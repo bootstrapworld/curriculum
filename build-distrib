@@ -1,0 +1,6 @@
+mkdir -p distribution
+cp -p src/*.adoc distribution
+cp -p lib/glossary-terms.rkt distribution
+cd distribution
+../lib/insert-metadata.rkt *.adoc
+rm *.adoc
