@@ -95,6 +95,7 @@
                                         #f)
                                        ((string=? directive "vocab")
                                         (let ((s (assoc-glossary arg glossary-list)))
+                                          (display arg o)
                                           (cond (s
                                                   (unless (member s glossary-items)
                                                     (set! glossary-items (cons s glossary-items)))
