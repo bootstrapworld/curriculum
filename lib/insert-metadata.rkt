@@ -172,7 +172,6 @@
           (set! glossary-items
             (sort glossary-items #:key car string-ci<=?))
           (fprintf op ".Glossary~%")
-          ;(fprintf op "== Glossary~%~%")
           (for-each
             (lambda (s)
               (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
@@ -185,7 +184,7 @@
           (set! standards-met
             (sort standards-met #:key car string-ci<=?))
           (fprintf op ".Standards Statements~%")
-          ;(fprintf op "== Standard Statements~%~%")
+          (fprintf op "[.standards-hierarchical-table]~%")
           (for-each
             (lambda (s)
               (let ((s (cadr s))
