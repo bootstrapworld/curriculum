@@ -44,6 +44,9 @@
                       (else #f))
                 (loop (cdr L))))))))
 
+(define (assoc-standards std L)
+  (assoc std L))
+
 (define (check-first-subsection i o)
   (let ((c (peek-char i)))
     (if (char=? c #\=)
@@ -55,11 +58,9 @@
                           #f)))
         #f)))
 
-(define (add-include-directive i o in-file)
-  (display "include::" o)
-  (display (path-replace-extension in-file "-glossary.adoc3") o)
-  (display "[]" o)
-  (newline o) (newline o)
+(define (add-include-directive o in-file)
+  (fprintf o "include::~a[]~%~%" (path-replace-extension in-file "-glossary.adoc3"))
+  (fprintf o "include::~a[]~%~%" (path-replace-extension in-file "-standards.adoc3"))
   (display #\= o))
 
 (define *summary-file* #f)
@@ -67,6 +68,8 @@
 (define *all-glossary-items* '())
 
 (define *glossary-list* '())
+
+(define *standards-list* '())
 
 (define *macro-list* '())
 
@@ -76,6 +79,8 @@
   (let ((out-file (path-replace-extension in-file ".adoc2"))
         (glossary-out-file (path-replace-extension in-file "-glossary.adoc3"))
         (glossary-items '())
+        (standards-met '())
+        (standards-out-file (path-replace-extension in-file "-standards.adoc3"))
         ;(standards-file "standards.rkt")
         ;(materials '())
         ;(preparation-items '())
@@ -97,17 +102,24 @@
                               (let* ((arg (read-group i))
                                      (s (assoc-glossary arg *glossary-list*)))
                                 (when (string=? arg "")
-                                  (printf "Directive @~a has ill-formed argument~%"
-                                          directive))
+                                  (printf "Directive @vocab has ill-formed argument~%"))
                                 (display arg o)
-                                (cond (s
-                                        (unless (member s glossary-items)
+                                (cond (s (unless (member s glossary-items)
                                           (set! glossary-items (cons s glossary-items)))
                                         (unless (member s *all-glossary-items*)
                                           (set! *all-glossary-items*
                                             (cons s *all-glossary-items*))))
                                       (else (printf "Item ~a not found in glossary~%"
                                                     arg)))))
+                             ((string=? directive "std")
+                              (let* ((arg (read-group i))
+                                     (s (assoc-standards arg *standards-list*)))
+                                (when (string=? arg "")
+                                  (printf "Directive @std has ill-formed argument~%"))
+                                (display arg o)
+                                (cond (s (unless (member s standards-met)
+                                           (set! standards-met (cons s standards-met))))
+                                      (else (printf "Standard ~a not found~%" arg)))))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o)))
@@ -119,26 +131,43 @@
                      (cond (first-subsection-crossed? #f)
                            ((check-first-subsection i o)
                             (set! first-subsection-crossed? #t)
-                            (add-include-directive i o in-file))
+                            (add-include-directive o in-file))
                            (else #f)))
                     (else (display c o)))
                   (loop)))))
           #:exists 'replace)))
-    (set! glossary-items
-      (sort glossary-items #:key car string-ci<=?))
     (call-with-output-file glossary-out-file
-      (lambda (g)
-        (for-each
-          (lambda (s)
-            (display "* *" g) (display (car s) g) (display "*: " g)
-            (display (cadr s) g) (newline g))
-          glossary-items))
+      (lambda (op)
+        (unless (empty? glossary-items)
+          (set! glossary-items
+            (sort glossary-items #:key car string-ci<=?))
+          (fprintf op ".Glossary~%")
+          ;(fprintf op "== Glossary~%~%")
+          (for-each
+            (lambda (s)
+              (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
+            glossary-items)
+          (fprintf op "~%~%")))
+      #:exists 'replace)
+    (call-with-output-file standards-out-file
+      (lambda (op)
+        (unless (empty? standards-met)
+          (set! standards-met
+            (sort standards-met #:key car string-ci<=?))
+          (fprintf op ".Standards Statements~%")
+          ;(fprintf op "== Standard Statements~%~%")
+          (for-each
+            (lambda (s)
+              (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
+            standards-met)
+          (fprintf op "~%~%")))
       #:exists 'replace)
     (system (format "~a ~a" *asciidoctor* out-file))))
 
 (define (main . args)
   (set! *glossary-list* (call-with-input-file "glossary-terms.rkt" read))
   (set! *all-glossary-items* '())
+  (set! *standards-list* (call-with-input-file "standards-dictionary.rkt" read))
   (set! *summary-file* "summary.adoc2")
   (set! *macro-list* (call-with-input-file "form-elements.rkt" read))
   (for-each insert-metadata args)
@@ -146,11 +175,10 @@
     (set! *all-glossary-items*
       (sort *all-glossary-items* #:key car string-ci<=?))
     (call-with-output-file *summary-file*
-      (lambda (g)
+      (lambda (op)
         (for-each
           (lambda (s)
-            (display "* *" g) (display (car s) g) (display "*: " g)
-            (display (cadr s) g) (newline g))
+            (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
           *all-glossary-items*))
       #:exists 'replace)
     (system (format "~a ~a" *asciidoctor* *summary-file*)))
