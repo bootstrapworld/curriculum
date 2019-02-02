@@ -49,7 +49,18 @@
                 (loop (cdr L))))))))
 
 (define (assoc-standards std L)
-  (assoc std L))
+  (let* ((std-bits (regexp-split #rx"&" std))
+         (std (list-ref std-bits 0))
+         (sublist-item #f))
+    (let ((c (assoc std L)))
+      (when (>= (length std-bits) 3)
+        (set! sublist-item (string->number (list-ref std-bits 2))))
+      (list c sublist-item))))
+
+(define (box-add-new! v bx)
+  (let ((vv (unbox bx)))
+    (unless (member v vv)
+      (set-box! bx (sort (cons v vv) <)))))
 
 (define (check-first-subsection i o)
   (let ((c (peek-char i)))
@@ -121,9 +132,22 @@
                                   (printf "Directive @std has ill-formed argument~%"))
                                 (for-each
                                   (lambda (arg)
-                                    (let ((s (assoc-standards arg *standards-list*)))
-                                      (cond (s (unless (member s standards-met)
-                                                 (set! standards-met (cons s standards-met))))
+                                    (let* ((s (assoc-standards arg *standards-list*))
+                                           (c (list-ref s 0))
+                                           (sublist-item (list-ref s 1)))
+                                      (cond (c (let ((std (list-ref c 0)))
+                                                 (cond ((assoc std standards-met) =>
+                                                        (lambda (c0)
+                                                          (let ((sublist-items (list-ref c0 2)))
+                                                            (box-add-new! sublist-item sublist-items))))
+                                                       (else
+                                                         (let ((sublist-items
+                                                                 (box (if sublist-item
+                                                                          (list sublist-item)
+                                                                          '()))))
+                                                           (set! standards-met
+                                                             (cons (list std c sublist-items)
+                                                                   standards-met)))))))
                                             (else (printf "Standard ~a not found~%" arg)))))
                                   args)))
                              ((assoc directive *macro-list*) =>
@@ -164,7 +188,12 @@
           ;(fprintf op "== Standard Statements~%~%")
           (for-each
             (lambda (s)
-              (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
+              (let ((s (cadr s))
+                    (sublist-items (unbox (caddr s))))
+                (fprintf op "* *~a*: ~a~%" (car s) (cadr s))
+                (for-each (lambda (n)
+                            (fprintf op "** ~a~%" (list-ref s (+ n 1))))
+                          sublist-items)))
             standards-met)
           (fprintf op "~%~%")))
       #:exists 'replace)
