@@ -23,6 +23,10 @@
             (printf "Ill-formed metadata directive~%")
             ""))))
 
+(define (read-commaed-group i)
+  (map string-trim
+       (regexp-split #rx"," (read-group i))))
+
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
   (let ((naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
@@ -112,14 +116,16 @@
                                       (else (printf "Item ~a not found in glossary~%"
                                                     arg)))))
                              ((string=? directive "std")
-                              (let* ((arg (read-group i))
-                                     (s (assoc-standards arg *standards-list*)))
-                                (when (string=? arg "")
+                              (let ((args (read-commaed-group i)))
+                                (when (empty? args)
                                   (printf "Directive @std has ill-formed argument~%"))
-                                (display arg o)
-                                (cond (s (unless (member s standards-met)
-                                           (set! standards-met (cons s standards-met))))
-                                      (else (printf "Standard ~a not found~%" arg)))))
+                                (for-each
+                                  (lambda (arg)
+                                    (let ((s (assoc-standards arg *standards-list*)))
+                                      (cond (s (unless (member s standards-met)
+                                                 (set! standards-met (cons s standards-met))))
+                                            (else (printf "Standard ~a not found~%" arg)))))
+                                  args)))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o)))
@@ -171,7 +177,7 @@
   (set! *summary-file* "summary.adoc2")
   (set! *macro-list* (call-with-input-file "form-elements.rkt" read))
   (for-each insert-metadata args)
-  (when (pair? *all-glossary-items*)
+  (unless (empty? *all-glossary-items*)
     (set! *all-glossary-items*
       (sort *all-glossary-items* #:key car string-ci<=?))
     (call-with-output-file *summary-file*
