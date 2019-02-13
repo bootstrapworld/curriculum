@@ -1,0 +1,24 @@
+language: ruby
+rvm:
+  - 2.2
+env:
+  global:
+    - RACKET_DIR=~/racket
+  matrix:
+    - RACKET_VERSION=6.12
+
+
+before_install:
+  - git clone https://github.com/greghendershott/travis-racket.git
+  - cat travis-racket/install-racket.sh | bash
+  - export $PATH="${RACKET_DIR}/bin:${PATH}"
+  - gem install asciidoctor
+
+script:
+  - ./build-distrib
+
+after_success:
+  - cd docs
+  - git commit -m "commited at $(date)" adocex.html
+
+
