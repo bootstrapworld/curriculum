@@ -1,4 +1,9 @@
-(
+#lang racket
+
+(provide *standards-list*)
+
+(define *standards-list*
+'(
  ("N-Q"
   "The student reasons quantitatively in using units to solve problems"
   "selection of appropriate units when solving a problem"
@@ -1221,4 +1226,4 @@
  ("3B-IC-28"
   "Debate laws and regulations that impact the development and use of software."
   )
- )
+ ))

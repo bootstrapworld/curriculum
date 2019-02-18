@@ -1,3 +1,6 @@
+#lang racket
+
+(provide *glossary-list*)
 
 #|
 Glossary for terminology used in the notes.  The first entry of each entry can be either
@@ -7,7 +10,8 @@ If a list of keys is provided, the generated glossary will use the first in the 
 when it prints out the glossary for a particular unit
 |#
 
-  (("accessor functions" "functions to extract values from a data structure")
+(define *glossary-list*
+  '(("accessor functions" "functions to extract values from a data structure")
     ("apply" "use a given function on some inputs")
     ("arguments" "the inputs to a function; expressions for arguments follow the name of a function")
     ("ascending" "an order in which lower values appear first, and higher values appear after")
