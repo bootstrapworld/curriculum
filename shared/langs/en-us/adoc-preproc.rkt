@@ -32,6 +32,8 @@ exec racket -t $0 -m -- "$@"
                        (if (char=? c #\")
                            (loop (cons c r) #f nesting #f #f)
                            (loop (cons c r) #f nesting #t #f)))
+                     ((char=? c #\")
+                      (loop (cons c r) #f nesting #t #f))
                      ((member c '(#\space #\tab #\newline #\return))
                       (loop (if in-space? r (cons #\space r)) #t nesting #f #f))
                      ((char=? c #\{)
@@ -46,6 +48,35 @@ exec racket -t $0 -m -- "$@"
             ""))))
 
 (define (read-commaed-group i)
+  (let* ((g (read-group i))
+         (n (string-length g)))
+    (let loop ((i 0) (r '()))
+      (if (>= i n)
+          (map string-trim (reverse r))
+          (let loop2 ((j i) (in-string? #f) (in-escape? #f))
+            (if (>= j n) (loop j (cons (substring g i j) r))
+                (let ((c (string-ref g j)))
+                  (cond (in-escape?
+                          (loop2 (+ j 1) in-string? #f))
+                        ((char=? c #\\)
+                         (loop2 (+ j 1) in-string? #t))
+                        (in-string?
+                          (if (char=? c #\")
+                              (loop2 (+ j 1) #f #f)
+                              (loop2 (+ j 1) #t #f)))
+                        ((char=? c #\")
+                         (loop2 (+ j 1) #t #f))
+                        ((char=? c #\,)
+                         (loop (+ j 1) (cons (substring g i j) r)))
+                        (else (loop2 (+ j 1) #f #f))))))))))
+
+(define (string-trim-dq s)
+  (let ((n (string-length s)))
+    (if (char=? (string-ref s 0) (string-ref s (- n 1)) #\")
+        (substring s 1 (- n 1))
+        s)))
+
+(define (read-commaed-group-obs i)
   (map string-trim
        (regexp-split #rx"," (read-group i))))
 
@@ -140,7 +171,7 @@ exec racket -t $0 -m -- "$@"
 
 (define *asciidoctor* "asciidoctor -a linkcss -a stylesheet=curriculum.css")
 
-(define (preprocess in-file)
+(define (preproc-n-asciidoctor in-file #:recipe (recipe #f))
   (let ((out-file (path-replace-extension in-file ".adoc2"))
         (glossary-out-file (path-replace-extension in-file "-glossary.adoc3"))
         (glossary-items '())
@@ -202,11 +233,18 @@ exec racket -t $0 -m -- "$@"
                                   args)))
                              ((string=? directive "link")
                               (let* ((args (read-commaed-group i))
-                                     (arg1 (car args)))
+                                     (adocf (car args))
+                                     (htmlf (path-replace-extension adocf ".html"))
+                                     (pdff (path-replace-extension adocf ".pdf")))
+                                (system (format "cp -p exercises/~a ~a" adocf adocf))
                                 (fprintf o
-                                         "link:~a[~a]"
-                                         (string-replace arg1 #rx"\\.adoc$" ".html")
-                                         (if (= (length args) 1) "" (cadr args)))))
+                                         "link:~a[~a]" htmlf
+                                         (if (= (length args) 1) "" (string-trim-dq (cadr args))))
+                                (preproc-n-asciidoctor adocf #:recipe #t)
+                                (system* (find-executable-path "wkhtmltopdf")
+                                         "--lowquality" "--print-media-type" "-q"
+                                         htmlf pdff)
+                                ))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o)))
@@ -276,7 +314,7 @@ exec racket -t $0 -m -- "$@"
 (define (main . args)
   (set! *all-glossary-items* '())
   (set! *summary-file* "summary.adoc2")
-  (for-each preprocess args)
+  (for-each preproc-n-asciidoctor args)
   (unless (empty? *all-glossary-items*)
     (set! *all-glossary-items*
       (sort *all-glossary-items* #:key car string-ci<=?))
