@@ -1,11 +1,6 @@
-#! /bin/sh
-#|
-exec racket -t $0 -m -- "$@"
-|#
+#!/usr/bin/env racket
 
 #lang racket
-
-(provide main)
 
 (define (read-word i)
   (let loop ((r '()))
@@ -235,7 +230,14 @@ exec racket -t $0 -m -- "$@"
                               (let* ((args (read-commaed-group i))
                                      (adocf (car args))
                                      (htmlf (path-replace-extension adocf ".html"))
-                                     (pdff (path-replace-extension adocf ".pdf")))
+                                     ;(pdff (path-replace-extension adocf ".pdf"))
+                                     )
+
+                                (fprintf o "link:~a[~a]" htmlf
+                                         (if (= (length args) 1) ""
+                                             (string-trim-dq (cadr args))))
+
+                                #|
                                 (system (format "cp -p exercises/~a ~a" adocf adocf))
                                 (fprintf o
                                          "link:~a[~a]" htmlf
@@ -244,6 +246,7 @@ exec racket -t $0 -m -- "$@"
                                 (system* (find-executable-path "wkhtmltopdf")
                                          "--lowquality" "--print-media-type" "-q"
                                          htmlf pdff)
+                                |#
                                 ))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
@@ -299,22 +302,18 @@ exec racket -t $0 -m -- "$@"
       #:exists 'replace)
     (system (format "~a ~a" *asciidoctor* out-file))))
 
-#|
-(require (path->string (build-path 'up "shared" "langs" "en-us" "glossary-terms.rkt")))
-(require (path->string (build-path 'up "shared" "langs" "en-us" "standards-dictionary.rkt")))
-(require (path->string (build-path 'up "shared" "langs" "en-us" "form-elements.rkt")))
-(require (path->string (build-path 'up "shared" "langs" "en-us" "function-directives.rkt")))
-|#
-
 (require "glossary-terms.rkt")
 (require "standards-dictionary.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 
-(define (main . args)
+(define (main cl-args)
   (set! *all-glossary-items* '())
   (set! *summary-file* "summary.adoc2")
-  (for-each preproc-n-asciidoctor args)
+
+  (for ((arg cl-args))
+    (preproc-n-asciidoctor arg))
+
   (unless (empty? *all-glossary-items*)
     (set! *all-glossary-items*
       (sort *all-glossary-items* #:key car string-ci<=?))
@@ -325,5 +324,8 @@ exec racket -t $0 -m -- "$@"
             (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
           *all-glossary-items*))
       #:exists 'replace)
-    (system (format "~a ~a" *asciidoctor* *summary-file*)))
-  (void))
+    (system (format "~a ~a" *asciidoctor* *summary-file*))))
+
+(main (current-command-line-arguments))
+
+(void)
