@@ -1,0 +1,77 @@
+PATHWAY=$2
+
+if test x$PATHWAY = x
+then
+  PATHWAY=pathwayP
+fi
+
+export TOPDIR=$(pwd)
+
+PROGDIR=$TOPDIR/shared/langs/en-us
+
+LIBDIR=$TOPDIR/lib
+
+rm -fr distribution
+mkdir distribution
+cp -pr lessons distribution
+cp -pr pathways distribution
+
+cd distribution/lessons
+
+for d in *; do
+  cd $d
+  echo building lesson: $d
+  cd langs/en-us
+  cp -p $LIBDIR/*.css .
+
+  for f in *.adoc; do
+    echo building lesson plan: $f
+    $PROGDIR/adoc-preproc.rkt $f
+  done
+
+  cd exercises
+  cp -p $LIBDIR/*.css .
+  for f in *.adoc; do
+    echo building exercise: $f
+    $PROGDIR/adoc-preproc.rkt $f
+    fhtml=${f%.adoc}.html
+    fpdf=${f%.adoc}.pdf
+    wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+  done
+  cd ../workbook-pages
+  cp -p $LIBDIR/*.css .
+  for f in *.adoc; do
+    echo building workbook page: $f
+    $PROGDIR/adoc-preproc.rkt $f
+    fhtml=${f%.adoc}.html
+    fpdf=${f%.adoc}.pdf
+    wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+  done
+  $PROGDIR/adoc-preproc.rkt *.adoc
+
+  cd $TOPDIR/distribution/lessons
+done
+
+cd $TOPDIR
+
+echo building pathway: $PATHWAY
+
+cd distribution/pathways/$PATHWAY/langs/en-us
+
+cp -p $LIBDIR/*.css .
+$PROGDIR/adoc-preproc.rkt *.adoc
+rm *.adoc[23]
+
+cd resources
+cp -p $LIBDIR/*.css .
+$PROGDIR/adoc-preproc.rkt *.adoc
+rm *.adoc[23]
+
+cd ..
+
+mkdir lessons
+mkdir workbook
+
+$PROGDIR/make-workbook.rkt
+
+# vi:ft=sh
