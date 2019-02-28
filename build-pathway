@@ -21,15 +21,8 @@ cd distribution/lessons
 for d in *; do
   cd $d
   echo building lesson: $d
-  cd langs/en-us
-  cp -p $LIBDIR/*.css .
 
-  for f in *.adoc; do
-    echo building lesson plan: $f
-    $PROGDIR/adoc-preproc.rkt $f
-  done
-
-  cd exercises
+  cd langs/en-us/exercises
   cp -p $LIBDIR/*.css .
   for f in *.adoc; do
     echo building exercise: $f
@@ -38,6 +31,7 @@ for d in *; do
     fpdf=${f%.adoc}.pdf
     wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
   done
+
   cd ../workbook-pages
   cp -p $LIBDIR/*.css .
   for f in *.adoc; do
@@ -73,5 +67,19 @@ mkdir lessons
 mkdir workbook
 
 $PROGDIR/make-workbook.rkt
+
+cd $TOPDIR/distribution/lessons
+
+for d in *; do
+  cd $d/langs/en-us
+  cp -p $LIBDIR/*.css .
+
+  for f in *.adoc; do
+    echo building $d lesson plan: $f
+    $PROGDIR/adoc-preproc.rkt $f
+  done
+
+  cd $TOPDIR/distribution/lessons
+done
 
 # vi:ft=sh

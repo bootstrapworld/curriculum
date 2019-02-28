@@ -443,6 +443,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <code>pathways</code>, which between them contain the curriculum content.
 Explore them to see where things are.</p>
 </div>
+<div class="literalblock">
+<div class="content">
+<pre>build-pathway
+/lib/*.css
+/shared
+  /langs/en-us/glossary-terms.rkt
+               standards-dictionary.rkt
+               adoc-preproc.rkt
+               form-elements.rkt
+               function-directives.rkt
+               make-workbook.rkt
+/lessons
+  /lessonX/langs/en-us/jened.adoc
+                       exercises/&lt;recipe&gt;.adoc
+                       images/&lt;picture&gt;.jpg
+                       workbook-pages/&lt;page&gt;.pdf
+/pathways
+  /pathwayX/langs/en-us/narrative.adoc
+                        workbook-index.rkt
+                        resources/&lt;teacher-index&gt;.adoc</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>In particular, “lesson A” is in subdirectory <code>lessonA</code> inside
 <code>lessons</code>. The lesson plan is an <code>.adoc</code> file in
@@ -470,6 +492,18 @@ tree.  Look at it to see how each constituent is specified.</p>
 <p>Call it with a pathway spec (e.g., <code>pathwayP</code>) to build a
 <code>distribution</code> directory containing all the lessons and a tree
 for <code>pathwayP</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+  lessons/lessonX/langs/en-us/jened.html
+                              exercises/*.{html,pdf}
+                              workbook-pages/*.{html,pdf}
+  pathways/pathwayX/langs/en-us/narrative.html
+                                lessons/...
+                                resources/&lt;teacher-index&gt;.html
+                                workbook/workbook.pdf</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>(As a convenience, calling <code>build-pathway</code> without an arg builds
@@ -536,10 +570,59 @@ make sure there are no “modified” files in your directory.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_glossary_and_standards">Glossary and standards</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Glossary items are annotated with the directive <code>@vocab</code>. E.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@vocab{function}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Standards are annotated with <code>@std</code>. E.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@std{2-AP-10 , 3A-NI-06 , N-Q&amp;1&amp;2, N-Q&amp;1&amp;3}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Such items are searched in
+<code>shared/langs/en-us/{glossary-terms.rkt,standards-dictionary.rkt}</code>,
+and are inserted as lists at the head of the document. In
+addition, glossary items for a set of files in a directory are
+collected into a file <code>summary.html</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pagination">Pagination</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Both lesson plans and pathway narratives can refer to particular
+pages in a pathway workbook.  The relevant directive is
+<code>@worksheet-link</code>, used in one of two ways:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@worksheet-link{lessonA, exercises/exerciseA1.adoc}
+@worksheet-link{pathwayP, lessonA, exercises/exerciseA1.adoc}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The second is used in lesson plans which need to specify which
+pathway’s workbook to use. The last two arguments are used to
+index into the pathway’s <code>workbook-index.rkt</code>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-27 17:16:47 EST
+Last updated 2019-02-28 02:20:28 EST
 </div>
 </div>
 </body>
