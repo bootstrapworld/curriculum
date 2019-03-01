@@ -1,0 +1,204 @@
+= Read me
+
+== Building
+
+The top directory contains the subdirectories `lessons`,
+`pathways`, which between them contain the curriculum content.
+Explore them to see where things are.
+
+  build-pathway
+  /lib/*.css
+  /shared
+    /langs/en-us/glossary-terms.rkt
+                 standards-dictionary.rkt
+                 adoc-preproc.rkt
+                 form-elements.rkt
+                 function-directives.rkt
+                 make-workbook.rkt
+  /lessons
+    /lessonX/langs/en-us/jened.adoc
+                         exercises/<recipe>.adoc
+                         images/<picture>.jpg
+                         workbook-pages/<page>.pdf
+  /pathways
+    /pathwayX/langs/en-us/narrative.adoc
+                          workbook-index.rkt
+                          resources/<teacher-index>.adoc
+
+In particular, “lesson A” is in subdirectory `lessonA` inside
+`lessons`. The lesson plan is an `.adoc` file in
+`lessons/lessonA/langs/en-us` (it can have any filename, here
+`jened.adoc`).
+
+The exercises associated with lesson A are alongside the lesson
+plan adoc file, in subdirectory `exercises`. Images are in
+subdir `images`. Single workpages are in subdir `workbook-pages`
+(some of these can be static PDFs).
+
+Only one pathway P is shown for now. It is `pathways/pathwayP`.
+In that directory, the pathway’s narrative is in
+`langs/en-us/main.adoc` (name can be anything). Alongside it, its
+index of pages is in `workbook-index.rkt`, which refers, in
+order, to constituent pages which are drawn from the `lessons`
+tree.  Look at it to see how each constituent is specified.
+
+The top dir contains the script `build-pathway`.
+
+Call it with a pathway spec (e.g., `pathwayP`) to build a
+`distribution` directory containing all the lessons and a tree
+for `pathwayP`.
+
+   distribution/
+     lessons/lessonX/langs/en-us/jened.html
+                                 exercises/*.{html,pdf}
+                                 workbook-pages/*.{html,pdf}
+     pathways/pathwayX/langs/en-us/narrative.html
+                                   lessons/...
+                                   resources/<teacher-index>.html
+                                   workbook/workbook.pdf
+
+(As a convenience, calling `build-pathway` without an arg builds
+`pathwayP`. This will change as more pathways are added.)
+
+
+== jened sample doc
+
+The following was reverse-engineered from the latest Google Docs
+mock-up of a lesson from Jen/Ed. Change this to reflect
+experience.
+
+link:distribution/lessons/lessonA/langs/en-us/jened.html[Sample
+lesson plan]
+
+== git stuff
+
+Fork this repo to your GitHub account (say, `louis`). (This is done using
+obvious clickety click on the GitHub page.)
+
+In your terminal, clone your fork thusly:
+
+   git clone https://github.com/louis/curr-reorg
+
+This will create a local repo where you can try things, change
+things, etc. But first, to retain connection with the original do:
+
+  git remote add upstream https://github.com/ds26gte/curr-reorg
+
+Every time the original changes, update like so:
+
+  git fetch upstream
+  git merge upstream/master
+
+You are probably in your own `master` branch. Even if you’re
+“branching out” to other new branches, the above merge will
+mostly work.  “Mostly” because merge often triggers conflicts
+depending on how far you have diverged from the original. At the
+very least, make sure you’ve checked in all your changes that you
+care about, before you attempt a merge. For changes you aren’t
+ready to check in, save the concerned files somewhere else, and
+make sure there are no “modified” files in your directory.
+
+== Glossary and standards
+
+Glossary items are annotated with the directive `@vocab`. E.g.,
+
+  @vocab{function}
+
+Standards are annotated with `@std`. E.g.,
+
+  @std{2-AP-10 , 3A-NI-06 , N-Q&1&2, N-Q&1&3}
+
+Such items are searched in
+`shared/langs/en-us/{glossary-terms.rkt,standards-dictionary.rkt}`,
+and are inserted as lists at the head of the document. In
+addition, glossary items for a set of files in a directory are
+collected into a file `summary.html`.
+
+== Exercises
+
+Exercise files are typically recipes and have calls to one of two
+directives
+
+  @design-recipe-exercise{...}
+
+  @assess-design-recipe{...}
+
+The former is used to specify a correct recipe; the latter to
+introduce a recipe to be debugged. See examples of such files,
+`exercise*.adoc`, in the repo.
+
+== Pagination
+
+Both lesson plans and pathway narratives can refer to particular
+pages in a pathway workbook.  The relevant directive is
+`@worksheet-link`, used in one of two ways:
+
+  @worksheet-link{lessonA, exercises/exerciseA1.adoc}
+  @worksheet-link{pathwayP, lessonA, exercises/exerciseA1.adoc}
+
+The second is used in lesson plans which need to specify which
+pathway’s workbook to use. The last two arguments are used to
+
+== Prereqs
+
+Needed: 
+
+* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
+(The format is AsciiDoc, the program that converts it is
+Asciidoctor. I wish we had this neat nomenclatural separation for
+other programs too.) To install it, 
++
+  sudo apt-get install asciidoctor
++
+on Linux machines, and
++
+  brew install asciidoctor
++
+on macOS.
++
+
+* Racket, to do preprocessing for metadata and other
+bookkeeping. Any version should do. I’m using very conservative
+Racket.
+
+* PDF manipulators wktohtmltopdf and pdftk.  Standard
+installation as for Asciidoctor.
+index into the pathway’s `workbook-index.rkt`.
+
+=== A brief AsciiDoc intro
+
+An AsciiDoc source file typically as the extension `.adoc`, at
+least in our setup. 
+
+A title (aka "level 1") header has its line preceded by a single
+equal sign. 
+
+Level 2 headers ("sections") are preceded by two equal signs.
+Similarly for "subsections" at level 3, 4, 5, 6.
+
+  = Title at level 1
+
+  == Section at level 2
+
+  === Subsection at level 3
+
+  ==== Et cetera
+
+Itemized lists have each item paragraph preceded by a ``*`` or
+``-`` and space.
+
+Emphasized text is set within by +_..._+.
+
+Bold text within +*...*+.
+
+In-text code fragment within +`...`+.
+
+Code displays are on contiguous lines that are indented (amount
+of indentation doesn't matter as long it's non-0).
+
+Please see the
+https://asciidoctor.org/docs/user-manual[Asciidoctor manual] for
+the whole story. Learn just the bare minimum to get started writing,
+and then learn more as needed, either from the online manual, or by bugging
+me. (If something seems too tedious to learn or input, I could
+add it as a Racket directive.)
