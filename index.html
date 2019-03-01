@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_build">build</h2>
+<h2 id="_building">Building</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The top directory contains the subdirectories <code>lessons</code>,
@@ -599,6 +599,30 @@ collected into a file <code>summary.html</code>.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_exercises">Exercises</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exercise files are typically recipes and have calls to one of two
+directives</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@design-recipe-exercise{...}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@assess-design-recipe{...}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The former is used to specify a correct recipe; the latter to
+introduce a recipe to be debugged. See examples of such files,
+<code>exercise*.adoc</code>, in the repo.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_pagination">Pagination</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -614,15 +638,118 @@ pages in a pathway workbook.  The relevant directive is
 </div>
 <div class="paragraph">
 <p>The second is used in lesson plans which need to specify which
-pathway’s workbook to use. The last two arguments are used to
+pathway’s workbook to use. The last two arguments are used to</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prereqs">Prereqs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Needed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
+(The format is AsciiDoc, the program that converts it is
+Asciidoctor. I wish we had this neat nomenclatural separation for
+other programs too.) To install it,</p>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install asciidoctor</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>on Linux machines, and</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>brew install asciidoctor</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>on macOS.</p>
+</div>
+</li>
+<li>
+<p>Racket, to do preprocessing for metadata and other
+bookkeeping. Any version should do. I’m using very conservative
+Racket.</p>
+</li>
+<li>
+<p>PDF manipulators wktohtmltopdf and pdftk.  Standard
+installation as for Asciidoctor.
 index into the pathway’s <code>workbook-index.rkt</code>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_a_brief_asciidoc_intro">A brief AsciiDoc intro</h3>
+<div class="paragraph">
+<p>An AsciiDoc source file typically as the extension <code>.adoc</code>, at
+least in our setup.</p>
+</div>
+<div class="paragraph">
+<p>A title (aka "level 1") header has its line preceded by a single
+equal sign.</p>
+</div>
+<div class="paragraph">
+<p>Level 2 headers ("sections") are preceded by two equal signs.
+Similarly for "subsections" at level 3, 4, 5, 6.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>= Title at level 1</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>== Section at level 2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>=== Subsection at level 3</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>==== Et cetera</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Itemized lists have each item paragraph preceded by a <code>*</code> or
+<code>-</code> and space.</p>
+</div>
+<div class="paragraph">
+<p>Emphasized text is set within by _..._.</p>
+</div>
+<div class="paragraph">
+<p>Bold text within *...*.</p>
+</div>
+<div class="paragraph">
+<p>In-text code fragment within `...`.</p>
+</div>
+<div class="paragraph">
+<p>Code displays are on contiguous lines that are indented (amount
+of indentation doesn&#8217;t matter as long it&#8217;s non-0).</p>
+</div>
+<div class="paragraph">
+<p>Please see the
+<a href="https://asciidoctor.org/docs/user-manual">Asciidoctor manual</a> for
+the whole story. Learn just the bare minimum to get started writing,
+and then learn more as needed, either from the online manual, or by bugging
+me. (If something seems too tedious to learn or input, I could
+add it as a Racket directive.)</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-28 02:20:28 EST
+Last updated 2019-02-28 20:09:56 EST
 </div>
 </div>
 </body>
