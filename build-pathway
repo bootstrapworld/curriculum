@@ -88,17 +88,17 @@ if test -d distribution/pathways/$PATHWAY; then
       if test x$copacetic = x1; then
         $PROGDIR/adoc-preproc.rkt *.adoc
         rm *.adoc[23]
-      else echo WARNING: No teacher resources in pathway $PATHWAY
+      else echo WARNING: No teacher resource files in pathway $PATHWAY
       fi
 
       cd ..
-      echo WARNING: No teacher resources in pathway $PATHWAY
+    else echo WARNING: No teacher resources in pathway $PATHWAY
     fi
 
     mkdir lessons
     mkdir workbook
 
-    if test -f $PROGDIR/workbook-index.rkt; then
+    if test -f workbook-index.rkt; then
       $PROGDIR/make-workbook.rkt
     else echo WARNING: No workbook-index.rkt in pathway $PATHWAY
     fi
