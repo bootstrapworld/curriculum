@@ -526,7 +526,7 @@ lesson plan</a></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_git_stuff">git stuff</h2>
+<h2 id="_git_stuff">Git stuff</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Fork this repo to your GitHub account (say, <code>jrandomuser</code>). (This is done using
@@ -567,6 +567,41 @@ very least, make sure you’ve checked in all your changes that you
 care about, before you attempt a merge. For changes you aren’t
 ready to check in, save the concerned files somewhere else, and
 make sure there are no “modified” files in your directory.</p>
+</div>
+<div class="sect2">
+<h3 id="_to_make_your_fetchmerge_experience_easier">To make your fetch/merge experience easier</h3>
+<div class="paragraph">
+<p>The directory <code>distribution</code> contains generated files which can
+always be re-generated. Before you merge, delete its contents and re-create
+its default so the merge doesn&#8217;t get snagged in it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cd distribution
+rm -fr *
+git checkout -- \*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create your own lesson directories under <code>lessons</code> and your own
+pathways under <code>pathways</code>.  Work exclusively there, rather than
+the supplied lessons <code>lessonA</code>, <code>lessonB</code>, <code>lessonC</code> and supplied
+pathway <code>pathwayP</code>&#8201;&#8212;&#8201;which are there purely for illustration.
+As the original repo doesn&#8217;t know about your lessons and
+pathways, there will be no conflicts from that regard.</p>
+</div>
+<div class="paragraph">
+<p>NB: When you create a pathway, named <code>pathwayQ</code> say, use</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>`./build-pathway pathwayQ`</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to generate its files. Without an argument, <code>build-pathway</code> uses
+<code>pathwayP</code>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -691,12 +726,12 @@ index into the pathway’s <code>workbook-index.rkt</code>.</p>
 least in our setup.</p>
 </div>
 <div class="paragraph">
-<p>A title (aka "level 1") header has its line preceded by a single
+<p>A title (aka “level 1”) header has its line preceded by a single
 equal sign.</p>
 </div>
 <div class="paragraph">
-<p>Level 2 headers ("sections") are preceded by two equal signs.
-Similarly for "subsections" at level 3, 4, 5, 6.</p>
+<p>Level 2 headers (“sections”) are preceded by two equal signs.
+Similarly for “subsections” at level 3, 4, 5, 6.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -749,7 +784,7 @@ add it as a Racket directive.)</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-03-01 10:26:36 EST
+Last updated 2019-03-01 15:35:59 EST
 </div>
 </div>
 </body>

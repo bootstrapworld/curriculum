@@ -60,7 +60,6 @@ for `pathwayP`.
 (As a convenience, calling `build-pathway` without an arg builds
 `pathwayP`. This will change as more pathways are added.)
 
-
 == jened sample doc
 
 The following was reverse-engineered from the latest Google Docs
@@ -70,7 +69,7 @@ experience.
 link:distribution/lessons/lessonA/langs/en-us/jened.html[Sample
 lesson plan]
 
-== git stuff
+== Git stuff
 
 Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
 obvious clickety click on the GitHub page.)
@@ -97,6 +96,30 @@ very least, make sure you’ve checked in all your changes that you
 care about, before you attempt a merge. For changes you aren’t
 ready to check in, save the concerned files somewhere else, and
 make sure there are no “modified” files in your directory.
+
+=== To make your fetch/merge experience easier
+
+The directory `distribution` contains generated files which can
+always be re-generated. Before you merge, delete its contents and re-create
+its default so the merge doesn't get snagged in it:
+
+  cd distribution
+  rm -fr *
+  git checkout -- \*
+
+Create your own lesson directories under `lessons` and your own
+pathways under `pathways`.  Work exclusively there, rather than
+the supplied lessons `lessonA`, `lessonB`, `lessonC` and supplied
+pathway `pathwayP` -- which are there purely for illustration.
+As the original repo doesn't know about your lessons and
+pathways, there will be no conflicts from that regard.
+
+NB: When you create a pathway, named `pathwayQ` say, use
+
+  `./build-pathway pathwayQ`
+
+to generate its files. Without an argument, `build-pathway` uses
+`pathwayP`.
 
 == Glossary and standards
 
@@ -141,12 +164,12 @@ pathway’s workbook to use. The last two arguments are used to
 
 == Prereqs
 
-Needed: 
+Needed:
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
 (The format is AsciiDoc, the program that converts it is
 Asciidoctor. I wish we had this neat nomenclatural separation for
-other programs too.) To install it, 
+other programs too.) To install it,
 +
   sudo apt-get install asciidoctor
 +
@@ -168,13 +191,13 @@ index into the pathway’s `workbook-index.rkt`.
 === A brief AsciiDoc intro
 
 An AsciiDoc source file typically as the extension `.adoc`, at
-least in our setup. 
+least in our setup.
 
-A title (aka "level 1") header has its line preceded by a single
-equal sign. 
+A title (aka “level 1”) header has its line preceded by a single
+equal sign.
 
-Level 2 headers ("sections") are preceded by two equal signs.
-Similarly for "subsections" at level 3, 4, 5, 6.
+Level 2 headers (“sections”) are preceded by two equal signs.
+Similarly for “subsections” at level 3, 4, 5, 6.
 
   = Title at level 1
 
