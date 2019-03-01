@@ -1,7 +1,6 @@
-PATHWAY=$2
+PATHWAY=$1
 
-if test x$PATHWAY = x
-then
+if test x$PATHWAY = x;then
   PATHWAY=pathwayP
 fi
 
@@ -18,66 +17,112 @@ cp -pr pathways distribution
 
 cd distribution/lessons
 
-for d in *; do
-  cd $d
-  echo building lesson: $d
+for L in *; do
+  if test -d $L; then
+    cd $L
+    echo building lesson: $L
 
-  cd langs/en-us/exercises
-  cp -p $LIBDIR/*.css .
-  for f in *.adoc; do
-    echo building exercise: $f
-    $PROGDIR/adoc-preproc.rkt $f
-    fhtml=${f%.adoc}.html
-    fpdf=${f%.adoc}.pdf
-    wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
-  done
+    if test -d langs/en-us/exercises; then
+      cd langs/en-us/exercises
+      cp -p $LIBDIR/*.css .
+      for f in *.adoc; do
+        if test -f $f; then
+          echo building exercise: $f
+          $PROGDIR/adoc-preproc.rkt $f
+          fhtml=${f%.adoc}.html
+          fpdf=${f%.adoc}.pdf
+          wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+        else echo WARNING: No exercise files in lesson $L
+        fi
+      done
 
-  cd ../workbook-pages
-  cp -p $LIBDIR/*.css .
-  for f in *.adoc; do
-    echo building workbook page: $f
-    $PROGDIR/adoc-preproc.rkt $f
-    fhtml=${f%.adoc}.html
-    fpdf=${f%.adoc}.pdf
-    wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
-  done
-  $PROGDIR/adoc-preproc.rkt *.adoc
+      cd ../workbook-pages
+      cp -p $LIBDIR/*.css .
+      for f in *.adoc; do
+        if test -f $f; then
+          echo building workbook page: $f
+          $PROGDIR/adoc-preproc.rkt $f
+          fhtml=${f%.adoc}.html
+          fpdf=${f%.adoc}.pdf
+          wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+        else echo WARNING: No workbook pages in lesson $L
+        fi
+      done
+      $PROGDIR/adoc-preproc.rkt *.adoc
+    else echo WARNING: No files in lesson $L
+    fi
 
-  cd $TOPDIR/distribution/lessons
+    cd $TOPDIR/distribution/lessons
+  else echo WARNING: No lessons
+  fi
 done
 
 cd $TOPDIR
 
 echo building pathway: $PATHWAY
 
-cd distribution/pathways/$PATHWAY/langs/en-us
+if test -d distribution/pathways/$PATHWAY; then
+  if test -d distribution/pathways/$PATHWAY/langs/en-us; then
+    cd distribution/pathways/$PATHWAY/langs/en-us
 
-cp -p $LIBDIR/*.css .
-$PROGDIR/adoc-preproc.rkt *.adoc
-rm *.adoc[23]
+    cp -p $LIBDIR/*.css .
+    copacetic=1
+    for f in *.adoc; do
+      if test ! -f $f; then copacetic=0
+      fi
+    done
+    if test x$copacetic = x1; then
+      $PROGDIR/adoc-preproc.rkt *.adoc
+      rm *.adoc[23]
+    else echo WARNING: No narrative in pathway $PATHWAY
+    fi
 
-cd resources
-cp -p $LIBDIR/*.css .
-$PROGDIR/adoc-preproc.rkt *.adoc
-rm *.adoc[23]
+    if test -d resources; then
+      cd resources
+      cp -p $LIBDIR/*.css .
+      copacetic=1
+      for f in *.adoc; do
+        if test ! -f $f; then copacetic=0
+        fi
+      done
+      if test x$copacetic = x1; then
+        $PROGDIR/adoc-preproc.rkt *.adoc
+        rm *.adoc[23]
+      else echo WARNING: No teacher resources in pathway $PATHWAY
+      fi
 
-cd ..
+      cd ..
+      echo WARNING: No teacher resources in pathway $PATHWAY
+    fi
 
-mkdir lessons
-mkdir workbook
+    mkdir lessons
+    mkdir workbook
 
-$PROGDIR/make-workbook.rkt
+    if test -f $PROGDIR/workbook-index.rkt; then
+      $PROGDIR/make-workbook.rkt
+    else echo WARNING: No workbook-index.rkt in pathway $PATHWAY
+    fi
+  else echo WARNING: No files in pathway $PATHWAY
+  fi
+else echo WARNING: No pathway $PATHWAY
+fi
 
 cd $TOPDIR/distribution/lessons
 
-for d in *; do
-  cd $d/langs/en-us
-  cp -p $LIBDIR/*.css .
+for L in *; do
+  if test -d $L/langs/en-us; then
+    cd $L/langs/en-us
+    cp -p $LIBDIR/*.css .
 
-  for f in *.adoc; do
-    echo building $d lesson plan: $f
-    $PROGDIR/adoc-preproc.rkt $f
-  done
+    for f in *.adoc; do
+      if test -f $f; then
+        echo building $L lesson plan: $f
+        $PROGDIR/adoc-preproc.rkt $f
+      else echo WARNING: No lesson plan in lesson $L
+      fi
+      done
+    else echo WARNING: No files in lesson $L
+    fi
 
   cd $TOPDIR/distribution/lessons
 done
