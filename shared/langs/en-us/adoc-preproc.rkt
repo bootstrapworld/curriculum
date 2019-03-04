@@ -279,20 +279,40 @@
                                      (page (car args))
                                      (link-text (if (> n 1) (cadr args) ""))
                                      (page-compts (regexp-split #rx"/"  page))
-                                     (lesson (car page-compts)))
+                                     (first-compt (car page-compts))
+                                     (second-compt (cadr page-compts))
+                                     )
                                 (case (length page-compts)
                                   ((2)
-                                   (display (make-lesson-link lesson (cadr page-compts) link-text) o)
-                                   )
+                                   (let ((lesson-dir (getenv "LESSON")))
+                                     (cond ((string=? first-compt "exercises")
+                                            (cond (lesson-dir
+                                                    (display (make-exercise-link lesson-dir
+                                                                                 (cadr page-compts)
+                                                                                 link-text) o))
+                                                  (else
+                                                    (printf "Incomplete exercise link ~a~n" page))))
+                                           ((string=? first-compt "workbook-pages")
+                                            (cond (lesson-dir
+                                                    (display (make-worksheet-link lesson-dir
+                                                                                  (cadr page-compts)
+                                                                                  link-text) o))
+                                                  (else
+                                                    (printf "Incomplete worksheet link ~a~n" page))))
+                                           (else
+                                             (display (make-lesson-link
+                                                        first-compt
+                                                        (cadr page-compts)
+                                                        link-text) o)))))
                                   ((3)
-                                   (let ((mid-compt (cadr page-compts)))
-                                     (cond ((string=? mid-compt "exercises")
-                                            (display (make-exercise-link lesson (caddr page-compts) link-text) o)
-                                            )
-                                           ((string=? mid-compt "workbook-pages")
-                                            (display (make-worksheet-link lesson (caddr page-compts) link-text) o)
-                                            )
-                                           (else (printf "Bad worksheet link ~a~n" page))))))))
+                                   (let ((third-compt (caddr page-compts)))
+                                   (cond ((string=? second-compt "exercises")
+                                          (display (make-exercise-link first-compt
+                                                                       third-compt link-text) o))
+                                         ((string=? second-compt "workbook-pages")
+                                          (display (make-worksheet-link first-compt
+                                                                        third-compt link-text) o))
+                                         (else (printf "Bad worksheet link ~a~n" page))))))))
                              ((string=? directive "link")
                               (let* ((args (read-commaed-group i))
                                      (adocf (car args))

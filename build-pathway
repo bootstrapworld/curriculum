@@ -44,6 +44,7 @@ else
       echo WARNING: No lessons in pathway $PATHWAY
     else
       cd $L
+      export LESSON=$L
       echo
       echo building lesson $L in pathway $PATHWAY
       #
@@ -99,6 +100,7 @@ else
       cd ..
     fi
   done
+  unset LESSON
   echo
   cd ..
 
