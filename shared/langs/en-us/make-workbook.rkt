@@ -3,7 +3,9 @@
 #lang racket
 
 (define *workbook-page-specs*
-  (call-with-input-file "workbook-index.rkt" read))
+  (call-with-input-file "workbook-page-index.rkt" read))
+
+;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
 
 (define *lessons* '())
 
@@ -12,16 +14,15 @@
     (unless (member lesson *lessons*)
       (set! *lessons* (cons lesson *lessons*)))))
 
-(for ((lesson *lessons*))
-  (system (format "cp -pr $TOPDIR/distribution/lessons/~a lessons" lesson)))
-
 (define *pdf-pages*
   (map (lambda (f)
-         (let ((f (string-append "lessons/" (car f) "/langs/en-us/" (cadr f))))
+         (let ((f (string-append "lessons/" (car f) "/workbook-pages/" (cadr f))))
            (when (path-has-extension? f #".adoc")
              (set! f (path-replace-extension f ".pdf")))
            f))
        *workbook-page-specs*))
+
+;(printf "*pdf-pages* = ~s~n" *pdf-pages*)
 
 (define *workbook-pdf* "workbook/workbook.pdf")
 

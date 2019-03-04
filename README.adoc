@@ -35,30 +35,30 @@ plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs).
 
-Only one pathway P is shown for now. It is `pathways/pathwayP`.
+Only one pathway P is shown in the repo for now. It is `pathways/pathwayP`.
 In that directory, the pathway’s narrative is in
 `langs/en-us/main.adoc` (name can be anything). Alongside it, its
-index of pages is in `workbook-index.rkt`, which refers, in
-order, to constituent pages which are drawn from the `lessons`
-tree.  Look at it to see how each constituent is specified.
+index of lessons, in correct order, is in `workbook-index.rkt`.
+These lessons are drawn from the `lessons`
+tree.
 
 The top dir contains the script `build-pathway`.
 
 Call it with a pathway spec (e.g., `pathwayP`) to build a
-`distribution` directory containing all the lessons and a tree
-for `pathwayP`.
+`distribution` directory containing a subtree for each
+`pathwayP`.
 
    distribution/
-     lessons/lessonX/langs/en-us/jened.html
+     pathwayX/langs/en-us/narrative.html
+                          lessons/
+                                 jened.html
                                  exercises/*.{html,pdf}
-                                 workbook-pages/*.{html,pdf}
-     pathways/pathwayX/langs/en-us/narrative.html
-                                   lessons/...
-                                   resources/<teacher-index>.html
-                                   workbook/workbook.pdf
+                                 workbook-pages/*.{html.pdf}
+                          resources/<teacher-index>.html
+                          workbook/workbook.pdf
 
-(As a convenience, calling `build-pathway` without an arg builds
-`pathwayP`. This will change as more pathways are added.)
+(For now, as a convenience, calling `build-pathway` without an arg builds
+`pathwayP`.)
 
 == jened sample doc
 
@@ -150,17 +150,29 @@ The former is used to specify a correct recipe; the latter to
 introduce a recipe to be debugged. See examples of such files,
 `exercise*.adoc`, in the repo.
 
-== Pagination
+== Cross-references and pagination
 
-Both lesson plans and pathway narratives can refer to particular
-pages in a pathway workbook.  The relevant directive is
-`@worksheet-link`, used in one of two ways:
+Both lesson plans and pathway narratives can refer to exercises
+or particular
+pages in a pathway workbook.  The relevant directive
+calls look like
 
-  @worksheet-link{lessonA, exercises/exerciseA1.adoc}
-  @worksheet-link{pathwayP, lessonA, exercises/exerciseA1.adoc}
+  @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
+  @worksheet-link{lessonA/workpages/pageA2.pdf, link-text}
+  @worksheet-link{lessonA/jened.adoc, link-text}
 
-The second is used in lesson plans which need to specify which
-pathway’s workbook to use. The last two arguments are used to
+The final argument for link text is optional.
+
+Except for exercises (which don't feature in the workbook unless
+you created a workbook page for them), the rendered link has its
+link text (if any) augmented with a reference to the specific
+page number in the pathway worksheet.
+
+=== Generic cross reference
+
+Use `@link{URL, link-text}` to refer to a generic cross-reference
+not part of the curriculum hierarchy.  The second argument for
+the link text is optional.
 
 == Prereqs
 
@@ -186,7 +198,6 @@ Racket.
 
 * PDF manipulators wktohtmltopdf and pdftk.  Standard
 installation as for Asciidoctor.
-index into the pathway’s `workbook-index.rkt`.
 
 === A brief AsciiDoc intro
 
