@@ -478,36 +478,36 @@ subdir <code>images</code>. Single workpages are in subdir <code>workbook-pages<
 (some of these can be static PDFs).</p>
 </div>
 <div class="paragraph">
-<p>Only one pathway P is shown for now. It is <code>pathways/pathwayP</code>.
+<p>Only one pathway P is shown in the repo for now. It is <code>pathways/pathwayP</code>.
 In that directory, the pathway’s narrative is in
 <code>langs/en-us/main.adoc</code> (name can be anything). Alongside it, its
-index of pages is in <code>workbook-index.rkt</code>, which refers, in
-order, to constituent pages which are drawn from the <code>lessons</code>
-tree.  Look at it to see how each constituent is specified.</p>
+index of lessons, in correct order, is in <code>workbook-index.rkt</code>.
+These lessons are drawn from the <code>lessons</code>
+tree.</p>
 </div>
 <div class="paragraph">
 <p>The top dir contains the script <code>build-pathway</code>.</p>
 </div>
 <div class="paragraph">
 <p>Call it with a pathway spec (e.g., <code>pathwayP</code>) to build a
-<code>distribution</code> directory containing all the lessons and a tree
-for <code>pathwayP</code>.</p>
+<code>distribution</code> directory containing a subtree for each
+<code>pathwayP</code>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>distribution/
-  lessons/lessonX/langs/en-us/jened.html
+  pathwayX/langs/en-us/narrative.html
+                       lessons/
+                              jened.html
                               exercises/*.{html,pdf}
-                              workbook-pages/*.{html,pdf}
-  pathways/pathwayX/langs/en-us/narrative.html
-                                lessons/...
-                                resources/&lt;teacher-index&gt;.html
-                                workbook/workbook.pdf</pre>
+                              workbook-pages/*.{html.pdf}
+                       resources/&lt;teacher-index&gt;.html
+                       workbook/workbook.pdf</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(As a convenience, calling <code>build-pathway</code> without an arg builds
-<code>pathwayP</code>. This will change as more pathways are added.)</p>
+<p>(For now, as a convenience, calling <code>build-pathway</code> without an arg builds
+<code>pathwayP</code>.)</p>
 </div>
 </div>
 </div>
@@ -658,22 +658,37 @@ introduce a recipe to be debugged. See examples of such files,
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pagination">Pagination</h2>
+<h2 id="_cross_references_and_pagination">Cross-references and pagination</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Both lesson plans and pathway narratives can refer to particular
-pages in a pathway workbook.  The relevant directive is
-<code>@worksheet-link</code>, used in one of two ways:</p>
+<p>Both lesson plans and pathway narratives can refer to exercises
+or particular
+pages in a pathway workbook.  The relevant directive
+calls look like</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>@worksheet-link{lessonA, exercises/exerciseA1.adoc}
-@worksheet-link{pathwayP, lessonA, exercises/exerciseA1.adoc}</pre>
+<pre>@worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
+@worksheet-link{lessonA/workpages/pageA2.pdf, link-text}
+@worksheet-link{lessonA/jened.adoc, link-text}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The second is used in lesson plans which need to specify which
-pathway’s workbook to use. The last two arguments are used to</p>
+<p>The final argument for link text is optional.</p>
+</div>
+<div class="paragraph">
+<p>Except for exercises (which don&#8217;t feature in the workbook unless
+you created a workbook page for them), the rendered link has its
+link text (if any) augmented with a reference to the specific
+page number in the pathway worksheet.</p>
+</div>
+<div class="sect2">
+<h3 id="_generic_cross_reference">Generic cross reference</h3>
+<div class="paragraph">
+<p>Use <code>@link{URL, link-text}</code> to refer to a generic cross-reference
+not part of the curriculum hierarchy.  The second argument for
+the link text is optional.</p>
+</div>
 </div>
 </div>
 </div>
@@ -714,8 +729,7 @@ Racket.</p>
 </li>
 <li>
 <p>PDF manipulators wktohtmltopdf and pdftk.  Standard
-installation as for Asciidoctor.
-index into the pathway’s <code>workbook-index.rkt</code>.</p>
+installation as for Asciidoctor.</p>
 </li>
 </ul>
 </div>
@@ -784,7 +798,7 @@ add it as a Racket directive.)</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-03-01 15:35:59 EST
+Last updated 2019-03-04 11:55:55 EST
 </div>
 </div>
 </body>
