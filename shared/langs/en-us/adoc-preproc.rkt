@@ -317,10 +317,13 @@
                               (let* ((args (read-commaed-group i))
                                      (adocf (car args))
                                      (htmlf (path-replace-extension adocf ".html"))
-                                     ;(pdff (path-replace-extension adocf ".pdf"))
+                                     (pdff (path-replace-extension adocf ".pdf"))
+                                     (f #f)
                                      )
+                                (cond ((file-exists? htmlf) (set! f htmlf))
+                                      ((file-exists? pdff) (set! f pdff)))
 
-                                (fprintf o "link:~a[~a]" htmlf
+                                (fprintf o "link:~a[~a]" f
                                          (if (= (length args) 1) ""
                                              (string-trim-dq (cadr args))))
 
@@ -335,6 +338,14 @@
                                          htmlf pdff)
                                 |#
                                 ))
+                             ((string=? directive "lessons-in-pathway")
+                              (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
+                                (newline o)
+                                (fprintf o ".Lessons used in this pathway~n[verse]~n")
+                                (for ((lesson lessons))
+                                  (fprintf o "link:./lessons/~a/index.html[~a]~n"
+                                           lesson lesson))
+                                (newline o)))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o)))

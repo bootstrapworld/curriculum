@@ -1,4 +1,4 @@
-# last modified 2019-03-04
+# last modified 2019-03-08
 
 if test index.html -ot README.adoc; then
   asciidoctor README.adoc -o index.html
@@ -9,6 +9,8 @@ PATHWAY=$1
 if test x$PATHWAY = x;then
   PATHWAY=pathwayP
 fi
+
+PATHWAY=${PATHWAY#pathways/}
 
 export TOPDIR=$(pwd)
 
@@ -95,7 +97,13 @@ else
       else
         cp -p $LIBDIR/*.css .
         export PATHWAYROOTDIR="../../"
+        # there should be only one?
+        echo building lesson plan from *.adoc
         $PROGDIR/adoc-preproc.rkt *.adoc
+        for g in *.adoc; do
+          cp -p ${g%.adoc}.html index.html
+        done
+        rm *.adoc[23]
       fi
       cd ..
     fi
@@ -114,7 +122,12 @@ else
   else
     cp -p $LIBDIR/*.css .
     export PATHWAYROOTDIR=""
+    # there should be only one?
+    echo building pathway narrative from *.adoc
     $PROGDIR/adoc-preproc.rkt *.adoc
+    for g in *.adoc; do
+      cp -p ${g%.adoc}.html index.html
+    done
     rm *.adoc[23]
   fi
 

@@ -26,7 +26,7 @@
 
 (define *workbook-pdf* "workbook/workbook.pdf")
 
-(printf "building ~a from PDF pages ~a~n" *workbook-pdf* *pdf-pages*)
+(printf "~nbuilding ~a from PDF pages ~a~n" *workbook-pdf* *pdf-pages*)
 
 (let ((pdftk-args (append *pdf-pages* (list "output" *workbook-pdf* "dont_ask"))))
   (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
