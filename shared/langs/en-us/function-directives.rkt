@@ -20,7 +20,7 @@
                                 #:show-range? (show-range? #f)
                                 #:purpose (purpose #f)
                                 #:show-purpose? (show-purpose? #f)
-                                #:num-examples (num-examples 1) ; number of total example spaces to generate
+                                #:num-examples (num-examples 0) ; number of total example spaces to generate
                                 #:example-list (example-list '()) ;concrete examples -- see doc above func for details
                                 #:buggy-example-list (buggy-example-list '()) ; full concrete examples with error
                                 #:show-examples (show-examples '()) ; see doc above func for details
@@ -33,6 +33,9 @@
                                 #:grid-lines? (grid-lines? #f)
                                 #:lang (lang 'racket)
                                 )
+
+  #; (when (and (cons? example-list) (cons? buggy-example-list))
+    (error 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
 
   (define (write-example funname ex show)
     (let ((show-funname? #f)
@@ -160,8 +163,8 @@ _Write the definition, given variable names to all your input values..._
                             #:purpose purpose
                             #:show-purpose? #t
                             #:num-examples (length use-examples)
-                            #:example-list example-list
-                            #:buggy-example-list buggy-example-list
+                            #:example-list use-examples
+                            #:buggy-example-list use-examples
                             #:show-examples (build-list (length use-examples) (lambda (i) #t))
                             #:buggy-funname-defn buggy-funname-defn
                             #:show-funname-defn? #t
