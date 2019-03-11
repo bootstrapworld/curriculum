@@ -219,6 +219,8 @@
 
 (define *summary-file* #f)
 
+(define *lesson-summary-file* #f)
+
 (define *all-glossary-items* '())
 
 (define *asciidoctor* "asciidoctor -a linkcss -a stylesheet=curriculum.css")
@@ -349,6 +351,8 @@
                                 |#
                                 ))
                              ((string=? directive "lessons-in-pathway")
+                              (unless (getenv "NARRATIVE")
+                                (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
                               (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
                                 (newline o)
                                 (fprintf o ".Lessons used in this pathway~n[verse]~n")
@@ -356,6 +360,21 @@
                                   (let ((lesson-title-cased
                                           (string-titlecase
                                             (string-replace lesson "-" " " #:all? #t))))
+                                    (let ((lesson-summary-file
+                                            (format "./lessons/~a/summary.adoc5" lesson)))
+                                      (call-with-input-file lesson-summary-file
+                                        (lambda (i)
+                                          (let loop ()
+                                            (let ((x (read i)))
+                                              (unless (eof-object? x)
+                                                (let ((s (assoc-glossary x *glossary-list*)))
+                                                  (cond (s (unless (member s glossary-items)
+                                                             (set! glossary-items
+                                                               (cons s glossary-items)))
+                                                           (unless (member s *all-glossary-items*)
+                                                             (set! *all-glossary-items*
+                                                               (cons s *all-glossary-items*))))))
+                                                (loop)))))))
                                     (fprintf o "link:./lessons/~a/index.html[~a]~n"
                                              lesson lesson-title-cased)))
                                 (newline o)))
@@ -421,6 +440,8 @@
 (define (main cl-args)
   (set! *all-glossary-items* '())
   (set! *summary-file* "summary.adoc2")
+  (when (getenv "LESSON")
+    (set! *lesson-summary-file* "summary.adoc5"))
 
   (for ((arg cl-args))
     (preproc-n-asciidoctor arg))
@@ -435,6 +456,14 @@
             (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
           *all-glossary-items*))
       #:exists 'replace)
+    (when *lesson-summary-file*
+      (call-with-output-file *lesson-summary-file*
+        (lambda (op)
+          (for-each
+            (lambda (s)
+              (fprintf op "~s~n" (car s)))
+            *all-glossary-items*)
+          )))
     (system (format "~a ~a" *asciidoctor* *summary-file*))))
 
 (main (current-command-line-arguments))
