@@ -1,4 +1,4 @@
-# last modified 2019-03-08
+# last modified 2019-03-11
 
 if test index.html -ot README.adoc; then
   asciidoctor README.adoc -o index.html
@@ -112,25 +112,6 @@ else
   echo
   cd ..
 
-  copacetic=1
-  for f in *.adoc; do
-    if test ! -f $f; then copacetic=0
-    fi
-  done
-  if test x$copacetic = x0; then
-    echo WARNING: No narrative in pathway $PATHWAY
-  else
-    cp -p $LIBDIR/*.css .
-    export PATHWAYROOTDIR=""
-    # there should be only one?
-    echo building pathway narrative from *.adoc
-    $PROGDIR/adoc-preproc.rkt *.adoc
-    for g in *.adoc; do
-      cp -p ${g%.adoc}.html index.html
-    done
-    rm *.adoc[23]
-  fi
-
   if test ! -d resources; then
     echo WARNING: No teacher resources in pathway $PATHWAY
   else
@@ -149,6 +130,25 @@ else
       rm *.adoc[23]
     fi
     cd ..
+  fi
+
+  copacetic=1
+  for f in *.adoc; do
+    if test ! -f $f; then copacetic=0
+    fi
+  done
+  if test x$copacetic = x0; then
+    echo WARNING: No narrative in pathway $PATHWAY
+  else
+    cp -p $LIBDIR/*.css .
+    export PATHWAYROOTDIR=""
+    # there should be only one?
+    echo building pathway narrative from *.adoc
+    $PROGDIR/adoc-preproc.rkt *.adoc
+    for g in *.adoc; do
+      cp -p ${g%.adoc}.html index.html
+    done
+    rm *.adoc[23]
   fi
 
   #echo READY TO MAKE WORKBOOK
