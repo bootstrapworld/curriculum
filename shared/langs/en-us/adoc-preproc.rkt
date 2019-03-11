@@ -169,6 +169,7 @@
 (define *index-length* (length *index-list*))
 
 (define (make-worksheet-link lesson snippet link-text)
+  (printf "make-worksheet-link ~a ~a ~a\n" lesson snippet link-text)
   (let (
         (snippet.adoc (path->string (path-replace-extension snippet ".adoc")))
         (snippet.html (path->string (path-replace-extension snippet ".html")))
@@ -192,17 +193,16 @@
       (set! snippet.pdf (path-replace-extension f ".pdf"))
       (cond ((file-exists? snippet.html) (set! f snippet.html))
             ((file-exists? snippet.pdf) (set! f snippet.pdf)))
-      (format "link:~alessons/~a/workbook-pages/~a[~aPage ~a]"
-              *pathway-root-dir* lesson f link-text pno))))
+      (format "link:~a[~aPage ~a]" f link-text pno))))
 
 (define (make-exercise-link lesson exer link-text)
-  (let ((f exer)
-        (exer.html (path-replace-extension exer ".html"))
-        (exer.pdf (path-replace-extension exer ".pdf")))
+  (printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
+  (let* ((f (string-append *pathway-root-dir* "lessons/" lesson "/exercises/" exer))
+         (exer.html (path-replace-extension f ".html"))
+         (exer.pdf (path-replace-extension f ".pdf")))
     (cond ((file-exists? exer.html) (set! f exer.html))
           ((file-exists? exer.pdf) (set! f exer.pdf)))
-    (format "link:~alessons/~a/exercises/~a[~a]"
-            *pathway-root-dir* lesson f link-text)))
+    (format "link:~a[~a]" f link-text)))
 
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
