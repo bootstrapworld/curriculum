@@ -187,12 +187,22 @@
                             (string=? snippet.pdf snippet2)))
                    (set! pno (+ i 1)))
                   (else (loop (+ i 1)))))))
-    (format "link:~alessons/~a/workbook-pages/~a[~aPage ~a]"
-            *pathway-root-dir* lesson snippet link-text pno)))
+    (let ((f (string-append *pathway-root-dir* "lessons/" lesson "/workbook-pages/" snippet)))
+      (set! snippet.html (path-replace-extension f ".html"))
+      (set! snippet.pdf (path-replace-extension f ".pdf"))
+      (cond ((file-exists? snippet.html) (set! f snippet.html))
+            ((file-exists? snippet.pdf) (set! f snippet.pdf)))
+      (format "link:~alessons/~a/workbook-pages/~a[~aPage ~a]"
+              *pathway-root-dir* lesson f link-text pno))))
 
 (define (make-exercise-link lesson exer link-text)
-  (format "link:~alessons/~a/exercises/~a[~a]"
-          *pathway-root-dir* lesson exer link-text))
+  (let ((f exer)
+        (exer.html (path-replace-extension exer ".html"))
+        (exer.pdf (path-replace-extension exer ".pdf")))
+    (cond ((file-exists? exer.html) (set! f exer.html))
+          ((file-exists? exer.pdf) (set! f exer.pdf)))
+    (format "link:~alessons/~a/exercises/~a[~a]"
+            *pathway-root-dir* lesson f link-text)))
 
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
@@ -318,7 +328,7 @@
                                      (adocf (car args))
                                      (htmlf (path-replace-extension adocf ".html"))
                                      (pdff (path-replace-extension adocf ".pdf"))
-                                     (f #f)
+                                     (f adocf)
                                      )
                                 (cond ((file-exists? htmlf) (set! f htmlf))
                                       ((file-exists? pdff) (set! f pdff)))
@@ -343,8 +353,11 @@
                                 (newline o)
                                 (fprintf o ".Lessons used in this pathway~n[verse]~n")
                                 (for ((lesson lessons))
-                                  (fprintf o "link:./lessons/~a/index.html[~a]~n"
-                                           lesson lesson))
+                                  (let ((lesson-title-cased
+                                          (string-titlecase
+                                            (string-replace lesson "-" " " #:all? #t))))
+                                    (fprintf o "link:./lessons/~a/index.html[~a]~n"
+                                             lesson lesson-title-cased)))
                                 (newline o)))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
