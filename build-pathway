@@ -142,12 +142,14 @@ else
   else
     cp -p $LIBDIR/*.css .
     export PATHWAYROOTDIR=""
+    export NARRATIVE=1
     # there should be only one?
     echo building pathway narrative from *.adoc
     $PROGDIR/adoc-preproc.rkt *.adoc
     for g in *.adoc; do
       cp -p ${g%.adoc}.html index.html
     done
+    unset NARRATIVE
     rm *.adoc[23]
   fi
 
