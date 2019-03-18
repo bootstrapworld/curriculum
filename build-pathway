@@ -1,16 +1,13 @@
-# last modified 2019-03-11
+# last modified 2019-03-18
 
 if test index.html -ot README.adoc; then
   asciidoctor README.adoc -o index.html
 fi
 
-PATHWAY=$1
-
-if test x$PATHWAY = x;then
-  PATHWAY=pathwayP
+if test $# -eq 0
+then args=pathwayP
+else args="$@"
 fi
-
-PATHWAY=${PATHWAY#pathways/}
 
 export TOPDIR=$(pwd)
 
@@ -19,139 +16,150 @@ PROGDIR=$TOPDIR/shared/langs/en-us
 LIBDIR=$TOPDIR/lib
 
 rm -fr distribution
-cp -pr pathways distribution
+mkdir distribution
+#cp -pr pathways distribution
 
-cd $TOPDIR
+buildpathway() {
+  cd $TOPDIR
 
-echo building pathway: $PATHWAY
+  PATHWAY=$1
 
-if test ! -d distribution/$PATHWAY; then
-  echo WARNING: No pathway $PATHWAY
-elif test ! -d distribution/$PATHWAY/langs/en-us; then
-  echo WARNING: No files in pathway $PATHWAY
-else
-  cd distribution/$PATHWAY/langs/en-us
+  PATHWAY=${PATHWAY#pathways/}
 
-  mkdir lessons workbook
+  PATHWAY=${PATHWAY%/}
 
-  if test ! -f workbook-index.rkt; then
-    echo WARNING: No workbook-index.rkt in pathway $PATHWAY
+  cp -pr pathways/$PATHWAY distribution
+
+  echo
+  echo building pathway: $PATHWAY
+
+  if test ! -d distribution/$PATHWAY; then
+    echo WARNING: No pathway $PATHWAY
+  elif test ! -d distribution/$PATHWAY/langs/en-us; then
+    echo WARNING: No files in pathway $PATHWAY
   else
-    $PROGDIR/copy-lessons.rkt
-  fi
+    cd distribution/$PATHWAY/langs/en-us
 
-  cd lessons
-  for L in *; do
-    if test ! -d $L; then
-      echo WARNING: No lessons in pathway $PATHWAY
+    mkdir lessons workbook
+
+    if test ! -f workbook-index.rkt; then
+      echo WARNING: No workbook-index.rkt in pathway $PATHWAY
     else
-      cd $L
-      export LESSON=$L
-      echo
-      echo building lesson $L in pathway $PATHWAY
-      #
-      if test -d exercises; then
-        cd exercises
-        export PATHWAYROOTDIR="../../../"
-        cp -p $LIBDIR/*.css .
+      $PROGDIR/copy-lessons.rkt
+    fi
+
+    cd lessons
+    for L in *; do
+      if test ! -d $L; then
+        echo WARNING: No lessons in pathway $PATHWAY
+      else
+        cd $L
+        export LESSON=$L
+        echo
+        echo building lesson $L in pathway $PATHWAY
+        #
+        if test -d exercises; then
+          cd exercises
+          export PATHWAYROOTDIR="../../../"
+          cp -p $LIBDIR/*.css .
+          for f in *.adoc; do
+            if test ! -f $f; then
+              echo WARNING: No exercise files in lesson $L
+            else
+              echo building exercise: $f
+              $PROGDIR/adoc-preproc.rkt $f
+              fhtml=${f%.adoc}.html
+              fpdf=${f%.adoc}.pdf
+              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+            fi
+          done
+          cd ..
+        fi
+        #
+        if test -d workbook-pages; then
+          cd workbook-pages
+          export PATHWAYROOTDIR="../../../"
+          cp -p $LIBDIR/*.css .
+          for f in *.adoc; do
+            if test ! -f $f; then
+              echo WARNING: No workbook adoc pages in lesson $L
+            else
+              echo building workbook page: $f
+              $PROGDIR/adoc-preproc.rkt $f
+              fhtml=${f%.adoc}.html
+              fpdf=${f%.adoc}.pdf
+              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+            fi
+          done
+          cd ..
+        fi
+        #
+        copacetic=1
         for f in *.adoc; do
           if test ! -f $f; then
-            echo WARNING: No exercise files in lesson $L
-          else
-            echo building exercise: $f
-            $PROGDIR/adoc-preproc.rkt $f
-            fhtml=${f%.adoc}.html
-            fpdf=${f%.adoc}.pdf
-            wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+            copacetic=0
           fi
         done
+        if test x$copacetic = x0; then
+          echo WARNING: No lesson plan in lesson $L
+        else
+          cp -p $LIBDIR/*.css .
+          export PATHWAYROOTDIR="../../"
+          # there should be only one?
+          echo building lesson plan from *.adoc
+          $PROGDIR/adoc-preproc.rkt *.adoc
+          for g in *.adoc; do
+            cp -p ${g%.adoc}.html index.html
+          done
+          rm *.adoc[23]
+        fi
         cd ..
       fi
-      #
-      if test -d workbook-pages; then
-        cd workbook-pages
-        export PATHWAYROOTDIR="../../../"
-        cp -p $LIBDIR/*.css .
-        for f in *.adoc; do
-          if test ! -f $f; then
-            echo WARNING: No workbook adoc pages in lesson $L
-          else
-            echo building workbook page: $f
-            $PROGDIR/adoc-preproc.rkt $f
-            fhtml=${f%.adoc}.html
-            fpdf=${f%.adoc}.pdf
-            wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
-          fi
-        done
-        cd ..
-      fi
-      #
+    done
+    unset LESSON
+    echo
+    cd ..
+
+    if test ! -d resources; then
+      echo WARNING: No teacher resources in pathway $PATHWAY
+    else
+      cd resources
+      cp -p $LIBDIR/*.css .
       copacetic=1
       for f in *.adoc; do
-        if test ! -f $f; then
-          copacetic=0
+        if test ! -f $f; then copacetic=0
         fi
       done
       if test x$copacetic = x0; then
-        echo WARNING: No lesson plan in lesson $L
+        echo WARNING: No teacher resource files in pathway $PATHWAY
       else
-        cp -p $LIBDIR/*.css .
-        export PATHWAYROOTDIR="../../"
-        # there should be only one?
-        echo building lesson plan from *.adoc
+        export PATHWAYROOTDIR="../"
         $PROGDIR/adoc-preproc.rkt *.adoc
-        for g in *.adoc; do
-          cp -p ${g%.adoc}.html index.html
-        done
         rm *.adoc[23]
       fi
       cd ..
     fi
-  done
-  unset LESSON
-  echo
-  cd ..
 
-  if test ! -d resources; then
-    echo WARNING: No teacher resources in pathway $PATHWAY
-  else
-    cd resources
-    cp -p $LIBDIR/*.css .
     copacetic=1
     for f in *.adoc; do
       if test ! -f $f; then copacetic=0
       fi
     done
     if test x$copacetic = x0; then
-      echo WARNING: No teacher resource files in pathway $PATHWAY
+      echo WARNING: No narrative in pathway $PATHWAY
     else
-      export PATHWAYROOTDIR="../"
+      cp -p $LIBDIR/*.css .
+      export PATHWAYROOTDIR=""
+      export NARRATIVE=1
+      # there should be only one?
+      echo building pathway narrative from *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
+      for g in *.adoc; do
+        cp -p ${g%.adoc}.html index.html
+      done
+      unset NARRATIVE
       rm *.adoc[23]
     fi
-    cd ..
-  fi
-
-  copacetic=1
-  for f in *.adoc; do
-    if test ! -f $f; then copacetic=0
-    fi
-  done
-  if test x$copacetic = x0; then
-    echo WARNING: No narrative in pathway $PATHWAY
-  else
-    cp -p $LIBDIR/*.css .
-    export PATHWAYROOTDIR=""
-    export NARRATIVE=1
-    # there should be only one?
-    echo building pathway narrative from *.adoc
-    $PROGDIR/adoc-preproc.rkt *.adoc
-    for g in *.adoc; do
-      cp -p ${g%.adoc}.html index.html
-    done
-    unset NARRATIVE
-    rm *.adoc[23]
-  fi
 
   #echo READY TO MAKE WORKBOOK
 
@@ -162,5 +170,10 @@ else
     $PROGDIR/make-workbook.rkt
   fi
 fi
+}
+
+for f in $args; do
+  buildpathway $f
+done
 
 # vi:ft=sh
