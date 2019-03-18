@@ -362,19 +362,20 @@
                                             (string-replace lesson "-" " " #:all? #t))))
                                     (let ((lesson-summary-file
                                             (format "./lessons/~a/summary.adoc5" lesson)))
-                                      (call-with-input-file lesson-summary-file
-                                        (lambda (i)
-                                          (let loop ()
-                                            (let ((x (read i)))
-                                              (unless (eof-object? x)
-                                                (let ((s (assoc-glossary x *glossary-list*)))
-                                                  (cond (s (unless (member s glossary-items)
-                                                             (set! glossary-items
-                                                               (cons s glossary-items)))
-                                                           (unless (member s *all-glossary-items*)
-                                                             (set! *all-glossary-items*
-                                                               (cons s *all-glossary-items*))))))
-                                                (loop)))))))
+                                      (when (file-exists? lesson-summary-file)
+                                        (call-with-input-file lesson-summary-file
+                                          (lambda (i)
+                                            (let loop ()
+                                              (let ((x (read i)))
+                                                (unless (eof-object? x)
+                                                  (let ((s (assoc-glossary x *glossary-list*)))
+                                                    (cond (s (unless (member s glossary-items)
+                                                               (set! glossary-items
+                                                                 (cons s glossary-items)))
+                                                             (unless (member s *all-glossary-items*)
+                                                               (set! *all-glossary-items*
+                                                                 (cons s *all-glossary-items*))))))
+                                                  (loop))))))))
                                     (fprintf o "link:./lessons/~a/index.html[~a]~n"
                                              lesson lesson-title-cased)))
                                 (newline o)))
