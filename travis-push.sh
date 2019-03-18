@@ -11,6 +11,6 @@ for f in $FILES_TO_COMMIT; do
   find distribution -name \*.$f | xargs git add
 done
 
-git commit -m "committed at $(date)"
+git commit -a -m "committed at $(date)"
 
 git push --force "https://${GH_TOKEN}@${GH_REF}" travistmp:gh-pages > /dev/null 2>&1
