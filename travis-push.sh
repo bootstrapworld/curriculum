@@ -1,16 +1,16 @@
 #!/bin/sh
 
-git config --global user.email ds26gte@gmail.com
-git config --global user.name "Dorai Sitaram"
+git checkout -B travistmp
 
-cd docs
-git commit -m "committed at $(date)" adocex.html
-cd ..
+git config --global user.email "${GH_USER_EMAIL}"
+git config --global user.name "${GH_USER_NAME}"
 
-git remote rm origin
-#git remote add origin https://${GITHUB_TOKEN}@github.com/ds26gte/curr-reorg >/dev/null 2>&1
-#git push origin master --quiet
-echo remotely adding origin to regular repo
-git remote add origin https://${GITHUB_TOKEN}@github.com/ds26gte/curr-reorg
-echo push to regular repo
-git push origin master
+FILES_TO_COMMIT="css html jpg pdf"
+
+for f in $FILES_TO_COMMIT; do
+  find distribution -name \*.$f | xargs git add
+done
+
+git commit -m "committed at $(date)"
+
+git push --force "https://${GH_TOKEN}@${GH_REF}" travistmp:gh-pages > /dev/null 2>&1

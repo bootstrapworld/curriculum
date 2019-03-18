@@ -3,20 +3,27 @@ rvm:
 - 2.2
 env:
   global:
-  - RACKET_DIR=~/racket
-  - RACKET_VERSION=6.12
-  matrix:
-  - secure: HJzGoBxAqwIKDeU67akjoVWTaqvuRZXC6Ey1bm+VBKbB24KeyRshB31c2Tb3OKOb07Q3Z0+iDhpHRUVDaaXnPUipqTYPPPn2fp2DK6ihcvsU7QDrp9Ev2N8IkcoRp8YuQQW7bTnYVJrzc0x/A/3jI58ZGQw9PhbEu2oHoOpRI42HeR8ODJiRv05FYPGRTrxgiJkQvo4WczmxUXIe3khlBby2spS2MSlfQDSyy8tMiUxKu3dcrvPekS4Pc7oCbBTjCGLZpcKTsE7eyPDT2LCDMEw5uANnGdsw8zxuUss7OfTYRz5MEkE3B8pMfpJParc7dJw6MFg0XO30OBfy7GHlX56nbNsMxHJ3pNM301cNFpJmligIQwnz/6tzoHUG2SGZ0ix1qlmO2Ql742KFsKthsy49l8xvh8Odnf7Ov72GUdhKK6zQdgC1BcXJA0KQ7WrvLHv17qp5V1WuoK7amT6S1pidAWdKvp3ABRgJr+w2d0OTrOX2vP3Jmvv+u9CPIpHd7pzr8q0JcMRH/As+U8I+Zfvr9lBADru5PyM2aRgbpfRf5k2N+JbeXkPI5SBHcmfl/8WvdZa4/Mx0IAlpge1mMhn5i/NXkGE5SzCrKQPO4ptZIHZCfOHbBOa1sjjcQ/vbswdTvRJi/bKeUSC5Mp0Wc08GeypjVpMvZQGjZ0XDTMQ=
+    - RACKET_DIR=~/racket
+    - RACKET_VERSION=6.12
+sudo: required
 git:
   quiet: true
 branches:
-  only: master
+  only:
+    - /.*/
+
 before_install:
-- git clone https://github.com/greghendershott/travis-racket.git
-- cat travis-racket/install-racket.sh | bash
-- export PATH="${RACKET_DIR}/bin:${PATH}"
-- gem install asciidoctor
+  - git clone https://github.com/greghendershott/travis-racket.git
+  - cat travis-racket/install-racket.sh | bash
+  - export PATH="${RACKET_DIR}/bin:${PATH}"
+  - gem install asciidoctor
+  - wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - sudo mv wkhtmltox/bin/wkhtmlto* /usr/bin
+  - sudo apt-get install -y pdftk
+
 script:
-- "./build-distrib"
+  - ./build-pathway
+
 after_success:
-- ./travis-push.sh
+  - ./travis-push.sh
