@@ -1,8 +1,11 @@
 # last modified 2019-03-18
 
-if test index.html -ot README.adoc; then
-  asciidoctor README.adoc -o index.html
+if test README.html -ot README.adoc; then
+  asciidoctor -a linkcss README.adoc
 fi
+
+echo '== Generated pathway docs' > index.adoc
+echo >> index.adoc
 
 if test $# -eq 0
 then args=pathwayP
@@ -29,6 +32,8 @@ buildpathway() {
   PATHWAY=${PATHWAY%/}
 
   cp -pr pathways/$PATHWAY distribution
+
+  echo \* link:distribution/$PATHWAY/langs/en-us/index.html[$PATHWAY] >> index.adoc
 
   echo
   echo building pathway: $PATHWAY
@@ -175,5 +180,8 @@ fi
 for f in $args; do
   buildpathway $f
 done
+
+cd $TOPDIR
+asciidoctor -a linkcss index.adoc
 
 # vi:ft=sh
