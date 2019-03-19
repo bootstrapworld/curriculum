@@ -37,18 +37,25 @@ subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
 pages, in correct order, is in `lesson-index.rkt`.
 
-Only one pathway P is shown in the repo for now. It is `pathways/pathwayP`.
-In that directory, the pathway’s narrative is in
+There are two pathways in the repo for now:
+
+  pathways/pathwayP
+  pathways/bs-flags-pathway
+
+In a pathway’s directory, the pathway narrative is in
 `langs/en-us/main.adoc` (name can be anything). Alongside it, its
 index of lessons, in correct order, is in `workbook-index.rkt`.
 These lessons are drawn from the `lessons`
 tree.
 
-The top dir contains the script `build-pathway`.
+The top dir contains the script `build-pathway`. It takes any
+number of pathways and creates a generated document tree for eahc
+of them under the `distribution` directory.
 
-Call it with a pathway spec (e.g., `pathwayP`) to build a
-`distribution` directory containing a subtree for each
-`pathwayP`.
+E.g., `build-pathway pathwayP` (or
+or `pathways/pathwayP` or `pathways/pathwayP/`, for those into
+shell completion) builds the subtree
+`distribution/pathwayP`.
 
    distribution/
      pathwayX/langs/en-us/narrative.html
@@ -59,8 +66,14 @@ Call it with a pathway spec (e.g., `pathwayP`) to build a
                           resources/<teacher-index>.html
                           workbook/workbook.pdf
 
-(For now, as a convenience, calling `build-pathway` without an arg builds
-`pathwayP`.)
+For now, as a convenience, calling `build-pathway` without an arg builds
+`distribution/bs-flags-pathway`.
+
+As a further convenience, a `git push` into the `master` branch
+automatically triggers a build of the `bs-flags-pathway` doctree
+and showcases it on the website
+`bootstrapworld.github.io/curriculum`.  (The choice of pathway(s) so
+to showcase may change in the future.)
 
 == jened sample doc
 
@@ -71,19 +84,19 @@ experience.
 link:distribution/lessons/lessonA/langs/en-us/jened.html[Sample
 lesson plan]
 
-== Git stuff
+== Git basics
 
 Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
 obvious clickety click on the GitHub page.)
 
 In your terminal, clone your fork thusly:
 
-   git clone https://github.com/jrandomuser/curr-reorg
+   git clone https://github.com/jrandomuser/curriculum
 
 This will create a local repo where you can try things, change
 things, etc. But first, to retain connection with the original do:
 
-  git remote add upstream https://github.com/ds26gte/curr-reorg
+  git remote add upstream https://github.com/bootstrapworld/curriculum
 
 Every time the original changes, update like so:
 
@@ -98,6 +111,24 @@ very least, make sure you’ve checked in all your changes that you
 care about, before you attempt a merge. For changes you aren’t
 ready to check in, save the concerned files somewhere else, and
 make sure there are no “modified” files in your directory.
+
+=== Creating your private branch in the original repo
+
+Alternatively -- and this will work only for greenlisted members
+-- clone the repo directly and add your own branch, e.g.,
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+  git checkout -b jenbranch
+
+You can pull and merge from `master` as needed:
+
+  git checkout master
+  git pull
+  git checkout jenbranch
+  git merge master
+
+If conflicts arise, you will be given a way to resolve them.
 
 === To make your fetch/merge experience easier
 
@@ -121,7 +152,7 @@ NB: When you create a pathway, named `pathwayQ` say, use
   `./build-pathway pathwayQ`
 
 to generate its files. Without an argument, `build-pathway` uses
-`pathwayP`.
+`bs-flags-pathway`.
 
 == Glossary and standards
 
