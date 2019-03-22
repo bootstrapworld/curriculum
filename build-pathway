@@ -1,4 +1,4 @@
-# last modified 2019-03-18
+# last modified 2019-03-22
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -8,7 +8,7 @@ echo '== Generated pathway docs' > index.adoc
 echo >> index.adoc
 
 if test $# -eq 0
-then args=bs-flags-pathway
+then args="pathways/*"
 else args="$@"
 fi
 
