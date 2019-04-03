@@ -1,5 +1,5 @@
 (
-"Coordinates1"
-"Coordinates2"
+"CoordinatesPlane1"
+"CoordinatesPlane2"
 "OrderOfOperations1"
 )
