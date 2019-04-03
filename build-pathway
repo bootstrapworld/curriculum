@@ -33,7 +33,6 @@ buildpathway() {
 
   cp -pr pathways/$PATHWAY distribution
 
-  echo \* link:distribution/$PATHWAY/langs/en-us/index.html[$PATHWAY] >> index.adoc
 
   echo
   echo building pathway: $PATHWAY
@@ -167,15 +166,31 @@ buildpathway() {
       rm *.adoc[23]
     fi
 
-  #echo READY TO MAKE WORKBOOK
+    #echo READY TO MAKE WORKBOOK
 
-  if test ! -f workbook-page-index.rkt; then
-    echo WARNING: No workbook index file in pathway $PATHWAY
-  else
-    export PATHWAYROOTDIR=""
-    $PROGDIR/make-workbook.rkt
+    if test ! -f workbook-page-index.rkt; then
+      echo WARNING: No workbook index file in pathway $PATHWAY
+    else
+      export PATHWAYROOTDIR=""
+      $PROGDIR/make-workbook.rkt
+    fi
   fi
-fi
+
+  cd $TOPDIR
+  echo \.$PATHWAY >> index.adoc
+  docf=distribution/$PATHWAY/langs/en-us/index.html
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY narrative] >> index.adoc
+  fi
+  docf=distribution/$PATHWAY/langs/en-us/workbook/workbook.pdf
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY workbook] >> index.adoc
+  fi
+  docf=distribution/$PATHWAY/langs/en-us/resources/protected/workbook-sols.pdf
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY workbook w/ solns] >> index.adoc
+  fi
+  echo >> index.adoc
 }
 
 for f in $args; do
