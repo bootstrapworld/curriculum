@@ -2,33 +2,50 @@
 
 #lang racket
 
-(define *workbook-page-specs*
-  (call-with-input-file "workbook-page-index.rkt" read))
+(define (make-workbook student?)
 
-;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
+  (define *workbook-page-specs*
+    (call-with-input-file
+      (if student? "workbook-page-index.rkt" "workbook-sols-page-index.rkt")
+      read))
 
-(define *lessons* '())
+  ;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
 
-(for ((spec *workbook-page-specs*))
-  (let ((lesson (car spec)))
-    (unless (member lesson *lessons*)
-      (set! *lessons* (cons lesson *lessons*)))))
+  (define *lessons* '())
 
-(define *pdf-pages*
-  (map (lambda (f)
-         (let ((f (string-append "lessons/" (car f) "/workbook-pages/" (cadr f))))
-           (when (path-has-extension? f #".adoc")
-             (set! f (path-replace-extension f ".pdf")))
-           f))
-       *workbook-page-specs*))
+  (for ((spec *workbook-page-specs*))
+    (let ((lesson (car spec)))
+      (unless (member lesson *lessons*)
+        (set! *lessons* (cons lesson *lessons*)))))
 
-;(printf "*pdf-pages* = ~s~n" *pdf-pages*)
+  (define *pdf-pages*
+    (map (lambda (f)
+           (let ((f (string-append "lessons/" (car f) "/workbook-pages/" (cadr f))))
+             (when (path-has-extension? f #".adoc")
+               (set! f (path-replace-extension f ".pdf")))
+             f))
+         *workbook-page-specs*))
 
-(define *workbook-pdf* "workbook/workbook.pdf")
+  ;(printf "*pdf-pages* = ~s~n" *pdf-pages*)
 
-(printf "~nbuilding ~a from PDF pages ~a~n" *workbook-pdf* *pdf-pages*)
+  (define *workbook-pdf*
+    (if student?
+        "workbook/workbook.pdf" "workbook/workbook-sols.pdf"))
 
-(let ((pdftk-args (append *pdf-pages* (list "output" *workbook-pdf* "dont_ask"))))
-  (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
+  (printf "~nbuilding ~a from PDF pages ~a~n" *workbook-pdf* *pdf-pages*)
+
+  (unless (null? *pdf-pages*)
+    (let ((pdftk-args (append *pdf-pages* (list "output" *workbook-pdf* "dont_ask"))))
+      (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
+
+    (unless student?
+      (system (format "mv ~a resources/protected" *workbook-pdf*)))
+    )
+
+  )
+
+(make-workbook #t)
+
+(make-workbook #f)
 
 (void)

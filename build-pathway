@@ -1,4 +1,4 @@
-# last modified 2019-03-22
+# last modified 2019-04-03
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -46,6 +46,7 @@ buildpathway() {
     cd distribution/$PATHWAY/langs/en-us
 
     mkdir lessons workbook
+    mkdir -p resources/protected
 
     if test ! -f workbook-index.rkt; then
       echo WARNING: No workbook-index.rkt in pathway $PATHWAY

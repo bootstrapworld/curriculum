@@ -20,6 +20,7 @@ Explore them to see where things are.
                          exercises/<recipe>.adoc
                          images/<picture>.jpg
                          workbook-pages/lesson-index.rkt
+                         workbook-pages/lesson-sols-index.rkt
                          workbook-pages/<page>.pdf
   /pathways
     /pathwayX/langs/en-us/narrative.adoc
@@ -35,7 +36,8 @@ The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`.
+pages, in correct order, is in `lesson-index.rkt`. A teacher
+version of the lesson pages is in `lesson-sols-index.rkt`.
 
 There are two pathways in the repo for now:
 
@@ -63,8 +65,15 @@ shell completion) builds the subtree
                                  jened.html
                                  exercises/*.{html,pdf}
                                  workbook-pages/*.{html.pdf}
-                          resources/<teacher-index>.html
+                          resources/
+                             <teacher-index>.html
+                             protected/
+                                workbook-sols.pdf
                           workbook/workbook.pdf
+
+Note that two workbook PDFs can be created, one for the students
+in the `workbook` directory; and another for teachers in the
+“protected” directory `resources/protected`.
 
 For now, as a convenience, calling `build-pathway` without an arg builds
 `distribution/bs-flags-pathway`.
