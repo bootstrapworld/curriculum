@@ -1,6 +1,6 @@
 (
-"CoordinatesPlane1"
-"CoordinatesPlane2"
+"CoordinatePlane1"
+"CoordinatePlane2"
 "OrderOfOperations1"
 "DomainAndRange"
 "FunctionComposition1"
