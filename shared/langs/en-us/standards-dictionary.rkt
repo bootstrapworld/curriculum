@@ -12,7 +12,7 @@
   "Know that numbers that are not rational are called irrational. Understand informally that every number has a decimal expansion; for rational numbers show that the decimal expansion repeats eventually, and convert a decimal expansion which repeats eventually into a rational number."
  )
  ("8.NS.A.2"
-  "Use rational approximations of irrational numbers to compare the size of irrational numbers, locate them approximately on a number line diagram, and estimate the value of expressions (e.g., πU+00B2)."
+  "Use rational approximations of irrational numbers to compare the size of irrational numbers, locate them approximately on a number line diagram, and estimate the value of expressions (e.g., π²)."
  )
  ("8.EE.A"
   "Expressions and equations work with radicals and integer exponents."
