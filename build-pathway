@@ -1,4 +1,4 @@
-# last modified 2019-04-03
+# last modified 2019-04-05
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -64,41 +64,38 @@ buildpathway() {
         echo
         echo building lesson $L in pathway $PATHWAY
         #
-        if test -d exercises; then
-          cd exercises
-          export PATHWAYROOTDIR="../../../"
-          cp -p $LIBDIR/*.css .
-          for f in *.adoc; do
-            if test ! -f $f; then
-              echo WARNING: No exercise files in lesson $L
-            else
-              echo building exercise: $f
-              $PROGDIR/adoc-preproc.rkt $f
-              fhtml=${f%.adoc}.html
-              fpdf=${f%.adoc}.pdf
-              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+        cp -pr workbook-pages solutions-pages
+        for f in workbook-sols-pages/*; do
+          if test -f $f; then
+            cp -p $f solutions-pages
+          fi
+        done
+        rm -fr workbook-sols-pages
+        mv solutions-pages workbook-sols-pages
+        for d in exercises workbook-pages workbook-sols-pages; do
+          if test -d $d; then
+            echo \(building $d\)
+            unset SOLUTIONS
+            if test $d = "workbook-sols-pages"; then
+              export SOLUTIONS=1
             fi
-          done
-          cd ..
-        fi
-        #
-        if test -d workbook-pages; then
-          cd workbook-pages
-          export PATHWAYROOTDIR="../../../"
-          cp -p $LIBDIR/*.css .
-          for f in *.adoc; do
-            if test ! -f $f; then
-              echo WARNING: No workbook adoc pages in lesson $L
-            else
-              echo building workbook page: $f
-              $PROGDIR/adoc-preproc.rkt $f
-              fhtml=${f%.adoc}.html
-              fpdf=${f%.adoc}.pdf
-              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
-            fi
-          done
-          cd ..
-        fi
+            cd $d
+            export PATHWAYROOTDIR="../../../"
+            cp -p $LIBDIR/*.css .
+            for f in *.adoc; do
+              if test ! -f $f; then
+                echo WARNING: No adoc files in lesson $L/$d
+              else
+                echo building $f
+                $PROGDIR/adoc-preproc.rkt $f
+                fhtml=${f%.adoc}.html
+                fpdf=${f%.adoc}.pdf
+                wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+              fi
+            done
+            cd ..
+          fi
+        done
         #
         copacetic=1
         for f in *.adoc; do
@@ -117,7 +114,7 @@ buildpathway() {
           for g in *.adoc; do
             cp -p ${g%.adoc}.html index.html
           done
-          rm *.adoc[23]
+          #rm *.adoc[23]
         fi
         cd ..
       fi
@@ -141,7 +138,7 @@ buildpathway() {
       else
         export PATHWAYROOTDIR="../"
         $PROGDIR/adoc-preproc.rkt *.adoc
-        rm *.adoc[23]
+        #rm *.adoc[23]
       fi
       cd ..
     fi
@@ -164,7 +161,7 @@ buildpathway() {
         cp -p ${g%.adoc}.html index.html
       done
       unset NARRATIVE
-      rm *.adoc[23]
+      #rm *.adoc[23]
     fi
 
     #echo READY TO MAKE WORKBOOK

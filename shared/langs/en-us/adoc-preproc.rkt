@@ -169,7 +169,7 @@
 (define *index-length* (length *index-list*))
 
 (define (make-worksheet-link lesson snippet link-text)
-  (printf "make-worksheet-link ~a ~a ~a\n" lesson snippet link-text)
+  ;(printf "make-worksheet-link ~a ~a ~a\n" lesson snippet link-text)
   (let (
         (snippet.adoc (path->string (path-replace-extension snippet ".adoc")))
         (snippet.html (path->string (path-replace-extension snippet ".html")))
@@ -196,7 +196,7 @@
       (format "link:~a[~aPage ~a]" f link-text pno))))
 
 (define (make-exercise-link lesson exer link-text)
-  (printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
+  ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
   (let* ((f (string-append *pathway-root-dir* "lessons/" lesson "/exercises/" exer))
          (exer.html (path-replace-extension f ".html"))
          (exer.pdf (path-replace-extension f ".pdf")))

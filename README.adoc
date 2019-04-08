@@ -22,6 +22,7 @@ Explore them to see where things are.
                          workbook-pages/lesson-index.rkt
                          workbook-pages/lesson-sols-index.rkt
                          workbook-pages/<page>.pdf
+                         workbook-sols-pages/<page>.pdf
   /pathways
     /pathwayX/langs/en-us/narrative.adoc
                           workbook-index.rkt
@@ -36,8 +37,13 @@ The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`. A teacher
-version of the lesson pages is in `lesson-sols-index.rkt`.
+pages, in correct order, is in `lesson-index.rkt`. 
+
+The subdir `workbook-sols-pages` contains workpages that would
+replace corresponding pages in the `workbook-pages` directory
+when creating the teacher version of the lesson pages. They use
+the same filename as the “student” pages they replace. Only pages
+that differ between the two versions need be supplied.
 
 There are two pathways in the repo for now:
 
@@ -315,3 +321,14 @@ the whole story. Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
 add it as a Racket directive.)
+
+If your Asciidoctor version is at least 2.0.0, you can type
+
+  asciidoctor --help syntax
+
+to get a brief reference guide to the syntax. To create a browsable HTML
+file, do
+
+  asciidoctor --help syntax | asciidoctor - -o help.html
+
+and open `help.html` in your browser.
