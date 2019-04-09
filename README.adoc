@@ -26,6 +26,7 @@ Explore them to see where things are.
   /pathways
     /pathwayX/langs/en-us/narrative.adoc
                           workbook-index.rkt
+                          external-index.rkt
                           resources/<teacher-index>.adoc
 
 In particular, “lesson A” is in subdirectory `lessonA` inside
@@ -222,11 +223,25 @@ you created a workbook page for them), the rendered link has its
 link text (if any) augmented with a reference to the specific
 page number in the pathway worksheet.
 
-=== Generic cross reference
+=== Generic links
 
-Use `@link{URL, link-text}` to refer to a generic cross-reference
+Use `@link{URL, link-text}` to refer to a generic URL
 not part of the curriculum hierarchy.  The second argument for
 the link text is optional.
+
+==== Generic links with standard names
+
+Use `@worksheet-link{pointer, link-text}` to refer to a pointer
+(a standard name) to a possibly volatile URL. E.g.,
+
+  @worksheet-link{demo-page, The Demo Page}
+
+The pointer `demo-page` is resolved using an index file
+`external-index.rkt`, which contains an assoc list, with entries
+like
+
+  ("demo-page"
+       "https://bootstrapworld.github.io/curriculum/index.html")
 
 == Some useful classes and directives
 

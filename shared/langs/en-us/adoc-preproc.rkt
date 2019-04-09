@@ -168,6 +168,13 @@
 
 (define *index-length* (length *index-list*))
 
+(define *external-url-index-file* (string-append *pathway-root-dir* "external-index.rkt"))
+
+(define *external-url-index*
+  (if (file-exists? *external-url-index-file*)
+      (call-with-input-file *external-url-index-file* read)
+      '()))
+
 (define (make-worksheet-link lesson snippet link-text)
   ;(printf "make-worksheet-link ~a ~a ~a\n" lesson snippet link-text)
   (let (
@@ -291,12 +298,19 @@
                                      (page (car args))
                                      (link-text (if (> n 1) (cadr args) ""))
                                      (page-compts (regexp-split #rx"/"  page))
-                                     (first-compt (car page-compts))
-                                     (second-compt (cadr page-compts))
-                                     )
+                                     (first-compt (car page-compts)))
                                 (case (length page-compts)
+                                  ((1)
+                                   (let* ((pointer (car page-compts))
+                                          (actual-url (assoc pointer *external-url-index*)))
+                                     (if actual-url
+                                         (fprintf o "link:~a[~a]" (cadr actual-url)
+                                                  (if (string=? link-text "")
+                                                      pointer link-text))
+                                         (printf "Unresolved external link ~a~n" pointer))))
                                   ((2)
-                                   (let ((lesson-dir (getenv "LESSON")))
+                                   (let ((second-compt (cadr page-compts))
+                                         (lesson-dir (getenv "LESSON")))
                                      (cond ((string=? first-compt "exercises")
                                             (cond (lesson-dir
                                                     (display (make-exercise-link lesson-dir
@@ -317,7 +331,8 @@
                                                         (cadr page-compts)
                                                         link-text) o)))))
                                   ((3)
-                                   (let ((third-compt (caddr page-compts)))
+                                   (let ((second-compt (cadr page-compts))
+                                         (third-compt (caddr page-compts)))
                                    (cond ((string=? second-compt "exercises")
                                           (display (make-exercise-link first-compt
                                                                        third-compt link-text) o))
