@@ -7,7 +7,159 @@
  ("7.RP.A"
   "Analyze proportional relationships and use them to solve real-world and mathematical problems."
  )
- 
+ ("7.RP.A.1"
+  "Compute unit rates associated with ratios of fractions, including ratios of lengths, areas and other quantities measured in like or different units."
+ )
+ ("7.RP.A.2"
+  "Recognize and represent proportional relationships between quantities."
+ )
+ ("7.RP.A.2.A"
+  "Decide whether two quantities are in a proportional relationship, e.g., by testing for equivalent ratios in a table or graphing on a coordinate plane and observing whether the graph is a straight line through the origin."
+ )
+ ("7.RP.A.2.B"
+  "Identify the constant of proportionality (unit rate) in tables, graphs, equations, diagrams, and verbal descriptions of proportional relationships."
+ )
+ ("7.RP.A.2.C"
+  "Represent proportional relationships by equations."
+ )
+ ("7.RP.A.2.D"
+  "Explain what a point (x, y) on the graph of a proportional relationship means in terms of the situation, with special attention to the points (0, 0) and (1, r) where r is the unit rate."
+ )
+ ("7.RP.A.3"
+  "Use proportional relationships to solve multistep ratio and percent problems."
+ )
+ ("7.NS.A"
+  "Apply and extend previous understandings of operations with fractions."
+ )
+ ("7.NS.A.1"
+  "Apply and extend previous understandings of addition and subtraction to add and subtract rational numbers; represent addition and subtraction on a horizontal or vertical number line diagram."
+ )
+ ("7.NS.A.1.A"
+  "Describe situations in which opposite quantities combine to make 0."
+ )
+ ("7.NS.A.1.B"
+  "Understand p + q as the number located a distance |q| from p, in the positive or negative direction depending on whether q is positive or negative. Show that a number and its opposite have a sum of 0 (are additive inverses). Interpret sums of rational numbers by describing real-world contexts."
+ )
+ ("7.NS.A.1.C"
+  "Understand subtraction of rational numbers as adding the additive inverse, p - q = p + (-q). Show that the distance between two rational numbers on the number line is the absolute value of their difference, and apply this principle in real-world contexts."
+ )
+ ("7.NS.A.1.D"
+  "Apply properties of operations as strategies to add and subtract rational numbers."
+ )
+ ("7.NS.A.2"
+  "Apply and extend previous understandings of multiplication and division and of fractions to multiply and divide rational numbers."
+ )
+ ("7.NS.A.2.A"
+  "Understand that multiplication is extended from fractions to rational numbers by requiring that operations continue to satisfy the properties of operations, particularly the distributive property, leading to products such as (-1)(-1) = 1 and the rules for multiplying signed numbers. Interpret products of rational numbers by describing real-world contexts."
+ )
+ ("7.NS.A.2.B"
+  "Understand that integers can be divided, provided that the divisor is not zero, and every quotient of integers (with non-zero divisor) is a rational number. If p and q are integers, then -(p/q) = (-p)/q = p/(-q). Interpret quotients of rational numbers by describing real-world contexts."
+ )
+ ("7.NS.A.2.C"
+  "Apply properties of operations as strategies to multiply and divide rational numbers."
+ )
+ ("7.NS.A.2.D"
+  "Convert a rational number to a decimal using long division; know that the decimal form of a rational number terminates in 0s or eventually repeats."
+ )
+ ("7.NS.A.3"
+  "Solve real-world and mathematical problems involving the four operations with rational numbers."
+ )
+ ("7.EE.A"
+  "Use properties of operations to generate equivalent expressions."
+ )
+ ("7.EE.A.1"
+  "Apply properties of operations as strategies to add, subtract, factor, and expand linear expressions with rational coefficients."
+ )
+ ("7.EE.A.2"
+  "Understand that rewriting an expression in different forms in a problem context can shed light on the problem and how the quantities in it are related."
+ )
+ ("7.EE.B"
+  "Solve real-life and mathematical problems using numerical and algebraic expressions and equations."
+ )
+ ("7.EE.B.3"
+  "Solve multi-step real-life and mathematical problems posed with positive and negative rational numbers in any form (whole numbers, fractions, and decimals), using tools strategically. Apply properties of operations to calculate with numbers in any form; convert between forms as appropriate; and assess the reasonableness of answers using mental computation and estimation strategies."
+ )
+ ("7.EE.B.4"
+  "Use variables to represent quantities in a real-world or mathematical problem, and construct simple equations and inequalities to solve problems by reasoning about the quantities."
+ )
+ ("7.EE.B.4.A"
+  "Solve word problems leading to equations of the form px + q = r and p(x + q) = r, where p, q, and r are specific rational numbers. Solve equations of these forms fluently. Compare an algebraic solution to an arithmetic solution, identifying the sequence of the operations used in each approach."
+ )
+ ("7.EE.B.4.B"
+  "Solve word problems leading to inequalities of the form px + q > r or px + q < r, where p, q, and r are specific rational numbers. Graph the solution set of the inequality and interpret it in the context of the problem."
+ )
+ ("7.G.A"
+  "Draw, construct, and describe geometical figures and describe the relationships between them."
+ )
+ ("7.G.A.1"
+  "Solve problems involving scale drawings of geometric figures, including computing actual lengths and areas from a scale drawing and reproducing a scale drawing at a different scale."
+ )
+ ("7.G.A.2"
+  "Draw (freehand, with ruler and protractor, and with technology) geometric shapes with given conditions. Focus on constructing triangles from three measures of angles or sides, noticing when the conditions determine a unique triangle, more than one triangle, or no triangle."
+ )
+ ("7.G.A.3"
+  "Describe the two-dimensional figures that result from slicing three-dimensional figures, as in plane sections of right rectangular prisms and right rectangular pyramids."
+ )
+ ("7.G.B"
+  "Solve real-life and mathematical problems involving angle measure, area, surface area, and volume."
+ )
+ ("7.G.B.4"
+  "Know the formulas for the area and circumference of a circle and use them to solve problems; give an informal derivation of the relationship between the circumference and area of a circle."
+ )
+ ("7.G.B.5"
+  "Use facts about supplementary, complementary, vertical, and adjacent angles in a multi-step problem to write and solve simple equations for an unknown angle in a figure."
+ )
+ ("7.G.B.6"
+  "Solve real-world and mathematical problems involving area, volume and surface area of two- and three-dimensional objects composed of triangles, quadrilaterals, polygons, cubes, and right prisms."
+ )
+ ("7.SP.A"
+  "Use random sampling to draw inferences about a population."
+ )
+ ("7.SP.A.1"
+  "Understand that statistics can be used to gain information about a population by examining a sample of the population; generalizations about a population from a sample are valid only if the sample is representative of that population. Understand that random sampling tends to produce representative samples and support valid inferences."
+ )
+ ("7.SP.A.2"
+  "Use data from a random sample to draw inferences about a population with an unknown characteristic of interest. Generate multiple samples (or simulated samples) of the same size to gauge the variation in estimates or predictions."
+ )
+ ("7.SP.B"
+  "Draw informal comparative inferences about two populations."
+ )
+ ("7.SP.B.3"
+  "Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability."
+ )
+ ("7.SP.B.4"
+  "Use measures of center and measures of variability for numerical data from random samples to draw informal comparative inferences about two populations."
+ )
+ ("7.SP.C"
+  "Investigate chance processes and develop, use, and evaluate probability models."
+ )
+ ("7.SP.C.5"
+  "Understand that the probability of a chance event is a number between 0 and 1 that expresses the likelihood of the event occurring. Larger numbers indicate greater likelihood. A probability near 0 indicates an unlikely event, a probability around 1/2 indicates an event that is neither unlikely nor likely, and a probability near 1 indicates a likely event."
+ )
+ ("7.SP.C.6"
+  "Approximate the probability of a chance event by collecting data on the chance process that produces it and observing its long-run relative frequency, and predict the approximate relative frequency given the probability."
+ )
+ ("7.SP.C.7"
+  "Develop a probability model and use it to find probabilities of events. Compare probabilities from a model to observed frequencies; if the agreement is not good, explain possible sources of the discrepancy."
+ )
+ ("7.SP.C.7.A"
+  "Develop a uniform probability model by assigning equal probability to all outcomes, and use the model to determine probabilities of events."
+ )
+ ("7.SP.C.7.B"
+  "Develop a probability model (which may not be uniform) by observing frequencies in data generated from a chance process."
+ )
+ ("7.SP.C.8"
+  "Find probabilities of compound events using organized lists, tables, tree diagrams, and simulation."
+ )
+ ("7.SP.C.8.A"
+  "Understand that, just as with simple events, the probability of a compound event is the fraction of outcomes in the sample space for which the compound event occurs."
+ )
+ ("7.SP.C.8.B"
+  "Represent sample spaces for compound events using methods such as organized lists, tables and tree diagrams. For an event described in everyday language (e.g., "rolling double sixes"), identify the outcomes in the sample space which compose the event."
+ )
+ ("7.SP.C.8.C"
+  "Design and use a simulation to generate frequencies for compound events."
+ )
  ("8.NS.A"
   "Know that there are numbers that are not rational, and approximate them by rational numbers."
  )
