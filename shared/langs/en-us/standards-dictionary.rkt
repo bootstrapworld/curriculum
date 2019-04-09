@@ -4,6 +4,9 @@
 
 (define *standards-list*
 '(
+ ("7.RP.A"
+  "Analyze proportional relationships and use them to solve real-world and mathematical problems."
+ )
  ("8.NS.A"
   "Know that there are numbers that are not rational, and approximate them by rational numbers."
  )
@@ -136,8 +139,6 @@
  ("8.SP.A.4"
   "Understand that patterns of association can also be seen in bivariate categorical data by displaying frequencies and relative frequencies in a two-way table. Construct and interpret a two-way table summarizing data on two categorical variables collected from the same subjects. Use relative frequencies calculated for rows or columns to describe possible association between the two variables. "
  )
- ("7.RP.A"
-  "Analyze proportional relationships and use them to solve real-world and mathematical problems."
  
  ("N-Q"
   "The student reasons quantitatively in using units to solve problems"
