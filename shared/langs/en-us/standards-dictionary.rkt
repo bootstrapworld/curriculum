@@ -7,6 +7,7 @@
  ("7.RP.A"
   "Analyze proportional relationships and use them to solve real-world and mathematical problems."
  )
+ 
  ("8.NS.A"
   "Know that there are numbers that are not rational, and approximate them by rational numbers."
  )
