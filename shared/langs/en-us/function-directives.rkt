@@ -4,6 +4,8 @@
 
 (provide *function-list*)
 
+(define *solutions-mode?* (getenv "SOLUTIONS"))
+
 (define (ft-list-ref s i)
   (let ((n (length s)))
     (and (< i n) (list-ref s i))))
@@ -33,6 +35,17 @@
                                 #:lang (lang 'racket)
                                 )
 
+  (when *solutions-mode?*
+    (set! show-funname-contract? #f)
+    (set! show-domains? #f)
+    (set! show-range? #f)
+    (set! show-purpose? #f)
+    (set! show-examples #f)
+    (set! show-funname-defn? #f)
+    (set! show-params? #f)
+    (set! show-body? #f)
+    )
+
   ;(printf "d-r-e body= ~s\n" body)
   ;uncomment in orig;
   ;comment, debug
@@ -46,6 +59,7 @@
           (show-args? #f)
           (show-body? #f))
       (cond ((not show) #f)
+            ((not *solutions-mode?*) #f)
             ((eqv? show #t)
              (set! show-funname? #t)
              (set! show-args? #t)
@@ -54,11 +68,9 @@
              (set! show-funname? (list-ref show 0))
              (set! show-args? (list-ref show 1))
              (set! show-body? (list-ref show 2))))
-      (format "
-
- (EXAMPLE (~a ~a) ~a)
-
-"
+      (format "~n
+ (EXAMPLE (~a ~a) ~a)~n
+~n"
               (if show-funname? funname "")
               (if show-args?
                   (apply string-append
