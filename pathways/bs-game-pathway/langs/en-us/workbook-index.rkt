@@ -5,4 +5,12 @@
 "DomainAndRange"
 "FunctionComposition1"
 "DefiningValues1"
+"FunctionApplications1"
+"CreatingFunctions1"
+"FunctionApplications2"
+"Inequalities1"
+"Inequalities2"
+"PiecewiseFunctions1"
+"PiecewiseFunctions2"
+"DistanceFormula1"
 )
