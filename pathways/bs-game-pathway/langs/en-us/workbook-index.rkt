@@ -8,6 +8,8 @@
 "FunctionApplications1"
 "CreatingFunctions1"
 "FunctionApplications2"
+"ErrorAnalysis"
+"FunctionComposition3"
 "Inequalities1"
 "Inequalities2"
 "PiecewiseFunctions1"
