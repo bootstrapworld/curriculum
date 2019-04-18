@@ -7,7 +7,7 @@ git config --global user.name "${GH_USER_NAME}"
 
 FILES_TO_COMMIT="css html jpg pdf"
 
-git add index.html asciidoctor.css
+git add index.html README.html asciidoctor.css
 
 for f in $FILES_TO_COMMIT; do
   find distribution -name \*.$f | xargs git add -f

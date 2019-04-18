@@ -20,10 +20,13 @@ Explore them to see where things are.
                          exercises/<recipe>.adoc
                          images/<picture>.jpg
                          workbook-pages/lesson-index.rkt
+                         workbook-pages/lesson-sols-index.rkt
                          workbook-pages/<page>.pdf
+                         workbook-sols-pages/<page>.pdf
   /pathways
     /pathwayX/langs/en-us/narrative.adoc
                           workbook-index.rkt
+                          external-index.rkt
                           resources/<teacher-index>.adoc
 
 In particular, “lesson A” is in subdirectory `lessonA` inside
@@ -35,7 +38,13 @@ The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`.
+pages, in correct order, is in `lesson-index.rkt`. 
+
+The subdir `workbook-sols-pages` contains workpages that would
+replace corresponding pages in the `workbook-pages` directory
+when creating the teacher version of the lesson pages. They use
+the same filename as the “student” pages they replace. Only pages
+that differ between the two versions need be supplied.
 
 There are two pathways in the repo for now:
 
@@ -63,8 +72,15 @@ shell completion) builds the subtree
                                  jened.html
                                  exercises/*.{html,pdf}
                                  workbook-pages/*.{html.pdf}
-                          resources/<teacher-index>.html
+                          resources/
+                             <teacher-index>.html
+                             protected/
+                                workbook-sols.pdf
                           workbook/workbook.pdf
+
+Note that two workbook PDFs can be created, one for the students
+in the `workbook` directory; and another for teachers in the
+“protected” directory `resources/protected`.
 
 For now, as a convenience, calling `build-pathway` without an arg builds
 `distribution/bs-flags-pathway`.
@@ -207,11 +223,25 @@ you created a workbook page for them), the rendered link has its
 link text (if any) augmented with a reference to the specific
 page number in the pathway worksheet.
 
-=== Generic cross reference
+=== Generic links
 
-Use `@link{URL, link-text}` to refer to a generic cross-reference
+Use `@link{URL, link-text}` to refer to a generic URL
 not part of the curriculum hierarchy.  The second argument for
 the link text is optional.
+
+==== Generic links with standard names
+
+Use `@worksheet-link{pointer, link-text}` to refer to a pointer
+(a standard name) to a possibly volatile URL. E.g.,
+
+  @worksheet-link{demo-page, The Demo Page}
+
+The pointer `demo-page` is resolved using an index file
+`external-index.rkt`, which contains an assoc list, with entries
+like
+
+  ("demo-page"
+       "https://bootstrapworld.github.io/curriculum/index.html")
 
 == Some useful classes and directives
 
@@ -306,3 +336,14 @@ the whole story. Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
 add it as a Racket directive.)
+
+If your Asciidoctor version is at least 2.0.0, you can type
+
+  asciidoctor --help syntax
+
+to get a brief reference guide to the syntax. To create a browsable HTML
+file, do
+
+  asciidoctor --help syntax | asciidoctor - -o help.html
+
+and open `help.html` in your browser.

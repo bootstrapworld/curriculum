@@ -1,14 +1,15 @@
-# last modified 2019-03-18
+# last modified 2019-04-05
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
 fi
 
-echo '== Generated pathway docs' > index.adoc
+echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
+echo link:README.html[Authoring Guide] >> index.adoc
 
 if test $# -eq 0
-then args=bs-flags-pathway
+then args="pathways/*"
 else args="$@"
 fi
 
@@ -33,7 +34,6 @@ buildpathway() {
 
   cp -pr pathways/$PATHWAY distribution
 
-  echo \* link:distribution/$PATHWAY/langs/en-us/index.html[$PATHWAY] >> index.adoc
 
   echo
   echo building pathway: $PATHWAY
@@ -46,6 +46,7 @@ buildpathway() {
     cd distribution/$PATHWAY/langs/en-us
 
     mkdir lessons workbook
+    mkdir -p resources/protected
 
     if test ! -f workbook-index.rkt; then
       echo WARNING: No workbook-index.rkt in pathway $PATHWAY
@@ -63,41 +64,38 @@ buildpathway() {
         echo
         echo building lesson $L in pathway $PATHWAY
         #
-        if test -d exercises; then
-          cd exercises
-          export PATHWAYROOTDIR="../../../"
-          cp -p $LIBDIR/*.css .
-          for f in *.adoc; do
-            if test ! -f $f; then
-              echo WARNING: No exercise files in lesson $L
-            else
-              echo building exercise: $f
-              $PROGDIR/adoc-preproc.rkt $f
-              fhtml=${f%.adoc}.html
-              fpdf=${f%.adoc}.pdf
-              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+        cp -pr workbook-pages solutions-pages
+        for f in workbook-sols-pages/*; do
+          if test -f $f; then
+            cp -p $f solutions-pages
+          fi
+        done
+        rm -fr workbook-sols-pages
+        mv solutions-pages workbook-sols-pages
+        for d in exercises workbook-pages workbook-sols-pages; do
+          if test -d $d; then
+            echo \(building $d\)
+            unset SOLUTIONS
+            if test $d = "workbook-sols-pages"; then
+              export SOLUTIONS=1
             fi
-          done
-          cd ..
-        fi
-        #
-        if test -d workbook-pages; then
-          cd workbook-pages
-          export PATHWAYROOTDIR="../../../"
-          cp -p $LIBDIR/*.css .
-          for f in *.adoc; do
-            if test ! -f $f; then
-              echo WARNING: No workbook adoc pages in lesson $L
-            else
-              echo building workbook page: $f
-              $PROGDIR/adoc-preproc.rkt $f
-              fhtml=${f%.adoc}.html
-              fpdf=${f%.adoc}.pdf
-              wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
-            fi
-          done
-          cd ..
-        fi
+            cd $d
+            export PATHWAYROOTDIR="../../../"
+            cp -p $LIBDIR/*.css .
+            for f in *.adoc; do
+              if test ! -f $f; then
+                echo WARNING: No adoc files in lesson $L/$d
+              else
+                echo building $f
+                $PROGDIR/adoc-preproc.rkt $f
+                fhtml=${f%.adoc}.html
+                fpdf=${f%.adoc}.pdf
+                wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+              fi
+            done
+            cd ..
+          fi
+        done
         #
         copacetic=1
         for f in *.adoc; do
@@ -116,7 +114,7 @@ buildpathway() {
           for g in *.adoc; do
             cp -p ${g%.adoc}.html index.html
           done
-          rm *.adoc[23]
+          #rm *.adoc[23]
         fi
         cd ..
       fi
@@ -140,7 +138,7 @@ buildpathway() {
       else
         export PATHWAYROOTDIR="../"
         $PROGDIR/adoc-preproc.rkt *.adoc
-        rm *.adoc[23]
+        #rm *.adoc[23]
       fi
       cd ..
     fi
@@ -163,18 +161,40 @@ buildpathway() {
         cp -p ${g%.adoc}.html index.html
       done
       unset NARRATIVE
-      rm *.adoc[23]
+      #rm *.adoc[23]
     fi
 
-  #echo READY TO MAKE WORKBOOK
+    #echo READY TO MAKE WORKBOOK
 
-  if test ! -f workbook-page-index.rkt; then
-    echo WARNING: No workbook index file in pathway $PATHWAY
-  else
-    export PATHWAYROOTDIR=""
-    $PROGDIR/make-workbook.rkt
+    if test ! -f workbook-page-index.rkt; then
+      echo WARNING: No workbook index file in pathway $PATHWAY
+    else
+      export PATHWAYROOTDIR=""
+      $PROGDIR/make-workbook.rkt
+    fi
   fi
-fi
+
+  cd $TOPDIR
+  echo >> index.adoc
+  echo == Pathway: $PATHWAY >> index.adoc
+  docf=distribution/$PATHWAY/langs/en-us/index.html
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY Narrative] >> index.adoc
+  fi
+  docf=distribution/$PATHWAY/langs/en-us/workbook/workbook.pdf
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY Workbook] >> index.adoc
+  fi
+  docf=distribution/$PATHWAY/langs/en-us/resources/protected/workbook-sols.pdf
+  if test -f $docf; then
+  echo \* link:$docf[$PATHWAY Workbook with Solutions] >> index.adoc
+  fi
+  echo >> index.adoc
+  echo === Lessons Used in $PATHWAY >> index.adoc
+  for docf in distribution/$PATHWAY/langs/en-us/lessons/*; do
+    docfb=$(basename $docf)
+    echo \* link:$docf/index.html[$docfb] >> index.adoc
+  done
 }
 
 for f in $args; do
