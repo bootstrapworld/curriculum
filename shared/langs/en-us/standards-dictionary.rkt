@@ -292,6 +292,322 @@
  ("8.SP.A.4"
   "Understand that patterns of association can also be seen in bivariate categorical data by displaying frequencies and relative frequencies in a two-way table. Construct and interpret a two-way table summarizing data on two categorical variables collected from the same subjects. Use relative frequencies calculated for rows or columns to describe possible association between the two variables. "
  )
+ ("HSN.NS.A"
+  "Extend the properties of exponents to rational exponents."
+ )
+ ("HSN.NS.A.1"
+  "Explain how the definition of the meaning of rational exponents follows from extending the properties of integer exponents to those values, allowing for a notation for radicals in terms of rational exponents."
+ )
+ ("HSN.NS.A.2"
+  "Rewrite expressions involving radicals and rational exponents using the properties of exponents."
+ )
+ ("HSN.NS.B"
+  "Use properties of rational and irrational numbers."
+ )
+ ("HSN.NS.B.3"
+  "Explain why the sum or product of two rational numbers is rational; that the sum of a rational number and an irrational number is irrational; and that the product of a nonzero rational number and an irrational number is irrational."
+ )
+ ("HSN.Q.A"
+  "Reason quantitatively and use units to solve problems."
+ )
+ ("HSN.Q.A.1"
+  "Use units as a way to understand problems and to guide the solution of multi-step problems; choose and interpret units consistently in formulas; choose and interpret the scale and the origin in graphs and data displays."
+ )
+ ("HSN.Q.A.2"
+  "Define appropriate quantities for the purpose of descriptive modeling."
+ )
+ ("HSN.Q.A.3"
+  "Choose a level of accuracy appropriate to limitations on measurement when reporting quantities."
+ )
+ ("HSN.CN.A"
+  "Perform arithmetic operations with complex numbers."
+ )
+ ("HSN.CN.A.1"
+  "Know there is a complex number i such that i2 = -1, and every complex number has the form a + bi with a and b real."
+ )
+ ("HSN.CN.A.2"
+  "Use the relation i2 = -1 and the commutative, associative, and distributive properties to add, subtract, and multiply complex numbers."
+ )
+ ("HSN.CN.A.3"
+  "Find the conjugate of a complex number; use conjugates to find moduli and quotients of complex numbers."
+ )
+ ("HSN.CN.B"
+  "Represent complex numbers and their operations on the complex plane."
+ )
+ ("HSN.CN.B.4"
+  "Represent complex numbers on the complex plane in rectangular and polar form (including real and imaginary numbers), and explain why the rectangular and polar forms of a given complex number represent the same number."
+ )
+ ("HSN.CN.B.5"
+  "Represent addition, subtraction, multiplication, and conjugation of complex numbers geometrically on the complex plane; use properties of this representation for computation."
+ )
+ ("HSN.CN.B.6"
+  "Calculate the distance between numbers in the complex plane as the modulus of the difference, and the midpoint of a segment as the average of the numbers at its endpoints."
+ )
+ ("HSN.CN.C"
+  "Use complex numbers in polynomial identities and equations."
+ )
+ ("HSN.CN.C.7"
+  "Solve quadratic equations with real coefficients that have complex solutions."
+ )
+ ("HSN.CN.C.8"
+  "Extend polynomial identities to the complex numbers."
+ )
+ ("HSN.CN.C.9"
+  "Know the Fundamental Theorem of Algebra; show that it is true for quadratic polynomials."
+ )
+ ("HSN.VM.A"
+  "Represent and model with vector quantities."
+ )
+ ("HSN.VM.A.1"
+  "Recognize vector quantities as having both magnitude and direction. Represent vector quantities by directed line segments, and use appropriate symbols for vectors and their magnitudes (e.g., v, |v|, ||v||, v)."
+ )
+ ("HSN.VM.A.2"
+  "Find the components of a vector by subtracting the coordinates of an initial point from the coordinates of a terminal point."
+ )
+ ("HSN.VM.A.3"
+  "Solve problems involving velocity and other quantities that can be represented by vectors."
+ )
+ ("HSN.VM.B"
+  "Perform operations on vectors."
+ )
+ ("HSN.VM.B.4"
+  "Add and subtract vectors."
+ )
+ ("HSN.VM.B.4.A"
+  "Add vectors end-to-end, component-wise, and by the parallelogram rule. Understand that the magnitude of a sum of two vectors is typically not the sum of the magnitudes."
+ )
+ ("HSN.VM.B.4.B"
+  "Given two vectors in magnitude and direction form, determine the magnitude and direction of their sum."
+ )
+ ("HSN.VM.B.4.C"
+  "Understand vector subtraction v - w as v + (-w), where -w is the additive inverse of w, with the same magnitude as w and pointing in the opposite direction. Represent vector subtraction graphically by connecting the tips in the appropriate order, and perform vector subtraction component-wise."
+ )
+ ("HSN.VM.B.5"
+  "Multiply a vector by a scalar."
+ )
+ ("HSN.VM.B.5.A"
+  "Represent scalar multiplication graphically by scaling vectors and possibly reversing their direction; perform scalar multiplication component-wise, e.g., as c(vx, vy) = (cvx, cvy)."
+ )
+ ("HSN.VM.B.5.B"
+  "Compute the magnitude of a scalar multiple cv using ||cv|| = |c|v. Compute the direction of cv knowing that when |c|v ≠ 0, the direction of cv is either along v (for c > 0) or against v (for c < 0)."
+ )
+ ("HSN.VM.C"
+  "Perform operations on matrices and use matrices in applications."
+ )
+ ("HSN.VM.C.6."
+  "Use matrices to represent and manipulate data, e.g., to represent payoffs or incidence relationships in a network."
+ )
+ ("HSN.VM.C.7"
+  "Multiply matrices by scalars to produce new matrices, e.g., as when all of the payoffs in a game are doubled."
+ )
+ ("HSN.VM.C.8"
+  "Add, subtract, and multiply matrices of appropriate dimensions."
+ )
+ ("HSN.VM.C.9"
+  "Understand that, unlike multiplication of numbers, matrix multiplication for square matrices is not a commutative operation, but still satisfies the associative and distributive properties."
+ )
+ ("HSN.VM.C.10"
+  "Understand that the zero and identity matrices play a role in matrix addition and multiplication similar to the role of 0 and 1 in the real numbers. The determinant of a square matrix is nonzero if and only if the matrix has a multiplicative inverse."
+ )
+ ("HSN.VM.C.11"
+  "Multiply a vector (regarded as a matrix with one column) by a matrix of suitable dimensions to produce another vector. Work with matrices as transformations of vectors."
+ )
+ ("HSN.VM.C.12"
+  "Work with 2 × 2 matrices as a transformations of the plane, and interpret the absolute value of the determinant in terms of area."
+ )
+ ("HSA.SSE.A.1"
+  "Interpret expressions that represent a quantity in terms of its context."
+ )
+ ("HSA.SSE.A.1.A"
+  "Interpret parts of an expression, such as terms, factors, and coefficients."
+ )
+ ("HSA.SSE.A.1.B"
+  "Interpret complicated expressions by viewing one or more of their parts as a single entity."
+ )
+ ("HSA.SSE.A.2"
+  "Use the structure of an expression to identify ways to rewrite it."
+ )
+ ("HSA.SSE.B"
+  "Write expressions in equivalent forms to solve problems."
+ )
+ ("HSA.SSE.B.3"
+  "Choose and produce an equivalent form of an expression to reveal and explain properties of the quantity represented by the expression."
+ )
+ ("HSA.SSE.B.3.A"
+  "Factor a quadratic expression to reveal the zeros of the function it defines."
+ )
+ ("HSA.SSE.B.3.B"
+  "Complete the square in a quadratic expression to reveal the maximum or minimum value of the function it defines."
+ )
+ ("HSA.SSE.B.3.C"
+  "Use the properties of exponents to transform expressions for exponential functions."
+ )
+ ("HSA.SSE.B.4"
+  "Derive the formula for the sum of a finite geometric series (when the common ratio is not 1), and use the formula to solve problems."
+ )
+ ("HSA.APR.A"
+  "Perform arithmetic operations on polynomials."
+ )
+ ("HSA.APR.A.1"
+  "Understand that polynomials form a system analogous to the integers, namely, they are closed under the operations of addition, subtraction, and multiplication; add, subtract, and multiply polynomials."
+ )
+ ("HSA.APR.B"
+  "Understand the relationship between zeros and factors of polynomials."
+ )
+ ("HSA.APR.B.2"
+  "Know and apply the Remainder Theorem: For a polynomial p(x) and a number a, the remainder on division by x - a is p(a), so p(a) = 0 if and only if (x - a) is a factor of p(x)."
+ )
+ ("HSA.APR.B.3"
+  "Identify zeros of polynomials when suitable factorizations are available, and use the zeros to construct a rough graph of the function defined by the polynomial."
+ )
+ ("HSA.APR.C"
+  "Use polynomial identities to solve problems."
+ )
+ ("HSA.APR.C.4"
+  "Prove polynomial identities and use them to describe numerical relationships."
+ )
+ ("HSA.APR.C.5"
+  "Know and apply the Binomial Theorem for the expansion of (x + y)n in powers of x and y for a positive integer n, where x and y are any numbers, with coefficients determined for example by Pascal's Triangle."
+ )
+ ("HSA.APR.D"
+  "Rewrite rational expressions."
+ )
+ ("HSA.APR.D.6"
+  "Rewrite simple rational expressions in different forms; write a(x)/b(x) in the form q(x) + r(x)/b(x), where a(x), b(x), q(x), and r(x) are polynomials with the degree of r(x) less than the degree of b(x), using inspection, long division, or, for the more complicated examples, a computer algebra system."
+ )
+ ("HSA.APR.D.7"
+  "Understand that rational expressions form a system analogous to the rational numbers, closed under addition, subtraction, multiplication, and division by a nonzero rational expression; add, subtract, multiply, and divide rational expressions."
+ )
+ ("HSA.CED.A"
+  "Create equations that describe numbers or relationships."
+ )
+ ("HSA.CED.A.1"
+  "Create equations and inequalities in one variable and use them to solve problems."
+ )
+ ("HSA.CED.A.2"
+  "Create equations in two or more variables to represent relationships between quantities; graph equations on coordinate axes with labels and scales."
+ )
+ ("HSA.CED.A.3"
+  "Represent constraints by equations or inequalities, and by systems of equations and/or inequalities, and interpret solutions as viable or nonviable options in a modeling context."
+ )
+ ("HSA.CED.A.4"
+  "Rearrange formulas to highlight a quantity of interest, using the same reasoning as in solving equations."
+ )
+ ("HSA.REI.A"
+  "Understand solving equations as a proces of reasoning and explain the reasoning."
+ )
+ ("HSA.REI.A.1"
+  "Explain each step in solving a simple equation as following from the equality of numbers asserted at the previous step, starting from the assumption that the original equation has a solution. Construct a viable argument to justify a solution method."
+ )
+ ("HSA.REI.A.2"
+  "Solve simple rational and radical equations in one variable, and give examples showing how extraneous solutions may arise."
+ )
+ ("HSA.REI.B"
+  "Solve equations and inequalities in one variable."
+ )
+ ("HSA.REI.B.3"
+  "Solve linear equations and inequalities in one variable, including equations with coefficients represented by letters."
+ )
+ ("HSA.REI.B.4"
+  "Solve quadratic equations in one variable."
+ )
+ ("HSA.REI.B.4.A"
+  "Use the method of completing the square to transform any quadratic equation in x into an equation of the form (x - p)2 = q that has the same solutions. Derive the quadratic formula from this form."
+ )
+ ("HSA.REI.B.4.B"
+  "Solve quadratic equations by inspection (e.g., for x2 = 49), taking square roots, completing the square, the quadratic formula and factoring, as appropriate to the initial form of the equation. Recognize when the quadratic formula gives complex solutions and write them as a ± bi for real numbers a and b."
+ )
+ ("HSA.REI.C"
+  "Solve systems of equations."
+ )
+ ("HSA.REI.C.5"
+  "Prove that, given a system of two equations in two variables, replacing one equation by the sum of that equation and a multiple of the other produces a system with the same solutions."
+ )
+ ("HSA.REI.C.6"
+  "Solve systems of linear equations exactly and approximately (e.g., with graphs), focusing on pairs of linear equations in two variables."
+ )
+ ("HSA.REI.C.7"
+  "Solve a simple system consisting of a linear equation and a quadratic equation in two variables algebraically and graphically. For example, find the points of intersection between the line y = -3x and the circle x2 + y2 = 3."
+ )
+ ("HSA.REI.C.8"
+  "Represent a system of linear equations as a single matrix equation in a vector variable."
+ )
+ ("HSA.REI.C.9"
+  "Find the inverse of a matrix if it exists and use it to solve systems of linear equations (using technology for matrices of dimension 3 × 3 or greater)."
+ )
+ ("HSA.REI.D"
+  "Represent and solve equations and inequalities graphically."
+ )
+ ("HSA.REI.D.10"
+  "Understand that the graph of an equation in two variables is the set of all its solutions plotted in the coordinate plane, often forming a curve (which could be a line)."
+ )
+ ("HSA.REI.D.11"
+  "Explain why the x-coordinates of the points where the graphs of the equations y = f(x) and y = g(x) intersect are the solutions of the equation f(x) = g(x); find the solutions approximately, e.g., using technology to graph the functions, make tables of values, or find successive approximations. Include cases where f(x) and/or g(x) are linear, polynomial, rational, absolute value, exponential, and logarithmic functions."
+ )
+ ("HSA.REI.D.12"
+  "Graph the solutions to a linear inequality in two variables as a half-plane (excluding the boundary in the case of a strict inequality), and graph the solution set to a system of linear inequalities in two variables as the intersection of the corresponding half-planes."
+ )
+ ("HSF.IF.A"
+  "Understand the concept of a function and use function notation."
+ )
+ ("HSF.IF.A.1"
+  "Understand that a function from one set (called the domain) to another set (called the range) assigns to each element of the domain exactly one element of the range. If f is a function and x is an element of its domain, then f(x) denotes the output of f corresponding to the input x. The graph of f is the graph of the equation y = f(x)."
+ )
+ ("HSF.IF.A.2"
+  "Use function notation, evaluate functions for inputs in their domains, and interpret statements that use function notation in terms of a context."
+ )
+ ("HSF.IF.A.3"
+  "Recognize that sequences are functions, sometimes defined recursively, whose domain is a subset of the integers."
+ )
+ ("HSF.IF.B"
+  "Interpret functions that arise in applications in terms of the context."
+ )
+ ("HSF.IF.B.4"
+  "For a function that models a relationship between two quantities, interpret key features of graphs and tables in terms of the quantities, and sketch graphs showing key features given a verbal description of the relationship."
+ )
+ ("HSF.IF.B.5"
+  "Relate the domain of a function to its graph and, where applicable, to the quantitative relationship it describes."
+ )
+ ("HSF.IF.B.6"
+  "Calculate and interpret the average rate of change of a function (presented symbolically or as a table) over a specified interval. Estimate the rate of change from a graph."
+ )
+ ("HSF.IF.C"
+  "Analyze functions using different representations."
+ )
+ ("HSF.IF.C.7"
+  "Graph functions expressed symbolically and show key features of the graph, by hand in simple cases and using technology for more complicated cases."
+ )
+ ("HSF.IF.C.7.A"
+  "Graph linear and quadratic functions and show intercepts, maxima, and minima."
+ )
+ ("HSF.IF.C.7.B"
+  "Graph square root, cube root, and piecewise-defined functions, including step functions and absolute value functions."
+ )
+ ("HSF.IF.C.7.C"
+  "Graph polynomial functions, identifying zeros when suitable factorizations are available, and showing end behavior."
+ )
+ ("HSF.IF.C.7.D"
+  "Graph rational functions, identifying zeros and asymptotes when suitable factorizations are available, and showing end behavior."
+ )
+ ("HSF.IF.C.7.E"
+  "Graph exponential and logarithmic functions, showing intercepts and end behavior, and trigonometric functions, showing period, midline, and amplitude."
+ )
+ ("HSF.IF.C.8"
+  "Write a function defined by an expression in different but equivalent forms to reveal and explain different properties of the function."
+ )
+ ("HSF.IF.C.8.A"
+  "Use the process of factoring and completing the square in a quadratic function to show zeros, extreme values, and symmetry of the graph, and interpret these in terms of a context."
+ )
+ ("HSF.IF.C.8.B"
+  "Use the properties of exponents to interpret expressions for exponential functions. For example, identify percent rate of change in functions such as y = (1.02)ᵗ, y = (0.97)ᵗ, y = (1.01)12ᵗ, y = (1.2)ᵗ/10, and classify them as representing exponential growth or decay."
+ )
+ ("HSF.IF.C.9"
+  "Compare properties of two functions each represented in a different way (algebraically, graphically, numerically in tables, or by verbal descriptions)."
+ )
+ ("HSF.BF.A"
+  "Build a function that models a relationship between two quantities."
+ )
+
  
  ("N-Q"
   "The student reasons quantitatively in using units to solve problems"
