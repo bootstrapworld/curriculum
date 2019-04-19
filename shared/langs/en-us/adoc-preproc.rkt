@@ -224,6 +224,8 @@
                   (else (loop (+ i 1)))))))
     (format "link:~alessons/~a/~a[~aPage ~a]" *pathway-root-dir* lesson file link-text pno)))
 
+
+
 (define *summary-file* #f)
 
 (define *lesson-summary-file* #f)
@@ -243,6 +245,33 @@
         ;(preparation-items '())
         (first-subsection-crossed? #f)
         )
+    (define (link-to-lessons-in-pathway o)
+      (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
+        (newline o)
+        (fprintf o ".Lessons used in this pathway~n[verse]~n")
+        (for ((lesson lessons))
+          (let ((lesson-title-cased
+                  (string-titlecase
+                    (string-replace lesson "-" " " #:all? #t))))
+            (let ((lesson-summary-file
+                    (format "./lessons/~a/summary.adoc5" lesson)))
+              (when (file-exists? lesson-summary-file)
+                (call-with-input-file lesson-summary-file
+                  (lambda (i)
+                    (let loop ()
+                      (let ((x (read i)))
+                        (unless (eof-object? x)
+                          (let ((s (assoc-glossary x *glossary-list*)))
+                            (cond (s (unless (member s glossary-items)
+                                       (set! glossary-items
+                                         (cons s glossary-items)))
+                                     (unless (member s *all-glossary-items*)
+                                       (set! *all-glossary-items*
+                                         (cons s *all-glossary-items*))))))
+                          (loop))))))))
+            (fprintf o "link:./lessons/~a/index.html[~a]~n"
+                     lesson lesson-title-cased)))
+        (newline o)))
     (call-with-input-file in-file
       (lambda (i)
         (call-with-output-file out-file
@@ -368,32 +397,7 @@
                              ((string=? directive "lessons-in-pathway")
                               (unless (getenv "NARRATIVE")
                                 (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
-                              (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
-                                (newline o)
-                                (fprintf o ".Lessons used in this pathway~n[verse]~n")
-                                (for ((lesson lessons))
-                                  (let ((lesson-title-cased
-                                          (string-titlecase
-                                            (string-replace lesson "-" " " #:all? #t))))
-                                    (let ((lesson-summary-file
-                                            (format "./lessons/~a/summary.adoc5" lesson)))
-                                      (when (file-exists? lesson-summary-file)
-                                        (call-with-input-file lesson-summary-file
-                                          (lambda (i)
-                                            (let loop ()
-                                              (let ((x (read i)))
-                                                (unless (eof-object? x)
-                                                  (let ((s (assoc-glossary x *glossary-list*)))
-                                                    (cond (s (unless (member s glossary-items)
-                                                               (set! glossary-items
-                                                                 (cons s glossary-items)))
-                                                             (unless (member s *all-glossary-items*)
-                                                               (set! *all-glossary-items*
-                                                                 (cons s *all-glossary-items*))))))
-                                                  (loop))))))))
-                                    (fprintf o "link:./lessons/~a/index.html[~a]~n"
-                                             lesson lesson-title-cased)))
-                                (newline o)))
+                              (link-to-lessons-in-pathway o))
                              ((assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o)))
@@ -414,7 +418,10 @@
                             (add-include-directive o in-file))
                            (else #f)))
                     (else (display c o)))
-                  (loop)))))
+                  (loop))))
+            (when (getenv "NARRATIVE")
+              (link-to-lessons-in-pathway o))
+            )
           #:exists 'replace)))
     (call-with-output-file glossary-out-file
       (lambda (op)
