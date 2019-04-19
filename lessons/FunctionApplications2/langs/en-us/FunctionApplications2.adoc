@@ -8,21 +8,23 @@
 |Lesson Goals
 |Students will be able to:
 
-* Goal 1
-* Goal 2
+* Apply the Design Recipe to create a function with given parameters
+* Explain the basics of animation
 
 |Student-Facing Lesson Goals
 |
-* I can...
-* I can...
+* I can use the Design Recipe to make a function.
+* I can describe how animation works.
 
 |Key Points for the Facilitator
 |
-* Key points
+* Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.  
+* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs and creates the interactive window that we see when we press the Run button!  
 
 |Prerequisites
 |
 * Students should be familiar with Circles of Evaluation.
+* Students should be familiar with the Design Recipe.
 
 |Materials
 |
@@ -33,8 +35,7 @@
 |===
 |Math Standards (CCSS)
 |
-* http://www.corestandards.org/Math/Practice/MP2[CCSS.MATH.PRACTICE.MP2],
-Reason abstractly and quantitatively.
+* MP.2 @std{MP.2} 
 
 
 |CS Standards (CSTA)
@@ -45,21 +46,19 @@ Reason abstractly and quantitatively.
 
 == Get Ready:
 
-Students should have their computer, contracts page, and pencil.
+Students should have their computer, contracts page, and pencil.  Students should have their saved "Game Template" file open in a separate window or tab.
 
-== Launch: (10 min)
+== Launch: (5 min)
 
-[.notice-box]
-.Notice and Wonder
-****
-Notice and Wonder 
-****
+Show the following short clip on animation: @link{https://www.youtube.com/watch?v=-l-pLqBD58E, Animation Careers : How Does Cartoon Animation Work?}
 
-Launch task
+What is persistence of vision?  _Our eyes fill in the gaps between rapidly changing images._
+How does this apply to animation? _It's the basis for movies and animation, movies are just a large sequence of still images._
+How might this apply to our game? _If we change image coordinates a little bit at a time, they will appear to move._
 
 == Explore: (10 min)
 
-Explore task
+Have students open the Animal Sprint program (_link to program_) and investigate the program with their partner.  Remind students to examine the code as well as the interactive portion.  If students want to change parts of the code, they can!
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -69,8 +68,21 @@ MLR
 
 == Discuss: (10 min)
 
-* Discussion questions
+* What did you notice about the movement of the animals?  What was changing about them? _Answers will vary: two animals were moving horizontally, the farmer was moving vertically, the x-coordinates or y-coordinates were changing, movement was based on the key pressed, etc._
+* How did you connect the movement of the animals to the code? _Answers may vary: The fastest animal had the highest speed value, etc._
+* Were you able to move all three animals simultaneously? _It's difficult to move all three animals smoothly._
+* What jobs could we hand over to the computer to make it possible for us to play the game? _The computer could handle automatically moving two of the animals for us, then we could control the movement of third._
 
-== Practice: (10 min)
+== Practice (10 min)
 
-Practice task
+Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.  
+
+Guide students as they complete the Design Recipe workbook pages for `update-danger` and transfer the code to their Game Template file.  
+
+When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
+
+== Apply (10 min)
+
+Have students complete the Design Recipe workbook page for `update-target` with their partner and transfer the code to their Game Template file.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
+
+
