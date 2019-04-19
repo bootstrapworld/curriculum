@@ -10,9 +10,9 @@
 "FunctionApplications2"
 "ErrorAnalysis"
 "FunctionComposition3"
-"Inequalities1"
+"Inequalities"
 "Inequalities2"
-"PiecewiseFunctions1"
+"PiecewiseFunctions"
 "PiecewiseFunctions2"
 "DistanceFormula1"
 )
