@@ -53,21 +53,60 @@ Students should have their computer, contracts page, and pencil.
 
 Hand out, or have students open, the @link{https://docs.google.com/document/d/1WvlflsKM28IOwgyV2HttnGxul3sAUnL0-KOZhvb6C2s/edit, Inequalities Warmup} and complete with a partner.    
 
-== Explore: (10 min)
+== Explore: (5 min)
 
-Have students open the @link{https://www.wescheme.org/openEditor?publicId=48low6MazC&, Sam The Butterfly starter file} and investigate the program with their partner.  Let students figure out that they need to press "Run" to see what the program does, and that the arrow keys control Sam.   
+Have students open the @link{https://www.wescheme.org/openEditor?publicId=48low6MazC&, Sam The Butterfly starter file}, _workbook page_, and investigate the program with their partner.  Let students figure out that they need to press "Run" to see what the program does, and that the arrow keys control Sam. 
 
-== Discuss: (10 min)
+== Discuss: (5 min)
 
 * What is something you noticed about this program? _Answers will vary: Sam can me moved with the arrow keys, the coordinates are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
 * What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
-* 
+* How far can Sam go to the left and stay within Mom's view?  _Up to, but not beyond, an x of -40._
+* How can we state this boundary mathematically? _x >= -40 or x > -50_
+* What will the contract for `safe-left?` look like?  What does it need to take in?  What will it give back?  _`safe-left?` should take in a Number (the x-coordinate) and return a Boolean (true if Sam is safe, false if not)_
 
 == Practice: (10 min)
 
 With their partners, students complete _workbook page_ to fix the `safe-left?` and `safe-right?` functions and type it into their file to test it.  
 
+Students will notice that their `safe-left?` function keeps Sam from disappearing off the left, but `safe-right?` doesn't keep Sam from disappearing off the right side!  When students run into this, encourage them to look through the code to try and figure out why.
 
+== Discuss II: (10 min)
+
+* What does `safe-left?` do?  _Checks to see if x is greater than -50_
+* What does `safe-right?` do? _Checks to see if x is less than 490_
+* What does `onscreen?` do? _Answers may vary, let students discuss with each other_
+
+Recruit some student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?` while giving function calls to `onscreen?`
+
+=== Role Play Example
+
+Facilitator: onscreen-huh 70
+Onscreen?: safe-left-huh 70
+Safe-left?: true
+Onscreen?: true
+
+Facilitator: onscreen-huh -100
+Onscreen?: safe-left-huh -100
+Safe-left?: false
+Onscreen?: false
+
+Facilitator: onscreen-huh 600
+Onscreen?: safe-left-huh 600
+Safe-left?: true
+Onscreen?: true
+
+* What is the problem with `onscreen?`? _It's only talking to `safe-left?`, it's not checking with `safe-right?`_
+* How can `onscreen?` check with both?  _By using `and`_
+
+Have students complete _workbook page_ with their partner before moving on.
 
 == Apply: (10 min)
 
+Students use what they've learned to fix the `onscreen?` function and should now see that Sam cannot move off of the left or right sides of the screen.
+
+[.strategy-box]
+Extension Option
+****
+What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?
+****
