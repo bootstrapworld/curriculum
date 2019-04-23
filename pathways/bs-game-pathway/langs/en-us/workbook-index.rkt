@@ -7,6 +7,8 @@
 "DefiningValues1"
 "FunctionApplications1"
 "CreatingFunctions1"
+"CreatingFunctions2"
+"CreatingFunctions3"
 "FunctionApplications2"
 "ErrorAnalysis"
 "FunctionComposition3"

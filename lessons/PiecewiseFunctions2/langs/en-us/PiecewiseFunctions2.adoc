@@ -18,6 +18,7 @@
 |
 * Encourage students to challenge themselves when creating update-player by completing one of the extension activities.
 * The update-player function is one of the main places where students can set their game apart and make it theirs.  Encourage exploration and experimentation!
+* Adding comments to code - if you have to ask a student "What are you trying to do there?", then they probably need more comments!  
 
 |Prerequisites
 |
@@ -31,10 +32,10 @@
 
 [.left-header,cols="20a,80a", stripes=none]
 |===
-|Math Standards (CCSS)
+|Working toward (CCSS):
 |
-* http://www.corestandards.org/Math/Practice/MP2[CCSS.MATH.PRACTICE.MP2],
-Reason abstractly and quantitatively.
+* @std{HSA.SSE.A.1.A}
+* @std{HSA.SSE.A.1.B}
 
 
 |CS Standards (CSTA)
@@ -42,24 +43,18 @@ Reason abstractly and quantitatively.
 * CS Standards here.
 |===
 
-
 == Get Ready:
 
-Students should have their computer, contracts page, and pencil.
+Students should have their computer, workbook, contracts page, and pencil.
 
-== Launch: (10 min)
+== Launch: (5 min)
 
-[.notice-box]
-.Notice and Wonder
-****
-Notice and Wonder 
-****
+Connect The Dots - Students think of what they did in the Luigi's Pizza lesson specifically, then generalize those concepts.  Finally, students think of how those concepts might be applied to their game.  
+  
 
-Launch task
+== Explore: (5 min)
 
-== Explore: (10 min)
-
-Explore task
+Students open their Game Project file and look for where a conditional function would be necessary, then figure out what the contract represents.  _workbook page?_
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -69,7 +64,26 @@ MLR
 
 == Discuss: (10 min)
 
-* Discussion questions
+* What is the contract for `update-player`?  _``update-player: Number String -> Number``_
+* What does each part of the domain and range represent? _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`_
+* What should happen mathematically to the y-coordinate of `PLAYER` when the user presses the "up" key?  _It should increase, the program should add something to it_
 
-== Create/Apply: (20 mins)
+image::images/player-move.png[Player Movement, 400, align="center"]
 
+== Practice: (15 min) 
+
+Students complete _workbook page_ with a partner, then type their code into their Game Project file and test.  
+
+
+== Create/Apply: (15 min)
+
+Students choose one or more features to make their game more unique. 
+
+Reminder: Use `;` to add comments to code!  Adding useful comments to code is an important part of programming. 
+
+Some ideas for features:
+
+* Warping - program one key to "warp" the player to a set location, such as the center of the screen
+* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen 
+* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
+* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
