@@ -246,31 +246,35 @@
         (first-subsection-crossed? #f)
         )
     (define (link-to-lessons-in-pathway o)
-      (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
+      (let ((lessons (call-with-input-file "workbook-index.rkt" read))
+            (lesson-toc-file "index-toc.adoc"))
         (newline o)
-        (fprintf o ".Lessons used in this pathway~n[verse]~n")
-        (for ((lesson lessons))
-          (let ((lesson-title-cased
-                  (string-titlecase
-                    (string-replace lesson "-" " " #:all? #t))))
-            (let ((lesson-summary-file
-                    (format "./lessons/~a/summary.adoc5" lesson)))
-              (when (file-exists? lesson-summary-file)
-                (call-with-input-file lesson-summary-file
-                  (lambda (i)
-                    (let loop ()
-                      (let ((x (read i)))
-                        (unless (eof-object? x)
-                          (let ((s (assoc-glossary x *glossary-list*)))
-                            (cond (s (unless (member s glossary-items)
-                                       (set! glossary-items
-                                         (cons s glossary-items)))
-                                     (unless (member s *all-glossary-items*)
-                                       (set! *all-glossary-items*
-                                         (cons s *all-glossary-items*))))))
-                          (loop))))))))
-            (fprintf o "link:./lessons/~a/index.html[~a]~n"
-                     lesson lesson-title-cased)))
+        (fprintf o "== Lessons used in this pathway~n~n")
+        (fprintf o "include::~a[]~n~n" lesson-toc-file)
+        (call-with-output-file lesson-toc-file
+          (lambda (toco)
+            (fprintf toco "[verse]~n")
+            (for ((lesson lessons))
+              (let ((lesson-summary-file
+                      (format "./lessons/~a/summary.adoc5" lesson)))
+                (when (file-exists? lesson-summary-file)
+                  (call-with-input-file lesson-summary-file
+                    (lambda (i)
+                      (let loop ()
+                        (let ((x (read i)))
+                          (unless (eof-object? x)
+                            (let ((s (assoc-glossary x *glossary-list*)))
+                              (cond (s (unless (member s glossary-items)
+                                         (set! glossary-items
+                                           (cons s glossary-items)))
+                                       (unless (member s *all-glossary-items*)
+                                         (set! *all-glossary-items*
+                                           (cons s *all-glossary-items*))))))
+                            (loop)))))))
+                (fprintf o "[[~a]]~n" lesson)
+                (fprintf toco "<<~a>>~n" lesson)
+                (fprintf o "include::./lessons/~a/index.adoc2[leveloffset=+1]~n~n"
+                         lesson)))))
         (newline o)))
     (call-with-input-file in-file
       (lambda (i)
@@ -394,7 +398,7 @@
                                          htmlf pdff)
                                 |#
                                 ))
-                             ((string=? directive "lessons-in-pathway")
+                             ((string=? directive "lessons-in-pathway-obsolete")
                               (unless (getenv "NARRATIVE")
                                 (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
                               (link-to-lessons-in-pathway o))

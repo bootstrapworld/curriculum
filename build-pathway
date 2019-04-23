@@ -1,4 +1,4 @@
-# last modified 2019-04-05
+# last modified 2019-04-23
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -112,6 +112,7 @@ buildpathway() {
           echo building lesson plan from *.adoc
           $PROGDIR/adoc-preproc.rkt *.adoc
           for g in *.adoc; do
+            cp -p ${g%.adoc}.adoc2 index.adoc2
             cp -p ${g%.adoc}.html index.html
           done
           #rm *.adoc[23]

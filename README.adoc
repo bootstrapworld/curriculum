@@ -38,7 +38,7 @@ The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`. 
+pages, in correct order, is in `lesson-index.rkt`.
 
 The subdir `workbook-sols-pages` contains workpages that would
 replace corresponding pages in the `workbook-pages` directory
@@ -52,14 +52,16 @@ There are two pathways in the repo for now:
   pathways/bs-flags-pathway
 
 In a pathway’s directory, the pathway narrative is in
-`langs/en-us/main.adoc` (name can be anything). Alongside it, its
+`langs/en-us/narrative.adoc` (name can be anything). Alongside it, its
 index of lessons, in correct order, is in `workbook-index.rkt`.
 These lessons are drawn from the `lessons`
 tree.
 
 The top dir contains the script `build-pathway`. It takes any
 number of pathways and creates a generated document tree for eahc
-of them under the `distribution` directory.
+of them under the `distribution` directory. If no argument is
+supplied, `build-pathway generates documents for every pathway in
+`pathways`.
 
 E.g., `build-pathway pathwayP` (or
 or `pathways/pathwayP` or `pathways/pathwayP/`, for those into
@@ -82,14 +84,13 @@ Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
 “protected” directory `resources/protected`.
 
-For now, as a convenience, calling `build-pathway` without an arg builds
-`distribution/bs-flags-pathway`.
+The web page `narrative.html` includes all the lesson plans
+associated with the pathway.
 
-As a further convenience, a `git push` into the `master` branch
-automatically triggers a build of the `bs-flags-pathway` doctree
-and showcases it on the website
-`bootstrapworld.github.io/curriculum`.  (The choice of pathway(s) so
-to showcase may change in the future.)
+As a convenience, a `git push` into the `master` branch
+automatically triggers a build of all the pathways
+and showcases the resulting doctrees on the website
+`bootstrapworld.github.io/curriculum`.
 
 == jened sample doc
 
@@ -269,10 +270,6 @@ border.
 Add the class `.physics-table` to a table attribute to generate a
 single-arg function
 table, e.g., one that maps miles driven to cost.
-
-Use the directive `@lessons-in-pathway` in a pathway narrative to
-insert a list of all the lessons referred to by the pathway
-(these are picked from the `workbook-index.rkt` file).
 
 == Prereqs
 
