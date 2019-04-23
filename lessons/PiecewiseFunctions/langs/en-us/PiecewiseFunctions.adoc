@@ -17,37 +17,35 @@
 
 |Key Points for the Facilitator
 |
-* The Design Recipe looks a bit different for piecewise, or conditional, functions.  Ensure students are taking time to write examples and circle what is changing.
-* 
+* The Design Recipe looks a bit different for piecewise, or conditional, functions.  Check that students are taking time to write examples and circle what is changing.
 
 |Prerequisites
 |
 * Students should be familiar with Circles of Evaluation.
+* Students should be familiar with the Design Recipe.
 
 |Materials
 |
-* Links to printables, activities, etc., go here
+* @link{https://docs.google.com/document/d/1k67XlYWkHefd4APynvwSnPKRaSTeOvGD7_lRbI8hHrg/edit, Luigi's Pizza Exploration}
 |===
 
 [.left-header,cols="20a,80a", stripes=none]
 |===
-|Math Standards (CCSS)
+|Working towards:
 |
-* http://www.corestandards.org/Math/Practice/MP2[CCSS.MATH.PRACTICE.MP2],
-Reason abstractly and quantitatively.
+* HSA.SSE.A.1.A
+* HSA.SSE.A.1.B
 
-
-|CS Standards (CSTA)
+|Addressing:
 |
-* CS Standards here.
+* MP.8 @std{MP.8}
 |===
-
 
 == Get Ready:
 
-Students should have their computer, contracts page, and pencil.
+Students should have their computer, workbook, contracts page, and pencil.
 
-== Launch: (10 min)
+== Launch: (5 min)
 
 [.notice-box]
 .Notice and Wonder
@@ -59,7 +57,20 @@ Launch task
 
 == Explore: (10 min)
 
-Explore task
+Students open the @link{https://www.wescheme.org/openEditor?publicId=JUXrqT0UT5, Luigi's Pizza file} and turn to _workbook page_ .  Students investigate the file using their workbook page as a guide.
+
+[.notice-box]
+.Notice and Wonder
+****
+Have students take time to think and discuss what they notice and wonder about this file, which contains many new elements they haven't seen before!
+****
+
+== Discuss: (10 min)
+
+* What are some familiar things you notice in this file? _Answers vary: `define`, `string=?`, a contract and purpose statement, etc._
+* What new things did you notice in this file? _Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `cost` function, etc._
+* What function is being defined here? What is its contract? _`cost`, takes in a String and produces a Number._
+* How do you think this function works? _Answers vary - let students drive discussion!_
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -67,10 +78,21 @@ Explore task
 MLR
 ****
 
-== Discuss: (10 min)
-
-* Discussion questions
-
 == Practice: (10 min)
 
-Practice task
+Students turn to _workbook page_ and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
+
+== Discuss II: (5 min)
+
+* What happens with the interactive cash register when you enter an item not on the menu? _The program freezes, or crashes._
+* Why does the cash register stop working when you enter an item not on the menu? _Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
+* The programmer who wrote the code for the cash register had the following comment in his code: `; If the cost function returns a non-positive value, the cash register will display an ERROR message and ask for a different topping` How should we change our `cost` function so that it will fully integrate with the cash register function? _We should change `else` to return something non-positive, like 0 or -1._
+
+
+== Apply: (10 min)
+
+Option 1: Students create another version of the Luigi's Pizza code that displays a student-created image of the pizza instead of the price. This integrates earlier-learned skills in creating images and defining values.
+
+Option 2: Students create an engaging visual representation of how the computer moves through a conditional function.
+
+
