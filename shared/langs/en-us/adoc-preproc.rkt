@@ -234,7 +234,7 @@
 
 (define *asciidoctor* "asciidoctor -a linkcss -a stylesheet=curriculum.css")
 
-(define (preproc-n-asciidoctor in-file #:recipe (recipe #f))
+(define (preproc-n-asciidoctor in-file #:auxfile (auxfile #f))
   (let ((out-file (path-replace-extension in-file ".adoc2"))
         (glossary-out-file (path-replace-extension in-file "-glossary.adoc3"))
         (glossary-items '())
@@ -247,34 +247,40 @@
         )
     (define (link-to-lessons-in-pathway o)
       (let ((lessons (call-with-input-file "workbook-index.rkt" read))
-            (lesson-toc-file "index-toc.adoc"))
+            (lessons-file "pathway-lessons.adoc")
+            (lessons-toc-file "pathway-lessons-toc.adoc"))
         (newline o)
-        (fprintf o "== Lessons used in this pathway~n~n")
-        (fprintf o "include::~a[]~n~n" lesson-toc-file)
-        (call-with-output-file lesson-toc-file
-          (lambda (toco)
-            (fprintf toco "[verse]~n")
-            (for ((lesson lessons))
-              (let ((lesson-summary-file
-                      (format "./lessons/~a/summary.adoc5" lesson)))
-                (when (file-exists? lesson-summary-file)
-                  (call-with-input-file lesson-summary-file
-                    (lambda (i)
-                      (let loop ()
-                        (let ((x (read i)))
-                          (unless (eof-object? x)
-                            (let ((s (assoc-glossary x *glossary-list*)))
-                              (cond (s (unless (member s glossary-items)
-                                         (set! glossary-items
-                                           (cons s glossary-items)))
-                                       (unless (member s *all-glossary-items*)
-                                         (set! *all-glossary-items*
-                                           (cons s *all-glossary-items*))))))
-                            (loop)))))))
-                (fprintf o "[[~a]]~n" lesson)
-                (fprintf toco "<<~a>>~n" lesson)
-                (fprintf o "include::./lessons/~a/index.adoc2[leveloffset=+1]~n~n"
-                         lesson)))))
+        (fprintf o "link:./pathway-lessons.html[Lessons used in this pathway]~n")
+        (call-with-output-file lessons-file
+          (lambda (lo)
+        (fprintf lo "= Lessons used in this pathway~n~n")
+        (fprintf lo "include::~a[]~n~n" lessons-toc-file)
+            (call-with-output-file lessons-toc-file
+              (lambda (toco)
+                (fprintf toco "[verse]~n")
+                (for ((lesson lessons))
+                  (let ((lesson-summary-file
+                          (format "./lessons/~a/summary.adoc5" lesson)))
+                    (when (file-exists? lesson-summary-file)
+                      (call-with-input-file lesson-summary-file
+                        (lambda (i)
+                          (let loop ()
+                            (let ((x (read i)))
+                              (unless (eof-object? x)
+                                (let ((s (assoc-glossary x *glossary-list*)))
+                                  (cond (s (unless (member s glossary-items)
+                                             (set! glossary-items
+                                               (cons s glossary-items)))
+                                           (unless (member s *all-glossary-items*)
+                                             (set! *all-glossary-items*
+                                               (cons s *all-glossary-items*))))))
+                                (loop)))))))
+                    (fprintf lo "[[~a]]~n" lesson)
+                    (fprintf toco "<<~a>>~n" lesson)
+                    (fprintf lo "include::./lessons/~a/index.adoc2[leveloffset=+1]~n~n"
+                             lesson)))) #:exists 'replace))
+          #:exists 'replace)
+        (preproc-n-asciidoctor lessons-file #:auxfile #t)
         (newline o)))
     (call-with-input-file in-file
       (lambda (i)
@@ -385,19 +391,7 @@
 
                                 (fprintf o "link:~a[~a]" f
                                          (if (= (length args) 1) ""
-                                             (string-trim-dq (cadr args))))
-
-                                #|
-                                (system (format "cp -p exercises/~a ~a" adocf adocf))
-                                (fprintf o
-                                         "link:~a[~a]" htmlf
-                                         (if (= (length args) 1) "" (string-trim-dq (cadr args))))
-                                (preproc-n-asciidoctor adocf #:recipe #t)
-                                (system* (find-executable-path "wkhtmltopdf")
-                                         "--lowquality" "--print-media-type" "-q"
-                                         htmlf pdff)
-                                |#
-                                ))
+                                             (string-trim-dq (cadr args))))))
                              ((string=? directive "lessons-in-pathway-obsolete")
                               (unless (getenv "NARRATIVE")
                                 (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
@@ -423,7 +417,8 @@
                            (else #f)))
                     (else (display c o)))
                   (loop))))
-            (when (getenv "NARRATIVE")
+            (when (and (getenv "NARRATIVE")
+                       (not auxfile))
               (link-to-lessons-in-pathway o))
             )
           #:exists 'replace)))

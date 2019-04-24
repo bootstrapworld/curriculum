@@ -161,7 +161,12 @@ buildpathway() {
       echo building pathway narrative from *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
       for g in *.adoc; do
-        cp -p ${g%.adoc}.html index.html
+        if test $g != pathway-lessons.adoc; then
+          gh=${g%.adoc}.html
+          if test -f $gh; then
+            cp -p $gh index.html
+          fi
+        fi
       done
       unset NARRATIVE
       #rm *.adoc[23]
