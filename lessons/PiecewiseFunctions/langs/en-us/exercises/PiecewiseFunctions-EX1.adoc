@@ -1,11 +1,16 @@
 @design-recipe-exercise{ "cost" "Luigi’s Pizza has hired you as a programmer. They offer Cheese ($9.00), Pepperoni
 ($10.50), Chicken ($11.25) and Broccoli ($10.25). Write a function called cost which takes in the
 name of a topping and outputs the price of a pizza with that topping." 
-  #:domain "string" 
+  #:domain-list (list "string")
   #:range "number" 
   #:purpose "Produce cost of pizza depending on topping" 
-  #:num-examples 4 
-  #:example-list '"cheese" (+ 320 20 (100 "up" (+ 100 20)) (320 "down" (- 320 20)) (100 "down" (- 100 20))) 
-  #:show-examples '#t #t #f) (#t #t #f #:param-list (list "y" "key") 
-  #:show-params? #f #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y]) 
-  #:show-body? #f #:grid-lines? #t }
+  #:num-examples 2 
+  #:example-list '(("cheese" 9) ("pepperoni" 10.50))
+  #:show-examples '((#t #t #f) (#t #t #f))
+  #:param-list (list "topping") 
+  #:show-params? #f 
+  #:body '(cond [(string=? topping "cheese") 9] 
+                [(string=? topping "pepperoni") 10.50] 
+                [else 20.99]) 
+  #:show-body? #f 
+  #:grid-lines? #t }
