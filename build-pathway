@@ -8,7 +8,7 @@ echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
 echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
-echo https://github.com/bootstrapworld/curriculum[Repo] >> index.adoc
+echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
 if test $# -eq 0
 then args="pathways/*"
@@ -177,25 +177,11 @@ buildpathway() {
 
   cd $TOPDIR
   echo >> index.adoc
-  echo == Pathway: $PATHWAY >> index.adoc
   docf=distribution/$PATHWAY/langs/en-us/index.html
   if test -f $docf; then
   echo \* link:$docf[$PATHWAY Narrative] >> index.adoc
   fi
-  docf=distribution/$PATHWAY/langs/en-us/workbook/workbook.pdf
-  if test -f $docf; then
-  echo \* link:$docf[$PATHWAY Workbook] >> index.adoc
-  fi
-  docf=distribution/$PATHWAY/langs/en-us/resources/protected/workbook-sols.pdf
-  if test -f $docf; then
-  echo \* link:$docf[$PATHWAY Workbook with Solutions] >> index.adoc
-  fi
   echo >> index.adoc
-  echo === Lessons Used in $PATHWAY >> index.adoc
-  for docf in distribution/$PATHWAY/langs/en-us/lessons/*; do
-    docfb=$(basename $docf)
-    echo \* link:$docf/index.html[$docfb] >> index.adoc
-  done
 }
 
 for f in $args; do
