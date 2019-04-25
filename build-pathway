@@ -1,4 +1,4 @@
-# last modified 2019-04-24
+# last modified 2019-04-25
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -35,7 +35,6 @@ buildpathway() {
   PATHWAY=${PATHWAY%/}
 
   cp -pr pathways/$PATHWAY distribution
-
 
   echo
   echo building pathway: $PATHWAY
@@ -146,6 +145,13 @@ buildpathway() {
       cd ..
     fi
 
+    if test ! -f workbook-page-index.rkt; then
+      echo WARNING: No workbook index file in pathway $PATHWAY
+    else
+      export PATHWAYROOTDIR=""
+      $PROGDIR/make-workbook.rkt
+    fi
+
     copacetic=1
     for f in *.adoc; do
       if test ! -f $f; then copacetic=0
@@ -167,14 +173,6 @@ buildpathway() {
       #rm *.adoc[23]
     fi
 
-    #echo READY TO MAKE WORKBOOK
-
-    if test ! -f workbook-page-index.rkt; then
-      echo WARNING: No workbook index file in pathway $PATHWAY
-    else
-      export PATHWAYROOTDIR=""
-      $PROGDIR/make-workbook.rkt
-    fi
   fi
 
   cd $TOPDIR

@@ -258,22 +258,24 @@
       ;(printf "link-to-lessons-in-pathway~n")
       (include-glossary-and-standards-files o)
 
+      (fprintf o "~n.Workbooks~n[verse]~n")
+      (fprintf o "link:./workbook/workbook.pdf[Student Workbook]~n")
+      (fprintf o "link:./resources/protected/workbook-sols.pdf[Teacher Workbook]~n")
+
       (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
 
-        (newline o)
-        (fprintf o ".Lessons used in this pathway~n[verse]~n")
+        (fprintf o "~n.Lessons used in this pathway~n[verse]~n")
         (for ((lesson lessons))
           (let ((lesson-title
                   (call-with-input-file
                     (format "./lessons/~a/index-title.txt" lesson)
                     read-line)))
             (fprintf o "link:./lessons/~a/index.html[~a]~n" lesson lesson-title)))
-        (newline o)
+
 
         (let ((lessons-file "pathway-lessons.asc")
             (lessons-toc-file "pathway-lessons-toc.asc"))
-        (newline o)
-        (fprintf o "link:./pathway-lessons.html[Lessons used in this pathway (single page)]~n")
+        (fprintf o "~nlink:./pathway-lessons.html[Lessons used in this pathway (single page)]~n")
         (call-with-output-file lessons-file
           (lambda (lo)
             (fprintf lo "= Lessons used in this pathway~n~n")
