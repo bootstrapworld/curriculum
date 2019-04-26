@@ -28,6 +28,43 @@
  ("MP.8"
   "Look for and express regularity in repeated reasoning"
  )
+ ("5.OA.A"
+  "Write and interpret numerical expressions."
+ )
+ ("5.OA.A.1"
+  "Use parentheses, brackets, or braces in numerical expressions, and evaluate expressions with these symbols."
+ )
+ ("5.OA.A.2"
+  "Write simple expressions that record calculations with numbers, and interpret numerical expressions without evaluating them."
+ )
+ ("5.OA.B"
+  "Analyze patterns and relationships."
+ )
+ ("5.OA.B.3"
+  "Generate two numerical patterns using two given rules. Identify apparent relationships between corresponding terms. Form ordered pairs consisting of corresponding terms from the two patterns, and graph the ordered pairs on a coordinate plane."
+ )
+ ("5.NBT.A"
+  "Understand the place value system."
+ )
+ ("5.NBT.A.1"
+  "Recognize that in a multi-digit number, a digit in one place represents 10 times as much as it represents in the place to its right and 1/10 of what it represents in the place to its left."
+ )
+ ("5.NBT.A.2"
+  "Explain patterns in the number of zeros of the product when multiplying a number by powers of 10, and explain patterns in the placement of the decimal point when a decimal is multiplied or divided by a power of 10. Use whole-number exponents to denote powers of 10."
+ )
+ ("5.NBT.A.3"
+  "Read, write, and compare decimals to thousandths."
+ )
+ ("5.NBT.A.3.A"
+  "Read and write decimals to thousandths using base-ten numerals, number names, and expanded form."
+ )
+ ("5.NBT.A.3.B"
+  "Compare two decimals to thousandths based on meanings of the digits in each place, using >, =, and < symbols to record the results of comparisons."
+ )
+ ("5.NBT.A.4"
+  "Use place value understanding to round decimals to any place."
+ )
+ 
  ("6.RP.A"
   "Understand ratio concepts and use ratio reasoning to solve problems."
  )
