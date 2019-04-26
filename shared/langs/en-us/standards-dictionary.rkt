@@ -28,9 +28,6 @@
  ("MP.8"
   "Look for and express regularity in repeated reasoning"
  )
- ("5.G.A.1"
-  "Graph points on the coordinate plane to solve real-world and mathematical problems."
- )
  ("5.OA.A"
   "Write and interpret numerical expressions."
  )
@@ -67,7 +64,60 @@
  ("5.NBT.A.4"
   "Use place value understanding to round decimals to any place."
  )
- 
+ ("5.MD.A"
+  "Convert like measurements units within a given measurement system."
+ )
+ ("5.MD.A.1"
+  "Convert among different-sized standard measurement units within a given measurement system (e.g., convert 5 cm to 0.05 m), and use these conversions in solving multi-step, real world problems."
+ )
+ ("5.MD.B"
+  "Represent and interpret data."
+ )
+ ("5.MD.C"
+  "Geometric measurement: understand concepts of volume."
+ )
+ ("5.MD.C.3"
+  "Recognize volume as an attribute of solid figures and understand concepts of volume measurement."
+ )
+ ("5.MD.C.3.A"
+  "A cube with side length 1 unit, called a "unit cube," is said to have "one cubic unit" of volume, and can be used to measure volume."
+ )
+ ("5.MD.C.3.B"
+  "A solid figure which can be packed without gaps or overlaps using n unit cubes is said to have a volume of n cubic units."
+ )
+ ("5.MD.C.4"
+  "Measure volumes by counting unit cubes, using cubic cm, cubic in, cubic ft, and improvised units."
+ )
+ ("5.MD.C.5"
+  "Relate volume to the operations of multiplication and addition and solve real world and mathematical problems involving volume."
+ )
+ ("5.MD.C.5.A"
+  "Find the volume of a right rectangular prism with whole-number side lengths by packing it with unit cubes, and show that the volume is the same as would be found by multiplying the edge lengths, equivalently by multiplying the height by the area of the base. Represent threefold whole-number products as volumes, e.g., to represent the associative property of multiplication."
+ )
+ ("5.MD.C.5.B"
+  "Apply the formulas V = l × w × h and V = b × h for rectangular prisms to find volumes of right rectangular prisms with whole-number edge lengths in the context of solving real world and mathematical problems."
+ )
+ ("5.MD.C.5.C"
+  "Recognize volume as additive. Find volumes of solid figures composed of two non-overlapping right rectangular prisms by adding the volumes of the non-overlapping parts, applying this technique to solve real world problems."
+ )
+ ("5.G.A"
+  "Graph points on the coordinate plane to solve real-world and mathematical problems."
+ )
+ ("5.G.A.1"
+  "Use a pair of perpendicular number lines, called axes, to define a coordinate system, with the intersection of the lines (the origin) arranged to coincide with the 0 on each line and a given point in the plane located by using an ordered pair of numbers, called its coordinates. Understand that the first number indicates how far to travel from the origin in the direction of one axis, and the second number indicates how far to travel in the direction of the second axis, with the convention that the names of the two axes and the coordinates correspond (e.g., x-axis and x-coordinate, y-axis and y-coordinate)."
+ )
+ ("5.G.A.2"
+  "Represent real world and mathematical problems by graphing points in the first quadrant of the coordinate plane, and interpret coordinate values of points in the context of the situation."
+ )
+ ("5.G.B"
+  "Classify two-dimensional figures into categories based on their properties."
+ )
+ ("5.G.B.3"
+  "Understand that attributes belonging to a category of two-dimensional figures also belong to all subcategories of that category."
+ )
+ ("5.G.B.4"
+  "Classify two-dimensional figures in a hierarchy based on properties."
+ )
  ("6.RP.A"
   "Understand ratio concepts and use ratio reasoning to solve problems."
  )
