@@ -28,6 +28,9 @@
  ("MP.8"
   "Look for and express regularity in repeated reasoning"
  )
+ ("5.G.A.1"
+  "Graph points on the coordinate plane to solve real-world and mathematical problems."
+ )
  ("5.OA.A"
   "Write and interpret numerical expressions."
  )
