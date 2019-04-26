@@ -4,6 +4,238 @@
 
 (define *standards-list*
 '(
+ ("MP.1"
+  "Make sense of problems and persevere in solving them"
+  )
+ ("MP.2"
+  "Reason abstractly and quantitatively"
+  )
+ ("MP.3"
+  "Construct viable arguments and critique the reasoning of others"
+  )
+ ("MP.4"
+  "Model with mathematics"
+  )
+ ("MP.5"
+  "Use appropriate tools strategically"
+  )
+ ("MP.6"
+  "Attend to precision"
+  )
+ ("MP.7"
+  "Look for and make use of structure"
+  )
+ ("MP.8"
+  "Look for and express regularity in repeated reasoning"
+ )
+ ("5.OA.A"
+  "Write and interpret numerical expressions."
+ )
+ ("5.OA.A.1"
+  "Use parentheses, brackets, or braces in numerical expressions, and evaluate expressions with these symbols."
+ )
+ ("5.OA.A.2"
+  "Write simple expressions that record calculations with numbers, and interpret numerical expressions without evaluating them."
+ )
+ ("5.OA.B"
+  "Analyze patterns and relationships."
+ )
+ ("5.OA.B.3"
+  "Generate two numerical patterns using two given rules. Identify apparent relationships between corresponding terms. Form ordered pairs consisting of corresponding terms from the two patterns, and graph the ordered pairs on a coordinate plane."
+ )
+ ("5.NBT.A"
+  "Understand the place value system."
+ )
+ ("5.NBT.A.1"
+  "Recognize that in a multi-digit number, a digit in one place represents 10 times as much as it represents in the place to its right and 1/10 of what it represents in the place to its left."
+ )
+ ("5.NBT.A.2"
+  "Explain patterns in the number of zeros of the product when multiplying a number by powers of 10, and explain patterns in the placement of the decimal point when a decimal is multiplied or divided by a power of 10. Use whole-number exponents to denote powers of 10."
+ )
+ ("5.NBT.A.3"
+  "Read, write, and compare decimals to thousandths."
+ )
+ ("5.NBT.A.3.A"
+  "Read and write decimals to thousandths using base-ten numerals, number names, and expanded form."
+ )
+ ("5.NBT.A.3.B"
+  "Compare two decimals to thousandths based on meanings of the digits in each place, using >, =, and < symbols to record the results of comparisons."
+ )
+ ("5.NBT.A.4"
+  "Use place value understanding to round decimals to any place."
+ )
+ 
+ ("6.RP.A"
+  "Understand ratio concepts and use ratio reasoning to solve problems."
+ )
+ ("6.RP.A.1"
+  "Understand the concept of a ratio and use ratio language to describe a ratio relationship between two quantities."
+ )
+ ("6.RP.A.2"
+  "Understand the concept of a unit rate a/b associated with a ratio a:b with b ≠ 0, and use rate language in the context of a ratio relationship."
+ )
+ ("6.RP.A.3"
+  "Use ratio and rate reasoning to solve real-world and mathematical problems, e.g., by reasoning about tables of equivalent ratios, tape diagrams, double number line diagrams, or equations."
+ )
+ ("6.RP.A.3.A"
+  "Make tables of equivalent ratios relating quantities with whole-number measurements, find missing values in the tables, and plot the pairs of values on the coordinate plane. Use tables to compare ratios."
+ )
+ ("6.RP.A.3.B"
+  "Solve unit rate problems including those involving unit pricing and constant speed."
+ )
+ ("6.RP.A.3.C"
+  "Find a percent of a quantity as a rate per 100; solve problems involving finding the whole, given a part and the percent."
+ )
+ ("6.RP.A.3.D"
+  "Use ratio reasoning to convert measurement units; manipulate and transform units appropriately when multiplying or dividing quantities."
+ )
+ ("6.NS.A"
+  "Apply and extend previous understandings of multiplication and division to divide fractions by fractions."
+ )
+ ("6.NS.A.1"
+  "Interpret and compute quotients of fractions, and solve word problems involving division of fractions by fractions, e.g., by using visual fraction models and equations to represent the problem."
+ )
+ ("6.NS.B"
+  "Compute fluently with multi-digit numbers and find common factors and multiples."
+ )
+ ("6.NS.B.2"
+  "Fluently divide multi-digit numbers using the standard algorithm."
+ )
+ ("6.NS.B.3"
+  "Fluently add, subtract, multiply, and divide multi-digit decimals using the standard algorithm for each operation."
+ )
+ ("6.NS.B.4"
+  "Find the greatest common factor of two whole numbers less than or equal to 100 and the least common multiple of two whole numbers less than or equal to 12. Use the distributive property to express a sum of two whole numbers 1-100 with a common factor as a multiple of a sum of two whole numbers with no common factor."
+ )
+ ("6.NS.C"
+  "Apply and extend previous understandings of numbers to the system of rational numbers."
+ )
+ ("6.NS.C.5"
+  "Understand that positive and negative numbers are used together to describe quantities having opposite directions or values (e.g., temperature above/below zero, elevation above/below sea level, credits/debits, positive/negative electric charge); use positive and negative numbers to represent quantities in real-world contexts, explaining the meaning of 0 in each situation."
+ )
+ ("6.NS.C.6"
+  "Understand a rational number as a point on the number line. Extend number line diagrams and coordinate axes familiar from previous grades to represent points on the line and in the plane with negative number coordinates."
+ )
+ ("6.NS.C.6.A"
+  "Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
+ )
+ ("6.NS.C.6.B"
+  "Understand signs of numbers in ordered pairs as indicating locations in quadrants of the coordinate plane; recognize that when two ordered pairs differ only by signs, the locations of the points are related by reflections across one or both axes."
+ )
+ ("6.NS.C.6.C"
+  "Find and position integers and other rational numbers on a horizontal or vertical number line diagram; find and position pairs of integers and other rational numbers on a coordinate plane."
+ )
+ ("6.NS.C.7"
+  "Understand ordering and absolute value of rational numbers."
+ )
+ ("6.NS.C.7.A"
+  "Interpret statements of inequality as statements about the relative position of two numbers on a number line diagram."
+ )
+ ("6.NS.C.7.B"
+  "Write, interpret, and explain statements of order for rational numbers in real-world contexts."
+ )
+ ("6.NS.C.7.C"
+  "Understand the absolute value of a rational number as its distance from 0 on the number line; interpret absolute value as magnitude for a positive or negative quantity in a real-world situation."
+ )
+ ("6.NS.C.7.D"
+  "Distinguish comparisons of absolute value from statements about order."
+ )
+ ("6.NS.C.8"
+  "Solve real-world and mathematical problems by graphing points in all four quadrants of the coordinate plane. Include use of coordinates and absolute value to find distances between points with the same first coordinate or the same second coordinate."
+ )
+ ("6.EE.A"
+  "Apply and extend previous understandings of arithmetic to algebraic expressions."
+ )
+ ("6.EE.A.1"
+  "Write and evaluate numerical expressions involving whole-number exponents."
+ )
+ ("6.EE.A.2"
+  "Write, read, and evaluate expressions in which letters stand for numbers."
+ )
+ ("6.EE.A.2.A"
+  "Write expressions that record operations with numbers and with letters standing for numbers."
+ )
+ ("6.EE.A.2.B"
+  "Identify parts of an expression using mathematical terms (sum, term, product, factor, quotient, coefficient); view one or more parts of an expression as a single entity."
+ )
+ ("6.EE.A.2.C"
+  "Evaluate expressions at specific values of their variables. Include expressions that arise from formulas used in real-world problems. Perform arithmetic operations, including those involving whole-number exponents, in the conventional order when there are no parentheses to specify a particular order (Order of Operations)."
+ )
+ ("6.EE.A.3"
+  "Apply the properties of operations to generate equivalent expressions."
+ )
+ ("6.EE.A.4"
+  "Identify when two expressions are equivalent (i.e., when the two expressions name the same number regardless of which value is substituted into them)."
+ )
+ ("6.EE.B"
+  "Reason about and solve one-variable equations and inequalities."
+ )
+ ("6.EE.B.5"
+  "Understand solving an equation or inequality as a process of answering a question: which values from a specified set, if any, make the equation or inequality true? Use substitution to determine whether a given number in a specified set makes an equation or inequality true."
+ )
+ ("6.EE.B.6"
+  "Use variables to represent numbers and write expressions when solving a real-world or mathematical problem; understand that a variable can represent an unknown number, or, depending on the purpose at hand, any number in a specified set."
+ )
+ ("6.EE.B.7"
+  "Solve real-world and mathematical problems by writing and solving equations of the form x + p = q and px = q for cases in which p, q and x are all nonnegative rational numbers."
+ )
+ ("6.EE.B.8"
+  "Write an inequality of the form x > c or x < c to represent a constraint or condition in a real-world or mathematical problem. Recognize that inequalities of the form x > c or x < c have infinitely many solutions; represent solutions of such inequalities on number line diagrams."
+ )
+ ("6.EE.C"
+  "Represent and analyze quantitative relationships between dependent and independent variables."
+ )
+ ("6.EE.C.9"
+  "Use variables to represent two quantities in a real-world problem that change in relationship to one another; write an equation to express one quantity, thought of as the dependent variable, in terms of the other quantity, thought of as the independent variable. Analyze the relationship between the dependent and independent variables using graphs and tables, and relate these to the equation."
+ )
+ ("6.G.A"
+  "Solve real-world and mathematical problems involving area, surface area, and volume."
+ )
+ ("6.G.A.1"
+  "Find the area of right triangles, other triangles, special quadrilaterals, and polygons by composing into rectangles or decomposing into triangles and other shapes; apply these techniques in the context of solving real-world and mathematical problems."
+ )
+ ("6.G.A.2"
+  "Find the volume of a right rectangular prism with fractional edge lengths by packing it with unit cubes of the appropriate unit fraction edge lengths, and show that the volume is the same as would be found by multiplying the edge lengths of the prism. Apply the formulas V = l w h and V = b h to find volumes of right rectangular prisms with fractional edge lengths in the context of solving real-world and mathematical problems."
+ )
+ ("6.G.A.3"
+  "Draw polygons in the coordinate plane given coordinates for the vertices; use coordinates to find the length of a side joining points with the same first coordinate or the same second coordinate. Apply these techniques in the context of solving real-world and mathematical problems."
+ )
+ ("6.G.A.4"
+  "Represent three-dimensional figures using nets made up of rectangles and triangles, and use the nets to find the surface area of these figures. Apply these techniques in the context of solving real-world and mathematical problems."
+ )
+ ("6.SP.A"
+  "Develop understanding of statistical variability."
+ )
+ ("6.SP.A.1"
+  "Recognize a statistical question as one that anticipates variability in the data related to the question and accounts for it in the answers."
+ )
+ ("6.SP.A.2"
+  "Understand that a set of data collected to answer a statistical question has a distribution which can be described by its center, spread, and overall shape."
+ )
+ ("6.SP.A.3"
+  "Recognize that a measure of center for a numerical data set summarizes all of its values with a single number, while a measure of variation describes how its values vary with a single number."
+ )
+ ("6.SP.B"
+  "Summarize and describe distributions."
+ )
+ ("6.SP.B.4"
+  "Display numerical data in plots on a number line, including dot plots, histograms, and box plots."
+ )
+ ("6.SP.B.5"
+  "Summarize numerical data sets in relation to their context."
+ )
+ ("6.SP.B.5.A"
+  "Summarize numerical data sets in relation to their context by reporting the number of observations."
+ )
+ ("6.SP.B.5.B"
+  "Summarize numerical data sets in relation to their context by describing the nature of the attribute under investigation, including how it was measured and its units of measurement."
+ )
+ ("6.SP.B.5.C"
+  "Summarize numerical data sets in relation to their context by giving quantitative measures of center (median and/or mean) and variability (interquartile range and/or mean absolute deviation), as well as describing any overall pattern and any striking deviations from the overall pattern with reference to the context in which the data were gathered."
+ )
+ ("6.SP.B.5.D"
+  "Summarize numerical data sets in relation to their context by relating the choice of measures of center and variability to the shape of the data distribution and the context in which the data were gathered."
+ )
  ("7.RP.A"
   "Analyze proportional relationships and use them to solve real-world and mathematical problems."
  )
@@ -607,8 +839,7 @@
  ("HSF.BF.A"
   "Build a function that models a relationship between two quantities."
  )
-
- 
+ ;Old versions of standards below this line
  ("N-Q"
   "The student reasons quantitatively in using units to solve problems"
   "selection of appropriate units when solving a problem"
@@ -1125,27 +1356,6 @@ of the graph, and interpret these in terms of a context."
   )
  ("BS-PL.P"
   "The Student is comfortable using the Pyret syntax for the Design Recipe"
-  )
- ("MP.1"
-  "Make sense of problems and persevere in solving them"
-  )
- ("MP.2"
-  "Reason abstractly and quantitatively"
-  )
- ("MP.3"
-  "Construct viable arguments and critique the reasoning of others"
-  )
- ("MP.4"
-  "Model with mathematics"
-  )
- ("MP.5"
-  "Use appropriate tools strategically"
-  )
- ("MP.6"
-  "Attend to precision"
-  )
- ("MP.7"
-  "Look for and make use of structure"
   )
  ("111.47.4"
   "Categorical and quantitative data. The student applies the mathematical process standards to represent and analyze both categorical and quantitative data."

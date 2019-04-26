@@ -1,6 +1,6 @@
 = Defining Values
 
-*Students learn how to define lines of code as a set value that can be used repeatedly in different situations, similar to a variable in math.*
+@lesson-description{Students learn how to define lines of code as a set value that can be used repeatedly in different situations, similar to a variable in math.}
 
 [.left-header, cols="20a, 80a", stripes=none]
 |===
@@ -27,6 +27,7 @@
 
 |Materials
 |
+* https://docs.google.com/presentation/d/1l369za3UsTHj5bEw0IZIBoAEMdPnFDmsA5_oenwN8Cw/edit?usp=sharing[Google Slides]
 * Workbook, writing utensil, computer
 |===
 
@@ -49,21 +50,30 @@
 Students should be logged into WeScheme.
 
 == Launch: (5 mins)
-Display sample code from the "Prize Star" exercise (Lesson 2c) visible to students.  
+Display the sample code from the "Prize Star" exercise.
 
-What common element was repeated throughout all the lines of code? `_(star 50 "solid" "green")_`
+`(star 50 "solid" "green")`
 
-What happened when you were asked to change the color of the star to gold? _Had to change it everywhere it appeared_  
+`(scale 3 (star 50 "solid" "green"))`
 
+`(scale .5 (star 50 "solid" "green"))`
 
+`(rotate 45 (star 50 "solid" "green"))`
+
+`(rotate 45 (scale 3 (star 50 "solid" "green")))`
+
+*What common element was repeated throughout all the lines of code?* `_(star 50 "solid" "green")_`
+
+*What happened when you were asked to change the color of the star to gold?* _We had to change it everywhere it appeared._  
+
+*Since we're using that star over and over again, wouldn't it be nice if we could give that piece of code a "nickname", something shorter we could type to represent that piece of code?*
 
 == Explore: (10 mins)
-Students open the “Exploring Define” file and use the commented directions there to explore the new ‘define’ keyword.
-
+On WeScheme, have students click "Start a new program" and open to @worksheet-link{DefiningValues-WB1.pdf} to explore the new ‘define’ keyword.
 
 == Discuss: (10 mins)
 * How is ‘define’ similar to a function?  How is it different? 
-_It’s written inside parentheses like a function, ‘define’ must be given a value name and a function call (a circle of eval), but ‘define’ doesn’t have an output_
+_It’s written inside parentheses like a function, ‘define’ must be given a value name and a function call (a circle of evaluation), but ‘define’ doesn’t have an output_
 * What is the usefulness of defining values? 
 _Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
 * What datatypes can we define values for? 
@@ -76,7 +86,7 @@ MLR 8 - Discussion Supports: As students discuss, rephrase responses as question
 ****
 
 == Practice: (10 mins)
-Students complete the workbook page with their partner.
+Students complete @worksheet-link{DefiningValues-WB2.pdf} with their partner.
 
 Student-facing task:
 
@@ -92,11 +102,10 @@ Use PRIZE_STAR to complete the following exercises:
 == Create/Apply: (15 mins) 
 
 *Option 1*:
-Define a least 3 values that uses the text function and at least 3 of following functions:
+Define at least 3 images of your own and combine using `overlay`, `beside`, and/or `above`.  You can also use any other functions you've learned, such as:
 
 * `rotate`
 * `scale`
-* `overlay`
 * `flip-horizontal`
 * `flip-vertical`
 * any other image producing function(`triangle`, `star`, `circle`, `rectangle`, etc..)
@@ -104,4 +113,4 @@ Define a least 3 values that uses the text function and at least 3 of following 
 Write comments to describe what is being produced.
 
 *Option 2*:
-Have students choose a flag from this list _link_ and recreate the flag using define and any of the functions they've learned so far.
+Have students choose a flag from this list: @worksheet-link{exercises/flags-of-the-world-resource.pdf, (Flags of the World Resource),} and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.
