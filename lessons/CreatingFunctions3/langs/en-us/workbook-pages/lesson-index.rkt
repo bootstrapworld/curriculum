@@ -1,2 +1,11 @@
 (
+"WordProblems.pdf"
+"DesignRecipe1.pdf"
+"PurposeStatement3ReadsStrongerClearer.pdf"
+"DesignRecipe1.pdf"
+"PurposeStatement3ReadsStrongerClearer.pdf"
+"DesignRecipe1.pdf"
+"PurposeStatement3ReadsStrongerClearer.pdf"
+"DesignRecipe1.pdf"
+"PurposeStatement3ReadsStrongerClearer.pdf"
 )
