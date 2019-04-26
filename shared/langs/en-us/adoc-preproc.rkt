@@ -218,15 +218,19 @@
             ((file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))))
       (format "link:{pathwayrootdir}~a[~aPage ~a]" g link-text pno))))
 
-(define (make-exercise-link lesson exer link-text)
+(define (make-exercise-link lesson exer link-text include?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
   (let* ((g (string-append "lessons/" lesson "/exercises/" exer))
          (f (string-append *pathway-root-dir* g))
+         (exer.asc (path-replace-extension f ".asc"))
          (exer.html (path-replace-extension f ".html"))
          (exer.pdf (path-replace-extension f ".pdf")))
     (cond ((file-exists? exer.html) (set! g (path-replace-extension g ".html")))
           ((file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))))
-    (format "link:{pathwayrootdir}~a[~a]" g link-text)))
+    (cond (include?
+            (format "include::~a[]" exer.asc))
+          (else
+            (format "link:{pathwayrootdir}~a[~a]" g link-text)))))
 
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
@@ -411,8 +415,10 @@
                                                                      standards-met)))))))
                                               (else (printf "Standard ~a not found~%" arg)))))
                                     args)))
-                               ((string=? directive "worksheet-link")
-                                (let* ((args (read-commaed-group i))
+                               ((or (string=? directive "worksheet-link")
+                                    (string=? directive "worksheet-include"))
+                                (let* ((include? (string=? directive "worksheet-include"))
+                                       (args (read-commaed-group i))
                                        (n (length args))
                                        (page (car args))
                                        (link-text (if (> n 1) (cadr args) ""))
@@ -434,7 +440,8 @@
                                               (cond (lesson-dir
                                                       (display (make-exercise-link lesson-dir
                                                                                    (cadr page-compts)
-                                                                                   link-text) o))
+                                                                                   link-text
+                                                                                   include?) o))
                                                     (else
                                                       (printf "Incomplete exercise link ~a~n" page))))
                                              ((string=? first-compt "workbook-pages")
@@ -454,7 +461,9 @@
                                            (third-compt (caddr page-compts)))
                                        (cond ((string=? second-compt "exercises")
                                               (display (make-exercise-link first-compt
-                                                                           third-compt link-text) o))
+                                                                           third-compt
+                                                                           link-text
+                                                                           include?) o))
                                              ((string=? second-compt "workbook-pages")
                                               (display (make-worksheet-link first-compt
                                                                             third-compt link-text) o))
