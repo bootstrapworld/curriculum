@@ -26,21 +26,41 @@
              f))
          *workbook-page-specs*))
 
+  (set! *pdf-pages*
+    (filter (lambda (f)
+              (if (file-exists? f) #t
+                  (begin
+                    (printf "ERROR: ~a is not present\n" f)
+                    #f)))
+            *pdf-pages*))
+
   ;(printf "*pdf-pages* = ~s~n" *pdf-pages*)
 
-  (define *workbook-pdf*
-    (if protected?
-        "workbook/workbook-sols.pdf" "workbook/workbook.pdf"))
-
-  (printf "~nbuilding ~a from PDF pages ~a~n" *workbook-pdf* *pdf-pages*)
+  (define *pdflatex* (find-executable-path "pdflatex"))
 
   (unless (null? *pdf-pages*)
-    (let ((pdftk-args (append *pdf-pages* (list "output" *workbook-pdf* "dont_ask"))))
+    (printf "~nbuilding workbook-no-pagenums.pdf from PDF pages ~a~n" *pdf-pages*)
+
+    (when (file-exists? "workbook-no-pagenums.pdf") (delete-file "workbook-no-pagenums.pdf"))
+
+    (let ((pdftk-args (append *pdf-pages* (list "output" "workbook-no-pagenums.pdf" "dont_ask"))))
       (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
 
-    (when protected?
-      (system (format "mv ~a resources/protected" *workbook-pdf*)))
-    )
+    (when (file-exists? "workbook-no-pagenums.pdf")
+      (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
+
+      (when *pdflatex*
+        (apply system* (list *pdflatex* "workbook-numbered")))
+
+      (unless (file-exists? "workbook-numbered.pdf")
+        (system (format "mv workbook-no-pagenums.pdf workbook-numbered.pdf")))
+
+      (system (format "mv workbook-numbered.pdf ~a.pdf"
+                      (if protected?
+                          "resources/protected/workbook-sols"
+                          "workbook/workbook")))
+
+      ))
 
   )
 

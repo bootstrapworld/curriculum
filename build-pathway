@@ -1,4 +1,4 @@
-# last modified 2019-04-25
+# last modified 2019-04-28
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -149,6 +149,7 @@ buildpathway() {
       echo WARNING: No workbook index file in pathway $PATHWAY
     else
       export PATHWAYROOTDIR=""
+      cp -p $PROGDIR/workbook-numbered.tex .
       $PROGDIR/make-workbook.rkt
     fi
 
