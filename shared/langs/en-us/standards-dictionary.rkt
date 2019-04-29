@@ -892,6 +892,117 @@
  ("HSF.BF.A"
   "Build a function that models a relationship between two quantities."
  )
+ ("HSF.BF.A.1"
+  "Write a function that describes a relationship between two quantities."
+ )
+ ("HSF.BF.A.1.A"
+  "Determine an explicit expression, a recursive process, or steps for calculation from a context."
+ )
+ ("HSF.BF.A.1.B"
+  "Combine standard function types using arithmetic operations."
+ )
+ ("HSF.BF.A.1.C"
+  "Compose functions."
+ )
+ ("HSF.BF.A.2"
+  "Write arithmetic and geometric sequences both recursively and with an explicit formula, use them to model situations, and translate between the two forms."
+ )
+ ("HSF.BF.B"
+  "Build new functions from existing functions."
+ )
+ ("HSF.BF.B.3"
+  "Identify the effect on the graph of replacing f(x) by f(x) + k, k f(x), f(kx), and f(x + k) for specific values of k (both positive and negative); find the value of k given the graphs. Experiment with cases and illustrate an explanation of the effects on the graph using technology. Include recognizing even and odd functions from their graphs and algebraic expressions for them."
+ )
+ ("HSF.BF.B.4"
+  "Find inverse functions."
+ )
+ ("HSF.BF.B.4.A"
+  "Solve an equation of the form f(x) = c for a simple function f that has an inverse and write an expression for the inverse."
+ )
+ ("HSF.BF.B.4.B"
+  "Verify by composition that one function is the inverse of another."
+ )
+ ("HSF.BF.B.4.C"
+  "Read values of an inverse function from a graph or a table, given that the function has an inverse."
+ )
+ ("HSF.BF.B.4.D"
+  "Produce an invertible function from a non-invertible function by restricting the domain."
+ )
+ ("HSF.BF.B.5"
+  "Understand the inverse relationship between exponents and logarithms and use this relationship to solve problems involving logarithms and exponents."
+ )
+ ("HSF.LE.A"
+  "Construct and compare linear, quadratic, and exponential models and solve problems."
+ )
+ ("HSF.LE.A.1"
+  "Distinguish between situations that can be modeled with linear functions and with exponential functions."
+ )
+ ("HSF.LE.A.1.A"
+  "Prove that linear functions grow by equal differences over equal intervals, and that exponential functions grow by equal factors over equal intervals."
+ )
+ ("HSF.LE.A.1.B"
+  "Recognize situations in which one quantity changes at a constant rate per unit interval relative to another."
+ )
+ ("HSF.LE.A.1.C"
+  "Recognize situations in which a quantity grows or decays by a constant percent rate per unit interval relative to another."
+ )
+ ("HSF.LE.A.2"
+  "Construct linear and exponential functions, including arithmetic and geometric sequences, given a graph, a description of a relationship, or two input-output pairs (include reading these from a table)."
+ )
+ ("HSF.LE.A.3"
+  "Observe using graphs and tables that a quantity increasing exponentially eventually exceeds a quantity increasing linearly, quadratically, or (more generally) as a polynomial function."
+ )
+ ("HSF.LE.A.4"
+  "For exponential models, express as a logarithm the solution to abct = d where a, c, and d are numbers and the base b is 2, 10, or e; evaluate the logarithm using technology."
+ )
+ ("HSF.LE.B"
+  "Interpret expressions for functions in terms of the situation they model."
+ )
+ ("HSF.LE.B.5"
+  "Interpret the parameters in a linear or exponential function in terms of a context."
+ )
+ ("HSF.TF.A"
+  "Extend the domain of trigonometric functions using the unit circle."
+ )
+ ("HSF.TF.A.1"
+  "Understand radian measure of an angle as the length of the arc on the unit circle subtended by the angle."
+ )
+ ("HSF.TF.A.2"
+  "Explain how the unit circle in the coordinate plane enables the extension of trigonometric functions to all real numbers, interpreted as radian measures of angles traversed counterclockwise around the unit circle."
+ )
+ ("HSF.TF.A.3"
+  "Use special triangles to determine geometrically the values of sine, cosine, tangent for π/3, π/4 and π/6, and use the unit circle to express the values of sine, cosine, and tangent for x, π + x, and 2π - x in terms of their values for x, where x is any real number."
+ )
+ ("HSF.TF.A.4"
+  "Use the unit circle to explain symmetry (odd and even) and periodicity of trigonometric functions."
+ )
+ ("HSF.TF.B"
+  "Model periodic phenomena with trigonometric functions."
+ )
+ ("HSF.TF.B.5"
+  "Choose trigonometric functions to model periodic phenomena with specified amplitude, frequency, and midline."
+ )
+ ("HSF.TF.B.6"
+  "Understand that restricting a trigonometric function to a domain on which it is always increasing or always decreasing allows its inverse to be constructed."
+ )
+ ("HSF.TF.B.7"
+  "Use inverse functions to solve trigonometric equations that arise in modeling contexts; evaluate the solutions using technology, and interpret them in terms of the context."
+ )
+ ("HSF.TF.C"
+  "Prove and apply trigonometric identities."
+ )
+ ("HSF.TF.C.8"
+  "Prove the Pythagorean identity sin2(θ) + cos2(θ) = 1 and use it to find sin(θ), cos(θ), or tan(θ) given sin(θ), cos(θ), or tan(θ) and the quadrant of the angle."
+ )
+ ("HSF.TF.C.9"
+  "Prove the addition and subtraction formulas for sine, cosine, and tangent and use them to solve problems."
+ )
+ 
+ 
+ 
+ 
+ 
+ 
  ;Old versions of standards below this line
  ("N-Q"
   "The student reasons quantitatively in using units to solve problems"
