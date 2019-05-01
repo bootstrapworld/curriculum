@@ -232,6 +232,10 @@
           (else
             (format "link:{pathwayrootdir}~a[~a]" g link-text)))))
 
+(define (make-image lesson img opts)
+  (format "image::{pathwayrootdir}lessons/~a/~a[~a]" lesson img
+          (string-join opts ", ")))
+
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
         (link-text (if (string=? link-text "") link-text (string-append link-text ", "))))
@@ -415,6 +419,9 @@
                                                                      standards-met)))))))
                                               (else (printf "Standard ~a not found~%" arg)))))
                                     args)))
+                               ((string=? directive "image")
+                                (let ((args (read-commaed-group i)))
+                                  (display (make-image (getenv "LESSON") (car args) (cdr args)) o)))
                                ((or (string=? directive "worksheet-link")
                                     (string=? directive "worksheet-include"))
                                 (let* ((include? (string=? directive "worksheet-include"))
