@@ -167,13 +167,17 @@
                 (else
                   (loop (cdr args) (cons arg r))))))))
 
-(define (include-glossary-and-standards-files o)
+(define (include-glossary-and-standards-files o pathway?)
   ;(printf "include-glossary-and-standards-files~n")
   (newline o)
   (newline o)
-  (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
-  (fprintf o "include::./~a[]~%~%" "index-standards.asc")
-  )
+  (cond (pathway?
+          (fprintf o "link:./index-glossary.html[Glossary]~%~%")
+          (fprintf o "link:./index-standards.html[Standards]~%~%"))
+        (else
+          (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
+          ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
+          )))
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
@@ -268,7 +272,7 @@
         )
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
-      (include-glossary-and-standards-files o)
+      (include-glossary-and-standards-files o #t)
 
       (fprintf o "~n.Workbooks~n[verse]~n")
       (fprintf o "link:./workbook/workbook.pdf[Student Workbook]~n")
@@ -403,6 +407,8 @@
                                              (sublist-item (list-ref s 0))
                                              (c (list-ref s 1)))
                                         (cond (c (let ((std (list-ref c 0)))
+                                                   (fprintf o "~a: ~a~n~n"
+                                                            std (list-ref c 1))
                                                    (cond ((assoc std standards-met) =>
                                                           (lambda (c0)
                                                             (when sublist-item
@@ -514,7 +520,7 @@
                                (cond (first-subsection-reached? #f)
                                      ((check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
-                                      (include-glossary-and-standards-files o))
+                                      (include-glossary-and-standards-files o #f))
                                      (else #f))
                                (display c o))
                              (else
@@ -535,8 +541,11 @@
 
     (create-glossary-and-standards-subfiles glossary-items standards-met)
 
-    (when (getenv "LESSON")
-      (accumulate-glossary-and-standards glossary-items standards-met))
+    (cond ((getenv "LESSON")
+           (accumulate-glossary-and-standards glossary-items standards-met))
+          (else
+            (asciidoctor "index-glossary.asc")
+            (asciidoctor "index-standards.asc")))
 
     (asciidoctor out-file)))
 
