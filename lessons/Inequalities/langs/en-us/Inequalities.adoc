@@ -64,11 +64,14 @@ Have students open the @link{https://www.wescheme.org/openEditor?publicId=48low6
 * What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
 * How far can Sam go to the left and stay within Mom's view?  _Up to, but not beyond, an x of -40._
 * How can we state this boundary mathematically? _x >= -40 or x > -50_
+
+*Every time Sam moves, we want to check and see if Sam is safe.  This is a repetitive job, so it would make an excellent function!  Let's focus on keeping Sam safe on the left side first.*
+
 * What will the contract for `safe-left?` look like?  What does it need to take in?  What will it give back?  _`safe-left?` should take in a Number (the x-coordinate) and return a Boolean (true if Sam is safe, false if not)_
 
 == Practice: (10 min)
 
-With their partners, students complete _workbook page_ to fix the `safe-left?` and `safe-right?` functions and type it into their file to test it.  
+With their partners, students complete @worksheet-link{workbook-pages/Inequalities-EX1.adoc} to fix the `safe-left?` function and @worksheet-link{workbook-pages/Inequalities-EX2.adoc} to fix the `safe-right?` function and type them into their file to test.  
 
 Students will notice that their `safe-left?` function keeps Sam from disappearing off the left, but `safe-right?` doesn't keep Sam from disappearing off the right side!  When students run into this, encourage them to look through the code to try and figure out why.
 
@@ -78,29 +81,29 @@ Students will notice that their `safe-left?` function keeps Sam from disappearin
 * What does `safe-right?` do? _Checks to see if x is less than 490_
 * What does `onscreen?` do? _Answers may vary, let students discuss with each other_
 
-Recruit some student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?` while giving function calls to `onscreen?`
+*Recruit some student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?` while giving function calls to `onscreen?`*
 
 === Role Play Example
 
-Facilitator: onscreen-huh 70
-Onscreen?: safe-left-huh 70
-Safe-left?: true
-Onscreen?: true
+* Facilitator: onscreen-huh 70
+* Onscreen?: safe-left-huh 70
+* Safe-left?: true
+* Onscreen?: true
 
-Facilitator: onscreen-huh -100
-Onscreen?: safe-left-huh -100
-Safe-left?: false
-Onscreen?: false
+* Facilitator: onscreen-huh -100
+* Onscreen?: safe-left-huh -100
+* Safe-left?: false
+* Onscreen?: false
 
-Facilitator: onscreen-huh 600
-Onscreen?: safe-left-huh 600
-Safe-left?: true
-Onscreen?: true
+* Facilitator: onscreen-huh 600
+* Onscreen?: safe-left-huh 600
+* Safe-left?: true
+* Onscreen?: true
 
 * What is the problem with `onscreen?`? _It's only talking to `safe-left?`, it's not checking with `safe-right?`_
 * How can `onscreen?` check with both?  _By using `and`_
 
-Have students complete _workbook page_ with their partner before moving on.
+Have students complete @worksheet-link{workbook-pages/Inequalities-EX3.adoc} with their partner before moving on.
 
 == Apply: (10 min)
 
