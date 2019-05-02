@@ -1174,6 +1174,142 @@
  ("HSG.MG.A.3"
   "Apply geometric methods to solve design problems."
  )
+ ("HSS.ID.A"
+  "Summarize, represent, and interpret data on a single count or measurement variable."
+ )
+ ("HSS.ID.A.1"
+  "Represent data with plots on the real number line (dot plots, histograms, and box plots)."
+ )
+ ("HSS.ID.A.2"
+  "Use statistics appropriate to the shape of the data distribution to compare center (median, mean) and spread (interquartile range, standard deviation) of two or more different data sets."
+ )
+ ("HSS.ID.A.3"
+  "Interpret differences in shape, center, and spread in the context of the data sets, accounting for possible effects of extreme data points (outliers)."
+ )
+ ("HSS.ID.A.4"
+  "Use the mean and standard deviation of a data set to fit it to a normal distribution and to estimate population percentages. Recognize that there are data sets for which such a procedure is not appropriate. Use calculators, spreadsheets, and tables to estimate areas under the normal curve."
+ )
+ ("HSS.ID.B"
+  "Summarize, represent, and interpret data on two categorical and quantitative variables."
+ )
+ ("HSS.ID.B.5" 
+  "Summarize categorical data for two categories in two-way frequency tables. Interpret relative frequencies in the context of the data (including joint, marginal, and conditional relative frequencies). Recognize possible associations and trends in the data."
+ )
+ ("HSS.ID.B.6"
+  "Represent data on two quantitative variables on a scatter plot, and describe how the variables are related."
+ )
+ ("HSS.ID.B.6.A"
+  "Fit a function to the data; use functions fitted to data to solve problems in the context of the data. Use given functions or choose a function suggested by the context. Emphasize linear, quadratic, and exponential models."
+ )
+ ("HSS.ID.B.6.B"
+  "Informally assess the fit of a function by plotting and analyzing residuals."
+ )
+ ("HSS.ID.B.6.C"
+  "Fit a linear function for a scatter plot that suggests a linear association."
+ )
+ ("HSS.ID.C"
+  "Interpret linear models."
+ )
+ ("HSS.ID.C.7"
+  "Interpret the slope (rate of change) and the intercept (constant term) of a linear model in the context of the data."
+ )
+ ("HSS.ID.C.8"
+  "Compute (using technology) and interpret the correlation coefficient of a linear fit."
+ )
+ ("HSS.ID.C.9"
+  "Distinguish between correlation and causation."
+ )
+ ("HSS.IC.A"
+  "Understand and evaluate random processes underlying statistical experiments."
+ )
+ ("HSS.IC.A.1"
+  "Understand statistics as a process for making inferences about population parameters based on a random sample from that population."
+ )
+ ("HSS.IC.A.2"
+  "Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation."
+ )
+ ("HSS.IC.B"
+  "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+ )
+ ("HSS.IC.B.3"
+  "Recognize the purposes of and differences among sample surveys, experiments, and observational studies; explain how randomization relates to each."
+ )
+ ("HSS.IC.B.4"
+  "Use data from a sample survey to estimate a population mean or proportion; develop a margin of error through the use of simulation models for random sampling."
+ )
+ ("HSS.IC.B.5"
+  "Use data from a randomized experiment to compare two treatments; use simulations to decide if differences between parameters are significant."
+ )
+ ("HSS.IC.B.6"
+  "Evaluate reports based on data."
+ )
+ ("HSS.CP.A"
+  "Understand independence and conditional probability and use them to interpret data."
+ )
+ ("HSS.CP.A.1"
+  "Describe events as subsets of a sample space (the set of outcomes) using characteristics (or categories) of the outcomes, or as unions, intersections, or complements of other events ("or," "and," "not")."
+ )
+ ("HSS.CP.A.2"
+  "Understand that two events A and B are independent if the probability of A and B occurring together is the product of their probabilities, and use this characterization to determine if they are independent."
+ )
+ ("HSS.CP.A.3"
+  "Understand the conditional probability of A given B as P(A and B)/P(B), and interpret independence of A and B as saying that the conditional probability of A given B is the same as the probability of A, and the conditional probability of B given A is the same as the probability of B."
+ )
+ ("HSS.CP.A.4"
+  "Construct and interpret two-way frequency tables of data when two categories are associated with each object being classified. Use the two-way table as a sample space to decide if events are independent and to approximate conditional probabilities."
+ )
+ ("HSS.CP.A.5"
+  "Recognize and explain the concepts of conditional probability and independence in everyday language and everyday situations."
+ )
+ ("HSS.CP.B"
+  "Use the rules of probability to compute probabilities of compound events."
+ )
+ ("HSS.CP.B.6"
+  "Find the conditional probability of A given B as the fraction of B's outcomes that also belong to A, and interpret the answer in terms of the model."
+ )
+ ("HSS.CP.B.7"
+  "Apply the Addition Rule, P(A or B) = P(A) + P(B) - P(A and B), and interpret the answer in terms of the model."
+ )
+ ("HSS.CP.B.8"
+  "Apply the general Multiplication Rule in a uniform probability model, P(A and B) = P(A)P(B|A) = P(B)P(A|B), and interpret the answer in terms of the model."
+ )
+ ("HSS.CP.B.9"
+  "Use permutations and combinations to compute probabilities of compound events and solve problems."
+ )
+ ("HSS.MD.A"
+  "Calculate expected values and use them to solve problems."
+ )
+ ("HSS.MD.A.1"
+  "Define a random variable for a quantity of interest by assigning a numerical value to each event in a sample space; graph the corresponding probability distribution using the same graphical displays as for data distributions."
+ )
+ ("HSS.MD.A.2"
+  "Calculate the expected value of a random variable; interpret it as the mean of the probability distribution."
+ )
+ ("HSS.MD.A.3"
+  "Develop a probability distribution for a random variable defined for a sample space in which theoretical probabilities can be calculated; find the expected value."
+ )
+ ("HSS.MD.A.4"
+  "Develop a probability distribution for a random variable defined for a sample space in which probabilities are assigned empirically; find the expected value."
+ )
+ ("HSS.MD.B"
+  "Use probability to evaluate outcomes of decisions."
+ )
+ ("HSS.MD.B.5"
+  "Weigh the possible outcomes of a decision by assigning probabilities to payoff values and finding expected values."
+ )
+ ("HSS.MD.B.5.A"
+  "Find the expected payoff for a game of chance."
+ )
+ ("HSS.MD.B.5.B"
+  "Evaluate and compare strategies on the basis of expected values."
+ )
+ ("HSS.MD.B.6"
+  "Use probabilities to make fair decisions."
+ )
+ ("HSS.MD.B.7"
+  "Analyze decisions and strategies using probability concepts."
+ )
+ 
  
  ;Old versions of standards below this line
  ("N-Q"
