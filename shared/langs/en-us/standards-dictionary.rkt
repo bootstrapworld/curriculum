@@ -997,11 +997,183 @@
  ("HSF.TF.C.9"
   "Prove the addition and subtraction formulas for sine, cosine, and tangent and use them to solve problems."
  )
- 
- 
- 
- 
- 
+ ("HSG.CO.A"
+  "Experiment with transformations in the plane."
+ )
+ ("HSG.CO.A.1"
+  "Know precise definitions of angle, circle, perpendicular line, parallel line, and line segment, based on the undefined notions of point, line, distance along a line, and distance around a circular arc."
+ )
+ ("HSG.CO.A.2"
+  "Represent transformations in the plane using, e.g., transparencies and geometry software; describe transformations as functions that take points in the plane as inputs and give other points as outputs. Compare transformations that preserve distance and angle to those that do not (e.g., translation versus horizontal stretch)."
+ )
+ ("HSG.CO.A.3"
+  "Given a rectangle, parallelogram, trapezoid, or regular polygon, describe the rotations and reflections that carry it onto itself."
+ )
+ ("HSG.CO.A.4"
+  "Develop definitions of rotations, reflections, and translations in terms of angles, circles, perpendicular lines, parallel lines, and line segments."
+ )
+ ("HSG.CO.A.5"
+  "Given a geometric figure and a rotation, reflection, or translation, draw the transformed figure using, e.g., graph paper, tracing paper, or geometry software. Specify a sequence of transformations that will carry a given figure onto another."
+ )
+ ("HSG.CO.B"
+  "Understand congruence in terms of rigid motions"
+ )
+ ("HSG.CO.B.6"
+  "Use geometric descriptions of rigid motions to transform figures and to predict the effect of a given rigid motion on a given figure; given two figures, use the definition of congruence in terms of rigid motions to decide if they are congruent."
+ )
+ ("HSG.CO.B.7"
+  "Use the definition of congruence in terms of rigid motions to show that two triangles are congruent if and only if corresponding pairs of sides and corresponding pairs of angles are congruent."
+ )
+ ("HSG.CO.B.8"
+  "Explain how the criteria for triangle congruence (ASA, SAS, and SSS) follow from the definition of congruence in terms of rigid motions."
+ )
+ ("HSG.CO.C"
+  "Prove geometric theorems."
+ )
+ ("HSG.CO.C.9"
+  "Prove theorems about lines and angles."
+ )
+ ("HSG.CO.C.10"
+  "Prove theorems about triangles."
+ )
+ ("HSG.CO.C.11"
+  "Prove theorems about parallelograms."
+ )
+ ("HSG.CO.D" 
+  "Make geometric constructions."
+ )
+ ("HSG.CO.D.12"
+  "Make formal geometric constructions with a variety of tools and methods."
+ )
+ ("HSG.CO.D.13"
+  "Construct an equilateral triangle, a square, and a regular hexagon inscribed in a circle."
+ )
+ ("HSG.SRT.A"
+  "Understand similarity in terms of similarity transformations."
+ )
+ ("HSG.SRT.A.1"
+  "Verify experimentally the properties of dilations given by a center and a scale factor."
+ )
+ ("HSG.SRT.A.1.A"
+  "A dilation takes a line not passing through the center of the dilation to a parallel line, and leaves a line passing through the center unchanged."
+ )
+ ("HSG.SRT.A.1.B"
+  "The dilation of a line segment is longer or shorter in the ratio given by the scale factor."
+ )
+ ("HSG.SRT.A.2"
+  "Given two figures, use the definition of similarity in terms of similarity transformations to decide if they are similar; explain using similarity transformations the meaning of similarity for triangles as the equality of all corresponding pairs of angles and the proportionality of all corresponding pairs of sides."
+ )
+ ("HSG.SRT.A.3"
+  "Use the properties of similarity transformations to establish the AA criterion for two triangles to be similar."
+ )
+ ("HSG.SRT.B"
+  "Prove theorems involving similarity."
+ )
+ ("HSG.SRT.B.4"
+  "Prove theorems about triangles (similarity).
+ )
+ ("HSG.SRT.B.5"
+  "Use congruence and similarity criteria for triangles to solve problems and to prove relationships in geometric figures."
+ )
+ ("HSG.SRT.C"
+  "Define trigonometric ratios and solve problems involving right triangles."
+ )
+ ("HSG.SRT.C.6"
+  "Understand that by similarity, side ratios in right triangles are properties of the angles in the triangle, leading to definitions of trigonometric ratios for acute angles."
+ )
+ ("HSG.SRT.C.7"
+  "Explain and use the relationship between the sine and cosine of complementary angles."
+ )
+ ("HSG.SRT.C.8"
+  "Use trigonometric ratios and the Pythagorean Theorem to solve right triangles in applied problems."
+ )
+ ("HSG.SRT.D"
+  "Apply trigonometry to general triangles."
+ )
+ ("HSG.SRT.D.9"
+  "Derive the formula A = 1/2 ab sin(C) for the area of a triangle by drawing an auxiliary line from a vertex perpendicular to the opposite side."
+ )
+ ("HSG.SRT.D.10"
+  "Prove the Laws of Sines and Cosines and use them to solve problems."
+ )
+ ("HSG.SRT.D.11"
+  "Understand and apply the Law of Sines and the Law of Cosines to find unknown measurements in right and non-right triangles."
+ )
+ ("HSG.C.A"
+  "Understand and apply theorems about circles."
+ )
+ ("HSG.C.A.1"
+  "Prove that all circles are similar."
+ )
+ ("HSG.C.A.2"
+  "Identify and describe relationships among inscribed angles, radii, and chords."
+ )
+ ("HSG.C.A.3"
+  "Construct the inscribed and circumscribed circles of a triangle, and prove properties of angles for a quadrilateral inscribed in a circle."
+ )
+ ("HSG.C.A.4"
+  "Construct a tangent line from a point outside a given circle to the circle."
+ )
+ ("HSG.C.B"
+  "Find arc lengths and areas of sectors of circles."
+ )
+ ("HSG.C.B.5"
+  "Derive using similarity the fact that the length of the arc intercepted by an angle is proportional to the radius, and define the radian measure of the angle as the constant of proportionality; derive the formula for the area of a sector."
+ )
+ ("HSG.GPE.A"
+  "Translate between the geometric description and the equation for a conic section."
+ )
+ ("HSG.GPE.A.1"
+  "Derive the equation of a circle of given center and radius using the Pythagorean Theorem; complete the square to find the center and radius of a circle given by an equation."
+ )
+ ("HSG.GPE.A.2"
+  "Derive the equation of a parabola given a focus and directrix."
+ )
+ ("HSG.GPE.A.3"
+  "Derive the equations of ellipses and hyperbolas given the foci, using the fact that the sum or difference of distances from the foci is constant."
+ )
+ ("HSG.GPE.B"
+  "Use coordinates to prove simple geometric theorems algebraically."
+ )
+ ("HSG.GPE.B.5"
+  "Prove the slope criteria for parallel and perpendicular lines and use them to solve geometric problems."
+ )
+ ("HSG.GPE.B.6"
+  "Find the point on a directed line segment between two given points that partitions the segment in a given ratio."
+ )
+ ("HSG.GPE.B.7"
+  "Use coordinates to compute perimeters of polygons and areas of triangles and rectangles, e.g., using the distance formula."
+ )
+ ("HSG.GMD.A"
+  "Explain volume formulas and use them to solve problems."
+ )
+ ("HSG.GMD.A.1"
+  "Give an informal argument for the formulas for the circumference of a circle, area of a circle, volume of a cylinder, pyramid, and cone."
+ )
+ ("HSG.GMD.A.2"
+  "Give an informal argument using Cavalieri's principle for the formulas for the volume of a sphere and other solid figures."
+ )
+ ("HSG.GMD.A.3"
+  "Use volume formulas for cylinders, pyramids, cones, and spheres to solve problems."
+ )
+ ("HSG.GMD.B"
+  "Visualize relationships between two-dimensional and three-dimensional objects."
+ )
+ ("HSG.GMD.B.4"
+  "Identify the shapes of two-dimensional cross-sections of three-dimensional objects, and identify three-dimensional objects generated by rotations of two-dimensional objects."
+ )
+ ("HSG.MG.A"
+  "Apply geometric concepts in modeling situations."
+ )
+ ("HSG.MG.A.1"
+  "Use geometric shapes, their measures, and their properties to describe objects."
+ )
+ ("HSG.MG.A.2"
+  "Apply concepts of density based on area and volume in modeling situations."
+ )
+ ("HSG.MG.A.3"
+  "Apply geometric methods to solve design problems."
+ )
  
  ;Old versions of standards below this line
  ("N-Q"
