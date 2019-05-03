@@ -19,7 +19,7 @@ Explore them to see where things are.
                  function-directives.rkt
                  make-workbook.rkt
   /lessons
-    /lessonX/langs/en-us/jened.adoc
+    /lessonX/langs/en-us/index.adoc
                          exercises/<recipe>.adoc
                          images/<picture>.jpg
                          workbook-pages/lesson-index.rkt
@@ -27,15 +27,20 @@ Explore them to see where things are.
                          workbook-pages/<page>.pdf
                          workbook-sols-pages/<page>.pdf
   /pathways
-    /pathwayX/langs/en-us/narrative.adoc
+    /pathwayX/langs/en-us/index.adoc
                           workbook-index.rkt
                           external-index.rkt
                           resources/<teacher-index>.adoc
 
 In particular, “lesson A” is in subdirectory `lessonA` inside
-`lessons`. The lesson plan is an `.adoc` file in
-`lessons/lessonA/langs/en-us` (it can have any filename, here
-`jened.adoc`).
+`lessons`. The lesson plan is the `index.adoc` file in
+`lessons/lessonA/langs/en-us`.
+
+(As a convenience, the lesson plan `.adoc` file can be
+named anything, e.g., `jened.adoc`. If there are multiple
+`.adoc` files, it is not reliably known which of them will be the
+narrative. However, a file `index.adoc`, if it exists, will
+definitely be the lesson plan.)
 
 The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
@@ -55,10 +60,17 @@ There are two pathways in the repo for now:
   pathways/bs-flags-pathway
 
 In a pathway’s directory, the pathway narrative is in
-`langs/en-us/narrative.adoc` (name can be anything). Alongside it, its
+`langs/en-us/index.adoc`.
+Alongside it, its
 index of lessons, in correct order, is in `workbook-index.rkt`.
 These lessons are drawn from the `lessons`
 tree.
+
+(As a convenience, the pathway narrative `.adoc` file can be
+named anything, e.g., `narrative.adoc`. If there are multiple
+`.adoc` files, it is not reliably known which of them will be the
+narrative. However, a file `index.adoc`, if it exists, will
+definitely be the narrative.)
 
 The top dir contains the script `build-pathway`. It takes any
 number of pathways and creates a generated document tree for eahc
@@ -286,7 +298,7 @@ Add the class `.physics-table` to a table attribute to generate a
 single-arg function
 table, e.g., one that maps miles driven to cost.
 
-Use 
+Use
 
    @lesson-description{... text ...}
 

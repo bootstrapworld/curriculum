@@ -308,10 +308,12 @@
 
         (let ((lessons-file "pathway-lessons.asc")
             (lessons-toc-file "pathway-lessons-toc.asc"))
-        (fprintf o "~nlink:./pathway-lessons.html[Lessons used in this pathway (single page)]~n")
+          (fprintf o "link:./pathway-lessons.html[Lessons Used in This Pathway (Single Page)]~n~n")
+          (fprintf o "link:./resources/index.html[Teacher Resources]~n~n")
+
         (call-with-output-file lessons-file
           (lambda (lo)
-            (fprintf lo "= Lessons used in this pathway~n~n")
+            (fprintf lo "= Lessons Used in This Pathway~n~n")
             (fprintf lo "include::~a[]~n~n" lessons-toc-file)
             (call-with-output-file lessons-toc-file
               (lambda (toco)
