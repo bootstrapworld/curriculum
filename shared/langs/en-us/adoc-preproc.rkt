@@ -200,7 +200,7 @@
         (snippet.adoc (path->string (path-replace-extension snippet ".adoc")))
         (snippet.html (path->string (path-replace-extension snippet ".html")))
         (snippet.pdf (path->string (path-replace-extension snippet ".pdf")))
-        (link-text (if (string=? link-text "") link-text (string-append link-text ", ")))
+        ;(link-text (if (string=? link-text "") link-text (string-append link-text ", ")))
         (pno "?")
         )
     (let loop ((i 0))
@@ -220,7 +220,9 @@
       (set! snippet.pdf (path-replace-extension f ".pdf"))
       (cond ((file-exists? snippet.html) (set! g (path-replace-extension g ".html")))
             ((file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))))
-      (format "link:{pathwayrootdir}~a[~aPage ~a]" g link-text pno))))
+      ;(format "link:{pathwayrootdir}~a[~aPage ~a]" g link-text pno)
+      (format "link:{pathwayrootdir}~a[~a]" g link-text)
+      )))
 
 (define (make-exercise-link lesson exer link-text include?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
@@ -236,7 +238,7 @@
           (else
             (format "link:{pathwayrootdir}~a[~a]" g link-text)))))
 
-(define (make-image lesson img opts)
+(define (make-image img opts)
   (let ((lesson (getenv "LESSON"))
         (opts (string-join opts ", ")))
     (if lesson
@@ -246,7 +248,8 @@
 
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
-        (link-text (if (string=? link-text "") link-text (string-append link-text ", "))))
+        ;(link-text (if (string=? link-text "") link-text (string-append link-text ", ")))
+        )
    (let loop ((i 0))
       (if (>= i *index-length*)
           (printf "Missing lesson in worksheet~a~n" lesson)
@@ -255,7 +258,9 @@
             (cond ((string=? lesson lesson2)
                    (set! pno (+ i 1)))
                   (else (loop (+ i 1)))))))
-    (format "link:{pathwayrootdir}lessons/~a/~a[~aPage ~a]" lesson file link-text pno)))
+    ;(format "link:{pathwayrootdir}lessons/~a/~a[~aPage ~a]" lesson file link-text pno)
+    (format "link:{pathwayrootdir}lessons/~a/~a[~a]" lesson file link-text)
+    ))
 
 (define *lesson-summary-file* #f)
 
@@ -313,7 +318,7 @@
 
         (let ((lessons-file "pathway-lessons.asc")
             (lessons-toc-file "pathway-lessons-toc.asc"))
-          (fprintf o "link:./pathway-lessons.html[Lessons Used in This Pathway (Single Page)]~n~n")
+          (fprintf o "~%link:./pathway-lessons.html[Lessons Used in This Pathway (Single Page)]~n~n")
           (fprintf o "link:./resources/index.html[Teacher Resources]~n~n")
 
         (call-with-output-file lessons-file
@@ -434,7 +439,7 @@
                                     args)))
                                ((string=? directive "image")
                                 (let ((args (read-commaed-group i)))
-                                  (display (make-image (getenv "LESSON") (car args) (cdr args)) o)))
+                                  (display (make-image (car args) (cdr args)) o)))
                                ((or (string=? directive "worksheet-link")
                                     (string=? directive "worksheet-include"))
                                 (let* ((include? (string=? directive "worksheet-include"))
