@@ -237,8 +237,12 @@
             (format "link:{pathwayrootdir}~a[~a]" g link-text)))))
 
 (define (make-image lesson img opts)
-  (format "image::{pathwayrootdir}lessons/~a/~a[~a]" lesson img
-          (string-join opts ", ")))
+  (let ((lesson (getenv "LESSON"))
+        (opts (string-join opts ", ")))
+    (if lesson
+        (format "image::{pathwayrootdir}lessons/~a/~a[~a]" lesson img
+                opts)
+        (format "image::~a[~a]" img opts))))
 
 (define (make-lesson-link lesson file link-text)
   (let ((pno "?")
@@ -565,7 +569,7 @@
           (set! glossary-items
             (sort glossary-items #:key car string-ci<=?))
           (fprintf op ".Glossary~%")
-          (fprintf op "[#glossary]~%")
+          (fprintf op "[.glossary]~%")
           (for-each
             (lambda (s)
               ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
