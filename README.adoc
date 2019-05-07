@@ -30,7 +30,7 @@ Explore them to see where things are.
     /pathwayX/langs/en-us/index.adoc
                           workbook-index.rkt
                           external-index.rkt
-                          resources/<teacher-index>.adoc
+                          resources/index.adoc
 
 In particular, “lesson A” is in subdirectory `lessonA` inside
 `lessons`. The lesson plan is the `index.adoc` file in
@@ -39,7 +39,7 @@ In particular, “lesson A” is in subdirectory `lessonA` inside
 (As a convenience, the lesson plan `.adoc` file can be
 named anything, e.g., `jened.adoc`. If there are multiple
 `.adoc` files, it is not reliably known which of them will be the
-narrative. However, a file `index.adoc`, if it exists, will
+lesson plan. However, a file `index.adoc`, if it exists, will
 definitely be the lesson plan.)
 
 The exercises associated with lesson A are alongside the lesson
@@ -84,14 +84,14 @@ shell completion) builds the subtree
 `distribution/pathwayP`.
 
    distribution/
-     pathwayX/langs/en-us/narrative.html
+     pathwayX/langs/en-us/index.html
                           pathway-lessons.html
                           lessons/
-                                 jened.html
+                                 index.html
                                  exercises/*.{html,pdf}
                                  workbook-pages/*.{html.pdf}
                           resources/
-                             <teacher-index>.html
+                             index.html
                              protected/
                                 workbook-sols.pdf
                           workbook/workbook.pdf
@@ -100,7 +100,7 @@ Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
 “protected” directory `resources/protected`.
 
-The web page `narrative.html` includes a link to
+The pathway narrative web page `index.html` includes a link to
 `pathway-lessons.html`, which contains all the lesson plans
 associated with the pathway, .
 
@@ -109,13 +109,13 @@ automatically triggers a build of all the pathways
 and showcases the resulting doctrees on the website
 https://bootstrapworld.github.io/curriculum.
 
-== jened sample doc
+== Sample lesson plan
 
 The following was reverse-engineered from the latest Google Docs
 mock-up of a lesson from Jen/Ed. Change this to reflect
 experience.
 
-link:distribution/lessons/lessonA/langs/en-us/jened.html[Sample
+link:distribution/lessons/lessonA/langs/en-us/index.html[Sample
 lesson plan]
 
 == Git basics
@@ -250,6 +250,10 @@ standalone PDFs that are typically printed, and any links in it
 would not be reachable anyway.)
 
 Use @image{images/pic.png} to insert the image `pic.png`.
+
+Use commas to add image options, e.g.,
+
+  @image{images/player-move.png, PlayerMovement, 400, align="center"}
 
 === Generic links
 

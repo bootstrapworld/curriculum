@@ -280,7 +280,8 @@
 
       (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
 
-        (fprintf o "~n.Lessons used in this pathway~n~n")
+        (fprintf o "~n.Lessons used in this pathway~n")
+        (fprintf o "[#lesson-list]~%")
         (for ((lesson lessons))
           (let ((lesson-title-file (format "./lessons/~a/index-title.txt" lesson))
                 (lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson))
@@ -299,11 +300,11 @@
                             (set! r (string-append r "\n" x))
                             (loop))))
                       r)))))
-            (fprintf o "link:./lessons/~a/index.html[~a]~n" lesson lesson-title)
+            (fprintf o "link:./lessons/~a/index.html[~a] ::" lesson lesson-title)
             (when lesson-description
-              (display ": " o)
               (display lesson-description o)
-              (newline o))
+              ;(newline o)
+              )
             (newline o)))
 
         (let ((lessons-file "pathway-lessons.asc")
@@ -546,8 +547,8 @@
     (cond ((getenv "LESSON")
            (accumulate-glossary-and-standards glossary-items standards-met))
           (else
-            (asciidoctor "index-glossary.asc")
-            (asciidoctor "index-standards.asc")))
+            (asciidoctor "-a title=Glossary index-glossary.asc")
+            (asciidoctor "-a title=Standards index-standards.asc")))
 
     (asciidoctor out-file)))
 
@@ -564,9 +565,12 @@
           (set! glossary-items
             (sort glossary-items #:key car string-ci<=?))
           (fprintf op ".Glossary~%")
+          (fprintf op "[#glossary]~%")
           (for-each
             (lambda (s)
-              (fprintf op "* *~a*: ~a~%" (car s) (cadr s)))
+              ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
+              (fprintf op "~a:: ~a~%" (car s) (cadr s))
+              )
             glossary-items)
           (fprintf op "~%~%")))
       #:exists 'replace)
@@ -576,14 +580,18 @@
           (set! standards-met
             (sort standards-met #:key car string-ci<=?))
           (fprintf op ".Standards Statements~%")
+          (fprintf op "[#standards]~%")
           (fprintf op "[.standards-hierarchical-table]~%")
           (for-each
             (lambda (s)
               (let ((sublist-items (unbox (cadr s)))
                     (s (caddr s)))
-                (fprintf op "* *~a*: ~a~%" (car s) (cadr s))
+                ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
+                (fprintf op "~a:: ~a~%" (car s) (cadr s))
                 (for-each (lambda (n)
-                            (fprintf op "** ~a~%" (list-ref s (+ n 1))))
+                            (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                            (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                            )
                           sublist-items)))
             standards-met)
           (fprintf op "~%~%")))
