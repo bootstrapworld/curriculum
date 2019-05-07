@@ -36,8 +36,8 @@
 |===
 |Building on (CCSS)
 |
-* 6.EE.B.5 @std{6.EE.B.5}
-* 6.EE.B.8 @std{6.EE.B.8}
+* @std{6.EE.B.5}
+* @std{6.EE.B.8}
 
 
 |CS Standards (CSTA)
@@ -60,14 +60,24 @@ Have students open the @link{https://www.wescheme.org/openEditor?publicId=48low6
 
 == Discuss: (5 min)
 
-* What is something you noticed about this program? _Answers will vary: Sam can me moved with the arrow keys, the coordinates are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
-* What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
-* How far can Sam go to the left and stay within Mom's view?  _Up to, but not beyond, an x of -40._
-* How can we state this boundary mathematically? _x >= -40 or x > -50_
+* *What is something you noticed about this program?* 
++
+_Sam can me moved with the arrow keys, the coordinates are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
+* *What do you see when Sam is at (0,0)?  Why is that?* 
++
+_You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
+* *How far can Sam go to the left and stay within Mom's view?*  
++
+_Up to, but not beyond, an x of -40._
+* *How can we state this boundary mathematically?* 
++
+_x >= -40 or x > -50_
 
 *Every time Sam moves, we want to check and see if Sam is safe.  This is a repetitive job, so it would make an excellent function!  Let's focus on keeping Sam safe on the left side first.*
 
-* What will the contract for `safe-left?` look like?  What does it need to take in?  What will it give back?  _`safe-left?` should take in a Number (the x-coordinate) and return a Boolean (true if Sam is safe, false if not)_
+* *What will the contract for `safe-left?` look like?  What does it need to take in?  What will it give back?*  
++
+_`safe-left?` should take in a Number (the x-coordinate) and return a Boolean (true if Sam is safe, false if not)_
 
 == Practice: (10 min)
 
@@ -77,9 +87,15 @@ Students will notice that their `safe-left?` function keeps Sam from disappearin
 
 == Discuss II: (10 min)
 
-* What does `safe-left?` do?  _Checks to see if x is greater than -50_
-* What does `safe-right?` do? _Checks to see if x is less than 490_
-* What does `onscreen?` do? _Answers may vary, let students discuss with each other_
+* *What does `safe-left?` do?*  
++
+_Checks to see if x is greater than -50_
+* *What does `safe-right?` do?*
++
+_Checks to see if x is less than 490_
+* *What does `onscreen?` do?* 
++
+_Answers may vary, let students drive the discussion!_
 
 *Recruit some student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?` while giving function calls to `onscreen?`*
 
@@ -123,5 +139,5 @@ Students use what they've learned to fix the `onscreen?` function and should now
 [.strategy-box]
 Extension Option
 ****
-What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?
+What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?  What functions would need to change?
 ****
