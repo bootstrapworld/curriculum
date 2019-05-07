@@ -10,7 +10,6 @@
 "CreatingFunctions2"
 "CreatingFunctions3"
 "FunctionApplications2"
-"ErrorAnalysis"
 "FunctionComposition3"
 "Inequalities"
 "Inequalities2"
