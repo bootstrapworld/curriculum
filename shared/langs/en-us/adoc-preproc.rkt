@@ -500,12 +500,13 @@
                                        (pdff (path-replace-extension adocf ".pdf"))
                                        (f adocf)
                                        )
+                                  ;(printf "doing @link of ~s~n" args)
                                   (cond ((file-exists? htmlf) (set! f htmlf))
                                         ((file-exists? pdff) (set! f pdff)))
 
                                   (fprintf o "link:~a[~a]" f
-                                           (if (= (length args) 1) ""
-                                               (string-trim-dq (cadr args))))))
+                                           (string-join
+                                             (map string-trim (cdr args)) ", "))))
                                ((string=? directive "lesson-description")
                                 (unless (getenv "LESSON")
                                   (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
@@ -562,6 +563,7 @@
     (asciidoctor out-file)))
 
 (define (asciidoctor file)
+  ;(printf "asciidoctor ~a~n" file)
   (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file)))
 
 (define (create-glossary-and-standards-subfiles glossary-items standards-met)
