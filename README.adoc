@@ -219,14 +219,14 @@ introduce a recipe to be debugged. See examples of such files,
 
 == Cross-references and pagination
 
-Both lesson plans and pathway narratives can refer to exercises
-or particular
+Both lesson plans and pathway narratives can refer to any files
+in any lessons, in particular, exercises
+or specific
 pages in a pathway workbook.  The relevant directive
 calls look like
 
   @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
   @worksheet-link{lessonA/workbook-pages/pageA2.pdf, link-text}
-  @worksheet-link{lessonA/jened.adoc, link-text}
 
 The final argument for link text is optional.
 
@@ -234,10 +234,23 @@ If called from a lesson plan for `lessonA`, the `lessonA/` may be
 dropped. Thus the first two examples can be rewritten:
 
   @worksheet-link{exercises/exerciseA1.html, link-text}
-  @worksheet-link{workpages/pageA2.pdf, link-text}
+  @worksheet-link{workpage-pages/pageA2.pdf, link-text}
 
-Except for exercises (which don't feature in the workbook unless
-you created a workbook page for them), the rendered link has its
+Arbitrary pages can be invoked:
+
+  @worksheet-link{lessonA/jened.adoc, link-text}
+
+This refers to `jened.adoc` in `lessonA`. Typically pages within
+the same lesson’s directory are used, in which case the `lessonA`
+may be replaced by a `.`:
+
+  @worksheet-link{./jened.adoc, link-text}
+
+Subdirectories can also be used:
+
+  @worksheet-link{./resources/jened.adoc, link-text}
+
+For pages known to be workbook pages, the rendered link has its
 link text (if any) augmented with a reference to the specific
 page number in the pathway worksheet.
 
