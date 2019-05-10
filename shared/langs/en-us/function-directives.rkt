@@ -6,9 +6,127 @@
 
 (define *solutions-mode?* (getenv "SOLUTIONS"))
 
+(define *div-nesting* 0)
+
 (define (ft-list-ref s i)
   (let ((n (length s)))
     (and (< i n) (list-ref s i))))
+
+(define (write-directions page-header funname directions)
+  (format "\n
+== ~a: ~a\n
+_**Directions**: ~a_
+" page-header
+          funname
+          directions))
+
+(define (write-purpose)
+  (format "\n
+=== Contract and Purpose Statement\n
+_Every contract has three parts..._\n
+
+[.wrapper]
+[.studentAnswer.blank.recipe_name]#MMMM# :
+[.studentAnswer.blank.recipe_domain]#MMMMMM# →
+[.studentAnswer.blank.recipe_range]#MMMMMM#
+
+[.studentAnswer.blank.recipe_purpose]#MMMMMMMMMMMMMMMMMMMMMMMMMM#
+
+"))
+
+(define (write-examples funname num-examples example-list buggy-example-list show-examples)
+  (string-append
+    (format "\n
+=== Examples\n
+_Write some examples, then circle and label what changes..._\n
+")
+    ;examples
+
+    (apply string-append
+           (cond [(and #t (cons? buggy-example-list))
+                  ;(printf "doing buggy-example-list ~s\n" buggy-example-list)
+                  (map (lambda (e)
+                         (write-each-example (caar e) (cdar e) (cadr e) #t))
+                       buggy-example-list) ]
+                 [else
+                   (let* ((example-list-len (length example-list))
+                          (num-blank-examples (- num-examples example-list-len)))
+                     (append
+                       (map (lambda (e s)
+                              (let* ((n (- (length e) 1))
+                                     (body (list-ref e n))
+                                     (parms (take e n)))
+                                (write-each-example funname parms body s)))
+                            example-list
+                            (append show-examples
+                                    (build-list (- example-list-len (length show-examples))
+                                                (lambda (i) #f))))
+                       (build-list num-blank-examples
+                                   (lambda (i)
+                                     (write-each-example funname '() '() #f)))))]
+                 ))
+    ))
+
+(define (write-each-example funname parms body show)
+    ;(printf "write-each-example ~s ~s ~s ~s\n" funname parms body show)
+    (let ((show-funname? #f)
+          (show-args? #f)
+          (show-body? #f))
+      (cond ((not show) #f)
+            ((not *solutions-mode?*) #f)
+            ((eqv? show #t)
+             (set! show-funname? #t)
+             (set! show-args? #t)
+             (set! show-body? #t))
+            ((list? show)
+             (set! show-funname? (list-ref show 0))
+             (set! show-args? (list-ref show 1))
+             (set! show-body? (list-ref show 2))))
+      (format "~n
+ (EXAMPLE (~a ~a) ~a)~n
+~n"
+              (if show-funname? funname "")
+              (if show-args?
+                  (apply string-append
+                         (let loop ((args parms) (r '()))
+                           (if (null? args) r
+                               (loop (cdr args) (cons (format " ~a" (car args)) r)))))
+                  "")
+              (if show-body?
+                  (format " ~a" body)
+                  ""))))
+
+(define (write-definition funname param-list body show-body?)
+  (string-append
+  (format "\n
+=== Definition\n
+_Write the definition, given variable names to all your input values..._\n
+ (define (~a ~a)
+" funname
+            (apply string-append
+                   (let loop ((params (reverse param-list)) (r '()))
+                     (if (null? params) r
+                         (loop (cdr params) (cons (format " ~a" (car params)) r)))))
+            )
+
+    (if (eqv? (car body) 'cond)
+        (apply string-append
+               (let loop ((clauses (cdr body))
+                          (r (list (format "   (~a~%"
+                                           (if show-body? "cond" "")))))
+                 (if (null? clauses) (reverse (cons (format "   )~%") r))
+                     (begin
+                       (loop (cdr clauses)
+                             (cons
+                               (format "     ~a~%"
+                                       (if show-body? (car clauses) "[]"))
+                               r))))))
+        (if show-body?
+            (format "   ~a~%" body)
+            ""))
+
+    (format " )~%~%")
+))
 
 (define (design-recipe-exercise funname directions
                                 #:page-header (page-header "Word Problem")
@@ -52,109 +170,15 @@
   (when (and (cons? example-list) (cons? buggy-example-list))
     (error 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
 
-  ;maybe this can be hoisted out?
-  (define (write-example funname parms body show)
-    ;(printf "write-example ~s ~s ~s ~s\n" funname parms body show)
-    (let ((show-funname? #f)
-          (show-args? #f)
-          (show-body? #f))
-      (cond ((not show) #f)
-            ((not *solutions-mode?*) #f)
-            ((eqv? show #t)
-             (set! show-funname? #t)
-             (set! show-args? #t)
-             (set! show-body? #t))
-            ((list? show)
-             (set! show-funname? (list-ref show 0))
-             (set! show-args? (list-ref show 1))
-             (set! show-body? (list-ref show 2))))
-      (format "~n
- (EXAMPLE (~a ~a) ~a)~n
-~n"
-              (if show-funname? funname "")
-              (if show-args?
-                  (apply string-append
-                         (let loop ((args parms) (r '()))
-                           (if (null? args) r
-                               (loop (cdr args) (cons (format " ~a" (car args)) r)))))
-                  "")
-              (if show-body?
-                  (format " ~a" body)
-                  "")))) ;end write-example
-
   (string-append
 
-    (format "\n
-== ~a: ~a\n
-_**Directions**: ~a_
-" page-header
-            funname
-            directions)
+    (write-directions page-header funname directions)
 
-    (format "\n
-=== Contract and Purpose Statement\n
-_Every contract has three parts..._\n
-")
+    (write-purpose)
 
-    (format "\n
-=== Examples\n
-_Write some examples, then circle and label what changes..._\n
-")
-    ;examples
+    (write-examples funname num-examples example-list buggy-example-list show-examples)
 
-    (apply string-append
-           (cond [(and #t (cons? buggy-example-list))
-                  ;(printf "doing buggy-example-list ~s\n" buggy-example-list)
-                  (map (lambda (e)
-                         (write-example (caar e) (cdar e) (cadr e) #t))
-                       buggy-example-list) ]
-                 [else
-                   (let* ((example-list-len (length example-list))
-                          (num-blank-examples (- num-examples example-list-len)))
-                     (append
-                       (map (lambda (e s)
-                              (let* ((n (- (length e) 1))
-                                     (body (list-ref e n))
-                                     (parms (take e n)))
-                                (write-example funname parms body s)))
-                            example-list
-                            (append show-examples
-                                    (build-list (- example-list-len (length show-examples))
-                                                (lambda (i) #f))))
-                       (build-list num-blank-examples
-                                   (lambda (i)
-                                     (write-example funname '() '() #f)))))]
-                 ))
-
-    (format "\n
-=== Definition\n
-_Write the definition, given variable names to all your input values..._\n
- (define (~a ~a)
-" funname
-            (apply string-append
-                   (let loop ((params (reverse param-list)) (r '()))
-                     (if (null? params) r
-                         (loop (cdr params) (cons (format " ~a" (car params)) r)))))
-            )
-
-
-    (if (eqv? (car body) 'cond)
-        (apply string-append
-               (let loop ((clauses (cdr body))
-                          (r (list (format "   (~a~%"
-                                           (if show-body? "cond" "")))))
-                 (if (null? clauses) (reverse (cons (format "   )~%") r))
-                     (begin
-                       (loop (cdr clauses)
-                             (cons
-                               (format "     ~a~%"
-                                       (if show-body? (car clauses) "[]"))
-                               r))))))
-        (if show-body?
-            (format "   ~a~%" body)
-            ""))
-
-    (format " )~%~%")
+    (write-definition funname param-list body show-body?)
 
     )
 

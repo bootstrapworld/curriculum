@@ -1,5 +1,5 @@
 (
-"FunctionComposition-WB1.adoc"
-"FunctionComposition-WB2.adoc"
-"FunctionComposition-WB3.adoc"
+"FunctionComposition3-WB1.adoc"
+"FunctionComposition3-WB2.adoc"
+"FunctionComposition3-WB3.adoc"
 )
