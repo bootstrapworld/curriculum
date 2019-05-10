@@ -19,7 +19,7 @@
 |Key Points for the Facilitator
 |
 * Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.  
-* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs and creates the interactive window that we see when we press the Run button!  
+* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we press the Run button!  
 
 |Prerequisites
 |
@@ -28,20 +28,28 @@
 
 |Materials
 |
-* https://docs.google.com/presentation/d/1s0pJgX0YEjM70wLPtJVAKikK3jv8AfNwZ30fxVBANhY/view[Google Slides]
-* Links to printables, activities, etc., go here
+* @link{https://docs.google.com/presentation/d/1s0pJgX0YEjM70wLPtJVAKikK3jv8AfNwZ30fxVBANhY/view, Google Slides}
+
 |===
 
 [.left-header,cols="20a,80a", stripes=none]
 |===
-|Math Standards (CCSS)
-|
-* MP.2 @std{MP.2} 
 
-
-|CS Standards (CSTA)
+|Addressing (CCSSM)
 |
-* CS Standards here.
+* @std{8.F.B}
+
+|Approaching (CCSSM)
+|
+* @std{HSF.LE.B}
+
+|Standards of Mathematical Practice
+|
+* @std{MP.2}
+
+|Bootstrap Benchmarks
+|
+* @std{BS-PL.3}
 |===
 
 
@@ -57,41 +65,57 @@ Show the following short clip on animation: @link{https://www.youtube.com/watch?
 * How does this apply to animation? _It's the basis for movies and animation, movies are just a large sequence of still images._
 * How might this apply to our game? _If we change image coordinates a little bit at a time, they will appear to move._
 
-== Explore: (10 min)
+== Discuss: (15 min)
 
-Have students open the Animal Sprint program (_link to program_) and investigate the program with their partner.  Remind students to examine the code as well as the interactive portion.  If students want to change parts of the code, they can!
+=== Role Play:
 
-[.strategy-box]
-.Strategies for English Language Learners
-****
-MLR
-****
+Select 3 student volunteers - one to be TARGET, one to be DANGER, and one to be called make-game, responsible for calling out the functions.  Start with just make-game and TARGET.
 
-== Discuss: (10 min)
+* TARGET moves a step to the left when they hear "update-target".
+* make-game can make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.  
 
-* *What did you notice about the movement of the animals?  What was changing about them?* 
+*How quickly can make-game get TARGET to move across the classroom?*
+
+After practicing with TARGET, add DANGER in.
+
+* DANGER takes a step to the right when they hear "update-danger".
+* make-game can make DANGER move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
+
+*How quickly can make-game get TARGET and DANGER to move across the room?*
+
+The student portraying make-game will have to call quickly to TARGET and DANGER, but it is very repetitive and tedious, and TARGET and DANGER won't be moving very fast!
+
+* *What did you notice about the movement of TARGET and DANGER?  What was changing about them?* 
 +
-_Answers will vary: two animals were moving horizontally, the farmer was moving vertically, the x-coordinates or y-coordinates were changing, movement was based on the key pressed, etc._
-* *How did you connect the movement of the animals to the code?* 
+_Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc.
+
+* *What would have happened if we'd added PLAYER?* 
 +
-_Answers may vary: The fastest animal had the highest speed value, etc._
-* *Were you able to move all three animals simultaneously?*
-+
-_It's difficult to move all three animals smoothly._
+_It would have been more difficult for our human "make-game" to move them all simultaneously._
+
 * *What jobs could we hand over to the computer to make it possible for us to play the game?* 
 +
-_The computer could handle automatically moving two of the animals for us, then we could control the movement of third._
+_The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
 
-== Practice (10 min)
+== Practice (15 min)
 
 Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.  
 
-Guide students as they complete the Design Recipe workbook pages for `update-danger` and transfer the code to their Game Template file.  
+Guide students as they complete the Design Recipe workbook page for `update-danger` and transfer the code to their Game Template file.  
 
-When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
+When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!  
 
-== Apply (10 min)
+== Apply (15 min)
 
 Have students complete the Design Recipe workbook page for `update-target` with their partner and transfer the code to their Game Template file.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
+
+[.strategy-box]
+.Extension Activities
+****
+Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want!  They should be sure to modify their purpose statements and examples if they change their functions.
+
+Want 2-D movement?  A supplemental lesson @link{https://www.bootstrapworld.org/materials/spring2019/courses/algebra/en-us/units/Supplemental/index.html#lesson_Structs, linked here} provides information on how to modify these functions to allow movement in the x _and_ y directions!
+****
+****
 
 
