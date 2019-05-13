@@ -16,26 +16,30 @@ a[href] {
   text-decoration: none;
 }
 
-.sect1{ clear: both; }
-.glossary dt {
-  font-size: 18px;
-  font-weight: 700;
+.glossary {
   float: left;
-  clear: left;
+  margin-bottom: 20px;
 }
+.glossary * { display: inline; }
+.glossary .title { 
+  display: block;
+  font-weight: bold;
+  color: inherit;
+  font-size: 1.5em;
+ }
 .glossary dt::after{content: '::'; margin: 0px 5px;}
 
 .glossary dd {
-  float: left;
   margin-bottom: 0px;
   margin-left: 0px;
 }
-.glossary dd p {display: inline; margin-bottom: 0px;}
+.glossary dd::after{content: '\A'; white-space: pre; }
 
 .standards-table thead {
   background-color: #bb29ff;
 }
 
+.sect1{ clear: both; border-top: solid 3px black;}
 #lesson-list div.title{
   font-family: inherit;
   font-style: inherit;
@@ -55,6 +59,14 @@ a[href] {
   font-weight: bold;
 }
 
+.sect2 { float: left; clear: both; }
+.sect2 h3 { 
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+  background: #b7d89361;
+  padding: 5px;
+ }
 .physics-table {
   margin-left: auto;
   margin-right: auto;
@@ -97,13 +109,11 @@ a[href] {
   color: #1a73b5;
 }
 
-table {
-  border: 3px solid #7747a5 !important;
+#preamble table, #preamble td, #preamble th {
+  border: 1px solid #7747a5;
 }
 
-td, th {
-  border: 2px solid #7747a5 !important;
-}
+#preamble ul p {margin: 0px}
 
 .blank {
   color: rgba(0,0,0,0);
