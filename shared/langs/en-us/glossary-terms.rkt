@@ -37,7 +37,7 @@ when it prints out the glossary for a particular unit
     ("data science" "the study of using data to answer questions about the world")
     (("dataset" "datasets") "a collection of related information that is composed of separate elements, but can be manipulated as a unit by a computer")
     ("data structure" "a datatype which packages several datatypes as fields")   
-    ("data type" "a way of classifying values, such as: Number, String, Image, Boolean, or any use`defined data structure")
+    ("data type" "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
     ("datatypes" "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
     ("define" "associate a descriptive name with a value")
     ("definitions area" "the text box in the Editor, where definitions for values and functions are written")
