@@ -118,12 +118,25 @@
     (if (eof-object? c) #f
         (char=? c #\=))))
 
+(define (display-section-markup i o)
+  (let ((section-level
+          (let loop ((section-level 1))
+            (let ((c (peek-char i)))
+              (cond ((eof-object? c) section-level)
+                    ((char=? c #\=) (read-char i) (loop (+ section-level 1)))
+                    (else section-level))))))
+    (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
+    (let loop ((section-level section-level))
+      (unless (<= section-level 0)
+        (display #\= o) (loop (- section-level 1))))))
+
 (define (display-title i o)
   (let ((title (string-trim (read-line i))))
     (call-with-output-file "index-title.txt"
       (lambda (o)
         (display title o) (newline o))
       #:exists 'replace)
+    (fprintf o "[.lesson-title]~n")
     (display #\= o) (display #\space o) (display title o) (newline o)))
 
 (define (display-lesson-description desc o)
@@ -560,7 +573,9 @@
                                       (set! first-subsection-reached? #t)
                                       (include-glossary-and-standards-files o #f))
                                      (else #f))
-                               (display c o))
+                               (display-section-markup i o)
+                               ;(display c o)
+                               )
                              (else
                                (set! title-reached? #t)
                                (display-title i o))))

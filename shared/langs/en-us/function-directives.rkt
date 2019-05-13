@@ -30,7 +30,7 @@ _Every contract has three parts..._\n
 [.studentAnswer.blank.recipe_domain]#MMMMMM# →
 [.studentAnswer.blank.recipe_range]#MMMMMM#
 
-[.studentAnswer.blank.recipe_purpose]#MMMMMMMMMMMMMMMMMMMMMMMMMM#
+[.studentAnswer.blank.recipe_purpose]#MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM#
 
 "))
 
