@@ -185,8 +185,8 @@
   (newline o)
   (newline o)
   (cond (pathway?
-          (fprintf o "link:./index-glossary.html[Glossary]~%~%")
-          (fprintf o "link:./index-standards.html[Standards]~%~%"))
+          (fprintf o "link:./index-glossary.html[Glossary for This Pathway]~%~%")
+          (fprintf o "link:./index-standards.html[Standards in This Pathway]~%~%"))
         (else
           (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
           ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
@@ -297,13 +297,11 @@
       ;(printf "link-to-lessons-in-pathway~n")
       (include-glossary-and-standards-files o #t)
 
-      (fprintf o "~n.Workbooks~n[verse]~n")
-      (fprintf o "link:./workbook/workbook.pdf[Student Workbook]~n")
-      (fprintf o "link:./resources/protected/workbook-sols.pdf[Teacher Workbook]~n")
-
       (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
 
-        (fprintf o "~n.Lessons used in this pathway~n")
+        (fprintf o "~n.Lessons Used in This Pathway (")
+        (fprintf o "link:./pathway-lessons.html[Single Page]")
+        (fprintf o ")~n")
         (fprintf o "[#lesson-list]~%")
         (for ((lesson lessons))
           (let ((lesson-title-file (format "./lessons/~a/index-title.txt" lesson))
@@ -331,68 +329,66 @@
             (newline o)))
 
         (let ((lessons-file "pathway-lessons.asc")
-            (lessons-toc-file "pathway-lessons-toc.asc"))
-          (fprintf o "~%link:./pathway-lessons.html[Lessons Used in This Pathway (Single Page)]~n~n")
-          (fprintf o "link:./resources/index.html[Teacher Resources]~n~n")
+              (lessons-toc-file "pathway-lessons-toc.asc"))
 
-        (call-with-output-file lessons-file
-          (lambda (lo)
-            (fprintf lo "= Lessons Used in This Pathway~n~n")
-            (fprintf lo "include::~a[]~n~n" lessons-toc-file)
-            (call-with-output-file lessons-toc-file
-              (lambda (toco)
-                (fprintf toco "[verse]~n")
-                (for ((lesson lessons))
-                  (let ((lesson-glossary-file
-                          (format "./lessons/~a/~a" lesson lesson-glossary-accumulator))
-                        (lesson-standards-file
-                          (format "./lessons/~a/~a" lesson lesson-standards-accumulator)))
+          (call-with-output-file lessons-file
+            (lambda (lo)
+              (fprintf lo "= Lessons Used in This Pathway~n~n")
+              (fprintf lo "include::~a[]~n~n" lessons-toc-file)
+              (call-with-output-file lessons-toc-file
+                (lambda (toco)
+                  (fprintf toco "[verse]~n")
+                  (for ((lesson lessons))
+                    (let ((lesson-glossary-file
+                            (format "./lessons/~a/~a" lesson lesson-glossary-accumulator))
+                          (lesson-standards-file
+                            (format "./lessons/~a/~a" lesson lesson-standards-accumulator)))
 
-                    (when (file-exists? lesson-glossary-file)
-                      (call-with-input-file lesson-glossary-file
-                        (lambda (i)
-                          (let loop ()
-                            (let ((x (read i)))
-                              (unless (eof-object? x)
-                                (let ((s (assoc-glossary x *glossary-list*)))
-                                  (cond (s (unless (member s glossary-items)
-                                             (set! glossary-items
-                                               (cons s glossary-items))))))
-                                (loop)))))))
-                    ;(printf "took care of pw glossary~n")
+                      (when (file-exists? lesson-glossary-file)
+                        (call-with-input-file lesson-glossary-file
+                          (lambda (i)
+                            (let loop ()
+                              (let ((x (read i)))
+                                (unless (eof-object? x)
+                                  (let ((s (assoc-glossary x *glossary-list*)))
+                                    (cond (s (unless (member s glossary-items)
+                                               (set! glossary-items
+                                                 (cons s glossary-items))))))
+                                  (loop)))))))
+                      ;(printf "took care of pw glossary~n")
 
-                    (when (file-exists? lesson-standards-file)
-                      (call-with-input-file lesson-standards-file
-                        (lambda (i)
-                          (let loop ()
-                            (let ((x (read i)))
-                              (unless (eof-object? x)
-                                (let* ((s (assoc-standards x *standards-list*))
-                                       (sublist-item (list-ref s 0))
-                                       (c (list-ref s 1)))
-                                  (cond (c (let ((std (list-ref c 0)))
-                                             (cond ((assoc std standards-met) =>
-                                                    (lambda (c0)
-                                                      (when sublist-item
-                                                        (let ((sublist-items (list-ref c0 1)))
-                                                          (box-add-new! sublist-item sublist-items)))))
-                                                   (else
-                                                     (let ((sublist-items
-                                                             (box (if sublist-item
-                                                                      (list sublist-item)
-                                                                      '()))))
-                                                       (set! standards-met
-                                                         (cons (list std sublist-items c)
-                                                               standards-met)))))))))
-                                (loop)))))))
+                      (when (file-exists? lesson-standards-file)
+                        (call-with-input-file lesson-standards-file
+                          (lambda (i)
+                            (let loop ()
+                              (let ((x (read i)))
+                                (unless (eof-object? x)
+                                  (let* ((s (assoc-standards x *standards-list*))
+                                         (sublist-item (list-ref s 0))
+                                         (c (list-ref s 1)))
+                                    (cond (c (let ((std (list-ref c 0)))
+                                               (cond ((assoc std standards-met) =>
+                                                      (lambda (c0)
+                                                        (when sublist-item
+                                                          (let ((sublist-items (list-ref c0 1)))
+                                                            (box-add-new! sublist-item sublist-items)))))
+                                                     (else
+                                                       (let ((sublist-items
+                                                               (box (if sublist-item
+                                                                        (list sublist-item)
+                                                                        '()))))
+                                                         (set! standards-met
+                                                           (cons (list std sublist-items c)
+                                                                 standards-met)))))))))
+                                  (loop)))))))
 
-                    ;(printf "took care of pw stds~n")
+                      ;(printf "took care of pw stds~n")
 
-                    (fprintf lo "[[~a]]~n" lesson)
-                    (fprintf toco "<<~a>>~n" lesson)
-                    (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
-                             lesson)))) #:exists 'replace))
-          #:exists 'replace)
+                      (fprintf lo "[[~a]]~n" lesson)
+                      (fprintf toco "<<~a>>~n" lesson)
+                      (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
+                               lesson)))) #:exists 'replace))
+            #:exists 'replace)
         ;(printf "calling preproc-n-asciidoctor on grouped lessons~n")
         ;(preproc-n-asciidoctor lessons-file #:auxfile #t)
         (asciidoctor lessons-file)
@@ -553,6 +549,10 @@
                                 (unless (getenv "NARRATIVE")
                                   (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
                                 (link-to-lessons-in-pathway o))
+                               ((string=? directive "solutions-workbook")
+                                (unless (getenv "TEACHER_RESOURCES")
+                                  (error 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
+                                (fprintf o "link:./protected/workbook-sols.pdf[Teacher Workbook]"))
                                ((assoc directive *macro-list*) =>
                                 (lambda (s)
                                   (display (cadr s) o)))
@@ -588,7 +588,13 @@
                         (display c o)))
                   (loop)))))
             (when (getenv "NARRATIVE")
-              (link-to-lessons-in-pathway o))
+              (link-to-lessons-in-pathway o)
+
+              (fprintf o "~nlink:./workbook/workbook.pdf[Student Workbook]~n")
+
+              (fprintf o "~nlink:./resources/index.html[Teacher Resources]~n")
+
+              )
             )
           #:exists 'replace)))
 

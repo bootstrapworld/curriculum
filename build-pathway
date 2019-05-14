@@ -1,4 +1,4 @@
-# last modified 2019-05-03
+# last modified 2019-05-14
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -141,7 +141,9 @@ buildpathway() {
         echo WARNING: No teacher resource files in pathway $PATHWAY
       else
         export PATHWAYROOTDIR="../"
+        export TEACHER_RESOURCES=1
         $PROGDIR/adoc-preproc.rkt *.adoc
+        unset TEACHER_RESOURCES
         if test ! -f index.html; then
           for g in *.adoc; do
             cp -p ${g%.adoc}.html index.html
@@ -174,12 +176,12 @@ buildpathway() {
       # there should be only one?
       echo building pathway narrative from *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
+      unset NARRATIVE
       if test ! -f index.html; then
         for g in *.adoc; do
           cp -p ${g%.adoc}.html index.html
         done
       fi
-      unset NARRATIVE
       #rm *.adoc[23]
     fi
 

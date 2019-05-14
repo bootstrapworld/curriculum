@@ -23,7 +23,6 @@ Explore them to see where things are.
                          exercises/<recipe>.adoc
                          images/<picture>.jpg
                          workbook-pages/lesson-index.rkt
-                         workbook-pages/lesson-sols-index.rkt
                          workbook-pages/<page>.pdf
                          workbook-sols-pages/<page>.pdf
   /pathways
@@ -54,10 +53,11 @@ when creating the teacher version of the lesson pages. They use
 the same filename as the “student” pages they replace. Only pages
 that differ between the two versions need be supplied.
 
-There are two pathways in the repo for now:
+There are three pathways in the repo for now:
 
   pathways/pathwayP
   pathways/bs-flags-pathway
+  pathways/bs-game-pathway
 
 In a pathway’s directory, the pathway narrative is in
 `langs/en-us/index.adoc`.
@@ -72,8 +72,17 @@ named anything, e.g., `narrative.adoc`. If there are multiple
 narrative. However, a file `index.adoc`, if it exists, will
 definitely be the narrative.)
 
+The pathway directory contains a subdirectory `resources`, where
+`index.adoc` is the source for the Teacher Resouces page.
+
+(As a convenience, the teacher resources `.adoc` file can be
+named anything, e.g., `teacher-resources.adoc`. If there are multiple
+`.adoc` files, it is not reliably known which of them will be the
+teacher resources page. However, a file `index.adoc`, if it exists, will
+definitely be chosen for the teacher resources page.)
+
 The top dir contains the script `build-pathway`. It takes any
-number of pathways and creates a generated document tree for eahc
+number of pathways and creates a generated document tree for each
 of them under the `distribution` directory. If no argument is
 supplied, `build-pathway generates documents for every pathway in
 `pathways`.
@@ -102,7 +111,10 @@ in the `workbook` directory; and another for teachers in the
 
 The pathway narrative web page `index.html` includes a link to
 `pathway-lessons.html`, which contains all the lesson plans
-associated with the pathway, .
+associated with the pathway. It also points to the student
+workbook PDF. (The teacher, or solutions, workbook, can be
+referred to in the teacher resources page with the directive
+`@solutions-workbook`.) 
 
 As a convenience, a `git push` into the `master` branch
 automatically triggers a build of all the pathways
