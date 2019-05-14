@@ -1,6 +1,5 @@
 (
 "CoverPageAttributePage.pdf"
-"ReverseEngineerGame1.pdf"
-"ReverseEngineerGame2.pdf"
+"ReverseEngineerGame.pdf"
 "Estimation.pdf"
 )
