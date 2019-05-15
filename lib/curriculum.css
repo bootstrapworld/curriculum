@@ -1,5 +1,6 @@
 @import url("./asciidoctor.css");
 
+/** Override AsciiDoctor CSS defaults **/
 body{
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   color: #75328A;
@@ -11,11 +12,14 @@ h1 {
   font-family: sans-serif;
 }
 
+.ulist p {margin: 0px;}
+
 a[href] {
   color: #F4AB3A;
   text-decoration: none;
 }
 
+/*  RULES FOR GLOSSARY ITEMS  */
 .glossary {
   float: left;
   margin-bottom: 20px;
@@ -35,14 +39,22 @@ a[href] {
 }
 .glossary dd::after{content: '\A'; white-space: pre; }
 
+
+/*  RULES FOR THE PATHWAY PAGE  */
+#lesson-list dt { margin-bottom: 0px; }
+#lesson-list dd { margin-bottom: 0px; }
+#lesson-list p { margin-bottom: 15px; }
+
+
 .standards-table thead {
   background-color: #bb29ff;
 }
 
-.sect1{ clear: both; border-top: solid 3px black;}
+.lesson-section-1{ clear: both; border-top: solid 3px black;}
 #lesson-list div.title{
   font-family: inherit;
   font-style: inherit;
+  font-size: larger;
   color: inherit;
   font-weight: bold;
 }
@@ -59,8 +71,8 @@ a[href] {
   font-weight: bold;
 }
 
-.sect2 { float: left; clear: both; }
-.sect2 h3 { 
+.lesson-section-2 { float: left; clear: both; }
+.lesson-section-2 h3 { 
   font-size: 1em;
   font-style: italic;
   font-weight: 600;
