@@ -1,6 +1,6 @@
 (
 "FastFunctions1.pdf"
-"MappingExamplesCOE.pdf"
+"MappingExamplesWithCoE1.pdf"
 "FastFunctions2.pdf"
-"MappingExamplesCOE.pdf"
+"MappingExamplesWithCoE2.pdf"
 )
