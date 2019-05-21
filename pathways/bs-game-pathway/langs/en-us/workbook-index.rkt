@@ -10,7 +10,6 @@
  "DefiningFunctions2"
  "DefiningFunctions3"
  "FunctionApplications2"
- "FunctionComposition3"
  "Inequalities"
  "Inequalities2"
  "PiecewiseFunctions"
