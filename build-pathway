@@ -32,7 +32,9 @@ buildworkbookpages() {
   cd $L
   export LESSON=$L
   cp -pr workbook-pages solutions-pages
-  cp -pr exercises exercises-sols
+  if test -d exercises; then
+    cp -pr exercises exercises-sols
+  fi
   for f in workbook-sols-pages/*; do
     if test -f $f; then
       cp -p $f solutions-pages
