@@ -6,11 +6,28 @@
 
 (define *solutions-mode?* (getenv "SOLUTIONS"))
 
+(define *show-funname-contract?* #f)
+(define *show-domains?* #f)
+(define *show-range?* #f)
+(define *show-purpose?* #f)
+(define *show-examples* #f)
+(define *show-funname-defn?* #f)
+(define *show-params?* #f)
+(define *show-body?* #f)
+
 (define *div-nesting* 0)
 
 (define (ft-list-ref s i)
   (let ((n (length s)))
     (and (< i n) (list-ref s i))))
+
+(define (encoded-ans style s show?)
+  (format "[.studentAnswer.~a.~a]##~a##"
+          (if show? "solution" "blank")
+          style
+          (if show? s
+              (let ((n (string-length (if (string? s) s (format "~a" s)))))
+                (make-string n #\M)))))
 
 (define (write-directions page-header funname directions)
   (format "\n
@@ -20,21 +37,29 @@ _**Directions**: ~a_
           funname
           directions))
 
-(define (write-purpose)
+(define (write-purpose funname domain-list range purpose)
   (format "\n
 === Contract and Purpose Statement\n
 _Every contract has three parts..._\n
 
 [.wrapper]
-[.studentAnswer.blank.recipe_name]#MMMM# :
-[.studentAnswer.blank.recipe_domain]#MMMMMM# →
-[.studentAnswer.blank.recipe_range]#MMMMMM#
+~a :
+~a →
+~a
 
-[.studentAnswer.blank.recipe_purpose]#MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM#
+~a
 
-"))
+"
+          (encoded-ans "recipe_name" funname *show-funname-defn?*)
+          (encoded-ans "recipe_domain" (list-to-string domain-list) *show-domains?*)
+          (encoded-ans "recipe_range" range *show-range?*)
 
-(define (write-examples funname num-examples example-list buggy-example-list show-examples)
+          (encoded-ans "recipe_purpose" purpose *show-purpose?*)
+
+          ))
+
+(define (write-examples funname num-examples example-list buggy-example-list)
+  ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
     (format "\n
 === Examples\n
@@ -58,9 +83,14 @@ _Write some examples, then circle and label what changes..._\n
                                      (parms (take e n)))
                                 (write-each-example funname parms body s)))
                             example-list
-                            (append show-examples
-                                    (build-list (- example-list-len (length show-examples))
-                                                (lambda (i) #f))))
+                            (cond ((eq? *show-examples* #t)
+                                   (build-list example-list-len (lambda (i) #t)))
+                                  ((eq? *show-examples* #f)
+                                   (build-list example-list-len (lambda (i) #f)))
+                                  (else
+                                    (append *show-examples*
+                                            (build-list (- example-list-len (length *show-examples*))
+                                                        (lambda (i) #f))))))
                        (build-list num-blank-examples
                                    (lambda (i)
                                      (write-each-example funname '() '() #f)))))]
@@ -68,64 +98,70 @@ _Write some examples, then circle and label what changes..._\n
     ))
 
 (define (write-each-example funname parms body show)
-    ;(printf "write-each-example ~s ~s ~s ~s\n" funname parms body show)
-    (let ((show-funname? #f)
-          (show-args? #f)
-          (show-body? #f))
-      (cond ((not show) #f)
-            ((not *solutions-mode?*) #f)
-            ((eqv? show #t)
-             (set! show-funname? #t)
-             (set! show-args? #t)
-             (set! show-body? #t))
-            ((list? show)
-             (set! show-funname? (list-ref show 0))
-             (set! show-args? (list-ref show 1))
-             (set! show-body? (list-ref show 2))))
-      (format "~n
- (EXAMPLE (~a ~a) ~a)~n
+  ;(printf "write-each-example ~s ~s ~s ~s\n" funname parms body show)
+  (let ((show-funname? #f)
+        (show-args? #f)
+        (show-body? #f))
+    (cond ((not show) #f)
+          ((not *solutions-mode?*) #f)
+          ((eqv? show #t)
+           (set! show-funname? #t)
+           (set! show-args? #t)
+           (set! show-body? #t))
+          ((list? show)
+           (set! show-funname? (list-ref show 0))
+           (set! show-args? (list-ref show 1))
+           (set! show-body? (list-ref show 2))))
+    (format "~n
+[.wrapper]
+(EXAMPLE (~a ~a) ~a)~n
+[.clear]## ##
 ~n"
-              (if show-funname? funname "")
-              (if show-args?
-                  (apply string-append
-                         (let loop ((args parms) (r '()))
-                           (if (null? args) r
-                               (loop (cdr args) (cons (format " ~a" (car args)) r)))))
-                  "")
-              (if show-body?
-                  (format " ~a" body)
-                  ""))))
+            (encoded-ans "recipe_name" funname show-funname? )
+            (encoded-ans "recipe_example_inputs" (list-to-string parms) show-args?)
+            (encoded-ans "recipe_example_body" body show-body?)
 
-(define (write-definition funname param-list body show-body?)
+            )))
+
+(define (list-to-string xx)
+  (apply string-append
+         (reverse
+           (let loop ((xx xx) (r '()))
+             (if (null? xx) r
+                 (loop (cdr xx) (cons (format " ~a" (car xx)) r)))))))
+
+(define (write-definition funname param-list body)
   (string-append
   (format "\n
 === Definition\n
 _Write the definition, given variable names to all your input values..._\n
- (define (~a ~a)
-" funname
-            (apply string-append
-                   (let loop ((params (reverse param-list)) (r '()))
-                     (if (null? params) r
-                         (loop (cdr params) (cons (format " ~a" (car params)) r)))))
+
+[.wrapper]
+(define (
+~a
+~a)
+"
+            (encoded-ans "recipe_name" funname *show-funname-defn?*)
+            (encoded-ans "recipe_variables" (list-to-string param-list) *show-params?*)
+
             )
 
     (if (eqv? (car body) 'cond)
         (apply string-append
                (let loop ((clauses (cdr body))
-                          (r (list (format "   (~a~%"
-                                           (if show-body? "cond" "")))))
-                 (if (null? clauses) (reverse (cons (format "   )~%") r))
+                          (r (list (format "[.clear]## ##(~a~%"
+                                           (encoded-ans "recipe_cond" "cond" *show-body?*)))))
+                 (if (null? clauses) (reverse (cons (format ")~%") r))
                      (begin
                        (loop (cdr clauses)
                              (cons
-                               (format "     ~a~%"
-                                       (if show-body? (car clauses) "[]"))
+                               (format "[.clear]## ##~a~%"
+                                       (encoded-ans "recipe_body" (car clauses) *show-body?*))
                                r))))))
-        (if show-body?
-            (format "   ~a~%" body)
-            ""))
+        (format "[.clear]## ##~a" (encoded-ans "recipe_body" body *show-body?*))
+        )
 
-    (format " )~%~%")
+    (format ")~%~%")
 ))
 
 (define (design-recipe-exercise funname directions
@@ -153,15 +189,24 @@ _Write the definition, given variable names to all your input values..._\n
                                 #:lang (lang 'racket)
                                 )
 
-  (when *solutions-mode?*
-    (set! show-funname-contract? #f)
-    (set! show-domains? #f)
-    (set! show-range? #f)
-    (set! show-purpose? #f)
-    (set! show-examples #f)
-    (set! show-funname-defn? #f)
-    (set! show-params? #f)
-    (set! show-body? #f)
+  (set! *show-funname-contract?* show-funname-contract?)
+  (set! *show-domains?* show-domains?)
+  (set! *show-range?* show-range?)
+  (set! *show-purpose?* show-purpose?)
+  (set! *show-examples* show-examples)
+  (set! *show-funname-defn?* show-funname-defn?)
+  (set! *show-params?* show-params?)
+  (set! *show-body?* show-body?)
+
+  (unless *solutions-mode?*
+    (set! *show-funname-contract?* #f)
+    (set! *show-domains?* #f)
+    (set! *show-range?* #f)
+    (set! *show-purpose?* #f)
+    (set! *show-examples* #f)
+    (set! *show-funname-defn?* #f)
+    (set! *show-params?* #f)
+    (set! *show-body?* #f)
     )
 
   ;(printf "d-r-e body= ~s\n" body)
@@ -174,11 +219,11 @@ _Write the definition, given variable names to all your input values..._\n
 
     (write-directions page-header funname directions)
 
-    (write-purpose)
+    (write-purpose funname domain-list range purpose)
 
-    (write-examples funname num-examples example-list buggy-example-list show-examples)
+    (write-examples funname num-examples example-list buggy-example-list)
 
-    (write-definition funname param-list body show-body?)
+    (write-definition funname param-list body)
 
     )
 

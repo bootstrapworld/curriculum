@@ -243,7 +243,9 @@
 
 (define (make-exercise-link lesson exer link-text include?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
-  (let* ((g (string-append "lessons/" lesson "/exercises/" exer))
+  (let* ((solutions-mode? (getenv "SOLUTIONS"))
+         (g (string-append "lessons/" lesson
+                           (if solutions-mode? "/exercises-sols/" "/exercises/") exer))
          (f (string-append *pathway-root-dir* g))
          (exer.asc (path-replace-extension f ".asc"))
          (exer.html (path-replace-extension f ".html"))
