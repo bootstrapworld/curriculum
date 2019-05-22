@@ -115,11 +115,12 @@ _Write some examples, then circle and label what changes..._\n
     (format "~n
 [.wrapper]
 (EXAMPLE (~a ~a) ~a)~n
-[.clear]## ##
+~a
 ~n"
             (encoded-ans "recipe_name" funname show-funname? )
             (encoded-ans "recipe_example_inputs" (list-to-string parms) show-args?)
             (encoded-ans "recipe_example_body" body show-body?)
+            (write-clear)
 
             )))
 
@@ -149,20 +150,31 @@ _Write the definition, given variable names to all your input values..._\n
     (if (eqv? (car body) 'cond)
         (apply string-append
                (let loop ((clauses (cdr body))
-                          (r (list (format "[.clear]## ##(~a~%"
+                          (r (list (format "~a(~a~%"
+                                           (write-clear)
                                            (encoded-ans "recipe_cond" "cond" *show-body?*)))))
-                 (if (null? clauses) (reverse (cons (format ")~%") r))
-                     (begin
-                       (loop (cdr clauses)
-                             (cons
-                               (format "[.clear]## ##~a~%"
-                                       (encoded-ans "recipe_body" (car clauses) *show-body?*))
-                               r))))))
-        (format "[.clear]## ##~a" (encoded-ans "recipe_body" body *show-body?*))
+                 (if (null? clauses)
+                     (reverse (cons (format ")~%") r))
+                     (loop (cdr clauses)
+                           (cons
+                             (format "~a{startsb}~a{endsb}~%"
+                                     (write-clear)
+                                     (write-cond-clause (car clauses) *show-body?*))
+                             r)))))
+        (format "~a~a" (write-clear) (encoded-ans "recipe_body" body *show-body?*))
         )
 
     (format ")~%~%")
 ))
+
+(define (write-clear)
+  "[.clear]## ##")
+
+(define (write-cond-clause clause show?)
+  ;(printf "doing write-cond-clause ~a ~a\n" clause show?)
+  (string-append (encoded-ans "questions" (car clause) show?)
+                 " "
+                 (encoded-ans "answers" (list-to-string (cdr clause)) show?)))
 
 (define (design-recipe-exercise funname directions
                                 #:page-header (page-header "Word Problem")
