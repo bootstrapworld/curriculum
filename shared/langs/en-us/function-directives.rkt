@@ -22,7 +22,7 @@
     (and (< i n) (list-ref s i))))
 
 (define (encoded-ans style s show?)
-  (format "[.studentAnswer.~a.~a]##~a##"
+  (format "[.studentAnswer.~a~a]##~a##"
           (if show? "solution" "blank")
           style
           (if show? s
@@ -32,39 +32,35 @@
 (define (write-directions page-header funname directions)
   (format "\n
 == ~a: ~a\n
-_**Directions**: ~a_
-" page-header
+_**Directions**: ~a_\n\n"
+          page-header
           funname
           directions))
 
 (define (write-purpose funname domain-list range purpose)
-  (format "\n
+  (string-append
+    (format "\n
 === Contract and Purpose Statement\n
-_Every contract has three parts..._\n
-
-[.wrapper]
-~a :
-~a →
-~a
-
-~a
-
-"
-          (encoded-ans "recipe_name" funname *show-funname-defn?*)
-          (encoded-ans "recipe_domain" (list-to-string domain-list) *show-domains?*)
-          (encoded-ans "recipe_range" range *show-range?*)
-
-          (encoded-ans "recipe_purpose" purpose *show-purpose?*)
-
-          ))
+_Every contract has three parts..._\n\n")
+    (write-wrapper ".recipe_graf"
+      (lambda ()
+        (string-append
+          (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+          " : "
+          (encoded-ans ".recipe_domain" (list-to-string domain-list) *show-domains?*)
+          " → "
+          (encoded-ans ".recipe_range" range *show-range?*))))
+    ;(write-clear)
+    (write-wrapper ".recipe_graf"
+      (lambda ()
+        (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
     (format "\n
 === Examples\n
-_Write some examples, then circle and label what changes..._\n
-")
+_Write some examples, then circle and label what changes..._\n\n")
     ;examples
 
     (apply string-append
@@ -112,17 +108,19 @@ _Write some examples, then circle and label what changes..._\n
            (set! show-funname? (list-ref show 0))
            (set! show-args? (list-ref show 1))
            (set! show-body? (list-ref show 2))))
-    (format "~n
-[.wrapper]
-(EXAMPLE (~a ~a) ~a)~n
-~a
-~n"
-            (encoded-ans "recipe_name" funname show-funname? )
-            (encoded-ans "recipe_example_inputs" (list-to-string parms) show-args?)
-            (encoded-ans "recipe_example_body" body show-body?)
-            (write-clear)
-
-            )))
+    (string-append
+      (write-wrapper ".recipe_graf"
+        (lambda ()
+          (string-append
+            ;(write-clear)
+            (write-spaced "(EXAMPLE ")
+            (write-spaced "(")
+            (encoded-ans ".recipe_name" funname show-funname? )
+            " "
+            (encoded-ans ".recipe_example_inputs" (list-to-string parms) show-args?)
+            (write-spaced ")")
+            (encoded-ans ".recipe_example_body" body show-body?)
+            ))))))
 
 (define (list-to-string xx)
   (apply string-append
@@ -132,49 +130,102 @@ _Write some examples, then circle and label what changes..._\n
                  (loop (cdr xx) (cons (format " ~a" (car xx)) r)))))))
 
 (define (write-definition funname param-list body)
-  (string-append
-  (format "\n
+  (let ((cond? (eqv? (car body) 'cond)))
+    (string-append
+      (format "\n
 === Definition\n
-_Write the definition, given variable names to all your input values..._\n
+_Write the definition, given variable names to all your input values..._\n\n")
+      (write-null-wrapper ""
+        (lambda ()
+          (string-append
+            (write-wrapper ".recipe_line"
+              (lambda ()
+                (string-append
+                  (write-spaced "(define")
+                  (write-spaced " (")
+                  (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+                  " "
+                  (encoded-ans ".recipe_variables" (list-to-string param-list) *show-params?*)
+                  (write-spaced ")"))))
 
-[.wrapper]
-(define (
-~a
-~a)
-"
-            (encoded-ans "recipe_name" funname *show-funname-defn?*)
-            (encoded-ans "recipe_variables" (list-to-string param-list) *show-params?*)
+            (cond (cond?
+                    (write-wrapper ".recipe_line"
+                      (lambda ()
+                        (string-append
+                          (encoded-ans "" "MM" #f)
+                          (write-spaced "(")
+                          (encoded-ans ".recipe_cond" "cond" *show-body?*)))))
+                  (else ""))
 
-            )
+            (cond (cond?
+                    (apply string-append
+                           (map write-cond-clause (cdr body))))
+                  (else
+                    (write-wrapper ".recipe_line"
+                      (lambda ()
+                        (encoded-ans ".recipe_line.recipe_body" body *show-body?*)))))
 
-    (if (eqv? (car body) 'cond)
-        (apply string-append
-               (let loop ((clauses (cdr body))
-                          (r (list (format "~a(~a~%"
-                                           (write-clear)
-                                           (encoded-ans "recipe_cond" "cond" *show-body?*)))))
-                 (if (null? clauses)
-                     (reverse (cons (format ")~%") r))
-                     (loop (cdr clauses)
-                           (cons
-                             (format "~a{startsb}~a{endsb}~%"
-                                     (write-clear)
-                                     (write-cond-clause (car clauses) *show-body?*))
-                             r)))))
-        (format "~a~a" (write-clear) (encoded-ans "recipe_body" body *show-body?*))
-        )
-
-    (format ")~%~%")
-))
+            (cond (cond?
+                    (write-wrapper ".recipe_line"
+                      (lambda ()
+                        (string-append
+                          (encoded-ans "" "MM" #f)
+                          (write-spaced "))")))))
+                  (else
+                    (write-wrapper ".recipe_line"
+                      (lambda ()
+                        (write-spaced ")")))))))))))
 
 (define (write-clear)
   "[.clear]## ##")
 
-(define (write-cond-clause clause show?)
-  ;(printf "doing write-cond-clause ~a ~a\n" clause show?)
-  (string-append (encoded-ans "questions" (car clause) show?)
-                 " "
-                 (encoded-ans "answers" (list-to-string (cdr clause)) show?)))
+(define (write-spaced c)
+  ;(format "[.spacer]##~a##" c)
+  (format "~a" c)
+  )
+
+(define *wrapper-block-level* 0)
+
+(define (write-wrapper-scan classes thunk)
+  (let ((res (thunk)))
+    (if (or #t (string=? classes "")) res
+        (format "[~a]##~a##" classes res))))
+
+(define (write-null-wrapper classes thunk)
+  (thunk))
+
+(define (write-wrapper classes thunk)
+  (string-append
+    (let ((old-*wrapper-block-level* *wrapper-block-level*)
+          (res #f))
+      (set! *wrapper-block-level* (+ *wrapper-block-level* 2))
+      (if (= *wrapper-block-level* 2)
+          (set! res (string-append
+                      (format "\n\n[.wrapper~a]\n" classes)
+                      (make-string *wrapper-block-level* #\-)
+                      "\n"
+                      (write-clear)
+                      (thunk)
+                      "\n"
+                      (make-string *wrapper-block-level* #\-)
+                      "\n"))
+          (set! res (write-wrapper-scan classes thunk)))
+      (set! *wrapper-block-level* old-*wrapper-block-level*)
+      res)))
+
+(define (write-cond-clause clause)
+  ;(printf "doing write-cond-clause ~a ~a\n" clause)
+  (write-wrapper ".recipe_line.recipe_cond_clause"
+    (lambda ()
+      (string-append (encoded-ans "" "MMMMM" #f)
+                     (write-spaced "{startsb}")
+                     (write-wrapper ".clause"
+                       (lambda ()
+                         (string-append
+                           (encoded-ans ".questions" (car clause) *show-body?*)
+                           " "
+                           (encoded-ans ".answers" (list-to-string (cdr clause)) *show-body?*))))
+                     (write-spaced "{endsb}")))))
 
 (define (design-recipe-exercise funname directions
                                 #:page-header (page-header "Word Problem")
