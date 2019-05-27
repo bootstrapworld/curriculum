@@ -165,31 +165,43 @@ span.clear {
 .studentAnswer {
 }
 
+.recipe_name,
+.recipe_purpose,
+.recipe_domain,
+.recipe_range,
+.recipe_example_inputs,
+.recipe_example_body,
+.recipe_variables,
+.recipe_cond,
+.questions,
+.answers
+{
+  display: inline-block;
+  border-bottom: solid 1pt black;
+}
+
 .recipe_name {
-  width: 20%;
+  width: 10%;
 }
 
 .recipe_domain {
-  display: inline-block;
-  width: 50%;
+  width: 30%;
 }
 
 .recipe_range {
-  display: inline-block;
-  width: 50%;
+  width: 30%;
 }
 
 .recipe_purpose {
+  width: 100%;
 }
 
 .recipe_example_inputs {
-  width: 65%;
-  display: inline-block;
+  width: 25%;
 }
 
 .recipe_example_body {
-  width: 65%;
-  display: inline-block;
+  width: 45%;
 }
 
 .recipe_variables {
@@ -205,16 +217,97 @@ span.clear {
 }
 
 .questions {
-  display: inline-block;
-  width: 45%;
+  width: 42%;
 }
 
 .answers {
-  display: inline-block;
-  width: 45%;
+  width: 42%;
 }
 
 .recipe_line p {
   margin: 0;
   padding: 0;
+}
+
+.recipe_name::after {
+  color: black;
+  content: "function name";
+}
+
+.recipe_purpose::after {
+  color: black;
+  content: "what does the function do?";
+}
+
+.recipe_domain::after {
+  color: black;
+  content: "domain";
+}
+
+.recipe_range::after {
+  color: black;
+  content: "range";
+}
+
+.recipe_variables::after {
+  color: black;
+  content: "variables";
+}
+
+.recipe_example_inputs::after {
+  color: black;
+  content: "input(s)";
+}
+
+.recipe_example_body::after {
+  color: black;
+  content: "what the function produces";
+}
+
+.studentAnswer {
+  margin-bottom:  20pt;
+  min-width:      100pt;
+  height:         20pt;
+  line-height:    20pt;
+  position:       relative;
+  padding:        0pt 0pt;
+  word-break:     break-all;
+  font-family:    monospace;
+  white-space:    pre;
+  margin-right:   5pt;
+  text-align:     center;
+  word-spacing:   4pt;
+}
+
+.studentAnswer::after {
+  position:     absolute;
+  bottom:       -18pt;
+  left:         0pt;
+  font-size:    7pt;
+  font-weight:  normal;
+  width:        100%;
+  text-align:   center;
+  font-style:   italic;
+  font-family:  "Century Gothic";
+  word-spacing:  0pt;  /* don't inherit spacing from .studentAnswer */
+}
+
+.recipe_title p {
+  color: white;
+  background: gray;
+  display: block;
+  padding: 5pt;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.recipe_title p::after {
+  content: "\2B1C";
+  float: right;
+}
+
+.recipe_instructions {
+  font-style: italic;
+  font-size: 9pt;
+  margin-bottom: 6pt;
 }

@@ -32,7 +32,8 @@
 (define (write-directions page-header funname directions)
   (format "\n
 == ~a: ~a\n
-_**Directions**: ~a_\n\n"
+[.recipe_instructions]
+**Directions**: ~a\n\n"
           page-header
           funname
           directions))
@@ -40,8 +41,10 @@ _**Directions**: ~a_\n\n"
 (define (write-purpose funname domain-list range purpose)
   (string-append
     (format "\n
-=== Contract and Purpose Statement\n
-_Every contract has three parts..._\n\n")
+[.recipe_title]
+Contract and Purpose Statement\n
+[.recipe_instructions]
+Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
@@ -59,8 +62,10 @@ _Every contract has three parts..._\n\n")
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
     (format "\n
-=== Examples\n
-_Write some examples, then circle and label what changes..._\n\n")
+[.recipe_title]
+Examples\n
+[.recipe_instructions]
+Write some examples, then circle and label what changes...\n\n")
     ;examples
 
     (apply string-append
@@ -120,6 +125,7 @@ _Write some examples, then circle and label what changes..._\n\n")
             (encoded-ans ".recipe_example_inputs" (list-to-string parms) show-args?)
             (write-spaced ")")
             (encoded-ans ".recipe_example_body" body show-body?)
+            (write-spaced ")")
             ))))))
 
 (define (list-to-string xx)
@@ -133,8 +139,10 @@ _Write some examples, then circle and label what changes..._\n\n")
   (let ((cond? (eqv? (car body) 'cond)))
     (string-append
       (format "\n
-=== Definition\n
-_Write the definition, given variable names to all your input values..._\n\n")
+[.recipe_title]
+Definition\n
+[.recipe_instructions]
+Write the definition, given variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
           (string-append
