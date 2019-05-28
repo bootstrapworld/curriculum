@@ -1,4 +1,4 @@
-# last modified 2019-05-22
+# last modified 2019-05-28
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -28,9 +28,8 @@ mkdir distribution
 buildworkbookpages() {
   L=$1
   echo
-  echo building $L workbookpages
+  echo building $L workbook-pages
   cd $L
-  export LESSON=$L
   cp -pr workbook-pages solutions-pages
   if test -d exercises; then
     cp -pr exercises exercises-sols
@@ -75,7 +74,6 @@ buildlessonplan() {
   echo
   echo building $L lesson plan
   cd $L
-  export LESSON=$L
   copacetic=1
   for f in *.adoc; do
     if test ! -f $f; then
@@ -107,8 +105,10 @@ buildlessons() {
     if test ! -d $L; then
       echo WARNING: No lessons in pathway $PATHWAY
     else
+      export LESSON=$L
       buildworkbookpages $L
       buildlessonplan $L
+      unset LESSON
     fi
   done
   cd ..

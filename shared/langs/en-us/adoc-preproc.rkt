@@ -623,7 +623,9 @@
         (unless (empty? glossary-items)
           (set! glossary-items
             (sort glossary-items #:key car string-ci<=?))
-          (fprintf op ".Glossary~%")
+          (fprintf op (if (getenv "LESSON")
+                          ".Glossary\n"
+                          "= Glossary\n\n"))
           (fprintf op "[.glossary]~%")
           (for-each
             (lambda (s)
@@ -638,8 +640,10 @@
         (unless (empty? standards-met)
           (set! standards-met
             (sort standards-met #:key car string-ci<=?))
-          (fprintf op ".Standards Statements~%")
-          (fprintf op "[#standards]~%")
+          (fprintf op (if (getenv "LESSON")
+                          ".Standards Statements\n"
+                          "= Standards Statements\n\n"))
+          ;(fprintf op "[#standards]~%")
           (fprintf op "[.standards-hierarchical-table]~%")
           (for-each
             (lambda (s)
