@@ -111,7 +111,10 @@
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
   (let ((vv (unbox bx)))
     (unless (member v vv)
-      (set-box! bx (sort (cons v vv) <)))))
+      (let ((vv (append vv (list v))))
+        (when (number? v)
+          (set! vv (sort vv <)))
+        (set-box! bx vv)))))
 
 (define (check-first-subsection i o)
   (let ((c (peek-char i)))
@@ -344,7 +347,14 @@
                     (let ((lesson-glossary-file
                             (format "./lessons/~a/~a" lesson lesson-glossary-accumulator))
                           (lesson-standards-file
-                            (format "./lessons/~a/~a" lesson lesson-standards-accumulator)))
+                            (format "./lessons/~a/~a" lesson lesson-standards-accumulator))
+                          (lesson-title-file
+                            (format "./lessons/~a/index-title.txt" lesson))
+                          (lesson-title lesson)
+                          )
+
+                      (when (file-exists? lesson-title-file)
+                        (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
                       (when (file-exists? lesson-glossary-file)
                         (call-with-input-file lesson-glossary-file
@@ -373,14 +383,18 @@
                                                       (lambda (c0)
                                                         (when sublist-item
                                                           (let ((sublist-items (list-ref c0 1)))
-                                                            (box-add-new! sublist-item sublist-items)))))
+                                                            (box-add-new! sublist-item sublist-items)))
+                                                        (box-add-new! (list lesson lesson-title)
+                                                                      (list-ref c0 3))
+                                                        ))
                                                      (else
                                                        (let ((sublist-items
                                                                (box (if sublist-item
                                                                         (list sublist-item)
                                                                         '()))))
                                                          (set! standards-met
-                                                           (cons (list std sublist-items c)
+                                                           (cons (list std sublist-items c
+                                                                       (box (list (list lesson lesson-title))))
                                                                  standards-met)))))))))
                                   (loop)))))))
 
@@ -445,7 +459,8 @@
                                                                             (list sublist-item)
                                                                             '()))))
                                                              (set! standards-met
-                                                               (cons (list std sublist-items c)
+                                                               (cons (list std sublist-items c
+                                                                           (box '()))
                                                                      standards-met)))))))
                                               (else (printf "Standard ~a not found~%" arg)))))
                                     args)))
@@ -647,10 +662,20 @@
           (fprintf op "[.standards-hierarchical-table]~%")
           (for-each
             (lambda (s)
-              (let ((sublist-items (unbox (cadr s)))
-                    (s (caddr s)))
-                ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
-                (fprintf op "~a:: ~a~%" (car s) (cadr s))
+              ;(printf "s= ~s\n" s)
+              (let ((sublist-items (unbox (list-ref s 1)))
+                    (lessons (unbox (list-ref s 3)))
+                    (s (list-ref s 2)))
+                (fprintf op "~a:: " (car s))
+                (fprintf op "~a\n" (cadr s))
+                (unless (getenv "LESSON")
+                  (when (> (length lessons) 0)
+                    (fprintf op "{startsb}See: ~a.{endsb}\n"
+                             (string-join
+                               (map
+                                 (lambda (x)
+                                   (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
+                                 lessons) ";"))))
                 (for-each (lambda (n)
                             (fprintf op "** ~a~%" (list-ref s (+ n 1)))
                             (fprintf op "** ~a~%" (list-ref s (+ n 1)))
