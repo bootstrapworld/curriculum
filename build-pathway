@@ -1,4 +1,4 @@
-# last modified 2019-05-29
+# last modified 2019-06-10
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -21,9 +21,9 @@ PROGDIR=$TOPDIR/shared/langs/en-us
 
 LIBDIR=$TOPDIR/lib
 
-rm -fr distribution
-mkdir distribution
-#cp -pr pathways distribution
+if test ! -d distribution; then
+  mkdir distribution
+fi
 
 buildworkbookpages() {
   L=$1
@@ -53,7 +53,7 @@ buildworkbookpages() {
       cp -p $LIBDIR/*.css .
       for f in *.adoc; do
         if test ! -f $f; then
-          echo WARNING: No adoc files in lesson $L/$d
+          echo "        " No adoc files in lesson $L/$d
         else
           echo building $f
           $PROGDIR/adoc-preproc.rkt $f
@@ -123,6 +123,9 @@ buildpathway() {
 
   PATHWAY=${PATHWAY%/}
 
+  if test -d distribution/$PATHWAY; then
+    rm -fr distribution/$PATHWAY
+  fi
   cp -pr pathways/$PATHWAY distribution
 
   echo
@@ -208,17 +211,19 @@ buildpathway() {
   fi
 
   cd $TOPDIR
-  echo >> index.adoc
-  docf=distribution/$PATHWAY/langs/en-us/index.html
-  if test -f $docf; then
-  echo \* link:$docf[$PATHWAY Narrative] >> index.adoc
-  fi
-  echo >> index.adoc
+
 }
 
 for f in $args; do
   buildpathway $f
 done
 
-cd $TOPDIR
+for f in distribution/*; do
+  echo >> index.adoc
+  docf=$f/langs/en-us/index.html
+  if test -f $docf; then
+    echo \* link:$docf[$f Narrative] >> index.adoc
+  fi
+done
+
 asciidoctor -a linkcss index.adoc

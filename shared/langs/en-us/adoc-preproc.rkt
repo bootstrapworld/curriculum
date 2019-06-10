@@ -10,7 +10,7 @@
           (if (null? r) ""
               (list->string (reverse r)))))))
 
-(define (read-group i)
+(define (read-group i directive)
   (let ((c (peek-char i)))
     (cond ((char=? c #\{)
            (read-char i)
@@ -39,11 +39,11 @@
                           (loop (cons c r) #f (- nesting 1) #f #f)))
                      (else (loop (cons c r) #f nesting #f #f))))))
           (else
-            (printf "Ill-formed metadata directive~%")
+            (printf "WARNING: Ill-formed metadata directive @~a\n" directive)
             ""))))
 
-(define (read-commaed-group i)
-  (let* ((g (read-group i))
+(define (read-commaed-group i directive)
+  (let* ((g (read-group i directive))
          (n (string-length g)))
     (let loop ((i 0) (r '()))
       (if (>= i n)
@@ -71,9 +71,9 @@
         (substring s 1 (- n 1))
         s)))
 
-(define (read-commaed-group-obs i)
+(define (read-commaed-group-obs i directive)
   (map string-trim
-       (regexp-split #rx"," (read-group i))))
+       (regexp-split #rx"," (read-group i directive))))
 
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
@@ -221,7 +221,7 @@
         )
     (let loop ((i 0))
       (if (>= i *index-length*)
-          (printf "Missing worksheet link ~a~n" snippet)
+          (printf "WARNING: Missing worksheet link ~a~n" snippet)
           (let* ((entry (list-ref *index-list* i))
                  (lesson2 (car entry)) (snippet2 (cadr entry)))
             (cond ((and (string=? lesson lesson2)
@@ -232,7 +232,7 @@
                   (else (loop (+ i 1)))))))
     (unless pno
       (set! pno "?")
-      (printf "worksheet-link ~a ~a ~a ~a with no page number~n"
+      (printf "WARNING: Worksheet link ~a ~a ~a ~a with no page number~n"
               lesson workbook-dir snippet link-text))
     (let* ((g (string-append "lessons/" lesson "/" workbook-dir "/" snippet))
            (f (string-append *pathway-root-dir* g)))
@@ -298,6 +298,37 @@
         (first-subsection-reached? #f)
         (title-reached? #f)
         )
+;
+   (define (add-standard x lesson lesson-title o)
+      ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
+      (let* ((s (assoc-standards x *standards-list*))
+             (sublist-item (list-ref s 0))
+             (c (list-ref s 1)))
+        (cond (c (let ((std (list-ref c 0)))
+                   (when (getenv "LESSON")
+                     (fprintf o "**~a**: ~a~n~n"
+                              std (list-ref c 1)))
+                   (cond ((assoc std standards-met) =>
+                          (lambda (c0)
+                            (when sublist-item
+                              (let ((sublist-items (list-ref c0 1)))
+                                (box-add-new! sublist-item sublist-items)))
+                            (unless (getenv "LESSON")
+                              (box-add-new! (list lesson lesson-title)
+                                            (list-ref c0 3)))
+                            ))
+                         (else
+                           (let ((sublist-items
+                                   (box (if sublist-item
+                                            (list sublist-item)
+                                            '()))))
+                             (set! standards-met
+                               (cons (list std sublist-items c
+                                           (box (list (list lesson lesson-title))))
+                                     standards-met)))))))
+              (else (printf "Standard ~a not found~%" x))
+              )))
+    ;
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
       (include-glossary-and-standards-files o #t)
@@ -375,27 +406,7 @@
                             (let loop ()
                               (let ((x (read i)))
                                 (unless (eof-object? x)
-                                  (let* ((s (assoc-standards x *standards-list*))
-                                         (sublist-item (list-ref s 0))
-                                         (c (list-ref s 1)))
-                                    (cond (c (let ((std (list-ref c 0)))
-                                               (cond ((assoc std standards-met) =>
-                                                      (lambda (c0)
-                                                        (when sublist-item
-                                                          (let ((sublist-items (list-ref c0 1)))
-                                                            (box-add-new! sublist-item sublist-items)))
-                                                        (box-add-new! (list lesson lesson-title)
-                                                                      (list-ref c0 3))
-                                                        ))
-                                                     (else
-                                                       (let ((sublist-items
-                                                               (box (if sublist-item
-                                                                        (list sublist-item)
-                                                                        '()))))
-                                                         (set! standards-met
-                                                           (cons (list std sublist-items c
-                                                                       (box (list (list lesson lesson-title))))
-                                                                 standards-met)))))))))
+                                  (add-standard x lesson lesson-title lo)
                                   (loop)))))))
 
                       ;(printf "took care of pw stds~n")
@@ -405,11 +416,9 @@
                       (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
                                lesson)))) #:exists 'replace))
             #:exists 'replace)
-        ;(printf "calling preproc-n-asciidoctor on grouped lessons~n")
-        ;(preproc-n-asciidoctor lessons-file #:auxfile #t)
         (asciidoctor lessons-file)
-        ;(printf "link-to-lessons-in-pathway done~n")
         (newline o))))
+    ;
     (call-with-input-file in-file
       (lambda (i)
         (call-with-output-file out-file
@@ -425,10 +434,10 @@
                          ;(printf "directive = ~s~%" directive)
                          (cond ((string=? directive "") (display c o))
                                ((string=? directive "vocab")
-                                (let* ((arg (read-group i))
+                                (let* ((arg (read-group i directive))
                                        (s (assoc-glossary arg *glossary-list*)))
                                   (when (string=? arg "")
-                                    (printf "Directive @vocab has ill-formed argument~%"))
+                                    (printf "WARNING: Directive @vocab has ill-formed argument~%"))
                                   (display arg o)
                                   (cond (s (unless (member s glossary-items)
                                              (set! glossary-items (cons s glossary-items))))
@@ -436,41 +445,20 @@
                                                       arg)))))
                                ((string=? directive "std")
                                 ;(printf "doing @std\n")
-                                (let ((args (read-commaed-group i)))
+                                (let ((args (read-commaed-group i directive)))
                                   (when (empty? args)
-                                    (printf "Directive @std has ill-formed argument~%"))
+                                    (printf "WARNING: Directive @std has ill-formed argument~%"))
                                   (for-each
                                     (lambda (arg)
-                                      (let* ((s (assoc-standards arg *standards-list*))
-                                             (sublist-item (list-ref s 0))
-                                             (c (list-ref s 1)))
-                                        (cond (c (let ((std (list-ref c 0)))
-                                                   (fprintf o "~a: ~a~n~n"
-                                                            std (list-ref c 1))
-                                                   (cond ((assoc std standards-met) =>
-                                                          (lambda (c0)
-                                                            (when sublist-item
-                                                              (let ((sublist-items (list-ref c0 1)))
-                                                                (box-add-new! sublist-item
-                                                                              sublist-items)))))
-                                                         (else
-                                                           (let ((sublist-items
-                                                                   (box (if sublist-item
-                                                                            (list sublist-item)
-                                                                            '()))))
-                                                             (set! standards-met
-                                                               (cons (list std sublist-items c
-                                                                           (box '()))
-                                                                     standards-met)))))))
-                                              (else (printf "Standard ~a not found~%" arg)))))
+                                      (add-standard arg #f #f o))
                                     args)))
                                ((string=? directive "image")
-                                (let ((args (read-commaed-group i)))
+                                (let ((args (read-commaed-group i directive)))
                                   (display (make-image (car args) (cdr args)) o)))
                                ((or (string=? directive "worksheet-link")
                                     (string=? directive "worksheet-include"))
                                 (let* ((include? (string=? directive "worksheet-include"))
-                                       (args (read-commaed-group i))
+                                       (args (read-commaed-group i directive))
                                        (n (length args))
                                        (page (car args))
                                        (link-text (if (> n 1) (cadr args) ""))
@@ -483,7 +471,7 @@
                                        (when (string=? link-text "")
                                          (set! link-text pointer))
                                        (unless actual-url
-                                         (printf "Unresolved external link ~a~n" pointer))
+                                         (printf "WARNING: Unresolved external link ~a~n" pointer))
                                        (fprintf o "link:~a[~a]"
                                                 (if actual-url (cadr actual-url) pointer)
                                                 (cond ((not actual-url)
@@ -502,7 +490,7 @@
                                                                                    link-text
                                                                                    include?) o))
                                                     (else
-                                                      (printf "Incomplete exercise link ~a~n" page))))
+                                                      (printf "WARNING: Incomplete exercise link ~a~n" page))))
                                              ((or (string=? first-compt "workbook-pages")
                                                   (string=? first-compt "workbook-sols-pages"))
                                               (cond (lesson-dir
@@ -511,7 +499,7 @@
                                                                                     (cadr page-compts)
                                                                                     link-text) o))
                                                     (else
-                                                      (printf "Incomplete worksheet link ~a~n" page))))
+                                                      (printf "WARNING: Incomplete worksheet link ~a~n" page))))
                                              (else
                                                (display (make-lesson-link
                                                           first-compt
@@ -545,7 +533,7 @@
 
                                     )))
                                ((string=? directive "link")
-                                (let* ((args (read-commaed-group i))
+                                (let* ((args (read-commaed-group i directive))
                                        (adocf (car args))
                                        (htmlf (path-replace-extension adocf ".html"))
                                        (pdff (path-replace-extension adocf ".pdf"))
@@ -561,11 +549,7 @@
                                ((string=? directive "lesson-description")
                                 (unless (getenv "LESSON")
                                   (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
-                                (display-lesson-description (read-group i) o))
-                               ((string=? directive "lessons-in-pathway-obsolete")
-                                (unless (getenv "NARRATIVE")
-                                  (error 'adoc-preproc.rkt "@lessons-in-pathway valid only in pathway narrative"))
-                                (link-to-lessons-in-pathway o))
+                                (display-lesson-description (read-group i directive) o))
                                ((string=? directive "solutions-workbook")
                                 (unless (getenv "TEACHER_RESOURCES")
                                   (error 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
@@ -575,12 +559,12 @@
                                   (display (cadr s) o)))
                                ((assoc directive *function-list*) =>
                                 (lambda (f)
-                                  (let ((args (string->form (read-group i))))
+                                  (let ((args (string->form (read-group i directive))))
                                     (let-values (((key-list key-vals args)
                                                   (rearrange-args args)))
                                       (display (keyword-apply (cadr f) key-list key-vals args) o)))))
                                (else
-                                 (printf "Unrecognized directive @~a~%" directive)
+                                 (printf "WARNING: Unrecognized directive @~a~%" directive)
                                  #f))))
                       ((and (getenv "LESSON") beginning-of-line? (char=? c #\=))
                        (set! beginning-of-line? #f)

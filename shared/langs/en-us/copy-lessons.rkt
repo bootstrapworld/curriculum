@@ -5,12 +5,6 @@
 (define *workbook-index*
   (call-with-input-file "workbook-index.rkt" read))
 
-(begin
-  (system (format "rm -fr lessons"))
-
-  (system (format "mkdir -p lessons"))
-  (void))
-
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(~n")
@@ -28,5 +22,3 @@
     (fprintf o ")~n")))
 
 ;(printf "returning from copy-lessons.rkt~n")
-
-;(void)
