@@ -1,4 +1,5 @@
 (
+"DefiningFunctions3CoverPage.pdf"
 "WordProblems.pdf"
 "DesignRecipe1.pdf"
 "PurposeStatement3ReadsStrongerClearer.pdf"
