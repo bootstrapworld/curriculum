@@ -2,6 +2,24 @@
 
 #lang racket
 
+(define *handle-prefix* "")
+(define *handle-counter* 0)
+
+(define *char-code-before-A* (sub1 (char->integer #\A)))
+
+(define (zero-out-handle)
+  (set! *handle-prefix* "")
+  (set! *handle-counter* 0))
+
+(define (gen-handle)
+  (set! *handle-counter* (+ *handle-counter* 1))
+  (when (> *handle-counter* 26)
+    (set! *handle-prefix* (string-append *handle-prefix* "Z"))
+    (set! *handle-counter* 1))
+  (format "~a~a" *handle-prefix* (integer->char (+ *char-code-before-A* *handle-counter*))))
+
+;
+
 (define *workbook-index*
   (call-with-input-file "workbook-index.rkt" read))
 
@@ -18,7 +36,7 @@
                        (printf "WARNING: Lesson ~a is incorrectly organized~n" lesson)
                        '()))))
         (for ((page lesson-index))
-          (fprintf o "(~s ~s)~n" lesson page))))
+          (fprintf o "(~s ~s ~s)~n" lesson page (gen-handle)))))
     (fprintf o ")~n")))
 
 ;(printf "returning from copy-lessons.rkt~n")

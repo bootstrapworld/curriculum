@@ -9,42 +9,48 @@
 
   ;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
 
-  (define *lessons* '())
-
-  (for ((spec *workbook-page-specs*))
-    (let ((lesson (car spec)))
-      (unless (member lesson *lessons*)
-        (set! *lessons* (cons lesson *lessons*)))))
-
-  (define *pdf-pages*
+  (define *pdf-page-specs*
     (map (lambda (f)
-           (let ((f (string-append "lessons/" (car f)
+           (let ((g (string-append "lessons/" (car f)
                                    (if protected? "/workbook-sols-pages/" "/workbook-pages/")
                                    (cadr f))))
-             (when (path-has-extension? f #".adoc")
-               (set! f (path-replace-extension f ".pdf")))
-             f))
+             (when (path-has-extension? g #".adoc")
+               (set! g (path-replace-extension g ".pdf")))
+             (list g (caddr f))))
          *workbook-page-specs*))
 
-  (set! *pdf-pages*
+  (set! *pdf-page-specs*
     (filter (lambda (f)
-              (if (file-exists? f) #t
-                  (begin
-                    (printf "ERROR: ~a is not present\n" f)
-                    #f)))
-            *pdf-pages*))
+              (let ((g (car f)))
+                (if (file-exists? g) #t
+                    (begin
+                      (printf "ERROR: ~a is not present\n" g)
+                      #f))))
+            *pdf-page-specs*))
 
-  ;(printf "*pdf-pages* = ~s~n" *pdf-pages*)
+  ;(printf "*pdf-page-specs* = ~s~n" *pdf-page-specs*)
+
+  (define *pdf-pages-w-handles*
+    (map (lambda (f)
+           (format "~a=~a" (cadr f) (car f)))
+         *pdf-page-specs*))
+
+  (define *handle-specs*
+    (map (lambda (f)
+           (cadr f))
+         *pdf-page-specs*))
 
   (define *pdflatex* (find-executable-path "pdflatex"))
 
-  (unless (null? *pdf-pages*)
-    (printf "~nbuilding workbook-no-pagenums.pdf from PDF pages ~a~n" *pdf-pages*)
+  (unless (null? *pdf-page-specs*)
+    (printf "~nbuilding workbook-no-pagenums.pdf from PDF pages ~a~n" *pdf-page-specs*)
 
     (when (file-exists? "workbook-no-pagenums.pdf") (delete-file "workbook-no-pagenums.pdf"))
 
-    (let ((pdftk-args (append *pdf-pages* (list "output" "workbook-no-pagenums.pdf" "dont_ask"))))
-      (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
+  (let ((pdftk-args (append *pdf-pages-w-handles* (list "cat")
+                            *handle-specs*
+                            (list "output" "workbook-no-pagenums.pdf" "dont_ask"))))
+    (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
 
     (when (file-exists? "workbook-no-pagenums.pdf")
       (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
