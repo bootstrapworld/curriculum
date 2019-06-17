@@ -3,5 +3,5 @@
 "BSABigIdeas.pdf"
 "CoordinatesCoverPage.pdf"
 "ReverseEngineerGame.pdf"
-"Estimation.pdf"
+("Estimation.pdf" "landscape")
 )

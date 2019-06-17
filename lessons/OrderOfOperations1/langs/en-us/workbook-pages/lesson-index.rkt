@@ -1,4 +1,4 @@
 (
 "OrderOfOperationsCoverPage.pdf"
-"OrderOfOperations1-FrayerModelTemplate.pdf"
+("OrderOfOperations1-FrayerModelTemplate.pdf" "landscape")
 )
