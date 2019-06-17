@@ -36,7 +36,12 @@
                        (printf "WARNING: Lesson ~a is incorrectly organized~n" lesson)
                        '()))))
         (for ((page lesson-index))
-          (fprintf o "(~s ~s ~s)~n" lesson page (gen-handle)))))
+          (let ((file page)
+                (aspect "portrait"))
+            (when (pair? page)
+              (set! file (car page))
+              (set! aspect (cadr page)))
+          (fprintf o "(~s ~s ~s ~s)~n" lesson file (gen-handle) aspect)))))
     (fprintf o ")~n")))
 
 ;(printf "returning from copy-lessons.rkt~n")

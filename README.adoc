@@ -45,7 +45,13 @@ The exercises associated with lesson A are alongside the lesson
 plan adoc file, in subdirectory `exercises`. Images are in
 subdir `images`. Single workpages are in subdir `workbook-pages`
 (some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`.
+pages, in correct order, is in `lesson-index.rkt`. By default,
+these pages are rendered in portrait mode. If you desire a
+particular file `file.adoc` to be in landscape, its entry in
+`lesson-index.rkt` should be `("file.adoc" "landscape")`. (The
+entry `"file.adoc"` is convenient shorthand for `("file.adoc"
+"portrait")`.)  (The strings `"landscape"` and `"portrait"` may
+be in any case.)
 
 The subdir `workbook-sols-pages` contains workpages that would
 replace corresponding pages in the `workbook-pages` directory
@@ -114,7 +120,7 @@ The pathway narrative web page `index.html` includes a link to
 associated with the pathway. It also points to the student
 workbook PDF. (The teacher, or solutions, workbook, can be
 referred to in the teacher resources page with the directive
-`@solutions-workbook`.) 
+`@solutions-workbook`.)
 
 As a convenience, a `git push` into the `master` branch
 automatically triggers a build of all the pathways

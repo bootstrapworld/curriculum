@@ -9,6 +9,8 @@
 
   ;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
 
+  ; *workbook-page-specs* is listof (lesson docfile handle aspect)
+
   (define *pdf-page-specs*
     (map (lambda (f)
            (let ((g (string-append "lessons/" (car f)
@@ -16,8 +18,10 @@
                                    (cadr f))))
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
-             (list g (caddr f))))
+             (list g (caddr f) (cadddr f))))
          *workbook-page-specs*))
+
+  ; *pdf-page-specs* is listof (docfile handle aspect)
 
   (set! *pdf-page-specs*
     (filter (lambda (f)
@@ -35,9 +39,15 @@
            (format "~a=~a" (cadr f) (car f)))
          *pdf-page-specs*))
 
+  ; *pdf-pages-w-handles is listof handle=docfile
+
   (define *handle-specs*
     (map (lambda (f)
-           (cadr f))
+           (let ((handle (cadr f))
+                 (aspect (caddr f)))
+             (cond ((char-ci=? (string-ref aspect 0) #\l)
+                    (format "~awest" handle))
+                   (else handle))))
          *pdf-page-specs*))
 
   (define *pdflatex* (find-executable-path "pdflatex"))
