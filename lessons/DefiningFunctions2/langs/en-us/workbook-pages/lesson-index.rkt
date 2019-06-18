@@ -1,6 +1,6 @@
 (
 "DefiningFunctions2CoverPage.pdf"
 "NoticeAndWonder.pdf"
-"DesignRecipe1.pdf"
+"DefiningFunctions2-EX1.adoc"
 ("PurposeStatement3ReadsStrongerClearer.pdf" "landscape")
 )
