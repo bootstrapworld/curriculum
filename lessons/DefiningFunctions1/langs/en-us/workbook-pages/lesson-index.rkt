@@ -1,7 +1,7 @@
 (
 "DefiningFunctions1CoverPage.pdf"
-"FastFunctions1.pdf"
+"FastFunctionsClassic.pdf"
 ("MappingExamplesWithCoE.pdf" "landscape")
-"FastFunctions2.pdf"
+"FastFunctionsClassic.pdf"
 ("MappingExamplesWithCoE.pdf" "landscape")
 )
