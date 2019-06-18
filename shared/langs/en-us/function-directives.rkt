@@ -31,8 +31,7 @@
 
 (define (write-directions page-header funname directions)
   (format "\n
-[.dr-title]
-== ~a: ~a\n
+== [.dr-title]##~a: ~a##\n
 [.recipe_instructions]
 **Directions**: ~a\n\n"
           page-header
