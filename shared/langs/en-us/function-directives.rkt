@@ -118,14 +118,15 @@ Write some examples, then circle and label what changes...\n\n")
         (lambda ()
           (string-append
             ;(write-clear)
-            (write-spaced "(EXAMPLE ")
-            (write-spaced "(")
+            (write-large "(")
+            (write-spaced "EXAMPLE ")
+            (write-large "(")
             (encoded-ans ".recipe_name" funname show-funname? )
             " "
             (encoded-ans ".recipe_example_inputs" (list-to-string parms) show-args?)
-            (write-spaced ")")
+            (write-large ")")
             (encoded-ans ".recipe_example_body" body show-body?)
-            (write-spaced ")")
+            (write-large ")")
             ))))))
 
 (define (list-to-string xx)
@@ -142,26 +143,28 @@ Write some examples, then circle and label what changes...\n\n")
 [.recipe_title]
 Definition\n
 [.recipe_instructions]
-Write the definition, given variable names to all your input values...\n\n")
+Write the definition, giving variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
           (string-append
             (write-wrapper ".recipe_line"
               (lambda ()
                 (string-append
-                  (write-spaced "(define")
-                  (write-spaced " (")
+                  (write-large "(")
+                  (write-spaced "define")
+                  (write-spaced " ")
+                  (write-large "(")
                   (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                   " "
                   (encoded-ans ".recipe_variables" (list-to-string param-list) *show-params?*)
-                  (write-spaced ")"))))
+                  (write-large ")"))))
 
             (cond (cond?
                     (write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
-                          (write-spaced "(")
+                          (write-large "(")
                           (encoded-ans ".recipe_cond" "cond" *show-body?*)))))
                   (else ""))
 
@@ -178,19 +181,22 @@ Write the definition, given variable names to all your input values...\n\n")
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
-                          (write-spaced "))")))))
+                          (write-large "))")))))
                   (else
                     (write-wrapper ".recipe_line"
                       (lambda ()
-                        (write-spaced ")")))))))))))
+                        (write-large ")")))))))))))
 
 (define (write-clear)
   "[.clear]## ##")
 
-(define (write-spaced c)
-  ;(format "[.spacer]##~a##" c)
-  (format "~a" c)
+(define (write-spaced s)
+  ;(format "[.spacer]##~a##" s)
+  (format "~a" s)
   )
+
+(define (write-large s)
+  (format "[.bigparen]##~a##" s))
 
 (define *wrapper-block-level* 0)
 
@@ -226,14 +232,14 @@ Write the definition, given variable names to all your input values...\n\n")
   (write-wrapper ".recipe_line.recipe_cond_clause"
     (lambda ()
       (string-append (encoded-ans "" "MMMMM" #f)
-                     (write-spaced "{startsb}")
+                     (write-large "{startsb}")
                      (write-wrapper ".clause"
                        (lambda ()
                          (string-append
                            (encoded-ans ".questions" (car clause) *show-body?*)
                            " "
                            (encoded-ans ".answers" (list-to-string (cdr clause)) *show-body?*))))
-                     (write-spaced "{endsb}")))))
+                     (write-large "{endsb}")))))
 
 (define (design-recipe-exercise funname directions
                                 #:page-header (page-header "Word Problem")
