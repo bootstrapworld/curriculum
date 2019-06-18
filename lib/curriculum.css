@@ -175,6 +175,7 @@ span.clear {
 .recipe_example_body,
 .recipe_variables,
 .recipe_cond,
+.recipe_definition_body,
 .questions,
 .answers
 {
@@ -203,7 +204,12 @@ span.clear {
 }
 
 .recipe_example_body {
-  width: 45%;
+ /* width: 45%; */
+ width: 95%;
+}
+
+.recipe_definition_body {
+  width: 95%;
 }
 
 .recipe_variables {
@@ -253,7 +259,7 @@ span.clear {
 
 .recipe_variables::after {
   color: black;
-  content: "variables";
+  content: "variable(s)";
 }
 
 .recipe_example_inputs::after {
@@ -265,6 +271,12 @@ span.clear {
   color: black;
   content: "what the function produces";
 }
+
+.recipe_definition_body::after {
+  color: black;
+  content: "what the function does with those variable(s)";
+}
+
 
 .studentAnswer {
   margin-bottom:  17pt;

@@ -126,6 +126,8 @@ Write some examples, then circle and label what changes...\n\n")
             " "
             (encoded-ans ".recipe_example_inputs" (list-to-string parms) show-args?)
             (write-large ")")
+            (write-clear) ;EXAMPLE body on its own line!
+            (encoded-ans "" "MM" #f)
             (encoded-ans ".recipe_example_body" body show-body?)
             (write-large ")")
             ))))))
@@ -175,7 +177,11 @@ Write the definition, giving variable names to all your input values...\n\n")
                   (else
                     (write-wrapper ".recipe_line"
                       (lambda ()
-                        (encoded-ans ".recipe_line.recipe_body" body *show-body?*)))))
+                        (string-append
+                          (encoded-ans "" "MM" #f)
+                          (encoded-ans ".recipe_definition_body" body *show-body?*)
+                          (write-large ")")
+                          )))))
 
             (cond (cond?
                     (write-wrapper ".recipe_line"
@@ -184,9 +190,13 @@ Write the definition, giving variable names to all your input values...\n\n")
                           (encoded-ans "" "MM" #f)
                           (write-large "))")))))
                   (else
-                    (write-wrapper ".recipe_line"
+                    ""
+                    #;(write-wrapper ".recipe_line"
                       (lambda ()
-                        (write-large ")")))))))))))
+                        (string-append
+                          (encoded-ans "" "MM" #f)
+                          (write-large ")"))))
+                    ))))))))
 
 (define (write-clear)
   "[.clear]## ##")
