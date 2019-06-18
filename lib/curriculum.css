@@ -6,6 +6,8 @@ body{
   color: #75328A;
 }
 
+p {margin: 0px;}
+
 h1 {
   font-size: 32px;
   font-weight: bold;
@@ -181,15 +183,15 @@ span.clear {
 }
 
 .recipe_name {
-  width: 10%;
+  width: 20%;
 }
 
 .recipe_domain {
-  width: 30%;
+  width: 50%;
 }
 
 .recipe_range {
-  width: 30%;
+  width: 20%;
 }
 
 .recipe_purpose {
@@ -251,7 +253,7 @@ span.clear {
 
 .recipe_variables::after {
   color: black;
-  content: "variable(s)";
+  content: "variables";
 }
 
 .recipe_example_inputs::after {
@@ -265,7 +267,7 @@ span.clear {
 }
 
 .studentAnswer {
-  margin-bottom:  20pt;
+  margin-bottom:  17pt;
   min-width:      100pt;
   height:         20pt;
   line-height:    20pt;
@@ -296,8 +298,8 @@ span.clear {
   color: white;
   background: gray;
   display: block;
-  padding: 5pt;
-  font-size: 14pt;
+  padding: 5px 10px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -311,18 +313,20 @@ span.clear {
   font-size: 9pt;
   margin-bottom: 6pt;
 }
-
-.bigparen {
-  font-size: 150%;
+/************************************************************************************
+ * PRINT MEDIA
+ */
+@page  {
+    size: 8.5in 11in;         /* normal letter size paper */
+    margin: .5in;             /* this affects the margin in the printer settings */
+    orphans: 0; widows: 0;    /* break a paragraph when you can have 3+ lines on each page */
 }
-
-
 @media print {
   body {
     color: black;
   }
-
-  #footer #footer-text {
-    display: none;
-  }
+  #footer { display: none; }
+  h2 {width: 100%; background: black; color: white; text-align: center;}
+  .recipe_title p { font-size: 14px; padding: 3px 5px; }
+  .recipe_title p::after { background: white; }
 }
