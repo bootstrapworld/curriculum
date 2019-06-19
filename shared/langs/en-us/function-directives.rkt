@@ -76,7 +76,7 @@ Write some examples, then circle and label what changes...\n\n")
                        buggy-example-list) ]
                  [else
                    (let* ((example-list-len (length example-list))
-                          (num-blank-examples (- num-examples example-list-len)))
+                          (num-blank-examples (max 0 (- num-examples example-list-len))))
                      (append
                        (map (lambda (e s)
                               (let* ((n (- (length e) 1))
@@ -89,9 +89,16 @@ Write some examples, then circle and label what changes...\n\n")
                                   ((eq? *show-examples* #f)
                                    (build-list example-list-len (lambda (i) #f)))
                                   (else
-                                    (append *show-examples*
-                                            (build-list (- example-list-len (length *show-examples*))
-                                                        (lambda (i) #f))))))
+                                    (let* ((num-examples-after-shown-ones
+                                             (max 0 (- example-list-len
+                                                       (length *show-examples*))))
+                                           (mod-show-examples
+                                             (append *show-examples* (build-list
+                                                                       num-examples-after-shown-ones
+                                                                       (lambda (i) #f))))
+                                           (mod-show-examples
+                                             (take mod-show-examples example-list-len)))
+                                      mod-show-examples))))
                        (build-list num-blank-examples
                                    (lambda (i)
                                      (write-each-example funname '() '() #f)))))]
@@ -132,14 +139,15 @@ Write some examples, then circle and label what changes...\n\n")
             ))))))
 
 (define (list-to-string xx)
-  (apply string-append
-         (reverse
-           (let loop ((xx xx) (r '()))
-             (if (null? xx) r
-                 (loop (cdr xx) (cons (format " ~a" (car xx)) r)))))))
+  (let ((ans (apply string-append
+                    (reverse
+                      (let loop ((xx xx) (r '()))
+                        (if (null? xx) r
+                            (loop (cdr xx) (cons (format " ~a" (car xx)) r))))))))
+    (if (string=? ans "") " " ans)))
 
 (define (write-definition funname param-list body)
-  (let ((cond? (eqv? (car body) 'cond)))
+  (let ((cond? (and (pair? body) (eqv? (car body) 'cond))))
     (string-append
       (format "\n
 [.recipe_title]
@@ -301,6 +309,10 @@ Write the definition, giving variable names to all your input values...\n\n")
   ;comment, debug
   (when (and (cons? example-list) (cons? buggy-example-list))
     (error 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
+
+  (when (string=? funname "") (set! funname " "))
+  (when (string=? range "") (set! range " "))
+  (when (string=? purpose "") (set! purpose " "))
 
   (string-append
 
