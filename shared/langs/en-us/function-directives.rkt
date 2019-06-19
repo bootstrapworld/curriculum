@@ -32,7 +32,7 @@
 (define (write-directions page-header funname directions)
   (format "\n
 == [.dr-title]##~a: ~a##\n
-[.recipe_instructions]
+[.recipe_word_problem]
 **Directions**: ~a\n\n"
           page-header
           funname
@@ -49,9 +49,9 @@ Every contract has three parts...\n\n")
       (lambda ()
         (string-append
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
-          " : "
+          ":"
           (encoded-ans ".recipe_domain" (list-to-string domain-list) *show-domains?*)
-          " → "
+          "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
     (write-wrapper ".recipe_graf"
