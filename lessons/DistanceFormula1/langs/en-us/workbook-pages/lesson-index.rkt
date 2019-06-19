@@ -1,7 +1,7 @@
 (
 "DistanceFormulaCoverPage.pdf"
 "NoticeAndWonder.pdf"
-"DesignRecipe1.pdf"
-"DesignRecipe2.pdf"
 ("FrayerModelDistance.pdf" "landscape")
+"DistanceFormula1-WB1.adoc"
+"DistanceFormula1-WB2.adoc"
 )

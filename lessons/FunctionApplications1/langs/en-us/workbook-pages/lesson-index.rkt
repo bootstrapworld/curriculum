@@ -1,3 +1,2 @@
 (
-"FunctionApplications1CoverPage.pdf"
 )
