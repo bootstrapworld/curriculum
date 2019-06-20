@@ -310,7 +310,12 @@ Write the definition, giving variable names to all your input values...\n\n")
   (when (and (cons? example-list) (cons? buggy-example-list))
     (error 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
 
-  (when (string=? funname "") (set! funname " "))
+  (when (string=? funname "")
+    (set! funname " ")
+    (set! page-header "Design Recipe")
+    (when (string=? directions "")
+      (set! directions (format "{sp} +\n{sp} +\n{sp} +\n")))
+    )
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose " "))
 
