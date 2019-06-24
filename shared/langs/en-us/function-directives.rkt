@@ -31,6 +31,7 @@
 
 (define (write-directions page-header funname directions)
   (format "\n
+[.designRecipeLayout]
 == [.dr-title]##~a: ~a##\n
 [.recipe_word_problem]
 **Directions**: ~a\n\n"
