@@ -5,6 +5,8 @@ body{
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   color: #75328A;
   font-size: 14pt;
+  width: 8.5in;
+  height: 11in;
 }
 
 p {margin: 0px; font-size: inherit; }
@@ -197,6 +199,7 @@ span.clear {
 
 .recipe_purpose {
   width: 100%;
+  overflow: auto;
 }
 
 .recipe_example_inputs {
@@ -330,11 +333,15 @@ span.clear {
 @page  {
     size: 8.5in 11in;         /* normal letter size paper */
     margin: .5in;             /* this affects the margin in the printer settings */
-    orphans: 0; widows: 0;    /* break a paragraph when you can have 3+ lines on each page */
+    orphans: 0; widows: 0;    /* never break a paragraph  */
 }
 @media print {
   body {
     color: black;
+  }
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
   }
   #footer { display: none; }
   .dr-title {width: 100%; background: black; color: white; text-align: center; display: inline-block;}
