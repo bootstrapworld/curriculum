@@ -319,6 +319,7 @@ Write the definition, giving variable names to all your input values...\n\n")
     )
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose " "))
+  (unless *show-purpose?* (set! purpose " "))
 
   (string-append
 
