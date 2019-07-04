@@ -1,4 +1,4 @@
-# last modified 2019-06-10
+# last modified 2019-07-04
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -89,10 +89,15 @@ buildlessonplan() {
     echo building lesson plan from *.adoc
     $PROGDIR/adoc-preproc.rkt *.adoc
     if test ! -f index.html; then
+      SRCFILE=
       for g in *.adoc; do
-        cp -p ${g%.adoc}.asc index.asc
-        cp -p ${g%.adoc}.html index.html
+        SRCFILE=${g%.adoc}
+        cp -p $SRCFILE.asc index.asc
+        cp -p $SRCFILE.html index.html
       done
+      if test -n "$SRCFILE"; then
+        rm $SRCFILE.html $SRCFILE.asc
+      fi
     fi
     #rm *.adoc[23]
   fi
@@ -168,9 +173,15 @@ buildpathway() {
         $PROGDIR/adoc-preproc.rkt *.adoc
         unset TEACHER_RESOURCES
         if test ! -f index.html; then
+          SRCFILE=
           for g in *.adoc; do
-            cp -p ${g%.adoc}.html index.html
+            SRCFILE=${g%.adoc}
+            cp -p $SRCFILE.asc index.asc
+            cp -p $SRCFILE.html index.html
           done
+          if test -n "$SRCFILE"; then
+            rm $SRCFILE.html $SRCFILE.asc
+          fi
         fi
         #rm *.adoc[23]
       fi
@@ -201,9 +212,15 @@ buildpathway() {
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset NARRATIVE
       if test ! -f index.html; then
+        SRCFILE=
         for g in *.adoc; do
-          cp -p ${g%.adoc}.html index.html
+          SRCFILE=${g%.adoc}
+          cp -p $SRCFILE.asc index.asc
+          cp -p $SRCFILE.html index.html
         done
+        if test -n "$SRCFILE"; then
+          rm $SRCFILE.html $SRCFILE.asc
+        fi
       fi
       #rm *.adoc[23]
     fi
