@@ -1,4 +1,4 @@
-# last modified 2019-07-04
+# last modified 2019-07-09
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -112,7 +112,9 @@ buildlessons() {
     else
       export LESSON=$L
       buildworkbookpages $L
+      export LESSONPLAN=$L
       buildlessonplan $L
+      unset LESSONPLAN
       unset LESSON
     fi
   done
@@ -128,6 +130,7 @@ buildpathway() {
 
   PATHWAY=${PATHWAY%/}
 
+  # remove previous build of $PATHWAY in distribution/, if any
   if test -d distribution/$PATHWAY; then
     rm -fr distribution/$PATHWAY
   fi

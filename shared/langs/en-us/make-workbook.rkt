@@ -2,6 +2,10 @@
 
 #lang racket
 
+(define *pdflatex* (find-executable-path "pdflatex"))
+
+(define *pdftk* (find-executable-path "pdftk"))
+
 (define (make-workbook protected?)
 
   (define *workbook-page-specs*
@@ -13,15 +17,19 @@
 
   (define *pdf-page-specs*
     (map (lambda (f)
-           (let ((g (string-append "lessons/" (car f)
-                                   (if protected? "/workbook-sols-pages/" "/workbook-pages/")
-                                   (cadr f))))
+           (let* ((lesson-dir (string-append "lessons/" (car f)))
+                  (lesson-title (call-with-input-file
+                                  (string-append lesson-dir "/index-title.txt")
+                                  read-line))
+                  (g (string-append lesson-dir
+                                    (if protected? "/workbook-sols-pages/" "/workbook-pages/")
+                                    (cadr f))))
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
-             (list g (caddr f) (cadddr f))))
+             (list g (caddr f) (cadddr f) lesson-title)))
          *workbook-page-specs*))
 
-  ; *pdf-page-specs* is listof (docfile handle aspect)
+  ; *pdf-page-specs* is listof (docfile handle aspect title)
 
   (set! *pdf-page-specs*
     (filter (lambda (f)
@@ -34,49 +42,69 @@
 
   ;(printf "*pdf-page-specs* = ~s~n" *pdf-page-specs*)
 
-  (define *pdf-pages-w-handles*
-    (map (lambda (f)
-           (format "~a=~a" (cadr f) (car f)))
-         *pdf-page-specs*))
+  (for ((pdf-page-spec *pdf-page-specs*))
+    (let ((docfile (list-ref pdf-page-spec 0))
+          (handle (list-ref pdf-page-spec 1))
+          (aspect (list-ref pdf-page-spec 2))
+          (title (list-ref pdf-page-spec 3)))
+      (system* *pdftk*
+               (format "Q=~a" docfile)
+               "cat"
+               (if (char-ci=? (string-ref aspect 0) #\l)
+                   "Qwest" "Q")
+               "output"
+               (format "~a.pdf" handle)
+               "dont_ask")))
 
-  ; *pdf-pages-w-handles is listof handle=docfile
+  (call-with-output-file "workbook-numbered.tex"
+    (lambda (o)
+      (fprintf o
+               "\\documentclass{article}
+\\usepackage{pdfpages}
+\\usepackage{fancyhdr}
+%
+\\setlength\\topmargin{-0.375in}
+\\setlength\\headheight{0in}
+\\setlength\\headsep{0in}
+\\setlength\\textheight{9.5in}
+\\setlength\\textwidth{7.0in}
+\\setlength\\oddsidemargin{-0.25in}
+\\setlength\\evensidemargin{-0.25in}
+%
+\\begin{document}\n
+\\pagestyle{empty}\n\n")
+      (let loop ((i 1) (pdf-page-specs *pdf-page-specs*))
+        (unless (null? pdf-page-specs)
+          (let* ((pdf-page-spec (car pdf-page-specs))
+                 (handle (list-ref pdf-page-spec 1))
+                 (title (list-ref pdf-page-spec 3)))
+            (set! title (regexp-replace* "&" title "\\\\&"))
+            (when (<= i 2)
+              (fprintf o "\\includepdf{~a.pdf}\n"
+                       handle))
+            (when (= i 3)
+              (fprintf o "\\pagenumbering{arabic}
+\\pagestyle{fancy}
+\\fancyhf{}
+\\rfoot{\\thepage}
+\n\n"))
+            (when (>= i 3)
+              (fprintf o "\\includepdf[pagecommand={\\thispagestyle{fancy}\\lfoot{~a}}]{~a.pdf}\n"
+                       title handle)))
+          (loop (+ i 1) (cdr pdf-page-specs))))
+      (fprintf o "\n\\end{document}\n")
+      )
+    #:exists 'replace)
 
-  (define *handle-specs*
-    (map (lambda (f)
-           (let ((handle (cadr f))
-                 (aspect (caddr f)))
-             (cond ((char-ci=? (string-ref aspect 0) #\l)
-                    (format "~awest" handle))
-                   (else handle))))
-         *pdf-page-specs*))
+  (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
 
-  (define *pdflatex* (find-executable-path "pdflatex"))
+  (when *pdflatex* (system* *pdflatex* "workbook-numbered"))
 
-  (unless (null? *pdf-page-specs*)
-    (printf "~nbuilding workbook-no-pagenums.pdf from PDF pages ~a~n" *pdf-page-specs*)
-
-    (when (file-exists? "workbook-no-pagenums.pdf") (delete-file "workbook-no-pagenums.pdf"))
-
-  (let ((pdftk-args (append *pdf-pages-w-handles* (list "cat")
-                            *handle-specs*
-                            (list "output" "workbook-no-pagenums.pdf" "dont_ask"))))
-    (apply system* (cons (find-executable-path "pdftk") pdftk-args)))
-
-    (when (file-exists? "workbook-no-pagenums.pdf")
-      (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
-
-      (when *pdflatex*
-        (apply system* (list *pdflatex* "workbook-numbered")))
-
-      (unless (file-exists? "workbook-numbered.pdf")
-        (system (format "mv workbook-no-pagenums.pdf workbook-numbered.pdf")))
-
-      (system (format "mv workbook-numbered.pdf ~a.pdf"
-                      (if protected?
-                          "resources/protected/workbook-sols"
-                          "workbook/workbook")))
-
-      ))
+  (when (file-exists? "workbook-numbered.pdf")
+    (system (format "mv workbook-numbered.pdf ~a.pdf"
+                    (if protected?
+                        "resources/protected/workbook-sols"
+                        "workbook/workbook"))))
 
   )
 

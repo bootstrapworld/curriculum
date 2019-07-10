@@ -135,10 +135,11 @@
 
 (define (display-title i o)
   (let ((title (string-trim (read-line i))))
-    (call-with-output-file "index-title.txt"
-      (lambda (o)
-        (display title o) (newline o))
-      #:exists 'replace)
+    (when (getenv "LESSONPLAN")
+      (call-with-output-file "index-title.txt"
+        (lambda (o)
+          (display title o) (newline o))
+        #:exists 'replace))
     (fprintf o "[.lesson-title]~n")
     (display #\= o) (display #\space o) (display title o) (newline o)))
 
@@ -572,7 +573,8 @@
                                (cond (first-subsection-reached? #f)
                                      ((check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
-                                      (include-glossary-and-standards-files o #f))
+                                      (when (getenv "LESSONPLAN")
+                                        (include-glossary-and-standards-files o #f)))
                                      (else #f))
                                (display-section-markup i o)
                                ;(display c o)
@@ -599,10 +601,13 @@
             )
           #:exists 'replace)))
 
-    (create-glossary-and-standards-subfiles glossary-items standards-met)
+    (when (or (not (getenv "LESSON"))
+              (and (getenv "LESSON") (getenv "LESSONPLAN")))
+      (create-glossary-and-standards-subfiles glossary-items standards-met))
 
     (cond ((getenv "LESSON")
-           (accumulate-glossary-and-standards glossary-items standards-met))
+           (when (getenv "LESSONPLAN")
+             (accumulate-glossary-and-standards glossary-items standards-met)))
           (else
             (asciidoctor "-a title=Glossary index-glossary.asc")
             (asciidoctor "-a title=Standards index-standards.asc")))
