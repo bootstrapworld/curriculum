@@ -100,6 +100,10 @@
 
   (when *pdflatex* (system* *pdflatex* "workbook-numbered"))
 
+  (for ((pdf-page-spec *pdf-page-specs*))
+    (let ((handle (list-ref pdf-page-spec 1)))
+      (delete-file (format "~a.pdf" handle))))
+
   (when (file-exists? "workbook-numbered.pdf")
     (system (format "mv workbook-numbered.pdf ~a.pdf"
                     (if protected?
