@@ -99,6 +99,8 @@ buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
+    echo Creating lesson plan pdf
+    wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
     #rm *.adoc[23]
   fi
   cd ..

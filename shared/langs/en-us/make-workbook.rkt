@@ -6,14 +6,17 @@
 
 (define *pdftk* (find-executable-path "pdftk"))
 
-(define (make-workbook protected?)
+(define *lessons*
+  (call-with-input-file "workbook-index.rkt" read))
 
-  (define *workbook-page-specs*
-    (call-with-input-file "workbook-page-index.rkt" read))
+(define *workbook-page-specs*
+  (call-with-input-file "workbook-page-index.rkt" read))
 
-  ;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
+;(printf "*workbook-page-specs* = ~s~n" *workbook-page-specs*)
 
-  ; *workbook-page-specs* is listof (lesson docfile handle aspect)
+; *workbook-page-specs* is listof (lesson docfile handle aspect)
+
+(define (make-workbook #:protected [protected #f] #:include-lesson [include-lesson #f])
 
   (define *pdf-page-specs*
     (map (lambda (f)
@@ -22,7 +25,7 @@
                                   (string-append lesson-dir "/index-title.txt")
                                   read-line))
                   (g (string-append lesson-dir
-                                    (if protected? "/workbook-sols-pages/" "/workbook-pages/")
+                                    (if protected "/workbook-sols-pages/" "/workbook-pages/")
                                     (cadr f))))
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
@@ -73,6 +76,9 @@
 %
 \\begin{document}\n
 \\pagestyle{empty}\n\n")
+      (when include-lesson
+        (for ((lesson *lessons*))
+          (fprintf o "\\includepdf{lessons/~a/index.pdf}\n" lesson)))
       (let loop ((i 1) (pdf-page-specs *pdf-page-specs*))
         (unless (null? pdf-page-specs)
           (let* ((pdf-page-spec (car pdf-page-specs))
@@ -106,14 +112,18 @@
 
   (when (file-exists? "workbook-numbered.pdf")
     (system (format "mv workbook-numbered.pdf ~a.pdf"
-                    (if protected?
+                    (if protected
                         "resources/protected/workbook-sols"
-                        "workbook/workbook"))))
+                        (if include-lesson
+                            "workbook/pd-workbook"
+                            "workbook/workbook")))))
 
   )
 
-(make-workbook #f)
+(make-workbook)
 
-(make-workbook #t)
+(make-workbook #:protected #t)
+
+(make-workbook #:include-lesson #t)
 
 (void)
