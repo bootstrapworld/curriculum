@@ -16,7 +16,7 @@
 
 ; *workbook-page-specs* is listof (lesson docfile handle aspect)
 
-(define (make-workbook #:protected [protected #f] #:include-lesson [include-lesson #f])
+(define (make-workbook #:teacher-version [teacher-version #f] #:include-lesson [include-lesson #f])
 
   (define *pdf-page-specs*
     (map (lambda (f)
@@ -25,7 +25,7 @@
                                   (string-append lesson-dir "/index-title.txt")
                                   read-line))
                   (g (string-append lesson-dir
-                                    (if protected "/workbook-sols-pages/" "/workbook-pages/")
+                                    (if teacher-version "/workbook-sols-pages/" "/workbook-pages/")
                                     (cadr f))))
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
@@ -76,6 +76,8 @@
 %
 \\begin{document}\n
 \\pagestyle{empty}\n\n")
+      (when teacher-version
+        (fprintf o "\\includepdf{front-cover-teacher.pdf}\n"))
       (when include-lesson
         (for ((lesson *lessons*))
           (fprintf o "\\includepdf{lessons/~a/index.pdf}\n" lesson)))
@@ -112,7 +114,7 @@
 
   (when (file-exists? "workbook-numbered.pdf")
     (system (format "mv workbook-numbered.pdf ~a.pdf"
-                    (if protected
+                    (if teacher-version
                         "resources/protected/workbook-sols"
                         (if include-lesson
                             "workbook/pd-workbook"
@@ -122,7 +124,7 @@
 
 (make-workbook)
 
-(make-workbook #:protected #t)
+(make-workbook #:teacher-version #t)
 
 (make-workbook #:include-lesson #t)
 

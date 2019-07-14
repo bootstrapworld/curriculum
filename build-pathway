@@ -1,4 +1,4 @@
-# last modified 2019-07-12
+# last modified 2019-07-13
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -160,43 +160,40 @@ buildpathway() {
     buildlessons
     echo
 
-    if test ! -d resources; then
-      echo WARNING: No teacher resources in pathway $PATHWAY
-    else
-      cd resources
-      cp -p $LIBDIR/*.css .
-      copacetic=1
-      for f in *.adoc; do
-        if test ! -f $f; then copacetic=0
-        fi
-      done
-      if test x$copacetic = x0; then
-        echo WARNING: No teacher resource files in pathway $PATHWAY
-      else
-        export PATHWAYROOTDIR="../"
-        export TEACHER_RESOURCES=1
-        $PROGDIR/adoc-preproc.rkt *.adoc
-        unset TEACHER_RESOURCES
-        if test ! -f index.html; then
-          SRCFILE=
-          for g in *.adoc; do
-            SRCFILE=${g%.adoc}
-            cp -p $SRCFILE.asc index.asc
-            cp -p $SRCFILE.html index.html
-          done
-          if test -n "$SRCFILE"; then
-            rm $SRCFILE.html $SRCFILE.asc
-          fi
-        fi
-        #rm *.adoc[23]
+    cd resources
+    cp -p $LIBDIR/*.css .
+    copacetic=1
+    for f in *.adoc; do
+      if test ! -f $f; then copacetic=0
       fi
-      cd ..
+    done
+    if test x$copacetic = x0; then
+      echo WARNING: No teacher resource files in pathway $PATHWAY
+    else
+      export PATHWAYROOTDIR="../"
+      export TEACHER_RESOURCES=1
+      $PROGDIR/adoc-preproc.rkt *.adoc
+      unset TEACHER_RESOURCES
+      if test ! -f index.html; then
+        SRCFILE=
+        for g in *.adoc; do
+          SRCFILE=${g%.adoc}
+          cp -p $SRCFILE.asc index.asc
+          cp -p $SRCFILE.html index.html
+        done
+        if test -n "$SRCFILE"; then
+          rm $SRCFILE.html $SRCFILE.asc
+        fi
+      fi
+      #rm *.adoc[23]
     fi
+    cd ..
 
     if test ! -f workbook-page-index.rkt; then
       echo WARNING: No workbook index file in pathway $PATHWAY
     else
       export PATHWAYROOTDIR=""
+      cp -p $PROGDIR/front-cover-teacher.pdf .
       $PROGDIR/make-workbook.rkt
     fi
 
