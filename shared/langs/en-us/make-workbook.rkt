@@ -80,7 +80,7 @@
         (fprintf o "\\includepdf{front-cover-teacher.pdf}\n"))
       (when include-lesson
         (for ((lesson *lessons*))
-          (fprintf o "\\includepdf{lessons/~a/index.pdf}\n" lesson)))
+          (fprintf o "\\includepdf[pages=-]{lessons/~a/index.pdf}\n" lesson)))
       (let loop ((i 1) (pdf-page-specs *pdf-page-specs*))
         (unless (null? pdf-page-specs)
           (let* ((pdf-page-spec (car pdf-page-specs))
@@ -124,8 +124,8 @@
 
 (make-workbook)
 
-(make-workbook #:teacher-version #t)
-
 (make-workbook #:include-lesson #t)
+
+(make-workbook #:teacher-version #t)
 
 (void)

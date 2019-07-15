@@ -594,6 +594,7 @@
               (link-to-lessons-in-pathway o)
 
               (fprintf o "~nlink:./workbook/workbook.pdf[Student Workbook]~n")
+              (fprintf o "~nlink:./workbook/pd-workbook.pdf[PD Workbook]~n")
 
               (fprintf o "~nlink:./resources/index.html[Teacher Resources]~n")
 
