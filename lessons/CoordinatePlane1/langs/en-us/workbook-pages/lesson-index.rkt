@@ -1,6 +1,6 @@
 (
-"CoverPageAttributePage.pdf"
-"BSABigIdeas.pdf"
+;"CoverPageAttributePage.pdf"
+;"BSABigIdeas.pdf"
 "CoordinatesCoverPage.pdf"
 "ReverseEngineerGame.pdf"
 ("Estimation.pdf" "landscape")

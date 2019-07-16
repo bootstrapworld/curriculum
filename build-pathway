@@ -1,4 +1,4 @@
-# last modified 2019-07-13
+# last modified 2019-07-15
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -101,7 +101,6 @@ buildlessonplan() {
     fi
     echo Creating lesson plan pdf
     wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
-    #rm *.adoc[23]
   fi
   cd ..
 }
@@ -185,7 +184,6 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      #rm *.adoc[23]
     fi
     cd ..
 
@@ -193,8 +191,9 @@ buildpathway() {
       echo WARNING: No workbook index file in pathway $PATHWAY
     else
       export PATHWAYROOTDIR=""
-      cp -p $PROGDIR/front-cover-teacher.pdf .
+      cp -p $PROGDIR/front-cover-teacher.pdf $PROGDIR/BSABigIdeas.pdf .
       $PROGDIR/make-workbook.rkt
+      rm -f workbook-numbered.* front-cover-teacher.pdf BSABigIdeas.pdf
     fi
 
     copacetic=1
@@ -223,7 +222,6 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      #rm *.adoc[23]
     fi
 
   fi

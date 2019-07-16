@@ -20,26 +20,30 @@
 
   (define *pdf-page-specs*
     (map (lambda (f)
-           (let* ((lesson-dir (string-append "lessons/" (car f)))
+           (let* ((lesson-basename (list-ref f 0))
+                  (lesson-workbook-page (list-ref f 1))
+                  (lesson-handle (list-ref f 2))
+                  (lesson-aspect (list-ref f 3))
+                  (lesson-dir (string-append "lessons/" lesson-basename))
                   (lesson-title (call-with-input-file
                                   (string-append lesson-dir "/index-title.txt")
                                   read-line))
                   (g (string-append lesson-dir
                                     (if teacher-version "/workbook-sols-pages/" "/workbook-pages/")
-                                    (cadr f))))
+                                    lesson-workbook-page)))
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
-             (list g (caddr f) (cadddr f) lesson-title)))
+             (list g lesson-basename lesson-handle lesson-aspect lesson-title)))
          *workbook-page-specs*))
 
-  ; *pdf-page-specs* is listof (docfile handle aspect title)
+  ; *pdf-page-specs* is listof (docfile basename handle aspect title)
 
   (set! *pdf-page-specs*
     (filter (lambda (f)
-              (let ((g (car f)))
-                (if (file-exists? g) #t
+              (let ((docfile (car f)))
+                (if (file-exists? docfile) #t
                     (begin
-                      (printf "ERROR: ~a is not present\n" g)
+                      (printf "ERROR: ~a is not present\n" docfile)
                       #f))))
             *pdf-page-specs*))
 
@@ -47,9 +51,10 @@
 
   (for ((pdf-page-spec *pdf-page-specs*))
     (let ((docfile (list-ref pdf-page-spec 0))
-          (handle (list-ref pdf-page-spec 1))
-          (aspect (list-ref pdf-page-spec 2))
-          (title (list-ref pdf-page-spec 3)))
+          (basename (list-ref pdf-page-spec 1))
+          (handle (list-ref pdf-page-spec 2))
+          (aspect (list-ref pdf-page-spec 3))
+          (title (list-ref pdf-page-spec 4)))
       (system* *pdftk*
                (format "Q=~a" docfile)
                "cat"
@@ -74,32 +79,35 @@
 \\setlength\\oddsidemargin{-0.25in}
 \\setlength\\evensidemargin{-0.25in}
 %
-\\begin{document}\n
-\\pagestyle{empty}\n\n")
-      (when teacher-version
-        (fprintf o "\\includepdf{front-cover-teacher.pdf}\n"))
-      (when include-lesson
-        (for ((lesson *lessons*))
-          (fprintf o "\\includepdf[pages=-]{lessons/~a/index.pdf}\n" lesson)))
-      (let loop ((i 1) (pdf-page-specs *pdf-page-specs*))
-        (unless (null? pdf-page-specs)
-          (let* ((pdf-page-spec (car pdf-page-specs))
-                 (handle (list-ref pdf-page-spec 1))
-                 (title (list-ref pdf-page-spec 3)))
-            (set! title (regexp-replace* "&" title "\\\\&"))
-            (when (<= i 2)
-              (fprintf o "\\includepdf{~a.pdf}\n"
-                       handle))
-            (when (= i 3)
-              (fprintf o "\\pagenumbering{arabic}
 \\pagestyle{fancy}
+\\renewcommand{\\headrulewidth}{0pt}
+\\lhead{}\\rhead{}
 \\fancyhf{}
-\\rfoot{\\thepage}
-\n\n"))
-            (when (>= i 3)
-              (fprintf o "\\includepdf[pagecommand={\\thispagestyle{fancy}\\lfoot{~a}}]{~a.pdf}\n"
-                       title handle)))
-          (loop (+ i 1) (cdr pdf-page-specs))))
+%
+\\begin{document}\n\n")
+      (when (or teacher-version include-lesson)
+        (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{front-cover-teacher.pdf}\n"))
+      (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
+      (let ((curr-lesson #f))
+        (let loop ((i 1) (pdf-page-specs *pdf-page-specs*))
+          (unless (null? pdf-page-specs)
+            (let* ((pdf-page-spec (car pdf-page-specs))
+                   (basename (list-ref pdf-page-spec 1))
+                   (handle (list-ref pdf-page-spec 2))
+                   (title (list-ref pdf-page-spec 4))
+                   (fresh-lesson (not (equal? basename curr-lesson))))
+              (set! title (regexp-replace* "&" title "\\\\&"))
+              (cond (fresh-lesson
+                      (set! curr-lesson basename)
+                      (fprintf o "\n\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
+                               "" i handle)
+                      (when include-lesson
+                        (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{lessons/~a/index.pdf}\n"
+                                 curr-lesson)))
+                    (else
+                      (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
+                               title i handle)))
+              (loop (+ i 1) (cdr pdf-page-specs))))))
       (fprintf o "\n\\end{document}\n")
       )
     #:exists 'replace)
@@ -109,7 +117,7 @@
   (when *pdflatex* (system* *pdflatex* "workbook-numbered"))
 
   (for ((pdf-page-spec *pdf-page-specs*))
-    (let ((handle (list-ref pdf-page-spec 1)))
+    (let ((handle (list-ref pdf-page-spec 2)))
       (delete-file (format "~a.pdf" handle))))
 
   (when (file-exists? "workbook-numbered.pdf")
@@ -123,9 +131,12 @@
   )
 
 (make-workbook)
+(system (format "mv workbook-numbered.tex workbook.tex"))
 
 (make-workbook #:include-lesson #t)
+(system (format "mv workbook-numbered.tex pd-workbook.tex"))
 
 (make-workbook #:teacher-version #t)
+(system (format "mv workbook-numbered.tex workbook-sols.tex"))
 
 (void)
