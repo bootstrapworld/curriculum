@@ -184,11 +184,11 @@
                 (else
                   (loop (cdr args) (cons arg r))))))))
 
-(define (include-glossary-and-standards-files o pathway?)
+(define (include-glossary-and-standards-files o)
   ;(printf "include-glossary-and-standards-files~n")
   (newline o)
   (newline o)
-  (cond (pathway?
+  (cond ((getenv "NARRATIVE")
           (fprintf o "link:./index-glossary.html[Glossary for This Pathway]~%~%")
           (fprintf o "link:./index-standards.html[Standards in This Pathway]~%~%"))
         (else
@@ -332,7 +332,7 @@
     ;
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
-      (include-glossary-and-standards-files o #t)
+      (include-glossary-and-standards-files o)
 
       (let ((lessons (call-with-input-file "workbook-index.rkt" read)))
 
@@ -544,9 +544,12 @@
                                   (cond ((file-exists? htmlf) (set! f htmlf))
                                         ((file-exists? pdff) (set! f pdff)))
 
-                                  (fprintf o "link:~a[~a]" f
+                                  (fprintf o "link:~a[~a~a]" f
                                            (string-join
-                                             (map string-trim (cdr args)) ", "))))
+                                             (map string-trim (cdr args)) ", ")
+                                           (if (getenv "LESSONPLAN")
+                                               ", window=\"_blank\""
+                                               ""))))
                                ((string=? directive "lesson-description")
                                 (unless (getenv "LESSON")
                                   (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
@@ -574,7 +577,7 @@
                                      ((check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
                                       (when (getenv "LESSONPLAN")
-                                        (include-glossary-and-standards-files o #f)))
+                                        (include-glossary-and-standards-files o)))
                                      (else #f))
                                (display-section-markup i o)
                                ;(display c o)
@@ -602,16 +605,15 @@
             )
           #:exists 'replace)))
 
-    (when (or (not (getenv "LESSON"))
-              (and (getenv "LESSON") (getenv "LESSONPLAN")))
+    (when (or (getenv "NARRATIVE")
+              (getenv "LESSONPLAN"))
       (create-glossary-and-standards-subfiles glossary-items standards-met))
 
-    (cond ((getenv "LESSON")
-           (when (getenv "LESSONPLAN")
-             (accumulate-glossary-and-standards glossary-items standards-met)))
-          (else
-            (asciidoctor "-a title=Glossary index-glossary.asc")
-            (asciidoctor "-a title=Standards index-standards.asc")))
+    (cond ((getenv "LESSONPLAN")
+           (accumulate-glossary-and-standards glossary-items standards-met))
+          ((getenv "NARRATIVE")
+           (asciidoctor "-a title=Glossary index-glossary.asc")
+           (asciidoctor "-a title=Standards index-standards.asc")))
 
     (asciidoctor out-file)))
 
