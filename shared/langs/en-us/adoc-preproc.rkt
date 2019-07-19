@@ -241,7 +241,8 @@
       (set! snippet.pdf (path-replace-extension f ".pdf"))
       (cond ((file-exists? snippet.html) (set! g (path-replace-extension g ".html")))
             ((file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))))
-      (format "link:{pathwayrootdir}~a[~aPage ~a]" g link-text pno)
+      (format "link:{pathwayrootdir}~a[~aPage ~a~a]" g link-text pno
+              (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
       ;(format "link:{pathwayrootdir}~a[~a]" g link-text)
       )))
 
@@ -547,9 +548,7 @@
                                   (fprintf o "link:~a[~a~a]" f
                                            (string-join
                                              (map string-trim (cdr args)) ", ")
-                                           (if (getenv "LESSONPLAN")
-                                               ", window=\"_blank\""
-                                               ""))))
+                                           (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))))
                                ((string=? directive "lesson-description")
                                 (unless (getenv "LESSON")
                                   (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
