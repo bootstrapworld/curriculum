@@ -140,6 +140,7 @@ Write some examples, then circle and label what changes...\n\n")
             ))))))
 
 (define (list-to-string xx)
+  (printf "list-to-string ~s\n" xx)
   (let ((ans (apply string-append
                     (reverse
                       (let loop ((xx xx) (r '()))
@@ -283,6 +284,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                                 #:show-body? (show-body? #f)
                                 #:grid-lines? (grid-lines? #f)
                                 #:lang (lang 'racket)
+                                #:assess-design-recipe (assess-design-recipe #f)
                                 )
 
   (set! *show-funname-contract?* show-funname-contract?)
@@ -303,6 +305,17 @@ Write the definition, giving variable names to all your input values...\n\n")
     (set! *show-funname-defn?* #f)
     (set! *show-params?* #f)
     (set! *show-body?* #f)
+    )
+
+  (when (and *solutions-mode?* (not assess-design-recipe))
+    (set! *show-funname-contract?* #t)
+    (set! *show-domains?* #t)
+    (set! *show-range?* #t)
+    (set! *show-purpose?* #t)
+    (set! *show-examples* #t)
+    (set! *show-funname-defn?* #t)
+    (set! *show-params?* #t)
+    (set! *show-body?* #t)
     )
 
   ;(printf "d-r-e body= ~s\n" body)
@@ -375,6 +388,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                             #:body body
                             #:show-body? #t
                             #:grid-lines? grid-lines?
+                            #:assess-design-recipe #t
                             )))
 
 (define *function-list*
