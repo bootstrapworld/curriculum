@@ -51,7 +51,7 @@ Every contract has three parts...\n\n")
         (string-append
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           ":"
-          (encoded-ans ".recipe_domain" (list-to-string domain-list) *show-domains?*)
+          (encoded-ans ".recipe_domain" (vars-to-string domain-list) *show-domains?*)
           "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
@@ -139,8 +139,19 @@ Write some examples, then circle and label what changes...\n\n")
             (write-large ")")
             ))))))
 
+(define (expr-to-string x)
+  (format "~s" x))
+
 (define (list-to-string xx)
-  (printf "list-to-string ~s\n" xx)
+  ;(printf "list-to-string ~s\n" xx)
+  (let ((ans (apply string-append
+                    (reverse
+                      (let loop ((xx xx) (r '()))
+                        (if (null? xx) r
+                            (loop (cdr xx) (cons (format " ~s" (car xx)) r))))))))
+    (if (string=? ans "") " " ans)))
+
+(define (vars-to-string xx)
   (let ((ans (apply string-append
                     (reverse
                       (let loop ((xx xx) (r '()))
@@ -168,7 +179,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                   (write-large "(")
                   (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                   " "
-                  (encoded-ans ".recipe_variables" (list-to-string param-list) *show-params?*)
+                  (encoded-ans ".recipe_variables" (vars-to-string param-list) *show-params?*)
                   (write-large ")"))))
 
             (cond (cond?
@@ -248,7 +259,7 @@ Write the definition, giving variable names to all your input values...\n\n")
       res)))
 
 (define (write-cond-clause clause)
-  ;(printf "doing write-cond-clause ~a ~a\n" clause)
+  ;(printf "doing write-cond-clause ~s\n" clause)
   (write-wrapper ".recipe_line.recipe_cond_clause"
     (lambda ()
       (string-append (encoded-ans "" "MMMMM" #f)
@@ -256,7 +267,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                      (write-wrapper ".clause"
                        (lambda ()
                          (string-append
-                           (encoded-ans ".questions" (car clause) *show-body?*)
+                           (encoded-ans ".questions" (expr-to-string (car clause)) *show-body?*)
                            " "
                            (encoded-ans ".answers" (list-to-string (cdr clause)) *show-body?*))))
                      (write-large "{endsb}")))))
