@@ -2,6 +2,8 @@
 
 #lang racket
 
+(define *base-namespace* (make-base-namespace))
+
 (define (read-word i)
   (let loop ((r '()))
     (let ((c (peek-char i)))
@@ -159,18 +161,15 @@
               (loop (cons x r))))))))
 
 (define (rearrange-args args)
-  (define (remove-quote arg)
-    (if (and (list? arg)
-             (= (length arg) 2)
-             (eq? (car arg) 'quote))
-        (cadr arg)
-        arg))
+
+  (define (massage-arg arg)
+    (eval arg *base-namespace*))
 
   (define (sort-keyword-args args)
     (let ((args-paired (let loop ((args args) (r '()))
                          (if (null? args) r
                                (loop (cddr args)
-                                     (cons (list (car args) (remove-quote (cadr args)))
+                                     (cons (list (car args) (massage-arg (cadr args)))
                                          r))))))
       (sort args-paired keyword<? #:key car)))
 
