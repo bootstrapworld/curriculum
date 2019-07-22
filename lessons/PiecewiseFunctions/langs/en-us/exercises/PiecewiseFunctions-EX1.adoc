@@ -5,13 +5,13 @@
   #:purpose "given a menu-item, produce the cost of that menu-item" 
   #:num-examples 2 
   #:example-list '((""hamburger"" 6.00) (""pie"" 2.25))
-  #:show-examples '((#t #t #f) (#t #t #f))
+  #:show-examples '((#t #t #t) (#t #t #t))
   #:param-list (list "menu-item") 
-  #:show-params? #f 
+  #:show-params? #t 
   #:body '(cond [(string=? topping "hamburger") 6.00] 
                 [(string=? topping "onion rings") 3.50] 
                 [(string=? topping "fried tofu") 5.25]
 		[(string=? topping "pie") 2.25]
 		[else "That's not on the menu!"]) 
-  #:show-body? #f 
+  #:show-body? #t
   #:grid-lines? #t }
