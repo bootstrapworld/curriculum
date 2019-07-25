@@ -22,6 +22,7 @@
     (and (< i n) (list-ref s i))))
 
 (define (encoded-ans style s show?)
+  ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
   (format "[.studentAnswer.~a~a]##~a##"
           (if show? "solution" "blank")
           style
@@ -135,7 +136,7 @@ Write some examples, then circle and label what changes...\n\n")
             (write-large ")")
             (write-clear) ;EXAMPLE body on its own line!
             (encoded-ans "" "MM" #f)
-            (encoded-ans ".recipe_example_body" body show-body?)
+            (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?)
             (write-large ")")
             ))))))
 
@@ -199,7 +200,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
-                          (encoded-ans ".recipe_definition_body" body *show-body?*)
+                          (encoded-ans ".recipe_definition_body" (expr-to-string body) *show-body?*)
                           (write-large ")")
                           )))))
 
