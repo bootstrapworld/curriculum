@@ -2,6 +2,8 @@
 
 #lang racket
 
+(require "defines.rkt")
+
 (define *base-namespace* (make-base-namespace))
 
 (define (read-word i)
@@ -188,8 +190,8 @@
   (newline o)
   (newline o)
   (cond ((getenv "NARRATIVE")
-          (fprintf o "link:./index-glossary.html[Glossary for This Pathway]~%~%")
-          (fprintf o "link:./index-standards.html[Standards in This Pathway]~%~%"))
+          (fprintf o "link:./index-glossary.html[~a]~%~%" *pathway-glossary-header*)
+          (fprintf o "link:./index-standards.html[~a]~%~%" *pathway-standards-header*))
         (else
           (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
           ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")

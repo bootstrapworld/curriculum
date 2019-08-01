@@ -1,4 +1,4 @@
-# last modified 2019-07-15
+# last modified 2019-08-01
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -10,16 +10,38 @@ echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
+export LANGUAGE=en-us
+
 if test $# -eq 0
 then args="pathways/*"
-else args="$@"
+else
+  args=
+  while test $# -ne 0; do
+    arg=$1; shift
+    if test x$arg = x--language; then
+      LANGUAGE=$1; shift
+    else
+      args="$args $arg"
+    fi
+  done
 fi
 
 export TOPDIR=$(pwd)
 
-PROGDIR=$TOPDIR/shared/langs/en-us
+if test ! -d prog; then
+  mkdir prog
+fi
 
-LIBDIR=$TOPDIR/lib
+PROGDIR=$TOPDIR/prog
+
+#cp -p $TOPDIR/lib/* $PROGDIR
+
+# just in case shared/langs/$LANGUAGE isn't sufficiently populated
+cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
+
+cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+
+cp -p $TOPDIR/lib/* $PROGDIR
 
 if test ! -d distribution; then
   mkdir distribution
@@ -50,7 +72,7 @@ buildworkbookpages() {
       fi
       cd $d
       export PATHWAYROOTDIR="../../../"
-      cp -p $LIBDIR/*.css .
+      cp -p $PROGDIR/*.css .
       for f in *.adoc; do
         if test ! -f $f; then
           echo "        " No adoc files in lesson $L/$d
@@ -70,6 +92,7 @@ buildworkbookpages() {
 }
 
 buildlessonplan() {
+  echo doing buildlessonplan
   L=$1
   echo
   echo building $L lesson plan
@@ -83,7 +106,7 @@ buildlessonplan() {
   if test x$copacetic = x0; then
     echo WARNING: No lesson plan in lesson $L
   else
-    cp -p $LIBDIR/*.css .
+    cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
     echo building lesson plan from *.adoc
@@ -106,6 +129,7 @@ buildlessonplan() {
 }
 
 buildlessons() {
+  echo doing buildlessons
   cd lessons
   for L in *; do
     if test ! -d $L; then
@@ -142,10 +166,10 @@ buildpathway() {
 
   if test ! -d distribution/$PATHWAY; then
     echo WARNING: No pathway $PATHWAY
-  elif test ! -d distribution/$PATHWAY/langs/en-us; then
+  elif test ! -d distribution/$PATHWAY/langs/$LANGUAGE; then
     echo WARNING: No files in pathway $PATHWAY
   else
-    cd distribution/$PATHWAY/langs/en-us
+    cd distribution/$PATHWAY/langs/$LANGUAGE
 
     mkdir lessons workbook
     mkdir -p resources/protected
@@ -153,6 +177,7 @@ buildpathway() {
     if test ! -f workbook-index.rkt; then
       echo WARNING: No workbook-index.rkt in pathway $PATHWAY
     else
+      echo calling copy-lessons.rkt
       $PROGDIR/copy-lessons.rkt
     fi
 
@@ -160,7 +185,7 @@ buildpathway() {
     echo
 
     cd resources
-    cp -p $LIBDIR/*.css .
+    cp -p $PROGDIR/*.css .
     copacetic=1
     for f in *.adoc; do
       if test ! -f $f; then copacetic=0
@@ -204,7 +229,7 @@ buildpathway() {
     if test x$copacetic = x0; then
       echo WARNING: No narrative in pathway $PATHWAY
     else
-      cp -p $LIBDIR/*.css .
+      cp -p $PROGDIR/*.css .
       export PATHWAYROOTDIR=""
       export NARRATIVE=1
       # there should be only one?
@@ -234,9 +259,11 @@ for f in $args; do
   buildpathway $f
 done
 
+rm -fr prog
+
 for f in distribution/*; do
   echo >> index.adoc
-  docf=$f/langs/en-us/index.html
+  docf=$f/langs/$LANGUAGE/index.html
   if test -f $docf; then
     echo \* link:$docf[$f Narrative] >> index.adoc
   fi

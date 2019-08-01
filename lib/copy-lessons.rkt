@@ -23,11 +23,13 @@
 (define *workbook-index*
   (call-with-input-file "workbook-index.rkt" read))
 
+(define *language* (getenv "LANGUAGE"))
+
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(~n")
     (for ((lesson *workbook-index*))
-      (system (format "cp -pr $TOPDIR/lessons/~a/langs/en-us lessons/~a" lesson lesson))
+      (system (format "cp -pr $TOPDIR/lessons/~a/langs/~a lessons/~a" lesson *language* lesson))
       (let* ((lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson))
              (lesson-index
                (cond ((file-exists? lesson-index-file)

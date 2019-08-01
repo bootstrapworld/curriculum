@@ -10,14 +10,21 @@ The top directory contains the subdirectories `lessons`,
 Explore them to see where things are.
 
   build-pathway
-  /lib/*.css
+  /lib/asciidoctor.css
+       shared.css
+       adoc-preproc.rkt
+       copy-lessons.rkt
+       form-elements.rkt
+       function-directives.rkt
+       make-workbook.rkt
   /shared
-    /langs/en-us/glossary-terms.rkt
+    /langs/en-us/curriculum.css
+                 BSABigIdeas.pdf
+                 front-cover-teacher.pdf
+                 defines.rkt
+                 glossary-terms.rkt
                  standards-dictionary.rkt
-                 adoc-preproc.rkt
-                 form-elements.rkt
-                 function-directives.rkt
-                 make-workbook.rkt
+                 curriculum.css
   /lessons
     /lessonX/langs/en-us/index.adoc
                          exercises/<recipe>.adoc
@@ -88,15 +95,22 @@ teacher resources page. However, a file `index.adoc`, if it exists, will
 definitely be chosen for the teacher resources page.)
 
 The top dir contains the script `build-pathway`. It takes any
-number of pathways and creates a generated document tree for each
-of them under the `distribution` directory. If no argument is
-supplied, `build-pathway generates documents for every pathway in
+number of pathway arguments and an optional `--language`
+argument.
+
+For each of the pathway args, it creates a document tree under
+the `distribution` directory. A pathway arg can be either the
+pathway name, or its relative pathname from the `build-pathway`
+script, with or without a trailing slash, e.g., `pathwayP`, or
+`pathways/pathwayP`, or `pathways/pathwayP/`.
+
+If no pathway arg is supplied,
+`build-pathway` generates doctrees for every pathway in
 `pathways`.
 
-E.g., `build-pathway pathwayP` (or
-or `pathways/pathwayP` or `pathways/pathwayP/`, for those into
-shell completion) builds the subtree
-`distribution/pathwayP`.
+If no `--language` option is supplied, the language used is
+`en-us`. To specify another language, say `es-mx`, use
+`--language es-mx`.
 
    distribution/
      pathwayX/langs/en-us/index.html
