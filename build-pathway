@@ -1,4 +1,4 @@
-# last modified 2019-08-01
+# last modified 2019-08-02
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -34,14 +34,14 @@ fi
 
 PROGDIR=$TOPDIR/prog
 
-#cp -p $TOPDIR/lib/* $PROGDIR
+cp -p $TOPDIR/lib/* $PROGDIR
 
 # just in case shared/langs/$LANGUAGE isn't sufficiently populated
 cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
 
-cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
-
-cp -p $TOPDIR/lib/* $PROGDIR
+if test -d $TOPDIR/shared/langs/$LANGUAGE; then
+  cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+fi
 
 if test ! -d distribution; then
   mkdir distribution
