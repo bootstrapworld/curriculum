@@ -4,11 +4,13 @@ if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
 fi
 
-echo '== Generated Documentation' > index.adoc
-echo >> index.adoc
-echo link:README.html[Authoring Guide] >> index.adoc
-echo >> index.adoc
-echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
+if test ! -f index.adoc; then
+  echo '== Generated Documentation' > index.adoc
+  echo >> index.adoc
+  echo link:README.html[Authoring Guide] >> index.adoc
+  echo >> index.adoc
+  echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
+fi
 
 export LANGUAGE=en-us
 
@@ -156,10 +158,14 @@ buildpathway() {
   PATHWAY=${PATHWAY%/}
 
   # remove previous build of $PATHWAY in distribution/, if any
-  if test -d distribution/$PATHWAY; then
-    rm -fr distribution/$PATHWAY
+  if test ! -d distribution/$PATHWAY; then
+    cp -pr pathways/$PATHWAY distribution
+  elif test -d distribution/$PATHWAY/langs; then
+    if test -d distribution/$PATHWAY/langs/$LANGUAGE; then
+      rm -fr distribution/$PATHWAY/langs/$LANGUAGE
+    fi
+    cp -pr pathways/$PATHWAY/langs/$LANGUAGE distribution/$PATHWAY/langs
   fi
-  cp -pr pathways/$PATHWAY distribution
 
   echo
   echo building pathway: $PATHWAY
@@ -261,11 +267,14 @@ done
 
 rm -fr prog
 
+echo >> index.adoc
+echo .{nbsp} >> index.adoc
+
 for f in distribution/*; do
-  echo >> index.adoc
   docf=$f/langs/$LANGUAGE/index.html
   if test -f $docf; then
-    echo \* link:$docf[$f Narrative] >> index.adoc
+    echo >> index.adoc
+    echo \* link:$docf[$f Narrative, $LANGUAGE] >> index.adoc
   fi
 done
 
