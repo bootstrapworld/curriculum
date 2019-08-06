@@ -27,11 +27,15 @@ Explore them to see where things are.
                  curriculum.css
   /lessons
     /lessonX/langs/en-us/index.adoc
-                         exercises/<recipe>.adoc
-                         images/<picture>.jpg
+                         exercises/recipe.adoc
+                         images/picture.jpg
                          workbook-pages/lesson-index.rkt
-                         workbook-pages/<page>.pdf
-                         workbook-sols-pages/<page>.pdf
+                         workbook-pages/page1.adoc
+                         workbook-pages/page2.pdf
+                         workbook-pages/pyret/page2.pdf
+                         workbook-sols-pages/page2.pdf
+                         workbook-sols-pages/pyret/page2.pdf
+
   /pathways
     /pathwayX/langs/en-us/index.adoc
                           workbook-index.rkt
@@ -66,6 +70,11 @@ when creating the teacher version of the lesson pages. They use
 the same filename as the “student” pages they replace. Only pages
 that differ between the two versions need be supplied.
 
+The subdirs `pyret` in the `workbook-pages` and
+`workbook-sols-pages` contain workpages that would replace
+corresponding pages when creating versions for the option
+`--proglang pyret` (see below).
+
 There are three pathways in the repo for now:
 
   pathways/pathwayP
@@ -95,8 +104,8 @@ teacher resources page. However, a file `index.adoc`, if it exists, will
 definitely be chosen for the teacher resources page.)
 
 The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments and an optional `--language`
-argument.
+number of pathway arguments, an optional `--language`
+argument, and an optional `--proglang` argument.
 
 For each of the pathway args, it creates a document tree under
 the `distribution` directory. A pathway arg can be either the
@@ -108,22 +117,26 @@ If no pathway arg is supplied,
 `build-pathway` generates doctrees for every pathway in
 `pathways`.
 
-If no `--language` option is supplied, the language used is
+If no `--language` option is supplied, the prose language used is
 `en-us`. To specify another language, say `es-mx`, use
 `--language es-mx`.
 
+If no `--proglang` option is supplied, the programming language
+used is `wescheme`. To specify another language, say `pyret`, use
+`--language pyret`.
+
    distribution/
-     pathwayX/langs/en-us/index.html
-                          pathway-lessons.html
-                          lessons/
-                                 index.html
-                                 exercises/*.{html,pdf}
-                                 workbook-pages/*.{html.pdf}
-                          resources/
-                             index.html
-                             protected/
-                                workbook-sols.pdf
-                          workbook/workbook.pdf
+     pathwayX-wescheme-en-us/index.html
+                             pathway-lessons.html
+                             lessons/
+                                    index.html
+                                    exercises/*.{html,pdf}
+                                    workbook-pages/*.{html.pdf}
+                             resources/
+                                index.html
+                                protected/
+                                   workbook-sols.pdf
+                             workbook/workbook.pdf
 
 Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
@@ -147,7 +160,7 @@ The following was reverse-engineered from the latest Google Docs
 mock-up of a lesson from Jen/Ed. Change this to reflect
 experience.
 
-link:distribution/lessons/lessonA/langs/en-us/index.html[Sample
+link:distribution/pathwayP-wescheme-en-us/lessons/lessonA/index.html[Sample
 lesson plan]
 
 == Git basics
@@ -319,6 +332,19 @@ like
 
   ("demo-page"
        "https://bootstrapworld.github.io/curriculum/index.html")
+
+==== Programming language specific text
+
+Use the conditional with the attribute `proglang` to selectively
+render portions of the document for a specific programming
+language. E.g.,
+
+```
+  ifeval::["{proglang}" == "pyret"]
+  This text occurs in the Pyret-specific portion of the
+  document.
+  endif::[]
+```
 
 == Some useful classes and directives
 

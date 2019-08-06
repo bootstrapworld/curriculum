@@ -1,4 +1,4 @@
-# last modified 2019-08-02
+# last modified 2019-08-06
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -13,19 +13,22 @@ if test ! -f index.adoc; then
 fi
 
 export LANGUAGE=en-us
+export PROGLANG=wescheme
 
-if test $# -eq 0
-then args="pathways/*"
-else
-  args=
-  while test $# -ne 0; do
-    arg=$1; shift
-    if test x$arg = x--language; then
-      LANGUAGE=$1; shift
-    else
-      args="$args $arg"
-    fi
-  done
+ARGS=
+while test $# -ne 0; do
+  arg=$1; shift
+  if test x$arg = x--language; then
+    LANGUAGE=$1; shift
+  elif test x$arg = x--proglang; then
+    PROGLANG=$1; shift
+  else
+    ARGS="$ARGS $arg"
+  fi
+done
+
+if test "$ARGS" = ""; then
+  ARGS="pathways/*"
 fi
 
 export TOPDIR=$(pwd)
@@ -54,17 +57,29 @@ buildworkbookpages() {
   echo
   echo building $L workbook-pages
   cd $L
+  #
+  if test -d workbook-pages/$PROGLANG; then
+    cp -p workbook-pages/$PROGLANG/* workbook-pages
+  fi
+  #
   cp -pr workbook-pages solutions-pages
+  if test -d workbook-sols-pages; then
+    for f in workbook-sols-pages/*; do
+      if test -f $f; then
+        cp -p $f solutions-pages
+      fi
+    done
+    if test -d workbook-sols-pages/$PROGLANG; then
+      cp -p workbook-sols-pages/$PROGLANG/* solutions-pages
+    fi
+    rm -fr workbook-sols-pages
+  fi
+  mv solutions-pages workbook-sols-pages
+  #
   if test -d exercises; then
     cp -pr exercises exercises-sols
   fi
-  for f in workbook-sols-pages/*; do
-    if test -f $f; then
-      cp -p $f solutions-pages
-    fi
-  done
-  rm -fr workbook-sols-pages
-  mv solutions-pages workbook-sols-pages
+  #
   for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
     if test -d $d; then
       echo \(building $d\)
@@ -151,31 +166,29 @@ buildlessons() {
 buildpathway() {
   cd $TOPDIR
 
-  PATHWAY=$1
+  SRCPATHWAY=$1
 
-  PATHWAY=${PATHWAY#pathways/}
+  SRCPATHWAY=${SRCPATHWAY#pathways/}
 
-  PATHWAY=${PATHWAY%/}
+  SRCPATHWAY=${SRCPATHWAY%/}
+
+  PATHWAY=$SRCPATHWAY-$PROGLANG-$LANGUAGE
 
   # remove previous build of $PATHWAY in distribution/, if any
-  if test ! -d distribution/$PATHWAY; then
-    cp -pr pathways/$PATHWAY distribution
-  elif test -d distribution/$PATHWAY/langs; then
-    if test -d distribution/$PATHWAY/langs/$LANGUAGE; then
-      rm -fr distribution/$PATHWAY/langs/$LANGUAGE
-    fi
-    cp -pr pathways/$PATHWAY/langs/$LANGUAGE distribution/$PATHWAY/langs
+  if test -d distribution/$PATHWAY; then
+    rm -fr distribution/$PATHWAY
   fi
+  cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY
+
+
 
   echo
   echo building pathway: $PATHWAY
 
   if test ! -d distribution/$PATHWAY; then
     echo WARNING: No pathway $PATHWAY
-  elif test ! -d distribution/$PATHWAY/langs/$LANGUAGE; then
-    echo WARNING: No files in pathway $PATHWAY
   else
-    cd distribution/$PATHWAY/langs/$LANGUAGE
+    cd distribution/$PATHWAY
 
     mkdir lessons workbook
     mkdir -p resources/protected
@@ -261,7 +274,7 @@ buildpathway() {
 
 }
 
-for f in $args; do
+for f in $ARGS; do
   buildpathway $f
 done
 
@@ -271,10 +284,10 @@ echo >> index.adoc
 echo .{nbsp} >> index.adoc
 
 for f in distribution/*; do
-  docf=$f/langs/$LANGUAGE/index.html
+  docf=$f/index.html
   if test -f $docf; then
     echo >> index.adoc
-    echo \* link:$docf[$f Narrative, $LANGUAGE] >> index.adoc
+    echo \* link:$docf[$f Narrative, \($PROGLANG, $LANGUAGE\)] >> index.adoc
   fi
 done
 

@@ -6,6 +6,11 @@
 
 (define *solutions-mode?* (getenv "SOLUTIONS"))
 
+(define *proglang* (getenv "PROGLANG"))
+
+(unless (member *proglang* '("pyret" "wescheme"))
+  (error 'function-directives.rkt "Unknown proglang ~a" *proglang*))
+
 (define *show-funname-contract?* #f)
 (define *show-domains?* #f)
 (define *show-range?* #f)
@@ -18,7 +23,7 @@
 (define *div-nesting* 0)
 
 (define (ft-list-ref s i)
-  (let ((n (length s)))
+  (let ([n (length s)])
     (and (< i n) (list-ref s i))))
 
 (define (encoded-ans style s show?)
@@ -27,7 +32,7 @@
           (if show? "solution" "blank")
           style
           (if show? s
-              (let ((n (string-length (if (string? s) s (format "~a" s)))))
+              (let ([n (string-length (if (string? s) s (format "~a" s)))])
                 (make-string n #\M)))))
 
 (define (write-directions page-header funname directions)
@@ -77,91 +82,133 @@ Write some examples, then circle and label what changes...\n\n")
                          (write-each-example (caar e) (cdar e) (cadr e) #t))
                        buggy-example-list) ]
                  [else
-                   (let* ((example-list-len (length example-list))
-                          (num-blank-examples (max 0 (- num-examples example-list-len))))
+                   (let* ([example-list-len (length example-list)]
+                          [num-blank-examples (max 0 (- num-examples example-list-len))])
                      (append
                        (map (lambda (e s)
-                              (let* ((n (- (length e) 1))
-                                     (body (list-ref e n))
-                                     (parms (take e n)))
+                              (let* ([n (- (length e) 1)]
+                                     [body (list-ref e n)]
+                                     [parms (take e n)])
                                 (write-each-example funname parms body s)))
                             example-list
-                            (cond ((eq? *show-examples* #t)
-                                   (build-list example-list-len (lambda (i) #t)))
-                                  ((eq? *show-examples* #f)
-                                   (build-list example-list-len (lambda (i) #f)))
-                                  (else
-                                    (let* ((num-examples-after-shown-ones
+                            (cond [(eq? *show-examples* #t)
+                                   (build-list example-list-len (lambda (i) #t))]
+                                  [(eq? *show-examples* #f)
+                                   (build-list example-list-len (lambda (i) #f))]
+                                  [else
+                                    (let* ([num-examples-after-shown-ones
                                              (max 0 (- example-list-len
-                                                       (length *show-examples*))))
-                                           (mod-show-examples
+                                                       (length *show-examples*)))]
+                                           [mod-show-examples
                                              (append *show-examples* (build-list
                                                                        num-examples-after-shown-ones
-                                                                       (lambda (i) #f))))
-                                           (mod-show-examples
-                                             (take mod-show-examples example-list-len)))
-                                      mod-show-examples))))
+                                                                       (lambda (i) #f)))]
+                                           [mod-show-examples
+                                             (take mod-show-examples example-list-len)])
+                                      mod-show-examples)]))
                        (build-list num-blank-examples
                                    (lambda (i)
                                      (write-each-example funname '() '() #f)))))]
                  ))
     ))
 
-(define (write-each-example funname parms body show)
-  ;(printf "write-each-example ~s ~s ~s ~s\n" funname parms body show)
-  (let ((show-funname? #f)
-        (show-args? #f)
-        (show-body? #f))
-    (cond ((not show) #f)
-          ((not *solutions-mode?*) #f)
-          ((eqv? show #t)
+(define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
+  ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
+  (string-append
+    (write-wrapper ".recipe_graf"
+      (lambda ()
+        (string-append
+          ;(write-clear)
+          (write-large "(")
+          (write-spaced "EXAMPLE ")
+          (write-large "(")
+          (encoded-ans ".recipe_name" funname show-funname?)
+          " "
+          (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
+          (write-large ")")
+          (write-clear) ;EXAMPLE body on its own line!
+          (encoded-ans "" "MM" #f)
+          (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?)
+          (write-large ")")
+          )))))
+
+(define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
+  (write-wrapper ".recipe_graf"
+    (lambda ()
+      (string-append
+        ;(write-clear)
+        (write-spaced "examples:")
+        (write-clear)
+        (encoded-ans "" "MM" #f)
+        (encoded-ans ".recipe_name" funname show-funname?)
+        " "
+        (write-large "(")
+        (encoded-ans ".recipe_example_inputs" (list-to-commaed-string args) show-args?)
+        (write-large ")")
+        (write-clear)
+        (encoded-ans "" "MM" #f)
+        (write-spaced "is")
+        (encoded-ans "" "MM" #f)
+        (encoded-ans ".recipe_example_body" body show-body?)
+        (write-clear)
+        (write-spaced "end")
+        ))))
+
+(define (write-each-example funname args body show)
+  (let ([show-funname? #f]
+        [show-args? #f]
+        [show-body? #f])
+    (cond [(not show) #f]
+          [(not *solutions-mode?*) #f]
+          [(eqv? show #t)
            (set! show-funname? #t)
            (set! show-args? #t)
-           (set! show-body? #t))
-          ((list? show)
+           (set! show-body? #t)]
+          [(list? show)
            (set! show-funname? (list-ref show 0))
            (set! show-args? (list-ref show 1))
-           (set! show-body? (list-ref show 2))))
-    (string-append
-      (write-wrapper ".recipe_graf"
-        (lambda ()
-          (string-append
-            ;(write-clear)
-            (write-large "(")
-            (write-spaced "EXAMPLE ")
-            (write-large "(")
-            (encoded-ans ".recipe_name" funname show-funname? )
-            " "
-            (encoded-ans ".recipe_example_inputs" (list-to-string parms) show-args?)
-            (write-large ")")
-            (write-clear) ;EXAMPLE body on its own line!
-            (encoded-ans "" "MM" #f)
-            (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?)
-            (write-large ")")
-            ))))))
+           (set! show-body? (list-ref show 2))])
+    ((case *proglang*
+       [("pyret") write-each-example/pyret]
+       [("wescheme") write-each-example/wescheme])
+     funname show-funname? args show-args? body show-body?)))
 
 (define (expr-to-string x)
   (format "~s" x))
 
 (define (list-to-string xx)
   ;(printf "list-to-string ~s\n" xx)
-  (let ((ans (apply string-append
+  (let ([ans (apply string-append
                     (reverse
-                      (let loop ((xx xx) (r '()))
+                      (let loop ([xx xx] [r '()])
                         (if (null? xx) r
-                            (loop (cdr xx) (cons (format " ~s" (car xx)) r))))))))
+                            (loop (cdr xx) (cons (format " ~s" (car xx)) r))))))])
     (if (string=? ans "") " " ans)))
+
+(define (list-to-commaed-string xx)
+  (cond [(null? xx) ""]
+        [(= (length xx) 1) (format "~s" (car xx))]
+        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
+                (if (null? xx) r
+                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
 
 (define (vars-to-string xx)
-  (let ((ans (apply string-append
+  (let ([ans (apply string-append
                     (reverse
-                      (let loop ((xx xx) (r '()))
+                      (let loop ([xx xx] [r '()])
                         (if (null? xx) r
-                            (loop (cdr xx) (cons (format " ~a" (car xx)) r))))))))
+                            (loop (cdr xx) (cons (format " ~a" (car xx)) r))))))])
     (if (string=? ans "") " " ans)))
 
-(define (write-definition funname param-list body)
-  (let ((cond? (and (pair? body) (eqv? (car body) 'cond))))
+(define (vars-to-commaed-string xx)
+  (cond [(null? xx) ""]
+        [(= (length xx) 1) (format "~a" (car xx))]
+        [else (let loop ([xx (cdr xx)] [r (format "~a" (car xx))])
+                (if (null? xx) r
+                    (loop (cdr xx) (string-append r ", " (format "~a" (car xx))))))]))
+
+(define (write-definition/wescheme funname param-list body)
+  (let ([cond? (and (pair? body) (eqv? (car body) 'cond))])
     (string-append
       (format "\n
 [.recipe_title]
@@ -183,41 +230,81 @@ Write the definition, giving variable names to all your input values...\n\n")
                   (encoded-ans ".recipe_variables" (vars-to-string param-list) *show-params?*)
                   (write-large ")"))))
 
-            (cond (cond?
+            (cond [cond?
                     (write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (write-large "(")
-                          (encoded-ans ".recipe_cond" "cond" *show-body?*)))))
-                  (else ""))
+                          (encoded-ans ".recipe_cond" "cond" *show-body?*))))]
+                  [else ""])
 
-            (cond (cond?
+            (cond [cond?
                     (apply string-append
-                           (map write-cond-clause (cdr body))))
-                  (else
+                           (map write-cond-clause (cdr body)))]
+                  [else
                     (write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (encoded-ans ".recipe_definition_body" (expr-to-string body) *show-body?*)
                           (write-large ")")
-                          )))))
+                          )))])
 
-            (cond (cond?
+            (cond [cond?
                     (write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
-                          (write-large "))")))))
-                  (else
+                          (write-large "))"))))]
+                  [else
                     ""
                     #;(write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (write-large ")"))))
-                    ))))))))
+                    ])))))))
+
+(define (write-definition/pyret funname param-list body)
+  (if (not (string? body))
+      "Don't care"
+      (let ([body-lines (map string-trim (regexp-split #rx"\n" body))])
+        (string-append
+          (format "\n
+[.recipe_title]
+Definition\n
+[.recipe_instructions]
+Write the definition, giving variable names to all your input values...\n\n")
+          (write-null-wrapper ""
+            (lambda ()
+              (string-append
+                (write-wrapper ".recipe_line"
+                  (lambda ()
+                    (string-append
+                      (write-spaced "fun ")
+                      (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+                      (write-large "(")
+                      (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
+                      (write-large ")"))))
+                (apply string-append
+                       (map
+                         (lambda (body-line)
+                           (write-wrapper ".recipe_line"
+                             (lambda ()
+                               (string-append
+                                 (encoded-ans "" "MM" #f)
+                                 (encoded-ans ".recipe_definition_body" body-line *show-body?*)))))
+                         body-lines))
+                (write-wrapper ".recipe_line"
+                  (lambda ()
+                    "end")))))))))
+
+(define (write-definition funname param-list body)
+  ((case *proglang*
+     [("pyret") write-definition/pyret]
+     [("wescheme") write-definition/wescheme])
+   funname param-list body))
 
 (define (write-clear)
   "[.clear]## ##")
@@ -233,7 +320,7 @@ Write the definition, giving variable names to all your input values...\n\n")
 (define *wrapper-block-level* 0)
 
 (define (write-wrapper-scan classes thunk)
-  (let ((res (thunk)))
+  (let ([res (thunk)])
     (if (or #t (string=? classes "")) res
         (format "[~a]##~a##" classes res))))
 
@@ -242,8 +329,8 @@ Write the definition, giving variable names to all your input values...\n\n")
 
 (define (write-wrapper classes thunk)
   (string-append
-    (let ((old-*wrapper-block-level* *wrapper-block-level*)
-          (res #f))
+    (let ([old-*wrapper-block-level* *wrapper-block-level*]
+          [res #f])
       (set! *wrapper-block-level* (+ *wrapper-block-level* 2))
       (if (= *wrapper-block-level* 2)
           (set! res (string-append
@@ -375,7 +462,7 @@ Write the definition, giving variable names to all your input values...\n\n")
   (unless range (error 'assess-design-recipe "range required"))
   (unless purpose (error 'assess-design-recipe "purpose required"))
   (unless body (error 'assess-design-recipe "body required"))
-  (let ((use-examples (if (cons? buggy-example-list) buggy-example-list example-list)))
+  (let ([use-examples (if (cons? buggy-example-list) buggy-example-list example-list)])
     (design-recipe-exercise funname directions
                             #:page-header "Check for Mistakes in this Word Problem"
                             #:show-funname-contract? #t

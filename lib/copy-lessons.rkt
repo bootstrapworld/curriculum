@@ -30,16 +30,16 @@
     (fprintf o "(~n")
     (for ((lesson *workbook-index*))
       (system (format "cp -pr $TOPDIR/lessons/~a/langs/~a lessons/~a" lesson *language* lesson))
-      (let* ((lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson))
-             (lesson-index
-               (cond ((file-exists? lesson-index-file)
-                      (call-with-input-file lesson-index-file read))
-                     (else
+      (let* ([lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson)]
+             [lesson-index
+               (cond [(file-exists? lesson-index-file)
+                      (call-with-input-file lesson-index-file read)]
+                     [else
                        (printf "WARNING: Lesson ~a is incorrectly organized~n" lesson)
-                       '()))))
+                       '()])])
         (for ((page lesson-index))
-          (let ((file page)
-                (aspect "portrait"))
+          (let ([file page]
+                [aspect "portrait"])
             (when (pair? page)
               (set! file (car page))
               (set! aspect (cadr page)))
