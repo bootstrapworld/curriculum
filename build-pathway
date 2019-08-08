@@ -1,4 +1,4 @@
-# last modified 2019-08-06
+# last modified 2019-08-08
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -13,7 +13,7 @@ if test ! -f index.adoc; then
 fi
 
 export LANGUAGE=en-us
-export PROGLANG=wescheme
+export PROGLANG=
 
 ARGS=
 while test $# -ne 0; do
@@ -122,6 +122,8 @@ buildlessonplan() {
   done
   if test x$copacetic = x0; then
     echo WARNING: No lesson plan in lesson $L
+  elif test $(find -maxdepth 1 -name \*.adoc|wc -l) -gt 1; then
+    echo WARNING: Too many lesson plans in lesson $L
   else
     cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
@@ -166,35 +168,38 @@ buildlessons() {
 buildpathway() {
   cd $TOPDIR
 
-  SRCPATHWAY=$1
+  PATHWAY=$SRCPATHWAY
 
-  SRCPATHWAY=${SRCPATHWAY#pathways/}
-
-  SRCPATHWAY=${SRCPATHWAY%/}
-
-  PATHWAY=$SRCPATHWAY-$PROGLANG-$LANGUAGE
-
-  # remove previous build of $PATHWAY in distribution/, if any
-  if test -d distribution/$PATHWAY; then
-    rm -fr distribution/$PATHWAY
+  # special-casing only algebra and bs-game-pathway,
+  # as they're the only pathways that allow two prog langs
+  if test "$SRCPATHWAY" = bs-game-pathway -o "$SRCPATHWAY" = algebra; then
+    PATHWAY=$SRCPATHWAY-$PROGLANG
+  elif test "$PROGLANG" = wescheme; then
+    PATHWAY=$SRCPATHWAY-wescheme
   fi
-  cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY
-
-
-
-  echo
-  echo building pathway: $PATHWAY
 
   if test ! -d distribution/$PATHWAY; then
-    echo WARNING: No pathway $PATHWAY
+    mkdir distribution/$PATHWAY
+  fi
+  # remove previous build of $PATHWAY in distribution/, if any
+  if test -d distribution/$PATHWAY/$LANGUAGE; then
+    rm -fr distribution/$PATHWAY/$LANGUAGE
+  fi
+  cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
+
+  echo
+
+  if test ! -d distribution/$PATHWAY/$LANGUAGE; then
+    echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
-    cd distribution/$PATHWAY
+    echo building pathway: $PATHWAY/$LANGUAGE
+    cd distribution/$PATHWAY/$LANGUAGE
 
     mkdir lessons workbook
     mkdir -p resources/protected
 
     if test ! -f workbook-index.rkt; then
-      echo WARNING: No workbook-index.rkt in pathway $PATHWAY
+      echo WARNING: No workbook-index.rkt in pathway $PATHWAY/$LANGUAGE
     else
       echo calling copy-lessons.rkt
       $PROGDIR/copy-lessons.rkt
@@ -232,7 +237,7 @@ buildpathway() {
     cd ..
 
     if test ! -f workbook-page-index.rkt; then
-      echo WARNING: No workbook index file in pathway $PATHWAY
+      echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
     else
       export PATHWAYROOTDIR=""
       cp -p $PROGDIR/front-cover-teacher.pdf $PROGDIR/BSABigIdeas.pdf .
@@ -247,6 +252,8 @@ buildpathway() {
     done
     if test x$copacetic = x0; then
       echo WARNING: No narrative in pathway $PATHWAY
+    elif test $(find -maxdepth 1 -name \*.adoc|wc -l) -gt 1; then
+      echo WARNING: Too many narratives in pathway $PATHWAY
     else
       cp -p $PROGDIR/*.css .
       export PATHWAYROOTDIR=""
@@ -275,7 +282,21 @@ buildpathway() {
 }
 
 for f in $ARGS; do
-  buildpathway $f
+  export SRCPATHWAY=$f
+  export SRCPATHWAY=${SRCPATHWAY#pathways/}
+  export SRCPATHWAY=${SRCPATHWAY%/}
+  if test "$PROGLANG" = ""; then
+    if test "$SRCPATHWAY" = bs-game-pathway -o "$SRCPATHWAY" = algebra; then
+      export PROGLANG=wescheme; buildpathway
+      export PROGLANG=pyret
+    else
+      export PROGLANG=pyret
+    fi
+    buildpathway
+    unset PROGLANG
+  else
+    buildpathway
+  fi
 done
 
 rm -fr prog
@@ -284,10 +305,10 @@ echo >> index.adoc
 echo .{nbsp} >> index.adoc
 
 for f in distribution/*; do
-  docf=$f/index.html
+  docf=$f/$LANGUAGE/index.html
   if test -f $docf; then
     echo >> index.adoc
-    echo \* link:$docf[$f Narrative, \($PROGLANG, $LANGUAGE\)] >> index.adoc
+    echo \* link:$docf[$f Narrative \($LANGUAGE\)] >> index.adoc
   fi
 done
 

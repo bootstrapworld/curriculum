@@ -121,22 +121,36 @@ If no `--language` option is supplied, the prose language used is
 `en-us`. To specify another language, say `es-mx`, use
 `--language es-mx`.
 
-If no `--proglang` option is supplied, the programming language
-used is `wescheme`. To specify another language, say `pyret`, use
-`--language pyret`.
+The doctree for the built pathway under `distribution` resides
+under a subdirectory named for the prose language, e.g., `en-us`.
 
    distribution/
-     pathwayX-wescheme-en-us/index.html
-                             pathway-lessons.html
-                             lessons/
-                                    index.html
-                                    exercises/*.{html,pdf}
-                                    workbook-pages/*.{html.pdf}
-                             resources/
-                                index.html
-                                protected/
-                                   workbook-sols.pdf
-                             workbook/workbook.pdf
+     pathwayX/en-us/index.html
+                    pathway-lessons.html
+                    lessons/
+                           index.html
+                           exercises/*.{html,pdf}
+                           workbook-pages/*.{html.pdf}
+                    resources/
+                       index.html
+                       protected/
+                          workbook-sols.pdf
+                    workbook/workbook.pdf
+
+If no `--proglang` option is supplied to `build-pathway`, the programming language
+used is `pyret`. To specify another language, say `wescheme`, use
+`--language wescheme`. The distribution doctree for a language
+other than `pyret` is named with that language as a hyphenated
+suffix, e.g., `pathwayP-wescheme`.
+
+The general run of pathways are written for `pyret`. However, for
+now, the pathways named `bs-game-pathway` and `algebra` are
+written for both `pyret` and `wescheme`, and `wescheme` version
+is equally or more important than the `pyret version. Such pathways always use
+the language suffix for better disambiguation. Thus,
+`algebra-wescheme` coexists with `algebra-pyret`.
+(This special case may be removed in future
+releases.)
 
 Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
@@ -160,7 +174,7 @@ The following was reverse-engineered from the latest Google Docs
 mock-up of a lesson from Jen/Ed. Change this to reflect
 experience.
 
-link:distribution/pathwayP-wescheme-en-us/lessons/lessonA/index.html[Sample
+link:distribution/pathwayP/en-us/lessons/lessonA/index.html[Sample
 lesson plan]
 
 == Git basics
