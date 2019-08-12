@@ -1,4 +1,4 @@
-# last modified 2019-08-08
+# last modified 2019-08-12
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -39,7 +39,8 @@ fi
 
 PROGDIR=$TOPDIR/prog
 
-cp -p $TOPDIR/lib/* $PROGDIR
+cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
+cp -p $TOPDIR/lib/.htp* .
 
 # just in case shared/langs/$LANGUAGE isn't sufficiently populated
 cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
@@ -209,7 +210,7 @@ buildpathway() {
     echo
 
     cd resources
-    cp -p $PROGDIR/*.css .
+    cp -p $PROGDIR/*.css $PROGDIR/.hta* .
     copacetic=1
     for f in *.adoc; do
       if test ! -f $f; then copacetic=0
