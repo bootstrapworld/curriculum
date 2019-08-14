@@ -1,4 +1,4 @@
-# last modified 2019-08-12
+# last modified 2019-08-14
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -40,7 +40,6 @@ fi
 PROGDIR=$TOPDIR/prog
 
 cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
-cp -p $TOPDIR/lib/.htp* .
 
 # just in case shared/langs/$LANGUAGE isn't sufficiently populated
 cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
@@ -52,6 +51,8 @@ fi
 if test ! -d distribution; then
   mkdir distribution
 fi
+
+cp -p $TOPDIR/lib/.htp* distribution
 
 buildworkbookpages() {
   L=$1
@@ -123,7 +124,7 @@ buildlessonplan() {
   done
   if test x$copacetic = x0; then
     echo WARNING: No lesson plan in lesson $L
-  elif test $(find -maxdepth 1 -name \*.adoc|wc -l) -gt 1; then
+  elif test $(ls *.adoc|wc -l) -gt 1; then
     echo WARNING: Too many lesson plans in lesson $L
   else
     cp -p $PROGDIR/*.css .
@@ -253,7 +254,7 @@ buildpathway() {
     done
     if test x$copacetic = x0; then
       echo WARNING: No narrative in pathway $PATHWAY
-    elif test $(find -maxdepth 1 -name \*.adoc|wc -l) -gt 1; then
+    elif test $(ls *.adoc|wc -l) -gt 1; then
       echo WARNING: Too many narratives in pathway $PATHWAY
     else
       cp -p $PROGDIR/*.css .
@@ -300,7 +301,7 @@ for f in $ARGS; do
   fi
 done
 
-rm -fr prog
+rm -fr $PROGDIR
 
 echo >> index.adoc
 echo .{nbsp} >> index.adoc
