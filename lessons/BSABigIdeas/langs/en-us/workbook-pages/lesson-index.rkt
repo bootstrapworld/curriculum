@@ -1,0 +1,3 @@
+(
+ ("BSABigIdeas.pdf" "portrait" "nopagenum")
+ )

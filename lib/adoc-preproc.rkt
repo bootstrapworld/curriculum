@@ -345,7 +345,8 @@
         (fprintf o ")~n")
         (fprintf o "[#lesson-list]~%")
         (for ((lesson lessons))
-          (let ([lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
+          (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
+                [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
                 [lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson)]
                 [lesson-title lesson]
                 [lesson-description #f])
@@ -362,8 +363,12 @@
                             (set! r (string-append r "\n" x))
                             (loop))))
                       r)))))
-            (fprintf o "link:./lessons/~a/index.html[~a] ::" lesson lesson-title)
-            (when lesson-description
+            (when (file-exists? lesson-index-file)
+              (fprintf o "link:~a[~a] ::" lesson-index-file lesson-title)
+              (if lesson-description
+                  (display lesson-description o)
+                  (display " {nbsp}" o)))
+            #;(when lesson-description
               (display lesson-description o)
               ;(newline o)
               )
@@ -380,7 +385,9 @@
                 (lambda (toco)
                   (fprintf toco "[verse]~n")
                   (for ((lesson lessons))
-                    (let ([lesson-glossary-file
+                    (let ([lesson-asc-file
+                            (format "./lessons/~a/index.asc" lesson)]
+                          [lesson-glossary-file
                             (format "./lessons/~a/~a" lesson lesson-glossary-accumulator)]
                           [lesson-standards-file
                             (format "./lessons/~a/~a" lesson lesson-standards-accumulator)]
@@ -416,10 +423,13 @@
 
                       ;(printf "took care of pw stds~n")
 
-                      (fprintf lo "[[~a]]~n" lesson)
-                      (fprintf toco "<<~a>>~n" lesson)
-                      (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
-                               lesson)))) #:exists 'replace))
+                      (when (file-exists? lesson-asc-file)
+                        (fprintf lo "[[~a]]~n" lesson)
+                        (fprintf toco "<<~a>>~n" lesson)
+                        (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
+                                 lesson))
+                      )))
+                #:exists 'replace))
             #:exists 'replace)
         (asciidoctor lessons-file)
         (newline o))))

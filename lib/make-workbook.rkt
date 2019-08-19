@@ -24,16 +24,18 @@
                   [lesson-workbook-page (list-ref f 1)]
                   [lesson-handle (list-ref f 2)]
                   [lesson-aspect (list-ref f 3)]
+                  [lesson-pagenum (list-ref f 4)]
                   [lesson-dir (string-append "lessons/" lesson-basename)]
-                  [lesson-title (call-with-input-file
-                                  (string-append lesson-dir "/index-title.txt")
-                                  read-line)]
+                  [lesson-title-file (string-append lesson-dir "/index-title.txt")]
+                  [lesson-title (if (file-exists? lesson-title-file)
+                                    (call-with-input-file lesson-title-file read-line)
+                                    "")]
                   [g (string-append lesson-dir
                                     (if teacher-version "/workbook-sols-pages/" "/workbook-pages/")
                                     lesson-workbook-page)])
              (when (path-has-extension? g #".adoc")
                (set! g (path-replace-extension g ".pdf")))
-             (list g lesson-basename lesson-handle lesson-aspect lesson-title)))
+             (list g lesson-basename lesson-handle lesson-aspect lesson-pagenum lesson-title)))
          *workbook-page-specs*))
 
   ; *pdf-page-specs* is listof (docfile basename handle aspect title)
@@ -50,11 +52,13 @@
   ;(printf "*pdf-page-specs* = ~s~n" *pdf-page-specs*)
 
   (for ((pdf-page-spec *pdf-page-specs*))
+    ;(printf "pdf-page-spec = ~s~n" pdf-page-spec)
     (let ([docfile (list-ref pdf-page-spec 0)]
           [basename (list-ref pdf-page-spec 1)]
           [handle (list-ref pdf-page-spec 2)]
           [aspect (list-ref pdf-page-spec 3)]
-          [title (list-ref pdf-page-spec 4)])
+          [pagneum (list-ref pdf-page-spec 4)]
+          [title (list-ref pdf-page-spec 5)])
       (system* *pdftk*
                (format "Q=~a" docfile)
                "cat"
@@ -87,26 +91,32 @@
 \\begin{document}\n\n")
       (when (or teacher-version include-lesson)
         (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{front-cover-teacher.pdf}\n"))
-      (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
+      ;(fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
       (let ([curr-lesson #f])
         (let loop ([i 1] [pdf-page-specs *pdf-page-specs*])
           (unless (null? pdf-page-specs)
             (let* ([pdf-page-spec (car pdf-page-specs)]
                    [basename (list-ref pdf-page-spec 1)]
                    [handle (list-ref pdf-page-spec 2)]
-                   [title (list-ref pdf-page-spec 4)]
+                   ;[aspect (list-ref pdf-page-spec 3)]
+                   [paginate (list-ref pdf-page-spec 4)]
+                   [title (list-ref pdf-page-spec 5)]
+                   [page-num i]
                    [fresh-lesson (not (equal? basename curr-lesson))])
               (set! title (regexp-replace* "&" title "\\\\&"))
+              (set! paginate (if (char-ci=? (string-ref paginate 0) #\y) #t #f))
+              (unless paginate
+                (set! page-num "") (set! title "") (set! i (- i 1)))
               (cond [fresh-lesson
                       (set! curr-lesson basename)
                       (fprintf o "\n\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                               "" i handle)
-                      (when include-lesson
+                               "" page-num handle)
+                      (when (and include-lesson #f)
                         (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{lessons/~a/index.pdf}\n"
                                  curr-lesson))]
                     [else
                       (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                               title i handle)])
+                               title page-num handle)])
               (loop (+ i 1) (cdr pdf-page-specs))))))
       (fprintf o "\n\\end{document}\n")
       )

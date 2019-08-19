@@ -39,11 +39,15 @@
                        '()])])
         (for ((page lesson-index))
           (let ([file page]
-                [aspect "portrait"])
+                [aspect "portrait"]
+                [paginate "yes"])
             (when (pair? page)
-              (set! file (car page))
-              (set! aspect (cadr page)))
-          (fprintf o "(~s ~s ~s ~s)~n" lesson file (gen-handle) aspect)))))
+              (let ([len (length page)])
+                (set! file (car page))
+                (set! aspect (cadr page))
+                (when (>= len 3)
+                  (set! paginate (caddr page)))))
+            (fprintf o "(~s ~s ~s ~s ~s)~n" lesson file (gen-handle) aspect paginate)))))
     (fprintf o ")~n")))
 
 ;(printf "returning from copy-lessons.rkt~n")
