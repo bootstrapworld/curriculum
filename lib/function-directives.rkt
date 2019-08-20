@@ -28,7 +28,9 @@
 
 (define (encoded-ans style s show?)
   ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
-  (format "[.studentAnswer.~a~a]##~a##"
+  (format "[.studentAnswer~a.~a~a]##~a##"
+          (if (string=? style ".recipe_purpose")
+              "" ".studentAnswerCode")
           (if show? "solution" "blank")
           style
           (if show? s
@@ -61,7 +63,7 @@ Every contract has three parts...\n\n")
           "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
-    (write-wrapper ".recipe_graf"
+    (write-wrapper-scan ".recipe_graf"
       (lambda ()
         (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))))
 

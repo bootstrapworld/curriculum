@@ -152,12 +152,6 @@ td.tableblock>.content { margin-bottom: 0px; }
   vertical-align: top;
 }
 
-/*
-.wrapper * {
-  vertical-align: top;
-}
-*/
-
 span.spacer {
   display: inline-block;
   line-height: 20pt;
@@ -171,7 +165,6 @@ span.clear {
 }
 
 .recipe_name,
-.recipe_purpose,
 .recipe_domain,
 .recipe_range,
 .recipe_example_inputs,
@@ -182,6 +175,12 @@ span.clear {
 .questions,
 .answers
 {
+  font-family: monospace;
+  display: inline-block;
+  border-bottom: solid 1pt black;
+}
+
+.recipe_purpose {
   display: inline-block;
   border-bottom: solid 1pt black;
 }
@@ -272,18 +271,26 @@ span.clear {
   color: black;
 }
 
+.studentAnswerCode {
+  height: 20pt;
+  word-break: break-all;
+  font-family: monospace;
+  white-space: pre;
+  text-align: center;
+}
+
 .studentAnswer {
   margin-bottom:  12pt;
   min-width:      100pt;
-  height:         20pt;
+  /* height:         20pt; */
   line-height:    20pt;
   position:       relative;
   padding:        0pt 0pt;
-  word-break:     break-all;
-  font-family:    monospace;
-  white-space:    pre;
+  /* word-break:     break-all; */
+  /* font-family:    monospace; */
+  /* white-space:    pre; */
   margin-right:   5pt;
-  text-align:     center;
+  /* text-align:     center; */
   word-spacing:   4pt;
 }
 
@@ -360,9 +367,9 @@ span.clear {
   .studentAnswer::after { font-size: 6pt; }
 
   /* Force preamble to always be on its own page */
-  #preamble { page-break-after: always; } 
+  #preamble { page-break-after: always; }
   /* More padding between sections, and don't ever break a section across pages */
-  .lesson-section-1 { margin-bottom: 20px; page-break-inside: avoid;} 
+  .lesson-section-1 { margin-bottom: 20px; page-break-inside: avoid;}
 
   /* bold borders between sections */
   .sect1+.sect1 { border-top: solid 3px black; }
