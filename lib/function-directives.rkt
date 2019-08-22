@@ -117,7 +117,7 @@ Write some examples, then circle and label what changes...\n\n")
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
   (string-append
-    (write-wrapper ".recipe_graf"
+    (write-wrapper ".recipe_example_line"
       (lambda ()
         (string-append
           ;(write-clear)
@@ -135,7 +135,7 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  (write-wrapper ".recipe_graf"
+  (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
         ;(write-clear)
