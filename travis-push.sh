@@ -18,5 +18,7 @@ git commit -a -m "committed at $(date)"
 
 git push --force "https://${GH_TOKEN}@${GH_REF}" travistmp:gh-pages > /dev/null 2>&1
 
-echo The whole tree!
-ls -R
+echo git push --force "https://${GH_TOKEN}@${GH_REF}" travistmp:gh-pages
+
+#echo The whole tree!
+#ls -R
