@@ -1,16 +1,14 @@
-# last modified 2019-08-19
+# last modified 2019-08-26
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
 fi
 
-if test ! -f index.adoc; then
-  echo '== Generated Documentation' > index.adoc
-  echo >> index.adoc
-  echo link:README.html[Authoring Guide] >> index.adoc
-  echo >> index.adoc
-  echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
-fi
+echo '== Generated Documentation' > index.adoc
+echo >> index.adoc
+echo link:README.html[Authoring Guide] >> index.adoc
+echo >> index.adoc
+echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
 export LANGUAGE=en-us
 export PROGLANG=
@@ -306,11 +304,15 @@ rm -fr $PROGDIR
 echo >> index.adoc
 echo .{nbsp} >> index.adoc
 
-for f in distribution/*; do
-  docf=$f/$LANGUAGE/index.html
+for f in distribution/*/*; do
+  f=${f%/}
+  g=${f#distribution/}
+  pwy=${g%/*}
+  lang=${g#*/}
+  docf=$f/index.html
   if test -f $docf; then
     echo >> index.adoc
-    echo \* link:$docf[$f Narrative \($LANGUAGE\)] >> index.adoc
+    echo \* link:$docf[$pwy Narrative \($lang\)] >> index.adoc
   fi
 done
 
