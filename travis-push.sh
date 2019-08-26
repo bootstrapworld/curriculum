@@ -14,7 +14,11 @@ for f in $FILES_TO_COMMIT; do
   find . -name .htaccess | xargs git add -f
 done
 
+echo Committing to travistmp...
+
 git commit -a -m "committed at $(date)"
+
+echo Pushing to gh-pages...
 
 git push --force "https://${GH_TOKEN}@${GH_REF}" travistmp:gh-pages > /dev/null 2>&1
 
