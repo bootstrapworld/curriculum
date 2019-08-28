@@ -77,6 +77,12 @@ Examples\n
 Write some examples, then circle and label what changes...\n\n")
     ;examples
 
+    (if (string=? *proglang* "pyret")
+        (write-wrapper ".recipe_example_line"
+          (lambda ()
+            (write-spaced "examples:")))
+        "")
+
     (apply string-append
            (cond [(and #t (cons? buggy-example-list))
                   ;(printf "doing buggy-example-list ~s\n" buggy-example-list)
@@ -112,6 +118,12 @@ Write some examples, then circle and label what changes...\n\n")
                                    (lambda (i)
                                      (write-each-example funname '() '() #f)))))]
                  ))
+
+    (if (string=? *proglang* "pyret")
+        (write-wrapper ".recipe_example_line"
+          (lambda ()
+            (write-spaced "end")))
+        "")
     ))
 
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
@@ -138,8 +150,6 @@ Write some examples, then circle and label what changes...\n\n")
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
-        ;(write-clear)
-        (write-spaced "examples:")
         (write-clear)
         (encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
@@ -153,7 +163,6 @@ Write some examples, then circle and label what changes...\n\n")
         (encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_example_body" body show-body?)
         (write-clear)
-        (write-spaced "end")
         ))))
 
 (define (write-each-example funname args body show)
