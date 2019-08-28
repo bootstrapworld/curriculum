@@ -1,4 +1,4 @@
-# last modified 2019-08-26
+# last modified 2019-08-28
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -52,6 +52,11 @@ fi
 
 cp -p $TOPDIR/lib/.htp* distribution
 
+resolvepyretkeywords() {
+  f=$1
+  sed -i -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' $f
+}
+
 buildworkbookpages() {
   L=$1
   echo
@@ -98,6 +103,7 @@ buildworkbookpages() {
           $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
+          resolvepyretkeywords $fhtml
           wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
         fi
       done
@@ -201,7 +207,6 @@ buildpathway() {
     if test ! -f workbook-index.rkt; then
       echo WARNING: No workbook-index.rkt in pathway $PATHWAY/$LANGUAGE
     else
-      echo calling copy-lessons.rkt
       $PROGDIR/copy-lessons.rkt
     fi
 

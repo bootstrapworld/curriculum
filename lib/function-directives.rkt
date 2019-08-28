@@ -37,6 +37,38 @@
               (let ([n (string-length (if (string? s) s (format "~a" s)))])
                 (make-string n #\M)))))
 
+(define (pyret-keyword? w)
+  ;(printf "doing pyret-keyword? ~s\n" w)
+  (ormap
+    (lambda (kw) (string=? w kw))
+    '(
+      "else"
+      "else:"
+      "end"
+      "examples:"
+      "fun"
+      "if"
+      "is"
+      )))
+
+(define (highlight-keywords s)
+  ;(printf "doing (~a) highlight-keywords ~s\n" *proglang* s)
+  (if (not (string? s))
+      "Don't care"
+      (let ([lines (regexp-split #rx"\n" s)])
+        (string-join
+          (map (lambda (ln)
+                 (let ([words (regexp-split #rx" " ln)])
+                   (string-join
+                     (map (lambda (w)
+                            (if (pyret-keyword? w)
+                                (begin
+                                  ;(printf "found keyword ~a\n" w)
+                                  (format "@PYRETKEYWORD~a@END" w))
+                                w))
+                          words) " ")))
+               lines) "\n"))))
+
 (define (write-directions page-header funname directions)
   (format "\n
 [.designRecipeLayout]
@@ -80,7 +112,7 @@ Write some examples, then circle and label what changes...\n\n")
     (if (string=? *proglang* "pyret")
         (write-wrapper ".recipe_example_line"
           (lambda ()
-            (write-spaced "examples:")))
+            (write-spaced (highlight-keywords "examples:"))))
         "")
 
     (apply string-append
@@ -122,7 +154,7 @@ Write some examples, then circle and label what changes...\n\n")
     (if (string=? *proglang* "pyret")
         (write-wrapper ".recipe_example_line"
           (lambda ()
-            (write-spaced "end")))
+            (write-spaced (highlight-keywords "end"))))
         "")
     ))
 
@@ -159,9 +191,9 @@ Write some examples, then circle and label what changes...\n\n")
         (write-large ")")
         (write-clear)
         (encoded-ans "" "MM" #f)
-        (write-spaced "is")
+        (write-spaced (highlight-keywords "is"))
         (encoded-ans "" "MM" #f)
-        (encoded-ans ".recipe_example_body" body show-body?)
+        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         (write-clear)
         ))))
 
@@ -293,7 +325,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                 (write-wrapper ".recipe_line"
                   (lambda ()
                     (string-append
-                      (write-spaced "fun ")
+                      (write-spaced (highlight-keywords "fun "))
                       (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                       (write-large "(")
                       (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
@@ -305,11 +337,13 @@ Write the definition, giving variable names to all your input values...\n\n")
                              (lambda ()
                                (string-append
                                  (encoded-ans "" "MM" #f)
-                                 (encoded-ans ".recipe_definition_body" body-line *show-body?*)))))
+                                 (encoded-ans ".recipe_definition_body_pyret"
+                                              (highlight-keywords body-line) *show-body?*)))))
                          body-lines))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    "end")))))))))
+                    (encoded-ans ".recipe_definition_body"
+                                 (highlight-keywords "end") #t))))))))))
 
 (define (write-definition funname param-list body)
   ((case *proglang*
