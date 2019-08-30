@@ -1,4 +1,4 @@
-# last modified 2019-08-28
+# last modified 2019-08-30
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -9,6 +9,18 @@ echo >> index.adoc
 echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
+
+export TOPDIR=$(pwd)
+
+if test ! -d distribution; then
+  mkdir distribution
+fi
+
+cd distribution
+
+echo '== Generated Documentation' > index.adoc
+
+cd $TOPDIR
 
 export LANGUAGE=en-us
 export PROGLANG=
@@ -29,7 +41,6 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-export TOPDIR=$(pwd)
 
 if test ! -d prog; then
   mkdir prog
@@ -46,11 +57,8 @@ if test -d $TOPDIR/shared/langs/$LANGUAGE; then
   cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
 fi
 
-if test ! -d distribution; then
-  mkdir distribution
-fi
 
-cp -p $TOPDIR/lib/.htp* distribution
+#cp -p $TOPDIR/lib/.htp* distribution
 
 resolvepyretkeywords() {
   f=$1
@@ -203,6 +211,7 @@ buildpathway() {
 
     mkdir lessons workbook
     mkdir -p resources/protected
+    cp -p $PROGDIR/.hta* resources/protected
 
     if test ! -f workbook-index.rkt; then
       echo WARNING: No workbook-index.rkt in pathway $PATHWAY/$LANGUAGE
@@ -312,6 +321,23 @@ echo .{nbsp} >> index.adoc
 for f in distribution/*/*; do
   f=${f%/}
   g=${f#distribution/}
+  pwy=${g%/*}
+  lang=${g#*/}
+  docf=$f/index.html
+  if test -f $docf; then
+    echo >> index.adoc
+    echo \* link:$docf[$pwy Narrative \($lang\)] >> index.adoc
+  fi
+done
+
+cd distribution
+
+echo >> index.adoc
+echo .{nbsp} >> index.adoc
+
+for f in */*; do
+  f=${f%/}
+  g=$f
   pwy=${g%/*}
   lang=${g#*/}
   docf=$f/index.html
