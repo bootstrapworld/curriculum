@@ -30,13 +30,18 @@
 * @link{https://docs.google.com/presentation/d/1M8A7eX7Ys-CNFvbwDwzoux21Kt5LwUlVTl-EM11fdfU/view, Google Slides}
 
 
-Connection Activities
+Connection Activities:
 
-* @link{https://teacher.desmos.com/activitybuilder/custom/57d6b323d5b6478408b8748b, Introduction to Domain & Range} (Desmos Activity)
+ifeval::["{proglang}" == "wescheme"]
+* @link{https://quizizz.com/admin/quiz/5cdcb3907f8c98001a203c1b, Bootstrap:Algebra - Contracts, Domain/Range, Data Types, & Functions} (Quizizz)
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* @link{https://quizizz.com/admin/quiz/5d69763f62e850001a0b0433, Contracts Review #1} (Quizizz)
+endif::[]
 * @link{https://teacher.desmos.com/activitybuilder/custom/56e8442cc2a23ba41da1c7d9, Finding Domain & Range} (Desmos Activity)
 * @link{https://teacher.desmos.com/polygraph/custom/5615f787bd554ea00761a522, Domain & Range} (Desmos Polygraph)
 * @link{https://www.geogebra.org/m/VapgrG4p, Domain & Range Illustrated} (Geogebra)
-* @link{https://quizizz.com/admin/quiz/57233dce9e0f97a95d8b1bd5/domain-and-range, Domain & Range Review} (Quizizz)
+* @link{https://quizizz.com/admin/quiz/57233dce9e0f97a95d8b1bd5/domain-and-range, Finding Domain & Range From Graphs} (Quizizz)
 
 |===
 
@@ -58,17 +63,38 @@ Connection Activities
 
 == Get Ready: 
 
-Students should be logged into WeScheme and have their Contracts page ready.
+Students should be logged in and have their Contracts page ready.
+
 
 == Launch: (5 mins)
 Have a Circle of Evaluation up in front of students.  *What will this evaluate to?*
 
+ifeval::["{proglang}" == "wescheme"]
 Show a line of code: `(* 10 -4)`.  *What will this evaluate to?*
 
-Show another line of code: `(star 50 “solid” “blue”)`.  *What will this evaluate to?* 
+Show another line of code: `(star 50 “solid” “blue”)`.  *What will this evaluate to?*
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Show a line of code: `10 * -4`.  *What will this evaluate to?*
+
+Show another line of code: `star(50, “solid”, “blue”)`.  *What will this evaluate to?*
+endif::[]
+ 
+
 
 == Explore: (10 mins)
-Have students turn to @worksheet-link{workbook-pages/DomainAndRange-WB1.pdf, "Exploring Image Functions"}. Give students time to investigate image functions and see how many they can discover, using the workbook page to organize their findings.  
+Have students turn to @worksheet-link{workbook-pages/DomainAndRange-WB1.pdf, "Exploring Image Functions"}. 
+
+ifeval::["{proglang}" == "wescheme"]
+Have students open a new program file and name it "Exploring Images".
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Have students open a new program file and name it "Exploring Images".  On Line 1, they should type the words *include image* and press "Run".
+endif::[]
+
+
+Give students time to investigate image functions and see how many they can discover, using the workbook page to organize their findings.  
+
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -129,15 +155,27 @@ _Yes, yes, and yes!_
 
 * *Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?* 
 +
-_An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, etc.  Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
+_An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
 
+ifeval::["{proglang}" == "wescheme"]
 * *What does the contract for `star` look like?*
 +
 _``star: Number String String -> Image``_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* *What does the contract for `star` look like?*
++
+_``star: Number, String, String -> Image``_
+endif::[]
 
 == Practice: (10 mins)
 
+ifeval::["{proglang}" == "wescheme"]
 Students complete @worksheet-link{workbook-pages/DomainAndRange-WB3.pdf, "Domain and Range - Practice"} with their partner.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Students complete @worksheet-link{workbook-pages/DomainAndRange-WB3-Pyret.pdf, "Domain and Range - Practice"} with their partner.
+endif::[]
 
 == Create: (10 mins) 
 

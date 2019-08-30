@@ -21,8 +21,8 @@
 
 |Key Points for the Facilitator
 |
+* Students will need their own Google accounts.
 * Take care to manage student expectations about what their game will be like.  Modern games are very complex!  
-
 
 
 |Prerequisites
@@ -31,13 +31,18 @@
 
 |Materials
 |
-* @link{https://docs.google.com/presentation/d/16ZKAYkRX3pMPd65dFwsu_opuihhu32sK7C3EpLbKxbs/edit#slide=id.g43c588b89e_1_5, Google Slides} for this lesson.
+* @link{https://docs.google.com/presentation/d/16ZKAYkRX3pMPd65dFwsu_opuihhu32sK7C3EpLbKxbs/edit#slide=id.g43c588b89e_1_5, Google Slides template} for this lesson.
 * Reverse Engineer worksheet
 (@worksheet-link{workbook-pages/ReverseEngineerGame.pdf,PDF}, @link{https://docs.google.com/document/d/1e6ice3yQ6auq4zVU9_YAujxFuxEIraKXuR0ihMaJQ1U/copy, Google Doc})
 
 * Estimation worksheet (@worksheet-link{workbook-pages/Estimation.pdf, PDF}, @link{https://docs.google.com/document/d/1WObz4aczEfd7vqxAnfYwp1NT0OZ7cge8hWB2ESc_UUk/edit?usp=sharing, Google Doc})
 
-* @link{https://www.wescheme.org/run?publicId=sggzRzgU5T, NinjaCat Game}
+ifeval::["{proglang}" == "wescheme"]
+* @link{https://www.wescheme.org/run?publicId=sggzRzgU5T, NinjaCat demo game}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* @link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, NinjaCat demo game}
+endif::[]
 
 Connecting Activities:
 
@@ -67,22 +72,41 @@ Connecting Activities:
 
 == Get Ready:
 
-Students should be logged into @link{https://www.wescheme.org, WeScheme} and have their workbooks with a pen or pencil.
+Students should be logged into 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org }
+endif::[]
+and have their workbooks with a pen or pencil.
 
-== Launch: (5 min)
+== Launch: (2 min)
 
-* Option A: Teacher plays a videogame @link{https://www.freetetris.org/game.php, Tetris} onscreen while students watch. Purposely makes mistakes while playing the game, which should elicit responses/direction from students.  
-* Option B: Watch this video on eSports @link{https://www.youtube.com/watch?v=A0zpF1c3aVA, eSports blurs videogames and sports} and then discuss with students why video games are so popular and whether they would ever participate in eSports or attend an event.
+Play the 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/run?publicId=sggzRzgU5T, NinjaCat demo game}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, NinjaCat demo game}
+endif::[]
+onscreen while students watch. Purposely make mistakes while playing the game, which should elicit responses/direction from students.  
 
 == Explore: (10 min)
 
-Students take turns playing the @link{https://www.wescheme.org/run?publicId=sggzRzgU5T, Ninja Cat game} file in pairs.   
-
+Students take turns playing the 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/run?publicId=sggzRzgU5T, NinjaCat demo game}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, NinjaCat demo game}
+endif::[] 
+in pairs.   
 
 [.notice-box]
 .Notice and Wonder
 ****
-As their partner plays, ask students to write down what they notice.
+As their partner plays, ask students to write down what they notice about the game.
 
 Switch players, and ask students to write down what they wonder.
 ****
@@ -93,9 +117,9 @@ Students complete the
 
 Ask students:
 
-* What did you Notice?
-* What did you Wonder?
-* What are the elements (characters, items, etc.) in the game? _NinjaCat, dog, ruby, cloud, background, score_
+* What did you notice?
+* What did you wonder?
+* What are the elements (characters, items, etc.) of the game? (These should be nouns.) _NinjaCat, dog, ruby, cloud, background, score_
 * What about these elements is changing? _The position of the characters changes, the score changes depending on what what NinjaCat hits_
 * What math words could we use to describe these changes? _A change in x-coordinate, y-coordinate, a change in value for the score_
 
@@ -108,24 +132,31 @@ Ask students to share out their favorite current videogame. Write the names of t
 In pairs, students complete the
 @worksheet-link{workbook-pages/ReverseEngineerGame.pdf, "Reverse Engineer A Video Game"} worksheet a second time but using one of the games listed on the board.
 
-== Discuss: (5 min)
-Let students choose a current, popular game to discuss. Collect students estimates for each of the questions below and then show them the actual amounts. Students can use the @worksheet-link{workbook-pages/Estimation.pdf, Estimation} worksheet to document their estimations.
+== Discuss: (10 min)
+Let students choose a current, popular game to discuss. 
+
+
+Collect students estimates for each of the questions below. Students can use the @worksheet-link{workbook-pages/Estimation.pdf, Estimation} worksheet to document their estimations.
+
 
 * How long do you think it took to create that game? 
 * Are there still people working on that game today?
 * How many people do you think it takes to create a game like this?
 * How much money does it take to create a game like this? 
-
 * Compare and contrast the number of elements and changing elements in NinjaCat vs their popular game.
 
-The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game but to manage expectations given our limited resources (time, money, people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
+
+Once students have made their estimations, have students use the Internet to research these questions and compare the actual numbers to their estimates.  
+
+
+The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
 
 
 == Create/Apply: (15 min)
 
 Students will research their own favorite videogame and answer the following:
 
-* What are the elements of this game that makes it so fun?
+* What are the elements of this game?  
 * How long did it take to create this videogame?
 * How many people did it take to create this game?
 * How much did it cost to create this videogame?

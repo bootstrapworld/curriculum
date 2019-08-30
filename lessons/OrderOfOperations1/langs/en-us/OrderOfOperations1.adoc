@@ -7,22 +7,32 @@
 | Lesson Goals
 | Students will be able to:
 
-* Model an arithmetic expression using The Circles of Evaluation.
-* Translate Circles of Evaluation into Racket code.
+* Model an arithmetic expression using Circles of Evaluation.
+* Translate Circles of Evaluation into code.
 
 |Student-facing Goals
 |
-* I can write the Circles of Evaluation for a given arithmetic expression.
-* I can translate a Circle of Evaluation model into Racket code.
-* I can use numbers and operations in the WeScheme programming environment.
+* I can write Circles of Evaluation for a given arithmetic expression.
+* I can translate a Circle of Evaluation model into code.
+* I can use numbers and operations in a programming environment.
 
 |Key Points For The Facilitator
 |
-* Drive home the idea to students that the errors are there to help and are very informative.
+* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to error messages with interest to demonstrate to students that the messages are a helpful tool.
 
-* After working with the Circles of Evaluation for a bit, ask students whether they create the Circles from the 'Inside-Out' or from the 'Outside-In.'  After they've given their responses, have them practice using the OTHER way.
 
-* Point out that up until now, we didn't have a visual spatial model for Order of Operations. Ask students to compare the Circles to previous methods they've learned(PEMDAS, GEMAS, etc..)
+* After the first few exercises in creating Circles of Evaluation, ask students whether they create them from the 'inside-out' (drawing the inner circles first) or from the 'outside-in.'  After they've given their responses, have them try using the OTHER way!
+
+
+* Up until now, we didn't have a visual spatial model for explaining the order of operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMAS, etc)
+
+* If a student doesn't know where to start, encourage them to start with what they know
+
+
+* For a memory hook, model the "bug that crawls through the circle" explanation.   
+
+
+* Students may benefit from using multiple colors to distinguish between the different smaller expressions and parentheses.
 
 
 |Prerequisites
@@ -33,20 +43,35 @@
 |Materials
 |
 
-* @link{https://docs.google.com/presentation/d/1G5odF5XrzMzpykskn-jTQ4pjJT54YLYAZytryQIRyCI/edit?usp=sharing, Google Slides} 
-(Frayer Model - Order of Operations (@worksheet-link{workbook-pages/OrderOfOperations1-FrayerModelTemplate.pdf, PDF}, @link{https://docs.google.com/drawings/d/1mCJygY5elVQzy64zLLRyFVZ9-CkTnVYTBM3URnIfzEc/view, Google Doc}) 
+* Slides template (@link{https://docs.google.com/presentation/d/1G5odF5XrzMzpykskn-jTQ4pjJT54YLYAZytryQIRyCI/edit?usp=sharing, Google Slides})
+* Circles of Evaluation template (@link{https://docs.google.com/document/d/12xlIyo1Iu7VZfk2tIQUPex6sP3Zs0ZeQFAZOaJmfVFs/edit?usp=sharing, Google Doc})
+* Frayer Model - Order of Operations (@worksheet-link{workbook-pages/OrderOfOperations1-FrayerModelTemplate.pdf, PDF}, @link{https://docs.google.com/drawings/d/1mCJygY5elVQzy64zLLRyFVZ9-CkTnVYTBM3URnIfzEc/view, Google Doc}) 
 
 Bootstrap Formative Assessments
 
+ifeval::["{proglang}" == "wescheme"]
 * @link{https://quizizz.com/admin/quiz/5cdcb223862fd8001a135579, Bootstrap: Algebra - Coordinates, Circles of Evaluation, & Code} (Quizizz)
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* @link{https://quizizz.com/admin/quiz/5d6973a4536e0b001a736010, Order of Operations Review #1} (Quizizz)
+endif::[]
 * @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb288f41b366950eba1e1, Bootstrap:Algebra - Data Types & Circles of Evaluation} (Desmos Activity)
 * @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb336f41b366950eba420, Bootstrap:Algebra - Circles of Evaluation Review(Blank Template)} (Desmos Activity)
-* @link{https://quizizz.com/admin/quiz/5cdcb3907f8c98001a203c1b, Bootstrap:Algebra - Contracts, Domain/Range, Data Types, & Functions } (Quizizz)
+ifeval::["{proglang}" == "wescheme"]
 * @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb3f555e3fb606a1f1ba2, Bootstrap:Algebra - Data Types, Circles of Evaluation, and Contracts} (Desmos Activity)
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+
+endif::[]
 
 Connecting Activities
 
+ifeval::["{proglang}" == "wescheme"]
 * @link{https://quizizz.com/admin/quiz/5bd690b3784210001af2588c, Order of Operations} (Quizizz)
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* @link{https://quizizz.com/admin/quiz/5d69796bfe45c5001d3d48ed, Order of Operations Review #2} (Quizizz)
+endif::[]
 * @link{https://teacher.desmos.com/activitybuilder/custom/57ae458a697f767c75597801, Twin Puzzles - Order of Operations} (Desmos)
 
 |===
@@ -69,51 +94,55 @@ Connecting Activities
 
 == Get Ready: 
 
-Students should be logged into @link{https://www.wescheme.org, WeScheme}.
+Students should be logged into 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}.
+endif::[]
+
 
 == Launch: (8 mins)
 Option 1: Watch the @link{https://www.youtube.com/watch?v=y9h1oqv21Vs, PEMDAS is wrong} video with students then ask students what they thought of the video and what they think/know of PEMDAS.
  (Suggestion: watch the video at 0.5 speed because they talk really fast).  
 
-Option 2: Have students evaluate the expression in the image below and gather a few responses from the students.  Discuss some of the issues mentioned in this Slate article, @link{https://slate.com/technology/2013/03/facebook-math-problem-why-pemdas-doesnt-always-give-a-clear-answer.html, What Is the Answer to That Stupid Math Problem on Facebook?}.
+Option 2: Have students evaluate the expression in the image below and gather a few responses from the students.  Discuss some of the issues mentioned in this Slate article, @link{https://slate.com/technology/2013/03/facebook-math-problem-why-pemdas-doesnt-always-give-a-clear-answer.html, What Is the Answer to That Math Problem on Facebook?}.
 
 [.text-center]
-Stupid Math Problem on Facebook
-
 @image{images/OrderOfOperationsFB.png, Facebook Math Problem, 400, align="center"}
                                                  
 
-
-
 == Explore: (5 mins) Let There Be Numbers!
-Have students log into @link{https://www.wescheme.org, WeScheme} and explore numbers in WeScheme in the Interactions window.
-
+Have students explore numbers in the Interactions window.  Make sure both students take a turn at the keyboard.
 [.notice-box]
 .Notice & Wonder
 **** 
-In pairs, students will each try entering a variety of numbers in WeScheme, then together they will write down what they notice and what they wonder.
+In pairs, students will each try entering a variety of numbers, then together they will write down what they notice and what they wonder.
 ****
 
 
-== Discuss: (5 mins)
+== Discuss: (10 mins)
 * What type of numbers did you try?
 * What did you notice? What did you wonder?
-* Did anyone try any irrational numbers? (Ex: pi or e)
+* Did anyone try any irrational numbers? (For example: pi, e)
 * Did you get any error messages?
-
-== Discuss: (7 mins)
-* Did anyone try to Add/Subtract/Multiply/Divide numbers? 
-* What was the Error Message? 
-* How can we Add/Subtract/Multiply/Divide in WeScheme?
+* Did anyone try to add, subtract, multiply, or divide numbers? 
+* What was the error message? 
+* How can we add, subtract, multiply, or divide in our coding environment?
 
 === Direct Instruction:
-At this point, you’ll provide some direct instruction on the Circles of Evaluation & Contracts and how to:
+At this point, you may provide some direct instruction on Circles of Evaluation & Contracts, such as how to:
 
 * Create a Circle of Evaluation from an expression.
-* Convert a Circle of Evaluation into Racket.
+* Convert a Circle of Evaluation into code.
 * Write the Contract of a function (Name, Domain, & Range).
+ifeval::["{proglang}" == "wescheme"]
 * Write the 6 contracts for `+`, `-`, `*`, `/`, `sqr`, and `sqrt` into the Contracts page.
-
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Write the 6 contracts for `+`, `-`, `*`, `/`, `num-sqr`, and `num-sqrt` into the Contracts page.
+endif::[]
 
 [.text-center]
 Circles of Evaluation
@@ -126,58 +155,54 @@ Contracts
 
 @image{images/Contracts.png, Contracts, 400, align="center"}
 
-== Practice: (5 mins)  Add/Subtract/Multiply/Divide
-Have students practice adding, subtracting, multiplying, and dividing using the 6 functions(`+`, `-`, `*`, `/`, `sqr`, `sqrt`).
-
-== Talking Points
+== Practice: (10 mins)
+ifeval::["{proglang}" == "wescheme"]
+* Have students practice creating Circles of Evaluation using the 6 functions(`+`, `-`, `*`, `/`, `sqr`, `sqrt`).
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Have students practice creating Circles of Evaluation using the 6 functions(`+`, `-`, `*`, `/`, `num-sqr`, `num-sqrt`).
+endif::[]
 
 * Do spaces matter when typing in functions?
 * Does the order of the numbers matter in the functions? Which functions?
 * What do the error messages tell us? 
-
-== Discuss: (10 mins) - Circles of Evaluation w/More than 1 expression
-
-=== Inquiry Based Instruction:
-At this point, you’ll provide some Inquiry Based instruction on the Circles of Evaluation with more than 1 expression:
-
-* How  would we model 2*(3+8) with Circle of Evaluation?
-* Does the order matter if I put the 2 first or second in the circle for `*`?
-* Why is it ok for multiplication to take in a number, 2, and a circle for the 2nd input?(Range of addition is a number)
-* What does the code look like?
 * What connections do you see between the expression, circle, and code?
-* What can you tell students if they don’t know where to start? (Start with 3+8 then connect it to the `*`)
-* Model using the Bug that crawls through the Circle 
-* Model using Color Coordination
 
 [.text-center]
 Circles of Evaluation 
 [.text-center]
-w/more than 1 expression
+for compound expressions
 
 @image{images/CoE2.png, Circle of Evaluations, 400, align="center"}
 
 
-
 == Practice: (10 mins)  Practice
-Have students practice the Circles of Evaluation and Racket by putting expressions all around the room and having them:
-Convert the expression into Circles of Evaluation.
-Convert the Circle of Evaluation model into Racket Code.
-Once the teacher has approved of both models, have them enter the code into WeScheme to test it out.
+Have students practice moving between Circles of Evaluation and code with a station review.
 
 
+* Convert the expression into a Circle of Evaluation.
+* Convert the Circle of Evaluation model into code.
 
 
-== Create/Apply: (15 mins) Create Your Own Circles of Evaluation - Frayer Model
+Once the students feel confident in their work, they can enter the code into their coding environment to test it out.
 
-Students will create a Create Your Own Circle of Evaluation based on an Expression they’ve created using at least 4 of the 6 functions:
-            `+`, `-`, `*`, `/`, `sqr`, `sqrt`.
 
-Using @worksheet-link{workbook-pages/OrderOfOperations1-FrayerModelTemplate.pdf, this Frayer Model}, Create the Code that represents this Circle, translate this into Racket Code, Evaluate using PEMDAS, and then Compare and Contrast the 3 methods.
+== Create/Apply: (15 mins) 
+
+Students will create a Circle of Evaluation based on an expression they’ve created using at least 4 of the 6 functions:
+ifeval::["{proglang}" == "wescheme"]
+`+`, `-`, `*`, `/`, `sqr`, `sqrt`.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+`+`, `-`, `*`, `/`, `num-sqr`, `num-sqrt`.
+endif::[]
+
+Using @worksheet-link{workbook-pages/OrderOfOperations1-FrayerModelTemplate.pdf, this Frayer Model}, create the code that represents this circle, translate this into code, evaluate the expression using the order of operations, and then compare and contrast the three methods.
 
 [.strategy-box]
 .Strategies For English Language Learners
 ****
-MLR 7 - Compare and Connect: Gather students Frayer Models to highlight and analyze a few of them as a class, asking students to compare and connect different models of the Circles of Evaluation/Code/PEMDAS. 
+MLR 7 - Compare and Connect: Gather students' Frayer models to highlight and analyze a few of them as a class, asking students to compare and connect different models. 
 ****
 
 
