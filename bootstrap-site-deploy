@@ -1,6 +1,6 @@
 # last modified 2019-09-03
 
-if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if ! git rev-parse --is-inside-work-tree; then
   echo Not in a Git repo; exit
 fi
 
@@ -12,9 +12,11 @@ fi
 
 cd $REPOTOPDIR
 
-if test x$(git rev-parse --abbrev-ref HEAD) != xgh-pages; then
+ORIGBRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if test x$ORIGBRANCH != xgh-pages; then
   rm -fr distribution asciidoctor.css index.html README.html
-  if ! git switch gh-pages >/dev/null 2>&1; then
+  if ! git switch gh-pages; then
     echo Could not switch to gh-pages branch; exit
   fi
 fi
@@ -34,6 +36,10 @@ fi
 rm -fr $DEPLOYDIR/distribution
 
 cp -prH distribution $DEPLOYDIR
+
+if test x$ORIGBRANCH != xgh-pages; then
+  git switch $ORIGBRANCH
+fi
 
 cd $DEPLOYDIR
 
