@@ -90,7 +90,7 @@ Every contract has three parts...\n\n")
       (lambda ()
         (string-append
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
-          ":"
+          (if (string=? *proglang* "pyret") "::" ":")
           (encoded-ans ".recipe_domain" (vars-to-string domain-list) *show-domains?*)
           "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
@@ -229,7 +229,7 @@ Write some examples, then circle and label what changes...\n\n")
     (if (string=? ans "") " " ans)))
 
 (define (list-to-commaed-string xx)
-  (cond [(null? xx) ""]
+  (cond [(null? xx) " "]
         [(= (length xx) 1) (format "~s" (car xx))]
         [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
                 (if (null? xx) r
@@ -311,7 +311,7 @@ Write the definition, giving variable names to all your input values...\n\n")
 
 (define (write-definition/pyret funname param-list body)
   (if (not (string? body))
-      "Don't care"
+      (if (null? body) "" "Don't care")
       (let ([body-lines (map string-trim (regexp-split #rx"\n" body))])
         (string-append
           (format "\n
