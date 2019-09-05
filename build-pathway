@@ -1,4 +1,4 @@
-# last modified 2019-08-30
+# last modified 2019-09-05
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -90,6 +90,9 @@ buildworkbookpages() {
   mv solutions-pages workbook-sols-pages
   #
   if test -d exercises; then
+    if test -d exercises/$PROGLANG; then
+      cp -p exercises/$PROGLANG/* exercises
+    fi
     cp -pr exercises exercises-sols
   fi
   #

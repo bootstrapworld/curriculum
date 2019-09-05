@@ -632,7 +632,7 @@
 
             (fprintf o "~nlink:./resources/index.html[Teacher Resources]~n"))
 
-          (when #t
+          (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
             (fprintf o (create-copyright *copyright-name* *copyright-author*)))
           )
 
