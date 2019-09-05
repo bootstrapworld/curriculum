@@ -244,7 +244,7 @@ Write some examples, then circle and label what changes...\n\n")
     (if (string=? ans "") " " ans)))
 
 (define (vars-to-commaed-string xx)
-  (cond [(null? xx) ""]
+  (cond [(null? xx) " "]
         [(= (length xx) 1) (format "~a" (car xx))]
         [else (let loop ([xx (cdr xx)] [r (format "~a" (car xx))])
                 (if (null? xx) r
@@ -310,8 +310,9 @@ Write the definition, giving variable names to all your input values...\n\n")
                     ])))))))
 
 (define (write-definition/pyret funname param-list body)
+  (when (null? body) (set! body ""))
   (if (not (string? body))
-      (if (null? body) "" "Don't care")
+      "Don't care"
       (let ([body-lines (map string-trim (regexp-split #rx"\n" body))])
         (string-append
           (format "\n
@@ -329,7 +330,8 @@ Write the definition, giving variable names to all your input values...\n\n")
                       (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                       (write-large "(")
                       (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
-                      (write-large ")"))))
+                      (write-large ")")
+                      (write-spaced ":"))))
                 (apply string-append
                        (map
                          (lambda (body-line)
