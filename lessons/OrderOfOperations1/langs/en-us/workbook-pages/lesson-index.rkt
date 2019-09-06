@@ -1,6 +1,6 @@
 (
 "OrderOfOperationsCoverPage.pdf"
 ("OrderOfOperations1-FrayerModelTemplate.pdf" "landscape")
-"TranslatingCoE.pdf"
+"OrderOfOperations1-Practice.pdf"
 "CoESquareRootsPractice.pdf"
 )
