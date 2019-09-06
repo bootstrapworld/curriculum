@@ -55,19 +55,20 @@
   ;(printf "doing (~a) highlight-keywords ~s\n" *proglang* s)
   (if (not (string? s))
       "Don't care"
-      (let ([lines (regexp-split #rx"\n" s)])
-        (string-join
-          (map (lambda (ln)
-                 (let ([words (regexp-split #rx" " ln)])
+      (let ([res (let ([lines (regexp-split #rx"\n" s)])
                    (string-join
-                     (map (lambda (w)
-                            (if (pyret-keyword? w)
-                                (begin
-                                  ;(printf "found keyword ~a\n" w)
-                                  (format "@PYRETKEYWORD~a@END" w))
-                                w))
-                          words) " ")))
-               lines) "\n"))))
+                     (map (lambda (ln)
+                            (let ([words (regexp-split #rx" " ln)])
+                              (string-join
+                                (map (lambda (w)
+                                       (if (pyret-keyword? w)
+                                           (begin
+                                             ;(printf "found keyword ~a\n" w)
+                                             (format "@PYRETKEYWORD~a@END" w))
+                                           w))
+                                     words) " ")))
+                          lines) "\n"))])
+        (if (string=? res "") " " res))))
 
 (define (write-directions page-header funname directions)
   (format "\n
@@ -179,6 +180,7 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
+  ;(printf "doing write-example/pyret (~a) ~s\n" show-body? body)
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
