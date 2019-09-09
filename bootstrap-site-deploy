@@ -1,4 +1,4 @@
-# last modified 2019-09-03
+# last modified 2019-09-09
 
 if ! git rev-parse --is-inside-work-tree; then
   echo Not in a Git repo; exit
@@ -21,7 +21,7 @@ if test x$ORIGBRANCH != xgh-pages; then
   fi
 fi
 
-git pull
+git pull -s recursive -X theirs
 
 if test ! -d distribution; then
   echo No distribution directory found; exit
