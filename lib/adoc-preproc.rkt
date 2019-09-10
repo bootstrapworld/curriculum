@@ -155,7 +155,6 @@
     #:exists 'replace)
   (display desc o) (newline o))
 
-
 (define (string->form s)
   (call-with-input-string s
     (lambda (i)
@@ -192,13 +191,10 @@
   ;(printf "include-glossary-and-standards-files~n")
   (newline o)
   (newline o)
-  (cond [(getenv "NARRATIVE")
-          (fprintf o "link:./index-glossary.html[~a]~%~%" *pathway-glossary-header*)
-          (fprintf o "link:./index-standards.html[~a]~%~%" *pathway-standards-header*)]
-        [else
-          (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
-          ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
-          ]))
+  (when (getenv "NARRATIVE") (error ' include-glossary-and-standards-files "deadc0de"))
+  (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
+  ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
+  )
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
@@ -355,14 +351,13 @@
     ;
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
-      (include-glossary-and-standards-files o)
+      ;(include-glossary-and-standards-files o) ;not needed
 
       (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
 
-        (fprintf o "~n.Lessons Used in This Pathway (")
-        (fprintf o "link:./pathway-lessons.html[Single Page]")
-        (fprintf o ")~n")
-        (fprintf o "[#lesson-list]~%")
+        ;(fprintf o "~n.Lessons Used in This Pathway\n")
+        (print-lessons-intro o)
+        ;(fprintf o "[#lesson-list]~%")
         (for ((lesson lessons))
           (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
                 [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
@@ -392,6 +387,7 @@
             ;(newline o)
             )
           (newline o)))
+      (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
 
       (let ([lessons-file "pathway-lessons.asc"]
             [lessons-toc-file "pathway-lessons-toc.asc"])
@@ -587,7 +583,10 @@
                              [(string=? directive "solutions-workbook")
                               (unless (getenv "TEACHER_RESOURCES")
                                 (error 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
-                              (fprintf o "link:./protected/workbook-sols.pdf[Teacher Workbook]")]
+                              (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
+                              (newline o)
+                              (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
+                              ]
                              [(assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o))]
@@ -627,10 +626,14 @@
           (when (getenv "NARRATIVE")
             (link-to-lessons-in-pathway o)
 
-            (fprintf o "~nlink:./workbook/workbook.pdf[Student Workbook]~n")
-            (fprintf o "~nlink:./workbook/pd-workbook.pdf[PD Workbook]~n")
+            (print-other-resources-intro o)
+            (print-link-to-glossary o)
+            (print-link-to-standards o)
+            (print-link-to-student-workbook o)
+            (print-link-to-teacher-resources o)
+            (print-link-to-forum o)
 
-            (fprintf o "~nlink:./resources/index.html[Teacher Resources]~n"))
+            )
 
           (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
             (fprintf o (create-copyright *copyright-name* *copyright-author*)))
@@ -654,7 +657,6 @@
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a~n" file)
   (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file)))
-
 
 (define (create-glossary-and-standards-subfiles glossary-items standards-met)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
