@@ -16,7 +16,7 @@ ORIGBRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if test x$ORIGBRANCH != xgh-pages; then
   rm -fr distribution asciidoctor.css index.html README.html
-  if ! git switch gh-pages; then
+  if ! git checkout gh-pages; then
     echo Could not switch to gh-pages branch; exit
   fi
 fi
@@ -38,7 +38,7 @@ rm -fr $DEPLOYDIR/distribution
 cp -prH distribution $DEPLOYDIR
 
 if test x$ORIGBRANCH != xgh-pages; then
-  git switch $ORIGBRANCH
+  git checkout $ORIGBRANCH
 fi
 
 cd $DEPLOYDIR
