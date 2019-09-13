@@ -92,9 +92,10 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
+          (if (string=? *proglang* "pyret") "# " "")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if (string=? *proglang* "pyret") "::" ":")
-          (encoded-ans ".recipe_domain" (vars-to-string domain-list) *show-domains?*)
+          (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
           "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
@@ -332,7 +333,10 @@ Write the definition, giving variable names to all your input values...\n\n")
   (when (null? body) (set! body ""))
   (if (not (string? body))
       "Don't care"
-      (let ([body-lines (map string-trim (regexp-split #rx"\n" body))])
+      (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]
+             [n (- (length body-lines) 1)]
+             [but-last-body-lines (take body-lines n)]
+             [last-body-line (car (drop body-lines n))])
         (string-append
           (format "\n
 [.recipe_title]
@@ -360,10 +364,16 @@ Write the definition, giving variable names to all your input values...\n\n")
                                  (encoded-ans "" "MM" #f)
                                  (encoded-ans ".recipe_definition_body_pyret"
                                               (highlight-keywords body-line) *show-body?*)))))
-                         body-lines))
+                         but-last-body-lines))
+                (write-wrapper ".recipe_line"
+                             (lambda ()
+                               (string-append
+                                 (encoded-ans "" "MM" #f)
+                                 (encoded-ans ".recipe_definition_body"
+                                              (highlight-keywords last-body-line) *show-body?*))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    (encoded-ans ".recipe_definition_body"
+                    (encoded-ans ".recipe_definition_body_pyret"
                                  (highlight-keywords "end") #t))))))))))
 
 (define (write-definition funname param-list body)
