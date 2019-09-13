@@ -22,6 +22,8 @@
 
 (define *div-nesting* 0)
 
+(define *max-pyret-example-rhs-length* 15)
+
 (define (ft-list-ref s i)
   (let ([n (length s)])
     (and (< i n) (list-ref s i))))
@@ -180,7 +182,8 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "doing write-example/pyret (~a) ~s\n" show-body? body)
+  ;(printf "doing write-example/pyret args= ~s body= ~s\n" args body)
+  (when (null? body) (set! body ""))
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
@@ -194,9 +197,22 @@ Write some examples, then circle and label what changes...\n\n")
         ;(write-clear)
         ;(encoded-ans "" "MM" #f)
         ;(write-spaced (highlight-keywords "is"))
-        (highlight-keywords " is ")
+        ;(highlight-keywords " is ")
+        (cond ((and (string? body) (> (string-length body) *max-pyret-example-rhs-length*))
+               ;(printf "overlong example body\n")
+               (string-append
+                 (write-clear)
+                 (encoded-ans "" "MM" #f)
+                 (write-spaced (highlight-keywords "is "))
+                 (encoded-ans ".recipe_example_body_long" (highlight-keywords body) show-body?)
+                 ))
+              (else 
+                (string-append
+                  (highlight-keywords " is ")
+                  (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                  )))
         ;(encoded-ans "" "MM" #f)
-        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+        ;(encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         (write-clear)
         ))))
 
@@ -357,7 +373,7 @@ Write the definition, giving variable names to all your input values...\n\n")
    funname param-list body))
 
 (define (write-clear)
-  "[.clear]## ##")
+  "\n[.clear]## ##")
 
 (define (write-spaced s)
   ;(format "[.spacer]##~a##" s)
