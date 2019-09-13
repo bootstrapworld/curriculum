@@ -83,6 +83,8 @@
           directions))
 
 (define (write-purpose funname domain-list range purpose)
+  (when (string=? *proglang* "pyret")
+    (set! purpose (string-append "# " purpose)))
   (string-append
     (format "\n
 [.recipe_title]
@@ -92,7 +94,7 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          (if (string=? *proglang* "pyret") "# " "")
+          ;(if (string=? *proglang* "pyret") "# " "")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if (string=? *proglang* "pyret") "::" ":")
           (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
