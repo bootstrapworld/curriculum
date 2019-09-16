@@ -1,4 +1,4 @@
-# last modified 2019-09-15
+# last modified 2019-09-16
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -99,11 +99,13 @@ buildworkbookpages() {
   for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
     if test -d $d; then
       echo \(building $d\)
-      unset SOLUTIONS WORKBOOK
+      unset EXERCISE SOLUTIONS WORKBOOK
       if test $d = "workbook-sols-pages" -o $d = "exercises-sols"; then
         export SOLUTIONS=1
       elif test $d = "workbook-pages"; then
         export WORKBOOK=1
+      elif test $d = "exercises"; then
+        export EXERCISE=1
       fi
       cd $d
       export PATHWAYROOTDIR="../../../"
@@ -120,7 +122,7 @@ buildworkbookpages() {
           wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
         fi
       done
-      unset SOLUTIONS WORKBOOK
+      unset EXERCISE SOLUTIONS WORKBOOK
       cd ..
     fi
   done

@@ -205,6 +205,12 @@
       (lambda (ex-ti)
         (let* ([ex (car ex-ti)] [ti (cadr ex-ti)]
                [ex-sol (regexp-replace #rx"/exercises/" ex "/exercises-sols/")])
+          (unless ti
+            (let ([ex-ti (path-replace-extension
+                           (string-append *pathway-root-dir* "lessons/" ex) ".title")])
+              (when (file-exists? ex-ti)
+                (set! ti (call-with-input-file ex-ti read)))))
+          (unless ti (set! ti ""))
           (fprintf o "|~a |[link:../lessons/~a[original] : link:../lessons/~a[answers]]\n"
                    ti ex ex-sol)
           ))
@@ -335,7 +341,7 @@
         ;[preparation-items '()]
         [first-subsection-reached? #f]
         [title-reached? #f]
-        [page-title ""]
+        [page-title #f]
         )
     ;
     (define (display-title i o)
@@ -356,6 +362,15 @@
         (when (getenv "WORKBOOK")
           ;(printf "adding exercise ~a ~a\n" exer.html page-title)
           (set! exercises-done (cons (list exer.html page-title) exercises-done)))))
+    ;
+    (define (add-exercise-title name)
+      (when (getenv "EXERCISE")
+        (let ([ex-ti-file (path-replace-extension in-file ".title")])
+          (call-with-output-file ex-ti-file
+            (lambda (o)
+              (display name o)
+              (newline o))
+            #:exists 'replace))))
     ;
     (define (add-standard x lesson lesson-title o)
       ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
@@ -635,6 +650,7 @@
                                 (let ([args (string->form (read-group i directive))])
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
+                                    (add-exercise-title (car args))
                                     (display (keyword-apply (cadr f) key-list key-vals args) o))))]
                              [else
                                (printf "WARNING: Unrecognized directive @~a~%" directive)
@@ -644,32 +660,18 @@
                               (getenv "TEACHER_RESOURCES"))
                           beginning-of-line? (char=? c #\=))
                      (set! beginning-of-line? #f)
-                     (cond [title-reached?
-                             #|
-                             (cond [first-subsection-reached? #f]
-                                   [(check-first-subsection i o)
-                                    (set! first-subsection-reached? #t)
-                                    (when (getenv "LESSONPLAN")
-                                      (include-glossary-and-standards-files o))]
-                                   [else #f])
-                             (if (getenv "LESSON")
-                                 (display-section-markup i o)
-                                 (display c o))
-                             |#
-                             (display c o)
-                             ]
+                     (cond [title-reached? (display c o)]
                            [else
                              (set! title-reached? #t)
                              (display-title i o)
                              (when (getenv "TEACHER_RESOURCES")
-                               (printf "teacher resource autoloading stuff\n")
+                               ;(printf "teacher resource autoloading stuff\n")
                                (include-workbook-and-solutions-files o))
                              (when (getenv "LESSONPLAN")
                                (include-glossary-and-standards-files o))])]
                     [(char=? c #\newline)
                      (newline o)
-                     (set! beginning-of-line? #t)
-                     ]
+                     (set! beginning-of-line? #t)]
                     [else
                       (set! beginning-of-line? #f)
                       (display c o)])
