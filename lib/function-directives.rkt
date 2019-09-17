@@ -22,6 +22,8 @@
 
 (define *div-nesting* 0)
 
+(define *max-pyret-example-rhs-length* 15)
+
 (define (ft-list-ref s i)
   (let ([n (length s)])
     (and (< i n) (list-ref s i))))
@@ -81,6 +83,8 @@
           directions))
 
 (define (write-purpose funname domain-list range purpose)
+  (when (string=? *proglang* "pyret")
+    (set! purpose (string-append "# " purpose)))
   (string-append
     (format "\n
 [.recipe_title]
@@ -90,9 +94,10 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
+          ;(if (string=? *proglang* "pyret") "# " "")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if (string=? *proglang* "pyret") "::" ":")
-          (encoded-ans ".recipe_domain" (vars-to-string domain-list) *show-domains?*)
+          (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
           "→"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
@@ -180,22 +185,37 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "doing write-example/pyret (~a) ~s\n" show-body? body)
+  ;(printf "doing write-example/pyret args= ~s body= ~s\n" args body)
+  (when (null? body) (set! body ""))
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
         (write-clear)
-        (encoded-ans "" "MM" #f)
+        ;(encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" (list-to-commaed-string args) show-args?)
         (write-large ")")
-        (write-clear)
-        (encoded-ans "" "MM" #f)
-        (write-spaced (highlight-keywords "is"))
-        (encoded-ans "" "MM" #f)
-        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+        ;(write-clear)
+        ;(encoded-ans "" "MM" #f)
+        ;(write-spaced (highlight-keywords "is"))
+        ;(highlight-keywords " is ")
+        (cond ((and (string? body) (> (string-length body) *max-pyret-example-rhs-length*))
+               ;(printf "overlong example body\n")
+               (string-append
+                 (write-clear)
+                 (encoded-ans "" "MM" #f)
+                 (write-spaced (highlight-keywords "is "))
+                 (encoded-ans ".recipe_example_body_long" (highlight-keywords body) show-body?)
+                 ))
+              (else 
+                (string-append
+                  (highlight-keywords " is ")
+                  (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                  )))
+        ;(encoded-ans "" "MM" #f)
+        ;(encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         (write-clear)
         ))))
 
@@ -315,7 +335,10 @@ Write the definition, giving variable names to all your input values...\n\n")
   (when (null? body) (set! body ""))
   (if (not (string? body))
       "Don't care"
-      (let ([body-lines (map string-trim (regexp-split #rx"\n" body))])
+      (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]
+             [n (- (length body-lines) 1)]
+             [but-last-body-lines (take body-lines n)]
+             [last-body-line (car (drop body-lines n))])
         (string-append
           (format "\n
 [.recipe_title]
@@ -343,10 +366,16 @@ Write the definition, giving variable names to all your input values...\n\n")
                                  (encoded-ans "" "MM" #f)
                                  (encoded-ans ".recipe_definition_body_pyret"
                                               (highlight-keywords body-line) *show-body?*)))))
-                         body-lines))
+                         but-last-body-lines))
+                (write-wrapper ".recipe_line"
+                             (lambda ()
+                               (string-append
+                                 (encoded-ans "" "MM" #f)
+                                 (encoded-ans ".recipe_definition_body"
+                                              (highlight-keywords last-body-line) *show-body?*))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    (encoded-ans ".recipe_definition_body"
+                    (encoded-ans ".recipe_definition_body_pyret"
                                  (highlight-keywords "end") #t))))))))))
 
 (define (write-definition funname param-list body)
@@ -356,7 +385,7 @@ Write the definition, giving variable names to all your input values...\n\n")
    funname param-list body))
 
 (define (write-clear)
-  "[.clear]## ##")
+  "\n[.clear]## ##")
 
 (define (write-spaced s)
   ;(format "[.spacer]##~a##" s)
@@ -479,7 +508,7 @@ Write the definition, giving variable names to all your input values...\n\n")
       (set! directions (format "{sp} +\n{sp} +\n{sp} +\n")))
     )
   (when (string=? range "") (set! range " "))
-  (when (string=? purpose "") (set! purpose " "))
+  (when (string=? purpose "") (set! purpose "{nbsp}"))
   (unless *show-purpose?* (set! purpose " "))
 
   (string-append

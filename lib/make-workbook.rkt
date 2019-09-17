@@ -135,7 +135,8 @@
                     (if teacher-version
                         "resources/protected/workbook-sols"
                         (if include-lesson
-                            "workbook/pd-workbook"
+                            "resources/protected/pd-workbook"
+                            ;"workbook/pd-workbook"
                             "workbook/workbook")))))
 
   )

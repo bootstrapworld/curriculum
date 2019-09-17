@@ -1,0 +1,14 @@
+@design-recipe-exercise{ "distance" "Use the Design Recipe to write a function ’distance’, which takes in the x and y coordinates of two objects and produces the distance between them in pixels"
+  #:domain-list (list "Number" "Number" "Number" "Number")
+  #:range "Number"
+  #:purpose "Takes in two sets of x-y coordinates and produces the distance between them"
+  #:num-examples 2
+  #:example-list '(
+                  (0 4 3 0 (sqrt (+ (sqr (- 4 0)) (sqr (- 0 3)))))
+		  (10 300 320 240 (sqrt (+ (sqr (- 300 10)) (sqr (- 240 320)))))
+                  )
+  #:show-examples '((#t #t #t) (#t #t #t))
+  #:param-list '(x1 y1 x2 y2)
+  #:show-params? #t
+  #:body '(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))
+  #:show-body? #t #:grid-lines? #t }

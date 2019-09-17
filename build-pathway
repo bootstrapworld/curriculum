@@ -1,4 +1,4 @@
-# last modified 2019-09-06
+# last modified 2019-09-16
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -99,9 +99,13 @@ buildworkbookpages() {
   for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
     if test -d $d; then
       echo \(building $d\)
-      unset SOLUTIONS
+      unset EXERCISE SOLUTIONS WORKBOOK
       if test $d = "workbook-sols-pages" -o $d = "exercises-sols"; then
         export SOLUTIONS=1
+      elif test $d = "workbook-pages"; then
+        export WORKBOOK=1
+      elif test $d = "exercises"; then
+        export EXERCISE=1
       fi
       cd $d
       export PATHWAYROOTDIR="../../../"
@@ -118,7 +122,7 @@ buildworkbookpages() {
           wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
         fi
       done
-      unset SOLUTIONS
+      unset EXERCISE SOLUTIONS WORKBOOK
       cd ..
     fi
   done
@@ -234,8 +238,12 @@ buildpathway() {
     done
     if test x$copacetic = x0; then
       echo WARNING: No teacher resource files in pathway $PATHWAY
+    elif test $(ls *.adoc|wc -l) -gt 1; then
+      echo WARNING: Too many teacher resource files in pathway $PATHWAY
     else
       export PATHWAYROOTDIR="../"
+      # there should be only one?
+      echo building teacher resource doc from *.adoc
       export TEACHER_RESOURCES=1
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset TEACHER_RESOURCES
