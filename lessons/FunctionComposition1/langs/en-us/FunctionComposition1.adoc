@@ -28,20 +28,29 @@
 |Materials
 |
 * https://docs.google.com/presentation/d/1BvOHRghJtY7vKSc_Icirlt7bVolrMjxGf0r4NfRsR48/view[Google Slides]
-* Workbook, writing utensil, computer
 
-Bootstrap Formative Assessments
+ifeval::["{proglang}" == "wescheme"]
+* Function Composition Exploration (@worksheet-link{workbook-pages/FunctionComposition-WB1.pdf, PDF}, @link{https://docs.google.com/document/d/1eqV4ZlZ4Kaz4v916vCMxq36wtIc-NrkJ3jBCVJopx-c/edit?usp=sharing, Google Doc})
 
-* @link{https://quizizz.com/admin/quiz/5cdcb223862fd8001a135579, Bootstrap: Algebra - Coordinates, Circles of Evaluation, & Code} (Quizizz)
-* @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb288f41b366950eba1e1, Bootstrap:Algebra - Data Types & Circles of Evaluation} (Desmos Activity)
-* @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb336f41b366950eba420, Bootstrap:Algebra - Circles of Evaluation Review(Blank Template)} (Desmos Activity)
-* @link{https://quizizz.com/admin/quiz/5cdcb3907f8c98001a203c1b, Bootstrap:Algebra - Contracts, Domain/Range, Data Types, & Functions } (Quizizz)
-* @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb3f555e3fb606a1f1ba2, Bootstrap:Algebra - Data Types, Circles of Evaluation, and Contracts} (Desmos Activity)
+* Function Composition Practice (@worksheet-link{workbook-pages/FunctionComposition-WB2.pdf, PDF}, @link{https://docs.google.com/document/d/1BRI6mFzdFCzsg-jwLuEfIoyRj_wk_gDFlWG2l8jfu-Q/edit?usp=sharing, Google Doc})
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+* Function Composition Exploration (@worksheet-link{workbook-pages/FunctionComposition-WB1.pdf, PDF}, @link{https://docs.google.com/document/d/1w5JW1jRRGqGhoZDfBkeKLGogpKRZ6bZXkmNhbjS-Ni8/edit?usp=sharing, Google Doc})
+
+* Function Composition Practice (@worksheet-link{workbook-pages/FunctionComposition-WB2.pdf, PDF}, @link{https://docs.google.com/document/d/1BRI6mFzdFCzsg-jwLuEfIoyRj_wk_gDFlWG2l8jfu-Q/edit?usp=sharing, Google Doc})
+endif::[]
+
+
+Formative Assessments & Activities
+
+* @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb336f41b366950eba420, Bootstrap:Algebra - Circles of Evaluation Review (Blank Template)} (Desmos Activity)
+
 
 Connection Activities
 
 * @link{https://www.geogebra.org/m/nqymeFc4, Function Composition Dynamic Illustrator I} (Geogebra)
-* @link{https://www.geogebra.org/m/h3qdzW3W, Composition of Function} (Geogebra Quiz)
+* @link{https://www.geogebra.org/m/h3qdzW3W, Composition of Functions} (Geogebra Quiz)
 * @link{https://quizizz.com/admin/quiz/58a61a2cf0b089151011ef50/composition-of-functions, Composite Functions} (Quizizz)
 
 |===
@@ -64,8 +73,12 @@ Connection Activities
 
 
 == Get Ready:
-
-Students should be logged into WeScheme.
+ifeval::["{proglang}" == "wescheme"] 
+Students should be logged on to @link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Students should be logged on to @link{https://code.pyret.org, code.pyret.org}.
+endif::[]
 
 == Launch: (5 mins)
 
@@ -107,9 +120,21 @@ _The scale factor, the percent by which the image should grow or shrink_
 * *What does the number in ‘rotate’ represent?*
 +
 _The rotation angle, measured counterclockwise_
-* *Suppose I wrote the code `(scale 3 (star 50 “solid” “red”))`.  What’s another line of code I could write that would produce the exact same image?*
+* *Suppose I wrote the code
+ifeval::["{proglang}" == "wescheme"] 
+`(scale 3 (star 50 “solid” “red”))`.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+`scale(3, star(50, "solid", "red"))`.
+endif::[]
+  What’s another line of code I could write that would produce the exact same image?*
 +
+ifeval::["{proglang}" == "wescheme"] 
 _``(star 150 "solid" "red")``_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_``star(150, "solid", "red")``_
+endif::[]
 * *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the text function as an input for `flip-horizontal`?*
 +
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
@@ -147,4 +172,13 @@ Create an Image that uses the text function and at least 3 of following function
 * `flip-vertical`
 * any other image producing function(`triangle`, `star`, `circle`, `rectangle`, etc..)
 
-Write comments to describe what is being produced.
+Students should practice writing *comments* in the code to describe what is being produced.
+ifeval::["{proglang}" == "wescheme"] 
+Use `;` at the beginning of a line to write a comment.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Use `#` at the beginning of a line to write a comment.
+endif::[]
+
+
+

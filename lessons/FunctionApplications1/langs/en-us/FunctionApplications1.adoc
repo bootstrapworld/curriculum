@@ -44,15 +44,15 @@
 * @std{7.RP.A.1}
 
 
-|Building Towards (CCSSM)
+|Approaching (CCSSM)
 |
 * @std{8.G.A.1}
 
-|Standards of Mathematical Practice (CCSSM)
+|Standards of Mathematical Practice
 |
 * @std{MP.6}
 
-|Bootstrap CS Standards
+|Bootstrap Benchmarks
 |
 * @std{BS-IDE}
 * @std{BS-PL.3}
@@ -64,11 +64,25 @@
 
 Students should have their computer, contracts page, and pencil.
 
-Students should be logged into WeScheme and have their completed “Game Design” worksheet.
+Students should be logged into 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org }.
+endif::[]
+and have their completed “Game Design” worksheet.
 
 == Explore: (10 min)
 
-With their partner, students investigate the @link{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, Game Template file} and write their observations.  
+With their partner, students investigate the 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, Game Template file }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org/editor#share=1xL3ZnWb43d5ih_fRib3dz3h8z9d__2om&v=f1d3c87, Game Template file }.
+endif::[]
+and write their observations.  
 
 [.notice-box]
 .Notice and Wonder
@@ -84,16 +98,24 @@ ask students to record what they notice, and then what they wonder.
 _``define``, `triangle`, ``circle``_
 * *What were some unfamiliar things?  Any idea what they might do?* 
 +
-_Answers vary: `bitmap/url`, comments (pink lines of text), require_
+_Answers vary: new functions, comments, images_
 * *What datatype is `GAME-TITLE`?  What datatype is `BACKGROUND`?* 
 +
 _``GAME-TITLE`` is a String, `BACKGROUND` is an Image_
 * *What does `SCREENSHOT` return in the Interactions window?* 
 +
 _An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
+ifeval::["{proglang}" == "wescheme"]
 * *What do you think `bitmap/url` does?* 
 +
-_Answers vary: It consumes a String, which is a URL (an image location on the Internet) and produces the Image inside Wescheme_
+_Answers vary: It consumes a String, which is a URL (an image location on the Internet) and produces the Image inside our program_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* *What do you think `image-url` does?* 
++
+_Answers vary: It consumes a String, which is a URL (an image location on the Internet) and produces the Image inside our program_
+endif::[]
+
 * *Did anyone try pressing "Run"?  What happens when you press "Run"?* 
 +
 _Allow students to discuss what they see and what connections they see with the code_
@@ -110,7 +132,7 @@ The students will be using images from the Internet for their game, and while th
 
 == Practice: (10 min)
 
-Guide the students through finding an image, saving it to their Drive, importing it into WeScheme, and defining the image value as `PLAYER`.  
+Guide the students through finding an image, saving it to their Drive, importing it into their program, and defining the image value as `PLAYER`.  
 _Students will change this image later on their own, this is just for teaching purposes._
 
 === Finding and Saving Images to Google Drive 
@@ -127,7 +149,21 @@ Once an image has been selected, click it to expand and save the image to Google
 * If using a Chromebook, this is done by right-clicking and selecting "Google Drive" on the left for the save location.  
 * On a PC or Mac, @worksheet-link{./resources/SavingImagesGuide.pdf, follow this quick guide}. 
 
-Once the image is saved to Google Drive, it can be brought in to WeScheme by using the "Images" button.  This will automatically bring in the image using the `bitmap/url` function, and students can run the code to see the image. 
+Once the image is saved to Google Drive, it can be brought into the program by using the 
+ifeval::["{proglang}" == "wescheme"]
+"Images" 
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+"Insert" 
+endif::[]
+button.  This will automatically bring in the image using the 
+ifeval::["{proglang}" == "wescheme"]
+`bitmap-url`  
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+`image-url` 
+endif::[]
+function, and students can run the code to see the image. 
 
 Next, they can define the image as a value and make changes to it with the image manipulation functions `scale`, `rotate`, `flip-horizontal`, and `flip-vertical`.   
 
