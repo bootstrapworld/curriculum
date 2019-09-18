@@ -190,7 +190,7 @@
   (fprintf o "\n== Workbooks\n\n")
   (fprintf o "link:./protected/workbook-sols.pdf[Teacher Workbook]\n\n")
   (fprintf o "link:./protected/pd-workbook.pdf[PD Workbook]\n\n")
-  (let ([exercises
+  #;(let ([exercises
           (call-with-input-file *pathway-exercises-file*
             (lambda (i)
               (let loop ([r '()])
@@ -516,6 +516,13 @@
                      (let ([directive (read-word i)])
                        ;(printf "directive = ~s~%" directive)
                        (cond [(string=? directive "") (display c o)]
+                             [(string=? directive "comment")
+                              (let ([prose (read-group i directive)])
+                                (display "@CURRICULUMCOMMENT\n" o)
+                                (display "++++\n")
+                                (display prose o)
+                                (display "\n++++\n")
+                                (display "@ENDCURRICULUMCOMMENT" o))]
                              [(string=? directive "vocab")
                               (let* ([arg (read-group i directive)]
                                      [s (assoc-glossary arg *glossary-list*)])

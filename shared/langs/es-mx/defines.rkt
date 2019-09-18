@@ -26,7 +26,7 @@
   in this material.\n"))
 
 (define (print-link-to-standards o)
-  (fprintf o "\n- link:./index.standards.html[Standards Alignment]\n")
+  (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")
 
 (define (print-link-to-forum o)
   (fprintf o "\n- link:https://discourse.bootstrapworld.org[Bootstrap Discussion Forum]\n")
