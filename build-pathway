@@ -72,6 +72,14 @@ resolvepyretkeywords() {
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
     $f
+  tif=${f%.html}-comment.txt
+  if test -f $tif; then
+    sed -i \
+      -e '/^<body[^>]*>/s/<body[^>]*>/\0INSERTCURRICULUMCOMMENT/' \
+      -e '/INSERTCURRICULUMCOMMENT/r '$tif \
+      -e 's/INSERTCURRICULUMCOMMENT//' \
+      $f
+  fi
 }
 
 buildworkbookpages() {
@@ -272,6 +280,7 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
+      resolvepyretkeywords index.html
     fi
     cd ..
 
@@ -312,6 +321,7 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
+      resolvepyretkeywords index.html
     fi
 
   fi

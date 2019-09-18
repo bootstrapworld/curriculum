@@ -302,6 +302,14 @@
           [else
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
+(define (display-comment prose o)
+  (display "@CURRICULUMCOMMENT\n" o)
+  (display "++++\n" o)
+  (display prose o)
+  (display "\n++++\n" o)
+  (display "@ENDCURRICULUMCOMMENT" o))
+
+
 (define (make-image img opts)
   (let ([lesson (getenv "LESSON")]
         [opts (string-join opts ", ")])
@@ -342,6 +350,7 @@
         [first-subsection-reached? #f]
         [title-reached? #f]
         [page-title #f]
+        [comment-before-title #f]
         )
     ;
     (define (display-title i o)
@@ -352,8 +361,10 @@
             (lambda (o)
               (display title o) (newline o))
             #:exists 'replace))
+        #|
         (unless (getenv "TEACHER_RESOURCES")
           (fprintf o "[.lesson-title]\n"))
+        |#
         (display #\= o) (display #\space o) (display title o) (newline o)))
     ;
     (define (add-exercise exercise)
@@ -405,9 +416,9 @@
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
       ;(include-glossary o) ;not needed
-
+    ;
       (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
-
+      ;
         ;(fprintf o "~n.Lessons Used in This Pathway\n")
         (print-lessons-intro o)
         ;(fprintf o "[#lesson-list]~%")
@@ -518,11 +529,14 @@
                        (cond [(string=? directive "") (display c o)]
                              [(string=? directive "comment")
                               (let ([prose (read-group i directive)])
-                                (display "@CURRICULUMCOMMENT\n" o)
-                                (display "++++\n")
-                                (display prose o)
-                                (display "\n++++\n")
-                                (display "@ENDCURRICULUMCOMMENT" o))]
+                                (if title-reached?
+                                    (display-comment prose o)
+                                    (call-with-output-file "index-comment.txt"
+                                      (lambda (o)
+                                        (display "<!-- " o)
+                                        (display prose o)
+                                        (display " -->" o)
+                                        (newline o)))))]
                              [(string=? directive "vocab")
                               (let* ([arg (read-group i directive)]
                                      [s (assoc-glossary arg *glossary-list*)])
