@@ -28,8 +28,7 @@ questions and share ideas.
 
 (define (print-link-to-glossary o)
   (fprintf o "\n- link:./index-glossary.html[Glossary]\n")
-  (fprintf o "-- Check here for the technical terms and concepts used
-  in this material.\n"))
+  (fprintf o "-- Check here for critical vocabulary words used in this pathway.\n"))
 
 (define (print-link-to-standards o)
   (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")
@@ -37,7 +36,8 @@ questions and share ideas.
   and Practice Standards, as well as the TEK and CSTA Standards.\n"))
 
 (define (print-link-to-student-workbook o)
-  (fprintf o "\n- link:./workbook/workbook.pdf[Student Workbook]\n"))
+  (fprintf o "\n- link:./workbook/workbook.pdf[Student Workbook]\n")
+  (fprintf o "-- Sometimes, the best way for students to get real thinking done is to step away from the keyboard! Our lesson plans are tightly integrated with the Student Workbook, allowing for paper-and-pencil practice and activities that don't require a computer.\n"))
 
 (define (print-link-to-teacher-resources o)
   (fprintf o "\n- link:./resources/index.html[Teacher-Only Resources]\n")
