@@ -32,7 +32,7 @@ questions and share ideas.
   in this material.\n"))
 
 (define (print-link-to-standards o)
-  (fprintf o "\n- link:./index.standards.html[Standards Alignment]\n")
+  (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")
   (fprintf o "-- Find out how our materials align with Common Core Content
   and Practice Standards, as well as the TEK and CSTA Standards.\n"))
 
