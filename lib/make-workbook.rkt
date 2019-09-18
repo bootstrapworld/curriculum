@@ -141,13 +141,15 @@
 
   )
 
-(make-workbook)
-(system (format "mv workbook-numbered.tex workbook.tex"))
+(unless (getenv "NOPDF")
+  (make-workbook)
+  (system (format "mv workbook-numbered.tex workbook.tex"))
 
-(make-workbook #:include-lesson #t)
-(system (format "mv workbook-numbered.tex pd-workbook.tex"))
+  (make-workbook #:include-lesson #t)
+  (system (format "mv workbook-numbered.tex pd-workbook.tex"))
 
-(make-workbook #:teacher-version #t)
-(system (format "mv workbook-numbered.tex workbook-sols.tex"))
+  (make-workbook #:teacher-version #t)
+  (system (format "mv workbook-numbered.tex workbook-sols.tex"))
+  )
 
 (void)

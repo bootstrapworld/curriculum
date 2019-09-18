@@ -24,6 +24,7 @@ cd $TOPDIR
 
 export LANGUAGE=en-us
 export PROGLANG=
+export NOPDF=
 
 ARGS=
 while test $# -ne 0; do
@@ -32,6 +33,8 @@ while test $# -ne 0; do
     LANGUAGE=$1; shift
   elif test x$arg = x--proglang; then
     PROGLANG=$1; shift
+  elif test x$arg = x--nopdf; then
+    NOPDF=1;
   else
     ARGS="$ARGS $arg"
   fi
@@ -125,7 +128,9 @@ buildworkbookpages() {
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
           resolvepyretkeywords $fhtml
-          wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+          if test -z $NOPDF; then
+            wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+          fi
         fi
       done
       unset EXERCISE SOLUTIONS WORKBOOK
@@ -169,8 +174,10 @@ buildlessonplan() {
       fi
     fi
     resolvepyretkeywords index.html
-    echo Creating lesson plan pdf
-    wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
+    if test -z $NOPDF; then
+      echo Creating lesson plan pdf
+      wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
+    fi
   fi
   cd ..
 }
