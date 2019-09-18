@@ -190,7 +190,7 @@
   (fprintf o "\n== Workbooks\n\n")
   (fprintf o "link:./protected/workbook-sols.pdf[Teacher Workbook]\n\n")
   (fprintf o "link:./protected/pd-workbook.pdf[PD Workbook]\n\n")
-  (let ([exercises
+  #;(let ([exercises
           (call-with-input-file *pathway-exercises-file*
             (lambda (i)
               (let loop ([r '()])
