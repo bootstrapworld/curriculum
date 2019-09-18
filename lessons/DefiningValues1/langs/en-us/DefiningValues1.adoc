@@ -29,16 +29,28 @@
 |Materials
 |
 * @link{https://docs.google.com/presentation/d/1l369za3UsTHj5bEw0IZIBoAEMdPnFDmsA5_oenwN8Cw/edit?usp=sharing,Google Slides}
-* Workbook, writing utensil, computer
+
+ifeval::["{proglang}" == "wescheme"]
+* Defining Values Exploration (@worksheet-link{workbook-pages/wescheme/DefiningValues-WB1.pdf, PDF}, @link{https://docs.google.com/document/d/1ghDCAwwTvIffzT-dxqfrqnWO9k9i7obKdl_ijYEzlMo/edit?usp=sharing, Google Doc})
+
+* Defining Values Practice (@worksheet-link{workbook-pages/wescheme/DefiningValues-WB2.pdf, PDF}, @link{https://docs.google.com/document/d/1NBnz8xzbBOWtpAZoKtTxm_mzGete6zobwLG8Hn6g498/edit?usp=sharing, Google Doc})
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+* Defining Values Exploration (@worksheet-link{workbook-pages/wescheme/DefiningValues-WB1.pdf, PDF}, @link{https://docs.google.com/document/d/1lU6AlKmiAwfA45mlZY9XkFDQELdQJTcNrV3BMIUirxo/edit?usp=sharing, Google Doc})
+
+* Defining Values Practice (@worksheet-link{workbook-pages/wescheme/DefiningValues-WB2.pdf, PDF}, @link{https://docs.google.com/document/d/1NBnz8xzbBOWtpAZoKtTxm_mzGete6zobwLG8Hn6g498/edit?usp=sharing, Google Doc})
+endif::[]
+
 |===
 
 [.left-header, cols="20a, 80a", stripes=none]
 |===
-|Reinforcing standard (CCSSM)
+|Reinforcing (CCSSM)
 |
 * @std{7.EE.B.4}
 
-|Building toward (CCSSM)
+|Approaching (CCSSM)
 |
 * @std{HSA.SSE.A.1}
 
@@ -47,7 +59,7 @@
 * @std{MP.2}
 * @std{MP.7}
 
-|Bootstrap CS Standards
+|Bootstrap Benchmarks
 |
 * @std{BS-PL.3}
 |===
@@ -55,10 +67,18 @@
 
 == Get Ready: 
 
-Students should be logged into WeScheme.
+Students should be logged into 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}.
+endif::[]
 
 == Launch: (5 mins)
 Display the sample code from the "Prize Star" exercise.
+
+ifeval::["{proglang}" == "wescheme"]
 
 `(star 50 "solid" "green")`
 
@@ -76,17 +96,48 @@ Display the sample code from the "Prize Star" exercise.
 
 * *What happened when you were asked to change the color of the star to gold?* 
 +
-_We had to change it everywhere it appeared._  
+_We had to change it everywhere it appeared._ 
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+`star(50, "solid", "green")`
+
+`scale(3, star(50, "solid", "green"))`
+
+`scale(0.5, star(50, "solid", "green"))`
+
+`rotate(45, star(50, "solid", "green"))`
+
+`rotate(45, scale(3, star(50, "solid", "green")))`
+
+* *What common element was repeated throughout all the lines of code?* 
++
+`_star(50, "solid", "green")_`
+
+* *What happened when you were asked to change the color of the star to gold?* 
++
+_We had to change it everywhere it appeared._ 
+endif::[] 
 
 === Since we're using that star over and over again, wouldn't it be nice if we could give that piece of code a "nickname", something shorter we could type to represent that piece of code?
 
 == Explore: (10 mins)
-On WeScheme, have students click "Start a new program" and open to @worksheet-link{workbook-pages/DefiningValues-WB1.pdf} to explore the new ‘define’ keyword.
+In the coding environment, have students click "Start a new program" and open to @worksheet-link{workbook-pages/DefiningValues-WB1.pdf} to explore defining values.
+
+ifeval::["{proglang}" == "pyret"]
+Students need to have *include image* as their first line of code in the Definitions window and press "Run" to load the image library.  
+endif::[]
 
 == Discuss: (10 mins)
+ifeval::["{proglang}" == "wescheme"]
 * *How is ‘define’ similar to a function?  How is it different?*
 +
 _It’s written inside parentheses like a @vocab{function}, but ‘define’ doesn’t have an output_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* *How is defining a value with the `=` sign similar to what you've seen in math class?
+endif::[]
+
 * *What is the usefulness of defining values?*
 +
 _Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
@@ -116,7 +167,9 @@ Use PRIZE_STAR to complete the following exercises:
 
 == Create/Apply: (15 mins) 
 
-*Option 1* (for a shorter time committment):
+There are other functions that also work with Images - `overlay`, `beside`, and `above` are all functions that take in two Images and return a new Image.
+
+*Option 1* (for a shorter time commitment):
 Define at least 3 images of your own and combine using `overlay`, `beside`, and/or `above`.  You can also use any other functions you've learned, such as:
 
 * `rotate`
@@ -127,5 +180,5 @@ Define at least 3 images of your own and combine using `overlay`, `beside`, and/
 
 Write comments to describe what is being produced.
 
-*Option 2* (for a longer time committment):
+*Option 2* (for a longer time commitment):
 Have students choose a flag from this list: @worksheet-link{exercises/flags-of-the-world-resource.pdf, (Flags of the World Resource)}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.

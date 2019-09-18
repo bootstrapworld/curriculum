@@ -177,11 +177,11 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
-(define (include-glossary-and-standards-files o)
-  ;(printf "include-glossary-and-standards-files~n")
+(define (include-glossary o)
+  ;(printf "include-glossary\n")
   (newline o)
   (newline o)
-  (when (getenv "NARRATIVE") (error ' include-glossary-and-standards-files "deadc0de"))
+  (when (getenv "NARRATIVE") (error ' include-glossary "deadc0de"))
   (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
   ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
   )
@@ -404,7 +404,7 @@
     ;
     (define (link-to-lessons-in-pathway o)
       ;(printf "link-to-lessons-in-pathway~n")
-      ;(include-glossary-and-standards-files o) ;not needed
+      ;(include-glossary o) ;not needed
 
       (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
 
@@ -660,15 +660,22 @@
                               (getenv "TEACHER_RESOURCES"))
                           beginning-of-line? (char=? c #\=))
                      (set! beginning-of-line? #f)
-                     (cond [title-reached? (display c o)]
+                     (cond [title-reached?
+                             (cond [first-subsection-reached? #f]
+                                   [(check-first-subsection i o)
+                                    (set! first-subsection-reached? #t)
+                                    (when (getenv "LESSONPLAN")
+                                      (include-glossary o))]
+                                   [else #f])
+                             (cond [(getenv "LESSON")
+                                    (display-section-markup i o)]
+                                   [else (display c o)])]
                            [else
                              (set! title-reached? #t)
                              (display-title i o)
                              (when (getenv "TEACHER_RESOURCES")
                                ;(printf "teacher resource autoloading stuff\n")
-                               (include-workbook-and-solutions-files o))
-                             (when (getenv "LESSONPLAN")
-                               (include-glossary-and-standards-files o))])]
+                               (include-workbook-and-solutions-files o))])]
                     [(char=? c #\newline)
                      (newline o)
                      (set! beginning-of-line? #t)]
