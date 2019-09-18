@@ -516,6 +516,13 @@
                      (let ([directive (read-word i)])
                        ;(printf "directive = ~s~%" directive)
                        (cond [(string=? directive "") (display c o)]
+                             [(string=? directive "comment")
+                              (let ([prose (read-group i directive)])
+                                (display "@CURRICULUMCOMMENT\n" o)
+                                (display "++++\n")
+                                (display prose o)
+                                (display "\n++++\n")
+                                (display "@ENDCURRICULUMCOMMENT" o))]
                              [(string=? directive "vocab")
                               (let* ([arg (read-group i directive)]
                                      [s (assoc-glossary arg *glossary-list*)])

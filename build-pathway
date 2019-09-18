@@ -1,4 +1,4 @@
-# last modified 2019-09-16
+# last modified 2019-09-18
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -62,7 +62,13 @@ fi
 
 resolvepyretkeywords() {
   f=$1
-  sed -i -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' $f
+  sed -i \
+    -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
+    -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
+    -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
+    -e 's/@CURRICULUMCOMMENT/<!-- /' \
+    -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
+    $f
 }
 
 buildworkbookpages() {
@@ -162,6 +168,7 @@ buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
+    resolvepyretkeywords index.html
     echo Creating lesson plan pdf
     wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
   fi
