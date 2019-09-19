@@ -1,4 +1,4 @@
-# last modified 2019-09-18
+# last modified 2019-09-19
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -9,6 +9,12 @@ echo >> index.adoc
 echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
+
+export SED=sed
+
+if test $(which gsed > /dev/null); then
+  SED=gsed
+fi
 
 export TOPDIR=$(pwd)
 
@@ -65,7 +71,7 @@ fi
 
 resolvepyretkeywords() {
   f=$1
-  sed -i \
+  $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
     -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
     -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
@@ -74,7 +80,7 @@ resolvepyretkeywords() {
     $f
   tif=${f%.html}-comment.txt
   if test -f $tif; then
-    sed -i \
+    $SED -i \
       -e '/^<body[^>]*>/s/<body[^>]*>/\0INSERTCURRICULUMCOMMENT/' \
       -e '/INSERTCURRICULUMCOMMENT/r '$tif \
       -e 's/INSERTCURRICULUMCOMMENT//' \
