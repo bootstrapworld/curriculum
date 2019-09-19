@@ -30,6 +30,8 @@ cd $TOPDIR
 
 export LANGUAGE=en-us
 export PROGLANG=
+
+export DEBUG=
 export NOPDF=
 
 ARGS=
@@ -39,6 +41,8 @@ while test $# -ne 0; do
     LANGUAGE=$1; shift
   elif test x$arg = x--proglang; then
     PROGLANG=$1; shift
+  elif test x$arg = x--debug; then
+    DEBUG=1;
   elif test x$arg = x--nopdf; then
     NOPDF=1;
   else
@@ -378,9 +382,8 @@ echo .{nbsp} >> index.adoc
 
 for f in */*; do
   f=${f%/}
-  g=$f
-  pwy=${g%/*}
-  lang=${g#*/}
+  pwy=${f%/*}
+  lang=${f#*/}
   docf=$f/index.html
   if test -f $docf; then
     echo >> index.adoc
@@ -389,3 +392,9 @@ for f in */*; do
 done
 
 asciidoctor -a linkcss index.adoc
+
+if test -z $DEBUG; then
+  for f in adoc asc rkt title txt; do
+    find . -name \*.$f -delete
+  done
+fi
