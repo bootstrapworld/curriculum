@@ -1,4 +1,4 @@
-# last modified 2019-09-10
+# last modified 2019-09-19
 
 if ! git rev-parse --is-inside-work-tree; then
   echo Not in a Git repo; exit
@@ -30,7 +30,10 @@ fi
 
 DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/preview
 
+ON_DEPLOY_SITE=1
+
 if test ! -d $DEPLOY_DIR; then
+  ON_DEPLOY_SITE=
   DEPLOY_DIR=~/tmp
   if test ! -d $DEPLOY_DIR; then
     mkdir $DEPLOY_DIR
@@ -58,3 +61,7 @@ cd ..
 rm -fr curriculum
 
 mv distribution curriculum
+
+if test ! -z $ON_DEPLOY_SITE; then
+  chgrp -R cs-plt curriculum
+fi
