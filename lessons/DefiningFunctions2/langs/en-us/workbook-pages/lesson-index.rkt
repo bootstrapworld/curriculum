@@ -3,4 +3,7 @@
 "NoticeAndWonder.pdf"
 "DefiningFunctions2-EX1.adoc"
 ("PurposeStatement3ReadsStrongerClearer.pdf" "landscape")
+"DefiningFunctions2-EX2.adoc"
+"DefiningFunctions2-EX3.adoc"
+"DefiningFunctions2-EX4.adoc"
 )
