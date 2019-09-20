@@ -99,7 +99,7 @@ resolvespans() {
     -e 's/@BEGINCURRICULUMSPAN/>/g' \
     -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
     $f
-  tif=${f%.html}-comment.txt
+  tif=${f%.*}-comment.txt
   if test -f $tif; then
     $SED -i \
       -e '/^<body[^>]*>/s/<body[^>]*>/\0INSERTCURRICULUMCOMMENT/' \
