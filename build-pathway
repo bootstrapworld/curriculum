@@ -54,7 +54,6 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-
 if test ! -d prog; then
   mkdir prog
 fi
@@ -70,7 +69,6 @@ if test -d $TOPDIR/shared/langs/$LANGUAGE; then
   cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
 fi
 
-
 #cp -p $TOPDIR/lib/.htp* distribution
 
 resolvepyretkeywords() {
@@ -81,6 +79,9 @@ resolvepyretkeywords() {
     -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
+    -e 's/@CURRICULUMSPAN/<span /g' \
+    -e 's/@BEGINCURRICULUMSPAN/>/g' \
+    -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
     $f
   tif=${f%.html}-comment.txt
   if test -f $tif; then

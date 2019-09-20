@@ -70,15 +70,27 @@
                          (loop (+ j 1) (cons (substring g i j) r))]
                         [else (loop2 (+ j 1) #f #f)]))))))))
 
-(define (string-trim-dq s)
-  (let ([n (string-length s)])
-    (if (char=? (string-ref s 0) (string-ref s (- n 1)) #\")
-        (substring s 1 (- n 1))
-        s)))
+(define (display-begin-span span-args o)
+  (set! span-args (map string-trim span-args))
+  (let ([classes (map (lambda (s) (substring s 1))
+                      (filter (lambda (s) (char=? (string-ref s 0) #\.)) span-args))]
+        [ids (map (lambda (s) (substring s 1))
+                  (filter (lambda (s) (char=? (string-ref s 0) #\#)) span-args))])
+    (when (> (length ids) 1)
+      (error 'span "Too many ids"))
+    (display "@CURRICULUMSPAN" o)
+    (when (pair? classes)
+      (display "class=\"" o)
+      (display (string-join classes " ") o)
+      (display "\" " o))
+    (when (pair? ids)
+      (display "id=\"" o)
+      (display (car ids) o)
+      (display "\"" o))
+    (display "@BEGINCURRICULUMSPAN" o)))
 
-(define (read-commaed-group-obs i directive)
-  (map string-trim
-       (regexp-split #rx"," (read-group i directive))))
+(define (display-end-span o)
+  (display "@ENDCURRICULUMSPAN" o))
 
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
@@ -513,6 +525,22 @@
         (asciidoctor lessons-file)
         (newline o))))
   ;
+  (define span-stack '())
+  (define (top-span-stack)
+    (car span-stack))
+  (define (grow-span-stack)
+    (set! span-stack (cons 0 span-stack)))
+  (define (pop-span-stack)
+    (set! span-stack (cdr span-stack)))
+  (define (increment-top-span-stack)
+    (let ([n (car span-stack)])
+      (set! span-stack (cons (+ n 1) (cdr span-stack)))))
+  (define (decrement-top-span-stack)
+    (let ([n (car span-stack)])
+      (when (<= n 0)
+        (error 'span "Bad @span: Check missing braces"))
+      (set! span-stack (cons (- n 1) (cdr span-stack)))))
+  ;
   (call-with-input-file in-file
     (lambda (i)
       (call-with-output-file out-file
@@ -527,6 +555,9 @@
                      (let ([directive (read-word i)])
                        ;(printf "directive = ~s~%" directive)
                        (cond [(string=? directive "") (display c o)]
+                             [(string=? directive "span")
+                              (display-begin-span (read-commaed-group i directive) o)
+                              (grow-span-stack)]
                              [(string=? directive "comment")
                               (let ([prose (read-group i directive)])
                                 (if title-reached?
@@ -702,7 +733,19 @@
                      (set! beginning-of-line? #t)]
                     [else
                       (set! beginning-of-line? #f)
-                      (display c o)])
+                      (cond [(and (pair? span-stack) (or (char=? c #\{) (char=? c #\})))
+                             (cond [(char=? c #\{)
+                                    (unless (= (top-span-stack) 0)
+                                      (display c o))
+                                    (increment-top-span-stack)]
+                                   [(char=? c #\})
+                                    (decrement-top-span-stack)
+                                    (cond [(= (top-span-stack) 0)
+                                           (pop-span-stack)
+                                           (display-end-span o)]
+                                          [else (display c o)])]
+                                   [else (error ' preproc-n-asciidoctor "deadc0de")])]
+                            [else (display c o)])])
                   (loop)))))
 
           (when (getenv "NARRATIVE")
