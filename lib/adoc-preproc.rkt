@@ -564,9 +564,9 @@
                                     (display-comment prose o)
                                     (call-with-output-file "index-comment.txt"
                                       (lambda (o)
-                                        (display "<!-- " o)
+                                        (display "<!--" o)
                                         (display prose o)
-                                        (display " -->" o)
+                                        (display "-->" o)
                                         (newline o)))))]
                              [(string=? directive "vocab")
                               (let* ([arg (read-group i directive)]
