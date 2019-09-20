@@ -313,7 +313,7 @@ buildpathway() {
 
     if test ! -f workbook-page-index.rkt; then
       echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-    else
+    elif test -z $NOPDF; then
       export PATHWAYROOTDIR=""
       cp -p $PROGDIR/front-cover-teacher.pdf .
       $PROGDIR/make-workbook.rkt
