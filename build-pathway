@@ -83,7 +83,7 @@ insertbodyid() {
 insertstylecss() {
   f=$1
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
+    -e 's/<link.*curriculum.css/<link rel="stylesheet" href="\/styles.css">\n\0/' \
     $f
 }
 
@@ -99,7 +99,7 @@ resolvespans() {
     -e 's/@BEGINCURRICULUMSPAN/>/g' \
     -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
     $f
-  tif=${f%.*}-comment.txt
+  tif=${f%.html}-comment.txt
   if test -f $tif; then
     $SED -i \
       -e '/^<body[^>]*>/s/<body[^>]*>/\0INSERTCURRICULUMCOMMENT/' \
@@ -348,10 +348,9 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      mv index.html index.shtml
-      insertbodyid index.shtml
-      insertstylecss index.shtml
-      resolvespans index.shtml
+      insertbodyid index.html
+      insertstylecss index.html
+      resolvespans index.html
     fi
 
   fi
@@ -404,7 +403,7 @@ for f in */*; do
   f=${f%/}
   pwy=${f%/*}
   lang=${f#*/}
-  docf=$f/index.shtml
+  docf=$f/index.html
   if test -f $docf; then
     echo >> index.adoc
     echo \* link:$docf[$pwy Narrative \($lang\)] >> index.adoc
