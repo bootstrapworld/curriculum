@@ -348,9 +348,10 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      insertbodyid index.html
-      insertstylecss index.html
-      resolvespans index.html
+      mv index.html index.shtml
+      insertbodyid index.shtml
+      insertstylecss index.shtml
+      resolvespans index.shtml
     fi
 
   fi
@@ -403,7 +404,7 @@ for f in */*; do
   f=${f%/}
   pwy=${f%/*}
   lang=${f#*/}
-  docf=$f/index.html
+  docf=$f/index.shtml
   if test -f $docf; then
     echo >> index.adoc
     echo \* link:$docf[$pwy Narrative \($lang\)] >> index.adoc
