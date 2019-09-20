@@ -33,6 +33,7 @@ export PROGLANG=
 
 export DEBUG=
 export NOPDF=
+unset NOPDF
 
 ARGS=
 while test $# -ne 0; do
@@ -76,6 +77,13 @@ insertbodyid() {
   $SED -i \
     -e 's/<body[^>]*>/\0\n<div id="body">/' \
     -e 's/<\/body>/<\/div>\n\0/' \
+    $f
+}
+
+insertstylecss() {
+  f=$1
+  $SED -i \
+    -e 's/<link.*curriculum.css/<link rel="stylesheet" href="\/styles.css">\n\0/' \
     $f
 }
 
@@ -341,6 +349,7 @@ buildpathway() {
         fi
       fi
       insertbodyid index.html
+      insertstylecss index.html
       resolvespans index.html
     fi
 
