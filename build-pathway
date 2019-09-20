@@ -83,7 +83,7 @@ insertbodyid() {
 insertstylecss() {
   f=$1
   $SED -i \
-    -e 's/<link.*curriculum.css/<link rel="stylesheet" href="\/styles.css">\n\0/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
     $f
 }
 
