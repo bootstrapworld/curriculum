@@ -1,4 +1,4 @@
-# last modified 2019-09-19
+# last modified 2019-09-20
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -71,7 +71,15 @@ fi
 
 #cp -p $TOPDIR/lib/.htp* distribution
 
-resolvepyretkeywords() {
+insertbodyid() {
+  f=$1
+  $SED -i \
+    -e 's/<body[^>]*>/\0\n<div id="body">/' \
+    -e 's/<\/body>/<\/div>\n\0/' \
+    $f
+}
+
+resolvespans() {
   f=$1
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
@@ -146,7 +154,7 @@ buildworkbookpages() {
           $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
-          resolvepyretkeywords $fhtml
+          resolvespans $fhtml
           if test -z $NOPDF; then
             wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
           fi
@@ -192,7 +200,7 @@ buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
-    resolvepyretkeywords index.html
+    resolvespans index.html
     if test -z $NOPDF; then
       echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
@@ -291,7 +299,7 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      resolvepyretkeywords index.html
+      resolvespans index.html
     fi
     cd ..
 
@@ -332,7 +340,8 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      resolvepyretkeywords index.html
+      insertbodyid index.html
+      resolvespans index.html
     fi
 
   fi
