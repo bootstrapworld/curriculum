@@ -80,6 +80,13 @@ insertbodyid() {
     $f
 }
 
+insertstylecss() {
+  f=$1
+  $SED -i \
+    -e 's/<link.*curriculum.css/<link rel="stylesheet" href="\/styles.css">\n\0/' \
+    $f
+}
+
 resolvespans() {
   f=$1
   $SED -i \
@@ -342,6 +349,7 @@ buildpathway() {
         fi
       fi
       insertbodyid index.html
+      insertstylecss index.html
       resolvespans index.html
     fi
 
