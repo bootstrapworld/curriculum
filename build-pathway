@@ -1,4 +1,4 @@
-# last modified 2019-09-20
+# last modified 2019-09-23
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -72,7 +72,7 @@ fi
 
 #cp -p $TOPDIR/lib/.htp* distribution
 
-insertbodyid() {
+function insertbodyid() {
   f=$1
   $SED -i \
     -e 's/<body[^>]*>/\0\n<div id="body">/' \
@@ -80,17 +80,18 @@ insertbodyid() {
     $f
 }
 
-insertstylecss() {
+function insertstylecss() {
   f=$1
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
     $f
 }
 
-resolvespans() {
+function resolveabbrevs() {
   f=$1
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
+    -e 's/@CURRICULUMCOMMA/,/g' \
     -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
     -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
@@ -109,7 +110,7 @@ resolvespans() {
   fi
 }
 
-buildworkbookpages() {
+function buildworkbookpages() {
   L=$1
   echo
   echo building $L workbook-pages
@@ -162,7 +163,7 @@ buildworkbookpages() {
           $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
-          resolvespans $fhtml
+          resolveabbrevs $fhtml
           if test -z $NOPDF; then
             wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
           fi
@@ -175,7 +176,7 @@ buildworkbookpages() {
   cd ..
 }
 
-buildlessonplan() {
+function buildlessonplan() {
   echo doing buildlessonplan
   L=$1
   echo
@@ -208,7 +209,7 @@ buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
-    resolvespans index.html
+    resolveabbrevs index.html
     if test -z $NOPDF; then
       echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
@@ -217,7 +218,7 @@ buildlessonplan() {
   cd ..
 }
 
-buildlessons() {
+function buildlessons() {
   echo doing buildlessons
   cd lessons
   for L in *; do
@@ -235,7 +236,7 @@ buildlessons() {
   cd ..
 }
 
-buildpathway() {
+function buildpathway() {
   cd $TOPDIR
 
   PATHWAY=$SRCPATHWAY
@@ -307,7 +308,7 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      resolvespans index.html
+      resolveabbrevs index.html
     fi
     cd ..
 
@@ -351,7 +352,7 @@ buildpathway() {
       mv index.html index.shtml
       insertbodyid index.shtml
       insertstylecss index.shtml
-      resolvespans index.shtml
+      resolveabbrevs index.shtml
     fi
 
   fi

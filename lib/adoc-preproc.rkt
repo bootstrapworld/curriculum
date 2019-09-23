@@ -321,14 +321,36 @@
   (display "\n++++\n" o)
   (display "@ENDCURRICULUMCOMMENT" o))
 
+(define (clean-up-image-text text)
+  (when (char=? (string-ref text 0) #\")
+    (set! text (substring text 1)))
+  (let ([n (string-length text)])
+    (when (char=? (string-ref text (- n 1)) #\")
+      (set! text (substring text 0 (- n 1)))))
+  (set! text (regexp-replace* #rx"," text "@CURRICULUMCOMMA"))
+  (set! text (string-append " " text " ")) ;needed?
+  text)
+
+(define (clean-up-url-in-image-text text)
+  (regexp-replace* #rx"https://" text ""))
 
 (define (make-image img opts)
+  ;(printf "making image ~s ~s\n" img opts)
   (let ([lesson (getenv "LESSON")]
-        [opts (string-join opts ", ")])
-    (if lesson
-        (format "image::{pathwayrootdir}lessons/~a/~a[~a]" lesson img
-                opts)
-        (format "image::~a[~a]" img opts))))
+        [text (clean-up-image-text (car opts))]
+        [rest-opts (cdr opts)])
+    (set! opts (string-join rest-opts ", "))
+    ;(printf "text = ~s\n" text)
+    ;(printf "opts = ~s\n" opts)
+    (string-append
+      (format "[.tooltip.centered-image]\n")
+      (format "@CURRICULUMSPANclass=\"tooltiptext\"@BEGINCURRICULUMSPAN ~a @ENDCURRICULUMSPAN\n" text)
+      (let ([text (clean-up-url-in-image-text text)])
+        (if lesson
+            (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
+                    text opts)
+            (format "image:~a[~s, ~a]" img text opts)))
+      )))
 
 (define (make-lesson-link lesson file-seq link-text)
   ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
