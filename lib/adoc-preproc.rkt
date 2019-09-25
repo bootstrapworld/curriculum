@@ -783,6 +783,9 @@
             )
 
           (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
+            (fprintf o "\n\n")
+            (fprintf o "'''\n")
+            (fprintf o "[.copyright]\n")
             (fprintf o (create-copyright *copyright-name* *copyright-author*)))
           )
 
