@@ -15,10 +15,11 @@
 to anyone who is interested in using our lesson plans or student
 workbooks.
 
+== Lesson Plans\n
 [#lesson-list]\n"))
 
 (define (print-other-resources-intro o)
-  (fprintf o "Of course, there's more to a curriculum than software
+  (fprintf o "== Other Resources\nOf course, there's more to a curriculum than software
 and lesson plans! We also provide a number of resources to educators,
 including standards alignment, a complete student workbook, an answer
 key for the programming exercises and a forums where they can ask
