@@ -375,7 +375,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                                               (highlight-keywords last-body-line) *show-body?*))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    (encoded-ans ".recipe_definition_body_pyret"
+                    (encoded-ans ".recipe_definition_end_pyret"
                                  (highlight-keywords "end") #t))))))))))
 
 (define (write-definition funname param-list body)

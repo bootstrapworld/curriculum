@@ -1,4 +1,4 @@
-# last modified 2019-09-20
+# last modified 2019-09-24
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -72,7 +72,7 @@ fi
 
 #cp -p $TOPDIR/lib/.htp* distribution
 
-insertbodyid() {
+function insertbodyid() {
   f=$1
   $SED -i \
     -e 's/<body[^>]*>/\0\n<div id="body">/' \
@@ -80,17 +80,18 @@ insertbodyid() {
     $f
 }
 
-insertstylecss() {
+function insertstylecss() {
   f=$1
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
     $f
 }
 
-resolvespans() {
+function resolveabbrevs() {
   f=$1
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
+    -e 's/@CURRICULUMCOMMA/,/g' \
     -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
     -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
@@ -109,10 +110,10 @@ resolvespans() {
   fi
 }
 
-buildworkbookpages() {
+function buildworkbookpages() {
   L=$1
   echo
-  echo building $L workbook-pages
+  #echo building $L workbook-pages
   cd $L
   #
   if test -d workbook-pages/$PROGLANG; then
@@ -142,7 +143,12 @@ buildworkbookpages() {
   #
   for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
     if test -d $d; then
-      echo \(building $d\)
+      if test $d = "exercises";             then dd="exercises          "
+      elif test $d = "exercises-sols";      then dd="exercises-sols     "
+      elif test $d = "workbook-pages";      then dd="workbook-pages     "
+      elif test $d = "workbook-sols-pages"; then dd="workbook-sols-pages"
+      fi
+      #echo \(building $L "->" $d\)
       unset EXERCISE SOLUTIONS WORKBOOK
       if test $d = "workbook-sols-pages" -o $d = "exercises-sols"; then
         export SOLUTIONS=1
@@ -156,13 +162,13 @@ buildworkbookpages() {
       cp -p $PROGDIR/*.css .
       for f in *.adoc; do
         if test ! -f $f; then
-          echo "        " No adoc files in lesson $L/$d
+          echo No adoc files in lesson $L/$d
         else
-          echo building $f
+          echo building $PATHWAY "->" $L "->" "$dd" "->" $f
           $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
-          resolvespans $fhtml
+          resolveabbrevs $fhtml
           if test -z $NOPDF; then
             wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
           fi
@@ -175,11 +181,11 @@ buildworkbookpages() {
   cd ..
 }
 
-buildlessonplan() {
-  echo doing buildlessonplan
+function buildlessonplan() {
+  #echo doing buildlessonplan
   L=$1
   echo
-  echo building $L lesson plan
+  #echo building $PATHWAY "->" $L lesson plan
   cd $L
   copacetic=1
   for f in *.adoc; do
@@ -195,7 +201,8 @@ buildlessonplan() {
     cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
-    echo building lesson plan from *.adoc
+    #echo building lesson plan from *.adoc
+    echo building lesson plan: $PATHWAY "->" $L "->" *.adoc
     $PROGDIR/adoc-preproc.rkt *.adoc
     if test ! -f index.html; then
       SRCFILE=
@@ -208,17 +215,17 @@ buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
-    resolvespans index.html
+    resolveabbrevs index.html
     if test -z $NOPDF; then
-      echo Creating lesson plan pdf
+      #echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
     fi
   fi
   cd ..
 }
 
-buildlessons() {
-  echo doing buildlessons
+function buildlessons() {
+  #echo doing buildlessons
   cd lessons
   for L in *; do
     if test ! -d $L; then
@@ -235,7 +242,7 @@ buildlessons() {
   cd ..
 }
 
-buildpathway() {
+function buildpathway() {
   cd $TOPDIR
 
   PATHWAY=$SRCPATHWAY
@@ -292,8 +299,8 @@ buildpathway() {
     else
       export PATHWAYROOTDIR="../"
       # there should be only one?
-      echo building teacher resource doc from *.adoc
       export TEACHER_RESOURCES=1
+      echo building teacher resources: $PATHWAY "->" "resources" "->" *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset TEACHER_RESOURCES
       if test ! -f index.html; then
@@ -307,16 +314,22 @@ buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      resolvespans index.html
+      resolveabbrevs index.html
     fi
     cd ..
 
     if test ! -f workbook-page-index.rkt; then
       echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-    else
+    elif test -z $NOPDF; then
       export PATHWAYROOTDIR=""
       cp -p $PROGDIR/front-cover-teacher.pdf .
-      $PROGDIR/make-workbook.rkt
+      echo
+      echo building pathway workbooks: $PATHWAY
+      if test -z $DEBUG; then
+        $PROGDIR/make-workbook.rkt >/dev/null 2>&1
+      else
+        $PROGDIR/make-workbook.rkt 
+      fi
       rm -f workbook-numbered.* front-cover-teacher.pdf
     fi
 
@@ -334,7 +347,8 @@ buildpathway() {
       export PATHWAYROOTDIR=""
       export NARRATIVE=1
       # there should be only one?
-      echo building pathway narrative from *.adoc
+      echo
+      echo building pathway narrative: $PATHWAY "->" *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset NARRATIVE
       if test ! -f index.html; then
@@ -351,7 +365,7 @@ buildpathway() {
       mv index.html index.shtml
       insertbodyid index.shtml
       insertstylecss index.shtml
-      resolvespans index.shtml
+      resolveabbrevs index.shtml
     fi
 
   fi
@@ -386,7 +400,7 @@ for f in distribution/*/*; do
   g=${f#distribution/}
   pwy=${g%/*}
   lang=${g#*/}
-  docf=$f/index.html
+  docf=$f/index.shtml
   if test -f $docf; then
     echo >> index.adoc
     echo \* link:$docf[$pwy Narrative \($lang\)] >> index.adoc

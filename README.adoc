@@ -169,10 +169,24 @@ workbook PDF. (The teacher, or solutions, workbook, can be
 referred to in the teacher resources page with the directive
 `@solutions-workbook`.)
 
+== Deploying to `bootstrapworld.github.io/curriculum`
+
 As a convenience, a `git push` into the `master` branch
 automatically triggers a build of all the pathways
 and showcases the resulting doctrees on the website
 https://bootstrapworld.github.io/curriculum.
+
+This is done via Travis, which creates and pushes a `gh-pages`
+branch onto the GitHub repo.
+
+=== Deploying to `github.io` without Travis
+
+The script `deploy-to-github-io` can be called from your clone
+to update the documents on
+`https://bootstrapworld.github.io/curriculum`. This circumvents
+Travis, but it also requires that your clone be in a well-tended
+environment, with all the programs for building the curriculum
+available (see section _Prereqs_ below).
 
 == Deploying to the Bootstrap website
 
@@ -183,6 +197,9 @@ updates the documents displayed on the site. (It does this by
 bringing over the `gh-pages` branch, which contains the latest
 converted files as shown on the `github.io`
 site mentioned above.)
+
+Currently, the entry URL for the curriculum on the Bootstrap site is
+https://www.bootstrapworld.org/preview/curriculum.
 
 == Sample lesson plan
 
@@ -441,11 +458,15 @@ on Linux machines, and
 on macOS.
 +
 
-* Racket, to do preprocessing for metadata and other
-bookkeeping. Any version should do. I’m using very conservative
-Racket.
+* GNU sed. This is pre-installed on Linux, but may need to be
+explicitly installed on macOS, using `brew` as above (i.e., `brew
+install gnu-sed`).
 
-* PDF manipulators `wktohtmltopdf` and `pdftk`.  Standard
+* Racket, to do preprocessing for metadata and other
+bookkeeping. Any version should do. I’m not using any
+bleeding-edge features of Racket.
+
+* PDF manipulators `wkhtmltopdf` and `pdftk`.  Standard
 installation as for Asciidoctor.
 
 * TeX containing `pdflatex`. Install a suitable TeX system for
