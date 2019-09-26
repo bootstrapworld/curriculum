@@ -370,7 +370,9 @@
 ;(define *all-glossary-items* '())
 
 (define *asciidoctor*
-  (format "asciidoctor -a linkcss -a proglang=~a -a stylesheet=curriculum.css" (getenv "PROGLANG")))
+  (format "asciidoctor -a linkcss -a proglang=~a -a stylesheet=~acurriculum.css"
+          (getenv "PROGLANG")
+          *pathway-root-dir*))
 
 (define (preproc-n-asciidoctor in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
@@ -544,7 +546,7 @@
                     )))
               #:exists 'replace))
           #:exists 'replace)
-        (asciidoctor lessons-file)
+        ;(asciidoctor lessons-file)
         (newline o))))
   ;
   (define span-stack '())
@@ -786,7 +788,7 @@
             (fprintf o "\n\n")
             (fprintf o "[.copyright]\n")
             (fprintf o "--\n")
-            (fprintf o "'''\n")
+            (fprintf o "image:~aCCbadge.png[abc,]\n" *pathway-root-dir*)
             (fprintf o (create-copyright *copyright-name* *copyright-author*))
             (fprintf o "\n--\n")
             )
