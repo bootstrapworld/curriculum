@@ -782,11 +782,14 @@
 
             )
 
-          (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
+          (when (or #t (getenv "NARRATIVE") (getenv "LESSONPLAN"))
             (fprintf o "\n\n")
-            (fprintf o "'''\n")
             (fprintf o "[.copyright]\n")
-            (fprintf o (create-copyright *copyright-name* *copyright-author*)))
+            (fprintf o "--\n")
+            (fprintf o "'''\n")
+            (fprintf o (create-copyright *copyright-name* *copyright-author*))
+            (fprintf o "\n--\n")
+            )
           )
 
         #:exists 'replace)))
