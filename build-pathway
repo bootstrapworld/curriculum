@@ -1,4 +1,4 @@
-# last modified 2019-09-24
+# last modified 2019-09-26
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -159,7 +159,7 @@ function buildworkbookpages() {
       fi
       cd $d
       export PATHWAYROOTDIR="../../../"
-      cp -p $PROGDIR/*.css .
+      #cp -p $PROGDIR/*.css .
       for f in *.adoc; do
         if test ! -f $f; then
           echo No adoc files in lesson $L/$d
@@ -198,7 +198,7 @@ function buildlessonplan() {
   elif test $(ls *.adoc|wc -l) -gt 1; then
     echo WARNING: Too many lesson plans in lesson $L
   else
-    cp -p $PROGDIR/*.css .
+    #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
     #echo building lesson plan from *.adoc
@@ -263,6 +263,7 @@ function buildpathway() {
     rm -fr distribution/$PATHWAY/$LANGUAGE
   fi
   cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
+  cp -p $PROGDIR/CCbadge.png $PROGDIR/*.css distribution/$PATHWAY/$LANGUAGE
 
   echo
 
@@ -286,7 +287,8 @@ function buildpathway() {
     echo
 
     cd resources
-    cp -p $PROGDIR/*.css $PROGDIR/.hta* .
+    #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
+    cp -p $PROGDIR/.hta* .
     copacetic=1
     for f in *.adoc; do
       if test ! -f $f; then copacetic=0
@@ -343,7 +345,7 @@ function buildpathway() {
     elif test $(ls *.adoc|wc -l) -gt 1; then
       echo WARNING: Too many narratives in pathway $PATHWAY
     else
-      cp -p $PROGDIR/*.css .
+      #cp -p $PROGDIR/*.css .
       export PATHWAYROOTDIR=""
       export NARRATIVE=1
       # there should be only one?
@@ -361,6 +363,10 @@ function buildpathway() {
         if test -n "$SRCFILE"; then
           rm $SRCFILE.html $SRCFILE.asc
         fi
+      fi
+      if test -f pathway-lessons.asc; then
+        $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
+        resolveabbrevs pathway-lessons.html
       fi
       mv index.html index.shtml
       insertbodyid index.shtml

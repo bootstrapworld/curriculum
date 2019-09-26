@@ -111,9 +111,11 @@
                       (set! curr-lesson basename)
                       (fprintf o "\n\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
                                "" page-num handle)
-                      (when (and include-lesson #f)
-                        (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{lessons/~a/index.pdf}\n"
-                                 curr-lesson))]
+                      (when include-lesson
+                        (let ([lesson-plan-pdf (format "lessons/~a/index.pdf" curr-lesson)])
+                          (when (file-exists? lesson-plan-pdf)
+                            (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
+                                     lesson-plan-pdf))))]
                     [else
                       (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
                                title page-num handle)])
