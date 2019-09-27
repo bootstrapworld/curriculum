@@ -401,7 +401,14 @@
         (unless (getenv "TEACHER_RESOURCES")
           (fprintf o "[.lesson-title]\n"))
         |#
-        (display #\= o) (display #\space o) (display title o) (newline o)))
+        (display #\= o) (display #\space o)
+        (when (or (getenv "LESSONPLAN") (getenv "NARRATIVE"))
+          (display-begin-span '(".bootstraplogo") o)
+          (fprintf o "image:{pathwayrootdir}bootstraplogo.png[]")
+          (display-end-span o)
+          (display " " o)
+          )
+        (display title o) (newline o)))
     ;
     (define (add-exercise exercise)
       ;(printf "doing add-exercise ~s (i= ~a, w= ~a, l= ~a)\n" exercise in-file (getenv "WORKBOOK") (getenv "LESSON"))
@@ -541,7 +548,8 @@
                     (when (file-exists? lesson-asc-file)
                       (fprintf lo "[[~a]]~n" lesson)
                       (fprintf toco "<<~a>>~n" lesson)
-                      (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1]~n~n"
+                      (fprintf lo "== ~a\n" lesson-title)
+                      (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1,2..-1]~n~n"
                                lesson))
                     )))
               #:exists 'replace))
@@ -733,6 +741,7 @@
                                #f]))]
                     [(and (or (getenv "LESSON")
                               (getenv "LESSONPLAN")
+                              (getenv "NARRATIVE")
                               (getenv "TEACHER_RESOURCES"))
                           beginning-of-line? (char=? c #\=))
                      (set! beginning-of-line? #f)
@@ -788,7 +797,7 @@
             (fprintf o "\n\n")
             (fprintf o "[.copyright]\n")
             (fprintf o "--\n")
-            (fprintf o "image:~aCCbadge.png[abc,]\n" *pathway-root-dir*)
+            (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:~aCCbadge.png[], window=\"_blank\"]\n" *pathway-root-dir*)
             (fprintf o (create-copyright *copyright-name* *copyright-author*))
             (fprintf o "\n--\n")
             )
