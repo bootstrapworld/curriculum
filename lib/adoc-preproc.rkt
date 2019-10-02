@@ -4,6 +4,7 @@
 
 (require "defines.rkt")
 (require "create-copyright.rkt")
+(require "create-acknowledgment.rkt")
 
 (define *base-namespace* (make-base-namespace))
 
@@ -199,9 +200,9 @@
   )
 
 (define (include-workbook-and-solutions-files o)
-  (fprintf o "\n== Workbooks\n\n")
-  (fprintf o "link:./protected/workbook-sols.pdf[Teacher Workbook]\n\n")
-  (fprintf o "link:./protected/pd-workbook.pdf[PD Workbook]\n\n")
+  (newline o)
+  (fprintf o "* *Teacher Workbook* link:./protected/workbook-sols.pdf[PDF]\n\n")
+  (fprintf o "* *PD Workbook* link:./protected/pd-workbook.pdf[PDF]\n\n")
   #;(let ([exercises
           (call-with-input-file *pathway-exercises-file*
             (lambda (i)
@@ -269,7 +270,7 @@
         [snippet.adoc (path->string (path-replace-extension snippet ".adoc"))]
         [snippet.html (path->string (path-replace-extension snippet ".html"))]
         [snippet.pdf (path->string (path-replace-extension snippet ".pdf"))]
-        [link-text (if (string=? link-text "") link-text (string-append link-text ", "))]
+        ;[link-text (if (string=? link-text "") link-text (string-append link-text ", "))]
         [pno #f]
         )
     (let loop ([i 0])
@@ -293,7 +294,12 @@
       (set! snippet.pdf (path-replace-extension f ".pdf"))
       (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
             [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])
+      ;should we also mention the workbook page this occurs on?
+      #|
       (format "link:{pathwayrootdir}~a[~aPage ~a~a]" g link-text pno
+              (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
+      |#
+      (format "link:{pathwayrootdir}~a[~a~a]" g link-text
               (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
       ;(format "link:{pathwayrootdir}~a[~a]" g link-text)
       )))
@@ -401,12 +407,15 @@
         (unless (getenv "TEACHER_RESOURCES")
           (fprintf o "[.lesson-title]\n"))
         |#
-        (display #\= o) (display #\space o)
-        (let ([header-with-logo? (or (getenv "LESSONPLAN") (getenv "NARRATIVE"))])
+        (let ([header-with-logo? (or (getenv "LESSONPLAN")
+                                     (getenv "NARRATIVE")
+                                     (getenv "TEACHER_RESOURCES"))])
+          (display #\= o) (display #\space o)
           (when header-with-logo?
             (display-begin-span '(".bootstraplogo") o)
             (fprintf o "image:{pathwayrootdir}bootstraplogo.png[]")
             (display-end-span o)
+            ;(fprintf o "\n\n")
             (display " " o)
             )
           (when header-with-logo? (display-begin-span '(".bootstrapheader") o))
@@ -799,6 +808,10 @@
 
           (when (or #t (getenv "NARRATIVE") (getenv "LESSONPLAN"))
             (fprintf o "\n\n")
+            (fprintf o "[.acknowledgment]\n")
+            (fprintf o "--\n")
+            (fprintf o (create-acknowledgment))
+            (fprintf o "\n--\n\n")
             (fprintf o "[.copyright]\n")
             (fprintf o "--\n")
             (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:~aCCbadge.png[], window=\"_blank\"]\n" *pathway-root-dir*)
