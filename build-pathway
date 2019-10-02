@@ -1,4 +1,4 @@
-# last modified 2019-09-28
+# last modified 2019-10-02
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -99,7 +99,11 @@ function moveheaderlogopos() {
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
     -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
-    -e '/^<div id="preamble">/r temp.txt' $f
+    -e '/^<div id="preamble">/r temp.txt' \
+    $f
+  $SED -i \
+    -e 's/^<h1>\(.*\)\(<span class="bootstrapheader">.*\)/\1<h1>\2/' \
+    $f
 }
 
 function resolveabbrevs() {
@@ -332,6 +336,7 @@ function buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
+      moveheaderlogopos index.html
       resolveabbrevs index.html
     fi
     cd ..
