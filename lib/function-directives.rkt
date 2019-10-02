@@ -44,6 +44,8 @@
   (ormap
     (lambda (kw) (string=? w kw))
     '(
+      "|"
+      "ask:"
       "else"
       "else:"
       "end"
@@ -51,6 +53,7 @@
       "fun"
       "if"
       "is"
+      "then:"
       )))
 
 (define (highlight-keywords s)
@@ -209,7 +212,7 @@ Write some examples, then circle and label what changes...\n\n")
                  (write-spaced (highlight-keywords "is "))
                  (encoded-ans ".recipe_example_body_long" (highlight-keywords body) show-body?)
                  ))
-              (else 
+              (else
                 (string-append
                   (highlight-keywords " is ")
                   (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
@@ -331,6 +334,27 @@ Write the definition, giving variable names to all your input values...\n\n")
                           (write-large ")"))))
                     ])))))))
 
+(define (pyret-ask-line? body-line)
+  (and (not (string=? body-line ""))
+       (char=? (string-ref body-line 0) #\|)
+       (string-contains? body-line " then: ")))
+
+(define (write-body-line/pyret body-line)
+  (write-wrapper ".recipe_line"
+    (lambda ()
+      (string-append
+        (encoded-ans "" "MM" #f)
+        (if (not (pyret-ask-line? body-line))
+            (encoded-ans ".recipe_definition_body_pyret"
+                         (highlight-keywords body-line) *show-body?*)
+            (let ([test-then (string-split body-line " then: ")])
+              (string-append
+                (encoded-ans ".questions"
+                             (highlight-keywords (car test-then)) *show-body?*)
+                (encoded-ans ".answers"
+                             (highlight-keywords (string-append " then: " (cadr test-then)))
+                             *show-body?*))))))))
+
 (define (write-definition/pyret funname param-list body)
   (when (null? body) (set! body ""))
   (if (not (string? body))
@@ -358,15 +382,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                       (write-large ")")
                       (write-spaced ":"))))
                 (apply string-append
-                       (map
-                         (lambda (body-line)
-                           (write-wrapper ".recipe_line"
-                             (lambda ()
-                               (string-append
-                                 (encoded-ans "" "MM" #f)
-                                 (encoded-ans ".recipe_definition_body_pyret"
-                                              (highlight-keywords body-line) *show-body?*)))))
-                         but-last-body-lines))
+                       (map write-body-line/pyret but-last-body-lines))
                 (write-wrapper ".recipe_line"
                              (lambda ()
                                (string-append
