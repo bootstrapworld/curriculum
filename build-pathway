@@ -1,4 +1,4 @@
-# last modified 2019-10-02
+# last modified 2019-10-03
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -98,11 +98,18 @@ function moveheaderlogopos() {
   f=$1
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
+    -e 's/^<h1>\(.*\)\(<span class="bootstrapheader".*\)$/\1<h1>\2/' \
+    temp.txt
+  $SED -i \
     -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
     -e '/^<div id="preamble">/r temp.txt' \
     $f
+}
+
+function cleanuptitle() {
+  f=$1
   $SED -i \
-    -e 's/^<h1>\(.*\)\(<span class="bootstrapheader">.*\)/\1<h1>\2/' \
+    -e '/^<title>/ s/<\/*span[^>]*>//g' \
     $f
 }
 
@@ -137,6 +144,7 @@ function buildworkbookpages() {
   #
   if test -d workbook-pages/$PROGLANG; then
     cp -p workbook-pages/$PROGLANG/* workbook-pages
+    rm -fr workbook-pages/$PROGLANG
   fi
   #
   cp -pr workbook-pages solutions-pages
@@ -148,6 +156,7 @@ function buildworkbookpages() {
     done
     if test -d workbook-sols-pages/$PROGLANG; then
       cp -p workbook-sols-pages/$PROGLANG/* solutions-pages
+      rm -fr workbook-sols-pages/$PROGLANG
     fi
     rm -fr workbook-sols-pages
   fi
@@ -156,6 +165,7 @@ function buildworkbookpages() {
   if test -d exercises; then
     if test -d exercises/$PROGLANG; then
       cp -p exercises/$PROGLANG/* exercises
+      rm -fr exercises/$PROGLANG
     fi
     cp -pr exercises exercises-sols
   fi
@@ -169,11 +179,11 @@ function buildworkbookpages() {
       fi
       #echo \(building $L "->" $d\)
       unset EXERCISE SOLUTIONS WORKBOOK
-      if test $d = "workbook-sols-pages" -o $d = "exercises-sols"; then
+      if test $d = "workbook-sols-pages"; then
         export SOLUTIONS=1
       elif test $d = "workbook-pages"; then
         export WORKBOOK=1
-      elif test $d = "exercises"; then
+      elif test $d = "exercises" -o $d = "exercises-sols"; then
         export EXERCISE=1
       fi
       cd $d
@@ -236,6 +246,7 @@ function buildlessonplan() {
     fi
     resolveabbrevs index.html
     moveheaderlogopos index.html
+    cleanuptitle index.html
     if test -z $NOPDF; then
       #echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
@@ -336,8 +347,9 @@ function buildpathway() {
           rm $SRCFILE.html $SRCFILE.asc
         fi
       fi
-      moveheaderlogopos index.html
       resolveabbrevs index.html
+      moveheaderlogopos index.html
+      cleanuptitle index.html
     fi
     cd ..
 
@@ -391,10 +403,11 @@ function buildpathway() {
         resolveabbrevs pathway-lessons.html
       fi
       mv index.html index.shtml
-      moveheaderlogopos index.shtml
       insertbodyid index.shtml
       insertstylecss index.shtml
       resolveabbrevs index.shtml
+      #moveheaderlogopos index.shtml
+      #cleanuptitle index.shtml
     fi
 
   fi
@@ -418,8 +431,6 @@ for f in $ARGS; do
     buildpathway
   fi
 done
-
-rm -fr $PROGDIR
 
 echo >> index.adoc
 echo .{nbsp} >> index.adoc
@@ -457,6 +468,7 @@ done
 asciidoctor -a linkcss index.adoc
 
 if test -z $DEBUG; then
+  rm -fr $PROGDIR
   for f in adoc asc rkt title txt; do
     find . -name \*.$f -delete
   done

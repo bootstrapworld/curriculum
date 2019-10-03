@@ -53,6 +53,7 @@
       "fun"
       "if"
       "is"
+      "otherwise:"
       "then:"
       )))
 
@@ -334,26 +335,37 @@ Write the definition, giving variable names to all your input values...\n\n")
                           (write-large ")"))))
                     ])))))))
 
-(define (pyret-ask-line? body-line)
-  (and (not (string=? body-line ""))
-       (char=? (string-ref body-line 0) #\|)
-       (string-contains? body-line " then: ")))
-
 (define (write-body-line/pyret body-line)
+  ;(printf "write-body-line-p ~s\n" body-line)
   (write-wrapper ".recipe_line"
     (lambda ()
       (string-append
         (encoded-ans "" "MM" #f)
-        (if (not (pyret-ask-line? body-line))
-            (encoded-ans ".recipe_definition_body_pyret"
-                         (highlight-keywords body-line) *show-body?*)
-            (let ([test-then (string-split body-line " then: ")])
-              (string-append
-                (encoded-ans ".questions"
-                             (highlight-keywords (car test-then)) *show-body?*)
-                (encoded-ans ".answers"
-                             (highlight-keywords (string-append " then: " (cadr test-then)))
-                             *show-body?*))))))))
+        (cond [(string=? body-line "") ""]
+              [(string-prefix? body-line "|")
+               (set! body-line (regexp-replace #rx"^\\| *" body-line ""))
+               (string-append
+                 (highlight-keywords "| ")
+                 (cond [(string-prefix? body-line "otherwise:")
+                        (let ([otherwise-branch (string-split body-line "otherwise:")])
+                          (string-append
+                            (highlight-keywords "otherwise: ")
+                            (encoded-ans ".answers" (highlight-keywords (car otherwise-branch))
+                                         *show-body?*)))]
+                       [(string-contains? body-line "then:")
+                        (let ([test-branch (string-split body-line " then: ")])
+                          ;(printf "test-branch = ~s\n" test-branch)
+                          (string-append
+                            (encoded-ans ".questions" (car test-branch) *show-body?*)
+                            (highlight-keywords " then: ")
+                            (encoded-ans ".answers" (cadr test-branch) *show-body?*)))]
+                       [else
+                         (encoded-ans "" body-line *show-body?*)]))]
+              [(regexp-match #rx"^(ask:|end)" body-line)
+               (highlight-keywords body-line)]
+              [else
+                (encoded-ans ".recipe_definition_body_pyret"
+                             (highlight-keywords body-line) *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
   (when (null? body) (set! body ""))
@@ -384,11 +396,13 @@ Write the definition, giving variable names to all your input values...\n\n")
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
                 (write-wrapper ".recipe_line"
-                             (lambda ()
-                               (string-append
-                                 (encoded-ans "" "MM" #f)
-                                 (encoded-ans ".recipe_definition_body"
-                                              (highlight-keywords last-body-line) *show-body?*))))
+                  (lambda ()
+                    (string-append
+                      (encoded-ans "" "MM" #f)
+                      (encoded-ans ".recipe_definition_body"
+                                   (highlight-keywords last-body-line)
+                                   (if (string-prefix? last-body-line "end") #t
+                                       *show-body?*)))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
                     (encoded-ans ".recipe_definition_end_pyret"

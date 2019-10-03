@@ -8,6 +8,8 @@
 
 (define *base-namespace* (make-base-namespace))
 
+(define *debug-links-port* #f)
+
 (define (read-word i)
   (let loop ([r '()])
     (let ([c (peek-char i)])
@@ -408,7 +410,7 @@
           (fprintf o "[.lesson-title]\n"))
         |#
         (let ([header-with-logo? (or (getenv "LESSONPLAN")
-                                     (getenv "NARRATIVE")
+                                     ;(getenv "NARRATIVE")
                                      (getenv "TEACHER_RESOURCES"))])
           (display #\= o) (display #\space o)
           (when header-with-logo?
@@ -719,14 +721,14 @@
                                      [adocf (car args)]
                                      [htmlf (path-replace-extension adocf ".html")]
                                      [pdff (path-replace-extension adocf ".pdf")]
-                                     [f adocf])
+                                     [f adocf]
+                                     [link-text (string-join
+                                                  (map string-trim (cdr args)) ", ")])
                                 ;(printf "doing @link of ~s~n" args)
                                 (cond [(file-exists? htmlf) (set! f htmlf)]
                                       [(file-exists? pdff) (set! f pdff)])
-
-                                (fprintf o "link:~a[~a~a]" f
-                                         (string-join
-                                           (map string-trim (cdr args)) ", ")
+                                (fprintf *debug-links-port* "link:~a[~a]\n" f link-text)
+                                (fprintf o "link:~a[~a~a]" f link-text
                                          (if (getenv "LESSONPLAN") ", window=\"_blank\"" "")))]
                              [(string=? directive "lesson-description")
                               (unless (getenv "LESSON")
@@ -806,7 +808,7 @@
 
             )
 
-          (when (or #t (getenv "NARRATIVE") (getenv "LESSONPLAN"))
+          (unless (getenv "EXERCISE")
             (fprintf o "\n\n")
             (fprintf o "[.acknowledgment]\n")
             (fprintf o "--\n")
@@ -850,7 +852,9 @@
 
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a~n" file)
-  (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file)))
+  (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file))
+  (void)
+  )
 
 (define (create-glossary-and-standards-subfiles glossary-items standards-met)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
@@ -931,12 +935,14 @@
 (require "function-directives.rkt")
 
 (define (main cl-args)
-
-  (for ((arg cl-args))
-    ;only one though
-    (preproc-n-asciidoctor arg))
-
-  )
+  (call-with-output-file "debug-links.asc"
+    (lambda (o)
+      (set! *debug-links-port* o)
+      (for ((arg cl-args))
+        ;only one though
+        (preproc-n-asciidoctor arg)))
+    #:exists 'append)
+  (asciidoctor "debug-links.asc"))
 
 (main (current-command-line-arguments))
 
