@@ -808,7 +808,7 @@
 
             )
 
-          (when (or #t (getenv "NARRATIVE") (getenv "LESSONPLAN"))
+          (unless (getenv "EXERCISE")
             (fprintf o "\n\n")
             (fprintf o "[.acknowledgment]\n")
             (fprintf o "--\n")

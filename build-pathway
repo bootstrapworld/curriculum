@@ -1,4 +1,4 @@
-# last modified 2019-10-02
+# last modified 2019-10-03
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -179,11 +179,11 @@ function buildworkbookpages() {
       fi
       #echo \(building $L "->" $d\)
       unset EXERCISE SOLUTIONS WORKBOOK
-      if test $d = "workbook-sols-pages" -o $d = "exercises-sols"; then
+      if test $d = "workbook-sols-pages"; then
         export SOLUTIONS=1
       elif test $d = "workbook-pages"; then
         export WORKBOOK=1
-      elif test $d = "exercises"; then
+      elif test $d = "exercises" -o $d = "exercises-sols"; then
         export EXERCISE=1
       fi
       cd $d
