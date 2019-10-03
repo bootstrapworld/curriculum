@@ -852,7 +852,9 @@
 
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a~n" file)
-  (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file)))
+  (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file))
+  (void)
+  )
 
 (define (create-glossary-and-standards-subfiles glossary-items standards-met)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
