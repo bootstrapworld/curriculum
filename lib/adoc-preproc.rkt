@@ -5,6 +5,7 @@
 (require "defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
+(require "create-workbook-links.rkt")
 
 (define *base-namespace* (make-base-namespace))
 
@@ -201,37 +202,6 @@
   ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
   )
 
-(define (include-workbook-and-solutions-files o)
-  (newline o)
-  (fprintf o "* *Teacher Workbook* link:./protected/workbook-sols.pdf[PDF]\n\n")
-  (fprintf o "* *PD Workbook* link:./protected/pd-workbook.pdf[PDF]\n\n")
-  #;(let ([exercises
-          (call-with-input-file *pathway-exercises-file*
-            (lambda (i)
-              (let loop ([r '()])
-                (let ([x (read i)])
-                  (if (eof-object? x) (reverse r)
-                      (loop (cons x r)))))))])
-    ;(printf "exercises= ~s\n" exercises)
-    (fprintf o "[.exercises_and_solutions]\n")
-    (fprintf o "== Exercises and Solutions\n\n")
-    (fprintf o "|===\n")
-    (for-each
-      (lambda (ex-ti)
-        (let* ([ex (car ex-ti)] [ti (cadr ex-ti)]
-               [ex-sol (regexp-replace #rx"/exercises/" ex "/exercises-sols/")])
-          (unless ti
-            (let ([ex-ti (path-replace-extension
-                           (string-append *pathway-root-dir* "lessons/" ex) ".title")])
-              (when (file-exists? ex-ti)
-                (set! ti (call-with-input-file ex-ti read)))))
-          (unless ti (set! ti ""))
-          (fprintf o "|~a |[link:../lessons/~a[original] : link:../lessons/~a[answers]]\n"
-                   ti ex ex-sol)
-          ))
-      exercises)
-    (fprintf o "|===\n\n")))
-
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
 (define *pathway-exercises-file* (string-append *pathway-root-dir* "workbook-exercises.txt"))
@@ -308,7 +278,7 @@
 
 (define (make-exercise-link lesson exer link-text include?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
-  (let* ([solutions-mode? (getenv "SOLUTIONS")]
+  (let* ([solutions-mode? (getenv "SOLUTION")]
          [g (string-append "lessons/" lesson
                            (if solutions-mode? "/exercises-sols/" "/exercises/") exer)]
          [f (string-append *pathway-root-dir* g)]
@@ -318,7 +288,14 @@
     (cond [(file-exists? exer.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))])
     (cond [include?
-            (format "include::~a[]" exer.asc)]
+            (let ([n -1])
+              (when (file-exists? exer.asc)
+                ;(printf "exercising ~a\n" exer.asc)
+                (system (format "grep -n '^\\[\\.acknowledgment\\]' ~a|sed -e 's/^\\([^:]*\\):.*/\\1/' > temp2.txt" exer.asc))
+                (set! n (- (call-with-input-file "temp2.txt" read) 1)))
+              (format "include::~a[lines=1..~a]" exer.asc n)
+              ;(format "include::~a[]" exer.asc)
+              )]
           [else
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
@@ -775,7 +752,8 @@
                              (display-title i o)
                              (when (getenv "TEACHER_RESOURCES")
                                ;(printf "teacher resource autoloading stuff\n")
-                               (include-workbook-and-solutions-files o))])]
+                               (newline o)
+                               (fprintf o (create-workbook-links)))])]
                     [(char=? c #\newline)
                      (newline o)
                      (set! beginning-of-line? #t)]
@@ -808,7 +786,7 @@
 
             )
 
-          (unless (getenv "EXERCISE")
+          (unless #f ;(getenv "EXERCISE")
             (fprintf o "\n\n")
             (fprintf o "[.acknowledgment]\n")
             (fprintf o "--\n")

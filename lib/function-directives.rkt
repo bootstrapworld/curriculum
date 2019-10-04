@@ -4,7 +4,7 @@
 
 (provide *function-list*)
 
-(define *solutions-mode?* (getenv "SOLUTIONS"))
+(define *solutions-mode?* (getenv "SOLUTION"))
 
 (define *proglang* (getenv "PROGLANG"))
 
@@ -353,12 +353,25 @@ Write the definition, giving variable names to all your input values...\n\n")
                             (encoded-ans ".answers" (highlight-keywords (car otherwise-branch))
                                          *show-body?*)))]
                        [(string-contains? body-line "then:")
-                        (let ([test-branch (string-split body-line " then: ")])
+                        (let* ([test-branch (string-split body-line " then: ")]
+                               [test (car test-branch)]
+                               [branch (cadr test-branch)]
+                               [test-len (string-length test)]
+                               [branch-len (string-length branch)])
                           ;(printf "test-branch = ~s\n" test-branch)
                           (string-append
-                            (encoded-ans ".questions" (car test-branch) *show-body?*)
-                            (highlight-keywords " then: ")
-                            (encoded-ans ".answers" (cadr test-branch) *show-body?*)))]
+                            (encoded-ans ".questions" test *show-body?*)
+                            (cond [(and *show-body?* (or (> test-len 20) (> branch-len 20)))
+                                   (string-append
+                                     (write-clear)
+                                     (encoded-ans "" "MM" #f)
+                                     (encoded-ans "" "| " #f)
+                                     (highlight-keywords "then: ")
+                                     (encoded-ans ".answers" branch *show-body?*))]
+                                  [else
+                                    (string-append
+                                      (highlight-keywords " then: ")
+                                      (encoded-ans ".answers" branch *show-body?*))])))]
                        [else
                          (encoded-ans "" body-line *show-body?*)]))]
               [(regexp-match #rx"^(ask:|end)" body-line)
