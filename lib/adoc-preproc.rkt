@@ -318,7 +318,14 @@
     (cond [(file-exists? exer.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))])
     (cond [include?
-            (format "include::~a[]" exer.asc)]
+            (let ([n -1])
+              (when (file-exists? exer.asc)
+                ;(printf "exercising ~a\n" exer.asc)
+                (system (format "grep -n '^\\[\\.acknowledgment\\]' ~a|sed -e 's/^\\([^:]*\\):.*/\\1/' > temp2.txt" exer.asc))
+                (set! n (- (call-with-input-file "temp2.txt" read) 1)))
+              (format "include::~a[lines=1..~a]" exer.asc n)
+              ;(format "include::~a[]" exer.asc)
+              )]
           [else
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
@@ -808,7 +815,7 @@
 
             )
 
-          (unless (getenv "EXERCISE")
+          (unless #f ;(getenv "EXERCISE")
             (fprintf o "\n\n")
             (fprintf o "[.acknowledgment]\n")
             (fprintf o "--\n")
