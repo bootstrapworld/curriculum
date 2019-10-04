@@ -361,7 +361,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                           ;(printf "test-branch = ~s\n" test-branch)
                           (string-append
                             (encoded-ans ".questions" test *show-body?*)
-                            (cond [(or (> test-len 20) (> branch-len 20))
+                            (cond [(and *show-body?* (or (> test-len 20) (> branch-len 20)))
                                    (string-append
                                      (write-clear)
                                      (encoded-ans "" "MM" #f)
