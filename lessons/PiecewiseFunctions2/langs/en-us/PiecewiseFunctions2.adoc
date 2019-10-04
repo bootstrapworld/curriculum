@@ -50,7 +50,7 @@ Connect The Dots - Students think of what they did in the Luigi's Pizza lesson s
 
 == Explore: (5 min)
 
-Students open their Game Project file and look for where a conditional function would be necessary, then figure out what the contract represents.  _workbook page?_
+Students open their *Game Project file* and look for where a conditional function would be necessary, then figure out what the contract represents.  
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -62,7 +62,12 @@ MLR 6 - Three Reads: Have students read through the problem statement three time
 
 * *What is the contract for `update-player`?*
 +
+ifeval::["{proglang}" == "wescheme"]
 _``update-player: Number String -> Number``_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_``update-player: Number, String -> Number``_
+endif::[]
 * *What does each part of the domain and range represent?*
 +
 _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`_
@@ -74,13 +79,19 @@ _It should increase, the program should add something to it_
 
 == Practice: (15 min) 
 
-Students complete @worksheet-link{workbook-pages/PiecewiseFunctions2-EX1.adoc} with a partner, then type their code into their Game Project file and test.  
+Students complete @worksheet-link{workbook-pages/PiecewiseFunctions2-EX1.adoc, Design Recipe: update-player} with a partner, then type their code into their *game file* and test.  
 
 == Create/Apply: (15 min)
 
 Students choose one or more features to make their game more unique. 
 
-Reminder: Use `;` to add comments to code!  Adding useful comments to code is an important part of programming. 
+ifeval::["{proglang}" == "wescheme"]
+Reminder: Use `;` to add comments to code!
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Reminder: Use `#` to add comments to code!
+endif::[]
+Adding useful comments to code is an important part of programming. 
 
 Some ideas for features:
 
