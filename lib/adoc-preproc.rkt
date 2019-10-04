@@ -308,7 +308,7 @@
 
 (define (make-exercise-link lesson exer link-text include?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
-  (let* ([solutions-mode? (getenv "SOLUTIONS")]
+  (let* ([solutions-mode? (getenv "SOLUTION")]
          [g (string-append "lessons/" lesson
                            (if solutions-mode? "/exercises-sols/" "/exercises/") exer)]
          [f (string-append *pathway-root-dir* g)]

@@ -178,12 +178,15 @@ function buildworkbookpages() {
       elif test $d = "workbook-sols-pages"; then dd="workbook-sols-pages"
       fi
       #echo \(building $L "->" $d\)
-      unset EXERCISE SOLUTIONS WORKBOOK
-      if test $d = "workbook-sols-pages"; then
-        export SOLUTIONS=1
-      elif test $d = "workbook-pages"; then
+      unset EXERCISE SOLUTION WORKBOOK
+      if test $d = "workbook-pages"; then
         export WORKBOOK=1
-      elif test $d = "exercises" -o $d = "exercises-sols"; then
+      elif test $d = "workbook-sols-pages"; then
+        export SOLUTION=1
+      elif test $d = "exercises"; then
+        export EXERCISE=1
+      elif test $d = "exercises-sols"; then
+        export SOLUTION=1
         export EXERCISE=1
       fi
       cd $d
@@ -203,7 +206,7 @@ function buildworkbookpages() {
           fi
         fi
       done
-      unset EXERCISE SOLUTIONS WORKBOOK
+      unset EXERCISE SOLUTION WORKBOOK
       cd ..
     fi
   done
