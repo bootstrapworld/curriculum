@@ -704,7 +704,7 @@
                                 ;(printf "doing @link of ~s~n" args)
                                 (cond [(file-exists? htmlf) (set! f htmlf)]
                                       [(file-exists? pdff) (set! f pdff)])
-                                (fprintf *debug-links-port* "link:~a[~a]\n" f link-text)
+                                (fprintf *debug-links-port* "link:~a[~a]\n\n" f link-text)
                                 (fprintf o "link:~a[~a~a]" f link-text
                                          (if (getenv "LESSONPLAN") ", window=\"_blank\"" "")))]
                              [(string=? directive "lesson-description")
