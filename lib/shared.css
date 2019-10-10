@@ -1,4 +1,5 @@
 @import url("./asciidoctor.css");
+/*@import 'https://fonts.googleapis.com/css?family=Consolas';*/
 
 /** Override AsciiDoctor CSS defaults **/
 body{
@@ -144,7 +145,7 @@ td.tableblock>.content { margin-bottom: 0px; }
 }
 
 .wrapper {
-  font-family: monospace;
+  font-family: "Courier New", monospace;
   width: 100%;
   display: inline-block;
   vertical-align: top;
@@ -162,6 +163,11 @@ span.clear {
   width: 100%;
 }
 
+/* Design Recipe styling */
+.designRecipeLayout {
+  font-size: 16pt;
+}
+
 .recipe_name,
 .recipe_domain,
 .recipe_range,
@@ -175,13 +181,13 @@ span.clear {
 .questions,
 .answers
 {
-  font-family: monospace;
+  font-family: "Courier New", monospace;
   display: inline-block;
   border-bottom: solid 1pt black;
 }
 
 .recipe_definition_end_pyret {
-  font-family: monospace;
+  font-family: "Courier New", monospace;
   display: inline-block;
 }
 
@@ -293,7 +299,7 @@ span.clear {
 .studentAnswerCode {
   height: 20pt;
   word-break: break-all;
-  font-family: monospace;
+  font-family: "Courier New", monospace;
   white-space: pre;
   /* text-align: center; */
 }
@@ -306,7 +312,7 @@ span.clear {
   position:       relative;
   padding:        0pt 0pt;
   /* word-break:     break-all; */
-  /* font-family:    monospace; */
+  /* font-family:    "Courier New", monospace; */
   /* white-space:    pre; */
   margin-right:   5pt;
   /* text-align:     center; */
@@ -462,7 +468,7 @@ span.clear {
  */
 @page  {
     size: 8.5in 11in;         /* normal letter size paper */
-    margin: .5in;             /* this affects the margin in the printer settings */
+    margin: .25in;            /* this affects the margin in the printer settings */
     orphans: 0; widows: 0;    /* never break a paragraph  */
 }
 @media print {
@@ -474,12 +480,9 @@ span.clear {
     background: transparent; /* make scrollbar transparent */
   }
   #footer { display: none; }
-  .designRecipeLayout {
-    font-size: 16pt;
-  }
   .dr-title {width: 100%; background: black; color: white; text-align: center; display: inline-block;}
   .recipe_title p { padding: 3px 5px; }
-  .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
+ /* .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;} */
   .studentAnswer::after { font-size: 6pt; }
 
   /* Force preamble to always be on its own page */
