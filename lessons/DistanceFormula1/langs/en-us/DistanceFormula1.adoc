@@ -31,6 +31,18 @@
 |
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1nds3sEXmoGPQdACNomLOde89FFyjHowILDVGktGLLxQ/view, Google Slides})
 
+ifeval::["{proglang}" == "wescheme"]
+* Sample game file - no distance lines (@link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, WeScheme})
+
+* Sample game file - with distance lines (@link{https://www.wescheme.org/view?publicId=0bCivugY3P, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"] 
+* Sample game file - no distance lines (@link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Pyret})
+
+* Sample game file - with distances lines (@link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Pyret})
+endif::[]
+
+
 * Notice And Wonder (@worksheet-link{workbook-pages/NoticeAndWonder.pdf, PDF}, @link{https://docs.google.com/document/d/1hNMUXcMRWgKllc7SOzzqaTR48RiWbXg8RvG9rtl3SuU/view, Google Doc})
 
 * Design Recipe (@worksheet-link{workbook-pages/DesignRecipe1.pdf, PDF}, @link{https://docs.google.com/document/d/1GQw-EJAw54BK04SMp_4jPtGGt4IojsUA7oXfz9TRm8Y/view, Google Doc})
@@ -69,11 +81,23 @@ Connection Activities
 
 == Get Ready:
 
-Students should have their workbook, contracts page, and a pencil.
+Students should have their workbook, pencil, and be logged into 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme} 
+endif::[]
+ifeval::["{proglang}" == "pyret"] 
+@link{https://code.pyret.org, code.pyret.org} 
+endif::[]
+on their computer.
 
 == Launch: (5 min)
 
-Have students play this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file}.
+ifeval::["{proglang}" == "wescheme"]
+Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Have students open this @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate.
+endif::[]
 
 [.notice-box]
 .Notice and Wonder
@@ -116,7 +140,7 @@ What do you Notice? What do you Wonder?
 You can extend this `line-length` activity into a lesson on absolute value and have students program `line-length` themselves.
 ****
 
-== Explore: 2D distance(5 mins)
+== Explore: (5 min)
 
 Have students open and play @link{https://www.wescheme.org/view?publicId=0bCivugY3P, this game file}.
 
@@ -128,30 +152,42 @@ What do you Notice? What do you Wonder?
 
 == Discuss: (5 min)
 
-* What kind of shapes do you see?
-* What kind of triangle is it?
-* What are the labels on the shapes?
-* What side is missing the label?
-
-Bring the discussion to closure by pointing out to students that the missing labeled side of the triangle is the hypotenuse of the right trangle and the legs are the difference in distances along the x and y axes of the characters. 
-
+* What kind of triangles are these?
++
+_Right triangles._
+* What do the numbers represent?
++
+_Let students discuss - the numbers should represent the lengths of the sides, but one side is always showing 0._
++
+The missing length on the right triangle is the *hypotenuse*. The *legs* of the triangle show the length of each side, or the *distance* between those points on the number line. +
+{empty} +
 [.strategy-box]
 .Extension
 ****
 You can take this activity further by having students prove the distance formula by solving for the hypotenuse of a right triangle.
 ****
 
-== Practice: (10 min)
+== Practice: (20 min)
 
-Have students use this @worksheet-link{workbook-pages/FrayerModelDistance.pdf, Frayer Model} to model the distance formula with the Circles of Evaluation and translate it to code.
+Have students use this @worksheet-link{workbook-pages/FrayerModelDistance.pdf, Frayer Model} to model the distance formula with the Circles of Evaluation and translate it to code. +
+{empty} +
 
-== Create/Apply: The Distance Formula(20 mins)
+Using @worksheet-link{workbook-pages/DistanceFormula1-WB1.adoc, Design Recipe: distance}, 
+have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
+{empty} +
 
-Have students write a function `distance` that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points.
+Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
 
-Students can test their `distance` function using Pythagorean Triples, such as (3, 4, 5) or (5, 12, 13), to make sure it's calculating the distance correctly.
+== Create: (10 min)
 
-== Create/Apply: collide? (20 mins)
+Using 
+ifeval::["{proglang}" == "wescheme"]
+@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: collision?}, 
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: is-collision}, 
+endif::[]
+have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a Boolean as to whether or not the two characters have gotten within 50 pixels of each other.   
 
-Have students write a function 'collide?' that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a Boolean as to whether or not the two characters have gotten within 50 pixels of each other.  
+
 
