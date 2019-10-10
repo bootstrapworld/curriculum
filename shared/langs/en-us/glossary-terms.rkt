@@ -95,7 +95,6 @@ when it prints out the glossary for a particular unit
     (("operator" "operators") "a symbol that manipulates two Numbers and produces a result")
     (("order" "orders" "ordering") "an arrangement of data according to some pattern")
     (("outlier" "outliers") "an observation point that is distant from other observations, perhaps due to experimental error or measurement variability.")
-    ("parameter" "
     ("piecewise function" "a function that computes different expressions based on its input")
     (("pie chart" "pie charts") "a chart where the size of each pie slice corresponds to a value in the data set")
     (("pixel" "pixels") "the smallest unit that makes up a digital image. The more pixels, the more detailed an image or video can appear.")
