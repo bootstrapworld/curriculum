@@ -87,8 +87,6 @@
           directions))
 
 (define (write-purpose funname domain-list range purpose)
-  (when (string=? *proglang* "pyret")
-    (set! purpose (string-append "# " purpose)))
   (string-append
     (format "\n
 [.recipe_title]
@@ -98,7 +96,7 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          ;(if (string=? *proglang* "pyret") "# " "")
+          (if (string=? *proglang* "pyret") "" "&#59;&#59; ")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if (string=? *proglang* "pyret") "::" ":")
           (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
@@ -107,7 +105,10 @@ Every contract has three parts...\n\n")
     ;(write-clear)
     (write-wrapper-scan ".recipe_graf"
       (lambda ()
-        (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))))
+        (string-append
+          (format "[.purpose_comment]##~a##" (if (string=? *proglang* "pyret") "&#35; " ";;")) 
+          " "
+          (encoded-ans ".recipe_purpose" purpose *show-purpose?*))))))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
@@ -195,7 +196,7 @@ Write some examples, then circle and label what changes...\n\n")
     (lambda ()
       (string-append
         (write-clear)
-        ;(encoded-ans "" "MM" #f)
+        (encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
