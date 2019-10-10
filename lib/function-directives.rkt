@@ -22,7 +22,7 @@
 
 (define *div-nesting* 0)
 
-(define *max-pyret-example-rhs-length* 15)
+(define *max-pyret-example-rhs-length* 30)
 
 (define (ft-list-ref s i)
   (let ([n (length s)])
@@ -362,7 +362,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                           ;(printf "test-branch = ~s\n" test-branch)
                           (string-append
                             (encoded-ans ".questions" test *show-body?*)
-                            (cond [(and *show-body?* (or (> test-len 20) (> branch-len 20)))
+                            (cond [(and *show-body?* (> (+ test-len branch-len) 50))
                                    (string-append
                                      (write-clear)
                                      (encoded-ans "" "MM" #f)
