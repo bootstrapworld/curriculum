@@ -202,7 +202,7 @@ function buildworkbookpages() {
           fpdf=${f%.adoc}.pdf
           resolveabbrevs $fhtml
           if test -z $NOPDF; then
-            wkhtmltopdf --lowquality --print-media-type -q $fhtml $fpdf
+            wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
           fi
         fi
       done

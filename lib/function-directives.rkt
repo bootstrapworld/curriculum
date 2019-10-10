@@ -96,7 +96,7 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          (if (string=? *proglang* "pyret") "" "&#59;&#59; ")
+          (if (string=? *proglang* "pyret") "" "&#59; ")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if (string=? *proglang* "pyret") "::" ":")
           (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
@@ -106,7 +106,7 @@ Every contract has three parts...\n\n")
     (write-wrapper-scan ".recipe_graf"
       (lambda ()
         (string-append
-          (format "[.purpose_comment]##~a##" (if (string=? *proglang* "pyret") "&#35; " ";;")) 
+          (format "[.purpose_comment]##~a##" (if (string=? *proglang* "pyret") "&#35; " ";")) 
           " "
           (encoded-ans ".recipe_purpose" purpose *show-purpose?*))))))
 
