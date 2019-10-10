@@ -11,6 +11,7 @@
  "DefiningFunctions2"
  "DefiningFunctions3"
  "FunctionApplications2"
+ "FunctionApplications3"
  "Inequalities"
  "Inequalities2"
  "PiecewiseFunctions"

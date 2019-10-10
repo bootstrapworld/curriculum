@@ -8,8 +8,8 @@
 |Lesson Goals
 |Students will be able to:
 
-* Describe how functions can work together
-* Make mathematical adjustments relevant to their game
+* Describe how functions can work together.
+* Make mathematical adjustments relevant to their game.
 
 |Student-Facing Lesson Goals
 |
@@ -18,20 +18,23 @@
 
 |Key Points for the Facilitator
 |
-* Key points
+* If a student's `TARGET` and `DANGER` image seem to be "getting stuck" on the edge of the screen, the student may have to adjust the side boundaries depending on the size of their images.
+* The code for the boundary functions in the game is exactly the same as in Sam the Butterfly. 
+* This activity should be as closely as possible to Inequalities 1 (Sam the Butterfly) as the two lessons are connected.
+
 
 |Prerequisites
 |
 * Students should be familiar with Circles of Evaluation.
+* Students should be familiar with the Design Recipe.
 
 |Materials
 |
-* Lesson slides template https://docs.google.com/presentation/d/1-Ey-m1iwpwIQt_nMbWrobg8b8AGFPBokM68U-lEgANA/edit?usp=sharing[Google Slides]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1-Ey-m1iwpwIQt_nMbWrobg8b8AGFPBokM68U-lEgANA/edit?usp=sharing, Google Slides})
 
 Bootstrap Formative Assessments
 
-* https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0[Bootstrap:Algebra - Booleans] (Quizizz)
-* https://teacher.desmos.com/activitybuilder/custom/5d991ac49b9b292020c18108[Bootstrap:Algebra - Booleans] (Desmos Activity)
+* Booleans Review (@link{https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0, Quizizz}, @link{https://teacher.desmos.com/activitybuilder/custom/5d991ac49b9b292020c18108, Desmos Activity})
 
 
 ////
@@ -53,9 +56,7 @@ Connection Activities
 
 |Approaching (CCSSM)
 |
-
 * @std{HSF.IF.A.2}
-
 
 |Bootstrap Benchmarks
 |
@@ -66,7 +67,14 @@ Connection Activities
 
 == Get Ready:
 
-Students should have their computer, contracts page, and pencil.
+Students should have their computer, contracts page, and pencil and be logged in to 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org }
+endif::[]
+with their Game Project file open.
 
 == Launch: (2 min)
 
@@ -81,10 +89,16 @@ _We want them to come back after they leave one side of the screen._
 * How do we know when an image has moved off the screen? +
 _We can see it._
 * How can we make the computer understand when an image has moved off the screen? +
-_We can give it a numeric boundary, just like we did with Sam the Butterfly!_
+_We can teach the computer to compare the image's position (a Number) to a numeric boundary, just like we did with Sam the Butterfly!_
 
 == Apply: (20 min)
 
-Students apply what they learned from Sam the Butterly to fix the `safe-left?`, `safe-right?`, and `onscreen?` functions in their own code.  Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
+ifeval::["{proglang}" == "wescheme"]
+Students apply what they learned from Sam the Butterly to fix the `safe-left?`, `safe-right?`, and `onscreen?` functions in their own code.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Students apply what they learned from Sam the Butterly to fix the `is-safe-left`, `is-safe-right`, and `is-onscreen` functions in their own code.
+endif::[]  
+Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
 
 Students will need to test their code with their images to see if the boundaries are correct for them.  Students with large images may need to use slightly wider boundaries, or vice versa for small images.  In some cases, students may have to go back and rescale their images if they are too large or too small for the game.  
