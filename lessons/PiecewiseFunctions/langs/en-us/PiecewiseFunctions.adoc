@@ -70,11 +70,31 @@ Connection Activities
 
 == Get Ready:
 
-Students should have their computer, workbook, contracts page, and pencil.
+Students should have their computer, workbook, contracts page, and pencil and be logged in to 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}.
+endif::[]
 
 == Launch: (10 min)
 
-Functions in Motion  
+*Functions in Motion* +
+{empty} +
+Have students stand up and put some space between themselves. +
+{empty} +
+Begin giving directions to certain distinct groups of students. For example:
+
+* If you have brown eyes, wave your arms in the air.
+* If you have blue eyes, walk in place.
+* If you have green or hazel eyes, flap your arms like a chicken.
+
+Every student should have an activity to perform.  Ask a student walking in place why they aren't waving their arms in the air, or how they knew what to do.
+
+*When we talk about functions, we know that for a function to be a function, every input has to be matched with exactly one output.  Every person should have know exactly what to do.*
+
+Ask students: Is this activity representing a function?  What is the input?  What is the output?
 
 == Explore: (10 min)
 
@@ -96,10 +116,22 @@ Have students take time to think and discuss what they notice and wonder about t
 
 * *What are some familiar things you notice in this file?* 
 +
+ifeval::["{proglang}" == "wescheme"]
 _Answers vary: `define`, `string=?`, a contract and purpose statement, etc._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_Answers vary: `fun`, `end`, a contract and purpose statement, etc._
+endif::[]
+
 * *What new things did you notice in this file?*
 +
+ifeval::["{proglang}" == "wescheme"]
 _Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `cost` function, etc._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_Answers vary: the `ask` keyword, the pipe symbols, `otherwise`, the general look of the `cost` function, etc._
+endif::[]
+
 * *What function is being defined here? What is its contract?*
 +
 _`cost`, takes in a String and produces a Number._
@@ -109,24 +141,40 @@ _Answers vary - let students drive discussion!_
 
 == Practice: (10 min)
 
-Students turn to @worksheet-link{workbook-pages/PiecewiseFunctions1-WB2.pdf, Alice's Restaurant - Practice} and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
+Students turn to 
+ifeval::["{proglang}" == "wescheme"]
+@worksheet-link{workbook-pages/PiecewiseFunctions1-WB2.pdf, Luigi's Restaurant - Practice } 
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@worksheet-link{workbook-pages/PiecewiseFunctions1-WB2.pdf, Alice's Restaurant - Practice }  
+endif::[]
+and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
 
 == Discuss II: (5 min)
 
+ifeval::["{proglang}" == "wescheme"]
 * *What happens with the interactive cash register when you enter an item not on the menu?*
 +
-_The program freezes, or crashes._
+_The program freezes, or crashes._ 
 * *Why does the cash register stop working when you enter an item not on the menu?*
 +
 _Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
-* *The programmer who wrote the code for the cash register had the following comment in his code: `; If the cost function returns a non-positive value, the cash register will display an ERROR message and ask for a different topping` How should we change our `cost` function so that it will fully integrate with the cash register function?*
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* *What happens with the `sales-tax` function when you enter an item not on the menu?*
 +
-_We should change `else` to return something non-positive, like 0 or -1._
+_We get an error._ 
+* *What is the error telling us?*
++
+_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
+endif::[]
 
+* *What should we do about this?* 
+_Since we want the program to stop if we give it an invalid input, we should just delete the last branch altogether. Think about other functions that don't work when we give them an invalid input!_
 
 == Apply: (10 min)
 
-Option 1: Students create another function in the Alice's Restaurant code that displays an image of the food instead of the price. This integrates earlier-learned skills in creating images and defining values.
+Option 1: Students create another function in the code that displays an image of the food instead of the price. This integrates earlier-learned skills in creating images and defining values.
 
 Option 2: Students create an engaging visual representation of how the computer moves through a conditional function.
 
