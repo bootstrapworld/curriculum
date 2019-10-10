@@ -29,7 +29,7 @@ questions and share ideas.
 
 (define (print-link-to-glossary o)
   (fprintf o "\n- link:./index-glossary.html[Glossary]\n")
-  (fprintf o "-- Check here for critical vocabulary words used in this pathway.\n"))
+  (fprintf o "-- A list of vocabulary words used in this pathway.\n"))
 
 (define (print-link-to-standards o)
   (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")

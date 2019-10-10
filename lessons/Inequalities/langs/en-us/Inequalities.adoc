@@ -18,7 +18,7 @@
 
 |Key Points for the Facilitator
 |
-* The new Boolean datatype, while simple to explain, can be confusing for some students as parts of a Contract.  @vocab{Boolean} is just another datatype, like Number, or Image, but it can only be one of two choices: true or false.   
+* The new Boolean datatype, while simple to explain, can be confusing for some students as parts of a Contract.  @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but it can only be one of two choices: true or false.   
 * Functions that produce Booleans are typically questions, so the names of the functions in this lesson read like questions.
 ifeval::["{proglang}" == "wescheme"]
 For example, `safe-left?`, `onscreen?` are both functions that are asking if a condition, such as an image being on the screen, is true or false.
@@ -37,7 +37,13 @@ endif::[]
 
 |Materials
 |
+ifeval::["{proglang}" == "wescheme"]
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1hAgZUfSdRS_6_IQEGOU5ZT8YC4v1CQ6J8u2ub07FsrI/edit?usp=sharing, Google Slides})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1LHYaEU2CTSuSH6ACYN5LAVrGdte_AuA4IfYB_rKLOqw, Google Slides})
+endif::[]
+
 * Inequalities Launch worksheet (@worksheet-link{workbook-pages/Inequalities-WB1.pdf, PDF}, @link{https://docs.google.com/document/d/1B1qUay2CB58Jk6RSztvAiDvmz_JZj1rMeMuiPL49wiE/edit?usp=sharing, Google Doc})
 * Inequalities Explore worksheet (@worksheet-link{workbook-pages/Inequalities-WB2.pdf, PDF}, @link{https://docs.google.com/document/d/1a8QFfheM7XLoyC1T3w3KDqITmbnG9wl-gDJ9k6nBUqA/edit?usp=sharing, Google Doc})
 * Inequalities Practice worksheet (@worksheet-link{workbook-pages/Inequalities-WB3.pdf, PDF}, @link{https://docs.google.com/document/d/1lfaH8dwAumD1lqzhLYqqBTKs3j-wI_MihJhmb7lV2Mc/edit?usp=sharing, Google Doc})
@@ -117,7 +123,7 @@ _Let students figure out that they need to press "Run" to see what the program d
 
 * *What is something you noticed about this program?* 
 +
-_Sam can be moved with the arrow keys, the coordinates are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
+_Sam can be moved with the arrow keys, the @vocab{coordinate}s are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
 * *What do you see when Sam is at (0,0)?  Why is that?* 
 +
 _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
@@ -128,7 +134,7 @@ _Up to, but not beyond, an x of -40._
 +
 _x >= -40 or x > -50_
 
-=== Every time Sam moves, we want to check and see if Sam is safe.  This is a repetitive job, so it would make an excellent function!  Let's focus on keeping Sam safe on the left side first.
+=== Every time Sam moves, we want to check and see if Sam is safe.  This is a repetitive job, so it would make an excellent @vocab{function}!  Let's focus on keeping Sam safe on the left side first.
 {empty} +
 ifeval::["{proglang}" == "wescheme"]
 * *What will the contract for `safe-left?` look like?  What does it need to take in?  What will it give back?*  
@@ -173,7 +179,7 @@ _Answers may vary, let students drive the discussion!_
 
 === Role Play Example
 
-*To visually demonstrate why `onscreen?` isn't preventing Sam from going off the right side, have students act it out!  The student who plays `onscreen?` will only ask the student playing `safe-left?` if Sam is safe, ignoring `safe-right?` at this point.  Have students watching discuss and explain what is happening and brainstorn how to fix `onscreen?`.* +
+*To visually demonstrate why `onscreen?` isn't preventing Sam from going off the right side, have students act it out!  The student who plays `onscreen?` will only ask the student playing `safe-left?` if Sam is safe, ignoring `safe-right?` at this point.  Have students watching discuss and explain what is happening and brainstorm how to fix `onscreen?`.* +
 {empty} +
 These cues can be printed on the back of notecards to help student volunteers with their part.
 {empty} +
@@ -234,7 +240,7 @@ _Answers may vary, let students drive the discussion!_
 
 === Role Play Example
 
-*To visually demonstrate why `is-onscreen` isn't preventing Sam from going off the right side, have students act it out!  The student who plays `is-onscreen` will only ask the student playing `is-safe-left` if Sam is safe, ignoring `is-safe-right` at this point.  Have students watching discuss and explain what is happening and brainstorn how to fix `is-onscreen`.* +
+*To visually demonstrate why `is-onscreen` isn't preventing Sam from going off the right side, have students act it out!  The student who plays `is-onscreen` will only ask the student playing `is-safe-left` if Sam is safe, ignoring `is-safe-right` at this point.  Have students watching discuss and explain what is happening and brainstorm how to fix `is-onscreen`.* +
 {empty} +
 These cues can be printed on the back of notecards to help student volunteers with their part. +
 {empty} +
