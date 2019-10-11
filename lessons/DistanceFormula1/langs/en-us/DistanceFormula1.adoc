@@ -19,7 +19,7 @@
 
 |Key Points for the Facilitator
 |
-* The distance formula is an excellent review of Circles of Evaluation. Have students work out the expression in small groups to foster discussion.
+* The distance formula is an excellent review of @vocab{Circles of Evaluation}. Have students work out the expression in small groups to foster discussion.
 
 |Prerequisites
 |
@@ -29,25 +29,34 @@
 
 |Materials
 |
-* Lesson slides template (@link{https://docs.google.com/presentation/d/1nds3sEXmoGPQdACNomLOde89FFyjHowILDVGktGLLxQ/view, Google Slides})
 
 ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1nds3sEXmoGPQdACNomLOde89FFyjHowILDVGktGLLxQ/view, Google Slides})
+
 * Sample game file - no distance lines (@link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, WeScheme})
 
 * Sample game file - with distance lines (@link{https://www.wescheme.org/view?publicId=0bCivugY3P, WeScheme})
 endif::[]
 ifeval::["{proglang}" == "pyret"] 
+* Lesson slides template (@link{https://drive.google.com/open?id=1zl_7vW2KqfRsL7zubjCCNXo24gwfxRHgRzD7M7Ox6NE, Google Slides})
+
 * Sample game file - no distance lines (@link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Pyret})
 
-* Sample game file - with distances lines (@link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Pyret})
+* Sample game file - with distance lines (@link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Pyret})
 endif::[]
-
 
 * Notice And Wonder (@worksheet-link{workbook-pages/NoticeAndWonder.pdf, PDF}, @link{https://docs.google.com/document/d/1hNMUXcMRWgKllc7SOzzqaTR48RiWbXg8RvG9rtl3SuU/view, Google Doc})
 
-* Design Recipe (@worksheet-link{workbook-pages/DesignRecipe1.pdf, PDF}, @link{https://docs.google.com/document/d/1GQw-EJAw54BK04SMp_4jPtGGt4IojsUA7oXfz9TRm8Y/view, Google Doc})
-
 * Frayer Model (@worksheet-link{workbook-pages/FrayerModelDistance.pdf, PDF}, @link{https://docs.google.com/drawings/d/1mCJygY5elVQzy64zLLRyFVZ9-CkTnVYTBM3URnIfzEc/view, Google Doc})
+
+* Design Recipe: distance (@worksheet-link{workbook-pages/DistanceFormula1-WB1.adoc, PDF})
+
+ifeval::["{proglang}" == "wescheme"]
+* Design Recipe: onscreen? (@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, PDF})
+endif::[]
+ifeval::["{proglang}" == "pyret"] 
+* Design Recipe: is-onscreen (@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, PDF})
+endif::[]
 
 ////
 Bootstrap Formative Assessments
@@ -93,11 +102,13 @@ on their computer.
 == Launch: (5 min)
 
 ifeval::["{proglang}" == "wescheme"]
-Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate.
+Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate. +
 endif::[]
 ifeval::["{proglang}" == "pyret"]
-Have students open this @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate.
+Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, game file} and investigate. +
 endif::[]
+
+{empty} +
 
 [.notice-box]
 .Notice and Wonder
@@ -125,7 +136,7 @@ Do this until students can clearly see it's when the two characters are 'touchin
 
 == Explore: line-length (10 min)
 
-Have students explore using the `line-length` function in the Interactions window.
+Have students explore using the `line-length` function in the @vocab{Interactions area}.
 
 [.notice-box]
 .Notice and Wonder
@@ -142,7 +153,13 @@ You can extend this `line-length` activity into a lesson on absolute value and h
 
 == Explore: (5 min)
 
-Have students open and play @link{https://www.wescheme.org/view?publicId=0bCivugY3P, this game file}.
+ifeval::["{proglang}" == "wescheme"]
+Have students open this new @link{https://www.wescheme.org/view?publicId=0bCivugY3P, game file} and investigate. +
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Have students run this new @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate. +
+endif::[]
+{empty} +
 
 [.notice-box]
 .Notice and Wonder
@@ -164,7 +181,7 @@ The missing length on the right triangle is the *hypotenuse*. The *legs* of the 
 [.strategy-box]
 .Extension
 ****
-You can take this activity further by having students prove the distance formula by solving for the hypotenuse of a right triangle.
+You can take this activity further by having students prove the distance formula by solving for the @vocab{hypotenuse} of a right triangle.
 ****
 
 == Practice: (20 min)
@@ -173,7 +190,7 @@ Have students use this @worksheet-link{workbook-pages/FrayerModelDistance.pdf, F
 {empty} +
 
 Using @worksheet-link{workbook-pages/DistanceFormula1-WB1.adoc, Design Recipe: distance}, 
-have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
+have students write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
 {empty} +
 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
@@ -187,7 +204,7 @@ endif::[]
 ifeval::["{proglang}" == "pyret"]
 @worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: is-collision}, 
 endif::[]
-have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a Boolean as to whether or not the two characters have gotten within 50 pixels of each other.   
+have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.   
 
 
 
