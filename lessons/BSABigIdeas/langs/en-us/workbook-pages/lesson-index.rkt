@@ -1,4 +1,4 @@
 (
- ("CoverPageAttributePage.pdf" "portrait" "nopagenum")
+ ;("CoverPageAttributePage.pdf" "portrait" "nopagenum")
  ("BSABigIdeas.pdf" "portrait" "nopagenum")
  )

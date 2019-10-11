@@ -1,4 +1,4 @@
-# last modified 2019-10-03
+# last modified 2019-10-10
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -360,7 +360,7 @@ function buildpathway() {
       echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
     elif test -z $NOPDF; then
       export PATHWAYROOTDIR=""
-      cp -p $PROGDIR/front-cover-teacher.pdf .
+      #cp -p $PROGDIR/front-cover-teacher.pdf .
       echo
       echo building pathway workbooks: $PATHWAY
       if test -z $DEBUG; then
@@ -368,7 +368,7 @@ function buildpathway() {
       else
         $PROGDIR/make-workbook.rkt 
       fi
-      rm -f workbook-numbered.* front-cover-teacher.pdf
+      rm -f workbook-numbered.*
     fi
 
     copacetic=1

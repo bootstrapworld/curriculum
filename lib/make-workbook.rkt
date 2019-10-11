@@ -2,6 +2,8 @@
 
 #lang racket
 
+(define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
+
 (define *pdflatex* (find-executable-path "pdflatex"))
 
 (define *pdftk* (find-executable-path "pdftk"))
@@ -89,8 +91,12 @@
 \\fancyhf{}
 %
 \\begin{document}\n\n")
-      (when (or teacher-version include-lesson)
-        (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{front-cover-teacher.pdf}\n"))
+      (let ([cover-page (string-append *pathway-root-dir*
+                                       (if (or teacher-version include-lesson)
+                                           "front-cover-teacher.pdf" "front-cover-student.pdf"))])
+        (when (file-exists? cover-page)
+          (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
+                   cover-page)))
       ;(fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
       (let ([curr-lesson #f])
         (let loop ([i 1] [pdf-page-specs *pdf-page-specs*])

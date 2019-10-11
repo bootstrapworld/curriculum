@@ -1,13 +1,15 @@
-#!/usr/bin/env racket
-
-#lang racket
+":"; exec racket -f $0 -m -- "$@"
 
 (require "defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
 (require "create-workbook-links.rkt")
+(require "form-elements.rkt")
+(require "function-directives.rkt")
+(require "glossary-terms.rkt")
+(require "standards-dictionary.rkt")
 
-(define *base-namespace* (make-base-namespace))
+(define *base-namespace* (current-namespace))
 
 (define *debug-links-port* #f)
 
@@ -74,7 +76,31 @@
                          (loop (+ j 1) (cons (substring g i j) r))]
                         [else (loop2 (+ j 1) #f #f)]))))))))
 
-(define (display-begin-span span-args o)
+(define *span-stack* '())
+
+(define (span-stack-present?)
+  (pair? *span-stack*))
+
+(define (top-span-stack)
+  (car *span-stack*))
+
+(define (grow-span-stack)
+  (set! *span-stack* (cons 0 *span-stack*)))
+
+(define (pop-span-stack)
+  (set! *span-stack* (cdr *span-stack*)))
+
+(define (increment-top-span-stack)
+  (let ([n (car *span-stack*)])
+    (set! *span-stack* (cons (+ n 1) (cdr *span-stack*)))))
+
+(define (decrement-top-span-stack)
+  (let ([n (car *span-stack*)])
+    (when (<= n 0)
+      (error 'span "Bad @span: Check missing braces"))
+    (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
+
+(define (create-begin-span span-args)
   (set! span-args (map string-trim span-args))
   (let ([classes (map (lambda (s) (substring s 1))
                       (filter (lambda (s) (char=? (string-ref s 0) #\.)) span-args))]
@@ -82,19 +108,30 @@
                   (filter (lambda (s) (char=? (string-ref s 0) #\#)) span-args))])
     (when (> (length ids) 1)
       (error 'span "Too many ids"))
-    (display "@CURRICULUMSPAN" o)
-    (when (pair? classes)
-      (display "class=\"" o)
-      (display (string-join classes " ") o)
-      (display "\" " o))
-    (when (pair? ids)
-      (display "id=\"" o)
-      (display (car ids) o)
-      (display "\"" o))
-    (display "@BEGINCURRICULUMSPAN" o)))
+    (grow-span-stack)
+    (string-append
+      "@CURRICULUMSPAN"
+      (cond [(pair? classes) (string-append
+                               "class=\""
+                               (string-join classes " ")
+                               "\" ")]
+            [else ""])
+      (cond [(pair? ids) (string-append
+                           "id=\""
+                           (car ids)
+                           "\"" )]
+            [else ""])
+      "@BEGINCURRICULUMSPAN")))
+
+(define (create-end-span)
+  (pop-span-stack)
+  "@ENDCURRICULUMSPAN")
+
+(define (display-begin-span span-args o)
+  (display (create-begin-span span-args) o))
 
 (define (display-end-span o)
-  (display "@ENDCURRICULUMSPAN" o))
+  (display (create-end-span) o))
 
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
@@ -169,11 +206,11 @@
           (if (eof-object? x) (reverse r)
               (loop (cons x r))))))))
 
+(define (massage-arg arg)
+  (eval arg *base-namespace*))
+
 (define (rearrange-args args)
   ;(printf "doing rearrange-args ~s\n" args)
-
-  (define (massage-arg arg)
-    (eval arg *base-namespace*))
 
   (define (sort-keyword-args args)
     (let ([args-paired (let loop ((args args) (r '()))
@@ -549,22 +586,6 @@
         ;(asciidoctor lessons-file)
         (newline o))))
   ;
-  (define span-stack '())
-  (define (top-span-stack)
-    (car span-stack))
-  (define (grow-span-stack)
-    (set! span-stack (cons 0 span-stack)))
-  (define (pop-span-stack)
-    (set! span-stack (cdr span-stack)))
-  (define (increment-top-span-stack)
-    (let ([n (car span-stack)])
-      (set! span-stack (cons (+ n 1) (cdr span-stack)))))
-  (define (decrement-top-span-stack)
-    (let ([n (car span-stack)])
-      (when (<= n 0)
-        (error 'span "Bad @span: Check missing braces"))
-      (set! span-stack (cons (- n 1) (cdr span-stack)))))
-  ;
   (call-with-input-file in-file
     (lambda (i)
       (call-with-output-file out-file
@@ -581,7 +602,7 @@
                        (cond [(string=? directive "") (display c o)]
                              [(string=? directive "span")
                               (display-begin-span (read-commaed-group i directive) o)
-                              (grow-span-stack)]
+                              ]
                              [(string=? directive "comment")
                               (let ([prose (read-group i directive)])
                                 (if title-reached?
@@ -718,6 +739,15 @@
                               (newline o)
                               (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
                               ]
+                             [(string=? directive "do")
+                              (let ([exprs (string->form (read-group i directive))])
+                                (for-each massage-arg exprs))]
+                             [(string=? directive "show")
+                              (let ([exprs (string->form (read-group i directive))])
+                                (for-each
+                                  (lambda (s)
+                                    (display (massage-arg s) o))
+                                  exprs))]
                              [(assoc directive *macro-list*) =>
                               (lambda (s)
                                 (display (cadr s) o))]
@@ -759,7 +789,7 @@
                      (set! beginning-of-line? #t)]
                     [else
                       (set! beginning-of-line? #f)
-                      (cond [(and (pair? span-stack) (or (char=? c #\{) (char=? c #\})))
+                      (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
                              (cond [(char=? c #\{)
                                     (unless (= (top-span-stack) 0)
                                       (display c o))
@@ -767,7 +797,6 @@
                                    [(char=? c #\})
                                     (decrement-top-span-stack)
                                     (cond [(= (top-span-stack) 0)
-                                           (pop-span-stack)
                                            (display-end-span o)]
                                           [else (display c o)])]
                                    [else (error ' preproc-n-asciidoctor "deadc0de")])]
@@ -907,12 +936,63 @@
   ;(printf "done accumulate-glossary-and-standards\n")
   )
 
-(require "glossary-terms.rkt")
-(require "standards-dictionary.rkt")
-(require "form-elements.rkt")
-(require "function-directives.rkt")
+;coe
 
-(define (main cl-args)
+(define (hspace n) " ")
+
+(define (encoded-elem classes s)
+  (let ([span-args
+          (map (lambda (s) (string-append "." s))
+               (regexp-split #rx"\\." (substring classes 1)))])
+    (string-append
+      (create-begin-span span-args)
+      s
+      (create-end-span))))
+
+(define (intersperse-spaces args funargs?)
+  (define (intersperse-spaces-aux args)
+    (if (null? args) args
+        (let ([a (car args)] [d (cdr args)])
+          (if (null? d) (list a)
+              (cons a
+                    (cons (hspace 1)
+                          (intersperse-spaces-aux d)))))))
+  (let ((ans (intersperse-spaces-aux args)))
+    (apply string-append
+           (if (and funargs? (not (null? args)))
+               (cons (hspace 1) ans)
+               ans))))
+
+(define (sexp-to-coe e)
+  (encoded-elem ".circofeval" (sexp-to-block e)))
+
+(define (sexp-to-code e)
+  (encoded-elem ".code" (sexp-to-block e)))
+
+(define (sexp-to-block e)
+  ;(printf "doing sexp-to-block ~s\n" e)
+  (cond [(member e '(true false)) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
+        [(eq? e 'else) (encoded-elem ".wescheme-keyword" "else")]
+        [(number? e) (encoded-elem ".value.wescheme-number" (format "~a" e))]
+        [(string? e) (encoded-elem ".value.wescheme-string" (format "~s" e))]
+        [(boolean? e) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
+        [(symbol? e) (encoded-elem ".value.wescheme-symbol" (format "~a" e))]
+        [(list? e) (let ([a (car e)])
+                     (if (symbol? a)
+                         (let ([args (intersperse-spaces (map sexp-to-block (cdr e)) 'args)])
+                           (string-append
+                             (encoded-elem ".lParen" "(")
+                             (encoded-elem ".operator" (sexp-to-block a))
+                             args
+                             (encoded-elem ".rParen" ")")))
+                         (let ([parts (intersperse-spaces (map sexp-to-block e) #f)])
+                           (string-append
+                             (encoded-elem ".lParen" "(")
+                             parts
+                             (encoded-elem ".rParen" ")")))))]
+        [else (error 'sexp-to-block "unknown s-exp")]))
+
+(define (main . cl-args)
   (call-with-output-file "debug-links.asc"
     (lambda (o)
       (set! *debug-links-port* o)
@@ -922,6 +1002,4 @@
     #:exists 'append)
   (asciidoctor "debug-links.asc"))
 
-(main (current-command-line-arguments))
-
-(void)
+;(void)
