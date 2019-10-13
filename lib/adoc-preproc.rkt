@@ -9,6 +9,8 @@
 (require "glossary-terms.rkt")
 (require "standards-dictionary.rkt")
 
+(define *proglang* (getenv "PROGLANG"))
+
 (define *base-namespace* (current-namespace))
 
 (define *debug-links-port* #f)
@@ -101,13 +103,7 @@
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
 (define (create-begin-span span-args)
-  (set! span-args (map string-trim span-args))
-  (let ([classes (map (lambda (s) (substring s 1))
-                      (filter (lambda (s) (char=? (string-ref s 0) #\.)) span-args))]
-        [ids (map (lambda (s) (substring s 1))
-                  (filter (lambda (s) (char=? (string-ref s 0) #\#)) span-args))])
-    (when (> (length ids) 1)
-      (error 'span "Too many ids"))
+  (let ([classes (regexp-split #rx"\\." (substring span-args 1))])
     (grow-span-stack)
     (string-append
       "@CURRICULUMSPAN"
@@ -115,11 +111,6 @@
                                "class=\""
                                (string-join classes " ")
                                "\" ")]
-            [else ""])
-      (cond [(pair? ids) (string-append
-                           "id=\""
-                           (car ids)
-                           "\"" )]
             [else ""])
       "@BEGINCURRICULUMSPAN")))
 
@@ -393,7 +384,7 @@
 
 (define *asciidoctor*
   (format "asciidoctor -a linkcss -a proglang=~a -a stylesheet=~acurriculum.css"
-          (getenv "PROGLANG")
+          *proglang*
           *pathway-root-dir*))
 
 (define (preproc-n-asciidoctor in-file)
@@ -428,13 +419,13 @@
                                      (getenv "TEACHER_RESOURCES"))])
           (display #\= o) (display #\space o)
           (when header-with-logo?
-            (display-begin-span '(".bootstraplogo") o)
+            (display-begin-span ".bootstraplogo" o)
             (fprintf o "image:{pathwayrootdir}bootstraplogo.png[]")
             (display-end-span o)
             ;(fprintf o "\n\n")
             (display " " o)
             )
-          (when header-with-logo? (display-begin-span '(".bootstrapheader") o))
+          (when header-with-logo? (display-begin-span ".bootstrapheader" o))
           (display title o)
           (when header-with-logo? (display-end-span o))
           (newline o))))
@@ -601,7 +592,7 @@
                        ;(printf "directive = ~s~%" directive)
                        (cond [(string=? directive "") (display c o)]
                              [(string=? directive "span")
-                              (display-begin-span (read-commaed-group i directive) o)
+                              (display-begin-span (string-trim (read-group i directive)) o)
                               ]
                              [(string=? directive "comment")
                               (let ([prose (read-group i directive)])
@@ -941,13 +932,10 @@
 (define (hspace n) " ")
 
 (define (encoded-elem classes s)
-  (let ([span-args
-          (map (lambda (s) (string-append "." s))
-               (regexp-split #rx"\\." (substring classes 1)))])
-    (string-append
-      (create-begin-span span-args)
-      s
-      (create-end-span))))
+  (string-append
+    (create-begin-span classes)
+    s
+    (create-end-span)))
 
 (define (intersperse-spaces args funargs?)
   (define (intersperse-spaces-aux args)
@@ -964,10 +952,43 @@
                ans))))
 
 (define (sexp-to-coe e)
-  (encoded-elem ".circofeval" (sexp-to-block e)))
+  (encoded-elem ".circleevalsexp" (sexp-to-block e)))
+
+(define (sexp-to-wescheme e)
+  (encoded-elem ".codesexp" (sexp-to-block e)))
+
+(define (sexp-to-arith e #:pyret [pyret #f] #:wrap [wrap #f])
+  (if (number? e)
+      (format "~a" e)
+      (let ([a (car e)])
+        (if (and (eq? a '/) (not pyret))
+            (format "{~a \\over ~a}"
+                    (sexp-to-arith (list-ref e 1))
+                    (sexp-to-arith (list-ref e 2)))
+            (let ([x (format "~a ~a ~a"
+                             (sexp-to-arith (list-ref e 1) #:pyret pyret #:wrap #t)
+                             a
+                             (sexp-to-arith (list-ref e 2) #:pyret pyret #:wrap #t))])
+              (if wrap
+                  (format "(~a)" x)
+                  x))))))
+
+;TODO sexp-to-pyret, sexp-to-math
+
+(define (sexp-to-pyret e)
+  (encoded-elem ".pyret" (sexp-to-arith e #:pyret #t)))
+
+(define (sexp-to-math e)
+  (string-append
+    (format "@CURRICULUMSCRIPT")
+    (format "@BEGINCURRICULUMSCRIPT")
+    (sexp-to-arith e)
+    (format "@ENDCURRICULUMSCRIPT")))
 
 (define (sexp-to-code e)
-  (encoded-elem ".code" (sexp-to-block e)))
+  ((if (string-ci=? *proglang* "pyret")
+       sexp-to-pyret
+       sexp-to-wescheme) e))
 
 (define (sexp-to-block e)
   ;(printf "doing sexp-to-block ~s\n" e)
@@ -978,19 +999,38 @@
         [(boolean? e) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
         [(symbol? e) (encoded-elem ".value.wescheme-symbol" (format "~a" e))]
         [(list? e) (let ([a (car e)])
-                     (if (symbol? a)
-                         (let ([args (intersperse-spaces (map sexp-to-block (cdr e)) 'args)])
-                           (string-append
-                             (encoded-elem ".lParen" "(")
-                             (encoded-elem ".operator" (sexp-to-block a))
-                             args
-                             (encoded-elem ".rParen" ")")))
-                         (let ([parts (intersperse-spaces (map sexp-to-block e) #f)])
-                           (string-append
-                             (encoded-elem ".lParen" "(")
-                             parts
-                             (encoded-elem ".rParen" ")")))))]
+                     (encoded-elem ".expression"
+                                   (if (symbol? a)
+                                       (let ([args (intersperse-spaces (map sexp-to-block (cdr e)) 'args)])
+                                         (string-append
+                                           (encoded-elem ".lParen" "(")
+                                           (encoded-elem ".operator" (sexp-to-block a))
+                                           args
+                                           (encoded-elem ".rParen" ")")))
+                                       (let ([parts (intersperse-spaces (map sexp-to-block e) #f)])
+                                         (string-append
+                                           (encoded-elem ".lParen" "(")
+                                           parts
+                                           (encoded-elem ".rParen" ")"))))))]
         [else (error 'sexp-to-block "unknown s-exp")]))
+
+(define (two-col-layout colA colB)
+  (string-append
+    "[.twoColumnLayout]\n"
+    (apply string-append
+           (map (lambda (lft rt)
+                  (string-append
+                    "- "
+                    (create-begin-span ".leftColumn")
+                    lft
+                    (create-end-span)
+                    "\n"
+                    (create-begin-span ".rightColumn")
+                    rt
+                    (create-end-span)
+                    "\n"))
+                colA colB))
+    "\n\n"))
 
 (define (main . cl-args)
   (call-with-output-file "debug-links.asc"
