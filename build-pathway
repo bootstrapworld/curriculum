@@ -1,4 +1,4 @@
-# last modified 2019-10-10
+# last modified 2019-10-12
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -115,6 +115,10 @@ function cleanuptitle() {
 
 function resolveabbrevs() {
   f=$1
+  mathjaxneeded=
+  if test $(grep @CURRICULUMSCRIPT $f 2>/dev/null|wc -l) -ge 1; then
+    mathjaxneeded=1
+  fi
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
     -e 's/@CURRICULUMCOMMA/,/g' \
@@ -125,13 +129,26 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMSPAN/<span /g' \
     -e 's/@BEGINCURRICULUMSPAN/>/g' \
     -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
+    -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
+    -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
+    -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
     $f
+  if test "$mathjaxneeded" != ""; then
+    cat > mathjax.txt <<EOF
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Chttp%3A%2F%2Fwww.cs.wpi.edu%2F%7Ekfisler%2Fmathjaxlocal.js"></script>
+EOF
+    sed -i \
+      -e '/^<link.*curriculum\.css/s/^/@INSERTMATHJAX\0/' \
+      -e '/@INSERTMATHJAX/r mathjax.txt' \
+      -e 's/@INSERTMATHJAX//' \
+      $f
+  fi
   tif=${f%.*}-comment.txt
   if test -f $tif; then
     $SED -i \
-      -e '/^<body[^>]*>/s/<body[^>]*>/\0INSERTCURRICULUMCOMMENT/' \
-      -e '/INSERTCURRICULUMCOMMENT/r '$tif \
-      -e 's/INSERTCURRICULUMCOMMENT//' \
+      -e '/^<body[^>]*>/s/<body[^>]*>/\0@INSERTCURRICULUMCOMMENT/' \
+      -e '/@INSERTCURRICULUMCOMMENT/r '$tif \
+      -e 's/@INSERTCURRICULUMCOMMENT//' \
       $f
   fi
 }
@@ -196,7 +213,7 @@ function buildworkbookpages() {
         if test ! -f $f; then
           echo No adoc files in lesson $L/$d
         else
-          echo building $PATHWAY "->" $L "->" "$dd" "->" $f
+          echo building $PATHWAY "→" $L "→" "$dd" "→" $f
           $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
@@ -234,7 +251,7 @@ function buildlessonplan() {
     export PATHWAYROOTDIR="../../"
     # there should be only one?
     #echo building lesson plan from *.adoc
-    echo building lesson plan: $PATHWAY "->" $L "->" *.adoc
+    echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
     $PROGDIR/adoc-preproc.rkt *.adoc
     if test ! -f index.html; then
       SRCFILE=
@@ -289,6 +306,12 @@ function buildpathway() {
     PATHWAY=$SRCPATHWAY-wescheme
   fi
 
+  langicon=🕱
+
+  if test "$PROGLANG" = wescheme; then
+    langicon=🥾
+  fi
+
   if test ! -d distribution/$PATHWAY; then
     mkdir distribution/$PATHWAY
   fi
@@ -304,7 +327,7 @@ function buildpathway() {
   if test ! -d distribution/$PATHWAY/$LANGUAGE; then
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
-    echo building pathway: $PATHWAY/$LANGUAGE
+    echo building pathway: $PATHWAY/$LANGUAGE $langicon
     cd distribution/$PATHWAY/$LANGUAGE
 
     mkdir lessons workbook
@@ -336,7 +359,7 @@ function buildpathway() {
       export PATHWAYROOTDIR="../"
       # there should be only one?
       export TEACHER_RESOURCES=1
-      echo building teacher resources: $PATHWAY "->" "resources" "->" *.adoc
+      echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset TEACHER_RESOURCES
       if test ! -f index.html; then
@@ -386,7 +409,7 @@ function buildpathway() {
       export NARRATIVE=1
       # there should be only one?
       echo
-      echo building pathway narrative: $PATHWAY "->" *.adoc
+      echo building pathway narrative: $PATHWAY "→" *.adoc
       $PROGDIR/adoc-preproc.rkt *.adoc
       unset NARRATIVE
       if test ! -f index.html; then
