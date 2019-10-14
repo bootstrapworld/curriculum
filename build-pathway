@@ -1,4 +1,4 @@
-# last modified 2019-10-13
+# last modified 2019-10-14
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -113,6 +113,14 @@ function cleanuptitle() {
     $f
 }
 
+function addanalytics() {
+  f=$1
+  cp $PROGDIR/analytics.txt .
+  $SED -i \
+    -e '/^<body/r analytics.txt' \
+    $f
+}
+
 function resolveabbrevs() {
   f=$1
   mathjaxneeded=
@@ -144,7 +152,7 @@ function resolveabbrevs() {
     cat > mathjax.txt <<EOF
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Chttp%3A%2F%2Fwww.cs.wpi.edu%2F%7Ekfisler%2Fmathjaxlocal.js"></script>
 EOF
-    sed -i \
+    $SED -i \
       -e '/^<link.*curriculum\.css/s/^/@INSERTMATHJAX\0/' \
       -e '/@INSERTMATHJAX/r mathjax.txt' \
       -e 's/@INSERTMATHJAX//' \
@@ -160,7 +168,7 @@ EOF
     <script type="text/javascript" src="${PATHWAYROOTDIR}pyret-mode.js"></script>
     <script type="text/javascript" src="${PATHWAYROOTDIR}bootstraplesson.js"></script>
 EOF
-    sed -i \
+    $SED -i \
       -e '/^<link.*curriculum\.css/s/^/@INSERTCODEMIRROR\0/' \
       -e '/@INSERTCODEMIRROR/r codemirror.txt' \
       -e 's/@INSERTCODEMIRROR//' \
@@ -287,6 +295,7 @@ function buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
+    addanalytics index.html
     resolveabbrevs index.html
     moveheaderlogopos index.html
     cleanuptitle index.html
@@ -453,6 +462,7 @@ function buildpathway() {
       fi
       mv index.html index.shtml
       insertbodyid index.shtml
+      addanalytics index.shtml
       insertstylecss index.shtml
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
