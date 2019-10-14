@@ -11,9 +11,12 @@
                  ))}
 
 @do{(define exprs-as-coe
-(map sexp-to-coe  exprs))}
+(map sexp->coe  exprs))}
 
 @do{(define exprs-as-math
-(map sexp-to-math  exprs))}
+(map sexp->math  exprs))}
 
-@show{(two-col-layout exprs-as-coe exprs-as-math)} 
+@show{(exercise-handout
+#:title "Sample B"
+#:instr "Do this and that"
+(questions-and-answers exprs-as-coe exprs-as-math))} 

@@ -23,7 +23,7 @@
           (if (null? r) ""
               (list->string (reverse r)))))))
 
-(define (read-group i directive)
+(define (read-group i directive #:scheme [scheme #f])
   (let ([c (peek-char i)])
     (cond [(char=? c #\{)
            (read-char i)
@@ -43,7 +43,9 @@
                      [(char=? c #\")
                       (loop (cons c r) #f nesting #t #f)]
                      [(member c '(#\space #\tab #\newline #\return))
-                      (loop (if in-space? r (cons #\space r)) #t nesting #f #f)]
+                      (if scheme
+                          (loop (cons c r) #f nesting #f #f)
+                          (loop (if in-space? r (cons #\space r)) #t nesting #f #f))]
                      [(char=? c #\{)
                       (loop (cons c r) #f (+ nesting 1) #f #f)]
                      [(char=? c #\})
@@ -102,26 +104,42 @@
       (error 'span "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
+(define (create-begin-div div-args)
+  (let ([classes (regexp-split #rx"\\." (substring div-args 1))])
+    (string-append
+      "@CURRICULUMDIV"
+      (cond [(pair? classes) (string-append
+                               "class=\""
+                               (string-join classes " ")
+                               "\"")]
+            [else ""])
+      "@BEGINCURRICULUMDIV")))
+
+(define (create-end-div)
+  "@ENDCURRICULUMDIV")
+
 (define (create-begin-span span-args)
   (let ([classes (regexp-split #rx"\\." (substring span-args 1))])
-    (grow-span-stack)
+    ;(grow-span-stack)
     (string-append
       "@CURRICULUMSPAN"
       (cond [(pair? classes) (string-append
                                "class=\""
                                (string-join classes " ")
-                               "\" ")]
+                               "\"")]
             [else ""])
       "@BEGINCURRICULUMSPAN")))
 
 (define (create-end-span)
-  (pop-span-stack)
+  ;(pop-span-stack)
   "@ENDCURRICULUMSPAN")
 
 (define (display-begin-span span-args o)
+  (grow-span-stack)
   (display (create-begin-span span-args) o))
 
 (define (display-end-span o)
+  (pop-span-stack)
   (display (create-end-span) o))
 
 (define (assoc-glossary term L)
@@ -731,10 +749,10 @@
                               (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
                               ]
                              [(string=? directive "do")
-                              (let ([exprs (string->form (read-group i directive))])
+                              (let ([exprs (string->form (read-group i directive #:scheme #t))])
                                 (for-each massage-arg exprs))]
                              [(string=? directive "show")
-                              (let ([exprs (string->form (read-group i directive))])
+                              (let ([exprs (string->form (read-group i directive #:scheme #t))])
                                 (for-each
                                   (lambda (s)
                                     (display (massage-arg s) o))
@@ -931,6 +949,12 @@
 
 (define (hspace n) " ")
 
+(define (div-encoded-elem classes s)
+  (string-append
+    (create-begin-div classes)
+    s
+    (create-end-div)))
+
 (define (encoded-elem classes s)
   (string-append
     (create-begin-span classes)
@@ -951,47 +975,47 @@
                (cons (hspace 1) ans)
                ans))))
 
-(define (sexp-to-coe e)
-  (encoded-elem ".circleevalsexp" (sexp-to-block e)))
+(define (sexp->coe e)
+  (div-encoded-elem ".circleevalsexp" (sexp->block e)))
 
-(define (sexp-to-wescheme e)
-  (encoded-elem ".codesexp" (sexp-to-block e)))
+(define (sexp->wescheme e)
+  (div-encoded-elem ".codesexp.kode.racket" (sexp->block e)))
 
-(define (sexp-to-arith e #:pyret [pyret #f] #:wrap [wrap #f])
+(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   (if (number? e)
       (format "~a" e)
       (let ([a (car e)])
         (if (and (eq? a '/) (not pyret))
             (format "{~a \\over ~a}"
-                    (sexp-to-arith (list-ref e 1))
-                    (sexp-to-arith (list-ref e 2)))
+                    (sexp->arith (list-ref e 1))
+                    (sexp->arith (list-ref e 2)))
             (let ([x (format "~a ~a ~a"
-                             (sexp-to-arith (list-ref e 1) #:pyret pyret #:wrap #t)
+                             (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)
                              a
-                             (sexp-to-arith (list-ref e 2) #:pyret pyret #:wrap #t))])
+                             (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
               (if wrap
                   (format "(~a)" x)
                   x))))))
 
-;TODO sexp-to-pyret, sexp-to-math
+;TODO sexp->pyret, sexp->math
 
-(define (sexp-to-pyret e)
-  (encoded-elem ".pyret" (sexp-to-arith e #:pyret #t)))
+(define (sexp->pyret e)
+  (div-encoded-elem ".kode.pyret" (sexp->arith e #:pyret #t)))
 
-(define (sexp-to-math e)
+(define (sexp->math e)
   (string-append
     (format "@CURRICULUMSCRIPT")
     (format "@BEGINCURRICULUMSCRIPT")
-    (sexp-to-arith e)
+    (sexp->arith e)
     (format "@ENDCURRICULUMSCRIPT")))
 
-(define (sexp-to-code e)
+(define (sexp->code e)
   ((if (string-ci=? *proglang* "pyret")
-       sexp-to-pyret
-       sexp-to-wescheme) e))
+       sexp->pyret
+       sexp->wescheme) e))
 
-(define (sexp-to-block e)
-  ;(printf "doing sexp-to-block ~s\n" e)
+(define (sexp->block e)
+  ;(printf "doing sexp->block ~s\n" e)
   (cond [(member e '(true false)) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
         [(eq? e 'else) (encoded-elem ".wescheme-keyword" "else")]
         [(number? e) (encoded-elem ".value.wescheme-number" (format "~a" e))]
@@ -1001,18 +1025,18 @@
         [(list? e) (let ([a (car e)])
                      (encoded-elem ".expression"
                                    (if (symbol? a)
-                                       (let ([args (intersperse-spaces (map sexp-to-block (cdr e)) 'args)])
+                                       (let ([args (intersperse-spaces (map sexp->block (cdr e)) 'args)])
                                          (string-append
                                            (encoded-elem ".lParen" "(")
-                                           (encoded-elem ".operator" (sexp-to-block a))
+                                           (encoded-elem ".operator" (sexp->block a))
                                            args
                                            (encoded-elem ".rParen" ")")))
-                                       (let ([parts (intersperse-spaces (map sexp-to-block e) #f)])
+                                       (let ([parts (intersperse-spaces (map sexp->block e) #f)])
                                          (string-append
                                            (encoded-elem ".lParen" "(")
                                            parts
                                            (encoded-elem ".rParen" ")"))))))]
-        [else (error 'sexp-to-block "unknown s-exp")]))
+        [else (error 'sexp->block "unknown s-exp")]))
 
 (define (two-col-layout colA colB)
   (string-append
@@ -1021,16 +1045,34 @@
            (map (lambda (lft rt)
                   (string-append
                     "- "
-                    (create-begin-span ".leftColumn")
+                    (create-begin-div ".leftColumn")
                     lft
-                    (create-end-span)
+                    (create-end-div)
                     "\n"
-                    (create-begin-span ".rightColumn")
+                    (create-begin-div ".rightColumn")
                     rt
-                    (create-end-span)
+                    (create-end-div)
                     "\n"))
                 colA colB))
     "\n\n"))
+
+(define questions-and-answers two-col-layout)
+
+(define (exercise-answers x) x)
+
+(define (exercise-evid-tags . x) #f)
+
+(define (exercise-handout #:title [title #f] #:instr [instr #f] #:forevidence [forevidence #f] 
+                          . body)
+  (string-append
+    (format "\n
+== ~a\n\n"
+            (if title (format "Exercise: ~a" title) "Exercise")
+            )
+    (if instr
+        (format "*Directions*: ~a\n\n" instr)
+        "")
+    (apply string-append body)))
 
 (define (main . cl-args)
   (call-with-output-file "debug-links.asc"

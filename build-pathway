@@ -1,4 +1,4 @@
-# last modified 2019-10-12
+# last modified 2019-10-13
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -116,8 +116,12 @@ function cleanuptitle() {
 function resolveabbrevs() {
   f=$1
   mathjaxneeded=
+  codemirrorneeded=
   if test $(grep @CURRICULUMSCRIPT $f 2>/dev/null|wc -l) -ge 1; then
     mathjaxneeded=1
+  fi
+  if test $(grep 'kode *\(pyret\|racket\)' $f 2>/dev/null|wc -l) -ge 1; then
+    codemirrorneeded=1
   fi
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
@@ -129,6 +133,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMSPAN/<span /g' \
     -e 's/@BEGINCURRICULUMSPAN/>/g' \
     -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
+    -e 's/@CURRICULUMDIV/<div /g' \
+    -e 's/@BEGINCURRICULUMDIV/>/g' \
+    -e 's/@ENDCURRICULUMDIV/<\/div>/g' \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
     -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
@@ -141,6 +148,22 @@ EOF
       -e '/^<link.*curriculum\.css/s/^/@INSERTMATHJAX\0/' \
       -e '/@INSERTMATHJAX/r mathjax.txt' \
       -e 's/@INSERTMATHJAX//' \
+      $f
+  fi
+  if test "$codemirrorneeded" != ""; then
+    cat > codemirror.txt <<EOF
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}pretty-printing.css" />
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}codemirror.css" />
+    <script type="text/javascript" src="${PATHWAYROOTDIR}codemirror.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}runmode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}scheme2.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}pyret-mode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}bootstraplesson.js"></script>
+EOF
+    sed -i \
+      -e '/^<link.*curriculum\.css/s/^/@INSERTCODEMIRROR\0/' \
+      -e '/@INSERTCODEMIRROR/r codemirror.txt' \
+      -e 's/@INSERTCODEMIRROR//' \
       $f
   fi
   tif=${f%.*}-comment.txt
@@ -320,7 +343,7 @@ function buildpathway() {
     rm -fr distribution/$PATHWAY/$LANGUAGE
   fi
   cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
-  cp -p $PROGDIR/*.png $PROGDIR/*.css distribution/$PATHWAY/$LANGUAGE
+  cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE
 
   echo
 

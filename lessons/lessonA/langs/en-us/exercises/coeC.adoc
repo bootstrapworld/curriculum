@@ -11,9 +11,12 @@
                  ))}
 
 @do{(define exprs-as-code
-(map sexp-to-code  exprs))}
+(map sexp->code  exprs))}
 
 @do{(define exprs-as-math
-(map sexp-to-math  exprs))}
+(map sexp->math  exprs))}
 
-@show{(two-col-layout exprs-as-code exprs-as-math)} 
+@show{(exercise-handout
+#:title "Sample C"
+#:instr "Do this and that"
+(questions-and-answers exprs-as-code exprs-as-math))} 
