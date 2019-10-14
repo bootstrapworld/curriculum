@@ -104,43 +104,28 @@
       (error 'span "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
-(define (create-begin-div div-args)
-  (let ([classes (regexp-split #rx"\\." (substring div-args 1))])
+(define (create-begin-tag tag-name classes)
+  (let ([classes (regexp-split #rx"\\." (substring classes 1))])
     (string-append
-      "@CURRICULUMDIV"
+      "@CURRICULUM" tag-name
       (cond [(pair? classes) (string-append
                                "class=\""
                                (string-join classes " ")
                                "\"")]
             [else ""])
-      "@BEGINCURRICULUMDIV")))
+      "@BEGINCURRICULUM" tag-name)))
 
-(define (create-end-div)
-  "@ENDCURRICULUMDIV")
-
-(define (create-begin-span span-args)
-  (let ([classes (regexp-split #rx"\\." (substring span-args 1))])
-    ;(grow-span-stack)
-    (string-append
-      "@CURRICULUMSPAN"
-      (cond [(pair? classes) (string-append
-                               "class=\""
-                               (string-join classes " ")
-                               "\"")]
-            [else ""])
-      "@BEGINCURRICULUMSPAN")))
-
-(define (create-end-span)
-  ;(pop-span-stack)
-  "@ENDCURRICULUMSPAN")
+(define (create-end-tag tag-name)
+  (string-append
+    "@ENDCURRICULUM" tag-name))
 
 (define (display-begin-span span-args o)
   (grow-span-stack)
-  (display (create-begin-span span-args) o))
+  (display (create-begin-tag "span" span-args) o))
 
 (define (display-end-span o)
   (pop-span-stack)
-  (display (create-end-span) o))
+  (display (create-end-tag "span") o))
 
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
@@ -951,15 +936,21 @@
 
 (define (div-encoded-elem classes s)
   (string-append
-    (create-begin-div classes)
+    (create-begin-tag "div" classes)
     s
-    (create-end-div)))
+    (create-end-tag "div")))
+
+(define (enclose-textarea classes s)
+  (string-append
+    (create-begin-tag "textarea" classes)
+    s
+    (create-end-tag "textarea")))
 
 (define (encoded-elem classes s)
   (string-append
-    (create-begin-span classes)
+    (create-begin-tag "span" classes)
     s
-    (create-end-span)))
+    (create-end-tag "span")))
 
 (define (intersperse-spaces args funargs?)
   (define (intersperse-spaces-aux args)
@@ -979,7 +970,7 @@
   (div-encoded-elem ".circleevalsexp" (sexp->block e)))
 
 (define (sexp->wescheme e)
-  (div-encoded-elem ".codesexp.kode.racket" (sexp->block e)))
+  (enclose-textarea ".codesexp.kode.racket" (sexp->block e)))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   (if (number? e)
@@ -989,7 +980,11 @@
             (format "{~a \\over ~a}"
                     (sexp->arith (list-ref e 1))
                     (sexp->arith (list-ref e 2)))
-            (let ([x (format "~a ~a ~a"
+            (let* ([a (if pyret a
+                          (cond [(eq? a '*) "\\times"]
+                                [(eq? a '/) "\\div"]
+                                [else a]))]
+                   [x (format "~a ~a ~a"
                              (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)
                              a
                              (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
@@ -1000,7 +995,7 @@
 ;TODO sexp->pyret, sexp->math
 
 (define (sexp->pyret e)
-  (div-encoded-elem ".kode.pyret" (sexp->arith e #:pyret #t)))
+  (enclose-textarea ".kode.pyret" (sexp->arith e #:pyret #t)))
 
 (define (sexp->math e)
   (string-append
@@ -1045,13 +1040,13 @@
            (map (lambda (lft rt)
                   (string-append
                     "- "
-                    (create-begin-div ".leftColumn")
+                    (create-begin-tag "div" ".leftColumn")
                     lft
-                    (create-end-div)
+                    (create-end-tag "div")
                     "\n"
-                    (create-begin-div ".rightColumn")
+                    (create-begin-tag "div" ".rightColumn")
                     rt
-                    (create-end-div)
+                    (create-end-tag "div")
                     "\n"))
                 colA colB))
     "\n\n"))
@@ -1062,7 +1057,7 @@
 
 (define (exercise-evid-tags . x) #f)
 
-(define (exercise-handout #:title [title #f] #:instr [instr #f] #:forevidence [forevidence #f] 
+(define (exercise-handout #:title [title #f] #:instr [instr #f] #:forevidence [forevidence #f]
                           . body)
   (string-append
     (format "\n

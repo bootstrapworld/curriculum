@@ -133,17 +133,26 @@ function resolveabbrevs() {
   fi
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
+    \
     -e 's/@CURRICULUMCOMMA/,/g' \
+    \
     -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
     -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
-    -e 's/@CURRICULUMSPAN/<span /g' \
-    -e 's/@BEGINCURRICULUMSPAN/>/g' \
-    -e 's/@ENDCURRICULUMSPAN/<\/span>/g' \
-    -e 's/@CURRICULUMDIV/<div /g' \
-    -e 's/@BEGINCURRICULUMDIV/>/g' \
-    -e 's/@ENDCURRICULUMDIV/<\/div>/g' \
+    \
+    -e 's/@CURRICULUMspan/<span /g' \
+    -e 's/@BEGINCURRICULUMspan/>/g' \
+    -e 's/@ENDCURRICULUMspan/<\/span>/g' \
+    \
+    -e 's/@CURRICULUMdiv/<div /g' \
+    -e 's/@BEGINCURRICULUMdiv/>/g' \
+    -e 's/@ENDCURRICULUMdiv/<\/div>/g' \
+    \
+    -e 's/@CURRICULUMtextarea/<textarea /g' \
+    -e 's/@BEGINCURRICULUMtextarea/>/g' \
+    -e 's/@ENDCURRICULUMtextarea/<\/textarea>/g' \
+    \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
     -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
