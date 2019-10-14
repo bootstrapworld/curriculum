@@ -970,7 +970,8 @@
   (div-encoded-elem ".circleevalsexp" (sexp->block e)))
 
 (define (sexp->wescheme e)
-  (enclose-textarea ".codesexp.kode.racket" (sexp->block e)))
+  ; .codesexp.kode?
+  (enclose-textarea ".racket" (sexp->block e)))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   (if (number? e)
@@ -992,10 +993,9 @@
                   (format "(~a)" x)
                   x))))))
 
-;TODO sexp->pyret, sexp->math
-
 (define (sexp->pyret e)
-  (enclose-textarea ".kode.pyret" (sexp->arith e #:pyret #t)))
+  ; .kode ?
+  (enclose-textarea ".pyret" (sexp->arith e #:pyret #t)))
 
 (define (sexp->math e)
   (string-append
