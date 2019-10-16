@@ -11,6 +11,8 @@
 
 (define *proglang* (getenv "PROGLANG"))
 
+(define *solutions-mode?* (getenv "SOLUTION"))
+
 (define *base-namespace* (current-namespace))
 
 (define *debug-links-port* #f)
@@ -23,7 +25,15 @@
           (if (null? r) ""
               (list->string (reverse r)))))))
 
-(define (read-group i directive #:scheme [scheme #f])
+(define (quote-rev-string s)
+  (let ([n (string-length s)])
+    (let loop ([i 0] [r (list #\")])
+      (if (>= i n) (cons #\" r)
+          (let ([c (string-ref s i)])
+            (cond [(char=? c #\") (loop (+ i 1) (cons c (cons #\\ r)))]
+                  [else (loop (+ i 1) (cons c r))]))))))
+
+(define (read-group i directive #:scheme? [scheme? #f])
   (let ([c (peek-char i)])
     (cond [(char=? c #\{)
            (read-char i)
@@ -40,10 +50,15 @@
                        (if (char=? c #\")
                            (loop (cons c r) #f nesting #f #f)
                            (loop (cons c r) #f nesting #t #f))]
+                     [(and scheme? (char=? c #\@))
+                      (let* ([directive (read-word i)]
+                             [gp (read-group i directive #:scheme? #t)])
+                        (loop (append (quote-rev-string gp) r)
+                              #f nesting #f #f))]
                      [(char=? c #\")
                       (loop (cons c r) #f nesting #t #f)]
                      [(member c '(#\space #\tab #\newline #\return))
-                      (if scheme
+                      (if scheme?
                           (loop (cons c r) #f nesting #f #f)
                           (loop (if in-space? r (cons #\space r)) #t nesting #f #f))]
                      [(char=? c #\{)
@@ -307,11 +322,12 @@
       ;(format "link:{pathwayrootdir}~a[~a]" g link-text)
       )))
 
-(define (make-exercise-link lesson exer link-text include?)
+(define (make-exercise-link lesson exerdir exer link-text include? as-is?)
   ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
-  (let* ([solutions-mode? (getenv "SOLUTION")]
-         [g (string-append "lessons/" lesson
-                           (if solutions-mode? "/exercises-sols/" "/exercises/") exer)]
+  (let* ([g (string-append "lessons/" lesson "/"
+                           (if as-is? exerdir
+                               (if *solutions-mode?* "exercises-sols"
+                                   "exercises")) "/" exer)]
          [f (string-append *pathway-root-dir* g)]
          [exer.asc (path-replace-extension f ".asc")]
          [exer.html (path-replace-extension f ".html")]
@@ -630,8 +646,10 @@
                               (let ([args (read-commaed-group i directive)])
                                 (display (make-image (car args) (cdr args)) o))]
                              [(or (string=? directive "worksheet-link")
-                                  (string=? directive "worksheet-include"))
+                                  (string=? directive "worksheet-include")
+                                  (string=? directive "exercise-link"))
                               (let* ([include? (string=? directive "worksheet-include")]
+                                     [exercise-as-is? (string=? directive "exercise-link")]
                                      [args (read-commaed-group i directive)]
                                      [n (length args)]
                                      [page (car args)]
@@ -657,50 +675,57 @@
                                   [(2)
                                    (let ([second-compt (cadr page-compts)]
                                          [lesson-dir (getenv "LESSON")])
-                                     (cond ((string=? first-compt "exercises")
+                                     (cond [(or (string=? first-compt "exercises")
+                                                (string=? first-compt "exercises-sols"))
                                             (add-exercise (format "~a/~a" lesson-dir page))
-                                            (cond (lesson-dir
+                                            (cond [lesson-dir
                                                     (display (make-exercise-link lesson-dir
+                                                                                 first-compt
                                                                                  second-compt
                                                                                  link-text
-                                                                                 include?) o))
-                                                  (else
-                                                    (printf "WARNING: Incomplete exercise link ~a~n" page))))
-                                           ((or (string=? first-compt "workbook-pages")
+                                                                                 include?
+                                                                                 exercise-as-is?) o)]
+                                                  [else
+                                                    (printf "WARNING: Incomplete exercise link ~a~n"
+                                                            page)])]
+                                           [(or (string=? first-compt "workbook-pages")
                                                 (string=? first-compt "workbook-sols-pages"))
-                                            (cond (lesson-dir
+                                            (cond [lesson-dir
                                                     (display (make-worksheet-link lesson-dir
                                                                                   first-compt
                                                                                   (cadr page-compts)
-                                                                                  link-text) o))
-                                                  (else
-                                                    (printf "WARNING: Incomplete worksheet link ~a~n" page))))
-                                           (else
+                                                                                  link-text) o)]
+                                                  [else
+                                                    (printf "WARNING: Incomplete worksheet link ~a~n"
+                                                            page)])]
+                                           [else
                                              (display (make-lesson-link
                                                         first-compt
                                                         (cdr page-compts)
-                                                        link-text) o))))]
+                                                        link-text) o)]))]
                                   [(3)
                                    (let ([second-compt (cadr page-compts)]
                                          [third-compt (caddr page-compts)])
-                                     (cond ((string=? second-compt "exercises")
+                                     (cond [(string=? second-compt "exercises")
                                             (add-exercise page)
                                             (display (make-exercise-link first-compt
+                                                                         second-compt
                                                                          third-compt
                                                                          link-text
-                                                                         include?) o))
-                                           ((or (string=? second-compt "workbook-pages")
+                                                                         include?
+                                                                         exercise-as-is?) o)]
+                                           [(or (string=? second-compt "workbook-pages")
                                                 (string=? second-compt "workbook-sols-pages"))
                                             (display (make-worksheet-link first-compt
                                                                           second-compt
-                                                                          third-compt link-text) o))
+                                                                          third-compt link-text) o)]
                                            ;(else (printf "Bad worksheet link ~a~n" page))
-                                           (else
+                                           [else
                                              (display (make-lesson-link first-compt
                                                                         (cdr page-compts)
                                                                         link-text) o)
 
-                                             )
+                                             ]
                                            ))]
                                   [else
                                     (display (make-lesson-link first-compt
@@ -734,10 +759,10 @@
                               (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
                               ]
                              [(string=? directive "do")
-                              (let ([exprs (string->form (read-group i directive #:scheme #t))])
+                              (let ([exprs (string->form (read-group i directive #:scheme? #t))])
                                 (for-each massage-arg exprs))]
                              [(string=? directive "show")
-                              (let ([exprs (string->form (read-group i directive #:scheme #t))])
+                              (let ([exprs (string->form (read-group i directive #:scheme? #t))])
                                 (for-each
                                   (lambda (s)
                                     (display (massage-arg s) o))
@@ -932,7 +957,11 @@
 
 ;coe
 
-(define (hspace n) " ")
+(define (hspace n)
+  (string-append
+    (create-begin-tag "span" ".hspace")
+    (string-join (build-list n (lambda (i) "{nbsp}")) "")
+    (create-end-tag "span")))
 
 (define (div-encoded-elem classes s)
   (string-append
@@ -969,33 +998,51 @@
 (define (sexp->coe e)
   (div-encoded-elem ".circleevalsexp" (sexp->block e)))
 
+(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
+  (cond [(number? e) (format "~a" e)]
+        [(and (symbol? e) pyret (eq? e 'BSLeaveAHoleHere))
+         (string-append (create-begin-tag "span" ".studentAnswer")
+           " " (create-end-tag "span"))]
+        [(symbol? e) e]
+        [(string? e) e]
+        [(list? e) (let ([a (car e)])
+                     (if (and (eq? a '/) (not pyret))
+                         (format "{~a \\over ~a}"
+                                 (sexp->arith (list-ref e 1))
+                                 (sexp->arith (list-ref e 2)))
+                         (let* ([a (if pyret a
+                                       (cond [(eq? a '*) "\\times"]
+                                             [(eq? a '/) "\\div"]
+                                             [else a]))]
+                                [x (format "~a ~a ~a"
+                                           (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)
+                                           a
+                                           (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
+                           (if wrap
+                               (format "(~a)" x)
+                               x))))]
+        [else (error 'sexp->arith "unknown s-exp ~s" e)]))
+
+(define (holes->underscores e)
+  (cond [(pair? e) (cons (holes->underscores (car e))
+                         (holes->underscores (cdr e)))]
+        [(eq? e 'BSLeaveAHoleHere) '++_______++]
+        [(eq? e 'BSLeaveAHoleHere2) '(++_______++ ++_______++ ++_______++)]
+        [(eq? e 'BSLeaveAHoleHere3) '(++_______++ ++_______++ ++_______++)]
+        [else e]))
+
 (define (sexp->wescheme e)
   ; .codesexp.kode?
-  (enclose-textarea ".racket" (sexp->block e)))
-
-(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
-  (if (number? e)
-      (format "~a" e)
-      (let ([a (car e)])
-        (if (and (eq? a '/) (not pyret))
-            (format "{~a \\over ~a}"
-                    (sexp->arith (list-ref e 1))
-                    (sexp->arith (list-ref e 2)))
-            (let* ([a (if pyret a
-                          (cond [(eq? a '*) "\\times"]
-                                [(eq? a '/) "\\div"]
-                                [else a]))]
-                   [x (format "~a ~a ~a"
-                             (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)
-                             a
-                             (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
-              (if wrap
-                  (format "(~a)" x)
-                  x))))))
+  (enclose-textarea ".racket" (format "~s" (holes->underscores e)))
+  ;(enclose-textarea ".racket" (sexp->block e))
+  )
 
 (define (sexp->pyret e)
   ; .kode ?
-  (enclose-textarea ".pyret" (sexp->arith e #:pyret #t)))
+  (sexp->wescheme e)
+  ;(enclose-textarea ".pyret" (sexp->arith e #:pyret #t))
+  ;(enclose-textarea ".pyret"  (format "~a" e))
+  )
 
 (define (sexp->math e)
   (string-append
@@ -1016,7 +1063,10 @@
         [(number? e) (encoded-elem ".value.wescheme-number" (format "~a" e))]
         [(string? e) (encoded-elem ".value.wescheme-string" (format "~s" e))]
         [(boolean? e) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
-        [(symbol? e) (encoded-elem ".value.wescheme-symbol" (format "~a" e))]
+        [(symbol? e)
+         (if (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
+             (encoded-elem ".studentAnswer" " ")
+             (encoded-elem ".value.wescheme-symbol" (format "~a" e)))]
         [(list? e) (let ([a (car e)])
                      (encoded-elem ".expression"
                                    (if (symbol? a)
@@ -1033,27 +1083,107 @@
                                            (encoded-elem ".rParen" ")"))))))]
         [else (error 'sexp->block "unknown s-exp")]))
 
-(define (two-col-layout colA colB)
+(define sexp sexp->block)
+
+(define (code x #:multi-line [multi-line #t]) x)
+
+(define elem string-append)
+
+(define (permute-list lst)
+  (let loop ([sourcelst lst])
+    (if (empty? sourcelst) empty
+        (let ([choose (list-ref sourcelst (random (length sourcelst)))])
+          (cons choose (loop (remove choose sourcelst)))))))
+
+(define (pad-to alst to-len with-elt)
+  (let ([n (length alst)])
+    (if (>= n to-len) alst
+        (let ([extras (build-list (- to-len n) (lambda (i) with-elt))])
+          (append alst extras)))))
+
+(define (string-or-los s)
+  (if (string? s) s
+      (string-join s "\n")))
+
+(define (create-itemlist #:style [style #f] items)
+  ;(printf "doing create-itemlist ~s\n" items)
+  (string-append "\n\n"
+    (if style (string-append "[.plain]") "")
+    (apply string-append
+           (let ([n (length items)])
+             (let loop ([i n] [r '()])
+               (cond [(< i 1) r]
+                     [else (loop (- i 1)
+                                 (cons (string-append "\n\n"
+                                         (if style (format "~a. " i) "* ")
+                                         (string-or-los (list-ref items (- i 1))))
+                                       r))]))))
+    "\n\n"))
+
+(define (create-exercise-itemlist items #:ordered? [ordered? #t]
+                                  #:itemstyle [itemstyle #f])
+  ;how to use itemstyle?
+  (create-itemlist #:style ordered?
+                   (map (lambda (item)
+                          (enclose-textarea
+                            (if (string=? *proglang* "pyret") ".pyret" ".racket")
+                            (string-or-los item)))
+                        items)))
+
+(define create-exercise-itemlist/contract-answers create-exercise-itemlist)
+
+(define (two-col-layout #:leftcolextratag [leftcolextratag ""]
+                        #:rightcolextratag [rightcolextratag ""]
+                        #:layoutstyle [layoutstyle ""]
+                        colA colB)
+  ;use layoutstyle?
+  (let* ([maxcollength (max (length colA) (length colB))]
+         [paddedcolA (pad-to colA maxcollength "")]
+         [paddedcolB (pad-to colB maxcollength "")]
+         [leftcolstyle (string-append ".leftColumn" leftcolextratag)]
+         [rightcolstyle (string-append ".rightColumn" rightcolextratag)])
   (string-append
     "[.twoColumnLayout]\n"
     (apply string-append
            (map (lambda (lft rt)
                   (string-append
                     "- "
-                    (create-begin-tag "div" ".leftColumn")
+                    (create-begin-tag "div" leftcolstyle)
                     lft
                     (create-end-tag "div")
                     "\n"
-                    (create-begin-tag "div" ".rightColumn")
+                    (create-begin-tag "div" rightcolstyle)
                     rt
                     (create-end-tag "div")
                     "\n"))
-                colA colB))
-    "\n\n"))
+                paddedcolA paddedcolB))
+    "\n\n")))
 
 (define questions-and-answers two-col-layout)
 
-(define (exercise-answers x) x)
+(define completion-exercise two-col-layout)
+
+(define (open-response-exercise colA answer-type)
+  ;check answer-type is valid
+  (two-col-layout colA '()
+                  #:rightcolextratag (string-append ".studentAnswer" answer-type)))
+
+(define (matching-exercise #:permute [permute #f]
+                           colA colB)
+  (let* ([colB (if permute (permute-list colB) colB)]
+         [nA (length colA)]
+         [nB (length colB)]
+         [paddedcolA (if (> nB nA) (pad-to colA nB "") colA)]
+         [paddedcolB (if (> nA nB) (pad-to colB nA "") colB)])
+    (two-col-layout #:layoutstyle "matching"
+                    paddedcolA paddedcolB)))
+
+(define (matching-exercise-answers #:compare-with [compare-with eq?]
+                                   #:content-of-ans [content-of-ans #f]
+                                   #:some-no-match? [some-no-match? #f]
+                                   ques formatted-ans presented-ans)
+  (let ([annotated-ans formatted-ans])
+    (two-col-layout #:layoutstyle "solutions matching" ques annotated-ans)))
 
 (define (exercise-evid-tags . x) #f)
 
@@ -1067,7 +1197,8 @@
     (if instr
         (format "*Directions*: ~a\n\n" instr)
         "")
-    (apply string-append body)))
+    (apply string-append
+           (filter (lambda (x) (not (void? x))) body))))
 
 (define (main . cl-args)
   (call-with-output-file "debug-links.asc"
