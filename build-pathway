@@ -1,4 +1,4 @@
-# last modified 2019-10-16
+# last modified 2019-10-17
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -12,7 +12,7 @@ echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.
 
 export SED=sed
 
-if test $(which gsed|wc -l) -ne 0; then
+if which gsed | grep -q .; then
   SED=gsed
 fi
 
@@ -33,18 +33,18 @@ export PROGLANG=
 
 export DEBUG=
 export NOPDF=
-unset NOPDF
+#unset NOPDF
 
 ARGS=
 while test $# -ne 0; do
   arg=$1; shift
-  if test x$arg = x--language; then
+  if test "$arg" = --language; then
     LANGUAGE=$1; shift
-  elif test x$arg = x--proglang; then
+  elif test "$arg" = --proglang; then
     PROGLANG=$1; shift
-  elif test x$arg = x--debug; then
+  elif test "$arg" = --debug; then
     DEBUG=1;
-  elif test x$arg = x--nopdf; then
+  elif test "$arg" = --nopdf; then
     NOPDF=1;
   else
     ARGS="$ARGS $arg"
@@ -125,10 +125,10 @@ function resolveabbrevs() {
   f=$1
   mathjaxneeded=
   codemirrorneeded=
-  if test $(grep @CURRICULUMSCRIPT $f 2>/dev/null|wc -l) -ge 1; then
+  if grep -q @CURRICULUMSCRIPT $f; then
     mathjaxneeded=1
   fi
-  if test $(grep 'textarea *class=\"\(pyret\|racket\)\"' $f 2>/dev/null|wc -l) -ge 1; then
+  if grep -q 'textarea *class=\"\(pyret\|racket\)\"' $f; then
     codemirrorneeded=1
   fi
   $SED -i \
@@ -141,17 +141,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
     \
-    -e 's/@CURRICULUMspan/<span /g' \
-    -e 's/@BEGINCURRICULUMspan/>/g' \
-    -e 's/@ENDCURRICULUMspan/<\/span>/g' \
-    \
-    -e 's/@CURRICULUMdiv/<div /g' \
-    -e 's/@BEGINCURRICULUMdiv/>/g' \
-    -e 's/@ENDCURRICULUMdiv/<\/div>/g' \
-    \
-    -e 's/@CURRICULUMtextarea/<textarea /g' \
-    -e 's/@BEGINCURRICULUMtextarea/>/g' \
-    -e 's/@ENDCURRICULUMtextarea/<\/textarea>/g' \
+    -e 's/@CURRICULUM\(div\|pre\|span\|textarea\|tt\)/<\1/g' \
+    -e 's/@BEGINCURRICULUM\(div\|pre\|span\|textarea\|tt\)/>/g' \
+    -e 's/@ENDCURRICULUM\(div\|pre\|span\|textarea\|tt\)/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
@@ -258,7 +250,7 @@ function buildworkbookpages() {
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
           resolveabbrevs $fhtml
-          if test -z $NOPDF; then
+          if test ! "$NOPDF"; then
             wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
           fi
         fi
@@ -279,12 +271,12 @@ function buildlessonplan() {
   copacetic=1
   for f in *.adoc; do
     if test ! -f $f; then
-      copacetic=0
+      copacetic=
     fi
   done
-  if test x$copacetic = x0; then
+  if test ! "$copacetic"; then
     echo WARNING: No lesson plan in lesson $L
-  elif test $(ls *.adoc|wc -l) -gt 1; then
+  elif ls *.adoc | wc -l | grep -vq '^1$'; then
     echo WARNING: Too many lesson plans in lesson $L
   else
     #cp -p $PROGDIR/*.css .
@@ -308,7 +300,7 @@ function buildlessonplan() {
     resolveabbrevs index.html
     moveheaderlogopos index.html
     cleanuptitle index.html
-    if test -z $NOPDF; then
+    if test ! "$NOPDF"; then
       #echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
     fi
@@ -389,12 +381,12 @@ function buildpathway() {
     cp -p $PROGDIR/.hta* .
     copacetic=1
     for f in *.adoc; do
-      if test ! -f $f; then copacetic=0
+      if test ! -f $f; then copacetic=
       fi
     done
-    if test x$copacetic = x0; then
+    if test ! "$copacetic"; then
       echo WARNING: No teacher resource files in pathway $PATHWAY
-    elif test $(ls *.adoc|wc -l) -gt 1; then
+    elif ls *.adoc | wc -l | grep -vq '^1$'; then
       echo WARNING: Too many teacher resource files in pathway $PATHWAY
     else
       export PATHWAYROOTDIR="../"
@@ -422,12 +414,12 @@ function buildpathway() {
 
     if test ! -f workbook-page-index.rkt; then
       echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-    elif test -z $NOPDF; then
+    elif test ! "$NOPDF"; then
       export PATHWAYROOTDIR=""
       #cp -p $PROGDIR/front-cover-teacher.pdf .
       echo
       echo building pathway workbooks: $PATHWAY
-      if test -z $DEBUG; then
+      if test ! "$DEBUG"; then
         $PROGDIR/make-workbook.rkt >/dev/null 2>&1
       else
         $PROGDIR/make-workbook.rkt 
@@ -437,12 +429,12 @@ function buildpathway() {
 
     copacetic=1
     for f in *.adoc; do
-      if test ! -f $f; then copacetic=0
+      if test ! -f $f; then copacetic=
       fi
     done
-    if test x$copacetic = x0; then
+    if test ! "$copacetic"; then
       echo WARNING: No narrative in pathway $PATHWAY
-    elif test $(ls *.adoc|wc -l) -gt 1; then
+    elif ls *.adoc | wc -l | grep -vq '^1$'; then
       echo WARNING: Too many narratives in pathway $PATHWAY
     else
       #cp -p $PROGDIR/*.css .
@@ -535,7 +527,7 @@ done
 
 asciidoctor -a linkcss index.adoc
 
-if test -z $DEBUG; then
+if test ! "$DEBUG"; then
   rm -fr $PROGDIR
   for f in adoc asc rkt title txt; do
     find . -name \*.$f -delete

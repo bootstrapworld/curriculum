@@ -1,4 +1,4 @@
-# last modified 2019-09-19
+# last modified 2019-10-17
 
 if ! git rev-parse --is-inside-work-tree; then
   echo Not in a Git repo; exit
@@ -6,7 +6,7 @@ fi
 
 REPO_TOPDIR=$(git rev-parse --show-toplevel)
 
-if test x$(basename $REPO_TOPDIR) != xcurriculum; then
+if test "$(basename $REPO_TOPDIR)" != curriculum; then
   echo Not in curriculum repo; exit
 fi
 
@@ -14,7 +14,7 @@ cd $REPO_TOPDIR
 
 ORIG_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if test x$ORIG_BRANCH != xgh-pages; then
+if test "$ORIG_BRANCH" != gh-pages; then
   rm -fr distribution asciidoctor.css index.html README.html
   if ! git checkout gh-pages; then
     echo Could not switch to gh-pages branch; exit
@@ -44,7 +44,7 @@ rm -fr $DEPLOY_DIR/distribution
 
 cp -prH distribution $DEPLOY_DIR
 
-if test x$ORIG_BRANCH != xgh-pages; then
+if test "$ORIG_BRANCH" != gh-pages; then
   git checkout $ORIG_BRANCH
 fi
 
@@ -62,6 +62,6 @@ rm -fr curriculum
 
 mv distribution curriculum
 
-if test ! -z $ON_DEPLOY_SITE; then
+if test "$ON_DEPLOY_SITE"; then
   chgrp -R cs-plt curriculum
 fi

@@ -124,7 +124,7 @@
     (string-append
       "@CURRICULUM" tag-name
       (cond [(pair? classes) (string-append
-                               "class=\""
+                               " class=\""
                                (string-join classes " ")
                                "\"")]
             [else ""])
@@ -376,7 +376,7 @@
     ;(printf "opts = ~s\n" opts)
     (string-append
       (format "[.tooltip.centered-image]\n")
-      (format "@CURRICULUMSPANclass=\"tooltiptext\"@BEGINCURRICULUMSPAN ~a @ENDCURRICULUMSPAN\n" text)
+      (format "@CURRICULUMSPAN class=\"tooltiptext\"@BEGINCURRICULUMSPAN ~a @ENDCURRICULUMSPAN\n" text)
       (let ([text (clean-up-url-in-image-text text)])
         (if lesson
             (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
@@ -970,10 +970,11 @@
     (create-end-tag "div")))
 
 (define (enclose-textarea classes s)
-  (string-append
-    (create-begin-tag "textarea" classes)
-    s
-    (create-end-tag "textarea")))
+  (let ([textarea "pre"]) ;shd be "textarea" eventually
+    (string-append
+      (create-begin-tag textarea classes)
+      s
+      (create-end-tag textarea))))
 
 (define (encoded-elem classes s)
   (string-append
@@ -1026,6 +1027,8 @@
 (define (holes->underscores e)
   (cond [(pair? e) (cons (holes->underscores (car e))
                          (holes->underscores (cdr e)))]
+        [(number? e) e]
+        [(string? e) e]
         [(eq? e 'BSLeaveAHoleHere) '++_______++]
         [(eq? e 'BSLeaveAHoleHere2) '(++_______++ ++_______++ ++_______++)]
         [(eq? e 'BSLeaveAHoleHere3) '(++_______++ ++_______++ ++_______++)]
@@ -1065,7 +1068,7 @@
         [(boolean? e) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
         [(symbol? e)
          (if (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
-             (encoded-elem ".studentAnswer" " ")
+             (encoded-elem ".value.wescheme-symbol" "{nbsp}{nbsp}{nbsp}")
              (encoded-elem ".value.wescheme-symbol" (format "~a" e)))]
         [(list? e) (let ([a (car e)])
                      (encoded-elem ".expression"
