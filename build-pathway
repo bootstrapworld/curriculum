@@ -1,4 +1,4 @@
-# last modified 2019-10-17
+# last modified 2019-10-18
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -128,7 +128,7 @@ function resolveabbrevs() {
   if grep -q @CURRICULUMSCRIPT $f; then
     mathjaxneeded=1
   fi
-  if grep -q 'textarea *class=\"\(pyret\|racket\)\"' $f; then
+  if grep -q 'class=\"\(pyret\|racket\)\"' $f; then
     codemirrorneeded=1
   fi
   $SED -i \

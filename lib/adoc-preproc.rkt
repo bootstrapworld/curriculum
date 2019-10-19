@@ -970,11 +970,13 @@
     (create-end-tag "div")))
 
 (define (enclose-textarea classes s)
-  (let ([textarea "pre"]) ;shd be "textarea" eventually
+  (let ([textarea "tt"]) ;shd be "textarea" eventually
     (string-append
+      (create-begin-tag "div" ".obeyspaces")
       (create-begin-tag textarea classes)
       s
-      (create-end-tag textarea))))
+      (create-end-tag textarea)
+      (create-end-tag "div"))))
 
 (define (encoded-elem classes s)
   (string-append
