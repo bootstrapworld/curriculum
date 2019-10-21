@@ -376,7 +376,7 @@
     ;(printf "opts = ~s\n" opts)
     (string-append
       (format "[.tooltip.centered-image]\n")
-      (format "@CURRICULUMSPAN class=\"tooltiptext\"@BEGINCURRICULUMSPAN ~a @ENDCURRICULUMSPAN\n" text)
+      (format "@CURRICULUMspan class=\"tooltiptext\"@BEGINCURRICULUMspan ~a @ENDCURRICULUMspan\n" text)
       (let ([text (clean-up-url-in-image-text text)])
         (if lesson
             (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
