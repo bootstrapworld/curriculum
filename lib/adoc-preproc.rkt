@@ -1044,7 +1044,7 @@
   (let* ([hole *hole-symbol*]
          [hole2 (if (string-ci=? *proglang* "pyret")
                     *hole2-symbol*
-                    (list hole1 hole1 hole1))]
+                    (list hole hole hole))]
          [hole3 hole2])
     (lambda (e)
       (cond [(pair? e) (cons (holes->underscores (car e))
