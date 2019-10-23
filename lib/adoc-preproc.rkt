@@ -1002,13 +1002,16 @@
   (div-encoded-elem ".circleevalsexp" (sexp->block e)))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
+  ;(printf "doing sexp->arith ~s\n" e)
   (cond [(number? e) (format "~a" e)]
-        [(and (symbol? e) pyret (eq? e 'BSLeaveAHoleHere))
+        [(and (symbol? e) pyret 
+              (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (string-append (create-begin-tag "span" ".studentAnswer")
-           " " (create-end-tag "span"))]
-        [(symbol? e) e]
+           (format "~a" e) (create-end-tag "span"))]
+        [(symbol? e) (format "~a" e)]
         [(string? e) e]
         [(list? e) (let ([a (car e)])
+                     (if (memq a '(+ - * /))
                      (if (and (eq? a '/) (not pyret))
                          (format "{~a \\over ~a}"
                                  (sexp->arith (list-ref e 1))
@@ -1023,18 +1026,34 @@
                                            (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
                            (if wrap
                                (format "(~a)" x)
-                               x))))]
+                               x)))
+                         (format "~a(~a)"
+                                 (sexp->arith a)
+                                 (apply string-append
+                                        (map (lambda (e1)
+                                               (sexp->arith e1 #:pyret pyret)) (cdr e))))
+                         ))]
         [else (error 'sexp->arith "unknown s-exp ~s" e)]))
 
-(define (holes->underscores e)
-  (cond [(pair? e) (cons (holes->underscores (car e))
-                         (holes->underscores (cdr e)))]
-        [(number? e) e]
-        [(string? e) e]
-        [(eq? e 'BSLeaveAHoleHere) '++_______++]
-        [(eq? e 'BSLeaveAHoleHere2) '(++_______++ ++_______++ ++_______++)]
-        [(eq? e 'BSLeaveAHoleHere3) '(++_______++ ++_______++ ++_______++)]
-        [else e]))
+(define *hole-symbol* '++_______++)
+(define *hole2-symbol* '++____________________++)
+(define *hole3-symbol* *hole2-symbol*)
+
+(define holes->underscores
+  (let* ([hole *hole-symbol*]
+         [hole2 (if (string-ci=? *proglang* "pyret")
+                    *hole2-symbol*
+                    (list hole1 hole1 hole1))]
+         [hole3 hole2])
+    (lambda (e)
+      (cond [(pair? e) (cons (holes->underscores (car e))
+                             (holes->underscores (cdr e)))]
+            [(number? e) e]
+            [(string? e) e]
+            [(eq? e 'BSLeaveAHoleHere) hole]
+            [(eq? e 'BSLeaveAHoleHere2) hole2]
+            [(eq? e 'BSLeaveAHoleHere3) hole3]
+            [else e]))))
 
 (define (sexp->wescheme e)
   ; .codesexp.kode?
@@ -1044,7 +1063,8 @@
 
 (define (sexp->pyret e)
   ; .kode ?
-  (sexp->wescheme e)
+  ;(sexp->wescheme e)
+  (enclose-textarea ".pyret" (sexp->arith (holes->underscores e) #:pyret #t))
   ;(enclose-textarea ".pyret" (sexp->arith e #:pyret #t))
   ;(enclose-textarea ".pyret"  (format "~a" e))
   )
