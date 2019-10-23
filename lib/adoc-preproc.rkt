@@ -402,8 +402,9 @@
 ;(define *all-glossary-items* '())
 
 (define *asciidoctor*
-  (format "asciidoctor -a linkcss -a proglang=~a -a stylesheet=~acurriculum.css"
+  (format "asciidoctor -a linkcss -a proglang=~a -a pathway=~a -a stylesheet=~acurriculum.css"
           *proglang*
+          (getenv "SRCPATHWAY")
           *pathway-root-dir*))
 
 (define (preproc-n-asciidoctor in-file)
