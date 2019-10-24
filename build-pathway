@@ -1,4 +1,4 @@
-# last modified 2019-10-18
+# last modified 2019-10-24
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -276,7 +276,7 @@ function buildlessonplan() {
   done
   if test ! "$copacetic"; then
     echo WARNING: No lesson plan in lesson $L
-  elif ls *.adoc | wc -l | grep -vq '^1$'; then
+  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many lesson plans in lesson $L
   else
     #cp -p $PROGDIR/*.css .
@@ -386,7 +386,7 @@ function buildpathway() {
     done
     if test ! "$copacetic"; then
       echo WARNING: No teacher resource files in pathway $PATHWAY
-    elif ls *.adoc | wc -l | grep -vq '^1$'; then
+    elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
       echo WARNING: Too many teacher resource files in pathway $PATHWAY
     else
       export PATHWAYROOTDIR="../"
@@ -434,7 +434,7 @@ function buildpathway() {
     done
     if test ! "$copacetic"; then
       echo WARNING: No narrative in pathway $PATHWAY
-    elif ls *.adoc | wc -l | grep -vq '^1$'; then
+    elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
       echo WARNING: Too many narratives in pathway $PATHWAY
     else
       #cp -p $PROGDIR/*.css .
