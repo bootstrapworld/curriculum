@@ -1005,7 +1005,7 @@
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   ;(printf "doing sexp->arith ~s\n" e)
   (cond [(number? e) (format "~a" e)]
-        [(and (symbol? e) pyret 
+        [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (string-append (create-begin-tag "span" ".studentAnswer")
            (format "~a" e) (create-end-tag "span"))]
@@ -1162,14 +1162,13 @@
                         #:rightcolextratag [rightcolextratag ""]
                         #:layoutstyle [layoutstyle ""]
                         colA colB)
-  ;use layoutstyle?
   (let* ([maxcollength (max (length colA) (length colB))]
          [paddedcolA (pad-to colA maxcollength "")]
          [paddedcolB (pad-to colB maxcollength "")]
          [leftcolstyle (string-append ".leftColumn" leftcolextratag)]
          [rightcolstyle (string-append ".rightColumn" rightcolextratag)])
   (string-append
-    "[.twoColumnLayout]\n"
+    (format "[.twoColumnLayout~a]\n" layoutstyle)
     (apply string-append
            (map (lambda (lft rt)
                   (string-append
@@ -1201,15 +1200,48 @@
          [nB (length colB)]
          [paddedcolA (if (> nB nA) (pad-to colA nB "") colA)]
          [paddedcolB (if (> nA nB) (pad-to colB nA "") colB)])
-    (two-col-layout #:layoutstyle "matching"
+    (two-col-layout #:layoutstyle ".matching"
                     paddedcolA paddedcolB)))
+
+(define (get-index ans presented-order #:compare-with [compare-with eq?])
+  (let loop ([i 0] [s presented-order])
+    (cond [(null? s) -1]
+          [(compare-with (car s) ans) i]
+          [else (loop (+ i 1) (cdr s))])))
+
+(define int->alpha
+  (let ([a->int (char->integer #\a)])
+    (lambda (i)
+      (string (integer->char (+ a->int i))))))
 
 (define (matching-exercise-answers #:compare-with [compare-with eq?]
                                    #:content-of-ans [content-of-ans #f]
                                    #:some-no-match? [some-no-match? #f]
                                    ques formatted-ans presented-ans)
-  (let ([annotated-ans formatted-ans])
-    (two-col-layout #:layoutstyle "solutions matching" ques annotated-ans)))
+  (let ([annotated-ans
+          (map (lambda (ansF ansC)
+                 (let ([i (get-index ansC presented-ans
+                                     #:compare-with compare-with)]
+                       [label #f])
+                   (when (and (< i 0) (not some-no-match?))
+                     (error 'matching-exercise-answers "Couldn't find ~a in ~a\n"
+                            ansC presented-ans))
+                   (string-append
+                     (create-begin-tag "div" ".labeledRightColumn")
+                     (if (>= i 0)
+                         (let ([label (int->alpha i)])
+                           (string-append
+                             (create-begin-tag "span" ".rightColumnLabel")
+                             label
+                             (create-end-tag "span")
+                             ansF))
+                         (string-append 
+                           (create-begin-tag "span" ".matchLabelAns")
+                           "No matching answer"
+                           (create-end-tag "span")))
+                     (create-end-tag "div"))))
+               formatted-ans (or content-of-ans formatted-ans))])
+    (two-col-layout #:layoutstyle ".solutions.matching" ques annotated-ans)))
 
 (define (exercise-evid-tags . x) #f)
 
