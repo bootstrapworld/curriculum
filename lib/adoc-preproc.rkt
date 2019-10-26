@@ -9,7 +9,7 @@
 (require "glossary-terms.rkt")
 (require "standards-dictionary.rkt")
 
-(define *proglang* (getenv "PROGLANG"))
+(define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (define *solutions-mode?* (getenv "SOLUTION"))
 
@@ -207,7 +207,7 @@
     #:exists 'replace)
   (display desc o) (newline o))
 
-(define (string->form s)
+(define (string-to-form s)
   (call-with-input-string s
     (lambda (i)
       (let loop ([r '()])
@@ -760,10 +760,10 @@
                               (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
                               ]
                              [(string=? directive "do")
-                              (let ([exprs (string->form (read-group i directive #:scheme? #t))])
+                              (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                                 (for-each massage-arg exprs))]
                              [(string=? directive "show")
-                              (let ([exprs (string->form (read-group i directive #:scheme? #t))])
+                              (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                                 (for-each
                                   (lambda (s)
                                     (display (massage-arg s) o))
@@ -773,7 +773,7 @@
                                 (display (cadr s) o))]
                              [(assoc directive *function-list*) =>
                               (lambda (f)
-                                (let ([args (string->form (read-group i directive))])
+                                (let ([args (string-to-form (read-group i directive))])
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (add-exercise-title (car args))
@@ -1040,15 +1040,15 @@
 (define *hole2-symbol* '++____________________++)
 (define *hole3-symbol* *hole2-symbol*)
 
-(define holes->underscores
+(define holes-to-underscores
   (let* ([hole *hole-symbol*]
-         [hole2 (if (string-ci=? *proglang* "pyret")
+         [hole2 (if (string=? *proglang* "pyret")
                     *hole2-symbol*
                     (list hole hole hole))]
          [hole3 hole2])
     (lambda (e)
-      (cond [(pair? e) (cons (holes->underscores (car e))
-                             (holes->underscores (cdr e)))]
+      (cond [(pair? e) (cons (holes-to-underscores (car e))
+                             (holes-to-underscores (cdr e)))]
             [(number? e) e]
             [(string? e) e]
             [(eq? e 'BSLeaveAHoleHere) hole]
@@ -1057,18 +1057,12 @@
             [else e]))))
 
 (define (sexp->wescheme e)
-  ; .codesexp.kode?
-  (enclose-textarea ".racket" (format "~s" (holes->underscores e)))
+  (enclose-textarea ".racket" (format "~s" (holes-to-underscores e)))
   ;(enclose-textarea ".racket" (sexp->block e))
   )
 
 (define (sexp->pyret e)
-  ; .kode ?
-  ;(sexp->wescheme e)
-  (enclose-textarea ".pyret" (sexp->arith (holes->underscores e) #:pyret #t))
-  ;(enclose-textarea ".pyret" (sexp->arith e #:pyret #t))
-  ;(enclose-textarea ".pyret"  (format "~a" e))
-  )
+  (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
 
 (define (sexp->math e)
   (string-append
@@ -1078,7 +1072,7 @@
     (format "@ENDCURRICULUMSCRIPT")))
 
 (define (sexp->code e)
-  ((if (string-ci=? *proglang* "pyret")
+  ((if (string=? *proglang* "pyret")
        sexp->pyret
        sexp->wescheme) e))
 
@@ -1111,7 +1105,10 @@
 
 (define sexp sexp->block)
 
-(define (code x #:multi-line [multi-line #t]) x)
+(define (code x #:multi-line [multi-line #t])
+  (enclose-textarea
+    (if (string=? *proglang* "pyret")
+        ".pyret" ".racket") x))
 
 (define elem string-append)
 
@@ -1235,7 +1232,7 @@
                              label
                              (create-end-tag "span")
                              ansF))
-                         (string-append 
+                         (string-append
                            (create-begin-tag "span" ".matchLabelAns")
                            "No matching answer"
                            (create-end-tag "span")))

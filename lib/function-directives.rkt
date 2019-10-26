@@ -6,7 +6,7 @@
 
 (define *solutions-mode?* (getenv "SOLUTION"))
 
-(define *proglang* (getenv "PROGLANG"))
+(define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (unless (member *proglang* '("pyret" "wescheme"))
   (error 'function-directives.rkt "Unknown proglang ~a" *proglang*))
