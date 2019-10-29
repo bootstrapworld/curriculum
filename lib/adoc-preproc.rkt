@@ -958,32 +958,26 @@
 
 ;coe
 
-(define (hspace n)
+(define (enclose-tag tag classes s)
   (string-append
-    (create-begin-tag "span" ".hspace")
-    (string-join (build-list n (lambda (i) "{nbsp}")) "")
-    (create-end-tag "span")))
-
-(define (div-encoded-elem classes s)
-  (string-append
-    (create-begin-tag "div" classes)
+    (create-begin-tag tag classes)
     s
-    (create-end-tag "div")))
+    (create-end-tag tag)))
+
+(define (enclose-div classes s)
+  (enclose-tag "div" classes s))
 
 (define (enclose-textarea classes s)
   (let ([textarea "tt"]) ;shd be "textarea" eventually
-    (string-append
-      (create-begin-tag "div" ".obeyspaces")
-      (create-begin-tag textarea classes)
-      s
-      (create-end-tag textarea)
-      (create-end-tag "div"))))
+    (enclose-div ".obeyspaces"
+                 (enclose-tag textarea classes s))))
 
-(define (encoded-elem classes s)
-  (string-append
-    (create-begin-tag "span" classes)
-    s
-    (create-end-tag "span")))
+(define (enclose-span classes s)
+  (enclose-tag "span" classes s))
+
+(define (hspace n)
+  (enclose-span ".hspace"
+                (string-join (build-list n (lambda (i) "{nbsp}")) "")))
 
 (define (intersperse-spaces args funargs?)
   (define (intersperse-spaces-aux args)
@@ -1000,15 +994,14 @@
                ans))))
 
 (define (sexp->coe e)
-  (div-encoded-elem ".circleevalsexp" (sexp->block e)))
+  (enclose-div ".circleevalsexp" (sexp->block e)))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   ;(printf "doing sexp->arith ~s\n" e)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
-         (string-append (create-begin-tag "span" ".studentAnswer")
-           (format "~a" e) (create-end-tag "span"))]
+         (enclose-span ".studentAnswer" (format "~a" e))]
         [(symbol? e) (format "~a" e)]
         [(string? e) e]
         [(list? e) (let ([a (car e)])
@@ -1078,29 +1071,29 @@
 
 (define (sexp->block e)
   ;(printf "doing sexp->block ~s\n" e)
-  (cond [(member e '(true false)) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
-        [(eq? e 'else) (encoded-elem ".wescheme-keyword" "else")]
-        [(number? e) (encoded-elem ".value.wescheme-number" (format "~a" e))]
-        [(string? e) (encoded-elem ".value.wescheme-string" (format "~s" e))]
-        [(boolean? e) (encoded-elem ".value.wescheme-boolean" (format "~a" e))]
+  (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
+        [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
+        [(number? e) (enclose-span ".value.wescheme-number" (format "~a" e))]
+        [(string? e) (enclose-span ".value.wescheme-string" (format "~s" e))]
+        [(boolean? e) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
         [(symbol? e)
          (if (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
-             (encoded-elem ".value.wescheme-symbol" "{nbsp}{nbsp}{nbsp}")
-             (encoded-elem ".value.wescheme-symbol" (format "~a" e)))]
+             (enclose-span ".value.wescheme-symbol" "{nbsp}{nbsp}{nbsp}")
+             (enclose-span ".value.wescheme-symbol" (format "~a" e)))]
         [(list? e) (let ([a (car e)])
-                     (encoded-elem ".expression"
+                     (enclose-span ".expression"
                                    (if (symbol? a)
                                        (let ([args (intersperse-spaces (map sexp->block (cdr e)) 'args)])
                                          (string-append
-                                           (encoded-elem ".lParen" "(")
-                                           (encoded-elem ".operator" (sexp->block a))
+                                           (enclose-span ".lParen" "(")
+                                           (enclose-span ".operator" (sexp->block a))
                                            args
-                                           (encoded-elem ".rParen" ")")))
+                                           (enclose-span ".rParen" ")")))
                                        (let ([parts (intersperse-spaces (map sexp->block e) #f)])
                                          (string-append
-                                           (encoded-elem ".lParen" "(")
+                                           (enclose-span ".lParen" "(")
                                            parts
-                                           (encoded-elem ".rParen" ")"))))))]
+                                           (enclose-span ".rParen" ")"))))))]
         [else (error 'sexp->block "unknown s-exp")]))
 
 (define sexp sexp->block)
@@ -1128,10 +1121,24 @@
   (if (string? s) s
       (string-join s "\n")))
 
+(define (contract-exercise/internal tag start-str colon-str)
+  (string-append start-str
+    (enclose-span  ".contract-name.studentAnswer" "")
+    colon-str
+    (enclose-span  ".contract-domain.studentAnswer" "")
+    " -> "
+    (enclose-span  ".contract-range.studentAnswer" "")))
+
+(define (contract-exercise tag)
+  (contract-exercise/internal tag "; " ": "))
+
+(define (contract-exercise/pyret tag)
+  (contract-exercise/internal tag "" " :: "))
+
 (define (create-itemlist #:style [style #f] items)
   ;(printf "doing create-itemlist ~s\n" items)
   (string-append "\n\n"
-    (if style (string-append "[.plain]") "")
+    (if style (string-append "[.plain.exercises]") "")
     (apply string-append
            (let ([n (length items)])
              (let loop ([i n] [r '()])
@@ -1143,17 +1150,28 @@
                                        r))]))))
     "\n\n"))
 
-(define (create-exercise-itemlist items #:ordered? [ordered? #t]
+(define (create-exercise-itemlist items #:ordered [ordered #t]
                                   #:itemstyle [itemstyle #f])
+  ;(printf "doing create-exercise-itemlist ~s\n" items)
   ;how to use itemstyle?
-  (create-itemlist #:style ordered?
-                   (map (lambda (item)
-                          (enclose-textarea
-                            (if (string=? *proglang* "pyret") ".pyret" ".racket")
-                            (string-or-los item)))
+  (create-itemlist #:style ordered
+                   (map (lambda (c)
+                          (enclose-div (or itemstyle ".ExerciseListItem")
+                                       (string-or-los c)))
                         items)))
 
-(define create-exercise-itemlist/contract-answers create-exercise-itemlist)
+(define (create-exercise-itemlist/contract-answers
+          contents
+          #:pyret [pyret #f] #:ordered [ordered #t])
+  ;(printf "doing create-exercise-itemlist/contract-answers ~s\n" contents)
+  (create-exercise-itemlist
+    #:ordered ordered
+    (map (lambda (c)
+           (list ((if pyret
+                      contract-exercise/pyret
+                      contract-exercise) "dummyid")
+                 c))
+         contents)))
 
 (define (two-col-layout #:leftcolextratag [leftcolextratag ""]
                         #:rightcolextratag [rightcolextratag ""]
@@ -1164,22 +1182,18 @@
          [paddedcolB (pad-to colB maxcollength "")]
          [leftcolstyle (string-append ".leftColumn" leftcolextratag)]
          [rightcolstyle (string-append ".rightColumn" rightcolextratag)])
-  (string-append
-    (format "[.twoColumnLayout~a]\n" layoutstyle)
-    (apply string-append
-           (map (lambda (lft rt)
-                  (string-append
-                    "- "
-                    (create-begin-tag "div" leftcolstyle)
-                    lft
-                    (create-end-tag "div")
-                    "\n"
-                    (create-begin-tag "div" rightcolstyle)
-                    rt
-                    (create-end-tag "div")
-                    "\n"))
-                paddedcolA paddedcolB))
-    "\n\n")))
+    (string-append
+      (format "[.twoColumnLayout~a]\n" layoutstyle)
+      (apply string-append
+             (map (lambda (lft rt)
+                    (string-append
+                      "- "
+                      (enclose-div leftcolstyle lft)
+                      "\n"
+                      (enclose-div rightcolstyle rt)
+                      "\n"))
+                  paddedcolA paddedcolB))
+      "\n\n")))
 
 (define questions-and-answers two-col-layout)
 
@@ -1223,20 +1237,14 @@
                    (when (and (< i 0) (not some-no-match?))
                      (error 'matching-exercise-answers "Couldn't find ~a in ~a\n"
                             ansC presented-ans))
-                   (string-append
-                     (create-begin-tag "div" ".labeledRightColumn")
+                   (enclose-div ".labeldRightColumn"
                      (if (>= i 0)
                          (let ([label (int->alpha i)])
                            (string-append
-                             (create-begin-tag "span" ".rightColumnLabel")
-                             label
-                             (create-end-tag "span")
+                             (enclose-span ".rightColumnLabel" label)
                              ansF))
-                         (string-append
-                           (create-begin-tag "span" ".matchLabelAns")
-                           "No matching answer"
-                           (create-end-tag "span")))
-                     (create-end-tag "div"))))
+                         (enclose-span ".matchLabelAns"
+                           "No matching answer")))))
                formatted-ans (or content-of-ans formatted-ans))])
     (two-col-layout #:layoutstyle ".solutions.matching" ques annotated-ans)))
 
