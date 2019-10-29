@@ -1,4 +1,4 @@
-# last modified 2019-10-24
+# last modified 2019-10-29
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -185,6 +185,14 @@ EOF
   fi
 }
 
+function rmproglangsubdirs() {
+  d=$1
+  for f in pyret wescheme; do
+    rm -fr $d/$f
+  done
+}
+
+
 function buildworkbookpages() {
   L=$1
   echo
@@ -193,8 +201,8 @@ function buildworkbookpages() {
   #
   if test -d workbook-pages/$PROGLANG; then
     cp -p workbook-pages/$PROGLANG/* workbook-pages
-    rm -fr workbook-pages/$PROGLANG
   fi
+  rmproglangsubdirs workbook-pages
   #
   cp -pr workbook-pages solutions-pages
   if test -d workbook-sols-pages; then
@@ -205,17 +213,18 @@ function buildworkbookpages() {
     done
     if test -d workbook-sols-pages/$PROGLANG; then
       cp -p workbook-sols-pages/$PROGLANG/* solutions-pages
-      rm -fr workbook-sols-pages/$PROGLANG
     fi
     rm -fr workbook-sols-pages
   fi
   mv solutions-pages workbook-sols-pages
+  rmproglangsubdirs workbook-sols-pages
   #
   if test -d exercises; then
     if test -d exercises/$PROGLANG; then
       cp -p exercises/$PROGLANG/* exercises
       rm -fr exercises/$PROGLANG
     fi
+    rmproglangsubdirs exercises
     cp -pr exercises exercises-sols
   fi
   #
