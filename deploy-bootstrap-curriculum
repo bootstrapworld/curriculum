@@ -1,4 +1,4 @@
-# last modified 2019-10-17
+# last modified 2019-10-29
 
 if ! git rev-parse --is-inside-work-tree; then
   echo Not in a Git repo; exit
@@ -50,11 +50,11 @@ fi
 
 cd $DEPLOY_DIR
 
-find distribution -type d | xargs chmod g+r,o+rx
+find distribution -type d | xargs chmod g+rwx,o+rx
 
 cd distribution
 
-find . -type f | xargs chmod g+r,o+r
+find . -type f | xargs chmod g+rw,o+r
 
 cd ..
 
