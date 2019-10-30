@@ -1003,29 +1003,34 @@
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))]
         [(symbol? e) (format "~a" e)]
-        [(string? e) e]
+        [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
-                     (if (memq a '(+ - * /))
-                     (if (and (eq? a '/) (not pyret))
-                         (format "{~a \\over ~a}"
-                                 (sexp->arith (list-ref e 1))
-                                 (sexp->arith (list-ref e 2)))
-                         (let* ([a (if pyret a
-                                       (cond [(eq? a '*) "\\times"]
-                                             [(eq? a '/) "\\div"]
-                                             [else a]))]
-                                [x (format "~a ~a ~a"
-                                           (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)
-                                           a
-                                           (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t))])
-                           (if wrap
-                               (format "(~a)" x)
-                               x)))
-                         (format "~a(~a)"
+                     (if (memq a '(+ - * / and or < > = <= >=))
+                         (if (and (eq? a '/) (not pyret))
+                             (format "{~a \\over ~a}"
+                                     (sexp->arith (list-ref e 1))
+                                     (sexp->arith (list-ref e 2)))
+                             (let* ([a (if pyret a
+                                           (cond [(eq? a '*) "\\times"]
+                                                 [(eq? a '/) "\\div"]
+                                                 [else a]))]
+                                    [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
+                                    [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
+                                    [x (format "~a ~a ~a"
+                                               lft
+                                               a
+                                               rt)])
+                               (if wrap
+                                   (if pyret
+                                       (format "({zwsp}~a{zwsp})" x)
+                                       (format "(~a)" x))
+                                   x)))
+                         (format "~a{zwsp}({zwsp}~a{zwsp})"
                                  (sexp->arith a)
-                                 (apply string-append
-                                        (map (lambda (e1)
-                                               (sexp->arith e1 #:pyret pyret)) (cdr e))))
+                                 (string-join
+                                   (map (lambda (e1)
+                                          (sexp->arith e1 #:pyret pyret)) (cdr e))
+                                   ", "))
                          ))]
         [else (error 'sexp->arith "unknown s-exp ~s" e)]))
 
@@ -1096,7 +1101,15 @@
                                            (enclose-span ".rParen" ")"))))))]
         [else (error 'sexp->block "unknown s-exp")]))
 
-(define sexp sexp->block)
+(define (sexp exp #:form [form "circofeval"])
+  (when (string? exp)
+    (set! exp (with-input-from-string exp read)))
+  (cond [(string=? form "circofeval")
+         (sexp->coe exp)]
+        [(member form (list "code" "text"))
+                 (sexp->block exp)]
+        [else (sexp->block exp)]))
+
 
 (define (code x #:multi-line [multi-line #t])
   (enclose-textarea
