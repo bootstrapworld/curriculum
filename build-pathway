@@ -1,4 +1,4 @@
-# last modified 2019-10-29
+# last modified 2019-10-30
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -492,9 +492,12 @@ for f in $ARGS; do
   if test "$PROGLANG" = ""; then
     if test "$SRCPATHWAY" = bs-game-pathway -o "$SRCPATHWAY" = algebra; then
       export PROGLANG=wescheme; buildpathway
+      export PROGLANG=pyret; buildpathway
+    elif test "$SRCPATHWAY" = buggy-recipes; then
+      export PROGLANG=wescheme; buildpathway
+    else
+      export PROGLANG=pyret; buildpathway
     fi
-    export PROGLANG=pyret
-    buildpathway
     unset PROGLANG
   else
     buildpathway

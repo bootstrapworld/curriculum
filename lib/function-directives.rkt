@@ -563,7 +563,7 @@ Write the definition, giving variable names to all your input values...\n\n")
 
     (write-examples funname num-examples example-list buggy-example-list)
 
-    (write-definition funname param-list body)
+    (write-definition (or buggy-funname-defn funname) param-list body)
 
     )
 
