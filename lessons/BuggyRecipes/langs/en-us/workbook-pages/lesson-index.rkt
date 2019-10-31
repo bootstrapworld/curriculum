@@ -1,0 +1,10 @@
+(
+ "target-leap.adoc"
+ "circle-area.adoc"
+ "check-total.adoc"
+ "enough-carpet-p.adoc"
+ "enough-cash-p.adoc"
+ "equal-length-p.adoc"
+ "flower-name.adoc"
+ "scale-image.adoc"
+ )
