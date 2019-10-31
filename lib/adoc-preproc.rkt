@@ -997,15 +997,17 @@
                ans))))
 
 (define (sexp->coe e)
-  (enclose-div ".circleevalsexp" (sexp->block e)))
+  ;(printf "sexp->coe ~s\n" e)
+  (enclose-div ".circleevalsexp"
+    (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
-  ;(printf "doing sexp->arith ~s\n" e)
+  ;(when pyret (printf "doing sexp->arith ~s\n" e))
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))]
-        [(symbol? e) (format "~a" e)]
+        [(symbol? e) (sym-to-adocstr e #:pyret pyret)]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
                      (if (memq a '(+ - * / and or < > = <= >=))
@@ -1013,7 +1015,7 @@
                              (format "{~a \\over ~a}"
                                      (sexp->arith (list-ref e 1))
                                      (sexp->arith (list-ref e 2)))
-                             (let* ([a (if pyret a
+                             (let* ([a (if pyret (sexp->arith a #:pyret #t)
                                            (cond [(eq? a '*) "\\times"]
                                                  [(eq? a '/) "\\div"]
                                                  [else a]))]
@@ -1029,7 +1031,7 @@
                                        (format "(~a)" x))
                                    x)))
                          (format "~a{zwsp}({zwsp}~a{zwsp})"
-                                 (sexp->arith a)
+                                 (sexp->arith a #:pyret pyret)
                                  (string-join
                                    (map (lambda (e1)
                                           (sexp->arith e1 #:pyret pyret)) (cdr e))
@@ -1077,31 +1079,44 @@
        sexp->pyret
        sexp->wescheme) e))
 
-(define (sexp->block e)
-  ;(printf "doing sexp->block ~s\n" e)
+(define (sym-to-adocstr e #:pyret [pyret #f])
+  ;(printf "sym-to-adocstr ~s ~a\n" e pyret)
+  (cond [(and pyret (eq? e 'string=?)) "string-equal"]
+        [(eq? e '<=) "\\<="]
+        [else (format "~a" e)]))
+
+(define (sexp->block e #:pyret [pyret #f])
+  ;(printf "doing sexp->block ~s ~a\n" e pyret)
   (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
         [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
         [(number? e) (enclose-span ".value.wescheme-number" (format "~a" e))]
         [(string? e) (enclose-span ".value.wescheme-string" (format "~s" e))]
         [(boolean? e) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
         [(symbol? e)
-         (if (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
-             (enclose-span ".value.wescheme-symbol" "{nbsp}{nbsp}{nbsp}")
-             (enclose-span ".value.wescheme-symbol" (format "~a" e)))]
+         (enclose-span ".value.wescheme-symbol"
+           (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
+                  "{nbsp}{nbsp}{nbsp}"]
+                 [else (sym-to-adocstr e #:pyret pyret)]))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
-                                   (if (symbol? a)
-                                       (let ([args (intersperse-spaces (map sexp->block (cdr e)) 'args)])
-                                         (string-append
-                                           (enclose-span ".lParen" "(")
-                                           (enclose-span ".operator" (sexp->block a))
-                                           args
-                                           (enclose-span ".rParen" ")")))
-                                       (let ([parts (intersperse-spaces (map sexp->block e) #f)])
-                                         (string-append
-                                           (enclose-span ".lParen" "(")
-                                           parts
-                                           (enclose-span ".rParen" ")"))))))]
+                       (if (symbol? a)
+                           (let ([args (intersperse-spaces
+                                         (map (lambda (e1)
+                                                (sexp->block e1 #:pyret pyret))
+                                              (cdr e)) 'args)])
+                             (string-append
+                               (enclose-span ".lParen" "(")
+                               (enclose-span ".operator" (sexp->block a #:pyret pyret))
+                               args
+                               (enclose-span ".rParen" ")")))
+                           (let ([parts (intersperse-spaces
+                                          (map (lambda (e1)
+                                                 (sexp->block e1 #:pyret pyret))
+                                               e) #f)])
+                             (string-append
+                               (enclose-span ".lParen" "(")
+                               parts
+                               (enclose-span ".rParen" ")"))))))]
         [else (error 'sexp->block "unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
@@ -1110,9 +1125,8 @@
   (cond [(string=? form "circofeval")
          (sexp->coe exp)]
         [(member form (list "code" "text"))
-                 (sexp->block exp)]
-        [else (sexp->block exp)]))
-
+                 (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
+        [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
 (define (code x #:multi-line [multi-line #t])
   (enclose-textarea
