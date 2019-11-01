@@ -53,9 +53,10 @@
                      [(and scheme? (char=? c #\@))
                       (let* ([directive (read-word i)]
                              [gp (read-group i directive #:scheme? #t)])
-                        (when (string=? directive "code")
-                          (set! gp (sexp->code (with-input-from-string gp read))))
                         ;(printf "dir=~a gp= ~s\n" directive gp)
+                        (when (string=? directive "code")
+                          (set! gp (code gp)))
+                        ;(printf "dir=~a gp'= ~s\n" directive gp)
                         (loop (append (quote-rev-string gp) r)
                               #f nesting #f #f))]
                      [(char=? c #\")
