@@ -1,0 +1,90 @@
+= Design Recipe Exercise Answer Key
+
+.target-leap
+
+1. First example should be `(EXAMPLE (target-leap 100) (* 100 2))`
+
+2. Second example should be `(EXAMPLE (target-leap 40) (* 40 2))`
+
+3. In the definition, the name of the function should be
+`target-leap`
+
+4. The variable name in the definition should be consistent
+(either `x` or `x-coor`)
+
+5. The body of the function definition should be `(* x-coor 2)`
+
+.circle-area
+
+1. The function body should be `(* (sqr (/ diameter 2)) (/ 22
+7))`
+
+.check-total
+
+1. The examples should use the function name `check-total` instead
+of `total`
+
+2. Both Examples have too many parentheses for the function call:
++
+`(EXAMPLE ( (total 20) ) ...)` should be `(EXAMPLE ( total 20
+) ...)`
+
+3. The `*` function must come before its inputs in the examples:
++
+`(EXAMPLE ... (+ (* 0.20 56.67) 56.67))`
+
+4. The function body should have the `*` and `+` functions
+reversed:
++
+`(+ (* 0.20 food-total) food-total)`
+
+
+.enough-carpet?
+
+1. The range of the functoin should be a boolean
+
+2. The example inputs should not be in parentheses
+
+3. Both the examples and the function definition should use `<=`
+instead of `<`
+
+
+.enough-cash?
+
+1. The domain of the function should be a number (representing
+the price), not a string
+
+2. The two examples should give numbers as an input and test if
+they are less than 1.50. For instance, `(EXAMPLE (enough-cash?
+4.50) (<= 4.50 1.50))`
+
+3. The variable name in the function body can be `item`, but a
+more accurate name would be `price` or `cost`
+
+
+.equal-length?
+
+1. The function body should be
++
+`(= (string-length string1) (string-length string2))`
+
+.flower-name
+
+1. The second example should be
++
+`(EXAMPLE (flower-name "purple") "tulip")`
+
+.scale-image
+
+1. The purpose statement doesn't specify what strings matter, or
+how much to scale by
++
+The Examples do not use the scale function at all, and instead
+change the parameters of the image. The first Example should be:
++
+----
+(EXAMPLE (scale-image (circle 5 "solid" "red") "bigger")
+         (scale 2 (circle 5 "solid" "red"))
+----
+
+2. The function name in the second example is incorrect

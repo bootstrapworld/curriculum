@@ -1,4 +1,4 @@
-# last modified 2019-10-30
+# last modified 2019-10-31
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -148,6 +148,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
     -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
+    \
+    -e 's/&#8656;/\&lt;=/g' \
+    \
     $f
   if test "$mathjaxneeded" != ""; then
     cat > mathjax.txt <<EOF
@@ -205,6 +208,7 @@ function buildworkbookpages() {
   rmproglangsubdirs workbook-pages
   #
   cp -pr workbook-pages solutions-pages
+  cp -p $PROGDIR/.hta* solutions-pages
   if test -d workbook-sols-pages; then
     for f in workbook-sols-pages/*; do
       if test -f $f; then

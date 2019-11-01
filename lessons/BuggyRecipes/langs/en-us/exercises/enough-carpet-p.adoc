@@ -11,10 +11,10 @@
 #:purpose "Given length and width of a room, is the area <= 100
 sq feet?"
 #:buggy-example-list 
-'([(enough-carpet? (10 15)) (<= (* 10 15) 100)]
-  [(enough-carpet? (9 10)) (<= (* 9 10) 100)])
+'([(enough-carpet? (10 15)) (< (* 10 15) 100)]
+  [(enough-carpet? (9 10)) (< (* 9 10) 100)])
 #:param-list (list "length" "width")
-#:body '(<= (* length width) 100)
+#:body '(< (* length width) 100)
 }
                        
                                 
