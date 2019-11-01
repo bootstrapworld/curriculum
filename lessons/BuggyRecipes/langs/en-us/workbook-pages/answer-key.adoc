@@ -2,9 +2,13 @@
 
 .target-leap
 
-1. First example should be `(EXAMPLE (target-leap 100) (* 100 2))`
+1. First example should be 
++
+`(EXAMPLE (target-leap 100) (* 100 2))`
 
-2. Second example should be `(EXAMPLE (target-leap 40) (* 40 2))`
+2. Second example should be 
++
+`(EXAMPLE (target-leap 40) (* 40 2))`
 
 3. In the definition, the name of the function should be
 `target-leap`
@@ -14,10 +18,31 @@
 
 5. The body of the function definition should be `(* x-coor 2)`
 
+.offscreen?
+
+1. The Purpose Statement should include “return true is the coordinate is less
+than -50 and greater than 690”
+
+2. Both examples should show the work, not just the answer:
++
+a. `(EXAMPLE (offscreen? 60) (or (< 60 -50) (> 60 690)))` 
++
+b. `(EXAMPLE (offscreen? 800) (or (< 8000 -50) (> 800 690)))`
+
+3. The function definition should use the function `or` instead of `and`
+
+.calc-pencils
+
+1. Both examples should multiply by 5
+
+2. The variable should be more descriptive: s, or students, to represent the
+number of students
+
 .circle-area
 
-1. The function body should be `(* (sqr (/ diameter 2)) (/ 22
-7))`
+1. The function body should be 
++
+`(* (sqr (/ diameter 2)) (/ 22 7))`
 
 .check-total
 
@@ -74,13 +99,25 @@ more accurate name would be `price` or `cost`
 +
 `(EXAMPLE (flower-name "purple") "tulip")`
 
+.long-name?
+
+1. Both examples should use the function `string-length`, not `string=?`
+
+2. The examples should check if the name is longer than 20 characters, not 10
+
+3. The function name in the definition should be `long-name?`
+
+4. The body of the function should be 
++
+`(< (string-length name) 20)`
+
 .scale-image
 
 1. The purpose statement doesn't specify what strings matter, or
 how much to scale by
 +
 The Examples do not use the scale function at all, and instead
-change the parameters of the image. The first Example should be:
+change the parameters of the image. The first example should be:
 +
 ----
 (EXAMPLE (scale-image (circle 5 "solid" "red") "bigger")
@@ -88,3 +125,23 @@ change the parameters of the image. The first Example should be:
 ----
 
 2. The function name in the second example is incorrect
+
+.state-tax
+
+1. The domain for the function should be `String Number` to account for both
+the state and the price of the item
+
+2. The function name in both examples should be `state-tax`
+
+3. The example inputs (“Delaware” and “Georgia”) should be Strings
+
+4. Examples should include a numerical price instead of the variable name
+`price`
+
+5. The examples should use `*` not `+`
+
+.late-to-class?
+
+1. Both examples should include 4 numbers as inputs
+
+2. In the first example, `<` should be used in place of `>`
