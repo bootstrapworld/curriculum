@@ -1130,9 +1130,11 @@
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
 (define (code x #:multi-line [multi-line #t])
-  (enclose-textarea
-    (if (string=? *proglang* "pyret")
-        ".pyret" ".racket") x))
+  (let ([pyret? (string=? *proglang* "pyret")])
+    (enclose-textarea
+      (if pyret? ".pyret" ".racket")
+      (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
+          x))))
 
 (define elem string-append)
 
