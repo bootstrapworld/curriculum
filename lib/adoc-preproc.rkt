@@ -1234,9 +1234,10 @@
 (define completion-exercise two-col-layout)
 
 (define (open-response-exercise colA answer-type)
-  ;check answer-type is valid
+  (unless (member answer-type '("circeval" "code" "math" "text"))
+    (error 'open-response-exercise "Unexpected answer type ~a\n" answer-type))
   (two-col-layout colA '()
-                  #:rightcolextratag (string-append ".studentAnswer" answer-type)))
+                  #:rightcolextratag (string-append ".studentAnswer" "." answer-type)))
 
 (define (matching-exercise #:permute [permute #f]
                            colA colB)
