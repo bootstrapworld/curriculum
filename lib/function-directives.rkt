@@ -30,10 +30,10 @@
 
 (define (encoded-ans style s show?)
   ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
-  (format "[.studentAnswer~a.~a~a]##~a##"
-          (if (string=? style ".recipe_purpose")
-              "" ".studentAnswerCode")
-          (if show? "solution" "blank")
+  (format "[~a~a~a~a]##~a##"
+          (if (string=? style "") "" ".studentAnswer")
+          (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+          (if show? ".solution" ".blank")
           style
           (if show? s
               (let ([n (string-length (if (string? s) s (format "~a" s)))])
@@ -326,7 +326,7 @@ Write the definition, giving variable names to all your input values...\n\n")
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
-                          (write-large "))"))))]
+                          (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
                   [else
                     ""
                     #;(write-wrapper ".recipe_line"
@@ -436,8 +436,8 @@ Write the definition, giving variable names to all your input values...\n\n")
   (format "~a" s)
   )
 
-(define (write-large s)
-  (format "[.bigparen]##~a##" s))
+(define (write-large s #:tag [tag ""])
+  (format "[.bigparen~a]##~a##" tag s))
 
 (define *wrapper-block-level* 0)
 

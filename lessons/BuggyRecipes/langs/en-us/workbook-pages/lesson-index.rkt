@@ -11,5 +11,5 @@
  "long-name.adoc"
  "scale-image.adoc"
  "state-tax.adoc"
- "late-to-class.adoc"
+ "late-to-class-p.adoc"
  )
