@@ -751,7 +751,9 @@
                                       [(file-exists? pdff) (set! f pdff)])
                                 (fprintf *debug-links-port* "link:~a[~a]\n\n" f link-text)
                                 (fprintf o "link:~a[~a~a]" f link-text
-                                         (if (getenv "LESSONPLAN") ", window=\"_blank\"" "")))]
+                                         (if (or (getenv "LESSONPLAN")
+                                                 (getenv "TEACHER_RESOURCES"))
+                                             ", window=\"_blank\"" "")))]
                              [(string=? directive "lesson-description")
                               (unless (getenv "LESSON")
                                 (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
