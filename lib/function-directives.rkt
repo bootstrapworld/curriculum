@@ -11,6 +11,8 @@
 (unless (member *proglang* '("pyret" "wescheme"))
   (error 'function-directives.rkt "Unknown proglang ~a" *proglang*))
 
+(define *pyret?* (string=? *proglang* "pyret"))
+
 (define *show-funname-contract?* #f)
 (define *show-domains?* #f)
 (define *show-range?* #f)
@@ -96,17 +98,20 @@ Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          (if (string=? *proglang* "pyret") "" "&#59; ")
+          (if *pyret?* "" "&#59; ")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
-          (if (string=? *proglang* "pyret") "::" ":")
-          (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
-          "→"
+          (if *pyret?* "::" ":")
+          (encoded-ans ".recipe_domain"
+                       ((if *pyret?*
+                            vars-to-commaed-string
+                            vars-to-string) domain-list) *show-domains?*)
+          "->"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
     (write-wrapper-scan ".recipe_graf"
       (lambda ()
         (string-append
-          (format "[.purpose_comment]##~a##" (if (string=? *proglang* "pyret") "&#35; " ";")) 
+          (format "[.purpose_comment]##~a##" (if *pyret?* "&#35; " ";"))
           " "
           (encoded-ans ".recipe_purpose" purpose *show-purpose?*))))))
 
@@ -120,7 +125,7 @@ Examples\n
 Write some examples, then circle and label what changes...\n\n")
     ;examples
 
-    (if (string=? *proglang* "pyret")
+    (if *pyret?*
         (write-wrapper ".recipe_example_line"
           (lambda ()
             (write-spaced (highlight-keywords "examples:"))))
@@ -162,7 +167,7 @@ Write some examples, then circle and label what changes...\n\n")
                                      (write-each-example funname '() '() #f)))))]
                  ))
 
-    (if (string=? *proglang* "pyret")
+    (if *pyret?*
         (write-wrapper ".recipe_example_line"
           (lambda ()
             (write-spaced (highlight-keywords "end"))))
