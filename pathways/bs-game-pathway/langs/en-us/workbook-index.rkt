@@ -1,4 +1,5 @@
 (
+ "Supplemental"
  "BSABigIdeas"
  "CoordinatePlane1"
  "CoordinatePlane2"
@@ -17,5 +18,4 @@
  "PiecewiseFunctions"
  "PiecewiseFunctions2"
  "DistanceFormula1"
- "Supplemental"
  )
