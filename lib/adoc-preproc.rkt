@@ -1093,8 +1093,10 @@
 
 (define (sym-to-adocstr e #:pyret [pyret #f])
   ;(printf "sym-to-adocstr ~s ~a\n" e pyret)
-  (cond [(and pyret (eq? e 'string=?)) "string-equal"]
-        [(and pyret (eq? e 'sqrt)) "num-sqrt"]
+  (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
+                     [(eq? e 'sqrt) "num-sqrt"]
+                     [(eq? e '=) "=="]
+                     [else (format "~a" e)])]
         [(eq? e '<=) "\\<="]
         [else (format "~a" e)]))
 
