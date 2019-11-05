@@ -1,4 +1,4 @@
-# last modified 2019-11-05
+# last modified 2019-11-01
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -322,20 +322,21 @@ function buildlessonplan() {
   cd ..
 }
 
-function buildeachlesson() {
-  export LESSON=$1
-  buildworkbookpages $LESSON
-  export LESSONPLAN=$LESSON
-  buildlessonplan $LESSONPLAN
-  unset LESSONPLAN
-  unset LESSON
-}
-
 function buildlessons() {
+  #echo doing buildlessons
   cd lessons
-  if test -f lessons.txt; then
-    cat lessons.txt | xargs buildeachlesson
-  fi
+  for L in *; do
+    if test ! -d $L; then
+      echo WARNING: No lessons in pathway $PATHWAY
+    else
+      export LESSON=$L
+      buildworkbookpages $L
+      export LESSONPLAN=$L
+      buildlessonplan $L
+      unset LESSONPLAN
+      unset LESSON
+    fi
+  done
   cd ..
 }
 
