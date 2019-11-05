@@ -1,4 +1,4 @@
-# last modified 2019-11-01
+# last modified 2019-11-05
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -347,7 +347,9 @@ function buildpathway() {
 
   # special-casing only algebra and bs-game-pathway,
   # as they're the only pathways that allow two prog langs
-  if test "$SRCPATHWAY" = bs-game-pathway -o "$SRCPATHWAY" = algebra; then
+  if test "$SRCPATHWAY" = bs-game-pathway -o \
+          "$SRCPATHWAY" = algebra -o \
+          "$SRCPATHWAY" = buggy-recipes; then
     PATHWAY=$SRCPATHWAY-$PROGLANG
   elif test "$PROGLANG" = wescheme; then
     PATHWAY=$SRCPATHWAY-wescheme
@@ -495,11 +497,11 @@ for f in $ARGS; do
   export SRCPATHWAY=${SRCPATHWAY#pathways/}
   export SRCPATHWAY=${SRCPATHWAY%/}
   if test "$PROGLANG" = ""; then
-    if test "$SRCPATHWAY" = bs-game-pathway -o "$SRCPATHWAY" = algebra; then
+    if test "$SRCPATHWAY" = bs-game-pathway -o \
+            "$SRCPATHWAY" = algebra -o \
+            "$SRCPATHWAY" = buggy-recipes; then
       export PROGLANG=wescheme; buildpathway
       export PROGLANG=pyret; buildpathway
-    elif test "$SRCPATHWAY" = buggy-recipes; then
-      export PROGLANG=wescheme; buildpathway
     else
       export PROGLANG=pyret; buildpathway
     fi

@@ -132,10 +132,13 @@ Write some examples, then circle and label what changes...\n\n")
         "")
 
     (apply string-append
-           (cond [(and #t (cons? buggy-example-list))
+           (cond [(cons? buggy-example-list)
                   ;(printf "doing buggy-example-list ~s\n" buggy-example-list)
                   (map (lambda (e)
-                         (write-each-example (caar e) (cdar e) (cadr e) #t))
+                         (let* ([n (- (length e) 1)]
+                                [body (list-ref e n)]
+                                [parms (take e n)])
+                           (write-each-example funname parms body #t)))
                        buggy-example-list) ]
                  [else
                    (let* ([example-list-len (length example-list)]
