@@ -1009,6 +1009,13 @@
   (enclose-div ".circleevalsexp"
     (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
+(define *hole-symbol* '++_______++)
+(define *hole2-symbol* '++____________________++)
+(define *hole3-symbol* *hole2-symbol*)
+
+(define *list-of-hole-symbols*
+  (list *hole-symbol* *hole2-symbol* *hole3-symbol*))
+
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
   ;(when pyret (printf "doing sexp->arith ~s\n" e))
   (cond [(number? e) (format "~a" e)]
@@ -1018,7 +1025,8 @@
         [(symbol? e) (sym-to-adocstr e #:pyret pyret)]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
-                     (if (memq a '(+ - * / and or < > = <= >=))
+                     (if (or (memq a '(+ - * / and or < > = <= >=))
+                             (memq a *list-of-hole-symbols*))
                          (if (and (eq? a '/) (not pyret))
                              (format "{~a \\over ~a}"
                                      (sexp->arith (list-ref e 1))
@@ -1046,10 +1054,6 @@
                                    ", "))
                          ))]
         [else (error 'sexp->arith "unknown s-exp ~s" e)]))
-
-(define *hole-symbol* '++_______++)
-(define *hole2-symbol* '++____________________++)
-(define *hole3-symbol* *hole2-symbol*)
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
