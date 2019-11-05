@@ -8,9 +8,6 @@
 
 (define *pdftk* (find-executable-path "pdftk"))
 
-(define *lessons*
-  (call-with-input-file "workbook-index.rkt" read))
-
 (define *workbook-page-specs*
   (call-with-input-file "workbook-page-index.rkt" read))
 

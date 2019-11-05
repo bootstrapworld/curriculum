@@ -326,20 +326,21 @@
       ;(format "link:{pathwayrootdir}~a[~a]" g link-text)
       )))
 
-(define (make-exercise-link lesson exerdir exer link-text include? as-is?)
-  ;(printf "make-exercise-link ~a ~a ~a\n" lesson exer link-text)
+(define (make-exercise-link lesson exerdir exer link-text
+                            #:include? [include? #f] #:as-is? [as-is? #f])
+  ;(printf "make-exercise-link ~a ~a ~a ~a ~a\n" lesson exerdir exer link-text as-is?)
   (let* ([g (string-append "lessons/" lesson "/"
                            (if as-is? exerdir
                                (if *solutions-mode?* "exercises-sols"
                                    "exercises")) "/" exer)]
          [f (string-append *pathway-root-dir* g)]
-         [exer.asc (path-replace-extension f ".asc")]
          [exer.html (path-replace-extension f ".html")]
          [exer.pdf (path-replace-extension f ".pdf")])
     (cond [(file-exists? exer.html) (set! g (path-replace-extension g ".html"))]
-          [(file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))])
+          [(file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))]
+          [(path-has-extension? g ".adoc") (set! g (path-replace-extension g ".html"))])
     (cond [include?
-            (let ([n -1])
+            (let ([exer.asc (path-replace-extension f ".asc")] [n -1])
               (when (file-exists? exer.asc)
                 ;(printf "exercising ~a\n" exer.asc)
                 (system (format "grep -n '^\\[\\.acknowledgment\\]' ~a|sed -e 's/^\\([^:]*\\):.*/\\1/' > temp2.txt" exer.asc))
@@ -659,7 +660,7 @@
                                      [n (length args)]
                                      [page (car args)]
                                      [link-text (if (> n 1) (cadr args) "")]
-                                     [page-compts (regexp-split #rx"/"  page)]
+                                     [page-compts (regexp-split #rx"/" page)]
                                      [first-compt (car page-compts)])
                                 (case (length page-compts)
                                   [(1)
@@ -684,12 +685,13 @@
                                                 (string=? first-compt "exercises-sols"))
                                             (add-exercise (format "~a/~a" lesson-dir page))
                                             (cond [lesson-dir
-                                                    (display (make-exercise-link lesson-dir
-                                                                                 first-compt
-                                                                                 second-compt
-                                                                                 link-text
-                                                                                 include?
-                                                                                 exercise-as-is?) o)]
+                                                    (display (make-exercise-link
+                                                               lesson-dir
+                                                               first-compt
+                                                               second-compt
+                                                               link-text
+                                                               #:include? include?
+                                                               #:as-is? exercise-as-is?) o)]
                                                   [else
                                                     (printf "WARNING: Incomplete exercise link ~a~n"
                                                             page)])]
@@ -711,14 +713,16 @@
                                   [(3)
                                    (let ([second-compt (cadr page-compts)]
                                          [third-compt (caddr page-compts)])
-                                     (cond [(string=? second-compt "exercises")
+                                     (cond [(or (string=? second-compt "exercises")
+                                                (string=? second-compt "exercises-sols"))
                                             (add-exercise page)
-                                            (display (make-exercise-link first-compt
-                                                                         second-compt
-                                                                         third-compt
-                                                                         link-text
-                                                                         include?
-                                                                         exercise-as-is?) o)]
+                                            (display (make-exercise-link
+                                                       first-compt
+                                                       second-compt
+                                                       third-compt
+                                                       link-text
+                                                       #:include? include?
+                                                       #:as-is? exercise-as-is?) o)]
                                            [(or (string=? second-compt "workbook-pages")
                                                 (string=? second-compt "workbook-sols-pages"))
                                             (display (make-worksheet-link first-compt

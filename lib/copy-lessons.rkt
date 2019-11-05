@@ -25,6 +25,11 @@
 
 (define *language* (getenv "LANGUAGE"))
 
+(call-with-output-file "lessons/lessons.txt"
+  (lambda (o)
+    (for ((lesson *workbook-index*))
+      (write lesson o) (newline o))))
+
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(~n")
