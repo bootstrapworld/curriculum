@@ -783,11 +783,12 @@
                                 (display (cadr s) o))]
                              [(assoc directive *function-list*) =>
                               (lambda (f)
-                                (let ([args (string-to-form (read-group i directive))])
-                                  (let-values ([(key-list key-vals args)
-                                                (rearrange-args args)])
-                                    (add-exercise-title (car args))
-                                    (display (keyword-apply (cadr f) key-list key-vals args) o))))]
+                                (let ([g (read-group i directive)])
+                                  (let ([args (string-to-form g)])
+                                    (let-values ([(key-list key-vals args)
+                                                  (rearrange-args args)])
+                                      (add-exercise-title (car args))
+                                      (display (keyword-apply (cadr f) key-list key-vals args) o)))))]
                              [else
                                (printf "WARNING: Unrecognized directive @~a~%" directive)
                                #f]))]
@@ -1204,6 +1205,7 @@
           contents
           #:pyret [pyret #f] #:ordered [ordered #t])
   ;(printf "doing create-exercise-itemlist/contract-answers ~s\n" contents)
+  (set! pyret (string=? *proglang* "pyret"))
   (create-exercise-itemlist
     #:ordered ordered
     (map (lambda (c)

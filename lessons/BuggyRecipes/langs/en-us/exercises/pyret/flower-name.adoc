@@ -1,5 +1,3 @@
-
-
 @assess-design-recipe{
   "flower-name"
     "You are putting together a list of flowers in your garden
@@ -9,16 +7,16 @@
 #:domain-list (list "String")
 #:range "String"
 #:purpose "Takes the name of the flower and returns its color"
-#:buggy-example-list 
+#:buggy-example-list
 '(["red" "rose"]
   ["tulip" "purple"]
   ["yellow" "daisy"])
 #:param-list (list "color")
-#:body 
-"if string-equal(color, \"red\"): \"rose\"
-else if string-equal(color, \"purple\"): \"tulip\"
-else if string-equal(color, \"yellow\"): \"daisy\"
-else \"That flower isn't in the garden!\""
+#:body
+"ask:
+  | color == \"red\" then: \"rose\"
+  | color == \"purple\" then: \"tulip\"
+  | color == \"yellow\" then: \"daisy\"
+  | otherwise: \"That flower isn't in the garden!\"
+end"
 }
-                       
-                                

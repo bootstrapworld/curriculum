@@ -1,5 +1,3 @@
-
-
 @assess-design-recipe{
   "scale-image"
     "Write a function that takes an image and a string,
@@ -10,17 +8,16 @@
 #:range "image"
 #:purpose "Make the image bigger or smaller, depending on the
 given string"
-#:buggy-example-list 
+#:buggy-example-list
 '(
 ["circle(5, \"solid\", \"red\")" "\"bigger\"" "circle(10, \"solid\", \"red\")"]
 ["triangle(20, \"solid\", \"blue\")" "\"smaller\"" "triangle(10,
 \"solid\", \"blue\")"])
 #:param-list (list "original-image" "scale-factor")
-#:body 
-"if string-equal(scale-factor, \"bigger\"): scale(2, original-image)
-else if string-equal(scale-factor, \"smaller\"): scale(0.5, original-image)
-else: original-image
+#:body
+"ask:
+  | scale-factor == \"bigger\" then: scale(2, original-image)
+  | scale-factor == \"smaller\" then: scale(0.5, original-image)
+  | otherwise: original-image
 end"
-               }
-                       
-                                
+}

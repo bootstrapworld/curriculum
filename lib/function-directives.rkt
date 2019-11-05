@@ -346,7 +346,7 @@ Write the definition, giving variable names to all your input values...\n\n")
 
 (define (write-body-line/pyret body-line)
   ;(printf "write-body-line-p ~s\n" body-line)
-  (write-wrapper ".recipe_line"
+  (write-wrapper ".recipe_line.recipe_pyret_line"
     (lambda ()
       (string-append
         (encoded-ans "" "MM" #f)

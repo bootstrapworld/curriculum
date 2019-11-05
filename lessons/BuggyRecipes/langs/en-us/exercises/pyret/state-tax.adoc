@@ -9,9 +9,10 @@
   ["Georgia" "0.05 + price"])
 #:param-list (list "state price")
 #:body
-"if string-equal(state, \"Pennsylvania\"): 0.03 * price
-else if string-equal(state, \"New York\"): 0.08 * price
-else if string-equal(state, \"Delaware\"): 0.0 * price
-else: 0.05 * price
+"ask:
+  | state == \"Pennsylvania\" then: 0.03 * price
+  | state == \"New York\" then: 0.08 * price
+  | state == \"Delaware\" then: 0.0 * price
+  | otherwise: 0.05 * price
 end"
 } 
