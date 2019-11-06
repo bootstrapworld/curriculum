@@ -55,7 +55,9 @@ fi
 
 for proglang in wescheme pyret; do
   rm -fr $DEPLOY_DIR/algebra-$proglang-remix
+  rm -fr $DEPLOY_DIR/buggy-recipes-$proglang
   cp -prH distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
+  cp -prH distribution/buggy-recipes-$proglang $DEPLOY_DIR
 done
 
 if test "$ORIG_BRANCH" != gh-pages; then
