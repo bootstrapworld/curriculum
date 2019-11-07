@@ -288,43 +288,16 @@
 
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
   ;(printf "make-worksheet-link ~a ~a ~a ~a\n" lesson workbook-dir snippet link-text)
-  (let (
-        [snippet.adoc (path->string (path-replace-extension snippet ".adoc"))]
-        [snippet.html (path->string (path-replace-extension snippet ".html"))]
-        [snippet.pdf (path->string (path-replace-extension snippet ".pdf"))]
-        ;[link-text (if (string=? link-text "") link-text (string-append link-text ", "))]
-        [pno #f]
-        )
-    (let loop ([i 0])
-      (if (>= i *index-length*)
-          (printf "WARNING: Missing worksheet link ~a~n" snippet)
-          (let* ([entry (list-ref *index-list* i)]
-                 [lesson2 (car entry)] [snippet2 (cadr entry)])
-            (cond [(and (string=? lesson lesson2)
-                        (or (string=? snippet.adoc snippet2)
-                            (string=? snippet.html snippet2)
-                            (string=? snippet.pdf snippet2)))
-                   (set! pno (+ i 1))]
-                  [else (loop (+ i 1))]))))
-    (unless pno
-      (set! pno "?")
-      (printf "WARNING: Worksheet link ~a ~a ~a ~a with no page number~n"
-              lesson workbook-dir snippet link-text))
-    (let* ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)]
-           [f (string-append *pathway-root-dir* g)])
-      (set! snippet.html (path-replace-extension f ".html"))
-      (set! snippet.pdf (path-replace-extension f ".pdf"))
-      (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
-            [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])
-      ;should we also mention the workbook page this occurs on?
-      #|
-      (format "link:{pathwayrootdir}~a[~aPage ~a~a]" g link-text pno
-              (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
-      |#
-      (format "link:{pathwayrootdir}~a[~a~a]" g link-text
-              (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
-      ;(format "link:{pathwayrootdir}~a[~a]" g link-text)
-      )))
+  (let ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)])
+    (when (path-has-extension? snippet ".adoc")
+      (let* ([f (string-append *pathway-root-dir* g)]
+             [snippet.html (path-replace-extension f ".html")]
+             [snippet.pdf (path-replace-extension f ".pdf")])
+        (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
+              [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
+    (format "link:{pathwayrootdir}~a[~a~a]" g link-text
+            (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
+    ))
 
 (define (make-exercise-link lesson exerdir exer link-text
                             #:include? [include? #f] #:as-is? [as-is? #f])
@@ -1032,7 +1005,7 @@
                                      (sexp->arith (list-ref e 1))
                                      (sexp->arith (list-ref e 2)))
                              (let* ([a (if pyret (sexp->arith a #:pyret #t)
-                                           (cond [(eq? a '*) "\\times"]
+                                           (cond [(eq? a '*) "\\;\\times\\;"]
                                                  [(eq? a '/) "\\div"]
                                                  [else a]))]
                                     [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]

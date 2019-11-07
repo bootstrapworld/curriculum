@@ -1,4 +1,4 @@
-# last modified 2019-11-05
+# last modified 2019-11-07
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -146,7 +146,7 @@ function resolveabbrevs() {
     -e 's/@ENDCURRICULUM\(div\|pre\|span\|textarea\|tt\)/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
-    -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
+    -e 's/@BEGINCURRICULUMSCRIPT/>\\displaystyle /g' \
     -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
     \
     -e 's/&#8656;/\&lt;=/g' \
@@ -348,8 +348,7 @@ function buildpathway() {
   # special-casing only algebra and bs-game-pathway,
   # as they're the only pathways that allow two prog langs
   if test "$SRCPATHWAY" = bs-game-pathway -o \
-          "$SRCPATHWAY" = algebra -o \
-          "$SRCPATHWAY" = buggy-recipes; then
+          "$SRCPATHWAY" = algebra; then
     PATHWAY=$SRCPATHWAY-$PROGLANG
   elif test "$PROGLANG" = wescheme; then
     PATHWAY=$SRCPATHWAY-wescheme
@@ -498,8 +497,7 @@ for f in $ARGS; do
   export SRCPATHWAY=${SRCPATHWAY%/}
   if test "$PROGLANG" = ""; then
     if test "$SRCPATHWAY" = bs-game-pathway -o \
-            "$SRCPATHWAY" = algebra -o \
-            "$SRCPATHWAY" = buggy-recipes; then
+            "$SRCPATHWAY" = algebra; then
       export PROGLANG=wescheme; buildpathway
       export PROGLANG=pyret; buildpathway
     else
