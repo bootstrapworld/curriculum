@@ -1,4 +1,4 @@
-# last modified 2019-11-07
+# last modified 2019-11-08
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -146,7 +146,7 @@ function resolveabbrevs() {
     -e 's/@ENDCURRICULUM\(div\|pre\|span\|textarea\|tt\)/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
-    -e 's/@BEGINCURRICULUMSCRIPT/>\\displaystyle /g' \
+    -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
     -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
     \
     -e 's/&#8656;/\&lt;=/g' \
@@ -192,10 +192,11 @@ EOF
 function rmproglangsubdirs() {
   d=$1
   for f in pyret wescheme; do
-    rm -fr $d/$f
+    if test -d $d/$f; then
+      rm -fr $d/$f
+    fi
   done
 }
-
 
 function buildworkbookpages() {
   L=$1
@@ -227,11 +228,19 @@ function buildworkbookpages() {
   if test -d exercises; then
     if test -d exercises/$PROGLANG; then
       cp -p exercises/$PROGLANG/* exercises
-      rm -fr exercises/$PROGLANG
     fi
     rmproglangsubdirs exercises
     cp -pr exercises exercises-sols
   fi
+  #
+  for d in *; do
+    if test -d $d; then
+      if test -d $d/$PROGLANG; then
+        cp -p $d/$PROGLANG/* $d
+      fi
+      rmproglangsubdirs $d
+    fi
+  done
   #
   for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
     if test -d $d; then

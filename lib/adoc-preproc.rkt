@@ -295,6 +295,8 @@
              [snippet.pdf (path-replace-extension f ".pdf")])
         (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
               [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
+    (fprintf *debug-links-port* "link:~a[~a]" (build-path *pathway-root-dir* g)
+             link-text)
     (format "link:{pathwayrootdir}~a[~a~a]" g link-text
             (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
     ))
@@ -322,6 +324,8 @@
               ;(format "include::~a[]" exer.asc)
               )]
           [else
+            (fprintf *debug-links-port* "link:~a[~a]\n\n" (build-path *pathway-root-dir* g)
+                     link-text)
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
@@ -373,11 +377,11 @@
     ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n" g f f.html f.pdf)
     (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))])
+    (fprintf *debug-links-port* "link:~a[~a]" (build-path *pathway-root-dir* g)
+             link-text)
     (format "link:{pathwayrootdir}~a[~a]" g link-text)))
 
 (define *lesson-summary-file* #f)
-
-;(define *all-glossary-items* '())
 
 (define *asciidoctor*
   (format "asciidoctor -a linkcss -a proglang=~a -a pathway=~a -a stylesheet=~acurriculum.css"
@@ -1055,7 +1059,7 @@
 (define (sexp->math e)
   (string-append
     (format "@CURRICULUMSCRIPT")
-    (format "@BEGINCURRICULUMSCRIPT")
+    (format "@BEGINCURRICULUMSCRIPT\\displaystyle ")
     (sexp->arith e)
     (format "@ENDCURRICULUMSCRIPT")))
 
