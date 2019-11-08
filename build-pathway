@@ -1,4 +1,68 @@
-# last modified 2019-11-08
+#
+
+export LANGUAGE=en-us
+export PROGLANG=
+export DEBUG=false
+export NOPDF=false
+export VERIFYLINKS=false
+export HELP=false
+export VERSION=false
+export LASTMOD=2019-11-08 # last modified
+
+ARGS=
+while test $# -ne 0; do
+  arg=$1; shift
+  if test "$arg" = --help; then
+    HELP=true;
+  elif test "$arg" = --version; then
+    VERSION=true;
+  elif test "$arg" = --language; then
+    LANGUAGE=$1; shift
+  elif test "$arg" = --proglang; then
+    PROGLANG=$1; shift
+  elif test "$arg" = --debug; then
+    DEBUG=true;
+  elif test "$arg" = --nopdf; then
+    NOPDF=true;
+  elif test "$arg" = --verify-links; then
+    if which linkchecker | grep -q .; then
+      VERIFYLINKS=true;
+    fi
+  else
+    ARGS="$ARGS $arg"
+  fi
+done
+
+if $HELP; then
+  echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--nopdf] [--help] pathway ...
+  echo
+  echo Builds a document tree for the given pathway argument\(s\)
+  echo under the \'distribution\' directory. If no pathway arg supplied,
+  echo builds for all pathways in the \'pathways\' directory.
+  echo
+  echo Options:
+  echo "  " --help: Display this help and exit.
+  echo "  " --language L: Build doctree for natural language L. Default: en-us
+  echo "  " --proglang P: Build doctree for programming language P.
+  echo "             " P is one of wescheme, pyret.
+  echo "             " An appropriate default is used depending on the pathway.
+  echo "  " --debug: Keep around for inspection/debugging various temp files
+  echo "           " in the 'distribution' directory.
+  echo "  " --nopdf: Don\'t generate PDF files. This is to speed things up
+  echo "           " during debugging when PDF output isn\'t necessary.
+  echo "  " --verify-links: Verify all the links used in the doctree. A copy of
+  echo "                  " the report is also stored in invalid-links.html
+  echo "                  " in the pathway doctree\'s top directory.
+  echo "  " --version: Display build-way version and exit.
+  echo
+  echo Order of arguments/options doesn\'t matter.
+  exit
+fi
+
+if $VERSION; then
+  echo build-pathway version $LASTMOD
+  exit
+fi
 
 if test README.html -ot README.adoc; then
   asciidoctor -a linkcss README.adoc
@@ -27,29 +91,6 @@ cd distribution
 echo '== Generated Documentation' > index.adoc
 
 cd $TOPDIR
-
-export LANGUAGE=en-us
-export PROGLANG=
-
-export DEBUG=
-export NOPDF=
-#unset NOPDF
-
-ARGS=
-while test $# -ne 0; do
-  arg=$1; shift
-  if test "$arg" = --language; then
-    LANGUAGE=$1; shift
-  elif test "$arg" = --proglang; then
-    PROGLANG=$1; shift
-  elif test "$arg" = --debug; then
-    DEBUG=1;
-  elif test "$arg" = --nopdf; then
-    NOPDF=1;
-  else
-    ARGS="$ARGS $arg"
-  fi
-done
 
 if test "$ARGS" = ""; then
   ARGS="pathways/*"
@@ -273,7 +314,7 @@ function buildworkbookpages() {
           fhtml=${f%.adoc}.html
           fpdf=${f%.adoc}.pdf
           resolveabbrevs $fhtml
-          if test ! "$NOPDF"; then
+          if ! $NOPDF; then
             wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
           fi
         fi
@@ -323,7 +364,7 @@ function buildlessonplan() {
     resolveabbrevs index.html
     moveheaderlogopos index.html
     cleanuptitle index.html
-    if test ! "$NOPDF"; then
+    if ! $NOPDF; then
       #echo Creating lesson plan pdf
       wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
     fi
@@ -438,15 +479,15 @@ function buildpathway() {
 
     if test ! -f workbook-page-index.rkt; then
       echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-    elif test ! "$NOPDF"; then
+    elif ! $NOPDF; then
       export PATHWAYROOTDIR=""
       #cp -p $PROGDIR/front-cover-teacher.pdf .
       echo
       echo building pathway workbooks: $PATHWAY
-      if test ! "$DEBUG"; then
+      if $DEBUG; then
         $PROGDIR/make-workbook.rkt >/dev/null 2>&1
       else
-        $PROGDIR/make-workbook.rkt 
+        $PROGDIR/make-workbook.rkt
       fi
       rm -f workbook-numbered.*
     fi
@@ -492,6 +533,10 @@ function buildpathway() {
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
       #cleanuptitle index.shtml
+
+      if $VERIFYLINKS; then
+        linkchecker -F html/invalid-links.html --check-extern --no-status
+      fi
     fi
 
   fi
@@ -553,7 +598,7 @@ done
 
 asciidoctor -a linkcss index.adoc
 
-if test ! "$DEBUG"; then
+if ! $DEBUG; then
   rm -fr $PROGDIR
   for f in adoc asc rkt title txt; do
     find . -name \*.$f -delete

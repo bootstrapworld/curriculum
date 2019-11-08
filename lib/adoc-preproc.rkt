@@ -15,8 +15,6 @@
 
 (define *base-namespace* (current-namespace))
 
-(define *debug-links-port* #f)
-
 (define (read-word i)
   (let loop ([r '()])
     (let ([c (peek-char i)])
@@ -286,6 +284,10 @@
 (cond ((assoc "author" *copyright-info*) =>
        (lambda (c) (set! *copyright-author* (cadr c)))))
 
+(define (prefix-pathway-root-dir f)
+  (if (string=? *pathway-root-dir* "") f
+      (build-path *pathway-root-dir* f)))
+
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
   ;(printf "make-worksheet-link ~a ~a ~a ~a\n" lesson workbook-dir snippet link-text)
   (let ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)])
@@ -295,8 +297,6 @@
              [snippet.pdf (path-replace-extension f ".pdf")])
         (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
               [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
-    (fprintf *debug-links-port* "link:~a[~a]" (build-path *pathway-root-dir* g)
-             link-text)
     (format "link:{pathwayrootdir}~a[~a~a]" g link-text
             (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
     ))
@@ -324,8 +324,6 @@
               ;(format "include::~a[]" exer.asc)
               )]
           [else
-            (fprintf *debug-links-port* "link:~a[~a]\n\n" (build-path *pathway-root-dir* g)
-                     link-text)
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
@@ -377,8 +375,6 @@
     ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n" g f f.html f.pdf)
     (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))])
-    (fprintf *debug-links-port* "link:~a[~a]" (build-path *pathway-root-dir* g)
-             link-text)
     (format "link:{pathwayrootdir}~a[~a]" g link-text)))
 
 (define *lesson-summary-file* #f)
@@ -730,7 +726,6 @@
                                 ;(printf "doing @link of ~s~n" args)
                                 (cond [(file-exists? htmlf) (set! f htmlf)]
                                       [(file-exists? pdff) (set! f pdff)])
-                                (fprintf *debug-links-port* "link:~a[~a]\n\n" f link-text)
                                 (fprintf o "link:~a[~a~a]" f link-text
                                          (if (or (getenv "LESSONPLAN")
                                                  (getenv "TEACHER_RESOURCES"))
@@ -831,7 +826,7 @@
             (fprintf o "\n--\n\n")
             (fprintf o "[.copyright]\n")
             (fprintf o "--\n")
-            (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:~aCCbadge.png[], window=\"_blank\"]\n" *pathway-root-dir*)
+            (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}CCbadge.png[], window=\"_blank\"]\n")
             (fprintf o (create-copyright *copyright-name* *copyright-author*))
             (fprintf o "\n--\n")
             )
@@ -1290,13 +1285,8 @@
            (filter (lambda (x) (not (void? x))) body))))
 
 (define (main . cl-args)
-  (call-with-output-file "debug-links.asc"
-    (lambda (o)
-      (set! *debug-links-port* o)
-      (for ((arg cl-args))
-        ;only one though
-        (preproc-n-asciidoctor arg)))
-    #:exists 'append)
-  (asciidoctor "debug-links.asc"))
+  (for ((arg cl-args))
+    ;only one though
+    (preproc-n-asciidoctor arg)))
 
 ;(void)

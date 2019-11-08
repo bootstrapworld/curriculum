@@ -109,6 +109,8 @@ named anything, e.g., `teacher-resources.adoc`. If there are multiple
 teacher resources page. However, a file `index.adoc`, if it exists, will
 definitely be chosen for the teacher resources page.)
 
+=== The `build-pathway` script
+
 The top dir contains the script `build-pathway`. It takes any
 number of pathway arguments, an optional `--language`
 argument, and an optional `--proglang` argument.
@@ -168,6 +170,18 @@ associated with the pathway. It also points to the student
 workbook PDF. (The teacher, or solutions, workbook, can be
 referred to in the teacher resources page with the directive
 `@solutions-workbook`.)
+
+==== `build-pathway` debugging
+
+`build-pathway` takes a few other options that are mainly useful
+for debugging.
+
+- `--debug` retains various temp files in the generated doctree.
+- `--nopdf` avoids PDF generation to speed up the debugging process.
+- `--verify-links` reports invlaid links in the doctree (also in
+file `invalid-links.html`)
+- `--help` shows help for the build-pathway script.
+- `--version` shows the version of the script.
 
 == Deploying to `bootstrapworld.github.io/curriculum`
 
@@ -471,6 +485,8 @@ installation as for Asciidoctor.
 
 * TeX containing `pdflatex`. Install a suitable TeX system for
 your OS (for Linux, it’s `texlive`).
+
+* `linkchecker`, optional. Standard installation as for Asciidoctor.
 
 === A brief AsciiDoc intro
 
