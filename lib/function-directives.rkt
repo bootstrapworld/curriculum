@@ -137,9 +137,12 @@ Write some examples, then circle and label what changes...\n\n")
                   (map (lambda (e)
                          (let* ([n (- (length e) 1)]
                                 [body (list-ref e n)]
-                                [parms (take e n)])
-                           (write-each-example funname parms body #t)))
-                       buggy-example-list) ]
+                                [fun-call
+                                  (case *proglang*
+                                    [("wescheme") (car e)]
+                                    [("pyret") (take e n)])])
+                           (write-each-example (car fun-call) (cdr fun-call) body #t)))
+                       buggy-example-list)]
                  [else
                    (let* ([example-list-len (length example-list)]
                           [num-blank-examples (max 0 (- num-examples example-list-len))])
