@@ -7,7 +7,12 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-08 # last modified
+export LASTMOD=2019-11-15 # last modified
+
+# set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
+if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
+  DEBUG=true
+fi
 
 ARGS=
 while test $# -ne 0; do

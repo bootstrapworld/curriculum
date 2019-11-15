@@ -24,7 +24,7 @@
 
 (define *div-nesting* 0)
 
-(define *max-pyret-example-rhs-length* 30)
+(define *max-pyret-example-side-length* 30)
 
 (define (ft-list-ref s i)
   (let ([n (length s)])
@@ -201,8 +201,15 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "doing write-example/pyret args= ~s body= ~s\n" args body)
-  (when (null? body) (set! body ""))
+  (printf "doing write-example/pyret fun ~s args= ~s body= ~s\n" funname args body)
+  (when (pair? funname)
+    (set! args (cdr funname))
+    (set! funname (car funname)))
+  (unless (string? funname) (set! funname (format "~a" funname)))
+  (set! args (list-to-commaed-string args))
+  (cond [(null? body) (set! body "")]
+        [(pair? body) (set! body (format "~a" body))])
+  (set! body (regexp-replace* #rx"\n" body " "))
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
@@ -211,27 +218,22 @@ Write some examples, then circle and label what changes...\n\n")
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
-        (encoded-ans ".recipe_example_inputs" (list-to-commaed-string args) show-args?)
+        (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-        ;(write-clear)
-        ;(encoded-ans "" "MM" #f)
-        ;(write-spaced (highlight-keywords "is"))
-        ;(highlight-keywords " is ")
-        (cond ((and (string? body) (> (string-length body) *max-pyret-example-rhs-length*))
-               ;(printf "overlong example body\n")
+
+        (cond [(or (> (+ (string-length funname)
+                         (string-length args)) *max-pyret-example-side-length*)
+                   (> (string-length body) *max-pyret-example-side-length*))
                (string-append
                  (write-clear)
-                 (encoded-ans "" "MM" #f)
-                 (write-spaced (highlight-keywords "is "))
-                 (encoded-ans ".recipe_example_body_long" (highlight-keywords body) show-body?)
-                 ))
-              (else
-                (string-append
-                  (highlight-keywords " is ")
-                  (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-                  )))
-        ;(encoded-ans "" "MM" #f)
-        ;(encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                 (encoded-ans "" "MM" #f))]
+              [else " "])
+
+        (string-append
+          (highlight-keywords "is ")
+          (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+          )
+
         (write-clear)
         ))))
 
@@ -268,10 +270,10 @@ Write some examples, then circle and label what changes...\n\n")
 
 (define (list-to-commaed-string xx)
   (cond [(null? xx) " "]
-        [(= (length xx) 1) (format "~s" (car xx))]
-        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
+        [(= (length xx) 1) (format "~a" (car xx))]
+        [else (let loop ([xx (cdr xx)] [r (format "~a" (car xx))])
                 (if (null? xx) r
-                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
+                    (loop (cdr xx) (string-append r ", " (format "~a" (car xx))))))]))
 
 (define (vars-to-string xx)
   (let ([ans (apply string-append
