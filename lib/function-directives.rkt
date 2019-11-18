@@ -201,7 +201,7 @@ Write some examples, then circle and label what changes...\n\n")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  (printf "doing write-example/pyret fun ~s args= ~s body= ~s\n" funname args body)
+  ;(printf "doing write-example/pyret fun ~s args= ~s body= ~s\n" funname args body)
   (when (pair? funname)
     (set! args (cdr funname))
     (set! funname (car funname)))
