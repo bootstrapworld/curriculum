@@ -25,10 +25,10 @@
 (define *div-nesting* 0)
 
 (define *max-pyret-example-side-length* 30)
+(define *max-wescheme-cond-side-length* 32)
 
-(define (ft-list-ref s i)
-  (let ([n (length s)])
-    (and (< i n) (list-ref s i))))
+(define (mstring . strs)
+  (string-join strs "\n"))
 
 (define (encoded-ans style s show?)
   ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
@@ -79,22 +79,22 @@
         (if (string=? res "") " " res))))
 
 (define (write-directions page-header funname directions)
-  (format "\n
-[.designRecipeLayout]
-== [.dr-title]##~a: ~a##\n
-[.recipe_word_problem]
-**Directions**: ~a\n\n"
+  (format (mstring "\n\n[.designRecipeLayout]"
+            "== [.dr-title]##~a: ~a##"
+            ""
+            "[.recipe_word_problem]"
+            "**Directions**: ~a\n\n")
           page-header
           funname
           directions))
 
 (define (write-purpose funname domain-list range purpose)
   (string-append
-    (format "\n
-[.recipe_title]
-Contract and Purpose Statement\n
-[.recipe_instructions]
-Every contract has three parts...\n\n")
+    (mstring "\n\n[.recipe_title]"
+      "Contract and Purpose Statement"
+      ""
+      "[.recipe_instructions]"
+      "Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
@@ -118,11 +118,11 @@ Every contract has three parts...\n\n")
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
-    (format "\n
-[.recipe_title]
-Examples\n
-[.recipe_instructions]
-Write some examples, then circle and label what changes...\n\n")
+    (mstring "\n\n[.recipe_title]"
+      "Examples"
+      ""
+      "[.recipe_instructions]"
+      "Write some examples, then circle and label what changes...\n\n")
     ;examples
 
     (if *pyret?*
@@ -293,11 +293,11 @@ Write some examples, then circle and label what changes...\n\n")
 (define (write-definition/wescheme funname param-list body)
   (let ([cond? (and (pair? body) (eqv? (car body) 'cond))])
     (string-append
-      (format "\n
-[.recipe_title]
-Definition\n
-[.recipe_instructions]
-Write the definition, giving variable names to all your input values...\n\n")
+      (mstring "\n\n[.recipe_title]"
+        "Definition"
+        ""
+        "[.recipe_instructions]"
+        "Write the definition, giving variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
           (string-append
@@ -367,25 +367,25 @@ Write the definition, giving variable names to all your input values...\n\n")
                             (encoded-ans ".answers" (highlight-keywords (car otherwise-branch))
                                          *show-body?*)))]
                        [(string-contains? body-line "then:")
-                        (let* ([test-branch (string-split body-line " then: ")]
-                               [test (car test-branch)]
-                               [branch (cadr test-branch)]
+                        (let* ([test-action (string-split body-line " then: ")]
+                               [test (car test-action)]
+                               [action (cadr test-action)]
                                [test-len (string-length test)]
-                               [branch-len (string-length branch)])
-                          ;(printf "test-branch = ~s\n" test-branch)
+                               [action-len (string-length action)])
+                          ;(printf "test-action = ~s\n" test-action)
                           (string-append
                             (encoded-ans ".questions" test *show-body?*)
-                            (cond [(and *show-body?* (> (+ test-len branch-len) 50))
+                            (cond [(and *show-body?* (> (+ test-len action-len) 50))
                                    (string-append
                                      (write-clear)
                                      (encoded-ans "" "MM" #f)
                                      (encoded-ans "" "| " #f)
                                      (highlight-keywords "then: ")
-                                     (encoded-ans ".answers" branch *show-body?*))]
+                                     (encoded-ans ".answers" action *show-body?*))]
                                   [else
                                     (string-append
                                       (highlight-keywords " then: ")
-                                      (encoded-ans ".answers" branch *show-body?*))])))]
+                                      (encoded-ans ".answers" action *show-body?*))])))]
                        [else
                          (encoded-ans "" body-line *show-body?*)]))]
               [(regexp-match #rx"^(ask:|end)" body-line)
@@ -403,11 +403,11 @@ Write the definition, giving variable names to all your input values...\n\n")
              [but-last-body-lines (take body-lines n)]
              [last-body-line (car (drop body-lines n))])
         (string-append
-          (format "\n
-[.recipe_title]
-Definition\n
-[.recipe_instructions]
-Write the definition, giving variable names to all your input values...\n\n")
+          (mstring "\n\n[.recipe_title]"
+            "Definition"
+            ""
+            "[.recipe_instructions]"
+            "Write the definition, giving variable names to all your input values...\n\n")
           (write-null-wrapper ""
             (lambda ()
               (string-append
@@ -489,10 +489,20 @@ Write the definition, giving variable names to all your input values...\n\n")
                      (write-large "{startsb}")
                      (write-wrapper ".clause"
                        (lambda ()
-                         (string-append
-                           (encoded-ans ".questions" (expr-to-string (car clause)) *show-body?*)
-                           " "
-                           (encoded-ans ".answers" (list-to-string (cdr clause)) *show-body?*))))
+                         (let* ([test (expr-to-string (car clause))]
+                                [action (list-to-string (cdr clause))]
+                                [test-len (string-length test)]
+                                [action-len (string-length action)])
+                           (string-append
+                             (encoded-ans ".questions" test *show-body?*)
+                             (cond [;(and *show-body?* (> (+ test-len action-len) 57))
+                                    (or (> test-len *max-wescheme-cond-side-length*)
+                                        (> action-len *max-wescheme-cond-side-length*))
+                                    (string-append (write-clear)
+                                      (encoded-ans "" "MMMMMMM" #f)
+                                      (encoded-ans ".answers" action *show-body?*))]
+                                   [else (string-append " "
+                                           (encoded-ans ".answers" action *show-body?*))])))))
                      (write-large "{endsb}")))))
 
 (define (design-recipe-exercise funname directions

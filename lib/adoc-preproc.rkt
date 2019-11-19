@@ -1274,9 +1274,8 @@
 (define (exercise-handout #:title [title #f] #:instr [instr #f] #:forevidence [forevidence #f]
                           . body)
   (string-append
-    (format "\n
-== ~a\n\n"
-            (if title (format "Exercise: ~a" title) "Exercise")
+    (format "\n\n== Exercise~a\n\n"
+            (if title (format ": ~a" title) "")
             )
     (if instr
         (format "*Directions*: ~a\n\n" instr)
