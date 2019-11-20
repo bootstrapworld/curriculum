@@ -1,8 +1,8 @@
 #lang racket
 
-(provide *obsolescent-standards-list*)
+(provide *old-standards-list*)
 
-(define *obsolescent-standards-list*
+(define *old-standards-list*
 '(
 
 ; Old versions of standards below this line

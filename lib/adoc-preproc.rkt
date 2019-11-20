@@ -1,5 +1,6 @@
 ":"; exec racket -f $0 -m -- "$@"
 
+(require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
@@ -121,21 +122,6 @@
       (error 'span "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
-(define (create-begin-tag tag-name classes)
-  (let ([classes (regexp-split #rx"\\." (substring classes 1))])
-    (string-append
-      "@CURRICULUM" tag-name
-      (cond [(pair? classes) (string-append
-                               " class=\""
-                               (string-join classes " ")
-                               "\"")]
-            [else ""])
-      "@BEGINCURRICULUM" tag-name)))
-
-(define (create-end-tag tag-name)
-  (string-append
-    "@ENDCURRICULUM" tag-name))
-
 (define (display-begin-span span-args o)
   (grow-span-stack)
   (display (create-begin-tag "span" span-args) o))
@@ -254,7 +240,6 @@
   (newline o)
   (when (getenv "NARRATIVE") (error ' include-glossary "deadc0de"))
   (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
-  ;(fprintf o "include::./~a[]~%~%" "index-standards.asc")
   )
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
@@ -359,11 +344,9 @@
         [text (clean-up-image-text (car opts))]
         [rest-opts (cdr opts)])
     (set! opts (string-join rest-opts ", "))
-    ;(printf "text = ~s\n" text)
-    ;(printf "opts = ~s\n" opts)
     (string-append
       (format "[.tooltip.centered-image]\n")
-      (format "@CURRICULUMspan class=\"tooltiptext\"@BEGINCURRICULUMspan ~a @ENDCURRICULUMspan\n" text)
+      (enclose-span ".tooltiptext" text) "\n"
       (let ([text (clean-up-url-in-image-text text)])
         (if lesson
             (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
@@ -391,6 +374,11 @@
           *proglang*
           (getenv "SRCPATHWAY")
           *pathway-root-dir*))
+
+(define *standards-dictionaries*
+  (map car *standards-alist*))
+
+(define *dictionaries-represented* '())
 
 (define (preproc-n-asciidoctor in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
@@ -812,10 +800,11 @@
 
           (when (getenv "NARRATIVE")
             (link-to-lessons-in-pathway o)
+            (create-standards-subfiles standards-met)
 
             (print-other-resources-intro o)
             (print-link-to-glossary o)
-            (print-link-to-standards o)
+            (print-link-to-standards *dictionaries-represented* o)
             (print-link-to-student-workbook o)
             (print-link-to-teacher-resources o)
             (print-link-to-forum o)
@@ -843,8 +832,8 @@
             (getenv "LESSONPLAN"))
     (create-glossary-subfile glossary-items))
 
-  (when (getenv "NARRATIVE")
-    (create-standards-subfile standards-met))
+;  (when (getenv "NARRATIVE")
+;    (create-standards-subfiles standards-met))
 
   ;(printf "exercises-done = ~s\n" exercises-done)
 
@@ -863,7 +852,10 @@
          (accumulate-glossary-and-standards glossary-items standards-met)]
         [(getenv "NARRATIVE")
          (asciidoctor "-a title=Glossary index-glossary.asc")
-         (asciidoctor "-a title=Standards index-standards.asc")])
+         (for ([dict *dictionaries-represented*])
+           ;(printf "creating index-~a-standards.html\n" dict)
+           (asciidoctor
+             (format "-a title='~a Standards' index-~a-standards.asc" dict dict)))])
 
   (asciidoctor out-file)))
 
@@ -893,42 +885,49 @@
         (fprintf op "~%~%")))
     #:exists 'replace))
 
-(define (create-standards-subfile standards-met)
-  ;(printf "doing create-standards-subfile ~s\n" standards-met)
-  (call-with-output-file "index-standards.asc"
+(define (create-standards-subfiles standards-met)
+  ;(printf "doing create-standards-subfiles ~s\n" standards-met)
+  (unless (empty? standards-met)
+    (for ([dict *standards-dictionaries*])
+      (let ([dict-standards-met
+              (filter (lambda (s) (string=? (list-ref s 3) dict))
+                      standards-met)])
+        (unless (empty? dict-standards-met)
+          (set! *dictionaries-represented* (cons dict *dictionaries-represented*))
+          (create-standards-subfile
+            dict (sort dict-standards-met #:key car string-ci<=?)))))))
+
+(define (create-standards-subfile dict standards-met)
+  ;(printf "doing create-standards-subfile ~a ~s\n" dict standards-met)
+  (call-with-output-file (format "index-~a-standards.asc" dict)
     (lambda (op)
-      (unless (empty? standards-met)
-        (set! standards-met
-          (sort standards-met #:key car string-ci<=?))
-        (fprintf op (if (getenv "LESSON")
-                        ".Standards Statements\n"
-                        "= Standards Statements\n\n"))
-        ;(fprintf op "[#standards]~%")
-        (fprintf op "[.standards-hierarchical-table]~%")
-        (for-each
-          (lambda (s)
-            ;(printf "s= ~s\n" s)
-            (let ([sublist-items (unbox (list-ref s 1))]
-                  [s (list-ref s 2)]
-                  [dict (list-ref s 3)]
-                  [lessons (unbox (list-ref s 4))])
-              (fprintf op "~a:: " (car s))
-              (fprintf op "~a\n" (cadr s))
-              (unless (getenv "LESSON")
-                (when (> (length lessons) 0)
-                  (fprintf op "{startsb}See: ~a.{endsb}\n"
-                           (string-join
-                             (map
-                               (lambda (x)
-                                 (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
-                               lessons) ";"))))
-              (for-each (lambda (n)
-                          (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                          (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                          )
-                        sublist-items)))
-          standards-met)
-        (fprintf op "~%~%")))
+      (fprintf op "= ~a Standards Statements\n\n" dict)
+      ;(fprintf op "[#standards]~%")
+      (fprintf op "[.standards-hierarchical-table]~%")
+      (for-each
+        (lambda (s)
+          ;(printf "s= ~s\n" s)
+          (let ([sublist-items (unbox (list-ref s 1))]
+                [s (list-ref s 2)]
+                ;[dict (list-ref s 3)]
+                [lessons (unbox (list-ref s 4))])
+            (fprintf op "~a:: " (car s))
+            (fprintf op "~a\n" (cadr s))
+            (unless (getenv "LESSON")
+              (when (> (length lessons) 0)
+                (fprintf op "{startsb}See: ~a.{endsb}\n"
+                         (string-join
+                           (map
+                             (lambda (x)
+                               (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
+                             lessons) ";"))))
+            (for-each (lambda (n)
+                        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                        )
+                      sublist-items)))
+        standards-met)
+      (fprintf op "~%~%"))
     #:exists 'replace)
   )
 
@@ -949,23 +948,6 @@
   )
 
 ;coe
-
-(define (enclose-tag tag classes s)
-  (string-append
-    (create-begin-tag tag classes)
-    s
-    (create-end-tag tag)))
-
-(define (enclose-div classes s)
-  (enclose-tag "div" classes s))
-
-(define (enclose-textarea classes s)
-  (let ([textarea "tt"]) ;shd be "textarea" eventually
-    (enclose-div ".obeyspaces"
-                 (enclose-tag textarea classes s))))
-
-(define (enclose-span classes s)
-  (enclose-tag "span" classes s))
 
 (define (hspace n)
   (enclose-span ".hspace"

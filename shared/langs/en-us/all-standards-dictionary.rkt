@@ -5,9 +5,12 @@
 (require "ccss-standards-dictionary.rkt")
 (require "csta-standards-dictionary.rkt")
 (require "ok-standards-dictionary.rkt")
+(require "old-standards-dictionary.rkt")
 
 (define *standards-alist*
   (list
-    (cons "ccss" *ccss-standards-list*)
-    (cons "csta" *csta-standards-list*)
-    (cons "ok" *ok-standards-list*)))
+    (cons "CCSS" *ccss-standards-list*)
+    (cons "CSTA" *csta-standards-list*)
+    (cons "OK" *ok-standards-list*)
+    (cons "OLD" *old-standards-list*)
+    ))

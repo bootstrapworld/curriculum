@@ -2,6 +2,8 @@
 #|
 |#
 
+(require "html-tag-gen.rkt")
+
 (provide *function-list*)
 
 (define *solutions-mode?* (getenv "SOLUTION"))
@@ -26,9 +28,6 @@
 
 (define *max-pyret-example-side-length* 30)
 (define *max-wescheme-cond-side-length* 32)
-
-(define (mstring . strs)
-  (string-join strs "\n"))
 
 (define (encoded-ans style s show?)
   ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
