@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-15 # last modified
+export LASTMOD=2019-11-19 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -109,10 +109,13 @@ PROGDIR=$TOPDIR/prog
 
 cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
 
-# just in case shared/langs/$LANGUAGE isn't sufficiently populated
+# if $LANGUAGE != en-us, and
+# shared/langs/$LANGUAGE isn't sufficiently populated,
+# we'll put in the en-us files first and shadow them later
+#
 cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
 
-if test -d $TOPDIR/shared/langs/$LANGUAGE; then
+if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
   cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
 fi
 

@@ -7,7 +7,7 @@
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
-(require "standards-dictionary.rkt")
+(require "all-standards-dictionary.rkt")
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
@@ -165,16 +165,23 @@
                       [else #f])
                 (loop (cdr L))))))))
 
-(define (assoc-standards std L)
+(define (assoc-standards std)
   ;(printf "doing assoc-standards ~s\n" std)
   (let* ([std-bits (regexp-split #rx"&" std)]
          [std (list-ref std-bits 0)]
-         [sublist-item #f])
-    (let ([c (assoc std L)])
-      (when (>= (length std-bits) 3)
-        (set! sublist-item (string->number (list-ref std-bits 2))))
-      ;(printf "returning (~s ~s)\n" c sublist-item)
-      (list sublist-item c))))
+         [sublist-item #f]
+         [c #f]
+         [dict #f])
+    (for-each
+      (lambda (x)
+        (unless c
+          (let ([stds-list (cdr x)])
+            (set! c (assoc std stds-list))
+            (when c (set! dict (car x))))))
+      *standards-alist*)
+    (when (>= (length std-bits) 3)
+      (set! sublist-item (string->number (list-ref std-bits 2))))
+    (values sublist-item c dict)))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -446,9 +453,7 @@
     ;
     (define (add-standard x lesson lesson-title o)
       ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
-      (let* ([s (assoc-standards x *standards-list*)]
-             [sublist-item (list-ref s 0)]
-             [c (list-ref s 1)])
+      (let-values ([(sublist-item c dict) (assoc-standards x)])
         (cond [c (let ([std (list-ref c 0)])
                    (when (getenv "LESSON")
                      (fprintf o "**~a**: ~a~n~n"
@@ -460,7 +465,7 @@
                                 (box-add-new! sublist-item sublist-items)))
                             (unless (getenv "LESSON")
                               (box-add-new! (list lesson lesson-title)
-                                            (list-ref c0 3)))
+                                            (list-ref c0 4)))
                             )]
                          [else
                            (let ([sublist-items
@@ -468,7 +473,7 @@
                                             (list sublist-item)
                                             '()))])
                              (set! standards-met
-                               (cons (list std sublist-items c
+                               (cons (list std sublist-items c dict
                                            (box (list (list lesson lesson-title))))
                                      standards-met)))]))]
               [else (printf "Standard ~a not found~%" x)]
@@ -507,10 +512,9 @@
               (if lesson-description
                   (display lesson-description o)
                   (display " {nbsp}" o)))
-            #;(when lesson-description
-            (display lesson-description o)
-            ;(newline o)
-            )
+            ;(when lesson-description
+            ;(display lesson-description o)
+            ;(newline o))
           (newline o)))
       (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
 
@@ -837,7 +841,10 @@
 
   (when (or (getenv "NARRATIVE")
             (getenv "LESSONPLAN"))
-    (create-glossary-and-standards-subfiles glossary-items standards-met))
+    (create-glossary-subfile glossary-items))
+
+  (when (getenv "NARRATIVE")
+    (create-standards-subfile standards-met))
 
   ;(printf "exercises-done = ~s\n" exercises-done)
 
@@ -866,7 +873,7 @@
   (void)
   )
 
-(define (create-glossary-and-standards-subfiles glossary-items standards-met)
+(define (create-glossary-subfile glossary-items)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
   (call-with-output-file "index-glossary.asc"
     (lambda (op)
@@ -884,7 +891,10 @@
             )
           glossary-items)
         (fprintf op "~%~%")))
-    #:exists 'replace)
+    #:exists 'replace))
+
+(define (create-standards-subfile standards-met)
+  ;(printf "doing create-standards-subfile ~s\n" standards-met)
   (call-with-output-file "index-standards.asc"
     (lambda (op)
       (unless (empty? standards-met)
@@ -899,8 +909,9 @@
           (lambda (s)
             ;(printf "s= ~s\n" s)
             (let ([sublist-items (unbox (list-ref s 1))]
-                  [lessons (unbox (list-ref s 3))]
-                  [s (list-ref s 2)])
+                  [s (list-ref s 2)]
+                  [dict (list-ref s 3)]
+                  [lessons (unbox (list-ref s 4))])
               (fprintf op "~a:: " (car s))
               (fprintf op "~a\n" (cadr s))
               (unless (getenv "LESSON")
@@ -919,7 +930,6 @@
           standards-met)
         (fprintf op "~%~%")))
     #:exists 'replace)
-  ;(printf "create-glossary-and-standards-subfiles done\n")
   )
 
 (define (accumulate-glossary-and-standards glossary-items standards-met)
@@ -936,7 +946,6 @@
                   (fprintf op "~s~n" (car s)))
                 standards-met))
     #:exists 'replace)
-  ;(printf "done accumulate-glossary-and-standards\n")
   )
 
 ;coe
