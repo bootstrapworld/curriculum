@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-20 # last modified
+export LASTMOD=2019-11-21 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -262,8 +262,8 @@ function buildworkbookpages() {
   cp -p $PROGDIR/.hta* solutions-pages
   if test -d workbook-sols-pages; then
     for f in workbook-sols-pages/*; do
-      if test -f $f; then
-        cp -p $f solutions-pages
+      if test -f "$f"; then
+        cp -p "$f" solutions-pages
       fi
     done
     if test -d workbook-sols-pages/$PROGLANG; then
@@ -314,8 +314,10 @@ function buildworkbookpages() {
       export PATHWAYROOTDIR="../../../"
       #cp -p $PROGDIR/*.css .
       for f in *.adoc; do
-        if test ! -f $f; then
+        if test ! -f "$f"; then
           echo No adoc files in lesson $L/$d
+        elif echo $f|grep -q ' '; then
+          echo Discarding file \`$f\` with space in its name
         else
           echo building $PATHWAY "→" $L "→" "$dd" "→" $f
           $PROGDIR/adoc-preproc.rkt $f
