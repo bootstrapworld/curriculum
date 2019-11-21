@@ -63,11 +63,6 @@
       "and Practice Standards, as well as the TEK and CSTA Standards.\n")
     o))
 
-(define (print-link-to-standards-obs o)
-  (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")
-  (fprintf o "-- Find out how our materials align with Common Core Content
-  and Practice Standards, as well as the TEK and CSTA Standards.\n"))
-
 (define (print-link-to-student-workbook o)
   (display
     (mstring "\n- link:./workbook/workbook.pdf[Student Workbook]"

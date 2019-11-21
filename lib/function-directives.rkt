@@ -30,15 +30,15 @@
 (define *max-wescheme-cond-side-length* 32)
 
 (define (encoded-ans style s show?)
-  ;(printf "\ndoing encoded-ans ~s ~s ~s\n" style s show?)
-  (format "[~a~a~a~a]##~a##"
-          (if (string=? style "") "" ".studentAnswer")
-          (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
-          (if show? ".solution" ".blank")
-          style
-          (if show? s
-              (let ([n (string-length (if (string? s) s (format "~a" s)))])
-                (make-string n #\M)))))
+  (enclose-span
+    (string-append
+      (if (string=? style "") "" ".studentAnswer")
+      (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+      (if show? ".solution" ".blank")
+      style)
+    (if show? s
+        (let ([n (string-length (if (string? s) s (format "~a" s)))])
+          (make-string n #\M)))))
 
 (define (pyret-keyword? w)
   ;(printf "doing pyret-keyword? ~s\n" w)
@@ -110,7 +110,7 @@
     (write-wrapper-scan ".recipe_graf"
       (lambda ()
         (string-append
-          (format "[.purpose_comment]##~a##" (if *pyret?* "&#35; " ";"))
+          (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
           " "
           (encoded-ans ".recipe_purpose" purpose *show-purpose?*))))))
 
@@ -441,7 +441,8 @@
    funname param-list body))
 
 (define (write-clear)
-  "\n[.clear]## ##")
+  (string-append "\n"
+    (enclose-span ".clear" " ")))
 
 (define (write-spaced s)
   ;(format "[.spacer]##~a##" s)
@@ -449,14 +450,14 @@
   )
 
 (define (write-large s #:tag [tag ""])
-  (format "[.bigparen~a]##~a##" tag s))
+  (enclose-span (string-append ".bigparen" tag) s))
 
 (define *wrapper-block-level* 0)
 
 (define (write-wrapper-scan classes thunk)
   (let ([res (thunk)])
     (if (or #t (string=? classes "")) res
-        (format "[~a]##~a##" classes res))))
+        (enclose-span classes res))))
 
 (define (write-null-wrapper classes thunk)
   (thunk))
