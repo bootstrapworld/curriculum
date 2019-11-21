@@ -30,6 +30,7 @@
 (define *max-wescheme-cond-side-length* 32)
 
 (define (encoded-ans style s show?)
+  (unless (string? s) (set! s (format "~a" s)))
   (enclose-span
     (string-append
       (if (string=? style "") "" ".studentAnswer")
@@ -37,7 +38,7 @@
       (if show? ".solution" ".blank")
       style)
     (if show? s
-        (let ([n (string-length (if (string? s) s (format "~a" s)))])
+        (let ([n (string-length s)])
           (make-string n #\M)))))
 
 (define (pyret-keyword? w)
