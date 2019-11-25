@@ -13,7 +13,7 @@
 (define (mstring . strs)
   (string-join strs "\n"))
 
-(define (create-begin-tag tag-name classes)
+(define (create-begin-tag tag-name classes #:attribs [attribs #f])
   (let ([classes (if (string=? classes "") '()
                      (regexp-split #rx"\\." (substring classes 1)))])
     (string-append
@@ -23,15 +23,16 @@
                                (string-join classes " ")
                                "\"")]
             [else ""])
+      (or attribs "")
       "@BEGINCURRICULUM" tag-name)))
 
 (define (create-end-tag tag-name)
   (string-append
     "@ENDCURRICULUM" tag-name))
 
-(define (enclose-tag tag classes s)
+(define (enclose-tag tag classes s #:attribs [attribs #f])
   (string-append
-    (create-begin-tag tag classes)
+    (create-begin-tag tag classes #:attribs attribs)
     s
     (create-end-tag tag)))
 

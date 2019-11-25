@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-21 # last modified
+export LASTMOD=2019-11-25 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -358,7 +358,9 @@ function buildlessonplan() {
     # there should be only one?
     #echo building lesson plan from *.adoc
     echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
-    $PROGDIR/adoc-preproc.rkt *.adoc
+    for f in *.adoc; do
+      $PROGDIR/adoc-preproc.rkt $f
+    done
     if test ! -f index.html; then
       SRCFILE=
       for g in *.adoc; do
@@ -398,6 +400,64 @@ function buildlessons() {
     fi
   done
   cd ..
+}
+
+function buildpathwaynarrative() {
+  local copacetic=1
+  for f in *.adoc; do
+    if test ! -f $f; then copacetic=
+    fi
+  done
+  if test ! "$copacetic"; then
+    echo WARNING: No narrative in pathway $PATHWAY
+  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
+    echo WARNING: Too many narratives in pathway $PATHWAY
+  else
+    #cp -p $PROGDIR/*.css .
+    export PATHWAYROOTDIR=""
+    export NARRATIVE=1
+    # there should be only one?
+    echo
+    echo building pathway narrative: $PATHWAY "→" *.adoc
+    for f in *.adoc; do
+      $PROGDIR/adoc-preproc.rkt $f
+    done
+    unset NARRATIVE
+    if test ! -f index.html; then
+      SRCFILE=
+      for g in *.adoc; do
+        SRCFILE=${g%.adoc}
+        cp -p $SRCFILE.asc index.asc
+        cp -p $SRCFILE.html index.html
+      done
+      if test -n "$SRCFILE"; then
+        rm $SRCFILE.html $SRCFILE.asc
+      fi
+    fi
+    if test -f pathway-lessons.asc; then
+      $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
+      removelogos pathway-lessons.html
+      resolveabbrevs pathway-lessons.html
+    fi
+    mv index.html index.shtml
+    insertbodyid index.shtml
+    addanalytics index.shtml
+    insertstylecss index.shtml
+    resolveabbrevs index.shtml
+    #moveheaderlogopos index.shtml
+    #cleanuptitle index.shtml
+
+    #TODO pull all index-* file processing from Racket to here
+    for f in index-glossary.html index-standards.html; do
+      if test -f $f; then
+        resolveabbrevs $f
+      fi
+    done
+
+    if $VERIFYLINKS; then
+      linkchecker -F html/invalid-links.html --check-extern --no-status
+    fi
+  fi
 }
 
 function buildpathway() {
@@ -468,7 +528,9 @@ function buildpathway() {
       # there should be only one?
       export TEACHER_RESOURCES=1
       echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
-      $PROGDIR/adoc-preproc.rkt *.adoc
+      for f in *.adoc; do
+        $PROGDIR/adoc-preproc.rkt $f
+      done
       unset TEACHER_RESOURCES
       if test ! -f index.html; then
         SRCFILE=
@@ -502,52 +564,7 @@ function buildpathway() {
       rm -f workbook-numbered.*
     fi
 
-    copacetic=1
-    for f in *.adoc; do
-      if test ! -f $f; then copacetic=
-      fi
-    done
-    if test ! "$copacetic"; then
-      echo WARNING: No narrative in pathway $PATHWAY
-    elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
-      echo WARNING: Too many narratives in pathway $PATHWAY
-    else
-      #cp -p $PROGDIR/*.css .
-      export PATHWAYROOTDIR=""
-      export NARRATIVE=1
-      # there should be only one?
-      echo
-      echo building pathway narrative: $PATHWAY "→" *.adoc
-      $PROGDIR/adoc-preproc.rkt *.adoc
-      unset NARRATIVE
-      if test ! -f index.html; then
-        SRCFILE=
-        for g in *.adoc; do
-          SRCFILE=${g%.adoc}
-          cp -p $SRCFILE.asc index.asc
-          cp -p $SRCFILE.html index.html
-        done
-        if test -n "$SRCFILE"; then
-          rm $SRCFILE.html $SRCFILE.asc
-        fi
-      fi
-      if test -f pathway-lessons.asc; then
-        $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
-        removelogos pathway-lessons.html
-        resolveabbrevs pathway-lessons.html
-      fi
-      mv index.html index.shtml
-      insertbodyid index.shtml
-      addanalytics index.shtml
-      insertstylecss index.shtml
-      resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-      #cleanuptitle index.shtml
-
-      if $VERIFYLINKS; then
-        linkchecker -F html/invalid-links.html --check-extern --no-status
-      fi
-    fi
+    buildpathwaynarrative
 
   fi
 

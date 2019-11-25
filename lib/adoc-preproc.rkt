@@ -332,7 +332,7 @@
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
   (set! text (regexp-replace* #rx"," text "@CURRICULUMCOMMA"))
-  (set! text (string-append " " text " ")) ;needed?
+  (set! text (string-append " " text " ")) ;FIXME needed?
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -378,13 +378,12 @@
 (define *standards-dictionaries*
   (map car *standards-alist*))
 
-(define *dictionaries-represented* '())
-
 (define (preproc-n-asciidoctor in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
         [exercises-done '()]
         [glossary-items '()]
         [standards-met '()]
+        [dictionaries-represented '()]
         [lesson-glossary-accumulator "lesson-glossary.txt"]
         [lesson-standards-accumulator "lesson-standards.txt"]
         ;[materials '()]
@@ -412,6 +411,7 @@
                                      (getenv "TEACHER_RESOURCES"))])
           (display #\= o) (display #\space o)
           (when header-with-logo?
+            ;TODO repl w enclose-span
             (display-begin-span ".bootstraplogo" o)
             (fprintf o "image:{pathwayrootdir}bootstraplogo.png[]")
             (display-end-span o)
@@ -460,6 +460,8 @@
                                    (box (if sublist-item
                                             (list sublist-item)
                                             '()))])
+                             (unless (member dict dictionaries-represented)
+                               (set! dictionaries-represented (cons dict dictionaries-represented)))
                              (set! standards-met
                                (cons (list std sublist-items c dict
                                            (box (list (list lesson lesson-title))))
@@ -800,11 +802,11 @@
 
           (when (getenv "NARRATIVE")
             (link-to-lessons-in-pathway o)
-            (create-standards-subfiles standards-met)
+            (create-standards-subfile standards-met dictionaries-represented)
 
             (print-other-resources-intro o)
             (print-link-to-glossary o)
-            (print-link-to-standards *dictionaries-represented* o)
+            (print-link-to-standards o)
             (print-link-to-student-workbook o)
             (print-link-to-teacher-resources o)
             (print-link-to-forum o)
@@ -851,11 +853,10 @@
   (cond [(getenv "LESSONPLAN")
          (accumulate-glossary-and-standards glossary-items standards-met)]
         [(getenv "NARRATIVE")
+         ;TODO in build-pathway rather than here?
+         ;TODO lessonplans also need this?
          (asciidoctor "-a title=Glossary index-glossary.asc")
-         (for ([dict *dictionaries-represented*])
-           ;(printf "creating index-~a-standards.html\n" dict)
-           (asciidoctor
-             (format "-a title='~a Standards' index-~a-standards.asc" dict dict)))])
+         (asciidoctor "-a title='Standards' index-standards.asc")])
 
   (asciidoctor out-file)))
 
@@ -885,51 +886,74 @@
         (fprintf op "~%~%")))
     #:exists 'replace))
 
-(define (create-standards-subfiles standards-met)
+
+(define (create-standards-section dict standards-met op)
+  (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
+  (fprintf op "== ~a Standards Statements\n\n" dict)
+  (fprintf op "[.standards-hierarchical-table]~%")
+  (for-each
+    (lambda (s)
+      ;(printf "s= ~s\n" s)
+      (let ([sublist-items (unbox (list-ref s 1))]
+            [s (list-ref s 2)]
+            ;[dict (list-ref s 3)]
+            [lessons (unbox (list-ref s 4))])
+        (fprintf op "~a:: " (car s))
+        (fprintf op "~a\n" (cadr s))
+        (unless (getenv "LESSON")
+          (when (> (length lessons) 0)
+            (fprintf op "{startsb}See: ~a.{endsb}\n"
+                     (string-join
+                       (map
+                         (lambda (x)
+                           (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
+                         lessons) ";"))))
+        (for-each (lambda (n)
+                    (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                    ;(fprintf op "** ~a~%" (list-ref s (+ n 1)))
+                    )
+                  sublist-items)))
+    standards-met)
+  (fprintf op "\n\n"))
+
+(define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
   (unless (empty? standards-met)
-    (for ([dict *standards-dictionaries*])
-      (let ([dict-standards-met
-              (filter (lambda (s) (string=? (list-ref s 3) dict))
-                      standards-met)])
-        (unless (empty? dict-standards-met)
-          (set! *dictionaries-represented* (cons dict *dictionaries-represented*))
-          (create-standards-subfile
-            dict (sort dict-standards-met #:key car string-ci<=?)))))))
+    (call-with-output-file "index-standards.asc"
+      (lambda (op)
+        ;(fprintf op "= Standards Statements\n\n")
+        (print-standards-js op)
+        ;(display "****\n" op)
+        (display (enclose-div ".floatRight"
+                   (enclose-div ".dropdown"
+                     (string-append
+                       (enclose-tag "button" "" "Choose Standards Alignment")
+                       "\n"
+                       (enclose-span ".dropdownContent"
+                         (enclose-tag "ul" ""
+                           (string-join
+                             (map (lambda (dict)
+                                    (enclose-tag "li" ""
+                                      (enclose-tag "button"
+                                        ".dropdownButton"
+                                        #:attribs (format " data-pointsto=\"standards-~a\"" dict)
+                                        (string-append dict " Standards"))))
+                                  dictionaries-represented)
+                             "\n")))))) op)
+        ;(display "\n****\n" op)
+        (display "\n" op)
+        (for ((dict dictionaries-represented))
+          (let ((dict-standards-met
+                  (filter (lambda (s) (string=? (list-ref s 3) dict))
+                          standards-met)))
+            (unless (empty? dict-standards-met) ;it will never be empty!
+              (create-standards-section
+                dict
+                (sort dict-standards-met #:key car string-ci<=?) op))))))))
 
-(define (create-standards-subfile dict standards-met)
-  ;(printf "doing create-standards-subfile ~a ~s\n" dict standards-met)
-  (call-with-output-file (format "index-~a-standards.asc" dict)
-    (lambda (op)
-      (fprintf op "= ~a Standards Statements\n\n" dict)
-      ;(fprintf op "[#standards]~%")
-      (fprintf op "[.standards-hierarchical-table]~%")
-      (for-each
-        (lambda (s)
-          ;(printf "s= ~s\n" s)
-          (let ([sublist-items (unbox (list-ref s 1))]
-                [s (list-ref s 2)]
-                ;[dict (list-ref s 3)]
-                [lessons (unbox (list-ref s 4))])
-            (fprintf op "~a:: " (car s))
-            (fprintf op "~a\n" (cadr s))
-            (unless (getenv "LESSON")
-              (when (> (length lessons) 0)
-                (fprintf op "{startsb}See: ~a.{endsb}\n"
-                         (string-join
-                           (map
-                             (lambda (x)
-                               (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
-                             lessons) ";"))))
-            (for-each (lambda (n)
-                        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                        )
-                      sublist-items)))
-        standards-met)
-      (fprintf op "~%~%"))
-    #:exists 'replace)
-  )
+
+
+
 
 (define (accumulate-glossary-and-standards glossary-items standards-met)
   ;(printf "doing accumulate-glossary-and-standards\n")
@@ -1275,8 +1299,8 @@
            (filter (lambda (x) (not (void? x))) body))))
 
 (define (main . cl-args)
-  (for ((arg cl-args))
-    ;only one though
-    (preproc-n-asciidoctor arg)))
+  (unless (= (length cl-args) 1)
+    (error 'adoc-preproc.rkt "Exactly one arg accepted"))
+  (preproc-n-asciidoctor (car cl-args)))
 
 ;(void)

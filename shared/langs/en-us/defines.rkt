@@ -10,6 +10,7 @@
   print-link-to-student-workbook
   print-link-to-teacher-resources
   print-link-to-forum
+  print-standards-js
   )
 
 (define (print-lessons-intro o)
@@ -39,27 +40,10 @@
     (mstring "\n- link:./index-glossary.html[Glossary]"
       "-- A list of vocabulary words used in this pathway.\n") o))
 
-(define (print-link-to-standards dicts o)
-  (printf "doing print-link-to-standards ~a\n" dicts)
-  (display "\n- " o)
+(define (print-link-to-standards o)
   (display
-    (enclose-div ".dropdown"
-      (string-append
-        (enclose-tag "button" "" "Standards Alignment")
-        (enclose-span ".dropdownContent"
-          (enclose-tag "ul" ""
-            (string-join
-              (map (lambda (dict)
-                     (enclose-tag "li" ""
-                       (format
-                         "link:./index-~a-standards.html[~a Standards Alignment]"
-                         dict dict)))
-                   dicts)
-              "\n")))))
-    o)
-  (display
-    (mstring
-      "\n-- Find out how our materials align with Common Core Content"
+    (mstring "\n- link:./index-standards.html[Standards Alignment]"
+      "-- Find out how our materials align with Common Core Content"
       "and Practice Standards, as well as the TEK and CSTA Standards.\n")
     o))
 
@@ -87,3 +71,30 @@
       "-- Want to be kept up-to-date about Bootstrap events, workshops, and curricular"
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap"
       "teachers? These forums are the place to do it.\n") o))
+
+(define (print-standards-js o)
+  (display
+    (mstring
+      "\n++++"
+      "<script>"
+      "function displayCorrespTable(ev) {"
+      "  var e = ev || window.event;"
+      "  var me = e.target.getAttribute('data-pointsto');"
+      "  var xx = document.getElementsByClassName('alignedStandards');"
+      "  for (var i = 0; i < xx.length; i++) {"
+      "    if (xx[i].classList.contains(me)) {"
+      "      xx[i].style.display = 'block';"
+      "    } else {"
+      "      xx[i].style.display = 'none';"
+      "    }"
+      "  }"
+      "}"
+
+      "window.onload = function () {"
+      "  var yy = document.getElementsByClassName('dropdownButton');"
+      "  for (var i = 0; i < yy.length; i++) {"
+      "    yy[i].onclick = displayCorrespTable;"
+      "  }"
+      "};"
+      "</script>"
+      "++++\n\n") o))
