@@ -434,6 +434,20 @@ function buildpathwaynarrative() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
+    if test -f index-glossary.asc; then
+      asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
+        -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
+        -a pathwayrootdir=$PATHWAYROOTDIR \
+        -a title='Glossary' \
+        index-glossary.asc
+    fi
+    if test -f index-standards.asc; then
+      asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
+        -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
+        -a pathwayrootdir=$PATHWAYROOTDIR \
+        -a title='Standards' \
+        index-standards.asc
+    fi
     if test -f pathway-lessons.asc; then
       $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
       removelogos pathway-lessons.html

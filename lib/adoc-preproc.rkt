@@ -850,13 +850,8 @@
           (reverse exercises-done)))
       #:exists 'append))
 
-  (cond [(getenv "LESSONPLAN")
-         (accumulate-glossary-and-standards glossary-items standards-met)]
-        [(getenv "NARRATIVE")
-         ;TODO in build-pathway rather than here?
-         ;TODO lessonplans also need this?
-         (asciidoctor "-a title=Glossary index-glossary.asc")
-         (asciidoctor "-a title='Standards' index-standards.asc")])
+  (when (getenv "LESSONPLAN")
+    (accumulate-glossary-and-standards glossary-items standards-met))
 
   (asciidoctor out-file)))
 
