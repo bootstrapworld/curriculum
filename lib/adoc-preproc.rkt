@@ -233,7 +233,7 @@
   (display
     (mstring
       "\n\n"
-      "[.left-header,cols=\"30a,70a\"]"
+      "[.left-header,cols=\"20a,80a\"]"
       "|==="
       "|Standards"
       "|"
@@ -593,6 +593,9 @@
               (add-standard s lesson #f #f))))))
 
     ;
+    (when (getenv "NARRATIVE")
+      (print-menubar "index"))
+    ;
     (call-with-input-file in-file
       (lambda (i)
         (call-with-output-file out-file
@@ -889,6 +892,7 @@
 
 (define (create-glossary-subfile glossary-items)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
+  (print-menubar "index-glossary")
   (call-with-output-file "index-glossary.asc"
     (lambda (op)
       (unless (empty? glossary-items)
@@ -940,6 +944,7 @@
 
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
+  (print-menubar "index-standards")
   (call-with-output-file "index-standards.asc"
     (lambda (op)
       (unless (empty? standards-met)

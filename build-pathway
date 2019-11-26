@@ -372,7 +372,7 @@ function buildlessonplan() {
         rm $SRCFILE.html $SRCFILE.asc
       fi
     fi
-    makeglossaryandstandards
+    #makeglossaryandstandards
     addanalytics index.html
     resolveabbrevs index.html
     moveheaderlogopos index.html
@@ -409,16 +409,18 @@ function makeglossaryandstandards() {
       -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
+      -o index-glossary.shtml \
       index-glossary.asc
-          resolveabbrevs index-glossary.html
+          resolveabbrevs index-glossary.shtml
   fi
   if test -f index-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
-      index-standards.asc
-          resolveabbrevs index-standards.html
+      -o index-standards.shtml \
+      index-standards.asc 
+          resolveabbrevs index-standards.shtml
   fi
 }
 

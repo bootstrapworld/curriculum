@@ -11,6 +11,7 @@
   print-link-to-teacher-resources
   print-link-to-forum
   print-standards-js
+  print-menubar
   )
 
 (define (print-lessons-intro o)
@@ -37,12 +38,12 @@
 
 (define (print-link-to-glossary o)
   (display
-    (mstring "\n- link:./index-glossary.html[Glossary]"
+    (mstring "\n- link:./index-glossary.shtml[Glossary]"
       "-- A list of vocabulary words used in this pathway.\n") o))
 
 (define (print-link-to-standards o)
   (display
-    (mstring "\n- link:./index-standards.html[Standards Alignment]"
+    (mstring "\n- link:./index-standards.shtml[Standards Alignment]"
       "-- Find out how our materials align with Common Core Content"
       "and Practice Standards, as well as the TEK and CSTA Standards.\n")
     o))
@@ -100,3 +101,9 @@
       "}"
       "</script>"
       "++++\n\n") o))
+
+(define (print-menubar f)
+  (call-with-output-file (string-append f "-comment.txt")
+    (lambda (o)
+      (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
+    #:exists 'replace))
