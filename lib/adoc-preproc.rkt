@@ -228,13 +228,24 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
+(define (include-standards o)
+  (unless (getenv "LESSONPLAN") (error ' include-standards "deadc0de"))
+  (display
+    (mstring
+      "\n\n"
+      "[.left-header,cols=\"30a,70a\"]"
+      "|==="
+      "|Standards"
+      "|"
+      ""
+      "include::./index-standards.asc[]"
+      ""
+      "|===\n\n") o))
+
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (newline o)
-  (newline o)
   (when (getenv "NARRATIVE") (error ' include-glossary "deadc0de"))
-  (fprintf o "include::./~a[]~%~%" "index-glossary.asc")
-  )
+  (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
@@ -423,8 +434,8 @@
           (display desc o) (newline o))
         #:exists 'replace)
       (display desc o)
-      (unless (empty? standards-met)
-        (display "\nlink:./index-standards.html[Standards Alignment]." o))
+      ;(unless (empty? standards-met)
+      ;  (display "\nlink:./index-standards.html[Standards Alignment]." o))
       (newline o))
     ;
     (define (add-exercise exercise)
@@ -783,6 +794,7 @@
                                      [(check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
                                       (when (getenv "LESSONPLAN")
+                                        (include-standards o)
                                         (include-glossary o))]
                                      [else #f])
                                (cond [(getenv "LESSON")
@@ -897,7 +909,9 @@
 
 (define (create-standards-section dict standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op "== ~a Standards Statements\n\n" dict)
+      (fprintf op (if (getenv "LESSON")
+                      ".~a Standards Statements\n"
+                      "== ~a Standards Statements\n\n") dict)
   (fprintf op "[.standards-hierarchical-table]~%")
   (for-each
     (lambda (s)
@@ -926,9 +940,9 @@
 
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
-  (unless (empty? standards-met)
-    (call-with-output-file "index-standards.asc"
-      (lambda (op)
+  (call-with-output-file "index-standards.asc"
+    (lambda (op)
+      (unless (empty? standards-met)
         (print-standards-js op)
         (display (enclose-tag "select" ".standardsAlignmentSelect"
                    #:attribs (format " multiple size=~a" (length dictionaries-represented))
