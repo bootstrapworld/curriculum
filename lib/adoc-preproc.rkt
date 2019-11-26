@@ -929,26 +929,20 @@
   (unless (empty? standards-met)
     (call-with-output-file "index-standards.asc"
       (lambda (op)
-        ;(fprintf op "= Standards Statements\n\n")
         (print-standards-js op)
-        ;(display "****\n" op)
-        (display (enclose-div ".floatRight"
-                   (enclose-div ".dropdown"
-                     (string-append
-                       (enclose-tag "button" "" "Choose Standards Alignment")
-                       "\n"
-                       (enclose-span ".dropdownContent"
-                         (enclose-tag "ul" ""
-                           (string-join
-                             (map (lambda (dict)
-                                    (enclose-tag "li" ""
-                                      (enclose-tag "button"
-                                        ".dropdownButton"
-                                        #:attribs (format " data-pointsto=\"standards-~a\"" dict)
-                                        (string-append dict " Standards"))))
-                                  dictionaries-represented)
-                             "\n")))))) op)
-        ;(display "\n****\n" op)
+        (display (enclose-tag "select" ".standardsAlignmentSelect"
+                   #:attribs (format " multiple size=~a" (length dictionaries-represented))
+                   (string-join
+                     (map (lambda (dict)
+                            (enclose-tag "option" ""
+                              #:attribs (format " value=\"standards-~a\"" dict)
+                              dict))
+                          dictionaries-represented)
+                     "\n")) op)
+        (display "\n" op)
+        (display (enclose-tag "button" ""
+                   #:attribs " onclick=\"showStandardsAlignment()\""
+                   "Show standards alignment") op)
         (display "\n" op)
         (for ((dict dictionaries-represented))
           (let ((dict-standards-met

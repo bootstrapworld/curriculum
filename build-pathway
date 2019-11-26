@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-25 # last modified
+export LASTMOD=2019-11-26 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -190,9 +190,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
     \
-    -e 's/@CURRICULUM\(button\|div\|li\|pre\|span\|textarea\|tt\|ul\)/<\1/g' \
-    -e 's/@BEGINCURRICULUM\(button\|div\|li\|pre\|span\|textarea\|tt\|ul\)/>/g' \
-    -e 's/@ENDCURRICULUM\(button\|div\|li\|pre\|span\|textarea\|tt\|ul\)/<\/\1>/g' \
+    -e 's/@CURRICULUM\(button\|div\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/<\1/g' \
+    -e 's/@BEGINCURRICULUM\(button\|div\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/>/g' \
+    -e 's/@ENDCURRICULUM\(button\|div\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
