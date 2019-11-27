@@ -960,7 +960,9 @@
              ;(format " multiple size=~a onchange=\"showStandardsAlignment()\""
              ;        (length dictionaries-represented))
              (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\""
-                      (* 30 (- (length dictionaries-represented) 1)))
+                      75
+                      ;(* 30 (- (length dictionaries-represented) 1))
+                      )
              (string-join
                (map (lambda (dict)
                       (enclose-tag "option" ""

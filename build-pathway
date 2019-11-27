@@ -318,6 +318,7 @@ function buildworkbookpages() {
           echo No adoc files in lesson $L/$d
         elif echo $f|grep -q ' '; then
           echo Discarding file \`$f\` with space in its name
+          rm "$f"
         else
           echo building $PATHWAY "→" $L "→" "$dd" "→" $f
           $PROGDIR/adoc-preproc.rkt $f
