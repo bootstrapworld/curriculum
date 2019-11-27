@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-26 # last modified
+export LASTMOD=2019-11-27 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -411,6 +411,7 @@ function makeglossaryandstandards() {
       -a title='Glossary' \
       -o index-glossary.shtml \
       index-glossary.asc
+          insertstylecss index-glossary.shtml
           resolveabbrevs index-glossary.shtml
   fi
   if test -f index-standards.asc; then
@@ -420,6 +421,7 @@ function makeglossaryandstandards() {
       -a title='Standards' \
       -o index-standards.shtml \
       index-standards.asc 
+          insertstylecss index-standards.shtml
           resolveabbrevs index-standards.shtml
   fi
 }

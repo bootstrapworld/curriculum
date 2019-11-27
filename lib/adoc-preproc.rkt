@@ -233,7 +233,8 @@
   (display
     (mstring
       "\n\n"
-      "[.left-header.standards-selection-container,cols=\"20a,80a\"]"
+      ;"[.left-header.standards-selection-container,cols=\"20a,80a\"]"
+      "[.left-header,cols=\"20a,80a\"]"
       "|==="
       "|") o)
   (display-standards-selection dictionaries-represented o)
@@ -955,7 +956,11 @@
     (display (create-end-tag "h2") o))
   (display "\n" o)
   (display (enclose-tag "select" ".standardsAlignmentSelect"
-             #:attribs (format " multiple size=~a onchange=\"showStandardsAlignment()\"" (length dictionaries-represented))
+             #:attribs
+             ;(format " multiple size=~a onchange=\"showStandardsAlignment()\""
+             ;        (length dictionaries-represented))
+             (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\""
+                      (* 30 (- (length dictionaries-represented) 1)))
              (string-join
                (map (lambda (dict)
                       (enclose-tag "option" ""
