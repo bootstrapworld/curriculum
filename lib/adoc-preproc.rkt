@@ -233,7 +233,7 @@
   (display
     (mstring
       "\n\n"
-      "[.left-header.standards-alignment-table,cols=\"20a,80a\"]"
+      "[.left-header.standards-selection-container,cols=\"20a,80a\"]"
       "|==="
       "|") o)
   (display-standards-selection dictionaries-represented o)
@@ -947,7 +947,13 @@
 
 (define (display-standards-selection dictionaries-represented o)
   (print-standards-js o)
-  (display "Relevant Standards\n" o)
+  (when (getenv "NARRATIVE")
+    (display (create-begin-tag "div" ".standards-selection-container") o)
+    (display (create-begin-tag "h2" "") o))
+  (display "Relevant Standards" o)
+  (when (getenv "NARRATIVE")
+    (display (create-end-tag "h2") o))
+  (display "\n" o)
   (display (enclose-tag "select" ".standardsAlignmentSelect"
              #:attribs (format " multiple size=~a onchange=\"showStandardsAlignment()\"" (length dictionaries-represented))
              (string-join
@@ -957,6 +963,8 @@
                         dict))
                     dictionaries-represented)
                "\n")) o)
+  (when (getenv "NARRATIVE")
+    (display (create-end-tag "div") o))
   (display "\n\n" o))
 
 (define (create-standards-subfile standards-met dictionaries-represented)
