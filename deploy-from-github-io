@@ -1,0 +1,31 @@
+# last modified 2019-11-27
+
+if ! git rev-parse --is-inside-work-tree; then
+  echo Not in a Git repo; exit
+fi
+
+REPO_TOPDIR=$(git rev-parse --show-toplevel)
+
+if test "$(basename $REPO_TOPDIR)" != curriculum; then
+  echo Not in curriculum repo; exit
+fi
+
+cd $REPO_TOPDIR
+
+ORIG_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if test "$ORIG_BRANCH" != gh-pages; then
+  rm -fr distribution asciidoctor.css index.html README.html
+  if ! git checkout gh-pages; then
+    echo Could not switch to gh-pages branch; exit
+  fi
+fi
+
+git reset --hard origin/gh-pages
+#git pull -s recursive -X theirs
+
+./deploy-from-here
+
+if test "$ORIG_BRANCH" != gh-pages; then
+  git checkout $ORIG_BRANCH
+fi

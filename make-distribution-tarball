@@ -1,0 +1,8 @@
+# last modified 2019-11-27
+
+rm -f distribution.tar.bz2
+tar jcf distribution.tar.bz2 distribution/bs-game-pathway-*
+
+if test "$HOSTNAME" = longitude; then
+  scp distribution.tar.bz2 $(providentialaddress):~/src/curriculum
+fi
