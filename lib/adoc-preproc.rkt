@@ -233,7 +233,7 @@
   (display
     (mstring
       "\n\n"
-      "[.left-header,cols=\"20a,80a\"]"
+      "[.left-header.standards-alignment-table,cols=\"20a,80a\"]"
       "|==="
       "|") o)
   (display-standards-selection dictionaries-represented o)
