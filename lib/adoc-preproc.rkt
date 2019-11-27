@@ -947,8 +947,9 @@
 
 (define (display-standards-selection dictionaries-represented o)
   (print-standards-js o)
+  (display "Relevant Standards\n" o)
   (display (enclose-tag "select" ".standardsAlignmentSelect"
-             #:attribs (format " multiple size=~a" (length dictionaries-represented))
+             #:attribs (format " multiple size=~a onchange=\"showStandardsAlignment()\"" (length dictionaries-represented))
              (string-join
                (map (lambda (dict)
                       (enclose-tag "option" ""
@@ -956,11 +957,7 @@
                         dict))
                     dictionaries-represented)
                "\n")) o)
-  (display "\n" o)
-  (display (enclose-tag "button" ""
-             #:attribs " onclick=\"showStandardsAlignment()\""
-             "Relevant Standards") o)
-  (display "\n" o))
+  (display "\n\n" o))
 
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
