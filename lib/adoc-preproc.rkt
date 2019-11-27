@@ -228,14 +228,17 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
-(define (include-standards o)
+(define (include-standards dictionaries-represented o)
   (unless (getenv "LESSONPLAN") (error ' include-standards "deadc0de"))
   (display
     (mstring
       "\n\n"
       "[.left-header,cols=\"20a,80a\"]"
       "|==="
-      "|Standards"
+      "|") o)
+  (display-standards-selection dictionaries-represented o)
+  (display
+    (mstring
       "|"
       ""
       "include::./index-standards.asc[]"
@@ -797,7 +800,7 @@
                                      [(check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
                                       (when (getenv "LESSONPLAN")
-                                        (include-standards o)
+                                        (include-standards dictionaries-represented o)
                                         (include-glossary o))]
                                      [else #f])
                                (cond [(getenv "LESSON")
@@ -942,27 +945,31 @@
     standards-met)
   (fprintf op "\n\n"))
 
+(define (display-standards-selection dictionaries-represented o)
+  (print-standards-js o)
+  (display (enclose-tag "select" ".standardsAlignmentSelect"
+             #:attribs (format " multiple size=~a" (length dictionaries-represented))
+             (string-join
+               (map (lambda (dict)
+                      (enclose-tag "option" ""
+                        #:attribs (format " value=\"standards-~a\"" dict)
+                        dict))
+                    dictionaries-represented)
+               "\n")) o)
+  (display "\n" o)
+  (display (enclose-tag "button" ""
+             #:attribs " onclick=\"showStandardsAlignment()\""
+             "Relevant Standards") o)
+  (display "\n" o))
+
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
   (print-menubar "index-standards")
   (call-with-output-file "index-standards.asc"
     (lambda (op)
       (unless (empty? standards-met)
-        (print-standards-js op)
-        (display (enclose-tag "select" ".standardsAlignmentSelect"
-                   #:attribs (format " multiple size=~a" (length dictionaries-represented))
-                   (string-join
-                     (map (lambda (dict)
-                            (enclose-tag "option" ""
-                              #:attribs (format " value=\"standards-~a\"" dict)
-                              dict))
-                          dictionaries-represented)
-                     "\n")) op)
-        (display "\n" op)
-        (display (enclose-tag "button" ""
-                   #:attribs " onclick=\"showStandardsAlignment()\""
-                   "Show standards alignment") op)
-        (display "\n" op)
+        (when (getenv "NARRATIVE")
+          (display-standards-selection dictionaries-represented op))
         (for ((dict dictionaries-represented))
           (let ((dict-standards-met
                   (filter (lambda (s) (string=? (list-ref s 3) dict))
