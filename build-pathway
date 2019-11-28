@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-27 # last modified
+export LASTMOD=2019-11-28 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -337,6 +337,20 @@ function buildworkbookpages() {
   cd ..
 }
 
+function collapseadjtables() {
+  local f=$1
+  local x=$(grep -n '^<\/*tbody>' "$f"|sed -e 's/^\([^:]*\):.*/\1/'|sed -ne '2,3p')
+  if test -z "$x"; then
+    return
+  fi
+  local xi=$(echo $x|sed -e 's/^\([^ ]*\) .*/\1/')
+  local xii=$(echo $x|sed -e 's/^[^ ]* \([^ ]*\).*/\1/')
+  if test -z "$xi" -o -z "$xii"; then
+    return
+  fi
+  sed -i -e "$xi,${xii}d" "$f"
+}
+
 function buildlessonplan() {
   #echo doing buildlessonplan
   L=$1
@@ -374,6 +388,7 @@ function buildlessonplan() {
       fi
     fi
     #makeglossaryandstandards
+    collapseadjtables index.html
     addanalytics index.html
     resolveabbrevs index.html
     moveheaderlogopos index.html
@@ -421,7 +436,7 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -o index-standards.shtml \
-      index-standards.asc 
+      index-standards.asc
           insertstylecss index-standards.shtml
           resolveabbrevs index-standards.shtml
   fi

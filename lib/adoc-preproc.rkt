@@ -948,13 +948,14 @@
 
 (define (display-standards-selection dictionaries-represented o)
   (print-standards-js o)
-  (when (getenv "NARRATIVE")
-    (display (create-begin-tag "div" ".standards-selection-container") o)
-    (display (create-begin-tag "h2" "") o))
-  (display "Relevant Standards" o)
-  (when (getenv "NARRATIVE")
-    (display (create-end-tag "h2") o))
-  (display "\n" o)
+  (cond [(getenv "NARRATIVE")
+         (display
+           (mstring
+             "\nThis pathway aligns with several important teaching standards."
+             "Select particular standards from the following menu to see"
+             "which items in the standards are met.\n\n")
+           o)]
+        [else (display "Relevant Standards\n" o)])
   (display (enclose-tag "select" ".standardsAlignmentSelect"
              #:attribs
              ;(format " multiple size=~a onchange=\"showStandardsAlignment()\""
@@ -970,8 +971,6 @@
                         dict))
                     dictionaries-represented)
                "\n")) o)
-  (when (getenv "NARRATIVE")
-    (display (create-end-tag "div") o))
   (display "\n\n" o))
 
 (define (create-standards-subfile standards-met dictionaries-represented)
