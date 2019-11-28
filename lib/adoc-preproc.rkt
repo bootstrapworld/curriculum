@@ -901,9 +901,13 @@
       (unless (empty? glossary-items)
         (set! glossary-items
           (sort glossary-items #:key car string-ci<=?))
+        (when (getenv "NARRATIVE")
+          (fprintf op (mstring "= {nbsp}"
+                        ""
+                        "{nbsp}\n\n")))
         (fprintf op (if (getenv "LESSON")
                         ".Glossary\n"
-                        "= Glossary\n\n"))
+                        "== Glossary\n\n"))
         (fprintf op "[.glossary]~%")
         (for-each
           (lambda (s)
@@ -946,6 +950,8 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection dictionaries-represented o)
+  (when (getenv "NARRATIVE")
+    (fprintf o "= {nbsp}\n\n"))
   (print-standards-js o)
   (cond [(getenv "NARRATIVE")
          (display
