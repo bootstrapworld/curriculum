@@ -233,7 +233,6 @@
   (display
     (mstring
       "\n\n"
-      ;"[.left-header.standards-selection-container,cols=\"20a,80a\"]"
       "[.left-header,cols=\"20a,80a\"]"
       "|==="
       "|") o)
@@ -438,8 +437,6 @@
           (display desc o) (newline o))
         #:exists 'replace)
       (display desc o)
-      ;(unless (empty? standards-met)
-      ;  (display "\nlink:./index-standards.html[Standards Alignment]." o))
       (newline o))
     ;
     (define (add-exercise exercise)
@@ -595,7 +592,9 @@
           (when (string=? (car x) lesson)
             (for ([s (cdr x)])
               (add-standard s lesson #f #f))))))
-
+    ;
+    (set! dictionaries-represented
+      (sort dictionaries-represented string-ci<=?))
     ;
     (when (getenv "NARRATIVE")
       (print-menubar "index"))
@@ -958,12 +957,7 @@
         [else (display "Relevant Standards\n" o)])
   (display (enclose-tag "select" ".standardsAlignmentSelect"
              #:attribs
-             ;(format " multiple size=~a onchange=\"showStandardsAlignment()\""
-             ;        (length dictionaries-represented))
-             (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\""
-                      75
-                      ;(* 30 (- (length dictionaries-represented) 1))
-                      )
+             (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
              (string-join
                (map (lambda (dict)
                       (enclose-tag "option" ""
@@ -975,12 +969,18 @@
 
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
-  (print-menubar "index-standards")
+  (when (getenv "NARRATIVE")
+    (print-menubar "index-standards"))
   (call-with-output-file "index-standards.asc"
     (lambda (op)
       (unless (empty? standards-met)
         (when (getenv "NARRATIVE")
           (display-standards-selection dictionaries-represented op))
+        (when (getenv "LESSON")
+          (fprintf op (mstring
+                        "\n[.alignedStandardsIntro]"
+                        "_Select one or more standards from the menu on the left (⌘-click"
+                        "on Mac, Ctrl-click elsewhere)._\n\n")))
         (for ((dict dictionaries-represented))
           (let ((dict-standards-met
                   (filter (lambda (s) (string=? (list-ref s 3) dict))
