@@ -593,9 +593,6 @@
             (for ([s (cdr x)])
               (add-standard s lesson #f #f))))))
     ;
-    (set! dictionaries-represented
-      (sort dictionaries-represented string-ci<=?))
-    ;
     (when (getenv "NARRATIVE")
       (print-menubar "index"))
     ;
@@ -833,20 +830,21 @@
                     (loop)))))
 
             (when (getenv "NARRATIVE")
-              (link-to-lessons-in-pathway o)
-              (create-standards-subfile standards-met dictionaries-represented)
+              (link-to-lessons-in-pathway o))
 
+            (set! dictionaries-represented
+              (sort dictionaries-represented string-ci<=?))
+
+            (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
+              (create-standards-subfile standards-met dictionaries-represented))
+
+            (when (getenv "NARRATIVE")
               (print-other-resources-intro o)
               (print-link-to-glossary o)
               (print-link-to-standards o)
               (print-link-to-student-workbook o)
               (print-link-to-teacher-resources o)
-              (print-link-to-forum o)
-
-              )
-
-            (when (getenv "LESSONPLAN")
-              (create-standards-subfile standards-met dictionaries-represented))
+              (print-link-to-forum o))
 
             (unless #f ;(getenv "EXERCISE")
               (fprintf o "\n\n")
@@ -902,12 +900,9 @@
         (set! glossary-items
           (sort glossary-items #:key car string-ci<=?))
         (when (getenv "NARRATIVE")
-          (fprintf op (mstring "= {nbsp}"
-                        ""
-                        "{nbsp}\n\n")))
-        (fprintf op (if (getenv "LESSON")
-                        ".Glossary\n"
-                        "== Glossary\n\n"))
+          (fprintf op "= Glossary\n\n"))
+        (when (getenv "LESSON")
+          (fprintf op ".Glossary\n\n"))
         (fprintf op "[.glossary]~%")
         (for-each
           (lambda (s)
@@ -951,7 +946,7 @@
 
 (define (display-standards-selection dictionaries-represented o)
   (when (getenv "NARRATIVE")
-    (fprintf o "= {nbsp}\n\n"))
+    (fprintf o "= Standards\n\n"))
   (print-standards-js o)
   (cond [(getenv "NARRATIVE")
          (display
