@@ -945,28 +945,34 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection dictionaries-represented o)
-  (when (getenv "NARRATIVE")
-    (fprintf o "= Standards\n\n"))
-  (print-standards-js o)
-  (cond [(getenv "NARRATIVE")
-         (display
-           (mstring
-             "\nThis pathway aligns with several important teaching standards."
-             "Select particular standards from the following menu to see"
-             "which items in the standards are met.\n\n")
-           o)]
-        [else (display "Relevant Standards\n" o)])
-  (display (enclose-tag "select" ".standardsAlignmentSelect"
-             #:attribs
-             (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
-             (string-join
-               (map (lambda (dict)
-                      (enclose-tag "option" ""
-                        #:attribs (format " value=\"standards-~a\"" dict)
-                        dict))
-                    dictionaries-represented)
-               "\n")) o)
-  (display "\n\n" o))
+  (let ([narrative? (getenv "NARRATIVE")])
+    (when narrative? (fprintf o "= Standards\n\n"))
+    (print-standards-js o)
+    (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
+    (cond [narrative?
+            (display
+              (enclose-div ""
+                (mstring
+                  "\nThis pathway aligns with several important teaching standards."
+                  "Select particular standards from the following menu to see"
+                  "which items in the standards are met.\n"))
+              o)]
+          [else (display "Relevant Standards\n" o)])
+    (when narrative? (display (create-begin-tag "div" "") o))
+    (display (enclose-tag "select" ".standardsAlignmentSelect"
+               #:attribs
+               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
+               (string-join
+                 (map (lambda (dict)
+                        (enclose-tag "option" ""
+                          #:attribs (format " value=\"standards-~a\"" dict)
+                          dict))
+                      dictionaries-represented)
+                 "\n")) o)
+    (when narrative?
+      (display (create-end-tag "div") o)
+      (display (create-end-tag "div") o))
+    (display "\n\n" o)))
 
 (define (create-standards-subfile standards-met dictionaries-represented)
   ;(printf "doing create-standards-subfiles ~s\n" standards-met)
