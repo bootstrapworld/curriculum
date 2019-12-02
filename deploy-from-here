@@ -1,12 +1,12 @@
-# last modified 2019-11-27
+# last modified 2019-11-29
+
+if test -f distribution.tar.bz2; then
+  rm -fr distribution
+  tar jxf distribution.tar.bz2
+fi
 
 if test ! -d distribution; then
-  if test -f distribution.tar.bz2; then
-    tar jxf distribution.tar.bz2
-  fi
-  if test ! -d distribution; then
-    echo distribution/ not found; exit
-  fi
+  echo distribution/ not found; exit
 else
   for f in pyret wescheme; do
     if test ! -d distribution/bs-game-pathway-$f; then

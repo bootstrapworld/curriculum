@@ -913,11 +913,17 @@
         (fprintf op "~%~%")))
     #:exists 'replace))
 
+(define (expand-dict-abbrev dict)
+  (case dict
+    [("CCSS") "Common Core State Standards"]
+    [else (format "~a Standards" dict)]))
+
 (define (create-standards-section dict standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-      (fprintf op (if (getenv "LESSON")
-                      ".~a Standards Statements\n"
-                      "== ~a Standards Statements\n\n") dict)
+  (fprintf op (if (getenv "LESSON")
+                  ".~a Statements\n"
+                  "== ~a Statements\n\n") 
+           (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for-each
     (lambda (s)
