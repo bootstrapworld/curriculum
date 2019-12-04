@@ -634,15 +634,9 @@
                                         [else (printf "Item ~a not found in glossary~%"
                                                       arg)]))]
                                [(string=? directive "std")
-                                ;FIXME maybe remove this directive?
                                 (let ([args (read-commaed-group i directive)])
-                                  (when (empty? args)
-                                    (printf "WARNING: Directive @std has ill-formed argument~%"))
-                                  (for-each
-                                    (lambda (arg)
-                                      (add-standard arg #f #f o)
-                                      )
-                                    args))]
+                                  (printf "WARNING: Directive @std is obsolete\n")
+                                  )]
                                [(string=? directive "image")
                                 (let ([args (read-commaed-group i directive)])
                                   (display (make-image (car args) (cdr args)) o))]
@@ -753,10 +747,11 @@
                                                    (getenv "TEACHER_RESOURCES"))
                                                ", window=\"_blank\"" "")))]
                                [(string=? directive "lesson-description")
-                                (unless (getenv "LESSONPLAN") ;TODO or LESSON or both?
+                                (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
                                   (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
                                 (display-lesson-description (read-group i directive) o)]
                                [(string=? directive "solutions-workbook")
+                                ;TODO: don't need this anymore -- link is autogen'd
                                 (unless (getenv "TEACHER_RESOURCES")
                                   (error 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
                                 (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")

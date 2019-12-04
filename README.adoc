@@ -1,125 +1,194 @@
-= Read me
+:toc:
+:toclevels: 4
 
-The generated doctree is at
-https://bootstrapworld.github.io/curriculum.
+= READ ME
 
-== Building
+We describe here the directories and files in the `curriculum`
+directory, and how to use the programs provided.
 
-The top directory contains the subdirectories `lessons`,
-`pathways`, which between them contain the curriculum content.
-Explore them to see where things are.
+For a generated
+document tree, please see
+https://bootstrapworld.github.io/curriculum/ or
+https://bootstrapworld.org/materials/.
 
-  build-pathway
-  /lib/asciidoctor.css
-       shared.css
-       adoc-preproc.rkt
-       copy-lessons.rkt
-       form-elements.rkt
-       function-directives.rkt
-       make-workbook.rkt
-  /shared
-    /langs/en-us/curriculum.css
-                 BSABigIdeas.pdf
-                 front-cover-teacher.pdf
-                 defines.rkt
-                 glossary-terms.rkt
-                 standards-dictionary.rkt
-                 curriculum.css
-  /lessons
-    /lessonX/langs/en-us/index.adoc
-                         exercises/recipe.adoc
-                         images/picture.jpg
-                         workbook-pages/lesson-index.rkt
-                         workbook-pages/page1.adoc
-                         workbook-pages/page2.pdf
-                         workbook-pages/pyret/page2.pdf
-                         workbook-sols-pages/page2.pdf
-                         workbook-sols-pages/pyret/page2.pdf
+== Structure of the `curriculum` directory
 
-  /pathways
-    /pathwayX/langs/en-us/index.adoc
-                          workbook-index.rkt
-                          external-index.rkt
-                          resources/index.adoc
+The top directory contains a bunch of scripts and subdirectories.
 
-In particular, “lesson A” is in subdirectory `lessonA` inside
-`lessons`. The lesson plan is the `index.adoc` file in
-`lessons/lessonA/langs/en-us`.
+The curriculum content is placed in the subdirectories `lessons`
+and `pathways`. `lessons` contains individual lessons, including
+the lesson plan, exercises, and workbook pages. `pathways`
+contains pathway directories, each of which defines a collection
+of lessons. (It is possible for a lesson to occur in multiple
+pathways.)
 
-(As a convenience, the lesson plan `.adoc` file can be
-named anything, e.g., `jened.adoc`. If there are multiple
-`.adoc` files, it is not reliably known which of them will be the
-lesson plan. However, a file `index.adoc`, if it exists, will
-definitely be the lesson plan.)
+The subdirectories `lib` and `shared` contain the components of
+the program used to generate web pages and PDFs from the
+`lessons` and `pathways`. `shared` contains directories named for
+the various natural languages used for instruction, e.g., `en-us`
+for US English, and `es-mx` for Mexican Spanish. Inside these
+dwell centralized educational-standards dictionaries, e.g.,
+`csta-standards-dictionary.rkt` for a list of standards defined
+by the CSTA. Also present is a general glossary of terms used in
+the lessons: `glossary-terms.rkt`.
 
-The exercises associated with lesson A are alongside the lesson
-plan adoc file, in subdirectory `exercises`. Images are in
-subdir `images`. Single workpages are in subdir `workbook-pages`
-(some of these can be static PDFs). The index of these lesson
-pages, in correct order, is in `lesson-index.rkt`. By default,
+The main script is `build-pathway` which takes a pathway name and
+constructs the web pages and PDFs for it in a directory called
+`distribution`.
+
+Here is a skeleton of the `curriculum` tree, showing the salient
+files, with a sample lesson and sample pathway:
+
+  curriculum/
+    build-pathway
+    lib/
+    shared/langs/
+      en-us/
+    lessons/
+      sample-lesson/
+        langs/
+          en-us/
+            index.adoc
+            images/
+            pyret/
+            wescheme/
+            exercises/
+              pyret/
+              wescheme/
+            exercises-sols/
+              pyret/
+              wescheme/
+            workbook-pages/
+              lesson-index.rkt
+              pyret/
+              wescheme/
+            workbook-sols-pages/
+              pyret/
+              wescheme/
+    pathways/
+      sample-pathway/
+        langs/
+          en-us/
+            index.adoc
+            workbook-index.rkt
+            external-index.rkt
+            resources/
+              index.adoc
+
+Some standard subdirectory names are used to separate and shadow
+content based on (natural) language of instruction, the
+programming language used, or whether content is being built for
+student or teacher. Thus:
+
+- The `langs` subdirectory uses further subdirectories, e.g.,
+`en-us` for US English and `es-mx` for Mexican Spanish. Source
+documents from the relevant natural language are chosen based on
+the `--language` option chosen during build. The default is
+`en-us`. In order to ease transition, if a language other than
+`en-us` is chosen, any content unavailable in the new language is
+filled in by what's in `en-us`.
+
+- Some of the directories have `pyret` and `wescheme`
+subdirectories or both. These contain content that should shadow
+the default content (one directory level up) if that
+programming language is used. Specify this choice via the
+`--proglang` option during build. The default is usually `pyret`,
+but in some cases content is built for both `pyret` and
+`wescheme`.
+
+- The directory `workbook-sols-pages` is used to house source
+that will shadow `workbook-pages`, when the pages meant only for
+teacher use are created. (`sols` = solutions.)  Similarly,
+the `exercises-sols` directory shadows `exercises` for solutions.
+
+In all these cases, it is important that the shadowing content
+have the same file basename as the content that is being
+shadowed. Extensions can vary; thus it is possible for
+`filename.pdf` to shadow `filename.adoc` and vice versa.
+
+=== Structure of a lesson directory
+
+Each lesson has a subdirectory, e.g., `sample-lesson`, under the
+`lessons` directory.
+
+A lesson plan is specified by an `.adoc` file in the language
+directory for that lesson, e.g.,
+`sample-lesson/langs/en-us/index.adoc`. While the file basename doesn't
+have to be `index`, ensure that there is only one `.adoc` file at
+this level.
+
+The exercises associated with the lesson are alongside the lesson
+plan adoc file, in subdirectory `exercises` and `exercises-sols`. Images are in
+subdir `images`. Single workpages are in subdirs `workbook-pages`
+(some of these can be static PDFs) and `workbook-sols-pages`.
+(The `sols` versions, as already explained, are meant to supply
+shadowing content intended for teacher-only documents.)
+
+The file `workbook-pages/lesson-index.rkt` lists -- as a Racket
+list -- the pages in the
+`workbook-pages` in the order in which they should show up in the
+final workbook.
+By default,
 these pages are rendered in portrait mode. If you desire a
 particular file `file.adoc` to be in landscape, its entry in
-`lesson-index.rkt` should be `("file.adoc" "landscape")`. (The
+`lesson-index.rkt` should be `("file.adoc" "landscape")` rather
+then `"file.adoc"`. (The
 entry `"file.adoc"` is convenient shorthand for `("file.adoc"
 "portrait")`.)  (The strings `"landscape"` and `"portrait"` may
 be in any case.)
 
 Lesson pages are paginated by default when they show up in the
-workbook. If you don’t want a page to be populated, its entry in
+workbook. If you don't want a page to be populated, its entry in
 `lesson-index.rkt` should be `("file.adoc" "portrait"
-"nopagenum")`. (The aspect should also be mentioned, even if it’s
+"nopagenum")`. (The aspect should also be mentioned, even if it's
 the default.)
 
-The subdir `workbook-sols-pages` contains workpages that would
-replace corresponding pages in the `workbook-pages` directory
-when creating the teacher version of the lesson pages. They use
-the same filename as the “student” pages they replace. Only pages
-that differ between the two versions need be supplied.
+=== Structure of a pathway directory
 
-The subdirs `pyret` in the `workbook-pages` and
-`workbook-sols-pages` contain workpages that would replace
-corresponding pages when creating versions for the option
-`--proglang pyret` (see below).
+Each pathway has a subdirectory, e.g., `sample-pathway`, under the
+`pathways` directory.
 
-There are three pathways in the repo for now:
+A pathway narrative is specified by an `.adoc` file in the
+language directory for that pathway, e.g.,
+`sample-pathway/langs/en-us/index.adoc`. The file basename
+doesn't have to be `index`, but there should be only one `.adoc`
+file in this directory.
 
-  pathways/pathwayP
-  pathways/bs-flags-pathway
-  pathways/bs-game-pathway
+There can also be a file `external-index.rkt` used to expand
+pointers to URLs in the pathway narrative (see below).
 
-In a pathway’s directory, the pathway narrative is in
-`langs/en-us/index.adoc`.
-Alongside it, its
-index of lessons, in correct order, is in `workbook-index.rkt`.
-These lessons are drawn from the `lessons`
-tree.
+In the same directory, the file `workbook-index.rkt` lists -- as
+a Racket list -- the names of the lessons (e.g., `sample-lesson`)
+that should be included in the
+pathway, in the order in which they should appear in the pathway
+workbook.
 
-(As a convenience, the pathway narrative `.adoc` file can be
-named anything, e.g., `narrative.adoc`. If there are multiple
-`.adoc` files, it is not reliably known which of them will be the
-narrative. However, a file `index.adoc`, if it exists, will
-definitely be the narrative.)
+The pathway directory can also contains a `resources`
+subdirectory, where an `.adoc` file describes the "`Teacher
+Resources`" page. There should be only one such `.adoc` file, but
+it can be named anything (not necessarily `index.adoc`).
 
-The pathway directory contains a subdirectory `resources`, where
-`index.adoc` is the source for the Teacher Resouces page.
-
-(As a convenience, the teacher resources `.adoc` file can be
-named anything, e.g., `teacher-resources.adoc`. If there are multiple
-`.adoc` files, it is not reliably known which of them will be the
-teacher resources page. However, a file `index.adoc`, if it exists, will
-definitely be chosen for the teacher resources page.)
-
-=== The `build-pathway` script
+== The `build-pathway` script
 
 The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments, an optional `--language`
-argument, and an optional `--proglang` argument.
+number of pathway arguments, and/or any combination of the
+options `--debug`, `--help`, `--language`, `--nopdf`,
+`--proglang`, `--verify-link`, and `--version`.
 
-For each of the pathway args, it creates a document tree under
-the `distribution` directory. A pathway arg can be either the
+If `--help` or `--version`, the script displays a help message
+and version information, respectively, and quits.
+
+Otherwise, the
+script creates a document tree under the `distribution` directory
+for every pathway argument.
+A pathway arg can be either the
 pathway name, or its relative pathname from the `build-pathway`
-script, with or without a trailing slash, e.g., `pathwayP`, or
-`pathways/pathwayP`, or `pathways/pathwayP/`.
+script, with or without a trailing slash, e.g., all of the
+following refer to the same pathway:
+
+  sample-pathway
+  pathways/sample-pathway
+  pathways/sample-pathway/
 
 If no pathway arg is supplied,
 `build-pathway` generates doctrees for every pathway in
@@ -130,60 +199,69 @@ If no `--language` option is supplied, the prose language used is
 `--language es-mx`.
 
 The doctree for the built pathway under `distribution` resides
-under a subdirectory named for the prose language, e.g., `en-us`.
+under a subdirectory named for the prose language, e.g., `en-us`,
+e.g.,
 
    distribution/
-     pathwayX/en-us/index.html
-                    pathway-lessons.html
-                    lessons/
-                           index.html
-                           exercises/*.{html,pdf}
-                           workbook-pages/*.{html.pdf}
-                    resources/
-                       index.html
-                       protected/
-                          workbook-sols.pdf
-                    workbook/workbook.pdf
+     sample-pathway/
+       en-us/
+         index.shtml
+         lessons/
+         resources/
+           protected/
+             workbook-sols.pdf
+         workbook/
+           workbook.pf
 
-If no `--proglang` option is supplied to `build-pathway`, the programming language
-used is `pyret`. To specify another language, say `wescheme`, use
-`--proglang wescheme`. The distribution doctree for a language
-other than `pyret` is named with that language as a hyphenated
-suffix, e.g., `pathwayP-wescheme`.
+Here `index.shtml` is the web page corresponding to the pathway
+narrative; `resources/protected/workbook-sols.pdf` is the Teacher
+workbook PDF; and `workbook/workbook.pdf` is the student
+workbook. These filenames are standard and do not necessarily
+mirror the names of the source documents.
 
-The general run of pathways are written for `pyret`. However, for
-now, the pathways named `bs-game-pathway` and `algebra` are
-written for both `pyret` and `wescheme`, and `wescheme` version
-is equally or more important than the `pyret version. Such pathways always use
-the language suffix for better disambiguation. Thus,
-`algebra-wescheme` coexists with `algebra-pyret`.
-(This special case may be removed in future
-releases.)
+If no `--proglang` option is supplied, the progamming language is
+assumed to be `pyret`. The other possible value for the option is
+`wescheme`. The distribution directory for a pathway built with
+`wescheme` has the suffix `-wescheme`.
+
+NOTE: A small number of pathways have both `pyret` and `wescheme`
+versions, and they should coexist. To better distinguish the two,
+the distribution directories for them currently have the suffix
+`-pyret` and `-wescheme` respectively. However, in general,
+exclusively `pyret`-based pathways do without the `-pyret`
+suffix.
 
 Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
-“protected” directory `resources/protected`.
+"`protected`" directory `resources/protected`.
 
-The pathway narrative web page `index.html` includes a link to
+Pages under `resources/protected` may prompt you for a teacher
+password, which is available on signing up with Bootstrapworld.
+
+The pathway narrative web page `index.shtml` includes a link to
 `pathway-lessons.html`, which contains all the lesson plans
-associated with the pathway. It also points to the student
-workbook PDF. (The teacher, or solutions, workbook, can be
-referred to in the teacher resources page with the directive
-`@solutions-workbook`.)
+associated with the pathway; the student
+workbook PDF; a page listing the standards met; and a glossary
+page for the terms used in the lessons.
 
-==== `build-pathway` debugging
+=== `build-pathway` debugging
 
-`build-pathway` takes a few other options that are mainly useful
-for debugging.
+The other options of `build-pathway` are predominantly used for
+debugging:
 
 - `--debug` retains various temp files in the generated doctree.
-- `--nopdf` avoids PDF generation to speed up the debugging process.
-- `--verify-links` reports invlaid links in the doctree (also in
-file `invalid-links.html`)
-- `--help` shows help for the build-pathway script.
-- `--version` shows the version of the script.
+- `--nopdf` avoids PDF generation to speed up the debugging
+process. - `--verify-links` reports invalid links in the doctree
+on console as well as in the file `invalid-links.html`)
 
-== Deploying to `bootstrapworld.github.io/curriculum`
+== Deployment
+
+We currently deploy to two locations:
+
+- A GitHub.io site: https://bootstrapworld.github.io/curriculum
+- A Bootstrapworld.org site: https://www.bootstrapworld.org/materials/spring2020/courses
+
+=== Deploying to `bootstrapworld.github.io/curriculum`
 
 As a convenience, a `git push` into the `master` branch
 automatically triggers a build of all the pathways
@@ -193,40 +271,53 @@ https://bootstrapworld.github.io/curriculum.
 This is done via Travis, which creates and pushes a `gh-pages`
 branch onto the GitHub repo.
 
-=== Deploying to `github.io` without Travis
+==== Deploying to `github.io` without Travis
 
 The script `deploy-to-github-io` can be called from your clone
 to update the documents on
 `https://bootstrapworld.github.io/curriculum`. This circumvents
 Travis, but it also requires that your clone be in a well-tended
-environment, with all the programs for building the curriculum
-available (see section _Prereqs_ below).
+environment, with all the programs necessary for building the curriculum
+available (see section _Prerequisites_ below).
 
-== Deploying to the Bootstrap website
+=== Deploying to the Bootstrap website
 
 If you've cloned the https://github.com/bootstrapworld/curriculum
-repo anywhere on the machine hosting the Bootstrap website, and
-you have a valid `distribution` subdirectory, then calling the
-script `deploy-from-here` updates the documents displayed on the
-site.
+repo anywhere on the machine hosting the Bootstrap website
+bootstrapworld.org, and
+you have a valid `distribution.tar.bz2` tarball or a
+valid `distribution` subdirectory, then calling the script
+`deploy-from-here` uses these files to update the documents displayed on the site.
 
-If you don't have a valid `distribution` subdirectory, calling
+This assumes you created the `distribution` or
+`distribution.tar.bz2` content elsewhere (the machine hosting the
+site doesn't have all the requisite programs for this).  Note
+that if both are present, `distribution.tar.bz2` is favored.
+
+If you have neither `distribution` nor tarball, calling
 the script `deploy-from-github-io` fetches the `distribution`
 subdirectory from the `gh-pages` branch, which contains the
 latest converted files as shown on the `github.io` site mentioned
-above.
+above. It uses this to update the site. Note that this uses the
+`gh-pages` branch only, and does not involve making the local `master`
+branch "`dirty`".
 
-Currently, the entry URL for the curriculum on the Bootstrap site is
-https://www.bootstrapworld.org/materials/spring2020/courses.
+== Standards compliance
 
-== Sample lesson plan
+The file `shared/lang/en-us/lessons-and-standards.rkt` (location
+pro tem) contains an association of lessons with the educational
+standards they comply with. Dictionaries for the various
+standards are available in the same directory: For now, these are
 
-The following was reverse-engineered from the latest Google Docs
-mock-up of a lesson from Jen/Ed. Change this to reflect
-experience.
+  ccss-standards-dictionary.rkt
+  csta-standards-dictionary.rkt
+  ok-standards-dictionary.rkt
+  old-standards-dictionary.rkt
 
-link:distribution/pathwayP/en-us/lessons/lessonA/index.html[Sample
-lesson plan]
+The build process creates a menu for finding out the standards
+complied with by the lessons and the pathway. The lesson's menu
+is embedded in the lesson plan, whereas the pathway's (larger)
+menu is linked to.
 
 == Git basics
 
@@ -247,14 +338,14 @@ Every time the original changes, update like so:
   git fetch upstream
   git merge upstream/master
 
-You are probably in your own `master` branch. Even if you’re
-“branching out” to other new branches, the above merge will
-mostly work.  “Mostly” because merge often triggers conflicts
+You are probably in your own `master` branch. Even if you're
+"`branching out`" to other new branches, the above merge will
+mostly work.  "`Mostly`" because merge often triggers conflicts
 depending on how far you have diverged from the original. At the
-very least, make sure you’ve checked in all your changes that you
-care about, before you attempt a merge. For changes you aren’t
+very least, make sure you've checked in all your changes that you
+care about, before you attempt a merge. For changes you aren't
 ready to check in, save the concerned files somewhere else, and
-make sure there are no “modified” files in your directory.
+make sure there are no "`modified`" files in your directory.
 
 === Creating your private branch in the original repo
 
@@ -293,176 +384,17 @@ pathways, there will be no conflicts from that regard.
 
 NB: When you create a pathway, named `pathwayQ` say, use
 
-  `./build-pathway pathwayQ`
+  ./build-pathway pathwayQ
 
-to generate its files. Without an argument, `build-pathway` uses
-`bs-flags-pathway`.
+to generate its files, as already described in a previous
+section.
 
-== Glossary and standards
+== Prerequisites
 
-Glossary items are annotated with the directive `@vocab`. E.g.,
+The following external programs are needed to construct documents from
+this repo:
 
-  @vocab{function}
-
-Standards are annotated with `@std`. E.g.,
-
-  @std{2-AP-10 , 3A-NI-06 , N-Q&1&2, N-Q&1&3}
-
-Such items are searched in
-`shared/langs/en-us/{glossary-terms.rkt,standards-dictionary.rkt}`,
-and are inserted as lists at the head of the document. In
-addition, glossary items for a set of files in a directory are
-collected into a file `summary.html`.
-
-== Exercises
-
-Exercise files are typically recipes and have calls to one of two
-directives
-
-  @design-recipe-exercise{...}
-
-  @assess-design-recipe{...}
-
-The former is used to specify a correct recipe; the latter to
-introduce a recipe to be debugged. See examples of such files,
-`exercise*.adoc`, in the repo.
-
-== Cross-references and pagination
-
-Both lesson plans and pathway narratives can refer to any files
-in any lessons, in particular, exercises
-or specific
-pages in a pathway workbook.  The relevant directive
-calls look like
-
-  @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
-  @worksheet-link{lessonA/workbook-pages/pageA2.pdf, link-text}
-
-The final argument for link text is optional.
-
-If called from a lesson plan for `lessonA`, the `lessonA/` may be
-dropped. Thus the first two examples can be rewritten:
-
-  @worksheet-link{exercises/exerciseA1.html, link-text}
-  @worksheet-link{workpage-pages/pageA2.pdf, link-text}
-
-Arbitrary pages can be invoked:
-
-  @worksheet-link{lessonA/jened.adoc, link-text}
-
-This refers to `jened.adoc` in `lessonA`. Typically pages within
-the same lesson’s directory are used, in which case the `lessonA`
-may be replaced by a `.`:
-
-  @worksheet-link{./jened.adoc, link-text}
-
-Subdirectories can also be used:
-
-  @worksheet-link{./resources/jened.adoc, link-text}
-
-For pages known to be workbook pages, the rendered link has its
-link text (if any) augmented with a reference to the specific
-page number in the pathway worksheet.
-
-A workbook page can include an exercise in the same lesson using
-
-  @worksheet-include{exercises/exerciseA1.adoc}
-
-(It does not make sense to use `@worksheet-link` as workbooks are
-standalone PDFs that are typically printed, and any links in it
-would not be reachable anyway.)
-
-Use `@image{images/pic.png}` to insert the image `pic.png`.
-
-Use commas to add image options, e.g.,
-
-  @image{images/player-move.png, PlayerMovement, 400, align="center"}
-
-=== Generic links
-
-Use `@link{URL, link-text}` to refer to a generic URL
-not part of the curriculum hierarchy.  The second argument for
-the link text is optional.
-
-==== Generic links with standard names
-
-Use `@worksheet-link{pointer, link-text}` to refer to a pointer
-(a standard name) to a possibly volatile URL. E.g.,
-
-  @worksheet-link{demo-page, The Demo Page}
-
-The pointer `demo-page` is resolved using an index file
-`external-index.rkt`, which contains an assoc list, with entries
-like
-
-  ("demo-page"
-       "https://bootstrapworld.github.io/curriculum/index.html")
-
-==== Programming language specific text
-
-Use the conditional with the attribute `proglang` to selectively
-render portions of the document for a specific programming
-language. E.g.,
-
-```
-  ifeval::["{proglang}" == "pyret"]
-  This text occurs in the Pyret-specific portion of the
-  document.
-  endif::[]
-```
-
-== Some useful classes and directives
-
-Some standard CSS classes to emphasize certain regions of text.
-
-Use
-
-  [.strategy-box]
-  .Header
-  ****
-  Rem suscipit soluta quas recusandae dolor culpa non. Iste aut
-  ipsum qui eos quidem et. Debitis omnis ipsam cupiditate ut vero
-  odio.
-  ****
-
-to generate a “strategy box”, a boxed text with a blue border.
-
-Use
-
-   [.notice-box]
-
-to generate a “notice & wonder box”, a boxed text with a purple
-border.
-
-Add the class `.physics-table` to a table attribute to generate a
-single-arg function
-table, e.g., one that maps miles driven to cost.
-
-Use
-
-   @lesson-description{... text ...}
-
-to identify text describing a lesson plan. This is displayed both
-in-place and in the autogenerated link to the lesson plan in the
-pathway narrative.
-
-Use `@comment{some comment prose}` anywhere in the text portions
-of the document to indicate that `some comment prose` should show
-up as an HTML
-comment.
-
-Use `@span{classes and id}{text}` to enclose CSS classes and/or IDs
-around arbitrary text. (``@span``s can be nested.)  ``@span``'s
-first argument is a comma-separated list of CSS classes or IDs.
-Classes are specified with an initial dot and IDs with an initial
-`#`. Note that at most one ID is meaningful, although any number
-of classes may be specified.
-
-== Prereqs
-
-Needed:
-
-* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
+- Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
 (The format is AsciiDoc, the program that converts it is
 Asciidoctor. I wish we had this neat nomenclatural separation for
 other programs too.) To install it,
@@ -476,32 +408,42 @@ on Linux machines, and
 on macOS.
 +
 
-* GNU sed. This is pre-installed on Linux, but may need to be
+- GNU sed. This is pre-installed on Linux, but may need to be
 explicitly installed on macOS, using `brew` as above (i.e., `brew
 install gnu-sed`).
 
-* Racket, to do preprocessing for metadata and other
-bookkeeping. Any version should do. I’m not using any
+- Bash. Keeps all the scripts humming.
+
+- Racket, to do preprocessing for metadata and other
+bookkeeping. Any version should do. I'm not using any
 bleeding-edge features of Racket.
 
-* PDF manipulators `wkhtmltopdf` and `pdftk`.  Standard
+- PDF manipulators `wkhtmltopdf` and `pdftk`.  Standard
 installation as for Asciidoctor.
 
-* TeX containing `pdflatex`. Install a suitable TeX system for
-your OS (for Linux, it’s `texlive`).
+- TeX containing `pdflatex`. Install a suitable TeX system for
+your OS (for Linux, it's `texlive`).
 
-* `linkchecker`, optional. Standard installation as for Asciidoctor.
+- `linkchecker`, optional. Standard installation as for Asciidoctor.
 
-=== A brief AsciiDoc intro
+== Authoring guidelines
+
+The `.adoc` files peppering this curriculum repo are written in
+AsciiDoc overlaid with some preprocessing macros written in
+Racket. AsciiDoc is a plain-text-based markup that is converted
+by the Asciidoctor program into HTML (among other things, but we
+don't use those parts).
+
+=== A brief introduction to AsciiDoc
 
 An AsciiDoc source file typically as the extension `.adoc`, at
 least in our setup.
 
-A title (aka “level 1”) header has its line preceded by a single
+A title (aka "`level 1`") header has its line preceded by a single
 equal sign.
 
-Level 2 headers (“sections”) are preceded by two equal signs.
-Similarly for “subsections” at level 3, 4, 5, 6.
+Level 2 headers ("`sections`") are preceded by two equal signs.
+Similarly for "`subsections`" at level 3, 4, 5, 6.
 
   = Title at level 1
 
@@ -528,7 +470,7 @@ https://asciidoctor.org/docs/user-manual[Asciidoctor manual] for
 the whole story. Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
-add it as a Racket directive.)
+perhaps add it as a Racket directive.)
 
 If your Asciidoctor version is at least 2.0.0, you can type
 
@@ -541,4 +483,197 @@ file, do
 
 and open `help.html` in your browser.
 
-// trivial line to trigger travis
+=== Racket preprocessing
+
+The `.adoc` files we author can contain some additional markup,
+which we shall call _directives_.  All directives begin with an
+`@`, and, if they take arguments, the latter are encased in
+braces (`{}`). Here are all the directives:
+
+==== Glossary
+
+Glossary items are annotated with the directive `@vocab`. E.g.,
+
+  @vocab{function}
+
+In a lesson plan, such items are searched in
+`shared/langs/en-us/glossary-terms.rkt`,
+and are inserted as lists at the head of the document.
+
+For a pathway narrative, the glossary items from all its
+constituent lessons are collected into a file
+`index-standards.shtml` that is linked to in the narrative
+page.
+
+==== Lesson descriptions
+
+Each lesson plan is strongly advised to have a
+
+  @lesson-description{A brief paragraph describing the lesson.}
+
+This is displayed in the lesson itself, but is also part of the
+autogenerated thumbnails used by the pathway narrative for each
+of its lessons.
+
+==== Exercises
+
+Exercise files are typically recipes and have calls to one of two
+directives
+
+  @design-recipe-exercise{...}
+
+  @assess-design-recipe{...}
+
+The former is used to specify a correct recipe; the latter to
+introduce a recipe that needs to be debugged. For examples of
+such recipes, please see the `.adoc` files in the various
+`exercises` and `exercises-sols` subdirectories in the repo.
+
+Some exercise files are more elaborate than recipes and contain
+sketches of solutions and tables that need to be filled. These
+use some extra directives like `@do`, `@show`, `@code` that then
+use raw Racket code to format the exercise. Examples of
+these can be found in the `Supplemental` lesson.
+
+==== Cross-references and pagination
+
+Both lesson plans and pathway narratives can refer to any files
+in any lessons, in particular, exercises
+or specific
+pages in a pathway workbook.  The relevant directive
+calls look like
+
+  @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
+  @worksheet-link{lessonA/workbook-pages/pageA2.pdf, link-text}
+
+The final argument for link text is optional.
+
+If called from a lesson plan for `lessonA`, the `lessonA/` may be
+dropped. Thus the first two examples can be rewritten:
+
+  @worksheet-link{exercises/exerciseA1.html, link-text}
+  @worksheet-link{workpage-pages/pageA2.pdf, link-text}
+
+Arbitrary pages can be invoked:
+
+  @worksheet-link{lessonA/jened.pdf, link-text}
+
+This refers to `jened.pdf` in `lessonA`. Typically pages within
+the same lesson's directory are used, in which case the `lessonA`
+may be replaced by a `.`:
+
+  @worksheet-link{./jened.pdf, link-text}
+
+Subdirectories can also be used:
+
+  @worksheet-link{./resources/jened.pdf, link-text}
+
+The directive `@exercise-link` is a near-synonym of
+`@worksheet-link` that is used only for exercises. (It differs
+from `@worksheet-link` only in that the exercise directory it
+points to is not allowed to be shadowed, e.g., `exercises` in the
+path is not replaced by `exercises-sols`.)
+
+The directive `@worksheet-include` uses the same argument
+structure as `@worksheet-link` but instead of linking to its file
+argument
+it includes the contents of the file. E.g.,
+a workbook page can include an exercise in the same lesson using
+
+  @worksheet-include{exercises/exerciseA1.adoc}
+
+(It would not make sense to use `@worksheet-link` here, as workbooks are
+standalone PDFs that are typically printed, and any links in it
+would not be reachable anyway.)
+
+Use `@image{images/pic.png}` to insert the image `pic.png`.
+
+Use commas to add image options, e.g.,
+
+  @image{images/player-move.png, PlayerMovement, 400, align="center"}
+
+==== Generic links
+
+Use `@link{URL, link-text}` to refer to a generic URL
+not part of the curriculum hierarchy.  The second argument for
+the link text is optional.
+
+===== Generic links with standard names
+
+Use `@worksheet-link{pointer, link-text}` to refer to a pointer
+(a standard name) to a possibly volatile URL. E.g.,
+
+  @worksheet-link{demo-page, The Demo Page}
+
+The pointer `demo-page` is resolved using an index file
+`external-index.rkt`, which contains an assoc list, with entries
+like
+
+  ("demo-page"
+       "https://bootstrapworld.github.io/curriculum/index.html")
+
+==== Comments
+
+HTML comments can be inserted anywhere in the `.adoc` file as
+
+  @comment{A comment}
+
+AsciiDoc has its own commenting mechanism with `//` and `////`
+(see manual), but these are expunged when the HTML is created. To
+have comments that persist as HTML comments, use `@comment`.
+
+==== Programming language specific text
+
+Use the conditional with the attribute `proglang` to selectively
+render portions of the document for a specific programming
+language. E.g.,
+
+```
+  ifeval::["{proglang}" == "pyret"]
+  This text occurs in the Pyret-specific portion of the
+  document.
+  endif::[]
+```
+
+==== Adding custom CSS classes
+
+Some standard CSS classes to emphasize certain regions of text.
+
+Use
+
+  [.strategy-box]
+  .Header
+  ****
+  Rem suscipit soluta quas recusandae dolor culpa non. Iste aut
+  ipsum qui eos quidem et. Debitis omnis ipsam cupiditate ut vero
+  odio.
+  ****
+
+to generate a "`strategy box`", a boxed text with a blue border.
+
+Use
+
+   [.notice-box]
+
+to generate a "`notice & wonder box`", a boxed text with a purple
+border.
+
+Add the class `.physics-table` to a table attribute to generate a
+single-arg function
+table, e.g., one that maps miles driven to cost.
+
+You can add your own CSS classes or IDs. Classes are specified
+with an initial dot and IDs with an initial `#`. Note that at
+most one ID is meaningful, although any number of classes may be
+specified. A combination of classes and ID are simply strung
+together, e.g,
+
+   [.class1.class2.class3#onlyid]
+
+The above works for blocks. Use `@span{classes and id}{text}` to
+enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
+text. ``@span``s may be nested. ``@span```'s first argument of
+classes and ID is specified in the same way as for blocks,
+without the brackets.
+
+// trivial line to trigger Travis
