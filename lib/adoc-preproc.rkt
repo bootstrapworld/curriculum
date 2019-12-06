@@ -11,7 +11,7 @@
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
-(require "draw-dep-diag.rkt")
+;(require "draw-dep-diag.rkt")
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
@@ -424,22 +424,26 @@
   (newline o))
 
 (define (display-lesson-dependencies other-lessons o)
-  (call-with-output-file "index-dependencies.txt"
-    (lambda (o)
-      (fprintf o "(")
-      (for ([lesson other-lessons])
-        (fprintf o "~s " lesson))
-      (fprintf o ")\n"))
-    #:exists 'replace)
+  ;  (call-with-output-file "index-dependencies.txt"
+  ;    (lambda (o)
+  ;      (fprintf o "(")
+  ;      (for ([lesson other-lessons])
+  ;        (fprintf o "~s " lesson))
+  ;      (fprintf o ")\n"))
+  ;    #:exists 'replace)
   (display "\n\n*Depends on:*\n" o)
-  (for ([lesson other-lessons])
-    (let ([lesson-title lesson]
-          [lesson-title-file (format "../~a/index-title.txt" lesson)])
-      (cond [(file-exists? lesson-title-file)
-             (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-            [else
-              (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-      (fprintf o "link:../~a/index.html[~a]\n" lesson lesson-title)))
+  (display
+    (string-join
+      (map (lambda (lesson)
+             (let ([lesson-title lesson]
+                   [lesson-title-file (format "../~a/index-title.txt" lesson)])
+               (cond [(file-exists? lesson-title-file)
+                      (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+                     [else
+                       (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
+               (format "link:../~a/index.html[~a]" lesson lesson-title)))
+           other-lessons)
+      ", ") o)
   (display "\n\n" o))
 
 (define (link-to-lessons-in-pathway o)
@@ -449,7 +453,7 @@
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
-    (draw-dependency-diagram lessons o)
+    ;(draw-dependency-diagram lessons o)
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
