@@ -9,7 +9,7 @@
          [item-graph (make-vector num-items)])
     (let loop ([i 0])
       (unless (>= i num-items)
-        (vector-set! item-graph i (vector '() #f))
+        (vector-set! item-graph i (vector '() 'not-yet))
         (loop (+ i 1))))
     (for-each (lambda (dep)
                 (let* ([me (car dep)]
@@ -25,13 +25,16 @@
       (letrec ([consider (lambda (i)
                            (let* ([me (vector-ref item-graph i)]
                                   [my-befores (vector-ref me 0)]
-                                  [im-done? (vector-ref me 1)])
-                             ;TODO: we don't stop show for cyclic dependency
-                             ;but perhaps warning?
-                             (unless im-done?
-                               (vector-set! me 1 #t)
-                               (for-each consider my-befores)
-                               (set! r (cons (list-ref all-items i) r)))))])
+                                  [my-status (vector-ref me 1)])
+                             (case my-status
+                               [(not-yet) (vector-set! me 1 'wip)
+                                          (for-each consider my-befores)
+                                          (set! r (cons (list-ref all-items i) r))
+                                          (vector-set! me 1 'done)]
+                               [(wip) (printf "WARNING: Cyclic dependency involving ~s in ~s\n" 
+                                              (list-ref all-items i)
+                                              deps)]
+                               [else (void)])))])
         (let loop ([i 0])
           (unless (>= i num-items)
             (consider i)

@@ -1,5 +1,6 @@
 ":"; exec racket -f $0 -m -- "$@"
 
+(require "utils.rkt")
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "create-copyright.rkt")
@@ -8,7 +9,7 @@
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
-(require "all-standards-dictionary.rkt")
+(require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
 (require "draw-dep-diag.rkt")
 
@@ -55,8 +56,6 @@
 (define *standards-met* '())
 
 (define *dictionaries-represented* '())
-
-(define *exercises-done* '()) ;FIXME needed still?
 
 (define (read-word i)
   (let loop ([r '()])
@@ -163,7 +162,7 @@
 
 (define (assoc-standards std)
   ;(printf "doing assoc-standards ~s\n" std)
-  (let* ([std-bits (regexp-split #rx"&" std)]
+  (let* ([std-bits (regexp-split #rx"&" std)] ;XXX This is probly obsolete now
          [std (list-ref std-bits 0)]
          [sublist-item #f]
          [c #f]
@@ -171,10 +170,10 @@
     (for-each
       (lambda (x)
         (unless c
-          (let ([stds-list (cdr x)])
+          (let ([stds-list (caddr x)])
             (set! c (assoc std stds-list))
             (when c (set! dict (car x))))))
-      *standards-alist*)
+      *standards-list*)
     (when (>= (length std-bits) 3)
       (set! sublist-item (string->number (list-ref std-bits 2))))
     (values sublist-item c dict)))
@@ -268,7 +267,6 @@
                   (loop (cdr args) (cons arg r))])))))
 
 (define (include-standards o)
-  (unless (getenv "LESSONPLAN") (error ' include-standards "deadc0de"))
   (display
     (mstring
       "\n\n"
@@ -286,7 +284,6 @@
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (when (getenv "NARRATIVE") (error ' include-glossary "deadc0de"))
   (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
 
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
@@ -385,7 +382,7 @@
           *pathway-root-dir*))
 
 (define *standards-dictionaries*
-  (map car *standards-alist*))
+  (map car *standards-list*))
 
 (define *page-title* #f)
 
@@ -406,7 +403,6 @@
                                  (getenv "TEACHER_RESOURCES"))])
       (display #\= o) (display #\space o)
       (when header-with-logo?
-        ;TODO repl w enclose-span
         (display
           (enclose-span ".bootstraplogo"
             "image:{pathwayrootdir}bootstraplogo.png[]")
@@ -733,12 +729,12 @@
                                                ", window=\"_blank\"" "")))]
                                [(string=? directive "lesson-description")
                                 (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
-                                  (error 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
+                                  (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
                                 (display-lesson-description (read-group i directive) o)]
                                [(string=? directive "solutions-workbook")
                                 ;TODO: don't need this anymore -- link is autogen'd
                                 (unless (getenv "TEACHER_RESOURCES")
-                                  (error 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
+                                  (ferror 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
                                 (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
                                 (newline o)
                                 (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
@@ -805,7 +801,7 @@
                                       (cond [(= (top-span-stack) 0)
                                              (display-end-span o)]
                                             [else (display c o)])]
-                                     [else (error ' preproc-n-asciidoctor "deadc0de")])]
+                                     [else (ferror ' preproc-n-asciidoctor "deadc0de")])]
                               [else (display c o)])])
                     (loop)))))
 
@@ -879,11 +875,6 @@
           *glossary-items*)
         (fprintf op "~%~%")))
     #:exists 'replace))
-
-(define (expand-dict-abbrev dict)
-  (case dict
-    [("CCSS") "Common Core State Standards"]
-    [else (format "~a Standards" dict)]))
 
 (define (create-standards-section dict dict-standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
@@ -1055,7 +1046,7 @@
                                           (sexp->arith e1 #:pyret pyret)) (cdr e))
                                    ", "))
                          ))]
-        [else (error 'sexp->arith "unknown s-exp ~s" e)]))
+        [else (ferror 'sexp->arith "unknown s-exp ~s" e)]))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
@@ -1134,7 +1125,7 @@
                                (enclose-span ".lParen" "(")
                                parts
                                (enclose-span ".rParen" ")"))))))]
-        [else (error 'sexp->block "unknown s-exp")]))
+        [else (ferror 'sexp->block "unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
   (when (string? exp)
@@ -1251,7 +1242,7 @@
 
 (define (open-response-exercise colA answer-type)
   (unless (member answer-type '("circeval" "code" "math" "text"))
-    (error 'open-response-exercise "Unexpected answer type ~a\n" answer-type))
+    (ferror 'open-response-exercise "Unexpected answer type ~a\n" answer-type))
   (two-col-layout colA '()
                   #:rightcolextratag (string-append ".studentAnswer" "." answer-type)))
 
@@ -1286,9 +1277,9 @@
                                      #:compare-with compare-with)]
                        [label #f])
                    (when (and (< i 0) (not some-no-match?))
-                     (error 'matching-exercise-answers "Couldn't find ~a in ~a\n"
+                     (ferror 'matching-exercise-answers "Couldn't find ~a in ~a\n"
                             ansC presented-ans))
-                   (enclose-div ".labeldRightColumn"
+                   (enclose-div ".labeledRightColumn"
                      (if (>= i 0)
                          (let ([label (int->alpha i)])
                            (string-append
@@ -1315,7 +1306,7 @@
 
 (define (main . cl-args)
   (unless (= (length cl-args) 1)
-    (error 'adoc-preproc.rkt "Exactly one arg accepted"))
+    (ferror 'adoc-preproc.rkt "Exactly one arg accepted"))
   (preproc-n-asciidoctor (car cl-args)))
 
 ;(void)

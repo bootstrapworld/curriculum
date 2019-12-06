@@ -1,7 +1,8 @@
 #lang racket
 
+(require "utils.rkt")
+
 (provide
-  mstring
   create-begin-tag
   create-end-tag
   enclose-tag
@@ -16,9 +17,6 @@
   display-begin-span
   display-end-span
   )
-
-(define (mstring . strs)
-  (string-join strs "\n"))
 
 (define (create-begin-tag tag-name classes #:attribs [attribs #f])
   (let ([classes (if (string=? classes "") '()
@@ -77,7 +75,7 @@
 (define (decrement-top-span-stack)
   (let ([n (car *span-stack*)])
     (when (<= n 0)
-      (error 'span "Bad @span: Check missing braces"))
+      (ferror 'span "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
 (define (display-begin-span span-args o)

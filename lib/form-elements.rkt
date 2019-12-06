@@ -1,8 +1,4 @@
 #lang racket
-#|
-Macros for use in .adoc files.
-|#
-
 
 (provide *macro-list*)
 
