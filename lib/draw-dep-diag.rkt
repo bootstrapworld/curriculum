@@ -27,15 +27,16 @@
         (set! deps (cons (cons lesson lesson-deps) deps))))
     (reverse deps)))
 
-(define *svg-dx* 200)
-(define *svg-dy* 150)
-(define *text-x0* 40)
-(define *text-y0* 40)
-(define *text-dy* 40)
-(define *arrow-dx* 10)
-(define *arrow-padding-dx* 10)
-(define *arrow-head-dx* 5)
-(define *arrow-padding-dy* 5)
+(define *svg-dx* 200) ;width of svg window
+(define *svg-dy* 150) ;height
+(define *text-x0* 40) ;x of first text line
+(define *text-y0* 40) ;y
+(define *text-dy* 40) ;baselineskip between text lines
+(define *arrow-dx* 10) ;x-shift unit for arrow
+(define *arrow-padding-dx* 10) ;padding between arrow end and text
+(define *arrow-head-dx* 5) ;additional padding between arrow head and text
+(define *arrow-padding-dy* 2) ;y-shift for arrow above text baseline
+(define *arrow-head-dy* 5) ;additional y-shift for arrow head above baseline
 
 (define (text-y i)
   (+ *text-y0* (* i *text-dy*)))
@@ -51,8 +52,8 @@
     (set! *svg-dy* (+ 20 (* num-lessons 40)))
     (set! *text-x0* (+ 40 (* num-lessons 15)))
 
-    (display 
-      (enclose-tag "svg" "" 
+    (display
+      (enclose-tag "svg" ""
         #:attribs (format "width=\"~a\" height=\"~a\"" *svg-dx* *svg-dy*)
         (string-append
           (enclose-tag "defs" ""
@@ -65,37 +66,40 @@
             (map (lambda (lsn)
                    (let ([i (index-of tsorted-lessons lsn)])
                      (enclose-tag "a" ""
-                       #:attribs (format "xlink:href=\"~a\"" 
+                       #:attribs (format "xlink:href=\"~a\""
                                          (lesson->plan lsn))
                        (enclose-tag "text" ""
-                         #:attribs (format "x=\"~a\" y=\"~a\"" 
+                         #:attribs (format "x=\"~a\" y=\"~a\""
                                            *text-x0*
                                            (text-y i))
                          (lesson->title lsn)))))
                  tsorted-lessons) "\n")
-          (string-join 
+          (string-join
             (apply append
                    (map (lambda (dep)
-                          (let* ([me (car dep)] 
+                          (let* ([me (car dep)]
                                  [others (cdr dep)]
                                  [i (index-of tsorted-lessons me)])
                             ;(printf "me=~s others=~s i= ~s deps=~s\n" me others i deps)
                             (map (lambda (it)
-                                   (let ([j (index-of tsorted-lessons it)]) 
+                                   (let ([j (index-of tsorted-lessons it)])
                                      ;(printf "me=~s i=~a j=~a\n" me i j)
                                      (if (> i j)
                                          (let ([i-j (- i j)])
-                                           (enclose-tag "polyline" ".svg-polyline" 
+                                           (enclose-tag "polyline" ".svg-polyline"
                                              #:attribs
                                              (format "marker-end=\"url(#arrow)\" points=\"~a,~a ~a,~a ~a,~a ~a,~a\""
-                                                     (- *text-x0* *arrow-padding-dx*) 
+                                                     (- *text-x0* *arrow-padding-dx*)
                                                      (- (text-y j) *arrow-padding-dy*)
+                                                     ;
                                                      (- *text-x0* *arrow-padding-dx* (* i-j *arrow-dx*))
                                                      (- (text-y j) *arrow-padding-dy*)
+                                                     ;
                                                      (- *text-x0* *arrow-padding-dx* (* i-j *arrow-dx*))
-                                                     (- (text-y i) *arrow-padding-dy*)
+                                                     (- (text-y i) *arrow-padding-dy* *arrow-head-dy*)
+                                                     ;
                                                      (- *text-x0* *arrow-padding-dx* *arrow-head-dx*)
-                                                     (- (text-y i) *arrow-padding-dy*))
+                                                     (- (text-y i) *arrow-padding-dy* *arrow-head-dy*))
                                              ""))
                                          "")))
                                  others)
@@ -104,6 +108,4 @@
             "\n")))
       o)
     (display "\n\n" o)))
-
-
 
