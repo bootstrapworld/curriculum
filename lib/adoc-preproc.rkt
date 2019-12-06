@@ -10,12 +10,53 @@
 (require "glossary-terms.rkt")
 (require "all-standards-dictionary.rkt")
 (require "lessons-and-standards.rkt")
+(require "draw-dep-diag.rkt")
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (define *solutions-mode?* (getenv "SOLUTION"))
 
 (define *base-namespace* (current-namespace))
+
+(define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
+
+(define *index-file* (string-append *pathway-root-dir* "workbook-page-index.rkt"))
+
+(define *index-list* (call-with-input-file *index-file* read))
+
+(define *index-length* (length *index-list*))
+
+(define *external-url-index-file* (string-append *pathway-root-dir* "external-index.rkt"))
+
+(define *external-url-index*
+  (if (file-exists? *external-url-index-file*)
+      (call-with-input-file *external-url-index-file* read)
+      '()))
+
+;default values
+(define *copyright-name* "Bootstrap:Cosmology")
+(define *copyright-author* "Jack Kepler, Ike Newton, and Al Einstein")
+
+(define *copyright-info-file* (string-append *pathway-root-dir* "copyright-info.rkt"))
+
+(define *copyright-info*
+  (if (file-exists? *copyright-info-file*)
+      (call-with-input-file *copyright-info-file* read)
+      '()))
+
+(cond ((assoc "name" *copyright-info*) =>
+       (lambda (c) (set! *copyright-name* (cadr c)))))
+
+(cond ((assoc "author" *copyright-info*) =>
+       (lambda (c) (set! *copyright-author* (cadr c)))))
+
+(define *glossary-items* '())
+
+(define *standards-met* '())
+
+(define *dictionaries-represented* '())
+
+(define *exercises-done* '()) ;FIXME needed still?
 
 (define (read-word i)
   (let loop ([r '()])
@@ -99,38 +140,6 @@
                          (loop (+ j 1) (cons (substring g i j) r))]
                         [else (loop2 (+ j 1) #f #f)]))))))))
 
-(define *span-stack* '())
-
-(define (span-stack-present?)
-  (pair? *span-stack*))
-
-(define (top-span-stack)
-  (car *span-stack*))
-
-(define (grow-span-stack)
-  (set! *span-stack* (cons 0 *span-stack*)))
-
-(define (pop-span-stack)
-  (set! *span-stack* (cdr *span-stack*)))
-
-(define (increment-top-span-stack)
-  (let ([n (car *span-stack*)])
-    (set! *span-stack* (cons (+ n 1) (cdr *span-stack*)))))
-
-(define (decrement-top-span-stack)
-  (let ([n (car *span-stack*)])
-    (when (<= n 0)
-      (error 'span "Bad @span: Check missing braces"))
-    (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
-
-(define (display-begin-span span-args o)
-  (grow-span-stack)
-  (display (create-begin-tag "span" span-args) o))
-
-(define (display-end-span o)
-  (pop-span-stack)
-  (display (create-end-tag "span") o))
-
 (define (assoc-glossary term L)
   ;(printf "doing assoc-glossary ~s ~n" term)
   (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
@@ -169,6 +178,36 @@
     (when (>= (length std-bits) 3)
       (set! sublist-item (string->number (list-ref std-bits 2))))
     (values sublist-item c dict)))
+
+(define (add-standard x lesson lesson-title o)
+  ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
+  (let-values ([(sublist-item c dict) (assoc-standards x)])
+    (cond [c (let ([std (list-ref c 0)])
+               (when (and o (getenv "LESSON"))
+                 (fprintf o "**~a**: ~a~n~n"
+                          std (list-ref c 1)))
+               (cond [(assoc std *standards-met*) =>
+                                                (lambda (c0)
+                                                  (when sublist-item
+                                                    (let ([sublist-items (list-ref c0 1)])
+                                                      (box-add-new! sublist-item sublist-items)))
+                                                  (unless (getenv "LESSON")
+                                                    (box-add-new! (list lesson lesson-title)
+                                                                  (list-ref c0 4)))
+                                                  )]
+                     [else
+                       (let ([sublist-items
+                               (box (if sublist-item
+                                        (list sublist-item)
+                                        '()))])
+                         (unless (member dict *dictionaries-represented*)
+                           (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
+                         (set! *standards-met*
+                           (cons (list std sublist-items c dict
+                                       (box (list (list lesson lesson-title))))
+                                 *standards-met*)))]))]
+          [else (printf "Standard ~a not found~%" x)]
+          )))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -228,7 +267,7 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
-(define (include-standards dictionaries-represented o)
+(define (include-standards o)
   (unless (getenv "LESSONPLAN") (error ' include-standards "deadc0de"))
   (display
     (mstring
@@ -236,7 +275,7 @@
       "[.left-header,cols=\"20a,80a\"]"
       "|==="
       "|") o)
-  (display-standards-selection dictionaries-represented o)
+  (display-standards-selection o)
   (display
     (mstring
       "|"
@@ -249,44 +288,6 @@
   ;(printf "include-glossary\n")
   (when (getenv "NARRATIVE") (error ' include-glossary "deadc0de"))
   (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
-
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
-
-(define *pathway-exercises-file* (string-append *pathway-root-dir* "workbook-exercises.txt"))
-
-(define *index-file* (string-append *pathway-root-dir* "workbook-page-index.rkt"))
-
-(define *index-list* (call-with-input-file *index-file* read))
-
-(define *index-length* (length *index-list*))
-
-(define *external-url-index-file* (string-append *pathway-root-dir* "external-index.rkt"))
-
-(define *external-url-index*
-  (if (file-exists? *external-url-index-file*)
-      (call-with-input-file *external-url-index-file* read)
-      '()))
-
-;default values
-(define *copyright-name* "Bootstrap:Cosmology")
-(define *copyright-author* "Jack Kepler, Ike Newton, and Al Einstein")
-
-(define *copyright-info-file* (string-append *pathway-root-dir* "copyright-info.rkt"))
-
-(define *copyright-info*
-  (if (file-exists? *copyright-info-file*)
-      (call-with-input-file *copyright-info-file* read)
-      '()))
-
-(cond ((assoc "name" *copyright-info*) =>
-       (lambda (c) (set! *copyright-name* (cadr c)))))
-
-(cond ((assoc "author" *copyright-info*) =>
-       (lambda (c) (set! *copyright-author* (cadr c)))))
-
-(define (prefix-pathway-root-dir f)
-  (if (string=? *pathway-root-dir* "") f
-      (build-path *pathway-root-dir* f)))
 
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
   ;(printf "make-worksheet-link ~a ~a ~a ~a\n" lesson workbook-dir snippet link-text)
@@ -386,65 +387,173 @@
 (define *standards-dictionaries*
   (map car *standards-alist*))
 
+(define *page-title* #f)
+
+(define (display-title i o)
+  (let ([title (string-trim (read-line i))])
+    (set! *page-title* title)
+    (when (getenv "LESSONPLAN")
+      (call-with-output-file "index-title.txt"
+        (lambda (o)
+          (display title o) (newline o))
+        #:exists 'replace))
+    #|
+    (unless (getenv "TEACHER_RESOURCES")
+      (fprintf o "[.lesson-title]\n"))
+    |#
+    (let ([header-with-logo? (or (getenv "LESSONPLAN")
+                                 ;(getenv "NARRATIVE")
+                                 (getenv "TEACHER_RESOURCES"))])
+      (display #\= o) (display #\space o)
+      (when header-with-logo?
+        ;TODO repl w enclose-span
+        (display
+          (enclose-span ".bootstraplogo"
+            "image:{pathwayrootdir}bootstraplogo.png[]")
+          o)
+        ;(fprintf o "\n\n")
+        (display " " o)
+        )
+      (if header-with-logo?
+          (display (enclose-span ".bootstrapheader" title) o)
+          (display title o))
+      (newline o))))
+
+(define (display-lesson-description desc o)
+  (call-with-output-file "index-desc.txt"
+    (lambda (o)
+      (display desc o) (newline o))
+    #:exists 'replace)
+  (display desc o)
+  (newline o))
+
+(define (display-lesson-dependencies other-lessons o)
+  (call-with-output-file "index-dependencies.txt"
+    (lambda (o)
+      (fprintf o "(")
+      (for ([lesson other-lessons])
+        (fprintf o "~s " lesson))
+      (fprintf o ")\n"))
+    #:exists 'replace)
+  (display "\n\n*Depends on:*\n" o)
+  (for ([lesson other-lessons])
+    (let ([lesson-title lesson]
+          [lesson-title-file (format "../~a/index-title.txt" lesson)])
+      (cond [(file-exists? lesson-title-file)
+             (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+            [else
+              (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
+      (fprintf o "link:../~a/index.html[~a]\n" lesson lesson-title)))
+  (display "\n\n" o))
+
+(define (link-to-lessons-in-pathway o)
+  ;(printf "link-to-lessons-in-pathway~n")
+  ;
+  (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
+    ;
+    ;(fprintf o "~n.Lessons Used in This Pathway\n")
+    (print-lessons-intro o)
+    (draw-dependency-diagram lessons o)
+    (fprintf o "[#lesson-list]\n")
+    (for ([lesson lessons])
+      (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
+            [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
+            [lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson)]
+            [lesson-title lesson]
+            [lesson-description #f])
+        (when (file-exists? lesson-title-file)
+          (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+        (when (file-exists? lesson-desc-file)
+          (set! lesson-description
+            (call-with-input-file lesson-desc-file
+              (lambda (i)
+                (let ([r ""])
+                  (let loop ()
+                    (let ([x (read-line i)])
+                      (unless (eof-object? x)
+                        (set! r (string-append r "\n" x))
+                        (loop))))
+                  r)))))
+        (when (file-exists? lesson-index-file)
+          (fprintf o "link:~a[~a] ::" lesson-index-file lesson-title)
+          (if lesson-description
+              (display lesson-description o)
+              (display " {nbsp}" o)))
+        ;(when lesson-description
+        ;(display lesson-description o)
+        ;(newline o))
+        (newline o)))
+    (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
+
+    (let ([lessons-file "pathway-lessons.asc"]
+          [lessons-toc-file "pathway-lessons-toc.asc"])
+
+      (call-with-output-file lessons-file
+        (lambda (lo)
+          (fprintf lo "= Lessons Used in This Pathway~n~n")
+          (fprintf lo "include::~a[]~n~n" lessons-toc-file)
+          (call-with-output-file lessons-toc-file
+            (lambda (toco)
+              (fprintf toco "[verse]~n")
+              (for ((lesson lessons))
+                (let ([lesson-asc-file
+                        (format "./lessons/~a/index.asc" lesson)]
+                      [lesson-glossary-file
+                        (format "./lessons/~a/lesson-glossary.txt" lesson)]
+                      [lesson-standards-file
+                        (format "./lessons/~a/lesson-standards.txt" lesson)]
+                      [lesson-title-file
+                        (format "./lessons/~a/index-title.txt" lesson)]
+                      [lesson-title lesson]
+                      )
+
+                  (when (file-exists? lesson-title-file)
+                    (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+
+                  (when (file-exists? lesson-glossary-file)
+                    (call-with-input-file lesson-glossary-file
+                      (lambda (i)
+                        (let loop ()
+                          (let ([x (read i)])
+                            (unless (eof-object? x)
+                              (let ([s (assoc-glossary x *glossary-list*)])
+                                (cond [s (unless (member s *glossary-items*)
+                                           (set! *glossary-items*
+                                             (cons s *glossary-items*)))]))
+                              (loop)))))))
+                  ;(printf "took care of pw glossary~n")
+
+                  (when (file-exists? lesson-standards-file)
+                    (call-with-input-file lesson-standards-file
+                      (lambda (i)
+                        (let loop ()
+                          (let ([x (read i)])
+                            (unless (eof-object? x)
+                              (add-standard x lesson lesson-title lo)
+                              (loop)))))))
+
+                  ;(printf "took care of pw stds~n")
+
+                  (when (file-exists? lesson-asc-file)
+                    (fprintf lo "[[~a]]~n" lesson)
+                    (fprintf toco "<<~a>>~n" lesson)
+                    (fprintf lo "== ~a\n" lesson-title)
+                    (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1,2..-1]~n~n"
+                             lesson))
+                  )))
+            #:exists 'replace))
+        #:exists 'replace)
+      ;(asciidoctor lessons-file)
+      (newline o))))
+
 (define (preproc-n-asciidoctor in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
-        [exercises-done '()]
-        [glossary-items '()]
-        [standards-met '()]
-        [dictionaries-represented '()]
-        [lesson-glossary-accumulator "lesson-glossary.txt"]
-        [lesson-standards-accumulator "lesson-standards.txt"]
         ;[materials '()]
         ;[preparation-items '()]
         [first-subsection-reached? #f]
         [title-reached? #f]
-        [page-title #f]
         [comment-before-title #f]
         )
-    ;
-    (define (display-title i o)
-      (let ([title (string-trim (read-line i))])
-        (set! page-title title)
-        (when (getenv "LESSONPLAN")
-          (call-with-output-file "index-title.txt"
-            (lambda (o)
-              (display title o) (newline o))
-            #:exists 'replace))
-        #|
-        (unless (getenv "TEACHER_RESOURCES")
-          (fprintf o "[.lesson-title]\n"))
-        |#
-        (let ([header-with-logo? (or (getenv "LESSONPLAN")
-                                     ;(getenv "NARRATIVE")
-                                     (getenv "TEACHER_RESOURCES"))])
-          (display #\= o) (display #\space o)
-          (when header-with-logo?
-            ;TODO repl w enclose-span
-            (display-begin-span ".bootstraplogo" o)
-            (fprintf o "image:{pathwayrootdir}bootstraplogo.png[]")
-            (display-end-span o)
-            ;(fprintf o "\n\n")
-            (display " " o)
-            )
-          (when header-with-logo? (display-begin-span ".bootstrapheader" o))
-          (display title o)
-          (when header-with-logo? (display-end-span o))
-          (newline o))))
-    ;
-    (define (display-lesson-description desc o)
-      (call-with-output-file "index-desc.txt"
-        (lambda (o)
-          (display desc o) (newline o))
-        #:exists 'replace)
-      (display desc o)
-      (newline o))
-    ;
-    (define (add-exercise exercise)
-      ;(printf "doing add-exercise ~s (i= ~a, w= ~a, l= ~a)\n" exercise in-file (getenv "WORKBOOK") (getenv "LESSON"))
-      (let ([exer.html (path-replace-extension exercise ".html")])
-        (when (getenv "WORKBOOK")
-          ;(printf "adding exercise ~a ~a\n" exer.html page-title)
-          (set! exercises-done (cons (list exer.html page-title) exercises-done)))))
     ;
     (define (add-exercise-title name)
       (when (getenv "EXERCISE")
@@ -455,137 +564,6 @@
               (newline o))
             #:exists 'replace))))
     ;
-    (define (add-standard x lesson lesson-title o)
-      ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
-      (let-values ([(sublist-item c dict) (assoc-standards x)])
-        (cond [c (let ([std (list-ref c 0)])
-                   (when (and o (getenv "LESSON"))
-                     (fprintf o "**~a**: ~a~n~n"
-                              std (list-ref c 1)))
-                   (cond [(assoc std standards-met) =>
-                          (lambda (c0)
-                            (when sublist-item
-                              (let ([sublist-items (list-ref c0 1)])
-                                (box-add-new! sublist-item sublist-items)))
-                            (unless (getenv "LESSON")
-                              (box-add-new! (list lesson lesson-title)
-                                            (list-ref c0 4)))
-                            )]
-                         [else
-                           (let ([sublist-items
-                                   (box (if sublist-item
-                                            (list sublist-item)
-                                            '()))])
-                             (unless (member dict dictionaries-represented)
-                               (set! dictionaries-represented (cons dict dictionaries-represented)))
-                             (set! standards-met
-                               (cons (list std sublist-items c dict
-                                           (box (list (list lesson lesson-title))))
-                                     standards-met)))]))]
-              [else (printf "Standard ~a not found~%" x)]
-              )))
-    ;
-    (define (link-to-lessons-in-pathway o)
-      ;(printf "link-to-lessons-in-pathway~n")
-      ;(include-glossary o) ;not needed
-    ;
-      (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
-      ;
-        ;(fprintf o "~n.Lessons Used in This Pathway\n")
-        (print-lessons-intro o)
-        ;(fprintf o "[#lesson-list]~%")
-        (for ((lesson lessons))
-          (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
-                [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
-                [lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson)]
-                [lesson-title lesson]
-                [lesson-description #f])
-            (when (file-exists? lesson-title-file)
-              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
-            (when (file-exists? lesson-desc-file)
-              (set! lesson-description
-                (call-with-input-file lesson-desc-file
-                  (lambda (i)
-                    (let ([r ""])
-                      (let loop ()
-                        (let ([x (read-line i)])
-                          (unless (eof-object? x)
-                            (set! r (string-append r "\n" x))
-                            (loop))))
-                      r)))))
-            (when (file-exists? lesson-index-file)
-              (fprintf o "link:~a[~a] ::" lesson-index-file lesson-title)
-              (if lesson-description
-                  (display lesson-description o)
-                  (display " {nbsp}" o)))
-            ;(when lesson-description
-            ;(display lesson-description o)
-            ;(newline o))
-          (newline o)))
-      (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
-
-      (let ([lessons-file "pathway-lessons.asc"]
-            [lessons-toc-file "pathway-lessons-toc.asc"])
-
-        (call-with-output-file lessons-file
-          (lambda (lo)
-            (fprintf lo "= Lessons Used in This Pathway~n~n")
-            (fprintf lo "include::~a[]~n~n" lessons-toc-file)
-            (call-with-output-file lessons-toc-file
-              (lambda (toco)
-                (fprintf toco "[verse]~n")
-                (for ((lesson lessons))
-                  (let ([lesson-asc-file
-                          (format "./lessons/~a/index.asc" lesson)]
-                        [lesson-glossary-file
-                          (format "./lessons/~a/~a" lesson lesson-glossary-accumulator)]
-                        [lesson-standards-file
-                          (format "./lessons/~a/~a" lesson lesson-standards-accumulator)]
-                        [lesson-title-file
-                          (format "./lessons/~a/index-title.txt" lesson)]
-                        [lesson-title lesson]
-                        )
-
-                    (when (file-exists? lesson-title-file)
-                      (set! lesson-title (call-with-input-file lesson-title-file read-line)))
-
-                    (when (file-exists? lesson-glossary-file)
-                      (call-with-input-file lesson-glossary-file
-                        (lambda (i)
-                          (let loop ()
-                            (let ([x (read i)])
-                              (unless (eof-object? x)
-                                (let ([s (assoc-glossary x *glossary-list*)])
-                                  (cond [s (unless (member s glossary-items)
-                                             (set! glossary-items
-                                               (cons s glossary-items)))]))
-                                (loop)))))))
-                    ;(printf "took care of pw glossary~n")
-
-                    (when (file-exists? lesson-standards-file)
-                      (call-with-input-file lesson-standards-file
-                        (lambda (i)
-                          (let loop ()
-                            (let ([x (read i)])
-                              (unless (eof-object? x)
-                                (add-standard x lesson lesson-title lo)
-                                (loop)))))))
-
-                    ;(printf "took care of pw stds~n")
-
-                    (when (file-exists? lesson-asc-file)
-                      (fprintf lo "[[~a]]~n" lesson)
-                      (fprintf toco "<<~a>>~n" lesson)
-                      (fprintf lo "== ~a\n" lesson-title)
-                      (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1,2..-1]~n~n"
-                               lesson))
-                    )))
-              #:exists 'replace))
-          #:exists 'replace)
-        ;(asciidoctor lessons-file)
-        (newline o))))
-    ;
-
     (when (getenv "LESSONPLAN")
       (let ((lesson (getenv "LESSON")))
         (for ([x *lessons-and-standards*])
@@ -594,7 +572,9 @@
               (add-standard s lesson #f #f))))))
     ;
     (when (getenv "NARRATIVE")
-      (print-menubar "index"))
+      (print-menubar "index")
+
+      )
     ;
     (call-with-input-file in-file
       (lambda (i)
@@ -629,14 +609,21 @@
                                   (when (string=? arg "")
                                     (printf "WARNING: Directive @vocab has ill-formed argument~%"))
                                   (display arg o)
-                                  (cond [s (unless (member s glossary-items)
-                                             (set! glossary-items (cons s glossary-items)))]
+                                  (cond [s (unless (member s *glossary-items*)
+                                             (set! *glossary-items* (cons s *glossary-items*)))]
                                         [else (printf "Item ~a not found in glossary~%"
                                                       arg)]))]
                                [(string=? directive "std")
                                 (let ([args (read-commaed-group i directive)])
                                   (printf "WARNING: Directive @std is obsolete\n")
                                   )]
+                               [(string=? directive "depends-on")
+                                (let ([args (read-commaed-group i directive)]
+                                      [lesson-dir (getenv "LESSONPLAN")])
+                                  (cond [(getenv "LESSONPLAN")
+                                         (display-lesson-dependencies args o)]
+                                        [else
+                                          (printf "WARNING: @depends-on only valid in lesson plans\n")]))]
                                [(string=? directive "image")
                                 (let ([args (read-commaed-group i directive)])
                                   (display (make-image (car args) (cdr args)) o))]
@@ -672,7 +659,6 @@
                                            [lesson-dir (getenv "LESSON")])
                                        (cond [(or (string=? first-compt "exercises")
                                                   (string=? first-compt "exercises-sols"))
-                                              (add-exercise (format "~a/~a" lesson-dir page))
                                               (cond [lesson-dir
                                                       (display (make-exercise-link
                                                                  lesson-dir
@@ -704,7 +690,6 @@
                                            [third-compt (caddr page-compts)])
                                        (cond [(or (string=? second-compt "exercises")
                                                   (string=? second-compt "exercises-sols"))
-                                              (add-exercise page)
                                               (display (make-exercise-link
                                                          first-compt
                                                          second-compt
@@ -767,17 +752,17 @@
                                     (lambda (s)
                                       (display (massage-arg s) o))
                                     exprs))]
-                               [(assoc directive *macro-list*) =>
-                                                               (lambda (s)
-                                                                 (display (cadr s) o))]
-                               [(assoc directive *function-list*) =>
-                                                                  (lambda (f)
-                                                                    (let ([g (read-group i directive)])
-                                                                      (let ([args (string-to-form g)])
-                                                                        (let-values ([(key-list key-vals args)
-                                                                                      (rearrange-args args)])
-                                                                          (add-exercise-title (car args))
-                                                                          (display (keyword-apply (cadr f) key-list key-vals args) o)))))]
+                               [(assoc directive *macro-list*)
+                                => (lambda (s)
+                                     (display (cadr s) o))]
+                               [(assoc directive *function-list*)
+                                => (lambda (f)
+                                     (let ([g (read-group i directive)])
+                                       (let ([args (string-to-form g)])
+                                         (let-values ([(key-list key-vals args)
+                                                       (rearrange-args args)])
+                                           (add-exercise-title (car args))
+                                           (display (keyword-apply (cadr f) key-list key-vals args) o)))))]
                                [else
                                  (printf "WARNING: Unrecognized directive @~a~%" directive)
                                  #f]))]
@@ -792,7 +777,7 @@
                                      [(check-first-subsection i o)
                                       (set! first-subsection-reached? #t)
                                       (when (getenv "LESSONPLAN")
-                                        (include-standards dictionaries-represented o)
+                                        (include-standards o)
                                         (include-glossary o))]
                                      [else #f])
                                (cond [(getenv "LESSON")
@@ -827,11 +812,11 @@
             (when (getenv "NARRATIVE")
               (link-to-lessons-in-pathway o))
 
-            (set! dictionaries-represented
-              (sort dictionaries-represented string-ci<=?))
+            (set! *dictionaries-represented*
+              (sort *dictionaries-represented* string-ci<=?))
 
             (when (or (getenv "NARRATIVE") (getenv "LESSONPLAN"))
-              (create-standards-subfile standards-met dictionaries-represented))
+              (create-standards-subfile))
 
             (when (getenv "NARRATIVE")
               (print-other-resources-intro o)
@@ -860,23 +845,10 @@
 
   (when (or (getenv "NARRATIVE")
             (getenv "LESSONPLAN"))
-    (create-glossary-subfile glossary-items))
-
-  ;(printf "exercises-done = ~s\n" exercises-done)
-
-  (when (getenv "WORKBOOK")
-    ;(printf "Adding exercises ~a\n" exercises-done)
-    (call-with-output-file *pathway-exercises-file*
-      (lambda (o)
-        (for-each
-          (lambda (f)
-            (fprintf o "(\"~a\" ~s)\n" (car f) (cadr f))
-            )
-          (reverse exercises-done)))
-      #:exists 'append))
+    (create-glossary-subfile))
 
   (when (getenv "LESSONPLAN")
-    (accumulate-glossary-and-standards glossary-items standards-met))
+    (accumulate-glossary-and-standards))
 
   (asciidoctor out-file)))
 
@@ -886,14 +858,14 @@
   (void)
   )
 
-(define (create-glossary-subfile glossary-items)
-  ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE") glossary-items standards-met)
+(define (create-glossary-subfile)
+  ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE"))
   (print-menubar "index-glossary")
   (call-with-output-file "index-glossary.asc"
     (lambda (op)
-      (unless (empty? glossary-items)
-        (set! glossary-items
-          (sort glossary-items #:key car string-ci<=?))
+      (unless (empty? *glossary-items*)
+        (set! *glossary-items*
+          (sort *glossary-items* #:key car string-ci<=?))
         (when (getenv "NARRATIVE")
           (fprintf op "= Glossary\n\n"))
         (when (getenv "LESSON")
@@ -904,7 +876,7 @@
             ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
             (fprintf op "~a:: ~a~%" (car s) (cadr s))
             )
-          glossary-items)
+          *glossary-items*)
         (fprintf op "~%~%")))
     #:exists 'replace))
 
@@ -913,11 +885,11 @@
     [("CCSS") "Common Core State Standards"]
     [else (format "~a Standards" dict)]))
 
-(define (create-standards-section dict standards-met op)
+(define (create-standards-section dict dict-standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if (getenv "LESSON")
                   ".~a Statements\n"
-                  "== ~a Statements\n\n") 
+                  "== ~a Statements\n\n")
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for-each
@@ -942,10 +914,10 @@
                     ;(fprintf op "** ~a~%" (list-ref s (+ n 1)))
                     )
                   sublist-items)))
-    standards-met)
+    dict-standards-met)
   (fprintf op "\n\n"))
 
-(define (display-standards-selection dictionaries-represented o)
+(define (display-standards-selection o)
   (let ([narrative? (getenv "NARRATIVE")])
     (when narrative? (fprintf o "= Standards\n\n"))
     (print-standards-js o)
@@ -968,49 +940,49 @@
                         (enclose-tag "option" ""
                           #:attribs (format " value=\"standards-~a\"" dict)
                           dict))
-                      dictionaries-represented)
+                      *dictionaries-represented*)
                  "\n")) o)
     (when narrative?
       (display (create-end-tag "div") o)
       (display (create-end-tag "div") o))
     (display "\n\n" o)))
 
-(define (create-standards-subfile standards-met dictionaries-represented)
-  ;(printf "doing create-standards-subfiles ~s\n" standards-met)
+(define (create-standards-subfile)
+  ;(printf "doing create-standards-subfiles ~s\n" *standards-met*)
   (when (getenv "NARRATIVE")
     (print-menubar "index-standards"))
   (call-with-output-file "index-standards.asc"
     (lambda (op)
-      (unless (empty? standards-met)
+      (unless (empty? *standards-met*)
         (when (getenv "NARRATIVE")
-          (display-standards-selection dictionaries-represented op))
+          (display-standards-selection op))
         (when (getenv "LESSON")
           (fprintf op (mstring
                         "\n[.alignedStandardsIntro]"
                         "_Select one or more standards from the menu on the left (⌘-click"
                         "on Mac, Ctrl-click elsewhere)._\n\n")))
-        (for ((dict dictionaries-represented))
+        (for ((dict *dictionaries-represented*))
           (let ((dict-standards-met
                   (filter (lambda (s) (string=? (list-ref s 3) dict))
-                          standards-met)))
+                          *standards-met*)))
             (unless (empty? dict-standards-met) ;it will never be empty!
               (create-standards-section
                 dict
                 (sort dict-standards-met #:key car string-ci<=?) op))))))))
 
-(define (accumulate-glossary-and-standards glossary-items standards-met)
+(define (accumulate-glossary-and-standards)
   ;(printf "doing accumulate-glossary-and-standards\n")
   (call-with-output-file "lesson-glossary.txt"
     (lambda (op)
       (for-each (lambda (s)
                   (fprintf op "~s~n" (car s)))
-                glossary-items))
+                *glossary-items*))
     #:exists 'replace)
   (call-with-output-file "lesson-standards.txt"
     (lambda (op)
       (for-each (lambda (s)
                   (fprintf op "~s~n" (car s)))
-                standards-met))
+                *standards-met*))
     #:exists 'replace)
   )
 

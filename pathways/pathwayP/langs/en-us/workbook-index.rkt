@@ -1,6 +1,6 @@
 (
  ;"BSABigIdeas"
  "lessonA"
-; "lessonC"
-; "lessonB"
+ "lessonB"
+ "lessonC"
  )

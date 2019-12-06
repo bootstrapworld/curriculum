@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-11-28 # last modified
+export LASTMOD=2019-12-05 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -190,9 +190,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
     \
-    -e 's/@CURRICULUM\(button\|div\|h2\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/<\1/g' \
-    -e 's/@BEGINCURRICULUM\(button\|div\|h2\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/>/g' \
-    -e 's/@ENDCURRICULUM\(button\|div\|h2\|li\|option\|pre\|select\|span\|textarea\|tt\|ul\)/<\/\1>/g' \
+    -e 's/@CURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/<\1/g' \
+    -e 's/@BEGINCURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/>/g' \
+    -e 's/@ENDCURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
@@ -404,18 +404,18 @@ function buildlessonplan() {
 function buildlessons() {
   #echo doing buildlessons
   cd lessons
-  for L in *; do
-    if test ! -d $L; then
-      echo WARNING: No lessons in pathway $PATHWAY
-    else
+  if test ! -f lessons.txt; then
+    echo WARNING: No lessons in pathway $PATHWAY
+  else
+    for L in $(cat lessons.txt); do
       export LESSON=$L
       buildworkbookpages $L
       export LESSONPLAN=$L
       buildlessonplan $L
       unset LESSONPLAN
       unset LESSON
-    fi
-  done
+    done
+  fi
   cd ..
 }
 

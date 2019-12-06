@@ -20,9 +20,7 @@
       "to anyone who is interested in using our lesson plans or student"
       "workbooks."
       ""
-      "== Lesson Plans"
-      ""
-      "[#lesson-list]\n") o))
+      "== Lesson Plans\n\n") o))
 
 (define (print-other-resources-intro o)
   (display
