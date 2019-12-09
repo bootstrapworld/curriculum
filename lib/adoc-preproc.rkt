@@ -428,7 +428,13 @@
   ;        (fprintf o "~s " lesson))
   ;      (fprintf o ")\n"))
   ;    #:exists 'replace)
-  (display "\n\n*Depends on:*\n" o)
+  (display
+    (mstring
+      "\n\n"
+      "[.left-header,cols=\"20a,80a\"]"
+      "|==="
+      "| Prerequisites"
+      "| ") o)
   (display
     (string-join
       (map (lambda (lesson)
@@ -441,7 +447,7 @@
                (format "link:../~a/index.html[~a]" lesson lesson-title)))
            other-lessons)
       ", ") o)
-  (display "\n\n" o))
+  (display "\n|===\n\n" o))
 
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway~n")
@@ -614,7 +620,7 @@
                                 (let ([args (read-commaed-group i directive)])
                                   (printf "WARNING: Directive @std is obsolete\n")
                                   )]
-                               [(string=? directive "depends-on")
+                               [(string=? directive "XXX-depends-on") ;XXX
                                 (let ([args (read-commaed-group i directive)]
                                       [lesson-dir (getenv "LESSONPLAN")])
                                   (cond [(getenv "LESSONPLAN")
@@ -732,6 +738,10 @@
                                 (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
                                   (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
                                 (display-lesson-description (read-group i directive) o)]
+                               [(string=? directive "depends-on")
+                                (unless (getenv "LESSONPLAN")
+                                  (ferror 'adoc-preproc.rkt "@depends-on valid only in lesson plan"))
+                                (display-lesson-dependencies (read-commaed-group i directive) o)]
                                [(string=? directive "solutions-workbook")
                                 ;TODO: don't need this anymore -- link is autogen'd
                                 (unless (getenv "TEACHER_RESOURCES")

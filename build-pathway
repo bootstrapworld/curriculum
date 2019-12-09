@@ -7,7 +7,7 @@ export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-12-05 # last modified
+export LASTMOD=2019-12-09 # last modified
 
 # set $BOOTSTRAP_CURRICULUM_BUILD_DEBUG to avoid typing --debug every time
 if test "$BOOTSTRAP_CURRICULUM_BUILD_DEBUG"; then
@@ -389,6 +389,7 @@ function buildlessonplan() {
     fi
     #makeglossaryandstandards
     collapseadjtables index.html
+    collapseadjtables index.html # do it twice!
     addanalytics index.html
     resolveabbrevs index.html
     moveheaderlogopos index.html
