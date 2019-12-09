@@ -167,13 +167,11 @@
          [sublist-item #f]
          [c #f]
          [dict #f])
-    (for-each
-      (lambda (x)
-        (unless c
-          (let ([stds-list (caddr x)])
-            (set! c (assoc std stds-list))
-            (when c (set! dict (car x))))))
-      *standards-list*)
+    (for ([x *standards-list*])
+      (unless c
+        (let ([stds-list (caddr x)])
+          (set! c (assoc std stds-list))
+          (when c (set! dict (car x))))))
     (when (>= (length std-bits) 3)
       (set! sublist-item (string->number (list-ref std-bits 2))))
     (values sublist-item c dict)))
@@ -230,9 +228,8 @@
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
                     [else section-level])))])
     (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
-    (let loop ([section-level section-level])
-      (unless (<= section-level 0)
-        (display #\= o) (loop (- section-level 1))))))
+    (for ([i section-level])
+      (display #\= o))))
 
 (define (string-to-form s)
   (call-with-input-string s
@@ -748,10 +745,8 @@
                                   (for-each massage-arg exprs))]
                                [(string=? directive "show")
                                 (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                                  (for-each
-                                    (lambda (s)
-                                      (display (massage-arg s) o))
-                                    exprs))]
+                                  (for ([s exprs])
+                                    (display (massage-arg s) o)))]
                                [(assoc directive *macro-list*)
                                 => (lambda (s)
                                      (display (cadr s) o))]
@@ -871,12 +866,9 @@
         (when (getenv "LESSON")
           (fprintf op ".Glossary\n\n"))
         (fprintf op "[.glossary]~%")
-        (for-each
-          (lambda (s)
-            ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
-            (fprintf op "~a:: ~a~%" (car s) (cadr s))
-            )
-          *glossary-items*)
+        (for ([s *glossary-items*])
+          ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
+          (fprintf op "~a:: ~a~%" (car s) (cadr s)))
         (fprintf op "~%~%")))
     #:exists 'replace))
 
@@ -887,29 +879,26 @@
                   "== ~a Statements\n\n")
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
-  (for-each
-    (lambda (s)
-      ;(printf "s= ~s\n" s)
-      (let ([sublist-items (unbox (list-ref s 1))]
-            [s (list-ref s 2)]
-            ;[dict (list-ref s 3)]
-            [lessons (unbox (list-ref s 4))])
-        (fprintf op "~a:: " (car s))
-        (fprintf op "~a\n" (cadr s))
-        (unless (getenv "LESSON")
-          (when (> (length lessons) 0)
-            (fprintf op "{startsb}See: ~a.{endsb}\n"
-                     (string-join
-                       (map
-                         (lambda (x)
-                           (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
-                         lessons) ";"))))
-        (for-each (lambda (n)
-                    (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                    ;(fprintf op "** ~a~%" (list-ref s (+ n 1)))
-                    )
-                  sublist-items)))
-    dict-standards-met)
+  (for ([s dict-standards-met])
+    ;(printf "s= ~s\n" s)
+    (let ([sublist-items (unbox (list-ref s 1))]
+          [s (list-ref s 2)]
+          ;[dict (list-ref s 3)]
+          [lessons (unbox (list-ref s 4))])
+      (fprintf op "~a:: " (car s))
+      (fprintf op "~a\n" (cadr s))
+      (unless (getenv "LESSON")
+        (when (> (length lessons) 0)
+          (fprintf op "{startsb}See: ~a.{endsb}\n"
+                   (string-join
+                     (map
+                       (lambda (x)
+                         (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
+                       lessons) ";"))))
+      (for ([n sublist-items])
+        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
+        ;(fprintf op "** ~a~%" (list-ref s (+ n 1)))
+        )))
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o)
@@ -969,15 +958,13 @@
   ;(printf "doing accumulate-glossary-and-standards\n")
   (call-with-output-file "lesson-glossary.txt"
     (lambda (op)
-      (for-each (lambda (s)
-                  (fprintf op "~s~n" (car s)))
-                *glossary-items*))
+      (for ([s *glossary-items*])
+        (fprintf op "~s~n" (car s))))
     #:exists 'replace)
   (call-with-output-file "lesson-standards.txt"
     (lambda (op)
-      (for-each (lambda (s)
-                  (fprintf op "~s~n" (car s)))
-                *standards-met*))
+      (for ([s *standards-met*])
+        (fprintf op "~s~n" (car s))))
     #:exists 'replace)
   )
 
