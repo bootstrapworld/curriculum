@@ -444,7 +444,7 @@
                       (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                      [else
                        (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-               (format "link:../~a/index.html[~a]" lesson lesson-title)))
+               (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
            other-lessons)
       ", ") o)
   (display "\n|===\n\n" o))
