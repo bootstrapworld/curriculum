@@ -148,7 +148,13 @@ reversed:
 `(0.20 * food-total) + food-total`
 endif::[]
 
+ifeval::["{proglang}" == "wescheme"]
 .enough-carpet?
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+.have-enough-carpet
+endif::[]
+
 
 1. The range of the function should be a Boolean.
 
@@ -162,7 +168,12 @@ ifeval::["{proglang}" == "pyret"]
 4. The example inputs should be separated by a comma.
 endif::[]
 
+ifeval::["{proglang}" == "wescheme"]
 .enough-cash?
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+.have-enough-cash
+endif::[]
 
 1. The domain of the function should be a Number (representing
 the price), not a String.
@@ -174,13 +185,18 @@ ifeval::["{proglang}" == "wescheme"]
 `(EXAMPLE (enough-cash? 2.50) (<= 2.50 1.50))`
 endif::[]
 ifeval::["{proglang}" == "pyret"]
-`enough-cash?(2.50) is 2.50 <= 1.50`
+`have-enough-cash(2.50) is 2.50 <= 1.50`
 endif::[]
 
 3. The variable name in the function body can be `item`, but a
 more accurate name would be `price` or `cost`.
 
+ifeval::["{proglang}" == "wescheme"]
 .equal-length?
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+.equal-length
+endif::[]
 
 1. The function body should be:
 +
@@ -210,7 +226,12 @@ ifeval::["{proglang}" == "pyret"]
 3. In the examples, all the colors and flower names should be Strings, written inside quotation marks.
 endif::[]
 
+ifeval::["{proglang}" == "wescheme"]
 .long-name?
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+.is-long-name
+endif::[]
 
 1. Both examples should use the function `string-length`, not
 ifeval::["{proglang}" == "wescheme"]
@@ -223,7 +244,14 @@ endif::[]
 2. The examples should check if the name is longer than 20
    characters, not 10.
 
+ifeval::["{proglang}" == "wescheme"]
 3. The function name in the definition should be `long-name?`.
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+3. The function name in the definition should be `is-long-name`.
+endif::[]
+
 
 4. The body of the function should be
 +
@@ -283,16 +311,30 @@ the state and the price of the item.
    be consistent throughout the function definition. It should
    instead be `price`.
 
+ifeval::["{proglang}" == "wescheme"]
 .late-to-class?
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+.late-to-class
+endif::[]
 
 1. Both examples should include 4 numbers as inputs.
 
 2. In the first example, `<` should be used in place of `>`.
 
+ifeval::["{proglang}"] == "wescheme"]
+3. Both examples and the function definition should calculate
+   distance based on the 4 inputs, such as:
++
+`((late-to-class? 40 55 80 100) (< 25 (distance 40 55 80 100)))`
+endif::[]
+
+ifeval::["{proglang}"] == "pyret"]
 3. Both examples and the function definition should calculate
    distance based on the 4 inputs, such as:
 +
 `late-to-class(40, 55, 80, 100) is 25 < distance(40, 55, 80, 100)`
+endif::[]
 
 4. The two examples should be different from each other.  Since
    the function returns a Boolean, good practice would be to make
