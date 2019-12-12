@@ -551,8 +551,6 @@
 
 (define (preproc-n-asciidoctor in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
-        ;[materials '()]
-        ;[preparation-items '()]
         [first-subsection-reached? #f]
         [title-reached? #f]
         [comment-before-title #f]
@@ -962,7 +960,8 @@
             (unless (empty? dict-standards-met) ;it will never be empty!
               (create-standards-section
                 dict
-                (sort dict-standards-met #:key car string-ci<=?) op))))))))
+                (sort dict-standards-met #:key car string-ci<=?) op))))))
+    #:exists 'replace))
 
 (define (accumulate-glossary-and-standards)
   ;(printf "doing accumulate-glossary-and-standards\n")

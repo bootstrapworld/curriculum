@@ -172,7 +172,7 @@ it can be named anything (not necessarily `index.adoc`).
 
 The top dir contains the script `build-pathway`. It takes any
 number of pathway arguments, and/or any combination of the
-options `--debug`, `--help`, `--language`, `--nopdf`,
+options `--debug`, `--force`, `--help`, `--language`, `--nopdf`,
 `--proglang`, `--verify-link`, and `--version`.
 
 If called with `--help` or `--version`, the script displays a help message
@@ -250,6 +250,11 @@ The other options of `build-pathway` are predominantly used for
 debugging:
 
 - `--debug` retains various temp files in the generated doctree.
+
+- `--force` forces creating anew the document tree. By default,
+  in order to save time,
+  conversions are skipped if the `distribution` already contains
+  the required target files and they are sufficiently new.
 
 - `--nopdf` avoids PDF generation to speed up the debugging
 process.

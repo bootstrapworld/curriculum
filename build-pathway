@@ -3,11 +3,12 @@
 export LANGUAGE=en-us
 export PROGLANG=
 export DEBUG=false
+export FORCE=false
 export NOPDF=false
 export VERIFYLINKS=false
 export HELP=false
 export VERSION=false
-export LASTMOD=2019-12-10 # last modified
+export LASTMOD=2019-12-12 # last modified
 
 # set $BUILD_PATHWAY_DEBUG_MODE to avoid typing --debug every time
 if test "$BUILD_PATHWAY_DEBUG_MODE"; then
@@ -29,6 +30,8 @@ while test $# -ne 0; do
     DEBUG=true;
   elif test "$arg" = --nopdf; then
     NOPDF=true;
+  elif test "$arg" = --force; then
+    FORCE=true;
   elif test "$arg" = --verify-links; then
     if which linkchecker | grep -q .; then
       VERIFYLINKS=true;
@@ -87,9 +90,7 @@ fi
 
 export TOPDIR=$(pwd)
 
-if test ! -d distribution; then
-  mkdir distribution
-fi
+mkdir -p distribution
 
 cd distribution
 
@@ -101,9 +102,7 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-if test ! -d prog; then
-  mkdir prog
-fi
+mkdir -p prog
 
 PROGDIR=$TOPDIR/prog
 
@@ -122,7 +121,7 @@ fi
 #cp -p $TOPDIR/lib/.htp* distribution
 
 function insertbodyid() {
-  f=$1
+  local f=$1
   $SED -i \
     -e 's/<body[^>]*>/\0\n<div id="body">/' \
     -e 's/<\/body>/<\/div>\n\0/' \
@@ -130,21 +129,21 @@ function insertbodyid() {
 }
 
 function insertstylecss() {
-  f=$1
+  local f=$1
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
     $f
 }
 
 function removelogos() {
-  f=$1
+  local f=$1
   $SED -i \
     -e '/^<h2 .*<img src="bootstraplogo.png"/d' \
     $f
 }
 
 function moveheaderlogopos() {
-  f=$1
+  local f=$1
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
     -e 's/^<h1>\(.*\)\(<span class="bootstrapheader".*\)$/\1<h1>\2/' \
@@ -156,14 +155,14 @@ function moveheaderlogopos() {
 }
 
 function cleanuptitle() {
-  f=$1
+  local f=$1
   $SED -i \
     -e '/^<title>/ s/<\/*span[^>]*>//g' \
     $f
 }
 
 function addanalytics() {
-  f=$1
+  local f=$1
   cp $PROGDIR/analytics.txt .
   $SED -i \
     -e '/^<body/r analytics.txt' \
@@ -171,7 +170,7 @@ function addanalytics() {
 }
 
 function resolveabbrevs() {
-  f=$1
+  local f=$1
   mathjaxneeded=
   codemirrorneeded=
   if grep -q @CURRICULUMSCRIPT $f; then
@@ -249,7 +248,7 @@ function rmproglangsubdirs() {
 
 function buildworkbookpages() {
   L=$1
-  echo
+  #echo
   #echo building $L workbook-pages
   cd $L
   #
@@ -320,13 +319,17 @@ function buildworkbookpages() {
           echo Discarding file \`$f\` with space in its name
           rm "$f"
         else
-          echo building $PATHWAY "→" $L "→" "$dd" "→" $f
-          $PROGDIR/adoc-preproc.rkt $f
           fhtml=${f%.adoc}.html
-          fpdf=${f%.adoc}.pdf
-          resolveabbrevs $fhtml
+          if test $f -nt $fhtml; then
+            echo building $PATHWAY "→" $L "→" "$dd" "→" $f
+            $PROGDIR/adoc-preproc.rkt $f
+            resolveabbrevs $fhtml
+          fi
           if ! $NOPDF; then
-            wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
+            fpdf=${fhtml%.html}.pdf
+            if test $fhtml -nt $fpdf; then
+              wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
+            fi
           fi
         fi
       done
@@ -354,7 +357,7 @@ function collapseadjtables() {
 function buildlessonplan() {
   #echo doing buildlessonplan
   L=$1
-  echo
+  #echo
   #echo building $PATHWAY "->" $L lesson plan
   cd $L
   local copacetic=1
@@ -372,31 +375,25 @@ function buildlessonplan() {
     export PATHWAYROOTDIR="../../"
     # there should be only one?
     #echo building lesson plan from *.adoc
-    echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
     for f in *.adoc; do
-      $PROGDIR/adoc-preproc.rkt $f
+      cp -p $f index.asciidoc
     done
-    if test ! -f index.html; then
-      SRCFILE=
-      for g in *.adoc; do
-        SRCFILE=${g%.adoc}
-        cp -p $SRCFILE.asc index.asc
-        cp -p $SRCFILE.html index.html
-      done
-      if test -n "$SRCFILE"; then
-        rm $SRCFILE.html $SRCFILE.asc
-      fi
+    if test index.asciidoc -nt index.html; then
+      echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
+      $PROGDIR/adoc-preproc.rkt index.asciidoc
+      #makeglossaryandstandards
+      collapseadjtables index.html
+      collapseadjtables index.html # do it twice!
+      addanalytics index.html
+      resolveabbrevs index.html
+      moveheaderlogopos index.html
+      cleanuptitle index.html
     fi
-    #makeglossaryandstandards
-    collapseadjtables index.html
-    collapseadjtables index.html # do it twice!
-    addanalytics index.html
-    resolveabbrevs index.html
-    moveheaderlogopos index.html
-    cleanuptitle index.html
     if ! $NOPDF; then
       #echo Creating lesson plan pdf
-      wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
+      if test index.html -nt index.pdf; then
+        wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
+      fi
     fi
   fi
   cd ..
@@ -458,38 +455,32 @@ function buildpathwaynarrative() {
   else
     #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR=""
-    export NARRATIVE=1
     # there should be only one?
-    echo
-    echo building pathway narrative: $PATHWAY "→" *.adoc
+    #echo
     for f in *.adoc; do
-      $PROGDIR/adoc-preproc.rkt $f
+      cp -p $f index.asciidoc
     done
-    unset NARRATIVE
-    if test ! -f index.html; then
-      SRCFILE=
-      for g in *.adoc; do
-        SRCFILE=${g%.adoc}
-        cp -p $SRCFILE.asc index.asc
-        cp -p $SRCFILE.html index.html
-      done
-      if test -n "$SRCFILE"; then
-        rm $SRCFILE.html $SRCFILE.asc
+    if test index.asciidoc -nt index.shtml; then
+      echo building pathway narrative: $PATHWAY "→" *.adoc
+      export NARRATIVE=1
+      $PROGDIR/adoc-preproc.rkt index.asciidoc
+      unset NARRATIVE
+      makeglossaryandstandards
+      if test -f pathway-lessons.asc; then
+        if test pathway-lessons.asc -nt pathway-lessons.html; then
+          $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
+          removelogos pathway-lessons.html
+          resolveabbrevs pathway-lessons.html
+        fi
       fi
+      mv index.html index.shtml
+      insertbodyid index.shtml
+      addanalytics index.shtml
+      insertstylecss index.shtml
+      resolveabbrevs index.shtml
+      #moveheaderlogopos index.shtml
+      #cleanuptitle index.shtml
     fi
-    makeglossaryandstandards
-    if test -f pathway-lessons.asc; then
-      $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
-      removelogos pathway-lessons.html
-      resolveabbrevs pathway-lessons.html
-    fi
-    mv index.html index.shtml
-    insertbodyid index.shtml
-    addanalytics index.shtml
-    insertstylecss index.shtml
-    resolveabbrevs index.shtml
-    #moveheaderlogopos index.shtml
-    #cleanuptitle index.shtml
 
     if $VERIFYLINKS; then
       linkchecker -F html/invalid-links.html --check-extern --no-status
@@ -517,29 +508,34 @@ function buildpathway() {
     langicon=🥾
   fi
 
-  if test ! -d distribution/$PATHWAY; then
-    mkdir distribution/$PATHWAY
-  fi
-  # remove previous build of $PATHWAY in distribution/, if any
-  if test -d distribution/$PATHWAY/$LANGUAGE; then
-    rm -fr distribution/$PATHWAY/$LANGUAGE
-  fi
-  cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
-  cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE
-
   echo
 
-  if test ! -d distribution/$PATHWAY/$LANGUAGE; then
+  if test ! -d pathways/$SRCPATHWAY/langs/$LANGUAGE; then
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
     echo building pathway: $PATHWAY/$LANGUAGE $langicon
+    mkdir -p distribution/$PATHWAY
+
+    if $FORCE; then
+      rm -fr distribution/$PATHWAY/$LANGUAGE
+      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
+    else
+      mkdir -p distribution/$PATHWAY/$LANGUAGE
+      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
+      #rsync -rt pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
+      #exit
+    fi
+
+    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE
+
     cd distribution/$PATHWAY/$LANGUAGE
 
+    # XXX probably not needed?
     if test -f lessons-and-standards.rkt; then
       cp -p lessons-and-standards.rkt $PROGDIR
     fi
 
-    mkdir lessons workbook
+    mkdir -p lessons workbook
     mkdir -p resources/protected
     cp -p $PROGDIR/.hta* resources/protected
 
@@ -550,7 +546,7 @@ function buildpathway() {
     fi
 
     buildlessons
-    echo
+    #echo
 
     cd resources
     #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
@@ -567,26 +563,18 @@ function buildpathway() {
     else
       export PATHWAYROOTDIR="../"
       # there should be only one?
-      export TEACHER_RESOURCES=1
-      echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       for f in *.adoc; do
-        $PROGDIR/adoc-preproc.rkt $f
+        cp -p $f index.asciidoc
       done
-      unset TEACHER_RESOURCES
-      if test ! -f index.html; then
-        SRCFILE=
-        for g in *.adoc; do
-          SRCFILE=${g%.adoc}
-          cp -p $SRCFILE.asc index.asc
-          cp -p $SRCFILE.html index.html
-        done
-        if test -n "$SRCFILE"; then
-          rm $SRCFILE.html $SRCFILE.asc
-        fi
+      if test index.asciidoc -nt index.html; then
+        echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
+        export TEACHER_RESOURCES=1
+        $PROGDIR/adoc-preproc.rkt index.asciidoc
+        unset TEACHER_RESOURCES
+        resolveabbrevs index.html
+        moveheaderlogopos index.html
+        cleanuptitle index.html
       fi
-      resolveabbrevs index.html
-      moveheaderlogopos index.html
-      cleanuptitle index.html
     fi
     cd ..
 
@@ -595,8 +583,8 @@ function buildpathway() {
     elif ! $NOPDF; then
       export PATHWAYROOTDIR=""
       #cp -p $PROGDIR/front-cover-teacher.pdf .
-      echo
-      echo building pathway workbooks: $PATHWAY
+      #echo
+      #echo building pathway workbooks: $PATHWAY
       if $DEBUG; then
         $PROGDIR/make-workbook.rkt >/dev/null 2>&1
       else
