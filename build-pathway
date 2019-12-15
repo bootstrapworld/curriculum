@@ -1,47 +1,48 @@
-#
+# build-pathway
+# build script for curriculum
+# Type build-pathway --help for help.
 
+export FORCE=false
 export LANGUAGE=en-us
 export PROGLANG=
-export DEBUG=false
-export FORCE=false
-export NOPDF=false
-export VERIFYLINKS=false
-export HELP=false
-export VERSION=false
-export LASTMOD=2019-12-12 # last modified
-
-# set $BUILD_PATHWAY_DEBUG_MODE to avoid typing --debug every time
-if test "$BUILD_PATHWAY_DEBUG_MODE"; then
-  DEBUG=true
-fi
+export TOPDIR=$(pwd)
 
 ARGS=
+DEBUG=false
+HELP=false
+LASTMOD=2019-12-15 # last modified
+NOPDF=false
+SED=sed
+VERIFYLINKS=false
+VERSION=false
+
+
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --help; then
-    HELP=true;
-  elif test "$arg" = --version; then
-    VERSION=true;
-  elif test "$arg" = --language; then
-    LANGUAGE=$1; shift
-  elif test "$arg" = --proglang; then
-    PROGLANG=$1; shift
-  elif test "$arg" = --debug; then
+  if test "$arg" = --debug; then
     DEBUG=true;
-  elif test "$arg" = --nopdf; then
-    NOPDF=true;
   elif test "$arg" = --force; then
     FORCE=true;
+  elif test "$arg" = --help; then
+    HELP=true;
+  elif test "$arg" = --language; then
+    LANGUAGE=$1; shift
+  elif test "$arg" = --nopdf; then
+    NOPDF=true;
+  elif test "$arg" = --proglang; then
+    PROGLANG=$1; shift
   elif test "$arg" = --verify-links; then
     if which linkchecker | grep -q .; then
       VERIFYLINKS=true;
     fi
+  elif test "$arg" = --version; then
+    VERSION=true;
   else
     ARGS="$ARGS $arg"
   fi
 done
 
-if $HELP; then
+function displayhelp() {
   echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--nopdf] [--help] pathway ...
   echo
   echo Builds a document tree for the given pathway argument\(s\)
@@ -65,11 +66,26 @@ if $HELP; then
   echo
   echo Order of arguments/options doesn\'t matter.
   exit
-fi
+}
+
+if $HELP; then displayhelp; fi
 
 if $VERSION; then
   echo build-pathway version $LASTMOD
   exit
+fi
+
+if which gsed | grep -q .; then
+  SED=gsed
+fi
+
+# set $BUILD_PATHWAY_DEBUG_MODE to avoid typing --debug every time
+if test "$BUILD_PATHWAY_DEBUG_MODE"; then
+  DEBUG=true
+fi
+
+if test "$ARGS" = ""; then
+  ARGS="pathways/*"
 fi
 
 if test README.html -ot README.adoc; then
@@ -82,14 +98,6 @@ echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
-export SED=sed
-
-if which gsed | grep -q .; then
-  SED=gsed
-fi
-
-export TOPDIR=$(pwd)
-
 mkdir -p distribution
 
 cd distribution
@@ -97,10 +105,6 @@ cd distribution
 echo '== Generated Documentation' > index.adoc
 
 cd $TOPDIR
-
-if test "$ARGS" = ""; then
-  ARGS="pathways/*"
-fi
 
 mkdir -p prog
 
@@ -171,13 +175,13 @@ function addanalytics() {
 
 function resolveabbrevs() {
   local f=$1
-  mathjaxneeded=
-  codemirrorneeded=
+  local mathjaxneeded=false
+  local codemirrorneeded=false
   if grep -q @CURRICULUMSCRIPT $f; then
-    mathjaxneeded=1
+    mathjaxneeded=true
   fi
   if grep -q 'class=\"\(pyret\|racket\)\"' $f; then
-    codemirrorneeded=1
+    codemirrorneeded=true
   fi
   $SED -i \
     -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
@@ -201,7 +205,7 @@ function resolveabbrevs() {
     -e 's/&#8594;/-\&gt;/g' \
     \
     $f
-  if test "$mathjaxneeded" != ""; then
+  if "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Chttp%3A%2F%2Fwww.cs.wpi.edu%2F%7Ekfisler%2Fmathjaxlocal.js"></script>
 EOF
@@ -211,7 +215,7 @@ EOF
       -e 's/@INSERTMATHJAX//' \
       $f
   fi
-  if test "$codemirrorneeded" != ""; then
+  if "$codemirrorneeded"; then
     cat > codemirror.txt <<EOF
     <link rel="stylesheet" href="${PATHWAYROOTDIR}pretty-printing.css" />
     <link rel="stylesheet" href="${PATHWAYROOTDIR}codemirror.css" />
@@ -238,7 +242,7 @@ EOF
 }
 
 function rmproglangsubdirs() {
-  d=$1
+  local d=$1
   for f in pyret wescheme; do
     if test -d $d/$f; then
       rm -fr $d/$f
@@ -247,7 +251,7 @@ function rmproglangsubdirs() {
 }
 
 function buildworkbookpages() {
-  L=$1
+  local L=$1
   #echo
   #echo building $L workbook-pages
   cd $L
@@ -356,17 +360,17 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   #echo doing buildlessonplan
-  L=$1
+  local L=$1
   #echo
   #echo building $PATHWAY "->" $L lesson plan
   cd $L
-  local copacetic=1
+  local copacetic=true
   for f in *.adoc; do
     if test ! -f $f; then
-      copacetic=
+      copacetic=false
     fi
   done
-  if test ! "$copacetic"; then
+  if ! "$copacetic"; then
     echo WARNING: No lesson plan in lesson $L
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many lesson plans in lesson $L
@@ -443,12 +447,12 @@ function makeglossaryandstandards() {
 }
 
 function buildpathwaynarrative() {
-  local copacetic=1
+  local copacetic=true
   for f in *.adoc; do
-    if test ! -f $f; then copacetic=
+    if test ! -f $f; then copacetic=false
     fi
   done
-  if test ! "$copacetic"; then
+  if ! "$copacetic"; then
     echo WARNING: No narrative in pathway $PATHWAY
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many narratives in pathway $PATHWAY
@@ -551,12 +555,12 @@ function buildpathway() {
     cd resources
     #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
     cp -p $PROGDIR/.hta* .
-    local copacetic=1
+    local copacetic=true
     for f in *.adoc; do
-      if test ! -f $f; then copacetic=
+      if test ! -f $f; then copacetic=false
       fi
     done
-    if test ! "$copacetic"; then
+    if ! "$copacetic"; then
       echo WARNING: No teacher resource files in pathway $PATHWAY
     elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
       echo WARNING: Too many teacher resource files in pathway $PATHWAY

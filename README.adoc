@@ -86,7 +86,7 @@ documents from the relevant natural language are chosen based on
 the `--language` option chosen during build. The default is
 `en-us`. In order to ease transition, if a language other than
 `en-us` is chosen, any content unavailable in the new language is
-filled in by what's in `en-us`.
+filled in by what’s in `en-us`.
 
 - Some of the directories have `pyret` and `wescheme`
 subdirectories or both. These contain content that should shadow
@@ -113,7 +113,8 @@ Each lesson has a subdirectory, e.g., `sample-lesson`, under the
 
 A lesson plan is specified by an `.adoc` file in the language
 directory for that lesson, e.g.,
-`sample-lesson/langs/en-us/index.adoc`. While the file basename doesn't
+`sample-lesson/langs/en-us/index.adoc`. While the file basename
+doesn’t
 have to be `index`, ensure that there is only one `.adoc` file at
 this level.
 
@@ -138,9 +139,9 @@ entry `"file.adoc"` is convenient shorthand for `("file.adoc"
 be in any case.)
 
 Lesson pages are paginated by default when they show up in the
-workbook. If you don't want a page to be populated, its entry in
+workbook. If you don’t want a page to be populated, its entry in
 `lesson-index.rkt` should be `("file.adoc" "portrait"
-"nopagenum")`. (The aspect should also be mentioned, even if it's
+"nopagenum")`. (The aspect should also be mentioned, even if it’s
 the default.)
 
 === Structure of a pathway directory
@@ -151,7 +152,7 @@ Each pathway has a subdirectory, e.g., `sample-pathway`, under the
 A pathway narrative is specified by an `.adoc` file in the
 language directory for that pathway, e.g.,
 `sample-pathway/langs/en-us/index.adoc`. The file basename
-doesn't have to be `index`, but there should be only one `.adoc`
+doesn’t have to be `index`, but there should be only one `.adoc`
 file in this directory.
 
 There can also be a file `external-index.rkt` used to expand
@@ -164,8 +165,8 @@ pathway, in the order in which they should appear in the pathway
 workbook.
 
 The pathway directory can also contains a `resources`
-subdirectory, where an `.adoc` file describes the "`Teacher
-Resources`" page. There should be only one such `.adoc` file, but
+subdirectory, where an `.adoc` file describes the “Teacher
+Resources” page. There should be only one such `.adoc` file, but
 it can be named anything (not necessarily `index.adoc`).
 
 == The `build-pathway` script
@@ -233,7 +234,7 @@ suffix.
 
 Note that two workbook PDFs can be created, one for the students
 in the `workbook` directory; and another for teachers in the
-"`protected`" directory `resources/protected`.
+“protected” directory `resources/protected`.
 
 Pages under `resources/protected` may prompt you for a teacher
 password, which is available on signing up with Bootstrapworld.
@@ -291,7 +292,7 @@ available (see section _Prerequisites_ below).
 
 === Deploying to the Bootstrap website
 
-If you've cloned the https://github.com/bootstrapworld/curriculum
+If you’ve cloned the https://github.com/bootstrapworld/curriculum
 repo anywhere on the machine hosting the Bootstrap website
 bootstrapworld.org, and
 you have a valid `distribution.tar.bz2` tarball or a
@@ -300,7 +301,7 @@ valid `distribution` subdirectory, then calling the script
 
 This assumes you created the `distribution` or
 `distribution.tar.bz2` content elsewhere (the machine hosting the
-site doesn't have all the requisite programs for this).  Note
+site doesn’t have all the requisite programs for this).  Note
 that if both are present, `distribution.tar.bz2` is favored.
 
 If you have neither `distribution` nor tarball, calling
@@ -309,7 +310,7 @@ subdirectory from the `gh-pages` branch, which contains the
 latest converted files as shown on the `github.io` site mentioned
 above. It uses this to update the site. Note that this uses the
 `gh-pages` branch only, and does not involve making the local `master`
-branch "`dirty`".
+branch “dirty”.
 
 == Standards compliance
 
@@ -324,8 +325,8 @@ standards are available in the same directory: For now, these are
   old-standards-dictionary.rkt
 
 The build process creates a menu for finding out the standards
-complied with by the lessons and the pathway. The lesson's menu
-is embedded in the lesson plan, whereas the pathway's (larger)
+complied with by the lessons and the pathway. The lesson’s menu
+is embedded in the lesson plan, whereas the pathway’s (larger)
 menu is linked to.
 
 == Git basics
@@ -347,14 +348,14 @@ Every time the original changes, update like so:
   git fetch upstream
   git merge upstream/master
 
-You are probably in your own `master` branch. Even if you're
-"`branching out`" to other new branches, the above merge will
-mostly work.  "`Mostly`" because merge often triggers conflicts
+You are probably in your own `master` branch. Even if you’re
+“branching out” to other new branches, the above merge will
+mostly work.  “Mostly” because merge often triggers conflicts
 depending on how far you have diverged from the original. At the
-very least, make sure you've checked in all your changes that you
-care about, before you attempt a merge. For changes you aren't
+very least, make sure you’ve checked in all your changes that you
+care about, before you attempt a merge. For changes you aren’t
 ready to check in, save the concerned files somewhere else, and
-make sure there are no "`modified`" files in your directory.
+make sure there are no “modified” files in your directory.
 
 === Creating your private branch in the original repo
 
@@ -378,7 +379,7 @@ If conflicts arise, you will be given a way to resolve them.
 
 The directory `distribution` contains generated files which can
 always be re-generated. Before you merge, delete its contents and re-create
-its default so the merge doesn't get snagged in it:
+its default so the merge doesn’t get snagged in it:
 
   cd distribution
   rm -fr *
@@ -388,7 +389,7 @@ Create your own lesson directories under `lessons` and your own
 pathways under `pathways`.  Work exclusively there, rather than
 the supplied lessons `lessonA`, `lessonB`, `lessonC` and supplied
 pathway `pathwayP` -- which are there purely for illustration.
-As the original repo doesn't know about your lessons and
+As the original repo doesn’t know about your lessons and
 pathways, there will be no conflicts from that regard.
 
 NB: When you create a pathway, named `pathwayQ` say, use
@@ -424,14 +425,15 @@ install gnu-sed`).
 - Bash. Keeps all the scripts humming.
 
 - Racket, to do preprocessing for metadata and other
-bookkeeping. Any version should do. I'm not using any
+bookkeeping. Any version should do. I’m not using any
 bleeding-edge features of Racket.
 
 - PDF manipulators `wkhtmltopdf` and `pdftk`.  Standard
-installation as for Asciidoctor.
+installation as for Asciidoctor. (Get at least version 0.12.5 for
+`wkhtmltopdf`, to avoid `font-weight` bugs.)
 
 - TeX containing `pdflatex`. Install a suitable TeX system for
-your OS (for Linux, it's `texlive`).
+your OS (for Linux, it’s `texlive`).
 
 - `linkchecker`, optional. Standard installation as for Asciidoctor.
 
@@ -441,18 +443,18 @@ The `.adoc` files peppering this curriculum repo are written in
 AsciiDoc overlaid with some preprocessing macros written in
 Racket. AsciiDoc is a plain-text-based markup that is converted
 by the Asciidoctor program into HTML (among other things, but we
-don't use those parts).
+don’t use those parts).
 
 === A brief introduction to AsciiDoc
 
 An AsciiDoc source file typically as the extension `.adoc`, at
 least in our setup.
 
-A title (aka "`level 1`") header has its line preceded by a single
+A title (aka “level 1”) header has its line preceded by a single
 equal sign.
 
-Level 2 headers ("`sections`") are preceded by two equal signs.
-Similarly for "`subsections`" at level 3, 4, 5, 6.
+Level 2 headers (“sections”) are preceded by two equal signs.
+Similarly for “subsections” at level 3, 4, 5, 6.
 
   = Title at level 1
 
@@ -472,7 +474,7 @@ Bold text within +*...*+.
 In-text code fragment within +`...`+.
 
 Code displays are on contiguous lines that are indented (amount
-of indentation doesn't matter as long it's non-0).
+of indentation doesn’t matter as long it’s non-0).
 
 Please see the
 https://asciidoctor.org/docs/user-manual[Asciidoctor manual] for
@@ -529,7 +531,7 @@ of the autogenerated thumbnails used by the pathway narrative for
 each of its lessons.
 
 ////
-TODO: Something text-based (?) that's equivalent to the following
+TODO: Something text-based (?) that’s equivalent to the following
 
 The dependency information is also showed on the lesson plan, but
 is furthermore combined with the dependencies of other lessons in
@@ -581,7 +583,7 @@ Arbitrary pages can be invoked:
   @worksheet-link{lessonA/jened.pdf, link-text}
 
 This refers to `jened.pdf` in `lessonA`. Typically pages within
-the same lesson's directory are used, in which case the `lessonA`
+the same lesson’s directory are used, in which case the `lessonA`
 may be replaced by a `.`:
 
   @worksheet-link{./jened.pdf, link-text}
@@ -671,13 +673,13 @@ Use
   odio.
   ****
 
-to generate a "`strategy box`", a boxed text with a blue border.
+to generate a “strategy box”, a boxed text with a blue border.
 
 Use
 
    [.notice-box]
 
-to generate a "`notice & wonder box`", a boxed text with a purple
+to generate a “notice & wonder box”, a boxed text with a purple
 border.
 
 Add the class `.physics-table` to a table attribute to generate a
@@ -694,7 +696,7 @@ together, e.g,
 
 The above works for blocks. Use `@span{classes and id}{text}` to
 enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
-text. ``@span``s may be nested. ``@span```'s first argument of
+text. ``@span``s may be nested. ``@span```’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
