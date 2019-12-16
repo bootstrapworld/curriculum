@@ -166,6 +166,6 @@
 
 (make-workbook "resources/protected/pd-workbook" #:include-lesson #t)
 
-(make-workbook "resources/protected/pd-workbook" #:teacher-version #t)
+(make-workbook "resources/protected/workbook-sols" #:teacher-version #t)
 
 (void)
