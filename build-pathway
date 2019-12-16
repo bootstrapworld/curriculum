@@ -261,6 +261,9 @@ function buildworkbookpages() {
   fi
   rmproglangsubdirs workbook-pages
   #
+  if test -d solutions-pages; then
+    echo deadc0de: solutions-pages shouldnt exist
+  fi
   cp -pr workbook-pages solutions-pages
   cp -p $PROGDIR/.hta* solutions-pages
   if test -d workbook-sols-pages; then
@@ -282,7 +285,8 @@ function buildworkbookpages() {
       cp -p exercises/$PROGLANG/* exercises
     fi
     rmproglangsubdirs exercises
-    cp -pr exercises exercises-sols
+    mkdir -p exercises-sols
+    cp -pr exercises/* exercises-sols
   fi
   #
   for d in *; do
