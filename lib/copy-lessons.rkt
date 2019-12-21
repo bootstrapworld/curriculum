@@ -34,7 +34,7 @@
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(\n")
-    (for ((lesson *workbook-index*))
+    (for ([lesson *workbook-index*])
       (system (format "mkdir -p lessons/~a" lesson))
       (system (format "cp -pr $TOPDIR/lessons/~a/langs/~a/* lessons/~a" lesson *language* lesson))
       (let* ([lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson)]
@@ -44,7 +44,7 @@
                      [else
                        (printf "WARNING: Lesson ~a is incorrectly organized\n" lesson)
                        '()])])
-        (for ((page lesson-index))
+        (for ([page lesson-index])
           (let ([file page]
                 [aspect "portrait"]
                 [paginate "yes"])

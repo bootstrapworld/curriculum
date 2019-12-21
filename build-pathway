@@ -2,20 +2,21 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
+export DEBUG=false
 export FORCE=false
 export LANGUAGE=en-us
 export PROGLANG=
 export TOPDIR=$(pwd)
 
 ARGS=
-DEBUG=false
 HELP=false
-LASTMOD=2019-12-15 # last modified
+LASTMOD=2019-12-20 # last modified
 NOPDF=false
+PDFMARGIN=0mm
 SED=sed
+TMPHTML=tmp0.html
 VERIFYLINKS=false
 VERSION=false
-
 
 while test $# -ne 0; do
   arg=$1; shift
@@ -79,10 +80,17 @@ if which gsed | grep -q .; then
   SED=gsed
 fi
 
-# set $BUILD_PATHWAY_DEBUG_MODE to avoid typing --debug every time
-if test "$BUILD_PATHWAY_DEBUG_MODE"; then
+# set $BUILD_PATHWAY_{DEBUG,FORCE} to avoid typing --{debug,force} every time
+
+if test "$BUILD_PATHWAY_DEBUG" -a "$BUILD_PATHWAY_DEBUG" != false; then
   DEBUG=true
 fi
+
+if test "$BUILD_PATHWAY_FORCE" -a "$BUILD_PATHWAY_FORCE" != false; then
+  FORCE=true
+fi
+
+#echo FORCE= $FORCE DEBUG= $DEBUG
 
 if test "$ARGS" = ""; then
   ARGS="pathways/*"
@@ -136,6 +144,14 @@ function insertstylecss() {
   local f=$1
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="\/styles.css">/' \
+    $f
+}
+
+function insertprintcss() {
+  local f=$1
+  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  $SED -i \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wkhtmltopdf.css">/' \
     $f
 }
 
@@ -336,7 +352,11 @@ function buildworkbookpages() {
           if ! $NOPDF; then
             fpdf=${fhtml%.html}.pdf
             if test $fhtml -nt $fpdf; then
-              wkhtmltopdf --margin-left '0mm' --margin-right '0mm' --lowquality --print-media-type -q $fhtml $fpdf
+              cp -p $fhtml $TMPHTML
+              insertprintcss $TMPHTML
+              wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN \
+                --lowquality -q $TMPHTML $fpdf
+              rm $TMPHTML
             fi
           fi
         fi
@@ -400,7 +420,10 @@ function buildlessonplan() {
     if ! $NOPDF; then
       #echo Creating lesson plan pdf
       if test index.html -nt index.pdf; then
-        wkhtmltopdf --lowquality --print-media-type -q index.html index.pdf
+        cp index.html $TMPHTML
+        insertprintcss $TMPHTML
+        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+        rm $TMPHTML
       fi
     fi
   fi
@@ -594,9 +617,9 @@ function buildpathway() {
       #echo
       #echo building pathway workbooks: $PATHWAY
       if $DEBUG; then
-        $PROGDIR/make-workbook.rkt >/dev/null 2>&1
-      else
         $PROGDIR/make-workbook.rkt
+      else
+        $PROGDIR/make-workbook.rkt >/dev/null 2>&1
       fi
       rm -f workbook-numbered.*
     fi

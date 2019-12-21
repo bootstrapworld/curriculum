@@ -4,9 +4,19 @@
 
 (require "utils.rkt")
 
+;(printf "Doing make-workbook.rkt\n")
+
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
-(define *force* (not (string=? (getenv "FORCE") "false")))
+(define *force*
+  (let ([force (getenv "FORCE")])
+    (and force (not (string=? force "false")))))
+
+(define *debug*
+  (let ([debug (getenv "DEBUG")])
+    (and debug (not (string=? debug "false")))))
+
+;(printf "force= ~s; debug= ~s\n" *force* *debug*)
 
 (define *pdflatex* (find-executable-path "pdflatex"))
 
@@ -96,9 +106,9 @@
                    "\\setlength\\headheight{0in}"
                    "\\setlength\\headsep{0in}"
                    "\\setlength\\textheight{9.5in}"
-                   "\\setlength\\textwidth{7.0in}"
-                   "\\setlength\\oddsidemargin{-0.25in}"
-                   "\\setlength\\evensidemargin{-0.25in}"
+                   "\\setlength\\textwidth{8.25in}"
+                   "\\setlength\\oddsidemargin{-0.5in}"
+                   "\\setlength\\evensidemargin{-0.5in}"
                    "%"
                    "\\pagestyle{fancy}"
                    "\\renewcommand{\\headrulewidth}{0pt}"
@@ -152,9 +162,11 @@
 
     (when *pdflatex* (system* *pdflatex* "workbook-numbered"))
 
-    (for ([pdf-page-spec *pdf-page-specs*])
-      (let ([handle (list-ref pdf-page-spec 2)])
-        (delete-file (format "~a.pdf" handle))))
+    (unless *debug*
+      ;(printf "cleaning up handle pdfs\n")
+      (for ([pdf-page-spec *pdf-page-specs*])
+        (let ([handle (list-ref pdf-page-spec 2)])
+          (delete-file (format "~a.pdf" handle)))))
 
     (when (file-exists? "workbook-numbered.pdf")
       (system (format "mv workbook-numbered.pdf ~a" dest.pdf)))

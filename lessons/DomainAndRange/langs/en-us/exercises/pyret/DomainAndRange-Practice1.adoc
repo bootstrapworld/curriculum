@@ -1,43 +1,84 @@
-== Domain and Range -- Contract Practice
+@do{
 
-For each of the sets of examples, write the contract for the
-function _above_ the examples.
+(define e1
+   (code #:multi-line #t
+    (string-append
+     "examples:\n"
+     "  big-triangle(\"solid\", \"red\") is\n"
+     "    triangle(90, \"solid\", \"red\")\n"
+     "  big-triangle(\"outline\", \"blue\") is\n"
+     "    triangle(90, \"outline\", \"blue\")\n"
+     "end\n"
+    )))
+(define c1
+  (code "big-triangle :: String String -> Image"))
 
-1. ``++_______________::____________________________ -> ___________++``
+(define e2
+   (code #:multi-line #t
+    (string-append
+     "examples:\n"
+     "  purple-square(15) is\n"
+     "    rectangle(15, 15, \"outline\", \"purple\")\n"
+     "  purple-square(6) is\n"
+     "    rectangle(6, 6, \"outline\", \"purple\")\n"
+     "end\n"
+    )))
+(define c2
+  (code "purple-square :: Number -> Image"))
 
-  examples:
-  big-triangle("solid", "red") is
-    triangle(90, "solid", "red")
-  big-triangle("outline", "blue") is
-    triangle(90, "outline", "blue")
-  end
+(define e3
+   (code #:multi-line #t
+    (string-append
+     "examples:\n"
+     "  banner(\"Game Today!\") is\n"
+     "    text(\"Game Today!\", 50, \"red\")\n"
+     "  banner(\"Go Team\") is\n"
+     "    text(\"Go Team\", 50, \"red\")\n"
+     "end\n"
+    )))
+(define c3
+  (code "banner :: String -> Image"))
 
-2. ``++_______________::____________________________ -> ___________++``
+(define e4
+   (code #:multi-line #t
+    (string-append
+     "examples:\n"
+     "  twinkle(5, \"outline\") is\n"
+     "    star(5, \"outline\", \"yellow\")\n"
+     "  twinkle(15, \"solid\") is\n"
+     "    star(15, \"solid\", \"yellow\")\n"
+     "end\n"
+    )))
+(define c4
+  (code "twinkle :: Number String -> Image"))
 
-  examples:
-  purple-square(15) is rectangle(15, 15, "outline", "purple")
-  purple-square(6) is rectangle(6, 6, "outline", "purple")
-  end
+(define e5
+   (code #:multi-line #t
+    (string-append
+     "examples:\n"
+     "  half(2) is 2 / 2\n"
+     "  half(4) is 4 / 2\n"
+     "  half(9) is 9 / 2\n"
+     "end\n"
+    )))
+(define c5
+  (code "half :: Number -> Number"))
 
-3. ``++_______________::____________________________ -> ___________++``
+(define examples-lst (list e1 e2 e3 e4 e5 ))
+(define answers-lst (list c1 c2 c3 c4 c5 ))
+(define answers-atop (map list answers-lst examples-lst))
+}
 
-  examples:
-  banner("Game Today!") is text("Game Today!", 50, "red")
-  banner("Go Team") is text("Go Team", 50, "red")
-  end
-
-4. ``++_______________::____________________________ -> ___________++``
-
-  examples:
-  twinkle(5, "outline") is star(5, "outline", "yellow")
-  twinkle(15, "solid") is star(15, "solid", "yellow")
-  end
-
-5. ``++_______________::____________________________ -> ___________++``
-
-  examples:
-  half(2) is 2 / 2
-  half(4) is 4 / 2
-  half(9) is 9 / 2
-  end
-
+@show{(exercise-handout
+  #:title "Domain and Range -- Contract Practice"
+  #:instr "For each of the sets of examples, write the contract
+           for the function _above_ the examples."
+  #:forevidence (exercise-evid-tags "BS-DR.2&1&1" "F-IF.1-3&1&1" "F-IF.1-3&1&2")
+  (cond [(not *solutions-mode?*)
+  (create-exercise-itemlist/contract-answers examples-lst)]
+  [else
+    (create-exercise-itemlist answers-atop)
+    ;(questions-and-answers examples-lst answers-lst)
+    ])
+  )
+  }
