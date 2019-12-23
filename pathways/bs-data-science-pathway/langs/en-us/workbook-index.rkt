@@ -2,7 +2,7 @@
  "DSIntroduction"
  "DSQuestionsAndDefs"
  "DSExploringDatasets"
- ;"DSVisualizingShapeOfData"
+ "DSVisualizingShapeOfData"
  ;"DSCenterAndSpread"
  ;"DSAdvancedAnalysis"
  "DSVisualizingRelationships"
