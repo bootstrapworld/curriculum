@@ -1,0 +1,10 @@
+(
+ "VisualizingShapeOfData.pdf"
+ "DesignRecipe.pdf"
+ "SummarizingColumns.pdf"
+ "ReadingHistograms.pdf"
+ "MakingHistograms.pdf"
+ "ShapeOfAnimalsDataset.pdf"
+ "ShapeOfMyDataset.pdf"
+ "WhatsOnYourMind.pdf"
+ )

@@ -1,0 +1,68 @@
+= More Practice with Lookups
+
+Consider the table below, and the four value definitions that follow:
+
+`shapes-table`
+
+[cols="3"]
+|===
+
+|name |corners |is-round
+
+|`"triangle"` | `3`  | `false`
+|`"triangle"` | `4`  | `false`
+|`"rectangle"` | `4`  | `false`
+|`"circle"` | `0`  | `true`
+
+|===
+
+----
+shapeA = shapes-table.row-n(0)
+shapeB = shapes-table.row-n(1)
+shapeC = shapes-table.row-n(2)
+shapeD = shapes-table.row-n(3)
+----
+
+.1. _Match_ each Pyret expression (left) to the description of what it looks up (right).
+
+[cols="2"]
+|===
+
+| `shapeD` | Evaluates to `4`
+| `shapeA` | Evaluates to the last row in the table
+| `shapeB["corners"]` | Evaluates to `"square"`
+| `shapeC["is-round"]` | Evaluates to `true`
+| `shapeB["name"]` | Evaluates to `false`
+| `shapeA["corners"]` | Evaluates to `3`
+| `shapeD["name"] == "circle"` | Evaluates to the first row in
+the table
+|===
+
+.2. Fill in the blanks (left) with the Pyret lookup code that will produce the value (right).
+“rectangle”
+
+[cols="1a,80a,19a"]
+|===
+
+| a. |
+@span{.fitb}{@span{.invisible}{---------------------------------------------------------------------------------------------------------------------}}
+| `"rectangle"`
+
+| b. |
+@span{.fitb}{@span{.invisible}{---------------------------------------------------------------------------------------------------------------------}}
+| `"rectangle"`
+
+| c. |
+@span{.fitb}{@span{.invisible}{---------------------------------------------------------------------------------------------------------------------}}
+| `4`
+
+| d. |
+@span{.fitb}{@span{.invisible}{---------------------------------------------------------------------------------------------------------------------}}
+| `0`
+
+| e. |
+@span{.fitb}{@span{.invisible}{---------------------------------------------------------------------------------------------------------------------}}
+| `true`
+
+|===
+

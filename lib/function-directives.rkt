@@ -531,6 +531,10 @@
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 )
 
+  ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
+  ;should be overridden in solutions mode
+
+
   (set! *show-funname-contract?* show-funname-contract?)
   (set! *show-domains?* show-domains?)
   (set! *show-range?* show-range?)
@@ -540,6 +544,7 @@
   (set! *show-params?* show-params?)
   (set! *show-body?* show-body?)
 
+  #|
   (unless *solutions-mode?*
     (set! *show-funname-contract?* #f)
     (set! *show-domains?* #f)
@@ -550,6 +555,7 @@
     (set! *show-params?* #f)
     (set! *show-body?* #f)
     )
+  |#
 
   (when (and *solutions-mode?* (not assess-design-recipe))
     (set! *show-funname-contract?* #t)

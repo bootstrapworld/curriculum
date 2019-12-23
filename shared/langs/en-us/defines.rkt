@@ -17,7 +17,9 @@
 
 (define (print-lessons-intro o)
   (display
-    (mstring "We provide all of our materials _free of charge_,"
+    (mstring
+      ""
+      "We provide all of our materials _free of charge_,"
       "to anyone who is interested in using our lesson plans or student"
       "workbooks."
       ""

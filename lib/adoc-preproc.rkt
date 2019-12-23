@@ -335,7 +335,7 @@
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
   (set! text (regexp-replace* #rx"," text "@CURRICULUMCOMMA"))
-  (set! text (string-append " " text " ")) ;FIXME needed?
+  ;(set! text (string-append " " text " ")) ;FIXME needed?
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -343,19 +343,21 @@
 
 (define (make-image img opts)
   ;(printf "making image ~s ~s\n" img opts)
-  (let ([lesson (getenv "LESSON")]
-        [text (clean-up-image-text (car opts))]
-        [rest-opts (cdr opts)])
-    (set! opts (string-join rest-opts ", "))
-    (string-append
-      (format "[.tooltip.centered-image]\n")
-      (enclose-span ".tooltiptext" text) "\n"
-      (let ([text (clean-up-url-in-image-text text)])
-        (if lesson
+  (let* ([lesson (getenv "LESSONPLAN")]
+         [text (clean-up-image-text (car opts))]
+         [rest-opts (cdr opts)]
+         [commaed-opts (string-join rest-opts ", ")]
+         [text-wo-url (clean-up-url-in-image-text text)]
+         [adoc-img (if lesson
             (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
-                    text opts)
-            (format "image:~a[~s, ~a]" img text opts)))
-      )))
+                    text-wo-url commaed-opts)
+            (format "image:~a[~s, ~a]" img text-wo-url commaed-opts))]
+         )
+    (if (string=? text "") adoc-img
+        (enclose-span ".tooltip.centered-image"
+          (string-append
+            (enclose-span ".tooltiptext" text) "\n"
+            adoc-img)))))
 
 (define (make-lesson-link lesson file-seq link-text)
   ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
@@ -768,6 +770,7 @@
                                            (display (keyword-apply (cadr f) key-list key-vals args) o)))))]
                                [else
                                  (printf "WARNING: Unrecognized directive @~a~%" directive)
+                                 (display c o) (display directive o)
                                  #f]))]
                       [(and (or (getenv "LESSON")
                                 (getenv "LESSONPLAN")
@@ -788,7 +791,9 @@
                                      [else (display c o)])]
                              [else
                                (set! title-reached? #t)
-                               (display-title i o)
+                               (cond [(or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
+                                      (display-title i o)]
+                                     [else (display #\= o)])
                                (when (getenv "TEACHER_RESOURCES")
                                  ;(printf "teacher resource autoloading stuff\n")
                                  (newline o)

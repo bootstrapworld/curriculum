@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2019-12-20 # last modified
+LASTMOD=2019-12-22 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -209,9 +209,9 @@ function resolveabbrevs() {
     -e 's/@CURRICULUMCOMMENT/<!-- /' \
     -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
     \
-    -e 's/@CURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/<\1/g' \
-    -e 's/@BEGINCURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/>/g' \
-    -e 's/@ENDCURRICULUM\(a\|button\|defs\|div\|h2\|li\|marker\|option\|path\|polyline\|pre\|select\|span\|svg\|textarea\|text\|tt\|ul\)/<\/\1>/g' \
+    -e 's/@CURRICULUM\([^!]*\)!/<\1/g' \
+    -e 's/@BEGINCURRICULUM\([^!]*\)!/>/g' \
+    -e 's/@ENDCURRICULUM\([^!]*\)!/<\/\1>/g' \
     \
     -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
     -e 's/@BEGINCURRICULUMSCRIPT/>/g' \

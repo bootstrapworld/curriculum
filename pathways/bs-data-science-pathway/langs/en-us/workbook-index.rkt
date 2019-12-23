@@ -1,0 +1,15 @@
+(
+ "DSIntroduction"
+ "DSQuestionsAndDefs"
+ ;"DSExploringDatasets"
+ ;"DSVisualizingShapeOfData"
+ ;"DSCenterAndSpread"
+ ;"DSAdvancedAnalysis"
+ "DSVisualizingRelationships"
+ ;"DSComputingRelationsships"
+ "DSThreatsToValidity"
+ ;"DSBlankRecipesAndRefs"
+ ;"DSContracts"
+ ;"CoordinatePlane1"
+ ;"DefiningValues1"
+ )
