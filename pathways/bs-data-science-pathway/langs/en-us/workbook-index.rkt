@@ -1,7 +1,7 @@
 (
  "DSIntroduction"
  "DSQuestionsAndDefs"
- ;"DSExploringDatasets"
+ "DSExploringDatasets"
  ;"DSVisualizingShapeOfData"
  ;"DSCenterAndSpread"
  ;"DSAdvancedAnalysis"
