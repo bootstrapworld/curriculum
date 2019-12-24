@@ -1,0 +1,10 @@
+(
+ "visualizing-shape-of-data.pdf"
+ "design-recipe.pdf"
+ "summarizing-columns.pdf"
+ "reading-histograms.pdf"
+ "making-histograms.pdf"
+ "shape-of-animals-dataset.pdf"
+ "shape-of-my-dataset.pdf"
+ "whats-on-your-mind.pdf"
+ )

@@ -1,9 +1,0 @@
-(
- "ExploringDatasets.pdf"
- "SamplesFromAnimalDataset.pdf"
- "MyDataset.pdf"
- "SamplesFromMyDataset.pdf"
- "DesignRecipeHelperFuns.pdf"
- "DesignRecipeHelperFuns2.pdf"
- "WhatsOnYourMind.pdf"
- )

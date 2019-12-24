@@ -77,14 +77,15 @@
                           lines) "\n"))])
         (if (string=? res "") " " res))))
 
-(define (write-directions page-header funname directions)
+(define (write-section-header page-header funname)
   (format (mstring "\n\n[.designRecipeLayout]"
-            "== [.dr-title]##~a: ~a##"
-            ""
-            "[.recipe_word_problem]"
+            "== [.dr-title]##~a: ~a##\n")
+          page-header funname))
+
+(define (write-directions directions)
+  (format (mstring
+            "\n[.recipe_word_problem]"
             "**Directions**: ~a\n\n")
-          page-header
-          funname
           directions))
 
 (define (write-purpose funname domain-list range purpose)
@@ -529,11 +530,11 @@
                                 #:grid-lines? (grid-lines? #f)
                                 #:lang (lang 'racket)
                                 #:assess-design-recipe (assess-design-recipe #f)
+                                #:headless? (headless? #f)
                                 )
 
   ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
   ;should be overridden in solutions mode
-
 
   (set! *show-funname-contract?* show-funname-contract?)
   (set! *show-domains?* show-domains?)
@@ -586,7 +587,10 @@
 
   (string-append
 
-    (write-directions page-header funname directions)
+    (if headless? ""
+        (write-section-header page-header funname))
+
+    (write-directions directions)
 
     (write-purpose funname domain-list range purpose)
 
