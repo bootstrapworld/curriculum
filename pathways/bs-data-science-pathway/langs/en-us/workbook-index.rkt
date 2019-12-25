@@ -8,7 +8,7 @@
  "ds-visualizing-relationships"
  "ds-computing-relationships"
  "ds-threats-to-validity"
- ;"ds-blank-recipes-n-refs"
+ "ds-blank-recipes-n-refs"
  "ds-contracts"
  ;"CoordinatePlane1"
  ;"DefiningValues1"
