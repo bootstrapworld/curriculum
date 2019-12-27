@@ -335,7 +335,6 @@
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
   (set! text (regexp-replace* #rx"," text "@CURRICULUMCOMMA"))
-  ;(set! text (string-append " " text " ")) ;FIXME needed?
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -344,8 +343,8 @@
 (define (make-image img opts)
   ;(printf "making image ~s ~s\n" img opts)
   (let* ([lesson (getenv "LESSONPLAN")]
-         [text (clean-up-image-text (car opts))]
-         [rest-opts (cdr opts)]
+         [text (if (pair? opts) (clean-up-image-text (car opts)) "")]
+         [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
          [adoc-img (if lesson
@@ -353,7 +352,9 @@
                     text-wo-url commaed-opts)
             (format "image:~a[~s, ~a]" img text-wo-url commaed-opts))]
          )
-    (if (string=? text "") adoc-img
+    ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
+    (if (string=? text "")
+        (enclose-span ".centered-image" adoc-img)
         (enclose-span ".tooltip.centered-image"
           (string-append
             (enclose-span ".tooltiptext" text) "\n"

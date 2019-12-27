@@ -1,4 +1,4 @@
-# last modified 2019-11-29
+# last modified 2019-12-25
 
 if test -f distribution.tar.bz2; then
   rm -fr distribution
@@ -41,3 +41,6 @@ for proglang in pyret wescheme; do
   rm -fr $DEPLOY_DIR/algebra-$proglang-remix
   cp -prH distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
 done
+
+rm -fr $DEPLOY_DIR/datascience-remix
+cp -prH distribution/bs-data-science-pathway $DEPLOY_DIR/datascience-remix

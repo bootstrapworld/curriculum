@@ -1,8 +1,8 @@
 (
- "CenterAndSpread.pdf"
- "SummarizingColumnsInAnimals.pdf"
- "InterpretingSpread.pdf"
- "MatchingBoxplotsToHistograms.pdf"
- "ShapeOfMyDataset"
- "WhatsOnYourMind"
+ "center-and-spread.adoc"
+ "summarizing-columns-in-animals.adoc"
+ "interpreting-spread.adoc"
+ "matching-boxplots-to-histograms.adoc"
+ "shape-of-my-dataset.adoc"
+ "whats-on-your-mind.adoc"
  )
