@@ -4,7 +4,7 @@
  "ds-exploring-datasets"
  "ds-visualizing-shape-of-data"
  "ds-center-and-spread"
- ;"ds-advanced-analysis"
+ "ds-advanced-analysis"
  "ds-visualizing-relationships"
  "ds-computing-relationships"
  "ds-threats-to-validity"
