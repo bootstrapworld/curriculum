@@ -5,7 +5,7 @@ git checkout -B travistmp
 git config --global user.email "${GH_USER_EMAIL}"
 git config --global user.name "${GH_USER_NAME}"
 
-FILES_TO_COMMIT="css html jpg pdf png shtml"
+FILES_TO_COMMIT="css html jpg pdf png shtml svg"
 
 git add index.html README.html asciidoctor.css deploy-bootstrap-curriculum
 

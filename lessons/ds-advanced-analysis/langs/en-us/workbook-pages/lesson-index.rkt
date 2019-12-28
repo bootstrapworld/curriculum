@@ -1,8 +1,8 @@
 (
- "advanced-analysis.pdf"
- "chaining-methods.pdf"
- "chaining-methods-order-matters.pdf"
- "trust-but-verify.pdf"
- "trust-but-verify-2.pdf"
- "whats-on-your-mind.pdf"
+ "advanced-analysis.adoc"
+ "chaining-methods.adoc"
+ "chaining-methods-order-matters.adoc"
+ "trust-but-verify.adoc"
+ "trust-but-verify-2.adoc"
+ "whats-on-your-mind.adoc"
  )

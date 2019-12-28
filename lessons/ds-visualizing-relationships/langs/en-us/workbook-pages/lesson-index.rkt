@@ -1,9 +1,9 @@
 (
- "visualizing-relationships.pdf"
- "disproving-claim.pdf"
- "creating-scatterplot.pdf"
-; "drawing-predictors.pdf"
- ;"correlations-in-my-dataset.pdf"
- "whats-on-your-mind.pdf"
+ "visualizing-relationships.adoc"
+ "disproving-claim.adoc"
+ "creating-scatterplot.adoc"
+; "drawing-predictors.adoc"
+ ;"correlations-in-my-dataset.adoc"
+ "whats-on-your-mind.adoc"
  )
  

@@ -1,10 +1,10 @@
 (
- "visualizing-shape-of-data.pdf"
- "design-recipe.pdf"
- "summarizing-columns.pdf"
- "reading-histograms.pdf"
- "making-histograms.pdf"
- "shape-of-animals-dataset.pdf"
- "shape-of-my-dataset.pdf"
- "whats-on-your-mind.pdf"
+ "visualizing-shape-of-data.adoc"
+ "design-recipe.adoc"
+ "summarizing-columns.adoc"
+ "reading-histograms.adoc"
+ "making-histograms.adoc"
+ "shape-of-animals-dataset.adoc"
+ "shape-of-my-dataset.adoc"
+ "whats-on-your-mind.adoc"
  )

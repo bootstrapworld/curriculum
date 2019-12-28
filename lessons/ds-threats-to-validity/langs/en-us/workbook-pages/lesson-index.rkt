@@ -1,8 +1,8 @@
 (
- "threats-to-validity.pdf"
- "threats-to-validity-2.pdf"
- "threats-to-validity-3.pdf"
- "fake-news.pdf"
- "lies-darned-lies-n-statistics.pdf"
- "whats-on-your-mind.pdf"
+ "threats-to-validity.adoc"
+ "threats-to-validity-2.adoc"
+ "threats-to-validity-3.adoc"
+ "fake-news.adoc"
+ "lies-darned-lies-n-statistics.adoc"
+ "whats-on-your-mind.adoc"
  )

@@ -1,8 +1,8 @@
 (
- "computing-relationships.pdf"
- "grading-predictors.pdf"
- "reading-regression-lines-n-rvalues.pdf"
- ;"regression-analysis-in-animals-dataset.pdf"
- ;"regression-analysis-in-my-dataset.pdf"
- "whats-on-your-mind.pdf"
+ "computing-relationships.adoc"
+ "grading-predictors.adoc"
+ "reading-regression-lines-n-rvalues.adoc"
+ ;"regression-analysis-in-animals-dataset.adoc"
+ ;"regression-analysis-in-my-dataset.adoc"
+ "whats-on-your-mind.adoc"
  )
