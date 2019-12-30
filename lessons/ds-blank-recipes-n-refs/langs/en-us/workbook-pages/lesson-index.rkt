@@ -1,5 +1,5 @@
 (
- "two-blank-recipes.adoc"
- "two-blank-recipes.adoc"
- "two-blank-recipes.adoc"
+ "2-blank-recipes.adoc"
+ "2-blank-recipes.adoc"
+ "2-blank-recipes.adoc"
  )

@@ -128,4 +128,6 @@ when it prints out the glossary for a particular unit
     ("variable" "a letter, symbol, or term that stands in for a value or expression")
     ("variable name" "name of the information that can be different each time a function is used")
     ("vertical axis" "number line on a graph that runs from bottom to top, indicating values in that direction")
+    ("skew" "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than separated by a gap (as with outliers)")
+    ("spread" "")
    ))
