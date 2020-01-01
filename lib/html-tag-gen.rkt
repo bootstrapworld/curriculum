@@ -22,18 +22,18 @@
   (let ([classes (if (string=? classes "") '()
                      (regexp-split #rx"\\." (substring classes 1)))])
     (string-append
-      "@CURRICULUM" tag-name "!"
+      "%CURRICULUM" tag-name "!"
       (if (pair? classes) (string-append
                             " class=\""
                             (string-join classes " ")
                             "\"")
           "")
       (if attribs (string-append " " attribs) "")
-      "@BEGINCURRICULUM" tag-name "!")))
+      "%BEGINCURRICULUM" tag-name "!")))
 
 (define (create-end-tag tag-name)
   (string-append
-    "@ENDCURRICULUM" tag-name "!"))
+    "%ENDCURRICULUM" tag-name "!"))
 
 (define (enclose-tag tag classes s #:attribs [attribs #f])
   (string-append

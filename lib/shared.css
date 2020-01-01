@@ -362,6 +362,10 @@ span.clear {
   text-align: center;
 }
 
+.recipe_title {
+  padding-top: 5px;
+}
+
 .recipe_title p {
   color: white;
   background: gray;
@@ -540,22 +544,46 @@ span.clear {
   fill: none;
 }
 
+td.tableblock code {
+  background: none;
+}
+
 .fitb,
+.vblank,
 .blankline {
   display: inline-block;
   min-height: 15px;
   min-width: 5em;
-  border-bottom: solid 1px black;
   text-align: center;
 }
 
+.fitb,
+.blankline {
+  border-bottom: solid 1px black;
+}
+
+.vblank,
+.blankline {
+  margin-top: 25px;
+}
+
 .fitb::before,
+.vblank::before,
 .blankline::before {
   content: '\00200b';
 }
 
+.vblank,
 .blankline {
   width: 100%;
+}
+
+.sectionbreak {
+  display: block;
+  width: auto;
+  border-bottom: solid 3px black;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .invisible {

@@ -322,11 +322,11 @@
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
-  (display "@CURRICULUMCOMMENT\n" o)
+  (display "%CURRICULUMCOMMENT\n" o)
   (display "++++\n" o)
   (display prose o)
   (display "\n++++\n" o)
-  (display "@ENDCURRICULUMCOMMENT" o))
+  (display "%ENDCURRICULUMCOMMENT" o))
 
 (define (clean-up-image-text text)
   (when (char=? (string-ref text 0) #\")
@@ -334,7 +334,7 @@
   (let ([n (string-length text)])
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
-  (set! text (regexp-replace* #rx"," text "@CURRICULUMCOMMA"))
+  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA"))
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -580,243 +580,256 @@
 
       )
     ;
+    (define (expand-directives i o)
+      (let ([beginning-of-line? #t])
+        (let loop ()
+          (let ([c (read-char i)])
+            (unless (eof-object? c)
+              (cond
+                [(char=? c #\@)
+                 (set! beginning-of-line? #f)
+                 (let ([directive (read-word i)])
+                   ;(printf "directive = ~s~%" directive)
+                   (cond [(string=? directive "") (display c o)]
+                         [(string=? directive "span")
+                          (display-begin-span (string-trim (read-group i directive)) o)
+                          ]
+                         [(string=? directive "comment")
+                          (let ([prose (read-group i directive)])
+                            (if title-reached?
+                                (display-comment prose o)
+                                (call-with-output-file "index-comment.txt"
+                                  (lambda (o)
+                                    (display "<!--" o)
+                                    (display prose o)
+                                    (display "-->" o)
+                                    (newline o)))))]
+                         [(string=? directive "vocab")
+                          (let* ([arg (read-group i directive)]
+                                 [s (assoc-glossary arg *glossary-list*)])
+                            (when (string=? arg "")
+                              (printf "WARNING: Directive @vocab has ill-formed argument~%"))
+                            (display arg o)
+                            (cond [s (unless (member s *glossary-items*)
+                                       (set! *glossary-items* (cons s *glossary-items*)))]
+                                  [else (printf "Item ~a not found in glossary~%"
+                                                arg)]))]
+                         [(string=? directive "std")
+                          (let ([args (read-commaed-group i directive)])
+                            (printf "WARNING: Directive @std is obsolete\n")
+                            )]
+                         [(string=? directive "XXX-depends-on") ;XXX
+                          (let ([args (read-commaed-group i directive)]
+                                [lesson-dir (getenv "LESSONPLAN")])
+                            (cond [(getenv "LESSONPLAN")
+                                   (display-lesson-dependencies args o)]
+                                  [else
+                                    (printf "WARNING: @depends-on only valid in lesson plans\n")]))]
+                         [(string=? directive "image")
+                          (let ([args (read-commaed-group i directive)])
+                            (display (make-image (car args) (cdr args)) o))]
+                         [(or (string=? directive "worksheet-link")
+                              (string=? directive "worksheet-include")
+                              (string=? directive "exercise-link"))
+                          (let* ([include? (string=? directive "worksheet-include")]
+                                 [exercise-as-is? (string=? directive "exercise-link")]
+                                 [args (read-commaed-group i directive)]
+                                 [n (length args)]
+                                 [page (car args)]
+                                 [link-text (if (> n 1) (cadr args) "")]
+                                 [page-compts (regexp-split #rx"/" page)]
+                                 [first-compt (car page-compts)])
+                            (case (length page-compts)
+                              [(1)
+                               (let* ([pointer (car page-compts)]
+                                      [actual-url (assoc pointer *external-url-index*)])
+                                 (when (string=? link-text "")
+                                   (set! link-text pointer))
+                                 (unless actual-url
+                                   (printf "WARNING: Unresolved external link ~a~n" pointer))
+                                 (fprintf o "link:~a[~a]"
+                                          (if actual-url (cadr actual-url) pointer)
+                                          (cond ((not actual-url)
+                                                 (format "Missing external link for ~a: ~a"
+                                                         pointer link-text))
+                                                (else link-text)))
+                                 )
+                               ]
+                              [(2)
+                               (let ([second-compt (cadr page-compts)]
+                                     [lesson-dir (getenv "LESSON")])
+                                 (cond [(or (string=? first-compt "exercises")
+                                            (string=? first-compt "exercises-sols"))
+                                        (cond [lesson-dir
+                                                (display (make-exercise-link
+                                                           lesson-dir
+                                                           first-compt
+                                                           second-compt
+                                                           link-text
+                                                           #:include? include?
+                                                           #:as-is? exercise-as-is?) o)]
+                                              [else
+                                                (printf "WARNING: Incomplete exercise link ~a~n"
+                                                        page)])]
+                                       [(or (string=? first-compt "workbook-pages")
+                                            (string=? first-compt "workbook-sols-pages"))
+                                        (cond [lesson-dir
+                                                (display (make-worksheet-link lesson-dir
+                                                                              first-compt
+                                                                              (cadr page-compts)
+                                                                              link-text) o)]
+                                              [else
+                                                (printf "WARNING: Incomplete worksheet link ~a~n"
+                                                        page)])]
+                                       [else
+                                         (display (make-lesson-link
+                                                    first-compt
+                                                    (cdr page-compts)
+                                                    link-text) o)]))]
+                              [(3)
+                               (let ([second-compt (cadr page-compts)]
+                                     [third-compt (caddr page-compts)])
+                                 (cond [(or (string=? second-compt "exercises")
+                                            (string=? second-compt "exercises-sols"))
+                                        (display (make-exercise-link
+                                                   first-compt
+                                                   second-compt
+                                                   third-compt
+                                                   link-text
+                                                   #:include? include?
+                                                   #:as-is? exercise-as-is?) o)]
+                                       [(or (string=? second-compt "workbook-pages")
+                                            (string=? second-compt "workbook-sols-pages"))
+                                        (display (make-worksheet-link first-compt
+                                                                      second-compt
+                                                                      third-compt link-text) o)]
+                                       ;(else (printf "Bad worksheet link ~a~n" page))
+                                       [else
+                                         (display (make-lesson-link first-compt
+                                                                    (cdr page-compts)
+                                                                    link-text) o)
+                                         ]
+                                       ))]
+                              [else
+                                (display (make-lesson-link first-compt
+                                                           (cdr page-compts)
+                                                           link-text) o)]
+                              ))]
+                         [(string=? directive "link")
+                          (let* ([args (read-commaed-group i directive)]
+                                 [adocf (car args)]
+                                 [htmlf (path-replace-extension adocf ".html")]
+                                 [pdff (path-replace-extension adocf ".pdf")]
+                                 [f adocf]
+                                 [link-text (string-join
+                                              (map string-trim (cdr args)) ", ")])
+                            ;(printf "doing @link of ~s~n" args)
+                            (cond [(file-exists? htmlf) (set! f htmlf)]
+                                  [(file-exists? pdff) (set! f pdff)])
+                            (fprintf o "link:~a[~a~a]" f link-text
+                                     (if (or (getenv "LESSONPLAN")
+                                             (getenv "TEACHER_RESOURCES"))
+                                         ", window=\"_blank\"" "")))]
+                         [(string=? directive "lesson-description")
+                          (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
+                            (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
+                          (display-lesson-description (read-group i directive) o)]
+                         [(string=? directive "depends-on")
+                          (unless (getenv "LESSONPLAN")
+                            (ferror 'adoc-preproc.rkt "@depends-on valid only in lesson plan"))
+                          (display-lesson-dependencies (read-commaed-group i directive) o)]
+                         [(string=? directive "solutions-workbook")
+                          ;TODO: don't need this anymore -- link is autogen'd
+                          (unless (getenv "TEACHER_RESOURCES")
+                            (ferror 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
+                          (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
+                          (newline o)
+                          (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
+                          ]
+                         [(string=? directive "do")
+                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                            (for-each massage-arg exprs))]
+                         [(string=? directive "show")
+                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                            (for ([s exprs])
+                              (display (massage-arg s) o)))]
+                         [(string=? directive "fitb")
+                          (let* ([width (string-trim (read-group i directive))]
+                                 [text (string-trim (read-group i directive))])
+                            (display
+                              (string-append
+                                (create-begin-tag "span" ".fitb" #:attribs
+                                                  (format "style=\"width: ~a\"" width))
+                                text
+                                (create-end-tag "span")) o))]
+                         [(assoc directive *macro-list*)
+                          => (lambda (s)
+                               (display (cadr s) o))]
+                         [(assoc directive *function-list*)
+                          => (lambda (f)
+                               (let ([g (read-group i directive)])
+                                 (let ([args (string-to-form g)])
+                                   (let-values ([(key-list key-vals args)
+                                                 (rearrange-args args)])
+                                     (add-exercise-title (car args))
+                                     (call-with-input-string (keyword-apply (cadr f) key-list key-vals args)
+                                       (lambda (i)
+                                         (expand-directives i o)
+                                         ))))))]
+                         [else
+                           (printf "WARNING: Unrecognized directive @~a~%" directive)
+                           (display c o) (display directive o)
+                           #f]))]
+                [(and (or (getenv "LESSON")
+                          (getenv "LESSONPLAN")
+                          (getenv "NARRATIVE")
+                          (getenv "TEACHER_RESOURCES"))
+                      beginning-of-line? (char=? c #\=))
+                 (set! beginning-of-line? #f)
+                 (cond [title-reached?
+                         (cond [first-subsection-reached? #f]
+                               [(check-first-subsection i o)
+                                (set! first-subsection-reached? #t)
+                                (when (getenv "LESSONPLAN")
+                                  (include-standards o)
+                                  (include-glossary o))]
+                               [else #f])
+                         (cond [(getenv "LESSON")
+                                (display-section-markup i o)]
+                               [else (display c o)])]
+                       [else
+                         (set! title-reached? #t)
+                         (cond [(or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
+                                (display-title i o)]
+                               [else (display #\= o)])
+                         (when (getenv "TEACHER_RESOURCES")
+                           ;(printf "teacher resource autoloading stuff\n")
+                           (newline o)
+                           (fprintf o (create-workbook-links)))])]
+                [(char=? c #\newline)
+                 (newline o)
+                 (set! beginning-of-line? #t)]
+                [else
+                  (set! beginning-of-line? #f)
+                  (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
+                         (cond [(char=? c #\{)
+                                (unless (= (top-span-stack) 0)
+                                  (display c o))
+                                (increment-top-span-stack)]
+                               [(char=? c #\})
+                                (decrement-top-span-stack)
+                                (cond [(= (top-span-stack) 0)
+                                       (display-end-span o)]
+                                      [else (display c o)])]
+                               [else (ferror ' preproc-n-asciidoctor "deadc0de")])]
+                        [else (display c o)])])
+              (loop))))))
+    ;
     (call-with-input-file in-file
       (lambda (i)
         (call-with-output-file out-file
           (lambda (o)
-            (let ([beginning-of-line? #t])
-              (let loop ()
-                (let ([c (read-char i)])
-                  (unless (eof-object? c)
-                    (cond
-                      [(char=? c #\@)
-                       (set! beginning-of-line? #f)
-                       (let ([directive (read-word i)])
-                         ;(printf "directive = ~s~%" directive)
-                         (cond [(string=? directive "") (display c o)]
-                               [(string=? directive "span")
-                                (display-begin-span (string-trim (read-group i directive)) o)
-                                ]
-                               [(string=? directive "comment")
-                                (let ([prose (read-group i directive)])
-                                  (if title-reached?
-                                      (display-comment prose o)
-                                      (call-with-output-file "index-comment.txt"
-                                        (lambda (o)
-                                          (display "<!--" o)
-                                          (display prose o)
-                                          (display "-->" o)
-                                          (newline o)))))]
-                               [(string=? directive "vocab")
-                                (let* ([arg (read-group i directive)]
-                                       [s (assoc-glossary arg *glossary-list*)])
-                                  (when (string=? arg "")
-                                    (printf "WARNING: Directive @vocab has ill-formed argument~%"))
-                                  (display arg o)
-                                  (cond [s (unless (member s *glossary-items*)
-                                             (set! *glossary-items* (cons s *glossary-items*)))]
-                                        [else (printf "Item ~a not found in glossary~%"
-                                                      arg)]))]
-                               [(string=? directive "std")
-                                (let ([args (read-commaed-group i directive)])
-                                  (printf "WARNING: Directive @std is obsolete\n")
-                                  )]
-                               [(string=? directive "XXX-depends-on") ;XXX
-                                (let ([args (read-commaed-group i directive)]
-                                      [lesson-dir (getenv "LESSONPLAN")])
-                                  (cond [(getenv "LESSONPLAN")
-                                         (display-lesson-dependencies args o)]
-                                        [else
-                                          (printf "WARNING: @depends-on only valid in lesson plans\n")]))]
-                               [(string=? directive "image")
-                                (let ([args (read-commaed-group i directive)])
-                                  (display (make-image (car args) (cdr args)) o))]
-                               [(or (string=? directive "worksheet-link")
-                                    (string=? directive "worksheet-include")
-                                    (string=? directive "exercise-link"))
-                                (let* ([include? (string=? directive "worksheet-include")]
-                                       [exercise-as-is? (string=? directive "exercise-link")]
-                                       [args (read-commaed-group i directive)]
-                                       [n (length args)]
-                                       [page (car args)]
-                                       [link-text (if (> n 1) (cadr args) "")]
-                                       [page-compts (regexp-split #rx"/" page)]
-                                       [first-compt (car page-compts)])
-                                  (case (length page-compts)
-                                    [(1)
-                                     (let* ([pointer (car page-compts)]
-                                            [actual-url (assoc pointer *external-url-index*)])
-                                       (when (string=? link-text "")
-                                         (set! link-text pointer))
-                                       (unless actual-url
-                                         (printf "WARNING: Unresolved external link ~a~n" pointer))
-                                       (fprintf o "link:~a[~a]"
-                                                (if actual-url (cadr actual-url) pointer)
-                                                (cond ((not actual-url)
-                                                       (format "Missing external link for ~a: ~a"
-                                                               pointer link-text))
-                                                      (else link-text)))
-                                       )
-                                     ]
-                                    [(2)
-                                     (let ([second-compt (cadr page-compts)]
-                                           [lesson-dir (getenv "LESSON")])
-                                       (cond [(or (string=? first-compt "exercises")
-                                                  (string=? first-compt "exercises-sols"))
-                                              (cond [lesson-dir
-                                                      (display (make-exercise-link
-                                                                 lesson-dir
-                                                                 first-compt
-                                                                 second-compt
-                                                                 link-text
-                                                                 #:include? include?
-                                                                 #:as-is? exercise-as-is?) o)]
-                                                    [else
-                                                      (printf "WARNING: Incomplete exercise link ~a~n"
-                                                              page)])]
-                                             [(or (string=? first-compt "workbook-pages")
-                                                  (string=? first-compt "workbook-sols-pages"))
-                                              (cond [lesson-dir
-                                                      (display (make-worksheet-link lesson-dir
-                                                                                    first-compt
-                                                                                    (cadr page-compts)
-                                                                                    link-text) o)]
-                                                    [else
-                                                      (printf "WARNING: Incomplete worksheet link ~a~n"
-                                                              page)])]
-                                             [else
-                                               (display (make-lesson-link
-                                                          first-compt
-                                                          (cdr page-compts)
-                                                          link-text) o)]))]
-                                    [(3)
-                                     (let ([second-compt (cadr page-compts)]
-                                           [third-compt (caddr page-compts)])
-                                       (cond [(or (string=? second-compt "exercises")
-                                                  (string=? second-compt "exercises-sols"))
-                                              (display (make-exercise-link
-                                                         first-compt
-                                                         second-compt
-                                                         third-compt
-                                                         link-text
-                                                         #:include? include?
-                                                         #:as-is? exercise-as-is?) o)]
-                                             [(or (string=? second-compt "workbook-pages")
-                                                  (string=? second-compt "workbook-sols-pages"))
-                                              (display (make-worksheet-link first-compt
-                                                                            second-compt
-                                                                            third-compt link-text) o)]
-                                             ;(else (printf "Bad worksheet link ~a~n" page))
-                                             [else
-                                               (display (make-lesson-link first-compt
-                                                                          (cdr page-compts)
-                                                                          link-text) o)
-
-                                               ]
-                                             ))]
-                                    [else
-                                      (display (make-lesson-link first-compt
-                                                                 (cdr page-compts)
-                                                                 link-text) o)]
-
-                                    ))]
-                               [(string=? directive "link")
-                                (let* ([args (read-commaed-group i directive)]
-                                       [adocf (car args)]
-                                       [htmlf (path-replace-extension adocf ".html")]
-                                       [pdff (path-replace-extension adocf ".pdf")]
-                                       [f adocf]
-                                       [link-text (string-join
-                                                    (map string-trim (cdr args)) ", ")])
-                                  ;(printf "doing @link of ~s~n" args)
-                                  (cond [(file-exists? htmlf) (set! f htmlf)]
-                                        [(file-exists? pdff) (set! f pdff)])
-                                  (fprintf o "link:~a[~a~a]" f link-text
-                                           (if (or (getenv "LESSONPLAN")
-                                                   (getenv "TEACHER_RESOURCES"))
-                                               ", window=\"_blank\"" "")))]
-                               [(string=? directive "lesson-description")
-                                (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
-                                  (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
-                                (display-lesson-description (read-group i directive) o)]
-                               [(string=? directive "depends-on")
-                                (unless (getenv "LESSONPLAN")
-                                  (ferror 'adoc-preproc.rkt "@depends-on valid only in lesson plan"))
-                                (display-lesson-dependencies (read-commaed-group i directive) o)]
-                               [(string=? directive "solutions-workbook")
-                                ;TODO: don't need this anymore -- link is autogen'd
-                                (unless (getenv "TEACHER_RESOURCES")
-                                  (ferror 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
-                                (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
-                                (newline o)
-                                (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
-                                ]
-                               [(string=? directive "do")
-                                (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                                  (for-each massage-arg exprs))]
-                               [(string=? directive "show")
-                                (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                                  (for ([s exprs])
-                                    (display (massage-arg s) o)))]
-                               [(assoc directive *macro-list*)
-                                => (lambda (s)
-                                     (display (cadr s) o))]
-                               [(assoc directive *function-list*)
-                                => (lambda (f)
-                                     (let ([g (read-group i directive)])
-                                       (let ([args (string-to-form g)])
-                                         (let-values ([(key-list key-vals args)
-                                                       (rearrange-args args)])
-                                           (add-exercise-title (car args))
-                                           (display (keyword-apply (cadr f) key-list key-vals args) o)))))]
-                               [else
-                                 (printf "WARNING: Unrecognized directive @~a~%" directive)
-                                 (display c o) (display directive o)
-                                 #f]))]
-                      [(and (or (getenv "LESSON")
-                                (getenv "LESSONPLAN")
-                                (getenv "NARRATIVE")
-                                (getenv "TEACHER_RESOURCES"))
-                            beginning-of-line? (char=? c #\=))
-                       (set! beginning-of-line? #f)
-                       (cond [title-reached?
-                               (cond [first-subsection-reached? #f]
-                                     [(check-first-subsection i o)
-                                      (set! first-subsection-reached? #t)
-                                      (when (getenv "LESSONPLAN")
-                                        (include-standards o)
-                                        (include-glossary o))]
-                                     [else #f])
-                               (cond [(getenv "LESSON")
-                                      (display-section-markup i o)]
-                                     [else (display c o)])]
-                             [else
-                               (set! title-reached? #t)
-                               (cond [(or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
-                                      (display-title i o)]
-                                     [else (display #\= o)])
-                               (when (getenv "TEACHER_RESOURCES")
-                                 ;(printf "teacher resource autoloading stuff\n")
-                                 (newline o)
-                                 (fprintf o (create-workbook-links)))])]
-                      [(char=? c #\newline)
-                       (newline o)
-                       (set! beginning-of-line? #t)]
-                      [else
-                        (set! beginning-of-line? #f)
-                        (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
-                               (cond [(char=? c #\{)
-                                      (unless (= (top-span-stack) 0)
-                                        (display c o))
-                                      (increment-top-span-stack)]
-                                     [(char=? c #\})
-                                      (decrement-top-span-stack)
-                                      (cond [(= (top-span-stack) 0)
-                                             (display-end-span o)]
-                                            [else (display c o)])]
-                                     [else (ferror ' preproc-n-asciidoctor "deadc0de")])]
-                              [else (display c o)])])
-                    (loop)))))
+            (expand-directives i o)
 
             (when (getenv "NARRATIVE")
               (link-to-lessons-in-pathway o))
@@ -1080,10 +1093,10 @@
 
 (define (sexp->math e)
   (string-append
-    (format "@CURRICULUMSCRIPT")
-    (format "@BEGINCURRICULUMSCRIPT\\displaystyle ")
+    (format "%CURRICULUMSCRIPT")
+    (format "%BEGINCURRICULUMSCRIPT\\displaystyle ")
     (sexp->arith e)
-    (format "@ENDCURRICULUMSCRIPT")))
+    (format "%ENDCURRICULUMSCRIPT")))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")

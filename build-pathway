@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2019-12-22 # last modified
+LASTMOD=2019-12-31 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -193,29 +193,29 @@ function resolveabbrevs() {
   local f=$1
   local mathjaxneeded=false
   local codemirrorneeded=false
-  if grep -q @CURRICULUMSCRIPT $f; then
+  if grep -q %CURRICULUMSCRIPT $f; then
     mathjaxneeded=true
   fi
   if grep -q 'class=\"\(pyret\|racket\)\"' $f; then
     codemirrorneeded=true
   fi
   $SED -i \
-    -e 's/@PYRETKEYWORD\([^@]*\)@END/<span class=pyretkeyword>\1<\/span>/g' \
+    -e 's/%PYRETKEYWORD\([^%]*\)%END/<span class=pyretkeyword>\1<\/span>/g' \
     \
-    -e 's/@CURRICULUMCOMMA/,/g' \
+    -e 's/%CURRICULUMCOMMA/,/g' \
     \
-    -e 's/<p>\(@CURRICULUMCOMMENT\)/\1/' \
-    -e 's/\(@ENDCURRICULUMCOMMENT\)<.p>/\1/' \
-    -e 's/@CURRICULUMCOMMENT/<!-- /' \
-    -e 's/@ENDCURRICULUMCOMMENT/\n-->/' \
+    -e 's/<p>\(%CURRICULUMCOMMENT\)/\1/' \
+    -e 's/\(%ENDCURRICULUMCOMMENT\)<.p>/\1/' \
+    -e 's/%CURRICULUMCOMMENT/<!-- /' \
+    -e 's/%ENDCURRICULUMCOMMENT/\n-->/' \
     \
-    -e 's/@CURRICULUM\([^!]*\)!/<\1/g' \
-    -e 's/@BEGINCURRICULUM\([^!]*\)!/>/g' \
-    -e 's/@ENDCURRICULUM\([^!]*\)!/<\/\1>/g' \
+    -e 's/%CURRICULUM\([^!]*\)!/<\1/g' \
+    -e 's/%BEGINCURRICULUM\([^!]*\)!/>/g' \
+    -e 's/%ENDCURRICULUM\([^!]*\)!/<\/\1>/g' \
     \
-    -e 's/@CURRICULUMSCRIPT/<script type="math\/tex"/g' \
-    -e 's/@BEGINCURRICULUMSCRIPT/>/g' \
-    -e 's/@ENDCURRICULUMSCRIPT/<\/script>/g' \
+    -e 's/%CURRICULUMSCRIPT/<script type="math\/tex"/g' \
+    -e 's/%BEGINCURRICULUMSCRIPT/>/g' \
+    -e 's/%ENDCURRICULUMSCRIPT/<\/script>/g' \
     \
     -e 's/&#8656;/\&lt;=/g' \
     -e 's/&#8594;/-\&gt;/g' \
@@ -226,9 +226,9 @@ function resolveabbrevs() {
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Chttp%3A%2F%2Fwww.cs.wpi.edu%2F%7Ekfisler%2Fmathjaxlocal.js"></script>
 EOF
     $SED -i \
-      -e '/^<link.*curriculum\.css/s/^/@INSERTMATHJAX\0/' \
-      -e '/@INSERTMATHJAX/r mathjax.txt' \
-      -e 's/@INSERTMATHJAX//' \
+      -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
+      -e '/%INSERTMATHJAX/r mathjax.txt' \
+      -e 's/%INSERTMATHJAX//' \
       $f
   fi
   if "$codemirrorneeded"; then
@@ -242,17 +242,17 @@ EOF
     <script type="text/javascript" src="${PATHWAYROOTDIR}bootstraplesson.js"></script>
 EOF
     $SED -i \
-      -e '/^<link.*curriculum\.css/s/^/@INSERTCODEMIRROR\0/' \
-      -e '/@INSERTCODEMIRROR/r codemirror.txt' \
-      -e 's/@INSERTCODEMIRROR//' \
+      -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
+      -e '/%INSERTCODEMIRROR/r codemirror.txt' \
+      -e 's/%INSERTCODEMIRROR//' \
       $f
   fi
   tif=${f%.*}-comment.txt
   if test -f $tif; then
     $SED -i \
-      -e '/^<body[^>]*>/s/<body[^>]*>/\0@INSERTCURRICULUMCOMMENT/' \
-      -e '/@INSERTCURRICULUMCOMMENT/r '$tif \
-      -e 's/@INSERTCURRICULUMCOMMENT//' \
+      -e '/^<body[^>]*>/s/<body[^>]*>/\0%INSERTCURRICULUMCOMMENT/' \
+      -e '/%INSERTCURRICULUMCOMMENT/r '$tif \
+      -e 's/%INSERTCURRICULUMCOMMENT//' \
       $f
   fi
 }

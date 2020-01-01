@@ -71,7 +71,7 @@
                                        (if (pyret-keyword? w)
                                            (begin
                                              ;(printf "found keyword ~a\n" w)
-                                             (format "@PYRETKEYWORD~a@END" w))
+                                             (format "%PYRETKEYWORD~a%END" w))
                                            w))
                                      words) " ")))
                           lines) "\n"))])
