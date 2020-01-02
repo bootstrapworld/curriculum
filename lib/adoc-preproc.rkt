@@ -264,7 +264,7 @@
                   (loop (cdr args) (cons arg r))])))))
 
 (define (display-prereqs-row other-lessons o)
-  (printf "doing display-prereqs-row ~a\n" other-lessons)
+  ;(printf "doing display-prereqs-row ~a\n" other-lessons)
   (unless (null? other-lessons)
     (display "\n| Prerequisites | " o)
     (display
@@ -282,7 +282,7 @@
     (display "\n\n" o)))
 
 (define (display-standards-row o)
-  (printf "doing display-standards-row\n")
+  ;(printf "doing display-standards-row\n")
   (display "| " o)
   (display-standards-selection o)
   (display 
