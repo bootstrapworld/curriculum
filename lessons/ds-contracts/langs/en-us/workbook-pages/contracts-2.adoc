@@ -1,0 +1,119 @@
+
+= Contracts
+
+Contracts tell us how to use methods. For example:
+`<Table>.filter {two-colons} (test {two-colons} (Row -> Boolean)) -> Table` tells us
+that the name of the function is `.filter` and that it is a
+`Table` method. The domain says it has one input (a function that
+consumes `Rows` and produces `Booleans`), and that the method
+evaluates to a `Table`.
+
+
+[cols="3a,1a,9a,1a,3a"]
+|===
+
+|Name||Domain||Range
+
+| `count`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Table`
+
+| `random-rows`
+| `{two-colons}`
+| `(t {two-colons} Table, num-rows {two-colons} Number)`
+| `->`
+| `Table`
+
+| `<Table>.row-n`
+| `{two-colons}`
+| `(n {two-colons} Number)`
+| `->`
+| `Row`
+
+| `<Table>.order-by`
+| `{two-colons}`
+| `(col {two-colons} String, increasing {two-colons} Boolean)`
+| `->`
+| `Table`
+
+| `<Table>.filter`
+| `{two-colons}`
+| `(test {two-colons} (Row -> Boolean))`
+| `->`
+| `Table`
+
+| `<Table>.build-column`
+| `{two-colons}`
+| `(col {two-colons} String, builder {two-colons} (Row -> Boolean))`
+| `->`
+| `Table`
+
+| `mean`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Number`
+
+| `median`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Number`
+
+| `modes`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `List<Number>`
+
+| `bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+
+| `pie-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+
+| `bar-chart-raw`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+
+| `pie-chart-raw`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+
+| `box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+
+| `histogram`
+| `{two-colons}`
+| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
+| `->`
+| `Image`
+
+| `scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+
+| `lr-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+
+|===
