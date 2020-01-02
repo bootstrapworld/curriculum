@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2019-12-31 # last modified
+LASTMOD=2020-01-02 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -410,8 +410,8 @@ function buildlessonplan() {
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       #makeglossaryandstandards
-      collapseadjtables index.html
-      collapseadjtables index.html # do it twice!
+      #collapseadjtables index.html
+      #collapseadjtables index.html # do it twice!
       addanalytics index.html
       resolveabbrevs index.html
       moveheaderlogopos index.html
@@ -497,9 +497,9 @@ function buildpathwaynarrative() {
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       unset NARRATIVE
       makeglossaryandstandards
-      if test -f pathway-lessons.asc; then
-        if test pathway-lessons.asc -nt pathway-lessons.html; then
-          $PROGDIR/adoc-preproc.rkt pathway-lessons.asc
+      if test -f pathway-lessons.asciidoc; then
+        if test pathway-lessons.asciidoc -nt pathway-lessons.html; then
+          $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
           removelogos pathway-lessons.html
           resolveabbrevs pathway-lessons.html
         fi

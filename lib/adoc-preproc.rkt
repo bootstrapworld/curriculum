@@ -222,8 +222,8 @@
 
 (define (display-section-markup i o)
   (let ([section-level
-          (let loop ((section-level 1))
-            (let ((c (peek-char i)))
+          (let loop ([section-level 1])
+            (let ([c (peek-char i)])
               (cond [(eof-object? c) section-level]
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
                     [else section-level])))])
@@ -246,7 +246,7 @@
   ;(printf "doing rearrange-args ~s\n" args)
 
   (define (sort-keyword-args args)
-    (let ([args-paired (let loop ((args args) (r '()))
+    (let ([args-paired (let loop ([args args] [r '()])
                          (if (null? args) r
                                (loop (cddr args)
                                      (cons (list (car args) (massage-arg (cadr args)))
@@ -263,21 +263,45 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
+(define (display-prereqs-row other-lessons o)
+  (printf "doing display-prereqs-row ~a\n" other-lessons)
+  (unless (null? other-lessons)
+    (display "\n| Prerequisites | " o)
+    (display
+      (string-join
+        (map (lambda (lesson)
+               (let ([lesson-title lesson]
+                     [lesson-title-file (format "../~a/index-title.txt" lesson)])
+                 (cond [(file-exists? lesson-title-file)
+                        (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+                       [else
+                         (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
+                 (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
+             other-lessons)
+        ", ") o)
+    (display "\n\n" o)))
+
+(define (display-standards-row o)
+  (printf "doing display-standards-row\n")
+  (display "| " o)
+  (display-standards-selection o)
+  (display 
+    (mstring
+      "|"
+      ""
+      "include::./index-standards.asc[]"
+      "") o))
+
 (define (include-standards o)
   (display
     (mstring
       "\n\n"
       "[.left-header,cols=\"20a,80a\"]"
       "|==="
-      "|") o)
-  (display-standards-selection o)
+      "") o)
+  (display-standards-row o)
   (display
-    (mstring
-      "|"
-      ""
-      "include::./index-standards.asc[]"
-      ""
-      "|===\n\n") o))
+    "\n|===\n\n" o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -360,7 +384,8 @@
             (enclose-span ".tooltiptext" text) "\n"
             adoc-img)))))
 
-(define (make-lesson-link lesson file-seq link-text)
+(define (make-lesson-link lesson file-seq link-text
+                          #:include? [include? #f])
   ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
   (when (string=? lesson ".") (set! lesson (getenv "LESSON")))
   (let* ([g (format "lessons/~a/~a" lesson
@@ -371,7 +396,9 @@
     ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n" g f f.html f.pdf)
     (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))])
-    (format "link:{pathwayrootdir}~a[~a]" g link-text)))
+    (if include?
+        (format "include::~a~a[]" *pathway-root-dir* g)
+        (format "link:{pathwayrootdir}~a[~a]" g link-text))))
 
 (define *lesson-summary-file* #f)
 
@@ -435,22 +462,9 @@
     (mstring
       "\n\n"
       "[.left-header,cols=\"20a,80a\"]"
-      "|==="
-      "| Prerequisites"
-      "| ") o)
-  (display
-    (string-join
-      (map (lambda (lesson)
-             (let ([lesson-title lesson]
-                   [lesson-title-file (format "../~a/index-title.txt" lesson)])
-               (cond [(file-exists? lesson-title-file)
-                      (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-                     [else
-                       (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-               (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
-           other-lessons)
-      ", ") o)
-  (display "\n|===\n\n" o))
+      "|===") o)
+  (display-prereqs-row other-lessons o)
+  (display "|===\n\n" o))
 
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway~n")
@@ -491,8 +505,8 @@
         (newline o)))
     (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
 
-    (let ([lessons-file "pathway-lessons.asc"]
-          [lessons-toc-file "pathway-lessons-toc.asc"])
+    (let ([lessons-file "pathway-lessons.asciidoc"]
+          [lessons-toc-file "pathway-lessons-toc.asciidoc"])
 
       (call-with-output-file lessons-file
         (lambda (lo)
@@ -553,6 +567,7 @@
       (newline o))))
 
 (define (preproc-n-asciidoctor in-file)
+  ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
         [first-subsection-reached? #f]
         [title-reached? #f]
@@ -569,7 +584,7 @@
             #:exists 'replace))))
     ;
     (when (getenv "LESSONPLAN")
-      (let ((lesson (getenv "LESSON")))
+      (let ([lesson (getenv "LESSON")])
         (for ([x *lessons-and-standards*])
           (when (string=? (car x) lesson)
             (for ([s (cdr x)])
@@ -618,13 +633,10 @@
                           (let ([args (read-commaed-group i directive)])
                             (printf "WARNING: Directive @std is obsolete\n")
                             )]
-                         [(string=? directive "XXX-depends-on") ;XXX
-                          (let ([args (read-commaed-group i directive)]
-                                [lesson-dir (getenv "LESSONPLAN")])
-                            (cond [(getenv "LESSONPLAN")
-                                   (display-lesson-dependencies args o)]
-                                  [else
-                                    (printf "WARNING: @depends-on only valid in lesson plans\n")]))]
+                         [(string=? directive "prereqs-stds")
+                          (display-prereqs-row (read-commaed-group i directive) o)
+                          (display-standards-row o)
+                          ]
                          [(string=? directive "image")
                           (let ([args (read-commaed-group i directive)])
                             (display (make-image (car args) (cdr args)) o))]
@@ -685,7 +697,8 @@
                                          (display (make-lesson-link
                                                     first-compt
                                                     (cdr page-compts)
-                                                    link-text) o)]))]
+                                                    link-text
+                                                    #:include? include?) o)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
@@ -707,13 +720,15 @@
                                        [else
                                          (display (make-lesson-link first-compt
                                                                     (cdr page-compts)
-                                                                    link-text) o)
+                                                                    link-text
+                                                                    #:include? include?) o)
                                          ]
                                        ))]
                               [else
                                 (display (make-lesson-link first-compt
                                                            (cdr page-compts)
-                                                           link-text) o)]
+                                                           link-text
+                                                           #:include? include?) o)]
                               ))]
                          [(string=? directive "link")
                           (let* ([args (read-commaed-group i directive)]
@@ -791,7 +806,7 @@
                                [(check-first-subsection i o)
                                 (set! first-subsection-reached? #t)
                                 (when (getenv "LESSONPLAN")
-                                  (include-standards o)
+                                  ;(include-standards o)
                                   (include-glossary o))]
                                [else #f])
                          (cond [(getenv "LESSON")
@@ -875,7 +890,7 @@
   (asciidoctor out-file)))
 
 (define (asciidoctor file)
-  ;(printf "asciidoctor ~a~n" file)
+  ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)
   (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file))
   (void)
   )
@@ -973,9 +988,9 @@
                         "_Select one or more standards from the menu on the left (⌘-click"
                         "on Mac, Ctrl-click elsewhere)._\n\n")))
         (for ((dict *dictionaries-represented*))
-          (let ((dict-standards-met
+          (let ([dict-standards-met
                   (filter (lambda (s) (string=? (list-ref s 3) dict))
-                          *standards-met*)))
+                          *standards-met*)])
             (unless (empty? dict-standards-met) ;it will never be empty!
               (create-standards-section
                 dict
@@ -1010,7 +1025,7 @@
               (cons a
                     (cons (hspace 1)
                           (intersperse-spaces-aux d)))))))
-  (let ((ans (intersperse-spaces-aux args)))
+  (let ([ans (intersperse-spaces-aux args)])
     (apply string-append
            (if (and funargs? (not (null? args)))
                (cons (hspace 1) ans)
