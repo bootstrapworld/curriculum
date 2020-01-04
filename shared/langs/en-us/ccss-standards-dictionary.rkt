@@ -1581,5 +1581,155 @@
  ("RST.11-12.10"
   "By the end of grade 12, read and comprehend science/technical texts in the grades 11-CCR text complexity band independently and proficiently."
  )
+ ("SL.6.1"
+  "Engage effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 6 topics, texts, and issues, building on others' ideas and expressing their own clearly."
+ )
+ ("SL.6.1.A"
+  "Come to discussions prepared, having read or studied required material; explicitly draw on that preparation by referring to evidence on the topic, text, or issue to probe and reflect on ideas under discussion."
+ )
+ ("SL.6.1.B"
+  "Follow rules for collegial discussions, set specific goals and deadlines, and define individual roles as needed."
+ )
+ ("SL.6.1.C"
+  "Pose and respond to specific questions with elaboration and detail by making comments that contribute to the topic, text, or issue under discussion."
+ )
+ ("SL.6.1.D"
+  "Review the key ideas expressed and demonstrate understanding of multiple perspectives through reflection and paraphrasing."
+ )
+ ("SL.6.2"
+  "Interpret information presented in diverse media and formats (e.g., visually, quantitatively, orally) and explain how it contributes to a topic, text, or issue under study."
+ )
+ ("SL.6.3"
+  "Delineate a speaker's argument and specific claims, distinguishing claims that are supported by reasons and evidence from claims that are not."
+ )
+ ("SL.6.4"
+  "Present claims and findings, sequencing ideas logically and using pertinent descriptions, facts, and details to accentuate main ideas or themes; use appropriate eye contact, adequate volume, and clear pronunciation."
+ )
+ ("SL.6.5"
+  "Include multimedia components (e.g., graphics, images, music, sound) and visual displays in presentations to clarify information."
+ )
+ ("SL.6.6"
+  "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grade 6 Language standards 1 and 3 for specific expectations.)"
+ )
+ ("SL.7.1"
+  "Engage effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 7 topics, texts, and issues, building on others' ideas and expressing their own clearly."
+ )
+ ("SL.7.1.A"
+  "Come to discussions prepared, having read or researched material under study; explicitly draw on that preparation by referring to evidence on the topic, text, or issue to probe and reflect on ideas under discussion."
+ )
+ ("SL.7.1.B"
+  "Follow rules for collegial discussions, track progress toward specific goals and deadlines, and define individual roles as needed."
+ )
+ ("SL.7.1.C"
+  "Pose questions that elicit elaboration and respond to others' questions and comments with relevant observations and ideas that bring the discussion back on topic as needed."
+ )
+ ("SL.7.1.D"
+  "Acknowledge new information expressed by others and, when warranted, modify their own views."
+ )
+ ("SL.7.2"
+  "Analyze the main ideas and supporting details presented in diverse media and formats (e.g., visually, quantitatively, orally) and explain how the ideas clarify a topic, text, or issue under study."
+ )
+ ("SL.7.3"
+  "Delineate a speaker's argument and specific claims, evaluating the soundness of the reasoning and the relevance and sufficiency of the evidence."
+ )
+ ("SL.7.4"
+  "Present claims and findings, emphasizing salient points in a focused, coherent manner with pertinent descriptions, facts, details, and examples; use appropriate eye contact, adequate volume, and clear pronunciation."
+ )
+ ("SL.7.5"
+  "Include multimedia components and visual displays in presentations to clarify claims and findings and emphasize salient points."
+ )
+ ("SL.7.6"
+  "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grade 7 Language standards 1 and 3 here for specific expectations.)"
+ )
+ ("SL.8.1"
+  "Engage effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 8 topics, texts, and issues, building on others' ideas and expressing their own clearly."
+ )
+ ("SL.8.1.A"
+  "Come to discussions prepared, having read or researched material under study; explicitly draw on that preparation by referring to evidence on the topic, text, or issue to probe and reflect on ideas under discussion."
+ )
+ ("SL.8.1.B"
+  "Follow rules for collegial discussions and decision-making, track progress toward specific goals and deadlines, and define individual roles as needed."
+ )
+ ("SL.8.1.C"
+  "Pose questions that connect the ideas of several speakers and respond to others' questions and comments with relevant evidence, observations, and ideas."
+ )
+ ("SL.8.1.D"
+  "Acknowledge new information expressed by others, and, when warranted, qualify or justify their own views in light of the evidence presented."
+ )
+ ("SL.8.2"
+  "Analyze the purpose of information presented in diverse media and formats (e.g., visually, quantitatively, orally) and evaluate the motives (e.g., social, commercial, political) behind its presentation."
+ )
+ ("SL.8.3"
+  "Delineate a speaker's argument and specific claims, evaluating the soundness of the reasoning and relevance and sufficiency of the evidence and identifying when irrelevant evidence is introduced."
+ )
+ ("SL.8.4"
+  "Present claims and findings, emphasizing salient points in a focused, coherent manner with relevant evidence, sound valid reasoning, and well-chosen details; use appropriate eye contact, adequate volume, and clear pronunciation."
+ )
+ ("SL.8.5"
+  "Integrate multimedia and visual displays into presentations to clarify information, strengthen claims and evidence, and add interest."
+ )
+ ("SL.8.6"
+  "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grade 8 Language standards 1 and 3 here for specific expectations.)"
+ )
+ ("SL.9-10.1"
+  "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 9-10 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively."
+ )
+ ("SL.9-10.1.A"
+  "Come to discussions prepared, having read and researched material under study; explicitly draw on that preparation by referring to evidence from texts and other research on the topic or issue to stimulate a thoughtful, well-reasoned exchange of ideas."
+ )
+ ("SL.9-10.1.B"
+  "Work with peers to set rules for collegial discussions and decision-making (e.g., informal consensus, taking votes on key issues, presentation of alternate views), clear goals and deadlines, and individual roles as needed."
+ )
+ ("SL.9-10.1.C"
+  "Propel conversations by posing and responding to questions that relate the current discussion to broader themes or larger ideas; actively incorporate others into the discussion; and clarify, verify, or challenge ideas and conclusions."
+ )
+ ("SL.9-10.1.D"
+  "Respond thoughtfully to diverse perspectives, summarize points of agreement and disagreement, and, when warranted, qualify or justify their own views and understanding and make new connections in light of the evidence and reasoning presented."
+ )
+ ("SL.9-10.2"
+  "Integrate multiple sources of information presented in diverse media or formats (e.g., visually, quantitatively, orally) evaluating the credibility and accuracy of each source."
+ )
+ ("SL.9-10.3"
+  "Evaluate a speaker's point of view, reasoning, and use of evidence and rhetoric, identifying any fallacious reasoning or exaggerated or distorted evidence."
+ )
+ ("SL.9-10.4"
+  "Present information, findings, and supporting evidence clearly, concisely, and logically such that listeners can follow the line of reasoning and the organization, development, substance, and style are appropriate to purpose, audience, and task."
+ )
+ ("SL.9-10.5"
+  "Make strategic use of digital media (e.g., textual, graphical, audio, visual, and interactive elements) in presentations to enhance understanding of findings, reasoning, and evidence and to add interest."
+ )
+ ("SL.9-10.6"
+  "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grades 9-10 Language standards 1 and 3 here for specific expectations.)"
+ )
+ ("SL.11-12.1"
+  "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 9-10 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively."
+ )
+ ("SL.11-12.1.A"
+  "Come to discussions prepared, having read and researched material under study; explicitly draw on that preparation by referring to evidence from texts and other research on the topic or issue to stimulate a thoughtful, well-reasoned exchange of ideas."
+ )
+ ("SL.11-12.1.B"
+  "Work with peers to set rules for collegial discussions and decision-making (e.g., informal consensus, taking votes on key issues, presentation of alternate views), clear goals and deadlines, and individual roles as needed."
+ )
+ ("SL.11-12.1.C"
+  "Propel conversations by posing and responding to questions that relate the current discussion to broader themes or larger ideas; actively incorporate others into the discussion; and clarify, verify, or challenge ideas and conclusions."
+ )
+ ("SL.11-12.1.D"
+  "Respond thoughtfully to diverse perspectives, summarize points of agreement and disagreement, and, when warranted, qualify or justify their own views and understanding and make new connections in light of the evidence and reasoning presented."
+ )
+ ("SL.11-12.2"
+  "Integrate multiple sources of information presented in diverse media or formats (e.g., visually, quantitatively, orally) evaluating the credibility and accuracy of each source."
+ )
+ ("SL.11-12.3"
+  "Evaluate a speaker's point of view, reasoning, and use of evidence and rhetoric, identifying any fallacious reasoning or exaggerated or distorted evidence."
+ )
+ ("SL.11-12.4"
+  "Present information, findings, and supporting evidence clearly, concisely, and logically such that listeners can follow the line of reasoning and the organization, development, substance, and style are appropriate to purpose, audience, and task."
+ )
+ ("SL.11-12.5"
+  "Make strategic use of digital media (e.g., textual, graphical, audio, visual, and interactive elements) in presentations to enhance understanding of findings, reasoning, and evidence and to add interest."
+ )
+ ("SL.11-12.6"
+  "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grades 9-10 Language standards 1 and 3 here for specific expectations.)"
+ )
  ))
  
