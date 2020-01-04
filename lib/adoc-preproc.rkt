@@ -21,12 +21,6 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
-;(define *index-file* (string-append *pathway-root-dir* "workbook-page-index.rkt"))
-
-;(define *index-list* (call-with-input-file *index-file* read))
-
-;(define *index-length* (length *index-list*))
-
 (define *workbook-pagenums*
   (if (getenv "LESSONPLAN") 
       (call-with-input-file 
@@ -316,9 +310,10 @@
 
 (define (workbook-pagenum lesson snippet) 
   (let* ([snippet.adoc
-          (path->string
-            (path-replace-extension snippet ".adoc"))]
-         [c (assoc (list lesson snippet.adoc) *workbook-pagenums*)])
+           (path->string
+             (path-replace-extension snippet ".adoc"))]
+         [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
+                (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f)))
 
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
