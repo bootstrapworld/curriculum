@@ -105,6 +105,7 @@ when it prints out the glossary for a particular unit
     ("purpose statement" "a brief description of what a function does")
     ("quartile" "each of four equal-sized groups into which a population can be divided, according to the distribution of values of a particular variable")
     ("quantitative data" "data with values that measure some amount or quantity;  may not have a fixed number of possible values")
+    ("r" "a number between −1 and 1 that measures the strength and direction of a linear relationship between two variables")
     (("r-squared") "a number between 0 and 1 that measures the strength of association between two variables")
     ("range" "the type or set of outputs that a function produces")
     ("reactor" "a value that contains a current state, and functions for updating, drawing, and interacting with that state")
