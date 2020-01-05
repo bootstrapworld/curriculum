@@ -14,22 +14,26 @@ interpret the results.}
 |Product Outcomes
 |
 
-* Students learn about shape, and how outliers or skewness prevent a data set from being balanced or on either side of its center
-* Students learn the extent to which outliers and skewness may affect measures of center.
-* Students find the mean, median and mode of various columns in the animals table
-* Students describe the centers and spread in their chosen dataset
-
+- Students learn about shape, and how outliers or skewness
+  prevent a data set from being balanced or on either side of its
+  center
+- Students learn the extent to which outliers and skewness may
+  affect measures of center.
+- Students find the mean, median and mode of various columns in
+  the animals table
+- Students describe the centers and spread in their chosen
+  dataset
 
 @worksheet-include{ds-questions-n-defs/xtra/lang-prereq.adoc}
 |===
 
-
-== Introduction (Time 10 minutes)
+== Introduction  (Time 10 minutes)
 
 [.lesson-instruction]
-Open your "Animals Starter File". (If you do not have this file,
-or if something has happened to it, you can always make a new
-copy.)
+Open your “Animals Starter File”. (If you do not have this file,
+or if something has happened to it, you can always make a
+@link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L,
+new copy}.)
 
 In the last Unit, you learned how to talk about shape by looking
 at histograms. In this Unit, you’ll learn about two more key
@@ -39,7 +43,8 @@ to connect those back to a visual representation.
 [.lesson-point]
 According to the Animal Shelter Bureau, the average pet weighs almost 41 pounds.
 
-[.lesson-instruction] Some medicines are dosed by weight: larger
+[.lesson-instruction]
+Some medicines are dosed by weight: larger
 animals need a larger dose. If someone at the shelter needs to
 give a dose of medicine to an animal, is 41 pounds the best
 estimate for how much it weighs?
@@ -48,7 +53,7 @@ estimate for how much it weighs?
 Invite an open discussion for a few minutes.
 ////
 
-"The average pet weighs 41 pounds" is a statement about the
+“The average pet weighs 41 pounds” is a statement about the
 entire dataset, which summarizes a whole column of values with a
 single number. Summarizing a big dataset means that some
 information gets lost, so it’s important to pick an appropriate
@@ -81,18 +86,18 @@ huge role in whether or not one kind of summary is appropriate!
 
 Data Scientists summarize quantitative data by reporting two key
 features: what’s the typical value (center) and how much do the
-values typically vary (spread). Let’s check the "41 pounds" claim
+values typically vary (spread). Let’s check the “41 pounds” claim
 and see if it’s an appropriate measure of center. Later on,
 you’ll have a chance to apply what you’ve learned to your own
 dataset, to find the best way to provide an overall summary of
 the data.
 
-== Measures of Center (Time 20 minutes)
+== Measures of Center  (Time 20 minutes)
 
 If we plotted all the pounds values as points on a number line,
 what could we say about the average of those values? Is there a
 midpoint? Is there a point that shows up most often? Each of
-these are different ways of "measuring center".
+these are different ways of “measuring center”.
 
 ////
 Draw some sample points on a number line, and have students
@@ -126,7 +131,7 @@ Notice that calculating the mean requires being able to add and
 divide, so the mean only makes sense for quantitative data. For
 example, the mean of a list of Presidents doesn’t make sense.
 Same thing for a list of zip codes: even though we can divide a
-sum of zip codes, the output doesn’t correspond to some "center"
+sum of zip codes, the output doesn’t correspond to some “center”
 zip code.
 
 Type `mean(animals-table, "pounds")`. What does this give us?
@@ -134,7 +139,7 @@ Does this support the Bureau’s claims?
 
 [.lesson-instruction] Open your workbooks to Page 30. We’ve
 already decided on the answer to Question 1 (`pounds`). Under the
-"measures of center" section, fill in the computed mean.
+“measures of center” section, fill in the computed mean.
 
 You computed the mean of that column to be almost exactly 41
 pounds. That IS the average, but if we look at the dots on our
@@ -156,25 +161,26 @@ outliers. The mean may also be thrown off by the presence of
 right of center, but not separated by the visible gap typical of
 outliers.
 
-[.lesson-instruction] Make a histogram of the pounds column, and
+[.lesson-instruction]
+Make a `histogram` of the `pounds` column, and
 try different bin sizes. Can you see the skew towards the right,
 with a huge number of animals clumped to the left?
 
 A different way to measure center is to line up all of the data
-points - in order - and find a point in the center where half of
+points -- in order -- and find a point in the center where half of
 the values are smaller and the other half are larger. This is the
-@vocab{median}, or "middle" value of a list.
+@vocab{median}, or “middle” value of a list.
 
 As an example, consider this list:
 
   2, 3, 1
 
-Here 2 is the median, because it separates the "top half" (all
-values greater than 2, which is just 3), and the "bottom half"
+Here 2 is the median, because it separates the “top half” (all
+values greater than 2, which is just 3), and the “bottom half”
 (all values less than or equal to 2).
 
 ////
-We recommend the following "pencil and paper algorithm" for median finding:
+We recommend the following “pencil and paper algorithm” for median finding:
 
 Sort the list.
 Cross out the highest number.
@@ -191,26 +197,27 @@ Pyret has a function to compute the median of a list as well, with the contract:
 
 [.lesson-instruction]
 Compute the median for the pounds column in our dataset, and add
-this to Page 30. Is it different than the mean? What can we
-conclude when the median is so much lower than the mean? For
-practice, compute the mean and median for the weeks and age
-columns.
+this to
+@worksheet-link{workbook-pages/summarizing-columns-in-animals.adoc}.
+Is it different than the mean? What can we conclude when the
+median is so much lower than the mean? For practice, compute the
+mean and median for the weeks and age columns.
 
 The third and last measure of center is the @vocab{mode} of a
-dataset. The mode of a data set is the value that appears most
-often. Median and Mean always produce one number, but if two or
+dataset. The @vocab{mode} of a data set is the value that appears _most
+often_. Median and Mean always produce one number, but if two or
 more values are equally common, there can be more than one mode.
 If all values are equally common, then there is no mode at all!
 
 Often there will be just one number in the list: many data sets
-are what we call "unimodal". But sometimes there are exceptions!
+are what we call “unimodal”. But sometimes there are exceptions!
 Consider the following three datasets:
 
   1, 2, 3, 4
   1, 2, 2, 3, 4
   1, 1, 2, 3, 4, 4
 
-- The first dataset has no mode at all!.
+- The first dataset has _no mode at all!_
 - The mode of the second data set is 2, since 2 appears more than
   any other number.
 - The mode of the last data set is both 1 and 4, because 1 and 4
@@ -226,15 +233,16 @@ and produces a List of Numbers.
 ----
 
 [.lesson-instruction]
-Compute the modes of the pounds column, and add it to Page 30.
+Compute the `modes` of the `pounds` column, and add it to
+@worksheet-link{workbook-pages/summarizing-columns-in-animals.adoc}.
 What did you get? The most common number of pounds an animal
 weighs is 6.5! That’s well below our mean and even our median,
 which is further evidence of outliers or skewness.
 
 At this point, we have a lot of evidence that suggests the
-Bureau’s use of "mean" to summarize data isn’t ideal. Our mean
+Bureau’s use of “mean” to summarize data isn’t ideal. Our mean
 weight agrees with their findings, but we have three reasons to
-suspect that mean isn’t the best value to use:
+suspect that @vocab{mean} isn’t the best value to use:
 
 - The median is only 13.4 pounds.
 - The mode of our dataset is only 6.5 pounds, which suggests a
@@ -242,7 +250,7 @@ suspect that mean isn’t the best value to use:
 - When viewed as a histogram, we can see the rightward skew in
   the dataset. Mean is sensitive to highly-skewed datasets
 
-The Animal Shelter Bureau started with a fact: the mean weight is
+The Animal Shelter Bureau started with a fact: the mean weight _is_
 about 41 pounds. But then they reported a conclusion without
 checking to see if that was the best summary statistic to look
 at. As Data Scientists, we had to look deeper into the data to
@@ -251,7 +259,7 @@ is why using tools like histograms can be so important when
 deciding on a summary tool.
 
 [.lesson-instruction]
-"In 2003, the average American family earned $43,000 a year -
+“In 2003, the average American family earned $43,000 a year --
 well above the poverty line! Therefore very few Americans were
 living in poverty." Do you trust this statement? Why or why not?
 
@@ -268,16 +276,17 @@ the dataset, a measure could be really useful or totally
 misleading! Here are some guidelines for when to use one
 measurement over the other:
 - If the data is doesn’t show much skewness or have outliers,
-  mean is the best summary because it incorporates information
+  @vocab{mean} is the best summary because it incorporates information
   from every value.
-- If the data clearly has a lot of outliers or skewness, median
+- If the data clearly has a lot of outliers or skewness,
+  @vocab{median}
   gives a better summary of center than the mean.
-- If there are very few possible values, such as AP Scores (1-5),
-  the mode could be a useful way to summarize the data set.
+- If there are very few possible values, such as AP Scores (1–5),
+  the @vocab{mode} could be a useful way to summarize the data set.
 
-== Measures of Spread(Time 20 minutes)
+== Measures of Spread (Time 20 minutes)
 
-Measuring the "center" of a dataset is helpful, and we’ve seen
+Measuring the “center” of a dataset is helpful, and we’ve seen
 that shape should be taken into account. But we should also pay
 attention to the spread in a data set. A teacher may report that
 her students averaged a 75 on a test, but it’s important to know
@@ -290,7 +299,7 @@ how good or bad a job that estimate does.
 Suppose we lined up all of the values in the pounds column from
 smallest to largest, and then split the line up into two equal
 groups by taking the median. We can learn something about the
-spread of the data set by taking things further: The middle of
+@vocab{spread} of the data set by taking things further: The middle of
 the lighter half of animals is called the first @vocab{quartile},
 Q1, and the middle of the heavier half of animals is the third
 quartile, Q3. Once we find these numbers, we can say that the
@@ -301,58 +310,69 @@ The first quartile (Q1) is the value for which 25% of the animals
 weighed that amount or less. What does the third quartile
 represent?
 
+////
 Point out the five numbers that create these quartiles: the three
 medians, the minimum and the maximum.
+////
 
 We can use @vocab{box plots} to visualize these quartiles. These
-plots can easily be represented using just five numbers, which
+plots can easily be represented using *just five numbers*, which
 makes them convenient ways to display data. Below is the contract
-for box-plot, along with an example that will make a box plot for
-the pounds column in the animals-table.
+for `box-plot`, along with an example that will make a box plot for
+the `pounds` column in the `animals-table`.
+
+----
 # box-plot :: (t :: Table, column :: String) -> Image
 box-plot(animals-table, "pounds")
+----
 
 [.lesson-instruction]
 Type in this expression in the Interactions Area, and see the resulting plot.
 
+@span{.right}{@image{images/5-plot.png, "", 400}}
+
 This plot shows us the spread in our dataset according to five numbers.
 
-- The minimum value in the dataset (at the left of "whisker"). In
+- The *minimum* value in the dataset (at the left of “whisker”). In
   our dataset, that’s just 0.1 pounds.
-- The First Quartile (Q1) (the left edge of the box), is computed
-  by taking the median of the smaller half of the values. In the
+- The *First Quartile (Q1)* (the left edge of the box), is computed
+  by taking _the median of the smaller half of the values_. In the
   pounds column, that’s 4.3 pounds.
-- The Median (Q2) value (the line in the middle), which is the
+- The *Median (Q2)* value (the line in the middle), which is the
   second Quartile of the whole dataset. We already computed this
   to be 13.4 pounds.
-- The Third Quartile (Q3) (the right edge of the box), which is
-  computed by taking the median of the larger half of the values.
+- The *Third Quartile (Q3)* (the right edge of the box), which is
+  computed by taking _the median of the larger half of the values_.
   That’s 68 pounds in our dataset.
-- The maximum value in the dataset (at the right of the
-  "whisker"). In our dataset, that’s 172 pounds.
+- The *maximum* value in the dataset (at the right of the
+  “whisker”). In our dataset, that’s 172 pounds.
 
 One way to summarize the spread in the dataset is to measure the
 distance between the largest value and the smallest value. When
 we talk about functions having many possible outputs, we use the
-term "Range" to describe them. (Note: the term "Range" means
+term “Range” to describe them. (*Note*: the term “Range” means
 something different in statistics than it does in algebra and
 programming!) When we look at the distance between the smallest
 and largest values in our dataset, we use the same term.
 
 [.lesson-instruction]
-Turn to Page 30, and fill in the five-number summary for the
+Turn to
+@worksheet-link{workbook-pages/summarizing-columns-in-animals.adoc},
+and fill in the five-number summary for the
 pounds column, and sketch the box-plot. What conclusions can you
 draw about the distribution of values in this column?
 
 Data Scientists subtract the 1st quartile from the 3rd quartile
-to compute the range of the "middle half" of the dataset, also
+to compute the range of the “middle half” of the dataset, also
 called the @vocab{interquartile range}.
 
 [.lesson-instruction]
+--
 Find the @vocab{interquartile range} of this dataset.
 
 - What percentage of animals fall within the interquartile range?
 - What percentage of animals fall within any of the quartiles?
+--
 
 ////
 68−4.3=63.7 pounds
@@ -363,7 +383,8 @@ measures of spread on the computer, it’s time to put your skills
 to the test!
 
 [.lesson-instruction]
-Turn to Page 31 and complete the questions you see there.
+Turn to @worksheet-link{workbook-pages/interpreting-spread.adoc}
+and complete the questions you see there.
 
 ////
 Review students’ answers, especially to the question five.
@@ -384,18 +405,22 @@ points. A histogram, on the other hand, has identically-sized
 intervals which can contain very different numbers of points.
 
 [.lesson-instruction]
-Turn to Page 32 and see if you can identify which box-plot matches which histogram.
+Turn to
+@worksheet-link{workbook-pages/matching-boxplots-to-histograms.adoc}
+and see if you can identify which box-plot matches which
+histogram.
 
-== Your Dataset(Time 20 minutes)
+== Your Dataset (Time 20 minutes)
 
 By now, you’ve got a good handle on how to report center, shape
 and spread, and it’s time to apply those skills to your dataset!
 
 [.lesson-instruction]
-Take 10 minutes to fill out Page 33 in your Student Workbook.
+Take 10 minutes to fill out
+@worksheet-link{workbook-pages/shape-of-my-dataset.adoc} in your Student Workbook.
 Choose a column to investigate, and write up your findings.
 
-== Closing(Time 5 minutes)
+== Closing (Time 5 minutes)
 
 Data Scientists are skeptical people: they don’t trust a claim
 unless they can see the data, or at least get some summary
@@ -405,4 +430,5 @@ and distribution.
 
 == Additional Exercises:
 
-Critiquing Findings
+@worksheet-link{workbook-pages/critiquing-findings.adoc,
+Critiquing Findings}
