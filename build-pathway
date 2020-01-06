@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-02 # last modified
+LASTMOD=2020-01-03 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -439,6 +439,24 @@ function buildlessons() {
     for L in $(cat lessons.txt); do
       export LESSON=$L
       buildworkbookpages $L
+      #export LESSONPLAN=$L
+      #buildlessonplan $L
+      #unset LESSONPLAN
+      unset LESSON
+    done
+  fi
+  cd ..
+}
+
+function buildlessonplans() {
+  echo buildlessonplans in $(pwd)
+  cd lessons
+  if test ! -f lessons.txt; then
+    echo WARNING: No lessons in pathway $PATHWAY
+  else
+    for L in $(cat lessons.txt); do
+      # needed?
+      export LESSON=$L
       export LESSONPLAN=$L
       buildlessonplan $L
       unset LESSONPLAN
@@ -623,6 +641,8 @@ function buildpathway() {
       fi
       rm -f workbook-numbered.*
     fi
+
+    buildlessonplans
 
     buildpathwaynarrative
 

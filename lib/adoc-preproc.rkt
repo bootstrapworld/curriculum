@@ -21,11 +21,12 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
-(define *index-file* (string-append *pathway-root-dir* "workbook-page-index.rkt"))
-
-(define *index-list* (call-with-input-file *index-file* read))
-
-(define *index-length* (length *index-list*))
+(define *workbook-pagenums*
+  (if (getenv "LESSONPLAN") 
+      (call-with-input-file 
+        (string-append *pathway-root-dir* "workbook-pagenum-index.rkt") 
+        read)
+      '()))
 
 (define *external-url-index-file* (string-append *pathway-root-dir* "external-index.rkt"))
 
@@ -307,8 +308,16 @@
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
 
+(define (workbook-pagenum lesson snippet) 
+  (let* ([snippet.adoc
+           (path->string
+             (path-replace-extension snippet ".adoc"))]
+         [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
+                (assoc (list lesson snippet) *workbook-pagenums*))])
+    (if c (cadr c) #f)))
+
 (define (make-worksheet-link lesson workbook-dir snippet link-text)
-  ;(printf "make-worksheet-link ~a ~a ~a ~a\n" lesson workbook-dir snippet link-text)
+  ;(printf "make-worksheet-link ~s ~s ~s ~s\n" lesson workbook-dir snippet link-text)
   (let ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)])
     (when (path-has-extension? snippet ".adoc")
       (let* ([f (string-append *pathway-root-dir* g)]
@@ -316,7 +325,16 @@
              [snippet.pdf (path-replace-extension f ".pdf")])
         (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
               [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
-    (format "link:{pathwayrootdir}~a[~a~a]" g link-text
+    (format "link:{pathwayrootdir}~a[~a~a~a]" g 
+            link-text
+            (if (getenv "LESSONPLAN")
+                (let ([pagenum (workbook-pagenum lesson snippet)])
+                  (if pagenum
+                      (let ([x (format "Page ~a" pagenum)])
+                        (if (string=? link-text "") x
+                            (string-append " (" x ")")))
+                      ""))
+                "")
             (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
     ))
 

@@ -16,7 +16,7 @@ animals dataset, using methods.}
 * define several row values from the animals table
 * define several functions over rows from the animals table
 
-@worksheet-include{ds-questions-n-defs/extras/lang-prereq.adoc}
+@worksheet-include{ds-questions-n-defs/xtra/lang-prereq.adoc}
 |===
 
 == Question Types (10 min)
@@ -26,8 +26,11 @@ we know what questions to ask? There’s an art to asking the right
 questions, and good Data Scientists think hard about what kind of
 questions can and can’t be answered.
 
-Turn to back to Page 3 in your Student Workbook, and look at the
-“Wonder” questions that you wrote about this dataset.
+[.lesson-instruction]
+Turn back to
+@worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc} in
+your Student Workbook, and look at the “Wonder” questions that
+you wrote about this dataset.
 
 ////
 Have students brainstorm some questions they might ask of the
@@ -39,24 +42,28 @@ Most questions can be broken down into one of three categories:
 - *Lookup questions* -- These can be answered simply by looking up a
   single value in the table and reading it out. Once you find the
   value, you’re done! Examples of lookup questions might be “is
-  Sunflower fixed?" or “How many legs does Felix have?"
+  Sunflower fixed?” or “How many legs does Felix have?”
 
 - *Compute questions* -- These can be answered by computing an
   answer across a single row or column. Examples of computing
-  questions might be “how much does the heaviest animal weigh?"
-  or “What is the average age of animals at the shelter?"
+  questions might be “how much does the heaviest animal weigh?”
+  or “What is the average age of animals at the shelter?”
 
 - *Relate questions* -- These ones take the most work, because they
   require looking for relationships between multiple columns.
   Examples of analysis questions might be “Do cats tend to be
-  adopted faster than dogs?" or “Are older animals heavier than
-  young ones?"
+  adopted faster than dogs?” or “Are older animals heavier than
+  young ones?”
 
 ////
 Have students come up with questions for each type.
 ////
 
-Look back at the Wonders you wrote on Page 3. Are any of these Lookup, Compute, or Relate questions? Circle the question type that’s appropriate. Can you come up with additional examples for each type of question?
+Look back at the Wonders you wrote on
+@worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc}.
+Are any of these Lookup, Compute, or Relate questions? Circle the
+question type that’s appropriate. Can you come up with additional
+examples for each type of question?
 
 ////
 Have students share their questions with the class. Allow time for discussion!
@@ -68,7 +75,9 @@ Pyret...
 
 == Row and Column Lookups(Time 15 minutes)
 
-Open Animals Starter File - Unit 2, save a copy, and click “Run”.
+Open
+@link{https://code.pyret.org/editor#share=1PTPxKGyUfsMpy4GzFtYS_JGntiHOL0Yu,
+Animals Starter File - Unit 2}, save a copy, and click “Run”.
 This is the same program you saw before, but with one extra line
 of code. Which line is new, and what do you think it does?
 
@@ -81,6 +90,7 @@ using the `.row-n` method:
 
 Note: data rows start at zero!
 
+[.lesson-instruction]
 For practice, in the Interactions Area, use the `row-n` method to get the second and third data rows.
 
 What is the Domain of .row-n? What is the Range? Find the
@@ -102,11 +112,14 @@ the animals-table:
   animals-table.row-n(0)["age"]
   animals-table.row-n(0)["fixed"]
 
+[.lesson-instruction]
 How would you get the `weeks` column out of the _second_ row? The third?
 
 Let’s get some practice playing with the `row-n` method, and row-accessors!
 
-Complete the exercises on Page 8.
+[.lesson-instruction]
+Complete the exercises on
+@worksheet-link{workbook-pages/lookup-questions.adoc}.
 
 Tables have other methods too! The `.order-by` method consumes a
 String (the name of the column you want to order) and a Boolean
@@ -123,7 +136,7 @@ it makes sense!
 
 == Defining Values(Time 15 minutes)
 
-Pyret allows us to define names for values using the = sign. In
+Pyret allows us to define names for values using the `=` sign. In
 math, you’re probably used to seeing definitions like _x = 4_, which
 defines the name x to be the value 4. Pyret works the same way,
 and you’ve already seen two names defined in this file:
@@ -135,8 +148,8 @@ definitions, for example:
   sum = 2 + 2
   img = triangle(10, "solid", "red")
 
+[.lesson-instruction]
 With your partner, take turns adding definitions to this file:
-
 - Define a value with name `food`, whose value is a String
   representing your favorite food
 - Define a value with name `year`, whose value is a Number
@@ -154,12 +167,15 @@ following lines of code into the Definitions Area and click
 
 What happens when you evaluate `animalA` in the Interactions Area?
 
+[.lesson-instruction]
 Define _at least_ two additional values to be animals from the
 `animals-table`, called `animalC` and `animalD`.
 
 Let’s get some practice combining Lookups with Value Definitions.
 
-Complete the exercises on Page 9.
+[.lesson-instruction]
+Complete the exercises on
+@worksheet-link{workbook-pages/more-practice-w-lookups.adoc}.
 
 == Defining Functions(Time 30 minutes)
 
@@ -177,7 +193,8 @@ ask certain questions:
 Have students brainstorm additional questions!
 ////
 
-Let’s try finding all the fixed animals by hand. Turn to Page 2,
+Let’s try finding all the fixed animals by hand. Turn to
+@worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc},
 and walk down the table one row at a time, putting a check next
 to each animal that is fixed.
 
@@ -233,8 +250,10 @@ But how do we define functions like this?
 
 To build our own functions, we’ll use a series of steps called the Design Recipe. The Design Recipe is a way to think through the behavior of a function, to make sure we don’t make any mistakes with the animals that depend on us! The Design Recipe has three steps, and we’ll go through them together for our first function.
 
-Turn to page Page 10 in your Student Workbook.
+[.lesson-instruction]
+Turn to @worksheet-link{workbook-pages/design-recipe.adoc} in your Student Workbook.
 
+[.lesson-point]
 Step 1: Contract and Purpose
 
 The first thing we do is write a Contract for this function. You
@@ -244,8 +263,10 @@ consumes a row from the animals table. It looks up the value in
 the fixed column, which will always be a Boolean. A Purpose
 Statement is just a description of what the function does:
 
-  # is-fixed :: (animal :: Row) -> Boolean
-  # Consumes an animal, and looks up the value in the fixed column
+----
+# is-fixed :: (animal :: Row) -> Boolean
+# Consumes an animal, and looks up the value in the fixed column
+----
 
 Since the contract and purpose statement are notes for humans, we
 add the # symbol at the front of the line to turn it into a
@@ -254,6 +275,7 @@ comment.
 Be sure to check students’ contracts and purpose
 statements before having them move on!
 
+[.lesson-point]
 Step 2: Write Examples
 
 Examples are a way for us to tell the computer how our function
@@ -265,12 +287,14 @@ have two animals defined, where animalA is fixed and animalB
 isn’t. What work do we have to do on each row to look up whether
 they are fixed? What is will the result be for each animal?
 
-  # is-fixed :: (r :: Row) -> Boolean
-  # Consumes an animal, and looks up the value in the fixed column
-  examples:
-    is-fixed(animalA) is true
-    is-fixed(animalB) is false
-  end
+----
+# is-fixed :: (r :: Row) -> Boolean
+# Consumes an animal, and looks up the value in the fixed column
+examples:
+  is-fixed(animalA) is true
+  is-fixed(animalB) is false
+end
+----
 
 ////
 Make sure students understand (1) that is-fixed came from the
@@ -279,12 +303,14 @@ Domain in our contract, and (3) that the Booleans are determined
 by whether those animals are fixed or not.
 ////
 
-When writing examples, we replace the look-up operation with the actual value in the table.
+*When writing examples, we replace the look-up operation with the
+actual value in the table.*
 
 ////
 This is a MAJOR point. Make sure students see it (and maybe even repeat it!).
 ////
 
+[.lesson-point]
 Step 3: Define the Function
 
 We start with the fun keyword (short for “function”), followed by
@@ -295,14 +321,16 @@ Then we add a colon (:) in place of is, and write out the work we
 did to get the answers for our examples. Finally, we finish with
 the end keyword.
 
-  # is-fixed :: (animal :: Row) -> Boolean
-  # Consumes an animal, and looks up the value in the fixed column
-  examples:
-    is-fixed(animalA) is true
-    is-fixed(animalB) is false
-  end
-  fun is-fixed(animal): animal["fixed"]
-  end
+----
+# is-fixed :: (animal :: Row) -> Boolean
+# Consumes an animal, and looks up the value in the fixed column
+examples:
+  is-fixed(animalA) is true
+  is-fixed(animalB) is false
+end
+fun is-fixed(animal): animal["fixed"]
+end
+----
 
 This program is missing examples! Add an examples block in the
 Definitions Area, using your animalA and animalB. Check the
@@ -314,8 +342,8 @@ the examples are correct. Make sure both of them pass!
 Walk around to make sure everyone’s examples pass.
 ////
 
+[.lesson-instruction]
 Now let’s try coming up with a totally new function, and use the Design Recipe to help us write it.
-
 - Solve the word problem at the bottom of Page 10.
 - Type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area.
 - Click “Run”, and make sure all your examples pass!
@@ -328,31 +356,41 @@ function with the .filter method. But what if we want to filter
 by a Boolean expression? For example, what if we want to find out
 specifically whether or not an animal is a cat, or whether it’s
 young? Let’s walk through an example of a Compute Function using
-the Design Recipe, by turning to Page 11.
+the Design Recipe, by turning to
+@worksheet-link{workbook-pages/design-recipe-2.adoc}.
 
-Define a function called is-cat, which consumes a row from the animals-table and returns true if the animal is a cat.
-
+[.lesson-instruction]
+Define a function called `is-cat`, which consumes a row from the
+`animals-table` and returns true if the animal is a cat.
 - Is this a Lookup, Compute or Relate question?
 - What is the name of this function? What are its Domain and Range?
-- Is Sasha a cat? What did you do to get that answer?
+- Is Sasha a cat? _What did you do to get that answer?_
+
+////
 Have students explain their thinking carefully, step-by-step. Repeat this with other animals.
+////
 
 To find out if an animal is a cat, we look-up the species column
-and check to see if that value is equal to "cat". Suppose animalA
-is a cat and animalB is a lizard. What should our examples look
-like? Remember: we replace any lookup with the actual value, and
-check to see if it is equal to "cat".
+and check to see if that value is _equal_ to `"cat"`. Suppose `animalA`
+is a cat and `animalB` is a lizard. What should our examples look
+like? *Remember: we replace any lookup with the actual value, and
+check to see if it is equal to `"cat"`.*
 
-  # is-cat :: (r :: Row) -> Boolean
-  # Consumes an animal, and compute whether the species is "cat"
-  examples:
-    is-cat(animalA) is "cat" == "cat"
-    is-cat(animalB) is "dog" == "cat"
-  end
+----
+# is-cat :: (r :: Row) -> Boolean
+# Consumes an animal, and compute whether the species is "cat"
+examples:
+  is-cat(animalA) is "cat" == "cat"
+  is-cat(animalB) is "dog" == "cat"
+end
+----
 
+[.lesson-instruction]
 Write two examples for your defined animals. Make sure one is a cat and one isn’t!
 
+////
 Note that the string on the left is the lookup value: the actual species for that specific animal.
+////
 
 As before, we’ll use the pattern from our examples to come up with our definition.
 
@@ -360,20 +398,25 @@ As before, we’ll use the pattern from our examples to come up with our definit
 - What is the name of the variable(s)?
 - What do we do in the body in the function?
 
-  # is-cat :: (r :: Row) -> Boolean
-  # Consumes an animal, and compute whether the species is "cat"
-  examples:
-    is-cat(animalA) is "cat" == "cat"
-    is-cat(animalB) is "dog" == "cat"
-  end
-  fun is-cat(animal): animal["species"] == "cat"
-  end
+----
+# is-cat :: (r :: Row) -> Boolean
+# Consumes an animal, and compute whether the species is "cat"
+examples:
+  is-cat(animalA) is "cat" == "cat"
+  is-cat(animalB) is "dog" == "cat"
+end
+fun is-cat(animal): animal["species"] == "cat"
+end
+----
 
-Type this definition - and its examples! - into the Definitions
-Area, then click "Run" and try using it to filter the
-animals-table.
+[.lesson-instruction]
+Type this definition -- and its examples! -- into the Definitions
+Area, then click “Run” and try using it to filter the
+`animals-table`.
 
-For practice, try solving the word problem for is-young at the bottom of Page 11.
+[.lesson-instruction]
+For practice, try solving the word problem for is-young at the
+bottom of @worksheet-link{workbook-pages/design-recipe-2.adoc}.
 
 == More About Table Methods(Time 15 minutes)
 
@@ -396,7 +439,7 @@ cats, or a bar chart of only the animals that have been fixed.
 ////
 
 Sometimes we want to _add a column_ to a table. For example, we
-could add a boolean column called "young" to the table, which is
+could add a boolean column called `"young"` to the table, which is
 `true` if the animal is less than four years old and `false` if it’s
 not. Pyret has another method for this.
 
@@ -405,7 +448,7 @@ not. Pyret has another method for this.
 [.lesson-instruction]
 Type this into the Interactions Area and hit Enter. What did you get back?
 
-== Closing(Time 5 minutes)
+== Closing (Time 5 minutes)
 
 Congratulations! You’ve explored the Animals dataset, formulated
 your own questions and begun to think critically about the
@@ -420,4 +463,5 @@ Have students share which dataset they chose, and pick one question they’re lo
 
 == Additional Exercises:
 
-- What can you answer?
+- @worksheet-link{workbook-pages/what-can-you-answer.adoc, What
+  can you answer?}

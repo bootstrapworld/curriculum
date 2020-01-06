@@ -58,7 +58,7 @@
                   )
              (unless do-it?
                (when (> (file-mtime g) dest.pdf.mtime) (set! do-it? #t)))
-             (list g lesson-basename lesson-handle lesson-aspect lesson-pagenum lesson-title)))
+             (list g lesson-basename lesson-workbook-page lesson-handle lesson-aspect lesson-pagenum lesson-title)))
          *workbook-page-specs*))
 
   (when do-it?
@@ -81,11 +81,8 @@
     (for ([pdf-page-spec *pdf-page-specs*])
       ;(printf "pdf-page-spec = ~s\n" pdf-page-spec)
       (let ([docfile (list-ref pdf-page-spec 0)]
-            [basename (list-ref pdf-page-spec 1)]
-            [handle (list-ref pdf-page-spec 2)]
-            [aspect (list-ref pdf-page-spec 3)]
-            [pagneum (list-ref pdf-page-spec 4)]
-            [title (list-ref pdf-page-spec 5)])
+            [handle (list-ref pdf-page-spec 3)]
+            [aspect (list-ref pdf-page-spec 4)])
         (system* *pdftk*
                  (format "Q=~a" docfile)
                  "cat"
@@ -106,7 +103,7 @@
                    "\\setlength\\headheight{0in}"
                    "\\setlength\\headsep{0in}"
                    "\\setlength\\textheight{9.5in}"
-                   "\\setlength\\textwidth{8.25in}"
+                   "\\setlength\\textwidth{7.25in}"
                    "\\setlength\\oddsidemargin{-0.5in}"
                    "\\setlength\\evensidemargin{-0.5in}"
                    "%"
@@ -124,25 +121,30 @@
             (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
                      cover-page)))
         ;(fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
-        (let ([curr-lesson #f])
+        (let ([curr-lesson #f]
+              [pagenum-list '()])
           (let loop ([i 1] [pdf-page-specs *pdf-page-specs*])
             (unless (null? pdf-page-specs)
               (let* ([pdf-page-spec (car pdf-page-specs)]
                      [basename (list-ref pdf-page-spec 1)]
-                     [handle (list-ref pdf-page-spec 2)]
-                     ;[aspect (list-ref pdf-page-spec 3)]
-                     [paginate (list-ref pdf-page-spec 4)]
-                     [title (list-ref pdf-page-spec 5)]
-                     [page-num i]
+                     [workbook-page (list-ref pdf-page-spec 2)]
+                     [handle (list-ref pdf-page-spec 3)]
+                     ;[aspect (list-ref pdf-page-spec 4)]
+                     [paginate (list-ref pdf-page-spec 5)]
+                     [title (list-ref pdf-page-spec 6)]
+                     [pagenum i]
                      [fresh-lesson (not (equal? basename curr-lesson))])
                 (set! title (regexp-replace* "&" title "\\\\&"))
                 (set! paginate (if (char-ci=? (string-ref paginate 0) #\y) #t #f))
                 (unless paginate
-                  (set! page-num "") (set! title "") (set! i (- i 1)))
+                  (set! pagenum "") (set! title "") (set! i (- i 1)))
+                (when (and (not include-lesson) (not teacher-version) paginate)
+                  (set! pagenum-list
+                    (cons (list (list basename workbook-page) pagenum) pagenum-list)))
                 (cond [fresh-lesson
                         (set! curr-lesson basename)
                         (fprintf o "\n\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                                 "" page-num handle)
+                                 "" pagenum handle)
                         (when include-lesson
                           (let ([lesson-plan-pdf (format "lessons/~a/index.pdf" curr-lesson)])
                             (when (file-exists? lesson-plan-pdf)
@@ -150,8 +152,21 @@
                                        lesson-plan-pdf))))]
                       [else
                         (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                                 title page-num handle)])
-                (loop (+ i 1) (cdr pdf-page-specs))))))
+                                 title pagenum handle)])
+                (loop (+ i 1) (cdr pdf-page-specs)))))
+          (when (and (not include-lesson) (not teacher-version))
+            (call-with-output-file "workbook-pagenum-index.rkt"
+              (lambda (o)
+                (display "(" o) (newline o)
+                (for-each
+                  (lambda (x)
+                    (write x o) (newline o)
+                    )
+                  (reverse pagenum-list))
+                (display ")" o) (newline o)
+                )
+              #:exists 'replace))
+          )
         (fprintf o "\n\\end{document}\n")
         )
       #:exists 'replace)

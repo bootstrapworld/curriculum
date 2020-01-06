@@ -17,8 +17,7 @@ Strings, Types, Operations, Contracts, and Function Application.}
 |
 * Computer for each student (or pair), with access to the
 internet
-* Student workbook, and something to write with
-
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 
 |===
 
@@ -27,11 +26,11 @@ internet
 Take a minute to look at the opening questions we have prepared
 for you, and choose a topic that interests you.
 
-- Once you’ve selected your topic, choose a question you’d like to answer.
-
+[.lesson-instruction]
+- Once you’ve selected your topic, choose a question you’d like
+  to answer.
 - Spend one minute discussing your answer, and explaining why you
   answered the way you did. Do other students agree with you?
-
 - What information could you collect, to determine if your answer
   is right or not?
 
@@ -77,24 +76,31 @@ data science, so some questions will be out of reach!
 
 == The Animals Dataset (20 min)
 
-Open the Animals Spreadsheet in a new tab, or turn to Page 2.
+Open the
+@link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0,
+Animals Spreadsheet} in a new tab, or turn to
+@worksheet-link{workbook-pages/animals-dataset.pdf}.
 This is some data from an animal shelter, listing animals that
 have been adopted. We’ll be using this as an example throughout
-the course, but you’ll be applying what you learn to a dataset
-you choose as well.
+the course, but you’ll be applying what you learn to _a dataset
+you choose_ as well.
 
-- Turn to Page 3 in your Student Workbook. What do you notice about
-this dataset? Write down your observations in the first column.
+[.lesson-instruction]
+- Turn to @worksheet-link{workbook-pages/animals-dataset-2.adoc}
+  in your Student Workbook. What do you notice about this
+  dataset? Write down your observations in the first column.
 - Sometimes, looking at data sparks questions. What do you wonder
   about this dataset? Write down your questions in the second
   column.
 - There’s a third column, called “Question Type” - we’re going to
   return to that later, so you can ignore it for now.
-- If you look at the bottom of the spreadsheet file, you’ll see
-  that this document contains multiple sheets called “pets” and
-  “README”. Which sheet are we looking at?
+- If you look at the bottom of the
+  @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0,
+  spreadsheet file}, you’ll see that this document contains
+  multiple sheets called `"pets"` and `"README"`. Which sheet are
+  we looking at?
 - Each sheet contains a table. For our purposes, we only care
-  about the animals table on the “pets” sheet.
+  about the animals table on the `"pets"` sheet.
 
 ////
 Each student (or pair of students) should have a Google Account.
@@ -112,7 +118,7 @@ average age of animals in other shelters.
 
 There are two different kinds of data that come up in Data
 Science: Categorical and Quantitative. @vocab{Categorical Data}
-is used to classify, not measure. Categories aren’t subject to
+is used to _classify_, not measure. Categories aren’t subject to
 the laws of arithmetic. For example, we couldn’t ask if “cat” is
 more than “lizard”, and it doesn’t make sense to find the
 “average ZIP code” in a list of addresses. We use
@@ -120,18 +126,19 @@ more than “lizard”, and it doesn’t make sense to find the
 weather forecast, temperature is quantitative but whether it’s
 snowing or raining is categorical.
 
+[.lesson-instruction]
 “Species” is a categorical variable, because we can ask questions
 like “which species does Mittens belong to?" What are some other
 categorical variables you see in this table?
 
 @vocab{Quantitative Data} is used to measure an amount of something, or
-to compare two pieces of data to see which is less or more. If we
+to compare two pieces of data to see which is _less or more_. If we
 want to ask “how much” or “which is most”, we’re talking about
 Quantitative Data.
 
+[.lesson-instruction]
 What kind of data -- categorical or quantitative -- are the
 following columns?
-
 - Hair color
 - Age
 - ZIP Code
@@ -141,9 +148,9 @@ Sometimes it can be tricky to figure out if data is categorical
 or quantitative, because it depends on how that data is being
 used!
 
+[.lesson-instruction]
 For each of the following questions, determine whether the data
 being used is categorical or quantitative.
-
 - We’d like to sort a list of phone numbers by area code.
 - We’d like to find out the average price of cars in a lot.
 - We’d like to find out the most popular color for cars.
@@ -156,15 +163,21 @@ The big idea here is that some data can be both categorical and
 quantitative – what matters is how we use it!
 ////
 
-On Page 3 in your Student Workbook, fill in the blanks for Questions 1 and 2.
+[.lesson-instruction]
+On @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student
+Workbook, fill in the blanks for Questions 1 and 2.
 
-Open up the Animals Starter File in a new tab. Click “Connect to
+Open up the
+@link{https://code.pyret.org/editor#share=1uK9VO5WO1RAH7g65DU_pkXZTyOnlno_-,
+Animals Starter File} in a new tab. Click “Connect to
 Google Drive” to sign into your Google account, and then click
 the “Save as” button. This will save a copy of the file into your
 own account, so that you can make changes and retrieve them
 later.
 
 //image
+
+@span{.right}{@image{images/editor.png, "", 300, ""}}
 
 This screen is called the @vocab{editor}, and it looks something like the
 diagram you see here. There are a few buttons at the top, but
@@ -183,7 +196,7 @@ is like writing function definitions on a blackboard, and having
 students use those functions to compute answers on scrap paper.
 ////
 
-The first few lines in the Definitions Area tell Pyret to import
+The first few lines in the Definitions Area tell Pyret to `import`
 files from elsewhere, which contain tools we’ll want to use for
 this course. We’re importing a file called Bootstrap:Data
 Science, as well as files for working with Google Sheets, tables,
@@ -206,7 +219,7 @@ following code:
 
 The first line (starting with `#`) is called a comment. Comments
 are notes for humans, which the computer ignores. The next line
-defines a new table. We call it `animals-table`, and we load it
+_defines_ a new table. We call it `animals-table`, and we load it
 from the `shelter-sheet` defined above. You can see the names we
 are giving to each of the columns, called `name`, `species`,
 `gender`,
@@ -220,19 +233,23 @@ and in the load-table function. Point out that they refer to the
 same columns, even though they have different names!
 ////
 
-Click “Run", and type `animals-table` into the Interactions Area to see what the table looks like in Pyret. Is it the same table you saw in Google Sheets? What is the same? What is different?
+[.lesson-instruction]
+Click “Run”, and type `animals-table` into the Interactions Area
+to see what the table looks like in Pyret. Is it the same table
+you saw in Google Sheets? What is the same? What is different?
 
 - In Data Science, every table is composed of cells, which are
-arranged in a grid of rows and columns.
-- Most of the cells contain data, but the first row and first
-  column are special.
-- The first row is called the header row, which gives a unique name
-to each variable (or “column”) in the table.
+  arranged in a grid of rows and columns.
+- Most of the cells contain data, but _the first row and first
+  column_ are special.
+- The first row is called the @vocab{header} row, which gives a unique
+  name to each variable (or “column”) in the table.
 - The first column in the table is the identifier column, which
-contains a unique ID for each row. Often, this will be the name
-of the people or places in the table, or sometimes just an ID
-number.
+  contains a unique ID for each row. Often, this will be the name
+  of the people or places in the table, or sometimes just an ID
+  number.
 
+[.lesson-instruction]
 How many variables are listed in the header row? What are they
 called? What is being used for the identifier column in this
 dataset?
@@ -241,7 +258,7 @@ After the header, Pyret tables can have any number of @vocab{data
 rows}.
 Each data row has values for every column variable (nothing can
 be left empty!). A table can have any number of data rows,
-including zero, as in the table below:
+including _zero_, as in the table below:
 
 [cols="50a,50a"]
 |===
@@ -259,7 +276,9 @@ has), Strings (the species of the animal), and Booleans (whether
 it is true or false than animal is fixed). Let’s get some
 practice playing with these Datatypes.
 
-With your partner(s), go through the questions on Page 4. Talk
+[.lesson-instruction]
+With your partner(s), go through the questions on
+@worksheet-link{workbook-pages/numbers-n-strings.adoc}. Talk
 about the answers to each question, and write down your answers
 when required.
 
@@ -271,13 +290,14 @@ By now you’ve discovered a number of important things about our
 programming language:
 
 - Numbers and Strings evaluate to themselves.
-- Anything in quotes is a String, even something like "42".
-- Strings must have quotation marks on both sides.
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
 - Operators like `+`, `-`, `*`, and `/` need spaces around them.
 - Any time there is more than one operator being used, Pyret
   requires that you use parentheses.
 - Types matter! We can add two Numbers or two Strings to one
-another, but we can’t add the Number 4 to the String `"hello"`.
+  another, but we can’t add the Number `4` to the String
+  `"hello"`.
 
 You’ve also seen a few @vocab{error messages} here. Error messages are a
 way for Pyret to tell you what went wrong, and are a really
@@ -286,8 +306,9 @@ spaces around operators, missing quotation marks, and mismatched
 operators without parentheses. What other errors do you think
 there are?
 
-- In `6 / 0` we know that you can’t divide any number by 0! In this
-case, Pyret obeys the same rules as humans, and gives an error.
+- In `6 / 0` we know that you can’t divide any number by 0! In
+  this case, Pyret obeys the same rules as humans, and gives an
+  error.
 - An unclosed quotation mark is a problem, but so is an unmatched
   parentheses. For example, you’ll get an error message if you
   type `(2 + 2`.
@@ -298,18 +319,20 @@ and produce new Numbers! But what about operators like
 greater-than and less-than-or-equal?
 
 - To identify if an animal’s gender is `"male"`, we need to know if
-  the value in that column is equal to the string "male".
+  the value in that column is _equal_ to the string `"male"`.
 - To sort the table by age, we need to know if one animal’s age
-  is _less_ than another’s.
+  is _less than_ another’s.
 - To filter the table to show only young animals, we need to know
   if an animal’s age is _less than_ 2.
 
 Those come in handy when comparing quantitative data, and Pyret
-has them, too: Equals (==), less-than (<), greater-than (>), as
-well as greater-than-or-equal (>=) and less-than-or-equal (<=).
+has them, too: Equals (`==`), less-than (`<`), greater-than (`>`), as
+well as greater-than-or-equal (`>=`) and less-than-or-equal (`<=`).
 
-With your partner(s), complete Page 5. Talk about the answers to
-each question, and write down your answers when required.
+[.lesson-instruction]
+With your partner(s), complete @worksheet-link{workbook-pages/booleans.adoc}. Talk
+about the answers to each question, and write down your answers
+when required.
 
 ////
 Have students share back. Point out that all the same rules about
@@ -318,7 +341,7 @@ parentheses, spaces, and types still applies!
 
 By using `and` and `or`, we can _combine_ tests. For example, we might
 want to ask if a character in a videogame has run out of health
-points and if they have any more lives. We might want to know if
+points _and_ if they have any more lives. We might want to know if
 someone’s ZIP Code puts them in Texas or New Mexico. When you go
 out to eat at a restaurant, you might ask what items on the menu
 have meat and cheese. We’ll use these Boolean operators in a lot
@@ -331,16 +354,17 @@ simple (“I am wearing a hat”), and gradually get complex (“I am
 wearing a hat, and I am standing on one leg”).
 ////
 
-== Applying Functions (30 min)
+== Applying Functions (Time 30 minutes)
 
 So now you know about Numbers, Strings, Booleans and Operators --
 all of which behave just like they do in math. But what about
 functions? You may remember functions from algebra: _f(x) = x²_.
 
+[.lesson-instruction]
 - What is the name of this function?
 - What will the expression _f(2)_ evaluate to? _f(3)_?
-- The values that we give to a function are called its arguments.
-How many arguments does _f_ expect?
+- The values that we give to a function are called its
+  @vocab{arguments}. How many arguments does _f_ expect?
 
 ////
 “Arguments” are the values passed into a function. This is subtly
@@ -356,10 +380,11 @@ area and hit Enter.
 
   num-sqrt(16)
 
+[.lesson-instruction]
 - What is the name of this function?
 - What did the expression `num-sqrt(16)` evaluate to?
 - Does the `num-sqrt` function produce Numbers? Strings? Booleans?
-- How many arguments does `num-sqrt` expect?
+- How many @vocab{arguments} does `num-sqrt` expect?
 
 Of course, functions on a computer can do a lot more than make
 Numbers! Type this line of code into the interactions area and
@@ -367,6 +392,7 @@ hit Enter.
 
   triangle(50, "solid", "red")
 
+[.lesson-instruction]
 - What is the name of this function?
 - What did the expression evaluate to?
 - How many arguments does `triangle` expect?
@@ -375,6 +401,7 @@ hit Enter.
 You’ve just created an example of a new Datatype, called an
 _Image_.
 
+[.lesson-instruction]
 - What are the types of the arguments `triangle` was expecting?
 - How does this output relate to the inputs?
 - Try making different triangles. Change the size and color! Try
@@ -396,10 +423,10 @@ convention, we *capitalize Types and keep names in lowercase*.
 `triangle` works on many different Numbers, not just the `20` we used
 in the example above!
 
+[.lesson-instruction]
 Can you see what is wrong with each of these expressions? Try
 copying them into Pyret, one at a time, and reading the error
 messages aloud.
-
 - `triangle(20, "solid", "red"`
 - `triangle(20 "solid" "red")`
 - `triangle("20", "solid", "red")`
@@ -435,21 +462,23 @@ with commas between each one.
 Finally, after the arrow goes the type of the @vocab{Range}, or the
 function’s output, which in this case is Image.
 
+[.lesson-instruction]
 Turn to the back of your workbook. We’ve given you the contracts
 for many Image-producing functions (as well as quite a few
 others!). Try using some of these contracts to make shapes.
 
+[.lesson-instruction]
 Turn to the back of your workbook, and get some practice reading
 and using contracts! Make sure you try out the following
 functions:
-
 - `text`
 - `circle`
 - `ellipse`
 - `star`
 
-Here’s the contract for another new function. Can you figure out how to use it in the Interactions Area?
-
+[.lesson-instruction]
+Here’s the @vocab{contract} for another new function. Can you
+figure out how to use it in the Interactions Area?
 ----
 # string-repeat :: (s :: String, n :: Number) -> String
 ----
@@ -458,11 +487,13 @@ Here’s the contract for another new function. Can you figure out how to use it
 The string s is printed n times, written as a single String.
 ////
 
-Here’s an example of another function. Type it into the
+[.lesson-instruction]
+Here’s an _example_ of another function. Type it into the
 Interactions Area to see what it does. Can you figure out the
 contract, based on the example?
-
-  string-contains("apples, pears, milk", "pears")
+----
+string-contains("apples, pears, milk", "pears")
+----
 
 ////
 The contract is string-contains :: (s :: String, search ::
@@ -488,11 +519,13 @@ does just that, and an example of using it:
 pie-chart(animals-table, "gender")
 ----
 
+[.lesson-instruction]
 - What is the Name of this function?
 - How many inputs are in its Domain?
 - Type the example into the Interactions Area.
 - What comes back?
 
+[.lesson-instruction]
 In the Interactions Area, type `pie-chart(animals-table,
 "species")` and hit Enter. What happens? What happens when you
 hover over a slice of the pie? These plots are _interactive_! This
@@ -518,28 +551,30 @@ Here is the contract for another function:
 # bar-chart :: (t :: Table, col :: String) -> Image
 ----
 
+[.lesson-instruction]
 Use this function to make a bar chart showing the number of each gender across the shelter.
 
 Do you think we could use any column? What about a quantitative column?
 
+[.lesson-instruction]
 Experiment with these two functions, passing in different column
 names for the label and data columns. If you get an error
 message, _read it carefully!_ What do you think are the rules for
 what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 
-== (Optional) Exploring other plots (10 min)
+== (Optional) Exploring other plots (Time 10 minutes)
 
 OPTIONAL: there are lots of other functions, for all different
 kinds of charts and plots. Even if you don’t know what these
 plots are for yet, see if you can use your knowledge of Contracts
 to figure out how to use them. What do you think they mean?
 
-- How many columns are needed to make a _histogram_?
-- Are __histogram__s made from quantitative or categorical columns?
-- What do you think a _histogram_ tells us about the data?
-- How many columns are needed to make a _box-plot_?
-- Are __box-plot__s made from quantitative or categorical columns?
-- What do you think a _box-plot_ tells us about the data?
+- How many columns are needed to make a `histogram`?
+- Are ``histogram``s made from quantitative or categorical columns?
+- What do you think a `histogram` tells us about the data?
+- How many columns are needed to make a `box-plot`?
+- Are ``box-plot``s made from quantitative or categorical columns?
+- What do you think a `box-plot` tells us about the data?
 - Can you answer the same questions for other plots?
 
 Sometimes we want to summarize a categorical column in a Table,
@@ -557,6 +592,7 @@ with exactly the columns we want: the name of the category and
 the number of times that category occurs in the dataset. What are
 the names of the columns in this new table?
 
+[.lesson-instruction]
 - Use the `count` function to make a table showing the number of
   animals of each `gender` at the shelter.
 - Use the `count` function to make a table showing the number of
@@ -576,9 +612,11 @@ function:
 pie-chart-raw(count(animals-table,"species"), "value", "count")
 ----
 
-Type this in and try it out. How would you make a bar chart based on the raw data?
+[.lesson-instruction]
+Type this in and try it out. How would you make a bar chart based
+on the raw data?
 
-== Closing (5 min)
+== Closing (Time 5 minutes)
 
 Today you’ve learned about quantitative and categorical data.
 You’ve learned about Numbers, Strings, Booleans, and Images.
@@ -602,12 +640,12 @@ programs. You will have many opportunities to use these concepts
 in this course, by writing programs to answer data science
 questions.
 
+[.lesson-instruction]
 Make sure to save your work, so you can go back to it later!
 
 == Additional Exercises:
 
-- Practicing Contracts
-- Practicing Contracts
-- Matching Expressions
-- Matching Expressions
-
+- @worksheet-link{workbook-pages/practicing-contracts.adoc, Practicing Contracts}
+- @worksheet-link{workbook-pages/practicing-contracts-2.adoc, Practicing Contracts}
+- @worksheet-link{workbook-pages/matching-expressions.adoc, Matching Expressions}
+- @worksheet-link{workbook-pages/matching-expressions-2.adoc, Matching Expressions}
