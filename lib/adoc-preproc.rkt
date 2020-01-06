@@ -23,17 +23,17 @@
 
 (define *workbook-pagenums*
   (if (getenv "LESSONPLAN") 
-      (call-with-input-file 
-        (string-append *pathway-root-dir* "workbook-pagenum-index.rkt") 
-        read)
+      (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt")])
+        (if (file-exists? f)
+            (call-with-input-file f read)
+            '()))
       '()))
-
-(define *external-url-index-file* (string-append *pathway-root-dir* "external-index.rkt"))
 
 (define *external-url-index*
-  (if (file-exists? *external-url-index-file*)
-      (call-with-input-file *external-url-index-file* read)
-      '()))
+  (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
+    (if (file-exists? f)
+        (call-with-input-file f read)
+        '())))
 
 ;default values
 (define *copyright-name* "Bootstrap:Cosmology")
