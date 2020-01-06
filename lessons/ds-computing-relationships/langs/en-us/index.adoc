@@ -16,6 +16,7 @@ dataset, and write up their findings
 
 @worksheet-include{ds-questions-n-defs/xtra/lang-prereq.adoc}
 |===
+
 == Introduction (Time 10 minutes)
 
 “Do smaller animals get adopted faster? Do younger animals?” We
@@ -33,7 +34,9 @@ relationship by finding the correlation.
 
 Open your “Animals Dataset” starter file. (If you do not have
 this file, or if something has happened to it, you can always
-make a new copy.)
+make a
+@link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L,
+new copy}.)
 
 == Linear Regression (Time 30 minutes)
 
@@ -42,10 +45,10 @@ make a new copy.)
 After our last Unit, we are left with two questions:
 
 - Is there a positive or negative relationship between our two
-  variables? In other words, “where do we draw the line of best
+  variables? In other words, “_where do we draw_ the line of best
   fit?"
 - How do we measure the strength of that relationship? In other
-  words, “how well does the line allow us to make predictions?"
+  words, “_how well_ does the line allow us to make predictions?"
 
 Data scientists use a statistical method called @vocab{linear
 regression} to search for certain kinds of relationships in a
@@ -56,16 +59,24 @@ little “up” or “down”. Linear regression is the math behind the
 line of best fit.
 
 [.lesson-instruction]
-You can see this in action, in this interactive simulation. Try
+--
+You can see this in action, in this
+@link{https://www.geogebra.org/m/ZcVIxKtF, interactive
+simulation). Try
 moving the blue point “P”, and see what effect it has on the red
 line.
-+
-- Could the regression line ever be above or below all the
+
+- Could the regression line ever be above or below _all_ the
   points? Why or why not?
 - What’s the largest r-value you can get? What do you think that
-  number means? Give students some time to experiment here! Can
-  your students come up with rules or suggestions for how to
-  minimize error?
+  number means? 
+--
+
+////
+Give students some time to experiment here! Can
+your students come up with rules or suggestions for how to
+minimize error?
+////
 
 We can compute our own predictor line in Pyret, plot it on top of
 a scatterplot, and even get the equation for that line:
@@ -75,7 +86,7 @@ a scatterplot, and even get the equation for that line:
 # lr-plot :: (t :: Table, ls :: String, xs :: String, ys :: String) -> Image
 ----
 
-`lr-plot` is a function that takes a Table and the names of 3 columns:
+`lr-plot` is a function that takes a Table and the names of *3 columns*:
 
 - `ls` -- the name of the column to use for _labels_ (e.g. “names
   of pets”)
@@ -100,8 +111,9 @@ variable_ and the y-variable is referred to as the _response or
 In the Interactions Area, create an
 `lr-plot` for our `animals-table`, using `"names"` for the
 labels, `"age"` for the x-axis and `"weeks"` for the y-axis. You
-can learn more about how a predictor is created by watching this
-video.
+can learn more about how a predictor is created by watching
+@link{https://www.youtube.com/watch?v=lZ72O-dXhtM, this
+video}.
 
 @span{.right}{@image{images/scatter-plot.png, "", 400}}
 
@@ -111,7 +123,7 @@ best fit} drawn on top. We can also see the equation for that line
 (in red), in the form _y = mx + b_. In this plot, we can see that the
 slope of the line is 0.714, which means that on average, each
 extra year of age results in an extra 0.714 weeks of waiting to
-be adopted. By plugging in an animal’s age for x, we can make a
+be adopted. By plugging in an animal’s age for _x_, we can make a
 _prediction_ about how many weeks it will take to be adopted.
 
 [.lesson-instruction]
@@ -128,7 +140,7 @@ they might make a useful prediction in the range of that data,
 but once we try to extrapolate beyond that data we quickly get
 into trouble!
 
-These charts also include something called an r-value at the top
+These charts also include something called an @vocab{r}-value at the top
 (in blue), which always seems to be between −1 and 1. What do you
 think this number means?
 
@@ -143,7 +155,7 @@ pounds, because animals get heavier as they grow up. If it’s
 negative, it means the y-values go down as the x-values go up.
 *The strength of a correlation is the distance from zero*: an
 r-value of zero means there is no correlation at all, and
-stronger correlations will be closer to -1 or 1.
+stronger correlations will be closer to −1 or 1.
 
 - What is the r-value for `age` vs. `weeks` for our entire shelter
   population? What about for just the cats? What does this
@@ -170,9 +182,9 @@ of data may be “noisier” than others, and in some fields an
 r-value of ±0.50 might be considered impressively strong!
 
 [.lesson-instruction]
-Turn to Page 48. For each plot, circle the display that has the
-best predictor. Then, give that predictor a grade between −1 and
-1.
+Turn to @worksheet-link{workbook-pages/grading-predictors.adoc}.
+For each plot, circle the display that has the best predictor.
+Then, give that predictor a grade between −1 and 1.
 
 You may notice another value, called R². This value describes the
 _percentage of the variation in the y-axis that is explained by
@@ -187,7 +199,7 @@ AP Statistics class.
 
 [.lesson-instruction]
 In the Interactions Area, use linear regression to answer the following questions:
-- What correlates most strongly with the time it takes an animal
+- What correlates _most strongly_ with the time it takes an animal
   to be adopted: the animal’s age, or weight?
 - Is age more strongly correlated with adoption time for dogs
   than for cats?
@@ -201,10 +213,11 @@ adopt that cat. The r-value was 0.566, confirming that the
 correlation is positive and indicating moderate strength.
 
 [.lesson-instruction]
-Turn to Page 50 to see how Data Scientists would write up the
-finding involving cats’ age and adoption time. Write up two other
-findings from the linear regressions you performed on this
-dataset.
+Turn to
+@worksheet-link{workbook-pages/regression-analysis-in-animals-dataset.adoc}
+to see how Data Scientists would write up the finding involving
+cats’ age and adoption time. Write up two other findings from the
+linear regressions you performed on this dataset.
 
 ////
 Have students read their text aloud, to get comfortable with the phrasing.
@@ -213,8 +226,10 @@ Have students read their text aloud, to get comfortable with the phrasing.
 How well can you interpret the results of a linear regression analysis?
 
 [.lesson-instruction]
-Turn to Page 49, and match the write up on the left with the line
-of best fit and r-value on the right.
+Turn to
+@worksheet-link{workbook-pages/reading-regression-lines-n-rvalues.adoc},
+and match the write up on the left with the line of best fit and
+r-value on the right.
 
 [.lesson-point]
 Correlation does NOT imply causation.
@@ -223,9 +238,10 @@ It’s worth revisiting this point again. It’s easy to be seduced
 by large r-values, but Data Scientists know that correlation can
 be accidental! Here are some real-life correlations that have
 absolutely no causal relationship:
+
 - “Number of people who drowned after falling out of a fishing
   boat” v. “Marriage rate in Kentucky” (R = 0.98)
-- “Average per-person consumption of chicken” v. “US crude oil
+- “Average per-person consumption of chicken” v. “U.S. crude oil
   imports” (R = 0.95)
 - “Marriage rate in Wyoming” v. “Domestic production of cars”
   (R = 0.99)
@@ -239,18 +255,22 @@ see more!
 == Your Dataset (Time 40 minutes)
 
 [.lesson-instruction]
-Turn back to Page 45, where you listed possible correlations. Use
-Table Plans and the Design Recipe to investigate these
-correlations. If you need blank Table Plans or Design Recipes,
-you can find them at the back your workbook, just before the
-Contracts.
+Turn back to
+@worksheet-link{ds-visualizing-relationships/workbook-pages/correlations-in-my-dataset.adoc},
+where you listed possible correlations. Use Table Plans and the
+Design Recipe to investigate these correlations. If you need
+blank Table Plans or Design Recipes, you can find them at the
+back your workbook, just before the Contracts.
 
 [.lesson-instruction]
 What correlations did you find? Did you need to filter out
 certain rows in order to get those correlations? Write up your
-findings by filling out Page 51.
+findings by filling out
+@worksheet-link{workbook-pages/regression-analysis-in-my-dataset.adoc}.
 
+////
 Have several students read their findings aloud.
+////
 
 == Closing (Time 10 minutes)
 
@@ -268,5 +288,5 @@ of data.
 
 == Additional Exercises:
 
-Describing Relationships-1
-Describing Relationships-2
+- @worksheet-link{workbook-pages/describing-relationships-1.pdf, Describing Relationships 1}
+- @worksheet-link{workbook-pages/describing-relationships-2.pdf, Describing Relationships 2}
