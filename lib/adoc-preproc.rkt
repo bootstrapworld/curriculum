@@ -84,7 +84,9 @@
                       [in-string? #f]
                       [in-escape? #f])
              (let ([c (read-char i)])
-               (cond [in-escape? (loop (cons c r) #f nesting in-string? #f)]
+               (cond [(eof-object? c)
+                         (ferror ' read-group "Runaway directive ~a" directive)]
+                     [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                      [(char=? c #\\)
                       (loop (cons c r) #f nesting in-string? #t)]
                      [in-string?
@@ -126,7 +128,9 @@
           (let loop2 ([j i] [in-string? #f] [in-escape? #f])
             (if (>= j n) (loop j (cons (substring g i j) r))
                 (let ([c (string-ref g j)])
-                  (cond [in-escape?
+                  (cond [(eof-object? c)
+                         (ferror ' read-commaed-group "Runaway directive ~a" directive)]
+                        [in-escape?
                           (loop2 (+ j 1) in-string? #f)]
                         [(char=? c #\\)
                          (loop2 (+ j 1) in-string? #t)]
