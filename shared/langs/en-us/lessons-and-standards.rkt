@@ -75,6 +75,7 @@
     ("Inequalities2" "BS-DR.3")
     ("Inequalities2" "HSF.IF.A.2")
     ("IntroToIDE" "OK.MAP.1")
+    ("IntroToContracts" "OK.PA.A.1.1")
     ("OrderOfOperations1" "HSA.SSE.A.2")
     ("OrderOfOperations1" "HSA.SSE.B")
     ("OrderOfOperations1" "MP.1")
