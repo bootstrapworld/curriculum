@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-03 # last modified
+LASTMOD=2020-01-07 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -147,11 +147,19 @@ function insertstylecss() {
     $f
 }
 
+function insertnarrativecss() {
+  local f=$1
+  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  $SED -i \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'narrative.css" \/>/' \
+    $f
+}
+
 function insertprintcss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wkhtmltopdf.css">/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wkhtmltopdf.css" \/>/' \
     $f
 }
 
@@ -415,6 +423,7 @@ function buildlessonplan() {
       addanalytics index.html
       resolveabbrevs index.html
       moveheaderlogopos index.html
+      insertnarrativecss index.html
       cleanuptitle index.html
     fi
     if ! $NOPDF; then
@@ -528,6 +537,7 @@ function buildpathwaynarrative() {
       insertstylecss index.shtml
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
+      insertnarrativecss index.shtml
       #cleanuptitle index.shtml
     fi
 
