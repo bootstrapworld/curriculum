@@ -1,9 +1,9 @@
 (
  "IntroToIDE"
-; "IntroToCoE"
-; "IntroToContracts"
+ "IntroToCoE"
+ "IntroToContracts"
 ; "FunctionComposition1"
 ; "DefiningValues1"
-; "flags-of-the-world"
+ "flags-of-the-world"
 ; "FunctionApplications2"
 )
