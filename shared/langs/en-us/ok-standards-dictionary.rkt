@@ -280,6 +280,198 @@ the denominator when necessary."
  ("OK.A1.D.2.4"
   "Apply probability concepts to real-world situations to make informed decisions."
  )
+
+ ; OK CS Standards
+
+ ("OK.3.CS.HS.01" 
+  "Model how information flows through hardware and software to accomplish tasks."
+ )
+ ("OK.4.CS.HS.01" 
+  "Model that information is translated, transmitted, and processed in order to flow through hardware and software."
+ )
+ ("OK.5.CS.HS.01" 
+  "Model that information is translated into bits in order to transmit and process between software to accomplish tasks."
+ )
+ ("OK.3.CS.T.01" 
+  "Identify, using accurate terminology, simple hardware and software problems that may occur during everyday use, discuss problems with peers and adults, and apply strategies for solving these problems."
+ )
+ ("OK.4.CS.T.01" 
+  "Identify, using accurate terminology, simple hardware and software problems that may occur during everyday use, discuss problems with peers and adults, and apply strategies for solving these problems."
+ )
+ ("OK.5.CS.T.01" 
+  "Identify, using accurate terminology, simple hardware and software problems that may occur during everyday use. Discuss problems with peers and adults, apply strategies for solving these problems and explain why the strategy should work."
+ )
+ ("OK.3.NI.NCO.01" 
+  "Recognize that information is sent and received over physical or wireless paths."
+ )
+ ("OK.4.NI.NCO.01" 
+  "Explain how information is sent and received across physical or wireless paths."
+ )
+ ("OK.5.NI.NCO.01" 
+  "Model how information is broken down into packets and transmitted through multiple devices over networks and the Internet, and reassembled at the destination."
+ )
+ ("OK.3.NI.C.01" 
+  "Identify problems that relate to inappropriate use of computing devices and networks."
+ )
+ ("OK.4.NI.C.01" 
+  "Identify and explain issues related to responsible use of technology and information, and describe personal consequences of inappropriate use."
+ )
+ ("OK.5.NI.C.01" 
+  "Discuss real-world cybersecurity problems and identify strategies for how personal information can be protected."
+ )
+ ("OK.3.DA.S.01" 
+  "Recognize that different types of information are stored in different formats that have associated programs and varied storage requirements."
+ )
+ ("OK.4.DA.S.01"
+  "Choose different storage locations based on the type of file, storage requirements, and sharing requirements."
+ )
+ ("OK.5.DA.S.01" 
+  "Evaluate trade-offs, including availability and quality, based on the type of file, storage requirements, and sharing requirements."
+ )
+ ("OK.3.DA.CVT.01" 
+  "Collect and organize data in various visual formats."
+ )
+ ("OK.4.DA.CVT.01" 
+  "Organize and present collected data visually to highlight comparisons."
+ )
+ ("OK.5.DA.CVT.01" 
+  "Organize and present collected data to highlight comparisons and support a claim."
+ )
+ ("OK.3.DA.IM.01" 
+  "With guidance, utilize data to make predictions and discuss whether there is adequate data to make reliable predictions."
+ )
+ ("OK.4.DA.IM.01" 
+  "Determine how the accuracy of conclusions are influenced by the amount of data collected."
+ )
+ ("OK.5.DA.IM.01" 
+  "Use data to highlight or propose cause and effect relationships, predict outcomes, or communicate an idea."
+ )
+ ("OK.3.AP.A.01" 
+  "Compare multiple algorithms for the same task."
+ )
+ ("OK.4.AP.A.01" 
+  "Compare and refine multiple algorithms for the same task."
+ )
+ ("OK.5.AP.A.01" 
+  "Compare and refine multiple algorithms for the same task and determine which is the most efficient."
+ )
+ ("OK.3.A.V.01" 
+  "Create programs that use variables to store and modify grade level appropriate data."
+ )
+ ("OK.4.AP.V.01" 
+  "Create programs that use variables to store and modify grade level appropriate data."
+ )
+ ("OK.5.AP.V.01" 
+  "Create programs that use variables to store and modify grade level appropriate data."
+ )
+ ("OK.3.AP.C.01" 
+  "Create programs using a programming language that utilize sequencing, repetition, conditionals, and variables to solve a problem or express ideas both independently and collaboratively."
+ )
+ ("OK.4.AP.C.01" 
+  "Create programs using a programming language that utilize sequencing, repetition, conditionals and variables using math operations manipulate values to solve a problem or express ideas both independently and collaboratively."
+ )
+ ("OK.5.AP.C.01" 
+  "Create programs using a programming language that utilize sequencing, repetition, conditionals, event handlers and variables using math operations to manipulate values to solve a problem or express ideas both independently and collaboratively."
+ )
+ ("OK.3.AP.M.01" 
+  "Decompose the steps needed to solve a problem into a precise sequence of instructions."
+ )
+ ("OK.4.AP.M.01"
+  "Decompose large problems into smaller, manageable subproblems to facilitate the program development process."
+ )
+ ("OK.5.AP.M.01" 
+  "Decompose large problems into smaller, manageable subproblems and then into a precise sequence of instructions."
+ )
+ ("OK.3.AP.M.02" 
+  "With grade appropriate complexity, modify, remix, or incorporate portions of an existing program into one's own work, to develop something new or add more advanced features."
+ )
+ ("OK.4.AP.M.02" 
+  "With grade appropriate complexity, modify, remix, or incorporate portions of an existing program into one's own work, to develop something new or add more advanced features."
+ )
+ ("OK.5.AP.M.02" 
+  "With grade appropriate complexity, modify, remix, or incorporate portions of an existing program into one's own work, to develop something new or add more advanced features."
+ )
+ ("OK.3.AP.PD.01" 
+  "Use an iterative process to plan the development of a program while solving simple problems."
+ )
+ ("OK.4.AP.PD.01" 
+  "Use an iterative process to plan the development of a program that includes user preferences while solving simple problems."
+ )
+ ("OK.5.AP.PD.01" 
+  "Use an iterative process to plan the development of a program that includes others' perspectives and user preferences while solving simple problems."
+ )
+ ("OK.3.AP.PD.02" 
+  "Observe intellectual property rights and give appropriate credit when creating or remixing programs."
+ )
+ ("OK.4.AP.PD.02" 
+  "Observe intellectual property rights and give appropriate credit when creating or remixing programs."
+ )
+ ("OK.5.AP.PD.02" 
+  "Observe intellectual property rights and give appropriate credit when creating or remixing programs."
+ )
+ ("OK.3.AP.PD.03" 
+  "Analyze and debug a program that includes sequencing, repetition and variables in a programming language."
+ )
+ ("OK.4.AP.PD.03" 
+  "Analyze, create, and debug a program that includes sequencing, repetition, conditionals and variables in a programming language."
+ )
+ ("OK.5.AP.PD.03" 
+  "Analyze, create, and debug a program that includes sequencing, repetition, conditionals and variables in a programming language."
+ )
+ ("OK.3.AP.PD.04" 
+  "Communicate and explain your program development using comments, presentations and demonstrations."
+ )
+ ("OK.4.AP.PD.04" 
+  "Communicate and explain your program development using comments, presentations and demonstrations."
+ )
+ ("OK.5.AP.PD.04"
+  "Communicate and explain your program development using comments, presentations and demonstrations."
+ )
+ ("OK.3.IC.C.01" 
+  "Identify computing technologies that have changed the world, and express how those technologies influence, and are influenced by, cultural practices."
+ )
+ ("OK.4.IC.C.01" 
+  "Give examples of computing technologies that have changed the world, and express how those technologies influence, and are influenced by, cultural practices."
+ )
+ ("OK.5.IC.C.01" 
+  "Give examples and explain how computing technologies have changed the world, and express how computing technologies influence, and are influenced by, cultural practices."
+ )
+ ("OK.3.IC.C.02" 
+  "Identify possible problems and how computing devices have built in features for increasing accessibility to all users."
+ )
+ ("OK.4.IC.C.02" 
+  "Brainstorm problems and ways to improve computing devices to increase accessibility to all users."
+ )
+ ("OK.5.IC.C.02" 
+  "Develop, test and refine digital artifacts to improve accessibility and usability."
+ )
+ ("OK.3.IC.SI.01" 
+  "Develop a code of conduct, explain, and practice grade-level appropriate behavior and responsibilities while participating in an online community. Identify and report inappropriate behavior."
+ )
+ ("OK.4.IC.SI.01" 
+  "Develop a code of conduct, explain, and practice grade-level appropriate behavior and responsibilities while participating in an online community. Identify and report inappropriate behavior."
+ )
+ ("OK.5.IC.SI.01" 
+  "Develop a code of conduct, explain, and practice grade-level appropriate behavior and responsibilities while participating in an online community. Identify and report inappropriate behavior."
+ )
+ ("OK.3.IC.SI.02" 
+  "Identify how computational products may be, or have been, improved to incorporate diverse perspectives."
+ )
+ ("OK.4.IC.SI.02" 
+  "As a team, consider each others perspectives on improving a computational product."
+ )
+ ("OK.5.IC.SI.02" 
+  "As a team, collaborate with outside resources (other grade levels, online collaborative spaces) to include diverse perspectives to improve computational products."
+ )
+ ("OK.3.IC.SLE.01" 
+  "Identify types of digital data that may have intellectual property rights that prevent copying or require attribution."
+ )
+ ("OK.4.IC.SLE.01" 
+  "Discuss the social impact of violating intellectual property rights."
+ )
+ ("OK.5.IC.SLE.01" 
+  "Observe intellectual property rights and give appropriate credit when using resources."
+ )
  ("OK.6.CS.D.01" 
   "Evaluate existing computing devices and recommend improvements to design based on analysis of personal interaction with the device."
  )
