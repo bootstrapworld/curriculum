@@ -561,7 +561,8 @@ tr th.tableblock code {
 }
 
 .fitb,
-.vblank,
+.fitbruby,
+.vskip,
 .blankline {
   display: inline-block;
   min-height: 15px;
@@ -569,24 +570,43 @@ tr th.tableblock code {
   text-align: center;
 }
 
+.fitbruby {
+   position: relative;
+   line-height: 20pt;
+   margin-bottom: 12pt;
+   padding: 0pt 0pt;
+}
+
 .fitb,
+.fitbruby,
 .blankline {
   border-bottom: solid 1px black;
 }
 
-.vblank,
+.vskip,
 .blankline {
   margin-top: 25px;
 }
 
 .studentAnswer::before,
 .fitb::before,
-.vblank::before,
+.fitbruby::before,
+.vskip::before,
 .blankline::before {
   content: '\00200b';
 }
 
-.vblank,
+.ruby {
+  position: absolute;
+  bottom: -18pt;
+  left: 0pt;
+  font-size: 8pt;
+  font-weight: normal;
+  width: 100%;
+  /* text-align: center; */
+}
+
+.vskip,
 .blankline {
   width: 100%;
 }
