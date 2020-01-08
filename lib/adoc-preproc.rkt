@@ -799,6 +799,20 @@
                                                   (format "style=\"width: ~a\"" width))
                                 text
                                 (create-end-tag "span")) o))]
+                         [(string=? directive "fitbruby")
+                          (let* ([width (string-trim (read-group i directive))]
+                                 [text (string-trim (read-group i directive))]
+                                 [ruby (string-trim (read-group i directive))])
+                            (display
+                              (string-append
+                                (create-begin-tag "span" ".fitbruby" #:attribs
+                                                  (format "style=\"width: ~a\"" width))
+                                (string-append
+                                  text
+                                  (create-begin-tag "span" ".ruby")
+                                  ruby
+                                  (create-end-tag "span"))
+                                (create-end-tag "span")) o))]
                          [(assoc directive *macro-list*)
                           => (lambda (s)
                                (display (cadr s) o))]
