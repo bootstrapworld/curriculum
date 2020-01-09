@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-07 # last modified
+LASTMOD=2020-01-08 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -178,7 +178,7 @@ function moveheaderlogopos() {
     temp.txt
   $SED -i \
     -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
-    -e '/^<div id="preamble">/r temp.txt' \
+    -e '/^<div id="content">/r temp.txt' \
     $f
 }
 
@@ -228,6 +228,7 @@ function resolveabbrevs() {
     -e 's/&#8656;/\&lt;=/g' \
     -e 's/&#8594;/-\&gt;/g' \
     \
+    -e 's/^\(<div id="preamble\)">/\1_disabled">/' \
     $f
   if "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
