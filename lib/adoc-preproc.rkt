@@ -368,11 +368,11 @@
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
-  (display "%CURRICULUMCOMMENT\n" o)
+  (display "%CURRICULUMCOMMENT!\n" o)
   (display "++++\n" o)
   (display prose o)
   (display "\n++++\n" o)
-  (display "%ENDCURRICULUMCOMMENT" o))
+  (display "%ENDCURRICULUMCOMMENT!" o))
 
 (define (clean-up-image-text text)
   (when (char=? (string-ref text 0) #\")
@@ -380,7 +380,7 @@
   (let ([n (string-length text)])
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
-  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA"))
+  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA!"))
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -1000,7 +1000,7 @@
                (string-join
                  (map (lambda (dict)
                         (enclose-tag "option" ""
-                          #:attribs (format " value=\"standards-~a\"" dict)
+                          #:attribs (format "value=\"standards-~a\"" dict)
                           dict))
                       *dictionaries-represented*)
                  "\n")) o)
@@ -1144,10 +1144,10 @@
 
 (define (sexp->math e)
   (string-append
-    (format "%CURRICULUMSCRIPT")
-    (format "%BEGINCURRICULUMSCRIPT\\displaystyle ")
+    (format "%CURRICULUMSCRIPT!")
+    (format "%BEGINCURRICULUMSCRIPT!\\displaystyle ")
     (sexp->arith e)
-    (format "%ENDCURRICULUMSCRIPT")))
+    (format "%ENDCURRICULUMSCRIPT!")))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")
