@@ -2,8 +2,7 @@
 
 @lesson-description{Students apply their knowledge of the Pythagorean Theorem and Circles of Evaluation to develop a function for the distance formula.}
 
-
-[.left-header,cols="20a,80a", stripes=none]
+[@lesson-intro-table]
 |===
 @prereqs-stds{PiecewiseFunctions2}
 |Lesson Goals
@@ -11,7 +10,6 @@
 
 * Explain how the distance formula is related to the Pythagorean theorem.
 * Write a function for the distance formula.
-
 
 |Student-Facing Lesson Goals
 |
@@ -38,7 +36,7 @@ ifeval::["{proglang}" == "wescheme"]
 
 * Sample game file - with distance lines (@link{https://www.wescheme.org/view?publicId=0bCivugY3P, WeScheme})
 endif::[]
-ifeval::["{proglang}" == "pyret"] 
+ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1zl_7vW2KqfRsL7zubjCCNXo24gwfxRHgRzD7M7Ox6NE, Google Slides})
 
 * Sample game file - no distance lines (@link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Pyret})
@@ -55,7 +53,7 @@ endif::[]
 ifeval::["{proglang}" == "wescheme"]
 * Design Recipe: onscreen? (@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, PDF})
 endif::[]
-ifeval::["{proglang}" == "pyret"] 
+ifeval::["{proglang}" == "pyret"]
 * Design Recipe: is-onscreen (@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, PDF})
 endif::[]
 
@@ -77,16 +75,14 @@ Connection Activities
 
 |===
 
-
-
 == Get Ready:
 
-Students should have their workbook, pencil, and be logged into 
+Students should have their workbook, pencil, and be logged into
 ifeval::["{proglang}" == "wescheme"]
-@link{https://www.wescheme.org, WeScheme} 
+@link{https://www.wescheme.org, WeScheme}
 endif::[]
-ifeval::["{proglang}" == "pyret"] 
-@link{https://code.pyret.org, code.pyret.org} 
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}
 endif::[]
 on their computer.
 
@@ -107,10 +103,9 @@ endif::[]
 What do you Notice? What do you Wonder?
 ****
 
-
 == Discuss: (10 min)
 
-* What seems to be missing from this game? 
+* What seems to be missing from this game?
 +
 _The characters aren't doing anything when they collide._
 * Why are the characters moving by each other?
@@ -134,7 +129,6 @@ Have students explore using the `line-length` function in the @vocab{Interaction
 ****
 What do you Notice? What do you Wonder?
 ****
-
 
 [.strategy-box]
 .Extension
@@ -180,7 +174,7 @@ You can take this activity further by having students prove the distance formula
 Have students use this @worksheet-link{workbook-pages/FrayerModelDistance.pdf, Frayer Model} to model the distance formula with the Circles of Evaluation and translate it to code. +
 {empty} +
 
-Using @worksheet-link{workbook-pages/DistanceFormula1-WB1.adoc, Design Recipe: distance}, 
+Using @worksheet-link{workbook-pages/DistanceFormula1-WB1.adoc, Design Recipe: distance},
 have students write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
 {empty} +
 
@@ -188,14 +182,12 @@ Students can test their `distance` function using *Pythagorean triples*, such as
 
 == Create: (10 min)
 
-Using 
+Using
 ifeval::["{proglang}" == "wescheme"]
-@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: collision?}, 
+@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: collision?},
 endif::[]
 ifeval::["{proglang}" == "pyret"]
-@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: is-collision}, 
+@worksheet-link{workbook-pages/DistanceFormula1-WB2.adoc, Design Recipe: is-collision},
 endif::[]
-have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.   
-
-
+have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.
 

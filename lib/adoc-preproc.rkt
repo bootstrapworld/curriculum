@@ -22,7 +22,7 @@
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
 (define *workbook-pagenums*
-  (if (getenv "LESSONPLAN") 
+  (if (getenv "LESSONPLAN")
       (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt")])
         (if (file-exists? f)
             (call-with-input-file f read)
@@ -288,14 +288,15 @@
 
 (define (display-standards-row o)
   ;(printf "doing display-standards-row\n")
-  (display "| " o)
-  (display-standards-selection o)
-  (display 
-    (mstring
-      "|"
-      ""
-      "include::./index-standards.asc[]"
-      "") o))
+  (unless (empty? *standards-met*)
+    (display "| " o)
+    (display-standards-selection o)
+    (display
+      (mstring
+        "|"
+        ""
+        "include::./index-standards.asc[]"
+        "") o)))
 
 (define (include-standards o)
   (display
@@ -312,7 +313,7 @@
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
 
-(define (workbook-pagenum lesson snippet) 
+(define (workbook-pagenum lesson snippet)
   (let* ([snippet.adoc
            (path->string
              (path-replace-extension snippet ".adoc"))]
@@ -329,7 +330,7 @@
              [snippet.pdf (path-replace-extension f ".pdf")])
         (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
               [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
-    (format "link:{pathwayrootdir}~a[~a~a~a]" g 
+    (format "link:{pathwayrootdir}~a[~a~a~a]" g
             link-text
             (if (getenv "LESSONPLAN")
                 (let ([pagenum (workbook-pagenum lesson snippet)])

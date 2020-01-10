@@ -2,9 +2,7 @@
 
 @lesson-description{Students learn why and how to create their own functions.}
 
-
-
-[.left-header,cols="20a,80a", stripes=none]
+[@lesson-intro-table]
 |===
 @prereqs-stds{FunctionApplications1}
 |Lesson Goals
@@ -13,18 +11,15 @@
 * Describe the usefulness of vocab{function}s.
 * Create their own functions and vocab{example}s given the constraints of a problem.
 
-
 |Student-Facing Lesson Goals
 |
 * I can explain why a function is useful.
 * I can plan and create my own function with examples.
 
-
 |Key Points for the Facilitator
 |
 * This lesson represents a big shift in thinking.  After some practice, students will not be limited to pre-existing functions!
-* Take plenty of time for the @vocab{Design Recipe} as students will return to it frequently in future lessons. 
-
+* Take plenty of time for the @vocab{Design Recipe} as students will return to it frequently in future lessons.
 
 |Prerequisites
 |
@@ -36,9 +31,9 @@
 |
 
 ifeval::["{proglang}" == "wescheme"]
-* Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides}) 
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides})
 endif::[]
-ifeval::["{proglang}" == "pyret"] 
+ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
 endif::[]
 
@@ -89,21 +84,19 @@ answers})
 Functions & Relations} (Desmos Polygraph Activity)
 * @link{https://quizizz.com/admin/quiz/582b7390e8e0c0c201647d9d/functions, Functions} (Quizizz)
 * @link{https://quizizz.com/admin/quiz/582f0e34b805cc5c6608d326/function-notation, Function Notation} (Quizizz)
- 
+
 ////
 
 |===
 
-
-
 == Get Ready:
 
-Students should have their workbook, pencil, and be logged into 
+Students should have their workbook, pencil, and be logged into
 ifeval::["{proglang}" == "wescheme"]
-@link{https://www.wescheme.org, WeScheme} 
+@link{https://www.wescheme.org, WeScheme}
 endif::[]
-ifeval::["{proglang}" == "pyret"] 
-@link{https://code.pyret.org, code.pyret.org} 
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}
 endif::[]
 on their computer.
 
@@ -153,9 +146,9 @@ _Answers vary: Pattern matching, copy and paste_
 * *What shortcut did we use before when we wanted to use the same code over and over?* +
 _We defined values in the Definitions area._
 
-=== Inquiry Based Instruction  
+=== Inquiry Based Instruction
 We've learned how to define *values* when we want to create a shortcut to reuse the same code over and over. +
-{empty} + 
+{empty} +
 
 For example:
 ifeval::["{proglang}" == "wescheme"]
@@ -171,14 +164,14 @@ endif::[]
 {empty} +
 
 ifeval::["{proglang}" == "pyret"]
-The keyword *fun* is used to define a new function.  At the _end_ of a function definition, we use the keyword *end*. + 
+The keyword *fun* is used to define a new function.  At the _end_ of a function definition, we use the keyword *end*. +
 endif::[]
 {empty} +
 
 *Word Problem: Write a function called `gt` that takes in a Number and produces a solid, green triangle of that given size.*
 
 Have students follow along on the @worksheet-link{workbook-pages/FastFunctions.pdf, Fast Functions} handout. +
-{empty} + 
+{empty} +
 
 * *1. Write the @vocab{contract} for this new function by looking at the word problem.* +
 ** What does `gt` take in? +
@@ -186,15 +179,15 @@ _A Number_
 ** What does `gt` give back? +
 _An Image. Students may say "a triangle", follow up by asking what data type that triangle will be (Number, String, or Image)_
 * *2. Write some examples of how this function should work.*
-** If I typed 
+** If I typed
 ifeval::["{proglang}" == "wescheme"]
 `(gt 40)`
 endif::[]
 ifeval::["{proglang}" == "pyret"]
-`gt(40)` 
+`gt(40)`
 endif::[]
 , what would I want the program to do? +
-_I'd want the computer the execute the code 
+_I'd want the computer the execute the code
 ifeval::["{proglang}" == "wescheme"]
 `(triangle 40 "solid" "green")`._ +
 endif::[]
@@ -227,7 +220,7 @@ endif::[]
 *Key Points:*
 
 * Writing the examples is like "showing your work" in math class.
-* Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.  
+* Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
 * Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
 
 Now that students have defined `gt` have them save their program as 'Defining Functions' and test out their newly created function in the Interactions window.
@@ -236,7 +229,7 @@ Now that students have defined `gt` have them save their program as 'Defining Fu
 
 * *What is the domain for `gt`?* +
 _Number_
-* *Why might someone think the domain for `gt` is 
+* *Why might someone think the domain for `gt` is
 ifeval::["{proglang}" == "wescheme"]
 `Number String String`?* +
 endif::[]
@@ -256,11 +249,9 @@ _Because that's the domain of `triangle`.  The function `gt` uses `triangle`, bu
 == Create/Apply: (15 min)
 
 *Design a problem for a function that takes in one input and returns a shape that uses that input.* +
-Your function's input could be a Number, as in the two examples, or a String.  
+Your function's input could be a Number, as in the two examples, or a String.
 {empty} +
 
 * Write two examples and a definition for your function
 * Complete the Circles of Evaluation mapping for the examples of your function.
-
-
 

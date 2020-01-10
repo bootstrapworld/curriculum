@@ -2,9 +2,7 @@
 
 @lesson-description{Students create the functions that will control animation in parts of their game.}
 
-
-
-[.left-header,cols="20a,80a", stripes=none]
+[@lesson-intro-table]
 |===
 @prereqs-stds{DefiningFunctions3}
 |Lesson Goals
@@ -20,8 +18,8 @@
 
 |Key Points for the Facilitator
 |
-* Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.  
-* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we press the Run button!  
+* Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
+* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we press the Run button!
 
 |Prerequisites
 |
@@ -43,8 +41,6 @@ endif::[]
 
 |===
 
-
-
 == Get Ready:
 
 Students should have their computer, contracts page, and pencil.  Students should have their own *game file* open in a separate window or tab.
@@ -52,7 +48,7 @@ Students should have their computer, contracts page, and pencil.  Students shoul
 == Launch: (5 min)
 
 * How does animation work?
-* Why do we see movement from still images? 
+* Why do we see movement from still images?
 +
 _Our eyes fill in the gaps between rapidly changing images._
 * How might this apply to our game? _If we change image @vocab{coordinate}s a little bit at a time, they will appear to move._
@@ -64,7 +60,7 @@ _Our eyes fill in the gaps between rapidly changing images._
 Select 2 student volunteers - one to be TARGET, one to be DANGER.  Start with just TARGET.
 
 * TARGET moves a step to the left when they hear "update target" followed by a number.
-* We make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.  
+* We make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.
 
 *How quickly could I get TARGET to move across the classroom?*
 
@@ -77,25 +73,25 @@ After practicing with TARGET, add DANGER in.
 
 You'll have to call quickly to TARGET and DANGER, but it is very repetitive and tedious, and TARGET and DANGER won't be moving very fast!
 
-* *What did you notice about the movement of TARGET and DANGER?  What was changing about them?* 
+* *What did you notice about the movement of TARGET and DANGER?  What was changing about them?*
 +
 _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
 
-* *What would have happened if we'd added PLAYER?* 
+* *What would have happened if we'd added PLAYER?*
 +
 _It would have been more difficult to move them all simultaneously._
 
-* *What jobs could we hand over to the computer to make it possible for us to play the game?* 
+* *What jobs could we hand over to the computer to make it possible for us to play the game?*
 +
 _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
 
 == Practice (15 min)
 
-Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.  
+Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.
 
-Guide students as they complete @worksheet-link{workbook-pages/FunctionApplications2-WB1.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.  
+Guide students as they complete @worksheet-link{workbook-pages/FunctionApplications2-WB1.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.
 
-When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!  
+When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
 
 == Apply (15 min)
 
@@ -109,5 +105,4 @@ ifeval::["{proglang}" == "wescheme"]
 Want 2-D movement?  A supplemental lesson @link{https://www.bootstrapworld.org/materials/fall2019/courses/algebra/en-us/units/Supplemental/index.html#lesson_Structs, linked here} provides information on how to modify these functions to allow movement in the x _and_ y directions!
 endif::[]
 ****
-
 
