@@ -1,0 +1,257 @@
+= Introduction to the Programming Environment
+
+@lesson-description{Students learn the basics of using a programming environment.}
+
+
+[.left-header,cols="20a,80a", stripes=none]
+|===
+@prereqs-stds{}
+|Lesson Goals
+|Students will be able to:
+
+* Practice using the programming environment.
+* Collaborate using the Pair Programming model.
+
+
+|Student-Facing Lesson Goals
+|
+* I know the basics of how to use the programming environment.
+* I can explain the difference between the driver and the navigator.  
+
+
+|Required Materials
+|
+* Computers connected to the Internet
+// ifeval::["{proglang}" == "wescheme"]
+// * Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides}) 
+// endif::[]
+// ifeval::["{proglang}" == "pyret"] 
+* Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
+// endif::[]
+
+
+|Preparation
+|
+
+* Students will need one computer per two students.
+* Students will work with a partner. Pair beforehand if desired.
+* Students need a Google account to log in to Pyret.
+
+|===
+
+== Warm Up: 10 minutes
+=== Notice and Wonder
+
+==== Narrative
+
+The purpose of Notice and Wonder is to explicitly give students time to let their brains process what they’re doing and not feel pressured to come up with an answer or response right away.  Once students have gotten used to this procedure, they begin to do it naturally on their own.  “Notice” responses are usually factual observations, such as colors, physical locations, buttons, etc.  “Wonder” responses are usually questions, such as “How can I…?”, “Will we…?”, “Why is…?”, etc. +
+{empty} +
+After students are logged in, they will spend about one minute “Noticing” and one minute “Wondering”.  After discussing the Notice and Wonder responses, they will try some simple math expressions in Pyret intended to expose them to error messages and allow for discussion between partners. +
+{empty} +
+Students should switch Driver/Navigator roles at least once during the lesson.  Some students might be reluctant or nervous about programming, and others may be overly eager and reluctant to share the keyboard.  Giving students roles to play makes it easier for both types of students to meaningfully engage with the material.
+
+==== Launch
+
+ifeval::["{proglang}" == "pyret"] 
+
+Have students go to code.pyret.org, where they'll see the following screen: +
+{empty} +
+
+@image{images/sign-in.png, Pyret Sign In Page, 800, align="center"}
+
+{empty} +
+
+Students should click “Sign in” and select their Google account, allowing any permissions that come up.  They should also bookmark this page as they’ll be using it frequently.
+Next, they’ll see a screen with several options, including: “Open Editor”, “Sign Out”, “Recent Files”, “New File”.  Today, we are just exploring, so we will go straight to the Editor.  Click “Open Editor”. +
+{empty} +
+
+@image{images/new-file.png, Creating a New File, 800, align="center"}
+
+[.left-header,cols="20a,80a", stripes=none]
+|===
+|Open Editor
+|Opens the Editor but does not create a new file.  Good for exploring or trying new things.  The file can be saved later if needed. 
+
+|Recent Files
+|A list of recently opened Pyret files.  When opening a file, be sure to press “Run” before trying to use it.  
+
+|New File
+|Creates a new file with the given name. Opens a new file in the Editor.
+
+|View in Google Drive
+|Opens the Google Drive folder containing the user's Pyret files.
+
+|Sign Out
+|Signs the user out.
+
+|===
+
+Verify that all students have an open Editor screen and that one student’s Google account is displayed on the bottom of the screen, meaning that they signed in successfully. +
+{empty} +
+
+[.left-header,cols="20a,80a", stripes=none]
+|===
+|Definitions Area
+|The left-side window in the Editor.  A place to store code we want to keep.  It will be used more in later lessons.  Code typed here is performed when the “Run” button is pressed. 
+
+|Interactions Area
+|The right-side window in the Editor.  A place to try out code, like scratch paper.  Code typed here clears when the “Run” button is pressed. 
+
+|"Run" button
+|Pressing this button tells the computer to execute, or “Run”, any code in the Definitions area.  It clears the Interactions area, and any results from the Definitions area will then appear in the Interactions area.  It will be used more in later lessons.
+
+|"Stop" button
+|Stops any code that is running.  Usually used if a program is stuck in a loop.
+
+|Pyret dropdown
+|Contains an option to make the text larger and view the documentation.
+
+|File dropdown
+|Contains file management options, such as saving and creating new files.
+
+|Insert button
+|Used for inserting images from Google Drive into Pyret. It will be used more in later lessons.
+
+|===
+
+{empty} +
+
+@image{images/editor.png, Editor, 800, align="center"}
+
+==== Student Task
+1. Take 1-2 minutes to record observations (Notice) with your partner about this new programming environment.  Investigate what you see.  What do you notice?
++
+Have students share what they noticed and display their responses.
+
+2. Take 1-2 minutes to record questions (Wonder) with your partner about the programming environment.  What do you wonder?
++
+Have students share what they wondered and display their responses.
+
+
+==== Synthesis (5 minutes)
+
+Ask students to reflect on the Notice and Wonder responses and respond to each other.
+
+To involve more students in the conversation, consider asking:
+
+* *"Who else noticed this?"* 
+* *"Did anyone have a Wonder that was related to a Notice?"*
+* *"Who else wondered this?"* +
+* *“Did anyone try anything that might answer _____’s Wonder?”* +
+* *“I noticed that you and your partner tried _______. Can you tell us about that?”* +
+
+== Activity 1: 15 Minutes
+=== Let There Be Numbers!
+
+==== Narrative
+
+The purpose of this activity is for students to get practice typing in the programming environment and learn the different parts of that environment.  Students should switch roles frequently during this activity. +
+{empty} + 
+
+*It is expected that students will encounter error messages during this activity.  Remind students to read the error messages and try to figure them out with their partner before asking for help.*
+
+==== Launch
+
+Allow for 10 minutes of partner work and 5 minutes of class discussion.  Walk the room to observe student progress and help solve technical issues where needed.
+
+==== Student Task 
+
+. What's your favorite number? Type it into the Interactions (right-side) window and press the Enter key.
+. Can Pyret handle negative numbers?  Type a negative number into the Interactions window and press the Enter key.
+. What about fractions?  Type an interesting fraction, using the `/` key, then press Enter.  (Example: 2/3).
+.. Do you notice anything different about the result this time? (If not, try another fraction)
+.. Try hovering your mouse over the result.  What happens if you click it? +
+{empty} +
+. Can Pyret add numbers?  Try typing `17+42` into the Interactions window and press Enter.
+.. What happened?
+.. Read the message you received.  What do you think you need to do?
+.. Can Pyret add very large or very small numbers?  Try it out! +
+{empty} +
+. What are some other math operations you think Pyret can do?  Try them out!
+. If you have other ideas to try, use this time to explore.  Be sure to carefully read any messages that appear!
+
+==== Student Response
+
+. Students should see their number appear on the next line.
+. Students should use a hyphen (-) in front of a number to make it negative.
+. Students should see the result appear in a dark red color.  If they click on it, it should switch between decimal and fraction representations.
+. Students should see an error message appear that says “The operator must have whitespace separating it from its operands.”  Students need to space out the expression as such: 17 + 42
+. Answers vary.
+. Students might try typing their name or performing multiple operations in a single line.  Allow them time to read the error messages and communicate with their partner.
+
+==== Anticipated Misconceptions
+
+Students might not read the error messages that appear or assume that they did something "wrong".  Frequently remind students that error messages are there to help us, and that the computer is trying to tell us something.
+
+==== Synthesis
+
+Ask students to share issues they encountered and discoveries they made.  What other math expressions did they try?  How did they react when they saw an error message?
+
+== Activity 2: 15 minutes
+=== Many Solutions
+
+==== Narrative
+
+In this activity, students are given a task to come up with as many ways as possible to get the computer to display the number 42.  The catch is that only unique solutions will count, so the goal is for students to come up with as many unique expressions that will result in 42 as they can. +
+{empty} +
+The use of parentheses will help students come up with more unique expressions.  Pyret does not assume the order of operations, so students will have to be explicit and put parentheses where needed to get the desired result. +
+{empty} +
+The goal is for students to practice their typing, understanding of the coding environment, and number sense.  This activity can be extended with different numbers or requirements that each expression contains at least 2 different math operations.
+
+==== Launch 
+
+Have students use their Interactions (right-side) window to test out expressions, and save successful expressions, each on their own line, in the Definitions (left-side) window.  When they press “Run”, they should see a sequence of 42s appear in the Interactions window.  This will also help them count their expressions.
+
+==== Student Task
+
+With your partner, come up with as many unique expressions that will result in 42 as you can.  Only unique expressions will count (if you have the same expression as another group, neither of you can count it), so be creative! +
+{empty} +
+For example: `40 + 2` would result in 42. +
+{empty} +
+Use the Interactions (right-side) window to test your expressions, and if they are successful, copy and paste them into the Definitions (left-side) window, with each expression on its own line.  Press “Run” occasionally to see how you’re doing!
+
+==== Synthesis
+
+Have each pair of students pair up with another group to compare their work.  If they discover duplicates, they can either carefully delete that line of code, or place a hashtag `#` at the beginning of the line to ignore it, or “turn it off”.  (This makes the line into a “comment”, a line of code that the computer doesn’t read.)
+
+== Summary
+
+In this lesson, students encountered the Pyret programming environment and began to get comfortable with the syntax of the Pyret language.  Students should recognize that computers have their own languages, and the computer is very particular about precision (things have to be typed exactly right). +
+{empty} +
+In the two activities, students interacted with the Pyret language using numbers and familiar math operations.  This serves to get students used to the keystrokes and buttons used in Pyret while simultaneously practicing and developing number sense from the previous unit.
+
+== Cool Down: 10 minutes
+=== The Cost of Doing Business
+
+==== Narrative
+
+The purpose of these questions is for students to practice reading story problems and selecting relevant information to help them solve the problem at hand.  It also serves to get students thinking about mathematical properties and the use of parentheses.
+
+==== Student Task
+
+Meluan runs her own screen printing store.  She’s teaching her 13 year-old niece Natalia about the different parts of running a business. +
+{empty} +
+Meluan tells Natalia that she has to pay $550 in rent every month for the building, and in July every year, she prints shirts for her landlord’s family reunion for a $300 rent discount.  She asks Natalia how much she pays in rent annually. +
+{empty} +
+
+. Natalia writes: 12 * (550 + 300) = 10200 for her number model. 
+.. Is Natalia’s math sentence computationally correct?  Check it in Pyret.
+.. Is her number model correct?  Why or why not?
+.. If you think the number model is incorrect, how would you explain it? +
+{empty} +
+. Natalia asks about the cost of supplies and Meluan responds that she buys shirts in bulk at a cost of $920 for 250 shirts, which includes the shipping cost of $22.50.  
+.. Natalia wonders how much could Meluan save per shirt if she didn’t have to pay shipping.  She estimates $0.10 per shirt.  Do you think this is a good estimate?  Why or why not?
+.. How could you calculate the savings per shirt?  Explain to your partner.
+.. Calculate how much Meluan could save per shirt if she didn’t have to pay for shipping.  Was Natalia’s estimate a good one?  Why or why not? 
+
+==== Student Response
+
+. Students discuss the model.
+.. Yes, it is computationally correct. She didn’t make any mistakes in her arithmetic.
+.. No, the model is not correct.  Reasons include incorrect parentheses and the addition, rather than subtraction, of 300.  Students might use estimation skills to reason that Natalia’s calculation is much too high. 
+.. 12 should be multiplied by 550 first, then 300 should be subtracted. +
+{empty} +
+. Students discuss the problem.
+.. Answers will vary - ask students for reasoning behind their response.
+.. Several methods - one method is to divide 22.50 / 250.
+.. $0.09.  Natalia made a good estimate.

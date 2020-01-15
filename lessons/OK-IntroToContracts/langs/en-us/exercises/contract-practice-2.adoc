@@ -1,0 +1,70 @@
+
+@do{(define e1
+   (code #:multi-line #t
+"examples:
+  third-root(16) is expt(16, 1/3)
+  third-root(125) is expt(125, 1/3)
+end"))
+
+(define c1 (code "third-root :: Number -> Number"))
+
+(define e2
+   (code #:multi-line #t
+"examples:
+  sentence-length(\"hello\", 5) is string-length(\"hello\") + 5
+  sentence-length(\"please\", 6) is string-length(\"please\") + 6
+  sentence-length(\"goodbye\", 10) is string-length(\"goodbye\") + 10
+end"))
+
+(define c2 (code "sentence-length :: String, Number -> Number"))
+
+(define e3
+   (code #:multi-line #t
+"examples:
+  upside-down(triangle(50, \"solid\", \"yellow\")) is
+    rotate(180, triangle(50, \"solid\", \"yellow\"))
+  upside-down(star(150, \"outline\", \"blue\")) is
+    rotate(180, star(150, \"outline\", \"blue\"))
+end"))
+
+(define c3 (code "upside-down :: Image -> Image"))
+
+(define e4
+   (code #:multi-line #t
+"examples:
+  product-squared(5, 6) is sqr(5 *  6)
+  product-squared(10, 17) is sqr(10 *  17)
+  product-squared(2, 5) is sqr(2 *  5)
+end"))
+
+(define c4 (code "product-squared :: Number, Number -> Number"))
+
+(define e5
+   (code #:multi-line #t
+"examples:
+  half-image(\"www.images.com/cat_image.jpg\") is
+    scale(0.5, bitmap/url(\"www.images.com/cat_image.jpg\"))
+  half-image(\"www.images.com/dog_image.jpg\") is
+    scale(0.5, bitmap/url(\"www.images.com/dog_image.jpg\"))
+end"))
+
+(define c5 (code "half-image :: String -> Image"))
+
+
+(define examples-lst (list e1 e2 e3 e4 e5 ))
+(define answers-lst (list c1 c2 c3 c4 c5 ))
+(define answers-atop (map list answers-lst examples-lst))
+}
+
+@show{(exercise-handout 
+  #:title "Creating Contracts From Examples"
+  #:instr "For each of the sets of examples, write the contract
+           for the function *above* the examples."
+  #:forevidence (exercise-evid-tags "BS-DR.2&1&1" "F-IF.1-3&1&1" "F-IF.1-3&1&2")
+  (cond [(not *solutions-mode?*)
+  (create-exercise-itemlist/contract-answers examples-lst)]
+  [else
+    (create-exercise-itemlist answers-atop)
+    ])
+  )
+  }
