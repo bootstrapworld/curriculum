@@ -78,22 +78,24 @@
         (if (string=? res "") " " res))))
 
 (define (write-section-header page-header funname)
-  (format (mstring "\n\n[.designRecipeLayout]"
+  (format (string-append
+            "\n\n[.designRecipeLayout]\n"
             "== [.dr-title]##~a: ~a##\n")
           page-header funname))
 
 (define (write-directions directions)
-  (format (mstring
-            "\n[.recipe_word_problem]"
+  (format (string-append
+            "\n[.recipe_word_problem]\n"
             "**Directions**: ~a\n\n")
           directions))
 
 (define (write-purpose funname domain-list range purpose)
   (string-append
-    (mstring "\n\n[.recipe_title]"
-      "Contract and Purpose Statement"
-      ""
-      "[.recipe_instructions]"
+    (string-append
+      "\n\n[.recipe_title]\n"
+      "Contract and Purpose Statement\n"
+      "\n"
+      "[.recipe_instructions]\n"
       "Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
@@ -118,10 +120,11 @@
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
-    (mstring "\n\n[.recipe_title]"
-      "Examples"
-      ""
-      "[.recipe_instructions]"
+    (string-append
+      "\n\n[.recipe_title]\n"
+      "Examples\n"
+      "\n"
+      "[.recipe_instructions]\n"
       "Write some examples, then circle and label what changes...\n\n")
     ;examples
 
@@ -293,10 +296,11 @@
 (define (write-definition/wescheme funname param-list body)
   (let ([cond? (and (pair? body) (eqv? (car body) 'cond))])
     (string-append
-      (mstring "\n\n[.recipe_title]"
-        "Definition"
-        ""
-        "[.recipe_instructions]"
+      (string-append
+        "\n\n[.recipe_title]\n"
+        "Definition\n"
+        "\n"
+        "[.recipe_instructions]\n"
         "Write the definition, giving variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
@@ -403,10 +407,11 @@
              [but-last-body-lines (take body-lines n)]
              [last-body-line (car (drop body-lines n))])
         (string-append
-          (mstring "\n\n[.recipe_title]"
-            "Definition"
-            ""
-            "[.recipe_instructions]"
+          (string-append
+            "\n\n[.recipe_title]\n"
+            "Definition\n"
+            "\n"
+            "[.recipe_instructions]\n"
             "Write the definition, giving variable names to all your input values...\n\n")
           (write-null-wrapper ""
             (lambda ()

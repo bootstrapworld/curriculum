@@ -1,0 +1,17 @@
+(
+ "re-algebra-review"
+ "re-intro-to-data-structures"
+ "re-structures-reactors-animations"
+ "re-functions-that-ask-questions"
+ "re-key-events"
+ "re-drawing-emoji"
+ "re-your-own-drawing-functions"
+ "re-build-your-own-animation"
+ "re-adding-collisions"
+ "re-feature-scoring"
+ "re-adding-levels"
+ "re-making-pong"
+ "re-nested-structures"
+ "re-timers"
+ )
+

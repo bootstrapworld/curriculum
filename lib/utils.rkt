@@ -6,7 +6,7 @@
   file-mtime
   )
 
-(define (mstring . strs)
+(define (mstring . strs) ;XXX obsolete
   (string-join strs "\n"))
 
 (define (ferror tag fmt . args)

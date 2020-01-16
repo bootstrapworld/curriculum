@@ -292,19 +292,17 @@
     (display "| " o)
     (display-standards-selection o)
     (display
-      (mstring
-        "|"
-        ""
-        "include::./index-standards.asc[]"
-        "") o)))
+      (string-append
+        "|\n"
+        "\n"
+        "include::./index-standards.asc[]\n") o)))
 
-(define (include-standards o)
+(define (include-standards o) ;XXX obsolete?
   (display
-    (mstring
-      "\n\n"
-      "[.left-header,cols=\"20a,80a\"]"
-      "|==="
-      "") o)
+    (string-append
+      "\n\n\n"
+      "[.left-header,cols=\"20a,80a\"]\n"
+      "|===\n") o)
   (display-standards-row o)
   (display
     "\n|===\n\n" o))
@@ -473,7 +471,7 @@
   (display desc o)
   (newline o))
 
-(define (display-lesson-dependencies other-lessons o)
+(define (display-lesson-dependencies other-lessons o) ;XXX obsolete?
   ;  (call-with-output-file "index-dependencies.txt"
   ;    (lambda (o)
   ;      (fprintf o "(")
@@ -482,9 +480,9 @@
   ;      (fprintf o ")\n"))
   ;    #:exists 'replace)
   (display
-    (mstring
-      "\n\n"
-      "[.left-header,cols=\"20a,80a\"]"
+    (string-append
+      "\n\n\n"
+      "[.left-header,cols=\"20a,80a\"]\n"
       "|===") o)
   (display-prereqs-row other-lessons o)
   (display "|===\n\n" o))
@@ -772,7 +770,7 @@
                           (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
                             (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
                           (display-lesson-description (read-group i directive) o)]
-                         [(string=? directive "depends-on")
+                         [(string=? directive "depends-on") ;XXX obsolete
                           (unless (getenv "LESSONPLAN")
                             (ferror 'adoc-preproc.rkt "@depends-on valid only in lesson plan"))
                           (display-lesson-dependencies (read-commaed-group i directive) o)]
@@ -988,9 +986,9 @@
     (cond [narrative?
             (display
               (enclose-div ""
-                (mstring
-                  "\nThis pathway aligns with several important teaching standards."
-                  "Select particular standards from the following menu to see"
+                (string-append
+                  "\nThis pathway aligns with several important teaching standards.\n"
+                  "Select particular standards from the following menu to see\n"
                   "which items in the standards are met.\n"))
               o)]
           [else (display "Relevant Standards\n" o)])
@@ -1020,9 +1018,9 @@
         (when (getenv "NARRATIVE")
           (display-standards-selection op))
         (when (getenv "LESSON")
-          (fprintf op (mstring
-                        "\n[.alignedStandardsIntro]"
-                        "_Select one or more standards from the menu on the left (⌘-click"
+          (fprintf op (string-append
+                        "\n[.alignedStandardsIntro]\n"
+                        "_Select one or more standards from the menu on the left (⌘-click\n"
                         "on Mac, Ctrl-click elsewhere)._\n\n")))
         (for ((dict *dictionaries-represented*))
           (let ([dict-standards-met

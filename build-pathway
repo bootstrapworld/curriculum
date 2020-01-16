@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-09 # last modified
+LASTMOD=2020-01-16 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -281,6 +281,10 @@ function buildworkbookpages() {
   #echo building $L workbook-pages
   cd $L
   #
+  if test ! -d workbook-pages; then
+    echo WARNING: $L missing workbook-pages
+    mkdir workbook-pages
+  fi
   if test -d workbook-pages/$PROGLANG; then
     cp -p workbook-pages/$PROGLANG/* workbook-pages
   fi
