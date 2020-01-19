@@ -8,7 +8,7 @@
  "re-your-own-drawing-functions"
  "re-build-your-own-animation"
  "re-adding-collisions"
- "re-feature-scoring"
+ "re-scoring"
  "re-adding-levels"
  "re-making-pong"
  "re-nested-structures"
