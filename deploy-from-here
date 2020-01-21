@@ -1,4 +1,4 @@
-# last modified 2019-12-25
+# last modified 2020-01-21
 
 if test -f distribution.tar.bz2; then
   rm -fr distribution
@@ -37,10 +37,17 @@ if $ON_DEPLOY_SITE; then
   chgrp -R cs-plt distribution
 fi
 
+function copydir() {
+  src=$1
+  dest=$2
+  rm -fr $dest
+  cp -prH $src $dest
+}
+
 for proglang in pyret wescheme; do
-  rm -fr $DEPLOY_DIR/algebra-$proglang-remix
-  cp -prH distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
+  copydir distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
 done
 
-rm -fr $DEPLOY_DIR/datascience-remix
-cp -prH distribution/bs-data-science-pathway $DEPLOY_DIR/datascience-remix
+copydir distribution/bs-data-science-pathway $DEPLOY_DIR/datascience-remix
+
+copydir distribution/bs-reactive-pathway $DEPLOY_DIR/reactive-remix

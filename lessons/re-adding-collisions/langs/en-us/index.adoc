@@ -37,6 +37,10 @@ Data Structures and Reactor from their games.}
 
 So far, none of the animations we’ve created included any distance or collision-detection functions. However, if you want to make a game where the player has to hit a target, avoid an enemy, jump onto platforms, or reach a specific part of the screen, we’ll need to account for collisions. This is going to require a little math, but luckily it’s exactly the same as it was in Bootstrap:Algebra.
 
+@span{.right}{@image{images/cat-dog.png, "", 400}}
+
+@span{.clear}{}
+
 ////
 This lesson is part of a series of features meant to come at the end of the Bootstrap:Reactive units. Once students have made a number of simple animations and games, they will have lots of ideas for what they want to make next and add to their existing games. We’ve included a number of the most requested features in these lessons. Because each students’ game will be different, we’ve used a Pyret version of the original Ninja Cat game as an example program, but this lesson can be adapted to add collision detection to any game.
 ////
@@ -53,18 +57,28 @@ Finding the distance in one dimesion is pretty easy: if the characters are on th
 When the cat and dog were switched, did you still subtract the dog’s position from the cat’s, or subtract the cat’s position from the dog’s? Why?
 
 ////
-Draw a number line on the board, with the cutouts of the cat and dog at the given positions. Ask students to tell you the distance between them, and move the images accordingly. Having students act this out can also work well: draw a number line, have two students stand at different points on the line, using their arms or cutouts to give objects of different sizes. Move students along the number line until they touch, then compute the distance on the number line.
+Draw a number line on the board, with the cutouts of the cat and
+dog at the given positions. Ask students to tell you the distance
+between them, and move the images accordingly. Having students
+act this out can also work well: draw a number line, have two
+students stand at different points on the line, using their arms
+or cutouts to give objects of different sizes. Move students
+along the number line until they touch, then compute the distance
+on the number line.
 ////
 
 Unfortunately, most distances aren’t only measured in one dimention. We’ll need some code to calculate the distance between two points in two dimentions.
 
-image
+@span{.right}{@image{images/hypotenuse.png, "", 400}}
+
+@span{.clear}{}
 
 [.lesson-instruction]
 - How could you find the distance between the two points shown in this image?
 - How could you find the length of the C, also called the @vocab{Hypotenuse}?
 
-Let’s start with what we do know: if we treat the x- and y-intercepts of C as lines A and B, we have a right triangle.
+Let’s start with what we do know: if we treat the x- and
+y-intercepts of C as lines A and B, we have a right triangle.
 
 [.lesson-instruction]
 What is the line-length of A? Would it be different if the
@@ -77,14 +91,19 @@ Draw this image on the board, with the lines labeled "A", "B", and "C".
 Ancient civilizations had the same problem: they also struggled to find the distance between points in two dimensions. Let’s work through a way to think about this problem: what expression computes the length of the hypotenuse of a right triangle?
 
 ////
-This exercise is best done in small groups of students (2-3 per group). Pass out Pythagorean Proof materials [1, 2] to each group, and have them review all of their materials:
+This exercise is best done in small groups of students (2-3 per
+group). Pass out Pythagorean Proof materials [1, 2] to each
+group, and have them review all of their materials:
 
 A large, white square with a smaller one drawn inside
 Four gray triangles, all the same size
-Everyone will have a packet with the same materials, but each group’s triangles are a little different. The activity workes with triangles of all sizes, so each pair will get to test it out on their own triangles. Draw the diagram on the board.
+Everyone will have a packet with the same materials, but each
+group’s triangles are a little different. The activity workes
+with triangles of all sizes, so each pair will get to test it out
+on their own triangles. Draw the diagram on the board.
 ////
 
-image
+@span{.right}{@image{images/4-rt-triangles.png, "", 400}}
 
 For any right triangle, it is possible to draw a picture where
 the hypoteneuse is used for all four sides of a square. In the

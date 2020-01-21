@@ -1,7 +1,18 @@
-# last modified 2019-12-25
+# last modified 2020-01-21
 
 rm -f distribution.tar.bz2
-tar jcf distribution.tar.bz2 distribution/bs-game-pathway-* distribution/bs-data-science-pathway
+
+tar jcf distribution.tar.bz2 \
+  distribution/bs-game-pathway-* \
+  distribution/bs-data-science-pathway \
+  distribution/bs-reactive-pathway
+
+if test $# -ne 0; then
+  arg=$1
+  if test "$arg" = -l; then
+    exit
+  fi
+fi
 
 if test "$HOSTNAME" = longitude; then
   scp distribution.tar.bz2 $(providentialaddress):~/src/curriculum
