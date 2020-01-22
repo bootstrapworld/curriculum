@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-16 # last modified
+LASTMOD=2020-01-22 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -512,8 +512,10 @@ function buildpathwaynarrative() {
     fi
   done
   if ! "$copacetic"; then
-    echo WARNING: No narrative in pathway $PATHWAY
-  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
+    echo WARNING: No narrative in pathway $PATHWAY\; creating one
+    echo "= $PATHWAY" > index.adoc
+  fi
+  if ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many narratives in pathway $PATHWAY
   else
     #cp -p $PROGDIR/*.css .

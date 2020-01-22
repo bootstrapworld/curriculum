@@ -20,8 +20,12 @@ complexity.}
 
 | Preparation
 |
-- The Pinwheels Starter #1 file
-- The Pinwheels Starter #2 file preloaded on students’ machines
+- The
+  https://code.pyret.org/editor#share=0B9rKDmABYlJVMjF3OU83dGtaVTQ&v=a49eb01[Pinwheels
+  Starter #1] file
+- The
+  https://code.pyret.org/editor#share=0B9rKDmABYlJVcFFCeDlnTm4zSGM&v=a49eb01[Pinwheels
+  Starter #2] file preloaded on students’ machines
 
 |===
 
@@ -46,7 +50,9 @@ structure to use for each character. Then, instead of our game
 structure containing 8 numbers, it only contains 4 ``Position``s.
 
 Let’s start out with a small animation to explore the benefits of
-nested structures. Open the Pinwheels Starter #1 file in Pyret,
+nested structures. Open the
+https://code.pyret.org/editor#share=0B9rKDmABYlJVMjF3OU83dGtaVTQ&v=a49eb01[Pinwheels
+Starter #1] file in Pyret,
 and click "`Run`". We see four colorful pinwheels spinning in the
 breeze. Now, take a look at the code:
 
@@ -85,7 +91,8 @@ will need to be added to the structure, so we’ll need to add 4
 new numbers to the `PinwheelState` structure.
 
 [.lesson-instruction]
-Print out the following code screenshot from the pinwheels file
+Print out the following link:images/NonNested-Pinwheels1.png[code
+screenshot] from the pinwheels file
 and underline or highlight each spot in the code you would need
 to change in order to add a speed to each pinwheel. Once you’ve
 identified which sections of the code will need to change, edit
@@ -99,7 +106,9 @@ save us some time and headaches down the road, if we want to add
 to our animation later.
 
 [.lesson-instruction]
-Open the Pinwheels Starter #2 file on your computer and take a
+Open the
+https://code.pyret.org/editor#share=0B9rKDmABYlJVcFFCeDlnTm4zSGM&v=a49eb01[Pinwheels
+Starter #2] file on your computer and take a
 look at the code. What differences do you see between this
 starter file and the first?
 
@@ -134,7 +143,11 @@ STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 --
 
 ////
-With nested structures, accessing fields in the "child" structure (in this case, Pinwheel requires two dots. So, STARTING-PINWHEELS.pw1 produces pw(60), the first Pinwheel. Whereas STARTING-PINWHEELS.pw2.angle produces 3, the angle of pw2.
+With nested structures, accessing fields in the "child" structure
+(in this case, Pinwheel requires two dots. So,
+STARTING-PINWHEELS.pw1 produces pw(60), the first Pinwheel.
+Whereas STARTING-PINWHEELS.pw2.angle produces 3, the angle of
+pw2.
 ////
 
 Another change between the non-nested and nested versions of the
@@ -148,17 +161,24 @@ Let’s do the same activity for the nested version of the code,
 where we make each pinwheel spin at a different speed.
 
 [.lesson-instruction]
-Print out the following code screenshot for the nested pinwheels
-file, and underline or highlight each spot in the code you would
+Print out the following code screenshot for the nested
+link:images/Nested-Pinwheels1.png[pinwheels
+file], and underline or highlight each spot in the code you would
 need to change in order to change each pinwheel’s speed
 independently. Once you’ve identified which sections will need to
 change, edit the nested version of the program on the computer.
 
 ////
-Point out the differences in underlining between the two code screenshots. Note that when students finish this activity, both of the animations will look the same- but one program will have been much more straightforward to modify! We wrote a bit more code at the beginning to set up the nested structures, but that paid off later by giving us more flexibility to change the behavior of the pinwheels.
+Point out the differences in underlining between the two code
+screenshots. Note that when students finish this activity, both
+of the animations will look the same- but one program will have
+been much more straightforward to modify! We wrote a bit more
+code at the beginning to set up the nested structures, but that
+paid off later by giving us more flexibility to change the
+behavior of the pinwheels.
 ////
 
-image
+@image{images/adding-speed.png, "", 800}
 
 Just by looking at the differences on paper, we can see the
 difference in complexity of changing our animations. In order to
@@ -174,19 +194,28 @@ x-coordinates will need to change.
 
 [.lesson-instruction]
 --
-Go through the same process as before: Starting with the non-nested version of the code, print out these code screenshots:
+Go through the same process as before: Starting with the
+non-nested version of the code, print out these code screenshots:
+
+//non-nested png missing
 
 - Non-nested pinwheels
-- Nested pinwheels
+- link:images/Nested-Pinwheels2.png[Nested pinwheels]
 
-and underline or highlight the places in the code you would need to edit in order to change the x-coordinates of each pinwheel. Do this for both the nested and non-nested versions of the animation.
+and underline or highlight the places in the code you would need
+to edit in order to change the x-coordinates of each pinwheel. Do
+this for both the nested and non-nested versions of the
+animation.
 --
 
 ////
-Optonal: For practice, have students make this change in both programs on the computer. Have them pay special attention to their helper functions- will they be able to use the existing update-pinwheel in the non-nested version of the animation?
+Optonal: For practice, have students make this change in both
+programs on the computer. Have them pay special attention to
+their helper functions- will they be able to use the existing
+update-pinwheel in the non-nested version of the animation?
 ////
 
-image
+@image{images/adding-x-coordinates.png, "", 800}
 
 As before, we end up underlining, and needing to change _much_ more
 of the code in the non-nested version of the animation. We also
@@ -321,7 +350,7 @@ PLAY  = game(char(320, 100), char(600, 75), 5, char(300, 250), 20, 0)
 --
 For the nested structures version of Ninja Cat:
 
-- How would you get the player’s x-coordinate out of START?
+- How would you get the _player’s x-coordinate_ out of START?
 - What about the danger’s y-coordinate?
 - How would you get the target’s speed out of PLAY?
 - Finally, what do you notice about these two versions of the Ninja Cat data? Which do you prefer, and why?
@@ -341,6 +370,8 @@ move characters in the same way?
 For practice, re-write the data block and sample instances for your video game using nested structures.
 
 ////
-Optional: If you like, have students completely refactor their entire game code to make use of nested structures and helper functions.
+Optional: If you like, have students completely refactor their
+entire game code to make use of nested structures and helper
+functions.
 ////
 
