@@ -204,7 +204,7 @@
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "doing write-example/pyret fun ~s args= ~s body= ~s\n" funname args body)
+  ;(printf "write-ea-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
   (when (pair? funname)
     (set! args (cdr funname))
     (set! funname (car funname)))
@@ -241,15 +241,17 @@
         ))))
 
 (define (write-each-example funname args body show)
+  ;(printf "write-each-example ~s ~s ~s ~s\n" funname args body show)
   (let ([show-funname? #f]
         [show-args? #f]
         [show-body? #f])
     (cond [(not show) #f]
-          [(not *solutions-mode?*) #f]
           [(eqv? show #t)
            (set! show-funname? #t)
            (set! show-args? #t)
            (set! show-body? #t)]
+          ;[(not *solutions-mode?*) #f]
+          ;FIXME what exactly should we decide here?
           [(list? show)
            (set! show-funname? (list-ref show 0))
            (set! show-args? (list-ref show 1))
@@ -563,6 +565,19 @@
     )
   |#
 
+  ;FIXME: set show's whenever assess-design-recipe OR solutions-mode?
+
+  (when (and (not *solutions-mode?*) assess-design-recipe)
+    (set! *show-funname-contract?* #t)
+    (set! *show-domains?* #t)
+    (set! *show-range?* #t)
+    (set! *show-purpose?* #t)
+    (set! *show-examples* #t)
+    (set! *show-funname-defn?* #t)
+    (set! *show-params?* #t)
+    (set! *show-body?* #t)
+    )
+
   (when (and *solutions-mode?* (not assess-design-recipe))
     (set! *show-funname-contract?* #t)
     (set! *show-domains?* #t)
@@ -584,7 +599,7 @@
     (set! funname " ")
     (set! page-header "Design Recipe")
     (when (string=? directions "")
-      (set! directions (format "{sp} +\n{sp} +\n{sp} +\n")))
+      (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
     )
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
