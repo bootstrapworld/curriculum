@@ -518,9 +518,9 @@
                                 #:show-funname-contract? (show-funname-contract? #f)
                                 #:domain-list (domain-list '()) ; list of string
                                 #:show-domains? (show-domains? #f)
-                                #:range (range #f)
+                                #:range (range "")
                                 #:show-range? (show-range? #f)
-                                #:purpose (purpose #f)
+                                #:purpose (purpose "")
                                 #:show-purpose? (show-purpose? #f)
                                 ; num-examples = 1, in orig
                                 ; = 0, debug
