@@ -789,6 +789,24 @@
                           (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                             (for ([s exprs])
                               (display (massage-arg s) o)))]
+                         [(string=? directive "clear")
+                          (read-group i directive)
+                          (newline o)
+                          (display (enclose-span ".clear" " ") o)]
+                         [(string=? directive "vspace")
+                          (let ([height (string-trim (read-group i directive))])
+                            (display
+                              (string-append
+                                (create-begin-tag "span" ".vspace" #:attribs
+                                                  (format "style=\"height: ~a\"" height))
+                                (create-end-tag "span")) o))]
+                         [(string=? directive "quad")
+                          (let ([width (string-trim (read-group i directive))])
+                            (display
+                              (string-append
+                                (create-begin-tag "span" ".quad" #:attribs
+                                                  (format "style=\"width: ~a\"" width))
+                                (create-end-tag "span")) o))]
                          [(string=? directive "fitb")
                           (let* ([width (string-trim (read-group i directive))]
                                  [text (string-trim (read-group i directive))])
