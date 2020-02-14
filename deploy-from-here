@@ -1,4 +1,4 @@
-# last modified 2020-01-26
+# last modified 2020-02-14
 
 if test -f distribution.tar.bz2; then
   rm -fr distribution
@@ -40,9 +40,9 @@ function copydir() {
 }
 
 for proglang in pyret wescheme; do
-  copydir distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
+  copydir distribution/game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
 done
 
-copydir distribution/bs-data-science-pathway $DEPLOY_DIR/datascience-remix
+copydir distribution/data-science-pathway $DEPLOY_DIR/datascience-remix
 
-copydir distribution/bs-reactive-pathway $DEPLOY_DIR/reactive-remix
+copydir distribution/reactive-pathway $DEPLOY_DIR/reactive-remix

@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-01-22 # last modified
+LASTMOD=2020-02-14 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -559,9 +559,9 @@ function buildpathway() {
 
   PATHWAY=$SRCPATHWAY
 
-  # special-casing only algebra and bs-game-pathway,
+  # special-casing only algebra and game-pathway,
   # as they're the only pathways that allow two prog langs
-  if test "$SRCPATHWAY" = bs-game-pathway -o \
+  if test "$SRCPATHWAY" = game-pathway -o \
           "$SRCPATHWAY" = algebra; then
     PATHWAY=$SRCPATHWAY-$PROGLANG
   elif test "$PROGLANG" = wescheme; then
@@ -674,7 +674,7 @@ for f in $ARGS; do
   export SRCPATHWAY=${SRCPATHWAY#pathways/}
   export SRCPATHWAY=${SRCPATHWAY%/}
   if test "$PROGLANG" = ""; then
-    if test "$SRCPATHWAY" = bs-game-pathway -o \
+    if test "$SRCPATHWAY" = game-pathway -o \
             "$SRCPATHWAY" = algebra; then
       export PROGLANG=wescheme; buildpathway
       export PROGLANG=pyret; buildpathway
