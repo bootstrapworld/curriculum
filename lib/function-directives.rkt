@@ -348,11 +348,12 @@
                           (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
                   [else
                     ""
-                    #;(write-wrapper ".recipe_line"
+                    #|(write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (write-large ")"))))
+                    |#
                     ])))))))
 
 (define (write-body-line/pyret body-line)
@@ -534,7 +535,7 @@
                                 #:show-params? (show-params? #f)
                                 #:body (body #f) ; a string
                                 #:show-body? (show-body? #f)
-                                #:grid-lines? (grid-lines? #f)
+                                #:grid-lines? (grid-lines? #f) ;TODO: what is grid-lines? for
                                 #:lang (lang 'racket)
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 #:headless? (headless? #f)
@@ -567,18 +568,8 @@
 
   ;FIXME: set show's whenever assess-design-recipe OR solutions-mode?
 
-  (when (and (not *solutions-mode?*) assess-design-recipe)
-    (set! *show-funname-contract?* #t)
-    (set! *show-domains?* #t)
-    (set! *show-range?* #t)
-    (set! *show-purpose?* #t)
-    (set! *show-examples* #t)
-    (set! *show-funname-defn?* #t)
-    (set! *show-params?* #t)
-    (set! *show-body?* #t)
-    )
-
-  (when (and *solutions-mode?* (not assess-design-recipe))
+  (when (or (and (not *solutions-mode?*) assess-design-recipe)
+            (and *solutions-mode?* (not assess-design-recipe)))
     (set! *show-funname-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
