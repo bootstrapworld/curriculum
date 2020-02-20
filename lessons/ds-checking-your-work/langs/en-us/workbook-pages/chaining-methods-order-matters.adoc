@@ -1,0 +1,110 @@
+= Chaining Methods 2: Order Matters!
+
+You have the following functions defined below (read them _carefully!_):
+
+  fun is-female(animal): animal["gender"] == "female" end
+  fun kilograms(animal): animal["pounds"] / 2.2 end
+  fun is-heavy(animal): animal["kilos"] > 25 end
+
+The table `t` below represents four animals at the shelter:
+
+[cols='5']
+|===
+| name
+| gender
+| age
+| fixed
+| pounds
+
+| `"Toggle"`
+| `"female"`
+| `3`
+| `true`
+| `48`
+
+| `"Fritz"`
+| `"male"`
+| `4`
+| `true`
+| `92`
+
+| `"Nori"`
+| `"female"`
+| `6`
+| `true`
+| `35.3`
+
+| `"Maple"`
+| `"female"`
+| `3`
+| `true`
+| `51.6`
+
+|===
+
+Match each Pyret expression (left) to the description of what it
+does (right). *Note: one
+description might match multiple expressions!*
+
+[cols="1a,1a"]
+|===
+| `t.order-by("kilos", true)`
+
+| Produces a table containing Toggle,
+Nori and Maple, with an extra column
+showing their weight in kilograms
+|
+
+|
+----
+t.filter(is-female)
+.build-column("kilos", kilograms)
+----
+
+|
+----
+t.build-column("kilos", kilograms)
+ .filter(is-heavy)
+----
+| Produces a table containing only Fritz.
+
+|
+----
+t.filter(is-heavy)
+ .build-column("kilos", kilograms)
+----
+
+| Won’t run: will produce an error
+
+|
+----
+t.build-column("kilos", kilograms)
+ .filter(is-heavy)
+ .order-by("gender", true)
+----
+
+| Produces a table containing only Fritz,
+with two extra columns.
+
+|
+----
+t.build-column("female", is-female)
+ .build-column("kilos", kilograms)
+ .filter(is-heavy)
+----
+
+| Produces a table containing Maple
+and Fritz
+
+|
+----
+t.order-by("name", true)
+ .build-column("kilos", kilograms)
+ .filter(is-female)
+----
+
+| Produces a table containing Maple,
+Nori and Toggle (in that order)
+
+|===
+

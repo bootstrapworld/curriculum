@@ -490,7 +490,7 @@
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway~n")
   ;
-  (let ([lessons (call-with-input-file "workbook-index.rkt" read)])
+  (let ([lessons (call-with-input-file "lesson-order.rkt" read)])
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
