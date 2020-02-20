@@ -20,35 +20,38 @@
 
 ;
 
-(define *workbook-index*
-  (call-with-input-file "workbook-index.rkt" read))
+(define *lesson-order*
+  (call-with-input-file "lesson-order.rkt" read))
 
 (define *language* (getenv "LANGUAGE"))
 
 (call-with-output-file "lessons/lessons.txt"
   (lambda (o)
-    (for ([lesson *workbook-index*])
+    (for ([lesson *lesson-order*])
       (display lesson o) (newline o)))
   #:exists 'replace)
 
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(\n")
-    (for ([lesson *workbook-index*])
+    (for ([lesson *lesson-order*])
       (system (format "mkdir -p lessons/~a" lesson))
       ;(system (format "cp -pr $TOPDIR/lessons/~a/langs/~a/* lessons/~a" lesson *language* lesson))
       (let ([lesson-dir (format "~a/lessons/~a/langs/~a" (getenv "TOPDIR") lesson *language*)])
         (unless (empty? (directory-list lesson-dir))
           (system (format "cp -pr ~a/* lessons/~a" lesson-dir lesson))))
-      (let* ([lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson)]
-             [lesson-index
-               (cond [(file-exists? lesson-index-file)
+      (let* ([workbook-pages-file (format "lessons/~a/workbook-pages/workbook-pages.rkt" lesson)]
+             [lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson)]
+             [workbook-pages
+               (cond [(file-exists? workbook-pages-file)
+                      (call-with-input-file workbook-pages-file read)]
+                     [(file-exists? lesson-index-file) ;XXX: transitional only
                       (call-with-input-file lesson-index-file read)]
                      [else
-                       (printf "WARNING: ~a missing lesson-index.rkt\n" lesson)
+                       (printf "WARNING: ~a missing workbook-pages.rkt\n" lesson)
                        ;(printf "WARNING: Lesson ~a is incorrectly organized\n" lesson)
                        '()])])
-        (for ([page lesson-index])
+        (for ([page workbook-pages])
           (let ([file page]
                 [aspect "portrait"]
                 [paginate "yes"])
