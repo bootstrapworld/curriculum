@@ -1,0 +1,137 @@
+= Using Histograms
+
+@lesson-description{Students explore new visualizations in Pyret,
+this time focusing on the frequency of observations in a
+quantitative dataset. Students are introduced to Histograms
+by comparing them to bar charts, and learn to construct them
+by hand and in Pyret.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-exploring-plots}
+|Product Outcomes
+|Students create
+
+* histograms using the animals dataset
+* visualizations of frequency using their chosen dataset, and
+write up their findings
+
+@worksheet-include{ds-question-types/xtra/lang-prereq.adoc}
+|===
+
+== Review (Time 20 minutes)
+
+[.lesson-instruction]
+Open your Animals Starter File, and click “Run”. (If you do not
+have this file, or if something has happened to it, you can
+always make a
+@link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L,
+new copy}.)
+
+Let’s get some more practice working with the Design Recipe, as we prepare to do more complex analysis.
+
+[.lesson-instruction]
+Turn to @worksheet-link{workbook-pages/design-recipe.adoc}, and
+write the functions you see there. When you’re ready, type the
+contracts, purpose statements, examples and definitions into the
+Definitions Area.
+
+[.lesson-instruction]
+Use the `.build-column` method to add a new column to the animals
+table, showing the weight of every animal in kilograms.
+
+== Introducing Histograms (Time 20 minutes)
+
+[.lesson-instruction]
+Let’s explore two different ways of visualizing data. Complete
+@worksheet-link{workbook-pages/summarizing-columns.adoc}.
+
+////
+Have students share their observations.
+////
+
+@vocab{Bar charts}, like the one of the bottom-left of
+@worksheet-link{workbook-pages/reading-histograms.adoc}, use the
+horizontal axis to show values of a categorical variable (in the
+diagram on the right, species). The vertical axis here shows
+@vocab{frequency} of that value in the dataset, which can be shown as
+absolute numbers or percentages of the total.
+
+This bar chart happens to show the categorical values in
+alphabetical order from left to right, but it would be perfectly
+fine to re-order them any way we wish. For instance, the bar for
+“dogs” could have been drawn before the one for “cats”. Unlike
+the numbers on a histogram’s horizontal axis, there is no
+objective order to categories on a bar-chart’s horizontal axis.
+For this reason, _it never makes sense to talk about the “shape”
+of a categorical data set_.
+
+The display on the bottom-right is called a @vocab{histogram}.
+Histograms show the distribution of _quantitative_ data. Since
+quantitative data can be ordered from smallest-to-largest,
+histograms allow us to see the shape of a data set.
+
+Animal shelters make decisions about food, capacity and policies
+based on how long it takes for animals to be adopted. But looking
+at each value in the weeks column is tedious, and isn’t always
+the easiest way to make sense of the data. As the saying goes,
+sometimes you “can’t see the forest for the trees”. Summarizing
+with a single number like the average alsi leaves out a lot of
+important information. So instead of talking about each
+individual in a dataset, or simply reporting the average for all
+those individuals, Data Scientists find it useful to describe the
+overall *shape* of the data.
+
+A display of how long it takes animals to get adopted can make it
+easier to get an idea of what adoption times were most common,
+and if there were any unusually long or short times that it took
+for an animal to be adopted. Let’s take a look at a histogram of
+the weeks it takes an animal to be adopted. Type the following
+into the interactions area:
+
+----
+histogram(animals-table, "weeks", 5)
+----
+
+[.lesson-instruction]
+Look at the histogram and count how many animals took between 0
+and 5 weeks to be adopted. How many took between 5 and 10 weeks?
+What else do you Notice? What do you Wonder?
+
+Display this histogram for students to see.
+
+What do you Notice about this histogram? What can you conclude?
+Here are a few conclusions to get you started:
+
+- Because we see most of the histogram’s area encompassed by the
+  two bars between 0 and 10 weeks, we can say it was most common
+  for an animal to be adopted in 10 weeks or less.
+- Because we see a small amount of the histogram’s area trailing
+  out to unusually high values, we can say that a couple of
+  animals took an unusually long time to be adopted: one took
+  even more than 30 weeks.
+- More than half of the animals (17 out of 31) took just 5 weeks
+  or less to be adopted. But those few unusually long adoption
+  times pulled the average up to 5.8 weeks. Knowing about the
+  shape gives us worthwhile information beyond the simple report
+  of average.
+
+If someone would ask us what was typical for the adoption times,
+we might say: “Almost all of the animals were adopted in 10 weeks
+or less, but a couple of animals took an unusually long time to
+be adopted -- even more than 20 or 30 weeks!” Without looking at
+the histogram’s shape, it would have been very difficult to make
+this summary.
+
+[.lesson-instruction]
+What would the histogram look like if most of the animals took
+more than 20 weeks to be adopted, but a couple of them were
+adopted in fewer than 5 weeks?
+
+== Closing (Time 5 minutes)
+
+[.lesson-instruction]
+Histograms are a powerful way to display a data set and assess
+its @vocab{shape}. But shape is just one of three key aspects that tell
+us what’s going on with a quantitative data set. In the next
+unit, we’ll explore the other two: center and spread.
