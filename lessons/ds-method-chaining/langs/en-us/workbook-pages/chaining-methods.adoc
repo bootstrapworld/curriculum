@@ -1,0 +1,101 @@
+= Chaining Methods
+
+You have the following functions defined below (read them _carefully!_):
+
+  fun is-fixed(animal): animal["fixed"] end
+  fun is-young(animal): animal["age"] < 4 end
+  fun nametag(animal): text(animal["name"], 20, "red") end
+
+The table `t` below represents four animals at the shelter:
+
+[cols='5']
+|===
+| name
+| gender
+| age
+| fixed
+| pounds
+
+| `"Toggle"`
+| `"female"`
+| `3`
+| `true`
+| `48`
+
+| `"Fritz"`
+| `"male"`
+| `4`
+| `true`
+| `92`
+
+| `"Nori"`
+| `"female"`
+| `6`
+| `true`
+| `35.3`
+
+| `"Maple"`
+| `"female"`
+| `3`
+| `true`
+| `51.6`
+
+|===
+
+Match each Pyret expression (left) to the description of what it does (right).
+
+[cols="1a,1a"]
+|===
+
+| `t.order-by("age", true)`
+
+| Produces a table containing only
+Toggle and Maple
+
+| `t.filter(is-fixed)`
+
+| Produces a table of only young, fixed
+animals
+
+| `t.build-column("sticker", nametag)`
+
+| Produces a table, sorted youngest-tooldest
+
+| `t.filter(is-young)`
+
+| Produces a table with an extra column,
+named "sticker"
+
+|
+----
+t.filter(is-young)
+ .filter(is-fixed)
+----
+
+| Produces a table containing Maple
+and Toggle, in that order
+
+|
+----
+t.filter(is-young)
+ .order-by("pounds", false)
+----
+
+| Produces a table containing the same
+four animals
+
+|
+----
+t.build-column("label", nametag)
+ .order-by("age", true)
+----
+
+| Won’t run: will produce an error
+
+| `t.order-by("gendr", false)`
+
+| Produces a table with an extra "label"
+column, sorted youngest-to-oldest
+
+|===
+

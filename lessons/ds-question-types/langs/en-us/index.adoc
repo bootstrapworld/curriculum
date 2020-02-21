@@ -1,0 +1,195 @@
+= Questions and Definitions
+
+@lesson-description{Students continue to explore the Animals
+Dataset, and consider the kinds of questions that can be asked
+about a dataset. They also learn to define values, and how to
+use the "Definitions" and "Interactions" areas.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-intro}
+|Product Outcomes
+|Students will be able to:
+
+* define several row values from the animals table
+* define several functions over rows from the animals table
+
+@worksheet-include{ds-question-types/xtra/lang-prereq.adoc}
+|===
+
+== Question Types (10 min)
+
+Once we have a dataset, we can start asking questions! But how do
+we know what questions to ask? There’s an art to asking the right
+questions, and good Data Scientists think hard about what kind of
+questions can and can’t be answered.
+
+[.lesson-instruction]
+Turn back to
+@worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc} in
+your Student Workbook, and look at the “Wonder” questions that
+you wrote about this dataset.
+
+////
+Have students brainstorm some questions they might ask of the
+animals table.
+////
+
+Most questions can be broken down into one of three categories:
+
+- *Lookup questions* -- These can be answered simply by looking up a
+  single value in the table and reading it out. Once you find the
+  value, you’re done! Examples of lookup questions might be “is
+  Sunflower fixed?” or “How many legs does Felix have?”
+
+- *Compute questions* -- These can be answered by computing an
+  answer across a single row or column. Examples of computing
+  questions might be “how much does the heaviest animal weigh?”
+  or “What is the average age of animals at the shelter?”
+
+- *Relate questions* -- These ones take the most work, because they
+  require looking for relationships between multiple columns.
+  Examples of analysis questions might be “Do cats tend to be
+  adopted faster than dogs?” or “Are older animals heavier than
+  young ones?”
+
+////
+Have students come up with questions for each type.
+////
+
+Look back at the Wonders you wrote on
+@worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc}.
+Are any of these Lookup, Compute, or Relate questions? Circle the
+question type that’s appropriate. Can you come up with additional
+examples for each type of question?
+
+////
+Have students share their questions with the class. Allow time for discussion!
+////
+
+Lookup questions are easy to answer: just find the right row and
+column, and read out the answer! Let’s learn how to do this in
+Pyret...
+
+== Row and Column Lookups (Time 15 minutes)
+
+Open
+@link{https://code.pyret.org/editor#share=1PTPxKGyUfsMpy4GzFtYS_JGntiHOL0Yu,
+Animals Starter File -- Unit 2}, save a copy, and click “Run”.
+This is the same program you saw before, but with one extra line
+of code. Which line is new, and what do you think it does?
+
+Tables have special functions associated with them, called
+@vocab{Methods}, which allow us to do all sorts of things with those
+tables. For example, we can get the first data row in a table by
+using the `.row-n` method:
+
+  animals-table.row-n(0)
+
+Note: data rows start at zero!
+
+[.lesson-instruction]
+For practice, in the Interactions Area, use the `row-n` method to get the second and third data rows.
+
+What is the Domain of .row-n? What is the Range? Find the
+contract for this method in your contracts table. A table
+@vocab{method}
+is a special kind of function which always operates on a specific
+table. In our example, we always use .row-n with the animals
+table, so the number we pass in is always used to grab a
+particular row from animals-table.
+
+Pyret also has a way for us to get at individual columns of a
+Row, by using a Row Accessor. Row accessors start with a Row
+value, followed by square brackets and the name of the column
+where the value can be found. Here are three examples that use
+row accessors to get at different columns from the first row in
+the animals-table:
+
+  animals-table.row-n(0)["name"]
+  animals-table.row-n(0)["age"]
+  animals-table.row-n(0)["fixed"]
+
+[.lesson-instruction]
+How would you get the `weeks` column out of the _second_ row? The third?
+
+Let’s get some practice playing with the `row-n` method, and row-accessors!
+
+[.lesson-instruction]
+Complete the exercises on
+@worksheet-link{workbook-pages/lookup-questions.adoc}.
+
+Tables have other methods too! The `.order-by` method consumes a
+String (the name of the column you want to order) and a Boolean
+(true for ascending, false for descending). Try typing the
+following expressions into the Interactions Area. What do you
+get?
+
+  animals-table.order-by("name", true)
+  animals-table.order-by("age", false)
+
+What is the Domain of `.order-by`? What is the Range? Find the
+contract for this method in your contracts table, and make sure
+it makes sense!
+
+== Defining Values(Time 15 minutes)
+
+Pyret allows us to define names for values using the `=` sign. In
+math, you’re probably used to seeing definitions like _x = 4_, which
+defines the name x to be the value 4. Pyret works the same way,
+and you’ve already seen two names defined in this file:
+`shelter-sheet` and `animals-table`. We generally write definitions
+on the left, in the Definitions Area. You can add your own
+definitions, for example:
+
+  my-name = "Maya"
+  sum = 2 + 2
+  img = triangle(10, "solid", "red")
+
+[.lesson-instruction]
+With your partner, take turns adding definitions to this file:
+- Define a value with name `food`, whose value is a String
+  representing your favorite food
+- Define a value with name `year`, whose value is a Number
+  representing the current year
+- Define a value with name `likes-cats`, whose value is a Boolean
+  that is `true` if you like cats and `false` if you don’t
+
+Each row of our `animals-table` represents a single animal in our
+shelter. We can use the `row-n` method to define values. Type the
+following lines of code into the Definitions Area and click
+“Run”:
+
+  animalA = animals-table.row-n(1)
+  animalB = animals-table.row-n(10)
+
+What happens when you evaluate `animalA` in the Interactions Area?
+
+[.lesson-instruction]
+Define _at least_ two additional values to be animals from the
+`animals-table`, called `animalC` and `animalD`.
+
+Let’s get some practice combining Lookups with Value Definitions.
+
+[.lesson-instruction]
+Complete the exercises on
+@worksheet-link{workbook-pages/more-practice-w-lookups.adoc}.
+
+
+== Closing (Time 5 minutes)
+
+Congratulations! You’ve explored the Animals dataset, formulated
+your own questions and begun to think critically about the
+connections between data and the questions we ask about it. For
+the rest of this course, you’ll be learning new programming and
+Data Science skills, practicing them with the Animals dataset and
+then applying them to your own data.
+
+////
+Have students share which dataset they chose, and pick one question they’re looking at.
+////
+
+== Additional Exercises:
+
+- @worksheet-link{workbook-pages/what-can-you-answer.adoc, What
+  can you answer?}

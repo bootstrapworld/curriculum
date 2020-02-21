@@ -91,11 +91,11 @@
 
     ;data science
     ("ds-intro" "6.SP.1-3" "Data 3.1.3" "BS-PL.1" "BS-PL.2")
-    ("ds-questions-n-defs" "Data 3.1.3" "BS-DR.1" "BS-DR.2" "BS-PL.3")
-    ("ds-exploring-datasets" "Data 3.1.3")
-    ("ds-visualizing-shape-of-data" "6.SP.4-5" "Data 3.1.2" "Data 3.1.3" "HSS.ID.A" "S-ID.1-4")
-    ("ds-center-n-spread" "6.SP.4-5" "Data 3.2.1" "HSS.ID.A" "S-ID.1-4")
-    ("ds-advanced-analysis" "Data 3.1.1" "BS-DR.1" "BS-DR.2" "BS-DR.4" "BS-PL.3")
-    ("ds-visualizing-relationships" "Data 3.1.1" "Data 3.1.2" "Data 3.1.3" "S-ID.5-6" "BS-DR.1" "BS-DR.2" "BS-DR.4")
-    ("ds-computing-relationships" "Data 3.1.3" "Data 3.2.1" "HSS.ID.B" "HSS.ID.C" "S-ID.7-9")
+    ("ds-question-types" "Data 3.1.3" "BS-DR.1" "BS-DR.2" "BS-PL.3")
+    ("ds-exploring-your-dataset" "Data 3.1.3")
+    ("ds-visualizing-shape" "6.SP.4-5" "Data 3.1.2" "Data 3.1.3" "HSS.ID.A" "S-ID.1-4")
+    ("ds-measures-of-center" "6.SP.4-5" "Data 3.2.1" "HSS.ID.A" "S-ID.1-4")
+    ("ds-method-chaining" "Data 3.1.1" "BS-DR.1" "BS-DR.2" "BS-DR.4" "BS-PL.3")
+    ("ds-correlations" "Data 3.1.1" "Data 3.1.2" "Data 3.1.3" "S-ID.5-6" "BS-DR.1" "BS-DR.2" "BS-DR.4")
+    ("ds-linear-regression" "Data 3.1.3" "Data 3.2.1" "HSS.ID.B" "HSS.ID.C" "S-ID.7-9")
     ))
