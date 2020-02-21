@@ -115,6 +115,7 @@ when it prints out the glossary for a particular unit
     ("sample instances" "a collection of single instances, or also used to describe illustrative instances that we use to provide examples of a data structure")
     (("select" "selects" "selecting") "a query that creates a table containing only a subset of a specified table's columns")
     (("scatter plot" "scatter plots") "a chart where points are placed on axes according to pairs of values")
+    ("shape" "The aspect of a dataset that tells which values are more or less common")
     ("sieve" "a table query that creates a table containing only rows that satisfy a boolean expression")
     ("skew" "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than separated by a gap (as with outliers)")
     ("spread" "how far the values in a dataset are away from the center")
