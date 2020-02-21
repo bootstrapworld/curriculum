@@ -1,5 +1,5 @@
 (
- "choosing-your-dataset.adoc"
+ "exploring-datasets.adoc"
  "my-dataset.adoc"
  "samples-from-my-dataset.adoc"
  "design-recipe-helper-funs.adoc"
