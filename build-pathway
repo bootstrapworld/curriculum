@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-02-20 # last modified
+LASTMOD=2020-02-25 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -160,6 +160,14 @@ function insertprintcss() {
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wkhtmltopdf.css" \/>/' \
+    $f
+}
+
+function insertwbpagecss() {
+  local f=$1
+  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  $SED -i \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wbpage.css" \/>/' \
     $f
 }
 
@@ -361,6 +369,7 @@ function buildworkbookpages() {
             echo building $PATHWAY "→" $L "→" "$dd" "→" $f
             $PROGDIR/adoc-preproc.rkt $f
             resolveabbrevs $fhtml
+            insertwbpagecss $fhtml
           fi
           if ! $NOPDF; then
             fpdf=${fhtml%.html}.pdf

@@ -138,6 +138,10 @@ entry `"file.adoc"` is convenient shorthand for `("file.adoc"
 "portrait")`.)  (The strings `"landscape"` and `"portrait"` may
 be in any case.)
 
+CAUTION: For backward compatibility, the filename
+         `lesson-index.rkt` is allowed in lieu of
+         `workbook-pages.rkt` but this use is deprecated.
+
 Lesson pages are paginated by default when they show up in the
 workbook. If you don’t want a page to be populated, its entry in
 `workbook-pages.rkt` should be `("file.adoc" "portrait"
@@ -163,6 +167,10 @@ a Racket list -- the names of the lessons (e.g., `sample-lesson`)
 that should be included in the
 pathway, in the order in which they should appear in the pathway
 workbook.
+
+CAUTION: For backward compatibility, the filename
+         `workbook-index.rkt` is allowed in lieu of
+         `lesson-order.rkt` but this use is deprecated.
 
 The pathway directory can also contains a `resources`
 subdirectory, where an `.adoc` file describes the “Teacher
@@ -380,30 +388,6 @@ You can pull and merge from `master` as needed:
   git merge master
 
 If conflicts arise, you will be given a way to resolve them.
-
-=== To make your fetch/merge experience easier
-
-The directory `distribution` contains generated files which can
-always be re-generated. Before you merge, delete its contents and re-create
-its default so the merge doesn’t get snagged in it:
-
-  cd distribution
-  rm -fr *
-  git checkout -- \*
-
-Create your own lesson directories under `lessons` and your own
-pathways under `pathways`.  Work exclusively there, rather than
-the supplied lessons `lessonA`, `lessonB`, `lessonC` and supplied
-pathway `pathwayP` -- which are there purely for illustration.
-As the original repo doesn’t know about your lessons and
-pathways, there will be no conflicts from that regard.
-
-NB: When you create a pathway, named `pathwayQ` say, use
-
-  ./build-pathway pathwayQ
-
-to generate its files, as already described in a previous
-section.
 
 == Prerequisites
 
