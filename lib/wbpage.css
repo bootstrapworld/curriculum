@@ -1,2 +1,18 @@
-/* CSS specific to workbook pages. Please replace to taste. */
+/* CSS specific to workbook pages for PDF. Do not use @media print here, as
+ * wkhtmltopdf won't pick it up.
+ *
+ * Its companion file, browser-wbpage.css, slurps this in for @media print, so
+ * printing from the browser will match the wkhtmltopdf output.
+ */
 
+#header > h1:first-child,
+.sect1 > h1:first-child,
+.sect1 > h2:first-child,
+.sect1 > h3:first-child {
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 24pt;
+}

@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-02-26 # last modified
+LASTMOD=2020-02-27 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -163,11 +163,11 @@ function insertprintcss() {
     $f
 }
 
-function insertprintwbpagecss() {
+function insertprintcss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'print-wbpage.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'browser-wkhtmltopdf.css" \/>/' \
     $f
 }
 
@@ -176,6 +176,14 @@ function insertwbpagecss() {
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wbpage.css" \/>/' \
+    $f
+}
+
+function insertwbpagecss_browser() {
+  local f=$1
+  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  $SED -i \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'browser-wbpage.css" \/>/' \
     $f
 }
 
@@ -377,17 +385,18 @@ function buildworkbookpages() {
             echo building $PATHWAY "→" $L "→" "$dd" "→" $f
             $PROGDIR/adoc-preproc.rkt $f
             resolveabbrevs $fhtml
-            insertwbpagecss $fhtml
+            insertprintcss_browser $fhtml
+            insertwbpagecss_browser $fhtml
           fi
           if ! $NOPDF; then
             fpdf=${fhtml%.html}.pdf
             if test $fhtml -nt $fpdf; then
               cp -p $fhtml $TMPHTML
               insertprintcss $TMPHTML
-              insertprintwbpagecss $TMPHTML
+              insertwbpagecss $TMPHTML
               wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN \
                 --lowquality -q $TMPHTML $fpdf
-              rm $TMPHTML
+              #rm $TMPHTML
             fi
           fi
         fi
@@ -447,6 +456,7 @@ function buildlessonplan() {
       resolveabbrevs index.html
       moveheaderlogopos index.html
       insertnarrativecss index.html
+      insertprintcss_browser index.html
       cleanuptitle index.html
     fi
     if ! $NOPDF; then
@@ -455,7 +465,7 @@ function buildlessonplan() {
         cp index.html $TMPHTML
         insertprintcss $TMPHTML
         wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-        rm $TMPHTML
+        #rm $TMPHTML
       fi
     fi
   fi
