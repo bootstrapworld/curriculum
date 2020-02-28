@@ -180,7 +180,7 @@
     (unless *debug*
       ;(printf "cleaning up handle pdfs\n")
       (for ([pdf-page-spec *pdf-page-specs*])
-        (let ([handle (list-ref pdf-page-spec 2)])
+        (let ([handle (list-ref pdf-page-spec 3)])
           (delete-file (format "~a.pdf" handle)))))
 
     (when (file-exists? "workbook-numbered.pdf")
