@@ -41,13 +41,13 @@
 (define (print-link-to-glossary o)
   (display
     (string-append
-      "\n- link:./index-glossary.shtml[Glossary]\n"
+      "\n- link:./pathway-glossary.shtml[Glossary]\n"
       "-- A list of vocabulary words used in this pathway.\n") o))
 
 (define (print-link-to-standards o)
   (display
     (string-append
-      "\n- link:./index-standards.shtml[Standards Alignment]\n"
+      "\n- link:./pathway-standards.shtml[Standards Alignment]\n"
       "-- Find out how our materials align with Common Core Content\n"
       "and Practice Standards, as well as the TEK and CSTA Standards.\n")
     o))

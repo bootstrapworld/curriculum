@@ -295,7 +295,7 @@
       (string-append
         "|\n"
         "\n"
-        "include::./index-standards.asc[]\n") o)))
+        "include::./pathway-standards.asc[]\n") o)))
 
 (define (include-standards o) ;XXX obsolete?
   (display
@@ -309,7 +309,7 @@
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::./index-glossary.asc[]\n\n"))
+  (fprintf o "\n\ninclude::./pathway-glossary.asc[]\n\n"))
 
 (define (workbook-pagenum lesson snippet)
   (let* ([snippet.adoc
@@ -424,7 +424,7 @@
 (define *lesson-summary-file* #f)
 
 (define *asciidoctor*
-  (format "asciidoctor -a linkcss -a proglang=~a -a pathway=~a -a stylesheet=~acurriculum.css"
+  (format "asciidoctor -a linkcss -a proglang=~a -a pathway=~a -a stylesheet=~alib/curriculum.css"
           *proglang*
           (getenv "SRCPATHWAY")
           *pathway-root-dir*))
@@ -950,8 +950,8 @@
 
 (define (create-glossary-subfile)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (getenv "NARRATIVE"))
-  (print-menubar "index-glossary")
-  (call-with-output-file "index-glossary.asc"
+  (print-menubar "pathway-glossary")
+  (call-with-output-file "pathway-glossary.asc"
     (lambda (op)
       (unless (empty? *glossary-items*)
         (set! *glossary-items*
@@ -1029,8 +1029,8 @@
 (define (create-standards-subfile)
   ;(printf "doing create-standards-subfiles ~s\n" *standards-met*)
   (when (getenv "NARRATIVE")
-    (print-menubar "index-standards"))
-  (call-with-output-file "index-standards.asc"
+    (print-menubar "pathway-standards"))
+  (call-with-output-file "pathway-standards.asc"
     (lambda (op)
       (unless (empty? *standards-met*)
         (when (getenv "NARRATIVE")

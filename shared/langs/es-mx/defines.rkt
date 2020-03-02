@@ -21,12 +21,12 @@
 [.pathway_external_links]\n"))
 
 (define (print-link-to-glossary o)
-  (fprintf o "\n- link:./index-glossary.html[Glossary]\n")
+  (fprintf o "\n- link:./pathway-glossary.html[Glossary]\n")
   (fprintf o "-- Check here for the technical terms and concepts used
   in this material.\n"))
 
 (define (print-link-to-standards o)
-  (fprintf o "\n- link:./index-standards.html[Standards Alignment]\n")
+  (fprintf o "\n- link:./pathway-standards.html[Standards Alignment]\n")
 
 (define (print-link-to-forum o)
   (fprintf o "\n- link:https://discourse.bootstrapworld.org[Bootstrap Discussion Forum]\n")

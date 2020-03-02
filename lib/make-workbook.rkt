@@ -143,16 +143,17 @@
                     (cons (list (list basename workbook-page) pagenum) pagenum-list)))
                 (cond [fresh-lesson
                         (set! curr-lesson basename)
-                        (fprintf o "\n\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                                 "" pagenum handle)
+                        (fprintf o "\n\\includepdf[pagecommand={\\lfoot{}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
+                                  pagenum handle)
                         (when include-lesson
                           (let ([lesson-plan-pdf (format "lessons/~a/index.pdf" curr-lesson)])
                             (when (file-exists? lesson-plan-pdf)
                               (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
                                        lesson-plan-pdf))))]
                       [else
-                        (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\rfoot{~a}}]{~a.pdf}\n"
-                                 title pagenum handle)])
+                        (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
+                                 "" ;title 
+                                 pagenum handle)])
                 (loop (+ i 1) (cdr pdf-page-specs)))))
           (when (and (not include-lesson) (not teacher-version))
             (call-with-output-file "workbook-pagenum-index.rkt"

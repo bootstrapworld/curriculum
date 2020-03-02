@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-02-27 # last modified
+LASTMOD=2020-03-02 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -151,7 +151,7 @@ function insertnarrativecss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'narrative.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/narrative.css" \/>/' \
     $f
 }
 
@@ -159,7 +159,7 @@ function insertprintcss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wkhtmltopdf.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wkhtmltopdf.css" \/>/' \
     $f
 }
 
@@ -167,7 +167,7 @@ function insertprintcss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'browser-wkhtmltopdf.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wkhtmltopdf.css" \/>/' \
     $f
 }
 
@@ -175,7 +175,7 @@ function insertwbpagecss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'wbpage.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wbpage.css" \/>/' \
     $f
 }
 
@@ -183,7 +183,7 @@ function insertwbpagecss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'browser-wbpage.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wbpage.css" \/>/' \
     $f
 }
 
@@ -396,7 +396,9 @@ function buildworkbookpages() {
               insertwbpagecss $TMPHTML
               wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN \
                 --lowquality -q $TMPHTML $fpdf
-              #rm $TMPHTML
+              if ! $DEBUG; then
+                rm $TMPHTML
+              fi
             fi
           fi
         fi
@@ -465,7 +467,9 @@ function buildlessonplan() {
         cp index.html $TMPHTML
         insertprintcss $TMPHTML
         wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-        #rm $TMPHTML
+        if ! $DEBUG; then
+          rm $TMPHTML
+        fi
       fi
     fi
   fi
@@ -509,27 +513,27 @@ function buildlessonplans() {
 }
 
 function makeglossaryandstandards() {
-  if test -f index-glossary.asc; then
+  if test -f pathway-glossary.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
-      -o index-glossary.shtml \
-      index-glossary.asc
-          insertbodyid index-glossary.shtml
-          insertstylecss index-glossary.shtml
-          resolveabbrevs index-glossary.shtml
+      -o pathway-glossary.shtml \
+      pathway-glossary.asc
+          insertbodyid pathway-glossary.shtml
+          insertstylecss pathway-glossary.shtml
+          resolveabbrevs pathway-glossary.shtml
   fi
-  if test -f index-standards.asc; then
+  if test -f pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
-      -o index-standards.shtml \
-      index-standards.asc
-          insertbodyid index-standards.shtml
-          insertstylecss index-standards.shtml
-          resolveabbrevs index-standards.shtml
+      -o pathway-standards.shtml \
+      pathway-standards.asc
+          insertbodyid pathway-standards.shtml
+          insertstylecss pathway-standards.shtml
+          resolveabbrevs pathway-standards.shtml
   fi
 }
 
@@ -620,7 +624,8 @@ function buildpathway() {
       #exit
     fi
 
-    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE
+    mkdir distribution/$PATHWAY/$LANGUAGE/lib
+    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
 
     cd distribution/$PATHWAY/$LANGUAGE
 
@@ -759,7 +764,7 @@ asciidoctor -a linkcss index.adoc
 
 if ! $DEBUG; then
   rm -fr $PROGDIR
-  for f in adoc asc rkt title txt; do
+  for f in adoc asc asciidoc rkt tex title txt; do
     find . -name \*.$f -delete
   done
 fi
