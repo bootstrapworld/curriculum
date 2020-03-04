@@ -453,7 +453,7 @@
       (when header-with-logo?
         (display
           (enclose-span ".bootstraplogo"
-            "image:{pathwayrootdir}bootstraplogo.png[]")
+            "image:{pathwayrootdir}lib/bootstraplogo.png[]")
           o)
         ;(fprintf o "\n\n")
         (display " " o)
@@ -924,7 +924,7 @@
               (fprintf o "\n--\n\n")
               (fprintf o "[.copyright]\n")
               (fprintf o "--\n")
-              (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}CCbadge.png[], window=\"_blank\"]\n")
+              (fprintf o "link:http://creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}lib/CCbadge.png[], window=\"_blank\"]\n")
               (fprintf o (create-copyright *copyright-name* *copyright-author*))
               (fprintf o "\n--\n")
               )
