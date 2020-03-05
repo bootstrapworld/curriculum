@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-02 # last modified
+LASTMOD=2020-03-05 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -20,7 +20,7 @@ VERSION=false
 
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --debug; then
+  if test "$arg" = --debug -o "$arg" == -d; then
     DEBUG=true;
   elif test "$arg" = --force -o "$arg" == -f; then
     FORCE=true;
@@ -624,7 +624,7 @@ function buildpathway() {
       #exit
     fi
 
-    mkdir distribution/$PATHWAY/$LANGUAGE/lib
+    mkdir -p distribution/$PATHWAY/$LANGUAGE/lib
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
 
     cd distribution/$PATHWAY/$LANGUAGE
