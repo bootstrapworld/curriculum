@@ -1,16 +1,15 @@
 = Plotting and Displaying Data
 
-@lesson-description{Students learn to apply functions to entire Tables,
-generating pie charts and bar charts. They then explore other plotting
-and display functions that are part of the Data Science library.}
+@lesson-description{Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{}
+@prereqs-stds{ds-operators-functions}
 |Lesson Goals
 |Students will be able to:
 
-* Add columns to a Pyret table
+* Explain the difference between pie and bar charts
+* Generate pie and bar charts (among others) from the animals dataset
 
 | Materials
 |
@@ -20,22 +19,13 @@ internet
 
 |===
 
-== Introduction (10 min)
-TODO: fill in 
+== Introduction (5 min)
+[.lesson-instruction]
+Can you think of a situation when you’d want to consume a _Table_, and use that to produce an image? Have you ever seen any pictures created from tables of data?
 
 == Making Plots and Displays (10 min)
-Can you think of a situation when you’d want to consume a _Table_,
-and use that to produce an image? Have you ever seen any pictures
-created from tables of data?
-
-////
-Give the class a minute to brainstorm.
-////
-
-The library included at the top of the file includes some helper
-functions that are useful for Data Science, which we will use
-throughout this course. Here is the contract for a function that
-does just that, and an example of using it:
+The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use
+throughout this course. Here is the contract for a function that does just that, and an example of using it:
 
 ----
 # pie-chart :: (t :: Table, col :: String) -> Image
@@ -49,24 +39,12 @@ pie-chart(animals-table, "gender")
 - What comes back?
 
 [.lesson-instruction]
-In the Interactions Area, type `pie-chart(animals-table,
-"species")` and hit Enter. What happens? What happens when you
-hover over a slice of the pie? These plots are _interactive_! This
-allows us to experiment with the data before generating the final
-image.
+In the Interactions Area, type `pie-chart(animals-table, "species")` and hit Enter. What happens? Hovering over a pie slice or bar reveals the value or percentage of the whole, and the label. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
-////
-Hovering over a pie slice or bar reveals the value or percentage of the whole, and the label.
-////
-
-The function `pie-chart` consumes a Table of data, along with the
-_name of a categorical column you want to display_. The computer
-will go through the column, counting the number of times that
-each value appears. It will then create a pie slice for each
-value, with the size of the slice being the percentage of times
-it appears. In this example, we used our `animals-table` table as
-our dataset, and made a pie chart showing the distribution of
-`species` across the shelter.
+The function `pie-chart` consumes a Table of data, along with the _name of a categorical column you want to display_. The computer
+will go through the column, counting the number of times that each value appears. It will then create a pie slice for each
+value, with the size of the slice being the percentage of times it appears. In this example, we used our `animals-table` table as
+our dataset, and made a pie chart showing the distribution of `species` across the shelter.
 
 Here is the contract for another function:
 
@@ -75,39 +53,25 @@ Here is the contract for another function:
 ----
 
 [.lesson-instruction]
-Use this function to make a bar chart showing the number of each gender across the shelter.
-
-Do you think we could use any column? What about a quantitative column?
-
-[.lesson-instruction]
-Experiment with these two functions, passing in different column
-names for the label and data columns. If you get an error
-message, _read it carefully!_ What do you think are the rules for
-what kinds of columns can be used by _bar-chart_ and _pie-chart_?
+- Which column of the animals table tells us whether an animal is male or female?
+- Use `bar-chart` to make a display showing the number of female animals at the shelter.
+- Do you think we could use any column? What about a quantitative column?
+- Experiment with these two functions, passing in different column names for the label and data columns. If you get an error message, _read it carefully!_ 
+- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 
 == (Optional) Exploring other plots (Time 10 minutes)
 
-OPTIONAL: there are lots of other functions, for all different
-kinds of charts and plots. Even if you don’t know what these
-plots are for yet, see if you can use your knowledge of Contracts
-to figure out how to use them. What do you think they mean?
+OPTIONAL: there are lots of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them. What do you think they mean?
 
 - How many columns are needed to make a `histogram`?
-- Are ``histogram``s made from quantitative or categorical columns?
+- Are histograms made from quantitative or categorical columns?
 - What do you think a `histogram` tells us about the data?
 - How many columns are needed to make a `box-plot`?
 - Are ``box-plot``s made from quantitative or categorical columns?
 - What do you think a `box-plot` tells us about the data?
 - Can you answer the same questions for other plots?
 
-Sometimes we want to summarize a categorical column in a Table,
-rather than a pie chart. For example, it might be handy to have a
-table that has a row for dogs, cats, lizards, and rabbits, and
-then the count of how many of each type there are.
-
-Pyret has a function that does exactly this! Try typing this code into the Interactions Area:
-
-  count(animals-table, "species")
+Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
 
 What did we get back? `count` is a function that consumes a table
 and the name of a categorical column, and produces a _new table_
