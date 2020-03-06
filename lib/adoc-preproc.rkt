@@ -645,7 +645,7 @@
                                  [s (assoc-glossary arg *glossary-list*)])
                             (when (string=? arg "")
                               (printf "WARNING: Directive @vocab has ill-formed argument~%"))
-                            (display arg o)
+                            (display (enclose-span ".vocab" arg) o)
                             (cond [s (unless (member s *glossary-items*)
                                        (set! *glossary-items* (cons s *glossary-items*)))]
                                   [else (printf "Item ~a not found in glossary~%"
