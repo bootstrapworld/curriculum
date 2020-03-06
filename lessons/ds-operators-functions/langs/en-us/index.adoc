@@ -9,7 +9,11 @@ Strings, Types, Operations, Contracts, and applying Functions.}
 |Lesson Goals
 |Students will be able to:
 
-* Add columns to a Pyret table
+* Explain the difference between several data types: Numbers, Strings, Images and Booleans
+* Identify a data type for a given value
+* Write Numbers, String, and Booleans in the Interactions Area
+* Apply functions to create Images
+* Identify the parts of a Contract, and use it to apply a function
 
 | Materials
 |
@@ -19,31 +23,19 @@ internet
 
 |===
 
-== Introduction (10 min)
+== Introduction (5 min)
 
-TODO: fill in
+You've already learned how to import a spreadsheet into Pyret, and print it out in the Interactions Area. Today we'll go deeper into programming, learning how to make Pyret do simple math, work with text, and create simple computer graphics.
 
 
 == Values and Operators (20 min)
 
-Pyret lets us use many different kinds of data. In this table,
-for example, you can see Numbers (the number of legs each animal
-has), Strings (the species of the animal), and Booleans (whether
-it is true or false than animal is fixed). Let’s get some
-practice playing with these Datatypes.
+Pyret lets us use many different kinds of data. In this table, for example, you can see Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false than animal is fixed). Let’s get some practice playing with these Datatypes.
 
 [.lesson-instruction]
-With your partner(s), go through the questions on
-@worksheet-link{workbook-pages/numbers-n-strings.adoc}. Talk
-about the answers to each question, and write down your answers
-when required.
+With your partner(s), go through the questions on @worksheet-link{workbook-pages/numbers-n-strings.adoc}. Talk about the answers to each question, and write down your answers when required.
 
-////
-Give students time to experiment, and then debrief as a group.
-////
-
-By now you’ve discovered a number of important things about our
-programming language:
+Discuss what students have learned about Pyret:
 
 - Numbers and Strings evaluate to themselves.
 - Anything in quotes is a String, even something like `"42"`.
@@ -55,98 +47,53 @@ programming language:
   another, but we can’t add the Number `4` to the String
   `"hello"`.
 
-You’ve also seen a few @vocab{error messages} here. Error messages are a
-way for Pyret to tell you what went wrong, and are a really
-helpful way of finding mistakes! You’ve seen errors for missing
-spaces around operators, missing quotation marks, and mismatched
-operators without parentheses. What other errors do you think
-there are?
+Students will also have encountered @vocab{error messages} during this activity. Error messages are a way for Pyret to explain went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
 
-- In `6 / 0` we know that you can’t divide any number by 0! In
-  this case, Pyret obeys the same rules as humans, and gives an
-  error.
-- An unclosed quotation mark is a problem, but so is an unmatched
-  parentheses. For example, you’ll get an error message if you
-  type `(2 + 2`.
+- In `6 / 0` we know that you can’t divide any number by 0! In this case, Pyret obeys the same rules as humans, and gives an error.
+- An unclosed quotation mark is a problem, but so is an unmatched parentheses. For example, you’ll get an error message if you type `(2 + 2`.
 
-As you’ve seen, operators like `+` and `-` behave exactly the way in
-Pyret that they do in math class: they add and subtract Numbers,
-and produce new Numbers! But what about operators like
-greater-than and less-than-or-equal?
+Operators like `+` and `-` behave exactly the way in Pyret that they do in math class: they add and subtract Numbers, and produce new Numbers! But what about operators like greater-than and less-than-or-equal?
 
-- To identify if an animal’s gender is `"male"`, we need to know if
-  the value in that column is _equal_ to the string `"male"`.
-- To sort the table by age, we need to know if one animal’s age
-  is _less than_ another’s.
-- To filter the table to show only young animals, we need to know
-  if an animal’s age is _less than_ 2.
+- To identify if an animal’s gender is `"male"`, we need to know if the value in that column is _equal_ to the string `"male"`. 
+- To sort the table by age, we need to know if one animal’s age is _less than_ another’s.
+- To filter the table to show only young animals, we need to know if an animal’s age is _less than_ 2.
 
-Those come in handy when comparing quantitative data, and Pyret
-has them, too: Equals (`==`), less-than (`<`), greater-than (`>`), as
-well as greater-than-or-equal (`>=`) and less-than-or-equal (`<=`).
+There are several operators that help us compare quantitative data, and Pyret has them, too: equals (`==`), less-than (`<`), greater-than (`>`), as well as greater-than-or-equal (`>=`) and less-than-or-equal (`<=`).
 
 [.lesson-instruction]
-With your partner(s), complete @worksheet-link{workbook-pages/booleans.adoc}. Talk
-about the answers to each question, and write down your answers
-when required.
+With your partner(s), complete @worksheet-link{workbook-pages/booleans.adoc}. Talk about the answers to each question, and write down your answers when required.
 
-////
-Have students share back. Point out that all the same rules about
-parentheses, spaces, and types still applies!
-////
+Debrief student answers as a class.
 
-By using `and` and `or`, we can _combine_ tests. For example, we might
-want to ask if a character in a videogame has run out of health
-points _and_ if they have any more lives. We might want to know if
-someone’s ZIP Code puts them in Texas or New Mexico. When you go
-out to eat at a restaurant, you might ask what items on the menu
-have meat and cheese. We’ll use these Boolean operators in a lot
+By using `and` and `or`, we can _combine_ tests. For example, we might want to ask if a character in a videogame has run out of health points _and_ if they have any more lives. We might want to know if
+someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese. We’ll use these Boolean operators in a lot
 of our Data Science work later on.
 
-////
-Have students play “true or false”, in which they stand if you
-say something true, and sit if you say something false. Start
-simple (“I am wearing a hat”), and gradually get complex (“I am
-wearing a hat, and I am standing on one leg”).
-////
+[.lesson-instruction]
+Have students play “true or false”, in which they stand if you say something true, and sit if you say something false. Start simple (“I am wearing a hat”), and gradually get complex (“I am wearing a hat, and I am standing on one leg”).
 
 == Applying Functions (Time 30 minutes)
 
-So now you know about Numbers, Strings, Booleans and Operators --
-all of which behave just like they do in math. But what about
+So now you know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about
 functions? You may remember functions from algebra: _f(x) = x²_.
 
 [.lesson-instruction]
 - What is the name of this function?
 - What will the expression _f(2)_ evaluate to? _f(3)_?
-- The values that we give to a function are called its
-  @vocab{arguments}. How many arguments does _f_ expect?
+- The values that we give to a function are called its @vocab{arguments}. How many arguments does _f_ expect?
 
-////
-“Arguments” are the values passed into a function. This is subtly
-different from variables, which are the placeholders that get
-replaced with those values!
-////
+“Arguments” (or "inputs") are the values passed into a function. This is subtly different from _variables_, which are the placeholders that get replaced with those values!
 
-Pyret has lots of built-in functions, which we can use to write
-more interesting programs. They also work pretty much the same
-way they do in algebra! Let’s explore one of Pyret’s functions,
-called `num-sqrt`. Type this line of code into the interactions
-area and hit Enter.
-
-  num-sqrt(16)
+Pyret has lots of built-in functions, which we can use to write more interesting programs. 
 
 [.lesson-instruction]
+Type this line of code into the interactions area and hit Enter: `num-sqrt(16)`.
 - What is the name of this function?
 - What did the expression `num-sqrt(16)` evaluate to?
 - Does the `num-sqrt` function produce Numbers? Strings? Booleans?
 - How many @vocab{arguments} does `num-sqrt` expect?
 
-Of course, functions on a computer can do a lot more than make
-Numbers! Type this line of code into the interactions area and
-hit Enter.
-
-  triangle(50, "solid", "red")
+Of course, functions on a computer can do a lot more than make Numbers! Type this line of code into the interactions area and hit Enter: `triangle(50, "solid", "red")`
 
 [.lesson-instruction]
 - What is the name of this function?
@@ -154,8 +101,7 @@ hit Enter.
 - How many arguments does `triangle` expect?
 - Does the `triangle` function produce Numbers? Strings? Booleans?
 
-You’ve just created an example of a new Datatype, called an
-_Image_.
+You’ve just created an example of a new Datatype, called an _Image_.
 
 [.lesson-instruction]
 - What are the types of the arguments `triangle` was expecting?
@@ -163,10 +109,8 @@ _Image_.
 - Try making different triangles. Change the size and color! Try
   using `"outline"` for the second argument.
 
-The `triangle` function consumes a Number and two Strings as
-input, and produces an Image. As you can imagine, there are many
-other functions for making images, each with a different set of
-arguments. For each of these functions, we need to keep track of
+The `triangle` function consumes a Number and two Strings as input, and produces an Image. As you can imagine, there are many
+other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of
 three things:
 
 - *Name* -- the name of the function, which we type in whenever we want to use it
@@ -174,31 +118,9 @@ three things:
   Types!), written between parentheses and separated by commas
 - *Range* -- the type of data the function produces
 
-Domain and Range are _Types_, not specific values. As a
-convention, we *capitalize Types and keep names in lowercase*.
-`triangle` works on many different Numbers, not just the `20` we used
-in the example above!
+Domain and Range are _Types_, not specific values. As a convention, we *capitalize Types and keep names in lowercase*. `triangle` works on many different Numbers, not just the `20` we used in the example above!
 
-[.lesson-instruction]
-Can you see what is wrong with each of these expressions? Try
-copying them into Pyret, one at a time, and reading the error
-messages aloud.
-- `triangle(20, "solid", "red"`
-- `triangle(20 "solid" "red")`
-- `triangle("20", "solid", "red")`
-- `triangle(20, "solid", "red", "striped")`
-
-////
-Explanations for each error message:
-
-Pyret needs both parentheses around the arguments, so that it knows exactly where the expression begins and ends.
-Arguments must be separated with a comma.
-triangle expects the first argument to be a Number. "20" is a String.
-triangle takes exactly three arguments. Functions must be called with the correct number of arguments.
-////
-
-These three parts make up a @vocab{contract} for each function.
-Let’s take a look at the Name, Domain, and Range of `num-sqrt` and
+These three parts make up a @vocab{contract} for each function. Let’s take a look at the Name, Domain, and Range of `num-sqrt` and
 `triangle`:
 
 ----
@@ -206,79 +128,49 @@ Let’s take a look at the Name, Domain, and Range of `num-sqrt` and
 # triangle :: (side :: Number, mode :: String, color :: String) -> Image
 ----
 
-The first part of a contract is the function’s name. In this
-example, our functions are named `num-sqrt` and `triangle`.
+The first part of a contract is the function’s name. In this example, our functions are named `num-sqrt` and `triangle`.
 
-The second part is the @vocab{Domain}, or the names and types of
-arguments the function expects. `triangle` has a Number and two
-Strings as variables, representing the length of each side, the
-mode, and the color. We write name-type pairs with double-colons,
-with commas between each one.
+The second part is the @vocab{Domain}, or the names and types of arguments the function expects. `triangle` has a Number and two
+Strings as variables, representing the length of each side, the mode, and the color. We write name-type pairs with double-colons,
+with commas between each one. Finally, after the arrow goes the type of the @vocab{Range}, or the function’s output, which in this case is Image.
 
-Finally, after the arrow goes the type of the @vocab{Range}, or the
-function’s output, which in this case is Image.
+
+Most of the time, error messages occur when we've accidentally broken a contract. 
+[.lesson-instruction]
+Can you see what is wrong with each of these expressions? Try copying them into Pyret, one at a time, and reading the error messages aloud.
+- `triangle(20 "solid" "red")`
+- `triangle("20", "solid", "red")`
+- `triangle(20, "solid", "red", "striped")`
 
 [.lesson-instruction]
-Turn to the back of your workbook. We’ve given you the contracts
-for many Image-producing functions (as well as quite a few
-others!). Try using some of these contracts to make shapes.
-
-[.lesson-instruction]
-Turn to the back of your workbook, and get some practice reading
-and using contracts! Make sure you try out the following
-functions:
+Turn to the back of your workbook, and get some practice reading and using contracts! Make sure you try out the following functions:
 - `text`
 - `circle`
 - `ellipse`
 - `star`
 
 [.lesson-instruction]
-Here’s the @vocab{contract} for another new function. Can you
-figure out how to use it in the Interactions Area?
+Here’s the @vocab{contract} for another new function. Can you figure out how to use it in the Interactions Area?
 ----
 # string-repeat :: (s :: String, n :: Number) -> String
 ----
 
-////
-The string s is printed n times, written as a single String.
-////
-
 [.lesson-instruction]
-Here’s an _example_ of another function. Type it into the
-Interactions Area to see what it does. Can you figure out the
-contract, based on the example?
-----
-string-contains("apples, pears, milk", "pears")
-----
-
-////
-The contract is string-contains :: (s :: String, search ::
-String) -> Boolean. Be sure the names students come up with for
-the variables make sense!
-////
+Here’s an _example_ of another function. Type it into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
+`string-contains("apples, pears, milk", "pears")`
 
 
 == Closing (Time 5 minutes)
 
-Today you’ve learned about Numbers, Strings, Booleans, and Images.
-You’ve learned about operators and functions, and how they can be
-used to make shapes, strings, and more!
+Today you’ve learned about Numbers, Strings, Booleans, and Images. You’ve learned about operators and functions, and how they can be used to make shapes, strings, and more!
 
-One of the other skills you’ll learn in this class is how to
-diagnose and fix errors. Some of these errors will be _syntax
-errors_: a missing comma, an unclosed string, etc. All the other
-errors are _contract errors_. If you see an error and you know the
-syntax is right, ask yourself these two questions:
+One of the other skills you’ll learn in this class is how to diagnose and fix errors. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
 
 - What is the function that is generating that error?
 - What is the contract for that function?
 - Is the function getting what it needs, according to its Domain?
 
-By learning to use values, operations and functions, you are now
-familiar with the fundamental concepts needed to write simple
-programs. You will have many opportunities to use these concepts
-in this course, by writing programs to answer data science
-questions.
+By learning to use values, operations and functions, you are now familiar with the fundamental concepts needed to write simple programs. You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
 
 [.lesson-instruction]
 Make sure to save your work, so you can go back to it later!

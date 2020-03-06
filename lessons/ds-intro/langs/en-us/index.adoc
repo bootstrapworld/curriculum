@@ -1,6 +1,6 @@
 = Introduction to Computational Data Science
 
-@lesson-description{Students are introduced to the Animals Dataset, and learn about Table, Categorical and Quantitative data. They begin to program as well, and learn about Numbers, Strings, Types, Operations, Contracts, and Function Application.}
+@lesson-description{Students are introduced to the Animals Dataset, and learn about Table, Categorical and Quantitative data. They are also introduced to the Pyret IDE, and see how to import a table into Pyret and print it out in the Interactions Area.}
 
 [@lesson-intro-table]
 |===
@@ -8,7 +8,8 @@
 |Lesson Goals
 |Students will be able to:
 
-* Add columns to a Pyret table
+* Explain the difference between Categorical and Quantitative data
+* Identify whether a variable in a dataset is either Categorical and Quantitative
 
 | Materials
 |
@@ -57,7 +58,8 @@ What are some other categorical variables you see in this table?
 
 @vocab{Quantitative Data} is used to measure an amount of something, or to compare two pieces of data to see which is _less or more_. If we want to ask “how much” or “which is most”, we’re talking about Quantitative Data. "Pounds" is a quantitative variable, because we can talk about whether one animal weighs more than another or ask what the average weight of animals in the shelter is.
 
-=== We use @vocab{Categorical Data} to answer “which one?”, and @vocab{Quantitative Data} to answer "how much?".
+[.lesson-point]
+We use @vocab{Categorical Data} to answer “which one?”, and @vocab{Quantitative Data} to answer "how much?".
 
 What kind of data -- categorical or quantitative -- are the following columns of data?
 
@@ -111,19 +113,19 @@ After that, we see a line of code that _defines_ `shelter-sheet` to be a spreads
 
 The first line (starting with `#`) is called a _comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called `animals-table`, which is loaded from the `shelter-sheet` defined above. We also create names for the columns: `name`, `species`, `gender`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 
-=== Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
+[.lesson-point]
+Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
 
 [.lesson-instruction]
 Click “Run”, and type `animals-table` into the Interactions Area to see what the table looks like in Pyret. Is it the same table you saw in Google Sheets? What is the same? What is different?
 
-- In Data Science, every table is composed of cells, which are arranged in a grid of rows and columns.
-- Most of the cells contain data, but _the first row and first column_ are special.
-- The first row is called the @vocab{header} row, which gives a unique name to each variable (or “column”) in the table.
-- The first column in the table is the identifier column, which contains a unique ID for each row. Often, this will be the name of the people or places in the table, or sometimes just an ID number.
+In Data Science, every table is composed of cells, which are arranged in a grid of rows and columns. Most of the cells contain data, but _the first row and first column_ are special. The first row is called the @vocab{header} row, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the identifier column, which contains a unique ID for each row. Often, this will be the name of the people or places in the table, or sometimes just an ID number.
 
 [.lesson-instruction]
-How many variables are listed in the header row? What are they called? What is being used for the identifier column in this
-dataset?
+- How many variables are listed in the header row? What are they called? What is being used for the identifier column in this dataset?
+- Try changing the name of one of the columns, and click "Run". What happens when you bring the table back in the Interactions Area?
+- What happens if you remove a column from the list? Or add an extra one?
+
 
 After the header, Pyret tables can have any number of @vocab{data rows}.
 Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_, as in the table below:
