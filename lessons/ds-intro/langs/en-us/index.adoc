@@ -1,9 +1,6 @@
 = Introduction to Computational Data Science
 
-@lesson-description{Students are introduced to the Animals
-Dataset, and learn about Table, Categorical and Quantitative
-data. They begin to program as well, and learn about Numbers,
-Strings, Types, Operations, Contracts, and Function Application.}
+@lesson-description{Students are introduced to the Animals Dataset, and learn about Table, Categorical and Quantitative data. They are also introduced to the Pyret IDE, and see how to import a table into Pyret and print it out in the Interactions Area.}
 
 [@lesson-intro-table]
 |===
@@ -11,262 +8,134 @@ Strings, Types, Operations, Contracts, and Function Application.}
 |Lesson Goals
 |Students will be able to:
 
-* Add columns to a Pyret table
+* Explain the difference between Categorical and Quantitative data
+* Identify whether a variable in a dataset is either Categorical and Quantitative
 
 | Materials
 |
 * Computer for each student (or pair), with access to the
 internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* link:exercises/OpeningQuestions.pdf[Opening questions] printed for each student, group of students, or posted around the room.
 
 |===
 
-== Introduction (10 min)
+== Introduction (20 min)
 
-Take a minute to look at the opening questions we have prepared
-for you, and choose a topic that interests you.
-
-[.lesson-instruction]
-- Once you’ve selected your topic, choose a question you’d like
-  to answer.
-- Spend one minute discussing your answer, and explaining why you
-  answered the way you did. Do other students agree with you?
-- What information could you collect, to determine if your answer
-  is right or not?
-
-////
-- Have students work in groups (no larger than 4), with each
-  group choosing an Opening Question (or writing their own).
-  After they’ve had time to discuss, have a few students share
-  back what they talked about.
-////
-
-What’s the greatest movie of all time? Is Climate Change real?
-Who is the best quarterback? Is Stop-and-Frisk racially biased?
-These questions quickly turn into a discussion about data -- how
-you assess it and how you interpret the results. In this course,
-you’ll learn how to use data to ask and answer questions like
-this. The process of learning from data is called @vocab{Data
-Science}. Data science techniques are used by scientists,
-business people, politicians, sports analysts, and hundreds of
-other different fields to ask and answer questions about data.
-
-////
-You can motivate relevance of data science by using additional
-examples that relate to student interests. Here are a few:
-
-Emojis
-Pop Music
-Election Analysis
-Polling
-Predicting Sports Performance
-Climate Change
-////
-
-We’ll use a @vocab{programming language} to investigate these
-questions. Just like any human language, programming languages
-have their own vocabulary and grammar that you will need to
-learn. The language you’ll be learning for data science is called
-Pyret.
-
-////
-Set expectations for the class. This course is an introduction to
-data science, so some questions will be out of reach!
-////
-
-== The Animals Dataset (20 min)
-
-Open the
-@link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0,
-Animals Spreadsheet} in a new tab, or turn to
-@worksheet-link{workbook-pages/animals-dataset.pdf}.
-This is some data from an animal shelter, listing animals that
-have been adopted. We’ll be using this as an example throughout
-the course, but you’ll be applying what you learn to _a dataset
-you choose_ as well.
+Have students look at the opening questions, either at their desks or in a walk
+around the room.
 
 [.lesson-instruction]
-- Turn to @worksheet-link{workbook-pages/animals-dataset-2.adoc}
-  in your Student Workbook. What do you notice about this
-  dataset? Write down your observations in the first column.
-- Sometimes, looking at data sparks questions. What do you wonder
-  about this dataset? Write down your questions in the second
-  column.
-- There’s a third column, called “Question Type” -- we’re going to
-  return to that later, so you can ignore it for now.
-- If you look at the bottom of the
-  @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0,
-  spreadsheet file}, you’ll see that this document contains
-  multiple sheets called `"pets"` and `"README"`. Which sheet are
-  we looking at?
-- Each sheet contains a table. For our purposes, we only care
-  about the animals table on the `"pets"` sheet.
+- Give students 2 minutes to choose a question that grabs their attention, and group themselves by question. Ideally, no student will be the only one interested in that question.
+- Have students spend 2 minutes coming up with a hypothesis about what the answer is, and explaining why. Does every student in a single question-grouping have the same answer?
+- Give students 5 minutes to think about what information they would need to collect, to find the answer.
 
-////
-Each student (or pair of students) should have a Google Account.
-Have students share back their noticings (statements) and
-wonderings (questions), and write them on the board.
-////
 
-Data Science is all about using a smaller sample of data to make
-predictions about a larger population. It’s important to remember
-that tables are only a sampling of a larger population: this
-table describes some animals, but obviously it isn’t every animal
-in the world! Still, if we took the average age of the animals at
-this particular shelter, it might tell us something about the
-average age of animals in other shelters.
+What’s the greatest movie of all time? Is Climate Change real? Who is the best quarterback? Is Stop-and-Frisk racially biased? These questions quickly turn into a discussion about data -- how you assess it and how you interpret the results. In this course, you’ll learn how to use data to ask and answer questions like this. The process of learning from data is called @vocab{Data Science}. Data science techniques are used by scientists, business people, politicians, sports analysts, and hundreds of other different fields to ask and answer questions about data.
 
-There are two different kinds of data that come up in Data
-Science: Categorical and Quantitative. @vocab{Categorical Data}
-is used to _classify_, not measure. Categories aren’t subject to
-the laws of arithmetic. For example, we couldn’t ask if “cat” is
-more than “lizard”, and it doesn’t make sense to find the
-“average ZIP code” in a list of addresses. We use
-@vocab{Categorical Data} to ask “which one”? When you look at a
-weather forecast, temperature is quantitative but whether it’s
-snowing or raining is categorical.
+We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.
+
+== The Animals Dataset (25 min)
+
+Open the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0, Animals Spreadsheet} in a new tab, or turn to @worksheet-link{workbook-pages/animals-dataset.pdf}. This is some data from an animal shelter, listing animals that have been adopted. We’ll be using this as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
 
 [.lesson-instruction]
-“Species” is a categorical variable, because we can ask questions
-like “which species does Mittens belong to?" What are some other
-categorical variables you see in this table?
+- Turn to @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student Workbook. What do you notice about this dataset? Write down your observations in the first column.
+- Sometimes, looking at data sparks questions. What do you wonder about this dataset? Write down your questions in the second column.
+- There’s a third column, called “Question Type” -- we’re going to return to that later, so you can ignore it for now.
+- If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0, spreadsheet file}, you’ll see that this document contains multiple sheets called `"pets"` and `"README"`. Which sheet are we looking at?
+- Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.
 
-@vocab{Quantitative Data} is used to measure an amount of something, or
-to compare two pieces of data to see which is _less or more_. If we
-want to ask “how much” or “which is most”, we’re talking about
-Quantitative Data.
+
+Each student (or pair of students) should have a Google Account. Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
+
+Data Science is all about using a smaller sample of data to make predictions about a larger population. It’s important to remember that tables are only a sampling of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals at this particular shelter, it might tell us something about the average age of animals in other shelters.
+
+There are two different kinds of data that come up in Data Science: Categorical and Quantitative. @vocab{Categorical Data} is used to _classify_, not measure. Categories aren’t subject to the laws of arithmetic. For example, we couldn’t ask if “cat is more than lizard”, and it doesn’t make sense to "find the average ZIP code” in a list of addresses. “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
+
+[.lesson-instruction]
+What are some other categorical variables you see in this table?
+
+@vocab{Quantitative Data} is used to measure an amount of something, or to compare two pieces of data to see which is _less or more_. If we want to ask “how much” or “which is most”, we’re talking about Quantitative Data. "Pounds" is a quantitative variable, because we can talk about whether one animal weighs more than another or ask what the average weight of animals in the shelter is.
+
+[.lesson-point]
+We use @vocab{Categorical Data} to answer “which one?”, and @vocab{Quantitative Data} to answer "how much?".
 
 [.lesson-instruction]
 --
-What kind of data -- categorical or quantitative -- are the
-following columns?
+What kind of data -- categorical or quantitative -- are the following columns of data?
 
-- Hair color
-- Age
-- ZIP Code
-- Date
+* Hair color
+* Age
+* ZIP Code
+* Date
 --
 
-Sometimes it can be tricky to figure out if data is categorical
-or quantitative, because it depends on how that data is being
-used!
+Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on *how that data is being used!*
+
 
 [.lesson-instruction]
 --
-For each of the following questions, determine whether the data
-being used is categorical or quantitative.
+For each of the following questions, determine whether the data being used is categorical or quantitative.
 
-- We’d like to sort a list of phone numbers by area code.
-- We’d like to find out the average price of cars in a lot.
-- We’d like to find out the most popular color for cars.
-- We’d like to find out which puppy is the youngest.
-- We’d like to find out which cats have been fixed.
-- We want to know which people have a ZIP code of 02907.
+* We’d like to sort a list of phone numbers by area code.
+* We’d like to find out the average price of cars in a lot.
+* We’d like to find out the most popular color for cars.
+* We’d like to find out which puppy is the youngest.
+* We’d like to find out which cats have been fixed.
+* We want to know which people have a ZIP code of 02907.
 --
 
-////
-The big idea here is that some data can be both categorical and
-quantitative – what matters is how we use it!
-////
-
 [.lesson-instruction]
-On @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student
-Workbook, fill in the blanks for Questions 1 and 2.
-
-Open up the
-@link{https://code.pyret.org/editor#share=1uK9VO5WO1RAH7g65DU_pkXZTyOnlno_-,
-Animals Starter File} in a new tab. Click “Connect to
-Google Drive” to sign into your Google account, and then click
-the “Save as” button. This will save a copy of the file into your
-own account, so that you can make changes and retrieve them
-later.
+On @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student Workbook, fill in the blanks for Questions 1 and 2.
 
 //image
 
 @span{.right}{@image{images/editor.png, "", 300, ""}}
 
-This screen is called the @vocab{editor}, and it looks something like the
-diagram you see here. There are a few buttons at the top, but
-most of the screen is taken up by two large boxes: the
-@vocab{Definitions Area} on the left and the @vocab{Interactions
-Area} on the
-right.
+Open up the @link{https://code.pyret.org/editor#share=1uK9VO5WO1RAH7g65DU_pkXZTyOnlno_-, Animals Starter File} in a new tab. Click “Connect to Google Drive” to sign into your Google account, and then click the “Save as” button. This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+
+This screen is called the @vocab{editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+
+The *Definitions Area* is where programmers define values and functions that they want to keep, while the *Interactions Area* allows them to experiment with those values and functions. This is like writing function definitions on a blackboard, and having students use those functions to compute answers on scrap paper.
 
 For now, we will only be writing programs in the Interactions area.
 
 @span{.clear}{}
 
-////
-The Definitions Area is where programmers define values and
-functions that they want to keep, while the Interactions Area
-allows them to experiment with those values and functions. This
-is like writing function definitions on a blackboard, and having
-students use those functions to compute answers on scrap paper.
-////
 
-The first few lines in the Definitions Area tell Pyret to `import`
-files from elsewhere, which contain tools we’ll want to use for
-this course. We’re importing a file called Bootstrap:Data
-Science, as well as files for working with Google Sheets, tables,
-and images:
+The first few lines in the Definitions Area tell Pyret to `import` files from elsewhere, which contain tools we’ll want to use for this course. We’re importing a file called Bootstrap:Data Science, as well as files for working with Google Sheets, tables, and images:
 
   include shared-gdrive("Bootstrap-DataScience-...")
   include gdrive-sheets
   include tables
   include image
 
-After that, we see a line of code that _defines_ `shelter-sheet` to
-be a spreadsheet. This table is loaded from Google Drive, so now
-Pyret can see the same spreadsheet you do. After that, we see the
-following code:
+After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. (Notice the funny scramble of letters and numbers in that line of code? If you open up the Google Sheet, you'll find that same scramble in the address bar!) After that, we see the following code:
 
   # load the 'pets' sheet as a table called animals-table
   animals-table = load-table: name, species, age, fixed, legs
     source: pets-sheet.sheet-by-name("pets", true)
   end
 
-The first line (starting with `#`) is called a comment. Comments
-are notes for humans, which the computer ignores. The next line
-_defines_ a new table. We call it `animals-table`, and we load it
-from the `shelter-sheet` defined above. You can see the names we
-are giving to each of the columns, called `name`, `species`,
-`gender`,
-`age`, `fixed`, `legs`, `pounds` and `weeks`. (We could use any names we
-want for these columns, but it’s always a good idea to pick names
-that make sense!)
+The first line (starting with `#`) is called a _comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called `animals-table`, which is loaded from the `shelter-sheet` defined above. We also create names for the columns: `name`, `species`, `gender`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 
-////
-Have students look back at the column names in the Google Sheet,
-and in the load-table function. Point out that they refer to the
-same columns, even though they have different names!
-////
+[.lesson-point]
+Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
 
 [.lesson-instruction]
-Click “Run”, and type `animals-table` into the Interactions Area
-to see what the table looks like in Pyret. Is it the same table
-you saw in Google Sheets? What is the same? What is different?
+Click “Run”, and type `animals-table` into the Interactions Area to see what the table looks like in Pyret. Is it the same table you saw in Google Sheets? What is the same? What is different?
 
-- In Data Science, every table is composed of cells, which are
-  arranged in a grid of rows and columns.
-- Most of the cells contain data, but _the first row and first
-  column_ are special.
-- The first row is called the @vocab{header} row, which gives a unique
-  name to each variable (or “column”) in the table.
-- The first column in the table is the identifier column, which
-  contains a unique ID for each row. Often, this will be the name
-  of the people or places in the table, or sometimes just an ID
-  number.
+In Data Science, every table is composed of cells, which are arranged in a grid of rows and columns. Most of the cells contain data, but _the first row and first column_ are special. The first row is called the @vocab{header} row, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the identifier column, which contains a unique ID for each row. Often, this will be the name of the people or places in the table, or sometimes just an ID number.
 
 [.lesson-instruction]
-How many variables are listed in the header row? What are they
-called? What is being used for the identifier column in this
-dataset?
+- How many variables are listed in the header row? What are they called? What is being used for the identifier column in this dataset?
+- Try changing the name of one of the columns, and click "Run". What happens when you bring the table back in the Interactions Area?
+- What happens if you remove a column from the list? Or add an extra one?
 
-After the header, Pyret tables can have any number of @vocab{data
-rows}.
-Each data row has values for every column variable (nothing can
-be left empty!). A table can have any number of data rows,
-including _zero_, as in the table below:
+
+After the header, Pyret tables can have any number of @vocab{data rows}.
+Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_, as in the table below:
 
 [.pyret-data,cols="50a,50a",options="header"]
 |===
@@ -279,8 +148,13 @@ species
 
 == Closing (Time 5 minutes)
 
-Today you’ve learned about quantitative and categorical data. TODO: fill in
+Debrief with the class, and have students reflect on what they learned by writing on @worksheet-link{workbook-pages/whats-on-your-mind.adoc}. Some prompts that may be helpful:
+
+* What new vocabulary did you learn?
+* What question was exciting to you, and what data would you need to answer it? Is that data Qualitative or Quantitative?
+* What do you hope to learn in the next lesson?
 
 
 == Additional Exercises:
 
+TODO

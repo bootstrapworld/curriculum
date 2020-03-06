@@ -1,7 +1,7 @@
 (
  "ds-intro"
  "ds-operators-functions"
- "ds-exploring-plots"
+ "ds-plotting"
  "ds-question-types"
  "ds-defining-functions"
  "ds-making-subsets"
