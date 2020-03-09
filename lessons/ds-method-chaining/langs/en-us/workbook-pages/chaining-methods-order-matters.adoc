@@ -8,7 +8,7 @@ You have the following functions defined below (read them _carefully!_):
 
 The table `t` below represents four animals at the shelter:
 
-[cols='5']
+[cols='5',options="header"]
 |===
 | name
 | gender
@@ -46,51 +46,48 @@ Match each Pyret expression (left) to the description of what it
 does (right). *Note: one
 description might match multiple expressions!*
 
-[cols="1a,1a"]
+[cols="1a,1a",stripes="none"]
 |===
+
 | `t.order-by("kilos", true)`
 
-| Produces a table containing Toggle,
-Nori and Maple, with an extra column
-showing their weight in kilograms
-|
+| Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
 |
 ----
-t.filter(is-female)
-.build-column("kilos", kilograms)
+`t.filter(is-female)
+.build-column("kilos", kilograms)`
 ----
 
 |
 ----
-t.build-column("kilos", kilograms)
- .filter(is-heavy)
+`t.build-column("kilos", kilograms)
+ .filter(is-heavy)`
 ----
 | Produces a table containing only Fritz.
 
 |
 ----
-t.filter(is-heavy)
- .build-column("kilos", kilograms)
+`t.filter(is-heavy)
+ .build-column("kilos", kilograms)`
 ----
 
 | Won’t run: will produce an error
 
 |
 ----
-t.build-column("kilos", kilograms)
+`t.build-column("kilos", kilograms)
  .filter(is-heavy)
- .order-by("gender", true)
+ .order-by("gender", true)`
 ----
 
-| Produces a table containing only Fritz,
-with two extra columns.
+| Produces a table containing only Fritz, with two extra columns.
 
 |
 ----
-t.build-column("female", is-female)
+`t.build-column("female", is-female)
  .build-column("kilos", kilograms)
- .filter(is-heavy)
+ .filter(is-heavy)`
 ----
 
 | Produces a table containing Maple
@@ -98,13 +95,12 @@ and Fritz
 
 |
 ----
-t.order-by("name", true)
+`t.order-by("name", true)
  .build-column("kilos", kilograms)
- .filter(is-female)
+ .filter(is-female)`
 ----
 
-| Produces a table containing Maple,
-Nori and Toggle (in that order)
+| Produces a table containing Maple, Nori and Toggle (in that order)
 
 |===
 
