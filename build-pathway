@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-05 # last modified
+LASTMOD=2020-03-10 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -79,18 +79,6 @@ fi
 if which gsed | grep -q .; then
   SED=gsed
 fi
-
-# set $BUILD_PATHWAY_{DEBUG,FORCE} to avoid typing --{debug,force} every time
-
-if test "$BUILD_PATHWAY_DEBUG" -a "$BUILD_PATHWAY_DEBUG" != false; then
-  DEBUG=true
-fi
-
-if test "$BUILD_PATHWAY_FORCE" -a "$BUILD_PATHWAY_FORCE" != false; then
-  FORCE=true
-fi
-
-#echo FORCE= $FORCE DEBUG= $DEBUG
 
 if test "$ARGS" = ""; then
   ARGS="pathways/*"
@@ -394,7 +382,12 @@ function buildworkbookpages() {
               cp -p $fhtml $TMPHTML
               insertprintcss $TMPHTML
               insertwbpagecss $TMPHTML
+              ASPECT=
+              if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+                ASPECT="-O Landscape --margin-top $PDFMARGIN --margin-bottom $PDFMARGIN"
+              fi
               wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN \
+                $ASPECT \
                 --lowquality -q $TMPHTML $fpdf
               if ! $DEBUG; then
                 rm $TMPHTML
