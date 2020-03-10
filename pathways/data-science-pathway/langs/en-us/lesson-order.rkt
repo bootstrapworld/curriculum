@@ -17,6 +17,5 @@
  "ds-linear-regression"
  "ds-regression-in-your-dataset"
  "ds-threats-to-validity"
- "ds-blank-recipes-n-refs"
- "ds-contracts"
+ "ds-back-pages"
  )
