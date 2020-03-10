@@ -1,5 +1,5 @@
 (
- "visualizing-shape-of-data.adoc"
+ "histograms.adoc"
  "design-recipe.adoc"
  "summarizing-columns.adoc"
  "reading-histograms.adoc"
