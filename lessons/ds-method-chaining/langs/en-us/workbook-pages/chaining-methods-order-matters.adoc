@@ -44,61 +44,67 @@ The table `t` below represents four animals at the shelter:
 
 _Match_ each Pyret expression (left) to the description of what it does (right).  *Note: one description might match multiple expressions!*
 
-[cols="1a,1a",stripes="none"]
+[cols=".^8a,^.^1a,3,^.^1a,.^10a",stripes="none",grid="none",frame="none"]
 |===
 
-| `t.order-by("kilos", true)`
-
+| 
+--
+ t.order-by("kilos", true)
+--
+|*1*||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
-|
-----
-`t.filter(is-female)
-.build-column("kilos", kilograms)`
-----
 
 |
 ----
-`t.build-column("kilos", kilograms)
- .filter(is-heavy)`
+t.filter(is-female)
+  .build-column("kilos", kilograms)
 ----
+|*2*||*B*
+| Produces a table containing Maple, Nori and Toggle (in that order)
+
+|
+----
+t.build-column("kilos", kilograms)
+  .filter(is-heavy)
+----
+|*3*||*C*
 | Produces a table containing only Fritz.
 
 |
 ----
-`t.filter(is-heavy)
- .build-column("kilos", kilograms)`
+t.filter(is-heavy)
+  .build-column("kilos", kilograms)
 ----
-
+|*4*||*D*
 | Won’t run: will produce an error
 
 |
 ----
-`t.build-column("kilos", kilograms)
- .filter(is-heavy)
- .order-by("gender", true)`
+t.build-column("kilos", kilograms)
+  .filter(is-heavy)
+  .order-by("gender", true)
 ----
-
+|*5*||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
 |
 ----
-`t.build-column("female", is-female)
- .build-column("kilos", kilograms)
- .filter(is-heavy)`
+t.build-column("female", is-female)
+  .build-column("kilos", kilograms)
+  .filter(is-heavy)
 ----
-
-| Produces a table containing Maple
-and Fritz
+|*6*||*F*
+| Produces a table containing Maple and Fritz
 
 |
 ----
-`t.order-by("name", true)
- .build-column("kilos", kilograms)
- .filter(is-female)`
+t.order-by("name", true)
+  .build-column("kilos", kilograms)
+  .filter(is-female)
 ----
-
-| Produces a table containing Maple, Nori and Toggle (in that order)
+|*7*|
+| 
 
 |===
 

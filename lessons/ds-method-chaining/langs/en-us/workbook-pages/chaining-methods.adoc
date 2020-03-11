@@ -44,23 +44,23 @@ The table `t` below represents four animals at the shelter:
 
 _Match_ each Pyret expression (left) to the description of what it does (right).
 
-[cols="1a,1a",stripes="none"]
+[cols=".^8a,^.^1a,3,^.^1a,.^10a",stripes="none",grid="none",frame="none"]
 |===
 
 | `t.order-by("age", true)`
-
+|*1*||*A*
 | Produces a table containing only Toggle and Maple
 
 | `t.filter(is-fixed)`
-
+|*2*||*B*
 | Produces a table of only young, fixed animals
 
 | `t.build-column("sticker", nametag)`
-
+|*3*||*C*
 | Produces a table, sorted youngest-to-oldest
 
 | `t.filter(is-young)`
-
+|*4*||*D*
 | Produces a table with an extra column, named "sticker"
 
 |
@@ -68,7 +68,7 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 t.filter(is-young)
  .filter(is-fixed)
 ----
-
+|*5*||*E*
 | Produces a table containing Maple and Toggle, in that order
 
 |
@@ -76,7 +76,7 @@ t.filter(is-young)
 t.filter(is-young)
  .order-by("pounds", false)
 ----
-
+|*6*||*F*
 | Produces a table containing the same four animals
 
 |
@@ -84,11 +84,11 @@ t.filter(is-young)
 t.build-column("label", nametag)
  .order-by("age", true)
 ----
-
+|*7*||*G*
 | Won’t run: will produce an error
 
 | `t.order-by("gendr", false)`
-
+|*8*||*H*
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
 
 |===
