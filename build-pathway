@@ -386,9 +386,11 @@ function buildworkbookpages() {
               if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
                 ASPECT="-O Landscape --margin-top $PDFMARGIN --margin-bottom $PDFMARGIN"
               fi
-              wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN \
-                $ASPECT \
-                --lowquality -q $TMPHTML $fpdf
+              wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
+              NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|sed -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
+              if test "$NUMPAGES" != 1; then
+                echo WARNING: $fpdf has $NUMPAGES pages
+              fi
               if ! $DEBUG; then
                 rm $TMPHTML
               fi
