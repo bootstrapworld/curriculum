@@ -440,8 +440,8 @@
                                        *show-body?*)))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    (encoded-ans ".recipe_definition_end_pyret"
-                                 (highlight-keywords "end") #t))))))))))
+                    (write-spaced (highlight-keywords "end"))
+                    )))))))))
 
 (define (write-definition funname param-list body)
   ((case *proglang*
