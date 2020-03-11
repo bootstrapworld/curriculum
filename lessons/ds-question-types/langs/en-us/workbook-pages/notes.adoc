@@ -1,43 +1,30 @@
 = Questions and Definitions
 
-*Answering Questions from Data* can take many forms. Here are a few types of
-questions, each requiring a different kind of analysis:
+// use double-space before the *bold* text to address a text-kerning bug in wkhtmltopdf 0.12.5 (with patched qt)
+*Answering Questions from Data* can take many forms. Here are a few types of questions, each requiring a different kind of analysis:
 
-- *Lookup Questions* can be answered just by finding the right row and column
-a table. (E.g., “How old is Toggle?”)
+- *Lookup Questions* can be answered just by finding the right row and column a table. (E.g., “How old is Toggle?”)
 
-- *Compute Questions* can be answered by computing over a single row or
-column. (E.g., “What is the heaviest animal at the shelter?”)
+- *Compute Questions* can be answered by computing over a single row or column. (E.g., “What is the heaviest animal at the shelter?”)
 
-- *Relate Questions* require looking for trends across multiple rows or columns.
-(E.g.,  “Do cats tend to be adopted sooner than dogs?”)
+- *Relate Questions* require looking for trends across multiple rows or columns. (E.g.,  “Do cats tend to be adopted sooner than dogs?”)
 
-*Methods* are special functions that are attached to pieces of data. We use them to
-manipulate Tables. They are different from functions in several ways:
+*Methods* are special functions that are attached to pieces of data. We use them to manipulate Tables. They are different from functions in several ways:
 
-- Their names can’t be used alone: they can only be used as part of data,
-separated by a dot. (E.g.,, `shapes.row-n(2)`.)
+- Their names can’t be used alone: they can only be used as part of data, separated by a dot. (E.g.,, `shapes.row-n(2)`.)
 
-- Their contracts are different: they include the type of the data as part of their
-names. (E.g., `<table>.row-n {two-colons} (index {two-colons} Number) -> Row`.)
+- Their contracts are different: they include the type of the data as part of their names. (E.g., `<table>.row-n {two-colons} (index {two-colons} Number) -> Row`.)
 
 - They have a “secret” argument, which is the data they are attached to.
 
-- In this course, the methods we’ll be using are `row-n`,
-  `order-by`, `filter`, and `build-column`.
+- In this course, the methods we’ll be using are `row-n`, `order-by`, `filter`, and `build-column`.
 
-We can *define our own functions*, using a technique called the
-*Design Recipe*.
+We can *define our own functions*, using a technique called the  *Design Recipe*.
 
--  We use the Design Recipe to help us define functions *and think through
-problems clearly*.
+-  We use the Design Recipe to help us define functions  *and think through problems clearly*.
 
-- The first step is to write a *Contract* and *Purpose Statement* for the function,
-which specify the Name, Domain and Range of the function and give a
-summary of what it does.
+- The first step is to write a *Contract* and *Purpose Statement* for the function, which specify the Name, Domain and Range of the function and give a summary of what it does.
 
-- The second step is to *write at least two examples*, which show how the
-function should work for specific inputs. These examples help us see patterns,
-and we express those patterns by *circling and labeling* what changes.
+- The second step is to *write at least two examples*, which show how the function should work for specific inputs. These examples help us see patterns, and we express those patterns by *circling and labeling* what changes.
 
 - The final step is to *define the function*, which generalizes our examples.
