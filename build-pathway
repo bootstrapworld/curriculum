@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-10 # last modified
+LASTMOD=2020-03-11 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -384,9 +384,9 @@ function buildworkbookpages() {
               insertwbpagecss $TMPHTML
               ASPECT=
               if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-                ASPECT="-O Landscape --margin-top $PDFMARGIN --margin-bottom $PDFMARGIN"
+                ASPECT="-O Landscape --margin-top $PDFMARGIN"
               fi
-              wkhtmltopdf --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
+              wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
               NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|sed -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
               if test "$NUMPAGES" != 1; then
                 echo WARNING: $fpdf has $NUMPAGES pages
