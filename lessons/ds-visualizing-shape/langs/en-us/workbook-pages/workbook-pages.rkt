@@ -1,5 +1,5 @@
 (
- "visualizing-shape.adoc"
+ "notes.adoc"
  "making-histograms.adoc"
  "shape-of-animals-dataset.adoc"
  "shape-of-my-dataset.adoc"

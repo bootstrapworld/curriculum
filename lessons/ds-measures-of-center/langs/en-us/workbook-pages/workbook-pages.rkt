@@ -1,5 +1,5 @@
 (
- "measures-of-center.adoc"
+ "notes.adoc"
  "summarizing-columns-in-animals.adoc"
  "interpreting-spread.adoc"
  "shape-of-my-dataset.adoc"

@@ -1,5 +1,5 @@
 (
- "method-chaining.adoc"
+ "notes.adoc"
  "chaining-methods.adoc"
  "chaining-methods-order-matters.adoc"
  "whats-on-your-mind.adoc"

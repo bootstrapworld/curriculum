@@ -1,5 +1,5 @@
 (
- "questions-n-defs.adoc"
+ "notes.adoc"
  "lookup-questions.adoc"
  "more-practice-w-lookups.adoc"
  "whats-on-your-mind.adoc"

@@ -1,5 +1,5 @@
 (
- "linear-regression.adoc"
+ "notes.adoc"
  "grading-predictors.adoc"
  "reading-regression-lines-n-rvalues.adoc"
  "regression-analysis-in-animals-dataset.adoc"

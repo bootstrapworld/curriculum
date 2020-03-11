@@ -1,5 +1,5 @@
 (
- "histograms.adoc"
+ "notes.adoc"
  "design-recipe.adoc"
  "summarizing-columns.adoc"
  "reading-histograms.adoc"

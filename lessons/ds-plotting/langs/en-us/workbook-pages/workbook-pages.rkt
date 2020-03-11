@@ -1,4 +1,4 @@
 (
-"exploring-plots.adoc"
+"notes.adoc"
 "whats-on-your-mind.adoc"
 )

@@ -1,5 +1,5 @@
 (
- "correlations.adoc"
+ "notes.adoc"
  "drawing-predictors.adoc"
  "correlations-in-my-dataset.adoc"
  "whats-on-your-mind.adoc"
