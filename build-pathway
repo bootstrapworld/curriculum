@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-11 # last modified
+LASTMOD=2020-03-16 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -339,15 +339,16 @@ function buildworkbookpages() {
     fi
   done
   #
-  for d in exercises exercises-sols workbook-pages workbook-sols-pages; do
+  for d in *; do
     if test -d $d; then
       if test $d = "exercises";             then dd="exercises          "
       elif test $d = "exercises-sols";      then dd="exercises-sols     "
       elif test $d = "workbook-pages";      then dd="workbook-pages     "
       elif test $d = "workbook-sols-pages"; then dd="workbook-sols-pages"
+      else                                       dd=$d
       fi
       #echo \(building $L "->" $d\)
-      unset EXERCISE SOLUTION WORKBOOK
+      unset EXERCISE SOLUTION WORKBOOK OTHERDIR
       if test $d = "workbook-pages"; then
         export WORKBOOK=1
       elif test $d = "workbook-sols-pages"; then
@@ -357,6 +358,8 @@ function buildworkbookpages() {
       elif test $d = "exercises-sols"; then
         export SOLUTION=1
         export EXERCISE=1
+      else
+        export OTHERDIR=1
       fi
       cd $d
       export PATHWAYROOTDIR="../../../"
@@ -372,13 +375,15 @@ function buildworkbookpages() {
           if test $f -nt $fhtml; then
             echo building $PATHWAY "→" $L "→" "$dd" "→" $f
             $PROGDIR/adoc-preproc.rkt $f
-            resolveabbrevs $fhtml
-            insertprintcss_browser $fhtml
-            insertwbpagecss_browser $fhtml
+            if test -f $fhtml; then
+              resolveabbrevs $fhtml
+              insertprintcss_browser $fhtml
+              insertwbpagecss_browser $fhtml
+            fi
           fi
           if ! $NOPDF; then
             fpdf=${fhtml%.html}.pdf
-            if test $fhtml -nt $fpdf; then
+            if test -f $fhtml -a $fhtml -nt $fpdf; then
               cp -p $fhtml $TMPHTML
               insertprintcss $TMPHTML
               insertwbpagecss $TMPHTML
