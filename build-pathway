@@ -348,7 +348,7 @@ function buildworkbookpages() {
       else                                       dd=$d
       fi
       #echo \(building $L "->" $d\)
-      unset EXERCISE SOLUTION WORKBOOK OTHERDIR
+      unset EXERCISE SOLUTION WORKBOOK OTHERDIR LESSONSUBDIR
       if test $d = "workbook-pages"; then
         export WORKBOOK=1
       elif test $d = "workbook-sols-pages"; then
@@ -361,6 +361,7 @@ function buildworkbookpages() {
       else
         export OTHERDIR=1
       fi
+      export LESSONSUBDIR=$d
       cd $d
       export PATHWAYROOTDIR="../../../"
       #cp -p $PROGDIR/*.css .
@@ -403,7 +404,7 @@ function buildworkbookpages() {
           fi
         fi
       done
-      unset EXERCISE SOLUTION WORKBOOK
+      unset EXERCISE SOLUTION WORKBOOK OTHERDIR LESSONSUBDIR
       cd ..
     fi
   done

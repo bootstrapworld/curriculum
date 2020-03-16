@@ -388,15 +388,20 @@
 (define (make-image img opts)
   ;(printf "making image ~s ~s\n" img opts)
   (let* ([lesson (getenv "LESSONPLAN")]
+         [lesson-subdir (getenv "LESSONSUBDIR")]
          [text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
-         [adoc-img (if lesson
-            (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
-                    text-wo-url commaed-opts)
-            (format "image:~a[~s, ~a]" img text-wo-url commaed-opts))]
-         )
+         [adoc-img
+           (cond [lesson
+                   (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
+                           text-wo-url commaed-opts)]
+                 [lesson-subdir
+                   (format "image:{pathwayrootdir}lessons/~a/~a/~a[~s, ~a]" (getenv "LESSON") lesson-subdir
+                           img text-wo-url commaed-opts)]
+                 [else
+                   (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
     ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
     (if (string=? text "")
         (enclose-span ".centered-image" adoc-img)
@@ -425,14 +430,7 @@
                                 (set! g (path-replace-extension g ".asc"))])
     ;(printf "g=~a~n" g)
     (if include?
-        (if inline-include?
-            (call-with-input-file f.asc
-              (lambda (i)
-                (let loop ()
-                  (let ([x (read-line i)])
-                    (unless (eof-object? x)
-                      (display x o) (newline o) (loop))))))
-            (fprintf o "include::~a~a[]" *pathway-root-dir* g))
+        (fprintf o "include::~a~a[]" *pathway-root-dir* g)
         (frpintf o "link:{pathwayrootdir}~a[~a]" g link-text))))
 
 (define *lesson-summary-file* #f)
