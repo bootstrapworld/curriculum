@@ -2,7 +2,7 @@
  "ds-intro"
  "ds-starting-to-program"
  "ds-plotting"
- "ds-question-types"
+ "ds-questions-and-value-defs"
  "ds-defining-functions"
  "ds-making-subsets"
  "ds-exploring-your-dataset"
