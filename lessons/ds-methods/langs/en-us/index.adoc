@@ -1,0 +1,66 @@
+= Using Table Methods
+
+@lesson-description{Students learn about _table methods_, which allow them to order, filter, and extend the animals table.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-questions-and-value-defs}
+|Product Outcomes
+|Students will be able to:
+
+* order the animals dataset by a number of criteria
+* filter the animals dataset by gender, fixed status, and age
+
+@worksheet-include{xtra/lang-prereq.adoc}
+|===
+
+== Introduction (10 minutes)
+
+In the last lesson, students learned to use the `.row-n` method to extract an individual row of the animals table. This lesson introduces other methods, having students experiment with them before trying to explain what they do and how they work.
+
+== Ordering Tables
+
+Find the contract for `.order-by` in your contracts page. The `.order-by` method consumes a String (the name of the column you want to order) and a Boolean (true for ascending, false for descending). But what does it produce?
+
+[.lesson-instruction]
+* Try typing the following expressions into the Interactions Area. What do you get?
+  animals-table.order-by("name", true)
+  animals-table.order-by("age", false)
+* What is the Domain of `.order-by`? What is the Range? Find the contract for this method in your contracts table, and make sure it makes sense!
+
+== Filtering Tables
+
+Find the contract for `.filter` in your contracts page. The `.filter` method is taking in a _function_, calling it on every row in the table, and producing a new table with only the rows for which it returns `true`.
+
+[.lesson-instruction]
+Look back to the Definitions Area, and find the line that starts with `fun is-fixed`. This function isn’t built into Pyret, but it’s _defined_ here in the program, so we can use it just as if it were built into the language!
+--
+* Type `is-fixed(animalA)` into the Interactions Area. What did the function do?
+* You've already seen expressions like `animals-table.row-n(..)` and `animals-table.order-by(...)`. But suppose you want to get a table of only animals that have been fixed? Try typing `animals-table.filter(is-fixed)` into the Interactions Area. 
+* What do you get? What do you think is going on?
+--
+
+The `.filter` method walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned true. In this case, we gave it the is-fixed function, so the new table had only rows for fixed animals.
+
+Try using the `gender` function to filter, by typing `animals-table.filter(gender)`. What happens?
+
+Notice that the Domain for `.filter` says that test must be a function (that’s the arrow), which consumes a `Row` and produces a `Boolean`. If the function we pass in produces anything else, we’ll get an error.
+
+== Building Columns
+
+Find the contract for `.build-column` in your contracts page. The `.build-column` method is taking in a _function_ and a _string_. The string tells Pyret what to name the new column, and Pyret walks down the table row-by-row and applies the function to determine what the value of that column should be.
+
+For example, we could add a boolean column called `"young"` to the table, which is `true` if the animal is less than four years old and `false` if it’s not. Pyret has another method for this.
+
+  animals-table.build-column("young", is-young)
+
+[.lesson-instruction]
+Type this into the Interactions Area and hit Enter. What did you get back?
+
+== Closing (Time 5 minutes)
+
+Congratulations! 
+
+== Additional Exercises:
+
+- TODO
