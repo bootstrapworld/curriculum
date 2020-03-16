@@ -720,9 +720,10 @@
                                                 (printf "WARNING: Incomplete worksheet link ~a~n"
                                                         page)])]
                                        [else
+                                         ;(printf "calling make-lesson-link~n")
                                          (display (make-lesson-link
-                                                    first-compt
-                                                    (cdr page-compts)
+                                                    lesson-dir
+                                                    page-compts
                                                     link-text
                                                     #:include? include?) o)]))]
                               [(3)
