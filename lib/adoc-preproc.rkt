@@ -413,10 +413,15 @@
                     (string-join file-seq "/"))]
          [f (string-append *pathway-root-dir* g)]
          [f.html (path-replace-extension f ".html")]
-         [f.pdf (path-replace-extension f ".pdf")])
-    ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n" g f f.html f.pdf)
+         [f.pdf (path-replace-extension f ".pdf")]
+         [f.asc (path-replace-extension f ".asc")])
+    ;(printf "cwd=~a~n" (current-directory))
+    ;(printf "x=~a~n" (file-exists? f))
+    ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n f.asc=~a~n" g f f.html f.pdf f.asc)
     (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
-          [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))])
+          [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))]
+          [(file-exists? f.asc) (set! g (path-replace-extension g ".asc"))])
+    ;(printf "g=~a~n" g)
     (if include?
         (format "include::~a~a[]" *pathway-root-dir* g)
         (format "link:{pathwayrootdir}~a[~a]" g link-text))))
@@ -916,7 +921,7 @@
               (print-link-to-teacher-resources o)
               (print-link-to-forum o))
 
-            (unless #f ;(getenv "EXERCISE")
+            (unless (getenv "OTHERDIR") ;(getenv "EXERCISE")
               (fprintf o "\n\n")
               (fprintf o "[.acknowledgment]\n")
               (fprintf o "--\n")
@@ -940,7 +945,8 @@
   (when (getenv "LESSONPLAN")
     (accumulate-glossary-and-standards))
 
-  (asciidoctor out-file)))
+  (unless (getenv "OTHERDIR")
+    (asciidoctor out-file))))
 
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)
