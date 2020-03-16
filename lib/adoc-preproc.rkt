@@ -367,11 +367,11 @@
             (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
-  (display "%CURRICULUMCOMMENT!\n" o)
+  (display "%CURRICULUMCOMMENT%\n" o)
   (display "++++\n" o)
   (display prose o)
   (display "\n++++\n" o)
-  (display "%ENDCURRICULUMCOMMENT!" o))
+  (display "%ENDCURRICULUMCOMMENT%" o))
 
 (define (clean-up-image-text text)
   (when (char=? (string-ref text 0) #\")
@@ -379,7 +379,7 @@
   (let ([n (string-length text)])
     (when (char=? (string-ref text (- n 1)) #\")
       (set! text (substring text 0 (- n 1)))))
-  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA!"))
+  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -405,7 +405,7 @@
             (enclose-span ".tooltiptext" text) "\n"
             adoc-img)))))
 
-(define (make-lesson-link lesson file-seq link-text
+(define (make-lesson-link o lesson file-seq link-text
                           #:include? [include? #f])
   ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
   (when (string=? lesson ".") (set! lesson (getenv "LESSON")))
@@ -414,17 +414,26 @@
          [f (string-append *pathway-root-dir* g)]
          [f.html (path-replace-extension f ".html")]
          [f.pdf (path-replace-extension f ".pdf")]
-         [f.asc (path-replace-extension f ".asc")])
+         [f.asc (path-replace-extension f ".asc")]
+         [inline-include? #f])
     ;(printf "cwd=~a~n" (current-directory))
     ;(printf "x=~a~n" (file-exists? f))
     ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n f.asc=~a~n" g f f.html f.pdf f.asc)
     (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
           [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))]
-          [(file-exists? f.asc) (set! g (path-replace-extension g ".asc"))])
+          [(file-exists? f.asc) (set! inline-include? #t)
+                                (set! g (path-replace-extension g ".asc"))])
     ;(printf "g=~a~n" g)
     (if include?
-        (format "include::~a~a[]" *pathway-root-dir* g)
-        (format "link:{pathwayrootdir}~a[~a]" g link-text))))
+        (if inline-include?
+            (call-with-input-file f.asc
+              (lambda (i)
+                (let loop ()
+                  (let ([x (read-line i)])
+                    (unless (eof-object? x)
+                      (display x o) (newline o) (loop))))))
+            (fprintf o "include::~a~a[]" *pathway-root-dir* g))
+        (frpintf o "link:{pathwayrootdir}~a[~a]" g link-text))))
 
 (define *lesson-summary-file* #f)
 
@@ -721,11 +730,10 @@
                                                         page)])]
                                        [else
                                          ;(printf "calling make-lesson-link~n")
-                                         (display (make-lesson-link
-                                                    lesson-dir
-                                                    page-compts
-                                                    link-text
-                                                    #:include? include?) o)]))]
+                                         (make-lesson-link o lesson-dir
+                                                           page-compts
+                                                           link-text
+                                                           #:include? include?)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
@@ -745,17 +753,17 @@
                                                                       third-compt link-text) o)]
                                        ;(else (printf "Bad worksheet link ~a~n" page))
                                        [else
-                                         (display (make-lesson-link first-compt
-                                                                    (cdr page-compts)
-                                                                    link-text
-                                                                    #:include? include?) o)
+                                         (make-lesson-link o first-compt
+                                                           (cdr page-compts)
+                                                           link-text
+                                                           #:include? include?)
                                          ]
                                        ))]
                               [else
-                                (display (make-lesson-link first-compt
-                                                           (cdr page-compts)
-                                                           link-text
-                                                           #:include? include?) o)]
+                                (make-lesson-link o first-compt
+                                                  (cdr page-compts)
+                                                  link-text
+                                                  #:include? include?)]
                               ))]
                          [(string=? directive "link")
                           (let* ([args (read-commaed-group i directive)]
@@ -1168,10 +1176,10 @@
 
 (define (sexp->math e)
   (string-append
-    (format "%CURRICULUMSCRIPT!")
-    (format "%BEGINCURRICULUMSCRIPT!\\displaystyle ")
+    (format "%CURRICULUMSCRIPT%")
+    (format "%BEGINCURRICULUMSCRIPT%\\displaystyle ")
     (sexp->arith e)
-    (format "%ENDCURRICULUMSCRIPT!")))
+    (format "%ENDCURRICULUMSCRIPT%")))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")

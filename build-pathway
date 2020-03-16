@@ -220,22 +220,22 @@ function resolveabbrevs() {
     codemirrorneeded=true
   fi
   $SED -i \
-    -e 's/%PYRETKEYWORD!\([^%]*\)%END!/<span class=pyretkeyword>\1<\/span>/g' \
+    -e 's/%PYRETKEYWORD%\([^%]*\)%END%/<span class=pyretkeyword>\1<\/span>/g' \
     \
-    -e 's/%CURRICULUMCOMMA!/,/g' \
+    -e 's/%CURRICULUMCOMMA%/,/g' \
     \
-    -e 's/<p>\(%CURRICULUMCOMMENT!\)/\1/' \
-    -e 's/\(%ENDCURRICULUMCOMMENT!\)<.p>/\1/' \
-    -e 's/%CURRICULUMCOMMENT!/<!-- /' \
-    -e 's/%ENDCURRICULUMCOMMENT!/\n-->/' \
+    -e 's/<p>\(%CURRICULUMCOMMENT%\)/\1/' \
+    -e 's/\(%ENDCURRICULUMCOMMENT%\)<.p>/\1/' \
+    -e 's/%CURRICULUMCOMMENT%/<!-- /' \
+    -e 's/%ENDCURRICULUMCOMMENT%/\n-->/' \
     \
-    -e 's/%CURRICULUM\([^!]*\)!/<\1/g' \
-    -e 's/%BEGINCURRICULUM\([^!]*\)!/>/g' \
-    -e 's/%ENDCURRICULUM\([^!]*\)!/<\/\1>/g' \
+    -e 's/%CURRICULUM\([^%]*\)%/<\1/g' \
+    -e 's/%BEGINCURRICULUM\([^%]*\)%/>/g' \
+    -e 's/%ENDCURRICULUM\([^%]*\)%/<\/\1>/g' \
     \
-    -e 's/%CURRICULUMSCRIPT!/<script type="math\/tex"/g' \
-    -e 's/%BEGINCURRICULUMSCRIPT!/>/g' \
-    -e 's/%ENDCURRICULUMSCRIPT!/<\/script>/g' \
+    -e 's/%CURRICULUMSCRIPT%/<script type="math\/tex"/g' \
+    -e 's/%BEGINCURRICULUMSCRIPT%/>/g' \
+    -e 's/%ENDCURRICULUMSCRIPT%/<\/script>/g' \
     \
     -e 's/&#8656;/\&lt;=/g' \
     -e 's/&#8594;/-\&gt;/g' \
