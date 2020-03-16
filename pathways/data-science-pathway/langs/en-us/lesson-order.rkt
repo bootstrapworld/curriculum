@@ -1,6 +1,6 @@
 (
  "ds-intro"
- "ds-operators-functions"
+ "ds-starting-to-program"
  "ds-plotting"
  "ds-question-types"
  "ds-defining-functions"
