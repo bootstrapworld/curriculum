@@ -958,7 +958,11 @@
     (accumulate-glossary-and-standards))
 
   (unless (getenv "OTHERDIR")
-    (asciidoctor out-file))))
+    (asciidoctor out-file)
+    (unless (getenv "DEBUG")
+      (delete-file out-file)))
+
+    ))
 
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)

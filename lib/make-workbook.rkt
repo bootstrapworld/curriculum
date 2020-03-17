@@ -12,9 +12,7 @@
   (let ([force (getenv "FORCE")])
     (and force (not (string=? force "false")))))
 
-(define *debug*
-  (let ([debug (getenv "DEBUG")])
-    (and debug (not (string=? debug "false")))))
+(define *debug* (getenv "DEBUG"))
 
 ;(printf "force= ~s; debug= ~s\n" *force* *debug*)
 

@@ -2,7 +2,7 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
-export DEBUG=false
+export DEBUG=
 export FORCE=false
 export LANGUAGE=en-us
 export PROGLANG=
@@ -21,11 +21,11 @@ VERSION=false
 while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --debug -o "$arg" = -d; then
-    DEBUG=true
+    DEBUG=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=true
   elif test "$arg" = -fd -o "$arg" = -df; then
-    DEBUG=true; FORCE=true
+    DEBUG=1; FORCE=true
   elif test "$arg" = --help; then
     HELP=true
   elif test "$arg" = --language; then
@@ -375,7 +375,14 @@ function buildworkbookpages() {
           rm "$f"
         else
           fhtml=${f%.adoc}.html
-          if test $f -nt $fhtml; then
+          fasc=${f%.adoc}.asc
+          DOIT=false
+          if test $OTHERDIR; then
+            if test $f -nt $fasc; then DOIT=true; fi
+          else
+            if test $f -nt $fhtml; then DOIT=true; fi
+          fi
+          if $DOIT; then
             echo building $PATHWAY "→" $L "→" "$dd" "→" $f
             $PROGDIR/adoc-preproc.rkt $f
             if test -f $fhtml; then
@@ -399,7 +406,7 @@ function buildworkbookpages() {
               if test "$NUMPAGES" != 1; then
                 echo WARNING: $fpdf has $NUMPAGES pages
               fi
-              if ! $DEBUG; then
+              if test ! $DEBUG; then
                 rm $TMPHTML
               fi
             fi
@@ -470,7 +477,7 @@ function buildlessonplan() {
         cp index.html $TMPHTML
         insertprintcss $TMPHTML
         wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-        if ! $DEBUG; then
+        if test ! $DEBUG; then
           rm $TMPHTML
         fi
       fi
@@ -694,7 +701,7 @@ function buildpathway() {
       #cp -p $PROGDIR/front-cover-teacher.pdf .
       #echo
       #echo building pathway workbooks: $PATHWAY
-      if $DEBUG; then
+      if test $DEBUG; then
         $PROGDIR/make-workbook.rkt
       else
         $PROGDIR/make-workbook.rkt >/dev/null 2>&1
@@ -765,9 +772,9 @@ done
 
 asciidoctor -a linkcss index.adoc
 
-if ! $DEBUG; then
+if test ! $DEBUG; then
   rm -fr $PROGDIR
-  for f in adoc asc asciidoc rkt tex title txt; do
+  for f in adoc asciidoc rkt tex title txt; do
     find . -name \*.$f -delete
   done
 fi
