@@ -218,6 +218,16 @@ function resolveabbrevs() {
   if grep -q %CURRICULUMSCRIPT $f; then
     mathjaxneeded=true
   fi
+  CODELANG=pyret
+  if test "$PROGLANG" = wescheme; then
+    CODELANG=racket
+  fi
+  $SED -i \
+    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
+    -e 's/<\/pre>/<\/tt><\/pre>/g' \
+    -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
+    -e 's/<\/code>/<\/tt><\/code>/g' \
+    $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f; then
     codemirrorneeded=true
   fi
@@ -255,14 +265,15 @@ EOF
       $f
   fi
   if "$codemirrorneeded"; then
+    #FIXME: is codemirror.css needed?
     cat > codemirror.txt <<EOF
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}pretty-printing.css" />
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}codemirror.css" />
-    <script type="text/javascript" src="${PATHWAYROOTDIR}codemirror.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}runmode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}scheme2.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}pyret-mode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}bootstraplesson.js"></script>
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}lib/pretty-printing.css" />
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}lib/codemirror.css" />
+    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/codemirror.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/runmode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/scheme2.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/pyret-mode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/bootstraplesson.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -471,14 +482,16 @@ function buildlessonplan() {
       insertprintcss_browser index.html
       cleanuptitle index.html
     fi
-    if ! $NOPDF; then
-      #echo Creating lesson plan pdf
-      if test index.html -nt index.pdf; then
-        cp index.html $TMPHTML
-        insertprintcss $TMPHTML
-        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-        if test ! $DEBUG; then
-          rm $TMPHTML
+    if false; then
+      if ! $NOPDF; then
+        #echo Creating lesson plan pdf
+        if test index.html -nt index.pdf; then
+          cp index.html $TMPHTML
+          insertprintcss $TMPHTML
+          wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+          if test ! $DEBUG; then
+            rm $TMPHTML
+          fi
         fi
       fi
     fi
