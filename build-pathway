@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-16 # last modified
+LASTMOD=2020-03-17 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -20,16 +20,18 @@ VERSION=false
 
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --debug -o "$arg" == -d; then
-    DEBUG=true;
-  elif test "$arg" = --force -o "$arg" == -f; then
-    FORCE=true;
+  if test "$arg" = --debug -o "$arg" = -d; then
+    DEBUG=true
+  elif test "$arg" = --force -o "$arg" = -f; then
+    FORCE=true
+  elif test "$arg" = -fd -o "$arg" = -df; then
+    DEBUG=true; FORCE=true
   elif test "$arg" = --help; then
-    HELP=true;
+    HELP=true
   elif test "$arg" = --language; then
     LANGUAGE=$1; shift
   elif test "$arg" = --nopdf; then
-    NOPDF=true;
+    NOPDF=true
   elif test "$arg" = --proglang; then
     PROGLANG=$1; shift
   elif test "$arg" = --verify-links; then
@@ -229,13 +231,13 @@ function resolveabbrevs() {
     -e 's/%CURRICULUMCOMMENT%/<!-- /' \
     -e 's/%ENDCURRICULUMCOMMENT%/\n-->/' \
     \
-    -e 's/%CURRICULUM\([^%]*\)%/<\1/g' \
-    -e 's/%BEGINCURRICULUM\([^%]*\)%/>/g' \
-    -e 's/%ENDCURRICULUM\([^%]*\)%/<\/\1>/g' \
-    \
     -e 's/%CURRICULUMSCRIPT%/<script type="math\/tex"/g' \
     -e 's/%BEGINCURRICULUMSCRIPT%/>/g' \
     -e 's/%ENDCURRICULUMSCRIPT%/<\/script>/g' \
+    \
+    -e 's/%CURRICULUM\([^%]*\)%/<\1/g' \
+    -e 's/%BEGINCURRICULUM\([^%]*\)%/>/g' \
+    -e 's/%ENDCURRICULUM\([^%]*\)%/<\/\1>/g' \
     \
     -e 's/&#8656;/\&lt;=/g' \
     -e 's/&#8594;/-\&gt;/g' \

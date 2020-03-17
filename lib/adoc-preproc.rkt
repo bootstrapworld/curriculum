@@ -413,7 +413,10 @@
 (define (make-lesson-link o lesson file-seq link-text
                           #:include? [include? #f])
   ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
-  (when (string=? lesson ".") (set! lesson (getenv "LESSON")))
+  (unless lesson (set! lesson "."))
+  (when (string=? lesson ".")
+    (let ([x (getenv "LESSON")])
+      (when x (set! lesson x))))
   (let* ([g (format "lessons/~a/~a" lesson
                     (string-join file-seq "/"))]
          [f (string-append *pathway-root-dir* g)]
@@ -431,7 +434,7 @@
     ;(printf "g=~a~n" g)
     (if include?
         (fprintf o "include::~a~a[]" *pathway-root-dir* g)
-        (frpintf o "link:{pathwayrootdir}~a[~a]" g link-text))))
+        (fprintf o "link:{pathwayrootdir}~a[~a]" g link-text))))
 
 (define *lesson-summary-file* #f)
 
@@ -673,6 +676,8 @@
                          [(string=? directive "image")
                           (let ([args (read-commaed-group i directive)])
                             (display (make-image (car args) (cdr args)) o))]
+                         [(string=? directive "math")
+                          (display (enclose-math (read-group i directive)) o)]
                          [(or (string=? directive "worksheet-link")
                               (string=? directive "worksheet-include")
                               (string=? directive "exercise-link"))
@@ -1173,11 +1178,7 @@
   (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
 
 (define (sexp->math e)
-  (string-append
-    (format "%CURRICULUMSCRIPT%")
-    (format "%BEGINCURRICULUMSCRIPT%\\displaystyle ")
-    (sexp->arith e)
-    (format "%ENDCURRICULUMSCRIPT%")))
+  (enclose-math (sexp->arith e)))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")

@@ -9,6 +9,7 @@
   enclose-span
   enclose-div
   enclose-textarea
+  enclose-math
 
   span-stack-present?
   top-span-stack
@@ -51,6 +52,13 @@
   (let ([textarea "tt"]) ;shd be "textarea" eventually
     (enclose-div ".obeyspaces"
                  (enclose-tag textarea classes s))))
+
+(define (enclose-math e)
+  (string-append
+    (format "%CURRICULUMSCRIPT%")
+    (format "%BEGINCURRICULUMSCRIPT%\\displaystyle ")
+    e
+    (format "%ENDCURRICULUMSCRIPT%")))
 
 ;for the @span{...}{...}
 
