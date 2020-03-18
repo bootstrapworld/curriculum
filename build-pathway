@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-17 # last modified
+LASTMOD=2020-03-18 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -223,7 +223,7 @@ function resolveabbrevs() {
     CODELANG=racket
   fi
   $SED -i \
-    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
+    -e 's/<pre>/<pre><span class="thinnegspace"><\/span><tt class="'$CODELANG'"> /g' \
     -e 's/<\/pre>/<\/tt><\/pre>/g' \
     -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
     -e 's/<\/code>/<\/tt><\/code>/g' \
