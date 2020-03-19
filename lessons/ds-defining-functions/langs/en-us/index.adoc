@@ -1,6 +1,6 @@
 = Defining Functions
 
-@lesson-description{Students learn a structured approach to problem solving called the “Design Recipe”. They then use these functions to filter the animals dataset, using methods.}
+@lesson-description{Students learn a structured approach to problem solving called the “Design Recipe”. They then use these functions to create images, and learn how to use them to enhance their scatterplots.}
 
 [@lesson-intro-table]
 |===
@@ -8,8 +8,10 @@
 |Product Outcomes
 |Students will be able to:
 
-* define several row values from the animals table
-* define several functions over rows from the animals table
+* define one-argument functions that consume a Number and produce an Image
+* define one-argument functions that consume a String and produce an Image
+* define one-argument functions that consume a Row and produce an Image
+* create custom scatter plots, using the functions they have defined
 
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
@@ -18,132 +20,125 @@
 
 In the last lesson, students learned to define _values_ (e.g. - `name = "Maya"`). Students should have defined `animalA` and `animalB` to be two different rows in the animals table. If they haven't, make sure they do this now.
 
-Suppose you work at the animal shelter, taking care of all the animals who live there. You want to make sure they’re healthy, happy, and find good homes. For each animal, you might want to ask certain questions:
+Suppose we want to make a solid, green triangle of size 10. What would we type? What if we wanted to make one of size 20? 25? 1000?
+----
+triangle(10, "solid", "green")
+triangle(20, "solid", "green")
+triangle(25, "solid", "green")
+triangle(1000, "solid", "green")
+----
 
-- What kind of animal is it?
-- Has it been fixed?
-- When was it born?
-- Is it a kitten?
+This is a lot of redundant typing, when the only thing changing is the size of the triangle! It would be convenient to define a _shortcut_, which only needs the size. Suppose we call it `gt` for short:
+----
+gt(10)
+gt(20)
+gt(25)
+gt(1000)
+----
 
-[.lesson-instruction]
-Take two minutes to find all the fixed animals by hand. Turn to @worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc}, and walk down the table one row at a time, putting a check next to each animal that is fixed.
+That's a lot better! We don't need to tell `gt` whether the shape is solid or outline, and we don't need to tell it what color to use. We will define our shortcut so it already knows these things, and all it needs is the size. This is a lot like defining values, which you already know how to do. But values don't change. Instead of defining values, we need to define _functions_.
 
-What did you do to complete this activity? You went through the table one row at a time, and for *each row* you did a lookup on the `fixed` column. Lookups are easy, but they can get really repetitive!
-
-[.lesson-instruction]
-In the Interactions Area, type the code that will look up if `animalA` is fixed or not. Then type the code to look up if `animalB` is fixed or not. Repeat for `animalC` and `animalD`. Suppose I wanted to do this for every animal in the table, just as you did by hand?
-
-This seems really repetitive, doesn’t it? We keep typing the same thing over and over, but all that’s really changing is the animal. Wouldn’t it be great if Pyret had a function called `is-fixed`, that would do this for us?
-
-== Defining Functions (Time 20 minutes)
+== Defining Functions over Numbers (Time 20 minutes)
 
 To build our own functions, we’ll use a series of steps called the @vocab{Design Recipe}. The Design Recipe is a way to think through the behavior of a function, to make sure we don’t make any mistakes with the animals that depend on us! The Design Recipe has three steps, and we’ll go through them together for our first function.
 
 [.lesson-instruction]
-Turn to @worksheet-link{workbook-pages/design-recipe.adoc} in your Student Workbook.
+Turn to @worksheet-link{workbook-pages/design-recipe-1.adoc} in your Student Workbook, and read the word problem at the top of the page.
 
 [.lesson-point]
 Step 1: Contract and Purpose
 
-The first thing we do is write a Contract for this function. You already know a lot about contracts: they tell us the Name, Domain and Range of the function. Our function is named is-fixed, and it consumes a row from the animals table. It looks up the value in the fixed column, which will always be a Boolean. A Purpose Statement is just a description of what the function does:
+The first thing we do is write a Contract for this function. You already know a lot about contracts: they tell us the Name, Domain and Range of the function. Our function is named `gt`, and it consumes a Number. It makes triangles, so the output will be an Image. A Purpose Statement is just a description of what the function does:
 
 ----
-# is-fixed :: (animal :: Row) -> Boolean
-# Consumes an animal, and looks up the value in the fixed column
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
 ----
 
-Since the contract and purpose statement are notes for humans, we add the # symbol at the front of the line to turn it into a comment.
+Since the contract and purpose statement are notes for humans, we add the # symbol at the front of the line to turn them into comments.
 
 Be sure to check students’ contracts and purpose statements before having them move on!
 
 [.lesson-point]
 Step 2: Write Examples
 
-Examples are a way for us to tell the computer how our function should behave for a specific input. We can write as many examples as we want, but they must all be wrapped in an examples: block and an end statement. Examples start with the name of the function we’re writing, followed by an example input. Suppose we have two animals defined, where animalA is fixed and animalB isn’t. What work do we have to do on each row to look up whether they are fixed? What is will the result be for each animal?
+Examples are a way for us to tell the computer how our function should behave for a specific input. We can write as many examples as we want, but they must all be wrapped in an examples: block and an end statement. Examples start with the name of the function we’re writing, followed by an example input. Suppose we write `gt(10)`. What work do we have to do, in order to produce the right shape as a result? What if we write `gt(20)`?
 
 ----
-# is-fixed :: (r :: Row) -> Boolean
-# Consumes an animal, and looks up the value in the fixed column
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
 examples:
-  is-fixed(animalA) is true
-  is-fixed(animalB) is false
+  gt(10) is triangle(10, "solid", "green")
+  gt(10) is triangle(10, "solid", "green")
 end
 ----
-
-*When writing examples, we replace the look-up operation with the actual value in the table.*
 
 [.lesson-point]
 Step 3: Define the Function
 
-We start with the `fun` keyword (short for “function”), followed by the name of our function and a set of parentheses. This is exactly how all of our examples started, too. But instead of writing animalA or animalB, we’ll use the label from our Domain. Then we add a colon (`:`) in place of is, and write out the work we did to get the answers for our examples. Finally, we finish with the `end` keyword.
+We start with the `fun` keyword (short for “function”), followed by the name of our function and a set of parentheses. This is exactly how all of our examples started, too. But instead of writing `10` or `20`, we’ll use the label from our Domain. Then we add a colon (`:`) in place of is, and write out the work we did to get the answers for our examples. Finally, we finish with the `end` keyword.
 
 ----
-# is-fixed :: (animal :: Row) -> Boolean
-# Consumes an animal, and looks up the value in the fixed column
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
 examples:
-  is-fixed(animalA) is true
-  is-fixed(animalB) is false
+  gt(10) is triangle(10, "solid", "green")
+  gt(10) is triangle(10, "solid", "green")
 end
-fun is-fixed(animal): animal["fixed"]
+fun gt(size):
+  triangle(size, "solid", "green")
 end
 ----
-
-This program is missing examples! Add an examples block in the Definitions Area, using your animalA and animalB. Check the Animals Dataset to make sure that your Booleans are correct for your animals. If you click “Run”, you’ll see a report on whether the examples are correct. Make sure both of them pass!
 
 [.lesson-instruction]
-* Use the Design Recipe to solve the word problem at the bottom of Page 10.
+Type your function definition into the Definitions Area. Be sure to include the Contract, Purpose Statement, Examples _and_ your Definition! Once you have typed everything in, click "Run" and evaluate `gt(10)` in the Interactions Area. What did you get back?
+
+Once we have defined a function, we can use it as our shortcut! This makes it easy to write simpler code, by moving the complexity into a function that can be tested and re-used whenever we like.
+
+[.lesson-instruction]
+* Use the Design Recipe to solve the word problem at the bottom of @worksheet-link{workbook-pages/design-recipe-1.adoc}.
 * Type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area.
 * Click “Run”, and make sure all your examples pass!
-* Type gender(animalA) into the Interactions Area.
+* Type bc(20) into the Interactions Area. What happens?
 
-== Functions that Compute (20 minutes)
+== Defining Functions over Other Datatypes (Time 20 minutes)
 
-So far, our functions have all been Lookup Functions: they consume a row, and they look up one column from that row as-is. And as long as that row contains Boolean values, we can use that function with the .filter method. But what if we want to filter by a Boolean expression? For example, what if we want to find out specifically whether or not an animal is a cat, or whether it’s young? Let’s walk through an example of a Compute Function using the Design Recipe, by turning to @worksheet-link{workbook-pages/design-recipe-2.adoc}.
-
-Suppose we want to define a function called `is-cat`, which consumes a row from the `animals-table` and returns true if the animal is a cat.
-
-* Is this a Lookup, Compute or Relate question?
-* What is the name of this function? What are its Domain and Range?
-* Is Sasha a cat? _What did you do to get that answer?_
-
-To find out if an animal is a cat, we look-up the species column and check to see if that value is _equal_ to `"cat"`. Suppose `animalA` is a cat and `animalB` is a lizard. What should our examples look like? *Remember: we replace any lookup with the actual value, and check to see if it is equal to `"cat"`.*
-
+Functions can consume values besides Numbers. For example, we might want to define a function called `sticker` that consumes a _Color_, and draws a star of that color:
 ----
-# is-cat :: (r :: Row) -> Boolean
-# Consumes an animal, and compute whether the species is "cat"
-examples:
-  is-cat(animalA) is "cat" == "cat"
-  is-cat(animalB) is "dog" == "cat"
-end
+sticker("blue") is star(50, "solid", "blue")
+sticker("yellow") is star(50, "solid", "yellow")
 ----
+
+Or a function called `nametag` that consumes a _Row_ from the animals table, and draws that animal's name in purple letters.
+----
+nametag(animalA) is text(animalA["name"], 10, "purple")
+nametag(animalB) is text(animalB["name"], 10, "purple")
+----
+
 
 [.lesson-instruction]
-Write two examples for your defined animals. Make sure one is a cat and one isn’t!
+Turn to @worksheet-link{workbook-pages/design-recipe-2.adoc}, and use the Design Recipe to write both of these functions.
 
-As before, we’ll use the pattern from our examples to come up with our definition.
+== Scatter Plots with Images (Time 10 minutes)
 
-* What is the function name?
-* What is the name of the variable(s)?
-* What do we do in the body in the function?
-
+You've used Pyret functions that use Numbers, Strings, Images, and even Tables and Rows. Now you've written functions of your own that work with these datatypes. But did you know that Pyret functions can even use _other functions_? Look at the Contract for `image-scatter-plot`:
 ----
-# is-cat :: (r :: Row) -> Boolean
-# Consumes an animal, and compute whether the species is "cat"
-examples:
-  is-cat(animalA) is "cat" == "cat"
-  is-cat(animalB) is "dog" == "cat"
-end
-fun is-cat(animal): animal["species"] == "cat"
-end
+ image-scatter-plot :: (t :: Table, xs :: String, ys :: String, f :: (Row -> Image)) -> Image
 ----
+This function looks a lot like the regular `scatter-plot` function. It takes in a table, and the names of columns to use for x- and y-values. Let's take a closer look at the third input...
+----
+...f :: (Row -> Image)...`
+----
+_That looks like the contract for a function!_ Indeed, the third input to `image-scatter-plot` is named `f`, which itself is a function that consumes Rows and produces Images. In fact, we just defined a function that does exactly that!
 
 [.lesson-instruction]
-* Type this definition -- and its examples! -- into the Definitions Area, then click “Run” and try using it to filter the `animals-table`.
-* For practice, try solving the word problem for `is-young` at the bottom of @worksheet-link{workbook-pages/design-recipe-2.adoc}.
+- Type `image-scatter-plot(animals-table, "pounds", "weeks", nametag)` into the Interactions Area. 
+- What did you get?
+- What other scatter plots could we create?
 
 == Closing (Time 5 minutes)
 
-Congratulations! You’ve explored the Animals dataset, formulated your own questions and begun to think critically about the connections between data and the questions we ask about it. For the rest of this course, you’ll be learning new programming and Data Science skills, practicing them with the Animals dataset and then applying them to your own data.
+Functions are powerful tools, for both mathematics and programming. They allow us to create reusable chunks of logic that can be tested to ensure correctness, and can be used over and over to solve different kinds of problems. A little later on, you'll learn how to combine, or _compose_ functions together, in order to handle more complex problems.
 
 == Additional Exercises:
 
