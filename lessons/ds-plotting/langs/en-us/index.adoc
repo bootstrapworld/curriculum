@@ -21,8 +21,7 @@
 
 | Materials
 |
-* Computer for each student (or pair), with access to the
-internet
+* Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 
 | Preparation
@@ -92,24 +91,9 @@ While bars in a bar chart are usually order in some logical way (alphabetical, s
 Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
 
 === Launch
-Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
-
-What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
-
-[.lesson-instruction]
-- Use the `count` function to make a table showing the number of animals of each `gender` at the shelter.
-- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) at the shelter.
-
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to use the raw values in the summary table as-is: the size of the pie slice or bar is taken directly from the `count` column, and the label is taken directly from the `value` column. When we want to use the raw values as-is, we have another function:
-
-----
-# pie-chart-raw :: (t :: Table, label :: String, data :: String) -> Image
-pie-chart-raw(count(animals-table,"species"), "value", "count")
-----
-
-=== Student-Facing Task Assessment
 There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.
 
+=== Student-Facing Task Assessment
 [.lesson-instruction]
 Complete @worksheet-link{workbook-pages/exploring-displays-1.adoc} anf @worksheet-link{workbook-pages/exploring-displays-2.adoc}.
 
@@ -124,6 +108,25 @@ You will have many opportunities to use these concepts in this course, by writin
 
 [.lesson-instruction]
 Make sure to save your work, so you can go back to it later!
+
+[.strategy-box]
+.Extension Activities
+****
+Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
+
+What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
+
+[.lesson-instruction]
+- Use the `count` function to make a table showing the number of animals of each `gender` at the shelter.
+- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) at the shelter.
+
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to use the raw values in the summary table as-is: the size of the pie slice or bar is taken directly from the `count` column, and the label is taken directly from the `value` column. When we want to use the raw values as-is, we have another function:
+
+----
+# pie-chart-raw :: (t :: Table, label :: String, data :: String) -> Image
+pie-chart-raw(count(animals-table,"species"), "value", "count")
+----
+****
 
 == Additional Exercises:
 
