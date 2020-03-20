@@ -1,22 +1,40 @@
-= Using Table Methods
+= Table Methods
 
 @lesson-description{Students learn about _table methods_, which allow them to order, filter, and extend the animals table.}
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{ds-questions-and-value-defs}
-|Product Outcomes
-|Students will be able to:
+| Lesson Goals
+| Students will be able to...
 
 * order the animals dataset by a number of criteria
 * filter the animals dataset by gender, fixed status, and age
 
+| Student-Facing Lesson Goals
+| I can...
+* order the animals dataset by any column
+* filter the animals dataset
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
-== Reviewing Function Definitions (15 minutes)
-
-Students have already learned to use the `.row-n` method to extract an individual row of the animals table. This lesson introduces other methods, having students experiment with them before trying to explain what they do and how they work.
+== Review Function Definitions (15 minutes)
 
 [.lesson-instruction]
 * Load the *shared file*, and click "Run". 
@@ -36,20 +54,33 @@ Students have already learned to use the `.row-n` method to extract an individua
 
 == Ordering Tables (10 minutes)
 
-Find the contract for `.order-by` in your contracts page. The `.order-by` method consumes a String (the name of the column you want to order) and a Boolean (true for ascending, false for descending). But what does it produce?
+=== Overview
+Students learn a second table method, which allows them to order columns in ascending or descending order.
 
+=== Launch
+Have students find the contract for `.order-by` in their contracts pages. The `.order-by` method consumes a String (the name of the column by which we want to order) and a Boolean (true for ascending, false for descending). But what does it produce?
+
+=== Student-Facing Task Assessment
 [.lesson-instruction]
 * Type `animals-table.order-by("name", true)` into the Interactions Area. What do you get?
 * Type `animals-table.order-by("age", false)` into the Interactions Area. What do you get?
-* What is the Domain of `.order-by`? What is the Range? Find the contract for this method in your contracts table, and make sure it makes sense!
+* Sort the animals table from heaviest-to-lightest.
+* Sort the animals table alphabetically by species.
+* Sort the animals table so that fixed and unfixed animals are grouped together.
+* Sort the animals table by how long it took for each animal to be adopted, in ascending order.
+
+== Collect
+Answer any questions students may have. Class discussion: what do `.order-by` and `.row-n` have in common? How are they different?
 
 == Filtering and Building (25 minutes)
 
-You've already seen expressions like `animals-table.row-n(..)` and `animals-table.order-by(...)`. But suppose you want to get a table of only animals that have been fixed? 
+=== Overview
+Students learn how to _transform_ tables, by filtering out rows and adding new columns.
+
+=== Launch
+Suppose we want to get a table of only animals that have been fixed? Have students find the contract for `.filter` in their contracts pages. The `.filter` method is taking in a _function_. What is the contract for that function? Where have we seen functions-taking-functions before?
 
 [.lesson-instruction]
-* Find the contract for `.filter` in your contracts page. 
-* The `.filter` method is taking in a _function_. What is the contract for that function? Where have you seen functions-taking-functions before?
 * Try typing `animals-table.filter(is-fixed)` into the Interactions Area.
 * Try typing `animals-table.filter(is-cat)` into the Interactions Area. 
 * What do you get? What do you think is going on?
@@ -57,16 +88,16 @@ You've already seen expressions like `animals-table.row-n(..)` and `animals-tabl
 
 The `.filter` method walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. In this case, we gave it the is-fixed function, so the new table had only rows for fixed animals. Notice that the Domain for `.filter` says that test must be a function (that’s the arrow), which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
 
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for `.build-column` in their contracts pages. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function? 
+
 [.lesson-instruction]
-* Find the contract for `.build-column` in your contracts page. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function? 
 * Try typing `animals-table.build-column("young", is-young)` into the Interactions Area. 
 * What do you get? What do you think is going on?
 
 The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In this case, we gave it the is-young function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
 
-== Closing (Time 5 minutes)
-
-Congratulations! 
+=== Collect
+TODO
 
 == Additional Exercises:
 
