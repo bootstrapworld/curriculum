@@ -1,51 +1,68 @@
 = Method Chaining
 
-@lesson-description{Students continue practicing the Design Recipe, and learn how to build and transform columns in a table. They also learn how to chain methods together, and define more sophisticated subsets. }
+@lesson-description{Students learn how to chain methods together, and define more sophisticated subsets. }
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{}
-|Product Outcomes
-|Students define functions that sort, filter, or extend the animals table
+| Lesson Goals
+| Students will be able to...
 
+* Use method chaining to write more sophisticated analyses using less code
+* Identify bugs introduced by chaining methods in the wrong order
+
+| Student-Facing Lesson Goals
+| I can...
+
+ Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
-== Review (Time 15 minutes)
-
-Take a minute to look back at the opening questions you saw at the beginning of the class, and choose another one that interests you.
-
-[.lesson-instruction]
-Using what you know now, what information would you need to collect in order to answer it? What subsets would you need to create? What analysis would you need to perform?
-
-////
-Debrief as a class.
-////
-
-[.lesson-instruction]
-- What kinds of displays and charts have you learned about so far?
-- What does each kind of display tell us about a dataset?
-- When would you use each kind of display?
-
-////
-Spend some time on this -- let students discuss amongst themselves, and facilitate as necessary.
-////
-
 == Chaining Methods (Time 30 minutes)
-Table methods can be chained together, so that we can build, filter _and_ order a Table. For example:
+
+=== Overview
+Students learn how to perform multiple table operations (sorting, filtering, building) in the same line of code.
+
+=== Launch
+Now that we are doing more sophisticated analyses, we might find ourselves writing the following code:
+----
+# get a table with the nametags of all the fixed animals, ordered by species
+fixed = animals-table.filter(is-fixed)
+fixed-with-nametags = fixed.build-column("tag", nametag)
+result = fixed-with-nametags.order-by("species", true)
+----
+
+That's a lot of code, and it also requires us to come up with names for each intermediates step! Pyret allows table methods can be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
 
 ----
 # get a table with the nametags of all the fixed animals, ordered by species
-animals-table.build-column("label", nametag).filter(is-fixed).order-by("species", true)
+result = animals-table.build-column("label", nametag).filter(is-fixed).order-by("species", true)
 ----
 
 This code takes the `animals-table`, and builds a new column. According to our Contracts Page, `.build-column` produces a new Table, and that’s the Table whose `.filter` method we use. That method produces _yet another Table_, and we call that Table’s `order-by` method. The Table that comes back from that is our final result.
 
-////
-Suggestion: use different color markers to draw nested boxes around each part of the expression, showing where each Table came from.
-////
 
-It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “.” to make it more readable. Here’s the exact same code, written with each method on its own line:
+[.strategy-box]
+.Teaching Tip
+****
+Use different color markers to draw _nested boxes_ around each part of the expression, showing where each Table came from.
+****
+
+It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “`.`” to make it more readable. Here’s the exact same code, written with each method on its own line:
 
 ----
 # get a table with the nametags of all the fixed animals, order by species
@@ -60,12 +77,11 @@ Order matters: Build, Filter, Order.
 
 Suppose we want to build a column and then use it to filter our table. If we use the methods in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
 
+=== Student-Facing Task Assessment
 [.lesson-point]
 When chaining methods, it’s important to build first, then filter, and then order.
 
 How well do you know your table methods? Complete @worksheet-link{workbook-pages/chaining-methods.adoc} and @worksheet-link{workbook-pages/chaining-methods-order-matters.adoc} in your Student Workbook to find out.
 
-
-== Closing (Time 5 minutes)
-
-As our analysis gets more complex, method chaining is a great way to keep the code simple. But complex analysis also has more room for mistakes, so it’s critical to think carefully when we use it.
+== Collect
+As our analysis gets more complex, method chaining is a great way to keep the code simple. But complex analysis also has more room for mistakes, so it’s critical to think carefully when we use it!
