@@ -1,23 +1,39 @@
 = Making Subsets
 
-@lesson-description{Students learn to prepare for analyzing a new
-dataset by considering logical subsets of that data. They begin
-with the Animals Dataset, and then apply what they’ve learned to
-a dataset of their own choosing. In the process, they practice
-using the Design Recipe to create filter functions, and come up
-with questions they wish to explore. Finally, students select a
-dataset of their own.}
+@lesson-description{Students learn about logical and random subsets, and practive creating them from the animals dataset. In the process, they practice using the Design Recipe to create filter functions, and come up with questions they wish to explore. Finally, students select a dataset of their own.}
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{ds-question-types}
-|Product Outcomes
-|Students choose a dataset they're interested in
+| Lesson Goals
+| Students will be able to...
 
+* Describe a dataset they are interested in, and explain why they chose it
+
+| Student-Facing Lesson Goals
+| I can...
+
+* Tell you why I chose my dataset, and describe it
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
-== Review (Time 10 minutes)
+== Warmup (Time 10 minutes)
 
 Open your saved animals-dataset file. You should have several functions defined:
 
@@ -29,71 +45,49 @@ Open your saved animals-dataset file. You should have several functions defined:
 If you didn’t have a chance to type them in from your workbook, make sure you do!
 
 [.lesson-instruction]
-Take 10m and write a function `is-dog`, then type it into the
-Definitions Area.
+Take 10m and write a function `is-dog`, then type it into the Definitions Area.
 
 == Making Subsets (Time 20 minutes)
 
-A lot of Data Science involves making predictions based on data.
-Suppose we want to survey Americans and try to predict who our
-next president will be. Obviously, it would take too long to ask
-everyone who they’re voting for! Instead, pollsters try to take a
-_sample_ of Americans, and generalize the opinion of the sample to
-estimate how Americans as a whole feel.
+=== Overview
+This activity is all about _representative samples_: how well does a subset of one population represent the whole population? Students make a bunch of subsets from the animals dataset, then see how each of those subsets differs in response to the same question.
+
+=== Launch
+Suppose we want to survey Americans and try to predict who our next president will be. It would take too long to ask everyone who they’re voting for, so pollsters instead take a _sample_ of Americans, and _generalize_ the opinion of the sample to estimate how Americans as a whole feel. But choosing a sample can be tricky...
 
 [.lesson-instruction]
-- Would it be problematic to only call voters who are registered
-  Democrats? To only call voters under 25? To only call regular
-  churchgoers? Why or why not?
-- Suppose we are interested how in women feel about a particular
-  issue. Should we still make sure we’re surveying men, too? Why
-  or why not?
+* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
+* Suppose we are interested how in women feel about a particular issue. Should we still make sure we’re surveying men, too? Why or why not?
 
-As you can see, sampling is a complicated issue! Depending on the
-question we want to answer, sometimes it makes sense to work with
-an entire dataset, and sometimes it makes sense to carve out a
-subset of the data (e.g. calling only women). In this Unit,
-we’ll be practicing what you learned about writing functions, and
-then using the `.filter` method to create subsets.
-
-[.lesson-point]
-Make subsets first!
-
-Data Scientists don’t always know what the interesting questions
-are right away. So whenever they explore a dataset, one of the
-first things do is define some _logical subsets_, just to have them
-handy later. Someone looking at our animals dataset might want to
-consider “just the lizards” or “just males”. This also helps them
-reason about the data, without being biased by a particular
-question.
+Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a subset of the data (e.g. calling only women, calling a random sample of 2000 people, etc). Sometimes we want to create a _random sample_ of an existing table. 
 
 [.lesson-instruction]
-A “kitten” is an animal whose `species == "cat"` and whose `age <
-2`. How would you make a subset of just kittens? Turn to
-@worksheet-link{workbook-pages/samples-from-animals-dataset.adoc},
-and see what code will compute whether or not an animal is a
-kitten. Can you fill in the code for the other subsets?
-
-Sometimes we want to create a table that’s just a random sample
-of an existing table. Type the following code into the
-Definitions Area (left-hand side of your screen), and click
-“Run”.
-
+--
+Type the following code into the Definitions Area (left-hand side of your screen), and click “Run”.
 ----
 tiny-sample  = random-rows(animals-table, 3)
 small-sample = random-rows(animals-table, 8)
 ----
+* What do you get when you evaluate `tiny-sample` in the Interactions Area? `small-sample`?
+* What is the contract for `random-rows`? What does the function do?
+--
 
+[.lesson-point]
+Make subsets first!
+
+Data Scientists don’t always know what the interesting questions are right away. So whenever they explore a dataset, one of the first things do is define some _logical subsets_, just to have them handy later. Someone looking at our animals dataset might want to consider “just the lizards” or “just males”. This also helps them reason about the data, without being biased by a particular question.
+
+=== Student-Facing Task Assessment
 [.lesson-instruction]
-- What do you get when you evaluate `tiny-sample` in the
-  Interactions Area? `small-sample`?
-- What is the contract for `random-rows`? What does the function
-  do?
+--
+A “kitten” is an animal whose `species == "cat"` and whose `age < 2`. How would you make a subset of just kittens?
 
-We already know how to define values, and how to filter a
-dataset. So let’s define some subsets, in addition to the random
-samples we just made:
+* Turn to @worksheet-link{workbook-pages/samples-from-animals-dataset.adoc}, and see what code will compute whether or not an animal is a kitten. 
+* Can you fill in the code for the other subsets? 
+* When you're done, type these definitions into the Definitions Area
+--
 
+We already know how to define values, and how to filter a dataset. So let’s define some subsets, in addition to the random samples we just made:
 ----
 dogs  = animals-table.filter(is-dog)
 cats  = animals-table.filter(is-cat)
@@ -101,17 +95,10 @@ fixed = animals-table.filter(is-fixed)
 young = animals-table.filter(is-young)
 ----
 
-We can make a pie-chart showing how many of each species is in
-the shelter, by writing
-
-----
-pie-chart(animals-table, "species")
-----
 
 [.lesson-instruction]
 --
-Which of our subsets do you think will give us the most accurate
-approximation of the original chart?
+Make a pie-chart showing how many of each species is in the shelter, by writing `pie-chart(animals-table, "species")`. Which of our subsets do you think will give us the most accurate approximation of the original chart?
 ----
 pie-chart(dogs, "species")
 pie-chart(cats, "species")
@@ -120,18 +107,26 @@ pie-chart(young, "species")
 pie-chart(tiny-sample, "species")
 pie-chart(small-sample, "species")
 ----
-Compare the charts you get from each of these. Which one is the
-most representative of the whole population? Why?
+Compare the charts you get from each of these. Which one is the most representative of the whole population? Why?
 --
 
 == Choose Your Dataset (Time 20 minutes)
 
-Now it’s time to choose a dataset of your own! Throughout this
-course, you’ll be analyzing this dataset and writing up your
-findings. As you learn new tools for data science, you’ll
-continue to refine this analysis, answering questions and raising
-new ones of your own! Take 10 minutes to look through the
-following datasets, and choose one that interests you:
+=== Overview
+Students browse through the library of provided datasets, and choose one they want to work with. NOTE: this can also be done as a homework assignment, if all students have internet access at home.
+
+=== Launch
+Explain to students that they will now select a dataset for them to work with for the remainder of the course. Make sure they understand that it genuinely has to be something they are interested in - their engagement with the data is critical to engaging with the class.
+
+_Students can also find their own dataset_, and use this (@link{https://code.pyret.org/editor#share=112j5-gF_BLpDWI_qzgaOseOhp6YbteD8, Blank Starter file}). See this @link{https://youtu.be/K4n9hTSqcyw, tutorial video} for help importing your own data into Pyret.
+
+[.lesson-point]
+Students must have at least 2 questions that are both _interesting_ and _answerable_ using their dataset.
+
+=== Student-Facing Task Assessment
+
+[.lesson-instruction]
+Choose a dataset that is interesting to you! You should have at least two questions that the dataset can help you answer. Write these questions down on @worksheet-link{workbook-pages/whats-on-your-mind.adoc}.
 
 - Movies
   (@link{https://docs.google.com/spreadsheets/d/1ldK-Xte5xCAPd6hz2wreBaJzuw-voe4q6ui9QkFGz8w,
@@ -220,27 +215,7 @@ following datasets, and choose one that interests you:
   Starter file})
 
 
+== Collect
+Have students share their datasets and their questions.
 
-Or find your own dataset, and use this
-(@link{https://code.pyret.org/editor#share=112j5-gF_BLpDWI_qzgaOseOhp6YbteD8,
-Blank Starter file}) for your project. See this
-@link{https://youtu.be/K4n9hTSqcyw, tutorial video} for help
-importing your own data into Pyret.
-
-////
-Make sure students realize this is a firm commitment! The farther
-they go in the course, the harder it will be to change datasets.
-////
-
-== Closing (Time 5 minutes)
-
-Congratulations! You’ve explored the Animals dataset, formulated
-your own and begun to think critically about how questions and
-data shape one another. For the rest of this course, you’ll be
-learning new programming and Data Science skills, practicing them
-with the Animals dataset and then applying them to your own data.
-
-////
-Have students share which dataset they chose, and pick one question they’re looking at.
-////
-
+For the rest of this course, students will be learning new programming and Data Science skills, practicing them with the Animals dataset and then applying them to their own data.
