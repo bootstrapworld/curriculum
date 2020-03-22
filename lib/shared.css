@@ -83,26 +83,30 @@ td.tableblock>.content { margin-bottom: 0px; }
   font-weight: bold;
 }
 
-.lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
-  background-color: lightgray;
-  font-weight: bold;
-  text-align: center;
-}
-
 .lang-features-table * {
   margin: 0px;
   padding: 1px;
   font-size: small;
 }
 
+.lang-features-table p { font-family: monospace; }
+
+.lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
+  background-color: lightgray;
+  font-weight: bold;
+  text-align: center;
+  font-family: inherit; /* Header row should not be monospace */
+}
+
 .lang-features-table .centered-image {
   display: inline; /* Override default image treatment */
 }
 
-.lang-features-table tr td:nth-child(1) {
+.lang-features-table tr td:nth-child(1), .lang-features-table tr td:nth-child(1) p {
   background-color: transparent;
   text-align: center;
   vertical-align: middle;
+  font-family: inherit; /* Type cell should not be monospace */
 }
 
 .lesson-section-2 { float: left; clear: both; }
