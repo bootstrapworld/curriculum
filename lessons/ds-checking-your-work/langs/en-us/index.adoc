@@ -5,20 +5,41 @@
 [@lesson-intro-table]
 |===
 @prereqs-stds{}
-|Product Outcomes
-|Students define functions that sort, filter, or extend the animals table
+| Lesson Goals
+| Students will be able to...
 
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
-
 == Confirming Analysis (Time 30 minutes)
 
-Data Analysis is often used to make predictions based on some sample data. For example, we might look at the Animals Dataset and try to make predictions about other animal shelters based on that sample. But if the sample dataset doesn’t represent the full population, those predictions can be wrong -- and sometimes, really really wrong!
+=== Overview
+Students learn how to create a _verification table_, which is small enough to reason about and can be used to test whether code does the right thing.
 
-- Uber and Google are making self-driving cars, which use artificial intelligence to interpret sensor data and make predictions about whether a car should speed up, slow down, or slam on the brakes. This AI is trained on a lot of sample data, which it learns from. What might be the problem if the sample data only included roads in California?
-- Law enforcement in many towns has started using facial-recognition software to automatically detect whether someone has a warrant out for their arrest. A lot of facial-recognition software, however, has been trained on sample data containing mostly white faces. As a result, it has gotten really good at telling white people apart, but @link{https://www.theweek.co.uk/95383/is-facial-recognition-racist, often can’t tell the difference between people who aren’t white}. Why might this be a problem?
-- Why might it be a bad thing to only test medicines only on men (or only on women), before prescribing them to the general public?
+=== Launch
+Data Analysis is often used to make predictions based on some sample data. For example, we might look at the Animals Dataset and try to make predictions about other animal shelters based on that sample. But if the sample dataset doesn’t represent the full population, those predictions can be wrong -- and sometimes, really, _really_ wrong!
+
+* Uber and Google are making self-driving cars, which use artificial intelligence to interpret sensor data and make predictions about whether a car should speed up, slow down, or slam on the brakes. This AI is trained on a lot of sample data, which it learns from. What might be the problem if the sample data only included roads in California?
+* Law enforcement in many towns has started using facial-recognition software to automatically detect whether someone has a warrant out for their arrest. A lot of facial-recognition software, however, has been trained on sample data containing mostly white faces. As a result, it has gotten really good at telling white people apart, but @link{https://www.theweek.co.uk/95383/is-facial-recognition-racist, often can’t tell the difference between people who aren’t white}. Why might this be a problem?
+* Why might it be a bad thing to only test medicines only on men (or only on women), before prescribing them to the general public?
 
 [.lesson-point]
 Sample Data Matters!
@@ -29,37 +50,19 @@ A good Sample Table should be _representative_ of the population, and _relevant_
 - A good Sample Table has enough rows to be a representative sample of the dataset. If our dataset has a mix of dogs and cats, for example, we want at least one of each in this table. 
 - A good Sample Table has rows in mostly random order, so that we’ll notice if our analysis winds up sorting them.
 
-Sample Tables can also be used to _verify_ that a certain analysis is correct. For example: suppose you’ve been given a function that is supposed to filter a table and _show only the cats_. If you test it on a Sample Table that only has cats to begin with, will that tell you whether or not the function works?
+=== Student-Facing Task Assessment
+Sample Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Sample Table only has cats to begin with. How would we know if the function filters out non-cats?
 
-////
-You’ll need a table with cats and non-cats.
-////
+Suppose a function takes in a table of animals and shows _only the kittens_. A sample table should have cats and non-cats, as well as old and young cats.
 
-[.lesson-instruction]
-Suppose you have a function that takes in a table of animals and shows _only the kittens_. What would your Sample Table need to have in order to verify this function?
-
-////
-You’ll need a table with cats and non-cats, as well as cats under the age of 2.
-////
+Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a sample table should have cats and non-cats, as well as old and young cats...and have rows sorted in random order.
 
 [.lesson-instruction]
-Suppose you have a function that takes in a table of animals and shows only the kittens, sorted in ascending order by weight. What would your Sample Table need to have in order to verify this function?
+* Turn to @worksheet-link{workbook-pages/trust-but-verify.adoc} in your student workbook. 
+* You’ve been given a function called `fixed-cats` and a description of what it _claims_ to do.
+* List the names of the animals that you would use in a Sample Table to verify whether the function works as-advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify Starter File}. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
+* Turn to @worksheet-link{workbook-pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Sample Table and figure out which (if any) of the functions are correct!
 
-////
-You’ll need a table with cats and non-cats, as well as cats under the age of 2, with the rows ordered randomly.
-////
-
-// TODO: _each_ page? 
-
-Turn to @worksheet-link{workbook-pages/trust-but-verify.adoc} in your student workbook. On each page, you’ve been given a function called `fixed-cats` and a description of what it _claims_ to do.
-
-[.lesson-instruction]
-List the names of the animals that you would use in a Sample Table to verify whether the function works as-advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify} Starter File. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
-
-
-[.lesson-instruction]
-Turn to @worksheet-link{workbook-pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Sample Table and figure out which (if any) of the functions are correct!
-
-== Closing (Time 5 minutes)
+== Collect
 
 Complex analysis has more room for mistakes, so it’s critical to think about a Sample Table that allows us to trust that our code really does what it’s supposed to!
