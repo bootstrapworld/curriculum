@@ -15,7 +15,7 @@ h1 {
   font-weight: bold;
   font-family: sans-serif;
 }
-h2 { margin: 0px; font-family: 'Lato', Arial, Helvetica, sans-serif; }
+h2 { margin: 1ex 0px; font-family: 'Lato', Arial, Helvetica, sans-serif; }
 
 .dr-title { font-size: 24pt; }
 
@@ -27,6 +27,9 @@ a[href] {
 }
 
 td.tableblock>.content { margin-bottom: 0px; }
+
+.left  { text-align: left!important; }
+.right { text-align: right!important; }
 
 /*  RULES FOR GLOSSARY ITEMS  */
 .glossary {
@@ -47,6 +50,8 @@ td.tableblock>.content { margin-bottom: 0px; }
 }
 .glossary dd::after{content: '\A'; white-space: pre; }
 
+.vocab { font-weight: bold; }
+
 /*  RULES FOR THE PATHWAY PAGE  */
 #lesson-list dt { margin-bottom: 0px; }
 #lesson-list dd { margin-bottom: 0px; }
@@ -56,7 +61,7 @@ td.tableblock>.content { margin-bottom: 0px; }
   background-color: #bb29ff;
 }
 
-.lesson-section-1{ clear: both; border-top: solid 3px black;}
+.lesson-section-1, .lesson-section-1+.lesson-section-1 { clear: both; border-top: solid 3px black; }
 #lesson-list div.title{
   font-family: inherit;
   font-style: inherit;
@@ -78,35 +83,37 @@ td.tableblock>.content { margin-bottom: 0px; }
   font-weight: bold;
 }
 
-.lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
-  background-color: lightgray;
-  font-weight: bold;
-  text-align: center;
-}
-
 .lang-features-table * {
   margin: 0px;
   padding: 1px;
   font-size: small;
 }
 
+.lang-features-table p { font-family: monospace; }
+
+.lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
+  background-color: lightgray;
+  font-weight: bold;
+  text-align: center;
+  font-family: inherit; /* Header row should not be monospace */
+}
+
 .lang-features-table .centered-image {
   display: inline; /* Override default image treatment */
 }
 
-.lang-features-table tr td:nth-child(1) {
+.lang-features-table tr td:nth-child(1), .lang-features-table tr td:nth-child(1) p {
   background-color: transparent;
   text-align: center;
   vertical-align: middle;
+  font-family: inherit; /* Type cell should not be monospace */
 }
 
 .lesson-section-2 { float: left; clear: both; }
 .lesson-section-2 h3 {
-  font-size: 1em;
+  font-size: 1.5em;
   font-style: italic;
-  font-weight: 600;
-  background: #b7d89361;
-  padding: 5px;
+  margin: 0px;
  }
 .physics-table {
   margin-left: auto;
@@ -687,10 +694,9 @@ tr th.tableblock code {
 #footer { background: rgba(0,0,0,.5); padding: 0px; }
 
 .lesson-instruction {
-  margin-top: 5ex;
-  margin-left: 2ex;
-  margin-bottom: 5ex;
-  padding-left: 2ex;
+  margin-top: 1ex;
+  margin-left: 1ex;
+  margin-bottom: 1ex;
   background: #eeeeee;
 }
 

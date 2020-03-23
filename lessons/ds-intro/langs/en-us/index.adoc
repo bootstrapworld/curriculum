@@ -1,44 +1,78 @@
 = Introduction to Computational Data Science
 
-@lesson-description{Students are introduced to the Animals Dataset, and learn about Tables, Categorical and Quantitative data. They are also introduced to the Pyret IDE, and see how to import a table into Pyret and print it out in the Interactions Area.}
+@lesson-description{Students are introduced to the Animals Dataset, and learn about Tables, Categorical and Quantitative data.}
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{}
-|Lesson Goals
-|Students will be able to:
+| Lesson Goals
+| Students will be able to...
 
 * Explain the difference between Categorical and Quantitative data
 * Identify whether a variable in a dataset is either Categorical and Quantitative
+* Identify the Header Row and Identifier Column of a Table
+
+| Student-Facing Lesson Goals
+| I can...
+
+* Explain the difference between Categorical and Quantitative data
+* Identify whether a piece of data is Categorical and Quantitative
+* Find the Header Row and Identifier Column of a Table
 
 | Materials
 |
-* Computer for each student (or pair), with access to the
-internet
+* Computer for each student (or pair), with access to the internet
+* Each student (or pair of students) should have a Google Account.
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 * @worksheet-link{exercises/OpeningQuestions.pdf, Opening questions} printed for each student, group of students, or posted around the room.
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Decide how the first activity (opening questions) will be run
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
 == Introduction (20 min)
 
-Have students look at the opening questions, either at their desks or in a walk
-around the room.
+=== Overview
+Students look at opening questions, either at their desks or in a walk around the room. They select a question they are personally interested in, and think about the data required to answer that question. This process draws a direct line between answering questions they care about and the basics of data science.
 
+=== Launch
 [.lesson-instruction]
 - Give students 2 minutes to choose a question that grabs their attention, and group themselves by question. Ideally, no student will be the only one interested in that question.
 - Have students spend 2 minutes coming up with a hypothesis about what the answer is, and explaining why. Does every student in a single question-grouping have the same answer?
+
+=== Student-Facing Task Assessment
+[.lesson-instruction]
 - Give students 5 minutes to think about what information they would need to collect, to find the answer.
 
+=== Possible Misconceptions
+Students may list information that isn't _data_. For example, "we would need to find out who the best player is". That's not data! Instead, students should be proposing things like "we would need to find out win/loss records, free throw percentage", etc.
 
+=== Connect
 What’s the greatest movie of all time? Is Climate Change real? Who is the best quarterback? Is Stop-and-Frisk racially biased? These questions quickly turn into a discussion about data -- how you assess it and how you interpret the results. In this course, you’ll learn how to use data to ask and answer questions like this. The process of learning from data is called @vocab{Data Science}. Data science techniques are used by scientists, business people, politicians, sports analysts, and hundreds of other different fields to ask and answer questions about data.
 
 We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.
 
-== The Animals Dataset (25 min)
+== The Animals Dataset (15 min)
 
-Open the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0, Animals Spreadsheet} in a new tab, or turn to @worksheet-link{workbook-pages/animals-dataset.pdf} in your Student Workbook. This table contains data from an animal shelter, listing animals that have been adopted. We’ll be analyzing this table as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
+=== Overview
+Students explore the animals dataset, sharing observations and familiarizing themselves with the idiosyncracies and patterns in the data. In the process, they learn about Categorical and Quantitative data.
+
+=== Launch
+Have students open the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0, Animals Spreadsheet} in a browser tab, or turn to @worksheet-link{workbook-pages/animals-dataset.pdf} in their Student Workbooks. 
+
+=== Student-Facing Task Assessment
+This table contains data from an animal shelter, listing animals that have been adopted. We’ll be analyzing this table as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
 
 [.lesson-instruction]
 - Turn to @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student Workbook. What do you notice about this dataset? Write down your observations in the first column.
@@ -46,11 +80,6 @@ Open the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsN
 - There’s a third column, called “Question Type” -- we’re going to return to that later, so you can ignore it for now.
 - If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/19m1bUCQo3fCzmSEmWMjTfnmsNIMqiByLytHE0JYtnQM/edit#gid=0, spreadsheet file}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?
 - Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.
-
-
-Each student (or pair of students) should have a Google Account. Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
-
-Data Science is all about using a smaller sample of data to make predictions about a larger population. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals at this particular shelter, it might tell us something about the average age of animals in other shelters.
 
 Data Scientists work with two broad kinds of data: Categorical Data and Quantitative Data. @vocab{Categorical Data} is used to _classify_, not measure. Categories aren’t subject to the laws of arithmetic. For example, we couldn’t ask if “cat is more than lizard”, and it doesn’t make sense to "find the average ZIP code” in a list of addresses. “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
 
@@ -64,33 +93,22 @@ We use @vocab{Categorical Data} to answer “which one?”, and @vocab{Quantitat
 
 [.lesson-instruction]
 --
-What kind of data -- categorical or quantitative -- are the following pieces of information?
-
-* Hair color
-* Age
-* ZIP Code
-* Date
+* Turn to page @worksheet-link{workbook-pages/categorical-or-quantitative.adoc}, and answer the questions 1-5
+* Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on _how that data is being used!_
+* On @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student Workbook, fill in the blanks for questions 8-13.
 --
 
-Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on *how that data is being used!*
+=== Connect
+Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
 
+Data Science is all about using a smaller sample of data to make predictions about a larger population. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals at this particular shelter, it might tell us something about the average age of animals in other shelters.
 
-[.lesson-instruction]
---
-For each of the following questions, determine whether the data being used is Categorical or Quantitative.
+== Introducing Pyret (10 minutes)
 
-* We’d like to sort a list of phone numbers by area code.
-* We’d like to find out the average price of cars in a lot.
-* We’d like to find out the most popular color for cars.
-* We’d like to find out which puppy is the youngest.
-* We’d like to find out which cats have been fixed.
-* We want to know which people have a ZIP code of 02907.
---
+=== Overview
+Students open up the Pyret environment (code.pyret.org, or "CPO") and see how tables look in Pyret.
 
-[.lesson-instruction]
-On @worksheet-link{workbook-pages/animals-dataset-2.adoc} in your Student Workbook, fill in the blanks for Questions 1 and 2.
-
-//image
+=== Launch
 
 @span{.right}{@image{images/editor.png, "", 300, ""}}
 

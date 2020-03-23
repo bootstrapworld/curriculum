@@ -9,7 +9,7 @@
  "ds-making-subsets"
  "ds-exploring-your-dataset"
  "ds-histograms"
- "ds-visualizing-shape"
+ "ds-histograms2"
  "ds-measures-of-center"
  "ds-measures-of-spread"
  "ds-method-chaining"

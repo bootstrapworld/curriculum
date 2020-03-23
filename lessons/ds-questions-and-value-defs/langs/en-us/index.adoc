@@ -4,24 +4,47 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{ds-plotting}
-|Product Outcomes
-|Students will be able to:
---
+@prereqs-stds{ds-starting-to-program}
+| Lesson Goals
+| Students will be able to...
+
 * Explain the difference between lookup, compute, and relate questions
 * Given a question, identify which type of question it is
 * Define values in the Definitions Area
 * Use the `.row-n` method to individual rows from the animals table
---
+
+| Student-Facing Lesson Goals
+| I can...
+
+* Explain difference between lookup, compute, and relate questions
+* Given a question, identify which type of question it is
+* Define values like Numbers, Strings, Images and Rows in the Definitions Area
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
 == Question Types (10 min)
 
-Once we have a dataset, we can start asking questions! But how do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
+=== Overview
+Students begin to categorize questions, sorting them into "lookup", "compute", and "relate" questions - as well as questions that simply can't be answered based on the data.
 
-[.lesson-instruction]
-Turn back to @worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc} in your Student Workbook, and look at the “Wonder” questions that you wrote about this dataset.
+=== Launch
+Once we have a dataset, we can start asking questions! But how do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
 
 Most questions can be broken down into one of four categories:
 
@@ -34,17 +57,21 @@ Most questions can be broken down into one of four categories:
 
 - *Can't answer* -- These are questions that just can't be answered based on the available data. We might ask "are cats or dogs better for elderly owners?", but the animals dataset doesn't have information that we can use to answer it.
 
+=== Student-Facing Task Assessment
 [.lesson-instruction]
 - Come up with examples for each type of question.
 - Look back at the Wonders you wrote on @worksheet-link{ds-intro/workbook-pages/animal-dataset-2.adoc}. Are any of these Lookup, Compute, or Relate questions? Circle the question type that’s appropriate. Can you come up with additional examples for each type of question?
 
+=== Collect
 Have students share their questions with the class. Allow time for discussion!
-
-Lookup questions are easy to answer: just find the right row and column, and read out the answer! Let’s learn how to do this in Pyret...
 
 == Row and Column Lookups (Time 15 minutes)
 
-Open @link{https://code.pyret.org/editor#share=1PTPxKGyUfsMpy4GzFtYS_JGntiHOL0Yu, Animals Starter File -- Unit 2}, save a copy, and click “Run”. This is the same program you saw before, but with one extra line of code. Which line is new, and what do you think it does?
+=== Overview
+Students learn how to access individual rows from a table in Pyret, and how to access a particular column from those rows.
+
+=== Launch
+Students open @link{https://code.pyret.org/editor#share=1PTPxKGyUfsMpy4GzFtYS_JGntiHOL0Yu, Animals Starter File -- Unit 2}, save a copy, and click “Run”. This is the same program they've seen before, but with one extra line of code. Ask them which line is new, and what they think it does.
 
 Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method: `animals-table.row-n(0)`
 
@@ -62,14 +89,20 @@ Pyret also has a way for us to get at individual columns of a Row, by using a Ro
   animals-table.row-n(0)["age"]
   animals-table.row-n(0)["fixed"]
 
+=== Student-Facing Task Assessment
 [.lesson-instruction]
 - How would you get the `weeks` column out of the _second_ row? The third?
 - Complete the exercises on @worksheet-link{workbook-pages/lookup-questions.adoc}.
 
-There are many other methods available as well, but you'll learn more about them in the next lesson.
+== Collect
+Have students share their answers, and see if there are any common questions that arise.
 
 == Defining Values (Time 15 minutes)
 
+=== Overview
+Students learn how to define values in Pyret (note that these definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages).
+
+=== Launch
 Pyret allows us to define names for values using the `=` sign. In math, you’re probably used to seeing definitions like _x = 4_, which defines the name x to be the value 4. Pyret works the same way, and you’ve already seen two names defined in this file: `shelter-sheet` and `animals-table`. We generally write definitions on the left, in the Definitions Area. You can add your own definitions, for example:
 
   my-name = "Maya"
@@ -91,6 +124,7 @@ Each row of our `animals-table` represents a single animal in our shelter. We ca
 
 What happens when you evaluate `animalA` in the Interactions Area?
 
+=== Student-Facing Task Assessment
 [.lesson-instruction]
 - Define _at least_ two additional values to be animals from the `animals-table`, called `animalC` and `animalD`.
 - Complete the exercises on @worksheet-link{workbook-pages/more-practice-w-lookups.adoc}.
