@@ -55,7 +55,7 @@ Let's see how much you remember about function definitions! Load the @link{MAKE_
 * Type `is-dog(animalB)` into the Interactions Area. What did you get?
 * Type `animal-img(animalA)` into the Interactions Area. What did you get?
 
-=== Collect
+=== Synthesize
 Can students explain what each function does?
 
 == Ordering Tables @duration{10 minutes}
@@ -75,7 +75,7 @@ Have students find the contract for `.order-by` in their contracts pages. The `.
 * Sort the animals table so that fixed and unfixed animals are grouped together.
 * Sort the animals table by how long it took for each animal to be adopted, in ascending order.
 
-=== Collect
+=== Synthesize
 Answer any questions students may have. Class discussion: what do `.order-by` and `.row-n` have in common? How are they different?
 
 == Filtering and Building @duration{20 minutes}
@@ -109,7 +109,7 @@ The `.filter` method walks through the table, applying whatever function it was 
 === Possible Misconceptions
 Students often think that filtering a table _changes_ the table. In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.
 
-=== Collect
+=== Synthesize
 Debrief with students.
 
 == Building Columns @duration{10 minutes}
@@ -127,7 +127,7 @@ Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or 
 
 The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
 
-=== Collect
+=== Synthesize
 Debrief with students. Ask them if they think of a situation where they would want to use this. Some ideas:
 - A dataset about school might include columns for how many students are in the school and how many pass the state exam. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ passed the exam. We could use `.build-column` to compute that for every row in the table.
 - The animals shelter might want to print nametags for every animal. They could build a column using the `text` function to have every animal's name in big, purple letters.
