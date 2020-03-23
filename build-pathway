@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-18 # last modified
+LASTMOD=2020-03-23 # last modified
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -200,6 +200,14 @@ function cleanuptitle() {
   local f=$1
   $SED -i \
     -e '/^<title>/ s/<\/*span[^>]*>//g' \
+    $f
+}
+
+function cleanupduration() {
+  local f=$1
+  $SED -i \
+    -e '/^<h2 id/ s/\(begin\|end\)curriculumspan/_/g' \
+    -e '/^<h2 id/ s/curriculumspan_class//g' \
     $f
 }
 
@@ -481,6 +489,7 @@ function buildlessonplan() {
       insertnarrativecss index.html
       insertprintcss_browser index.html
       cleanuptitle index.html
+      cleanupduration index.html
     fi
     if false; then
       if ! $NOPDF; then
