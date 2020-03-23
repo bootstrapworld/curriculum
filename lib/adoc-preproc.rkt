@@ -655,6 +655,12 @@
                                     (display prose o)
                                     (display "-->" o)
                                     (newline o)))))]
+                         [(string=? directive "duration")
+                          (let ([txt (read-group i directive)])
+                            (display (string-append
+                                       (create-begin-tag "span" ".duration")
+                                       txt
+                                       (create-end-tag "span")) o))]
                          [(string=? directive "vocab")
                           (let* ([arg (read-group i directive)]
                                  [s (assoc-glossary arg *glossary-list*)])
