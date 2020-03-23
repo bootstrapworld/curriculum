@@ -9,7 +9,7 @@
 | Students will be able to...
 
 * order the animals dataset by a number of criteria
-* filter the animals dataset by gender, fixed status, and age
+* filter the animals dataset by species, fixed status, and age
 
 | Student-Facing Lesson Goals
 | I can...
@@ -50,9 +50,9 @@ Let's see how much you remember about function definitions! Load the @link{MAKE_
 * Look over at the Definitions Area. What functions do you see defined here?
 * What are their contracts?
 * Type `is-fixed(animalA)` into the Interactions Area. What did you get?
-* Type `gender(animalB)` into the Interactions Area. What did you get?
-* Type `is-young(animalA)` into the Interactions Area. What did you get?
-* Type `is-cat(animalB)` into the Interactions Area. What did you get?
+* Type `name(animalB)` into the Interactions Area. What did you get?
+* Type `is-old(animalA)` into the Interactions Area. What did you get?
+* Type `is-dog(animalB)` into the Interactions Area. What did you get?
 * Type `animal-img(animalA)` into the Interactions Area. What did you get?
 
 === Collect
@@ -99,10 +99,10 @@ Suppose we want to get a table of only animals that have been fixed? Have studen
 
 [.lesson-instruction]
 * In the Interactions Area, type `animals-table.filter(is-fixed)`. What did you get?
-* In the Interactions Area, type `animals-table.filter(is-young)`. What did you get?
-* In the Interactions Area, type `animals-table.filter(is-cat)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(is-old)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(is-dog)`. What did you get?
 * In the Interactions Area, type `animals-table`. What did you get? Why?
-* In the Interactions Area, type `animals-table.filter(gender)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(name)`. What did you get?
 
 The `.filter` method walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. Notice that the Domain for `.filter` says that test must be a function (that’s the arrow), which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
 
@@ -121,11 +121,11 @@ Students learn how to _build columns_, using the `.build-column` table method.
 Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for `.build-column` in their contracts pages. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function? 
 
 [.lesson-instruction]
-* Try typing `animals-table.build-column("young", is-young)` into the Interactions Area. 
+* Try typing `animals-table.build-column("old", is-old)` into the Interactions Area. 
 * Try typing `animals-table.build-column("picture", animal-img)` into the Interactions Area. 
 * What do you get? What do you think is going on?
 
-The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-young` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
+The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
 
 === Collect
 Debrief with students. Ask them if they think of a situation where they would want to use this. Some ideas:
