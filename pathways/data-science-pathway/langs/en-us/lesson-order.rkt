@@ -17,7 +17,6 @@
  "ds-scatter-plots"
  "ds-correlations"
  "ds-linear-regression"
- "ds-linear-regression-in-your-dataset"
  "ds-threats-to-validity"
  "ds-back-pages"
  )

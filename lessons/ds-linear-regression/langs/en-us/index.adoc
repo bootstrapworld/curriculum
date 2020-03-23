@@ -4,32 +4,55 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{ds-correlations}
-|Product Outcomes
-|Students
+@prereqs-stds{ds-linear-regression}
+| Lesson Goals
+| Students will be able to...
 
 * interpret linear regression data for the animals table
 * use linear regression to quantify patterns in their chosen dataset, and write up their findings
 
+* the animal dataset
+* their chosen dataset
+
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
 @worksheet-include{xtra/lang-prereq.adoc}
 |===
 
-== Introduction (Time 10 minutes)
+== Intro to Linear Regression (Time 10 minutes)
 
+=== Overview
+Students are introduced to the _concept_ of linear regression. Essentially, they're asked to think about how to quantify the strength of a correlation, and given the basic idea behind regression. For teachers who have the need and the bandwidth to go deeper, this is a good opportunity to teach the algorithm behind linear regression.
+
+== Launch
 “Do smaller animals get adopted faster? Do younger animals?” We started the previous Unit with these questions, and looked at scatter plots as a way to visualize possible @vocab{correlations} between two variables in our dataset. What did we find?
 
-Whenever there’s a possible linear relationship, Data Scientists try to draw the @vocab{line of best fit}, which cuts through the data cloud and can be used to make predictions. This line can be graphed on top of the scatter plot as a function, called the @vocab{predictor}. In this Unit, you’ll learn how to compute the line of best fit in Pyret, and how to measure the strength of a relationship by finding the correlation.
+Whenever there’s a possible linear relationship, Data Scientists try to draw the @vocab{line of best fit}, which cuts through the data cloud and can be used to make predictions. This line can be graphed on top of the scatter plot as a function, called the @vocab{predictor}.
 
-Open your “Animals Dataset” starter file. (If you do not have this file, or if something has happened to it, you can always make a @link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L, new copy}.)
-
-== Linear Regression (Time 30 minutes)
+Have students open their “Animals Dataset” files. (If you do not have this file, or if something has happened to it, they can always make a @link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L, new copy}.)
 
 @span{.right}{@image{images/lin-reg.png, "", 400}}
 
-After our last Unit, we are left with two questions:
+After looking for correlations in the point cloud, we are left with two questions:
 
-- Is there a positive or negative relationship between our two variables? In other words, “_where do we draw_ the line of best fit?"
-- How do we measure the strength of that relationship? In other words, “_how well_ does the line allow us to make predictions?"
+* Is there a positive or negative relationship between our two variables? In other words, “_where do we draw_ the line of best fit?"
+* How do we measure the strength of that relationship? In other words, “_how well_ does the line allow us to make predictions?"
 
 Data scientists use a statistical method called @vocab{linear regression} to search for certain kinds of relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine a rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit.
 
@@ -37,7 +60,9 @@ Data scientists use a statistical method called @vocab{linear regression} to sea
 --
 You can see this in action, in this @link{https://www.geogebra.org/m/ZcVIxKtF, interactive simulation}. Try moving the blue point “P”, and see what effect it has on the red line.
 
-- Could the regression line ever be above or below _all_ the points? Why or why not? - What’s the largest r-value you can get? What do you think that number means?
+- Could the regression line ever be above or below _all_ the points?
+- Why or why not? 
+- What’s the largest r-value you can get? What do you think that number means?
 --
 
 ////
@@ -132,12 +157,29 @@ It’s worth revisiting this point again. It’s easy to be seduced by large r-v
 All of these correlations come from the Spurious Correlations website. If time allows, have your students explore the site to see more!
 ////
 
-== Closing (Time 10 minutes)
+== Your Dataset (Time 40 minutes)
+
+=== Overview
+Students apply what they've learned to their own dataset.
+
+=== Launch
+Now that you've gotten some practice performing linear regression on the animals dataset, it's time to apply that knowledge to your own data!
+
+=== Student-Facing Lesson Task
+[.lesson-instruction]
+* Turn back to @worksheet-link{ds-visualizing-relationships/workbook-pages/correlations-in-my-dataset.adoc}, where you listed possible correlations. 
+* Investigate these correlations. If you need blank Table Plans or Design Recipes, you can find them at the back your workbook, just before the Contracts.
+* What correlations did you find? 
+* Did you need to filter out certain rows in order to get those correlations? 
+* Write up your findings by filling out @worksheet-link{workbook-pages/regression-analysis-in-my-dataset.adoc}.
+
+
+=== Collect (Time 10 minutes)
+Have students share their findings with the class. Get excited about the connections they are making and the conclusions they are drawing! Encourage students to make suggestions to one another about further analysis.
 
 @span{.right}{@image{images/lin-reg-2.png, "", 400}}
 
-You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line! There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or
-otherwise), to figure out how to get the “best fit” for a cloud of data.
+You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line! There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
 
 == Additional Exercises:
 
