@@ -41,12 +41,9 @@
         (unless (empty? (directory-list lesson-dir))
           (system (format "cp -pr ~a/* lessons/~a" lesson-dir lesson))))
       (let* ([workbook-pages-file (format "lessons/~a/workbook-pages/workbook-pages.rkt" lesson)]
-             [lesson-index-file (format "lessons/~a/workbook-pages/lesson-index.rkt" lesson)]
              [workbook-pages
                (cond [(file-exists? workbook-pages-file)
                       (call-with-input-file workbook-pages-file read)]
-                     [(file-exists? lesson-index-file) ;XXX: transitional only
-                      (call-with-input-file lesson-index-file read)]
                      [else
                        (printf "WARNING: ~a missing workbook-pages.rkt\n" lesson)
                        ;(printf "WARNING: Lesson ~a is incorrectly organized\n" lesson)

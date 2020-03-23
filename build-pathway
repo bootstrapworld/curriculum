@@ -671,13 +671,6 @@ function buildpathway() {
     cp -p $PROGDIR/.hta* resources/protected
 
     if test ! -f lesson-order.rkt; then
-      # XXX: transitional only
-      if test -f workbook-index.rkt; then
-        cp -p workbook-index.rkt lesson-order.rkt
-      fi
-    fi
-
-    if test ! -f lesson-order.rkt; then
       echo WARNING: No lesson-order.rkt in pathway $PATHWAY/$LANGUAGE
     else
       $PROGDIR/copy-lessons.rkt
