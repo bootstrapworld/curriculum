@@ -229,6 +229,8 @@ function verifylinks() {
   if $LINT; then
     if which linkchecker|grep -q .; then
       linkchecker -F html/invalid-links.html --check-extern --no-status
+    else
+      WARNING: linkchecker not found
     fi
   fi
 }
