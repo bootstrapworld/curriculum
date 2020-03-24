@@ -669,7 +669,7 @@
                             (display (enclose-span ".vocab" arg) o)
                             (cond [s (unless (member s *glossary-items*)
                                        (set! *glossary-items* (cons s *glossary-items*)))]
-                                  [else (printf "Item ~a not found in glossary~%"
+                                  [else (printf "WARNING: Item ~a not found in glossary~%"
                                                 arg)]))]
                          [(string=? directive "std")
                           (let ([args (read-commaed-group i directive)])

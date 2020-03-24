@@ -10,7 +10,8 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-23 # last modified
+LASTMOD=2020-03-24 # last modified
+LINT=false
 NOPDF=false
 PDFMARGIN=0mm
 SED=sed
@@ -34,13 +35,15 @@ while test $# -ne 0; do
     NOPDF=true
   elif test "$arg" = --proglang; then
     PROGLANG=$1; shift
-  elif test "$arg" = --verify-links; then
-    if which linkchecker | grep -q .; then
-      VERIFYLINKS=true;
-    fi
+  elif test "$arg" = --lint -o "$arg" = --verify-links; then
+    LINT=true
   elif test "$arg" = --version; then
     VERSION=true;
   else
+    arg1=${arg#--}
+    if test "$arg1" != "$arg"; then
+      echo Mistyped option ‘$arg’?
+    fi
     ARGS="$ARGS $arg"
   fi
 done
@@ -209,6 +212,24 @@ function cleanupduration() {
     -e '/^<h2 id/ s/\(begin\|end\)curriculumspan/_/g' \
     -e '/^<h2 id/ s/curriculumspan_class//g' \
     $f
+}
+
+function lintlesson() {
+  local f=$1
+  if ! $LINT; then return; fi
+  for g in Prerequisites 'Relevant Standards' 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
+    if ! grep -q ">$g<" $f; then
+      echo WARNING: Lesson $LESSONPLAN missing summary-table row for “$g”
+    fi
+  done
+}
+
+function verifylinks() {
+  if $LINT; then
+    if which linkchecker|grep -q .; then
+      linkchecker -F html/invalid-links.html --check-extern --no-status
+    fi
+  fi
 }
 
 function addanalytics() {
@@ -490,6 +511,7 @@ function buildlessonplan() {
       insertprintcss_browser index.html
       cleanuptitle index.html
       cleanupduration index.html
+      lintlesson index.html
     fi
     if false; then
       if ! $NOPDF; then
@@ -612,9 +634,8 @@ function buildpathwaynarrative() {
       #cleanuptitle index.shtml
     fi
 
-    if $VERIFYLINKS; then
-      linkchecker -F html/invalid-links.html --check-extern --no-status
-    fi
+    verifylinks
+
   fi
 }
 
