@@ -179,7 +179,7 @@ it can be named anything (not necessarily `index.adoc`).
 The top dir contains the script `build-pathway`. It takes any
 number of pathway arguments, and/or any combination of the
 options `--debug`, `--force` (aka `-f`), `--help`, `--language`, `--nopdf`,
-`--proglang`, `--verify-link`, and `--version`.
+`--proglang`, `--lint`, and `--version`.
 
 If called with `--help` or `--version`, the script displays a help message
 and version information, respectively, and quits.
@@ -265,8 +265,9 @@ debugging:
 - `--nopdf` avoids PDF generation to speed up the debugging
 process.
 
-- `--verify-links` reports invalid links in the doctree
-on console as well as in the file `invalid-links.html`)
+- `--lint` reports missing rows in the summary tables of lesson
+  plans, and invalid links in the doctree. The latter is also
+  saved in the file `invalid-links.html`.
 
 == Deployment
 

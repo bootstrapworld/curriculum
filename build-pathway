@@ -42,7 +42,7 @@ while test $# -ne 0; do
   else
     arg1=${arg#--}
     if test "$arg1" != "$arg"; then
-      echo Mistyped option ‘$arg’?
+      echo Mistyped option \'$arg\'?
     fi
     ARGS="$ARGS $arg"
   fi
@@ -65,9 +65,10 @@ function displayhelp() {
   echo "           " in the 'distribution' directory.
   echo "  " --nopdf: Don\'t generate PDF files. This is to speed things up
   echo "           " during debugging when PDF output isn\'t necessary.
-  echo "  " --verify-links: Verify all the links used in the doctree. A copy of
-  echo "                  " the report is also stored in invalid-links.html
-  echo "                  " in the pathway doctree\'s top directory.
+  echo "  " --lint: \(1\) Ensure the summary tables in lesson plans have the required rows.
+  echo "          " \(2\) Verify all the links used in the doctree. A copy of
+  echo "          " the report is also stored in invalid-links.html
+  echo "          " in the pathway doctree\'s top directory.
   echo "  " --version: Display build-way version and exit.
   echo
   echo Order of arguments/options doesn\'t matter.
@@ -219,7 +220,7 @@ function lintlesson() {
   if ! $LINT; then return; fi
   for g in Prerequisites 'Relevant Standards' 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
     if ! grep -q ">$g<" $f; then
-      echo WARNING: Lesson $LESSONPLAN missing summary-table row for “$g”
+      echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
     fi
   done
 }
