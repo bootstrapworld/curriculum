@@ -385,7 +385,7 @@
 (define (clean-up-url-in-image-text text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (make-image img opts)
+(define (make-image img opts #:centered? [centered? #f])
   ;(printf "making image ~s ~s\n" img opts)
   (let* ([lesson (getenv "LESSONPLAN")]
          [lesson-subdir (getenv "LESSONSUBDIR")]
@@ -404,8 +404,12 @@
                    (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
     ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
     (if (string=? text "")
-        (enclose-span ".centered-image" adoc-img)
-        (enclose-span ".tooltip.centered-image"
+        (if centered?
+            (enclose-span ".centered-image" adoc-img)
+            adoc-img)
+        (enclose-span 
+          (string-append ".tooltip"
+            (if centered? ".centered-image" ""))
           (string-append
             (enclose-span ".tooltiptext" text) "\n"
             adoc-img)))))
@@ -682,6 +686,9 @@
                          [(string=? directive "image")
                           (let ([args (read-commaed-group i directive)])
                             (display (make-image (car args) (cdr args)) o))]
+                         [(string=? directive "centered-image")
+                          (let ([args (read-commaed-group i directive)])
+                            (display (make-image (car args) (cdr args) #:centered? #t) o))]
                          [(string=? directive "math")
                           (display (enclose-math (read-group i directive)) o)]
                          [(or (string=? directive "worksheet-link")
