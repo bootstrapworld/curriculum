@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-24 # last modified
+LASTMOD=2020-03-25 # last modified
 LINT=false
 NOPDF=false
 PDFMARGIN=0mm
@@ -219,7 +219,7 @@ function lintlesson() {
   local f=$1
   if ! $LINT; then return; fi
   for g in Prerequisites 'Relevant Standards' 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
-    if ! grep -q ">$g<" $f; then
+    if ! grep -q "^<p>$g</p>$" $f; then
       echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
     fi
   done
@@ -230,7 +230,7 @@ function verifylinks() {
     if which linkchecker|grep -q .; then
       linkchecker -F html/invalid-links.html --check-extern --no-status
     else
-      WARNING: linkchecker not found
+      echo WARNING: linkchecker not found
     fi
   fi
 }
