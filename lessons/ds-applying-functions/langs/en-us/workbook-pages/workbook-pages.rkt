@@ -1,0 +1,7 @@
+(
+"notes.adoc"
+"applying-functions.adoc"
+"practicing-contracts.adoc"
+"matching-expressions.adoc"
+"whats-on-your-mind.adoc"
+)

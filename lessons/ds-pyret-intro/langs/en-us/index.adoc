@@ -1,0 +1,105 @@
+= Starting to Program
+
+@lesson-description{Students begin to program in Pyret, learning about Numbers, Strings, Types, Operations, and how to define values.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{}
+| Lesson Goals
+| Students will be able to...
+
+* Explain the difference between several data types: Numbers, Strings, Images and Booleans
+* Identify a data type for a given value
+* Write Numbers, String, and Booleans in the Interactions Area
+* Define values, and evaluate simple expressions that use defined values
+
+| Student-Facing Lesson Goals
+| I can...
+
+
+| Materials
+|
+* Computer for each student (or pair), with access to the
+internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Make sure student computers can access @link{https://code.pyret.org, the Pyret IDE (CPO)}
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1uK9VO5WO1RAH7g65DU_pkXZTyOnlno_-, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@worksheet-include{xtra/lang-prereq.adoc}
+|===
+
+== Numbers, Strings and Booleans @duration{30 minutes}
+
+=== Overview
+This lesson starts them programming, showing students how to make Pyret do simple math, work with text, and create simple computer graphics. It also draws attention to error messages, which are helpful when diagnosing mistakes.
+
+=== Launch
+Pyret lets us use many different kinds of data. In the animals table, for example, there are Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false than animal is fixed). Pyret has the usual arithmetic operators: addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).
+
+To identify if an animal is male, we need to know if the value in the `gender` column is _equal_ to the string `"male"`. To sort the table by age, we need to know if one animal’s age is _less than_ another’s and should come before it. To filter the table to show only young animals, we might want to know if an animal’s age is _less than_ 2. Pyret has Boolean operators, too: equals (`==`), less-than (`<`), greater-than (`>`), as well as greater-than-or-equal (`>=`) and less-than-or-equal (`<=`).
+
+
+=== Investigate
+[.lesson-instruction]
+In pairs, students complete @worksheet-link{workbook-pages/numbers-n-strings.adoc}.
+
+Discuss what students have learned about Pyret:
+
+- Numbers and Strings evaluate to themselves.
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
+- Operators like `+`, `-`, `*`, and `/` need spaces around them.
+- Any time there is more than one operator being used, Pyret requires that you use parentheses.
+- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
+
+Error messages are a way for Pyret to explain went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
+
+- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
+- A`(2 + 2`. An unclosed quotation mark is a problem, but so is an unmatched parentheses.
+
+[.lesson-instruction]
+In pairs, students complete @worksheet-link{workbook-pages/booleans.adoc}.
+
+=== Connect
+Debrief student answers as a class.
+
+By using `and` and `or`, we can _combine_ tests. For example, we might want to ask if a character in a videogame has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese. We’ll use these Boolean operators in a lot of our Data Science work later on.
+
+[.lesson-instruction]
+Have students play “true or false”, in which they stand if you say something true, and sit if you say something false. Start simple (“I am wearing a hat”), and gradually get complex (“I am wearing a hat, and I am standing on one leg”).
+
+== Defining Values @duration{20 minutes}
+
+=== Overview
+Students learn how to define values in Pyret (note that these definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages).
+
+=== Launch
+Pyret allows us to define names for values using the `=` sign. In math, you’re probably used to seeing definitions like _x = 4_, which defines the name x to be the value 4. Pyret works the same way, and you’ve already seen two names defined in this file: `shelter-sheet` and `animals-table`. We generally write definitions on the left, in the Definitions Area. You can add your own definitions, for example:
+
+  my-name = "Maya"
+  sum = 2 + 2
+  kittens-are-cute = true
+
+[.lesson-instruction]
+--
+With your partner, take turns adding definitions to this file:
+
+- Define a value with name `food`, whose value is a String representing your favorite food
+- Define a value with name `year`, whose value is a Number representing the current year
+- Define a value with name `likes-cats`, whose value is a Boolean that is `true` if you like cats and `false` if you don’t
+--
+
+=== Collect
+TODO
+
+== Additional Exercises:
