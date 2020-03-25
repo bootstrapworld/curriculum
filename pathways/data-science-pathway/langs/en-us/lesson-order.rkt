@@ -1,6 +1,7 @@
 (
  "ds-intro"
- "ds-starting-to-program"
+ "ds-pyret-intro"
+ "ds-applying-functions"
  "ds-plotting"
  "ds-questions-and-value-defs"
  "ds-defining-functions"

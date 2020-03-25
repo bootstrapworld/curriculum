@@ -1,0 +1,164 @@
+= Applying Functions
+@lesson-description{Students how to apply Functions, and how to interpret the information contained in a Contract: Name, Domain and Range. They then use this knoweldge to explore more of the Pyret language.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-pyret-intro}
+| Lesson Goals
+| Students will be able to...
+
+* Apply functions to create Images
+* Identify the parts of a Contract, and use it to apply a function
+
+| Student-Facing Lesson Goals
+| I can...
+
+
+| Materials
+|
+* Computer for each student (or pair), with access to the
+internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Make sure student computers can access @link{https://code.pyret.org, the Pyret IDE (CPO)}
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1uK9VO5WO1RAH7g65DU_pkXZTyOnlno_-, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@worksheet-include{xtra/lang-prereq.adoc}
+|===
+
+
+== Applying Functions @duration{15 minutes}
+
+=== Overview
+Students learn how to apply functions in Pyret, reinforcing concepts from standard Algebra.
+
+=== Launch
+Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about @vocab{functions}? They may remember functions from algebra: @math{f(x) = x²}.
+
+[.lesson-instruction]
+- What is the name of this function?
+- The expression @math{f(2)} applies the function @math{f} to the number 2. What will it evaluate to? 
+- What will the expression @math{f(3)} evaluate to?
+- The values that we give to a function are called its @vocab{arguments}. How many arguments does @math{f} expect?
+
+@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from _variables_, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs. 
+
+[.lesson-instruction]
+--
+Have students type this line of code into the interactions area and hit Enter: `num-sqrt(16)`.
+
+- What is the name of this function?
+- What do we think the expression `num-sqrt(16)` will evaluate to?
+- What did the expression `num-sqrt(16)` evaluate to?
+- Does the `num-sqrt` function produce Numbers? Strings? Booleans?
+- How many @vocab{arguments} does `num-sqrt` expect?
+
+Have students type this line of code into the interactions area and hit Enter: `num-min(84, 140)`.
+
+- What is the name of this function?
+- What did the expression `num-min(16, 99)` evaluate to?
+- Does the `num-min` function produce Numbers? Strings? Booleans?
+- How many @vocab{arguments} does `num-min` expect?
+- What happens if we forget to include a comma between our numbers?
+--
+
+Just like in math, functions can also be _composed_ with one another. For example:
+```
+# take the minimum of 84 and 99, then take the square root of the result
+num-sqrt(num-min(84, 99))
+```
+
+=== Investigation
+[.lesson-instruction]
+Have students complete @worksheet-link{workbook-pages/applying-functions.adoc}.
+
+=== Collect
+Debrief the activity with the class. What kind of value was produced by that expression? (An Image! New datatype!) Which error messages were helpful? Which ones weren't?
+
+== Contracts @duration{35 minutes}
+
+=== Overview
+Students learn about *Contracts*, and how they can be used to figure out new functions or diagnose errors in their code. Then they use this knowledge to explore the contracts pages in their workbooks.
+
+=== Launch
+
+When students typed `triangle(50, "solid", "red")`, they created an example of a new Datatype, called an _Image_.
+
+- What are the types of the arguments `triangle` was expecting?
+- How does this output relate to the inputs?
+- Try making different triangles. Change the size and color! Try using `"outline"` for the second argument.
+
+The `triangle` function consumes a Number and two Strings as input, and produces an Image. As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of
+three things:
+
+. *Name* -- the name of the function, which we type in whenever we want to use it
+. *Domain* -- the data we give to the function (names and
+  Types!), written between parentheses and separated by commas
+. *Range* -- the type of data the function produces
+
+Domain and Range are _Types_, not specific values. As a convention, we *capitalize Types and keep names in lowercase*. `triangle` works on many different Numbers, not just the `20` we used in the example above!
+
+These three parts make up a @vocab{contract} for each function. Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
+
+----
+# num-sqrt :: (n :: Number) -> Number
+# num-min :: (a :: Number, b :: Number) -> Boolean
+# triangle :: (side :: Number, mode :: String, color :: String) -> Image
+----
+
+The first part of a contract is the function’s name. In this example, our functions are named `num-sqrt` and `triangle`.
+
+The second part is the @vocab{Domain}, or the names and types of arguments the function expects. `triangle` has a Number and two Strings as variables, representing the length of each side, the mode, and the color. We write name-type pairs with double-colons, with commas between each one. Finally, after the arrow goes the type of the @vocab{Range}, or the function’s output, which in this case is Image.
+
+Contracts tell us a lot about how to use a function. In fact, we can figure out how to use functions we've never seen before, just by looking at the contract! Most of the time, error messages occur when we've accidentally broken a contract.
+
+=== Investigate
+[.lesson-instruction]
+--
+Turn to the back of your workbook, and get some practice reading and using contracts! Make sure you try out the following functions:
+
+- `text`
+- `circle`
+- `ellipse`
+- `star`
+- `string-repeat`
+
+Here’s an _example_ of another function. Type it into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
+`string-contains("apples, pears, milk", "pears")`
+--
+
+=== Possible Misconceptions
+Students are _very_ likely to randomly experiment, rather than actually using the Contracts page. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
+
+- How many items are in this function's Domain?
+- What is the _name_ of the 1st item in this function's Domain?
+- What is the _type_ of the 1st item in this function's Domain?
+- What is the _type_ of the Range?
+
+=== Connect
+You’ve learned about Numbers, Strings, Booleans, and Images. You’ve learned about operators and functions, and how they can be used to make shapes, strings, and more!
+
+One of the other skills you’ll learn in this class is how to diagnose and fix errors. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
+
+- What is the function that is generating that error?
+- What is the contract for that function?
+- Is the function getting what it needs, according to its Domain?
+
+By learning to use values, operations and functions, you are now familiar with the fundamental concepts needed to write simple programs. You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+
+Make sure to save your work, so you can go back to it later!
+
+== Additional Exercises:
+
+- @worksheet-link{workbook-pages/fun-with-images.adoc, Fun with images!}
+- @worksheet-link{workbook-pages/practicing-contracts-2.adoc, More Practicing Contracts}
+- @worksheet-link{workbook-pages/matching-expressions-2.adoc, More Matching Expressions}
