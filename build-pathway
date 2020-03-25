@@ -143,7 +143,7 @@ function insertstylecss() {
 
 function insertnarrativecss() {
   local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/narrative.css" \/>/' \
     $f
@@ -151,7 +151,7 @@ function insertnarrativecss() {
 
 function insertprintcss() {
   local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wkhtmltopdf.css" \/>/' \
     $f
@@ -159,7 +159,7 @@ function insertprintcss() {
 
 function insertprintcss_browser() {
   local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wkhtmltopdf.css" \/>/' \
     $f
@@ -167,7 +167,7 @@ function insertprintcss_browser() {
 
 function insertwbpagecss() {
   local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wbpage.css" \/>/' \
     $f
@@ -175,7 +175,7 @@ function insertwbpagecss() {
 
 function insertwbpagecss_browser() {
   local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|sed -e 's/\//\\\//g')
+  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wbpage.css" \/>/' \
     $f
@@ -228,9 +228,25 @@ function lintlesson() {
 function verifylinks() {
   if $LINT; then
     if which linkchecker|grep -q .; then
-      linkchecker -F html/invalid-links.html --check-extern --no-status
+      find . -name \*.html -exec linkchecker --check-extern --no-status {} 2>/dev/null \;|grep '^Real URL' > g-invalid-links.txt
+      find . -name \*.shtml -exec linkchecker --check-extern --no-status {} 2>/dev/null \;|grep '^Real URL' >> g-invalid-links.txt
+      echo = Broken Links > invalid-links.txt
+      echo >> invalid-links.txt
+      echo \[verse\] >> invalid-links.txt
+      sort -u g-invalid-links.txt | $SED -e 's/^ *Real URL *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
+      asciidoctor -a linkcss invalid-links.txt
+
+      #linkchecker -F html/invalid-links.html --check-extern --no-status
+    elif which check-links|grep -q .; then
+      find . -name \*.html -exec check-links {} 2>/dev/null \;|grep Link: > g-invalid-links.txt
+      find . -name \*.shtml -exec check-links {} 2>/dev/null \;|grep Link: >> g-invalid-links.txt
+      echo = Broken Links > invalid-links.txt
+      echo >> invalid-links.txt
+      echo \[verse\] >> invalid-links.txt
+      sort -u g-invalid-links.txt | $SED -e 's/^ *Link: *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
+      asciidoctor -a linkcss invalid-links.txt
     else
-      echo WARNING: linkchecker not found
+      echo WARNING: Neither linkchecker nor check-links found
     fi
   fi
 }
@@ -445,7 +461,7 @@ function buildworkbookpages() {
                 ASPECT="-O Landscape --margin-top $PDFMARGIN"
               fi
               wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
-              NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|sed -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
+              NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|$SED -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
               if test "$NUMPAGES" != 1; then
                 echo WARNING: $fpdf has $NUMPAGES pages
               fi
@@ -465,16 +481,16 @@ function buildworkbookpages() {
 
 function collapseadjtables() {
   local f=$1
-  local x=$(grep -n '^<\/*tbody>' "$f"|sed -e 's/^\([^:]*\):.*/\1/'|sed -ne '2,3p')
+  local x=$(grep -n '^<\/*tbody>' "$f"|$SED -e 's/^\([^:]*\):.*/\1/'|$SED -ne '2,3p')
   if test -z "$x"; then
     return
   fi
-  local xi=$(echo $x|sed -e 's/^\([^ ]*\) .*/\1/')
-  local xii=$(echo $x|sed -e 's/^[^ ]* \([^ ]*\).*/\1/')
+  local xi=$(echo $x|$SED -e 's/^\([^ ]*\) .*/\1/')
+  local xii=$(echo $x|$SED -e 's/^[^ ]* \([^ ]*\).*/\1/')
   if test -z "$xi" -o -z "$xii"; then
     return
   fi
-  sed -i -e "$xi,${xii}d" "$f"
+  $SED -i -e "$xi,${xii}d" "$f"
 }
 
 function buildlessonplan() {
