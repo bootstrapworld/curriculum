@@ -346,8 +346,8 @@
   ;(printf "make-exercise-link ~a ~a ~a ~a ~a\n" lesson exerdir exer link-text as-is?)
   (let* ([g (string-append "lessons/" lesson "/"
                            (if as-is? exerdir
-                               (if *solutions-mode?* "exercises-sols"
-                                   "exercises")) "/" exer)]
+                               (if *solutions-mode?* "solution-fragments"
+                                   "fragments")) "/" exer)]
          [f (string-append *pathway-root-dir* g)]
          [exer.html (path-replace-extension f ".html")]
          [exer.pdf (path-replace-extension f ".pdf")])
@@ -615,7 +615,7 @@
         )
     ;
     (define (add-exercise-title name)
-      (when (getenv "EXERCISE")
+      (when (getenv "FRAGMENT")
         (let ([ex-ti-file (path-replace-extension in-file ".title")])
           (call-with-output-file ex-ti-file
             (lambda (o)
@@ -721,8 +721,8 @@
                               [(2)
                                (let ([second-compt (cadr page-compts)]
                                      [lesson-dir (getenv "LESSON")])
-                                 (cond [(or (string=? first-compt "exercises")
-                                            (string=? first-compt "exercises-sols"))
+                                 (cond [(or (string=? first-compt "fragments")
+                                            (string=? first-compt "solution-fragments"))
                                         (cond [lesson-dir
                                                 (display (make-exercise-link
                                                            lesson-dir
@@ -734,8 +734,8 @@
                                               [else
                                                 (printf "WARNING: Incomplete exercise link ~a~n"
                                                         page)])]
-                                       [(or (string=? first-compt "workbook-pages")
-                                            (string=? first-compt "workbook-sols-pages"))
+                                       [(or (string=? first-compt "paages")
+                                            (string=? first-compt "solution-paages"))
                                         (cond [lesson-dir
                                                 (display (make-worksheet-link lesson-dir
                                                                               first-compt
@@ -753,8 +753,8 @@
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
-                                 (cond [(or (string=? second-compt "exercises")
-                                            (string=? second-compt "exercises-sols"))
+                                 (cond [(or (string=? second-compt "fragments")
+                                            (string=? second-compt "solution-fragments"))
                                         (display (make-exercise-link
                                                    first-compt
                                                    second-compt
@@ -762,8 +762,8 @@
                                                    link-text
                                                    #:include? include?
                                                    #:as-is? exercise-as-is?) o)]
-                                       [(or (string=? second-compt "workbook-pages")
-                                            (string=? second-compt "workbook-sols-pages"))
+                                       [(or (string=? second-compt "paages")
+                                            (string=? second-compt "solution-paages"))
                                         (display (make-worksheet-link first-compt
                                                                       second-compt
                                                                       third-compt link-text) o)]
@@ -946,7 +946,7 @@
               (print-link-to-teacher-resources o)
               (print-link-to-forum o))
 
-            (unless (getenv "OTHERDIR") ;(getenv "EXERCISE")
+            (unless (getenv "OTHERDIR") ;(getenv "FRAGMENT")
               (fprintf o "\n\n")
               (fprintf o "[.acknowledgment]\n")
               (fprintf o "--\n")

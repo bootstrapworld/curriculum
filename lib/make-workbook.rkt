@@ -49,7 +49,7 @@
                                     (call-with-input-file lesson-title-file read-line)
                                     "")]
                   [g (string-append lesson-dir
-                                    (if teacher-version "/workbook-sols-pages/" "/workbook-pages/")
+                                    (if teacher-version "/solution-pages/" "/pages/")
                                     lesson-workbook-page)]
                   [g (if (path-has-extension? g #".adoc")
                          (path-replace-extension g ".pdf") g)]

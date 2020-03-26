@@ -40,7 +40,7 @@
       (let ([lesson-dir (format "~a/lessons/~a/langs/~a" (getenv "TOPDIR") lesson *language*)])
         (unless (empty? (directory-list lesson-dir))
           (system (format "cp -pr ~a/* lessons/~a" lesson-dir lesson))))
-      (let* ([workbook-pages-file (format "lessons/~a/workbook-pages/workbook-pages.rkt" lesson)]
+      (let* ([workbook-pages-file (format "lessons/~a/pages/workbook-pages.rkt" lesson)]
              [workbook-pages
                (cond [(file-exists? workbook-pages-file)
                       (call-with-input-file workbook-pages-file read)]
