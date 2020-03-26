@@ -270,21 +270,21 @@
 
 (define (display-prereqs-row other-lessons o)
   ;(printf "doing display-prereqs-row ~a\n" other-lessons)
-  (unless (null? other-lessons)
-    (display "\n| Prerequisites | " o)
-    (display
-      (string-join
-        (map (lambda (lesson)
-               (let ([lesson-title lesson]
-                     [lesson-title-file (format "../~a/index-title.txt" lesson)])
-                 (cond [(file-exists? lesson-title-file)
-                        (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-                       [else
-                         (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-                 (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
-             other-lessons)
-        ", ") o)
-    (display "\n\n" o)))
+  (display "\n| Prerequisites | " o)
+  (display
+    (if (null? other-lessons) "None"
+        (string-join
+          (map (lambda (lesson)
+                 (let ([lesson-title lesson]
+                       [lesson-title-file (format "../~a/index-title.txt" lesson)])
+                   (cond [(file-exists? lesson-title-file)
+                          (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+                         [else
+                           (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
+                   (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
+               other-lessons)
+          ", ")) o)
+  (display "\n\n" o))
 
 (define (display-standards-row o)
   ;(printf "doing display-standards-row\n")

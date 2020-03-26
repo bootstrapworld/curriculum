@@ -228,18 +228,22 @@ function lintlesson() {
 function verifylinks() {
   if $LINT; then
     if which linkchecker|grep -q .; then
-      find . -name \*.html -exec linkchecker --check-extern --no-status {} 2>/dev/null \;|grep '^Real URL' > g-invalid-links.txt
-      find . -name \*.shtml -exec linkchecker --check-extern --no-status {} 2>/dev/null \;|grep '^Real URL' >> g-invalid-links.txt
+      find . -name \*.html  >  html-files.txt
+      find . -name \*.shtml >> html-files.txt
+      cat html-files.txt|xargs linkchecker --check-extern --no-status 2>/dev/null > g-invalid-links.txt
+      $SED -i -ne '/^Real URL/p' g-invalid-links.txt
       echo = Broken Links > invalid-links.txt
       echo >> invalid-links.txt
       echo \[verse\] >> invalid-links.txt
-      sort -u g-invalid-links.txt | $SED -e 's/^ *Real URL *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
+      sort -u g-invalid-links.txt | $SED -e 's/^Real URL *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
       asciidoctor -a linkcss invalid-links.txt
 
       #linkchecker -F html/invalid-links.html --check-extern --no-status
     elif which check-links|grep -q .; then
-      find . -name \*.html -exec check-links {} 2>/dev/null \;|grep Link: > g-invalid-links.txt
-      find . -name \*.shtml -exec check-links {} 2>/dev/null \;|grep Link: >> g-invalid-links.txt
+      find . -name \*.html  >  html-files.txt
+      find . -name \*.shtml >> html-files.txt
+      cat html-files.txt|xargs check-links 2>/dev/null > g-invalid-links.txt
+      $SED -i -ne '/Link:/p' g-invalid-links.txt
       echo = Broken Links > invalid-links.txt
       echo >> invalid-links.txt
       echo \[verse\] >> invalid-links.txt
