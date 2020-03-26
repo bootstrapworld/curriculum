@@ -734,8 +734,8 @@
                                               [else
                                                 (printf "WARNING: Incomplete exercise link ~a~n"
                                                         page)])]
-                                       [(or (string=? first-compt "paages")
-                                            (string=? first-compt "solution-paages"))
+                                       [(or (string=? first-compt "pages")
+                                            (string=? first-compt "solution-pages"))
                                         (cond [lesson-dir
                                                 (display (make-worksheet-link lesson-dir
                                                                               first-compt
@@ -762,8 +762,8 @@
                                                    link-text
                                                    #:include? include?
                                                    #:as-is? exercise-as-is?) o)]
-                                       [(or (string=? second-compt "paages")
-                                            (string=? second-compt "solution-paages"))
+                                       [(or (string=? second-compt "pages")
+                                            (string=? second-compt "solution-pages"))
                                         (display (make-worksheet-link first-compt
                                                                       second-compt
                                                                       third-compt link-text) o)]
