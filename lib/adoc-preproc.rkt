@@ -322,7 +322,8 @@
 (define (make-workbook-link lesson pages-dir snippet link-text)
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
   (let* ([g (string-append "lessons/" lesson "/" pages-dir "/" snippet)]
-         [f (string-append *pathway-root-dir* g)])
+         [f (string-append *pathway-root-dir* g)]
+         [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
     (when (path-has-extension? snippet ".adoc")
@@ -333,19 +334,20 @@
               [(file-exists? f.pdf) (set! f f.pdf)
                                     (set! g (path-replace-extension g ".pdf"))])))
     (unless (file-exists? f)
+      (set! error-cascade? #t)
       (printf "WARNING: @workbook-link refers to nonexistent file ~a\n" f))
     (format "link:{pathwayrootdir}~a[~a~a~a]" g
             link-text
             (if (getenv "LESSONPLAN")
                 (let ([pagenum (workbook-pagenum lesson snippet)])
+                  (unless pagenum
+                    (unless error-cascade?
+                      (printf "WARNING: @workbook-link used for non-workbook page ~a\n" f)))
                   (cond [pagenum
                           (let ([x (format "Page ~a" pagenum)])
                             (if (string=? link-text "") x
                                 (string-append " (" x ")")))]
-                        [else
-                          (when (string=? link-text "")
-                            (printf "WARNING: @workbook-link, without link text, refers to non-workbook page ~a\n" f))
-                          ""]))
+                        [else ""]))
                 "")
             (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))))
 

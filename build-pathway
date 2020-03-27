@@ -431,7 +431,9 @@ function buildworkbookpages() {
       #cp -p $PROGDIR/*.css .
       for f in *.adoc; do
         if test ! -f "$f"; then
-          echo No adoc files in lesson $L/$d
+          if test "$PAGE"; then
+            echo No adoc files in lesson $L/$d
+          fi
         elif echo $f|grep -q ' '; then
           echo Discarding file \`$f\` with space in its name
           rm "$f"
