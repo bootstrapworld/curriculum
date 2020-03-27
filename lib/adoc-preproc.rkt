@@ -319,8 +319,9 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f)))
 
-(define (make-worksheet-link lesson workbook-dir snippet link-text)
-  ;(printf "make-worksheet-link ~s ~s ~s ~s\n" lesson workbook-dir snippet link-text)
+(define (make-workbook-link lesson workbook-dir snippet link-text)
+  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson workbook-dir snippet link-text)
+  ;FIXME add more existence checks
   (let ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)])
     (when (path-has-extension? snippet ".adoc")
       (let* ([f (string-append *pathway-root-dir* g)]
@@ -340,31 +341,6 @@
                 "")
             (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
     ))
-
-(define (make-exercise-link lesson exerdir exer link-text
-                            #:include? [include? #f] #:as-is? [as-is? #f])
-  ;(printf "make-exercise-link ~a ~a ~a ~a ~a\n" lesson exerdir exer link-text as-is?)
-  (let* ([g (string-append "lessons/" lesson "/"
-                           (if as-is? exerdir
-                               (if *solutions-mode?* "solution-fragments"
-                                   "fragments")) "/" exer)]
-         [f (string-append *pathway-root-dir* g)]
-         [exer.html (path-replace-extension f ".html")]
-         [exer.pdf (path-replace-extension f ".pdf")])
-    (cond [(file-exists? exer.html) (set! g (path-replace-extension g ".html"))]
-          [(file-exists? exer.pdf) (set! g (path-replace-extension g ".pdf"))]
-          [(path-has-extension? g ".adoc") (set! g (path-replace-extension g ".html"))])
-    (cond [include?
-            (let ([exer.asc (path-replace-extension f ".asc")] [n -1])
-              (when (file-exists? exer.asc)
-                ;(printf "exercising ~a\n" exer.asc)
-                (system (format "grep -n '^\\[\\.acknowledgment\\]' ~a|sed -e 's/^\\([^:]*\\):.*/\\1/' > temp2.txt" exer.asc))
-                (set! n (- (call-with-input-file "temp2.txt" read) 1)))
-              (format "include::~a[lines=1..~a]" exer.asc n)
-              ;(format "include::~a[]" exer.asc)
-              )]
-          [else
-            (format "link:{pathwayrootdir}~a[~a]" g link-text)])))
 
 (define (display-comment prose o)
   (display "%CURRICULUMCOMMENT%\n" o)
@@ -407,38 +383,26 @@
         (if centered?
             (enclose-span ".centered-image" adoc-img)
             adoc-img)
-        (enclose-span 
+        (enclose-span
           (string-append ".tooltip"
             (if centered? ".centered-image" ""))
           (string-append
             (enclose-span ".tooltiptext" text) "\n"
             adoc-img)))))
 
-(define (make-lesson-link o lesson file-seq link-text
-                          #:include? [include? #f])
-  ;(printf "make-lesson-link ~a ~a ~a~n" lesson file-seq link-text)
-  (unless lesson (set! lesson "."))
-  (when (string=? lesson ".")
-    (let ([x (getenv "LESSON")])
-      (when x (set! lesson x))))
-  (let* ([g (format "lessons/~a/~a" lesson
-                    (string-join file-seq "/"))]
-         [f (string-append *pathway-root-dir* g)]
-         [f.html (path-replace-extension f ".html")]
-         [f.pdf (path-replace-extension f ".pdf")]
-         [f.asc (path-replace-extension f ".asc")]
-         [inline-include? #f])
-    ;(printf "cwd=~a~n" (current-directory))
-    ;(printf "x=~a~n" (file-exists? f))
-    ;(printf "g=~a~n f=~a~n f.html=~a~n f.pdf=~a~n f.asc=~a~n" g f f.html f.pdf f.asc)
-    (cond [(file-exists? f.html) (set! g (path-replace-extension g ".html"))]
-          [(file-exists? f.pdf) (set! g (path-replace-extension g ".pdf"))]
-          [(file-exists? f.asc) (set! inline-include? #t)
-                                (set! g (path-replace-extension g ".asc"))])
-    ;(printf "g=~a~n" g)
-    (if include?
-        (fprintf o "include::~a~a[]" *pathway-root-dir* g)
-        (fprintf o "link:{pathwayrootdir}~a[~a]" g link-text))))
+(define (make-link f link-text #:include? [include? #f])
+  (cond [(not include?)
+         (let ([f.html (path-replace-extension f ".html")]
+               [f.pdf (path-replace-extension f ".pdf")])
+           (cond [(file-exists? f.html) (set! f f.html)]
+                 [(file-exists? f.pdf) (set! f f.pdf)])
+           (format "link:~a[~a~a]" f link-text
+                   (if (or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
+                       ", window=\"_blank\"" ""))) ]
+        [else
+          (let ([f.asc (path-replace-extension f ".asc")])
+            (cond [(file-exists? f.asc) (set! f f.asc)])
+            (format "include::~a[]" f))]))
 
 (define *lesson-summary-file* #f)
 
@@ -614,15 +578,6 @@
         [comment-before-title #f]
         )
     ;
-    (define (add-exercise-title name)
-      (when (getenv "FRAGMENT")
-        (let ([ex-ti-file (path-replace-extension in-file ".title")])
-          (call-with-output-file ex-ti-file
-            (lambda (o)
-              (display name o)
-              (newline o))
-            #:exists 'replace))))
-    ;
     (when (getenv "LESSONPLAN")
       (let ([lesson (getenv "LESSON")])
         (for ([x *lessons-and-standards*])
@@ -691,12 +646,8 @@
                             (display (make-image (car args) (cdr args) #:centered? #t) o))]
                          [(string=? directive "math")
                           (display (enclose-math (read-group i directive)) o)]
-                         [(or (string=? directive "worksheet-link")
-                              (string=? directive "worksheet-include")
-                              (string=? directive "exercise-link"))
-                          (let* ([include? (string=? directive "worksheet-include")]
-                                 [exercise-as-is? (string=? directive "exercise-link")]
-                                 [args (read-commaed-group i directive)]
+                         [(string=? directive "workbook-link")
+                          (let* ([args (read-commaed-group i directive)]
                                  [n (length args)]
                                  [page (car args)]
                                  [link-text (if (> n 1) (cadr args) "")]
@@ -704,98 +655,53 @@
                                  [first-compt (car page-compts)])
                             (case (length page-compts)
                               [(1)
-                               (let* ([pointer (car page-compts)]
-                                      [actual-url (assoc pointer *external-url-index*)])
-                                 (when (string=? link-text "")
-                                   (set! link-text pointer))
-                                 (unless actual-url
-                                   (printf "WARNING: Unresolved external link ~a~n" pointer))
-                                 (fprintf o "link:~a[~a]"
-                                          (if actual-url (cadr actual-url) pointer)
-                                          (cond ((not actual-url)
-                                                 (format "Missing external link for ~a: ~a"
-                                                         pointer link-text))
-                                                (else link-text)))
-                                 )
-                               ]
+                               (display (make-workbook-link (getenv "LESSON")
+                                                            "pages"
+                                                            first-compt
+                                                            link-text) o)]
                               [(2)
                                (let ([second-compt (cadr page-compts)]
                                      [lesson-dir (getenv "LESSON")])
-                                 (cond [(or (string=? first-compt "fragments")
-                                            (string=? first-compt "solution-fragments"))
-                                        (cond [lesson-dir
-                                                (display (make-exercise-link
-                                                           lesson-dir
-                                                           first-compt
-                                                           second-compt
-                                                           link-text
-                                                           #:include? include?
-                                                           #:as-is? exercise-as-is?) o)]
-                                              [else
-                                                (printf "WARNING: Incomplete exercise link ~a~n"
-                                                        page)])]
-                                       [(or (string=? first-compt "pages")
-                                            (string=? first-compt "solution-pages"))
-                                        (cond [lesson-dir
-                                                (display (make-worksheet-link lesson-dir
-                                                                              first-compt
-                                                                              (cadr page-compts)
-                                                                              link-text) o)]
-                                              [else
-                                                (printf "WARNING: Incomplete worksheet link ~a~n"
-                                                        page)])]
+                                 (cond [(and (or (string=? first-compt "pages")
+                                                 (string=? first-compt "solution-pages"))
+                                             lesson-dir)
+                                        (display (make-workbook-link lesson-dir
+                                                                     first-compt
+                                                                     (cadr page-compts)
+                                                                     link-text) o)]
                                        [else
-                                         ;(printf "calling make-lesson-link~n")
-                                         (make-lesson-link o lesson-dir
-                                                           page-compts
-                                                           link-text
-                                                           #:include? include?)]))]
+                                         (ferror ' adoc-preproc.rkt
+                                                 "Incorrect @workbook-link ~a\n" page)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
-                                 (cond [(or (string=? second-compt "fragments")
-                                            (string=? second-compt "solution-fragments"))
-                                        (display (make-exercise-link
-                                                   first-compt
-                                                   second-compt
-                                                   third-compt
-                                                   link-text
-                                                   #:include? include?
-                                                   #:as-is? exercise-as-is?) o)]
-                                       [(or (string=? second-compt "pages")
+                                 (cond [(or (string=? second-compt "pages")
                                             (string=? second-compt "solution-pages"))
-                                        (display (make-worksheet-link first-compt
+                                        (display (make-workbook-link first-compt
                                                                       second-compt
                                                                       third-compt link-text) o)]
-                                       ;(else (printf "Bad worksheet link ~a~n" page))
                                        [else
-                                         (make-lesson-link o first-compt
-                                                           (cdr page-compts)
-                                                           link-text
-                                                           #:include? include?)
-                                         ]
-                                       ))]
+                                         (ferror ' adoc-preproc.rkt
+                                                 "Incorrect @workbook-link ~a\n" page)]))]
                               [else
-                                (make-lesson-link o first-compt
-                                                  (cdr page-compts)
-                                                  link-text
-                                                  #:include? include?)]
-                              ))]
+                                (ferror ' adoc-preproc.rkt
+                                        "Incorrect @workbook-link ~a\n" page)]))]
+                         [(or (string=? directive "worksheet-link")
+                              (string=? directive "worksheet-include")
+                              (string=? directive "exercise-link"))
+                          (ferror ' adoc-preproc.rkt
+                                  "Obsolete directive ~a\n" directive)]
                          [(string=? directive "link")
                           (let* ([args (read-commaed-group i directive)]
                                  [adocf (car args)]
-                                 [htmlf (path-replace-extension adocf ".html")]
-                                 [pdff (path-replace-extension adocf ".pdf")]
-                                 [f adocf]
                                  [link-text (string-join
                                               (map string-trim (cdr args)) ", ")])
-                            ;(printf "doing @link of ~s~n" args)
-                            (cond [(file-exists? htmlf) (set! f htmlf)]
-                                  [(file-exists? pdff) (set! f pdff)])
-                            (fprintf o "link:~a[~a~a]" f link-text
-                                     (if (or (getenv "LESSONPLAN")
-                                             (getenv "TEACHER_RESOURCES"))
-                                         ", window=\"_blank\"" "")))]
+                            (display (make-link adocf link-text) o))]
+                         [(string=? directive "include")
+                          (let* ([args (read-commaed-group i directive)]
+                                 [adocf (car args)] ;only one right? FIXME
+                                 )
+                            (display (make-link adocf "" #:include? #t) o))]
                          [(string=? directive "lesson-description")
                           (unless (getenv "LESSONPLAN") ;TODO: or LESSON or both?
                             (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
@@ -869,7 +775,6 @@
                                  (let ([args (string-to-form g)])
                                    (let-values ([(key-list key-vals args)
                                                  (rearrange-args args)])
-                                     (add-exercise-title (car args))
                                      (call-with-input-string (keyword-apply (cadr f) key-list key-vals args)
                                        (lambda (i)
                                          (expand-directives i o)
@@ -946,7 +851,7 @@
               (print-link-to-teacher-resources o)
               (print-link-to-forum o))
 
-            (unless (getenv "OTHERDIR") ;(getenv "FRAGMENT")
+            (unless (getenv "OTHERDIR")
               (fprintf o "\n\n")
               (fprintf o "[.acknowledgment]\n")
               (fprintf o "--\n")

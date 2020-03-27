@@ -10,7 +10,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=false
-LASTMOD=2020-03-26 # last modified
+LASTMOD=2020-03-27 # last modified
 LINT=false
 NOPDF=false
 PDFMARGIN=0mm
@@ -343,6 +343,47 @@ EOF
   fi
 }
 
+function adjustproglangsubdirs() {
+  local d=$1
+  #echo doing adjustproglangsubdirs $d
+  if test -d "$d"/$PROGLANG; then
+    cp -p "$d"/$PROGLANG/* "$d"
+  fi
+  for lang in pyret wescheme; do
+    if test -d "$d"/$lang; then
+      rm -fr "$d"/$lang
+    fi
+  done
+  for subdir in "$d"/*; do
+    if test -d "$subdir"; then
+      adjustproglangsubdirs "$subdir"
+    fi
+  done
+  #echo done adjustproglangsubdirs $d
+}
+
+function shadowcopydir() {
+  local srcdir=$1
+  local targetdir=$2
+  #echo doing shadowcopydir $srcdir $targetdir
+  mkdir -p "$targetdir"
+
+  for f in "$srcdir"/*; do
+    #echo f = $f
+    if test -f "$f"; then
+      cp -p "$f" "$targetdir"
+    elif test -d "$f"; then
+      g=$(basename "$f")
+      shadowcopydir "$f" "$targetdir"/"$g"
+    fi
+  done
+  #echo $targetdir has...
+  #ls "$targetdir"
+}
+
+
+
+
 function rmproglangsubdirs() {
   local d=$1
   for f in pyret wescheme; do
@@ -362,67 +403,38 @@ function buildworkbookpages() {
     echo WARNING: $L missing pages
     mkdir pages
   fi
-  if test -d pages/$PROGLANG; then
-    cp -p pages/$PROGLANG/* pages
-  fi
-  rmproglangsubdirs pages
+  adjustproglangsubdirs pages
+
   #
   if test -d solution-pages-2; then
     echo deadc0de: solution-pages-2 shouldnt exist
+    rm -fr solution-pages-2
   fi
   cp -pr pages solution-pages-2
   cp -p $PROGDIR/.hta* solution-pages-2
+
+
   if test -d solution-pages; then
-    for f in solution-pages/*; do
-      if test -f "$f"; then
-        cp -p "$f" solution-pages-2
-      fi
-    done
-    if test -d solution-pages/$PROGLANG; then
-      cp -p solution-pages/$PROGLANG/* solution-pages-2
-    fi
+    shadowcopydir solution-pages solution-pages-2
     rm -fr solution-pages
   fi
   mv solution-pages-2 solution-pages
-  rmproglangsubdirs solution-pages
+  adjustproglangsubdirs solution-pages
   #
-  if test -d fragments; then
-    if test -d fragments/$PROGLANG; then
-      cp -p fragments/$PROGLANG/* fragments
-    fi
-    rmproglangsubdirs fragments
-    mkdir -p solution-fragments
-    cp -pr fragments/* solution-fragments
-  fi
+  #adjustproglangsubdirs . ?
   #
   for d in *; do
     if test -d $d; then
-      if test -d $d/$PROGLANG; then
-        cp -p $d/$PROGLANG/* $d
-      fi
-      rmproglangsubdirs $d
-    fi
-  done
-  #
-  for d in *; do
-    if test -d $d; then
-      if   test $d = "fragments";          then dd="fragments         "
-      elif test $d = "solution-fragments"; then dd="solution-fragments"
-      elif test $d = "pages";              then dd="pages             "
-      elif test $d = "solution-pages";     then dd="solution-pages    "
-      else                                      dd=$d
+      if   test $d = "pages";          then dd="pages             "
+      elif test $d = "solution-pages"; then dd="solution-pages    "
+      else                                  dd=$d
       fi
       #echo \(building $L "->" $d\)
-      unset FRAGMENT SOLUTION PAGE OTHERDIR LESSONSUBDIR
+      unset SOLUTION PAGE OTHERDIR LESSONSUBDIR
       if test $d = "pages"; then
         export PAGE=1
       elif test $d = "solution-pages"; then
         export SOLUTION=1
-      elif test $d = "fragments"; then
-        export FRAGMENT=1
-      elif test $d = "solution-fragments"; then
-        export SOLUTION=1
-        export FRAGMENT=1
       else
         export OTHERDIR=1
       fi
@@ -476,7 +488,7 @@ function buildworkbookpages() {
           fi
         fi
       done
-      unset FRAGMENT SOLUTION PAGE OTHERDIR LESSONSUBDIR
+      unset SOLUTION PAGE OTHERDIR LESSONSUBDIR
       cd ..
     fi
   done
@@ -696,9 +708,8 @@ function buildpathway() {
     else
       mkdir -p distribution/$PATHWAY/$LANGUAGE
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
-      #rsync -rt pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
-      #exit
     fi
+
 
     mkdir -p distribution/$PATHWAY/$LANGUAGE/lib
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
@@ -717,8 +728,10 @@ function buildpathway() {
     if test ! -f lesson-order.rkt; then
       echo WARNING: No lesson-order.rkt in pathway $PATHWAY/$LANGUAGE
     else
+      #echo copying lessons...
       $PROGDIR/copy-lessons.rkt
     fi
+
 
     buildlessons
     #echo

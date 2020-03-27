@@ -5,7 +5,7 @@
  "ds-plotting"
  "ds-lookups"
  "ds-defining-functions"
- "ds-methods"
+ "ds-method-chaining"
  "ds-defining-table-functions"
  "ds-making-subsets"
  "ds-exploring-your-dataset"
