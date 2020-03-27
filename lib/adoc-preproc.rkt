@@ -319,28 +319,35 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f)))
 
-(define (make-workbook-link lesson workbook-dir snippet link-text)
-  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson workbook-dir snippet link-text)
-  ;FIXME add more existence checks
-  (let ([g (string-append "lessons/" lesson "/" workbook-dir "/" snippet)])
+(define (make-workbook-link lesson pages-dir snippet link-text)
+  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
+  (let* ([g (string-append "lessons/" lesson "/" pages-dir "/" snippet)]
+         [f (string-append *pathway-root-dir* g)])
+    ;g = relative pathname of the linked file from pathway-root-dir
+    ;f = its fully qualified pathname
     (when (path-has-extension? snippet ".adoc")
-      (let* ([f (string-append *pathway-root-dir* g)]
-             [snippet.html (path-replace-extension f ".html")]
-             [snippet.pdf (path-replace-extension f ".pdf")])
-        (cond [(file-exists? snippet.html) (set! g (path-replace-extension g ".html"))]
-              [(file-exists? snippet.pdf) (set! g (path-replace-extension g ".pdf"))])))
+      (let ([f.html (path-replace-extension f ".html")]
+            [f.pdf (path-replace-extension f ".pdf")])
+        (cond [(file-exists? f.html) (set! f f.html)
+                                     (set! g (path-replace-extension g ".html"))]
+              [(file-exists? f.pdf) (set! f f.pdf)
+                                    (set! g (path-replace-extension g ".pdf"))])))
+    (unless (file-exists? f)
+      (printf "WARNING: @workbook-link refers to nonexistent file ~a\n" f))
     (format "link:{pathwayrootdir}~a[~a~a~a]" g
             link-text
             (if (getenv "LESSONPLAN")
                 (let ([pagenum (workbook-pagenum lesson snippet)])
-                  (if pagenum
-                      (let ([x (format "Page ~a" pagenum)])
-                        (if (string=? link-text "") x
-                            (string-append " (" x ")")))
-                      ""))
+                  (cond [pagenum
+                          (let ([x (format "Page ~a" pagenum)])
+                            (if (string=? link-text "") x
+                                (string-append " (" x ")")))]
+                        [else
+                          (when (string=? link-text "")
+                            (printf "WARNING: @workbook-link, without link text, refers to non-workbook page ~a\n" f))
+                          ""]))
                 "")
-            (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))
-    ))
+            (if (getenv "LESSONPLAN") ", window=\"_blank\"" ""))))
 
 (define (display-comment prose o)
   (display "%CURRICULUMCOMMENT%\n" o)
@@ -392,15 +399,20 @@
 
 (define (make-link f link-text #:include? [include? #f])
   (cond [(not include?)
-         (let ([f.html (path-replace-extension f ".html")]
-               [f.pdf (path-replace-extension f ".pdf")])
-           (cond [(file-exists? f.html) (set! f f.html)]
-                 [(file-exists? f.pdf) (set! f f.pdf)])
-           (format "link:~a[~a~a]" f link-text
-                   (if (or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
-                       ", window=\"_blank\"" ""))) ]
+         (unless (regexp-match #rx"://" f)
+           (when (path-has-extension? f ".adoc")
+             (let ([f.html (path-replace-extension f ".html")]
+                   [f.pdf (path-replace-extension f ".pdf")])
+               (cond [(file-exists? f.html) (set! f f.html)]
+                     [(file-exists? f.pdf) (set! f f.pdf)])))
+           (unless (file-exists? f)
+             (printf "WARNING: @link refers to nonexistent file ~a\n" f)))
+         (format "link:~a[~a~a]" f link-text
+                 (if (or (getenv "LESSONPLAN") (getenv "TEACHER_RESOURCES"))
+                     ", window=\"_blank\"" ""))]
         [else
           (let ([f.asc (path-replace-extension f ".asc")])
+            ;TODO: probably not needed anymore
             (cond [(file-exists? f.asc) (set! f f.asc)])
             (format "include::~a[]" f))]))
 

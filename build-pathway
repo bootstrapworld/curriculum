@@ -381,18 +381,6 @@ function shadowcopydir() {
   #ls "$targetdir"
 }
 
-
-
-
-function rmproglangsubdirs() {
-  local d=$1
-  for f in pyret wescheme; do
-    if test -d $d/$f; then
-      rm -fr $d/$f
-    fi
-  done
-}
-
 function buildworkbookpages() {
   local L=$1
   #echo
@@ -413,7 +401,6 @@ function buildworkbookpages() {
   cp -pr pages solution-pages-2
   cp -p $PROGDIR/.hta* solution-pages-2
 
-
   if test -d solution-pages; then
     shadowcopydir solution-pages solution-pages-2
     rm -fr solution-pages
@@ -425,8 +412,8 @@ function buildworkbookpages() {
   #
   for d in *; do
     if test -d $d; then
-      if   test $d = "pages";          then dd="pages             "
-      elif test $d = "solution-pages"; then dd="solution-pages    "
+      if   test $d = "pages";          then dd="pages         "
+      elif test $d = "solution-pages"; then dd="solution-pages"
       else                                  dd=$d
       fi
       #echo \(building $L "->" $d\)
@@ -710,7 +697,6 @@ function buildpathway() {
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
     fi
 
-
     mkdir -p distribution/$PATHWAY/$LANGUAGE/lib
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
 
@@ -731,7 +717,6 @@ function buildpathway() {
       #echo copying lessons...
       $PROGDIR/copy-lessons.rkt
     fi
-
 
     buildlessons
     #echo
