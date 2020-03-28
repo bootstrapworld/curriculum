@@ -5,7 +5,7 @@
 
 (provide *function-list*)
 
-(define *solutions-mode?* (getenv "SOLUTION"))
+(define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 

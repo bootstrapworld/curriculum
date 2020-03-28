@@ -8,11 +8,11 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
-(define *force*
-  (let ([force (getenv "FORCE")])
-    (and force (not (string=? force "false")))))
+(define *force* (truthy-getenv "FORCE"))
 
-(define *debug* (getenv "DEBUG"))
+(define *debug* (truthy-getenv "DEBUG"))
+
+(define *nopdf* (truthy-getenv "NOPDF"))
 
 ;(printf "force= ~s; debug= ~s\n" *force* *debug*)
 
@@ -49,8 +49,8 @@
                                     (call-with-input-file lesson-title-file read-line)
                                     "")]
                   [g (string-append lesson-dir
-                                    (if teacher-version "/solution-pages/" "/pages/")
-                                    lesson-workbook-page)]
+                       (if teacher-version "/solution-pages/" "/pages/")
+                       lesson-workbook-page)]
                   [g (if (path-has-extension? g #".adoc")
                          (path-replace-extension g ".pdf") g)]
                   )
@@ -59,23 +59,27 @@
              (list g lesson-basename lesson-workbook-page lesson-handle lesson-aspect lesson-pagenum lesson-title)))
          *workbook-page-specs*))
 
+  (when *nopdf* (set! do-it? #f))
+
+  ;when #t ;do-it?
+
+  (printf "building workbooks\n")
+
+  ; *pdf-page-specs* is listof (docfile basename handle aspect title)
+
+  ;when do-it? ?
+  (set! *pdf-page-specs*
+    (filter (lambda (f)
+              (let ([docfile (car f)])
+                (if (file-exists? docfile) #t
+                    (begin
+                      (printf "ERROR: ~a is not present\n" docfile)
+                      #f))))
+            *pdf-page-specs*))
+
+  ;(printf "*pdf-page-specs* = ~s\n" *pdf-page-specs*)
+
   (when do-it?
-
-    (printf "building workbooks\n")
-
-    ; *pdf-page-specs* is listof (docfile basename handle aspect title)
-
-    (set! *pdf-page-specs*
-      (filter (lambda (f)
-                (let ([docfile (car f)])
-                  (if (file-exists? docfile) #t
-                      (begin
-                        (printf "ERROR: ~a is not present\n" docfile)
-                        #f))))
-              *pdf-page-specs*))
-
-    ;(printf "*pdf-page-specs* = ~s\n" *pdf-page-specs*)
-
     (for ([pdf-page-spec *pdf-page-specs*])
       ;(printf "pdf-page-spec = ~s\n" pdf-page-spec)
       (let ([docfile (list-ref pdf-page-spec 0)]
@@ -88,8 +92,9 @@
                      "Qwest" "Q")
                  "output"
                  (format "~a.pdf" handle)
-                 "dont_ask")))
+                 "dont_ask"))))
 
+  (unless (and (not do-it?) (or include-lesson teacher-version))
     (call-with-output-file "workbook-numbered.tex"
       (lambda (o)
         (display (string-append
@@ -142,7 +147,7 @@
                 (cond [fresh-lesson
                         (set! curr-lesson basename)
                         (fprintf o "\n\\includepdf[pagecommand={\\lfoot{}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
-                                  pagenum handle)
+                                 pagenum handle)
                         (when include-lesson
                           (let ([lesson-plan-pdf (format "lessons/~a/index.pdf" curr-lesson)])
                             (when (file-exists? lesson-plan-pdf)
@@ -153,7 +158,8 @@
                                  "" ;title 
                                  pagenum handle)])
                 (loop (+ i 1) (cdr pdf-page-specs)))))
-          (when (and (not include-lesson) (not teacher-version))
+          (unless (or include-lesson teacher-version)
+            (printf "*** creating workbook-pagenum-index.rkt\n")
             (call-with-output-file "workbook-pagenum-index.rkt"
               (lambda (o)
                 (display "(" o) (newline o)
@@ -168,8 +174,9 @@
           )
         (fprintf o "\n\\end{document}\n")
         )
-      #:exists 'replace)
+      #:exists 'replace))
 
+  (when do-it?
     (system (format "cp -p workbook-numbered.tex ~a.tex" dest))
 
     (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
@@ -184,9 +191,10 @@
 
     (when (file-exists? "workbook-numbered.pdf")
       (system (format "mv workbook-numbered.pdf ~a" dest.pdf)))
-
     )
-)
+
+
+  )
 
 (make-workbook "workbook/workbook")
 
