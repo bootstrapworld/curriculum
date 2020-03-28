@@ -1,6 +1,6 @@
 = Making Subsets
 
-@lesson-description{Students learn about logical and random subsets, and practive creating them from the animals dataset. In the process, they practice using the Design Recipe to create filter functions, and come up with questions they wish to explore.}
+@lesson-description{Students learn about grouped and random samples, and practive creating them from the animals dataset. In the process, they practice using the Design Recipe to create filter functions, and come up with questions they wish to explore.}
 
 [@lesson-intro-table]
 |===
@@ -8,12 +8,12 @@
 | Lesson Goals
 | Students will be able to...
 
-* Make logical and random subsets of a table
+* Make grouped and random samples from a population
 
 | Student-Facing Lesson Goals
 | I can...
 
-* Make logical and random subsets of a table
+* Make grouped and random samples from a population
 
 | Materials
 |
@@ -48,10 +48,10 @@ If you didn’t have a chance to type them in from your workbook, make sure you 
 [.lesson-instruction]
 Take 10m and write a function `is-dog`, then type it into the Definitions Area.
 
-== Making Random Subsets @duration{15 minutes}
+== Random Samples @duration{15 minutes}
 
 === Overview
-This activity is all about _representative samples_: how well does a random sample of a population represent the whole population? Students make differently-sized random samples of the animals dataset, and see how well each sample represents the population. They begin to explore the concept of _sample size_.
+This activity is all about @vocab{random samples}: how well does a random sample of a population _represent_ the whole population? Students make differently-sized random samples of the animals dataset, and see how well each sample represents the population. They begin to explore the concept of _sample size_.
 
 === Launch
 Suppose we want to survey Americans and try to predict who our next president will be. It would take too long to ask everyone who they’re voting for, so pollsters instead take a _sample_ of Americans, and _generalize_ the opinion of the sample to estimate how Americans as a whole feel. But choosing a sample can be tricky...
@@ -60,12 +60,12 @@ Suppose we want to survey Americans and try to predict who our next president wi
 * Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
 * How could we choose a representative subset, or _sample_ of American voters?
 
-Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a subset of the data (e.g. calling only women, calling a random sample of 2000 people, etc). Sometimes we want to create a _random sample_ of an existing dataset. 
+Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a subset of the data (e.g. calling only women, calling a random sample of 2000 people, etc). Sometimes we want to create a @vocab{random sample} of an existing dataset. 
 
 [.lesson-point]
 Make subsets first!
 
-Data Scientists don’t always know what the interesting questions are right away. So whenever they explore a dataset, one of the first things do is define some _logical subsets_, just to have them handy later. Someone looking at our animals dataset might want to consider “just the lizards” or “just males”. This also helps them reason about the data, without being biased by a particular question.
+Data Scientists don’t always know what the interesting questions are right away. So whenever they explore a dataset, one of the first things do is define different kinds of @vocab{samples}, just to have them handy later. This also helps them reason about the data, without being biased by a particular question.
 
 === Investigate
 [.lesson-instruction]
@@ -92,17 +92,17 @@ Have students share their results, and discuss how large a sample needs to be fo
 If appropriate for your learning goes, this is a great place to include more rigorous statistics content about sample size.
 ****
 
-== Logical Subsets @duration{25 minutes}
+== Grouped Samples @duration{25 minutes}
 
 === Overview
-This activity is all about _logical subsets_: Students make a bunch of subsets from the animals dataset, and see how each subset might answer the same question differently.
+This activity is all about @vocab{grouped samples}: Students make a bunch of subsets from the animals dataset, and see how each subset might answer the same question differently.
 
 === Launch
 Cats and Dogs are very different characteristics. Dogs tend to weigh more, and cats tend to live longer. If we're asking questions about weight or lifespan, it might make more sense to ask those questions about "just the cats" or "just the dogs". Averaging every animal together will give us an answer, but it may not be a _useful_ answer. 
 
-Sometimes, important facts about subsets get _lost_ if we analyze an entire population! Imagine that you've been handed a dataset from a country where half the people are wealthy and have access to amazing medical care, and the other half are poor and have no healthcare. Looking at the population as a whole, we might say that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!.
+Sometimes, important facts about subsets get _lost_ if we mix them with the rest of the population! Imagine that you've been handed a dataset from a country where half the people are wealthy and have access to amazing medical care, and the other half are poor and have no healthcare. Looking at the population as a whole, we might say that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!.
 
-Data Scientists make @vocab{logical subsets} of datasets, breaking them up into sub-groups that may be helpful in their analysis. 
+Data Scientists make @vocab{grouped samples} of datasets, breaking them up into sub-groups that may be helpful in their analysis. 
 
 === Investigate
 [.lesson-instruction]
@@ -122,7 +122,7 @@ dogs  = animals-table.filter(is-dog)
 [.lesson-instruction]
 * Define the other subsets, and click "Run". 
 * Make a pie chart showing the species in the `young` subset, by typing `pie-chart(young, "species")`.
-* Make pie charts for every logical subset. Which one is the most representative of the whole population? Why?
+* Make pie charts for every grouped sample. Which one is the most representative of the whole population? Why?
 
 === Synthesize
-Making logical and random subsets is a powerful skill to have, which allows us to dig deeper than just making charts or asking questions about a whole dataset.
+Making grouped and random samples is a powerful skill to have, which allows us to dig deeper than just making charts or asking questions about a whole dataset.
