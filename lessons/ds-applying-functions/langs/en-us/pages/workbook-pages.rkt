@@ -1,5 +1,4 @@
 (
-"notes.adoc"
 "applying-functions.adoc"
 "practicing-contracts.adoc"
 "matching-expressions.adoc"
