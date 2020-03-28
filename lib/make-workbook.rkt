@@ -159,8 +159,8 @@
                                  pagenum handle)])
                 (loop (+ i 1) (cdr pdf-page-specs)))))
           (unless (or include-lesson teacher-version)
-            (printf "*** creating workbook-pagenum-index.rkt\n")
-            (call-with-output-file "workbook-pagenum-index.rkt"
+            ;(printf "*** creating workbook-pagenum-index.rkt.kp\n")
+            (call-with-output-file "workbook-pagenum-index.rkt.kp"
               (lambda (o)
                 (display "(" o) (newline o)
                 (for-each

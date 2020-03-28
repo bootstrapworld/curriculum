@@ -23,7 +23,7 @@
 
 (define *workbook-pagenums*
   (if (truthy-getenv "LESSONPLAN")
-      (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt")])
+      (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt.kp")])
         (if (file-exists? f)
             (call-with-input-file f read)
             '()))
@@ -53,6 +53,8 @@
        (lambda (c) (set! *copyright-author* (cadr c)))))
 
 (define *glossary-items* '())
+
+(define *missing-glossary-items* '())
 
 (define *standards-met* '())
 
@@ -642,7 +644,10 @@
                             (display (enclose-span ".vocab" arg) o)
                             (cond [s (unless (member s *glossary-items*)
                                        (set! *glossary-items* (cons s *glossary-items*)))]
-                                  [else (printf "WARNING: Item ~a not found in glossary~%"
+                                  [else
+                                    (unless (member arg *missing-glossary-items*)
+                                      (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
+                                    (printf "WARNING: Item ~s not found in glossary~%"
                                                 arg)]))]
                          [(string=? directive "std")
                           (let ([args (read-commaed-group i directive)])
@@ -917,7 +922,25 @@
           ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
           (fprintf op "~a:: ~a~%" (car s) (cadr s)))
         (fprintf op "~%~%")))
-    #:exists 'replace))
+    #:exists 'replace)
+
+  (let ([missing-glossary-items-file "pathway-missing-glossary-items.rkt.kp"])
+    (when (file-exists? missing-glossary-items-file)
+      (delete-file missing-glossary-items-file))
+
+    (unless (null? *missing-glossary-items*)
+      (call-with-output-file missing-glossary-items-file
+        (lambda (o)
+          (display "(" o) (newline o)
+          (for-each
+            (lambda (g)
+              (write g o) (newline o))
+            (reverse *missing-glossary-items*))
+          (display ")" o) (newline o)
+          )
+        #:exists 'replace)))
+
+  )
 
 (define (create-standards-section dict dict-standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)

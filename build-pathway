@@ -561,6 +561,10 @@ function buildlessonplan() {
       cleanuptitle index.html
       cleanupduration index.html
       lintlesson index.html
+    else
+      if test -f pathway-missing-glossary-items.rkt.kp; then
+        $PROGDIR/glossary-warnings.rkt
+      fi
     fi
     if test ""; then
       if test ! $NOPDF; then
@@ -759,12 +763,12 @@ function buildpathway() {
     for d in *; do
       if test -d "$d"; then
         adjustproglangsubdirs "$d" # XXX maybe in a separate loop so potential xrefs work
-        echo making pathways lessons
+        #echo making pathways lessons
         #export SOLUTION=
-        echo L is $L
-        echo PATHWAYROOTDIR is $PATHWAYROOTDIR
-        echo LESSONSUBDIR is $LESSONSUBDIR
-        echo SOLUTION is $SOLUTION
+        #echo L is $L
+        #echo PATHWAYROOTDIR is $PATHWAYROOTDIR
+        #echo LESSONSUBDIR is $LESSONSUBDIR
+        #echo SOLUTION is $SOLUTION
 
         recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       fi
@@ -806,7 +810,7 @@ function buildpathway() {
       #cp -p $PROGDIR/front-cover-teacher.pdf .
       #echo
       #echo building pathway workbooks: $PATHWAY
-      echo calling make-workbook.rkt
+      #echo calling make-workbook.rkt
       if test $DEBUG; then
         $PROGDIR/make-workbook.rkt
       else
@@ -880,7 +884,7 @@ asciidoctor -a linkcss index.adoc
 
 if test ! $DEBUG; then
   rm -fr $PROGDIR
-  for f in adoc asciidoc tex title txt; do
+  for f in adoc asciidoc rkt tex title txt; do
     find . -name \*.$f -delete
   done
 fi
