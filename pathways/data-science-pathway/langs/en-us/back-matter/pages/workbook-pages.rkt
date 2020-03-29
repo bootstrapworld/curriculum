@@ -1,0 +1,7 @@
+(
+ "2-blank-recipes.adoc"
+ "2-blank-recipes.adoc"
+ "2-blank-recipes.adoc"
+ ("contracts-1.adoc" "landscape")
+ ("contracts-2.adoc" "landscape")
+ )
