@@ -31,35 +31,41 @@
       (display lesson o) (newline o)))
   #:exists 'replace)
 
+(define (write-pages-info lesson-dir o #:paginate [paginate "yes"])
+  (let* ([workbook-pages-file (format "~a/pages/workbook-pages.rkt" lesson-dir)]
+         [workbook-pages
+           (cond [(file-exists? workbook-pages-file)
+                  (call-with-input-file workbook-pages-file read)]
+                 [else
+                   (printf "WARNING: missing ~a\n" workbook-pages-file)
+                   '()])])
+    (for ([page workbook-pages])
+      (let ([file page]
+            [aspect "portrait"])
+        (when (pair? page)
+          (let ([len (length page)])
+            (set! file (car page))
+            (set! aspect (cadr page))
+            (when (>= len 3)
+              (set! paginate (caddr page)))))
+        (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))))
+
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(\n")
+    (write-pages-info "front-matter" o #:paginate "no")
     (for ([lesson *lesson-order*])
-      (system (format "mkdir -p lessons/~a" lesson))
-      ;(system (format "cp -pr $TOPDIR/lessons/~a/langs/~a/* lessons/~a" lesson *language* lesson))
-      (let ([lesson-dir (format "~a/lessons/~a/langs/~a" (getenv "TOPDIR") lesson *language*)])
-        (unless (empty? (directory-list lesson-dir))
-          (system (format "cp -pr ~a/* lessons/~a" lesson-dir lesson))))
-      (let* ([workbook-pages-file (format "lessons/~a/pages/workbook-pages.rkt" lesson)]
-             [workbook-pages
-               (cond [(file-exists? workbook-pages-file)
-                      (call-with-input-file workbook-pages-file read)]
-                     [else
-                       (printf "WARNING: ~a missing workbook-pages.rkt\n" lesson)
-                       ;(printf "WARNING: Lesson ~a is incorrectly organized\n" lesson)
-                       '()])])
-        (for ([page workbook-pages])
-          (let ([file page]
-                [aspect "portrait"]
-                [paginate "yes"])
-            (when (pair? page)
-              (let ([len (length page)])
-                (set! file (car page))
-                (set! aspect (cadr page))
-                (when (>= len 3)
-                  (set! paginate (caddr page)))))
-            (fprintf o "(~s ~s ~s ~s ~s)\n" lesson file (gen-handle) aspect paginate)))))
+      (let ([lesson-dir (string-append "lessons/" lesson)])
+        (system (format "mkdir -p ~a" lesson-dir))
+        (let ([orig-lesson-dir (format "~a/~a/langs/~a" (getenv "TOPDIR") lesson-dir *language*)])
+          (unless (empty? (directory-list orig-lesson-dir))
+            (system (format "cp -pr ~a/* ~a" orig-lesson-dir lesson-dir))))
+        (write-pages-info lesson-dir o)))
+    (write-pages-info "back-matter" o #:paginate "no")
     (fprintf o ")\n"))
   #:exists 'replace)
 
 ;(printf "returning from copy-lessons.rkt\n")
+
+(void)
+

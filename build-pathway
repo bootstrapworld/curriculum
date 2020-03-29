@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-03-28 # last modified
+LASTMOD=2020-03-29 # last modified
 LINT=
 PDFMARGIN=0mm
 SED=sed
@@ -345,16 +345,21 @@ EOF
 }
 
 function adjustproglangsubdirs() {
-  local d=$1
   #echo doing adjustproglangsubdirs $d
+  local d=$1
+
+  test -d "$d" || return
+
   if test -d "$d"/$PROGLANG; then
     cp -p "$d"/$PROGLANG/* "$d"
   fi
+
   for lang in pyret wescheme; do
     if test -d "$d"/$lang; then
       rm -fr "$d"/$lang
     fi
   done
+
   for subdir in "$d"/*; do
     if test -d "$subdir"; then
       adjustproglangsubdirs "$subdir"
@@ -382,6 +387,14 @@ function shadowcopydir() {
   #ls "$targetdir"
 }
 
+function checkifsinglepdfpage() {
+  local fpdf="$1"
+
+  NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|$SED -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
+
+  test "$NUMPAGES" = 1 || echo WARNING: $fpdf has $NUMPAGES pages
+}
+
 function recursiveadoc() {
   local dir="$1"
   local oldPATHWAYROOTDIR="$2"
@@ -405,8 +418,9 @@ function recursiveadoc() {
   done
 
   export OTHERDIR=1
-  if test "$dir" = pages -o "$dir" = solution-pages; then
-    export OTHERDIR=
+  if test "$dir" = pages -o "$dir" = solution-pages \
+    -o "$dir" = front-matter -o "$dir" = back-matter; then
+      export OTHERDIR=
   fi
 
   for f in *.adoc; do
@@ -445,13 +459,8 @@ function recursiveadoc() {
                 ASPECT="-O Landscape --margin-top $PDFMARGIN"
               fi
               wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
-              NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|$SED -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
-              if test "$NUMPAGES" != 1; then
-                echo WARNING: $fpdf has $NUMPAGES pages
-              fi
-              if test ! $DEBUG; then
-                rm $TMPHTML
-              fi
+              checkifsinglepdfpage "$fpdf"
+              test $DEBUG || rm $TMPHTML
             fi
           fi
         fi
@@ -466,6 +475,25 @@ function recursiveadoc() {
   export OTHERDIR="$oldOTHERDIR"
 }
 
+function mkdirsolutionversionof() {
+  local d="$1"
+
+  test -d "$d" || return
+
+  if test -d solution-$d-2; then
+    echo deadc0de: solution-$d-2 shouldnt exist
+    rm -fr solution-$d-2
+  fi
+  cp -pr $d solution-$d-2
+  cp -p $PROGDIR/.hta* solution-$d-2
+
+  if test -d solution-$d; then
+    shadowcopydir solution-$d solution-$d-2
+    rm -fr solution-$d
+  fi
+  mv solution-$d-2 solution-$d
+}
+
 function buildworkbookpages() {
   local L=$1
   #echo
@@ -478,22 +506,9 @@ function buildworkbookpages() {
   fi
   adjustproglangsubdirs pages
 
-  #
-  if test -d solution-pages-2; then
-    echo deadc0de: solution-pages-2 shouldnt exist
-    rm -fr solution-pages-2
-  fi
-  cp -pr pages solution-pages-2
-  cp -p $PROGDIR/.hta* solution-pages-2
-
-  if test -d solution-pages; then
-    shadowcopydir solution-pages solution-pages-2
-    rm -fr solution-pages
-  fi
-  mv solution-pages-2 solution-pages
+  mkdirsolutionversionof pages
   adjustproglangsubdirs solution-pages
-  #
-  #adjustproglangsubdirs . ?
+
   #
   export PATHWAYROOTDIR="../../"
   export LESSONSUBDIR="."
@@ -590,11 +605,8 @@ function buildlessons() {
     echo WARNING: No lessons in pathway $PATHWAY
   else
     for L in $(cat lessons.txt); do
-      export LESSON=$L
+      export LESSON=lessons/$L
       buildworkbookpages $L
-      #export LESSONPLAN=$L
-      #buildlessonplan $L
-      #export LESSONPLAN=
       export LESSON=
     done
     export L=
@@ -610,7 +622,7 @@ function buildlessonplans() {
   else
     for L in $(cat lessons.txt); do
       # needed?
-      export LESSON=$L
+      export LESSON=lessons/$L
       export LESSONPLAN=$L
       buildlessonplan $L
       export LESSONPLAN=
@@ -699,6 +711,10 @@ function buildpathway() {
 
   PATHWAY=$SRCPATHWAY
 
+  export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
+  export SOLUTION=
+
   # special-casing only algebra and game-pathway,
   # as they're the only pathways that allow two prog langs
   if test "$SRCPATHWAY" = game-pathway -o \
@@ -754,11 +770,27 @@ function buildpathway() {
     buildlessons
     #echo
 
+    for d in front-matter back-matter; do
+      cd $d
+      mkdirsolutionversionof pages
+      cd ..
+      adjustproglangsubdirs $d
+    done
+
+    export PATHWAYROOTDIR=
+
+    #echo PWYD is $PATHWAYROOTDIR
+    #echo LSDR is $LESSONSUBDIR
+    #echo SOLN is $SOLUTION
+
+    for d in front-matter back-matter; do
+      test -d "$d" || break
+      recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
+    done
+
     cd resources
 
     export PATHWAYROOTDIR=../
-    export LESSONSUBDIR=
-    export SOLUTION=
 
     for d in *; do
       if test -d "$d"; then

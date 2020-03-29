@@ -38,12 +38,11 @@
 
   (define *pdf-page-specs*
     (map (lambda (f)
-           (let* ([lesson-basename (list-ref f 0)]
+           (let* ([lesson-dir (list-ref f 0)]
                   [lesson-workbook-page (list-ref f 1)]
                   [lesson-handle (list-ref f 2)]
                   [lesson-aspect (list-ref f 3)]
                   [lesson-pagenum (list-ref f 4)]
-                  [lesson-dir (string-append "lessons/" lesson-basename)]
                   [lesson-title-file (string-append lesson-dir "/index-title.txt")]
                   [lesson-title (if (file-exists? lesson-title-file)
                                     (call-with-input-file lesson-title-file read-line)
@@ -56,7 +55,7 @@
                   )
              (unless do-it?
                (when (> (file-mtime g) dest.pdf.mtime) (set! do-it? #t)))
-             (list g lesson-basename lesson-workbook-page lesson-handle lesson-aspect lesson-pagenum lesson-title)))
+             (list g lesson-dir lesson-workbook-page lesson-handle lesson-aspect lesson-pagenum lesson-title)))
          *workbook-page-specs*))
 
   (when *nopdf* (set! do-it? #f))
@@ -65,7 +64,7 @@
 
   (printf "building workbooks\n")
 
-  ; *pdf-page-specs* is listof (docfile basename handle aspect title)
+  ; *pdf-page-specs* is listof (docfile lessondir handle aspect title)
 
   ;when do-it? ?
   (set! *pdf-page-specs*
@@ -129,23 +128,23 @@
           (let loop ([i 1] [pdf-page-specs *pdf-page-specs*])
             (unless (null? pdf-page-specs)
               (let* ([pdf-page-spec (car pdf-page-specs)]
-                     [basename (list-ref pdf-page-spec 1)]
+                     [lessondir (list-ref pdf-page-spec 1)]
                      [workbook-page (list-ref pdf-page-spec 2)]
                      [handle (list-ref pdf-page-spec 3)]
                      ;[aspect (list-ref pdf-page-spec 4)]
                      [paginate (list-ref pdf-page-spec 5)]
                      [title (list-ref pdf-page-spec 6)]
                      [pagenum i]
-                     [fresh-lesson (not (equal? basename curr-lesson))])
+                     [fresh-lesson (not (equal? lessondir curr-lesson))])
                 (set! title (regexp-replace* "&" title "\\\\&"))
                 (set! paginate (if (char-ci=? (string-ref paginate 0) #\y) #t #f))
                 (unless paginate
                   (set! pagenum "") (set! title "") (set! i (- i 1)))
                 (when (and (not include-lesson) (not teacher-version) paginate)
                   (set! pagenum-list
-                    (cons (list (list basename workbook-page) pagenum) pagenum-list)))
+                    (cons (list (list lessondir workbook-page) pagenum) pagenum-list)))
                 (cond [fresh-lesson
-                        (set! curr-lesson basename)
+                        (set! curr-lesson lessondir)
                         (fprintf o "\n\\includepdf[pagecommand={\\lfoot{}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
                                  pagenum handle)
                         (when include-lesson

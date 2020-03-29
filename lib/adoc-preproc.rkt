@@ -29,6 +29,8 @@
             '()))
       '()))
 
+;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -314,6 +316,7 @@
   (fprintf o "\n\ninclude::./pathway-glossary.asc[]\n\n"))
 
 (define (workbook-pagenum lesson snippet)
+  ;(printf "workbook-pagenum ~s ~s\n" lesson snippet)
   (let* ([snippet.adoc
            (path->string
              (path-replace-extension snippet ".adoc"))]
@@ -323,7 +326,7 @@
 
 (define (make-workbook-link lesson pages-dir snippet link-text)
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
-  (let* ([g (string-append "lessons/" lesson "/" pages-dir "/" snippet)]
+  (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
          [f (string-append *pathway-root-dir* g)]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
@@ -382,10 +385,10 @@
          [text-wo-url (clean-up-url-in-image-text text)]
          [adoc-img
            (cond [lesson
-                   (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
+                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" lesson img
                            text-wo-url commaed-opts)]
                  [lesson-subdir
-                   (format "image:{pathwayrootdir}lessons/~a/~a/~a[~s, ~a]" (getenv "LESSON") lesson-subdir
+                   (format "image:{pathwayrootdir}~a/~a/~a[~s, ~a]" (getenv "LESSON") lesson-subdir
                            img text-wo-url commaed-opts)]
                  [else
                    (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
@@ -595,16 +598,15 @@
         )
     ;
     (when (truthy-getenv "LESSONPLAN")
-      (let ([lesson (getenv "LESSON")])
+      (let* ([lesson0 (getenv "LESSON")]
+             [lesson (cadr (regexp-split #rx"/" lesson0))])
         (for ([x *lessons-and-standards*])
           (when (string=? (car x) lesson)
             (for ([s (cdr x)])
               (add-standard s lesson #f #f))))))
     ;
     (when (truthy-getenv "NARRATIVE")
-      (print-menubar "index")
-
-      )
+      (print-menubar "index"))
     ;
     (define (expand-directives i o)
       (let ([beginning-of-line? #t])
@@ -696,9 +698,9 @@
                                      [third-compt (caddr page-compts)])
                                  (cond [(or (string=? second-compt "pages")
                                             (string=? second-compt "solution-pages"))
-                                        (display (make-workbook-link first-compt
-                                                                      second-compt
-                                                                      third-compt link-text) o)]
+                                        (display (make-workbook-link (string-append "lessons/" first-compt)
+                                                                     second-compt
+                                                                     third-compt link-text) o)]
                                        [else
                                          (ferror ' adoc-preproc.rkt
                                                  "Incorrect @workbook-link ~a\n" page)]))]
@@ -963,7 +965,7 @@
                    (string-join
                      (map
                        (lambda (x)
-                         (format " link:./lessons/~a/index.html[~a]" (car x) (cadr x)))
+                         (format " link:./~a/index.html[~a]" (car x) (cadr x)))
                        lessons) ";"))))
       (for ([n sublist-items])
         (fprintf op "** ~a~%" (list-ref s (+ n 1)))
