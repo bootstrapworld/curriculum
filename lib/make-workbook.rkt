@@ -72,7 +72,7 @@
               (let ([docfile (car f)])
                 (if (file-exists? docfile) #t
                     (begin
-                      (printf "ERROR: ~a is not present\n" docfile)
+                      (printf "WARNING: Nonexistent workbook page ~s\n" docfile)
                       #f))))
             *pdf-page-specs*))
 

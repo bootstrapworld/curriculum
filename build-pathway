@@ -5,15 +5,14 @@
 export DEBUG=
 export FORCE=
 export LANGUAGE=en-us
+export LINT=
 export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 
-
 ARGS=
 HELP=
-LASTMOD=2020-03-29 # last modified
-LINT=
+LASTMOD=2020-03-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 TMPHTML=tmp0.html
@@ -85,6 +84,11 @@ fi
 
 if which gsed | grep -q .; then
   SED=gsed
+fi
+
+if ! which curl | grep -q .; then
+  echo WARNING: Missing \'curl\' tool; can\'t do --lint
+  LINT=
 fi
 
 if test "$ARGS" = ""; then
@@ -226,36 +230,6 @@ function lintlesson() {
   done
 }
 
-function verifylinks() {
-  if test $LINT; then
-    if which linkchecker|grep -q .; then
-      find . -name \*.html  >  html-files.txt
-      find . -name \*.shtml >> html-files.txt
-      cat html-files.txt|xargs linkchecker --check-extern --no-status 2>/dev/null > g-invalid-links.txt
-      $SED -i -ne '/^Real URL/p' g-invalid-links.txt
-      echo = Broken Links > invalid-links.txt
-      echo >> invalid-links.txt
-      echo \[verse\] >> invalid-links.txt
-      sort -u g-invalid-links.txt | $SED -e 's/^Real URL *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
-      asciidoctor -a linkcss invalid-links.txt
-
-      #linkchecker -F html/invalid-links.html --check-extern --no-status
-    elif which check-links|grep -q .; then
-      find . -name \*.html  >  html-files.txt
-      find . -name \*.shtml >> html-files.txt
-      cat html-files.txt|xargs check-links 2>/dev/null > g-invalid-links.txt
-      $SED -i -ne '/Link:/p' g-invalid-links.txt
-      echo = Broken Links > invalid-links.txt
-      echo >> invalid-links.txt
-      echo \[verse\] >> invalid-links.txt
-      sort -u g-invalid-links.txt | $SED -e 's/^ *Link: *\(.*\)/pass:macros[\1]/' >> invalid-links.txt
-      asciidoctor -a linkcss invalid-links.txt
-    else
-      echo WARNING: Neither linkchecker nor check-links found
-    fi
-  fi
-}
-
 function addanalytics() {
   local f=$1
   cp $PROGDIR/analytics.txt .
@@ -395,6 +369,34 @@ function checkifsinglepdfpage() {
   test "$NUMPAGES" = 1 || echo WARNING: $fpdf has $NUMPAGES pages
 }
 
+function checkeachlink() {
+  local f="$1"
+  #echo checkeachlink $f
+
+#  if ! wget -q --spider $f; then
+#    echo WARNING: Invalid external link $f
+#  fi
+
+  if ! curl -m 2 -Is $f|head -n 1|grep -q 200; then
+    echo WARNING: Invalid external link $f
+  fi
+
+}
+
+function checklinks() {
+  #echo checklinks $1
+  test "$LINT" || return
+
+  local g="$1"
+  local f=${g%.*}.external-links.rkt.kp
+
+  if test -s "$f"; then
+    for h in $(cat "$f"); do
+      checkeachlink "$h"
+    done
+  fi
+}
+
 function recursiveadoc() {
   local dir="$1"
   local oldPATHWAYROOTDIR="$2"
@@ -465,6 +467,7 @@ function recursiveadoc() {
           fi
         fi
       fi
+      checklinks $f
     fi
   done
 
@@ -581,6 +584,7 @@ function buildlessonplan() {
         $PROGDIR/glossary-warnings.rkt
       fi
     fi
+    checklinks index.html
     if test ""; then
       if test ! $NOPDF; then
         #echo Creating lesson plan pdf
@@ -701,7 +705,8 @@ function buildpathwaynarrative() {
       #cleanuptitle index.shtml
     fi
 
-    verifylinks
+    checklinks index.html
+    #verifylinks
 
   fi
 }
@@ -832,6 +837,7 @@ function buildpathway() {
         moveheaderlogopos index.html
         cleanuptitle index.html
       fi
+      checklinks index.html
     fi
     cd ..
 

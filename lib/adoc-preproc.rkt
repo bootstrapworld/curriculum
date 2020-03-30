@@ -17,6 +17,10 @@
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
+(define *check-external-links?* (truthy-getenv "LINT"))
+
+(define *external-links-port* #f)
+
 (define *base-namespace* (current-namespace))
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
@@ -404,16 +408,25 @@
             (enclose-span ".tooltiptext" text) "\n"
             adoc-img)))))
 
+(define (check-external-link url)
+  ;(printf "check-external-link ~s\n" url)
+  (when *check-external-links?*
+    (display url *external-links-port*)
+    (newline *external-links-port*)))
+
 (define (make-link f link-text #:include? [include? #f])
   (cond [(not include?)
-         (unless (regexp-match #rx"://" f)
-           (when (path-has-extension? f ".adoc")
-             (let ([f.html (path-replace-extension f ".html")]
-                   [f.pdf (path-replace-extension f ".pdf")])
-               (cond [(file-exists? f.html) (set! f f.html)]
-                     [(file-exists? f.pdf) (set! f f.pdf)])))
-           (unless (file-exists? f)
-             (printf "WARNING: @link refers to nonexistent file ~a\n" f)))
+
+         (cond [(regexp-match #rx"://" f) (check-external-link f)]
+               [else
+                 (when (path-has-extension? f ".adoc")
+                   (let ([f.html (path-replace-extension f ".html")]
+                         [f.pdf (path-replace-extension f ".pdf")])
+                     (cond [(file-exists? f.html) (set! f f.html)]
+                           [(file-exists? f.pdf) (set! f f.pdf)])))
+                 (unless (file-exists? f)
+                   (printf "WARNING: @link refers to nonexistent file ~a\n" f))])
+
          (format "link:~a[~a~a]" f link-text
                  (if (or (truthy-getenv "LESSONPLAN") (truthy-getenv "TEACHER_RESOURCES"))
                      ", window=\"_blank\"" ""))]
@@ -594,8 +607,12 @@
   (let ([out-file (path-replace-extension in-file ".asc")]
         [first-subsection-reached? #f]
         [title-reached? #f]
-        [comment-before-title #f]
         )
+    ;
+    (when *check-external-links?*
+      (let ([external-links-file (path-replace-extension in-file ".external-links.rkt.kp")])
+        (when (file-exists? external-links-file) (delete-file external-links-file))
+        (set! *external-links-port* (open-output-file external-links-file))))
     ;
     (when (truthy-getenv "LESSONPLAN")
       (let* ([lesson0 (getenv "LESSON")]
@@ -898,6 +915,9 @@
     (asciidoctor out-file)
     (unless (truthy-getenv "DEBUG")
       (delete-file out-file)))
+
+  (when *check-external-links?*
+    (close-output-port *external-links-port*))
 
     ))
 

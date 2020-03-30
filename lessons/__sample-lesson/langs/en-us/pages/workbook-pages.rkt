@@ -1,6 +1,7 @@
 (
 ; "cover.adoc"
  "pageA1.adoc"
+ "nonexistentwbpage.adoc"
  ("pageA2.adoc" "portrait")
  "pageA3.adoc"
  ("pageA4.adoc" "landscape")
