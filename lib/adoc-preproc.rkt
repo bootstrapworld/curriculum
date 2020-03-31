@@ -616,8 +616,8 @@
         )
     ;
     (when *link-lint?*
-      (let ([internal-links-file (path-replace-extension in-file ".internal-links.rkt.kp")]
-            [external-links-file (path-replace-extension in-file ".external-links.rkt.kp")])
+      (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
+            [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
         (when (file-exists? internal-links-file) (delete-file internal-links-file))
         (when (file-exists? external-links-file) (delete-file external-links-file))
         (set! *internal-links-port* (open-output-file internal-links-file))

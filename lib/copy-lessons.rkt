@@ -39,16 +39,22 @@
                  [else
                    (printf "WARNING: missing ~a\n" workbook-pages-file)
                    '()])])
-    (for ([page workbook-pages])
-      (let ([file page]
-            [aspect "portrait"])
-        (when (pair? page)
-          (let ([len (length page)])
-            (set! file (car page))
-            (set! aspect (cadr page))
-            (when (>= len 3)
-              (set! paginate (caddr page)))))
-        (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))))
+    (unless (null? workbook-pages)
+      (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages.txt.kp" lesson-dir)])
+        (call-with-output-file workbook-pages-ls-file
+          (lambda (o2)
+            (for ([page workbook-pages])
+              (let ([file page]
+                    [aspect "portrait"])
+                (when (pair? page)
+                  (let ([len (length page)])
+                    (set! file (car page))
+                    (set! aspect (cadr page))
+                    (when (>= len 3)
+                      (set! paginate (caddr page)))))
+                (fprintf o2 "~a\n" file)
+                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate))))
+          #:exists 'replace)))))
 
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)

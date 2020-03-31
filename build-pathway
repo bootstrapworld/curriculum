@@ -66,7 +66,6 @@ function displayhelp() {
   echo "           " during debugging when PDF output isn\'t necessary.
   echo "  " --lint: \(1\) Ensure the summary tables in lesson plans have the required rows.
   echo "          " \(2\) Verify all the links used in the doctree.
-  echo "          " The report is stored in invalid-links.html
   echo "          " in the pathway doctree\'s top directory.
   echo "  " --help: Display this help and exit.
   echo "  " --version: Display build-way version and exit.
@@ -203,6 +202,7 @@ function moveheaderlogopos() {
     -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
     -e '/^<div id="content">/r temp.txt' \
     $f
+  rm temp.txt
 }
 
 function cleanuptitle() {
@@ -375,7 +375,7 @@ function checkeachinternallink() {
   local f="$1"
 
   if ! test -f "$f"; then
-    export INVALID_INTERNAL_LINKS=1
+    export BROKEN_INTERNAL_LINKS=1
     echo WARNING: Invalid internal link $f
   fi
 }
@@ -387,20 +387,22 @@ function checkeachexternallink() {
   local invalid=
 
   # possible alternative? wget -q --spider $f
-  curl -Is $f > $TMPHTML
+  curl -Is $f > .temp.txt
 
-  if test ! -s $TMPHTML; then
+  if test ! -s .temp.txt; then
     invalid=1
-  elif ! cat $TMPHTML|head -n 1|grep -q 302; then
+  elif ! cat .temp.txt|head -n 1|grep -q 302; then
     :
-  elif cat $TMPHTML|head -n 1|grep -q 200; then
-    if cat $TMPHTML|grep -q '^Connection: close'; then
+  elif cat .temp.txt|head -n 1|grep -q 200; then
+    if cat .temp.txt|grep -q '^Connection: close'; then
       invalid=1
     fi
   fi
 
+  rm .temp.txt
+
   if test $invalid; then
-    export INVALID_EXTERNAL_LINKS=1
+    export BROKEN_EXTERNAL_LINKS=1
     echo WARNING: Invalid external link $f
   fi
 
@@ -411,7 +413,7 @@ function checklinks() {
   test "$LINT" || return
 
   local g="$1"
-  local f=${g%.*}.external-links.rkt.kp
+  local f=${g%.*}.external-links.txt.kp
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
@@ -419,7 +421,7 @@ function checklinks() {
     done
   fi
 
-  f=${g%.*}.internal-links.rkt.kp
+  f=${g%.*}.internal-links.txt.kp
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
@@ -454,6 +456,19 @@ function recursiveadoc() {
   if test "$dir" = pages -o "$dir" = solution-pages \
     -o "$dir" = front-matter -o "$dir" = back-matter; then
       export OTHERDIR=
+  fi
+
+  if test $LINT; then
+    if test ! $OTHERDIR; then
+      if test -f workbook-pages.txt.kp; then
+        for wbp in $(cat workbook-pages.txt.kp); do
+          if test ! -f $wbp; then
+            BROKEN_WORKBOOK_PAGES=1
+            echo WARNING: Missing workbook page $wbp in $LESSON/$dir
+          fi
+        done
+      fi
+    fi
   fi
 
   for f in *.adoc; do
@@ -750,8 +765,9 @@ function buildpathway() {
   export PATHWAYROOTDIR=./
   export LESSONSUBDIR=
   export SOLUTION=
-  export INVALID_INTERNAL_LINKS=
-  export INVALID_EXTERNAL_LINKS=
+  export BROKEN_WORKBOOK_PAGES=
+  export BROKEN_INTERNAL_LINKS=
+  export BROKEN_EXTERNAL_LINKS=
 
   # special-casing only algebra and game-pathway,
   # as they're the only pathways that allow two prog langs
@@ -899,16 +915,23 @@ function buildpathway() {
   cd $TOPDIR
 
   if test $LINT; then
-    if test $INVALID_INTERNAL_LINKS; then
-      echo 👎 Invalid internal links in $PATHWAY
+
+    if test $BROKEN_WORKBOOK_PAGES; then
+      echo 👎 Broken workbook pages in $PATHWAY
     else
-      echo 👍 No invalid internal links in $PATHWAY
+      echo 👍 No broken workbook pages in $PATHWAY
     fi
 
-    if test $INVALID_EXTERNAL_LINKS; then
-      echo 👎 Invalid external links in $PATHWAY
+    if test $BROKEN_INTERNAL_LINKS; then
+      echo 👎 Broken internal links in $PATHWAY
     else
-      echo 👍 No invalid external links in $PATHWAY
+      echo 👍 No broken internal links in $PATHWAY
+    fi
+
+    if test $BROKEN_EXTERNAL_LINKS; then
+      echo 👎 Broken external links in $PATHWAY
+    else
+      echo 👍 No broken external links in $PATHWAY
     fi
   fi
 
