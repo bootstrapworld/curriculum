@@ -468,7 +468,8 @@
     |#
     (let ([header-with-logo? (or (truthy-getenv "LESSONPLAN")
                                  ;(truthy-getenv "NARRATIVE")
-                                 (truthy-getenv "TEACHER_RESOURCES"))])
+                                 ;(truthy-getenv "TEACHER_RESOURCES")
+                                 )])
       (display #\= o) (display #\space o)
       (when header-with-logo?
         (display
@@ -631,6 +632,9 @@
               (add-standard s lesson #f #f))))))
     ;
     (when (truthy-getenv "NARRATIVE")
+      (print-menubar "index"))
+    ;
+    (when (truthy-getenv "TEACHER_RESOURCES")
       (print-menubar "index"))
     ;
     (define (expand-directives i o)
