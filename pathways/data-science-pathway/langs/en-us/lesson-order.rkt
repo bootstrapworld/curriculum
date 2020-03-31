@@ -8,7 +8,7 @@
  "ds-table-methods"
  "ds-defining-table-functions"
  "ds-making-subsets"
- "ds-exploring-your-dataset"
+ "ds-choosing-your-dataset"
  "ds-histograms"
  "ds-histograms2"
  "ds-measures-of-center"
