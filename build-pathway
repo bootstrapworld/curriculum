@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-03-30 # last modified
+LASTMOD=2020-03-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 TMPHTML=tmp0.html
@@ -222,7 +222,9 @@ function cleanupduration() {
 
 function lintlesson() {
   local f=$1
-  if test ! $LINT; then return; fi
+
+  test $LINT || return
+
   for g in Prerequisites 'Relevant Standards' 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
     if ! grep -q "^<p>$g</p>$" $f; then
       echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
@@ -369,15 +371,36 @@ function checkifsinglepdfpage() {
   test "$NUMPAGES" = 1 || echo WARNING: $fpdf has $NUMPAGES pages
 }
 
-function checkeachlink() {
+function checkeachinternallink() {
+  local f="$1"
+
+  if ! test -f "$f"; then
+    export INVALID_INTERNAL_LINKS=1
+    echo WARNING: Invalid internal link $f
+  fi
+}
+
+function checkeachexternallink() {
   local f="$1"
   #echo checkeachlink $f
 
-#  if ! wget -q --spider $f; then
-#    echo WARNING: Invalid external link $f
-#  fi
+  local invalid=
 
-  if ! curl -m 2 -Is $f|head -n 1|grep -q 200; then
+  # possible alternative? wget -q --spider $f
+  curl -Is $f > $TMPHTML
+
+  if test ! -s $TMPHTML; then
+    invalid=1
+  elif ! cat $TMPHTML|head -n 1|grep -q 302; then
+    :
+  elif cat $TMPHTML|head -n 1|grep -q 200; then
+    if cat $TMPHTML|grep -q '^Connection: close'; then
+      invalid=1
+    fi
+  fi
+
+  if test $invalid; then
+    export INVALID_EXTERNAL_LINKS=1
     echo WARNING: Invalid external link $f
   fi
 
@@ -392,7 +415,15 @@ function checklinks() {
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
-      checkeachlink "$h"
+      checkeachexternallink "$h"
+    done
+  fi
+
+  f=${g%.*}.internal-links.rkt.kp
+
+  if test -s "$f"; then
+    for h in $(cat "$f"); do
+      checkeachinternallink "$h"
     done
   fi
 }
@@ -719,6 +750,8 @@ function buildpathway() {
   export PATHWAYROOTDIR=./
   export LESSONSUBDIR=
   export SOLUTION=
+  export INVALID_INTERNAL_LINKS=
+  export INVALID_EXTERNAL_LINKS=
 
   # special-casing only algebra and game-pathway,
   # as they're the only pathways that allow two prog langs
@@ -864,6 +897,20 @@ function buildpathway() {
   fi
 
   cd $TOPDIR
+
+  if test $LINT; then
+    if test $INVALID_INTERNAL_LINKS; then
+      echo 👎 Invalid internal links in $PATHWAY
+    else
+      echo 👍 No invalid internal links in $PATHWAY
+    fi
+
+    if test $INVALID_EXTERNAL_LINKS; then
+      echo 👎 Invalid external links in $PATHWAY
+    else
+      echo 👍 No invalid external links in $PATHWAY
+    fi
+  fi
 
 }
 

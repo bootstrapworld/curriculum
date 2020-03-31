@@ -62,7 +62,7 @@
 
   ;when #t ;do-it?
 
-  (printf "building workbooks\n")
+  ;(printf "building workbooks\n")
 
   ; *pdf-page-specs* is listof (docfile lessondir handle aspect title)
 
@@ -194,6 +194,8 @@
 
 
   )
+
+(printf "building workbooks\n")
 
 (make-workbook "workbook/workbook")
 

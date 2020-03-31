@@ -56,17 +56,17 @@ files, with a sample lesson and sample pathway:
             images/
             pyret/
             wescheme/
-            exercises/
-              pyret/
-              wescheme/
-            exercises-sols/
-              pyret/
-              wescheme/
-            workbook-pages/
+            pages/
+              *.{adoc,pdf}
               workbook-pages.rkt
               pyret/
               wescheme/
-            workbook-sols-pages/
+            solution-pages/
+              *.{adoc,pdf}
+              pyret/
+              wescheme/
+            xtra/
+              *.{adoc,pdf}
               pyret/
               wescheme/
     pathways/
@@ -76,6 +76,16 @@ files, with a sample lesson and sample pathway:
             index.adoc
             lesson-order.rkt
             external-index.rkt
+            front-matter/
+              pages/
+                *.{adoc,pdf}
+                workbook-pages.rkt
+              solution-pages/
+                *.adoc
+                workbook-pages.rkt
+            back-matter/
+              pages/
+              solution-pages/
             resources/
               index.adoc
 
@@ -100,10 +110,9 @@ programming language is used. Specify this choice via the
 but in some cases content is built for both `pyret` and
 `wescheme`.
 
-- The directory `workbook-sols-pages` is used to house source
-that will shadow `workbook-pages`, when the pages meant only for
-teacher use are created. (`sols` = solutions.)  Similarly,
-the `exercises-sols` directory shadows `exercises` for solutions.
+- The directory `solution-pages` is used to house source
+that will shadow `pages`, when the pages meant only for
+teacher use are created.  Similarly,
 
 In all these cases, it is important that the shadowing content
 have the same file basename as the content that is being
@@ -122,17 +131,18 @@ doesn’t
 have to be `index`, ensure that there is only one `.adoc` file at
 this level.
 
-The exercises associated with the lesson are alongside the lesson
-plan adoc file, in subdirectory `exercises` and `exercises-sols`. Images are in
-subdir `images`. Single workbook pages are in subdirs `workbook-pages`
-and `workbook-sols-pages` (some of these can be static PDFs
+Images are in
+subdir `images`.
+
+Single workbook pages are in subdirs `pages`
+and `solution-pages` (some of these can be static PDFs
 rather than adoc source files).
-(The `sols` versions, as already explained, are meant to supply
+(The `solution-` versions, as already explained, are meant to supply
 shadowing content intended for teacher-only documents.)
 
-The file `workbook-pages/workbook-pages.rkt` lists -- as a Racket
+The file `pages/workbook-pages.rkt` lists -- as a Racket
 list -- the pages in the
-`workbook-pages` in the order in which they should show up in the
+`pages` directory in the order in which they should show up in the
 final workbook.
 By default,
 these pages are rendered in portrait mode. If you desire a
@@ -141,7 +151,8 @@ particular file `file.adoc` to be in landscape, its entry in
 then `"file.adoc"`. (The
 entry `"file.adoc"` is convenient shorthand for `("file.adoc"
 "portrait")`.)  (The strings `"landscape"` and `"portrait"` may
-be in any case.)
+be in any case.) Supplementary `adoc` files used by these pages
+can be stored in subdirectories, typically named `fragments`.
 
 Lesson pages are paginated by default when they show up in the
 workbook. If you don’t want a page to be populated, its entry in
@@ -266,8 +277,7 @@ debugging:
 process.
 
 - `--lint` reports missing rows in the summary tables of lesson
-  plans, and invalid links in the doctree. The latter is also
-  saved in the file `invalid-links.html`.
+  plans, and invalid links in the doctree.
 
 == Deployment
 
@@ -423,7 +433,9 @@ installation as for Asciidoctor. (Get at least version 0.12.5 for
 - TeX containing `pdflatex`. Install a suitable TeX system for
 your OS (for Linux, it’s `texlive`).
 
-- `linkchecker`, optional. Standard installation as for Asciidoctor.
+- `curl`. Use brew to install.
+
+// - `linkchecker`, optional. Standard installation as for Asciidoctor.
 
 == Authoring guidelines
 
@@ -539,7 +551,7 @@ directives
 The former is used to specify a correct recipe; the latter to
 introduce a recipe that needs to be debugged. For examples of
 such recipes, please see the `.adoc` files in the various
-`exercises` and `exercises-sols` subdirectories in the repo.
+`fragments` subdirectories in the repo.
 
 Some exercise files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
