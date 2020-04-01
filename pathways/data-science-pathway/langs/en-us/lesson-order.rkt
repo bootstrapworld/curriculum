@@ -3,7 +3,7 @@
  "ds-pyret-intro"
  "ds-applying-functions"
  "ds-plotting"
- "ds-lookups"
+ "ds-displays-and-lookups"
  "ds-defining-functions"
  "ds-table-methods"
  "ds-defining-table-functions"
