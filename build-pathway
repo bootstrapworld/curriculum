@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-03-31 # last modified
+LASTMOD=2020-04-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 TMPHTML=tmp0.html
@@ -430,6 +430,56 @@ function checklinks() {
   fi
 }
 
+function processadoc() {
+  local f="$1"
+
+  if test ! -f "$f"; then
+    if test "$dir" = "pages"; then
+      echo No adoc files in $L/$LESSONSUBDIR
+    fi
+  elif echo $f|grep -q ' '; then
+    echo Discarding file \'$f\' with space in its name
+    rm "$f"
+  else
+    fhtml=${f%.adoc}.html
+    fasc=${f%.adoc}.asc
+    DOIT=
+    if test $OTHERDIR; then
+      if test $f -nt $fasc; then DOIT=1; fi
+    else
+      if test $f -nt $fhtml; then DOIT=1; fi
+    fi
+    if test $DOIT; then
+      echo building $PATHWAY/\*\*/$L/$LESSONSUBDIR/$f
+      $PROGDIR/adoc-preproc.rkt $f
+      #test -f "$fhtml" || echo $fhtml not created
+      if test -f "$fhtml"; then
+        resolveabbrevs $fhtml
+        insertprintcss_browser $fhtml
+        insertwbpagecss_browser $fhtml
+        if test ! $NOPDF; then
+          fpdf=${fhtml%.html}.pdf
+          if test $fhtml -nt $fpdf; then
+            TMPHTML=$(mktemp -p .).$fhtml
+            cp -p $fhtml $TMPHTML
+            insertprintcss $TMPHTML
+            insertwbpagecss $TMPHTML
+            ASPECT=
+            if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+              ASPECT="-O Landscape --margin-top $PDFMARGIN"
+            fi
+            wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
+            rm $TMPHTML
+            checkifsinglepdfpage "$fpdf"
+            #test $DEBUG || rm $TMPHTML
+          fi
+        fi
+      fi
+    fi
+    checklinks $f
+  fi
+}
+
 function recursiveadoc() {
   local dir="$1"
   local oldPATHWAYROOTDIR="$2"
@@ -472,50 +522,9 @@ function recursiveadoc() {
   fi
 
   for f in *.adoc; do
-    if test ! -f "$f"; then
-      if test "$dir" = "pages"; then
-        echo No adoc files in $L/$LESSONSUBDIR
-      fi
-    elif echo $f|grep -q ' '; then
-      echo Discarding file \'$f\' with space in its name
-      rm "$f"
-    else
-      fhtml=${f%.adoc}.html
-      fasc=${f%.adoc}.asc
-      DOIT=
-      if test $OTHERDIR; then
-        if test $f -nt $fasc; then DOIT=1; fi
-      else
-        if test $f -nt $fhtml; then DOIT=1; fi
-      fi
-      if test $DOIT; then
-        echo building $PATHWAY/\*\*/$L/$LESSONSUBDIR/$f
-        $PROGDIR/adoc-preproc.rkt $f
-        #test -f "$fhtml" || echo $fhtml not created
-        if test -f "$fhtml"; then
-          resolveabbrevs $fhtml
-          insertprintcss_browser $fhtml
-          insertwbpagecss_browser $fhtml
-          if test ! $NOPDF; then
-            fpdf=${fhtml%.html}.pdf
-            if test $fhtml -nt $fpdf; then
-              cp -p $fhtml $TMPHTML
-              insertprintcss $TMPHTML
-              insertwbpagecss $TMPHTML
-              ASPECT=
-              if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-                ASPECT="-O Landscape --margin-top $PDFMARGIN"
-              fi
-              wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
-              checkifsinglepdfpage "$fpdf"
-              test $DEBUG || rm $TMPHTML
-            fi
-          fi
-        fi
-      fi
-      checklinks $f
-    fi
+    processadoc "$f"  &
   done
+  wait
 
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
@@ -890,20 +899,22 @@ function buildpathway() {
     fi
     cd ..
 
-    if test ! -f workbook-page-index.rkt; then
-      echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-    else
-      export PATHWAYROOTDIR=""
-      #cp -p $PROGDIR/front-cover-teacher.pdf .
-      #echo
-      #echo building pathway workbooks: $PATHWAY
-      #echo calling make-workbook.rkt
-      if test $DEBUG; then
-        $PROGDIR/make-workbook.rkt
+    if test ! $NOPDF; then
+      if test ! -f workbook-page-index.rkt; then
+        echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
-        $PROGDIR/make-workbook.rkt >/dev/null 2>&1
+        export PATHWAYROOTDIR=""
+        #cp -p $PROGDIR/front-cover-teacher.pdf .
+        #echo
+        #echo building pathway workbooks: $PATHWAY
+        #echo calling make-workbook.rkt
+        if test $DEBUG; then
+          $PROGDIR/make-workbook.rkt
+        else
+          $PROGDIR/make-workbook.rkt >/dev/null 2>&1
+        fi
+        rm -f workbook-numbered.*
       fi
-      rm -f workbook-numbered.*
     fi
 
     buildlessonplans
