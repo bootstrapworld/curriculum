@@ -460,7 +460,9 @@ function processadoc() {
         if test ! $NOPDF; then
           fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
-            TMPHTML=$(mktemp -p .).$fhtml
+            TEMPF=$(mktemp)
+            TMPHTML=$(basename $TEMPF).$fhtml
+            rm $TEMPF
             cp -p $fhtml $TMPHTML
             insertprintcss $TMPHTML
             insertwbpagecss $TMPHTML
