@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-01 # last modified
+LASTMOD=2020-04-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 TMPHTML=tmp0.html
@@ -470,7 +470,8 @@ function processadoc() {
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
               ASPECT="-O Landscape --margin-top $PDFMARGIN"
             fi
-            wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
+            wkhtmltopdf --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN \
+              --margin-right $PDFMARGIN $ASPECT --lowquality -q $TMPHTML $fpdf
             rm $TMPHTML
             checkifsinglepdfpage "$fpdf"
             #test $DEBUG || rm $TMPHTML
@@ -642,17 +643,16 @@ function buildlessonplan() {
       fi
     fi
     checklinks index.html
-    if test ""; then
-      if test ! $NOPDF; then
-        #echo Creating lesson plan pdf
-        if test index.html -nt index.pdf; then
-          cp index.html $TMPHTML
-          insertprintcss $TMPHTML
-          wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-          if test ! $DEBUG; then
-            rm $TMPHTML
-          fi
-        fi
+    if test ! $NOPDF; then
+      #echo Creating lesson plan pdf
+      if test index.html -nt index.pdf; then
+        TEMPF=$(mktemp)
+        TMPHTML=$(basename $TEMPF).index.html
+        rm $TEMPF
+        cp index.html $TMPHTML
+        insertprintcss $TMPHTML
+        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+        rm $TMPHTML
       fi
     fi
   fi
@@ -830,16 +830,26 @@ function buildpathway() {
     else
       #echo copying lessons...
       $PROGDIR/copy-lessons.rkt
+      cd lessons
+      for ldir in *; do
+        if test -d "$ldir"; then
+          grep '^= ' $ldir/*.adoc|head -n 1|$SED -e 's/^= *//'> $ldir/index-title.txt
+        fi
+      done
+      cd ..
     fi
 
     buildlessons
     #echo
 
+
     for d in front-matter back-matter; do
-      cd $d
-      mkdirsolutionversionof pages
-      cd ..
-      adjustproglangsubdirs $d
+      if test -d $d; then
+        cd $d
+        mkdirsolutionversionof pages
+        cd ..
+        adjustproglangsubdirs $d
+      fi
     done
 
     export PATHWAYROOTDIR=
@@ -901,27 +911,41 @@ function buildpathway() {
     fi
     cd ..
 
-    if test ! $NOPDF; then
-      if test ! -f workbook-page-index.rkt; then
-        echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
-      else
-        export PATHWAYROOTDIR=""
-        #cp -p $PROGDIR/front-cover-teacher.pdf .
-        #echo
-        #echo building pathway workbooks: $PATHWAY
-        #echo calling make-workbook.rkt
-        if test $DEBUG; then
-          $PROGDIR/make-workbook.rkt
-        else
-          $PROGDIR/make-workbook.rkt >/dev/null 2>&1
-        fi
-        rm -f workbook-numbered.*
-      fi
-    fi
+    $PROGDIR/make-workbook-tex.rkt
+    for tgt in workbook pd-workbook workbook-sols; do
+      $SED -i -e "s/==TARGET==/$tgt/" $tgt.tex
+    done
 
     buildlessonplans
 
     buildpathwaynarrative
+
+    if test ! $NOPDF; then
+      if test ! -f workbook-page-index.rkt; then
+        echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
+      else
+        ABYSS=this-page-intentionally-left-blank
+        if test ! -f $ABYSS.pdf; then
+          touch $ABYSS.html
+          wkhtmltopdf --lowquality -q $ABYSS.html \
+            $ABYSS.pdf
+          rm $ABYSS.html
+        fi
+
+        export PATHWAYROOTDIR=""
+        #echo
+        #echo building pathway workbooks: $PATHWAY
+        #echo calling make-workbook.rkt
+        for wbf in workbook pd-workbook workbook-sols; do
+          if test $DEBUG; then
+            $PROGDIR/make-workbook.rkt $wbf &
+          else
+            $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+          fi
+        done
+        wait
+      fi
+    fi
 
   fi
 

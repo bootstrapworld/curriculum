@@ -12,8 +12,6 @@
 
 (define *debug* (truthy-getenv "DEBUG"))
 
-(define *nopdf* (truthy-getenv "NOPDF"))
-
 ;(printf "force= ~s; debug= ~s\n" *force* *debug*)
 
 (define *pdflatex* (find-executable-path "pdflatex"))
@@ -27,7 +25,13 @@
 
 ; *workbook-page-specs* is listof (lesson docfile handle aspect)
 
-(define (make-workbook dest #:teacher-version [teacher-version #f] #:include-lesson [include-lesson #f])
+(define (make-workbook tgt #:teacher-version [teacher-version #f])
+
+  (define dest
+    (cond [(string=? tgt "workbook") "workbook/workbook"]
+          [(string=? tgt "pd-workbook") "resources/protected/pd-workbook"]
+          [(string=? tgt "workbook-sols") "resources/protected/workbook-sols"]
+          [else (error 'ERROR "deadc0de")]))
 
   (define dest.pdf (format "~a.pdf" dest))
 
@@ -36,171 +40,83 @@
 
   (define do-it? *force*)
 
-  (define *pdf-page-specs*
-    (map (lambda (f)
-           (let* ([lesson-dir (list-ref f 0)]
-                  [lesson-workbook-page (list-ref f 1)]
-                  [lesson-handle (list-ref f 2)]
-                  [lesson-aspect (list-ref f 3)]
-                  [lesson-pagenum (list-ref f 4)]
-                  [lesson-title-file (string-append lesson-dir "/index-title.txt")]
-                  [lesson-title (if (file-exists? lesson-title-file)
-                                    (call-with-input-file lesson-title-file read-line)
-                                    "")]
-                  [g (string-append lesson-dir
-                       (if teacher-version "/solution-pages/" "/pages/")
-                       lesson-workbook-page)]
-                  [g (if (path-has-extension? g #".adoc")
-                         (path-replace-extension g ".pdf") g)]
-                  )
-             (unless do-it?
-               (when (> (file-mtime g) dest.pdf.mtime) (set! do-it? #t)))
-             (list g lesson-dir lesson-workbook-page lesson-handle lesson-aspect lesson-pagenum lesson-title)))
-         *workbook-page-specs*))
+  (for ([f *workbook-page-specs*])
+    (let* ([lesson-dir (list-ref f 0)]
+           [lesson-workbook-page (list-ref f 1)]
+           [g (string-append lesson-dir
+                (if teacher-version "/solution-pages/" "/pages/")
+                lesson-workbook-page)]
+           [g (if (path-has-extension? g #".adoc")
+                  (path-replace-extension g ".pdf") g)])
+      (unless do-it?
+        (when (> (file-mtime g) dest.pdf.mtime) (set! do-it? #t)))))
 
-  (when *nopdf* (set! do-it? #f))
-
-  ;when #t ;do-it?
+  ;(printf "*workbook-page-specs* = ~s\n" *workbook-page-specs*)
 
   ;(printf "building workbooks\n")
 
-  ; *pdf-page-specs* is listof (docfile lessondir handle aspect title)
+  ; *workbook-page-specs* is listof (lessondir docfile handle aspect)
 
-  ;when do-it? ?
-  (set! *pdf-page-specs*
-    (filter (lambda (f)
-              (let ([docfile (car f)])
-                (if (file-exists? docfile) #t
-                    (begin
-                      (printf "WARNING: Nonexistent workbook page ~s\n" docfile)
-                      #f))))
-            *pdf-page-specs*))
+  ; 0=lessondir 1=docfile 2=handle 3=aspect
 
-  ;(printf "*pdf-page-specs* = ~s\n" *pdf-page-specs*)
+  ;  (printf "starting pdftk\n")
 
   (when do-it?
-    (for ([pdf-page-spec *pdf-page-specs*])
+    (for ([pdf-page-spec *workbook-page-specs*])
       ;(printf "pdf-page-spec = ~s\n" pdf-page-spec)
-      (let ([docfile (list-ref pdf-page-spec 0)]
-            [handle (list-ref pdf-page-spec 3)]
-            [aspect (list-ref pdf-page-spec 4)])
+      (let* ([lessondir (list-ref pdf-page-spec 0)]
+             [docfile (list-ref pdf-page-spec 1)]
+             [handle (list-ref pdf-page-spec 2)]
+             [aspect (list-ref pdf-page-spec 3)])
+
+        (set! docfile (string-append lessondir
+                        (if teacher-version "/solution-pages/" "/pages/")
+                        docfile))
+
+        (when (path-has-extension? docfile #".adoc")
+          (set! docfile (path-replace-extension docfile ".pdf")))
+
+        (unless (file-exists? docfile)
+          (set! docfile "this-page-intentionally-left-blank.pdf"))
+
         (system* *pdftk*
                  (format "Q=~a" docfile)
                  "cat"
                  (if (char-ci=? (string-ref aspect 0) #\l)
                      "Qwest" "Q")
                  "output"
-                 (format "~a.pdf" handle)
+                 (format "~a-~a.pdf" tgt handle)
                  "dont_ask"))))
 
-  (unless (and (not do-it?) (or include-lesson teacher-version))
-    (call-with-output-file "workbook-numbered.tex"
-      (lambda (o)
-        (display (string-append
-                   "\\documentclass{article}\n"
-                   "\\usepackage{pdfpages}\n"
-                   "\\usepackage{fancyhdr}\n"
-                   "%\n"
-                   "\\setlength\\topmargin{-0.375in}\n"
-                   "\\setlength\\headheight{0in}\n"
-                   "\\setlength\\headsep{0in}\n"
-                   "\\setlength\\textheight{9.5in}\n"
-                   "\\setlength\\textwidth{7.25in}\n"
-                   "\\setlength\\oddsidemargin{-0.5in}\n"
-                   "\\setlength\\evensidemargin{-0.5in}\n"
-                   "%\n"
-                   "\\pagestyle{fancy}\n"
-                   "\\renewcommand{\\headrulewidth}{0pt}\n"
-                   "\\lhead{}\\rhead{}\n"
-                   "\\fancyhf{}\n"
-                   "%\n"
-                   "\\begin{document}\n\n"
-                   ) o)
-        (let ([cover-page (string-append *pathway-root-dir*
-                            (if (or teacher-version include-lesson)
-                                "front-cover-teacher.pdf" "front-cover-student.pdf"))])
-          (when (file-exists? cover-page)
-            (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
-                     cover-page)))
-        ;(fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{BSABigIdeas.pdf}\n")
-        (let ([curr-lesson #f]
-              [pagenum-list '()])
-          (let loop ([i 1] [pdf-page-specs *pdf-page-specs*])
-            (unless (null? pdf-page-specs)
-              (let* ([pdf-page-spec (car pdf-page-specs)]
-                     [lessondir (list-ref pdf-page-spec 1)]
-                     [workbook-page (list-ref pdf-page-spec 2)]
-                     [handle (list-ref pdf-page-spec 3)]
-                     ;[aspect (list-ref pdf-page-spec 4)]
-                     [paginate (list-ref pdf-page-spec 5)]
-                     [title (list-ref pdf-page-spec 6)]
-                     [pagenum i]
-                     [fresh-lesson (not (equal? lessondir curr-lesson))])
-                (set! title (regexp-replace* "&" title "\\\\&"))
-                (set! paginate (if (char-ci=? (string-ref paginate 0) #\y) #t #f))
-                (unless paginate
-                  (set! pagenum "") (set! title "") (set! i (- i 1)))
-                (when (and (not include-lesson) (not teacher-version) paginate)
-                  (set! pagenum-list
-                    (cons (list (list lessondir workbook-page) pagenum) pagenum-list)))
-                (cond [fresh-lesson
-                        (set! curr-lesson lessondir)
-                        (fprintf o "\n\\includepdf[pagecommand={\\lfoot{}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
-                                 pagenum handle)
-                        (when include-lesson
-                          (let ([lesson-plan-pdf (format "lessons/~a/index.pdf" curr-lesson)])
-                            (when (file-exists? lesson-plan-pdf)
-                              (fprintf o "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{~a}\n"
-                                       lesson-plan-pdf))))]
-                      [else
-                        (fprintf o "\\includepdf[pagecommand={\\lfoot{~a}\\cfoot{~a}\\rfoot{}}]{~a.pdf}\n"
-                                 "" ;title 
-                                 pagenum handle)])
-                (loop (+ i 1) (cdr pdf-page-specs)))))
-          (unless (or include-lesson teacher-version)
-            ;(printf "*** creating workbook-pagenum-index.rkt.kp\n")
-            (call-with-output-file "workbook-pagenum-index.rkt.kp"
-              (lambda (o)
-                (display "(" o) (newline o)
-                (for-each
-                  (lambda (x)
-                    (write x o) (newline o)
-                    )
-                  (reverse pagenum-list))
-                (display ")" o) (newline o)
-                )
-              #:exists 'replace))
-          )
-        (fprintf o "\n\\end{document}\n")
-        )
-      #:exists 'replace))
+  ;  (printf "pdftk done\n")
 
   (when do-it?
-    (system (format "cp -p workbook-numbered.tex ~a.tex" dest))
+    (let ([tex-jobname.tex (format "~a.tex" tgt)]
+          [tex-jobname.pdf (format "~a.pdf" tgt)])
 
-    (when (file-exists? "workbook-numbered.pdf") (delete-file "workbook-numbered.pdf"))
+      (when (file-exists? tex-jobname.pdf) (delete-file tex-jobname.pdf))
 
-    (when *pdflatex* (system* *pdflatex* "workbook-numbered"))
+      (when *pdflatex*
+        (when (file-exists? tex-jobname.tex)
+          (system* *pdflatex* tex-jobname.tex)))
 
-    (unless *debug*
-      ;(printf "cleaning up handle pdfs\n")
-      (for ([pdf-page-spec *pdf-page-specs*])
-        (let ([handle (list-ref pdf-page-spec 3)])
-          (delete-file (format "~a.pdf" handle)))))
+      (when (file-exists? tex-jobname.pdf)
+        (system (format "mv ~a ~a" tex-jobname.pdf dest.pdf)))
+      )
 
-    (when (file-exists? "workbook-numbered.pdf")
-      (system (format "mv workbook-numbered.pdf ~a" dest.pdf)))
     )
-
 
   )
 
-(printf "building workbooks\n")
+;(printf "building workbook\n")
 
-(make-workbook "workbook/workbook")
-
-(make-workbook "resources/protected/pd-workbook" #:include-lesson #t)
-
-(make-workbook "resources/protected/workbook-sols" #:teacher-version #t)
+(let ([arg (vector-ref (current-command-line-arguments) 0)])
+  (cond [(string=? arg "workbook")
+         (make-workbook arg)]
+        [(string=? arg "pd-workbook")
+         (make-workbook arg)]
+        [(string=? arg "workbook-sols")
+         (make-workbook arg #:teacher-version #t)]
+        [else (error 'ERROR "make-workbook.rkt: bad argument ~a" arg)]))
 
 (void)
