@@ -22,7 +22,7 @@
 * "Function Purpose cards" which describe simple boolean functions to apply to students
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-* All students should log into @link{https://code.pyret.org, CPO} and open the @link{https://pyret-horizon.herokuapp.com/editor#share=1KNye47iX_SCRXpMdRiCGdvOQuRFabFHn, Table Methods Starter File}
+* All students should log into @link{https://code.pyret.org, CPO} and open the @link{https://code.pyret.org/editor#share=1KNye47iX_SCRXpMdRiCGdvOQuRFabFHn, Table Methods Starter File}
 * One copy of @link{pages/function-cards.adoc, Function Cards} printed and cut.
 
 | Preparation
@@ -44,11 +44,11 @@
 Students get some practice reading function definitions, and in the process they build knowledge that's needed later on in the lesson.
 
 === Launch
-Let's see how much you remember about function definitions! Load the @link{https://pyret-horizon.herokuapp.com/editor#share=1KNye47iX_SCRXpMdRiCGdvOQuRFabFHn, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
+Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1KNye47iX_SCRXpMdRiCGdvOQuRFabFHn, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
 
 === Investigate
 [.lesson-instruction]
-* Students load the *shared file*, and click "Run". 
+* Students load the @link{https://code.pyret.org/editor#share=1KNye47iX_SCRXpMdRiCGdvOQuRFabFHn, Table Methods Starter File}, save a copy, and click "Run". 
 * Students complete @workbook-link{pages/reading-functions.adoc} in their student workbooks.
 
 === Synthesize
@@ -95,10 +95,10 @@ Suppose we want to get a table of only animals that have been fixed? Have studen
 
 [.lesson-instruction]
 * In the Interactions Area, type `animals-table.filter(is-fixed)`. What did you get?
+* What do you expect `animals-table` to produce, and why? Try it out. What happened?
 * In the Interactions Area, type `animals-table.filter(is-old)`. What did you get?
 * In the Interactions Area, type `animals-table.filter(is-dog)`. What did you get?
-* In the Interactions Area, type `animals-table`. What did you get? Why?
-* In the Interactions Area, type `animals-table.filter(name)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(get-name)`. What did you get?
 
 The `.filter` method walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. Notice that the Domain for `.filter` says that test must be a function (that’s the arrow), which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
 
@@ -125,6 +125,7 @@ The `.build-column` method walks through the table, applying whatever function i
 
 === Synthesize
 Debrief with students. Ask them if they think of a situation where they would want to use this. Some ideas:
+
 - A dataset about school might include columns for how many students are in the school and how many pass the state exam. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ passed the exam. We could use `.build-column` to compute that for every row in the table.
 - The animals shelter might want to print nametags for every animal. They could build a column using the `text` function to have every animal's name in big, purple letters.
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
