@@ -685,10 +685,11 @@ function buildlessonplans() {
       # needed?
       export LESSON=lessons/$L
       export LESSONPLAN=$L
-      buildlessonplan $L
+      buildlessonplan $L &
       export LESSONPLAN=
       export LESSON=
     done
+    wait
     export L=
   fi
   cd ..

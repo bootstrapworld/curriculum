@@ -1,6 +1,6 @@
 (
  "interpreting-spread.adoc"
- "matching-boxplots-to-histograms.adoc"
+ "identifying-shape.adoc"
  "shape-of-my-dataset.adoc"
  "whats-on-your-mind.adoc"
  )
