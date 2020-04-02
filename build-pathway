@@ -603,6 +603,10 @@ function buildlessonplan() {
   local L=$1
   #echo
   #echo building $PATHWAY "->" $L lesson plan
+
+  export LESSON=lessons/$L
+  export LESSONPLAN=$L
+
   cd $L
   local copacetic=1
   for f in *.adoc; do
@@ -657,6 +661,9 @@ function buildlessonplan() {
     fi
   fi
   cd ..
+
+  export LESSONPLAN=
+  export LESSON=
 }
 
 function buildlessons() {
@@ -683,14 +690,11 @@ function buildlessonplans() {
   else
     for L in $(cat lessons.txt); do
       # needed?
-      export LESSON=lessons/$L
-      export LESSONPLAN=$L
-      buildlessonplan $L
-      export LESSONPLAN=
-      export LESSON=
+      buildlessonplan $L &
     done
     export L=
   fi
+  wait
   cd ..
 }
 
@@ -768,6 +772,123 @@ function buildpathwaynarrative() {
   fi
 }
 
+function makeworkbooktex() {
+
+  local wtex=workbook
+  local pwtex=pd-workbook
+  local twtex=workbook-sols
+
+  local wbpnf=workbook-pagenum-index.rkt.kp
+
+  local tgt=
+  local i=
+
+  echo "(" > $wbpnf
+
+  local tmpf=$(basename $(mktemp))
+
+  echo "
+  \\documentclass{article}
+  \\usepackage{pdfpages}
+  \\usepackage{fancyhdr}
+  %
+  \\setlength\\topmargin{-0.375in}
+  \\setlength\\headheight{0in}
+  \\setlength\\headsep{0in}
+  \\setlength\\textheight{9.5in}
+  \\setlength\\textwidth{7.25in}
+  \\setlength\\oddsidemargin{-0.5in}
+  \\setlength\\evensidemargin{-0.5in}
+  %
+  \\pagestyle{fancy}
+  \\renewcommand{\\headrulewidth}{0pt}
+  \\lhead{}\\rhead{}
+  \\fancyhf{}
+  %
+  \\begin{document}
+  " > $tmpf
+
+  for tgt in $wtex $pwtex $twtex; do
+    cat $tmpf > $tgt.tex
+  done
+
+  echo \( > $wbpnf
+
+  local currlesson=
+  local i=1
+
+  cat workbook-page-index.rkt |
+    while read -r pdfpagespec; do
+      if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
+        continue
+      fi
+      lessondir=$(echo $pdfpagespec|sed -e 's/^("\([^"]*\).*/\1/')
+      workbookpage=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
+      handle=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      paginate=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+
+      if test "$paginate" != y -a "$paginate" != Y; then
+        paginate=
+      fi
+
+    #lessontitlefile=$lessondir/index-title.txt
+
+    #lessontitle=
+    #if test -f $lessontitlefile; then
+    #  lessontitle=$(cat $lessontitlefile)
+    #fi
+
+    pagenum=$i
+
+    freshlesson=
+    if test "$lessondir" != "$currlesson"; then
+      freshlesson=1
+    fi
+
+    #lessontitle=$(echo $lessontitle|sed -e 's/&/\\\\&/')
+
+    if test ! "$paginate"; then
+      pagenum=
+      #lessontitle=
+      i=$(expr $i - 1)
+    fi
+
+    if test "$paginate"; then
+      echo \(\(\"$lessondir\" \"$workbookpage\"\) $pagenum\) >> $wbpnf
+    fi
+
+    if test "$freshlesson"; then
+      currlesson=$lessondir
+      for tgt in $wtex $pwtex $twtex; do
+        echo >> $tgt.tex
+        echo "\\includepdf[pagecommand={\\lfoot{}\\cfoot{$pagenum}\\rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+      done
+      if echo $currlesson| grep -q "lessons/"; then
+        lessonplanpdf=$currlesson/index.pdf
+        echo "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
+      fi
+
+    else
+      for tgt in $wtex $pwtex $twtex; do
+        echo "\\includepdf[pagecommand={\\lfoot{}\\cfoot{$pagenum}\\rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+      done
+
+    fi
+
+    i=$(expr $i + 1)
+
+  done
+
+  rm $tmpf
+
+  for tgt in $wtex $pwtex $twtex; do
+    echo >> $tgt.tex
+    echo "\\end{document}" >> $tgt.tex
+  done
+
+  echo \) >> $wbpnf
+}
+
 function buildpathway() {
   cd $TOPDIR
 
@@ -842,7 +963,6 @@ function buildpathway() {
     buildlessons
     #echo
 
-
     for d in front-matter back-matter; do
       if test -d $d; then
         cd $d
@@ -911,10 +1031,14 @@ function buildpathway() {
     fi
     cd ..
 
-    $PROGDIR/make-workbook-tex.rkt
-    for tgt in workbook pd-workbook workbook-sols; do
-      $SED -i -e "s/==TARGET==/$tgt/" $tgt.tex
-    done
+    # Racket version
+    # $PROGDIR/make-workbook-tex.rkt
+    # for tgt in workbook pd-workbook workbook-sols; do
+    #   $SED -i -e "s/==TARGET==/$tgt/" $tgt.tex
+    # done
+
+    # Shell version
+    makeworkbooktex
 
     buildlessonplans
 
