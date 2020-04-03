@@ -15,7 +15,6 @@ HELP=
 LASTMOD=2020-04-02 # last modified
 PDFMARGIN=0mm
 SED=sed
-TMPHTML=tmp0.html
 VERSION=
 
 while test $# -ne 0; do
@@ -783,34 +782,33 @@ function makeworkbooktex() {
   local tgt=
   local i=
 
-  echo "(" > $wbpnf
+  local TMPFILE=$(basename $(mktemp))
 
-  local tmpf=$(basename $(mktemp))
-
-  echo "
-  \\documentclass{article}
-  \\usepackage{pdfpages}
-  \\usepackage{fancyhdr}
+  echo '
+  \documentclass{article}
+  \usepackage{pdfpages}
+  \usepackage{fancyhdr}
   %
-  \\setlength\\topmargin{-0.375in}
-  \\setlength\\headheight{0in}
-  \\setlength\\headsep{0in}
-  \\setlength\\textheight{9.5in}
-  \\setlength\\textwidth{7.25in}
-  \\setlength\\oddsidemargin{-0.5in}
-  \\setlength\\evensidemargin{-0.5in}
+  \setlength\topmargin{-0.375in}
+  \setlength\headheight{0in}
+  \setlength\headsep{0in}
+  \setlength\textheight{9.5in}
+  \setlength\textwidth{7.25in}
+  \setlength\oddsidemargin{-0.5in}
+  \setlength\evensidemargin{-0.5in}
   %
-  \\pagestyle{fancy}
-  \\renewcommand{\\headrulewidth}{0pt}
-  \\lhead{}\\rhead{}
-  \\fancyhf{}
+  \pagestyle{fancy}
+  \renewcommand{\headrulewidth}{0pt}
+  \lhead{}\rhead{}
+  \fancyhf{}
   %
-  \\begin{document}
-  " > $tmpf
+  \begin{document}
+  ' > $TMPFILE
 
   for tgt in $wtex $pwtex $twtex; do
-    cat $tmpf > $tgt.tex
+    cat $TMPFILE > $tgt.tex
   done
+  rm $TMPFILE
 
   echo \( > $wbpnf
 
@@ -822,10 +820,10 @@ function makeworkbooktex() {
       if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
         continue
       fi
-      lessondir=$(echo $pdfpagespec|sed -e 's/^("\([^"]*\).*/\1/')
-      workbookpage=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-      handle=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      paginate=$(echo $pdfpagespec|sed -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+      lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
+      workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
+      handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
 
       if test "$paginate" != y -a "$paginate" != Y; then
         paginate=
@@ -845,7 +843,7 @@ function makeworkbooktex() {
       freshlesson=1
     fi
 
-    #lessontitle=$(echo $lessontitle|sed -e 's/&/\\\\&/')
+    #lessontitle=$(echo $lessontitle|$SED -e 's/&/\\\\&/')
 
     if test ! "$paginate"; then
       pagenum=
@@ -861,16 +859,16 @@ function makeworkbooktex() {
       currlesson=$lessondir
       for tgt in $wtex $pwtex $twtex; do
         echo >> $tgt.tex
-        echo "\\includepdf[pagecommand={\\lfoot{}\\cfoot{$pagenum}\\rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+        echo '\includepdf[pagecommand={\lfoot{}\cfoot{'$pagenum'}\rfoot{}}]{'$tgt'-'$handle'.pdf}' >> $tgt.tex
       done
-      if echo $currlesson| grep -q "lessons/"; then
+      if echo $currlesson| grep -q 'lessons/'; then
         lessonplanpdf=$currlesson/index.pdf
-        echo "\\includepdf[pages=-,pagecommand={\\lfoot{}\\rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
+        echo '\includepdf[pages=-,pagecommand={\lfoot{}\rfoot{}}]{'$lessonplanpdf'}' >> $pwtex.tex
       fi
 
     else
       for tgt in $wtex $pwtex $twtex; do
-        echo "\\includepdf[pagecommand={\\lfoot{}\\cfoot{$pagenum}\\rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+        echo '\includepdf[pagecommand={\lfoot{}\cfoot{'$pagenum'}\rfoot{}}]{'$tgt'-'$handle'.pdf}' >> $tgt.tex
       done
 
     fi
@@ -879,11 +877,9 @@ function makeworkbooktex() {
 
   done
 
-  rm $tmpf
-
   for tgt in $wtex $pwtex $twtex; do
     echo >> $tgt.tex
-    echo "\\end{document}" >> $tgt.tex
+    echo '\end{document}' >> $tgt.tex
   done
 
   echo \) >> $wbpnf
