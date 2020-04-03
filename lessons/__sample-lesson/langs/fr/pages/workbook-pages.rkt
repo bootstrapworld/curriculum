@@ -1,6 +1,6 @@
-(
+
  "pageA1.adoc"
- ("pageA2.adoc" "portrait")
+ "pageA2.adoc" "portrait"
  "pageA3.adoc"
- ("pageA4.adoc" "landscape")
- )
+ "pageA4.adoc" "landscape"
+ 

@@ -1,5 +1,5 @@
-(
+
 "CoordinatesEstimationCoverPage.pdf"
-("Estimation.pdf" "landscape")
+"Estimation.pdf" "landscape"
 "BrainstormGame1.pdf"
-)
+

@@ -1,4 +1,4 @@
-(
+
  "target-leap.adoc"
  "offscreen.adoc"
  "calc-pencils.adoc"
@@ -12,4 +12,4 @@
  "scale-image.adoc"
  "state-tax.adoc"
  "late-to-class-p.adoc"
- )
+ 

@@ -1,7 +1,7 @@
-(
+
  "reading-histograms.adoc"
  "identifying-shape.adoc"
  "shape-of-animals-dataset.adoc"
  "shape-of-my-dataset.adoc"
  "whats-on-your-mind.adoc"
- )
+ 

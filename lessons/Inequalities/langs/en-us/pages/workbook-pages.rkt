@@ -1,4 +1,4 @@
-(
+
 "Inequalities1CoverPage.pdf"
 "Inequalities-WB1.pdf"
 "Inequalities-WB2.pdf"
@@ -6,4 +6,4 @@
 "Inequalities-EX2.adoc"
 "Inequalities-WB3.pdf"
 "Inequalities-EX3.adoc"
-)
+

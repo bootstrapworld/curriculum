@@ -35,7 +35,16 @@
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.rkt" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
-                  (call-with-input-file workbook-pages-file read)]
+                  (call-with-input-file workbook-pages-file
+                    (lambda (i)
+                      (let loop ([pages '()])
+                        (let ([x (read-line i)])
+                          (if (eof-object? x) (reverse pages)
+                              (loop (if (regexp-match #rx"^ *;" x)
+                                        pages
+                                        (let ([xx (string-split x)])
+                                          (if (null? xx) pages
+                                              (cons xx pages))))))))))]
                  [else
                    (printf "WARNING: missing ~a\n" workbook-pages-file)
                    '()])])
@@ -44,14 +53,13 @@
         (call-with-output-file workbook-pages-ls-file
           (lambda (o2)
             (for ([page workbook-pages])
-              (let ([file page]
-                    [aspect "portrait"])
-                (when (pair? page)
-                  (let ([len (length page)])
-                    (set! file (car page))
-                    (set! aspect (cadr page))
-                    (when (>= len 3)
-                      (set! paginate (caddr page)))))
+              (let ([file (string-trim (list-ref page 0) "\"")]
+                    [aspect "portrait"]
+                    [n (length page)])
+                (when (>= n 2)
+                  (set! aspect (string-trim (list-ref page 1) "\"")))
+                (when (>= n 3)
+                  (set! paginate (string-trim (list-ref page 2) "\"")))
                 (fprintf o2 "~a\n" file)
                 (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate))))
           #:exists 'replace)))))

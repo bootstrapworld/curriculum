@@ -1,5 +1,5 @@
-(
+
  "front-cover.pdf"
  "attributes.adoc"
  "BSABigIdeas.pdf"
- )
+ 
