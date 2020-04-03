@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-02 # last modified
+LASTMOD=2020-04-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -784,26 +784,28 @@ function makeworkbooktex() {
 
   local TMPFILE=$(basename $(mktemp))
 
-  echo '
-  \documentclass{article}
-  \usepackage{pdfpages}
-  \usepackage{fancyhdr}
+  local BS=\\
+
+  echo "
+  ${BS}documentclass{article}
+  ${BS}usepackage{pdfpages}
+  ${BS}usepackage{fancyhdr}
   %
-  \setlength\topmargin{-0.375in}
-  \setlength\headheight{0in}
-  \setlength\headsep{0in}
-  \setlength\textheight{9.5in}
-  \setlength\textwidth{7.25in}
-  \setlength\oddsidemargin{-0.5in}
-  \setlength\evensidemargin{-0.5in}
+  ${BS}setlength${BS}topmargin{-0.375in}
+  ${BS}setlength${BS}headheight{0in}
+  ${BS}setlength${BS}headsep{0in}
+  ${BS}setlength${BS}textheight{9.5in}
+  ${BS}setlength${BS}textwidth{7.25in}
+  ${BS}setlength${BS}oddsidemargin{-0.5in}
+  ${BS}setlength${BS}evensidemargin{-0.5in}
   %
-  \pagestyle{fancy}
-  \renewcommand{\headrulewidth}{0pt}
-  \lhead{}\rhead{}
-  \fancyhf{}
+  ${BS}pagestyle{fancy}
+  ${BS}renewcommand{${BS}headrulewidth}{0pt}
+  ${BS}lhead{}${BS}rhead{}
+  ${BS}fancyhf{}
   %
-  \begin{document}
-  ' > $TMPFILE
+  ${BS}begin{document}
+  " > $TMPFILE
 
   for tgt in $wtex $pwtex $twtex; do
     cat $TMPFILE > $tgt.tex
@@ -859,16 +861,16 @@ function makeworkbooktex() {
       currlesson=$lessondir
       for tgt in $wtex $pwtex $twtex; do
         echo >> $tgt.tex
-        echo '\includepdf[pagecommand={\lfoot{}\cfoot{'$pagenum'}\rfoot{}}]{'$tgt'-'$handle'.pdf}' >> $tgt.tex
+        echo "${BS}includepdf[pagecommand={${BS}lfoot{}${BS}cfoot{$pagenum}${BS}rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
       done
       if echo $currlesson| grep -q 'lessons/'; then
         lessonplanpdf=$currlesson/index.pdf
-        echo '\includepdf[pages=-,pagecommand={\lfoot{}\rfoot{}}]{'$lessonplanpdf'}' >> $pwtex.tex
+        echo "${BS}includepdf[pages=-,pagecommand={${BS}lfoot{}${BS}rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
       fi
 
     else
       for tgt in $wtex $pwtex $twtex; do
-        echo '\includepdf[pagecommand={\lfoot{}\cfoot{'$pagenum'}\rfoot{}}]{'$tgt'-'$handle'.pdf}' >> $tgt.tex
+        echo "${BS}includepdf[pagecommand={${BS}lfoot{}${BS}cfoot{$pagenum}${BS}rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
       done
 
     fi
