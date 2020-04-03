@@ -787,24 +787,24 @@ function makeworkbooktex() {
   local BS=\\
 
   echo "
-  ${BS}documentclass{article}
-  ${BS}usepackage{pdfpages}
-  ${BS}usepackage{fancyhdr}
+  %BS%documentclass{article}
+  %BS%usepackage{pdfpages}
+  %BS%usepackage{fancyhdr}
   %
-  ${BS}setlength${BS}topmargin{-0.375in}
-  ${BS}setlength${BS}headheight{0in}
-  ${BS}setlength${BS}headsep{0in}
-  ${BS}setlength${BS}textheight{9.5in}
-  ${BS}setlength${BS}textwidth{7.25in}
-  ${BS}setlength${BS}oddsidemargin{-0.5in}
-  ${BS}setlength${BS}evensidemargin{-0.5in}
+  %BS%setlength%BS%topmargin{-0.375in}
+  %BS%setlength%BS%headheight{0in}
+  %BS%setlength%BS%headsep{0in}
+  %BS%setlength%BS%textheight{9.5in}
+  %BS%setlength%BS%textwidth{7.25in}
+  %BS%setlength%BS%oddsidemargin{-0.5in}
+  %BS%setlength%BS%evensidemargin{-0.5in}
   %
-  ${BS}pagestyle{fancy}
-  ${BS}renewcommand{${BS}headrulewidth}{0pt}
-  ${BS}lhead{}${BS}rhead{}
-  ${BS}fancyhf{}
+  %BS%pagestyle{fancy}
+  %BS%renewcommand{%BS%headrulewidth}{0pt}
+  %BS%lhead{}%BS%rhead{}
+  %BS%fancyhf{}
   %
-  ${BS}begin{document}
+  %BS%begin{document}
   " > $TMPFILE
 
   for tgt in $wtex $pwtex $twtex; do
@@ -861,16 +861,16 @@ function makeworkbooktex() {
       currlesson=$lessondir
       for tgt in $wtex $pwtex $twtex; do
         echo >> $tgt.tex
-        echo "${BS}includepdf[pagecommand={${BS}lfoot{}${BS}cfoot{$pagenum}${BS}rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
       done
       if echo $currlesson| grep -q 'lessons/'; then
         lessonplanpdf=$currlesson/index.pdf
-        echo "${BS}includepdf[pages=-,pagecommand={${BS}lfoot{}${BS}rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
+        echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
       fi
 
     else
       for tgt in $wtex $pwtex $twtex; do
-        echo "${BS}includepdf[pagecommand={${BS}lfoot{}${BS}cfoot{$pagenum}${BS}rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
       done
 
     fi
@@ -881,7 +881,8 @@ function makeworkbooktex() {
 
   for tgt in $wtex $pwtex $twtex; do
     echo >> $tgt.tex
-    echo '\end{document}' >> $tgt.tex
+    echo '%BS%end{document}' >> $tgt.tex
+    $SED -i -e 's/%BS%/\\/g' $tgt.tex
   done
 
   echo \) >> $wbpnf
