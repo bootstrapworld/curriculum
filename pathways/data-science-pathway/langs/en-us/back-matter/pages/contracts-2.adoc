@@ -8,8 +8,13 @@ that the name of the function is `.filter` and that it is a
 consumes `Rows` and produces `Booleans`), and that the method
 evaluates to a `Table`.
 
+++++
+<style>
+td {padding: .4em .625em !important;}
+</style>
+++++
 
-[cols="3,1,6,1,2", options="header", grid="rows"]
+[cols="3,1,10,1,2", options="header", grid="rows"]
 |===
 
 |Name||Domain||Range
@@ -98,6 +103,12 @@ evaluates to a `Table`.
 | `->`
 | `Image`
 
+| `modified-box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+
 | `histogram`
 | `{two-colons}`
 | `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
@@ -109,6 +120,13 @@ evaluates to a `Table`.
 | `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
 | `->`
 | `Image`
+
+| `image-scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `->`
+| `Image`
+
 
 | `lr-plot`
 | `{two-colons}`

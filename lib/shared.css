@@ -199,6 +199,24 @@ span.clear {
   width: 100%;
 }
 
+/****************************************************************
+* Two Column Layout that spans page width, using DT and DD tags
+* Every other row is shaded for readability
+***************************************************************/
+.TwoColumnDD_DT dl {width: 100%; clear: both; overflow: hidden;}
+.TwoColumnDD_DT dl > * {padding: 0; margin: 0; float: left; width: 50%; clear: left; line-height:27px;}
+.TwoColumnDD_DT dd {float: right; text-align: right; clear: none;}
+.TwoColumnDD_DT dd * {display: inline; }
+.TwoColumnDD_DT dd::before {content: '['; }
+.TwoColumnDD_DT dd::after  {content: ']'; }
+.TwoColumnDD_DT dd a:first-child::after {
+  content: '  |';
+  white-space: pre-wrap;
+  display: inline-block;
+ }
+ .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
+
+
 /* Design Recipe styling */
 .designRecipeLayout {
   font-size: 14pt;
