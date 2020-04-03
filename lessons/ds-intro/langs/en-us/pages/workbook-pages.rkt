@@ -1,7 +1,0 @@
-
-"notes.adoc"
-"animals-dataset.pdf"
-"categorical-or-quantitative.adoc"
-"animals-dataset-2.adoc"
-"whats-on-your-mind.adoc"
-

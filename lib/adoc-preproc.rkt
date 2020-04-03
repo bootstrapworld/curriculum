@@ -94,7 +94,7 @@
                       [in-escape? #f])
              (let ([c (read-char i)])
                (cond [(eof-object? c)
-                         (ferror ' read-group "Runaway directive ~a" directive)]
+                         (error 'ERROR "read-group: Runaway directive ~a" directive)]
                      [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                      [(char=? c #\\)
                       (loop (cons c r) #f nesting in-string? #t)]
@@ -138,7 +138,7 @@
             (if (>= j n) (loop j (cons (substring g i j) r))
                 (let ([c (string-ref g j)])
                   (cond [(eof-object? c)
-                         (ferror ' read-commaed-group "Runaway directive ~a" directive)]
+                         (error 'ERROR "read-commaed-group: Runaway directive ~a" directive)]
                         [in-escape?
                           (loop2 (+ j 1) in-string? #f)]
                         [(char=? c #\\)
@@ -511,7 +511,7 @@
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway~n")
   ;
-  (let ([lessons (call-with-input-file "lesson-order.rkt" read)])
+  (let ([lessons (read-data-file "lesson-order.txt")])
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
@@ -720,8 +720,8 @@
                                                                      (cadr page-compts)
                                                                      link-text) o)]
                                        [else
-                                         (ferror ' adoc-preproc.rkt
-                                                 "Incorrect @workbook-link ~a\n" page)]))]
+                                         (error 'ERROR
+                                                 "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
@@ -731,16 +731,16 @@
                                                                      second-compt
                                                                      third-compt link-text) o)]
                                        [else
-                                         (ferror ' adoc-preproc.rkt
-                                                 "Incorrect @workbook-link ~a\n" page)]))]
+                                         (error 'ERROR
+                                                 "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
                               [else
-                                (ferror ' adoc-preproc.rkt
-                                        "Incorrect @workbook-link ~a\n" page)]))]
+                                (error 'ERROR
+                                        "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
                          [(or (string=? directive "worksheet-link")
                               (string=? directive "worksheet-include")
                               (string=? directive "exercise-link"))
-                          (ferror ' adoc-preproc.rkt
-                                  "Obsolete directive ~a\n" directive)]
+                          (error 'ERROR
+                                  "adoc-preproc: Obsolete directive ~a\n" directive)]
                          [(string=? directive "link")
                           (let* ([args (read-commaed-group i directive)]
                                  [adocf (car args)]
@@ -754,16 +754,18 @@
                             (display (make-link adocf "" #:include? #t) o))]
                          [(string=? directive "lesson-description")
                           (unless (truthy-getenv "LESSONPLAN") ;TODO: or LESSON or both?
-                            (ferror 'adoc-preproc.rkt "@lesson-description valid only in lesson plan"))
+                            (error 'ERROR
+                                   "adoc-preproc: @lesson-description valid only in lesson plan"))
                           (display-lesson-description (read-group i directive) o)]
                          [(string=? directive "depends-on") ;XXX obsolete
                           (unless (truthy-getenv "LESSONPLAN")
-                            (ferror 'adoc-preproc.rkt "@depends-on valid only in lesson plan"))
+                            (error 'ERROR "adoc-preproc: @depends-on valid only in lesson plan"))
                           (display-lesson-dependencies (read-commaed-group i directive) o)]
                          [(string=? directive "solutions-workbook")
                           ;TODO: don't need this anymore -- link is autogen'd
                           (unless (truthy-getenv "TEACHER_RESOURCES")
-                            (ferror 'adoc-preproc.rkt "@solutions-workbook valid only in teacher resources directory~n"))
+                            (error 'ERROR
+                                   "adoc-preproc: @solutions-workbook valid only in teacher resources directory~n"))
                           (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
                           (newline o)
                           (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
@@ -874,7 +876,7 @@
                                 (cond [(= (top-span-stack) 0)
                                        (display-end-span o)]
                                       [else (display c o)])]
-                               [else (ferror ' preproc-n-asciidoctor "deadc0de")])]
+                               [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])]
                         [else (display c o)])])
               (loop))))))
     ;
@@ -1143,7 +1145,7 @@
                                           (sexp->arith e1 #:pyret pyret)) (cdr e))
                                    ", "))
                          ))]
-        [else (ferror 'sexp->arith "unknown s-exp ~s" e)]))
+        [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
@@ -1218,7 +1220,7 @@
                                (enclose-span ".lParen" "(")
                                parts
                                (enclose-span ".rParen" ")"))))))]
-        [else (ferror 'sexp->block "unknown s-exp")]))
+        [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
   (when (string? exp)
@@ -1335,7 +1337,7 @@
 
 (define (open-response-exercise colA answer-type)
   (unless (member answer-type '("circeval" "code" "math" "text"))
-    (ferror 'open-response-exercise "Unexpected answer type ~a\n" answer-type))
+    (error 'ERROR "open-response-exercise: Unexpected answer type ~a\n" answer-type))
   (two-col-layout colA '()
                   #:rightcolextratag (string-append ".studentAnswer" "." answer-type)))
 
@@ -1370,7 +1372,7 @@
                                      #:compare-with compare-with)]
                        [label #f])
                    (when (and (< i 0) (not some-no-match?))
-                     (ferror 'matching-exercise-answers "Couldn't find ~a in ~a\n"
+                     (error 'ERROR "matching-exercise-answers: Couldn't find ~a in ~a\n"
                             ansC presented-ans))
                    (enclose-div ".labeledRightColumn"
                      (if (>= i 0)
@@ -1399,7 +1401,7 @@
 
 (define (main . cl-args)
   (unless (= (length cl-args) 1)
-    (ferror 'adoc-preproc.rkt "Exactly one arg accepted"))
+    (error 'ERROR "adoc-preproc: Exactly one arg accepted"))
   (preproc-n-asciidoctor (car cl-args)))
 
 ;(void)

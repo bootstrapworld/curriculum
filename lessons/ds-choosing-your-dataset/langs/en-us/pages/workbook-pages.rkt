@@ -1,8 +1,0 @@
-
- "notes.adoc"
- "my-dataset.adoc"
- "samples-from-my-dataset.adoc"
- "design-recipe-helper-funs.adoc"
- "design-recipe-helper-funs-2.adoc"
- "whats-on-your-mind.adoc"
- 

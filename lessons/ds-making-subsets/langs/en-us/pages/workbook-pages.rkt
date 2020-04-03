@@ -1,6 +1,0 @@
-
- "notes.adoc"
- "samples-from-animals-dataset.adoc"
- "data-displays2.adoc"
- "whats-on-your-mind.adoc"
- 

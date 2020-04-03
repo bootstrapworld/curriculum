@@ -10,7 +10,7 @@
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (unless (member *proglang* '("pyret" "wescheme"))
-  (ferror 'function-directives.rkt "Unknown proglang ~a" *proglang*))
+  (error 'ERROR "function-directives: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
 
@@ -584,7 +584,7 @@
   ;uncomment in orig;
   ;comment, debug
   (when (and (cons? example-list) (cons? buggy-example-list))
-    (ferror 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
+    (error 'ERROR "design-recipe-exercise: At most one of example-list and buggy-example-list should be provided"))
 
   (when (string=? funname "")
     (set! funname " ")
@@ -625,9 +625,9 @@
           #:body (body #f) ; a string
           #:grid-lines? (grid-lines? #f)
           )
-  (unless range (ferror 'assess-design-recipe "range required"))
-  (unless purpose (ferror 'assess-design-recipe "purpose required"))
-  (unless body (ferror 'assess-design-recipe "body required"))
+  (unless range (error 'ERROR "assess-design-recipe: range required"))
+  (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
+  (unless body (error 'ERROR "assess-design-recipe: body required"))
   (let ([use-examples (if (cons? buggy-example-list) buggy-example-list example-list)])
     (design-recipe-exercise funname directions
                             #:page-header "Check for Mistakes in this Word Problem"

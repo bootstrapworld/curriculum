@@ -2,6 +2,8 @@
 
 #lang racket
 
+(require "utils.rkt")
+
 (define *handle-prefix* "")
 (define *handle-counter* 0)
 
@@ -20,8 +22,7 @@
 
 ;
 
-(define *lesson-order*
-  (call-with-input-file "lesson-order.rkt" read))
+(define *lesson-order* (read-data-file "lesson-order.txt"))
 
 (define *language* (getenv "LANGUAGE"))
 
@@ -32,19 +33,10 @@
   #:exists 'replace)
 
 (define (write-pages-info lesson-dir o #:paginate [paginate "yes"])
-  (let* ([workbook-pages-file (format "~a/pages/workbook-pages.rkt" lesson-dir)]
+  (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
-                  (call-with-input-file workbook-pages-file
-                    (lambda (i)
-                      (let loop ([pages '()])
-                        (let ([x (read-line i)])
-                          (if (eof-object? x) (reverse pages)
-                              (loop (if (regexp-match #rx"^ *;" x)
-                                        pages
-                                        (let ([xx (string-split x)])
-                                          (if (null? xx) pages
-                                              (cons xx pages))))))))))]
+                  (read-data-file workbook-pages-file #:lists #t)]
                  [else
                    (printf "WARNING: missing ~a\n" workbook-pages-file)
                    '()])])
@@ -53,13 +45,13 @@
         (call-with-output-file workbook-pages-ls-file
           (lambda (o2)
             (for ([page workbook-pages])
-              (let ([file (string-trim (list-ref page 0) "\"")]
+              (let ([file (list-ref page 0)]
                     [aspect "portrait"]
                     [n (length page)])
                 (when (>= n 2)
-                  (set! aspect (string-trim (list-ref page 1) "\"")))
+                  (set! aspect (list-ref page 1)))
                 (when (>= n 3)
-                  (set! paginate (string-trim (list-ref page 2) "\"")))
+                  (set! paginate (list-ref page 2)))
                 (fprintf o2 "~a\n" file)
                 (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate))))
           #:exists 'replace)))))

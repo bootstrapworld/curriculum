@@ -1,5 +1,0 @@
-
- "double-radius.adoc"
- "double-width.adoc"
- "next-position.adoc"
- 

@@ -1,3 +1,0 @@
-(
- "__sample-lesson"
- )

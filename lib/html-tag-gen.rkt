@@ -83,7 +83,7 @@
 (define (decrement-top-span-stack)
   (let ([n (car *span-stack*)])
     (when (<= n 0)
-      (ferror 'span "Bad @span: Check missing braces"))
+      (error 'ERROR "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
 (define (display-begin-span span-args o)

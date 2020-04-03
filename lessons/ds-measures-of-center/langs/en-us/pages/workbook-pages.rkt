@@ -1,4 +1,0 @@
-
- "notes.adoc"
- "summarizing-columns-in-animals.adoc"
- 

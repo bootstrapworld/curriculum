@@ -1,4 +1,0 @@
-
- "front-cover.pdf"
- "attributes.adoc"
- 

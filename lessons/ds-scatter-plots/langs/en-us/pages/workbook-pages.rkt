@@ -1,6 +1,0 @@
-
- "notes.adoc"
- "disproving-claim.adoc"
- "creating-scatterplot.adoc"
- 
- 
