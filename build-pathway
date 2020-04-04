@@ -1076,6 +1076,11 @@ function buildpathway() {
           fi
         done
         wait
+        if test ! $DEBUG; then
+          for wbf in workbook pd-workbook; do
+            rm -f $wbf-*.pdf
+          done
+        fi
       fi
     fi
 
