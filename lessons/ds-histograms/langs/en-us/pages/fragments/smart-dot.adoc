@@ -3,19 +3,20 @@
 #:assess-design-recipe #t
 #:headless? #t
 #:show-funname-contract? #t
-#:domain-list (list "Row")
+#:domain-list '("(r {two-colons} Row)")
 #:show-domains? #f
 #:range "Image"
 #:show-range? #t
 #:purpose "Consumes an animal, and computes a solid red circle using the weight as the radius"
 #:show-purpose? #t
 #:num-examples 2
-#:example-list '(("animalA" "") ("" ""))
+#:example-list '(("animalA" "circle(animalA[\"pounds\"], \"solid\", \"red\")") 
+				 ("animalB" "circle(animalB[\"pounds\"], \"solid\", \"red\")"))
 #:show-examples '((#t #t #f) (#f #f #f))
-#:param-list '()
+#:param-list (list "r")
 #:show-funname-defn? #f
 #:show-params? #f
-#:body ""
+#:body "circle(r[\"pounds\"], \"solid\", \"red\")"
 #:show-body? #f
 #:grid-lines? #t
 }

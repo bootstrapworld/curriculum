@@ -3,19 +3,20 @@
 #:assess-design-recipe #t
 #:headless? #t
 #:show-funname-contract? #f
-#:domain-list '()
+#:domain-list '("(r {two-colons} Row)")
 #:show-domains? #f
-#:range ""
+#:range "Boolean"
 #:show-range? #f
-#:purpose ""
+#:purpose "Consumes an animal, and computes whether it's age is > 12"
 #:show-purpose? #f
 #:num-examples 2
-#:example-list '(("" "") ("" ""))
+#:example-list '(("animalA" "animalA[\"age\"] > 12")
+				 ("animalB" "animalB[\"age\"] > 12"))
 #:show-examples #f
-#:param-list '()
+#:param-list (list "r")
 #:show-funname-defn? #f
 #:show-params? #f
-#:body ""
+#:body "r[\"age\"] > 12"
 #:show-body? #f
 #:grid-lines? #t
 }

@@ -3,19 +3,20 @@
 #:assess-design-recipe #t
 #:headless? #t
 #:show-funname-contract? #f
-#:domain-list (list "Row")
+#:domain-list '("(r {two-colons} Row)")
 #:show-domains? #t
-#:range ""
+#:range "Number"
 #:show-range? #f
-#:purpose ""
+#:purpose "Consumes an animal, and computes the animal's weight in kilos"
 #:show-purpose? #f
 #:num-examples 2
-#:example-list '(("" "") ("" ""))
+#:example-list '(("animalA" "animalA[\"pounds\"] / 2.2") 
+				 ("animalB" "animalB[\"pounds\"] / 2.2"))
 #:show-examples #f
-#:param-list '()
+#:param-list (list "r")
 #:show-funname-defn? #f
 #:show-params? #f
-#:body ""
+#:body "r[\"pounds\"] / 2.2"
 #:show-body? #f
 #:grid-lines? #t
 }
