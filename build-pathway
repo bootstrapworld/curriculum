@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-03 # last modified
+LASTMOD=2020-04-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -784,8 +784,6 @@ function makeworkbooktex() {
 
   local TMPFILE=$(basename $(mktemp))
 
-  local BS=\\
-
   echo "
   %BS%documentclass{article}
   %BS%usepackage{pdfpages}
@@ -970,6 +968,17 @@ function buildpathway() {
         adjustproglangsubdirs $d
       fi
     done
+
+    cd resources
+    for d in *; do
+      if test -d $d; then
+        cd $d
+        mkdirsolutionversionof pages
+        cd ..
+        adjustproglangsubdirs $d
+      fi
+    done
+    cd ..
 
     export PATHWAYROOTDIR=
 
