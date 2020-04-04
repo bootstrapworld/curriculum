@@ -2,5 +2,26 @@
 
 // use double-space before the *bold* text to address a text-kerning bug in wkhtmltopdf 0.12.5 (with patched qt)
 
+Data scientists use data visualizations to gain better insights into their data, and to communicate their findings with others. Making a display requires answering three questions:
 
-In Pyret, we can *define values* by giving them names that we can refer to later on. For example, we might say `name = "Maya"` or `sticker = star(20, "solid", "yellow")`, so that we can use `name` and `sticker` in our code.
+. *What data* is being displayed? This could be "a random sample of 2000 people", "every animal in the shelter", or "students ages 14-17".
+
+. *What variables* are being explored? Are we looking at the `species` column? The number of `kilograms` that an animal weighs? Searching for a relationship between a person's `income` and their `height`?
+
+. *What display* is being used to visualize this data? Is it a pie chart? Scatterplot?
+
+When *looking up a data Row* from a Table, programmers use the `row-n` method. This method takes a single number as its input, which tells the computer which Row we want. _Note: Rows are numbered starting at zero!_
+
+For example:
+```
+animals-table.row-n(0) # access the 1st data row
+animals-table.row-n(16) # access the 17th data row
+``` 
+
+When *looking up a column* from a Row, programmers use square brackets and the name of the column they want.
+
+For example:
+```
+animals-table.row-n(0)["age"] # look up the age of the animal in the 1st data row
+animals-table.row-n(16)["species"] # look up the species of the animal in the 17th data row
+```
