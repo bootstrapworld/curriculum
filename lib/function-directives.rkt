@@ -100,7 +100,7 @@
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          (if *pyret?* "" "&#59; ")
+          (if *pyret?* "# " "&#59; ")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if *pyret?* "::" ":")
           (encoded-ans ".recipe_domain"
