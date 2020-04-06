@@ -15,6 +15,8 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
+(define *solutions-mode?* (truthy-getenv "SOLUTION"))
+
 (define *link-lint?* (truthy-getenv "LINT"))
 
 (define *internal-links-port* #f)
