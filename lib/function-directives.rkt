@@ -559,8 +559,7 @@
 
   ;FIXME: set show's whenever assess-design-recipe OR solutions-mode?
 
-  (when (or (and (not *solutions-mode?*) assess-design-recipe)
-            (and *solutions-mode?* (not assess-design-recipe)))
+  (when (or *solutions-mode?* assess-design-recipe)
     (set! *show-funname-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
