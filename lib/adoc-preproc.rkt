@@ -391,7 +391,7 @@
          [text-wo-url (clean-up-url-in-image-text text)]
          [adoc-img
            (cond [lesson
-                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" lesson img
+                   (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
                            text-wo-url commaed-opts)]
                  [lesson-subdir
                    (format "image:{pathwayrootdir}~a/~a/~a[~s, ~a]" (getenv "LESSON") lesson-subdir
