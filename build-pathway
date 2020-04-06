@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-04 # last modified
+LASTMOD=2020-04-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -443,7 +443,9 @@ function processadoc() {
     fhtml=${f%.adoc}.html
     fasc=${f%.adoc}.asc
     DOIT=
-    if test $OTHERDIR; then
+    if test $FORCE; then
+      DOIT=1;
+    elif test $OTHERDIR; then
       if test $f -nt $fasc; then DOIT=1; fi
     else
       if test $f -nt $fhtml; then DOIT=1; fi
@@ -673,7 +675,9 @@ function buildlessons() {
   else
     for L in $(cat lessons.txt); do
       export LESSON=lessons/$L
+      export PATHWAYROOTDIR=../../
       buildworkbookpages $L
+      export PATHWAYROOTDIR=./
       export LESSON=
     done
     export L=
@@ -891,7 +895,6 @@ function buildpathway() {
 
   PATHWAY=$SRCPATHWAY
 
-  export PATHWAYROOTDIR=./
   export LESSONSUBDIR=
   export SOLUTION=
   export BROKEN_WORKBOOK_PAGES=
@@ -933,6 +936,8 @@ function buildpathway() {
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
 
     cd distribution/$PATHWAY/$LANGUAGE
+
+    export PATHWAYROOTDIR=./
 
     # XXX probably not needed?
     if test -f lessons-and-standards.rkt; then
