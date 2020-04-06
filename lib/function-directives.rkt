@@ -216,27 +216,18 @@
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
-        (write-clear)
         (encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-
-        (cond [(or (> (+ (string-length funname)
-                         (string-length args)) *max-pyret-example-side-length*)
-                   (> (string-length body) *max-pyret-example-side-length*))
-               (string-append
-                 (write-clear)
-                 (encoded-ans "" "MM" #f))]
-              [else " "])
-
-        (string-append
-          (highlight-keywords "is ")
-          (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-          )
-
+        ; wrap the `is ....` code in it's own element, so that wrapping works properly
+        (enclose-span ".recipe_example_body_wrap"
+          (string-append
+            (highlight-keywords "is ")
+            (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+            ))
         (write-clear)
         ))))
 
