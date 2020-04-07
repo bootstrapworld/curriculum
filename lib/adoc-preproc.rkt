@@ -986,7 +986,7 @@
     (call-with-output-file *pathway-exercises-file*
       (lambda (o)
         (for ([ex *exercises-done*])
-          (fprintf o "~s\n" ex)
+          (fprintf o "~s ~s\n" (car ex) (cadr ex))
           ))
       #:exists 'append)))
 
