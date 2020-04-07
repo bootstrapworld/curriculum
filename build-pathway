@@ -12,7 +12,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-05 # last modified
+LASTMOD=2020-04-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -890,6 +890,41 @@ function makeworkbooktex() {
   echo \) >> $wbpnf
 }
 
+function buildteacherresource() {
+  cd resources
+  export PATHWAYROOTDIR=../
+  #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
+  cp -p $PROGDIR/.hta* .
+  local copacetic=1
+  for f in *.adoc; do
+    if test ! -f $f; then copacetic=
+    fi
+  done
+  if test ! "$copacetic"; then
+    echo WARNING: No teacher resource files in pathway $PATHWAY
+  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
+    echo WARNING: Too many teacher resource files in pathway $PATHWAY
+  else
+    #export PATHWAYROOTDIR="../"
+    # there should be only one?
+    for f in *.adoc; do
+      cp -p $f index.asciidoc
+    done
+    if test index.asciidoc -nt index.html; then
+      echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
+      export TEACHER_RESOURCES=1
+      $PROGDIR/adoc-preproc.rkt index.asciidoc
+      export TEACHER_RESOURCES=
+      resolveabbrevs index.html
+      moveheaderlogopos index.html
+      cleanuptitle index.html
+    fi
+    checklinks index.html
+  fi
+  export PATHWAYROOTDIR=""
+  cd ..
+}
+
 function buildpathway() {
   cd $TOPDIR
 
@@ -1014,34 +1049,7 @@ function buildpathway() {
       fi
     done
 
-    #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
-    cp -p $PROGDIR/.hta* .
-    local copacetic=1
-    for f in *.adoc; do
-      if test ! -f $f; then copacetic=
-      fi
-    done
-    if test ! "$copacetic"; then
-      echo WARNING: No teacher resource files in pathway $PATHWAY
-    elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
-      echo WARNING: Too many teacher resource files in pathway $PATHWAY
-    else
-      #export PATHWAYROOTDIR="../"
-      # there should be only one?
-      for f in *.adoc; do
-        cp -p $f index.asciidoc
-      done
-      if test index.asciidoc -nt index.html; then
-        echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
-        export TEACHER_RESOURCES=1
-        $PROGDIR/adoc-preproc.rkt index.asciidoc
-        export TEACHER_RESOURCES=
-        resolveabbrevs index.html
-        moveheaderlogopos index.html
-        cleanuptitle index.html
-      fi
-      checklinks index.html
-    fi
+    export PATHWAYROOTDIR=""
     cd ..
 
     # Racket version
@@ -1057,6 +1065,8 @@ function buildpathway() {
 
     buildpathwaynarrative
 
+    buildteacherresource
+
     if test ! $NOPDF; then
       if test ! -f workbook-page-index.rkt; then
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
@@ -1069,7 +1079,9 @@ function buildpathway() {
           rm $ABYSS.html
         fi
 
+        #XXX:  ↓ not needed?
         export PATHWAYROOTDIR=""
+
         #echo
         #echo building pathway workbooks: $PATHWAY
         #echo calling make-workbook.rkt

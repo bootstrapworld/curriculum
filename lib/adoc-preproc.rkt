@@ -26,6 +26,9 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
+(define *pathway-exercises-file*
+  (string-append *pathway-root-dir* "resources/workbook-exercises.txt"))
+
 (define *workbook-pagenums*
   (if (truthy-getenv "LESSONPLAN")
       (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt.kp")])
@@ -66,6 +69,8 @@
 (define *standards-met* '())
 
 (define *dictionaries-represented* '())
+
+(define *exercises-done* '())
 
 (define (read-word i)
   (let loop ([r '()])
@@ -329,7 +334,7 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f)))
 
-(define (make-workbook-link lesson pages-dir snippet link-text)
+(define (make-workbook-link lesson pages-dir snippet link-text #:exercise? [exercise? #f])
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
   (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
          [f (string-append *pathway-root-dir* g)]
@@ -347,6 +352,8 @@
       (set! error-cascade? #t)
       (check-link f)
       (printf "WARNING: @workbook-link refers to nonexistent file ~a\n" f))
+    (when exercise?
+      (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
     (format "link:{pathwayrootdir}~a[~a~a~a]" g
             link-text
             (if (truthy-getenv "LESSONPLAN")
@@ -696,19 +703,23 @@
                             (display (make-image (car args) (cdr args) #:centered? #t) o))]
                          [(string=? directive "math")
                           (display (enclose-math (read-group i directive)) o)]
-                         [(string=? directive "workbook-link")
+                         [(or (string=? directive "workbook-link")
+                              (string=? directive "exercise-link"))
                           (let* ([args (read-commaed-group i directive)]
+                                 [exercise? (string=? directive "exercise-link")]
                                  [n (length args)]
                                  [page (car args)]
                                  [link-text (if (> n 1) (cadr args) "")]
                                  [page-compts (regexp-split #rx"/" page)]
                                  [first-compt (car page-compts)])
+                            ;(when (string=? directive "exercise-link") (printf "calling @exercise-link ~s\n" args))
                             (case (length page-compts)
                               [(1)
                                (display (make-workbook-link (getenv "LESSON")
                                                             "pages"
                                                             first-compt
-                                                            link-text) o)]
+                                                            link-text
+                                                            #:exercise? exercise?) o)]
                               [(2)
                                (let ([second-compt (cadr page-compts)]
                                      [lesson-dir (truthy-getenv "LESSON")])
@@ -718,8 +729,11 @@
                                         (display (make-workbook-link lesson-dir
                                                                      first-compt
                                                                      (cadr page-compts)
-                                                                     link-text) o)]
+                                                                     link-text
+                                                                     #:exercise? exercise?) o)]
                                        [else
+                                         ;XXX: should these just be warnings
+                                         ;with the @workbook-link converted to plain @link ?
                                          (error 'ERROR
                                                  "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
                               [(3)
@@ -729,16 +743,18 @@
                                             (string=? second-compt "solution-pages"))
                                         (display (make-workbook-link (string-append "lessons/" first-compt)
                                                                      second-compt
-                                                                     third-compt link-text) o)]
+                                                                     third-compt link-text
+                                                                     #:exercise? exercise?) o)]
                                        [else
                                          (error 'ERROR
-                                                 "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
+                                                 "adoc-preproc: Incorrect² @workbook-link ~a\n" page)]))]
                               [else
                                 (error 'ERROR
-                                        "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
+                                        "adoc-preproc: Incorrect³  @workbook-link ~a\n" page)]))]
                          [(or (string=? directive "worksheet-link")
                               (string=? directive "worksheet-include")
                               (string=? directive "exercise-link"))
+                          ;TODO: Remove this after a while
                           (error 'ERROR
                                   "adoc-preproc: Obsolete directive ~a\n" directive)]
                          [(string=? directive "link")
@@ -860,7 +876,9 @@
                          (when (truthy-getenv "TEACHER_RESOURCES")
                            ;(printf "teacher resource autoloading stuff\n")
                            (newline o)
-                           (fprintf o (create-workbook-links)))])]
+                           (fprintf o (create-workbook-links))
+                           (display-exercise-collation o)
+                           )])]
                 [(char=? c #\newline)
                  (newline o)
                  (set! beginning-of-line? #t)]
@@ -919,6 +937,7 @@
 
   (when (or (truthy-getenv "NARRATIVE")
             (truthy-getenv "LESSONPLAN"))
+    (add-exercises)
     (create-glossary-subfile))
 
   (when (truthy-getenv "LESSONPLAN")
@@ -941,6 +960,35 @@
   (system (format "~a -a pathwayrootdir=~a ~a" *asciidoctor* *pathway-root-dir* file))
   (void)
   )
+
+(define (display-exercise-collation o)
+  ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
+  ;(printf "pwrd = ~s\n" *pathway-root-dir*)
+  ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
+  (let ([exx (read-data-file *pathway-exercises-file* #:lists #t)])
+    (unless (null? exx)
+      ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
+      (fprintf o "=== Exercises and Solutions\n\n")
+      (fprintf o "[.exercises_and_solutions]\n")
+      (fprintf o "|===\n")
+      (for ([ex exx])
+        ;(printf "ex = ~s ~a\n" ex (length ex))
+        (let* ([ti (list-ref ex 1)]
+               [exer (list-ref ex 0)]
+               [soln (regexp-replace "/pages/" exer "/solution-pages/")])
+          (fprintf o "~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
+      (fprintf o "|===\n\n"))))
+
+(define (add-exercises)
+  ;(printf "doing add-exercises\n")
+  (unless (null? *exercises-done*)
+    ;(printf "doing add-exercises I\n")
+    (call-with-output-file *pathway-exercises-file*
+      (lambda (o)
+        (for ([ex *exercises-done*])
+          (fprintf o "~s\n" ex)
+          ))
+      #:exists 'append)))
 
 (define (create-glossary-subfile)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (truthy-getenv "NARRATIVE"))
