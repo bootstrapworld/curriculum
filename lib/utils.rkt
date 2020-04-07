@@ -22,6 +22,7 @@
   (string-trim s "\""))
 
 (define (read-data-file f #:lists [lists #f])
+  ;(printf "doing read-data-file ~s ~s\n" f lists)
   (if (file-exists? f)
       (call-with-input-file f
         (lambda (i)
@@ -30,14 +31,17 @@
               (if (eof-object? x) (reverse lines)
                   (loop (if (regexp-match #rx"^ *;" x)
                             lines
-                            (if lists
-                                (call-with-input-string x
-                                  (lambda (i)
-                                    (let loop ([yy '()])
-                                      (let ([y (read i)])
-                                        (if (eof-object? y) (reverse yy)
-                                            (loop (cons y yy)))))))
-                                (let ([x (unquote-string (string-trim x))])
-                                  (if (string=? x "") lines
-                                      (cons x lines)))))))))))
+                            (let ([x (string-trim x)])
+                              (if (string=? x "") lines
+                                  (if lists
+                                      (cons
+                                        (call-with-input-string x
+                                          (lambda (i)
+                                            (let loop ([yy '()])
+                                              (let ([y (read i)])
+                                                (if (eof-object? y) (reverse yy)
+                                                    (loop (cons (format "~a" y) yy))))))) lines)
+                                      (let ([x (unquote-string x)])
+                                        (if (string=? x "") lines
+                                            (cons x lines)))))))))))))
       '()))
