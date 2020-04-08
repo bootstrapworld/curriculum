@@ -1,6 +1,6 @@
 #lang racket
 
-(provide 
+(provide
   truthy-getenv
   ferror
   file-mtime
@@ -21,27 +21,31 @@
 (define (unquote-string s)
   (string-trim s "\""))
 
-(define (read-data-file f #:lists [lists #f])
-  ;(printf "doing read-data-file ~s ~s\n" f lists)
-  (if (file-exists? f)
+(define (read-data-file f #:mode [mode 'files])
+  ;(printf "doing read-data-file ~s ~s\n" f mode)
+  (if (not (file-exists? f)) '()
       (call-with-input-file f
         (lambda (i)
-          (let loop ([lines '()])
-            (let ([x (read-line i)])
-              (if (eof-object? x) (reverse lines)
-                  (loop (if (regexp-match #rx"^ *;" x)
-                            lines
-                            (let ([x (string-trim x)])
-                              (if (string=? x "") lines
-                                  (if lists
-                                      (cons
-                                        (call-with-input-string x
-                                          (lambda (i)
-                                            (let loop ([yy '()])
-                                              (let ([y (read i)])
-                                                (if (eof-object? y) (reverse yy)
-                                                    (loop (cons (format "~a" y) yy))))))) lines)
-                                      (let ([x (unquote-string x)])
-                                        (if (string=? x "") lines
-                                            (cons x lines)))))))))))))
-      '()))
+          (case mode
+            [(files) (let loop ([xx '()])
+                       (let ([x (read-line i)])
+                         (if (eof-object? x) (reverse xx)
+                             (let ([x (unquote-string (string-trim x))])
+                               (loop (if (or (regexp-match #rx";" x) (string=? x "")) xx
+                                         (cons x xx)))))))]
+            [(lines) (let loop ([xx '()])
+                       (let ([x (read-line i)])
+                         (if (eof-object? x) (reverse xx)
+                             (loop
+                               (let ([yy (call-with-input-string x
+                                           (lambda (i2)
+                                             (let loop2 ([yy '()])
+                                               (let ([y (read i2)])
+                                                 (if (eof-object? y) (reverse yy)
+                                                     (loop2 (cons (format "~a" y) yy)))))))])
+                                 (if (null? yy) xx (cons yy xx)))))))]
+            [(forms) (let loop ([xx '()])
+                       (let ([x (read i)])
+                         (if (eof-object? x) (reverse xx)
+                             (loop (cons x xx)))))])))))
+

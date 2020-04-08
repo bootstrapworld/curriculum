@@ -36,7 +36,7 @@
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
-                  (read-data-file workbook-pages-file #:lists #t)]
+                  (read-data-file workbook-pages-file #:mode 'lines)]
                  [else
                    (printf "WARNING: missing ~a\n" workbook-pages-file)
                    '()])])

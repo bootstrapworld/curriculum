@@ -965,7 +965,7 @@
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
   ;(printf "pwrd = ~s\n" *pathway-root-dir*)
   ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
-  (let ([exx (read-data-file *pathway-exercises-file* #:lists #t)])
+  (let ([exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
     (unless (null? exx)
       ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
       (fprintf o "=== Exercises and Solutions\n\n")
@@ -986,8 +986,7 @@
     (call-with-output-file *pathway-exercises-file*
       (lambda (o)
         (for ([ex *exercises-done*])
-          (fprintf o "~s ~s\n" (car ex) (cadr ex))
-          ))
+          (fprintf o "~s\n" ex)))
       #:exists 'append)))
 
 (define (create-glossary-subfile)
