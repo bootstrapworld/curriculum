@@ -338,6 +338,7 @@
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
   (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
          [f (string-append *pathway-root-dir* g)]
+         [dirve (if exercise? "@exercise-link" "@workbook-link")]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
@@ -351,7 +352,7 @@
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: @workbook-link refers to nonexistent file ~a\n" f))
+      (printf "WARNING: ~a refers to nonexistent file ~a\n" dirve f))
     (when exercise?
       (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
     (format "link:{pathwayrootdir}~a[~a~a~a]" g
@@ -360,7 +361,7 @@
                 (let ([pagenum (workbook-pagenum lesson snippet)])
                   (unless pagenum
                     (unless error-cascade?
-                      (printf "WARNING: @workbook-link used for non-workbook page ~a\n" f)))
+                      (printf "WARNING: ~a used for non-workbook page ~a\n" dirve f)))
                   (cond [pagenum
                           (let ([x (format "Page ~a" pagenum)])
                             (if (string=? link-text "") x
