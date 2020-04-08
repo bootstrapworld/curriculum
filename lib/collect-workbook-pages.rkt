@@ -22,26 +22,27 @@
 
 ;
 
-(define *lesson-order* (read-data-file "lesson-order.txt"))
+(define *lesson-order* (read-data-file "lessons/lessons.txt"))
 
 (define *language* (getenv "LANGUAGE"))
 
-(call-with-output-file "lessons/lessons.txt"
-  (lambda (o)
-    (for ([lesson *lesson-order*])
-      (display lesson o) (newline o)))
-  #:exists 'replace)
-
 (define (write-pages-info lesson-dir o #:paginate [paginate "yes"])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
+         [exercise-pages-file (format "~a/pages/exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
                  [else
                    (printf "WARNING: missing ~a\n" workbook-pages-file)
+                   '()])]
+         [exercise-pages
+           (cond [(not (truthy-getenv "ADDEXERCISES")) '()]
+                 [(file-exists? exercise-pages-file)
+                  (read-data-file exercise-pages-file #:mode 'files)]
+                 [else
                    '()])])
     (unless (null? workbook-pages)
-      (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages.txt.kp" lesson-dir)])
+      (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
         (call-with-output-file workbook-pages-ls-file
           (lambda (o2)
             (for ([page workbook-pages])
@@ -53,7 +54,10 @@
                 (when (>= n 3)
                   (set! paginate (list-ref page 2)))
                 (fprintf o2 "~a\n" file)
-                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate))))
+                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))
+            ;
+            (for ([file exercise-pages])
+              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")))
           #:exists 'replace)))))
 
 (call-with-output-file "workbook-page-index.rkt"
@@ -62,17 +66,10 @@
     (write-pages-info "front-matter" o #:paginate "no")
     (for ([lesson *lesson-order*])
       (let ([lesson-dir (string-append "lessons/" lesson)])
-        (system (format "mkdir -p ~a" lesson-dir))
-        (let ([orig-lesson-dir (format "~a/~a/langs/~a" (getenv "TOPDIR") lesson-dir *language*)])
-          (when (and (directory-exists? orig-lesson-dir)
-                     (not (empty? (directory-list orig-lesson-dir))))
-            (system (format "cp -pr ~a/* ~a" orig-lesson-dir lesson-dir))))
         (write-pages-info lesson-dir o)))
     (write-pages-info "back-matter" o #:paginate "no")
     (fprintf o ")\n"))
   #:exists 'replace)
-
-;(printf "returning from copy-lessons.rkt\n")
 
 (void)
 

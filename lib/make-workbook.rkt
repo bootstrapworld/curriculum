@@ -73,7 +73,8 @@
                         (if teacher-version "/solution-pages/" "/pages/")
                         docfile))
 
-        (when (path-has-extension? docfile #".adoc")
+        (when (or (path-has-extension? docfile #".adoc")
+                  (path-has-extension? docfile #".html"))
           (set! docfile (path-replace-extension docfile ".pdf")))
 
         (unless (file-exists? docfile)

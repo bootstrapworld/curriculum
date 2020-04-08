@@ -2,6 +2,7 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
+export ADDEXERCISES=
 export DEBUG=
 export FORCE=
 export LANGUAGE=en-us
@@ -12,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-07 # last modified
+LASTMOD=2020-04-08 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -21,6 +22,8 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
+  elif test "$arg" = --add-exercises -o "$arg" = -e; then
+    ADDEXERCISES=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
   elif test "$arg" = -fd -o "$arg" = -df; then
@@ -29,12 +32,12 @@ while test $# -ne 0; do
     HELP=1
   elif test "$arg" = --language; then
     LANGUAGE=$1; shift
+  elif test "$arg" = --lint -o "$arg" = --verify-links; then
+    LINT=1
   elif test "$arg" = --nopdf; then
     NOPDF=1
   elif test "$arg" = --proglang; then
     PROGLANG=$1; echo PROGLANG is $PROGLANG; shift
-  elif test "$arg" = --lint -o "$arg" = --verify-links; then
-    LINT=1
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1;
   else
@@ -514,8 +517,8 @@ function recursiveadoc() {
 
   if test $LINT; then
     if test ! $OTHERDIR; then
-      if test -f workbook-pages.txt.kp; then
-        for wbp in $(cat workbook-pages.txt.kp); do
+      if test -f workbook-pages-ls.txt.kp; then
+        for wbp in $(cat workbook-pages-ls.txt.kp); do
           if test ! -f $wbp; then
             BROKEN_WORKBOOK_PAGES=1
             echo WARNING: Missing workbook page $wbp in $LESSON/$dir
@@ -554,6 +557,41 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d
   fi
   mv solution-$d-2 solution-$d
+}
+
+function checksinglelessonplan() {
+  local L=$1
+  rm -f index.asciidoc
+  local copacetic=1
+  for f in *.adoc; do
+    if test ! -f $f; then
+      copacetic=
+    fi
+  done
+  if ! test $copacetic; then
+    echo WARNING: No lesson plan in $L
+  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
+    echo WARNING: Too many lesson plans in $L
+  else
+    for f in *.adoc; do
+      cp -p $f index.asciidoc
+    done
+  fi
+}
+
+function checklessonplan() {
+  local L=$1
+  checksinglelessonplan $L
+
+  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//'> index-title.txt
+
+  if test $ADDEXERCISES; then
+    if test -f index.asciidoc; then
+      echo collecting exercises in $L
+      $PROGDIR/collect-exercises.rkt index.asciidoc
+    fi
+  fi
+
 }
 
 function buildworkbookpages() {
@@ -599,6 +637,7 @@ function collapseadjtables() {
   $SED -i -e "$xi,${xii}d" "$f"
 }
 
+
 function buildlessonplan() {
   #echo doing buildlessonplan
   local L=$1
@@ -609,17 +648,8 @@ function buildlessonplan() {
   export LESSONPLAN=$L
 
   cd $L
-  local copacetic=1
-  for f in *.adoc; do
-    if test ! -f $f; then
-      copacetic=
-    fi
-  done
-  if ! test "$copacetic"; then
-    echo WARNING: No lesson plan in lesson $L
-  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
-    echo WARNING: Too many lesson plans in lesson $L
-  else
+
+  if test -f index.asciidoc; then
     #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
@@ -686,7 +716,7 @@ function buildlessons() {
 }
 
 function buildlessonplans() {
-  echo buildlessonplans in $(pwd)
+  #echo buildlessonplans in $(pwd)
   cd lessons
   if test ! -f lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
@@ -986,15 +1016,26 @@ function buildpathway() {
     if test ! -f lesson-order.txt; then
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
-      #echo copying lessons...
-      $PROGDIR/copy-lessons.rkt
+      grep -v '^ *;' lesson-order.txt|grep -v '^ *$' > lessons/lessons.txt
+      for lsn in $(cat lessons/lessons.txt); do
+        lsndir=lessons/$lsn
+        mkdir -p $lsndir
+        oglsndir=$TOPDIR/$lsndir/langs/$LANGUAGE
+        if test -d "$oglsndir"; then
+          cp -pr $oglsndir/* $lsndir
+        fi
+      done
       cd lessons
-      for ldir in *; do
-        if test -d "$ldir"; then
-          grep '^= ' $ldir/*.adoc|head -n 1|$SED -e 's/^= *//'> $ldir/index-title.txt
+      for lsn in *; do
+        if test -d $lsn; then
+          cd $lsn
+          checklessonplan $lsn
+          cd ..
         fi
       done
       cd ..
+      #echo collect workbook pages...
+      $PROGDIR/collect-workbook-pages.rkt
     fi
 
     buildlessons
