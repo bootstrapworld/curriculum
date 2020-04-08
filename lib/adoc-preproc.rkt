@@ -1,4 +1,6 @@
-":"; exec racket -f $0 -m -- "$@"
+#!/usr/bin/env racket
+
+#lang racket
 
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
@@ -22,7 +24,9 @@
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
 
-(define *base-namespace* (current-namespace))
+(define-namespace-anchor *adoc-namespace-anchor*)
+
+(define *adoc-namespace* (namespace-anchor->namespace *adoc-namespace-anchor*))
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
@@ -259,7 +263,7 @@
               (loop (cons x r))))))))
 
 (define (massage-arg arg)
-  (eval arg *base-namespace*))
+  (eval arg *adoc-namespace*))
 
 (define (rearrange-args args)
   ;(printf "doing rearrange-args ~s\n" args)
@@ -1453,9 +1457,6 @@
     (apply string-append
            (filter (lambda (x) (not (void? x))) body))))
 
-(define (main . cl-args)
-  (unless (= (length cl-args) 1)
-    (error 'ERROR "adoc-preproc: Exactly one arg accepted"))
-  (preproc-n-asciidoctor (car cl-args)))
+(preproc-n-asciidoctor
+  (vector-ref (current-command-line-arguments) 0))
 
-;(void)
