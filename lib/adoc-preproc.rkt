@@ -27,7 +27,7 @@
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
 (define *pathway-exercises-file*
-  (string-append *pathway-root-dir* "resources/workbook-exercises.txt"))
+  (string-append *pathway-root-dir* "resources/workbook-exercises.rkt.kp"))
 
 (define *workbook-pagenums*
   (if (truthy-getenv "LESSONPLAN")
@@ -777,11 +777,16 @@
                           (unless (truthy-getenv "LESSONPLAN")
                             (error 'ERROR "adoc-preproc: @depends-on valid only in lesson plan"))
                           (display-lesson-dependencies (read-commaed-group i directive) o)]
+                         [(string=? directive "all-exercises")
+                          (unless (truthy-getenv "TEACHER_RESOURCES")
+                            (error 'ERROR
+                                   "adoc-preproc: @all-exercises valid only in teacher resources"))
+                          (display-exercise-collation o)]
                          [(string=? directive "solutions-workbook")
                           ;TODO: don't need this anymore -- link is autogen'd
                           (unless (truthy-getenv "TEACHER_RESOURCES")
                             (error 'ERROR
-                                   "adoc-preproc: @solutions-workbook valid only in teacher resources directory~n"))
+                                   "adoc-preproc: @solutions-workbook valid only in teacher resources"))
                           (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
                           (newline o)
                           (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
@@ -877,7 +882,7 @@
                            ;(printf "teacher resource autoloading stuff\n")
                            (newline o)
                            (fprintf o (create-workbook-links))
-                           (display-exercise-collation o)
+                           ;(display-exercise-collation o)
                            )])]
                 [(char=? c #\newline)
                  (newline o)
@@ -968,15 +973,15 @@
   (let ([exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
     (unless (null? exx)
       ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
-      (fprintf o "=== Exercises and Solutions\n\n")
-      (fprintf o "[.exercises_and_solutions]\n")
+      (fprintf o "\n=== Exercises and Solutions\n\n")
+      (fprintf o "[.exercises_and_solutions,cols=2]\n")
       (fprintf o "|===\n")
       (for ([ex exx])
         ;(printf "ex = ~s ~a\n" ex (length ex))
         (let* ([ti (list-ref ex 1)]
                [exer (list-ref ex 0)]
                [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-          (fprintf o "~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
+          (fprintf o "|~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
       (fprintf o "|===\n\n"))))
 
 (define (add-exercises)
