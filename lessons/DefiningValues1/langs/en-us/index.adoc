@@ -47,7 +47,7 @@ endif::[]
 
 |===
 
-== Get Ready:
+== Warmup
 
 Students should be logged into
 ifeval::["{proglang}" == "wescheme"]
@@ -57,74 +57,68 @@ ifeval::["{proglang}" == "pyret"]
 @link{https://code.pyret.org, code.pyret.org}.
 endif::[]
 
-== Launch: (5 mins)
+== Defining Values @duration{30 minutes}
+
+=== Overview
+This activity introduces the problem with duplicate code, leveraging Mathematical Practice 7 - Identify and Make Use of Structure. Students identify common structures in an expression, and discover ways to bind that expression to a name that can be re-used.
+
+=== Launch
+
 Display the sample code from the "Prize Star" exercise.
 
 ifeval::["{proglang}" == "wescheme"]
 
+```
+(star 50 "solid" "green")
+(scale 3 (star 50 "solid" "green"))
+(scale .5 (star 50 "solid" "green"))
+(rotate 45 (star 50 "solid" "green"))
+(rotate 45 (scale 3 (star 50 "solid" "green")))
+```
+
+- *What common element was repeated throughout all the lines of code?*
 `(star 50 "solid" "green")`
-
-`(scale 3 (star 50 "solid" "green"))`
-
-`(scale .5 (star 50 "solid" "green"))`
-
-`(rotate 45 (star 50 "solid" "green"))`
-
-`(rotate 45 (scale 3 (star 50 "solid" "green")))`
-
-* *What common element was repeated throughout all the lines of code?*
-+
-`_(star 50 "solid" "green")_`
-
-* *What happened when you were asked to change the color of the star to gold?*
-+
-_We had to change it everywhere it appeared._
 endif::[]
 
 ifeval::["{proglang}" == "pyret"]
+```
+star(50, "solid", "green")
+scale(3, star(50, "solid", "green"))
+scale(0.5, star(50, "solid", "green"))
+rotate(45, star(50, "solid", "green"))
+rotate(45, scale(3, star(50, "solid", "green")))
+```
+
+- *What common element was repeated throughout all the lines of code?*
 `star(50, "solid", "green")`
 
-`scale(3, star(50, "solid", "green"))`
-
-`scale(0.5, star(50, "solid", "green"))`
-
-`rotate(45, star(50, "solid", "green"))`
-
-`rotate(45, scale(3, star(50, "solid", "green")))`
-
-* *What common element was repeated throughout all the lines of code?*
-+
-`_star(50, "solid", "green")_`
-
-* *What happened when you were asked to change the color of the star to gold?*
-+
-_We had to change it everywhere it appeared._
 endif::[]
 
-=== Since we're using that star over and over again, wouldn't it be nice if we could give that piece of code a "nickname", something shorter we could type to represent that piece of code?
+- *What happened when you were asked to change the color of the star to gold?*
+_We had to change it everywhere it appeared._
 
-== Explore: (10 mins)
+Since we're using that star over and over again, wouldn't it be nice if we could give that piece of code a "nickname", something shorter we could type to represent that piece of code?
+
+=== Investigate
+[.lesson-instruction]
 In the coding environment, have students click "Start a new program" and open to @workbook-link{pages/DefiningValues-WB1.pdf, Defining Values - Explore} to explore defining values.
 
 ifeval::["{proglang}" == "pyret"]
 Students need to have *include image* as their first line of code in the @vocab{Definitions area} and press "Run" to load the image library.
 endif::[]
 
-== Discuss: (10 mins)
 ifeval::["{proglang}" == "wescheme"]
-* *How is ‘define’ similar to a function?  How is it different?*
-+
+- *How is ‘define’ similar to a function?  How is it different?*
 _It’s written inside parentheses like a @vocab{function}, but ‘define’ doesn’t have an output_
 endif::[]
+
 ifeval::["{proglang}" == "pyret"]
-* *How is defining a value with the `=` sign similar to what you've seen in math class?
+- *How is defining a value with the `=` sign similar to what you've seen in math class?
 endif::[]
 
-* *What is the usefulness of defining values?*
-+
+- *What is the usefulness of defining values?*
 _Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
-* *What datatypes can we define values for?*
-+
+- *What datatypes can we define values for?*
 _All of them - Number, String, Image_
 
 [.strategy-box]
@@ -133,36 +127,29 @@ _All of them - Number, String, Image_
 MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the programming-specific language, such as "define" and "value".
 ****
 
-== Practice: (10 mins)
+[.lesson-instruction]
 Students complete @workbook-link{pages/DefiningValues-WB2.pdf, Defining Values Practice} with their partner.
 
-Student-facing task:
+== Playing with Value Definitions @duration{20 minutes}
 
-* Write the code for a solid, green `star` of size 50 and define it as `PRIZE_STAR`
+=== Overview
+This activity is a chance to _play_ with new concepts, combining value definitions and function composition to create more exciting shapes. The engaging nature of the activity is designed to motivate lots of experiments, each of which gives students a chance to practice applying those concepts.
 
-Use PRIZE_STAR to complete the following exercises:
-
-* a solid, green `star` that’s 3 times as large as the original (using the `scale` function)
-* a solid, green `star` that’s ½ the size of the original( using the `scale` function)
-* a solid, green `star` of size 50 that’s rotated 45 degrees (using the `rotate` function)
-* a solid, green `star` that’s 3 times as large as the original and rotated 45 degrees
-
-== Create/Apply: (15 mins)
-
-There are other functions that also work with Images - `overlay`, `beside`, and `above` are all functions that take in two Images and return a new Image. +
-{empty} +
+=== Launch
+There are other functions that also work with Images - `overlay`, `beside`, and `above` are all functions that take in two Images and return a new Image. 
+{empty}
 
 *Option 1* (for a shorter time commitment):
 Define at least 3 images of your own and combine using `overlay`, `beside`, and/or `above`.  You can also use any other functions you've learned, such as:
 
-* `rotate`
-* `scale`
-* `flip-horizontal`
-* `flip-vertical`
-* any other image producing function(`triangle`, `star`, `circle`, `rectangle`, etc..)
+- `rotate`
+- `scale`
+- `flip-horizontal`
+- `flip-vertical`
+- any other image producing function(`triangle`, `star`, `circle`, `rectangle`, etc..)
 
-Write comments to describe what is being produced. +
-{empty} +
+Write comments to describe what is being produced.
+{empty}
 
 *Option 2* (for a longer time commitment):
 Have students choose a flag from this list: @workbook-link{pages/flags-of-the-world-resource.pdf, (Flags of the World Resource)}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.
