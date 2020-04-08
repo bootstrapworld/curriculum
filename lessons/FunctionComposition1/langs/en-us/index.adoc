@@ -48,17 +48,9 @@ Formative Assessments & Activities
 
 * Circles of Evaluation Review - Blank Template (@link{https://teacher.desmos.com/activitybuilder/custom/5d991a674febfc7e0ff8cb15, Desmos Activity})
 
-////
-Connection Activities
-
-* @link{https://www.geogebra.org/m/nqymeFc4, Function Composition Dynamic Illustrator I} (Geogebra)
-* @link{https://www.geogebra.org/m/h3qdzW3W, Composition of Functions} (Geogebra Quiz)
-* @link{https://quizizz.com/admin/quiz/58a61a2cf0b089151011ef50/composition-of-functions, Composite Functions} (Quizizz)
-////
-
 |===
 
-== Get Ready:
+== Warmup
 ifeval::["{proglang}" == "wescheme"]
 Students should be logged on to @link{https://www.wescheme.org, WeScheme}.
 endif::[]
@@ -66,7 +58,12 @@ ifeval::["{proglang}" == "pyret"]
 Students should be logged on to @link{https://code.pyret.org, code.pyret.org}.
 endif::[]
 
-== Launch: (5 mins)
+== Composing Functions @duration{20 minutes}
+
+=== Overview
+Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them. The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+
+=== Launch
 
 [.text-center]
 Which One Doesn't Belong?
@@ -74,14 +71,11 @@ Which One Doesn't Belong?
 @centered-image{images/shape6.jpg, "Which One Doesn't Belong?, Matt Owen,
 Curated by Mary Bourassa's https://wodb.ca", 400, align="center"}
 
-//[.text-center]
-//Source: Matt Owen, curated by Mary Bourassa's @link{https://wodb.ca/, Which One Doesn't Belong?}
-
 Have students choose which image they feel doesn't belong and move together with other students who share their view. Take turns letting groups justify their reasons and discuss with other groups.
 
 *Ask students: What theme do you see here?*  _(All of the shapes are cubes with some aspect of their appearance changed - angle, color, size, etc)_
 
-== Explore: (10 mins)
+=== Investigate
 
 Have students open to @workbook-link{pages/FunctionComposition-WB1.pdf, Function Composition - Explore}.  Students create a text @vocab{image} of their name and experiment with their choice of these new functions.
 
@@ -89,24 +83,24 @@ While students are exploring, be available for support but encourage student dis
 
 Many questions can be addressed with these responses:
 
-* *Did you try drawing the Circle of Evaluation first?*
-* *Did you check the contract?*
-* *Have you pressed the Run button to save your Definitions changes?*
+- *Did you try drawing the Circle of Evaluation first?*
+- *Did you check the contract?*
+- *Have you pressed the Run button to save your Definitions changes?*
 
-== Discuss: (10 mins)
-* *What do all of these functions have in common?*
-+
+=== Synthesize
+- *What do all of these functions have in common?*+
 _They all produce images, they all change some element of the original image_
-* *Does using one of these functions change the original image?*
-+
+
+- *Does using one of these functions change the original image?*
 _No, it creates a whole new image_
-* *What does the number in ‘scale’ represent?*
-+
+
+- *What does the number in ‘scale’ represent?*
 _The scale factor, the percent by which the image should grow or shrink_
-* *What does the number in ‘rotate’ represent?*
-+
+
+- *What does the number in ‘rotate’ represent?*
 _The rotation angle, measured counterclockwise_
-* *Suppose I wrote the code
+
+- *Suppose I wrote the code
 ifeval::["{proglang}" == "wescheme"]
 `(scale 3 (star 50 “solid” “red”))`.
 endif::[]
@@ -114,15 +108,15 @@ ifeval::["{proglang}" == "pyret"]
 `scale(3, star(50, "solid", "red"))`.
 endif::[]
   What’s another line of code I could write that would produce the exact same image?*
-+
+
 ifeval::["{proglang}" == "wescheme"]
 _``(star 150 "solid" "red")``_
 endif::[]
 ifeval::["{proglang}" == "pyret"]
 _``star(150, "solid", "red")``_
 endif::[]
-* *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the text function as an input for `flip-horizontal`?*
-+
+
+- *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the text function as an input for `flip-horizontal`?*
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
 
 [.strategy-box]
@@ -132,10 +126,12 @@ MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussio
 Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
 ****
 
-== Practice: (10 mins)
-Students complete @workbook-link{pages/FunctionComposition-WB2.pdf, Function Composition - Practice}, practicing drawing Circles of Evaluation and writing code with their partner using different functions.
+== Decomposing Image Problems @duration{25 minutes}
 
-Student-facing Task:
+=== Overview
+Students are given (simple, highly-structured) word problems involving creating images, and must map from the word problems to the names and order of functions needed to solve them. At this stage, the skill is quite brittle and hardly resembles the generalized problem-decomposition skill needed to solve complex word problems in algerba. This is merely the first introduction, and other lessons will deepen and broaden the idea.
+
+=== Launch
 Create the circles of evaluation and write the code for the following images.  Write a new line of code for each exercise.
 
 * a solid, green `star` of size 50
@@ -144,18 +140,20 @@ Create the circles of evaluation and write the code for the following images.  W
 * a solid, green `star` of size 50 that’s rotated 45 degrees (using the `rotate` function)
 * a solid, green `star` that’s 3x as large as the original and rotated 45 degrees.
 
+=== Investigate
+Students complete @workbook-link{pages/FunctionComposition-WB2.pdf, Function Composition - Practice}, practicing drawing Circles of Evaluation and writing code with their partner using different functions.
+
 When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing.
 
-== Create/Apply: (15 mins)
-
+[.lesson-instruction]
 Create an Image that uses the text function and at least 3 of following functions:
 
-* `rotate`
-* `scale`
-* `overlay`
-* `flip-horizontal`
-* `flip-vertical`
-* any other image producing function (`triangle`, `star`, `circle`, `rectangle`, etc..)
+- `rotate`
+- `scale`
+- `overlay`
+- `flip-horizontal`
+- `flip-vertical`
+- any other image producing function (`triangle`, `star`, `circle`, `rectangle`, etc..)
 
 Students should practice writing *comments* in the code to describe what is being produced.
 ifeval::["{proglang}" == "wescheme"]
@@ -165,3 +163,7 @@ ifeval::["{proglang}" == "pyret"]
 Use `#` at the beginning of a line to write a comment.
 endif::[]
 
+== Additional Exercises:
+* @link{https://www.geogebra.org/m/nqymeFc4, Function Composition Dynamic Illustrator I} (Geogebra)
+* @link{https://www.geogebra.org/m/h3qdzW3W, Composition of Functions} (Geogebra Quiz)
+* @link{https://quizizz.com/admin/quiz/58a61a2cf0b089151011ef50/composition-of-functions, Composite Functions} (Quizizz)
