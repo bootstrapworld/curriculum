@@ -359,9 +359,10 @@
             link-text
             (if (truthy-getenv "LESSONPLAN")
                 (let ([pagenum (workbook-pagenum lesson snippet)])
-                  (unless pagenum
-                    (unless error-cascade?
-                      (printf "WARNING: ~a used for non-workbook page ~a\n" dirve f)))
+                  (unless exercise?
+                    (unless pagenum
+                      (unless error-cascade?
+                        (printf "WARNING: ~a used for non-workbook page ~a\n" dirve f))))
                   (cond [pagenum
                           (let ([x (format "Page ~a" pagenum)])
                             (if (string=? link-text "") x
