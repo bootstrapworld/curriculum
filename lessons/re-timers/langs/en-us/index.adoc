@@ -22,21 +22,25 @@ The https://code.pyret.org/editor#share=0B9rKDmABYlJVNGRsTTltUjZmRkE[Watermelon 
 
 |===
 
-== Adding a Splash Screen (Time 30 minutes)
+== Adding a Splash Screen @duration{30 minutes}
 
+=== Overview
+One of the simplest uses for a timer is a _splash screen_: something that is shown for a few seconds when you first run a game. Students implement a splash screen for their games, as a way of getting comfortable with the idea of passing a timer into their Reactor.
+
+=== Launch
 Timers are a key component in many video games: players may need to reach a certain objective before time runs out, or keep from losing a game for longer and longer periods of time to reach a high score. In this feature, we’ll cover two possible uses of a timer in your game: adding a “splash screen” at the beginning to give instructions to the player, and adding a short animation when two characters collide.
 
 Of course, a timer is a piece of data in our game that will be changing, meaning it should be added to our data structure. We’ll be adding a timer to the completed https://code.pyret.org/editor#share=0B9rKDmABYlJVTUtoekI2XzE3Znc[Moving Character] file from Unit 5, and you can follow along using the same file, or your own video game project.
 
+=== Investigate
 [.lesson-instruction]
 Add a field called "`timer`" to the data structure, represented by a Number. Then, go through your code and add that field to each @vocab{constructor} call in your code. Once complete, run your program to make sure there are no errors, then move on.
 
 The next step is to find (or make!) the image you want displayed as your splash screen when the game begins. We’ve made a simple image of instructional text overlayed onto the background, and defined it using the name `instructions`.
 
 ----
-instructions =
-overlay(text("Press the arrow keys to move!", 50, "purple"),
-rectangle(640, 480, "solid", "white"))
+instructions = overlay(text("Press the arrow keys to move!", 50, "purple"),
+  rectangle(640, 480, "solid", "white"))
 ----
 
 Encourage students to get creative here: In addition to giving instructions to a user, they can also use their splash screen to provide a backstory for their game, include names and images of their characters, and of course, note who created the game!
@@ -69,20 +73,25 @@ fun draw-state(a-char):
 end
 ----
 
-Have students explain the logic here: We only want the splash screen to appear at the very start of the game, when the timer is below a certain amount. All other times, we should see the game itself.
+=== Synthesize
+Have students explain what's going on in their own words. (We only want the splash screen to appear at the very start of the game, when the timer is below a certain amount. All other times, we should see the game itself.)
 
-Click "`Run`", and test out your new feature! You may want to increase or decrease the amount of time your splash screen is displayed, or make changes to the image itself.
+Click "Run", and test out your new feature! You may want to increase or decrease the amount of time your splash screen is displayed, or make changes to the image itself.
 
 Following these steps, students should end up with something similar to this completed Moving Character file.
 
-== Timer-based animations (Time 45 minutes)
+== Timer-Based Animations @duration{45 minutes}
 
+=== Overview
+Students implement a timer-based animation, to create a temporary effect when a collision occurs.
+
+=== Launch
 Another way to use timers in a game is to add a short animation when a collision occurs. In this example, we’re going to add a timer to a simple animation, but you could extend this to add an animation to your game when two characters collide, when the player reaches a goal, etc.
 
 Note that if students have already used a timer to add a splash screen to their game, they will not be able to use the same timer field to display a collision animation. Instead, they could implement a collision animation in a different game, or add another, seprate field to their data structure: animation-timer and instruction-timer, for instance.
 
 [.lesson-instruction]
-Open the Watermelon Smash Starter file and click "`Run`".
+Open the Watermelon Smash Starter file and click "Run".
 
 Our goal is to make a complete animation of a watermelon getting smashed by a mallet. When the mallet reaches the melon, we should see some sort of pink explosion! We’ve gotten you started by including a data structure called `SmashState`, which contains the y-coordinate of a mallet and a timer. When the reactor begins, the initial state (defined here as `START`) defines the mallet at 250 and the timer at 0.
 
@@ -121,6 +130,7 @@ Which field should we use to represent the size of the growing explosion? `malle
 
 `mallety` only represents the y-coordinate of the falling mallet, whereas the timer can be set and reset based on certain conditions to represent the changing size of the star image.
 
+=== Investigate
 [.lesson-instruction]
 Change the `draw-state` function to make it piecewise: when the mallet’s y-coordinate is 140 or less, draw the following image of the radial star `(radial-star(20, a-smash.timer, 25, "solid", "deep-pink"))` at the watermelon’s current coordinates. In all other cases, produce the current body of `draw-state`.
 
@@ -158,7 +168,7 @@ Currently, this function decreases the mallet’s y-coordinate to make it fall, 
 [.lesson-instruction]
 _When_ should we start increasing the timer, thereby increasing the size of the watermelon’s explosion animation?
 
-For help, we can look back at our `draw-state` function. We only wanted to start drawing the explosion (the pink radial star) when `mallety` was less than or equal to 140. So we can check the same condition in `next-state-tick` to tell us when to start increasing the ``SmashState``’s timer.
+For help, we can look back at our `draw-state` function. We only wanted to start drawing the explosion (the pink radial star) when `mallety` was less than or equal to 140. So we can check the same condition in `next-state-tick` to tell us when to start increasing the `SmashState`’s timer.
 
 [.lesson-instruction]
 Turn `next-state-tick` into a piecewise function: once `a-smash.mallety` reaches 140 or less, continue decreasing it’s y-coordinate, but also _increase_ the timer by 2. Use the original body of `next-state-tick` as your `else` clause.
@@ -179,4 +189,5 @@ Run your program, and watch that watermelon get smashed!
 [.lesson-instruction]
 For a challenge, change the `draw-state` function so that once the mallet has passed below a certain threshold, an image of the smashed watermelon (we’ve defined one called `SMASHED`) appears. *Hint:* _Where_ within the `draw-state` function will this new condition need to be placed in order for it to work properly?
 
+== Closing
 We’ve shown you a couple ways to use timers in your games and animations, but there are many more possibilities. You could extend the timer animation to add a short animation when two characters have collided, or display an ever-increasing timer on the screen to show players how long they have ben playing your game. What other uses for timers can you come up with?
