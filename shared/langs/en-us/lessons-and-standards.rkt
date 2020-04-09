@@ -83,9 +83,9 @@
     ("alg-piecewise-functions" "MP.8")
     ("alg-piecewise-functions-2" "HSA.SSE.A.1.A")
     ("alg-piecewise-functions-2" "HSA.SSE.A.1.B")
-    ("flags-of-the-world" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
-    ("image-transformations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
-    ("intro-to-dilations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
+    ("fl-flags-of-the-world" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
+    ("fl-image-transformations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
+    ("fl-intro-to-dilations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
     ("lessonA" "8.F.1-3&1")
     ("lessonA" "8.NS.A")
 
