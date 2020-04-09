@@ -26,14 +26,17 @@
 
 == Adding a Scoring System @duration{45 minutes}
 
-In Bootstrap:Algebra, the scoring system for your video game was included in the teachpack, code which ran "`under the hood`" in your game file. In Bootstrap:Reactive, however, you no longer need this hidden code, since you’ve learned enough to program your entire Bootstrap:Algebra game (and more) yourself! In this lesson, we’ll cover how to add a scoring system to your Bootstrap:Reactive game.
+=== Overview
+Students add a score to their game.
 
 ////
 This lesson is part of a series of features meant to come at the end of the Bootstrap:Reactive units. Once students have made a number of simple animations and games, they will have lots of ideas for what they want to make next and add to their existing games. We’ve included a number of the most requested features in these lessons. Because each students’ game will be different, we’ve used a Pyret version of the original Ninja Cat game as an example program, but the lesson can be adapted to add scoring to any game. 
 ////
 
+=== Launch
 The score is something that will be changing in the game, so you can be sure that it has to be added to the ``____State`` data structure. In our example Ninja Cat program, we’ve called our structure `GameState`, which currently contains the x and y-coordinates for our player, danger, and target, plus the speed of the danger, and speed of the target. Your game(s) will likely have different structures.
 
+=== Investigate
 [.lesson-instruction]
 --
 - What data type is a score? Number, String, Image, or Boolean?
@@ -63,9 +66,11 @@ data GameState:
 end
 ----
 
-////
-Reminder: Your students will likely have radically different games at this point in the course. This lesson is not meant to be followed exactly, but rather used to give students an idea of what steps they should take to add a scoring system to their own games. For extra practice, students can work through adding a scoring system to the Ninja Cat program as well as their own games.
-////
+[.strategy-box]
+.Reminder
+****
+Your students will likely have radically different games at this point in the course. This lesson is not meant to be followed exactly, but rather used to give students an idea of what steps they should take to add a scoring system to their own games. For extra practice, students can work through adding a scoring system to the Ninja Cat program as well as their own games.
+****
 
 Now that the game has a score, that score needs to actually increase or decrease depending on what happens in the game. For our Ninja Cat game, we’ll say that the score should go up by 30 points when Ninja Cat collides with the ruby (target), and down by 20 points when she collides with the dog (danger).
 
@@ -155,10 +160,7 @@ will place the score (drawn in size 20 white text) onto the center of the BACKGR
 
 [.lesson-instruction]
 --
-Use these functions to draw the score onto your game screen. You
-could also use the string-append function to make it clear to
-players that the number they see is their score, like so:
-
+Use these functions to draw the score onto your game screen. You could also use the string-append function to make it clear to players that the number they see is their score, like so:
 ----
 text(string-append("Score: ", num-to-string(g.score)), 20, "white")
 ----
