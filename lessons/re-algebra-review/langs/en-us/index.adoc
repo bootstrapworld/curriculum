@@ -31,9 +31,11 @@ definitions, and the Design Recipe.}
 
 |===
 
+== Introduction to Pyret @duration{30 minutes}
 
+=== Overview
 
-== Introduction to Pyret (Time 30 minutes)
+=== Launch
 
 Welcome back to Bootstrap! In Bootstrap:Algebra, you used a
 @vocab{programming language} called Racket to make your video games. We
@@ -45,40 +47,6 @@ a different @vocab{syntax} that looks more like popular languages such as
 Python. This unit will help you make the switch to Pyret syntax
 in no time!
 
-////
-Why the language switch?
-
-Some students and teachers may already have experiences with
-languages such as HTML, JavaScript, or Python. With each new
-language, one encounters new syntax (how the language looks) and
-semantics (how the language behaves). Each of these languages has
-settings for which it is particularly appropriate and effective,
-and learning each teaches new lessons about programming style.
-The world of computing is multi-lingual, and we think a good
-introduction to computing should be, too.
-
-Why Pyret?
-
-Pyret, the language we will learn in Bootstrap:Reactive, takes
-all the nice parts of the Bootstrap:Algebra language, and uses a
-syntax that is similar to traditional industry languages like
-Python. This means it shares the mathematical behavior of Racket,
-and allows for easy image-manipulation, test-cases, and the
-Design Recipe. This lets teachers and students to use what they
-know about Racket as they progress into Bootstrap:Reactive. Pyret
-also has some unique features that make programming interactive
-programs more pleasant than in WeScheme.
-
-This new syntax gives us an opportunity to show students that key
-programming ideas, like defining and using functions, carry over
-across different languages. It also provides a stepping stone
-towards more traditional languages, without diving head first
-into a language like Python, in which we’d have to learn
-different rules for numbers (among other things), new terminology
-for errors, and use functions that don’t always correspond to
-algebra. Pyret also provides us with the ability to write
-interactive programs and use images in a familiar way.
-////
 
 Open your workbook to Page 1. Here we have a table, with examples
 of value definitions in Racket and Pyret. On the left-hand
@@ -88,6 +56,7 @@ the left-hand side says `(define AGE 14)`. Directly to the right,
 we have the Pyret @vocab{syntax}: `AGE = 14`, which does the same thing:
 defines a variable called AGE, which has a value of 14.
 
+=== Investigate
 [.lesson-instruction]
 --
 Take a look at the other values defined here for Numbers,
@@ -163,25 +132,17 @@ Now we have values, and we know how to define shortcuts for them. There are also
 What are some functions you know that work on numbers? How many can you list?
 
 ////
-Remind students that arithmetic operations, such as +, -, *, and / are functions.
-////
-
-One of the big changes from Racket to Pyret is the way arithmetic
-functions are used. In Pyret, you can write these expressions
-with math notation, like so: `(2 + 9)` or `(10 * 8)`. *But don’t
-forget to leave a space before and after the function!* Pyret
-will report an error if you write something like `2+9` without
-spaces around the `+`.
-
-////
 The spaces matter because Pyret allow various non-alphabetic characters to be used in names of variables and identifiers. Pyret needs the spaces to tell whether - is a minus sign or a hyphen, for example. The spacing rule thus applies to all arithmetic function characters.
 ////
 
-Another difference between Racket and Pyret is that Pyret requires commas between each input to a function. So, `circle(50 "solid" "red")` will return an error message, because you need commas between each input. `circle(50, "solid", "red")` is the correct code. Keep this in mind as you write your programs!
+=== Synthesize
+How is this similar to what you've seen before? How is it different?
 
+== Contracts @duration{10 minutes}
 
-== Contracts (Time 10 minutes)
+=== Overview
 
+=== Launch
 It’s important to keep track of how functions work, and
 Bootstrap:Algebra introduced the idea of @vocab{Contracts}. The contract for the star function is shown below.  
 
@@ -220,7 +181,8 @@ The Contract for `+` is shown below.
 ----
 #  +  :: Number, Number -> Number
 ----
- 
+
+=== Investigate
 Write down the Contracts for `*`, `-`, `/` and `num-sqrt` in your
 Contracts page. (You know `num-sqrt` as the `sqrt` function in
 Racket!)
@@ -248,7 +210,11 @@ For even more practice, have students write contracts for various word problems.
 ////
 
 
-== The Design Recipe (Time 25 minutes)
+== The Design Recipe @duration{25 minutes}
+
+=== Overview
+
+=== Launch
 
 Now you know how to define values in Pyret, and you know how to
 use Contracts for pre-built functions. But what about defining
@@ -318,6 +284,7 @@ an error message, just like in Bootstrap:Algebra.
 Make sure students are writing Pyret code for the results of their examples. double(5) is 10, while technically correct, doesn’t show us the work and thought process behind the code, and makes it much harder to define the function in the next step. Writing examples is akin to "showing your work" in math class: You want to see how students arrived at their answers, not just that they have an answer. It is also much easier to debug a function using the design recipe, because you can check each section individually for errors. Writing examples for code is also called "unit testing," something professional programmers do all the time.
 ////
 
+=== Investigate
 [.lesson-instruction]
 At the bottom of Page 3 in your workbook, write the contract and
 two examples for a function called `triple`, which takes in a
@@ -361,6 +328,7 @@ Now write the function header and body for triple. Don’t forget to replace the
 Just as writing a Contract helps us write examples, writing examples makes it easier to write the function definition: circling what changes between the examples makes it obvious that the changeable thing is where we need to use a variable in our function. You will want to explicitly connect each step in the Design Recipe to every other step. Ask students to justify each part of their Contract by referring back to the Word Problem, to justify each step of their examples by referring back to their Contract, and to justify each step of the definition by referring to their Contract and Examples. The same variable name can be used in multiple functions, just as in math (where many functions use x as the variable name, for example). This activity can be done as a team competition: teams have one minute to write the contract and two examples for triple, and another minute for the function header and body. Assign points to the teams that complete each function. Make sure students fill out the ENTIRE contract, with two examples, before they circle what changes and move on to the function body. Build these good habits early in the course!
 ////
 
+=== Investigate
 Try using the Design Recipe to solve the following word problems
 (in the "`Fast Function`" areas starting on
 @workbook-link{pages/fast-funs-1.adoc} of your
@@ -386,6 +354,9 @@ Students will make syntax errors when learning any new language. This workbook p
 
 == Images in Pyret (Time 20 minutes)
 
+=== Overview
+
+=== Launch
 You’ll be working with a lot of animations in Bootstrap:Reactive. In Bootstrap:Algebra, the way your game characters moved and where they were placed on the screen was mostly determined for you. In this course, you have all the control over your animation. To start, let’s practice making static scenes: images with no animation. Do you remember the put-image function from Racket? Pyret has the same function, and its contract should look familiar:  
 
 ----
@@ -432,7 +403,8 @@ expressions using the `put-image` function.
 put-image(HIKER1, 700, 500,
           put-image(BOAT, 750, 200, BACKGROUND))
 ----
- 
+
+=== Investigate
 [.lesson-instruction]
 --
 Now it’s time to create your own scene. To start,
