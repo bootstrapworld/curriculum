@@ -1,12 +1,6 @@
 = Structures, Reactors, and Animations
 
-@lesson-description{Students create a complete animation (of a
-sunset) from scratch, and learn how to use data structures to
-capture the essence of an animation. They apply the put-image
-function to draw single frames from data structure instances, and
-write a function to generate new frame data from previous frame
-data. They learn how to use reactors to combine their data and
-functions into a full running animation.}
+@lesson-description{Students create a complete animation (of a sunset) from scratch, and learn how to use data structures to capture the essence of an animation. They apply the put-image function to draw single frames from data structure instances, and write a function to generate new frame data from previous frame data. They learn how to use reactors to combine their data and functions into a full running animation.}
 
 [@lesson-intro-table]
 |===
@@ -28,93 +22,45 @@ functions into a full running animation.}
 
 | Preparation
 - Computer for each student (or pair), running the Pyret Editor
-- The
-  https://code.pyret.org/editor#share=0B9rKDmABYlJVSm94cFA4T3R2NTA[sunset
-  starter file] loaded on student machines
+- The https://code.pyret.org/editor#share=0B9rKDmABYlJVSm94cFA4T3R2NTA[sunset starter file] loaded on student machines
 
 |===
 
 == Animations in Pyret (Time 55 minutes)
 
-You’ve learned how to create data structures, and how to create
-images. Now it’s time to put these together to create an
-animation in Pyret. We’ll even go a step further than what we did
-in Bootstrap:Algebra, creating an animation with movement in two
-dimensions.
+You’ve learned how to create data structures, and how to create images. Now it’s time to put these together to create an animation in Pyret. We’ll even go a step further than what we did in Bootstrap:Algebra, creating an animation with movement in two dimensions.
 
-In Bootstrap:Algebra, many decisions about your animation were
-made for you. We told you how many characters you had and which
-aspects of them could change during the animation. The danger
-always moved in the x-axis, the player always moved in the
-y-axis. In Bootstrap:Reactive, we give you much more control of
-your game: you decide how many characters you will have, and what
-aspects of them can change (position, color, size, etc). In order
-to have this flexibility, we need to do a little more work to set
-up the animation. Let’s break down an animation to see what we
-need.
+In Bootstrap:Algebra, many decisions about your animation were made for you. We told you how many characters you had and which aspects of them could change during the animation. The danger always moved in the x-axis, the player always moved in the y-axis. In Bootstrap:Reactive, we give you much more control of your game: you decide how many characters you will have, and what aspects of them can change (position, color, size, etc). In order to have this flexibility, we need to do a little more work to set up the animation. Let’s break down an animation to see what we need.
 
-Let’s create an animation of a sunset. The sun will start at the
-top-left corner of the screen and fall diagonally down and right
-across the sky. Here’s a running version of the animation we are
-trying to create. Notice that the sun dips below the horizon in
-the bottom-right corner.
+Let’s create an animation of a sunset. The sun will start at the top-left corner of the screen and fall diagonally down and right across the sky. Here’s a running version of the animation we are trying to create. Notice that the sun dips below the horizon in the bottom-right corner.
 
 @centered-image{images/sunset1.gif, "", 800}
 
-In Bootstrap:Algebra, we talked about how an animation is made of
-a sequence of images that we flip through quickly. We continue to
-think of an animation as a sequence of images in
-Bootstrap:Reactive. For example, here are the first three frames
-of the sunset animation: 
+In Bootstrap:Algebra, we talked about how an animation is made of a sequence of images that we flip through quickly. We continue to think of an animation as a sequence of images in Bootstrap:Reactive. For example, here are the first three frames of the sunset animation:
 
 @centered-image{images/sunset2.png, "", 800}
 
-Where will we get this sequence of images? We don’t want to
-create them all by hand. Instead, we want to write programs that
-will create them for us. This is the power of computer
-programming. It can automate tasks (like creating new images)
-that might otherwise be tedious for people to do. There are four
-steps to creating animations programs. You’ve actually already
-done the first three in the first two units, but now we need to
-show you how to put them together.
+Where will we get this sequence of images? We don’t want to create them all by hand. Instead, we want to write programs that will create them for us. This is the power of computer programming. It can automate tasks (like creating new images) that might otherwise be tedious for people to do. There are four steps to creating animations programs. You’ve actually already done the first three in the first two units, but now we need to show you how to put them together.
 
-This is a key point at which to emphasize why functions are
-important to computer science. Computers are good at repetition,
-but they need instructions telling them what steps to repeat.
-Functions capture those instructions.
+This is a key point at which to emphasize why functions are important to computer science. Computers are good at repetition, but they need instructions telling them what steps to repeat. Functions capture those instructions.
 
 [.lesson-point]
 Step 1: Define the data structure
 
-The first step is to develop a @vocab{data structure} for the information
-that changes across frames. To do this, we need to figure out
-what @vocab{fields} our data structure will need.
+The first step is to develop a @vocab{data structure} for the information that changes across frames. To do this, we need to figure out what @vocab{fields} our data structure will need.
 
 [.lesson-instruction]
-Turn to
-@workbook-link{pages/sunset-animation-worksheet.adoc}
-in your workbook. Copy the three sunset images we
-gave you into the boxes at the top of the worksheet.
+Turn to @workbook-link{pages/sunset-animation-worksheet.adoc} in your workbook. Copy the three sunset images we gave you into the boxes at the top of the worksheet.
 
-To identify the fields, we have to figure out what information is
-needed to create each frame image. Information that changes from
-frame to frame must be in the data structure.
+To identify the fields, we have to figure out what information is needed to create each frame image. Information that changes from frame to frame must be in the data structure.
 
 [.lesson-instruction]
-On your worksheet, fill in the table just below the three images
-to indicate what information changes across the frames.
+On your worksheet, fill in the table just below the three images to indicate what information changes across the frames.
 
-Hopefully, you identified two pieces of changing information: the
-x-coordinate of the sun and the y-coordinate of the sun. Each
-image also contains the horizon (the brown rectangle), but that
-is the same in every frame. Let’s write down a data structure
-that captures the two coordinates.
+Hopefully, you identified two pieces of changing information: the x-coordinate of the sun and the y-coordinate of the sun. Each image also contains the horizon (the brown rectangle), but that is the same in every frame. Let’s write down a data structure that captures the two coordinates.
 
 [.lesson-instruction]
-Fill in the second table, giving a name and type for each of the
-x-coordinate and y-coordinate. Then fill in the SunsetState data
-structure definition that we started for you at the bottom of the
-page. Use sunset as the name of the constructor.
+Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then fill in the SunsetState data structure definition that we started for you at the bottom of the page. Use sunset as the name of the constructor.
 
 You should have come up with something like this: a data block with numbers for the two coordinates.
 
@@ -128,10 +74,7 @@ data SunsetState:
 end
 ----
 
-The term state is used in computer science to refer to the
-details of a program at a specific point in time. Here, we use it
-to refer to the details that are unique to a single frame of the
-animation.
+The term state is used in computer science to refer to the details of a program at a specific point in time. Here, we use it to refer to the details that are unique to a single frame of the animation.
 
 ////
 We have the students copy the images into the workbook partly to
@@ -146,86 +89,42 @@ students should have an easier time distinguishing between the
 constructor name and data structure name.
 ////
 
-Any time we make a data structure, we should make some sample
-@vocab{instances}: this helps check that we have the right fields
-and gives us data to use in making examples later.
+Any time we make a data structure, we should make some sample @vocab{instances}: this helps check that we have the right fields and gives us data to use in making examples later.
 
 [.lesson-instruction]
-At the bottom of the worksheet, use the `sunset` constructor to
-write write down the `SunsetState` instance for the first frame
-(labeled "`Sketch A`"). It has x-coordinate 10 and y-coordinate
-300.
+At the bottom of the worksheet, use the `sunset` constructor to write write down the `SunsetState` instance for the first frame (labeled "`Sketch A`"). It has x-coordinate 10 and y-coordinate 300.
 
 [.lesson-point]
 Step 2: Draw one frame
 
-The second step in making an animation is to write a function
-that consumes an instance of one state and produces the image for
-that instance. We call this function `draw-state`. For sunset,
-`draw-state` takes a `SunsetState` instance and produces an image
-with the sun at that location (dipping behind the horizon when
-low in the sky). This function should use `put-image`, as we did
-with the hikers in unit 1.
+The second step in making an animation is to write a function that consumes an instance of one state and produces the image for that instance. We call this function `draw-state`. For sunset, `draw-state` takes a `SunsetState` instance and produces an image with the sun at that location (dipping behind the horizon when low in the sky). This function should use `put-image`, as we did with the hikers in unit 1.
 
 [.lesson-instruction]
-Go to @workbook-link{pages/draw-state.adoc} in your workbook and develop the `draw-state`
-function described there. Type in your function and use it (in
-the interactions window) to draw several individual sunset
-frames.
+Go to @workbook-link{pages/draw-state.adoc} in your workbook and develop the `draw-state` function described there. Type in your function and use it (in the interactions window) to draw several individual sunset frames.
 
 ////
-You may have noticed that we used SunsetState instead of sunset
-as the domain name. Remember that sunset is just the name of the
-constructor, while SunsetState is the name of the type. We use
-SunsetState whenever we need a type name for the domain or range.
+You may have noticed that we used SunsetState instead of sunset as the domain name. Remember that sunset is just the name of the constructor, while SunsetState is the name of the type. We use SunsetState whenever we need a type name for the domain or range. 
 ////
 
-We can now draw one frame, but an animation needs many frames.
-How can we draw multiple frames? Let’s simply the problem a bit:
-if you have the instance for one frame, how do we compute the
-instance for the next frame? Note we didn’t ask how to produce
-the image for the next frame. We only asked how to produce the
-next `SunsetState` instance. Why? We just wrote `draw-state`, which
-produces the image from a `SunsetState`. So if we can produce the
-instance for the next frame, we can use `draw-state` to produce the
-image.
+We can now draw one frame, but an animation needs many frames. How can we draw multiple frames? Let’s simply the problem a bit: if you have the instance for one frame, how do we compute the instance for the next frame? Note we didn’t ask how to produce the image for the next frame. We only asked how to produce the next `SunsetState` instance. Why? We just wrote `draw-state`, which produces the image from a `SunsetState`. So if we can produce the instance for the next frame, we can use `draw-state` to produce the image.
 
 ////
-Separating the instance from the image of it is key here: when we
-produce an animation, we actually produce a sequence of
-instances, and use draw-state to produce each one. Students may
-need some practice to think of the instance as separate from the
-image that goes into the animation.
+Separating the instance from the image of it is key here: when we produce an animation, we actually produce a sequence of instances, and use draw-state to produce each one. Students may need some practice to think of the instance as separate from the image that goes into the animation.
 ////
 
 [.lesson-point]
 Step 3: Produce the next frame instance
 
-The third step in making an animation is to write a function that
-consumes an instance of one state and produces the instance for
-the next state. We call this function `next-state-tick`. For
-sunset, `next-state-tick` takes a `SunsetState` instance and produces
-a `SunsetState` instance that is just a little lower in the sky.
+The third step in making an animation is to write a function that consumes an instance of one state and produces the instance for the next state. We call this function `next-state-tick`. For sunset, `next-state-tick` takes a `SunsetState` instance and produces a `SunsetState` instance that is just a little lower in the sky.
 
 [.lesson-instruction]
-Go to @workbook-link{pages/next-state-tick.adoc} in your workbook and develop the `next-state-tick`
-function described there. Use the sample `SunsetState` instances
-that you developed in step 1 as you make your examples of the
-function. Then, type in the code you have so far (including the
-data definition for `SunsetState` into the sunset starter file, and
-make sure your examples are producing the expected answers.
+Go to @workbook-link{pages/next-state-tick.adoc} in your workbook and develop the `next-state-tick` function described there. Use the sample `SunsetState` instances that you developed in step 1 as you make your examples of the function. Then, type in the code you have so far (including the data definition for `SunsetState` into the sunset starter file, and make sure your examples are producing the expected answers.
 
-Together, the `draw-state` and `next-state-tick` functions are the
-building blocks for an animation. To start to see how, let’s
-first use these two functions to create the first several frames
-of an animation by hand (then we’ll show you how to make more
-frames automatically).
+Together, the `draw-state` and `next-state-tick` functions are the building blocks for an animation. To start to see how, let’s first use these two functions to create the first several frames of an animation by hand (then we’ll show you how to make more frames automatically).
 
 [.lesson-instruction]
 --
-Run each of the following expressions in the interactions window
-in turn. Just copy and paste them, rather than type them by hand
-each time:
+Run each of the following expressions in the interactions window in turn. Just copy and paste them, rather than type them by hand each time:
 
 - `draw-state(sunset(10,300))`
 - `next-state-tick(sunset(10,300))`
@@ -238,18 +137,11 @@ Now use `draw-state` on the result of `next-state-tick`, then call `next-state-t
 - `next-state-tick(sunset(26,292))`
 --
 
-Do you see the sun getting lower in the sky from image to image?
-Do you see how we are creating a "`chain`" of images by alternating
-calls to `draw-state` and `next-state-tick`? We use `next-state-tick`
-to create the instance for a new frame, then use `draw-state` to
-produce the image for that frame.
+Do you see the sun getting lower in the sky from image to image? Do you see how we are creating a "`chain`" of images by alternating calls to `draw-state` and `next-state-tick`? We use `next-state-tick` to create the instance for a new frame, then use `draw-state` to produce the image for that frame.
 
 [.lesson-instruction]
 --
-(Optional) Here’s another way to see the same sequence of
-expressions. Run each of the following expressions in the
-interactions window in turn. Just copy and paste them, rather
-than type them by hand each time:
+(Optional) Here’s another way to see the same sequence of expressions. Run each of the following expressions in the interactions window in turn. Just copy and paste them, rather than type them by hand each time:
 
 - `draw-state(sunset(10,300))`
 - `draw-state(next-state-tick(sunset(10,300)))`
@@ -257,24 +149,10 @@ than type them by hand each time:
 - `draw-state(next-state-tick(next-state-tick(next-state-tick(sunset(10,300)))))`
 --
 
-Do you see what this sequence of expressions does? Each one
-starts with the sun in the upper-left corner, calls
-`next-state-tick` one or more times to compute a new position for
-the sun, then draws the state. Notice that this sequence only has
-us write down one `SunsetState` instance explicitly (the first
-one). All the others are computed from `next-state-tick`. If we
-could only get Pyret to keep making these calls for us, and to
-show us the images quickly one after the next, we’d have an
-animation!
+Do you see what this sequence of expressions does? Each one starts with the sun in the upper-left corner, calls `next-state-tick` one or more times to compute a new position for the sun, then draws the state. Notice that this sequence only has us write down one `SunsetState` instance explicitly (the first one). All the others are computed from `next-state-tick`. If we could only get Pyret to keep making these calls for us, and to show us the images quickly one after the next, we’d have an animation!
 
 ////
-These sequences show students how the two functions work together
-to create an animation. If you feel the second one that composes
-next-state-tick with itself many times is too complicated for
-your students, you can skip it. The goal of the second sequence
-is to show that we only need an initial instance and the two
-functions to generate a sequence of images that make up an
-animation.
+These sequences show students how the two functions work together to create an animation. If you feel the second one that composes next-state-tick with itself many times is too complicated for your students, you can skip it. The goal of the second sequence is to show that we only need an initial instance and the two functions to generate a sequence of images that make up an animation.
 ////
 
 [.lesson-point]

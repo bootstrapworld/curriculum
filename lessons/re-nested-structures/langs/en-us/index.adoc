@@ -22,8 +22,12 @@
 
 |===
 
-Managing Complexity with Nested Structures (Time 45 minutes)
+== Nested Structures: Managing Complexity  @duration{45 minutes}
 
+=== Overview
+Students are introduced to the need for nested data structures, as a way of managing complexity.
+
+=== Launch
 Now that you know all about data structures, you’re able to use them to make video games and animations from scratch, including games that are much more complex than those you worked on in Bootstrap:Algebra. However, as you add more things to your game, you quickly end up with a large number of elements in your data structure. (If you have multiple characters in your game, each with their own position, speed, costume, etc. that all change, your structure can become quite long and unwieldy.)
 
 Making changes to your structure, or writing functions to alter it, can get extremely complex. One way to manage this complexity is to use _nested_ structures: Just like we can write functions to handle repetitive processes, we can make structures to handle repetitive data. For example, if each of our 4 game characters have their own x and y coordinates, we could make one `Position` structure to use for each character. Then, instead of our game structure containing 8 numbers, it only contains 4 ``Position``s.
@@ -47,8 +51,9 @@ The only things that change in this animation are the angles of rotaton for each
 
 Suppose we wanted each of the pinwheels to spin at a different speed. We already know that any changeable part of the animation will need to be added to the structure, so we’ll need to add 4 new numbers to the `PinwheelState` structure.
 
+=== Investigate
 [.lesson-instruction]
-Print out the following link:images/NonNested-Pinwheels1.png[code screenshot] from the pinwheels file and underline or highlight each spot in the code you would need to change in order to add a speed to each pinwheel. Once you’ve identified which sections of the code will need to change, edit the program on the computer so that each pinwheel spins at a different speed.
+Print out the following link: @link{images/NonNested-Pinwheels1.png, code screenshot} from the pinwheels file and underline or highlight each spot in the code you would need to change in order to add a speed to each pinwheel. Once you’ve identified which sections of the code will need to change, edit the program on the computer so that each pinwheel spins at a different speed.
 
 Now we have a nice animation of pinwheels spinning at different speeds, but what if we had started off by making each individual pinwheel _its own structure_? As we’ll see shortly, this can help save us some time and headaches down the road, if we want to add to our animation later.
 
@@ -81,9 +86,7 @@ STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 - How would you get the angle out of `pw2` in the `STARTING-PINWHEELS` instance?
 --
 
-////
 With nested structures, accessing fields in the "child" structure (in this case, Pinwheel requires two dots. So, STARTING-PINWHEELS.pw1 produces pw(60), the first Pinwheel. Whereas STARTING-PINWHEELS.pw2.angle produces 3, the angle of pw2.
-////
 
 Another change between the non-nested and nested versions of the code is that in the nested version, our @vocab{helper functions} `update-pinwheel` and `draw-pinwheel` now take in a `Pinwheel` data structure, as opposed to just a number. The animation still works and looks the same on the outside, and the code hasn’t changed too drastically.
 
@@ -92,9 +95,7 @@ Let’s do the same activity for the nested version of the code, where we make e
 [.lesson-instruction]
 Print out the following code screenshot for the nested link:images/Nested-Pinwheels1.png[pinwheels file], and underline or highlight each spot in the code you would need to change in order to change each pinwheel’s speed independently. Once you’ve identified which sections will need to change, edit the nested version of the program on the computer.
 
-////
 Point out the differences in underlining between the two code screenshots. Note that when students finish this activity, both of the animations will look the same- but one program will have been much more straightforward to modify! We wrote a bit more code at the beginning to set up the nested structures, but that paid off later by giving us more flexibility to change the behavior of the pinwheels.
-////
 
 @centered-image{images/adding-speed.png, "", 800}
 
@@ -129,6 +130,7 @@ Non-nested Pinwheels+Speed
 Nested Pinwheels+Speed
 ////
 
+=== Synthesize
 Compare the updating functions for the non-nested version of the code:
 
 ----
@@ -170,7 +172,7 @@ fun next-state-tick(ps):
 end
 ----
 
-Not only is the version which uses nested structures much shorter, it’s also much more readable. Using a nested structure affords us a unique opportunity for abstraction- If each pinwheel moves the same way, we can use one @vocab{helper function} on all of them, each time consuming a pinwheel and producing the updated pinwheel. This way the only function that needs to change is the one which addresses the "`child`" structure (in this case, `update-pinwheel`, which consumes a `Pinwheel`), and the function `next-state-tick`, which consumes the "`parent`" structure `PinwheelState`, can stay unchanged. This offers you lots more flexibility when making changes to your code, or adding things to a program.
+Not only is the version which uses nested structures much shorter, it’s also much more _readable_. Using a nested structure affords us a unique opportunity for abstraction. If each pinwheel moves the same way, we can use one @vocab{helper function} on all of them, each time consuming a pinwheel and producing the updated pinwheel. This way the only function that needs to change is the one which addresses the "child" structure (in this case, `update-pinwheel`, which consumes a `Pinwheel`), and the function `next-state-tick`, which consumes the "parent" structure `PinwheelState`, can stay unchanged. This offers you lots more flexibility when making changes to your code, or adding things to a program.
 
 You’ve seen how nested structures work inside a simple animation, but what about a more complex video game? Let’s return to he Ninja Cat game from Bootstrap:Algebra. Here’s the original data block and some sample instances from Ninja Cat:
 
@@ -229,9 +231,7 @@ For the nested structures version of Ninja Cat:
 - Finally, what do you notice about these two versions of the Ninja Cat data? Which do you prefer, and why?
 --
 
-////
 Have students discuss the pros and cons of writing a game using nested or non-nested structures.
-////
 
 Now take a look at YOUR video games. If you were to re-write your program to use nested structures, what would it look like? Do you have multiple characters in your game with their own x, y, and speed? Do you have any opportunities to use @vocab{helper functions} to move characters in the same way?
 
@@ -239,7 +239,5 @@ Now take a look at YOUR video games. If you were to re-write your program to use
 For practice, re-write the data block and sample instances for your video game using nested structures.
 
 ////
-Optional: If you like, have students completely refactor their
-entire game code to make use of nested structures and helper
-functions.
+Optional: If you like, have students completely refactor their entire game code to make use of nested structures and helper functions.
 ////
