@@ -17,7 +17,8 @@
 - Editing environment (Pyret Editor)
 - Student workbooks
 - Cutouts of Cat and Dog images
-- Cutouts of Pythagorean Theorem packets [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster - Student Games or the https://code.pyret.org/editor#share=0B9rKDmABYlJVT1FBd3RpQWFqbGM[Pyret Ninja Cat Starter] file preloaded on students’ machines
+- Cutouts of Pythagorean Theorem packets [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster 
+- Student Games or the https://code.pyret.org/editor#share=0B9rKDmABYlJVT1FBd3RpQWFqbGM[Pyret Ninja Cat Starter] file preloaded on students’ machines
 
 @include{xtra/lang-table.adoc}
 
@@ -29,8 +30,12 @@
 |===
 
 
-== The Distance Formula (Time 30 minutes)
+== The Distance Formula @duration{30 minutes}
 
+=== Overview
+Students implement the distance formula, to prepare for collision detection in their games.
+
+=== Launch
 So far, none of the animations we’ve created included any distance or collision-detection functions. However, if you want to make a game where the player has to hit a target, avoid an enemy, jump onto platforms, or reach a specific part of the screen, we’ll need to account for collisions. This is going to require a little math, but luckily it’s exactly the same as it was in Bootstrap:Algebra.
 
 @span{.right}{@centered-image{images/cat-dog.png, "", 400}}
@@ -62,6 +67,7 @@ Unfortunately, most distances aren’t only measured in one dimension. We’ll n
 
 @span{.clear}{}
 
+=== Investigate
 [.lesson-instruction]
 - How could you find the distance between the two points shown in this image?
 - How could you find the length of the C, also called the @vocab{Hypotenuse}?
@@ -85,13 +91,13 @@ A large, white square with a smaller one drawn inside Four gray triangles, all t
 
 @span{.right}{@centered-image{images/4-rt-triangles.png, "", 400}}
 
-For any right triangle, it is possible to draw a picture where the hypoteneuse is used for all four sides of a square. In the diagram shown here, the white square is surrounded by four gray, identical right-triangles, each with sides A and B. The square itself has four identical sides of length C, which are the hypoteneuses for the triangles. If the area of a square is expressed by _side_ ∗ _side_, then the area of the white space is C2.
+For any right triangle, it is possible to draw a picture where the hypoteneuse is used for all four sides of a square. In the diagram shown here, the white square is surrounded by four gray, identical right-triangles, each with sides @math{A} and @math{B}. The square itself has four identical sides of length @math{C}, which are the hypoteneuses for the triangles. If the area of a square is expressed by _side_ ∗ _side_, then the area of the white space is @math{C^2}.
 
 ////
 Have students place their gray triangles onto the paper, to match the diagram.
 ////
 
-By moving the gray triangles, it is possible to create two rectangles that fit inside the original square. While the space taken up by the triangles has shifted, it hasn’t gotten any bigger or smaller. Likewise, the white space has been broken into two smaller squares, but in total it remains the same size. By using the side-lengths A and B, one can calculate the area of the two squares.
+By moving the gray triangles, it is possible to create two rectangles that fit inside the original square. While the space taken up by the triangles has shifted, it hasn’t gotten any bigger or smaller. Likewise, the white space has been broken into two smaller squares, but in total it remains the same size. By using the side-lengths @math{A} and @math{B}, one can calculate the area of the two squares.
 
 [.lesson-instruction]
 What is the area of the smaller square? The larger square?
@@ -102,23 +108,21 @@ You may need to explicitly point out that the side-lengths of the triangles can 
 
 image
 
-The smaller square has an area of __A__², and the larger square has an area of __B__². Since these squares are just the original square broken up into two pieces, we know that the sum of these areas must be equal to the area of the original square:
+The smaller square has an area of @math{A^2}, and the larger square has an area of @math{B^2}. Since these squares are just the original square broken up into two pieces, we know that the sum of these areas must be equal to the area of the original square:
 
-__A__² + __B__² = __C__²
+@math{A^2 + B^2 = C^2}
 
 [.lesson-instruction]
-Does the same equation work for any values of _A_ and _B_?
+Does the same equation work for any values of @math{A} and @math{B}?
 
 To get _C_ by itself, we take the square-root of the sum of the areas:
 
-√(__A__² + __B__²) = __C__
+@math{\sqrt{A^2 + B^2} = C}
 
 
 Pythagoras proved that you can get the square of the hypotenuse by adding the squares of the other two sides. In your games, you’re going to use the horizontal and vertical distance between two characters as the two sides of your triangle, and use the Pythagorean theorem to find the length of that third side.
 
-////
-Remind students that A and B are the horizontal and vertical lengths, which are calculated by line-length.
-////
+Remind students that @math{A} and @math{B} are the horizontal and vertical lengths, which are calculated by line-length.
 
 [.lesson-instruction]
 --
@@ -145,13 +149,19 @@ Now you’ve got code that tells you the distance between the points (4, 2) and 
 
 You still need a function to check whether or not two things are colliding.
 
-////
+[.strategy-box]
+.Watch Out!
+****
 Pay careful attention to the order in which the coordinates are given to the distance function. The player’s x-coordinate (px) must be given first, followed by the player’s y (py), character’s x (cx), and character’s y (cy). Just like with making data structures, order matters, and the distance function will not work otherwise. Also be sure to check that students are using num-sqr and num-sqrt in the correct places.
-////
+****
 
 
-== Collision Detection (Time 30 minutes)
+== Collision Detection @duration{30 minutes}
 
+=== Overview
+Students implement a simple Boolean-producing function, which composes with the distance function they implemented.
+
+=== Launch
 So what do we want to do with this distance?
 
 [.lesson-instruction]
@@ -171,6 +181,7 @@ Using visual examples, ask students to guess the distance between a danger and a
 
 Now that you have a function which will check whether two things are colliding, you can use it in your game! For extra practice, You can also implement collision detection into this Pyret Ninja Cat game. This is the program we’ll be altering for this lesson, as an example. In Ninja Cat, when the cat collides with the dog, we want to put the dog offscreen so that he can come back to attack again.
 
+=== Investigate
 [.lesson-instruction]
 Out of the major functions in the game (`next-state-tick`, `draw-state`, or `next-state-key`), which do you think you’ll need to edit to handle collisions, changing the `GameState` when two characters collide?
 
@@ -186,10 +197,10 @@ We’ll need to make some more `if` branches for `next-state-tick`.
  
 ----
 if is-collision(
-g.playerx,
-g.playery,
-g.dangerx,
-g.dangery):   ...result...
+  g.playerx,
+  g.playery,
+  g.dangerx,
+  g.dangery):   ...result...
 ----
  
 Remember that `next-state-tick` produces a GameState, so what function should come first in our result?  
@@ -236,14 +247,12 @@ game(
   g.targety,
   g.targetspeed) 
 ----
- 
-////
+
 Collision detection must be part of the next-state-tick function because the game should be checking for a collision each time the GameState is updated, on every tick. Students may assume that draw-state should handle collision detection, but point out that the Range of draw-state is an Image, and their function must return a new GameState in order to set the locations of the characters after a collision.
-////
 
 [.lesson-instruction]
 --
- Once you’ve finished, write another branch to check whether the player and the target have collided. *Challenges:*
+Once you’ve finished, write another branch to check whether the player and the target have collided. *Challenges:*
 
 - Change your first condition so that the danger gets reset only when the player and danger collide AND the cat is jumping. (What must be true about the player’s y-coordinate for it to be jumping?)
 - Add another condition to check whether the player has collided with the danger while the player is on the ground. This could be a single expression within `next-state-tick`, or you can write a @vocab{helper function} called `game-over` to do this work, and use it in other functions as well (maybe the GameState is drawn differently once the game is over.)
