@@ -1,0 +1,185 @@
+= Function Applications
+
+@lesson-description{Students practice using a new function alongside previously-learned functions to choose images for their game.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-defining-values-1}
+|Lesson Goals
+|Students will be able to:
+
+* Apply previous knowledge of @vocab{functions} to new situations
+* Use reasoning skills to select appropriate functions and combine their effects
+
+|Student-Facing Lesson Goals
+|
+* I can use different functions to transform @vocab{images}.
+* I can write definitions for my transformed images.
+
+|Key Points for the Facilitator
+|
+* Discuss copyright and fair use guidelines with your students.
+* Instructional time may vary based on students’ experience with using Google Image Search.
+* Check beforehand for any issues the school Internet security blocker might cause with searching for images.
+* There are two ways of importing images: linking directly to the image on the web or downloading the image to Google Drive and then using the "Insert" button.  See the "Linking Images Guide" below for more information on linking directly.
+* Encourage students to focus on finding and scaling each image as needed before moving on to the next one.
+
+|Prerequisites
+|
+* Students should be familiar with Circles of Evaluation.
+* Students should be familiar with image manipulation functions.
+* Students should be familiar with defining @vocab{value}s.
+
+|Materials
+|
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1sxU3oF6wOVZJ_5YMmgxYor3Ec5LNISudyJiuj0Q_5oQ/view, Google Slides})
+* Blank Game template (@link{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1pBTgEUgicEE8VPxPpAQaYnEJn7cdxvMJjOdWabc94KA, Google Slides})
+* Blank Game template (@link{https://code.pyret.org/editor#share=1xL3ZnWb43d5ih_fRib3dz3h8z9d__2om&v=f1d3c87, Pyret})
+endif::[]
+* Linking Images Guide (@link{pages/LinkingImagesGuide.pdf, PDF})
+* Saving Images Guide (@link{pages/SavingImagesGuide.pdf, PDF})
+ifeval::["{proglang}" == "wescheme"]
+* Blank Game template (@link{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Blank Game template (@link{https://code.pyret.org/editor#share=1xL3ZnWb43d5ih_fRib3dz3h8z9d__2om&v=f1d3c87, Pyret})
+endif::[]
+
+|===
+
+== Warmup
+
+Students should have their computer, contracts page, and pencil.
+
+Students should be logged into
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org }.
+endif::[]
+and have their completed “Game Design” worksheet.
+
+== The Game Template @duration{15 minutes}
+
+=== Overview
+This activity is primarily about _review and reading comprehension_, in which students open a large and unfamiliar file and must make sense of it using what they've seen before.
+
+=== Launch
+By now you've learned about defining values, composing functions, and reading contracts. Taken together, that's a lot of code you should be able to understand! Now it's time to flex your reading skills, and look at the file you'll be working with to build your videogame.
+
+=== Investigate
+[,lesson-instruction]
+With their partner, students should load the
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, Blank Game Template }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org/editor#share=1xL3ZnWb43d5ih_fRib3dz3h8z9d__2om&v=f1d3c87, Blank Game Template }.
+endif::[]
+
+[.notice-box]
+.Notice and Wonder
+****
+As students investigate the Game Template file with their partner,
+ask students to record what they notice, and then what they wonder.
+****
+
+=== Synthesize
+
+- *What familiar things did you see in the Game Template file?*
+- *What were some unfamiliar things?  Any idea what they might do?*
+_Answers vary: new functions, comments, images_
+- *What datatype is `GAME-TITLE`?  What datatype is `BACKGROUND`?*
+_``GAME-TITLE`` is a String, `BACKGROUND` is an Image_
+- *What does `SCREENSHOT` return in the @vocab{Interactions area}?*
+_An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
+ifeval::["{proglang}" == "wescheme"]
+- *What do you think `bitmap/url` does?*
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* *What do you think `image-url` does?*
+_Answers vary: It consumes a @vocab{String}, which is a URL (an image location on the Internet) and produces the @vocab{Image} inside our program_
+endif::[]
+
+- *Did anyone try pressing "Run"?  What happens when you press "Run"?*
+_Allow students to discuss what they see and what connections they see with the code_
+
+== Finding Your Game Images @duration{flexible}
+
+=== Overview
+This activity is all about finding the right images for students' games. Since the internet never has _exactly_ the right image, students' need to get their games *just right* motivates them to confront the need for dilation, rotation, and reflection of the images they find. This, in turn feeds back into their understanding of Contracts and Function Composition.
+
+=== Launch
+[.strategy-box]
+.Copyright and Fair Use
+
+@centered-image{images/fair-use-diagram.jpg, "Fair Use Diagram, Source:
+https://www.resourcesforlife.com/docs/item6247",400,align="center"}
+
+The students will be using images from the Internet for their game, and while this falls entirely under the "Educational Use" umbrella of Fair Use Guidelines, it is still important to make sure students of all ages understand the purpose of copyright law and the differences between educational and commercial purposes.
+
+Guide the students through finding an image, saving it to their Drive, importing it into their program, and defining the image value as `PLAYER`.
+_Students will change this image later on their own, this is just for teaching purposes._
+
+[.lesson-point]
+How to find and save images to Google Drive....
+
+In your favorite search engine (we recommend @link{https://www.DuckDuckGo.com, DuckDuckGo}, search for an image (an image of a flower is used here is an example).  Be sure to click the "Images" tab, and click "Tools" to select "Color" -> "Transparent".  This will filter and display images that have a transparent background, appearing as a light white/grey checkerboard pattern behind the character.
+
+@centered-image{images/transparent-image-search.png, "Finding Images on
+GIS, Source: Google Image Search, https://images.google.com" ,400,align="center"}
+
+Once an image has been selected, click it to expand and save the image to Google Drive. For file management, students could create a folder to store their game images.
+
+* If using a Chromebook, this is done by right-clicking and selecting "Google Drive" on the left for the save location.
+* On a PC or Mac, @link{pages/SavingImagesGuide.pdf, follow this quick guide}.
+
+Once the image is saved to Google Drive, it can be brought into the program by using the
+ifeval::["{proglang}" == "wescheme"]
+"Images"
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+"Insert"
+endif::[]
+button.  This will automatically bring in the image using the
+ifeval::["{proglang}" == "wescheme"]
+`bitmap-url`
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+`image-url`
+endif::[]
+function, and students can run the code to see the image.
+
+=== Investigate
+What happens if the image we find needs to be made bigger or smaller? What if it needs to be rotated, or flipped?
+
+Students can define the image as a value and make changes to it with the image manipulation functions `scale`, `rotate`, `flip-horizontal`, and `flip-vertical`.
+
+[.strategy-box]
+.Strategies for English Language Learners
+****
+MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the functions, such as `scale` and `flip-horizontal`.
+****
+
+[.lesson-instruction]
+With their partner, students search the Internet for images to use in their game.  They will need 4 images, one for each visual element of their game:
+
+- `BACKGROUND`
+- `PLAYER`
+- `DANGER`
+- `TARGET`
+
+Students should:
+
+- Save the chosen images to their Drive
+- Bring them into the programming environment
+- @vocab{Define} the images as values
+- Plan out how to resize and reorient them in their game
+- Make sure the final version of each image is defined as either `BACKGROUND`, `TARGET`, `DANGER`, or `PLAYER`
+
+When finished, students should be able to type `SCREENSHOT` in the interactions window and see all four of their images appropriately sized and oriented.
