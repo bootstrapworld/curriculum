@@ -41,60 +41,58 @@ endif::[]
 
 |===
 
-== Get Ready:
+== Warmup
 
 Students should have their computer, contracts page, and pencil.  Students should have their own *game file* open in a separate window or tab.
 
-== Launch: (5 min)
+== Animation @duration{45 minutes}
 
-* How does animation work?
-* Why do we see movement from still images?
-+
+=== Overview
+Students connect the behavior of functions with changing coordinate values, ultimately leading to animation.
+
+=== Launch
+
+- How does animation work?
+- Why do we see movement from still images?
 _Our eyes fill in the gaps between rapidly changing images._
-* How might this apply to our game? _If we change image @vocab{coordinate}s a little bit at a time, they will appear to move._
 
-== Discuss: (15 min)
+- How might this apply to our game? _If we change image @vocab{coordinate}s a little bit at a time, they will appear to move._
 
-=== Role Play:
-
+[.lesson-instruction]
 Select 2 student volunteers - one to be TARGET, one to be DANGER.  Start with just TARGET.
 
-* TARGET moves a step to the left when they hear "update target" followed by a number.
-* We make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.
+- TARGET moves a step to the left when they hear "update target" followed by a number.
+- We make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.
 
 *How quickly could I get TARGET to move across the classroom?*
 
 After practicing with TARGET, add DANGER in.
 
-* DANGER takes a step to the right when they hear "update danger" followed by a number.
-* We make DANGER move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
+- DANGER takes a step to the right when they hear "update danger" followed by a number.
+- We make DANGER move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
 
 *How quickly could I get TARGET and DANGER to move across the room?*
 
 You'll have to call quickly to TARGET and DANGER, but it is very repetitive and tedious, and TARGET and DANGER won't be moving very fast!
 
-* *What did you notice about the movement of TARGET and DANGER?  What was changing about them?*
+- *What did you notice about the movement of TARGET and DANGER?  What was changing about them?*
 +
 _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
 
-* *What would have happened if we'd added PLAYER?*
-+
+- *What would have happened if we'd added PLAYER?*
 _It would have been more difficult to move them all simultaneously._
 
-* *What jobs could we hand over to the computer to make it possible for us to play the game?*
-+
+- *What jobs could we hand over to the computer to make it possible for us to play the game?*
 _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
 
-== Practice (15 min)
-
-Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.
-
-Guide students as they complete @workbook-link{pages/FunctionApplications2-WB1.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.
+=== Investigate
+[.lesson-instruction]
+-Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.
+-Guide students as they complete @workbook-link{pages/FunctionApplications2-WB1.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.
 
 When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
 
-== Apply (15 min)
-
+[.lesson-instruction]
 Have students complete @workbook-link{pages/FunctionApplications2-WB2.adoc, Design Recipe: update-target} with their partner and transfer the code to their Game Template file.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
 
 [.strategy-box]
@@ -105,4 +103,3 @@ ifeval::["{proglang}" == "wescheme"]
 Want 2-D movement?  A supplemental lesson @link{https://www.bootstrapworld.org/materials/fall2019/courses/algebra/en-us/units/Supplemental/index.html#lesson_Structs, linked here} provides information on how to modify these functions to allow movement in the x _and_ y directions!
 endif::[]
 ****
-
