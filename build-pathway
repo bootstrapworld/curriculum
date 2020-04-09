@@ -37,7 +37,8 @@ while test $# -ne 0; do
   elif test "$arg" = --nopdf; then
     NOPDF=1
   elif test "$arg" = --proglang; then
-    PROGLANG=$1; echo PROGLANG is $PROGLANG; shift
+    PROGLANG=$1; #echo PROGLANG is $PROGLANG
+    shift
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1;
   else
@@ -637,7 +638,6 @@ function collapseadjtables() {
   fi
   $SED -i -e "$xi,${xii}d" "$f"
 }
-
 
 function buildlessonplan() {
   #echo doing buildlessonplan
