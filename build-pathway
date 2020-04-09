@@ -679,20 +679,18 @@ function buildlessonplan() {
     fi
     checklinks index.shtml
 
-#################################################################
-#    I thought we were getting rid of builing individual lesson plan PDFs?
-#    if test ! $NOPDF; then
-#      #echo Creating lesson plan pdf
-#      if test index.shtml -nt index.pdf; then
-#        TEMPF=$(mktemp)
-#        TMPHTML=$(basename $TEMPF).index.html
-#        rm $TEMPF
-#        cp index.shtml $TMPHTML
-#        insertprintcss $TMPHTML
-#        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-#        rm $TMPHTML
-#      fi
-#    fi
+    if test ! $NOPDF; then
+      #echo Creating lesson plan pdf
+      if test index.shtml -nt index.pdf; then
+        TEMPF=$(mktemp)
+        TMPHTML=$(basename $TEMPF).index.html
+        rm $TEMPF
+        cp index.shtml $TMPHTML
+        insertprintcss $TMPHTML
+        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+        rm $TMPHTML
+      fi
+    fi
   fi
   cd ..
 
