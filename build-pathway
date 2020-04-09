@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-08 # last modified
+LASTMOD=2020-04-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -768,7 +768,8 @@ function buildpathwaynarrative() {
     echo WARNING: Too many narratives in pathway $PATHWAY
   else
     #cp -p $PROGDIR/*.css .
-    export PATHWAYROOTDIR=""
+    export PATHWAYROOTDIR=./
+    export LESSONSUBDIR=
     # there should be only one?
     #echo
     for f in *.adoc; do
@@ -933,7 +934,7 @@ function buildteacherresource() {
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many teacher resource files in pathway $PATHWAY
   else
-    #export PATHWAYROOTDIR="../"
+    #export PATHWAYROOTDIR=../
     # there should be only one?
     for f in *.adoc; do
       cp -p $f index.asciidoc
@@ -950,8 +951,8 @@ function buildteacherresource() {
     fi
     checklinks index.shtml
   fi
-  export PATHWAYROOTDIR=""
   cd ..
+  export PATHWAYROOTDIR=./
 }
 
 function buildpathway() {
@@ -1060,7 +1061,7 @@ function buildpathway() {
     done
     cd ..
 
-    export PATHWAYROOTDIR=
+    export PATHWAYROOTDIR=./
 
     #echo PWYD is $PATHWAYROOTDIR
     #echo LSDR is $LESSONSUBDIR
@@ -1089,7 +1090,7 @@ function buildpathway() {
       fi
     done
 
-    export PATHWAYROOTDIR=""
+    export PATHWAYROOTDIR=./
     cd ..
 
     # Racket version
@@ -1120,7 +1121,7 @@ function buildpathway() {
         fi
 
         #XXX:  ↓ not needed?
-        export PATHWAYROOTDIR=""
+        export PATHWAYROOTDIR=./
 
         #echo
         #echo building pathway workbooks: $PATHWAY
