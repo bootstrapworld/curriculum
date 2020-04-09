@@ -299,7 +299,7 @@
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
                            (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-                   (format "link:{pathwayrootdir}lessons/~a/index.shtml[~a]" lesson lesson-title)))
+                   (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]" lesson lesson-title)))
                other-lessons)
           ", ")) o)
   (display "\n\n" o))
@@ -359,7 +359,7 @@
       (printf "WARNING: ~a refers to nonexistent file ~a\n" dirve f))
     (when exercise?
       (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
-    (format "link:{pathwayrootdir}~a[~a~a~a]" g
+    (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if (truthy-getenv "LESSONPLAN")
                 (let ([pagenum (workbook-pagenum lesson snippet)])
@@ -445,7 +445,7 @@
                    (check-link f)
                    (printf "WARNING: @link refers to nonexistent file ~a\n" f))])
 
-         (format "link:~a[~a~a]" f link-text
+         (format "link:pass:[~a][~a~a]" f link-text
                  (if (or (truthy-getenv "LESSONPLAN") (truthy-getenv "TEACHER_RESOURCES"))
                      ", window=\"_blank\"" ""))]
         [else
@@ -550,7 +550,7 @@
                         (loop))))
                   r)))))
         (when (file-exists? lesson-index-file)
-          (fprintf o "link:~a[~a] ::" lesson-index-file lesson-title)
+          (fprintf o "link:pass:[~a][~a] ::" lesson-index-file lesson-title)
           (if lesson-description
               (display lesson-description o)
               (display " {nbsp}" o)))
@@ -986,7 +986,7 @@
         (let* ([ti (list-ref ex 1)]
                [exer (list-ref ex 0)]
                [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-          (fprintf o "|~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
+          (fprintf o "|~a |[link:pass:[~a][exercise] : link:pass:[~a][solution]]\n" ti exer soln)))
       (fprintf o "|===\n\n"))))
 
 (define (add-exercises)
@@ -1057,7 +1057,7 @@
                    (string-join
                      (map
                        (lambda (x)
-                         (format " link:./~a/index.shtml[~a]" (car x) (cadr x)))
+                         (format " link:./pass:[~a]/index.shtml[~a]" (car x) (cadr x)))
                        lessons) ";"))))
       (for ([n sublist-items])
         (fprintf op "** ~a~%" (list-ref s (+ n 1)))
