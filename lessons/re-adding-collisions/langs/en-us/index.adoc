@@ -1,9 +1,6 @@
 = Adding Collisions
 
-@lesson-description{Using what they know from Bootstrap:Algebra,
-students write a distance function and collision detection
-function to handle collisions in their games, this time using the
-Data Structures and Reactor from their games.}
+@lesson-description{Using what they know from Bootstrap:Algebra, students write a distance function and collision detection function to handle collisions in their games, this time using the Data Structures and Reactor from their games.}
 
 [@lesson-intro-table]
 |===
@@ -20,11 +17,7 @@ Data Structures and Reactor from their games.}
 - Editing environment (Pyret Editor)
 - Student workbooks
 - Cutouts of Cat and Dog images
-- Cutouts of Pythagorean Theorem packets
-  [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster
-- Student Games or the
-  https://code.pyret.org/editor#share=0B9rKDmABYlJVT1FBd3RpQWFqbGM[Pyret
-  Ninja Cat Starter] file preloaded on students’ machines
+- Cutouts of Pythagorean Theorem packets [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster - Student Games or the https://code.pyret.org/editor#share=0B9rKDmABYlJVT1FBd3RpQWFqbGM[Pyret Ninja Cat Starter] file preloaded on students’ machines
 
 @include{xtra/lang-table.adoc}
 
@@ -60,19 +53,10 @@ Finding the distance in one dimesion is pretty easy: if the characters are on th
 When the cat and dog were switched, did you still subtract the dog’s position from the cat’s, or subtract the cat’s position from the dog’s? Why?
 
 ////
-Draw a number line on the board, with the cutouts of the cat and
-dog at the given positions. Ask students to tell you the distance
-between them, and move the images accordingly. Having students
-act this out can also work well: draw a number line, have two
-students stand at different points on the line, using their arms
-or cutouts to give objects of different sizes. Move students
-along the number line until they touch, then compute the distance
-on the number line.
+Draw a number line on the board, with the cutouts of the cat and dog at the given positions. Ask students to tell you the distance between them, and move the images accordingly. Having students act this out can also work well: draw a number line, have two students stand at different points on the line, using their arms or cutouts to give objects of different sizes. Move students along the number line until they touch, then compute the distance on the number line.
 ////
 
-Unfortunately, most distances aren’t only measured in one
-dimension. We’ll need some code to calculate the distance between
-two points in two dimensions.
+Unfortunately, most distances aren’t only measured in one dimension. We’ll need some code to calculate the distance between two points in two dimensions.
 
 @span{.right}{@centered-image{images/hypotenuse.png, "", 400}}
 
@@ -82,12 +66,10 @@ two points in two dimensions.
 - How could you find the distance between the two points shown in this image?
 - How could you find the length of the C, also called the @vocab{Hypotenuse}?
 
-Let’s start with what we do know: if we treat the x- and
-y-intercepts of C as lines A and B, we have a right triangle.
+Let’s start with what we do know: if we treat the x- and y-intercepts of C as lines A and B, we have a right triangle.
 
 [.lesson-instruction]
-What is the line-length of A? Would it be different if the
-triangle pointed downward, and intercepted the point (0, −4)?
+What is the line-length of A? Would it be different if the triangle pointed downward, and intercepted the point (0, −4)?
 
 ////
 Draw this image on the board, with the lines labeled "A", "B", and "C".
@@ -96,27 +78,14 @@ Draw this image on the board, with the lines labeled "A", "B", and "C".
 Ancient civilizations had the same problem: they also struggled to find the distance between points in two dimensions. Let’s work through a way to think about this problem: what expression computes the length of the hypotenuse of a right triangle?
 
 ////
-This exercise is best done in small groups of students (2-3 per
-group). Pass out Pythagorean Proof materials [1, 2] to each
-group, and have them review all of their materials:
+This exercise is best done in small groups of students (2-3 per group). Pass out Pythagorean Proof materials [1, 2] to each group, and have them review all of their materials:
 
-A large, white square with a smaller one drawn inside
-Four gray triangles, all the same size
-Everyone will have a packet with the same materials, but each
-group’s triangles are a little different. The activity workes
-with triangles of all sizes, so each pair will get to test it out
-on their own triangles. Draw the diagram on the board.
+A large, white square with a smaller one drawn inside Four gray triangles, all the same size Everyone will have a packet with the same materials, but each group’s triangles are a little different. The activity workes with triangles of all sizes, so each pair will get to test it out on their own triangles. Draw the diagram on the board.
 ////
 
 @span{.right}{@centered-image{images/4-rt-triangles.png, "", 400}}
 
-For any right triangle, it is possible to draw a picture where
-the hypoteneuse is used for all four sides of a square. In the
-diagram shown here, the white square is surrounded by four gray,
-identical right-triangles, each with sides A and B. The square
-itself has four identical sides of length C, which are the
-hypoteneuses for the triangles. If the area of a square is
-expressed by _side_ ∗ _side_, then the area of the white space is C2.
+For any right triangle, it is possible to draw a picture where the hypoteneuse is used for all four sides of a square. In the diagram shown here, the white square is surrounded by four gray, identical right-triangles, each with sides A and B. The square itself has four identical sides of length C, which are the hypoteneuses for the triangles. If the area of a square is expressed by _side_ ∗ _side_, then the area of the white space is C2.
 
 ////
 Have students place their gray triangles onto the paper, to match the diagram.
@@ -133,8 +102,7 @@ You may need to explicitly point out that the side-lengths of the triangles can 
 
 image
 
-The smaller square has an area of __A__², and the larger square has
-an area of __B__². Since these squares are just the original square broken up into two pieces, we know that the sum of these areas must be equal to the area of the original square: 
+The smaller square has an area of __A__², and the larger square has an area of __B__². Since these squares are just the original square broken up into two pieces, we know that the sum of these areas must be equal to the area of the original square:
 
 __A__² + __B__² = __C__²
 
@@ -146,7 +114,7 @@ To get _C_ by itself, we take the square-root of the sum of the areas:
 √(__A__² + __B__²) = __C__
 
 
- Pythagoras proved that you can get the square of the hypotenuse by adding the squares of the other two sides. In your games, you’re going to use the horizontal and vertical distance between two characters as the two sides of your triangle, and use the Pythagorean theorem to find the length of that third side.
+Pythagoras proved that you can get the square of the hypotenuse by adding the squares of the other two sides. In your games, you’re going to use the horizontal and vertical distance between two characters as the two sides of your triangle, and use the Pythagorean theorem to find the length of that third side.
 
 ////
 Remind students that A and B are the horizontal and vertical lengths, which are calculated by line-length.
@@ -165,10 +133,7 @@ end
 ----
 --
  
-Now you’ve got code that tells you the distance between the
-points (4, 2) and (0, 5). But we want to have it work for _any_ two
-points. It would be great if we had a function that would just
-take the x’s and y’s as input, and do the math for us.
+Now you’ve got code that tells you the distance between the points (4, 2) and (0, 5). But we want to have it work for _any_ two points. It would be great if we had a function that would just take the x’s and y’s as input, and do the math for us.
 
 [.lesson-instruction]
 --
@@ -191,7 +156,6 @@ So what do we want to do with this distance?
 
 [.lesson-instruction]
 How close should your danger and your player be, before they hit each other?
-
 
 At the top of Page 47 you’ll find the Word Problem for `is-collision`.
 
@@ -279,16 +243,10 @@ Collision detection must be part of the next-state-tick function because the gam
 
 [.lesson-instruction]
 --
- Once you’ve finished, write another branch to check whether the
- player and the target have collided. *Challenges:*
+ Once you’ve finished, write another branch to check whether the player and the target have collided. *Challenges:*
 
 - Change your first condition so that the danger gets reset only when the player and danger collide AND the cat is jumping. (What must be true about the player’s y-coordinate for it to be jumping?)
-- Add another condition to check whether the player has collided
-  with the danger while the player is on the ground. This could
-  be a single expression within `next-state-tick`, or you can write
-  a @vocab{helper function} called `game-over` to do this work, and use it
-  in other functions as well (maybe the GameState is drawn
-  differently once the game is over.)
+- Add another condition to check whether the player has collided with the danger while the player is on the ground. This could be a single expression within `next-state-tick`, or you can write a @vocab{helper function} called `game-over` to do this work, and use it in other functions as well (maybe the GameState is drawn differently once the game is over.)
 --
 
 ////
