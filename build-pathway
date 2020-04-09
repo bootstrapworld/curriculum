@@ -522,8 +522,11 @@ function recursiveadoc() {
       if test -f workbook-pages-ls.txt.kp; then
         for wbp in $(cat workbook-pages-ls.txt.kp); do
           if test ! -f $wbp; then
-            BROKEN_WORKBOOK_PAGES=1
-            echo WARNING: Missing workbook page $wbp in $LESSON/$dir
+            wbpadoc=${wbp%.*}.adoc
+            if test ! -f $wbpadoc; then
+              BROKEN_WORKBOOK_PAGES=1
+              echo WARNING: Missing workbook page $wbp in $LESSON/$dir
+            fi
           fi
         done
       fi

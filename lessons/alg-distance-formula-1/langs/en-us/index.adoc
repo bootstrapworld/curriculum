@@ -1,0 +1,179 @@
+= The Distance Formula
+
+@lesson-description{Students apply their knowledge of the Pythagorean Theorem and Circles of Evaluation to develop a function for the distance formula.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-piecewise-functions-2}
+|Lesson Goals
+|Students will be able to:
+
+* Explain how the distance formula is related to the Pythagorean theorem.
+* Write a function for the distance formula.
+
+|Student-Facing Lesson Goals
+|
+* I can explain how the distance formula is connected to the Pythagorean theorem.
+* I can write a function that takes in 2 points and returns the distance between them.
+
+|Key Points for the Facilitator
+|
+* The distance formula is an excellent review of @vocab{Circles of Evaluation}. Have students work out the expression in small groups to foster discussion.
+
+|Prerequisites
+|
+* Students should be familiar with Circles of Evaluation.
+* Students should be familiar with the Design Recipe.
+* Students should have all other game functions working. (Game Pathway)
+
+|Materials
+|
+
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1nds3sEXmoGPQdACNomLOde89FFyjHowILDVGktGLLxQ/view, Google Slides})
+
+* Sample game file - no distance lines (@link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, WeScheme})
+
+* Sample game file - with distance lines (@link{https://www.wescheme.org/view?publicId=0bCivugY3P, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1zl_7vW2KqfRsL7zubjCCNXo24gwfxRHgRzD7M7Ox6NE, Google Slides})
+
+* Sample game file - no distance lines (@link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Pyret})
+
+* Sample game file - with distance lines (@link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Pyret})
+endif::[]
+
+* Notice And Wonder (@workbook-link{pages/NoticeAndWonder.pdf, PDF}, @link{https://docs.google.com/document/d/1hNMUXcMRWgKllc7SOzzqaTR48RiWbXg8RvG9rtl3SuU/view, Google Doc})
+
+* Frayer Model (@workbook-link{pages/FrayerModelDistance.pdf, PDF}, @link{https://docs.google.com/drawings/d/1mCJygY5elVQzy64zLLRyFVZ9-CkTnVYTBM3URnIfzEc/view, Google Doc})
+
+* Design Recipe: distance (@workbook-link{pages/DistanceFormula1-WB1.adoc, PDF})
+
+ifeval::["{proglang}" == "wescheme"]
+* Design Recipe: onscreen? (@workbook-link{pages/DistanceFormula1-WB2.adoc, PDF})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Design Recipe: is-onscreen (@workbook-link{pages/DistanceFormula1-WB2.adoc, PDF})
+endif::[]
+
+|===
+
+== Warmup
+
+Students should have their workbook, pencil, and be logged into
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}
+endif::[]
+on their computer.
+
+== Distance @duration{25 minutes}
+
+=== Overview
+Students discover the need for distance calculation (first in one dimention, then in two) in videogames.
+
+=== Launch
+
+ifeval::["{proglang}" == "wescheme"]
+Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate. +
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, game file} and investigate. +
+endif::[]
+
+{empty}
+
+- What seems to be missing from this game?
++
+_The characters aren't doing anything when they collide._
+
+- Why are the characters moving by each other?
++
+_We haven't given the game any instructions on what to do when the characters get close._
+
+- What does it mean for characters to 'hit' one another? To collide?
++
+_They have to be in the same place at the same time._
+
+- How will the computer know when the characters have collided?
++
+_When the coordinates of the characters are really close to each other._
+
+Role-Play: Ask a volunteer to help role-play two characters colliding. Stand about 10 steps away from one another and side-step towards each other one step at a time, while asking, "Are we colliding yet?"
+
+Do this until students can clearly see it's when the two characters are 'touching' or 'at the same point.' Don't worry about clarifying the difference now, they will be able to see the differences with their own images very soon.
+
+[.lesson-instruction]
+Have students explore using the `line-length` function in the @vocab{Interactions area}.
+
+[.strategy-box]
+.Extension
+****
+You can extend this `line-length` activity into a lesson on absolute value and have students program `line-length` themselves. Computing 1-dimensional distance - and absolute value - are in fact piecewise functions!
+****
+
+ifeval::["{proglang}" == "wescheme"]
+Have students open this new @link{https://www.wescheme.org/view?publicId=0bCivugY3P, game file} and investigate. +
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Have students run this new @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate. +
+endif::[]
+{empty} +
+
+[.notice-box]
+.Notice and Wonder
+****
+What do you Notice? What do you Wonder?
+****
+
+* What kind of triangles are these?
++
+_Right triangles._
+* What do the numbers represent?
++
+_Let students discuss - the numbers should represent the lengths of the sides, but one side is always showing 0._
++
+The missing length on the right triangle is the *hypotenuse*. The *legs* of the triangle show the length of each side, or the *distance* between those points on the number line. +
+{empty} +
+[.strategy-box]
+.Extension
+****
+You can take this activity further by having students prove the distance formula by solving for the @vocab{hypotenuse} of a right triangle.
+****
+
+=== Investigate
+
+Optional: Have students use this @workbook-link{pages/FrayerModelDistance.pdf, Frayer Model} to model the distance formula with the Circles of Evaluation and translate it to code. +
+{empty} +
+
+[.lesson-instruction]
+Using @workbook-link{pages/DistanceFormula1-WB1.adoc, Design Recipe: distance},
+have students write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
+{empty} +
+
+Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
+
+Using
+ifeval::["{proglang}" == "wescheme"]
+@workbook-link{pages/DistanceFormula1-WB2.adoc, Design Recipe: collision?},
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@workbook-link{pages/DistanceFormula1-WB2.adoc, Design Recipe: is-collision},
+endif::[]
+have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.
+
+=== Synthesize
+
+
+== Additional Exercises:
+- @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb07bb4b8576069fdcef1, Bootstrap: Algebra - More Design Recipe Practice} (Desmos Activity)
+- @link{https://teacher.desmos.com/activitybuilder/custom/58efa58b999d890619a5663e, Absolute Value} (Desmos)
+- @link{https://www.geogebra.org/m/rq7uDucY, Absolute Value Inequality Illustrator} (Geogebra)
+- @link{https://quizizz.com/admin/quiz/581c92bd3fa551e37a438264/absolute-value-preview, Absolute Value} (Quizizz)
+- @link{https://www.geogebra.org/m/DTeGM5U7, Distance Formula} (Geogebra)
+- @link{https://quizizz.com/admin/quiz/5876366405dad51d02b1beef/distance-formula, Distance Formula} (Quizizz)
+- @link{https://quizizz.com/admin/quiz/5828a9f82627ff7d77818381/pythagorean-theorem, Pythagorean Theorem} (Quizizz)
+- @link{https://www.geogebra.org/m/jFFERBdd#material/ZFTGX57r, Pythagorean Theorem} (Geogebra)

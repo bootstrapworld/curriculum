@@ -739,8 +739,7 @@
                                        [else
                                          ;XXX: should these just be warnings
                                          ;with the @workbook-link converted to plain @link ?
-                                         (error 'ERROR
-                                                 "adoc-preproc: Incorrect @workbook-link ~a\n" page)]))]
+                                         (printf "WARNING: Incorrect @workbook-link ~a\n" page)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
@@ -751,11 +750,9 @@
                                                                      third-compt link-text
                                                                      #:exercise? exercise?) o)]
                                        [else
-                                         (error 'ERROR
-                                                 "adoc-preproc: Incorrect² @workbook-link ~a\n" page)]))]
+                                         (printf "WARNING: Incorrect² @workbook-link ~a\n" page)]))]
                               [else
-                                (error 'ERROR
-                                        "adoc-preproc: Incorrect³  @workbook-link ~a\n" page)]))]
+                                (printf "WARNING: Incorrect³  @workbook-link ~a\n" page)]))]
                          [(or (string=? directive "worksheet-link")
                               (string=? directive "worksheet-include")
                               (string=? directive "exercise-link"))
@@ -776,7 +773,7 @@
                          [(string=? directive "lesson-description")
                           (unless (truthy-getenv "LESSONPLAN") ;TODO: or LESSON or both?
                             (error 'ERROR
-                                   "adoc-preproc: @lesson-description valid only in lesson plan"))
+                                   "WARNING: @lesson-description valid only in lesson plan"))
                           (display-lesson-description (read-group i directive) o)]
                          [(string=? directive "depends-on") ;XXX obsolete
                           (unless (truthy-getenv "LESSONPLAN")

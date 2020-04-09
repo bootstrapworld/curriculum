@@ -1,0 +1,210 @@
+= Defining Functions 2
+
+@lesson-description{Students will apply the Design Recipe to a linear function problem.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-defining-functions-1}
+|Lesson Goals
+|Students will be able to:
+
+* Understand how to use the Design Recipe to break down word problems.
+* Create a strong purpose statement that details in their own words what the function should do.
+
+|Student-Facing Lesson Goals
+|
+* I can use the @vocab{Design Recipe} to break down word problem when writing a @vocab{function}.
+* I can identify the @vocab{domain} and @vocab{range} and other quantities in a word problem when writing a function.
+* I can create and revise a strong @vocab{purpose statement} that explains what the function is doing.
+
+|Key Points for the Facilitator
+|
+
+* The *purpose statement* is a comment in the code - something the computer doesn't read.  It is important for readability of their code - there may be other people looking at their code and using their functions!
+* Remind students that the domain and range of a function must be one or more of the three @vocab{data types} (Number, String, Image) they've learned so far.
+* If students struggle with creating the examples, use the Circle of Evaluation mapping activity or use role-playing to help students build up their understanding around the concept.
+
+|Prerequisites
+|
+
+* Students should be familiar with @vocab{Circles of Evaluation}.
+* Students should be familiar with defining values.
+* Students should be familiar with the Design Recipe.
+
+|Materials
+|
+
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1jZ42nPILZIrv0FWiAh7h7tWVQcJ1r6_DxzlDOXXDo_s/view, Google Slides})
+* Rocket-height starter file (@link{https://www.wescheme.org/openEditor?publicId=LGTVNvzrax, WeScheme})
+* Notice & Wonder (@workbook-link{pages/NoticeAndWonder.pdf, PDF}, @link{https://docs.google.com/document/d/1hNMUXcMRWgKllc7SOzzqaTR48RiWbXg8RvG9rtl3SuU/edit?usp=sharing, Google Doc})
+* Purpose Statement organizer (@workbook-link{pages/PurposeStatement3ReadsStrongerClearer.pdf, PDF}, @link{https://docs.google.com/document/d/16xiKkaB6GYUv95ug7-o3QubnmX7oZnm03J1AJTtH_2k/view, Google Doc})
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=13AWEODX-9v8Ioqj-splV3lqfNXUaTjW__u4xTNDjRbI, Google Slides})
+* Rocket-height starter file (@link{https://code.pyret.org/editor#share=13zlxZnvvQdW-UJVy8FlGOCwpjkiWGT56&v=f1d3c87, Pyret})
+* Notice & Wonder (@workbook-link{pages/NoticeAndWonder.pdf, PDF}, @link{https://docs.google.com/document/d/1hNMUXcMRWgKllc7SOzzqaTR48RiWbXg8RvG9rtl3SuU/edit?usp=sharing, Google Doc})
+* Purpose Statement organizer (@workbook-link{pages/PurposeStatement3ReadsStrongerClearer.pdf, PDF}, @link{https://docs.google.com/document/d/16xiKkaB6GYUv95ug7-o3QubnmX7oZnm03J1AJTtH_2k/view, Google Doc})
+endif::[]
+
+ifeval::["{proglang}" == "wescheme"]
+|Formative Assessments and Activites
+|
+* Design Recipe Practice (@link{https://teacher.desmos.com/activitybuilder/custom/5d991b421172d473178c981b, Desmos Activity})
+* Design Recipe Practice - Blank Template (@link{https://teacher.desmos.com/activitybuilder/custom/5d991b939b9b292020c1810d, Desmos Activity})
+endif::[]
+
+|Supplemental Activities
+|
+* @link{https://teacher.desmos.com/expressions, Expression Bundle} (Desmos Activities)
+* @link{https://quizizz.com/admin/quiz/576d1e5f91cb32ef5fc67529/variables-and-expressions, Variables and Expressions} (Quizizz)
+* @link{https://teacher.desmos.com/functions, Functions Bundle} (Desmos Activities)
+* @link{https://teacher.desmos.com/polygraph/custom/560ad28e9e65da5615091edb,
+Functions & Relations} (Desmos Polygraph Activity)
+* @link{https://quizizz.com/admin/quiz/582b7390e8e0c0c201647d9d/functions, Functions} (Quizizz)
+* @link{https://quizizz.com/admin/quiz/582f0e34b805cc5c6608d326/function-notation, Function Notation} (Quizizz)
+
+|===
+
+== Warmup
+
+Students should have their workbook, pencil, and be logged into
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}
+endif::[]
+on their computer.
+
+== Writing Linear Functions @duration{25 minutes}
+
+=== Overview
+Students are given a non-working program, which uses a linear function to determine the height of a rocket after a given length of time. The "broken" code is provided to lower cognitive load, allowing students to focus on comprehension (reading the code) and making use of structure (identifying where it's broken).
+
+=== Launch
+
+Ask students to open the
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/openEditor?publicId=LGTVNvzrax, rocket-height Starter File} and click "Run". By typing `(start rocket-height)`, they will see the simulation start to run on their computer.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org/editor#share=13zlxZnvvQdW-UJVy8FlGOCwpjkiWGT56&v=f1d3c87, rocket-height Starter File} and click "Run". By typing `start(rocket-height)`, they will see the simulation start to run on their computer.
+endif::[]
+
+
+[.notice-box]
+.Notice and Wonder
+****
+What do you notice about this program?  What do you wonder?
+****
+
+Survey the class on their "Notices" and "Wonders" and record on the board before moving on to the discussion.
+
+[.lesson-instruction]
+- *Is `rocket-height` working?*
+** Why do you think it's not working?
+** What do you think the *purpose* of this function is?  How do you know?
+
+- *What is the domain of `rocket-height`?* +
+_Number_
+
+- *What is the range of `rocket-height`? How do you know?*
+_Number, we can tell by looking at the @vocab{contract} for the function._
+
+- *As the program is currently written, what happens when I give the function an input of 5?  15?  One million?* +
+_It always returns 0._
+
+=== Investigate
+
+We can use the Design Recipe to fix `rocket-height` and to introduce the *purpose statement*. 
+
+[.lesson-instruction]
+Have students turn to the @workbook-link{pages/DefiningFunctions2-EX1.adoc, rocket-height Design Recipe} and read the problem statement with their partner.
+
+[.strategy-box]
+.Strategies for English Language Learners
+****
+*MLR 6: Three Reads* +
+Students will access the problem statement three times, looking and listening for different relevant information for the function.  Students will document their work in the @workbook-link{pages/PurposeStatement3ReadsStrongerClearer.pdf, Purpose Statement organizer}.
+
+* 1st Read: Teacher reads the word problem aloud. Students discuss: What is the problem about?
+* 2nd Read: Partner A reads. Students discuss: What are the quantities?
+* 3rd Read: Partner B reads. Students discuss: What is a good purpose statement?
+
+*MLR 1: Stronger and Clearer Each Time* +
+Using the @workbook-link{pages/PurposeStatement3ReadsStrongerClearer.pdf, Purpose Statement organizer}, students will switch partners three times.  The purpose of this exercise is for students to read, listen and comprehend while also improving their own language in their purpose statement.
+
+* 1st new partner: Read their purpose statements to each other & revise the purpose statement to be stronger and clearer.
+* 2nd new partner: Repeat.
+* 3rd new partner (if needed): Repeat.
+****
+
+[.lesson-instruction]
+- Now that the students have revised and refined their purpose statement, have them write the @vocab{Contract} and @vocab{purpose statement} on the @workbook-link{pages/DefiningFunctions2-EX1.adoc, Design Recipe} worksheet.
+- Given the contract and purpose statement, write 2 examples of how `rocket-height` should work.
+- Circle and label what's changing in the two examples, just as they did with their green triangle function before.
+- Choose a good variable name for what's changing.
+- Write the function definition using the variable name.
+- Once the Design Recipe has been completed in the workbook, students can type the code into the `rocket-height` program, replacing any incorrect code with their own code.
+
+=== Synthesize
+- What was the problem?
+- What mistake did the programmer make?
+- Where in the Design Recipe did they first go astray?
+
+_The Design Recipe allows us to trace mistakes back to the source!_
+
+== Writing Nonlinear Functions @duration{flexible}
+
+=== Overview
+For teachers who cover quadratic and exponential functions, this activity deepens students' understanding of functions and extends the Design Recipe to include those. This can also be a useful activity for students who finish early, or who need more of a challenge.
+
+=== Launch
+Now that `rocket-height` is working correctly, explore the rest of the file and try the following:
+
+- Remove the comment from before the `(start rocket-height)` and test the program.
+- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.
+- Try out `(space rocket-height)`
+- Try out `(everything rocket-height)`
+
+=== Investigate
+[.lesson-instruction]
+- Can you make the rocket fly faster? Slower?
+- Can you make the rocket sink down instead of fly up?
+- Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
+- Can you make the rocket blast off _and then land again_?
+- Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
+- Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
+- Can you make the rocket fly to the edge of the the universe?
+
+=== Synthesize
+Debrief - what did students try? Have students share their experiments with one another!
+
+
+== Additional Exercises:
+- Define a function ’purple-star’, that takes in the size of the star and produces an outlined, purple star of the given size. +
+@exercise-link{pages/DefiningFunctions2-EX2.adoc, Design Recipe: purple-star}
+
+- Define a function ’spot’, that takes in a color and produces a solid circle of radius 50, filled in with that color. +
+@exercise-link{pages/DefiningFunctions2-EX3.adoc, Design Recipe: spot}
+
+- Define a function ’average’, which takes in two numbers and produces their average.
+@exercise-link{pages/DefiningFunctions2-EX4.adoc, Design Recipe: average}
+
+- Do Examples Have the Same Contracts? (1)
+(@exercise-link{pages/examples-same-contracts1.adoc, original} ,
+@exercise-link{solution-pages/examples-same-contracts1.adoc, answers})
+
+- Do Examples Have the Same Contracts? (2)
+(@exercise-link{pages/examples-same-contracts2.adoc, original} ,
+@exercise-link{solution-pages/examples-same-contracts2.adoc, answers})
+
+- Matching Contracts and Examples (1)
+(@exercise-link{pages/match-contracts-examples1.adoc, original} ,
+@exercise-link{solution-pages/match-contracts-examples1.adoc, answers})
+
+- Matching Contracts and Examples (2)
+(@exercise-link{pages/match-contracts-examples2.html, original} ,
+@exercise-link{solution-pages/match-contracts-examples2.adoc, answers})
