@@ -64,7 +64,7 @@
 (define (print-link-to-teacher-resources o)
   (display
     (string-append
-      "\n- link:./resources/index.html[Teacher-Only Resources]\n"
+      "\n- link:./resources/index.shtml[Teacher-Only Resources]\n"
       "-- We also offer several teachers-only materials, including an\n"
       "answer key to the student workbook, a quick-start guide to making the final\n"
       "project, and pre- and post-tests for teachers who are participating in our\n"

@@ -299,7 +299,7 @@
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
                            (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
-                   (format "link:{pathwayrootdir}lessons/~a/index.html[~a]" lesson lesson-title)))
+                   (format "link:{pathwayrootdir}lessons/~a/index.shtml[~a]" lesson lesson-title)))
                other-lessons)
           ", ")) o)
   (display "\n\n" o))
@@ -479,7 +479,7 @@
     (unless (truthy-getenv "TEACHER_RESOURCES")
       (fprintf o "[.lesson-title]\n"))
     |#
-    (let ([header-with-logo? (or (truthy-getenv "LESSONPLAN")
+    (let ([header-with-logo? (or #f ;(truthy-getenv "LESSONPLAN")
                                  ;(truthy-getenv "NARRATIVE")
                                  ;(truthy-getenv "TEACHER_RESOURCES")
                                  )])
@@ -531,7 +531,7 @@
     ;(draw-dependency-diagram lessons o)
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
-      (let ([lesson-index-file (format "./lessons/~a/index.html" lesson)]
+      (let ([lesson-index-file (format "./lessons/~a/index.shtml" lesson)]
             [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
             [lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson)]
             [lesson-title lesson]
@@ -644,10 +644,9 @@
             (for ([s (cdr x)])
               (add-standard s lesson #f #f))))))
     ;
-    (when (truthy-getenv "NARRATIVE")
-      (print-menubar "index"))
-    ;
-    (when (truthy-getenv "TEACHER_RESOURCES")
+    (when (or (truthy-getenv "LESSONPLAN")
+              (truthy-getenv "NARRATIVE")
+              (truthy-getenv "TEACHER_RESOURCES"))
       (print-menubar "index"))
     ;
     (define (expand-directives i o)
@@ -1058,7 +1057,7 @@
                    (string-join
                      (map
                        (lambda (x)
-                         (format " link:./~a/index.html[~a]" (car x) (cadr x)))
+                         (format " link:./~a/index.shtml[~a]" (car x) (cadr x)))
                        lessons) ";"))))
       (for ([n sublist-items])
         (fprintf op "** ~a~%" (list-ref s (+ n 1)))

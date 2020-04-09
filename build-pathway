@@ -195,6 +195,7 @@ function removelogos() {
 }
 
 function moveheaderlogopos() {
+  #XXX: Not used anymore?
   local f=$1
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
@@ -660,31 +661,28 @@ function buildlessonplan() {
     if test index.asciidoc -nt index.html; then
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
       $PROGDIR/adoc-preproc.rkt index.asciidoc
-      #test -f index.html || echo index.html not made!
-      #makeglossaryandstandards
-      #collapseadjtables index.html
-      #collapseadjtables index.html # do it twice!
-      addanalytics index.html
-      resolveabbrevs index.html
-      moveheaderlogopos index.html
-      insertnarrativecss index.html
-      insertprintcss_browser index.html
-      cleanuptitle index.html
-      cleanupduration index.html
-      lintlesson index.html
+      mv index.html index.shtml
+      addanalytics index.shtml
+      resolveabbrevs index.shtml
+      #moveheaderlogopos index.shtml
+      insertnarrativecss index.shtml
+      insertprintcss_browser index.shtml
+      cleanuptitle index.shtml
+      cleanupduration index.shtml
+      lintlesson index.shtml
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
       fi
     fi
-    checklinks index.html
+    checklinks index.shtml
     if test ! $NOPDF; then
       #echo Creating lesson plan pdf
-      if test index.html -nt index.pdf; then
+      if test index.shtml -nt index.pdf; then
         TEMPF=$(mktemp)
         TMPHTML=$(basename $TEMPF).index.html
         rm $TEMPF
-        cp index.html $TMPHTML
+        cp index.shtml $TMPHTML
         insertprintcss $TMPHTML
         wkhtmltopdf --lowquality -q $TMPHTML index.pdf
         rm $TMPHTML
@@ -780,6 +778,7 @@ function buildpathwaynarrative() {
       echo building pathway narrative: $PATHWAY "→" *.adoc
       export NARRATIVE=1
       $PROGDIR/adoc-preproc.rkt index.asciidoc
+      mv index.html index.shtml
       export NARRATIVE=
       makeglossaryandstandards
       if test -f pathway-lessons.asciidoc; then
@@ -789,7 +788,6 @@ function buildpathwaynarrative() {
           resolveabbrevs pathway-lessons.html
         fi
       fi
-      mv index.html index.shtml
       insertbodyid index.shtml
       addanalytics index.shtml
       insertstylecss index.shtml
@@ -799,7 +797,7 @@ function buildpathwaynarrative() {
       #cleanuptitle index.shtml
     fi
 
-    checklinks index.html
+    checklinks index.shtml
     #verifylinks
 
   fi
@@ -944,12 +942,13 @@ function buildteacherresource() {
       echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       $PROGDIR/adoc-preproc.rkt index.asciidoc
+      mv index.html index.shtml
       export TEACHER_RESOURCES=
-      resolveabbrevs index.html
-      moveheaderlogopos index.html
-      cleanuptitle index.html
+      resolveabbrevs index.shtml
+      #moveheaderlogopos index.shtml
+      cleanuptitle index.shtml
     fi
-    checklinks index.html
+    checklinks index.shtml
   fi
   export PATHWAYROOTDIR=""
   cd ..
