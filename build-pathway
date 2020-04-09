@@ -662,11 +662,13 @@ function buildlessonplan() {
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
+      insertbodyid index.shtml
       addanalytics index.shtml
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
       insertnarrativecss index.shtml
       insertprintcss_browser index.shtml
+      insertstylecss index.shtml
       cleanuptitle index.shtml
       cleanupduration index.shtml
       lintlesson index.shtml
@@ -676,18 +678,21 @@ function buildlessonplan() {
       fi
     fi
     checklinks index.shtml
-    if test ! $NOPDF; then
-      #echo Creating lesson plan pdf
-      if test index.shtml -nt index.pdf; then
-        TEMPF=$(mktemp)
-        TMPHTML=$(basename $TEMPF).index.html
-        rm $TEMPF
-        cp index.shtml $TMPHTML
-        insertprintcss $TMPHTML
-        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
-        rm $TMPHTML
-      fi
-    fi
+
+#################################################################
+#    I thought we were getting rid of builing individual lesson plan PDFs?
+#    if test ! $NOPDF; then
+#      #echo Creating lesson plan pdf
+#      if test index.shtml -nt index.pdf; then
+#        TEMPF=$(mktemp)
+#        TMPHTML=$(basename $TEMPF).index.html
+#        rm $TEMPF
+#        cp index.shtml $TMPHTML
+#        insertprintcss $TMPHTML
+#        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+#        rm $TMPHTML
+#      fi
+#    fi
   fi
   cd ..
 
