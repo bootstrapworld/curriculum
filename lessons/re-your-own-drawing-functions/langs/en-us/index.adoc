@@ -1,8 +1,6 @@
 = Your Own Drawing Functions
 
-@lesson-description{Starting with a bare-bones reactor, students
-brainstorm possible animations, and write their own draw-state
-functions}
+@lesson-description{Starting with a bare-bones reactor, students brainstorm possible animations, and write their own draw-state functions}
 
 [@lesson-intro-table]
 |===
@@ -10,10 +8,8 @@ functions}
 
 | Product Outcomes
 |
-- Students write the draw-state function for a reactor using a
-  single number
-- Students write the draw-state function for a reactor using a
-  state containing two numbers
+- Students write the draw-state function for a reactor using a single number
+- Students write the draw-state function for a reactor using a state containing two numbers
 
 | Materials
 |
@@ -27,30 +23,17 @@ functions}
 
 | Preparation
 - Make sure students have completed units 1 through 3 before starting this lesson.
-- The
-  https://code.pyret.org/editor#share=0B9rKDmABYlJVSFRPYWlsajJ1SmM[Blank
-  Single Number draw-state] file preloaded on student machines
-- The
-  https://code.pyret.org/editor#share=0B9rKDmABYlJVcTZ1WTdReUxTMTA[Blank
-  2 Number draw-state] file preloaded on student machines
+- The https://code.pyret.org/editor#share=0B9rKDmABYlJVSFRPYWlsajJ1SmM[Blank Single Number draw-state] file preloaded on student machines 
+- The https://code.pyret.org/editor#share=0B9rKDmABYlJVcTZ1WTdReUxTMTA[Blank 2 Number draw-state] file preloaded on student machines
 
 |===
 
 == draw-state for a Single Number (Time 30 minutes)
 
-The majority of reactive programs you’ll write in this course
-will use data structures consisting of multiple pieces of data,
-whether that be Numbers, Strings, Images, or Booleans. However,
-it’s not _required_ to have a full data structure in order to use a
-reactor. In fact, we can create an animation based on just a
-single number!
+The majority of reactive programs you’ll write in this course will use data structures consisting of multiple pieces of data, whether that be Numbers, Strings, Images, or Booleans. However, it’s not _required_ to have a full data structure in order to use a reactor. In fact, we can create an animation based on just a single number!
 
 [.lesson-instruction]
-Open the
-https://code.pyret.org/editor#share=0B9rKDmABYlJVSFRPYWlsajJ1SmM[Blank
-Single Number draw-state] file and take a look at
-the code. Before hitting "`Run`", can you guess what this code will
-do?
+Open the https://code.pyret.org/editor#share=0B9rKDmABYlJVSFRPYWlsajJ1SmM[Blank Single Number draw-state] file and take a look at the code. Before hitting "`Run`", can you guess what this code will do?
 
 ----
 include image
@@ -77,58 +60,33 @@ end
 interact(num-react)
 ----
 
-Notice how there is no `data` block in this file. Both the
-`next-state-tick` and the `draw-state` function consume a single
-number, and the initial value given to the reactor is also a
-single number (in this case, 1.)
+Notice how there is no `data` block in this file. Both the `next-state-tick` and the `draw-state` function consume a single number, and the initial value given to the reactor is also a single number (in this case, 1.)
 
 [.lesson-instruction]
 Click `Run`. What do you see?
 
-According to the `next-state-tick` function, on every clock tick
-the state (a single number) will increase by one, which is
-exactly what happens. Since we didn’t tell the reactor how to
-draw the state (the `to-draw` part of the reactor is commented
-out), when the reactor runs we see the state of the reactor (a
-single number) increasing, instead of an animation.
+According to the `next-state-tick` function, on every clock tick the state (a single number) will increase by one, which is exactly what happens. Since we didn’t tell the reactor how to draw the state (the `to-draw` part of the reactor is commented out), when the reactor runs we see the state of the reactor (a single number) increasing, instead of an animation.
 
 [.lesson-instruction]
-What do you think would happen if we had a reactor with a
-complete `draw-state` function, but a `next-state-tick` function that
-never updated the state? (Consuming and producing the same
-value.)
+What do you think would happen if we had a reactor with a complete `draw-state` function, but a `next-state-tick` function that never updated the state? (Consuming and producing the same value.)
 
-////
-Reinforce the fact that, although the draw-state and
-next-state-tick functions work together within a reactor to
-produce an animation, each function can work without the other.
-In this example, next-state-tick will update the state even
-without a function to draw the state.
-////
+Reinforce the fact that, although the draw-state and next-state-tick functions work together within a reactor to produce an animation, each function can work without the other. In this example, next-state-tick will update the state even without a function to draw the state.
 
-There are much more interesting things we can display using a
-number as the state of the reactor, however!
+There are much more interesting things we can display using a number as the state of the reactor, however!
 
 [.lesson-instruction]
-Change the `draw-state` function so that it consumes a Number and
-produces an image. Then, uncomment the `to-draw: draw-state` line
-in the reactor to see an animation when the program runs!
+Change the `draw-state` function so that it consumes a Number and produces an image. Then, uncomment the `to-draw: draw-state` line in the reactor to see an animation when the program runs!
 
-////
-Encourage students to brainstorm and share ideas for the
-draw-state function before beginning. Some possible options
+Encourage students to brainstorm and share ideas for the draw-state function before beginning. Some possible options
 include:
 
-Drawing a star of size n (so that it gets larger on each tick)
-Display n as an image using the text function.
-Have students share back the draw-state functions they wrote.
-////
+- Drawing a star of size n (so that it gets larger on each tick)
+- Display n as an image using the text function.
+- Have students share back the draw-state functions they wrote.
 
 == draw-state for Two Numbers (Time 30 minutes)
 
-You’ve practiced writing a `draw-state` function using a single
-number as a state, now let’s look at something a bit more
-familiar.
+You’ve practiced writing a `draw-state` function using a single number as a state, now let’s look at something a bit more familiar.
 
 [.lesson-instruction]
 Open the Blank 2 Number draw-state file and take a look at the code.
@@ -166,27 +124,15 @@ end
 interact(state-react)
 ----
 
-This code includes a data structure (called `AnimationState`)
-containing two numbers as its fields, `a` and `b`. As before, the
-`draw-state` function is incomplete, and commented out from the
-reactor.
+This code includes a data structure (called `AnimationState`) containing two numbers as its fields, `a` and `b`. As before, the `draw-state` function is incomplete, and commented out from the reactor.
 
 [.lesson-instruction]
-Based on the `next-state-tick` function defined here, what do you
-think will happen when you hit ’Run’? Discuss with your partner,
-then try it out!
+Based on the `next-state-tick` function defined here, what do you think will happen when you hit ’Run’? Discuss with your partner, then try it out!
 
-With only the `next-state-tick` function, we can see the state
-updating, increasing the first number by 1 and decreasing the
-second number by 1 each tick.
+With only the `next-state-tick` function, we can see the state updating, increasing the first number by 1 and decreasing the second number by 1 each tick.
 
 [.lesson-instruction]
-How could you define a `draw-state` function to show something
-interesting when the program runs? Branstorm with your partner,
-then change the existing, broken `draw-state` function to consume
-an `AnimationState` and produce an image. Then, comment out the
-`to-draw: draw-state` line in the reactor to see an animation when
-the program runs!
+How could you define a `draw-state` function to show something interesting when the program runs? Branstorm with your partner, then change the existing, broken `draw-state` function to consume an `AnimationState` and produce an image. Then, comment out the `to-draw: draw-state` line in the reactor to see an animation when the program runs!
 
 ////
 Some possible ideas for this activity:
