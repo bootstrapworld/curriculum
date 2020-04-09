@@ -25,30 +25,18 @@ those concepts.}
 
 |===
 
-== Leveling up: Adding Levels (Time 45 minutes)
+== Adding Levels @duration{45 minutes}
 
-You can add depth to your game by adding _levels_. In this lesson,
-we’ll cover making new levels based on the game’s score. To
-start, we want
-https://code.pyret.org/editor#share=0B9rKDmABYlJVVkpkTmEyd1ZTaE0[our
-Ninja Cat game] to have a different background
-image when the player progresses to the next level. We’ll say
-that *the player reaches level two when his or her score is
-greater than 250*.
+=== Overview
+This activity introduces a programming pattern to add _levels_ to students' games. For now, the only thing a level does is change the background - but students can easily extend this to change other aspects of the game.
+
+=== Launch
+You can add depth to your game by adding _levels_. In this lesson, we’ll cover making new levels based on the game’s score. To start, we want https://code.pyret.org/editor#share=0B9rKDmABYlJVVkpkTmEyd1ZTaE0[our Ninja Cat game] to have a different background image when the player progresses to the next level. We’ll say that *the player reaches level two when his or her score is greater than 250*.
 
 [.lesson-instruction]
-Where do you define the `BACKGROUND-IMG` image in your game? Keep
-your original background for the first level, but define a new
-variable, `BACKGROUND2-IMG`, that will be used for level 2. For the
-best results, use an image that is the same size as your original
-background.
+Where do you define the `BACKGROUND-IMG` image in your game? Keep your original background for the first level, but define a new variable, `BACKGROUND2-IMG`, that will be used for level 2. For the best results, use an image that is the same size as your original background.
 
-Once you have your second background image, it should be drawn
-into the game  -- but only when a certain condition is met. Think
-back to the @vocab{helper function} we wrote to
-link:{pathwayrootdir}lessons/re-functions-that-ask-questions[change the color of the
-sunset animation in Unit 4], and we need to do the same thing
-here!
+Once you have your second background image, it should be drawn into the game  -- but only when a certain condition is met. Think back to the @vocab{helper function} we wrote to link:{pathwayrootdir}lessons/re-functions-that-ask-questions[change the color of the sunset animation in Unit 4], and we need to do the same thing here!
 
 [.lesson-instruction]
 --
@@ -56,9 +44,7 @@ here!
 - Write a function draw-bg, which consumes the score and produces the appropriate background image.
 --
 
-Now that we have our helper function, we can use it to draw of
-that one part of the animation. Instead of blindly putting
-`BACKGROUND-IMG` into our function, now we’ll use `draw-bg(g.score)`:  
+Now that we have our helper function, we can use it to draw of that one part of the animation. Instead of blindly putting `BACKGROUND-IMG` into our function, now we’ll use `draw-bg(g.score)`:
 
 ----
 fun draw-state(g):
@@ -78,9 +64,8 @@ string-append("NinjaCat! Score: ", num-to-string(g.score)),
 ...
 ----
 
-Now our Ninja Cat game has a level 2! You can add more conditions
-to `draw-bg` to have multiple levels. You can use this same
-technique in lots of ways:
+=== Investigate
+Now our Ninja Cat game has a level 2! You can add more conditions to `draw-bg` to have multiple levels. You can use this same technique in lots of ways:
 
 [.lesson-instruction]
 --
