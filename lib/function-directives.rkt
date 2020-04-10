@@ -197,9 +197,8 @@
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
-          (write-clear) ;EXAMPLE body on its own line!
-          (encoded-ans "" "MM" #f)
-          (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?)
+          (enclose-span ".recipe_example_body_wrap"
+            (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?))
           (write-large ")")
           )))))
 
@@ -222,7 +221,7 @@
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-        ; wrap the `is ....` code in it's own element, so that wrapping works properly
+        ; wrap the `is ...` code in its own element, so that wrapping works properly
         (enclose-span ".recipe_example_body_wrap"
           (string-append
             (highlight-keywords "is ")
