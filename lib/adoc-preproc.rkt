@@ -975,7 +975,6 @@
   (let ([exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
     (unless (null? exx)
       ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
-      (fprintf o "\n== Exercises and Solutions\n\n")
       (fprintf o "[.exercises_and_solutions,cols=2]\n")
       (fprintf o "|===\n")
       (for ([ex exx])
