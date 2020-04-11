@@ -1,31 +1,33 @@
-= Coordinates
+= Dissecting and Designing a Video Game
 
 @lesson-description{Students reverse engineer a video game and research what takes to create a video game.}
 
 [@lesson-intro-table]
 |===
-|Lesson Goals
-|Students will be able to:
+| Lesson Goals
+| Students will be able to:
 
 * Identify the objects in a video game that are changing.
 * Use math language to describe what is changing about each object.
 * Understand the time, money, and resources it takes to create a popular videogame.
 
-|Student-Facing Lesson Goals
+| Student-Facing Lesson Goals
 |
 * I can identify the objects in a videogame.
 * I can use math vocabulary to describe what is changing about each object.
+* I understand the time, money, and resources it takes to create a popular videogame.
 
-|Key Points for the Facilitator
+
+| Key Points for the Facilitator
 |
 * Students will need their own Google accounts.
 * Take care to manage student expectations about what their game will be like.  Modern games are very complex!
 
-|Prerequisites
+| Prerequisites
 |
 * No prerequisites
 
-|Materials
+| Materials
 |
 ifeval::["{proglang}" == "wescheme"]
 * Lesson slides template (@link{https://docs.google.com/presentation/d/16ZKAYkRX3pMPd65dFwsu_opuihhu32sK7C3EpLbKxbs/edit#slide=id.g43c588b89e_1_5, Google Slides})
@@ -34,9 +36,9 @@ ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1D89D0MflgxOzUyvPfK94jncQPcKD-0CBnMBrsgrUlEU, Google Slides})
 endif::[]
 * Reverse Engineer worksheet
-(@workbook-link{pages/ReverseEngineerGame.pdf,PDF}, @link{https://docs.google.com/document/d/1e6ice3yQ6auq4zVU9_YAujxFuxEIraKXuR0ihMaJQ1U/copy, Google Doc})
+(@workbook-link{pages/ReverseEngineerGame.adoc, HTML}, @link{https://docs.google.com/document/d/1e6ice3yQ6auq4zVU9_YAujxFuxEIraKXuR0ihMaJQ1U/copy, Google Doc})
 
-* Estimation worksheet (@workbook-link{pages/Estimation.pdf, PDF}, @link{https://docs.google.com/document/d/1WObz4aczEfd7vqxAnfYwp1NT0OZ7cge8hWB2ESc_UUk/edit?usp=sharing, Google Doc})
+* Estimation worksheet (@workbook-link{pages/Estimation.adoc, HTML}, @link{https://docs.google.com/document/d/1WObz4aczEfd7vqxAnfYwp1NT0OZ7cge8hWB2ESc_UUk/edit?usp=sharing, Google Doc})
 
 ifeval::["{proglang}" == "wescheme"]
 * NinjaCat demo game (@link{https://www.wescheme.org/run?publicId=sggzRzgU5T, WeScheme})
@@ -44,6 +46,13 @@ endif::[]
 ifeval::["{proglang}" == "pyret"]
 * NinjaCat demo game (@link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, Pyret})
 endif::[]
+
+| Supplemental Resources
+|
+* @link{https://quizizz.com/admin/quiz/5739e1b55752be78da03a648/coordinates, Coordinates} (Quizizz)
+* @link{https://teacher.desmos.com/activitybuilder/custom/563d705f36a7843710aba2ce, The Awesome Coordinate Plane Activity} (Desmos Activity)
+* @link{https://www.geogebra.org/m/dyaxqKdP, Boat Coordinate Game} (Geogebra)
+* @link{https://t.co/2lIf5Yofmj, Coordinate Grid Exploration} (Geogebra)
 
 |===
 
@@ -78,10 +87,18 @@ Students take turns playing the game in pairs.
 [.notice-box]
 .Notice and Wonder
 ****
-As their partner plays, ask students to write down what they notice about the game.
+As their partner plays, ask students to write down what they notice about the game on @workbook-link{pages/NoticeAndWonder.adoc}.
 
 Switch players, and ask students to write down what they wonder.
 ****
+
+Ask students:
+
+- What did you Notice?
+- What did you Wonder?
+- What are the elements (characters, items, etc.) of the game? (These should be nouns.) _NinjaCat, dog, ruby, cloud, background, score_
+- What about these elements is changing? _The position of the characters changes, the score changes depending on what what NinjaCat hits_
+- What math words could we use to describe these changes? _A change in x-@vocab{coordinates}, y-coordinates, a change in value for the score_
 
 [.strategy-box]
 .Pedagogy Note!
@@ -92,15 +109,7 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 === Investigate
 [.lesson-instruction]
 Students complete the
-@workbook-link{pages/ReverseEngineerGame.pdf, "Reverse Engineer A Video Game"} worksheet in pairs. *Note:* the three columns on this worksheet refer to objects in the game, what changes as the game is played, and how that change is modeled mathematically. For example: "A dog", "position", "x-coordinate".
-
-Ask students:
-
-- What did you Notice?
-- What did you Wonder?
-- What are the elements (characters, items, etc.) of the game? (These should be nouns.) _NinjaCat, dog, ruby, cloud, background, score_
-- What about these elements is changing? _The position of the characters changes, the score changes depending on what what NinjaCat hits_
-- What math words could we use to describe these changes? _A change in x-@vocab{coordinates}, y-coordinates, a change in value for the score_
+@workbook-link{pages/ReverseEngineerGame.adoc, "Reverse Engineer A Video Game"} worksheet in pairs. *Note:* the three columns on this worksheet refer to objects in the game, what changes as the game is played, and how that change is modeled mathematically. For example: "A dog", "position", "x-coordinate".
 
 === Possible Misconceptions
 - Students are likely to describe what the character is _doing_, as opposed to _what changes_. For example: "The dog is moving to the left" is not actualy describing the property being changed (position, place, location, etc).
@@ -116,7 +125,7 @@ The main idea here is to understand that while we see images on a screen, the co
 - How many numbers would we need if the entire game was in 3d?
 - How many numbers would we need to make a modern game?
 
-== Connecting to Real Games @duration{20 minutes}
+== Connecting to Real Games @duration{25 minutes}
 
 === Overview
 Students apply this way of thinking to more complex, real-world games. They also get a sense for how much work is involved in creating games like that.
@@ -126,11 +135,9 @@ Ask students to share out their favorite current video game. Write the names of 
 
 === Investigate
 [.lesson-instruction]
-In pairs, students complete the @workbook-link{pages/ReverseEngineerGame.pdf, "Reverse Engineer A Video Game"} worksheet a second time but using one of the games listed on the board.
-
 Let students choose a current, popular game to discuss.
 
-Collect students estimates for each of the questions below. Students can use the @workbook-link{pages/Estimation.pdf, Estimation} worksheet to document their estimations.
+Collect students estimates for each of the questions below. Students can use the @workbook-link{pages/Estimation.adoc, Estimation} worksheet to document their estimations.
 
 * How long do you think it took to create that game?
 * Are there still people working on that game today?
@@ -145,12 +152,13 @@ The goal here is not to discourage students from the possibility of eventually c
 === Synthesize
 - How accurate were your estimates?
 - What does this tell us about making modern games?
+- Are we likely to create games like the ones you researched?
 
 The 3d, two-player version of NinjaCat needed a lot more numbers than the simple one you saw here, _but the actual concepts at work are the same_. Even if we don't have time to make games like the ones we chose here, you'll learn the same concepts just by making a simpler one.
 
-== Additional Exercises:
+== Closing
+Options:
 
-* @link{https://quizizz.com/admin/quiz/5739e1b55752be78da03a648/coordinates, Coordinates} (Quizizz)
-* @link{https://teacher.desmos.com/activitybuilder/custom/563d705f36a7843710aba2ce, The Awesome Coordinate Plane Activity} (Desmos Activity)
-* @link{https://www.geogebra.org/m/dyaxqKdP, Boat Coordinate Game} (Geogebra)
-* @link{https://t.co/2lIf5Yofmj, Coordinate Grid Exploration} (Geogebra)
+- Exit Slip: what role do coordinates play in videogames?
+- Discussion: what do you think the equations are, that govern the movement of characters in the game?
+- Share-back: have students share their video game designs with the class.
