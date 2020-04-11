@@ -1,45 +1,35 @@
-= Order of Operations (Circles of Evaluation)
+= Order of Operations
 
-@lesson-description{Students learn to model arithmetic expressions with the visual tool for order of operations and function composition known as Circles of Evaluation.}
+@lesson-description{Students learn to model arithmetic expressions with a visual tool for order of operations, known as "Circles of Evaluation".}
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{alg-coordinate-plane-1,alg-coordinate-plane-2}
+@prereqs-stds{alg-coordinate-plane}
 | Lesson Goals
 | Students will be able to:
 
 * Model an arithmetic expression using @vocab{Circles of Evaluation}.
 * Translate Circles of Evaluation into code.
 
-|Student-facing Goals
+| Student-facing Goals
 |
 * I can write Circles of Evaluation for a given arithmetic @vocab{expression}.
 * I can translate a Circle of Evaluation model into code.
 * I can use numbers and operations in a programming environment.
 
-|Key Points For The Facilitator
+| Key Points For The Facilitator
 |
 * Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error message}s with interest to demonstrate to students that the messages are a helpful tool.
-
-
 * After the first few exercises in creating Circles of Evaluation, ask students whether they create them from the 'inside-out' (drawing the inner circles first) or from the 'outside-in.'  After they've given their responses, have them try using the OTHER way!
-
-
 * Up until now, we didn't have a visual spatial model for explaining the order of operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMAS, etc)
-
-
-* For a memory hook, model the "bug that crawls through the circle" explanation.   
-
-
+* For a memory hook, model the "bug that crawls through the circle" explanation.
 * Students may benefit from using multiple colors to distinguish between the different smaller expressions and parentheses.
 
-
-|Prerequisites
+| Prerequisites
 |
 * Students should have knowledge of general arithmetic and the order of operations.
 
-
-|Materials
+| Materials
 |
 ifeval::["{proglang}" == "wescheme"]
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1G5odF5XrzMzpykskn-jTQ4pjJT54YLYAZytryQIRyCI/edit?usp=sharing, Google Slides})
@@ -47,22 +37,19 @@ endif::[]
 ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1e89uaOZDPxlm0NofNoq6P5z9Sn58nnim7fuy_i3S35c, Google Slides})
 endif::[]
-
 * Circles of Evaluation template (@link{https://docs.google.com/document/d/12xlIyo1Iu7VZfk2tIQUPex6sP3Zs0ZeQFAZOaJmfVFs/edit?usp=sharing, Google Doc})
-
-* Frayer Model - Order of Operations (@workbook-link{pages/OrderOfOperations1-FrayerModelTemplate.pdf, PDF}, @link{https://docs.google.com/document/d/1HeXGZXkSnvGeSbtktU5qXYKwnuYlgkiM3elbVEYxiCk/edit?usp=sharing, Google Doc}) 
-
-* Circles of Evaluation Mixed Review (@workbook-link{pages/OrderOfOperations1-Practice.pdf, PDF}, @link{https://docs.google.com/document/d/1AezrjhLGDYLfiuLfjYRH_AK0vytDJQvAK4Tq5v77ztE/edit?usp=sharing, Google Doc})
+//* Frayer Model - Order of Operations (@workbook-link{pages/OrderOfOperations1-FrayerModelTemplate.pdf, PDF}, @link{https://docs.google.com/document/d/1HeXGZXkSnvGeSbtktU5qXYKwnuYlgkiM3elbVEYxiCk/edit?usp=sharing, Google Doc}) 
+* Circles of Evaluation Mixed Review (@workbook-link{pages/Practicing-Circles-2.adoc, HTML}, @link{https://docs.google.com/document/d/1AezrjhLGDYLfiuLfjYRH_AK0vytDJQvAK4Tq5v77ztE/edit?usp=sharing, Google Doc})
 
 ifeval::["{proglang}" == "wescheme"]
-* Circles of Evaluation with Square Roots (@workbook-link{pages/OrderOfOperations1-Practice2.pdf, PDF}, @link{https://docs.google.com/document/d/1vsobkbbXTOjl4FFLdbHYRGn7l8ZbWBRptSqWYzxllxQ/edit?usp=sharing, Google Doc})
+* Circles of Evaluation with Square Roots (@exercise-link{pages/Practicing-Circles-3.adoc, HTML}, @link{https://docs.google.com/document/d/1vsobkbbXTOjl4FFLdbHYRGn7l8ZbWBRptSqWYzxllxQ/edit?usp=sharing, Google Doc})
 endif::[]
 
 ifeval::["{proglang}" == "pyret"]
-* Circles of Evaluation with Square Roots (@workbook-link{pages/OrderOfOperations1-Practice2.pdf, PDF}, @link{https://docs.google.com/document/d/10fX_6qL5q94kk6KylH7-2JY89LNF7b5qiohmDz_NFQY/edit?usp=sharing, Google Doc})
+* Circles of Evaluation with Square Roots (@exercise-link{pages/Practicing-Circles-3.adoc, PDF}, @link{https://docs.google.com/document/d/10fX_6qL5q94kk6KylH7-2JY89LNF7b5qiohmDz_NFQY/edit?usp=sharing, Google Doc})
 endif::[]
 
-|Formative Assessments and Activities
+| Supplemental Resources
 |
 ifeval::["{proglang}" == "wescheme"]
 * Coordinates, Circles of Evaluation, and Code (@link{https://quizizz.com/admin/quiz/5d9919a36c6f17001a9dc796, Quizizz})
@@ -106,7 +93,7 @@ Have students explore numbers - just numbers! - in the Interactions window.  Mak
 [.notice-box]
 .Notice & Wonder
 **** 
-In pairs, students will each try entering a variety of numbers, then together they will write down what they notice and what they wonder.
+In pairs, students will each try entering a variety of numbers, then together they will write down what they Notice and what they Wonder.
 ****
 
 - What type of numbers did you try?
@@ -119,7 +106,11 @@ In pairs, students will each try entering a variety of numbers, then together th
 - What was the error message? 
 
 === Student Misconceptions
-TODO - FILL IN
+ifeval::["{proglang}" == "pyret"]
+- Students who write decimals as `.5` (without the leading zero) may get an error message, causing them to think that Pyret doesn't have decimals! They just need to add the zero.
+endif::[]
+- Students who try division by writing `3/2` and get an answer may falsely assume that they've performed division. In fact, what they've done is entered a _fraction_.
+- Rational numbers can be converted back and forth betweem fractions and decimals by clicking on them.
 
 === Synthesize
 Our programming language knows about many types of numbers, and they seem to behave the way they do in math. Our Editor is also pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
@@ -127,24 +118,59 @@ Our programming language knows about many types of numbers, and they seem to beh
 == Arithmetic Operations @duration{30 minutes}
 
 === Overview
-Students are given a challenging expression that exposes common misconceptions about order of operations. The ultimate goal is to demonstrate that a brittle, fixed notion of order of operations is _not good enough_, and lead students to a deeper understanding of PEMDAS as a grammatical device.
+Students are given a challenging expression that exposes common misconceptions about order of operations. The goal is to demonstrate that a brittle, fixed notion of order of operations is _not good enough_, and lead students to a deeper understanding of PEMDAS as a grammatical device. The Circles of Evaluation are introduced as "sentence diagramming for arithmetic".
 
 === Launch
-
 Have students evaluate the expression in the image below and gather a few responses from the students.  Have they seen a problem like this on social media before?  Why might we be disagreeing on the solution?  How do we know how to evaluate this expression?
 
 @centered-image{images/OrderOfOperationsFB.png, Puzzling Math Problem, 400, align="center"}
                                                  
+[.strategy-box]
+.Circles of Evaluation
+****
+The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies PEMDAS incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
+****
 
-Provide some direct instruction on Circles of Evaluation, such as how to:
+Math is a language, and all languages have rules and grammar. We can _draw the structure_ of those rules using something called the *Circles of Evaluation*. The rules are simple:
 
-* Create a Circle of Evaluation from an expression.
-* Convert a Circle of Evaluation into code.
+[.lesson-point]
+1) Every Circle must one - and only one! - function, written at the top
+
+That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a circle. 
+
+[.lesson-point]
+2) The inputs to the function are written left-to-right, in the middle of the Circle.
+
+[.right]
+@show{(sexp->coe '(/ 6 3))}
+
+If we want to draw the Circle of Evaluation for @math{6 \div 3}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right. 
+@span{.clear}{}
+
+
+What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do divide 6 by that circle?
+
+[.lesson-point]
+3) Circles can contain other Circles
+
+[.right]
+@show{(sexp->coe '(/ 6 (+ 1 2)))}
+
+We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!
+
+@span{.clear}{}
+
+[.lesson-point]
+4) Circles of Evaluation _help us write code_
+
+When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the function at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthisis).
+
 
 ifeval::["{proglang}" == "wescheme"]
 @centered-image{images/CoE1-Racket.jpg, Circle of Evaluation, 400, align="center"}
 endif::[]
 ifeval::["{proglang}" == "pyret"]
+In Pyret, we treat _operators_ like `+`, `-`, `*`, and `/` differently - they are written in between their inputs, just like in math.
 @centered-image{images/CoE1-Pyret.jpg, Circle of Evaluation, 400, align="center"}
 endif::[]                                          
 
@@ -171,6 +197,11 @@ endif::[]
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
 
 === Investigate
+
+[.lesson-instruction]
+Students will complete @workbook-link{pages/Practicing-Circles.adoc, Practicing Circles} page in their workbook. They should __draw all of the Circles first__ and check their work, before converting to code.
+
+
 Option 1: Have students practice moving between Circles of Evaluation and code with a station review.
 
 * Convert the expression into a Circle of Evaluation.
@@ -178,18 +209,7 @@ Option 1: Have students practice moving between Circles of Evaluation and code w
 
 Once the students feel confident in their work, they can enter the code into their code @vocab{editor} to test it out.
 
-Option 2: Have students complete the 
-ifeval::["{proglang}" == "wescheme"]
-@workbook-link{pages/OrderOfOperations1-Practice.pdf, Mixed Review worksheet }
-and / or the 
-@workbook-link{pages/OrderOfOperations1-Practice2.pdf, Square Roots worksheet }
-endif::[]
-ifeval::["{proglang}" == "pyret"]
-@workbook-link{pages/OrderOfOperations1-Practice.pdf, Mixed Review worksheet }
-and / or the 
-@workbook-link{pages/OrderOfOperations1-Practice2.pdf, Square Roots worksheet }
-endif::[]
-with their partners and test their code in their coding environment.
+Option 2: Have students complete the @workbook-link{pages/Practicing-Circles-2.adoc, Mixed Review worksheet } and / or the @workbook-link{pages/Practicing-Circles-3.adoc, Square Roots worksheet } with their partners and test their code in their coding environment.
 
 [.lesson-instruction]
 Students will create a Circle of Evaluation based on an expression they’ve created using at least 4 of the 6 functions:
@@ -200,6 +220,7 @@ ifeval::["{proglang}" == "pyret"]
 	`+`, `-`, `*`, `/`, `num-sqr`, `num-sqrt`.
 endif::[]
 
+////
 Using @workbook-link{pages/OrderOfOperations1-FrayerModelTemplate.pdf, this Frayer Model}, create the code that represents this circle, translate this into code, evaluate the expression using the order of operations, and then compare and contrast the three methods.
 
 [.strategy-box]
@@ -207,6 +228,10 @@ Using @workbook-link{pages/OrderOfOperations1-FrayerModelTemplate.pdf, this Fray
 ****
 MLR 7 - Compare and Connect: Gather students' Frayer models to highlight and analyze a few of them as a class, asking students to compare and connect different models. 
 ****
+////
+
+== Closing
+Have students share back what they learned from the Circles of Evaluation. You may want to assign traditional Order of Evaluation problems from your math book, but instead of asking them simply to compute the answer - or even list the steps - have them _draw the circle_.
 
 == Additional Exercises
 
