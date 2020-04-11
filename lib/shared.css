@@ -8,6 +8,9 @@ body{
   color: #75328A;
 }
 
+/* This might be the source of a bunch of bugs - why negative spacing?? */
+h1, h2, p, td.content, span.alt{ letter-spacing:-.01em; }
+
 #header, #content {margin: 0 !important; }
 
 p {margin: 0px; font-size: inherit; }
@@ -457,17 +460,16 @@ code{
 .teacher_resources strong { /* name of resource */
 }
 
-/* LIs within Exercises and Solutions */
-.exercises_and_solutions li {
+/* Exercises and Solutions Table */
+table.exercises_and_solutions { border-width: 0px; }
+table.exercises_and_solutions td:nth-child(even) { text-align: right; }
+table.exercises_and_solutions td {
+  padding: 0px;
+  border-width: 0px !important;
 }
+table.exercises_and_solutions tr:hover td { border-bottom: solid 1px gray; background: red; }
 
-.exercises_and_solutions li:hover {
-  background: #eee;
-}
 
-.exercises_and_solutions a:hover {
-  text-decoration: underline;
-}
 
 .pyretkeyword {
   font-weight: 900;
