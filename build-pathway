@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-09 # last modified
+LASTMOD=2020-04-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -229,8 +229,14 @@ function lintlesson() {
 
   test $LINT || return
 
-  for g in Prerequisites 'Relevant Standards' 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
+  for g in Prerequisites 'Lesson Goals' Materials Preparation 'Supplemental Resources'; do
     if ! grep -q "^<p>$g</p>$" $f; then
+      echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
+    fi
+  done
+
+  for g in Prerequisites 'Relevant Standards'; do
+    if ! grep -q "^<p>$g$" $f; then
       echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
     fi
   done
