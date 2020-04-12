@@ -1,0 +1,164 @@
+= Dissecting and Designing a Video Game
+
+@lesson-description{Students reverse engineer a video game and research what takes to create a video game.}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to:
+
+* Identify the objects in a video game that are changing.
+* Use math language to describe what is changing about each object.
+* Understand the time, money, and resources it takes to create a popular videogame.
+
+| Student-Facing Lesson Goals
+|
+* I can identify the objects in a videogame.
+* I can use math vocabulary to describe what is changing about each object.
+* I understand the time, money, and resources it takes to create a popular videogame.
+
+
+| Key Points for the Facilitator
+|
+* Students will need their own Google accounts.
+* Take care to manage student expectations about what their game will be like.  Modern games are very complex!
+
+| Prerequisites
+|
+* No prerequisites
+
+| Materials
+|
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/16ZKAYkRX3pMPd65dFwsu_opuihhu32sK7C3EpLbKxbs/edit#slide=id.g43c588b89e_1_5, Google Slides})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1D89D0MflgxOzUyvPfK94jncQPcKD-0CBnMBrsgrUlEU, Google Slides})
+endif::[]
+* Reverse Engineer worksheet
+(@workbook-link{pages/ReverseEngineerGame.adoc, HTML}, @link{https://docs.google.com/document/d/1e6ice3yQ6auq4zVU9_YAujxFuxEIraKXuR0ihMaJQ1U/copy, Google Doc})
+
+* Estimation worksheet (@workbook-link{pages/Estimation.adoc, HTML}, @link{https://docs.google.com/document/d/1WObz4aczEfd7vqxAnfYwp1NT0OZ7cge8hWB2ESc_UUk/edit?usp=sharing, Google Doc})
+
+ifeval::["{proglang}" == "wescheme"]
+* NinjaCat demo game (@link{https://www.wescheme.org/run?publicId=sggzRzgU5T, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* NinjaCat demo game (@link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, Pyret})
+endif::[]
+
+| Supplemental Resources
+|
+* @link{https://quizizz.com/admin/quiz/5739e1b55752be78da03a648/coordinates, Coordinates} (Quizizz)
+* @link{https://teacher.desmos.com/activitybuilder/custom/563d705f36a7843710aba2ce, The Awesome Coordinate Plane Activity} (Desmos Activity)
+* @link{https://www.geogebra.org/m/dyaxqKdP, Boat Coordinate Game} (Geogebra)
+* @link{https://t.co/2lIf5Yofmj, Coordinate Grid Exploration} (Geogebra)
+
+|===
+
+== Warmup
+
+Students should be logged into
+ifeval::["{proglang}" == "wescheme"]
+	@link{https://www.wescheme.org, WeScheme }
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+	@link{https://code.pyret.org, code.pyret.org }
+endif::[]
+and have their workbooks with a pen or pencil.
+
+== Reverse Engineering a Videogame @duration{25 minutes}
+
+=== Overview
+Students play a simple videogame, and gradually break it down into constituent parts. Doing so reveals how coordinates play a crucial role in videogames, and how animation is created via equations that govern the changing values of those coordinates.
+
+=== Launch
+Play the
+ifeval::["{proglang}" == "wescheme"]
+	@link{https://www.wescheme.org/run?publicId=sggzRzgU5T, NinjaCat demo game}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+	@link{https://code.pyret.org/editor#share=0B32bNEogmncOQ25ZOHBoR3ZNcUE&v=80ba55b, NinjaCat demo game}
+endif::[]
+onscreen while students watch. Purposely make mistakes while playing the game, which should elicit responses/direction from students.
+
+Students take turns playing the game in pairs.
+
+[.notice-box]
+.Notice and Wonder
+****
+As their partner plays, ask students to write down what they notice about the game on @workbook-link{pages/NoticeAndWonder.adoc}.
+
+Switch players, and ask students to write down what they wonder.
+****
+
+Ask students:
+
+- What did you Notice?
+- What did you Wonder?
+- What are the elements (characters, items, etc.) of the game? (These should be nouns.) _NinjaCat, dog, ruby, cloud, background, score_
+- What about these elements is changing? _The position of the characters changes, the score changes depending on what what NinjaCat hits_
+- What math words could we use to describe these changes? _A change in x-@vocab{coordinates}, y-coordinates, a change in value for the score_
+
+[.strategy-box]
+.Pedagogy Note!
+****
+This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding in literature}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! Students may notice that the animals table has corners, or that it's printed in black ink. But by listening to other students' observations, students may find themselves taking a closer look at the dataset to begin with. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's going on in this Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with time given to each.
+****
+
+=== Investigate
+[.lesson-instruction]
+Students complete the
+@workbook-link{pages/ReverseEngineerGame.adoc, "Reverse Engineer A Video Game"} worksheet in pairs. *Note:* the three columns on this worksheet refer to objects in the game, what changes as the game is played, and how that change is modeled mathematically. For example: "A dog", "position", "x-coordinate".
+
+=== Possible Misconceptions
+- Students are likely to describe what the character is _doing_, as opposed to _what changes_. For example: "The dog is moving to the left" is not actualy describing the property being changed (position, place, location, etc).
+- Students may write down what they _hope_ is changeable, as opposed to what actually changes. It's common for students to say they cat's costume is changing, because they assume the cat will somehow "level up" if they get enough points.
+
+=== Synthesize
+The main idea here is to understand that while we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.
+
+- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the videogame?
+- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?
+- How many numbers would we need if the dog could also move up and down?
+- How many numbers would we need to have a two-player game?
+- How many numbers would we need if the entire game was in 3d?
+- How many numbers would we need to make a modern game?
+
+== Connecting to Real Games @duration{25 minutes}
+
+=== Overview
+Students apply this way of thinking to more complex, real-world games. They also get a sense for how much work is involved in creating games like that.
+
+=== Launch
+Ask students to share out their favorite current video game. Write the names of the games on the board.
+
+=== Investigate
+[.lesson-instruction]
+Let students choose a current, popular game to discuss.
+
+Collect students estimates for each of the questions below. Students can use the @workbook-link{pages/Estimation.adoc, Estimation} worksheet to document their estimations.
+
+* How long do you think it took to create that game?
+* Are there still people working on that game today?
+* How many people do you think it takes to create a game like this?
+* How much money does it take to create a game like this?
+* Compare and contrast the number of elements and changing elements in NinjaCat vs their popular game.
+
+Once students have made their estimations, have students use the Internet to research these questions and compare the actual numbers to their estimates.
+
+The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
+
+=== Synthesize
+- How accurate were your estimates?
+- What does this tell us about making modern games?
+- Are we likely to create games like the ones you researched?
+
+The 3d, two-player version of NinjaCat needed a lot more numbers than the simple one you saw here, _but the actual concepts at work are the same_. Even if we don't have time to make games like the ones we chose here, you'll learn the same concepts just by making a simpler one.
+
+== Closing
+Options:
+
+- Exit Slip: what role do coordinates play in videogames?
+- Discussion: what do you think the equations are, that govern the movement of characters in the game?
+- Share-back: have students share their video game designs with the class.
