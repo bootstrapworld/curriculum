@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-11 # last modified
+LASTMOD=2020-04-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -182,6 +182,8 @@ EOF
     -e 's/<\/head>/%INSERTGDRIVESAVE1\n\0/' \
     -e 's/<\/h1>.*/\0\n%INSERTGDRIVESAVE2/' \
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
+    $f
+  $SED -i \
     -e '/%INSERTGDRIVESAVE1/r gdrivesave1.txt' \
     -e '/%INSERTGDRIVESAVE2/r gdrivesave2.txt' \
     -e 's/%INSERTGDRIVESAVE[12]//' \
@@ -191,6 +193,17 @@ EOF
     -e '/%INSERTGDRIVEURL/r gdriveurl.txt' \
     -e 's/%INSERTGDRIVEURL//' \
     $f
+}
+
+function modifygdrivepage() {
+  local f=$1
+
+  $SED -i \
+    -e '/include virtual=".menubar.ssi"/d' \
+    -e 's/<h[23456] /<strong>\0/' \
+    -e 's/<\/h[23456]>/\0<\/strong>/' \
+    $f
+
 }
 
 function insertstylecss() {
@@ -736,6 +749,7 @@ function buildlessonplan() {
       lintlesson index.shtml
       insertgdrivesave index.shtml
       cp -p index.shtml index-gdrive-import.shtml
+      modifygdrivepage index-gdrive-import.shtml
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
