@@ -1,35 +1,28 @@
 = Defining Functions 1
 
-@lesson-description{Students learn why and how to create their own functions.}
+@lesson-description{Students discover functions as an abstraction over a programming pattern, and are introduced to a structured approach to building them called the Design Recipe.}
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{alg-defining-values}
-|Lesson Goals
-|Students will be able to:
+| Lesson Goals
+| Students will be able to:
 
 * Describe the usefulness of vocab{function}s.
 * Create their own functions and vocab{example}s given the constraints of a problem.
 
-|Student-Facing Lesson Goals
+| Student-Facing Lesson Goals
 |
 * I can explain why a function is useful.
 * I can plan and create my own function with examples.
 
-|Key Points for the Facilitator
+| Key Points for the Facilitator
 |
 * This lesson represents a big shift in thinking.  After some practice, students will not be limited to pre-existing functions!
 * Take plenty of time for the @vocab{Design Recipe} as students will return to it frequently in future lessons.
 
-|Prerequisites
+| Materials
 |
-
-* Students should be familiar with @vocab{Circles of Evaluation}.
-* Students should be familiar with defining @vocab{value}s.
-
-|Materials
-|
-
 ifeval::["{proglang}" == "wescheme"]
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides})
 endif::[]
@@ -37,32 +30,23 @@ ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
 endif::[]
 
-* Circles of Evaluation Mapping worksheet (@workbook-link{pages/MappingExamplesWithCoE2.pdf, PDF}, @link{https://docs.google.com/document/d/1EDLbNC9C62Z-kf9jGZzbaRRRj8Ni_Gbz2f14kp30COU/edit?usp=sharing, Google Doc})
+* Circles of Evaluation Mapping worksheet (@workbook-link{pages/MappingExamplesWithCoE2.adoc, HTML})
 
-ifeval::["{proglang}" == "wescheme"]
-* Fast Functions worksheet (@workbook-link{pages/FastFunctions.pdf, PDF}, @link{https://docs.google.com/document/d/1zxq7TYX76y6DFwdF2DCuN1nnLAmbD33Sua1QhhmOYH8/edit?usp=sharing, Google Doc})
-endif::[]
+* Fast Functions worksheet (@workbook-link{pages/FastFunctions.adoc, original}, 
+@link{solution-pages/FastFunctions.adoc, original})
 
-ifeval::["{proglang}" == "pyret"]
-* Fast Functions worksheet (@workbook-link{pages/FastFunctions.pdf, PDF}, @link{https://docs.google.com/document/d/19zlI9LU1u3xOfC7CQ2OHznaiJJNwbWJD9mm-7QtEXVQ/edit?usp=sharing, Google Doc})
-endif::[]
-
-ifeval::["{proglang}" == "wescheme"]
-|Formative Assessments and Activities
+| Supplemental Resources
 |
-* Review: Define Values & Fast Functions (@link{https://teacher.desmos.com/activitybuilder/custom/5cdcaea0b4b8576069fdca4f, Desmos Activity})
+ifeval::["{proglang}" == "wescheme"]
+- Review: Define Values & Fast Functions (@link{https://teacher.desmos.com/activitybuilder/custom/5cdcaea0b4b8576069fdca4f, Desmos Activity})
 endif::[]
-
-|Connecting Activities
-|
-
-* @link{https://teacher.desmos.com/expressions, Expression Bundle} (Desmos Activities)
-* @link{https://quizizz.com/admin/quiz/576d1e5f91cb32ef5fc67529/variables-and-expressions, Variables and Expressions} (Quizizz)
-* @link{https://teacher.desmos.com/functions, Functions Bundle} (Desmos Activities)
-* @link{https://teacher.desmos.com/polygraph/custom/560ad28e9e65da5615091edb,
+- @link{https://teacher.desmos.com/expressions, Expression Bundle} (Desmos Activities)
+- @link{https://quizizz.com/admin/quiz/576d1e5f91cb32ef5fc67529/variables-and-expressions, Variables and Expressions} (Quizizz)
+- @link{https://teacher.desmos.com/functions, Functions Bundle} (Desmos Activities)
+- @link{https://teacher.desmos.com/polygraph/custom/560ad28e9e65da5615091edb,
 Functions & Relations} (Desmos Polygraph Activity)
-* @link{https://quizizz.com/admin/quiz/582b7390e8e0c0c201647d9d/functions, Functions} (Quizizz)
-* @link{https://quizizz.com/admin/quiz/582f0e34b805cc5c6608d326/function-notation, Function Notation} (Quizizz)
+- @link{https://quizizz.com/admin/quiz/582b7390e8e0c0c201647d9d/functions, Functions} (Quizizz)
+- @link{https://quizizz.com/admin/quiz/582f0e34b805cc5c6608d326/function-notation, Function Notation} (Quizizz)
 
 |===
 
@@ -77,10 +61,10 @@ ifeval::["{proglang}" == "pyret"]
 endif::[]
 on their computer.
 
-== Identifying Dynamic Structures @duration{30 minutes}
+== Identifying Dynamic Patterns @duration{30 minutes}
 
 === Overview
-As with the Definfing Values lesson, students search for structure in a list of expressions. But this time, the structures are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
+As with the Defining Values lesson, students search for structure in a list of expressions. But this time, the structures are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
 
 === Launch
 
@@ -142,18 +126,27 @@ ifeval::["{proglang}" == "pyret"]
 `myStar = star(50, "solid", "gold")`
 endif::[]
 
-=== We can define a _function_ when we want the program to perform a task repeatedly, such as creating solid, green triangles.
+*But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
 
-ifeval::["{proglang}" == "pyret"]
-The keyword *fun* is used to define a new function.  At the _end_ of a function definition, we use the keyword *end*.
-endif::[]
+Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we gave it. 
+
+Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Run through some sample examples before having the class add their own:
+
+- You say: *gt 20!*
+The student responds: _(triangle 20 "solid" "green")!_
+- You say: *gt 200!*
+The student responds: _(triangle 200 "solid" "green")!_
+- You say: *gt 99!*
+The student responds: _(triangle 99 "solid" "green")!_
+
+We need to program the computer to be as smart as our volunteer. But how do we do that?
 
 === Investigate
 
 [.lesson-point]
 Word Problem: Write a function called `gt` that takes in a Number and produces a solid, green triangle of that given size.
 
-Have students follow along on the @workbook-link{pages/FastFunctions.pdf, Fast Functions} handout.
+Have students follow along on the @workbook-link{pages/FastFunctions.adoc, Fast Functions} handout.
 
 - *1. Write the @vocab{contract} for this new function by looking at the word problem.* +
 ** What does `gt` take in? +
@@ -178,9 +171,9 @@ ifeval::["{proglang}" == "pyret"]
 `triangle(40, "solid", "green")`._ +
 endif::[]
 _This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!_ 
-- Have students complete the @workbook-link{pages/MappingExamplesWithCoE2.pdf, Circle of Evaluation mapping} worksheet showing how their function examples are working.
+- Have students complete the @workbook-link{pages/MappingExamplesWithCoE2.adoc, Circle of Evaluation mapping} worksheet showing how their function examples are working.
 
-- *3. Find what is changing between the examples. Circle it and label it with a name that describes it.* +
+- *3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
 _The number is changing in each example.  We could name it "x", but "size" is a more accurate name._ +
 
 ifeval::["{proglang}" == "wescheme"]
@@ -192,7 +185,13 @@ ifeval::["{proglang}" == "pyret"]
 endif::[]
 
 - *4. Write the function definition.* +
-_Look to the examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the Number input._
+ifeval::["{proglang}" == "wescheme"]
+_Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`.
+endif::[]
+
 ifeval::["{proglang}" == "wescheme"]
 _``(define (gt size) (triangle size, "solid", "green"))``_
 endif::[]
@@ -202,9 +201,11 @@ endif::[]
 
 [.strategy-box]
 .Connecting to Best Practices
-* Writing the examples is like "showing your work" in math class.
-* Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
-* Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+****
+- Writing the examples is like "showing your work" in math class.
+- Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
+- Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+****
 
 [.lesson-instruction]
 Now that students have defined `gt` have them save their program as 'Defining Functions' and test out their newly created function in the Interactions window.
@@ -213,14 +214,7 @@ Now that students have defined `gt` have them save their program as 'Defining Fu
 - *What is the domain for `gt`?*
 _Number_
 
-- *Why might someone think the domain for `gt` is
-ifeval::["{proglang}" == "wescheme"]
-`Number String String`?* +
-endif::[]
-ifeval::["{proglang}" == "pyret"]
-`Number, String, String`?* +
-endif::[]
-_Because that's the domain of `triangle`.  The function `gt` uses `triangle`, but only needs one Number input because that's the only part that's changing._
+- *Why might someone think the domain for `gt` contains a Number and two Strings, because that's the Domain of `triangle`.  The function `gt` _uses_ `triangle`, but only needs one Number input because _that's the only part that's changing._
 - *Why is defining functions useful to us as programmers?*
 
 == Practicing the Design Recipe
@@ -232,7 +226,7 @@ This is a chance to review the steps students learned in the prior activity, wit
 *Word Problem: Write a function called `gold-star` that takes in number and produces a solid, gold star of that given size.*
 
 * Write 2 examples and the definition of `gold-star` on the 'Fast Functions' handout.
-* Complete the `gold-star` example on the @workbook-link{pages/FastFunctions.pdf, Fast Functions} worksheet.
+* Complete the `gold-star` example on the @workbook-link{pages/FastFunctions.adoc, Fast Functions} worksheet.
 
 === Investigate
 [.lesson-instruction]
