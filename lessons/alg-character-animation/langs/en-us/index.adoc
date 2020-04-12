@@ -1,12 +1,12 @@
-= Function Applications 2 (Animation with Functions)
+= Character Animation
 
-@lesson-description{Students create the functions that will control animation in parts of their game.}
+@lesson-description{Students define functions that control the movement of the target and danger in their games}
 
 [@lesson-intro-table]
 |===
 @prereqs-stds{alg-defining-functions-3}
-|Lesson Goals
-|Students will be able to:
+| Lesson Goals
+| Students will be able to:
 
 * Apply the @vocab{Design Recipe} to create a @vocab{function} given the constraints of a word problem.
 * Explain the basics of animation.
@@ -16,17 +16,12 @@
 * I can use the Design Recipe to make a function.
 * I can describe how animation works.
 
-|Key Points for the Facilitator
+| Key Points for the Facilitator
 |
 * Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
 * Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`.  `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we press the Run button!
 
-|Prerequisites
-|
-* Students should be familiar with Circles of Evaluation.
-* Students should be familiar with the Design Recipe.
-
-|Materials
+| Materials
 |
 
 ifeval::["{proglang}" == "wescheme"]
@@ -36,8 +31,8 @@ ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1-3eA21c2M229MbpU7XFo7kI5KXUumPQE_ZIrxXEiMDQ, Google Slides})
 endif::[]
 
-* Design Recipe: update-danger (@workbook-link{pages/FunctionApplications2-WB1.adoc, PDF})
-* Design Recipe: update-target (@workbook-link{pages/FunctionApplications2-WB2.adoc, PDF})
+* Design Recipe: update-danger (@workbook-link{pages/update-danger.adoc})
+* Design Recipe: update-target (@workbook-link{pages/update-target.adoc})
 
 |===
 
@@ -59,41 +54,39 @@ _Our eyes fill in the gaps between rapidly changing images._
 - How might this apply to our game? _If we change image @vocab{coordinate}s a little bit at a time, they will appear to move._
 
 [.lesson-instruction]
-Select 2 student volunteers - one to be TARGET, one to be DANGER.  Start with just TARGET.
+Draw a number line on the board, running from 0 to 640 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`.
 
-- TARGET moves a step to the left when they hear "update target" followed by a number.
-- We make TARGET move by calling out `(update-target 10)`, `(update-target 11)`, etc.
+- Have the class select a starting x-coordinate for the `TARGET`, and have the volunteer move to that position on the number line or coordinate plane.
+- Both characters move by 50 (pixels) on each frame of the game.
+- When they hear "update target" followed by their current location, the `TARGET` takes a step to the left, moving down the x-axis by 50 (pixels).
+- We make TARGET move by calling out `(update-target 300)`, `(update-target 250)`, etc.
 
 *How quickly could I get TARGET to move across the classroom?*
 
 After practicing with TARGET, add DANGER in.
 
-- DANGER takes a step to the right when they hear "update danger" followed by a number.
-- We make DANGER move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
+- `DANGER` takes a step to the _right_ when they hear "update danger" followed by their current x-coordinate.
+- We make `DANGER` move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
+- If the `DANGER` is moving to the right, is its x-coordinate increasing or decreasing?
 
-*How quickly could I get TARGET and DANGER to move across the room?*
-
-You'll have to call quickly to TARGET and DANGER, but it is very repetitive and tedious, and TARGET and DANGER won't be moving very fast!
+*Practice this a few times with your volunteer, asking the class what their new x-coordinate is each time.* Then have the other students call the update-danger function.
 
 - *What did you notice about the movement of TARGET and DANGER?  What was changing about them?*
 +
 _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
-
-- *What would have happened if we'd added PLAYER?*
-_It would have been more difficult to move them all simultaneously._
 
 - *What jobs could we hand over to the computer to make it possible for us to play the game?*
 _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
 
 === Investigate
 [.lesson-instruction]
--Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.
--Guide students as they complete @workbook-link{pages/FunctionApplications2-WB1.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.
+- Have students examine the `update-danger` function in their Game Template file, identify the contract, and interpret what the function is currently doing.
+- Guide students as they complete @workbook-link{pages/update-danger.adoc, Design Recipe: update-danger} and transfer the code to their Game Template file.
 
 When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
 
 [.lesson-instruction]
-Have students complete @workbook-link{pages/FunctionApplications2-WB2.adoc, Design Recipe: update-target} with their partner and transfer the code to their Game Template file.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
+Have students complete @workbook-link{pages/update-target.adoc, Design Recipe: update-target} with their partner and transfer the code to their Game Template file.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
 
 [.strategy-box]
 .Extension Activities
