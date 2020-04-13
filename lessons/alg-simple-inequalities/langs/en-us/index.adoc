@@ -1,4 +1,4 @@
-= Inequalities
+= Simple Inequalities
 
 @lesson-description{Students discover the Boolean data type, and apply knowledge of inequalities to simple programming problems.}
 
@@ -129,8 +129,10 @@ Every time Sam moves, we want to check and see if Sam is safe.
 
 [.lesson-instruction]
 ifeval::["{proglang}" == "wescheme"]
-- Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. 
-- For each of them, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "(safe-left? 20)!", "(safe-right? -100)!") *Do not ask `onscreen?` to roleplay beyond their contract!* 
+*Note:* In this programming language, question marks are prounced "huh?". So `safe-left?` would be prounounced "safe left huh?" This can be a source of some amusement for students!
+
+- Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. Give them 1 minute to read the contract and code, as written in the program.
+- For each of them, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "(safe-left? 20)!", "(safe-right? -100)!") *Note:* Do not ask `onscreen?` to roleplay beyond their contract! They'll get involved in the next lesson... 
 - Make sure that students understand that these functions _always return true_, because that is what the code says they should do! Obviously this is incorrect, and it's our job to fix those functions.
 endif::[]
 ifeval::["{proglang}" == "pyret"]
@@ -164,6 +166,10 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 endif::[]
 
 - Recruit three new student volunteers to roleplay those same functions, which have now been _corrected_. Make sure students provide correct answers, testing both `true` and `false` conditions using coordinates where Sam is onscreen and offscreen.
+
+=== Common Misconceptions
+- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_, such as when Sam is offscreen.
+- Push students to think carefully about corner-cases, such as when Sam is _exactly_ at -50 or 690.
 
 == Additional Exercises
 - Converting Circles of Evaluation with Booleans to Code
