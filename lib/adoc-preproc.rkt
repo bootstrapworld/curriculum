@@ -19,6 +19,14 @@
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
+(define *lesson-plan* (truthy-getenv "LESSONPLAN"))
+
+(define *lesson* (truthy-getenv "LESSON"))
+
+(define *narrative* (truthy-getenv "NARRATIVE"))
+
+(define *teacher-resources* (truthy-getenv "TEACHER_RESOURCES"))
+
 (define *link-lint?* (truthy-getenv "LINT"))
 
 (define *internal-links-port* #f)
@@ -34,7 +42,7 @@
   (string-append *pathway-root-dir* "resources/workbook-exercises.rkt.kp"))
 
 (define *workbook-pagenums*
-  (if (truthy-getenv "LESSONPLAN")
+  (if *lesson-plan*
       (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt.kp")])
         (if (file-exists? f)
             (call-with-input-file f read)
@@ -203,7 +211,7 @@
   ;(printf "doing add-standard ~a ~a ~a\n" x lesson lesson-title)
   (let-values ([(sublist-item c dict) (assoc-standards x)])
     (cond [c (let ([std (list-ref c 0)])
-               (when (and o (truthy-getenv "LESSON"))
+               (when (and o *lesson*)
                  (fprintf o "**~a**: ~a~n~n"
                           std (list-ref c 1)))
                (cond [(assoc std *standards-met*) =>
@@ -211,7 +219,7 @@
                                                   (when sublist-item
                                                     (let ([sublist-items (list-ref c0 1)])
                                                       (box-add-new! sublist-item sublist-items)))
-                                                  (unless (truthy-getenv "LESSON")
+                                                  (unless *lesson*
                                                     (box-add-new! (list lesson lesson-title)
                                                                   (list-ref c0 4)))
                                                   )]
@@ -298,7 +306,7 @@
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
-                           (printf "WARNING: pathway doesn't specify constituent lessons in correct order\n")])
+                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n" *lesson-plan* lesson)])
                    (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]" lesson lesson-title)))
                other-lessons)
           ", ")) o)
@@ -361,7 +369,7 @@
       (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
-            (if (truthy-getenv "LESSONPLAN")
+            (if *lesson-plan*
                 (let ([pagenum (workbook-pagenum lesson snippet)])
                   (unless exercise?
                     (unless pagenum
@@ -373,7 +381,7 @@
                                 (string-append " (" x ")")))]
                         [else ""]))
                 "")
-            (if (truthy-getenv "LESSONPLAN") ", window=\"_blank\"" ""))))
+            (if *lesson-plan* ", window=\"_blank\"" ""))))
 
 (define (display-comment prose o)
   (display "%CURRICULUMCOMMENT%\n" o)
@@ -396,7 +404,7 @@
 
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "making image ~s ~s\n" img opts)
-  (let* ([lesson (truthy-getenv "LESSONPLAN")]
+  (let* ([lesson *lesson-plan*]
          [lesson-subdir (truthy-getenv "LESSONSUBDIR")]
          [text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
@@ -446,7 +454,7 @@
                    (printf "WARNING: @link refers to nonexistent file ~a\n" f))])
 
          (format "link:pass:[~a][~a~a]" f link-text
-                 (if (or (truthy-getenv "LESSONPLAN") (truthy-getenv "TEACHER_RESOURCES"))
+                 (if (or *lesson-plan* *teacher-resources*)
                      ", window=\"_blank\"" ""))]
         [else
           (let ([f.asc (path-replace-extension f ".asc")])
@@ -470,18 +478,18 @@
 (define (display-title i o)
   (let ([title (string-trim (read-line i))])
     (set! *page-title* title)
-    (when (truthy-getenv "LESSONPLAN")
+    (when *lesson-plan*
       (call-with-output-file "index-title.txt"
         (lambda (o)
           (display title o) (newline o))
         #:exists 'replace))
     #|
-    (unless (truthy-getenv "TEACHER_RESOURCES")
+    (unless *teacher-resources*
       (fprintf o "[.lesson-title]\n"))
     |#
-    (let ([header-with-logo? (or #f ;(truthy-getenv "LESSONPLAN")
-                                 ;(truthy-getenv "NARRATIVE")
-                                 ;(truthy-getenv "TEACHER_RESOURCES")
+    (let ([header-with-logo? (or #f ;*lesson-plan*
+                                 ;*narrative*
+                                 ;*teacher-resources*
                                  )])
       (display #\= o) (display #\space o)
       (when header-with-logo?
@@ -636,17 +644,15 @@
         (set! *internal-links-port* (open-output-file internal-links-file))
         (set! *external-links-port* (open-output-file external-links-file))))
     ;
-    (when (truthy-getenv "LESSONPLAN")
-      (let* ([lesson0 (getenv "LESSON")]
-             [lesson (cadr (regexp-split #rx"/" lesson0))])
-        (for ([x *lessons-and-standards*])
-          (when (string=? (car x) lesson)
-            (for ([s (cdr x)])
-              (add-standard s lesson #f #f))))))
+    (when *lesson-plan*
+      (for ([x *lessons-and-standards*])
+        (when (string=? (car x) *lesson-plan*)
+          (for ([s (cdr x)])
+            (add-standard s *lesson-plan* #f #f)))))
     ;
-    (when (or (truthy-getenv "LESSONPLAN")
-              (truthy-getenv "NARRATIVE")
-              (truthy-getenv "TEACHER_RESOURCES"))
+    (when (or *lesson-plan*
+              *narrative*
+              *teacher-resources*)
       (print-menubar "index"))
     ;
     (define (expand-directives i o)
@@ -727,7 +733,7 @@
                                                             #:exercise? exercise?) o)]
                               [(2)
                                (let ([second-compt (cadr page-compts)]
-                                     [lesson-dir (truthy-getenv "LESSON")])
+                                     [lesson-dir *lesson*])
                                  (cond [(and (or (string=? first-compt "pages")
                                                  (string=? first-compt "solution-pages"))
                                              lesson-dir)
@@ -771,22 +777,22 @@
                                  )
                             (display (make-link adocf "" #:include? #t) o))]
                          [(string=? directive "lesson-description")
-                          (unless (truthy-getenv "LESSONPLAN") ;TODO: or LESSON or both?
+                          (unless *lesson-plan* ;TODO: or LESSON or both?
                             (error 'ERROR
                                    "WARNING: @lesson-description valid only in lesson plan"))
                           (display-lesson-description (read-group i directive) o)]
                          [(string=? directive "depends-on") ;XXX obsolete
-                          (unless (truthy-getenv "LESSONPLAN")
+                          (unless *lesson-plan*
                             (error 'ERROR "adoc-preproc: @depends-on valid only in lesson plan"))
                           (display-lesson-dependencies (read-commaed-group i directive) o)]
                          [(string=? directive "all-exercises")
-                          (unless (truthy-getenv "TEACHER_RESOURCES")
+                          (unless *teacher-resources*
                             (error 'ERROR
                                    "adoc-preproc: @all-exercises valid only in teacher resources"))
                           (display-exercise-collation o)]
                          [(string=? directive "solutions-workbook")
                           ;TODO: don't need this anymore -- link is autogen'd
-                          (unless (truthy-getenv "TEACHER_RESOURCES")
+                          (unless *teacher-resources*
                             (error 'ERROR
                                    "adoc-preproc: @solutions-workbook valid only in teacher resources"))
                           (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
@@ -858,29 +864,29 @@
                            (printf "WARNING: Unrecognized directive @~a~%" directive)
                            (display c o) (display directive o)
                            #f]))]
-                [(and (or (truthy-getenv "LESSON")
-                          (truthy-getenv "LESSONPLAN")
-                          (truthy-getenv "NARRATIVE")
-                          (truthy-getenv "TEACHER_RESOURCES"))
+                [(and (or *lesson*
+                          *lesson-plan*
+                          *narrative*
+                          *teacher-resources*)
                       beginning-of-line? (char=? c #\=))
                  (set! beginning-of-line? #f)
                  (cond [title-reached?
                          (cond [first-subsection-reached? #f]
                                [(check-first-subsection i o)
                                 (set! first-subsection-reached? #t)
-                                (when (truthy-getenv "LESSONPLAN")
+                                (when *lesson-plan*
                                   ;(include-standards o)
                                   (include-glossary o))]
                                [else #f])
-                         (cond [(truthy-getenv "LESSON")
+                         (cond [*lesson*
                                 (display-section-markup i o)]
                                [else (display c o)])]
                        [else
                          (set! title-reached? #t)
-                         (cond [(or (truthy-getenv "LESSONPLAN") (truthy-getenv "TEACHER_RESOURCES"))
+                         (cond [(or *lesson-plan* *teacher-resources*)
                                 (display-title i o)]
                                [else (display #\= o)])
-                         (when (truthy-getenv "TEACHER_RESOURCES")
+                         (when *teacher-resources*
                            ;(printf "teacher resource autoloading stuff\n")
                            (newline o)
                            (fprintf o (create-workbook-links))
@@ -911,16 +917,16 @@
           (lambda (o)
             (expand-directives i o)
 
-            (when (truthy-getenv "NARRATIVE")
+            (when *narrative*
               (link-to-lessons-in-pathway o))
 
             (set! *dictionaries-represented*
               (sort *dictionaries-represented* string-ci<=?))
 
-            (when (or (truthy-getenv "NARRATIVE") (truthy-getenv "LESSONPLAN"))
+            (when (or *narrative* *lesson-plan*)
               (create-standards-subfile))
 
-            (when (truthy-getenv "NARRATIVE")
+            (when *narrative*
               (print-other-resources-intro o)
               (print-link-to-glossary o)
               (print-link-to-standards o)
@@ -942,12 +948,12 @@
           #:exists 'replace)))
   ;
 
-  (when (or (truthy-getenv "NARRATIVE")
-            (truthy-getenv "LESSONPLAN"))
+  (when (or *narrative*
+            *lesson-plan*)
     (add-exercises)
     (create-glossary-subfile))
 
-  (when (truthy-getenv "LESSONPLAN")
+  (when *lesson-plan*
     (accumulate-glossary-and-standards))
 
   ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
@@ -996,16 +1002,16 @@
       #:exists 'append)))
 
 (define (create-glossary-subfile)
-  ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" (truthy-getenv "NARRATIVE"))
+  ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" *narrative*)
   (print-menubar "pathway-glossary")
   (call-with-output-file "pathway-glossary.asc"
     (lambda (op)
       (unless (empty? *glossary-items*)
         (set! *glossary-items*
           (sort *glossary-items* #:key car string-ci<=?))
-        (when (truthy-getenv "NARRATIVE")
+        (when *narrative*
           (fprintf op "= Glossary\n\n"))
-        (when (truthy-getenv "LESSON")
+        (when *lesson*
           (fprintf op ".Glossary\n\n"))
         (fprintf op "[.glossary]~%")
         (for ([s *glossary-items*])
@@ -1034,7 +1040,7 @@
 
 (define (create-standards-section dict dict-standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op (if (truthy-getenv "LESSON")
+  (fprintf op (if *lesson*
                   ".~a Statements\n"
                   "== ~a Statements\n\n")
            (expand-dict-abbrev dict))
@@ -1047,7 +1053,7 @@
           [lessons (unbox (list-ref s 4))])
       (fprintf op "~a:: " (car s))
       (fprintf op "~a\n" (cadr s))
-      (unless (truthy-getenv "LESSON")
+      (unless *lesson*
         (when (> (length lessons) 0)
           (fprintf op "{startsb}See: ~a.{endsb}\n"
                    (string-join
@@ -1062,7 +1068,7 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o)
-  (let ([narrative? (truthy-getenv "NARRATIVE")])
+  (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
     (print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
@@ -1093,14 +1099,14 @@
 
 (define (create-standards-subfile)
   ;(printf "doing create-standards-subfiles ~s\n" *standards-met*)
-  (when (truthy-getenv "NARRATIVE")
+  (when *narrative*
     (print-menubar "pathway-standards"))
   (call-with-output-file "pathway-standards.asc"
     (lambda (op)
       (unless (empty? *standards-met*)
-        (when (truthy-getenv "NARRATIVE")
+        (when *narrative*
           (display-standards-selection op))
-        (when (truthy-getenv "LESSON")
+        (when *lesson*
           (fprintf op (string-append
                         "\n[.alignedStandardsIntro]\n"
                         "_Select one or more standards from the menu on the left (⌘-click\n"
