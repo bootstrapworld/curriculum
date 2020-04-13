@@ -314,14 +314,17 @@
 
 (define (display-standards-row o)
   ;(printf "doing display-standards-row\n")
-  (unless (empty? *standards-met*)
-    (display "| " o)
-    (display-standards-selection o)
-    (display
-      (string-append
-        "|\n"
-        "\n"
-        "include::./pathway-standards.asc[]\n") o)))
+  (cond [(null? *standards-met*)
+         (when *lesson-plan*
+           (printf "WARNING: Lesson ~a: No standards specified\n" *lesson-plan*))]
+        [else
+          (display "| " o)
+          (display-standards-selection o)
+          (display
+            (string-append
+              "|\n"
+              "\n"
+              "include::./pathway-standards.asc[]\n") o)]))
 
 (define (include-standards o) ;XXX obsolete?
   (display
