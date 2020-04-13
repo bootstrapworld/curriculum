@@ -1,0 +1,120 @@
+= Histograms
+
+@lesson-description{Students explore new visualizations in Pyret, this time focusing on the frequency of observations in a quantitative dataset. Students are introduced to Histograms by comparing them to bar charts, and learn to construct them by hand and in Pyret.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-table-functions}
+| Lesson Goals
+| Students will be able to...
+
+* create histograms using the animals dataset
+* visualizations of frequency using their chosen dataset, and write up their findings
+
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Review @duration{20 minutes}
+
+Have students open their Animals Starter File, and click “Run”. (If they do not have this file, or if something has happened to it, they can always make a @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, new copy}.)
+
+
+[.lesson-instruction]
+- Turn to @workbook-link{pages/design-recipe.adoc}, and write the functions you see there. When you’re ready, type the contracts, purpose statements, examples and definitions into the Definitions Area.
+- Use the `.build-column` method to add a new column to the animals table, showing the weight of every animal in kilograms.
+- Use the `image-scatter-plot` function to plot all of the animals, using their `age` as the x-axis, their number of `weeks` in the shelter as the y-axis, and `smart-dot` as our function.
+
+== Introducing Histograms @duration{20 minutes}
+
+=== Overview
+Students look at a bar chart and a histogram, compare/contrast them, and make observations about what they have in common and how they are different. Then they learn a more formal explanation of histograms.
+
+=== Launch
+
+[.lesson-instruction]
+Have students complete @workbook-link{pages/summarizing-columns.adoc}.
+
+The display on the left side of that page is a @vocab{Bar chart}. 
+
+- Bar charts use the horizontal axis to show values of a categorical variable (in the diagram on the right, `species`). 
+- The vertical axis here shows @vocab{frequency} of categorical values in the dataset.
+- This bar chart happens to show the categorical values in alphabetical order from left to right, but it would be  fine to re-order them any way we wish. The bar for “dogs” could have been drawn before the one for “cats”, without changing the meaning of the display. _It never makes sense to talk about the “shape” of a categorical data set_, since that shape holds no meaning.
+
+The display on the right side is called a @vocab{histogram}. 
+
+- Histograms show the distribution of _quantitative_ data. 
+- Since quantitative data can be ordered from smallest-to-largest, these bars _cannot_ be re-ordered.
+- Histograms allow us to see the shape of a data set.
+
+=== Investigate
+To build a histogram, we start by sorting all of the numbers in our column from smallest to largest, marking our x-axis from the smallest value to the largest value and dividing into equally-sized intervals, or “bins”. Once we have our bins, we put each value in our dataset into the bin it belongs, and then count how many values are in each bin. This count determines the height of the bars on our y-axis.
+
+[.lesson-instruction]
+Turn to @workbook-link{pages/making-histograms.adoc}, and try drawing a histogram from a dataset.
+
+==== Possible Misconceptions
+Note that intervals on this display include the left endpoint but not the right. If we included the right endpoint and someone had 0 teeth, we’d have to add on a bar from -5 to 0, which would be awfully strange!
+
+=== Synthesize
+Review: How are histograms and bar charts different?
+
+== Choosing the Right Bin Size @duration{15 minutes}
+
+=== Overview
+Students make histograms from the animals-dataset, and explore different bin sizes. 
+
+=== Launch
+*The size of the bins matters a lot!* Bins that are too small will hide the shape of the data by breaking it into too many short columns. Bins that are too large will hide the shape by squeezing the data into just a few tall columns. In this workbook exercise, the bins were provided for you. But how do you choose a good bin-size?
+
+=== Investigate
+
+A display of how long it takes animals to get adopted can make it easier to get an idea of what adoption times were most common, and if there were any unusually long or short times that it took for an animal to be adopted. 
+
+[.lesson-instruction]
+--
+Suppose we want to know how long it takes for animals at the shelter to be adopted.
+
+* Find the contract for the `histogram` function.
+* Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 5.
+* How many took between 5 and 10 weeks? Between 20 and 25?
+* Now try a bin size of 10, then a bin size of 2. What happens? Which bin size is most useful?
+--
+
+[.lesson-instruction]
+Look at the histogram and count how many animals took between 0 and 5 weeks to be adopted. How many took between 5 and 10 weeks? What else do you Notice? What do you Wonder?
+
+Some observations you can share with the class, to get them started:
+
+- We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less. 
+- We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.
+- More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But those few unusually long adoption times pulled the average up to 5.8 weeks. 
+
+If someone would ask what was typical for the adoption times, one could say: “Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!” Without looking at the histogram’s shape, we could not have drawn this conclusion.
+
+[.lesson-instruction]
+What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?
+
+=== Synthesize
+[.lesson-point]
+Rule of thumb: a histogram should have between 5–10 bins.
+
+Histograms are a powerful way to display a data set and assess its @vocab{shape}. Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column. But how do we talk about or describe that shape, and what does the shape actually tell is? The next lesson addresses all of these.

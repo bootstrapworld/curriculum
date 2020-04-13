@@ -9,6 +9,7 @@
   enclose-span
   enclose-div
   enclose-textarea
+  enclose-math
 
   span-stack-present?
   top-span-stack
@@ -22,18 +23,18 @@
   (let ([classes (if (string=? classes "") '()
                      (regexp-split #rx"\\." (substring classes 1)))])
     (string-append
-      "%CURRICULUM" tag-name "!"
+      "%CURRICULUM" tag-name "%"
       (if (pair? classes) (string-append
                             " class=\""
                             (string-join classes " ")
                             "\"")
           "")
       (if attribs (string-append " " attribs) "")
-      "%BEGINCURRICULUM" tag-name "!")))
+      "%BEGINCURRICULUM" tag-name "%")))
 
 (define (create-end-tag tag-name)
   (string-append
-    "%ENDCURRICULUM" tag-name "!"))
+    "%ENDCURRICULUM" tag-name "%"))
 
 (define (enclose-tag tag classes s #:attribs [attribs #f])
   (string-append
@@ -51,6 +52,13 @@
   (let ([textarea "tt"]) ;shd be "textarea" eventually
     (enclose-div ".obeyspaces"
                  (enclose-tag textarea classes s))))
+
+(define (enclose-math e)
+  (string-append
+    (format "%CURRICULUMSCRIPT%")
+    (format "%BEGINCURRICULUMSCRIPT%\\displaystyle ")
+    e
+    (format "%ENDCURRICULUMSCRIPT%")))
 
 ;for the @span{...}{...}
 
@@ -75,7 +83,7 @@
 (define (decrement-top-span-stack)
   (let ([n (car *span-stack*)])
     (when (<= n 0)
-      (ferror 'span "Bad @span: Check missing braces"))
+      (error 'ERROR "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
 (define (display-begin-span span-args o)

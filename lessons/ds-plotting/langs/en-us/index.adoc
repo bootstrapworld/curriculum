@@ -1,0 +1,133 @@
+= Plotting and Displaying Data
+
+@lesson-description{Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-applying-functions}
+| Lesson Goals
+| Students will be able to:
+
+* Read pie and bar charts
+* Explain the difference between pie and bar charts
+* Generate pie and bar charts (among others) from the animals dataset
+
+| Student-Facing Lesson Goals
+| I can...
+
+* Answer questions about pie and bar charts
+* Explain the difference between pie and bar charts
+* Make pie and bar charts
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Displaying Categorical Variables @duration{10 minutes}
+=== Overview
+Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
+
+=== Launch
+Have students ever seen any pictures created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image? The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that does just that, and an example of using it:
+----
+# pie-chart :: (t :: Table, col :: String) -> Image
+pie-chart(animals-table, "gender")
+----
+
+[.lesson-instruction]
+- What is the Name of this function?
+- How many inputs are in its @vocab{Domain}?
+- In the Interactions Area, type `pie-chart(animals-table, "species")` and hit Enter. What happens? 
+
+Hovering over a pie slice or bar reveals the value or percentage of the whole, and the label. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+
+The function `pie-chart` consumes a Table of data, along with the _name of a categorical column you want to display_. The computer
+will go through the column, counting the number of times that each value appears. It will then create a pie slice for each
+value, with the size of the slice being the percentage of times it appears. In this example, we used our `animals-table` table as
+our dataset, and made a pie chart showing the distribution of `species` across the shelter.
+
+=== Investigate
+Here is the @vocab{Contract} for another function:
+
+----
+# bar-chart :: (t :: Table, col :: String) -> Image
+----
+
+[.lesson-instruction]
+- Which column of the animals table tells us whether an animal is male or female?
+- Use `bar-chart` to make a display showing the number of female animals at the shelter.
+- Do you think we could use any column? What about a quantitative column?
+- Experiment with these two functions, passing in different column names for the label and data columns. If you get an error message, _read it carefully!_ 
+- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
+- When would you want to use a pie chart instead of a bar chart?
+- When would you want to use a bar chart instead of a pie chart?
+
+=== Possible Misconceptions
+Pie charts show _percentages_, whereas bar charts show _quantities_. Students don't often notice the difference, so be sure to explicitly call it out!
+
+==== Synthesize
+[.lesson-point]
+Pie charts and bar charts are mostly used to _summarize categorical columns_. 
+
+While bars in a bar chart are usually order in some logical way (alphabetical, small-medium-large, etc), the pie slices and bars can be placed in any order, without changing the meaning of the chart.
+
+== Exploring other Displays @duration{30 minutes}
+
+=== Overview
+Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
+
+=== Launch
+There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.
+
+=== Investigate
+[.lesson-instruction]
+Complete @workbook-link{pages/exploring-displays-1.adoc} and @workbook-link{pages/exploring-displays-2.adoc}.
+
+=== Possible Misconceptions
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts. 
+
+=== Synthesize
+
+Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
+
+You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+
+[.lesson-instruction]
+Make sure to save your work, so you can go back to it later!
+
+[.strategy-box]
+.Extension Activity
+****
+Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
+
+What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
+
+[.lesson-instruction]
+- Use the `count` function to make a table showing the number of animals of each `gender` at the shelter.
+- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) at the shelter.
+
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to use the raw values in the summary table as-is: the size of the pie slice or bar is taken directly from the `count` column, and the label is taken directly from the `value` column. When we want to use the raw values as-is, we have another function:
+
+----
+# pie-chart-raw :: (t :: Table, label :: String, data :: String) -> Image
+pie-chart-raw(count(animals-table,"species"), "value", "count")
+----
+****
+
+== Additional Exercises:
+@exercise-link{pages/plot-practice.adoc, "Practice with Plots"}

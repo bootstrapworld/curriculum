@@ -1,0 +1,151 @@
+= Defining Values
+
+@lesson-description{Students learn how to define lines of code as a set value that can be used repeatedly in different situations, similar to a variable in math.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-function-composition-1}
+| Lesson Goals
+| Students will be able to:
+
+* Demonstrate understanding of @vocab{variable}s and why they are useful in math and programming
+
+| Student-facing Goals
+|
+* I can define a line of code as a @vocab{value}, such as `myStar` or `eyeColor`.
+* I can use my defined value in different situations.
+
+| Materials
+|
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1l369za3UsTHj5bEw0IZIBoAEMdPnFDmsA5_oenwN8Cw/edit?usp=sharing, Google Slides})
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1zwQm0b6to3zyLXdqJbskSZNSCnDt1GitoNiA1yN4PrU, Google Slides})
+endif::[]
+
+* Defining Values Exploration (@workbook-link{pages/defining-values-practice.adoc, original}, @link{solution-pages/defining-values-practice.adoc, solutions})
+
+* Defining Values Practice (@workbook-link{defining-values-practice-2.adoc, original}, @link{solution-pages/defining-values-practice-2.adoc, solutions})
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Key Points For The Facilitator
+|
+* Learning how to define values is a big milestone! It will be used consistently throughout other lessons, so be sure to give students plenty of time to practice this new skill.
+* Check frequently for understanding of @vocab{data types} and @vocab{contract}s during this lesson and throughout subsequent lessons.
+
+* Students will use their Contracts page frequently, so it should be kept in an accessible, convenient location.
+
+|===
+
+== Warmup
+
+Students should be logged into
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}.
+endif::[]
+
+== Identifying Fixed Structures @duration{30 minutes}
+
+=== Overview
+This activity introduces the problem with duplicate code, leveraging Mathematical Practice 7 - Identify and Make Use of Structure. Students identify common structures in an expression, and discover ways to bind that expression to a name that can be re-used.
+
+=== Launch
+
+Display the sample code from the "Prize Star" exercise.
+
+ifeval::["{proglang}" == "wescheme"]
+
+```
+(star 50 "solid" "green")
+(scale 3 (star 50 "solid" "green"))
+(scale .5 (star 50 "solid" "green"))
+(rotate 45 (star 50 "solid" "green"))
+(rotate 45 (scale 3 (star 50 "solid" "green")))
+```
+
+- *What common element was repeated throughout all the lines of code?*
+`(star 50 "solid" "green")`
+endif::[]
+
+ifeval::["{proglang}" == "pyret"]
+```
+star(50, "solid", "green")
+scale(3, star(50, "solid", "green"))
+scale(0.5, star(50, "solid", "green"))
+rotate(45, star(50, "solid", "green"))
+rotate(45, scale(3, star(50, "solid", "green")))
+```
+
+- *What common element was repeated throughout all the lines of code?*
+`star(50, "solid", "green")`
+endif::[]
+
+- *What happened when you were asked to change the color of the star to gold?*
+_We had to change it everywhere it appeared._
+
+Since we're using that star over and over again, wouldn't it be nice if we could give that piece of code a "nickname", something shorter we could type to represent that piece of code?
+
+=== Investigate
+[.lesson-instruction]
+In the coding environment, have students click "Start a new program" and open to @workbook-link{pages/defining-values-practice.adoc, Defining Values - Explore} to explore defining values.
+
+ifeval::["{proglang}" == "pyret"]
+Students need to have *include image* as their first line of code in the @vocab{Definitions area} and press "Run" to load the image library.
+
+- *How is defining a value with the `=` sign similar to what you've seen in math class?
+endif::[]
+
+ifeval::["{proglang}" == "wescheme"]
+- *How is ‘define’ similar to a function?  How is it different?*
+_It’s written inside parentheses like a @vocab{function}, but ‘define’ doesn’t have an output_
+endif::[]
+
+- *What is the usefulness of defining values?*
+_Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
+- *What datatypes can we define values for?*
+_All of them - Number, String, Image_
+
+[.strategy-box]
+.Support for English Language Learners
+****
+MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the programming-specific language, such as "define" and "value".
+****
+
+[.lesson-instruction]
+Students complete @workbook-link{pages/defining-values-practice-2.adoc, Defining Values Practice 2} with their partner.
+
+== Playing with Value Definitions @duration{20 minutes}
+
+=== Overview
+This activity is a chance to _play_ with new concepts, combining value definitions and function composition to create more exciting shapes. The engaging nature of the activity is designed to motivate lots of experiments, each of which gives students a chance to practice applying those concepts.
+
+=== Launch
+There are other functions that also work with Images - `overlay`, `beside`, and `above` are all functions that take in two Images and return a new Image. 
+{empty}
+
+*Option 1* (for a shorter time commitment):
+Define at least 3 images of your own and combine using `overlay`, `beside`, and/or `above`.  You can also use any other functions you've learned, such as:
+
+- `rotate`
+- `scale`
+- `flip-horizontal`
+- `flip-vertical`
+- any other image producing function(`triangle`, `star`, `circle`, `rectangle`, etc..)
+
+Write comments to describe what is being produced.
+{empty}
+
+*Option 2* (for a longer time commitment):
+Have students choose a flag from this list: @link{pages/flags-of-the-world-resource.pdf, (Flags of the World Resource)}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.

@@ -1,4 +1,4 @@
-# last modified 2019-12-25
+# last modified 2020-02-26
 
 if test -f distribution.tar.bz2; then
   rm -fr distribution
@@ -7,12 +7,6 @@ fi
 
 if test ! -d distribution; then
   echo distribution/ not found; exit
-else
-  for f in pyret wescheme; do
-    if test ! -d distribution/bs-game-pathway-$f; then
-      echo distribution/bs-game-pathway-$f not found; exit
-    fi
-  done
 fi
 
 YEAR=2020
@@ -37,10 +31,20 @@ if $ON_DEPLOY_SITE; then
   chgrp -R cs-plt distribution
 fi
 
+function copydir() {
+  src=$1
+  if test ! -d $src; then return; fi
+  dest=$2
+  rm -fr $dest
+  cp -prH $src $dest
+}
+
 for proglang in pyret wescheme; do
-  rm -fr $DEPLOY_DIR/algebra-$proglang-remix
-  cp -prH distribution/bs-game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
+  copydir distribution/game-pathway-$proglang $DEPLOY_DIR/algebra-$proglang-remix
 done
 
-rm -fr $DEPLOY_DIR/datascience-remix
-cp -prH distribution/bs-data-science-pathway $DEPLOY_DIR/datascience-remix
+copydir distribution/data-science-pathway $DEPLOY_DIR/datascience-remix
+
+copydir distribution/reactive-pathway $DEPLOY_DIR/reactive-remix
+
+copydir distribution/flags-pathway $DEPLOY_DIR/flags-remix

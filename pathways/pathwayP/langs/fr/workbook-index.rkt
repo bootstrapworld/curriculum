@@ -1,5 +1,0 @@
-(
- "lessonA"
- "lessonC"
- "lessonB"
- )

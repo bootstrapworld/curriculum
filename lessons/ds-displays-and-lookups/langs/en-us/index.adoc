@@ -1,0 +1,111 @@
+= Data Displays and Lookups
+
+@lesson-description{Students continue to practice making different kinds of data displays, this time focusing lesson on programming and more of using visualizations to answer questions. They also learn how to extract individual rows from a table, and columns from a row. }
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-applying-functions}
+| Lesson Goals
+| Students will be able to...
+
+* Given an human-language request for a data display involving the entire animals dataset, break it down into parts and generate the display.
+* Given a Table, use the `row-n` method to extract any Row from that table
+* Given a Row, use the column lookups to extract the value of any column in the Row
+
+| Student-Facing Lesson Goals
+| I can...
+
+* 
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Displaying Data @duration{20 minutes}
+
+=== Overview
+Students get some more practice applying the plotting functions and working with Contracts, and begin to shift the focus from _programming_ to _data visualization_. This activity stresses a hard programming skill (reading Contracts) with formal reading comprehension (identifying key portions of the sentence).
+
+=== Launch
+The Contracts page in the back of students' workbooks contains contracts for many plotting functions. When given a dataset and a desired display, can students read these Contracts and figure out how to produce it?
+
+Suppose we wanted to generate a pie chart showing the ratio of fixed to un-fixed animals at the shelter? How do we go from a simple sentence to working code that makes a data display?
+
+[.lesson-point]
+To make a data display, we ask "What Data?", "Which Variable?", and "What Display?"
+
+. We start by asking *what data* we're talking about. In this case, it's all the animals at the shelter.
+. We also need to know *which variable* - or "what column" - we are displaying. In this case, it's the `fixed` column.
+. Finally, we need to know *what display* we are using. Is it a histogram? Bar chart? In this case, we want to make pie charts.
+
+Once we can answer these questions, all we need to do is find the Contract for that display and fill in the Domain!
+
+=== Investigate
+Let's get some practice going from questions to code, making visualizations.
+[.lesson-instruction]
+
+Turn to @workbook-link{pages/data-displays.adoc}, and see if you can fill in these three parts for a number of data display requests. When you're finished, try to make the display in Pyret using the appropriate function.
+
+=== Synthesize
+Debrief the activity with students. As an extension, have students break into teams and come up with additional Data Display challenges, then race to see which team can complete the other team's challenges first!
+
+== Row and Column Lookups @duration{30 minutes}
+
+=== Overview
+Students learn how to access individual rows from a table in Pyret, and how to access a particular column from those rows.
+
+=== Launch
+Have students open their saved Animals Starter File (or make a @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, new copy}), and click “Run”.
+
+Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method: `animals-table.row-n(0)`
+
+[.lesson-point]
+Don't forget: data rows start at index _zero_!
+
+[.lesson-instruction]
+For practice, in the Interactions Area, use the `row-n` method to get the second and third data rows.
+
+What is the Domain of .row-n? What is the Range? Find the contract for this method in your contracts table. A table @vocab{method} is a special kind of function which always operates on a specific table. In our example, we always use .row-n with the animals table, so the number we pass in is always used to grab a particular row from animals-table.
+
+Pyret also has a way for us to get at individual columns of a Row, by using a Row Accessor. Row accessors start with a Row value, followed by square brackets and the name of the column where the value can be found. Here are three examples that use row accessors to get at different columns from the first row in the animals-table:
+
+  animals-table.row-n(0)["name"]
+  animals-table.row-n(0)["age"]
+  animals-table.row-n(0)["fixed"]
+
+=== Investigate
+[.lesson-instruction]
+- How would you get the `weeks` column out of the _second_ row? The third?
+- Complete the exercises on @workbook-link{pages/lookup-questions.adoc} and @workbook-link{pages/more-practice-w-lookups.adoc}.
+
+We can use the `row-n` method to define entire _animal rows_ as values. Type the following lines of code into the Definitions Area and click “Run”:
+
+  animalA = animals-table.row-n(1)
+  animalB = animals-table.row-n(10)
+
+What happens when you evaluate `animalA` in the Interactions Area?
+
+=== Investigate
+[.lesson-instruction]
+- Define _at least_ two additional values to be animals from the `animals-table`, called `animalC` and `animalD`.
+
+
+=== Synthesize
+Have students share their answers, and see if there are any common questions that arise.
+
+== Additional Exercises:

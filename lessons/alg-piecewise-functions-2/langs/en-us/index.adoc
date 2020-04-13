@@ -1,0 +1,116 @@
+= Piecewise Functions 2 
+
+@lesson-description{Students apply their knowledge of piecewise functions to write a function to move the player in their game.}
+
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-piecewise-functions}
+| Lesson Goals
+| Students will be able to:
+
+* Apply previous knowledge of @vocab{piecewise function}s to a new problem situation.
+
+| Student-Facing Lesson Goals
+|
+* I can write a function using conditionals to move my player.
+
+| Materials
+|
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1u0Zg-ErvH4ICRewgDeT42hnWngMrxPM1QwGSm8_FW-E/edit?usp=sharing, Google Slides})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=1p5gSt0ic3HC8oSltN_wSfqochw-eGUa_W2Ag56mEfpw, Google Slides})
+endif::[]
+
+* Design Recipe: update-player (@workbook-link{pages/PiecewiseFunctions2-EX1.adoc, PDF})
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Key Points for the Facilitator
+|
+* Encourage students to challenge themselves when creating update-player by completing one of the extension activities.
+* The update-player function is one of the main places where students can set their game apart and make it theirs.  Encourage exploration and experimentation!
+* Adding comments to code - if you have to ask a student "What are you trying to do there?", then they probably need more comments!  
+
+|===
+
+
+== Warmup
+
+Students should have their computer, workbook, contracts page, and pencil.
+
+== Defining Piecewise Functions @duration{30 minutes}
+
+=== Overview
+Students _define_ a piecewise function. This is a challenging task, which is motivated by introducing key events in their videogame.
+
+=== Launch
+
+Connect The Dots - Students think of what they did in the previous lesson on piecewise functions specifically, then generalize those concepts. (Example: We wrote a function that gave different responses based on the input.)  Students then think of how those concepts might be applied to their game.  (What element of the game needs user input?) 
+  
+
+=== Investigate
+
+[.lesson-instruction]
+Students open their *Game Project file* and look for where a @vocab{conditional} function would be necessary, then figure out what the contract represents.  
+
+[.strategy-box]
+.Strategies for English Language Learners
+****
+MLR 6 - Three Reads: Have students read through the problem statement three times, looking for different information.  What is the problem asking me?  What is the @vocab{contract} for this @vocab{function}?  What information do I need to create that function?
+****
+
+* *What is the contract for `update-player`?*
++
+ifeval::["{proglang}" == "wescheme"]
+_``update-player: Number String -> Number``_
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_``update-player: Number, String -> Number``_
+endif::[]
+* *What does each part of the domain and range represent?*
++
+_Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`_
+* *What should happen mathematically to the y-coordinate of `PLAYER` when the user presses the "up" key?*
++
+_It should increase, the program should add something to it_
+
+@centered-image{images/player-move.png, Player Movement, 400, align="center"}
+
+
+Students complete @workbook-link{pages/PiecewiseFunctions2-EX1.adoc, Design Recipe: update-player} with a partner, then type their code into their *Game Project file* and test.  
+
+=== Possible Misconceptions
+- Students often think of this function as returning a _relative distance_ (e.g. "it adds 20"), instead of an absolute coordinate (e.g. "the new y-coordinate is the old y plus 20")
+
+=== Synthesize
+- How is this function similar to the piecewise functions you've seen before? How is it different?
+- How could we change this function so that the "W" key makes the player go up, instead of the arrow key?
+- How could we change this function so that the "W" key makes the player go up, _in addition to_ the arrow key?
+- What happens if your little brother or sister walks by and hits a random key that doesn't have a meaning in your function? What _should_ happen?
+
+== Closing
+Students choose one or more features to make their game more unique.
+
+ifeval::["{proglang}" == "wescheme"]
+Reminder: Use `;` to add comments to code! +
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Reminder: Use `#` to add comments to code! +
+endif::[]
+Adding useful comments to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
+
+Some ideas for features:
+
+* Warping - program one key to "warp" the player to a set location, such as the center of the screen
+* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen 
+* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
+* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again

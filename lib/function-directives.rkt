@@ -5,12 +5,12 @@
 
 (provide *function-list*)
 
-(define *solutions-mode?* (getenv "SOLUTION"))
+(define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (unless (member *proglang* '("pyret" "wescheme"))
-  (ferror 'function-directives.rkt "Unknown proglang ~a" *proglang*))
+  (error 'ERROR "function-directives: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
 
@@ -71,34 +71,36 @@
                                        (if (pyret-keyword? w)
                                            (begin
                                              ;(printf "found keyword ~a\n" w)
-                                             (format "%PYRETKEYWORD~a%END" w))
+                                             (format "%PYRETKEYWORD%~a%END%" w))
                                            w))
                                      words) " ")))
                           lines) "\n"))])
         (if (string=? res "") " " res))))
 
 (define (write-section-header page-header funname)
-  (format (mstring "\n\n[.designRecipeLayout]"
+  (format (string-append
+            "\n\n[.designRecipeLayout]\n"
             "== [.dr-title]##~a: ~a##\n")
           page-header funname))
 
 (define (write-directions directions)
-  (format (mstring
-            "\n[.recipe_word_problem]"
+  (format (string-append
+            "\n[.recipe_word_problem]\n"
             "**Directions**: ~a\n\n")
           directions))
 
 (define (write-purpose funname domain-list range purpose)
   (string-append
-    (mstring "\n\n[.recipe_title]"
-      "Contract and Purpose Statement"
-      ""
-      "[.recipe_instructions]"
+    (string-append
+      "\n\n[.recipe_title]\n"
+      "Contract and Purpose Statement\n"
+      "\n"
+      "[.recipe_instructions]\n"
       "Every contract has three parts...\n\n")
     (write-wrapper ".recipe_graf"
       (lambda ()
         (string-append
-          (if *pyret?* "" "&#59; ")
+          (if *pyret?* "# " "&#59; ")
           (encoded-ans ".recipe_name" funname *show-funname-defn?*)
           (if *pyret?* "::" ":")
           (encoded-ans ".recipe_domain"
@@ -118,10 +120,11 @@
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
-    (mstring "\n\n[.recipe_title]"
-      "Examples"
-      ""
-      "[.recipe_instructions]"
+    (string-append
+      "\n\n[.recipe_title]\n"
+      "Examples\n"
+      "\n"
+      "[.recipe_instructions]\n"
       "Write some examples, then circle and label what changes...\n\n")
     ;examples
 
@@ -194,14 +197,13 @@
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
-          (write-clear) ;EXAMPLE body on its own line!
-          (encoded-ans "" "MM" #f)
-          (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?)
+          (enclose-span ".recipe_example_body_wrap"
+            (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?))
           (write-large ")")
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "doing write-example/pyret fun ~s args= ~s body= ~s\n" funname args body)
+  ;(printf "write-ea-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
   (when (pair? funname)
     (set! args (cdr funname))
     (set! funname (car funname)))
@@ -213,40 +215,33 @@
   (write-wrapper ".recipe_example_line"
     (lambda ()
       (string-append
-        (write-clear)
         (encoded-ans "" "MM" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-
-        (cond [(or (> (+ (string-length funname)
-                         (string-length args)) *max-pyret-example-side-length*)
-                   (> (string-length body) *max-pyret-example-side-length*))
-               (string-append
-                 (write-clear)
-                 (encoded-ans "" "MM" #f))]
-              [else " "])
-
-        (string-append
-          (highlight-keywords "is ")
-          (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-          )
-
+        ; wrap the `is ...` code in its own element, so that wrapping works properly
+        (enclose-span ".recipe_example_body_wrap"
+          (string-append
+            (highlight-keywords "is ")
+            (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+            ))
         (write-clear)
         ))))
 
 (define (write-each-example funname args body show)
+  ;(printf "write-each-example ~s ~s ~s ~s\n" funname args body show)
   (let ([show-funname? #f]
         [show-args? #f]
         [show-body? #f])
     (cond [(not show) #f]
-          [(not *solutions-mode?*) #f]
           [(eqv? show #t)
            (set! show-funname? #t)
            (set! show-args? #t)
            (set! show-body? #t)]
+          ;[(not *solutions-mode?*) #f]
+          ;FIXME what exactly should we decide here?
           [(list? show)
            (set! show-funname? (list-ref show 0))
            (set! show-args? (list-ref show 1))
@@ -293,10 +288,11 @@
 (define (write-definition/wescheme funname param-list body)
   (let ([cond? (and (pair? body) (eqv? (car body) 'cond))])
     (string-append
-      (mstring "\n\n[.recipe_title]"
-        "Definition"
-        ""
-        "[.recipe_instructions]"
+      (string-append
+        "\n\n[.recipe_title]\n"
+        "Definition\n"
+        "\n"
+        "[.recipe_instructions]\n"
         "Write the definition, giving variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
@@ -342,11 +338,12 @@
                           (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
                   [else
                     ""
-                    #;(write-wrapper ".recipe_line"
+                    #|(write-wrapper ".recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (write-large ")"))))
+                    |#
                     ])))))))
 
 (define (write-body-line/pyret body-line)
@@ -403,10 +400,11 @@
              [but-last-body-lines (take body-lines n)]
              [last-body-line (car (drop body-lines n))])
         (string-append
-          (mstring "\n\n[.recipe_title]"
-            "Definition"
-            ""
-            "[.recipe_instructions]"
+          (string-append
+            "\n\n[.recipe_title]\n"
+            "Definition\n"
+            "\n"
+            "[.recipe_instructions]\n"
             "Write the definition, giving variable names to all your input values...\n\n")
           (write-null-wrapper ""
             (lambda ()
@@ -432,8 +430,8 @@
                                        *show-body?*)))))
                 (write-wrapper ".recipe_line"
                   (lambda ()
-                    (encoded-ans ".recipe_definition_end_pyret"
-                                 (highlight-keywords "end") #t))))))))))
+                    (write-spaced (highlight-keywords "end"))
+                    )))))))))
 
 (define (write-definition funname param-list body)
   ((case *proglang*
@@ -511,9 +509,9 @@
                                 #:show-funname-contract? (show-funname-contract? #f)
                                 #:domain-list (domain-list '()) ; list of string
                                 #:show-domains? (show-domains? #f)
-                                #:range (range #f)
+                                #:range (range "")
                                 #:show-range? (show-range? #f)
-                                #:purpose (purpose #f)
+                                #:purpose (purpose "")
                                 #:show-purpose? (show-purpose? #f)
                                 ; num-examples = 1, in orig
                                 ; = 0, debug
@@ -527,7 +525,7 @@
                                 #:show-params? (show-params? #f)
                                 #:body (body #f) ; a string
                                 #:show-body? (show-body? #f)
-                                #:grid-lines? (grid-lines? #f)
+                                #:grid-lines? (grid-lines? #f) ;TODO: what is grid-lines? for
                                 #:lang (lang 'racket)
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 #:headless? (headless? #f)
@@ -558,7 +556,9 @@
     )
   |#
 
-  (when (and *solutions-mode?* (not assess-design-recipe))
+  ;FIXME: set show's whenever assess-design-recipe OR solutions-mode?
+
+  (when (or *solutions-mode?* assess-design-recipe)
     (set! *show-funname-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
@@ -573,13 +573,13 @@
   ;uncomment in orig;
   ;comment, debug
   (when (and (cons? example-list) (cons? buggy-example-list))
-    (ferror 'design-recipe-exercise "At most one of example-list and buggy-example-list should be provided"))
+    (error 'ERROR "design-recipe-exercise: At most one of example-list and buggy-example-list should be provided"))
 
   (when (string=? funname "")
     (set! funname " ")
     (set! page-header "Design Recipe")
     (when (string=? directions "")
-      (set! directions (format "{sp} +\n{sp} +\n{sp} +\n")))
+      (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
     )
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
@@ -614,9 +614,9 @@
           #:body (body #f) ; a string
           #:grid-lines? (grid-lines? #f)
           )
-  (unless range (ferror 'assess-design-recipe "range required"))
-  (unless purpose (ferror 'assess-design-recipe "purpose required"))
-  (unless body (ferror 'assess-design-recipe "body required"))
+  (unless range (error 'ERROR "assess-design-recipe: range required"))
+  (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
+  (unless body (error 'ERROR "assess-design-recipe: body required"))
   (let ([use-examples (if (cons? buggy-example-list) buggy-example-list example-list)])
     (design-recipe-exercise funname directions
                             #:page-header "Check for Mistakes in this Word Problem"

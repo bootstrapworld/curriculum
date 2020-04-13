@@ -8,6 +8,11 @@ body{
   color: #75328A;
 }
 
+/* This might be the source of a bunch of bugs - why negative spacing?? */
+h1, h2, p, td.content, span.alt{ letter-spacing:-.01em; }
+
+#header, #content {margin: 0 !important; }
+
 p {margin: 0px; font-size: inherit; }
 
 h1 {
@@ -15,7 +20,7 @@ h1 {
   font-weight: bold;
   font-family: sans-serif;
 }
-h2 { margin: 0px; font-family: 'Lato', Arial, Helvetica, sans-serif; }
+h2 { margin: 1ex 0px; font-family: 'Lato', Arial, Helvetica, sans-serif; }
 
 .dr-title { font-size: 24pt; }
 
@@ -27,6 +32,9 @@ a[href] {
 }
 
 td.tableblock>.content { margin-bottom: 0px; }
+
+.left  { text-align: left!important; }
+.right { text-align: right!important; }
 
 /*  RULES FOR GLOSSARY ITEMS  */
 .glossary {
@@ -47,6 +55,13 @@ td.tableblock>.content { margin-bottom: 0px; }
 }
 .glossary dd::after{content: '\A'; white-space: pre; }
 
+.vocab { font-weight: bold; }
+
+.duration {
+  float: right;
+  opacity: 0.5;
+}
+
 /*  RULES FOR THE PATHWAY PAGE  */
 #lesson-list dt { margin-bottom: 0px; }
 #lesson-list dd { margin-bottom: 0px; }
@@ -56,7 +71,7 @@ td.tableblock>.content { margin-bottom: 0px; }
   background-color: #bb29ff;
 }
 
-.lesson-section-1{ clear: both; border-top: solid 3px black;}
+.lesson-section-1, .lesson-section-1+.lesson-section-1 { clear: both; border-top: solid 3px black; }
 #lesson-list div.title{
   font-family: inherit;
   font-style: inherit;
@@ -78,13 +93,37 @@ td.tableblock>.content { margin-bottom: 0px; }
   font-weight: bold;
 }
 
+.lang-features-table * {
+  margin: 0px;
+  padding: 1px;
+  font-size: small;
+}
+
+.lang-features-table p { font-family: monospace; }
+
+.lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
+  background-color: lightgray;
+  font-weight: bold;
+  text-align: center;
+  font-family: inherit; /* Header row should not be monospace */
+}
+
+.lang-features-table .centered-image {
+  display: inline; /* Override default image treatment */
+}
+
+.lang-features-table tr td:nth-child(1), .lang-features-table tr td:nth-child(1) p {
+  background-color: transparent;
+  text-align: center;
+  vertical-align: middle;
+  font-family: inherit; /* Type cell should not be monospace */
+}
+
 .lesson-section-2 { float: left; clear: both; }
 .lesson-section-2 h3 {
-  font-size: 1em;
+  font-size: 1.5em;
   font-style: italic;
-  font-weight: 600;
-  background: #b7d89361;
-  padding: 5px;
+  margin: 0px;
  }
 .physics-table {
   margin-left: auto;
@@ -165,6 +204,24 @@ span.clear {
   width: 100%;
 }
 
+/****************************************************************
+* Two Column Layout that spans page width, using DT and DD tags
+* Every other row is shaded for readability
+***************************************************************/
+.TwoColumnDD_DT dl {width: 100%; clear: both; overflow: hidden;}
+.TwoColumnDD_DT dl > * {padding: 0; margin: 0; float: left; width: 50%; clear: left; line-height:27px;}
+.TwoColumnDD_DT dd {float: right; text-align: right; clear: none;}
+.TwoColumnDD_DT dd * {display: inline; }
+.TwoColumnDD_DT dd::before {content: '['; }
+.TwoColumnDD_DT dd::after  {content: ']'; }
+.TwoColumnDD_DT dd a:first-child::after {
+  content: '  |';
+  white-space: pre-wrap;
+  display: inline-block;
+ }
+ .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
+
+
 /* Design Recipe styling */
 .designRecipeLayout {
   font-size: 14pt;
@@ -240,6 +297,11 @@ span.clear {
 
 .recipe_example_body_long {
   width: 90%;
+}
+
+.recipe_example_body_wrap {
+  margin-left: 16px;
+  display: inline-block;
 }
 
 .recipe_definition_body_pyret,.recipe_definition_body {
@@ -370,7 +432,7 @@ span.clear {
   color: white;
   background: gray;
   display: block;
-  padding: 5px 10px;
+  padding: 2px 10px;
   font-size: 13pt;
   font-weight: bold;
 }
@@ -383,7 +445,11 @@ span.clear {
 .recipe_instructions {
   font-style: italic;
   font-size: 10pt;
-  margin-bottom: 6pt;
+  margin-bottom: 0pt;
+}
+
+code{
+  display: inline-block;
 }
 
 /* CSS hooks in Teacher Resources adoc */
@@ -394,17 +460,16 @@ span.clear {
 .teacher_resources strong { /* name of resource */
 }
 
-/* LIs within Exercises and Solutions */
-.exercises_and_solutions li {
+/* Exercises and Solutions Table */
+table.exercises_and_solutions { border-width: 0px; }
+table.exercises_and_solutions td:nth-child(even) { text-align: right; }
+table.exercises_and_solutions td {
+  padding: 0px;
+  border-width: 0px !important;
 }
+table.exercises_and_solutions tr:hover td { border-bottom: solid 1px gray; background: red; }
 
-.exercises_and_solutions li:hover {
-  background: #eee;
-}
 
-.exercises_and_solutions a:hover {
-  text-decoration: underline;
-}
 
 .pyretkeyword {
   font-weight: 900;
@@ -431,6 +496,10 @@ span.clear {
   text-align: center !important;
   padding-top: 2ex;
   padding-bottom: 2ex;
+}
+
+.centered {
+  text-align: center;
 }
 
 .tooltip {
@@ -504,15 +573,12 @@ span.clear {
   margin-top: 35px;
   border-top: dashed 2px black;
   padding-top: 20px;
-}
-
-.copyright,.acknowledgment {
   padding-bottom: 5px;
   font-size: 80%;
   font-style: italic;
 }
 
-.copyright img {
+.acknowledgment img {
   width: 94px;
   height: 37px;
   float: right;
@@ -528,7 +594,7 @@ span.clear {
 .bootstraplogo img {
   /* width: 307px; */
   /* height: 234px; */
-  height: 156px;
+  max-height: 156px;
 }
 
 .bootstraplogo {
@@ -554,10 +620,20 @@ td.tableblock pre {
 
 tr th.tableblock {
   background: #cccccc;
+  padding: .25em .5em;
 }
 
 tr th.tableblock code {
   background: none;
+}
+
+.quad {
+  display: inline-block;
+  min-height: 15px;
+}
+
+.vspace {
+  display: inline-block;
 }
 
 .fitb,
@@ -568,6 +644,30 @@ tr th.tableblock code {
   min-height: 15px;
   min-width: 5em;
   text-align: center;
+  line-height: 1.2;
+  /*line-height: 1;*/
+}
+
+.fitb {
+  /*padding-bottom: 4px;*/
+}
+
+/*
+.lh-style li:not(:last-of-type) p {
+  line-height: 6ex;
+}
+*/
+
+.lh-style li p {
+  line-height: 6ex;
+}
+
+.lh-style li {
+	margin-bottom: 5ex;
+}
+
+.lh-style .fitb {
+  line-height: 1 !important;
 }
 
 .fitbruby {
@@ -589,6 +689,7 @@ tr th.tableblock code {
 }
 
 .studentAnswer::before,
+.quad::before,
 .fitb::before,
 .fitbruby::before,
 .vskip::before,
@@ -615,8 +716,8 @@ tr th.tableblock code {
   display: block;
   width: auto;
   border-bottom: solid 3px black;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .invisible {
@@ -626,22 +727,67 @@ tr th.tableblock code {
 #footer { background: rgba(0,0,0,.5); padding: 0px; }
 
 .lesson-instruction {
-  margin-top: 5ex;
-  margin-left: 2ex;
-  margin-bottom: 5ex;
-  padding-left: 2ex;
+  margin-top: 1ex;
+  margin-left: 1ex;
+  margin-bottom: 1ex;
   background: #eeeeee;
 }
 
 .lesson-point {
   font-weight: bold;
-  font-size: 140%;
+  color: black;
+  font-size: 120%;
   border-style: solid;
-  margin-top: 5ex;
-  margin-left: 2ex;
-  margin-bottom: 5ex;
-  padding: 2px;
+  margin: 2ex 2ex;
   border-width: 2px 0 2px 0;
+}
+.lesson-point p { margin: 0ex 1ex; }
+
+/* class for tables containing Pyret data */
+
+table.pyret-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: auto;
+  display: table!important;
+  border: 1px black solid;
+  border-radius: 1em;
+  overflow: hidden;
+  background: #eee;
+}
+table.pyret-table tr:nth-child(even){background-color: #f2f2f2}
+
+table.pyret-table thead {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+table.pyret-table td, table.pyret-table th {
+  border: none;
+  border-right: 1px white solid;
+  color: #1f1180;
+  font-family: monospace;
+}
+
+table.pyret-table td p { margin: 0px; }
+
+.landscape #header,
+.landscape #content,
+.landscape #footnotes,
+.landscape #footer {
+  max-width: 80em !important;
+}
+
+td.tableblock .listingblock {
+  margin-bottom: 0 !important;
+}
+
+.thinnegspace {
+  margin-left: -0.2ex;
+}
+
+/* class for styling duration info in headers */
+.duration {
+
 }
 
 /************************************************************************************
@@ -693,4 +839,6 @@ tr th.tableblock code {
   .answers {
     width: auto;
   }
+
+  #header { background: black; color: white; }
 }

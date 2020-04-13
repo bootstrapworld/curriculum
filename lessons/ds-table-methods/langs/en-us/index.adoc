@@ -1,0 +1,135 @@
+= Table Methods
+
+@lesson-description{Students learn about _table methods_, which allow them to order, filter, and build columns to extend the animals table.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* order the animals dataset by a number of criteria
+* filter the animals dataset by species, fixed status, and age
+
+| Student-Facing Lesson Goals
+| I can...
+
+* order the animals dataset by any column
+* filter the animals dataset
+
+| Materials
+|
+* "Function Purpose cards" which describe simple boolean functions to apply to students
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, CPO} and open the @link{https://code.pyret.org/editor#share=1cNVNVaCPT44KZ2Fg6tibze0C0u-V2SVy, Table Methods Starter File}
+* One copy of @link{pages/function-cards.adoc, Function Cards} printed and cut.
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Review Function Definitions @duration{15 minutes}
+
+=== Overview
+Students get some practice reading function definitions, and in the process they build knowledge that's needed later on in the lesson.
+
+=== Launch
+Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1cNVNVaCPT44KZ2Fg6tibze0C0u-V2SVy, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
+
+=== Investigate
+[.lesson-instruction]
+* Students load the @link{https://code.pyret.org/editor#share=1cNVNVaCPT44KZ2Fg6tibze0C0u-V2SVy, Table Methods Starter File}, save a copy, and click "Run". 
+* Students complete @workbook-link{pages/reading-functions.adoc} in their student workbooks.
+
+=== Synthesize
+Can students explain what each function does?
+
+== Ordering Tables @duration{10 minutes}
+
+=== Overview
+Students learn a second table method, which allows them to sort rows in ascending or descending order, according to one column.
+
+=== Launch
+Have students find the contract for `.order-by` in their contracts pages. The `.order-by` method consumes a String (the name of the column by which we want to order) and a Boolean (true for ascending, false for descending). But what does it produce?
+
+=== Investigate
+[.lesson-instruction]
+* Type `animals-table.order-by("name", true)` into the Interactions Area. What do you get?
+* Type `animals-table.order-by("age", false)` into the Interactions Area. What do you get?
+* Sort the animals table from heaviest-to-lightest.
+* Sort the animals table alphabetically by species.
+* Sort the animals table so that fixed and unfixed animals are grouped together.
+* Sort the animals table by how long it took for each animal to be adopted, in ascending order.
+
+=== Synthesize
+Answer any questions students may have. Class discussion: what do `.order-by` and `.row-n` have in common? How are they different?
+
+== Filtering @duration{20 minutes}
+
+=== Overview
+Students learn how to _filter_ tables, by removing rows.
+
+=== Launch
+Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the "filter method", and have them _randomly choose_ a @link{pages/function-cards.adoc, Function Card}, and make sure they read it without showing it to anyone else.
+
+Have ~10 students line up in front of the classroom, and have the filter method go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say true, the student stays standing.
+
+Ask the class: based on who sat and who stayed, _what function was on the card?_
+
+[.lesson-point]
+The `.filter` method takes a function, and produces a _new table_ containing only rows for which the function returns `true`.
+
+Suppose we want to get a table of only animals that have been fixed? Have students find the contract for `.filter` in their contracts pages. The `.filter` method is taking in a _function_. What is the contract for that function? Where have we seen functions-taking-functions before?
+
+=== Investigate
+
+[.lesson-instruction]
+* In the Interactions Area, type `animals-table.filter(is-fixed)`. What did you get?
+* What do you expect `animals-table` to produce, and why? Try it out. What happened?
+* In the Interactions Area, type `animals-table.filter(is-old)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(is-dog)`. What did you get?
+* In the Interactions Area, type `animals-table.filter(get-name)`. What did you get?
+
+The `.filter` method walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. Notice that the Domain for `.filter` says that test must be a function (that’s the arrow), which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
+
+=== Possible Misconceptions
+Students often think that filtering a table _changes_ the table. In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.
+
+=== Synthesize
+Debrief with students.
+
+== Building Columns @duration{10 minutes}
+
+=== Overview
+Students learn how to _build columns_, using the `.build-column` table method.
+
+=== Launch
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for `.build-column` in their contracts pages. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function? 
+
+[.lesson-instruction]
+* Try typing `animals-table.build-column("old", is-old)` into the Interactions Area. 
+* Try typing `animals-table.build-column("sticker", label)` into the Interactions Area. 
+* What do you get? What do you think is going on?
+
+The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
+
+=== Synthesize
+Debrief with students. Ask them if they think of a situation where they would want to use this. Some ideas:
+
+- A dataset about school might include columns for how many students are in the school and how many pass the state exam. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ passed the exam. We could use `.build-column` to compute that for every row in the table.
+- The animals shelter might want to print nametags for every animal. They could build a column using the `text` function to have every animal's name in big, purple letters.
+- A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
+
+== Additional Exercises:
+
+@exercise-link{pages/what-table-do-we-get.adoc, What table do we get?}

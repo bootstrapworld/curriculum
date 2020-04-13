@@ -1,0 +1,203 @@
+= Linear Regression
+
+@lesson-description{Students compute the “line of best fit” using linear regression, and search for correlations in the animals dataset.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{}
+| Lesson Goals
+| Students will be able to...
+
+* interpret linear regression data for the animals table
+* use linear regression to quantify patterns in their chosen dataset, and write up their findings
+
+* the animal dataset
+* their chosen dataset
+
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure students can access the @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Supplemental Resources
+| @link{http://tylervigen.com/, Spurious Correlations}
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Intro to Linear Regression @duration{10 minutes}
+
+=== Overview
+Students are introduced to the _concept_ of linear regression, and learn how to interpret the @math{r}-value. Essentially, they're asked to think about how to quantify the strength of a correlation, and given the basic idea behind regression. For teachers who have the need and the bandwidth to go deeper, this is a good opportunity to teach the algorithm behind linear regression.
+
+=== Launch
+[.lesson-point]
+“What helps an animal get adopted faster: being small or being young?”
+
+Have student write down what you think on @workbook-link{pages/notes.adoc}, then quickly survey the class to see what they think.
+
+@span{.right}{@centered-image{images/lin-reg.png, "", 400}}
+To be more formal about this, we are asking whether being young or being small is more strongly correlated with being adopted faster. In the previous lesson, we looked at scatter plots as a way to visualize possible @vocab{correlations} between two variables in our dataset. What did we find?
+
+Whenever there’s a possible linear relationship, Data Scientists try to draw the @vocab{line of best fit}, which cuts through the data cloud and can be used to make predictions. This line can be graphed on top of the scatter plot as a function, called the @vocab{predictor}.
+
+Have students open their “Animals Dataset” files. (If you do not have this file, or if something has happened to it, they can always make a @link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L, new copy}.)
+
+After looking for correlations in the point cloud, we are left with two questions:
+
+* Is there a positive or negative relationship between our two variables? In other words, “_where do we draw_ the line of best fit?"
+* How do we measure the strength of that relationship? In other words, “_how well_ does the line allow us to make predictions?"
+
+Data scientists use a statistical method called @vocab{linear regression} to search for certain kinds of relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine a rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit.
+
+[.strategy-box]
+.Going Deeper
+****
+Students can learn more about how the line of best fit is created by watching @link{https://www.youtube.com/watch?v=lZ72O-dXhtM, this video}. If you want to teach students the algorithm for linear regression, now is the time! However, this algorithm is not a required portion of Bootstrap:Data Science.
+****
+
+=== Investigate
+[.lesson-instruction]
+--
+Have students open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
+
+- Try moving the blue point “P”, and see what effect it has on the red line.
+- Could the regression line ever be above or below _all_ the points? Why or why not?
+- Find the values values called @math{r}.
+- What’s the largest @math{r}-value you can get? What do you think that number means?
+--
+
+=== Synthesize
+Give students some time to experiment, then share back observations. Can they come up with rules or suggestions for how to minimize error?
+
+== Linear Regression in Pyret @duration{20 minutes}
+
+=== Overview
+Students are introduced to the `lr-plot` function in Pyret, which performs a linear regression and plots the result.
+
+=== Launch
+Pyret includes a powerful display, which draws a scatterplot, draws the line of best fit, and even displays the equation for that line:
+
+----
+# use linear regression to extract a predictor function
+# lr-plot :: (t :: Table, ls :: String, xs :: String, ys :: String) -> Image
+lr-plot(animals-table, "name", "age", "weeks")
+----
+
+@span{.right}{@centered-image{images/scatter-plot.png, "", 400}}
+`lr-plot` is a function that takes a Table and the names of *3 columns*:
+
+- `ls` -- the name of the column to use for _labels_ (e.g. “names of pets”)
+- `xs` -- the name of the column to use for _x-coordinates_ (e.g. “age of each pet”)
+- `ys` -- the name of the column to use for _y-coordinates_ (e.g. “weeks for each pet to be adopted”)
+
+Our goal is to figure out how strongly or weakly the variable on our x-axis _explains_ the change in the variable on our y-axis, the x-variable is sometimes referred to as the _explanatory variable_ and the y-variable is referred to as the _response or “outcome” variable._
+
+Have students create an `lr-plot` for our `animals-table`, using `"names"` for the labels, `"age"` for the x-axis and `"weeks"` for the y-axis.
+
+The resulting scatterplot looks like those we’ve seen before, but it has a few important additions. First, we can see the @vocab{line of best fit} drawn on top. We can also see the equation for that line (in red), in the form @math{y = mx + b}. In this plot, we can see that the slope of the line is 0.714, which means that on average, each extra year of age results in an extra 0.714 weeks of waiting to be adopted. By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted.
+
+=== Investigate
+[.lesson-instruction]
+- Make another lr-plot, but this time use the animals' weight as our explanatory variable instead of their age.
+- If an animal is 5 years old, how long would our line of best fit predict they would wait to be adopted? What if they were a newborn, just 0 years old?
+- If an animal weighs 21 pounds, how long would our line of best fit predict they would wait to be adopted? What if they weighed 0.1 pounds?
+- Make another lr-plot, comparing the `age` v. `weeks` columns for _only the cats_.
+
+=== Synthesize
+A predictor only _makes sense within the range of the data that was used to generate it_. For example, if we extend our line out to where it hits the y-axis, it appears to predict that “unborn animals are adopted instantly”! Statistical models are just proxies for the real world, drawn from a limited sample of data: they might make a useful prediction in the range of that data, but once we try to extrapolate beyond that data we quickly get into trouble!
+
+== Interpreting Regression Results @duration{20 minutes}
+
+=== Overview
+Students learn how to interpret @math{r}-values, which tell us the strength and direction of a correlation.
+
+=== Launch
+The correlation @vocab{r} is a number that tells us the direction and strength of a linear relationship between two quantitative variables. In other words, it tells us if the best-fitting line slopes up or down, and how tightly clustered or loosely scattered the points are around that line. If the number is positive, it means that the y-values tend to go up as the x-values go up. If it’s negative, it means the y-values go down as the x-values go up. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
+
+[.lesson-instruction]
+Turn to @workbook-link{pages/grading-predictors.adoc}. For each plot, circle the display that has the best predictor. Then, give that predictor a grade between −1 and 1.
+
+An r-value of ±0.65 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than ±0.35 may be considered weak. However, these cutoffs are not an exact science! Different types of data may be “noisier” than others, and in some fields an r-value of ±0.50 might be considered impressively strong!
+
+[.strategy-box]
+.Going Deeper
+****
+Students may notice another value in the lr-plot, called @math{R^2}. This value describes the _percentage of the variation in the y-axis that is explained by variation on the x-axis_. In other words, an @math{R^2} value of 0.42 could mean that “42% of the variation in dog adoption time is explained by the age of the dog”. Discussion of @math{R^2} may be appropriate for older students, or in an AP Statistics class.
+****
+
+=== Investigate
+[.lesson-instruction]
+- What is the @math{r}-value for the age v. weeks regression?
+- What is the @math{r}-value for the pounds v. weeks regression?
+- Which is more important for predicting adoption time: age or weight?
+- What is the r-value for `age` vs. `weeks` for just the cats? Why is this different from the whole population?
+- What does it mean when a data point is _above_ the line of best fit?
+- What does it mean when a data point is _below_ the line of best fit?
+- If you only have two data points, why will the r-value always be either −1 or +1?
+- Is age more strongly correlated with adoption time for dogs than for cats?
+- Is weight more strongly correlated with adopting time for dogs than for cats?
+
+How well can you interpret the results of a linear regression analysis? Can you write your own?
+
+[.lesson-instruction]
+- Turn to @workbook-link{pages/reading-regression-lines-n-rvalues.adoc}, and match the write-up on the left with the line of best fit and r-value on the right.
+- Turn to @workbook-link{pages/regression-analysis-in-animals-dataset.adoc} to see how Data Scientists would write up the finding involving cats’ age and adoption time. Write up two other findings from the linear regressions you performed on this dataset.
+
+=== Synthesize
+When looking at a regression for age v. adoption time for just the cats, we saw that the slope of the predictor function was +0.23, meaning that for every year older a cats is, we expect a +0.23-week increase in the time taken to adopt that cat. The @math{r}-value was 0.566, confirming that the correlation is positive and indicating moderate strength.
+
+=== Synthesize
+Have students read their text aloud, to get comfortable with the phrasing.
+
+[.lesson-point]
+Correlation does NOT imply causation.
+
+It’s worth revisiting this point again. It’s easy to be seduced by large r-values, but Data Scientists know that correlation can be accidental! Here are some real-life correlations that have absolutely no causal relationship:
+
+- “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (R = 0.98) - “Average per-person consumption of chicken” v. “U.S. crude oil imports” (R = 0.95)
+- “Marriage rate in Wyoming” v. “Domestic production of cars” (R = 0.99)
+
+All of these correlations come from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
+
+== Your Analysis @duration{flexible}
+
+=== Overview 
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+
+=== Launch
+Now that you've gotten some practice performing linear regression on the animals dataset, it's time to apply that knowledge to your own data!
+
+=== Student-Facing Lesson Task
+[.lesson-instruction]
+- Turn back to @workbook-link{ds-correlations/pages/correlations-in-my-dataset.adoc}, where you listed possible correlations.
+- Investigate these correlations. If you need blank Table Plans or Design Recipes, you can find them at the back your workbook, just before the Contracts.
+- What correlations did you find?
+- Did you need to filter out certain rows in order to get those correlations?
+- Write up your findings by filling out @workbook-link{pages/regression-analysis-in-my-dataset.adoc}.
+- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#, Correlations} portion of their Research Paper, using the scatter plots and linear regression plots they've constructed for their dataset and explaining what they show.
+
+
+=== Synthesize
+Have students share their findings with the class. Get excited about the connections they are making and the conclusions they are drawing! Encourage students to make suggestions to one another about further analysis.
+
+@span{.right}{@centered-image{images/lin-reg-2.png, "", 400}}
+
+You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line! There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
+
+== Additional Exercises:
+
+- @exercise-link{pages/describing-relationships-1.pdf, Describing Relationships 1}
+- @exercise-link{pages/describing-relationships-2.pdf, Describing Relationships 2}

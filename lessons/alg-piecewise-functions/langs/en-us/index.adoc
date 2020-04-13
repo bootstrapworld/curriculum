@@ -1,0 +1,180 @@
+= Piecewise Functions 
+
+@lesson-description{Students will learn how one function can have different behaviors based on the input.}
+
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-simple-inequalities}
+| Lesson Goals
+| Students will be able to:
+
+* Explain what a piecewise function is.
+* Give examples of inputs and outputs of a given @vocab{piecewise function}.
+
+| Student-Facing Lesson Goals
+|
+* I can describe how piecewise functions work.
+
+| Materials
+|
+ifeval::["{proglang}" == "wescheme"]
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1Xz0VOY7Kg_lawcRPvZX5FvPnZ8pdRfiQ4JRjtl54mP4/edit?usp=sharing, Google Slides})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Lesson slides template (@link{https://drive.google.com/open?id=16vkybW9pizzg5HwUXzSUdi_4EB2BogEp4evHO4OnG3I, Google Slides})
+endif::[]
+
+////
+ifeval::["{proglang}" == "wescheme"]
+* Piecewise Mystery Functions starter file (@link{https://www.wescheme.org/openEditor?publicId=pLVBsxgC93, WeScheme})
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Piecewise Mystery Functions starter file (@link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Pyret})
+endif::[]
+////
+
+ifeval::["{proglang}" == "wescheme"]
+* Luigi's Pizza Exploration (@workbook-link{pages/PiecewiseFunctions1-WB1.adoc})
+* Luigi's Pizza starter file (@link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, WeScheme})
+* Luigi's Pizza Practice (@workbook-link{pages/PiecewiseFunctions1-WB2.adoc})
+// * @link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, Alice's Restaurant starter file}
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+* Alice's Restaurant Exploration (@workbook-link{pages/PiecewiseFunctions1-WB1.adoc})
+* Alice's Restaurant starter file (@link{https://code.pyret.org/editor#share=1oeHRCcJhaP2GuKiujU0PRnJzOyWrPWSh&v=8934c12, Pyret})
+* Alice's Restaurant Practice (@workbook-link{pages/PiecewiseFunctions1-WB2.adoc})
+endif::[]
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+* @link{https://teacher.desmos.com/activitybuilder/custom/57d6b323d5b6478408b8748b, Domain & Range of Piecewise Function} (Desmos Activity)
+
+| Key Points for the Facilitator
+|
+* The Design Recipe looks a bit different for piecewise, or @vocab{conditional}, @vocab{function}s.  Check that students are taking time to write @vocab{example}s and circle what is changing.
+|===
+
+
+== Warmup
+
+Students should have their computer, workbook, contracts page, and pencil and be logged in to 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org, WeScheme}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@link{https://code.pyret.org, code.pyret.org}.
+endif::[]
+
+== Not Every Function is Smooth @duration{20 minutes}
+
+=== Overview
+Students are challenges via counterexamples to see just how far the @link{https://en.wikipedia.org/wiki/Vertical_line_test, Vertical Line Test} will go: into behaviors that _feel_ like functions but don't act line a straight line or smooth curve!
+
+=== Launch
+
+Have students stand up and put some space between themselves. Begin giving directions to certain distinct groups of students. For example:
+
+[.lesson-instruction]
+* If you have brown eyes, wave your arms in the air.
+* If you have blue eyes, walk in place.
+* If you have green or hazel eyes, flap your arms like a chicken.
+
+Every student should have an activity to perform.  Ask a student walking in place why they aren't waving their arms in the air, or how they knew what to do.
+
+[.lesson-point]
+The @link{https://en.wikipedia.org/wiki/Vertical_line_test, Vertical Line Test} says that to be a function, every input has to be matched with exactly one output.  
+
+[.lesson-instruction]
+Ask students: Is this activity representing a function?  What is the input?  What is the output?
+
+=== Investigate
+Students open the 
+ifeval::["{proglang}" == "wescheme"]
+@link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, Luigi's Pizza file} and turn to @workbook-link{pages/PiecewiseFunctions1-WB1.adoc, Luigi's Restaurant - Explore}.
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+Students open the @link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Alice's Restaurant file} and turn to @workbook-link{pages/PiecewiseFunctions1-WB1.adoc, Alice's Restaurant - Explore}.
+endif::[]
+Students investigate the file using their workbook page as a guide.
+
+[.notice-box]
+.Notice and Wonder
+****
+Have students take time to think and discuss what they notice and wonder about this file, which contains some new elements they haven't seen before!
+****
+
+=== Synthesize
+- *What are some familiar things you notice in this file?* 
++
+ifeval::["{proglang}" == "wescheme"]
+_Answers vary: `define`, `string=?`, a contract and purpose statement, etc._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_Answers vary: `fun`, `end`, a contract and purpose statement, etc._
+endif::[]
+
+- *What new things did you notice in this file?*
++
+ifeval::["{proglang}" == "wescheme"]
+_Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `cost` function, etc._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+_Answers vary: the `ask` keyword, the pipe symbols, `otherwise`, the general look of the `cost` function, etc._
+endif::[]
+
+- *What function is being defined here? What is its contract?*
++
+_`cost`, takes in a String and produces a Number._
+- *How do you think this function works?*
++
+_Answers vary - let students drive discussion!_
+
+== Modifying Piecewise Functions @duration{25 minutes}
+
+=== Overview
+Having acted out a piecewise function and examined the code for one on their computers, students take the first step towards writing one, by modifying a function that's already been written for them.
+
+=== Launch
+Students turn to 
+ifeval::["{proglang}" == "wescheme"]
+@workbook-link{pages/PiecewiseFunctions1-WB2.adoc, Luigi's Restaurant - Practice } 
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+@workbook-link{pages/PiecewiseFunctions1-WB2.adoc, Alice's Restaurant - Practice }  
+endif::[]
+and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
+
+ifeval::["{proglang}" == "wescheme"]
+- *What happens with the interactive cash register when you enter an item not on the menu?*
++
+_The program freezes, or crashes._ 
+- *Why does the cash register stop working when you enter an item not on the menu?*
++
+_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a @vocab{String} instead of a Number._
+endif::[]
+ifeval::["{proglang}" == "pyret"]
+- *What happens with the `sales-tax` function when you enter an item not on the menu?*
++
+_We get an error._ 
+- *What is the error telling us?*
++
+_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
+endif::[]
+
+- *What should we do about this?* 
+_Since we want the program to stop if we give it an invalid input, we should just delete the last branch altogether. Think about other functions that don't work when we give them an invalid input!_
+
+=== Investigate
+
+Option 1: Students create another function in the code that displays an image of the food instead of the price. This integrates earlier-learned skills in creating images and defining values.
+
+Option 2: Students create an engaging visual representation of how the computer moves through a conditional function.
+
+
+== Additional Exercises:

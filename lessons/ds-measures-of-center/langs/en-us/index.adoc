@@ -1,0 +1,176 @@
+= Measures of Center
+
+@lesson-description{
+Students learn different ways to explore central tendency in a quantitative data set: mean, median and modes. After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-histograms2}
+| Lesson Goals
+| Students will be able to...
+
+* Students explore the concept of central tendency, learning how to compute the mean, median and modes of a dataset
+* Students find the mean, median and mode of various columns in the animals table
+
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Mean @duration{15 minutes}
+
+=== Overview
+Students learn about mean (or "average"), and how it is one way to summarize a quantitative column..._among others_.
+
+=== Launch
+[.lesson-point]
+According to the Animal Shelter Bureau, the average pet weighs almost 41 pounds.
+
+Some medicines are dosed by weight: heavier animals need a larger dose. If someone at the shelter needs to give a dose of medicine to an animal, is the average the best estimate we can use for how much it weighs?
+
+“The average pet weighs 41 pounds” is a statement about the entire dataset, which summarizes a whole column of values with a single number. Summarizing a big dataset means that some information gets lost, so it’s important to pick an appropriate summary. Picking the wrong summary can have serious implications! Here are just a few examples of summary data being used for important things. Do you think these summaries are appropriate or not?
+
+- Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.
+- Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.
+- Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.
+- When buying uniforms for a sports team, a coach might look for the most-common size that the players wear.
+
+[.lesson-instruction]
+Can you think of other examples where a number or two are used to summarize something complex?
+
+Every kind of summary has situations in which it does a good job of reporting what’s typical, and others where it doesn’t really do justice to the data. In fact, the shape of the data can play a huge role in whether or not one kind of summary is appropriate!
+
+One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally, "what is a typical value?" But there are many different ways to define "center", and each method has strengths and weaknesses. Let’s check the “41 pounds” claim and see if it’s an appropriate measure of center. Later on, you’ll have a chance to apply what you’ve learned to your own dataset, to find the best way to provide an overall summary of the data.
+
+=== Investigate
+
+[.lesson-instruction]
+Open your “Animals Starter File”. (If you do not have this file, or if something has happened to it, you can always make a @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, new copy}.)
+
+If we plotted all the pounds values as points on a number line, what could we say about the average of those values? Is there a midpoint? Is there a point that shows up most often? Each of these are different ways of “measuring center”.
+
+The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, or "average". In general, the mean of a data set is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
+
+Pyret has a way for us to compute the mean of any quantitative column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
+
+----
+# mean :: (t :: Table, col :: String) -> Number
+----
+
+[.lesson-instruction]
+What is its name? Domain? Range?
+
+Notice that calculating the mean requires being able to add and divide, so the mean only makes sense for quantitative data. For example, the mean of a list of Presidents doesn’t make sense. Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.
+
+Type `mean(animals-table, "pounds")`. What does this give us?
+Does this support the Bureau’s claims?
+
+[.lesson-instruction]
+Open your workbooks to @workbook-link{pages/summarizing-columns-in-animals.adoc}. We’ve already filled in the answer to Question 1 for you (`pounds`). Under the “measures of center” section, fill in the computed mean.
+
+== Median @duration{15 minutes}
+
+=== Overview 
+Students learn a second measure of center: the @vocab{median}. They learn the algorithm and the code to find the median, as well as situations where taking the median is more appropriate than the mean.
+
+=== Launch
+You computed the mean of that column to be almost exactly 41 pounds. That IS the average, but if we scan the dataset we'll quickly see that most of the animals weigh less than 41 pounds! In fact, more than half of the animals weigh less than just 15 pounds. What is throwing off the average so much?
+
+_Kujo and Mr. Peanutbutter!_
+
+In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it breaks down for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skew}: a lopsided shape due to values trailing off left or right of center, but not separated by the visible gap typical of outliers.
+
+[.lesson-instruction]
+Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the skew towards the right, with a huge number of animals clumped to the left?
+
+A different way to measure center is to line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger. This is the @vocab{median}, or “middle” value of a list.
+
+As an example, consider this list:
+
+  2, 3, 1
+
+Here 2 is the median, because it separates the “top half” (all values greater than 2, which is just 3), and the “bottom half” (all values less than or equal to 2).
+
+The algorithm for finding the median of a quantitative column is:
+
+. Sort the numbers.
+. Cross out the highest number.
+. Cross out the lowest number.
+. Repeat until there is only one number left. If there are two numbers, take the _mean_ of those numbers.
+
+=== Investigate
+[.lesson-instruction]
+* Pyret has a function to compute the median of a list as well. Find the contract in your contracts page.
+* Compute the median for the `pounds` column in the animals dataset, and add this to @workbook-link{pages/summarizing-columns-in-animals.adoc}. 
+* Is it different than the mean? 
+* What can we conclude when the median is so much lower than the mean? 
+* For practice, compute the mean and median for the weeks and age columns.
+
+=== Synthesize
+By looking at the histogram, we can develop an intuition for whether the mean or median might be a better measure. Datasets with a lot of skew have extreme outliers, which will throw off the mean. For these datasets, it's probably better to use the median!
+
+== Modes @duration{25 minutes}
+
+=== Overview
+Students learn about the mode(s) of a dataset, how to compute them, and when it is appropriate to use this as a measure of center.
+
+=== Launch
+The third measure of center is called the @vocab{mode} of a dataset. The @vocab{mode} of a data set is the value that appears _most often_. Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one number in the list: many data sets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
+
+  1, 2, 3, 4
+  1, 2, 2, 3, 4
+  1, 1, 2, 3, 4, 4
+
+- The first dataset has _no mode at all!_
+- The mode of the second data set is 2, since 2 appears more than any other number.
+- The modes (plural!) of the last data set are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
+
+In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
+
+----
+# modes :: (t :: Table, col :: String) -> List<Number>
+----
+
+=== Investigate
+[.lesson-instruction]
+Compute the `modes` of the `pounds` column, and add it to @workbook-link{pages/summarizing-columns-in-animals.adoc}. What did you get? 
+
+=== Synthesize
+The most common number of pounds an animal weighs is 6.5! That’s well below our mean and even our median, which is further evidence of outliers or skewness.
+
+At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize data isn’t ideal. Our mean weight agrees with their findings, but we have three reasons to suspect that @vocab{mean} isn’t the best value to use:
+
+- The median is only 13.4 pounds.
+- The mode of our dataset is only 6.5 pounds, which suggests a cluster of animals that weigh less than one-sixth the mean.
+- When viewed as a histogram, we can see the rightward skew in the dataset. Mean is sensitive to highly-skewed datasets
+
+The Animal Shelter Bureau started with a fact: the mean weight _is_ about 41 pounds. But then they reported a conclusion without checking to see if that was the best summary statistic to look at. As Data Scientists, we had to look deeper into the data to find out whether or not to settle for the Bureau’s summary. This is why using tools like histograms can be so important when deciding on a summary tool.
+
+_*“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."*_ 
+
+Do you trust this statement? Why or why not? Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
+
+You now have three different ways to measure center in a dataset. But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! Here are some guidelines for when to use one measurement over the other:
+- If the data is doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
+- If the data clearly has a lot of outliers or skewness, @vocab{median} gives a better summary of center than the mean.
+- If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the data set.
+
+== Exercises
+@exercise-link{pages/critiquing-findings.adoc, Critiquing Findings}

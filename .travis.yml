@@ -12,21 +12,3 @@ branches:
   only:
     - master
 
-before_install:
-  - git clone https://github.com/greghendershott/travis-racket.git
-  - cat travis-racket/install-racket.sh | bash
-  - export PATH="${RACKET_DIR}/bin:${PATH}"
-  - gem install asciidoctor
-  - wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - sudo mv wkhtmltox/bin/wkhtmlto* /usr/bin
-  - sudo apt-get install -y pdftk texlive-latex-base texlive-latex-extra
-
-script:
-  - ./build-pathway
-  - ./build-pathway pathways/pathwayP --language fr
-  - ./build-pathway pathways/pathwayP --proglang wescheme
-  - ./build-pathway pathways/pathwayP --language fr --proglang wescheme
-
-after_success:
-  - ./travis-push.sh

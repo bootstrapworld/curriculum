@@ -1,0 +1,130 @@
+= Measures of Spread
+
+@lesson-description{
+Students learn how to evaluate the spread of a quantitative column using box plots, and explore how this offers a different perspective on shape from what can be achieved with a histogram. After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-measures-of-center}
+| Lesson Goals
+| Students will be able to...
+
+- Students learn about shape, and how outliers or skewness prevent a data set from being balanced or on either side of its center
+- Students learn the extent to which outliers and skewness may affect measures of center.
+- Students describe the centers and spread in their chosen dataset
+
+| Student-Facing Lesson Goals
+| I can...
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+	
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+
+== Measures of Spread @duration{30 minutes}
+
+=== Overview
+Students are introduced to the notion of _spread_ in a dataset. They learn about quartiles, box-plots, and how use them to talk about this measure.
+
+=== Launch
+A teacher may report that her students averaged a 75 on a test, but it’s important to know how those scores were spread out: did all of them get exactly 75, or did half score 100 and the other half 50? When Data Scientists use the mean of a sample to estimate the mean of a whole population, it’s important to know the spread in order to report how good or bad a job that estimate does.
+
+Suppose we lined up all of the values in the pounds column from smallest to largest, and then split the line up into two equal groups by taking the @vocab{median}. We can learn something about the @vocab{spread} of the data set by taking things further: The middle of the lighter half of animals is called the first @vocab{quartile} - or "Q1" - and the middle of the heavier half of animals is the third quartile (also called "Q3"). Once we find these numbers, we can say that the middle half of the animals’ weights are spread between Q1 and Q3.
+
+[.lesson-instruction]
+The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less. What does the third quartile represent?
+
+These quartiles are creared from five numbers: the three medians, the minimum and the maximum.
+
+We can use @vocab{box plots} to visualize these quartiles. These plots can easily be represented using *just five numbers*, which makes them convenient ways to display data. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+
+----
+# box-plot :: (t :: Table, column :: String) -> Image
+box-plot(animals-table, "pounds")
+----
+
+[.lesson-instruction]
+Type in this expression in the Interactions Area, and see the resulting plot.
+
+@span{.right}{@centered-image{images/5-plot.png, "", 400}}
+
+This plot shows us the spread in our dataset according to those five numbers.
+
+- The *minimum* value in the dataset (at the left of “whisker”). In our dataset, that’s just 0.1 pounds.
+- The *First Quartile (Q1)* (the left edge of the box), is computed by taking _the median of the smaller half of the values_. In the pounds column, that’s 4.3 pounds.
+- The *Median (Q2)* value (the line in the middle), which is the second Quartile of the whole dataset. We already computed this to be 13.4 pounds.
+- The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the larger half of the values_. That’s 68 pounds in our dataset.
+- The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
+
+One way to summarize the spread in the dataset is to measure the distance between the largest value and the smallest value. When we talk about functions having many possible outputs, we use the term “Range” to describe them. (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!) When we look at the distance between the smallest and largest values in our dataset, we use the same term.
+
+=== Investigate
+[.lesson-instruction]
+* Turn to @workbook-link{ds-measures-of-center/pages/summarizing-columns-in-animals.adoc}
+* Fill in the five-number summary for the `pounds` column, and sketch the box-plot. 
+* What conclusions can you draw about the distribution of values in this column?
+
+Data Scientists subtract the 1st quartile from the 3rd quartile to compute the range of the “middle half” of the dataset, also called the @vocab{interquartile range}.
+
+[.lesson-instruction]
+* Find the @vocab{interquartile range} of this dataset.
+* What percentage of animals fall within the interquartile range?
+* What percentage of animals fall within any of the quartiles?
+
+Now that you’re comfortable creating box plots and looking at measures of spread on the computer, it’s time to put your skills to the test!
+
+[.lesson-instruction]
+Turn to @workbook-link{pages/interpreting-spread.adoc} and complete the questions you see there.
+
+Just as pie and bar charts are ways of visualizing categorical data, box plots and histograms are both ways of visualizing the shape of quantitative data. Box plots make it easy to see the 5-number summary, and compare the Range and Interquartile Range. Histograms make it easier to see outliers, and offer more granularity when using smaller bins.
+
+Box-plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box-plot always has four quartiles, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
+
+[.lesson-instruction]
+Turn to @workbook-link{pages/identifying-shape.adoc} and see if you can describe box plots using what you know about skew-ness.
+
+=== Possible Misconceptions
+It is extremely common for students to forget that every quartile _always_ includes 25% of the dataset. This will need to be heavily reinforced.
+
+=== Synthesize
+Histograms, box plots, and measures of center and spread are all different ways to get at the @vocab{shape} of our data. It's important to get comfortable using every tool in the toolbox when discussing shape!
+
+[.strategy-box]
+.Modified Box Plots
+****
+More Statistics or Math-oriented class will also be familiar with _modified box plots_. These are similar to traditional box plots, but the box-and-whisker does not include any outliers. Instead, these outliers are drawn as small dots at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
+****
+
+
+== Your Analysis @duration{flexible}
+
+=== Overview 
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+
+=== Investigate
+
+[.lesson-instruction]
+- Take 15 minutes to fill out @workbook-link{pages/shape-of-my-dataset.adoc} in your Student Workbook. Choose a column to investigate, and write up your findings. 
+- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.bercj2qohd7o, Measures of Center and Spread} portion of their Research Paper, using the means, medians, modes, box plots and five-number summaries they've constructed for their dataset and explaining what they show.
+
+
+=== Synthesize
+Have students share their findings with one another.
+
+== Additional Exercises:
+@link{pages/matching-boxplots-to-histograms.adoc, Matching Box Plots to Histograms}
