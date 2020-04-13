@@ -8,8 +8,8 @@
 (define *lessons-and-standards*
   '(
 
-    ("alg-game-intro" "BS-M")
-    ("alg-game-intro" "MP.2")
+    ("alg-game-introA" "BS-M")
+    ("alg-game-introA" "MP.2")
     ("alg-coordinates" "BS-M")
     ("alg-coordinates" "MP.2")
     ("alg-creating-functions-1" "7.EE.B.4")
