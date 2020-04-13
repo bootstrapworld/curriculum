@@ -348,6 +348,7 @@
 
 (define (make-workbook-link lesson pages-dir snippet link-text #:exercise? [exercise? #f])
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
+  (unless lesson (error ' make-workbook-link "deadc0de"))
   (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
          [f (string-append *pathway-root-dir* g)]
          [dirve (if exercise? "@exercise-link" "@workbook-link")]
@@ -364,7 +365,7 @@
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: ~a refers to nonexistent file ~a\n" dirve f))
+      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
     (when exercise?
       (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
@@ -374,7 +375,8 @@
                   (unless exercise?
                     (unless pagenum
                       (unless error-cascade?
-                        (printf "WARNING: ~a used for non-workbook page ~a\n" dirve f))))
+                        (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n"
+                                lesson dirve f))))
                   (cond [pagenum
                           (let ([x (format "Page ~a" pagenum)])
                             (if (string=? link-text "") x
@@ -726,7 +728,7 @@
                             ;(when (string=? directive "exercise-link") (printf "calling @exercise-link ~s\n" args))
                             (case (length page-compts)
                               [(1)
-                               (display (make-workbook-link (getenv "LESSON")
+                               (display (make-workbook-link *lesson*
                                                             "pages"
                                                             first-compt
                                                             link-text
