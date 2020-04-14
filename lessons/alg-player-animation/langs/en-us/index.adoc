@@ -1,4 +1,4 @@
-= Piecewise Functions 2 
+= Player Animation 
 
 @lesson-description{Students apply their knowledge of piecewise functions to write a function to move the player in their game.}
 
@@ -24,7 +24,7 @@ ifeval::["{proglang}" == "pyret"]
 * Lesson slides template (@link{https://drive.google.com/open?id=1p5gSt0ic3HC8oSltN_wSfqochw-eGUa_W2Ag56mEfpw, Google Slides})
 endif::[]
 
-* Design Recipe: update-player (@workbook-link{pages/PiecewiseFunctions2-EX1.adoc, PDF})
+* Design Recipe: update-player (@workbook-link{pages/update-player.adoc, PDF})
 
 | Preparation
 |
@@ -53,14 +53,18 @@ Students should have their computer, workbook, contracts page, and pencil.
 Students _define_ a piecewise function. This is a challenging task, which is motivated by introducing key events in their videogame.
 
 === Launch
+You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code or workbook, and refresh your memory on how they work.
 
-Connect The Dots - Students think of what they did in the previous lesson on piecewise functions specifically, then generalize those concepts. (Example: We wrote a function that gave different responses based on the input.)  Students then think of how those concepts might be applied to their game.  (What element of the game needs user input?) 
-  
+[.lesson-instruction]
+- What controlled the speed of your characters?
+- What controlled the _direction_ of your characters?
+
+If we wanted our `PLAYER` to go up all the time, we would already know how to do that. If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that. But we want the player to go up _only_ when the "up" arrow is pressed, and down when the "down" arrow is pressed. Do we know how to make a function behave differently, based on its input?
 
 === Investigate
 
 [.lesson-instruction]
-Students open their *Game Project file* and look for where a @vocab{conditional} function would be necessary, then figure out what the contract represents.  
+Students open their *Game Project file* and look for `update-player`, then figure out what the contract represents.
 
 [.strategy-box]
 .Strategies for English Language Learners
@@ -70,12 +74,7 @@ MLR 6 - Three Reads: Have students read through the problem statement three time
 
 * *What is the contract for `update-player`?*
 +
-ifeval::["{proglang}" == "wescheme"]
-_``update-player: Number String -> Number``_
-endif::[]
-ifeval::["{proglang}" == "pyret"]
-_``update-player: Number, String -> Number``_
-endif::[]
+_The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number._
 * *What does each part of the domain and range represent?*
 +
 _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`_
@@ -85,8 +84,7 @@ _It should increase, the program should add something to it_
 
 @centered-image{images/player-move.png, Player Movement, 400, align="center"}
 
-
-Students complete @workbook-link{pages/PiecewiseFunctions2-EX1.adoc, Design Recipe: update-player} with a partner, then type their code into their *Game Project file* and test.  
+Students complete @workbook-link{pages/update-player.adoc, Design Recipe: update-player} with a partner, then type their code into their *Game Project file* and test.  
 
 === Possible Misconceptions
 - Students often think of this function as returning a _relative distance_ (e.g. "it adds 20"), instead of an absolute coordinate (e.g. "the new y-coordinate is the old y plus 20")
@@ -97,8 +95,21 @@ Students complete @workbook-link{pages/PiecewiseFunctions2-EX1.adoc, Design Reci
 - How could we change this function so that the "W" key makes the player go up, _in addition to_ the arrow key?
 - What happens if your little brother or sister walks by and hits a random key that doesn't have a meaning in your function? What _should_ happen?
 
-== Closing
-Students choose one or more features to make their game more unique.
+== Cheat Codes and Customizations @duration{flexible}
+
+=== Overview
+Students choose one or more features to make their game more unique. These features can be quite simple, such as adding another key that does the same thing that "up" or "down" does. But they can also be extremely sophisticated, requiring students to exploit properties of the number line in conjuntion with function composition and compound inequalities!
+
+=== Launch
+Right now, all of your games allow the player to move up and down at a constant speed. But what if we wanted to add a special key that made the player warp to the top of the screen, or move down twice as fast? What if we wanted the player to _wrap_, so going off one side of the screen would make it re-appear on the other?
+
+=== Investigate
+Now is your time to customize your game! Try implementing some of the following features, or make your own!
+
+* Warping - program one key to "warp" the player to a set location, such as the center of the screen
+* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen 
+* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
+* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
 
 ifeval::["{proglang}" == "wescheme"]
 Reminder: Use `;` to add comments to code! +
@@ -108,9 +119,5 @@ Reminder: Use `#` to add comments to code! +
 endif::[]
 Adding useful comments to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
-Some ideas for features:
-
-* Warping - program one key to "warp" the player to a set location, such as the center of the screen
-* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen 
-* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
-* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
+=== Synthesize
+Have students share back what they implemented. It's likely that once they hear other students' ideas, they will want more time to try them out.

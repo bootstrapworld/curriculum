@@ -81,8 +81,8 @@
     ("alg-piecewise-functions" "HSA.SSE.A.1.A")
     ("alg-piecewise-functions" "HSA.SSE.A.1.B")
     ("alg-piecewise-functions" "MP.8")
-    ("alg-piecewise-functions-2" "HSA.SSE.A.1.A")
-    ("alg-piecewise-functions-2" "HSA.SSE.A.1.B")
+    ("alg-player-animation" "HSA.SSE.A.1.A")
+    ("alg-player-animation" "HSA.SSE.A.1.B")
 
     ; flags
     ("fl-flags-of-the-world" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
