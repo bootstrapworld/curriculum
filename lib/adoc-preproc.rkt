@@ -993,7 +993,7 @@
         (let* ([ti (list-ref ex 1)]
                [exer (list-ref ex 0)]
                [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-          (fprintf o "|~a |[link:pass:[~a][exercise] : link:pass:[~a][solution]]\n" ti exer soln)))
+          (fprintf o "|~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
       (fprintf o "|===\n\n"))))
 
 (define (add-exercises)
