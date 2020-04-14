@@ -558,7 +558,8 @@
 
   ;FIXME: set show's whenever assess-design-recipe OR solutions-mode?
 
-  (when (or *solutions-mode?* assess-design-recipe)
+  (unless assess-design-recipe
+  (when  *solutions-mode?*
     (set! *show-funname-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
@@ -567,7 +568,7 @@
     (set! *show-funname-defn?* #t)
     (set! *show-params?* #t)
     (set! *show-body?* #t)
-    )
+    ))
 
   ;(printf "d-r-e body= ~s\n" body)
   ;uncomment in orig;
