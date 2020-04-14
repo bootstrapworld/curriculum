@@ -43,6 +43,9 @@
 (define *pathway-exercises-file*
   (string-append *pathway-root-dir* "resources/workbook-exercises.rkt.kp"))
 
+(define *pathway-lessons-containing-exercises-file*
+  (string-append *pathway-root-dir* "resources/workbook-lessons-containing-exercises.rkt.kp"))
+
 (define *workbook-pagenums*
   (if *lesson-plan*
       (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt.kp")])
@@ -351,28 +354,44 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f)))
 
+(define (exercise-title f)
+  (if (and (file-exists? f) (path-has-extension? f ".adoc"))
+      (call-with-input-file f
+        (lambda (i)
+          (let loop ()
+            (let ([x (read-line i)])
+              (cond [(eof-object? x) #f]
+                    [(regexp-match #rx"^= " x)
+                     (regexp-replace "^= *" x "")]
+                    [else (loop)])))))
+      #f))
+
 (define (make-workbook-link lesson pages-dir snippet link-text #:exercise? [exercise? #f])
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
   (unless lesson (error ' make-workbook-link "deadc0de"))
   (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
          [f (string-append *pathway-root-dir* g)]
+         [f.src f]
          [dirve (if exercise? "@exercise-link" "@workbook-link")]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
-    (when (path-has-extension? snippet ".adoc")
-      (let ([f.html (path-replace-extension f ".html")]
-            [f.pdf (path-replace-extension f ".pdf")])
-        (cond [(file-exists? f.html) (set! f f.html)
-                                     (set! g (path-replace-extension g ".html"))]
-              [(file-exists? f.pdf) (set! f f.pdf)
-                                    (set! g (path-replace-extension g ".pdf"))])))
+    (cond [(path-has-extension? snippet ".adoc")
+           (let ([f.html (path-replace-extension f ".html")]
+                 [f.pdf (path-replace-extension f ".pdf")])
+             (cond [(file-exists? f.html) (set! f f.html)
+                                          (set! g (path-replace-extension g ".html"))]
+                   [(file-exists? f.pdf) (set! f f.pdf)
+                                         (set! g (path-replace-extension g ".pdf"))]))]
+          [else (set! f.src (path-replace-extension f ".adoc"))])
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
     (when exercise?
-      (set! *exercises-done* (cons (list (format "{pathwayrootdir}~a" g) *page-title*) *exercises-done*)))
+      (let ([ex-ti (or (exercise-title f.src) *page-title*)])
+        (set! *exercises-done*
+          (cons (list *page-title* (format "../~a" g) ex-ti) *exercises-done*))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
@@ -985,17 +1004,23 @@
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
   ;(printf "pwrd = ~s\n" *pathway-root-dir*)
   ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
-  (let ([exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
+  (let ([lessons (read-data-file *pathway-lessons-containing-exercises-file* #:mode 'forms)]
+        [exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
+    ;(printf "lessons= ~s\n\nexercises= ~s\n" lessons exx)
     (unless (null? exx)
       ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
-      (fprintf o "[.exercises_and_solutions,cols=2]\n")
+      (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
       (fprintf o "|===\n")
-      (for ([ex exx])
-        ;(printf "ex = ~s ~a\n" ex (length ex))
-        (let* ([ti (list-ref ex 1)]
-               [exer (list-ref ex 0)]
-               [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-          (fprintf o "|~a |[link:~a[exercise] : link:~a[solution]]\n" ti exer soln)))
+      (for ([lsn lessons])
+        (let ([lsn-exx (filter (lambda (x) (string=? (car x) lsn)) exx)])
+          (fprintf o "|~a |\n\n[cols=\"1a,1a\"]\n!===\n" lsn)
+          (for ([ex lsn-exx])
+            ;(printf "ex = ~s ~a\n" ex (length ex))
+            (let* ([ti (list-ref ex 2)]
+                   [exer (list-ref ex 1)]
+                   [soln (regexp-replace "/pages/" exer "/solution-pages/")])
+              (fprintf o "!~a ![ link:~a[exercise] : link:~a[solution] ]\n" ti exer soln)))
+          (fprintf o "!===\n")))
       (fprintf o "|===\n\n"))))
 
 (define (add-exercises)
@@ -1006,7 +1031,12 @@
       (lambda (o)
         (for ([ex *exercises-done*])
           (fprintf o "~s\n" ex)))
-      #:exists 'append)))
+      #:exists 'append)
+    (call-with-output-file *pathway-lessons-containing-exercises-file*
+      (lambda (o)
+        (fprintf o "~s\n" *page-title*))
+      #:exists 'append)
+    ))
 
 (define (create-glossary-subfile)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" *narrative*)

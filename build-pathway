@@ -1068,7 +1068,8 @@ function buildpathway() {
     if test $FORCE; then
       rm -fr distribution/$PATHWAY/$LANGUAGE
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
-      rm -f pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-exercises.rkt.kp
+      rm -f pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-exercises.rkt.kp \
+        pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-lessons-containing-exercises.rkt.kp
     else
       mkdir -p distribution/$PATHWAY/$LANGUAGE
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
