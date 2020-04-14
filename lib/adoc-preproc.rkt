@@ -15,6 +15,8 @@
 (require "lessons-and-standards.rkt")
 ;(require "draw-dep-diag.rkt")
 
+(define *force* (truthy-getenv "FORCE"))
+
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
@@ -998,7 +1000,7 @@
 
 (define (add-exercises)
   ;(printf "doing add-exercises\n")
-  (unless (null? *exercises-done*)
+  (when (and *force* (cons? *exercises-done*))
     ;(printf "doing add-exercises I\n")
     (call-with-output-file *pathway-exercises-file*
       (lambda (o)
