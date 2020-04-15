@@ -1275,8 +1275,10 @@
   (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
                      [(eq? e 'sqrt) "num-sqrt"]
                      [(eq? e '=) "=="]
+                     [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (format "~a" e)])]
         [(eq? e '<=) "\\<="]
+        [(memq e '(* -)) (format "{zwsp}~a" e)]
         [else (format "~a" e)]))
 
 (define (sexp->block e #:pyret [pyret #f])
