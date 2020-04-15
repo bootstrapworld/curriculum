@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-14 # last modified
+LASTMOD=2020-04-15 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -26,8 +26,10 @@ while test $# -ne 0; do
     ADDEXERCISES=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
-  elif test "$arg" = -fd -o "$arg" = -df; then
+  elif test "$arg" = -df -o "$arg" = -fd; then
     DEBUG=1; FORCE=1
+  elif test "$arg" = -dfl; then
+    DEBUG=1; FORCE=1; LINT=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
   elif test "$arg" = --language; then
@@ -501,6 +503,21 @@ function checklinks() {
   fi
 }
 
+function setmathdelay() {
+  local f=$1
+
+  local NUMMATHEXPRS=$(grep -c '\\displaystyle' $TMPHTML)
+  if test $NUMMATHEXPRS; then
+    JAVASCRIPTDELAY=3000
+    local JTMP=$(expr $NUMMATHEXPRS \* 50)
+    if test $JTMP -gt $JAVASCRIPTDELAY; then
+      JAVASCRIPTDELAY=$JTMP
+    fi
+    JAVASCRIPTDELAY="--javascript-delay $JAVASCRIPTDELAY"
+  fi
+}
+
+
 function processadoc() {
   local f="$1"
 
@@ -544,7 +561,9 @@ function processadoc() {
               ASPECT="--margin-top $PDFMARGIN --margin-right 25mm --margin-bottom $PDFMARGIN --margin-left 25mm"
               ASPECT="-O Landscape $ASPECT"
             fi
-            wkhtmltopdf $ASPECT --lowquality -q $TMPHTML $fpdf
+            JAVASCRIPTDELAY=
+            setmathdelay $TMPHTML
+            wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML $fpdf
             rm $TMPHTML
             checkifsinglepdfpage "$fpdf"
             #test $DEBUG || rm $TMPHTML
@@ -760,7 +779,13 @@ function buildlessonplan() {
         rm $TEMPF
         cp index.shtml $TMPHTML
         insertprintcss $TMPHTML
-        wkhtmltopdf --lowquality -q $TMPHTML index.pdf
+
+        ASPECT=
+
+        JAVASCRIPTDELAY=
+        setmathdelay $TMPHTML
+        wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML index.pdf
+
         rm $TMPHTML
       fi
     fi
@@ -1193,8 +1218,7 @@ function buildpathway() {
         ABYSS=this-page-intentionally-left-blank
         if test ! -f $ABYSS.pdf; then
           touch $ABYSS.html
-          wkhtmltopdf --lowquality -q $ABYSS.html \
-            $ABYSS.pdf
+          wkhtmltopdf --lowquality -q $ABYSS.html $ABYSS.pdf
           rm $ABYSS.html
         fi
 
