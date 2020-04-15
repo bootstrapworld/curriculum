@@ -392,7 +392,7 @@ span.clear {
 
 /* .designRecipeLayout prefix removed */
 .studentAnswer {
-  margin-bottom:  12pt;
+  margin-bottom:  10pt;
   min-width:      100pt;
   /* height:         20pt; */
   line-height:    20pt;
@@ -461,15 +461,16 @@ code{
 }
 
 /* Exercises and Solutions Table */
-table.exercises_and_solutions { border-width: 0px; }
-table.exercises_and_solutions td:nth-child(even) { text-align: right; }
-table.exercises_and_solutions td {
+table.exercises_and_solutions, table.exercises_and_solutions * { 
+  border: 0px !important; 
   padding: 0px;
-  border-width: 0px !important;
+  background: none !important;
 }
-table.exercises_and_solutions tr:hover td { border-bottom: solid 1px gray; background: red; }
-
-
+table.exercises_and_solutions td:last-child { text-align: right; }
+table.exercises_and_solutions>tbody>tr>td:first-child * { font-weight: bold; }
+table.exercises_and_solutions table * { background: none !important; }
+table.exercises_and_solutions tr:hover {background: #7532892f !important; }
+table.exercises_and_solutions table tr:hover a {color: white; text-decoration: underline;}
 
 .pyretkeyword {
   font-weight: 900;
