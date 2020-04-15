@@ -3,7 +3,7 @@
 
 Write the code to define `PRIZE_STAR` as a *solid, green star of size 50*.
 
-@vspace{20ex}
+@show{(sexp->code `(define PRIZE_STAR (star 50 "solid" "green")))}
 
 Using the `PRIZE_STAR` definition from above, draw the Circle of Evaluation and write the code for each of the exercises. One Circle of Evaluation has been done for you.
 
@@ -14,20 +14,27 @@ Using the `PRIZE_STAR` definition from above, draw the Circle of Evaluation and 
 @span{.clear}{}the size of the original (using `scale`)
 --
 @vspace{10ex}
-@show{(sexp->coe '(scale 3 PRIZE_STAR))}
+@show{(sexp->coe  '(scale 3 PRIZE_STAR))}
+@show{(sexp->code '(scale 3 PRIZE_STAR))}
 --
 |A solid, green star is half the size of the
 original (using scale)
-
-@vspace{40ex}
+@vspace{10ex}
+@show{(sexp->coe  '(scale 0.5 PRIZE_STAR))}
+@show{(sexp->code '(scale 0.5 PRIZE_STAR))}
 
 |A solid, green star of size 50 that has
 been rotated 45 degrees
-
-@vspace{40ex}
+@vspace{10ex}
+@show{(sexp->coe  '(rotate 45 PRIZE_STAR))}
+@show{(sexp->code '(rotate 45 PRIZE_STAR))}
 
 |A solid, green star that is 3 times the size of the original
 @span{.clear}{} *and* has been rotated 45 degrees
+@vspace{10ex}
+@show{(sexp->coe  '(rotate 45 (scale 3 PRIZE_STAR)))}
+@show{(sexp->code '(rotate 45 (scale 3 PRIZE_STAR)))}
+
 |===
 
 How does defining values help you as a programmer?
