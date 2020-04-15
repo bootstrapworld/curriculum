@@ -35,9 +35,12 @@
             (when (string=? directive "exercise-link")
               (let* ([page (read-first-arg i directive)]
                      [compts (string-split page "/")])
+                ;(printf "doing ex ~s ~s\n" directive page)
                 (when (= (length compts) 2)
-                  (set! *exercises-files*
-                    (cons (cadr compts) *exercises-files*)))))))
+                  (let ([f (cadr compts)])
+                    (unless (member f *exercises-files*)
+                      (set! *exercises-files*
+                        (cons f *exercises-files*)))))))))
         (loop)))))
 
 (define (collect-exercises lesson-plan-file)
