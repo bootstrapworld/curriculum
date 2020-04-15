@@ -851,14 +851,9 @@
                                                   (format "style=\"width: ~a\"" width))
                                 (create-end-tag "span")) o))]
                          [(string=? directive "fitb")
-                          (let* ([width (string-trim (read-group i directive))]
-                                 [text (string-trim (read-group i directive))])
-                            (display
-                              (string-append
-                                (create-begin-tag "span" ".fitb" #:attribs
-                                                  (format "style=\"width: ~a\"" width))
-                                text
-                                (create-end-tag "span")) o))]
+                          (let ([width (string-trim (read-group i directive))])
+                            (display-begin-span 
+                              ".fitb" o #:attribs (format "style=\"width: ~a\"" width)))]
                          [(string=? directive "fitbruby")
                           (let* ([width (string-trim (read-group i directive))]
                                  [text (string-trim (read-group i directive))]
@@ -1327,9 +1322,9 @@
                  (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
-(define (code x #:multi-line [multi-line #t])
+(define (code x #:multi-line [multi-line #t]) ;TODO or #f?
   (let ([pyret? (string=? *proglang* "pyret")])
-    (enclose-textarea
+    (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
           x))))

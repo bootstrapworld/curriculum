@@ -48,10 +48,12 @@
 (define (enclose-div classes s)
   (enclose-tag "div" classes s))
 
-(define (enclose-textarea classes s)
+(define (enclose-textarea classes s #:multi-line [multi-line #f])
   (let ([textarea "tt"]) ;shd be "textarea" eventually
-    (enclose-div ".obeyspaces"
-                 (enclose-tag textarea classes s))))
+    (let ([ta (enclose-tag textarea classes s)])
+      (if multi-line
+          (enclose-div ".obeyspaces" ta)
+          ta))))
 
 (define (enclose-math e)
   (string-append
@@ -86,9 +88,9 @@
       (error 'ERROR "Bad @span: Check missing braces"))
     (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
 
-(define (display-begin-span span-args o)
+(define (display-begin-span span-args o #:attribs [attribs #f])
   (grow-span-stack)
-  (display (create-begin-tag "span" span-args) o))
+  (display (create-begin-tag "span" span-args #:attribs attribs) o))
 
 (define (display-end-span o)
   (pop-span-stack)
