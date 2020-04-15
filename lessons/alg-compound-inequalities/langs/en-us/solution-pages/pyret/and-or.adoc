@@ -8,7 +8,11 @@ Create the Circles of Evaluation, then convert the expressions into code in the 
 
 @show{(sexp->coe '(and (< 2 5) (= 0 6)))}
 
-@vspace{20ex}
+@vspace{2ex}
+
+@show{(sexp->code '(and (< 2 5) (= 0 6)))}
+
+@vspace{10ex}
 
 What will this evaluate to? @fitb{20ex}{false}
 
@@ -18,7 +22,11 @@ What will this evaluate to? @fitb{20ex}{false}
 
 @show{(sexp->coe '(or (> 6 8) (< -4 1)))}
 
-@vspace{20ex}
+@vspace{2ex}
+
+@show{(sexp->code '(or (> 6 8) (< -4 1)))}
+
+@vspace{10ex}
 
 What will this evaluate to? @fitb{20ex}{true}
 
@@ -28,7 +36,11 @@ What will this evaluate to? @fitb{20ex}{true}
 
 @show{(sexp->coe '(and (string-equal "purple" "blue") (= (+ 3 5) 8)))}
 
-@vspace{20ex}
+@vspace{2ex}
+
+@show{(sexp->code '(and (string-equal "purple" "blue") (= (+ 3 5) 8)))}
+
+@vspace{10ex}
 
 What will this evaluate to? @fitb{20ex}{false}
 
@@ -36,5 +48,6 @@ What will this evaluate to? @fitb{20ex}{false}
 
 4) Write the contracts for `and` and `or` in your Contracts page.
 
-`# and :: Boolean Boolean -> Boolean`
-`# or  :: Boolean Boolean -> Boolean`
+`# and {two-colons} Boolean Boolean -> Boolean`
+
+`# or  {two-colons} Boolean Boolean -> Boolean`
