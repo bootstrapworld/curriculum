@@ -64,34 +64,42 @@
 
 ;for the @span{...}{...}
 
+(struct span (real? [nesting #:mutable]))
+
 (define *span-stack* '())
 
 (define (span-stack-present?)
   (pair? *span-stack*))
 
 (define (top-span-stack)
-  (car *span-stack*))
+  (span-nesting (car *span-stack*)))
 
-(define (grow-span-stack)
-  (set! *span-stack* (cons 0 *span-stack*)))
+(define (grow-span-stack span-type)
+  (set! *span-stack* (cons (span span-type 0) *span-stack*)))
 
 (define (pop-span-stack)
-  (set! *span-stack* (cdr *span-stack*)))
+  (let ([a (car *span-stack*)])
+    (set! *span-stack* (cdr *span-stack*))
+    a))
 
 (define (increment-top-span-stack)
-  (let ([n (car *span-stack*)])
-    (set! *span-stack* (cons (+ n 1) (cdr *span-stack*)))))
+  (let* ([top-span (car *span-stack*)]
+        [n (span-nesting top-span)])
+    (set-span-nesting! top-span (+ n 1))))
 
 (define (decrement-top-span-stack)
-  (let ([n (car *span-stack*)])
+  (let* ([top-span (car *span-stack*)]
+         [n (span-nesting top-span)])
     (when (<= n 0)
       (error 'ERROR "Bad @span: Check missing braces"))
-    (set! *span-stack* (cons (- n 1) (cdr *span-stack*)))))
+    (set-span-nesting! top-span (- n 1))))
 
 (define (display-begin-span span-args o #:attribs [attribs #f])
-  (grow-span-stack)
-  (display (create-begin-tag "span" span-args #:attribs attribs) o))
+  (cond [span-args
+          (grow-span-stack 'real-span)
+          (display (create-begin-tag "span" span-args #:attribs attribs) o)]
+        [else (grow-span-stack #f)]))
 
 (define (display-end-span o)
-  (pop-span-stack)
-  (display (create-end-tag "span") o))
+  (when (span-real? (pop-span-stack))
+    (display (create-end-tag "span") o)))

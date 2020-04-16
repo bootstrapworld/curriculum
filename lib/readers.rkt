@@ -34,6 +34,8 @@
                                    [in-escape? #f])
                           (let ([c (read-char i)])
                             (cond [(eof-object? c)
+                                   (printf "Read so far: ~s\n"
+                                           (string-trim (list->string (reverse r))))
                                    (error 'ERROR "read-group: Runaway directive ~a" directive)]
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)

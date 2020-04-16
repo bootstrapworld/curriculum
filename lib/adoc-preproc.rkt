@@ -50,6 +50,8 @@
 (define *pathway-lessons-containing-exercises-file*
   (string-append *pathway-root-dir* "resources/workbook-lessons-containing-exercises.rkt.kp"))
 
+(define *in-file* #f)
+
 (define *workbook-pagenums*
   (if *lesson-plan*
       (let ([f (string-append *pathway-root-dir* "workbook-pagenum-index.rkt.kp")])
@@ -95,6 +97,14 @@
 
 (define read-group (*make-read-group (lambda z (apply code z))))
 
+(define (read-space i)
+  (let loop ()
+    (let ([c (peek-char i)])
+      (cond [(eof-object? c) #f]
+            [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
+            [(or (char=? c #\newline)) (read-char i)]
+            [else #f]))))
+
 (define (read-commaed-group i directive)
   (let* ([g (read-group i directive)]
          [n (string-length g)])
@@ -105,7 +115,8 @@
             (if (>= j n) (loop j (cons (substring g i j) r))
                 (let ([c (string-ref g j)])
                   (cond [(eof-object? c)
-                         (error 'ERROR "read-commaed-group: Runaway directive ~a" directive)]
+                         (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
+                                directive *lesson-plan* *in-file*)]
                         [in-escape?
                           (loop2 (+ j 1) in-string? #f)]
                         [(char=? c #\\)
@@ -607,6 +618,7 @@
       (newline o))))
 
 (define (preproc-n-asciidoctor in-file)
+  (set! *in-file* in-file)
   ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
   (let ([out-file (path-replace-extension in-file ".asc")]
         [first-subsection-reached? #f]
@@ -822,9 +834,11 @@
                                 (create-end-tag "span")) o))]
                          [(string=? directive "ifproglang")
                           (let ([proglang (read-group i directive)])
-                            (if (string=? proglang *proglang*)
-                                (display-begin-span "" o)
-                                (read-group i directive)))]
+                            (cond [(string=? proglang *proglang*)
+                                   (display-begin-span #f o)]
+                                  [else
+                                    (read-group i directive)
+                                    (read-space i)]))]
                          [(assoc directive *macro-list*)
                           => (lambda (s)
                                (display (cadr s) o))]
