@@ -969,7 +969,7 @@
       (for ([lsn lessons])
         (let* ([lsn-dir (car lsn)]
                [lsn-exx (filter (lambda (x) (string=? (car x) lsn-dir)) exx)])
-          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"1a,1a\"]\n!===\n" lsn-dir (cadr lsn))
+          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n" lsn-dir (cadr lsn))
           (for ([ex lsn-exx])
             ;(printf "ex = ~s ~a\n" ex (length ex))
             (let* ([ti (list-ref ex 2)]
