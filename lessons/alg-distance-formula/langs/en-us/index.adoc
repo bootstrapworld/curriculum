@@ -74,12 +74,8 @@
 == Warmup
 
 Students should have their workbook, pencil, and be logged into
-@ifproglang{wescheme}{
-@link{https://www.wescheme.org, WeScheme}
-}
-@ifproglang{pyret}{
-@link{https://code.pyret.org, code.pyret.org}
-}
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme} }
+@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org} }
 on their computer.
 
 == Distance @duration{30 minutes}
@@ -172,15 +168,13 @@ have students write a function that takes in two @vocab{coordinate} pairs (four 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
 
 === Common Misconceptions
+
 - It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
-@ifproglang{wescheme}{
-`...(sqrt (+ (sqr (- x1 y1)) (sqr (- x2 y2))))...` 
-instead of `...(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))...` 
-}
-@ifproglang{pyret}{
-`...num-sqrt(num-sqr(x1 - y1) + num-sqr(x2 - y2))...` 
-instead of `...num-sqrt(num-sqr(x2 - x1) + num-sqr(y2 - y1))...` 
-}
+@ifproglang{wescheme}{ `...(sqrt (+ (sqr (- x1 y1)) (sqr (- x2 y2))))...` 
+instead of `...(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))...` }
+@ifproglang{pyret}{ `...num-sqrt(num-sqr(x1 - y1) + num-sqr(x2 - y2))...` 
+instead of `...num-sqrt(num-sqr(x2 - x1) + num-sqr(y2 - y1))...` }
+
 In this situation, remind student to look back at what they circled and labeled in the examples step. _This is why we label!_ 
 
 == Collision Detection @duration{20 minutes}
@@ -193,12 +187,8 @@ Knowing how far apart our characters are is the first step. We still need the co
 
 === Investigate
 Using
-@ifproglang{wescheme}{
-@workbook-link{pages/collide.adoc, Design Recipe: collision?},
-}
-@ifproglang{pyret}{
-@workbook-link{pages/collide.adoc, Design Recipe: is-collision},
-}
+@ifproglang{wescheme}{ @workbook-link{pages/collide.adoc, Design Recipe: collision?}, }
+@ifproglang{pyret}{ @workbook-link{pages/collide.adoc, Design Recipe: is-collision}, }
 have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.
 
 === Synthesize
