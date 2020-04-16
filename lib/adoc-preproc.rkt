@@ -389,9 +389,12 @@
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
     (when exercise?
-      (let ([ex-ti (or (exercise-title f.src) *page-title*)])
-        (set! *exercises-done*
-          (cons (list *page-title* (format "../~a" g) ex-ti) *exercises-done*))))
+      (let ([gg (format "../~a/pages/~a" lesson snippet)])
+        (unless (ormap (lambda (e) (and (equal? (car e) *page-title*)
+                                        (equal? (cadr e) gg))) *exercises-done*)
+          (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
+            (set! *exercises-done*
+              (cons (list *page-title* gg ex-ti) *exercises-done*))))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
