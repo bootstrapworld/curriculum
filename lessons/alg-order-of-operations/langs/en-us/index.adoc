@@ -1,5 +1,11 @@
 = Order of Operations
 
+++++
+<style>
+.embedded {width: 50%; margin: 0px auto;}
+</style>
+++++
+
 @lesson-description{Students learn to model arithmetic expressions with a visual tool for order of operations, known as "Circles of Evaluation".}
 
 [@lesson-intro-table]
@@ -129,7 +135,7 @@ Math is a language, and all languages have rules and grammar. We can _draw the s
 [.lesson-point]
 1) Every Circle must one - and only one! - function, written at the top
 
-That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a circle. 
+That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a Circle. 
 
 [.lesson-point]
 2) The inputs to the function are written left-to-right, in the middle of the Circle.
@@ -143,8 +149,7 @@ If we want to draw the Circle of Evaluation for @math{6 \div 3}, the division fu
 
 What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do divide 6 by that circle?
 
-[.lesson-point]
-3) Circles can contain other Circles
+*Circles can contain other Circles*
 
 [.right]
 @show{(sexp->coe '(/ 6 (+ 1 2)))}
@@ -153,19 +158,20 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 
 @span{.clear}{}
 
-[.lesson-point]
-4) Circles of Evaluation _help us write code_
+*Circles of Evaluation _help us write code_*
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the function at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthisis).
 
-
-ifeval::["{proglang}" == "wescheme"]
-@centered-image{images/CoE1-Racket.jpg, Circle of Evaluation, 400, align="center"}
-endif::[]
 ifeval::["{proglang}" == "pyret"]
 In Pyret, we treat _operators_ like `+`, `-`, `*`, and `/` differently - they are written in between their inputs, just like in math.
-@centered-image{images/CoE1-Pyret.jpg, Circle of Evaluation, 400, align="center"}
 endif::[]                                          
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|*Expression*			| &rarr; | @show{(sexp->math `(+ 3 8)) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(+ 3 8)) }
+|*Code*					| &rarr; | @show{(sexp->code `(+ 3 8)) }
+|===
+
 
 ifeval::["{proglang}" == "wescheme"]
 Have students practice creating Circles of Evaluation using the 6 functions(`+`, `-`, `*`, `/`, `sqr`, `sqrt`).
@@ -179,12 +185,12 @@ endif::[]
 - What do the error messages tell us? 
 - What connections do you see between the expression, circle, and code?
 
-ifeval::["{proglang}" == "wescheme"]
-@centered-image{images/CoE2-Racket.jpg, Circles of Evaluation, 400, align="center"}
-endif::[]
-ifeval::["{proglang}" == "pyret"]
-@centered-image{images/CoE2-Pyret.jpg, Circles of Evaluation, 400, align="center"}
-endif::[]  
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|*Expression*			| &rarr; | @show{(sexp->math `(* 2 (+ 3 8))) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(* 2 (+ 3 8))) }
+|*Code*					| &rarr; | @show{(sexp->code `(* 2 (+ 3 8))) }
+|===
 
 - Why are there two closing parentheses in a row, at the end of the code?
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
