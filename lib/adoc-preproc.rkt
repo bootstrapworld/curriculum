@@ -40,6 +40,9 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
+(define *pathway-lesson-order*
+  (string-append *pathway-root-dir* "workbook-lessons.txt"))
+
 (define *pathway-exercises-file*
   (string-append *pathway-root-dir* "resources/workbook-exercises.rkt.kp"))
 
@@ -393,11 +396,11 @@
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
     (when exercise?
       (let ([f (format "../~a" g-in-pages)])
-        (unless (ormap (lambda (e) (and (equal? (car e) *page-title*)
+        (unless (ormap (lambda (e) (and (equal? (car e) lesson)
                                         (equal? (cadr e) f))) *exercises-done*)
           (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
             (set! *exercises-done*
-              (cons (list *page-title* f ex-ti) *exercises-done*))))))
+              (cons (list lesson f ex-ti) *exercises-done*))))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
@@ -975,8 +978,7 @@
           #:exists 'replace)))
   ;
 
-  (when (or *narrative*
-            *lesson-plan*)
+  (when (or *lesson-plan* *narrative*)
     (add-exercises)
     (create-glossary-subfile))
 
@@ -1005,16 +1007,21 @@
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
   ;(printf "pwrd = ~s\n" *pathway-root-dir*)
   ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
-  (let ([lessons (read-data-file *pathway-lessons-containing-exercises-file* #:mode 'forms)]
-        [exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
+  (let* ([all-lessons (read-data-file *pathway-lesson-order* #:mode 'files)]
+         [lessons-with-exx (read-data-file *pathway-lessons-containing-exercises-file* #:mode 'forms)]
+         [lessons (sort lessons-with-exx #:key car
+                        (lambda (x y)
+                          (< (index-of all-lessons x) (index-of all-lessons y))))]
+         [exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
     ;(printf "lessons= ~s\n\nexercises= ~s\n" lessons exx)
     (unless (null? exx)
       ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
       (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
       (fprintf o "|===\n")
       (for ([lsn lessons])
-        (let ([lsn-exx (filter (lambda (x) (string=? (car x) lsn)) exx)])
-          (fprintf o "|~a |\n\n[cols=\"1a,1a\"]\n!===\n" lsn)
+        (let* ([lsn-dir (car lsn)]
+               [lsn-exx (filter (lambda (x) (string=? (car x) lsn-dir)) exx)])
+          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"1a,1a\"]\n!===\n" lsn-dir (cadr lsn))
           (for ([ex lsn-exx])
             ;(printf "ex = ~s ~a\n" ex (length ex))
             (let* ([ti (list-ref ex 2)]
@@ -1035,7 +1042,7 @@
       #:exists 'append)
     (call-with-output-file *pathway-lessons-containing-exercises-file*
       (lambda (o)
-        (fprintf o "~s\n" *page-title*))
+        (fprintf o "(\"lessons/~a\" ~s)\n" *lesson-plan* *page-title*))
       #:exists 'append)
     ))
 

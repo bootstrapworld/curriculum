@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-15 # last modified
+LASTMOD=2020-04-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1120,6 +1120,7 @@ function buildpathway() {
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
       grep -v '^ *;' lesson-order.txt|grep -v '^ *$' > lessons/lessons.txt
+      sed -e 's/.*/lessons\/\0/' lessons/lessons.txt > workbook-lessons.txt
       for lsn in $(cat lessons/lessons.txt); do
         lsndir=lessons/$lsn
         mkdir -p $lsndir
