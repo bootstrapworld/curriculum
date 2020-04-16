@@ -370,6 +370,7 @@
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
   (unless lesson (error ' make-workbook-link "deadc0de"))
   (let* ([g (string-append lesson "/" pages-dir "/" snippet)]
+         [g-in-pages (string-append lesson "/pages/" snippet)]
          [f (string-append *pathway-root-dir* g)]
          [f.src f]
          [dirve (if exercise? "@exercise-link" "@workbook-link")]
@@ -380,8 +381,10 @@
            (let ([f.html (path-replace-extension f ".html")]
                  [f.pdf (path-replace-extension f ".pdf")])
              (cond [(file-exists? f.html) (set! f f.html)
+                                          (set! g-in-pages (path-replace-extension g-in-pages ".html"))
                                           (set! g (path-replace-extension g ".html"))]
                    [(file-exists? f.pdf) (set! f f.pdf)
+                                         (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
                                          (set! g (path-replace-extension g ".pdf"))]))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
     (unless (file-exists? f)
@@ -389,12 +392,12 @@
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
     (when exercise?
-      (let ([gg (format "../~a/pages/~a" lesson snippet)])
+      (let ([f (format "../~a" g-in-pages)])
         (unless (ormap (lambda (e) (and (equal? (car e) *page-title*)
-                                        (equal? (cadr e) gg))) *exercises-done*)
+                                        (equal? (cadr e) f))) *exercises-done*)
           (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
             (set! *exercises-done*
-              (cons (list *page-title* gg ex-ti) *exercises-done*))))))
+              (cons (list *page-title* f ex-ti) *exercises-done*))))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
@@ -1486,9 +1489,10 @@
 (define (exercise-handout #:title [title #f] #:instr [instr #f] #:forevidence [forevidence #f]
                           . body)
   (string-append
-    (format "\n\n== Exercise~a\n\n"
-            (if title (format ": ~a" title) "")
-            )
+    "\n\n"
+    (if title
+        (format "== Exercise: ~a\n\n" title)
+        "")
     (if instr
         (format "*Directions*: ~a\n\n" instr)
         "")
