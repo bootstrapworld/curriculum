@@ -2,7 +2,6 @@
 
 @lesson-description{Students learn about Circles of Evaluation as a tool for programming and understanding the order of operations.}
 
-
 [.left-header,cols="20a,80a", stripes=none]
 |===
 |Lesson Goals
@@ -11,12 +10,10 @@
 * Use Circles of Evaluation to translate math expressions into code.
 * Translate between math notation, Circles of Evaluation, and Pyret syntax.
 
-
 |Student-Facing Lesson Goals
 |
 * I can create Circles of Evaluation based on math expressions.
-* I can translate between math notation, Circles of Evaluation, and the Pyret language.  
-
+* I can translate between math notation, Circles of Evaluation, and the Pyret language.
 
 |Required Materials
 |
@@ -26,12 +23,12 @@
 * @link{https://docs.google.com/document/d/1gOeFQNWCE-LPbgm60DJT8JIlvopOPG9FGpvYUiwM5Us/edit?usp=sharing, Master Copy for Activity 2}
 * Computers connected to the Internet
 ////
-ifeval::["{proglang}" == "wescheme"]
-* Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides}) 
-endif::[]
-ifeval::["{proglang}" == "pyret"] 
+@ifproglang{wescheme}{
+* Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides})
+}
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
-endif::[]
+}
 ////
 
 |Preparation
@@ -49,8 +46,7 @@ endif::[]
 
 This lesson introduces students to Circles of Evaluation, a visual tool that provides structure for understanding the order of operations and programming syntax.  Pyret doesn’t assume the traditional PEMDAS order of operations, so students have to be explicit in what order they want the computer to use. +
 {empty} +
-[underline]#This lesson can be taught with or without the use of computers, depending on your preference and/or computer availability.#  
-
+[underline]#This lesson can be taught with or without the use of computers, depending on your preference and/or computer availability.#
 
 == Warm Up: 10 minutes
 === Notice and Wonder
@@ -59,7 +55,7 @@ This lesson introduces students to Circles of Evaluation, a visual tool that pro
 
 The purpose of Notice and Wonder is to explicitly give students time to let their brains process what they’re doing and not feel pressured to come up with an answer or response right away.  Once students have gotten used to this procedure, they begin to do it naturally on their own.  “Notice” responses are usually factual observations, such as colors, physical locations, buttons, etc.  “Wonder” responses are usually questions, such as “How can I…?”, “Will we…?”, “Why is…?”, etc. +
 {empty} +
-Student will spend about one minute “Noticing” and one minute “Wondering”.  After discussing the Notice and Wonder responses, they will practice translating math expressions into Circles of Evaluation and then into Pyret syntax. 
+Student will spend about one minute “Noticing” and one minute “Wondering”.  After discussing the Notice and Wonder responses, they will practice translating math expressions into Circles of Evaluation and then into Pyret syntax.
 
 ==== Launch
 
@@ -83,7 +79,7 @@ Ask students to reflect on the Notice and Wonder responses and respond to each o
 
 To involve more students in the conversation, consider asking:
 
-* *"Who else noticed this?"* 
+* *"Who else noticed this?"*
 * *"Did anyone have a Wonder that was related to a Notice?"*
 * *"Who else wondered this?"* +
 * *“Did anyone try anything that might answer _____’s Wonder?”* +
@@ -95,17 +91,17 @@ To involve more students in the conversation, consider asking:
 ==== Narrative
 
 The purpose of this activity is for students to get practice and build fluency in moving between math notation and Circles of Evaluation.  In this activity, they will match cards containing math expressions in common notation to cards with Circles of Evaluation on them.  One of the math expressions cards and one of the Circles of Evaluation cards will not have a match, and students will need to create a match for those.  This is the first time students are encountering Circles of Evaluation, which will be used frequently throughout subsequent lessons, so plenty of time for practice is recommended. +
-{empty} + 
+{empty} +
 
-The difficulty of this activity can be increased by providing more challenging math expressions, fewer matches, or by not providing the set of Circle cards at all and having students draw them independently. 
+The difficulty of this activity can be increased by providing more challenging math expressions, fewer matches, or by not providing the set of Circle cards at all and having students draw them independently.
 
 ==== Launch
 
 Allow for 10 minutes of partner work and 5 minutes of class discussion.  Walk the room to observe student progress and help solve technical issues where needed.
 
-==== Student Task 
+==== Student Task
 
-Your teacher will give you two sets of cards: one containing math expressions in common notation and one containing Circles of Evaluation like the ones we just saw. 
+Your teacher will give you two sets of cards: one containing math expressions in common notation and one containing Circles of Evaluation like the ones we just saw.
 
 . Match each number card with a letter card.
 . One of the math cards and one of the Circle of Evaluation cards will not have a match. For those cards, write what the match would be.
@@ -113,9 +109,9 @@ Your teacher will give you two sets of cards: one containing math expressions in
 
 ==== Student Response
 
-. 
-. 
-. 
+.
+.
+.
 
 ==== Anticipated Misconceptions
 
@@ -134,17 +130,16 @@ The purpose of this activity is for students to practice translating Circles of 
 {empty} +
 Blank space is provided at the bottom of each page for students to create their own Circle of Evaluation to challenge their partner. +
 
-==== Launch 
+==== Launch
 
 Hand out “Translating Circles to Code” worksheets A & B to each pair of students.
 
 ==== Student Task
 
-Translate the Circles of Evaluation into Pyret code with your partner. 
+Translate the Circles of Evaluation into Pyret code with your partner.
 
 . You may use Pyret to type in the code if you wish, however, remember that just because Pyret completes the calculation doesn’t guarantee it’s right!  Be sure to check the model.
 . Create a challenge Circle of Evaluation in the space provided for your partner to try.
-
 
 ==== Synthesis
 
@@ -164,7 +159,7 @@ When students are ready for more, they can investigate these two new functions a
 == Summary
 In this lesson, students encountered Circles of Evaluation for the first time.  They learned how to translate common math notation into the Circle of Evaluation format and be explicit in what order the math operations will be performed in.  They then practiced translating Circles of Evaluation into Pyret code. +
 {empty} +
-In future lessons, these skills will be used frequently with increasingly complex functions and expressions.  If students are struggling, be sure to spend another class period giving students practice time. 
+In future lessons, these skills will be used frequently with increasingly complex functions and expressions.  If students are struggling, be sure to spend another class period giving students practice time.
 
 == Cool Down: 5 minutes
 === Switcheroo
@@ -184,8 +179,7 @@ Give students the following math expression and ask them to employ the opposite 
 
 Think about how you approach Circles of Evaluation.  Do you start from the inside, or the outside?  What about your partner?  Do you think one strategy has advantages over the other? +
 {empty} +
-Translate this math expression into a Circle of Evaluation, using the opposite strategy you used before. 
-
+Translate this math expression into a Circle of Evaluation, using the opposite strategy you used before.
 
 How did it feel to try a new strategy?  Did you feel like you preferred the new way, or the previous way?  How does trying new strategies to strengthen our brains?
 

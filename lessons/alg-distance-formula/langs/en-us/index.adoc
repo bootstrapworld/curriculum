@@ -20,15 +20,15 @@
 | Materials
 |
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1nds3sEXmoGPQdACNomLOde89FFyjHowILDVGktGLLxQ/view, Google Slides})
 
 * @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, Sample game file - no distance lines} (WeScheme))
 
 * @link{https://www.wescheme.org/view?publicId=0bCivugY3P, Sample game file - with distance lines} (WeScheme))
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 * @link{https://drive.google.com/open?id=1zl_7vW2KqfRsL7zubjCCNXo24gwfxRHgRzD7M7Ox6NE, Lesson slides template} (Google Slides)
 
 * @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Sample game file - no distance lines} (Pyret))
@@ -41,12 +41,12 @@ ifeval::["{proglang}" == "pyret"]
 
 * @workbook-link{pages/distance.adoc, Design Recipe: distance} (original))
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Design Recipe: collide? (@workbook-link{pages/collide.adoc, original})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Design Recipe: is-collision (@workbook-link{pages/collide.adoc, original})
-endif::[]
+}
 
 | Supplemental Resources
 |
@@ -72,12 +72,12 @@ endif::[]
 == Warmup
 
 Students should have their workbook, pencil, and be logged into
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @link{https://www.wescheme.org, WeScheme}
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @link{https://code.pyret.org, code.pyret.org}
-endif::[]
+}
 on their computer.
 
 == Distance @duration{30 minutes}
@@ -87,12 +87,12 @@ Students discover the need for distance calculation (first in one dimention, the
 
 === Launch
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate. +
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, game file} and investigate. +
-endif::[]
+}
 
 {empty}
 
@@ -125,12 +125,12 @@ Have students explore using the `line-length` function in the @vocab{Interaction
 You can extend this `line-length` activity into a lesson on absolute value and have students program `line-length` themselves. Computing 1-dimensional distance - and absolute value - are in fact piecewise functions!
 ****
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Have students open this new @link{https://www.wescheme.org/view?publicId=0bCivugY3P, game file} and investigate. +
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 Have students run this new @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate. +
-endif::[]
+}
 {empty} +
 
 [.notice-box]
@@ -171,14 +171,14 @@ Students can test their `distance` function using *Pythagorean triples*, such as
 
 === Common Misconceptions
 - It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `...(sqrt (+ (sqr (- x1 y1)) (sqr (- x2 y2))))...` 
 instead of `...(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))...` 
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `...num-sqrt(num-sqr(x1 - y1) + num-sqr(x2 - y2))...` 
 instead of `...num-sqrt(num-sqr(x2 - x1) + num-sqr(y2 - y1))...` 
-endif::[]
+}
 In this situation, remind student to look back at what they circled and labeled in the examples step. _This is why we label!_ 
 
 == Collision Detection @duration{20 minutes}
@@ -191,12 +191,12 @@ Knowing how far apart our characters are is the first step. We still need the co
 
 === Investigate
 Using
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @workbook-link{pages/collide.adoc, Design Recipe: collision?},
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @workbook-link{pages/collide.adoc, Design Recipe: is-collision},
-endif::[]
+}
 have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.
 
 === Synthesize
@@ -205,6 +205,6 @@ have students write a function that takes in two coordinate pairs (four numbers)
 
 == Additional Exercises:
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - @link{https://teacher.desmos.com/activitybuilder/custom/5cdcb07bb4b8576069fdcef1, Bootstrap: Algebra - More Design Recipe Practice} (Desmos Activity)
-endif::[]
+}

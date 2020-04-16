@@ -18,28 +18,28 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1Xz0VOY7Kg_lawcRPvZX5FvPnZ8pdRfiQ4JRjtl54mP4/edit?usp=sharing, Google Slides})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=16vkybW9pizzg5HwUXzSUdi_4EB2BogEp4evHO4OnG3I, Google Slides})
-endif::[]
+}
 
 ////
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Piecewise Mystery Functions starter file (@link{https://www.wescheme.org/openEditor?publicId=pLVBsxgC93, WeScheme})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Piecewise Mystery Functions starter file (@link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Pyret})
-endif::[]
+}
 ////
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Luigi's Pizza starter file (@link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, WeScheme})
 // * @link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, Alice's Restaurant starter file}
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Alice's Restaurant starter file (@link{https://code.pyret.org/editor#share=1oeHRCcJhaP2GuKiujU0PRnJzOyWrPWSh&v=8934c12, Pyret})
-endif::[]
+}
 * Restaurant - Intro (@workbook-link{pages/restaurant-intro.adoc})
 * Restaurant - Explore (@workbook-link{pages/restaurant-explore.adoc})
 
@@ -59,12 +59,12 @@ endif::[]
 
 == Warmup
 Students should have their computer, workbook, contracts page, and pencil and be logged in to 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @link{https://www.wescheme.org, WeScheme}.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @link{https://code.pyret.org, code.pyret.org}.
-endif::[]
+}
 
 == Not Every Function is Smooth @duration{15 minutes}
 
@@ -93,13 +93,13 @@ _Since each student ("input") has only one action ("output"), it *is still a fun
 Up until now, almost all the students have seen are continuous and smooth. Make a big deal about this, so they recognize how big of a shift this is!
 
 === Investigate
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Students open the @link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, Luigi's Pizza file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 Students open the @link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Alice's Restaurant file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
-endif::[]
+}
 
 Students investigate the file using their workbook page as a guide.
 
@@ -112,21 +112,21 @@ Have students take time to think and discuss what they notice and wonder about t
 === Synthesize
 - *What are some familiar things you notice in this file?* 
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 _Answers vary: `define`, `string=?`, a contract and purpose statement, etc._
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 _Answers vary: `fun`, `end`, a contract and purpose statement, etc._
-endif::[]
+}
 
 - *What new things did you notice in this file?*
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 _Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `cost` function, etc._
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 _Answers vary: the `ask` keyword, the pipe symbols, `otherwise`, the general look of the `cost` function, etc._
-endif::[]
+}
 
 - *What function is being defined here? What is its contract?*
 +
@@ -143,22 +143,22 @@ Having acted out a piecewise function and examined the code for one on their com
 === Launch
 Students turn to @workbook-link{pages/restaurant-explore.adoc, Restaurant Explore} and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - *What happens with the interactive cash register when you enter an item not on the menu?*
 +
 _The program freezes, or crashes._ 
 - *Why does the cash register stop working when you enter an item not on the menu?*
 +
 _Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a @vocab{String} instead of a Number._
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 - *What happens with the `sales-tax` function when you enter an item not on the menu?*
 +
 _We get an error._ 
 - *What is the error telling us?*
 +
 _Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
-endif::[]
+}
 
 - *What should we do about this?* 
 _Since we want the program to stop if we give it an invalid input, we should just delete the last branch altogether. Think about other functions that don't work when we give them an invalid input!_
@@ -175,21 +175,21 @@ How many examples are needed to fully test this function?
 
 _More than two!_ In fact, we need an example for at least every possible item on the menu!
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 ```(EXAMPLE (cost "cheese")     9.00)
 (EXAMPLE (cost "pepperoni") 10.50)
 (EXAMPLE (cost "chicken")   11.25)
 (EXAMPLE (cost "brocolli")  10.25)
 ```
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 ```(EXAMPLE (cost "hamburger")   6.00)
 (EXAMPLE (cost "onion rings") 3.50)
 (EXAMPLE (cost "fried tofu")  5.25)
 (EXAMPLE (cost "pie")         2.25)
 ```
-endif::[]
+}
 
 [.lesson-instruction]
 Now we circle and label everything that is change-able, just as we always have. So what changes?
@@ -208,7 +208,7 @@ If there are more labels in the examples than there are things in the Domain, we
 
 We have two things changing (the food and the price), but only one thing is in our Domain. That's how we know this function is piecewise function!
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost topping) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `cond` expression. Each condition has a test and a result, and we copy the results from our examples just as we always do.
@@ -230,9 +230,9 @@ Finally, we fill in the tests with an expression that tells us _when_ the functi
     [      ...                      11.25]
     [      ...                      10.25]))
 ```
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 We start writing the definition as we normally would, using the function name and the input label from the examples step (`fun cost(menu-item): ... end`. But since we know it's a piecewise function, now we add `ask: ... end` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `ask` block. Each condition has a test, a `then:`, and a result, and we copy the results from our examples just as we always do.
@@ -258,7 +258,7 @@ fun​ cost(menu-item):
   end
 end
 ```
-endif::[]
+}
 
 
 == Additional Exercises:

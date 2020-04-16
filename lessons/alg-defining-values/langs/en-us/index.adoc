@@ -17,13 +17,13 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1l369za3UsTHj5bEw0IZIBoAEMdPnFDmsA5_oenwN8Cw/edit?usp=sharing, Google Slides})
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1zwQm0b6to3zyLXdqJbskSZNSCnDt1GitoNiA1yN4PrU, Google Slides})
-endif::[]
+}
 
 * Defining Values Exploration (@workbook-link{pages/defining-values-practice.adoc, original}, @link{solution-pages/defining-values-practice.adoc, solutions})
 
@@ -49,12 +49,12 @@ endif::[]
 == Warmup
 
 Students should be logged into
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @link{https://www.wescheme.org, WeScheme}.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @link{https://code.pyret.org, code.pyret.org}.
-endif::[]
+}
 
 == Identifying Fixed Structures @duration{30 minutes}
 
@@ -65,7 +65,7 @@ This activity introduces the problem with duplicate code, leveraging Mathematica
 
 Display the sample code from the "Prize Star" exercise.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 
 ```
 (star 50 "solid" "green")
@@ -77,9 +77,9 @@ ifeval::["{proglang}" == "wescheme"]
 
 - *What common element was repeated throughout all the lines of code?*
 `(star 50 "solid" "green")`
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 ```
 star(50, "solid", "green")
 scale(3, star(50, "solid", "green"))
@@ -90,7 +90,7 @@ rotate(45, scale(3, star(50, "solid", "green")))
 
 - *What common element was repeated throughout all the lines of code?*
 `star(50, "solid", "green")`
-endif::[]
+}
 
 - *What happened when you were asked to change the color of the star to gold?*
 _We had to change it everywhere it appeared._
@@ -101,16 +101,16 @@ Since we're using that star over and over again, wouldn't it be nice if we could
 [.lesson-instruction]
 In the coding environment, have students click "Start a new program" and open to @workbook-link{pages/defining-values-practice.adoc, Defining Values - Explore} to explore defining values.
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 Students need to have *include image* as their first line of code in the @vocab{Definitions area} and press "Run" to load the image library.
 
 - *How is defining a value with the `=` sign similar to what you've seen in math class?
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - *How is ‘define’ similar to a function?  How is it different?*
 _It’s written inside parentheses like a @vocab{function}, but ‘define’ doesn’t have an output_
-endif::[]
+}
 
 - *What is the usefulness of defining values?*
 _Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_

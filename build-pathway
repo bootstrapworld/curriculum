@@ -52,6 +52,10 @@ while test $# -ne 0; do
   fi
 done
 
+TMPTMP=$(mktemp)
+TMPPFX=$(basename $TMPTMP)
+rm -f $TMPTMP
+
 function displayhelp() {
   echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--nopdf] [--lint] [--help] [--version] pathway ...
   echo
@@ -916,7 +920,7 @@ function makeworkbooktex() {
   local tgt=
   local i=
 
-  local TMPFILE=$(basename $(mktemp))
+  local TMPFILE=$TMPPFX.tex
 
   echo "
   %BS%documentclass{article}

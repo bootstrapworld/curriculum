@@ -19,12 +19,12 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
-endif::[]
+}
 
 * Circles of Evaluation Mapping worksheet (@workbook-link{pages/MappingExamplesWithCoE2.adoc, HTML})
 
@@ -55,12 +55,12 @@ endif::[]
 == Warmup
 
 Students should have their workbook, pencil, and be logged into
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @link{https://www.wescheme.org, WeScheme}
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @link{https://code.pyret.org, code.pyret.org}
-endif::[]
+}
 on their computer.
 
 == Identifying Dynamic Patterns @duration{30 minutes}
@@ -79,21 +79,21 @@ Confess to your students, "I LOVE green triangles." Challenge them to use the @v
 Walk around the room and give positive feedback on the green triangles.  After the 2 minutes, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
 
 For example:
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 ```
 (triangle 30  "solid" "green")
 (triangle 12  "solid" "green")
 (triangle 500 "solid" "green")
 ```
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 ```
 triangle(30,  "solid", "green")
 triangle(12,  "solid", "green")
 triangle(500, "solid", "green")
 ```
-endif::[]
+}
 
 [.notice-box]
 .Notice and Wonder
@@ -120,13 +120,13 @@ _We defined values in the Definitions area._
 We've learned how to define *values* when we want to create a shortcut to reuse the same code over and over.
 
 For example:
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(define myStar (star 50 "solid" "gold"))` 
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 `myStar = star(50, "solid", "gold")`
-endif::[]
+}
 
 *But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
 
@@ -158,48 +158,48 @@ _An Image. Students may say "a triangle", follow up by asking what data type tha
 
 - *2. Write some examples of how this function should work.*
 ** If I typed
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(gt 40)`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `gt(40)`
-endif::[]
+}
 , what would I want the program to do? +
 _I'd want the computer the execute the code
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(triangle 40 "solid" "green")`._ +
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `triangle(40, "solid", "green")`._ +
-endif::[]
+}
 _This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!_ 
 - Have students complete the @workbook-link{pages/MappingExamplesWithCoE2.adoc, Circle of Evaluation mapping} worksheet showing how their function examples are working.
 
 - *3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
 _The number is changing in each example.  We could name it "x", but "size" is a more accurate name._ +
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 @centered-image{images/WhatChanges.png, Circle and label what is changing, 400, align="center"}
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 @centered-image{images/WhatChanges-Pyret.png, Circle and label what is changing, 400, align="center"}
-endif::[]
+}
 
 - *4. Write the function definition.* +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 _Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it._
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 _Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`.
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 _``(define (gt size) (triangle size, "solid", "green"))``_
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 _``fun gt(size): triangle(size, "solid", "green") end``_
-endif::[]
+}
 
 [.strategy-box]
 .Connecting to Best Practices
@@ -237,9 +237,9 @@ This is a chance to review the steps students learned in the prior activity, wit
 - Complete the Circles of Evaluation mapping for the examples of your function.
 
 == Additional Exercises:
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - Review: Define Values & Fast Functions (@link{https://teacher.desmos.com/activitybuilder/custom/5cdcaea0b4b8576069fdca4f, Desmos Activity})
-endif::[]
+}
 
 * Matching Examples & Function Definitions
 (@exercise-link{pages/match-examples-functions1.adoc, original} ,

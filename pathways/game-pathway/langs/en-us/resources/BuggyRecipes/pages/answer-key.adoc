@@ -4,26 +4,26 @@
 
 1. The first example doesn't work. It would work better as
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(EXAMPLE (target-leap 100) (* 100 2))` or
 `(EXAMPLE (target-leap 100) (* 2 100))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `target-leap(100) is 100 * 2` or
 `target-leap(100) is 2 * 100`
-endif::[]
+}
 
 2. The second example is incorrect according to the problem
    statement. It could be
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(EXAMPLE (target-leap 40) (* 40 2))`  or
 `(EXAMPLE (target-leap 40) (* 2 40))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `target-leap(40) is 40 * 2` or
 `target-leap(40) is 2 * 40`
-endif::[]
+}
 
 3. In the definition, the name of the function should be
 `target-leap`.
@@ -32,46 +32,46 @@ endif::[]
 (either `x` or `x-coor`).
 
 5. The body of the function definition should be
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(* x-coor 2)`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `x-coor * 2`.
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .offscreen?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .is-offscreen
-endif::[]
+}
 
 1. The Purpose Statement should include “return true if the coordinate is less
 than -50 or greater than 690”.
 
 2. Both examples should show the work, not just the answer:
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 a. `(EXAMPLE (offscreen? 60) (or (< 60 -50) (> 60 690)))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 a. `is-offscreen(60) is (60 < -50) or (60 > 690)`
-endif::[]
+}
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 b. `(EXAMPLE (offscreen? 800) (or (< 8000 -50) (> 800 690)))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 b. `is-offscreen(800) is (800 < -50) or (800 > 690)`
-endif::[]
+}
 
 3. In the definition, the function name should be
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `offscreen?` instead of `off-screen`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `is-offscreen` instead of `is-off-screen`.
-endif::[]
+}
 
 4. The function definition should use the function `or` instead
    of `and`.
@@ -89,35 +89,35 @@ number of students.
 
 1. `pi` is not a built-in value, so it should be replaced with an
 approximation such as `3.14` or
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(/ 22 7)`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `(22 / 7)`.
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 2. If using
 `(/ 22 7)`
 for `pi`, the function body could be
 +
 `(* (sqr (/ diameter 2)) (/ 22 7))`
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 2. If using
 `(22 / 7)`
 for `pi`, the function body could be
 +
 `num-sqr(diameter / 2) * (22 / 7))`
-endif::[]
+}
 
 .check-total
 
 1. The examples should use the function name `check-total` instead
 of `total`.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 
 2. Both examples have too many parentheses for the function call.
 
@@ -129,9 +129,9 @@ ifeval::["{proglang}" == "wescheme"]
 reversed:
 +
 `(+ (* 0.20 food-total) food-total)`
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 
 2. Both examples have an extra input that isn't attached to an
    operator or function:
@@ -146,14 +146,14 @@ ifeval::["{proglang}" == "pyret"]
 reversed:
 +
 `(0.20 * food-total) + food-total`
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .enough-carpet?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .have-enough-carpet
-endif::[]
+}
 
 
 1. The range of the function should be a Boolean.
@@ -164,16 +164,16 @@ endif::[]
 3. Both the examples and the function definition should use `<=`
 instead of `<`.
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 4. The example inputs should be separated by a comma.
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .enough-cash?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .have-enough-cash
-endif::[]
+}
 
 1. The domain of the function should be a Number (representing
 the price), not a String.
@@ -181,34 +181,34 @@ the price), not a String.
 2. The two examples should give numbers as an input and test if
 they are less than 1.50. For instance,
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(EXAMPLE (enough-cash? 2.50) (<= 2.50 1.50))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `have-enough-cash(2.50) is 2.50 <= 1.50`
-endif::[]
+}
 
 3. The variable name in the function body can be `item`, but a
 more accurate name would be `price` or `cost`.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .equal-length?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .equal-length
-endif::[]
+}
 
 1. The function body should be:
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(= (string-length string1) (string-length string2))`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `string-length(string1) == string-length(string2)`
 
 2. The inputs in the examples should be in quotes -- `"yes"`,
    `"no"`.
-endif::[]
+}
 
 .flower-name
 
@@ -217,50 +217,50 @@ endif::[]
 
 2. The second example should be
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(EXAMPLE (flower-name "purple") "tulip")`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `flower-name("purple") is "tulip"`
 
 3. In the examples, all the colors and flower names should be Strings, written inside quotation marks.
-endif::[]
+}
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .long-name?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .is-long-name
-endif::[]
+}
 
 1. Both examples should use the function `string-length`, not
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `string=?`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `string-equal`.
-endif::[]
+}
 
 2. The examples should check if the name is longer than 20
    characters, not 10.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 3. The function name in the definition should be `long-name?`.
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 3. The function name in the definition should be `is-long-name`.
-endif::[]
+}
 
 
 4. The body of the function should be
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(< (string-length name) 20)`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `string-length(name) < 20`
-endif::[]
+}
 
 .scale-image
 
@@ -270,30 +270,30 @@ how much to scale by.
 The examples do not use the `scale` function at all, and instead
 change the parameters of the image. The first example should be:
 +
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 ----
 (EXAMPLE (scale-image (circle 5 "solid" "red") "bigger")
          (scale 2 (circle 5 "solid" "red"))
 ----
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 ----
 scale-image(circle(5, "solid", "red"), "bigger") is
          scale(2, circle(5, "solid", "red"))
 ----
-endif::[]
+}
 
 2. The function name in the second example is incorrect.
 
 .state-tax
 
 1. The domain for the function should be
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `String Number`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `String, Number`
-endif::[]
+}
  to account for both
 the state and the price of the item.
 
@@ -311,30 +311,30 @@ the state and the price of the item.
    be consistent throughout the function definition. It should
    instead be `price`.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 .late-to-class?
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 .late-to-class
-endif::[]
+}
 
 1. Both examples should include 4 numbers as inputs.
 
 2. In the first example, `<` should be used in place of `>`.
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 3. Both examples and the function definition should calculate
    distance based on the 4 inputs, such as:
 +
 `((late-to-class? 40 55 80 100) (< 25 (distance 40 55 80 100)))`
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 3. Both examples and the function definition should calculate
    distance based on the 4 inputs, such as:
 +
 `late-to-class(40, 55, 80, 100) is 25 < distance(40, 55, 80, 100)`
-endif::[]
+}
 
 4. The two examples should be different from each other.  Since
    the function returns a Boolean, good practice would be to make

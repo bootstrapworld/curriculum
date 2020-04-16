@@ -2,7 +2,6 @@
 
 @lesson-description{Students learn the basics of using a programming environment.}
 
-
 [.left-header,cols="20a,80a", stripes=none]
 |===
 @prereqs-stds{}
@@ -12,23 +11,20 @@
 * Practice using the programming environment.
 * Collaborate using the Pair Programming model.
 
-
 |Student-Facing Lesson Goals
 |
 * I know the basics of how to use the programming environment.
-* I can explain the difference between the driver and the navigator.  
-
+* I can explain the difference between the driver and the navigator.
 
 |Required Materials
 |
 * Computers connected to the Internet
-// ifeval::["{proglang}" == "wescheme"]
-// * Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides}) 
+// @ifproglang{wescheme}{
+// * Lesson slides template (@link{https://docs.google.com/presentation/d/1gPY40bnT1J8Or147mcUd6oPh_W_Ugf-gJs5Va3FN4vk/view, Google Slides})
 // endif::[]
-// ifeval::["{proglang}" == "pyret"] 
+// @ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1qrNx_92gKl8kzYzM_ksttAlMUw9jz-fILVx4rnXZViA, Google Slides})
 // endif::[]
-
 
 |Preparation
 |
@@ -52,7 +48,7 @@ Students should switch Driver/Navigator roles at least once during the lesson.  
 
 ==== Launch
 
-ifeval::["{proglang}" == "pyret"] 
+@ifproglang{pyret}{
 
 Have students go to code.pyret.org, where they'll see the following screen: +
 {empty} +
@@ -70,10 +66,10 @@ Next, they’ll see a screen with several options, including: “Open Editor”,
 [.left-header,cols="20a,80a", stripes=none]
 |===
 |Open Editor
-|Opens the Editor but does not create a new file.  Good for exploring or trying new things.  The file can be saved later if needed. 
+|Opens the Editor but does not create a new file.  Good for exploring or trying new things.  The file can be saved later if needed.
 
 |Recent Files
-|A list of recently opened Pyret files.  When opening a file, be sure to press “Run” before trying to use it.  
+|A list of recently opened Pyret files.  When opening a file, be sure to press “Run” before trying to use it.
 
 |New File
 |Creates a new file with the given name. Opens a new file in the Editor.
@@ -92,10 +88,10 @@ Verify that all students have an open Editor screen and that one student’s Goo
 [.left-header,cols="20a,80a", stripes=none]
 |===
 |Definitions Area
-|The left-side window in the Editor.  A place to store code we want to keep.  It will be used more in later lessons.  Code typed here is performed when the “Run” button is pressed. 
+|The left-side window in the Editor.  A place to store code we want to keep.  It will be used more in later lessons.  Code typed here is performed when the “Run” button is pressed.
 
 |Interactions Area
-|The right-side window in the Editor.  A place to try out code, like scratch paper.  Code typed here clears when the “Run” button is pressed. 
+|The right-side window in the Editor.  A place to try out code, like scratch paper.  Code typed here clears when the “Run” button is pressed.
 
 |"Run" button
 |Pressing this button tells the computer to execute, or “Run”, any code in the Definitions area.  It clears the Interactions area, and any results from the Definitions area will then appear in the Interactions area.  It will be used more in later lessons.
@@ -127,14 +123,13 @@ Have students share what they noticed and display their responses.
 +
 Have students share what they wondered and display their responses.
 
-
 ==== Synthesis (5 minutes)
 
 Ask students to reflect on the Notice and Wonder responses and respond to each other.
 
 To involve more students in the conversation, consider asking:
 
-* *"Who else noticed this?"* 
+* *"Who else noticed this?"*
 * *"Did anyone have a Wonder that was related to a Notice?"*
 * *"Who else wondered this?"* +
 * *“Did anyone try anything that might answer _____’s Wonder?”* +
@@ -146,7 +141,7 @@ To involve more students in the conversation, consider asking:
 ==== Narrative
 
 The purpose of this activity is for students to get practice typing in the programming environment and learn the different parts of that environment.  Students should switch roles frequently during this activity. +
-{empty} + 
+{empty} +
 
 *It is expected that students will encounter error messages during this activity.  Remind students to read the error messages and try to figure them out with their partner before asking for help.*
 
@@ -154,7 +149,7 @@ The purpose of this activity is for students to get practice typing in the progr
 
 Allow for 10 minutes of partner work and 5 minutes of class discussion.  Walk the room to observe student progress and help solve technical issues where needed.
 
-==== Student Task 
+==== Student Task
 
 . What's your favorite number? Type it into the Interactions (right-side) window and press the Enter key.
 . Can Pyret handle negative numbers?  Type a negative number into the Interactions window and press the Enter key.
@@ -198,7 +193,7 @@ The use of parentheses will help students come up with more unique expressions. 
 {empty} +
 The goal is for students to practice their typing, understanding of the coding environment, and number sense.  This activity can be extended with different numbers or requirements that each expression contains at least 2 different math operations.
 
-==== Launch 
+==== Launch
 
 Have students use their Interactions (right-side) window to test out expressions, and save successful expressions, each on their own line, in the Definitions (left-side) window.  When they press “Run”, they should see a sequence of 42s appear in the Interactions window.  This will also help them count their expressions.
 
@@ -234,21 +229,21 @@ Meluan runs her own screen printing store.  She’s teaching her 13 year-old nie
 Meluan tells Natalia that she has to pay $550 in rent every month for the building, and in July every year, she prints shirts for her landlord’s family reunion for a $300 rent discount.  She asks Natalia how much she pays in rent annually. +
 {empty} +
 
-. Natalia writes: 12 * (550 + 300) = 10200 for her number model. 
+. Natalia writes: 12 * (550 + 300) = 10200 for her number model.
 .. Is Natalia’s math sentence computationally correct?  Check it in Pyret.
 .. Is her number model correct?  Why or why not?
 .. If you think the number model is incorrect, how would you explain it? +
 {empty} +
-. Natalia asks about the cost of supplies and Meluan responds that she buys shirts in bulk at a cost of $920 for 250 shirts, which includes the shipping cost of $22.50.  
+. Natalia asks about the cost of supplies and Meluan responds that she buys shirts in bulk at a cost of $920 for 250 shirts, which includes the shipping cost of $22.50.
 .. Natalia wonders how much could Meluan save per shirt if she didn’t have to pay shipping.  She estimates $0.10 per shirt.  Do you think this is a good estimate?  Why or why not?
 .. How could you calculate the savings per shirt?  Explain to your partner.
-.. Calculate how much Meluan could save per shirt if she didn’t have to pay for shipping.  Was Natalia’s estimate a good one?  Why or why not? 
+.. Calculate how much Meluan could save per shirt if she didn’t have to pay for shipping.  Was Natalia’s estimate a good one?  Why or why not?
 
 ==== Student Response
 
 . Students discuss the model.
 .. Yes, it is computationally correct. She didn’t make any mistakes in her arithmetic.
-.. No, the model is not correct.  Reasons include incorrect parentheses and the addition, rather than subtraction, of 300.  Students might use estimation skills to reason that Natalia’s calculation is much too high. 
+.. No, the model is not correct.  Reasons include incorrect parentheses and the addition, rather than subtraction, of 300.  Students might use estimation skills to reason that Natalia’s calculation is much too high.
 .. 12 should be multiplied by 550 first, then 300 should be subtracted. +
 {empty} +
 . Students discuss the problem.

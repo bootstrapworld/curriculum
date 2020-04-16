@@ -2,13 +2,11 @@
 
 #lang racket
 
-(define (read-word i)
-  (let loop ([r '()])
-    (let ([c (peek-char i)])
-      (if (or (char-alphabetic? c) (char=? c #\-))
-          (loop (cons (read-char i) r))
-          (if (null? r) ""
-              (list->string (reverse r)))))))
+(require "readers.rkt")
+
+(define read-group (*make-read-group (lambda z "")))
+
+(define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (define *exercises-list-file* "pages/exercise-pages.txt.kp")
 
@@ -32,22 +30,24 @@
         (when (char=? c #\@)
           (let ([directive (read-word i)])
             ;(printf "ce directive= ~s\n" directive)
-            (when (string=? directive "exercise-link")
-              (let* ([page (read-first-arg i directive)]
-                     [compts (string-split page "/")])
-                ;(printf "doing ex ~s ~s\n" directive page)
-                (when (= (length compts) 2)
-                  (let ([f (cadr compts)])
-                    (unless (member f *exercises-files*)
-                      (set! *exercises-files*
-                        (cons f *exercises-files*)))))))))
+            (cond [(string=? directive "exercise-link")
+                   (let* ([page (read-first-arg i directive)]
+                          [compts (string-split page "/")])
+                     ;(printf "doing ex ~s ~s\n" directive page)
+                     (when (= (length compts) 2)
+                       (let ([f (cadr compts)])
+                         (unless (member f *exercises-files*)
+                           (set! *exercises-files*
+                             (cons f *exercises-files*))))))]
+                  [(string=? directive "ifproglang")
+                   (let ([proglang (read-group i directive)])
+                     (unless (string=? proglang *proglang*)
+                       (read-group i directive)))])))
         (loop)))))
 
 (define (collect-exercises lesson-plan-file)
   ;(printf "doing collect-exercises ~s\n" lesson-plan-file)
-  (call-with-input-file lesson-plan-file
-    (lambda (i)
-      (scan-exercise-directives i)))
+  (call-with-input-file lesson-plan-file scan-exercise-directives)
   (unless (null? *exercises-files*)
     ;(printf "writing collected exercises\n")
     (set! *exercises-files* (reverse *exercises-files*))

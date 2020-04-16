@@ -17,13 +17,13 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1M8A7eX7Ys-CNFvbwDwzoux21Kt5LwUlVTl-EM11fdfU/view, Google Slides})
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1FZsKNPlWYBBAKFA_YuBcaoJojIDJgul1jI-lipIhDVg, Google Slides})
-endif::[]
+}
 
 * Exploring Image Functions (@workbook-link{pages/exploring-image-functions.adoc, original}, @link{solution-pages/exploring-image-functions.adoc, solutions})
 
@@ -38,14 +38,14 @@ endif::[]
 
 | Supplemental Resources
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Functions Review (@link{https://quizizz.com/admin/quiz/5d9919776c6f17001a9dc6a0, Quizizz})
 * Domain and Range Review (@link{https://teacher.desmos.com/activitybuilder/custom/5d991ae71172d473178c9816, Desmos Activity})
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 * Contracts Review #1 (@link{https://quizizz.com/admin/quiz/5d69763f62e850001a0b0433, Quizizz})
-endif::[]
+}
 
 | Key Points For The Facilitator
 |
@@ -77,15 +77,15 @@ A String is anything in quotation marks. _Anything_.
 
 String values evaluate to themselves, the same way Numbers do. Have a Circle of Evaluation up in front of students. _What will this evaluate to?_
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Show a line of code: `(* 10 -4)`.  _What will this evaluate to?_
 Show another line of code: `(star 50 “solid” “blue”)`.  _What will this evaluate to?_
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 Show a line of code: `10 * -4`.  _What will this evaluate to?_
 Show another line of code: `star(50, “solid”, “blue”)`.  _What will this evaluate to?_
-endif::[]
+}
 
 - What happened?
 - What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
@@ -100,13 +100,13 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 - Have students type `star` into the Interactions Area and hit "Enter". What did they get back? What do they think it means? _Students learn that there is a function called_ `star`.
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try 
-ifeval::["{proglang}" == "wescheme"]
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try
+@ifproglang{wescheme}{
 `(star 50)`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `star(50)`
-endif::[]
+}
 
 - What error did we get? What _hint_ does it give us about how to use this function?
 
@@ -114,9 +114,9 @@ endif::[]
 [.lesson-instruction]
 - Have students turn to @workbook-link{pages/exploring-image-functions.adoc, "Exploring Image Functions"}.
 - Have students open a new program file and name it "Exploring Images".
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 - On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
-endif::[]
+}
 
 Give students time to investigate image functions and see how many they can discover, using the workbook page to organize their findings.
 
@@ -152,12 +152,12 @@ A function's contract has three parts: the Name, the @vocab{Domain}, and the @vo
 
 === Investigate
 [.lesson-instruction]
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - Write the contracts for `+`, `-`, `*`, `/`, `sqr`, and `sqrt` into the Contracts page.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 - Write the contracts for `num-sqr`, and `num-sqrt` into the Contracts page.
-endif::[]
+}
 
 [.text-center]
 *A Sample Contracts Table*
@@ -172,18 +172,18 @@ endif::[]
 [.inlineContractTable, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 | Name 			|	| Domain				|		| Range
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 |`;` `+`		| :	| `Number Number` 		|	->	| `Number`
 |`;` `-` 		| :	| `Number Number` 		|	->	| `Number`
 |`;` `sqr`		| :	| `Number`  			|	->	| `Number`
 |`;` `sqrt`		| :	| `Number` 				|	->	| `Number`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 |`#` `+`		| ::| `Number Number` 		|	->	| `Number`
 |`#` `-` 		| ::| `Number Number` 		|	->	| `Number`
 |`#` `num-sqr`	| ::| `Number`  			|	->	| `Number`
 |`#` `num-sqrt`	| ::| `Number` 				|	->	| `Number`
-endif::[] 
+}
 |===
 
 [.lesson-instruction]
@@ -218,20 +218,20 @@ _Yes, yes, and yes!_
 - *Can we up with an example of two math functions that have the same Domain and Range?*
 
 [.lesson-point]
-When the input matches what the function consumes, the function produces the output we expect. 
+When the input matches what the function consumes, the function produces the output we expect.
 
 *Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?*
 
 _An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 - *What does the contract for `star` look like?*
 `star : Number String String -> Image`
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 - *What does the contract for `star` look like?*
 `star {two-colons} Number, String, String -> Image`
-endif::[]
+}
 
 === Investigate
 [.lesson-instruction]
@@ -242,7 +242,7 @@ Students create a visual "Contracts page" either digitally or physically.  Ask s
 
 == Additional Exercises:
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 
 - @link{https://quizizz.com/admin/quiz/5cdcb3907f8c98001a203c1b, Bootstrap:Algebra - Contracts, Domain/Range, Data Types, & Functions } (Quizizz)
 
@@ -269,4 +269,4 @@ ifeval::["{proglang}" == "wescheme"]
 - Matching Expressions & Contracts
 (@exercise-link{pages/match-contracts-exprs1.adoc, original} ,
 @exercise-link{solution-pages/match-contracts-exprs1.adoc, answers})
-endif::[]
+}

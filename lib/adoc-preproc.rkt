@@ -2,6 +2,7 @@
 
 #lang racket
 
+(require "readers.rkt")
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
@@ -92,66 +93,7 @@
 
 (define *exercises-done* '())
 
-(define (read-word i)
-  (let loop ([r '()])
-    (let ([c (peek-char i)])
-      (if (or (char-alphabetic? c) (char=? c #\-))
-          (loop (cons (read-char i) r))
-          (if (null? r) ""
-              (list->string (reverse r)))))))
-
-(define (quote-rev-string s)
-  (let ([n (string-length s)])
-    (let loop ([i 0] [r (list #\")])
-      (if (>= i n) (cons #\" r)
-          (let ([c (string-ref s i)])
-            (cond [(char=? c #\") (loop (+ i 1) (cons c (cons #\\ r)))]
-                  [else (loop (+ i 1) (cons c r))]))))))
-
-(define (read-group i directive #:scheme? [scheme? #f])
-  (let ([c (peek-char i)])
-    (cond [(char=? c #\{)
-           (read-char i)
-           (let loop ([r '()]
-                      [in-space? #t]
-                      [nesting 0]
-                      [in-string? #f]
-                      [in-escape? #f])
-             (let ([c (read-char i)])
-               (cond [(eof-object? c)
-                         (error 'ERROR "read-group: Runaway directive ~a" directive)]
-                     [in-escape? (loop (cons c r) #f nesting in-string? #f)]
-                     [(char=? c #\\)
-                      (loop (cons c r) #f nesting in-string? #t)]
-                     [in-string?
-                       (if (char=? c #\")
-                           (loop (cons c r) #f nesting #f #f)
-                           (loop (cons c r) #f nesting #t #f))]
-                     [(and scheme? (char=? c #\@))
-                      (let* ([directive (read-word i)]
-                             [gp (read-group i directive #:scheme? #t)])
-                        ;(printf "dir=~a gp= ~s\n" directive gp)
-                        (when (string=? directive "code")
-                          (set! gp (code gp)))
-                        ;(printf "dir=~a gp'= ~s\n" directive gp)
-                        (loop (append (quote-rev-string gp) r)
-                              #f nesting #f #f))]
-                     [(char=? c #\")
-                      (loop (cons c r) #f nesting #t #f)]
-                     [(member c '(#\space #\tab #\newline #\return))
-                      (if scheme?
-                          (loop (cons c r) #f nesting #f #f)
-                          (loop (if in-space? r (cons #\space r)) #t nesting #f #f))]
-                     [(char=? c #\{)
-                      (loop (cons c r) #f (+ nesting 1) #f #f)]
-                     [(char=? c #\})
-                      (if (= nesting 0)
-                          (string-trim (list->string (reverse r)))
-                          (loop (cons c r) #f (- nesting 1) #f #f))]
-                     [else (loop (cons c r) #f nesting #f #f)])))]
-          [else
-            (printf "WARNING: Ill-formed metadata directive @~a\n" directive)
-            ""])))
+(define read-group (*make-read-group (lambda z (apply code z))))
 
 (define (read-commaed-group i directive)
   (let* ([g (read-group i directive)]
@@ -702,7 +644,7 @@
                    ;(printf "directive = ~s~%" directive)
                    (cond [(string=? directive "") (display c o)]
                          [(string=? directive "span")
-                          (display-begin-span (string-trim (read-group i directive)) o)
+                          (display-begin-span (read-group i directive) o)
                           ]
                          [(string=? directive "comment")
                           (let ([prose (read-group i directive)])
@@ -846,27 +788,28 @@
                           (newline o)
                           (display (enclose-span ".clear" " ") o)]
                          [(string=? directive "vspace")
-                          (let ([height (string-trim (read-group i directive))])
+                          (let ([height (read-group i directive)])
                             (display
                               (string-append
                                 (create-begin-tag "span" ".vspace" #:attribs
                                                   (format "style=\"height: ~a\"" height))
                                 (create-end-tag "span")) o))]
                          [(string=? directive "quad")
-                          (let ([width (string-trim (read-group i directive))])
+                          (let ([width (read-group i directive)])
                             (display
                               (string-append
                                 (create-begin-tag "span" ".quad" #:attribs
                                                   (format "style=\"width: ~a\"" width))
                                 (create-end-tag "span")) o))]
                          [(string=? directive "fitb")
-                          (let ([width (string-trim (read-group i directive))])
-                            (display-begin-span 
+                          (let ([width (read-group i directive)])
+                            (display-begin-span
                               ".fitb" o #:attribs (format "style=\"width: ~a\"" width)))]
                          [(string=? directive "fitbruby")
-                          (let* ([width (string-trim (read-group i directive))]
-                                 [text (string-trim (read-group i directive))]
-                                 [ruby (string-trim (read-group i directive))])
+                          ;FIXME: text should be processed, see fitb above
+                          (let* ([width (read-group i directive)]
+                                 [text (read-group i directive)]
+                                 [ruby (read-group i directive)])
                             (display
                               (string-append
                                 (create-begin-tag "span" ".fitbruby" #:attribs
@@ -877,6 +820,11 @@
                                   ruby
                                   (create-end-tag "span"))
                                 (create-end-tag "span")) o))]
+                         [(string=? directive "ifproglang")
+                          (let ([proglang (read-group i directive)])
+                            (if (string=? proglang *proglang*)
+                                (display-begin-span "" o)
+                                (read-group i directive)))]
                          [(assoc directive *macro-list*)
                           => (lambda (s)
                                (display (cadr s) o))]

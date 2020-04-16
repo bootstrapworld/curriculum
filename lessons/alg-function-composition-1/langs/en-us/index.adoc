@@ -18,12 +18,12 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1BvOHRghJtY7vKSc_Icirlt7bVolrMjxGf0r4NfRsR48/view, Google Slides})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1IAViGbTynOiKoAu9RqOMqpIjRiFtfv6ac1GKcGlwaS8, Google Slides})
-endif::[]
+}
 
 * Composing Image Functions (@workbook-link{pages/composing-image-functions.adoc, original}, @link{solution-pages/composing-image-functions.adoc, solutions})
 
@@ -49,12 +49,12 @@ endif::[]
 |===
 
 == Warmup
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Students should be logged on to @link{https://www.wescheme.org, WeScheme}.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 Students should be logged on to @link{https://code.pyret.org, code.pyret.org}.
-endif::[]
+}
 
 == Composing Functions @duration{20 minutes}
 
@@ -99,20 +99,20 @@ _The scale factor, the percent by which the image should grow or shrink_
 _The rotation angle, measured counterclockwise_
 
 - *Suppose I wrote the code
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 `(scale 3 (star 50 “solid” “red”))`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 `scale(3, star(50, "solid", "red"))`.
-endif::[]
+}
   What’s another line of code I could write that would produce the exact same image?*
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 _``(star 150 "solid" "red")``_
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 _``star(150, "solid", "red")``_
-endif::[]
+}
 
 - *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the text function as an input for `flip-horizontal`?*
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
@@ -154,12 +154,12 @@ Create an Image that uses the text function and at least 3 of following function
 - any other image producing function (`triangle`, `star`, `circle`, `rectangle`, etc..)
 
 Students should practice writing *comments* in the code to describe what is being produced.
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Use `;` at the beginning of a line to write a comment.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 Use `#` at the beginning of a line to write a comment.
-endif::[]
+}
 
 == Additional Exercises:
 * @link{https://www.geogebra.org/m/nqymeFc4, Function Composition Dynamic Illustrator I} (Geogebra)

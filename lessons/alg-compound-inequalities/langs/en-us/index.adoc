@@ -2,7 +2,6 @@
 
 @lesson-description{Students learn to compose inequalities using the concepts of union and intersection, and solve problems using compound inequalities. Finally, they apply what they've learned to set screen boundaries in their game.}
 
-
 [@lesson-intro-table]
 |===
 @prereqs-stds{alg-simple-inequalities}
@@ -22,12 +21,12 @@
 
 | Materials
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1-Ey-m1iwpwIQt_nMbWrobg8b8AGFPBokM68U-lEgANA/edit?usp=sharing, Google Slides})
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1kKYXX9tdZhYDjRYrrJU0TXajLVdnEcs5HSOgkqCZIcE, Google Slides})
-endif::[]
+}
 * Inequalities Explore worksheet (@workbook-link{pages/and-or.adoc, original}, @link{solution-pages/and-or.adoc, solutions})
 * Design Recipe: onscreen? (@workbook-link{pages/onscreen.adoc, original}, @link{solution-pages/onscreen.adoc, solution})
 
@@ -49,12 +48,12 @@ Bootstrap Formative Assessments
 
 | Key Points for the Facilitator
 |
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 * Role-playing can help students understand the job of `onscreen`?, and how it relates to `safe-left?` and `safe-right?`.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 * Role-playing can help students understand the job of `is-onscreen`, and how it relates to `is-safe-left` and `is-safe-right`.
-endif::[]
+}
 * If a student's `TARGET` and `DANGER` image seem to be "getting stuck" on the edge of the screen, the student may have to adjust the side boundaries depending on the size of their images.
 * The code for the boundary functions in the game is _exactly the same_ as in Sam the Butterfly.
 
@@ -62,13 +61,13 @@ endif::[]
 
 == Warmup
 
-Students should have their computer, contracts page, and pencil and be logged in to 
-ifeval::["{proglang}" == "wescheme"]
+Students should have their computer, contracts page, and pencil and be logged in to
+@ifproglang{wescheme}{
 @link{https://www.wescheme.org, WeScheme }
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 @link{https://code.pyret.org, code.pyret.org }
-endif::[]
+}
 with their Game Project file open.
 
 == Compound Inequalities @duration{10 minutes}
@@ -114,16 +113,16 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 Students solve a word problem involving compound inequalities, using `and` to compose the simpler boundary-checking functions from the previous lesson.
 
 === Launch
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 *Note:* In this programming language, question marks are prounced "huh?". So `safe-left?` would be prounounced "safe left huh?" This can be a source of some amusement for students!
-endif::[]
+}
 
 - Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. Give them 1 minute to read the contract and code, as written in the program.
 
 - As in the previous lesson, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "(safe-left? 20)!", "(safe-right? -100)!", "(onscreen? 829)!") *Note"* the code for `onscreen` _calls the safe-left function!_. So the student roleplaying `onscreen` should turn to `safe-left` and give the input to them.
 
 For example:
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 
 - *Facilitator*: "onscreen-huh 70"
 - *onscreen?* (turns to safe-left?): "safe-left-huh 70"
@@ -145,17 +144,17 @@ ifeval::["{proglang}" == "wescheme"]
 
 *Ask the rest of the class*
 
-- What is the problem with `onscreen?`? 
+- What is the problem with `onscreen?`?
 +
 _It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
-- How can `onscreen?` check with both?  
+- How can `onscreen?` check with both?
 +
 _It needs to talk to `safe-left?` AND ``safe-right?``_
 
 Have students complete @workbook-link{pages/onscreen.adoc, Design Recipe: onscreen?}. When this functions is entered into WeScheme, students should now see that Sam is protected on _both_ sides of the screen.
-endif::[]
+}
 
-ifeval::["{proglang}" == "pyret"]
+@ifproglang{pyret}{
 - *Facilitator*: "is-onscreen 70"
 - *is-onscreen* (turns to is-safe-left): "is-safe-left 70"
 - *is-safe-left*: "true"
@@ -175,15 +174,15 @@ ifeval::["{proglang}" == "pyret"]
 {empty} +
 
 *Ask the rest of the class-* +
-* What is the problem with `is-onscreen`? 
+* What is the problem with `is-onscreen`?
 +
 _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
-* How can `is-onscreen` check with both?  
+* How can `is-onscreen` check with both?
 +
 _It needs to talk to `is-safe-left` AND ``is-safe-right``_
 
 Have students complete @workbook-link{pages/onscreen.adoc, Design Recipe: is-onscreen}. When this functions is entered into WeScheme, students should now see that Sam is protected on _both_ sides of the screen.
-endif::[]
+}
 
 [.strategy-box]
 .Extension Option
@@ -198,7 +197,7 @@ Students identify common patterns between 2-dimensional boundary detection and d
 
 === Launch
 
-Have students open their in-progress game file and press Run.  
+Have students open their in-progress game file and press Run.
 
 - How are the `TARGET` and `DANGER` behaving right now? +
 _They move across the screen._
@@ -214,12 +213,12 @@ _We can teach the computer to compare the image's @vocab{coordinates} to a numer
 
 === Investigate
 
-ifeval::["{proglang}" == "wescheme"]
+@ifproglang{wescheme}{
 Students apply what they learned from Sam the Butterly to fix the `safe-left?`, `safe-right?`, and `onscreen?` functions in their own code.
-endif::[]
-ifeval::["{proglang}" == "pyret"]
+}
+@ifproglang{pyret}{
 Students apply what they learned from Sam the Butterly to fix the `is-safe-left`, `is-safe-right`, and `is-onscreen` functions in their own code.
-endif::[]  
+}
 Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
 
 === Common Misconceptions
