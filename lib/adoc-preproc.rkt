@@ -1035,6 +1035,7 @@
   ;(printf "doing add-exercises\n")
   (when (and *force* (cons? *exercises-done*))
     ;(printf "doing add-exercises I\n")
+    (set! *exercises-done* (reverse *exercises-done*))
     (call-with-output-file *pathway-exercises-file*
       (lambda (o)
         (for ([ex *exercises-done*])
