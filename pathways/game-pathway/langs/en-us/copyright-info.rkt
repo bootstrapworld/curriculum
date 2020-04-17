@@ -1,4 +1,4 @@
 (
  ("name" "BS:Games")
- ("author" "Jen Poole, Emmanuel Schanzer and Ed Campos Jr")
+ ("author" "Jen Poole, Emmanuel Schanzer, Ed Campos Jr, and Dorai Sitaram")
  )
