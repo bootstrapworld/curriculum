@@ -552,6 +552,9 @@ function processadoc() {
         resolveabbrevs $fhtml
         insertprintcss_browser $fhtml
         insertwbpagecss_browser $fhtml
+        if test ! $SOLUTION -a ! $OTHERDIR; then
+          insertgdrivesave $fhtml
+        fi
         if test ! $NOPDF; then
           fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
