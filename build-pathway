@@ -17,6 +17,7 @@ LASTMOD=2020-04-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
+NOPARALLEL=
 
 while test $# -ne 0; do
   arg=$1; shift
@@ -38,6 +39,8 @@ while test $# -ne 0; do
     LINT=1
   elif test "$arg" = --nopdf; then
     NOPDF=1
+  elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
+    NOPARALLEL=1
   elif test "$arg" = --proglang; then
     PROGLANG=$1; #echo PROGLANG is $PROGLANG
     shift
@@ -633,9 +636,15 @@ function recursiveadoc() {
   fi
 
   for f in *.adoc; do
-    processadoc "$f"  &
+    if test $NOPARALLEL; then
+      processadoc "$f"
+    else
+      processadoc "$f" &
+    fi
   done
-  wait
+  if test ! $NOPARALLEL; then
+    wait
+  fi
 
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
@@ -844,9 +853,15 @@ function buildlessonplans() {
   else
     for L in $(cat lessons.txt); do
       # needed?
-      buildlessonplan $L &
+      if test $NOPARALLEL; then
+        buildlessonplan $L
+      else
+        buildlessonplan $L &
+      fi
     done
-    wait
+    if test ! $NOPARALLEL; then
+      wait
+    fi
     export L=
   fi
   cd ..
@@ -1262,12 +1277,22 @@ function buildpathway() {
         #echo calling make-workbook.rkt
         for wbf in workbook pd-workbook workbook-sols; do
           if test $DEBUG; then
-            $PROGDIR/make-workbook.rkt $wbf &
+            if test $NOPARALLEL; then
+              $PROGDIR/make-workbook.rkt $wbf
+            else
+              $PROGDIR/make-workbook.rkt $wbf &
+            fi
           else
-            $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+            if test $NOPARALLEL; then
+              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
+            else
+              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+            fi
           fi
         done
-        wait
+        if test ! $NOPARALLEL; then
+          wait
+        fi
         if test ! $DEBUG; then
           for wbf in workbook pd-workbook; do
             rm -f $wbf-*.pdf
