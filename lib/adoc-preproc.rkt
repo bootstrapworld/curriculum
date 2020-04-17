@@ -1080,7 +1080,7 @@
                   "Select particular standards from the following menu to see\n"
                   "which items in the standards are met.\n"))
               o)]
-          [else (display "Relevant Standards\n" o)])
+          [else (display "Relevant Standards" o)])
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
@@ -1109,7 +1109,7 @@
         (when *lesson*
           (fprintf op (string-append
                         "\n[.alignedStandardsIntro]\n"
-                        "_Select one or more standards from the menu on the left (⌘-click\n"
+                        "_Select one or more standards from the menu on the left (⌘-click "
                         "on Mac, Ctrl-click elsewhere)._\n\n")))
         (for ((dict *dictionaries-represented*))
           (let ([dict-standards-met

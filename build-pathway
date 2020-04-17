@@ -218,6 +218,10 @@ function modifygdrivepage() {
     -e '/include virtual=".menubar.ssi"/d' \
     -e 's/<h[23456] /<strong>\0/' \
     -e 's/<\/h[23456]>/\0<\/strong>/' \
+    -e 's/^<p>Relevant Standards<select.*<\/select><\/p> *$/<p>Standards<\/p>/' \
+    -e '/^<p><em>Select one or more standards from the menu on the left.*<\/p> *$/d' \
+    -e 's/\(class="paragraph \)alignedStandardsIntro/\1/' \
+    -e 's/\(class="dlist \)alignedStandards /\1/' \
     $f
 
 }
