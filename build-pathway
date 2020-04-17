@@ -1147,7 +1147,7 @@ function buildpathway() {
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
       grep -v '^ *;' lesson-order.txt|grep -v '^ *$' > lessons/lessons.txt
-      sed -e 's/ *\(.*\)/lessons\/\1/' lessons/lessons.txt > workbook-lessons.txt
+      $SED -e 's/ *\(.*\)/lessons\/\1/' lessons/lessons.txt > workbook-lessons.txt
       for lsn in $(cat lessons/lessons.txt); do
         lsndir=lessons/$lsn
         mkdir -p $lsndir
