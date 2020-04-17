@@ -126,12 +126,21 @@ Suppose we want to define a shortcut called `gt`. When we give it a number, it m
 
 Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Run through some sample examples before having the class add their own:
 
+@ifproglang{wescheme}{
 - You say: *gt 20!*
 The student responds: _(triangle 20 "solid" "green")!_
 - You say: *gt 200!*
 The student responds: _(triangle 200 "solid" "green")!_
 - You say: *gt 99!*
-The student responds: _(triangle 99 "solid" "green")!_
+The student responds: _(triangle 99 "solid" "green")!_ }
+
+@ifproglang{pyret}{
+- You say: *gt 20!*
+The student responds: _triangle(20, "solid", "green")!_
+- You say: *gt 200!*
+The student responds: _triangle(200, "solid", "green")!_
+- You say: *gt 99!*
+The student responds: _triangle(99, "solid", "green")!_ }
 
 We need to program the computer to be as smart as our volunteer. But how do we do that?
 
@@ -173,6 +182,7 @@ _The number is changing in each example.  We could name it "x", but "size" is a 
 }
 
 - *4. Write the function definition.* +
+
 @ifproglang{wescheme}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it.__ }
 @ifproglang{pyret}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`.__ }
 
@@ -204,7 +214,7 @@ _Number_
 == Practicing the Design Recipe
 
 === Overview
-This is a chance to review the steps students learned in the prior activity, with the teacher gradually fading to the role of coach.
+This is a chance for students to independently review the steps learned in the prior activity, with the teacher in a supporting role asking guiding questions and giving support when needed.  
 
 === Launch
 *Word Problem: Write a function called `gold-star` that takes in number and produces a solid, gold star of that given size.*
