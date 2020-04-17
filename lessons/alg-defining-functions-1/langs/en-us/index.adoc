@@ -116,9 +116,9 @@ _We defined values in the Definitions area._
 We've learned how to define *values* when we want to create a shortcut to reuse the same code over and over.
 
 For example:
-@ifproglang{wescheme}{ `(define myStar (star 50 "solid" "gold"))` }
+@ifproglang{wescheme}{ (define myStar (star 50 "solid" "gold")) }
 
-@ifproglang{pyret}{ `myStar = star(50, "solid", "gold")` }
+@ifproglang{pyret}{ myStar = star(50, "solid", "gold") }
 
 *But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
 
@@ -153,11 +153,12 @@ _An Image. Students may say "a triangle", follow up by asking what data type tha
 @ifproglang{wescheme}{ `(gt 40)` }
 @ifproglang{pyret}{ `gt(40)` }
 , what would I want the program to do? +
-_I'd want the computer the execute the code
-@ifproglang{wescheme}{ `(triangle 40 "solid" "green")`._  }
-@ifproglang{pyret}{    `triangle(40, "solid", "green")`._ }
+_I'd want the computer the execute the code_
+@ifproglang{wescheme}{ `(triangle 40 "solid" "green")`.  }
+@ifproglang{pyret}{    `triangle(40, "solid", "green")`. }
 
 _This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!_ 
+
 - Have students complete the @workbook-link{pages/MappingExamplesWithCoE2.adoc, Circle of Evaluation mapping} worksheet showing how their function examples are working.
 
 - *3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
@@ -172,14 +173,14 @@ _The number is changing in each example.  We could name it "x", but "size" is a 
 }
 
 - *4. Write the function definition.* +
-@ifproglang{wescheme}{ _Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it._ }
-@ifproglang{pyret}{ _Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`. }
+@ifproglang{wescheme}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it.__ }
+@ifproglang{pyret}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`.__ }
 
 @ifproglang{wescheme}{
-_``(define (gt size) (triangle size, "solid", "green"))``_
+ (define (gt size) (triangle size, "solid", "green"))
 }
 @ifproglang{pyret}{
-_``fun gt(size): triangle(size, "solid", "green") end``_
+ fun gt(size): triangle(size, "solid", "green") end
 }
 
 [.strategy-box]
