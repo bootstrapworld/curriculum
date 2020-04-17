@@ -13,10 +13,11 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-16 # last modified
+LASTMOD=2020-04-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
+NOPARALLEL=
 
 while test $# -ne 0; do
   arg=$1; shift
@@ -38,6 +39,8 @@ while test $# -ne 0; do
     LINT=1
   elif test "$arg" = --nopdf; then
     NOPDF=1
+  elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
+    NOPARALLEL=1
   elif test "$arg" = --proglang; then
     PROGLANG=$1; #echo PROGLANG is $PROGLANG
     shift
@@ -149,15 +152,19 @@ function insertbodyid() {
 
 function insertgdrivesave() {
   local f=$1
+  local f_head=${f%.*}
+  local f_ext=${f##*.}
+  local other_f=$f_head-gdrive-import.$f_ext
   #echo DOING INSERTGDRIVESAVE $f
-  local indexTitle=$(head -n 1 index-title.txt)
-  #echo indexTitle is $indexTitle
-  local x=$(pwd)
-  #echo x is $x
+  if test -f $f_head.adoc; then
+    indexTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//')
+  fi
+  if test ! "$indexTitle"; then
+    indexTitle=$f_head
+  fi
+  #echo indexTitle of $f_head.adoc is $indexTitle
   indexURL=https://www.bootstrapworld.org/materials/spring2020/courses/$TGTPATHWAY
-  indexURL="$indexURL/$(basename $(dirname $(dirname $x)))"
-  indexURL="$indexURL/$(basename $(dirname $x))"
-  indexURL="$indexURL/$(basename $x)/index-gdrive-import.shtml"
+  indexURL="$indexURL/$LESSONSUBDIR/$other_f"
   #echo indexURL is $indexURL
   echo \"$indexURL\" > gdriveurl.txt
   indexURL=$(echo $indexURL|$SED -e 's/\//\\\//g')
@@ -199,6 +206,9 @@ EOF
     -e '/%INSERTGDRIVEURL/r gdriveurl.txt' \
     -e 's/%INSERTGDRIVEURL//' \
     $f
+
+  cp -p $f $other_f
+  modifygdrivepage $other_f
 }
 
 function modifygdrivepage() {
@@ -208,6 +218,10 @@ function modifygdrivepage() {
     -e '/include virtual=".menubar.ssi"/d' \
     -e 's/<h[23456] /<strong>\0/' \
     -e 's/<\/h[23456]>/\0<\/strong>/' \
+    -e 's/^<p>Relevant Standards<select.*<\/select><\/p> *$/<p>Standards<\/p>/' \
+    -e '/^<p><em>Select one or more standards from the menu on the left.*<\/p> *$/d' \
+    -e 's/\(class="paragraph \)alignedStandardsIntro/\1/' \
+    -e 's/\(class="dlist \)alignedStandards /\1/' \
     $f
 
 }
@@ -267,7 +281,7 @@ function removelogos() {
 }
 
 function moveheaderlogopos() {
-  #XXX: Not used anymore?
+  #TODO: Not used anymore?
   local f=$1
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
@@ -521,13 +535,12 @@ function setmathdelay() {
   fi
 }
 
-
 function processadoc() {
   local f="$1"
 
   if test ! -f "$f"; then
     if test "$dir" = "pages"; then
-      echo No adoc files in $L/$LESSONSUBDIR
+      echo No adoc files in $LESSONSUBDIR
     fi
   elif echo $f|grep -q ' '; then
     echo Discarding file \'$f\' with space in its name
@@ -544,13 +557,16 @@ function processadoc() {
       if test $f -nt $fhtml; then DOIT=1; fi
     fi
     if test $DOIT; then
-      echo building $PATHWAY/\*\*/$L/$LESSONSUBDIR/$f
+      echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
         resolveabbrevs $fhtml
         insertprintcss_browser $fhtml
         insertwbpagecss_browser $fhtml
+        if test ! $SOLUTION -a ! $OTHERDIR; then
+          insertgdrivesave $fhtml
+        fi
         if test ! $NOPDF; then
           fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
@@ -588,15 +604,15 @@ function recursiveadoc() {
 
   #echo recursiveadoc of $dir
 
-  export PATHWAYROOTDIR="$oldPATHWAYROOTDIR../"
-  export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
-
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
   cd "$dir"
+  export PATHWAYROOTDIR="$oldPATHWAYROOTDIR../"
+  export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
 
   for d in *; do
     if test -d "$d"; then
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -624,9 +640,15 @@ function recursiveadoc() {
   fi
 
   for f in *.adoc; do
-    processadoc "$f"  &
+    if test $NOPARALLEL; then
+      processadoc "$f"
+    else
+      processadoc "$f" &
+    fi
   done
-  wait
+  if test ! $NOPARALLEL; then
+    wait
+  fi
 
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
@@ -645,6 +667,11 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d-2
   fi
   cp -pr $d solution-$d-2
+
+  rm -fr solution-$d-2/*.html solution-$d-2/**/*.html \
+    solution-$d-2/*.shtml solution-$d-2/**/*.shtml \
+    solution-$d-2/*.pdf solution-$d-2/**/*.pdf
+
   cp -p $PROGDIR/.hta* solution-$d-2
 
   if test -d solution-$d; then
@@ -706,11 +733,12 @@ function buildworkbookpages() {
 
   #
   export PATHWAYROOTDIR="../../"
-  export LESSONSUBDIR="."
+  #export LESSONSUBDIR="."
   export SOLUTION=
 
   for d in *; do
     if test -d "$d"; then
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -738,10 +766,14 @@ function buildlessonplan() {
   #echo
   #echo building $PATHWAY "->" $L lesson plan
 
+  #FIXME: phase out LESSON
   export LESSON=lessons/$L
   export LESSONPLAN=$L
 
+  local oldLESSONSUBDIR=$LESSONSUBDIR
+
   cd $L
+  export LESSONSUBDIR=$oldLESSONSUBDIR/$L
 
   if test -f index.asciidoc; then
     #cp -p $PROGDIR/*.css .
@@ -766,8 +798,8 @@ function buildlessonplan() {
       cleanupduration index.shtml
       lintlesson index.shtml
       insertgdrivesave index.shtml
-      cp -p index.shtml index-gdrive-import.shtml
-      modifygdrivepage index-gdrive-import.shtml
+      #cp -p index.shtml index-gdrive-import.shtml
+      #modifygdrivepage index-gdrive-import.shtml
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
@@ -797,6 +829,7 @@ function buildlessonplan() {
   cd ..
 
   export LESSONPLAN=
+  export LESSONSUBDIR=$oldLESSONSUBDIR
   export LESSON=
 }
 
@@ -809,29 +842,39 @@ function buildlessons() {
     for L in $(cat lessons.txt); do
       export LESSON=lessons/$L
       export PATHWAYROOTDIR=../../
+      export LESSONSUBDIR=lessons/$L
       buildworkbookpages $L
-      export PATHWAYROOTDIR=./
-      export LESSON=
     done
     export L=
   fi
   cd ..
+  export PATHWAYROOTDIR=./
+  export LESSON=
+  export LESSONSUBDIR=
 }
 
 function buildlessonplans() {
   #echo buildlessonplans in $(pwd)
   cd lessons
+  export LESSONSUBDIR=lessons
   if test ! -f lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
     for L in $(cat lessons.txt); do
       # needed?
-      buildlessonplan $L &
+      if test $NOPARALLEL; then
+        buildlessonplan $L
+      else
+        buildlessonplan $L &
+      fi
     done
-    wait
+    if test ! $NOPARALLEL; then
+      wait
+    fi
     export L=
   fi
   cd ..
+  export LESSONSUBDIR=
 }
 
 function makeglossaryandstandards() {
@@ -901,6 +944,7 @@ function buildpathwaynarrative() {
       #moveheaderlogopos index.shtml
       insertnarrativecss index.shtml
       #cleanuptitle index.shtml
+      insertgdrivesave index.shtml
     fi
 
     checklinks index.shtml
@@ -1027,6 +1071,7 @@ function makeworkbooktex() {
 function buildteacherresource() {
   cd resources
   export PATHWAYROOTDIR=../
+  export LESSONSUBDIR=resources
   #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
   cp -p $PROGDIR/.hta* .
   local copacetic=1
@@ -1053,11 +1098,13 @@ function buildteacherresource() {
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
       cleanuptitle index.shtml
+      insertgdrivesave index.shtml
     fi
     checklinks index.shtml
   fi
   cd ..
   export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
 }
 
 function buildpathway() {
@@ -1111,7 +1158,7 @@ function buildpathway() {
 
     export PATHWAYROOTDIR=./
 
-    # XXX probably not needed?
+    # TODO probably not needed?
     if test -f lessons-and-standards.rkt; then
       cp -p lessons-and-standards.rkt $PROGDIR
     fi
@@ -1124,7 +1171,7 @@ function buildpathway() {
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
       grep -v '^ *;' lesson-order.txt|grep -v '^ *$' > lessons/lessons.txt
-      sed -e 's/ *\(.*\)/lessons\/\1/' lessons/lessons.txt > workbook-lessons.txt
+      $SED -e 's/ *\(.*\)/lessons\/\1/' lessons/lessons.txt > workbook-lessons.txt
       for lsn in $(cat lessons/lessons.txt); do
         lsndir=lessons/$lsn
         mkdir -p $lsndir
@@ -1177,16 +1224,18 @@ function buildpathway() {
 
     for d in front-matter back-matter; do
       test -d "$d" || break
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     done
 
     cd resources
 
     export PATHWAYROOTDIR=../
+    export LESSONSUBDIR=resources
 
     for d in *; do
       if test -d "$d"; then
-        adjustproglangsubdirs "$d" # XXX maybe in a separate loop so potential xrefs work
+        adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
         #echo making pathways lessons
         #export SOLUTION=
         #echo L is $L
@@ -1194,12 +1243,14 @@ function buildpathway() {
         #echo LESSONSUBDIR is $LESSONSUBDIR
         #echo SOLUTION is $SOLUTION
 
+        #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
         recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       fi
     done
 
-    export PATHWAYROOTDIR=./
     cd ..
+    export PATHWAYROOTDIR=./
+    export LESSONSUBDIR=
 
     # Racket version
     # $PROGDIR/make-workbook-tex.rkt
@@ -1227,7 +1278,7 @@ function buildpathway() {
           rm $ABYSS.html
         fi
 
-        #XXX:  ↓ not needed?
+        #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
         #echo
@@ -1235,12 +1286,22 @@ function buildpathway() {
         #echo calling make-workbook.rkt
         for wbf in workbook pd-workbook workbook-sols; do
           if test $DEBUG; then
-            $PROGDIR/make-workbook.rkt $wbf &
+            if test $NOPARALLEL; then
+              $PROGDIR/make-workbook.rkt $wbf
+            else
+              $PROGDIR/make-workbook.rkt $wbf &
+            fi
           else
-            $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+            if test $NOPARALLEL; then
+              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
+            else
+              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+            fi
           fi
         done
-        wait
+        if test ! $NOPARALLEL; then
+          wait
+        fi
         if test ! $DEBUG; then
           for wbf in workbook pd-workbook; do
             rm -f $wbf-*.pdf
