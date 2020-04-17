@@ -153,8 +153,13 @@ function insertgdrivesave() {
   local f_ext=${f##*.}
   local other_f=$f_head-gdrive-import.$f_ext
   #echo DOING INSERTGDRIVESAVE $f
-  local indexTitle=$(head -n 1 index-title.txt)
-  #echo indexTitle is $indexTitle
+  if test -f $f_head.adoc; then
+    indexTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//')
+  fi
+  if test ! "$indexTitle"; then
+    indexTitle=$f_head
+  fi
+  #echo indexTitle of $f_head.adoc is $indexTitle
   indexURL=https://www.bootstrapworld.org/materials/spring2020/courses/$TGTPATHWAY
   indexURL="$indexURL/$LESSONSUBDIR/$other_f"
   #echo indexURL is $indexURL
