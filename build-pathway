@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-16 # last modified
+LASTMOD=2020-04-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -149,15 +149,14 @@ function insertbodyid() {
 
 function insertgdrivesave() {
   local f=$1
+  local f_head=${f%.*}
+  local f_ext=${f##*.}
+  local other_f=$f_head-gdrive-import.$f_ext
   #echo DOING INSERTGDRIVESAVE $f
   local indexTitle=$(head -n 1 index-title.txt)
   #echo indexTitle is $indexTitle
-  local x=$(pwd)
-  #echo x is $x
   indexURL=https://www.bootstrapworld.org/materials/spring2020/courses/$TGTPATHWAY
-  indexURL="$indexURL/$(basename $(dirname $(dirname $x)))"
-  indexURL="$indexURL/$(basename $(dirname $x))"
-  indexURL="$indexURL/$(basename $x)/index-gdrive-import.shtml"
+  indexURL="$indexURL/$LESSONSUBDIR/$other_f"
   #echo indexURL is $indexURL
   echo \"$indexURL\" > gdriveurl.txt
   indexURL=$(echo $indexURL|$SED -e 's/\//\\\//g')
@@ -199,6 +198,9 @@ EOF
     -e '/%INSERTGDRIVEURL/r gdriveurl.txt' \
     -e 's/%INSERTGDRIVEURL//' \
     $f
+
+  cp -p $f $other_f
+  modifygdrivepage $other_f
 }
 
 function modifygdrivepage() {
@@ -267,7 +269,7 @@ function removelogos() {
 }
 
 function moveheaderlogopos() {
-  #XXX: Not used anymore?
+  #TODO: Not used anymore?
   local f=$1
   $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
   $SED -i \
@@ -521,13 +523,12 @@ function setmathdelay() {
   fi
 }
 
-
 function processadoc() {
   local f="$1"
 
   if test ! -f "$f"; then
     if test "$dir" = "pages"; then
-      echo No adoc files in $L/$LESSONSUBDIR
+      echo No adoc files in $LESSONSUBDIR
     fi
   elif echo $f|grep -q ' '; then
     echo Discarding file \'$f\' with space in its name
@@ -544,7 +545,7 @@ function processadoc() {
       if test $f -nt $fhtml; then DOIT=1; fi
     fi
     if test $DOIT; then
-      echo building $PATHWAY/\*\*/$L/$LESSONSUBDIR/$f
+      echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
@@ -588,15 +589,15 @@ function recursiveadoc() {
 
   #echo recursiveadoc of $dir
 
-  export PATHWAYROOTDIR="$oldPATHWAYROOTDIR../"
-  export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
-
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
   cd "$dir"
+  export PATHWAYROOTDIR="$oldPATHWAYROOTDIR../"
+  export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
 
   for d in *; do
     if test -d "$d"; then
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -706,11 +707,12 @@ function buildworkbookpages() {
 
   #
   export PATHWAYROOTDIR="../../"
-  export LESSONSUBDIR="."
+  #export LESSONSUBDIR="."
   export SOLUTION=
 
   for d in *; do
     if test -d "$d"; then
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -738,10 +740,14 @@ function buildlessonplan() {
   #echo
   #echo building $PATHWAY "->" $L lesson plan
 
+  #FIXME: phase out LESSON
   export LESSON=lessons/$L
   export LESSONPLAN=$L
 
+  local oldLESSONSUBDIR=$LESSONSUBDIR
+
   cd $L
+  export LESSONSUBDIR=$oldLESSONSUBDIR/$L
 
   if test -f index.asciidoc; then
     #cp -p $PROGDIR/*.css .
@@ -766,8 +772,8 @@ function buildlessonplan() {
       cleanupduration index.shtml
       lintlesson index.shtml
       insertgdrivesave index.shtml
-      cp -p index.shtml index-gdrive-import.shtml
-      modifygdrivepage index-gdrive-import.shtml
+      #cp -p index.shtml index-gdrive-import.shtml
+      #modifygdrivepage index-gdrive-import.shtml
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
@@ -797,6 +803,7 @@ function buildlessonplan() {
   cd ..
 
   export LESSONPLAN=
+  export LESSONSUBDIR=$oldLESSONSUBDIR
   export LESSON=
 }
 
@@ -809,6 +816,7 @@ function buildlessons() {
     for L in $(cat lessons.txt); do
       export LESSON=lessons/$L
       export PATHWAYROOTDIR=../../
+      export LESSONSUBDIR=lessons/$L
       buildworkbookpages $L
       export PATHWAYROOTDIR=./
       export LESSON=
@@ -816,11 +824,13 @@ function buildlessons() {
     export L=
   fi
   cd ..
+  export LESSONSUBDIR=
 }
 
 function buildlessonplans() {
   #echo buildlessonplans in $(pwd)
   cd lessons
+  export LESSONSUBDIR=lessons
   if test ! -f lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
@@ -832,6 +842,7 @@ function buildlessonplans() {
     export L=
   fi
   cd ..
+  export LESSONSUBDIR=
 }
 
 function makeglossaryandstandards() {
@@ -901,6 +912,7 @@ function buildpathwaynarrative() {
       #moveheaderlogopos index.shtml
       insertnarrativecss index.shtml
       #cleanuptitle index.shtml
+      insertgdrivesave index.shtml
     fi
 
     checklinks index.shtml
@@ -1027,6 +1039,7 @@ function makeworkbooktex() {
 function buildteacherresource() {
   cd resources
   export PATHWAYROOTDIR=../
+  export LESSONSUBDIR=resources
   #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
   cp -p $PROGDIR/.hta* .
   local copacetic=1
@@ -1053,11 +1066,13 @@ function buildteacherresource() {
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
       cleanuptitle index.shtml
+      insertgdrivesave index.shtml
     fi
     checklinks index.shtml
   fi
   cd ..
   export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
 }
 
 function buildpathway() {
@@ -1111,7 +1126,7 @@ function buildpathway() {
 
     export PATHWAYROOTDIR=./
 
-    # XXX probably not needed?
+    # TODO probably not needed?
     if test -f lessons-and-standards.rkt; then
       cp -p lessons-and-standards.rkt $PROGDIR
     fi
@@ -1177,16 +1192,18 @@ function buildpathway() {
 
     for d in front-matter back-matter; do
       test -d "$d" || break
+      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     done
 
     cd resources
 
     export PATHWAYROOTDIR=../
+    export LESSONSUBDIR=resources
 
     for d in *; do
       if test -d "$d"; then
-        adjustproglangsubdirs "$d" # XXX maybe in a separate loop so potential xrefs work
+        adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
         #echo making pathways lessons
         #export SOLUTION=
         #echo L is $L
@@ -1194,12 +1211,14 @@ function buildpathway() {
         #echo LESSONSUBDIR is $LESSONSUBDIR
         #echo SOLUTION is $SOLUTION
 
+        #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
         recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       fi
     done
 
-    export PATHWAYROOTDIR=./
     cd ..
+    export PATHWAYROOTDIR=./
+    export LESSONSUBDIR=
 
     # Racket version
     # $PROGDIR/make-workbook-tex.rkt
@@ -1227,7 +1246,7 @@ function buildpathway() {
           rm $ABYSS.html
         fi
 
-        #XXX:  ↓ not needed?
+        #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
         #echo

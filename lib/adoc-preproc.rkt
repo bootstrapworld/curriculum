@@ -154,7 +154,7 @@
 
 (define (assoc-standards std)
   ;(printf "doing assoc-standards ~s\n" std)
-  (let* ([std-bits (regexp-split #rx"&" std)] ;XXX This is probly obsolete now
+  (let* ([std-bits (regexp-split #rx"&" std)] ;TODO This is probly obsolete now
          [std (list-ref std-bits 0)]
          [sublist-item #f]
          [c #f]
@@ -287,7 +287,7 @@
               "\n"
               "include::./pathway-standards.asc[]\n") o)]))
 
-(define (include-standards o) ;XXX obsolete?
+(define (include-standards o) ;TODO obsolete?
   (display
     (string-append
       "\n\n\n"
@@ -392,18 +392,14 @@
 
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "making image ~s ~s\n" img opts)
-  (let* ([lesson *lesson-plan*]
-         [lesson-subdir (truthy-getenv "LESSONSUBDIR")]
+  (let* ([lesson-subdir (truthy-getenv "LESSONSUBDIR")]
          [text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
          [adoc-img
-           (cond [lesson
-                   (format "image:{pathwayrootdir}lessons/~a/~a[~s, ~a]" lesson img
-                           text-wo-url commaed-opts)]
-                 [lesson-subdir
-                   (format "image:{pathwayrootdir}~a/~a/~a[~s, ~a]" (getenv "LESSON") lesson-subdir
+           (cond [lesson-subdir
+                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" lesson-subdir
                            img text-wo-url commaed-opts)]
                  [else
                    (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
@@ -501,7 +497,7 @@
   (display desc o)
   (newline o))
 
-(define (display-lesson-dependencies other-lessons o) ;XXX obsolete?
+(define (display-lesson-dependencies other-lessons o) ;TODO obsolete?
   ;  (call-with-output-file "index-dependencies.txt"
   ;    (lambda (o)
   ;      (fprintf o "(")
@@ -732,7 +728,7 @@
                                                                      link-text
                                                                      #:exercise? exercise?) o)]
                                        [else
-                                         ;XXX: should these just be warnings
+                                         ;TODO should these just be warnings
                                          ;with the @workbook-link converted to plain @link ?
                                          (printf "WARNING: Incorrect @workbook-link ~a\n" page)]))]
                               [(3)
@@ -770,10 +766,6 @@
                             (error 'ERROR
                                    "WARNING: @lesson-description valid only in lesson plan"))
                           (display-lesson-description (read-group i directive) o)]
-                         [(string=? directive "depends-on") ;XXX obsolete
-                          (unless *lesson-plan*
-                            (error 'ERROR "adoc-preproc: @depends-on valid only in lesson plan"))
-                          (display-lesson-dependencies (read-commaed-group i directive) o)]
                          [(string=? directive "all-exercises")
                           (unless *teacher-resources*
                             (error 'ERROR
