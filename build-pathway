@@ -663,6 +663,11 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d-2
   fi
   cp -pr $d solution-$d-2
+
+  rm -fr solution-$d-2/*.html solution-$d-2/**/*.html \
+    solution-$d-2/*.shtml solution-$d-2/**/*.shtml \
+    solution-$d-2/*.pdf solution-$d-2/**/*.pdf
+
   cp -p $PROGDIR/.hta* solution-$d-2
 
   if test -d solution-$d; then
@@ -835,12 +840,12 @@ function buildlessons() {
       export PATHWAYROOTDIR=../../
       export LESSONSUBDIR=lessons/$L
       buildworkbookpages $L
-      export PATHWAYROOTDIR=./
-      export LESSON=
     done
     export L=
   fi
   cd ..
+  export PATHWAYROOTDIR=./
+  export LESSON=
   export LESSONSUBDIR=
 }
 
