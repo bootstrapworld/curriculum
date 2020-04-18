@@ -191,7 +191,7 @@ EOF
 </script>
 EOF
   $SED -i \
-    -e 's/^\(<body  *[^>]*\)>/<body \1 onload="renderSaveToDrive()">/' \
+    -e 's/^\(<body  *[^>]*\)>/\1 onload="renderSaveToDrive()">/' \
     -e 's/<\/head>/%INSERTGDRIVESAVE1\n\0/' \
     -e 's/<\/h1>.*/\0\n%INSERTGDRIVESAVE2/' \
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
