@@ -169,7 +169,9 @@ function insertgdrivesave() {
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\//\\\//g')
 
-  cat > gdrivesave1.txt <<EOF
+  local TMPFILE=$TMPPFX-$f_head
+
+  cat > $TMPFILE-1.txt <<EOF
   <script>
   window.___gcfg = {
   parsetags: 'explicit'
@@ -177,7 +179,7 @@ function insertgdrivesave() {
   </script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 EOF
-  cat > gdrivesave2.txt <<EOF
+  cat > $TMPFILE-2.txt <<EOF
   <div id="savetodrive-div"></div>
   <script>
   function renderSaveToDrive() {
@@ -196,10 +198,13 @@ EOF
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
     $f
   $SED -i \
-    -e '/%INSERTGDRIVESAVE1/r gdrivesave1.txt' \
-    -e '/%INSERTGDRIVESAVE2/r gdrivesave2.txt' \
+    -e '/%INSERTGDRIVESAVE1/r '$TMPFILE-1.txt \
+    -e '/%INSERTGDRIVESAVE2/r '$TMPFILE-2.txt \
     -e 's/%INSERTGDRIVESAVE[12]//' \
     $f
+
+  rm $TMPFILE-[12].txt
+
   $SED -i \
     -e 's/%INSERTGDRIVELESSONTITLE/'"$pageTitle"'/' \
     -e 's/%INSERTGDRIVEURL/'$hrefPrefix'\/'$other_f'/' \
@@ -214,8 +219,6 @@ function modifygdrivepage() {
 
   $SED -i \
     -e '/include virtual=".menubar.ssi"/d' \
-    -e 's/<h[23456] /<strong>\0/g' \
-    -e 's/<\/h[23456]>/\0<\/strong>/g' \
     -e 's/^<p>Relevant Standards<select.*<\/select><\/p> *$/<p>Standards<\/p>/' \
     -e '/^<p><em>Select one or more standards from the menu on the left.*<\/p> *$/d' \
     -e 's/\(class="paragraph \)alignedStandardsIntro/\1/' \
@@ -227,7 +230,16 @@ function modifygdrivepage() {
     $f
   $SED -i \
     -e 's/%GDRIVEEXTERNALHREF//g' \
+    -e '/^ *<link rel="stylesheet".*\.css/d' \
     $f
+  echo "<style>" > $TMPFILE.css
+  cat $PATHWAYROOTDIR/lib/gdrive-import.css >> $TMPFILE.css
+  echo "</style>" >> $TMPFILE.css
+  $SED -i \
+    -e '/<\/title>/r '$TMPFILE.css \
+    $f
+
+  rm -f $TMPFILE.css
 
 }
 
