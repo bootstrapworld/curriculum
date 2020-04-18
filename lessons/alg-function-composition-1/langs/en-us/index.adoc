@@ -24,6 +24,7 @@
 @ifproglang{pyret}{
 * Lesson slides template (@link{https://drive.google.com/open?id=1IAViGbTynOiKoAu9RqOMqpIjRiFtfv6ac1GKcGlwaS8, Google Slides})
 }
+* Function cards (@link{pages/function-cards.adoc, print and cut})
 
 * Composing Image Functions (@workbook-link{pages/composing-image-functions.adoc, original}, @link{solution-pages/composing-image-functions.adoc, solutions})
 
@@ -60,11 +61,17 @@ and have their workbooks with a pen or pencil.
 Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them. The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
 
 === Launch
+Divide students into groups of 3-4, and distribute a set function cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
 
+[.lesson-instruction]
+- Each group has a set of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be? (_10_!)
+- I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`? (_10_!)
+- For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end. _You will need to use some functions more than once, and that's ok!_
 
-
+Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions. If two groups come up with different compositions that achieve the same end result, have them share their ideas!
 
 === Investigate
+The contracts page in your workbook is just like the Function Cards from this activity. Your job as a programmer is to figure out how to compose those functions to get where you want to go, in the most clever or elegant way possible.
 
 Have students open to @workbook-link{pages/composing-image-functions.adoc, Composing Image Functions}.  Students create a text @vocab{image} of their name and experiment with their choice of these new functions.
 
@@ -77,7 +84,7 @@ Many questions can be addressed with these responses:
 - *Have you pressed the Run button to save your Definitions changes?*
 
 === Synthesize
-- *What do all of these functions have in common?*+
+- *What do all of these functions have in common?*
 _They all produce images, they all change some element of the original image_
 
 - *Does using one of these functions change the original image?*
@@ -89,20 +96,18 @@ _The scale factor, the percent by which the image should grow or shrink_
 - *What does the number in ‘rotate’ represent?*
 _The rotation angle, measured counterclockwise_
 
-- *Suppose I wrote the code
-@ifproglang{wescheme}{
-`(scale 3 (star 50 “solid” “red”))`.
-}
-@ifproglang{pyret}{
-`scale(3, star(50, "solid", "red"))`.
-}
-  What’s another line of code I could write that would produce the exact same image?*
+- *Suppose I wrote the code*
+@ifproglang{wescheme}{ `(scale 3 (star 50 “solid” “red”))`. }
+@ifproglang{pyret}{ `scale(3, star(50, "solid", "red"))`. }
+  
+
+What’s another line of code I could write that would produce the exact same image?*
 
 @ifproglang{wescheme}{
-_``(star 150 "solid" "red")``_
+`(star 150 "solid" "red")`
 }
 @ifproglang{pyret}{
-_``star(150, "solid", "red")``_
+`star(150, "solid", "red")`
 }
 
 - *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the text function as an input for `flip-horizontal`?*
@@ -118,16 +123,16 @@ Student pairs can then share with another pair and compare their responses befor
 == Decomposing Image Problems @duration{25 minutes}
 
 === Overview
-Students are given (simple, highly-structured) word problems involving creating images, and must map from the word problems to the names and order of functions needed to solve them. At this stage, the skill is quite brittle and hardly resembles the generalized problem-decomposition skill needed to solve complex word problems in algerba. This is merely the first introduction, and other lessons will deepen and broaden the idea.
+Students are given (simple, highly-structured) word problems involving creating images, and must map from the word problems to the names and order of functions needed to solve them. At this stage, the skill is quite brittle and hardly resembles the generalized problem-decomposition skill needed to solve complex word problems in algebra. This is merely the first introduction, and other lessons will deepen and broaden the idea.
 
 === Launch
-Create the circles of evaluation and write the code for the following images.  Write a new line of code for each exercise.
+Create the Circles of Evaluation and write the code for the following images.  Write a new line of code for each exercise.
 
 * a solid, green `star` of size 50
-* a solid, green `star` that’s 3 x’s as large as the original (using the `scale` function)
-* a solid, green `star` that’s ½ the size of the original (using the `scale` function)
-* a solid, green `star` of size 50 that’s rotated 45 degrees (using the `rotate` function)
-* a solid, green `star` that’s 3x as large as the original and rotated 45 degrees.
+* a solid, green `star` that is 3 times as large as the original (using the `scale` function)
+* a solid, green `star` that is ½ the size of the original (using the `scale` function)
+* a solid, green `star` of size 50 that is rotated 45 degrees (using the `rotate` function)
+* a solid, green `star` that is 3 times as large as the original and rotated 45 degrees.
 
 === Investigate
 Students complete @workbook-link{pages/making-stars.adoc, Making Stars}, practicing drawing Circles of Evaluation and writing code with their partner using different functions.
