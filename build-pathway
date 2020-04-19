@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-18 # last modified
+LASTMOD=2020-04-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -231,6 +231,7 @@ function modifygdrivepage() {
   $SED -i \
     -e 's/%GDRIVEEXTERNALHREF//g' \
     -e '/^ *<link rel="stylesheet".*\.css/d' \
+    -e '/^ *<script type="text\/javascript".*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
     $f
   echo "<style>" > $TMPFILE.css
   cat $PATHWAYROOTDIR/lib/gdrive-import.css >> $TMPFILE.css
