@@ -72,11 +72,12 @@ result = animals-table.build-column("label", nametag).filter(is-fixed).order-by(
 This code takes the `animals-table`, and builds a new column. According to our Contracts Page, `.build-column` produces a new Table, and that’s the Table whose `.filter` method we use. That method produces _yet another Table_, and we call that Table’s `order-by` method. The Table that comes back from that is our final result.
 
 
-[.strategy-box]
-.Teaching Tip
-****
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Teaching Tip}
 Use different color markers to draw _nested boxes_ around each part of the expression, showing where each Table came from.
-****
+|===
 
 It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “`.`” to make it more readable. Here’s the exact same code, written with each method on its own line:
 

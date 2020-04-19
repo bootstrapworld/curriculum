@@ -86,11 +86,12 @@ Students experiment with the Editor, exploring the different kinds of numbers an
 Have students explore numbers - just numbers! - in the Interactions window.  Make sure both students take a turn at the keyboard.
 
 === Investigate
-[.notice-box]
-.Notice & Wonder
-****
+[.notice-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Notice & Wonder}
 In pairs, students will each try entering a variety of numbers, then together they will write down what they Notice and what they Wonder.
-****
+|===
 
 - What type of numbers did you try?
 - What did you notice? What did you wonder?
@@ -119,39 +120,46 @@ Students are given a challenging expression that exposes common misconceptions a
 === Launch
 Have students evaluate the expression in the image below and gather a few responses from the students.  Have they seen a problem like this on social media before?  Why might we be disagreeing on the solution?  How do we know how to evaluate this expression?
 
-@centered-image{images/OrderOfOperationsFB.png, Puzzling Math Problem, 400, align="center"}
+++++
+<style>
+.centered-image.big, .centered-image.big p {margin-top: 0px; padding-top: 0px;}
+.big .MathJax {font-size: 6em; color: black;}
+</style>
+++++
+[.centered-image.big]
+@math{6 \div 2(1 + 2)}
 
-[.strategy-box]
-.Circles of Evaluation
-****
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Circles of Evaluation}
 The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies PEMDAS incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
-****
+|===
 
 Math is a language, and all languages have rules and grammar. We can _draw the structure_ of those rules using something called the *Circles of Evaluation*. The rules are simple:
 
 [.lesson-point]
-1) Every Circle must one - and only one! - function, written at the top
+1) Every Circle must have one - and only one! - function, written at the top
 
 That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a Circle.
 
 [.lesson-point]
 2) The inputs to the function are written left-to-right, in the middle of the Circle.
 
-[.right]
-@show{(sexp->coe '(/ 6 3))}
-
 If we want to draw the Circle of Evaluation for @math{6 \div 3}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
+
+[.centered-image]
+@show{(sexp->coe '(/ 6 3))}
 @span{.clear}{}
 
 What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do divide 6 by that circle?
 
 *Circles can contain other Circles*
 
-[.right]
-@show{(sexp->coe '(/ 6 (+ 1 2)))}
-
 We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!
 
+[.centered-image]
+@show{(sexp->coe '(/ 6 (+ 1 2)))}
 @span{.clear}{}
 
 *Circles of Evaluation _help us write code_*
@@ -211,11 +219,12 @@ Students will create a Circle of Evaluation based on an expression they’ve cre
 
 Using @exercise-link{pages/OrderOfOperations-Multiple-Representations.pdf, this graphic organizer}, (1) create the code that represents this Circle of Evaluation, (2) translate this into code, (3) evaluate the expression using the order of operations, and (4) then compare and contrast the three methods.
 
-[.strategy-box]
-.Strategies For English Language Learners
-****
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies For English Language Learners}
 MLR 7 - Compare and Connect: Gather students' graphic organizers to highlight and analyze a few of them as a class, asking students to compare and connect different representations.
-****
+|===
 
 == Closing
 Have students share back what they learned from the Circles of Evaluation. You may want to assign traditional Order of Operations problems from your math book, but instead of asking them simply to compute the answer - or even list the steps - have them _draw the circle_.
