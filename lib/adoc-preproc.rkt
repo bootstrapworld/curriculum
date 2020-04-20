@@ -26,6 +26,8 @@
 
 (define *lesson* (truthy-getenv "LESSON"))
 
+(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR"))
+
 (define *narrative* (truthy-getenv "NARRATIVE"))
 
 (define *teacher-resources* (truthy-getenv "TEACHER_RESOURCES"))
@@ -116,7 +118,7 @@
                 (let ([c (string-ref g j)])
                   (cond [(eof-object? c)
                          (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
-                                directive *lesson-plan* *in-file*)]
+                                directive *lesson-subdir* *in-file*)]
                         [in-escape?
                           (loop2 (+ j 1) in-string? #f)]
                         [(char=? c #\\)
@@ -267,7 +269,7 @@
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
-                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n" *lesson-plan* lesson)])
+                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n" *lesson-subdir* lesson)])
                    (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]" lesson lesson-title)))
                other-lessons)
           ", ")) o)
@@ -277,7 +279,7 @@
   ;(printf "doing display-standards-row\n")
   (cond [(null? *standards-met*)
          (when *lesson-plan*
-           (printf "WARNING: Lesson ~a: No standards specified\n" *lesson-plan*))]
+           (printf "WARNING: Lesson ~a: No standards specified\n" *lesson-subdir*))]
         [else
           (display "| " o)
           (display-standards-selection o)
@@ -392,14 +394,13 @@
 
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "making image ~s ~s\n" img opts)
-  (let* ([lesson-subdir (truthy-getenv "LESSONSUBDIR")]
-         [text (if (pair? opts) (clean-up-image-text (car opts)) "")]
+  (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
          [adoc-img
-           (cond [lesson-subdir
-                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" lesson-subdir
+           (cond [*lesson-subdir*
+                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" *lesson-subdir*
                            img text-wo-url commaed-opts)]
                  [else
                    (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
@@ -444,6 +445,7 @@
           (let ([f.asc (path-replace-extension f ".asc")])
             ;TODO: probably not needed anymore
             (cond [(file-exists? f.asc) (set! f f.asc)])
+            ;FIXME: avoid erroring include: if file doesn't exist?
             (format "include::~a[]" f))]))
 
 (define *lesson-summary-file* #f)
@@ -764,7 +766,8 @@
                          [(string=? directive "lesson-description")
                           (unless *lesson-plan* ;TODO: or LESSON or both?
                             (error 'ERROR
-                                   "WARNING: @lesson-description valid only in lesson plan"))
+                                   "WARNING: @lesson-description (~a,~a) valid only in lesson plan"
+                                   *lesson-subdir* *in-file*))
                           (display-lesson-description (read-group i directive) o)]
                          [(string=? directive "all-exercises")
                           (unless *teacher-resources*
@@ -1068,6 +1071,7 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o)
+  ;(printf "doing display-standards-selection\n")
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
     (print-standards-js o)
@@ -1091,7 +1095,7 @@
                           #:attribs (format "value=\"standards-~a\"" dict)
                           dict))
                       *dictionaries-represented*)
-                 "\n")) o)
+                 "")) o)
     (when narrative?
       (display (create-end-tag "div") o)
       (display (create-end-tag "div") o))
