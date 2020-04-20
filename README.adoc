@@ -58,7 +58,7 @@ files, with a sample lesson and sample pathway:
             wescheme/
             pages/
               *.{adoc,pdf}
-              workbook-pages.rkt
+              workbook-pages.txt
               pyret/
               wescheme/
             solution-pages/
@@ -79,10 +79,10 @@ files, with a sample lesson and sample pathway:
             front-matter/
               pages/
                 *.{adoc,pdf}
-                workbook-pages.rkt
+                workbook-pages.txt
               solution-pages/
                 *.adoc
-                workbook-pages.rkt
+                workbook-pages.txt
             back-matter/
               pages/
               solution-pages/
@@ -140,25 +140,29 @@ rather than adoc source files).
 (The `solution-` versions, as already explained, are meant to supply
 shadowing content intended for teacher-only documents.)
 
-The file `pages/workbook-pages.rkt` lists -- as a Racket
-list -- the pages in the
+The file `pages/workbook-pages.txt` lists
+the pages -- one per line -- in the
 `pages` directory in the order in which they should show up in the
 final workbook.
 By default,
 these pages are rendered in portrait mode. If you desire a
-particular file `file.adoc` to be in landscape, its entry in
-`workbook-pages.rkt` should be `("file.adoc" "landscape")` rather
-then `"file.adoc"`. (The
-entry `"file.adoc"` is convenient shorthand for `("file.adoc"
-"portrait")`.)  (The strings `"landscape"` and `"portrait"` may
+particular file `file.adoc` to be in landscape, its entry line in
+`workbook-pages.txt` should be `file.adoc" landscape` rather
+than just `file.adoc`. (The
+entry `file.adoc` is convenient shorthand for `file.adoc
+portrait`.)  (The words `landscape` and `portrait` may
 be in any case.) Supplementary `adoc` files used by these pages
 can be stored in subdirectories, typically named `fragments`.
 
 Lesson pages are paginated by default when they show up in the
-workbook. If you don’t want a page to be populated, its entry in
-`workbook-pages.rkt` should be `("file.adoc" "portrait"
-"nopagenum")`. (The aspect should also be mentioned, even if it’s
+workbook. If you don’t want a page to be populated, its entry
+line in
+`workbook-pages.txt` should be `file.adoc portrait
+nopagenum`. (The aspect should also be mentioned, even if it’s
 the default.)
+
+(Any of the components in an entry line in `workbook-pages.txt`
+may be enclosed in double-quotes.)
 
 === Structure of a pathway directory
 
@@ -178,7 +182,7 @@ In the same directory, the file `lesson-order.txt` lists
 the names of the lessons (e.g., `sample-lesson`)
 that should be included in the
 pathway, in the order in which they should appear in the pathway
-workbook. (The filename
+workbook. (The filename can be enclosed in double-quotes.)
 
 The pathway directory can also contains a `resources`
 subdirectory, where an `.adoc` file describes the “Teacher
@@ -189,10 +193,11 @@ it can be named anything (not necessarily `index.adoc`).
 
 The top dir contains the script `build-pathway`. It takes any
 number of pathway arguments, and/or any combination of the
-options `--debug`, `--force` (aka `-f`), `--help`, `--language`, `--nopdf`,
-`--proglang`, `--lint`, `--add-exercises`, and `--version`.
+options `--add-exercises`, `--debug`, `--force`, `--help`, `--language`,
+`--lint`, `--nopdf`,
+`--no-parallel`, `--proglang`, and `--version`.
 
-If called with `--help` or `--version`, the script displays a help message
+If called with `--help` (aka `-h`) or `--version` (aka `-v`), the script displays a help message
 and version information, respectively, and quits.
 
 Otherwise, the
@@ -261,26 +266,30 @@ associated with the pathway; the student
 workbook PDF; a page listing the standards met; and a glossary
 page for the terms used in the lessons.
 
+The option `--add-exercises` (aka `-e`) swells the workbooks with
+exercises following each lesson.
+
 === `build-pathway` debugging
 
 The other options of `build-pathway` are predominantly used for
 debugging:
 
-- `--debug` retains various temp files in the generated doctree.
+- `--debug` (aka `--d`) retains various temp files in the generated doctree.
 
-- `--force` or `--f` forces creating anew the document tree. By default,
+- `--force` (aka `--f`) forces creating anew the document tree. By default,
   in order to save time,
   conversions are skipped if the `distribution` already contains
   the required target files and they are sufficiently new.
 
-- `--nopdf` avoids PDF generation to speed up the debugging
-process.
-
-- `--lint` reports missing rows in the summary tables of lesson
+- `--lint` (aka `-l`) reports missing rows in the summary tables of lesson
   plans, and invalid links in the doctree.
 
-- `--add-exercises` or `-e` swells the workbooks with exercises
-  following each lesson.
+- `--no-parallel` (aka `--noparallel`) runs the build script
+  strictly sequentially, without exploiting parallelism. This may
+  be used to uncover bugs introduced by parallelism.
+
+- `--nopdf` avoids PDF generation to speed up the debugging
+process.
 
 == Deployment
 
