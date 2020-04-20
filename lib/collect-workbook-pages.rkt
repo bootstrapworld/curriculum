@@ -22,7 +22,7 @@
 
 ;
 
-(define *lesson-order* (read-data-file "lessons/lessons.txt"))
+(define *lesson-order* (read-data-file "workbook-lessons.txt"))
 
 (define *language* (getenv "LANGUAGE"))
 
@@ -64,9 +64,8 @@
   (lambda (o)
     (fprintf o "(\n")
     (write-pages-info "front-matter" o #:paginate "no")
-    (for ([lesson *lesson-order*])
-      (let ([lesson-dir (string-append "lessons/" lesson)])
-        (write-pages-info lesson-dir o)))
+    (for ([lesson-dir *lesson-order*])
+      (write-pages-info lesson-dir o))
     (write-pages-info "back-matter" o #:paginate "no")
     (fprintf o ")\n"))
   #:exists 'replace)

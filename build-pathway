@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-19 # last modified
+LASTMOD=2020-04-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -649,7 +649,7 @@ function recursiveadoc() {
             wbpadoc=${wbp%.*}.adoc
             if test ! -f $wbpadoc; then
               BROKEN_WORKBOOK_PAGES=1
-              echo WARNING: Missing workbook page $wbp in $LESSON/$dir
+              echo WARNING: Missing workbook page $wbp in $LESSONSUBDIR
             fi
           fi
         done
@@ -737,8 +737,10 @@ function checklessonplan() {
 function buildworkbookpages() {
   local L=$1
   #echo
-  #echo building $L pages
+  #echo pwd is $(pwd)
+  #echo building $L wbpages
   cd $L
+  export LESSONSUBDIR=$L
   #
   if test ! -d pages; then
     echo WARNING: $L missing pages
@@ -751,7 +753,6 @@ function buildworkbookpages() {
 
   #
   export PATHWAYROOTDIR="../../"
-  #export LESSONSUBDIR="."
   export SOLUTION=
 
   for d in *; do
@@ -761,7 +762,7 @@ function buildworkbookpages() {
     fi
   done
 
-  cd ..
+  cd ../..
 }
 
 function collapseadjtables() {
@@ -779,19 +780,18 @@ function collapseadjtables() {
 }
 
 function buildlessonplan() {
-  #echo doing buildlessonplan
   local L=$1
+  #echo doing buildlessonplan $L
   #echo
   #echo building $PATHWAY "->" $L lesson plan
-
-  #FIXME: phase out LESSON
-  export LESSON=lessons/$L
-  export LESSONPLAN=$L
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
 
   cd $L
-  export LESSONSUBDIR=$oldLESSONSUBDIR/$L
+  export LESSONSUBDIR=$L
+  export LESSON=$L
+  export LESSONPLAN=$(basename $LESSONSUBDIR)
+  #FIXME: phase out LESSON
 
   if test -f index.asciidoc; then
     #cp -p $PROGDIR/*.css .
@@ -844,7 +844,7 @@ function buildlessonplan() {
       fi
     fi
   fi
-  cd ..
+  cd ../..
 
   export LESSONPLAN=
   export LESSONSUBDIR=$oldLESSONSUBDIR
@@ -853,19 +853,15 @@ function buildlessonplan() {
 
 function buildlessons() {
   #echo doing buildlessons
-  cd lessons
-  if test ! -f lessons.txt; then
+  if test ! -f workbook-lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
-    for L in $(cat lessons.txt); do
-      export LESSON=lessons/$L
-      export PATHWAYROOTDIR=../../
-      export LESSONSUBDIR=lessons/$L
+    for L in $(cat workbook-lessons.txt); do
+      export LESSON=$L
       buildworkbookpages $L
     done
     export L=
   fi
-  cd ..
   export PATHWAYROOTDIR=./
   export LESSON=
   export LESSONSUBDIR=
@@ -873,12 +869,10 @@ function buildlessons() {
 
 function buildlessonplans() {
   #echo buildlessonplans in $(pwd)
-  cd lessons
-  export LESSONSUBDIR=lessons
-  if test ! -f lessons.txt; then
+  if test ! -f workbook-lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
-    for L in $(cat lessons.txt); do
+    for L in $(cat workbook-lessons.txt); do
       # needed?
       if test $NOPARALLEL; then
         buildlessonplan $L
@@ -891,7 +885,6 @@ function buildlessonplans() {
     fi
     export L=
   fi
-  cd ..
   export LESSONSUBDIR=
 }
 
@@ -1188,10 +1181,10 @@ function buildpathway() {
     if test ! -f lesson-order.txt; then
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
-      grep -v '^ *;' lesson-order.txt|grep -v '^ *$' > lessons/lessons.txt
-      $SED -e 's/ *\(.*\)/lessons\/\1/' lessons/lessons.txt > workbook-lessons.txt
-      for lsn in $(cat lessons/lessons.txt); do
-        lsndir=lessons/$lsn
+      grep -v '^ *;' lesson-order.txt |
+        grep -v '^ *$' |
+        $SED -e 's/^ *\(.*\)/lessons\/\1/' > workbook-lessons.txt
+      for lsndir in $(cat workbook-lessons.txt); do
         mkdir -p $lsndir
         oglsndir=$TOPDIR/$lsndir/langs/$LANGUAGE
         if test -d "$oglsndir"; then
@@ -1267,6 +1260,7 @@ function buildpathway() {
     done
 
     cd ..
+
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
 
