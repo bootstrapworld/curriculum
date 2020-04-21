@@ -228,6 +228,13 @@ function modifygdrivepage() {
     -e 's/<\/div>/<\/span>/g' \
     $f
   $SED -i \
+    -e 's/^\(.*\)<span\(  *class="paragraph"\)/%GDRIVESPANDIV\1<div\2/g' \
+    $f
+  $SED -i \
+    -e '/^%GDRIVESPANDIV/,/^<\/span>/ s/^<\/span>/<\/div>/' \
+    -e 's/^%GDRIVESPANDIV//' \
+    $f
+  $SED -i \
     -e 's/href="/\0'$hrefPrefix'\//g' \
     $f
   $SED -i \
