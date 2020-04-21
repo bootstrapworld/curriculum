@@ -58,6 +58,8 @@ done
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
 
+WKH2P_PFX=wkh2p-tmp
+
 NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 function displayhelp() {
@@ -107,9 +109,6 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-if test README.html -ot README.adoc; then
-  asciidoctor -a linkcss README.adoc
-fi
 
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
@@ -605,7 +604,7 @@ function processadoc() {
           fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
             TEMPF=$(mktemp); rm -f $TEMPF
-            TMPHTML=wkh2p-tmp-$(basename $TEMPF).$fhtml
+            TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
             insertprintcss $TMPHTML
             insertwbpagecss $TMPHTML
@@ -619,7 +618,7 @@ function processadoc() {
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
             #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML $fpdf
-            echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH
+            echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
             
             #rm $TMPHTML
             #checkifsinglepdfpage "$fpdf"
@@ -848,7 +847,7 @@ function buildlessonplan() {
       #echo Creating lesson plan pdf
       if test index.shtml -nt index.pdf; then
         TEMPF=$(mktemp); rm -f $TEMPF
-        TMPHTML=wkh2p-tmp-$(basename $TEMPF).index.html
+        TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
         cp index.shtml $TMPHTML
         insertprintcss $TMPHTML
 
@@ -857,7 +856,7 @@ function buildlessonplan() {
         JAVASCRIPTDELAY=
         setmathdelay $TMPHTML
         #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
-        echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH
+        echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML index.pdf
 
         #rm $TMPHTML
@@ -1140,13 +1139,16 @@ function buildteacherresource() {
 
 function batchhtmltopdf() {
   echo building all PDF files
-  rm -f split-$WKH2P_BATCH_BASE*
-  split -l $(expr 1 + $(wc -l $WKH2P_BATCH|sed -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
-    $WKH2P_BATCH_BASE split-$WKH2P_BATCH_BASE
-  for f in split-$WKH2P_BATCH_BASE*; do
+  rm -f $WKH2P_BATCH_BASE-split*
+  split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|sed -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
+    $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
+  for f in $WKH2P_BATCH_BASE-split*; do
     wkhtmltopdf --read-args-from-stdin < $f &
   done
   wait
+  if test ! $DEBUG; then
+    find . -name $WKH2P_PFX-\* -delete
+  fi
 }
 
 function buildpathway() {
@@ -1203,9 +1205,9 @@ function buildpathway() {
     export PATHWAYROOTDIR=./
 
     TEMPF=$(mktemp); rm -f $TEMPF
-    export WKH2P_BATCH_BASE=batchtmp-$(basename $TEMPF).txt
-    export WKH2P_BATCH=$TOPDIR/$DESTPATHWAYDIR/$WKH2P_BATCH_BASE
-    rm -f $WKH2P_BATCH_BASE; touch $WKH2P_BATCH_BASE
+    export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
+    export WKH2P_BATCH_FILE=$TOPDIR/$DESTPATHWAYDIR/$WKH2P_BATCH_BASE.txt
+    rm -f $WKH2P_BATCH_BASE.txt; touch $WKH2P_BATCH_BASE.txt
 
     mkdir -p lessons workbook
     mkdir -p resources/protected
@@ -1309,12 +1311,11 @@ function buildpathway() {
         cd lib
         ABYSS=this-page-intentionally-left-blank
         if test ! -f $ABYSS.pdf; then
-          touch $ABYSS.adoc
-          asciidoctor -a linkcss $ABYSS.adoc
-          echo --lowquality -q lib/$ABYSS.html $ABYSS.pdf >> $WKH2P_BATCH
-          #echo >> $WKH2P_BATCH
-          #wkhtmltopdf --lowquality -q $ABYSS.html $ABYSS.pdf
-          #rm $ABYSS.html
+          echo '= This Page Intentionally Left Blank' > $ABYSS.adoc
+          echo >> $ABYSS.adoc
+          #touch $ABYSS.adoc
+          asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
+          echo --lowquality -q lib/$ABYSS.html $ABYSS.pdf >> $WKH2P_BATCH_FILE
         fi
         cd ..
 
@@ -1434,7 +1435,11 @@ for f in distribution/*/*; do
   fi
 done
 
-asciidoctor -a linkcss index.adoc
+if test README.html -ot README.adoc; then
+  asciidoctor README.adoc
+fi
+
+asciidoctor index.adoc
 
 cd distribution
 
@@ -1452,7 +1457,7 @@ for f in */*; do
   fi
 done
 
-asciidoctor -a linkcss index.adoc
+asciidoctor index.adoc
 
 if test ! $DEBUG; then
   rm -fr $PROGDIR
