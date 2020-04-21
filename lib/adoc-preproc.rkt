@@ -398,12 +398,15 @@
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
+         [img-link (format "link:~a[~a,~a]" img "Click here for image" "role=\"gdrive-only\"")]
          [adoc-img
+          (string-append
            (cond [*lesson-subdir*
                    (format "image:{pathwayrootdir}~a/~a[~s, ~a]" *lesson-subdir*
                            img text-wo-url commaed-opts)]
                  [else
-                   (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])])
+                   (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])
+           img-link)])
     ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
     (if (string=? text "")
         (if centered?
