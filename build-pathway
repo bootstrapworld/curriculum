@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-20 # last modified
+LASTMOD=2020-04-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -55,9 +55,10 @@ while test $# -ne 0; do
   fi
 done
 
-TMPTMP=$(mktemp)
+TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
-rm -f $TMPTMP
+
+NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 function displayhelp() {
   echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--nopdf] [--lint] [--help] [--version] pathway ...
@@ -172,8 +173,7 @@ function insertgdrivesave() {
   local TMPFILE=$TMPPFX-$f_head
 
   cat > $TMPFILE-1.txt <<EOF
-  <script>
-  window.___gcfg = {
+  <script>window.___gcfg = {
   parsetags: 'explicit'
   };
   </script>
@@ -181,8 +181,7 @@ function insertgdrivesave() {
 EOF
   cat > $TMPFILE-2.txt <<EOF
   <div id="savetodrive-div"></div>
-  <script>
-  function renderSaveToDrive() {
+  <script>function renderSaveToDrive() {
     gapi.savetodrive.render('savetodrive-div', {
     src:"%INSERTGDRIVEURL",
     filename:"%INSERTGDRIVELESSONTITLE",
@@ -277,6 +276,10 @@ function insertprintcss() {
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wkhtmltopdf.css" \/>/' \
+    -e '/^ *<script>window.___gcfg/,/^ *<\/script>/d' \
+    -e '/^ *<script src="https:\/\/apis.google.com\/js\/paltform.js"/d' \
+    -e 's/onload="renderSaveToDrive()"//g' \
+    -e '/^ *<script>function renderSaveToDrive()/,/^ *<\/script>/d' \
     $f
 }
 
@@ -601,9 +604,8 @@ function processadoc() {
         if test ! $NOPDF; then
           fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
-            TEMPF=$(mktemp)
-            TMPHTML=$(basename $TEMPF).$fhtml
-            rm $TEMPF
+            TEMPF=$(mktemp); rm -f $TEMPF
+            TMPHTML=wkh2p-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
             insertprintcss $TMPHTML
             insertwbpagecss $TMPHTML
@@ -614,9 +616,13 @@ function processadoc() {
             fi
             JAVASCRIPTDELAY=
             setmathdelay $TMPHTML
-            wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML $fpdf
-            rm $TMPHTML
-            checkifsinglepdfpage "$fpdf"
+            #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
+
+            #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML $fpdf
+            echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH
+            
+            #rm $TMPHTML
+            #checkifsinglepdfpage "$fpdf"
             #test $DEBUG || rm $TMPHTML
           fi
         fi
@@ -841,9 +847,8 @@ function buildlessonplan() {
     if test ! $NOPDF; then
       #echo Creating lesson plan pdf
       if test index.shtml -nt index.pdf; then
-        TEMPF=$(mktemp)
-        TMPHTML=$(basename $TEMPF).index.html
-        rm $TEMPF
+        TEMPF=$(mktemp); rm -f $TEMPF
+        TMPHTML=wkh2p-tmp-$(basename $TEMPF).index.html
         cp index.shtml $TMPHTML
         insertprintcss $TMPHTML
 
@@ -851,9 +856,11 @@ function buildlessonplan() {
 
         JAVASCRIPTDELAY=
         setmathdelay $TMPHTML
-        wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML index.pdf
+        #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
+        echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH
+        #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML index.pdf
 
-        rm $TMPHTML
+        #rm $TMPHTML
       fi
     fi
   fi
@@ -877,7 +884,7 @@ function buildlessons() {
   fi
   export PATHWAYROOTDIR=./
   export LESSON=
-  export LESSONSUBDIR=
+  export LESSONSUBDIR=.
 }
 
 function buildlessonplans() {
@@ -1131,12 +1138,23 @@ function buildteacherresource() {
   export LESSONSUBDIR=
 }
 
+function batchhtmltopdf() {
+  echo building all PDF files
+  rm -f split-$WKH2P_BATCH_BASE*
+  split -l $(expr 1 + $(wc -l $WKH2P_BATCH|sed -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
+    $WKH2P_BATCH_BASE split-$WKH2P_BATCH_BASE
+  for f in split-$WKH2P_BATCH_BASE*; do
+    wkhtmltopdf --read-args-from-stdin < $f &
+  done
+  wait
+}
+
 function buildpathway() {
   cd $TOPDIR
 
   PATHWAY=$SRCPATHWAY
 
-  export LESSONSUBDIR=
+  export LESSONSUBDIR=.
   export SOLUTION=
   export BROKEN_WORKBOOK_PAGES=
   export BROKEN_INTERNAL_LINKS=
@@ -1178,14 +1196,16 @@ function buildpathway() {
     mkdir -p distribution/$PATHWAY/$LANGUAGE/lib
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
 
-    cd distribution/$PATHWAY/$LANGUAGE
+    export DESTPATHWAYDIR=distribution/$PATHWAY/$LANGUAGE
+
+    cd $DESTPATHWAYDIR
 
     export PATHWAYROOTDIR=./
 
-    # TODO probably not needed?
-    if test -f lessons-and-standards.rkt; then
-      cp -p lessons-and-standards.rkt $PROGDIR
-    fi
+    TEMPF=$(mktemp); rm -f $TEMPF
+    export WKH2P_BATCH_BASE=batchtmp-$(basename $TEMPF).txt
+    export WKH2P_BATCH=$TOPDIR/$DESTPATHWAYDIR/$WKH2P_BATCH_BASE
+    rm -f $WKH2P_BATCH_BASE; touch $WKH2P_BATCH_BASE
 
     mkdir -p lessons workbook
     mkdir -p resources/protected
@@ -1240,11 +1260,7 @@ function buildpathway() {
     done
     cd ..
 
-    export PATHWAYROOTDIR=./
-
-    #echo PWYD is $PATHWAYROOTDIR
-    #echo LSDR is $LESSONSUBDIR
-    #echo SOLN is $SOLUTION
+    #export PATHWAYROOTDIR=./
 
     for d in front-matter back-matter; do
       test -d "$d" || break
@@ -1260,12 +1276,6 @@ function buildpathway() {
     for d in *; do
       if test -d "$d"; then
         adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
-        #echo making pathways lessons
-        #export SOLUTION=
-        #echo L is $L
-        #echo PATHWAYROOTDIR is $PATHWAYROOTDIR
-        #echo LESSONSUBDIR is $LESSONSUBDIR
-        #echo SOLUTION is $SOLUTION
 
         #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
         recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
@@ -1290,18 +1300,25 @@ function buildpathway() {
 
     buildpathwaynarrative
 
-    buildteacherresource
+    #buildteacherresource
 
     if test ! $NOPDF; then
       if test ! -f workbook-page-index.rkt; then
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
+        cd lib
         ABYSS=this-page-intentionally-left-blank
         if test ! -f $ABYSS.pdf; then
-          touch $ABYSS.html
-          wkhtmltopdf --lowquality -q $ABYSS.html $ABYSS.pdf
-          rm $ABYSS.html
+          touch $ABYSS.adoc
+          asciidoctor -a linkcss $ABYSS.adoc
+          echo --lowquality -q lib/$ABYSS.html $ABYSS.pdf >> $WKH2P_BATCH
+          #echo >> $WKH2P_BATCH
+          #wkhtmltopdf --lowquality -q $ABYSS.html $ABYSS.pdf
+          #rm $ABYSS.html
         fi
+        cd ..
+
+        batchhtmltopdf
 
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
@@ -1334,6 +1351,8 @@ function buildpathway() {
         fi
       fi
     fi
+
+    buildteacherresource
 
   fi
 
