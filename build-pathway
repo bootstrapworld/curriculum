@@ -226,6 +226,9 @@ function modifygdrivepage() {
     -e 's/href=\("\(https\|http\):\/\/\)/href%GDRIVEEXTERNALHREF=\1/g' \
     -e 's/<div/<span/g' \
     -e 's/<\/div>/<\/span>/g' \
+    -e 's/<dt class="hdlist1">/\0<br\/>/g' \
+    -e 's/<span class="sect1 lesson-section-1">/\0<hr\/>/g' \
+    -e 's/<span class="openblock acknowledgment">/\0<hr\/>/g' \
     $f
   $SED -i \
     -e 's/^\(.*\)<span\(  *class="paragraph"\)/%GDRIVESPANDIV\1<div\2/g' \
