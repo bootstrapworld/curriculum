@@ -229,6 +229,7 @@ function modifygdrivepage() {
     -e 's/<dt class="hdlist1">/\0<br\/>/g' \
     -e 's/<span class="sect1 lesson-section-1">/\0<hr\/>/g' \
     -e 's/<span class="openblock acknowledgment">/\0<hr\/>/g' \
+    -e 's/<h2.*>\(.*\)<span class="duration">\(.*\)<\/span><\/h2>/<table class="grid-none frame-none section-heading"><tr><td>\1<\/td><td>\2<\/td><\/tr><\/table>/g' \
     $f
   $SED -i \
     -e 's/^\(.*\)<span\(  *class="paragraph lesson-point"\)/%GDRIVESPANDIV\1<div\2/g' \
