@@ -183,7 +183,7 @@ EOF
   <script>function renderSaveToDrive() {
     gapi.savetodrive.render('savetodrive-div', {
     src:"%INSERTGDRIVEURL",
-    filename:"%INSERTGDRIVELESSONTITLE",
+    filename:echo "%INSERTGDRIVELESSONTITLE" | xargs,
     sitename:"Bootstrap, Brown University"
   });
 }
