@@ -243,6 +243,7 @@ function modifygdrivepage() {
     -e 's/%GDRIVEEXTERNALHREF//g' \
     -e '/^ *<link rel="stylesheet".*\.css/d' \
     -e '/^ *<script type="text\/javascript".*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
+    -e '/<span class="tooltiptext">.*<\/span>/d' \
     $f
   echo "<style>" > $TMPFILE.css
   cat $PATHWAYROOTDIR/lib/gdrive-import.css >> $TMPFILE.css
