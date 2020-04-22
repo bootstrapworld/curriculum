@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-21 # last modified
+LASTMOD=2020-04-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -108,7 +108,6 @@ fi
 if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
-
 
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
@@ -618,11 +617,9 @@ function processadoc() {
             setmathdelay $TMPHTML
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
-            #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML $fpdf
             echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
-            
-            #rm $TMPHTML
-            #checkifsinglepdfpage "$fpdf"
+
+            # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
           fi
         fi
@@ -696,18 +693,16 @@ function recursiveadoc() {
 
 function mkdirsolutionversionof() {
   local d="$1"
+  local origDir="$2"
 
   test -d "$d" || return
 
   if test -d solution-$d-2; then
-    echo deadc0de: solution-$d-2 shouldnt exist
+    echo DEADC0DE: solution-$d-2 shouldn\'t exist
     rm -fr solution-$d-2
   fi
-  cp -pr $d solution-$d-2
 
-  rm -fr solution-$d-2/*.html solution-$d-2/**/*.html \
-    solution-$d-2/*.shtml solution-$d-2/**/*.shtml \
-    solution-$d-2/*.pdf solution-$d-2/**/*.pdf
+  cp -pr $origDir/$d solution-$d-2
 
   cp -p $PROGDIR/.hta* solution-$d-2
 
@@ -767,7 +762,7 @@ function buildworkbookpages() {
   fi
   adjustproglangsubdirs pages
 
-  mkdirsolutionversionof pages
+  mkdirsolutionversionof pages $TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE
   adjustproglangsubdirs solution-pages
 
   #
@@ -858,9 +853,6 @@ function buildlessonplan() {
         setmathdelay $TMPHTML
         #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
         echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
-        #wkhtmltopdf $JAVASCRIPTDELAY $ASPECT --lowquality -q $TMPHTML index.pdf
-
-        #rm $TMPHTML
       fi
     fi
   fi
@@ -1185,7 +1177,7 @@ function buildpathway() {
     PATHWAY=$SRCPATHWAY-wescheme
   fi
 
-  langicon=🕱
+  langicon=💀
 
   if test "$PROGLANG" = wescheme; then
     langicon=🥾
@@ -1233,11 +1225,11 @@ function buildpathway() {
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/lessons\/\1/' > workbook-lessons.txt
-      for lsndir in $(cat workbook-lessons.txt); do
-        mkdir -p $lsndir
-        oglsndir=$TOPDIR/$lsndir/langs/$LANGUAGE
-        if test -d "$oglsndir"; then
-          cp -pr $oglsndir/* $lsndir
+      for lessonDir in $(cat workbook-lessons.txt); do
+        mkdir -p $lessonDir
+        repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
+        if test -d "$repoLessonDir"; then
+          cp -pr $repoLessonDir/* $lessonDir
         fi
       done
       cd lessons
@@ -1259,7 +1251,7 @@ function buildpathway() {
     for d in front-matter back-matter; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages
+        mkdirsolutionversionof pages $TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/$d
         cd ..
         adjustproglangsubdirs $d
       fi
@@ -1269,7 +1261,7 @@ function buildpathway() {
     for d in *; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages
+        mkdirsolutionversionof pages $TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/$d
         cd ..
         adjustproglangsubdirs $d
       fi
