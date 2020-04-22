@@ -398,7 +398,9 @@
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
-         [img-link (format "link:~a[~a,~a]" img "Click here for image" "role=\"gdrive-only\"")]
+         [img-link-txt (string-append 
+            (enclose-span ".big" "&#x1f5bc;") "Show image")]
+         [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
          [adoc-img
           (string-append
            (cond [*lesson-subdir*
