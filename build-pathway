@@ -1146,9 +1146,22 @@ function batchhtmltopdf() {
     wkhtmltopdf --read-args-from-stdin < $f &
   done
   wait
-  if test ! $DEBUG; then
-    find . -name $WKH2P_PFX-\* -delete
-  fi
+}
+
+function rmtmpfiles() {
+  test $DEBUG && return
+
+  rm -fr $PROGDIR
+
+  for f in adoc asciidoc aux log rkt tex title txt; do
+    find . -name \*.$f -delete
+  done
+
+  for wbf in workbook pd-workbook; do
+    rm -f $wbf-*.pdf
+  done
+
+  find . -name $WKH2P_PFX-\* -delete
 }
 
 function buildpathway() {
@@ -1345,15 +1358,12 @@ function buildpathway() {
         if test ! $NOPARALLEL; then
           wait
         fi
-        if test ! $DEBUG; then
-          for wbf in workbook pd-workbook; do
-            rm -f $wbf-*.pdf
-          done
-        fi
       fi
     fi
 
     buildteacherresource
+
+    rmtmpfiles
 
   fi
 
@@ -1459,9 +1469,3 @@ done
 
 asciidoctor index.adoc
 
-if test ! $DEBUG; then
-  rm -fr $PROGDIR
-  for f in adoc asciidoc rkt tex title txt; do
-    find . -name \*.$f -delete
-  done
-fi
