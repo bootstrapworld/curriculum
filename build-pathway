@@ -158,7 +158,7 @@ function insertgdrivesave() {
   local other_f=$f_head-gdrive-import.$f_ext
   local pageTitle=
   if test -f $f_head.adoc; then
-    pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//')
+    pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
   fi
   if test ! "$pageTitle"; then
     pageTitle=$f_head
@@ -737,7 +737,7 @@ function checklessonplan() {
   local L=$1
   checksinglelessonplan $L
 
-  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//'> index-title.txt
+  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > index-title.txt
 
   if test $ADDEXERCISES; then
     if test -f index.asciidoc; then
