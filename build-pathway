@@ -176,9 +176,6 @@ function insertgdrivesave() {
   };
   </script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-EOF
-  cat > $TMPFILE-2.txt <<EOF
-  <div id="savetodrive-div"></div>
   <script>function renderSaveToDrive() {
     gapi.savetodrive.render('savetodrive-div', {
     src:"%INSERTGDRIVEURL",
@@ -187,6 +184,9 @@ EOF
   });
 }
 </script>
+EOF
+  cat > $TMPFILE-2.txt <<EOF
+  <div id="savetodrive-div"></div>
 EOF
   $SED -i \
     -e 's/^\(<body  *[^>]*\)>/\1 onload="renderSaveToDrive()">/' \
