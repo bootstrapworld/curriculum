@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-22 # last modified
+LASTMOD=2020-04-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -37,7 +37,7 @@ while test $# -ne 0; do
     LANGUAGE=$1; shift
   elif test "$arg" = --lint -o "$arg" = -l -o "$arg" = --verify-links; then
     LINT=1
-  elif test "$arg" = --nopdf; then
+  elif test "$arg" = --nopdf -o "$arg" = --no-pdf; then
     NOPDF=1
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
