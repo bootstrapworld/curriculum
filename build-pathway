@@ -1144,8 +1144,6 @@ function batchhtmltopdf() {
 function rmtmpfiles() {
   test $DEBUG && return
 
-  rm -fr $PROGDIR
-
   for f in adoc asciidoc aux log rkt tex title txt; do
     find . -name \*.$f -delete
   done
@@ -1462,3 +1460,6 @@ done
 
 asciidoctor index.adoc
 
+if test ! $DEBUG; then
+  rm -fr $PROGDIR
+fi
