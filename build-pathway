@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-23 # last modified
+LASTMOD=2020-04-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1118,8 +1118,11 @@ function buildteacherresource() {
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export TEACHER_RESOURCES=
+      insertbodyid index.shtml
       resolveabbrevs index.shtml
       #moveheaderlogopos index.shtml
+      insertnarrativecss index.shtml
+      insertstylecss index.shtml
       cleanuptitle index.shtml
       insertgdrivesave index.shtml
     fi
