@@ -97,7 +97,8 @@
 
 (define *exercises-done* '())
 
-(define read-group (*make-read-group (lambda z (apply code z))))
+(define read-group (*make-read-group (lambda z (apply code z))
+                                     (lambda () *in-file*)))
 
 (define (read-space i)
   (let loop ()
@@ -398,7 +399,7 @@
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
-         [img-link-txt (string-append 
+         [img-link-txt (string-append
             (enclose-span ".big" "&#x1f5bc;") "Show image")]
          [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
          [adoc-img

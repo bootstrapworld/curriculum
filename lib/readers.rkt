@@ -21,7 +21,7 @@
             (cond [(char=? c #\") (loop (+ i 1) (cons c (cons #\\ r)))]
                   [else (loop (+ i 1) (cons c r))]))))))
 
-(define (*make-read-group code)
+(define (*make-read-group code in-file)
   (letrec ([read-group
              (lambda (i directive #:scheme? [scheme? #f])
                (let ([c (peek-char i)])
@@ -67,6 +67,8 @@
                                        (loop (cons c r) #f (- nesting 1) #f #f))]
                                   [else (loop (cons c r) #f nesting #f #f)])))]
                        [else
-                         (printf "WARNING: Ill-formed metadata directive @~a\n" directive)
+                         (printf "WARNING: Ill-formed metadata directive in ~a/~a: @~a\n"
+                                 (current-directory)
+                                 (in-file) directive)
                          ""])))])
     read-group))
