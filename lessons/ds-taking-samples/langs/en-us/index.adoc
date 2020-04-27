@@ -22,6 +22,7 @@
 
 | Preparation
 |
+* Lesson slides (@link{https://docs.google.com/presentation/d/1Yw5WhQRkz6F7G0mE6CP9HahgDZt9hdp4khfjnlBrzKQ/, Google Slides})
 * Make sure all materials have been gathered
 * Decide how students will be grouped in pairs
 * All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
@@ -46,10 +47,10 @@ Suppose we want to survey Americans and try to predict who our next president wi
 * Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
 * How could we choose a representative subset, or _sample_ of American voters?
 
-Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a subset of the data (e.g. calling only women, calling a random sample of 2000 people, etc). Sometimes we want to create a @vocab{random sample} of an existing dataset. 
+Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a sample of the data (e.g. calling only women, calling a random sample of 2000 people, etc). Sometimes we want to create a @vocab{random sample} of an existing dataset. 
 
 [.lesson-point]
-Make subsets first!
+Make samples first!
 
 Data Scientists don’t always know what the interesting questions are right away. So whenever they explore a dataset, one of the first things do is define different kinds of @vocab{samples}, just to have them handy later. This also helps them reason about the data, without being biased by a particular question.
 
@@ -64,14 +65,19 @@ random-rows(animals-table, 15)
 ----
 * What do you get?
 * What is the contract for `random-rows`? What does the function do?
-* In the Definitions Area, define `tiny-subset` and `small-subset` to be these two random samples.
-* Make the same pie chart, but using each these subsets: `pie-chart(tiny-subset, "species")`.
+* In the Definitions Area, define `tiny-sample` and `small-sample` to be these two random samples.
+* Make the same pie chart, but using each these samples: `pie-chart(tiny-sample, "species")`.
 * Which pie chart is _most representative_ of the whole table? 
-* How large does a random sample have to be, to allow us to generalize? 1/10th the size of the dataset? 1/4th?
+
 --
 
 === Synthesize
-Have students share their results, and discuss how large a sample needs to be for it to be "representative". 
+* Have students share their results, and discuss how large a sample needs to be for it to be "representative". 
+* How large does a random sample have to be, to allow us to generalize? 1/10th the size of the dataset? 1/4th?
+* Suppose we decide it’s X%. Will that be true for all datasets?
+* Why or why not?
+
+
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
@@ -88,7 +94,10 @@ This activity is all about @vocab{grouped samples}: Students make a bunch of sub
 === Launch
 Cats and Dogs are very different characteristics. Dogs tend to weigh more, and cats tend to live longer. If we're asking questions about weight or lifespan, it might make more sense to ask those questions about "just the cats" or "just the dogs". Averaging every animal together will give us an answer, but it may not be a _useful_ answer. 
 
-Sometimes, important facts about subsets get _lost_ if we mix them with the rest of the population! Imagine that you've been handed a dataset from a country where half the people are wealthy and have access to amazing medical care, and the other half are poor and have no healthcare. Looking at the population as a whole, we might say that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!.
+Imagine that you've been handed a dataset from a country where half the people are wealthy and have access to amazing medical care, and the other half are poor and have no healthcare. If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!
+
+[.lesson-point]
+Sometimes, important facts about samples get _lost_ if we mix them with the rest of the population!
 
 Data Scientists make @vocab{grouped samples} of datasets, breaking them up into sub-groups that may be helpful in their analysis. 
 
@@ -115,17 +124,17 @@ dogs  = animals-table.filter(is-dog)
 === Synthesize
 Debrief with students. Thoughtful question: how could we filter _and_ sort a table? How can we combine methods?
 
-== Displaying Data @duration{10 minutes}
+== Displaying Samples @duration{10 minutes}
 
 === Overview
-Students revisit the data display activity, now using the subsets they created.
+Students revisit the data display activity, now using the samples they created.
 
 === Launch
 Making grouped and random samples is a powerful skill to have, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make subsets, we can make much more sophisticated displays!
 
 === Investigate
 [.lesson-instruction]
-Complete @workbook-link{pages/data-displays2.adoc}, using what you've learned about subsets to make more sophisticated data displays.
+Complete @workbook-link{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
 
 === Synthesize
 Were any of the students' displays interesting or surprising? Given a novel question, can students identify what helper functions they would need to write?

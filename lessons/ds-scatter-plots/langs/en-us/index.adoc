@@ -17,6 +17,7 @@
 
 | Materials
 |
+* Lesson Slides (@link{https://docs.google.com/presentation/d/1RgRT61h69EHUDvpUKMPlnbjFv9D3rB7DZCqDWQ4CqiQ/, Google Slides})
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 
@@ -71,9 +72,11 @@ Students are introduced to scatter plots, which are visualizations tailored to R
 === Launch
 This question is asking about _two columns_ in our dataset. Specifically, it’s asking *if there is a relationship* between `pounds` and `weeks`.
 
-For each animal in the shelter, there are two data points we care about: how many `pounds` they weigh, and the number of `weeks` it took to be adopted. We can use these points to plot each animal as a point on a coordinate plane.
+For each animal in the shelter, there are two data points we care about: how many `pounds` they weigh, and the number of `weeks` it took to be adopted.
 
 === Investigate
+We can use these points to plot each animal as a point on a coordinate plane.
+
 [.lesson-instruction]
 Complete @workbook-link{pages/creating-scatterplot.adoc} in your Student Workbook.
 
@@ -89,10 +92,10 @@ Divide the full table up into sub-lists, and have a few student plot 3-4 animals
 * Open your “Animals Starter File”. (If you do not have this file, or if something has happened to it, you can always make a @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, new copy}.)
 * Make a scatter plot that displays the relationship between weight and adoption time.
 * Are there any patterns or trends that you see here?
-* Try making a few other scatter plots, looking for relationships between other columns in the animals-table.
+* Try making a few other scatter plots, looking for relationships between other columns in the `animals-table`.
 
 === Synthesize
-Have students share their observations. What trends do they see?
+Have students share their observations. What trends do they see? Are there any points that seem unusual? Why?
 
 == Looking for Trends @duration{20 minutes}
 
@@ -118,7 +121,7 @@ Project the scatter plot at the front of the room, and have students come up to 
 @span{.right}{@centered-image{images/visualizing-relationships-1.png, "", 400}}
 A straight-line pattern in the cloud of scatter plot points suggests that there is a relationship between two columns. This relationship is called a @vocab{correlation}. In this case, we’re looking for a correlation between `pounds` and `weeks`. This line is called the @vocab{line of best fit}, and it can be useful for making predictions. For example, the line of best fit might predict how long a new dog would wait at the shelter, if the dog weighs 68 pounds.
 
-Do any data points that seem unusually far away from the line? Which animals are those? These points are called @vocab{outliers}, meaning that they fall far outside where most of the data lies. In a histogram, outiers would be the isolated bars that sit far away from the rest of the bars. 
+Do any data points that seem unusually far away from the line? Which animals are those? These points are called @vocab{outliers}, meaning that they fall far outside where most of the data lies. In a histogram, outliers would be the isolated bars that sit far away from the rest of the bars. 
 
 Outliers are always interesting:
 
@@ -143,4 +146,4 @@ Debrief, showing the plots on the board. Make sure students see plots for which 
 [.lesson-point]
 Theory 2: Younger animals get adopted faster because they are cuter.
 
-It might be tempting to go straight into making a scatter plot to compare `age` and `weeks`. But different animals have very different lifespans! A 5-lear-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them all together, we may actually wind up _hiding_ a real correlation. To do this analysis, we might have to make several displays, each for a different subset.
+It might be tempting to go straight into making a scatter plot to compare `age` and `weeks`. But different animals have very different lifespans! A 5yr-old tarantula is still really young, while a 5yr old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be  _hiding_ a real correlation! We might want to make several displays, one for each species.
