@@ -61,103 +61,27 @@ Students should be logged into
 @ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
 and have their @vocab{Contracts} page ready.
 
-== Exploring Image Functions @duration{25 minutes}
-
-=== Overview
-Students explore functions that go beyond numbers, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
-
-=== Launch
-Students have already seen Number values like Integers, Decimals and Fractions, but computer programs can work with a much larger set of data types. Show students String values, by having them typing various things in quotation marks:
-
-- `"hello"`
-- `"many words, one string"`
-- `"42"`
-- `"1/3"`
-- Something students come up with on their own...
-
-[.lesson-point]
-A String is anything in quotation marks. _Anything_.
-
-String values evaluate to themselves, the same way Numbers do. Have a Circle of Evaluation up in front of students. _What will this evaluate to?_
-
-@ifproglang{wescheme}{
-Show a line of code: `(* 10 -4)`.  _What will this evaluate to?_
-Show another line of code: `(star 50 “solid” “blue”)`.  _What will this evaluate to?_
-}
-
-@ifproglang{pyret}{
-Show a line of code: `10 * -4`.  _What will this evaluate to?_
-Show another line of code: `star(50, “solid”, “blue”)`.  _What will this evaluate to?_
-}
-
-- What happened?
-- What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Error Messages}
-
-The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
-|===
-
-- Have students type `star` into the Interactions Area and hit "Enter". What did they get back? What do they think it means? _Students learn that there is a function called_ `star`.
-
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try
-@ifproglang{wescheme}{
-`(star 50)`
-}
-@ifproglang{pyret}{
-`star(50)`
-}
-
-- What error did we get? What _hint_ does it give us about how to use this function?
-
-=== Investigate
-[.lesson-instruction]
-- Have students turn to @workbook-link{pages/exploring-image-functions.adoc, "Exploring Image Functions"}.
-- Have students open a new program file and name it "Exploring Images".
-@ifproglang{pyret}{
-- On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
-}
-
-Give students time to investigate image functions and see how many they can discover, using the workbook page to organize their findings.
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Strategies for English Language Learners}
-
-MLR 2 - Collect and Display: As students explore, walk the room and record student language relating to functions, domain, range, contracts, or what they perceive from @vocab{error messages}.  This output can be used for a concept map, which can be updated and built upon, bridging student language with disciplinary language while increasing sense-making.
-|===
-
-=== Synthesize
-- *What image functions did you and your partner discover?*
-``rectangle``, `triangle`, `ellipse`, `circle`, etc.
-- *How did you decide what to try?*
-- *What error messages did you see?*
-_Input mismatches, missing parentheses, etc._
-- *How did you figure out what to do after seeing an error message?*
-_Read the error message, think about what the computer is trying to tell us, etc._
-
 == Contracts @duration{15 minutes}
 
 === Overview
-After experimenting with image-producing functions, students have begun to realize that each function needs different inputs. Remembering all of these can be challenging! This activity introduces the notion of @vocab{Contracts}, which are a simple notation (found in algebra) for keeping track of the set all of possible inputs and outputs for a function.
+Students have seen arithmetic operators like `+`,`-`,`*` and `/`, as well as functions for taking the square root or squaring a number. Some of them take one input, and others take two. Remembering all of these can be challenging! This activity introduces the notion of @vocab{Contracts}, which are a simple notation (found in algebra) for keeping track of the set all of possible inputs and outputs for a function.
 
 === Launch
-Keeping track of how many inputs a function needs - and whether those inputs are Numbers, Strings, Images, etc. In programming, we use something called a @vocab{Contract} to do this. Contracts are like a "cheat sheet" for using functions. Once you know how to read one, you can quickly figure out how to use a function just by looking at its contract.
+Functions are a lot like machines: values go in, something happens, and new values come out. Addition, for example, is like a machine that takes in pairs of numbers and produces a sum. Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast.
+
+We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what goes in and what comes out!
+
+We use something called a @vocab{Contract} to keep track of what goes in and out of functions. Contracts are like a "cheat sheet" for using functions. Once you know how to read one, you can quickly figure out how to use a function just by looking at its contract!
 
 [.lesson-point]
-A function's contract has three parts: the Name, the @vocab{Domain}, and the @vocab{Range}
+The Contract for a function has three parts: the Name, the @vocab{Domain}, and the @vocab{Range}
 
-- The Name is simply how we refer to the function: `circle`, `star`, etc.
+- The Name is simply how we refer to the function: 
+@ifproglang{wescheme}{`*`, `+`, `sqrt`, etc.}
+@ifproglang{pyret}{`num-sqrt`, `num-sqr`, etc.}
 - The @vocab{Domain} tells us what the function "takes in", or _consumes_. These also known as the _arguments_ to the function.
 - The @vocab{Range} tells us what the function "gives back", _produces_.
 
-=== Investigate
 [.lesson-instruction]
 @ifproglang{wescheme}{
 - Write the contracts for `+`, `-`, `*`, `/`, `sqr`, and `sqrt` into the Contracts page.
@@ -194,11 +118,109 @@ A function's contract has three parts: the Name, the @vocab{Domain}, and the @vo
 |===
 
 [.lesson-instruction]
-Have students turn to the @workbook-link{pages/frayer-model.pdf, Domain and Range Frayer model} in their workbooks and use the visual organizer to explain the concepts of domain and range in their own words.
+*Optional:* Have students turn to the @workbook-link{pages/frayer-model.pdf, Domain and Range Frayer model} in their workbooks and use the visual organizer to explain the concepts of domain and range in their own words.
 
-- *Group together the image functions you discovered by elements in their domain.*
+=== Synthesize
+Knowing the Domain and Range of our functions also tells us how they can fit together. For example:
+@ifproglang{wescheme}{`(sqrt (sqr 16))`}
+@ifproglang{pyret}{`num-sqrt(num-sqr(16))`}
 
-`star`, `circle`, and `triangle` have the same Domain, `rectangle` and `ellipse` have the same domain, etc.
+We know from it's @vocab{Domain} that the square-root function needs a number. And we know from the square function's @vocab{Range} that it will produce that number. We can be pretty confident that this code will work, even before we run it.
+
+== Exploring Image Functions @duration{25 minutes}
+
+=== Overview
+Students explore functions that go beyond numbers, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
+
+=== Launch
+Students have already seen Number values like Integers, Decimals and Fractions, but computer programs can work with a much larger set of data types. Show students String values, by having them typing various things in quotation marks:
+
+- `"hello"`
+- `"many words, one string"`
+- `"42"`
+- `"1/3"`
+- Something students come up with on their own...
+
+[.lesson-point]
+A String is anything in quotation marks. _Anything_.
+String values evaluate to themselves, the same way Numbers do.
+
+Here are two Circles of Evaluation. One of them is familiar, but the other very different from what students have seen before. Have them identify what looks strange about that circle.
+
+[cols="1,1", grid="none", frame="none"]
+|===
+| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
+|@show{(sexp->coe `(star 50 “solid” “blue”))}
+|===
+
+Possible responses:
+
+- We've never seen the function `star` before
+- We've never seen Strings used in a Circle of Evaluation before
+- We've never seen a function take in three inputs
+- We've never seen a function take in a mix of Numbers and Strings
+
+Have students see if they can figure out the Name and @vocab{Domain} for the function in the second Circle. This is a chance to look for and make use of structure in deciphering a novel expression.
+
+- We know the name of the function is `star`, because that's what is at the top of the circle
+- We know it has three things in its Domain
+- We know the Domain consists of a Number and two Strings
+
+But what about the @vocab{Range}? Have students share some guesses, and then convert the Circle to code and try it out!
+
+- What happened?
+- What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
+- What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get.
+- What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Error Messages}
+
+The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
+|===
+
+Suppose we had never seen `star` before. How could we figure out how to use it?
+
+- Have students type `star` into the Interactions Area and hit "Enter". What did they get back? What do they think it means? _Students learn that there is a function called_ `star`.
+
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try
+@ifproglang{wescheme}{
+`(star 50)`
+}
+@ifproglang{pyret}{
+`star(50)`
+}
+
+- What error did we get? What _hint_ does it give us about how to use this function?
+
+=== Investigate
+[.lesson-instruction]
+- Have students turn to @workbook-link{pages/exploring-image-functions.adoc, "Exploring Image Functions"}.
+- Have students open a new program file and name it "Exploring Images".
+@ifproglang{pyret}{
+- On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
+}
+
+Give students time to investigate image functions and see how many they can discover, using the Contracts page to organize their findings.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for English Language Learners}
+
+MLR 2 - Collect and Display: As students explore, walk the room and record student language relating to functions, domain, range, contracts, or what they perceive from @vocab{error messages}.  This output can be used for a concept map, which can be updated and built upon, bridging student language with disciplinary language while increasing sense-making.
+|===
+
+=== Synthesize
+- *What image functions did you and your partner discover?*
+``rectangle``, `triangle`, `ellipse`, `circle`, etc.
+- *How did you decide what to try?*
+- *What error messages did you see?*
+_Input mismatches, missing parentheses, etc._
+- *How did you figure out what to do after seeing an error message?*
+_Read the error message, think about what the computer is trying to tell us, etc._
 
 == Making Sense of Contracts @duration{10 minutes}
 
@@ -246,6 +268,7 @@ _An actor signs a contract agreeing to perform in a film in exchange for compens
 
 [.lesson-instruction]
 Students create a visual "Contracts page" either digitally or physically.  Ask students to think about how they visualize contracts in their own minds and how they could use that imagery to explain functions and their contracts to others.
+
 
 == Additional Exercises:
 
