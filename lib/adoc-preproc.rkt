@@ -1186,34 +1186,44 @@
         [(symbol? e) (sym-to-adocstr e #:pyret pyret)]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
-                     (if (or (memq a '(+ - * / and or < > = <= >=))
-                             (memq a *list-of-hole-symbols*))
-                         (if (and (eq? a '/) (not pyret))
-                             (format "{~a \\over ~a}"
-                                     (sexp->arith (list-ref e 1))
-                                     (sexp->arith (list-ref e 2)))
-                             (let* ([a (if pyret (sexp->arith a #:pyret #t)
-                                           (cond [(eq? a '*) "\\;\\times\\;"]
-                                                 [(eq? a '/) "\\div"]
-                                                 [else a]))]
-                                    [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
-                                    [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
-                                    [x (format "~a ~a ~a"
-                                               lft
-                                               a
-                                               rt)])
-                               (if wrap
-                                   (if pyret
-                                       (format "({zwsp}~a{zwsp})" x)
-                                       (format "(~a)" x))
-                                   x)))
-                         (format "~a{zwsp}({zwsp}~a{zwsp})"
-                                 (sexp->arith a #:pyret pyret)
-                                 (string-join
-                                   (map (lambda (e1)
-                                          (sexp->arith e1 #:pyret pyret)) (cdr e))
-                                   ", "))
-                         ))]
+                     (cond [(or (memq a '(+ - * / and or < > = <= >=))
+                                (memq a *list-of-hole-symbols*))
+                            (if (and (eq? a '/) (not pyret))
+                                (format "{~a \\over ~a}"
+                                        (sexp->arith (list-ref e 1))
+                                        (sexp->arith (list-ref e 2)))
+                                (let* ([a (if pyret (sexp->arith a #:pyret #t)
+                                              (cond [(eq? a '*) "\\;\\times\\;"]
+                                                    [(eq? a '/) "\\div"]
+                                                    [else a]))]
+                                       [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
+                                       [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
+                                       [x (format "~a ~a ~a"
+                                                  lft
+                                                  a
+                                                  rt)])
+                                  (if wrap
+                                      (if pyret
+                                          (format "({zwsp}~a{zwsp})" x)
+                                          (format "(~a)" x))
+                                      x)))]
+                           [(and (eq? a 'define) (= (length e) 3) pyret)
+                            (let* ([lhs (list-ref e 1)]
+                                   [rhs (list-ref e 2)]
+                                   [lhs-c (sexp->arith lhs #:pyret #t)]
+                                   [rhs-c (sexp->arith rhs #:pyret #t)])
+                              (cond [(cons? lhs)
+                                     (format "fun ~a: ~a end" lhs-c rhs-c)]
+                                    [else
+                                      (format "var ~a = ~a" lhs-c rhs-c)]))]
+                           [else
+                             (format "~a{zwsp}({zwsp}~a{zwsp})"
+                                     (sexp->arith a #:pyret pyret)
+                                     (string-join
+                                       (map (lambda (e1)
+                                              (sexp->arith e1 #:pyret pyret)) (cdr e))
+                                       ", "))]
+                           ))]
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
 
 (define holes-to-underscores
