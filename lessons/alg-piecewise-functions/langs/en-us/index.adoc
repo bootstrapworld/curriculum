@@ -25,17 +25,8 @@
 * Lesson slides template (@link{https://docs.google.com/presentation/d/12N4SJTiOq5aymbry1Yw94ER8Ea3fyyKIkppVsb1SFKw/edit?usp=sharing, Google Slides})
 }
 
-////
 @ifproglang{wescheme}{
-* Piecewise Mystery Functions starter file (@link{https://www.wescheme.org/openEditor?publicId=pLVBsxgC93, WeScheme})
-}
-@ifproglang{pyret}{
-* Piecewise Mystery Functions starter file (@link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Pyret})
-}
-////
-@ifproglang{wescheme}{
-* Luigi's Pizza starter file (@link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, WeScheme})
-// * @link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, Alice's Restaurant starter file}
+* Alice's Restaurant starter file (@link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, WeScheme})
 }
 @ifproglang{pyret}{
 * Alice's Restaurant starter file (@link{https://code.pyret.org/editor#share=1oeHRCcJhaP2GuKiujU0PRnJzOyWrPWSh&v=8934c12, Pyret})
@@ -89,13 +80,19 @@ _Since each student ("input") has only one action ("output"), it *is still a fun
 
 Up until now, almost all the students have seen are continuous and smooth. Make a big deal about this, so they recognize how big of a shift this is!
 
+Explain that students have just acted out what is called a _piecewise function_. Even though their behavior didn't follow a smooth pattern (or even a continuous one!), it clearly followed a set of rules and each input had exactly one output. Math has functions like this as well!
+
+Example: Suppose I sell boxes of candy for $2 each. We could imagine that a graph of sales-v-revenue looks like a straight line with a slope of 2: a linear functions! But then I want to offer a "bulk discount", where the price drops to $1 for the 21st box of candy and every box after that. Suddenly our line has a kink in it at 20 boxes, where the slops suddenly changes from 2 to 1. 
+
+Can students come up with their own examples?
+
 === Investigate
 @ifproglang{wescheme}{
-Students open the @link{https://www.wescheme.org/openEditor?publicId=5jBc52gFTV, Luigi's Pizza file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
+Students open the @link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, Alice's Restaurant starter file}. and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
 }
 
 @ifproglang{pyret}{
-Students open the @link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Alice's Restaurant file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
+Students open the @link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Alice's Restaurant file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Intro}.
 }
 
 Students investigate the file using their workbook page as a guide.
@@ -133,6 +130,17 @@ _`cost`, takes in a String and produces a Number._
 - *How do you think this function works?*
 +
 _Answers vary - let students drive discussion!_
+
+The `cost` function is _also_ piecewise function! Each input has a single output, but the behavior isn't smooth (there's no relationship between one item's price and another!) or continuous (there are plenty of items not on the menu!).
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Partial Functions}
+
+For Algebra 2 or pre-calculus teachers, this is a useful time to address _partial functions_. The students who liked sushi had _no rule at all_, meaning that the function was _undefined_ at those points. The candy-sales analogy can be extended to say that no one can order more than 100 boxes at a time, making the function undefined for values of x greater than 99.
+
+|===
 
 == Defining Piecewise Functions @duration{30 minutes}
 
@@ -175,23 +183,27 @@ How many examples are needed to fully test this function?
 _More than two!_ In fact, we need an example for at least every possible item on the menu!
 
 @ifproglang{wescheme}{
-```(EXAMPLE (cost "cheese")     9.00)
-(EXAMPLE (cost "pepperoni") 10.50)
-(EXAMPLE (cost "chicken")   11.25)
-(EXAMPLE (cost "brocolli")  10.25)
 ```
-}
-
-@ifproglang{pyret}{
-```(EXAMPLE (cost "hamburger")   6.00)
+(EXAMPLE (cost "hamburger")   6.00)
 (EXAMPLE (cost "onion rings") 3.50)
 (EXAMPLE (cost "fried tofu")  5.25)
 (EXAMPLE (cost "pie")         2.25)
 ```
 }
 
+@ifproglang{pyret}{
+```
+examples:
+  cost("hamburger")   is 6.00
+  cost("onion rings") is 3.50
+  cost("fried tofu")  is 5.25
+  cost("pie")         is 2.25
+end
+```
+}
+
 [.lesson-instruction]
-Now we circle and label everything that is change-able, just as we always have. So what changes?
+Now we circle and label everything that is _change_-able, just as we always have. So what changes?
 
 - The input changes (the String, representing the food being ordered)
 - The price changes (the Number, representing the price of the food)
@@ -210,26 +222,26 @@ If there are more labels in the examples than there are things in the Domain, we
 We have two things changing (the food and the price), but only one thing is in our Domain. That's how we know this function is piecewise function!
 
 @ifproglang{wescheme}{
-We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost topping) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
+We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost menu-item) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `cond` expression. Each condition has a test and a result, and we copy the results from our examples just as we always do.
 ```
-(define (cost topping)
+(define (cost menu-item)
   (cond
-    [      ...                       9.00]
-    [      ...                      10.50]
-    [      ...                      11.25]
-    [      ...                      10.25]))
+    [      ...                       6.00]
+    [      ...                       3.50]
+    [      ...                       5.25]
+    [      ...                       2.25]))
 ```
 
-Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `9.00`? _when the topping is "cheese"!_:
+Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `6.00`? _when the menu item is "hamburger"!_:
 ```
 (define (cost topping)
   (cond
-    [ (string=? topping "cheese")    9.00]
-    [      ...                      10.50]
-    [      ...                      11.25]
-    [      ...                      10.25]))
+    [ (string=? menu-item "hamburger") 6.00]
+    [          ...                     3.50]
+    [          ...                     5.25]
+    [          ...                     2.25]))
 ```
 }
 
@@ -240,10 +252,10 @@ Then, for each different behavior we wrote in our examples, we add a condition t
 ```
 fun​ cost(menu-item):
   ask:
-    |           ...                          then:​ 6.00
-    |           ...                          then:​ 3.50
-    |           ...                          then:​ 5.25
-    |           ...                          then: 2.25
+    |           ...                        then:​ 6.00
+    |           ...                        then:​ 3.50
+    |           ...                        then:​ 5.25
+    |           ...                        then: 2.25
   end
 end
 ```
@@ -252,10 +264,10 @@ Finally, we fill in the tests with an expression that tells us _when_ the functi
 ```
 fun​ cost(menu-item):
   ask:
-    | string-equal(menu-item, "hamburger")   then:​ 6.00
-    |           ...                          then:​ 3.50
-    |           ...                          then:​ 5.25
-    |           ...                          then: 2.25
+    | string-equal(menu-item, "hamburger") then:​ 6.00
+    |           ...                        then:​ 3.50
+    |           ...                        then:​ 5.25
+    |           ...                        then: 2.25
   end
 end
 ```
@@ -265,4 +277,4 @@ end
 == Additional Exercises:
 - Option 1: Students create another function in the code that displays an image of the food instead of the price. This integrates earlier-learned skills in creating images and defining values.
 
-- Option 2: Students create an engaging visual representation of how the computer moves through a conditional function.
+- Option 2: Students create a _visual representation_ of how the computer moves through a conditional function.

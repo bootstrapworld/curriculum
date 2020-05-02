@@ -10,15 +10,15 @@ Alice's code has some new elements we haven't seen before, so let's experiment a
 
 @vspace{2ex}
 
-1) What does `cost("hamburger")` evaluate to? @fitb{30ex}{_6_}
+1) What does @show{(sexp->code `(cost "hamburger"))} evaluate to? @fitb{30ex}{_6_}
 
 @vspace{1ex}
 
-2) What does `cost("pie")` evaluate to? @fitb{30ex}{_2.25_}
+2) What does @show{(sexp->code `(cost "pie"))} evaluate to? @fitb{30ex}{_2.25_}
 
 @vspace{1ex}
 
-3) What if you ask for `cost("fries")`? @fitb{30ex}{___"Sorry, that's not on the menu!"___}
+3) What if you ask for @show{(sexp->code `(cost "fries"))}? @fitb{30ex}{___"Sorry, that's not on the menu!"___}
 
 @vspace{1ex}
 
@@ -57,7 +57,6 @@ Is this a problem? Why or why not?
 
 @vspace{1ex}
 
-10) Suppose Luigi wants to calculate the price of the item including a 5% sales tax.
-Draw a Circle of Evaluation for the expression below.
+10) Suppose Alice wants to calculate the price of a hamburger, _including a 5% sales tax_. Draw a Circle of Evaluation for the expression below.
 
-@show{(sexp->coe `(* 1.05 (cost "fried tofu")))}
+@show{(sexp->coe `(* 1.05 (cost "hamburger")))}
