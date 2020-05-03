@@ -26,10 +26,10 @@
 }
 
 @ifproglang{wescheme}{
-* Alice's Restaurant starter file (@link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, WeScheme})
+* Alice's Restaurant starter file (@link{https://www.wescheme.org/openEditor?publicId=AcThgFgX9z, WeScheme})
 }
 @ifproglang{pyret}{
-* Alice's Restaurant starter file (@link{https://code.pyret.org/editor#share=1oeHRCcJhaP2GuKiujU0PRnJzOyWrPWSh&v=8934c12, Pyret})
+* Alice's Restaurant starter file (@link{https://code.pyret.org/editor#share=1_TxgoUCDKY3WYn_Vu9J1_2LXkY1o0dx_, Pyret})
 }
 * Restaurant - Intro (@workbook-link{pages/restaurant-intro.adoc})
 * Restaurant - Explore (@workbook-link{pages/restaurant-explore.adoc})
@@ -57,7 +57,7 @@ and have their workbooks with a pen or pencil.
 == Not Every Function is Smooth @duration{15 minutes}
 
 === Overview
-Students are challenged via counterexamples to see just how far the @link{https://en.wikipedia.org/wiki/Vertical_line_test, Vertical Line Test} will go: into behaviors that _feel_ like functions but don't act line a straight line or smooth curve!
+Students are challenged via counterexamples to see just how far the @link{https://en.wikipedia.org/wiki/Vertical_line_test, Vertical Line Test} will go: into behaviors that __feel__ like functions but don't act line a straight line or smooth curve!
 
 === Launch
 
@@ -72,7 +72,7 @@ Have students stand up and put some space between themselves, as if on a number 
 Every student should have an activity to perform.  Ask a student walking in place why they aren't waving their arms in the air, or how they knew what to do. Their behavior is essentially the y-coordinate, though for a more direct connection you can specify that different groups sit, kneel, or stand so that their literal _height_ represents the y-axis.
 
 [.lesson-point]
-The @link{https://en.wikipedia.org/wiki/Vertical_line_test, Vertical Line Test} says that to be a function, every input has to be matched with exactly one output.
+The Vertical Line Test says that to be a function, every input has to be matched with exactly one output.
 
 [.lesson-instruction]
 Ask students: Is this activity representing a function?  What is the input?  What is the output?
@@ -88,11 +88,11 @@ Can students come up with their own examples?
 
 === Investigate
 @ifproglang{wescheme}{
-Students open the @link{https://www.wescheme.org/openEditor?publicId=SF5vyMJyw2, Alice's Restaurant starter file}. and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Explore}.
+Students open the @link{https://www.wescheme.org/openEditor?publicId=AcThgFgX9z, Alice's Restaurant starter file}. and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Intro}.
 }
 
 @ifproglang{pyret}{
-Students open the @link{https://code.pyret.org/editor#share=1IzEm5fsWV22dHbKQFDRXZloHqU8fJ7W8&v=882d33a, Alice's Restaurant file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Intro}.
+Students open the @link{https://code.pyret.org/editor#share=1_TxgoUCDKY3WYn_Vu9J1_2LXkY1o0dx_, Alice's Restaurant starter file} and turn to @workbook-link{pages/restaurant-intro.adoc, Restaurant - Intro}.
 }
 
 Students investigate the file using their workbook page as a guide.
@@ -102,7 +102,7 @@ Students investigate the file using their workbook page as a guide.
 |
 @span{.title}{Notice and Wonder}
 
-Have students take time to think and discuss what they notice and wonder about this file, which contains some new elements they haven't seen before!
+Have students take time to think and discuss what they Notice and Wonder about this file, which contains some new elements they haven't seen before!
 |===
 
 === Synthesize
@@ -150,25 +150,13 @@ Having acted out a piecewise function and examined the code for one on their com
 === Launch
 Students turn to @workbook-link{pages/restaurant-explore.adoc, Restaurant Explore} and complete the exercises with their partner.  Students should have added as least one extra option to the menu before moving on.
 
-@ifproglang{wescheme}{
-- *What happens with the interactive cash register when you enter an item not on the menu?*
+- *Why do you get an error when you try to use the `sales-tax` function for an item not on the menu?*
 +
-_The program freezes, or crashes._ 
-- *Why does the cash register stop working when you enter an item not on the menu?*
-+
-_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a @vocab{String} instead of a Number._
-}
-@ifproglang{pyret}{
-- *What happens with the `sales-tax` function when you enter an item not on the menu?*
-+
-_We get an error._ 
-- *What is the error telling us?*
-+
-_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the `else` statement returns a String instead of a Number._
-}
+_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the "catch-all" branch at the bottom returns a @vocab{String} instead of a Number._
 
 - *What should we do about this?* 
-_Since we want the program to stop if we give it an invalid input, we should just delete the last branch altogether. Think about other functions that don't work when we give them an invalid input!_
++
+_Since we want the program to stop if we give it an invalid input, we should just delete the last branch altogether. Think about other functions that don't work when we give them an invalid input, like dividing by zero!_
 
 === Investigate
 So how do we actually _write_ a piecewise function? And more importantly, how does the Design Recipe help us get there?
@@ -217,16 +205,16 @@ Up until now, there's been a pattern that students may not have noticed: the num
 |===
 
 [.lesson-point]
-If there are more labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
+If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
 
-We have two things changing (the food and the price), but only one thing is in our Domain. That's how we know this function is piecewise function!
+We have two things changing (the item and the price), but only one thing is in our Domain. That's how we know this function is piecewise function!
 
 @ifproglang{wescheme}{
-We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost menu-item) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
+We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost item) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `cond` expression. Each condition has a test and a result, and we copy the results from our examples just as we always do.
 ```
-(define (cost menu-item)
+(define (cost item)
   (cond
     [      ...                       6.00]
     [      ...                       3.50]
@@ -236,38 +224,38 @@ Then, for each different behavior we wrote in our examples, we add a condition t
 
 Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `6.00`? _when the menu item is "hamburger"!_:
 ```
-(define (cost topping)
+(define (cost item)
   (cond
-    [ (string=? menu-item "hamburger") 6.00]
-    [          ...                     3.50]
-    [          ...                     5.25]
-    [          ...                     2.25]))
+    [ (string=? item "hamburger")    6.00]
+    [          ...                   3.50]
+    [          ...                   5.25]
+    [          ...                   2.25]))
 ```
 }
 
 @ifproglang{pyret}{
-We start writing the definition as we normally would, using the function name and the input label from the examples step (`fun cost(menu-item): ... end`. But since we know it's a piecewise function, now we add `ask: ... end` to the body of the function.
+We start writing the definition as we normally would, using the function name and the input label from the examples step (`fun cost(item): ... end`. But since we know it's a piecewise function, now we add `ask: ... end` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `ask` block. Each condition has a test, a `then:`, and a result, and we copy the results from our examples just as we always do.
 ```
-fun​ cost(menu-item):
+fun​ cost(item):
   ask:
-    |           ...                        then:​ 6.00
-    |           ...                        then:​ 3.50
-    |           ...                        then:​ 5.25
-    |           ...                        then: 2.25
+    |           ...                  then:​ 6.00
+    |           ...                  then:​ 3.50
+    |           ...                  then:​ 5.25
+    |           ...                  then: 2.25
   end
 end
 ```
 
 Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `6.00`? _when the menu item is "hamburger"!_:
 ```
-fun​ cost(menu-item):
+fun​ cost(item):
   ask:
-    | string-equal(menu-item, "hamburger") then:​ 6.00
-    |           ...                        then:​ 3.50
-    |           ...                        then:​ 5.25
-    |           ...                        then: 2.25
+    | string-equal(item, "hamburger") then:​ 6.00
+    |           ...                   then:​ 3.50
+    |           ...                   then:​ 5.25
+    |           ...                   then: 2.25
   end
 end
 ```
