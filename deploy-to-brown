@@ -1,9 +1,6 @@
 # last modified 2020-05-04
 
-if test ! $(which providentialaddress); then
-  echo Missing command \'providentialaddress\' that echoes \<your_userid\>@ssh.cs.brown.edu
-  exit
-fi
+userid=$1
 
 if test ! -d distribution; then
   echo distribution/ not found; exit
@@ -35,6 +32,6 @@ copyCourse flags-pathway flags-remix
 #find courses -type d | xargs chmod g+rwx,o+rx
 #find courses -type f | xargs chmod g+rw,o+r
 
-scp -prq courses/* $(providentialaddress):tmp/courses
+scp -prq courses/* $userid@ssh.cs.brown.edu:tmp/courses
 
-ssh $(providentialaddress) "find tmp/courses -type d|xargs chmod g+rwx,o+rx; find tmp/courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt tmp/courses;cp -prH tmp/courses/* $DEPLOY_DIR"
+ssh $userid@ssh.cs.brown.edu "find tmp/courses -type d|xargs chmod g+rwx,o+rx; find tmp/courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt tmp/courses;cp -prH tmp/courses/* $DEPLOY_DIR"
