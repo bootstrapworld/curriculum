@@ -2,14 +2,20 @@
 
 userid=$1
 
+pwy=
+
+if test $# -ge 2; then
+  pwy=$2
+fi
+
 if test ! -d distribution; then
   echo distribution/ not found; exit
 fi
 
-YEAR=2020
-SEMESTER=spring
+#YEAR=2020
+#SEMESTER=spring
 
-DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR/courses
+#DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR/courses
 
 cd distribution
 
@@ -18,20 +24,43 @@ test -d courses && rm -fr courses
 mkdir courses
 
 function copyCourse() {
-  local src=$1 dest=$2
+  local src=$1
   test -d $src || return
-  cp -prH $src courses/$dest
+  local dest=$(pathwayNameOnServer $src)
+  cp -pr $src courses/$dest
 }
 
-copyCourse game-pathway-wescheme algebra-wescheme-remix
-copyCourse game-pathway-pyret algebra-pyret-remix
-copyCourse data-science-pathway datascience-remix
-copyCourse reactive-pathway reactive-remix
-copyCourse flags-pathway flags-remix
+function pathwayNameOnServer() {
+  local localName=$1
+  case $localName in
+    game-pathway-wescheme) echo algebra-wescheme-remix;;
+    game-pathway-pyret) echo algebra-pyret-remix;;
+    data-science-pathway) echo datascience-remix;;
+    reactive-pathway) echo reactive-remix;;
+    flags-pathway) echo flags-remix;;
+    *) echo $1-remix;;
+  esac
+}
 
-#find courses -type d | xargs chmod g+rwx,o+rx
-#find courses -type f | xargs chmod g+rw,o+r
+if test $pwy; then
+  copyCourse $pwy
+else
+  copyCourse game-pathway-wescheme
+  copyCourse game-pathway-pyret
+  copyCourse data-science-pathway
+  copyCourse reactive-pathway
+  copyCourse flags-pathway
+fi
 
-scp -prq courses/* $userid@ssh.cs.brown.edu:tmp/courses
+test -f courses.tar.bz2 && rm courses.tar.bz2
 
-ssh $userid@ssh.cs.brown.edu "find tmp/courses -type d|xargs chmod g+rwx,o+rx; find tmp/courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt tmp/courses;cp -prH tmp/courses/* $DEPLOY_DIR"
+echo Tarring up courses...
+tar jcf courses.tar.bz2 courses
+
+echo Copying courses tarball to brown.edu...
+scp courses.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
+
+cd ..
+
+./deploy-to-brown-perms $userid
+
