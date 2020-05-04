@@ -1,0 +1,2 @@
+ssh $(providentialaddress) "find tmp/courses -type d|xargs chmod g+rwx,o+rx; find tmp/courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt tmp/courses;cp -prH tmp/courses/* $DEPLOY_DIR"
+

@@ -1,0 +1,40 @@
+# last modified 2020-05-04
+
+if test ! $(which providentialaddress); then
+  echo Missing command \'providentialaddress\' that echoes \<your_userid\>@ssh.cs.brown.edu
+  exit
+fi
+
+if test ! -d distribution; then
+  echo distribution/ not found; exit
+fi
+
+YEAR=2020
+SEMESTER=spring
+
+DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR/courses
+
+cd distribution
+
+test -d courses && rm -fr courses
+
+mkdir courses
+
+function copyCourse() {
+  local src=$1 dest=$2
+  test -d $src || return
+  cp -prH $src courses/$dest
+}
+
+copyCourse game-pathway-wescheme algebra-wescheme-remix
+copyCourse game-pathway-pyret algebra-pyret-remix
+copyCourse data-science-pathway datascience-remix
+copyCourse reactive-pathway reactive-remix
+copyCourse flags-pathway flags-remix
+
+#find courses -type d | xargs chmod g+rwx,o+rx
+#find courses -type f | xargs chmod g+rw,o+r
+
+scp -prq courses/* $(providentialaddress):tmp/courses
+
+ssh $(providentialaddress) "find tmp/courses -type d|xargs chmod g+rwx,o+rx; find tmp/courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt tmp/courses;cp -prH tmp/courses/* $DEPLOY_DIR"
