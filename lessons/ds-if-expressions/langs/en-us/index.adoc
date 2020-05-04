@@ -1,0 +1,100 @@
+= If-Expressions
+
+@lesson-description{ }
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* use if-then-else expressions in Pyret
+* explain the behavior of a (specific) higher order function
+
+| Student-Facing Lesson Goals
+| I can...
+
+* define one-argument functions that make Images from Numbers, Strings, and even Rows
+* create custom scatter plots using those functions
+
+| Materials
+|
+* Lesson Slides (@link{https://docs.google.com/presentation/d/1qGfWcaI9dqNW71AUUJJZoR_w6JUqsWLSln4uh1NiBJA, Google Slides})
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* The Mood Generator Starter File (@link{https://code.pyret.org/editor#share=1ymyvlI7RTtq8lHh4VH3x1N3WlcZB650j, CPO})
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Warmup
+
+Show students @link{https://code.pyret.org/editor#share=1AZXHbT23IMIOw-qwNzg310_DDVUyCpLc, this code}, which uses `bitmap-url` and `scale` to use actual pictures of animals.
+
+What do they Notice? What do they Wonder? How might this scatterplot change our analysis?
+
+== If-Expressions @duration{20 minutes}
+
+=== Overview
+Students explore a program that makes use of an _if-expression_, develop their own understanding, and modify it.
+
+=== Launch
+So far, all of the functions we know how to write have had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue triangle of that size. The rule for `nametag` was to take a row and make an image of the animal's name in purple letters.
+
+What if we want to write functions that apply different rules, depending on the input? For example, what if we want to change the color of the nametag depending on the species of the animal?
+
+=== Investigate
+[.lesson-instruction]
+- Open the @link{https://code.pyret.org/editor#share=1ymyvlI7RTtq8lHh4VH3x1N3WlcZB650j, Mood Generator starter file}.
+- Complete @workbook-link{pagers/MoodGenerator-intro.adoc, Mood Generator - Intro} in your student workbooks.
+
+=== Synthesize
+Have the class share their own explanations for how if-expressions work.
+
+Pyret allows us to write if-expressions, which contain:
+
+. the keyword `if`, followed by a _condition_.
+. a color (`:`), followed by a rule for what the function should do if the condition is `true`
+. an `else:`, followed by a rule for what to do if the condition is `false`
+
+We can chain them together to create multiple rules, with the last `else:` being our fallback in case every other condition is `false`.
+
+== Better Image Scatter Plots @duration{20 minutes}
+
+=== Overview
+Suppose we want to make a scatter plot for the animals dataset, but with each dot being a different color depending on the species. This would make it possible to see if different animals are "clustered" in different parts of the plot.
+
+=== Investigate
+Have students open @workbook-link{pages/species-color.adoc, Species-Color}. Make sure they all write the Contract and Purpose Statement _first_ , and check in with their partner _and_ the teacher before proceeding.
+
+Once they've got the Contract and Purpose Statement, have them come up with `examples:` for _each species_. Once again, have them check with a partner _and_ the teacher before finishing the page.
+
+[.lesson-instruction]
+Once another student _and_ the teacher has checked their work, have them type this function into their animals starter files, and use it to make an `image-scatter-plot` with different colors for each species.
+
+=== Synthesize
+
+. What do you Notice about this scatter plot?
+. What do you Wonder?
+. How else could we use if-expressions in our analysis?
+
+== Closing
+Make sure to direct the conversation _back to Data Science!_ Does this scatter plot make us think we should be analzing animals separately? What other scatterplots might this be useful for?
+
+__This scatterplot makes it clear that we may want to analyze each species separately, rather than grouping them all together!__ In the next lesson, students will learn how to do just that.
+
+
+== Additional Exercises:
+
+- TODO
