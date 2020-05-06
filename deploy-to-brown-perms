@@ -1,11 +1,14 @@
-# last modified 2020-05-04
+# last modified 2020-05-05
 
 userid=$1
 
-YEAR=2020
+YEAR=20xx
 SEMESTER=spring
 
 DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR/courses
 
-ssh $userid@ssh.cs.brown.edu "cd tmp;rm -fr courses;tar jxf courses.tar.bz2;find courses -type d|xargs chmod g+rwx,o+rx; find courses -type f|xargs chmod g+rw,o+r; chgrp -R cs-plt courses;cd courses;for d in *; do if test ! -d \$d; then break; fi; rm -fr $DEPLOY_DIR/\$d; mv \$d $DEPLOY_DIR; done;cd $DEPLOY_DIR;chmod g+rws,o+rx *"
+echo Deploying docs on Brown site...
 
+ssh $userid@ssh.cs.brown.edu "cd tmp;rm -fr courses;tar jxf courses.tar.bz2;chgrp -R cs-plt courses;find courses -type d|xargs chmod g+rwx,o+rx; find courses -type f|xargs chmod g+rw,o+r; cd courses;for d in *; do if test ! -d \$d; then break; fi; rm -fr $DEPLOY_DIR/\$d; mv \$d $DEPLOY_DIR; (cd $DEPLOY_DIR;chmod g+rwx,o+rx \$d); done"
+
+echo Deployment done!
