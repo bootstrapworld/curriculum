@@ -1,6 +1,11 @@
-# last modified 2020-05-05
+# last modified 2020-05-07
 
 userid=$1
+
+if test ! $userid; then
+  echo Supply userid as arg!
+  exit
+fi
 
 pwy=
 
@@ -47,13 +52,21 @@ else
   copyCourse flags-pathway
 fi
 
+for f in asc asciidoc rkt.kp txt.kp; do
+  find courses -name \*.$f -delete
+done
+
 test -f courses.tar.bz2 && rm courses.tar.bz2
 
 echo Tarring up courses...
 tar jcf courses.tar.bz2 courses
 
+#exit
+
 echo Copying courses tarball to brown.edu...
 scp courses.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
+
+echo Copying done
 
 cd ..
 
