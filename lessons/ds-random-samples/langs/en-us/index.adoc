@@ -1,0 +1,86 @@
+= Random Samples
+
+@lesson-description{Students learn about random samples and statistical inference, as applied to the animals dataset. In the process, get a light introduction to the role of sample size and the importance of statistical inference.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-table-functions}
+| Lesson Goals
+| Students will be able to...
+
+* Make random samples from a population
+* Understand the need for random samples
+
+| Student-Facing Lesson Goals
+| I can...
+
+* Make random samples from a population
+
+| Materials
+|
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Preparation
+|
+* Lesson slides (@link{https://docs.google.com/presentation/d/1Yw5WhQRkz6F7G0mE6CP9HahgDZt9hdp4khfjnlBrzKQ/, Google Slides})
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
+
+| Supplemental Resources
+|
+
+| Relevant Standards
+|
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Random Samples @duration{15 minutes}
+
+=== Overview
+This activity is all about @vocab{random samples}: how well does a random sample of a population _represent_ the whole population? Students make differently-sized random samples of the animals dataset, and see how well each sample represents the population. They begin to explore the concept of _sample size_.
+
+=== Launch
+One of the most useful tasks in Data Science is using sample data to _infer_ (guess) what’s true about the larger population from which the sample was taken. This process, called @vocab{statistical inference}, is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art! Early on, statisticians discovered that _random_ samples almost always work best.
+
+Suppose we want to make an educated guess about who the next US president will be. We can't ask everyone who they’re voting for, so pollsters instead take a _sample_ of Americans, and _generalize_ the opinion of the sample to estimate how Americans as a whole feel. But choosing a sample can be tricky...
+
+[.lesson-instruction]
+* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
+* How could we choose a representative subset, or _sample_ of American voters?
+
+Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a sample of the data. The main reason for doing inference is to guess about something that’s _uknown_ for the whole population. But a useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth. Another discovery (besides the value of randomness) that statisticians made early on was something that’s perfectly consistent with common sense: Larger samples are better than smaller ones, because they tend to get us closer to the truth about the larger population.
+
+[.lesson-point]
+Make samples first!
+
+Data Scientists don’t always know what the interesting questions are right away. Let’s see what happens if we switch from smaller to larger sample sizes, if we’re taking a sample of shelter animals to infer what’s true about the larger population...
+
+=== Investigate
+
+The animals dataset we've been using is just a _sample_ taken from a large animal shelter. How much can we infer about the whole population, by looking at just this one sample? 
+
+[.lesson-instruction]
+- Have students open the @link{https://code.pyret.org/editor#share=1d-EPNpMzYw0a2Nj5axj_rWjaXUOJTv08, Random Samples starter file}, and click "Run".
+- Have students complete @workbook-link{pages/sampling-and-inference.adoc}.
+
+=== Synthesize
+* Have students share their results, and discuss how large a sample needs to be for it to be "representative". 
+* How large does a random sample have to be, to allow us to generalize? 1/10th the size of the dataset? 1/4th?
+* Suppose we decide it’s X%. Will that be true for all datasets?
+* Why or why not?
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Going Deeper}
+
+If appropriate for your learning goes, this is a great place to include more rigorous statistics content about sample size.
+|===
+
+
+== Additional Exercises
+- Project: @link{pages/food-habits-project.adoc, Analyzing Food Habits}
+- Project: @link{pages/time-use-project.adoc, Analyzing Time-Use}

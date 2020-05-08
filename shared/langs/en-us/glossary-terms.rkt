@@ -126,6 +126,7 @@ when it prints out the glossary for a particular unit
     (("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right.")
     ("spread" "how far the values in a dataset are away from the center")
     ("state" "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")
+    ("statistical inference" "the process of using data analysis to deduce properties of an underlying distribution of probability")
     ("String" "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
     (("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
     (("normal" "normal distribution") "A normal distribution has a particular symmetric shape that bulges in the middle and tapers at the ends.")
