@@ -55,14 +55,10 @@ pie-chart(animals-table, "gender")
 - How many inputs are in its @vocab{Domain}?
 - In the Interactions Area, type `pie-chart(animals-table, "species")` and hit Enter. What happens? 
 
+@span{.right}{@image{images/pie-chart.png}}
 Hovering over a pie slice or bar reveals the value or percentage of the whole, and the label. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
-The function `pie-chart` consumes a Table of data, along with the _name of a categorical column you want to display_. The computer
-will go through the column, counting the number of times that each value appears. It will then create a pie slice for each
-value, with the size of the slice being the percentage of times it appears. In this example, we used our `animals-table` table as
-our dataset, and made a pie chart showing the distribution of `species` across the shelter.
-
-Pie and Bar Charts display the proportion of a sample that belongs to each category. We use them to _infer_ the proportion of a whole population that might belong to each category.
+The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `species` across the shelter.
 
 === Investigate
 Here is the @vocab{Contract} for another function:
@@ -73,21 +69,21 @@ Here is the @vocab{Contract} for another function:
 
 [.lesson-instruction]
 - Which column of the animals table tells us whether an animal is male or female?
-- Use `bar-chart` to make a display showing the number of female animals at the shelter.
-- Do you think we could use any column? What about a quantitative column?
-- Experiment with these two functions, passing in different column names for the label and data columns. If you get an error message, _read it carefully!_ 
+- Use `bar-chart` to make a display showing the number of male and female animals at the shelter.
+- Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_ 
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
-- When would you want to use a pie chart instead of a bar chart?
-- When would you want to use a bar chart instead of a pie chart?
+- When would you want to use one chart instead of another?
 
 === Possible Misconceptions
-Pie charts show _percentages_, whereas bar charts show _quantities_. Students don't often notice the difference, so be sure to explicitly call it out!
+Pie charts may show counts or percentages (in Pyret they show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables. 
 
 ==== Synthesize
-[.lesson-point]
-Pie charts and bar charts are mostly used to _summarize categorical columns_. 
+Pie and Bar Charts display the proportion of a sample that belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
-While bars in a bar chart are usually order in some logical way (alphabetical, small-medium-large, etc), the pie slices and bars can be placed in any order, without changing the meaning of the chart.
+[.lesson-point]
+Pie charts and bar charts are mostly used to _display categorical columns_. 
+
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
 
 == Exploring other Displays @duration{30 minutes}
 
@@ -109,9 +105,6 @@ There are _many_ possible misconceptions about displays that students may encoun
 Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
 
 You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
-
-[.lesson-instruction]
-Make sure to save your work, so you can go back to it later!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
