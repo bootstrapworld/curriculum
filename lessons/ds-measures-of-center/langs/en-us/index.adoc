@@ -1,7 +1,7 @@
 = Measures of Center
 
 @lesson-description{
-Students learn different ways to explore central tendency in a quantitative data set: mean, median and modes. After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
+Students learn different ways to explore central tendency in a quantitative data set: mean, median and mode(s). After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
 
 [@lesson-intro-table]
 |===
@@ -9,8 +9,8 @@ Students learn different ways to explore central tendency in a quantitative data
 | Lesson Goals
 | Students will be able to...
 
-* Students explore the concept of central tendency, learning how to compute the mean, median and modes of a dataset
-* Students find the mean, median and mode of various columns in the animals table
+* Students explore the concept of central tendency, learning how to compute the mean, median and mode(s) of a dataset
+* Students find the mean, median and mode(s) of various columns in the animals table
 
 | Student-Facing Lesson Goals
 | I can...
@@ -38,7 +38,7 @@ Students learn different ways to explore central tendency in a quantitative data
 == Mean @duration{15 minutes}
 
 === Overview
-Students learn about mean (or "average"), and how it is one way to summarize a quantitative column..._among others_.
+Students learn about mean (or "average"), and how it is one way (among others!) to summarize a quantitative column..._among others_.
 
 === Launch
 [.lesson-point]
@@ -96,41 +96,41 @@ You computed the mean of that column to be almost exactly 41 pounds. That IS the
 
 _Kujo and Mr. Peanutbutter!_
 
-In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it breaks down for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skew}: a lopsided shape due to values trailing off left or right of center, but not separated by the visible gap typical of outliers.
+In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it distorts things for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off left or right of center.
 
 [.lesson-instruction]
 Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the skew towards the right, with a huge number of animals clumped to the left?
 
 A different way to measure center is to line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger. This is the @vocab{median}, or “middle” value of a list.
 
-As an example, consider this list:
+As an example, consider this list of ACT scores:
 
-  2, 3, 1
+  25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32
 
-Here 2 is the median, because it separates the “top half” (all values greater than 2, which is just 3), and the “bottom half” (all values less than or equal to 2).
+Here 29 is the median, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
 
 The algorithm for finding the median of a quantitative column is:
 
-. Sort the numbers.
+. Sort the numbers (we did this for you in the above example).
 . Cross out the highest number.
 . Cross out the lowest number.
-. Repeat until there is only one number left. If there are two numbers, take the _mean_ of those numbers.
+. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers.
 
 === Investigate
 [.lesson-instruction]
 * Pyret has a function to compute the median of a list as well. Find the contract in your contracts page.
 * Compute the median for the `pounds` column in the animals dataset, and add this to @workbook-link{pages/summarizing-columns-in-animals.adoc}. 
 * Is it different than the mean? 
-* What can we conclude when the median is so much lower than the mean? 
+* What can we conclude when the mean is so much greater than the median? 
 * For practice, compute the mean and median for the weeks and age columns.
 
 === Synthesize
-By looking at the histogram, we can develop an intuition for whether the mean or median might be a better measure. Datasets with a lot of skew have extreme outliers, which will throw off the mean. For these datasets, it's probably better to use the median!
+By looking at the histogram, we can develop an intuition for whether it's probably better to use the mean or median. Pronounced left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up. Either way, such shapes distort the mean as a measure of what’s typical for the data set.
 
 == Modes @duration{25 minutes}
 
 === Overview
-Students learn about the mode(s) of a dataset, how to compute them, and when it is appropriate to use this as a measure of center.
+Students learn about the mode(s) of a dataset, how to compute the mode, and when it is appropriate to use this as a measure of center.
 
 === Launch
 The third measure of center is called the @vocab{mode} of a dataset. The @vocab{mode} of a data set is the value that appears _most often_. Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one number in the list: many data sets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
@@ -143,7 +143,7 @@ The third measure of center is called the @vocab{mode} of a dataset. The @vocab{
 - The mode of the second data set is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last data set are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
 
-In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
+In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
 ----
 # modes :: (t :: Table, col :: String) -> List<Number>
@@ -156,14 +156,14 @@ Compute the `modes` of the `pounds` column, and add it to @workbook-link{pages/s
 === Synthesize
 The most common number of pounds an animal weighs is 6.5! That’s well below our mean and even our median, which is further evidence of outliers or skewness.
 
-At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize data isn’t ideal. Our mean weight agrees with their findings, but we have three reasons to suspect that @vocab{mean} isn’t the best value to use:
+At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize animal weights isn’t ideal. Our mean weight agrees with their findings, but we have three reasons to suspect that @vocab{mean} isn’t the best value to use:
 
 - The median is only 13.4 pounds.
 - The mode of our dataset is only 6.5 pounds, which suggests a cluster of animals that weigh less than one-sixth the mean.
-- When viewed as a histogram, we can see the rightward skew in the dataset. Mean is sensitive to highly-skewed datasets
+- When viewed as a histogram, we can see the right skewness and high outliers in the dataset. Mean is sensitive to datasets with skewness and/or outliers.
 
 == Closing
-The Animal Shelter Bureau started with a fact: the mean weight _is_ about 41 pounds. But then they reported a conclusion without checking to see if that was the best summary statistic to look at. As Data Scientists, we had to look deeper into the data to find out whether or not to settle for the Bureau’s summary. This is why using tools like histograms can be so important when deciding on a summary tool.
+The Animal Shelter Bureau started with a fact: the mean weight _is_ about 41 pounds. But then they reported a conclusion without checking to see if that was the best summary statistic to look at. As Data Scientists, we had to look deeper into the data to find out whether or not to settle for the Bureau’s summary. This is why using tools like histograms that show shape can be so important when deciding on a summary tool.
 
 _“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."_ 
 
@@ -172,7 +172,7 @@ Do you trust this statement? Why or why not? Consider how many policies or laws 
 You now have three different ways to measure center in a dataset. But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! Here are some guidelines for when to use one measurement over the other:
 
 - If the data is doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
-- If the data clearly has a lot of outliers or skewness, @vocab{median} gives a better summary of center than the mean.
+- If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the data set.
 
 == Exercises
