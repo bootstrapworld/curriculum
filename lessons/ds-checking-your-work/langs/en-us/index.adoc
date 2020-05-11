@@ -34,7 +34,7 @@
 == Confirming Analysis @duration{30 minutes}
 
 === Overview
-Students learn how to create a _verification table_, which is small enough to reason about and can be used to test whether code does the right thing.
+Students learn how to create a _Testing Table_, which is small enough to reason about and can be used to test whether code does the right thing.
 
 === Launch
 Data Analysis is often used to make predictions based on some sample data. For example, we might look at the Animals Dataset and try to make predictions about other animal shelters based on that sample. But if the sample dataset doesn’t represent the full population, those predictions can be wrong -- and sometimes, really, _really_ wrong!
@@ -46,26 +46,26 @@ Data Analysis is often used to make predictions based on some sample data. For e
 [.lesson-point]
 Sample Data Matters!
 
-A good Sample Table should be _representative_ of the population, and _relevant_ to what’s being analyzed. A good Sample Table should have...
+A good Testing Table should be _representative_ of the population, and _relevant_ to what’s being analyzed. A good Testing Table should have...
 
 - _At least_ the columns that matter -- whether we’ll be ordering or filtering by those columns.
 - Enough rows to be a representative sample of the dataset. If our dataset has a mix of dogs and cats, for example, we want at least one of each in this table. 
 - Rows in mostly random order, so that we’ll notice if our analysis winds up sorting them.
 
-*This connects back to our lesson on @link{../ds-random-samples/index.shtml, statistical inference and random samples}: a good Sample Table should allow us to make inferences about the larger dataset when we run our analysis.*
+*This connects back to our lesson on @link{../ds-random-samples/index.shtml, statistical inference and random samples}: a good Testing Table should allow us to make inferences about the larger dataset when we run our analysis.*
 
 === Investigate
-Sample Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Sample Table only has cats to begin with. How would we know if the function filters out non-cats?
+Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table only has cats to begin with. How would we know if the function filters out non-cats?
 
-Suppose a function takes in a table of animals and shows _only the kittens_. A sample table should have cats and non-cats, as well as old and young cats.
+Suppose a function takes in a table of animals and shows _only the kittens_. A Testing Table should have cats and non-cats, as well as old and young cats.
 
-Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a sample table should have cats and non-cats, as well as old and young cats...and have rows sorted in random order.
+Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats...and have rows sorted in random order.
 
 [.lesson-instruction]
 * Turn to @workbook-link{pages/trust-but-verify.adoc} in your student workbook. 
 * You’ve been given a function called `fixed-cats` and a description of what it _claims_ to do.
-* List the names of the animals that you would use in a Sample Table to verify whether the function works as-advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify Starter File}. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
-* Turn to @workbook-link{pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Sample Table and figure out which (if any) of the functions are correct!
+* List the names of the animals that you would use in a Testing Table to verify whether the function works as-advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify Starter File}. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
+* Turn to @workbook-link{pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Testing Table and figure out which (if any) of the functions are correct!
 
 === Synthesize
-Complex analysis has more room for mistakes, so it’s critical to think about a Sample Table that allows us to trust that our code really does what it’s supposed to!
+Complex analysis has more room for mistakes, so it’s critical to think about a Testing Table that allows us to trust that our code really does what it’s supposed to!
