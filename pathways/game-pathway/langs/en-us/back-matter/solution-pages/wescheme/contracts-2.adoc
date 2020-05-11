@@ -1,7 +1,7 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. For example: 
+Contracts tell us how to use a function. For example:
 `sqr : Number -> Number` tells us that the name of the function is `sqr`, it takes one input (a `Number`), and it evaluates to a `Number`. From the contract, we know `sqr(4)` will evaluate to a `Number`.
 
 ++++
@@ -10,29 +10,27 @@ td {padding: .4em .625em !important; height: 15pt;}
 </style>
 ++++
 
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contract-table,cols="4,1,10,1,2", options="header",grid="rows",stripes="none"]
 |===
-| Name 				|	| Domain						|		| Range
-|; >				| :	| Number Number 				|	->	| Boolean
-|; < 				| :	| Number Number 				|	->	| Boolean
-|; =				| :	| Number Number 				|	->	| Boolean
-|; >=				| :	| Number Number					|	->	| Boolean
-|; <=				| :	| Number Number 				|	->	| Boolean
-|; string=?			| :	| String String 				|	->	| Boolean
-|; and				| :	| Number Number 				|	->	| Boolean
-|; or				| :	| Number Number					|	->	| Boolean
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
-|;					| :	|								|	->	|
+| Name    |       | Domain      |     | Range
+|; rectangle		| :	| Number Number String String	|	->	| Image
+5+|;
+|; ellipse			| :	| Number Number String String	|	->	| Image
+5+|;
+|; text				| :	| String Number String 			|	->	| Image
+5+|;
+|; bitmap/url		| :	| String						|	->	| Image
+5+|;
+|; scale			| :	| Number Image					|	->	| Image
+5+|;
+|; rotate			| :	| Number Image					|	->	| Image
+5+|;
+|; overlay			| :	| Image Image					|	->	| Image
+5+|;
+|; put-image		| :	| Image Number Number Image		|	->	| Image
+5+|;
+|; flip-horizontal	| :	| Image							|	->	| Image
+5+|;
+|; flip-vertical	| :	| Image							|	->	| Image
+5+|;
 |===
