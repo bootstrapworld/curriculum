@@ -37,29 +37,31 @@
 Students learn how to create a _Testing Table_, which is small enough to reason about and can be used to test whether code does the right thing.
 
 === Launch
-Data Analysis is often used to make predictions based on some sample data. For example, we might look at the Animals Dataset and try to make predictions about other animal shelters based on that sample. But if the sample dataset doesn’t represent the full population, those predictions can be wrong -- and sometimes, really, _really_ wrong!
+Samples are taken in Data Science and Computer Programming for two different reasons. One of the main purposes of Data Science is to take a representative sample from a larger population, and use information from the sample to infer what’s true about the whole population. In programming, we often extract a smaller Table from a larger one, for the purpose of testing that our code seems to do what it’s supposed to. In this lesson, we focus on the tasks of programmers, and consider best practices for setting up a Testing Table that helps us check our code.
 
 * Uber and Google are making self-driving cars, which use artificial intelligence to interpret sensor data and make predictions about whether a car should speed up, slow down, or slam on the brakes. This AI is trained on a lot of sample data, which it learns from. What might be the problem if the sample data only included roads in California?
 * Law enforcement in many towns has started using facial-recognition software to automatically detect whether someone has a warrant out for their arrest. A lot of facial-recognition software, however, has been trained on sample data containing mostly white faces. As a result, it has gotten really good at telling white people apart, but @link{https://www.theweek.co.uk/95383/is-facial-recognition-racist, often can’t tell the difference between people who aren’t white}. Why might this be a problem?
 * Why might it be a bad thing to only test medicines only on men (or only on women), before prescribing them to the general public?
 
 [.lesson-point]
-Sample Data Matters!
+Testing Matters!
 
 A good Testing Table should be _representative_ of the population, and _relevant_ to what’s being analyzed. A good Testing Table should have...
 
 - _At least_ the columns that matter -- whether we’ll be ordering or filtering by those columns.
-- Enough rows to be a representative sample of the dataset. If our dataset has a mix of dogs and cats, for example, we want at least one of each in this table. 
-- Rows in mostly random order, so that we’ll notice if our analysis winds up sorting them.
+- Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.
+- Rows that aren’t already sorted, if our analysis is supposed to sort for us.
 
 *This connects back to our lesson on @link{../ds-random-samples/index.shtml, statistical inference and random samples}: a good Testing Table should allow us to make inferences about the larger dataset when we run our analysis.*
+
+For the purpose of performing __inference__, we typically take a random sample of at least 20 individuals from a much larger population. For the purpose of testing code, we can extract just a few rows and columns from a larger Table in a strategic way so we can catch any obvious errors.
 
 === Investigate
 Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table only has cats to begin with. How would we know if the function filters out non-cats?
 
 Suppose a function takes in a table of animals and shows _only the kittens_. A Testing Table should have cats and non-cats, as well as old and young cats.
 
-Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats...and have rows sorted in random order.
+Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats...and have rows that aren't already sorted.
 
 [.lesson-instruction]
 * Turn to @workbook-link{pages/trust-but-verify.adoc} in your student workbook. 
