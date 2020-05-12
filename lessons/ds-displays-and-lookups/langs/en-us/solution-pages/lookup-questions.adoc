@@ -1,0 +1,64 @@
+= Lookup Questions
+
+The table below represents four pets at an animal shelter:
+
+`animals-table`
+
+[cols="4",options="header"]
+|===
+
+| name 		| gender 	| age | pounds
+| `"Toggle"`| `"female"`| `3` | `48`
+| `"Fritz"` | `"male"` 	| `4` | `92`
+| `"Nori"` 	| `"female"`| `6` | `35.3`
+| `"Maple"` | `"female"`| `3` | `51.6`
+|===
+
+1) _Match_ each Lookup Question (left) to the code that will give the answer (right).
+
+[cols=">.^7a,^.^1a,5,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+|===
+|“How much does Maple weigh?”
+|*1* (E) ||*A*
+| `animals-table.row-n(3)`
+
+|“Which is the last row in the table?
+|*2* (A) ||*B*
+| `animals-table.row-n(2)["name"]`
+
+|“What is Fritz’s gender?”
+|*3* +(C)+ ||*C*
+| `animals-table.row-n(1)["gender"]`
+
+|“What’s the third animal’s name?”
+|*4* (B) ||*D*
+| `animals-table.row-n(3)["age"]`
+
+|“How much does Nori weigh?”
+|*5* (G) ||*E*
+| `animals-table.row-n(3)["pounds"]`
+
+|“How old is Maple?”
+|*6* (D)||*F*
+| `animals-table.row-n(0)`
+
+|“What is Toggle’s gender?”
+|*7* (H) ||*G*
+| `animals-table.row-n(2)["pounds"]`
+
+|“What is the first row in the table?”
+|*8* (F) ||*H*
+| `animals-table.row-n(0)["gender"]`
+
+|===
+
+2) Fill in the blanks (left) with code that will produce the value (right).
+
+[cols="1a,70a,29a"]
+|===
+| a. | @fitb{25em}{animals-table.row-n(3)["name"]}		| `"Maple"`
+| b. | @fitb{25em}{animals-table.row-n(1)["gender"]}	| `"male"`
+| c. | @fitb{25em}{animals-table.row-n(1)["age"]}		| `4`
+| d. | @fitb{25em}{animals-table.row-n(0)["pounds"]}	| `48`
+| e. | @fitb{25em}{animals-table.row-n(2)["name"]}		| `"Nori"`
+|===

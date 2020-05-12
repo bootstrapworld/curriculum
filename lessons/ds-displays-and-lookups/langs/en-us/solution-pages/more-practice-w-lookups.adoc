@@ -1,0 +1,68 @@
+= More Practice with Lookups
+
+Consider the table below, and the four value definitions that follow:
+
+`shapes-table`
+
+[cols="3",options="header"]
+|===
+
+| name 			| corners 	| is-round
+|`"triangle"` 	| `3`  		| `false`
+|`"square"` 	| `4`  		| `false`
+|`"rectangle"` 	| `4`  		| `false`
+|`"circle"` 	| `0`  		| `true`
+
+|===
+
+----
+shapeA = shapes-table.row-n(0)
+shapeB = shapes-table.row-n(1)
+shapeC = shapes-table.row-n(2)
+shapeD = shapes-table.row-n(3)
+----
+
+1) _Match_ each Pyret expression (left) to the description of what it looks up (right).
+
+[cols=">.^7a,^.^1a,5,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+|===
+
+| `shapeD`
+|*1* (B) ||*A*
+| Evaluates to `4`
+
+| `shapeA`
+|*2* (G) ||*B*
+| Evaluates to the last row in the table
+
+| `shapeB["corners"]`
+|*3* (F) ||*C*
+| Evaluates to `"square"`
+
+| `shapeC["is-round"]`
+|*4* (E) ||*D*
+| Evaluates to `true`
+
+| `shapeB["name"]`
+|*5* +(C)+ ||*E*
+| Evaluates to `false`
+
+| `shapeA["corners"]`
+|*6* (F)||*F*
+| Evaluates to `3`
+
+| `shapeD["name"] == "circle"`
+|*7* (E)||*G*
+| Evaluates to the first row in the table
+|===
+
+2) Fill in the blanks (left) with the Pyret lookup code that will produce the value (right).
+
+[cols="1a,80a,19a"]
+|===
+| a. | @fitb{90ex}{`shapeC["name"]`}		| `"rectangle"`
+| b. | @fitb{90ex}{`shapeB["name"]`}		| `"square"`
+| c. | @fitb{90ex}{`shapeB["corners"]`}		| `4`
+| d. | @fitb{90ex}{`shapeD["corners"]`}		| `0`
+| e. | @fitb{90ex}{`shapeD["is-round"]`}	| `true`
+|===

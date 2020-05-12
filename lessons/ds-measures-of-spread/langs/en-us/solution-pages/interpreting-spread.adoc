@@ -1,0 +1,52 @@
+= Interpreting Spread
+
+// use double-space before the *bold* text to address a text-kerning bug in wkhtmltopdf 0.12.5 (with patched qt)
+Consider the following dataset, representing the annual income of ten people:
+
+  $65k, $12k, $14k, $280k, $15k, $22k, $45k, $34k, $45k, $175k
+
+1) In the space below, rewrite this dataset in  *sorted order*.
+
+__$12k, $14k, $15K, $22k, $34k, $45k, $45k, $65k, $175k, $280k__
+
+@vspace{1ex}
+
+2) In the table below, compute the  *measures of center* for this dataset.
+
+[cols="^1a,^1a,^1a",options='header']
+|===
+| Mean (Average) | Median | Mode(s)
+| $70.7k 		 | $39.5k | $45k
+|===
+
+3) In the table below, compute the  *five number summary* of this dataset.
+
+[cols="^1a,^1a,^1a,^1a,^1a",options='header']
+|===
+
+| Minimum | Q1	| Q2 (Median) | Q3 	| Maximum
+
+| $12k	  | $15k| $39.5 	  | $65k| 	$280k
+|===
+
+4) On the number line below, draw a  *box plot* for this dataset.
+
+@centered-image{boxplot.png, "", 800}
+
+5) The following statements are _correct_ ... but misleading. Write down the reason why.
+
+[cols="2a,5a"]
+
+|===
+| Statement | Why it’s misleading
+
+| “They’re rich! The average person makes more than $70k dollars!” 
+| The mean is easily manipulated by a few outliers. For a dataset with this skew, median would have been a better measure.
+
+| “It’s a middle-income list: the most common salary is $45k/yr!” 
+| This is true, but mode should rarely be used for quantitative data with as much variability as this. The fact that $45k appears _twice_ doesn't tell us enough information about the shape for this claim to be valid.
+
+| “This group is really diverse, with people making as little as 12k and as much as $280k!”
+| Two datapoints - especially the extremes! - should not be used to make a claim about shape.
+|===
+
