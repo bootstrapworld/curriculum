@@ -13,7 +13,7 @@ export TOPDIR=$(pwd)
 
 ARGS=
 HELP=
-LASTMOD=2020-04-26 # last modified
+LASTMOD=2020-05-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -313,6 +313,14 @@ function removelogos() {
     $f
 }
 
+function removecodetags() {
+  local f=$1
+  $SED -i \
+    -e 's/<code>\(<tt\)/\1/g' \
+    -e 's/\(<\/tt>\)<\/code>/\1/g' \
+    $f
+}
+
 function moveheaderlogopos() {
   #TODO: Not used anymore?
   local f=$1
@@ -608,6 +616,7 @@ function processadoc() {
             cp -p $fhtml $TMPHTML
             insertprintcss $TMPHTML
             insertwbpagecss $TMPHTML
+            removecodetags $TMPHTML
             ASPECT="--margin-right $PDFMARGIN --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN"
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
               ASPECT="--margin-top $PDFMARGIN --margin-right 25mm --margin-bottom $PDFMARGIN --margin-left 25mm"
@@ -846,6 +855,7 @@ function buildlessonplan() {
         TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
         cp index.shtml $TMPHTML
         insertprintcss $TMPHTML
+        removecodetags $TMPHTML
 
         ASPECT=
 
