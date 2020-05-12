@@ -1,8 +1,7 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. For example:
-`sqr : Number -> Number` tells us that the name of the function is `sqr`, it takes one input (a `Number`), and it evaluates to a `Number`. From the contract, we know `sqr(4)` will evaluate to a `Number`.
+Contracts tell us how to use a function. For example:  `num-sqr {two-colons} (Number) -> Number` tells us that the name of the function is  `num-sqr`, it takes one input (a  `Number`), and it evaluates to a  `Number`. From the contract, we know  `num-sqr(4)` will evaluate to a  `Number`.
 
 ++++
 <style>
@@ -12,25 +11,76 @@ td {padding: .4em .625em !important; height: 15pt;}
 
 [.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
 |===
-| Name    |       | Domain      |     | Range
-|# scale			| :: | (Number Image)					|	->	| Image
-5+|#
-|# rotate			| :: | (Number Image)					|	->	| Image
-5+|#
-|# overlay			| :: | (Image Image)					|	->	| Image
-5+|#
-|# put-image		| :: | (Image Number Number Image)		|	->	| Image
-5+|#
-|# flip-horizontal	| :: | (Image)							|	->	| Image
-5+|#
-|# flip-vertical	| :: | (Image)							|	->	| Image
-5+|#
-|# above			| :: | (Image Image)					|	->	| Image
-5+|#
-|# beside			| :: | (Image Image)					|	->	| Image
-5+|#
-|# 					| :: | 				 					|	->	| Number
-5+|#
-|# 	 				| :: | 				 					|	->	| Number
-5+|#
+| Name    			|	 | Domain      							|     	| Range
+
+| `# scale`
+| `{two-colons}`
+| `(Number, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# rotate`
+| `{two-colons}`
+| `(Number, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# overlay`
+| `{two-colons}`
+| `(Image, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# put-image`
+| `{two-colons}`
+| `(Image, Number, Number, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# flip-horizontal`
+| `{two-colons}`
+| `(Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# flip-vertical`
+| `{two-colons}`
+| `(Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# above`
+| `{two-colons}`
+| `(Image, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+| `# beside`
+| `{two-colons}`
+| `(Image, Image)`
+| `->`
+| `Image`
+5+|`#`
+
+|`#`
+| `{two-colons}` 
+|
+|`->`
+|
+5+|`#`
+
+|`#`
+| `{two-colons}` 
+|
+|`->`
+|
+5+|`#`
+
 |===
