@@ -1,4 +1,4 @@
-# last modified 2020-05-05
+# last modified 2020-05-12
 
 userid=$1
 
@@ -10,5 +10,11 @@ DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$
 echo Deploying docs on Brown site...
 
 ssh $userid@ssh.cs.brown.edu "cd tmp;rm -fr courses;tar jxf courses.tar.bz2;chgrp -R cs-plt courses;find courses -type d|xargs chmod g+rwx,o+rx; find courses -type f|xargs chmod g+rw,o+r; cd courses;for d in *; do if test ! -d \$d; then break; fi; rm -fr $DEPLOY_DIR/\$d; mv \$d $DEPLOY_DIR; (cd $DEPLOY_DIR;chmod g+rwx,o+rx \$d); done"
+
+success=$?
+
+if test "$success" -ne 0; then
+  echo SSH failed! ; exit
+fi
 
 echo Deployment done!

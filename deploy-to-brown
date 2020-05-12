@@ -1,10 +1,9 @@
-# last modified 2020-05-07
+# last modified 2020-05-12
 
 userid=$1
 
 if test ! $userid; then
-  echo Supply userid as arg!
-  exit
+  echo Supply userid as arg! ; exit
 fi
 
 pwy=
@@ -33,12 +32,12 @@ function copyCourse() {
 function pathwayNameOnServer() {
   local localName=$1
   case $localName in
-    game-pathway-wescheme) echo algebra-wescheme-remix;;
-    game-pathway-pyret) echo algebra-pyret-remix;;
-    data-science-pathway) echo datascience-remix;;
-    reactive-pathway) echo reactive-remix;;
-    flags-pathway) echo flags-remix;;
-    *) echo $1-remix;;
+    game-pathway-wescheme) echo algebra-wescheme;;
+    game-pathway-pyret) echo algebra-pyret;;
+    data-science-pathway) echo data-science;;
+    reactive-pathway) echo reactive;;
+    flags-pathway) echo flags;;
+    *) echo $1;;
   esac
 }
 
@@ -65,6 +64,12 @@ tar jcf courses.tar.bz2 courses
 
 echo Copying courses tarball to brown.edu...
 scp courses.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
+
+success=$?
+
+if test "$success" -ne 0; then
+  echo SCP failed! ; exit
+fi
 
 echo Copying done
 
