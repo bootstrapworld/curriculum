@@ -951,8 +951,8 @@
   ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
   (unless (truthy-getenv "OTHERDIR")
     (asciidoctor out-file)
-    (unless (truthy-getenv "DEBUG")
-      (delete-file out-file)))
+    ;(unless (truthy-getenv "DEBUG") (delete-file out-file))
+    )
 
   (when *link-lint?*
     (close-output-port *internal-links-port*)
