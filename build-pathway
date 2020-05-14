@@ -11,9 +11,14 @@ export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 
+SEMESTER=spring
+MONTH=$(date +%m)
+test "$MONTH" -gt 7 && SEMESTER=fall
+export SEMESTER_YEAR=$SEMESTER$(date +%Y)
+
 ARGS=
 HELP=
-LASTMOD=2020-05-13 # last modified
+LASTMOD=2020-05-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -164,7 +169,7 @@ function insertgdrivesave() {
     pageTitle=$f_head
   fi
   #echo pageTitle of $f_head.adoc is $pageTitle
-  local hrefPrefix=https://www.bootstrapworld.org/materials/spring2020/courses/$TGTPATHWAY/$LANGUAGE/$LESSONSUBDIR
+  local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/courses/$TGTPATHWAY/$LANGUAGE/$LESSONSUBDIR
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\//\\\//g')
 
@@ -178,7 +183,7 @@ function insertgdrivesave() {
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>function renderSaveToDrive() {
     gapi.savetodrive.render('savetodrive-div', {
-    src:"%INSERTGDRIVEURL",
+    src:%INSERTGDRIVEURL,
     filename:"%INSERTGDRIVELESSONTITLE",
     sitename:"Bootstrap, Brown University"
   });
@@ -204,10 +209,18 @@ EOF
 
   $SED -i \
     -e 's/%INSERTGDRIVELESSONTITLE/'"$pageTitle"'/' \
-    -e 's/%INSERTGDRIVEURL/'$hrefPrefix'\/'$other_f'/' \
     $f
 
   cp -p $f $other_f
+
+  $SED -i \
+    -e "s/%INSERTGDRIVEURL/window.location.href.replace(\/([^\\\\\/]+)\\\\.([^.\\\\\/]+)$\/, '\$1-gdrive-import.\$2')/" \
+    $f
+
+  $SED -i \
+    -e 's/%INSERTGDRIVEURL/window.location.href/' \
+    $other_f
+
   modifygdrivepage $other_f
 }
 

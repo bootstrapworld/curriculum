@@ -1,11 +1,15 @@
-# last modified 2020-05-12
+# last modified 2020-05-14
 
 userid=$1
 
-YEAR=2020
-SEMESTER=fall
+if test ! "$SEMESTER_YEAR"; then
+  eval $(grep '^SEMESTER=' ./deploy-to-brown)
+  eval $(grep '^YEAR=' ./deploy-to-brown)
 
-DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR/courses
+  SEMESTER_YEAR=$SEMESTER_YEAR
+fi
+
+DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER_YEAR/courses
 
 echo Deploying docs on Brown site...
 

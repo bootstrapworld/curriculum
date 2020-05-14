@@ -1,4 +1,10 @@
-# last modified 2020-05-12
+# last modified 2020-05-14
+
+# Set environment variables SEMESTER and YEAR to reflect where you want the
+# curriculum pages to be deployed on the server.
+
+SEMESTER=fall
+YEAR=2020
 
 userid=$1
 
@@ -22,11 +28,26 @@ test -d courses && rm -fr courses
 
 mkdir courses
 
+SEMESTER_YEAR=$SEMESTER$YEAR
+
+function correctgdriveurl_1() {
+  local f=$1
+  sed -i -e '/href=/s/\(spring\|fall\)[0-9][0-9][0-9][0-9]/'$SEMESTER_YEAR'/g' $f
+}
+
+function correctgdriveurls() {
+  local d=$1
+  for f in $(find $d -name \*gdrive-import.shtml); do
+    correctgdriveurl_1 $f
+  done
+}
+
 function copyCourse() {
   local src=$1
   test -d $src || return
   local dest=$(pathwayNameOnServer $src)
   cp -pr $src courses/$dest
+  correctgdriveurls courses/$dest
 }
 
 function pathwayNameOnServer() {
@@ -60,8 +81,6 @@ test -f courses.tar.bz2 && rm courses.tar.bz2
 echo Tarring up courses...
 tar jcf courses.tar.bz2 courses
 
-#exit
-
 echo Copying courses tarball to brown.edu...
 scp courses.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
 
@@ -75,5 +94,5 @@ echo Copying done
 
 cd ..
 
-./deploy-to-brown-perms $userid
+SEMESTER_YEAR=$SEMESTER_YEAR ./deploy-to-brown-perms $userid
 
