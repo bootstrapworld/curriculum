@@ -264,6 +264,19 @@ function modifygdrivepage() {
     -e '/<\/title>/r '$TMPFILE.css \
     $f
 
+  local mathjaxneeded=
+  if grep -q CURRICULUMPMMATH $f; then
+    mathjaxneeded=1
+  fi
+
+  if test "$mathjaxneeded"; then
+    $SED -i \
+      -e 's/<script type="math[^<]*<\/script>/<!--\0-->/g' \
+      -e 's/<!--CURRICULUMPMMATH//g' \
+      -e 's/CURRICULUMPMMATH-->//g' \
+      $f
+  fi
+
   rm -f $TMPFILE.css
 
 }
@@ -418,6 +431,9 @@ function resolveabbrevs() {
     -e 's/%CURRICULUMSCRIPT%/<script type="math\/tex"/g' \
     -e 's/%BEGINCURRICULUMSCRIPT%/>/g' \
     -e 's/%ENDCURRICULUMSCRIPT%/<\/script>/g' \
+    \
+    -e 's/%CURRICULUMPMMATH%/<!--CURRICULUMPMMATH<tt>/g' \
+    -e 's/%ENDCURRICULUMPMMATH%/<\/tt>CURRICULUMPMMATH-->/g' \
     \
     -e 's/%CURRICULUM\([^%]*\)%/<\1/g' \
     -e 's/%BEGINCURRICULUM\([^%]*\)%/>/g' \

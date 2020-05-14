@@ -55,12 +55,34 @@
           (enclose-div ".obeyspaces" ta)
           ta))))
 
+(define (poor-man-math x)
+
+  (set! x (regexp-replace "\\\\;" x ""))
+  (set! x (regexp-replace "\\\\times" x "×"))
+  (set! x (regexp-replace "\\\\over" x "÷"))
+  (set! x (regexp-replace "\\\\sqrt" x "√"))
+  (set! x (regexp-replace "{zwsp}" x ""))
+  (set! x (regexp-replace "\\\\gt" x ">"))
+  (set! x (regexp-replace "\\\\lt" x "<"))
+  (set! x (regexp-replace "\\\\leq" x "≤"))
+  (set! x (regexp-replace "\\\\geq" x "≥"))
+  (set! x (regexp-replace "\\\\frac" x "frac"))
+  (set! x (regexp-replace "\\\\div" x "÷"))
+  x
+
+  )
+
 (define (enclose-math e)
-  (string-append
-    (format "%CURRICULUMSCRIPT%")
-    (format "%BEGINCURRICULUMSCRIPT%\\displaystyle ")
-    e
-    (format "%ENDCURRICULUMSCRIPT%")))
+  ;(printf "enclose-math of ~s\n" e)
+  (let ([pme (poor-man-math e)])
+    (string-append
+      "%CURRICULUMPMMATH%"
+      pme
+      "%ENDCURRICULUMPMMATH%"
+      "%CURRICULUMSCRIPT%"
+      "%BEGINCURRICULUMSCRIPT%\\displaystyle "
+      e
+      "%ENDCURRICULUMSCRIPT%")))
 
 ;for the @span{...}{...}
 

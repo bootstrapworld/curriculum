@@ -1189,7 +1189,7 @@
                      (cond [(or (memq a '(+ - * / and or < > = <= >=))
                                 (memq a *list-of-hole-symbols*))
                             (if (and (eq? a '/) (not pyret))
-                                (format "{~a \\over ~a}"
+                                (format "{{~a} \\over {~a}}"
                                         (sexp->arith (list-ref e 1))
                                         (sexp->arith (list-ref e 2)))
                                 (let* ([a (if pyret (sexp->arith a #:pyret #t)
