@@ -39,26 +39,26 @@
 == Correlations have _Form_ @duration{10 minutes}
 
 === Overview
-Students identify and make use of patterns in scatter plots, learning to identify patterns which are linear, patterns that are not, and scatter plots for which there is no clear pattern. This builds intuition for identifying a @vocab{form} that can be used with linear regression.
+Students identify and make use of patterns in scatter plots, learning to identify scatter plots that are linear, curved, or show no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression.
 
 === Launch
-By now we have learned ways to summarize a single quantitative variable, like age or weight of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. 
+By now we have learned ways to summarize a single quantitative variable, like the `age` of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. We could do the same for `pounds`, `weeks`, or any other quantitative column.
 
 But those individual summaries tell us nothing about the _relationship_ between animals' ages and weights. In order to understand such relationships, we have to expand our view from a single dimension (along one axis) to two dimensions. This goes hand in hand with expanding our display from a one-dimensional histogram to a two-dimensional scatter plot.
 
-Rather than summarizing the distribution in one dimension, we can summarize a _linear relationship_ between two quantitative variables. But this relationship only makes sense if the scatter plot follows a _straight-line pattern_, as opposed to being curved. So the very first assessment we have to make is to identify the @vocab{form} of the relationship as being linear or not.
+Rather than summarizing each distribution in one dimension, we can summarize a _linear relationship_ between two quantitative variables. But this only makes sense if the scatter plot follows a _straight-line pattern_, as opposed to being curved. So the very first assessment we have to make is to identify the @vocab{form} of the relationship as being linear or not.
 
 [.lesson-point]
 _Form:_ whether a relationship is linear or not
 
 === Investigate
-The relationship between two variables can take many forms - some patterns are _linear_, and appear as a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
+The relationship between two quantitative variables can take many forms - some patterns are _linear_, and appear as a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
 
 [.lesson-instruction]
 Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form} in their student workbooks. For each scatter plot, identify whether the relationship is linear, non-linear or if there's no relationship at all.
 
 === Synthesize
-Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and only linear relationships make sense if we're looking for a correlation/@math{r}-value.
+Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and only linear relationships make sense if we want to summarize with a correlation/@math{r}-value.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -90,25 +90,25 @@ _Strength:_ how closely the two variables are correlated.
 
 A relationship between two quantitative variables is strong if the scatter plot points are tightly clustered together. If this is the case, then knowing the x value of a data point gives us a very good idea of what its y value will be. If the relationship is linear and strong, the scatter plot points are clumped together in a thin cloud.
 
-- A *strong* relationship means that the points in the scatter plot are all clustered closely around an invisible line. If the cloud point is very tightly packed around a single line, the relationship is said to be strong. 
-- A *weak* relationship means that the cloud is spread out, with points being farther away from the line.
+- A *strong* linear relationship means that the points in the scatter plot are all clustered closely around an invisible line. If the cloud point is very tightly packed around the line, the relationship is said to be strong. 
+- A *weak* linear relationship means that the cloud of points is scattered very loosely around the line.
 
 The correlation @vocab{r} is a number (between -1 and 1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
 
 An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
 
-Calculating @math{r} from a data set only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
+Calculating @math{r} from a data set only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
 === Investigate
-Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and strong or weak, and combine those two to guess whether the @math{r}-value is closer to -1, 0, or +1.
+Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form, Direction and Strength} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and strong or weak, and combine those two to guess whether the @math{r}-value is closer to -1, 0, or +1.
 
 
 [.lesson-instruction]
 - In the Interactions Area, create a scatter plot for the animals dataset, using `"pounds"` as the xs and `"weeks"` as the ys. 
 - *Form:* Does the point cloud appear linear or non-linear?
-- *Direction:* If it's linear, does it appear to slow up or down as you move from left to right?
+- *Direction:* If it's linear, does it appear to go up or down as you move from left to right?
 - *Strength:* Is the point cloud tightly packed, or loosely dispersed?
-- Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero or closer to ±1? 
+- Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero, closer to ±1, or in between? 
 - Have Pyret compute the @math{r}-value, by typing `r-value(animals-table, "pounds", "weeks")`. Does this match your prediction?
 - Repeat this process using `"age"` as the xs. Is this correlation stronger or weaker than the correlation for `"pounds"`? What does that _mean_?
 
