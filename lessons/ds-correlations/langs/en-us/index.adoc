@@ -1,6 +1,6 @@
 = Correlations
 
-@lesson-description{Students begin to interpret scatter plots, and search for correlations in their dataset.}
+@lesson-description{Students continue to interpret scatter plots, and think about correlations in their dataset.}
 
 [@lesson-intro-table]
 |===
@@ -8,8 +8,10 @@
 | Lesson Goals
 | Students will be able to...
 
-* explain what a line of best fit is, and discuss it in terms of direction and strength
-* draw a line of best fit on a scatter plot
+- Confirm if a scatter plot appears linear
+- Understand how correlation measures direction in a linear relationship
+- Understand how correlation measures strength in a linear relationship
+
 
 | Student-Facing Lesson Goals
 | I can...
@@ -34,78 +36,99 @@
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Correlations have _Direction_ @duration{20 minutes}
+== Correlations have _Form_ @duration{10 minutes}
 
 === Overview
-Students learn about the line of best fit, and what it means for the slope of the line to positive or negative.
+Students identify and make use of patterns in scatter plots, learning to identify patterns which are linear, patterns that are not, and scatter plots for which there is no clear pattern. This builds intuition for identifying a @vocab{form} that can be used with linear regression.
 
 === Launch
-The mean, median, and mode are three different ways to measure the “center” of a dataset in one dimension. Each represents a different way to collapse a bunch of points on a number line into a single, summary value. If the “center” of points on a _one dimensional_ number line is a single point, what is the “center” of points in a _two-dimensional_ cloud, which cluster around a line?
+By now we have learned ways to summarize a single quantitative variable, like age or weight of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. 
 
-What we need to do is find a _line_ -- called a @vocab{line of best fit}, or a “regression line” -- that is at the center of this cloud. Each point in our scatter plot “pulls” on the line, with points above the line yanking it up and points below the line dragging it down. Points that are really far away -- our @vocab{outliers} and our influential observations -- pull with more force than those that are close to the line. 
+But those individual summaries tell us nothing about the _relationship_ between animals' ages and weights. In order to understand such relationships, we have to expand our view from a single dimension (along one axis) to two dimensions. This goes hand in hand with expanding our display from a one-dimensional histogram to a two-dimensional scatter plot.
 
-If the line has a positive slope, the correlation is positive. If it has a negative slope, the correlation is negative. Given a value on the x-axis, this line allows us to “predict” what the corresponding value on the y-axis might be. This allows us to make predictions based on our data.
+Rather than summarizing the distribution in one dimension, we can summarize a _linear relationship_ between two quantitative variables. But this relationship only makes sense if the scatter plot follows a _straight-line pattern_, as opposed to being curved. So the very first assessment we have to make is to identify the @vocab{form} of the relationship as being linear or not.
 
 [.lesson-point]
-Correlations have _direction_: they can be positive or negative.
-
-* A *positive correlation* means that the variable on the y-axis increases as the variable on the x-axis goes up. For example, “the older the animal, the more weeks it generally takes to get adopted”.
-* A *negative correlation* means that the variable on the y-axis decreases as the variable on the x-axis goes down. For example, “the longer an animal is at the shelter, the less they generally weigh”.
-
-Was there a correlation in the pounds-vs-weeks scatter plot? If so, is it positive or negative? What correlations, if any, did students see in the other scatterplots they created?
+_Form:_ whether a relationship is linear or not
 
 === Investigate
+The relationship between two variables can take many forms - some patterns are _linear_, and appear as a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
 
 [.lesson-instruction]
-* Turn to @workbook-link{pages/drawing-predictors.adoc}.
-* In the first column, draw a @vocab{line of best fit} through each of the scatter plots. 
-* In the second column, circle whether the slope of the line - the correlation - is positive or negative.
-
-=== Student Misconceptions
-It is useful to ask students probing questions, to help erase misconceptions here. Some examples:
-
-* Would it be possible to have a line that is _below_ all the points? (no)
-* Would it be possible to have a line that is _above_ all the points? (no)
-* Would it be possible to have a line with more points on one side than the other? (yes)
+Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form} in their student workbooks. For each scatter plot, identify whether the relationship is linear, non-linear or if there's no relationship at all.
 
 === Synthesize
-Have students share their answers. 
+Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and only linear relationships make sense if we're looking for a correlation/@math{r}-value.
 
-== Correlations have _Strength_ @duration{20 minutes}
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Going Deeper}
+
+In an AP Statistics class or full-year Data Science class, it's appropriate to discuss non-linear relationships here. In a dedicated computer science class, it may also be appropriate to talk about _transforming_ the x- or y-axis (using `.build-column`!) via a quadratic, exponential, or logarithmic function and then looking for a linear pattern in the resulting scatter plot. All of these are *extensions* to the materials presented here.
+|===
+
+
+== Correlations have __Direction & Strength__ @duration{20 minutes}
 
 === Overview
-Students learn about strength, as a property of correlations.
-
+Once students have learned to identify a possible linear relationship, they can turn their attention to other qualities of that relationship: its _direction_ and _strength_. Each of these is expressed in the @math{r}-value, which students learn to read.
 
 === Launch
-Suppose you have two identical lines of best fit, but the point clouds around them are different. For one scatter plot, all the of the points are pretty tightly packed around the line. For the other, they are really spread out. If both correlations have the same direction, should we treat them the same way?
+Assuming a relationship is linear, data scientists calculate a single number called "correlation" - or @math{r}-value - that reports both the direction and strength.
 
 [.lesson-point]
-Correlations have _strength_: they can be strong or weak.
+_Direction:_ whether a linear relationship is positive or negative.
 
-* If the cloud is tightly packed, there is a _strong correlation_.
-* If the cloud is loosely scattered, there is a _weak correlation_.
-* If the points are all over the place, with no tendency to rise or fall from left to right, there may be _no correlation_.
+A linear relationship between two quantitative variables is _positive_ if, in general, the scatter plot points are sloping up: smaller x values tend to go with smaller y values, and larger x values tend to go with larger y values. The relationship is _negative_ if points slope down: smaller x values tend to go with _larger_ y values, and larger x values tend to go with _smaller_ y values. 
 
-Even if the slope and direction of the line are identical, the _strength_ of a correlation tells us how much one variable predicts another.
+- *Positive* directions are by far more common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
+- *Negative* relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
 [.lesson-point]
-Correlation does NOT imply causation.
+_Strength:_ how closely the two variables are correlated.
 
-If two quantities are _correlated_, it doesn’t mean that one _causes_ the other! For example, @link{http://tylervigen.com/view_correlation?id=7, a study found that there is a strong correlation between the number of people who become tangled in their own bedsheets each year and the amount of cheese consumed that year}. It happens that both of those values have been increasing over the past decade, but there is no causal relationship between them!
+A relationship between two quantitative variables is strong if the scatter plot points are tightly clustered together. If this is the case, then knowing the x value of a data point gives us a very good idea of what its y value will be. If the relationship is linear and strong, the scatter plot points are clumped together in a thin cloud.
 
+- A *strong* relationship means that the points in the scatter plot are all clustered closely around an invisible line. If the cloud point is very tightly packed around a single line, the relationship is said to be strong. 
+- A *weak* relationship means that the cloud is spread out, with points being farther away from the line.
+
+The correlation @vocab{r} is a number (between -1 and 1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
+
+An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+
+Calculating @math{r} from a data set only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
 === Investigate
+Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and strong or weak, and combine those two to guess whether the @math{r}-value is closer to -1, 0, or +1.
+
+
 [.lesson-instruction]
-For each line you drew on @workbook-link{pages/drawing-predictors.adoc}, determine the direction and strength of the correlation by circling the words that describe it.
+- In the Interactions Area, create a scatter plot for the animals dataset, using `"pounds"` as the xs and `"weeks"` as the ys. 
+- *Form:* Does the point cloud appear linear or non-linear?
+- *Direction:* If it's linear, does it appear to slow up or down as you move from left to right?
+- *Strength:* Is the point cloud tightly packed, or loosely dispersed?
+- Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero or closer to ±1? 
+- Have Pyret compute the @math{r}-value, by typing `r-value(animals-table, "pounds", "weeks")`. Does this match your prediction?
+- Repeat this process using `"age"` as the xs. Is this correlation stronger or weaker than the correlation for `"pounds"`? What does that _mean_?
+
+=== Common Misconceptions
+- Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
+- Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
+- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million datapoints _must_ be strong!"
 
 === Synthesize
-Have students discuss and share their answers.
+It is useful to ask students probing questions, to help address the misconceptions listed above. Some examples:
+
+- What is the difference between a _weak_ relationship and a _negative_ relationship?
+- What is the difference between a _strong_ relationship and a _positive_ relationship?
+- If we find a strong relationship in a sample, can we always infer that relationship holds for the whole population?
+- Suppose we have two correlations, one drawn from 10 datapoints and one drawn from 50. If both correlations are identical in direction and strength, should we trust them equally when make an inference about the larger population?
 
 == Your Analysis @duration{flexible}
 
 === Overview 
-Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
 
 === Launch
 What correlations do you think there are in your dataset? Would you like to investigate a subset of your data to find those correlations?
@@ -114,10 +137,11 @@ What correlations do you think there are in your dataset? Would you like to inve
 [.lesson-instruction]
 - Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
 - Turn to @workbook-link{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
+- Investigate these correlations. If you need blank Design Recipes, you can find them at the back your workbook, just before the Contracts.
+- What correlations did you find?
+- Did you need to filter out certain rows in order to get those correlations?
 
 === Synthesize
 Have students share back their correlations, and why they expect to find them.
 
 After looking at the scatter plot for our animal shelter, do students still agree with the claim on @workbook-link{ds-scatter-plots/pages/disproving-claim.adoc}? (Perhaps they need more information, or to see the analysis broken down separately by animal!)
-
-But how do we know if a correlation is strong enough to be _useful_? Eyeballing charts isn’t good enough. In the next lesson, students learn how a correlation is measured via linear regression, and get a feel for strength of a relationship based on a single number.

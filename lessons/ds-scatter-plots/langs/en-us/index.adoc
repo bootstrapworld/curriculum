@@ -8,9 +8,12 @@
 | Lesson Goals
 | Students will be able to...
 
+* consider explanatory and response roles of variables​
 * make scatter plots by hand, given a list of (x,y) pairs
 * make scatter plots using Pyret
-* identify a possible correlation by looking at a point cloud
+* identify a possible linear relationship by looking at a point cloud
+* Consider unusual observations in a scatter plot
+
 
 | Student-Facing Lesson Goals
 | I can...
@@ -46,12 +49,12 @@ Why are some animals adopted quickly, while others take a long time? What factor
 [.lesson-point]
 Theory 1: Smaller animals get adopted faster because they’re easier to care for.
 
-How could we test that theory? Bar and pie charts are great for showing us how the frequencies of values in a categorical column. Histograms and box plots are great for showing us the shape, center, and spread of a quantitative column. But none of these displays will help us see connections between two columns.
+How could we test that theory? Bar and pie charts are great for showing us frequencies in a categorical column. Histograms and box plots are great for showing us the shape, center, and spread of a single quantitative column. But none of these displays will help us see connections between *two* quantitative columns.
 
 === Investigate
 [.lesson-instruction]
-* Take a few minutes to look through the whole dataset, and see if you agree with the statement. 
-* Could any of our visualizations or measures of center help us answer this question? 
+* Take a few minutes to look through the whole dataset, and see if you agree with Theory 1. 
+* Could any of our visualizations or summaries provide evidence for or against the theory? 
 * Write down your hypothesis on @workbook-link{pages/disproving-claim.adoc}, as well as a theory about how we could use this dataset to see if you’re right.
 
 
@@ -60,22 +63,24 @@ We’ve got a lot of tools in our toolkit that help us think about an entire _co
 
 - We have ways to find measures of center and spread for a given column.
 - We have visualizations that let us see the shape of values in a quantitative column.
-- We have visualizations that let us see the frequencies a categorical column.
+- We have visualizations that let us see frequencies in a categorical column.
 
-What column is this question asking about?
+What columns is this question asking about?
 
 == Making Scatter Plots @duration{20 minutes}
 
 === Overview
-Students are introduced to scatter plots, which are visualizations tailored to Relate Questions. They learn how to construct scatter plots by hand, and in Pyret.
+Students are introduced to @vocab{scatter plots}, which are visualizations tailored to Relate Questions about quantitative variables. They learn how to construct scatter plots by hand, and in Pyret.
 
 === Launch
 This question is asking about _two columns_ in our dataset. Specifically, it’s asking *if there is a relationship* between `pounds` and `weeks`.
 
-For each animal in the shelter, there are two data points we care about: how many `pounds` they weigh, and the number of `weeks` it took to be adopted.
+Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? 
+
+The first of these makes sense, and reflects our suspicion that weight plays a role in adoption time. The convention is to use the horizontal axis for our explanatory variable and the vertical axis for the response. Thus, `pounds` will be x and `weeks` will be y.
 
 === Investigate
-We can use these points to plot each animal as a point on a coordinate plane.
+We will produce our scatter plot by graphing each animal’s `pounds` and `weeks` values as a point on the x and y axes.
 
 [.lesson-instruction]
 Complete @workbook-link{pages/creating-scatterplot.adoc} in your Student Workbook.
@@ -85,7 +90,7 @@ Complete @workbook-link{pages/creating-scatterplot.adoc} in your Student Workboo
 |
 @span{.title}{Teaching Tip}
 
-Divide the full table up into sub-lists, and have a few student plot 3-4 animals on the board. This can be done collaboratively, resulting in a whole-class scatterplot!
+Divide the full table up into sub-lists, and have a few students plot 3-4 animals on the board. This can be done collaboratively, resulting in a whole-class scatterplot!
 |===
 
 [.lesson-instruction]
@@ -100,13 +105,12 @@ Have students share their observations. What trends do they see? Are there any p
 == Looking for Trends @duration{20 minutes}
 
 === Overview
-Students are asked to identify patterns in their scatter plots. This activity builds towards the idea of correlations, but does not go into depth (as the following lesson does).
+Students are asked to identify patterns in their scatter plots. This activity builds towards the idea of _linear associations_, but does not go into depth (as the following lesson does).
 
 === Launch
 
 [.lesson-instruction]
 * Can you see a “cloud” around which the points are clustered?
-* Are there places where the “cloud” is denser than others?
 * Does the number of weeks to adoption seem to go up or down as the age increases?
 * Are there any points that “stray from the pack”? Which ones? 
 
@@ -119,25 +123,27 @@ Project the scatter plot at the front of the room, and have students come up to 
 |===
 
 @span{.right}{@centered-image{images/visualizing-relationships-1.png, "", 400}}
-A straight-line pattern in the cloud of scatter plot points suggests that there is a linear relationship between two columns. In other words, there seems to be a straight-line relationship between `pounds` and `weeks`. There are data science methods to calculate the @vocab{line of best fit}, which can be useful for making predictions. For example, the line of best fit might predict how long a new dog would wait at the shelter, if the dog weighs 68 pounds.
+A straight-line pattern in the cloud of scatter plot points suggests that there is a linear relationship between two columns. If we can pinpoint a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait at the shelter, if the dog weighs 68 `pounds`.
 
-Do any data points that seem unusually far above or below from the line? Which animals are those? These points are called @vocab{outliers}, meaning that they fall very far in a vertical direction from the line of best fit.
+Do any data points that seem unusually far above or below from the line? Which animals are those? These points are called *unusual observations*. Unusual observations in a scatter plot are sort of like outliers in a histogram, but more complicated because it’s the combination of x and y values that makes them stand apart from the rest of the cloud.
 
-Outliers are always interesting:
+[.lesson-point]
+Unusual observations are _always_ worth thinking about
 
-* Sometimes they’re just random. Maybe Felix just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
-* Sometimes they can give you a deeper insight into your data. Maybe Felix is a special, popular breed of cat, and we discover that our dataset is missing an important column for breed!
-* Sometimes outliers are the points we are looking for! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatterplot of restaurant prices vs. reviews, an outlier that’s high above the rest of the points would be a restaurant whose reviews are _unusually good_ for the price. An outlier way below the cloud would be a really bad deal.
+- Sometimes they’re just random. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
+- Sometimes they can give you a deeper insight into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
+Sometimes unusual observations are the points we are looking for! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
 === Investigate
 [.lesson-instruction]
 --
-For practice, try making scatter plots for each of the following relationships. If you see any outliers, try to explain them!
+For practice, try making scatter plots for each of the following relationships, always expressed as “response variable vs explanatory variable”. If you see any *unusual observations*, try to explain them!
 
-* The `age` of an animal vs the `pounds` of the animal
-* The `legs` of an animal vs the number of `weeks` to be adopted
-* The `age` vs the number of `legs` it has.
-* Do you see a correlation in any of these? Are there any outliers?
+- The `pounds` of an animal vs its `age`
+- The number of `weeks` for an animal to be adopted vs its number of `legs`
+- The number of `legs` vs the `age` of an animal.
+- Do you see a relationship in any of these, evidenced by a cloud of points that’s clearly rising or falling from left to right? Are there any unusual observations?
+
 --
 
 === Synthesize
@@ -146,4 +152,4 @@ Debrief, showing the plots on the board. Make sure students see plots for which 
 [.lesson-point]
 Theory 2: Younger animals get adopted faster because they are cuter.
 
-It might be tempting to go straight into making a scatter plot to compare `age` and `weeks`. But different animals have very different lifespans! A 5yr-old tarantula is still really young, while a 5yr old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be  _hiding_ a real correlation! We might want to make several displays, one for each species.
+It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there! So it’s probably best to make several displays, one for each species.
