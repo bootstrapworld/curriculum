@@ -824,7 +824,7 @@ function buildlessonplan() {
     for f in *.adoc; do
       cp -p $f index.asciidoc
     done
-    if test index.asciidoc -nt index.html; then
+    if test index.asciidoc -nt index.shtml; then
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
@@ -1122,7 +1122,7 @@ function buildteacherresource() {
     for f in *.adoc; do
       cp -p $f index.asciidoc
     done
-    if test index.asciidoc -nt index.html; then
+    if test index.asciidoc -nt index.shtml; then
       echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       $PROGDIR/adoc-preproc.rkt index.asciidoc
