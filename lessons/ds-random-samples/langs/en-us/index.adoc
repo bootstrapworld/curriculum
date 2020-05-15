@@ -37,10 +37,10 @@
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Taking Random Samples @duration{30 minutes}
+== Running Inference _Backwards_ @duration{30 minutes}
 
 === Overview
-This activity is all about samples: How well does a sample represent the larger population from which it was taken? Randomness and sample size play key roles in the answer to this question. Students first think about the drawbacks of non-random samples. Then they take differently-sized random samples of the animals dataset, and see how well each sample represents the population. They begin to explore the role played by _sample size_.
+Statistical inference involves looking at a sample and trying to __infer something you don't know__ about a larger population. But before we go about inferring, we need to understand how good a sample is in the first place! To do this, we essentually run the process backwards: starting with __something we know about a population__ and understanding how accurate different samples are at representing that information.
 
 === Launch
 One of the most useful tasks in Data Science is using sample data to _infer_ (guess) what’s true about the larger population from which the sample was taken. This process, called @vocab{statistical inference}, is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art! Early on, statisticians discovered that _random_ samples almost always work best.
@@ -52,21 +52,27 @@ Suppose we want to make an educated guess about who the next US president will b
 * How could we choose a representative subset, or _sample_ of American voters?
 * Would it be problematic to only sample a handful of voters? What do we gain by taking a larger sample?
 
-Sampling is a complicated issue! Depending on the question we want to answer, we often want carve out a sample of the data. The main reason for doing inference is to guess about something that’s _unknown_ for the whole population. But a useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth. Another discovery (besides the value of randomness) that statisticians made early on was something that’s perfectly consistent with common sense: Larger samples are better than smaller ones, because they tend to get us closer to the truth about the whole population.
+[.lesson-point]
+Before we infer something _unknown_ about a population from a sample, we need to know what makes a "good" sample!
+
+Sampling is a complicated issue. The main reason for doing inference is to guess about something that’s _unknown_ for the whole population. But a useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth. Another discovery (besides the value of randomness) that statisticians made early on was something that’s perfectly consistent with common sense: Larger samples are better than smaller ones, because they tend to get us closer to the truth about the whole population.
 
 Let’s see what happens if we switch from smaller to larger sample sizes, if we’re taking a random sample of shelter animals to infer what’s true about the larger population...
 
 === Investigate
-
 The animals dataset we've been using is just one _sample_ taken from a very large animal shelter. How much can we infer about the whole population of hundreds of animals, by looking at just this one sample? 
 
 [.lesson-instruction]
+- Divide the class into groups of 3-5 students.
 - Have students open the @link{https://code.pyret.org/editor#share=1d-EPNpMzYw0a2Nj5axj_rWjaXUOJTv08, Random Samples starter file}, and click "Run".
-- Have students complete @workbook-link{pages/sampling-and-inference.adoc}.
+- Have students complete @workbook-link{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
 
 === Synthesize
 * Have students share how much better their larger samples are at guessing the truth about the whole population. 
 * How large does a random sample have to be, to allow us to generalize? 1/10th the size of the dataset? 1/4th?
+
+=== Common Misconceptions
+Larger populations need to be represented by larger sample sizes. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===

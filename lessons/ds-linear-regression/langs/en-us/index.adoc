@@ -1,6 +1,6 @@
 = Linear Regression
 
-@lesson-description{Students compute the “line of best fit” using linear regression, and search for summarize linear relationship in a dataset.}
+@lesson-description{Students compute the “line of best fit” using linear regression, and summarize linear relationship in a dataset.}
 
 [@lesson-intro-table]
 |===
@@ -30,7 +30,7 @@
 * All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1Z8ncVGKqWiED_wHl8TlNF3D9AGBb7awm, open a new one}
 
 | Supplemental Resources
-| @link{http://tylervigen.com/, Spurious Correlations}
+|
 
 | Relevant Standards
 |
@@ -41,7 +41,7 @@
 Have students open their “Animals Dataset” files. (If they do not have this file, or if something has happened to it, they can always make a @link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L, new copy}.)
 
 [.lesson-instruction]
-Make two scatterplots from the `animals-table`, using `"age"` as the `xs` in one plot and `"pounds"` as the @vocab{explanatory variable} in the other. In both plots, use `"weeks"` as your @vocab{response variable} and `"name"` for the `labels`.
+Make two scatterplots from the `animals-table`, using `"age"` as the explanatory variable in one plot and `"pounds"` as the @vocab{explanatory variable} in the other. In both plots, use `"weeks"` as your @vocab{response variable} and `"name"` for the `labels`. When we start programming, we will refer to the explanatory column as “xs” and the response column as “ys.”
 
 == Intro to Linear Regression @duration{10 minutes}
 
@@ -65,7 +65,7 @@ Given a value on the x-axis, this line allows us to predict what the correspondi
 
 Is there only one “best line”? Based on methods of calculus, data scientists know the answer to this question is yes! That justifies us talking about a single “line of best fit.”
 
-Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine a rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit. 
+Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit. 
 Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine a rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit. 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -73,7 +73,7 @@ Data scientists use a statistical method called @vocab{linear regression} to pin
 |
 @span{.title}{Going Deeper}
 
-Students can learn more about how the line of best fit is created by watching @link{https://www.youtube.com/watch?v=lZ72O-dXhtM, this video}. If you want to teach students the algorithm for linear regression, now is the time! However, this algorithm is not a required portion of Bootstrap:Data Science.
+If you want to teach students the algorithm for linear regression, now is the time! However, this algorithm is _not_ a required portion of Bootstrap:Data Science.
 |===
 
 === Investigate
@@ -132,7 +132,7 @@ lr-plot(animals-table, "name", "age", "weeks")
 - `xs` -- the name of the column to use for _x-coordinates_ (e.g. “age of each pet”)
 - `ys` -- the name of the column to use for _y-coordinates_ (e.g. “weeks for each pet to be adopted”)
 
-Our goal is to use values of the the variable on our x-axis to _predict_ values of the variable on our y-axis.
+Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -148,7 +148,7 @@ The resulting scatterplot looks like those we’ve seen before, but it has a few
 
 The intercept is `2.285`. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this too literally, and say that a newborn animal would be adopted in 2.285 weeks, because none of the animals in our data set was that young. Still, the regression line suggests that a baby animal, whose age is close to 0, would take only about 3 weeks to be adopted.
 
-We also see the @math{r}-value is +0.442. The sign is positive, consistent with the fact that the scatter plot point cloud, along with the line of best fit, slope upward. The fact that the magnitude falls well between 0 and 1 tells us that the strength is moderate. This is consistent with the fact that the scatter plot points are somewhere between being really tightly clustered or really loosely scattered.
+We also see the @math{r}-value is +0.442. The sign is positive, consistent with the fact that the scatter plot point cloud, along with the line of best fit, slopes upward. The fact that the magnitude falls well between 0 and 1 tells us that the strength is moderate. This is consistent with the fact that the scatter plot points are somewhere between being really tightly clustered and really loosely scattered.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -190,24 +190,10 @@ How well can you interpret the results of a linear regression analysis? Can you 
 When looking at a regression for adoption time v. age for just the cats, we saw that the slope of the predictor function was +0.23, meaning that for every year older a cat is, we expect a +0.23-week increase in the time taken to adopt the cat. The @math{r}-value was +0.566, confirming that the correlation is positive and indicating moderate strength.
 
 === Common Misconceptions
-- Many students assume the correlation statistic - the @math{r}-value - means that the predictor is accurate @math{r%} of the time. This is profoundly untrue, and is also a _really_ common misconception!
+Students often think it doesn’t matter which variable is assigned to be x and which is y in a regression. It’s true that you’ll get the same correlation either way---for example, @math{r=+0.442} whether your scatter plot shows `weeks` v. `pounds` or `pounds` v. `weeks`. *However, the regression line _is_ different, due to the math involved in minimizing _vertical_ distances from the line, not horizontal*.
 
 === Synthesize
 Have students read their text aloud, to get comfortable with the phrasing.
-
-[.lesson-point]
-Correlation does NOT imply causation.
-
-It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us make predictions! But Data Scientists know better than that...
-
-Here are some real-life correlations that have absolutely no causal relationship; they come about either by chance or because both of them are tied in with another variable that’s lurking in the background.
-
-- “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (@math{r} = 0.98) 
-- “Average per-person consumption of chicken” v. “U.S. crude oil imports” (@math{r} = 0.95)
-- “Marriage rate in Wyoming” v. “Domestic production of cars” (@math{r} = 0.99)
-- “Number of people who get tangled in their own bedsheets” v. “Amount of cheese consumed that year” (@math{r} = 0.95)
-
-All of these correlations come from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
 
 == Your Analysis @duration{flexible}
 

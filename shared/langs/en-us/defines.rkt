@@ -33,7 +33,7 @@
       "Of course, there's more to a curriculum than software\n"
       "and lesson plans! We also provide a number of resources to educators,\n"
       "including standards alignment, a complete student workbook, an answer\n"
-      "key for the programming exercises and a forums where they can ask\n"
+      "key for the programming exercises and a forum where they can ask\n"
       "questions and share ideas.\n"
       "\n"
       "[.pathway_external_links]\n") o))

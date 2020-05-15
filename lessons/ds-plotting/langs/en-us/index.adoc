@@ -56,9 +56,9 @@ pie-chart(animals-table, "gender")
 - In the Interactions Area, type `pie-chart(animals-table, "species")` and hit Enter. What happens? 
 
 @span{.right}{@image{images/pie-chart.png}}
-Hovering over a pie slice or bar reveals the value or percentage of the whole, and the label. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+Hovering over a pie slice or bar reveals the label, as well as the count or percentage of the whole. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
-The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `species` across the shelter.
+The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `gender` across the shelter.
 
 === Investigate
 Here is the @vocab{Contract} for another function:
@@ -69,16 +69,16 @@ Here is the @vocab{Contract} for another function:
 
 [.lesson-instruction]
 - Which column of the animals table tells us whether an animal is male or female?
-- Use `bar-chart` to make a display showing the number of male and female animals at the shelter.
+- Use `bar-chart` to make a display showing the numbers of male and female animals at the shelter.
 - Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_ 
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 - When would you want to use one chart instead of another?
 
 === Possible Misconceptions
-Pie charts may show counts or percentages (in Pyret they show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables. 
+Pie charts and bar charts may show counts or percentages (in Pyret pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables. 
 
 ==== Synthesize
-Pie and Bar Charts display the proportion of a sample that belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+Pie and Bar Charts display what portion of a sample that belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
 Pie charts and bar charts are mostly used to _display categorical columns_. 
@@ -121,8 +121,8 @@ What did we get back? `count` is a function that consumes a table and the name o
 
 Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to use the raw values in the summary table as-is: the size of the pie slice or bar is taken directly from the `count` column, and the label is taken directly from the `value` column. When we want to use the raw values as-is, we have another function:
 
-`# pie-chart-raw :: (t :: Table, label :: String, data :: String) -> Image`
-`pie-chart-raw(count(animals-table,"species"), "value", "count")`
+`# pie-chart-summarized :: (t :: Table, label :: String, data :: String) -> Image`
+`pie-chart-summarized(count(animals-table,"species"), "value", "count")`
 |===
 
 
