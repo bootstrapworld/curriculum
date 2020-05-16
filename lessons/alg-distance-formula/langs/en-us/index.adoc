@@ -38,14 +38,6 @@
 
 * @workbook-link{pages/distance.adoc, Design Recipe: distance} (original))
 
-
-@ifproglang{wescheme}{
-* Design Recipe: collide? (@workbook-link{pages/collide.adoc, original})
-}
-@ifproglang{pyret}{
-* Design Recipe: is-collision (@workbook-link{pages/collide.adoc, original})
-}
-
 | Supplemental Resources
 |
 - Absolute Value (@link{https://teacher.desmos.com/activitybuilder/custom/58efa58b999d890619a5663e, Desmos })
@@ -74,7 +66,7 @@ Students should have their workbook, pencil, and be logged into
 @ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
 on their computer.
 
-== Distance @duration{30 minutes}
+== Distance in 1 Dimension @duration{15 minutes}
 
 === Overview
 Students discover the need for distance calculation (first in one dimention, then in two) in videogames.
@@ -85,7 +77,7 @@ Students discover the need for distance calculation (first in one dimention, the
 Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate. +
 }
 @ifproglang{pyret}{
-Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, game file} and investigate. +
+Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS, game file} and investigate. +
 }
 
 {empty}
@@ -94,22 +86,29 @@ Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6T
 +
 _The characters aren't doing anything when they collide._
 
-- Why are the characters moving by each other?
-+
-_We haven't given the game any instructions on what to do when the characters get close._
-
 - What does it mean for characters to 'hit' one another? To collide?
 +
-_They have to be in the same place at the same time._
+_They have to be close enough to touch._
 
 - How will the computer know when the characters have collided?
 +
 _When the coordinates of the characters are really close to each other._
 
-Role-Play: Ask a volunteer to help role-play two characters colliding. Stand about 10 steps away from one another and side-step towards each other one step at a time, while asking, "True or False: we colliding!"
+[.lesson-instruction]
+--
+Role-Play: Ask a volunteer to help role-play two characters colliding! 
 
-Do this until students can clearly see it's when the two characters are 'touching' or 'overlapping' in some way - NOT when they are 'at the same point.' Don't worry too much about clarifying the difference now, they will be able to see the differences with their own images very soon.
+- Idenitfy a "number line" on the floor (this can be done just by pointing, or with a visual aid). 
+- Make sure that you and your volunteer stand with feet as close together as possible, representing the infinitely small point that identifies your center.
+- Raise your arms to form a "T shape", representing the outer edges of the characters.
+- Emphasize that this represents _one dimension_ (perhaps the x- or y-axis).
+- With the volunteeer, stand about 10 steps away from one another and side-step towards each other one step at a time, while asking the class, "True or False: we colliding!" __Be sure to only accept "true" and "false" as responses - not "yes" and "no"!__
+- Ask the class how far apart you and your volunteer are, and then ask them how they would calculate this if you were standing on a number line and they could see the actual coordinates under your feet.
+- After a few iterations, try switching places and repeating. _Point out that students always subtract the smaller number from the larger one, regardless of the character order!_
+- Do this until students can clearly see it's when the two characters are 'touching' or 'overlapping' in some way - NOT when they are 'at the same point.'
+--
 
+=== Investigate
 [.lesson-instruction]
 Have students explore using the `line-length` function in the @vocab{Interactions area}.
 
@@ -120,6 +119,23 @@ Have students explore using the `line-length` function in the @vocab{Interaction
 
 You can extend this `line-length` activity into a lesson on absolute value and have students program `line-length` themselves. Computing 1-dimensional distance - and absolute value - are in fact piecewise functions!
 |===
+
+[.lesson-instruction]
+- What does this function _do_?
+- Why does it use conditionals?
+
+=== Synthesize
+Make absolutely certain that students understand that this function _always returns the positive distance_ between two points on a number line.
+
+What if we have points that are not on the same line? What if instead they differ by both the x- and y-coordinate? 
+
+== Distance in 2 Dimensions @duration{30 minutes}
+
+=== Overview
+
+
+=== Launch
+Bring your volunteer (or choose a different one!) back up to the front of the class, and have them stand on a chair while repeating the role-play activity. How does the class calculate distance _now_?
 
 @ifproglang{wescheme}{
 Have students open this new @link{https://www.wescheme.org/view?publicId=0bCivugY3P, game file} and investigate. +
@@ -170,8 +186,7 @@ have students write a function that takes in two @vocab{coordinate} pairs (four 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
 
 === Common Misconceptions
-
-- It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
+It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
 @ifproglang{wescheme}{ `...(sqrt (+ (sqr (- x1 y1)) (sqr (- x2 y2))))...` 
 instead of `...(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))...` }
 @ifproglang{pyret}{ `...num-sqrt(num-sqr(x1 - y1) + num-sqr(x2 - y2))...` 
@@ -179,23 +194,8 @@ instead of `...num-sqrt(num-sqr(x2 - x1) + num-sqr(y2 - y1))...` }
 
 In this situation, remind student to look back at what they circled and labeled in the examples step. _This is why we label!_ 
 
-== Collision Detection @duration{20 minutes}
-
-=== Overview
-Students once again see function composition at work, as they compose a simple inequality with the `distance` function they've created.
-
-=== Launch
-Knowing how far apart our characters are is the first step. We still need the computer to be asking: "True or False: is there a collision?"
-
-=== Investigate
-Using
-@ifproglang{wescheme}{ @workbook-link{pages/collide.adoc, Design Recipe: collision?}, }
-@ifproglang{pyret}{ @workbook-link{pages/collide.adoc, Design Recipe: is-collision}, }
-have students write a function that takes in two coordinate pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns a @vocab{Boolean} as to whether or not the two characters have gotten within 50 @vocab{pixels} of each other.
-
 === Synthesize
-- Explicitly point out that this function is easy to write because we can _re-use_ the distance function. 
-- Connect this back to `profit`, `revenue`, `cost` and `onscreen` from previous lessons. Function composition is powerful!
+
 
 == Additional Exercises:
 
