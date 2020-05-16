@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-05-14 # last modified
+LASTMOD=2020-05-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -164,6 +164,7 @@ function insertgdrivesave() {
   local pageTitle=
   if test -f $f_head.adoc; then
     pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
+    pageTitle=$(echo $pageTitle|$SED -e 's/[“”]/\\\\"/g')
   fi
   if test ! "$pageTitle"; then
     pageTitle=$f_head
@@ -1175,7 +1176,7 @@ function buildteacherresource() {
 function batchhtmltopdf() {
   echo building all PDF files
   rm -f $WKH2P_BATCH_BASE-split*
-  split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|sed -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
+  split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
     wkhtmltopdf --read-args-from-stdin < $f &

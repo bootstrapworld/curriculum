@@ -294,26 +294,46 @@ process.
 
 We currently deploy to:
 
-https://www.bootstrapworld.org/materials/spring2020/courses
+https://www.bootstrapworld.org/materials/fall2020/courses
 
-If you’ve cloned the https://github.com/bootstrapworld/curriculum
-repo anywhere on the machine hosting the Bootstrap website
-bootstrapworld.org, and
-you have a valid `distribution.tar.bz2` tarball or a
-valid `distribution` subdirectory, then calling the script
-`deploy-from-here` uses these files to update the documents displayed on the site.
+(The `fall2020` is in general `<semester><year>` where
+`<semester>` is one of `spring` or `fall`, and `<year>` is the
+4-digit year.)
 
-This assumes you created the `distribution` or
-`distribution.tar.bz2` content elsewhere (the machine hosting the
-site doesn’t have all the requisite programs for this).  Note
-that if both are present, `distribution.tar.bz2` is favored.
+After building one or pathways on your local machine, you can
+deploy all relevant docs from the `distribution/` directory by typing
+
+  deploy-to-brown jrandomuser
+
+Here `jrandomuser` is your user ID on Brown. You will be prodded for
+your Brown password, once to copy the files over and another time
+to set it up on the Brown machine. (This may be compressed in the
+future.)
+
+If you wish to deploy only a single pathway, e.g.,
+`data-science-pathway`, add a second argument:
+
+  deploy-to-brown jrandomuser data-science-pathway
+
+(This assumes you've first built `data-science-pathway`, of
+course.)
+
+The script `deploy-to-brown` uses SSH to interact with your Brown
+account. The connection has been often been flaky, so often the
+second SSH fails. If this happens, in order to let you finish, without redoing the
+work accomplished with the first SSH, you may type
+
+  deploy-to-brown-perms jrandomuser
+
+(If you used the optional second arg for `deploy-to-brown`, you
+don't need to repeat it here.)
 
 == Standards compliance
 
 The file `shared/lang/en-us/lessons-and-standards.rkt` contains
 an association of lessons with the educational standards they
 comply with. Dictionaries for the various standards are available
-in the same directory: For now, these are
+in the same directory. For now, these are:
 
   ccss-standards-dictionary.rkt
   csta-standards-dictionary.rkt

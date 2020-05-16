@@ -1,10 +1,12 @@
-# last modified 2020-05-14
+# last modified 2020-05-16
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
 
 SEMESTER=fall
 YEAR=2020
+
+############################################################################
 
 userid=$1
 
@@ -30,9 +32,15 @@ mkdir courses
 
 SEMESTER_YEAR=$SEMESTER$YEAR
 
+SED=sed
+
+if which gsed | grep -q .; then
+  SED=gsed
+fi
+
 function correctgdriveurl_1() {
   local f=$1
-  sed -i -e '/href=/s/\(spring\|fall\)[0-9][0-9][0-9][0-9]/'$SEMESTER_YEAR'/g' $f
+  $SED -i -e '/href=/s/\(spring\|fall\)[0-9][0-9][0-9][0-9]/'$SEMESTER_YEAR'/g' $f
 }
 
 function correctgdriveurls() {
@@ -75,6 +83,10 @@ fi
 for f in asc asciidoc rkt.kp txt.kp DS_Store; do
   find courses -name \*.$f -delete
 done
+
+find courses -name workbook-[A-Z]\*.pdf -delete
+find courses -name workbook-sols-\*.pdf -delete
+find courses -name pd-workbook-\*.pdf -delete
 
 test -f courses.tar.bz2 && rm courses.tar.bz2
 
