@@ -1,7 +1,6 @@
 = Measures of Center
 
-@lesson-description{
-Students learn different ways to explore central tendency in a quantitative data set: mean, median and mode(s). After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
+@lesson-description{Students learn different ways to report the center of a quantitative data set: mean, median and mode(s). After applying these concepts to a contrived dataset, they apply them to their own datasets and interpret the results.}
 
 [@lesson-intro-table]
 |===
@@ -9,7 +8,7 @@ Students learn different ways to explore central tendency in a quantitative data
 | Lesson Goals
 | Students will be able to...
 
-* Students explore the concept of central tendency, learning how to compute the mean, median and mode(s) of a dataset
+* Students explore the concept of center of a distribution, learning how to compute the mean, median and mode(s) of a dataset
 * Students find the mean, median and mode(s) of various columns in the animals table
 
 | Student-Facing Lesson Goals
@@ -38,7 +37,7 @@ Students learn different ways to explore central tendency in a quantitative data
 == Mean @duration{15 minutes}
 
 === Overview
-Students learn about mean (or "average"), and how it is one way (among others!) to summarize a quantitative column..._among others_.
+Students learn about mean (or "average"), and how it is one way (among others!) to summarize a quantitative column.
 
 === Launch
 [.lesson-point]
@@ -51,10 +50,10 @@ Some medicines are dosed by weight: heavier animals need a larger dose. If someo
 - Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.
 - Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.
 - Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.
-- When buying uniforms for a sports team, a coach might look for the most-common size that the players wear.
+- When buying uniforms for a sports team, a coach might look for the most common size that the players wear.
 
 [.lesson-instruction]
-Can you think of other examples where a number or two are used to summarize something complex?
+Can you think of other examples where someone uses a number or two to summarize something complex?
 
 Every kind of summary has situations in which it does a good job of reporting what’s typical, and others where it doesn’t really do justice to the data. In fact, the shape of the data can play a huge role in whether or not one kind of summary is appropriate!
 
@@ -119,13 +118,14 @@ The algorithm for finding the median of a quantitative column is:
 === Investigate
 [.lesson-instruction]
 * Pyret has a function to compute the median of a list as well. Find the contract in your contracts page.
-* Compute the median for the `pounds` column in the animals dataset, and add this to @workbook-link{pages/summarizing-columns-in-animals.adoc}. 
+* Compute the median for the `pounds` column in the Animals Dataset, and add this to @workbook-link{pages/summarizing-columns-in-animals.adoc}. 
 * Is it different than the mean? 
 * What can we conclude when the mean is so much greater than the median? 
 * For practice, compute the mean and median for the weeks and age columns.
 
 === Synthesize
-By looking at the histogram, we can develop an intuition for whether it's probably better to use the mean or median. Pronounced left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up. Either way, such shapes distort the mean as a measure of what’s typical for the data set.
+By looking at the histogram, we can develop an intuition for whether it's probably better to use the mean or median. Pronounced left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up. Either way, such shapes distort the mean as a measure of what’s typical for the data set. Data scientists generally prefer to use the mean as their measure of center, because it contains information from every single data value. However, if a data set has substantial skewness or outliers, they use median to report the center .
+
 
 == Modes @duration{25 minutes}
 
@@ -133,7 +133,7 @@ By looking at the histogram, we can develop an intuition for whether it's probab
 Students learn about the mode(s) of a dataset, how to compute the mode, and when it is appropriate to use this as a measure of center.
 
 === Launch
-The third measure of center is called the @vocab{mode} of a dataset. The @vocab{mode} of a data set is the value that appears _most often_. Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one number in the list: many data sets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
+The third measure of center is called the @vocab{mode} of a dataset. The @vocab{mode} of a data set is the value that appears _most often_. Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one mode in the list of most common values: many data sets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
 
   1, 2, 3, 4
   1, 2, 2, 3, 4
@@ -142,6 +142,8 @@ The third measure of center is called the @vocab{mode} of a dataset. The @vocab{
 - The first dataset has _no mode at all!_
 - The mode of the second data set is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last data set are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
+
+Mode is rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
 
 In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 

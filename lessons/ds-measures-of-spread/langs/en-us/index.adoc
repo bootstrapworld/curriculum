@@ -9,8 +9,8 @@ Students learn how to evaluate the spread of a quantitative column using box plo
 | Lesson Goals
 | Students will be able to...
 
-- Students learn one approach to measuring and displaying spread of a data set
-- Students learn to compare and contrast information displayed in a box plot and a histogram
+- apply one approach to measuring and displaying spread of a data set
+- compare and contrast information displayed in a box plot and a histogram
 
 | Student-Facing Lesson Goals
 | I can...
@@ -49,9 +49,9 @@ Suppose we lined up all of the values in the pounds column of the animals data s
 [.lesson-instruction]
 The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less. What does the third quartile represent?
 
-Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire data set—that is, the distance between minimum and maximum. 
+Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire data set—that is, the distance between minimum and maximum. This is called the @vocab{range of a data set}.
 
-We can use @vocab{box plots} to visualize all of this information. These plots can easily be represented using *just five numbers*, which makes them convenient ways to display both center and spread of a data set in a clear and simple way. . Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+We can use @vocab{box plots} to visualize all of this information. These plots are constructed using *just five numbers*, which makes them convenient ways to display both center and spread of a data set in a clear and simple way. . Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
 ----
 # box-plot :: (t :: Table, column :: String) -> Image
@@ -84,7 +84,7 @@ Data Scientists subtract the 1st quartile from the 3rd quartile to compute the r
 [.lesson-instruction]
 * Find the @vocab{interquartile range} of this dataset.
 * What percentage of animals fall within the interquartile range?
-* What percentage of animals fall within below the First Quartile? Above the Third Quartile? What percentage fall anywhere between the minimum and the maximum?
+* What percentage of animals fall below the First Quartile? Above the Third Quartile? What percentage fall anywhere between the minimum and the maximum?
 
 Now that you’re comfortable creating box plots and looking at measures of spread on the computer, it’s time to put your skills to the test!
 
@@ -93,9 +93,9 @@ Turn to @workbook-link{pages/interpreting-spread.adoc} and complete the question
 
 Just as pie and bar charts are ways of visualizing categorical data, box plots and histograms are both ways of visualizing the shape of quantitative data. Box plots make it easy to see the 5-number summary, and compare the Range and Interquartile Range. Histograms make it easier to see skewness and more details of the shape, and offer more granularity when using smaller bins.
 
-Left-skewness is seen as a long tail in a histogram. In a boxplot, it's seen as longer left "whisker" or more spread in the left part of the box. Likewise, right skewness is shown as a longer right "whisker" or more spread in the right part of the box.
+Left-skewness is seen as a long tail in a histogram. In a box plot, it's seen as a longer left "whisker" or more spread in the left part of the box. Likewise, right skewness is shown as a longer right "whisker" or more spread in the right part of the box.
 
-Box-plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box-plot ais always divided into four parts, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
+Box-plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box-plot is always divided into four parts, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
 
 [.lesson-instruction]
 Turn to @workbook-link{pages/identifying-shape.adoc} and see if you can describe box plots using what you know about skewness.
@@ -111,7 +111,7 @@ Histograms, box plots, and measures of center and spread are all different ways 
 |
 @span{.title}{Modified Box Plots}
 
-More Statistics or Math-oriented class will also be familiar with _modified box plots_. These are similar to traditional box plots, but the box-and-whisker does not include any outliers. Instead, these outliers are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
+More Statistics or Math-oriented class will also be familiar with __modified box plots__. These are similar to traditional box plots, but the box-and-whisker just extends to minimum and maximum non-outliers. To call our attention to outliers, they are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
 |===
 
 == Your Analysis @duration{flexible}

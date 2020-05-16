@@ -52,21 +52,19 @@ A good Testing Table should be _representative_ of the population, and _relevant
 - Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.
 - Rows that aren’t already sorted, if our analysis is supposed to sort for us.
 
-*This connects back to our lesson on @link{../ds-random-samples/index.shtml, statistical inference and random samples}: a good Testing Table should allow us to make inferences about the larger dataset when we run our analysis.*
-
 For the purpose of performing __inference__, we typically take a random sample of at least 20 individuals from a much larger population. For the purpose of testing code, we can extract just a few rows and columns from a larger Table in a strategic way so we can catch any obvious errors.
 
 === Investigate
-Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table only has cats to begin with. How would we know if the function filters out non-cats?
+Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table that only has cats to begin with. How would we know if the function filters out non-cats?
 
 Suppose a function takes in a table of animals and shows _only the kittens_. A Testing Table should have cats and non-cats, as well as old and young cats.
 
-Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats...and have rows that aren't already sorted.
+Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats..._and_ have rows that aren't already sorted!
 
 [.lesson-instruction]
 * Turn to @workbook-link{pages/trust-but-verify.adoc} in your student workbook. 
 * You’ve been given a function called `fixed-cats` and a description of what it _claims_ to do.
-* List the names of the animals that you would use in a Testing Table to verify whether the function works as-advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify Starter File}. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
+* List the names of the animals that you would use in a Testing Table to verify whether the function works as advertised. When you’ve finished, open the @link{https://code.pyret.org/editor#share=1VVz4l0P6GLwbcpYyAGYJuRgBxj69R52Z, Trust-but-Verify Starter File}. There are three versions of `fixed-cats` here. Are they all correct? If not, which ones are broken?
 * Turn to @workbook-link{pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Testing Table and figure out which (if any) of the functions are correct!
 
 === Synthesize
