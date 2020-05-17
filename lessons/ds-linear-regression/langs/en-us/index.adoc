@@ -41,7 +41,7 @@
 Have students open their “Animals Dataset” files. (If they do not have this file, or if something has happened to it, they can always make a @link{https://code.pyret.org/editor#share=1gaYAyYhvlKBm6VJuvJDcnoINBw76pL-L, new copy}.)
 
 [.lesson-instruction]
-Make two scatterplots from the `animals-table`, using `"age"` as the explanatory variable in one plot and `"pounds"` as the @vocab{explanatory variable} in the other. In both plots, use `"weeks"` as your @vocab{response variable} and `"name"` for the `labels`. When we start programming, we will refer to the explanatory column as “xs” and the response column as “ys.”
+Make two scatterplots from the `animals-table`, using `age` as the explanatory variable in one plot and `pounds` as the @vocab{explanatory variable} in the other. In both plots, use `weeks` as your @vocab{response variable} and `name` for the `labels`. We will refer to the explanatory column as “xs” and the response column as “ys.”
 
 == Intro to Linear Regression @duration{10 minutes}
 
@@ -65,7 +65,6 @@ Given a value on the x-axis, this line allows us to predict what the correspondi
 
 Is there only one “best line”? Based on methods of calculus, data scientists know the answer to this question is yes! That justifies us talking about a single “line of best fit.”
 
-Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit. 
 Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. When we draw our regression line on a scatter plot, we can imagine a rubber bands stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”. Linear regression is the math behind the line of best fit. 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -77,23 +76,6 @@ If you want to teach students the algorithm for linear regression, now is the ti
 |===
 
 === Investigate
-Let's explore scatter plots for weeks-v-pounds and weeks-v-age:
-
-@span{.left}{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot", 400}}
-@span{.right}{@image{images/age-v-weeks.gif,"weeks-v-age scatterplot", 400}}
-@span{.clear}
-
-After looking at the point clouds, we are left with two questions:
-
-- Do the relationships appear to be linear for one? Both?
-- If a relationship is linear, what line in particular are the scatter plot points clustering around? 
-- What is the @math{r}-value for each relationship?
-
-[.lesson-instruction]
-* Turn to @workbook-link{pages/drawing-predictors.adoc}.
-* In the first column, draw a @vocab{line of best fit} through each of the scatter plots. 
-* In the second column, circle whether the slope of the line (which is the same as the _direction_ of the correlation) is positive or negative.
-
 [.lesson-instruction]
 --
 Have students open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
@@ -103,6 +85,23 @@ Have students open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive L
 - Find the number called @math{r}. In your own words, explain what this number tells us.
 - What’s the largest @math{r}-value you can get? What do you think that number means?
 --
+
+Let's explore scatter plots for weeks-v-pounds and weeks-v-age:
+
+@span{.left}{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot", 400}}
+@span{.right}{@image{images/age-v-weeks.gif,"weeks-v-age scatterplot", 400}}
+@span{.clear}
+
+After looking at the point clouds, we are left with a few questions:
+
+- Do the relationships appear to be linear for one? Both?
+- If a relationship is linear, what line in particular are the scatter plot points clustering around? 
+- What is the @math{r}-value for each relationship?
+
+[.lesson-instruction]
+* Turn to @workbook-link{pages/drawing-predictors.adoc}.
+* In the first column, draw a @vocab{line of best fit} through each of the scatter plots. 
+* In the second column, circle whether the slope of the line (which is the same as the _direction_ of the correlation) is positive or negative.
 
 === Synthesize
 Give students some time to experiment, then share back observations. Can they come up with rules or suggestions for how to minimize error?
@@ -117,7 +116,7 @@ Give students some time to experiment, then share back observations. Can they co
 Students are introduced to the `lr-plot` function in Pyret, which performs a linear regression and plots the result.
 
 === Launch
-Pyret includes a powerful display, which draws a scatterplot, draws the line of best fit, and even displays the equation for that line:
+Pyret includes a powerful display, which (1) draws a scatterplot, (2) draws the line of best fit, and (3) even displays the equation for that line:
 
 ----
 # use linear regression to extract a predictor function
@@ -173,15 +172,16 @@ Does the linear regression for our sample of the Animals Dataset allow us to _ma
 == Interpreting LR Plots in Pyret @duration{20 minutes}
 
 === Overview
-Students learn how to _write_ about the results of a linear regression, using proper statistical terminology and thinking through the many ways this language can be mis-used.
+Students learn how to _write_ about the results of a linear regression, using proper statistical terminology and thinking through the many ways this language can be misused.
 
 === Launch
 How well can you interpret the results of a linear regression analysis? Can you write your own?
 
-=== Investigate
 [.lesson-instruction]
 - What does it mean when a data point is _above_ the line of best fit?
 - What does it mean when a data point is _below_ the line of best fit?
+
+=== Investigate
 
 [.lesson-instruction]
 - Turn to @workbook-link{pages/reading-regression-lines-n-rvalues.adoc}, and match the write-up on the left with the line of best fit and @math{r}-value on the right.
