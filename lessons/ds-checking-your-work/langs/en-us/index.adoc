@@ -52,7 +52,7 @@ A good Testing Table should be _representative_ of the population, and _relevant
 - Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.
 - Rows that aren’t already sorted, if our analysis is supposed to sort for us.
 
-For the purpose of performing __inference__, we typically take a random sample of at least 20 individuals from a much larger population. For the purpose of testing code, we can extract just a few rows and columns from a larger Table in a strategic way so we can catch any obvious errors.
+Data scientists usually think in terms of samples that best serve the purpose of __performing inference__: Samples should be representative of the entire population, and large enough to get us fairly close to the truth about that population. Computer programmers need to think in terms of __Testing Tables__ that best serve the purpose of verifying that their code does what it’s supposed to: The Tables should be designed to call attention to any imperfections in the code’s instructions.
 
 === Investigate
 Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table that only has cats to begin with. How would we know if the function filters out non-cats?
