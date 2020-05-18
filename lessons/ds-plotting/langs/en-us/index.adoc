@@ -1,4 +1,4 @@
-= Plotting and Displaying Data
+= Displaying Categorical Data
 
 @lesson-description{Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
 
@@ -44,7 +44,7 @@
 Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
 
 === Launch
-Have students ever seen any pictures created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image? The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that does just that, and an example of using it:
+Have students ever seen any pictures created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image? The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}, and an example of using it:
 ----
 # pie-chart :: (t :: Table, col :: String) -> Image
 pie-chart(animals-table, "gender")
@@ -56,12 +56,12 @@ pie-chart(animals-table, "gender")
 - In the Interactions Area, type `pie-chart(animals-table, "species")` and hit Enter. What happens? 
 
 @span{.right}{@image{images/pie-chart.png}}
-Hovering over a pie slice or bar reveals the label, as well as the count or percentage of the whole. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+Hovering over a pie slice reveals the label, as well as the count or percentage of the whole. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
 The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `gender` across the shelter.
 
 === Investigate
-Here is the @vocab{Contract} for another function:
+Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
 
 ----
 # bar-chart :: (t :: Table, col :: String) -> Image
@@ -75,7 +75,7 @@ Here is the @vocab{Contract} for another function:
 - When would you want to use one chart instead of another?
 
 === Possible Misconceptions
-Pie charts and bar charts may show counts or percentages (in Pyret pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables. 
+Pie charts and bar charts may show counts or percentages (in Pyret, pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables. 
 
 ==== Synthesize
 Pie and Bar Charts display what portion of a sample that belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
@@ -119,7 +119,7 @@ What did we get back? `count` is a function that consumes a table and the name o
 
 - Use the `count` function to make a table showing the number of animals that are `fixed` (or not) from the shelter.
 
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to use the raw values in the summary table as-is: the size of the pie slice or bar is taken directly from the `count` column, and the label is taken directly from the `value` column. When we want to use the raw values as-is, we have another function:
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have another function:
 
 `# pie-chart-summarized :: (t :: Table, label :: String, data :: String) -> Image`
 `pie-chart-summarized(count(animals-table,"species"), "value", "count")`

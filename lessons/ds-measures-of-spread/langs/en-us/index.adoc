@@ -39,7 +39,7 @@ Students learn how to evaluate the spread of a quantitative column using box plo
 == Measures of Spread @duration{30 minutes}
 
 === Overview
-Students are introduced to the notion of _spread_ in a dataset. They learn about quartiles, box-plots, and how to use them to talk about this measure.
+Students are introduced to the notion of _spread_ in a dataset. They learn about quartiles, box plots, and how to use them to talk about spread.
 
 === Launch
 A teacher may report that her students averaged a 75 on a test, but it’s important to know how those scores were spread out: did all of them get exactly 75, or did half score 100 and the other half 50? When Data Scientists use the mean of a sample to estimate the mean of a whole population, it’s important to know the spread in order to report how good or bad a job that estimate does.
@@ -66,9 +66,9 @@ Type in this expression in the Interactions Area, and see the resulting plot.
 This plot shows us the center and spread in our dataset according to those five numbers.
 
 - The *minimum* value in the dataset (at the left of “whisker”). In our dataset, that’s just 0.1 pounds.
-- The *First Quartile (Q1)* (the left edge of the box), is computed by taking _the median of the smaller half of the values_. In the pounds column, that’s 4.3 pounds.
+- The *First Quartile (Q1)* (the left edge of the box), is computed by taking _the median of the lower half of the values_. In the pounds column, that’s 4.3 pounds.
 - The *Median* value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 13.4 pounds.
-- The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the larger half of the values_. That’s 68 pounds in our dataset.
+- The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the upper half of the values_. That’s 68 pounds in our dataset.
 - The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
 
 One way to summarize the spread in the dataset is to measure the distance between the largest value and the smallest value. When we talk about functions having many possible outputs, we use the term “Range” to describe them. (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!) When we look at the distance between the smallest and largest values in our dataset, we use the same term.
@@ -76,7 +76,7 @@ One way to summarize the spread in the dataset is to measure the distance betwee
 === Investigate
 [.lesson-instruction]
 * Turn to @workbook-link{ds-measures-of-center/pages/summarizing-columns-in-animals.adoc}
-* Fill in the five-number summary for the `pounds` column, and sketch the box-plot. 
+* Fill in the five-number summary for the `pounds` column, and sketch the box plot. 
 * What conclusions can you draw about the distribution of values in this column?
 
 Data Scientists subtract the 1st quartile from the 3rd quartile to compute the range of the “middle half” of the dataset, also called the @vocab{interquartile range}.
@@ -95,7 +95,7 @@ Just as pie and bar charts are ways of visualizing categorical data, box plots a
 
 Left-skewness is seen as a long tail in a histogram. In a box plot, it's seen as a longer left "whisker" or more spread in the left part of the box. Likewise, right skewness is shown as a longer right "whisker" or more spread in the right part of the box.
 
-Box-plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box-plot is always divided into four parts, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
+Box plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box plot is always divided into four parts, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
 
 [.lesson-instruction]
 Turn to @workbook-link{pages/identifying-shape.adoc} and see if you can describe box plots using what you know about skewness.
@@ -111,7 +111,7 @@ Histograms, box plots, and measures of center and spread are all different ways 
 |
 @span{.title}{Modified Box Plots}
 
-More Statistics or Math-oriented class will also be familiar with __modified box plots__. These are similar to traditional box plots, but the box-and-whisker just extends to minimum and maximum non-outliers. To call our attention to outliers, they are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__. These are similar to traditional box plots, but the box-and-whisker just extends to minimum and maximum non-outliers. To call our attention to outliers, they are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
 |===
 
 == Your Analysis @duration{flexible}
