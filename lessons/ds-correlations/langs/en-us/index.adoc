@@ -39,8 +39,7 @@
 == Correlations have _Form_ @duration{10 minutes}
 
 === Overview
-Students identify and make use of patterns in scatter plots, learning to identify scatter plots that are linear, curved, or show no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression.
-
+Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression
 === Launch
 By now we have learned ways to summarize a single quantitative variable, like the `age` of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. We could do the same for `pounds`, `weeks`, or any other quantitative column.
 
@@ -88,19 +87,19 @@ A linear relationship between two quantitative variables is _positive_ if, in ge
 [.lesson-point]
 _Strength:_ how closely the two variables are correlated.
 
-A relationship between two quantitative variables is strong if the scatter plot points are tightly clustered together. In, then knowing the x-value of a data point gives us a very good idea of what its y-value will be. If the relationship is linear and strong, the scatter plot points are clumped together in a thin cloud.
+A relationship between two quantitative variables is strong if the scatter plot points are tightly clustered together. In this case, knowing the x-value of a data point gives us a very good idea of what its y-value will be. In other words, if the relationship is linear and strong, the scatter plot points are clumped together in a thin cloud.
 
 - A *strong* linear relationship means that the points in the scatter plot are all clustered closely around an invisible line. If the cloud point is very tightly packed around the line, the relationship is said to be strong. 
 - A *weak* linear relationship means that the cloud of points is scattered very loosely around the line.
 
 The correlation @vocab{r} is a number (between -1 and 1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
 
-An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 or ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
 
 Calculating @math{r} from a data set only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
 === Investigate
-Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form, Direction and Strength} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and strong or weak, and combine those two to guess whether the @math{r}-value is closer to -1, 0, or +1.
+Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Form, Direction and Strength} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and strong or weak, and combine those two to guess whether the @math{r}-value is closer to -1, -0.5, 0, +0.5, or +1.
 
 
 [.lesson-instruction]
@@ -115,7 +114,7 @@ Have students turn to @workbook-link{pages/identifying-form.adoc, Identifying Fo
 === Common Misconceptions
 - Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
 - Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
-- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million datapoints _must_ be strong!"
+- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
 
 === Synthesize
 It is useful to ask students probing questions, to help address the misconceptions listed above. Some examples:
@@ -123,14 +122,14 @@ It is useful to ask students probing questions, to help address the misconceptio
 - What is the difference between a _weak_ relationship and a _negative_ relationship?
 - What is the difference between a _strong_ relationship and a _positive_ relationship?
 - If we find a strong relationship in a sample, can we always infer that relationship holds for the whole population?
-- Suppose we have two correlations, one drawn from 10 datapoints and one drawn from 50. If both correlations are identical in direction and strength, should we trust them equally when make an inference about the larger population?
+- Suppose we have two correlations, one drawn from 10 data points and one drawn from 50. If both correlations are identical in direction and strength, should we trust them equally when making an inference about the larger population?
 
 [.lesson-point]
 Correlation does NOT imply causation.
 
 It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us make predictions! But Data Scientists know better than that...
 
-Here are some real-life correlations that have absolutely no causal relationship; they come about either by chance or because both of them are tied in with another variable that’s lurking in the background.
+Here are some real-life correlations that have absolutely no causal relationship; they come about either by chance or because both of them are tied in with another variable that’s (often) lurking in the background.
 
 - “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (@math{r} = 0.98) 
 - “Average per-person consumption of chicken” v. “U.S. crude oil imports” (@math{r} = 0.95)
@@ -151,7 +150,7 @@ What correlations do you think there are in your dataset? Would you like to inve
 [.lesson-instruction]
 - Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
 - Turn to @workbook-link{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
-- Investigate these correlations. If you need blank Design Recipes, you can find them at the back your workbook, just before the Contracts.
+- Investigate these correlations. If you need blank Design Recipes, you can find them at the back of your workbook, just before the Contracts.
 - What correlations did you find?
 - Did you need to filter out certain rows in order to get those correlations?
 
