@@ -1293,7 +1293,7 @@
                      (enclose-tag "table" ".gdrive-only.expression"
                        (if (symbol? a)
                            (let ([args (map (lambda (e1)
-                                                (sexp->block e1 #:pyret pyret))
+                                                (sexp->block-table e1 #:pyret pyret))
                                               (cdr e))])
                              (string-append
                                (enclose-tag "tr"  ""
@@ -1309,7 +1309,7 @@
                                                      args))))))))
                            ;is this else ever used in our docs? (Not really args)
                            (let ([args (map (lambda (e1)
-                                                 (sexp->block e1 #:pyret pyret))
+                                                 (sexp->block-table e1 #:pyret pyret))
                                                e)])
                              (enclose-tag "tr" ""
                                (enclose-tag "td" ""
@@ -1320,7 +1320,7 @@
                                                    (enclose-tag "td" "" arg))
                                                  args)))))))
                              )))]
-        [else (error 'ERROR "sexp->block: unknown s-exp")]))
+        [else (error 'ERROR "sexp->block-table: unknown s-exp")]))
 
 (define (sexp->block e #:pyret [pyret #f])
   ;(printf "doing sexp->block ~s ~a\n" e pyret)
