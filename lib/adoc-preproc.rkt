@@ -1167,8 +1167,14 @@
 
 (define (sexp->coe e)
   ;(printf "sexp->coe ~s\n" e)
-  (enclose-div ".circleevalsexp"
-    (sexp->block e #:pyret (string=? *proglang* "pyret"))))
+  (string-append
+    ;enclosing following in span .gdrive-only doesn't seem to work
+    (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
+    ;
+    (enclose-span ".begin-ignore-for-gdrive" "")
+    (enclose-div ".circleevalsexp"
+      (sexp->block e #:pyret (string=? *proglang* "pyret")))
+    (enclose-span ".end-ignore-for-gdrive" "")))
 
 (define *hole-symbol* '++_______++)
 (define *hole2-symbol* '++____________________++)
@@ -1270,6 +1276,51 @@
         [(eq? e '+) "{plus}"]
         [(memq e '(* -)) (format "{zwsp}~a" e)]
         [else (format "~a" e)]))
+
+(define (sexp->block-table e #:pyret [pyret #f])
+  ;(printf "doing sexp->block-table ~s ~a\n" e pyret)
+  (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
+        [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
+        [(number? e) (enclose-span ".value.wescheme-number" (format "~a" e))]
+        [(string? e) (enclose-span ".value.wescheme-string" (format "~s" e))]
+        [(boolean? e) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
+        [(symbol? e)
+         (enclose-span ".value.wescheme-symbol"
+           (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
+                  "{nbsp}{nbsp}{nbsp}"]
+                 [else (sym-to-adocstr e #:pyret pyret)]))]
+        [(list? e) (let ([a (car e)])
+                     (enclose-tag "table" ".gdrive-only.expression"
+                       (if (symbol? a)
+                           (let ([args (map (lambda (e1)
+                                                (sexp->block e1 #:pyret pyret))
+                                              (cdr e))])
+                             (string-append
+                               (enclose-tag "tr"  ""
+                                 (enclose-tag "td" ".operator"
+                                   (enclose-span ".operator" (sexp->block-table a #:pyret pyret))))
+                                 (enclose-tag "tr" ""
+                                   (enclose-tag "td" ""
+                                     (enclose-tag "table" ".args"
+                                       (enclose-tag "tr" ""
+                                         (apply string-append
+                                                (map (lambda (arg)
+                                                       (enclose-tag "td" "" arg))
+                                                     args))))))))
+                           ;is this else ever used in our docs? (Not really args)
+                           (let ([args (map (lambda (e1)
+                                                 (sexp->block e1 #:pyret pyret))
+                                               e)])
+                             (enclose-tag "tr" ""
+                               (enclose-tag "td" ""
+                                 (enclose-tag "table" ".args"
+                                   (enclose-tag "tr" ""
+                                     (apply string-append
+                                            (map (lambda (arg)
+                                                   (enclose-tag "td" "" arg))
+                                                 args)))))))
+                             )))]
+        [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp->block e #:pyret [pyret #f])
   ;(printf "doing sexp->block ~s ~a\n" e pyret)

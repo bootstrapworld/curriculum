@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-05-16 # last modified
+LASTMOD=2020-05-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -222,11 +222,13 @@ EOF
     -e 's/%INSERTGDRIVEURL/window.location.href/' \
     $other_f
 
-  modifygdrivepage $other_f
+  modifygdrivepage $other_f $f
 }
 
 function modifygdrivepage() {
   local f=$1
+  local h=$2
+
 
   $SED -i \
     -e '/include virtual=".menubar.ssi"/d' \
@@ -265,20 +267,16 @@ function modifygdrivepage() {
     -e '/<\/title>/r '$TMPFILE.css \
     $f
 
-  local mathjaxneeded=
-  if grep -q CURRICULUMPMMATH $f; then
-    mathjaxneeded=1
-  fi
-
-  if test "$mathjaxneeded"; then
-    $SED -i \
-      -e 's/<script type="math[^<]*<\/script>/<!--\0-->/g' \
-      -e 's/<!--CURRICULUMPMMATH//g' \
-      -e 's/CURRICULUMPMMATH-->//g' \
-      $f
-  fi
+  $SED -i \
+    -e 's/<span class="begin-ignore-for-gdrive">/<!--\0/g' \
+    -e 's/<span class="end-ignore-for-gdrive"><\/span>/\0-->/g' \
+    $f
 
   rm -f $TMPFILE.css
+
+  $SED -i \
+    -e 's/<span class="\(begin\|end\)-ignore-for-gdrive"><\/span>//g' \
+    $h
 
 }
 
@@ -869,8 +867,6 @@ function buildlessonplan() {
       cleanupduration index.shtml
       lintlesson index.shtml
       insertgdrivesave index.shtml
-      #cp -p index.shtml index-gdrive-import.shtml
-      #modifygdrivepage index-gdrive-import.shtml
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt

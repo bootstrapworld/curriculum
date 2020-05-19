@@ -73,13 +73,14 @@
   ;(printf "enclose-math of ~s\n" e)
   (let ([pme (low-quality-math e)])
     (string-append
-      "%CURRICULUMPMMATH%"
-      pme
-      "%ENDCURRICULUMPMMATH%"
+      (enclose-span ".gdrive-only" pme)
+      (enclose-span ".begin-ignore-for-gdrive" "")
       "%CURRICULUMSCRIPT%"
       "%BEGINCURRICULUMSCRIPT%\\displaystyle "
       e
-      "%ENDCURRICULUMSCRIPT%")))
+      "%ENDCURRICULUMSCRIPT%"
+      (enclose-span ".end-ignore-for-gdrive" "")
+      )))
 
 ;for the @span{...}{...}
 
