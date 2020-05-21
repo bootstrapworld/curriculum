@@ -1305,7 +1305,7 @@
                                        (enclose-tag "tr" ""
                                          (apply string-append
                                                 (map (lambda (arg)
-                                                       (enclose-tag "td" "" arg))
+                                                       (enclose-tag "td" ".arg" arg))
                                                      args))))))))
                            ;is this else ever used in our docs? (Not really args)
                            (let ([args (map (lambda (e1)
