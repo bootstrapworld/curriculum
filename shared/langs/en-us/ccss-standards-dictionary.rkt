@@ -1317,6 +1317,7 @@
  ("WHST.6-8.1"
   "Write arguments focused on discipline-specific content."
  )
+ ; ELA Standards for grades 6-12
  ("WHST.6-8.1.A"
   "Introduce claim(s) about a topic or issue, acknowledge and distinguish the claim(s) from alternate or opposing claims, and organize the reasons and evidence logically."
  )
@@ -1702,7 +1703,7 @@
   "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grades 9-10 Language standards 1 and 3 here for specific expectations.)"
  )
  ("SL.11-12.1"
-  "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 9-10 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively."
+  "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 11-12 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively."
  )
  ("SL.11-12.1.A"
   "Come to discussions prepared, having read and researched material under study; explicitly draw on that preparation by referring to evidence from texts and other research on the topic or issue to stimulate a thoughtful, well-reasoned exchange of ideas."
