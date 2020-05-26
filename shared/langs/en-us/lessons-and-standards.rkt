@@ -106,7 +106,7 @@
     ("ds-histograms2" "HS-SEP4-2" "HSS.ID.B.6.A" "HSS.ID.A.3" "HSS.ID.A.1" "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.C")
     ("ds-if-expressions" "")
     ("ds-measures-of-center" "HS-SEP4-2" "6.SP.A.2" "6.SP.A.3" "6.SP.B.4" "6.SP.B.5.C")
-    ("ds-measures-of-spread" "HS-SEP4-2" "HSS.ID.A.1" "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.C")
+    ("ds-measures-of-spread" "HS-SEP4-2" "HSS.ID.A.1" "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.C" "7.SP.B.3")
     ("ds-choosing-your-dataset" "6.SP.A.1" "HS-SEP1-3")
     ("ds-method-chaining" "HS-SEP4-1")
     ("ds-checking-your-work" "7.SP.A.1" "HS-SEP5-4")
