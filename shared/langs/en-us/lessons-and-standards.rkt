@@ -94,7 +94,7 @@
     ("__sample-lesson" "8.NS.A")
 
     ;data science
-    ("ds-intro"  "6.SP.A.1" "6.SP.B.5.A" "7.SP.A.1" "ELA.SL.9-10.1")
+    ("ds-intro"  "6.SP.A.1" "6.SP.B.5.A" "7.SP.A.1" "SL.9-10.1")
     ("ds-pyret-intro" "")
     ("ds-applying-functions" "HSF.IF.A.2")
     ("ds-displays-and-lookups" "6.SP.B.4" "8.SP.A.1" "HS-SEP4-1")
