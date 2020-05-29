@@ -560,10 +560,10 @@
         (newline o)))
     (fprintf o "link:./pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
 
-    (let ([lessons-file "pathway-lessons.asciidoc"]
-          [lessons-toc-file "pathway-lessons-toc.asciidoc"])
+    (let ([lessons-toc-file "pathway-lessons-toc.asciidoc"])
 
-      (call-with-output-file lessons-file
+      (print-menubar "pathway-lessons")
+      (call-with-output-file "pathway-lessons.asciidoc"
         (lambda (lo)
           (fprintf lo "= Lessons Used in This Pathway~n~n")
           (fprintf lo "include::~a[]~n~n" lessons-toc-file)
@@ -618,7 +618,6 @@
                   )))
             #:exists 'replace))
         #:exists 'replace)
-      ;(asciidoctor lessons-file)
       (newline o))))
 
 (define (preproc-n-asciidoctor in-file)

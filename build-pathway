@@ -991,6 +991,7 @@ function buildpathwaynarrative() {
       if test -f pathway-lessons.asciidoc; then
         if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
           $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
+          mv pathway-lessons.html pathway-lessons.shtml
           removelogos pathway-lessons.shtml
           resolveabbrevs pathway-lessons.shtml
         fi
