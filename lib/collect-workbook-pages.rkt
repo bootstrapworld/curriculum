@@ -24,8 +24,6 @@
 
 (define *lesson-order* (read-data-file "workbook-lessons.txt"))
 
-(define *language* (getenv "LANGUAGE"))
-
 (define (write-pages-info lesson-dir o #:paginate [paginate "yes"])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [exercise-pages-file (format "~a/pages/exercise-pages.txt.kp" lesson-dir)]

@@ -134,10 +134,10 @@ cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
 # shared/langs/$LANGUAGE isn't sufficiently populated,
 # we'll put in the en-us files first and shadow them later
 #
-cp -prH $TOPDIR/shared/langs/en-us/* $PROGDIR
+cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
 
 if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
-  cp -prH $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+  cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
 fi
 
 cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
