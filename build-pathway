@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-05-19 # last modified
+LASTMOD=2020-05-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -120,13 +120,9 @@ echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
-mkdir -p distribution
+mkdir -p distribution/$LANGUAGE/courses
 
-cd distribution
-
-echo '== Generated Documentation' > index.adoc
-
-cd $TOPDIR
+echo '== Generated Documentation' > distribution/index.adoc
 
 mkdir -p prog
 
@@ -138,11 +134,13 @@ cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
 # shared/langs/$LANGUAGE isn't sufficiently populated,
 # we'll put in the en-us files first and shadow them later
 #
-cp -p $TOPDIR/shared/langs/en-us/* $PROGDIR
+cp -prH $TOPDIR/shared/langs/en-us/* $PROGDIR
 
 if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
-  cp -p $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+  cp -prH $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
 fi
+
+cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
 
 #cp -p $TOPDIR/lib/.htp* distribution
 
@@ -1179,6 +1177,7 @@ function batchhtmltopdf() {
     wkhtmltopdf --read-args-from-stdin < $f &
   done
   wait
+  rm -f $WKH2P_BATCH_BASE-split*
 }
 
 function rmtmpfiles() {
@@ -1226,23 +1225,23 @@ function buildpathway() {
   if test ! -d pathways/$SRCPATHWAY/langs/$LANGUAGE; then
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
-    echo building pathway: $PATHWAY/$LANGUAGE $langicon
-    mkdir -p distribution/$PATHWAY
+    echo building pathway: $LANGUAGE/$PATHWAY $langicon
+    mkdir -p distribution/$LANGUAGE/courses/$PATHWAY
 
     if test $FORCE; then
-      rm -fr distribution/$PATHWAY/$LANGUAGE
-      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$PATHWAY/$LANGUAGE
+      rm -fr distribution/$LANGUAGE/courses/$PATHWAY
+      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$LANGUAGE/courses/$PATHWAY
       rm -f pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-exercises.rkt.kp \
         pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-lessons-containing-exercises.rkt.kp
     else
-      mkdir -p distribution/$PATHWAY/$LANGUAGE
-      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$PATHWAY/$LANGUAGE
+      mkdir -p distribution/$LANGUAGE/courses/$PATHWAY
+      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$LANGUAGE/courses/$PATHWAY
     fi
 
-    mkdir -p distribution/$PATHWAY/$LANGUAGE/lib
-    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$PATHWAY/$LANGUAGE/lib
+    mkdir -p distribution/$LANGUAGE/courses/$PATHWAY/lib
+    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/courses/$PATHWAY/lib
 
-    export DESTPATHWAYDIR=distribution/$PATHWAY/$LANGUAGE
+    export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
     cd $DESTPATHWAYDIR
 

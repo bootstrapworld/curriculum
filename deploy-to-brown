@@ -1,4 +1,4 @@
-# last modified 2020-05-16
+# last modified 2020-05-29
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -26,17 +26,21 @@ fi
 
 cd distribution
 
-test -d courses && rm -fr courses
+test -d deployables && rm -fr deployables
 
-mkdir courses
+mkdir deployables
+
+ALL_THE_LANGS="en-us es-mx"
+
+for lang in $ALL_THE_LANGS; do
+  mkdir -p deployables/$lang/courses
+done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
 
 SED=sed
 
-if which gsed | grep -q .; then
-  SED=gsed
-fi
+(which gsed | grep -q .) && SED=gsed
 
 function correctgdriveurl_1() {
   local f=$1
@@ -51,11 +55,13 @@ function correctgdriveurls() {
 }
 
 function copyCourse() {
-  local src=$1
-  test -d $src || return
-  local dest=$(pathwayNameOnServer $src)
-  cp -pr $src courses/$dest
-  correctgdriveurls courses/$dest
+  for lang in $ALL_THE_LANGS; do
+    local src=$1
+    test -d $lang/courses/$src || return
+    local dest=$(pathwayNameOnServer $src)
+    cp -pr $lang/courses/$src deployables/$lang/courses/$dest
+    correctgdriveurls deployables/$lang/courses/$dest
+  done
 }
 
 function pathwayNameOnServer() {
@@ -70,6 +76,14 @@ function pathwayNameOnServer() {
   esac
 }
 
+for lang in $ALL_THE_LANGS; do
+  for f in $lang/*; do
+    if test -f $f; then
+      cp -p $f deployables/$lang
+    fi
+  done
+done
+
 if test $pwy; then
   copyCourse $pwy
 else
@@ -81,20 +95,20 @@ else
 fi
 
 for f in asc asciidoc rkt.kp txt.kp DS_Store; do
-  find courses -name \*.$f -delete
+  find deployables -name \*.$f -delete
 done
 
-find courses -name workbook-[A-Z]\*.pdf -delete
-find courses -name workbook-sols-\*.pdf -delete
-find courses -name pd-workbook-\*.pdf -delete
+find deployables -name workbook-[A-Z]\*.pdf -delete
+find deployables -name workbook-sols-\*.pdf -delete
+find deployables -name pd-workbook-\*.pdf -delete
 
-test -f courses.tar.bz2 && rm courses.tar.bz2
+test -f deployables.tar.bz2 && rm deployables.tar.bz2
 
-echo Tarring up courses...
-tar jcf courses.tar.bz2 courses
+echo Tarring up deployables...
+tar jcf deployables.tar.bz2 deployables
 
 echo Copying courses tarball to brown.edu...
-scp courses.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
+scp deployables.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
 
 success=$?
 

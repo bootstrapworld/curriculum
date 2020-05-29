@@ -1,4 +1,4 @@
-# last modified 2020-05-14
+# last modified 2020-05-29
 
 userid=$1
 
@@ -6,14 +6,56 @@ if test ! "$SEMESTER_YEAR"; then
   eval $(grep '^SEMESTER=' ./deploy-to-brown)
   eval $(grep '^YEAR=' ./deploy-to-brown)
 
-  SEMESTER_YEAR=$SEMESTER_YEAR
+  SEMESTER_YEAR=$SEMESTER$YEAR
 fi
 
-DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER_YEAR/courses
+DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER_YEAR
 
 echo Deploying docs on Brown site...
 
-ssh $userid@ssh.cs.brown.edu "cd tmp;rm -fr courses;tar jxf courses.tar.bz2;chgrp -R cs-plt courses;find courses -type d|xargs chmod g+rwx,o+rx; find courses -type f|xargs chmod g+rw,o+r; cd courses;for d in *; do if test ! -d \$d; then break; fi; rm -fr $DEPLOY_DIR/\$d; mv \$d $DEPLOY_DIR; (cd $DEPLOY_DIR;chmod g+rwx,o+rx \$d); done"
+cat > sshcmd.tmp <<EOF
+cd tmp;
+rm -fr deployables;
+tar jxf deployables.tar.bz2;
+chgrp -R cs-plt deployables;
+find deployables -type d|xargs chmod g+rwx,o+rx;
+find deployables -type f|xargs chmod g+rw,o+r;
+cd deployables;
+for lang in *; do
+  test -d \$lang || continue;
+  cd \$lang;
+  mkdir -p $DEPLOY_DIR/\$lang;
+  chmod g+rws,o+rx $DEPLOY_DIR/\$lang;
+  for f in *; do
+    if test -f \$f; then
+      mv \$f $DEPLOY_DIR/\$lang;
+    elif test -d \$f; then
+      if test "\$f" = courses; then
+        cd courses;
+        for course in *; do
+          if test -d \$course; then
+            mkdir -p $DEPLOY_DIR/\$lang/courses;
+            chmod g+rws,o+rx $DEPLOY_DIR/\$lang/courses;
+            rm -fr $DEPLOY_DIR/\$lang/courses/\$course;
+            mv \$course $DEPLOY_DIR/\$lang/courses;
+            chmod g+rws,o+rx $DEPLOY_DIR/\$lang/courses/\$course;
+          fi
+        done;
+        cd ..;
+      else
+        rm -fr $DEPLOY_DIR/\$lang/\$f;
+        mv \$d $DEPLOY_DIR/\$lang;
+      fi
+    fi
+  done;
+  cd ..;
+done;
+EOF
+
+sshcmd1=$(cat sshcmd.tmp)
+sshcmd=$(echo $sshcmd1)
+
+ssh $userid@ssh.cs.brown.edu "$sshcmd"
 
 success=$?
 
