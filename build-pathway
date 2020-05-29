@@ -989,10 +989,10 @@ function buildpathwaynarrative() {
       export NARRATIVE=
       makeglossaryandstandards
       if test -f pathway-lessons.asciidoc; then
-        if test pathway-lessons.asciidoc -nt pathway-lessons.html; then
+        if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
           $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
-          removelogos pathway-lessons.html
-          resolveabbrevs pathway-lessons.html
+          removelogos pathway-lessons.shtml
+          resolveabbrevs pathway-lessons.shtml
         fi
       fi
       insertbodyid index.shtml

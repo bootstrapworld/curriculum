@@ -558,7 +558,7 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (fprintf o "link:./pathway-lessons.html[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
+    (fprintf o "link:./pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
 
     (let ([lessons-file "pathway-lessons.asciidoc"]
           [lessons-toc-file "pathway-lessons-toc.asciidoc"])
