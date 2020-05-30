@@ -14,9 +14,9 @@
 
 (define *standards-list*
   (list
-    (list "CCSS" "Common Core State" *ccss-standards-list*)
+    (list "CCSS" "Common Core" *ccss-standards-list*)
     (list "CSTA" #f *csta-standards-list*)
-    (list "K12CS" *k12cs-standards-list*)
+    (list "K12CS" "K-12CS" *k12cs-standards-list*)
     (list "NGSS" "Next-Gen Science" *ngss-standards-list*)
     (list "OK" "Oklahoma" *ok-standards-list*)
 ;    (list "OLD" "Older" *old-standards-list*)
