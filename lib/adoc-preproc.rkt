@@ -1049,8 +1049,8 @@
 (define (create-standards-section dict dict-standards-met op)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
-                  ".~a Statements\n"
-                  "== ~a Statements\n\n")
+                  ".~a Standards\n"
+                  "== ~a Standards\n\n")
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for ([s dict-standards-met])

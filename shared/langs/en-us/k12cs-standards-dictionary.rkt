@@ -7,26 +7,26 @@
 ; K12CS Frameworkss
 
   ;;;;;;;;;;;;;; Practices ;;;;;;;;;;;;;;;;;;;;;;
-  ("P1-Fostering an Inclusive Computing Culture"
-   "Building an inclusive and diverse computing culture requires strategies for incorporating perspectives from people of different genders, ethnicities, and abilities. Incorporating these perspectives involves understanding the personal, ethical, social, economic, and cultural contexts in which people operate. Considering the needs of diverse users during the design process is essential to producing inclusive computational products."
+  ("P1"
+   "Fostering an Inclusive Computing Culture"
   )
-  ("P2-Collaborating Around Computing"
-   "Collaborative computing is the process of performing a computational task by working in pairs and on teams. Because it involves asking for the contributions and feedback of others, effective collaboration can lead to better outcomes than working independently. Collaboration requires individuals to navigate and incorporate diverse perspectives, conflicting ideas, disparate skills, and distinct personalities. Students should use collaborative tools to effectively work together and to create complex artifacts."
+  ("P2"
+   "Collaborating Around Computing"
   )
-  ("P3-Recognizing and Defining Computational Problems"
-   "The ability to recognize appropriate and worthwhile opportunities to apply computation is a skill that develops over time and is central to computing. Solving a problem with a computational approach requires defining the problem, breaking it down into parts, and evaluating each part to determine whether a computational solution is appropriate."
+  ("P3"
+   "Recognizing and Defining Computational Problems"
   )
-  ("P4-Developing and Using Abstractions"
-   "Abstractions are formed by identifying patterns and extracting common features from specific examples to create generalizations. Using generalized solutions and parts of solutions designed for broad reuse simplifies the development process by managing complexity."
+  ("P4"
+   "Developing and Using Abstractions"
   )
-  ("P5-Creating Computational Artifacts"
-   "The process of developing computational artifacts embraces both creative expression and the exploration of ideas to create prototypes and solve computational problems. Students create artifacts that are personally relevant or beneficial to their community and beyond. Computational artifacts can be created by combining and modifying existing artifacts or by developing new artifacts. Examples of computational artifacts include programs, simulations, visualizations, digital animations, robotic systems, and apps."
+  ("P5"
+   "Creating Computational Artifacts"
   )
-  ("P6-Testing and Refining Computational Artifacts"
-   "Testing and refinement is the deliberate and iterative process of improving a computational artifact. This process includes debugging (identifying and fixing errors) and comparing actual outcomes to intended outcomes. Students also respond to the changing needs and expectations of end users and improve the performance, reliability, usability, and accessibility of artifacts."
+  ("P6"
+   "Testing and Refining Computational Artifacts"
   )
-  ("P7-Communicating About Computing"
-   "Communication involves personal expression and exchanging ideas with others. In computer science, students communicate with diverse audiences about the use and effects of computation and the appropriateness of computational choices. Students write clear comments, document their work, and communicate their ideas through multiple forms of media. Clear communication includes using precise language and carefully considering possible audiences."
+  ("P7"
+   "Communicating About Computing"
   )
 
   ;;;;;;;;;;;;;; Computing Systems ;;;;;;;;;;;;;;;;;;;;;;
@@ -66,7 +66,7 @@
 
   ;;;;;;;;;;;;;; Data and Analysis ;;;;;;;;;;;;;;;;;;;;;;
   ("9-12.Data and Analysis.Collection"
-   Data is constantly collected or generated through automated processes that are not always evident, raising privacy concerns. The different collection methods and tools that are used influence the amount and quality of the data that is observed and recorded.
+   "Data is constantly collected or generated through automated processes that are not always evident, raising privacy concerns. The different collection methods and tools that are used influence the amount and quality of the data that is observed and recorded."
   )
   ("6-8.Data and Analysis.Collection"
    "People design algorithms and tools to automate the collection of data by computers. When data collection is automated, data is sampled and converted into a form that a computer can process. For example, data from an analog sensor must be converted into a digital form. The method used to automate data collection is influenced by the availability of tools and the intended use of the data."
