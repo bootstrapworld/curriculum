@@ -95,7 +95,7 @@
 
     ;data science
     ("ds-intro" 
-        "6.SP.A.1" "6.SP.B.5.A" "7.SP.A.1" "SL.9-10.1" 
+        "SL.9-10.1" 
         "2-DA-07" 
         "P7")
     ("ds-pyret-intro" 
@@ -106,7 +106,7 @@
         "2-DA-07" "2-DA-08" "3A-DA-11" 
         "P5")
     ("ds-displays-and-lookups" 
-        "6.SP.B.4" "8.SP.A.1" 
+        "8.SP.A.1" 
         "HS-SEP4-1" 
         "3A-DA-11" 
         "9-12.Data and Analysis.Visualization and Transformation" "6-8.Data and Analysis.Inference and Models")
@@ -131,37 +131,33 @@
         "2-DA-08" "2-AP-19" "3B-NI-05" "P3" 
         "6-8.Data and Analysis.Inference and Models" "9-12.Algorithms and Programming.Control")
     ("ds-random-samples" 
-        "7.SP.A.1" "7.SP.A.2" "HSS.IC.B.3" 
+        "HSS.IC.B.3" 
         "HS-SEP4-3" 
         "2-DA-08" "2-DA-09")
     ("ds-grouped-samples" 
-        "6.SP.B.4" "8.SP.A.1" 
+        "8.SP.A.1" 
         "HS-SEP4-5" 
         "2-DA-08" "2-DA-09" "2-AP-11" "P3")
     ("ds-choosing-your-dataset" 
-        "6.SP.A.1" 
         "HS-SEP1-3" 
         "3A-AP-16" "3A-AP-23" "3B-AP-14" "P7")
     ("ds-histograms" 
-        "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.A" "6.SP.B.5.B" "6.SP.B.5.C" "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.A.2"
+        "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.A.2"
         "HS-SEP2-1"  
         "3A-DA-11" "3B-AP-14" "P5")
     ("ds-histograms2" 
-        "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.C" "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.B.6.A"
+        "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.B.6.A"
         "HS-SEP4-2" 
         "3A-DA-11" "3B-AP-14" 
         "9-12.Data and Analysis.Visualization and Transformation")
-    ("ds-measures-of-center" 
-        "6.SP.A.2" "6.SP.A.3" "6.SP.B.4" "6.SP.B.5.C" 
+    ("ds-measures-of-center"
         "HS-SEP4-2" 
         "6-8.Data and Analysis.Inference and Models")
     ("ds-measures-of-spread" 
-        "6.SP.A.2" "6.SP.B.4" "6.SP.B.5.C" "7.SP.B.3" 
         "HS-SEP4-2" "HSS.ID.A.1" 
         "3A-DA-11" "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" "6-8.Data and Analysis.Inference and Models")
     ("ds-checking-your-work" 
-        "7.SP.A.1" 
         "HS-SEP5-4" "2-AP-17" 
         "3B-AP-21" "P6" 
         "9-12.Computing Systems.Troubleshooting" "6-8.Computing Systems.Troubleshooting")
@@ -181,13 +177,12 @@
         "3A-DA-11" "3B-NI-05" 
         "9-12.Data and Analysis.Inference and Models")
     ("ds-threats-to-validity" 
-        "HSS.IC.B.6" "HS-SEP4-3" "7.SP.A.1" 
+        "HSS.IC.B.6" "HS-SEP4-3"
         "HS-SEP1-7" 
         "3B-NI-07" "P1" 
         "6-8.Data and Analysis.Collection" "9-12.Data and Analysis.Inference and Models")
     ("ds-ethics-and-privacy" 
         "3A-AP-16" "P1" 
         "HS-SEP7-1" 
-        "9-12.Data and Analysis.Collection" "9-12.Data and Analysis.Collection" "9-12.Impacts of Computing.Culture" "6-8.Impacts of Computing.Culture" "9-12.Impacts of Computing.Safety, Law, and Ethics" "6-8.Impacts of Computing.Safety, Law, and Ethics")
-
+        "9-12.Data and Analysis.Collection" "9-12.Impacts of Computing.Culture" "9-12.Impacts of Computing.Safety, Law, and Ethics" )
     ))
