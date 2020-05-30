@@ -25,4 +25,4 @@
 
 (define (expand-dict-abbrev dict)
   (let ([x (assoc dict *standards-list*)])
-    (if x (cadr x) dict)))
+    (or (and x (cadr x)) dict)))
