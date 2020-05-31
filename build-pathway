@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-05-29 # last modified
+LASTMOD=2020-05-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -42,7 +42,7 @@ while test $# -ne 0; do
     LANGUAGE=$1; shift
   elif test "$arg" = --lint -o "$arg" = -l -o "$arg" = --verify-links; then
     LINT=1
-  elif test "$arg" = --nopdf -o "$arg" = --no-pdf; then
+  elif test "$arg" = --no-pdf -o "$arg" = --nopdf; then
     NOPDF=1
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
@@ -68,7 +68,7 @@ WKH2P_PFX=wkh2p-tmp
 NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 function displayhelp() {
-  echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--nopdf] [--lint] [--help] [--version] pathway ...
+  echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--no-pdf] [--lint] [--help] [--version] pathway ...
   echo
   echo Builds a document tree for the given pathway argument\(s\)
   echo under the \'distribution\' directory. If no pathway arg supplied,
@@ -82,8 +82,8 @@ function displayhelp() {
   echo "  " --debug: Keep around for inspection/debugging various temp files
   echo "           " in the \'distribution\' directory.
   echo "  " --force: Regenerate doctree from scratch without relying on previous runs.
-  echo "  " --nopdf: Don\'t generate PDF files. This is to speed things up
-  echo "           " during debugging when PDF output isn\'t necessary.
+  echo "  " --no-pdf: Don\'t generate PDF files. This is to speed things up
+  echo "            " during debugging when PDF output isn\'t necessary.
   echo "  " --lint: \(1\) Ensure the summary tables in lesson plans have the required rows.
   echo "          " \(2\) Verify all the links used in the doctree.
   echo "          " in the pathway doctree\'s top directory.
@@ -730,6 +730,7 @@ function recursiveadoc() {
 function mkdirsolutionversionof() {
   local d="$1"
   local origDir="$2"
+  #echo doing mkdirsolutionversionof $d $origDir
 
   test -d "$d" || return
 
@@ -738,7 +739,9 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d-2
   fi
 
-  cp -pr $origDir/$d solution-$d-2
+  if test -d $origDir/$d; then
+    cp -pr $origDir/$d solution-$d-2
+  fi
 
   cp -p $PROGDIR/.hta* solution-$d-2
 
@@ -747,10 +750,12 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d
   fi
   mv solution-$d-2 solution-$d
+  #echo done mkdirsolutionversionof
 }
 
 function checksinglelessonplan() {
   local L=$1
+  #echo doing checksinglelessonplan $L
   rm -f index.asciidoc
   local copacetic=1
   for f in *.adoc; do
@@ -759,7 +764,9 @@ function checksinglelessonplan() {
     fi
   done
   if ! test $copacetic; then
-    echo WARNING: No lesson plan in $L
+    if test ! -f index.html -a ! -f index.shtml; then
+      echo WARNING: No lesson plan in $L
+    fi
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
     echo WARNING: Too many lesson plans in $L
   else
@@ -771,7 +778,10 @@ function checksinglelessonplan() {
 
 function checklessonplan() {
   local L=$1
+  #echo doing checklessonplan $L
   checksinglelessonplan $L
+
+  test -f index.asciidoc || return
 
   grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > index-title.txt
 
@@ -843,14 +853,15 @@ function buildlessonplan() {
   export LESSONPLAN=$(basename $LESSONSUBDIR)
   #FIXME: phase out LESSON
 
-  if test -f index.asciidoc; then
+  if test -f index.asciidoc -o -f index.html; then
     #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
+    # this is already done? Remove?
     #echo building lesson plan from *.adoc
-    for f in *.adoc; do
-      cp -p $f index.asciidoc
-    done
+    #for f in *.adoc; do
+    #  cp -p $f index.asciidoc
+    #done
     if test index.asciidoc -nt index.shtml; then
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
       $PROGDIR/adoc-preproc.rkt index.asciidoc
@@ -866,6 +877,9 @@ function buildlessonplan() {
       cleanupduration index.shtml
       lintlesson index.shtml
       insertgdrivesave index.shtml
+    elif test index.html -nt index.shtml; then
+      mv index.html index.shtml
+      # anything else?
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
