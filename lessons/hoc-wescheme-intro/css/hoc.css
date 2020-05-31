@@ -1,0 +1,119 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  background: rgba(214, 255, 169, 0.34) url('../images/bg1.png');
+  font-family: Lato, Century Gothic, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+}
+
+#banner, #footer{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  border-bottom: solid 2px black;
+  text-align: left;
+  background: black;
+  color: white;
+  padding: 5px;
+}
+#banner{top: 0px; font-size: 30px; font-weight: 600;}
+#footer{bottom: 0px; font-size: 10px;}
+#banner * { vertical-align: middle;}
+
+#lesson {
+  position: absolute;
+  top:      100px;
+  bottom:   100px;
+  width:      400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border:     solid 1px;
+  border-radius: 20px;
+  position:     absolute;
+  left:         25px;
+  background:   white;
+  -webkit-box-shadow:inset 0px 0px 5px black;
+  -moz-box-shadow:inset 0px 0px 5px black;
+  -ms-box-shadow: inset 0px 0px 5px black;
+  box-shadow: inset 0px 0px 5px black;
+}
+ul#cards{
+  margin: 0px;
+  padding: 0px;
+  width: 10000px;
+  position: absolute;
+  -webkit-transition: all 1s;
+  -moz-transition:  all 1s;
+  -o-transition:    all 1s;
+  transition:       all 1s;
+}
+ul#cards>li{
+  float: left;
+  width: 360px;
+  height: 100%;
+  text-align: left;
+  margin: 20px;
+  list-style: none;
+}
+ul#cards h1{margin-top: 0px;}
+.activity{
+  background: rgba(117,50,138,.2);
+  border-top: dashed 1px black;
+  border-bottom: dashed 1px black;
+}
+
+a#prev, a#next{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 5px;
+  border: solid 1px gray;
+  text-decoration: none;
+  top: 45%;
+  text-align: center;
+  z-index: 9;
+  box-shadow: 2px 2px 5px #888888;
+  display: none;
+}
+a#prev:hover, a#next:hover{background: black; color: white;}
+a#prev:active, a#next:active{margin-left: 1px; margin-top: 1px; box-shadow: none;}
+
+a#prev{left: 5px;}
+a#next{left: 415px;}
+
+#righthand{
+  position: absolute;
+  top:    100px;
+  bottom: 100px;
+  left:   500px;
+  right:  50px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+#righthand img{ position: absolute; left: 0px; z-index: 1; }
+#righthand .embeddedWescheme{position: absolute; top: -15px; left: 0px; right: 0px; min-width: 300px; bottom: 50px; z-index: 1;}
+
+.embeddedWescheme::before {
+    content: 'Loading...';
+    display: block;
+    position: relative;
+    font-size: 80px;
+    top: 220px;
+    left: -21px;
+    color: rgba(0,0,0,0.08);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.refreshButton {background: black; color: white; font-size: 14px; border: outset 1px; height: 20px; display:block;}
+#header{display:none;}
+#progressbar{position: absolute; top: 62px; left: 0px; height: 2px; background: white; width: 0px;
+-webkit-transition: all 1s;
+  -moz-transition:  all 1s;
+  -o-transition:    all 1s;
+  transition:       all 1s;}

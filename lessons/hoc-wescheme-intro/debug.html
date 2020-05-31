@@ -1,0 +1,81 @@
+<html moznomarginboxes="">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Bootstrap :: Hour of Code</title>
+      <link   type="text/css"        rel="stylesheet" href="css/hoc.css" title="default"/>
+      <link   type="text/css"        rel="stylesheet" href="css/pretty-printing.css" title="default"/>
+      <script type="text/javascript" src="js/hoc.js"></script>
+      <script type="text/javascript" src="js/codemirror.js"></script>
+      <script type="text/javascript" src="js/runmode.js"></script>
+      <script type="text/javascript" src="js/scheme2.js"></script>
+      <script type="text/javascript" src="js/wescheme-embedded.js"></script>
+      </head>
+  <body onload="initializeCards(); attachCodeMirror();">
+    <div id="banner">
+      <img src="images/icon.png" height="50"><span>Bootstrap :: Introduction to Programming</span>
+    </div>
+    <div id="progressbar"></div>
+    <a id="prev" href="#" onclick="javascript:previousCard()">&#171;</a>
+    <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
+    <div id="lesson">
+      <ul id="cards">
+        <li weschemeConfig='(star 50 "solid" "red")'>
+          <h1>2. The WeScheme Editor</h1>
+          Bootstrap students use a tool called WeScheme to write programs, and we've
+          embedded a WeScheme editor on the right-hand side of this page. (If you want,
+          can always <a href="http://www.WeScheme.org" target="_blank">open WeScheme in a new window.</a>)
+          <p/>
+          The Editor is divided into two sections:
+          <ol>
+            <li>The <b>Definitions Area</b> on the left and</li>
+            <li>the <b>Interactions Area</b> on the right.</li>
+          </ol>
+          <p/>
+          <div class="activity">Drag the gray, vertical divider to resize the Definition Area</div>
+          <p/>
+          In the editor, we've written a simple program in the Definitions Area:
+          <br/><tt class="racket">(star 50 "solid" "red")</tt>
+          <br/>What do you think it will do?
+          <div class="activity">
+            To run the program and see the result, click the <b>Run Button</b>.
+            <ol>
+              <li>Where did the result appear?</li>
+              <li>Try changing the number and clicking Run. What happens?</li>
+              <li>Try changing <tt class="racket">"solid"</tt> to <tt class="racket">"outline"</tt>.</li>
+              <li>Copy and paste this program into the <i>Interactions</i> Area, then hitting the "Enter" key. What happens?</li>
+              <li>Try making other stars in the Interactions Area, and then click Run. What happens?</li>
+            </ol>
+          </div>
+        </li>
+        <li weschemeConfig='star%0A50%0A"solid"%0A"red"'>
+          <h1>3. Reading Code</h1>
+          The program <tt class="racket">(star 50 "solid" "red")</tt> is an example of a <b>function application</b>.
+          In this case, the application has four parts:
+          <ol>
+            <li>The <b>function</b> <tt class="racket">star</tt>, which is being applied to three inputs.</li>
+            <li>The <b>number</b> <tt class="racket">50</tt>, which specifies the <i>radius</i> of the star.</li>
+            <li>The <b>string</b> <tt class="racket">"solid"</tt>, which specifies the <i>style</i> of the star.</li>
+            <li>The <b>string</b> <tt class="racket">"red"</tt>, which specifies the <i>color</i> of the star.</li>
+          </ol>
+          The parentheses tell the computer that we want to <b>apply</b> the function to these inputs.<br/>
+          If we get rid of the parentheses, the computer will just evaluate each of the four parts separately, giving us four values instead of one (you can see this written in the Definitions Area on the right).
+          <div class="activity">
+            <ol>
+              <li>Click the Run button and see what happens.</li>
+              <li>What did the function <tt class="racket">star</tt> evaluate to?</li>
+              <li>What did the number <tt class="racket">50</tt> evaluate to?</li>
+              <li>What did the string <tt class="racket">"red"</tt> evaluate to?</li>
+              <li>What did the string <tt class="racket">"solid"</tt> evaluate to?</li>
+            </ol>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+    
+    <div id="righthand" class="embedded-wescheme"></div>
+    <div id="footer">
+      <a href="http://www,BootstrapWorld.org" style="color: white">Bootstrap</a> is brought to you by Emmanuel Schanzer, Kathi Fisler, Shriram Krishnamurthi, Emma Youndtsmith, and Rosanna Sobota. Special thanks to <a href="http://www.ProgramByDesign.org">Program by Design</a>.
+    </div>
+  </body>
+</html>

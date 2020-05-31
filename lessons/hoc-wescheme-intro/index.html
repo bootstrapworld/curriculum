@@ -1,0 +1,370 @@
+<html moznomarginboxes="">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Bootstrap :: Hour of Code</title>
+      <link   type="text/css"        rel="stylesheet" href="css/hoc.css" title="default"/>
+      <link   type="text/css"        rel="stylesheet" href="css/pretty-printing.css" title="default"/>
+      <script type="text/javascript" src="js/hoc.js"></script>
+      <script type="text/javascript" src="js/codemirror.js"></script>
+      <script type="text/javascript" src="js/runmode.js"></script>
+      <script type="text/javascript" src="js/scheme2.js"></script>
+      <script type="text/javascript" src="js/wescheme-embedded.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": { scale: 80, linebreaks: { automatic: true } },
+         });
+        </script>
+      </head>
+  <body onload="initializeCards(); attachCodeMirror();">
+    <div id="banner">
+      <img src="images/icon.png" height="50"><span>Bootstrap :: Introduction to Programming</span>
+    </div>
+    <div id="progressbar"></div>
+    <a id="prev" href="#" onclick="javascript:previousCard()">&#171;</a>
+    <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
+    <div id="lesson">
+      <ul id="cards">
+        <li imageConfig="images/klein.gif">
+          <h1>1. From Algebra to Computer Graphics</h1>
+          In Bootstrap, every computer program is made up of <b>Expressions</b>
+          and <b>Definitions</b>. Expressions are pieces of code that produce a value.
+          Just like in math class, expressions can be simple numbers like 4 and 9
+          (4 evaluates to 4, 9 evaluates to 9, etc). They can also be more complex,
+          using functions to add and subtract numbers ($4+9$ evaluates to 13).
+        </li>
+        <li weschemeConfig='(star 50 "solid" "red")'>
+          <h1>2. The WeScheme Editor</h1>
+          Bootstrap students use a tool called WeScheme to write programs, and we've
+          embedded a WeScheme editor on the right-hand side of this page. (If you want,
+          can always <a href="http://www.WeScheme.org" target="_blank">open WeScheme in a new window.</a>)
+          <p/>
+          The Editor is divided into two sections:
+          <ol>
+            <li>The <b>Definitions Area</b> on the left and</li>
+            <li>the <b>Interactions Area</b> on the right.</li>
+          </ol>
+          <p/>
+          <div class="activity">Drag the gray, vertical divider to resize the Definition Area</div>
+          <p/>
+          In the editor, we've written a simple program in the Definitions Area:
+          <br/><tt class="racket">(star 50 "solid" "red")</tt>
+          <br/>What do you think it will do?
+          <div class="activity">
+            To run the program and see the result, click the <b>Run Button</b>.
+            <ol>
+              <li>Where did the result appear?</li>
+              <li>Try changing the number and clicking Run. What happens?</li>
+              <li>Try changing <tt class="racket">"solid"</tt> to <tt class="racket">"outline"</tt>.</li>
+              <li>Copy and paste this program into the <i>Interactions</i> Area, then hitting the "Enter" key. What happens?</li>
+              <li>Try making other stars in the Interactions Area, and then click Run. What happens?</li>
+            </ol>
+          </div>
+        </li>
+        <li weschemeConfig='star%0A50%0A"solid"%0A"red"'>
+          <h1>3. Reading Code</h1>
+          The program <tt class="racket">(star 50 "solid" "red")</tt> is an example of a <b>function application</b>.
+          In this case, the application has four parts:
+          <ol>
+            <li>The <b>function</b> <tt class="racket">star</tt>, which is being applied to three inputs.</li>
+            <li>The <b>number</b> <tt class="racket">50</tt>, which specifies the <i>radius</i> of the star.</li>
+            <li>The <b>string</b> <tt class="racket">"solid"</tt>, which specifies the <i>style</i> of the star.</li>
+            <li>The <b>string</b> <tt class="racket">"red"</tt>, which specifies the <i>color</i> of the star.</li>
+          </ol>
+          The parentheses tell the computer that we want to <b>apply</b> the function to these inputs.<br/>
+          If we get rid of the parentheses, the computer will just evaluate each of the four parts separately, giving us four values instead of one (you can see this written in the Definitions Area on the right).
+          <div class="activity">
+            <ol>
+              <li>Click the Run button and see what happens.</li>
+              <li>What did the function <tt class="racket">star</tt> evaluate to?</li>
+              <li>What did the number <tt class="racket">50</tt> evaluate to?</li>
+              <li>What did the string <tt class="racket">"red"</tt> evaluate to?</li>
+              <li>What did the string <tt class="racket">"solid"</tt> evaluate to?</li>
+            </ol>
+          </div>
+        </li>
+        <li weschemeConfig='"This is a string value!"'>
+          <h1>4. Functions and Values</h1>
+          In Bootstrap, our language works a lot like what you know from math class! Everything is either a <b>function</b> or a
+          <b>value</b>. Functions are things like <tt class="racket">+</tt> (addition), <tt class="racket">-</tt> (subtraction), <tt class="racket">*</tt> (multiplication) or <tt class="racket">/</tt> (division)...but they can also be more complex things like the <tt class="racket">star</tt> function you've already seen.
+          <p/>
+          Values are things like <b>Numbers</b> (-54, 2/3, 0.66, or 42), but you have already seen examples of <b>Strings</b>, such as <tt class="racket">"solid"</tt> and <tt class="racket">"red"</tt>. Any value in quotation marks is a string - even <tt class="racket">"42"</tt> is a string, because it has quotes around it!
+          <p>
+          Like Numbers, String values are very simple: they just evaluate to themselves.
+          Notice that the computer makes all Numbers blue and all Strings green, to help
+          us keep track of which is which!
+          <div class="activity">
+            <ol>
+              <li>Add your name to the Definitions Area as a string, and click the Run button.</li>
+              <li>Add more string values and number values, each on their own line. What happens when you click the Run button?</li>
+            </ol>
+          </div>
+        </li>
+        <li imageConfig="images/CircleConversion.png">
+          <h1>5. Using What You Know</h1>
+          Since our programming language works just like math, you can <b>use what
+            you already</b> know to think about it. A mathematical expression is
+          just like our <tt class="racket">star</tt> expression: it has a function and some values.
+          To <b>evaluate</b> an expression, we <b>apply the function</b> to the
+          values that follow. The expression $4+5$ applies the addition function ($+$)
+          to the values $4$ and $5$, which evaluates to $9$.
+          <div class="activity">
+            For each of the expressions below, what is the function? What are the values?
+            <ol>
+              <li>$8*4$</li>
+              <li>$20-16$</li>
+              <li>$16/20$</li>
+            </ol>
+          </div>
+          <p/>
+          We can diagram expressions in math - and in programming -
+          using a <b>Circle of Evaluation</b>.
+          <p/>
+          <div class="circleevalsexp" style="float: right;">
+            <span class="expression">
+              <span class="lParen">(</span>
+              <span class="operator">* </span>
+              <span class="value wescheme-number">9</span>
+              <span class="value wescheme-number">4</span>
+              <span class="rParen">)</span>
+            </span>
+          </div>
+          Here is an example of a Circle of Evaluation, for the expression $9 x 4$. Circles of Evaluation show the <i>structure</i>
+          of an expression.  All Circles of Evaluation have two rules:
+          <ol>
+            <li><b>Rule 1</b>: Each circle must have one function, which goes at the top of the circle.</li>
+            <li><b>Rule 2</b>: The inputs are written below, in order from left to right.</li>
+          </ol>
+        </li>
+        <li imageConfig="images/matching.png">
+          <h1>6. Circles of Evaluation</h1>
+          Circles of Evaluation are a way of seeing and reading computation. You can use the <b>Order of Operations</b> to build these circles.
+          <div class="activity">
+            On paper, try drawing the Circle of Evaluation for each of the following expressions:
+            <ol>
+              <li>$6*4$</li>
+              <li>$7-10$</li>
+              <li>$5+8$</li>
+              <li>$\frac{351}{-1} $</li>
+            </ol>
+            <p/>
+            <b>In the image on the right, match each arithmetic expression with its circle.</b>
+          </div>
+        </li>
+        <li imageConfig="images/convertToCode.png">
+          <h1>7. From Circles to Code</h1>
+          The Circles of Evaluation are also easy to convert into code. To translate a Circle of
+          Evaluation into a program, we use the following steps:
+          <ol>
+            <li>Begin with an open parenthesis <tt class="racket">(</tt>.</li>
+            <li>Write the name of the function (<tt class="racket">+</tt>, <tt class="racket">-</tt>, <tt class="racket">star</tt>, etc.) that you see at the top of the circle.</li>
+            <li>Then translate the arguments from left to right.</li>
+            <li>Adding a closing parenthesis <tt class="racket">)</tt> when you're done.</li>
+          </ol>
+          <div class="activity">
+            Try converting the Circle of Evaluation below into code.
+            <div class="circleevalsexp" style="clear: both;">
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">triangle</span>
+                <span class="value wescheme-number">100</span>
+                <span class="value wescheme-string">"solid"</span>
+                <span class="value wescheme-string">"orange"</span>
+                <span class="rParen">)</span>
+              </span>
+            </div>
+          </div>
+        </li>
+        <li weschemeConfig='(triangle 100 "solid" "orange")'>
+            <h1>8. Converting to Code</h1>
+            Here is the Circle of Evaluation from the previous step:
+            <div class="circleevalsexp" style="clear: both;">
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">triangle</span>
+                <span class="value wescheme-number">100</span>
+                <span class="value wescheme-string">"solid"</span>
+                <span class="value wescheme-string">"orange"</span>
+                <span class="rParen">)</span>
+              </span>
+            </div>
+            You can see the same code typed out in the Definitions Area on the right.
+            <div class="activity">
+            <ol>
+              <li>What do you think this program will evaluate to?</li>
+              <li>Click the Run button - was your guess right?</li>
+              <li>Click back in the Definitions Area, so that your cursor is right next to a parenthesis. Notice that the computer will highlight the matching parentheses for you! For more complex expressions, this will help you keep track of which expression is which.</li>
+              <li>Try converting the other Circles of Evaluation you drew on paper into code, and typing them into the Definitions Area.</li>
+            </ol>
+          </div>
+        </li>
+        <li weschemeConfig='(star 50 "solid" 24)'>
+          <h1>9. Debugging</h1>
+          <tt class="racket">star</tt> is a function that takes three inputs: a Number for the size of the star,
+          a String for the style, and a String for the color. What if a programmer forgets one of these?
+          When something like this happens, computers use <b>Error Messages</b> to give helpful
+          hints about what is wrong.
+          <p/>
+          <div class="activity">
+            Can you see the problem in the Definitions Area, on the right?
+            <ol>
+              <li>Click Run to see what kind of message the computer will give you.</li>
+              <li>Read the error message out loud</li>
+              <li>Click on the colored parts of the error, and see the corresponding code blink!</li>
+              <li>Can you fix the problem?</li>
+              </ol>
+          </div>
+        </li>
+        <li weschemeConfig='(rectangle 50 100 "solid" )'>
+          <h1>10. Exploring Images</h1>
+          There are lots of other functions that will produce an image...but how do you use them?
+          <p/>
+          Error messages are really helpful when you're starting to program. You can try experimenting with
+          different functions, reading the error messages, and figuring out how to use them. In the editor
+          on the right, we've filled in an example of an expression that uses the  <tt class="racket">rectangle</tt>
+          function...but it has an error!</p>
+          <div class="activity">
+            Try to figure out what the error is. For a hint, click Run and read the error message out loud.
+            <p/>
+            Take a few minutes to experiment with these functions:
+            <ol>
+              <li><tt class="racket">circle</tt> - can you make a solid blue circle?</li>
+              <li><tt class="racket">triangle</tt> - can you make an outlined, red triangle?</li>
+              <li><tt class="racket">square</tt> - can you make a purple square?</li>
+              <li><tt class="racket">right-triangle</tt> - can you make a pink right triangle?</li>
+              <li><tt class="racket">isosceles-triangle</tt> - can you make a black isosceles triangle?</li>
+              <li><tt class="racket">text</tt> - can you write your name in huge orange letters?</li>
+            </ol>
+          </div>
+        </li>
+        <li weschemeConfig='(* (&#45; 1 2)%0A   (&#45; 3 4))'>
+          <h1>11. Nested Expressions</h1>
+          <div class="circleevalsexp" style="float: right;">
+            <span class="expression">
+              <span class="lParen">(</span>
+              <span class="operator">*</span>
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">-</span>
+                <span class="value wescheme-number">1</span>
+                <span class="value wescheme-number">2</span>
+                <span class="rParen">)</span>
+              </span>
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">-</span>
+                <span class="value wescheme-number">3</span>
+                <span class="value wescheme-number">4</span>
+                <span class="rParen">)</span>
+              </span>
+              <span class="rParen">)</span>
+            </span>
+          </div>
+          To use multiple functions in the same expression, we can combine Circles
+          of Evaluation. Suppose we wanted to multiply $1-2$ by $3-4$. Here is the Circle of
+          Evaluation to do just that:
+          <p/>
+          We've converted this Circle of Evaluation into code, and written it into the Definitions Area on the right. Click run to see what it evaluates to.
+          <div class="activity">
+            Convert the following Circle of Evaluaton into code, and type it into the Definitions Area.
+            <div class="circleevalsexp" style="clear: both;">
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">rotate</span>
+                <span class="value wescheme-number">45</span>
+                <span class="expression">
+                  <span class="lParen">(</span>
+                  <span class="operator">star</span>
+                  <span class="value wescheme-number">50</span>
+                  <span class="value wescheme-string">"solid"</span>
+                  <span class="value wescheme-string">"red"</span>
+                  <span class="rParen">)</span>
+                </span>
+                <span class="rParen">)</span>
+              </span>
+            </div>
+            <ol>
+              <li>What does the <tt class="racket">rotate</tt> function do?</li>
+              <li>Try making a blue triangle, rotated so it points to the right.</li>
+              <li>Try drawing your name in red, rotated upside-down.</li>
+            <ol>
+          </div>
+        </li>
+        <li weschemeConfig='(overlay (star 50 "solid" "yellow")%0A         (circle 50 ...))'>
+          <h1>12. Combining Images</h1>
+          Let's explore a new function called <tt class="racket">overlay</tt>. This function takes two images as an input, and
+          glues them one on top of another. Here's a Circle of Evaluation that uses <tt class="racket">overlay</tt>.
+          <div class="circleevalsexp" style="clear: both;">
+            <span class="expression">
+              <span class="lParen">(</span>
+              <span class="operator">overlay</span>
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">star</span>
+                <span class="value wescheme-number">50</span>
+                <span class="value wescheme-string">"solid"</span>
+                <span class="value wescheme-string">"yellow"</span>
+                <span class="rParen">)</span>
+              </span>
+              <span class="expression">
+                <span class="lParen">(</span>
+                <span class="operator">circle</span>
+                <span class="value wescheme-number">50</span>
+                <span class="value wescheme-string">"solid"</span>
+                <span class="value wescheme-string">"blue"</span>
+                <span class="rParen">)</span>
+              </span>
+              <span class="rParen">)</span>
+            </span>
+          </div>
+          <div class="activity">
+            <ol>
+              <li>What kind of image will this produce?</li>
+              <li>Finish the code on the right so that it matches the Circle of Evaluation.</li>
+              <li>Try drawing a red triangle inside a black square.</li>
+              <li>Try drawing a <i>rotated</i> red triangle inside a black square.</li>
+            <ol>
+          </div>
+        </li>
+        <li weschemeConfig='(bitmap/url "http://bootstrapworld.org/icon.gif")'>
+          <h1>13. Adding Your Own Images</h1>
+          Bootstrap also lets you grab any image from the internet, and use it just like you would any image value.
+          The function <tt class="racket">bitmap/url</tt> takes only one string as an input, as long as that string
+          is an address - or URL - for an image! You can see an example Circle of Evaluation below:
+          <div class="circleevalsexp" style="clear: both;">
+            <span class="expression">
+              <span class="lParen">(</span>
+              <span class="operator">bitmap/url</span>
+              <span class="value wescheme-string">"http://bootstrapworld.org/icon.gif"</span>
+              <span class="rParen">)</span>
+            </span>
+          </div>
+          <p/>
+          The code for this Circle of Evaluation is written in the Definitions Area on the right. Click Run
+          and see what happens!
+          <div class="activity">
+            <ol>
+              <li>Try replacing the string value with the URL for a different image. <b>Not all URLs are images!</b> Make sure the address ends in <b>.jpg</b>, <b>.gif</b>, or <b>.png</b>!</li>
+              <li>Try using the <tt class="racket">rotate</tt> function, to turn your image 45 degrees.</li>
+              <li>Try to <tt class="racket">overlay</tt> another shape on top of this image.</li>
+            <ol>
+          </div>
+        </li>
+        <li imageConfig="images/end.jpg">
+          <h1>14. Want More?</h1>
+          An Hour of Code is just a taste, and we hope you've enjoyed it! But of course, there's so much more to explore when it comes to computer programming! If you'd like to do more of this kind of programming - especially in a math class - check out <a href="http://www.BootstrapWorld.org">Bootstrap</a> to learn how to make a videogame using programming in your math class!
+          <p/>
+          For an extra challenge, see if you can make a flag for a country you've always wanted to visit, or where you have family. You can find out more by reading the <a href="http://www.bootstrapworld.org/materials/fall2015/courses/bs1/units/Supplemental/index.html#lesson_Making-Flags">Flags Lesson</a>.
+          <p style="border-top: solid 1px black; padding-top: 10px;"/>
+          <b>Teachers</b>, you can have students bring what they've learned back into their math classroom - even without a computer! Check out our <a href="http://www.bootstrapworld.org/materials/fall2015/courses/bs1/units/unit1/index.html#lesson_Closing5499">print-out supplemental exercises</a>, where students write code while practicing their Order of Operations and Function Composition skills.
+        </li>
+      </ul>
+    </div>
+    
+    <div id="righthand" class="embedded-wescheme"></div>
+    <div id="footer">
+      <a href="http://www,BootstrapWorld.org" style="color: white">Bootstrap</a> is brought to you by Emmanuel Schanzer, Kathi Fisler, Shriram Krishnamurthi, Emma Youndtsmith, and Rosanna Sobota. Special thanks to <a href="http://www.ProgramByDesign.org">Program by Design</a>.
+    </div>
+  </body>
+</html>
