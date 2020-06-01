@@ -1481,8 +1481,9 @@ for f in $ARGS; do
   export SRCPATHWAY=$f
   export SRCPATHWAY=${SRCPATHWAY#pathways/}
   export SRCPATHWAY=${SRCPATHWAY%/}
+  export TGTPATHWAY="$SRCPATHWAY"
   if test "$PROGLANG" = ""; then
-    if test "$SRCPATHWAY" = game-pathway; then
+    if test "$SRCPATHWAY" = algebra; then
       export PROGLANG=wescheme
       export TGTPATHWAY=algebra-wescheme
       buildpathway
@@ -1491,27 +1492,12 @@ for f in $ARGS; do
       buildpathway
     else
       export PROGLANG=pyret
-      if test "$SRCPATHWAY" = data-science-pathway; then
-        export TGTPATHWAY=data-science
-      elif test "$SRCPATHWAY" = reactive-pathway; then
-        export TGTPATHWAY=reactive
-      elif test "$SRCPATHWAY" = flags-pathway; then
-        export TGTPATHWAY=flags
-      else
-        export TGTPATHWAY="$SRCPATHWAY"
-      fi
       buildpathway
     fi
     export PROGLANG=
   else
-    if test "$SRCPATHWAY" = game-pathway; then
+    if test "$SRCPATHWAY" = algebra; then
       export TGTPATHWAY=algebra-$PROGLANG
-    elif test "$SRCPATHWAY" = data-science-pathway; then
-      export TGTPATHWAY=data-science
-    elif test "$SRCPATHWAY" = reactive-pathway; then
-      export TGTPATHWAY=reactive
-    elif test "$SRCPATHWAY" = flags-pathway; then
-      export TGTPATHWAY=flags
     fi
     buildpathway
   fi
