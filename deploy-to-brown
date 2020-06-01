@@ -1,4 +1,4 @@
-# last modified 2020-05-29
+# last modified 2020-05-31
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -56,24 +56,11 @@ function correctgdriveurls() {
 
 function copyCourse() {
   for lang in $ALL_THE_LANGS; do
-    local src=$1
-    test -d $lang/courses/$src || return
-    local dest=$(pathwayNameOnServer $src)
-    cp -pr $lang/courses/$src deployables/$lang/courses/$dest
-    correctgdriveurls deployables/$lang/courses/$dest
+    local dir=$1
+    test -d $lang/courses/$dir || return
+    cp -pr $lang/courses/$dir deployables/$lang/courses/$dir
+    correctgdriveurls deployables/$lang/courses/$dir
   done
-}
-
-function pathwayNameOnServer() {
-  local localName=$1
-  case $localName in
-    game-pathway-wescheme) echo algebra-wescheme;;
-    game-pathway-pyret) echo algebra-pyret;;
-    data-science-pathway) echo data-science;;
-    reactive-pathway) echo reactive;;
-    flags-pathway) echo flags;;
-    *) echo $1;;
-  esac
 }
 
 for lang in $ALL_THE_LANGS; do
@@ -87,11 +74,11 @@ done
 if test $pwy; then
   copyCourse $pwy
 else
-  copyCourse game-pathway-wescheme
-  copyCourse game-pathway-pyret
-  copyCourse data-science-pathway
-  copyCourse reactive-pathway
-  copyCourse flags-pathway
+  copyCourse algebra-wescheme
+  copyCourse algebra-pyret
+  copyCourse data-science
+  copyCourse reactive
+  copyCourse flags
 fi
 
 for f in asc asciidoc rkt.kp txt.kp DS_Store; do

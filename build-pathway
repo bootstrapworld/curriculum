@@ -1217,7 +1217,7 @@ function rmtmpfiles() {
 function buildpathway() {
   cd $TOPDIR
 
-  PATHWAY=$SRCPATHWAY
+  PATHWAY=$TGTPATHWAY
 
   export LESSONSUBDIR=.
   export SOLUTION=
@@ -1225,14 +1225,14 @@ function buildpathway() {
   export BROKEN_INTERNAL_LINKS=
   export BROKEN_EXTERNAL_LINKS=
 
-  # special-casing only algebra and game-pathway,
-  # as they're the only pathways that allow two prog langs
-  if test "$SRCPATHWAY" = game-pathway -o \
-          "$SRCPATHWAY" = algebra; then
-    PATHWAY=$SRCPATHWAY-$PROGLANG
-  elif test "$PROGLANG" = wescheme; then
-    PATHWAY=$SRCPATHWAY-wescheme
-  fi
+#  # special-casing only algebra and game-pathway,
+#  # as they're the only pathways that allow two prog langs
+#  if test "$SRCPATHWAY" = game-pathway -o \
+#          "$SRCPATHWAY" = algebra; then
+#    PATHWAY=$SRCPATHWAY-$PROGLANG
+#  elif test "$PROGLANG" = wescheme; then
+#    PATHWAY=$SRCPATHWAY-wescheme
+#  fi
 
   langicon=💀
 
@@ -1479,36 +1479,42 @@ for f in $ARGS; do
   if test "$PROGLANG" = ""; then
     if test "$SRCPATHWAY" = game-pathway; then
       export PROGLANG=wescheme
-      export TGTPATHWAY=algebra-wescheme-remix
+      export TGTPATHWAY=algebra-wescheme
       buildpathway
       export PROGLANG=pyret
-      export TGTPATHWAY=algebra-pyret-remix
+      export TGTPATHWAY=algebra-pyret
       buildpathway
     else
       export PROGLANG=pyret
       if test "$SRCPATHWAY" = data-science-pathway; then
-        export TGTPATHWAY=datascience-remix
+        export TGTPATHWAY=data-science
       elif test "$SRCPATHWAY" = reactive-pathway; then
-        export TGTPATHWAY=reactive-remix
+        export TGTPATHWAY=reactive
       elif test "$SRCPATHWAY" = flags-pathway; then
-        export TGTPATHWAY=flags-remix
+        export TGTPATHWAY=flags
+      else
+        export TGTPATHWAY="$SRCPATHWAY"
       fi
+      echo doing buildpathway x $PROGLANG z
       buildpathway
     fi
     export PROGLANG=
   else
     if test "$SRCPATHWAY" = game-pathway; then
-      export TGTPATHWAY=algebra-$PROGLANG-remix
+      export TGTPATHWAY=algebra-$PROGLANG
     elif test "$SRCPATHWAY" = data-science-pathway; then
-      export TGTPATHWAY=datascience-remix
+      export TGTPATHWAY=data-science
     elif test "$SRCPATHWAY" = reactive-pathway; then
-      export TGTPATHWAY=reactive-remix
+      export TGTPATHWAY=reactive
     elif test "$SRCPATHWAY" = flags-pathway; then
-      export TGTPATHWAY=flags-remix
+      export TGTPATHWAY=flags
     fi
     buildpathway
   fi
 done
+
+# only to shush now-benign error
+export PROGLANG=pyret
 
 allthestandards
 
