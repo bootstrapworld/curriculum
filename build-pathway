@@ -26,16 +26,12 @@ NOPARALLEL=
 
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --debug -o "$arg" = -d; then
-    DEBUG=1
-  elif test "$arg" = --add-exercises -o "$arg" = -e; then
+  if test "$arg" = --add-exercises -o "$arg" = -e; then
     ADDEXERCISES=1
+  elif test "$arg" = --debug -o "$arg" = -d; then
+    DEBUG=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
-  elif test "$arg" = -df -o "$arg" = -fd; then
-    DEBUG=1; FORCE=1
-  elif test "$arg" = -dfl; then
-    DEBUG=1; FORCE=1; LINT=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
   elif test "$arg" = --language; then
@@ -51,6 +47,14 @@ while test $# -ne 0; do
     shift
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1;
+    #
+    # some common combos
+  elif test "$arg" = -df; then
+    DEBUG=1; FORCE=1
+  elif test "$arg" = -dfl; then
+    DEBUG=1; FORCE=1; LINT=1
+  elif test "$arg" = -dfn; then
+    DEBUG=1; FORCE=1; NOPDF=1
   else
     arg1=${arg#--}
     if test "$arg1" != "$arg"; then
@@ -168,6 +172,7 @@ function insertgdrivesave() {
     pageTitle=$f_head
   fi
   #echo pageTitle of $f_head.adoc is $pageTitle
+  #FIXME: pathname should be corrected, again
   local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/courses/$TGTPATHWAY/$LANGUAGE/$LESSONSUBDIR
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\//\\\//g')
@@ -227,7 +232,6 @@ function modifygdrivepage() {
   local f=$1
   local h=$2
 
-
   $SED -i \
     -e '/include virtual=".menubar.ssi"/d' \
     -e 's/^<p>Relevant Standards<select.*<\/select><\/p> *$/<p>Standards<\/p>/' \
@@ -260,7 +264,7 @@ function modifygdrivepage() {
     -e '/<span class="tooltiptext">.*<\/span>/d' \
     $f
   echo "<style>" > $TMPFILE.css
-  cat $PATHWAYROOTDIR/lib/gdrive-import.css >> $TMPFILE.css
+  cat $PATHWAYROOTDIR/../../lib/gdrive-import.css >> $TMPFILE.css
   echo "</style>" >> $TMPFILE.css
   $SED -i \
     -e '/<\/title>/r '$TMPFILE.css \
@@ -290,7 +294,7 @@ function insertnarrativecss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/narrative.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/narrative.css" \/>/' \
     $f
 }
 
@@ -298,7 +302,7 @@ function insertprintcss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wkhtmltopdf.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wkhtmltopdf.css" \/>/' \
     -e '/^ *<script>window.___gcfg/,/^ *<\/script>/d' \
     -e '/^ *<script src="https:\/\/apis.google.com\/js\/paltform.js"/d' \
     -e 's/onload="renderSaveToDrive()"//g' \
@@ -310,7 +314,7 @@ function insertprintcss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wkhtmltopdf.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/browser-wkhtmltopdf.css" \/>/' \
     $f
 }
 
@@ -318,7 +322,7 @@ function insertwbpagecss() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/wbpage.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wbpage.css" \/>/' \
     $f
 }
 
@@ -326,7 +330,7 @@ function insertwbpagecss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
   $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'lib\/browser-wbpage.css" \/>/' \
+    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/browser-wbpage.css" \/>/' \
     $f
 }
 
@@ -455,13 +459,13 @@ EOF
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
     cat > codemirror.txt <<EOF
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}lib/pretty-printing.css" />
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}lib/codemirror.css" />
-    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/codemirror.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/runmode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/scheme2.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/pyret-mode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}lib/bootstraplesson.js"></script>
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/pretty-printing.css" />
+    <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
+    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
+    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -952,7 +956,7 @@ function buildlessonplans() {
 function makeglossaryandstandards() {
   if test -f pathway-glossary.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
-      -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
+      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
       -o pathway-glossary.shtml \
@@ -963,7 +967,7 @@ function makeglossaryandstandards() {
   fi
   if test -f pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
-      -a stylesheet=${PATHWAYROOTDIR}curriculum.css \
+      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -o pathway-standards.shtml \
@@ -1181,6 +1185,7 @@ function buildteacherresource() {
   cd ..
   export PATHWAYROOTDIR=./
   export LESSONSUBDIR=
+
 }
 
 function batchhtmltopdf() {
@@ -1253,8 +1258,11 @@ function buildpathway() {
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$LANGUAGE/courses/$PATHWAY
     fi
 
-    mkdir -p distribution/$LANGUAGE/courses/$PATHWAY/lib
-    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/courses/$PATHWAY/lib
+    #mkdir -p distribution/$LANGUAGE/courses/$PATHWAY/lib
+    #cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/courses/$PATHWAY/lib
+
+    mkdir -p distribution/$LANGUAGE/lib
+    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/lib
 
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
@@ -1366,7 +1374,7 @@ function buildpathway() {
       if test ! -f workbook-page-index.rkt; then
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
-        cd lib
+        cd ../../lib
         ABYSS=this-page-intentionally-left-blank
         if test ! -f $ABYSS.pdf; then
           echo '= This Page Intentionally Left Blank' > $ABYSS.adoc
@@ -1375,7 +1383,7 @@ function buildpathway() {
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
           echo --lowquality -q lib/$ABYSS.html $ABYSS.pdf >> $WKH2P_BATCH_FILE
         fi
-        cd ..
+        cd ../courses/$PATHWAY
 
         batchhtmltopdf
 
@@ -1437,6 +1445,33 @@ function buildpathway() {
 
 }
 
+function allthestandards() {
+  cd $TOPDIR
+  cd distribution/$LANGUAGE
+  export LANGROOTDIR=./
+  rm -f all-standards.txt
+  for d in courses/*; do
+    test -d $d || continue
+    db=${d%/}
+    db=${db##*/}
+    f=$d/standards-in-pathway.txt.kp
+    if test -f $f; then
+      sed -e "s/)\$/ \"$db\")/" $f >> all-standards.txt
+    fi
+  done
+  $PROGDIR/make-standards.rkt
+  asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=PATHWAY \
+    -a stylesheet=lib/curriculum.css \
+    -a pathwayrootdir=PATHWAYROOTDIR \
+    -a title='Standards' \
+    -o Standards.shtml \
+    Standards.asc
+  insertbodyid Standards.shtml
+  insertstylecss Standards.shtml
+  resolveabbrevs Standards.shtml
+  cd $TOPDIR
+}
+
 for f in $ARGS; do
   export SRCPATHWAY=$f
   export SRCPATHWAY=${SRCPATHWAY#pathways/}
@@ -1474,6 +1509,8 @@ for f in $ARGS; do
     buildpathway
   fi
 done
+
+allthestandards
 
 echo >> index.adoc
 echo .{nbsp} >> index.adoc
