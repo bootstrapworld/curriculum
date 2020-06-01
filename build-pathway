@@ -1469,6 +1469,11 @@ function allthestandards() {
   insertbodyid Standards.shtml
   insertstylecss Standards.shtml
   resolveabbrevs Standards.shtml
+
+  if test ! $DEBUG; then
+    rm *.asc *.txt
+  fi
+
   cd $TOPDIR
 }
 
