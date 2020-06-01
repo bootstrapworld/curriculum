@@ -1106,15 +1106,15 @@
             (display
               (enclose-div ""
                 (string-append
-                  "\nThis pathway aligns with several important teaching standards.\n"
+                  "\nBootstrap lessons align with several important teaching standards.\n"
                   "Select particular standards from the following menu to see\n"
-                  "which items in the standards are met.\n"))
+                  "which lessons meet those standards.\n"))
               o)]
           [else (display "Relevant Standards" o)])
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
-               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
+               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 150)
                (string-join
                  (map (lambda (dict)
                         (enclose-tag "option" ""
