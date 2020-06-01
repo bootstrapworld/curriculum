@@ -1,4 +1,4 @@
-# last modified 2020-05-31
+# last modified 2020-06-01
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -64,7 +64,10 @@ function copyCourse() {
 }
 
 for lang in $ALL_THE_LANGS; do
-  for f in $lang/*; do
+  if test -d $lang/lib; then
+    cp -pr $lang/lib deployables/$lang
+  fi
+  for f in $lang/*html; do
     if test -f $f; then
       cp -p $f deployables/$lang
     fi
@@ -74,11 +77,13 @@ done
 if test $pwy; then
   copyCourse $pwy
 else
-  copyCourse algebra-wescheme
   copyCourse algebra-pyret
+  copyCourse algebra-wescheme
   copyCourse data-science
-  copyCourse reactive
   copyCourse flags
+  copyCourse hour-of-code
+  copyCourse physics
+  copyCourse reactive
 fi
 
 for f in asc asciidoc rkt.kp txt.kp DS_Store; do
@@ -104,6 +109,8 @@ if test "$success" -ne 0; then
 fi
 
 echo Copying done
+
+rm -fr deployables
 
 cd ..
 

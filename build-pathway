@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-05-31 # last modified
+LASTMOD=2020-06-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1469,6 +1469,11 @@ function allthestandards() {
   insertbodyid Standards.shtml
   insertstylecss Standards.shtml
   resolveabbrevs Standards.shtml
+
+  if test ! $DEBUG; then
+    rm *.asc *.txt
+  fi
+
   cd $TOPDIR
 }
 
