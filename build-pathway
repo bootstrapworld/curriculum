@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-06-01 # last modified
+LASTMOD=2020-06-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -955,7 +955,7 @@ function buildlessonplans() {
 
 function makeglossaryandstandards() {
   if test -f pathway-glossary.asc; then
-    asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
+    asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
@@ -966,7 +966,7 @@ function makeglossaryandstandards() {
           resolveabbrevs pathway-glossary.shtml
   fi
   if test -f pathway-standards.asc; then
-    asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
+    asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
@@ -1460,9 +1460,8 @@ function allthestandards() {
     fi
   done
   $PROGDIR/make-standards.rkt
-  asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=PATHWAY \
+  asciidoctor -a linkcss -a proglang=$PROGLANG \
     -a stylesheet=lib/curriculum.css \
-    -a pathwayrootdir=PATHWAYROOTDIR \
     -a title='Standards' \
     -o Standards.shtml \
     Standards.asc
