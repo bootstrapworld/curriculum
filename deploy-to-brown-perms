@@ -1,4 +1,4 @@
-# last modified 2020-05-30
+# last modified 2020-06-01
 
 userid=$1
 
@@ -25,9 +25,9 @@ for lang in *; do
   test -d \$lang || continue;
   cd \$lang;
   mkdir -p $DEPLOY_DIR/\$lang;
-  chmod g+rwx,o+rx $DEPLOY_DIR/\$lang;
   for f in *; do
     if test -f \$f; then
+      rm -fr $DEPLOY_DIR/\$lang/\$f;
       mv \$f $DEPLOY_DIR/\$lang;
     elif test -d \$f; then
       if test "\$f" = courses; then
@@ -35,16 +35,14 @@ for lang in *; do
         for course in *; do
           if test -d \$course; then
             mkdir -p $DEPLOY_DIR/\$lang/courses;
-            chmod g+rwx,o+rx $DEPLOY_DIR/\$lang/courses;
             rm -fr $DEPLOY_DIR/\$lang/courses/\$course;
             mv \$course $DEPLOY_DIR/\$lang/courses;
-            chmod g+rwx,o+rx $DEPLOY_DIR/\$lang/courses/\$course;
           fi
         done;
         cd ..;
       else
         rm -fr $DEPLOY_DIR/\$lang/\$f;
-        mv \$d $DEPLOY_DIR/\$lang;
+        mv \$f $DEPLOY_DIR/\$lang;
       fi
     fi
   done;
