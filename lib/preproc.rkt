@@ -497,7 +497,7 @@
       (when header-with-logo?
         (display
           (enclose-span ".bootstraplogo"
-            "image:{pathwayrootdir}lib/bootstraplogo.png[]")
+            "image:{pathwayrootdir}../../lib/bootstraplogo.png[]")
           o)
         ;(fprintf o "\n\n")
         (display " " o)
