@@ -1085,9 +1085,9 @@
                                [lesson (list-ref x 1)]
                                [pwy (list-ref x 2)])
                            (cond [(string=? pwy "algebra-pyret")
-                                  (set! ltitle (string-append ltitle " (P)"))]
+                                  (set! ltitle (string-append ltitle "^(Pyret)^"))]
                                  [(string=? pwy "algebra-wescheme")
-                                  (set! ltitle (string-append ltitle " (W)"))])
+                                  (set! ltitle (string-append ltitle "^(WeScheme)^"))])
                            (if pwy
                                (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
                                        pwy lesson ltitle)
