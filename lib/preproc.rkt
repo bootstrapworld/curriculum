@@ -1084,6 +1084,10 @@
                          (let ([ltitle (list-ref x 0)]
                                [lesson (list-ref x 1)]
                                [pwy (list-ref x 2)])
+                           (cond [(string=? pwy "algebra-pyret")
+                                  (set! ltitle (string-append ltitle " (P)"))]
+                                 [(string=? pwy "algebra-wescheme")
+                                  (set! ltitle (string-append ltitle " (W)"))])
                            (if pwy
                                (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
                                        pwy lesson ltitle)
@@ -1092,7 +1096,6 @@
                        lessons) ";"))))
       (for ([n sublist-items])
         (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-        ;(fprintf op "** ~a~%" (list-ref s (+ n 1)))
         )))
   (fprintf op "\n\n"))
 
