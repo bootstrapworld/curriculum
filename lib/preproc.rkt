@@ -14,7 +14,7 @@
 (require "lessons-and-standards.rkt")
 ;(require "draw-dep-diag.rkt")
 
-(provide 
+(provide
   assoc-standards
   box-add-new!
   create-standards-file
@@ -50,7 +50,7 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
-(define *lang-root-dir* 
+(define *lang-root-dir*
   (let ([x (truthy-getenv "LANGROOTDIR")])
     (or x (string-append *pathway-root-dir* "../../"))))
 
@@ -189,7 +189,7 @@
                (when (and o *lesson*)
                  (fprintf o "**~a**: ~a~n~n"
                           std (list-ref c 1)))
-               (cond [(assoc std *standards-met*) 
+               (cond [(assoc std *standards-met*)
                       => (lambda (c0)
                            (when sublist-item
                              (let ([sublist-items (list-ref c0 1)])
@@ -1084,15 +1084,16 @@
                          (let ([ltitle (list-ref x 0)]
                                [lesson (list-ref x 1)]
                                [pwy (list-ref x 2)])
-                           (cond [(string=? pwy "algebra-pyret")
-                                  (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                 [(string=? pwy "algebra-wescheme")
-                                  (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                           (if pwy
-                               (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
-                                       pwy lesson ltitle)
-                               (format " link:./lessons/pass:[~a]/index.shtml[~a]"
-                                       lesson ltitle))))
+                           (cond [pwy
+                                   (cond [(string=? pwy "algebra-pyret")
+                                          (set! ltitle (string-append ltitle "^(Pyret)^"))]
+                                         [(string=? pwy "algebra-wescheme")
+                                          (set! ltitle (string-append ltitle "^(WeScheme)^"))])
+                                   (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
+                                           pwy lesson ltitle)]
+                                 [else
+                                   (format " link:./lessons/pass:[~a]/index.shtml[~a]"
+                                           lesson ltitle)])))
                        lessons) ";"))))
       (for ([n sublist-items])
         (fprintf op "** ~a~%" (list-ref s (+ n 1)))
@@ -1170,7 +1171,6 @@
         (fprintf op "~s~n" (car s))))
     #:exists 'replace)
   )
-
 
 ;coe
 
@@ -1560,5 +1560,4 @@
         "")
     (apply string-append
            (filter (lambda (x) (not (void? x))) body))))
-
 
