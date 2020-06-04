@@ -391,6 +391,15 @@
   (display "\n++++\n" o)
   (display "%ENDCURRICULUMCOMMENT%" o))
 
+(define (display-header-comment prose o)
+  (call-with-output-file "index-comment.txt"
+    (lambda (o)
+      (display "<!--" o)
+      (display prose o)
+      (display "-->" o)
+      (newline o))
+    #:exists 'append))
+
 (define (clean-up-image-text text)
   (when (char=? (string-ref text 0) #\")
     (set! text (substring text 1)))
@@ -477,6 +486,22 @@
 
 (define *page-title* #f)
 
+(define (display-alternative-proglang o)
+  (when (and (string=? *pathway* "algebra")
+             (or *narrative* *lesson-plan*))
+    ;(printf "doing display-alternative-proglang\n")
+    (let ([other-proglang (if (string=? *proglang* "pyret") "wescheme" "pyret")]
+          [other-proglang-cased (if (string=? *proglang* "pyret") "WeScheme" "Pyret")])
+      (display
+        (enclose-span ".other-proglang"
+          (format "link:{pathwayrootdir}../algebra-~a/~a[(Also available for ~a)]"
+                  other-proglang
+                  (cond [*narrative* "index.shtml"]
+                        [*lesson-plan* (format "lessons/~a/index.shtml" *lesson-plan*)])
+                  other-proglang-cased)) o)
+      (newline o)
+      (newline o))))
+
 (define (display-title i o)
   (let ([title (string-trim (read-line i))])
     (set! *page-title* title)
@@ -485,27 +510,10 @@
         (lambda (o)
           (display title o) (newline o))
         #:exists 'replace))
-    #|
-    (unless *teacher-resources*
-      (fprintf o "[.lesson-title]\n"))
-    |#
-    (let ([header-with-logo? (or #f ;*lesson-plan*
-                                 ;*narrative*
-                                 ;*teacher-resources*
-                                 )])
-      (display #\= o) (display #\space o)
-      (when header-with-logo?
-        (display
-          (enclose-span ".bootstraplogo"
-            "image:{pathwayrootdir}../../lib/bootstraplogo.png[]")
-          o)
-        ;(fprintf o "\n\n")
-        (display " " o)
-        )
-      (if header-with-logo?
-          (display (enclose-span ".bootstrapheader" title) o)
-          (display title o))
-      (newline o))))
+    (display #\= o) (display #\space o)
+    (display title o)
+    (newline o)
+    (newline o)))
 
 (define (display-lesson-description desc o)
   (call-with-output-file "index-desc.txt"
@@ -639,6 +647,9 @@
         [title-reached? #f]
         )
     ;
+    (when (file-exists? "index-comment.txt")
+      (delete-file "index-comment.txt"))
+    ;
     (when *link-lint?*
       (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
             [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
@@ -652,9 +663,7 @@
         (when (string=? (car x) *lesson-plan*)
           (for ([s (cdr x)])
             (add-standard s #f *lesson-plan* #f #f))))
-
       )
-
     ;
     (when (or *lesson-plan*
               *narrative*
@@ -679,12 +688,8 @@
                           (let ([prose (read-group i directive)])
                             (if title-reached?
                                 (display-comment prose o)
-                                (call-with-output-file "index-comment.txt"
-                                  (lambda (o)
-                                    (display "<!--" o)
-                                    (display prose o)
-                                    (display "-->" o)
-                                    (newline o)))))]
+                                (display-header-comment prose o)
+                                ))]
                          [(string=? directive "duration")
                           (let ([txt (read-group i directive)])
                             (display (string-append
@@ -889,9 +894,8 @@
                                [else (display c o)])]
                        [else
                          (set! title-reached? #t)
-                         (cond [(or *lesson-plan* *teacher-resources*)
-                                (display-title i o)]
-                               [else (display #\= o)])
+                         (display-title i o)
+                         (display-alternative-proglang o)
                          (when *teacher-resources*
                            ;(printf "teacher resource autoloading stuff\n")
                            (newline o)
