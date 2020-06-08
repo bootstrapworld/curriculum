@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-06-02 # last modified
+LASTMOD=2020-06-08 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -55,6 +55,8 @@ while test $# -ne 0; do
     DEBUG=1; FORCE=1; LINT=1
   elif test "$arg" = -dfn; then
     DEBUG=1; FORCE=1; NOPDF=1
+  elif test "$arg" = -dn; then
+    DEBUG=1; NOPDF=1
   else
     arg1=${arg#--}
     if test "$arg1" != "$arg"; then
@@ -609,6 +611,7 @@ function setmathdelay() {
 
 function processadoc() {
   local f="$1"
+  fbase=${f%.adoc}
 
   if test ! -f "$f"; then
     if test "$dir" = "pages"; then
@@ -618,8 +621,8 @@ function processadoc() {
     echo Discarding file \'$f\' with space in its name
     rm "$f"
   else
-    fhtml=${f%.adoc}.html
-    fasc=${f%.adoc}.asc
+    fhtml=$fbase.html
+    fasc=$fbase.asc
     DOIT=
     if test $FORCE; then
       DOIT=1;
@@ -630,6 +633,7 @@ function processadoc() {
     fi
     if test $DOIT; then
       echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
+      rm -f $fbase-comment.txt
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
@@ -868,6 +872,7 @@ function buildlessonplan() {
     #done
     if test index.asciidoc -nt index.shtml; then
       echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
+      rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       insertbodyid index.shtml
@@ -1002,12 +1007,14 @@ function buildpathwaynarrative() {
     if test index.asciidoc -nt index.shtml; then
       echo building pathway narrative: $PATHWAY "→" *.adoc
       export NARRATIVE=1
+      rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export NARRATIVE=
       makeglossaryandstandards
       if test -f pathway-lessons.asciidoc; then
         if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
+          rm -f pathway-lessons-comment.txt
           $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
           mv pathway-lessons.html pathway-lessons.shtml
           removelogos pathway-lessons.shtml
@@ -1169,6 +1176,7 @@ function buildteacherresource() {
     if test index.asciidoc -nt index.shtml; then
       echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
+      rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export TEACHER_RESOURCES=

@@ -647,9 +647,6 @@
         [title-reached? #f]
         )
     ;
-    (when (file-exists? "index-comment.txt")
-      (delete-file "index-comment.txt"))
-    ;
     (when *link-lint?*
       (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
             [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
