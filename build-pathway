@@ -18,7 +18,7 @@ export SEMESTER_YEAR=$SEMESTER$(date +%Y)
 
 ARGS=
 HELP=
-LASTMOD=2020-06-08 # last modified
+LASTMOD=2020-06-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -378,6 +378,13 @@ function cleanupduration() {
   $SED -i \
     -e '/^<h2 id/ s/\(begin\|end\)curriculumspan/_/g' \
     -e '/^<h2 id/ s/curriculumspan_class//g' \
+    $f
+}
+
+function insertsectionselfie() {
+  local f=$1
+  $SED -i \
+    -e '/^<h2 id=/s/^<h2 id="\([^>]*\)>\(.*\)<\/h2>/<h2 id="\1>\2 <a href="#\1>\&#128279;<\/a><\/h2>/' \
     $f
 }
 
@@ -884,6 +891,7 @@ function buildlessonplan() {
       insertstylecss index.shtml
       cleanuptitle index.shtml
       cleanupduration index.shtml
+      insertsectionselfie index.shtml
       lintlesson index.shtml
       insertgdrivesave index.shtml
     elif test index.html -nt index.shtml; then
