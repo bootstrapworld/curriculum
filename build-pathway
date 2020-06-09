@@ -384,7 +384,7 @@ function cleanupduration() {
 function insertsectionselfie() {
   local f=$1
   $SED -i \
-    -e '/^<h2 id=/s/^<h2 id="\([^>]*\)>\(.*\)<\/h2>/<h2 id="\1>\2 <a href="#\1>\&#128279;<\/a><\/h2>/' \
+    -e '/^<h2 id=/s/^<h2 id="\([^>]*\)>\(.*\)<\/h2>/<h2 id="\1>\2 <span class="section-link"><a href="#\1>\&#128279;<\/a><\/span><\/h2>/' \
     $f
 }
 
