@@ -11,14 +11,18 @@ export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 
-SEMESTER=spring
-MONTH=$(date +%m)
-test "$MONTH" -gt 7 && SEMESTER=fall
-export SEMESTER_YEAR=$SEMESTER$(date +%Y)
+#SEMESTER=spring
+#MONTH=$(date +%m)
+#test "$MONTH" -gt 7 && SEMESTER=fall
+#export SEMESTER_YEAR=$SEMESTER$(date +%Y)
+
+eval $(grep '^SEMESTER=' ./deploy-to-brown)
+eval $(grep '^YEAR=' ./deploy-to-brown)
+SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-06-09 # last modified
+LASTMOD=2020-06-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -175,7 +179,7 @@ function insertgdrivesave() {
   fi
   #echo pageTitle of $f_head.adoc is $pageTitle
   #FIXME: pathname should be corrected, again
-  local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/courses/$TGTPATHWAY/$LANGUAGE/$LESSONSUBDIR
+  local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/$LANGUAGE/courses/$TGTPATHWAY/$LESSONSUBDIR
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\//\\\//g')
 
