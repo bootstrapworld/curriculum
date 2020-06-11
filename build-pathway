@@ -209,6 +209,11 @@ EOF
     -e 's/<\/h1>.*/\0\n%INSERTGDRIVESAVE2/' \
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
     $f
+  if ! grep -q %INSERTGDRIVESAVE2 $f; then
+    $SED -i \
+      -e 's/<div id="header">/\0\n%INSERTGDRIVESAVE2/' \
+      $f
+  fi
   $SED -i \
     -e '/%INSERTGDRIVESAVE1/r '$TMPFILE-1.txt \
     -e '/%INSERTGDRIVESAVE2/r '$TMPFILE-2.txt \
