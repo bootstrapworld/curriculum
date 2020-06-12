@@ -1,0 +1,94 @@
+[.landscape]
+= Contracts
+
+Contracts _also_ help us use methods. `<Table>.filter {two-colons} (test {two-colons} (Row -> Boolean)) -> Table` tells us that the name of the function is  `.filter` and that it is a `Table` method. The domain says it has one input (a function that consumes  `Rows` and produces  `Booleans`), and that the method evaluates to a  `Table`.
+
+++++
+<style>
+td {padding: .1em .625em !important; height: 20pt;}
+</style>
+++++
+
+[cols="3,1,10,1,2", options="header", grid="rows"]
+|===
+|Name||Domain||Range
+
+| `bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `pie-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `bar-chart-summarized`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `pie-chart-summarized`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `modified-box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `histogram`
+| `{two-colons}`
+| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
+| `->`
+| `Image`
+5+|
+
+| `scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `image-scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `->`
+| `Image`
+5+|
+
+| `r-value`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Number`
+5+|
+
+| `lr-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+
+|===
