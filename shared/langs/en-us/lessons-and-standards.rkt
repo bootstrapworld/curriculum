@@ -101,88 +101,185 @@
     ("ds-pyret-intro" 
         "2-DA-07")
     ("ds-applying-functions" 
-        "HSF.IF.A.2")
+        "HSF.IF.A.2"
+        "OK.A1.F.1.2")
     ("ds-plotting" 
-        "2-DA-07" "2-DA-08" "3A-DA-11" 
-        "P5")
+        "2-DA-07" 
+        "2-DA-08" 
+        "3A-DA-11" 
+        "P5"
+        "OK.8.DA.S.01")
     ("ds-displays-and-lookups" 
         "8.SP.A.1" 
         "HS-SEP4-1" 
         "3A-DA-11" 
-        "9-12.Data and Analysis.Visualization and Transformation" "6-8.Data and Analysis.Inference and Models")
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models"
+        "OK.8.DA.S.01")
     ("ds-defining-functions" 
         "8.SP.A.1" 
-        "HS-SEP5-3" "HSF.BF.A.1" 
-        "2-AP-14" "2-AP-17" "2-AP-19" "P4" 
-        "6-8.Algorithms and Programming.Variables" "9-12.Algorithms and Programming.Modularity" "6-8.Algorithms and Programming.Modularity")
+        "HS-SEP5-3" 
+        "HSF.BF.A.1" 
+        "2-AP-14" 
+        "2-AP-17" 
+        "2-AP-19" 
+        "P4" 
+        "6-8.Algorithms and Programming.Variables" 
+        "9-12.Algorithms and Programming.Modularity" 
+        "6-8.Algorithms and Programming.Modularity"
+        "OK.A1.F.1.3"
+        "OK.8.AP.PD.02"
+        )
     ("ds-table-methods" 
         "HS-SEP4-6"
-        "2-DA-08")
+        "2-DA-08"
+        "OK.L1.AP.M.02")
     ("ds-defining-table-functions" 
         "HS-SEP5-3" 
-        "2-AP-13" "2-AP-14" "2-AP-17" "2-AP-19" "3A-AP-17" "3A-AP-18" "P4" 
-        "9-12.Algorithms and Programming.Modularity" "6-8.Algorithms and Programming.Modularity")
+        "2-AP-13" 
+        "2-AP-14" 
+        "2-AP-17" 
+        "2-AP-19" 
+        "3A-AP-17" 
+        "3A-AP-18" 
+        "P4" 
+        "9-12.Algorithms and Programming.Modularity" 
+        "6-8.Algorithms and Programming.Modularity"
+        "OK.L1.AP.M.01")
     ("ds-method-chaining" 
         "HS-SEP4-1" 
-        "2-AP-17" "2-AP-13" "3A-AP-17" "3A-AP-18" "P3" 
-        "9-12.Algorithms and Programming.Control" "6-8.Algorithms and Programming.Control" "9-12.Algorithms and Programming.Modularity")
+        "2-AP-17" 
+        "2-AP-13" 
+        "3A-AP-17" 
+        "3A-AP-18" 
+        "P3" 
+        "9-12.Algorithms and Programming.Control" 
+        "6-8.Algorithms and Programming.Control" 
+        "9-12.Algorithms and Programming.Modularity"
+        "OK.L1.AP.M.01")
     ("ds-if-expressions" 
         "HS-SEP4-5" 
-        "2-DA-08" "2-AP-19" "3B-NI-05" "P3" 
-        "6-8.Data and Analysis.Inference and Models" "9-12.Algorithms and Programming.Control")
+        "2-DA-08" 
+        "2-AP-19" 
+        "3B-NI-05" 
+        "P3" 
+        "6-8.Data and Analysis.Inference and Models" 
+        "9-12.Algorithms and Programming.Control")
     ("ds-random-samples" 
         "HSS.IC.B.3" 
         "HS-SEP4-3" 
-        "2-DA-08" "2-DA-09")
+        "2-DA-08" 
+        "2-DA-09"
+        "OK.PA.2.2"
+        "OK.L1.IC.C.02")
     ("ds-grouped-samples" 
         "8.SP.A.1" 
         "HS-SEP4-5" 
-        "2-DA-08" "2-DA-09" "2-AP-11" "P3")
+        "2-DA-08" 
+        "2-DA-09" 
+        "2-AP-11" 
+        "P3"
+        "OK.PA.2.2"
+        "OK.L1.IC.C.02")
     ("ds-choosing-your-dataset" 
         "HS-SEP1-3" 
-        "3A-AP-16" "3A-AP-23" "3B-AP-14" "P7")
+        "3A-AP-16" 
+        "3A-AP-23" 
+        "3B-AP-14" 
+        "P7"
+        "OK.L1.DA.CVT.01")
     ("ds-histograms" 
-        "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.A.2"
+        "HSS.ID.A.3" 
+        "HSS.ID.A.1" 
+        "HSS.ID.A.2"
         "HS-SEP2-1"  
-        "3A-DA-11" "3B-AP-14" "P5")
+        "3A-DA-11" 
+        "3B-AP-14" 
+        "P5")
     ("ds-histograms2" 
-        "HSS.ID.A.3" "HSS.ID.A.1" "HSS.ID.B.6.A"
+        "HSS.ID.A.3" 
+        "HSS.ID.A.1" 
+        "HSS.ID.B.6.A"
         "HS-SEP4-2" 
-        "3A-DA-11" "3B-AP-14" 
-        "9-12.Data and Analysis.Visualization and Transformation")
+        "3A-DA-11" 
+        "3B-AP-14" 
+        "9-12.Data and Analysis.Visualization and Transformation"
+        "OK.L1.AP.PD.05")
     ("ds-measures-of-center"
         "HS-SEP4-2" 
-        "6-8.Data and Analysis.Inference and Models")
+        "6-8.Data and Analysis.Inference and Models"
+        "OK.PA.D.1.2")
     ("ds-measures-of-spread" 
-        "HS-SEP4-2" "HSS.ID.A.1" 
-        "3A-DA-11" "P5" 
-        "9-12.Data and Analysis.Visualization and Transformation" "6-8.Data and Analysis.Inference and Models")
+        "HS-SEP4-2" 
+        "HSS.ID.A.1" 
+        "3A-DA-11" 
+        "P5" 
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models")
     ("ds-checking-your-work" 
-        "HS-SEP5-4" "2-AP-17" 
-        "3B-AP-21" "P6" 
-        "9-12.Computing Systems.Troubleshooting" "6-8.Computing Systems.Troubleshooting")
+        "HS-SEP5-4" 
+        "2-AP-17" 
+        "3B-AP-21" 
+        "P6" 
+        "9-12.Computing Systems.Troubleshooting" 
+        "6-8.Computing Systems.Troubleshooting"
+        "OK.L1.IC.C.02")
     ("ds-scatter-plots" 
         "HS-SEP6-1" 
-        "8.SP.A.1" "8.SP.A.2" "HSS.ID.B.6" "HSS.ID.C.8" 
-        "3A-DA-11" "3B-NI-05" "P5" 
-        "9-12.Data and Analysis.Visualization and Transformation" "6-8.Data and Analysis.Visualization and Transformation")
+        "8.SP.A.1" 
+        "8.SP.A.2" 
+        "HSS.ID.B.6" 
+        "HSS.ID.C.8" 
+        "3A-DA-11" 
+        "3B-NI-05" 
+        "P5" 
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Visualization and Transformation"
+        "OK.PA.D.1.3"
+        "OK.L1.DA.IM.01")
     ("ds-correlations" 
-        "HSS.ID.C.9" "HSS.ID.C.8" "HSS.ID.B.6" "8.SP.A.1" "8.SP.A.2" 
+        "HSS.ID.C.9" 
+        "HSS.ID.C.8" 
+        "HSS.ID.B.6" 
+        "8.SP.A.1" 
+        "8.SP.A.2" 
         "HS-SEP6-1" 
-        "2-DA-09" "3B-NI-05" "3B-NI-07" "P5" 
-        "6-8.Data and Analysis.Visualization and Transformation")
+        "2-DA-09" 
+        "3B-NI-05" 
+        "3B-NI-07" 
+        "P5" 
+        "6-8.Data and Analysis.Visualization and Transformation"
+        "OK.PA.D.1.3"
+        "OK.L1.DA.IM.01")
     ("ds-linear-regression" 
-        "HSS.ID.C.7" "HSS.ID.C.8" "HSS.ID.C.9" "HSS.ID.B.6.C" "8.SP.A.1" "8.SP.A.2" "8.SP.A.3" 
+        "HSS.ID.C.7" 
+        "HSS.ID.C.8" 
+        "HSS.ID.C.9" 
+        "HSS.ID.B.6.C" 
+        "8.SP.A.1" 
+        "8.SP.A.2" 
+        "8.SP.A.3" 
         "HS-SEP3-5" 
-        "3A-DA-11" "3B-NI-05" 
-        "9-12.Data and Analysis.Inference and Models")
+        "3A-DA-11" 
+        "3B-NI-05" 
+        "9-12.Data and Analysis.Inference and Models"
+        "OK.PA.D.1.3"
+        "OK.L1.DA.IM.01")
     ("ds-threats-to-validity" 
-        "HSS.IC.B.6" "HS-SEP4-3"
+        "HSS.IC.B.6" 
+        "HS-SEP4-3"
         "HS-SEP1-7" 
-        "3B-NI-07" "P1" 
-        "6-8.Data and Analysis.Collection" "9-12.Data and Analysis.Inference and Models")
+        "3B-NI-07" 
+        "P1" 
+        "6-8.Data and Analysis.Collection" 
+        "9-12.Data and Analysis.Inference and Models"
+        "OK.L1.IC.C.02")
     ("ds-ethics-and-privacy" 
-        "3A-AP-16" "P1" 
+        "3A-AP-16" 
+        "P1" 
         "HS-SEP7-1" 
-        "9-12.Data and Analysis.Collection" "9-12.Impacts of Computing.Culture" "9-12.Impacts of Computing.Safety, Law, and Ethics" )
+        "9-12.Data and Analysis.Collection" 
+        "9-12.Impacts of Computing.Culture" 
+        "9-12.Impacts of Computing.Safety, Law, and Ethics"
+        "OK.L1.IC.C.01")
     ))
