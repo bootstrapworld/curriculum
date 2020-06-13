@@ -656,10 +656,180 @@ the denominator when necessary."
   "Differentiate between appropriate and inappropriate content on the Internet, and identify unethical and illegal online behavior."
  )
  ("OK.7.IC.SLE.01"
-  "Explain the connection between the longevity of data on the Internet, personal online identity, and personal privacy."
+  "Explain the connection between the longevity  of data on the Internet, personal online identity, and personal privacy."
  )
  ("OK.8.IC.SLE.01"
   "Discuss the social impacts and ethical considerations associated with cybersecurity, including the positive and malicious purposes of hacking."
  )
+ ("OK.L1.CS.D.01"
+  "Explain how abstractions hide the underlying implementation details of computing systems embedded in everyday objects."
+ )
+ ("OK.L1.CS.HS.01"
+  "Explain the interactions between
+  application software, system software, and hardware."
+ )
+ ("OK.L2.CS.HS.01"
+  "Identify and categorize roles of an operating system."
+ )
+ ("OK.L1.CS.T.01"
+  "Develop and apply criteria for systematic discovery of errors and systematic strategies for correction of errors in computing systems."
+ )
+ ("OK.L2.CS.T.01"
+  "Identify how hardware components facilitate logic, input, output, and storage in computing systems."
+ )
+ ("OK.L1.NI.NCO.01"
+  "Evaluate the scalability and reliability of networks by identifying and illustrating the basic components of computer networks (e.g., routers, switches, servers, etc.) and network protocols (e.g., IP, DNS, etc.)."
+ )
+ ("OK.L2.NI.NCO.01"
+  "Describe the issues that impact network functionality (e.g., bandwidth, load, latency, topology)."
+ )
+ ("OK.L1.NI.C.01"
+  "Compare physical and cybersecurity measures by evaluating trade-offs between the usability and security of a computing system."
+ )
+ ("OK.L2.NI.C.01"
+  "Compare and refine ways in which software developers protect devices and information from unauthorized access."
+ )
+ ("OK.L1.NI.C.02"
+  "Illustrate how sensitive data can be affected by attacks."
+ )
+ ("OK.L1.NI.C.03"
+  "Recommend security measures to address various scenarios based on information security principles."
+ )
+ ("OK.L1.NI.C.04"
+  "Explain trade-offs when selecting and implementing cybersecurity recommendations from multiple perspectives such as the user, enterprise, and government."
+ )
+ ("OK.L1.DA.S.01"
+  "Translate and compare different bit representations of data types, such as characters, numbers, and images."
+ )
+ ("OK.L1.DA.S.02"
+  "Evaluate the trade-offs in how data is organized and stored digitally."
+ )
+ ("OK.L1.DA.CVT.01"
+  "Use tools and techniques to locate, collect, and create visualizations of small- and largescale data sets (e.g., paper surveys and online data sets)."
+ )
+ ("OK.L2.DA.CVT.01"
+  "Use data analysis tools and techniques to identify patterns from complex real-world data."
+ )
+ ("OK.L2.DA.CVT.02"
+  "Generate data sets that use a variety of data collection tools and analysis techniques to support a claim and/or communicate information."
+ )
+ ("OK.L1.DA.IM.01" 
+  "Show the relationships between collected data elements using computational models."
+ )
+ ("OK.L2.DA.IM.01"
+  "Use models and simulations to help formulate, refine, and test scientific hypotheses." 
+ )
+ ("OK.L1.AP.A.01" 
+  "Create a prototype that uses algorithms (e.g., searching, sorting, finding shortest distance) to provide a possible solution for a real-world problem."
+ )
+ ("OK.L2.AP.A.01"
+  "Describe how artificial intelligence algorithms drive many software and physical systems (e.g., autonomous robots, computer vision, pattern recognition, text analysis)."
+ )
+ ("OK.L2.AP.A.02"
+  "Develop an artificial intelligence algorithm to play a game against a human opponent or solve a real world problem."
+ )
+ ("OK.L2.AP.A.03"
+  "Critically examine and trace classic algorithms (e.g., selection sort, insertion sort, binary search, linear search)."
+ )
+ ("OK.L2.AP.A.04"
+  "Evaluate algorithms (e.g., sorting, searching) in terms of their efficiency and clarity."
+ )
+ ("OK.L1.AP.V.01"
+  "Demonstrate the use of lists (e.g., arrays) to simplify solutions, generalizing computational problems instead of repeatedly using primitive variables."
+ )
+ ("OK.L2.AP.V.01"
+  "Compare and contrast simple data structures and their uses (e.g., lists, stacks, queues)."
+ )
+ ("OK.L1.AP.C.01"
+  "Justify the selection of specific control structures (e.g., sequence, conditionals, repetition, procedures) considering program efficiencies such as readability, performance, and memory usage."
+ )
+ ("OK.L2.AP.C.01"
+  "Trace the execution of repetition (e.g., loops, recursion), illustrating output and changes in values of named variables."
+ )
+ ("OK.L1.AP.M.01"
+  "Break down a solution into procedures using systematic analysis and design."
+ )
+ ("OK.L2.AP.M.01"
+  "Construct solutions to problems using student-created components (e.g., procedures, modules, objects)."
+ )
+ ("OK.L1.AP.M.02"
+  "Create computational artifacts by systematically organizing, manipulating and/or processing data."
+ )
+ ("OK.L2.AP.M.02"
+  "Design or redesign a solution to a large-scale computational problem by identifying generalizable patterns."
+ )
+ ("OK.L2.AP.M.03"
+  "Create programming solutions by reusing existing code (e.g., libraries, Application Programming Interface (APIs), code repositories)."
+ )
+ ("OK.L1.AP.PD.01"
+  "Create software by analyzing a problem and/or process, developing and documenting a solution, testing outcomes, and adapting the program for a variety of users."
+ )
+ ("OK.L2.AP.PD.01" 
+  "Create software that will provide solutions to a variety of users using the software life cycle process."
+ )
+ ("OK.L1.AP.PD.02"
+  "Define and classify a variety of software licensing schemes (e.g., open source, freeware, commercial) and discuss the advantages and disadvantages of each scheme in software development."
+ )
+ ("OK.L2.AP.PD.02"
+  "Design software in a project team environment using integrated development environments (IDEs), versioning systems, and collaboration systems."
+ )
+ ("OK.L1.AP.PD.03"
+  "While working in a team, develop, test, and refine event-based programs that solve practical problems or allow self expression."
+ )
+ ("OK.L2.AP.PD.03"
+  "Develop programs for multiple computing platforms."
+ )
+ ("OK.L1.AP.PD.04"
+  "Using visual aids and documentation, illustrate the design elements and data flow (e.g., flowcharts, pseudocode) of the development of a complex program."
+ )
+ ("OK.L2.AP.PD.04"
+  "Systematically check code for correctness, usability, readability, efficiency, portability, and scalability through peer review."
+ )
+ ("OK.L1.AP.PD.05"
+  "Evaluate and refine computational artifacts to make them more user-friendly, efficient and/or accessible." 
+ )
+ ("OK.L2.AP.PD.05"
+  "Develop and use a series of test cases to verify that a program performs according to its design specifications."
+ )
+ ("OK.L2.AP.PD.06"
+  "Explain security issues that might lead to compromised computer programs."
+ )
+ ("OK.L2.AP.PD.07"
+  "Modify an existing program to add additional functionality and discuss intended and unintended implications (e.g., breaking other functionality)."
+ )
+ ("OK.L1.IC.C.01"
+  "Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices."
+ )
+ ("OK.L2.IC.C.01"
+  "Evaluate the beneficial and harmful effects that computational artifacts and innovations have on society."
+ )
+ ("OK.L1.IC.C.02"
+  "Test and refine computational artifacts to reduce bias and equity deficits."
+ )
+ ("OK.L2.IC.C.02"
+  "Evaluate the impact of equity, access, and influence on the distribution of computing resources in a global society."
+ )
+ ("OK.L1.IC.C.03"
+  "Demonstrate how a given algorithm applies to problems across disciplines."
+ )
+ ("OK.L2.IC.C.03"
+  "Design and implement a study that evaluates or predicts how computation has revolutionized an aspect of our culture and how it might evolve (e.g., education, healthcare, art/entertainment, energy)."
+ )
+ ("OK.L1.IC.SI.01"
+  "Demonstrate how computing increases connectivity among people of various cultures."
+ )
+ ("OK.L1.IC.SLE.01"
+  "Explain the beneficial and harmful effects that intellectual property laws can have on innovation."
+ )
+ ("OK.L2.IC.SLE.01"
+  "Debate laws and regulations that impact the development and use of software."
+ )
+ ("OK.L1.IC.SLE.02"
+  "Explain the privacy concerns related to the large-scale collection and analysis of information about individuals (e.g., how businesses, social media, and the government collects and uses data) that may not be evident to users."
+ )
+ ("OK.L1.IC.SLE.03" 
+  "Evaluate the social and economic consequences of how law and ethics interact with digital aspects of privacy, data, property, information, and identity."
+ )
+   
 ))
 
