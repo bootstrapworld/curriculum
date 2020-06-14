@@ -89,10 +89,6 @@
     ("fl-image-transformations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
     ("fl-intro-to-dilations" "N-Q&1&3" "BS-PL.2" "6.NS.5-8" "F-IF.1-3")
 
-    ; demo
-    ("__sample-lesson" "8.F.1-3&1")
-    ("__sample-lesson" "8.NS.A")
-
     ;data science
     ("ds-intro" 
         "SL.9-10.1" 
