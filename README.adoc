@@ -311,11 +311,11 @@ to set it up on the Brown machine. (This may be compressed in the
 future.)
 
 If you wish to deploy only a single pathway, e.g.,
-`data-science-pathway`, add a second argument:
+`data-science`, add the pathway by name as a second argument:
 
   deploy-to-brown jrandomuser data-science-pathway
 
-(This assumes you've first built `data-science-pathway`, of
+(This assumes you've first run some variant of `./build-pathway data-science`, of
 course.)
 
 The script `deploy-to-brown` uses SSH to interact with your Brown
@@ -327,6 +327,10 @@ work accomplished with the first SSH, you may type
 
 (If you used the optional second arg for `deploy-to-brown`, you
 don't need to repeat it here.)
+
+*Note:* The Algebra pathway is an anomaly, since it exists in both `-wescheme` and `-pyret` variants. To deploy this pathway, you will need to _separately_ type 
+  deploy-to-brown jrandomuser algebra-wescheme
+  deploy-to-brown jrandomuser algebra-pyret
 
 == Standards compliance
 
