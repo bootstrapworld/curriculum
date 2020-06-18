@@ -313,7 +313,7 @@ future.)
 If you wish to deploy only a single pathway, e.g.,
 `data-science`, add the pathway by name as a second argument:
 
-  deploy-to-brown jrandomuser data-science-pathway
+  deploy-to-brown jrandomuser data-science
 
 (This assumes you've first run some variant of `./build-pathway data-science`, of
 course.)
@@ -328,10 +328,21 @@ work accomplished with the first SSH, you may type
 (If you used the optional second arg for `deploy-to-brown`, you
 don't need to repeat it here.)
 
-*Note:* The Algebra pathway is an anomaly, since it exists in both `-wescheme` and `-pyret` variants. To deploy this pathway, you will need to _separately_ type 
+*Note:* The `algebra` pathway is an anomaly, since it exists in
+both `-wescheme` and `-pyret` variants.
+To type just one or the other variant, type one of
 
   deploy-to-brown jrandomuser algebra-wescheme
   deploy-to-brown jrandomuser algebra-pyret
+
+To deploy both variants (if available), type
+
+  deploy-to-brown jrandomuser algebra
+
+In any case, `deploy-to-brown` only deploys a pathway if the
+latter has been built locally first. So if you've built `algebra-wescheme` but
+`algebra-pyret`, requesting `algebra` be deployed is equivalent to requesting
+`algebra-wescheme`.
 
 == Standards compliance
 
@@ -340,8 +351,11 @@ an association of lessons with the educational standards they
 comply with. Dictionaries for the various standards are available
 in the same directory. For now, these are:
 
-  ccss-standards-dictionary.rkt
+  cc-ela-standards-dictionary.rkt
+  cc-math-standards-dictionary.rkt
   csta-standards-dictionary.rkt
+  k12cs-standards-dictionary.rkt
+  ngss-standards-dictionary.rkt
   ok-standards-dictionary.rkt
   old-standards-dictionary.rkt
 

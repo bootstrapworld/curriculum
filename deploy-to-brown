@@ -1,4 +1,4 @@
-# last modified 2020-06-01
+# last modified 2020-06-17
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -55,9 +55,9 @@ function correctgdriveurls() {
 }
 
 function copyCourse() {
+  local dir=$1
   for lang in $ALL_THE_LANGS; do
-    local dir=$1
-    test -d $lang/courses/$dir || return
+    test -d $lang/courses/$dir || continue
     cp -pr $lang/courses/$dir deployables/$lang/courses/$dir
     correctgdriveurls deployables/$lang/courses/$dir
   done
@@ -75,7 +75,12 @@ for lang in $ALL_THE_LANGS; do
 done
 
 if test $pwy; then
-  copyCourse $pwy
+  if test "$pwy" = algebra; then
+    copyCourse algebra-pyret
+    copyCourse algebra-wescheme
+  else
+    copyCourse $pwy
+  fi
 else
   copyCourse algebra-pyret
   copyCourse algebra-wescheme
