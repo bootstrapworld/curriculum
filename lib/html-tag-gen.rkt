@@ -66,8 +66,11 @@
   (set! x (regexp-replace* "\\\\lt" x "<"))
   (set! x (regexp-replace* "\\\\leq" x "\\&le;"))
   (set! x (regexp-replace* "\\\\geq" x "\\&ge;"))
-  (set! x (regexp-replace* "\\\\frac" x "frac"))
+  (set! x (regexp-replace* "\\\\frac{([^}]+)}" x "{\\1}MATHFRAC"))
+  (set! x (regexp-replace* "MATHFRAC" x "/"))
   (set! x (regexp-replace* "\\\\div" x "\\&divide;"))
+  (set! x (regexp-replace* "{" x "( "))
+  (set! x (regexp-replace* "}" x " )"))
   x)
 
 (define (enclose-math e)
