@@ -22,7 +22,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-06-11 # last modified
+LASTMOD=2020-06-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -239,6 +239,50 @@ EOF
   modifygdrivepage $other_f $f
 }
 
+function adjustgdrivecolgroup() {
+  local f=$1
+
+  local CTEMP=$(mktemp); rm -f $CTEMP
+
+  local CTEMPFILE=$(basename $CTEMP)-cols.txt
+
+  grep '^<col style.*> *$' $f > $CTEMPFILE
+
+  local num=$(wc -l $CTEMPFILE|sed -e 's/^ *\([^ ]*\).*/\1/')
+
+  if test $num -eq 0; then return; fi
+
+  sed -i \
+    -e 's/^<col //' \
+    -e 's/> *$//' \
+    $CTEMPFILE
+
+  local i=1
+
+  local cline
+  local flnum
+
+  while test $i -le $num; do
+    cline=$(sed -ne "$i p" $CTEMPFILE)
+
+    flnum=$(grep -n '^<th ' $f|sed -e 1q|sed -e 's/^\([^:]*\).*/\1/')
+
+    sed -i \
+      -e "$flnum s/^<th /<th%GDRIVE $cline /" \
+      $f
+
+    i=$(expr $i + 1)
+
+  done
+
+  rm -f $CTEMPFILE
+
+  sed -i \
+    -e 's/^<th%GDRIVE /<th /' \
+    $f
+
+}
+
 function modifygdrivepage() {
   local f=$1
   local h=$2
@@ -287,6 +331,8 @@ function modifygdrivepage() {
     $f
 
   rm -f $TMPFILE.css
+
+  adjustgdrivecolgroup $f
 
   $SED -i \
     -e 's/<span class="\(begin\|end\)-ignore-for-gdrive"><\/span>//g' \
