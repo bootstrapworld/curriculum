@@ -1,30 +1,36 @@
 = Translating Circles of Evaluation to Code
-
+++++
+<style>
+  td {height: 200pt;}
+</style>
+++++
 @vspace{2ex}
 
 Translate the Circles of Evaluation into code. Use the space below each Circle of Evaluation to create your own challenging Circle of Evaluation!
 
-[cols="^1a,^1a,^1a",options="header"]
+@do{
+  (define expr1 '(- (* 3 7) (+ 1 2)))
+  (define expr2 '(- 3 (+ 1 2)))
+  (define expr3 '(- 3 (+ 1 (* 5 6))))
+  (define expr4 '(- (+ 1 (* 5 6)) 3))
+
+  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
+  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
+  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
+  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
+
+  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code2 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code3 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code4 (if *solutions-mode?* (sexp->code expr1) ""))
+}
+
+
+[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
 |===
-| Arithmetic								
-| Circle of Evaluation		
-| Code
-
-| @math{(3 \times 7) - (1 + 2)}					
-| 
-| @vspace{25ex}
-
-| @math{3 - (1 + 2)}					
-| 
-| @vspace{25ex}
-
-| @math{3 - (1 + (5 \times 6))}					
-| 
-| @vspace{25ex}
-
-| @math{(1 + (5 \times 6)) - 3}
-| 
-| @vspace{25ex}
-
+|   | Arithmetic				| Circle of Evaluation	| Code
+|*1*| @show{(sexp->math expr1)}	| @show{coe1}			| @show{code1}
+|*2*| @show{(sexp->math expr2)}	| @show{coe2}			| @show{code2}
+|*3*| @show{(sexp->math expr3)}	| @show{coe3}			| @show{code3}
+|*4*| @show{(sexp->math expr4)}	| @show{coe4}			| @show{code4}
 |===
-

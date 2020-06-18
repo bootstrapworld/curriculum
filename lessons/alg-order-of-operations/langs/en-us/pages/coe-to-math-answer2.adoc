@@ -1,37 +1,29 @@
-= Evaluating Circles of Evaluation (2)
+=  Evaluating Circles of Evaluation (2)
+++++
+<style>
+  td {height: 100pt;}
+</style>
+++++
+@vspace{2ex}
 
-@do{(define exprs (list ;'(+ 4 5) 
-                     ;'(* 7 6)
-                     ;'(- (* 2 3) (+ 1 0))
-                     ;'(- (+ 5 8) 12)
-                     ;'(* -2 -6)
-                     ;'(+ (* 5 -2) 12)
-                     '(- 12 (* 2 5))
-                     '(+ (* 2 (+ 3 1)) 10)
-                     '(+ (/ 56 (* 2 4)) (- -7 3))
-                     '(/ (* 7 8) 4)
-                     '(* -7 (+ 9(/ 14 2)))
-                     ;'(- -10 (/ 60 5))
-                     ;'(+ (* 5 6) (/ 7 3))
-                     ;'(/ (* 8 10) (/ 16 4))
-                     ))
+For each Circle of Evaluation on the left-hand side, write the code for the Circle on the right-hand side
 
-; this should be done using eval, but need to figure out why that raises a (syntax) error
-(define expr-ans '(9 42 5 1 12 2 2 18 -3 14 33 -112 -22 20))
-
-(define exprs-as-coe (map sexp->coe exprs))
-;(define expr-vals (map (lambda (e) (math (format "~a" (eval e)))) exprs))
-(define expr-vals (map (lambda (v) (format "~a" v)) expr-ans))
+@do{
+  (define expr1 '(- 12 (* 2 5)))
+  (define expr2 '(+ (* 2 (+ 3 1)) 10))
+  (define expr3 '(+ (/ 56 (* 2 4)) (- -7 3)))
+  (define expr4 '(/ (* 7 8) 4))
+  (define expr5 '(* -7 (+ 9(/ 14 2))))
 }
 
-@show{(exercise-handout 
-;  #:title "Evaluating Circles of Evaluation"
-  #:instr "For each Circle of Evaluation on the left, evaluate the Circle and 
-   write down the ANSWER (a number) on the right:"
-  #:forevidence (exercise-evid-tags "BS-CE&1&3")
-  (cond [(not *solutions-mode?*)
-  (open-response-exercise exprs-as-coe "text")]
-  [else
-    (questions-and-answers exprs-as-coe expr-vals)])
-  )
-}
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|   | Circle of Evaluation        | Answer
+|*1*| @show{(sexp->coe expr1)}    | @show{(if *solutions-mode?* (eval expr1) "")}
+|*2*| @show{(sexp->coe expr2)}    | @show{(if *solutions-mode?* (eval expr2) "")}
+|*3*| @show{(sexp->coe expr3)}    | @show{(if *solutions-mode?* (eval expr3) "")}
+|*4*| @show{(sexp->coe expr4)}    | @show{(if *solutions-mode?* (eval expr4) "")}
+|*5*| @show{(sexp->coe expr5)}    | @show{(if *solutions-mode?* (eval expr5) "")}
+|*6*| @show{(sexp->coe expr5)}    | @show{(if *solutions-mode?* (eval expr5) "")}
+|*7*| @show{(sexp->coe expr5)}    | @show{(if *solutions-mode?* (eval expr5) "")}
+|===

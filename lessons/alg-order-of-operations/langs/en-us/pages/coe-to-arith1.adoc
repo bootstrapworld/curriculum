@@ -1,33 +1,27 @@
-= Converting Circles of Evaluation to Arithmetic Expressions (2)
+= Converting Circles of Evaluation to Arithmetic Expressions
+++++
+<style>
+  td {height: 150pt;}
+</style>
+++++
+@vspace{2ex}
 
-@do{(define exprs (list '(+ 4 5) 
-                     '(* 7 6)
-                     '(- (* 2 3) (+ 1 0))
-                     '(- (+ 5 8) 12)
-                     '(* -2 (* 1 -6))
-                     '(+ (* (- 4 1) -2) 12)
-                     ;'(/ 10 (* 2 (+ 3 1)))
-                     ;'(/ 5 20)
-                     ;'(+ (* 5 6) (/ 7 3))
-                     ;'(* 4 (+ -9 8))
-                     ;'(- (* 7 12) 8)
-                     ;'(- 9 (+ 4 5))
-                     ;'(+ (/ 56 (* 2 4)) (- -7 3))
-                     ;'(/ (* 9 12) 12)
-                     ))
-(define sexps-as-coe (map sexp->coe exprs))
-(define sexps-as-math (map sexp->math exprs))
+For each Circle of Evaluation on left, write the Arithmetic expression on the right
+
+@do{
+  (define expr1 '(+ 4 5))
+  (define expr2 '(- (* 2 3) (+ 1 0)))
+  (define expr3 '(- (+ 5 8) 12))
+  (define expr4 '(* -2 (* 1 -6)))
+  (define expr5 '(+ (* (- 4 1) -2) 12))
 }
 
-@show{(exercise-handout 
-;  #:title "Converting Circles of Evaluation to Arithmetic Expressions"
-  #:instr "For each Circle of Evaluation on left, write the Arithmetic expression
-           on the right:" 
-  #:forevidence (exercise-evid-tags "BS-CE&1&3")
-  (cond [(not *solutions-mode?*)
-  (open-response-exercise sexps-as-coe "math")]
-  [else
- (questions-and-answers sexps-as-coe sexps-as-math)])
-  )
-  }
-
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|   | Circle of Evaluation        | Arithmetic Expression
+|*1*| @show{(sexp->coe expr1)}    | @show{(if *solutions-mode?* (sexp->math expr1) "")}
+|*2*| @show{(sexp->coe expr2)}    | @show{(if *solutions-mode?* (sexp->math expr2) "")}
+|*3*| @show{(sexp->coe expr3)}    | @show{(if *solutions-mode?* (sexp->math expr3) "")}
+|*4*| @show{(sexp->coe expr4)}    | @show{(if *solutions-mode?* (sexp->math expr4) "")}
+|*5*| @show{(sexp->coe expr5)}    | @show{(if *solutions-mode?* (sexp->math expr5) "")}
+|===

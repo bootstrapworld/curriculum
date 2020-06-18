@@ -1,26 +1,27 @@
 = Creating Circles of Evaluation from Arithmetic Expressions
+++++
+<style>
+  td * {text-align: left;}
+  td {height: 200pt;}
+</style>
+++++
+@vspace{2ex}
 
-@do{(define exprs '((- 4 (- 6 17))
-                  (- (+ 25 14) 12)	
-                  (+ 1 (* 15 5))
-                  ;(* (+ 2 17) (- 12 8))
-                  ;(* (* 23 14) (+ 3 20))
-                  ;(+ (- 5 17) (* 14 5))
-                  ;(* 9 (+ 17 2))
-                  ;(- 19 (+ 12 11))
-                  ;(/ 7 (* 7 (+ 9 8)))
-                  ))
+For each math expression on the left, draw its Circle of Evaluation on the right.
 
-  (define exprs-as-math (map sexp->math exprs))
-  (define exprs-as-coe (map sexp->coe exprs))
+
+@do{
+  (define expr1 '(- 4 (- 6 17)))
+  (define expr2 '(- (+ 25 14) 12))
+  (define expr3 '(+ 1 (* 15 5)))
+  (define expr4 '(/ 15 (+ 10 (* 4 -2))))
 }
 
-@show{(exercise-handout 
-  #:instr "For each math expression on the left, draw its Circle of Evaluation on the right."
-  #:forevidence (exercise-evid-tags "BS-CE&1&1" "BS-CE&1&2")
-  (cond [(not *solutions-mode?*)
-         (open-response-exercise (map sexp->math exprs) "circeval")]
-        [else (questions-and-answers exprs-as-math exprs-as-coe)])
-  )
-}
-
+[cols=".^1a,^10a,^10a",options="header",stripes="none"]
+|===
+|   | Math Expression              | Circle of Evaluation
+|*1*| @show{(sexp->math expr1)}    | @show{(if *solutions-mode?* (sexp->coe expr1) "")}
+|*2*| @show{(sexp->math expr2)}    | @show{(if *solutions-mode?* (sexp->coe expr2) "")}
+|*3*| @show{(sexp->math expr3)}    | @show{(if *solutions-mode?* (sexp->coe expr3) "")}
+|*4*| @show{(sexp->math expr4)}    | @show{(if *solutions-mode?* (sexp->coe expr4) "")}
+|===

@@ -1,30 +1,28 @@
 = Matching Circles of Evaluation and Arithmetic Expressions
+++++
+<style>
+  td * {text-align: center;}
+  td {height: 200pt;}
+</style>
+++++
+@vspace{2ex}
 
-@do{(define exprs '((/ (* 1 1) 1)
-                    (/ 1 (* 1 1))
-                    (* (- 1 1) (+ 1 1))
-                    (- (* 1 1) (+ 1 1))
-                    ;(* (- (+ 1 1) 1) (+ 1 1))
-                    (* (+ 1 (- 1 1)) (+ 1 1))
-                    ;(+ (/ 1 1) 1)
-                    ;(+ (- 1 1) (/ 1 1))
-           ))
+Draw a line from each Circle of Evaluation on the left to the corresponding code on the right.
 
-(define permuted-exprs (shuffle exprs))
+@do{
+  (define expr1 '(/ (* 1 1) 1))
+  (define expr2 '(/ 1 (* 1 1)))
+  (define expr3 '(* (- 1 1) (+ 1 1)))
+  (define expr4 '(- (+ 1 1) 1))
+  (define expr5 '(* (+ 1 (- 1 1)) (+ 1 1)))
 }
 
-@show{(exercise-handout 
-;  #:title "Matching Circles of Evaluation and Arithmetic Expressions"
-  #:instr "Draw a line from each Circle of Evaluation in the left to its corresponding arithmetic expression on the right:" 
-  #:forevidence (exercise-evid-tags "BS-CE&1&1" "BS-CE&1&2")
-  (cond [(not *solutions-mode?*)
-  (matching-exercise 
-    (map sexp->coe exprs)
-    (map sexp->math permuted-exprs))]
-    [else
-    (matching-exercise-answers #:compare-with equal?
-                         #:content-of-ans exprs
-        (map sexp->coe exprs) (map sexp->math exprs)
-        permuted-exprs)])
-  )
-  }
+[cols="^.^10a,^.^2a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Math Expression            |   ||       | Circle of Evaluation
+| @show{(sexp->coe expr1)}   |*1*@show{(if *solutions-mode?* "-C" "")}||*A*    | @show{(sexp->math expr2)}
+| @show{(sexp->coe expr2)}   |*2*@show{(if *solutions-mode?* "-A" "")}||*B*    | @show{(sexp->math expr4)}
+| @show{(sexp->coe expr3)}   |*3*@show{(if *solutions-mode?* "-E" "")}||*C*    | @show{(sexp->math expr1)}
+| @show{(sexp->coe expr4)}   |*4*@show{(if *solutions-mode?* "-B" "")}||*D*    | @show{(sexp->math expr5)}
+| @show{(sexp->coe expr5)}   |*5*@show{(if *solutions-mode?* "-D" "")}||*E*    | @show{(sexp->math expr3)}
+|===

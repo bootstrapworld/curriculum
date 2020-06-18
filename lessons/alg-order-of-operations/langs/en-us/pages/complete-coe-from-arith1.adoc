@@ -1,43 +1,31 @@
-= Completing Circles of Evaluation from Arithmetic Expressions
+= Completing Circles of Evaluation from Arithmetic Expressions (1)
+++++
+<style>
+  td * {text-align: left;}
+</style>
+++++
+@vspace{2ex}
 
-@do{(define exprs '((- (* 5 9) (+ 2 7))
-                 (* (+ 3 12) 16)
-                 (+ 20 (* -4 6))
-                 (/ 15 (+ 10 (* 4 -2)))
-                 ;(+ (/ 20 (+ 2 3)) (- 6 3))
-                 ;(* 4 (- 8 (+ 2 3)))
-                 ;(- (+ 4 2) (/ 10 5))
-                 ;(+ (- 4 5) (* 5 8))
-                 ;(/ -15 (+ 5 -8))
-                 ;(* (+ 4 (- 9 8)) 5)
-                 ))
+For each arithmetic expression on the left, finish the Circle of Evaluation on the right by filling in the blanks
 
-(define exprs-with-holes '((- (* BSLeaveAHoleHere 9) (+ 2 BSLeaveAHoleHere))
-                            (* (+ 3 BSLeaveAHoleHere) BSLeaveAHoleHere)
-                            (+ BSLeaveAHoleHere (* BSLeaveAHoleHere 6))
-                            (/ 15 (BSLeaveAHoleHere 10 BSLeaveAHoleHere2))
-                            ;(+ (BSLeaveAHoleHere 20 (+ BSLeaveAHoleHere 3)) (BSLeaveAHoleHere BSLeaveAHoleHere 3))
-                            ;(* BSLeaveAHoleHere (- BSLeaveAHoleHere (BSLeaveAHoleHere 2 3)))
-                            ;(BSLeaveAHoleHere (BSLeaveAHoleHere 4 2) (/ BSLeaveAHoleHere 5))
-                            ;(+ (BSLeaveAHoleHere 4 5) (* BSLeaveAHoleHere BSLeaveAHoleHere))
-                            ;(/ BSLeaveAHoleHere (+ 5 BSLeaveAHoleHere))
-                            ;(* (BSLeaveAHoleHere 4 (BSLeaveAHoleHere 9 8)) BSLeaveAHoleHere)
-                            ))
+@do{
+  (define expr1 '(- (* 5 9) (+ 2 7)))
+  (define expr2 '(* (+ 3 12) 16))
+  (define expr3 '(+ 20 (* -4 6)))
+  (define expr4 '(/ 15 (+ 10 (* 4 -2))))
 
-(define exprs-as-code (map sexp->code exprs))
-(define exprs-as-coe (map sexp->coe exprs))
-(define exprs-as-math (map sexp->math exprs))
+  (define coe1 (if *solutions-mode?* expr1 `(- (* BSLeaveAHoleHere 9) (+ 2 BSLeaveAHoleHere))))
+  (define coe2 (if *solutions-mode?* expr2 `(* (+ 3 BSLeaveAHoleHere) BSLeaveAHoleHere)))
+  (define coe3 (if *solutions-mode?* expr3 `(+ BSLeaveAHoleHere (* BSLeaveAHoleHere 6))))
+  (define coe4 (if *solutions-mode?* expr4 `(/ 15 (BSLeaveAHoleHere 10 BSLeaveAHoleHere2))))
+
 }
 
-@show{(exercise-handout 
-;  #:title "Completing Partial Circles of Evaluation from Arithmetic Expressions"
-  #:instr "For each arithmetic expression on the left,  finish the Circle of Evaluation
-           on the right by filling in the blanks."
-  #:forevidence (exercise-evid-tags "BS-CE&1&1" "BS-CE&1&2")
-  (cond [(not *solutions-mode?*)
-  (completion-exercise exprs-as-math (map sexp->coe
-  exprs-with-holes))]
-  [else
-     (completion-exercise exprs-as-math exprs-as-coe)])
-  )
-}
+[cols=".^1a,^10a,^10a",options="header",stripes="none"]
+|===
+|   | Math Expression              | Circle of Evaluation
+|*1*| @show{(sexp->math expr1)}    | @show{(sexp->coe coe1)}
+|*2*| @show{(sexp->math expr2)}    | @show{(sexp->coe coe2)}
+|*3*| @show{(sexp->math expr3)}    | @show{(sexp->coe coe3)}
+|*4*| @show{(sexp->math expr4)}    | @show{(sexp->coe coe4)}
+|===

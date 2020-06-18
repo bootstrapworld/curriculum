@@ -1,19 +1,36 @@
-= Circles of Evaluation -- Square Roots
+= Translating Circles of Evaluation to Code - w/Square Roots
 ++++
 <style>
-	td * {text-align: left;}
+  td {height: 200pt;}
 </style>
 ++++
 @vspace{2ex}
 
 Translate the Circles of Evaluation into code. Use the space below each Circle of Evaluation to create your own challenging Circle of Evaluation!
 
-[cols=".^1a,^10a,^10a,^10a",options="header",stripes="none"]
+@do{
+  (define expr1 '(sqrt 9))
+  (define expr2 '(sqrt (+ 5 1)))
+  (define expr3 '(+ (sqrt 4) 1))
+  (define expr4 '(+ (* 3 (sqrt 3)) (sqrt 7)))
+
+  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
+  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
+  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
+  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
+
+  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code2 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code3 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code4 (if *solutions-mode?* (sexp->code expr1) ""))
+}
+
+
+[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
 |===
-| 	| Math Expression				| Circle of Evaluation				| Code
-|*1*| @math{\sqrt{9}}				| @vspace{10ex}						| `sqrt(9)`
-|*2*| @math{\sqrt{5 + 1}}			| @vspace{10ex}						| 
-|*3*| 							| @show{(sexp->coe '(sqrt (- 9 5)))}| 
-|*4*| @math{\sqrt{4} + 1}			| @vspace{10ex}						|
-|*5*| @math{3\sqrt{3} + \sqrt{7}}	| @vspace{10ex}						|
+|   | Arithmetic				| Circle of Evaluation	| Code
+|*1*| @math{\sqrt 9}			| @show{coe1}			| @show{code1}
+|*2*| @math{\sqrt (5 + 1)}		| @show{coe2}			| @show{code2}
+|*3*| @math{\sqrt 4 + 1}		| @show{coe3}			| @show{code3}
+|*4*| @math{3\sqrt 3 + \sqrt 7}	| @show{coe4}			| @show{code4}
 |===
