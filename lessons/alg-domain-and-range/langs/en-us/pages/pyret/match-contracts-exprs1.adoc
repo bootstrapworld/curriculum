@@ -19,44 +19,44 @@ Can you guess the contract for a function just by seeing how it's used? Try to m
 [cols=">.^10a,^.^2a,1a,^.^1a,<.^15a",options="header",stripes="none",grid="none",frame="none"]
 |===
 | Math Expression                 |   ||       | Contract
-| `(big-star "purple")`           
+| `big-star("purple")`           
 |*1*@show{(if *solutions-mode?* "-B" "")}||*A*    
-| `; message-cost : Number -> Number`
+| `# message-cost {two-colons} Number -> Number`
 
-| `(big-star 25 "gold")`          
+| `big-star(25 "gold")`          
 |*2*@show{(if *solutions-mode?* "-D" "")}||*B*    
-| `; big-star : String -> Image`
+| `# big-star {two-colons} String -> Image`
 
-| `(message-cost 15)`             
+| `message-cost(15)`             
 |*3*@show{(if *solutions-mode?* "-A" "")}||*C*    
-| `; choose-flavor : String String -> String`
+| `# choose-flavor {two-colons} String String -> String`
 
 
-| `(message-cost "where are you?")` 
+| `message-cost("where are you?")` 
 |*4*@show{(if *solutions-mode?* "-E" "")}||*D*    
-| `; big-star : Number String -> Image`
+| `# big-star {two-colons} Number String -> Image`
 
-| `(show-score "Red Sox" 6 "Cardinals" 4)")` 
+| `show-score("Red Sox" 6 "Cardinals" 4)")` 
 |*5*@show{(if *solutions-mode?* "-H" "")}||*E*    
-| `; message-cost : String -> Number`
+| `# message-cost {two-colons} String -> Number`
 
-| `(find-winner "Red Sox" 4 "Cardinals" 6)`
+| `find-winner("Red Sox" 4 "Cardinals" 6)`
 |*6*@show{(if *solutions-mode?* "-G" "")}||*F*    
-| `; prefer-flavor : String String -> Number`
+| `# prefer-flavor {two-colons} String String -> Number`
 
-| `(pick-flavor "vanilla" "oreo" "mint")`
+| `pick-flavor("vanilla" "oreo" "mint")`
 |*7*@show{(if *solutions-mode?* "-I" "")}||*G*    
-| `; find-winner : String Number String Number -> String`
+| `# find-winner {two-colons} String Number String Number -> String`
 
-| `(prefer-flavor "lemon" "lime")`
+| `prefer-flavor("lemon" "lime")`
 |*8*@show{(if *solutions-mode?* "-F" "")}||*H*    
-| `; show-score : String Number String Number -> Image`
+| `# show-score {two-colons} String Number String Number -> Image`
 
 | 
 |||*I*       
-| `; pick-flavor : String String String -> Image`
+| `# pick-flavor {two-colons} String String String -> Image`
 
 |
 |||*J*
-| `; show-score : String String -> Image`
+| `# show-score : String String -> Image`
 |===
