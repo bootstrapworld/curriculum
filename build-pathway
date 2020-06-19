@@ -22,7 +22,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-06-18 # last modified
+LASTMOD=2020-06-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -481,7 +481,7 @@ function resolveabbrevs() {
     -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
     -e 's/<\/code>/<\/tt><\/code>/g' \
     $f
-  if grep -q 'class=\"\(pyret\|racket\)\"' $f; then
+  if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
   fi
   $SED -i \
