@@ -59,10 +59,15 @@ For a textbook-like version of materials similar to these, you may wish to see t
 
 == Warmup
 
-Students should be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-and have their @vocab{Contracts} page ready.
+@ifproglang{wescheme}{ 
+Students should open @link{https://www.wescheme.org, WeScheme} in their browser, and click "Log In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Start a New Program".
+}
+
+@ifproglang{pyret}{
+Students should open @link{https://code.Pyret.org, code.pyret.org (CPO) } in their browser, and click "Sign In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "Programs" page. This page is empty - they don't have any programs yet! Have them click "Open Editor".
+}
+
+They will also want to have their @link{../../back-matter/pages/contracts-1.html, Contracts page} ready, preferably in paper form.
 
 == Contracts @duration{15 minutes}
 
@@ -74,11 +79,11 @@ This activity introduces the notion of @vocab{Contracts}, which are a simple not
 For each input to a function, there is exactly one output
 
 @span{.right}{ @image{images/VerticalLineTest.png, "Source: Wikipedia", 250} }
-Functions are a lot like machines: values go in, something happens, and new values come out. Addition, for example, is like a machine that takes in pairs of numbers and produces a sum. Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast.
+Functions are a lot like machines: values go in, something happens, and new values come out. Let's start with an example of a function we all know: adding two numbers! Addition is like a machine that takes in pairs of numbers and produces a sum. 
 
-We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what goes in and what comes out!
+Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast. We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what goes in and what comes out!
 
-Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output_ for that input.
+Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output__ for the same input. Like any good machine, function machines must be *reliable*. 
 
 In our coffee-maker example, we expect to get the exact same coffee out if we use the exact same beans and water each time. If you put bread in a toaster and got a bagel out, you'd be pretty surprised! __Functions work the same way:__  no matter how many times you plug in the same number, you will _always_ get the same result. And if you don't? *It's not a function!*
 
@@ -87,7 +92,7 @@ We use something called a @vocab{Contract} to keep track of what goes in and out
 @span{.clear}
 
 [.lesson-point]
-The Contract for a function has three parts: the Name, the @vocab{Domain}, and the @vocab{Range}
+The Contract for a function has three parts: the Name of the function, the @vocab{Domain}, and the @vocab{Range}
 
 - The Name is simply how we refer to the function: 
 @ifproglang{wescheme}{`*`, `+`, `sqrt`, etc.}
@@ -95,7 +100,12 @@ The Contract for a function has three parts: the Name, the @vocab{Domain}, and t
 - The @vocab{Domain} tells us what the function "takes in", or _consumes_. These also known as the _arguments_ to the function.
 - The @vocab{Range} tells us what the function "gives back", _produces_.
 
+Memorizing contracts is boring - so let's write them down and refer to them later! At the back of your workbook, you'll find pages with space to write down every contract you see in the course.
+
 [.lesson-instruction]
+- What does Multiplication need as an input? What does it produce?
+- What inputs does the Square Root function consume? What does it produce? 
+- When we Square something, what does the Square function consume and produce?
 @ifproglang{wescheme}{
 - Write the contracts for `+`, `-`, `*`, `/`, `sqr`, and `sqrt` into the Contracts page.
 }
@@ -158,7 +168,7 @@ Students have already seen Number values like Integers, Decimals and Fractions, 
 A String is anything in quotation marks. _Anything_.
 String values evaluate to themselves, the same way Numbers do.
 
-Here are two Circles of Evaluation. One of them is familiar, but the other very different from what students have seen before. Have them identify what looks strange about that circle.
+Here are two Circles of Evaluation. One of them is familiar, but the other very different from what you've seen before. What is strange about that circle?
 
 [cols="1,1", grid="none", frame="none"]
 |===
@@ -173,7 +183,7 @@ Possible responses:
 - We've never seen a function take in three inputs
 - We've never seen a function take in a mix of Numbers and Strings
 
-Have students see if they can figure out the Name and @vocab{Domain} for the function in the second Circle. This is a chance to look for and make use of structure in deciphering a novel expression.
+Can you figure out the Name and @vocab{Domain} for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
 
 - We know the name of the function is `star`, because that's what is at the top of the circle
 - We know it has three things in its Domain
@@ -196,15 +206,9 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 Suppose we had never seen `star` before. How could we figure out how to use it?
 
-- Have students type `star` into the Interactions Area and hit "Enter". What did they get back? What do they think it means? _Students learn that there is a function called_ `star`.
+- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try
-@ifproglang{wescheme}{
-`(star 50)`
-}
-@ifproglang{pyret}{
-`star(50)`
-}
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @ifproglang{wescheme}{ `(star 50)` } @ifproglang{pyret}{ `star(50)` }
 
 - What error did we get? What _hint_ does it give us about how to use this function?
 
