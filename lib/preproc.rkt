@@ -504,6 +504,7 @@
 
 (define (display-title i o)
   (let ([title (string-trim (read-line i))])
+    (set! title (regexp-replace "^=+ *" title ""))
     (set! *page-title* title)
     (when *lesson-plan*
       (call-with-output-file "index-title.txt"
