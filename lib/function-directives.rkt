@@ -392,7 +392,7 @@
                              (highlight-keywords body-line) *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
-  (when (null? body) (set! body ""))
+  (when (or (not body) (null? body)) (set! body ""))
   (if (not (string? body))
       "Don't care"
       (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]
