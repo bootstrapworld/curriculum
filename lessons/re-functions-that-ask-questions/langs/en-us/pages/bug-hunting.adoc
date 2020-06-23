@@ -1,0 +1,64 @@
+= Syntax and Style Bug Hunting: Piecewise Edition
+
+[cols=".^1a,.<9a,.<9a",stripes="none"]
+|===
+
+|
+| Buggy Code
+| Correct Code / Explanation
+
+|*1*
+| 
+----
+fun piecewisefun(n):
+ if (n > 0): n
+ else: 0
+----
+|
+
+|*2*
+|
+----
+fun cost(topping):
+ if string-equal(topping,
+"pepperoni"): 10.50
+ else string-equal(topping,
+"cheese"): 9.00
+ else string-equal(topping,
+"chicken"): 11.25
+ else string-equal(topping,
+"broccoli"): 10.25
+ else: "That's not on the menu!"
+ end
+end
+----
+|
+
+|*3*
+|
+----
+fun absolute-value(a b):
+ if a > b: a - b
+ b - a
+ end
+end
+----
+|
+
+|*4*
+|
+----
+fun best-function(f):
+ if string-equal(f, “blue”):
+ “you win!”
+ else if string-equal(f, “blue”):
+ “you lose!”
+ else if string-equal(f, “red”):
+ “Try again!”
+ else: “Invalid entry!”
+ end
+end
+----
+|
+
+|===
