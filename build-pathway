@@ -22,7 +22,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-06-19 # last modified
+LASTMOD=2020-06-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1452,7 +1452,7 @@ function buildpathway() {
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
-          echo --lowquality -q lib/$ABYSS.html $ABYSS.pdf >> $WKH2P_BATCH_FILE
+          echo --lowquality -q ../../lib/$ABYSS.html ../../lib/$ABYSS.pdf >> $WKH2P_BATCH_FILE
         fi
         cd ../courses/$PATHWAY
 

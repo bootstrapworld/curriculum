@@ -79,7 +79,7 @@
 
         (unless (file-exists? docfile)
           (printf "WARNING: Page ~s not found; subbing blank page\n" docfile)
-          (set! docfile "this-page-intentionally-left-blank.pdf"))
+          (set! docfile "../../lib/this-page-intentionally-left-blank.pdf"))
 
         (system* *pdftk*
                  (format "Q=~a" docfile)
