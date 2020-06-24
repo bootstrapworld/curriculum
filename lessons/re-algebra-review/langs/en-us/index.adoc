@@ -1,4 +1,4 @@
-= Everything You Learned in Bootstrap:Algebra
+= Reviewing the Basics
 
 @lesson-description{While learning a new programming language,
 students review the major concepts and material from
@@ -20,9 +20,7 @@ definitions, and the Design Recipe.}
 
 | Preparation
 - Computer for each student (or pair), running the Pyret Editor
-- The
-  https://code.pyret.org/editor#share=0B9rKDmABYlJVdHZESmZ6ZnRmdXc[Review
-  file] preloaded on students’ machines.
+- The @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVdHZESmZ6ZnRmdXc,Review file} preloaded on students’ machines.
 - Student link:{pathwayrootdir}/workbook/workbook.pdf[workbook]
   folders with names on covers, and something to write with
 - The
@@ -34,13 +32,14 @@ definitions, and the Design Recipe.}
 == Introduction to Pyret @duration{30 minutes}
 
 === Overview
+As an advanced Bootstrap module, Reactive pretty much _requires_ that students be comfortable and confident with defining values, applying functions, using the Design Recipe, and reading contracts. This lesson is all about review.
 
 === Launch
 
 Welcome back to Bootstrap! In Bootstrap:Algebra, you used a @vocab{programming language} called Racket to make your video games. We chose this language because it behaves like algebra, but there are many different languages you could use to make video games. In Bootstrap:Reactive, you’re going to learn a new language, called Pyret. Pyret has many of the features of Racket, but with a different @vocab{syntax} that looks more like popular languages such as Python. This unit will help you make the switch to Pyret syntax in no time!
 
 
-Open your workbook to Page 1. Here we have a table, with examples of value definitions in Racket and Pyret. On the left-hand column, we’ve defined values in Racket, and on the right we have the same values defined in Pyret. For instance, the first line on the left-hand side says `(define AGE 14)`. Directly to the right, we have the Pyret @vocab{syntax}: `AGE = 14`, which does the same thing: defines a variable called AGE, which has a value of 14. 
+Open your workbook to @workbook-link{pages/review-1.adoc}. Here we have a table, with examples of value definitions in Racket and Pyret. On the left-hand column, we’ve defined values in Racket, and on the right we have the same values defined in Pyret. For instance, the first line on the left-hand side says `(define AGE 14)`. Directly to the right, we have the Pyret @vocab{syntax}: `AGE = 14`, which does the same thing: defines a variable called AGE, which has a value of 14. 
 
 === Investigate
 [.lesson-instruction]
@@ -53,11 +52,11 @@ Take a look at the other values defined here for Numbers, Strings, Images, and B
 - one more Image
 --
 
-The last row of the table on Page 2 shows you the same function definition in Racket and Pyret. We’ll go into more detail on functions soon.
+The last row of the table on @workbook-link{pages/review-2.adoc} shows you the same function definition in Racket and Pyret. We’ll go into more detail on functions soon.
 
-Open the Review file in a new window. The first thing you’ll notice is that we’re no longer using WeScheme to edit our programs, although the Pyret editor behaves very similarly. The definitions area (where you write code you want to save for later) is on the left side of the screen, and the interactions area (where you write code you just want to test out once, like scratch paper) is on the right. The top of the editor has space to write a name for your program, and the "Run" button at the top right will clear the interactions area and run whatever program is written in the definitions area.
+Open the @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVdHZESmZ6ZnRmdXc, Review file} in a new window. The first thing you’ll notice is that we’re no longer using WeScheme to edit our programs, although the Pyret editor behaves very similarly. The definitions area (where you write code you want to save for later) is on the left side of the screen, and the interactions area (where you write code you just want to test out once, like scratch paper) is on the right. The top of the editor has space to write a name for your program, and the "Run" button at the top right will clear the interactions area and run whatever program is written in the definitions area.
 
-The first line of code here will be new to you: Since Pyret has a lot more functions than we used in Bootstrap:Algebra in Racket, to keep things simple we’ve grouped some of these functions into @vocab{libraries}. The line `include image` tells Pyret to load all of the functions from the image library for use in this file, so we can use familiar functions like `star`, `triangle`, `rectangle`, `scale`, `rotate`, and more.
+The first line of code here will be new to you: Since Pyret has a lot more functions than you've seen in other Bootstrap class, to keep things simple we’ve grouped some of these functions into @vocab{libraries}. The line `include image` tells Pyret to load all of the functions from the image library for use in this file, so we can use familiar functions like `star`, `triangle`, `rectangle`, `scale`, `rotate`, and more.
 
 [.lesson-instruction]
 --
@@ -84,7 +83,7 @@ Remind students about the importance of good variable names: they make code more
 As you can see, Pyret uses the same data types that we used in Racket: Numbers, Strings, Images, and Booleans are used in Pyret, and look and behave in the same way.
 
 [.lesson-instruction]
-In your review file, define the new Numbers, Strings, Images, and Boolean you wrote in your workbook on Page 1.
+In your review file, define the new Numbers, Strings, Images, and Boolean you wrote in your workbook on @link{pages/review-1.adoc}.
 
 Now we have values, and we know how to define shortcuts for them. There are also plenty of built-in functions, which let us play around with these values.
 
@@ -97,8 +96,6 @@ The spaces matter because Pyret allow various non-alphabetic characters to be us
 How is this similar to what you've seen before? How is it different?
 
 == Contracts @duration{10 minutes}
-
-=== Overview
 
 === Launch
 It’s important to keep track of how functions work, and Bootstrap:Algebra introduced the idea of @vocab{Contracts}. The contract for the star function is shown below.
@@ -118,6 +115,8 @@ Every contract has three parts: Name, Domain and Range!
 
 A contract is a note we write to ourselves about how to use the function. Just as in Bootstrap:Algebra, it will be helpful to keep track of the contracts for each function you learn about. The last page in your workbook has a table labeled "`Contracts`", where you can (and should!) copy down each contract as you learn it. Contracts in Pyret are just as important as they are in Racket, and are written the same way. You write contracts as comments: pieces of text for humans only, which are ignored by the computer. In Racket we used a ; (semicolon) before Contracts, but in Pyret, just put a `#` (pound sign, or octothorpe) before a line of text to turn it into a comment!
 
+=== Investigate
+
 [.lesson-instruction]
 --
 The Contract for `+` is shown below.  
@@ -125,8 +124,6 @@ The Contract for `+` is shown below.
 ----
 #  +  :: Number, Number -> Number
 ----
-
-=== Investigate
 Write down the Contracts for `*`, `-`, `/` and `num-sqrt` in your
 Contracts page. (You know `num-sqrt` as the `sqrt` function in
 Racket!)
@@ -147,8 +144,6 @@ Below are some Pyret expressions using functions you used in Bootstrap:Algebra. 
 For even more practice, have students write contracts for various word problems. This is a great time to remind them about connections to algebra and applying skills learned in Bootstrap to their math classes.
 
 == The Design Recipe @duration{25 minutes}
-
-=== Overview
 
 === Launch
 
@@ -203,7 +198,7 @@ Make sure students are writing Pyret code for the results of their `examples`. d
 
 === Investigate
 [.lesson-instruction]
-At the bottom of Page 3 in your workbook, write the contract and two examples for a function called `triple`, which takes in a number as its input and multiplies it by 3.
+At the bottom of @link{pages/fast-funs-double.adoc} in your workbook, write the contract and two examples for a function called `triple`, which takes in a number as its input and multiplies it by 3.
 
 Now look at your two examples. What is the only thing that changes from one to the other?
 
@@ -230,7 +225,7 @@ Now write the function header and body for triple. Don’t forget to replace the
 Just as writing a Contract helps us write examples, writing examples makes it easier to write the function definition: circling what changes between the examples makes it obvious that the changeable thing is where we need to use a variable in our function. You will want to explicitly connect each step in the Design Recipe to every other step. Ask students to justify each part of their Contract by referring back to the Word Problem, to justify each step of their examples by referring back to their Contract, and to justify each step of the definition by referring to their Contract and Examples. The same variable name can be used in multiple functions, just as in math (where many functions use x as the variable name, for example). This activity can be done as a team competition: teams have one minute to write the contract and two examples for triple, and another minute for the function header and body. Assign points to the teams that complete each function. Make sure students fill out the ENTIRE contract, with two examples, before they circle what changes and move on to the function body. Build these good habits early in the course!
 
 === Investigate
-Try using the Design Recipe to solve the following word problems (in the "`Fast Function`" areas starting on @workbook-link{pages/fast-funs-1.adoc} of your workbook):
+Try using the Design Recipe to solve the following word problems (in the "`Fast Function`" areas starting on @workbook-link{pages/fast-funs.adoc} of your workbook):
 
 - Write a function `plus1`, that takes in a number and adds one to it
 - Write a function `mystery`, that takes in a number and subtracts 4
@@ -238,7 +233,7 @@ Try using the Design Recipe to solve the following word problems (in the "`Fast 
 
 Have a student act out one of the functions they’ve defined. They will take on the name and behavior of that function (plus1, red-spot, etc.) and can be used by the class. Remind the class that in order to use the function they must practice calling it by name with some input(s).
 
-For some extra practice with Pyret syntax, turn to Page 6 in your workbook and see if you can spot the bugs in the Pyret code in the left column. Circle each error (some sections might have more than one!), and then write the correct code in the right column.
+For some extra practice with Pyret syntax, turn to @link{pages/bug-hunting.adoc} in your workbook and see if you can spot the bugs in the Pyret code in the left column. Circle each error (some sections might have more than one!), and then write the correct code in the right column.
 
 Students will make syntax errors when learning any new language. This workbook page is intended to give them practice finding syntax bugs on paper first, to help identify the same bugs while typing later on.
 
@@ -312,4 +307,4 @@ In the upcoming lessons, students will be creating their own scenes from scratch
 
 You just reviewed the first half of the entire Bootstrap:Algebra course in one unit, and learned how to write material from Bootstrap:Algebra in the syntax of a new language! Throughout Bootstrap:Reactive you’ll use all the concepts that you learned in Bootstrap:Algebra, as well as brand new data types, functions, and programming concepts. Of course, you’ll do it all with the help of our old friend the Design Recipe, which will help you write your own functions for your own videogame! Since this is Bootstrap:Reactive, the games you will be able to create will be even more interactive and advanced than in Bootstrap:Algebra. There’s a lot to learn... onward to Unit 2!
 
-If time permits, have students practice solving other algebra word problems using the Fast Functions sections on Page 4 and Page 4 in their workbook.
+If time permits, have students practice solving other algebra word problems using the Fast Functions sections on @link{pages/fast-funs.adoc, Fast Functions} in their workbook.
