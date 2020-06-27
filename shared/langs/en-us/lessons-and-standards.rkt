@@ -166,7 +166,7 @@
         "HS-SEP4-3" 
         "2-DA-08" 
         "2-DA-09"
-        "OK.PA.2.2"
+        "OK.PA.A.2.2"
         "OK.L1.IC.C.02")
     ("ds-grouped-samples" 
         "8.SP.A.1" 
@@ -175,7 +175,7 @@
         "2-DA-09" 
         "2-AP-11" 
         "P3"
-        "OK.PA.2.2"
+        "OK.PA.A.2.2"
         "OK.L1.IC.C.02")
     ("ds-choosing-your-dataset" 
         "HS-SEP1-3" 
