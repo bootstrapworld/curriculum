@@ -514,7 +514,18 @@
     (display #\= o) (display #\space o)
     (display title o)
     (newline o)
-    (newline o)))
+    (newline o)
+    (when (and *lesson-subdir* (not *lesson-plan*))
+      (let ([lesson-title-file
+              (format "~a/~a/index-title.txt" *pathway-root-dir* *lesson*)]
+            [lesson-title *lesson*])
+        (when (file-exists? lesson-title-file)
+          (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+        (display
+          (enclose-span ".brown-web-page-only"
+            (format
+              "Referenced from lesson link:{pathwayrootdir}/~a/index.shtml[~a]\n\n"
+              *lesson* lesson-title)) o)))))
 
 (define (display-lesson-description desc o)
   (call-with-output-file "index-desc.txt"
