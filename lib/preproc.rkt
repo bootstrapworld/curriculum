@@ -522,7 +522,7 @@
         (when (file-exists? lesson-title-file)
           (set! lesson-title (call-with-input-file lesson-title-file read-line)))
         (display
-          (enclose-span ".brown-web-page-only"
+          (enclose-span ".web-page-only"
             (format
               "Referenced from lesson link:{pathwayrootdir}/~a/index.shtml[~a]\n\n"
               *lesson* lesson-title)) o)))))
