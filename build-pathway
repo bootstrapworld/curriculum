@@ -22,7 +22,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-01 # last modified
+LASTMOD=2020-07-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -173,6 +173,7 @@ function insertgdrivesave() {
   if test -f $f_head.adoc; then
     pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
     pageTitle=$(echo $pageTitle|$SED -e 's/[“”]/\\\\"/g')
+    pageTitle=$(echo $pageTitle|$SED -e 's/\//\\\//g')
   fi
   if test ! "$pageTitle"; then
     pageTitle=$f_head
