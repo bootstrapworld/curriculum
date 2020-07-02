@@ -742,8 +742,6 @@ function recursiveadoc() {
   local oldSOLUTION="$SOLUTION"
   local oldOTHERDIR="$OTHERDIR"
 
-  #echo recursiveadoc of $dir
-
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
   cd "$dir"
@@ -780,10 +778,12 @@ function recursiveadoc() {
   fi
 
   for f in *.adoc; do
-    if test $NOPARALLEL; then
-      processadoc "$f"
-    else
-      processadoc "$f" &
+    if test -f "$f"; then
+      if test $NOPARALLEL; then
+        processadoc "$f"
+      else
+        processadoc "$f" &
+      fi
     fi
   done
   if test ! $NOPARALLEL; then
@@ -1261,6 +1261,9 @@ function buildteacherresource() {
 function batchhtmltopdf() {
   echo building all PDF files
   rm -f $WKH2P_BATCH_BASE-split*
+  if test ! -f $WKH2P_BATCH_BASE.txt; then
+    echo $WKH2P_BATCH_BASE.txt not found!
+  fi
   split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
