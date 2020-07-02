@@ -1261,13 +1261,12 @@ function buildteacherresource() {
 function batchhtmltopdf() {
   echo building all PDF files
   rm -f $WKH2P_BATCH_BASE-split*
-  if test ! -f $WKH2P_BATCH_BASE.txt; then
-    echo $WKH2P_BATCH_BASE.txt not found!
-  fi
   split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
-    wkhtmltopdf --read-args-from-stdin < $f &
+    if test -f "$f"; then
+      wkhtmltopdf --read-args-from-stdin < $f &
+    fi
   done
   wait
   rm -f $WKH2P_BATCH_BASE-split*
