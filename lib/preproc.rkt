@@ -108,6 +108,12 @@
 
 (define *exercises-done* '())
 
+(define (errmessage-context)
+  (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
+        [*lesson-plan* (format "Lesson plan ~a" *lesson*)]
+        [*lesson-subdir* (format "Page ~a" *lesson-subdir*)]
+        [else ""]))
+
 (define read-group (*make-read-group (lambda z (apply code z))
                                      (lambda () *in-file*)))
 
@@ -208,7 +214,7 @@
                            (cons (list std sublist-items c dict
                                        (box (list (list lesson-title lesson pwy))))
                                  *standards-met*)))]))]
-          [else (printf "Standard ~a not found~%" x)]
+          [else (printf "WARNING: ~a: Standard ~a not found\n" (errmessage-context) x)]
           )))
 
 (define (box-add-new! v bx)
@@ -290,7 +296,7 @@
   ;(printf "doing display-standards-row\n")
   (cond [(null? *standards-met*)
          (when *lesson-plan*
-           (printf "WARNING: Lesson ~a: No standards specified\n" *lesson-subdir*))]
+           (printf "WARNING: ~a: No standards specified\n" (errmessage-context)))]
         [else
           (display "| " o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -449,6 +455,13 @@
            (display f *internal-links-port*)
            (newline *internal-links-port*)])))
 
+(define (abbreviated-index-page? f)
+  (and (directory-exists? f)
+       (ormap (lambda (x) (file-exists? (build-path f x)))
+              (list "index.html"
+                    "index.shtml"
+                    "index.asciidoc"))))
+
 (define (make-link f link-text #:include? [include? #f])
   (cond [(not include?)
 
@@ -459,9 +472,13 @@
                          [f.pdf (path-replace-extension f ".pdf")])
                      (cond [(file-exists? f.html) (set! f f.html)]
                            [(file-exists? f.pdf) (set! f f.pdf)])))
-                 (unless (file-exists? f)
+                 (unless (or (file-exists? f)
+                             (string=? f "pathway-standards.shtml")
+                             (abbreviated-index-page? f))
                    (check-link f)
-                   (printf "WARNING: @link refers to nonexistent file ~a\n" f))])
+                   (printf "WARNING: ~a: @link refers to nonexistent file ~a\n"
+                           (errmessage-context)
+                           f))])
 
          (format "link:pass:[~a][~a~a]" f link-text
                  (if (or *lesson-plan* *teacher-resources*)
@@ -1146,6 +1163,7 @@
 
 (define (create-standards-file file *narrative* *lesson* *standards-met* *dictionaries-represented*)
   ;(printf "create-standards-file ~s ~s ~s ~s\n" *narrative* *lesson* *standards-met* *dictionaries-represented*)
+  ;(printf "create-standards-file ~s ~s\n" *narrative* *lesson*)
   (when *narrative*
     (print-menubar file))
   (call-with-output-file (string-append file ".asc")

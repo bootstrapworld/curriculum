@@ -695,7 +695,9 @@ function processadoc() {
       if test $f -nt $fhtml; then DOIT=1; fi
     fi
     if test $DOIT; then
-      echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
+      #echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
+      #echo -n building $PATHWAY/\*\*/$LESSONSUBDIR/$f " "
+      echo -n .
       rm -f $fbase-comment.txt
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
@@ -933,7 +935,8 @@ function buildlessonplan() {
     #  cp -p $f index.asciidoc
     #done
     if test index.asciidoc -nt index.shtml; then
-      echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
+      #echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
+      echo -n .
       rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
@@ -1068,7 +1071,8 @@ function buildpathwaynarrative() {
       cp -p $f index.asciidoc
     done
     if test index.asciidoc -nt index.shtml; then
-      echo building pathway narrative: $PATHWAY "→" *.adoc
+      #echo building pathway narrative: $PATHWAY "→" *.adoc
+      echo -n .
       export NARRATIVE=1
       rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
