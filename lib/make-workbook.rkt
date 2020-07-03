@@ -78,7 +78,7 @@
           (set! docfile (path-replace-extension docfile ".pdf")))
 
         (unless (file-exists? docfile)
-          (printf "WARNING: Page ~s not found; subbing blank page\n" docfile)
+          (printf "WARNING: Page ~s not found; subbing blank page\n\n" docfile)
           (set! docfile "../../lib/this-page-intentionally-left-blank.pdf"))
 
         (system* *pdftk*

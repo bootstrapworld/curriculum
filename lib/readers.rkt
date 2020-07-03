@@ -67,7 +67,7 @@
                                        (loop (cons c r) #f (- nesting 1) #f #f))]
                                   [else (loop (cons c r) #f nesting #f #f)])))]
                        [else
-                         (printf "WARNING: Ill-formed metadata directive in ~a/~a: @~a\n"
+                         (printf "WARNING: Ill-formed metadata directive in ~a/~a: @~a\n\n"
                                  (current-directory)
                                  (in-file) directive)
                          ""])))])

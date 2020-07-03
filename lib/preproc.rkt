@@ -214,7 +214,7 @@
                            (cons (list std sublist-items c dict
                                        (box (list (list lesson-title lesson pwy))))
                                  *standards-met*)))]))]
-          [else (printf "WARNING: ~a: Standard ~a not found\n" (errmessage-context) x)]
+          [else (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) x)]
           )))
 
 (define (box-add-new! v bx)
@@ -286,7 +286,7 @@
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
-                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n" *lesson-subdir* lesson)])
+                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
                    (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]" lesson lesson-title)))
                other-lessons)
           ", ")) o)
@@ -296,7 +296,7 @@
   ;(printf "doing display-standards-row\n")
   (cond [(null? *standards-met*)
          (when *lesson-plan*
-           (printf "WARNING: ~a: No standards specified\n" (errmessage-context)))]
+           (printf "WARNING: ~a: No standards specified\n\n" (errmessage-context)))]
         [else
           (display "| " o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -365,7 +365,7 @@
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n" lesson dirve f))
+      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson dirve f))
     (when exercise?
       (let ([f (format "../~a" g-in-pages)])
         (unless (ormap (lambda (e) (and (equal? (car e) lesson)
@@ -380,7 +380,7 @@
                   (unless exercise?
                     (unless pagenum
                       (unless error-cascade?
-                        (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n"
+                        (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
                                 lesson dirve f))))
                   (cond [pagenum
                           (let ([x (format "Page ~a" pagenum)])
@@ -476,7 +476,7 @@
                              (string=? f "pathway-standards.shtml")
                              (abbreviated-index-page? f))
                    (check-link f)
-                   (printf "WARNING: ~a: @link refers to nonexistent file ~a\n"
+                   (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
                            (errmessage-context)
                            f))])
 
@@ -726,18 +726,18 @@
                           (let* ([arg (read-group i directive)]
                                  [s (assoc-glossary arg *glossary-list*)])
                             (when (string=? arg "")
-                              (printf "WARNING: Directive @vocab has ill-formed argument~%"))
+                              (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
                             (display (enclose-span ".vocab" arg) o)
                             (cond [s (unless (member s *glossary-items*)
                                        (set! *glossary-items* (cons s *glossary-items*)))]
                                   [else
                                     (unless (member arg *missing-glossary-items*)
                                       (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
-                                    (printf "WARNING: Item ~s not found in glossary~%"
+                                    (printf "WARNING: Item ~s not found in glossary\n\n"
                                                 arg)]))]
                          [(string=? directive "std")
                           (let ([args (read-commaed-group i directive)])
-                            (printf "WARNING: Directive @std is obsolete\n")
+                            (printf "WARNING: Directive @std is obsolete\n\n")
                             )]
                          [(string=? directive "prereqs-stds")
                           (display-prereqs-row (read-commaed-group i directive) o)
@@ -782,7 +782,7 @@
                                        [else
                                          ;TODO should these just be warnings
                                          ;with the @workbook-link converted to plain @link ?
-                                         (printf "WARNING: Incorrect @workbook-link ~a\n" page)]))]
+                                         (printf "WARNING: Incorrect @workbook-link ~a\n\n" page)]))]
                               [(3)
                                (let ([second-compt (cadr page-compts)]
                                      [third-compt (caddr page-compts)])
@@ -793,9 +793,9 @@
                                                                      third-compt link-text
                                                                      #:exercise? exercise?) o)]
                                        [else
-                                         (printf "WARNING: Incorrect² @workbook-link ~a\n" page)]))]
+                                         (printf "WARNING: Incorrect² @workbook-link ~a\n\n" page)]))]
                               [else
-                                (printf "WARNING: Incorrect³  @workbook-link ~a\n" page)]))]
+                                (printf "WARNING: Incorrect³  @workbook-link ~a\n\n" page)]))]
                          [(or (string=? directive "worksheet-link")
                               (string=? directive "worksheet-include")
                               (string=? directive "exercise-link"))
@@ -898,7 +898,7 @@
                                          (expand-directives i o)
                                          ))))))]
                          [else
-                           (printf "WARNING: Unrecognized directive @~a~%" directive)
+                           (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                            (display c o) (display directive o)
                            #f]))]
                 [(and (or *lesson*

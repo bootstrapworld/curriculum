@@ -9,7 +9,7 @@
         '())))
 
 (for-each (lambda (gi)
-            (printf "WARNING: Item ~s not found in glossary~%"
+            (printf "WARNING: Item ~s not found in glossary\n\n"
                     gi))
           *missing-glossary-items*)
 
