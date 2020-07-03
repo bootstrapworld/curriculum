@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-02 # last modified
+LASTMOD=2020-07-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -698,7 +698,9 @@ function processadoc() {
     if test $DOIT; then
       #echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
       #echo -n building $PATHWAY/\*\*/$LESSONSUBDIR/$f " "
-      echo -n .
+      #echo -n .
+      echo -e '\e[1A\e[Kbuilding' $PATHWAY/\*\*/$LESSONSUBDIR/$f
+      #echo -e '\e[1A\e[Kbuilding' $f
       rm -f $fbase-comment.txt
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
@@ -937,7 +939,8 @@ function buildlessonplan() {
     #done
     if test index.asciidoc -nt index.shtml; then
       #echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
-      echo -n .
+      #echo -n .
+      echo -e '\e[1A\e[Kbuilding' lesson plan: $L
       rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
@@ -1073,7 +1076,8 @@ function buildpathwaynarrative() {
     done
     if test index.asciidoc -nt index.shtml; then
       #echo building pathway narrative: $PATHWAY "→" *.adoc
-      echo -n .
+      #echo -n .
+      echo -e '\e[1A\e[Kbuilding' pathway narrative: $PATHWAY
       export NARRATIVE=1
       rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
@@ -1242,7 +1246,7 @@ function buildteacherresource() {
       cp -p $f index.asciidoc
     done
     if test index.asciidoc -nt index.shtml; then
-      echo building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
+      echo -e '\e[1A\e[Kbuilding' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       rm -f index-comment.txt
       $PROGDIR/adoc-preproc.rkt index.asciidoc
