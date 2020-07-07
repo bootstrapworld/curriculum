@@ -1,26 +1,23 @@
 = Matching Expressions and Contracts
 
-Read the following 5 contracts carefully:
+_Match_ the contract (left) with the expression described by the function being used (right). 
 
-----
-A.  make-id :: (name :: String, age :: Number) -> Image
-B.  phone-bill :: (minutes :: Number, texts :: Number) -> Number
-C.  phone-bill :: (minutes :: Number) -> Number
-D.  make-id :: (first :: String, last :: String) -> Image
-E.  make-id :: (first :: String, last :: String, age :: Number) -> Image
-----
-
-For each of the expressions below, indicate which contract (A–E)
-describes the function being used.
-
-[cols="^1a,20a,1a",options="header"]
+@vspace{1ex}
+[cols=">.^15a,^.^1a,2,^.^1a,.^10a",stripes="none",grid="none",frame="none"]
 |===
-| | Expression                        | Contract
-|1| `make-id("Hannah", "Smith")`      |
-|2| `make-id("George", 17)`           |
-|3| `phone-bill(31, 287)`             |
-|4| `make-id("Jessica", "Jones", 32)` |
-|5| `phone-bill(55)`                  |
+| make-id +::+ (name +::+ String, age +::+ Number) -> Image
+| *1* || *A* |`make-id("Hannah", "Smith")`
+@vspace{1ex}
+| phone-bill +::+ (minutes +::+ Number, texts +::+ Number) -> Number
+| *2*||*B*| `make-id("George", 17)`           
+@vspace{1ex}
+| phone-bill +::+ (minutes +::+ Number) -> Number
+|*3*||*C* | `phone-bill(31, 287)` 
+@vspace{1ex}
+| make-id +::+ (first +::+ String, last +::+ String) -> Image
+|*4*||*D* | `make-id("Jessica", "Jones", 32)`
+@vspace{1ex}
+| make-id +::+ (first +::+ String, last +::+ String, age +::+ Number) -> Image
+|*5*||*E* | `phone-bill(55)`
+
 |===
-
-
