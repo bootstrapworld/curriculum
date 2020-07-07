@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-03 # last modified
+LASTMOD=2020-07-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -482,7 +482,7 @@ function resolveabbrevs() {
     CODELANG=racket
   fi
   $SED -i \
-    -e 's/<pre>/<pre><span class="thinnegspace"><\/span><tt class="'$CODELANG'">/g' \
+    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
     -e 's/<\/pre>/<\/tt><\/pre>/g' \
     -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
     -e 's/<\/code>/<\/tt><\/code>/g' \
