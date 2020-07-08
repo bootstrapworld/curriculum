@@ -1,26 +1,25 @@
 = Matching Expressions and Contracts
 
-Read the following 5 contracts carefully:
 
-----
-A.  is-capital :: (city :: String, state :: String) -> Boolean
-B.  show-score :: (team1 :: String, team2 :: String) -> Number
-C.  is-capital :: (city :: String, pop :: Number) -> Boolean
-D.  show-score :: (team :: String, score :: Number) -> Image
-E.  is-capital :: (city :: String) -> Boolean
-----
+_Match_ the contract (left) with the expression described by the function being used (right). 
 
-For each of the expressions below, indicate which contract (A–E)
-describes the function being used.
-
-[cols="1a,9a,3a",options="header"]
+@vspace{1ex}
+[cols=">.^15a,^.^1a,2,^.^1a,.^10a",stripes="none",grid="none",frame="none", options="header"]
 |===
-|  | Expression | Contract
-|1.| `show-score("Vikings", 41)` |
-|2.| `is-capital("Philadelphia")` |
-|3.| `is-capital("Philadelphia", "PA")` |
-|4.| `show-score("Seahawks", "Ravens")` |
-|5.| `is-capital("Austin", 94800)` |
+|  Contract|  || |Expression
+| is-capital +::+ (city +::+ String, state +::+ String) -> Boolean
+| *1* || *A* |`show-score("Vikings", 41)`
+@vspace{1ex}
+| show-score +::+ (team1 +::+ String, team2 +::+ String) -> Number
+| *2*||*B*| `is-capital("Philadelphia")`           
+@vspace{1ex}
+| is-capital +::+ (city +::+ String, pop +::+ Number) -> Boolean
+|*3*||*C* | `is-capital("Philadelphia", "PA")` 
+@vspace{1ex}
+| show-score +::+ (team +::+ String, score +::+ Number) -> Image
+|*4*||*D* | `show-score("Seahawks", "Ravens")`
+@vspace{1ex}
+| is-capital +::+ (city +::+ String) -> Boolean
+|*5*||*E* | `is-capital("Austin", 94800)`
+
 |===
-
-
