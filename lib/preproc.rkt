@@ -542,7 +542,7 @@
           (display
             (enclose-span ".web-page-only"
               (format
-                "Referenced from lesson link:{pathwayrootdir}/~a/index.shtml[~a]\n\n"
+                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a]\n\n"
                 *lesson* lesson-title)) o))))))
 
 (define (display-lesson-description desc o)
