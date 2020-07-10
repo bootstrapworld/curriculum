@@ -100,7 +100,7 @@ when it prints out the glossary for a particular unit
     (("operator" "operators") "a symbol that manipulates two Numbers and produces a result")
     (("order" "orders" "ordering") "an arrangement of data according to some pattern")
     (("outlier" "outliers") "a data point that is unusually far above or below most of the others")
-    ("piecewise function" "a function that computes different expressions based on its input")
+    (("piecewise function" "piecewise functions") "a function that computes different expressions based on its input")
     (("pie chart" "pie charts") "a display that uses areas of a circular pie's slices to show percentages in each category")
     (("pixel" "pixels") "the smallest unit that makes up a digital image. The more pixels, the more detailed an image or video can appear.")
     ("positive correlation" "relationship in which one variable increases as the other increases, and vice versa")
