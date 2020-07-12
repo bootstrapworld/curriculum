@@ -1,31 +1,83 @@
 @import url("./asciidoctor.css");
-@import url("./bootstrap.css");
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
-/** Override AsciiDoctor CSS defaults **/
+/**************************************************************
+*  OK TO DELETE?
+#lesson-list div.title{
+  font-family: inherit;
+  font-style: inherit;
+  font-size: larger;
+  color: inherit;
+  font-weight: bold;
+}
+
+.lesson-table thead {
+  background-color: #93c47d;
+}
+
+.physics-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+.physics-table thead {
+  background-color: #ffd966;
+}
+.lh-style li:not(:last-of-type) p {
+  line-height: 6ex;
+}
+
+.invisible {
+  visibility: hidden;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown:hover .dropdownContent {
+  display: block;
+  z-index: 1;
+}
+
+.floatRight {
+  float: right;
+}
+.svg-polyline {
+  stroke: black;
+  fill: none;
+}
+.blank { color: rgba(0,0,0,0); }
+*/
+
+/***************************************************************************
+*  HARDLY USED!
+.sidebarblock {
+  background-color: #efefef;
+  border-width: thick;
+}
+.links {
+  float: right;
+}
+*/
+
+/************************************************************************************
+* OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
+*/
 body{
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   color: #75328A;
 }
 
-.section-link a {
-  margin-left:    -1.5em;
-  margin-right:   0.5em;
-  vertical-align: middle;
-  font-size:      14pt;
-}
-
-.old-materials p { width: 100%; background: #75328AAA; color: black; text-align: center; }
-
-/* Hide anything that we only want seen on Google drive */
-.gdrive-only {display: none; visibility: hidden;}
-
-/* This might be the source of a bunch of bugs - why negative spacing?? */
-h1, h2, p, td.content, span.alt{ letter-spacing:-.01em; }
-
-#header, #content {margin: 0 !important; }
-
 p {margin: 0px; font-size: inherit; }
+code{ display: inline-block; }
 
 h1 {
   font-size: 32px;
@@ -34,21 +86,49 @@ h1 {
 }
 h2 { margin: 1ex 0px; font-family: 'Lato', Arial, Helvetica, sans-serif; }
 
-.dr-title { font-size: 24pt; }
+a[href] { color: #F4AB3A; text-decoration: none; }
+
+/* The footer at the bottom of every page */
+.acknowledgment {
+  margin-top: 35px;
+  border-top: dashed 2px black;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  font-size: 80%;
+  font-style: italic;
+}
+.acknowledgment img {
+  width: 94px;
+  height: 37px;
+  float: right;
+}
+#footer { background: rgba(0,0,0,.5); padding: 0px; }
+
+/* Hide anything that we only want seen on Google drive */
+.gdrive-only {display: none; visibility: hidden;}
+
+#header, #content {margin: 0 !important; }
+
+/* Another asciidoc setting we need to undo */
+td.tableblock>.content { margin-bottom: 0px; }
+tr th.tableblock code, td.tableblock code { background: none; }
+td.tableblock pre { background: none !important; }
+tr th.tableblock { background: #cccccc; padding: .25em .5em; }
 
 .ulist p {margin: 0px;}
 
-a[href] {
-  color: #F4AB3A;
-  text-decoration: none;
-}
-
-td.tableblock>.content { margin-bottom: 0px; }
-
 .left  { text-align: left!important; }
 .right { text-align: right!important; }
+.center, .centered-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important;
+  padding-top: 2ex;
+  padding-bottom: 2ex;
+}
 
-/*  RULES FOR GLOSSARY ITEMS  */
+/*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
 .glossary {
   float: left;
   margin-bottom: 20px;
@@ -67,96 +147,173 @@ td.tableblock>.content { margin-bottom: 0px; }
 }
 .glossary dd::after{content: '\A'; white-space: pre; }
 
-.vocab { font-weight: bold; }
+.vocab { font-weight: bold; font-style: italic; color: #75328A; }
 
-/* RULES FOR THE NARRATIVE PAGE */
+.sectionbreak {
+  display: block;
+  width: auto;
+  border-bottom: solid 3px black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.tooltip { position: relative; }
+.tooltip .tooltiptext {
+  visibility: hidden;
+  min-width: 120px;
+  max-width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 5ex;
+  left: 5ex;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.alignedStandards { display: none; }
+.standard-menu-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.standard-menu-container div:nth-child(1) { width: 75%; }
+.standard-menu-container div:nth-child(2) { width: 25%;}
+
+.quad   { display: inline-block; min-height: 15px; }
+.vspace { display: inline-block; }
+
+.fitb,
+.fitbruby,
+.blankline,
+.vskip {
+  display: inline-block;
+  min-height: 15px;
+  min-width: 5em;
+  text-align: center;
+  line-height: 1.2;
+  border-bottom: solid 1px black;
+}
+
+.fitbruby {
+   position: relative;
+   line-height: 20pt;
+   margin-bottom: 12pt;
+   padding: 0pt 0pt;
+}
+
+.vskip, .blankline { margin-top: 25px; width: 100%; border-bottom: none;}
+
+.lh-style li, .lh-style li p { line-height: 6ex; }
+.lh-style .fitb { line-height: 1 !important; }
+
+.studentAnswer::before,
+.quad::before,
+.fitb::before,
+.fitbruby::before,
+.vskip::before,
+.blankline::before {
+  content: '\00200b';
+}
+
+.ruby {
+  position: absolute;
+  bottom: -18pt;
+  left: 0pt;
+  font-size: 8pt;
+  font-weight: normal;
+  width: 100%;
+}
+
+/************************************************************************************
+* NARRATIVE PAGE STYLES
+*/
 #lesson-list * {display:inline; margin-bottom: 0px; margin-left: 0px;}
 #lesson-list dt { margin-top: 15px; display: inline-block;}
 #lesson-list dd:after{ display: block; content: '';}
 #lesson-list dd:before{ display: inline; content: '::'; font-weight: 900; }
 
-.standards-table thead {
-  background-color: #bb29ff;
-}
+/************************************************************************************
+* LESSON PAGE STYLES
+*/
 
-.lesson-section-1, .lesson-section-1+.lesson-section-1 { clear: both; border-top: solid 3px black; }
-#lesson-list div.title{
-  font-family: inherit;
-  font-style: inherit;
-  font-size: larger;
-  color: inherit;
-  font-weight: bold;
-}
+/* The summary table at the top of each lesson */
+#preamble table, #preamble td, #preamble th { border: 1px solid #7747a5; }
+#preamble ul p { margin: 0px; }
+.left-header tr td:nth-child(1) { background-color: #b7d893; }
+.left-header tr td:nth-child(1) p { font-weight: bold; }
 
-.lesson-table thead {
-  background-color: #93c47d;
-}
-
-/* RULES FOR THE GLOBAL STANDARDS PAGE */
-.standard-menu-container{ padding: 10px;  }
-
-/* XXX there was a #preamble prefixing following here, why? */
-.left-header tr td:nth-child(1) {
-  background-color: #b7d893;
-}
-
-.left-header tr td:nth-child(1) p {
-  font-weight: bold;
-}
-
+/* Language and Standards Tables */
 .lang-features-table * {
   margin: 0px;
   padding: 1px;
   font-size: small;
-}
-
+} 
 .lang-features-table p { font-family: monospace; }
-
 .lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
   background-color: lightgray;
   font-weight: bold;
   text-align: center;
   font-family: inherit; /* Header row should not be monospace */
 }
-
 .lang-features-table .centered-image {
   display: inline; /* Override default image treatment */
 }
-
 .lang-features-table tr td:nth-child(1), .lang-features-table tr td:nth-child(1) p {
   background-color: transparent;
   text-align: center;
   vertical-align: middle;
   font-family: inherit; /* Type cell should not be monospace */
 }
+.standards-hierarchical-table ul li ul { display: none; }
 
+/* Special links back to older, pre-remix materials */
+.old-materials p { width: 100%; background: #75328AAA; color: black; text-align: center; }
+
+/* Headers, Sections, and section links */
+.lesson-section-1, .lesson-section-1+.lesson-section-1 { 
+  clear: both; 
+  border-top: solid 3px black; 
+}
 .lesson-section-2 { float: left; clear: both; width: 100%;}
 .lesson-section-2 h3 {
   font-size: 1.5em;
   font-style: italic;
   margin: 0px;
  }
-.physics-table {
-  margin-left: auto;
-  margin-right: auto;
+/* class for styling duration info in headers */
+.duration { float: right; color: #d9d2e9;}
+.section-link a {
+  margin-left:    -1.5em;
+  margin-right:   0.5em;
+  vertical-align: middle;
+  font-size:      14pt;
 }
 
-.physics-table thead {
-  background-color: #ffd966;
+.lesson-instruction {
+  margin-top: 1ex;
+  margin-left: 1ex;
+  margin-bottom: 1ex;
+  background: #eeeeee;
 }
 
-.standards-hierarchical-table ul li ul {
-   display: none;
+.lesson-point {
+  font-weight: bold;
+  color: black;
+  font-size: 120%;
+  border-style: solid;
+  margin: 2ex 2ex;
+  border-width: 2px 0 2px 0;
 }
-
-.standards-hierarchical-table ul li:hover ul {
-  display: block;
-}
-
-.sidebarblock {
-  background-color: #efefef;
-  border-width: thick;
-}
+.lesson-point p { margin: 0ex 1ex; }
 
 /* Callout boxes */
 .strategy-box, .notice-box {
@@ -176,27 +333,11 @@ td.tableblock>.content { margin-bottom: 0px; }
 }
 .strategy-box .title { color: #1a73b5; }
 .notice-box   .title { color: #7747a5; }
-
 .strategy-box a, .notice-box a { color: blue; text-decoration: underline; }
 
-
-#preamble table, #preamble td, #preamble th {
-  border: 1px solid #7747a5;
-}
-
-#preamble ul p {margin: 0px}
-
-.blank {
-  color: rgba(0,0,0,0);
-}
-
-.logo {
-  float: right;
-}
-
-.logo img {
-  width: 400px;
-}
+.blank { color: rgba(0,0,0,0); }
+.logo { float: right; }
+.logo img { width: 400px; }
 
 .wrapper {
   font-family: Hack, "Courier New", monospace;
@@ -217,10 +358,10 @@ span.clear {
   width: 100%;
 }
 
-/****************************************************************
+/*
 * Two Column Layout that spans page width, using DT and DD tags
 * Every other row is shaded for readability
-***************************************************************/
+*/
 .TwoColumnDD_DT dl {width: 100%; clear: both; overflow: hidden;}
 .TwoColumnDD_DT dl > * {padding: 0; margin: 0; float: left; width: 50%; clear: left; line-height:27px;}
 .TwoColumnDD_DT dd {float: right; text-align: right; clear: none;}
@@ -235,11 +376,11 @@ span.clear {
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
 
-/* Design Recipe styling */
-.designRecipeLayout {
-  font-size: 14pt;
-}
-
+/************************************************************************************
+* DESIGN RECIPE STYLING
+*/
+.dr-title { font-size: 24pt; }
+.designRecipeLayout { font-size: 14pt; }
 .recipe_name,
 .recipe_domain,
 .recipe_range,
@@ -251,11 +392,23 @@ span.clear {
 .recipe_definition_body_pyret,
 .recipe_definition_body,
 .questions,
-.answers
-{
+.answers{
   font-family: Hack, "Courier New", monospace;
   display: inline-block;
   border-bottom: solid 1pt black;
+}
+
+.recipe_name::after,
+.recipe_purpose::after,
+.recipe_domain::after,
+.recipe_range::after,
+.recipe_variables::after,
+.recipe_example_inputs::after,
+.recipe_example_body::after,
+.recipe_example_body_long::after,
+.recipe_definition_body_pyret::after,
+.recipe_definition_body::after { 
+  color: black; 
 }
 
 .purpose_comment {
@@ -272,154 +425,72 @@ span.clear {
   display: inline-block;
   border-bottom: solid 1pt black;
 }
-
-.recipe_name {
-  min-width: 20%;
-  width: auto;
-}
-
-.recipe_domain {
-  width: 48%;
-}
-
-.recipe_range {
-  width: 15%;
-}
-
-.recipe_purpose {
-  width: 93%;
-  /* overflow: auto; */
-}
-
+.recipe_name    { min-width: 20%; width: auto; }
+.recipe_domain  { width: 48%; }
+.recipe_range   { width: 15%; }
+.recipe_purpose { width: 93%; }
 .recipe_example_inputs {
-  /* width: 25%; */
   min-width: 15%;
   width: auto;
   text-align: center;
 }
-
-/* prefix .designRecipeLayout removed */
 .recipe_example_line .studentAnswer.recipe_example_body{
   min-width: 200pt;
 }
+.recipe_example_body { min-width: 40%; width: auto; }
+.recipe_example_body_long { width: 90%; }
+.recipe_example_body_wrap { margin-left: 16px; display: inline-block; }
+.recipe_definition_body_pyret,.recipe_definition_body { width: 90%; }
+.recipe_variables { text-align: center; }
+.recipe_cond {  }
+.recipe_line {  }
+.recipe_cond_clause {  }
 
-.recipe_example_body {
-  min-width: 40%;
-  width: auto;
+.questions { width: 42%; }
+.answers   { width: 47%; }
+
+.recipe_pyret_line .questions { width: 39%; }
+.recipe_pyret_line .answers   { width: 44%; }
+
+.recipe_line p                { margin: 0; padding: 0; }
+
+.recipe_title { padding-top: 5px; }
+.recipe_title p {
+  color: white;
+  background: gray;
+  display: block;
+  padding: 2px 10px;
+  font-size: 13pt;
+  font-weight: bold;
+}
+.recipe_title p::after {
+  content: "\2B1C";
+  float: right;
 }
 
-.recipe_example_body_long {
-  width: 90%;
-}
-
-.recipe_example_body_wrap {
-  margin-left: 16px;
-  display: inline-block;
-}
-
-.recipe_definition_body_pyret,.recipe_definition_body {
-  width: 90%;
-}
-
-.recipe_variables {
-  text-align: center;
-}
-
-.recipe_cond {
-}
-
-.recipe_line {
-}
-
-.recipe_cond_clause {
-}
-
-.questions {
-  width: 42%;
-}
-
-.answers {
-  width: 47%;
-}
-
-.recipe_pyret_line .questions {
-  width: 39%;
-}
-
-.recipe_pyret_line .answers {
-  width: 44%;
-}
-
-.recipe_line p {
-  margin: 0;
-  padding: 0;
-}
-
-.recipe_name::after {
-  color: black;
-}
-
-.recipe_purpose::after {
-  color: black;
-}
-
-.recipe_domain::after {
-  color: black;
-}
-
-.recipe_range::after {
-  color: black;
-}
-
-.recipe_variables::after {
-  color: black;
-}
-
-.recipe_example_inputs::after {
-  color: black;
-}
-
-.recipe_example_body::after {
-  color: black;
-}
-
-.recipe_example_body_long::after {
-  color: black;
-}
-
-.recipe_definition_body_pyret::after {
-  color: black;
-}
-
-.recipe_definition_body::after {
-  color: black;
+.recipe_instructions {
+  font-style: italic;
+  font-size: 10pt;
+  margin-bottom: 0pt;
 }
 
 .studentAnswerCode {
   height: 20pt;
   word-break: break-all;
   font-family: Hack, "Courier New", monospace;
+  text-align: center;
   white-space: pre; /* this is probably not needed? */
-  /* text-align: center; */
 }
-
-/* .designRecipeLayout prefix removed */
 .studentAnswer {
   margin-bottom:  10pt;
   min-width:      100pt;
-  /* height:         20pt; */
   line-height:    20pt;
   position:       relative;
   padding:        0pt 0pt;
-  /* word-break:     break-all; */
-  /* font-family:    Hack, "Courier New", monospace; */
-  /* white-space:    pre; */
-  /* margin-right:   5pt; */
-  /* text-align:     center; */
   word-spacing:   4pt;
+  display: inline-block;
+  border-bottom: solid 1px black;
 }
-
-/* .designRecipeLayout prefix removed */
 .studentAnswer::after {
   position:     absolute;
   bottom:       -18pt;
@@ -433,45 +504,12 @@ span.clear {
   word-spacing:  0pt;  /* don't inherit spacing from .studentAnswer */
 }
 
-.recipe_graf .studentAnswerCode {
-  text-align: center;
-}
+/************************************************************************************
+* TEACHER RESOURCES PAGE
+*/
 
-.recipe_title {
-  padding-top: 5px;
-}
-
-.recipe_title p {
-  color: white;
-  background: gray;
-  display: block;
-  padding: 2px 10px;
-  font-size: 13pt;
-  font-weight: bold;
-}
-
-.recipe_title p::after {
-  content: "\2B1C";
-  float: right;
-}
-
-.recipe_instructions {
-  font-style: italic;
-  font-size: 10pt;
-  margin-bottom: 0pt;
-}
-
-code{
-  display: inline-block;
-}
-
-/* CSS hooks in Teacher Resources adoc */
-
-.teacher_resources {
-}
-
-.teacher_resources strong { /* name of resource */
-}
+.teacher_resources {  }
+.teacher_resources strong { /* name of resource */ }
 
 /* Exercises and Solutions Table */
 table.exercises_and_solutions, table.exercises_and_solutions * { 
@@ -493,288 +531,93 @@ table.exercises_and_solutions table * { background: none !important; }
 table.exercises_and_solutions tr:hover {background: #7532892f !important; }
 table.exercises_and_solutions table tr:hover a {color: white; text-decoration: underline;}
 
-.pyretkeyword {
-  font-weight: 900;
+.pathway_external_links ul li { margin-top: 3ex 0ex; list-style-type: none; }
+
+table.contract-table tr:nth-child(4n+3),
+table.contract-table tr:nth-child(4n+4) { background-color: #f2f2f2; }
+
+td.tableblock .listingblock {
+  margin-bottom: 0 !important;
 }
 
-.pathway_external_links ul {
-  list-style-type: none;
-  margin-left: 0px;
-}
-
-.pathway_external_links ul li {
-  margin-top: 3ex;
-  margin-bottom: 3ex;
-}
-
-.links {
-  float: right;
-}
-
-.center, .centered-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center !important;
-  padding-top: 2ex;
-  padding-bottom: 2ex;
-}
-
-.centered {
-  text-align: center;
-}
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  min-width: 120px;
-  max-width: 200px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 5ex;
-  left: 5ex;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-
-.floatRight {
-  float: right;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdownContent {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  padding-left: 5px;
-  padding-right: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown:hover .dropdownContent {
-  display: block;
-  z-index: 1;
-}
-
-.alignedStandards {
-  display: none;
-}
-
-.standard-menu-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.standard-menu-container div:nth-child(1) {
-  width: 75%;
-}
-
-.standard-menu-container div:nth-child(2) {
-  width: 25%;
-}
-
-.acknowledgment {
-  margin-top: 35px;
-  border-top: dashed 2px black;
-  padding-top: 20px;
-  padding-bottom: 5px;
-  font-size: 80%;
-  font-style: italic;
-}
-
-.acknowledgment img {
-  width: 94px;
-  height: 37px;
-  float: right;
-}
-
-.bootstraplogo {
-  line-height: 80%;
-  float: left;
-  padding-right: 10px;
-  padding-bottom: 3px;
-}
-
-.bootstraplogo img {
-  /* width: 307px; */
-  /* height: 234px; */
-  max-height: 156px;
-}
-
-.bootstraplogo {
-  width: 20%;
-}
-
-.bootstrapheader {
-  width: 80%;
-}
-
-.svg-polyline {
-  stroke: black;
-  fill: none;
-}
-
-td.tableblock code {
-  background: none;
-}
-
-td.tableblock pre {
-  background: none !important;
-}
-
-tr th.tableblock {
-  background: #cccccc;
-  padding: .25em .5em;
-}
-
-tr th.tableblock code {
-  background: none;
-}
-
-.quad {
-  display: inline-block;
-  min-height: 15px;
-}
-
-.vspace {
-  display: inline-block;
-}
-
-.fitb,
-.fitbruby,
-.vskip,
-.blankline {
-  display: inline-block;
-  min-height: 15px;
-  min-width: 5em;
-  text-align: center;
-  line-height: 1.2;
-  /*line-height: 1;*/
-}
-
-.fitb {
-  /*padding-bottom: 4px;*/
-}
-
-/*
-.lh-style li:not(:last-of-type) p {
-  line-height: 6ex;
-}
+/************************************************************************************
+* FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
 */
-
-.lh-style li p {
-  line-height: 6ex;
+div.circleevalsexp .expression {
+  display: inline-block;
+  padding-top: 6px;
+  margin: 5px;
+  clear: none;
+  border: 2px solid black;
+  background: white;
+  border-radius: 20px;
+  text-align: center;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 
-.lh-style li {
-	margin-bottom: 5ex;
+div.circleevalsexp .value {
+  display: inline-block;
+  margin: 10px 10px 5px 10px;
+  vertical-align: top;
 }
 
-.lh-style .fitb {
-  line-height: 1 !important;
-}
-
-.fitbruby {
-   position: relative;
-   line-height: 20pt;
-   margin-bottom: 12pt;
-   padding: 0pt 0pt;
-}
-
-.fitb,
-.fitbruby,
-.blankline {
-  border-bottom: solid 1px black;
-}
-
-.vskip,
-.blankline {
-  margin-top: 25px;
-}
-
-.studentAnswer::before,
-.quad::before,
-.fitb::before,
-.fitbruby::before,
-.vskip::before,
-.blankline::before {
-  content: '\00200b';
-}
-
-.ruby {
-  position: absolute;
-  bottom: -18pt;
-  left: 0pt;
-  font-size: 8pt;
-  font-weight: normal;
-  width: 100%;
-  /* text-align: center; */
-}
-
-.vskip,
-.blankline {
-  width: 100%;
-}
-
-.sectionbreak {
+div.circleevalsexp .operator {
   display: block;
-  width: auto;
-  border-bottom: solid 3px black;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  height: 20px;
+  line-height: 16px;
+  text-align: center;
+  width: 100%;
+  border-bottom: solid 2px black;
+  border-radius: 15px 15px 0px 0px;
 }
 
-.invisible {
-  visibility: hidden;
+/* When in operator position, drop the margins */
+div.circleevalsexp .operator .value { margin: 0px; }
+/* Don't show parens in Circle mode */
+div.circleevalsexp .lParen, div.circleevalsexp .rParen { display: none; }
+
+div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
+  width:      100%;
+  margin:     0px 3px;
+  display:    inline-block;
+  padding:    0px;
+  font-family:Hack, "Courier New", monospace;
+  font-size:  10pt;
+  color:      #666666;
+  font-style: normal;
+  clear:      both;
 }
 
-#footer { background: rgba(0,0,0,.5); padding: 0px; }
+.wescheme-string,     .cm-scheme-string    {color: green;}
+.wescheme-number,     .cm-scheme-number    {color: blue;}
+.wescheme-boolean,    .cm-scheme-boolean   {color: darkred;}
+.wescheme-character,  .cm-scheme-character {color: orange;}
+.wescheme-symbol,     .cm-scheme-symbol    {color: steelblue;}
+.wescheme-comment,    .cm-scheme-comment   {color: orange; }
+.CodeMirror {font-family: Hack, "Courier New", monospace;}
 
-.lesson-instruction {
-  margin-top: 1ex;
-  margin-left: 1ex;
-  margin-bottom: 1ex;
-  background: #eeeeee;
-}
+.cm-s-default.CodeMirror      { color: black; }
+.cm-comment     { color: #cd7054; }
+.cm-boolean     { color: darkred; }
+.cm-builtin     { color: #555; }
+.cm-variable    { color: #4d5966; }
+.cm-keyword     { color: black; font-weight: bold; }
+.cm-number      { color: navy; }
+.cm-roughnum    { color: blue; }
+.cm-bad-number  { color: red; font-weight: bold; }
+.cm-string      { color: forestgreen; }
+.cm-type        { color: #374049; }
+.cm-function-name { color: #374049; }
+.cm-unterminated-string { color: red; font-weight: bold; }
+.cptteach-fixed { line-height: 1.5; background: #ddd; }
 
-.lesson-point {
-  font-weight: bold;
-  color: black;
-  font-size: 120%;
-  border-style: solid;
-  margin: 2ex 2ex;
-  border-width: 2px 0 2px 0;
-}
-.lesson-point p { margin: 0ex 1ex; }
+span.cm-scheme-punctuation                 {color: black;}
+span.cm-scheme-rparen                      {color: black;}
 
-table.contract-table tr:nth-child(4n+3) {
-  background-color: #f2f2f2;
-}
-
-table.contract-table tr:nth-child(4n+4) {
-  background-color: #f2f2f2;
-}
+.pyretkeyword { font-weight: 900; }
 
 /* class for tables containing Pyret data */
-
 table.pyret-table {
   border-collapse: collapse;
   width: 100%;
@@ -786,11 +629,8 @@ table.pyret-table {
   background: #eee;
 }
 table.pyret-table tr:nth-child(even){background-color: #f2f2f2}
-
-table.pyret-table thead {
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-}
-
+table.pyret-table thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
+table.pyret-table td p { margin: 0px; }
 table.pyret-table td, table.pyret-table th {
   border: none;
   border-right: 1px white solid;
@@ -798,29 +638,22 @@ table.pyret-table td, table.pyret-table th {
   font-family: monospace;
 }
 
-table.pyret-table td p { margin: 0px; }
+.obeyspaces { white-space: pre-wrap; }
 
-.landscape #header,
-.landscape #content,
-.landscape #footnotes,
-.landscape #footer {
-  max-width: 80em !important;
+div.leftColumn .obeyspaces,
+div.rightColumn .obeyspaces {
+  display: inline-block;
 }
 
-td.tableblock .listingblock {
-  margin-bottom: 0 !important;
-}
-
-.web-page-only {
-  font-weight: bold;
-  font-style: italic;
-  line-height: 45px;
-}
-
-/* class for styling duration info in headers */
-.duration {
-  float: right;
-  color: #d9d2e9;
+/************************************************************************************
+* SCREEN MEDIA
+*/
+@media screen{
+  .web-page-only {
+    font-weight: bold;
+    font-style: italic;
+    line-height: 45px;
+  }
 }
 
 /************************************************************************************
@@ -832,6 +665,16 @@ td.tableblock .listingblock {
     orphans: 0; widows: 0;    /* never break a paragraph  */
 }
 @media print {
+  .web-page-only { display: none; visibility: hidden; }
+
+  /* When printing in landscape mode... */
+  .landscape #header,
+  .landscape #content,
+  .landscape #footnotes,
+  .landscape #footer {
+    max-width: 80em !important;
+  }
+
   body {
     color: black;
   }
@@ -839,18 +682,28 @@ td.tableblock .listingblock {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
   }
-  #footer { display: none; }
-  .dr-title {width: 100%; background: black; color: white; text-align: center; display: inline-block;}
+
+  div.circeval { min-height: 975px; }
+
+  /* Hide the cursor when printing */
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden;}
+
+  #savetodrive-div { display: none !important; }
+  .acknowledgment, .copyright, #footer, #outOfDate { display: none; }
+
+  .dr-title {
+    width: 100%; 
+    background: black; 
+    color: white; 
+    text-align: center; 
+    display: inline-block;
+  }
   .recipe_title p { padding: 3px 5px; }
   .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
-  /* .designrecipelayout prefix removed */
-  .studentAnswer::after { font-size: 6pt; }
+  .designRecipeLayout .studentAnswer::after { font-size: 6pt; }
 
   /* Force preamble to always be on its own page */
   #preamble { page-break-after: always; }
-
-  #header, #content {margin: 0 2em !important; }
-  
   /* More padding between sections, and don't ever break a section across pages */
   .lesson-section-1 { margin-bottom: 20px; page-break-inside: avoid;}
   .lesson-section-1 { margin-bottom: 20px;  }
@@ -859,22 +712,54 @@ td.tableblock .listingblock {
   /* bold borders between sections */
   .sect1+.sect1 { border-top: solid 3px black; }
 
-  .acknowledgment { display: none; }
 
-  .copyright { display: none; }
+  a[href]:after { content: none !important; }
 
-  a[href]:after {
-    content: none !important;
+  .questions { min-width: 36%; width: auto; }
+  .answers { width: auto; }
+
+  /* format code and strong/emphasized text for printing */
+  .pyret, .racket { font-size: 12pt; margin: 0px 6px; display: inline-block;}
+  .paragraph em, .paragraph strong{ margin: 0px 3px; }
+
+  #header > h1:first-child,
+  .sect1 > h1:first-child,
+  .sect1 > h2:first-child,
+  .sect1 > h3:first-child,
+  .sect2 > h3:first-child {
+    width: 100%;
+    background: black;
+    padding-top: .4ex;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 24pt;
   }
 
-  .questions {
-    min-width: 36%;
-    width: auto;
+  .sect1.designRecipeLayout > h2:first-child {
+    background: white !important;
+    color: black !important;
   }
 
-  .answers {
-    width: auto;
+  #header > h1:first-child > code {
+    background: black;
+    color: white;
+    font-size: 16pt;
   }
 
-  #header { background: black; color: white; }
+  div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
+    display:    inline-block;
+  }
+
+  /* Remove AsciiDoc's gray background for code chunks */
+  .listingblock pre:not(.highlight) { background: #f9f9fa !important; }
+
+  /* Work around a known issue with wkhtmltopdf, in which font-weight is not applied
+   * consistently for the same font. By switching to a different font, we can make
+   * font-weight work.
+  .pyretkeyword{
+    font-family: monospace;
+    font-size: 14pt;
+  }
+   */
 }
