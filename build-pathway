@@ -732,7 +732,7 @@ function processadoc() {
             setmathdelay $TMPHTML
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
-            echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
+            echo '--enable-local-file-access' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
