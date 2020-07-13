@@ -210,7 +210,8 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
    padding: 0pt 0pt;
 }
 
-.vskip, .blankline { margin-top: 25px; width: 100%; border-bottom: none;}
+.vskip { margin-top: 25px; width: 100%; border-bottom: none;}
+.blankline { margin-top: 25px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 6ex; }
 .lh-style .fitb { line-height: 1 !important; }
@@ -645,6 +646,14 @@ div.rightColumn .obeyspaces {
   display: inline-block;
 }
 
+.landscape #header,
+.landscape #content,
+.landscape #footnotes,
+.landscape #footer {
+  max-width: 80em !important;
+}
+
+
 /************************************************************************************
 * SCREEN MEDIA
 */
@@ -666,14 +675,6 @@ div.rightColumn .obeyspaces {
 }
 @media print {
   .web-page-only { display: none; visibility: hidden; }
-
-  /* When printing in landscape mode... */
-  .landscape #header,
-  .landscape #content,
-  .landscape #footnotes,
-  .landscape #footer {
-    max-width: 80em !important;
-  }
 
   body {
     color: black;
@@ -704,6 +705,10 @@ div.rightColumn .obeyspaces {
 
   /* Force preamble to always be on its own page */
   #preamble { page-break-after: always; }
+  #header, #content {margin: 0 2em !important; }
+  #header { background: black; color: white; }
+
+
   /* More padding between sections, and don't ever break a section across pages */
   .lesson-section-1 { margin-bottom: 20px; page-break-inside: avoid;}
   .lesson-section-1 { margin-bottom: 20px;  }
