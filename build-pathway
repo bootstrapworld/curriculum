@@ -353,26 +353,6 @@ function insertstylecss() {
     $f
 }
 
-#function insertnarrativecss() {
-#  local f=$1
-#  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-#  $SED -i \
-#    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/narrative.css" \/>/' \
-#    $f
-#}
-
-#function insertprintcss() {
-#  local f=$1
-#  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-#  $SED -i \
-#    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wkhtmltopdf.css" \/>/' \
-#    -e '/^ *<script>window.___gcfg/,/^ *<\/script>/d' \
-#    -e '/^ *<script src="https:\/\/apis.google.com\/js\/platform.js"/d' \
-#    -e 's/onload="renderSaveToDrive()"//g' \
-#    -e '/^ *<script>function renderSaveToDrive()/,/^ *<\/script>/d' \
-#    $f
-#}
-
 function insertprintcss_browser() {
   local f=$1
   local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
@@ -388,14 +368,6 @@ function insertwbpagecss() {
     -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wbpage.css" \/>/' \
     $f
 }
-
-#function insertwbpagecss_browser() {
-#  local f=$1
-#  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-#  $SED -i \
-#    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/browser-wbpage.css" \/>/' \
-#    $f
-#}
 
 function removelogos() {
   local f=$1
@@ -553,7 +525,6 @@ EOF
 }
 
 function adjustproglangsubdirs() {
-  #echo doing adjustproglangsubdirs $d
   local d=$1
 
   test -d "$d" || return
@@ -573,7 +544,6 @@ function adjustproglangsubdirs() {
       adjustproglangsubdirs "$subdir"
     fi
   done
-  #echo done adjustproglangsubdirs $d
 }
 
 function shadowcopydir() {
@@ -708,8 +678,6 @@ function processadoc() {
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
         resolveabbrevs $fhtml
-#        insertprintcss_browser $fhtml
-#        insertwbpagecss_browser $fhtml
         if test ! $OTHERDIR; then
           insertgdrivesave $fhtml
         fi
@@ -719,7 +687,6 @@ function processadoc() {
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
-#            insertwbpagecss $TMPHTML
             removecodetags $TMPHTML
             ASPECT="--margin-right $PDFMARGIN --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN"
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
@@ -948,9 +915,6 @@ function buildlessonplan() {
       insertbodyid index.shtml
       addanalytics index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-#      insertnarrativecss index.shtml
-#      insertprintcss_browser index.shtml
       insertstylecss index.shtml
       cleanuptitle index.shtml
       cleanupduration index.shtml
@@ -973,7 +937,6 @@ function buildlessonplan() {
         TEMPF=$(mktemp); rm -f $TEMPF
         TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
         cp index.shtml $TMPHTML
-#        insertprintcss $TMPHTML
         removecodetags $TMPHTML
 
         ASPECT=
@@ -1097,9 +1060,6 @@ function buildpathwaynarrative() {
       addanalytics index.shtml
       insertstylecss index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-#      insertnarrativecss index.shtml
-      #cleanuptitle index.shtml
       insertgdrivesave index.shtml
     fi
 
@@ -1254,8 +1214,6 @@ function buildteacherresource() {
       export TEACHER_RESOURCES=
       insertbodyid index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-#      insertnarrativecss index.shtml
       insertstylecss index.shtml
       cleanuptitle index.shtml
       insertgdrivesave index.shtml
