@@ -1,72 +1,6 @@
 @import url("./asciidoctor.css");
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
-/**************************************************************
-*  OK TO DELETE?
-#lesson-list div.title{
-  font-family: inherit;
-  font-style: inherit;
-  font-size: larger;
-  color: inherit;
-  font-weight: bold;
-}
-
-.lesson-table thead {
-  background-color: #93c47d;
-}
-
-.physics-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-.physics-table thead {
-  background-color: #ffd966;
-}
-.lh-style li:not(:last-of-type) p {
-  line-height: 6ex;
-}
-
-.invisible {
-  visibility: hidden;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdownContent {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  padding-left: 5px;
-  padding-right: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-.dropdown:hover .dropdownContent {
-  display: block;
-  z-index: 1;
-}
-
-.floatRight {
-  float: right;
-}
-.svg-polyline {
-  stroke: black;
-  fill: none;
-}
-.blank { color: rgba(0,0,0,0); }
-*/
-
-/***************************************************************************
-*  HARDLY USED!
-.sidebarblock {
-  background-color: #efefef;
-  border-width: thick;
-}
-.links {
-  float: right;
-}
-*/
 
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
@@ -676,13 +610,14 @@ div.rightColumn .obeyspaces {
 @media print {
   .web-page-only { display: none; visibility: hidden; }
 
-  body {
-    color: black;
-  }
+  div#body, body { color: black; }
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
+    color: black;
   }
+
+  p {margin: 0px; font-size: 13pt; }
 
   div.circeval { min-height: 975px; }
 
