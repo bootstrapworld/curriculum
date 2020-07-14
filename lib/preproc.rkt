@@ -952,6 +952,8 @@
       (lambda (i)
         (call-with-output-file out-file
           (lambda (o)
+            (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+                  )
             (expand-directives i o)
 
             (when *narrative*
