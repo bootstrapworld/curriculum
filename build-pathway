@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-07 # last modified
+LASTMOD=2020-07-15 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -173,7 +173,7 @@ function insertgdrivesave() {
   local f=$1
   local f_head=${f%.*}
   local f_ext=${f##*.}
-  local other_f=$f_head-gdrive-import.$f_ext
+  local other_f=$f_head-gdrive-import.html
   local pageTitle=
   if test -f $f_head.adoc; then
     pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
@@ -235,7 +235,7 @@ EOF
   cp -p $f $other_f
 
   $SED -i \
-    -e "s/%INSERTGDRIVEURL/window.location.href.replace(\/([^\\\\\/]+)\\\\.([^.\\\\\/]+)$\/, '\$1-gdrive-import.\$2')/" \
+    -e "s/%INSERTGDRIVEURL/(window.location.href.match(\/\\\\\/$\/)?(window.location.href+'index-gdrive-import.html'):(window.location.href.replace(\/([^\\\\\/]+)\\\\.([^.\\\\\/]+)$\/, '\$1-gdrive-import.html')))/" \
     $f
 
   $SED -i \
