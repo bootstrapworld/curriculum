@@ -226,7 +226,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
   margin: 0px;
  }
 /* class for styling duration info in headers */
-.duration { float: right; color: #d9d2e9;}
+.duration { float: right; color: #d9d2e9; min-width: 150px; text-align: right;}
 .section-link a {
   margin-left:    -1.5em;
   margin-right:   0.5em;
@@ -611,14 +611,24 @@ div.rightColumn .obeyspaces {
 @media print {
   .web-page-only { display: none; visibility: hidden; }
 
-  div#body, body { color: black; }
+  div#body, body { 
+    color: black; 
+    top:    0px;
+    left:   0px;
+    width:  100%;
+  }
+
+  /* we need a right-hand padding to eliminate some weird clipping behavior */
+  #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
+
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
     color: black;
   }
-
-  p {margin: 0px; font-size: 13pt; }
+  /* Override AsciiDoc print default */
+  a[href] { color: #F4AB3A !important; text-decoration: none !important; } 
+  p {margin: 0px; font-size: 13pt; font-weight: normal;}
 
   div.circeval { min-height: 975px; }
 
@@ -641,14 +651,12 @@ div.rightColumn .obeyspaces {
 
   /* Force preamble to always be on its own page */
   #preamble { page-break-after: always; }
-  #header, #content {margin: 0 2em !important; padding: 0px;}
-  #header { background: black; color: white; }
+  :not(body.LessonPlan) #header { background: black; color: white; }
 
 
   /* More padding between sections, and don't ever break a section across pages */
-  .lesson-section-1 { margin-bottom: 20px; page-break-inside: avoid;}
-  .lesson-section-1 { margin-bottom: 20px;  }
-  .lesson-section-1, .lesson-section-2 { page-break-inside: avoid;}
+  .lesson-section-1 { margin-bottom: 20px; }
+  .lesson-section-1, .lesson-section-2, .sectionbody { page-break-inside: avoid;}
 
   /* bold borders between sections */
   .sect1+.sect1 { border-top: solid 3px black; }
@@ -663,7 +671,8 @@ div.rightColumn .obeyspaces {
   .pyret, .racket { font-size: 12pt; margin: 0px 6px; display: inline-block;}
   .paragraph em, .paragraph strong{ margin: 0px 3px; }
 
-  #header > h1:first-child,
+  /* If we're NOT in a lesson plan, format the headers differently */
+  :not(body.LessonPlan) #header > h1:first-child,
   .sect1 > h1:first-child,
   .sect1 > h2:first-child,
   .sect1 > h3:first-child,
