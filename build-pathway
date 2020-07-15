@@ -187,7 +187,7 @@ function insertgdrivesave() {
   #FIXME: pathname should be corrected, again
   local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/$LANGUAGE/courses/$TGTPATHWAY/$LESSONSUBDIR
 
-  hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\//\\\//g')
+  hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\/$//'|$SED -e 's/\//\\\//g')
 
   local TMPFILE=$TMPPFX-$f_head
 
