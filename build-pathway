@@ -346,57 +346,6 @@ function modifygdrivepage() {
 
 }
 
-function insertstylecss() {
-  local f=$1
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/<link rel="stylesheet" href="\/styles.css">\n\0/' \
-    $f
-}
-
-function insertnarrativecss() {
-  local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/narrative.css" \/>/' \
-    $f
-}
-
-function insertprintcss() {
-  local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wkhtmltopdf.css" \/>/' \
-    -e '/^ *<script>window.___gcfg/,/^ *<\/script>/d' \
-    -e '/^ *<script src="https:\/\/apis.google.com\/js\/paltform.js"/d' \
-    -e 's/onload="renderSaveToDrive()"//g' \
-    -e '/^ *<script>function renderSaveToDrive()/,/^ *<\/script>/d' \
-    $f
-}
-
-function insertprintcss_browser() {
-  local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/browser-wkhtmltopdf.css" \/>/' \
-    $f
-}
-
-function insertwbpagecss() {
-  local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/wbpage.css" \/>/' \
-    $f
-}
-
-function insertwbpagecss_browser() {
-  local f=$1
-  local spwd=$(echo $PATHWAYROOTDIR|$SED -e 's/\//\\\//g')
-  $SED -i \
-    -e 's/<link.*curriculum.css.*>/\0\n<link rel="stylesheet" href="'$spwd'..\/..\/lib\/browser-wbpage.css" \/>/' \
-    $f
-}
-
 function removelogos() {
   local f=$1
   $SED -i \
@@ -529,7 +478,6 @@ EOF
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
     cat > codemirror.txt <<EOF
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/pretty-printing.css" />
     <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
     <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
     <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
@@ -554,7 +502,6 @@ EOF
 }
 
 function adjustproglangsubdirs() {
-  #echo doing adjustproglangsubdirs $d
   local d=$1
 
   test -d "$d" || return
@@ -574,7 +521,6 @@ function adjustproglangsubdirs() {
       adjustproglangsubdirs "$subdir"
     fi
   done
-  #echo done adjustproglangsubdirs $d
 }
 
 function shadowcopydir() {
@@ -709,8 +655,6 @@ function processadoc() {
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
         resolveabbrevs $fhtml
-        insertprintcss_browser $fhtml
-        insertwbpagecss_browser $fhtml
         if test ! $OTHERDIR; then
           insertgdrivesave $fhtml
         fi
@@ -720,8 +664,6 @@ function processadoc() {
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
-            insertprintcss $TMPHTML
-            insertwbpagecss $TMPHTML
             removecodetags $TMPHTML
             ASPECT="--margin-right $PDFMARGIN --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN"
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
@@ -732,7 +674,7 @@ function processadoc() {
             setmathdelay $TMPHTML
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
-            echo '--enable-local-file-access' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
+            echo '--enable-local-file-access --print-media-type' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
@@ -950,10 +892,6 @@ function buildlessonplan() {
       insertbodyid index.shtml
       addanalytics index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-      insertnarrativecss index.shtml
-      insertprintcss_browser index.shtml
-      insertstylecss index.shtml
       cleanuptitle index.shtml
       cleanupduration index.shtml
       insertsectionselfie index.shtml
@@ -975,7 +913,6 @@ function buildlessonplan() {
         TEMPF=$(mktemp); rm -f $TEMPF
         TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
         cp index.shtml $TMPHTML
-        insertprintcss $TMPHTML
         removecodetags $TMPHTML
 
         ASPECT=
@@ -983,7 +920,7 @@ function buildlessonplan() {
         JAVASCRIPTDELAY=
         setmathdelay $TMPHTML
         #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
-        echo $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+        echo '--enable-local-file-access --print-media-type' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
       fi
     fi
   fi
@@ -1040,7 +977,6 @@ function makeglossaryandstandards() {
       -o pathway-glossary.shtml \
       pathway-glossary.asc
           insertbodyid pathway-glossary.shtml
-          insertstylecss pathway-glossary.shtml
           resolveabbrevs pathway-glossary.shtml
   fi
   if test -f pathway-standards.asc; then
@@ -1051,7 +987,6 @@ function makeglossaryandstandards() {
       -o pathway-standards.shtml \
       pathway-standards.asc
           insertbodyid pathway-standards.shtml
-          insertstylecss pathway-standards.shtml
           resolveabbrevs pathway-standards.shtml
   fi
 }
@@ -1097,11 +1032,7 @@ function buildpathwaynarrative() {
       fi
       insertbodyid index.shtml
       addanalytics index.shtml
-      insertstylecss index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-      insertnarrativecss index.shtml
-      #cleanuptitle index.shtml
       insertgdrivesave index.shtml
     fi
 
@@ -1256,9 +1187,6 @@ function buildteacherresource() {
       export TEACHER_RESOURCES=
       insertbodyid index.shtml
       resolveabbrevs index.shtml
-      #moveheaderlogopos index.shtml
-      insertnarrativecss index.shtml
-      insertstylecss index.shtml
       cleanuptitle index.shtml
       insertgdrivesave index.shtml
     fi
@@ -1551,7 +1479,6 @@ function allthestandards() {
     -o Standards.shtml \
     Standards.asc
   insertbodyid Standards.shtml
-  insertstylecss Standards.shtml
   resolveabbrevs Standards.shtml
 
   if test ! $DEBUG; then
