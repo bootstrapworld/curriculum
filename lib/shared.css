@@ -6,6 +6,7 @@
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
 */
+html {  font-size: 12pt; }
 body{
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   color: #75328A;
@@ -15,7 +16,7 @@ p {margin: 0px; font-size: inherit; }
 code{ display: inline-block; }
 
 h1 {
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: bold;
   font-family: sans-serif;
 }
@@ -29,7 +30,7 @@ a[href] { color: #F4AB3A; text-decoration: none; }
   border-top: dashed 2px black;
   padding-top: 20px;
   padding-bottom: 5px;
-  font-size: 80%;
+  font-size: 0.8rem;
   font-style: italic;
 }
 .acknowledgment img {
@@ -48,7 +49,11 @@ a[href] { color: #F4AB3A; text-decoration: none; }
 td.tableblock>.content { margin-bottom: 0px; }
 tr th.tableblock code, td.tableblock code { background: none; }
 td.tableblock pre { background: none !important; }
-tr th.tableblock { background: #cccccc; padding: .25em .5em; }
+tr th.tableblock { 
+  background:     #cccccc; 
+  padding:        .25em .5em; 
+  font-size:      1rem;
+}
 
 .ulist p {margin: 0px;}
 
@@ -164,7 +169,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
   position: absolute;
   bottom: -18pt;
   left: 0pt;
-  font-size: 8pt;
+  font-size: 0.7rem;
   font-weight: normal;
   width: 100%;
 }
@@ -191,7 +196,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
 .lang-features-table * {
   margin: 0px;
   padding: 1px;
-  font-size: small;
+  font-size: 0.8rem;
 } 
 .lang-features-table p { font-family: monospace; }
 .lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
@@ -221,7 +226,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
 }
 .lesson-section-2 { float: left; clear: both; width: 100%;}
 .lesson-section-2 h3 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-style: italic;
   margin: 0px;
  }
@@ -231,7 +236,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
   margin-left:    -1.5em;
   margin-right:   0.5em;
   vertical-align: middle;
-  font-size:      14pt;
+  font-size:      .9rem;
 }
 
 .lesson-instruction {
@@ -244,7 +249,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
 .lesson-point {
   font-weight: bold;
   color: black;
-  font-size: 120%;
+  font-size: 1.2rem;
   border-style: solid;
   margin: 2ex 2ex;
   border-width: 2px 0 2px 0;
@@ -265,7 +270,7 @@ tr th.tableblock { background: #cccccc; padding: .25em .5em; }
   display: block;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;  
+  font-size: 1.5rem;  
 }
 .strategy-box .title { color: #1a73b5; }
 .notice-box   .title { color: #7747a5; }
@@ -315,8 +320,7 @@ span.clear {
 /************************************************************************************
 * DESIGN RECIPE STYLING
 */
-.dr-title { font-size: 24pt; }
-.designRecipeLayout { font-size: 14pt; }
+.designRecipeLayout { font-size: 14pt; }  /* Not used?? */
 .recipe_name,
 .recipe_domain,
 .recipe_range,
@@ -396,7 +400,7 @@ span.clear {
   background: gray;
   display: block;
   padding: 2px 10px;
-  font-size: 13pt;
+  font-size: 1.1rem;
   font-weight: bold;
 }
 .recipe_title p::after {
@@ -406,7 +410,7 @@ span.clear {
 
 .recipe_instructions {
   font-style: italic;
-  font-size: 10pt;
+  font-size: .85rem;
   margin-bottom: 0pt;
 }
 
@@ -414,7 +418,6 @@ span.clear {
   height: 20pt;
   word-break: break-all;
   font-family: Hack, "Courier New", monospace;
-  text-align: center;
   white-space: pre; /* this is probably not needed? */
 }
 .studentAnswer {
@@ -431,7 +434,7 @@ span.clear {
   position:     absolute;
   bottom:       -18pt;
   left:         0pt;
-  font-size:    8pt;
+  font-size:    .65rem;
   font-weight:  normal;
   width:        100%;
   text-align:   center;
@@ -519,7 +522,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   display:    inline-block;
   padding:    0px;
   font-family:Hack, "Courier New", monospace;
-  font-size:  10pt;
+  font-size:  .8rem;
   color:      #666666;
   font-style: normal;
   clear:      both;
@@ -616,6 +619,7 @@ div.rightColumn .obeyspaces {
     top:    0px;
     left:   0px;
     width:  100%;
+
   }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
@@ -628,7 +632,7 @@ div.rightColumn .obeyspaces {
   }
   /* Override AsciiDoc print default */
   a[href] { color: #F4AB3A !important; text-decoration: none !important; } 
-  p {margin: 0px; font-size: 13pt; font-weight: normal;}
+  p {margin: 0px; font-size: 1rem; font-weight: normal;}
 
   div.circeval { min-height: 975px; }
 
@@ -647,7 +651,7 @@ div.rightColumn .obeyspaces {
   }
   .recipe_title p { padding: 3px 5px; }
   .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
-  .designRecipeLayout .studentAnswer::after { font-size: 6pt; }
+  .designRecipeLayout .studentAnswer::after { font-size: .8rem; }
 
   /* Force preamble to always be on its own page */
   #preamble { page-break-after: always; }
@@ -672,18 +676,17 @@ div.rightColumn .obeyspaces {
   .paragraph em, .paragraph strong{ margin: 0px 3px; }
 
   /* If we're NOT in a lesson plan, format the headers differently */
-  :not(body.LessonPlan) #header > h1:first-child,
-  .sect1 > h1:first-child,
-  .sect1 > h2:first-child,
-  .sect1 > h3:first-child,
-  .sect2 > h3:first-child {
+  body:not(.LessonPlan) #header > h1:first-child,
+  body:not(.LessonPlan) .sect1 > h1:first-child,
+  body:not(.LessonPlan) .sect1 > h2:first-child,
+  body:not(.LessonPlan) .sect1 > h3:first-child,
+  body:not(.LessonPlan) .sect2 > h3:first-child {
     width: 100%;
     background: black;
     margin-top: 0px;
     color: white;
     text-align: center;
     display: inline-block;
-    font-size: 24pt;
   }
 
   .sect1.designRecipeLayout > h2:first-child {
@@ -694,7 +697,7 @@ div.rightColumn .obeyspaces {
   #header > h1:first-child > code {
     background: black;
     color: white;
-    font-size: 16pt;
+    font-size: 16pt; /* NOT USED? */
   }
 
   div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
@@ -703,4 +706,12 @@ div.rightColumn .obeyspaces {
 
   /* Remove AsciiDoc's gray background for code chunks */
   .listingblock pre:not(.highlight) { background: #f9f9fa !important; }
+
+  /* Work around a known issue with wkhtmltopdf, in which font-weight is not applied
+   * consistently for the same font. By switching to a different font, we can make
+   * font-weight work.
+   */
+  .pyretkeyword{
+    font-family: monospace;
+  }
 }
