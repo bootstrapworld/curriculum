@@ -1,7 +1,7 @@
 [.landscape]
 = Contracts
 
-Contracts _also_ help us use methods. `<Table>.filter {two-colons} (test {two-colons} (Row -> Boolean)) -> Table` tells us that the name of the function is  `.filter` and that it is a `Table` method. The domain says it has one input (a function that consumes  `Rows` and produces  `Booleans`), and that the method evaluates to a  `Table`.
+Contracts tell us how to use a function. For example: `num-sqr {two-colons} (n {two-colons} Number) -> Number` tells us that the name of the function is  `num-sqr`, it takes one input (a  `Number`), and it evaluates to a  `Number`. From the contract, we know  `num-sqr(4)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
 
 ++++
 <style>
@@ -62,41 +62,6 @@ td {padding: .1em .625em !important; height: 20pt;}
 | `Table`
 5+|
 
-| `random-rows`
-| `{two-colons}`
-| `(t {two-colons} Table, num-rows {two-colons} Number)`
-| `->`
-| `Table`
-5+|
-
-| `<Table>.row-n`
-| `{two-colons}`
-| `(n {two-colons} Number)`
-| `->`
-| `Row`
-5+|
-
-| `<Table>.order-by`
-| `{two-colons}`
-| `(col {two-colons} String, increasing {two-colons} Boolean)`
-| `->`
-| `Table`
-5+|
-
-| `<Table>.filter`
-| `{two-colons}`
-| `(test {two-colons} (Row -> Boolean))`
-| `->`
-| `Table`
-5+|
-
-| `<Table>.build-column`
-| `{two-colons}`
-| `(col {two-colons} String, builder {two-colons} (Row -> Any))`
-| `->`
-| `Table`
-5+|
-
 | `mean`
 | `{two-colons}`
 | `(t {two-colons} Table, col {two-colons} String)`
@@ -109,6 +74,34 @@ td {padding: .1em .625em !important; height: 20pt;}
 | `(t {two-colons} Table, col {two-colons} String)`
 | `->`
 | `Number`
+5+|
+
+| `modes`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `List<Number>`
+5+|
+
+| `bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `pie-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `histogram`
+| `{two-colons}`
+| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
+| `->`
+| `Image`
 5+|
 
 |===
