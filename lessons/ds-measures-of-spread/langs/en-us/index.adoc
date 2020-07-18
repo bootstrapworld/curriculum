@@ -51,12 +51,15 @@ The first quartile (Q1) is the value for which 25% of the animals weighed that a
 
 Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire data set—that is, the distance between minimum and maximum. This is called the @vocab{range of a data set}.
 
-We can use @vocab{box plots} to visualize all of this information. These plots are constructed using *just five numbers*, which makes them convenient ways to display both center and spread of a data set in a clear and simple way. . Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+We can use @vocab{box plots} to visualize all of this information. These plots are constructed using *just five numbers*, which makes them convenient ways to display both center and spread of a data set in a clear and simple way. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
 ----
 # box-plot :: (t :: Table, column :: String) -> Image
 box-plot(animals-table, "pounds")
 ----
+
+[.lesson-point]
+Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
 
 [.lesson-instruction]
 Type in this expression in the Interactions Area, and see the resulting plot.
@@ -72,6 +75,17 @@ This plot shows us the center and spread in our dataset according to those five 
 - The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
 
 One way to summarize the spread in the dataset is to measure the distance between the largest value and the smallest value. When we talk about functions having many possible outputs, we use the term “Range” to describe them. (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!) When we look at the distance between the smallest and largest values in our dataset, we use the same term.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Extension Activity}
+
+In statistics, it is not uncommon to use _modified box plots_, which remove extreme datapoints from the box-and-whisker and draw them as dots outside of the blot. The box plot then represents only the "non-extreme" points. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
+
+`# modified-box-plot :: (t :: Table, column :: String) -> Image`
+|===
+
 
 === Investigate
 [.lesson-instruction]
