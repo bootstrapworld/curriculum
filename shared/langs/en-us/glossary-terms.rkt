@@ -85,7 +85,7 @@ when it prints out the glossary for a particular unit
     ("instance" "a specific, packaged value of a data structure that contains other values in its fields")
     ("legal expression" "code that follows the Code Rules for a language")
     (("library" "libraries") "a collection of functions that can be made available to our program by using include")
-    (("line of best fit" "lines of best fit") "summarizes the relationship (if linear) between two quantitative variables")
+    (("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables")
     ("linear regression" "modeling the relationship between two quantitative variables using a straight line")
     (("list" "lists") "a data structure containing a sequence of values")
     ("mathematical expression" "a computation using the rules of arithmetic")
