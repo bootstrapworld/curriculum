@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-15 # last modified
+LASTMOD=2020-07-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -804,7 +804,7 @@ function checklessonplan() {
 
   test -f index.asciidoc || return
 
-  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > index-title.txt
+  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > index.titletxt
 
   if test $ADDEXERCISES; then
     if test -f index.asciidoc; then
@@ -835,6 +835,7 @@ function buildworkbookpages() {
   #
   export PATHWAYROOTDIR="../../"
   export SOLUTION=
+  export WORKBOOKPAGE=1
 
   for d in *; do
     if test -d "$d"; then
@@ -842,6 +843,8 @@ function buildworkbookpages() {
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
+
+  export WORKBOOKPAGE=
 
   cd ../..
 }
@@ -1100,7 +1103,7 @@ function makeworkbooktex() {
         paginate=
       fi
 
-    #lessontitlefile=$lessondir/index-title.txt
+    #lessontitlefile=$lessondir/index.titletxt
 
     #lessontitle=
     #if test -f $lessontitlefile; then
