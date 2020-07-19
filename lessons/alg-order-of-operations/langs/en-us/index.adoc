@@ -210,6 +210,11 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 |*Code*					| &rarr; | @show{(sexp->code `(+ 3 8)) }
 |===
 
+@ifproglang{wescheme}{
+All of the expressions that follow the function name are called arguments to the function. The following diagram summarizes the shape of an expression that uses a function.
+@span{.center}{@image{images/wescheme-code-diagram.png, "Diagram of a WeScheme Expression", 400}} 
+}
+
 Practice creating Circles of Evaluation using the common operators (`+`, `-`, `*`, `/`).
 
 - Do spaces matter when typing in functions?
@@ -224,8 +229,10 @@ Practice creating Circles of Evaluation using the common operators (`+`, `-`, `*
 |*Code*					| &rarr; | @show{(sexp->code `(* 2 (+ 3 8))) }
 |===
 
+@ifproglang{wescheme}{
 - Why are there two closing parentheses in a row, at the end of the code?
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
+}
 
 *Circles of Evaluation _help us get the correct answer_*
 
