@@ -27,6 +27,8 @@
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
+(define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
+
 (define *pathway* (truthy-getenv "SRCPATHWAY"))
 
 (define *lesson-plan* (truthy-getenv "LESSONPLAN"))
@@ -282,7 +284,7 @@
         (string-join
           (map (lambda (lesson)
                  (let ([lesson-title lesson]
-                       [lesson-title-file (format "../~a/index-title.txt" lesson)])
+                       [lesson-title-file (format "../~a/index.titletxt" lesson)])
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
@@ -373,6 +375,11 @@
           (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
             (set! *exercises-done*
               (cons (list lesson f ex-ti) *exercises-done*))))))
+    (unless exercise?
+      (when (or (not link-text) (string=? link-text ""))
+        (let ([f.titletxt (path-replace-extension f ".titletxt")])
+          (when (file-exists? f.titletxt)
+            (set! link-text (call-with-input-file f.titletxt read-line))))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
@@ -523,18 +530,26 @@
   (let ([title (string-trim (read-line i))])
     (set! title (regexp-replace "^=+ *" title ""))
     (set! *page-title* title)
-    (when *lesson-plan*
-      (call-with-output-file "index-title.txt"
-        (lambda (o)
-          (display title o) (newline o))
-        #:exists 'replace))
+    (when (or *lesson-plan* *workbook-page?*)
+      (let ([title-file (if *workbook-page?*
+                            (path-replace-extension *in-file* ".titletxt")
+                            "index.titletxt")]
+            [title (if *workbook-page?*
+                       (regexp-replace* #rx"ZZ"
+                                        (regexp-replace* #rx"\\[.*?\\]" title "")
+                                        "")
+                       title)])
+        (call-with-output-file title-file
+          (lambda (o)
+            (display title o) (newline o))
+          #:exists 'replace)))
     (display #\= o) (display #\space o)
     (display title o)
     (newline o)
     (newline o)
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
-              (format "~a/~a/index-title.txt" *pathway-root-dir* *lesson*)]
+              (format "~a/~a/index.titletxt" *pathway-root-dir* *lesson*)]
             [lesson-title *lesson*])
         (when (file-exists? lesson-title-file)
           (set! lesson-title (call-with-input-file lesson-title-file read-line)))
@@ -580,7 +595,7 @@
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       (let ([lesson-index-file (format "./lessons/~a/index.shtml" lesson)]
-            [lesson-title-file (format "./lessons/~a/index-title.txt" lesson)]
+            [lesson-title-file (format "./lessons/~a/index.titletxt" lesson)]
             [lesson-desc-file (format "./lessons/~a/index-desc.txt" lesson)]
             [lesson-title lesson]
             [lesson-description #f])
@@ -626,7 +641,7 @@
                       [lesson-standards-file
                         (format "./lessons/~a/lesson-standards.txt" lesson)]
                       [lesson-title-file
-                        (format "./lessons/~a/index-title.txt" lesson)]
+                        (format "./lessons/~a/index.titletxt" lesson)]
                       [lesson-title lesson]
                       )
 
