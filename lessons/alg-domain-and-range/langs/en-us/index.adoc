@@ -27,8 +27,6 @@
 
 * Exploring Image Functions (@workbook-link{pages/exploring-image-functions.adoc, original}, @link{solution-pages/exploring-image-functions.adoc, solutions})
 
-* Domain and Range Frayer Model (@exercise-link{pages/frayer-model.pdf, PDF})
-
 * Reading for Domain and Range (@workbook-link{pages/reading-for-domain-and-range.adoc, original}, @link{solution-pages/reading-for-domain-and-range.adoc, solution})
 
 | Preparation
@@ -72,7 +70,7 @@ They will also want to have their @link{../../back-matter/pages/contracts-1.html
 == Contracts @duration{15 minutes}
 
 === Overview
-This activity introduces the notion of @vocab{Contracts}, which are a simple notation (found in algebra) for keeping track of the set all of possible inputs and outputs for a function. They are also closely related to the concept of a _function machine_, which is introduced as well.
+This activity introduces the notion of @vocab{Contracts}, which are a simple notation for keeping track of the set all of possible inputs and outputs for a function. They are also closely related to the concept of a _function machine_, which is introduced as well. __Note: Contracts are based on the same notation found in Algebra!__
 
 === Launch
 [.lesson-point]
@@ -81,11 +79,13 @@ For each input to a function, there is exactly one output
 @span{.right}{ @image{images/VerticalLineTest.png, "Source: Wikipedia", 250} }
 Functions are a lot like machines: values go in, something happens, and new values come out. Let's start with an example of a function we all know: adding two numbers! Addition is like a machine that takes in pairs of numbers and produces a sum. 
 
-Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast. We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what goes in and what comes out!
-
 Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output__ for the same input. Like any good machine, function machines must be *reliable*. 
 
+Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast. We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what type of thing goes in and what type of thing should come out!
+
 In our coffee-maker example, we expect to get the exact same coffee out if we use the exact same beans and water each time. If you put bread in a toaster and got a bagel out, you'd be pretty surprised! __Functions work the same way:__  no matter how many times you plug in the same number, you will _always_ get the same result. And if you don't? *It's not a function!*
+
+== Investigate
 
 We use something called a @vocab{Contract} to keep track of what goes in and out of these machines called functions. Contracts are like a "cheat sheet" for using functions. Once you know how to read one, you can quickly figure out how to use a function just by looking at its contract!
 
@@ -100,7 +100,7 @@ The Contract for a function has three parts: the Name of the function, the @voca
 - The @vocab{Domain} tells us what the function "takes in", or _consumes_. These are also known as the _arguments_ to the function.
 - The @vocab{Range} tells us what the function "gives back", _produces_.
 
-Memorizing contracts is boring - so let's write them down and refer to them later! At the back of your workbook, you'll find pages with space to write down every contract you see in the course.
+Memorizing contracts is hard, and why memorize when we can just keep a log of them! Let's write them down so we can use them later! At the back of your workbook, you'll find pages with space to write down every contract you see in the course.
 
 [.lesson-instruction]
 - What does Multiplication need as an input? What does it produce?
@@ -140,15 +140,19 @@ Memorizing contracts is boring - so let's write them down and refer to them late
 }
 |===
 
+It would be silly to buy a coffee-maker that only works with one specific coffee! Similarly, Contracts don't tell us _specific_ inputs. They tell us the _@vocab{Datatype}_ of input a function needs. For example, a Contract wouldn't say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers".  When we _use_ a Contract, we plug specific numbers into a mathematical expression.
+
+[.lesson-point]
+Contracts are general. Expressions are specific.
+
 [.lesson-instruction]
-*Optional:* Have students turn to the @workbook-link{pages/frayer-model.pdf, Domain and Range Frayer model} in their workbooks and use the visual organizer to explain the concepts of domain and range in their own words.
+*Optional:* Have students make a @exercise-link{pages/frayer-model.pdf, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words.
 
 === Synthesize
-Knowing the Domain and Range of our functions also tells us how they can fit together. For example:
-@ifproglang{wescheme}{`(sqrt (sqr 16))`}
-@ifproglang{pyret}{`num-sqrt(num-sqr(16))`}
-
-We know from it's @vocab{Domain} that the square-root function needs a number. And we know from the square function's @vocab{Range} that it will produce that number. We can be pretty confident that this code will work, even before we run it.
+- What is wrong with the contract 
+@ifproglang{wescheme}{`; + : 3 4 -> 7`?}
+@ifproglang{pyret}{`# + : 3 4 -> 7`?}
+- What is the difference between a value like `17` and a type like `Number`?
 
 == Exploring Image Functions @duration{25 minutes}
 
@@ -156,7 +160,7 @@ We know from it's @vocab{Domain} that the square-root function needs a number. A
 Students explore functions that go beyond numbers, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
 
 === Launch
-Students have already seen Number values like Integers, Decimals and Fractions, but computer programs can work with a much larger set of data types. Show students String values, by having them typing various things in quotation marks:
+Students have already seen `Number` values like `42`,`-91`, `1/4` or `0.25`, but computer programs can work with a much larger set of @vocab{datatypes}. Show students examples of the `String` datatype, by having them type various things in quotation marks:
 
 - `"hello"`
 - `"many words, one string"`
@@ -165,10 +169,10 @@ Students have already seen Number values like Integers, Decimals and Fractions, 
 - Something students come up with on their own...
 
 [.lesson-point]
-A String is anything in quotation marks. _Anything_.
-String values evaluate to themselves, the same way Numbers do.
+A String is _anything_ in quotation marks. Like Number values, String values evaluate to themselves.
 
-Here are two Circles of Evaluation. One of them is familiar, but the other very different from what you've seen before. What is strange about that circle?
+[.lesson-instruction]
+Here are two Circles of Evaluation. One of them is familiar, but the other very different from what you've seen before. What's different about the Circle on the right?
 
 [cols="1,1", grid="none", frame="none"]
 |===
@@ -183,18 +187,23 @@ Possible responses:
 - We've never seen a function take in three inputs
 - We've never seen a function take in a mix of Numbers and Strings
 
+[.lesson-instruction]
 Can you figure out the Name and @vocab{Domain} for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
+
+Possible responses:
 
 - We know the name of the function is `star`, because that's what is at the top of the circle
 - We know it has three things in its Domain
 - We know the Domain consists of a Number and two Strings
 
-But what about the @vocab{Range}? Have students share some guesses, and then convert the Circle to code and try it out!
-
-- What happened?
+[.lesson-instruction]
+- But what about the @vocab{Range}? What do you think this expression will evaluate to? 
+- Convert this Circle to code and try out!
 - What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get.
 - What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
+- What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get. *If you get an error, read it!* It just might give you a hint about what to do...
+
+You've seen two @vocab{datatypes already}: Numbers and Strings. Did we get back either on of those? The @vocab{Range} of `star` is a datatype we haven't seen before: an `Image`!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -204,7 +213,7 @@ But what about the @vocab{Range}? Have students share some guesses, and then con
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
 |===
 
-Suppose we had never seen `star` before. How could we figure out how to use it?
+Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
 
 - Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
@@ -271,15 +280,6 @@ When the input matches what the function consumes, the function produces the out
 *Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?*
 
 _An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
-
-@ifproglang{wescheme}{
-- *What does the contract for `star` look like?*
-`star : Number String String -> Image`
-}
-@ifproglang{pyret}{
-- *What does the contract for `star` look like?*
-`star {two-colons} Number, String, String -> Image`
-}
 
 === Investigate
 [.lesson-instruction]
