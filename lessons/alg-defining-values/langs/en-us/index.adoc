@@ -25,9 +25,9 @@
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1X9xZb68iwRI6E8jskUZ8lEfhwqIqKlFTlJGJq6wEAJc/edit?usp=sharing, Google Slides})
 }
 
-* Defining Values Exploration (@workbook-link{pages/defining-values-practice.adoc, original}, @link{solution-pages/defining-values-practice.adoc, solutions})
+* Defining Values Exploration (@workbook-link{pages/defining-values-explore.adoc, original}, @link{solution-pages/defining-values-practice.adoc, solutions})
 
-* Defining Values Practice (@workbook-link{defining-values-practice-2.adoc, original}, @link{solution-pages/defining-values-practice-2.adoc, solutions})
+* Defining Values Practice (@workbook-link{defining-values-practice.adoc, original}, @link{solution-pages/defining-values-practice-2.adoc, solutions})
 
 | Preparation
 |
@@ -55,14 +55,14 @@ Students should be logged into
 @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     }. }
 @ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org }. }
 
-== Identifying Fixed Structures @duration{30 minutes}
+== What's in Common? @duration{30 minutes}
 
 === Overview
-This activity introduces the problem with duplicate code, leveraging Mathematical Practice 7 - Identify and Make Use of Structure. Students identify common structures in an expression, and discover ways to bind that expression to a name that can be re-used.
+This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that can be re-used.
 
 === Launch
 
-Display the sample code from the "Prize Star" exercise.
+Take a look at the expressions below:
 
 @ifproglang{wescheme}{
 
@@ -74,7 +74,7 @@ Display the sample code from the "Prize Star" exercise.
 (rotate 45 (scale 3 (star 50 "solid" "green")))
 ```
 
-- *What common element was repeated throughout all the lines of code?*
+- *What code do they all have in common?*
 `(star 50 "solid" "green")`
 }
 
@@ -87,29 +87,47 @@ rotate(45, star(50, "solid", "green"))
 rotate(45, scale(3, star(50, "solid", "green")))
 ```
 
-- *What common element was repeated throughout all the lines of code?*
+- *What code do they all have in common?*
 `star(50, "solid", "green")`
 }
 
 - *What happened when you were asked to change the color of the star to gold?*
 _We had to change it everywhere it appeared._
 
-Since we're using that star over and over again, wouldn't it be nice if we could give the piece of code a "nickname", something shorter we could type to represent that piece of code?
+[.lesson-point]
+Duplicate code is almost always bad!
+
+There are lots of potential problems with duplicate code:
+
+- *Readability:* The more code there is, the harder it can be to read.
+- *Performance:* Why re-evalute the same code a dozen times, when we can evaluate it _once_ and use the result as many times as we need?
+- *Maintainability:* Suppose we needed to change the size of the stars in the examples above. We would have to make sure every line is changed, which leaves a lot of room for error.
+
+Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression?
 
 === Investigate
-[.lesson-instruction]
-In the coding environment, have students click "Start a new program" and open to @workbook-link{pages/defining-values-practice.adoc, Defining Values - Explore} to explore defining values.
 
-@ifproglang{pyret}{
-Students need to have *include image* as their first line of code in the @vocab{Definitions area} and press "Run" to load the image library.
-
-- *How is defining a value with the `=` sign similar to what you've seen in math class?*
-}
+You already know how to do this in math: @math{x = 4 + 2} evaluates the expression, and _defines_ the nickname @math{x} to be the value 6. 
 
 @ifproglang{wescheme}{
-- *How is ‘define’ similar to a function?  How is it different?*
-_It’s written inside parentheses like a @vocab{function}, but ‘define’ doesn’t have an output_
+WeScheme uses the word "define" to make this even clearer! We can type `(define x (+ 4 2))` to define `x` to be the value 6.
 }
+@ifproglang{pyret}{
+Pyret is no different! We type `x = 4 + 2` to define `x` to be the value 6.
+}
+
+[.lesson-instruction]
+- Start a new program, and type this code into the Interactions Area. 
+- What happens when you hit Enter?
+- Can you explain what happened or didn't happen?
+
+[.lesson-point]
+Expressions evaluate to answers. Definitions don't.
+
+Think back to math: @math{x = 4 + 2} doesn't have an "answer". All it does is tell us that anytime we see @math{x}, we know it stands for 6. We only see a result when we _use_ that definition, for example @math{x \times 5} will evaluate to 30.
+
+[.lesson-instruction]
+On the computer, try using the definition of `x` by multiplying it by 5.
 
 - *What is the usefulness of defining values?*
 _Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
@@ -124,18 +142,21 @@ _All of them - Number, String, Image_
 MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the programming-specific language, such as "define" and "value".
 |===
 
-[.lesson-instruction]
-Students complete @workbook-link{pages/defining-values-practice.adoc, Defining Values Practice} with their partner.
+Of course, the whole point of defining a value is so that it sticks around and can be used later! That's why programmers put their definitions on the _left-hand side_, known as the @vocab{Definitions Area}.
 
-== Cleaning Up @duration{20 minutes}
+[.lesson-instruction]
+- Complete @workbook-link{pages/defining-values-explore.adoc, Defining Values - Explore} in your student workbook. What else can you define?
+- Complete @workbook-link{pages/defining-values-practice.adoc, Defining Values - Practice} with their partner.
+
+== Cleaning Up Code @duration{20 minutes}
 
 === Overview
 This activity is a chance to _play_ with new concepts, combining value definitions and function composition to create new shapes or to clean up code that generates shapes. The engaging nature of the activity is designed to motivate lots of experiments, each of which gives students a chance to practice applying those concepts.
 
 === Launch
-The ability to define values allows us to look for - and make use of - structure in our code or in our equations. 
-{empty}
-What structures are repeated in this expression? @math{(x + 1)^2 - \frac{4}{(x + 1)} * -2(x + 1)}
+The ability to define values allows us to look for - and make use of - structure in our code or in our equations. What structure is repeated in this expression? 
+
+@span{.center}{@math{(x + 1)^2 - \frac{4}{(x + 1)} * -2(x + 1)}}
 
 === Investigate
 Have students open
@@ -143,8 +164,10 @@ Have students open
 @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1qUY9u9j_NfZM8PJwT9QKJKNlD3RPbSDE, this file}}
 , which draws the Chinese flag. 
 
-. Have them change the color of all the star from yellow to black
-. Have them identify what structures are repeated
+. This file uses a function students haven't seen before! What is it? 
+. What is it its contract?
+. Have them change the color of all the stars from yellow to black
+. Have them identify what structure is repeated
 . Have them use a value definition to simplify the code
 . Have them change the stars from black back to yellow
 
