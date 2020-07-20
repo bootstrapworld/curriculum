@@ -58,6 +58,8 @@ while test $# -ne 0; do
     DEBUG=1; FORCE=1
   elif test "$arg" = -dfl; then
     DEBUG=1; FORCE=1; LINT=1
+  elif test "$arg" = -dfln; then
+    DEBUG=1; FORCE=1; LINT=1; NOPDF=1
   elif test "$arg" = -dfn; then
     DEBUG=1; FORCE=1; NOPDF=1
   elif test "$arg" = -dn; then
@@ -556,6 +558,7 @@ function checkeachinternallink() {
 
   if ! test -f "$f"; then
     export BROKEN_INTERNAL_LINKS=1
+    echo $'\033[?7h'
     echo WARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
   fi
 }
@@ -652,6 +655,7 @@ function processadoc() {
       #echo -n .
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f $fbase-comment.txt
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
@@ -891,6 +895,7 @@ function buildlessonplan() {
       #echo -n .
       overwrite 'building' lesson plan: $L
       rm -f index-comment.txt
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       insertbodyid index.shtml
@@ -1021,6 +1026,7 @@ function buildpathwaynarrative() {
       echo building pathway narrative: $PATHWAY
       export NARRATIVE=1
       rm -f index-comment.txt
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export NARRATIVE=
@@ -1028,6 +1034,7 @@ function buildpathwaynarrative() {
       if test -f pathway-lessons.asciidoc; then
         if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
           rm -f pathway-lessons-comment.txt
+          echo -n $'\033[?7h'
           $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
           mv pathway-lessons.html pathway-lessons.shtml
           removelogos pathway-lessons.shtml
@@ -1186,6 +1193,7 @@ function buildteacherresource() {
       overwrite 'building' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       rm -f index-comment.txt
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export TEACHER_RESOURCES=
@@ -1459,7 +1467,7 @@ function buildpathway() {
       echo 👍 No broken external links in $PATHWAY
     fi
   fi
-  echo $'\033[?7h';
+  echo $'\033[?7h'
 }
 
 function allthestandards() {
