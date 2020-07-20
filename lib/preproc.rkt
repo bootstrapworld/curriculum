@@ -367,7 +367,7 @@
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson dirve f))
+      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file\n    ~a\n\n" lesson dirve f))
     (when exercise?
       (let ([f (format "../~a" g-in-pages)])
         (unless (ormap (lambda (e) (and (equal? (car e) lesson)
@@ -455,7 +455,7 @@
             adoc-img)))))
 
 (define (check-link f #:external? [external? #f])
-  (when *link-lint?*
+  (when (or *link-lint?* #t)
     (cond [external? (display f *external-links-port*)
                      (newline *external-links-port*)]
           [(not (file-exists? f))
@@ -483,7 +483,7 @@
                              (string=? f "pathway-standards.shtml")
                              (abbreviated-index-page? f))
                    (check-link f)
-                   (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                   (printf "WARNING: ~a: @link refers to nonexistent file\n    ~a\n\n"
                            (errmessage-context)
                            f))])
 
@@ -692,7 +692,7 @@
         [title-reached? #f]
         )
     ;
-    (when *link-lint?*
+    (when (or *link-lint?* #t)
       (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
             [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
         (when (file-exists? internal-links-file) (delete-file internal-links-file))

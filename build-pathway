@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-19 # last modified
+LASTMOD=2020-07-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -552,10 +552,11 @@ function checkifsinglepdfpage() {
 
 function checkeachinternallink() {
   local f="$1"
+  local containingf="$2"
 
   if ! test -f "$f"; then
     export BROKEN_INTERNAL_LINKS=1
-    echo WARNING: Invalid internal link $f
+    echo WARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
   fi
 }
 
@@ -604,7 +605,7 @@ function checklinks() {
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
-      checkeachinternallink "$h"
+      checkeachinternallink "$h" "$g"
     done
   fi
 }
