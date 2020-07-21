@@ -50,7 +50,7 @@ To do this activity, what kind of question were you asking of each animal? Was i
 You went through the table one row at a time, and for *each row* you did a lookup on the `fixed` column.
 
 [.lesson-instruction]
-Have students type the code that will look up if `animalA` is fixed or not, then do the same with `animalB`. Suppose we wanted to do this for every animal in the table? This seems really repetitive, doesn’t it? We would keep typing the same thing over and over, but all that’s really changing is the animal. Wouldn’t it be great if Pyret had a function called `get-fixed`, that would do this for us?
+Have students type the code that will look up if `animalX` is fixed or not, then do the same with `animalY`. Suppose we wanted to do this for every animal in the table? This seems really repetitive, doesn’t it? We would keep typing the same thing over and over, but all that’s really changing is the animal. Wouldn’t it be great if Pyret had a function called `get-fixed`, that would do this for us?
 
 Fortunately, we already know how to define functions using the Design Recipe!
 
@@ -80,8 +80,8 @@ Writing examples for Lookup questions is really simple: all we have to do is loo
 # get-fixed :: (r :: Row) -> Boolean
 # Consumes an animal, and looks up the value in the fixed column
 examples:
-  get-fixed(animalA) is true
-  get-fixed(animalB) is false
+  get-fixed(animalX) is true
+  get-fixed(animalY) is false
 end
 ----
 
@@ -94,8 +94,8 @@ When defining the function, we replace the answer with the lookup code.
 # get-fixed :: (animal :: Row) -> Boolean
 # Consumes an animal, and looks up the value in the fixed column
 examples:
-  get-fixed(animalA) is true
-  get-fixed(animalB) is false
+  get-fixed(animalX) is true
+  get-fixed(animalY) is false
 end
 fun get-fixed(r): r["fixed"]
 end
@@ -108,7 +108,7 @@ For practice, try using the Design Recipe to define another lookup function.
 * Use the Design Recipe to solve the word problem at the bottom of @workbook-link{pages/design-recipe-1.adoc}.
 * Type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area.
 * Click “Run”, and make sure all your examples pass!
-* Type `get-sex(animalA)` into the Interactions Area.
+* Type `get-sex(animalX)` into the Interactions Area.
 
 == Defining Compute Functions @duration{25 minutes}
 
@@ -126,14 +126,14 @@ Suppose we want to define a function called `is-cat`, which consumes a row from 
 * What is the name of this function? What are its Domain and Range?
 * Is Sasha a cat? _What did you do to get that answer?_
 
-To find out if an animal is a cat, we look-up the species column and check to see if that value is _equal_ to `"cat"`. Suppose `animalA` is a cat and `animalB` is a lizard. What should our examples look like? *Remember: we replace any lookup with the actual value, and check to see if it is equal to `"cat"`.*
+To find out if an animal is a cat, we look-up the species column and check to see if that value is _equal_ to `"cat"`. Suppose `animalX` is a cat and `animalY` is a dog. What should our examples look like? *Remember: we replace any lookup with the actual value, and check to see if it is equal to `"cat"`.*
 
 ----
 # is-cat :: (r :: Row) -> Boolean
 # Consumes an animal, and compute whether the species is "cat"
 examples:
-  is-cat(animalA) is "cat" == "cat"
-  is-cat(animalB) is "dog" == "cat"
+  is-cat(animalX) is "cat" == "cat"
+  is-cat(animalY) is "dog" == "cat"
 end
 ----
 
@@ -146,8 +146,8 @@ As before, we’ll use the pattern from our examples to come up with our definit
 # is-cat :: (r :: Row) -> Boolean
 # Consumes an animal, and compute whether the species is "cat"
 examples:
-  is-cat(animalA) is "cat" == "cat"
-  is-cat(animalB) is "dog" == "cat"
+  is-cat(animalX) is "cat" == "cat"
+  is-cat(animalY) is "dog" == "cat"
 end
 fun is-cat(r): r["species"] == "cat"
 end
