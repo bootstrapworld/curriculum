@@ -116,8 +116,11 @@
         [*lesson-subdir* (format "Page ~a" *lesson-subdir*)]
         [else ""]))
 
+(define (errmessage-file-context)
+  (format "~a/~a" (current-directory) *in-file*))
+
 (define read-group (*make-read-group (lambda z (apply code z))
-                                     (lambda () *in-file*)))
+                                     errmessage-file-context))
 
 (define (read-space i)
   (let loop ()
@@ -245,15 +248,24 @@
       (display #\= o))))
 
 (define (string-to-form s)
-  (call-with-input-string s
-    (lambda (i)
-      (let loop ([r '()])
-        (let ([x (read i)])
-          (if (eof-object? x) (reverse r)
-              (loop (cons x r))))))))
+  (with-handlers ([exn:fail? (lambda (e)
+                               (printf "ERROR: ~a in ~s\n\n"
+                                       (exn-message e) (errmessage-file-context))
+                               '())])
+    (call-with-input-string s
+      (lambda (i)
+        (let loop ([r '()])
+          (let ([x (read i)])
+            (if (eof-object? x) (reverse r)
+                (loop (cons x r)))))))))
 
 (define (massage-arg arg)
-  (eval arg *adoc-namespace*))
+  ;(printf "doing massage-arg ~s\n" arg)
+  (with-handlers ([exn:fail? (lambda (e)
+                               (printf "ERROR: ~a in ~s\n\n"
+                                       (exn-message e) (errmessage-file-context))
+                               #f)])
+    (eval arg *adoc-namespace*)))
 
 (define (rearrange-args args)
   ;(printf "doing rearrange-args ~s\n" args)
