@@ -248,24 +248,16 @@
       (display #\= o))))
 
 (define (string-to-form s)
-  (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
-                                       (exn-message e) (errmessage-file-context))
-                               '())])
-    (call-with-input-string s
-      (lambda (i)
-        (let loop ([r '()])
-          (let ([x (read i)])
-            (if (eof-object? x) (reverse r)
-                (loop (cons x r)))))))))
+  (call-with-input-string s
+    (lambda (i)
+      (let loop ([r '()])
+        (let ([x (read i)])
+          (if (eof-object? x) (reverse r)
+              (loop (cons x r))))))))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
-  (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
-                                       (exn-message e) (errmessage-file-context))
-                               #f)])
-    (eval arg *adoc-namespace*)))
+  (eval arg *adoc-namespace*))
 
 (define (rearrange-args args)
   ;(printf "doing rearrange-args ~s\n" args)
@@ -697,341 +689,344 @@
       (newline o)))
 
 (define (preproc-n-asciidoctor in-file)
-  (set! *in-file* in-file)
-  ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
-  (let ([out-file (path-replace-extension in-file ".asc")]
-        [first-subsection-reached? #f]
-        [title-reached? #f]
+  (with-handlers ([exn:fail? (lambda (e)
+                               (printf "ERROR: ~a in ~s\n\n"
+                                       (exn-message e) (errmessage-file-context)))])
+    (set! *in-file* in-file)
+    ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
+    (let ([out-file (path-replace-extension in-file ".asc")]
+          [first-subsection-reached? #f]
+          [title-reached? #f]
+          )
+      ;
+      (when (or *link-lint?* #t)
+        (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
+              [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
+          (when (file-exists? internal-links-file) (delete-file internal-links-file))
+          (when (file-exists? external-links-file) (delete-file external-links-file))
+          (set! *internal-links-port* (open-output-file internal-links-file))
+          (set! *external-links-port* (open-output-file external-links-file))))
+      ;
+      (when *lesson-plan*
+        (for ([x *lessons-and-standards*])
+          (when (string=? (car x) *lesson-plan*)
+            (for ([s (cdr x)])
+              (add-standard s #f *lesson-plan* #f #f))))
         )
-    ;
-    (when (or *link-lint?* #t)
-      (let ([internal-links-file (path-replace-extension in-file ".internal-links.txt.kp")]
-            [external-links-file (path-replace-extension in-file ".external-links.txt.kp")])
-        (when (file-exists? internal-links-file) (delete-file internal-links-file))
-        (when (file-exists? external-links-file) (delete-file external-links-file))
-        (set! *internal-links-port* (open-output-file internal-links-file))
-        (set! *external-links-port* (open-output-file external-links-file))))
-    ;
-    (when *lesson-plan*
-      (for ([x *lessons-and-standards*])
-        (when (string=? (car x) *lesson-plan*)
-          (for ([s (cdr x)])
-            (add-standard s #f *lesson-plan* #f #f))))
-      )
-    ;
-    (when (or *lesson-plan*
-              *narrative*
-              *teacher-resources*)
-      (print-menubar "index"))
-    ;
-    (define (expand-directives i o)
-      (let ([beginning-of-line? #t])
-        (let loop ()
-          (let ([c (read-char i)])
-            (unless (eof-object? c)
-              (cond
-                [(char=? c #\@)
-                 (set! beginning-of-line? #f)
-                 (let ([directive (read-word i)])
-                   ;(printf "directive = ~s~%" directive)
-                   (cond [(string=? directive "") (display c o)]
-                         [(string=? directive "span")
-                          (display-begin-span (read-group i directive) o)
-                          ]
-                         [(string=? directive "comment")
-                          (let ([prose (read-group i directive)])
-                            (if title-reached?
-                                (display-comment prose o)
-                                (display-header-comment prose o)
-                                ))]
-                         [(string=? directive "duration")
-                          (let ([txt (read-group i directive)])
-                            (display (string-append
-                                       (create-begin-tag "span" ".duration")
-                                       txt
-                                       (create-end-tag "span")) o))]
-                         [(string=? directive "vocab")
-                          (let* ([arg (read-group i directive)]
-                                 [s (assoc-glossary arg *glossary-list*)])
-                            (when (string=? arg "")
-                              (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
-                            (display (enclose-span ".vocab" arg) o)
-                            (cond [s (unless (member s *glossary-items*)
-                                       (set! *glossary-items* (cons s *glossary-items*)))]
-                                  [else
-                                    (unless (member arg *missing-glossary-items*)
-                                      (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
-                                    (printf "WARNING: Item ~s not found in glossary\n\n"
-                                                arg)]))]
-                         [(string=? directive "std")
-                          (let ([args (read-commaed-group i directive)])
-                            (printf "WARNING: Directive @std is obsolete\n\n")
-                            )]
-                         [(string=? directive "prereqs-stds")
-                          (display-prereqs-row (read-commaed-group i directive) o)
-                          (display-standards-row o)
-                          ]
-                         [(string=? directive "image")
-                          (let ([args (read-commaed-group i directive)])
-                            (display (make-image (car args) (cdr args)) o))]
-                         [(string=? directive "centered-image")
-                          (let ([args (read-commaed-group i directive)])
-                            (display (make-image (car args) (cdr args) #:centered? #t) o))]
-                         [(string=? directive "math")
-                          (display (enclose-math (read-group i directive)) o)]
-                         [(or (string=? directive "workbook-link")
-                              (string=? directive "exercise-link"))
-                          (let* ([args (read-commaed-group i directive)]
-                                 [exercise? (string=? directive "exercise-link")]
-                                 [n (length args)]
-                                 [page (car args)]
-                                 [link-text (if (> n 1) (cadr args) "")]
-                                 [page-compts (regexp-split #rx"/" page)]
-                                 [first-compt (car page-compts)])
-                            ;(when (string=? directive "exercise-link") (printf "calling @exercise-link ~s\n" args))
-                            (case (length page-compts)
-                              [(1)
-                               (display (make-workbook-link *lesson*
-                                                            "pages"
-                                                            first-compt
-                                                            link-text
-                                                            #:exercise? exercise?) o)]
-                              [(2)
-                               (let ([second-compt (cadr page-compts)]
-                                     [lesson-dir *lesson*])
-                                 (cond [(and (or (string=? first-compt "pages")
-                                                 (string=? first-compt "solution-pages"))
-                                             lesson-dir)
-                                        (display (make-workbook-link lesson-dir
-                                                                     first-compt
-                                                                     (cadr page-compts)
-                                                                     link-text
-                                                                     #:exercise? exercise?) o)]
-                                       [else
-                                         ;TODO should these just be warnings
-                                         ;with the @workbook-link converted to plain @link ?
-                                         (printf "WARNING: Incorrect @workbook-link ~a\n\n" page)]))]
-                              [(3)
-                               (let ([second-compt (cadr page-compts)]
-                                     [third-compt (caddr page-compts)])
-                                 (cond [(or (string=? second-compt "pages")
-                                            (string=? second-compt "solution-pages"))
-                                        (display (make-workbook-link (string-append "lessons/" first-compt)
-                                                                     second-compt
-                                                                     third-compt link-text
-                                                                     #:exercise? exercise?) o)]
-                                       [else
-                                         (printf "WARNING: Incorrect² @workbook-link ~a\n\n" page)]))]
-                              [else
-                                (printf "WARNING: Incorrect³  @workbook-link ~a\n\n" page)]))]
-                         [(or (string=? directive "worksheet-link")
-                              (string=? directive "worksheet-include")
-                              (string=? directive "exercise-link"))
-                          ;TODO: Remove this after a while
-                          (error 'ERROR
-                                  "adoc-preproc: Obsolete directive ~a\n" directive)]
-                         [(string=? directive "link")
-                          (let* ([args (read-commaed-group i directive)]
-                                 [adocf (car args)]
-                                 [link-text (string-join
-                                              (map string-trim (cdr args)) ", ")])
-                            (display (make-link adocf link-text) o))]
-                         [(string=? directive "include")
-                          (let* ([args (read-commaed-group i directive)]
-                                 [adocf (car args)] ;only one right? FIXME
-                                 )
-                            (display (make-link adocf "" #:include? #t) o))]
-                         [(string=? directive "lesson-description")
-                          (unless *lesson-plan* ;TODO: or LESSON or both?
+      ;
+      (when (or *lesson-plan*
+                *narrative*
+                *teacher-resources*)
+        (print-menubar "index"))
+      ;
+      (define (expand-directives i o)
+        (let ([beginning-of-line? #t])
+          (let loop ()
+            (let ([c (read-char i)])
+              (unless (eof-object? c)
+                (cond
+                  [(char=? c #\@)
+                   (set! beginning-of-line? #f)
+                   (let ([directive (read-word i)])
+                     ;(printf "directive = ~s~%" directive)
+                     (cond [(string=? directive "") (display c o)]
+                           [(string=? directive "span")
+                            (display-begin-span (read-group i directive) o)
+                            ]
+                           [(string=? directive "comment")
+                            (let ([prose (read-group i directive)])
+                              (if title-reached?
+                                  (display-comment prose o)
+                                  (display-header-comment prose o)
+                                  ))]
+                           [(string=? directive "duration")
+                            (let ([txt (read-group i directive)])
+                              (display (string-append
+                                         (create-begin-tag "span" ".duration")
+                                         txt
+                                         (create-end-tag "span")) o))]
+                           [(string=? directive "vocab")
+                            (let* ([arg (read-group i directive)]
+                                   [s (assoc-glossary arg *glossary-list*)])
+                              (when (string=? arg "")
+                                (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
+                              (display (enclose-span ".vocab" arg) o)
+                              (cond [s (unless (member s *glossary-items*)
+                                         (set! *glossary-items* (cons s *glossary-items*)))]
+                                    [else
+                                      (unless (member arg *missing-glossary-items*)
+                                        (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
+                                      (printf "WARNING: Item ~s not found in glossary\n\n"
+                                              arg)]))]
+                           [(string=? directive "std")
+                            (let ([args (read-commaed-group i directive)])
+                              (printf "WARNING: Directive @std is obsolete\n\n")
+                              )]
+                           [(string=? directive "prereqs-stds")
+                            (display-prereqs-row (read-commaed-group i directive) o)
+                            (display-standards-row o)
+                            ]
+                           [(string=? directive "image")
+                            (let ([args (read-commaed-group i directive)])
+                              (display (make-image (car args) (cdr args)) o))]
+                           [(string=? directive "centered-image")
+                            (let ([args (read-commaed-group i directive)])
+                              (display (make-image (car args) (cdr args) #:centered? #t) o))]
+                           [(string=? directive "math")
+                            (display (enclose-math (read-group i directive)) o)]
+                           [(or (string=? directive "workbook-link")
+                                (string=? directive "exercise-link"))
+                            (let* ([args (read-commaed-group i directive)]
+                                   [exercise? (string=? directive "exercise-link")]
+                                   [n (length args)]
+                                   [page (car args)]
+                                   [link-text (if (> n 1) (cadr args) "")]
+                                   [page-compts (regexp-split #rx"/" page)]
+                                   [first-compt (car page-compts)])
+                              ;(when (string=? directive "exercise-link") (printf "calling @exercise-link ~s\n" args))
+                              (case (length page-compts)
+                                [(1)
+                                 (display (make-workbook-link *lesson*
+                                                              "pages"
+                                                              first-compt
+                                                              link-text
+                                                              #:exercise? exercise?) o)]
+                                [(2)
+                                 (let ([second-compt (cadr page-compts)]
+                                       [lesson-dir *lesson*])
+                                   (cond [(and (or (string=? first-compt "pages")
+                                                   (string=? first-compt "solution-pages"))
+                                               lesson-dir)
+                                          (display (make-workbook-link lesson-dir
+                                                                       first-compt
+                                                                       (cadr page-compts)
+                                                                       link-text
+                                                                       #:exercise? exercise?) o)]
+                                         [else
+                                           ;TODO should these just be warnings
+                                           ;with the @workbook-link converted to plain @link ?
+                                           (printf "WARNING: Incorrect @workbook-link ~a\n\n" page)]))]
+                                [(3)
+                                 (let ([second-compt (cadr page-compts)]
+                                       [third-compt (caddr page-compts)])
+                                   (cond [(or (string=? second-compt "pages")
+                                              (string=? second-compt "solution-pages"))
+                                          (display (make-workbook-link (string-append "lessons/" first-compt)
+                                                                       second-compt
+                                                                       third-compt link-text
+                                                                       #:exercise? exercise?) o)]
+                                         [else
+                                           (printf "WARNING: Incorrect² @workbook-link ~a\n\n" page)]))]
+                                [else
+                                  (printf "WARNING: Incorrect³  @workbook-link ~a\n\n" page)]))]
+                           [(or (string=? directive "worksheet-link")
+                                (string=? directive "worksheet-include")
+                                (string=? directive "exercise-link"))
+                            ;TODO: Remove this after a while
                             (error 'ERROR
-                                   "WARNING: @lesson-description (~a,~a) valid only in lesson plan"
-                                   *lesson-subdir* *in-file*))
-                          (display-lesson-description (read-group i directive) o)]
-                         [(string=? directive "all-exercises")
-                          (unless *teacher-resources*
-                            (error 'ERROR
-                                   "adoc-preproc: @all-exercises valid only in teacher resources"))
-                          (display-exercise-collation o)]
-                         [(string=? directive "solutions-workbook")
-                          ;TODO: don't need this anymore -- link is autogen'd
-                          (unless *teacher-resources*
-                            (error 'ERROR
-                                   "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                          (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
-                          (newline o)
-                          (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
-                          ]
-                         [(string=? directive "do")
-                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                            (for-each massage-arg exprs))]
-                         [(string=? directive "show")
-                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                            (for ([s exprs])
-                              (display (massage-arg s) o)))]
-                         [(string=? directive "clear")
-                          (read-group i directive)
-                          (newline o)
-                          (display (enclose-span ".clear" " ") o)]
-                         [(string=? directive "vspace")
-                          (let ([height (read-group i directive)])
-                            (display
-                              (string-append
-                                (create-begin-tag "span" ".vspace" #:attribs
-                                                  (format "style=\"height: ~a\"" height))
-                                (create-end-tag "span")) o))]
-                         [(string=? directive "quad")
-                          (let ([width (read-group i directive)])
-                            (display
-                              (string-append
-                                (create-begin-tag "span" ".quad" #:attribs
-                                                  (format "style=\"width: ~a\"" width))
-                                (create-end-tag "span")) o))]
-                         [(string=? directive "fitb")
-                          (let ([width (read-group i directive)])
-                            (display-begin-span
-                              ".fitb" o #:attribs (format "style=\"width: ~a\"" width)))]
-                         [(string=? directive "fitbruby")
-                          ;FIXME: text should be processed, see fitb above
-                          (let* ([width (read-group i directive)]
-                                 [text (read-group i directive)]
-                                 [ruby (read-group i directive)])
-                            (display
-                              (string-append
-                                (create-begin-tag "span" ".fitbruby" #:attribs
-                                                  (format "style=\"width: ~a\"" width))
+                                   "adoc-preproc: Obsolete directive ~a\n" directive)]
+                           [(string=? directive "link")
+                            (let* ([args (read-commaed-group i directive)]
+                                   [adocf (car args)]
+                                   [link-text (string-join
+                                                (map string-trim (cdr args)) ", ")])
+                              (display (make-link adocf link-text) o))]
+                           [(string=? directive "include")
+                            (let* ([args (read-commaed-group i directive)]
+                                   [adocf (car args)] ;only one right? FIXME
+                                   )
+                              (display (make-link adocf "" #:include? #t) o))]
+                           [(string=? directive "lesson-description")
+                            (unless *lesson-plan* ;TODO: or LESSON or both?
+                              (error 'ERROR
+                                     "WARNING: @lesson-description (~a,~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (display-lesson-description (read-group i directive) o)]
+                           [(string=? directive "all-exercises")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                            (display-exercise-collation o)]
+                           [(string=? directive "solutions-workbook")
+                            ;TODO: don't need this anymore -- link is autogen'd
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @solutions-workbook valid only in teacher resources"))
+                            (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
+                            (newline o)
+                            (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
+                            ]
+                           [(string=? directive "do")
+                            (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                              (for-each massage-arg exprs))]
+                           [(string=? directive "show")
+                            (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                              (for ([s exprs])
+                                (display (massage-arg s) o)))]
+                           [(string=? directive "clear")
+                            (read-group i directive)
+                            (newline o)
+                            (display (enclose-span ".clear" " ") o)]
+                           [(string=? directive "vspace")
+                            (let ([height (read-group i directive)])
+                              (display
                                 (string-append
-                                  text
-                                  (create-begin-tag "span" ".ruby")
-                                  ruby
-                                  (create-end-tag "span"))
-                                (create-end-tag "span")) o))]
-                         [(string=? directive "ifproglang")
-                          (let ([proglang (read-group i directive)])
-                            (cond [(string=? proglang *proglang*)
-                                   (display-begin-span #f o)]
-                                  [else
-                                    (read-group i directive)
-                                    (read-space i)]))]
-                         [(assoc directive *macro-list*)
-                          => (lambda (s)
-                               (display (cadr s) o))]
-                         [(assoc directive *function-list*)
-                          => (lambda (f)
-                               (let ([g (read-group i directive)])
-                                 (let ([args (string-to-form g)])
-                                   (let-values ([(key-list key-vals args)
-                                                 (rearrange-args args)])
-                                     (call-with-input-string (keyword-apply (cadr f) key-list key-vals args)
-                                       (lambda (i)
-                                         (expand-directives i o)
-                                         ))))))]
+                                  (create-begin-tag "span" ".vspace" #:attribs
+                                                    (format "style=\"height: ~a\"" height))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "quad")
+                            (let ([width (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".quad" #:attribs
+                                                    (format "style=\"width: ~a\"" width))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "fitb")
+                            (let ([width (read-group i directive)])
+                              (display-begin-span
+                                ".fitb" o #:attribs (format "style=\"width: ~a\"" width)))]
+                           [(string=? directive "fitbruby")
+                            ;FIXME: text should be processed, see fitb above
+                            (let* ([width (read-group i directive)]
+                                   [text (read-group i directive)]
+                                   [ruby (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".fitbruby" #:attribs
+                                                    (format "style=\"width: ~a\"" width))
+                                  (string-append
+                                    text
+                                    (create-begin-tag "span" ".ruby")
+                                    ruby
+                                    (create-end-tag "span"))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "ifproglang")
+                            (let ([proglang (read-group i directive)])
+                              (cond [(string=? proglang *proglang*)
+                                     (display-begin-span #f o)]
+                                    [else
+                                      (read-group i directive)
+                                      (read-space i)]))]
+                           [(assoc directive *macro-list*)
+                            => (lambda (s)
+                                 (display (cadr s) o))]
+                           [(assoc directive *function-list*)
+                            => (lambda (f)
+                                 (let ([g (read-group i directive)])
+                                   (let ([args (string-to-form g)])
+                                     (let-values ([(key-list key-vals args)
+                                                   (rearrange-args args)])
+                                                 (call-with-input-string (keyword-apply (cadr f) key-list key-vals args)
+                                                   (lambda (i)
+                                                     (expand-directives i o)
+                                                     ))))))]
+                           [else
+                             (printf "WARNING: Unrecognized directive @~a\n\n" directive)
+                             (display c o) (display directive o)
+                             #f]))]
+                  [(and (or *lesson*
+                            *lesson-plan*
+                            *narrative*
+                            *teacher-resources*)
+                        beginning-of-line? (char=? c #\=))
+                   (set! beginning-of-line? #f)
+                   (cond [title-reached?
+                           (cond [first-subsection-reached? #f]
+                                 [(check-first-subsection i o)
+                                  (set! first-subsection-reached? #t)
+                                  (when *lesson-plan*
+                                    ;(include-standards o)
+                                    (include-glossary o))]
+                                 [else #f])
+                           (cond [*lesson*
+                                   (display-section-markup i o)]
+                                 [else (display c o)])]
                          [else
-                           (printf "WARNING: Unrecognized directive @~a\n\n" directive)
-                           (display c o) (display directive o)
-                           #f]))]
-                [(and (or *lesson*
-                          *lesson-plan*
-                          *narrative*
-                          *teacher-resources*)
-                      beginning-of-line? (char=? c #\=))
-                 (set! beginning-of-line? #f)
-                 (cond [title-reached?
-                         (cond [first-subsection-reached? #f]
-                               [(check-first-subsection i o)
-                                (set! first-subsection-reached? #t)
-                                (when *lesson-plan*
-                                  ;(include-standards o)
-                                  (include-glossary o))]
-                               [else #f])
-                         (cond [*lesson*
-                                (display-section-markup i o)]
-                               [else (display c o)])]
-                       [else
-                         (set! title-reached? #t)
-                         (display-title i o)
-                         (display-alternative-proglang o)
-                         (when *teacher-resources*
-                           ;(printf "teacher resource autoloading stuff\n")
-                           (newline o)
-                           (fprintf o (create-workbook-links))
-                           ;(display-exercise-collation o)
-                           )])]
-                [(char=? c #\newline)
-                 (newline o)
-                 (set! beginning-of-line? #t)]
-                [else
-                  (set! beginning-of-line? #f)
-                  (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
-                         (cond [(char=? c #\{)
-                                (unless (= (top-span-stack) 0)
-                                  (display c o))
-                                (increment-top-span-stack)]
-                               [(char=? c #\})
-                                (decrement-top-span-stack)
-                                (cond [(= (top-span-stack) 0)
-                                       (display-end-span o)]
-                                      [else (display c o)])]
-                               [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])]
-                        [else (display c o)])])
-              (loop))))))
-    ;
-    (call-with-input-file in-file
-      (lambda (i)
-        (call-with-output-file out-file
-          (lambda (o)
-            (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
-                  )
-            (expand-directives i o)
+                           (set! title-reached? #t)
+                           (display-title i o)
+                           (display-alternative-proglang o)
+                           (when *teacher-resources*
+                             ;(printf "teacher resource autoloading stuff\n")
+                             (newline o)
+                             (fprintf o (create-workbook-links))
+                             ;(display-exercise-collation o)
+                             )])]
+                  [(char=? c #\newline)
+                   (newline o)
+                   (set! beginning-of-line? #t)]
+                  [else
+                    (set! beginning-of-line? #f)
+                    (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
+                           (cond [(char=? c #\{)
+                                  (unless (= (top-span-stack) 0)
+                                    (display c o))
+                                  (increment-top-span-stack)]
+                                 [(char=? c #\})
+                                  (decrement-top-span-stack)
+                                  (cond [(= (top-span-stack) 0)
+                                         (display-end-span o)]
+                                        [else (display c o)])]
+                                 [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])]
+                          [else (display c o)])])
+                (loop))))))
+      ;
+      (call-with-input-file in-file
+        (lambda (i)
+          (call-with-output-file out-file
+            (lambda (o)
+              (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+                    )
+              (expand-directives i o)
 
-            (when *narrative*
-              (link-to-lessons-in-pathway o))
+              (when *narrative*
+                (link-to-lessons-in-pathway o))
 
-            (set! *dictionaries-represented*
-              (sort *dictionaries-represented* string-ci<=?))
+              (set! *dictionaries-represented*
+                (sort *dictionaries-represented* string-ci<=?))
 
-            (when (or *narrative* *lesson-plan*)
-              (create-standards-subfile))
+              (when (or *narrative* *lesson-plan*)
+                (create-standards-subfile))
 
-            (when *narrative*
-              (print-other-resources-intro o)
-              (print-link-to-glossary o)
-              (print-link-to-standards o)
-              (print-link-to-student-workbook o)
-              (print-link-to-teacher-resources o)
-              (print-link-to-forum o))
+              (when *narrative*
+                (print-other-resources-intro o)
+                (print-link-to-glossary o)
+                (print-link-to-standards o)
+                (print-link-to-student-workbook o)
+                (print-link-to-teacher-resources o)
+                (print-link-to-forum o))
 
-            (unless (truthy-getenv "OTHERDIR")
-              (fprintf o "\n\n")
-              (fprintf o "[.acknowledgment]\n")
-              (fprintf o "--\n")
-              (fprintf o (create-acknowledgment))
-              (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}../../lib/CCbadge.png[], window=\"_blank\"]\n")
-              (fprintf o (create-copyright *copyright-name* *copyright-author*))
-              (fprintf o "\n--\n")
+              (unless (truthy-getenv "OTHERDIR")
+                (fprintf o "\n\n")
+                (fprintf o "[.acknowledgment]\n")
+                (fprintf o "--\n")
+                (fprintf o (create-acknowledgment))
+                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}../../lib/CCbadge.png[], window=\"_blank\"]\n")
+                (fprintf o (create-copyright *copyright-name* *copyright-author*))
+                (fprintf o "\n--\n")
+                )
               )
-            )
 
-          #:exists 'replace)))
-  ;
+            #:exists 'replace)))
+      ;
 
-  (when (or *lesson-plan* *narrative*)
-    (add-exercises)
-    (create-glossary-subfile))
+      (when (or *lesson-plan* *narrative*)
+        (add-exercises)
+        (create-glossary-subfile))
 
-  (when *lesson-plan*
-    (accumulate-glossary-and-standards))
+      (when *lesson-plan*
+        (accumulate-glossary-and-standards))
 
-  ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
-  (unless (truthy-getenv "OTHERDIR")
-    (asciidoctor out-file)
-    ;(unless (truthy-getenv "DEBUG") (delete-file out-file))
-    )
+      ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
+      (unless (truthy-getenv "OTHERDIR")
+        (asciidoctor out-file)
+        ;(unless (truthy-getenv "DEBUG") (delete-file out-file))
+        )
 
-  (when *link-lint?*
-    (close-output-port *internal-links-port*)
-    (close-output-port *external-links-port*))
+      (when *link-lint?*
+        (close-output-port *internal-links-port*)
+        (close-output-port *external-links-port*))
 
-    ))
+      )))
 
 (define (asciidoctor file)
   ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)
