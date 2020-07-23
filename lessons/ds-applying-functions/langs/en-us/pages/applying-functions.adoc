@@ -25,27 +25,14 @@ Type this line of code into the interactions area and hit "Enter":  `triangle(50
 
 == Catching Bugs
 
-The following lines of code are all BUGGY! Can you spot the mistake? In the blanks below, write down what the problem is, then type in the code and see what error message Pyret produces.
-[cols="1,15,10", frame="none"]
+The following lines of code are all BUGGY! Can you spot the mistake? _Match_ the code (left) with the mistake (right). If you have time, type in the buggy code and see what Pyret does!
+
+[cols=".^10a,^.^1a,2,^.^1a,.^10a",stripes="none",grid="none",frame="none"]
 |===
 
-|1
-| `triangle(20, "solid" "red")`
-| @fitb{45ex}{}
-
-|2
-| `triangle(20, "solid")`
-| @fitb{45ex}{}
-
-|3
-| `triangle(20, 10, "solid", "red")`
-| @fitb{45ex}{}
-
-|4
-| `triangle (20, "solid", "red")`
-| @fitb{45ex}{}
-
-|5
-| `triangle 20, "solid", "red")`
-| @fitb{45ex}{}
+| `triangle(20, "solid" "red")` |*1*||*A*| Not enough arguments for triangle's Domain
+| `triangle(20, "solid")`		|*2*||*B*| Missing open parentheses
+| `triangle(20, 10, "solid", "red")`|*3*||*C*| Missing a comma between arguments
+| `triangle (20, "solid", "red")`|*4*||*D*| Too many arguments for triangle's Domain
+| `triangle 20, "solid", "red")`|*5*||*E*| Space after the function name
 |===
