@@ -662,8 +662,12 @@ div.rightColumn .obeyspaces {
 
   /* Force preamble to always be on its own page */
   #preamble { page-break-after: always; }
-  :not(body.LessonPlan) #header { background: black; color: white; }
-
+  /* Workbook pages should have an inverted header, with a little space below */
+  :not(body.LessonPlan) #header { 
+    background: black; 
+    color: white; 
+    margin-bottom: 5px !important;
+  }
 
   /* More padding between sections, and don't ever break a section across pages */
   .lesson-section-1 { margin-bottom: 20px; }
