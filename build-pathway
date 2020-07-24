@@ -641,13 +641,17 @@ function processadoc() {
   else
     fhtml=$fbase.html
     fasc=$fbase.asc
+    fpdf=$fbase.pdf
     DOIT=
+    DOITPDF=
     if test $FORCE; then
       DOIT=1;
+      if test ! $OTHERDIR; then DOITPDF=1; fi
     elif test $OTHERDIR; then
       if test $f -nt $fasc; then DOIT=1; fi
     else
       if test $f -nt $fhtml; then DOIT=1; fi
+      if test $f -nt $fpdf; then DOITPDF=1; fi
     fi
     if test $DOIT; then
       #echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
@@ -663,8 +667,11 @@ function processadoc() {
         if test ! $OTHERDIR; then
           insertgdrivesave $fhtml
         fi
+      fi
+    fi
+    if test $DOITPDF; then
+      if test -f "$fhtml"; then
         if test ! $NOPDF; then
-          fpdf=${fhtml%.html}.pdf
           if test $fhtml -nt $fpdf; then
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
