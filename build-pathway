@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-20 # last modified
+LASTMOD=2020-07-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1217,7 +1217,7 @@ function batchhtmltopdf() {
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
     if test -f "$f"; then
-      wkhtmltopdf --read-args-from-stdin < $f &
+      wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
     fi
   done
   wait
