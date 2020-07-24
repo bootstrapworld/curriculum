@@ -4,10 +4,12 @@
 
 - Sometimes we want to _ask questions_ about data. For example, is `x` greater than `y`? Is one string equal to another? These questions can't be answered with numbers. Instead, they are answered with *Booleans*.
 
+- Video games use Booleans for many things: asking when a player's health is equal to zero, whether two characters are close enough to bump into one another, or if a character's coordinates put it off the edge of the screen.
+
 - A Boolean value is either `true` or `false`. Unlike Numbers, Strings, and Images, Booleans have only two possible values.
 
-- You already know some functions that produce Booleans, such as `<` and `>`! Our programming language has them, too: @show{(sexp->code `(3 > 4))}, @show{(sexp->code `(10 < 2))}.
+- You already know some functions that produce Booleans, such as `<` and `>`! Our programming language has them, too: @show{(sexp->code `(< 3 4))}, @show{(sexp->code `(> 10 2))}, and @show{(sexp->code `(= -10 19))}.
 
-- We also have ways of _combining_ Boolean expressions, so we can ask more complicated questions. For example, we can write @show{(sexp->code `(and (3 > 4) (10 < 2)))}
+- We also have ways of _combining_ Boolean expressions, so we can ask more complicated questions. For example, we can write @show{(sexp->code `(and (> 3 4) (< 10 2)))}
 
-- video games use Booleans for many things: asking when a player's health is equal to zero, whether two characters are close enough to bump into one another, or if a character's coordinates put it off the edge of the screen.
+- The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images: @show{(sexp->coe `(and (> 3 4) (< 10 2)))}
