@@ -200,16 +200,25 @@ function insertgdrivesave() {
   </script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>function renderSaveToDrive() {
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     gapi.savetodrive.render('savetodrive-div', {
     src:%INSERTGDRIVEURL,
     filename:"%INSERTGDRIVELESSONTITLE",
     sitename:"Bootstrap, Brown University"
   });
+  if(isSafari){
+    var warning = document.createElement("div");
+    warning.id = "safariWarning";
+    warning.innerHTML = "You appear to be using Safari, which interferes with Google's Save-to-Drive button. You can fix it by going to Preferences, clicking 'Privacy', and making sure that 'Prevent cross-site tracking' is <b>not</b> checked."
+    var button = document.getElementById("savetodrive-div");
+    button.parentNode.insertBefore(warning, warning.nextSibling);
+  }
 }
 </script>
 EOF
   cat > $TMPFILE-2.txt <<EOF
   <div id="savetodrive-div"></div>
+
 EOF
   $SED -i \
     -e 's/^\(<body  *[^>]*\)>/\1 onload="renderSaveToDrive()">/' \
