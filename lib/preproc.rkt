@@ -1351,6 +1351,7 @@
   ;(printf "sym-to-adocstr ~s ~a\n" e pyret)
   (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
                      [(eq? e 'sqrt) "num-sqrt"]
+                     [(eq? e 'sqr) "num-sqr"]
                      [(eq? e '=) "=="]
                      [(eq? e '+) "{plus}"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]

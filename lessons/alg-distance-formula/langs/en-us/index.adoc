@@ -22,17 +22,11 @@
 
 @ifproglang{wescheme}{
 * Lesson slides template (@link{https://docs.google.com/presentation/d/1INT8koAGQcpUelRzGpvThViGSAVMdZYT08LHgqnQAzg/edit?usp=sharing, Google Slides})
-* Sample game file - no distance lines (@link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, WeScheme)}
-* Sample game file - with distance lines (@link{https://www.wescheme.org/view?publicId=0bCivugY3P, WeScheme)}
 }
 
 @ifproglang{pyret}{
 * @link{https://docs.google.com/presentation/d/1WVWq3JVFlq8OgpLGIUFQ9mR7DbADkgMxR8NYPhuPQN4/edit?usp=sharing, Lesson slides} (Google Slides)
-* Sample game file - no distance lines (@link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Pyret)}
-* Sample game file - with distance lines (@link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Pyret})
 }
-
-* @workbook-link{pages/NoticeAndWonder.adoc}
 
 * @exercise-link{pages/Distance-Multiple-Representations.pdf, Multiple Representations} (PDF)
 
@@ -75,12 +69,8 @@ Students discover the need for distance calculation (first in one dimension, the
 
 === Launch
 
-@ifproglang{wescheme}{
-Have students open this @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, game file} and investigate. +
-}
-@ifproglang{pyret}{
-Have students run this @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS, game file} and investigate. +
-}
+[.lesson-instruction]
+Open your saved Game File, which should have the Target and Danger moving on their own. Your Player should respond to keypresses, and the Target and Danger should re-appear after they leave the screen. It's almost fully-playable!
 
 {empty}
 
@@ -96,11 +86,19 @@ _They have to be close enough to touch._
 +
 _When the coordinates of the characters are really close to each other._
 
+@span{.right}{@image{images/screenshot.jpg}}
+[.lesson-instruction]
+Scroll down to the `distances-color` definition (look for `; 4. Collisions` in the file). Right now this value is defined to be the __empty string__ `""`. Change this to a color that will show up on your background, and click "Run".
+
+This setting will draw lines from your Player to each of the other characters, and then use those lines as the hypoteneuse to draw right triangles! 
+
+The legs of these triangles show the distance in 1 dimension each (on the x- and y-axis). How is this calculated?
+
 [.lesson-instruction]
 --
 Role-Play: Ask a volunteer to help role-play two characters colliding! 
 
-- Idenitfy a "number line" on the floor (this can be done just by pointing, or with a visual aid). 
+- Identify a "number line" on the floor (this can be done just by pointing, or with a visual aid). 
 - Make sure that you and your volunteer stand with feet as close together as possible, representing the infinitely small point that identifies your center.
 - Raise your arms to form a "T shape", representing the outer edges of the characters.
 - Emphasize that this represents _one dimension_ (perhaps the x- or y-axis).
@@ -111,6 +109,9 @@ Role-Play: Ask a volunteer to help role-play two characters colliding!
 --
 
 === Investigate
+
+Let's explore how the program computes the length of these lines...
+
 [.lesson-instruction]
 Have students explore using the `line-length` function in the @vocab{Interactions area}.
 
@@ -137,52 +138,22 @@ What if we have points that are not on the same line? What if instead they diffe
 Students extend their understanding of _distance_ from one dimension to two, using a geometric proof of the Pythagorean Theorem to compute the distance between two points.
 
 === Launch
-Bring your volunteer (or choose a different one!) back up to the front of the class, and have them stand on a chair while repeating the role-play activity. How does the class calculate distance _now_?
+Bring your volunteer (or choose a different one!) back up to the front of the class, and have them squat down on the floor to represent a difference in the y-coordinate between the player and a character. Repeat the role-play activity. How does the class calculate distance _now_?
 
-@ifproglang{wescheme}{
-Have students open this new @link{https://www.wescheme.org/view?publicId=0bCivugY3P, game file} and investigate. +
-}
-@ifproglang{pyret}{
-Have students run this new @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, game file} and investigate. +
-}
-{empty} +
+Computing the distance in 1-dimension is great, as long as the Player and Danger have the same x- or y-coordinate. In that case, the difference between the coordinates is exactly the distance between the two characters. But how do we compute the distance between two points when both the x- _and_ y-coordinates are different?
 
-[.notice-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Notice and Wonder}
-
-What do you Notice? What do you Wonder?
-|===
-
-* What kind of triangles are these?
-+
-_Right triangles._
-* What do the numbers represent?
-+
-_Let students discuss - the numbers should represent the lengths of the sides, but one side is always showing 0._
-+
-The missing length on the right triangle is the *hypotenuse*. The *legs* of the triangle show the length of each side, or the *distance* between those points on the number line. +
-{empty} +
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Extension}
-@span{.right}{ @image{images/Pythag_anim.gif} }
-
-You can take this activity further by having students prove the distance formula by solving for the @vocab{hypotenuse} of a right triangle. @link{https://www.cut-the-knot.org/pythagoras/, This page} from Cut the Knot includes a number of different proofs. Proof #4 is especially well-suited for students who may be uncomfortable with symbol manipulation, and need more of a geometric proof. The animation on the right is a demonstration of this proof.
-@span{.clear}{}
-|===
+Have students watch @link{https://www.youtube.com/watch?v=Ln7myXQx8TM, video of this problem} [Credit: Tova Brown], and try explaining the proof to one another. In our case, the lengths A and B are computed by the `line-length` function we already have!
 
 === Investigate
 
-Optional: Have students use this @exercise-link{pages/Distance-Multiple-Representations.pdf, Graphic Organizer} to model the distance formula with the Circles of Evaluation and translate it to code. +
+[.lesson-instruction]
+Turn to @workbook-link{pages/distance-scaffold.adoc, "Distance between (0,0) and (4, 3)"} in your student workbook. This page shows the arithmetic expression to compute the distance between (0,0) and (4,3). Convert this expression to a Circle of Evaluation, and then to code.
+
+Optional: Have students use this @exercise-link{pages/Distance-Multiple-Representations.pdf, Graphic Organizer} to model the distance formula for these coordinates with the Circles of Evaluation. +
 {empty} +
 
 [.lesson-instruction]
-Using @workbook-link{pages/distance.adoc},
-have students write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. +
+Using @workbook-link{pages/distance.adoc}, write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. _HINT:_ the code you wrote in @workbook-link{pages/distance-scaffold.adoc} can be used to give you your first example! +
 {empty} +
 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
@@ -191,10 +162,10 @@ Finally, students fix the broken `distance` function in their game files. When t
 
 === Common Misconceptions
 It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
-@ifproglang{wescheme}{ `...(sqrt (+ (sqr (- x1 y1)) (sqr (- x2 y2))))...` 
-instead of `...(sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1))))...` }
-@ifproglang{pyret}{ `...num-sqrt(num-sqr(x1 - y1) + num-sqr(x2 - y2))...` 
-instead of `...num-sqrt(num-sqr(x2 - x1) + num-sqr(y2 - y1))...` }
+@ifproglang{wescheme}{ `...(sqrt (+ (sqr (line-length x1 y1)) (sqr (line-length x2 y2))))...` 
+instead of `...(sqrt (+ (sqr (line-length x2 x1)) (sqr (line-length y2 y1))))...` }
+@ifproglang{pyret}{ `...num-sqrt(num-sqr(line-length(x1,y1)) + num-sqr(line-length(x2, y2)))...` 
+instead of `...num-sqrt(num-sqr(line-length(x2 - x1)) + num-sqr(line-length(y2 - y1)))...` }
 
 In this situation, remind student to look back at what they circled and labeled in the examples step. _This is why we label!_ 
 
