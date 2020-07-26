@@ -93,6 +93,7 @@
     ("alg-player-animation" "HSA.SSE.A.1.A")
     ("alg-player-animation" "HSA.SSE.A.1.B")
     ("alg-player-animation" "OK.PA.A.1.1")
+    ("alg-collision" "HSF.BF.A.1")
 
     ; flags
     ("fl-flags-of-the-world" "N-Q&1&3" "6.NS.5-8" "F-IF.1-3")
