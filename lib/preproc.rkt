@@ -379,11 +379,10 @@
           (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
             (set! *exercises-done*
               (cons (list lesson f ex-ti) *exercises-done*))))))
-    (unless exercise?
-      (when (or (not link-text) (string=? link-text ""))
-        (let ([f.titletxt (path-replace-extension f ".titletxt")])
-          (when (file-exists? f.titletxt)
-            (set! link-text (call-with-input-file f.titletxt read-line))))))
+    (when (or (not link-text) (string=? link-text ""))
+      (let ([f.titletxt (path-replace-extension f ".titletxt")])
+        (when (file-exists? f.titletxt)
+          (set! link-text (call-with-input-file f.titletxt read-line)))))
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
