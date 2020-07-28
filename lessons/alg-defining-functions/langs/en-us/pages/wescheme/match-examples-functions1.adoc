@@ -85,14 +85,16 @@
 (define permuted-functions-lst (list f2 f6 f3 f5 f7 f1 f4))
 }
 
-@show{(exercise-handout 
-;  #:title "Matching Examples and Function Definitions"
-  #:instr "Match the EXAMPLEs on the left with the definitions on the right. NOTE: Some definitions may not match any examples!"
-  #:forevidence (exercise-evid-tags "BS-DR.3&1&2" "F-IF.1-3&1&2" "F-IF.1-3&1&4" "F-LE.1-4&1&5")
-  (cond [(not *solutions-mode?*)
-  (matching-exercise examples-lst permuted-functions-lst)]
-  [else
-    (matching-exercise-answers examples-lst functions-lst
-    permuted-functions-lst)]))
+Match the EXAMPLEs on the left with the definitions on the right. NOTE: Some definitions may not match any examples!
 
-}
+
+[cols=".^12a,^.^2a,2a,^.^1a,.^8a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Examples    |                                        ||       | Definition
+| @show{e2}   |*2*@show{(if *solutions-mode?* "-E" "")}||*A*    | @show{f3}
+| @show{e5}   |*5*@show{(if *solutions-mode?* "-C" "")}||*B*    | @show{f6}
+| @show{e1}   |*1*@show{(if *solutions-mode?* "-F" "")}||*C*    | @show{f5}
+| @show{e4}   |*4*@show{(if *solutions-mode?* "-D" "")}||*D*    | @show{f4}
+| @show{e3}   |*3*@show{(if *solutions-mode?* "-A" "")}||*E*    | @show{f2}
+|             |*5*                                     ||*F*    | @show{f1}
+|===

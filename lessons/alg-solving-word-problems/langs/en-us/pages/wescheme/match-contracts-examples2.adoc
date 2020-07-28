@@ -1,5 +1,13 @@
 =  Matching Contracts and Examples
 
+++++
+<style>
+div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
+  font-size: .7rem;
+}
+</style>
+++++
+
 @do{(define e5a
    (code #:multi-line #t
 "(EXAMPLE (match 30)
@@ -54,6 +62,7 @@
 (define c8 (code "; match : Number Number -> Number"))
 (define c9 (code "; match : Number -> String"))
 
+#|
 (define answer-key
    (list  (list e5a c5)
           (list e5b c5)
@@ -65,19 +74,21 @@
           (list e9b c9)
           ))
 
-(define ques (map car answer-key))
-(define ans (map cadr answer-key))
-(define permuted-ans (list c8 c9 c7 c5 c6))
+|#
 }
 
-@show{(exercise-handout
-;  #:title "Matching Contracts and Examples"
-  #:instr "Match each Example on the left with the Contract on the right. NOTE: Multiple examples may match to the same contract!"
-  #:forevidence (exercise-evid-tags "BS-DR.2&1&2" "F-IF.1-3&1&1" "F-IF.1-3&1&2")
-  (cond [(not *solutions-mode?*)
-  (matching-exercise ques permuted-ans)]
-  [else
-     (matching-exercise-answers ques ans permuted-ans)])
-)
-}
 
+Match each Example on the left with the Contract on the right. NOTE: Multiple examples may match to the same contract!
+
+[cols=".^12a,^.^2a,2a,^.^1a,.^8a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Contract                   |                      ||       | Examples
+| @show{e9b}   |*1*@show{(if *solutions-mode?* "-A" "")}||       | 
+| @show{e5b}   |*2*@show{(if *solutions-mode?* "-B" "")}||       | 
+| @show{e9a}   |*3*@show{(if *solutions-mode?* "-A" "")}||*A*    | @show{c9}
+| @show{e6a}   |*4*@show{(if *solutions-mode?* "-E" "")}||*B*    | @show{c5}
+| @show{e6b}   |*5*@show{(if *solutions-mode?* "-E" "")}||*C*    | @show{c8}
+| @show{e7a}   |*6*@show{(if *solutions-mode?* "-D" "")}||*D*    | @show{c7}
+| @show{e5a}   |*7*@show{(if *solutions-mode?* "-B" "")}||*E*    | @show{c6}
+| @show{e8a}   |*8*@show{(if *solutions-mode?* "-C" "")}||       | 
+|===
