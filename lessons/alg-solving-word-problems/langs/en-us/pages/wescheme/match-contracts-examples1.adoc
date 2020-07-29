@@ -2,9 +2,8 @@
 
 ++++
 <style>
-div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
-  font-size: .7rem;
-}
+tt.pyret, tt.racket { font-size: .8rem; }
+td {padding: 20px 0px !important; }
 </style>
 ++++
 
@@ -26,17 +25,13 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 
 (define e2a
    (code #:multi-line #t
-"(EXAMPLE (match (triangle 20 \"solid\" \"blue\") 
-                3)
-         (scale 3 (triangle 20 \"solid\"
-                               \"blue\")))"))
+"(EXAMPLE (match (triangle 20 \"solid\" \"blue\") 3)
+         (scale 3 (triangle 20 \"solid\" \"blue\")))"))
 
 (define e2b
    (code #:multi-line #t
-"(EXAMPLE (match (circle 10 \"solid\" \"orange\") 
-                22)
-         (scale 22 
-                (circle 10 \"solid\" \"orange\")))"))
+"(EXAMPLE (match (circle 10 \"solid\" \"orange\") 22)
+         (scale 22 (circle 10 \"solid\" \"orange\")))"))
 
 (define e3a
    (code #:multi-line #t
@@ -52,14 +47,12 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 (define e4a
    (code #:multi-line #t
 "(EXAMPLE (match (circle 20 \"outline\" \"gold\"))
-         (rotate 37 (circle 20 \"outline\" 
-                              \"gold\")))"))
+         (rotate 37 (circle 20 \"outline\" \"gold\")))"))
 
 (define e4b
    (code #:multi-line #t
 "(EXAMPLE (match (circle 10 \"solid\" \"green\"))
-         (rotate 37 
-                 (circle 10 \"solid\" \"green\")))"))
+         (rotate 37 (circle 10 \"solid\" \"green\")))"))
 
 
 (define c1 (code "; match : Number String -> Number"))
@@ -70,7 +63,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 
 Match each Example on the left with the Contract on the right. NOTE: Multiple examples may match to the same contract!
 
-[cols=".^12a,^.^2a,2a,^.^1a,.^8a",options="header",stripes="none",grid="none",frame="none"]
+[cols=".^12a,^.^2a,1a,^.^1a,.^9a",options="header",stripes="none",grid="none",frame="none"]
 |===
 | Contract                   |                      ||       | Examples
 | @show{e4b}   |*1*@show{(if *solutions-mode?* "-C" "")}||*A*    | @show{c3}
