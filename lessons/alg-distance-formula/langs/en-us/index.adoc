@@ -122,11 +122,13 @@ Have students explore using the `line-length` function in the @vocab{Interaction
 |
 @span{.title}{Extension}
 
+`line-length` is essentially the way students conceptualize distance in one dimension.
+
 You can extend this `line-length` activity into a lesson on absolute value and have students program `line-length` themselves. Computing 1-dimensional distance - and absolute value - are in fact piecewise functions!
 |===
 
 [.lesson-instruction]
-- What does this function _do_?
+- What does this function _do?_
 - Why does it use conditionals?
 
 === Synthesize
@@ -140,11 +142,29 @@ What if we have points that are not on the same line? What if instead they diffe
 Students extend their understanding of _distance_ from one dimension to two, using a geometric proof of the Pythagorean Theorem to compute the distance between two points.
 
 === Launch
-Bring your volunteer (or choose a different one!) back up to the front of the class, and have them squat down on the floor to represent a difference in the y-coordinate between the player and a character. Repeat the role-play activity. How does the class calculate distance _now_?
+@span{.right}{@image{images/2d-distance.png}}
+Bring your volunteer (or choose a different one!) back up to the front of the class, and have them squat down on the floor to represent a difference in the y-coordinate between the player and a character. Repeat the role-play activity. 
+
+[.lesson-instruction]
+Suppose the Player is at (0, 4), and another game character is at (3, 0). Now there is a difference in both dimensions. How could we calculate distance _now?_
 
 Computing the distance in 1-dimension is great, as long as the Player and Danger have the same x- or y-coordinate. In that case, the difference between the coordinates is exactly the distance between the two characters. But how do we compute the distance between two points when both the x- _and_ y-coordinates are different?
 
 Have students watch @link{https://www.youtube.com/watch?v=Ln7myXQx8TM, video of this problem} [Credit: Tova Brown], and try explaining the proof to one another. In our case, the lengths A and B are computed by the `line-length` function we already have!
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Why line-length?}
+Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypoteneuse is computed based on the distance in the x- and y-dimension. However, most math textbooks show the distance formula without connecting back to that formula:
+
+@math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}
+
+A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on. Unfortunately, the response to this student relies on a computational artifact of squaring to force a number to be positive (rather than the purpose of squaring in the Pythagorean Theorem). Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connecting back to the Pythagorean Theorem itself. This effectively rewrites the distance formula as:
+
+@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}
+
+|===
 
 === Investigate
 
@@ -155,7 +175,7 @@ Optional: Have students use this @exercise-link{pages/Distance-Multiple-Represen
 {empty} +
 
 [.lesson-instruction]
-Using @workbook-link{pages/distance.adoc}, write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. _HINT:_ the code you wrote in @workbook-link{pages/distance-scaffold.adoc} can be used to give you your first example! +
+Using @workbook-link{pages/distance.adoc}, write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (x1, y1) and (x2, y2) and returns the distance between those two points. _HINT:_ the code you wrote in @workbook-link{pages/distance-scaffold.adoc, "Distance between (0,0) and (4, 3)"} can be used to give you your first example! +
 {empty} +
 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly.
