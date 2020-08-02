@@ -121,20 +121,20 @@ _Answers vary: `fun`, `end`, a contract and purpose statement, etc._
 - *What new things did you notice in this file?*
 +
 @ifproglang{wescheme}{
-_Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `cost` function, etc._
+_Answers vary: the `cond` keyword, the square brackets, `else`, the general look of the `order` function, etc._
 }
 @ifproglang{pyret}{
-_Answers vary: the `ask` keyword, the pipe symbols, `otherwise`, the general look of the `cost` function, etc._
+_Answers vary: the `ask` keyword, the pipe symbols, `otherwise`, the general look of the `order` function, etc._
 }
 
 - *What function is being defined here? What is its contract?*
 +
-_`cost`, takes in a String and produces a Number._
+_`order`, takes in a String and produces a Number._
 - *How do you think this function works?*
 +
 _Answers vary - let students drive discussion!_
 
-The `cost` function is _also_ piecewise function! Each input has a single output, but the behavior isn't smooth (there's no relationship between one item's price and another!) or continuous (there are plenty of items not on the menu!).
+The `order` function is _also_ piecewise function! Each input has a single output, but the behavior isn't smooth (there's no relationship between one item's price and another!) or continuous (there are plenty of items not on the menu!).
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -155,7 +155,7 @@ Students turn to @workbook-link{pages/restaurant-explore.adoc} and complete the 
 
 - *Why do you get an error when you try to use the `sales-tax` function for an item not on the menu?*
 +
-_Let students discuss - move towards the realization that the contract for `cost` is `cost: String -> Number`, and the "catch-all" branch at the bottom returns a @vocab{String} instead of a Number._
+_Let students discuss - move towards the realization that the contract for `order` is `order : String -> Number`, and the "catch-all" branch at the bottom returns a @vocab{String} instead of a Number._
 
 - *What should we do about this?* 
 +
@@ -175,20 +175,20 @@ _More than two!_ In fact, we need an example for at least every possible item on
 
 @ifproglang{wescheme}{
 ```
-(EXAMPLE (cost "hamburger")   6.00)
-(EXAMPLE (cost "onion rings") 3.50)
-(EXAMPLE (cost "fried tofu")  5.25)
-(EXAMPLE (cost "pie")         2.25)
+(EXAMPLE (order "hamburger")   6.00)
+(EXAMPLE (order "onion rings") 3.50)
+(EXAMPLE (order "fried tofu")  5.25)
+(EXAMPLE (order "pie")         2.25)
 ```
 }
 
 @ifproglang{pyret}{
 ```
 examples:
-  cost("hamburger")   is 6.00
-  cost("onion rings") is 3.50
-  cost("fried tofu")  is 5.25
-  cost("pie")         is 2.25
+  order("hamburger")   is 6.00
+  order("onion rings") is 3.50
+  order("fried tofu")  is 5.25
+  order("pie")         is 2.25
 end
 ```
 }
@@ -213,11 +213,11 @@ If there are more unique labels in the examples than there are things in the Dom
 We have two things changing (the item and the price), but only one thing is in our Domain. That's how we know this function is piecewise function!
 
 @ifproglang{wescheme}{
-We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (cost item) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
+We start writing the definition as we normally would, using the function name and the input label from the examples step (`define (order item) ...)`. But since we know it's a piecewise function, now we add `(cond ...)` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `cond` expression. Each condition has a test and a result, and we copy the results from our examples just as we always do.
 ```
-(define (cost item)
+(define (order item)
   (cond
     [      ...                       6.00]
     [      ...                       3.50]
@@ -225,9 +225,9 @@ Then, for each different behavior we wrote in our examples, we add a condition t
     [      ...                       2.25]))
 ```
 
-Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `6.00`? _when the menu item is "hamburger"!_:
+Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `order` return `6.00`? _when the menu item is "hamburger"!_:
 ```
-(define (cost item)
+(define (order item)
   (cond
     [ (string=? item "hamburger")    6.00]
     [          ...                   3.50]
@@ -237,11 +237,11 @@ Finally, we fill in the tests with an expression that tells us _when_ the functi
 }
 
 @ifproglang{pyret}{
-We start writing the definition as we normally would, using the function name and the input label from the examples step (`fun cost(item): ... end`. But since we know it's a piecewise function, now we add `ask: ... end` to the body of the function.
+We start writing the definition as we normally would, using the function name and the input label from the examples step (`fun order(item): ... end`. But since we know it's a piecewise function, now we add `ask: ... end` to the body of the function.
 
 Then, for each different behavior we wrote in our examples, we add a condition to the body of our `ask` block. Each condition has a test, a `then:`, and a result, and we copy the results from our examples just as we always do.
 ```
-fun​ cost(item):
+fun​ order(item):
   ask:
     |           ...                  then:​ 6.00
     |           ...                  then:​ 3.50
@@ -251,9 +251,9 @@ fun​ cost(item):
 end
 ```
 
-Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `cost` return `6.00`? _when the menu item is "hamburger"!_:
+Finally, we fill in the tests with an expression that tells us _when_ the function should behave that way. When should `order` return `6.00`? _when the menu item is "hamburger"!_:
 ```
-fun​ cost(item):
+fun​ order(item):
   ask:
     | string-equal(item, "hamburger") then:​ 6.00
     |           ...                   then:​ 3.50
