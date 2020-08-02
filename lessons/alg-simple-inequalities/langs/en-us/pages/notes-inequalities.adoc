@@ -1,6 +1,10 @@
 = Inequalities
 
-
+++++
+<style>
+.editbox{width: auto;}
+</style>
+++++
 
 - Sometimes we want to _ask questions_ about data. For example, is `x` greater than `y`? Is one string equal to another? These questions can't be answered with numbers. Instead, they are answered with *Booleans*.
 
@@ -10,6 +14,10 @@
 
 - You already know some functions that produce Booleans, such as `<` and `>`! Our programming language has them, too: @show{(sexp->code `(< 3 4))}, @show{(sexp->code `(> 10 2))}, and @show{(sexp->code `(= -10 19))}.
 
-- We also have ways of _combining_ Boolean expressions, so we can ask more complicated questions. For example, we can write @show{(sexp->code `(and (> 3 4) (< 10 2)))}
+- We also have ways writing *Compound Inequalities*, so we can ask more complicated questions using the `and` and `or` functions. 
+
+** @show{(sexp->code `(and (< 3 4) (< 10 2)))} translates to "three is less than four _and_ ten is less than two". This will evaluate to `false`, since the `and` function requires that both sub-expressions be `true`.
+
+** @show{(sexp->code `(or (< 3 4) (< 10 2)))}, which translates to "three is less than four _or_ ten is less than two". This will evaluate to `true`, since the `or` function only requires that one sub-expression be `true`.
 
 - The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images: @show{(sexp->coe `(and (> 3 4) (< 10 2)))}
