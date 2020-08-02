@@ -538,9 +538,9 @@
                             (path-replace-extension *in-file* ".titletxt")
                             "index.titletxt")]
             [title (if *workbook-page?*
-                       (regexp-replace* #rx"ZZ"
-                                        (regexp-replace* #rx"\\[.*?\\]" title "")
-                                        "")
+                       (regexp-replace* #rx","
+                         (regexp-replace* #rx"\\[.*?\\]" title "")
+                         "\\&#x2c;")
                        title)])
         (call-with-output-file title-file
           (lambda (o)
