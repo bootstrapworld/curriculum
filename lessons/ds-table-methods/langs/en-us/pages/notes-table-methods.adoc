@@ -1,8 +1,8 @@
-= Table Methods
+= Defining Row Functions &amp; Using Table Methods
 
 *Methods* are special functions that are attached to pieces of data. We use them to manipulate Tables. They are different from functions in several ways:
 
-- Their names can’t be used alone: they can only be used as part of data, separated by a dot. (E.g., `shapes.row-n(2)`.)
+- Their names can’t be used alone: they can only be used as part of data, separated by a dot (for example, `shapes.row-n(2)`).
 
 - Their contracts are different: they include the type of the data as part of their names. 
 + 
@@ -10,4 +10,9 @@
 
 - They have a “secret” argument, which is the data they are attached to.
 
-- In this course, the methods we’ll be using are  `row-n`, `order-by`, `filter`, and `build-column`.
+- In this course, the methods we’ll be using are  
+
+** `row-n` - consumes an index (starting with zero!) and produces a row from a table
+** `order-by` - consumes the name of a column and a Boolean value to determine if that table should be sorted by that column in ascending order.
+** `filter` - consumes a __Boolean-producing function__, and produces a table containing only rows for which the function returns `true`.
+** `build-column` - consumes the name of a new column, and a function that produces the values in that column for each Row.
