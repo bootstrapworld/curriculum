@@ -539,7 +539,7 @@
                             "index.titletxt")]
             [title (if *workbook-page?*
                        (regexp-replace* #rx","
-                         (regexp-replace* #rx"\\[.*?\\]" title "")
+                         (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title "\\1")
                          "\\&#x2c;")
                        title)])
         (call-with-output-file title-file
