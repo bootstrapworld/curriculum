@@ -1,7 +1,10 @@
 = Top Down / Bottom Up
 
-A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Define functions that compute the height of the pole and the area of the triangle after a given number of seconds.
+@span{.right}{@image{../images/retractable-flag.jpg, '', 200}}
+A retractable flag pole starts out 24 inches tall, and grows taller at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Define functions that compute the _height_ of the pole and the _area_ of the triangle after a given number of seconds. 
 
+*Will you solve this using the Top-Down strategy, or the Bottom-Up strategy?* Decide whether you want to calculate the height or the area first, and use the Design Recipes below to write your answer!
+@span{.clear}
 ++++
 <style>
 .recipe_instructions, .recipe_title, .recipe_word_problem,
@@ -15,8 +18,36 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 
 </style>
 ++++
+
+@design-recipe-exercise{ "area"
+  "Define your first function (`height or area`) here.
+"#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #f
+#:domain-list '(Number)
+#:show-domains? #f
+#:range "Number"
+#:show-range? #f
+#:purpose "Consumes seconds & produces the area of the triangle with a base of 200 and changing height"
+#:show-purpose? #f
+#:num-examples 2
+#:example-list '((5 (* 1/2 (* 200 (height 5))))
+                 (6 (* 1/2 (* 200 (height 6)))))
+#:show-examples #f
+#:param-list '(sec)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body '(* 1/2 (* 200 (height sec)))
+#:show-body? #f
+#:grid-lines? #t
+}
+
+@vspace{2ex}
+@span{.sectionbreak}{}
+@vspace{2ex}
+
 @design-recipe-exercise{ "height"
-  "height"
+  "Define your second function (`height or area`) here."
 #:assess-design-recipe #f
 #:headless? #t
 #:show-funname-contract? #f
@@ -34,33 +65,6 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 #:show-funname-defn? #f
 #:show-params? #f
 #:body '(+ (* 0.6 sec) 10)
-#:show-body? #f
-#:grid-lines? #t
-}
-
-@vspace{2ex}
-@span{.sectionbreak}{}
-@vspace{2ex}
-
-@design-recipe-exercise{ "area"
-  "area"
-#:assess-design-recipe #f
-#:headless? #t
-#:show-funname-contract? #f
-#:domain-list '(Number)
-#:show-domains? #f
-#:range "Number"
-#:show-range? #f
-#:purpose "Consumes seconds & produces the area of the triangle with a base of 200 and changing height"
-#:show-purpose? #f
-#:num-examples 2
-#:example-list '((5 (* 1/2 (* 200 (height 5))))
-                 (6 (* 1/2 (* 200 (height 6)))))
-#:show-examples #f
-#:param-list '(sec)
-#:show-funname-defn? #f
-#:show-params? #f
-#:body '(* 1/2 (* 200 (height sec)))
 #:show-body? #f
 #:grid-lines? #t
 }
