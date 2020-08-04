@@ -9,19 +9,19 @@
 
 @vspace{2ex}
 
-Draw a line from each arithmetic expression on the left to the corresponding Circle of Evaluation on the right.
+Draw a line from each Circle of Evaluation on the left to the corresponding Code on the right.
 
 @do{
   (define expr1 '(* (- 1 1) (+ 1 1)))
-  (define expr2 '(- (- 1 1) 1))
-  (define expr3 '(* (- 1 1) 1))
-  (define expr4 '(- (+ 1 1) 1))
+  (define expr2 '(- (+ 1 1) 1))
+  (define expr3 '(* (- 1 (+ 1 1))))
+  (define expr4 '(+ (- 1 1) 1))
   (define expr5 '(* (+ 1 1) (- (+ 1 1) 1)))
 }
 
 [cols="^.^10a,^.^2a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
 |===
-| Circle of Evaluation             |   ||       | Code
+| Circle of Evaluation       |   									  ||       | Code
 | @show{(sexp->coe expr1)}   |*1*@show{(if *solutions-mode?* "-B" "")}||*A*    | @show{(sexp->code expr3)}
 | @show{(sexp->coe expr2)}   |*2*@show{(if *solutions-mode?* "-D" "")}||*B*    | @show{(sexp->code expr1)}
 | @show{(sexp->coe expr3)}   |*3*@show{(if *solutions-mode?* "-A" "")}||*C*    | @show{(sexp->code expr5)}

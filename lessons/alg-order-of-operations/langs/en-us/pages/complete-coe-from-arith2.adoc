@@ -1,4 +1,4 @@
-= Completing Circles of Evaluation from Arithmetic Expressions (2)
+= Completing Circles of Evaluation from Arithmetic Expressions
 
 ++++
 <style>
@@ -12,22 +12,28 @@ For each arithmetic expression on the left, finish the Circle of Evaluation on t
 
 @do{
   (define expr1 '(- (+ 4 2) (/ 10 5)))
-  (define expr2 '(+ (- 4 5) (* 5 8)))
+  (define expr2 '(+ (- 7 1) (* 5 8)))
   (define expr3 '(/ -15 (+ 5 -8)))
   (define expr4 '(* (+ 4 (- 9 8)) 5))
+  (define expr5 '(- (/ 20 (+ 6 4))(/ (* 5 9) (- -12 3))))
+  (define expr6 '(+ (* 6 4) (/ (- 9 -6) 5) ))
 
   (define coe1 (if *solutions-mode?* expr1 `(BSLeaveAHoleHere (BSLeaveAHoleHere 4 2) (/ BSLeaveAHoleHere 5))))
-  (define coe2 (if *solutions-mode?* expr2 `(+ (BSLeaveAHoleHere 4 5) (* BSLeaveAHoleHere BSLeaveAHoleHere))))
+  (define coe2 (if *solutions-mode?* expr2 `(+ (BSLeaveAHoleHere 7 1) (* BSLeaveAHoleHere BSLeaveAHoleHere))))
   (define coe3 (if *solutions-mode?* expr3 `(/ BSLeaveAHoleHere (+ 5 BSLeaveAHoleHere))))
   (define coe4 (if *solutions-mode?* expr4 `(* (BSLeaveAHoleHere 4 (BSLeaveAHoleHere 9 8)) BSLeaveAHoleHere)))
+  (define coe5 (if *solutions-mode?* expr5 `(BSLeaveAHoleHere (BSLeaveAHoleHere 20 (+ BSLeaveAHoleHere 4))(BSLeaveAHoleHere (BSLeaveAHoleHere BSLeaveAHoleHere BSLeaveAHoleHere) (- BSLeaveAHoleHere 3)))))
+  (define coe6 (if *solutions-mode?* expr6 `(BSLeaveAHoleHere (BSLeaveAHoleHere BSLeaveAHoleHere 4) (/ (BSLeaveAHoleHere 9 BSLeaveAHoleHere) BSLeaveAHoleHere) )))
 
 }
 
-[cols=".^1a,^10a,^10a",options="header",stripes="none"]
+[cols=".^1a,^8a,^12a",options="header",stripes="none"]
 |===
-|   | Math Expression              | Circle of Evaluation
-|*1*| @show{(sexp->math expr1)}    | @show{(sexp->coe coe1)}
-|*2*| @show{(sexp->math expr2)}    | @show{(sexp->coe coe2)}
-|*3*| @show{(sexp->math expr3)}    | @show{(sexp->coe coe3)}
-|*4*| @show{(sexp->math expr4)}    | @show{(sexp->coe coe4)}
+|   | Math Expression              			| Circle of Evaluation
+|*1*| @math{4 + 2 - {\frac {10} {5}}}    	| @show{(sexp->coe coe1)}
+|*2*| @show{(sexp->math expr2)}    			| @show{(sexp->coe coe2)}
+|*3*| @show{(sexp->math expr3)}    			| @show{(sexp->coe coe3)}
+|*4*| @show{(sexp->math expr4)}    			| @show{(sexp->coe coe4)}
+|*5*| @show{(sexp->math expr5)}    			| @show{(sexp->coe coe5)}
+|*6*| @show{(sexp->math expr6)}    			| @show{(sexp->coe coe6)}
 |===
