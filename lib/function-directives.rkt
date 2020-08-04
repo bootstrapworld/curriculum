@@ -229,7 +229,7 @@
           )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "write-ea-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
+  ;(printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
   (when (pair? body)
     (set! body (wescheme->pyret body)))
   (when (pair? funname)
@@ -293,10 +293,10 @@
 
 (define (list-to-commaed-string xx)
   (cond [(null? xx) " "]
-        [(= (length xx) 1) (format "~a" (car xx))]
-        [else (let loop ([xx (cdr xx)] [r (format "~a" (car xx))])
+        [(= (length xx) 1) (format "~s" (car xx))]
+        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
                 (if (null? xx) r
-                    (loop (cdr xx) (string-append r ", " (format "~a" (car xx))))))]))
+                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
 
 (define (vars-to-string xx)
   (let ([ans (apply string-append
