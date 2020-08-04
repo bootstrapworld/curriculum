@@ -40,6 +40,32 @@
         (let ([n (string-length s)])
           (make-string n #\M)))))
 
+(define (wescheme->pyret e #:wrap [wrap #f])
+  (cond [(number? e) (format "~a" e)]
+        [(symbol? e) (cond [(eq? e 'string=?) "string-equal"]
+                           [(eq? e 'sqrt) "num-sqrt"]
+                           [(eq? e 'sqr) "num-sqr"]
+                           [(eq? e '=) "=="]
+                           [else (format "~a" e)])]
+        [(string? e) (format "~s" e)]
+        [(list? e) (let ([a (car e)])
+                     (cond [(memq a '(+ - * / and or < > = <= >=))
+                            (let* ([a (wescheme->pyret a)]
+                                   [lft (wescheme->pyret (list-ref e 1) #:wrap #t)]
+                                   [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
+                                   [x (format "~a ~a ~a" lft a rt)])
+                              (if wrap
+                                  (format "(~a)" x)
+                                  x))]
+                           [else (format "~a(~a)"
+                                         (wescheme->pyret a)
+                                         (string-join
+                                           (map (lambda (e1)
+                                                  (wescheme->pyret e1)) (cdr e))
+                                           ", "))]))]
+        [else
+          (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
+
 (define (pyret-keyword? w)
   ;(printf "doing pyret-keyword? ~s\n" w)
   (ormap
@@ -204,6 +230,8 @@
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
   ;(printf "write-ea-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
+  (when (pair? body)
+    (set! body (wescheme->pyret body)))
   (when (pair? funname)
     (set! args (cdr funname))
     (set! funname (car funname)))
@@ -393,8 +421,7 @@
 
 (define (write-definition/pyret funname param-list body)
   (when (or (not body) (null? body)) (set! body ""))
-  (if (not (string? body))
-      "Don't care"
+  (unless (string? body) (set! body (wescheme->pyret body)))
       (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]
              [n (- (length body-lines) 1)]
              [but-last-body-lines (take body-lines n)]
@@ -431,7 +458,7 @@
                 (write-wrapper ".recipe_line"
                   (lambda ()
                     (write-spaced (highlight-keywords "end"))
-                    )))))))))
+                    ))))))))
 
 (define (write-definition funname param-list body)
   ((case *proglang*
