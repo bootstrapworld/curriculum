@@ -482,7 +482,7 @@
 
 (define (write-wrapper-scan classes thunk)
   (let ([res (thunk)])
-    (if (or #t (string=? classes "")) res
+    (if (string=? classes "") res
         (enclose-span classes res))))
 
 (define (write-null-wrapper classes thunk)
