@@ -4,69 +4,25 @@
 <style>
 /* Hide DR elements we want hidden */
 .recipe_instructions, .recipe_title, .recipe_word_problem,
-.studentAnswer::before, .studentAnswer::after,
-.recipe_purpose, .purpose_comment  {
-	display: none !important;
+.recipe_purpose, .purpose_comment,
+.studentAnswer::before, .studentAnswer::after  {
+ 	display: none !important;
 }
+
 /* shade the contract */
 .recipe_instructions + .recipe_graf { background: #eee; }
-.studentAnswer { margin-bottom: 7pt; line-height: 1rem; }
 
 /* maximize length of DR lines */
-.recipe_example_body {min-width: 385pt !important; }
-.recipe_definition_body { min-width: 350pt !important;}
-.recipe_definition_body { width: 650pt !important; }
-.recipe_name, .recipe_range { width: 15% !important; }
-.recipe_domain {width: 62% !important; }
+.recipe_example_body, .recipe_definition_body {width: 90%; min-width: 340pt !important;}
+.recipe_example_body_wrap { width: 55%; }
 </style>
 ++++
-@design-recipe-exercise{ "gt"
-  "gt"
-#:assess-design-recipe #f
-#:headless? #t
-#:show-funname-contract? #f
-#:domain-list '(Number)
-#:show-domains? #f
-#:range "Image"
-#:show-range? #f
-#:purpose ""
-#:show-purpose? #f
-#:num-examples 2
-#:example-list '((10 "triangle(10, \"solid\", \"green\")")
-                 (20 "triangle(20, \"solid\", \"green\")"))
-#:show-examples #f
-#:param-list '(size)
-#:show-funname-defn? #f
-#:show-params? #f
-#:body "triangle(size, \"solid\", \"green\")"
-#:show-body? #f
-#:grid-lines? #t
-}
+
+@include{fragments/gt.adoc}
 
 @span{.sectionbreak}{}
 
-@design-recipe-exercise{ "gold-star"
-  "gold-star"
-#:assess-design-recipe #f
-#:headless? #t
-#:show-funname-contract? #f
-#:domain-list '(Number)
-#:show-domains? #f
-#:range "Image"
-#:show-range? #f
-#:purpose ""
-#:show-purpose? #f
-#:num-examples 2
-#:example-list '((35 "star(35, \"solid\", \"gold\")")
-                 (27 "star(27, \"solid\", \"gold\")"))
-#:show-examples #f
-#:param-list '(radius)
-#:show-funname-defn? #f
-#:show-params? #f
-#:body "star(radius, \"solid\", \"gold\")"
-#:show-body? #f
-#:grid-lines? #t
-}
+@include{fragments/gold-star.adoc}
 
 @span{.sectionbreak}{}
 

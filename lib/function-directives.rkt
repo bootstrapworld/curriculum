@@ -105,9 +105,9 @@
 
 (define (write-section-header page-header funname)
   (format (string-append
-            "\n\n[.designRecipeLayout.~a]\n"
+            "\n\n[.designRecipeLayout]\n"
             "== [.dr-title]##~a: ~a##\n")
-          *proglang* page-header funname))
+          page-header funname))
 
 (define (write-directions directions)
   (format (string-append
