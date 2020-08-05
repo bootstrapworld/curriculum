@@ -114,8 +114,7 @@ tr th.tableblock {
   display: block;
   width: auto;
   border-bottom: solid 3px black;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 0px;
 }
 
 .tooltip { position: relative; }
@@ -343,7 +342,29 @@ span.clear {
 /************************************************************************************
 * DESIGN RECIPE STYLING
 */
-.designRecipeLayout { font-size: 14pt; }  /* Not used?? */
+.studentAnswer {
+  margin-bottom:  10pt;
+  min-width:      100pt;
+  line-height:    20pt;
+  position:       relative;
+  padding:        0pt 0pt;
+  word-spacing:   4pt;
+  display: inline-block;
+  border-bottom: solid 1px black;
+}
+.studentAnswer::after {
+  position:     absolute;
+  bottom:       -18pt;
+  left:         0pt;
+  font-size:    .65rem;
+  font-weight:  normal;
+  width:        100%;
+  text-align:   center;
+  font-style:   italic;
+  font-family:  "Century Gothic";
+  word-spacing:  0pt;  /* don't inherit spacing from .studentAnswer */
+}
+
 .recipe_name,
 .recipe_domain,
 .recipe_range,
@@ -352,10 +373,9 @@ span.clear {
 .recipe_example_body_long,
 .recipe_variables,
 .recipe_cond,
-.recipe_definition_body_pyret,
 .recipe_definition_body,
 .questions,
-.answers{
+.answers {
   font-family: Hack, "Courier New", monospace;
   display: inline-block;
   border-bottom: solid 1pt black;
@@ -369,7 +389,6 @@ span.clear {
 .recipe_example_inputs::after,
 .recipe_example_body::after,
 .recipe_example_body_long::after,
-.recipe_definition_body_pyret::after,
 .recipe_definition_body::after { 
   color: black; 
 }
@@ -379,31 +398,26 @@ span.clear {
   vertical-align: top;
 }
 
-.recipe_definition_end_pyret {
-  font-family: Hack, "Courier New", monospace;
-  display: inline-block;
-}
-
 .recipe_purpose {
   display: inline-block;
   border-bottom: solid 1pt black;
 }
-.recipe_name    { min-width: 20%; width: auto; }
-.recipe_domain  { width: 48%; }
+.recipe_domain, .recipe_range { text-align: center; }
+.recipe_name    { min-width: 15%; width: auto; }
+.recipe_domain  { width: 60%; }
 .recipe_range   { width: 15%; }
 .recipe_purpose { width: 93%; }
 .recipe_example_inputs {
-  min-width: 15%;
+  min-width: 20%;
   width: auto;
   text-align: center;
 }
-.recipe_example_line .studentAnswer.recipe_example_body{
-  min-width: 200pt;
-}
-.recipe_example_body { min-width: 40%; width: auto; }
+
+.recipe_example_body { width: 100%; }
+.pyretkeyword + .recipe_example_body { width: calc(100% - 50pt); }
 .recipe_example_body_long { width: 90%; }
-.recipe_example_body_wrap { margin-left: 16px; display: inline-block; }
-.recipe_definition_body_pyret,.recipe_definition_body { width: 90%; }
+.recipe_example_body_wrap { margin-left: 16px; display: inline-block; min-width: 45%;}
+.recipe_definition_body { width: 90%; }
 .recipe_variables { text-align: center; }
 .recipe_cond {  }
 .recipe_line {  }
@@ -412,8 +426,8 @@ span.clear {
 .questions { width: 42%; }
 .answers   { width: 47%; }
 
-.recipe_pyret_line .questions { width: 39%; }
-.recipe_pyret_line .answers   { width: 44%; }
+.pyret .recipe_line .questions { width: 39%; }
+.pyret .recipe_line .answers   { width: 44%; }
 
 .recipe_line p                { margin: 0; padding: 0; }
 
@@ -442,28 +456,6 @@ span.clear {
   word-break: break-all;
   font-family: Hack, "Courier New", monospace;
   white-space: pre; /* this is probably not needed? */
-}
-.studentAnswer {
-  margin-bottom:  10pt;
-  min-width:      100pt;
-  line-height:    20pt;
-  position:       relative;
-  padding:        0pt 0pt;
-  word-spacing:   4pt;
-  display: inline-block;
-  border-bottom: solid 1px black;
-}
-.studentAnswer::after {
-  position:     absolute;
-  bottom:       -18pt;
-  left:         0pt;
-  font-size:    .65rem;
-  font-weight:  normal;
-  width:        100%;
-  text-align:   center;
-  font-style:   italic;
-  font-family:  "Century Gothic";
-  word-spacing:  0pt;  /* don't inherit spacing from .studentAnswer */
 }
 
 /************************************************************************************

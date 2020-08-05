@@ -105,9 +105,9 @@
 
 (define (write-section-header page-header funname)
   (format (string-append
-            "\n\n[.designRecipeLayout]\n"
+            "\n\n[.designRecipeLayout.~a]\n"
             "== [.dr-title]##~a: ~a##\n")
-          page-header funname))
+          *proglang* page-header funname))
 
 (define (write-directions directions)
   (format (string-append
@@ -376,7 +376,7 @@
 
 (define (write-body-line/pyret body-line)
   ;(printf "write-body-line-p ~s\n" body-line)
-  (write-wrapper ".recipe_line.recipe_pyret_line"
+  (write-wrapper ".recipe_line"
     (lambda ()
       (string-append
         (encoded-ans "" "MM" #f)
@@ -416,7 +416,7 @@
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else
-                (encoded-ans ".recipe_definition_body_pyret"
+                (encoded-ans ".recipe_definition_body"
                              (highlight-keywords body-line) *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
