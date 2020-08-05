@@ -546,6 +546,7 @@
           (lambda (o)
             (display title o) (newline o))
           #:exists 'replace)))
+    (fprintf o "[.~a]\n" *proglang*)
     (display #\= o) (display #\space o)
     (display title o)
     (newline o)
