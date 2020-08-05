@@ -121,9 +121,9 @@
       "\n\n[.recipe_title]\n"
       "Contract and Purpose Statement\n"
       "\n"
-      "[.recipe_instructions]\n"
+      "[.recipe.recipe_instructions]\n"
       "Every contract has three parts...\n\n")
-    (write-wrapper ".recipe_graf"
+    (write-wrapper ".recipe.recipe_graf"
       (lambda ()
         (string-append
           (if *pyret?* "# " "&#59; ")
@@ -136,7 +136,7 @@
           "->"
           (encoded-ans ".recipe_range" range *show-range?*))))
     ;(write-clear)
-    (write-wrapper-scan ".recipe_graf"
+    (write-wrapper-scan ".recipe.recipe_graf"
       (lambda ()
         (string-append
           (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
@@ -150,12 +150,12 @@
       "\n\n[.recipe_title]\n"
       "Examples\n"
       "\n"
-      "[.recipe_instructions]\n"
+      "[.recipe.recipe_instructions]\n"
       "Write some examples, then circle and label what changes...\n\n")
     ;examples
 
     (if *pyret?*
-        (write-wrapper ".recipe_example_line"
+        (write-wrapper ".recipe.recipe_example_line"
           (lambda ()
             (write-spaced (highlight-keywords "examples:"))))
         "")
@@ -203,7 +203,7 @@
                  ))
 
     (if *pyret?*
-        (write-wrapper ".recipe_example_line"
+        (write-wrapper ".recipe.recipe_example_line"
           (lambda ()
             (write-spaced (highlight-keywords "end"))))
         "")
@@ -212,7 +212,7 @@
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
   (string-append
-    (write-wrapper ".recipe_example_line"
+    (write-wrapper ".recipe.recipe_example_line"
       (lambda ()
         (string-append
           ;(write-clear)
@@ -240,7 +240,7 @@
   (cond [(null? body) (set! body "")]
         [(pair? body) (set! body (format "~a" body))])
   (set! body (regexp-replace* #rx"\n" body " "))
-  (write-wrapper ".recipe_example_line"
+  (write-wrapper ".recipe.recipe_example_line"
     (lambda ()
       (string-append
         (encoded-ans "" "MM" #f)
@@ -320,12 +320,12 @@
         "\n\n[.recipe_title]\n"
         "Definition\n"
         "\n"
-        "[.recipe_instructions]\n"
+        "[.recipe.recipe_instructions]\n"
         "Write the definition, giving variable names to all your input values...\n\n")
       (write-null-wrapper ""
         (lambda ()
           (string-append
-            (write-wrapper ".recipe_line"
+            (write-wrapper ".recipe.recipe_line"
               (lambda ()
                 (string-append
                   (write-large "(")
@@ -338,7 +338,7 @@
                   (write-large ")"))))
 
             (cond [cond?
-                    (write-wrapper ".recipe_line"
+                    (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
@@ -350,7 +350,7 @@
                     (apply string-append
                            (map write-cond-clause (cdr body)))]
                   [else
-                    (write-wrapper ".recipe_line"
+                    (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
@@ -359,14 +359,14 @@
                           )))])
 
             (cond [cond?
-                    (write-wrapper ".recipe_line"
+                    (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
                           (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
                   [else
                     ""
-                    #|(write-wrapper ".recipe_line"
+                    #|(write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
                           (encoded-ans "" "MM" #f)
@@ -376,7 +376,7 @@
 
 (define (write-body-line/pyret body-line)
   ;(printf "write-body-line-p ~s\n" body-line)
-  (write-wrapper ".recipe_line"
+  (write-wrapper ".recipe.recipe_line"
     (lambda ()
       (string-append
         (encoded-ans "" "MM" #f)
@@ -431,12 +431,12 @@
             "\n\n[.recipe_title]\n"
             "Definition\n"
             "\n"
-            "[.recipe_instructions]\n"
+            "[.recipe.recipe_instructions]\n"
             "Write the definition, giving variable names to all your input values...\n\n")
           (write-null-wrapper ""
             (lambda ()
               (string-append
-                (write-wrapper ".recipe_line"
+                (write-wrapper ".recipe.recipe_line"
                   (lambda ()
                     (string-append
                       (write-spaced (highlight-keywords "fun "))
@@ -447,7 +447,7 @@
                       (write-spaced ":"))))
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
-                (write-wrapper ".recipe_line"
+                (write-wrapper ".recipe.recipe_line"
                   (lambda ()
                     (string-append
                       (encoded-ans "" "MM" #f)
@@ -455,7 +455,7 @@
                                    (highlight-keywords last-body-line)
                                    (if (string-prefix? last-body-line "end") #t
                                        *show-body?*)))))
-                (write-wrapper ".recipe_line"
+                (write-wrapper ".recipe.recipe_line"
                   (lambda ()
                     (write-spaced (highlight-keywords "end"))
                     ))))))))
@@ -509,7 +509,7 @@
 
 (define (write-cond-clause clause)
   ;(printf "doing write-cond-clause ~s\n" clause)
-  (write-wrapper ".recipe_line.recipe_cond_clause"
+  (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
     (lambda ()
       (string-append (encoded-ans "" "MMMMM" #f)
                      (write-large "{startsb}")
