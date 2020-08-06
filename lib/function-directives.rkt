@@ -70,6 +70,9 @@
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
 
+(define (wescheme->pyret-s s)
+  (wescheme->pyret (string->symbol s)))
+
 (define (pyret-keyword? w)
   ;(printf "doing pyret-keyword? ~s\n" w)
   (ormap
@@ -603,6 +606,8 @@
     (when (string=? directions "")
       (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
     )
+  (when *pyret?*
+    (set! funname (wescheme->pyret-s funname)))
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
   (unless *show-purpose?* (set! purpose " "))
