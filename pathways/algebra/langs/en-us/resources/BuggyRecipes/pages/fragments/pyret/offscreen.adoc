@@ -1,16 +1,15 @@
-
-@assess-design-recipe{
-  "offscreen?"
-    "Write a function, is-offscreen, which returns true is Sam the butterfly's x-coordinate is less than -50 or greater than 690."
-#:domain-list (list "Number")
-#:range "Boolean"
-#:purpose "Given an x-coordinate, returns true if the coordinate is less than -50"
-#:buggy-example-list 
-'([is-offscreen 60 "true"]
-  [is-offscreen 800 "false"])
-#:buggy-funname-defn "is-off-screen"
-#:param-list (list "x-coord")
-#:body "(x-coord < -50) and (x-coord > 690)"
+@assess-design-recipe{"offscreen?"
+"Write a function, is-offscreen, which returns true is Sam the butterfly's x-coordinate is less than -50 or greater than 690."
+    #:headless? #t
+	#:domain-list (list "Number")
+	#:range "Boolean"
+	#:purpose "Given an x-coordinate, returns true if the coordinate is less than -50"
+	#:buggy-example-list 
+	'([is-offscreen 60 "true"]
+	  [is-offscreen 800 "false"])
+	#:buggy-funname-defn "is-off-screen"
+	#:param-list (list "x-coord")
+	#:body "(x-coord < -50) and (x-coord > 690)"
 }
                        
                                 
