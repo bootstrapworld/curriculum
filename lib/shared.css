@@ -2,7 +2,6 @@
 @import url("./asciidoctor.css");
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
-
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
 */
@@ -63,6 +62,9 @@ tr th.tableblock {
 .gdrive-only {display: none; visibility: hidden;}
 
 #header, #content, #footer {margin: 0 !important; max-width: 9.5in;}
+.landscape #header, .landscape #content, .landscape #footer {
+  max-width: 100em !important;
+}
 
 /* Warn the user the Save-to-Drive is broken on Safari */
 #safariWarning { display: none; }
@@ -302,16 +304,12 @@ tr th.tableblock {
 .logo { float: right; }
 .logo img { width: 400px; }
 
+/* NOT NEEDED? */
 .wrapper {
   font-family: Hack, "Courier New", monospace;
   width: 100%;
   display: inline-block;
   vertical-align: top;
-}
-
-span.spacer {
-  display: inline-block;
-  line-height: 20pt;
 }
 
 span.clear {
@@ -338,12 +336,11 @@ span.clear {
  }
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
-
 /************************************************************************************
 * DESIGN RECIPE STYLING
 */
 
-.recipe { height: 35pt; } /* Lines where students should write need to be tall */
+.recipe { height: 37pt; } /* Lines where students should write need to be tall */
 .keyword_only { height: 20pt; } /* lines containing nothing to write on should be short */
 .recipe_instructions { height: 16pt; } /* instruction lines should be extra-short */
 
@@ -461,6 +458,10 @@ td.tableblock .listingblock {
 /************************************************************************************
 * FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
 */
+div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+  font-family: Hack, "Courier New", monospace;
+}
+
 div.circleevalsexp .expression {
   display: inline-block;
   padding-top: 6px;
@@ -500,40 +501,36 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   margin:     0px 3px;
   display:    inline-block;
   padding:    0px;
-  font-family:Hack, "Courier New", monospace;
   font-size:  .8rem;
   color:      #666666;
   font-style: normal;
   clear:      both;
 }
-
-.wescheme-string,     .cm-scheme-string    {color: green;}
-.wescheme-number,     .cm-scheme-number    {color: blue;}
-.wescheme-boolean,    .cm-scheme-boolean   {color: darkred;}
-.wescheme-character,  .cm-scheme-character {color: orange;}
-.wescheme-symbol,     .cm-scheme-symbol    {color: steelblue;}
-.wescheme-comment,    .cm-scheme-comment   {color: orange; }
-.CodeMirror {font-family: Hack, "Courier New", monospace;}
-
-.cm-s-default.CodeMirror      { color: black; }
-.cm-comment     { color: #cd7054; }
-.cm-boolean     { color: darkred; }
-.cm-builtin     { color: #555; }
-.cm-variable    { color: #4d5966; }
-.cm-keyword     { color: black; font-weight: bold; }
-.cm-number      { color: navy; }
-.cm-roughnum    { color: blue; }
-.cm-bad-number  { color: red; font-weight: bold; }
-.cm-string      { color: forestgreen; }
-.cm-type        { color: #374049; }
-.cm-function-name { color: #374049; }
-.cm-unterminated-string { color: red; font-weight: bold; }
-.cptteach-fixed { line-height: 1.5; background: #ddd; }
-
+/* WESCHEME COLORS */
+.wescheme-string,     .cm-scheme-string   { color: green;}
+.wescheme-number,     .cm-scheme-number   { color: blue;}
+.wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
+.wescheme-character,  .cm-scheme-character{ color: orange;}
+.wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
+.wescheme-comment,    .cm-scheme-comment  { color: orange; }
 span.cm-scheme-punctuation                 {color: black;}
 span.cm-scheme-rparen                      {color: black;}
 
-.pyretkeyword { font-weight: 900; }
+/* PYRET COLORS */
+.cm-s-default.CodeMirror                  { color: black; }
+.cm-comment                               { color: #cd7054; }
+.cm-boolean                               { color: darkred; }
+.cm-builtin                               { color: #555; }
+.cm-variable                              { color: #4d5966; }
+.cm-keyword                               { color: black; font-weight: bold; }
+.cm-number                                { color: navy; }
+.cm-roughnum                              { color: blue; }
+.cm-bad-number                            { color: red; font-weight: bold; }
+.cm-string                                { color: forestgreen; }
+.cm-type                                  { color: #374049; }
+.cm-function-name                         { color: #374049; }
+.cm-unterminated-string                   { color: red; font-weight: bold; }
+.pyretkeyword                             { font-weight: 900; }
 
 /* class for tables containing Pyret data */
 table.pyret-table {
@@ -563,14 +560,6 @@ div.rightColumn .obeyspaces {
   display: inline-block;
 }
 
-.landscape #header,
-.landscape #content,
-.landscape #footnotes,
-.landscape #footer {
-  max-width: 100em !important;
-}
-
-
 /************************************************************************************
 * SCREEN MEDIA
 */
@@ -591,8 +580,6 @@ div.rightColumn .obeyspaces {
     orphans: 0; widows: 0;    /* never break a paragraph  */
 }
 @media print {
-  .web-page-only { display: none; visibility: hidden; }
-
   div#body, body { 
     color: black; 
     top:    0px;
@@ -601,7 +588,7 @@ div.rightColumn .obeyspaces {
 
   }
 
-  strong{ font-weight: 700; }
+  strong { font-weight: 700; }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
   #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
@@ -620,16 +607,11 @@ div.rightColumn .obeyspaces {
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursor { visibility: hidden;}
 
-  #savetodrive-div { display: none !important; }
-  .acknowledgment, .copyright, #footer, #outOfDate { display: none; }
-
-  .dr-title {
-    width: 100%; 
-    background: black; 
-    color: white; 
-    text-align: center; 
-    display: inline-block;
+  #savetodrive-div, .acknowledgment, .copyright, #footer, #outOfDate, 
+  .web-page-only { 
+   display: none !important; visibility: hidden;
   }
+
   .recipe_title p { padding: 3px 5px; }
   .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
   .designRecipeLayout .studentAnswer::after { font-size: .8rem; }
@@ -671,20 +653,6 @@ div.rightColumn .obeyspaces {
     color: white;
     text-align: center;
     display: inline-block;
-  }
-
-  .sect1.designRecipeLayout > h2:first-child {
-    background: white !important;
-    color: black !important;
-  }
-
-  /* Preserve some vertical padding in Design Recipes */
-  .designRecipeLayout p {margin: 3px 0px;}
-
-  #header > h1:first-child > code {
-    background: black;
-    color: white;
-    font-size: 16pt; /* NOT USED? */
   }
 
   div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
