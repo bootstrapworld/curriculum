@@ -3,7 +3,8 @@
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 
-(provide *function-list*)
+(provide *function-list* 
+         get-function-name)
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
@@ -27,6 +28,10 @@
 
 (define *max-pyret-example-side-length* 30)
 (define *max-wescheme-cond-side-length* 32)
+
+(define *funname* #f)
+
+(define (get-function-name) *funname*)
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
@@ -608,6 +613,7 @@
     )
   (when *pyret?*
     (set! funname (wescheme->pyret-s funname)))
+  (set! *funname* funname)
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
   (unless *show-purpose?* (set! purpose " "))
