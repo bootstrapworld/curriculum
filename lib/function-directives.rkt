@@ -117,31 +117,24 @@
 
 (define (write-purpose funname domain-list range purpose)
   (string-append
-    (string-append
-      "\n\n[.recipe_title]\n"
-      "Contract and Purpose Statement\n"
-      "\n"
-      "[.recipe.recipe_instructions]\n"
-      "Every contract has three parts...\n\n")
-    (write-wrapper ".recipe.recipe_graf"
-      (lambda ()
-        (string-append
-          (if *pyret?* "# " "&#59; ")
-          (encoded-ans ".recipe_name" funname *show-funname-defn?*)
-          (if *pyret?* "::" ":")
-          (encoded-ans ".recipe_domain"
-                       ((if *pyret?*
-                            vars-to-commaed-string
-                            vars-to-string) domain-list) *show-domains?*)
-          "->"
-          (encoded-ans ".recipe_range" range *show-range?*))))
-    ;(write-clear)
-    (write-wrapper-scan ".recipe.recipe_graf"
-      (lambda ()
-        (string-append
-          (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
-          " "
-          (encoded-ans ".recipe_purpose" purpose *show-purpose?*))))))
+    "\n\n[.recipe_title]\n"
+    "Contract and Purpose Statement\n"
+    "\n"
+    "[.recipe.recipe_instructions]\n"
+    "Every contract has three parts...\n\n"
+    "[.recipe]\n"
+    (if *pyret?* "&#x23; " "&#x3b; ")
+    (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+    (if *pyret?* "::" ":")
+    (encoded-ans ".recipe_domain"
+                 ((if *pyret?*
+                      vars-to-commaed-string
+                      vars-to-string) domain-list) *show-domains?*)
+    "->"
+    (encoded-ans ".recipe_range" range *show-range?*)
+    (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
+    " "
+    (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
@@ -480,11 +473,6 @@
 
 (define *wrapper-block-level* 0)
 
-(define (write-wrapper-scan classes thunk)
-  (let ([res (thunk)])
-    (if (or #t (string=? classes "")) res
-        (enclose-span classes res))))
-
 (define (write-null-wrapper classes thunk)
   (thunk))
 
@@ -503,7 +491,7 @@
                       "\n"
                       (make-string *wrapper-block-level* #\-)
                       "\n"))
-          (set! res (write-wrapper-scan classes thunk)))
+          (set! res (thunk)))
       (set! *wrapper-block-level* old-*wrapper-block-level*)
       res)))
 
