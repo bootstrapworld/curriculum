@@ -46,7 +46,11 @@
                            [(eq? e 'sqrt) "num-sqrt"]
                            [(eq? e 'sqr) "num-sqr"]
                            [(eq? e '=) "=="]
-                           [else (format "~a" e)])]
+                           [else
+                             (let ([es (format "~a" e)])
+                               (cond [(regexp-match #rx"\\?$" es)
+                                      (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
+                                     [else es]))])]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
                      (cond [(memq a '(+ - * / and or < > = <= >=))
