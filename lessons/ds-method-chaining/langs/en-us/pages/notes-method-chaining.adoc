@@ -3,13 +3,13 @@
 *Method chaining* allows us to apply multiple methods with less code:
 For example, instead of using multiple definitions, like this:
 
-  with-labels = table.build-column("labels", nametag)
+  with-labels = animals-table.build-column("labels", nametag)
   cats = with-labels.filter(is-cat)
   cats.order-by("age", true)
 
 We can use method-chaining to write it all on one line, like this:
 
-  table.build-column("labels", nametag).filter(is-cat).order-by("age", true)
+  animals-table.build-column("labels", nametag).filter(is-cat).order-by("age", true)
 
 *Order Matters!* The methods are applied in the order they appear. For example,
 trying to order a table by a column that hasn’t been built will result in an error.
