@@ -4,12 +4,12 @@
   #:range "Boolean"
   #:purpose "Consumes a forecast and returns true if it is sunny"
   #:num-examples 2
-  #:example-list '(("sunny" (string-equal? "sunny" "sunny"))
-                   ("rainy" (string-equal? "rainy" "sunny")))
+  #:example-list '(("sunny" (string=? "sunny" "sunny"))
+                   ("rainy" (string=? "rainy" "sunny")))
   #:show-examples '((#f #f #f) (#f #f #f))
   #:param-list (list "forecast")
   #:show-params? #f
-  #:body '(string-equal? forecast "sunny")
+  #:body '(string=? forecast "sunny")
   #:show-body? #f 
   #:grid-lines? #t 
 }
