@@ -3,7 +3,8 @@
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 
-(provide *function-list*)
+(provide *function-list* 
+         get-function-name)
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
@@ -28,6 +29,10 @@
 (define *max-pyret-example-side-length* 30)
 (define *max-wescheme-cond-side-length* 32)
 
+(define *funname* #f)
+
+(define (get-function-name) *funname*)
+
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
   (enclose-span
@@ -46,7 +51,11 @@
                            [(eq? e 'sqrt) "num-sqrt"]
                            [(eq? e 'sqr) "num-sqr"]
                            [(eq? e '=) "=="]
-                           [else (format "~a" e)])]
+                           [else
+                             (let ([es (format "~a" e)])
+                               (cond [(regexp-match #rx"\\?$" es)
+                                      (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
+                                     [else es]))])]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
                      (cond [(memq a '(+ - * / and or < > = <= >=))
@@ -65,6 +74,9 @@
                                            ", "))]))]
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
+
+(define (wescheme->pyret-s s)
+  (wescheme->pyret (string->symbol s)))
 
 (define (pyret-keyword? w)
   ;(printf "doing pyret-keyword? ~s\n" w)
@@ -599,6 +611,9 @@
     (when (string=? directions "")
       (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
     )
+  (when *pyret?*
+    (set! funname (wescheme->pyret-s funname)))
+  (set! *funname* funname)
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
   (unless *show-purpose?* (set! purpose " "))

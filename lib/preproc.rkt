@@ -907,6 +907,8 @@
                                     [else
                                       (read-group i directive)
                                       (read-space i)]))]
+                           [(string=? directive "funname")
+                            (fprintf o "`~a`" (get-function-name))]
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
