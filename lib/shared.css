@@ -316,6 +316,8 @@ span.clear {
 .keyword_only { height: 20pt; } /* lines containing nothing to write on should be short */
 .recipe_instructions { height: 16pt; } /* instruction lines should be extra-short */
 
+:not(.recipe_instructions) + .keyword_only { margin: -8pt 0pt; }
+
 .studentAnswer {
   margin-bottom:      10pt;
   min-width:          100pt;
@@ -336,6 +338,14 @@ span.clear {
   font-style:         italic;
   font-family:        "Century Gothic";
   word-spacing:       0pt;  /* don't inherit spacing from .studentAnswer */
+}
+
+/* This class and the rule below it could be cleaned up */
+.wrapper {
+  font-family: Hack, "Courier New", monospace;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .recipe_name, .recipe_domain, .recipe_range, .purpose_comment,
