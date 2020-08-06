@@ -924,11 +924,7 @@
                              (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
-                  [(and (or *lesson*
-                            *lesson-plan*
-                            *narrative*
-                            *teacher-resources*)
-                        beginning-of-line? (char=? c #\=))
+                  [(and beginning-of-line? (char=? c #\=))
                    (set! beginning-of-line? #f)
                    (cond [title-reached?
                            (cond [first-subsection-reached? #f]
