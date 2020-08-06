@@ -122,7 +122,7 @@
     "\n"
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
-    "[.recipe]\n"
+    "[.recipe.recipe_contract]\n"
     (if *pyret?* "&#x23; " "&#x3b; ")
     (encoded-ans ".recipe_name" funname *show-funname-defn?*)
     (if *pyret?* "::" ":")
@@ -133,7 +133,7 @@
     "->"
     (encoded-ans ".recipe_range" range *show-range?*)
     "\n\n"
-    "[.recipe]\n"
+    "[.recipe.recipe_purpose_statement]\n"
     (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
     " "
     (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))
@@ -150,7 +150,7 @@
     ;examples
 
     (if *pyret?*
-        (write-wrapper ".recipe.recipe_example_line"
+        (write-wrapper ".recipe.recipe_example_line.keyword_only"
           (lambda ()
             (write-spaced (highlight-keywords "examples:"))))
         "")
@@ -198,7 +198,7 @@
                  ))
 
     (if *pyret?*
-        (write-wrapper ".recipe.recipe_example_line"
+        (write-wrapper ".recipe.recipe_example_line.keyword_only"
           (lambda ()
             (write-spaced (highlight-keywords "end"))))
         "")
@@ -450,7 +450,7 @@
                                    (highlight-keywords last-body-line)
                                    (if (string-prefix? last-body-line "end") #t
                                        *show-body?*)))))
-                (write-wrapper ".recipe.recipe_line"
+                (write-wrapper ".recipe.recipe_line.keyword_only"
                   (lambda ()
                     (write-spaced (highlight-keywords "end"))
                     ))))))))
