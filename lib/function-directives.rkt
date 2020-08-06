@@ -631,6 +631,7 @@
           #:param-list (param-list '()) ; list of string
           #:body (body #f) ; a string
           #:grid-lines? (grid-lines? #f)
+          #:headless? (headless? #f)
           )
   (unless range (error 'ERROR "assess-design-recipe: range required"))
   (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
@@ -661,6 +662,7 @@
                             #:show-body? #t
                             #:grid-lines? grid-lines?
                             #:assess-design-recipe #t
+                            #:headless? headless?
                             )))
 
 (define *function-list*
