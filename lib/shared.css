@@ -5,61 +5,59 @@
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
 */
-html {  font-size: 12pt; }
-body{
-  font-family: 'Lato', Arial, Helvetica, sans-serif;
-  color: #75328A;
+html {
+  font-size:      12pt;
+  font-family:    'Lato', Arial, Helvetica, sans-serif;
+  color:          #75328A;
 }
 
-p {margin: 10px 0px; font-size: inherit; }
-code{ display: inline-block; }
+p       { margin: 10px 0px; font-size: inherit; }
+code    { display: inline-block; }
+a[href] { color: #F4AB3A; text-decoration: none; }
+mark    { background: none; color: inherit; }
 
 h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: sans-serif;
+  font-size:      2rem;
+  font-weight:    bold;
+  font-family:    sans-serif;
 }
 h2 { 
-  margin: 1ex 0px; 
-  font-family: 'Lato', Arial, Helvetica, sans-serif; 
+  margin:         1ex 0px; 
+  font-family:    'Lato', Arial, Helvetica, sans-serif; 
 }
-
-a[href] { color: #F4AB3A; text-decoration: none; }
-
-mark { background: none; color: inherit; }
 
 .ulist ul {margin-bottom: 0px;}
 /* unordered list spacing */
-.ulist p {margin: 5px 0px;}
+.ulist p  {margin: 5px 0px;}
 
 /* table format defaults */
 td.tableblock>.content { margin-bottom: 0px; }
 tr th.tableblock code, td.tableblock code { background: none; }
 td.tableblock pre { background: none !important; }
 tr th.tableblock { 
-  background:     #cccccc; 
-  padding:        .25em .5em; 
-  font-size:      1rem;
+  background:       #cccccc; 
+  padding:          .25em .5em; 
+  font-size:        1rem;
 }
 
 /* The footer at the bottom of every page */
 .acknowledgment {
-  margin-top: 35px;
-  border-top: dashed 2px black;
-  padding-top: 20px;
-  padding-bottom: 5px;
-  font-size: 0.8rem;
-  font-style: italic;
+  margin-top:       35px;
+  border-top:       dashed 2px black;
+  padding-top:      20px;
+  padding-bottom:   5px;
+  font-size:        0.8rem;
+  font-style:       italic;
 }
 .acknowledgment img {
-  width: 94px;
-  height: 37px;
-  float: right;
+  width:            94px;
+  height:           37px;
+  float:            right;
 }
 #footer { background: rgba(0,0,0,.5); padding: 0px; }
 
 /* Hide anything that we only want seen on Google drive */
-.gdrive-only {display: none; visibility: hidden;}
+.gdrive-only { display: none; visibility: hidden; }
 
 #header, #content, #footer {margin: 0 !important; max-width: 9.5in;}
 .landscape #header, .landscape #content, .landscape #footer {
@@ -69,83 +67,70 @@ tr th.tableblock {
 /* Warn the user the Save-to-Drive is broken on Safari */
 #safariWarning { display: none; }
 #savetodrive-div:hover+#safariWarning { 
-  display: block; 
-  background: #75328AAA; 
-  color: white; 
-  padding: 5px; 
-  margin-top: 75px; 
-  border-radius: 5px; 
-  font-size: 10pt; 
-  line-height: 16pt;
+  display:          block; 
+  background:       #75328AAA; 
+  color:            white; 
+  padding:          5px; 
+  margin-top:       75px; 
+  border-radius:    5px; 
+  font-size:        10pt; 
+  line-height:      16pt;
 }
 
 .left  { text-align: left!important; }
 .right { text-align: right!important; }
 .right img { margin-left: 15px; }
 .center, .centered-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center !important;
-  padding-top: 2ex;
-  padding-bottom: 2ex;
+  display:          block;
+  margin-left:      auto;
+  margin-right:     auto;
+  text-align:       center !important;
+  padding:          2ex 0ex;
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
-.glossary {
-  float: left;
-  margin-bottom: 20px;
-}
+.glossary   { float: left; margin-bottom: 20px; }
 .glossary * { display: inline; }
 .glossary .title {
-  display: block;
-  font-weight: bold;
-  color: inherit;
+  display:          block;
+  font-weight:      bold;
+  color:            inherit;
  }
-.glossary dt::after{content: '::'; margin: 0px 5px;}
-
-.glossary dd {
-  margin-bottom: 0px;
-  margin-left: 0px;
-}
-.glossary dd::after{content: '\A'; white-space: pre; }
+.glossary dt::after { content: '::'; margin: 0px 5px; }
+.glossary dd        { margin: 0px; }
+.glossary dd::after { content: '\A'; white-space: pre; }
 
 .vocab { font-weight: bold; font-style: italic; color: #75328A; }
 
 .sectionbreak {
-  display: block;
-  width: auto;
-  border-bottom: solid 3px black;
-  margin: 5px 0px;
+  display:          block;
+  width:            auto;
+  border-bottom:    solid 3px black;
+  margin:           5px 0px;
 }
 
 .tooltip { position: relative; }
 .tooltip .tooltiptext {
-  visibility: hidden;
-  min-width: 120px;
-  max-width: 200px;
+  min-width:        120px;
+  max-width:        66%;
   background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 5ex;
-  left: 5ex;
-  opacity: 0;
-  transition: opacity 0.3s;
+  color:            white;
+  border-radius:    6px;
+  padding:          5px 0;
+  position:         absolute;
+  top:              50%;
+  left:             50%;
+  opacity:          0;
+  transition:       all 0.3s;
+  transform:        translateX(-50%) translateY(-50%);
 }
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
+.tooltip:hover .tooltiptext { opacity: 1; }
 
 .alignedStandards { display: none; }
 .standard-menu-container {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
+  padding:          10px;
+  display:          flex;
+  justify-content:  space-between;
 }
 .standard-menu-container div:nth-child(1) { width: 75%; }
 .standard-menu-container div:nth-child(2) { width: 25%;}
@@ -157,19 +142,19 @@ tr th.tableblock {
 .fitbruby,
 .blankline,
 .vskip {
-  display: inline-block;
-  min-height: 15px;
-  min-width: 5em;
-  text-align: center;
-  line-height: 1.2;
-  border-bottom: solid 1px black;
+  display:            inline-block;
+  min-height:         15px;
+  min-width:          5em;
+  text-align:         center;
+  line-height:        1.2;
+  border-bottom:      solid 1px black;
 }
 
 .fitbruby {
-   position: relative;
-   line-height: 20pt;
-   margin-bottom: 12pt;
-   padding: 0pt 0pt;
+   position:          relative;
+   line-height:       20pt;
+   margin-bottom:     12pt;
+   padding:           0pt 0pt;
 }
 
 .vskip { margin-top: 25px; width: 100%; border-bottom: none;}
@@ -188,12 +173,12 @@ tr th.tableblock {
 }
 
 .ruby {
-  position: absolute;
-  bottom: -18pt;
-  left: 0pt;
-  font-size: 0.7rem;
-  font-weight: normal;
-  width: 100%;
+  position:           absolute;
+  bottom:             -18pt;
+  left:               0pt;
+  font-size:          0.7rem;
+  font-weight:        normal;
+  width:              100%;
 }
 
 /************************************************************************************
@@ -216,107 +201,94 @@ tr th.tableblock {
 
 /* Language and Standards Tables */
 .lang-features-table * {
-  margin: 0px;
-  padding: 1px;
-  font-size: 0.8rem;
+  margin:             0px;
+  padding:            1px;
+  font-size:          0.8rem;
 } 
 .lang-features-table p { font-family: monospace; }
 .lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
-  background-color: lightgray;
-  font-weight: bold;
-  text-align: center;
-  font-family: inherit; /* Header row should not be monospace */
+  background-color:   lightgray;
+  font-weight:        bold;
+  text-align:         center;
+  font-family:        inherit; /* Header row should not be monospace */
 }
 .lang-features-table .centered-image {
   display: inline; /* Override default image treatment */
 }
 .lang-features-table tr td:nth-child(1), .lang-features-table tr td:nth-child(1) p {
-  background-color: transparent;
-  text-align: center;
-  vertical-align: middle;
-  font-family: inherit; /* Type cell should not be monospace */
+  background-color:   transparent;
+  text-align:         center;
+  vertical-align:     middle;
+  font-family:        inherit; /* Type cell should not be monospace */
 }
 .standards-hierarchical-table ul li ul { display: none; }
 
 /* Special links back to older, pre-remix materials */
-.old-materials p { width: 100%; background: #75328AAA; color: black; text-align: center; }
+.old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
 
 /* Headers, Sections, and section links */
 .lesson-section-1, .lesson-section-1+.lesson-section-1 { 
-  clear: both; 
-  border-top: solid 3px black; 
+  clear:              both; 
+  border-top:         solid 3px black; 
 }
 .lesson-section-2 { float: left; clear: both; width: 100%; margin: 10px 0px;}
 .lesson-section-2 h3 {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin: 0px;
+  font-size:          1.5rem;
+  font-style:         italic;
+  margin:             0px;
  }
 /* class for styling duration info in headers */
 .duration { float: right; color: #d9d2e9; min-width: 150px; text-align: right;}
 .section-link a {
-  margin-left:     -1.75em;
-  padding-right:   0.5em;
-  vertical-align:  middle;
-  text-decoration: none;
-  font-size:       .9rem;
-  visibility:      hidden;
+  margin-left:        -1.75em;
+  padding-right:      0.5em;
+  vertical-align:     middle;
+  text-decoration:    none;
+  font-size:          .9rem;
+  visibility:         hidden;
 }
 .sect1.lesson-section-1 h2:hover .section-link a {visibility: visible;}
 
-.lesson-instruction {
-  margin-top: 1ex;
-  margin-left: 1ex;
-  margin-bottom: 1ex;
-  background: #eeeeee;
-}
+.lesson-instruction { margin: 1ex; background: #eee; }
 
 .lesson-point {
-  font-weight: bold;
-  color: black;
-  border-style: solid;
-  margin: 2ex 2ex;
-  border-width: 2px 0 2px 0;
+  font-weight:        bold;
+  color:              black;
+  border-style:       solid;
+  margin:             2ex;
+  border-width:       2px 0px;
 }
 .lesson-point p { margin: 0ex 1ex; }
 
 /* Callout boxes */
 .strategy-box, .notice-box {
-  background: #efefef;
-  border: solid 5px !important;
-  width: 75%;
-  margin: 15px auto;
+  background:         #efefef;
+  border:             solid 5px !important;
+  width:              75%;
+  margin:             15px auto;
 }
 .strategy-box { border-color: #1a73b5 !important; }
 .notice-box   { border-color: #7747a5 !important; }
-.strategy-box .title, .notice-box .title{
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.5rem;  
+.strategy-box .title, .notice-box .title {
+  width:              100%;
+  display:            block;
+  text-align:         center;
+  font-weight:        bold;
+  font-size:          1.5rem;  
 }
 .strategy-box .title { color: #1a73b5; }
 .notice-box   .title { color: #7747a5; }
 .strategy-box a, .notice-box a { color: blue; text-decoration: underline; }
 
-.blank { color: rgba(0,0,0,0); }
-.logo { float: right; }
+.blank    { color: rgba(0,0,0,0); }
+.logo     { float: right; }
 .logo img { width: 400px; }
 
-/* NOT NEEDED? */
-.wrapper {
-  font-family: Hack, "Courier New", monospace;
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-}
-
 span.clear {
-  clear: both;
-  display: block;
-  content: "";
-  width: 100%;
+  clear:              both;
+  display:            block;
+  content:            "";
+  width:              100%;
 }
 
 /*
@@ -330,9 +302,9 @@ span.clear {
 .TwoColumnDD_DT dd::before {content: '['; }
 .TwoColumnDD_DT dd::after  {content: ']'; }
 .TwoColumnDD_DT dd a:first-child::after {
-  content: '  |';
-  white-space: pre-wrap;
-  display: inline-block;
+  content:            '  |';
+  white-space:        pre-wrap;
+  display:            inline-block;
  }
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
@@ -345,34 +317,34 @@ span.clear {
 .recipe_instructions { height: 16pt; } /* instruction lines should be extra-short */
 
 .studentAnswer {
-  margin-bottom:  10pt;
-  min-width:      100pt;
-  line-height:    20pt;
-  position:       relative;
-  padding:        0pt 0pt;
-  word-spacing:   4pt;
-  display: inline-block;
-  border-bottom: solid 1px black;
+  margin-bottom:      10pt;
+  min-width:          100pt;
+  line-height:        20pt;
+  position:           relative;
+  padding:            0pt;
+  word-spacing:       4pt;
+  display:            inline-block;
+  border-bottom:      solid 1px black;
 }
 .studentAnswer::after {
-  position:       absolute;
-  bottom:         -18pt;
-  left:           0pt;
-  font-size:      .65rem;
-  width:          100%;
-  text-align:     center;
-  font-style:     italic;
-  font-family:    "Century Gothic";
-  word-spacing:   0pt;  /* don't inherit spacing from .studentAnswer */
+  position:           absolute;
+  bottom:             -18pt;
+  left:               0pt;
+  font-size:          .65rem;
+  width:              100%;
+  text-align:         center;
+  font-style:         italic;
+  font-family:        "Century Gothic";
+  word-spacing:       0pt;  /* don't inherit spacing from .studentAnswer */
 }
 
 .recipe_name, .recipe_domain, .recipe_range, .purpose_comment,
 .recipe_example_inputs, .recipe_example_body, .recipe_example_body_long,
 .recipe_variables, .recipe_definition_body,
 .recipe_cond, .questions, .answers {
-  font-family: Hack, "Courier New", monospace;
-  display: inline-block;
-  border-bottom: solid 1pt black;
+  font-family:        Hack, "Courier New", monospace;
+  display:            inline-block;
+  border-bottom:      solid 1pt black;
 }
 
 .recipe_name::after, .recipe_domain::after, .recipe_range::after,
@@ -388,11 +360,11 @@ span.clear {
 .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables { 
   text-align: center; 
 }
-.recipe_name    { min-width: 15%; }
-.recipe_domain  { width: 60%; }
-.recipe_range   { width: 15%; }
-.recipe_purpose { width: 93%; }
-.recipe_example_inputs { min-width: 20%; }
+.recipe_name          { min-width: 15%; }
+.recipe_domain        { width: 60%; }
+.recipe_range         { width: 15%; }
+.recipe_purpose       { width: 93%; }
+.recipe_example_inputs{ min-width: 20%; }
 
 .wescheme .recipe_example_body { width: 100%; }
 .pyret    .recipe_example_body { width:  90%; }
@@ -402,19 +374,19 @@ span.clear {
 .recipe_definition_body { width: 90%; }
 
 /* Piecewise Functions (ask/cond) branches */
-.questions { width: 42%; }
-.answers   { width: 47%; }
-.pyret .recipe_line .questions { width: 39%; }
-.pyret .recipe_line .answers   { width: 44%; }
+.wescheme .questions  { width: 42%; }
+.wescheme .answers    { width: 47%; }
+.pyret    .questions  { width: 39%; }
+.pyret    .answers    { width: 44%; }
 
 /* Section title, with checkbox and step-specific instructions */
 .recipe_title p {
-  color: white;
-  background: gray;
-  display: block;
-  padding: 2px 10px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  color:              white;
+  background:         gray;
+  display:            block;
+  padding:            2px 10px;
+  font-size:          1.1rem;
+  font-weight:        bold;
 }
 .recipe_title p::after { content: "\2B1C"; float: right; }
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
@@ -428,18 +400,18 @@ span.clear {
 
 /* Exercises and Solutions Table */
 table.exercises_and_solutions, table.exercises_and_solutions * { 
-  border: 0px !important; 
-  padding: 0px;
-  background: none !important;
+  border:             0px !important; 
+  padding:            0px;
+  background:         none !important;
 }
 table.exercises_and_solutions table td:last-child { text-align: right; }
 table.exercises_and_solutions>tbody>tr>td:first-child * { font-weight: bold; }
 table.exercises_and_solutions tr td:last-child .content {
-  max-height: 0px; 
-  overflow: hidden; 
-  text-overflow: ellipsis;
-  transition: max-height linear 0.5s; 
-  display: block;
+  max-height:         0px; 
+  overflow:           hidden; 
+  text-overflow:      ellipsis;
+  transition:         max-height linear 0.5s; 
+  display:            block;
 }
 table.exercises_and_solutions tr:hover td:last-child .content {max-height: 1000px; }
 table.exercises_and_solutions table * { background: none !important; }
@@ -451,9 +423,7 @@ table.exercises_and_solutions table tr:hover a {color: white; text-decoration: u
 table.contract-table tr:nth-child(4n+3),
 table.contract-table tr:nth-child(4n+4) { background-color: #f2f2f2; }
 
-td.tableblock .listingblock {
-  margin-bottom: 0 !important;
-}
+td.tableblock .listingblock { margin-bottom: 0 !important; }
 
 /************************************************************************************
 * FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
@@ -463,32 +433,32 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
 }
 
 div.circleevalsexp .expression {
-  display: inline-block;
-  padding-top: 6px;
-  margin: 5px;
-  clear: none;
-  border: 2px solid black;
-  background: white;
-  border-radius: 20px;
-  text-align: center;
+  display:            inline-block;
+  padding-top:        6px;
+  margin:             5px;
+  clear:              none;
+  border:             2px solid black;
+  background:         white;
+  text-align:         center;
+  border-radius:      20px;
   -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
+  -webkit-border-radius:20px;
 }
 
 div.circleevalsexp .value {
-  display: inline-block;
-  margin: 10px 10px 5px 10px;
-  vertical-align: top;
+  display:            inline-block;
+  margin:             10px 10px 5px 10px;
+  vertical-align:     top;
 }
 
 div.circleevalsexp .operator {
-  display: block;
-  height: 20px;
-  line-height: 16px;
-  text-align: center;
-  width: 100%;
-  border-bottom: solid 2px black;
-  border-radius: 15px 15px 0px 0px;
+  display:            block;
+  height:             20px;
+  line-height:        16px;
+  text-align:         center;
+  width:              100%;
+  border-bottom:      solid 2px black;
+  border-radius:      15px 15px 0px 0px;
 }
 
 /* When in operator position, drop the margins */
@@ -497,14 +467,14 @@ div.circleevalsexp .operator .value { margin: 0px; }
 div.circleevalsexp .lParen, div.circleevalsexp .rParen { display: none; }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
-  width:      100%;
-  margin:     0px 3px;
-  display:    inline-block;
-  padding:    0px;
-  font-size:  .8rem;
-  color:      #666666;
-  font-style: normal;
-  clear:      both;
+  width:              100%;
+  margin:             0px 3px;
+  display:            inline-block;
+  padding:            0px;
+  font-size:          .8rem;
+  color:              #666;
+  font-style:         normal;
+  clear:              both;
 }
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
@@ -513,8 +483,8 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
 .wescheme-comment,    .cm-scheme-comment  { color: orange; }
-span.cm-scheme-punctuation                 {color: black;}
-span.cm-scheme-rparen                      {color: black;}
+span.cm-scheme-punctuation                { color: black;}
+span.cm-scheme-rparen                     { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
@@ -534,29 +504,28 @@ span.cm-scheme-rparen                      {color: black;}
 
 /* class for tables containing Pyret data */
 table.pyret-table {
-  border-collapse: collapse;
-  width: 100%;
-  table-layout: auto;
-  display: table!important;
-  border: 1px black solid;
-  border-radius: 1em;
-  overflow: hidden;
-  background: #eee;
+  border-collapse:    collapse;
+  width:              100%;
+  table-layout:       auto;
+  display:            table!important;
+  border:             1px black solid;
+  border-radius:      1em;
+  overflow:           hidden;
+  background:         #eee;
 }
 table.pyret-table tr:nth-child(even){background-color: #f2f2f2}
 table.pyret-table thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
 table.pyret-table td p { margin: 0px; }
 table.pyret-table td, table.pyret-table th {
-  border: none;
-  border-right: 1px white solid;
-  color: #1f1180;
-  font-family: monospace;
+  border:             none;
+  border-right:       1px white solid;
+  color:              #1f1180;
+  font-family:        monospace;
 }
 
 .obeyspaces { white-space: pre-wrap; }
 
-div.leftColumn .obeyspaces,
-div.rightColumn .obeyspaces {
+div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   display: inline-block;
 }
 
@@ -565,9 +534,9 @@ div.rightColumn .obeyspaces {
 */
 @media screen{
   .web-page-only {
-    font-weight: bold;
-    font-style: italic;
-    line-height: 45px;
+    font-weight:      bold;
+    font-style:       italic;
+    line-height:      45px;
   }
 }
 
@@ -575,28 +544,25 @@ div.rightColumn .obeyspaces {
  * PRINT MEDIA
  */
 @page  {
-    size: 8.5in 11in;         /* normal letter size paper */
-    margin: 0.5in;            /* this affects the margin in the printer settings */
-    orphans: 0; widows: 0;    /* never break a paragraph  */
+    size:             8.5in 11in;   /* normal letter size paper */
+    margin:           0.5in;        /* half-inch margins */
+    orphans:          0; widows: 0; /* never break a paragraph across pages */
 }
 @media print {
   div#body, body { 
-    color: black; 
-    top:    0px;
-    left:   0px;
-    width:  100%;
-
+    color:            black; 
+    top:              0px;
+    left:             0px;
+    width:            100%;
   }
-
-  strong { font-weight: 700; }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
   #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
 
   ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-    color: black;
+    width:            0px;
+    background:       transparent; /* make scrollbar transparent */
+    color:            black;
   }
   /* Override AsciiDoc print default */
   a[href] { color: #F4AB3A !important; text-decoration: none !important; } 
@@ -620,9 +586,9 @@ div.rightColumn .obeyspaces {
   #preamble { page-break-after: always; }
   /* Workbook pages should have an inverted header, with a little space below */
   :not(body.LessonPlan) #header { 
-    background: black; 
-    color: white; 
-    margin-bottom: 5px !important;
+    background:       black; 
+    color:            white; 
+    margin-bottom:    5px !important;
   }
 
   /* More padding between sections, and don't ever break a section across pages */
@@ -634,33 +600,34 @@ div.rightColumn .obeyspaces {
 
   a[href]:after { content: none !important; }
 
-  .questions { min-width: 36%; width: auto; }
-  .answers { width: auto; }
+  .questions    { min-width: 36%; width: auto; }
+  .answers      { width: auto; }
 
   /* format code and strong/emphasized text for printing */
   .pyret, .racket { font-size: 12pt; margin: 0px 6px; display: inline-block;}
   .paragraph em, .paragraph strong{ margin: 0px 3px; }
+  strong { font-weight: 700; }
 
   /* If we're NOT in a lesson plan, format the headers differently */
-  body:not(.LessonPlan) #header > h1:first-child,
+  body:not(.LessonPlan) #header> h1:first-child,
   body:not(.LessonPlan) .sect1 > h1:first-child,
   body:not(.LessonPlan) .sect1 > h2:first-child,
   body:not(.LessonPlan) .sect1 > h3:first-child,
   body:not(.LessonPlan) .sect2 > h3:first-child {
-    width: 100%;
-    background: black;
-    margin-top: 0px;
-    color: white;
-    text-align: center;
-    display: inline-block;
+    width:            100%;
+    background:       black;
+    margin-top:       0px;
+    color:            white;
+    text-align:       center;
+    display:          inline-block;
   }
 
   div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
-    display:    inline-block;
+    display: inline-block;
   }
 
   /* Remove AsciiDoc's gray background for code chunks */
-  .listingblock pre:not(.highlight) { background: #f9f9fa !important; }
+  .listingblock pre:not(.highlight) { background: none !important; }
 
   /* Work around a known issue with wkhtmltopdf, in which font-weight is not applied
    * consistently for the same font. By switching to a different font, we can make
