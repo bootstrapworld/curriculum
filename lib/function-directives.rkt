@@ -132,6 +132,8 @@
                       vars-to-string) domain-list) *show-domains?*)
     "->"
     (encoded-ans ".recipe_range" range *show-range?*)
+    "\n\n"
+    "[.recipe]\n"
     (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
     " "
     (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))
