@@ -458,7 +458,7 @@
                   (lambda ()
                     (string-append
                       (encoded-ans "" "MM" #f)
-                      (encoded-ans ".recipe_definition_body"
+                      (encoded-ans (if (= n 0) ".recipe_definition_body" "")
                                    (highlight-keywords last-body-line)
                                    (if (string-prefix? last-body-line "end") #t
                                        *show-body?*)))))
