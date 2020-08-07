@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-07-23 # last modified
+LASTMOD=2020-08-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -141,7 +141,7 @@ mkdir -p prog
 
 PROGDIR=$TOPDIR/prog
 
-cp -p $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
+cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
 
 # if $LANGUAGE != en-us, and
 # shared/langs/$LANGUAGE isn't sufficiently populated,
@@ -478,7 +478,7 @@ function resolveabbrevs() {
     $f
   if test "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Chttp%3A%2F%2Fwww.cs.wpi.edu%2F%7Ekfisler%2Fmathjaxlocal.js"></script>
+      <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
@@ -1304,6 +1304,8 @@ function buildpathway() {
 
     mkdir -p distribution/$LANGUAGE/lib
     cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/lib
+    rm -fr distribution/$LANGUAGE/lib/MathJax*
+    cp -pr $PROGDIR/MathJax* distribution/$LANGUAGE/lib
 
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
