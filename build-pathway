@@ -627,7 +627,7 @@ function setmathdelay() {
 
   local NUMMATHEXPRS=$(grep -c '\\displaystyle' $TMPHTML)
   if test $NUMMATHEXPRS; then
-    JAVASCRIPTDELAY=4000
+    JAVASCRIPTDELAY=3000
     local JTMP=$(expr $NUMMATHEXPRS \* 50)
     if test $JTMP -gt $JAVASCRIPTDELAY; then
       JAVASCRIPTDELAY=$JTMP
