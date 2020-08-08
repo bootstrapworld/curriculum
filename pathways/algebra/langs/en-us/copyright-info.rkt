@@ -1,4 +1,4 @@
 (
- ("name" "BS:Games")
- ("author" "Jen Poole, Emmanuel Schanzer, Ed Campos Jr, Flannery Denny, and Dorai Sitaram")
+ ("name" "Bootstrap:Algebra")
+ ("author" "Emmanuel Schanzer, Jen Poole, Ed Campos Jr, Flannery Denny, and Dorai Sitaram")
  )
