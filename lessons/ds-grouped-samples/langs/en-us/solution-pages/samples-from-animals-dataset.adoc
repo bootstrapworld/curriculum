@@ -1,19 +1,21 @@
+[.landscape]
 = Grouped Samples from the Animals Dataset
-
-Use method chaining to define the *grouped samples* below, using the helper functions that you've already defined:  `is-old`, `is-young`, `is-cat`, `is-dog`, `is-female`, `lookup-fixed`, and `has-s-name`. We’ve given you the solution for the first sample, to get you started.
 
 ++++
 <style>
 /** fitb CSS experiment **/
-td:nth-of-type(2) p { display: table }
-td:nth-of-type(2) .fitb { display: table-cell; width: 90%; }
-td:nth-of-type(2) code {display: table-cell; white-space: pre; margin: 0px; padding: 0px;}
+td:nth-of-type(2) p { display: table; overflow: hidden; }
+td:nth-of-type(2) .fitb { display: table-cell;  }
+td:nth-of-type(2) .pyret, td:nth-of-type(2) .wescheme {display: table-cell; white-space: pre; margin: 0px; padding: 0px;}
 td:nth-of-type(2) .editbox {white-space: pre; display: inline-block;}
-.fitb::before{content: none;}
 </style>
 ++++
 
-[cols="1a,3a",options="header"]
+Use method chaining to define the *grouped samples* below, using the helper functions that you've already defined:  `is-old`, `is-young`, `is-cat`, `is-dog`, `is-female`, `lookup-fixed`, and `has-s-name`. We’ve given you the solution for the first sample, to get you started.
+
+@vspace{2ex}
+
+[cols="1a,4a",options="header"]
 |===
 
 | Subset 								| The code to define that subset
@@ -22,30 +24,30 @@ td:nth-of-type(2) .editbox {white-space: pre; display: inline-block;}
 | `kittens = animals-table.filter(is-cat).filter(is-young)`
 
 | Puppies
-| `young-dogs = animals-table.` @fitb{}{`filter(is-young).filter(is-dog)`}
+| `young-dogs = animals-table.filter(is-young).filter(is-dog)`
 
 | Fixed Cats
-| `fixed-cats = animals-table.` @fitb{}{`filter(is-fixed).filter(is-cat)`}
+| `fixed-cats = animals-table.filter(is-fixed).filter(is-cat)`
 
 | Cats with “s” in their name
-| `s-cats = animals-table.` @fitb{}{`filter(is-cat).filter(has-s-name)`}
+| `s-cats = animals-table.filter(is-cat).filter(has-s-name)`
 
 | Old Dogs
-| `old = animals-table.` @fitb{}{`filter(is-dog).filter(is-old)`}
+| `old = animals-table.filter(is-dog).filter(is-old)`
 
 | Fixed Animals
-| `fixed = animals-table.` @fitb{}{`filter(is-fixed)`}
+| `fixed = animals-table.filter(is-fixed)`
 
 | Old Female Cats
-| `old-cats = animals-table.` @fitb{}{`filter(is-old).filter(is-female).filter(is-cat)`}
+| `old-cats = animals-table.filter(is-old).filter(is-female).filter(is-cat)`
 
 | Fixed Kittens
-| `young-fixed-cats=animals-table.` @fitb{}{`filter(is-fixed).filter(is-young).filter(is-cat)`}
+| `young-fixed-cats=animals-table.filter(is-fixed).filter(is-young).filter(is-cat)`
 
 | Fixed Female Dogs
-| `fixed-female-dogs=animals-table.` @fitb{}{`filter(is-fixed).filter(is-female).filter(is-dog)`}
+| `fixed-female-dogs=animals-table.filter(is-fixed).filter(is-female).filter(is-dog)`
 
 | Old Fixed Female Cats
-| `old-fixed-female-cats =` @fitb{}{`filter(is-old).filter(is-fixed).filter(is-female).filter(is-cat)`}
+| `old-fixed-female-cats=animals-table.filter(is-old).filter(is-fixed).filter(is-female).filter(is-cat)`
 
 |===
