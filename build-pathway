@@ -681,7 +681,7 @@ function processadoc() {
             JAVASCRIPTDELAY="--javascript-delay 3000"
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
-            echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
+            echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
@@ -930,7 +930,7 @@ function buildlessonplan() {
 
         JAVASCRIPTDELAY="--javascript-delay 3000"
         #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
-        echo '--enable-local-file-access --print-media-type' $JAVASCRIPTDELAY $ASPECT --lowquality -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+        echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
       fi
     fi
   fi
@@ -1409,7 +1409,7 @@ function buildpathway() {
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
-          echo --lowquality -q ../../lib/$ABYSS.html ../../lib/$ABYSS.pdf >> $WKH2P_BATCH_FILE
+          echo -q ../../lib/$ABYSS.html ../../lib/$ABYSS.pdf >> $WKH2P_BATCH_FILE
         fi
         cd ../courses/$PATHWAY
 
