@@ -702,7 +702,7 @@
                             [else (loop (- num 1)
                                         (string-append r
                                           (create-begin-tag "span" ".gdrive-only")
-                                          (create-begin-tag "p" ".junkk")
+                                          (create-begin-tag "p" "")
                                           "&#xa0;"
                                           (create-end-tag "p")
                                           (create-end-tag "span")))]))])
