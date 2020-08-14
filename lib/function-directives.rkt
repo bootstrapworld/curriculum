@@ -33,6 +33,11 @@
 
 (define (get-function-name) *funname*)
 
+(define (string-multiply s n)
+  (let loop ([n n] [r ""])
+    (if (= n 0) r
+        (loop (- n 1) (string-append r s)))))
+
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
   (enclose-span
@@ -42,8 +47,7 @@
       (if show? ".solution" ".blank")
       style)
     (if show? s
-        (let ([n (string-length s)])
-          (make-string n #\M)))))
+        (string-multiply "&#x5f;" (string-length s)))))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
   (cond [(number? e) (format "~a" e)]
@@ -250,7 +254,7 @@
   (write-wrapper ".recipe.recipe_example_line"
     (lambda ()
       (string-append
-        (encoded-ans "" "MM" #f)
+        (encoded-ans "" "&#x5f;&#x5f;" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
@@ -348,7 +352,7 @@
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "MM" #f)
+                          (encoded-ans "" "&#x5f;&#x5f;" #f)
                           (write-large "(")
                           (encoded-ans ".recipe_cond" "cond" *show-body?*))))]
                   [else ""])
@@ -360,7 +364,7 @@
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "MM" #f)
+                          (encoded-ans "" "&#x5f;&#x5f;" #f)
                           (encoded-ans ".recipe_definition_body" (expr-to-string body) *show-body?*)
                           (write-large ")")
                           )))])
@@ -369,14 +373,14 @@
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "MM" #f)
+                          (encoded-ans "" "&#x5f;&#x5f;" #f)
                           (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
                   [else
                     ""
                     #|(write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "MM" #f)
+                          (encoded-ans "" "&#x5f;&#x5f;" #f)
                           (write-large ")"))))
                     |#
                     ])))))))
@@ -386,7 +390,7 @@
   (write-wrapper ".recipe.recipe_line"
     (lambda ()
       (string-append
-        (encoded-ans "" "MM" #f)
+        (encoded-ans "" "&#x5f;&#x5f;" #f)
         (cond [(string=? body-line "") ""]
               [(string-prefix? body-line "|")
                (set! body-line (regexp-replace #rx"^\\| *" body-line ""))
@@ -410,7 +414,7 @@
                             (cond [(and *show-body?* (> (+ test-len action-len) 50))
                                    (string-append
                                      (write-clear)
-                                     (encoded-ans "" "MM" #f)
+                                     (encoded-ans "" "&#x5f;&#x5f;" #f)
                                      (encoded-ans "" "| " #f)
                                      (highlight-keywords "then: ")
                                      (encoded-ans ".answers" action *show-body?*))]
@@ -457,7 +461,7 @@
                 (write-wrapper ".recipe.recipe_line"
                   (lambda ()
                     (string-append
-                      (encoded-ans "" "MM" #f)
+                      (encoded-ans "" "&#x5f;&#x5f;" #f)
                       (encoded-ans (if (= n 0) ".recipe_definition_body" "")
                                    (highlight-keywords last-body-line)
                                    (if (string-prefix? last-body-line "end") #t
@@ -513,7 +517,7 @@
   ;(printf "doing write-cond-clause ~s\n" clause)
   (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
     (lambda ()
-      (string-append (encoded-ans "" "MMMMM" #f)
+      (string-append (encoded-ans "" "&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;" #f)
                      (write-large "{startsb}")
                      (write-wrapper ".clause"
                        (lambda ()
@@ -527,7 +531,7 @@
                                     (or (> test-len *max-wescheme-cond-side-length*)
                                         (> action-len *max-wescheme-cond-side-length*))
                                     (string-append (write-clear)
-                                      (encoded-ans "" "MMMMMMM" #f)
+                                      (encoded-ans "" "&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;" #f)
                                       (encoded-ans ".answers" action *show-body?*))]
                                    [else (string-append " "
                                            (encoded-ans ".answers" action *show-body?*))])))))
