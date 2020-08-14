@@ -693,7 +693,6 @@
     (when (string=? num ht) (set! num "10"))
     (set! num (inexact->exact (floor (string->number num))))
     (set! num (quotient num 5))
-    (when (= num 0) (set! num 1))
     (let ([reg-space (string-append
                        (create-begin-tag "span" ".vspace" #:attribs
                                          (format "style=\"height: ~a\"" ht))
@@ -703,7 +702,7 @@
                             [else (loop (- num 1)
                                         (string-append r
                                           (create-begin-tag "span" ".gdrive-only")
-                                          (create-begin-tag "p" "")
+                                          (create-begin-tag "p" ".junkk")
                                           "&#xa0;"
                                           (create-end-tag "p")
                                           (create-end-tag "span")))]))])
