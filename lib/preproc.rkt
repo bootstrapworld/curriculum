@@ -688,6 +688,27 @@
         #:exists 'replace)
       (newline o)))
 
+(define (create-vspace ht)
+  (let ([num (regexp-replace #rx"([0-9]*)ex" ht "\\1")])
+    (when (string=? num ht) (set! num "10"))
+    (set! num (inexact->exact (floor (string->number num))))
+    (set! num (quotient num 5))
+    (when (= num 0) (set! num 1))
+    (let ([reg-space (string-append
+                       (create-begin-tag "span" ".vspace" #:attribs
+                                         (format "style=\"height: ~a\"" ht))
+                       (create-end-tag "span"))]
+          [gd-space (let loop ([num num] [r ""])
+                      (cond [(= num 0) r]
+                            [else (loop (- num 1)
+                                        (string-append r
+                                          (create-begin-tag "span" ".gdrive-only")
+                                          (create-begin-tag "p" "")
+                                          "&#xa0;"
+                                          (create-end-tag "p")
+                                          (create-end-tag "span")))]))])
+      (string-append reg-space gd-space))))
+
 (define (preproc-n-asciidoctor in-file)
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
@@ -870,10 +891,8 @@
                            [(string=? directive "vspace")
                             (let ([height (read-group i directive)])
                               (display
-                                (string-append
-                                  (create-begin-tag "span" ".vspace" #:attribs
-                                                    (format "style=\"height: ~a\"" height))
-                                  (create-end-tag "span")) o))]
+                                (create-vspace height)
+                                 o))]
                            [(string=? directive "quad")
                             (let ([width (read-group i directive)])
                               (display
