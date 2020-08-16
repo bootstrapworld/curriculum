@@ -678,7 +678,7 @@ function processadoc() {
               ASPECT="--margin-top $PDFMARGIN --margin-right 25mm --margin-bottom $PDFMARGIN --margin-left 25mm"
               ASPECT="-O Landscape $ASPECT"
             fi
-            JAVASCRIPTDELAY="--javascript-delay 3000"
+            JAVASCRIPTDELAY="--javascript-delay 4000"
             #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
             echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
@@ -928,7 +928,7 @@ function buildlessonplan() {
 
         ASPECT=
 
-        JAVASCRIPTDELAY="--javascript-delay 3000"
+        JAVASCRIPTDELAY="--javascript-delay 4000"
         #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
         echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
       fi
