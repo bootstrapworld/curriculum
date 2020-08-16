@@ -47,7 +47,7 @@
       (if show? ".solution" ".blank")
       style)
     (if show? s
-        (string-multiply "&#x5f;" (string-length s)))))
+        (string-multiply "&#x5f;&#x5f;" (string-length s)))))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
   (cond [(number? e) (format "~a" e)]
