@@ -47,7 +47,7 @@
       (if show? ".solution" ".blank")
       style)
     (if show? s
-        (string-multiply "&#x5f;&#x5f;" (string-length s)))))
+        (string-multiply "&#x5f;" (string-length s)))))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
   (cond [(number? e) (format "~a" e)]
@@ -131,11 +131,17 @@
             "**Directions**: ~a\n\n")
           directions))
 
+(define (write-title title-text)
+  (string-append
+    "\n\n[.recipe_title, cols=\"1a\"]\n"
+    "|===\n"
+    "| " title-text "\n"
+    "|===\n\n"))
+
+
 (define (write-purpose funname domain-list range purpose)
   (string-append
-    "\n\n[.recipe_title]\n"
-    "Contract and Purpose Statement\n"
-    "\n"
+    (write-title "Contract and Purpose Statement")
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
@@ -168,12 +174,9 @@
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
   (string-append
-    (string-append
-      "\n\n[.recipe_title]\n"
-      "Examples\n"
-      "\n"
-      "[.recipe.recipe_instructions]\n"
-      "Write some examples, then circle and label what changes...\n\n")
+    (write-title "Examples")
+    "[.recipe.recipe_instructions]\n"
+    "Write some examples, then circle and label what changes...\n\n"
     ;examples
 
     (if *pyret?*
@@ -338,12 +341,9 @@
 (define (write-definition/wescheme funname param-list body)
   (let ([cond? (and (pair? body) (eqv? (car body) 'cond))])
     (string-append
-      (string-append
-        "\n\n[.recipe_title]\n"
-        "Definition\n"
-        "\n"
-        "[.recipe.recipe_instructions]\n"
-        "Write the definition, giving variable names to all your input values...\n\n")
+      (write-title "Definition")
+      "[.recipe.recipe_instructions]\n"
+      "Write the definition, giving variable names to all your input values...\n\n"
       (write-null-wrapper ""
         (lambda ()
           (string-append
@@ -449,12 +449,9 @@
              [but-last-body-lines (take body-lines n)]
              [last-body-line (car (drop body-lines n))])
         (string-append
-          (string-append
-            "\n\n[.recipe_title]\n"
-            "Definition\n"
-            "\n"
-            "[.recipe.recipe_instructions]\n"
-            "Write the definition, giving variable names to all your input values...\n\n")
+          (write-title "Definition")
+          "[.recipe.recipe_instructions]\n"
+          "Write the definition, giving variable names to all your input values...\n\n"
           (write-null-wrapper ""
             (lambda ()
               (string-append
