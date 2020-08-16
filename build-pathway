@@ -23,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-08 # last modified
+LASTMOD=2020-08-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -345,6 +345,10 @@ function modifygdrivepage() {
   $SED -i \
     -e 's/<span class="begin-ignore-for-gdrive">/<!--\0/g' \
     -e 's/<span class="end-ignore-for-gdrive"><\/span>/\0-->/g' \
+    $f
+
+  $SED -i \
+    -e '/studentAnswer/ s/&#x5f;/\0\0/g' \
     $f
 
   rm -f $TMPFILE.css
