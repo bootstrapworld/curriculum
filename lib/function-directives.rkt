@@ -47,7 +47,7 @@
       (if show? ".solution" ".blank")
       style)
     (if show? s
-        (string-multiply "&#x5f;" (string-length s)))))
+        (string-multiply "&#x5f;&#x5f;" (string-length s)))))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
   (cond [(number? e) (format "~a" e)]
@@ -152,7 +152,18 @@
     "[.recipe.recipe_purpose_statement]\n"
     (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
     " "
-    (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))
+    (write-purpose-prose purpose)))
+
+(define (write-purpose-prose purpose)
+  (cond [*show-purpose?*
+          (encoded-ans ".recipe_purpose" purpose *show-purpose?*)]
+        [else
+          (string-append
+            (enclose-span ".begin-ignore-for-gdrive" "")
+            (encoded-ans ".recipe_purpose" " " *show-purpose?*)
+            (enclose-span ".end-ignore-for-gdrive" "")
+            (enclose-span ".gdrive-only"
+              (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
@@ -620,7 +631,7 @@
   (set! *funname* funname)
   (when (string=? range "") (set! range " "))
   (when (string=? purpose "") (set! purpose "{nbsp}"))
-  (unless *show-purpose?* (set! purpose " "))
+  ;(unless *show-purpose?* (set! purpose " "))
 
   (string-append
 
