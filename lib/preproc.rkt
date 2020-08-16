@@ -692,7 +692,7 @@
   (let ([num (regexp-replace #rx"([0-9]*)ex" ht "\\1")])
     (when (string=? num ht) (set! num "10"))
     (set! num (inexact->exact (floor (string->number num))))
-    (set! num (quotient num 5))
+    (set! num (quotient num 4))
     (let ([reg-space (string-append
                        (create-begin-tag "span" ".vspace" #:attribs
                                          (format "style=\"height: ~a\"" ht))
