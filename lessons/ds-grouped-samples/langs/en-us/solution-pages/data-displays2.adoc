@@ -1,66 +1,72 @@
 = Displaying Data
 
-Fill in the tables below, then use Pyret to make the following displays. The first answer has been filled in for you.
+@vspace{1ex}
 
-1) A `pie-chart` showing the `sex` of kittens from the shelter.
+Fill in the tables below, then use Pyret to make the following displays. Record the code you used. 
+
+The first table has been filled in for you.
+
+@vspace{1ex}
+
+1) A `bar-chart` showing how many puppies are fixed or not.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Kittens_				| _sex_								| pie chart
+| What Rows?			| Which Column(s)?			| What Display?
+|	_puppies_			| _fixed_					| _bar-chart_
 |===
 
-2) A `bar-chart` showing how many puppies are fixed or not
+*code:* @fitb{102ex}{`bar-chart(puppies, "fixed")`}
+
+@vspace{1ex}
+
+2) A `pie-chart` showing how many heavy dogs are fixed or not.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Puppies_				| _fixed_							| bar chart
+| What Rows?			| Which Column(s)?					| What Display?
+| _Heavy dogs_			| _fixed_							| _pie-chart_
+|=== 
+*code:* @fitb{102ex}{`pie-chart(heavy-dogs, "fixed")`}
+
+@vspace{1ex}
+
+3) A `histogram` of the number of `weeks` it takes for a random sample of animals to be adopted.
+[cols="^1,^1,^1",options="header"]
+|===
+| What Rows?			| Which Column(s)?					| What Display?
+| _Random Sample_		| _weeks_							| _histogram_
 |===
 
-3) A `pie-chart` showing how many heavy dogs are fixed or not.
+*code:* @fitb{102ex}{`histogram((random-rows(animals-table, 50)), "weeks")`}
+
+@vspace{1ex}
+
+4) A `box-plot` of the number of `pounds` that kittens weigh.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Heavy dogs_			| _fixed_							| pie chart
+| What Rows?			| Which Column(s)?					| What Display?
+| _Kittens_				| _pounds_, _species_, and _age_	| _box-plot_
 |===
 
-4) A `histogram` of the number of `pounds` that fixed cats weigh.
+*code:* @fitb{102ex}{`box-plot(animals-table.filter(is-cat).filter(is-young), "pounds")`}
+
+@vspace{1ex}
+
+5) A `scatter-plot` of a random sample using `name` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Fixed cats_			| _pounds_, _species_, and _fixed_	| histogram
+| What Rows?			| Which Column(s)?					| What Display?
+| _Random Sample_		| _name_, _weeks_, and _age_		| _scatter-plot_
 |===
 
-5) A `box-plot` of the number of `pounds` that kittens weigh.
+*code:* @fitb{102ex}{`scatter-plot((random-rows(animals-table, 45)), "name", "age", "weeks")`}
+
+@vspace{1ex}
+
+6) A `scatter-plot` of fixed cats, using `species` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Kittens_				| _pounds_, _species_, and _age_	| box plot
+| What Rows?			| Which Column(s)?									| What Display?
+| _Fixed cats_			| _fixed_, _species_, _name_, _pounds_, and _weeks_	| _scatter-plot_
 |===
 
-6) A `histogram` of the number of `weeks` it takes for a random sample of animals to be adopted.
-[cols="^1,^1,^1",options="header"]
-|===
-| What Rows?			| Which Columns(s)?					| What Display?
-| Random Sample			| _weeks_, 							| histogram
-|===
-
-7) A `scatter-plot` of puppies, using `name` as the labels, `age` as the x-axis, and `pounds` as the y-axis.
-[cols="^1,^1,^1",options="header"]
-|===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Puppies_				| _species_, _name_, _pounds_, and _age_	| scatter plot
-|===
-
-8) A `scatter-plot` of a random sample using `name` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
-[cols="^1,^1,^1",options="header"]
-|===
-| What Rows?			| Which Columns(s)?					| What Display?
-| Random Sample			| _name_, _weeks_, and _age_| scatter plot
-|===
-
-9) A `scatter-plot` of fixed cats, using `name` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
-[cols="^1,^1,^1",options="header"]
-|===
-| What Rows?			| Which Columns(s)?					| What Display?
-| _Fixed cats_			| _fixed_, _species_, _name_, _pounds_, and _weeks_	| scatter plot
-|===
+*code:* @fitb{102ex}{`scatter-plot(animal-table.filter(is-cat).filter(is-fixed), "species", "pounds", "weeks")`}
