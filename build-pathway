@@ -4,15 +4,13 @@
 # Type build-pathway --help for help.
 
 export ADDEXERCISES=
-export CHECKTARGET=
-export DEBUG=1
+export DEBUG=
 export FORCE=
 export LANGUAGE=en-us
 export LINT=
 export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
-export EXPANDEDWARNINGS=
 
 #SEMESTER=spring
 #MONTH=$(date +%m)
@@ -25,7 +23,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-17 # last modified
+LASTMOD=2020-08-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -33,9 +31,7 @@ NOPARALLEL=
 
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --check-target -o "$arg" = -c; then
-    CHECKTARGET=1
-  elif test "$arg" = --add-exercises -o "$arg" = -e; then
+  if test "$arg" = --add-exercises -o "$arg" = -e; then
     ADDEXERCISES=1
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
@@ -47,7 +43,7 @@ while test $# -ne 0; do
     LANGUAGE=$1; shift
   elif test "$arg" = --lint -o "$arg" = -l -o "$arg" = --verify-links; then
     LINT=1
-  elif test "$arg" = --no-pdf -o "$arg" = --nopdf -o "$arg" = -n; then
+  elif test "$arg" = --no-pdf -o "$arg" = --nopdf; then
     NOPDF=1
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
@@ -55,11 +51,9 @@ while test $# -ne 0; do
     PROGLANG=$1; #echo PROGLANG is $PROGLANG
     shift
   elif test "$arg" = --version -o "$arg" = -v; then
-    VERSION=1
+    VERSION=1;
     #
     # some common combos
-  elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
-    EXPANDEDWARNINGS=1
   elif test "$arg" = -df; then
     DEBUG=1; FORCE=1
   elif test "$arg" = -dfl; then
@@ -133,10 +127,6 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-if test $FORCE; then
-  CHECKTARGET=1
-fi
-
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
 echo link:README.html[Authoring Guide] >> index.adoc
@@ -169,13 +159,7 @@ cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
-function overwrite() {
-  if test  $EXPANDEDWARNINGS; then
-    echo $@
-  else
-    echo $'\e[1A\e[K\033[?7l'$@
-  fi
-}
+function overwrite() { echo $'\e[1A\e[K\033[?7l'$@; }
 
 function insertbodyid() {
   local f=$1
@@ -587,7 +571,7 @@ function checkeachinternallink() {
 
   if ! test -f "$f"; then
     export BROKEN_INTERNAL_LINKS=1
-    test $EXPANDEDWARNINGS || echo $'\033[?7h'
+    echo $'\033[?7h'
     echo WARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
   fi
 }
@@ -642,6 +626,7 @@ function checklinks() {
   fi
 }
 
+
 function processadoc() {
   local f="$1"
   fbase=${f%.adoc}
@@ -674,7 +659,7 @@ function processadoc() {
       #echo -n .
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f $fbase-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
@@ -718,8 +703,6 @@ function recursiveadoc() {
   local oldLESSONSUBDIR="$3"
   local oldSOLUTION="$SOLUTION"
   local oldOTHERDIR="$OTHERDIR"
-
-  #echo doing recursiveadoc $1 $2 $3
 
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
@@ -851,29 +834,13 @@ function buildworkbookpages() {
   cd $L
   export LESSONSUBDIR=$L
   #
-  repoDir="$TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE"
-
-  DORECURSIVEADOC=1
-  if test ! $CHECKTARGET; then
-    if test "$(ls -A .)" -a -f index.shtml -a $repoDir -ot .; then
-      #echo checking $repoDir against $(pwd)
-      #echo no recursiveadoc
-      DORECURSIVEADOC=
-    else
-      :
-      #echo yes I recursiveadoc
-    fi
-  fi
-
-  if test $DORECURSIVEADOC; then
-
   if test ! -d pages; then
     echo WARNING: $L missing pages
     mkdir pages
   fi
   adjustproglangsubdirs pages
 
-  mkdirsolutionversionof pages $repoDir
+  mkdirsolutionversionof pages $TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE
   adjustproglangsubdirs solution-pages
 
   #
@@ -889,8 +856,6 @@ function buildworkbookpages() {
   done
 
   export WORKBOOKPAGE=
-
-  fi
 
   cd ../..
 }
@@ -936,7 +901,7 @@ function buildlessonplan() {
       #echo -n .
       overwrite 'building' lesson plan: $L
       rm -f index-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       insertbodyid index.shtml
@@ -1066,7 +1031,7 @@ function buildpathwaynarrative() {
       echo building pathway narrative: $PATHWAY
       export NARRATIVE=1
       rm -f index-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export NARRATIVE=
@@ -1074,7 +1039,7 @@ function buildpathwaynarrative() {
       if test -f pathway-lessons.asciidoc; then
         if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
           rm -f pathway-lessons-comment.txt
-          test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+          echo -n $'\033[?7h'
           $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
           mv pathway-lessons.html pathway-lessons.shtml
           removelogos pathway-lessons.shtml
@@ -1233,7 +1198,7 @@ function buildteacherresource() {
       overwrite 'building' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       rm -f index-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+      echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
       mv index.html index.shtml
       export TEACHER_RESOURCES=
@@ -1313,39 +1278,13 @@ function buildpathway() {
     echo $'-----------------------------------------------------------\n'
     mkdir -p distribution/$LANGUAGE/courses/$PATHWAY
 
-    REFRESHFRONTMATTER=1
-    REFRESHBACKMATTER=1
-    REFRESHRESOURCES=1
-
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
-    distDir="$TOPDIR/distribution/$LANGUAGE/courses/$PATHWAY"
-
-    if test -d $distDir/front-matter -a \
-      -d $repoDir/front-matter -a \
-      $distDir/front-matter -nt $repoDir/front-matter; then
-          REFRESHFRONTMATTER=
-    fi
-    if test -d $distDir/back-matter -a \
-      -d $repoDir/back-matter -a \
-      $distDir/back-matter -nt $repoDir/back-matter; then
-          REFRESHBACKMATTER=
-    fi
-    if test -d $distDir/resources -a \
-      -d $repoDir/resources -a \
-      $distDir/resources -nt $repoDir/resources; then
-          REFRESHRESOURCES=
-    fi
-
-    #echo REFRESHFRONTMATTER $REFRESHFRONTMATTER
-    #echo REFRESHBACKMATTER $REFRESHBACKMATTER
-    #echo REFRESHRESOURCES $REFRESHRESOURCES
-
     if test $FORCE; then
       rm -fr distribution/$LANGUAGE/courses/$PATHWAY
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$LANGUAGE/courses/$PATHWAY
       rm -f pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-exercises.rkt.kp \
         pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-lessons-containing-exercises.rkt.kp
     else
+      mkdir -p distribution/$LANGUAGE/courses/$PATHWAY
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$LANGUAGE/courses/$PATHWAY
     fi
 
@@ -1369,6 +1308,8 @@ function buildpathway() {
     rm -f $WKH2P_BATCH_BASE.txt; touch $WKH2P_BATCH_BASE.txt
 
     mkdir -p lessons workbook
+    mkdir -p resources/protected
+    cp -p $PROGDIR/.hta* resources/protected
 
     if test ! -f lesson-order.txt; then
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
@@ -1380,15 +1321,7 @@ function buildpathway() {
         mkdir -p $lessonDir
         repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
         if test -d "$repoLessonDir"; then
-          DOCOPYDIR=1
-          if test ! $CHECKTARGET; then
-            if test "$(ls -A $lessonDir)" -a $repoLessonDir -ot $lessonDir; then
-              DOCOPYDIR=
-            fi
-          fi
-          if test $DOCOPYDIR; then
-            cp -pr $repoLessonDir/* $lessonDir
-          fi
+          cp -pr $repoLessonDir/* $lessonDir
         fi
       done
       cd lessons
@@ -1401,78 +1334,38 @@ function buildpathway() {
       done
       cd ..
       #echo collect workbook pages...
-      # $PROGDIR/collect-workbook-pages.rkt
+      $PROGDIR/collect-workbook-pages.rkt
     fi
 
-    DOFRONTBACKRECURSIVE=1
-    if test ! $CHECKTARGET; then
-      if test ! $REFRESHFRONTMATTER; then
-        if test ! $REFRESHBACKMATTER; then
-          #echo checking front- back-matter
-          #echo no recursiveadoc
-          DOFRONTBACKRECURSIVE=
-        else
-          :
-          #echo yes II recursiveadoc
-        fi
-      else
-        :
-        #echo yes III recursiveadoc
-      fi
-    fi
+    buildlessons
+    #echo
 
     for d in front-matter back-matter; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages $repoDir/$d
+        mkdirsolutionversionof pages $TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/$d
         cd ..
         adjustproglangsubdirs $d
       fi
     done
 
-    DORESOURCESRECURSIVE=1
-    if test ! $CHECKTARGET; then
-      if test ! $REFRESHRESOURCES; then
-        #echo checking resources
-        #echo no recursiveadoc
-        DORESOURCESRECURSIVE=
-      else
-        :
-        #echo yes IV recursiveadoc
-      fi
-    fi
-
-    mkdir -p resources/protected
-    cp -p $PROGDIR/.hta* resources/protected
-
     cd resources
     for d in *; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages $repoDir/resources/$d
+        mkdirsolutionversionof pages $TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/$d
         cd ..
         adjustproglangsubdirs $d
       fi
     done
     cd ..
 
-    $PROGDIR/collect-workbook-pages.rkt
-
-    buildlessons
-    #echo
-
     #export PATHWAYROOTDIR=./
-
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/$d"
 
     for d in front-matter back-matter; do
       test -d "$d" || break
       #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
-
-      if test $DOFRONTBACKRECURSIVE; then
-        recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
-        touch "$d" # nudge timestamp
-      fi
+      recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     done
 
     cd resources
@@ -1480,21 +1373,16 @@ function buildpathway() {
     export PATHWAYROOTDIR=../
     export LESSONSUBDIR=resources
 
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/resources"
+    for d in *; do
+      if test -d "$d"; then
+        adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
 
-    if test $DORESOURCESRECURSIVE; then
-      for d in *; do
-        if test -d "$d"; then
-          adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
-          #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
-          recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
-        fi
-      done
-    fi
+        #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
+        recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
+      fi
+    done
 
     cd ..
-
-    if test $DORESOURCESRECURSIVE; then touch resources; fi
 
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
@@ -1586,7 +1474,7 @@ function buildpathway() {
       echo 👍 No broken external links in $PATHWAY
     fi
   fi
-  test $EXPANDEDWARNINGS || echo $'\033[?7h'
+  echo $'\033[?7h'
 }
 
 function allthestandards() {
