@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-17 # last modified
+LASTMOD=2020-08-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -857,7 +857,7 @@ function buildworkbookpages() {
   if test ! $CHECKTARGET; then
     reponewestfile=$(find $repoDir -type f|xargs ls -tr|tail -1)
     distnewestfile=$(find . -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    if test "$(ls -A .)" -a -f index.shtml -a $reponewestfile -ot $distnewestfile; then
+    if test "$(ls -A .)" -a -f index.shtml -a \( $reponewestfile -ot $distnewestfile \); then
       #echo checking $repoDir against $(pwd)
       #echo no recursiveadoc
       DORECURSIVEADOC=
@@ -1264,6 +1264,7 @@ function batchhtmltopdf() {
     fi
   done
   wait
+  #echo finished batchhtmltopdf
   rm -f $WKH2P_BATCH_BASE-split*
 }
 
@@ -1323,28 +1324,28 @@ function buildpathway() {
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/distribution/$LANGUAGE/courses/$PATHWAY"
 
-    distnewestfile=$(find $distDir/front-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    reponewestfile=$(find $repoDir/front-matter -type f|xargs ls -tr|tail -1)
-    if test -d $distDir/front-matter -a \
-      -d $repoDir/front-matter -a \
-      $distnewestfile -nt $reponewestfile; then
-          REFRESHFRONTMATTER=
+    if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
+      distnewestfile=$(find $distDir/front-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
+      reponewestfile=$(find $repoDir/front-matter -type f|xargs ls -tr|tail -1)
+      if test $distnewestfile -nt $reponewestfile; then
+        REFRESHFRONTMATTER=
+      fi
     fi
 
-    distnewestfile=$(find $distDir/back-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    reponewestfile=$(find $repoDir/back-matter -type f|xargs ls -tr|tail -1)
-    if test -d $distDir/back-matter -a \
-      -d $repoDir/back-matter -a \
-      $distnewestfile -nt $reponewestfile; then
-          REFRESHBACKMATTER=
+    if test -d $distDir/back-matter -a -d $repoDir/back-matter; then
+      distnewestfile=$(find $distDir/back-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
+      reponewestfile=$(find $repoDir/back-matter -type f|xargs ls -tr|tail -1)
+      if test $distnewestfile -nt $reponewestfile; then
+        REFRESHBACKMATTER=
+      fi
     fi
 
-    distnewestfile=$(find $distDir/resources -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    reponewestfile=$(find $repoDir/resources -type f|xargs ls -tr|tail -1)
-    if test -d $distDir/resources -a \
-      -d $repoDir/resources -a \
-      $distnewestfile -nt $reponewestfile; then
-          REFRESHRESOURCES=
+    if test -d $distDir/resources -a -d $repoDir/resources; then
+      distnewestfile=$(find $distDir/resources -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
+      reponewestfile=$(find $repoDir/resources -type f|xargs ls -tr|tail -1)
+      if test $distnewestfile -nt $reponewestfile; then
+        REFRESHRESOURCES=
+      fi
     fi
 
     #echo REFRESHFRONTMATTER $REFRESHFRONTMATTER
@@ -1395,7 +1396,7 @@ function buildpathway() {
           if test ! $CHECKTARGET; then
             reponewestfile=$(find $repoLessonDir -type f|xargs ls -tr|tail -1)
             distnewestfile=$(find $lessonDir -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-            if test "$(ls -A $lessonDir)" -a $reponewestfile -ot $distnewestfile; then
+            if test "$(ls -A $lessonDir)" -a \( $reponewestfile -ot $distnewestfile \); then
               DOCOPYDIR=
             fi
           fi
@@ -1703,3 +1704,4 @@ asciidoctor index.adoc
 if test ! $DEBUG; then
   rm -fr $PROGDIR
 fi
+
