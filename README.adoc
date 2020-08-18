@@ -273,9 +273,19 @@ exercises following each lesson.
 The other options of `build-pathway` are predominantly used for
 debugging:
 
-- `--debug` (aka `--d`) retains various temp files in the generated doctree.
+- `--check-target` (aka `-c`) checks each file of a previous 
+  run to see if it needs to be refreshed. By default, a much more
+  lax check is done to save build time. (The default is enough if you
+  only alter source files and don't alter the previous output.
+  If however you alter output files selectively in order to re-make
+  them, you must use `-c`.)
 
-- `--force` (aka `--f`) forces creating anew the document tree. By default,
+- `--debug` (aka `-d`) retains various temp files in the generated doctree.
+
+- `--expanded-warnings` (aka `--w`) shows the diagnostics as
+  long scroll instead of overwriting them.
+
+- `--force` (aka `-f`) forces creating anew the document tree. By default,
   in order to save time,
   conversions are skipped if the `distribution` already contains
   the required target files and they are sufficiently new.
@@ -287,7 +297,7 @@ debugging:
   strictly sequentially, without exploiting parallelism. This may
   be used to uncover bugs introduced by parallelism.
 
-- `--no-pdf` (aka `--nopdf`) avoids PDF generation to speed up the debugging
+- `--no-pdf` (aka `--nopdf` or `-n`) avoids PDF generation to speed up the debugging
 process.
 
 == Deployment
