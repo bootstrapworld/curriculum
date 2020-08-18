@@ -854,10 +854,10 @@ function buildworkbookpages() {
   repoDir="$TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE"
 
   DORECURSIVEADOC=1
-  if test ! $CHECKTARGET; then
+  if test ! $CHECKTARGET -a "$(ls -A .)" -a -f index.shtml; then
     reponewestfile=$(find $repoDir -type f|xargs ls -tr|tail -1)
     distnewestfile=$(find . -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    if test "$(ls -A .)" -a -f index.shtml -a \( $reponewestfile -ot $distnewestfile \); then
+    if test $reponewestfile -ot $distnewestfile; then
       #echo checking $repoDir against $(pwd)
       #echo no recursiveadoc
       DORECURSIVEADOC=
@@ -1393,10 +1393,10 @@ function buildpathway() {
         repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
         if test -d "$repoLessonDir"; then
           DOCOPYDIR=1
-          if test ! $CHECKTARGET; then
+          if test ! $CHECKTARGET -a "$(ls -A $lessonDir)"; then
             reponewestfile=$(find $repoLessonDir -type f|xargs ls -tr|tail -1)
             distnewestfile=$(find $lessonDir -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-            if test "$(ls -A $lessonDir)" -a \( $reponewestfile -ot $distnewestfile \); then
+            if test $reponewestfile -ot $distnewestfile; then
               DOCOPYDIR=
             fi
           fi
