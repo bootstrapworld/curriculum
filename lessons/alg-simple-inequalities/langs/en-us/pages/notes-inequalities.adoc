@@ -16,8 +16,8 @@
 
 - We also have ways of writing *Compound Inequalities*, so we can ask more complicated questions using the `and` and `or` functions. 
 
-** @show{(sexp->code `(and (< 3 4) (< 10 2)))} translates to "three is less than four _and_ ten is less than two". This will evaluate to `false`, since the `and` function requires that both sub-expressions be `true`.
+** @show{(sexp->code `(and (> 3 4) (< 10 2)))} translates to "three is less than four _and_ ten is less than two". This will evaluate to `false`, since the `and` function requires that both sub-expressions be `true`.
 
-** @show{(sexp->code `(or (< 3 4) (< 10 2)))}, which translates to "three is less than four _or_ ten is less than two". This will evaluate to `true`, since the `or` function only requires that one sub-expression be `true`.
+** @show{(sexp->code `(or (> 3 4) (< 10 2)))}, which translates to "three is less than four _or_ ten is less than two". This will evaluate to `true`, since the `or` function only requires that one sub-expression be `true`.
 
 - The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images: @show{(sexp->coe `(and (> 3 4) (< 10 2)))}  @show{(sexp->coe `(or (> 3 4) (< 10 2)))}
