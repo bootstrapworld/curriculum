@@ -18,6 +18,12 @@
 
 (define *pdftk* (find-executable-path "pdftk"))
 
+(unless *pdflatex*
+  (printf "WARNING: pdflatex not installed on your system\n"))
+
+(unless *pdftk*
+  (printf "WARNING: pdftk not installed on your system\n"))
+
 (define *workbook-page-specs*
   (call-with-input-file "workbook-page-index.rkt" read))
 

@@ -133,6 +133,10 @@ if ! which curl | grep -q .; then
   LINT=
 fi
 
+if ! which wkhtmltopdf|grep -q .; then
+  echo WARNING: Missing wkhtmltopdf: PDF workbooks can\t be created
+fi
+
 if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
