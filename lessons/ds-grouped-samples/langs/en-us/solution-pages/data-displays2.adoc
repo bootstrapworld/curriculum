@@ -15,7 +15,7 @@ The first table has been filled in for you.
 |	_puppies_			| _fixed_					| _bar-chart_
 |===
 
-*code:* @fitb{102ex}{`bar-chart(puppies, "fixed")`}
+*code:* @fitb{102ex}{`bar-chart(animals-table.filter(is-dog).filter(is-young), "fixed")`}
 
 @vspace{1ex}
 
@@ -23,9 +23,9 @@ The first table has been filled in for you.
 [cols="^1,^1,^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?					| What Display?
-| _Heavy dogs_			| _fixed_							| _pie-chart_
+| _heavy dogs_			| _fixed_							| _pie-chart_
 |=== 
-*code:* @fitb{102ex}{`pie-chart(heavy-dogs, "fixed")`}
+*code:* @fitb{102ex}{`pie-chart(animals-table.filter(is-dog).filter(is-heavy), "fixed")`}
 
 @vspace{1ex}
 
@@ -33,7 +33,7 @@ The first table has been filled in for you.
 [cols="^1,^1,^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?					| What Display?
-| _Random Sample_		| _weeks_							| _histogram_
+| _random sample_		| _weeks_							| _histogram_
 |===
 
 *code:* @fitb{102ex}{`histogram(random-rows(animals-table, 50), "weeks")`}
@@ -44,29 +44,29 @@ The first table has been filled in for you.
 [cols="^1,^1,^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?					| What Display?
-| _Kittens_				| _pounds_							| _box-plot_
+| _kittens_				| _pounds_							| _box-plot_
 |===
 
 *code:* @fitb{102ex}{`box-plot(animals-table.filter(is-cat).filter(is-young), "pounds")`}
 
 @vspace{1ex}
 
-5) A `scatter-plot` of a random sample using `name` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
+5) A `scatter-plot` of a random sample using `species` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
 [cols="^1,^1,^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?					| What Display?
-| _Random Sample_		| _name_, _weeks_, and _age_		| _scatter-plot_
+| _random sample_		| _species_, _weeks_, and _age_		| _scatter-plot_
 |===
 
 *code:* @fitb{102ex}{`scatter-plot(random-rows(animals-table, 45), "name", "age", "weeks")`}
 
 @vspace{1ex}
 
-6) A `scatter-plot` of fixed cats, using `species` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
+6) A `scatter-plot` of fixed cats, using `name` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
 [cols="^1,^1,^1",options="header"]
 |===
-| What Rows?			| Which Column(s)?									| What Display?
-| _Fixed cats_			| _fixed_, _species_, _name_, _pounds_, and _weeks_	| _scatter-plot_
+| What Rows?			| Which Column(s)?					| What Display?
+| _fixed cats_			| _name_, _pounds_, and _weeks_		| _scatter-plot_
 |===
 
-*code:* @fitb{102ex}{`scatter-plot(animal-table.filter(is-cat).filter(is-fixed), "species", "pounds", "weeks")`}
+*code:* @fitb{102ex}{`scatter-plot(animals-table.filter(is-cat).filter(is-fixed), "species", "pounds", "weeks")`}

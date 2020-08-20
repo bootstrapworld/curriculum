@@ -1,0 +1,114 @@
+[.landscape]
+= Contracts
+
+++++
+<style>
+#content > .paragraph {padding: 0px 5px;}
+</style>
+++++
+
+Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
+
+++++
+<style>
+td {padding: .1em .625em !important; height: 20pt;}
+</style>
+++++
+
+[cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+
+|Name||Domain||Range
+
+| `triangle`
+| `{two-colons}`
+| `(side-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`_triangle(80, "solid", "darkgreen")_`
+
+| `circle`
+| `{two-colons}`
+| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`_circle(30, "outline", "fuchsia")_`
+
+| `star`
+| `{two-colons}`
+| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`_star(50, "solid", "teal")_`
+
+| `rectangle`
+| `{two-colons}`
+| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
+| `->`
+| `Image`
+5+|`_rectangle(20, 80, "solid", "gold")_`
+
+| `ellipse`
+| `{two-colons}`
+| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
+| `->`
+| `Image`
+5+|`_ellipse(30, 70, "outline", "lightblue")_`
+
+| `square`
+| `{two-colons}`
+| `(size-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`_square(10, "outline", "red")_`
+
+| `text`
+| `{two-colons}`
+| `(str {two-colons} String, size {two-colons} Number, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`_text("I'm thankful for...", 50, "green")_`
+
+| `overlay`
+| `{two-colons}`
+| `(img1 {two-colons} Image, img2 {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`
+
+| `beside`
+| `{two-colons}`
+| `(img1 {two-colons} Image, img2 {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`
+
+| `above`
+| `{two-colons}`
+| `(img1 {two-colons} Image, img2 {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
+
+| `put-image`
+| `{two-colons}`
+| `(img1 {two-colons} Image, x {two-colons} Number, y {two-colons} Number, img2 {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`
+
+| `rotate`
+| `{two-colons}`
+| `(degree {two-colons} Number, img {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_rotate(35, rectangle(30, 80, "solid", "purple"))_`
+
+| `scale`
+| `{two-colons}`
+| `(factor {two-colons} Number, img {two-colons} Image)`
+| `->`
+| `Image`
+5+|`_scale( 0.8, triangle(30, "solid", "red"))_`
+
+|===
