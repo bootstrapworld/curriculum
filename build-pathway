@@ -52,7 +52,7 @@ while test $# -ne 0; do
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
   elif test "$arg" = --proglang; then
-    PROGLANG=$1; #echo PROGLANG is $PROGLANG
+    PROGLANG=$1
     shift
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1
@@ -194,7 +194,6 @@ function insertbodyid() {
 }
 
 function insertgdrivesave() {
-  #echo DOING insertgdrivesave $f
 
   local f=$1
   local f_head=${f%.*}
@@ -565,20 +564,18 @@ function adjustproglangsubdirs() {
 function shadowcopydir() {
   local srcdir=$1
   local targetdir=$2
-  #echo doing shadowcopydir $srcdir $targetdir
   mkdir -p "$targetdir"
 
   for f in "$srcdir"/*; do
-    #echo f = $f
     if test -f "$f"; then
+      g=$(basename "$f")
+      targetfile="$targetdir/$g"
       cp -p "$f" "$targetdir"
     elif test -d "$f"; then
       g=$(basename "$f")
       shadowcopydir "$f" "$targetdir"/"$g"
     fi
   done
-  #echo $targetdir has...
-  #ls "$targetdir"
 }
 
 function checkifsinglepdfpage() {
@@ -602,7 +599,6 @@ function checkeachinternallink() {
 
 function checkeachexternallink() {
   local f="$1"
-  #echo checkeachlink $f
 
   local invalid=
 
@@ -629,7 +625,6 @@ function checkeachexternallink() {
 }
 
 function checklinks() {
-  #echo checklinks $1
   test "$LINT" || return
 
   local g="$1"
@@ -677,9 +672,6 @@ function processadoc() {
       if test $f -nt $fpdf; then DOITPDF=1; fi
     fi
     if test $DOIT; then
-      #echo building $PATHWAY/\*\*/$LESSONSUBDIR/$f
-      #echo -n building $PATHWAY/\*\*/$LESSONSUBDIR/$f " "
-      #echo -n .
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f $fbase-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
@@ -706,7 +698,6 @@ function processadoc() {
               ASPECT="-O Landscape $ASPECT"
             fi
             JAVASCRIPTDELAY="--javascript-delay 4000"
-            #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
 
             echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
@@ -727,8 +718,6 @@ function recursiveadoc() {
   local oldSOLUTION="$SOLUTION"
   local oldOTHERDIR="$OTHERDIR"
 
-  #echo doing recursiveadoc $1 $2 $3
-
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
   cd "$dir"
@@ -737,7 +726,6 @@ function recursiveadoc() {
 
   for d in *; do
     if test -d "$d"; then
-      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -786,10 +774,9 @@ function recursiveadoc() {
 
 function mkdirsolutionversionof() {
   local d="$1"
-  local origDir="$2"
-  #echo doing mkdirsolutionversionof $d $origDir
-
   test -d "$d" || return
+
+  local origDir="$2"
 
   if test -d solution-$d-2; then
     echo DEADC0DE: solution-$d-2 shouldn\'t exist
@@ -798,6 +785,8 @@ function mkdirsolutionversionof() {
 
   if test -d $origDir/$d; then
     cp -pr $origDir/$d solution-$d-2
+  else
+    mkdir solution-$d-2
   fi
 
   cp -p $PROGDIR/.hta* solution-$d-2
@@ -807,7 +796,6 @@ function mkdirsolutionversionof() {
     rm -fr solution-$d
   fi
   mv solution-$d-2 solution-$d
-  #echo done mkdirsolutionversionof
 }
 
 function checksinglelessonplan() {
@@ -851,9 +839,6 @@ function checklessonplan() {
 
 function buildworkbookpages() {
   local L=$1
-  #echo
-  #echo pwd is $(pwd)
-  #echo building $L wbpages
   cd $L
   export LESSONSUBDIR=$L
   #
@@ -864,13 +849,9 @@ function buildworkbookpages() {
     reponewestfile=$(find $repoDir -type f|xargs ls -tr|tail -1)
     distnewestfile=$(find . -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
     if test $reponewestfile -ot $distnewestfile; then
-      #echo checking $repoDir against $(pwd)
-      #echo no recursiveadoc
       DORECURSIVEADOC=
     else
       :
-      #echo checking $repoDir against $(pwd)
-      #echo yes I recursiveadoc
     fi
   fi
 
@@ -892,7 +873,6 @@ function buildworkbookpages() {
 
   for d in *; do
     if test -d "$d"; then
-      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -920,9 +900,6 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
-  #echo doing buildlessonplan $L
-  #echo
-  #echo building $PATHWAY "->" $L lesson plan
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
 
@@ -932,17 +909,9 @@ function buildlessonplan() {
   export LESSONPLAN=$(basename $LESSONSUBDIR)
 
   if test -f index.asciidoc -o -f index.html; then
-    #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR="../../"
     # there should be only one?
-    # this is already done? Remove?
-    #echo building lesson plan from *.adoc
-    #for f in *.adoc; do
-    #  cp -p $f index.asciidoc
-    #done
     if test index.asciidoc -nt index.shtml; then
-      #echo building lesson plan: $PATHWAY "→" $L "→" *.adoc
-      #echo -n .
       overwrite 'building' lesson plan: $L
       rm -f index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
@@ -967,7 +936,6 @@ function buildlessonplan() {
     checklinks index.shtml
 
     if test ! $NOPDF; then
-      #echo Creating lesson plan pdf
       if test index.shtml -nt index.pdf; then
         TEMPF=$(mktemp); rm -f $TEMPF
         TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
@@ -977,7 +945,6 @@ function buildlessonplan() {
         ASPECT=
 
         JAVASCRIPTDELAY="--javascript-delay 4000"
-        #echo PWD is $(pwd) and LESSONSUBDIR is $LESSONSUBDIR
         echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
       fi
     fi
@@ -990,7 +957,6 @@ function buildlessonplan() {
 }
 
 function buildlessons() {
-  #echo doing buildlessons
   if test ! -f workbook-lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
@@ -1006,7 +972,6 @@ function buildlessons() {
 }
 
 function buildlessonplans() {
-  #echo buildlessonplans in $(pwd)
   if test ! -f workbook-lessons.txt; then
     echo WARNING: No lessons in pathway $PATHWAY
   else
@@ -1065,13 +1030,10 @@ function buildpathwaynarrative() {
     #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
-    # there should be only one?
-    #echo
     for f in *.adoc; do
       cp -p $f index.asciidoc
     done
     if test index.asciidoc -nt index.shtml; then
-      #echo building pathway narrative: $PATHWAY "→" *.adoc
       echo building pathway narrative: $PATHWAY
       export NARRATIVE=1
       rm -f index-comment.txt
@@ -1270,7 +1232,6 @@ function batchhtmltopdf() {
     fi
   done
   wait
-  #echo finished batchhtmltopdf
   rm -f $WKH2P_BATCH_BASE-split*
 }
 
@@ -1418,24 +1379,18 @@ function buildpathway() {
         fi
       done
       cd ..
-      #echo collect workbook pages...
-      # $PROGDIR/collect-workbook-pages.rkt
     fi
 
     DOFRONTBACKRECURSIVE=1
     if test ! $CHECKTARGET; then
       if test ! $REFRESHFRONTMATTER; then
         if test ! $REFRESHBACKMATTER; then
-          #echo checking front- back-matter
-          #echo no recursiveadoc
           DOFRONTBACKRECURSIVE=
         else
           :
-          #echo yes II recursiveadoc
         fi
       else
         :
-        #echo yes III recursiveadoc
       fi
     fi
 
@@ -1451,12 +1406,9 @@ function buildpathway() {
     DORESOURCESRECURSIVE=1
     if test ! $CHECKTARGET; then
       if test ! $REFRESHRESOURCES; then
-        #echo checking resources
-        #echo no recursiveadoc
         DORESOURCESRECURSIVE=
       else
         :
-        #echo yes IV recursiveadoc
       fi
     fi
 
@@ -1477,7 +1429,6 @@ function buildpathway() {
     $PROGDIR/collect-workbook-pages.rkt
 
     buildlessons
-    #echo
 
     #export PATHWAYROOTDIR=./
 
@@ -1485,7 +1436,6 @@ function buildpathway() {
 
     for d in front-matter back-matter; do
       test -d "$d" || break
-      #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
 
       if test $DOFRONTBACKRECURSIVE; then
         recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
@@ -1504,7 +1454,6 @@ function buildpathway() {
       for d in *; do
         if test -d "$d"; then
           adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
-          #echo DOING recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
           recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
         fi
       done
@@ -1552,9 +1501,6 @@ function buildpathway() {
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
-        #echo
-        #echo building pathway workbooks: $PATHWAY
-        #echo calling make-workbook.rkt
         for wbf in workbook pd-workbook workbook-sols; do
           if test $DEBUG; then
             if test $NOPARALLEL; then
