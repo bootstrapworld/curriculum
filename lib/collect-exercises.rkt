@@ -4,7 +4,10 @@
 
 (require "readers.rkt")
 
-(define read-group (*make-read-group (lambda z "")))
+(define read-group
+  (*make-read-group (lambda z "")
+                    (lambda ()
+                      (format "Collecting exercises in ~a" (current-directory)))))
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 

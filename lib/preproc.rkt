@@ -45,6 +45,7 @@
 
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
+(define *extra-materials-port* #f)
 
 (define-namespace-anchor *adoc-namespace-anchor*)
 
@@ -383,6 +384,7 @@
       (let ([f.titletxt (path-replace-extension f ".titletxt")])
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
+    (let ([link-output
     (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
             link-text
             (if *lesson-plan*
@@ -398,7 +400,10 @@
                                 (string-append " (" x ")")))]
                         [else ""]))
                 "")
-            (if *lesson-plan* ", window=\"_blank\"" ""))))
+            (if *lesson-plan* ", window=\"_blank\"" ""))])
+      (when *lesson-plan*
+        (fprintf *extra-materials-port* "* ~a\n\n" link-output))
+      link-output)))
 
 (define (display-comment prose o)
   (display "%CURRICULUMCOMMENT%\n" o)
@@ -734,6 +739,12 @@
               (add-standard s #f *lesson-plan* #f #f))))
         )
       ;
+      (when *lesson-plan*
+        (let ([extra-materials-file (path-replace-extension in-file "-extra-mat.asc")])
+          (when (file-exists? extra-materials-file) (delete-file extra-materials-file))
+          (set! *extra-materials-port* (open-output-file extra-materials-file)))
+        )
+      ;
       (when (or *lesson-plan*
                 *narrative*
                 *teacher-resources*)
@@ -856,6 +867,12 @@
                                    [adocf (car args)] ;only one right? FIXME
                                    )
                               (display (make-link adocf "" #:include? #t) o))]
+                           [(string=? directive "material-links")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @material-links (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (fprintf o "\ninclude::./index-extra-mat.asc[]\n\n")]
                            [(string=? directive "lesson-description")
                             (unless *lesson-plan* ;TODO: or LESSON or both?
                               (error 'ERROR
@@ -1032,6 +1049,9 @@
       (when *lesson-plan*
         (accumulate-glossary-and-standards))
 
+      (when *lesson-plan*
+        (close-output-port *extra-materials-port*))
+
       ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
       (unless (truthy-getenv "OTHERDIR")
         (asciidoctor out-file)
@@ -1041,6 +1061,7 @@
       (when *link-lint?*
         (close-output-port *internal-links-port*)
         (close-output-port *external-links-port*))
+
 
       )))
 
