@@ -1049,7 +1049,8 @@
         (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
           (lambda (o)
             (for ([x (reverse *extra-material-links*)])
-              (fprintf o "\n* ~a\n\n" x)))))
+              (fprintf o "\n* ~a\n\n" x)))
+          #:exists 'replace))
 
       ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
       (unless (truthy-getenv "OTHERDIR")
