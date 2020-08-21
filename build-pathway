@@ -418,7 +418,7 @@ function lintlesson() {
 
   test $LINT || return
 
-  for g in Prerequisites 'Lesson Goals' Materials Preparation 'Supplemental Resources' 'Relevant Standards'; do
+  for g in Prerequisites 'Lesson Goals' Materials Preparation 'Relevant Standards'; do
     if ! grep -q "^<p>$g\>" $f; then
       echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
     fi
