@@ -45,7 +45,6 @@
 
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
-(define *extra-materials-port* #f)
 
 (define-namespace-anchor *adoc-namespace-anchor*)
 
@@ -110,6 +109,8 @@
 (define *dictionaries-represented* '())
 
 (define *exercises-done* '())
+
+(define *extra-material-links* '())
 
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
@@ -385,24 +386,25 @@
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-    (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
-            link-text
-            (if *lesson-plan*
-                (let ([pagenum (workbook-pagenum lesson snippet)])
-                  (unless exercise?
-                    (unless pagenum
-                      (unless error-cascade?
-                        (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
-                                lesson dirve f))))
-                  (cond [pagenum
-                          (let ([x (format "Page ~a" pagenum)])
-                            (if (string=? link-text "") x
-                                (string-append " (" x ")")))]
-                        [else ""]))
-                "")
-            (if *lesson-plan* ", window=\"_blank\"" ""))])
+            (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
+                    link-text
+                    (if *lesson-plan*
+                        (let ([pagenum (workbook-pagenum lesson snippet)])
+                          (unless exercise?
+                            (unless pagenum
+                              (unless error-cascade?
+                                (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
+                                        lesson dirve f))))
+                          (cond [pagenum
+                                  (let ([x (format "Page ~a" pagenum)])
+                                    (if (string=? link-text "") x
+                                        (string-append " (" x ")")))]
+                                [else ""]))
+                        "")
+                    (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
-        (fprintf *extra-materials-port* "* ~a\n\n" link-output))
+        (unless (member link-output *extra-material-links*)
+          (set! *extra-material-links* (cons link-output *extra-material-links*))))
       link-output)))
 
 (define (display-comment prose o)
@@ -739,12 +741,6 @@
               (add-standard s #f *lesson-plan* #f #f))))
         )
       ;
-      (when *lesson-plan*
-        (let ([extra-materials-file (path-replace-extension in-file "-extra-mat.asc")])
-          (when (file-exists? extra-materials-file) (delete-file extra-materials-file))
-          (set! *extra-materials-port* (open-output-file extra-materials-file)))
-        )
-      ;
       (when (or *lesson-plan*
                 *narrative*
                 *teacher-resources*)
@@ -1050,7 +1046,10 @@
         (accumulate-glossary-and-standards))
 
       (when *lesson-plan*
-        (close-output-port *extra-materials-port*))
+        (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
+          (lambda (o)
+            (for ([x (reverse *extra-material-links*)])
+              (fprintf o "\n* ~a\n\n" x)))))
 
       ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
       (unless (truthy-getenv "OTHERDIR")
