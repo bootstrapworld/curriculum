@@ -110,6 +110,8 @@
 
 (define *exercises-done* '())
 
+(define *extra-material-links* '())
+
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
         [*lesson-plan* (format "Lesson plan ~a" *lesson*)]
@@ -383,22 +385,27 @@
       (let ([f.titletxt (path-replace-extension f ".titletxt")])
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
-    (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
-            link-text
-            (if *lesson-plan*
-                (let ([pagenum (workbook-pagenum lesson snippet)])
-                  (unless exercise?
-                    (unless pagenum
-                      (unless error-cascade?
-                        (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
-                                lesson dirve f))))
-                  (cond [pagenum
-                          (let ([x (format "Page ~a" pagenum)])
-                            (if (string=? link-text "") x
-                                (string-append " (" x ")")))]
-                        [else ""]))
-                "")
-            (if *lesson-plan* ", window=\"_blank\"" ""))))
+    (let ([link-output
+            (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
+                    link-text
+                    (if *lesson-plan*
+                        (let ([pagenum (workbook-pagenum lesson snippet)])
+                          (unless exercise?
+                            (unless pagenum
+                              (unless error-cascade?
+                                (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
+                                        lesson dirve f))))
+                          (cond [pagenum
+                                  (let ([x (format "Page ~a" pagenum)])
+                                    (if (string=? link-text "") x
+                                        (string-append " (" x ")")))]
+                                [else ""]))
+                        "")
+                    (if *lesson-plan* ", window=\"_blank\"" ""))])
+      (when *lesson-plan*
+        (unless (member link-output *extra-material-links*)
+          (set! *extra-material-links* (cons link-output *extra-material-links*))))
+      link-output)))
 
 (define (display-comment prose o)
   (display "%CURRICULUMCOMMENT%\n" o)
@@ -856,6 +863,12 @@
                                    [adocf (car args)] ;only one right? FIXME
                                    )
                               (display (make-link adocf "" #:include? #t) o))]
+                           [(string=? directive "material-links")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @material-links (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (fprintf o "\ninclude::./index-extra-mat.asc[]\n\n")]
                            [(string=? directive "lesson-description")
                             (unless *lesson-plan* ;TODO: or LESSON or both?
                               (error 'ERROR
@@ -1032,6 +1045,12 @@
       (when *lesson-plan*
         (accumulate-glossary-and-standards))
 
+      (when *lesson-plan*
+        (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
+          (lambda (o)
+            (for ([x (reverse *extra-material-links*)])
+              (fprintf o "\n* ~a\n\n" x)))))
+
       ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
       (unless (truthy-getenv "OTHERDIR")
         (asciidoctor out-file)
@@ -1041,6 +1060,7 @@
       (when *link-lint?*
         (close-output-port *internal-links-port*)
         (close-output-port *external-links-port*))
+
 
       )))
 
