@@ -205,6 +205,39 @@ tr th.tableblock {
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
+/* Styling for the Materials section of the preamble */
+.materials-links { 
+  max-height: 200pt; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  transition: all 0.5s ease-out;
+  background:
+      /* Shadow covers */
+      linear-gradient(white 30%, rgba(255,255,255,0)),
+      linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+      
+      /* Shadows */
+      radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+      radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background:
+      /* Shadow covers */
+      linear-gradient(white 30%, rgba(255,255,255,0)),
+      linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+      
+      /* Shadows */
+      radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+}
+.materials-links:hover {max-height: 1000px;}
+.ExercisePage { font-style: italic; }
+.ExercisePage::before {content: "Optional: "; color: gray;} 
+
 /* Language and Standards Tables */
 .lang-features-table * {
   margin:             0px;
