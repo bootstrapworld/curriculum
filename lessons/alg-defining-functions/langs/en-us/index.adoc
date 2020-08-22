@@ -44,19 +44,17 @@
 [.old-materials]
 Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit4/index.html, prior unit-based version}
 
-== Warmup
-
-Students should have their workbook, pencil, and be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-on their computer.
-
 == Identifying Repeated _Patterns_ @duration{30 minutes}
 
 === Overview
 As with the Defining Values lesson, students search for structure in a list of expressions. But this time, the structures are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
 
 === Launch
+
+Students should have their workbook, pencil, and be logged into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+on their computer.
 
 @centered-image{images/ILoveGreenTriangles.jpg, I Love Green Triangles, 400, align="center"}
 
@@ -147,37 +145,36 @@ Word Problem: Write a function called `gt` that takes in a Number and produces a
 
 Have students follow along on the @workbook-link{pages/FastFunctions.adoc} handout.
 
-- *1. Write the @vocab{contract} for this new function by looking at the word problem.* +
-** What does `gt` take in? +
-_A Number_
-** What does `gt` give back? +
-_An Image. Students may say "a triangle", follow up by asking what data type that triangle will be (Number, String, or Image)_
+*1. Write the @vocab{contract} for this new function by looking at the word problem.* +
+- What does `gt` take in? +
+- _A Number_ +
 
-- *2. Write some examples of how this function should work.*
-** If I typed
+- What does `gt` give back? +
+- __An Image. Students may say "a triangle", follow up by asking what data type that triangle will be (Number, String, or Image)__
+
+*2. Write some examples of how this function should work.*
+- If I typed
 @ifproglang{wescheme}{ `(gt 40)` }
 @ifproglang{pyret}{ `gt(40)` }
 , what would I want the program to do? +
-_I'd want the computer the execute the code_
+- _I'd want the computer the execute the code_
 @ifproglang{wescheme}{ `(triangle 40 "solid" "green")`.  }
 @ifproglang{pyret}{    `triangle(40, "solid", "green")`. }
-
-_This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!_ 
+(This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!)
 
 - OPTIONAL: Have students complete the @workbook-link{pages/MappingExamplesWithCoE.adoc, Mapping Examples with Circles of Evaluation} worksheet showing how their function examples are working.
 
-- *3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
+*3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
 _The number is changing in each example.  We could name it "x", but "size" is a more accurate name._ +
 
 @ifproglang{wescheme}{
-@centered-image{images/WhatChanges-WeScheme.png, Circle and label what is changing, 400, align="center"}
+@centered-image{images/WhatChanges-WeScheme.png, Circle and label what is changing, 400}
 }
-
 @ifproglang{pyret}{
-@centered-image{images/WhatChanges-Pyret.png, Circle and label what is changing, 400, align="center"}
+@centered-image{images/WhatChanges-Pyret.png, Circle and label what is changing, 400}
 }
 
-- *4. Write the function definition.* +
+*4. Write the function definition.* +
 
 @ifproglang{wescheme}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. If it doesn't change between the examples, we just copy it.__ }
 @ifproglang{pyret}{__Look at the two examples.  The function definition will follow the same pattern, but it will use the variable name `size` in place of the variable part we circled. We also use the keyword `fun`, replace the colon (`is`) with a colon (`:`), and finish it off with an `end`.__ }
@@ -228,7 +225,7 @@ This is a chance for students to independently review the steps learned in the p
 - Write two examples and a definition for your function
 - Complete the @workbook-link{pages/MappingExamplesWithCoE.adoc, Mapping Examples with Circles of Evaluation} for the examples of your function.
 
-== Closing
+=== Synthesize
 The Design Recipe is a powerful tool for solving word problems. In this lesson, students practiced using it on simple _programming problems_, but soon they'll be applying it to traditional math problems. Encourage them to make this connection on their own: can they think of a math problem in which this would be useful?
 
 == Additional Exercises:
@@ -241,4 +238,3 @@ The Design Recipe is a powerful tool for solving word problems. In this lesson, 
 * @exercise-link{pages/create-contracts-examples1.adoc} 
 
 * @exercise-link{pages/create-contracts-examples2.adoc} 
-
