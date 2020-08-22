@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-19 # last modified
+LASTMOD=2020-08-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -916,15 +916,17 @@ function buildlessonplan() {
       rm -f index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       $PROGDIR/adoc-preproc.rkt index.asciidoc
-      mv index.html index.shtml
-      insertbodyid index.shtml
-      addanalytics index.shtml
-      resolveabbrevs index.shtml
-      cleanuptitle index.shtml
-      cleanupduration index.shtml
-      insertsectionselfie index.shtml
-      lintlesson index.shtml
-      insertgdrivesave index.shtml
+      if test -f index.html; then
+        mv index.html index.shtml
+        insertbodyid index.shtml
+        addanalytics index.shtml
+        resolveabbrevs index.shtml
+        cleanuptitle index.shtml
+        cleanupduration index.shtml
+        insertsectionselfie index.shtml
+        lintlesson index.shtml
+        insertgdrivesave index.shtml
+      fi
     elif test index.html -nt index.shtml; then
       mv index.html index.shtml
       # anything else?
@@ -933,19 +935,21 @@ function buildlessonplan() {
         $PROGDIR/glossary-warnings.rkt
       fi
     fi
-    checklinks index.shtml
+    if test -f index.shtml; then
+      checklinks index.shtml
 
-    if test ! $NOPDF; then
-      if test index.shtml -nt index.pdf; then
-        TEMPF=$(mktemp); rm -f $TEMPF
-        TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
-        cp index.shtml $TMPHTML
-        removecodetags $TMPHTML
+      if test ! $NOPDF; then
+        if test index.shtml -nt index.pdf; then
+          TEMPF=$(mktemp); rm -f $TEMPF
+          TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
+          cp index.shtml $TMPHTML
+          removecodetags $TMPHTML
 
-        ASPECT=
+          ASPECT=
 
-        JAVASCRIPTDELAY="--javascript-delay 4000"
-        echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+          JAVASCRIPTDELAY="--javascript-delay 4000"
+          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+        fi
       fi
     fi
   fi
