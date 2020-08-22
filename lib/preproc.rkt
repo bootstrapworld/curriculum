@@ -403,8 +403,11 @@
                         "")
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
-        (unless (member link-output *extra-material-links*)
-          (set! *extra-material-links* (cons link-output *extra-material-links*))))
+        (let ([styled-link-output
+                (string-append (if exercise? "[.ExercisePage]##" "[.WorkbookPage]##")
+                  link-output "##")])
+          (unless (member styled-link-output *extra-material-links*)
+            (set! *extra-material-links* (cons styled-link-output *extra-material-links*)))))
       link-output)))
 
 (define (display-comment prose o)
