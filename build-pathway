@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-23 # last modified
+LASTMOD=2020-08-24 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -562,6 +562,8 @@ function adjustproglangsubdirs() {
 }
 
 function shadowcopydir() {
+  # srcdir = solution-pages from (previous run + repo)
+  # targetdir = pages from repo
   local srcdir=$1
   local targetdir=$2
   mkdir -p "$targetdir"
@@ -773,29 +775,33 @@ function recursiveadoc() {
 }
 
 function mkdirsolutionversionof() {
-  local d="$1"
-  test -d "$d" || return
+  test -d pages || return
 
-  local origDir="$2"
+  local origDir="$1"
 
-  if test -d solution-$d-2; then
-    echo DEADC0DE: solution-$d-2 shouldn\'t exist
-    rm -fr solution-$d-2
+  if test -d solution-pages-2; then
+    echo DEADC0DE: solution-pages-2 shouldn\'t exist
+    rm -fr solution-pages-2
   fi
 
-  if test -d $origDir/$d; then
-    cp -pr $origDir/$d solution-$d-2
+  if test -d solution-pages; then
+    adjustproglangsubdirs solution-pages
+  fi
+
+  if test -d $origDir/pages; then
+    cp -pr $origDir/pages solution-pages-2
+    adjustproglangsubdirs solution-pages-2
   else
-    mkdir solution-$d-2
+    mkdir solution-pages-2
   fi
 
-  cp -p $PROGDIR/.hta* solution-$d-2
+  cp -p $PROGDIR/.hta* solution-pages-2
 
-  if test -d solution-$d; then
-    shadowcopydir solution-$d solution-$d-2
-    rm -fr solution-$d
+  if test -d solution-pages; then
+    shadowcopydir solution-pages solution-pages-2
+    rm -fr solution-pages
   fi
-  mv solution-$d-2 solution-$d
+  mv solution-pages-2 solution-pages
 }
 
 function checksinglelessonplan() {
@@ -863,8 +869,8 @@ function buildworkbookpages() {
   fi
   adjustproglangsubdirs pages
 
-  mkdirsolutionversionof pages $repoDir
-  adjustproglangsubdirs solution-pages
+  mkdirsolutionversionof $repoDir
+  #adjustproglangsubdirs solution-pages
 
   #
   export PATHWAYROOTDIR="../../"
@@ -1392,7 +1398,7 @@ function buildpathway() {
     for d in front-matter back-matter; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages $repoDir/$d
+        mkdirsolutionversionof $repoDir/$d
         cd ..
         adjustproglangsubdirs $d
       fi
@@ -1414,7 +1420,7 @@ function buildpathway() {
     for d in *; do
       if test -d $d; then
         cd $d
-        mkdirsolutionversionof pages $repoDir/resources/$d
+        mkdirsolutionversionof $repoDir/resources/$d
         cd ..
         adjustproglangsubdirs $d
       fi
