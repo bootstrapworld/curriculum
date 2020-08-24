@@ -28,6 +28,7 @@
 
 (define *max-wescheme-cond-side-length* 32)
 (define *max-wescheme-example-side-length* 30)
+(define *max-pyret-example-side-length* 30)
 
 (define *funname* #f)
 
@@ -285,11 +286,19 @@
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
         ; wrap the `is ...` code in its own element, so that wrapping works properly
-        (enclose-span ".recipe_example_body_wrap"
-          (string-append
-            (highlight-keywords "is ")
-            (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-            ))
+
+        (if (> (string-length body) *max-pyret-example-side-length*)
+            (string-append (write-clear)
+              (encoded-ans "" "MMMMMMMMM" #f)
+              (encoded-ans ".recipe_example_body_long"
+                           (string-append
+                             (highlight-keywords "is ")
+                             (encoded-ans "" (highlight-keywords body) show-body?)) #t))
+            (enclose-span ".recipe_example_body_wrap"
+              (string-append
+                (highlight-keywords "is ")
+                (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                )))
         (write-clear)
         ))))
 
