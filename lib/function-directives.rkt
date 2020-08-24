@@ -3,7 +3,7 @@
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 
-(provide *function-list* 
+(provide *function-list*
          get-function-name)
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
@@ -26,8 +26,8 @@
 
 (define *div-nesting* 0)
 
-(define *max-pyret-example-side-length* 30)
 (define *max-wescheme-cond-side-length* 32)
+(define *max-wescheme-example-side-length* 30)
 
 (define *funname* #f)
 
@@ -138,7 +138,6 @@
     "| " title-text "\n"
     "|===\n\n"))
 
-
 (define (write-purpose funname domain-list range purpose)
   (string-append
     (write-title "Contract and Purpose Statement")
@@ -248,10 +247,21 @@
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
-          (enclose-span ".recipe_example_body_wrap"
-            (encoded-ans ".recipe_example_body" (expr-to-string body) show-body?))
-          (write-large ")")
-          )))))
+          (let ([body-s (expr-to-string body)])
+            (if (> (string-length body-s) *max-wescheme-example-side-length*)
+                (string-append (write-clear)
+                  (encoded-ans "" "MMMMMMMMM" #f)
+                  (encoded-ans ".recipe_example_body_long"
+                               (string-append
+                                 (encoded-ans "" body-s show-body?)
+                                 (write-large ")"))
+                               #t))
+                (string-append
+                  (enclose-span ".recipe_example_body_wrap"
+                    (encoded-ans ".recipe_example_body" body-s show-body?))
+                  (write-large ")")
+                  )))
+            )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
