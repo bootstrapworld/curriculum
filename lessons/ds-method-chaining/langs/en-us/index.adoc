@@ -60,16 +60,16 @@ Students learn how to perform multiple table operations (sorting, filtering, bui
 Now that we are doing more sophisticated analyses, we might find ourselves writing the following code:
 ----
 # get a table with the nametags of all the fixed animals, ordered by species
-fixed = animals-table.filter(is-fixed)
-fixed-with-nametags = fixed.build-column("tag", nametag)
-result = fixed-with-nametags.order-by("species", true)
+with-labels = animals-table.build-column("labels", nametag)
+fixed-with-labels = with-nametags.filter(is-fixed)
+result = fixed-with-labels.order-by("species", true)
 ----
 
 That's a lot of code, and it also requires us to come up with names for each intermediate step! Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
 
 ----
 # get a table with the nametags of all the fixed animals, ordered by species
-result = animals-table.build-column("label", nametag).filter(is-fixed).order-by("species", true)
+result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
 ----
 
 This code takes the `animals-table`, and builds a new column. According to our Contracts Page, `.build-column` produces a new Table, and that’s the Table whose `.filter` method we use. That method produces _yet another Table_, and we call that Table’s `order-by` method. The Table that comes back from that is our final result.
