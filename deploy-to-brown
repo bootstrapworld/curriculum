@@ -1,4 +1,4 @@
-# last modified 2020-06-17
+# last modified 2020-09-04
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -8,16 +8,23 @@ YEAR=2020
 
 ############################################################################
 
-userid=$1
+userid=
+pwy=
+lib=
+
+while test $# -ne 0; do
+  arg=$1; shift
+  if test "$arg" = -lib; then
+    lib=lib
+  elif test -z "$userid"; then
+    userid=$arg
+  else
+    pwy=$arg
+  fi
+done
 
 if test ! $userid; then
   echo Supply userid as arg! ; exit
-fi
-
-pwy=
-
-if test $# -ge 2; then
-  pwy=$2
 fi
 
 if test ! -d distribution; then
@@ -64,8 +71,10 @@ function copyCourse() {
 }
 
 for lang in $ALL_THE_LANGS; do
-  if test -d $lang/lib; then
-    cp -pr $lang/lib deployables/$lang
+  if test $lib; then
+    if test -d $lang/lib; then
+      cp -pr $lang/lib deployables/$lang
+    fi
   fi
   for f in $lang/*html; do
     if test -f $f; then
@@ -91,20 +100,21 @@ else
   copyCourse reactive
 fi
 
-for f in asc asciidoc rkt.kp txt.kp DS_Store; do
+for f in adoc asc asciidoc aux log rkt rkt.kp tex titletxt txt txt.kp DS_Store; do
   find deployables -name \*.$f -delete
 done
 
 find deployables -name workbook-[A-Z]\*.pdf -delete
 find deployables -name workbook-sols-\*.pdf -delete
 find deployables -name pd-workbook-\*.pdf -delete
+find deployables -name wkh2p-tmp\* -delete
 
 test -f deployables.tar.bz2 && rm deployables.tar.bz2
 
 echo Tarring up deployables...
 tar jcf deployables.tar.bz2 deployables
 
-echo Copying courses tarball to brown.edu...
+echo Copying courses tarball to $userid@ssh.cs.brown.edu...
 scp deployables.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
 
 success=$?
