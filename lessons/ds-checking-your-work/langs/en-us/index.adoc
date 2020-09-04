@@ -60,11 +60,9 @@ A good Testing Table should be _representative_ of the population, and _relevant
 Data scientists usually think in terms of samples that best serve the purpose of __performing inference__: Samples should be representative of the entire population, and large enough to get us fairly close to the truth about that population. Computer programmers need to think in terms of __Testing Tables__ that best serve the purpose of verifying that their code does what it’s supposed to: The Tables should be designed to call attention to any imperfections in the code’s instructions.
 
 === Investigate
-Testing Tables can also be used to _verify_ that a certain analysis is correct. A function that is supposed to filter a table and _show only the cats_ can't be tested with a Testing Table that only has cats to begin with. How would we know if the function filters out non-cats?
+Testing Tables can also be used to _verify_ that a certain analysis is correct. Code that filters a table to show only cats can’t be verified with a Testing Table that _already_ has only cats. (Why not?)
 
-Suppose a function takes in a table of animals and shows _only the kittens_. A Testing Table should have cats and non-cats, as well as old and young cats.
-
-Suppose a function takes in a table of animals and shows only the kittens, sorted in ascending order by weight. Now a Testing Table should have cats and non-cats, as well as old and young cats..._and_ have rows that aren't already sorted!
+Code that shows only the kittens...sorted in ascending order by weight must be verified by a Table containing cats, non-cats, old and young cats... __and rows that aren’t already sorted!__
 
 [.lesson-instruction]
 * Turn to @workbook-link{pages/trust-but-verify.adoc} in your student workbook. 
@@ -74,3 +72,5 @@ Suppose a function takes in a table of animals and shows only the kittens, sorte
 
 === Synthesize
 Complex analysis has more room for mistakes, so it’s critical to think about a Testing Table that allows us to trust that our code really does what it’s supposed to!
+
+*How would you check whether or not a facial recognition system was equally accurate for everyone?*
