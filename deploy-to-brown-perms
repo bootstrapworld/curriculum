@@ -1,4 +1,4 @@
-# last modified 2020-06-01
+# last modified 2020-09-02
 
 userid=$1
 
@@ -41,8 +41,8 @@ for lang in *; do
         done;
         cd ..;
       else
-        rm -fr $DEPLOY_DIR/\$lang/\$f;
-        mv \$f $DEPLOY_DIR/\$lang;
+        mkdir -p $DEPLOY_DIR/\$lang/\$f;
+        cp -pr \$f/* $DEPLOY_DIR/\$lang/\$f;
       fi
     fi
   done;
