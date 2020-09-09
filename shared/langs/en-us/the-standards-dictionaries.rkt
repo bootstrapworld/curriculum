@@ -3,6 +3,7 @@
 (provide
   *standards-list*
   expand-dict-abbrev
+  disallow-standards
   )
 
 (require "cc-ela-standards-dictionary.rkt")
@@ -22,6 +23,11 @@
     (list "OK" "Oklahoma" *ok-standards-list*)
 ;   (list "OLD" "Older" *old-standards-list*)
     ))
+
+(define (disallow-standards . stds)
+  (set! *standards-list*
+    (filter (lambda (x) (not (member (car x) stds)))
+            *standards-list*)))
 
 (define (expand-dict-abbrev dict)
   (let ([x (assoc dict *standards-list*)])

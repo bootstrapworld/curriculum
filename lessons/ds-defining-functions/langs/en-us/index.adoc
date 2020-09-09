@@ -44,7 +44,12 @@
 == Defining Functions over Numbers @duration{20 minutes}
 
 === Overview
-Students have learned to define _values_ (e.g. - `name = "Maya"`, `x = 5`, etc). Students should have defined `animalA` and `animalB` to be two different rows in the animals table. If they haven't, make sure they do this now.
+Students have learned to define _values_ (e.g. - `name = "Maya"`, `x = 5`, etc). Students should have defined `animalA` and `animalB` to be the following two rows in the animals table. 
+
+  animalA = animals-table.row-n(4)
+  animalB = animals-table.row-n(13)
+
+If they haven't, make sure they do this now.
 
 === Launch
 Suppose we want to make a solid, green triangle of size 10. What would we type? What if we wanted to make one of size 20? 25? 1000?
@@ -93,8 +98,8 @@ Examples are a way for us to tell the computer how our function should behave fo
 # gt :: (size :: Number) -> Image
 # Consumes a size, and produces a solid green triangle of that size.
 examples:
-  gt(10) is triangle(10, "solid", "green")
-  gt(10) is triangle(10, "solid", "green")
+  gt(100) is triangle(100, "solid", "green")
+  gt(30) is triangle(30, "solid", "green")
 end
 ----
 
@@ -107,8 +112,8 @@ We start with the `fun` keyword (short for “function”), followed by the name
 # gt :: (size :: Number) -> Image
 # Consumes a size, and produces a solid green triangle of that size.
 examples:
-  gt(10) is triangle(10, "solid", "green")
-  gt(10) is triangle(10, "solid", "green")
+  gt(100) is triangle(100, "solid", "green")
+  gt(30) is triangle(30, "solid", "green")
 end
 fun gt(size):
   triangle(size, "solid", "green")
@@ -160,7 +165,7 @@ Turn to @workbook-link{pages/design-recipe-2.adoc}, and use the Design Recipe to
 Students discover _functions that consume other functions_, and compose a scatter plot function with one of the functions they've already defined.
 
 === Launch
-Students have used Pyret functions that use Numbers, Strings, Images, and even Tables and Rows. Now they've written functions of their own that work with these datatypes. However, Pyret functions can even use _other functions_! Have students at the Contract for `image-scatter-plot`:
+Students have used Pyret functions that use Numbers, Strings, Images, and even Tables and Rows. Now they've written functions of their own that work with these datatypes. However, Pyret functions can even use _other functions_! Have students look at the Contract for `image-scatter-plot`:
 ----
  image-scatter-plot :: (t :: Table, xs :: String, ys :: String, f :: (Row -> Image)) -> Image
 ----

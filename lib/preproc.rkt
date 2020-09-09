@@ -14,12 +14,16 @@
 (require "lessons-and-standards.rkt")
 ;(require "draw-dep-diag.rkt")
 
+
+
 (provide
   assoc-standards
   box-add-new!
   create-standards-file
   preproc-n-asciidoctor
   )
+
+(define *progdir* (getenv "PROGDIR"))
 
 (define *force* (truthy-getenv "FORCE"))
 
@@ -46,9 +50,21 @@
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
 
+
 (define-namespace-anchor *adoc-namespace-anchor*)
 
 (define *adoc-namespace* (namespace-anchor->namespace *adoc-namespace-anchor*))
+
+(when *progdir*
+  (let ([pathway-local-file (build-path *progdir* "pathway-local.rkt")])
+    (when (file-exists? pathway-local-file)
+      (call-with-input-file pathway-local-file
+        (lambda (i)
+          (let loop ()
+            (let ([x (read i)])
+              (unless (eof-object? x)
+                (eval x *adoc-namespace*)
+                (loop)))))))))
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
