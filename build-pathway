@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-08-24 # last modified
+LASTMOD=2020-09-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -157,7 +157,7 @@ echo '== Generated Documentation' > distribution/index.adoc
 
 mkdir -p prog
 
-PROGDIR=$TOPDIR/prog
+export PROGDIR=$TOPDIR/prog
 
 cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
 
@@ -1291,6 +1291,11 @@ function buildpathway() {
 
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/distribution/$LANGUAGE/courses/$PATHWAY"
+
+    rm -f $PROGDIR/pathway-local.rkt
+    if test -f $repoDir/pathway-local.rkt; then
+      cp -p $repoDir/pathway-local.rkt $PROGDIR
+    fi
 
     if test ! $CHECKTARGET; then
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
