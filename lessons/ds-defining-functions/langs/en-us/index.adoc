@@ -145,15 +145,19 @@ Students deepen their understanding of function definition and the Design Recipe
 === Launch
 Functions can consume values besides Numbers. For example, we might want to define a function called `sticker` that consumes a _Color_, and draws a star of that color:
 ----
-sticker("blue") is star(50, "solid", "blue")
-sticker("yellow") is star(50, "solid", "yellow")
+fun sticker(color):
+  star(50, "solid", color)
+end
 ----
 
 Or a function called `nametag` that consumes a _Row_ from the animals table, and draws that animal's name in purple letters.
 ----
-nametag(animalA) is text(animalA["name"], 10, "purple")
-nametag(animalB) is text(animalB["name"], 10, "purple")
+fun nametag(r): 
+  text(r["name"], 10, "purple")
+end
 ----
+
+*NOTE:* for now, students will follow the pattern for row-consuming functions, so that both examples include a lookup operation. Eventually, however, students will write examples that do *not* contain lookups.
 
 === Investigate
 [.lesson-instruction]
