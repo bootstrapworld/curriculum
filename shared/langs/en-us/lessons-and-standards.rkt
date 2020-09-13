@@ -44,7 +44,8 @@
         ; "BS-PL.3"
         "HSA.SSE.A.1"
         "MP.2"
-        "MP.7")
+        "MP.7"
+        "OK.PA.A.3.1")
     ("alg-distance-formula" 
         "8.G.B.7"
         "MP.2"
@@ -72,7 +73,8 @@
         ; "BS-DR.2"
         "HSF.BF.A.1"
         "MP.1"
-        "MP.6")
+        "MP.6"
+        "OK.A1.A.3.1")
     ("alg-function-composition-1" 
         "8.G.A.1"
         ; "BS-IDE"
@@ -97,7 +99,10 @@
         ; "BS-DR.3"
         "HSF.IF.A.2"
         "OK.PA.A.4.3")
-    ("alg-order-of-operations" 
+    ("alg-order-of-operations"
+        "OK.7.A.4" 
+        "OK.PA.A.3"
+        "OK.A1.A.3"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
         "MP.1"
@@ -115,17 +120,26 @@
         "HSF.BF.A.1")
 
     ; flags
-    ("fl-flags-of-the-world" "N-Q&1&3" "6.NS.5-8" "F-IF.1-3")
-    ("fl-image-transformations" "N-Q&1&3" "6.NS.5-8" "F-IF.1-3")
-    ("fl-intro-to-dilations" "N-Q&1&3" "6.NS.5-8" "F-IF.1-3")
+    ("flags" 
+        "N-Q&1&3" 
+        "6.NS.5-8" 
+        "F-IF.1-3"
+        "OK.8.AP.C.01"
+        "OK.6-8.AP.M.01"
+        "OK.3-5.AP.A.01"
+        "OK.3-5.AP.M.01")
 
     ;data science
     ("ds-intro" 
         "SL.9-10.1" 
         "2-DA-07" 
-        "P7")
+        "P7"
+        "OK.6-8.DA.CVT.01"
+        "OK.3-5.DA.IM.01")
     ("ds-pyret-intro" 
-        "2-DA-07")
+        "2-DA-07"
+        "OK.7.AP.A.01"
+        "OK.8.AP.C.01")
     ("ds-applying-functions" 
         "HSF.IF.A.2"
         "OK.A1.F.1.2")
@@ -154,6 +168,7 @@
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
         "OK.A1.F.1.3"
+        "OK.A1.A.1.1"
         "OK.8.AP.PD.02"
         )
     ("ds-table-methods" 

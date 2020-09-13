@@ -10,7 +10,7 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{alg-function-composition}
+@prereqs-stds{alg-function-composition, defining-values}
 
 | Lesson Goals
 | Students will be able to:
@@ -28,17 +28,14 @@
 |[.materials-links]
 
 @ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1ZnZzX8bKGcrig2iUzggQDnhpmPiyuS0tDTI3YIMhEV4/edit?usp=sharing, TBD}
+* @link{https://docs.google.com/presentation/d/12Pm4x4eN3Ldq9S4mnpU-GVlUT6qh-GTKDx3XiZTIZCI/edit?usp=sharing, Lesson Slides}
 }
 @ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1Z8gGtbIOW1jC4ktAVzpoxVTFne4_JpqyZR70UJ4_Ip0/edit?usp=sharing, TBD}
+* @link{https://docs.google.com/presentation/d/1X2l3Lyz3dxDNFwAFYuQgWUjbL8GcanaPOPRXK542WSY/edit?usp=sharing, Lesson Slides}
 }
 
 @material-links
 
-| Supplemental Resources
-|
-- @link{https://teacher.desmos.com/activitybuilder/custom/5d991a674febfc7e0ff8cb15, Circles of Evaluation Review - Blank Template - Desmos Activity}
 
 | Preparation
 |
@@ -62,11 +59,11 @@ You already know how to place one image on top of another, using the `overlay` f
 
 [.lesson instruction]
 Open the
-@ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=PYN3JaBTzy, Flags Starter File} }
+@ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=xTZUy7EmCR, Flags Starter File} }
 @ifproglang{pyret}{ @link{https://code.pyret.org/editor#share=1QEz7p-AVDMd3xmuJCvh2YRHSt8uF82CW, Flags Starter File} }
 , and click Run. 
 
-There's some code in the Definitions Area you haven't seen before. For now, just focus on numbers 1 and 2 in the code. __What do these lines of code do?__
+There's some code in the Definitions Area you haven't seen before. For now, just focus on lines 4 and 5 in the code. __What do these lines of code do?__
 
 [.lesson-instruction]
 Evaluate `dot` and `blank` in the Interactions Area. What do you get?
@@ -78,7 +75,7 @@ As you've seen, `overlay` stick two images together, so that the _center_ of the
 === Investigate
 [.lesson-instruction]
 - Type `japan` into the Interactions Area. What do you get back?
-- Take a look at the code in number 3. What function is being used here?
+- Take a look at the code on line 7. What function is being used here?
 - Try changing the `150` to `50`, then click Run. How does this image change?
 - Try changing the `50` to `0`, then click Run. How does this image change?
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
@@ -93,7 +90,7 @@ The numbers in `put-image` specify a point on that graph paper, with the center 
 
 [.lesson-instruction.whiteBG]
 --
-*Estimate:* What coordinates for the `dot` would create each of the following images?
+The width of the rectangle is 300 and height is 200. *Estimate:* What coordinates for the `dot` would create each of the following images?
 
 . @image{images/flag1.png}
 . @image{images/flag2.png}
@@ -101,7 +98,7 @@ The numbers in `put-image` specify a point on that graph paper, with the center 
 . @image{images/flag4.png}
 --
 
-Complete @workbook-link{combining-images.adoc}, to connect `overlay` and `put-image` back to what you know about Circles of Evaluation.
+Complete @workbook-link{combining-images.adoc}.
 
 === Synthesize
 Could we completely replace `overlay` with `put-image`? Why or why not?
@@ -116,11 +113,12 @@ Let's dig into the process for how the `japan` was made:
 
 *1) Decompose the Image*
 
-Looking at the Japanese flag, we can see that it's made up of two simpler images: a blank rectangle and a solid red circle.
+We observe that the Japanese flag is made up of two simpler images: a blank rectangle and a red dot.
 
 *2) Define those parts*
 
-This is where we define `dot` and `blank`. These are the puzzle pieces we'll fit together to make our flag. Once we've defined those images, it's always a good idea to test them out in the Interactions Area and make sure they look the way we want.
+We define `dot` and `blank`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
+
 
 *3) Find the Coordinates*
 
@@ -129,7 +127,8 @@ For each image, calculate what the x- and y-coordinates of the center should be.
 
 *4) Build the Image*
 
-One at a time, stack the parts on top of the bottom image using the coordinates you planned. __TIP: don't cram all the code into one line of code! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__
+We stack the parts on top of the bottom image using the coordinates we found.
+ __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__
 
 === Investigate
 [.lesson-instruction]
