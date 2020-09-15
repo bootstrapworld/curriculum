@@ -92,7 +92,7 @@ tr th.tableblock {
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
-.glossary   { float: left; margin-bottom: 20px; }
+.glossary   { margin-bottom: 20px; }
 .glossary * { display: inline; }
 .glossary .title {
   display:          block;
@@ -123,6 +123,7 @@ tr th.tableblock {
   position:         absolute;
   top:              50%;
   left:             50%;
+  text-align:       center;
   opacity:          0;
   transition:       all 0.3s;
   transform:        translateX(-50%) translateY(-50%);
@@ -200,12 +201,10 @@ tr th.tableblock {
 .LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
 
 /* The summary table at the top of each lesson */
-#preamble table, #preamble td, #preamble th { border: 1px solid #7747a5; }
-#preamble ul p { margin: 0px; }
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
-/* Styling for the Materials section of the preamble */
+/* Styling for the Materials section of the Lesson Summary */
 .materials-links { 
   max-height: 200pt; 
   overflow: hidden; 
@@ -269,8 +268,9 @@ tr th.tableblock {
 .lesson-section-1, .lesson-section-1+.lesson-section-1 { 
   clear:              both; 
   border-top:         solid 3px black; 
+  display:            block;
 }
-.lesson-section-2 { float: left; clear: both; width: 100%; margin: 10px 0px;}
+.lesson-section-2 { clear: both; width: 100%; margin: 20px 0px;}
 .lesson-section-2 h3 {
   font-size:          1.5rem;
   font-style:         italic;
@@ -296,6 +296,7 @@ tr th.tableblock {
   border-style:       solid;
   margin:             2ex;
   border-width:       2px 0px;
+  clear:              both;
 }
 .lesson-point p { margin: 0ex 1ex; }
 
@@ -305,6 +306,7 @@ tr th.tableblock {
   border:             solid 5px !important;
   width:              75%;
   margin:             15px auto;
+  display:            block;
 }
 .strategy-box { border-color: #1a73b5 !important; }
 .notice-box   { border-color: #7747a5 !important; }
@@ -584,6 +586,15 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 /************************************************************************************
+* PAGE BREAK RULES
+*/
+.lessonSummary { page-break-after: always !important; }
+.lesson-section-1 { page-break-before: always !important; }
+.lesson-section-1, .lesson-section-2, .sectionbody, 
+.notice-box, .strategy-box, .image, img { page-break-inside: avoid !important;}
+
+
+/************************************************************************************
 * SCREEN MEDIA
 */
 @media screen{
@@ -613,6 +624,9 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   /* we need a right-hand padding to eliminate some weird clipping behavior */
   #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
 
+  /* The summary table at the top of each lesson */
+  .left-header tr td:nth-child(1) { background-color: lightgray; }
+
   ::-webkit-scrollbar {
     width:            0px;
     background:       transparent; /* make scrollbar transparent */
@@ -637,8 +651,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
   .designRecipeLayout .studentAnswer::after { font-size: .8rem; }
 
-  /* Force preamble to always be on its own page */
-  #preamble { page-break-after: always; }
   /* Workbook pages should have an inverted header, with a little space below */
   :not(body.LessonPlan) #header { 
     background:       black; 
@@ -646,9 +658,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     margin-bottom:    5px !important;
   }
 
-  /* More padding between sections, and don't ever break a section across pages */
+  /* More padding between sections */
   .lesson-section-1 { margin-bottom: 20px; }
-  .lesson-section-1, .lesson-section-2, .sectionbody { page-break-inside: avoid;}
 
   /* bold borders between sections */
   .sect1+.sect1 { border-top: solid 3px black; }
