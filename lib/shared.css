@@ -586,15 +586,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 /************************************************************************************
-* PAGE BREAK RULES
-*/
-.lessonSummary { page-break-after: always !important; }
-.lesson-section-1 { page-break-before: always !important; }
-.lesson-section-1, .lesson-section-2, .sectionbody, 
-.notice-box, .strategy-box, .image, img { page-break-inside: avoid !important;}
-
-
-/************************************************************************************
 * SCREEN MEDIA
 */
 @media screen{
@@ -606,12 +597,26 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 /************************************************************************************
+* PAGE BREAK RULES
+*/
+.lessonSummary { page-break-after: always !important; }
+.lesson-section-1 { page-break-before: always !important; }
+.lesson-section-2 p, .notice-box, .strategy-box, .image, img { 
+  page-break-inside: avoid !important;
+}
+table { page-break-inside: auto }
+tr    { page-break-inside: avoid; page-break-after: auto }
+thead { display: table-header-group; }
+tfoot { display: table-footer-group; }
+
+/************************************************************************************
  * PRINT MEDIA
  */
 @page  {
     size:             8.5in 11in;   /* normal letter size paper */
-    margin:           0.5in;        /* half-inch margins */
-    orphans:          0; widows: 0; /* never break a paragraph across pages */
+    margin:           0.5in 0.5in 1in 0.5in !important; /* make room for page number */
+    orphans:          0; 
+    widows:           0; /* never break a paragraph across pages */
 }
 @media print {
   div#body, body { 
@@ -619,10 +624,12 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     top:              0px;
     left:             0px;
     width:            100%;
+    padding:          0px;
+    margin:           0px;
   }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
-  #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
+  #header, #content {margin: 0px !important; padding: 0px; padding-right: 20px;}
 
   /* The summary table at the top of each lesson */
   .left-header tr td:nth-child(1) { background-color: lightgray; }
