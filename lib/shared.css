@@ -10,6 +10,9 @@ html, body {
   font-family:    'Lato', Arial, Helvetica, sans-serif;
   color:          #75328A;
   -webkit-font-smoothing: antialiased;
+  break-inside:   auto !important;
+  page-break-inside: auto !important;
+  display:        block !important;
 }
 
 p       { margin: 10px 0px; font-size: inherit; }
@@ -596,29 +599,31 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   }
 }
 
-/************************************************************************************
-* PAGE BREAK RULES
-*/
-.lessonSummary { page-break-after: always !important; }
-.lesson-section-1 { page-break-before: always !important; }
-.lesson-section-2 p, .notice-box, .strategy-box, .image, img { 
-  page-break-inside: avoid !important;
-}
-table { page-break-inside: auto }
-tr    { page-break-inside: avoid; page-break-after: auto }
-thead { display: table-header-group; }
-tfoot { display: table-footer-group; }
 
 /************************************************************************************
  * PRINT MEDIA
  */
-@page  {
+@page {
     size:             8.5in 11in;   /* normal letter size paper */
-    margin:           0.5in 0.5in 1in 0.5in !important; /* make room for page number */
-    orphans:          0; 
-    widows:           0; /* never break a paragraph across pages */
+    margin:           0.5in 0.5in 2in 0.5in !important; /* make room for page number */
+    orphans:          0; /* never break a paragraph across pages */
+    widows:           0; 
 }
+
 @media print {
+  .lessonSummary    { break-after:  page !important; page-break-after:  always !important; }
+  .lesson-section-1 { break-before: page !important; page-break-before: always !important; }
+  .lesson-section-2 p, .notice-box, .strategy-box, .circleevalsexp, .image,
+  img, .MathJax, #_additional_exercises + .sectionbody { 
+    break-inside: avoid !important; page-break-inside: avoid !important;
+  }
+  h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
+  h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
+  table { break-inside: auto; }
+  tr td { page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: auto; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+
   div#body, body { 
     color:            black; 
     top:              0px;
@@ -626,6 +631,7 @@ tfoot { display: table-footer-group; }
     width:            100%;
     padding:          0px;
     margin:           0px;
+    display:          block !important;
   }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
@@ -651,7 +657,7 @@ tfoot { display: table-footer-group; }
 
   #savetodrive-div, .acknowledgment, .copyright, #footer, #outOfDate, 
   .web-page-only { 
-   display: none !important; visibility: hidden;
+   display: none !important; visibility: hidden; float: none;
   }
 
   .recipe_title p { padding: 3px 5px; }
