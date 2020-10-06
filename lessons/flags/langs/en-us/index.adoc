@@ -49,56 +49,62 @@
 |===
 
 
-== Putting Images Together @duration{15 minutes}
+== Putting Images Together @duration{25 minutes}
 
 === Overview
 Students learn about the `put-image` function.
 
 === Launch
-You already know how to place one image on top of another, using the `overlay` function. 
+As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
 
-[.lesson instruction]
+The `put-image` function works like `overlay`, but instead of placing the centers of each image on top of one another, it _translates_ the center of the top image by some distance in the x- and y-direction.
+
+[.lesson-point]
+Think of the background image as a sheet of graph paper with the origin (0,0) in the bottom left corner.
+
+The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
+
+Turn to @exercise-link{estimating-coordinates}. The width of the rectangle is 300 and the height is 200. *Estimate:* What coordinates for the `dot` would create each of the images on the page.  Write them in the spaces provided in the code.
+
+=== Investigate
+
 Open the
 @ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=xTZUy7EmCR, Flags Starter File} }
 @ifproglang{pyret}{ @link{https://code.pyret.org/editor#share=1QEz7p-AVDMd3xmuJCvh2YRHSt8uF82CW, Flags Starter File} }
 , and click Run. 
 
-There's some code in the Definitions Area you haven't seen before. For now, just focus on lines 4 and 5 in the code. __What do these lines of code do?__
-
-[.lesson-instruction]
-Evaluate `dot` and `blank` in the Interactions Area. What do you get?
-
-How could we overlay the `dot` on top of the `blank` rectangle image? What image do we get back?
-
-As you've seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
-
-=== Investigate
-[.lesson-instruction]
-- Type `japan` into the Interactions Area. What do you get back?
-- Take a look at the code on line 7. What function is being used here?
-- Try changing the `150` to `50`, then click Run. How does this image change?
-- Try changing the `50` to `0`, then click Run. How does this image change?
+[.lesson instruction]
+--
+- Type `japan-flag` into the Interactions Area. What do you get back?
+- Type `japan` into the Interactions Area and compare the image to `japan-flag`.
+- `japan` is composed using `dot` and `background`. Type each of those variables into the interactions area. What do you get back?
+- Take a look at the `japan` code and fix it so that it matches the image from `japan-flag`.
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
-- What does the `put-image` function do?
-
-The `put-image` function works like `overlay`, but instead of placing the centers of each image on top of one another, it _translates_ the center of the top image by some distance in the x- and y-direction.
-
-[.lesson-point]
-Think of the bottom image as a sheet of graph paper with the origin (0,0) in the bottom left corner.
-
-The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
-
-[.lesson-instruction.whiteBG]
---
-The width of the rectangle is 300 and height is 200. *Estimate:* What coordinates for the `dot` would create each of the following images?
-
-. @image{images/flag1.png}
-. @image{images/flag2.png}
-. @image{images/flag3.png}
-. @image{images/flag4.png}
 --
 
-Complete @workbook-link{combining-images.adoc}.
+
+Open the
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=xTZUy7EmCR, "Netherlands, Ireland, Mauritius Starter File"}}
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Netherlands, Ireland, Mauritius Starter File"} }
+, and click Run. 
+
+[.lesson instruction]
+--
+Work through the questions embedded in the code.
+See what you can learn flag of the Netherlands code and apply it to writing code for the flags of Ireland and Mauritius.
+
+--
+If you only have 55 minutes to devote to flags, jump to synthesize and then proceed to Making Flags.  For those with time to dig deeper first, here are some additional activities to work with on your way there.
+
+-	For a quick dive into why it’s more efficient to define shapes before building the image, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, the Alaska starter code.}}
+
+-	For practice scaling found graphics to fit a flag, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, the Lebanon starter code}}
+
+-	For practice with composing more complex images, fix @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, this code for the Puerto Rican flag}}
+
+-	If you’ve already studied Pythagorean Theorem and are ready to apply it, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Trinidad starter code.}}
+
+-	Complete @workbook-link{combining-images.adoc}.
 
 === Synthesize
 Could we completely replace `overlay` with `put-image`? Why or why not?
@@ -109,7 +115,7 @@ Could we completely replace `overlay` with `put-image`? Why or why not?
 Students focus on decomposing complex images into simple ones, and using `put-image` to combine them.
 
 === Launch
-Let's dig into the process for how the `japan` was made:
+Let's dig into the process for how the flags we’ve seen so far were made:
 
 *1) Decompose the Image*
 
@@ -117,7 +123,7 @@ We observe that the Japanese flag is made up of two simpler images: a blank rect
 
 *2) Define those parts*
 
-We define `dot` and `blank`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
+We define `dot` and `background`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
 
 
 *3) Find the Coordinates*
@@ -154,4 +160,4 @@ Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then
 === Synthesize
 Which flags were the easiest to make? The hardest?
 
-Why is it useful to define each part of the flag first, before stitching them together?
+Why is it useful to define each part of the flag first, before stitching 
