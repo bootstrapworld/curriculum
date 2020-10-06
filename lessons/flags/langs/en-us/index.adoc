@@ -29,18 +29,37 @@
 
 @ifproglang{wescheme}{
 * @link{https://docs.google.com/presentation/d/12Pm4x4eN3Ldq9S4mnpU-GVlUT6qh-GTKDx3XiZTIZCI/edit?usp=sharing, Lesson Slides}
+*  @link{https://www.wescheme.org/view?publicId=jH25JejavW, Flags Starter File} 
+* @link{https://www.wescheme.org/view?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}
 }
+
 @ifproglang{pyret}{
 * @link{https://docs.google.com/presentation/d/1X2l3Lyz3dxDNFwAFYuQgWUjbL8GcanaPOPRXK542WSY/edit?usp=sharing, Lesson Slides}
+* @link{https://code.pyret.org/editor#share=1z3fDFl23HAlW8HBONANVI9Z7cWSMAUFa&v=8c4da7d, Flags Starter File}
+* @link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Flags of Netherlands, Ireland, Mauritius Starter File"}
 }
 
 @material-links
 
+@ifproglang{pyret}{
+* _Optional: @link{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, Flag of Alaska Starter File_}
+* _Optional: @link{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, Flag of Lebanon Starter File_}
+* _Optional: @link{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, Flag of Puerto Rico Starter File_}
+* _Optional: @link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, Flag of Trinidad Starter File_}
+}
+
+@ifproglang{wescheme}{
+* _Optional: @link{https://www.wescheme.org/view?publicId=ve2gTEY06p, Flag of Alaska Starter File_}
+* _Optional: @link{https://www.wescheme.org/view?publicId=8mMKtpZiZ5, Flag of Lebanon Starter File_}
+* _Optional: @link{https://www.wescheme.org/view?publicId=6TJ0N2CJqU, Flag of Puerto Rico Starter File_}
+* _Optional: @link{https://www.wescheme.org/view?publicId=YFim9aP7y7, Flag of Trinidad Starter File_}
+}
 
 | Preparation
 |
 * Make sure all materials have been gathered.
 * Decide how students will be grouped in pairs.
+* For some students, the use of graph paper for this activity will make a big difference!
 
 | Key Points For The Facilitator
 |
@@ -60,54 +79,60 @@ As you've already seen, `overlay` sticks two images together, so that the _cente
 The `put-image` function works like `overlay`, but instead of placing the centers of each image on top of one another, it _translates_ the center of the top image by some distance in the x- and y-direction.
 
 [.lesson-point]
+--
 Think of the background image as a sheet of graph paper with the origin (0,0) in the bottom left corner.
 
 The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
+--
 
-Turn to @exercise-link{estimating-coordinates}. The width of the rectangle is 300 and the height is 200. *Estimate:* What coordinates for the `dot` would create each of the images on the page.  Write them in the spaces provided in the code.
+[.lesson-instruction]
+- Turn to @exercise-link{japan-estimating-coordinates.adoc}. 
+- The code beneath each image is missing the x and y coordinates to place the dot.  
+- Estimate the x and y coordinate of the dot's lcoation for each image and complete the code!
 
 === Investigate
 
-Open the
-@ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=xTZUy7EmCR, Flags Starter File} }
-@ifproglang{pyret}{ @link{https://code.pyret.org/editor#share=1QEz7p-AVDMd3xmuJCvh2YRHSt8uF82CW, Flags Starter File} }
+Have students open the
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=jH25JejavW, Flags Starter File}}
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1z3fDFl23HAlW8HBONANVI9Z7cWSMAUFa&v=8c4da7d, Flags Starter File}}
 , and click Run. 
 
-[.lesson instruction]
---
+[.lesson-instruction]
 - Type `japan-flag` into the Interactions Area. What do you get back?
 - Type `japan` into the Interactions Area and compare the image to `japan-flag`.
-- `japan` is composed using `dot` and `background`. Type each of those variables into the interactions area. What do you get back?
-- Take a look at the `japan` code and fix it so that it matches the image from `japan-flag`.
+- `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
+- Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
---
 
-
-Open the
-@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=xTZUy7EmCR, "Netherlands, Ireland, Mauritius Starter File"}}
-@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Netherlands, Ireland, Mauritius Starter File"} }
+Have students open the
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}}
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Flags of Netherlands, Ireland, Mauritius Starter File"} }
 , and click Run. 
 
-[.lesson instruction]
+[.lesson-instruction]
 --
-Work through the questions embedded in the code.
-See what you can learn flag of the Netherlands code and apply it to writing code for the flags of Ireland and Mauritius.
-
+- Look at the code for the flag of the Netherlands.
+- How big is the flag?
+- What was the programmer thinking when she coded the height of the red stripe as @show{(sexp->code `(/ 200 3))}?
+- The center of the blue stripe is placed at (150, @show{(sexp->code `(/ 200 6))}).
+- How did the programmer know to use 150 as the x-coordinate?
+- What was the programmer thinking when she coded the y-coordinate as @show{(sexp->code `(/ 200 6))}?
+- Explain the thinking behind coding the redstripe's y-coordinate as @show{(sexp->code `(* 5 (/ 200 6)))}.
 --
-If you only have 55 minutes to devote to flags, jump to synthesize and then proceed to Making Flags.  For those with time to dig deeper first, here are some additional activities to work with on your way there.
 
--	For a quick dive into why it’s more efficient to define shapes before building the image, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, the Alaska starter code.}}
-
--	For practice scaling found graphics to fit a flag, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, the Lebanon starter code}}
-
--	For practice with composing more complex images, fix @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, this code for the Puerto Rican flag}}
-
--	If you’ve already studied Pythagorean Theorem and are ready to apply it, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Trinidad starter code.}}
-
--	Complete @workbook-link{combining-images.adoc}.
+Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
 
 === Synthesize
+
 Could we completely replace `overlay` with `put-image`? Why or why not?
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Going Deeper}
+
+If you have time, we have lots of additional starter files to push student thinking linked in the additional exercises at the end of this lesson and now would be the time to dive into them!
+|===
 
 == Making Flags @duration{25 minutes}
 
@@ -119,7 +144,7 @@ Let's dig into the process for how the flags we’ve seen so far were made:
 
 *1) Decompose the Image*
 
-We observe that the Japanese flag is made up of two simpler images: a blank rectangle and a red dot.
+We observe that the Japanese flag is made up of two simpler images: a white rectangle and a red dot.
 
 *2) Define those parts*
 
@@ -131,10 +156,11 @@ We define `dot` and `background`. Once we’ve defined those images, we test the
 For each image, calculate what the x- and y-coordinates of the center should be. __TIP: this is a lot easier if you have a sheet of graph paper handy!__
 
 
-*4) Build the Image*
+
+*4) Build the Image & Check that it Matches the Target Image*
 
 We stack the parts on top of the bottom image using the coordinates we found.
- __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__
+ __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
 
 === Investigate
 [.lesson-instruction]
@@ -142,8 +168,8 @@ We stack the parts on top of the bottom image using the coordinates we found.
 . Turn to @workbook-link{decomposing-flags.adoc}, and choose ONE flag to focus on. On the blank lines below, describe the parts that make up that flag.
 
 . Once you're done, return to the 
-@ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=PYN3JaBTzy, Flags Starter File} }
-@ifproglang{pyret}{ @link{https://code.pyret.org/editor#share=1QEz7p-AVDMd3xmuJCvh2YRHSt8uF82CW, Flags Starter File} }
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=PYN3JaBTzy, Flags Starter File}}
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1QEz7p-AVDMd3xmuJCvh2YRHSt8uF82CW, Flags Starter File}}
 and define those parts.
 
 . Then, compose those parts using `put-image`, and make your flag!
@@ -161,3 +187,22 @@ Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then
 Which flags were the easiest to make? The hardest?
 
 Why is it useful to define each part of the flag first, before stitching 
+
+=== Additional Exercises
+
+-	For students who could use more scaffolding between overlay and put-image, use @workbook-link{combining-images.adoc}.
+
+-	For a quick dive into why it’s more efficient to define shapes before building the image, open 
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, the Alaska Flag Starter Code.}} 
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=ve2gTEY06p, the Alaska Flag Starter Code.}}
+
+-	For practice scaling found graphics to fit a flag, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, the Flag of Lebanon Starter Code}}
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=8mMKtpZiZ5, the Flag of Lebanon Starter Code}}
+
+-	For practice with composing more complex images, fix @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, this Code for the Puerto Rican flag}}
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=6TJ0N2CJqU, this Code for the Puerto Rican flag}}
+
+-	If you’ve already studied Pythagorean Theorem and are ready to apply it, open @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Flag of Trinidad Starter Code.}} 
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=YFim9aP7y7}}
+
+
