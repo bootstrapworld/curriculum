@@ -11,7 +11,7 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{alg-function-composition, defining-values}
+@prereqs-stds{alg-function-composition, alg-defining-values}
 
 | Lesson Goals
 | Students will be able to:
@@ -30,8 +30,8 @@
 
 @ifproglang{wescheme}{
 * @link{https://docs.google.com/presentation/d/1I5ljcgyfhKXkHiUbIIX0rE9KwTFpQ3x265bIeSsrPHQ/edit?usp=sharing, Lesson Slides}
-*  @link{https://www.wescheme.org/view?publicId=jH25JejavW, Flags Starter File} 
-* @link{https://www.wescheme.org/view?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}
+*  @link{https://www.wescheme.org/openEditor?publicId=jH25JejavW, Flags Starter File} 
+* @link{https://www.wescheme.org/openEditor?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}
 }
 
 @ifproglang{pyret}{
@@ -60,7 +60,7 @@
 
 | Supplemental Resources
 |
-* @link{http://www.flagwizard.net/, Flag Wizard}
+* @link{http://www.flagwizard.net/, Flag Wizard} - Searchable index of the world's flags, based on geometric properties and complexity.
 
 | Preparation
 |
@@ -95,7 +95,7 @@ The numbers in `put-image` specify a point on that graph paper, with the center 
 [.lesson-instruction]
 - Turn to @exercise-link{japan-estimating-coordinates.adoc}. 
 - The code beneath each image is missing the x and y coordinates to place the dot.  
-- Estimate the x and y coordinate of the dot's lcoation for each image and complete the code!
+- Estimate the x- and y-coordinate of the dot's location for each image and complete the code!
 
 === Investigate
 
@@ -104,11 +104,11 @@ Have students open the
 @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1z3fDFl23HAlW8HBONANVI9Z7cWSMAUFa&v=8c4da7d, Flags Starter File}}
 , and click Run. 
 
-[.lesson-instruction]
-- There is something special happening in this code called commenting. The programmer who wrote this code included a series of messages for us, the humans, that will not be read by the computer.  Commenting can help me or you keep track of things we want to remember when we come back to look at our code another day.  Professional programmers use comments all the time because they work with teams who need to be able to follow each other's thinking in order to collaborate efficiently.
-@ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (;) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it? _Purple!_}
-@ifproglang{pyret}{In pyret, we use the number sign (#) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it? _Red!_}
+There is something special happening in this file called *commenting code*. The programmer who wrote this code included a series of messages for us - humans - that will not be read by the computer.  Commenting can help programmers leave notes for one another when they are working on the same file, or keep track of what they want to remember when _they_ come back to  at their code another day.  Professional programmers use comments all the time because they work with teams who need to be able to follow each other's thinking in order to collaborate efficiently.
 
+[.lesson-instruction]
+- @ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (`;`) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it? _Purple!_}
+@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it? _Red!_}
 - Type `japan-flag` into the Interactions Area. What do you get back?
 - Type `japan` into the Interactions Area and compare the image to `japan-flag`.
 - `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
@@ -155,7 +155,8 @@ Let's dig into the process for how the flags we’ve seen so far were made:
 
 *1) Decompose the Image*
 
-We observe that the Japanese flag is made up of two simpler images: a white rectangle and a red dot.
+We observe that the Japanese flag is made up of two simpler images: a black, outline rectangle and a red dot.
+
 
 *2) Define those parts*
 
@@ -202,7 +203,7 @@ Which flags were the easiest to make? The hardest?
 
 Why is it useful to define each part of the flag first, before stitching 
 
-=== Additional Exercises
+== Additional Exercises
 
 - For students who could use more scaffolding between overlay and put-image, use @workbook-link{combining-images.adoc}.
 
