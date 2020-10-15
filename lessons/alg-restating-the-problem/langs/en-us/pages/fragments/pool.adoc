@@ -1,0 +1,16 @@
+@design-recipe-exercise{"pool" 
+"An Olympic pool holds 660,000 gallons of water.  A fire hose can spray about 250 gallons per minute. Write a function @funname that takes in the number of minutes that have passed and calculates how much water is still needed to fill it."
+	#:headless? #t
+	#:domain-list (list "Number")
+	#:range "Number"
+	#:purpose "Takes in the number of minutes, multiplies them by 250 and subtracts the product from 660,000."
+	#:num-examples 2
+	#:example-list '(( 10 (- 660000 (* 10 250)))
+                 ( 40 (- 660000 (* 40 250))))
+	#:show-examples '((#f #f #f) (#f #f #f))
+	#:param-list (list "n")
+	#:show-params? #f
+	#:body '(- 660000 (* minutes 250))
+	#:show-body? #f
+	#:grid-lines? #t
+}
