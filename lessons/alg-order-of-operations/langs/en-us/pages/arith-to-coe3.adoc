@@ -9,21 +9,20 @@
 
 @vspace{2ex}
 
-For each math expression on the left, draw its Circle of Evaluation on the right.
-
+For each expression on the left, draw its Circle of Evaluation on the right.
 
 @do{
-  (define expr1 '(- 4 (- 6 17)))
-  (define expr2 '(- (+ 25 14) 12))
-  (define expr3 '(+ 1 (* 15 5)))
-  (define expr4 '(/ 15 (+ 10 (* 4 -2))))
+  (define expr1 '(* 9 (+ 17 2)))
+  (define expr2 '(* (+ 2 17) (- 12 8)))
+  (define expr3 '(- 19 (+ 12 11)))
+  (define expr4 '(/ 7 (* 7 (+ 9 8))))
 }
 
 [cols=".^1a,^10a,^10a",options="header",stripes="none"]
 |===
-|   | Math Expression              			| Circle of Evaluation
-|*1*| @show{(sexp->math expr1)}    			| @show{(if *solutions-mode?* (sexp->coe expr1) "")}
-|*2*| @math{25 + 14 - 12}    	   			| @show{(if *solutions-mode?* (sexp->coe expr2) "")}
-|*3*| @math{1 + 15 \times 5}    	   		| @show{(if *solutions-mode?* (sexp->coe expr3) "")}
-|*4*| @math{\frac{15}{10 + 4 \times -2}}   	| @show{(if *solutions-mode?* (sexp->coe expr4) "")}
+|   | Arithmetic Expression              	| Circle of Evaluation
+|*1*| @math{9 \times 17 +2}    	   			| @show{(if *solutions-mode?* (sexp->coe expr1) "")}
+|*2*| @math{2 + 17 \times (12 - 8)}    		| @show{(if *solutions-mode?* (sexp->coe expr2) "")}
+|*3*| @math{19 - (12 + 11)}    				| @show{(if *solutions-mode?* (sexp->coe expr3) "")}
+|*4*| @math{\frac{7} {7 \times (9 + 8)}}    | @show{(if *solutions-mode?* (sexp->coe expr4) "")}
 |===
