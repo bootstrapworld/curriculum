@@ -63,8 +63,8 @@ when it prints out the glossary for a particular unit
     (("explanatory variable" "explanatory") "the variable in a relationship that is presumed to impact the other variable")
     ("expression" "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
     (("extend" "extending" "extends") "a table query that creates a table with new column(s), whose entries are computed with an expression")
-    ("extract" "to construct a list using data from a particular column in ")a table")
-    (("face" "faces") "Faces are the shapes on the outside of the figure.
+    ("extract" "to construct a list using data from a particular column in a table")
+    (("face" "faces") "Faces are the shapes on the outside of the figure")
     ("field" "a part of a data structure that has a name and holds a single value of a specified datatype")
     ("form" "of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
     ("function definition" "code that names a function, lists its variables, and states the expression to compute when the function is used")
