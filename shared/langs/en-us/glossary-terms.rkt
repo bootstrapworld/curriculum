@@ -118,7 +118,7 @@ when it prints out the glossary for a particular unit
     ("range" "the type or set of outputs that a function produces")
     ("range of a data set" "the distance between minimum and maximum values")
     ("reactor" "a value that contains a current state, and functions for updating, drawing, and interacting with that state")
-    (("rectangular prism" "rectangular prisms") "a" solid figure which has 6 faces, all of which are rectangular")
+    (("rectangular prism" "rectangular prisms") "a solid figure which has 6 faces, all of which are rectangular")
     (("refactor" "refactoring") "the process of changing the style or structure of a program's code, without changing the program's behavior")
     (("response variable" "response") "the variable in a relationship that is presumed to be affected by the other variable")
     (("row" "rows") "item(s) in a table, which consist of some group of values; each table is a collection of rows")
@@ -136,8 +136,7 @@ when it prints out the glossary for a particular unit
     ("statistical inference" "using information from a sample to draw conclusions about the larger population from which the sample was taken")
     ("strength" "of a relationship between two quantitative variables: the extent to which knowing the value of one variable tells us something about the value of the other")
     ("String" "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
-
-    (("Surface Area" "surface area" "Surface area") "the sum of the areas of the faces of a polyhedron or the total area that the surface of a solid object occupies")
+    ("surface area" "the sum of the areas of the faces of a polyhedron or the total area that the surface of a solid object occupies")
     (("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
     (("normal" "normal distribution") "A normal distribution has a particular symmetric shape that bulges in the middle and tapers at the ends.")
     ("syntax" "the set of rules that defines a language, whether it be spoken, written, or programmed.")
