@@ -53,6 +53,7 @@ when it prints out the glossary for a particular unit
     ("editor" "software in which you can write and evaluate code")
     (("entry" "entries") "a single value in a table, belonging to a particular row and column")
     (("error message" "error messages") "information from the computer about errors in code")
+    (("edge" "edges") "Edges are the line segments where the faces of solid figures meet in each of the three dimensions.")
     ("evaluate" "perform the computation in an expression, producing an answer")
     ("evaluates to" "the result of computing an expression")
     ("event-based programming" "a style of programming in which every functions are written to respond to mouse-clicks, keypresses, etc.")
@@ -62,7 +63,8 @@ when it prints out the glossary for a particular unit
     (("explanatory variable" "explanatory") "the variable in a relationship that is presumed to impact the other variable")
     ("expression" "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
     (("extend" "extending" "extends") "a table query that creates a table with new column(s), whose entries are computed with an expression")
-    ("extract" "to construct a list using data from a particular column in a table")
+    ("extract" "to construct a list using data from a particular column in ")a table")
+    (("face" "faces") "Faces are the shapes on the outside of the figure.
     ("field" "a part of a data structure that has a name and holds a single value of a specified datatype")
     ("form" "of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
     ("function definition" "code that names a function, lists its variables, and states the expression to compute when the function is used")
@@ -133,6 +135,8 @@ when it prints out the glossary for a particular unit
     ("statistical inference" "using information from a sample to draw conclusions about the larger population from which the sample was taken")
     ("strength" "of a relationship between two quantitative variables: the extent to which knowing the value of one variable tells us something about the value of the other")
     ("String" "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
+
+    (("Surface Area" "surface area" "Surface area") "the sum of the areas of the faces of a polyhedron or the total area that the surface of a solid object occupies")
     (("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
     (("normal" "normal distribution") "A normal distribution has a particular symmetric shape that bulges in the middle and tapers at the ends.")
     ("syntax" "the set of rules that defines a language, whether it be spoken, written, or programmed.")
