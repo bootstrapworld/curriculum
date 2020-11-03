@@ -118,16 +118,18 @@
         "OK.PA.A.1.1")
     ("alg-collision" 
         "HSF.BF.A.1")
-
-    ; flags
-    ("flags" 
+    ("alg-flags" 
         "N-Q&1&3" 
         "6.NS.5-8" 
         "F-IF.1-3"
         "OK.8.AP.C.01"
         "OK.6-8.AP.M.01"
         "OK.3-5.AP.A.01"
-        "OK.3-5.AP.M.01")
+        "OK.3-5.AP.M.01")    
+    ("alg-surface-area-rect-prism"
+        "6.G.A.4"
+        "7.G.B.6"
+        "OK.PA.GM.2.1")
 
     ;data science
     ("ds-intro" 
