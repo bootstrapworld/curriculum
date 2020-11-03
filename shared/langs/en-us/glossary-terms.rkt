@@ -53,7 +53,7 @@ when it prints out the glossary for a particular unit
     ("editor" "software in which you can write and evaluate code")
     (("entry" "entries") "a single value in a table, belonging to a particular row and column")
     (("error message" "error messages") "information from the computer about errors in code")
-    (("edge" "edges") "Edges are the line segments where the faces of solid figures meet in each of the three dimensions.")
+    (("edge" "edges") "the line segments where the faces of solid figures meet in each of the three dimensions.")
     ("evaluate" "perform the computation in an expression, producing an answer")
     ("evaluates to" "the result of computing an expression")
     ("event-based programming" "a style of programming in which every functions are written to respond to mouse-clicks, keypresses, etc.")
