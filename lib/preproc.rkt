@@ -509,7 +509,10 @@
 (define (make-link f link-text #:include? [include? #f])
   (cond [(not include?)
 
-         (cond [(regexp-match #rx"://" f) (check-link f #:external? #t)]
+         (cond [(string=? f "")
+                (printf "WARNING: ~a: @link with no file argument\n\n"
+                        (errmessage-context))]
+               [(regexp-match #rx"://" f) (check-link f #:external? #t)]
                [else
                  (when (path-has-extension? f ".adoc")
                    (let ([f.html (path-replace-extension f ".html")]
