@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-09-09 # last modified
+LASTMOD=2020-11-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -913,6 +913,12 @@ function buildlessonplan() {
   export LESSONSUBDIR=$L
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
+
+  for subdir in *; do
+    if test -d "$subdir"; then
+      adjustproglangsubdirs "$subdir"
+    fi
+  done
 
   if test -f index.asciidoc -o -f index.html; then
     export PATHWAYROOTDIR="../../"
