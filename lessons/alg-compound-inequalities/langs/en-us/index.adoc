@@ -42,7 +42,14 @@
 
 | Key Points for the Facilitator
 |
-
+@ifproglang{wescheme}{
+* Role-playing can help students understand the job of `onscreen`?, and how it relates to `safe-left?` and `safe-right?`.
+}
+@ifproglang{pyret}{
+* Role-playing can help students understand the job of `is-onscreen`, and how it relates to `is-safe-left` and `is-safe-right`.
+}
+* If a student's `TARGET` and `DANGER` image seem to be "getting stuck" on the edge of the screen, the student may have to adjust the side Boundaaries depending on the size of their images.
+* The code for the Boundaary functions in the game is _exactly the same_ as in Sam the Butterfly.
 |===
 
 [.old-materials]
@@ -82,15 +89,16 @@ Both mathematics and programming have ways of combining - or _composing_ - inequ
 Have students complete @workbook-link{pages/and-or.adoc}.
 
 === Synthesize
-- Be really careful to check for understanding here. __Expressions using `and` only produce `true` if both of their sub-expressions are `true`. Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.__
+- Be really careful to check for understanding here. __Expresions using `and` only produce `true` if both of their sub-expressions are `true`. Expresions using `or` produce `true` if *either* of their sub-expressions are `true`.__
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
 @span{.title}{Strategies for English Language Learners}
 
-When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this unecessarily adds to cognitive load!
+When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
 |===
+
 
 == Protecting Sam on Both Sides @duration{30 minutes}
 
@@ -165,7 +173,7 @@ _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
 - How can `is-onscreen` check with both? +
 _It needs to talk to `is-safe-left` AND ``is-safe-right``_
 
-Have students complete @workbook-link{pages/onscreen.adoc}. When this function is entered into WeScheme, students should now see that Sam is protected on _both_ sides of the screen.
+Have students complete @workbook-link{pages/onscreen.adoc}. When this functions is entered into WeScheme, students should now see that Sam is protected on _both_ sides of the screen.
 }
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -179,7 +187,7 @@ What if we wanted to keep Sam safe on the top and bottom edges of the screen as 
 == Boundary Detection in the Game @duration{10 minutes}
 
 === Overview
-Students identify common patterns between 2-dimensional boundary detection and detecting whether a player is onscreen. They apply the same problem-solving and narrow mathematical concept from the previous lesson to a more general problem.
+Students identify common patterns between 2-dimensional Boundaary detection and detecting whether a player is onscreen. They apply the same problem-solving and narrow mathematical concept from the previous lesson to a more general problem.
 
 === Launch
 
@@ -195,7 +203,7 @@ _We want them to come back after they leave one side of the screen._
 _We can see it._
 
 - How can we make the computer understand when an image has moved off the screen? +
-_We can teach the computer to compare the image's @vocab{coordinates} to a numeric Boundary, just like we did with Sam the Butterfly!_
+_We can teach the computer to compare the image's @vocab{coordinates} to a numeric Boundaary, just like we did with Sam the Butterfly!_
 
 === Investigate
 
