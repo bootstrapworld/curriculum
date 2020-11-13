@@ -14,17 +14,19 @@
 
 | Student-Facing Lesson Goals
 |
+* I can use two or more inequalities together and describe the area they enclose.
 * I can explain to someone else what a Boolean is.
-* I can find solutions and non solutions to an inequality.
 
 | Materials
 |[.materials-links]
 
 @ifproglang{wescheme}{
 *  @link{https://docs.google.com/presentation/d/1jaMxaWc7XHlR7jf3RMPHU1mSsCetBmxp-52XiZq7HGo/edit?usp=sharing, Lesson slides}
+*  @link{https://www.wescheme.org/view?publicId=AR6ndpC5s9, Sam the Butterfly Starter File}
 }
 @ifproglang{pyret}{
 *  @link{https://docs.google.com/presentation/d/1akxlsl3LQkdtPwrbBarDFn8J96SvI-4l6qa4e1Ndrkg/edit?usp=sharing, Lesson slides}
+* @link{https://code.pyret.org/editor#share=1YSPPa4BLhOG7_qhWdqQ-cG1u3yUUi-zZ, Sam the Butterfly Starter File }
 }
 
 @material-links
@@ -46,6 +48,9 @@ For example, `safe-left?`, `onscreen?` are both functions that are asking if a c
 For example, `is-safe-left`, `is-onscreen` are both functions that are asking if a condition, such as an image being on the screen, is true or false.
 * Role-playing can help students understand the jobs of `is-safe-left` and `is-safe-right`.
 }
+
+@include{xtra/lang-prereq.adoc}
+
 |===
 
 [.old-materials]
@@ -86,10 +91,82 @@ Have students open to the @workbook-link{pages/booleans-intro.adoc} worksheet an
 - Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about they do, and then type it in to discover for themselves.
 - Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
 
+== Introducing Sam @duration{30 minutes}
+
+=== Overview
+Students are introduced to Sam the Butterfly: a simple activity in which they must write 1-step inequalities to detect when Sam has gone too far in one dimension.
+
+=== Launch
+Have students open the 
+@ifproglang{wescheme}{ @link{https://www.wescheme.org/view?publicId=AR6ndpC5s9, Sam The Butterfly starter file}  and click "Save." }
+@ifproglang{pyret}{ @link{https://code.pyret.org/editor#share=1YSPPa4BLhOG7_qhWdqQ-cG1u3yUUi-zZ, Sam The Butterfly starter file} and click "Save A Copy." }
+
+Have students turn to the @workbook-link{pages/sam-intro.adoc, Introducing Sam} and investigate the program with their partner. 
+
+__Let students figure out that they need to press "Run" to see what the program does, and that the arrow keys control Sam.__
+
+- *What is something you noticed about this program?* 
+_Sam can be moved with the arrow keys, the @vocab{coordinates} are displayed at the top of the screen, the coordinates are all in the 1st quadrant, etc._
+
+- *What do you see when Sam is at (0,0)?  Why is that?* 
+_You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
+
+- *How far can Sam go to the left and stay on the screen?*  
+_Up to, but not beyond, an x of -40._
+
+- *How could we write this as an @vocab{expression}?* 
+@math{x \geq -40}, or @math{x \gt -50}
+
+[.lesson-point]
+Every time Sam moves, we want to check and see if Sam is safe. 
+
+- There are three functions defined in this file. What are they?
+
+[.lesson-instruction]
+@ifproglang{wescheme}{
+*Note:* In this programming language, question marks are prounced "huh?". So `safe-left?` would be prounounced "safe left huh?" This can be a source of some amusement for students!
+}
+
+*Optional: For extra scaffolding...*
+
+- *What _should_ our left-checking function do?*  
+_Check to see if x is greater than -50_
+
+- *What _should_ our right-checking function do?*
+_Check to see if x is less than 490_
+
+- *What should `onscreen?` do?* 
+_Answers may vary, let students drive the discussion, and don't give away the answer_
+
+=== Investigate
+With their partners, students complete @workbook-link{pages/left-and-right.adoc}.  Once finished, students can fix the corresponding functions in their Sam the Butterly file, and test them out.
+
+@ifproglang{wescheme}{
+Students will notice that fixing `safe-left?` keeps Sam from disappearing off the left, but fixing `safe-right?` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
+}
+
+@ifproglang{pyret}{
+Students will notice that fixing `is-safe-left` keeps Sam from disappearing off the left, but fixing `is-safe-right` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
+}
+
+- Recruit three new student volunteers to roleplay those same functions, which have now been _corrected_. Make sure students provide correct answers, testing both `true` and `false` conditions using coordinates where Sam is onscreen and offscreen.
+
 === Common Misconceptions
-- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
+- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_, such as when Sam is offscreen.
+- Push students to think carefully about corner-cases, such as when Sam is _exactly_ at -50 or 690.
+
+=== Synthesize
+@ifproglang{wescheme}{
+- Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. Give them 1 minute to read the contract and code, as written in the program.
+- For each of them, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "(safe-left? 20)!", "(safe-right? -100)!") *Note:* Do not ask `onscreen?` to roleplay beyond their contract! They'll get involved in the next lesson... 
+}
+@ifproglang{pyret}{
+- Recruit three student volunteers to roleplay the functions `is-safe-left`, `is-safe-right` and `is-onscreen`. 
+- For each of them, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "is-safe-left(20)!", "is-safe-right(-100)!") *Do not ask `is-onscreen` to roleplay beyond their contract!* 
+}
 
 == Additional Exercises
+- @exercise-link{pages/keeping-ninjacat-in-the-game.adoc}
 
 - @exercise-link{pages/boolean-coe-to-code1.adoc} 
 
