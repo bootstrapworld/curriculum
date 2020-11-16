@@ -89,18 +89,18 @@
   "Calculate surface area and volume of three-dimensional figures."
  )
  ("OK.PA.GM.2.1"
-  "Calculate the surface area of a rectangular prism using decomposition or nets. Use appropriate measurements such as cm2."
+  "Calculate the surface area of a rectangular prism using decomposition or nets. Use appropriate units of measure, such as square centimeters."
  )
  ("OK.PA.GM.2.2"
-  "Calculate the surface area of a cylinder, in terms of pi and using approximations for pi, using decomposition or nets. Use appropriate measurements such as cm2."
+  "Calculate the surface area of a cylinder, in terms of pi and using approximations for pi, using decomposition or nets. Use appropriate units of measure, such as square centimeters."
  )
  ("OK.PA.GM.2.3"
   "Develop and use the formulas V = lwh and V = Bh to determine the volume of rectangular prisms. Justify why base area (B) and height (h) are
-multiplied to find the volume of a rectangular prism. Use appropriate measurements such as cm3."
+  multiplied to find the volume of a rectangular prism. Use appropriate measurements such as cubic centimeters."
  )
  ("OK.PA.GM.2.4"
-  "Develop and use the formulas V = pi * r2 * h and V = Bh to determine the volume of right cylinders, in terms of pi and using approximations for pi.
-Justify why base area (B) and height (h) are multiplied to find the volume of a right cylinder. Use appropriate measurements such as cm3."
+  "Develop and use the formulas V = pi * r^2 * h and V = Bh to determine the volume of right cylinders, in terms of pi and using approximations for pi.
+Justify why base area (B) and height (h) are multiplied to find the volume of a right cylinder. Use appropriate measurements such as cubic centimeters."
  )
  ("OK.PA.D.1"
   "Display and interpret data in a variety of ways, including using scatterplots and approximate lines of best fit. Use line of best fit and average rate of change to make predictions and draw conclusions about data."
