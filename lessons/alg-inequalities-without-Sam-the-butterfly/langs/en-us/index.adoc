@@ -1,6 +1,6 @@
 = Inequalities - Without Sam the Butterfly
 
-@lesson-description{Students learn to compose inequalities using the concepts of union and intersection, and solve problems using compound inequalities. Finally, they apply what they've learned to set screen boundaries in their game.}
+@lesson-description{Students learn to identify solutions and non-solutions of inequalities. They then learn to compose compound inequalities using the concepts of union and intersection.}
 
 [@lesson-intro-table]
 |===
@@ -19,15 +19,15 @@
 * I can find solutions and non solutions to an inequality.
 * I can use two or more inequalities together and describe the area they enclose.
 * I can tell someone else how two or more @vocab{function}s work together.
-* I can make adjustments to a program based on how the program behaves.
 
 | Materials
 |[.materials-links]
 
 @ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1y9X1iLjGKrpu2SNYjbL_oJWrMycvwwaZQB-PsIQW3rw/, Lesson Slides}
+* Lesson Slides}
 }
-@ifproglang{pyret}{Lesson slides template (@link{https://docs.google.com/presentation/d/1_PdCxPiY7j8X5FGyJXVIo1eNJqsCrNIMn9_WgocSblM/, Lesson Slides}
+@ifproglang{pyret}{
+* Lesson Slides}
 }
 
 @material-links
@@ -46,7 +46,7 @@
 |* A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but unlike the others there are only two values: `true` and `false`. While simple to explain, this different behavior can be confusing for some students.
 * Functions that produce Booleans are typically questions, so the names of the functions in this lesson read like questions.
 @ifproglang{wescheme}{
-For example, `odd?`, `even?` are both functions that are asking if a condition, such as a number being odd, is true or false.
+For example, `odd?`, `even?` are both functions that are asking if a condition, such as a number being odd or even, is true or false.
 * Role-playing can help students understand the jobs of `odd?` and `even?`. 
 }
 @ifproglang{pyret}{
@@ -56,8 +56,48 @@ For example, `is-odd`, `is-even` are both functions that are asking if a conditi
 
 |===
 
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit6/index.html, prior unit-based version}
+== Introducing Booleans 
+
+=== Overview
+Students discover Booleans.
+
+=== Launch
+Students should have their workbook, pencil, and be logged into the
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File} }
+
+=== Investigate
+[.lesson-instruction]
+- Explore the five functions in this starter file.  They produce a new data type called @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
+- Turn to Boolean Intro and write down 
+== Introducing Inequalities
+
+Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
+
+- @show{(sexp->coe '(+ 1 2))}
+- @show{(sexp->coe '(- 4 5))}
+- @show{(sexp->coe '(* 8 0))}
+
+Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they means, what they will evaluate to, and what the code would look like.
+
+- @show{(sexp->coe '(> 1 2))}
+- @show{(sexp->coe '(< 4 5))}
+- @show{(sexp->coe '(= 8 0))}
+
+Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the output means?
+
+Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new datatype__, called a @vocab{Boolean}. Booleans are the answers to any yes-or-no question (for example: "Is five greater than two?", "Did a character hit a wall?", etc.)
+
+=== Investigate
+[.lesson-instruction]
+Have students open to the @workbook-link{pages/booleans-intro.adoc} worksheet and complete with a partner.
+
+=== Synthesize
+- Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about they do, and then type it in to discover for themselves.
+- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
+
+=== Common Misconceptions
+- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
 
 == Introducing Booleans @duration{15 minutes}
 
@@ -96,6 +136,7 @@ Have students open to the @workbook-link{pages/booleans-intro.adoc} worksheet an
 
 === Common Misconceptions
 - Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
+
 
 == Compound Inequalities @duration{10 minutes}
 
