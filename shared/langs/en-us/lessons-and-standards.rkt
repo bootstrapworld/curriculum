@@ -99,8 +99,7 @@
         ; "BS-DR.3"
         "HSF.IF.A.2"
         "OK.PA.A.4.3")
-    ("alg-order-of-operations"
-        "OK.7.A.4" 
+    ("alg-order-of-operations" 
         "OK.PA.A.3"
         "OK.A1.A.3"
         "HSA.SSE.A.2"

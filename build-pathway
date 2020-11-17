@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-09-09 # last modified
+LASTMOD=2020-11-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -501,7 +501,7 @@ function resolveabbrevs() {
     -e 's/&#8656;/\&lt;=/g' \
     -e 's/&#8594;/-\&gt;/g' \
     \
-    -e 's/^\(<div id="preamble\)">/\1_disabled">/' \
+    -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
     $f
   if test "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
@@ -694,10 +694,9 @@ function processadoc() {
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
             removecodetags $TMPHTML
-            ASPECT="--margin-right $PDFMARGIN --margin-bottom $PDFMARGIN --margin-left $PDFMARGIN"
+            ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              ASPECT="--margin-top $PDFMARGIN --margin-right 25mm --margin-bottom $PDFMARGIN --margin-left 25mm"
-              ASPECT="-O Landscape $ASPECT"
+              ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
             fi
             JAVASCRIPTDELAY="--javascript-delay 4000"
 
@@ -914,6 +913,12 @@ function buildlessonplan() {
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
 
+  for subdir in *; do
+    if test -d "$subdir"; then
+      adjustproglangsubdirs "$subdir"
+    fi
+  done
+
   if test -f index.asciidoc -o -f index.html; then
     export PATHWAYROOTDIR="../../"
     # there should be only one?
@@ -951,10 +956,8 @@ function buildlessonplan() {
           cp index.shtml $TMPHTML
           removecodetags $TMPHTML
 
-          ASPECT=
-
           JAVASCRIPTDELAY="--javascript-delay 4000"
-          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
       fi
     fi
