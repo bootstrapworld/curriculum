@@ -27,8 +27,10 @@
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
-(define *max-wescheme-example-side-length* 30)
-(define *max-pyret-example-side-length* 30)
+(define *max-line-length* 80)
+;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
+;(define *max-wescheme-example-side-length* 30)
+;(define *max-pyret-example-side-length* 30)
 
 (define *funname* #f)
 
@@ -249,7 +251,10 @@
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
           (let ([body-s (expr-to-string body)])
-            (if (> (string-length body-s) *max-wescheme-example-side-length*)
+            (if (> (+ (string-length body-s) 
+                      (string-length (expr-to-string funname))
+                      (string-length (list-to-string args)))
+                    *max-line-length*)
                 (string-append (write-clear)
                   (encoded-ans "" "MMMMMMMMM" #f)
                   (encoded-ans ".recipe_example_body_long"
@@ -287,7 +292,10 @@
         (write-large ")")
         ; wrap the `is ...` code in its own element, so that wrapping works properly
 
-        (if (> (string-length body) *max-pyret-example-side-length*)
+        (if (> (+ (string-length body) 
+                  (string-length funname) 
+                  (string-length args))
+                *max-line-length*)
             (string-append (write-clear)
               (encoded-ans "" "MMMMMMMMM" #f)
               (encoded-ans ".recipe_example_body_long"

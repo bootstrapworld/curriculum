@@ -10,6 +10,9 @@ html, body {
   font-family:    'Lato', Arial, Helvetica, sans-serif;
   color:          #75328A;
   -webkit-font-smoothing: antialiased;
+  break-inside:   auto !important;
+  page-break-inside: auto !important;
+  display:        block !important;
 }
 
 p       { margin: 10px 0px; font-size: inherit; }
@@ -64,7 +67,7 @@ tr th.tableblock {
 
 #header, #content, #footer {margin: 0 !important; max-width: 9.5in;}
 .landscape #header, .landscape #content, .landscape #footer {
-  max-width: 100em !important;
+  max-width: 130em !important;
 }
 
 /* Warn the user the Save-to-Drive is broken on Safari */
@@ -92,7 +95,7 @@ tr th.tableblock {
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
-.glossary   { float: left; margin-bottom: 20px; }
+.glossary   { margin-bottom: 20px; }
 .glossary * { display: inline; }
 .glossary .title {
   display:          block;
@@ -123,6 +126,7 @@ tr th.tableblock {
   position:         absolute;
   top:              50%;
   left:             50%;
+  text-align:       center;
   opacity:          0;
   transition:       all 0.3s;
   transform:        translateX(-50%) translateY(-50%);
@@ -200,12 +204,10 @@ tr th.tableblock {
 .LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
 
 /* The summary table at the top of each lesson */
-#preamble table, #preamble td, #preamble th { border: 1px solid #7747a5; }
-#preamble ul p { margin: 0px; }
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
-/* Styling for the Materials section of the preamble */
+/* Styling for the Materials section of the Lesson Summary */
 .materials-links { 
   max-height: 200pt; 
   overflow: hidden; 
@@ -269,8 +271,9 @@ tr th.tableblock {
 .lesson-section-1, .lesson-section-1+.lesson-section-1 { 
   clear:              both; 
   border-top:         solid 3px black; 
+  display:            block;
 }
-.lesson-section-2 { float: left; clear: both; width: 100%; margin: 10px 0px;}
+.lesson-section-2 { clear: both; width: 100%; margin: 20px 0px;}
 .lesson-section-2 h3 {
   font-size:          1.5rem;
   font-style:         italic;
@@ -296,6 +299,7 @@ tr th.tableblock {
   border-style:       solid;
   margin:             2ex;
   border-width:       2px 0px;
+  clear:              both;
 }
 .lesson-point p { margin: 0ex 1ex; }
 
@@ -305,6 +309,7 @@ tr th.tableblock {
   border:             solid 5px !important;
   width:              75%;
   margin:             15px auto;
+  display:            block;
 }
 .strategy-box { border-color: #1a73b5 !important; }
 .notice-box   { border-color: #7747a5 !important; }
@@ -594,24 +599,56 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   }
 }
 
+
 /************************************************************************************
  * PRINT MEDIA
  */
-@page  {
+@page {
     size:             8.5in 11in;   /* normal letter size paper */
-    margin:           0.5in;        /* half-inch margins */
-    orphans:          0; widows: 0; /* never break a paragraph across pages */
+    margin:           0.5in 0.5in 2in 0.5in !important; /* make room for page number */
+    orphans:          0; /* never break a paragraph across pages */
+    widows:           0; 
 }
+
 @media print {
+  div#body{ position: static; } /* page-break fails on absolute positioning */
+
+  .section-link { display: none; }
+
+  .LessonPlan .lessonSummary { 
+    break-after:  page !important; 
+    page-break-after:  always !important; 
+  }
+  .LessonPlan .lesson-section-1 { 
+    break-before: page !important; 
+    page-break-before: always !important; 
+  }
+  .lesson-section-2 p, .notice-box, .strategy-box, .circleevalsexp, .image,
+  img, .MathJax, #_additional_exercises + .sectionbody { 
+    break-inside: avoid !important; page-break-inside: avoid !important;
+  }
+  h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
+  h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
+  table { break-inside: auto; }
+  tr td { page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: auto; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+
   div#body, body { 
     color:            black; 
     top:              0px;
     left:             0px;
     width:            100%;
+    padding:          0px;
+    margin:           0px;
+    display:          block !important;
   }
 
   /* we need a right-hand padding to eliminate some weird clipping behavior */
-  #header, #content {margin: 0 2em !important; padding: 0px; padding-right: 20px;}
+  #header, #content {margin: 0px !important; padding: 0px; padding-right: 20px;}
+
+  /* The summary table at the top of each lesson */
+  .left-header tr td:nth-child(1) { background-color: lightgray; }
 
   ::-webkit-scrollbar {
     width:            0px;
@@ -630,15 +667,13 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 
   #savetodrive-div, .acknowledgment, .copyright, #footer, #outOfDate, 
   .web-page-only { 
-   display: none !important; visibility: hidden;
+   display: none !important; visibility: hidden; float: none;
   }
 
   .recipe_title p { padding: 3px 5px; }
   .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
   .designRecipeLayout .studentAnswer::after { font-size: .8rem; }
 
-  /* Force preamble to always be on its own page */
-  #preamble { page-break-after: always; }
   /* Workbook pages should have an inverted header, with a little space below */
   :not(body.LessonPlan) #header { 
     background:       black; 
@@ -646,9 +681,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     margin-bottom:    5px !important;
   }
 
-  /* More padding between sections, and don't ever break a section across pages */
+  /* More padding between sections */
   .lesson-section-1 { margin-bottom: 20px; }
-  .lesson-section-1, .lesson-section-2, .sectionbody { page-break-inside: avoid;}
 
   /* bold borders between sections */
   .sect1+.sect1 { border-top: solid 3px black; }
