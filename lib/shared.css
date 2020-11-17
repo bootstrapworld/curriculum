@@ -611,6 +611,10 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 @media print {
+  div#body{ position: static; } /* page-break fails on absolute positioning */
+
+  .section-link { display: none; }
+
   .LessonPlan .lessonSummary { 
     break-after:  page !important; 
     page-break-after:  always !important; 
