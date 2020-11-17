@@ -232,25 +232,21 @@ Practice creating Circles of Evaluation using the common operators (`+`, `-`, `*
 
 *Circles of Evaluation _help us get the correct answer_*
 
-Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "any subtraction can be transformed to a negative addition." For example, @math{1 - 2} can be transformed to @math{1 + (-2)}.
+Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @math{a + b} can always be written as @math{b + a}." For example, @math{1 + 2} can be transformed to @math{2 + 1}.
 
-Suppose someone tells you that @math{1 - 2 * 3 + 4} can be rewritten as @math{1 + (-2) * 3 + 4}. These two expressions will definitely give us the same answer, but this transformation is actually _incorrect_! It doesn't use the negative addition rule at all! *Take a moment to think: what's the problem?*
+Suppose another student tells you that @math{1 + 2 * 3} can be rewritten as @math{2 + 1 * 3}. This is obviously wrong, but __why__? *Take a moment to think: what's the problem?*
 
 We can use the Circles of Evaluation to figure it out!
 
-The first Circle is just the original expression. The multiplication happens first, so let's see how multiplication changes this circle:
+The first Circle is just the original expression. The second expression represents what the (incorrect) commutativity transformation gives us:
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-| @show{(sexp->coe '(+ (- 1 (* 2 3)) 4))}
-| __multiplication__ &rarr;
-| @show{(sexp->coe '(+ (- 1 6) 4))}
+| @show{(sexp->coe '(+ 1 (* 2 3)))}
+| __commutativity__ &rarr;
+| @show{(sexp->coe '(2 (* 1 3)))}
 |===
 
-As you can see, replacing the subtraction with a negative addition happens to the _result_ of the multiplication. We can't actually change the `2` into a `-2`, because it isn't actually being subtracted from `1`!
-
-Sure, we got the same answer - but that doesn't mean the way we got it was correct. If all that mattered was getting the right answer, we could just as easily have replaced the whole expression with @math{5 - 6}. And that is _definitely_ not a correct transformation!
-
-Any time you make a transformation in math (replacing @math{10 - 2} with @math{8} because of subtraction, or replacing @math{2 + 6} with @math{6 + 2} because of commutativity), you need to make sure the transformation is _correct_. The Circles of Evaluation help us see these transformation _visually_, rather than forcing us to keep them in our heads.
+In this case, the student __failed to see the structure__, viewing the term to the right of the @math{+} sign as @math{2} instead of @math{2 * 3}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
