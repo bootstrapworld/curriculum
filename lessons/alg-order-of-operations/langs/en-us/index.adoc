@@ -56,7 +56,7 @@
 
 | Key Points For The Facilitator
 |
-* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error message}s with interest to demonstrate to students that the messages are a helpful tool.
+* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
 * After the first few exercises in creating Circles of Evaluation, ask students whether they create them from the 'inside-out' (drawing the inner circles first) or from the 'outside-in.'  After they've given their responses, have them try using the OTHER way!
 * Up until now, we didn't have a visual spatial model for explaining the order of operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMDAS, etc)
 * For a memory hook, model the "bug that crawls through the circle" explanation.
@@ -143,10 +143,10 @@ Students are given a challenging expression that exposes common misconceptions a
 
 Humans also use verbs like "throw", "run", "build" and "jump" to describe operations on these nouns. Mathematics has @vocab{functions} - or "operations" - like addition and subtraction, which are operations performed on values. Just as you can "*spread* _mustard_ on _bread_", a person can also "*add* _four_ and _five_".
 
-A mathematical expression is like a sentence: it’s an instruction for doing something. The expression 4+5 tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @math{4 + 5} evaluates to 9.
+A mathematical expression is like a sentence: it’s an instruction for doing something. The expression @math{4 + 5} tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @math{4 + 5} evaluates to 9.
 
 @span{.right}{@image{images/pemdas.png, "", 300, ""}}
-Sometimes, we need multiple expressions to accomplish a task, and it will matter in which order they come. For exmple, if you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. The order of functions matters in mathematics, too.
+Sometimes, we need multiple expressions to accomplish a task, and it will matter in which order they come. For example, if you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. The order of functions matters in mathematics, too.
 
 Mathematicians didn’t always agree on the order of operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @math{4 + 2 − 1}), we read the expression from left to right, applying the operations in the order in which they appear.
 
@@ -166,10 +166,10 @@ But this set of rules is brittle, and doesn't always make it clear what we need 
 
 Order of Operations mneumonic devices like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
 
-Instead of a rule for computing answers, let's start by diagramming the math itself! We can _draw the structure_ of this grammer in mathematics using something called the *Circles of Evaluation*. The rules are simple:
+Instead of a rule for computing answers, let's start by diagramming the math itself! We can _draw the structure_ of this grammar in mathematics using something called the *Circles of Evaluation*. The rules are simple:
 
 [.lesson-point]
-1) Every Circle must have one - and only one! - function, written at the top
+1) Every Circle must have one - and only one! - function, written at the top.
 
 That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a Circle.
 
@@ -182,7 +182,7 @@ If we want to draw the Circle of Evaluation for @math{6 \div 3}, the division fu
 @show{(sexp->coe '(/ 6 3))}
 @span{.clear}{}
 
-What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do divide 6 by that circle?
+What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do we divide 6 by that circle?
 
 *Circles can contain other Circles*
 
@@ -243,7 +243,7 @@ The first Circle is just the original expression. The second expression represen
 |===
 | @show{(sexp->coe '(+ 1 (* 2 3)))}
 | __commutativity__ &rarr;
-| @show{(sexp->coe '(2 (* 1 3)))}
+| @show{(sexp->coe '(+ 2 (* 1 3)))}
 |===
 
 In this case, the student __failed to see the structure__, viewing the term to the right of the @math{+} sign as @math{2} instead of @math{2 * 3}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
