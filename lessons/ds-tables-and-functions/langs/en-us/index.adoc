@@ -1,0 +1,138 @@
+= Connecting Tables and Functions
+
+@lesson-description{Students describe Tables with functions, and generate Tables from functions.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* define linear functions to match a given table
+
+| Student-facing Lesson Goals
+|
+
+* Given a table, I can define a function to match
+
+| Materials
+|[.materials-links]
+* Lesson Slides
+* @link{https://code.pyret.org/editor#share=XYZ, Graphing Starter File}
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Graphing Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=XYZ, open a new one}
+
+| Supplemental Resources
+| In a more programming-focused course, or if appropriate for your learning goals, students can learn to write piecewise functions in the @link{../ds-if-expressions/index.shtml, If-Expressions} lesson. 
+
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Summarizing Tables with Functions @duration{20 minutes}
+
+=== Overview
+Students explore linear functions as a way of _summarizing_ the information in Tables.
+
+=== Launch
+Take a look at the following Table:
+
+[.pyret-table,cols="^.^1,^.^1",options="header"]
+|===
+| x | y
+| 0 | 0
+| 1 | 1
+| 2 | 4
+| 3 | 6
+| ? | ?
+|===
+
+* What do you *Notice* about this table?
+* What do you *Wonder*?
+* What are the values in the @vocab{header row}?
+* Which column is the @vocab{identifier column}?
+* What do you think the values in the last row will be?
+
+For tables like this - where the rows follow a precise pattern - a @vocab{function} can be used to summarize the entire Table! For this table in particular, that function would be:
+
+```
+# f :: (x :: Number) -> Number
+fun f(x): 2 * x end
+```
+
+If we apply the function to the x-value in each Row, it produces the y-value! Instead of writing endless rows repeating the pattern, we can just declare the pattern itself using the function.
+
+=== Investigate
+[.lesson-instruction]
+- Complete @workbook-link{match-functions-tables.adoc}.
+- Complete @workbook-link{define-functions-tables.adoc}.
+
+=== Synthesize
+For Tables that fit a linear pattern like this, a function can be a much shorter way of describing all the Rows! In fact, a one-line function can summarize an _infinite_ number of Rows.
+
+
+== Building Tables with Functions @duration{15 minutes}
+
+=== Overview
+Students learn how to _build_ Tables with linear functions, and that not all Tables can be generated from a function.
+
+=== Launch
+We've provided a special function `make-table` that takes in a starting point, an ending point, the size of the steps between them, and a function. It produces a __new table__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
+
+```
+fun f(x): 2 * x end
+# make a table with xs going from 0-10 in steps of 2
+make-table(0, 10, 2, f)
+```
+
+will produce:
+[.pyret-table,cols="^.^1,^.^1",options="header"]
+|===
+|  x |  y
+|  0 |  0
+|  2 |  4
+|  4 |  8
+|  6 | 12
+|  8 | 16
+| 10 | 20
+|===
+
+[.lesson-instruction]
+* How could we change this code to make a table for *all* the points between 0 and 10, instead of skipping by 2? 
+* How could we change this code to make a table for all the points between 20 and 200, skipping by 10? 
+* How could we change this code to make a table for a different function altogether? 
+* Open the Table and Graphs Starter File, and try defining different functions and using them to build Tables.
+
+=== Investigate
+[.lesson-instruction]
+* @workbook-link{building-tables-from-functions.adoc, Match the code to the Table} it will generate.
+* Can every Table be built from a function?
+
+_Any_ Table constructed from a function will have points that precisely follow the pattern. But not every Table follows an exact pattern! In fact, most Tables in Data Science __don't__ follow an exact pattern! Can you tell which is which?
+
+[.lesson-instruction]
+Open @workbook-link{not-all-tables.adoc}. Which of these tables can be summarized by a function? Which ones can't?
+
+=== Synthesize
+Some things in life run like clockwork: 
+* A car traveling at 50mph will take two hours to travel 50 miles
+* If someone can make a bouqet of flowers every 15 minutes, you know it will take them 45 minutes to make three of them.
+
+For these things, functions perfectly model what happens in reality. But...reality usually doesn't work quite so neatly.
+
+[.lesson-point]
+Data Science is about making sense of life's messiness.
+
+Outside of a math book, cars don't _actually_ move at exactly 50mph. Maybe the driver hits the gas at one point, or slows down for a minute to avoid a pothole. A worker at a flower shop make take a minute to use the bathroom! Mathematical functions can give us a good _approximation_ for how the world works, but they aren't an exact fit.
+
+We don't use Data Science to find a perfect model for real life. We use it to find the __closest model__ we can to fit the messy data.
+
+
+== Additional Exercises:
+

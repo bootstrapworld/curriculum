@@ -1,0 +1,130 @@
+= Connecting Tables and Graphs
+
+@lesson-description{Students describe Tables with graphs, and generate graphs from linear functions.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* define linear functions to match a given graph
+
+| Student-facing Lesson Goals
+|
+
+* Given a table, I can define a function to match
+* I can tell the difference between linear and non-linear functions
+
+| Materials
+|[.materials-links]
+* Lesson Slides
+* @link{https://code.pyret.org/editor#share=XYZ, Graphing Starter File}
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Graphing Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=XYZ, open a new one}
+
+| Supplemental Resources
+| In a more programming-focused course, or if appropriate for your learning goals, students can learn to write piecewise functions in the @link{../ds-if-expressions/index.shtml, If-Expressions} lesson. 
+
+| Key Points for the Facilitator
+| This lesson is designed to feel almost _eerily_ similar to @link{../ds-tables-and-functions/index.shtml, Tables and Functions}. __This is entirely purposeful__. Teachers should not be afraid make explicit references to this, driving home the fact that Tables, Functions and Graphs are all connected.
+
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Describing Tables with Graphs @duration{20 minutes}
+
+=== Overview
+Students consider graphs as a way of _describing_ the information in certain Tables
+
+=== Launch
+Take a look at the following Table and Graph:
+
+[cols="^.^1a,^.^1a"]
+|===
+|
+
+[.pyret-table.first-table,cols="1,1",options="header"]
+!===
+! x ! y
+! 0 ! 0
+! 1 ! 1
+! 2 ! 4
+! 3 ! 6
+! ? ! ?
+!===
+| @image{images/2x.png}
+
+|===
+
+* What do you *Notice*?
+* What do you *Wonder*?
+
+There's a definite connection between the graph and the table. Each x/y-point on the graph represents a row in the Table.
+
+For graphs like this - where the dots follow a precise pattern - a @vocab{function} can be used to summarize the entire graph! For this graph in particular, that function would be:
+
+```
+# f :: (x :: Number) -> Number
+fun f(x): 2 * x end
+```
+
+If we apply this linear function to any point on the x-axis, it produces the y-value that falls on the line. Instead of drawing endless points repeating the same pattern, we can just declare the pattern itself using the function.
+
+=== Investigate
+[.lesson-instruction]
+- Complete @workbook-link{match-functions-graphs.adoc}
+- TODO(Emmanuel): Match all three representations in Desmos cards
+- Complete @workbook-link{define-functions-graphs.adoc}
+
+=== Synthesize
+For graphs that fit a pattern like this, a function can be a much shorter way of describing all of the points on the graph! In fact, a one-line function can summarize an _infinite_ number of points.
+
+
+== Not all Graphs come from Functions @duration{15 minutes}
+
+=== Overview
+Students learn how to _build_ graphs with functions, and that not all graphs can be generated from linear functions.
+
+=== Launch
+We've provided a special function `make-graph` that takes in a starting point, an ending point, the size of the steps between them, and a function. It produces a __graph__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
+
+```
+fun f(x): 0.5 * x end
+# make a table with xs going from 0-10 in steps of 2
+make-graph(0, 10, 2, f)
+```
+
+will produce:
+
+@image{images/0.5x.png}
+
+[.lesson-instruction]
+* How could we change this code to make a graph for *all* the points between 0 and 10, instead of skipping by 2? 
+* How could we change this code to make a graph for all the points between 20 and 200, skipping by 10? 
+* How could we change this code to make a graph for a different function altogether? 
+* Open the Table and Graphs Starter File, and try defining different functions and using them to build Tables.
+
+=== Investigate
+[.lesson-instruction]
+* Complete @workbook-link{define-functions-graphs.adoc}.
+* What are some graphs that can't be made from linear functions?
+
+_Any_ graph constructed from a linear function will have points that precisely follow a straight-line pattern. But not every graph follows a pattern like that! Can you tell which is which?
+
+[.lesson-instruction]
+Open @workbook-link{linear-or-not.adoc}. Which of these tables can be summarized by a linear function? Which ones can't?
+
+=== Synthesize
+TODO(Emmanuel)
+
+
+== Additional Exercises:
+
