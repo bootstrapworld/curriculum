@@ -4,16 +4,18 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{alg-simple-inequalities}
+@prereqs-stds{alg-inequalities}
 
 | Lesson Goals
 | Students will be able to:
 
+* Understand how the conjunctions `and` and `or` differ.
 * Describe how functions can work together.
 * Describe the solution set of a compound inequality
 
 | Student-Facing Lesson Goals
 |
+* I can explain the difference between how we `and` and `or` in programming.
 * I can use two or more inequalities together and describe the area they enclose.
 * I can tell someone else how two or more @vocab{function}s work together.
 
@@ -24,7 +26,7 @@
 * @link{https://www.wescheme.org/view?publicId=38WrQ0zlCn, Compound Inequalities Starter File} 
 * Lesson Slides
 }
-*@ifproglang{pyret}{
+@ifproglang{pyret}{
 * @link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File.} 
 * Lesson Slides
 }
@@ -44,7 +46,7 @@
 
 |===
 
-== Compound Inequalities @duration{10 minutes}
+== Introduction to `and`, `or`, and Compound Inequalities
 
 === Overview
 Students consider the need to _compose_ inequalities, and think about how to write them.
@@ -71,10 +73,10 @@ Guide students through other examples of `and` and `or` with various statements,
 === Investigate
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
 
-Have students complete @workbook-link{pages/and-or.adoc}.
+Have students complete @exercise-link{pages/boolean-coe-to-code1.adoc} and/or @workbook-link{pages/and-or.adoc}.
 
 === Synthesize
-- Be really careful to check for understanding here. __Expresions using `and` only produce `true` if both of their sub-expressions are `true`. Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.__
+Be really careful to check for understanding here. __Expressions using `and` only produce `true` if both of their sub-expressions are `true`. Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.__
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -84,15 +86,16 @@ Have students complete @workbook-link{pages/and-or.adoc}.
 When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
 |===
 
-== Exploring Compuound Inequalities
+== Exploring Solutions and Non-Solutions of Compound Inequalities
 
 === Launch
-Have students identify 4 solutions and 4 non-solutions for each of the following inequalities and think discuss what they're graphs would look like.
+Have students identify 4 solutions and 4 non-solutions for each of the following inequalities.
 
 * x > 5 
 * x < 15 
 
 What about the solution set of x > 5 `and` x < 15?  What numbers make both of these inequality expressions true?
+
 How would that be different from x > 5 `or` x < 15?  What numbers make at least one of these inequality expressions true?
 
 === Investigate
@@ -104,24 +107,15 @@ Have students log in to the
 }
 @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File} 
 }
-read the carefully and click run to see the graphs they've just considered.
+read the code carefully and click run to see the graphs they've just considered.
 
-- Turn to the Explore the five functions in this starter file.  They all produce @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
- 
-[.lesson-point]
- A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but unlike the others there are only two values: `true` and `false`.
-
-[.lesson-instruction]
-- Turn to @exercise-link{pages/pyret/boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function _true_ and inputs that will make each function _false_.
-
-- Additional practice with Booleans can be found at @link{../ds-pyret-intro/pages/booleans.shtml}
+- Turn to @exercise-link{alg-inequalities-2/langs/en-us/pyret/compound-inequalities.adoc, Compound Inequalities} and explore the functions using the @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File}
 
 === Synthesize
-- Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
-- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
+- How did the graphs of intersections and unions differ?
 
 
 == Additional Exercises:
-- @exercise-link{pages/boolean-coe-to-code1.adoc} 
+
 - @exercise-link{pages/boolean-coe-to-code2.adoc} 
 
