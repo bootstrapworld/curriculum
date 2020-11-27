@@ -1,6 +1,6 @@
-= Inequalities - Without Sam the Butterfly
+= Simple Inequalities
 
-@lesson-description{Students learn to identify solutions and non-solutions of inequalities. They then learn to compose compound inequalities using the concepts of union and intersection.}
+@lesson-description{Students discover the `Boolean` datatype. They then learn to identify solutions and non-solutions of inequalities.}
 
 [@lesson-intro-table]
 |===
@@ -8,26 +8,27 @@
 
 | Lesson Goals
 | Students will be able to:
+
 * Explain the 'Boolean' datatype
+
 * Describe the solution set of a simple inequality
-* Describe how functions can work together.
-* Describe the solution set of a compound inequality
 
 | Student-Facing Lesson Goals
 |
 * I can explain to someone else what a Boolean is.
 * I can find solutions and non solutions to an inequality.
-* I can use two or more inequalities together and describe the area they enclose.
-* I can tell someone else how two or more @vocab{function}s work together.
 
 | Materials
 |[.materials-links]
 
 @ifproglang{wescheme}{
 * @link{https://www.wescheme.org/view?publicId=2vzXJZoC1B, Boolean Starter File} 
+* @link{https://www.wescheme.org/view?publicId=eVMjb9omtP, Simple Inequalities Starter File} 
 * Lesson Slides
 }
-*@ifproglang{pyret}{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File} 
+@ifproglang{pyret}{
+* @link{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File} 
+* @link{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.} 
 * Lesson Slides
 }
 
@@ -42,51 +43,25 @@
 |
 * @link{https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0, Booleans Review - Quizizz}
 
-
 | Key Points for the Facilitator
 |* A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but, unlike the others, there are only two values: `true` and `false`. While simple to explain, this different behavior can be confusing for some students.
-* Functions that produce Booleans are typically questions, so the names of the functions in this lesson read like questions.
+* Functions that produce Booleans are typically questions, so the names of the functions in this lesson read like questions. 
 @ifproglang{wescheme}{
-For example, `odd?`, `even?` are both functions that are asking if a condition, such as a number being odd or even, is true or false.
-* Role-playing can help students understand the jobs of `odd?` and `even?`. 
-}
+* For example, `odd?`, `even?` are both functions that are asking if a condition, such as a number being odd or even, is true or false.
+* Role-playing can help students understand the jobs of `odd?` and `even?`. }
+
 @ifproglang{pyret}{
-For example, `is-odd`, `is-even` are both functions that are asking if a condition, such as a number being odd, is true or false.
+* For example, `is-odd`, `is-even` are both functions that are asking if a condition, such as a number being odd, is true or false.
 * Role-playing can help students understand the jobs of `is-odd` and `is-even`.
 }
-
 |===
 
-== Introducing Booleans 
-
-
-=== Overview
-Students discover Booleans.
-
-=== Launch
-Students should have their workbook, pencil, and be logged into the
-@ifproglang{wescheme}{ @link{https://www.wescheme.org/openEditor?publicId=jvWT8h7pLc, Boolean Starter File.} 
-}
-@ifproglang{pyret}{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File.} }
-
-=== Investigate
-[.lesson-instruction]
-- Explore the five functions in this starter file.  They produce a new data type called @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
- 
-[.lesson-point]
- A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but unlike the others there are only two values: `true` and `false`.
-
-[.lesson-instruction]
-- Turn to @exercise-link{pages/boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function true and inputs that will make each function false.
-
-== Introducing Inequalities
+== Introducing Booleans
 
 === Launch
 Students should be logged into
-ifproglang{wescheme}{ , Inequalities Starter File.} 
-}
-@ifproglang{pyret}{ , Inequalities Starter File.} 
-}
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
 
 Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
 
@@ -94,19 +69,36 @@ Ask students to evaluate Circles of Evaluation for simple expressions they've se
 - @show{(sexp->coe '(- 4 5))}
 - @show{(sexp->coe '(* 8 0))}
 
-Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they means, what they will evaluate to, and what the code would look like.
+Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they mean, what they will evaluate to, and what the code would look like.
 
 - @show{(sexp->coe '(> 1 2))}
 - @show{(sexp->coe '(< 4 5))}
 - @show{(sexp->coe '(= 8 0))}
 
-Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the output means?
+Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the outputs mean?
 
-Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new datatype__, called a @vocab{Boolean}. Booleans are the answers to any yes-or-no question (for example: "Is five greater than two?", "Did a character hit a wall?", etc.)
+Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new datatype__, called a @vocab{Boolean}. 
 
 === Investigate
 [.lesson-instruction]
-Have students open to the @exercise-link{pages/booleans-first-intro.adoc} worksheet and complete it with a partner.
+
+Have students log into the
+@ifproglang{wescheme}{
+@link{https://www.wescheme.org/openEditor?publicId=jvWT8h7pLc, Boolean Starter File} and open to @exercise-link{pages/wesccheme/boolean-functions.adoc, Boolean Functions.} 
+}
+@ifproglang{pyret}{
+@link{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File} and open to @exercise-link{pages/pyret/boolean-functions.adoc, Boolean Functions.} 
+}
+
+- Explore the five functions in this starter file.  They all produce @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
+ 
+[.lesson-point]
+ A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but unlike the others there are only two values: `true` and `false`.
+
+[.lesson-instruction]
+- Turn to @exercise-link{pages/pyret/boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function _true_ and inputs that will make each function _false_.
+
+- Additional practice with Booleans can be found at @link{../ds-pyret-intro/pages/booleans.shtml}
 
 === Synthesize
 - Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
@@ -115,91 +107,28 @@ Have students open to the @exercise-link{pages/booleans-first-intro.adoc} worksh
 === Common Misconceptions
 - Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
 
-== Introducing Booleans @duration{15 minutes}
+== Introducing Inequalities @duration{15 minutes}
 
 === Overview
-Students discover the concept of inequalities (or apply it, if they've seen it before) in programming, and extend their knowledge of data types, Contracts, and Circles of Evaluation.
+Students discover (or expand their understanding of) inequalities by identifying solutions and non-solutions and connecting expressions to graphic representations.
 
 === Launch
-Students should have their workbook, pencil, and be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-and have their workbooks with a pen or pencil.
+Have students open the
+ifproglang{wescheme}{
+@link{https://www.wescheme.org/view?publicId=eVMjb9omtP, Simple Inequalities Starter File.} 
+}
+ifproglang{pyret}{
+@link{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.} 
+}
 
-Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
-
-- @show{(sexp->coe '(+ 1 2))}
-- @show{(sexp->coe '(- 4 5))}
-- @show{(sexp->coe '(* 8 0))}
-
-Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they means, what they will evaluate to, and what the code would look like.
-
-- @show{(sexp->coe '(> 1 2))}
-- @show{(sexp->coe '(< 4 5))}
-- @show{(sexp->coe '(= 8 0))}
-
-Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the output means?
-
-Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new datatype__, called a @vocab{Boolean}. Booleans are the answers to any yes-or-no question (for example: "Is five greater than two?", "Did a character hit a wall?", etc.)
+Students should read the example code in the file carefully and click run to see the image it returns.
 
 === Investigate
 [.lesson-instruction]
-Have students open to the @workbook-link{pages/booleans.adoc} worksheet and complete with a partner.
+Have students open to the @exercise-link{pages/pyret/simple-inequalities.adoc, Simple Inequalities worksheet} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @link{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.}
 
 === Synthesize
-- Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about they do, and then type it in to discover for themselves.
-- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
-
-=== Common Misconceptions
-- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
-
-
-== Compound Inequalities @duration{10 minutes}
-
-=== Overview
-Students consider the need to _compose_ inequalities, and think about how to write them.
-
-=== Launch
-Students should have their computer, contracts page, and pencil and be logged in to
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-with their Game Project file open.
-
-We use inequalities for lots of things:
-
-- Is it hot out? (@math{temperature \gt 80°})
-- Are the cookies finished baking? (@math{timer = 0})
-
-Have students come up with other examples.
-
-But many times we need to _combine_ inequalities:
-
-- Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"})
-- Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $10})
-
-Have students come up with other examples.
-
-Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
-
-=== Investigate
-Both mathematics and programming have ways of combining - or _composing_ - inequalities.
-
-Have students complete @workbook-link{pages/and-or.adoc}.
-
-=== Synthesize
-- Be really careful to check for understanding here. __Expressions using `and` only produce `true` if both of their sub-expressions are `true`. Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.__
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Strategies for English Language Learners}
-
-When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this unecessarily adds to cognitive load!
-|===
-
-
+- What patterns did you observe in how the inequalities worked?
 
 == Additional Exercises:
-- @exercise-link{pages/boolean-coe-to-code1.adoc} 
-- @exercise-link{pages/boolean-coe-to-code2.adoc} 
 - @exercise-link{pages/is-hot.adoc}
