@@ -79,17 +79,6 @@ This plot shows us the center and spread in our dataset according to those five 
 - The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the upper half of the values_. That’s 60.4 pounds in our dataset.
 - The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Extension Activity}
-
-In statistics, it is not uncommon to use _modified box plots_, which remove extreme datapoints from the box-and-whisker and draw them as dots outside of the blot. The box plot then represents only the "non-extreme" points. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
-
-`# modified-box-plot :: (t :: Table, column :: String) -> Image`
-|===
-
-
 === Investigate
 [.lesson-instruction]
 * Turn to @workbook-link{ds-measures-of-center/pages/summarizing-columns-in-animals.adoc}
@@ -97,6 +86,19 @@ In statistics, it is not uncommon to use _modified box plots_, which remove extr
 * What conclusions can you draw about the distribution of values in this column?
 
 Data Scientists subtract the 1st quartile from the 3rd quartile to compute the range of the “middle half” of the dataset, also called the @vocab{interquartile range}.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Kinesthetic Activity}
+
+Divide the class into groups, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}. 
+
+Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students roll their cylinders so that they fill each of these intervals, retaining a uniform thickness. 
+
+They should notice that shorter intervals have __thicker cyliners__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the datapoints, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
+
+|===
 
 [.lesson-instruction]
 * Find the @vocab{interquartile range} of this dataset.
@@ -132,8 +134,10 @@ Histograms, box plots, and measures of center and spread are all different ways 
 |===
 |
 @span{.title}{Modified Box Plots}
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as dots outside of the blot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
 
-More Statistics- or Math-oriented classes will also be familiar with __modified box plots__. These are similar to traditional box plots, but the box-and-whisker just extends to minimum and maximum non-outliers. To call our attention to outliers, they are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
+`# modified-box-plot :: (t :: Table, column :: String) -> Image`
+
 |===
 
 == Comparing Box Plots @duration{15 minutes}
