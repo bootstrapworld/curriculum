@@ -56,7 +56,7 @@
 }
 |===
 
-== Introducing Booleans
+== Introducing Booleans @duration{20 minutes}
 
 === Launch
 Students should be logged into
@@ -89,7 +89,8 @@ Have students log in to the @link{https://code.pyret.org/editor#share=1qoAI2cFSe
 }
 
 [.lesson-instruction]
-- Explore the five functions in this starter file.  They all produce @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
+- Explore the five functions in this starter file:  `is-odd`, `is-even`, `is-less-than-one`, `is-continent`,  `is-primary-color`
+- They all produce @vocab{booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{boolean} is.
  
 [.lesson-point]
 A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but unlike the others there are only two values: `true` and `false`.
@@ -97,7 +98,7 @@ A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but 
 [.lesson-instruction]
 - Turn to @exercise-link{boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function _true_ and inputs that will make each function _false_.
 
-- Additional practice with Booleans can be found at @link{../ds-pyret-intro/pages/booleans.shtml}
+- Additional practice with Booleans can be found at @link{../ds-pyret-intro/pages/booleans.html}
 
 === Synthesize
 - Students will see functions on the worksheet that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
@@ -106,7 +107,7 @@ A @vocab{Boolean} is just another @vocab{data type}, like Number, or Image, but 
 === Common Misconceptions
 - Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
 
-== Introducing Inequalities @duration{15 minutes}
+== Introducing Inequalities @duration{20 minutes}
 
 === Overview
 Students discover (or expand their understanding of) inequalities by identifying solutions and non-solutions and connecting expressions to graphic representations.
@@ -120,12 +121,24 @@ Have students open the @link{https://www.wescheme.org/view?publicId=eVMjb9omtP, 
 Have students open the @link{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.} 
 }
 
-This starter file allows students to plot inequalities.  They will generate a list of 8 points for each inequality they want to plot. The goal is to select 4 values that are solutions and 4 values that aren't solutions.  Encourgage students to use negatives, positives fractions and decimals.
+True understanding of inequalities is achieved when we can identify both solutions and non-solutions.
 
-The starter file includes an example.  
+This starter file includes a special `inequality` function that takes in a function, _which tests numbers in an inequality_, a list of 8 numbers _(to test in the function)_, and plots the numbers and a graph of the inequality on a number line.  
+
+When students successfully include 4 solutions and 4 non-solutions, the image returned will show 4 green dots and 4 red dots.
+
+@span{.center}{@image{images/inequality-works.png,"" ,""}}
+
+If their list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and they will get an error message encouraging them to adjust their list.
+
+@span{.center}{@image{images/not-quite.png,"" ,""}}
+
+Encourage students to use negatives, positives fractions and decimals as they generate their lists.
 
 [.lesson-instruction]
-Students should read the example code in the file carefully and click run to see the image it returns.
+The starter file includes an example.  Read the example code in the file carefully and click run to see the image it returns.  Discuss the code with your partner.
+- What do you notice?
+- What do you wonder?
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -137,8 +150,6 @@ In order to stop seeing the examples written into the starter file code, student
 === Investigate
 [.lesson-instruction]
 Have students open to the @exercise-link{simple-inequalities.adoc, Simple Inequalities worksheet} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @link{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.}
-
-
 
 === Synthesize
 - What patterns did you observe in how the inequalities worked?
