@@ -59,13 +59,15 @@ We use inequalities for lots of things:
 - Did I get paid enough for painting that fence? (@math{temperature \lt $100})
 - Are the cookies finished baking? (@math{timer = 0})
 
+[.lesson-instruction]
 Have students come up with other examples.
 
-But many times we need to _combine_ inequalities:
+Many times we need to _combine_ inequalities:
 
 - Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"})
 - Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $20})
 
+[.lesson-instruction]
 Have students come up with other examples.
 
 Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
@@ -76,7 +78,10 @@ Both mathematics and programming have ways of combining - or _composing_ - inequ
 Have students complete @exercise-link{pages/boolean-coe-to-code1.adoc} and/or @exercise-link{pages/and-or.adoc}.
 
 === Synthesize
-Be really careful to check for understanding here. __Expressions using `and` only produce `true` if both of their sub-expressions are `true`. Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.__
+Be really careful to check for understanding here. 
+
+- Expressions using `and` only produce `true` if both of their sub-expressions are `true`. 
+- Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -99,21 +104,32 @@ What about the solution set of x > 5 `and` x < 15?  What numbers make both of th
 How would that be different from x > 5 `or` x < 15?  What numbers make at least one of these inequality expressions true?
 
 === Investigate
-[.lesson-instruction]
 
+[.lesson-instruction]
 Have students log in to the 
 @ifproglang{wescheme}{ 
-@link{https://www.wescheme.org, Compound Inequalities Starter File} 
+@link{https://www.wescheme.org, Compound Inequalities Starter File, read the code carefully and click run to see the graphs they've just considered} 
 }
-@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File} 
+@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File, read the code carefully and click run to see the graphs they've just considered.} 
 }
-read the code carefully and click run to see the graphs they've just considered.
 
-- Turn to @exercise-link{compound-inequalities.adoc, Compound Inequalities} and explore the functions using the @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File}
+This starter file includes the functions `and-intersection` and `or-union`. 
+
+Both take in two functions and a list of numbers.
+
+`and-intersection` produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true. _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
+
+@span{.center}{@image{images/intersection.png,"" ,""}}
+
+`or-union` produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true. Some @vocab{unions}, like the one below, include *all real numbers* so have have *infinite solutions* that satisfy at least one of the inequalities.
+
+@span{.center}{@image{images/union.png,"" ,""}}
+
+[.lesson-instruction]
+Turn to @exercise-link{compound-inequalities.adoc, Compound Inequalities} and explore the compound inequalities listed using the @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File}, identifying solutions and non-solutions for each.
 
 === Synthesize
 - How did the graphs of intersections and unions differ?
-
 
 == Additional Exercises:
 
