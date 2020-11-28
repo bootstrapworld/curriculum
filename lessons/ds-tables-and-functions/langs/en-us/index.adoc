@@ -15,11 +15,13 @@
 | Students will be able to...
 
 * define linear functions to match a given table
+* identify whether or not a function is linear
 
 | Student-facing Lesson Goals
 |
 
-* Given a table, I can define a function to match
+* Given a table showing a linear relationship, I can define a function to match
+* Given a function, I can tell whether or not it is linear
 
 | Materials
 |[.materials-links]
@@ -67,10 +69,10 @@ Take a look at the following Table:
 * Which column is the @vocab{identifier column}?
 * What do you think the values in the _next_ row will be?
 
-For tables like this - where the rows follow a precise pattern - a @vocab{function} can be used to summarize the entire Table! For this table in particular, that function would be:
+For tables like this - where the rows follow a precise pattern - a @vocab{function} can be used to summarize the entire Table! For this table in particular, that function would be @math{f(x) = 2x}. We can also write this function in Pyret:
+
 
 ```
-# f :: (x :: Number) -> Number
 fun f(x): 2 * x end
 ```
 
@@ -78,12 +80,11 @@ If we apply the function to the x-value in each Row, it produces the y-value! In
 
 === Investigate
 [.lesson-instruction]
-- Complete @workbook-link{match-functions-tables.adoc}.
-- Complete @workbook-link{define-functions-tables.adoc}.
+- Complete @exercise-link{match-functions-tables.adoc}.
+- Complete @exercise-link{define-functions-tables.adoc}.
 
 === Synthesize
 For Tables that fit a linear pattern like this, a function can be a much shorter way of describing all the Rows! In fact, a one-line function can summarize an _infinite_ number of Rows.
-
 
 == Building Tables with Functions @duration{15 minutes}
 
@@ -91,7 +92,14 @@ For Tables that fit a linear pattern like this, a function can be a much shorter
 Students learn how to _build_ Tables with linear functions, and that not all Tables can be generated from a function.
 
 === Launch
-We've provided a special function `make-table` that takes in a starting point, an ending point, the size of the steps between them, and a function. It produces a __new table__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
+We've provided a special function `make-table` that takes in four arguments:
+
+1) a starting point
+2) an ending point
+3) the size of the steps between the start and end point
+4) a function
+
+It produces a __new table__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
 
 ```
 fun f(x): 2 * x end
@@ -112,20 +120,21 @@ will produce:
 |===
 
 [.lesson-instruction]
-* How could we change this code to make a table for *all* the points between 0 and 10, instead of skipping by 2? 
-* How could we change this code to make a table for all the points between 20 and 200, skipping by 10? 
+* What is the @vocab{slope} of this function? The @vocab{y-intercept}?
+* How could we change this code to make steps of 1, instead of 2?
+* How could we change this code to make a table for the integer values between 20 and 200, skipping by 10? 
 * How could we change this code to make a table for a different function altogether? 
 * Open the Table and Graphs Starter File, and try defining different functions and using them to build Tables.
 
 === Investigate
 [.lesson-instruction]
-* @workbook-link{building-tables-from-functions.adoc, Match the code to the Table} it will generate.
+* @exercise-link{building-tables-from-functions.adoc, Match the code to the Table} it will generate.
 * Can every Table be built from a function?
 
 Any Table __constructed from a function__ will have points that precisely follow the pattern. But the opposite is not true: plenty of Tables don't follow the pattern of any function! In fact, most Tables in Data Science __don't__ follow an exact pattern! Can you tell which is which?
 
 [.lesson-instruction]
-Open @workbook-link{not-all-tables.adoc}. Which of these tables can be summarized by a function? Which ones can't?
+Open @exercise-link{not-all-tables.adoc}. Which of these tables can be summarized by a function? Which ones can't?
 
 === Synthesize
 Some things in life run like clockwork: 
