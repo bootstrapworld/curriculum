@@ -1,6 +1,6 @@
-= Connecting Tables and Graphs
+= Exploring Linearity w/Tables and Graphs
 
-@lesson-description{Students describe Tables with graphs, and generate graphs from linear functions.}
+@lesson-description{Students see tables with graphs as different representations of the same data, and explore the concept of linearity in both.}
 
 [@lesson-intro-table]
 |===
@@ -8,18 +8,20 @@
 | Lesson Goals
 | Students will be able to...
 
-* define linear functions to match a given graph
+* match graphs to tables that represent the same data
+* identify linear and non-linear graphs and tables
 
 | Student-facing Lesson Goals
 |
 
-* Given a table, I can define a function to match
-* I can tell the difference between linear and non-linear functions
+* I can match graphs to tables, if they display the same data
+* I can tell the difference between linear and non-linear relationships in tables and graphs
 
 | Materials
 |[.materials-links]
 * Lesson Slides
 * @link{https://code.pyret.org/editor#share=XYZ, Graphing Starter File}
+* TODO(Flannery): Matching Tables to Graphs (Desmos)
 @material-links
 
 | Preparation
@@ -30,24 +32,24 @@
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 * All students should log into @link{https://code.pyret.org, CPO} and open the "Graphing Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=XYZ, open a new one}
 
-| Supplemental Resources
-| In a more programming-focused course, or if appropriate for your learning goals, students can learn to write piecewise functions in the @link{../ds-if-expressions/index.shtml, If-Expressions} lesson. 
-
 | Key Points for the Facilitator
-| This lesson is designed to feel almost _eerily_ similar to @link{../ds-tables-and-functions/index.shtml, Tables and Functions}. __This is entirely purposeful__. Teachers should not be afraid make explicit references to this, driving home the fact that Tables, Functions and Graphs are all connected.
+| This lesson is about two big ideas:
+
+* Linear relationships, as defined by slope and y-intercept
+* Matching representations of Tables and Graphs
 
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Describing Tables with Graphs @duration{20 minutes}
+== Connecting Tables with Graphs @duration{15 minutes}
 
 === Overview
-Students consider graphs as a way of _describing_ the information in certain Tables
+Students consider graphs as an alternate representation of tables.
 
 === Launch
 Take a look at the following Table and Graph:
 
-[cols="^.^1a,^.^1a"]
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
 |===
 |
 
@@ -55,76 +57,99 @@ Take a look at the following Table and Graph:
 !===
 ! x ! y
 ! 0 ! 0
-! 1 ! 1
+! 1 ! 2
 ! 2 ! 4
 ! 3 ! 6
-! ? ! ?
+! 4 ! 8
 !===
 | @image{images/2x.png}
 
 |===
-
+[.lesson-instruction]
 * What do you *Notice*?
 * What do you *Wonder*?
 
 There's a definite connection between the graph and the table. Each x/y-point on the graph represents a row in the Table.
 
-For graphs like this - where the dots follow a precise pattern - a @vocab{function} can be used to summarize the entire graph! For this graph in particular, that function would be:
+[.lesson-instruction]
+Can you predict the next two rows in the table? Could you extend the line on the graph? __How did you arrive at your prediction?__
 
-```
-# f :: (x :: Number) -> Number
-fun f(x): 2 * x end
-```
-
-If we apply this linear function to any point on the x-axis, it produces the y-value that falls on the line. Instead of drawing endless points repeating the same pattern, we can just declare the pattern itself using the function.
+*Some* tables represent a pattern, and this pattern can be graphed on a coordinate plane.
 
 === Investigate
+All graphs are made of points, each of which has an x- and a y-coordinate. For any graph, we can list ten x's and their matching y's as ten rows in a table. 
+
 [.lesson-instruction]
-- Complete @workbook-link{match-functions-graphs.adoc}
-- TODO(Emmanuel): Match all three representations in Desmos cards
-- Complete @workbook-link{define-functions-graphs.adoc}
+- Complete @exercise-link{pages/match-tables-graphs.adoc}.
+- Complete @link{TBD, "Matching Tables to Graphs (Desmos)"}.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Pedagogy Note}
+
+To encourage students to look at the _points_ in the table and graph, it is useful to change the scale of the graphs so that all lines look the same. This prevents students from leaning on visual cues like "steepness" to bypass the learning objective.
+
+It can also be useful to list the points in the table __out of order__, both to focus students' attention on the points and to drive home that rows do not have to be ordered!
+|===
+
+[.lesson-point]
+Axes on a graph have an order. Rows in a tables don't!
+
+The rows in a table are _discrete_, meaning they preserve their meaning if the rows are shuffled into a different order. On a graph, however, the points on a line are _not_ discrete, and cannot be shuffled. 
+
+Lines have properties that depend on that order, like @vocab{slope}. Graphs can be stretched or squished by changing the scale of the axis. This can make the lines _look_ different, but the points will always be in the same order.
+
+[.lesson-instruction]
+- Can you match tables and graphs, even if the rows are shuffled and the axes are changed? Complete @exercise-link{pages/match-tables-graphs2.adoc}.
 
 === Synthesize
-For graphs that fit a pattern like this, a function can be a much shorter way of describing all of the points on the graph! In fact, a one-line function can summarize an _infinite_ number of points.
+Tables, by definition, do not go on forever. That means that a table will only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. When a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
-
-== Not all Graphs come from Functions @duration{15 minutes}
+== Linear vs. Non-linear
 
 === Overview
-Students learn how to _build_ graphs with functions, and that not all graphs can be generated from linear functions.
+Students explore the concept of linearity, identifying properties like @vocab{slope} and @vocab{y-intercept} (or @vocab{rate} and "starting value") in both tables and graphs.
 
 === Launch
-We've provided a special function `make-graph` that takes in a starting point, an ending point, the size of the steps between them, and a function. It produces a __graph__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
+There is a pattern to each of the numbers below. Can you figure out what the next number should be?
 
-```
-fun f(x): 0.5 * x end
-# make a table with xs going from 0-10 in steps of 2
-make-graph(0, 10, 2, f)
-```
+* 1, 2, 3, 4, 5
+* 12, 14, 16, 18, 20
+* 8, 5, 2, -1, -4
 
-will produce:
+Each of these patterns has two properties. They all have a __starting value__ (1, 12, and 8), and they all increase at a consistent @vocab{rate}, growing by the same amount (growing by 1, by 2, and by -3).
 
-@image{images/0.5x.png}
+Rows in a table don't have to be ordered! In a table that represents a pattern, you may have to _sort_ the rows in order to see the pattern emerge. 
 
-[.lesson-instruction]
-* How could we change this code to make a graph for *all* the points between 0 and 10, instead of skipping by 2? 
-* How could we change this code to make a graph for all the points between 20 and 200, skipping by 10? 
-* How could we change this code to make a graph for a different function altogether? 
-* Open the Table and Graphs Starter File, and try defining different functions and using them to build Tables.
+These properties also show up if we view that pattern as a line on a graph. When graphed, the rate is called the @vocab{slope} of the line. Remember that points in a table are discrete, but a line goes forever in both directions. That means there is no "starting value"! Instead, mathematicians use the point where the line crosses the y-axis, which they call the @vocab{y-intercept}.
 
-=== Investigate
-[.lesson-instruction]
-* Complete @workbook-link{define-functions-graphs.adoc}.
-* What are some graphs that can't be made from linear functions?
+== Investigate
+Can you identify these two properties in a table? In a graph?
 
-_Any_ graph constructed from a linear function will have points that precisely follow a straight-line pattern. But not every graph follows a pattern like that! Can you tell which is which?
+- Complete @exercise-link{rates-and-starting-values-tables.adoc}
+- Complete @exercise-link{rates-and-starting-values-graphs.adoc}
 
-[.lesson-instruction]
-Open @workbook-link{linear-or-not.adoc}. Which of these tables can be summarized by a linear function? Which ones can't?
+Patterns that have a slope are called @vocab{linear} patterns, or linear relationships. 
+
+[.lesson-point]
+The graph of a linear relationship will always appear as a straight line.
+
+There are other kinds of patterns, which don't have a rate/slope. Can you figure out the next number in the patterns below?
+
+* 1, 4, 9, 16, 25
+* 100, 50, 25, 12.5, 6.25
+* -10, -6, -1, 6, 15
+
+These patterns are @vocab{nonlinear} patterns. When graphed, they don't look like straight lines at all!
+
+And of course, sometimes there _is_ no pattern. Sometimes the numbers are truly random! A graph can only have one y-value for each x-value, so a table with repeated x-values but different y-values can't be part of a pattern.
+
+- Complete @exercise-link{linear-nonlinear-bust.adoc, "Linear, Non-Linear or Bust?"}
 
 === Synthesize
-TODO(Emmanuel)
 
+TBD
 
 == Additional Exercises:
 
