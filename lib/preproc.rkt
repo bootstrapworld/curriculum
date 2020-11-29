@@ -16,6 +16,7 @@
 
 (provide
   assoc-standards
+  add-standard
   box-add-new!
   create-standards-file
   preproc-n-asciidoctor
@@ -194,50 +195,58 @@
                       [else #f])
                 (loop (cdr L))))))))
 
-(define (assoc-standards std *standards-list*)
+(define (assoc-standards std)
   ;(printf "doing assoc-standards ~s\n" std)
   (let* ([std-bits (regexp-split #rx"&" std)] ;TODO This is probly obsolete now
          [std (list-ref std-bits 0)]
          [sublist-item #f]
          [c #f]
          [dict #f])
-    (for ([x *standards-list*])
+    (for ((x *disallowed-standards-list*))
       (unless c
         (let ([stds-list (caddr x)])
-          (set! c (assoc std stds-list))
-          (when c (set! dict (car x))))))
-    (when (>= (length std-bits) 3)
-      (set! sublist-item (string->number (list-ref std-bits 2))))
-    (values sublist-item c dict)))
+          (set! c (assoc std stds-list)))))
+    ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
+    (cond (c (values #f #f #f))
+          (else
+            (for ([x *standards-list*])
+              (unless c
+                (let ([stds-list (caddr x)])
+                  (set! c (assoc std stds-list))
+                  (when c (set! dict (car x))))))
+            ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
+            (when (>= (length std-bits) 3)
+              (set! sublist-item (string->number (list-ref std-bits 2))))
+            (unless c
+              (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
+            (values sublist-item c dict)))))
 
 (define (add-standard x lesson-title lesson pwy o)
   ;(printf "doing add-standard ~a ~a ~a\n" x lesson-title lesson pwy)
-  (let-values ([(sublist-item c dict) (assoc-standards x *standards-list*)])
-    (cond [c (let ([std (list-ref c 0)])
-               (when (and o *lesson*)
-                 (fprintf o "**~a**: ~a~n~n"
-                          std (list-ref c 1)))
-               (cond [(assoc std *standards-met*)
-                      => (lambda (c0)
-                           (when sublist-item
-                             (let ([sublist-items (list-ref c0 1)])
-                               (box-add-new! sublist-item sublist-items)))
-                           (unless *lesson*
-                             (box-add-new! (list  lesson-title lesson pwy)
-                                           (list-ref c0 4))))]
-                     [else
-                       (let ([sublist-items
-                               (box (if sublist-item
-                                        (list sublist-item)
-                                        '()))])
-                         (unless (member dict *dictionaries-represented*)
-                           (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
-                         (set! *standards-met*
-                           (cons (list std sublist-items c dict
-                                       (box (list (list lesson-title lesson pwy))))
-                                 *standards-met*)))]))]
-          [else (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) x)]
-          )))
+  (let-values (((sublist-item c dict) (assoc-standards x)))
+    (when c (let ((std (list-ref c 0)))
+              (when (and o *lesson*)
+                (fprintf o "**~a**: ~a~n~n"
+                         std (list-ref c 1)))
+              (cond ((assoc std *standards-met*)
+                     => (lambda (c0)
+                          (when sublist-item
+                            (let ((sublist-items (list-ref c0 1)))
+                              (box-add-new! sublist-item sublist-items)))
+                          (unless *lesson*
+                            (box-add-new! (list  lesson-title lesson pwy)
+                                          (list-ref c0 4)))))
+                    (else
+                      (let ((sublist-items
+                              (box (if sublist-item
+                                       (list sublist-item)
+                                       '()))))
+                        (unless (member dict *dictionaries-represented*)
+                          (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
+                        (set! *standards-met*
+                          (cons (list std sublist-items c dict
+                                      (box (list (list lesson-title lesson pwy))))
+                                *standards-met*)))))))))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
