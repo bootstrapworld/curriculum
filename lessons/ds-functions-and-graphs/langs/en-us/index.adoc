@@ -1,5 +1,14 @@
 = Connecting Functions and Graphs
 
+++++
+<style>
+.top-table img {width: 75%; height: 75%;}
+.top-table td:first-child, .top-table td:first-child .editbox {
+	font-size: 1.1rem !important;
+}
+</style>
+++++
+
 @lesson-description{Students describe functions with graphs, and generate graphs from linear functions.}
 
 [@lesson-intro-table]
@@ -20,9 +29,16 @@
 |[.materials-links]
 * Lesson Slides
 * @link{https://code.pyret.org/editor#share=XYZ, Graphing Starter File}
-* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96?collections=5fbecc2b40d7aa0d844956f0, "Matching Linear Functions and Graphs (Desmos)"}
-* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, "Matching Linear Functions, Tables and Graphs (Desmos)"}
-* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, "Matching Linear Functions, Tables and Graphs 2 (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, "Matching Graph and Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Symbolic Representations of Linear Functions 2 (Desmos)}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbecf6ee47d820d0a06ef09, "Matching Graph and Symbolic Representations of Functions (not just linear!) (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, "Identifying y-intercepts in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, "Identifying slope in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+@link{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc, "Matching Tables, Graphs, and Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d, "Matching Tables, Graphs, and Symbolic Representations of Linear Functions 2 (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d, "Matching Tables, Graphs, and Symbolic Representations of Functions (not just linear!) (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, "Matching Tables, Graphs, and Symbolic Representations of Functions (challenge!) (Desmos)"}
 @material-links
 
 | Preparation
@@ -39,19 +55,19 @@
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Representing Functions as Graphs @duration{20 minutes}
+== Function Notation and Graphs @duration{20 minutes}
 
 === Overview
 Students consider graphs as another representation of functions.
 
 === Launch
-Take a look at the following linear function (shown as Pyret code and regular algebra) and Graph:
+Take a look at the following linear function on the left (shown as Pyret code and regular algebra) and graph on the right:
 
-[cols="^.^1a,^.^1a"]
+[.top-table, cols="^.^1a,^.^1a", frame="none"]
 |===
-| `fun f(x): 2 * x end`
+| `fun f(x): (2 * x) + 10 end`
 
-@math{f(x) = 2x}
+@math{f(x) = 2x + 10}
 
 | @image{images/2x.png}
 
@@ -62,13 +78,31 @@ Take a look at the following linear function (shown as Pyret code and regular al
 
 There's a definite connection between the function and the graph. If we apply this linear function to any point on the x-axis, it produces the y-value that falls on the line. Instead of drawing endless points repeating the same pattern, we can just declare the pattern itself using the function.
 
+[.lesson-point]
+When like terms are combined, linear functions have two terms.
+
+@image{images/slope-and-y.png}
+
+*Review:* We know that a linear function looks like a straight line when represented as a graph, which has a @vocab{slope} and a @vocab{y-intercept}. But what about when we read it as function notation? One of these terms has an @math{x} in it, and determines the @vocab{slope}. The other term is a number by itself, which is the @vocab{y-intercept}. Note: If there is no number by itself, the y-intercept is "invisible" and can be written out as _zero_.
+
 === Investigate
+
+There are two strategies we could take to see if the function notation and graph match:
+
+. Use the function to _compute_ some (x, y) pairs, and see if those fall on the graph.
+. Find the _slope_ and _y-intercept_ of the function and graph, and see if they are the same.
+
 [.lesson-instruction]
+--
+Which strategy do you like best? Are there times when you would use one over the other?
+
 - Complete @exercise-link{match-functions-graphs.adoc}
-- @link{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96?collections=5fbecc2b40d7aa0d844956f0, Matching Linear Functions and Graphs (Desmos)}
+- @link{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, "Matching Graph and Symbolic Representations of Linear Functions (Desmos)"}
+- @link{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Symbolic Representations of Linear Functions 2 (Desmos)}
 - @link{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, "Matching Linear Functions, Tables and Graphs (Desmos)"}
 - @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, "Matching Linear Functions, Tables and Graphs 2 (Desmos)"}
 - Complete @exercise-link{define-functions-graphs.adoc}
+--
 
 === Synthesize
 For graphs that fit a pattern like this, a function can be a much shorter way of describing all of the points on the graph! In fact, a one-line function can summarize an _infinite_ number of points.
@@ -99,6 +133,8 @@ will produce:
 * Open the Table and Graphs Starter File, and try defining different functions and using them to build Tables.
 
 === Investigate
+__Non-linear functions__ have terms that involve more than just @math{x}. They might have exotic terms like @math{x^2}, @math{\sqrt x}, etc. These functions (e.g. - _quadratic_ or _exponential_ functions) have patterns of their own, and very differently-shaped graphs! 
+
 [.lesson-instruction]
 * Complete @exercise-link{define-functions-graphs.adoc}.
 * What are some graphs that can't be made from linear functions?
@@ -106,11 +142,17 @@ will produce:
 _Any_ graph constructed from a linear function will have points that precisely follow a straight-line pattern. But not every graph follows a pattern like that! Can you tell which is which?
 
 [.lesson-instruction]
-Open @exercise-link{linear-or-not.adoc}. Which of these tables can be summarized by a linear function? Which ones can't?
+Open @exercise-link{linear-nonlinear-bust.adoc}. Which of these tables can be summarized by a linear function? Which ones can't?
 
 === Synthesize
 TODO(Emmanuel)
 
 
 == Additional Exercises:
-
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, "Identifying y-intercepts in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, "Identifying slope in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc, "Matching Tables, Graphs, and Symbolic Representations of Linear Functions (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d, "Matching Tables, Graphs, and Symbolic Representations of Linear Functions 2 (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d, "Matching Tables, Graphs, and Symbolic Representations of Functions (not just linear!) (Desmos)"}
+* @link{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, "Matching Tables, Graphs, and Symbolic Representations of Functions (challenge!) (Desmos)"}
