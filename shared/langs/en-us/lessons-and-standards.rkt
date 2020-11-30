@@ -215,6 +215,7 @@
         "OK.PA.A.2.2"
         "OK.L1.IC.C.02")
     ("ds-grouped-samples" 
+        "8.SP.A.1"
         "HS-SEP4-5" 
         "2-DA-08" 
         "2-DA-09" 
@@ -241,11 +242,13 @@
         "HSS.ID.A.3" 
         "HSS.ID.A.1" 
         "HSS.ID.B.6.A"
+        "HS-SEP4-2"
         "3A-DA-11" 
         "3B-AP-14" 
         "9-12.Data and Analysis.Visualization and Transformation"
         "OK.L1.AP.PD.05")
     ("ds-measures-of-center"
+        "HS-SEP4-2"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2")
     ("ds-measures-of-spread" 
@@ -268,6 +271,7 @@
         "8.SP.A.1" 
         "8.SP.A.2" 
         "HSS.ID.B.6" 
+        "HSS.ID.C.8" 
         "3A-DA-11" 
         "3B-NI-05" 
         "P5" 
