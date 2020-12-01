@@ -39,24 +39,23 @@
                   (read-data-file exercise-pages-file #:mode 'files)]
                  [else
                    '()])])
-    (unless (null? workbook-pages)
-      (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
-        (call-with-output-file workbook-pages-ls-file
-          (lambda (o2)
-            (for ([page workbook-pages])
-              (let ([file (list-ref page 0)]
-                    [aspect "portrait"]
-                    [n (length page)])
-                (when (>= n 2)
-                  (set! aspect (list-ref page 1)))
-                (when (>= n 3)
-                  (set! paginate (list-ref page 2)))
-                (fprintf o2 "~a\n" file)
-                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))
-            ;
-            (for ([file exercise-pages])
-              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")))
-          #:exists 'replace)))))
+    (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
+      (call-with-output-file workbook-pages-ls-file
+        (lambda (o2)
+          (for ([page workbook-pages])
+            (let ([file (list-ref page 0)]
+                  [aspect "portrait"]
+                  [n (length page)])
+              (when (>= n 2)
+                (set! aspect (list-ref page 1)))
+              (when (>= n 3)
+                (set! paginate (list-ref page 2)))
+              (fprintf o2 "~a\n" file)
+              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))
+          ;
+          (for ([file exercise-pages])
+            (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")))
+        #:exists 'replace))))
 
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
