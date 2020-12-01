@@ -1,5 +1,11 @@
 = Exploring Linearity w/Tables and Graphs
 
+++++
+<style>
+.graph-table img {width: 33%;}
+</style>
+++++
+
 @lesson-description{Students see tables with graphs as different representations of the same data, and explore the concept of linearity in both.}
 
 [@lesson-intro-table]
@@ -63,16 +69,39 @@ Take a look at the following Table and Graph:
 ! 4 ! 8
 !===
 | @image{images/2x.png}
-
 |===
+
 [.lesson-instruction]
 * What do you *Notice*?
 * What do you *Wonder*?
 
-There's a definite connection between the graph and the table. Each x/y-point on the graph represents a row in the Table.
+There's a definite connection between the graph and the table. Each row in the Table represents an x,y point on the graph.
 
 [.lesson-instruction]
 Can you predict the next two rows in the table? Could you extend the line on the graph? __How did you arrive at your prediction?__
+
+[.lesson-point]
+Not every table or graph has a patterm!
+
+Take a look at the table and graph below. Can you predict the next two rows? Could you extend the line?
+
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
+|===
+|
+
+[.pyret-table.first-table,cols="1,1",options="header"]
+!===
+! x ! y
+! 0 ! 13
+! 1 ! -2
+! 1 ! 16
+! 3 ! 0
+! 4 ! 54
+!===
+| @image{images/scatterplot.png}
+|===
+
+Sometimes there is no pattern at all! *PROTIP:* One surefire way to tell that there is no relationship between @math{x} and @math{y} is when there are two different @math{y} values for the same @math{x}.
 
 === Investigate
 All graphs are made of points, each of which has an x- and a y-coordinate. For any graph, we can list any number of x's and their matching y's as rows in a table. 
@@ -92,11 +121,11 @@ It can also be useful to list the points in the table __out of order__, both to 
 |===
 
 [.lesson-point]
-Axes on a graph have an order. Rows in a table don't have to be listed in any particular order!
+Axes on a graph need an order. Rows in a table don't!
 
 The rows in a table are _discrete_, meaning they preserve their meaning if the rows are shuffled into a different order. *Some* tables represent a pattern. Ordering the rows in a table can make it easier for us to recognize patterns.
 
-On a graph of a line, the points on are _not_ discrete, and cannot be shuffled. Lines have properties that depend on order, like @vocab{slope}. Graphs can be stretched or squished by changing the scale of the axis. This can make the lines _look_ different, but the points will always be in the same order.
+On a graph of a line, the points are _not_ discrete, and cannot be shuffled. Lines have properties that depend on order, like whether the line slopes up or down as it goes from left to right. Graphs can be stretched or squished by changing the scale of the axis. This can make the lines _look_ different, but the points will always be in the same order.
 
 [.lesson-instruction]
 - Can you match tables and graphs, even if the rows are shuffled and the axes are changed? Complete @exercise-link{pages/match-tables-graphs2.adoc}.
@@ -107,34 +136,33 @@ Tables only show us _some points_ on a line, whereas a line itself is made up of
 == Linear vs. Non-linear
 
 === Overview
-Students explore the concept of linearity, identifying properties like @vocab{slope} (or @vocab{rate}) and @vocab{y-intercept}  and "starting value") in both tables and graphs.
+Students explore the concept of linearity, identifying properties like @vocab{slope} (or @vocab{rate}) and @vocab{y-intercept} in both tables and graphs.
 
 === Launch
-There is a pattern in each of the tables below. Can you figure out what the next row should be? When reading these tables, you can think of the "x" column as counting the rows. The first row has x=1, the second has x=2, and so on. Each of the "y" columns is some kind of pattern. For each pattern, can you guess the next row in the table? Can you guess what the y-value would be when x is 0?
 
-| [.sideways-pyret-table]
-|===
-| x | 1 | 2 | 3 | 4 | 5
-| y | 1 | 2 | 3 | 4 | 5
-|===
+Look at the six graphs shown below.
 
-| [.sideways-pyret-table]
+[.graph-table, stripes="none", frame="none"]
 |===
-| x |  1 |  2 |  3 |  4 |  5
-| y | 12 | 14 | 16 | 18 | 20
-|===
+| @image{images/constant-linear.png} 
+  @image{images/num-abs.png}
+  @image{images/num-sqrt.png}
 
-| [.sideways-pyret-table]
-|===
-| x |  1 | 2 | 3 | 4 | 5
-| y | 10 | 9 | 8 | 7 | 6
+| @image{images/negative-linear.png}
+  @image{images/positive-linear.png}
+  @image{images/num-sqr.png}
 |===
 
-Each of these patterns has two properties. They all increase at a consistent @vocab{rate}, growing by the same amount (growing by 1, by 2, and by -1). They also have a @vocab{y-intercept}, which is the y-value when x = 0.
+What do you *Notice?*
 
-*Note:* Rows in a table don't have to be ordered! In a table that represents a pattern, you may have to _sort_ the rows in order to see the pattern emerge. 
+What do you *Wonder?*
 
-These properties also show up if we view that pattern as a line on a graph. When graphed, the rate is called the @vocab{slope} of the line. And the point where x = 0 is also the point where the line crosses the y-axis. This is why mathematicians call it the @vocab{y-intercept}!
+Three of the graphs above are *straight lines* (called "linear") and three are not ("nonlinear"). As we can see, the linear graphs can be perfectly horizontal, tilt upwards and to the right, or tilt downwards to the right. 
+
+[.lesson-point]
+Linear relationships are always a straight line.
+
+Each of these linear relationships has two properties. First, they all increase at a consistent @vocab{rate} - @vocab{slope} - increasing or decreasing by the same amount. Second, they also have a @vocab{y-intercept}: the y-value when x = 0 ("intercepts" the y-axis).
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -144,6 +172,104 @@ These properties also show up if we view that pattern as a line on a graph. When
 There is nothing "magical" about the @vocab{y-intercept}! It's just a convention that mathematicians use, since graphs don't have a "starting value". They could have arbitrarily picked some other point, like "the point where the line crosses -2735.1", and the only change to the way we teach linear functions would be a vocabulary word!
 |===
 
+Look at the six "sideways" data tables below. Each of the "y" columns shows a pattern. You can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc).
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 ! 5
+! y ! 2 ! 3 ! 4 ! 5 ! 6
+!===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 !  4 !  5
+! y ! 1 ! 4 ! 9 ! 16 ! 25
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !  3 !  4 !  5
+! y ! 12 ! 14 ! 16 ! 18 ! 20
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 !  5
+! y ! 3 ! 3 ! 3 ! 3 ! 3
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !  5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !  5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|===
+
+* What do you *Notice?*
+* What do you *Wonder?*
+* Can you figure out what the next x,y pair should be for each of them?  
+* Can you guess what the y-value for each table would be when x is 0?
+
+When there is a @vocab{linear} relationship, the values in a table increase at a _consistent rate_ and the graph of those values will all fall on a straight line.
+
+*Note:* Rows in a table don't have to be ordered! You may have to _sort_ the rows first in order to see the pattern emerge. 
+
+For example, the pattern in this table is much easier to recognize when we order the x values from least to greatest.
+
+[.sideways-pyret-table]
+|===
+| x | 3 | 2 | 4 | 0 | 1
+| y | 6 | 4 | 8 | 0 | 2
+|===
+
+{empty}
+
+[.sideways-pyret-table]
+|===
+| x | 0 | 1 | 2 | 3 | 4
+| y | 0 | 2 | 4 | 6 | 8
+|===
+
+Sometimes it can also be difficult to see patterns in tables when they are missing rows.  For example, in the table below if we just looked at the y-values we might think there is not a pattern because the value goes down by 6, then 2, then 2 and then 4... 
+
+[.sideways-pyret-table]
+|===
+| x | -4 |-1  | 0  | 1  | 3
+| y | 20 | 14 | 12 | 10 | 6
+|===
+
+If we fill in the missing x-values... and find a pattern by which to fill in the y-values...
+
+[.sideways-pyret-table]
+|===
+| x | -4 | -3 | -2 | -1 | 0  | 1  | 2 | 3
+| y | 20 | 18 | 16 | 14 | 12 | 10 | 8 | 6
+|===
+
+...the table reveals that the y-values are increasing by 2 for each x.
+
+Another way of thinking about this would be to look at how the x and y change __in proportion__ to each other. When x increased by 3, y decreased by 6. When x increased by 1, y decreased by 2. When x increased by 2, y decreased by 4. The y value decreased by twice as much as the x value increased no matter how much x changed by.
+
 == Investigate
 Can you identify these two properties in a table? In a graph?
 
@@ -152,16 +278,6 @@ Can you identify these two properties in a table? In a graph?
 
 [.lesson-point]
 The graph of a linear relationship will always appear as a straight line.  An ordered table of values for any linear relationship will reveal a constant rate of change.
-
-There are other kinds of patterns, which don't have a rate/slope. Can you figure out the next number in the patterns below?
-
-* 1, 4, 9, 16, 25
-* 100, 50, 25, 12.5, 6.25
-* -10, -6, -1, 6, 15
-
-These patterns are @vocab{nonlinear} patterns. When graphed, they don't look like straight lines at all!
-
-And of course, sometimes there _is_ no pattern. Sometimes the numbers are truly random! A graph can only have one y-value for each x-value, so a table with repeated x-values but different y-values can't be part of a pattern.
 
 - Complete @exercise-link{linear-nonlinear-bust.adoc, "Linear, Non-Linear or Bust?"}
 
