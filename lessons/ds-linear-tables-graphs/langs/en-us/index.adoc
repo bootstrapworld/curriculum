@@ -69,7 +69,7 @@ Take a look at the following Table and Graph:
 * What do you *Notice*?
 * What do you *Wonder*?
 
-There's a definite connection between the graph and the table. Each x/y-point on the graph represents a row in the Table.
+There's a definite connection between the graph and the table. Each row in the Table represents an x,y point on the graph.
 
 [.lesson-instruction]
 Can you predict the next two rows in the table? Could you extend the line on the graph? __How did you arrive at your prediction?__
@@ -96,7 +96,7 @@ Axes on a graph have an order. Rows in a table don't have to be listed in any pa
 
 The rows in a table are _discrete_, meaning they preserve their meaning if the rows are shuffled into a different order. *Some* tables represent a pattern. Ordering the rows in a table can make it easier for us to recognize patterns.
 
-On a graph of a line, the points on are _not_ discrete, and cannot be shuffled. Lines have properties that depend on order, like @vocab{slope}. Graphs can be stretched or squished by changing the scale of the axis. This can make the lines _look_ different, but the points will always be in the same order.
+On a graph of a line, the points are _not_ discrete, and cannot be shuffled. Lines have properties that depend on order, like @vocab{slope}. Graphs can be stretched or squished by changing the scale of the axis. This can make the lines _look_ different, but the points will always be in the same order.
 
 [.lesson-instruction]
 - Can you match tables and graphs, even if the rows are shuffled and the axes are changed? Complete @exercise-link{pages/match-tables-graphs2.adoc}.
@@ -107,34 +107,72 @@ Tables only show us _some points_ on a line, whereas a line itself is made up of
 == Linear vs. Non-linear
 
 === Overview
-Students explore the concept of linearity, identifying properties like @vocab{slope} (or @vocab{rate}) and @vocab{y-intercept}  and "starting value") in both tables and graphs.
+Students explore the concept of linearity, identifying properties like @vocab{slope} (or @vocab{rate}) and @vocab{y-intercept} in both tables and graphs.
 
 === Launch
-There is a pattern in each of the tables below. Can you figure out what the next row should be? When reading these tables, you can think of the "x" column as counting the rows. The first row has x=1, the second has x=2, and so on. Each of the "y" columns is some kind of pattern. For each pattern, can you guess the next row in the table? Can you guess what the y-value would be when x is 0?
+There is a pattern in each of the tables below. 
+* Can you figure out what the next x,y pair should be for each of them?  
+* Can you guess what the y-value for each table would be when x is 0?
 
-| [.sideways-pyret-table]
+
+[.sideways-pyret-table]
 |===
 | x | 1 | 2 | 3 | 4 | 5
 | y | 1 | 2 | 3 | 4 | 5
 |===
 
-| [.sideways-pyret-table]
+|
+[.sideways-pyret-table]
 |===
 | x |  1 |  2 |  3 |  4 |  5
 | y | 12 | 14 | 16 | 18 | 20
 |===
 
-| [.sideways-pyret-table]
+|
+[.sideways-pyret-table]
 |===
 | x |  1 | 2 | 3 | 4 | 5
 | y | 10 | 9 | 8 | 7 | 6
 |===
 
-Each of these patterns has two properties. They all increase at a consistent @vocab{rate}, growing by the same amount (growing by 1, by 2, and by -1). They also have a @vocab{y-intercept}, which is the y-value when x = 0.
+Each of these patterns increases at a consistent @vocab{rate}... each time x increases, y changes by the same amount (they change by 1, by 2, and by -1, respectively). 
 
-*Note:* Rows in a table don't have to be ordered! In a table that represents a pattern, you may have to _sort_ the rows in order to see the pattern emerge. 
+When the values in a table increase at a consistent rate, the graph of the values will all fall on the same line.  When graphed, the rate is called the @vocab{slope} of the line. And the point where x = 0 is also the point where the line crosses the y-axis. This is why mathematicians call it the @vocab{y-intercept}!kW
 
-These properties also show up if we view that pattern as a line on a graph. When graphed, the rate is called the @vocab{slope} of the line. And the point where x = 0 is also the point where the line crosses the y-axis. This is why mathematicians call it the @vocab{y-intercept}!
+*Note:* Rows in a table don't have to be ordered! In a table that represents a pattern, you may have to _sort_ the rows in order to see the pattern emerge.
+
+For example, the pattern in this table is much easier to recognize when we order the x values from least to greatest.
+[.sideways-pyret-table]
+|===
+| x | 3 | 2 | 4 | 0 | 1
+| y | 6 | 4 | 8 | 0 | 2
+|===
+|
+[.sideways-pyret-table]
+|===
+| x | 0 | 1 | 2 | 3 | 4
+| y | 0 | 2 | 4 | 6 | 8
+|===
+
+Sometimes it can also be difficult to see patterns in tables when they are missing rows.  For example, in the table below if we just looked at the y-values we might think there is not a pattern because the value goes down by 6, then 2, then 2 and then 4... 
+
+[.sideways-pyret-table]
+|===
+| x | -4 |-1  | 0  | 1  | 3
+| y | 20 | 14 | 12 | 10 | 6
+|===
+
+If we fill in the missing x-values... and find a pattern by which to fill in the y-values...
+
+[.sideways-pyret-table]
+|===
+| x | -4 | -3 | -2 | -1 | 0  | 1  | 2 | 3
+| y | 20 | 18 | 16 | 14 | 12 | 10 | 8 | 6
+|===
+
+the table reveals that the y-values are increasing by 2 for each x.
+
+Another way of thinking about this would be to look at how the x and y change in proportion to each other. When x increased by 3, y decreased by 6. When x increased by 1, y decreased by 2. When x increased by 2, y decreased by 4. The y value decreased by twice as much as the x value increased no matter how much x changed by.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -159,9 +197,12 @@ There are other kinds of patterns, which don't have a rate/slope. Can you figure
 * 100, 50, 25, 12.5, 6.25
 * -10, -6, -1, 6, 15
 
-These patterns are @vocab{nonlinear} patterns. When graphed, they don't look like straight lines at all!
+These patterns are @vocab{nonlinear} patterns. When graphed, they don't look like straight lines at all! 
+There are also non-linear relationships that do not follow a pattern.
 
-And of course, sometimes there _is_ no pattern. Sometimes the numbers are truly random! A graph can only have one y-value for each x-value, so a table with repeated x-values but different y-values can't be part of a pattern.
+A graph can only have one y-value for each x-value, so a table with repeated x-values but different y-values can't be part of a pattern.
+
+FLANNERY NOTE - If we're going to touch on the difference between function and non-functions, we need to do better than this. It's a complicated concept and it's actually something that bootstrap is poised to help students understand. Part of how I found bootstrap was looking for a grounding for conversations about functions. by this point students understand enough coding to get that when the write a function they know exactly what the computer is going to do and that the computer won't print a triangle unless we choose the color and the size, because it can't live in ambiguity. We need explicitly make that connection in this conversation about functions. There are plenty of graphs with two y-values for the same x.  But they aren't generated by a single function. and that's the point here.  But I wonder if it's worthy of its own lesson....
 
 - Complete @exercise-link{linear-nonlinear-bust.adoc, "Linear, Non-Linear or Bust?"}
 
