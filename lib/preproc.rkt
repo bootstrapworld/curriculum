@@ -125,8 +125,9 @@
 (define *exercises-done* '())
 
 (define *extra-workbook-links* '())
-(define *extra-outside-links* '())
+(define *extra-other-lesson-links* '())
 (define *extra-exercise-links* '())
+(define *extra-external-links* '())
 
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
@@ -433,8 +434,8 @@
                     (set! *extra-exercise-links* (cons styled-link-output *extra-exercise-links*))))]
               [lesson-dir
                 (let ([styled-link-output (string-append "[.WorkbookPage]##" link-output "##")])
-                  (unless (member styled-link-output *extra-outside-links*)
-                    (set! *extra-outside-links* (cons styled-link-output *extra-outside-links*))))]
+                  (unless (member styled-link-output *extra-other-lesson-links*)
+                    (set! *extra-other-lesson-links* (cons styled-link-output *extra-other-lesson-links*))))]
               [else
                 (let ([styled-link-output (string-append "[.WorkbookPage]##" link-output "##")])
                   (unless (findf (lambda (L) (equal? (cadr L) styled-link-output))
@@ -515,13 +516,16 @@
                     "index.shtml"
                     "index.asciidoc"))))
 
-(define (make-link f link-text #:include? [include? #f])
+(define (make-link f link-text #:include? [include? #f] #:activity? [activity? #f])
   (cond [(not include?)
 
+         (let ([external-link? #f])
          (cond [(string=? f "")
                 (printf "WARNING: ~a: @link with no file argument\n\n"
                         (errmessage-context))]
-               [(regexp-match #rx"://" f) (check-link f #:external? #t)]
+               [(regexp-match #rx"://" f)
+                (set! external-link? #t)
+                (check-link f #:external? #t)]
                [else
                  (when (path-has-extension? f ".adoc")
                    (let ([f.html (path-replace-extension f ".html")]
@@ -536,9 +540,19 @@
                            (errmessage-context)
                            f))])
 
+         (let ([link-output
          (format "link:pass:[~a][~a~a]" f link-text
                  (if (or *lesson-plan* *teacher-resources*)
-                     ", window=\"_blank\"" ""))]
+                     ", window=\"_blank\"" ""))])
+
+         (when (and *lesson-plan* external-link? activity?)
+           (let ([styled-link-output (string-append "[.ExternalPage]##" link-output "##")])
+             (unless (member styled-link-output *extra-external-links*)
+               (set! *extra-external-links* (cons styled-link-output *extra-external-links*)))))
+
+         link-output)
+
+         )]
         [else
           (let ([f.asc (path-replace-extension f ".asc")])
             ;TODO: probably not needed anymore
@@ -893,12 +907,14 @@
                             ;TODO: Remove this after a while
                             (error 'ERROR
                                    "adoc-preproc: Obsolete directive ~a\n" directive)]
-                           [(string=? directive "link")
+                           [(or (string=? directive "link")
+                                (string=? directive "activity-link"))
                             (let* ([args (read-commaed-group i directive)]
+                                   [activity? (string=? directive "activity-link")]
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
-                              (display (make-link adocf link-text) o))]
+                              (display (make-link adocf link-text #:activity? activity?) o))]
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive)]
                                    [adocf (car args)] ;only one right? FIXME
@@ -1092,7 +1108,7 @@
             (let ([workbook-pages-ls-file (format "pages/workbook-pages-ls.txt.kp")])
               (unless (file-exists? workbook-pages-ls-file)
                 (error 'ERROR "File ~a not found" workbook-pages-ls-file))
-            (for ([x (reverse *extra-outside-links*)])
+            (for ([x (reverse *extra-other-lesson-links*)])
               (fprintf o "\n* ~a\n\n" x))
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *extra-workbook-links*
@@ -1104,7 +1120,11 @@
                 (for ([x xx])
                   (fprintf o "\n* ~a\n\n" (cadr x)))))
             (for ([x (reverse *extra-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x)))
+              (fprintf o "\n* ~a\n\n" x))
+            (for ([x (reverse *extra-external-links*)])
+              (fprintf o "\n* ~a\n\n" x))
+
+            )
           #:exists 'replace))
 
       ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
