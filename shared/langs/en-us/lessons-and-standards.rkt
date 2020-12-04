@@ -213,6 +213,7 @@
         "2-DA-08" 
         "2-DA-09"
         "OK.PA.A.2.2"
+        "OK.PA.D.2.2"
         "OK.L1.IC.C.02")
     ("ds-grouped-samples" 
         "8.SP.A.1"
