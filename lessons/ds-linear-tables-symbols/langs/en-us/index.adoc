@@ -1,4 +1,4 @@
-= Connecting Tables and Functions
+= Linear Functions: Symbols and Tables
 
 ++++
 <style>
@@ -6,11 +6,11 @@
 </style>
 ++++
 
-@lesson-description{Students describe Tables with functions, and generate Tables from functions.}
+@lesson-description{Students describe tables with function notation, and generate tables from these symbolic definitions.}
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{ds-defining-functions}
+@prereqs-stds{ds-linear-tables-graphs}
 | Lesson Goals
 | Students will be able to...
 
@@ -21,7 +21,7 @@
 |
 
 * Given a table showing a linear relationship, I can define a function to match
-* Given a function, I can tell whether or not it is linear
+* Given a function definition, I can tell whether or not it is linear
 
 | Materials
 |[.materials-links]
@@ -44,7 +44,7 @@
 == From Tables to Symbols @duration{20 minutes}
 
 === Overview
-Students explore linear functions as a way of _summarizing_ the information in Tables.
+Students explore function definitions as a way of _summarizing_ linear relationships expressed through Tables.
 
 === Launch
 Take a look at the following Table:
@@ -72,7 +72,7 @@ We start by finding two rows in the table, dividing the difference in y's by the
 
 Once we have the slope, we can find the y-intercept from any row. Let's take the last row in the table, multiplying the x-value @math{3} by the slope @math{2} to get @math{6}. The y-value is 7, so the y-intercept is @math{7 - 6 = 1}.
 
-For tables like this - where the rows follow a linear pattern - a linear @vocab{function} definition can be used to summarize the entire Table! Let's see the function definition, written as regular function notation and as Pyret code.
+For tables like this - where the rows follow a predictable pattern - a *function definition* can be used to summarize the entire Table using just a few symbols! Let's see the function definition, written both as regular function notation and as Pyret code.
 
 [first-table,cols="1,1",options="header"]
 |===
@@ -80,19 +80,31 @@ For tables like this - where the rows follow a linear pattern - a linear @vocab{
 |@math{f(x) = 2x + 1} 		| `fun f(x): (2 * x) + 1`
 |===
 
-Just like tables and graphs, the symbols that make up a function can reveal whether or not it is linear.
+As with tables and graphs, the symbols that define a function can reveal whether or not it is linear.
 
 @image{images/slope-and-y.png}
 
 [.lesson-point]
 SLOPE: simplify, and find the number multiplied by @math{x}.
 
-When we combine like terms, the symbolic form of a linear function will have one term where a number is multiplied by @math{x}. This is the @vocab{slope} of the function - __no computation required!__ NOTE: if the line is perfectly flat the slope will be zero, making the term "invisible". 
+When we combine like terms, the symbolic form of a linear function will have one term where a number is multiplied by @math{x}. This is the @vocab{slope} of the function - __no computation required!__ NOTE: if the line is perfectly flat the slope will be zero, making the term "invisible". In the example below, a linear function with a slope of zero is shown with and without this term:
+
+[first-table,cols="1,1",options="header"]
+|===
+| Visible		 			| "Invisible"
+|@math{f(x) = 0x + 22}		| @math{f(x) = 22}
+|===
 
 [.lesson-point]
 Y-INTERCEPT: simplify, and find the number that is standing alone.
 
-The symbolic form of a linear function will also have a term consisting of a number by itself. This is the @vocab{y-intercept} - __no computation required!__ Note: if the line crosses the y-axis at zero the y-intercept will be @math{0}, making this term "invisible".
+A function definition will also have a term consisting of a number by itself. This is the @vocab{y-intercept} - __no computation required!__ Note: if the line crosses the y-axis at zero the y-intercept will be @math{0}, making this term "invisible". In the example below, a linear function with a y-intercept of zero is shown with and without this term:
+
+[first-table,cols="1,1",options="header"]
+|===
+| Visible		 			| "Invisible"
+|@math{f(x) = 3.2x + 0}		| @math{f(x) = 3.2x}
+|===
 
 To check our work, we can apply the function to the x-value in each Row in the table, it produces the y-value! Instead of writing endless rows repeating the pattern or drawing an entire graph, we can just declare the pattern itself using the function.
 
@@ -100,7 +112,7 @@ To check our work, we can apply the function to the x-value in each Row in the t
 
 [.lesson-instruction]
 - Complete @link{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Symbolic Representations of Linear Functions (Desmos)"}.
-- Complete @exercise-link{match-functions-tables.adoc}.
+- Complete @exercise-link{match-symbols-tables.adoc}.
 - Complete @exercise-link{define-functions-tables.adoc}.
 
 [.lesson-instruction]
@@ -152,7 +164,7 @@ will produce:
 
 === Investigate
 [.lesson-instruction]
-* @exercise-link{building-tables-from-functions.adoc, Match the code to the Table} it will generate.
+* @exercise-link{building-tables-from-symbols.adoc, Match the code to the Table} it will generate.
 * Can every Table be built from a function?
 
 Any Table __constructed from a function__ will have points that precisely follow the pattern. But the opposite is not true: plenty of Tables don't follow the pattern of any function! In fact, most Tables in Data Science __don't__ follow an exact pattern! Can you tell which is which?

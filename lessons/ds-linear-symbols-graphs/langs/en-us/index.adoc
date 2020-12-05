@@ -1,4 +1,4 @@
-= Connecting Functions and Graphs
+= Linear Functions: Symbols and Graphs
 
 ++++
 <style>
@@ -9,7 +9,7 @@
 </style>
 ++++
 
-@lesson-description{Students describe linear functions in both symbolic form and as a graph, identifying slope and y-intercept in both representations}
+@lesson-description{Students describe linear functions in both symbolic and graphical form, identifying slope and y-intercept in both representations}
 
 [@lesson-intro-table]
 |===
@@ -17,7 +17,7 @@
 | Lesson Goals
 | Students will be able to...
 
-* define linear functions to match a given graph
+* use symbols to define linear functions shown on a graph
 
 | Student-facing Lesson Goals
 |
@@ -50,7 +50,7 @@
 * All students should log into @link{https://code.pyret.org, CPO} and open the "Graphing Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=XYZ, open a new one} 
 
 | Key Points for the Facilitator
-| This lesson is designed to feel almost _eerily_ similar to @link{../ds-linear-tables-functions/index.shtml, Tables and Functions}. __This is entirely purposeful__. Teachers should not be afraid make explicit references to this, driving home the fact that Tables, Functions and Graphs are all connected.
+| Stress that Graphs, Symbols, and Tables are all __different ways of viewing the same function__. The misconception to fight against is the idea that @math{f(x) = 3x + 2} is somehow the "real" function, with the graph being "the thing the function draws."
 
 @include{xtra/lang-prereq.adoc}
 |===
@@ -61,7 +61,7 @@
 Students connect graph and symbolic representations of functions.
 
 === Launch
-Take a look at the following linear function, shown as symbols on the left (shown as Pyret code and regular algebra) and a graph on the right:
+Take a look at the following linear function, shown as symbolic notation on the left (shown as Pyret code and regular algebra) and a graph on the right:
 
 [.top-table, cols="^.^1a,^.^1a", frame="none"]
 |===
@@ -76,7 +76,7 @@ Take a look at the following linear function, shown as symbols on the left (show
 * What do you *Notice*?
 * What do you *Wonder*?
 
-If we apply this linear function to any point on the x-axis, it produces the y-value that falls on the line. Instead of drawing endless points repeating the same pattern, we can just declare the pattern itself using the function.
+If we apply this linear function to any point on the x-axis, it produces the y-value that falls on the line. Instead of drawing endless points repeating the same pattern, we can just declare the pattern itself using __function notation__.
 
 Let's review know how to find the @vocab{slope} and @vocab{y-intercept} in function notation.
 
@@ -95,9 +95,9 @@ Y-INTERCEPT: find where the line crosses the y-axis, at @math{x = 0}
 
 === Investigate
 
-There are two strategies we could take to see if the function notation and graph match:
+There are two strategies we could take to see if the notation and graph match:
 
-. Use the function to _compute_ some (x, y) pairs, and see if those fall on the graph.
+. Use the function definition to _compute_ some (x, y) pairs, and see if those fall on the graph.
 . Find the _slope_ and _y-intercept_ of the function and graph, and see if they are the same.
 
 [.lesson-instruction]
@@ -112,6 +112,9 @@ Which strategy do you like best? Are there times when you would use one over the
 - Complete @exercise-link{define-functions-graphs.adoc}
 --
 
+=== Common Misconceptions
+It is incredibly common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
+
 === Synthesize
 For graphs that fit a pattern like this, the symbolic form can be a much shorter way of describing all of the points on the graph! In fact, a single line of symbols can summarize an _infinite_ number of points.
 
@@ -119,7 +122,7 @@ For graphs that fit a pattern like this, the symbolic form can be a much shorter
 == Not Every Relationship is Linear! @duration{15 minutes}
 
 === Overview
-Students learn how to _build_ graphs with functions, and that not all graphs can be generated from linear functions.
+Students learn how to _build_ graphs with function definitions, and that not all graphs can be generated from linear functions.
 
 === Launch
 We've provided a special function `make-graph` that takes in a starting point, an ending point, the size of the steps between them, and a function. It produces a __graph__ with those steps as x-coordinates and the output of the function as the y-coordinates. For example:
