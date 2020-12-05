@@ -41,7 +41,7 @@
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Summarizing Tables with Functions @duration{20 minutes}
+== From Tables to Symbols @duration{20 minutes}
 
 === Overview
 Students explore linear functions as a way of _summarizing_ the information in Tables.
@@ -49,13 +49,10 @@ Students explore linear functions as a way of _summarizing_ the information in T
 === Launch
 Take a look at the following Table:
 
-[.pyret-table.small-table,cols="^.^1,^.^1",options="header"]
+[.sideways-pyret-table]
 |===
-| x | y
-| 0 | 0
-| 1 | 2
-| 2 | 4
-| 3 | 6
+| x | 0 | 1 | 2 | 3 
+| y | 1 | 3 | 5 | 7
 |===
 
 * What do you *Notice* about this table?
@@ -66,34 +63,45 @@ Take a look at the following Table:
 * What are the values in the @vocab{header row}?
 * Which column is the @vocab{identifier column}?
 * What do you think the values in the _next_ row will be?
+* Is the relationship between x and y @vocab{linear}? Why or why not?
+* If it's linear, what is the @vocab{slope}? What is the @vocab{y-intercept}?
 
-For tables like this - where the rows follow a precise pattern - a @vocab{function} can be used to summarize the entire Table! For this table in particular, that function would be @math{f(x) = 2x}. We can also write this function in Pyret:
+Let's review know how to find the @vocab{slope} and @vocab{y-intercept} for a table.
 
+We start by finding two rows in the table, dividing the difference in y's by the difference in x's. Taking the first two rows in the table, this gives us @math{\frac{3 - 1}{1 - 0}}, which simplifies to @math{\frac{2}{1}}, for a slope of @math{2}.
 
-```
-fun f(x): 2 * x end
-```
+Once we have the slope, we can find the y-intercept from any row. Let's take the last row in the table, multiplying the x-value @math{3} by the slope @math{2} to get @math{6}. The y-value is 7, so the y-intercept is @math{7 - 6 = 1}.
 
-If we apply the function to the x-value in each Row, it produces the y-value! Instead of writing endless rows repeating the pattern, we can just declare the pattern itself using the function.
-
-=== Investigate
-[.lesson-instruction]
-- Complete @link{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Symbolic Representations of Linear Functions (Desmos)"}.
-- Complete @exercise-link{match-functions-tables.adoc}.
-- Complete @exercise-link{define-functions-tables.adoc}.
-
-Just like tables and graphs, the symbols that make up a function can reveal whether or not it is linear, and what the slope is. You may remember that graphs don't have a "starting value", since the line goes on forever in both directions. Instead, they refer to the @vocab{y-intercept} - where the line crosses the y-axis. The linear functions we define have a y-intercept as well! 
-
-[.lesson-point]
-All linear functions have a @vocab{slope} and @vocab{y-intercept}.
+For tables like this - where the rows follow a linear pattern - a linear @vocab{function} definition can be used to summarize the entire Table! Let's see the function definition, written as regular function notation and as Pyret code.
 
 [first-table,cols="1,1",options="header"]
 |===
 | Function Notation 		| Pyret Code
-|@math{f(x) = -3x + 6} 		| `fun f(x): (-3 * x) + 6`
+|@math{f(x) = 2x + 1} 		| `fun f(x): (2 * x) + 1`
 |===
 
-In the table above, we have the same function written in regular math notation, and in Pyret. Both have two terms. The one containing @math{x} (multiplying by -3) gives us the @vocab{slope} of the function. The other term, which contains only the number @math{6}, gives us the @vocab{y-intercept}.
+Just like tables and graphs, the symbols that make up a function can reveal whether or not it is linear.
+
+@image{images/slope-and-y.png}
+
+[.lesson-point]
+SLOPE: simplify, and find the number multiplied by @math{x}.
+
+When we combine like terms, the symbolic form of a linear function will have one term where a number is multiplied by @math{x}. This is the @vocab{slope} of the function - __no computation required!__ NOTE: if the line is perfectly flat the slope will be zero, making the term "invisible". 
+
+[.lesson-point]
+Y-INTERCEPT: simplify, and find the number that is standing alone.
+
+The symbolic form of a linear function will also have a term consisting of a number by itself. This is the @vocab{y-intercept} - __no computation required!__ Note: if the line crosses the y-axis at zero the y-intercept will be @math{0}, making this term "invisible".
+
+To check our work, we can apply the function to the x-value in each Row in the table, it produces the y-value! Instead of writing endless rows repeating the pattern or drawing an entire graph, we can just declare the pattern itself using the function.
+
+=== Investigate
+
+[.lesson-instruction]
+- Complete @link{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Symbolic Representations of Linear Functions (Desmos)"}.
+- Complete @exercise-link{match-functions-tables.adoc}.
+- Complete @exercise-link{define-functions-tables.adoc}.
 
 [.lesson-instruction]
 - Can you tell whether or not a function is linear? Complete @exercise-link{linear-nonlinear-bust.adoc}.
@@ -102,7 +110,7 @@ In the table above, we have the same function written in regular math notation, 
 === Synthesize
 For Tables that fit a linear pattern like this, a function can be a much shorter way of describing all the Rows! In fact, a one-line function can summarize an _infinite_ number of Rows.
 
-== Building Tables with Functions @duration{25 minutes}
+== Not Every Relationship is Linear! @duration{25 minutes}
 
 === Overview
 Students learn how to _build_ Tables with linear functions, and that not all Tables can be generated from a function.
