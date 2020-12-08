@@ -3,6 +3,7 @@
 ++++
 <style>
 .small-table {max-width: 75%}
+.first-table td, .first-table th {text-align: center;}
 </style>
 ++++
 
@@ -60,7 +61,6 @@ Take a look at the following Table:
 (After Notice and Wonder, ask specific questions...)
 
 * What are the values in the @vocab{header row}?
-* Which column is the @vocab{identifier column}?
 * What do you think the values in the _next_ row will be?
 * Is the relationship between x and y @vocab{linear}? Why or why not?
 * If it's linear, what is the @vocab{slope}? What is the @vocab{y-intercept}?
@@ -73,7 +73,7 @@ Once we have the slope, we can find the y-intercept from any row. Let's take the
 
 For tables like this - where the rows follow a predictable pattern - a *function definition* can be used to summarize the entire Table using just a few symbols! Let's see the function definition, written both as regular function notation and as Pyret code.
 
-[first-table,cols="1,1",options="header"]
+[.first-table,cols="1,1",options="header"]
 |===
 | Function Notation 		| Pyret Code
 |@math{f(x) = 2x + 1} 		| `fun f(x): (2 * x) + 1`
@@ -88,9 +88,9 @@ SLOPE: simplify, and find the number multiplied by @math{x}.
 
 When we combine like terms, the definition of a linear function will have one term where a number is multiplied by @math{x}. This is the @vocab{slope} of the function - __no computation required!__ NOTE: if the line is perfectly flat the slope will be zero, making the term "invisible". In the example below, a linear function with a slope of zero is shown with and without this term:
 
-[first-table,cols="1,1",options="header"]
+[.first-table,cols="1,1",options="header"]
 |===
-| Visible		 			| "Invisible"
+| "Visible" Slope	 		| "Invisible" Slope
 |@math{f(x) = 0x + 22}		| @math{f(x) = 22}
 |===
 
@@ -101,7 +101,7 @@ A function definition will also have a term consisting of a number by itself. Th
 
 [first-table,cols="1,1",options="header"]
 |===
-| Visible		 			| "Invisible"
+| "Visible"	y-intercept 	| "Invisible" y-intercept
 |@math{f(x) = 3.2x + 0}		| @math{f(x) = 3.2x}
 |===
 
@@ -180,7 +180,7 @@ Some things in life run like clockwork:
 For these things, functions perfectly model what happens in reality. But...reality usually isn't quite so neat and tidy!
 
 [.lesson-point]
-Data Science is about making sense of life's messiness.
+Real life is messy. That's where Data Science comes in.
 
 Outside of a math book, cars don't _actually_ move at exactly 50mph. Maybe the driver hits the gas at one point, or slows down to avoid a pothole. A worker at a flower shop may take a minute to use the bathroom! Algebraic functions can give us a good _approximation_ for how the world works, but they aren't an exact fit.
 
