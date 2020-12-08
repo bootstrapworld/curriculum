@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-11-11 # last modified
+LASTMOD=2020-12-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -731,10 +731,9 @@ function recursiveadoc() {
     fi
   done
 
-  export OTHERDIR=1
-  if test "$dir" = pages -o "$dir" = solution-pages \
-    -o "$dir" = front-matter -o "$dir" = back-matter; then
-      export OTHERDIR=
+  export OTHERDIR=
+  if test "$dir" = fragments; then
+    export OTHERDIR=1
   fi
 
   if test $LINT; then
