@@ -472,8 +472,25 @@
 (define (clean-up-url-in-image-text text)
   (regexp-replace* #rx"https://" text ""))
 
+(define (system-echo cmd . args)
+  (let* ((x (apply process* cmd args))
+         (i (car x))
+         (result (read i)))
+    (close-input-port i)
+    (close-output-port (cadr x))
+    (close-input-port (cadddr x))
+    (and (not (eof-object? result))
+         result)))
+
 (define (make-image img opts #:centered? [centered? #f])
-  ;(printf "making image ~s ~s\n" img opts)
+  (let ((img-anonymized
+          (system-echo
+            (format "~a/anonymize-filename" *progdir*) img)))
+    (cond (img-anonymized (set! img img-anonymized))
+          (else (cond ((file-exists? img)
+                       (printf "WARNING: Image file ~a anonymization failed\n\n" img))
+                      (else
+                        (printf "WARNING: Image file ~a not found\n\n" img))))))
   (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [commaed-opts (string-join rest-opts ", ")]

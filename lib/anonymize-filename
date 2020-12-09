@@ -1,0 +1,28 @@
+#!/bin/bash
+
+f="$1"
+
+fd=$(dirname $f)
+
+if test "$fd" = "."; then fd=""
+else fd="$fd/"
+fi
+
+fb=$(basename $f)
+
+fe=${fb##*.}
+
+if test "$fe" = "$fb"; then fe=""
+else fe=".$fe"
+  fb=$(basename $fb $fe)
+fi
+
+fbb=$(echo $fb|git hash-object --stdin|sed -e 's/^\(.\{16\}\).*/\1/')
+
+anonf="$fd$fbb$fe"
+
+echo "$anonf"
+
+if test -f "$f" -a ! -f "$anonf"; then
+  mv "$f" "$anonf"
+fi
