@@ -866,7 +866,14 @@ function buildworkbookpages() {
     echo WARNING: $L missing pages
     mkdir pages
   fi
-  adjustproglangsubdirs pages
+
+  for subdir in *; do
+    if test -d "$subdir"; then
+      if test "$subdir" != solution-pages; then
+        adjustproglangsubdirs "$subdir"
+      fi
+    fi
+  done
 
   mkdirsolutionversionof $repoDir
   #adjustproglangsubdirs solution-pages
@@ -913,11 +920,11 @@ function buildlessonplan() {
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
 
-  for subdir in *; do
-    if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir"
-    fi
-  done
+#  for subdir in *; do
+#    if test -d "$subdir"; then
+#      adjustproglangsubdirs "$subdir"
+#    fi
+#  done
 
   if test -f index.asciidoc -o -f index.html; then
     export PATHWAYROOTDIR="../../"
