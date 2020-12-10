@@ -129,6 +129,20 @@
         "6.G.A.4"
         "7.G.B.6"
         "OK.PA.GM.2.1")
+    ("alg-inequalities" 
+        "7.EE.B.4"
+        ; "BS-DR.2"
+        ; "BS-DR.3"
+        "HSF.IF.A.2"
+        "MP.1"
+        "MP.4"
+        "OK.PA.A.4.3")
+    ("alg-inequalities-2" 
+        "7.EE.B.4"
+        ; "BS-DR.2"
+        ; "BS-DR.3"
+        "HSF.IF.A.2"
+        "OK.PA.A.4.3")
 
     ;data science
     ("ds-intro" 
