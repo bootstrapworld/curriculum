@@ -21,8 +21,12 @@ fbb=$(echo $fb|git hash-object --stdin|sed -e 's/^\(.\{16\}\).*/\1/')
 
 anonf="$fd$fbb$fe"
 
-echo "$anonf"
-
-if test -f "$f" -a ! -f "$anonf"; then
+if test -f "$anonf"; then
+  if test -f "$f"; then
+    mv "$f" "$anonf"
+  fi
+  echo "$anonf"
+elif test -f "$f"; then
   mv "$f" "$anonf"
+  echo "$anonf"
 fi
