@@ -533,7 +533,7 @@
                     "index.asciidoc"))))
 
 (define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.]*[.]com" f)])
+  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.]com" f)])
     (and x
          (let ([y (car x)])
            (and (not (string-ci=? y "google"))
