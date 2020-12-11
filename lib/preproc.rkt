@@ -536,7 +536,8 @@
   (let ([x (regexp-match "[a-zA-Z][^.]*[.]com" f)])
     (and x
          (let ([y (car x)])
-           (string-titlecase (substring y 0 (- (string-length y) 4)))))))
+           (and (not (string-ci=? y "google"))
+                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
   (cond [(not include?)
@@ -562,7 +563,8 @@
                            (errmessage-context)
                            f))])
 
-         (when external-link?
+         (when (and (member link-type '("online-exercise" "opt-online-exercise"))
+                    external-link?)
            (let ([domain-name (extract-domain-name f)])
              (when domain-name
                (set! link-text (string-append link-text " (" domain-name ")")))))
