@@ -99,7 +99,6 @@
 
 ;default values
 (define *copyright-name* "Bootstrap:Cosmology")
-(define *copyright-author* "Jack Kepler, Ike Newton, and Al Einstein")
 
 (define *copyright-info-file* (string-append *pathway-root-dir* "copyright-info.rkt"))
 
@@ -110,9 +109,6 @@
 
 (cond ((assoc "name" *copyright-info*) =>
        (lambda (c) (set! *copyright-name* (cadr c)))))
-
-(cond ((assoc "author" *copyright-info*) =>
-       (lambda (c) (set! *copyright-author* (cadr c)))))
 
 (define *glossary-items* '())
 
@@ -1138,7 +1134,7 @@
                 (fprintf o "--\n")
                 (fprintf o (create-acknowledgment))
                 (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:{pathwayrootdir}../../lib/CCbadge.png[], window=\"_blank\"]\n")
-                (fprintf o (create-copyright *copyright-name* *copyright-author*))
+                (fprintf o (create-copyright *copyright-name*))
                 (fprintf o "\n--\n")
                 )
               )
