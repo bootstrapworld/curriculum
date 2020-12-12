@@ -372,6 +372,7 @@
 
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
+  (when (equal? lesson-dir *lesson*) (set! lesson-dir #f))
   (let* ([lesson (or lesson-dir *lesson*)]
          [g (string-append lesson "/" pages-dir "/" snippet)]
          [g-in-pages (string-append lesson "/pages/" snippet)]
@@ -897,13 +898,12 @@
                             (when (equal? directive "exercise-link")
                               (set! directive "opt-printable-exercise"))
                             (let* ([args (read-commaed-group i directive)]
-                                   [exercise? (string=? directive "exercise-link")]
                                    [n (length args)]
                                    [page (car args)]
                                    [link-text (if (> n 1) (cadr args) "")]
                                    [page-compts (regexp-split #rx"/" page)]
                                    [first-compt (car page-compts)])
-                              ;(when (string=? directive "exercise-link") (printf "calling @exercise-link ~s\n" args))
+                              ;
                               (case (length page-compts)
                                 [(1)
                                  (cond [*lesson*
