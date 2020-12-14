@@ -961,6 +961,7 @@
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
+                              (set! link-text (string-trim link-text "\"")) ;XXX
                               (display (make-link adocf link-text #:link-type directive) o))]
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive)]
