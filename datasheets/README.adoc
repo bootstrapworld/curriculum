@@ -12,16 +12,17 @@ This directory contains two scripts `make-questionnaire.rkt` and
   processed by Asciidoctor to produce an HTML version of the
   student's answers.
 
-It also includes a sample spec file, `D-admin.adoc`, and other
+It also includes a sample spec file, `D-admin.adoc`, a sample
+stylesheet `questionnaire.css`, and other
 production datasheets as they are authored.
 
 == Format of the `D-admin.adoc` file
 
 The `D-admin.adoc` file contains a list of tags with the paragraph
-that each tag expands to. E.g., a tag `_Description` could be
+that each tag expands to. E.g., a tag `Description` could be
 defined as:
 
-   :_Description:
+   :Description:
    These questions relate to the Frobbotz dataset. Your
    answers will help clarify what Frobbotz's benefits, demands,
    and consequences are.
@@ -30,19 +31,27 @@ All tags end with a blank line or end-of-file. This tag is a not
 a question, and there is no expectation of an answer by the
 student. Non-question tags have a leading underscore (`++_++`).
 
-A tag that doesn't start in an underscore is a question tag.
+The line immediately following a question tag is the AsciiDoc
+class `[.question]`.
 E.g.,
 
     :origin:
+    [.question]
     Where did the Frobbotz data come from?
 
-In addition to these tag descriptions, the admin file contains
-other comments that mark the structure (sections) holding up the
-questionnaire. E.g.,
+In addition to these tag descriptions, the admin file
+may contain other content. These are passed through except that
+any leading comment indicators are stripped. This is useful for
+including structure (like section breaks). E.g.,
 
     // == Questions relating to Frobbotz's dispersal
 
 This identifies a subsection with its header.
+
+If you want a comment to pass through as a comment, simply double
+the comment marker (with at least one space sep):
+
+    // // This comment passes through.
 
 == The student-facing file, `D-student.adoc`
 
@@ -52,7 +61,7 @@ The command
 
 creates the corresponding student-facing file, `D-student.adoc`.
 
-This file is a copy of `D-admin.adoc` with all the structural
+This file is a copy of `D-admin.adoc` with all the 
 comments uncommented. Thus, the commented section header above
 becomes
 
@@ -63,7 +72,9 @@ their values are given as AsciiDoc comments so that the student
 can read them and enter the appropriate answer in the space
 indicated. E.g., the tagged question `:origin:` above becomes
 
-    include::D-admin-origin.adoc[]
+    include::D-admin.adoc[...]
+    //
+    // Question :origin:
     //
     // Where did the Frobbotz data come from?
     //
@@ -80,9 +91,9 @@ answer.
 The tags that define non-questions are also translated to tag
 inclusions. Their text is also commented, so the student can read them
 for guidance, but there is no invitation to write under them (and
-no filler text). Thus the `:_Description:` tag above becomes:
+no filler text). Thus the `:Description:` tag above becomes:
 
-   include::D-admin-_Description.adoc[]
+   include::D-admin.adoc[...]
    //
    // These questions relate to the Frobbotz dataset. Your
    // answers will help clarify what Frobbotz's benefits, demands,
@@ -110,3 +121,13 @@ ensure that all the guidelines and questions are re-inserted
 correctly, and that all tags are present and answered, and are in the
 right order. Cases of serious manglage are reported as failure,
 so the file can be discarded as invalid.
+
+== Creating HTML report
+
+Run Asciidoctor on the filled student file.
+
+    asciidoctor -a stylesheet=questionnaire.css D-student.adoc
+
+Any stylesheet may be used. Ideally, it should contain a suitable
+style for the class `.question`, so the questions stand out apart
+from the student answers.
