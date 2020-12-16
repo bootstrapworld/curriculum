@@ -567,24 +567,24 @@
                (set! link-text (string-append link-text " (" domain-name ")")))))
 
          (let ([link-output
-         (format "link:pass:[~a][~a~a]" f link-text
-                 (if (or *lesson-plan* *teacher-resources*)
-                     ", window=\"_blank\"" ""))])
+                 (format "link:pass:[~a][~s~a]" f link-text
+                         (if (or *lesson-plan* *teacher-resources*)
+                             ", window=\"_blank\"" ""))])
 
-         (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
-           (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-             (unless (member styled-link-output *online-exercise-links*)
-               (set! *online-exercise-links*
-                     (cons styled-link-output *online-exercise-links*)))))
+           (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
+             (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
+               (unless (member styled-link-output *online-exercise-links*)
+                 (set! *online-exercise-links*
+                   (cons styled-link-output *online-exercise-links*)))))
 
-             (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
-               (let ([styled-link-output (string-append "[optional.OnlineExercise]##"
-                                           link-output "##")])
-                 (unless (member styled-link-output *opt-online-exercise-links*)
-                   (set! *opt-online-exercise-links*
-                     (cons styled-link-output *opt-online-exercise-links*)))))
+           (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
+             (let ([styled-link-output (string-append "[optional.OnlineExercise]##"
+                                         link-output "##")])
+               (unless (member styled-link-output *opt-online-exercise-links*)
+                 (set! *opt-online-exercise-links*
+                   (cons styled-link-output *opt-online-exercise-links*)))))
 
-         link-output)
+           link-output)
 
          )]
         [else
