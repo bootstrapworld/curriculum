@@ -1,4 +1,4 @@
-= Linear Functions: Tables and Graphs
+= Linear Relationships
 
 ++++
 <style>
@@ -27,7 +27,7 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{ds-defining-functions}
+@prereqs-stds{}
 | Lesson Goals
 | Students will be able to...
 
@@ -52,18 +52,18 @@
 * Decide how students will be grouped in pairs
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-* All students should log into @link{https://code.pyret.org, CPO} and open the "Graphing Starter File" they saved from the prior lesson. If they don't have the file, they can @online-exercise{https://code.pyret.org/editor#share=XYZ, open a new one}
+* All students should log into @link{https://code.pyret.org, CPO} and open the @online-exercise{https://code.pyret.org/editor#share=XYZ, Graphing Starter File} they saved from the prior lesson. If they don't have the file, they can open a new one.
 
 | Key Points for the Facilitator
 | This lesson is about two big ideas:
 
-* Linear relationships, as defined by slope and y-intercept
+* Linear relationships, defined as straight lines on a graph and sequences that change at a constant rate
 * Connecting representations of Tables and Graphs
 
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Simple Sequences and Straight Lines @duration{15 minutes}
+== Simple Sequences and Straight Lines @duration{35 minutes}
 
 === Overview
 Students explore the concept of _linearity_, as represented in tables and graphs.
@@ -91,7 +91,7 @@ Take a look at the following Table and Graph:
 - What do you *Notice*?
 - What do you *Wonder*?
 
-Each row in the Table represents an (x,y) point on the graph.
+Each row in the Table represents an (x, y) point on the graph. We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). The "y" column, on the other hand, shows the values in the sequence.
 
 [.lesson-instruction]
 Can you predict the next two rows in the table? Could you extend the line on the graph? __How did you arrive at your prediction?__
@@ -112,6 +112,67 @@ Linear relationships are _everywhere_:
 If you know how to think about linear relationships, these questions become easy to answer!
 
 === Investigate
+
+Look at the six "sideways" data tables below. You can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). The "y" column, on the other hand, shows the values in the sequence:
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 ! 5
+! y ! 2 ! 3 ! 4 ! 5 ! 6
+!===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 !  4 !  5
+! y ! 1 ! 4 ! 9 ! 16 ! 25
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !  3 !  4 !  5
+! y ! 12 ! 14 ! 16 ! 18 ! 20
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 ! 5
+! y ! 3 ! 3 ! 3 ! 3 ! 3
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !   5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !   5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|===
+
+- What do you *Notice?*
+- What do you *Wonder?*
+- Can you figure out what the next x,y pair should be for each of them?  
+- Can you guess what the y-value for each table would be when x is 0?
+
+When there is a @vocab{linear} relationship, the values in a table increase at a _constant rate_ and the graph of those values will all fall on a straight line.
+
 The same linear relationship can be shown as a table or a graph. Can you see the same pattern in both representations? For any line on the graph, we can select a few points and represent them as x's and y's as rows in a table. 
 
 [.lesson-instruction]
@@ -141,10 +202,10 @@ Can you match tables and graphs, even if the rows are shuffled and the axes are 
 === Synthesize
 @vocab{Linear} relationships show up all the time in real life, so it's helpful to know how to think about them. We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. When a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
-== Linear, Non-Linear, or Bust!
+== Linear, Non-Linear, or Bust!  @duration{20 minutes}
 
 === Overview
-Students explore the concept of linearity, identifying properties like @vocab{slope} (or @vocab{rate}) and @vocab{y-intercept} in both tables and graphs. They also learn that not all tables and graphs express linear relationships - or any relationship at all!
+Students deepen their understanding of linearity, by seeing counterexamples (non-linear relationships), as well as tables and graphs for which there is _no_ relationship.
 
 === Launch
 
@@ -168,17 +229,7 @@ If all linear relationships can be shown as a table or a graph, does that mean a
 Three of the graphs above are *straight lines* (called "linear") and three are not ("nonlinear"). As we can see, the linear graphs can be perfectly horizontal, slope upwards and to the right, or slope downwards to the right. 
 
 [.lesson-point]
-Linear relationships are always a straight line, defined by slope and y-intercept
-
-Each of these linear relationships has two properties. First, they all increase at a consistent rate - called @vocab{slope} - increasing or decreasing by the same amount. Second, they also have a @vocab{y-intercept}: the y-value when x = 0 ("intercepts" the y-axis).
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Pedagogy Note}
-
-There is nothing "magical" about the @vocab{y-intercept}! It's just a convention that mathematicians use, since graphs don't have a "starting value". They could have arbitrarily picked some other point, like "the point where the line crosses -2735.1", and the only change to the way we teach linear functions would be a vocabulary word!
-|===
+Linear relationships in a graph always appear as straight lines
 
 Look at the six "sideways" data tables below. Each of the "y" columns shows a pattern. You can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc).
 
@@ -238,79 +289,10 @@ Look at the six "sideways" data tables below. Each of the "y" columns shows a pa
 - Can you figure out what the next x,y pair should be for each of them?  
 - Can you guess what the y-value for each table would be when x is 0?
 
-When there is a @vocab{linear} relationship, the values in a table increase at a _constant rate_ and the graph of those values will all fall on a straight line.
-
-*Note:* Rows in a table don't have to be ordered! You may have to _sort_ the rows first in order to see the pattern emerge. 
-
-For example, the pattern in this table is unclear until we re-order the rows (hover your mouse over the table to see).
-
-++++
-<div class="tableFlip">
-++++
-[.sideways-pyret-table]
-|===
-| x | 3 | 2 | 4 | 0 | 1
-| y | 6 | 4 | 8 | 0 | 2
-|===
-
-
-[.sideways-pyret-table]
-|===
-| x | 0 | 1 | 2 | 3 | 4
-| y | 0 | 2 | 4 | 6 | 8
-|===
-++++
-</div>
-++++
-
-Sometimes it can also be difficult to see patterns in tables when they are missing rows.  For example, in the table below if we just looked at the y-values we might not see a pattern because the value goes down by 6, then 2, then 2 and then 4. 
-But if we fill in the missing x-values (hover your mouse over the table to see) ...the table reveals that the y-values are decreasing by 2 each time x increases by 1.
-
-++++
-<div class="tableFlip">
-++++
-[.sideways-pyret-table]
-|===
-| x | -4 |-1  | 0  | 1  | 3
-| y | 20 | 14 | 12 | 10 | 6
-|===
-
-
-[.sideways-pyret-table]
-|===
-| x | -4 | -3 | -2 | -1 | 0  | 1  | 2 | 3
-| y | 20 | 18 | 16 | 14 | 12 | 10 | 8 | 6
-|===
-++++
-</div>
-++++
-
 [.lesson-point]
-Finding the @vocab{slope} and @vocab{y-intercept}, _without_ having to sort or fill in the rows
+Linear relationships in a table show up as sequences that change at a constant rate
 
-*SLOPE: find two rows in the table, and divide the difference in y's by the difference in x's.*
-
-This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function. 
-
-Taking the first two rows in the table, this gives us @math{\frac{18 - 20}{-3 - -4}}, which simplifies to @math{\frac{-2}{1}}, for a slope of @math{-2}.
-
-*Y-INTERCEPT: multiply any x in the table by the slope, and subtract the result from the corresponding y.*
-
-We can take the last row in the table, multiplying @math{3 \times -2} gives us @math{-6}. The corresponding y is 6, so the y-intercept is @math{6 - -6 = 12}.
-
-== Investigate
-[.lesson-point]
-The graph of a linear relationship will always appear as a straight line.  An ordered table of values for any linear relationship will reveal a constant rate of change.
-
-Can you identify the slope and y-intercept of a linear relationship in a table? In a graph?
-
-- Complete @opt-printable-exercise{slope-and-y-tables.adoc}
-- Complete @opt-printable-exercise{slope-and-y-graphs.adoc}
-
-[.lesson-point]
-Not every table or graph has a pattern!
-
-Take a look at the table and graph below. Can you predict the next two rows? Could you extend the line?
+Sometimes there is __no pattern at all__! Take a look at the table and graph below. Can you predict the next two rows? Could you extend the line?
 
 [cols="^.^1a,^.^1a", grid="none", frame="none"]
 |===
@@ -328,16 +310,14 @@ Take a look at the table and graph below. Can you predict the next two rows? Cou
 | @image{images/scatterplot.png}
 |===
 
+*PRO TIP:* One surefire way to tell that there is no relationship between @math{x} and @math{y} is when there are two different @math{y} values for the same @math{x}.
 
-Sometimes there is no pattern at all! *PRO TIP:* One surefire way to tell that there is no relationship between @math{x} and @math{y} is when there are two different @math{y} values for the same @math{x}.
-
-Can you tell when a relationship has a linear pattern? A non-linear one? No pattern at all?
-
-- OPTIONAL: Complete @opt-printable-exercise{linear-nonlinear-bust.adoc, "Linear, Non-Linear or Bust?"}
+== Investigate
+[.lesson-instruction]
+Can you tell when a relationship has a linear pattern? A non-linear one? No pattern at all? Complete @opt-printable-exercise{linear-nonlinear-bust.adoc, "Linear, Non-Linear or Bust?"}
 
 === Synthesize
-
-Data has a "shape", and this shape can emerge when we look for patterns in that data. A linear, straight-line relationship is one kind of shape, and it shows up when we view that data as a table or a graph.
+Data has a "shape", and this shape can emerge when we look for patterns in that data. A @vocab{linear} relationship is one kind of shape, and it shows up when we view that data as a table or a graph.
 
 == Additional Exercises:
 

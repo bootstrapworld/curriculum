@@ -1,0 +1,239 @@
+= Defining Linear Relationships
+
+++++
+<style>
+.small-table {max-width: 75%}
+.graph-table img {width: 33%;}
+.tableFlip { position: relative; }
+.tableFlip table {
+	top: 0px;
+	left: 0px;
+    transition: opacity 1s;
+}
+.tableFlip table:first-child {
+	position: relative;
+	background: lightpink;
+}
+.tableFlip table:last-child {
+	position: absolute;
+	background: lightgreen;
+	opacity: 0;
+}
+.tableFlip:hover table:first-child { opacity: 0;}
+.tableFlip:hover table:last-child  { opacity: 1;}
+</style>
+++++
+
+@lesson-description{Students explore the concept of slope and y-intercept in linear relationships, using function definitions as a third representation (alongside tables and graphs).}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{ds-linearity, ds-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* identify the slope and y-intercept for a relationship shown as a table or graph
+* define linear functions using slope and y-intercept
+* match different representations of the same linear relationship
+
+| Student-facing Lesson Goals
+|
+
+* Given a table or graph showing a linear relationship, I can compute the slope and y-intercept
+* I can define a function to express a linear relationship
+
+| Materials
+|[.materials-links]
+* Lesson Slides
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, CPO} and open the @online-exercise{https://code.pyret.org/editor#share=XYZ, Graphing Starter File} they saved from the prior lesson. If they don't have the file, they can open a new one.
+
+| Key Points for the Facilitator
+| Stress that Graphs, Definitions, and Tables are all __different ways of viewing the same function__. The misconception to fight against is the idea that @math{f(x) = 3x + 2} is somehow the "real" function, with the graph being "the thing the function draws."
+
+
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Slope and Y-Intercept @duration{20 minutes}
+
+=== Overview
+Students explore the concept of linearity, identifying properties like @vocab{slope} and @vocab{y-intercept} in both tables and graphs.
+
+=== Launch
+
+[.lesson-point]
+All linear relationships are defined by slope and y-intercept
+
+Every linear relationship has two properties: 
+
+1) The sequence of y-values always changes at a consistent rate - called @vocab{slope} - increasing or decreasing by the same amount for each value. On a graph, this value refers to the "steepness" and "direction" of the line. If it rises up as we go from left to right, the slope is positive. If it sinks down, the slope is negative. A slope of zero means the line is perfectly horizontal.
+
+2) There is always @vocab{y-intercept}: the y-value when @math{x = 0}, On a graph, this value is where the line "intercepts" the y-axis.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Pedagogy Note}
+
+There is nothing "magical" about the @vocab{y-intercept}! It's just a convention that mathematicians use, since graphs don't have a "starting value". They could have arbitrarily picked some other point, like "the point where the line crosses -2735.1", and the only change to the way we teach linear functions would be a vocabulary word!
+|===
+
+Take a look at the following Table (shown sideways, with rows going from left-to-right):
+
+[.sideways-pyret-table]
+|===
+| x | 0 | 1 | 2 | 3 | 4
+| y | 1 | 3 | 5 | 7 | 9
+|===
+
+[.lesson-instruction]
+- Compute how much are the y-values changing from one row to the next to identify the @vocab{slope}.
+- Identify the @vocab{y-intercept} by finding the y-value when @math{x = 0}.
+
+We can see that the y-values increase by 2 each time, giving us a @vocab{slope} of 2. Meanwhile, the row for @math{x = 0} tells us that the @vocab{y-intercept} is 1.
+
+But life isn't always so simple! 
+
+- What if we were missing that first row?
+- What if the other rows were __out of order__?
+- What if we only had a few random rows, for @math{x = 3} and @math{x = 19}?
+
+The slope in this table is much harder to see, until we re-order the rows:
+
+[.sideways-pyret-table]
+|===
+| x | 3 | 2 | 4 | 0 | 1
+| y | 6 | 4 | 8 | 0 | 2
+|===
+
+And this table doesn't even _have_ a row that tells us the y-intercept:
+
+[.sideways-pyret-table]
+|===
+| x | 11 | 17 |  4 |  6 |  9
+| y | 24 | 36 | 10 | 14 | 20
+|===
+
+*So how do we find the @vocab{slope} and @vocab{y-intercept}, _without_ having to sort or fill in the rows?*
+
+It's a lot easier to think about this in terms of graphs than tables. We know that __any linear relationship will show up as a straight line on a graph__, and that we can get as many x's and y's as we need from that line to reconstruct our table.
+
+[.lesson-instruction]
+How many points do we need, in order to figure out the line?
+
+As long as we have __two points__, we can draw the line between them! That means that any table with two or more rows can give us all the information we need to figure out the @vocab{slope} and @vocab{y-intercept}. Here's how we do it:
+
+*1) SLOPE: find any two rows in the table, and divide the difference in y's by the difference in x's.*
+
+This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function. This is often called "change in y over change in x", or __"rise over run"__.
+
+Taking the first two rows in the table, this gives us @math{\frac{36 - 24}{17 - 11}}, which simplifies to @math{\frac{12}{6}}, for a slope of @math{2}.
+
+[.lesson-instruction]
+Pick two other rows in the table and compute the @vocab{slope}. Did you get the same answer?
+
+*2) Y-INTERCEPT: multiply any x in the table by the slope, and subtract the result from the corresponding y.*
+
+We can take the last row in the table, multiplying @math{9 \times 2} to get @math{18}. The corresponding y is 20, so the y-intercept is @math{20 - 18 = 2}.
+
+[.lesson-instruction]
+Pick another row in the table and compute the @vocab{y-intercept}. Did you get the same answer?
+
+__But what about graphs?__ We can compute the @vocab{slope} and @vocab{y-intercept} from a graph the same way, by picking two points and using those as our two sample rows.
+
+=== Investigate
+Can you identify the slope and y-intercept of a linear relationship in a table? In a graph?
+
+- Complete @opt-printable-exercise{slope-and-y-tables.adoc}
+- Complete @opt-printable-exercise{slope-and-y-graphs.adoc}
+
+=== Synthesize
+The @vocab{slope} and @vocab{y-intercept} form the essence of linear relationships. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at the same speed, all we need to know is __where it is at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+
+== Defining Linear Relationships
+
+=== Overview
+Students explore function definitions as a way of expressing linear relationships, and construct tables and graphs from those definitions.
+
+=== Launch
+Writing out an entire table or graph - even if it's just two rows or two points! - can be time-consuming. It also forces other people to compute the slope and y-intercept by hand!
+
+Fortunately, a *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center! Let's see a function definition, written both as regular function notation and as Pyret code.
+
+[cols="^1,^1",options="header"]
+|===
+| Function Notation 		| Pyret Code
+|@math{f(x) = 6x - 10} 		| `fun f(x): (6 * x) - 10`
+|===
+
+As with tables and graphs, a function definition can reveal whether or not it is linear.
+
+@image{images/slope-and-y.png}
+
+If the line is perfectly flat the slope will be zero, making the term "invisible"! In the example below, a linear function with a slope of zero is shown with and without this term:
+
+[cols="^1,^1",options="header"]
+|===
+| "Visible" Slope	 		| "Invisible" Slope
+|@math{f(x) = 0x + 22}		| @math{f(x) = 22}
+|===
+
+If the line crosses the y-axis at zero, the y-intercept will be @math{0}. This can make that term "invisible"! In the example below, a linear function with a y-intercept of zero is shown with and without this term:
+
+[cols="^1,^1",options="header"]
+|===
+| "Visible"	y-intercept 	| "Invisible" y-intercept
+|@math{f(x) = 3.2x + 0}		| @math{f(x) = 3.2x}
+|===
+
+To check our work, we can apply the function to the x-value in each Row in the table, it produces the y-value! Instead of writing endless rows repeating the pattern or drawing an entire graph, we can just declare the pattern itself using the function.
+
+=== Investigate
+
+[.lesson-instruction]
+- Can you find the slope and y-intercept of a function? Complete @opt-printable-exercise{slope-and-yintercept.adoc}.
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Definitions of Linear Functions"}.
+- Complete @opt-printable-exercise{match-symbols-tables.adoc}.
+- Complete @opt-printable-exercise{define-functions-tables.adoc}.
+
+There are two ways to compare function definitions to graphs:
+
+1) Use the function definition to _compute_ some (x, y) pairs, and see if those fall on the graph.
+
+2) Find the _slope_ and _y-intercept_ of the function and graph, and see if they are the same.
+
+[.lesson-instruction]
+--
+Which strategy do you like best? Are there times when you would use one over the other?
+
+- Complete @opt-printable-exercise{match-definitions-graphs.adoc}
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, "Matching Graphs and Definitions of Linear Functions"}
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Definitions of Linear Functions 2}
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, "Matching Function Definitions, Tables and Graphs"}
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, "Matching Linear Functions, Tables and Graphs 2"}
+- Complete @opt-printable-exercise{define-functions-graphs.adoc}
+--
+
+=== Common Misconceptions
+It is incredibly common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
+
+=== Synthesize
+Function definitions are a way of talking about relationships between quantities: milk costs $0.59/gallon, a stone falls at @math{9.8m/s^2}, or there are 30 students for every teacher at a school. If we can figure out the relationship between a small sample of data, we can __make predictions__ about what happens next. We can see these relationships as tables, graphs, or symbols in a definition. We can even think about them as a mapping between @vocab{Domain} and @vocab{Range}! 
+
+When we talk about functions, sometimes it's easiest to think of the graph. Sometimes it's best to see the table, or the definition. *It all depends on what we want to know.* What's important is being able to switch between representations, and see the connections between them.
+
+
+== Additional Exercises:
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, "Identifying y-intercepts in Tables, Graphs & Symbolic Representations of Linear Functions"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, "Identifying slope in Tables, Graphs & Symbolic Representations of Linear Functions"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Symbolic Representations of Linear Functions"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, "Matching Tables, Graphs, and Symbolic Representations of Functions (challenge!)"}
