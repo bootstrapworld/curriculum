@@ -27,13 +27,32 @@ defined as:
    answers will help clarify what Frobbotz's benefits, demands,
    and consequences are.
 
-All tags end with a blank line or end-of-file. This tag is a not
-a question, and there is no expectation of an answer by the
-student. Non-question tags have a leading underscore (`++_++`).
+All tags end with a blank line or end-of-file.  If the body of
+the tag narrative should contain a blank line, as when
+introducing an itemization, you may put the entire tag
+narrative inside an open block, i.e., with lines that have a
+leading `--` and nothing else. E.g.,
 
-The line immediately following a question tag is the AsciiDoc
-class `[.question]`.
-E.g.,
+   :Description:
+   --
+   These questions relate to the Frobbotz dataset. Your
+   answers will help clarify what Frobbotz's benefits, demands,
+   and consequences are.
+
+   - Question 1
+
+   - Question 2
+   --
+
+(AsciiDoc needs a blank line (or beginning-of-file) above the
+first item in order to recognize an itemization list.)
+
+The `Description` tag above is a \fInot\fP
+a question, so there is no expectation of an answer by the
+student. 
+
+Tags that are questions are characterized by a line immediately
+following the tag mentioning the (CSS) class `[.question]`. E.g.,
 
     :origin:
     [.question]
