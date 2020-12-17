@@ -7,6 +7,6 @@ reports:
 student-files:
 	@for f in *-admin.adoc; do \
 	  echo converting $$f; \
-	  make-questionnaire.rkt $$f; \
+	  ./make-questionnaire.rkt $$f; \
 	done
 
