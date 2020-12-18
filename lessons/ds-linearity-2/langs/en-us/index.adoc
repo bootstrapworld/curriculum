@@ -143,7 +143,9 @@ Pick two other rows in the table and compute the @vocab{slope}. Did you get the 
 
 *2) Y-INTERCEPT: multiply any x in the table by the slope, and subtract the result from the corresponding y.*
 
-We can take the last row in the table, multiplying @math{9 \times 2} to get @math{18}. The corresponding y is 20, so the y-intercept is @math{20 - 18 = 2}.
+You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work!
+
+Let's use last row in the table to demonstrate this shortcut: Starting with the @math{x} value of 9, multiplying @math{9 \times 2} gives us @math{18}. The corresponding @math{y} is 20, so the y-intercept is @math{20 - 18 = 2}.
 
 [.lesson-instruction]
 Pick another row in the table and compute the @vocab{y-intercept}. Did you get the same answer?
@@ -169,19 +171,20 @@ Students explore function definitions as a way of expressing linear relationship
 === Launch
 Writing out an entire table or graph - even if it's just two rows or two points! - can be time-consuming. It also forces other people to compute the slope and y-intercept by hand!
 
-Fortunately, a *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center! Let's see a function definition, written both as regular function notation and as Pyret code.
+Fortunately, a *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center! Let's see a function definition, written both as regular function notation and as Pyret code. NOTE: the slope and y-intercept can be written in any order!
 
 [cols="^1,^1",options="header"]
 |===
 | Function Notation 		| Pyret Code
 |@math{f(x) = 6x - 10} 		| `fun f(x): (6 * x) - 10`
+|@math{f(x) = -10 + 6x} 	| `fun f(x): -10 + (6 * x)`
 |===
 
 As with tables and graphs, a function definition can reveal whether or not it is linear.
 
 @image{images/slope-and-y.png}
 
-If the line is perfectly flat the slope will be zero, making the term "invisible"! In the example below, a linear function with a slope of zero is shown with and without this term:
+If the line is perfectly horizontal the @vocab{slope} will be zero, making the term "invisible"! In the example below, a linear function with a slope of zero is shown with and without this term:
 
 [cols="^1,^1",options="header"]
 |===
