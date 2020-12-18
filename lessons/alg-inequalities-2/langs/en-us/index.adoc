@@ -90,11 +90,11 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 Have students identify 4 solutions and 4 non-solutions for each of the following inequalities.
 
 * @math{x \gt 5}
-* @math{x \lt 15}
+* @math{x \le 15}
 
-What about the solution set of @math{x \gt 5} `and` @math{x \lt 15}?  What numbers make both of these inequality expressions true?
+What about the solution set of @math{x \gt 5} `and` @math{x \le 15}?  What numbers make both of these inequality expressions true?
 
-How would that be different from @math{x \gt 5} `or` @math{x \lt 15}?  What numbers make at least one of these inequality expressions true?
+How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numbers make at least one of these inequality expressions true?
 
 === Investigate
 
@@ -112,22 +112,22 @@ This starter file includes two special functions.
 
 `fun gt5(x): x > 5 end`
 
-`fun lt15(x): x < 15 end`
+`fun lte15(x): @math{x \le 15} end`
 
-`and-intersection( gt5, lt15, [list: 3, 6, 9, 12, 15, 18, 21, 24] )`
+`and-intersection( gt5, lt15, [list: -5, -2.1, 0, 5, 10, @math{\frac{39}{5}}, 15, 20] )`
 
-@span{.center}{@image{images/intersection.png,"" ,""}}
+@span{.center}{@image{images/intersection1.png,"" ,""}}
 
-`fun lt5(x): x < 5 end`
+`fun lte5(x): @math{x \le 15} end`
 
 `fun gt15(x): x > 15 end`
 
-`and-intersection(lt5, gt15, [list: 3, 6, 9, 12, 15, 18, 21, 24] )`
+`and-intersection(lt5,gt15, [list: -5, -2.1, 0, 5, 10, @math{\frac{39}{5}}, 15, 20] )`
 
  
 _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
 
-@span{.center}{@image{images/intersection-no-solution.png,"" ,""}}
+@span{.center}{@image{images/intersection-no-solution1.png,"" ,""}}
 
 `or-union`takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true. 
 
@@ -135,29 +135,29 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 `fun gt15(x): x > 15 end`
 
-`or-union(lt5, gt15, [list: 3, 6, 9, 12, 15, 18, 21, 24] )`
+`or-union(lt5, gt15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
 
-@span{.center}{@image{images/union.png,"" ,""}}
+@span{.center}{@image{images/union1.png,"" ,""}}
 
 
 `fun gt5(x): x > 5 end`
 
 `fun lt15(x): x < 15 end`
 
-`or-union(gt5, lt15, [list: 3, 6, 9, 12, 15, 18, 21, 24] )`
+`or-union(gt5, lt15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
 
 _Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
 
-@span{.center}{@image{images/union-infinite.png,"" ,""}}
+@span{.center}{@image{images/union-infinite1.png,"" ,""}}
 
 [.lesson-instruction]
 Turn to @opt-printable-exercise{compound-inequalities.adoc, Compound Inequalities} and explore the compound inequalities listed using the @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File} @ifproglang{wescheme}{https://www.wescheme.org/view?publicId=yFnDbsSnR7}, identifying solutions and non-solutions for each.
 
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality. 
 
-`(define (fiveto15 x) (and (> x 5)(< x 15)))`
+`(define (fiveto15 x) (and (> x 5)(<= x 15)))`
 
-`(inequality fiveto15 [list: 3, 6, 9, 12, 15, 18, 21, 24])`
+`(inequality fiveto15 [list: -5, -2.1, 0, 5, 10, 12, 15, 20])`
 
 If you have time, have students open to @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc96db07611cd39220e6672, Unions and Intersections - Matching Inequality Functions to graphs of their Solution Sets}
 
