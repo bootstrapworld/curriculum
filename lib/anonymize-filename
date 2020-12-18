@@ -2,24 +2,33 @@
 
 f="$1"
 
-fd=$(dirname $f)
+#echo anonymizing $f >> ~/j.txt
+
+fd=$(dirname -- $f)
 
 if test "$fd" = "."; then fd=""
 else fd="$fd/"
 fi
 
-fb=$(basename $f)
+#echo fd is $fd>>~/j.txt
+
+fb=$(basename -- $f)
 
 fe=${fb##*.}
 
 if test "$fe" = "$fb"; then fe=""
 else fe=".$fe"
-  fb=$(basename $fb $fe)
+  fb=$(basename -- $fb $fe)
 fi
+
+#echo fb is $fb >> ~/j.txt
+#echo fe is $fe >> ~/j.txt
 
 fbb=$(echo $fb|git hash-object --stdin|sed -e 's/^\(.\{16\}\).*/\1/')
 
 anonf="$fd$fbb$fe"
+
+#echo destination $anonf >> ~/j.txt
 
 if test -f "$anonf"; then
   if test -f "$f"; then
