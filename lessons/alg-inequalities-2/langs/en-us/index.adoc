@@ -101,9 +101,9 @@ How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numb
 [.lesson-instruction]
 Have students log in to the 
 @ifproglang{wescheme}{ 
-@online-exercise{https://www.wescheme.org/view?publicId=yFnDbsSnR7, Compound Inequalities Starter File, read the code carefully and click run to see the graphs they've just considered} 
+@online-exercise{https://www.wescheme.org/view?publicId=yFnDbsSnR7, Compound Inequalities Starter File), read the code carefully and click run to see the graphs they've just considered} 
 }
-@ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File, read the code carefully and click run to see the graphs they've just considered.} 
+@ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1ErJCa-wrr4zdV5U4lhUhIXvcup8R6_5y&v=8c4da7d, Compound Inequalities Starter File), read the code carefully and click run to see the graphs they've just considered.} 
 }
 
 This starter file includes two special functions.
@@ -139,7 +139,6 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 @span{.center}{@image{images/union1.png,"" ,""}}
 
-
 `fun gt5(x): x > 5 end`
 
 `fun lte15(x):`@math{x \le 15} `end`
@@ -155,14 +154,17 @@ Turn to @opt-printable-exercise{compound-inequalities.adoc, Compound Inequalitie
 
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality. 
 
-`(define (fiveto15 x) (and (> x 5)(<= x 15)))`
-
-`(inequality fiveto15 [list: -5, -2.1, 0, 5, 10, 12, 15, 20])`
-
+@ifproglang{pyret}{
+`fun fiveto15(x): (x > 5) and (x <= 15) end`
+`inequality(fiveto15, [list: -5, -2.1, 0, 5, 10.2, 12, 15, 20])`
+}
+@ifproglang{wescheme}{
+	`(define (fiveto15 x)(and (> x 5) (<= x 15)))`
+	`(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))`
+}
 
 // [.lesson-instruction]
 // Turn to @opt-printable-exercise{compound-inequality-functions.adoc, Compound Inequality Functions}  // and have students write code to describe the compound inequalities pictured. 
-
 
 If you have time, have students open to @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc96db07611cd39220e6672, Unions and Intersections - Matching Inequality Functions to graphs of their Solution Sets}
 
