@@ -112,17 +112,17 @@ This starter file includes two special functions.
 
 `fun gt5(x): x > 5 end`
 
-`fun lte15(x): @math{x \le 15} end`
+`fun lte15(x):` @math{x \le 15} `end`
 
-`and-intersection( gt5, lt15, [list: -5, -2.1, 0, 5, 10, @math{\frac{39}{5}}, 15, 20] )`
+`and-intersection( gt5, lte15, [list: -5, -2.1, 0, 5, 10,` @math{\frac{39}{5}},` 15, 20] )`
 
 @span{.center}{@image{images/intersection1.png,"" ,""}}
 
-`fun lte5(x): @math{x \le 15} end`
+`fun lt5(x): x < 5 end`
 
-`fun gt15(x): x > 15 end`
+`fun gte15(x):` @math{x \ge 15} `end`
 
-`and-intersection(lt5,gt15, [list: -5, -2.1, 0, 5, 10, @math{\frac{39}{5}}, 15, 20] )`
+`and-intersection(lt5, gte15, [list: -5, -2.1, 0, 5, 10,` @math{\frac{39}{5}}, `15, 20] )`
 
  
 _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
@@ -133,18 +133,18 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 `fun lt5(x): x < 5 end`
 
-`fun gt15(x): x > 15 end`
+`fun gte15(x):` @math{x \le 15} `end`
 
-`or-union(lt5, gt15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
+`or-union(lt5, gte15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
 
 @span{.center}{@image{images/union1.png,"" ,""}}
 
 
 `fun gt5(x): x > 5 end`
 
-`fun lt15(x): x < 15 end`
+`fun lte15(x):`@math{x \le 15} `end`
 
-`or-union(gt5, lt15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
+`or-union(gt5, lte15, [list: -5, -2.1, 0, 5, 10, 12, 15, 20] )`
 
 _Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
 
@@ -158,6 +158,9 @@ Instead of defining two functions as simple inequalities, we could produce the s
 `(define (fiveto15 x) (and (> x 5)(<= x 15)))`
 
 `(inequality fiveto15 [list: -5, -2.1, 0, 5, 10, 12, 15, 20])`
+
+[.lesson-instruction]
+Turn to @opt-printable-exercise{compound-inequality-functions.adoc, Compound Inequality Functions} and have students write code to describe the compound inequalities pictured. 
 
 If you have time, have students open to @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc96db07611cd39220e6672, Unions and Intersections - Matching Inequality Functions to graphs of their Solution Sets}
 
