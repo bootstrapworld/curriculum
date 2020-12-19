@@ -77,7 +77,7 @@ Every linear relationship has two properties:
 
 1) The sequence of y-values always changes at a consistent rate - called @vocab{slope} - increasing or decreasing by the same amount for each value. On a graph, this value refers to the "steepness" and "direction" of the line. If it rises up as we go from left to right, the slope is positive. If it sinks down, the slope is negative. A slope of zero means the line is perfectly horizontal.
 
-2) There is always @vocab{y-intercept}: the y-value when @math{x = 0}, On a graph, this value is where the line "intercepts" the y-axis.
+2) There is allso @vocab{y-intercept}: the y-value when @math{x = 0}. On a graph, this value is where the line "intercepts" the y-axis.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -85,6 +85,10 @@ Every linear relationship has two properties:
 @span{.title}{Pedagogy Note}
 
 There is nothing "magical" about the @vocab{y-intercept}! It's just a convention that mathematicians use, since graphs don't have a "starting value". They could have arbitrarily picked some other point, like "the point where the line crosses -2735.1", and the only change to the way we teach linear functions would be a vocabulary word!
+
+NOTE FOR EMMANUEL: Not sure I agree with this. The magical thing about the y-intecept is that when you put in 0 for x the x term falls away... that doesn't happen with any other number... so, unlike lots of other things, like why coordinate pairs are written (x, y) instead of (y, x) there is actually a mathematically important logic to this convention.
+
+ALSO FOR E: I think rows is a confusing word here... I'm going to make some edits to eliminate the word. Revert if that language is important from a perspective I don't have.
 |===
 
 Take a look at the following Table (shown sideways, with rows going from left-to-right):
@@ -96,18 +100,19 @@ Take a look at the following Table (shown sideways, with rows going from left-to
 |===
 
 [.lesson-instruction]
-- Compute how much are the y-values changing from one row to the next to identify the @vocab{slope}.
+- Compute how much y increases by for each increase in x to identify the @vocab{slope}.
 - Identify the @vocab{y-intercept} by finding the y-value when @math{x = 0}.
 
-We can see that the y-values increase by 2 each time, giving us a @vocab{slope} of 2. Meanwhile, the row for @math{x = 0} tells us that the @vocab{y-intercept} is 1.
+We can see that the y-values increase by 2 each time x increases by 1, giving us a @vocab{slope} of 2. Meanwhile, the row for @math{x = 0} tells us that the @vocab{y-intercept} is 1.
 
 But life isn't always so simple! 
 
-- What if we were missing that first row?
+- What if the table didn't include x = 0?
+- What if the x-values didn't increase by 1?
 - What if the other rows were __out of order__?
 - What if we only had a few random rows, for @math{x = 3} and @math{x = 19}?
 
-The slope in this table is much harder to see, until we re-order the rows:
+The slope in this table is much harder to see, because the x-values are out of order:
 
 [.sideways-pyret-table]
 |===
@@ -115,7 +120,7 @@ The slope in this table is much harder to see, until we re-order the rows:
 | y | 6 | 4 | 8 | 0 | 2
 |===
 
-And this table doesn't even _have_ a row that tells us the y-intercept:
+And the y-intercept is hard to find in this table, because it doesn't tell us what y equals when x = 0:
 
 [.sideways-pyret-table]
 |===
@@ -123,7 +128,7 @@ And this table doesn't even _have_ a row that tells us the y-intercept:
 | y | 24 | 36 | 10 | 14 | 20
 |===
 
-*So how do we find the @vocab{slope} and @vocab{y-intercept}, _without_ having to sort or fill in the rows?*
+*So how do we find the @vocab{slope} and @vocab{y-intercept}, _without_ having to sort or extend the table?*
 
 It's a lot easier to think about this in terms of graphs than tables. We know that __any linear relationship will show up as a straight line on a graph__, and that we can get as many x's and y's as we need from that line to reconstruct our table.
 
@@ -132,20 +137,20 @@ How many points do we need, in order to figure out the line?
 
 As long as we have __two points__, we can draw the line between them! That means that any table with two or more rows can give us all the information we need to figure out the @vocab{slope} and @vocab{y-intercept}. Here's how we do it:
 
-*1) SLOPE: find any two rows in the table, and divide the difference in y's by the difference in x's.*
+*1) SLOPE: find any two pairs of values in the table, and divide the difference in y's by the difference in x's.*
 
 This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function. This is often called "change in y over change in x", or __"rise over run"__.
 
-Taking the first two rows in the table, this gives us @math{\frac{36 - 24}{17 - 11}}, which simplifies to @math{\frac{12}{6}}, for a slope of @math{2}.
+Taking the first two pairs of values in the table, this gives us @math{\frac{36 - 24}{17 - 11}}, which simplifies to @math{\frac{12}{6}}, for a slope of @math{2}.
 
 [.lesson-instruction]
-Pick two other rows in the table and compute the @vocab{slope}. Did you get the same answer?
+Pick two other pairs of values from the table and compute the @vocab{slope}. Did you get the same answer?
 
 *2) Y-INTERCEPT: multiply any x in the table by the slope, and subtract the result from the corresponding y.*
 
 You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work!
 
-Let's use last row in the table to demonstrate this shortcut: Starting with the @math{x} value of 9, multiplying @math{9 \times 2} gives us @math{18}. The corresponding @math{y} is 20, so the y-intercept is @math{20 - 18 = 2}.
+Let's use the last pair of values in the table to demonstrate this shortcut: Starting with the @math{x} value of 9, multiplying @math{9 \times 2} gives us @math{18}. The corresponding @math{y} is 20, so the y-intercept is @math{20 - 18 = 2}.
 
 [.lesson-instruction]
 Pick another row in the table and compute the @vocab{y-intercept}. Did you get the same answer?
@@ -161,7 +166,7 @@ Can you identify the slope and y-intercept of a linear relationship in a table? 
 - For more paper-and-pencil practice, complete @opt-printable-exercise{slope-and-y-graphs.adoc}
 
 === Synthesize
-The @vocab{slope} and @vocab{y-intercept} form the essence of linear relationships. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at the same speed, all we need to know is __where it is at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+The @vocab{slope} and @vocab{y-intercept} form the essence of linear relationships. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
 
 == Defining Linear Relationships
 
