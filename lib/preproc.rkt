@@ -578,7 +578,7 @@
                    (cons styled-link-output *online-exercise-links*)))))
 
            (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
-             (let ([styled-link-output (string-append "[optional.OnlineExercise]##"
+             (let ([styled-link-output (string-append "[.optional.OnlineExercise]##"
                                          link-output "##")])
                (unless (member styled-link-output *opt-online-exercise-links*)
                  (set! *opt-online-exercise-links*
