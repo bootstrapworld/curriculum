@@ -266,6 +266,10 @@
         "3B-AP-14" 
         "9-12.Data and Analysis.Visualization and Transformation"
         "OK.L1.AP.PD.05")
+    ("ds-linearity"
+        )
+    ("ds-linearity-2"
+        )
     ("ds-linear-regression" 
         "HSS.ID.C.7" 
         "HSS.ID.C.8" 
