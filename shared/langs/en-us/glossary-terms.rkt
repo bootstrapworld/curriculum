@@ -88,7 +88,7 @@ when it prints out the glossary for a particular unit
     (("intersection" "intersections") "the set of values that makes both inequalities true")
     ("legal expression" "code that follows the Code Rules for a language")
     (("library" "libraries") "a collection of functions that can be made available to our program by using include")
-    ("linear" "a pattern that makes a straight line when it is graphed")
+    (("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as straight line or written as a sequence of numbers that change at a constant rate")
     (("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables")
     ("linear regression" "modeling the relationship between two quantitative variables using a straight line")
     (("list" "lists") "a data structure containing a sequence of values")

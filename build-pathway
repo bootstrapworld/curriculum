@@ -1495,9 +1495,9 @@ function buildpathway() {
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
-        ABYSS=this-page-intentionally-left-blank
+        ABYSS=page-not-found
         if test ! -f $ABYSS.pdf; then
-          echo '= This Page Intentionally Left Blank' > $ABYSS.adoc
+          echo '= PAGE NOT FOUND!' > $ABYSS.adoc
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
