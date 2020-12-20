@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-12-09 # last modified
+LASTMOD=2020-12-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1495,7 +1495,7 @@ function buildpathway() {
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
-        ABYSS=page-not-found
+        export ABYSS=page-not-found
         if test ! -f $ABYSS.pdf; then
           echo '= PAGE NOT FOUND!' > $ABYSS.adoc
           echo >> $ABYSS.adoc
