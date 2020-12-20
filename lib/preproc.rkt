@@ -1043,6 +1043,13 @@
                                     [else
                                       (read-group i directive)
                                       (read-space i)]))]
+                           [(string=? directive "ifpathway")
+                            (let ([pathway (read-group i directive)])
+                              (cond [(string=? pathway *pathway*)
+                                     (display-begin-span #f o)]
+                                    [else
+                                      (read-group i directive)
+                                      (read-space i)]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(assoc directive *macro-list*)
