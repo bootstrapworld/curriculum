@@ -33,7 +33,7 @@
         (when (char=? c #\@)
           (let ([directive (read-word i)])
             ;(printf "ce directive= ~s\n" directive)
-            (cond [(string=? directive "exercise-link")
+            (cond [(member directive '("printable-exercise" "opt-printable-exercise"))
                    (let* ([page (read-first-arg i directive)]
                           [compts (string-split page "/")])
                      ;(printf "doing ex ~s ~s\n" directive page)
