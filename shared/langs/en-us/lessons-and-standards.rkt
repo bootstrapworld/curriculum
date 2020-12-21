@@ -31,10 +31,14 @@
         ; "BS-DR.1"
         "HSA.SSE.A.1")
     ("alg-defining-functions" 
+        "HSF.IF.A.2"
+        "HSF.IF.B"
+        "HSF.IF.C"
         "7.EE.B.4"
         "8.F.B"
-        ; "BS-DR.1"
-        "HSA.SSE.A.1")
+        "HSA.SSE.A.1"
+        "OK.PA.A.1.1"
+        "OK.PA.A.1.2")
     ("alg-defining-values" 
         "7.EE.B.4"
         ; "BS-PL.3"
@@ -53,10 +57,12 @@
         "OK.PA.A.1.1")
     ("alg-error-analysis" "MP.2")
     ("alg-flags" 
-        "N-Q&1&3" 
-        "6.NS.5-8" 
-        "F-IF.1-3"
-        "OK.Map.1"
+        "HSN.Q.A" 
+        "6.RP.A" 
+        "6.RP.A.3.D"
+        "HSF.IF.A.2"
+        "HSF.IF.B"
+        "OK.MAP.1"
         "OK.MAP.4"
         "OK.PA.A.4"
         "OK.3.AP.A.01" 
@@ -64,17 +70,12 @@
         "OK.3.AP.M.01"
         "OK.3.AP.PD.03"
         "OK.6.AP.M.01") 
-    ("alg-function-composition-1" 
-        "8.G.A.1"
-        ; "BS-IDE"
+    ("alg-function-composition" 
+        "HSF.BF.A.1.C"
         "MP.1"
         "MP.5"
         "OK.PA.A.3.1")
-    ("alg-function-composition-2" 
-        "7.RP.A.1"
-        ;"MP.1"
-        "8.G.A.1")
-    ("alg-game-intro" 
+    ("alg-numbers-inside-videogames" 
         ; "BS-M"
         "MP.2")
     ("alg-inequalities" 
@@ -143,9 +144,9 @@
     ("alg-solving-word-problems" 
         "7.EE.B.4"
         "8.F.B"
-        ; "BS-DR.2"
         "HSF.IF.A.2"
-        "OK.PA.A.1.3")
+        "OK.PA.A.1.3"
+        "OK.PA.A.2.1")
     ("alg-surface-area-rect-prism"
         "6.G.A.4"
         "7.G.B.6"
@@ -218,12 +219,13 @@
         "3A-DA-11" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
-        "OK.8.DA.S.01")("ds-intro" 
+        "OK.8.DA.S.01")
+    ("ds-intro" 
         "SL.9-10.1" 
         "2-DA-07" 
         "P7"
-        "OK.6-8.DA.CVT.01"
-        "OK.3-5.DA.IM.01")
+        "OK.8.DA.CVT.01"
+        "OK.5.DA.IM.01")
     ("ds-ethics-and-privacy" 
         "3A-AP-16" 
         "P1" 
@@ -267,9 +269,36 @@
         "9-12.Data and Analysis.Visualization and Transformation"
         "OK.L1.AP.PD.05")
     ("ds-linearity"
-        )
+        "8.F.A.2"
+        "8.F.B.4"
+        "8.EE.B.5"
+        "HSF.IF.A.2"
+        "HSF.IF.B.5"
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "MP.1"
+        "MP.2"
+        "MP.3"
+        "MP.5"
+        "MP.7"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2")
     ("ds-linearity-2"
-        )
+        "HSF.IF.A.1"
+        "HSF.IF.A.2"
+        "HSF.IF.B.5"
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "MP.1"
+        "MP.2"
+        "MP.3"
+        "MP.5"
+        "MP.7"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2"
+        "OK.PA.A.2.3"
+        "OK.A1.A.4.1"
+        "OK.A1.F.3.1")
     ("ds-linear-regression" 
         "HSS.ID.C.7" 
         "HSS.ID.C.8" 
