@@ -68,7 +68,7 @@
          (s1 (list-ref p 0))
          (question? (let ((s2 ""))
                       (when (>= n 2) (set! s2 (list-ref p 1)))
-                      (regexp-match "question" s2)))
+                      (regexp-match "\\[\\.question\\]" s2)))
          (tag (regexp-replace "^:(.+): *$" s1 "\\1")))
     (fprintf o "include::~a[lines=~a..~a]\n//\n" *admin-file* line1 line-last)
     (when question?
