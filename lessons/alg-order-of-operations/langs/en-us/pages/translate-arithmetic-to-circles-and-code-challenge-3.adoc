@@ -14,17 +14,16 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
   (define expr1 '(+ 2^3^ (*(*(/ (+ (sqr 8) (sqr 4))(- 9 5)) 2) (- 9 (* 4 2)))))
   (define expr2 '(- (* 3 (sqr 4)) (* 2 (sqrt(25 - (sqr 4))))))
   (define expr3 '(- (* (sqr 5)(- 8 (+ 3 2)))(/ (sqrt 100) 2)))
-  (define expr4 '(+ (- 27 (* 5 (- (sqr 4) 16))) (sqrt 9)))
+  
 
   (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
   (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
   (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
-  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
+  
 
   (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
   (define code2 (if *solutions-mode?* (sexp->code expr2) ""))
   (define code3 (if *solutions-mode?* (sexp->code expr3) ""))
-  (define code4 (if *solutions-mode?* (sexp->code expr4) ""))
 }
 
 
@@ -34,6 +33,6 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 |*1*| @math{2^3 + \frac{8^2 + 4^2}{9 - 5} \times 2 \times [9 - (4 - 2)]}	  | @show{coe1}			      | @show{code1}
 |*2*| @math{3 \times 4^2 - 2 \times \sqrt{25 - 4^2}}	                      | @show{coe2}			      | @show{code2}
 |*3*| @math{5^2 \times [8 - (3 + 2)] - \frac{\sqrt{100}}{2}}	              | @show{coe3}			      | @show{code3}
-|*4*| @math{27 - 5 \times (4^2 - 16) + \sqrt{9}}	                          | @show{coe4}			      | @show{code4}
+
 |===
 
