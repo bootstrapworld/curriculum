@@ -13,7 +13,7 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 @do{
   (define expr1 '(- (+ (/ 45 (sqr 3)) (* 8 -2)) (sqrt 16)))
   (define expr2 '(- (+ 11 (/ (sqr (- 5 3)) 5) )(* 6 2)))
-  (define expr3 '(+ (- 27 (* 5 (- (sqr 4) 16))) (sqrt 9)))
+  (define expr3 '(+ 2^3^ (*(*(/ (+ (sqr 8) (sqr 4))(- 9 5)) 2) (- 9 (* 4 2)))))
 
   (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
   (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
@@ -25,7 +25,7 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 
 }
 
-[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
+[cols=".^1a,^10a,^22a,^13a",options="header",stripes="none"]
 |===
 
 |
@@ -48,7 +48,7 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 | @show{code2}
 
 |*3*
-| @math{27 - 5 \times (4^2 - 16) + \sqrt{9}}
+| @math{2^3 + \frac{8^2 + 4^2}{9 - 5} \times 2 \times [9 - (4 - 2)]}
 
 @vspace{20ex}
 | @show{coe3}
