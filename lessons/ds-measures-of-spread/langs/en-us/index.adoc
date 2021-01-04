@@ -79,24 +79,26 @@ This plot shows us the center and spread in our dataset according to those five 
 - The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the upper half of the values_. That’s 60.4 pounds in our dataset.
 - The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Extension Activity}
-
-In statistics, it is not uncommon to use _modified box plots_, which remove extreme datapoints from the box-and-whisker and draw them as dots outside of the blot. The box plot then represents only the "non-extreme" points. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
-
-`# modified-box-plot :: (t :: Table, column :: String) -> Image`
-|===
-
-
 === Investigate
 [.lesson-instruction]
-* Turn to @workbook-link{ds-measures-of-center/pages/summarizing-columns-in-animals.adoc}
+* Turn to @printable-exercise{ds-measures-of-center/pages/summarizing-columns-in-animals.adoc}
 * Fill in the five-number summary for the `pounds` column, and sketch the box plot. 
 * What conclusions can you draw about the distribution of values in this column?
 
 Data Scientists subtract the 1st quartile from the 3rd quartile to compute the range of the “middle half” of the dataset, also called the @vocab{interquartile range}.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Kinesthetic Activity}
+
+Divide the class into groups, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}. 
+
+Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students roll their cylinders so that they fill each of these intervals, retaining a uniform thickness. 
+
+They should notice that shorter intervals have __thicker cyliners__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the datapoints, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
+
+|===
 
 [.lesson-instruction]
 * Find the @vocab{interquartile range} of this dataset.
@@ -106,7 +108,7 @@ Data Scientists subtract the 1st quartile from the 3rd quartile to compute the r
 Now that you’re comfortable creating box plots and looking at measures of spread on the computer, it’s time to put your skills to the test!
 
 [.lesson-instruction]
-Turn to @workbook-link{pages/interpreting-spread.adoc} and complete the questions you see there.
+Turn to @printable-exercise{pages/interpreting-spread.adoc} and complete the questions you see there.
 
 Just as pie and bar charts are ways of visualizing categorical data, box plots and histograms are both ways of visualizing the shape of quantitative data. Box plots make it easy to see the 5-number summary, and compare the Range and Interquartile Range. Histograms make it easier to see skewness and more details of the shape, and offer more granularity when using smaller bins.
 
@@ -115,7 +117,7 @@ Left-skewness is seen as a long tail in a histogram. In a box plot, it's seen as
 Box plots and Histograms can both tell us a lot about the shape of a dataset, but they do so by grouping data quite differently. A box plot is always divided into four parts, which may fall on differently-sized intervals but all contain the same number of points. A histogram, on the other hand, has identically-sized intervals which can contain very different numbers of points.
 
 [.lesson-instruction]
-Turn to @workbook-link{pages/identifying-shape.adoc} and see if you can describe box plots using what you know about skewness.
+Turn to @printable-exercise{pages/identifying-shape.adoc} and see if you can describe box plots using what you know about skewness.
 
 *Challenge Questions:*
 - Compare the  for the `pounds` column of both cats and dogs in the dataset. Are their shapes different? How much overlap is there? 
@@ -132,8 +134,10 @@ Histograms, box plots, and measures of center and spread are all different ways 
 |===
 |
 @span{.title}{Modified Box Plots}
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as dots outside of the blot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
 
-More Statistics- or Math-oriented classes will also be familiar with __modified box plots__. These are similar to traditional box plots, but the box-and-whisker just extends to minimum and maximum non-outliers. To call our attention to outliers, they are drawn as small dots or asterisks at the extreme ends of the graph (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, watch a video on modified box plots}). Pyret also has a `modified-box-plot` function, with the same Domain as `box-plot`.
+`# modified-box-plot :: (t :: Table, column :: String) -> Image`
+
 |===
 
 == Comparing Box Plots @duration{15 minutes}
@@ -146,7 +150,7 @@ __"Do dogs take longer to get adopted than cats?"__
 
 This is asking us about the interaction between a categorical variable (`species`) and a quantitative one (`weeks`). Instead of creating a whole new display, all we have to do is make _separate_ box plots for the distribution of `weeks` for both cats and dogs. Note: this works fine as long as we’re sure to use a common scale! Both box plots (see below) share the same axis for adoption times, which ranges from about 1 to 10 weeks.
 
-Box plots make it easy to decide if values of a quantitative variable seem to be fairly similar or quite different, depending on which group an individual is in. The trick is to train your eyes to look for whether there’s a lot of overlap in the two box plots, or if one is noticeably higher than the other.
+Box plots make it easy to decide if values of a quantitative variable seem to be mostly similar or mostly different, depending on which group an individual is in. The trick is to train your eyes to look for whether there’s a lot of overlap in the two box plots, or if one is noticeably higher than the other.
 
 === Investigate
 Have students break into groups of 3-4, and compare the box plot of weeks-to-adoption for cats with the one for dogs. *Note:* they can  generate the pair of box plots themselves, but we recommend simply giving them this image: @image{images/weeks-cats-v-dogs.png, cats v. dogs}
@@ -165,6 +169,11 @@ Next, each group examines the pair of box plots that compare weeks to adoption f
 Students should confirm that the box plots for adoption times of unfixed versus fixed animals have more overlap than the box plots for adoption times of cats versus dogs.
 
 [.lesson-point]
+Box plots create __varying-size__ bins, which contain a fixed number of datapoints.
+
+This is in contrast to @vocab{histograms}, which have __fixed-size__ bins with varying numbers of datapoints. We can imagine the data as being a pile of pizza dough, divided into four equally-sized quartiles. When the data is tightly packed, the bin is narrow. When it's spread out, the bin is wide. Histograms show data clusters as tall bars, whereas box plots show clusters as narrow quartiles.
+
+[.lesson-point]
 Box plots and histograms give us two different views on the concept of shape.
 
 *Histograms:* fixed intervals (“bins”) with variable numbers of data points in each one. Points “pile up in bins”, so we can see how many are in each. __Larger bars show where the clusters are.__
@@ -172,7 +181,7 @@ Box plots and histograms give us two different views on the concept of shape.
 *Box plots:* variable intervals (“quartiles”) with a fixed number of data points in each one. Treats data more like “pizza dough”, dividing it into four equal quarters showing where the data is tightly clumped or spread thin. __Smaller intervals show where the clusters are.__
 
 [.lesson-instruction]
-To make connections between histograms and box plots, complete @workbook-link{pages/matching-boxplots-to-histograms.adoc}.
+To make connections between histograms and box plots, complete @printable-exercise{pages/matching-boxplots-to-histograms.adoc}.
 
 === Synthesize
 Referring to our Dogs v. Cats box plots, the dogs’ adoption times were much higher than the cats’; the top half of the dogs’ box plot doesn’t overlap at all with the cats’ box plot. Does this suggest that species _does_ or _does not_ play a role in how long it takes for an animal to be adopted?
@@ -199,9 +208,13 @@ Students repeat the previous activity, this time applying it to their own datase
 === Investigate
 
 [.lesson-instruction]
-- Take 15 minutes to fill out @workbook-link{pages/shape-of-my-dataset.adoc} in your Student Workbook. Choose a column to investigate, and write up your findings. 
+- Take 15 minutes to fill out @printable-exercise{pages/shape-of-my-dataset.adoc} in your Student Workbook. Choose a column to investigate, and write up your findings. 
 - Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.bercj2qohd7o, Measures of Center and Spread} portion of their Research Paper, using the means, medians, modes, box plots and five-number summaries they've constructed for their dataset and explaining what they show.
 
 
 === Synthesize
 Have students share their findings with one another.
+
+
+== Additional Exercises:
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe89eeaaef67d0cea85ba5e, "Matching Vocabulary to Definitions"}

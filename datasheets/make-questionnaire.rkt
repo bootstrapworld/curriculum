@@ -21,8 +21,17 @@
 (define *nudge*
   (string-append
     "//\n"
-    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n"
-    "//\n"))
+    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+
+(define *nudge-required*
+  (string-append
+    "//\n"
+    "// PLEASE WRITE TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+
+(define *nudge-common*
+  (string-append
+    "//\n"
+    "// PLEASE WRITE ‘COMMON’ OR OTHER TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
 
 (define *lineno* 0)
 
@@ -32,56 +41,70 @@
     ln))
 
 (define (read-graf i)
-  (let loop ((ss '()))
-    (let ((ln (read-a-line i)))
-      (cond ((eof-object? ln)
-             (if (null? ss) ln (reverse ss)))
-            ((regexp-match "^ *$" ln)
-             (reverse ss))
-            (else
-              (loop (cons ln ss)))))))
+  (let* ((start-line (+ *lineno* 1))
+         (stop-line -1)
+         (inside-double-dash? #f)
+         (lines
+           (let loop ((ss '()))
+             (let ((ln (read-a-line i)))
+               (cond ((eof-object? ln)
+                      (if (null? ss) ln (reverse ss)))
+                     ((regexp-match "^ *$" ln)
+                      (cond (inside-double-dash? (loop (cons ln ss)))
+                            (else (set! stop-line *lineno*) 
+                                  (reverse ss))))
+                     ((regexp-match "^-- *$" ln)
+                      (set! inside-double-dash? (not inside-double-dash?))
+                      (loop (cons ln ss)))
+                     (else
+                       (loop (cons ln ss))))))))
+    (values lines start-line stop-line)))
 
-(define (tagged-question? p)
+(define (tagged-graf? p)
   (let ((line0 (list-ref p 0)))
     (regexp-match "^:[^ ]+: *$" line0)))
 
-(define (tagged-guideline? p)
-  (let ((line0 (list-ref p 0)))
-    (regexp-match "^:_[^ ]+: *$" line0)))
+(define (write-uncomment p o)
+  (let ((n (length p)))
+    (let loop ((i 0))
+      (unless (>= i n)
+        (display (regexp-replace "^// *" (list-ref p 0) "") o)
+        (newline o)
+        (loop (+ i 1))))))
 
-(define (header? p)
-  (and (= (length p) 1)
-       (regexp-match "^// *= *" (list-ref p 0))))
-
-(define (write-snippet p o #:guideline? [guideline? #f])
+(define (write-snippet p line1 line-last o)
   (let* ((n (length p))
          (s1 (list-ref p 0))
-         (tag (regexp-replace "^:(.+): *$" s1 "\\1"))
-         (tag-file (format ".~a-~a.adoc" *datasheet-name* tag)))
-    ;(printf "doing tag ~a, tag-file ~a\n" tag tag-file)
-    (call-with-output-file tag-file
-      (lambda (tfo)
-        (fprintf o "include::~a[]\n//\n" tag-file)
-        (display (if guideline? "[.guideline]" "[.question]") tfo)
-        (display "\n--\n" tfo)
-        (let loop ((i 1))
-          (unless (>= i n)
-            (let ((s (list-ref p i)))
-              (display s tfo) (newline tfo)
-              (display "// " o) (display s o) (newline o))
-            (loop (+ i 1))))
-        (display "--\n" tfo))
-      #:exists 'replace))
-  (display "//\n" o)
-  (unless guideline?
-    (display *nudge* o)
-    (display *lorem* o))
-  (newline o))
-
-(define (write-header p o)
-  (display (regexp-replace "^// *" (list-ref p 0) "") o)
-  (newline o)
-  )
+         (s2 "")
+         (question? #f)
+         (required? #f)
+         (common? #f)
+         (tag (regexp-replace "^:(.+): *$" s1 "\\1")))
+    (when (>= n 2) (set! s2 (list-ref p 1))
+      (set! question? (regexp-match "\\.question" s2))
+      (set! required? (regexp-match "\\.required" s2))
+      (set! common? (regexp-match "\\.common" s2)))
+    (fprintf o "include::~a[lines=~a..~a]\n//\n" *admin-file* line1 line-last)
+    (display "// " o)
+    (display (cond (common? "Common Question")
+                   (required?  "Required Question")
+                   (question?  "Question")
+                   (else "_")) o)
+    (display " " o) (display s1 o) (newline o)
+    (display "//" o) (newline o)
+    (let loop ((i (if question? 2 1)))
+      (unless (>= i n)
+        (let ((s (list-ref p i)))
+          (display "// " o) (display s o) (newline o))
+        (loop (+ i 1))))
+    (display "//\n" o)
+    (when question? 
+      (display (cond (common? *nudge-common*) 
+                     (required? *nudge-required*)
+                     (else *nudge*)) o)
+      (unless (or common? required?)
+        (display *lorem* o)))
+    (newline o)))
 
 (define (gen-student-file)
   (call-with-input-file *admin-file*
@@ -89,13 +112,11 @@
       (call-with-output-file *student-file*
         (lambda (o)
           (let loop ()
-            (let ((p (read-graf i)))
+            (let-values (((p line0 line-last) (read-graf i)))
               (unless (eof-object? p)
                 (cond ((null? p) #t)
-                      ((tagged-guideline? p) (write-snippet p o #:guideline? #t))
-                      ((tagged-question? p) (write-snippet p o))
-                      ((header? p) (write-header p o))
-                      (else (printf "Ill-formed paragraph at l. ~a; discarding ~s\n" *lineno* p)))
+                      ((tagged-graf? p) (write-snippet p (+ line0 1) line-last o))
+                      (else (write-uncomment p o)))
                 (newline o)
                 (loop)))))
         #:exists 'replace))))

@@ -1,0 +1,56 @@
+= Arithmetic Expressions to Circles of Evaluation & Code - Challenge
+
+++++
+<style>
+  td {height: 175pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Translate each of the arithmetic expressions below into Circles of Evaluation, then translate them to Code.
+
+@do{
+  (define expr1 '(/ (16 + (sqr 3)) (- (sqrt 49) 2)))
+  (define expr2 '(- (- 45 (* 9 (+ 3 (- 2 4)))) 7))
+  (define expr3 '(- (* (/ 50 5) 2)(- (*(+ 3 4) 2) 5)))
+
+  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
+  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
+  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
+
+  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code2 (if *solutions-mode?* (sexp->code expr2) ""))
+  (define code3 (if *solutions-mode?* (sexp->code expr3) ""))
+
+}
+
+[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
+|===
+
+|
+| Arithmetic
+| Circle of Evaluation
+| Code
+
+|*1*
+| @math{\frac{16 + 3^2}{\sqrt{49} - 2}}
+
+@vspace{20ex}
+|  @show{coe1}
+| @show{code1}
+
+|*2*
+| @math{45 - 9 \times (3 + [2 - 4]) - 7}
+
+@vspace{20ex}
+| @show{coe2}
+| @show{code2}
+
+|*3*
+| @math{50 \div 5 \times 2 - [(3 + 4) \times 2 - 5]}
+
+@vspace{20ex}
+| @show{coe3}
+| @show{code3}
+|===

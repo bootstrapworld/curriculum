@@ -21,18 +21,25 @@
 |[.materials-links]
 
 @ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1PTljhZ-L5v64088JgaGVvkP_j2b8CNBE5h_X2mttLak/, Lesson Slides}
+* @link{https://docs.google.com/presentation/d/1ARo-g6kmsBm7KbGQT0QMKMJiRl-8PSmgNr7s9LBnPfI/, Lesson Slides}
 *  @link{https://www.wescheme.org/view?publicId=PJMfrSvGRl, Sample game file - no distance lines}
 * @link{https://www.wescheme.org/view?publicId=0bCivugY3P, Sample game file - with distance lines}
 }
 
 @ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1dwVDAJpw6ki57Y6r-Q2vzq3R7gFx4wg58Dm8dNWh4lo/, Lesson slides} 
+* @link{https://docs.google.com/presentation/d/1hmbpBbZWLDIfJxX5465i19LbY-ghYajduQmDfKBhN-s/, Lesson slides} 
 * @link{https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS&v=882d33a, Sample game file - no distance lines }
 *  @link{https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W&v=882d33a, Sample game file - with distance lines}
 }
 
 @material-links
+
+| Supplemental Resources
+|
+@ifproglang{pyret}{
+* [.ExercisePage]#@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Flag of Trinidad and Tobago Starter Code}#} 
+@ifproglang{wescheme}{
+* [.ExercisePage]#@link{https://www.wescheme.org/view?publicId=SQRHKcqQvW, the Flag of Trinidad and Tobago Starter Code}#}
 
 | Preparation
 |
@@ -42,6 +49,9 @@
 | Key Points for the Facilitator
 |
 * The distance formula is an excellent review of @vocab{Circles of Evaluation}. Have students work out the expression in small groups to foster discussion.
+
+@include{xtra/lang-prereq.adoc}
+
 |===
 
 [.old-materials]
@@ -73,7 +83,7 @@ For the following complex word problem, have students *first* decide which strat
 [.lesson-instruction]
 A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Define functions that compute the height of the pole and the area of the triangle after a given number of seconds.
 
-Have students complete the @workbook-link{pages/top-down-bottom-up.adoc} worksheet, using Problem Decomposition and the Design Recipe to solve this problem!
+Have students complete the @printable-exercise{pages/top-down-bottom-up.adoc} worksheet, using Problem Decomposition and the Design Recipe to solve this problem!
 
 === Synthesize
 - Which strategy did students use?
@@ -89,11 +99,16 @@ Knowing how far apart our characters are is the first step. We still need the co
 
 === Investigate
 Using
-@ifproglang{wescheme}{ @workbook-link{pages/collide.adoc}, }
-@ifproglang{pyret}{ @workbook-link{pages/collide.adoc}, }
+@ifproglang{wescheme}{ @printable-exercise{pages/collide.adoc}, }
+@ifproglang{pyret}{ @printable-exercise{pages/collide.adoc}, }
 have students write a function that takes in two coordinate pairs (four numbers) of the `PLAYER` and a character (`(px, py)` and `(cx, cy)`), and and returns `true` if they are within 50 @vocab{pixels} of each other.
 
 === Synthesize
-- SiYou started by writing the `distance` function first, and then `collide?` Is this *Top-Down* or *Bottom-Up* decomposition?
+- You started by writing the `distance` function first, and then `collide?` Is this *Top-Down* or *Bottom-Up* decomposition?
 - Explicitly point out that this function is easy to write because we can _re-use_ the distance function. 
 - Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @link{../alg-problem-decomposition, previous lessons}. Problem Decomposition is powerful!
+
+== Additional Exercises:
+- For teachers who've already introduced your class to flags, @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Flag of Trinidad and Tobago Starter Code}} 
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=SQRHKcqQvW, the Flag of Trinidad and Tobago Starter Code}}
+makes use of Pythagorean Theorem and could make for an interesting connection to this lesson.

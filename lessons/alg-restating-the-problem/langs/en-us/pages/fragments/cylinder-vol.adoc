@@ -1,0 +1,16 @@
+@design-recipe-exercise{"cylinder-vol" 
+"Write a function @funname that takes in a cylinder’s radius and height and calculates its volume, making use of the function area-circle."
+	#:headless? #t
+	#:domain-list (list "Number" "Number")
+	#:range "Number"
+	#:purpose "Takes in 2 numbers, radius and height, and returns the product of the height and the circle-area calculated using the radius."
+	#:num-examples 2
+	#:example-list '(( 10  20 (* 20 (area-circle 10)))
+                 (200 350 (* 350 (area-circle 200))))
+	#:show-examples '((#f #f #f) (#f #f #f))
+	#:param-list (list "radius" "height")
+	#:show-params? #f
+	#:body '(* height (area-circle radius))
+	#:show-body? #f
+	#:grid-lines? #t
+}
