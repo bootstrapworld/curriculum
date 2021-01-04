@@ -49,13 +49,13 @@ Students are introduced to the concept of @vocab{permutations}, both with and wi
 
 === Launch
 
-Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with ten different disges, and they plan to offer a six-course "Tour of Italy" dinner for the low-low price of $9.95 per person. The gimmick is that diners can ___choose the order of the courses:__ you might start with lasagna, but your friend can start with the chicken parmesan, and so on. And if your friend happens to really, *really* like chicken parmesan, they can choose to eat it for all six courses!
+Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Tour of Italy" dinner for the low-low price of $9.95 per person. The gimmick is that diners can ___choose the order of the courses:__ you might start with lasagna, but your friend can start with the chicken parmesan, and so on. And if your friend happens to really, *really* like chicken parmesan, they can choose to eat it for all four courses!
 
-They advertise "an almost-endless number of dining experiences". In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those six courses__?
+They advertise "an almost-endless number of dining experiences". In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
 
-Each time you choose a course, you can think of it as choosing from a "bag" of possible menu items. We can order the same thing for all six courses, so once we've "removed" an item from the bag it gets magically "replaced" so that we can use it again.
+Each time you choose a course, you can think of it as choosing from a "bag" of possible menu items. We can order the same thing for all three courses, so once we've "removed" an item from the bag it gets magically "replaced" so that we can use it again.
 
-We also know that *order matters*: Luigi isn't going to give away free food just because you order six courses - he wants you to order six courses _in every possible order_! In situations where order matters, the set of possible options is called @vocab{permutations}.
+We also know that *order matters*: Luigi isn't going to give away free food just because you order four courses - he wants you to order four courses _in every possible order_! In situations where order matters, the set of possible options is called @vocab{permutations}. And in situations like this one, where the same choice is replaced each time it's used, it's *permutation with replacement*.
 
 So how many @vocab{permutations} are there?
 === Investigate
@@ -75,26 +75,32 @@ Have students discuss.
 
 It's useful to use __tree diagrams__, so we can see what our possible choices are.
 
-With ten menu items, a 1 course meal could be item 1, or item 2, etc...all the way up to item 10. That means the set of all possible @vocab{permutations} (with replacement!) has 10 different orders. In ten days, we'd have tried all the possibilities. Free food for life!
+With six menu items, a 1 course meal could be item 1, or item 2, etc...all the way up to item 6. That means the set of all possible 1-course @vocab{permutations} (with replacement!) has six different meals. In less than a week, we'd have tried all the possibilities!
 
-TODO(Emmanuel): tree-diagram for 10 possibilities
+TODO(Emmanuel): tree-diagram for six possibilities
 
-Let's diagram the permutations for a 2-course meal. We can pick any of ten items for the first course, so we start with the same diagram as before. But once we've made that choice, we have ten _more_ possible items for the second one, so each of those choices has __another tree__ underneath it! Remember: the item we picked for the first course has been "replaced", so we still have ten more choices in our bag.
+Let's diagram the permutations for a 2-course meal. We can pick any of six items for the first course, so we start with the same diagram as before. But once we've made that choice, we have six _more_ possible items for the second one, so each of those choices has __another tree__ underneath it! Remember: the item we picked for the first course has been "replaced", so we still have six more choices in our bag.
 
-TODO(Emmanuel): tree-diagram for 100 possibilities
+TODO(Emmanuel): tree-diagram for 36 possibilities
 
-Each time we make a choice, there are 10 new possibilities. Instead of taking ten days to try all the permutations, now it takes __100 days__!
+Each time we make a choice, there are six new possibilities. Instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
-The set of possible @vocab{permutations} is a function of how many times we get to __choose__, and the number of possible __choices__. In fact, we can write this as a function:
+For a 4-course meal, we have a four-level tree with six branches at every level! That's @math{6 \mul 6 \mul 6 \mul 6} possible permutations!
+
+The number of @vocab{permutations} is computed based on two things:
+. The number of possible __choices__ (lasagna? chicken parmesan? salad?)
+. How many times we get to __choose__. (1-course meal? 3-course meal?)
+
+Let's see this as a function:
 
 [.big]
 @math{permute-replace(choices, choose) = choose^{choices}}
 
-How many permutations are there for a 6-course meal chosen from Luigi's 10-item menu?
+How many permutations are there for a 4-course meal chosen from Luigi's 6-item menu?
 
-@math{permute-w-replace(10, 6) = 6^{10} = 60,466,176}
+@math{permute-w-replace(6, 4) = 6^{4} = 1296}
 
-Even if we are three meals a day at Luigi's, it would take __55,220 years__ to try them all!
+Even if we ate every dinner, every day at Luigi's, it would take more than __3.5 years__ to try them all!
 
 [.lesson-instruction]
 --
@@ -104,16 +110,15 @@ Even if we are three meals a day at Luigi's, it would take __55,220 years__ to t
 [.lesson-point]
 Permutation without Replacement
 
-After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. His daughter points out that there's no way to predict how many ingredients to buy, since some people might want six courses of spaghetti and others might want six different dishes entirely. Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
+After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. His daughter points out that there's no way to predict how many ingredients to buy, since some people might want four courses of spaghetti and others might want four courses of salad. Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
 
-Luigi proposes two important changes to his "Tour of Italy deal":
+Luigi proposes an important change to his "Tour of Italy deal": **No item can be ordered twice.**
 
-. Now there are only six menu items
-. No item can be ordered twice. 
+He also decides to simplify his menu even further, down to just **four different options**.
 
-That way no one can order six of the same thing, and there's far fewer choices to make! This makes it a lot easier to predict what to buy, so it will save Luigi a lot of money.
+That way no one can order four of the same thing, and there's far fewer choices to make! This makes it a lot easier to predict what to buy, so it will waste less food and save Luigi a lot of money.
 
-How much easier this make it easier to win free food for life?
+Now how long would it take to try every permutation?
 
 Let's start by drawing the tree diagram for 1st place:
 
@@ -123,27 +128,27 @@ There are six possible items we could eat for our first course, so we have 6 pos
 
 Now there are only _five_ possible choices, since we can't re-order. This is called @vocab{permutation} *without replacement*.
 
-We can visualize this as a six-level tree, with each set of branches getting smaller and smaller until there's only one student left. Let's count the number of branches...
+We can visualize this as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. Let's count the number of branches...
 
-@math{6 \mul 5 \mul 4 \mul 3 \mul 2 \mul 1 = 720}
+@math{4 \mul 3 \mul 2 \mul 1 = 24}
 
 We can simplify all these multiplications using _factorial_ notation:
 
-@math{6! = 720}
+@math{4! = 24}
 
-If we ate 3 meals a day every day, we could try all the permutations in just under 8 months!
+Now we could try all the permutations in just under a month!
 
-Luigi decides this makes it too easy, so he keeps the "no replacement" rule but goes back to the original 10 menu options. Now how long would it take to try them all?
+Luigi decides this makes it too easy, and now that his kitchen is running smoothly he decides to bring back the original six-item menu. 
 
-In this situation, we want to stop multiplying after the first six choices. There might be 10 items on the menu, but we want to stop counting after we've made our first six choices!
+In this situation, there might be six items on the menu, but we want to stop counting after we've made our first four choices! We want to __stop multiplying__ after the first four choices. 
 
-@math{10 \mul 9 \mul 8 \mul 7 \mul 6 \mul 5 = 151,200} 
+@math{6 \mul 5 \mul 4 \mul 3 = 360} 
 
-We can write this by starting with our factorial notation from before (where everything is multiplied), and then "undoing" the @math{4 \ mul 3 \mul 2 \mul 1}. This takes the form of __dividing__:
+We can write this by starting with our factorial notation from before (where every number is multiplied), and then "undoing" the @math{2 \mul 1}. This takes the form of __dividing__:
 
-@math{\frac{10!}{4!} = 151,200}
+@math{\frac{6 \mul 5 \mul 4 \mul 3 \mul 2 \mul 1}{2 \ mul 1} = \frac{6!}{2!} = 360}
 
-With this number of possible combinations, it would take over a century to try them all - even eating three meals a day! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
+With this number of possible combinations, it would take a little more than a year try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
 
 We can write this relationship as a function:
 
@@ -166,9 +171,9 @@ Students are introduced to the concept of @vocab{combinations}. They learn the d
 === Launch
 With this new set of rules, Luigi's Family Restaurant is more popular than ever! But with a full house every night, the cooks are busy and the kitchen gets backed up. Customers start complaining about slow service, and Luigi is once again in trouble.
 
-The cooks point out that it's easy to make twice as much ravioli - but it's hard to make two separate ravioli dishes. If people could choose their six courses in advance, the chefs could just make a few huge batches of each item and divide them up on people's plates!
+The cooks point out that it's easy to make twice as much ravioli - but it's hard to make two _separate_ ravioli dishes. If people could choose their six courses in advance, the chefs could just make a few huge batches of each item and divide them up on people's plates!
 
-Luigi decides to change the rules again, to help his kitchen staff. There are still 10 items on the menu, and customers can still choose any six they want...but __it no longer matters what order__ they come in. Instead of a six-course meal, diners get a "combination platter" with all six items on the plate.
+Luigi decides to change the rules again, to help his kitchen staff. There are still six items on the menu, and customers can still choose any four they want...but **order no longer matters**. Instead of a four-course meal, diners get a "combination platter" with all four items on the plate.
 
 [.lesson-instruction]
 - How is this situation similar to the permutation questions?
@@ -186,19 +191,23 @@ TODO(Emmanuel): tree-diagram for 6 possibilities
 
 We can use our formula for permutation-without-replacement to compute all the possible permutations:
 
-@math{permute-no-replace(10, 6) = \frac{10!}{(10 - 6)!} = \frac{10!}{4!}}
+@math{permute-no-replace(6, 4) = \frac{6!}{(6 - 2)!} = \frac{6!}{2!} = 360}
 
-In this situation, the order __doesn't matter__, so some of these permutations are going to be duplicates!  Ordering items 1 through 6 is the same as ordering 6 through one 1! So we need to divide our permutations by the number of possible __re-ordered duplicates__ to find the total number of combinations.
+In this situation, the order __doesn't matter__, so some of these permutations are going to be duplicates!  Ordering items A, B, C and D will result in the same combination platter as ordering D, C, B and A! So we need to divide our permutations by the number of __permuted duplicates__ to find the total number of combinations.
 
-How many ways are there to re-order @math{n} choices? Well, we already know how to do that: that's how many @vocab{permutations} there are for @math{n} items!
+How many ways are there to re-order four choices? Well, we already know how to do that: that's how many @vocab{permutations} there are for four items!
 
-So we have one function that will tell us how many __permutations-with-choices__ there are, but we need to trim this by the number of _permutations_ there are for that many choices.
+So we have one function that will tell us how many __permutations-without-replacement__ there are, but we need to trim this by the number of __permutations-without-replacement__ there are for exactly that many choices.
 
-@math{combine(choices, choose) = \frac{permute-no-replace(choices, choose)}{permute-w-replace(choose, choose)}}
+@math{combinations(6, 4) = \frac{6!}{(6 - 2)!} \div \frac{1}{4!} = 15}
 
-In this situation, we have 10 possible choices and we get to choose six times:
+We can rewrite this using our functions from earlier:
 
-@math{combine(10, 6) = \frac{permute-no-replace(10, 6)}{permute-w-replace(6, 6)}}
+@math{combinations(choices, choose) = \frac{permute-no-replace(choices, choices)}{permute-no-replace(choose, choose)}}
+
+In this situation, we have 6 possible choices and we get to choose 4 times:
+
+@math{combinations(6, 4) = \frac{permute-no-replace(6, 6)}{permute-without-replace(4, 4)}}
 
 @opt-printable-exercise{combinations.adoc}
 
