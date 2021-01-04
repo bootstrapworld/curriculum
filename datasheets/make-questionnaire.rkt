@@ -21,8 +21,17 @@
 (define *nudge*
   (string-append
     "//\n"
-    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n"
-    "//\n"))
+    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+
+(define *nudge-required*
+  (string-append
+    "//\n"
+    "// PLEASE WRITE TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+
+(define *nudge-common*
+  (string-append
+    "//\n"
+    "// PLEASE WRITE ‘COMMON’ OR OTHER TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
 
 (define *lineno* 0)
 
@@ -66,23 +75,35 @@
 (define (write-snippet p line1 line-last o)
   (let* ((n (length p))
          (s1 (list-ref p 0))
-         (question? (let ((s2 ""))
-                      (when (>= n 2) (set! s2 (list-ref p 1)))
-                      (regexp-match "\\[\\.question\\]" s2)))
+         (s2 "")
+         (question? #f)
+         (required? #f)
+         (common? #f)
          (tag (regexp-replace "^:(.+): *$" s1 "\\1")))
+    (when (>= n 2) (set! s2 (list-ref p 1))
+      (set! question? (regexp-match "\\.question" s2))
+      (set! required? (regexp-match "\\.required" s2))
+      (set! common? (regexp-match "\\.common" s2)))
     (fprintf o "include::~a[lines=~a..~a]\n//\n" *admin-file* line1 line-last)
-    (when question?
-      (display "// Question " o) (display s1 o) (newline o)
-      (display "//" o) (newline o))
+    (display "// " o)
+    (display (cond (common? "Common Question")
+                   (required?  "Required Question")
+                   (question?  "Question")
+                   (else "_")) o)
+    (display " " o) (display s1 o) (newline o)
+    (display "//" o) (newline o)
     (let loop ((i (if question? 2 1)))
       (unless (>= i n)
         (let ((s (list-ref p i)))
           (display "// " o) (display s o) (newline o))
         (loop (+ i 1))))
     (display "//\n" o)
-    (when question?
-      (display *nudge* o)
-      (display *lorem* o))
+    (when question? 
+      (display (cond (common? *nudge-common*) 
+                     (required? *nudge-required*)
+                     (else *nudge*)) o)
+      (unless (or common? required?)
+        (display *lorem* o)))
     (newline o)))
 
 (define (gen-student-file)
