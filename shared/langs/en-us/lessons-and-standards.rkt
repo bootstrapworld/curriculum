@@ -35,6 +35,8 @@
         "HSF.IF.C"
         "7.EE.B.4"
         "8.F.B"
+        "2-AP-14" ; STEMworks
+        "2-AP-19"
         "HSA.SSE.A.1"
         "OK.PA.A.1.1"
         "OK.PA.A.1.2")
@@ -100,8 +102,10 @@
     ("alg-making-game-images" 
         "7.RP.A.1"
         "8.G.A.1"
-        ; "BS-IDE"
-        ; "BS-PL.3"
+        "1B-AP-14" ; STEMworks
+        "2-AP-16"  ; STEMworks
+        "3A-AP-20" ; STEMworks
+        "1B-IC-21" ; STEMworks
         "MP.6")
     ("alg-order-of-operations" 
         "OK.PA.A.3"
@@ -122,8 +126,9 @@
         "OK.PA.A.1.1")
     ("alg-player-animation" 
         "6.EE.B.6" ; STEMworks
-        "7.EE.B" ; STEMworks
-        "MP.4" ; STEMworks
+        "7.EE.B"   ; STEMworks
+        "MP.4"     ; STEMworks
+        "3B-AP-22" ; STEMworks
         "HSA.SSE.A.1.A"
         "HSA.SSE.A.1.B"
         "OK.PA.A.1.1")      
@@ -139,6 +144,9 @@
         "MP.3" ; STEMworks
         "MP.4" ; STEMworks
         "MP.6"
+        "1B-AP-11" ; STEMworks
+        "2-AP-13"  ; STEMworks
+        "3A-AP-17" ; STEMworks
         "OK.A1.A.3.1")
     ("alg-restating-the-problem" 
         "8.F.B"
@@ -191,6 +199,9 @@
         "HS-SEP5-4" 
         "2-AP-17" 
         "3B-AP-21" 
+        "1B-AP-15" ; STEMworks
+        "2-AP-17"  ; STEMworks
+        "3B-AP-21" ; STEMworks
         "P6" 
         "9-12.Computing Systems.Troubleshooting" 
         "6-8.Computing Systems.Troubleshooting"
@@ -201,11 +212,14 @@
         "3A-AP-16" 
         "3A-AP-23" 
         "3B-AP-14" 
+        "1B-AP-11" ; STEMworks
+        "3A-AP-17" ; STEMworks
         "P7"
         "OK.L1.DA.CVT.01")
     ("ds-correlations" 
         "MP.3" ; STEMworks
         "MP.4" ; STEMworks
+        "1B-DA-06" ; STEMworks
         "HSS.ID.C.9" 
         "HSS.ID.C.8" 
         "HSS.ID.B.6" 
@@ -265,7 +279,11 @@
         "OK.5.DA.IM.01")
     ("ds-ethics-and-privacy" 
         "3A-AP-16" 
-        "MP.3" ; STEMworks
+        "MP.3"    ; STEMworks
+        "2-IC-23" ; STEMworks
+        "3A-IC-24"; STEMworks
+        "3A-IC-29"; STEMworks
+        "3A-IC-30"; STEMworks
         "P1" 
         "HS-SEP7-1" 
         "9-12.Data and Analysis.Collection" 
@@ -287,6 +305,7 @@
         "2-DA-08" 
         "2-AP-19" 
         "3B-NI-05" 
+        "1B-AP-10" ; STEMworks
         "P3" 
         "6-8.Data and Analysis.Inference and Models" 
         "9-12.Algorithms and Programming.Control")
@@ -308,6 +327,7 @@
         "HSS.ID.A.1" 
         "HSS.ID.B.6.A"
         "HS-SEP4-2"
+        "1B-DA-06" ; STEMworks
         "3A-DA-11" 
         "3B-AP-14" 
         "9-12.Data and Analysis.Visualization and Transformation"
@@ -356,8 +376,11 @@
         "8.SP.A.1" 
         "8.SP.A.2" 
         "8.SP.A.3" 
-        "HS-SEP3-5" 
+        "HS-SEP3-5"
+        "1B-DA-06" ; STEMworks 
+        "1B-DA-07" ; STEMworks
         "3A-DA-11" 
+        "3A-DA-12" ; STEMworks
         "3B-NI-05" 
         "9-12.Data and Analysis.Inference and Models"
         "OK.PA.D.1.3"
@@ -375,6 +398,7 @@
         "6.SP.B.4" ; STEMworks
         "HS-SEP4-2" 
         "HSS.ID.A.1" 
+        "1B-DA-06" ; STEMworks
         "3A-DA-11" 
         "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
@@ -414,6 +438,10 @@
         "8.SP.A.2" 
         "HSS.ID.B.6" 
         "HSS.ID.C.8" 
+        "1B-DA-06" ; STEMworks
+        "1B-DA-07" ; STEMworks
+        "2-DA-09"  ; STEMworks
+        "3A-DA-12" ; STEMworks
         "3A-DA-11" 
         "3B-NI-05" 
         "P5" 
@@ -431,6 +459,7 @@
         "HS-SEP4-3"
         "HS-SEP1-7" 
         "3B-NI-07" 
+        "2-IC-21" ; STEMworks
         "P1" 
         "6-8.Data and Analysis.Collection" 
         "9-12.Data and Analysis.Inference and Models"
