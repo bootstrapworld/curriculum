@@ -28,15 +28,17 @@
                           (set! tags (cons tag tags)))))
                     (else
                       (when (regexp-match
-                              (format "^include::\\.~a-([^ ]+)\\.adoc\\[\\]" *datasheet-name*) ln)
-                        (let ((tag (regexp-replace
-                                     (format "^include::\\.~a-([^ ]+)\\.adoc.*" *datasheet-name*)
-                                     ln "\\1")))
+                              "^// +(Required Question|Common Question|Question|_) +:.+?: *$"
+                              ln)
+                        (let ((tag 
+                                (regexp-replace 
+                                  "^// +(Required Question|Common Question|Question|_) +:(.+?): *$" 
+                                  ln "\\2")))
                           (set! tags (cons tag tags))))))
               (loop))))))
     (reverse tags)))
 
-(define (sanitize)
+(define (check-tag-integrity)
   (let ((admin-tags (collect-tags #:admin? #t))
         (student-tags (collect-tags)))
     ;(printf "a-tags = ~a\n" admin-tags)
@@ -63,6 +65,34 @@
                                   s-tag a-tag)
                           (loop (+ i 1) (+ j 1))))
                   (loop (+ i 1) (+ j 1))))))))))
+
+(define (check-questions-answered)
+  (call-with-input-file *student-file*
+    (lambda (i)
+      (let ((ok? #t))
+        (let loop ()
+          (let ((ln (read-line i)))
+            (unless (eof-object? ln)
+              (when (regexp-match "^// +(Common|Required) Question +:.+:?: *$" ln)
+                (let ((tag (regexp-replace "^// +(Common|Required) Question +:(.+?): *$" ln "\\1"))
+                      (answered? #f))
+                  (let loop2 ()
+                    (let ((ln (read-line i)))
+                      (unless (or (eof-object? ln)
+                                  (regexp-match "^include::" ln))
+                        (cond ((regexp-match "^//" ln) #f)
+                              ((regexp-match "^ *$" ln) #f)
+                              (else (set! answered? #t)))))
+                    (loop2))
+                  (unless answered?
+                    (set! ok? #f)
+                    (printf "Student file has unanswered COMMON question ~a\n")))))))
+        (when ok?
+          (printf "All required/common questions answered\n"))))))
+
+(define (sanitize)
+  (check-tag-integrity)
+  (check-questions-answered))
 
 (sanitize)
 
