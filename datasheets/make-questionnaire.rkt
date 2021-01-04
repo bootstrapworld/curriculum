@@ -26,12 +26,13 @@
 (define *nudge-required*
   (string-append
     "//\n"
-    "// PLEASE WRITE TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+    "// PLEASE WRITE YOUR ANSWER BELOW THIS LINE.\n\n"))
 
 (define *nudge-common*
   (string-append
     "//\n"
-    "// PLEASE WRITE ‘COMMON’ OR OTHER TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+    "// PLEASE WRITE YOUR ANSWER BELOW.\n"
+    "// (FOR STANDARD RESPOSE, PLEASE WRITE ‘:common:’.\n\n"))
 
 (define *lineno* 0)
 

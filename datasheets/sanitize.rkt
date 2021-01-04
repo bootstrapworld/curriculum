@@ -86,7 +86,7 @@
                     (loop2))
                   (unless answered?
                     (set! ok? #f)
-                    (printf "Student file has unanswered COMMON question ~a\n")))))))
+                    (printf "Student file has unanswered question ~a\n")))))))
         (when ok?
           (printf "All required/common questions answered\n"))))))
 
