@@ -30,7 +30,7 @@ defined as:
 All tags end with a blank line or end-of-file.  If the body of
 the tag narrative should contain a blank line, as when
 introducing an itemization, you may put the entire tag
-narrative inside an open block, i.e., with lines that have a
+narrative inside an open block, i.e., with “fence” lines that have a
 leading `--` and nothing else. E.g.,
 
    :Description:
@@ -63,8 +63,14 @@ the brackets for questions that cannot be skipped. `.common` is
 used for those questions which can be answered with the symbol
 `:common:`, whereby a common pre-stored answer is intended.
 
-In addition to these tag descriptions, the admin file
-may contain other content. These are passed through except that
+`:common:` questions must be followed by the default (“stock”) answer in the
+admin file. The answer is given as a paragraph (or an open block of
+pragraphs fenced with `--`) prefixed with
+
+   [.answer]
+
+In addition to these, the admin file
+may contain other content. These are passed through verbatim except that
 any leading comment indicators are stripped. This is useful for
 including structure (like section breaks). E.g.,
 
