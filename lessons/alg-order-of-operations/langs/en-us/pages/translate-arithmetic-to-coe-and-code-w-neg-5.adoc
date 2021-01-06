@@ -1,0 +1,38 @@
+= Arithmetic Expressions to Circles of Evaluation & Code - 5
+
+++++
+<style>
+  td {height: 175pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Translate each of the arithmetic expressions below into Circles of Evaluation, then translate them to Code.
+
+@do{
+  (define expr1 '(+ 6(/ (- 5 3) 2)))
+  (define expr2 '(* (/ -15 3) (+ 2 1)))
+  (define expr3 '(- 8 (* (/ 6 (+ -2 -1)) -4)))
+  (define expr4 '(- (* (/ 10 -5) 3) -7))
+
+  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
+  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
+  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
+  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
+
+  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
+  (define code2 (if *solutions-mode?* (sexp->code expr2) ""))
+  (define code3 (if *solutions-mode?* (sexp->code expr3) ""))
+  (define code4 (if *solutions-mode?* (sexp->code expr4) ""))
+}
+
+
+[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
+|===
+|   | Arithmetic				                      | Circle of Evaluation	| Code
+|*1*| @math{6 + (-15 + 3) \div 2}	            | @show{coe1}			      | @show{code1}
+|*2*| @math{-15 \div 3 \times (2 + 1)}        | @show{coe2}			      | @show{code2}
+|*3*| @math{8 - 6 \div (-2 + -1) \times -4}	  | @show{coe3}			      | @show{code3}
+|*4*| @math{10 \div -5 \times 3 - -7}	        | @show{coe4}			      | @show{code4}
+|===

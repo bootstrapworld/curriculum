@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-11-11 # last modified
+LASTMOD=2020-12-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -731,10 +731,9 @@ function recursiveadoc() {
     fi
   done
 
-  export OTHERDIR=1
-  if test "$dir" = pages -o "$dir" = solution-pages \
-    -o "$dir" = front-matter -o "$dir" = back-matter; then
-      export OTHERDIR=
+  export OTHERDIR=
+  if test "$dir" = fragments -o "$dir" = xtra -o "$dir" = xtras; then
+    export OTHERDIR=1
   fi
 
   if test $LINT; then
@@ -866,7 +865,14 @@ function buildworkbookpages() {
     echo WARNING: $L missing pages
     mkdir pages
   fi
-  adjustproglangsubdirs pages
+
+  for subdir in *; do
+    if test -d "$subdir"; then
+      if test "$subdir" != solution-pages; then
+        adjustproglangsubdirs "$subdir"
+      fi
+    fi
+  done
 
   mkdirsolutionversionof $repoDir
   #adjustproglangsubdirs solution-pages
@@ -912,12 +918,6 @@ function buildlessonplan() {
   export LESSONSUBDIR=$L
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
-
-  for subdir in *; do
-    if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir"
-    fi
-  done
 
   if test -f index.asciidoc -o -f index.html; then
     export PATHWAYROOTDIR="../../"
@@ -1495,9 +1495,9 @@ function buildpathway() {
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
-        ABYSS=this-page-intentionally-left-blank
+        export ABYSS=page-not-found
         if test ! -f $ABYSS.pdf; then
-          echo '= This Page Intentionally Left Blank' > $ABYSS.adoc
+          echo '= PAGE NOT FOUND!' > $ABYSS.adoc
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc

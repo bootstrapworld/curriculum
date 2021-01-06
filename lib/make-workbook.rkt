@@ -83,9 +83,12 @@
                   (path-has-extension? docfile #".html"))
           (set! docfile (path-replace-extension docfile ".pdf")))
 
+        ;(printf "XXX doing ~s\n" docfile)
+
         (unless (file-exists? docfile)
+          ;(printf "cwd= ~s ~s\n" (current-directory) (getenv "ABYSS"))
           (printf "WARNING: Page ~s not found; subbing blank page\n\n" docfile)
-          (set! docfile "../../lib/this-page-intentionally-left-blank.pdf"))
+          (set! docfile (format "../../lib/~a.pdf" (getenv "ABYSS"))))
 
         (system* *pdftk*
                  (format "Q=~a" docfile)

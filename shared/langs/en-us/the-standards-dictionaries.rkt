@@ -2,6 +2,7 @@
 
 (provide
   *standards-list*
+  *disallowed-standards-list*
   expand-dict-abbrev
   disallow-standards
   )
@@ -24,10 +25,20 @@
 ;   (list "OLD" "Older" *old-standards-list*)
     ))
 
+(define *disallowed-standards-list*
+  '())
+
 (define (disallow-standards . stds)
-  (set! *standards-list*
-    (filter (lambda (x) (not (member (car x) stds)))
-            *standards-list*)))
+  ;(printf "doing disallow-standards ~s\n" stds)
+  (for ((std stds))
+    (unless (assoc std *disallowed-standards-list*)
+      (let ((x (assoc std *standards-list*)))
+        (when x
+          (set! *disallowed-standards-list*
+            (cons x *disallowed-standards-list*))))))
+  ;(printf "*standards-list* = ~s\n" *standards-list*)
+  ;(printf "*disallowed-standards-list* = ~s\n" *disallowed-standards-list*)
+  )
 
 (define (expand-dict-abbrev dict)
   (let ([x (assoc dict *standards-list*)])

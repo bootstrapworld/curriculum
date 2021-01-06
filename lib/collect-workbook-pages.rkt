@@ -39,8 +39,10 @@
                   (read-data-file exercise-pages-file #:mode 'files)]
                  [else
                    '()])])
-    (unless (null? workbook-pages)
-      (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
+    (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
+      (with-handlers ([exn:fail?
+                        (lambda (e)
+                          (printf "WARNING: Couldn't open ~a\n" workbook-pages-ls-file))])
         (call-with-output-file workbook-pages-ls-file
           (lambda (o2)
             (for ([page workbook-pages])
