@@ -37,12 +37,6 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         )
-    ("alg-compound-inequalities" 
-        "7.EE.B.4"
-        "HSF.BF.B" ; STEMworks
-        "HSF.IF.A.2"
-        "HSF.BF.A.1.C" ; STEMworks
-        "OK.PA.A.4.3")
     ("alg-defining-functions" 
         "MP.4" ; STEMworks
         "6.EE.B.6" ; STEMworks
@@ -120,26 +114,6 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-21" ; STEMworks
         )
-    ("alg-numbers-inside-videogames" 
-        "MP.2"
-        )
-    ("alg-inequalities" 
-        "7.EE.B.4"
-        "HSF.IF.A.2"
-        "MP.1"
-        "MP.4"
-        "OK.PA.A.4.3"
-        "IA.HSA.REI.D"
-        "6.EE.B.5"
-        "6.EE.B.8"
-        "6.NS.C.6.C"
-        )
-    ("alg-inequalities-2" 
-        "7.EE.B.4"
-        "HSF.IF.A.2"
-        "OK.PA.A.4.3"
-        "IA.HSA.REI.D"
-        )
     ("alg-inequalities1-simple" 
         "7.EE.B.4"
         "HSF.IF.A.2"
@@ -155,13 +129,19 @@
         "HSF.IF.A.2"
         "OK.PA.A.4.3"
         "HSS.CP.A.1"
-        
         )
     ("alg-inequalities3-sam"
         "IA.HSA.CED.A.3"
         "HSA.CED.A.1"
         "HSA.CED.A.3"
         "6.EE.B.8"
+        "6.EE.B.6" ; STEMworks
+        "MP.4" ; STEMworks
+        "7.EE.B" ; STEMworks
+        "HSF.BF.B" ; STEMworks
+        "HSF.BF.A.1.C" ; STEMworks
+        "OK.PA.A.4.3"
+        "OK.A1.A.2"
         )    
     ("alg-making-game-images" 
         "7.RP.A.1"
@@ -172,6 +152,9 @@
         "1B-IC-21" ; STEMworks
         "3A-AP-18" ; STEMworks
         "MP.6"
+        )
+    ("alg-numbers-inside-videogames" 
+        "MP.2"
         )
     ("alg-order-of-operations" 
         "OK.PA.A.3"
