@@ -3,7 +3,16 @@
 #lang racket
 
 (define *admin-file*
-  (vector-ref (current-command-line-arguments) 0))
+  (let* ((args (current-command-line-arguments))
+         (n (vector-length args)))
+    (cond ((= n 0)
+           (error 'make-questionnaire.rkt
+                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-datasets-admin.adoc"))
+          (else
+            (let ((adminf (vector-ref args 0)))
+            (when (> n 1)
+              (printf "make-questionnaire.rkt given too many arguments: Only first one, ~s, used\n" adminf))
+            adminf)))))
 
 (define *datasheet-name*
   (regexp-replace "([^ ]+)-admin.adoc" *admin-file* "\\1"))
