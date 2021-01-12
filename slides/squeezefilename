@@ -1,0 +1,14 @@
+# last modified 2021-01-12
+
+f="$@"
+
+sf=$(echo $f|sed -e 's/ /_/g'|sed -e 's/&/and/g'|sed -e 's/_-_/-/g')
+
+if test ! -d .og; then
+  mkdir .og
+fi
+
+if test "$f" != "$sf"; then
+  cp "$f" .og
+  mv "$f" "$sf"
+fi
