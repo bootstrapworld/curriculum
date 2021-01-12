@@ -41,7 +41,7 @@
   (string-append
     "//\n"
     "// PLEASE WRITE YOUR ANSWER BELOW.\n"
-    "// (FOR STANDARD RESPOSE, PLEASE WRITE ‘:common:’.\n\n"))
+    "// (TO INSERT STANDARD REPLY, PLEASE WRITE :common:.)\n\n"))
 
 (define *lineno* 0)
 
