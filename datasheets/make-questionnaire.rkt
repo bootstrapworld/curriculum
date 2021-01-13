@@ -84,7 +84,7 @@
   (let ((n (length p)))
     (let loop ((i 0))
       (unless (>= i n)
-        (display (regexp-replace "^// *" (list-ref p 0) "") o)
+        (display (regexp-replace "^// *" (list-ref p i) "") o)
         (newline o)
         (loop (+ i 1))))))
 

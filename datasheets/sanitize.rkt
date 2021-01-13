@@ -11,6 +11,9 @@
 (define *admin-file*
   (string-append *datasheet-name* "-admin.adoc"))
 
+(define *final-file*
+  (string-append *datasheet-name* "-final.adoc"))
+
 ;(printf "student-file = ~a\n" *student-file*)
 ;(printf "admin-file = ~a\n" *admin-file*)
 ;(printf "datasheet-name = ~a\n" *datasheet-name*)
@@ -107,13 +110,11 @@
   (regexp-match "^ *:common: *$" ln))
 
 (define (check-common-answers)
-  (let ((temp-file (regexp-replace "([^ ]+)-student.adoc" *student-file*
-                                   "\\1-student-temp.adoc"))
-        (common-answer-inserted? #f)
+  (let ((common-answer-inserted? #f)
         (common-answer-fragment #f))
     (call-with-input-file *student-file*
       (lambda (i)
-        (call-with-output-file temp-file
+        (call-with-output-file *final-file*
           (lambda (o)
             (let loop ()
               (let ((ln (read-line i)))
@@ -131,7 +132,7 @@
           #:exists 'replace)))
     (when common-answer-inserted?
       (printf "Stock answers needed to be inserted\n")
-      (rename-file-or-directory temp-file *student-file* #t))))
+      )))
 
 (define (sanitize)
   (and
