@@ -106,8 +106,28 @@
     (and x
          (string-append "include::" (list-ref x 1)))))
 
+(define (include-call? ln)
+  (regexp-match "^include::(.*)\\[lines=([0-9]+)\\.\\.([-0-9]+)\\]" ln))
+
+(define (include-file-fragment x o)
+  (let ((f (list-ref x 1))
+        (start-line (string->number (list-ref x 2)))
+        (stop-line (string->number (list-ref x 3))))
+    (call-with-input-file f
+      (lambda (i)
+        (let loop ((k 1))
+          (when (or (= stop-line -1) (<= k stop-line))
+            (let ((x (read-line i)))
+              (unless (eof-object? x)
+                (when (>= k start-line)
+                  (display x o) (newline o))
+                (loop (+ k 1))))))))))
+
 (define (insert-common? ln)
   (regexp-match "^ *:common: *$" ln))
+
+(define (comment? ln)
+  (regexp-match "^//" ln))
 
 (define (check-common-answers)
   (let ((common-answer-inserted? #f)
@@ -121,25 +141,30 @@
                 (unless (eof-object? ln)
                   (cond ((common-answer-include? ln)
                          => (lambda (x) (set! common-answer-fragment x)))
+                        ((include-call? ln)
+                        => (lambda (x)
+                             ;(printf "x = ~s\n" x)
+                             (include-file-fragment x o)))
                         ((insert-common? ln)
                          (cond (common-answer-fragment
                                  (set! common-answer-inserted? #t)
-                                 (fprintf o "\n~a\n\n" common-answer-fragment))
+                                 (include-file-fragment
+                                   (include-call? common-answer-fragment) o))
                                (else
                                  (printf "WARNING: :common: used incorrectly\n"))))
+                        ((comment? ln) #f)
                         (else (display ln o) (newline o)))
                   (loop)))))
           #:exists 'replace)))
     (when common-answer-inserted?
-      (printf "Stock answers needed to be inserted\n")
-      )))
+      (printf "Stock answers needed to be inserted\n"))
+    #t))
 
 (define (sanitize)
-  (and
-    (check-tag-integrity)
-    (check-questions-answered)
-    (check-common-answers))
-  (void))
+  (when (and (check-tag-integrity)
+             (check-questions-answered)
+             (check-common-answers))
+    (printf "Sanitized form of ~s written to ~s\n" *student-file* *final-file*)))
 
 (sanitize)
 
