@@ -1,3 +1,5 @@
+= Datasheet for Pipe Organs
+
 [.datasheet]
 Content Courtesy: 
 https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
@@ -16,7 +18,7 @@ the dataset and to promote transparency about funding interests.
 
 [.answer]
 --
-
+This dataset was created to expand the set of datasets in the possesion of the Bootstrap Data Science curriculum.
 
 --
 [.question.required]
@@ -27,8 +29,7 @@ Please provide a description.
 
 [.answer]
 --
-This data set was created for the purpose of exploring the strengths of the
-esports scenes of games across a variety of genres.
+This dataset was created for educational purposes. The pipe organ is a relatively obscure instrument, and this dataset is intended to provoke an interest in it.
 
 
 --
@@ -40,7 +41,9 @@ organization)?
 
 [.answer]
 --
-This data set was created by David Young, a student at Brown University, for Bootstrap:Data Science.
+{empty}E. C. Holtz and J. Sobel created this dataset on behalf of Bootstrap.
+
+
 --
 [.question.optional]
 Who funded the creation of the dataset? If there is an
@@ -50,11 +53,7 @@ grant name and number.
 
 [.answer]
 --
-
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
+This dataset was provided by volunteer effort, and there is no funding involved.
 
 
 --
@@ -64,7 +63,7 @@ Any other comments?
 
 [.answer]
 --
-The interpretation of the "strength" of the esports scene of a game is left to the user of the data set. Possible interpretations include total winnings, total number of tournaments, total number of players, average number of tournaments per year, etc.
+No compensation was provided for those who submitted data to the dataset of which this dataset is a sample; all data was compiled by organ enthusiasts who simply want an organ database.
 
 
 --
@@ -98,7 +97,7 @@ description.
 
 [.answer]
 --
-The instances that comprise the dataset represent video games, which are the only type of instance in this data set.
+The instances of this dataset are individual pipe organs.
 
 
 --
@@ -109,7 +108,7 @@ appropriate)?
 
 [.answer]
 --
-There are 509 instances in total.
+There are 500 instances of pipe organs. 
 
 
 --
@@ -126,7 +125,7 @@ of instances, because instances were withheld or unavailable).
 
 [.answer]
 --
-The data set does not contain all possible instances. The data set is a sample from the larger set of video games. The sample is not representative of the larger set, as we can assume that esportsearnings.com is biased towards games that have an active esports scene because it is a resource crowdsourced from individuals interested in esports. Thus, games that have had no tournaments are less likely to be included in the data set.
+This dataset contains a small fraction of the original 66,018 instances of pipe organs from the Organ Historical Society's Pipe Organ Database. Pipe organs without stoplists were excluded from the sample taken, as not all data in the columns could be collected without a stoplist. This reduced the number of organs that could be sampled to 19,042. 
 
 
 --
@@ -138,7 +137,9 @@ provide a description.
 
 [.answer]
 --
-For each instance, we include the release date of the game as a Number, the predominant genre of the game as a String, the total earnings of all tournament winners as a Number, the earnings that were won through online-only tournaments as a Number, the total number of tournament winners as a Number, and the total number of tournaments as a Number. All data, save the release date and genre, were obtained by summing the statistics of each tournament that took place for a given game.
+Each instance consists of text representing the state wherein it resides (or Non-US), text representing the type of institution/location wherein it resides, text representing the original builder of the organ, a number representing the number of ranks (sets of pipes spanning the entire range of a manual/the pedalboard), a number representing the number of stops (usually one rank, but sometimes groups of ranks, which can be selected by the organist to be mixed to create a particular sound), number of manuals (keyboards), a number representing the lowest pitch (written as the length of what the lowest pipe would be if it were an open tube), a number representing the year the organ was originally completed, and a boolean representing whether the organ has been modified or restored since its completion.
+
+
 --
 [.question.optional]
 Is there a label or target associated with each instance? If
@@ -147,11 +148,7 @@ so, please provide a description.
 
 [.answer]
 --
-
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
+The label associated with each organ is the Pipe Organ Database's ID number for that particular organ.
 
 
 --
@@ -165,7 +162,7 @@ redacted text.
 
 [.answer]
 --
-No information is missing from individual instances.
+No information is missing from any instances.
 
 
 --
@@ -177,7 +174,9 @@ describe how these relationships are made explicit.
 
 [.answer]
 --
-No relationships between individual instances are explicitly stated.
+No instances are related to any others in this dataset.
+
+
 --
 [.question.optional]
 Are there recommended data splits (e.g., training,
@@ -188,11 +187,7 @@ them.
 
 [.answer]
 --
-
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
+When splitting data, the user should be mindful of the fact that theater organs vary greatly from other organs, and that there are more subtle variations among organs of different builders.
 
 
 --
@@ -203,7 +198,11 @@ dataset? If so, please provide a description.
 
 [.answer]
 --
-Errors are possible, as the information is crowdsourced. However, for the same reason, blatant errors are improbable, especially for more popular titles.
+Sometimes, the listed number of stops disagrees with the number listed on the stoplist. In these cases, the one listed directly on the page is the one entered into the dataset.
+
+This dataset in its entirety is not intended for an analysis of the prolificness of any organbuilder. In order to use this dataset for that purpose, remove the first four and last four organs fromt his dataset, as they were selected as organs of note and not sampled with Simple Random Sampling. 
+
+Also, the parent dataset relies on self-reporting of existing organs. This means that organs in certain regions may be underrepresented.
 
 
 --
@@ -221,10 +220,19 @@ provide descriptions of all external resources and any
 restrictions associated with them, as well as links or other
 access points, as appropriate.
 
+--
+The dataset is self-contained.
+
+There is an archival version of the complete dataset from which this
+one was created.
+
+The dataset is released under a CC BY-NC-SA license. Any other uses
+require express permission from the Bootstrap team.
+--
+
 
 [.answer]
 --
-The data set is fully self-contained.
 
 
 --
@@ -235,10 +243,11 @@ by doctorpatient confidentiality, data that includes the content
 of individuals’ non-public communications)? If so, please provide
 a description.
 
+The dataset does not contain any confidential information.
+
 
 [.answer]
 --
-All data was obtained from esportsearnings.com, which asserts that all data is "freely available public information."
 
 
 --
@@ -247,10 +256,13 @@ Does the dataset contain data that, if viewed directly, might
 be offensive, insulting, threatening, or might otherwise cause
 anxiety? If so, please describe why.
 
+The dataset does not contain any content known or intended to be
+offensive.
+
 
 [.answer]
 --
-The data set does not contain data that might be offensive, insulting, threatening, or might otherwise cause anxiety.
+
 
 --
 [.question.required]
@@ -260,8 +272,7 @@ remaining questions in this section.
 
 [.answer]
 --
-
-XXX: missing answer.
+This dataset does not relate to people aside from most organbuilders' names being the names of their companies.
 
 
 
@@ -290,7 +301,7 @@ describe how.
 [.answer]
 --
 
-XXX: missing number.
+XXX: missing answer.
 
 
 --
@@ -318,6 +329,8 @@ Any other comments?
 
 [.answer]
 --
+No other comments.
+
 
 --
 
@@ -350,7 +363,7 @@ data validated/verified? If so, please describe how.
 
 [.answer]
 --
-The data associated with each instance was freely available online.
+The data in this dataset was recorded in the Organ Historical Society's Pipe Organ Database. Stop counts could be verified by stoplists, but no organs were directly observed in the coellction of this data.
 
 
 --
@@ -363,7 +376,7 @@ procedures validated?
 
 [.answer]
 --
-The data was manually submitted by users on esportsearnings.com. Submitted data is subject to review by other users, and all submitted data must be accompanied by a reliable citation.
+This data was mostly collected by a web scraper scraping the database, but eight manually curated organs of note were included.
 
 
 --
@@ -375,7 +388,7 @@ specific sampling probabilities)?
 
 [.answer]
 --
-There was no predefined sampling strategy, as the composition of the sample depended solely on the submissions of users on esportsearnings.com.
+The first four  and last four organs in the dataset are organs of note. The rest were collected by Simple Random Sampling.
 
 
 --
@@ -387,7 +400,7 @@ compensated (e.g., how much were crowdworkers paid)?
 
 [.answer]
 --
-Users on esportsearnings.com who chose to volunteer their time were involved in the data collection process.
+This data was collected by two student volunteers who were not compensated monetarily.
 
 
 --
@@ -401,7 +414,7 @@ the instances was created.
 
 [.answer]
 --
-Data collection began with the inception of the site, which was in 2012. It is an ongoing process. The timeframe over which the data was collected does not match the creation timeframe of the data associated with the instances. The timeframe for data creation was from 1998 to 2020.
+This data was collected in December 2020/January 2021. It does not match the creation timeframe of the data in question, which started in the 1950s and is ongoing.
 
 
 --
@@ -411,10 +424,13 @@ institutional review board)? If so, please provide a description
 of these review processes, including the outcomes, as well as a
 link or other access point to any supporting documentation.
 
+Creating this dataset did not undergo ethics review. The assumption is
+that the original dataset was suitably guarded.
+
 
 [.answer]
 --
-No ethical review processes were conducted.
+
 
 --
 [.question.required]
@@ -424,8 +440,7 @@ remainder of the questions in this section.
 
 [.answer]
 --
-
-XXX: missing answer.
+This dataset does not relate to people beyond the extent of their organ companies being named after them.
 
 
 --
@@ -437,11 +452,7 @@ websites)?
 
 [.answer]
 --
-
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
+The data was obtained from a third party, the Pipe Organ Database, who in turn collected the data from the organ enthusiasts who directly observed the organs.
 
 
 --
@@ -456,10 +467,6 @@ of the notification itself.
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 
 --
@@ -475,10 +482,6 @@ consented.
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 
 --
@@ -493,10 +496,6 @@ appropriate).
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 
 --
@@ -511,10 +510,6 @@ access point to any supporting documentation.
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 
 --
@@ -524,11 +519,8 @@ Any other comments?
 
 [.answer]
 --
+No other comments.
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 --
 
@@ -562,7 +554,7 @@ in this section.
 
 [.answer]
 --
-The names of the video games were cleaned to fix any unicode characters that did not display properly.
+All church organs' venues was labeled as "Church", rather than being listed by denomination.
 
 
 --
@@ -575,7 +567,7 @@ to the “raw” data.
 
 [.answer]
 --
-The original data set upon which this data set is based can be found at https://www.kaggle.com/rankirsh/esports-earnings.
+The "raw" data was not saved.
 
 
 --
@@ -586,7 +578,7 @@ available? If so, please provide a link or other access point.
 
 [.answer]
 --
-The cleaning of the names column was done in Google Sheets (https://www.google.com/sheets/about/).
+https://gist.github.com/SYZYGY-DEV333/56ae34f08c6e3c0e8018d5e80ec3d80d
 
 
 --
@@ -596,7 +588,7 @@ Any other comments?
 
 [.answer]
 --
-The instances that were formatted incorrectly were in cells A129, A200, A290, and A507.
+No other comments.
 
 
 --
@@ -614,6 +606,7 @@ avoiding potential risks or harms.
 
 [.answer]
 --
+This dataset can be used for comparisons between numbers of manuals, ranks, and stops, as well as the lowest pitch of a pipe, provided that the user takes into account the fact that theater organs differ drastically from pipe organs in the difference between ranks and stops. The first four and last four elements of this dataset should not be used in any attempt to find the prolificness of any organbuilder, as they were not obtained by simple random sampling. This was to highlight certain organs of note to show the true ranges of the distributions of organ characteristics.
 
 
 --
@@ -624,7 +617,7 @@ provide a description.
 
 [.answer]
 --
-A few users on Kaggle have conducted analyses with the source data set in an attempt to find relationships between variables in the data set.
+This dataset has not been used for any other tasks.
 
 
 --
@@ -636,7 +629,7 @@ other access point.
 
 [.answer]
 --
-There is no repository that links to any or all papers or systems that use the data set.
+No such repository exists because no such papers or systems exist.
 
 
 --
@@ -646,7 +639,7 @@ What (other) tasks could the dataset be used for?
 
 [.answer]
 --
-The data set could be used to determine the factors that affect the total amount of money awarded to tournament winners, which is representative to the strength of a game's esports scene. These factors could include genre, release date, the ratio of online earnings to total earnings, etc.
+This dataset may also be used for an analysis by year of pipe organ, for instance observing a trend in the lowest pitches or number of stops in pipe organs as time wears on.
 
 
 --
@@ -664,7 +657,7 @@ harms?
 
 [.answer]
 --
-There is nothing about the composition of the data set or the way it was collected that might impact future uses.
+The composition of this dataset should not impact future uses.
 
 
 --
@@ -675,7 +668,7 @@ so, please provide a description.
 
 [.answer]
 --
-There are no tasks for which the data set should not be used.
+Users should proceed with caution when using this dataset to analyze organs by venue because of the small number of non-church organs.
 
 
 --
@@ -685,7 +678,7 @@ Any other comments?
 
 [.answer]
 --
-The user of the data set must be careful not to conflate the esports scene of a game with the quality of the game, as there are many factors, including whether or not the game is free, that affect how much money is awarded in tournaments.
+No other comments.
 
 
 --
@@ -711,10 +704,11 @@ entity (e.g., company, institution, organization) on behalf of
 which the dataset was created? If so, please provide a
 description.
 
+Yes, the dataset is intended for public use.
+
 
 [.answer]
 --
-The data set will not be distributed to third parties outside of the entity on behalf of which the data set was created (Bootstrap:Data Science).
 
 
 --
@@ -723,10 +717,13 @@ How will the dataset will be distributed (e.g., tarball on
 website, API, GitHub)? Does the dataset have a digital object
 identifier (DOI)?
 
+The dataset will at least be made available through a permanent URL on
+the Bootstrap Web site (bootstrapworld.org). It may also be included
+in software distributions.
+
 
 [.answer]
 --
-The data set will be distributed through the Bootstrap:Data Science website. The data set does not have a DOI.
 
 
 --
@@ -736,7 +733,7 @@ When will the dataset be distributed?
 
 [.answer]
 --
-The data set will likely be distributed in the early months of 2021.
+January 2021
 
 
 --
@@ -784,6 +781,7 @@ No, no (US) export controls govern the data.
 [.answer]
 --
 
+
 --
 [.question.optional]
 Any other comments?
@@ -791,11 +789,8 @@ Any other comments?
 
 [.answer]
 --
+No other comments.
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 --
 
@@ -845,7 +840,7 @@ access point.
 
 [.answer]
 --
-There is no erratum.
+No erratum exists for this dataset at this time.
 
 
 --
@@ -865,6 +860,7 @@ Bootstrap teacher support forums.
 [.answer]
 --
 
+
 --
 [.question.optional]
 If the dataset relates to people, are there applicable limits
@@ -878,10 +874,6 @@ enforced.
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 
 --
@@ -894,11 +886,8 @@ users.
 
 [.answer]
 --
+This dataset should not become obsolete, as it is a record of organs that have been constructed/will be constructed in the next couple of years. It is a record of organs which have in some way or another come into existence.
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
 
 --
 [.question.common]
@@ -910,10 +899,22 @@ Is there a process for communicating/distributing these
 contributions to other users? If so, please provide a
 description.
 
+--
+Users may build on the dataset so long as they follow the license.
+
+Users who wish to contribute should email contact@@bootstrapworld.org.
+
+Verification and validation will depend on the Bootstrap team's
+resources at that point.
+
+Changes contributed by third-parties will be announced in the same
+manner as ones made by the Bootstrap team.
+--
+
 
 [.answer]
 --
-Individuals interested in contributing to the data set can contribute to esportsearnings.com, which is the source of the data in this data set.
+
 
 --
 [.question.optional]
@@ -922,8 +923,6 @@ Any other comments?
 [.answer]
 --
 
-Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-perferendis sint amet eligendi. Minus unde odit quod officia sit
-ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-vitae qui. Laborum itaque ipsa possimus et.
+
+
 --

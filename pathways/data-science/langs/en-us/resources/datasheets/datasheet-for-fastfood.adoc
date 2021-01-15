@@ -1,3 +1,5 @@
+= Datasheet for Fast Food
+
 [.datasheet]
 Content Courtesy: 
 https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
@@ -16,7 +18,7 @@ the dataset and to promote transparency about funding interests.
 
 [.answer]
 --
-This dataset was created to expand the set of datasets in the possesion of the Bootstrap Data Science curriculum.
+
 
 --
 [.question.required]
@@ -27,7 +29,12 @@ Please provide a description.
 
 [.answer]
 --
-This dataset was created for educational purposes. The pipe organ is a relatively obscure instrument, and this dataset is intended to provoke an interest in it.
+
+The dataset was created to provide interesting data
+for middle school and high school students to learn
+data science and statistics. In addition, through this
+process of learning, students can gain some insights
+on healthy choices of fastfood.
 
 
 --
@@ -39,7 +46,10 @@ organization)?
 
 [.answer]
 --
-{empty}E. C. Holtz and J. Sobel created this dataset on behalf of Bootstrap.
+
+Tianren Dong created the dataset with guidance
+from Flannery Denny on behalf of 
+the Bootstrap Data Science curriculum.
 
 
 --
@@ -51,7 +61,6 @@ grant name and number.
 
 [.answer]
 --
-This dataset was provided by volunteer effort, and there is no funding involved.
 
 
 --
@@ -61,7 +70,8 @@ Any other comments?
 
 [.answer]
 --
-No compensation was provided for those who submitted data to the dataset of which this dataset is a sample; all data was compiled by organ enthusiasts who simply want an organ database.
+
+No additional comments.
 
 
 --
@@ -95,7 +105,9 @@ description.
 
 [.answer]
 --
-The instances of this dataset are individual pipe organs.
+
+The instances that comprise the dataset represent various fastfood
+in America. These food items are the only type of instance.
 
 
 --
@@ -106,7 +118,8 @@ appropriate)?
 
 [.answer]
 --
-There are 500 instances of pipe organs. 
+
+There is a total of 461 instances.
 
 
 --
@@ -123,7 +136,12 @@ of instances, because instances were withheld or unavailable).
 
 [.answer]
 --
-This dataset contains a small fraction of the original 66,018 instances of pipe organs from the Organ Historical Society's Pipe Organ Database. Pipe organs without stoplists were excluded from the sample taken, as not all data in the columns could be collected without a stoplist. This reduced the number of organs that could be sampled to 19,042. 
+
+It is a sample of instances from a larger set of all fast food.
+The sample is not representative of the larger set since it doesn't
+include all types of food produced for speed of service. 
+For example, the sample mostly covers fast food commonly found in America,
+excluding various other fast food cuisines.
 
 
 --
@@ -135,7 +153,12 @@ provide a description.
 
 [.answer]
 --
-Each instance consists of text representing the state wherein it resides (or Non-US), text representing the type of institution/location wherein it resides, text representing the original builder of the organ, a number representing the number of ranks (sets of pipes spanning the entire range of a manual/the pedalboard), a number representing the number of stops (usually one rank, but sometimes groups of ranks, which can be selected by the organist to be mixed to create a particular sound), number of manuals (keyboards), a number representing the lowest pitch (written as the length of what the lowest pipe would be if it were an open tube), a number representing the year the organ was originally completed, and a boolean representing whether the organ has been modified or restored since its completion.
+
+Each instance consists of its type, vendor, and
+various nutritional information. Nutritional information
+includes calories in kcal, fat in grams, protein in grams, 
+carbohydrate in grams, cholestorol in milligrams, saturated-fats in grams, 
+sodium in milligrams, serving weight in grams, and 200 calorie weight in grams.
 
 
 --
@@ -146,7 +169,6 @@ so, please provide a description.
 
 [.answer]
 --
-The label associated with each organ is the Pipe Organ Database's ID number for that particular organ.
 
 
 --
@@ -160,7 +182,8 @@ redacted text.
 
 [.answer]
 --
-No information is missing from any instances.
+
+There is no information missing from individual instances.
 
 
 --
@@ -172,7 +195,8 @@ describe how these relationships are made explicit.
 
 [.answer]
 --
-No instances are related to any others in this dataset.
+
+There are no explicit relationships between individual instances.
 
 
 --
@@ -185,7 +209,6 @@ them.
 
 [.answer]
 --
-When splitting data, the user should be mindful of the fact that theater organs vary greatly from other organs, and that there are more subtle variations among organs of different builders.
 
 
 --
@@ -196,11 +219,10 @@ dataset? If so, please provide a description.
 
 [.answer]
 --
-Sometimes, the listed number of stops disagrees with the number listed on the stoplist. In these cases, the one listed directly on the page is the one entered into the dataset.
 
-This dataset in its entirety is not intended for an analysis of the prolificness of any organbuilder. In order to use this dataset for that purpose, remove the first four and last four organs fromt his dataset, as they were selected as organs of note and not sampled with Simple Random Sampling. 
-
-Also, the parent dataset relies on self-reporting of existing organs. This means that organs in certain regions may be underrepresented.
+There are redundancies within same types of fast food instances.
+For example, variations are often just one additional topping
+or a change in type of bun used.
 
 
 --
@@ -218,6 +240,10 @@ provide descriptions of all external resources and any
 restrictions associated with them, as well as links or other
 access points, as appropriate.
 
+
+[.answer]
+--
+
 --
 The dataset is self-contained.
 
@@ -229,9 +255,6 @@ require express permission from the Bootstrap team.
 --
 
 
-[.answer]
---
-
 
 --
 [.question.common]
@@ -241,11 +264,12 @@ by doctorpatient confidentiality, data that includes the content
 of individuals’ non-public communications)? If so, please provide
 a description.
 
-The dataset does not contain any confidential information.
-
 
 [.answer]
 --
+
+The dataset does not contain any confidential information.
+
 
 
 --
@@ -254,12 +278,13 @@ Does the dataset contain data that, if viewed directly, might
 be offensive, insulting, threatening, or might otherwise cause
 anxiety? If so, please describe why.
 
-The dataset does not contain any content known or intended to be
-offensive.
-
 
 [.answer]
 --
+
+The dataset does not contain any content known or intended to be
+offensive.
+
 
 
 --
@@ -270,8 +295,8 @@ remaining questions in this section.
 
 [.answer]
 --
-This dataset does not relate to people aside from most organbuilders' names being the names of their companies.
 
+This dataset doesn't relate to people.
 
 
 --
@@ -299,7 +324,8 @@ describe how.
 [.answer]
 --
 
-XXX: missing answer.
+It should not be possible to identify individuals from the dataset.
+
 
 
 --
@@ -316,8 +342,9 @@ history)? If so, please provide a description.
 [.answer]
 --
 
-
-XXX: missing answer.
+This dataset doesn't contain any data that might be considered
+sensitive in any way. All information regarding the instances
+are published publicly by government institution.
 
 
 --
@@ -327,7 +354,8 @@ Any other comments?
 
 [.answer]
 --
-No other comments.
+
+No additional comments.
 
 
 --
@@ -361,7 +389,9 @@ data validated/verified? If so, please describe how.
 
 [.answer]
 --
-The data in this dataset was recorded in the Organ Historical Society's Pipe Organ Database. Stop counts could be verified by stoplists, but no organs were directly observed in the coellction of this data.
+
+The data associated with each instance is published by USDA,
+and data is downloaded from the internet.
 
 
 --
@@ -374,7 +404,8 @@ procedures validated?
 
 [.answer]
 --
-This data was mostly collected by a web scraper scraping the database, but eight manually curated organs of note were included.
+
+Data was collected through manual human curation.
 
 
 --
@@ -386,7 +417,10 @@ specific sampling probabilities)?
 
 [.answer]
 --
-The first four  and last four organs in the dataset are organs of note. The rest were collected by Simple Random Sampling.
+
+The sampling was to take fast food items from the USDA
+FNDDS database while balancing the amount in each type 
+and each vendor.
 
 
 --
@@ -398,7 +432,9 @@ compensated (e.g., how much were crowdworkers paid)?
 
 [.answer]
 --
-This data was collected by two student volunteers who were not compensated monetarily.
+
+This dataset was created by student volunteers at Brown University from a parent dataset whose datasheet should provide information about collection.
+
 
 
 --
@@ -412,7 +448,9 @@ the instances was created.
 
 [.answer]
 --
-This data was collected in December 2020/January 2021. It does not match the creation timeframe of the data in question, which started in the 1950s and is ongoing.
+
+The data was collected recently. However, the FNDDS data was 
+released in late 2017. 
 
 
 --
@@ -422,12 +460,13 @@ institutional review board)? If so, please provide a description
 of these review processes, including the outcomes, as well as a
 link or other access point to any supporting documentation.
 
-Creating this dataset did not undergo ethics review. The assumption is
-that the original dataset was suitably guarded.
-
 
 [.answer]
 --
+
+Creating this dataset did not undergo ethics review. The assumption is
+that the original dataset was suitably guarded.
+
 
 
 --
@@ -438,7 +477,8 @@ remainder of the questions in this section.
 
 [.answer]
 --
-This dataset does not relate to people beyond the extent of their organ companies being named after them.
+
+This dataset doesn't relate to people.
 
 
 --
@@ -450,7 +490,6 @@ websites)?
 
 [.answer]
 --
-The data was obtained from a third party, the Pipe Organ Database, who in turn collected the data from the organ enthusiasts who directly observed the organs.
 
 
 --
@@ -464,7 +503,6 @@ of the notification itself.
 
 [.answer]
 --
-
 
 
 --
@@ -481,7 +519,6 @@ consented.
 --
 
 
-
 --
 [.question.optional]
 If consent was obtained, were the consenting individuals
@@ -493,7 +530,6 @@ appropriate).
 
 [.answer]
 --
-
 
 
 --
@@ -509,7 +545,6 @@ access point to any supporting documentation.
 --
 
 
-
 --
 [.question.optional]
 Any other comments?
@@ -517,7 +552,6 @@ Any other comments?
 
 [.answer]
 --
-No other comments.
 
 
 --
@@ -552,7 +586,8 @@ in this section.
 
 [.answer]
 --
-All church organs' venues was labeled as "Church", rather than being listed by denomination.
+
+There were no preprocess/cleaning/labeling done.
 
 
 --
@@ -565,7 +600,8 @@ to the “raw” data.
 
 [.answer]
 --
-The "raw" data was not saved.
+
+XXX: missing answer.
 
 
 --
@@ -576,8 +612,8 @@ available? If so, please provide a link or other access point.
 
 [.answer]
 --
-https://gist.github.com/SYZYGY-DEV333/56ae34f08c6e3c0e8018d5e80ec3d80d
 
+XXX: missing answer.
 
 --
 [.question.required]
@@ -586,7 +622,8 @@ Any other comments?
 
 [.answer]
 --
-No other comments.
+
+No additional comments.
 
 
 --
@@ -604,7 +641,6 @@ avoiding potential risks or harms.
 
 [.answer]
 --
-This dataset can be used for comparisons between numbers of manuals, ranks, and stops, as well as the lowest pitch of a pipe, provided that the user takes into account the fact that theater organs differ drastically from pipe organs in the difference between ranks and stops. The first four and last four elements of this dataset should not be used in any attempt to find the prolificness of any organbuilder, as they were not obtained by simple random sampling. This was to highlight certain organs of note to show the true ranges of the distributions of organ characteristics.
 
 
 --
@@ -615,7 +651,10 @@ provide a description.
 
 [.answer]
 --
-This dataset has not been used for any other tasks.
+
+The dataset has been used to create a sample student
+statistics/data science research paper exploring the
+nutritional trends of different fast food.
 
 
 --
@@ -627,7 +666,8 @@ other access point.
 
 [.answer]
 --
-No such repository exists because no such papers or systems exist.
+
+There isn't a repository.
 
 
 --
@@ -637,7 +677,9 @@ What (other) tasks could the dataset be used for?
 
 [.answer]
 --
-This dataset may also be used for an analysis by year of pipe organ, for instance observing a trend in the lowest pitches or number of stops in pipe organs as time wears on.
+
+The dataset could be used for accessing nutritional inforamtion
+regarding specific fast food or general trends in types of fast food.
 
 
 --
@@ -655,7 +697,9 @@ harms?
 
 [.answer]
 --
-The composition of this dataset should not impact future uses.
+
+The majority of nuanced nutritional information have been omitted.
+Thus, users shouldn't rely solely on this dataset for nutritional guidance.
 
 
 --
@@ -666,7 +710,10 @@ so, please provide a description.
 
 [.answer]
 --
-Users should proceed with caution when using this dataset to analyze organs by venue because of the small number of non-church organs.
+
+This dataset should not be used as a nutritional guidance,
+nor should it be used in place of a 
+professional's (doctor/nutritionist) suggestions.
 
 
 --
@@ -676,7 +723,8 @@ Any other comments?
 
 [.answer]
 --
-No other comments.
+
+No additional comments.
 
 
 --
@@ -702,11 +750,12 @@ entity (e.g., company, institution, organization) on behalf of
 which the dataset was created? If so, please provide a
 description.
 
-Yes, the dataset is intended for public use.
-
 
 [.answer]
 --
+
+Yes, the dataset is intended for public use.
+
 
 
 --
@@ -715,13 +764,14 @@ How will the dataset will be distributed (e.g., tarball on
 website, API, GitHub)? Does the dataset have a digital object
 identifier (DOI)?
 
+
+[.answer]
+--
+
 The dataset will at least be made available through a permanent URL on
 the Bootstrap Web site (bootstrapworld.org). It may also be included
 in software distributions.
 
-
-[.answer]
---
 
 
 --
@@ -731,7 +781,8 @@ When will the dataset be distributed?
 
 [.answer]
 --
-January 2021
+
+The dataset will be distributed in early 2021.
 
 
 --
@@ -743,12 +794,13 @@ provide a link or other access point to, or otherwise reproduce,
 any relevant licensing terms or ToU, as well as any fees
 associated with these restrictions.
 
-The dataset is released under a CC BY-NC-SA license. Any other uses
-require express written permission from the Bootstrap team.
-
 
 [.answer]
 --
+
+The dataset is released under a CC BY-NC-SA license. Any other uses
+require express written permission from the Bootstrap team.
+
 
 
 --
@@ -759,11 +811,12 @@ these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any relevant licensing terms, as well as
 any fees associated with these restrictions.
 
-No, there are no third-party IP restrictions on the data.
-
 
 [.answer]
 --
+
+No, there are no third-party IP restrictions on the data.
+
 
 
 --
@@ -773,11 +826,12 @@ to the dataset or to individual instances? If so, please describe
 these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any supporting documentation.
 
-No, no (US) export controls govern the data.
-
 
 [.answer]
 --
+
+No, no (US) export controls govern the data.
+
 
 
 --
@@ -787,7 +841,6 @@ Any other comments?
 
 [.answer]
 --
-No other comments.
 
 
 --
@@ -811,11 +864,12 @@ dataset consumers.
 [.question.common]
 Who is supporting/hosting/maintaining the dataset?
 
-The dataset is maintained by Bootstrap.
-
 
 [.answer]
 --
+
+The dataset is maintained by Bootstrap.
+
 
 
 --
@@ -823,11 +877,12 @@ The dataset is maintained by Bootstrap.
 How can the owner/curator/manager of the dataset be contacted
 (e.g., email address)?
 
-contact@@bootstrapworld.org
-
 
 [.answer]
 --
+
+contact@@bootstrapworld.org
+
 
 
 --
@@ -838,7 +893,8 @@ access point.
 
 [.answer]
 --
-No erratum exists for this dataset at this time.
+
+There is currently no erratum linked to this dataset.
 
 
 --
@@ -848,15 +904,16 @@ add new instances, delete instances)? If so, please describe how
 often, by whom, and how updates will be communicated to users
 (e.g., mailing list, GitHub)?
 
+
+[.answer]
+--
+
 This derivative dataset is not expected to be actively updated, and
 therefore quite likely will not track changes made to the original
 dataset. However, changes may be made in response to feedback from
 users or finding errors. Significant changes will be announced on
 Bootstrap teacher support forums.
 
-
-[.answer]
---
 
 
 --
@@ -873,7 +930,6 @@ enforced.
 --
 
 
-
 --
 [.question.optional]
 Will older versions of the dataset continue to be
@@ -884,7 +940,6 @@ users.
 
 [.answer]
 --
-This dataset should not become obsolete, as it is a record of organs that have been constructed/will be constructed in the next couple of years. It is a record of organs which have in some way or another come into existence.
 
 
 --
@@ -896,6 +951,10 @@ validated/verified? If so, please describe how. If not, why not?
 Is there a process for communicating/distributing these
 contributions to other users? If so, please provide a
 description.
+
+
+[.answer]
+--
 
 --
 Users may build on the dataset so long as they follow the license.
@@ -910,9 +969,6 @@ manner as ones made by the Bootstrap team.
 --
 
 
-[.answer]
---
-
 
 --
 [.question.optional]
@@ -920,7 +976,6 @@ Any other comments?
 
 [.answer]
 --
-
 
 
 --
