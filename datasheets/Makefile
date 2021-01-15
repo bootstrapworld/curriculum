@@ -1,6 +1,7 @@
 reports:
 	@for f in *-student.adoc; do \
 	  echo converting $$f; \
+	  sanitize.rkt $$f; \
 	  asciidoctor -a linkcss -a stylesheet=./questionnaire.css $$f; \
 	done
 

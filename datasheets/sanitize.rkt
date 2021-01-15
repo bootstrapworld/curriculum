@@ -18,6 +18,11 @@
 ;(printf "admin-file = ~a\n" *admin-file*)
 ;(printf "datasheet-name = ~a\n" *datasheet-name*)
 
+(define (question-asked? ln)
+  (regexp-match
+    "^// +(Required Question|Common Question|Question|_) +:.+?: *$"
+    ln))
+
 (define (collect-tags #:admin? [admin? #f])
   (let ((tags '()))
     (call-with-input-file (if admin? *admin-file* *student-file*)
@@ -30,9 +35,7 @@
                         (let ((tag (regexp-replace "^:([^ ]+):.*" ln "\\1")))
                           (set! tags (cons tag tags)))))
                     (else
-                      (when (regexp-match
-                              "^// +(Required Question|Common Question|Question|_) +:.+?: *$"
-                              ln)
+                      (when (question-asked? ln)
                         (let ((tag
                                 (regexp-replace
                                   "^// +(Required Question|Common Question|Question|_) +:(.+?): *$"
@@ -129,6 +132,9 @@
 (define (comment? ln)
   (regexp-match "^//" ln))
 
+(define (section-header? ln)
+  (regexp-match "^=+ " ln))
+
 (define (check-common-answers)
   (let ((common-answer-inserted? #f)
         (common-answer-fragment #f))
@@ -136,25 +142,43 @@
       (lambda (i)
         (call-with-output-file *final-file*
           (lambda (o)
-            (let loop ()
-              (let ((ln (read-line i)))
-                (unless (eof-object? ln)
-                  (cond ((common-answer-include? ln)
-                         => (lambda (x) (set! common-answer-fragment x)))
-                        ((include-call? ln)
-                        => (lambda (x)
-                             ;(printf "x = ~s\n" x)
-                             (include-file-fragment x o)))
-                        ((insert-common? ln)
-                         (cond (common-answer-fragment
-                                 (set! common-answer-inserted? #t)
-                                 (include-file-fragment
-                                   (include-call? common-answer-fragment) o))
-                               (else
-                                 (printf "WARNING: :common: used incorrectly\n"))))
-                        ((comment? ln) #f)
-                        (else (display ln o) (newline o)))
-                  (loop)))))
+            (fprintf o "[.datasheet]\n")
+            (let ((track-question #f))
+              (let loop ()
+                (let ((ln (read-line i)))
+                  (unless (eof-object? ln)
+                    (cond ((common-answer-include? ln)
+                           => (lambda (x) (set! common-answer-fragment x)))
+                          ((section-header? ln)
+                           (fprintf o "\n[.datasheet]\n")
+                           (display ln o) (newline o))
+                          ((include-call? ln)
+                           => (lambda (x)
+                                ;(printf "x = ~s\n" x)
+                                (when (eq? track-question 'within-answer)
+                                  (set! track-question #f)
+                                  (fprintf o "--\n"))
+                                (include-file-fragment x o)))
+                          ((insert-common? ln)
+                           (cond (common-answer-fragment
+                                   (set! common-answer-inserted? #t)
+                                   (include-file-fragment
+                                     (include-call? common-answer-fragment) o)
+                                   )
+                                 (else
+                                   (printf "WARNING: :common: used incorrectly\n"))))
+                          ((comment? ln)
+                           (when (question-asked? ln)
+                             (set! track-question 'within-question))
+                           #f)
+                          (else
+                            (when (eq? track-question 'within-question)
+                              (set! track-question 'within-answer)
+                              (fprintf o "\n[.answer]\n--\n"))
+                            (display ln o) (newline o)))
+                    (loop))))
+              (when (eq? track-question 'within-answer) (fprintf o "--\n"))
+              ))
           #:exists 'replace)))
     (when common-answer-inserted?
       (printf "Stock answers needed to be inserted\n"))
