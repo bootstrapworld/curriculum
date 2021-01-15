@@ -1,41 +1,83 @@
-// Content Courtesy:
-// https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
-// by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
-// Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
-// Kate Crawford
+[.datasheet]
+Content Courtesy: 
+https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
+by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
+Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
+Kate Crawford
 
-// == Motivation
 
-:Mot-intro:
+[.datasheet]
+== Motivation
+
 The questions in this section are primarily intended to encourage
 dataset creators to clearly articulate their reasons for creating
 the dataset and to promote transparency about funding interests.
 
-:mot-purpose:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 For what purpose was the dataset created? Was there a specific
 task in mind? Was there a specific gap that needed to be filled?
 Please provide a description.
 
-:mot-creator:
+
+[.answer]
+--
+
+The dataset was created to provide interesting data
+for middle school and high school students to learn
+data science and statistics. In addition, through this
+process of learning, students can gain some insights
+on making healthy choices when drinking beverages.
+
+
+--
 [.question.required]
 Who created the dataset (e.g., which team, research group) and
 on behalf of which entity (e.g., company, institution,
 organization)?
 
-:mot-funding:
+
+[.answer]
+--
+
+Tianren Dong created the dataset with guidance
+from Flannery Denny on behalf of 
+the Bootstrap Data Science curriculum.
+
+
+--
 [.question.optional]
 Who funded the creation of the dataset? If there is an
 associated grant, please provide the name of the grantor and the
 grant name and number.
 
-:mot-other:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Composition
 
-:Comp-intro:
+[.answer]
+--
+
+No additional comments.
+
+
+--
+
+
+[.datasheet]
+== Composition
+
 Dataset creators should read through the questions in this
 section prior to any data collection and then provide answers
 once collection is complete. Most of these questions are intended
@@ -45,7 +87,12 @@ tasks. The answers to some of these questions reveal information
 about compliance with the EU’s General Data Protection Regulation
 (GDPR) or comparable regulations in other jurisdictions.
 
-:comp-what:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 What do the instances that comprise the dataset represent
 (e.g., documents, photos, people, countries)? Are there multiple
@@ -53,12 +100,27 @@ types of instances (e.g., movies, users, and ratings; people and
 interactions between them; nodes and edges)? Please provide a
 description.
 
-:comp-quantity:
+
+[.answer]
+--
+
+The instances that comprise the dataset represent various beverages
+commonly found in America. Beverages are the only type of instance.
+
+
+--
 [.question.required]
 How many instances are there in total (of each type, if
 appropriate)?
 
-:comp-representativeness:
+
+[.answer]
+--
+
+There is a total of 559 beverage instances.
+
+
+--
 [.question.required]
 Does the dataset contain all possible instances or is it a
 sample (not necessarily random) of instances from a larger set?
@@ -69,18 +131,45 @@ validated/verified. If it is not representative of the larger
 set, please describe why not (e.g., to cover a more diverse range
 of instances, because instances were withheld or unavailable).
 
-:comp-content:
+
+[.answer]
+--
+
+It is a sample of instances from a larger set of all beverages.
+The sample is representative of the larger set since it covers
+various types of beverages. However, the sample excludes all
+alcoholic and powerdered beverages.
+
+
+--
 [.question.required]
 What data does each instance consist of? “Raw” data (e.g.,
 unprocessed text or images) or features? In either case, please
 provide a description.
 
-:comp-label:
+
+[.answer]
+--
+
+Each instances consists of its beverage type and
+various nutritional information. Nutritional information
+includes calories in kcal, fat in grams, protein in grams, 
+carbohydrate in grams, sugars in grams, sodium in milligrams,
+caffeine in milligrams, serving weight in grams, 
+serving description in fluid ounces, and 200 calorie weight in grams.
+
+
+--
 [.question.optional]
 Is there a label or target associated with each instance? If
 so, please provide a description.
 
-:comp-missing:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Is any information missing from individual instances? If so,
 please provide a description, explaining why this information is
@@ -88,25 +177,53 @@ missing (e.g., because it was unavailable). This does not include
 intentionally removed information, but might include, e.g.,
 redacted text.
 
-:comp-relationsship:
+
+[.answer]
+--
+
+There is no information missing from individual instances.
+
+
+--
 [.question.required]
 Are relationships between individual instances made explicit
 (e.g., users’ movie ratings, social network links)? If so, please
 describe how these relationships are made explicit.
 
-:comp-splits:
+
+[.answer]
+--
+
+There are no explicit relationships between individual instances.
+
+
+--
 [.question.optional]
 Are there recommended data splits (e.g., training,
 development/validation, testing)? If so, please provide a
 description of these splits, explaining the rationale behind
 them.
 
-:comp-errors:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Are there any errors, sources of noise, or redundancies in the
 dataset? If so, please provide a description.
 
-:comp-selfcontained:
+
+[.answer]
+--
+
+There are redundancies among same types of beverage instances.
+For example, there are tea entries with the only difference being
+brewed with different water.
+
+
+--
 [.question.common]
 Is the dataset self-contained, or does it link to or otherwise
 rely on external resources (e.g., websites, tweets, other
@@ -121,7 +238,10 @@ provide descriptions of all external resources and any
 restrictions associated with them, as well as links or other
 access points, as appropriate.
 
+
 [.answer]
+--
+
 --
 The dataset is self-contained.
 
@@ -133,7 +253,8 @@ require express permission from the Bootstrap team.
 --
 
 
-:comp-confidentiality:
+
+--
 [.question.common]
 Does the dataset contain data that might be considered
 confidential (e.g., data that is protected by legal privilege or
@@ -141,43 +262,71 @@ by doctorpatient confidentiality, data that includes the content
 of individuals’ non-public communications)? If so, please provide
 a description.
 
+
 [.answer]
+--
+
 The dataset does not contain any confidential information.
 
 
-:comp-offense:
+
+--
 [.question.common]
 Does the dataset contain data that, if viewed directly, might
 be offensive, insulting, threatening, or might otherwise cause
 anxiety? If so, please describe why.
 
+
 [.answer]
+--
+
 The dataset does not contain any content known or intended to be
 offensive.
 
-:comp-people:
+
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remaining questions in this section.
 
-:comp-subpopulation:
+
+[.answer]
+--
+
+This dataset doesn't relate to people.
+
+
+--
 [.question.required]
 Does the dataset identify any subpopulations (e.g., by age,
 gender)? If so, please describe how these subpopulations are
 identified and provide a description of their respective
 distributions within the dataset.
 
-:comp-doxx:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.common]
 Is it possible to identify individuals (i.e., one or more
 natural persons), either directly or indirectly (i.e., in
 combination with other data) from the dataset? If so, please
 describe how.
 
+
 [.answer]
+--
+
 It should not be possible to identify individuals from the dataset.
 
-:comp-sensitivity:
+
+
+--
 [.question.required]
 Does the dataset contain data that might be considered
 sensitive in any way (e.g., data that reveals racial or ethnic
@@ -187,13 +336,32 @@ data; biometric or genetic data; forms of government
 identification, such as social security numbers; criminal
 history)? If so, please provide a description.
 
-:comp-other:
+
+[.answer]
+--
+
+This dataset doesn't contain any data that might be considered
+sensitive in any way. All information regarding the instances
+are published publicly by government institution.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Process Collection
 
-:Coll-intro:
+[.answer]
+--
+
+No additional comments.
+
+
+--
+
+
+[.datasheet]
+== Process Collection
+
 As with the previous section, dataset creators should read
 through these questions prior to any data collection to flag
 potential issues and then provide answers once collection is
@@ -201,7 +369,12 @@ complete. In addition to the goals of the prior section, the
 answers to questions here may provide information that allow
 others to reconstruct the dataset without access to it.
 
-:coll-how:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 How was the data associated with each instance acquired? Was
 the data directly observable (e.g., raw text, movie ratings),
@@ -211,29 +384,56 @@ model-based guesses for age or language)? If data was reported by
 subjects or indirectly inferred/derived from other data, was the
 data validated/verified? If so, please describe how.
 
-:coll-tools:
+
+[.answer]
+--
+
+The data associated with each instance is published by USDA.
+
+
+--
 [.question.required]
 What mechanisms or procedures were used to collect the data
 (e.g., hardware apparatus or sensor, manual human curation,
 software program, software API)? How were these mechanisms or
 procedures validated?
 
-:coll-subset:
+
+[.answer]
+--
+
+Data was collected through manual human curation.
+
+
+--
 [.question.required]
 If the dataset is a sample from a larger set, what was the
 sampling strategy (e.g., deterministic, probabilistic with
 specific sampling probabilities)?
 
-:coll-who:
+
+[.answer]
+--
+
+The sampling was to take all occurences of beverages from 
+the MyFoodData FNDDS dataset.
+
+
+--
 [.question.common]
 Who was involved in the data collection process (e.g.,
 students, crowdworkers, contractors) and how were they
 compensated (e.g., how much were crowdworkers paid)?
 
+
 [.answer]
+--
+
 This dataset was created by student volunteers at Brown University from a parent dataset whose datasheet should provide information about collection.
 
-:coll-time:
+
+
+--
 [.question.required]
 Over what timeframe was the data collected? Does this timeframe
 match the creation timeframe of the data associated with the
@@ -241,29 +441,54 @@ instances (e.g., recent crawl of old news articles)? If not,
 please describe the timeframe in which the data associated with
 the instances was created.
 
-:coll-ethics:
+
+[.answer]
+--
+
+The data was collected recently. However, the FNDDS data was 
+released in late 2017. 
+
+
+--
 [.question.common]
 Were any ethical review processes conducted (e.g., by an
 institutional review board)? If so, please provide a description
 of these review processes, including the outcomes, as well as a
 link or other access point to any supporting documentation.
 
+
 [.answer]
+--
+
 Creating this dataset did not undergo ethics review. The assumption is
 that the original dataset was suitably guarded.
 
-:coll-people:
+
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remainder of the questions in this section.
 
-:coll-3rdparty:
+
+[.answer]
+--
+
+This dataset doesn't relate to people.
+
+
+--
 [.question.optional]
 Did you collect the data from the individuals in question
 directly, or obtain it via third parties or other sources (e.g.,
 websites)?
 
-:coll-notification:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Were the individuals in question notified about the data
 collection? If so, please describe (or show with screenshots or
@@ -271,7 +496,12 @@ other information) how notice was provided, and provide a link or
 other access point to, or otherwise reproduce, the exact language
 of the notification itself.
 
-:coll-consent:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Did the individuals in question consent to the collection and
 use of their data? If so, please describe (or show with
@@ -280,7 +510,12 @@ provided, and provide a link or other access point to, or
 otherwise reproduce, the exact language to which the individuals
 consented.
 
-:coll-revoke:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 If consent was obtained, were the consenting individuals
 provided with a mechanism to revoke their consent in the future
@@ -288,7 +523,12 @@ or for certain uses? If so, please provide a description, as well
 as a link or other access point to the mechanism (if
 appropriate).
 
-:coll-impact:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Has an analysis of the potential impact of the dataset and its
 use on data subjects (e.g., a data protection impact
@@ -296,13 +536,26 @@ analysis)been conducted? If so, please provide a description of
 this analysis, including the outcomes, as well as a link or other
 access point to any supporting documentation.
 
-:coll-other:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Any other comments?
 
-// == Preprocessing/cleaning/labeling
 
-:Preproc-intro:
+[.answer]
+--
+
+
+--
+
+
+[.datasheet]
+== Preprocessing/cleaning/labeling
+
 Dataset creators should read through these questions prior to any
 preprocessing, cleaning, or labeling and then provide answers
 once these tasks are complete. The questions in this section are
@@ -312,7 +565,12 @@ ways that are compatible with their chosen tasks. For example,
 text that has been converted into a “bag of words” is not
 suitable for tasks involving word order.
 
-:preproc-preproc:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Was any preprocessing/cleaning/labeling of the data done (e.g.,
 discretization or bucketing, tokenization, part-of-speech
@@ -321,47 +579,106 @@ processing of missing values)? If so, please provide a
 description. If not, you may skip the remainder of the questions
 in this section.
 
-:preproc-save:
+
+[.answer]
+--
+
+There were no preprocess/cleaning/labeling done.
+
+
+--
 [.question.required]
 Was the “raw” data saved in addition to the
 preprocessed/cleaned/labeled data (e.g., to support unanticipated
 future uses)? If so, please provide a link or other access point
 to the “raw” data.
 
-:preproc-software:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.required]
 Is the software used to preprocess/clean/label the instances
 available? If so, please provide a link or other access point.
 
-:preproc-other:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+--
 [.question.required]
 Any other comments?
 
-// == Uses
 
-:Use-intro:
+[.answer]
+--
+
+No additional comments.
+
+
+--
+
+
+[.datasheet]
+== Uses
+
 These questions are intended to encourage dataset creators to
 reflect on the tasks for which the dataset should and should not
 be used. By explicitly highlighting these tasks, dataset creators
 can help dataset consumers to make informed decisions, thereby
 avoiding potential risks or harms.
 
-:use-already:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Has the dataset been used for any tasks already? If so, please
 provide a description.
 
-:use-repo:
+
+[.answer]
+--
+
+The dataset has been used to create a sample student
+statistics/data science research paper exploring the
+nutrition in different beverages.
+
+
+--
 [.question.required]
 Is there a repository that links to any or all papers or
 systems that use the dataset? If so, please provide a link or
 other access point.
 
-:use-potential:
+
+[.answer]
+--
+
+There isn't a repository.
+
+
+--
 [.question.required]
 What (other) tasks could the dataset be used for?
 
-:use-future:
+
+[.answer]
+--
+
+The dataset could be used for accessing nutritional inforamtion
+regarding specific beverages or types of beverages.
+
+
+--
 [.question.required]
 Is there anything about the composition of the dataset or the
 way it was collected and preprocessed/cleaned/labeled that might
@@ -373,49 +690,98 @@ harms, legal risks) If so, please provide a description. Is there
 anything a future user could do to mitigate these undesirable
 harms?
 
-:use-dontuse:
+
+[.answer]
+--
+
+The majority of nuanced nutritional information have been omitted.
+Thus, users shouldn't rely solely on this dataset for nutritional guidance.
+
+
+--
 [.question.required]
 Are there tasks for which the dataset should not be used? If
 so, please provide a description.
 
-:use-other:
+
+[.answer]
+--
+
+This dataset should not be used as a nutritional guidance,
+nor should it be used in place of a 
+professional's (doctor/nutritionist) suggestions.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Distribution
 
-:Dist-intro:
+[.answer]
+--
+
+No additional comments.
+
+
+--
+
+
+[.datasheet]
+== Distribution
+
 Dataset creators should provide answers to these questions prior
 to distributing the dataset either internally within the entity
 on behalf of which the dataset was created or externally to third
 parties.
 
-:dist-3rdparty:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Will the dataset be distributed to third parties outside of the
 entity (e.g., company, institution, organization) on behalf of
 which the dataset was created? If so, please provide a
 description.
 
+
 [.answer]
+--
+
 Yes, the dataset is intended for public use.
 
-:dist-how:
+
+
+--
 [.question.common]
 How will the dataset will be distributed (e.g., tarball on
 website, API, GitHub)? Does the dataset have a digital object
 identifier (DOI)?
 
+
 [.answer]
+--
+
 The dataset will at least be made available through a permanent URL on
 the Bootstrap Web site (bootstrapworld.org). It may also be included
 in software distributions.
 
-:dist-when:
+
+
+--
 [.question.required]
 When will the dataset be distributed?
 
-:dist-license:
+
+[.answer]
+--
+
+The dataset will be distributed in early 2021.
+
+
+--
 [.question.common]
 Will the dataset be distributed under a copyright or other
 intellectual property (IP) license, and/or under applicable terms
@@ -424,11 +790,16 @@ provide a link or other access point to, or otherwise reproduce,
 any relevant licensing terms or ToU, as well as any fees
 associated with these restrictions.
 
+
 [.answer]
+--
+
 The dataset is released under a CC BY-NC-SA license. Any other uses
 require express written permission from the Bootstrap team.
 
-:dist-restrictions:
+
+
+--
 [.question.common]
 Have any third parties imposed IP-based or other restrictions
 on the data associated with the instances? If so, please describe
@@ -436,67 +807,112 @@ these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any relevant licensing terms, as well as
 any fees associated with these restrictions.
 
+
 [.answer]
+--
+
 No, there are no third-party IP restrictions on the data.
 
-:dist-controls:
+
+
+--
 [.question.common]
 Do any export controls or other regulatory restrictions apply
 to the dataset or to individual instances? If so, please describe
 these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any supporting documentation.
 
+
 [.answer]
+--
+
 No, no (US) export controls govern the data.
 
-:dist-other:
+
+
+--
 [.question.optional]
 Any other comments?
 
-// == Maintenance
 
-:Maint-intro:
+[.answer]
+--
+
+
+--
+
+
+[.datasheet]
+== Maintenance
+
 As with the previous section, dataset creators should provide
 answers to these questions prior to distributing the dataset.
 These questions are intended to encourage dataset creators to
 plan for dataset maintenance and communicate this plan with
 dataset consumers.
 
-:maint-who:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Who is supporting/hosting/maintaining the dataset?
 
+
 [.answer]
+--
+
 The dataset is maintained by Bootstrap.
 
-:maint-contact:
+
+
+--
 [.question.common]
 How can the owner/curator/manager of the dataset be contacted
 (e.g., email address)?
 
+
 [.answer]
+--
+
 contact@@bootstrapworld.org
 
-:maint-erratum:
+
+
+--
 [.question.required]
 Is there an erratum? If so, please provide a link or other
 access point.
 
-:maint-update:
+
+[.answer]
+--
+
+There is currently no erratum linked to this dataset.
+
+
+--
 [.question.common]
 Will the dataset be updated (e.g., to correct labeling errors,
 add new instances, delete instances)? If so, please describe how
 often, by whom, and how updates will be communicated to users
 (e.g., mailing list, GitHub)?
 
+
 [.answer]
+--
+
 This derivative dataset is not expected to be actively updated, and
 therefore quite likely will not track changes made to the original
 dataset. However, changes may be made in response to feedback from
 users or finding errors. Significant changes will be announced on
 Bootstrap teacher support forums.
 
-:maint-retention:
+
+
+--
 [.question.optional]
 If the dataset relates to people, are there applicable limits
 on the retention of the data associated with the instances (e.g.,
@@ -505,14 +921,24 @@ retained for a fixed period of time and then deleted)? If so,
 please describe these limits and explain how they will be
 enforced.
 
-:maint-legacy:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Will older versions of the dataset continue to be
 supported/hosted/maintained? If so, please describe how. If not,
 please describe how its obsolescence will be communicated to
 users.
 
-:maint-augmentation:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 If others want to extend/augment/build on/contribute to the
 dataset, is there a mechanism for them to do so? If so, please
@@ -522,7 +948,10 @@ Is there a process for communicating/distributing these
 contributions to other users? If so, please provide a
 description.
 
+
 [.answer]
+--
+
 --
 Users may build on the dataset so long as they follow the license.
 
@@ -535,6 +964,14 @@ Changes contributed by third-parties will be announced in the same
 manner as ones made by the Bootstrap team.
 --
 
-:maint-other:
+
+
+--
 [.question.optional]
 Any other comments?
+
+[.answer]
+--
+
+
+--

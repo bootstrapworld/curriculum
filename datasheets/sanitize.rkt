@@ -2,21 +2,27 @@
 
 #lang racket
 
-(define *student-file*
-  (vector-ref (current-command-line-arguments) 0))
+(define *args* (current-command-line-arguments))
 
-(define *datasheet-name*
+(define *student-file* #f)
+(define *admin-file* #f)
+
+(let ((n (vector-length *args*)))
+  (cond ((<= n 0)
+         (error 'sanitize.rkt "Missing filename argument"))
+        (else
+          (set! *student-file* (vector-ref *args* 0))
+          (when (>= n 2)
+            (set! *admin-file* (vector-ref *args* 1))))))
+
+(define *student-file-basename*
   (regexp-replace "([^ ]+)-student.adoc" *student-file* "\\1"))
 
-(define *admin-file*
-  (string-append *datasheet-name* "-admin.adoc"))
+(unless *admin-file*
+  (set! *admin-file* (string-append *student-file-basename* "-admin.adoc")))
 
 (define *final-file*
-  (string-append *datasheet-name* "-final.adoc"))
-
-;(printf "student-file = ~a\n" *student-file*)
-;(printf "admin-file = ~a\n" *admin-file*)
-;(printf "datasheet-name = ~a\n" *datasheet-name*)
+  (string-append *student-file-basename* "-final.adoc"))
 
 (define (question-asked? ln)
   (regexp-match

@@ -624,24 +624,24 @@
       (newline o))))
 
 (define (display-title i o)
-  (let ([title (string-trim (read-line i))])
-    (set! title (regexp-replace "^=+ *" title ""))
-    (set! *page-title* title)
+  (let* ([title (string-trim (read-line i))]
+         (title-txt (regexp-replace "^=+ *" title "")))
+    (set! *page-title* title-txt)
     (when (or *lesson-plan* *workbook-page?*)
       (let ([title-file (if *workbook-page?*
                             (path-replace-extension *in-file* ".titletxt")
                             "index.titletxt")]
             [title (if *workbook-page?*
                        (regexp-replace* #rx","
-                         (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title "\\1")
+                         (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1")
                          "\\&#x2c;")
-                       title)])
+                       title-txt)])
         (call-with-output-file title-file
           (lambda (o)
             (display title o) (newline o))
           #:exists 'replace)))
     (fprintf o "[.~a]\n" *proglang*)
-    (display #\= o) (display #\space o)
+    (display #\= o)
     (display title o)
     (newline o)
     (newline o)
@@ -844,6 +844,7 @@
                    (let ([directive (read-word i)])
                      ;(printf "directive = ~s~%" directive)
                      (cond [(string=? directive "") (display c o)]
+                           [(string=? directive "@") (display c o)]
                            [(string=? directive "span")
                             (display-begin-span (read-group i directive) o)
                             ]

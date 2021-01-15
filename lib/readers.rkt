@@ -10,8 +10,12 @@
     (let ([c (peek-char i)])
       (if (or (char-alphabetic? c) (char=? c #\-))
           (loop (cons (read-char i) r))
-          (if (null? r) ""
-              (list->string (reverse r)))))))
+          (cond ((null? r)
+                 (if (char=? c #\@)
+                     (begin (read-char i) "@")
+                     ""))
+                (else
+                  (list->string (reverse r))))))))
 
 (define (quote-rev-string s)
   (let ([n (string-length s)])

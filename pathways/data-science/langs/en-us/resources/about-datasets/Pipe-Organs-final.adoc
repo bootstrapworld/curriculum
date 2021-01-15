@@ -1,41 +1,75 @@
-// Content Courtesy:
-// https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
-// by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
-// Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
-// Kate Crawford
+[.datasheet]
+Content Courtesy: 
+https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
+by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
+Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
+Kate Crawford
 
-// == Motivation
 
-:Mot-intro:
+[.datasheet]
+== Motivation
+
 The questions in this section are primarily intended to encourage
 dataset creators to clearly articulate their reasons for creating
 the dataset and to promote transparency about funding interests.
 
-:mot-purpose:
+
+[.answer]
+--
+This dataset was created to expand the set of datasets in the possesion of the Bootstrap Data Science curriculum.
+
+--
 [.question.required]
 For what purpose was the dataset created? Was there a specific
 task in mind? Was there a specific gap that needed to be filled?
 Please provide a description.
 
-:mot-creator:
+
+[.answer]
+--
+This dataset was created for educational purposes. The pipe organ is a relatively obscure instrument, and this dataset is intended to provoke an interest in it.
+
+
+--
 [.question.required]
 Who created the dataset (e.g., which team, research group) and
 on behalf of which entity (e.g., company, institution,
 organization)?
 
-:mot-funding:
+
+[.answer]
+--
+{empty}E. C. Holtz and J. Sobel created this dataset on behalf of Bootstrap.
+
+
+--
 [.question.optional]
 Who funded the creation of the dataset? If there is an
 associated grant, please provide the name of the grantor and the
 grant name and number.
 
-:mot-other:
+
+[.answer]
+--
+This dataset was provided by volunteer effort, and there is no funding involved.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Composition
 
-:Comp-intro:
+[.answer]
+--
+No compensation was provided for those who submitted data to the dataset of which this dataset is a sample; all data was compiled by organ enthusiasts who simply want an organ database.
+
+
+--
+
+
+[.datasheet]
+== Composition
+
 Dataset creators should read through the questions in this
 section prior to any data collection and then provide answers
 once collection is complete. Most of these questions are intended
@@ -45,7 +79,12 @@ tasks. The answers to some of these questions reveal information
 about compliance with the EU’s General Data Protection Regulation
 (GDPR) or comparable regulations in other jurisdictions.
 
-:comp-what:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 What do the instances that comprise the dataset represent
 (e.g., documents, photos, people, countries)? Are there multiple
@@ -53,12 +92,24 @@ types of instances (e.g., movies, users, and ratings; people and
 interactions between them; nodes and edges)? Please provide a
 description.
 
-:comp-quantity:
+
+[.answer]
+--
+The instances of this dataset are individual pipe organs.
+
+
+--
 [.question.required]
 How many instances are there in total (of each type, if
 appropriate)?
 
-:comp-representativeness:
+
+[.answer]
+--
+There are 500 instances of pipe organs. 
+
+
+--
 [.question.required]
 Does the dataset contain all possible instances or is it a
 sample (not necessarily random) of instances from a larger set?
@@ -69,18 +120,36 @@ validated/verified. If it is not representative of the larger
 set, please describe why not (e.g., to cover a more diverse range
 of instances, because instances were withheld or unavailable).
 
-:comp-content:
+
+[.answer]
+--
+This dataset contains a small fraction of the original 66,018 instances of pipe organs from the Organ Historical Society's Pipe Organ Database. Pipe organs without stoplists were excluded from the sample taken, as not all data in the columns could be collected without a stoplist. This reduced the number of organs that could be sampled to 19,042. 
+
+
+--
 [.question.required]
 What data does each instance consist of? “Raw” data (e.g.,
 unprocessed text or images) or features? In either case, please
 provide a description.
 
-:comp-label:
+
+[.answer]
+--
+Each instance consists of text representing the state wherein it resides (or Non-US), text representing the type of institution/location wherein it resides, text representing the original builder of the organ, a number representing the number of ranks (sets of pipes spanning the entire range of a manual/the pedalboard), a number representing the number of stops (usually one rank, but sometimes groups of ranks, which can be selected by the organist to be mixed to create a particular sound), number of manuals (keyboards), a number representing the lowest pitch (written as the length of what the lowest pipe would be if it were an open tube), a number representing the year the organ was originally completed, and a boolean representing whether the organ has been modified or restored since its completion.
+
+
+--
 [.question.optional]
 Is there a label or target associated with each instance? If
 so, please provide a description.
 
-:comp-missing:
+
+[.answer]
+--
+The label associated with each organ is the Pipe Organ Database's ID number for that particular organ.
+
+
+--
 [.question.required]
 Is any information missing from individual instances? If so,
 please provide a description, explaining why this information is
@@ -88,25 +157,53 @@ missing (e.g., because it was unavailable). This does not include
 intentionally removed information, but might include, e.g.,
 redacted text.
 
-:comp-relationsship:
+
+[.answer]
+--
+No information is missing from any instances.
+
+
+--
 [.question.required]
 Are relationships between individual instances made explicit
 (e.g., users’ movie ratings, social network links)? If so, please
 describe how these relationships are made explicit.
 
-:comp-splits:
+
+[.answer]
+--
+No instances are related to any others in this dataset.
+
+
+--
 [.question.optional]
 Are there recommended data splits (e.g., training,
 development/validation, testing)? If so, please provide a
 description of these splits, explaining the rationale behind
 them.
 
-:comp-errors:
+
+[.answer]
+--
+When splitting data, the user should be mindful of the fact that theater organs vary greatly from other organs, and that there are more subtle variations among organs of different builders.
+
+
+--
 [.question.required]
 Are there any errors, sources of noise, or redundancies in the
 dataset? If so, please provide a description.
 
-:comp-selfcontained:
+
+[.answer]
+--
+Sometimes, the listed number of stops disagrees with the number listed on the stoplist. In these cases, the one listed directly on the page is the one entered into the dataset.
+
+This dataset in its entirety is not intended for an analysis of the prolificness of any organbuilder. In order to use this dataset for that purpose, remove the first four and last four organs fromt his dataset, as they were selected as organs of note and not sampled with Simple Random Sampling. 
+
+Also, the parent dataset relies on self-reporting of existing organs. This means that organs in certain regions may be underrepresented.
+
+
+--
 [.question.common]
 Is the dataset self-contained, or does it link to or otherwise
 rely on external resources (e.g., websites, tweets, other
@@ -121,7 +218,6 @@ provide descriptions of all external resources and any
 restrictions associated with them, as well as links or other
 access points, as appropriate.
 
-[.answer]
 --
 The dataset is self-contained.
 
@@ -133,7 +229,11 @@ require express permission from the Bootstrap team.
 --
 
 
-:comp-confidentiality:
+[.answer]
+--
+
+
+--
 [.question.common]
 Does the dataset contain data that might be considered
 confidential (e.g., data that is protected by legal privilege or
@@ -141,43 +241,68 @@ by doctorpatient confidentiality, data that includes the content
 of individuals’ non-public communications)? If so, please provide
 a description.
 
-[.answer]
 The dataset does not contain any confidential information.
 
 
-:comp-offense:
+[.answer]
+--
+
+
+--
 [.question.common]
 Does the dataset contain data that, if viewed directly, might
 be offensive, insulting, threatening, or might otherwise cause
 anxiety? If so, please describe why.
 
-[.answer]
 The dataset does not contain any content known or intended to be
 offensive.
 
-:comp-people:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remaining questions in this section.
 
-:comp-subpopulation:
+
+[.answer]
+--
+This dataset does not relate to people aside from most organbuilders' names being the names of their companies.
+
+
+
+--
 [.question.required]
 Does the dataset identify any subpopulations (e.g., by age,
 gender)? If so, please describe how these subpopulations are
 identified and provide a description of their respective
 distributions within the dataset.
 
-:comp-doxx:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.common]
 Is it possible to identify individuals (i.e., one or more
 natural persons), either directly or indirectly (i.e., in
 combination with other data) from the dataset? If so, please
 describe how.
 
-[.answer]
-It should not be possible to identify individuals from the dataset.
 
-:comp-sensitivity:
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.required]
 Does the dataset contain data that might be considered
 sensitive in any way (e.g., data that reveals racial or ethnic
@@ -187,13 +312,30 @@ data; biometric or genetic data; forms of government
 identification, such as social security numbers; criminal
 history)? If so, please provide a description.
 
-:comp-other:
+
+[.answer]
+--
+
+
+XXX: missing answer.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Process Collection
 
-:Coll-intro:
+[.answer]
+--
+No other comments.
+
+
+--
+
+
+[.datasheet]
+== Process Collection
+
 As with the previous section, dataset creators should read
 through these questions prior to any data collection to flag
 potential issues and then provide answers once collection is
@@ -201,7 +343,12 @@ complete. In addition to the goals of the prior section, the
 answers to questions here may provide information that allow
 others to reconstruct the dataset without access to it.
 
-:coll-how:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 How was the data associated with each instance acquired? Was
 the data directly observable (e.g., raw text, movie ratings),
@@ -211,29 +358,50 @@ model-based guesses for age or language)? If data was reported by
 subjects or indirectly inferred/derived from other data, was the
 data validated/verified? If so, please describe how.
 
-:coll-tools:
+
+[.answer]
+--
+The data in this dataset was recorded in the Organ Historical Society's Pipe Organ Database. Stop counts could be verified by stoplists, but no organs were directly observed in the coellction of this data.
+
+
+--
 [.question.required]
 What mechanisms or procedures were used to collect the data
 (e.g., hardware apparatus or sensor, manual human curation,
 software program, software API)? How were these mechanisms or
 procedures validated?
 
-:coll-subset:
+
+[.answer]
+--
+This data was mostly collected by a web scraper scraping the database, but eight manually curated organs of note were included.
+
+
+--
 [.question.required]
 If the dataset is a sample from a larger set, what was the
 sampling strategy (e.g., deterministic, probabilistic with
 specific sampling probabilities)?
 
-:coll-who:
+
+[.answer]
+--
+The first four  and last four organs in the dataset are organs of note. The rest were collected by Simple Random Sampling.
+
+
+--
 [.question.common]
 Who was involved in the data collection process (e.g.,
 students, crowdworkers, contractors) and how were they
 compensated (e.g., how much were crowdworkers paid)?
 
-[.answer]
-This dataset was created by student volunteers at Brown University from a parent dataset whose datasheet should provide information about collection.
 
-:coll-time:
+[.answer]
+--
+This data was collected by two student volunteers who were not compensated monetarily.
+
+
+--
 [.question.required]
 Over what timeframe was the data collected? Does this timeframe
 match the creation timeframe of the data associated with the
@@ -241,29 +409,51 @@ instances (e.g., recent crawl of old news articles)? If not,
 please describe the timeframe in which the data associated with
 the instances was created.
 
-:coll-ethics:
+
+[.answer]
+--
+This data was collected in December 2020/January 2021. It does not match the creation timeframe of the data in question, which started in the 1950s and is ongoing.
+
+
+--
 [.question.common]
 Were any ethical review processes conducted (e.g., by an
 institutional review board)? If so, please provide a description
 of these review processes, including the outcomes, as well as a
 link or other access point to any supporting documentation.
 
-[.answer]
 Creating this dataset did not undergo ethics review. The assumption is
 that the original dataset was suitably guarded.
 
-:coll-people:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remainder of the questions in this section.
 
-:coll-3rdparty:
+
+[.answer]
+--
+This dataset does not relate to people beyond the extent of their organ companies being named after them.
+
+
+--
 [.question.optional]
 Did you collect the data from the individuals in question
 directly, or obtain it via third parties or other sources (e.g.,
 websites)?
 
-:coll-notification:
+
+[.answer]
+--
+The data was obtained from a third party, the Pipe Organ Database, who in turn collected the data from the organ enthusiasts who directly observed the organs.
+
+
+--
 [.question.optional]
 Were the individuals in question notified about the data
 collection? If so, please describe (or show with screenshots or
@@ -271,7 +461,13 @@ other information) how notice was provided, and provide a link or
 other access point to, or otherwise reproduce, the exact language
 of the notification itself.
 
-:coll-consent:
+
+[.answer]
+--
+
+
+
+--
 [.question.optional]
 Did the individuals in question consent to the collection and
 use of their data? If so, please describe (or show with
@@ -280,7 +476,13 @@ provided, and provide a link or other access point to, or
 otherwise reproduce, the exact language to which the individuals
 consented.
 
-:coll-revoke:
+
+[.answer]
+--
+
+
+
+--
 [.question.optional]
 If consent was obtained, were the consenting individuals
 provided with a mechanism to revoke their consent in the future
@@ -288,7 +490,13 @@ or for certain uses? If so, please provide a description, as well
 as a link or other access point to the mechanism (if
 appropriate).
 
-:coll-impact:
+
+[.answer]
+--
+
+
+
+--
 [.question.optional]
 Has an analysis of the potential impact of the dataset and its
 use on data subjects (e.g., a data protection impact
@@ -296,13 +504,28 @@ analysis)been conducted? If so, please provide a description of
 this analysis, including the outcomes, as well as a link or other
 access point to any supporting documentation.
 
-:coll-other:
+
+[.answer]
+--
+
+
+
+--
 [.question.optional]
 Any other comments?
 
-// == Preprocessing/cleaning/labeling
 
-:Preproc-intro:
+[.answer]
+--
+No other comments.
+
+
+--
+
+
+[.datasheet]
+== Preprocessing/cleaning/labeling
+
 Dataset creators should read through these questions prior to any
 preprocessing, cleaning, or labeling and then provide answers
 once these tasks are complete. The questions in this section are
@@ -312,7 +535,12 @@ ways that are compatible with their chosen tasks. For example,
 text that has been converted into a “bag of words” is not
 suitable for tasks involving word order.
 
-:preproc-preproc:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Was any preprocessing/cleaning/labeling of the data done (e.g.,
 discretization or bucketing, tokenization, part-of-speech
@@ -321,47 +549,98 @@ processing of missing values)? If so, please provide a
 description. If not, you may skip the remainder of the questions
 in this section.
 
-:preproc-save:
+
+[.answer]
+--
+All church organs' venues was labeled as "Church", rather than being listed by denomination.
+
+
+--
 [.question.required]
 Was the “raw” data saved in addition to the
 preprocessed/cleaned/labeled data (e.g., to support unanticipated
 future uses)? If so, please provide a link or other access point
 to the “raw” data.
 
-:preproc-software:
+
+[.answer]
+--
+The "raw" data was not saved.
+
+
+--
 [.question.required]
 Is the software used to preprocess/clean/label the instances
 available? If so, please provide a link or other access point.
 
-:preproc-other:
+
+[.answer]
+--
+https://gist.github.com/SYZYGY-DEV333/56ae34f08c6e3c0e8018d5e80ec3d80d
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Uses
 
-:Use-intro:
+[.answer]
+--
+No other comments.
+
+
+--
+
+
+[.datasheet]
+== Uses
+
 These questions are intended to encourage dataset creators to
 reflect on the tasks for which the dataset should and should not
 be used. By explicitly highlighting these tasks, dataset creators
 can help dataset consumers to make informed decisions, thereby
 avoiding potential risks or harms.
 
-:use-already:
+
+[.answer]
+--
+This dataset can be used for comparisons between numbers of manuals, ranks, and stops, as well as the lowest pitch of a pipe, provided that the user takes into account the fact that theater organs differ drastically from pipe organs in the difference between ranks and stops. The first four and last four elements of this dataset should not be used in any attempt to find the prolificness of any organbuilder, as they were not obtained by simple random sampling. This was to highlight certain organs of note to show the true ranges of the distributions of organ characteristics.
+
+
+--
 [.question.required]
 Has the dataset been used for any tasks already? If so, please
 provide a description.
 
-:use-repo:
+
+[.answer]
+--
+This dataset has not been used for any other tasks.
+
+
+--
 [.question.required]
 Is there a repository that links to any or all papers or
 systems that use the dataset? If so, please provide a link or
 other access point.
 
-:use-potential:
+
+[.answer]
+--
+No such repository exists because no such papers or systems exist.
+
+
+--
 [.question.required]
 What (other) tasks could the dataset be used for?
 
-:use-future:
+
+[.answer]
+--
+This dataset may also be used for an analysis by year of pipe organ, for instance observing a trend in the lowest pitches or number of stops in pipe organs as time wears on.
+
+
+--
 [.question.required]
 Is there anything about the composition of the dataset or the
 way it was collected and preprocessed/cleaned/labeled that might
@@ -373,49 +652,89 @@ harms, legal risks) If so, please provide a description. Is there
 anything a future user could do to mitigate these undesirable
 harms?
 
-:use-dontuse:
+
+[.answer]
+--
+The composition of this dataset should not impact future uses.
+
+
+--
 [.question.required]
 Are there tasks for which the dataset should not be used? If
 so, please provide a description.
 
-:use-other:
+
+[.answer]
+--
+Users should proceed with caution when using this dataset to analyze organs by venue because of the small number of non-church organs.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Distribution
 
-:Dist-intro:
+[.answer]
+--
+No other comments.
+
+
+--
+
+
+[.datasheet]
+== Distribution
+
 Dataset creators should provide answers to these questions prior
 to distributing the dataset either internally within the entity
 on behalf of which the dataset was created or externally to third
 parties.
 
-:dist-3rdparty:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Will the dataset be distributed to third parties outside of the
 entity (e.g., company, institution, organization) on behalf of
 which the dataset was created? If so, please provide a
 description.
 
-[.answer]
 Yes, the dataset is intended for public use.
 
-:dist-how:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 How will the dataset will be distributed (e.g., tarball on
 website, API, GitHub)? Does the dataset have a digital object
 identifier (DOI)?
 
-[.answer]
 The dataset will at least be made available through a permanent URL on
 the Bootstrap Web site (bootstrapworld.org). It may also be included
 in software distributions.
 
-:dist-when:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 When will the dataset be distributed?
 
-:dist-license:
+
+[.answer]
+--
+January 2021
+
+
+--
 [.question.common]
 Will the dataset be distributed under a copyright or other
 intellectual property (IP) license, and/or under applicable terms
@@ -424,11 +743,15 @@ provide a link or other access point to, or otherwise reproduce,
 any relevant licensing terms or ToU, as well as any fees
 associated with these restrictions.
 
-[.answer]
 The dataset is released under a CC BY-NC-SA license. Any other uses
 require express written permission from the Bootstrap team.
 
-:dist-restrictions:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Have any third parties imposed IP-based or other restrictions
 on the data associated with the instances? If so, please describe
@@ -436,67 +759,107 @@ these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any relevant licensing terms, as well as
 any fees associated with these restrictions.
 
-[.answer]
 No, there are no third-party IP restrictions on the data.
 
-:dist-controls:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Do any export controls or other regulatory restrictions apply
 to the dataset or to individual instances? If so, please describe
 these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any supporting documentation.
 
-[.answer]
 No, no (US) export controls govern the data.
 
-:dist-other:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Any other comments?
 
-// == Maintenance
 
-:Maint-intro:
+[.answer]
+--
+No other comments.
+
+
+--
+
+
+[.datasheet]
+== Maintenance
+
 As with the previous section, dataset creators should provide
 answers to these questions prior to distributing the dataset.
 These questions are intended to encourage dataset creators to
 plan for dataset maintenance and communicate this plan with
 dataset consumers.
 
-:maint-who:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Who is supporting/hosting/maintaining the dataset?
 
-[.answer]
 The dataset is maintained by Bootstrap.
 
-:maint-contact:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 How can the owner/curator/manager of the dataset be contacted
 (e.g., email address)?
 
-[.answer]
 contact@@bootstrapworld.org
 
-:maint-erratum:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Is there an erratum? If so, please provide a link or other
 access point.
 
-:maint-update:
+
+[.answer]
+--
+No erratum exists for this dataset at this time.
+
+
+--
 [.question.common]
 Will the dataset be updated (e.g., to correct labeling errors,
 add new instances, delete instances)? If so, please describe how
 often, by whom, and how updates will be communicated to users
 (e.g., mailing list, GitHub)?
 
-[.answer]
 This derivative dataset is not expected to be actively updated, and
 therefore quite likely will not track changes made to the original
 dataset. However, changes may be made in response to feedback from
 users or finding errors. Significant changes will be announced on
 Bootstrap teacher support forums.
 
-:maint-retention:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 If the dataset relates to people, are there applicable limits
 on the retention of the data associated with the instances (e.g.,
@@ -505,14 +868,26 @@ retained for a fixed period of time and then deleted)? If so,
 please describe these limits and explain how they will be
 enforced.
 
-:maint-legacy:
+
+[.answer]
+--
+
+
+
+--
 [.question.optional]
 Will older versions of the dataset continue to be
 supported/hosted/maintained? If so, please describe how. If not,
 please describe how its obsolescence will be communicated to
 users.
 
-:maint-augmentation:
+
+[.answer]
+--
+This dataset should not become obsolete, as it is a record of organs that have been constructed/will be constructed in the next couple of years. It is a record of organs which have in some way or another come into existence.
+
+
+--
 [.question.common]
 If others want to extend/augment/build on/contribute to the
 dataset, is there a mechanism for them to do so? If so, please
@@ -522,7 +897,6 @@ Is there a process for communicating/distributing these
 contributions to other users? If so, please provide a
 description.
 
-[.answer]
 --
 Users may build on the dataset so long as they follow the license.
 
@@ -535,6 +909,18 @@ Changes contributed by third-parties will be announced in the same
 manner as ones made by the Bootstrap team.
 --
 
-:maint-other:
+
+[.answer]
+--
+
+
+--
 [.question.optional]
 Any other comments?
+
+[.answer]
+--
+
+
+
+--
