@@ -18,6 +18,9 @@
 (define *student-file-basename*
   (regexp-replace "([^ ]+)-student.adoc" *student-file* "\\1"))
 
+(when (string=? *student-file-basename* *student-file*)
+  (set! *student-file-basename* (regexp-replace "(.*).adoc" *student-file* "\\1")))
+
 (unless *admin-file*
   (set! *admin-file* (string-append *student-file-basename* "-admin.adoc")))
 
