@@ -1344,7 +1344,7 @@
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
-               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 150)
+               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
                (string-join
                  (map (lambda (dict)
                         (enclose-tag "option" ""
