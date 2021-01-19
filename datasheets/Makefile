@@ -1,7 +1,10 @@
 reports:
 	@for f in *-student.adoc; do \
 	  echo converting $$f; \
-	  asciidoctor -a linkcss -a stylesheet=./questionnaire.css $$f; \
+	  sanitize.rkt $$f; \
+	  g=$$(basename $$f -student.adoc)-final.adoc; \
+	  echo doing $$g; \
+	  asciidoctor -a linkcss -a stylesheet=./questionnaire.css $$g; \
 	done
 
 student-files:

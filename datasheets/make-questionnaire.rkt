@@ -41,7 +41,7 @@
   (string-append
     "//\n"
     "// PLEASE WRITE YOUR ANSWER BELOW.\n"
-    "// (FOR STANDARD RESPOSE, PLEASE WRITE ‘:common:’.\n\n"))
+    "// (TO INSERT STANDARD REPLY, PLEASE WRITE :common:.)\n\n"))
 
 (define *lineno* 0)
 
@@ -84,7 +84,7 @@
   (let ((n (length p)))
     (let loop ((i 0))
       (unless (>= i n)
-        (display (regexp-replace "^// *" (list-ref p 0) "") o)
+        (display (regexp-replace "^// *" (list-ref p i) "") o)
         (newline o)
         (loop (+ i 1))))))
 

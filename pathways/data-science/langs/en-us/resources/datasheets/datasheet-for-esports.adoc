@@ -1,41 +1,80 @@
-// Content Courtesy:
-// https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
-// by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
-// Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
-// Kate Crawford
+= Datasheet for Esports
 
-// == Motivation
+[.datasheet]
+Content Courtesy: 
+https://arxiv.org/pdf/1803.09010.pdf[Datasheets for Datasets]
+by Timnit Gebru, Jamie Morgenstern, Briana Vecchione,
+Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III,
+Kate Crawford
 
-:Mot-intro:
+
+[.datasheet]
+== Motivation
+
 The questions in this section are primarily intended to encourage
 dataset creators to clearly articulate their reasons for creating
 the dataset and to promote transparency about funding interests.
 
-:mot-purpose:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 For what purpose was the dataset created? Was there a specific
 task in mind? Was there a specific gap that needed to be filled?
 Please provide a description.
 
-:mot-creator:
+
+[.answer]
+--
+This data set was created for the purpose of exploring the strengths of the
+esports scenes of games across a variety of genres.
+
+
+--
 [.question.required]
 Who created the dataset (e.g., which team, research group) and
 on behalf of which entity (e.g., company, institution,
 organization)?
 
-:mot-funding:
+
+[.answer]
+--
+This data set was created by David Young, a student at Brown University, for Bootstrap:Data Science.
+--
 [.question.optional]
 Who funded the creation of the dataset? If there is an
 associated grant, please provide the name of the grantor and the
 grant name and number.
 
-:mot-other:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Composition
 
-:Comp-intro:
+[.answer]
+--
+The interpretation of the "strength" of the esports scene of a game is left to the user of the data set. Possible interpretations include total winnings, total number of tournaments, total number of players, average number of tournaments per year, etc.
+
+
+--
+
+
+[.datasheet]
+== Composition
+
 Dataset creators should read through the questions in this
 section prior to any data collection and then provide answers
 once collection is complete. Most of these questions are intended
@@ -45,7 +84,12 @@ tasks. The answers to some of these questions reveal information
 about compliance with the EU’s General Data Protection Regulation
 (GDPR) or comparable regulations in other jurisdictions.
 
-:comp-what:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 What do the instances that comprise the dataset represent
 (e.g., documents, photos, people, countries)? Are there multiple
@@ -53,12 +97,24 @@ types of instances (e.g., movies, users, and ratings; people and
 interactions between them; nodes and edges)? Please provide a
 description.
 
-:comp-quantity:
+
+[.answer]
+--
+The instances that comprise the dataset represent video games, which are the only type of instance in this data set.
+
+
+--
 [.question.required]
 How many instances are there in total (of each type, if
 appropriate)?
 
-:comp-representativeness:
+
+[.answer]
+--
+There are 509 instances in total.
+
+
+--
 [.question.required]
 Does the dataset contain all possible instances or is it a
 sample (not necessarily random) of instances from a larger set?
@@ -69,18 +125,38 @@ validated/verified. If it is not representative of the larger
 set, please describe why not (e.g., to cover a more diverse range
 of instances, because instances were withheld or unavailable).
 
-:comp-content:
+
+[.answer]
+--
+The data set does not contain all possible instances. The data set is a sample from the larger set of video games. The sample is not representative of the larger set, as we can assume that esportsearnings.com is biased towards games that have an active esports scene because it is a resource crowdsourced from individuals interested in esports. Thus, games that have had no tournaments are less likely to be included in the data set.
+
+
+--
 [.question.required]
 What data does each instance consist of? “Raw” data (e.g.,
 unprocessed text or images) or features? In either case, please
 provide a description.
 
-:comp-label:
+
+[.answer]
+--
+For each instance, we include the release date of the game as a Number, the predominant genre of the game as a String, the total earnings of all tournament winners as a Number, the earnings that were won through online-only tournaments as a Number, the total number of tournament winners as a Number, and the total number of tournaments as a Number. All data, save the release date and genre, were obtained by summing the statistics of each tournament that took place for a given game.
+--
 [.question.optional]
 Is there a label or target associated with each instance? If
 so, please provide a description.
 
-:comp-missing:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.required]
 Is any information missing from individual instances? If so,
 please provide a description, explaining why this information is
@@ -88,25 +164,51 @@ missing (e.g., because it was unavailable). This does not include
 intentionally removed information, but might include, e.g.,
 redacted text.
 
-:comp-relationsship:
+
+[.answer]
+--
+No information is missing from individual instances.
+
+
+--
 [.question.required]
 Are relationships between individual instances made explicit
 (e.g., users’ movie ratings, social network links)? If so, please
 describe how these relationships are made explicit.
 
-:comp-splits:
+
+[.answer]
+--
+No relationships between individual instances are explicitly stated.
+--
 [.question.optional]
 Are there recommended data splits (e.g., training,
 development/validation, testing)? If so, please provide a
 description of these splits, explaining the rationale behind
 them.
 
-:comp-errors:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.required]
 Are there any errors, sources of noise, or redundancies in the
 dataset? If so, please provide a description.
 
-:comp-selfcontained:
+
+[.answer]
+--
+Errors are possible, as the information is crowdsourced. However, for the same reason, blatant errors are improbable, especially for more popular titles.
+
+
+--
 [.question.common]
 Is the dataset self-contained, or does it link to or otherwise
 rely on external resources (e.g., websites, tweets, other
@@ -121,19 +223,13 @@ provide descriptions of all external resources and any
 restrictions associated with them, as well as links or other
 access points, as appropriate.
 
+
 [.answer]
 --
-The dataset is self-contained.
+The data set is fully self-contained.
 
-There is an archival version of the complete dataset from which this
-one was created.
 
-The dataset is released under a CC BY-NC-SA license. Any other uses
-require express permission from the Bootstrap team.
 --
-
-
-:comp-confidentiality:
 [.question.common]
 Does the dataset contain data that might be considered
 confidential (e.g., data that is protected by legal privilege or
@@ -141,43 +237,65 @@ by doctorpatient confidentiality, data that includes the content
 of individuals’ non-public communications)? If so, please provide
 a description.
 
+
 [.answer]
-The dataset does not contain any confidential information.
+--
+All data was obtained from esportsearnings.com, which asserts that all data is "freely available public information."
 
 
-:comp-offense:
+--
 [.question.common]
 Does the dataset contain data that, if viewed directly, might
 be offensive, insulting, threatening, or might otherwise cause
 anxiety? If so, please describe why.
 
-[.answer]
-The dataset does not contain any content known or intended to be
-offensive.
 
-:comp-people:
+[.answer]
+--
+The data set does not contain data that might be offensive, insulting, threatening, or might otherwise cause anxiety.
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remaining questions in this section.
 
-:comp-subpopulation:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+
+--
 [.question.required]
 Does the dataset identify any subpopulations (e.g., by age,
 gender)? If so, please describe how these subpopulations are
 identified and provide a description of their respective
 distributions within the dataset.
 
-:comp-doxx:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.common]
 Is it possible to identify individuals (i.e., one or more
 natural persons), either directly or indirectly (i.e., in
 combination with other data) from the dataset? If so, please
 describe how.
 
-[.answer]
-It should not be possible to identify individuals from the dataset.
 
-:comp-sensitivity:
+[.answer]
+--
+
+XXX: missing number.
+
+
+--
 [.question.required]
 Does the dataset contain data that might be considered
 sensitive in any way (e.g., data that reveals racial or ethnic
@@ -187,13 +305,28 @@ data; biometric or genetic data; forms of government
 identification, such as social security numbers; criminal
 history)? If so, please provide a description.
 
-:comp-other:
+
+[.answer]
+--
+
+
+XXX: missing answer.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Process Collection
 
-:Coll-intro:
+[.answer]
+--
+
+--
+
+
+[.datasheet]
+== Process Collection
+
 As with the previous section, dataset creators should read
 through these questions prior to any data collection to flag
 potential issues and then provide answers once collection is
@@ -201,7 +334,12 @@ complete. In addition to the goals of the prior section, the
 answers to questions here may provide information that allow
 others to reconstruct the dataset without access to it.
 
-:coll-how:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 How was the data associated with each instance acquired? Was
 the data directly observable (e.g., raw text, movie ratings),
@@ -211,29 +349,50 @@ model-based guesses for age or language)? If data was reported by
 subjects or indirectly inferred/derived from other data, was the
 data validated/verified? If so, please describe how.
 
-:coll-tools:
+
+[.answer]
+--
+The data associated with each instance was freely available online.
+
+
+--
 [.question.required]
 What mechanisms or procedures were used to collect the data
 (e.g., hardware apparatus or sensor, manual human curation,
 software program, software API)? How were these mechanisms or
 procedures validated?
 
-:coll-subset:
+
+[.answer]
+--
+The data was manually submitted by users on esportsearnings.com. Submitted data is subject to review by other users, and all submitted data must be accompanied by a reliable citation.
+
+
+--
 [.question.required]
 If the dataset is a sample from a larger set, what was the
 sampling strategy (e.g., deterministic, probabilistic with
 specific sampling probabilities)?
 
-:coll-who:
+
+[.answer]
+--
+There was no predefined sampling strategy, as the composition of the sample depended solely on the submissions of users on esportsearnings.com.
+
+
+--
 [.question.common]
 Who was involved in the data collection process (e.g.,
 students, crowdworkers, contractors) and how were they
 compensated (e.g., how much were crowdworkers paid)?
 
-[.answer]
-This dataset was created by student volunteers at Brown University from a parent dataset whose datasheet should provide information about collection.
 
-:coll-time:
+[.answer]
+--
+Users on esportsearnings.com who chose to volunteer their time were involved in the data collection process.
+
+
+--
 [.question.required]
 Over what timeframe was the data collected? Does this timeframe
 match the creation timeframe of the data associated with the
@@ -241,29 +400,53 @@ instances (e.g., recent crawl of old news articles)? If not,
 please describe the timeframe in which the data associated with
 the instances was created.
 
-:coll-ethics:
+
+[.answer]
+--
+Data collection began with the inception of the site, which was in 2012. It is an ongoing process. The timeframe over which the data was collected does not match the creation timeframe of the data associated with the instances. The timeframe for data creation was from 1998 to 2020.
+
+
+--
 [.question.common]
 Were any ethical review processes conducted (e.g., by an
 institutional review board)? If so, please provide a description
 of these review processes, including the outcomes, as well as a
 link or other access point to any supporting documentation.
 
-[.answer]
-Creating this dataset did not undergo ethics review. The assumption is
-that the original dataset was suitably guarded.
 
-:coll-people:
+[.answer]
+--
+No ethical review processes were conducted.
+
+--
 [.question.required]
 Does the dataset relate to people? If not, you may skip the
 remainder of the questions in this section.
 
-:coll-3rdparty:
+
+[.answer]
+--
+
+XXX: missing answer.
+
+
+--
 [.question.optional]
 Did you collect the data from the individuals in question
 directly, or obtain it via third parties or other sources (e.g.,
 websites)?
 
-:coll-notification:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 Were the individuals in question notified about the data
 collection? If so, please describe (or show with screenshots or
@@ -271,7 +454,17 @@ other information) how notice was provided, and provide a link or
 other access point to, or otherwise reproduce, the exact language
 of the notification itself.
 
-:coll-consent:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 Did the individuals in question consent to the collection and
 use of their data? If so, please describe (or show with
@@ -280,7 +473,17 @@ provided, and provide a link or other access point to, or
 otherwise reproduce, the exact language to which the individuals
 consented.
 
-:coll-revoke:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 If consent was obtained, were the consenting individuals
 provided with a mechanism to revoke their consent in the future
@@ -288,7 +491,17 @@ or for certain uses? If so, please provide a description, as well
 as a link or other access point to the mechanism (if
 appropriate).
 
-:coll-impact:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 Has an analysis of the potential impact of the dataset and its
 use on data subjects (e.g., a data protection impact
@@ -296,13 +509,35 @@ analysis)been conducted? If so, please provide a description of
 this analysis, including the outcomes, as well as a link or other
 access point to any supporting documentation.
 
-:coll-other:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 Any other comments?
 
-// == Preprocessing/cleaning/labeling
 
-:Preproc-intro:
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+--
+
+
+[.datasheet]
+== Preprocessing/cleaning/labeling
+
 Dataset creators should read through these questions prior to any
 preprocessing, cleaning, or labeling and then provide answers
 once these tasks are complete. The questions in this section are
@@ -312,7 +547,12 @@ ways that are compatible with their chosen tasks. For example,
 text that has been converted into a “bag of words” is not
 suitable for tasks involving word order.
 
-:preproc-preproc:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Was any preprocessing/cleaning/labeling of the data done (e.g.,
 discretization or bucketing, tokenization, part-of-speech
@@ -321,47 +561,97 @@ processing of missing values)? If so, please provide a
 description. If not, you may skip the remainder of the questions
 in this section.
 
-:preproc-save:
+
+[.answer]
+--
+The names of the video games were cleaned to fix any unicode characters that did not display properly.
+
+
+--
 [.question.required]
 Was the “raw” data saved in addition to the
 preprocessed/cleaned/labeled data (e.g., to support unanticipated
 future uses)? If so, please provide a link or other access point
 to the “raw” data.
 
-:preproc-software:
+
+[.answer]
+--
+The original data set upon which this data set is based can be found at https://www.kaggle.com/rankirsh/esports-earnings.
+
+
+--
 [.question.required]
 Is the software used to preprocess/clean/label the instances
 available? If so, please provide a link or other access point.
 
-:preproc-other:
+
+[.answer]
+--
+The cleaning of the names column was done in Google Sheets (https://www.google.com/sheets/about/).
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Uses
 
-:Use-intro:
+[.answer]
+--
+The instances that were formatted incorrectly were in cells A129, A200, A290, and A507.
+
+
+--
+
+
+[.datasheet]
+== Uses
+
 These questions are intended to encourage dataset creators to
 reflect on the tasks for which the dataset should and should not
 be used. By explicitly highlighting these tasks, dataset creators
 can help dataset consumers to make informed decisions, thereby
 avoiding potential risks or harms.
 
-:use-already:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Has the dataset been used for any tasks already? If so, please
 provide a description.
 
-:use-repo:
+
+[.answer]
+--
+A few users on Kaggle have conducted analyses with the source data set in an attempt to find relationships between variables in the data set.
+
+
+--
 [.question.required]
 Is there a repository that links to any or all papers or
 systems that use the dataset? If so, please provide a link or
 other access point.
 
-:use-potential:
+
+[.answer]
+--
+There is no repository that links to any or all papers or systems that use the data set.
+
+
+--
 [.question.required]
 What (other) tasks could the dataset be used for?
 
-:use-future:
+
+[.answer]
+--
+The data set could be used to determine the factors that affect the total amount of money awarded to tournament winners, which is representative to the strength of a game's esports scene. These factors could include genre, release date, the ratio of online earnings to total earnings, etc.
+
+
+--
 [.question.required]
 Is there anything about the composition of the dataset or the
 way it was collected and preprocessed/cleaned/labeled that might
@@ -373,49 +663,85 @@ harms, legal risks) If so, please provide a description. Is there
 anything a future user could do to mitigate these undesirable
 harms?
 
-:use-dontuse:
+
+[.answer]
+--
+There is nothing about the composition of the data set or the way it was collected that might impact future uses.
+
+
+--
 [.question.required]
 Are there tasks for which the dataset should not be used? If
 so, please provide a description.
 
-:use-other:
+
+[.answer]
+--
+There are no tasks for which the data set should not be used.
+
+
+--
 [.question.required]
 Any other comments?
 
-// == Distribution
 
-:Dist-intro:
+[.answer]
+--
+The user of the data set must be careful not to conflate the esports scene of a game with the quality of the game, as there are many factors, including whether or not the game is free, that affect how much money is awarded in tournaments.
+
+
+--
+
+
+[.datasheet]
+== Distribution
+
 Dataset creators should provide answers to these questions prior
 to distributing the dataset either internally within the entity
 on behalf of which the dataset was created or externally to third
 parties.
 
-:dist-3rdparty:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Will the dataset be distributed to third parties outside of the
 entity (e.g., company, institution, organization) on behalf of
 which the dataset was created? If so, please provide a
 description.
 
-[.answer]
-Yes, the dataset is intended for public use.
 
-:dist-how:
+[.answer]
+--
+The data set will not be distributed to third parties outside of the entity on behalf of which the data set was created (Bootstrap:Data Science).
+
+
+--
 [.question.common]
 How will the dataset will be distributed (e.g., tarball on
 website, API, GitHub)? Does the dataset have a digital object
 identifier (DOI)?
 
-[.answer]
-The dataset will at least be made available through a permanent URL on
-the Bootstrap Web site (bootstrapworld.org). It may also be included
-in software distributions.
 
-:dist-when:
+[.answer]
+--
+The data set will be distributed through the Bootstrap:Data Science website. The data set does not have a DOI.
+
+
+--
 [.question.required]
 When will the dataset be distributed?
 
-:dist-license:
+
+[.answer]
+--
+The data set will likely be distributed in the early months of 2021.
+
+
+--
 [.question.common]
 Will the dataset be distributed under a copyright or other
 intellectual property (IP) license, and/or under applicable terms
@@ -424,11 +750,15 @@ provide a link or other access point to, or otherwise reproduce,
 any relevant licensing terms or ToU, as well as any fees
 associated with these restrictions.
 
-[.answer]
 The dataset is released under a CC BY-NC-SA license. Any other uses
 require express written permission from the Bootstrap team.
 
-:dist-restrictions:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Have any third parties imposed IP-based or other restrictions
 on the data associated with the instances? If so, please describe
@@ -436,67 +766,108 @@ these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any relevant licensing terms, as well as
 any fees associated with these restrictions.
 
-[.answer]
 No, there are no third-party IP restrictions on the data.
 
-:dist-controls:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Do any export controls or other regulatory restrictions apply
 to the dataset or to individual instances? If so, please describe
 these restrictions, and provide a link or other access point to,
 or otherwise reproduce, any supporting documentation.
 
-[.answer]
 No, no (US) export controls govern the data.
 
-:dist-other:
+
+[.answer]
+--
+
+--
 [.question.optional]
 Any other comments?
 
-// == Maintenance
 
-:Maint-intro:
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+--
+
+
+[.datasheet]
+== Maintenance
+
 As with the previous section, dataset creators should provide
 answers to these questions prior to distributing the dataset.
 These questions are intended to encourage dataset creators to
 plan for dataset maintenance and communicate this plan with
 dataset consumers.
 
-:maint-who:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 Who is supporting/hosting/maintaining the dataset?
 
-[.answer]
 The dataset is maintained by Bootstrap.
 
-:maint-contact:
+
+[.answer]
+--
+
+
+--
 [.question.common]
 How can the owner/curator/manager of the dataset be contacted
 (e.g., email address)?
 
-[.answer]
 contact@@bootstrapworld.org
 
-:maint-erratum:
+
+[.answer]
+--
+
+
+--
 [.question.required]
 Is there an erratum? If so, please provide a link or other
 access point.
 
-:maint-update:
+
+[.answer]
+--
+There is no erratum.
+
+
+--
 [.question.common]
 Will the dataset be updated (e.g., to correct labeling errors,
 add new instances, delete instances)? If so, please describe how
 often, by whom, and how updates will be communicated to users
 (e.g., mailing list, GitHub)?
 
-[.answer]
 This derivative dataset is not expected to be actively updated, and
 therefore quite likely will not track changes made to the original
 dataset. However, changes may be made in response to feedback from
 users or finding errors. Significant changes will be announced on
 Bootstrap teacher support forums.
 
-:maint-retention:
+
+[.answer]
+--
+
+--
 [.question.optional]
 If the dataset relates to people, are there applicable limits
 on the retention of the data associated with the instances (e.g.,
@@ -505,14 +876,33 @@ retained for a fixed period of time and then deleted)? If so,
 please describe these limits and explain how they will be
 enforced.
 
-:maint-legacy:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+
+--
 [.question.optional]
 Will older versions of the dataset continue to be
 supported/hosted/maintained? If so, please describe how. If not,
 please describe how its obsolescence will be communicated to
 users.
 
-:maint-augmentation:
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+
+--
 [.question.common]
 If others want to extend/augment/build on/contribute to the
 dataset, is there a mechanism for them to do so? If so, please
@@ -522,19 +912,20 @@ Is there a process for communicating/distributing these
 contributions to other users? If so, please provide a
 description.
 
+
 [.answer]
 --
-Users may build on the dataset so long as they follow the license.
+Individuals interested in contributing to the data set can contribute to esportsearnings.com, which is the source of the data in this data set.
 
-Users who wish to contribute should email contact@@bootstrapworld.org.
-
-Verification and validation will depend on the Bootstrap team's
-resources at that point.
-
-Changes contributed by third-parties will be announced in the same
-manner as ones made by the Bootstrap team.
 --
-
-:maint-other:
 [.question.optional]
 Any other comments?
+
+[.answer]
+--
+
+Ad rem est vero cum ratione. Optio dolor molestiae consequatur
+perferendis sint amet eligendi. Minus unde odit quod officia sit
+ut impedit facilis. Voluptatum alias illo et dolore impedit aut
+vitae qui. Laborum itaque ipsa possimus et.
+--
