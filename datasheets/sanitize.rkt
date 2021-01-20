@@ -6,6 +6,7 @@
 
 (define *student-file* #f)
 (define *admin-file* #f)
+(define *final-file* #f)
 
 (let ((n (vector-length *args*)))
   (cond ((<= n 0)
@@ -13,7 +14,9 @@
         (else
           (set! *student-file* (vector-ref *args* 0))
           (when (>= n 2)
-            (set! *admin-file* (vector-ref *args* 1))))))
+            (set! *admin-file* (vector-ref *args* 1))
+            (when (>= n 3)
+              (set! *final-file* (vector-ref *args* 2)))))))
 
 (define *student-file-basename*
   (regexp-replace "([^ ]+)-student.adoc" *student-file* "\\1"))
@@ -24,8 +27,8 @@
 (unless *admin-file*
   (set! *admin-file* (string-append *student-file-basename* "-admin.adoc")))
 
-(define *final-file*
-  (string-append *student-file-basename* "-final.adoc"))
+(unless *final-file*
+  (set! *final-file* (string-append *student-file-basename* "-final.adoc")))
 
 (define (question-asked? ln)
   (regexp-match
