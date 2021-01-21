@@ -128,6 +128,7 @@
   (let ((f (list-ref x 1))
         (start-line (string->number (list-ref x 2)))
         (stop-line (string->number (list-ref x 3))))
+    (set! f *admin-file*)
     (call-with-input-file f
       (lambda (i)
         (let loop ((k 1))
