@@ -3,7 +3,16 @@
 #lang racket
 
 (define *admin-file*
-  (vector-ref (current-command-line-arguments) 0))
+  (let* ((args (current-command-line-arguments))
+         (n (vector-length args)))
+    (cond ((= n 0)
+           (error 'make-questionnaire.rkt
+                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-datasets-admin.adoc"))
+          (else
+            (let ((adminf (vector-ref args 0)))
+            (when (> n 1)
+              (printf "make-questionnaire.rkt given too many arguments: Only first one, ~s, used\n" adminf))
+            adminf)))))
 
 (define *datasheet-name*
   (regexp-replace "([^ ]+)-admin.adoc" *admin-file* "\\1"))
@@ -32,7 +41,7 @@
   (string-append
     "//\n"
     "// PLEASE WRITE YOUR ANSWER BELOW.\n"
-    "// (FOR STANDARD RESPOSE, PLEASE WRITE ‘:common:’.\n\n"))
+    "// (TO INSERT STANDARD REPLY, PLEASE WRITE :common:.)\n\n"))
 
 (define *lineno* 0)
 
@@ -75,7 +84,7 @@
   (let ((n (length p)))
     (let loop ((i 0))
       (unless (>= i n)
-        (display (regexp-replace "^// *" (list-ref p 0) "") o)
+        (display (regexp-replace "^// *" (list-ref p i) "") o)
         (newline o)
         (loop (+ i 1))))))
 

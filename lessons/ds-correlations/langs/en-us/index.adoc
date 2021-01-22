@@ -4,12 +4,12 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{}
+@prereqs-stds{ds-scatter-plots}
 | Lesson Goals
 | Students will be able to...
 
 - Confirm if a scatter plot appears linear
-- Understand how correlation measures direction in a linear relationship
+- Understand how correlation assesses direction in a linear relationship
 - Understand how correlation measures strength in a linear relationship
 
 | Student-facing Lesson Goals
@@ -38,12 +38,13 @@
 @include{xtra/lang-prereq.adoc}
 |===
 
-== Correlations have _Form_ @duration{10 minutes}
+== Scatterplot have _Form_ @duration{10 minutes}
 
 === Overview
-Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression
+Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression.
+
 === Launch
-By now we have learned ways to summarize a single quantitative variable, like the `age` of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. We could do the same for `pounds`, `weeks`, or any other quantitative column.
+By now we have learned ways to summarize a single quantitative variable, like the `age` of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. We could do the same for for animals' weights (or any other quantitative column).
 
 But those individual summaries tell us nothing about the _relationship_ between animals' ages and weights. In order to understand such relationships, we have to expand our view from a single dimension (along one axis) to two dimensions. This goes hand in hand with expanding our display from a one-dimensional histogram to a two-dimensional scatter plot.
 
@@ -89,21 +90,21 @@ A linear relationship between two quantitative variables is _positive_ if, in ge
 [.lesson-point]
 _Strength:_ how closely the two variables are correlated.
 
-A relationship between two quantitative variables is strong if the points are tightly clustered. In this case, knowing the x-value of a data point gives us a very good idea of what its y-value will be.
+How well does knowing the x-value allow us to predict what the y-value will be?
 
-- A *strong* linear relationship means that the points in the scatter plot are all clustered tightly around an invisible line.
-- A *weak* linear relationship means that the cloud of points is scattered very loosely around the line.
+- A relationship is *strong* if knowing the x-value of a data point gives us a very good idea of what its y-value will be (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line. 
+- A relationship is *weak* if x tells us little about y (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 === Investigate
 Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and whether it is strong or weak.
 
-The correlation @vocab{r} is a number (between -1 and 1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
+The correlation @vocab{r} is a number (falling anywhere from -1 to +1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
 
 An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 or ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
 
 Calculating @math{r} from a data set only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
-Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship linear, and use @math{r} to summarize direction and strength.
+Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, and use @math{r} to summarize direction and strength.
 
 [.lesson-instruction]
 - In the Interactions Area, create a scatter plot for the Animals Dataset, using `"pounds"` as the xs and `"weeks"` as the ys. 
@@ -130,16 +131,19 @@ It is useful to ask students probing questions, to help address the misconceptio
 [.lesson-point]
 Correlation does NOT imply causation.
 
-It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us make predictions! But Data Scientists know better than that...
+It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
 
-Here are some real-life correlations that have absolutely no causal relationship; they come about either by chance or because both of them are tied in with another variable that’s (often) lurking in the background.
+Here are some possible correlations that have absolutely no causal relationship; they come about either by chance or because both of them are related to another variable that’s (often) lurking in the background.
 
+- For a certain psychology test, the amount of time a student studied was negatively correlated with their score! (Struggling students _needed_ to study more; they would have done even worse if they'd studied less!)
+- Weekly data gathered in a city throughout the year showed a positive correlation between ice cream consumption and drowning deaths. (Warmer weather affects both; they have no effect on one another.)
+- A negative correlation was found between how much time students talked on the phone and how much they weighed. (Gender is a confounder: women tend to weigh less and talk more than men.)
+
+Here are a few real correlations, drawn from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
 - “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (@math{r} = 0.98) 
 - “Average per-person consumption of chicken” v. “U.S. crude oil imports” (@math{r} = 0.95)
 - “Marriage rate in Wyoming” v. “Domestic production of cars” (@math{r} = 0.99)
 - “Number of people who get tangled in their own bedsheets” v. “Amount of cheese consumed that year” (@math{r} = 0.95)
-
-All of these correlations come from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
 
 == Your Analysis @duration{flexible}
 
