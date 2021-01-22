@@ -513,7 +513,7 @@
         "9-12.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
         )
-    ("ds-plotting"  
+    ("ds-displaying-categorical-data"  
         "2-DA-08" 
         "3A-DA-11" 
         "P5"
