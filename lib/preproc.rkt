@@ -537,6 +537,7 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
+  ;(printf "doing make-link ~s ~s ~s\n" f link-text include?)
   (cond [(not include?)
 
          (let ([external-link? #f])
@@ -567,9 +568,9 @@
                (set! link-text (string-append link-text " (" domain-name ")")))))
 
          (let ([link-output
-                 (format "link:pass:[~a][~s~a]" f link-text
-                         (if (or *lesson-plan* *teacher-resources*)
-                             ", window=\"_blank\"" ""))])
+                 (cond ((or *lesson-plan* *teacher-resources*)
+                        (format "link:pass:[~a][~s, window=\"_blank\"") f link-text)
+                       (else (format "link:pass:[~a][~a]" f link-text)))])
 
            (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
              (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
