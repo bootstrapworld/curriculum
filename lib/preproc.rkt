@@ -569,7 +569,7 @@
 
          (let ([link-output
                  (cond ((or *lesson-plan* *teacher-resources*)
-                        (format "link:pass:[~a][~s, window=\"_blank\"" f link-text))
+                        (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text))
                        (else (format "link:pass:[~a][~a]" f link-text)))])
 
            (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
