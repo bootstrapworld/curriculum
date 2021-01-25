@@ -1,0 +1,50 @@
+= Combinations
+
+For each of the problems below, (1) figure out whether this involves combination with or without replacement, then (2) compute the solution.
+
+[cols="^1, 10, ^4, ^15", options="header"]
+|===
+|
+| Word problem
+| Replacement?
+| Solution
+
+| 1
+| A soccer team has 20 players, but only 11 are allowed on the field at once. How many different groups of players can be on the field at one time?
+| Yes  {nbsp}  No
+| @math{combinations(20, 11) = \frac{20!}{(20 - 11)!} \div 11!}
+@math{\frac{20!}{9!} \div 11! = 167,960}
+
+
+| 2
+| A set of pool balls is numbered 1-15. How many different ways are there to choose six balls?
+| Yes  {nbsp}  No
+| @math{combinations(15, 6) = \frac{15!}{(15 - 6)!} \div 6!}
+
+@math{\frac{15!}{9!} \div 6! = 5,005}
+
+| 3
+| Six friends get together to play video games. All the games can only have two players, so they decided to pair off to make sure everyone gets to play everyone else. How many games will they have to play?
+| Yes  {nbsp}  No
+| @math{combinations(6, 2) = \frac{6!}{(6 - 2)!} \div 2!}
+
+@math{\frac{6!}{4!} \div 2! = 15}
+
+| 4
+| A pizzaria has a 3-topping special on any pizza, for only $12.99. If they have 10 toppings to choose from, how many different pizzas can they make?
+| Yes  {nbsp}  No
+| @math{combinations(10, 3) = \frac{10!}{(10 - 3)!} \div 3!}
+@math{\frac{10!}{7!} \div 3! = 120}
+
+| 5
+| A set of pool balls is numbered 1-15. 7 of them are striped and 8 are solid colors. How many different ways are there to choose 4 balls where 2 are striped and 2 are solid?
+| Yes  {nbsp}  No
+| This problem actually involves two separate combination problems. Each combination of striped balls could be paired with every combination of solid balls, so the two outcomes are _multiplied_.
+
+@math{striped = combinations(7, 2) = \frac{7!}{(7 - 2)!} \div 2! = 21}
+
+@math{solid = combinations(8, 2) = \frac{8!}{(8 - 2)!} \div 2! = 28}
+
+@math{21 \mul 28 = 588}
+
+|===
