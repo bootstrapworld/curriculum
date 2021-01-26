@@ -108,9 +108,19 @@ end
 |
 @span{.title}{No lookups in examples!}
 
-In all previous functions, the examples matched the definitions almost perfectly. The only difference was the definition's use of variables instead of actual values. So if our definition uses a lookup operation (`r["fixed"]`), why don't our examples?
+In all previous functions (like the one below!), __the examples matched the definition__ almost perfectly. The only difference was the definition's use of variables instead of actual values. So if our definition uses a lookup operation (`r["fixed"]`), why don't our examples?
 
-Data Scientists never want to stray far from the "truth", meaning they want to use real data whenever possible in order to minimize errors. So when writing examples for a specific animal, __we use the actual value from that animal's row__ instead of a lookup operation.
+m|# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
+examples:
+{nbsp}{nbsp}gt(100) is triangle(100, "solid", "green")
+{nbsp}{nbsp}gt(30)  is triangle(30, "solid", "green")
+end
+fun gt(size):
+{nbsp}{nbsp}triangle(size, "solid", "green")
+end
+
+|Data Scientists never want to stray far from the "truth", meaning they want to use real data whenever possible in order to minimize errors. So when writing examples for a specific animal, __we use the actual value from that animal's row__ instead of a lookup operation.
 |===
 
 === Investigate

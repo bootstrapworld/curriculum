@@ -120,8 +120,8 @@
         "MP.1"
         "MP.4"
         "OK.PA.A.4.3"
-        "IA.6.EE.B.8"
-        "IA.6.EE.B.5"
+        "6.EE.B.8"
+        "6.EE.B.5"
         "6.EE.B.8"
         )
     ("alg-inequalities2-compound" 
@@ -131,7 +131,7 @@
         "HSS.CP.A.1"
         )
     ("alg-inequalities3-sam"
-        "IA.HSA.CED.A.3"
+        "HSA.CED.A.3"
         "HSA.CED.A.1"
         "HSA.CED.A.3"
         "6.EE.B.8"
@@ -524,7 +524,7 @@
         "9-12.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
         )
-    ("ds-plotting"  
+    ("ds-displaying-categorical-data"  
         "2-DA-08" 
         "3A-DA-11" 
         "P5"
