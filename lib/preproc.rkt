@@ -1438,14 +1438,36 @@
 (define *list-of-hole-symbols*
   (list *hole-symbol* *hole2-symbol* *hole3-symbol*))
 
+(define (answer? e)
+  (and (list? e) (eq? (car e) '?ANSWER)))
+
+(define (answer-fill-length e)
+  (let ([n (string-length (format "~a" e))])
+    (cond [(< n 3) ".studentAnswerShort"]
+          [(< n 10) ".studentAnswerMedium"]
+          [else ".studentAnswerLong"])))
+
+(define (answer-block-fill-length e)
+  "")
+
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
-  ;(when pyret (printf "doing sexp->arith ~s\n" e))
+  ;(printf "doing sexp->arith (~a) ~s\n" pyret e)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))]
         [(symbol? e) (sym-to-adocstr e #:pyret pyret)]
         [(string? e) (format "~s" e)]
+        [(answer? e) (let* ([e (cadr e)]
+                            [fill-len (answer-fill-length e)])
+                       ;(printf "answer frag found: ~s\n" e)
+                       (if *solutions-mode?*
+                           (enclose-span (format ".studentAnswerFilled~a" fill-len)
+                             (sexp->arith e #:pyret pyret #:wrap wrap))
+                           (enclose-span (format ".studentAnswerUnfilled~a" fill-len)
+                             "{nbsp}"
+                             ;(symbol->string *hole-symbol*)
+                             )))]
         [(list? e) (let ([a (car e)])
                      (cond [(or (memq a '(+ - * / and or < > = <= >=))
                                 (memq a *list-of-hole-symbols*))
@@ -1504,14 +1526,17 @@
             [else e]))))
 
 (define (sexp->wescheme e)
+  ;(printf "doing sexp->wescheme ~s\n" e)
   (enclose-textarea ".racket" (format "~s" (holes-to-underscores e)))
   ;(enclose-textarea ".racket" (sexp->block e))
   )
 
 (define (sexp->pyret e)
+  ;(printf "doing sexp->pyret ~s\n" e)
   (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
 
 (define (sexp->math e)
+  ;(printf "doing sexp->math ~s\n" e)
   (enclose-math (sexp->arith e)))
 
 (define (sexp->code e)
@@ -1590,6 +1615,14 @@
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
+        [(answer? e) (let* ([e (cadr e)]
+                            [fill-len (answer-block-fill-length e)])
+                       (if *solutions-mode?*
+                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
+                             (sexp->block e #:pyret pyret))
+                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnFilled~a"
+                                                 fill-len)
+                             "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
                        (if (symbol? a)
