@@ -1,0 +1,23 @@
+= Inequalities
+
+++++
+<style>
+.editbox{width: auto;}
+</style>
+++++
+
+- Sometimes we want to _ask questions_ about data. For example, is `x` greater than `y`? Is one string equal to another? These questions can't be answered with a Numbers. Instead, they are answered with a new datatype called a *Boolean*.
+
+- Video games use Booleans for many things: asking when a player's health is equal to zero, whether two characters are close enough to bump into one another, or if a character's coordinates put it off the edge of the screen.
+
+- A Boolean value is either `true` or `false`. Unlike Numbers, Strings, and Images, Booleans have only two possible values.
+
+- You already know some functions that produce Booleans, such as `<` and `>`! Our programming language has them, too: @show{(sexp->code `(< 3 4))}, @show{(sexp->code `(> 10 2))}, and @show{(sexp->code `(= -10 19))}.
+
+- We also have ways of writing *Compound Inequalities*, so we can ask more complicated questions using the `and` and `or` functions. 
+
+** @show{(sexp->code `(and (> 3 4) (< 10 2)))} translates to "three is less than four _and_ ten is less than two". This will evaluate to `false`, since the `and` function requires that both sub-expressions be `true`.
+
+** @show{(sexp->code `(or (> 3 4) (< 10 2)))}, which translates to "three is less than four _or_ ten is less than two". This will evaluate to `true`, since the `or` function only requires that one sub-expression be `true`.
+
+- The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images: @show{(sexp->coe `(and (> 3 4) (< 10 2)))}  @show{(sexp->coe `(or (> 3 4) (< 10 2)))}
