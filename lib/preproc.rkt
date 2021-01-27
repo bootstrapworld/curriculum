@@ -1439,10 +1439,17 @@
   (list *hole-symbol* *hole2-symbol* *hole3-symbol*))
 
 (define (answer? e)
-  (and (list? e) (memq (car e) '(?ANSWER ?ANS ?ANSWER-INFIX-OP ?ANS-INFIX-OP))))
+  (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
+
+(define *pyret-infix-ops*
+ '(+ - * / and or < > = <= >=))
 
 (define (answer-infix-op? e)
-  (and (list? e) (memq (car e) '(?ANSWER-INFIX-OP ?ANS-INFIX-OP))))
+  (cond ((not (list? e)) #f)
+        ((memq (car e) '(?ANSWER ?ANS))
+         (let ((a (cadr e)))
+           (memq a *pyret-infix-ops*)))
+        (else #f)))
 
 (define (answer-fill-length e)
   (let ([n (string-length (format "~a" e))])
@@ -1472,7 +1479,7 @@
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(list? e) (let ([a (car e)])
-                     (cond [(or (memq a '(+ - * / and or < > = <= >=))
+                     (cond [(or (memq a *pyret-infix-ops*)
                                 (memq a *list-of-hole-symbols*)
                                 (answer-infix-op? a)
                                 )
@@ -1484,7 +1491,6 @@
                                               (sexp->arith a #:pyret #t)
                                               (cond [(eq? a '*) "\\;\\times\\;"]
                                                     [(eq? a '/) "\\div"]
-                                                    ;XXX sexp->arith?
                                                     [else a]))]
                                        [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
                                        [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
