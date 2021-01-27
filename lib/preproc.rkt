@@ -1583,9 +1583,17 @@
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
+        [(answer? e) (let* ([e (cadr e)]
+                            [fill-len (answer-block-fill-length e)])
+                       (if *solutions-mode?*
+                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
+                           (sexp->block-table e #:pyret pyret))
+                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a"
+                                                 fill-len)
+                             "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-tag "table" ".gdrive-only.expression"
-                       (if (symbol? a)
+                       (if (or (symbol? a) (answer-infix-op? a))
                            (let ([args (map (lambda (e1)
                                                 (sexp->block-table e1 #:pyret pyret))
                                               (cdr e))])
@@ -1638,7 +1646,7 @@
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
-                       (if (symbol? a)
+                       (if (or (symbol? a) (answer? a))
                            (let ([args (intersperse-spaces
                                          (map (lambda (e1)
                                                 (sexp->block e1 #:pyret pyret))
