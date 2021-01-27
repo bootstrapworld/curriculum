@@ -16,10 +16,11 @@ For each arithmetic expression on the left, finish the Circle of Evaluation on t
   (define expr3 '(+ 20 (* -4 6)))
   (define expr4 '(/ 15 (+ 10 (* 4 -2))))
 
-  (define coe1 (if *solutions-mode?* expr1 `(- (* BSLeaveAHoleHere 9) (+ 2 BSLeaveAHoleHere))))
-  (define coe2 (if *solutions-mode?* expr2 `(* (+ 3 BSLeaveAHoleHere) BSLeaveAHoleHere)))
-  (define coe3 (if *solutions-mode?* expr3 `(+ BSLeaveAHoleHere (* BSLeaveAHoleHere 6))))
-  (define coe4 (if *solutions-mode?* expr4 `(/ 15 (BSLeaveAHoleHere 10 BSLeaveAHoleHere2))))
+  (define coe1 '(- (* (?ANS 5) 9) (+ 2 (?ANS 7))))
+  (define coe2 '(* (+ 3 (?ANS 12)) (?ANS 16)))
+  (define coe3 '(+ (?ANS 20) (* (?ANS -4) 6)))
+  (define coe4 '(/ 15 ((?ANS-INFIX-OP +) 10 (?ANS (* 4 -2)))))
+
 
 }
 

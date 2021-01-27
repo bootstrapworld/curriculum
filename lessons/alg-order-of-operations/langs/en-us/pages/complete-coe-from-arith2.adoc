@@ -18,14 +18,16 @@ For each expression on the left, finish the Circle of Evaluation on the right by
   (define expr5 '(+ (* 6 4) (/ (- 9 -6) 5) ))
   (define expr6 '(- (/ 20 (+ 6 4))(/ (* 5 9) (- -12 3))))
 
-
-  (define coe1 (if *solutions-mode?* expr1 `(BSLeaveAHoleHere (BSLeaveAHoleHere 4 2) (/ BSLeaveAHoleHere 5))))
-  (define coe2 (if *solutions-mode?* expr2 `(+ (BSLeaveAHoleHere 7 1) (* BSLeaveAHoleHere BSLeaveAHoleHere))))
-  (define coe3 (if *solutions-mode?* expr3 `(/ BSLeaveAHoleHere (+ 5 BSLeaveAHoleHere))))
-  (define coe4 (if *solutions-mode?* expr4 `(* (BSLeaveAHoleHere 4 (BSLeaveAHoleHere 9 8)) BSLeaveAHoleHere)))
-  (define coe5 (if *solutions-mode?* expr5 `(BSLeaveAHoleHere (BSLeaveAHoleHere BSLeaveAHoleHere 4) (/ (BSLeaveAHoleHere 9 BSLeaveAHoleHere) BSLeaveAHoleHere) )))
-  (define coe6 (if *solutions-mode?* expr6 `(BSLeaveAHoleHere (BSLeaveAHoleHere 20 (+ BSLeaveAHoleHere 4))(BSLeaveAHoleHere (BSLeaveAHoleHere BSLeaveAHoleHere BSLeaveAHoleHere) (- BSLeaveAHoleHere 3)))))
-  
+  (define coe1 '((?ANS-INFIX-OP -) ((?ANS-INFIX-OP +) 4 2) (/ (?ANS 10) 5)))
+  (define coe2 '(+ ((?ANS-INFIX-OP -) 7 1) (* (?ANS 5) (?ANS 8))))
+  (define coe3 '(/ (?ANS -15) (+ 5 (?ANS -8))))
+  (define coe4 '(* ((?ANS-INFIX-OP +) 4 ((?ANS-INFIX-OP -) 9 8))
+                   (?ANS 5)))
+  (define coe5 '((?ANS-INFIX-OP +) ((?ANS-INFIX-OP *) (?ANS 6) 4)
+                                   (/ ((?ANS-INFIX-OP -) 9 (?ANS -6)) (?ANS 5))))
+  (define coe6 '((?ANS-INFIX-OP -) ((?ANS-INFIX-OP /) 20 (+ (?ANS 6) 4))
+                                   ((?ANS-INFIX-OP /) ((?ANS-INFIX-OP *) (?ANS 5) (?ANS 9))
+                                                      (- (?ANS -12) 3))))
 
 }
 

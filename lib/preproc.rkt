@@ -1439,7 +1439,10 @@
   (list *hole-symbol* *hole2-symbol* *hole3-symbol*))
 
 (define (answer? e)
-  (and (list? e) (eq? (car e) '?ANSWER)))
+  (and (list? e) (memq (car e) '(?ANSWER ?ANS ?ANSWER-INFIX-OP ?ANS-INFIX-OP))))
+
+(define (answer-infix-op? e)
+  (and (list? e) (memq (car e) '(?ANSWER-INFIX-OP ?ANS-INFIX-OP))))
 
 (define (answer-fill-length e)
   (let ([n (string-length (format "~a" e))])
@@ -1470,14 +1473,18 @@
                              )))]
         [(list? e) (let ([a (car e)])
                      (cond [(or (memq a '(+ - * / and or < > = <= >=))
-                                (memq a *list-of-hole-symbols*))
+                                (memq a *list-of-hole-symbols*)
+                                (answer-infix-op? a)
+                                )
                             (if (and (eq? a '/) (not pyret))
                                 (format "{{~a} \\over {~a}}"
                                         (sexp->arith (list-ref e 1))
                                         (sexp->arith (list-ref e 2)))
-                                (let* ([a (if pyret (sexp->arith a #:pyret #t)
+                                (let* ([a (if pyret
+                                              (sexp->arith a #:pyret #t)
                                               (cond [(eq? a '*) "\\;\\times\\;"]
                                                     [(eq? a '/) "\\div"]
+                                                    ;XXX sexp->arith?
                                                     [else a]))]
                                        [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
                                        [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
@@ -1620,7 +1627,7 @@
                        (if *solutions-mode?*
                            (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
                              (sexp->block e #:pyret pyret))
-                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnFilled~a"
+                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a"
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
