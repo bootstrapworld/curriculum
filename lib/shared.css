@@ -362,7 +362,7 @@ span.clear {
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
 /************************************************************************************
-* DESIGN RECIPE STYLING
+* DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
 .recipe { min-height: 37pt; } /* Lines where students should write need to be tall */
@@ -371,7 +371,8 @@ span.clear {
 
 :not(.recipe_instructions) + .keyword_only { margin: -8pt 0pt; }
 
-.studentAnswer {
+.studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
+.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   margin-bottom:      10pt;
   min-width:          100pt;
   line-height:        20pt;
@@ -395,32 +396,25 @@ span.clear {
 
 .studentAnswerUnfilled,.studentAnswerFilled,
 .studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
-  margin-bottom:      10pt;
-  line-height:        20pt;
-  position:           relative;
-  padding:            0pt;
-  word-spacing:       4pt;
-  display:            inline-block;
-  border-bottom:      solid 1px black;
-  text-align:         center;
+  min-width:          auto;
 }
 
-
-.studentBlockAnswerFilled,.studentBlockAnswerUnfilled {
-    border-bottom: dotted 1px black;
+.studentAnswerFilled, .studentBlockAnswerFilled {
+    border-bottom:    none;
+    font-weight:      900;
+    font-style:       italic;
+    text-shadow:      2px 2px 5px black;
+    margin-bottom:    0;
+    line-height:      inherit;
 }
 
-.studentAnswerShort {
-    min-width: 60pt;
+.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
+  box-shadow: 2px 1px 5px black;
 }
 
-.studentAnswerMedium {
-    min-width: 100pt;
-}
-
-.studentAnswerLong {
-    min-width: 140pt;
-}
+.studentAnswerShort  { min-width: 60pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
 
 /* This class and the rule below it could be cleaned up */
 .wrapper {
