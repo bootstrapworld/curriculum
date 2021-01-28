@@ -92,15 +92,13 @@ Have students discuss.
 
 It's useful to use __tree diagrams__, so we can see what our possible choices are.
 
-Let's diagram the permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, etc.... That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
+Let's diagram the permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, etc... That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
 
 @span{.center}@image{images/6-1-course-permute-w-replacement.png}
 
-But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? Remember: the meal we picked for the first course has been "replaced", so we still have six more choices in our bag.
+But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna, Lasagna & Pizza, Lasagna & Chicken, Lasagna & Veal, Lasagna & Soup, or Lasagna & Ziti.  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
 @span{.center}@image{images/6-2-course-permute-w-replacement.png}
-
-Now we can choose Lasagna for our first course....and then Lasagna _again_, or Pizza, Chicken, Veal, Soup, or Ziti. Each time we make a choice, there are six new possibilities. Instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
 Every time we get to make a choice, each endpoint in our tree sprouts six more branches. 
 
@@ -144,7 +142,7 @@ Luigi proposes an important change to his "Tour of Italy deal": **No item can be
 
 He also decides to simplify his menu even further, down to just **four different options**.
 
-That way no one can order four of the same thing, and there's far fewer choices to make! This makes it a lot easier to predict what to buy, so it will waste less food and save Luigi a lot of money.
+With no one ordering four of the same thing and far fewer choices to make, it's a lot easier to predict what to buy, so it will waste less food and save Luigi a lot of money.
 
 Now how long would it take to try every permutation?
 
@@ -152,15 +150,26 @@ Let's start by drawing the tree diagram for 1st place:
 
 @span{.center}@image{images/4-1-course-permute-wo-replacement.png}
 
-Now there are *four* possible items we could eat for our first course, so we have 4 possible branches. After we eat that course, it's time to order the second course! How many branches are there for the second course, under each first course choice?
+There are *four* possible items we could eat for our first course, so we have 4 possible branches. After we eat that course, it's time to order the second course! How many branches are there for the second course, under each first course choice?
 
 @span{.center}@image{images/4-2-course-permute-wo-replacement.png}
 
-Now there are only _three_ possible items, since we can't order the same thing twice. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
+We can't order the same thing twice so, once we've eaten pizza for the first course, there are only _three_ possible items left to choose from: chicken, veal and soup. If we start with chicken, we can't order chicken again, but we can choose from pizza, veal & soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
 
 We can visualize our four courses as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. In the tree diagram below, you can see a _partial_ drawing of all four courses.
 
 @span{.center}@image{images/4-4-course-permute-wo-replacement.png}
+
+If we start with chicken, we can order: 
+
+- chicken, pizza, veal & soup
+- chicken, pizza, soup & veal
+- chicken, veal, pizza & soup
+- chicken, veal, soup & pizza
+- chicken, soup, veal & pizza
+- chicken, soup, pizza & veal
+
+That's six different orders starting with one first course option and we have four different first course options.
 
 We can compute the number of permutations-without-replacement with the factorial function. @math{4 \times 3 \times 2 \times 1 = 4! = 24}
 
@@ -176,7 +185,7 @@ We can write this by starting with our factorial notation from before (where eve
 
 @math{\frac{6 \times 5 \times 4 \times 3 \times 2 \times 1}{2 \times 1} = \frac{6!}{2!} = 360}
 
-With this number of possible combinations, it would take a little more than a year try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
+With this number of possible combinations, it would take almost a year to try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
 
 We can write this relationship as a function:
 
@@ -215,18 +224,20 @@ Let students discuss.
 
 When order _doesn't_ matter, all the possible options are called @vocab{combinations} (think of Luigi's "combination platter!"). 
 
-Since there's no replacement, let's start by using our formula for permutation-without-replacement to compute all the possible permutations:
+Since there's no replacement, let's start by using our formula for permutation-without-replacement to compute all the possible permutations. We have six items to choose from and are selecting four of them:
 
 @math{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
-In this situation, the order __doesn't matter__, so some of these platters are going to be the same combination: L-S-Z-C is a different @vocab{permutation} from L-S-C-Z, but it's the same @vocab{combination}! If we knew that every combination would have a duplicate, we'd divide the number of platters by two. If we knew each one would have a triplicate, we'd divide by three. 
+In this situation, the order __doesn't matter__, so some of these platters are going to be the same combination: lasagna, soup, ziti and chicken is a different @vocab{permutation} from lasagna, soup, chicken, ziti, but it's the same @vocab{combination}! If we knew that every combination would have a duplicate, we'd divide the number of platters by two. If we knew each one would have a triplicate, we'd divide by three. 
 
 [.lesson-instruction]
 How do we compute the number of duplicates in a four-course platter?
 
-We already know how to do this! This is the same question as "how many permutations are there for the same four courses?" So let's use our formula for permutation without replacement: @math{\frac{4!}{4-4!} = 4! = 24}
+We already know how to do this! This is the same question as "How many permutations are there for the same four courses?" 
 
-So we have one function that will tell us how many __permutations-without-replacement__ there are for 4 courses out of six items, and we need to divide this by the number of __permutations-without-replacement__ there are for exactly four courses.
+Using our formula for permutation without replacement we get: @math{\frac{4!}{(4-4)!} = 4! = 24 duplicates!}
+
+Now, we need to divide the number of _permutations-without-replacement_ for selecting 4 courses out of six items by the number of duplicate permutations in a four-course platter.
 
 @math{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
 
