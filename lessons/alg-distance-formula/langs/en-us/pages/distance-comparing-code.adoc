@@ -1,15 +1,17 @@
 = Comparing Code: Finding Missing Distances
 
-In each of the game screenshots below, one of the distance calculations has been covered. The code to generate the missing distance from the information provided is revealed below the images. Notice what is similar and what is different about the two sets of code. Think about why those similarities and differences exist and record your thinking. 
+For each of the game screenshots below, the math and the code for computing the covered distance is shown. Notice what is similar and what is different about how the top and bottom distances are calculated. Think about why those similarities and differences exist and record your thinking. 
 
 @span{.blankline}{}
 @span{.blankline}{}
-@centered-image{../images/desert.png,"", 600}		
 
-[.center]
-@show{(sexp->code `(sqrt (+ (sqr 166)(sqr 276))))}
+@vspace{2ex}
 
-@centered-image{../images/sewers.png,"", 600}		
+[cols=" ^.^6, ^.^1", stripes="none"]
+|===
+| @centered-image{../images/desert.png,"", 600}
+| @math{\sqrt{166^2 + 276^2}} @show{(sexp->code `(sqrt (+ (sqr 166)(sqr 276))))}
 
-[.center]
-@show{(sexp->code `(sqrt (- (sqr 276)(sqr 194))))} 
+| @centered-image{../images/sewers.png,"", 600}		
+| @math{\sqrt{276^2 - 194^2}} @show{(sexp->code `(sqrt (- (sqr 276)(sqr 194))))} 
+|===
