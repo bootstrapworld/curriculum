@@ -1,5 +1,6 @@
 = Permutations
 
+++++
 <!--
 
 Visme URLs for tree diagrams: 
@@ -50,8 +51,8 @@ Visme URLs for tree diagrams:
 Students are introduced to the concept of @vocab{permutation} (with replacement). They  compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations with replacement.
 
 === Launch
-@span{.right}{@image{images/pizza.png}}
-Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with lasagna, but your friend can start with the chicken parmesan, and so on. And if your friend happens to really, *really* like chicken parmesan, they can choose to eat it for all four courses!
+@span{.right}{@image{images/Pizza.png}}
+Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with lasagna, but your friend can start with the Chicken parmesan, and so on. And if your friend happens to really, *really* like Chicken parmesan, they can choose to eat it for all four courses!
 
 They advertise "an almost-endless number of dining experiences". In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
 
@@ -87,7 +88,7 @@ Let's diagram the permutations for a 1-course meal. With six menu items, a 1-cou
 
 @span{.center}@image{images/6-1-course-permute-w-replacement.png}
 
-But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna, Lasagna & Pizza, Lasagna & Chicken, Lasagna & Veal, Lasagna & Soup, or Lasagna & Ziti.  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
+But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna, Lasagna & Pizza, Lasagna & Chicken, Lasagna & Ravioli, Lasagna & Soup, or Lasagna & Ziti.  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
 @span{.center}@image{images/6-2-course-permute-w-replacement.png}
 
@@ -101,7 +102,7 @@ We had 36 possible 2-course meals, so choosing a third course means that each "e
 For a 4-course meal, we have a _four-level_ tree with six branches at every level! That's @math{6 \times 6 \times 6 \times 6} - or @math{6^4} possible permutations!
 
 The number of @vocab{permutations} is computed based on two things:
-. The number of possible menu __items__ (lasagna? chicken? soup?)
+. The number of possible menu __items__ (lasagna? Chicken? Soup?)
 . How many times we get to __choose__. (1-course meal? 3-course meal?)
 
 Let's see this as a function:
@@ -136,7 +137,7 @@ What are some other examples of permutation? (Password strength, guessing combin
 Students build on their understanding of @vocab{permutation}, now extending it to situations _without_ replacement. They compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations without replacement.
 
 === Launch
-After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. His daughter observes that there's no way to predict how many ingredients to buy, since some people might want four courses of soup and others might want four courses of ziti. Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
+After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. His daughter observes that there's no way to predict how many ingredients to buy, since some people might want four courses of Soup and others might want four courses of ziti. Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
 
 Luigi proposes an important change to his "Italian Safari deal": **No item can be ordered twice.**
 
@@ -154,20 +155,20 @@ There are *four* possible items we could eat for our first course, so we have 4 
 
 @span{.center}@image{images/4-2-course-permute-wo-replacement.png}
 
-We can't order the same thing twice so, once we've eaten pizza for the first course, there are only _three_ possible items left to choose from: chicken, veal and soup. If we start with chicken, we can't order chicken again, but we can choose from pizza, veal & soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
+We can't order the same thing twice so, once we've eaten Pizza for the first course, there are only _three_ possible items left to choose from: Chicken, Ravioli and Soup. If we start with Chicken, we can't order Chicken again, but we can choose from Pizza, Ravioli & Soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
 
 We can visualize our four courses as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. In the tree diagram below, you can see a _partial_ drawing of all four courses.
 
 @span{.center}@image{images/4-4-course-permute-wo-replacement.png}
 
-If we start with chicken, we can order: 
+If we start with Chicken, we can order: 
 
-- chicken, pizza, veal & soup
-- chicken, pizza, soup & veal
-- chicken, veal, pizza & soup
-- chicken, veal, soup & pizza
-- chicken, soup, veal & pizza
-- chicken, soup, pizza & veal
+- Chicken, Pizza, Ravioli & Soup
+- Chicken, Pizza, Soup & Ravioli
+- Chicken, Ravioli, Pizza & Soup
+- Chicken, Ravioli, Soup & Pizza
+- Chicken, Soup, Ravioli & Pizza
+- Chicken, Soup, Pizza & Ravioli
 
 That's six different orders starting with one first course option and we have four different first course options.
 
