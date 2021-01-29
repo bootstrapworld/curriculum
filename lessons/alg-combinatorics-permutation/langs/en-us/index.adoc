@@ -55,7 +55,7 @@ Students are introduced to the concept of @vocab{permutation} (with replacement)
 
 Have students open the @link{https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi, Permutations and Combinations Starter File}, save a copy, and click "Run".
 
-Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with lasagna, but your friend can start with the Chicken parmesan, and so on. And if your friend happens to really, *really* like Chicken parmesan, they can choose to eat it for all four courses!
+Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with Lasagna, but your friend can start with the Chicken Parmesan, and so on. And if your friend happens to really, *really* like Chicken Parmesan, they can choose to eat it for all four courses!
 
 [.lesson-instruction]
 In the Interactions Area, type `menu` to see a list of all the items Luigi will serve.
@@ -88,20 +88,21 @@ Luigi has six possible dishes to choose from. Discuss:
 - Is there a pattern here?
 --
 
-It's useful to use __tree diagrams__, so we can see what our possible choices are.
+It's useful to use __tree diagrams__, so we can see what our possible choices are. A tree diagram is a way of tracking a series of events. In this case, each course we choose is an event.
 
-Let's diagram the permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, etc... That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
+Let's diagram all permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, Ravioli, Soup or Ziti. That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
 
 @span{.center}@image{images/6-1-course-permute-w-replacement.png}
 
-But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna, Lasagna & Pizza, Lasagna & Chicken, Lasagna & Ravioli, Lasagna & Soup, or Lasagna & Ziti.  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
+But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna (L-L), Lasagna & Pizza (L-P), Lasagna & Chicken (L-C), Lasagna & Ravioli (L-R), Lasagna & Soup (L-S), or Lasagna & Ziti (L-Z).  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
 @span{.center}@image{images/6-2-course-permute-w-replacement.png}
 
 Every time we get to make a choice, each endpoint in our tree sprouts six more branches. 
 
 [.lesson-instruction]
-How many permutations would there be in a 3-course meal?
+- For practice with tree-diagrams and permutations, complete @printable-exercise{pages/tree-diagrams.adoc}.
+- How many permutations would there be in a 3-course meal?
 
 We had 36 possible 2-course meals, so choosing a third course means that each "endpoint" of our 2-course meal tree now has six possible branches! @math{6 \times 6  \times 6 = 6^3 = 216} possible 3-course meals.
 
@@ -234,7 +235,7 @@ We can write this relationship as a function:
 @math{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
 
 [.lesson-instruction]
-For practice, complete the @opt-printable-exercise{permutation.adoc} worksheet.
+For practice, complete the @printable-exercise{permutation.adoc} worksheet.
 
 [.lesson-instruction]
 In Pyret, we can compute the factorial of 6 with the `factorial` function. For example, `factorial(6)` will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}. In the Definitions Area, use the Design Recipe to define `num-permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).
