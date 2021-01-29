@@ -1,0 +1,34 @@
+= Completing Circles of Evaluation from Arithmetic Expressions
+
+++++
+<style>
+  td * {text-align: left;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each arithmetic expression on the left, finish the Circle of Evaluation on the right by filling in the blanks
+
+@do{
+  (define expr1 '(- (* 5 9) (+ 2 7)))
+  (define expr2 '(* (+ 3 12) 16))
+  (define expr3 '(+ 20 (* -4 6)))
+  (define expr4 '(/ 15 (+ 10 (* 4 -2))))
+
+  (define coe1 '(- (* (?ANS 5) 9) (+ 2 (?ANS 7))))
+  (define coe2 '(* (+ 3 (?ANS 12)) (?ANS 16)))
+  (define coe3 '(+ (?ANS 20) (* (?ANS -4) 6)))
+  (define coe4 '(/ 15 ((?ANS +) 10 (?ANS (* 4 -2)))))
+
+
+}
+
+[cols=".^1a,^10a,^10a",options="header",stripes="none"]
+|===
+|   | Math Expression              		| Circle of Evaluation
+|*1*| @math{5 \times 9 - (2 + 7)}  		| @show{(sexp->coe coe1)}
+|*2*| @show{(sexp->math expr2)}    		| @show{(sexp->coe coe2)}
+|*3*| @math{20 + -4 \times 6}    		| @show{(sexp->coe coe3)}
+|*4*| @math{\frac{15} {10 + 4 \times -2}}| @show{(sexp->coe coe4)}
+|===

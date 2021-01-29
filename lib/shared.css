@@ -205,6 +205,13 @@ tr th.tableblock {
 
 .LessonPlan h2 { font-size: 2.2em; font-weight: normal; }
 .LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
+.LessonPlan h4 { 
+  font-size: 1.25em; 
+  font-weight: bold; 
+  font-style: italic;
+  color: darkgray; 
+  text-align: center;
+}
 
 /* The summary table at the top of each lesson */
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
@@ -356,7 +363,7 @@ span.clear {
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
 /************************************************************************************
-* DESIGN RECIPE STYLING
+* DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
 .recipe { min-height: 37pt; } /* Lines where students should write need to be tall */
@@ -365,7 +372,8 @@ span.clear {
 
 :not(.recipe_instructions) + .keyword_only { margin: -8pt 0pt; }
 
-.studentAnswer {
+.studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
+.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   margin-bottom:      10pt;
   min-width:          100pt;
   line-height:        20pt;
@@ -386,6 +394,28 @@ span.clear {
   font-family:        "Century Gothic";
   word-spacing:       0pt;  /* don't inherit spacing from .studentAnswer */
 }
+
+.studentAnswerUnfilled,.studentAnswerFilled,
+.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
+  min-width:          auto;
+}
+
+.studentAnswerFilled, .studentBlockAnswerFilled {
+    border-bottom:    none;
+    font-weight:      900;
+    font-style:       italic;
+    text-shadow:      2px 2px 5px black;
+    margin-bottom:    0;
+    line-height:      inherit;
+}
+
+.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
+  box-shadow: 2px 1px 5px black;
+}
+
+.studentAnswerShort  { min-width: 60pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
 
 /* This class and the rule below it could be cleaned up */
 .wrapper {
