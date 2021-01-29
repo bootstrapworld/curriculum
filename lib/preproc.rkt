@@ -1476,8 +1476,12 @@
                                      (format "fun ~a: ~a end" lhs-c rhs-c)]
                                     [else
                                       (format "var ~a = ~a" lhs-c rhs-c)]))]
+                           [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
+                            (format "\\sqrt{~a}" (sexp->arith (cadr e)))]
+                           [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
+                            (format "{~a}^2" (sexp->arith (cadr e)))]
                            [else
-                             (format "~a{zwsp}({zwsp}~a{zwsp})"
+                             (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
                                      (sexp->arith a #:pyret pyret)
                                      (string-join
                                        (map (lambda (e1)
