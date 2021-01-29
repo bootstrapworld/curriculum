@@ -1,17 +1,31 @@
 = Comparing Code: Finding Missing Distances
 
+++++
+<style>
+img, table { max-height: 450px; }
+td { padding: 0px !important; }
+.centered-image { padding: 0px; }
+</style>
+++++
+
 For each of the game screenshots below, the math and the code for computing the covered distance is shown. Notice what is similar and what is different about how the top and bottom distances are calculated. Think about why those similarities and differences exist and record your thinking. 
 
 @span{.blankline}{}
 @span{.blankline}{}
 
-@vspace{2ex}
-
-[cols=" ^.^6, ^.^1", stripes="none"]
+@centered-image{../images/desert.png}
+[cols="^1,^1", stripes="none", grid="none", frame="none"]
 |===
-| @centered-image{../images/desert.png,"", 600}
-| @math{\sqrt{166^2 + 276^2}} @show{(sexp->code `(sqrt (+ (sqr 166)(sqr 276))))}
-
-| @centered-image{../images/sewers.png,"", 600}		
-| @math{\sqrt{276^2 - 194^2}} @show{(sexp->code `(sqrt (- (sqr 276)(sqr 194))))} 
+| @math{\sqrt{166^2 + 276^2}} 
+| @show{(sexp->code `(sqrt (+ (sqr 166)(sqr 276))))}
 |===
+
+@vspace{1ex}
+
+@centered-image{../images/sewers.png}		
+[cols="^1,^1", stripes="none", grid="none", frame="none"]
+|===
+| @math{\sqrt{276^2 - 194^2}} 
+| @show{(sexp->code `(sqrt (- (sqr 276)(sqr 194))))} 
+|===
+ 
