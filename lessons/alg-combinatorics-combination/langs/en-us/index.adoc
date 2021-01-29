@@ -1,0 +1,104 @@
+= Combinations and Permutations
+
+<!--
+
+Visme URLs for tree diagrams: 
+- https://my.visme.co/view/epd0w63y-permutation-and-combination-2
+- https://my.visme.co/view/8rerg1ee-permutation-and-combination
+-->
+++++
+
+@lesson-description{Students compute the possible number of outcomes using combinations and permutations.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{alg-defining-functions}
+| Lesson Goals
+| Students will be able to...
+
+* 
+* 
+* 
+
+| Student-facing Lesson Goals
+|
+
+* 
+
+| Materials
+|[.materials-links]
+* @link{TODO, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Supplemental Resources
+| 
+
+@include{xtra/lang-prereq.adoc}
+|===
+
+== Combinations
+
+=== Overview
+Students are introduced to the concept of @vocab{combinations}. They learn the definition and compute a number of combinations by hand using tree diagrams, then learn the formula for computing combinations.
+
+=== Launch
+With this new set of rules, Luigi's Family Restaurant is more popular than ever! But with a full house every night, the cooks are busy and the kitchen gets backed up. Customers start complaining about slow service, and Luigi is once again in trouble.
+
+The cooks point out that it's easy to add twice as much ravioli to the same pot - but it's hard to make two _separate_ pots of ravioli. If people could choose their four courses in advance, the chefs could just make a few huge batches of each item and divide them up on people's plates!
+
+Luigi decides to change the rules again, to help his kitchen staff. There are still six items on the menu, customers can still choose any four they want, and they still can't choose the same item twice...but **order no longer matters**. Instead of a four-course meal, diners get a "combination platter" with all four items on the plate.
+
+[.lesson-instruction]
+--
+- How is this situation similar to the permutation questions?
+- How is it different?
+--
+
+=== Investigate
+
+When order _doesn't_ matter, all the possible options are called @vocab{combinations} (think of Luigi's "combination platter!"). 
+
+Since there's no replacement, let's start by using our formula for permutation-without-replacement to compute all the possible permutations. We have six items to choose from and are selecting four of them:
+
+@math{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+
+In this situation, the order __doesn't matter__, so some of these platters are going to be the same combination: lasagna, soup, ziti and chicken is a different @vocab{permutation} from lasagna, soup, chicken, ziti, but it's the same @vocab{combination}! If we knew that every combination would have a duplicate, we'd divide the number of platters by two. If we knew each one would have a triplicate, we'd divide by three. 
+
+[.lesson-instruction]
+How do we compute the number of duplicates in a four-course platter?
+
+We already know how to do this! This is the same question as "How many permutations are there for the same four courses?" 
+
+Using our formula for permutation without replacement we get: @math{\frac{4!}{(4-4)!} = 4! = 24} duplicates!
+
+Now, we need to divide the number of _permutations-without-replacement_ for selecting 4 courses out of six items by the number of duplicate permutations in a four-course platter.
+
+@math{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
+
+We can rewrite this using our functions from earlier:
+
+@math{combinations(items, choose) = \frac{permute\mbox{-}no\mbox{-}replace(items, choose)}{permute\mbox{-}no\mbox{-}replace(choose, choose)}}
+
+In this situation, we have 6 possible choices and we get to choose 4 times:
+
+@math{combinations(6, 4) = \frac{permute\mbox{-}no\mbox{-}replace(6, 4)}{permute\mbox{-}no\mbox{-}replace(4, 4)}}
+
+[.lesson-instruction]
+Complete the @opt-printable-exercise{combination.adoc}, and @opt-printable-exercise{combination-or-permutation.adoc} worksheets
+
+=== Synthesize
+
+- What is the difference between @vocab{combination} and @vocab{permutation}? 
+
+- What are some real-world examples of combinations?
+
+== Additional Exercises:
+TODO
