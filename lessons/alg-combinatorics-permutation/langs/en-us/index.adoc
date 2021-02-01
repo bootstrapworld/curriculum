@@ -31,7 +31,6 @@ Visme URLs for tree diagrams:
 | Materials
 |[.materials-links]
 * @link{TODO, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi, Permutations and Combinations Starter File}
 
 @material-links
 
@@ -53,12 +52,7 @@ Students are introduced to the concept of @vocab{permutation} (with replacement)
 === Launch
 @span{.right}{@image{images/Pizza.png}}
 
-Have students open the @link{https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi, Permutations and Combinations Starter File}, save a copy, and click "Run".
-
 Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with Lasagna, but your friend can start with the Chicken Parmesan, and so on. And if your friend happens to really, *really* like Chicken Parmesan, they can choose to eat it for all four courses!
-
-[.lesson-instruction]
-In the Interactions Area, type `menu` to see a list of all the items Luigi will serve.
 
 They advertise "an almost-endless number of dining experiences". In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
 
@@ -108,13 +102,6 @@ We had 36 possible 2-course meals, so choosing a third course means that each "e
 
 For a 4-course meal, we have a _four-level_ tree with six branches at every level! That's @math{6 \times 6 \times 6 \times 6} - or @math{6^4} possible permutations!
 
-[.lesson-instruction]
-- In the Interactions Area, type `permute-with-replace(menu, 1)` to see all the permutations for a 1-course meal. PROTIP: By clicking the first `list`, you can expand it to show each permutation on its own line.
-- Does the number of permutations shown here match the number we computed earlier?
-- How could we see all of the permutations for a 2-course meal? 3-course? 4?
-- Does the number of permutations shown here still match what we expect?
-- Write the number of permutations in the definitions area, under #2
-
 The number of @vocab{permutations} is computed based on two things:
 . The number of possible menu __items__ (lasagna? Chicken? Soup?)
 . How many times we get to __choose__. (1-course meal? 3-course meal?)
@@ -162,9 +149,6 @@ He also decides to simplify his menu even further, down to just **four different
 
 With no one ordering four of the same thing and far fewer choices to make, it's a lot easier to predict what to buy, so it will waste less food and save Luigi a lot of money.
 
-[.lesson-instruction]
-In the Interactions Area, type `small-menu` to see the new, reduced menu.
-
 Now how long would it take to try every permutation?
 
 Let's start by drawing the tree diagram for 1st place:
@@ -194,12 +178,6 @@ That's six different permutatons that starting with Chicken, and we have four di
 
 We can compute the number of permutations-without-replacement by multiplying the number of choices as they shrink after each course: @math{4 \times 3 \times 2 \times 1 = 24}.
 
-[.lesson-instruction]
-- In the Interactions Area, type `permute-no-replace(small-menu, 1)` to see all the permutations for a 1-course meal. PROTIP: By clicking the first `list`, you can expand it to show each permutation on its own line.
-- Does the number of permutations shown here match the number we computed earlier?
-- How could we see all of the permutations for a 2-course meal? 3-course?
-- Write the number of permutations in the definitions area, under #5a-c
-
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
@@ -225,11 +203,6 @@ We can write this by starting with our factorial notation from before (where eve
 
 With this number of possible combinations, it would take almost a year to try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
 
-[.lesson-instruction]
-- In the Interactions Area, type `permute-no-replace(menu, 1)` to see all the permutations for a 1-course meal. 
-- How could we see all of the permutations for a 2-course meal? 3-course? 4?
-- Write the number of permutations in the definitions area, under #5d-f
-
 We can write this relationship as a function:
 
 @math{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
@@ -247,4 +220,4 @@ In Pyret, we can compute the factorial of 6 with the `factorial` function. For e
 - What are some real-world examples of each?
 
 == Additional Exercises:
-TODO
+* @opt-online-exercise{https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi, Permutations and Combinations Starter File} - provides students with a chance to view all the permutations and combinations for Luigi's menu.
