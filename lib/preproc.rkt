@@ -1449,11 +1449,14 @@
 (define *pyret-infix-ops*
  '(+ - * / and or < > = <= >=))
 
-(define (answer-infix-op? e)
-  (cond ((not (list? e)) #f)
+(define *arith-infix-ops*
+  (append *pyret-infix-ops* '(expt)))
+
+(define (infix-op? e #:pyret [pyret #f])
+  (cond ((not (list? e)) (memq e (if pyret *pyret-infix-ops* *arith-infix-ops*)))
         ((memq (car e) '(?ANSWER ?ANS))
          (let ((a (cadr e)))
-           (memq a *pyret-infix-ops*)))
+           (memq a (if pyret *pyret-infix-ops* *arith-infix-ops*))))
         (else #f)))
 
 (define (answer-fill-length e)
@@ -1473,12 +1476,13 @@
                 (sexp->arith (list-ref e 1)))
         (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
                          [(eq? a '/) "\\div"]
+                         [(eq? a 'expt) "^"]
                          [else a])]
                [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t #:encloser a)) e)]
                [x (string-join args (format " ~a " am))])
           (if (and wrap (or (not encloser)
-                            (and (eq? encloser '+) (not (memq a '(+ - * /))))
-                            (and (eq? encloser '*) (not (memq a '(* /))))))
+                            (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
+                            (and (eq? encloser '*) (not (memq a '(* / expt))))))
               (format "(~a)" x)
               x)))))
 
@@ -1501,17 +1505,18 @@
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(list? e) (let ([a (car e)])
-                     (cond [(or (memq a *pyret-infix-ops*)
-                                (memq a *list-of-hole-symbols*)  ;XXX
-                                (answer-infix-op? a)
-                                )
-                            (if pyret
-                                (let* ([a (sexp->arith a #:pyret #t)]
-                                       [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
-                                       [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
-                                       [x (format "~a ~a ~a" lft a rt)])
-                                  (if wrap (format "({zwsp}~a{zwsp})" x) x))
-                                (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser))]
+                     (cond [(and pyret (or (memq a *list-of-hole-symbols*)  ;XXX
+                                           (infix-op? a #:pyret #t)
+                                           ))
+                            (let* ([a (sexp->arith a #:pyret #t)]
+                                   [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
+                                   [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
+                                   [x (format "~a ~a ~a" lft a rt)])
+                              (if wrap (format "({zwsp}~a{zwsp})" x) x)) ]
+                           [(and (not pyret) (or (memq a *list-of-hole-symbols*)  ;XXX
+                                                 (infix-op? a #:pyret #f)
+                                                 ))
+                            (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser)]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
@@ -1575,6 +1580,7 @@
   (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
                      [(eq? e 'sqrt) "num-sqrt"]
                      [(eq? e 'sqr) "num-sqr"]
+                     [(eq? e 'expt) "num-expt"]
                      [(eq? e '=) "=="]
                      [(eq? e '+) "{plus}"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
@@ -1606,7 +1612,7 @@
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-tag "table" ".gdrive-only.expression"
-                       (if (or (symbol? a) (answer-infix-op? a))
+                       (if (or (symbol? a) (infix-op? a))
                            (let ([args (map (lambda (e1)
                                                 (sexp->block-table e1 #:pyret pyret))
                                               (cdr e))])
