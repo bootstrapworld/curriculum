@@ -1460,7 +1460,24 @@
 (define (answer-block-fill-length e)
   "")
 
-(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f])
+(define (infix-sexp->math a e #:wrap (wrap #t) #:encloser (encloser #f))
+  (let ([n (length e)])
+    (if (and (eq? a '/) (= n 2))
+        (format "{{~a} \\over {~a}}"
+                (sexp->arith (list-ref e 0))
+                (sexp->arith (list-ref e 1)))
+        (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
+                         [(eq? a '/) "\\div"]
+                         [else a])]
+               [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t #:encloser a)) e)]
+               [x (string-join args (format " ~a " am))])
+          (if (and wrap (or (not encloser)
+                            (and (eq? encloser '+) (not (memq a '(+ - * /))))
+                            (and (eq? encloser '*) (not (memq a '(* /))))))
+              (format "(~a)" x)
+              x)))))
+
+(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f] #:encloser [encloser #f])
   ;(printf "doing sexp->arith (~a) ~s\n" pyret e)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
@@ -1480,29 +1497,16 @@
                              )))]
         [(list? e) (let ([a (car e)])
                      (cond [(or (memq a *pyret-infix-ops*)
-                                (memq a *list-of-hole-symbols*)
+                                (memq a *list-of-hole-symbols*)  ;XXX
                                 (answer-infix-op? a)
                                 )
-                            (if (and (eq? a '/) (not pyret))
-                                (format "{{~a} \\over {~a}}"
-                                        (sexp->arith (list-ref e 1))
-                                        (sexp->arith (list-ref e 2)))
-                                (let* ([a (if pyret
-                                              (sexp->arith a #:pyret #t)
-                                              (cond [(eq? a '*) "\\;\\times\\;"]
-                                                    [(eq? a '/) "\\div"]
-                                                    [else a]))]
-                                       [lft (sexp->arith (list-ref e 1) #:pyret pyret #:wrap #t)]
-                                       [rt (sexp->arith (list-ref e 2) #:pyret pyret #:wrap #t)]
-                                       [x (format "~a ~a ~a"
-                                                  lft
-                                                  a
-                                                  rt)])
-                                  (if wrap
-                                      (if pyret
-                                          (format "({zwsp}~a{zwsp})" x)
-                                          (format "(~a)" x))
-                                      x)))]
+                            (if pyret
+                                (let* ([a (sexp->arith a #:pyret #t)]
+                                       [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
+                                       [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
+                                       [x (format "~a ~a ~a" lft a rt)])
+                                  (if wrap (format "({zwsp}~a{zwsp})" x) x))
+                                (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser))]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
