@@ -1003,6 +1003,11 @@
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
+                           [(string=? directive "smath")
+                            (let ([exprs (string-to-form (format "(sexp->math '~a)"
+                                                 (read-group i directive #:scheme? #t)))])
+                              (for ([s exprs])
+                                (display (massage-arg s) o)))]
                            [(string=? directive "clear")
                             (read-group i directive)
                             (newline o)
