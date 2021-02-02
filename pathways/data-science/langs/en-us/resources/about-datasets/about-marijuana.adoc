@@ -2,7 +2,7 @@
 
 
 [.datasheet]
-= Esports Earnings
+= Marijuana Arrests and Laws by State
 
 [.question]
 --
@@ -19,10 +19,11 @@
 
 [.answer-roman]
 --
+This dataset looks at marijuana arrest records for the year 2018 in 49 US States (data was unavailable for Florida), and breaks 
+these arrests down by race. Each state also includes data for the years marijuana was legalized and/or decriminalized, 
+and/or when medical marijuana was legalized.
 
-This dataset includes data from 1998-2020 that comes from https://www.esportsearnings.com, a publicly-sourced repository of information on esports earnings.
 --
-
 [.question]
 --
 //Write one of the following descriptors in the space below:
@@ -36,10 +37,10 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+This data set has a limited number of categories, making it accessible to any student.
 
-- This data set has a limited number of categories, making it accessible to any student.
+
 --
-
 [.question]
 --
 //Write one of the following descriptors in the space below:
@@ -55,9 +56,9 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 --
 
 - The columns of this data set require calculations to convert data before students start making graphs.
-- **Column Titles:** game, release-date, genre, total-earnings (total earnings of all players in all tournaments), online-earnings (total earnings of all players in online-only tournaments), total-winners (total number of tournament winners in all tournaments), total tournaments (total number of tournaments that took place from the release date to 2020)
---
+- **Column Titles:**  State, All Drug Arrests, Total Marijuana Arrests, Total Marijuana Possession Arrests, Black Marijuana Possession Arrests, White Marijuana Possession Arrests, Black Population, White Population, Total Population, Marijuana Legalized (year), Marijuana Decriminalized (year), Medical Marijuana Legalized (year)
 
+--
 [.question]
 *Have students...*
 --
@@ -73,13 +74,20 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+- *define* a function black-population-proportion, which computes the proportion of black individuals in a state's 
+  population.
+- *define* a function black-arrest-proportion, which computes the ratio between marijuana possession arrests for black 
+  people and marijuana possession arrests for all people.
+- *define* function marijuana-arrest-proportion, which computes the percent of drug arrests that were marijuana arrests, 
+or marijuana possession arrests.
+- *define* a function is-legal-in-2018, which determines whether marijuana was legalized in 2018 
+(the time that the data was calculated). The same can be done for decriminalization and medical marijuana legalization.
 
-- **define** a function online-ratio, which returns the ratio of online-earnings to total-earnings for a game.
-- **define** a function annual-earnings, which returns the average earnings per year since the release date for a game.
+
+
 --
-
 [.question]
-**Heads Up**
+*Heads Up*
 --
 //If there are outliers teachers should be aware of, please note them below. For example:
 //
@@ -91,8 +99,8 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 [.answer-roman]
 --
 
-- Note that since the data is publicly sourced, there are games with no earnings and no tournaments. Additionally, the nature of the data means that there are a few extremely large outliers that the student will have to deal with when analyzing the data.
-
+- A few states have multiple dates for medical marijuana legalization, denoted by listing the two dates
+separated by a slash.
 
 --
 [.question]
@@ -109,10 +117,10 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+- In order to compare between states, percentages will need to be calculated. These could include 
+the percentage of a population that is black or white, the percentage of marijuana arrests that were
+of a black or white person, or the percentage of total arrests that were for marijuana possession.
+- It may also make sense to split data into groups depending on whether marijuana/medical marijuana was legalized, decriminalized, or illegal.
 
-- The data for many less popular games varies greatly due to one-off tournaments. Additionally, the number of games with zero tournaments and zero players may vary, as the data is publicly sourced. Thus, it is recommended that comparisons between genres be done with subsets containing the games with the highest earnings, as much more data is available for those games.
 
-- Other metrics that may be interesting to the student for analysis are the average earnings per year since release and the average number of tournaments per year since the release year of the game or 1998--whichever comes second.
-
-- Keep in mind that the data only includes tournaments that occur from 1998 to 2020, even though some of the games included in the data set were released before 1998.
 --

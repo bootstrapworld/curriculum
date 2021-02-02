@@ -7,10 +7,16 @@ This directory contains two scripts `make-questionnaire.rkt` and
   `D-admin.adoc`, and produces
   a student-facing file, `D-student.adoc`, that each student fills out.
 
-- `sanitize.rkt` checks the filled `D-student.adoc` for errors and
-  corrects it in-place. A sanitized `D-student.adoc` can then be
-  processed by Asciidoctor to produce an HTML version of the
-  student's answers.
+- `sanitize.rkt` checks the filled `D-student.adoc` against
+  `D-admin.adoc` and produces the sanitized and possibly
+  corrected version in `D-final.adoc`. `sanitize.rkt` can take
+  two extra optional arguments in addition to its first argument.
+  The optional second argument specifies the filename of the
+  admin file (which by default is `D-admin.adoc`). The optional
+  third argument specifies the filename of the output file (which
+  by default is `D-final.adoc`). These optional arguments make it
+  easy to convert filled student files that have been renamed for
+  convenience.
 
 It also includes a sample spec file, `D-admin.adoc`, a sample
 stylesheet `questionnaire.css`, and other
