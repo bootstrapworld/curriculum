@@ -1459,6 +1459,12 @@
            (memq a (if pyret *pyret-infix-ops* *arith-infix-ops*))))
         (else #f)))
 
+(define (answer->hole e)
+  (let ((n (string-length (format "~a" e))))
+    (cond ((< n 3) 'BSLeaveAHoleHere)
+          ((< n 10) 'BSLeaveAHoleHere2)
+          (else 'BSLeaveAHoleHere3))))
+
 (define (answer-fill-length e)
   (let ([n (string-length (format "~a" e))])
     (cond [(< n 3) ".studentAnswerShort"]
@@ -1546,19 +1552,24 @@
                     *hole2-symbol*
                     (list hole hole hole))]
          [hole3 hole2])
-    (lambda (e)
-      (cond [(pair? e) (cons (holes-to-underscores (car e))
-                             (holes-to-underscores (cdr e)))]
-            [(number? e) e]
-            [(string? e) e]
+    (lambda (e #:wescheme [wescheme #f])
+      ;(printf "doing holes-to-underscores ~s\n" e)
+      (cond [(or (null? e) (number? e) (string? e)) e]
             [(eq? e 'BSLeaveAHoleHere) hole]
             [(eq? e 'BSLeaveAHoleHere2) hole2]
             [(eq? e 'BSLeaveAHoleHere3) hole3]
+            [(and (answer? e) wescheme)
+             (let ((e (cadr e)))
+               (holes-to-underscores
+                 (if *solutions-mode?* e (answer->hole e))
+                 #:wescheme #t))]
+            [(pair? e) (cons (holes-to-underscores (car e) #:wescheme wescheme)
+                             (holes-to-underscores (cdr e) #:wescheme wescheme))]
             [else e]))))
 
 (define (sexp->wescheme e)
   ;(printf "doing sexp->wescheme ~s\n" e)
-  (enclose-textarea ".racket" (format "~s" (holes-to-underscores e)))
+  (enclose-textarea ".racket" (format "~s" (holes-to-underscores e #:wescheme #t)))
   ;(enclose-textarea ".racket" (sexp->block e))
   )
 
