@@ -87,33 +87,67 @@
                         (loop (+ i 1) (+ j 1)))))))
             #f))))
 
+(define *lorem-sentences*
+  ;has to match *lorem* in make-questionnaire.rkt
+  (list
+    "Ad rem est vero cum ratione. Optio dolor molestiae consequatur"
+    "perferendis sint amet eligendi. Minus unde odit quod officia sit"
+    "ut impedit facilis. Voluptatum alias illo et dolore impedit aut"
+    "vitae qui. Laborum itaque ipsa possimus et."))
+
+(define (lorem? ln)
+  (ormap (lambda (s) (regexp-match s ln)) *lorem-sentences*))
+
 (define (check-questions-answered)
   (call-with-input-file *student-file*
     (lambda (i)
-      (let ((ok? #t))
+      (let ((ok? #t)
+            [optional-q-answered? #t])
         (let loop ()
           (let ((ln (read-line i)))
             (unless (eof-object? ln)
               ;(printf "XXX ln = ~s\n" ln)
-              (when (regexp-match "^// +(Common|Required) Question +:.+:?: *$" ln)
-                ;(printf "XXX found a common/reqd q ~s\n" ln)
-                (let ((tag (regexp-replace "^// +(Common|Required) Question +(:.+?:) *$" ln "\\2"))
-                      (answered? #f))
-                  (let loop2 ()
-                    (let ((ln (read-line i)))
-                      ;(printf "XXX loop2 ln = ~s\n" ln)
-                      (unless (or (eof-object? ln)
-                                  (regexp-match "^include::" ln))
-                        (cond ((regexp-match "^//" ln) #f)
-                              ((regexp-match "^ *$" ln) #f)
-                              (else (set! answered? #t)))
-                        (unless answered? (loop2)))))
-                  (unless answered?
-                    (set! ok? #f)
-                    (printf "Student file has unanswered question ~a\n" tag))))
+              (cond [(regexp-match "^// +(Common|Required) Question +:.+?: *$" ln)
+                     ;(printf "XXX found a common/reqd q ~s\n" ln)
+                     (let ((tag (regexp-replace "^// +(Common|Required) Question +(:.+?:) *$" ln "\\2"))
+                           (answered? #f))
+                       (let loop2 ()
+                         (let ((ln (read-line i)))
+                           ;(printf "XXX loop2 ln = ~s\n" ln)
+                           (unless (or (eof-object? ln)
+                                       (regexp-match "^include::" ln))
+                             (cond ((regexp-match "^//" ln) #f)
+                                   ((regexp-match "^ *$" ln) #f)
+                                   (else (set! answered? #t)))
+                             (unless answered? (loop2)))))
+                       (unless answered?
+                         (set! ok? #f)
+                         (printf "Student file has unanswered question ~a\n" tag)))]
+                    [(regexp-match "^// +Question +:.+?: *$" ln)
+                     (let ([tag (regexp-replace "^// +Question +(:.+?:) *$" ln "\\1")]
+                           [lorem-unmodified? #f]
+                           [answered? #f])
+                       (let loop2 ()
+                         (let ([ln (read-line i)])
+                           (unless (or (eof-object? ln)
+                                       (regexp-match "^include::" ln))
+                             (cond [(regexp-match "^//" ln) #f]
+                                   [(regexp-match "^ *$" ln) #f]
+                                   [(lorem? ln) (set! lorem-unmodified? #t)]
+                                   [else (set! answered? #t)])
+                             (unless answered? (loop2)))))
+                       (unless answered?
+                         (set! optional-q-answered? #f)
+                         (printf "Student file has unanswered optional question ~a\n" tag))
+                       (when lorem-unmodified?
+                         (set! optional-q-answered? #f)
+                         (printf "Student file has placeholder (\"lorem\") answer for question ~a\n" tag)))]
+                    )
               (loop))))
         (when ok?
           (printf "All required/common questions answered\n"))
+        (when optional-q-answered?
+          (printf "All optional questions answered\n"))
         ok?))))
 
 (define (common-answer-include? ln)
