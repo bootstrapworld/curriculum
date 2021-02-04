@@ -19,6 +19,11 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
   (define expr3 '(+ (sqrt 4) 1))
   (define expr4 '(+ (* 3 (sqrt 3)) (sqrt 7)))
 
+  (define mat1 (sexp->math expr1))
+  (define mat2 (sexp->math expr2))
+  (define mat3 (sexp->math expr3))
+  (define mat4 (sexp->math expr4))
+
   (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
   (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
   (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
@@ -33,9 +38,9 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 
 [cols=".^1a,^8a,^15,^15a",options="header",stripes="none"]
 |===
-|   | Arithmetic				      | Circle of Evaluation	 | Code
-|*1*| @math{\sqrt 9}			    | @show{coe1}			       | @show{code1}
-|*2*| @math{\sqrt{5 + 1}}		  | @show{coe2}			       | @show{code2}
-|*3*| @math{\sqrt 4 + 1}		  | @show{coe3}			       | @show{code3}
-|*4*| @math{3\sqrt 3 + \sqrt 7}|@show{coe4}			       | @show{code4}
+|   | Arithmetic		| Circle of Evaluation	 | Code
+|*1*| @show{mat1}		| @show{coe1}		 | @show{code1}
+|*2*| @show{mat2}		| @show{coe2}		 | @show{code2}
+|*3*| @show{mat3}		| @show{coe3}		 | @show{code3}
+|*4*| @show{mat4}		| @show{coe4}		 | @show{code4}
 |===

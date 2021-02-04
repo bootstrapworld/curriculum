@@ -18,6 +18,13 @@ For each expression on the left, finish the Circle of Evaluation on the right by
   (define expr5 '(+ (* 6 4) (/ (- 9 -6) 5) ))
   (define expr6 '(- (/ 20 (+ 6 4))(/ (* 5 9) (- -12 3))))
 
+  (define mat1 (sexp->math expr1))
+  (define mat2 (sexp->math expr2))
+  (define mat3 (sexp->math expr3))
+  (define mat4 (sexp->math expr4))
+  (define mat5 (sexp->math expr5))
+  (define mat6 (sexp->math expr6))
+
   (define coe1 '((?ANS -) ((?ANS +) 4 2) (/ (?ANS 10) 5)))
   (define coe2 '(+ ((?ANS -) 7 1) (* (?ANS 5) (?ANS 8))))
   (define coe3 '(/ (?ANS -15) (+ 5 (?ANS -8))))
@@ -33,11 +40,11 @@ For each expression on the left, finish the Circle of Evaluation on the right by
 
 [cols=".^2a,^8a,^12a",options="header",stripes="none"]
 |===
-|           | Arithmetic Expression              			    | Circle of Evaluation
-|*1*        | @math{4 + 2 - {\frac {10} {5}}}    	        | @show{(sexp->coe coe1)}
-|*2*        | @math{7 - 1 + 5 \times 8}   			          | @show{(sexp->coe coe2)}
-|*3*        | @show{(sexp->math expr3)}    			          | @show{(sexp->coe coe3)}
-|*4*        | @show{(sexp->math expr4)}   			          | @show{(sexp->coe coe4)}
-|*5*        | @math{6 \times 4 + {\frac {9 - -6} {5}}}    | @show{(sexp->coe coe5)}
-|*Challenge*| @show{(sexp->math expr6)}    			          | @show{(sexp->coe coe6)}
+|           | Arithmetic Expression     | Circle of Evaluation
+|*1*        | @show{mat1}    	        | @show{(sexp->coe coe1)}
+|*2*        | @show{mat2}   		| @show{(sexp->coe coe2)}
+|*3*        | @show{mat3}    		| @show{(sexp->coe coe3)}
+|*4*        | @show{mat4}   		| @show{(sexp->coe coe4)}
+|*5*        | @show{mat5}    		| @show{(sexp->coe coe5)}
+|*Challenge*| @show{mat6}    		| @show{(sexp->coe coe6)}
 |===

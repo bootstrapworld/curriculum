@@ -15,6 +15,10 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
   (define expr2 '(- (- 45 (* 9 (+ 3 (- 2 4)))) 7))
   (define expr3 '(- (* (/ 50 5) 2)(- (*(+ 3 4) 2) 5)))
 
+  (define mat1 (sexp->math expr1))
+  (define mat2 (sexp->math expr2))
+  (define mat3 (sexp->math expr3))
+
   (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
   (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
   (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
@@ -34,21 +38,21 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
 | Code
 
 |*1*
-| @math{\frac{16 + 3^2}{\sqrt{49} - 2}}
+| @show{mat1}
 
 @vspace{20ex}
 |  @show{coe1}
 | @show{code1}
 
 |*2*
-| @math{45 - 9 \times (3 + [2 - 4]) - 7}
+| @show{mat2}
 
 @vspace{20ex}
 | @show{coe2}
 | @show{code2}
 
 |*3*
-| @math{50 \div 5 \times 2 - [(3 + 4) \times 2 - 5]}
+| @show{mat3}
 
 @vspace{20ex}
 | @show{coe3}
