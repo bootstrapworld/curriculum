@@ -1492,7 +1492,7 @@
           (if (and wrap (or (not encloser)
                             parens
                             (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
-                            (and (eq? encloser '-) (not (memq a '(+ * / expt))))
+                            (and (eq? encloser '-) (not (memq a '(* / expt))))
                             (and (eq? encloser '*) (not (memq a '(* / expt))))))
               (format "(~a)" x)
               x)))))
