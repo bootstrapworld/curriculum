@@ -1474,25 +1474,29 @@
 (define (answer-block-fill-length e)
   "")
 
-(define (infix-sexp->math a e #:wrap (wrap #t) #:encloser (encloser #f))
+(define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
+                          #:parens [parens #f])
   (let ([n (length e)])
     (if (and (eq? a '/) (= n 2))
         (format "{{~a} \\over {~a}}"
-                (sexp->arith (list-ref e 0))
-                (sexp->arith (list-ref e 1)))
+                (sexp->arith (list-ref e 0) #:parens parens)
+                (sexp->arith (list-ref e 1) #:parens parens))
         (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
                          [(eq? a '/) "\\div"]
                          [(eq? a 'expt) "^"]
                          [else a])]
-               [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t #:encloser a)) e)]
+               [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t
+                                                    #:encloser a #:parens parens)) e)]
                [x (string-join args (format " ~a " am))])
           (if (and wrap (or (not encloser)
+                            parens
                             (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
                             (and (eq? encloser '*) (not (memq a '(* / expt))))))
               (format "(~a)" x)
               x)))))
 
-(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f] #:encloser [encloser #f])
+(define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
+                     #:encloser [encloser #f] #:parens [parens #f])
   ;(printf "doing sexp->arith (~a) ~s\n" pyret e)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
@@ -1505,7 +1509,7 @@
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
                            (enclose-span (format ".studentAnswerFilled~a" fill-len)
-                             (sexp->arith e #:pyret pyret #:wrap wrap))
+                             (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens))
                            (enclose-span (format ".studentAnswerUnfilled~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
@@ -1522,7 +1526,8 @@
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*)  ;XXX
                                                  (infix-op? a #:pyret #f)
                                                  ))
-                            (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser)]
+                            (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
+                                              #:parens parens)]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
@@ -1533,15 +1538,16 @@
                                     [else
                                       (format "var ~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
-                            (format "\\sqrt{~a}" (sexp->arith (cadr e)))]
+                            (format "\\sqrt{~a}" (sexp->arith (cadr e) #:parens parens))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
-                            (format "{~a}^2" (sexp->arith (cadr e)))]
+                            (format "{~a}^2" (sexp->arith (cadr e) #:parens parens))]
                            [else
                              (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
-                                     (sexp->arith a #:pyret pyret)
+                                     (sexp->arith a #:pyret pyret #:parens parens)
                                      (string-join
                                        (map (lambda (e1)
-                                              (sexp->arith e1 #:pyret pyret)) (cdr e))
+                                              (sexp->arith e1 #:pyret pyret #:parens parens))
+                                            (cdr e))
                                        ", "))]
                            ))]
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
@@ -1577,9 +1583,9 @@
   ;(printf "doing sexp->pyret ~s\n" e)
   (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
 
-(define (sexp->math e)
+(define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s\n" e)
-  (enclose-math (sexp->arith e)))
+  (enclose-math (sexp->arith e #:parens parens)))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")

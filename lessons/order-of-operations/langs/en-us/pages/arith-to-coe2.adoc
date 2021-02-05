@@ -17,10 +17,10 @@ For each math expression on the left, draw its Circle of Evaluation on the right
   (define expr3 '(* (* 23 14) (+ 3 20)))
   (define expr4 '(+ (- 5 17) (* 14 5)))
 
-  (define mat1 (sexp->math expr1))
-  (define mat2 (sexp->math expr2))
-  (define mat3 (sexp->math expr3))
-  (define mat4 (sexp->math expr4))
+  (define mat1 (sexp->math expr1 #:parens #t))
+  (define mat2 (sexp->math expr2 #:parens #t))
+  (define mat3 (sexp->math expr3 #:parens #t))
+  (define mat4 (sexp->math expr4 #:parens #t))
 
   (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
   (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
