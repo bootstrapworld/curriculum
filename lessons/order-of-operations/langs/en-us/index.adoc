@@ -113,7 +113,7 @@ If working in pairs, make sure you each take a turn at the keyboard. Suggestions
 - Do fractions work? Decimals?
 - Do negative numbers work?
 
-Remember, we're only trying _numbers_ for now, not operations like @math{3 - 6}, @math{\sqrt{16}} or @math{4^2}
+Remember, we're only trying _numbers_ for now, not operations like @smath{(- 3 6)}, @smath{(sqrt 16)} or @smath{(expt 4 2)}
 --
 
 [.notice-box, cols="1", grid="none", stripes="none"]
@@ -146,12 +146,12 @@ Students are given a challenging expression that exposes common misconceptions a
 
 Humans also use verbs like "throw", "run", "build" and "jump" to describe operations on these nouns. Mathematics has @vocab{functions} - or "operations" - like addition and subtraction, which are operations performed on values. Just as you can "*spread* _mustard_ on _bread_", a person can also "*add* _four_ and _five_".
 
-A mathematical expression is like a sentence: it’s an instruction for doing something. The expression @math{4 + 5} tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @math{4 + 5} evaluates to 9.
+A mathematical expression is like a sentence: it’s an instruction for doing something. The expression @smath{(+ 4 5)} tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @smath{(+ 4 5)} evaluates to 9.
 
 @span{.right}{@image{images/pemdas.png, "", 300, ""}}
 Sometimes, we need multiple expressions to accomplish a task, and it will matter in which order they come. For example, if you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. The order of functions matters in mathematics, too.
 
-Mathematicians didn’t always agree on the order of operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @math{4 + 2 − 1}), we read the expression from left to right, applying the operations in the order in which they appear.
+Mathematicians didn’t always agree on the order of operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @smath{(+ 4 (- 2 1))}), we read the expression from left to right, applying the operations in the order in which they appear.
 
 @span{.clear}{}
 
@@ -179,13 +179,13 @@ That means that Numbers (e.g. - `3`, `-29`, `77.01`...) are still written by the
 [.lesson-point]
 2) The inputs to the function are written left-to-right, in the middle of the Circle.
 
-If we want to draw the Circle of Evaluation for @math{6 \div 3}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
+If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
 
 [.centered-image]
 @show{(sexp->coe '(/ 6 3))}
 @span{.clear}{}
 
-What if we want to use multiple functions? How would we draw the Circle of Evaluation for @math{6 \div (1 + 2)}? Drawing the Circle of Evaluation for the @math{1 + 2} is easy. But how do we divide 6 by that circle?
+What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we divide 6 by that circle?
 
 *Circles can contain other Circles*
 
@@ -246,9 +246,9 @@ Practice creating Circles of Evaluation using the common operators (`+`, `-`, `*
 
 *Circles of Evaluation _help us get the correct answer_*
 
-Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @math{a + b} can always be written as @math{b + a}." For example, @math{1 + 2} can be transformed to @math{2 + 1}.
+Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
-Suppose another student tells you that @math{1 + 2 * 3} can be rewritten as @math{2 + 1 * 3}. This is obviously wrong, but __why__? *Take a moment to think: what's the problem?*
+Suppose another student tells you that @smath{(+ 1 (* 2 3))} can be rewritten as @smath{(+ 2 (* 1 3))}. This is obviously wrong, but __why__? *Take a moment to think: what's the problem?*
 
 We can use the Circles of Evaluation to figure it out!
 
@@ -260,7 +260,7 @@ The first Circle is just the original expression. The second expression represen
 | @show{(sexp->coe '(+ 2 (* 1 3)))}
 |===
 
-In this case, the student __failed to see the structure__, viewing the term to the right of the @math{+} sign as @math{2} instead of @math{2 * 3}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
+In this case, the student __failed to see the structure__, viewing the term to the right of the @smath{+} sign as @smath{2} instead of @smath{(* 2 3)}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
