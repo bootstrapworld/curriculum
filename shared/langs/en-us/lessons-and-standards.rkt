@@ -250,7 +250,14 @@
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
         )
-   
+    ("combinatorics-permutation"
+        "HSS.CP.B.9"
+        "OK.SP.1.5"
+        )
+   ("combinatorics-combination"
+        "HSS.CP.B.9"
+        "OK.SP.1.5"
+        )
 
     ;data science
     

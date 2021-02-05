@@ -830,6 +830,8 @@ the denominator when necessary."
  ("OK.L1.IC.SLE.03" 
   "Evaluate the social and economic consequences of how law and ethics interact with digital aspects of privacy, data, property, information, and identity."
  )
+ ("OK.SP.1.5"
+  "Use counting techniques including permutations and combinations to solve mathematical and real-world problems, including determining probabilities of compound events. ")
    
 ))
 
