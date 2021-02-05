@@ -143,7 +143,7 @@
         "OK.PA.A.4.3"
         "OK.A1.A.2"
         )    
-    ("scaling-to-make-game-images" 
+    ("making-game-images" 
         "7.RP.A.1"
         "8.G.A.1"
         "1B-AP-14" ; STEMworks
@@ -180,7 +180,7 @@
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.1"
         )
-    ("functions-for-player-animation" 
+    ("player-animation" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B"   ; STEMworks
         "MP.4"     ; STEMworks
