@@ -1476,6 +1476,7 @@
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
                           #:parens [parens #f])
+  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s\n" a e wrap encloser parens)
   (let ([n (length e)])
     (if (and (eq? a '/) (= n 2))
         (format "{{~a} \\over {~a}}"
@@ -1491,13 +1492,14 @@
           (if (and wrap (or (not encloser)
                             parens
                             (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
+                            (and (eq? encloser '-) (not (memq a '(+ * / expt))))
                             (and (eq? encloser '*) (not (memq a '(* / expt))))))
               (format "(~a)" x)
               x)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
                      #:encloser [encloser #f] #:parens [parens #f])
-  ;(printf "doing sexp->arith (~a) ~s\n" pyret e)
+  ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
