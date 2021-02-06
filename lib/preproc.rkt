@@ -1475,7 +1475,7 @@
   "")
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
-                          #:parens [parens #f])
+                          #:parens [parens #f] #:first [first #f])
   ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s\n" a e wrap encloser parens)
   (let ([n (length e)])
     (if (and (eq? a '/) (= n 2))
@@ -1486,19 +1486,30 @@
                          [(eq? a '/) "\\div"]
                          [(eq? a 'expt) "^"]
                          [else a])]
+               [e1 (if (>= n 1) (car e) #f)]
+               [rest-e (if (>= n 1) (cdr e) '())]
+               [arg1 (and e1
+                         (sexp->arith e1 #:pyret #f #:wrap #t
+                                      #:encloser a #:parens parens #:first #t))]
                [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t
-                                                    #:encloser a #:parens parens)) e)]
+                                                    #:encloser a #:parens parens)) rest-e)]
+               [args (if e1 (cons arg1 args) args)]
                [x (string-join args (format " ~a " am))])
-          (if (and wrap (or (not encloser)
-                            parens
-                            (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
-                            (and (eq? encloser '-) (not (memq a '(+ * / expt))))
-                            (and (eq? encloser '*) (not (memq a '(* / expt))))))
-              (format "(~a)" x)
-              x)))))
+          (let ([ans (if (and wrap (or (not encloser)
+                                       parens
+                                       (and (eq? encloser '+) (not (memq a '(+ - * / expt))))
+                                       (and (eq? encloser '-)
+                                            (if first
+                                                (not (memq a '(+ - * / expt)))
+                                                (not (memq a '(* / expt)))))
+                                       (and (eq? encloser '*) (not (memq a '(* / expt))))))
+                         (format "(~a)" x)
+                         x)])
+            ;(printf "infix ret'd ~s\n" ans)
+            ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
-                     #:encloser [encloser #f] #:parens [parens #f])
+                     #:encloser [encloser #f] #:parens [parens #f] #:first [first #f])
   ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
@@ -1529,7 +1540,7 @@
                                                  (infix-op? a #:pyret #f)
                                                  ))
                             (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
-                                              #:parens parens)]
+                                              #:parens parens #:first first)]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
