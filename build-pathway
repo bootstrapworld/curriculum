@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2020-12-20 # last modified
+LASTMOD=2021-02-06 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -290,7 +290,10 @@ function adjustgdrivecolgroup() {
 
   local num=$(wc -l $CTEMPFILE|sed -e 's/^ *\([^ ]*\).*/\1/')
 
-  if test $num -eq 0; then return; fi
+  if test $num -eq 0; then
+    rm -f $CTEMPFILE
+    return
+  fi
 
   sed -i \
     -e 's/^<col //' \
@@ -686,6 +689,13 @@ function processadoc() {
         fi
       fi
     fi
+    if test ! $OTHERDIR; then
+      if $DEBUG; then
+        if test -f $fasc; then
+          rm $fasc
+        fi
+      fi
+    fi
     if test $DOITPDF; then
       if test -f "$fhtml"; then
         if test ! $NOPDF; then
@@ -960,6 +970,9 @@ function buildlessonplan() {
           echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
       fi
+    fi
+    if test ! $DEBUG; then
+      rm *.asc
     fi
   fi
   cd ../..
@@ -1251,8 +1264,12 @@ function batchhtmltopdf() {
 function rmtmpfiles() {
   test $DEBUG && return
 
-  for f in adoc asciidoc aux log rkt tex title txt; do
+  for f in adoc asciidoc aux log rkt tex title; do
     find . -name \*.$f -delete
+  done
+
+  for f in txt; do
+    find . -name \*.$f | grep -v 'workbook-pages\.txt' | xargs rm
   done
 
   for wbf in workbook pd-workbook; do
@@ -1533,7 +1550,7 @@ function buildpathway() {
 
     buildteacherresource
 
-    #rmtmpfiles
+    rmtmpfiles
 
   fi
 
@@ -1585,7 +1602,7 @@ function allthestandards() {
   insertbodyid Standards.shtml
   resolveabbrevs Standards.shtml
 
-  #if test ! $DEBUG; then rm *.asc *.txt fi
+  if test ! $DEBUG; then rm *.asc *.txt; fi
 
   cd $TOPDIR
 }
