@@ -1476,7 +1476,7 @@
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
                           #:parens [parens #f] #:first [first #f])
-  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens first)
+  (printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens first)
   (let ([n (length e)])
     (if (and (eq? a '/) (= n 2))
         (format "{{~a} \\over {~a}}"
@@ -1506,9 +1506,9 @@
                                                 (not (memq a '(+ - * / expt)))
                                                 (not (memq a '(* / expt)))))
                                        (and (eq? encloser '*) (not (memq a '(* / expt))))))
-                         (format "(~a)" x)
+                         (format "( ~a )" x)
                          x)])
-            ;(printf "infix ret'd ~s\n" ans)
+            (printf "infix ret'd ~s\n" ans)
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
@@ -1554,9 +1554,9 @@
                                     [else
                                       (format "var ~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
-                            (format "\\sqrt{~a}" (sexp->arith (cadr e) #:parens parens))]
+                            (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
-                            (format "{~a}^2" (sexp->arith (cadr e) #:parens parens))]
+                            (format " { ~a }^2" (sexp->arith (cadr e) #:parens parens))]
                            [else
                              (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
                                      (sexp->arith a #:pyret pyret #:parens parens)
