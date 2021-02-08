@@ -1512,13 +1512,13 @@
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
-                     #:encloser [encloser #f] #:parens [parens #f] #:first [first #f])
+                     #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
   ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(number? e) (format "~a" e)]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))]
-        [(symbol? e) (sym-to-adocstr e #:pyret pyret)]
+        [(symbol? e) (sym-to-adocstr e #:pyret pyret #:tex tex)]
         [(string? e) (format "~s" e)]
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-fill-length e)])
@@ -1601,14 +1601,14 @@
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
-  (enclose-math (sexp->arith e #:parens parens)))
+  (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e)
   ((if (string=? *proglang* "pyret")
        sexp->pyret
        sexp->wescheme) e))
 
-(define (sym-to-adocstr e #:pyret [pyret #f])
+(define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s ~a\n" e pyret)
   (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
                      [(eq? e 'sqrt) "num-sqrt"]
@@ -1618,10 +1618,13 @@
                      [(eq? e '+) "{plus}"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (format "~a" e)])]
-        [(eq? e '<=) "\\<="]
-        [(eq? e '+) "{plus}"]
-        [(memq e '(* -)) (format "{zwsp}~a" e)]
-        [else (format "~a" e)]))
+        [(not tex) (cond [(eq? e '<=) "\\<="]
+                         [(eq? e '+) "{plus}"]
+                         [(memq e '(* -)) (format "{zwsp}~a" e)]
+                         [else (format "~a" e)])]
+        [else (cond [(eq? e '<=) " \\le "]
+                    [else
+                      (format "~a" e)])]))
 
 (define (sexp->block-table e #:pyret [pyret #f])
   ;(printf "doing sexp->block-table ~s ~a\n" e pyret)
