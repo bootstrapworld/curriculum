@@ -1619,6 +1619,7 @@
                      [(eq? e 'sqrt) "num-sqrt"]
                      [(eq? e 'sqr) "num-sqr"]
                      [(eq? e 'expt) "num-expt"]
+                     [(eq? e 'pi) "num-pi"]
                      [(eq? e '=) "=="]
                      [(eq? e '+) "{plus}"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
