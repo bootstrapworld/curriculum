@@ -13,7 +13,7 @@
 (require "standards-k12cs-dictionary.rkt")
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
-(require "standards-cmp-dictionary.rkt")
+(require "textbook-cmp-dictionary.rkt")
 
 (define *standards-list*
   (list
