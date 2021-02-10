@@ -25,7 +25,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-02-08 # last modified
+LASTMOD=2021-02-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -972,7 +972,7 @@ function buildlessonplan() {
       fi
     fi
     if test ! $DEBUG; then
-      rm *.asc
+      rm -f *.asc
     fi
   fi
   cd ../..
@@ -1602,7 +1602,7 @@ function allthestandards() {
   insertbodyid Standards.shtml
   resolveabbrevs Standards.shtml
 
-  if test ! $DEBUG; then rm *.asc *.txt; fi
+  if test ! $DEBUG; then rm -f *.asc *.txt; fi
 
   cd $TOPDIR
 }

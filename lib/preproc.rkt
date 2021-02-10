@@ -1480,8 +1480,8 @@
   (let ([n (length e)])
     (if (and (eq? a '/) (= n 2))
         (format "{{~a} \\over {~a}}"
-                (sexp->arith (list-ref e 0) #:parens parens)
-                (sexp->arith (list-ref e 1) #:parens parens))
+                (sexp->arith (list-ref e 0) #:parens parens #:tex #t)
+                (sexp->arith (list-ref e 1) #:parens parens #:tex #t))
         (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
                          [(eq? a '/) "\\div"]
                          [(eq? a 'expt) "^"]
@@ -1490,9 +1490,9 @@
                [rest-e (if (>= n 1) (cdr e) '())]
                [arg1 (and e1
                          (sexp->arith e1 #:pyret #f #:wrap #t
-                                      #:encloser a #:parens parens #:first #t))]
+                                      #:encloser a #:parens parens #:first #t #:tex #t))]
                [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t
-                                                    #:encloser a #:parens parens)) rest-e)]
+                                                    #:encloser a #:parens parens #:tex #t)) rest-e)]
                [args (if e1 (cons arg1 args) args)]
                [x (string-join args (format " ~a " am))])
           (let ([ans (if (and wrap (or (not encloser)
@@ -1614,11 +1614,12 @@
        sexp->wescheme) e))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
-  ;(printf "sym-to-adocstr ~s ~a\n" e pyret)
+  ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
   (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
                      [(eq? e 'sqrt) "num-sqrt"]
                      [(eq? e 'sqr) "num-sqr"]
                      [(eq? e 'expt) "num-expt"]
+                     [(eq? e 'pi) "num-pi"]
                      [(eq? e '=) "=="]
                      [(eq? e '+) "{plus}"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
@@ -1628,6 +1629,7 @@
                          [(memq e '(* -)) (format "{zwsp}~a" e)]
                          [else (format "~a" e)])]
         [else (cond [(eq? e '<=) " \\le "]
+                    [(eq? e 'pi) " \\pi "]
                     [else
                       (format "~a" e)])]))
 
