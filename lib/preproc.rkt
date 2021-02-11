@@ -1446,11 +1446,14 @@
 (define (answer? e)
   (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
 
+(define *common-infix-ops*
+ '(+ - * / and or < > = <= >= frac))
+
 (define *pyret-infix-ops*
- '(+ - * / and or < > = <= >=))
+  (append *common-infix-ops*))
 
 (define *arith-infix-ops*
-  (append *pyret-infix-ops* '(expt)))
+  (append *common-infix-ops* '(expt)))
 
 (define (infix-op? e #:pyret [pyret #f])
   (cond ((not (list? e)) (memq e (if pyret *pyret-infix-ops* *arith-infix-ops*)))
@@ -1483,7 +1486,8 @@
                 (sexp->arith (list-ref e 0) #:parens parens #:tex #t)
                 (sexp->arith (list-ref e 1) #:parens parens #:tex #t))
         (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
-                         [(eq? a '/) "\\div"]
+                         [(eq? a '/) "\\div"] ;XXX dead except for multi-ary /
+                         [(eq? a 'frac) "\\div"]
                          [(eq? a 'expt) "^"]
                          [else a])]
                [e1 (if (>= n 1) (car e) #f)]
@@ -1499,13 +1503,13 @@
                                        parens
                                        (and (eq? encloser '+)
                                             (if first
-                                                (not (memq a '(+ - * / expt)))
-                                                (not (memq a '(* / expt)))))
+                                                (not (memq a '(+ - * / frac expt)))
+                                                (not (memq a '(* / frac expt)))))
                                        (and (eq? encloser '-)
                                             (if first
-                                                (not (memq a '(+ - * / expt)))
-                                                (not (memq a '(* / expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* / expt))))))
+                                                (not (memq a '(+ - * / frac expt)))
+                                                (not (memq a '(* / frac expt)))))
+                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))))
                          (format "( ~a )" x)
                          x)])
             ;(printf "infix ret'd ~s\n" ans)
@@ -1555,6 +1559,12 @@
                                       (format "var ~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
                             (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
+                           [(and (eq? a 'frac) (= (length e) 3) (not pyret))
+                            ;XXX dead now, but maybe in future
+                            (format "{\\textstyle\\frac{ ~a }{ ~a } }"
+                                    (sexp->arith (cadr e) #:parens parens)
+                                    (sexp->arith (caddr e) #:parens parens)
+                                    )]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
                             (let* ([x (cadr e)]
                                    [xm (sexp->arith x #:parens parens)])
@@ -1582,9 +1592,10 @@
     (lambda (e #:wescheme [wescheme #f])
       ;(printf "doing holes-to-underscores ~s\n" e)
       (cond [(or (null? e) (number? e) (string? e)) e]
-            [(eq? e 'BSLeaveAHoleHere) hole]
+            [(eq? e 'BSLeaveAHoleHere) hole] ;XXX used anymore?
             [(eq? e 'BSLeaveAHoleHere2) hole2]
             [(eq? e 'BSLeaveAHoleHere3) hole3]
+            [(and (eq? e 'frac) wescheme) '/]
             [(and (answer? e) wescheme)
              (let ((e (cadr e)))
                (holes-to-underscores
@@ -1622,6 +1633,7 @@
                      [(eq? e 'pi) "num-pi"]
                      [(eq? e '=) "=="]
                      [(eq? e '+) "{plus}"]
+                     [(eq? e 'frac) "/"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (format "~a" e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]

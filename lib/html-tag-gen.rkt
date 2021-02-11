@@ -74,6 +74,7 @@
   (set! x (regexp-replace* "{" x "( "))
   (set! x (regexp-replace* "}" x " )"))
   (set! x (regexp-replace* "\\( *([^() ]+) *\\)" x "\\1"))
+  (set! x (regexp-replace* "\\\\textstyle" x ""))
   x)
 
 (define (enclose-math e)
