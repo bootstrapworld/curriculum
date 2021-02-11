@@ -1481,12 +1481,12 @@
                           #:parens [parens #f] #:first [first #f])
   ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens first)
   (let ([n (length e)])
-    (if (and (eq? a '/) (= n 2))
+    (if (and (eq? a 'frac) (= n 2))
         (format "{{~a} \\over {~a}}"
                 (sexp->arith (list-ref e 0) #:parens parens #:tex #t)
                 (sexp->arith (list-ref e 1) #:parens parens #:tex #t))
         (let* ([am (cond [(eq? a '*) "\\;\\times\\;"]
-                         [(eq? a '/) "\\div"] ;XXX dead except for multi-ary /
+                         [(eq? a '/) "\\div"]
                          [(eq? a 'frac) "\\div"]
                          [(eq? a 'expt) "^"]
                          [else a])]
@@ -1559,12 +1559,6 @@
                                       (format "var ~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
                             (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
-                           [(and (eq? a 'frac) (= (length e) 3) (not pyret))
-                            ;XXX dead now, but maybe in future
-                            (format "{\\textstyle\\frac{ ~a }{ ~a } }"
-                                    (sexp->arith (cadr e) #:parens parens)
-                                    (sexp->arith (caddr e) #:parens parens)
-                                    )]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
                             (let* ([x (cadr e)]
                                    [xm (sexp->arith x #:parens parens)])
