@@ -593,7 +593,7 @@
             ;TODO: probably not needed anymore
             (cond [(file-exists? f.asc) (set! f f.asc)])
             ;FIXME: avoid erroring include: if file doesn't exist?
-            (format "include::~a[]" f))]))
+            (format "include::~a[~a]" f link-text))]))
 
 (define *lesson-summary-file* #f)
 
@@ -968,8 +968,10 @@
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive)]
                                    [adocf (car args)] ;only one right? FIXME
+                                   [rest-args (string-join
+                                                (map string-trim (cdr args)) ",")]
                                    )
-                              (display (make-link adocf "" #:include? #t) o))]
+                              (display (make-link adocf rest-args #:include? #t) o))]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
