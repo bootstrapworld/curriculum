@@ -9,10 +9,10 @@ html, body {
   font-size:      12pt;
   font-family:    'Lato', Arial, Helvetica, sans-serif;
   color:          #75328A;
-  -webkit-font-smoothing: antialiased;
   break-inside:   auto !important;
-  page-break-inside: auto !important;
   display:        block !important;
+  page-break-inside: auto !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 p       { margin: 10px 0px; font-size: inherit; }
@@ -496,6 +496,7 @@ table.exercises_and_solutions, table.exercises_and_solutions * {
   padding:            0px;
   background:         none !important;
 }
+table.exercises_and_solutions table td p { margin: 5px; }
 table.exercises_and_solutions table td:last-child { text-align: right; }
 table.exercises_and_solutions>tbody>tr>td:first-child * { font-weight: bold; }
 table.exercises_and_solutions tr td:last-child .content {
@@ -505,7 +506,9 @@ table.exercises_and_solutions tr td:last-child .content {
   transition:         max-height linear 0.5s; 
   display:            block;
 }
-table.exercises_and_solutions tr:hover td:last-child .content {max-height: 1000px; }
+table.exercises_and_solutions tr:hover td:last-child .content {
+  max-height: 300px; overflow: scroll;
+}
 table.exercises_and_solutions table * { background: none !important; }
 table.exercises_and_solutions tr:hover {background: #7532892f !important; }
 table.exercises_and_solutions table tr:hover a {color: white; text-decoration: underline;}
