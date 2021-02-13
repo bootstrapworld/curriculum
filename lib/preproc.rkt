@@ -1634,6 +1634,7 @@
                      [else (format "~a" e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
+                         [(eq? e 'frac) "/"]
                          [(memq e '(* -)) (format "{zwsp}~a" e)]
                          [else (format "~a" e)])]
         [else (cond [(eq? e '<=) " \\le "]
