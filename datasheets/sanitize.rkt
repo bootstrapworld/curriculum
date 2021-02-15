@@ -4,7 +4,7 @@
 
 (define *args* (current-command-line-arguments))
 
-(define *student-file* #f)
+(define *author-file* #f)
 (define *admin-file* #f)
 (define *final-file* #f)
 
@@ -12,148 +12,125 @@
   (cond ((<= n 0)
          (error 'sanitize.rkt "Missing filename argument"))
         (else
-          (set! *student-file* (vector-ref *args* 0))
+          (set! *author-file* (vector-ref *args* 0))
           (when (>= n 2)
             (set! *admin-file* (vector-ref *args* 1))
             (when (>= n 3)
               (set! *final-file* (vector-ref *args* 2)))))))
 
-(define *student-file-basename*
-  (regexp-replace "([^ ]+)-student.adoc" *student-file* "\\1"))
+(define *author-file-basename*
+  (regexp-replace "([^ ]+)-author.adoc" *author-file* "\\1"))
 
-(when (string=? *student-file-basename* *student-file*)
-  (set! *student-file-basename* (regexp-replace "(.*).adoc" *student-file* "\\1")))
+(when (string=? *author-file-basename* *author-file*)
+  (set! *author-file-basename* (regexp-replace "(.*).adoc" *author-file* "\\1")))
 
 (unless *admin-file*
-  (set! *admin-file* (string-append *student-file-basename* "-admin.adoc")))
+  (set! *admin-file* (string-append *author-file-basename* "-admin.adoc")))
 
 (unless *final-file*
-  (set! *final-file* (string-append *student-file-basename* "-final.adoc")))
+  (set! *final-file* (string-append *author-file-basename* "-final.adoc")))
 
 (define (question-asked? ln)
-  (regexp-match
-    "^// +(Required Question|Common Question|Question|_) +:.+?: *$"
-    ln))
+  (let ([m (regexp-match
+             "^// +Question +:(.+?): *$"
+             ln)])
+    (and m (list-ref m 1))))
+
+(define (skip-to-answer i)
+  (let loop ()
+    (let ([ln (read-line i)])
+      (cond [(eof-object? ln) #f]
+            [(regexp-match "^//" ln) (loop)]
+            [(regexp-match "^ *$" ln) (loop)]
+            [else (string-trim ln)]))))
 
 (define (collect-tags #:admin? [admin? #f])
-  (let ((tags '()))
-    (call-with-input-file (if admin? *admin-file* *student-file*)
+  (let ([tags '()])
+    (call-with-input-file (if admin? *admin-file* *author-file*)
       (lambda (i)
         (let loop ()
-          (let ((ln (read-line i)))
+          (let ([ln (read-line i)])
             (unless (eof-object? ln)
-              (cond (admin?
+              (cond [admin?
                       (when (regexp-match "^:[^ ]+: *$" ln)
-                        (let ((tag (regexp-replace "^:([^ ]+):.*" ln "\\1")))
-                          (set! tags (cons tag tags)))))
-                    (else
-                      (when (question-asked? ln)
-                        (let ((tag
-                                (regexp-replace
-                                  "^// +(Required Question|Common Question|Question|_) +:(.+?): *$"
-                                  ln "\\2")))
-                          (set! tags (cons tag tags))))))
+                        (let ([ln2 (read-line i)])
+                          (when (and (string? ln2)
+                                     (and (regexp-match "\\.question" ln2)
+                                          (not (regexp-match "\\.common" ln2))))
+                            (let ([tag (regexp-replace "^:([^ ]+):.*" ln "\\1")])
+                              (set! tags (cons tag tags))))))]
+                    [else (when (question-asked? ln)
+                            (let ([tag (regexp-replace
+                                         "^// +Question +:(.+?): *$" ln "\\1")])
+                              (when (string=? tag "dataset-name")
+                                (let ([ans (skip-to-answer i)])
+                                  (when ans
+                                    (set! *final-file*
+                                      (string-append "datasheet-for-" ans ".adoc")))))
+                              (set! tags (cons tag tags))))])
               (loop))))))
     (reverse tags)))
 
 (define (check-tag-integrity)
   (let ((admin-tags (collect-tags #:admin? #t))
-        (student-tags (collect-tags)))
+        (author-tags (collect-tags)))
     ;(printf "a-tags = ~a\n" admin-tags)
-    ;(printf "s-tags = ~a\n" student-tags)
-    (cond ((equal? admin-tags student-tags)
-           (printf "Student file has all the tags in the right order\n")
+    ;(printf "s-tags = ~a\n" author-tags)
+    (cond ((equal? admin-tags author-tags)
+           (printf "Author file has all the tags in the right order\n")
            #t)
           (else
             (let ((num-admin-tags (length admin-tags))
-                  (num-student-tags (length student-tags)))
-              (cond ((< num-admin-tags num-student-tags)
-                     (printf "Student file has extra tags\n"))
-                    ((> num-admin-tags num-student-tags)
-                     (printf "Student file missing tags\n")))
+                  (num-author-tags (length author-tags)))
+              (cond ((< num-admin-tags num-author-tags)
+                     (printf "Author file has extra tags\n"))
+                    ((> num-admin-tags num-author-tags)
+                     (printf "Author file missing tags\n")))
               (let loop ((i 0) (j 0))
                 (unless (or (>= i num-admin-tags)
-                            (>= j num-student-tags))
+                            (>= j num-author-tags))
                   (let ((a-tag (list-ref admin-tags i))
-                        (s-tag (list-ref student-tags j)))
+                        (s-tag (list-ref author-tags j)))
                     (if (not (equal? a-tag s-tag))
                         (cond ((not (member s-tag admin-tags))
-                               (printf "Student file has unrecognized tag ~a\n" s-tag)
+                               (printf "Author file has unrecognized tag ~a\n" s-tag)
                                (loop i (+ j 1)))
                               (else
-                                (printf "Student file has tag ~a where admin file has ~a\n"
+                                (printf "Author file has tag ~a where admin file has ~a\n"
                                         s-tag a-tag)
                                 (loop (+ i 1) (+ j 1))))
                         (loop (+ i 1) (+ j 1)))))))
             #f))))
 
-(define *lorem-sentences*
-  ;has to match *lorem* in make-questionnaire.rkt
-  (list
-    "Ad rem est vero cum ratione. Optio dolor molestiae consequatur"
-    "perferendis sint amet eligendi. Minus unde odit quod officia sit"
-    "ut impedit facilis. Voluptatum alias illo et dolore impedit aut"
-    "vitae qui. Laborum itaque ipsa possimus et."))
-
-(define (lorem? ln)
-  (ormap (lambda (s) (regexp-match s ln)) *lorem-sentences*))
-
 (define (check-questions-answered)
-  (call-with-input-file *student-file*
+  (call-with-input-file *author-file*
     (lambda (i)
-      (let ((ok? #t)
-            [optional-q-answered? #t])
+      (let ([optional-q-answered? #t])
         (let loop ()
           (let ((ln (read-line i)))
             (unless (eof-object? ln)
               ;(printf "XXX ln = ~s\n" ln)
-              (cond [(regexp-match "^// +(Common|Required) Question +:.+?: *$" ln)
-                     ;(printf "XXX found a common/reqd q ~s\n" ln)
-                     (let ((tag (regexp-replace "^// +(Common|Required) Question +(:.+?:) *$" ln "\\2"))
-                           (answered? #f))
-                       (let loop2 ()
-                         (let ((ln (read-line i)))
-                           ;(printf "XXX loop2 ln = ~s\n" ln)
-                           (unless (or (eof-object? ln)
-                                       (regexp-match "^include::" ln))
-                             (cond ((regexp-match "^//" ln) #f)
-                                   ((regexp-match "^ *$" ln) #f)
-                                   (else (set! answered? #t)))
-                             (unless answered? (loop2)))))
-                       (unless answered?
-                         (set! ok? #f)
-                         (printf "Student file has unanswered question ~a\n" tag)))]
-                    [(regexp-match "^// +Question +:.+?: *$" ln)
-                     (let ([tag (regexp-replace "^// +Question +(:.+?:) *$" ln "\\1")]
-                           [lorem-unmodified? #f]
-                           [answered? #f])
-                       (let loop2 ()
-                         (let ([ln (read-line i)])
-                           (unless (or (eof-object? ln)
-                                       (regexp-match "^include::" ln))
-                             (cond [(regexp-match "^//" ln) #f]
-                                   [(regexp-match "^ *$" ln) #f]
-                                   [(lorem? ln) (set! lorem-unmodified? #t)]
-                                   [else (set! answered? #t)])
-                             (unless answered? (loop2)))))
-                       (unless answered?
-                         (set! optional-q-answered? #f)
-                         (printf "Student file has unanswered optional question ~a\n" tag))
-                       (when lorem-unmodified?
-                         (set! optional-q-answered? #f)
-                         (printf "Student file has placeholder (\"lorem\") answer for question ~a\n" tag)))]
-                    )
+              (when (regexp-match "^// +Question +:.+?: *$" ln)
+                (let ([tag (regexp-replace "^// +Question +(:.+?:) *$" ln "\\1")]
+                      [answered? #f])
+                  (let loop2 ()
+                    (let ([ln (read-line i)])
+                      (unless (or (eof-object? ln)
+                                  (regexp-match "^include::" ln))
+                        (cond [(regexp-match "^//" ln) #f]
+                              [(regexp-match "^ *$" ln) #f]
+                              [else (set! answered? #t)])
+                        (unless answered? (loop2)))))
+                  (unless answered?
+                    (set! optional-q-answered? #f)
+                    (printf "Author file has unanswered optional question ~a\n" tag))
+                  )
+                )
               (loop))))
-        (when ok?
-          (printf "All required/common questions answered\n"))
         (when optional-q-answered?
           (printf "All optional questions answered\n"))
-        ok?))))
-
-(define (common-answer-include? ln)
-  (let ((x (regexp-match "^// +common-answer::(.*)" ln)))
-    (and x
-         (string-append "include::" (list-ref x 1)))))
+        #t
+        ))))
 
 (define (include-call? ln)
   (regexp-match "^include::(.*)\\[lines=([0-9]+)\\.\\.([-0-9]+)\\]" ln))
@@ -170,11 +147,9 @@
             (let ((x (read-line i)))
               (unless (eof-object? x)
                 (when (>= k start-line)
-                  (display x o) (newline o))
+                  (unless (regexp-match "^:[^ ]+: *$" x)
+                    (display x o) (newline o)))
                 (loop (+ k 1))))))))))
-
-(define (insert-common? ln)
-  (regexp-match "^ *:common: *$" ln))
 
 (define (comment? ln)
   (regexp-match "^//" ln))
@@ -182,63 +157,49 @@
 (define (section-header? ln)
   (regexp-match "^=+ " ln))
 
-(define (check-common-answers)
-  (let ((common-answer-inserted? #f)
-        (common-answer-fragment #f))
-    (call-with-input-file *student-file*
-      (lambda (i)
-        (call-with-output-file *final-file*
-          (lambda (o)
-            (fprintf o "[.datasheet]\n")
-            (let ((track-question #f))
-              (let loop ()
-                (let ((ln (read-line i)))
-                  (unless (eof-object? ln)
-                    (cond ((common-answer-include? ln)
-                           => (lambda (x) (set! common-answer-fragment x)))
-                          ((section-header? ln)
-                           (when (eq? track-question 'within-answer)
-                             (set! track-question #f)
-                             (fprintf o "--\n\n"))
-                           (fprintf o "\n[.datasheet]\n")
-                           (display ln o) (newline o))
-                          ((include-call? ln)
-                           => (lambda (x)
-                                ;(printf "x = ~s\n" x)
-                                (when (eq? track-question 'within-answer)
-                                  (set! track-question #f)
-                                  (fprintf o "--\n"))
-                                (include-file-fragment x o)))
-                          ((insert-common? ln)
-                           (cond (common-answer-fragment
-                                   (set! common-answer-inserted? #t)
-                                   (include-file-fragment
-                                     (include-call? common-answer-fragment) o)
-                                   )
-                                 (else
-                                   (printf "WARNING: :common: used incorrectly\n"))))
-                          ((comment? ln)
-                           (when (question-asked? ln)
-                             (set! track-question 'within-question))
-                           #f)
-                          (else
-                            (when (eq? track-question 'within-question)
-                              (set! track-question 'within-answer)
-                              (fprintf o "\n[.answer]\n--\n"))
-                            (display ln o) (newline o)))
-                    (loop))))
-              (when (eq? track-question 'within-answer) (fprintf o "--\n"))
-              ))
-          #:exists 'replace)))
-    (when common-answer-inserted?
-      (printf "Stock answers needed to be inserted\n"))
-    #t))
+(define (create-final-file)
+  (call-with-input-file *author-file*
+    (lambda (i)
+      (printf "final-file is ~a\n" *final-file*)
+      (call-with-output-file *final-file*
+        (lambda (o)
+          (fprintf o "[.datasheet]\n")
+          (let ([track-question #f])
+            (let loop ()
+              (let ([ln (read-line i)])
+                (unless (eof-object? ln)
+                  (cond [(section-header? ln)
+                         (when (eq? track-question 'within-answer)
+                           (set! track-question #f)
+                           (fprintf o "--\n\n"))
+                         (fprintf o "\n[.datasheet]\n")
+                         (display ln o) (newline o)]
+                        [(include-call? ln)
+                         => (lambda (x)
+                              (when (eq? track-question 'within-answer)
+                                (set! track-question #f)
+                                (fprintf o "--\n\n"))
+                              (include-file-fragment x o))]
+                        [(comment? ln)
+                         (let ([tag (question-asked? ln)])
+                           (when tag (set! track-question 'within-question))
+                           )]
+                        [else
+                          (when (eq? track-question 'within-question)
+                            (set! track-question 'within-answer)
+                            (fprintf o "\n[.answer]\n--\n"))
+                          (display ln o) (newline o)])
+                  (loop))))
+            (when (eq? track-question 'within-answer)
+              (fprintf o "--\n"))
+            ))
+        #:exists 'replace))))
 
 (define (sanitize)
   (when (and (check-tag-integrity)
              (check-questions-answered)
-             (check-common-answers))
-    (printf "Sanitized form of ~s written to ~s\n" *student-file* *final-file*)))
+             (create-final-file))
+    (printf "Sanitized form of ~s written to ~s\n" *author-file* *final-file*)))
 
 (sanitize)
 

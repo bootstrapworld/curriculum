@@ -17,31 +17,8 @@
 (define *datasheet-name*
   (regexp-replace "([^ ]+)-admin.adoc" *admin-file* "\\1"))
 
-(define *student-file*
-  (string-append *datasheet-name* "-student.adoc"))
-
-(define *lorem*
-  (string-append
-    "Ad rem est vero cum ratione. Optio dolor molestiae consequatur\n"
-    "perferendis sint amet eligendi. Minus unde odit quod officia sit\n"
-    "ut impedit facilis. Voluptatum alias illo et dolore impedit aut\n"
-    "vitae qui. Laborum itaque ipsa possimus et.\n"))
-
-(define *nudge*
-  (string-append
-    "//\n"
-    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
-
-(define *nudge-required*
-  (string-append
-    "//\n"
-    "// PLEASE WRITE YOUR ANSWER BELOW THIS LINE.\n\n"))
-
-(define *nudge-common*
-  (string-append
-    "//\n"
-    "// PLEASE WRITE YOUR ANSWER BELOW.\n"
-    "// (TO INSERT STANDARD REPLY, PLEASE WRITE :common:.)\n\n"))
+(define *author-file*
+  (string-append *datasheet-name* "-author.adoc"))
 
 (define *lineno* 0)
 
@@ -50,104 +27,95 @@
     (unless (eof-object? ln) (set! *lineno* (+ *lineno* 1)))
     ln))
 
-(define (read-graf i #:non-trivial? [non-trivial? #f])
-  (let* ((start-line (+ *lineno* 1))
-         (stop-line -1)
-         (inside-double-dash? #f)
-         (lines
-           (let loop ((ss '()))
-             (let ((ln (read-a-line i)))
-               (cond ((eof-object? ln)
-                      (if (null? ss) ln (reverse ss)))
-                     ((regexp-match "^ *$" ln)
-                      (cond (inside-double-dash? (loop (cons ln ss)))
-                            (else (set! stop-line *lineno*)
-                                  (reverse ss))))
-                     ((regexp-match "^-- *$" ln)
-                      (set! inside-double-dash? (not inside-double-dash?))
-                      (loop (cons ln ss)))
-                     (else
-                       (loop (cons ln ss))))))))
-    (if (null? lines) (read-graf i #:non-trivial? non-trivial?)
+(define (read-graf i)
+  (let* ([start-line (+ *lineno* 1)]
+         [stop-line -1]
+         [inside-double-dash? #f]
+         [lines (let loop ([ss '()])
+                  (let ([ln (read-a-line i)])
+                    (cond [(eof-object? ln)
+                           (if (null? ss) ln (reverse ss))]
+                          [(regexp-match "^ *$" ln)
+                           (set! stop-line *lineno*)
+                           (reverse ss)]
+                          [(regexp-match "^-- *$" ln)
+                           (set! inside-double-dash? (not inside-double-dash?))
+                           (loop (cons ln ss))]
+                          [else (loop (cons ln ss))])))])
+    (if (null? lines)
+        (read-graf i)
         (values lines start-line stop-line))))
 
-(define (tagged-graf? p)
-  (let ((line0 (list-ref p 0)))
-    (regexp-match "^:[^ ]+: *$" line0)))
+(define (question-graf? p)
+  (let ([n (length p)])
+    (if (<= n 2) #f
+        (let ([l1 (list-ref p 0)]
+              [l2 (list-ref p 1)])
+          (and (regexp-match "^:[^ ]+: *$" l1)
+               (and
+                 (regexp-match "\\.question" l2)
+                 (not (regexp-match "\\.common" l2))))))))
 
-(define (common-answer? p)
-  (let ((line0 (list-ref p 0)))
-    (regexp-match "^\\[.answer\\] *$" line0)))
+(define (header-graf? p)
+  (and (= (length p) 1)
+       (regexp-match "^=" (list-ref p 0))))
 
-(define (write-uncomment p o)
-  ;(printf "XXX doing write-comment ~s\n" p)
-  (let ((n (length p)))
-    (let loop ((i 0))
+(define (write-graf p o)
+  (display "\n" o)
+  (let ([n (length p)])
+    (let loop ([i 0])
       (unless (>= i n)
-        (display (regexp-replace "^// *" (list-ref p i) "") o)
-        (newline o)
+        (display (list-ref p i) o) (display "\n" o)
         (loop (+ i 1))))))
 
-(define (write-snippet p line1 line-last o i)
-  (let* ((n (length p))
-         (s1 (list-ref p 0))
-         (s2 "")
-         (question? #f)
-         (required? #f)
-         (common? #f)
-         (next-snippet #f)
-         (tag (regexp-replace "^(:.+:) *$" s1 "\\1")))
-    (when (>= n 2) (set! s2 (list-ref p 1))
-      (set! question? (regexp-match "\\.question" s2))
-      (set! required? (regexp-match "\\.required" s2))
-      (set! common? (regexp-match "\\.common" s2)))
-    (fprintf o "include::~a[lines=~a..~a]\n" *admin-file* line1 line-last)
-    (when common?
-      ;(printf "XXX reading stock answer\n")
-      (let-values (((ans-p ans-line0 ans-line-last) (read-graf i #:non-trivial? #t)))
-        ;(printf "XXX stock ans = ~s\n" ans-p)
-        (cond ((common-answer? ans-p)
-               (fprintf o "// common-answer::~a[lines=~a..~a]\n"
-                        *admin-file* (+ ans-line0 1) ans-line-last))
-              (else
-                (printf "Question ~a lacks stock answer\n" tag)
-                (set! next-snippet (lambda ()
-                                     (process-graf ans-p ans-line0 ans-line-last o i)))))))
-    (display "//\n// " o)
-    (display (cond (common? "Common Question")
-                   (required? "Required Question")
-                   (question? "Question")
-                   (else "_")) o)
-    (display " " o) (display s1 o) (newline o)
-    (display "//" o) (newline o)
-    (let loop ((i (if question? 2 1)))
-      (unless (>= i n)
-        (let ((s (list-ref p i)))
-          (display "// " o) (display s o) (newline o))
-        (loop (+ i 1))))
+(define (write-question p line0 line-last o i)
+  (let* ([n (length p)]
+         [s1 (list-ref p 0)]
+         [s2 ""]
+         [tag (regexp-replace "^(:.+:) * $" s1 "\\1")])
+    (when (>= n 2) (set! s2 (list-ref p 1)))
+    (write-include p (+ line0 1) line-last o)
+    (flush-includes o)
+    (display "// " o)
+    (display "Question " o)
+    (display s1 o) (display "\n" o)
     (display "//\n" o)
-    (when question?
-      (display (cond (common? *nudge-common*)
-                     (required? *nudge-required*)
-                     (else *nudge*)) o)
-      (unless (or common? required?)
-        (display *lorem* o)))
-    (newline o)
-    (when next-snippet (next-snippet))))
+    (let loop ([i 2])
+      (unless (>= i n)
+        (let ([s (list-ref p i)])
+          (display "// " o) (display s o) (display "\n" o))
+        (loop (+ i 1))))
+    (display "//\n\n\n\n" o)))
+
+(define *accumulating-includes?* #f)
+(define *include-start* #f)
+(define *include-stop* #f)
+
+(define (write-include p line0 line-last o)
+  (cond [*accumulating-includes?* (set! *include-stop* line-last)]
+        [else (set! *accumulating-includes?* #t)
+              (set! *include-start* line0)
+              (set! *include-stop* line-last)]))
+
+(define (flush-includes o)
+  (when *accumulating-includes?*
+    (fprintf o "include::~a[lines=~a..~a]\n" *admin-file* *include-start* *include-stop*)
+    (set! *accumulating-includes?* #f)))
 
 (define (process-graf p line0 line-last o i)
-  (cond ((null? p) #t)
-        ((tagged-graf? p)
-         (write-snippet p (+ line0 1) line-last o i))
-        ((common-answer? p)
-         (printf "Stray stock answer above line ~a\n" *lineno*))
-        (else (write-uncomment p o)))
-  (newline o))
+  (cond [(null? p) (flush-includes o) #t]
+        [(question-graf? p)
+         (write-question p line0 line-last o i)]
+        [(header-graf? p)
+         (flush-includes o)
+         (write-graf p o)]
+        [else (write-include p line0 line-last o)])
+  )
 
-(define (gen-student-file)
+(define (gen-author-file)
   (call-with-input-file *admin-file*
     (lambda (i)
-      (call-with-output-file *student-file*
+      (call-with-output-file *author-file*
         (lambda (o)
           (let loop ()
             (let-values (((p line0 line-last) (read-graf i)))
@@ -157,5 +125,5 @@
                 (loop)))))
         #:exists 'replace))))
 
-(gen-student-file)
+(gen-author-file)
 
