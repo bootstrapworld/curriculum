@@ -395,7 +395,7 @@
       (set! error-cascade? #t)
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson link-type f))
-    (when (equal? link-type "opt-printable-exercise")
+    (when (member link-type '("printable-exercise" "opt-printable-exercise"))
       (let ([f (format "../~a" g-in-pages)])
         (unless (ormap (lambda (e) (and (equal? (car e) lesson)
                                         (equal? (cadr e) f))) *exercises-done*)
