@@ -1,0 +1,65 @@
+=  Matching Expressions and Contracts
+
+++++
+<style>
+tt.pyret, tt.racket { font-size: .8rem; }
+td {padding: 20px 0px !important; }
+</style>
+++++
+
+@vspace{2ex}
+
+Can you guess the contract for a function just by seeing how it's used? Try to match each Expression in the left column with a Contract in the right column that describes the function being used.  Some expressions or contracts might not have a match.
+
+@do{
+  (define expr1 '(* (- 1 1) (+ 1 1)))
+  (define expr2 '(- (- 1 1) 1))
+  (define expr3 '(* (- 1 1) 1))
+  (define expr4 '(- (+ 1 1) 1))
+  (define expr5 '(* (+ 1 1) (- (+ 1 1) 1)))
+}
+
+[cols=">.^10a,^.^2a,1a,^.^1a,<.^15a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Math Expression                 |   ||       | Contract
+| `big-star("purple")`           
+|*1*@show{(if *solutions-mode?* "-B" "")}||*A*    
+| `# message-cost {two-colons} Number -> Number`
+
+| `big-star(25 "gold")`          
+|*2*@show{(if *solutions-mode?* "-D" "")}||*B*    
+| `# big-star {two-colons} String -> Image`
+
+| `message-cost(15)`             
+|*3*@show{(if *solutions-mode?* "-A" "")}||*C*    
+| `# choose-flavor {two-colons} String String -> String`
+
+
+| `message-cost("where are you?")` 
+|*4*@show{(if *solutions-mode?* "-E" "")}||*D*    
+| `# big-star {two-colons} Number String -> Image`
+
+| `show-score("Red Sox" 6 "Cardinals" 4))` 
+|*5*@show{(if *solutions-mode?* "-H" "")}||*E*    
+| `# message-cost {two-colons} String -> Number`
+
+| `find-winner("Red Sox" 4 "Cardinals" 6)`
+|*6*@show{(if *solutions-mode?* "-G" "")}||*F*    
+| `# prefer-flavor {two-colons} String String -> Number`
+
+| `pick-flavor("vanilla" "oreo" "mint")`
+|*7*@show{(if *solutions-mode?* "-I" "")}||*G*    
+| `# find-winner {two-colons} String Number String Number -> String`
+
+| `prefer-flavor("lemon" "lime")`
+|*8*@show{(if *solutions-mode?* "-F" "")}||*H*    
+| `# show-score {two-colons} String Number String Number -> Image`
+
+| 
+|||*I*       
+| `# pick-flavor {two-colons} String String String -> Image`
+
+|
+|||*J*
+| `# show-score : String String -> Image`
+|===

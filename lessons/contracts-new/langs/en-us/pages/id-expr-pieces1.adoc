@@ -1,0 +1,48 @@
+=  Identifying Parts of Expressions
+
+++++
+<style>
+  td * {text-align: left;}
+  td {height: 50pt;}
+  tt {display: inline-block}
+  .editbox{ width: auto; }
+</style>
+++++
+
+@vspace{2ex}
+
+Answer each of the following questions in the space provided.
+
+[cols="^.^1a,^25a,^1a",options="header",stripes="none"]
+
+|===
+|   
+| Question        				
+| Answer
+|*1*| How many @vocab{arguments} does the circle function take in @show{(sexp->code `(circle (* 3 10) "outline" "black"))}?
+| @show{(if *solutions-mode?* "3" "")}
+
+|*2*| How many arguments does the string-append function take in @show{(sexp->code `(string-append "Happy" "Halloween"))}?
+| @show{(if *solutions-mode?* "2" "")}
+
+|*3*| What is the name of the function being used in @show{(sexp->code `(* 4 5))}?
+| @show{(if *solutions-mode?* "`*`" "")}
+
+|*4*| What is the name of the function being used in @show{(sexp->code `(string-length "Math is fun!"))}?
+| @show{(if *solutions-mode?* "`string-length`" "")}
+
+|*5*| What is the name of the outermost function being used in @show{(sexp->code `(rotate 45 (star 15 "solid" "orange")))}?
+| @show{(if *solutions-mode?* "`rotate` (`star` is also a function, but not the one in the overall expression)" "")}
+
+|*6*| Is "outline" the name of a function or an argument in @show{(sexp->code `(triangle 48 "outline" "pink"))}? 
+| @show{(if *solutions-mode?* "an argument" "")}
+
+|*7*| How many arguments does rotate expect in @show{(sexp->code `(rotate 45 (star 15 "solid" "orange")))}?
+| @show{(if *solutions-mode?* "2" "")}
+
+|*8*| What is the first argument to the rotate function in @show{(sexp->code `(rotate 45 (star 15 "solid" "orange")))}?
+| @show{(if *solutions-mode?* "`45`" "")}
+
+|*9*| What is the third argument to the star function in @show{(sexp->code `(rotate 45 (star 15 "solid" "orange")))}?
+| @show{(if *solutions-mode?* "`orange`" "")}
+|===
