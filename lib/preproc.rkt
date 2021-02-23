@@ -1146,7 +1146,10 @@
                 (print-link-to-forum o))
 
               (unless (truthy-getenv "OTHERDIR")
-                (fprintf o "\n\n")
+                (fprintf o "\n\n"))
+
+              (unless (or (truthy-getenv "OTHERDIR") (truthy-getenv "NOCOLOPHON"))
+                ;(fprintf o "\n\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
                 (fprintf o (create-acknowledgment))
