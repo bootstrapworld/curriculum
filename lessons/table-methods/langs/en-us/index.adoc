@@ -44,11 +44,26 @@
 Students get some practice reading function definitions, and in the process they build knowledge that's needed later on in the lesson.
 
 === Launch
-Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1IWPbJK_hsxIGtbUJLz59tLeL_NE1p9FG&v=ebd213d, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
+Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1KYBve1W6-RAxICOSbWjVsELt_1ZwHWj7, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
+
+**NOTE: this file will NOT RUN until students have defined `animalA` and `animalB`. This is __by design__.**
 
 === Investigate
 [.lesson-instruction]
+Students define `animalA` and `animalB` as rows in their table, so that `animalA` is a cat and `animalB` is a dog.
+
+[.lesson-instruction]
 Students complete @printable-exercise{pages/reading-functions.adoc} in their student workbooks.
+
+Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples:
+
+. The first example simply says that animalA is not a dog (`is-dog` returns `false`). We know this because we defined it to be a cat.
+. The second example shows us the actual work involved: we know the species of animalA is `"cat"`, and comparing that to the String `"dog"` will return false.
+. The third example shows __all the work__: given the Row `animalA`, we lookup the `"species"` column and compare it to the String `"dog"`.
+
+[.lesson-instruction]
+Write three similar examples, this time using `animalB`.
+
 
 === Synthesize
 Can students explain what each function does?
@@ -56,7 +71,7 @@ Can students explain what each function does?
 == Ordering Tables @duration{10 minutes}
 
 === Overview
-Students learn a second table method, which allows them to sort rows in ascending or descending order, according to one column.
+Students learn to sort Rows of a Table in ascending or descending order, according to one column.
 
 === Launch
 Have students find the contract for `.order-by` in their contracts pages. The `.order-by` method consumes a String (the name of the column by which we want to order) and a Boolean (true for ascending, false for descending). But what does it produce?
@@ -70,12 +85,13 @@ Have students find the contract for `.order-by` in their contracts pages. The `.
 * Sort the animals table by how long it took for each animal to be adopted, in ascending order.
 
 === Synthesize
-Answer any questions students may have. Class discussion: what do `.order-by` and `.row-n` have in common? How are they different?
+- What do `.order-by` and `.row-n` have in common? How are they different?
+- Does sorting the `animals-table` produce a _new_ table, or change the existing one? How could we test this?
 
 == Filtering Tables @duration{20 minutes}
 
 === Overview
-Students learn how to _filter_ tables, by removing rows.
+Students learn how to _filter_ tables, by removing Rows.
 
 === Launch
 Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the "filter method", and have them _randomly choose_ a @link{pages/function-cards.adoc, Function Card}, and make sure they read it without showing it to anyone else.
@@ -85,7 +101,7 @@ Have ~10 students line up in front of the classroom, and have the filter method 
 Ask the class: based on who sat and who stayed, _what function was on the card?_
 
 [.lesson-point]
-The `.filter` method takes a function, and produces a _new table_ containing only rows for which the function returns `true`.
+The `.filter` method takes a _function_, and produces a new table containing only rows for which the function returns `true`.
 
 Suppose we want to get a table of only animals that have been fixed? Have students find the contract for `.filter` in their contracts pages. The `.filter` method is taking in a _function_. What is the contract for that function? Where have we seen functions-taking-functions before?
 
