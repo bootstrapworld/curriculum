@@ -1,0 +1,80 @@
+= Applying Functions
+
+Type this line of code into the interactions area and hit "Enter":  `triangle(50, "solid", "red")`
+
+
+[cols="1,15,10", frame="none"]
+|===
+|1)
+| What is the name of this function?
+| @fitb{45ex}{}
+
+|2)
+| What did the expression evaluate to?
+| @fitb{45ex}{}
+
+|3)
+| How many arguments does `triangle` expect?
+| @fitb{45ex}{}
+
+|4)
+| What does the `triangle` function produce? (Numbers? Strings? Booleans?)
+| @fitb{45ex}{}
+
+|===
+
+== Catching Bugs
+
+The following lines of code are all BUGGY! Read the code and the error messages to identify the mistake.
+
+
+5) `triangle(20, "solid" "red")` 	
+
+[indent=2]
+--
+Pyret didn't understand your program around
+
+triangle(20, "solid" *"red"*)
+
+You may need to add or remove some text to fix your program. Look carefully before the *highlighted* text. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
+--
+Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
+
+6) `triangle(20, "solid")`				
+
+This [.underline]#application expression# errored:
+
+*triangle*(_20_, _"solid"_)
+
+[.underline]#_2 arguments_# were passed to the [.underline]#*operator*#.
+The [.underline]#*operator*# evaluated to a function accepting 3 parameters.
+An [.underline]#application expression# expects the number of parameters and [.underline]#_arguments_# to be the same.
+
+
+Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
+7) `triangle(20, 10, "solid", "red")`		
+--
+This [.underline]#application expression# errored:
+
+*triangle*(20, 10, "solid", _"red"_)`
+
+[.underline]#_4 arguments_# were passed to the [.underline]#*operator*#.
+The [.underline]#*operator*# evaluated to a function accepting 3 parameters.
+An [.underline]#application expression# expects the number of parameters and [.underline]#_arguments_# to be the same.
+--
+Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
+8) `triangle (20, "solid", "red")` 		
+--
+Pyret thinks this code is probably a function call:
+
+*triangle* _(50, "solid", "red")_
+
+Function calls must not have space between the *function expression* and the _arguments_.
+--
+Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
+
+
