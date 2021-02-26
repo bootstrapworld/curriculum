@@ -24,7 +24,8 @@
 
 (define *lesson-order* (read-data-file "workbook-lessons.txt"))
 
-(define (write-pages-info lesson-dir o #:paginate [paginate "yes"])
+(define (write-pages-info lesson-dir o #:paginate [paginate "yes"]
+                          #:back-matter-port [back-matter-port #f])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [exercise-pages-file (format "~a/pages/exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
@@ -54,11 +55,28 @@
                 (when (>= n 3)
                   (set! paginate (list-ref page 2)))
                 (fprintf o2 "~a\n" file)
-                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)))
+                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)
+                (when (and back-matter-port (contracts-page? lesson-dir file))
+                  (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
+                           lesson-dir file (gen-handle) aspect paginate))
+                ))
             ;
             (for ([file exercise-pages])
               (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")))
           #:exists 'replace)))))
+
+(define (contracts-page? dir file)
+  (let ([f (build-path dir "solution-pages" file)])
+    (and (file-exists? f)
+         (call-with-input-file f
+           (lambda (i)
+             (let loop ([k 0])
+               (if (>= k 10) #f
+                   (let ([x (read-line i)])
+                     (if (eof-object? x) #f
+                         (if (regexp-match "^=.*(?i:contract)" x)
+                             #t
+                             (loop (+ k 1))))))))))))
 
 (call-with-output-file "workbook-page-index.rkt"
   (lambda (o)
@@ -66,7 +84,13 @@
     (write-pages-info "front-matter" o #:paginate "no")
     (for ([lesson-dir *lesson-order*])
       (write-pages-info lesson-dir o))
-    (write-pages-info "back-matter" o #:paginate "no")
+    (call-with-output-file "back-matter-contracts-index.rkt"
+      (lambda (ob)
+        (fprintf ob "(\n")
+        (write-pages-info "back-matter" o #:paginate "no" #:back-matter-port ob)
+        (fprintf ob ")\n")
+        )
+      #:exists 'replace)
     (fprintf o ")\n"))
   #:exists 'replace)
 

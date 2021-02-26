@@ -24,20 +24,23 @@
 (unless *pdftk*
   (printf "WARNING: pdftk not installed on your system\n"))
 
-(define *workbook-page-specs*
-  (call-with-input-file "workbook-page-index.rkt" read))
+(define (make-workbook tgt )
 
-;(printf "*workbook-page-specs* = ~s\n" *workbook-page-specs*)
-
-; *workbook-page-specs* is listof (lesson docfile handle aspect)
-
-(define (make-workbook tgt #:teacher-version [teacher-version #f])
+  (define teacher-version
+    (member tgt '("workbook-sols" "bm-contracts")))
 
   (define dest
     (cond [(string=? tgt "workbook") "workbook/workbook"]
           [(string=? tgt "pd-workbook") "resources/protected/pd-workbook"]
           [(string=? tgt "workbook-sols") "resources/protected/workbook-sols"]
+          [(string=? tgt "bm-contracts") "resources/contracts"]
           [else (error 'ERROR "deadc0de")]))
+
+  (define workbook-page-specs
+    (call-with-input-file
+      (if (string=? tgt "bm-contracts")
+          "back-matter-contracts-index.rkt"
+          "workbook-page-index.rkt") read))
 
   (define dest.pdf (format "~a.pdf" dest))
 
@@ -46,38 +49,38 @@
 
   (define do-it? *force*)
 
-  (for ([f *workbook-page-specs*])
+  (for ([f workbook-page-specs])
     (let* ([lesson-dir (list-ref f 0)]
            [lesson-workbook-page (list-ref f 1)]
-           [g (string-append lesson-dir
-                (if teacher-version "/solution-pages/" "/pages/")
-                lesson-workbook-page)]
+           [g (build-path lesson-dir
+                          (if teacher-version "solution-pages" "pages")
+                          lesson-workbook-page)]
            [g (if (path-has-extension? g #".adoc")
                   (path-replace-extension g ".pdf") g)])
       (unless do-it?
         (when (> (file-mtime g) dest.pdf.mtime) (set! do-it? #t)))))
 
-  ;(printf "*workbook-page-specs* = ~s\n" *workbook-page-specs*)
+  ;(printf "workbook-page-specs = ~s\n" workbook-page-specs)
 
   ;(printf "building workbooks\n")
 
-  ; *workbook-page-specs* is listof (lessondir docfile handle aspect)
+  ; workbook-page-specs is listof (lessondir docfile handle aspect)
 
   ; 0=lessondir 1=docfile 2=handle 3=aspect
 
   ;  (printf "starting pdftk\n")
 
   (when do-it?
-    (for ([pdf-page-spec *workbook-page-specs*])
+    (for ([pdf-page-spec workbook-page-specs])
       ;(printf "pdf-page-spec = ~s\n" pdf-page-spec)
       (let* ([lessondir (list-ref pdf-page-spec 0)]
              [docfile (list-ref pdf-page-spec 1)]
              [handle (list-ref pdf-page-spec 2)]
              [aspect (list-ref pdf-page-spec 3)])
 
-        (set! docfile (string-append lessondir
-                        (if teacher-version "/solution-pages/" "/pages/")
-                        docfile))
+        (set! docfile (build-path lessondir
+                                  (if teacher-version "solution-pages" "pages")
+                                  docfile))
 
         (when (or (path-has-extension? docfile #".adoc")
                   (path-has-extension? docfile #".html"))
@@ -98,7 +101,6 @@
                  "output"
                  (format "~a-~a.pdf" tgt handle)
                  "dont_ask"))))
-
   ;  (printf "pdftk done\n")
 
   (when do-it?
@@ -122,12 +124,8 @@
 ;(printf "building workbook\n")
 
 (let ([arg (vector-ref (current-command-line-arguments) 0)])
-  (cond [(string=? arg "workbook")
-         (make-workbook arg)]
-        [(string=? arg "pd-workbook")
-         (make-workbook arg)]
-        [(string=? arg "workbook-sols")
-         (make-workbook arg #:teacher-version #t)]
-        [else (error 'ERROR "make-workbook.rkt: bad argument ~a" arg)]))
+  (unless (member arg '("workbook" "pd-workbook" "workbook-sols" "bm-contracts"))
+    (error 'ERROR "make-workbook.rkt: bad argument ~a" arg))
+  (make-workbook arg))
 
 (void)
