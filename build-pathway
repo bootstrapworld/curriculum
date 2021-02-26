@@ -26,7 +26,7 @@ JAVASCRIPTDELAY="--javascript-delay 5000"
 
 ARGS=
 HELP=
-LASTMOD=2021-02-23 # last modified
+LASTMOD=2021-02-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -1096,13 +1096,17 @@ function buildpathwaynarrative() {
 
 function makeworkbooktex() {
 
-  local wtex=workbook
-  local pwtex=pd-workbook
-  local twtex=workbook-sols
+  #echo doing makeworkbooktex "$@"
 
-  local wbpnf=workbook-pagenum-index.rkt.kp
+  local tgt=$1
+  local wbpnf=$2
 
-  local tgt=
+  if test "$wbpnf" = workbook-page-index.rkt; then
+    local wbpnfkp=workbook-pagenum-index.rkt.kp
+  else
+    local wbpnfkp=$wbpnf.kp
+  fi
+
   local i=
 
   local TMPFILE=$TMPPFX.tex
@@ -1128,17 +1132,15 @@ function makeworkbooktex() {
   %BS%begin{document}
   " > $TMPFILE
 
-  for tgt in $wtex $pwtex $twtex; do
-    cat $TMPFILE > $tgt.tex
-  done
+  cat $TMPFILE > $tgt.tex
   rm $TMPFILE
 
-  echo \( > $wbpnf
+  echo \( > $wbpnfkp
 
   local currlesson=
   local i=1
 
-  cat workbook-page-index.rkt |
+  cat $wbpnf |
     while read -r pdfpagespec; do
       if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
         continue
@@ -1175,24 +1177,22 @@ function makeworkbooktex() {
     fi
 
     if test "$paginate"; then
-      echo \(\(\"$lessondir\" \"$workbookpage\"\) $pagenum\) >> $wbpnf
+      echo \(\(\"$lessondir\" \"$workbookpage\"\) $pagenum\) >> $wbpnfkp
     fi
 
     if test "$freshlesson"; then
       currlesson=$lessondir
-      for tgt in $wtex $pwtex $twtex; do
         echo >> $tgt.tex
         echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
-      done
+        if test "$tgt" = pd-workbook; then
       if echo $currlesson| grep -q 'lessons/'; then
         lessonplanpdf=$currlesson/index.pdf
-        echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $pwtex.tex
+        echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
       fi
+        fi
 
     else
-      for tgt in $wtex $pwtex $twtex; do
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
-      done
+      echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
 
     fi
 
@@ -1200,13 +1200,11 @@ function makeworkbooktex() {
 
   done
 
-  for tgt in $wtex $pwtex $twtex; do
-    echo >> $tgt.tex
-    echo '%BS%end{document}' >> $tgt.tex
-    $SED -i -e 's/%BS%/\\/g' $tgt.tex
-  done
+  echo >> $tgt.tex
+  echo '%BS%end{document}' >> $tgt.tex
+  $SED -i -e 's/%BS%/\\/g' $tgt.tex
 
-  echo \) >> $wbpnf
+  echo \) >> $wbpnfkp
 }
 
 function buildteacherresource() {
@@ -1456,6 +1454,8 @@ function buildpathway() {
     done
     cd ..
 
+    #exit
+
     $PROGDIR/collect-workbook-pages.rkt
 
     buildlessons
@@ -1463,6 +1463,8 @@ function buildpathway() {
     #export PATHWAYROOTDIR=./
 
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/$d"
+
+    export WORKBOOKPAGE=1
 
     for d in front-matter back-matter; do
       test -d "$d" || break
@@ -1472,6 +1474,8 @@ function buildpathway() {
         touch "$d" # nudge timestamp
       fi
     done
+
+    export WORKBOOKPAGE=
 
     cd resources
 
@@ -1503,7 +1507,10 @@ function buildpathway() {
     # done
 
     # Shell version
-    makeworkbooktex
+    makeworkbooktex workbook workbook-page-index.rkt
+    makeworkbooktex pd-workbook workbook-page-index.rkt
+    makeworkbooktex workbook-sols workbook-page-index.rkt
+    makeworkbooktex bm-contracts back-matter-contracts-index.rkt
 
     buildlessonplans
 
@@ -1531,7 +1538,7 @@ function buildpathway() {
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
-        for wbf in workbook pd-workbook workbook-sols; do
+        for wbf in workbook pd-workbook workbook-sols bm-contracts; do
           if test $DEBUG; then
             if test $NOPARALLEL; then
               $PROGDIR/make-workbook.rkt $wbf
