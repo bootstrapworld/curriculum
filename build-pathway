@@ -26,7 +26,7 @@ JAVASCRIPTDELAY="--javascript-delay 5000"
 
 ARGS=
 HELP=
-LASTMOD=2021-02-26 # last modified
+LASTMOD=2021-02-27 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -130,12 +130,14 @@ if which gsed | grep -q .; then
 fi
 
 if ! which curl | grep -q .; then
-  echo \nWARNING: Missing \'curl\' tool; can\'t do --lint
+  echo
+  echo WARNING: Missing \'curl\' tool; can\'t do --lint
   LINT=
 fi
 
 if ! which wkhtmltopdf|grep -q .; then
-  echo \nWARNING: Missing wkhtmltopdf: PDF workbooks can\t be created
+  echo
+  echo WARNING: Missing wkhtmltopdf: PDF workbooks can\t be created
 fi
 
 if test "$ARGS" = ""; then
@@ -447,7 +449,8 @@ function lintlesson() {
 
   for g in Prerequisites 'Lesson Goals' Materials Preparation 'Relevant Standards'; do
     if ! grep -q "^<p>$g\>" $f; then
-      echo \nWARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
+      echo
+      echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
     fi
   done
 
@@ -589,7 +592,7 @@ function checkifsinglepdfpage() {
 
   NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|$SED -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
 
-  test "$NUMPAGES" = 1 || echo \nWARNING: $fpdf has $NUMPAGES pages
+  test "$NUMPAGES" = 1 || (echo;echo WARNING: $fpdf has $NUMPAGES pages)
 }
 
 function checkeachinternallink() {
@@ -599,7 +602,8 @@ function checkeachinternallink() {
   if ! test -f "$f"; then
     export BROKEN_INTERNAL_LINKS=1
     test $EXPANDEDWARNINGS || echo $'\033[?7h'
-    echo \nWARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
+    echo
+    echo WARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
   fi
 }
 
@@ -625,7 +629,8 @@ function checkeachexternallink() {
 
   if test $invalid; then
     export BROKEN_EXTERNAL_LINKS=1
-    echo \nWARNING: Invalid external link $f
+    echo
+    echo WARNING: Invalid external link $f
   fi
 
 }
@@ -759,7 +764,8 @@ function recursiveadoc() {
             wbpadoc=${wbp%.*}.adoc
             if test ! -f $wbpadoc; then
               BROKEN_WORKBOOK_PAGES=1
-              echo \nWARNING: Missing workbook page $wbp in $LESSONSUBDIR
+              echo
+              echo WARNING: Missing workbook page $wbp in $LESSONSUBDIR
             fi
           fi
         done
@@ -828,10 +834,12 @@ function checksinglelessonplan() {
   done
   if ! test $copacetic; then
     if test ! -f index.html -a ! -f index.shtml; then
-      echo \nWARNING: No lesson plan in $L
+      echo
+      echo WARNING: No lesson plan in $L
     fi
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
-    echo \nWARNING: Too many lesson plans in $L
+    echo
+    echo WARNING: Too many lesson plans in $L
   else
     for f in *.adoc; do
       cp -p $f index.asciidoc
@@ -877,7 +885,8 @@ function buildworkbookpages() {
   if test $DORECURSIVEADOC; then
 
   if test ! -d pages; then
-    echo \nWARNING: $L missing pages
+    echo
+    echo WARNING: $L missing pages
     mkdir pages
   fi
 
@@ -988,7 +997,8 @@ function buildlessonplan() {
 
 function buildlessons() {
   if test ! -f workbook-lessons.txt; then
-    echo \nWARNING: No lessons in pathway $PATHWAY
+    echo
+    echo WARNING: No lessons in pathway $PATHWAY
   else
     for L in $(cat workbook-lessons.txt); do
       export LESSON=$L
@@ -1003,7 +1013,8 @@ function buildlessons() {
 
 function buildlessonplans() {
   if test ! -f workbook-lessons.txt; then
-    echo \nWARNING: No lessons in pathway $PATHWAY
+    echo
+    echo WARNING: No lessons in pathway $PATHWAY
   else
     for L in $(cat workbook-lessons.txt); do
       # needed?
@@ -1051,11 +1062,13 @@ function buildpathwaynarrative() {
     fi
   done
   if test ! "$copacetic"; then
-    echo \nWARNING: No narrative in pathway $PATHWAY\; creating one
+    echo
+    echo WARNING: No narrative in pathway $PATHWAY\; creating one
     echo "= $PATHWAY" > index.adoc
   fi
   if ls *.adoc | wc -l | grep -vq '^ *1$'; then
-    echo \nWARNING: Too many narratives in pathway $PATHWAY
+    echo
+    echo WARNING: Too many narratives in pathway $PATHWAY
   else
     #cp -p $PROGDIR/*.css .
     export PATHWAYROOTDIR=./
@@ -1219,9 +1232,11 @@ function buildteacherresource() {
     fi
   done
   if test ! "$copacetic"; then
-    echo \nWARNING: No teacher resource files in pathway $PATHWAY
+    echo
+    echo WARNING: No teacher resource files in pathway $PATHWAY
   elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
-    echo \nWARNING: Too many teacher resource files in pathway $PATHWAY
+    echo
+    echo WARNING: Too many teacher resource files in pathway $PATHWAY
   else
     #export PATHWAYROOTDIR=../
     # there should be only one?
@@ -1301,7 +1316,8 @@ function buildpathway() {
   echo
 
   if test ! -d pathways/$SRCPATHWAY/langs/$LANGUAGE; then
-    echo \nWARNING: No pathway $PATHWAY/$LANGUAGE
+    echo
+    echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
     echo BUILDING PATHWAY: $LANGUAGE/$PATHWAY $langicon
     echo $'-----------------------------------------------------------\n'
@@ -1376,7 +1392,8 @@ function buildpathway() {
     mkdir -p lessons workbook
 
     if test ! -f lesson-order.txt; then
-      echo \nWARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
+      echo
+      echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
@@ -1520,7 +1537,8 @@ function buildpathway() {
 
     if test ! $NOPDF; then
       if test ! -f workbook-page-index.rkt; then
-        echo \nWARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
+        echo
+        echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
         export ABYSS=page-not-found
