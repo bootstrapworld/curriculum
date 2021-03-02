@@ -46,6 +46,8 @@
 
 (define *link-lint?* (truthy-getenv "LINT"))
 
+(define *autonumber-index* 1)
+
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
 
@@ -882,6 +884,15 @@
                             (display-prereqs-row (read-commaed-group i directive) o)
                             (display-standards-row o)
                             ]
+                           [(string=? directive "n")
+                            (fprintf o "[.autonum]##~a##" *autonumber-index*)
+                            (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "nfrom")
+                            (let* ([arg (read-group i directive)]
+                                   [n (string->number arg)])
+                              (unless n
+                                (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
+                              (set! *autonumber-index* n))]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive)])
                               (display (make-image (car args) (cdr args)) o))]
