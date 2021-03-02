@@ -44,11 +44,14 @@ triangle(20, "solid" *"red"*)
 
 You may need to add or remove some text to fix your program. Look carefully before the *highlighted* text. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
 --
+@vspace{2ex}
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
-
+@vspace{1ex}
 
 6) `triangle(20, "solid")`				
 
+[.indentedpara]
+--
 This [.underline]#application expression# errored:
 
 *triangle*(_20_, _"solid"_)
@@ -56,11 +59,14 @@ This [.underline]#application expression# errored:
 [.underline]#_2 arguments_# were passed to the [.underline]#*operator*#.
 The [.underline]#*operator*# evaluated to a function accepting 3 parameters.
 An [.underline]#application expression# expects the number of parameters and [.underline]#_arguments_# to be the same.
-
-
+--
+@vspace{2ex}
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
+@vspace{1ex}
 
 7) `triangle(20, 10, "solid", "red")`		
+
+[.indentedpara]
 --
 This [.underline]#application expression# errored:
 
@@ -70,17 +76,19 @@ This [.underline]#application expression# errored:
 The [.underline]#*operator*# evaluated to a function accepting 3 parameters.
 An [.underline]#application expression# expects the number of parameters and [.underline]#_arguments_# to be the same.
 --
+@vspace{2ex}
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
+@vspace{1ex}
 
 8) `triangle (20, "solid", "red")` 		
+
+[.indentedpara]
 --
 Pyret thinks this code is probably a function call:
 
-*triangle* _(50, "solid", "red")_
+*triangle* _(20, "solid", "red")_
 
-Function calls must not have space between the *function expression* and the _arguments_.
+Function calls must not have space between the [.underline]*function expression* and the [.underline]_arguments_.
 --
+@vspace{2ex}
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
-
-
-
