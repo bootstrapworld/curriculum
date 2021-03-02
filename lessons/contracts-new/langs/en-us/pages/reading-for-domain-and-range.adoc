@@ -10,42 +10,47 @@ As you think about the functions below, remember that you can always type them i
 [cols="6a,3a"]
 |===
 |1) What is the *name* of the function being used in:
+--
+@quad{2ex}@show{(sexp->code `(string-length "broccoli")`)}
+--
+| @vspace{2ex}@show{(if *solutions-mode?* "`string-length`")}
 
---
-@quad{2ex}@show{(sexp->code `(+ (string-length "broccoli") 8))}
---
-| @vspace{11ex}
+|2) What is the *domain* of the function `string-length`?
+| @vspace{2ex}@show{(if *solutions-mode?* "String")}
 
-|2) What is the *domain* of the outermost function being used in:
---
-@quad{2ex}@show{(sexp->code `(scale 2 (circle 40 "solid" "blue")))}
---
-| @vspace{11ex}
+|3) What is the *range* of the function `string-length`?
+| @vspace{2ex}@show{(if *solutions-mode?* "Number")}
 
-|3) What is the *domain* of the innermost function being used in:
+|4) How many @vocab{arguments} does the circle function take in?
 --
-@quad{2ex}@show{(sexp->code `(scale 2 (circle 40 "solid" "blue")))}
+@quad{2ex}@show{(sexp->code `(circle 30 "outline" "lightblue")`)}
 --
-| @vspace{11ex}
+| @vspace{2ex}@show{(if *solutions-mode?* "3")}
 
-|4) How many *arguments* does the `+` operator take in:
+|5) What is the first *argument* to the `circle` function in:
 --
-@quad{2ex}@show{(sexp->code `(+ (string-length "broccoli") 8))}
+@quad{2ex}@show{(sexp->code `(circle 40 "solid" "darkgreen"))}
 --
-| @vspace{11ex}
+| @vspace{2ex}@show{(if *solutions-mode?* "40")}
 
-|5) What is the *range* of the function `string-length`?
-| @vspace{11ex}
+|6) What is the *domain* of the circle function?
 
-|6) Is `text` a _String_, a _function_, or an _Image_?
-| @vspace{11ex}
+| @vspace{2ex}@show{(if *solutions-mode?* "Number, String, String")}
 
-|7) Is the *range* of `text` a _String_ or an _Image_?
-| @vspace{11ex}
+|7) What is the *range* of the circle function?
 
-|8) What is the first *argument* to the `circle` function in:
+| @vspace{2ex}@show{(if *solutions-mode?* "Image")}
+
+|8) Is `text` a _String_, a _function_, or an _Image_?
 --
-@quad{2ex}@show{(sexp->code `(scale 2 (circle 40 "solid" "blue")))}
+@quad{2ex}@show{(sexp->code `(text "Math is fun!" 30 "red")`)}
 --
-| @vspace{11ex}
+| @vspace{2ex}@show{(if *solutions-mode?* "Function")}
+
+|9) Is the *range* of `text` a _String_ or an _Image_?
+| @vspace{2ex}@show{(if *solutions-mode?* "Image")}
+
+|10) What is the *domain* of `text`?
+| @vspace{2ex}@show{(if *solutions-mode?* "String, Number, String")}
+
 |===

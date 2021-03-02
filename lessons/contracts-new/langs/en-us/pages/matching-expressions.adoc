@@ -1,0 +1,52 @@
+= Matching Expressions and Contracts
+
+++++
+<style>
+td { height: 20pt; }
+</style>
+++++
+
+_Match_ the contract (left) with the expression described by the function being used (right). 
+
+@vspace{1ex}
+[cols=">.^15a,^.^1a,1,^.^1a,.^11a",stripes="none",grid="none",frame="none", options="header"]
+|===
+|  Contract|  || |Expression
+| make-id +::+ (name +::+ String, age +::+ Number) -> Image
+| *1* || *A* |`make-id("Savannah", "Lopez")`
+@vspace{1ex}
+| make-id +::+ (name +::+ String, age +::+ Number, color +::+ String) -> Image
+| *2* || *B* | `make-id("Pilar", 17)`           
+@vspace{1ex}
+| make-id +::+ (name +::+ String) -> Image
+| *3* || *C* | `make-id("Akemi", 39, "red")` 
+@vspace{1ex}
+| make-id +::+ (first +::+ String, last +::+ String) -> Image
+| *4* || *D* | `make-id("Raïssa", "McCracken", 32)`
+@vspace{1ex}
+| make-id +::+ (first +::+ String, last +::+ String, age +::+ Number) -> Image
+| *5* || *E* | `make-id("von Einsiedel")`
+
+|===
+
+
+
+@vspace{5ex}
+[cols=">.^15a,^.^1a,2,^.^1a,.^10a",stripes="none",grid="none",frame="none", options="header"]
+|===
+|  Contract|  || |Expression
+| is-capital +::+ (city +::+ String, state +::+ String) -> Boolean
+| *1* || *A* |`show-pop("Juneau", "Alaska", 31848)`
+@vspace{1ex}
+| is-capital +::+ (city +::+ String, country +::+ String) -> Boolean
+| *2*|| *B* | `show-pop("San Juan", 395426)`           
+@vspace{1ex}
+| show-pop +::+ (city +::+ String, pop +::+ Number) -> Image
+| *3* || *C* | `is-capital("Accra", "Ghana")` 
+@vspace{1ex}
+| show-pop +::+ (city +::+ String, state +::+ String, pop +::+ Number) -> Image
+| *4* || *D* | `show-pop("Oklahoma", 3751351)`
+@vspace{1ex}
+| show-pop +::+ (state +::+ String, pop +::+ Number) -> Number
+| *5* || *E* | `is-capital("Albany", "New York")`
+|===
