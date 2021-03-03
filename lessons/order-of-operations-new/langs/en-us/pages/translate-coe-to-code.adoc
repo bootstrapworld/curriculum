@@ -1,0 +1,71 @@
+= Translating Circles of Evaluation to Code
+
+++++
+<style>
+  td {height: 200pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Translate the Circles of Evaluation into Code. 
+
+@do{
+  (define expr1 '(+ 4 -9))
+  (define expr2 '(- -1 14))
+  (define expr3 '(* -5 6.2))
+  (define expr4 '(/ 0 (* 12 -9)))
+  (define expr5 '(* (+ 9.1 -1) 7))
+  (define expr6 '(+ 3 (* 8 -8)))
+  (define expr7 '(- (* 6 -2) (+ 0 1)))
+  (define expr8 '(+ -13 (/ 100 (+ 3 6))))
+  (define expr9 '(- (* (- 15 7) 7) 6.5))
+}
+
+[cols="^1a,^1a,^1a",stripes='none']
+|===
+
+|1) @show{(sexp->coe expr1)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr1) "")}
+@vspace{5ex}
+
+|2) @show{(sexp->coe expr2)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr2) "")}
+@vspace{5ex}
+
+|3) @show{(sexp->coe expr3)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr3) "")}
+@vspace{5ex}
+
+|4) @show{(sexp->coe expr4)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr4) "")}
+@vspace{5ex}
+
+|5) @show{(sexp->coe expr5)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr5) "")}
+@vspace{5ex}
+
+|6) @show{(sexp->coe expr6)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr6) "")}
+@vspace{5ex}
+|7) @show{(sexp->coe expr7)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr7) "")}
+@vspace{5ex}
+
+|8) @show{(sexp->coe expr8)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr8) "")}
+@vspace{5ex}
+
+|9) @show{(sexp->coe expr9)}
+@vspace{5ex}
+@show{(if *solutions-mode?* (sexp->code expr9) "")}
+@vspace{5ex}
+|===

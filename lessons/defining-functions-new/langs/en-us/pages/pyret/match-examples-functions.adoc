@@ -1,0 +1,107 @@
+=  Matching Examples and Function Definitions
+
+@do{
+
+;apparent misalignment in second piece of each first example is intentional
+;to make code render aligned once scribbled
+
+(define e1
+   (code #:multi-line #t 
+"examples:
+  mystery(\"red\") is circle(10, \"solid\", \"red\")
+  mystery(\"orange\") is circle(10, \"solid\", \"orange\")
+end"))
+  
+(define f1
+   (code #:multi-line #t
+"fun mystery(c):
+  circle(10, \"solid\", c)
+end"))
+
+(define e2
+   (code #:multi-line #t
+"examples:
+  mystery(30) is circle(30, \"solid\", \"red\")
+  mystery(10) is circle(10, \"solid\", \"red\")
+end"))
+  
+
+(define f2
+   (code #:multi-line #t
+"fun mystery(r):
+  circle(r, \"outline\", \"red\")
+end"))
+
+(define e3
+   (code #:multi-line #t
+"examples:
+  mystery(30) is rectangle(30, 10, \"solid\", \"red\")
+  mystery(10) is rectangle(10, 10, \"solid\", \"red\")
+end"))
+
+(define f3
+   (code #:multi-line #t
+"fun mystery(w):
+  rectangle(w, 10, \"outline\", \"red\")
+end"))
+
+(define e4
+   (code #:multi-line #t
+"examples:
+  mystery(30) is rectangle(20, 30, \"solid\", \"red\")
+  mystery(20) is rectangle(20, 20, \"solid\", \"red\")
+  mystery(10) is rectangle(20, 10, \"solid\", \"red\")
+end"))
+
+(define f4
+   (code #:multi-line #t
+"fun mystery(h):
+  rectangle(20, h, \"solid\", \"red\")
+end"))
+
+
+(define e5
+   (code #:multi-line #t
+"examples:
+  mystery(2) is 2 + 2
+  mystery(4) is 4 + 4
+  mystery(5) is 5 + 5
+end"))
+
+
+(define f5
+   (code #:multi-line #t
+"fun mystery(num):
+  num + num
+end"))
+
+
+(define f6
+   (code #:multi-line #t
+"fun mystery(num):
+  num * 2
+end"))
+
+
+(define f7
+   (code #:multi-line #t
+"fun mystery(h):
+  rectangle(20, h, \"solid\", \"red\")
+end"))
+
+(define examples-lst (list e1 e2 e3 e4 e5))
+(define functions-lst (list f1 f2 f3 f4 f5))
+(define permuted-functions-lst (list f2 f6 f3 f5 f7 f1 f4))
+}
+
+
+[cols="16,1,1,1,8",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Examples    |                                        ||       | Definition
+| @show{e2}   |*2*@show{(if *solutions-mode?* "-E" "")}||*A*    | @show{f3}
+| @show{e5}   |*5*@show{(if *solutions-mode?* "-C" "")}||*B*    | @show{f6}
+| @show{e1}   |*1*@show{(if *solutions-mode?* "-F" "")}||*C*    | @show{f5}
+| @show{e4}   |*4*@show{(if *solutions-mode?* "-D" "")}||*D*    | @show{f4}
+| @show{e3}   |*3*@show{(if *solutions-mode?* "-A" "")}||*E*    | @show{f2}
+|             |*5*                                     ||*F*    | @show{f1}
+|===

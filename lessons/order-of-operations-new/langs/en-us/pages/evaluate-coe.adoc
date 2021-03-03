@@ -1,0 +1,70 @@
+= Evaluating Circles of Evaluation
+
+++++
+<style>
+  td {height: 100pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Write each Circle of Evaluation as a math expression and evaluate it.
+
+@do{
+  (define expr1 '(+ 4 5) )
+  (define expr2 '(* 7 6))
+  (define expr3 '(- (* 2 3) (+ 1 0)))
+  (define expr4 '(- (+ 5 8) 12))
+  (define expr5 '(/ (* 7 8) 4))
+  (define expr6 '(* (/ 6 -2) 12))
+  (define expr7 '(- (* -2 3) (+ (/ 10 2) -3)))
+
+  (define coe1 (sexp->coe expr1))
+  (define coe2 (sexp->coe expr2))
+  (define coe3 (sexp->coe expr3))
+  (define coe4 (sexp->coe expr4))
+  (define coe5 (sexp->coe expr5))
+  (define coe6 (sexp->coe expr6))
+  (define coe7 (sexp->coe expr7))
+
+  (define mat1 (sexp->math expr1))
+  (define mat2 (sexp->math expr2))
+  (define mat3 (sexp->math expr3))
+  (define mat4 (sexp->math expr4))
+  (define mat5 (sexp->math expr5))
+  (define mat6 (sexp->math expr6))
+  (define mat7 (sexp->math expr7))
+}
+
+[cols=".^1a,^.^10a,^.^8a,^.^1a",options="header",stripes="none"]
+|===
+|   | Circle of Evaluation | Math Expression | Answer
+
+|*1*| @show{coe1}
+| @show{(if *solutions-mode?* mat1 "")}
+| @show{(if *solutions-mode?* (eval expr1) "")}
+
+|*2*| @show{coe2}
+| @show{(if *solutions-mode?* mat2 "")}
+| @show{(if *solutions-mode?* (eval expr2) "")}
+
+|*3*| @show{coe3}
+| @show{(if *solutions-mode?* mat3 "")}
+| @show{(if *solutions-mode?* (eval expr3) "")}
+
+|*4*| @show{coe4}
+| @show{(if *solutions-mode?* mat4 "")}
+| @show{(if *solutions-mode?* (eval expr4) "")}
+
+|*5*| @show{coe5}
+| @show{(if *solutions-mode?* mat5 "")}
+| @show{(if *solutions-mode?* (eval expr5) "")}
+
+|*6*| @show{coe6}
+| @show{(if *solutions-mode?* mat6 "")}
+| @show{(if *solutions-mode?* (eval expr6) "")}
+
+|*7*| @show{coe7}          
+| @show{(if *solutions-mode?* mat7 "")}
+| @show{(if *solutions-mode?* (eval expr7) "")}
+|===

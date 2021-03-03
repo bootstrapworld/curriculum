@@ -5,7 +5,7 @@
 Consider the following contract:
 
 ----
-rotate :: (degree :: Number, img :: Image) -> Image
+is-beach-weather :: (temperature :: Number, cloud cover :: String) -> Boolean
 ----
 
 What is the *Name* of this function? @fitb{39em}{}
@@ -32,20 +32,22 @@ Circle the expression below that shows the correct application of this function,
 
 @vspace{1ex}
 
-1. `rotate(45, 90)`
+For each Circle of Evaluation on the left, write down the code on the right
 
-2. `rotate(circle(99, "solid", "green"))`
+1. @show{(sexp->code `(is-beach-weather 70 90))}
 
-3. `rotate(25, rectangle(7, 10, "outline", "black"))`
+2. @show{(sexp->code `(is-beach-weather 80 100 "cloudy"))}
 
-4. `rotate(rectangle(7, 10, "outline", "black"), 25)`
+3. @show{(sexp->code `(is-beach-weather "sunny" 90))}
+
+4. @show{(sexp->code `(is-beach-weather 90 "stormy weather"))}
 
 @vspace{1ex}
 
 Consider the following contract:
 
 ----
-text :: (str :: String, size :: Number, color :: String) -> Image
+cylinder :: (radius :: Number, height :: Number, color :: String) -> Image
 ----
 
 What is the *Name* of this function? @fitb{15em}{}
@@ -55,17 +57,17 @@ How may things are in this function's *Domain*? @fitb{10em}{}
 What is the *type* of this function's *first argument*?
 @fitb{10em}{}
 
-What is the *name* of this function's *second argument*?
+What is the *name* of this function's *third argument*?
 @fitb{10em}{}
 
 What is the *Range* of this function? @fitb{15em}{}.
 
 Below, circle which expression is the correct application of this function, based on its contract.
 
-1. `text("Bootstrap:Data Science", "purple", 60)`
+1. @show{(sexp->code `(cylinder "red" 10 60))}
 
-2. `text(circle(99, "solid", "green"))`
+2. @show{(sexp->code `(cylinder 30 "green"))}
 
-3. `text("red", 25, "Andrew")`
+3. @show{(sexp->code `(cylinder 10 25 "blue"))}
 
-4. `text("Angela", 25, "purple")`
+4. @show{(sexp->code `(cylinder 14 "orange" 25))}

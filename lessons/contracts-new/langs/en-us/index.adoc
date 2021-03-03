@@ -65,12 +65,15 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Applying Functions @duration{15 minutes}
 
 === Overview
-Students learn how to apply functions in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}, reinforcing concepts from standard Algebra.
+Students learn how to apply functions in 
+	@ifproglang{pyret}{Pyret} 
+	@ifproglang{wescheme}{WeScheme}, 
+reinforcing concepts from standard Algebra.
 
 === Launch
 Students know about Numbers, Strings, 
-@ifproglang{pyret}{Booleans and Operators} 
-@ifproglang{wescheme}{and Booleans}
+	@ifproglang{pyret}{Booleans and Operators} 
+	@ifproglang{wescheme}{and Booleans}
 -- all of which behave just like they do in math. But what about @vocab{functions}? They may remember functions from algebra: @math{f(x) = x + 4}.
 
 [.lesson-instruction]
@@ -100,15 +103,25 @@ Have students type this line of code into the interactions area and hit Enter: `
 }
 
 @ifproglang{wescheme}{
-@link{https://www.wescheme.org, WeScheme}
+Have students log into  @link{https://wescheme.org, WeScheme} and open the editor. Have students type this line of code into the interactions area and hit Enter: `(sqrt 16)`.
+
+- What is the name of this function?
+- What did the expression `(sqrt 16)` evaluate to?
+- Does the `sqrt` function produce Numbers? Strings? Booleans?
+- How many @vocab{arguments} does `sqrt` expect?
+
+Have students type this line of code into the interactions area and hit Enter: `(string-length "gratitude")`.
+
+- What is the name of this function?
+- What does the expression `(string-length "gratitude")` evaluate to?
+- Does the `string-length` function produce Numbers? Strings? Booleans?
+- How many @vocab{arguments} does `string-length` expect?
 }
 --
 
 === Investigation
 [.lesson-instruction]
-Have students complete 
-	@ifpathway{algebra}{@printable-exercise{pages/applying-functions.adoc}} 
-	@ifpathway{data-science}{@printable-exercise{pages/shapes-contracts.adoc}}.
+Have students complete @printable-exercise{pages/applying-functions.adoc}.
 
 === Synthesize
 Debrief the activity with the class. What kind of value was produced by that expression? (An Image! New datatype!) Which error messages were helpful? Which ones weren't?
@@ -120,7 +133,6 @@ Students learn about *Contracts*, and how they can be used to figure out new fun
 
 === Launch
 
-
 When students typed 
 @ifproglang{pyret}{`triangle(50, "solid", "red")`}
 @ifproglang{wescheme}{`(triangle 50 "solid" "red")`}, 
@@ -130,7 +142,7 @@ they created an example of a new Datatype, called an _Image_.
 - How does the output relate to the inputs?
 - Try making different triangles. Change the size and color! Try using `"outline"` for the second argument.
 
-The `triangle` function consumes a Number and two Strings as input, and produces an Image. As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
+The `triangle` function consumes a Number and two Strings as inputs, and produces an Image. As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
 
 . *Name* -- the name of the function, which we type in whenever we want to use it
 . *Domain* -- the type of data we give to the function (names and
@@ -149,7 +161,9 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 # triangle :: (side :: Number, mode :: String, color :: String) -> Image
 ----
 
-The first part of a contract is the function’s name. In this example, our functions are named `num-sqrt`, `string-length` and `triangle`.
+The first part of a contract is the function’s name. 
+@ifproglang{pyret}{In this example, our functions are named `num-sqrt`, `string-length` and `triangle`.}
+@ifproglang{wescheme}{In this example, our functions are named `sqrt`, `string-length` and `triangle`.}
 
 The second part is the @vocab{Domain}, or the names and types of arguments the function expects. `triangle` has a Number and two Strings as variables, representing the length of each side, the mode, and the color. We write name-type pairs with double-colons, with commas between each one. Finally, after the arrow goes the type of the @vocab{Range}, or the function’s output, which in this case is Image.
 
@@ -335,7 +349,9 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 @ifproglang{pyret}{
 - On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
 }
-@ifpathway{data-science}{*NEED TO MAKE A FILE FOR IMAGE EXPLORATION THAT'S NOT COE DEPENDENT*}
+@ifpathway{data-science}{
+- Have students turn to @printable-exercise{pages/shapes-contracts.adoc} in the workbook.
+}
 Give students time to investigate image functions and see how many they can discover, using the Contracts page to organize their findings.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
