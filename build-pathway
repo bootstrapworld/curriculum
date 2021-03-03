@@ -26,7 +26,7 @@ JAVASCRIPTDELAY="--javascript-delay 5000"
 
 ARGS=
 HELP=
-LASTMOD=2021-02-27 # last modified
+LASTMOD=2021-03-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -890,13 +890,7 @@ function buildworkbookpages() {
     mkdir pages
   fi
 
-  for subdir in *; do
-    if test -d "$subdir"; then
-      if test "$subdir" != solution-pages; then
-        adjustproglangsubdirs "$subdir"
-      fi
-    fi
-  done
+  # subdir -> adjustproglangsubdirs moved
 
   mkdirsolutionversionof $repoDir
   #adjustproglangsubdirs solution-pages
@@ -1420,6 +1414,13 @@ function buildpathway() {
         if test -d $lsn; then
           cd $lsn
           checklessonplan $lsn
+          for subdir in *; do
+            if test -d "$subdir"; then
+              if test "$subdir" != solution-pages; then
+                adjustproglangsubdirs "$subdir"
+              fi
+            fi
+          done
           cd ..
         fi
       done
