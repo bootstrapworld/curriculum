@@ -6,17 +6,13 @@
 
 (define *author-file* #f)
 (define *admin-file* #f)
-(define *final-file* #f)
 
 (let ((n (vector-length *args*)))
   (cond ((<= n 0)
          (error 'sanitize.rkt "Missing filename argument"))
         (else
           (set! *author-file* (vector-ref *args* 0))
-          (when (>= n 2)
-            (set! *admin-file* (vector-ref *args* 1))
-            (when (>= n 3)
-              (set! *final-file* (vector-ref *args* 2)))))))
+          )))
 
 (define *author-file-basename*
   (regexp-replace "([^ ]+)-author.adoc" *author-file* "\\1"))
@@ -24,11 +20,7 @@
 (when (string=? *author-file-basename* *author-file*)
   (set! *author-file-basename* (regexp-replace "(.*).adoc" *author-file* "\\1")))
 
-(unless *admin-file*
-  (set! *admin-file* (string-append *author-file-basename* "-admin.adoc")))
-
-(unless *final-file*
-  (set! *final-file* (string-append *author-file-basename* "-final.adoc")))
+(define *final-file* (string-append *author-file-basename* "-final.adoc"))
 
 (define (question-asked? ln)
   (let ([m (regexp-match
@@ -65,11 +57,31 @@
                               (when (string=? tag "dataset-name")
                                 (let ([ans (skip-to-answer i)])
                                   (when ans
-                                    (set! *final-file*
-                                      (string-append "datasheet-for-" ans ".adoc")))))
+                                    (let ([prefix
+                                            (cond [*admin-file*
+                                                    (let ([admin-prefix
+                                                            (regexp-replace
+                                                              "([^ ]+)-dataset-admin.adoc"
+                                                              *admin-file* "\\1")])
+                                                      (if (string=? admin-prefix *admin-file*)
+                                                          "datasheet-for" admin-prefix))]
+                                                  [else "datasheet-for"])])
+                                      (set! *final-file*
+                                        (string-append prefix "-" ans ".adoc"))))))
                               (set! tags (cons tag tags))))])
               (loop))))))
     (reverse tags)))
+
+(define (find-admin-file)
+  (call-with-input-file *author-file*
+    (lambda (i)
+      (let ([ln (read-line i)])
+        (unless (eof-object? ln)
+          (let ([x (regexp-replace ".*from ([^ ]+) *$" ln "\\1")])
+            (unless (string=? x ln)
+              (set! *admin-file* x)))))))
+  (unless *admin-file*
+    (set! *admin-file* "datasheet-for-datasets-admin.adoc")))
 
 (define (check-tag-integrity)
   (let ((admin-tags (collect-tags #:admin? #t))
@@ -139,7 +151,6 @@
   (let ((f (list-ref x 1))
         (start-line (string->number (list-ref x 2)))
         (stop-line (string->number (list-ref x 3))))
-    (set! f *admin-file*)
     (call-with-input-file f
       (lambda (i)
         (let loop ((k 1))
@@ -196,9 +207,14 @@
         #:exists 'replace))))
 
 (define (sanitize)
+  (find-admin-file)
   (when (and (check-tag-integrity)
              (check-questions-answered)
              (create-final-file))
+    (call-with-output-file ".expanded-file"
+      (lambda (o)
+        (display *final-file* o) (newline o))
+      #:exists 'replace)
     (printf "Sanitized form of ~s written to ~s\n" *author-file* *final-file*)))
 
 (sanitize)
