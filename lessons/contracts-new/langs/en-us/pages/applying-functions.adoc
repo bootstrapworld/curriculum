@@ -32,6 +32,7 @@ Type this line of code into the interactions area and hit "Enter":  @show{(sexp-
 
 == Catching Bugs
 
+@ifproglang{pyret}{
 The following lines of code are all BUGGY! Read the code and the error messages to identify the mistake.
 
 5) `triangle(20, "solid" "red")` 	
@@ -47,7 +48,7 @@ You may need to add or remove some text to fix your program. Look carefully befo
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
 
 @vspace{2ex}
 
@@ -66,7 +67,7 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
 
 @vspace{2ex}
 
@@ -85,7 +86,7 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
 
 @vspace{2ex}
 
@@ -102,4 +103,64 @@ Function calls must not have space between the [.underline]*function expression*
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+}
+
+@ifproglang{wescheme}{
+
+5) `(*triangle* 20 "solid")`				
+
+[.indentedpara]
+--
+[.underline]*triangle*: expects 3 arguments, but given 2: [.underline]20 [.underline]solid
+[.underline]"at: line 1, column 0, in <interactions3>""
+--
+
+@vspace{3ex}
+
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+
+@vspace{2ex}
+
+6) `(*triangle* "solid" "red" 20)`		
+
+[.indentedpara]
+--
+[.underline]triangle: expects a non-negative number as 1st argument, but given: [.underline]"solid"; other arguments were: [.underline]"red" [.underline]20
+[.underline]"at: line 1, column 0, in <interactions2>""
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+@vspace{2ex}
+
+7) `(*triangle* 20 40 "solid" "red")` 		
+
+[.indentedpara]
+[.underline]*triangle*: expects 3 arguments, but given 4: [.underline]20 [.underline]40 [.underline]solid [.underline]red
+[.underline]"at: line 1, column 0, in <interactions12>" 
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+
+8) `(triangle 20 *solid* "red")` 	
+
+[.indentedpara]
+--
+[.underline]*solid*: this variable is not defined
+[.underline]"at: line 1, column 0, in <interactions11>" 
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+@vspace{2ex}
+
+9) `(triangle 20 *"striped"* "red")`
+
+[.indentedpara]
+--
+[.underline]triangle: expects a style ("solid" / "outline") or an opacity value [0-255]) as 2nd argument, but given: "striped"; other arguments were: 20 "red"
+at: line 1, column 0, in <interactions8>
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}}
+@vspace{2ex}
+}
