@@ -3,28 +3,44 @@
 This directory contains two scripts `make-questionnaire.rkt` and
 `sanitize.rkt`.
 
-- `make-questionnaire.rkt` takes a datasheet spec file, say
-  `D-admin.adoc`, and produces
-  a student-facing file, `D-student.adoc`, that each student fills out.
+1) `make-questionnaire.rkt` takes a datasheet spec file, say
+`D-dataset-admin.adoc`, and produces
+a student-facing questionnaire file, `D-dataset-author.adoc`, that each student fills out.
 
-- `sanitize.rkt` checks the filled `D-student.adoc` against
-  `D-admin.adoc` and produces the sanitized and possibly
-  corrected version in `D-final.adoc`. `sanitize.rkt` can take
-  two extra optional arguments in addition to its first argument.
-  The optional second argument specifies the filename of the
-  admin file (which by default is `D-admin.adoc`). The optional
-  third argument specifies the filename of the output file (which
-  by default is `D-final.adoc`). These optional arguments make it
-  easy to convert filled student files that have been renamed for
-  convenience.
+It is allowed to rename these questionnaire files, especially if
+many copies are generated, each presumably to filled differently
+for a different dataset.
+ 
 
-It also includes a sample spec file, `D-admin.adoc`, a sample
-stylesheet `questionnaire.css`, and other
-production datasheets as they are authored.
+2) `expand-questionnaire.rkt` takes the _filled_ questionnaire
+`D-dataset-author.adoc`
+and produces a checked, expanded version
+`D-dataset-final.adoc`, which can be transferred to the appropriate
+pathway subdirectory. 
 
-== Format of the `D-admin.adoc` file
+`expand-questionnaire.rkt` checks the filled questionnaire
+against the original admin file. This latter file is embedded in
+the questionnaire, so it does not matter if the questionnaire was
+renamed.
 
-The `D-admin.adoc` file contains a list of tags with the paragraph
+The name of the final file can be changed by the answer to a
+specific question with tag `:dataset-name`. If, e.g., the answer
+to this question is `poodles`, and if the admin file is
+`D-dataset-admin.adoc`, then the final file is named
+`D-poodles.adoc`.
+
+Some admin files are included:
+`datasheet-for-dataset-admin.adoc` and `about-dataset-admin.adoc`
+which are used for production, and some sample ones for testing.
+
+A sample stylesheet `questionnaire.css` is used to test the HTML
+versions locally. Typically, though, the final files are included
+in the pathways and use the latter's stylesheets.
+
+
+== Format of the `D-datasheet-admin.adoc` file
+
+The `D-datasheet-admin.adoc` file contains a list of tags with the paragraph
 that each tag expands to. E.g., a tag `Description` could be
 defined as:
 
@@ -76,109 +92,100 @@ pragraphs fenced with `--`) prefixed with
    [.answer]
 
 In addition to these, the admin file
-may contain other content. These are passed through verbatim except that
-any leading comment indicators are stripped. This is useful for
-including structure (like section breaks). E.g.,
+may contain other content. These, as also the stock questions
+with their stock answers, are suppressed in the
+generated questionnaire.
 
-    // == Questions relating to Frobbotz's dispersal
-
-This identifies a subsection with its header.
-
-If you want a comment to pass through as a comment, simply double
-the comment marker (with at least one space sep):
-
-    // // This comment passes through.
-
-== The student-facing file, `D-student.adoc`
+== The student-facing file, `D-dataset-author.adoc`
 
 The command
 
-    make-questionnaire.rkt D-admin.adoc.
+    make-questionnaire.rkt D-dataset-admin.adoc
 
-creates the corresponding student-facing file, `D-student.adoc`.
+creates the corresponding student-facing questionnaire file,
+`D-dataset-author.adoc`.
 
-This file is a copy of `D-admin.adoc` with all the 
-comments uncommented. Thus, the commented section header above
-becomes
-
-    == Questions relating to Frobbotz's dispersal
+This file is a condensed copy of `D-dataset-admin.adoc` that is
+used as a questionnaire. It is OK to rename this file before
+issuing it to respondents, and also to rename the returned filled
+questionnaire still further.
 
 The tag definitions are converted tag inclusions, and
 their values are given as AsciiDoc comments so that the student
 can read them and enter the appropriate answer in the space
 indicated. E.g., the tagged question `:origin:` above becomes
 
-    include::D-admin.adoc[...]
+    include::D-dataset-admin.adoc[...]
     //
     // Question :origin:
     //
     // Where did the Frobbotz data come from?
     //
-    // PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER
-    //
-    Ad rem est vero cum ratione. Optio dolor molestiae consequatur
-    perferendis sint amet eligendi. Minus unde odit quod officia sit
-    ut impedit facilis. Voluptatum alias illo et dolore impedit aut
-    vitae qui. Laborum itaque ipsa possimus et.
 
-The student replaces the Latin filler text with their actual
-answer.
 
-The tags that define non-questions are also translated to tag
-inclusions. Their text is also commented, so the student can read them
-for guidance, but there is no invitation to write under them (and
-no filler text). Thus the `:Description:` tag above becomes:
+== Editing and submitting `D-dataset-author.adoc`
 
-   include::D-admin.adoc[...]
-   //
-   // These questions relate to the Frobbotz dataset. Your
-   // answers will help clarify what Frobbotz's benefits, demands,
-   // and consequences are.
-   //
-
-== Editing and submitting `D-student.adoc`
-
-The student edits `D-student.adoc` using the text editor of their
-choice. Answers are written in the spaces advised. The comments
--- whether guidelines or questions -- tolerate any amount of
-mangling, as they are just comments. The tag inclusion lines
-ideally should not be
+The student edits `D-dataset-author.adoc` (whatever its chosen name) using the text editor of their
+choice. Answers are written in the spaces following the
+questions.
+The tag inclusion lines
+should not be
 tampered with.
 
-== Sanitizing `D-student.adoc`
+== Sanitizing `D-dataset-author.adoc`
 
 Running
 
-    sanitize.rkt D-student.adoc
+    expand-questionnaire.rkt D-author.adoc
 
-corrects any damage the file may have incurred during the editing
-process. `sanitize.rkt` uses the admin file, `D-admin.adoc`, to
+does a spot-check that edited file is clean, has all the answers
+mandated, and removes the tag-inclusion, and creates a “final”
+file that is independent, i.e., with all the includes of the
+admin file fragments expanded out. This file can then be moved to
+its desired place in 
+the pathway directories.
+
+`expand-questionnaire.rkt` uses the admin file, `D-dataset-admin.adoc`, to
 ensure that all the guidelines and questions are re-inserted
 correctly, and that all tags are present and answered, and are in the
 right order. Cases of serious manglage are reported as failure,
 so the file can be discarded as invalid.
 
+If the questionnaire file is `D-author.adoc`, then the
+final file named `D-final.adoc` by default. If the q file
+basename doesn't
+have the `-author` suffix, e.g., `B.adoc`, then the final file is
+`B-final.adoc`.  If the first question in the q file is
+`:dataset-name:`, then its answer `C` is used with the admin file
+(`D-dataset-admin.adoc`) to fashion a final file named
+`D-C.adoc`.
+
 == Creating HTML report
 
-Run Asciidoctor on the filled student file.
+Run Asciidoctor on the expanded file
 
-    asciidoctor -a stylesheet=questionnaire.css D-student.adoc
+    asciidoctor -a stylesheet=questionnaire.css D-final.adoc
 
+to get a local HTML file that can be used to check the output.
 Any stylesheet may be used. Ideally, it should contain a suitable
 style for the class `.question`, so the questions stand out apart
-from the student answers.
+from the student answers. 
+
+`questionnaire.css` is used only for local checking.
+After carting off the final files to the pathway directories, the
+pathway build's stylesheets take over.
 
 == Makefile
 
 A `Makefile` is included for convenience:
 
-    make student-files
+    make questionnaires
 
-generates a new `*-student.adoc` file for each of the
+generates a new `*-author.adoc` file for each of the
 `*-admin.adoc` in the directory.
 
     make
 
-generates HTML reports from all the `*-student.adoc` files in the
+generates HTML reports from all the `*-author.adoc` files in the
 directory. It is assumed that these student files have all been
 manually edited to reflect a student's answers.

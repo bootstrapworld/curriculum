@@ -113,10 +113,12 @@
   )
 
 (define (gen-author-file)
+  (printf "Making questionnaire ~a from ~a\n" *author-file* *admin-file*)
   (call-with-input-file *admin-file*
     (lambda (i)
       (call-with-output-file *author-file*
         (lambda (o)
+          (fprintf o "// Questionnaire generated from ~a\n" *admin-file*)
           (let loop ()
             (let-values (((p line0 line-last) (read-graf i)))
               ;(printf "XXX ~s ~s ~s\n" p line0 line-last)
