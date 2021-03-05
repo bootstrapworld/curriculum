@@ -1,4 +1,4 @@
-= Applying Functions
+= Applying Functions (Pyret)
 
 ++++
 <style>
@@ -6,7 +6,7 @@
 </style>
 ++++
 
-Type this line of code into the interactions area and hit "Enter":  `triangle(50, "solid", "red")`
+Type this line of code into the interactions area and hit "Enter":  @show{(sexp->code `(triangle 50 "solid" "red"))}
 
 
 [cols="1,15,10", frame="none"]
@@ -29,10 +29,10 @@ Type this line of code into the interactions area and hit "Enter":  `triangle(50
 
 |===
 
+
 == Catching Bugs
 
 The following lines of code are all BUGGY! Read the code and the error messages to identify the mistake.
-
 
 5) `triangle(20, "solid" "red")` 	
 
@@ -44,8 +44,11 @@ triangle(20, "solid" *"red"*)
 
 You may need to add or remove some text to fix your program. Look carefully before the *highlighted* text. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
 --
+
 @vspace{3ex}
+
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
 @vspace{2ex}
 
 6) `triangle(20, "solid")`				
@@ -79,8 +82,11 @@ This [.underline]#application expression# errored:
 The [.underline]#*operator*# evaluated to a function accepting 3 parameters.
 An [.underline]#application expression# expects the number of parameters and [.underline]#_arguments_# to be the same.
 --
+
 @vspace{3ex}
+
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
+
 @vspace{2ex}
 
 8) `triangle (20, "solid", "red")` 		
@@ -93,5 +99,7 @@ Pyret thinks this code is probably a function call:
 
 Function calls must not have space between the [.underline]*function expression* and the [.underline]_arguments_.
 --
+
 @vspace{3ex}
+
 Can you spot the mistake?				@span{.right}{@fitb{60ex}
