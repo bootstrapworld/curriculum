@@ -13,22 +13,21 @@ _Match_ the contract (left) with the expression described by the function being 
 |===
 |  Contract|  || |Expression
 | make-id +::+ (name +::+ String, age +::+ Number) -> Image
-| *1* || *A* |`make-id("Savannah", "Lopez")`
+| *1* || *A* | @show{(sexp->code `(make-id "Savannah" "Lopez"))}
 @vspace{1ex}
 | make-id +::+ (name +::+ String, age +::+ Number, color +::+ String) -> Image
-| *2* || *B* | `make-id("Pilar", 17)`           
+| *2* || *B* | @show{(sexp->code `(make-id "Pilar" 17))}          
 @vspace{1ex}
 | make-id +::+ (name +::+ String) -> Image
-| *3* || *C* | `make-id("Akemi", 39, "red")` 
+| *3* || *C* | @show{(sexp->code `(make-id "Akemi" 39 "red"))}
 @vspace{1ex}
 | make-id +::+ (first +::+ String, last +::+ String) -> Image
-| *4* || *D* | `make-id("Raïssa", "McCracken", 32)`
+| *4* || *D* | @show{(sexp->code `(make-id "Raïssa" "McCracken" 32))}
 @vspace{1ex}
 | make-id +::+ (first +::+ String, last +::+ String, age +::+ Number) -> Image
-| *5* || *E* | `make-id("von Einsiedel")`
+| *5* || *E* | @show{(sexp->code `(make-id "von Einsiedel"))}
 
 |===
-
 
 
 @vspace{5ex}
@@ -36,17 +35,17 @@ _Match_ the contract (left) with the expression described by the function being 
 |===
 |  Contract|  || |Expression
 | is-capital +::+ (city +::+ String, state +::+ String) -> Boolean
-| *1* || *A* |`show-pop("Juneau", "Alaska", 31848)`
+| *1* || *A* | @show{(sexp->code `(show-pop "Juneau" "Alaska" 31848))}
 @vspace{1ex}
 | is-capital +::+ (city +::+ String, country +::+ String) -> Boolean
-| *2*|| *B* | `show-pop("San Juan", 395426)`           
+| *2*|| *B* | @show{(sexp->code `(show-pop "San Juan" 395426))}          
 @vspace{1ex}
 | show-pop +::+ (city +::+ String, pop +::+ Number) -> Image
-| *3* || *C* | `is-capital("Accra", "Ghana")` 
+| *3* || *C* | @show{(sexp->code `(is-capital "Accra" "Ghana"))}
 @vspace{1ex}
 | show-pop +::+ (city +::+ String, state +::+ String, pop +::+ Number) -> Image
-| *4* || *D* | `show-pop("Oklahoma", 3751351)`
+| *4* || *D* | @show{(sexp->code `(show-pop "Oklahoma" 3751351))}
 @vspace{1ex}
 | show-pop +::+ (state +::+ String, pop +::+ Number) -> Number
-| *5* || *E* | `is-capital("Albany", "New York")`
+| *5* || *E* | @show{(sexp->code `(is-capital "Albany" "New York"))}
 |===
