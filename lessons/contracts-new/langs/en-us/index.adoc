@@ -1,6 +1,6 @@
 = Contracts
 
-@lesson-description{Students encounter String and Image datatypes and use "contracts" to make sense of the domain and range of functions.Students learn how to apply Functions, and how to interpret the information contained in a Contract: Name, Domain and Range. They then use this knowledge to explore more of the Pyret language.}
+@lesson-description{Students learn how to apply Functions in the programming environment, encounter Image datatypes, and learn how to interpret the information contained in a Contract: Name, Domain and Range.}
 
 [@lesson-intro-table]
 |===
@@ -11,7 +11,7 @@
 
 * Apply functions to create Images
 * Identify the parts of a Contract, and use it to apply a function
-* Demonstrate understanding of @vocab{Domain} and @vocab{Range} and how they relate to @vocab{functions}
+* Demonstrate understanding of @vocab{Domain} and @vocab{Range} and how they relate to @vocab{Functions}
 
 | Student-facing Lesson Goals
 |
@@ -22,21 +22,18 @@
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1Guoozn2nrzlCF2na8G9VTGXECMo4x2oNQPZptryf0ds/, Lesson Slides}
-
-
-@material-links
 
 @ifproglang{wescheme}{
 * @link{https://docs.google.com/presentation/d/1-G2RiCc20dGiexnPqIjLDdvPJWeSlBj_bTKEhngmqL0/, Lesson Slides}
-* @link{https://wescheme.org, WeScheme}
 * @link{../../back-matter/pages/contracts-1.html, Blank Contracts Page}
 }
 
 @ifproglang{pyret}{
 * @link{https://docs.google.com/presentation/d/1t765w-UJAHFCzvkE1YRYgHHBQ0MzegUUKKDtkxdY8KI/, Lesson Slides}
-* @link{https://code.pyret.org/, "code.pyret.org (CPO)"}
 }
+
+
+@material-links
 
 | Preparation
 |
@@ -45,14 +42,21 @@
 internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 * Decide how students will be grouped in pairs
-* Make sure student computers can access @link{https://code.pyret.org, "code.pyret.org (CPO)"}
+@ifproglang{pyret}{
 * All students should log into @link{https://code.pyret.org, "code.pyret.org (CPO)"} and open the "Editor"
+}
+@ifproglang{wescheme}{
+* All students should log into @link{https://wescheme.org, WeScheme} and open the "Editor"
+}
 
 | Key Points For The Facilitator
 |
 * Check frequently for understanding of @vocab{data types} and @vocab{contract}s during this lesson and throughout subsequent lessons.
 
+@ifproglang{wescheme}{
 * Students will use their Contracts page frequently, so it should be kept in an accessible, convenient location.
+}
+
 | Supplemental Resources
 |
 
@@ -68,16 +72,16 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 Students learn how to apply functions in 
 	@ifproglang{pyret}{Pyret} 
 	@ifproglang{wescheme}{WeScheme}, 
-reinforcing concepts from standard Algebra.
+reinforcing concepts from standard Algebra, and practice reading error messages to diagnose errors in code.
 
 === Launch
 Students know about Numbers, Strings, 
 	@ifproglang{pyret}{Booleans and Operators} 
 	@ifproglang{wescheme}{and Booleans}
--- all of which behave just like they do in math. But what about @vocab{functions}? They may remember functions from algebra: @math{f(x) = x + 4}.
+-- all of which behave just like they do in math. But what about @vocab{functions}? Students may remember functions from algebra: @math{f(x) = x + 4}.
 
 [.lesson-instruction]
-- What is the name of this function?
+- What is the name of this function? _f_
 - The expression @math{f(2)} applies the function @math{f} to the number 2. What will it evaluate to? _6_
 - What will the expression @math{f(3)} evaluate to? _7_
 - The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? _1_
@@ -86,160 +90,75 @@ Students know about Numbers, Strings,
 
 [.lesson-instruction]
 --
-@ifproglang{pyret}{
-Have students log into  @link{https://code.pyret.org, "code.pyret.org CPO"} and open the editor. Have students type this line of code into the interactions area and hit Enter: `num-sqrt(16)`.
+Have students log into  
+@ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org CPO"}}
+@ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}
+and open the editor. 
+Have students type @show{(sexp->code `(sqrt 16))} into the interactions area and hit Enter.
 
-- What is the name of this function?
-- What did the expression `num-sqrt(16)` evaluate to?
-- Does the `num-sqrt` function produce Numbers? Strings? Booleans?
-- How many @vocab{arguments} does `num-sqrt` expect?
+- What is the name of this function? 
+- What did the expression evaluate to? _4_
+- Does the @ifproglang{pyret}{`num-sqrt`} @ifproglang{wescheme}{`sqrt`} function produce a Number? String? Boolean? _Number_
+- How many @vocab{arguments} does the function expect? _1_
 
-Have students type this line of code into the interactions area and hit Enter: `string-length("gratitude")`.
+Have students type @show{(sexp->code `(string-length "rainbow"))} into the interactions area and hit Enter: 
 
-- What is the name of this function?
-- What does the expression `string-length("gratitude")` evaluate to?
-- Does the `string-length` function produce Numbers? Strings? Booleans?
-- How many @vocab{arguments} does `string-length` expect?
-}
-
-@ifproglang{wescheme}{
-Have students log into  @link{https://wescheme.org, WeScheme} and open the editor. Have students type this line of code into the interactions area and hit Enter: `(sqrt 16)`.
-
-- What is the name of this function?
-- What did the expression `(sqrt 16)` evaluate to?
-- Does the `sqrt` function produce Numbers? Strings? Booleans?
-- How many @vocab{arguments} does `sqrt` expect?
-
-Have students type this line of code into the interactions area and hit Enter: `(string-length "gratitude")`.
-
-- What is the name of this function?
-- What does the expression `(string-length "gratitude")` evaluate to?
-- Does the `string-length` function produce Numbers? Strings? Booleans?
-- How many @vocab{arguments} does `string-length` expect?
-}
+- What is the name of this function? _string-length_
+- What does the expression evaluate to? _7_
+- Does the `string-length` function produce a Number? String? Boolean? _Number_
+- How many @vocab{arguments} does `string-length` expect? _1_
 --
 
 === Investigation
 [.lesson-instruction]
-Have students complete @printable-exercise{pages/applying-functions.adoc}.
+@ifproglang{pyret}{
+- On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
+}
+Have students complete @printable-exercise{pages/applying-functions.adoc}. As students finish, have them try making other triangles using `"outline"` for the second argument and changing the size and color! 
 
 === Synthesize
-Debrief the activity with the class. What kind of value was produced by that expression? (An Image! New datatype!) Which error messages were helpful? Which ones weren't?
+Debrief the activity with the class. 
+
+- What are the types of the arguments `triangle` was expecting? _A Number and 2 Strings_
+- How does the output relate to the inputs? _The Number determines the size and the Strings determine the style and color._
+- What kind of value was produced by that expression? _An Image! New datatype!_ 
+- Which error messages were helpful? Which ones weren't?
 
 == Contracts @duration{35 minutes}
 
 === Overview
-Students learn about *Contracts*, and how they can be used to figure out new functions or diagnose errors in their code. Then they use this knowledge to explore the contracts pages in their workbooks.
+
+This activity introduces the notion of @vocab{Contracts}, which are a simple notation for keeping track of the set of all possible inputs and outputs for a function. They are also closely related to the concept of a _function machine_, which is introduced as well. __Note: Contracts are based on the same notation found in Algebra!__
 
 === Launch
 
 When students typed 
 @ifproglang{pyret}{`triangle(50, "solid", "red")`}
-@ifproglang{wescheme}{`(triangle 50 "solid" "red")`}, 
-they created an example of a new Datatype, called an _Image_.
+@ifproglang{wescheme}{`(triangle 50 "solid" "red")`} 
+into the editor, they created an example of a new Datatype, called an _Image_.
 
-- What are the types of the arguments `triangle` was expecting?
-- How does the output relate to the inputs?
-- Try making different triangles. Change the size and color! Try using `"outline"` for the second argument.
+The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
 
-The `triangle` function consumes a Number and two Strings as inputs, and produces an Image. As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
+As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
 
 . *Name* -- the name of the function, which we type in whenever we want to use it
 . *Domain* -- the type of data we give to the function (names and
   Types!), written between parentheses and separated by commas
 . *Range* -- the type of data the function produces
 
-Domain and Range are _Types_, not specific values. As a convention, we *capitalize Types and keep names in lowercase*. `triangle` works on many different Numbers, not just the `20` we used in the example above!
-
-These three parts make up a @vocab{contract} for each function. 
-
-Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
-
-----
-# num-sqrt :: (n :: Number) -> Number
-# string-length :: (s :: String) -> Number
-# triangle :: (side :: Number, mode :: String, color :: String) -> Image
-----
-
-The first part of a contract is the function’s name. 
-@ifproglang{pyret}{In this example, our functions are named `num-sqrt`, `string-length` and `triangle`.}
-@ifproglang{wescheme}{In this example, our functions are named `sqrt`, `string-length` and `triangle`.}
-
-The second part is the @vocab{Domain}, or the names and types of arguments the function expects. `triangle` has a Number and two Strings as variables, representing the length of each side, the mode, and the color. We write name-type pairs with double-colons, with commas between each one. Finally, after the arrow goes the type of the @vocab{Range}, or the function’s output, which in this case is Image.
-
 Contracts tell us a lot about how to use a function. In fact, we can figure out how to use functions we've never seen before, just by looking at the contract! Most of the time, error messages occur when we've accidentally broken a contract.
 
-=== Investigate
-[.lesson-instruction]
-Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc}, to get some practice working with Contracts.
-
-Once you feel confident, it's time to play with some new functions! Turn to the back of your workbook, and get some practice reading and using Contracts! Make sure you try out the following functions:
-
-- `text`
-- `circle`
-- `ellipse`
-- `star`
-- `string-repeat`
-
-When you've figured out the code for each of these, *write it down in the empty line beneath each contract*. These pages will become your reference for the remainder of the class!
-
-Here’s an _example_ of another function. Type it into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
-
-`string-contains("apples, pears, milk", "pears")`
-[.lesson-point]
-For each input to a function, there is exactly one output.
-
-
-== Contracts @duration{15 minutes}
-
-=== Overview
-This activity introduces the notion of @vocab{Contracts}, which are a simple notation for keeping track of the set of all possible inputs and outputs for a function. They are also closely related to the concept of a _function machine_, which is introduced as well. __Note: Contracts are based on the same notation found in Algebra!__
-
-=== Launch
-@ifproglang{wescheme}{ 
-Students should open @link{https://www.wescheme.org, WeScheme} in their browser, and click "Log In". They will be asked to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.). Logging in will take them to the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Start a New Program".
-}
-
-@ifproglang{pyret}{
-Students should open @link{https://code.Pyret.org, code.pyret.org (CPO) } in their browser, and click "Sign In". They will be asked to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.). Logging in will take them to the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Open Editor".
-}
-@span{.right}{ @image{images/VerticalLineTest.png, "Source: Wikipedia", 250} }
-Functions are a lot like machines: values go in, something happens, and new values come out. Let's start with an example of a function we all know: adding two numbers! Addition is like a machine that takes in pairs of numbers and produces a sum. 
-
-Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast. We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what type of thing goes in and what type of thing should come out!
-
-In our coffee-maker example, we expect to get the exact same coffee out if we use the exact same beans and water each time. If you put bread in a toaster and got a bagel out, you'd be pretty surprised! __Functions work the same way:__  no matter how many times you plug in the same number, you will _always_ get the same result. And if you don't? *It's not a function!*
-
-Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output__ for the same input. Like any good machine, function machines must be *reliable*. 
-
-=== Investigate
-
-We use something called a @vocab{Contract} to keep track of what goes in and out of these machines called functions. Contracts are like a "cheat sheet" for using functions. Once you know how to read one, you can quickly figure out how to use a function just by looking at its contract!
-
-@span{.clear}
+Contracts don't tell us _specific_ inputs. They tell us the _@vocab{Datatype}_ of input a function needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we _use_ a Contract, we plug specific numbers or strings into an expression.
 
 [.lesson-point]
-The Contract for a function has three parts: the Name of the function, the @vocab{Domain}, and the @vocab{Range}
-
-- The Name is simply how we refer to the function: 
-@ifproglang{wescheme}{`*`, `+`, `sqrt`, etc.}
-@ifproglang{pyret}{`num-sqrt`, `num-sqr`, etc.}
-- The @vocab{Domain} tells us what the function "takes in", or _consumes_. These are also known as the _arguments_ to the function.
-- The @vocab{Range} tells us what the function "gives back", or _produces_.
-
-Memorizing contracts is hard, and why memorize when we can just keep a log of them! Let's write them down so we can use them later! At the back of your workbook, you'll find pages with space to write down every contract you see in the course.
+Contracts are general. Expressions are specific.
 
 [.lesson-instruction]
-- What does Multiplication need as an input? What does it produce?
-- What inputs does the Square Root function consume? What does it produce? 
-- When we Square something, what does the Square function consume and produce?
-@ifproglang{wescheme}{
-- Write the contracts for `+`, `-`, `*`, `/`, `sqr`, `sqrt` and `string-length` into the Contracts page.
-}
-@ifproglang{pyret}{
-- Write the contracts for `num-sqr`, `num-sqrt`, and `string-length` into the Contracts page.
-- If you have time, students could complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc5415a24be4c0d054d73b2, Matching Expressions and Contracts}
-}
+*Optional:* Have students make a @printable-exercise{pages/frayer-model.pdf, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words.
+
+
+
+Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
 
 [.text-center]
 *A Sample Contracts Table*
@@ -251,7 +170,7 @@ Memorizing contracts is hard, and why memorize when we can just keep a log of th
 </style>
 ++++
 
-[.inlineContractTable, cols="4,1,10,1,2", options="header", grid="rows"]
+[.inlineContractTable, cols="6,1,8,1,2", options="header", grid="rows"]
 |===
 | Name 					|	| Domain				|		| Range
 @ifproglang{wescheme}{
@@ -260,69 +179,68 @@ Memorizing contracts is hard, and why memorize when we can just keep a log of th
 |`;` `sqr`				| :	| `Number`  			|	->	| `Number`
 |`;` `sqrt`				| :	| `Number` 				|	->	| `Number`
 |`;` `string-length`	| :	| `String` 				|	->	| `Number`
+|`;` `triangle`			| : | `Number String String`|	->	| `Image`
 }
 @ifproglang{pyret}{
 |`#` `num-sqr`			| ::| `Number`  			|	->	| `Number`
 |`#` `num-sqrt`			| ::| `Number` 				|	->	| `Number`
 |`#` `string-length`	| ::| `String`				|	->	| `Number`
+|`#` `triangle`			| ::| `Number String String`|	->	| `Image`
 }
 |===
 
-It would be silly to buy a coffee-maker that only works with one specific coffee! Similarly, Contracts don't tell us _specific_ inputs. They tell us the _@vocab{Datatype}_ of input a function needs. For example, a Contract wouldn't say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers".  When we _use_ a Contract, we plug specific numbers into a mathematical expression.
+@ifpathway{algebra}{
+	Memorizing contracts is hard, and why memorize when we can just keep a log of them! Let's write them down so we can use them later! At the back of your workbook, you'll find pages with space to write down every contract you see in this course.
+	
+	@ifproglang{wescheme}{
+ 	Write the contracts for `+`, `-`, `*`, `/`, `sqr`, `sqrt` and `string-length` into the Contracts page.
+	}
+	@ifproglang{pyret}{
+	- Write the contracts for `num-sqr`, `num-sqrt`, and `string-length` into the Contracts page.
+	}
+	}
+
+Open the editor and write code that satisfies each of these contracts. @ifpathway{algebra}{When you've figured out code for each of these, *write it down in the empty line beneath each contract*. These pages will become your reference for the remainder of the class!}
 
 [.lesson-point]
-Contracts are general. Expressions are specific.
+When the input matches what the function consumes, the function produces the output we expect.
 
+*Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?*
+
+_An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
+
+=== Investigate
 [.lesson-instruction]
-*Optional:* Have students make a @opt-printable-exercise{pages/frayer-model.pdf, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words.
+Complete pages @printable-exercise{pages/practicing-contracts.adoc}, @printable-exercise{pages/matching-expressions.adoc}, @printable-exercise{pages/reading-for-domain-and-range.adoc} and @ifproglang{pyret}{@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc5415a24be4c0d054d73b2, Matching Expressions and Contracts ONCE WE DECIDE ON CONTRACTS, FIX THIS ACTIVITY and PUBLISH THE LINK}
+} @ifproglang{wescheme}{https://teacher.desmos.com/activitybuilder/custom/6043cb3561acbf05f5863155, ONCE WE DECIDE ON CONTRACTS, FIX THIS ACTIVITY and PUBLISH THE LINK} to get some practice working with Contracts.
+
+Here’s an example of another function. Type it into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
+
+`string-contains("apples, pears, milk", "pears")`
+
+@ifpathway{algebra}{Add it to your contracts page!}
+
+=== Possible Misconceptions
+
+Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
+
+- How many items are in this function's Domain?
+- What is the _name_ of the 1st item in this function's Domain?
+- What is the _type_ of the 1st item in this function's Domain?
+- What is the _type_ of the Range?
 
 === Synthesize
-- What is wrong with the contract 
-@ifproglang{wescheme}{`; + : 3 4 -> 7`?}
-@ifproglang{pyret}{`# + : 3 4 -> 7`?}
+
 - What is the difference between a value like `17` and a type like `Number`?
+- How many output are there for a function? _For each input (or collection of inputs) there is exactly one output._
+
 
 == Exploring Image Functions @duration{25 minutes}
 
 === Overview
-Students explore functions that go beyond numbers and strings, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
+This activity digs deeper into Contracts, and has students create their own Contracts trackers to take ownership of the concept and create an artifact they can refer back to.  Students explore functions, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
 
 === Launch
-Students have already seen `Number` values like `42`,`-91`, `1/4` or `0.25`, `Strings` like `"hello"`, and `Booleans` like @ifproglang{pyret}{3 > 2} @ifproglang{wescheme}{> 3 2}...but computer programs can work with a much larger set of @vocab{datatypes}. 
-
-[.lesson-instruction]
-Here are two Circles of Evaluation. One of them is familiar, but the other is very different from what you've seen before. What's different about the Circle on the right?
-
-[cols="1,1", grid="none", frame="none"]
-|===
-| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
-|@show{(sexp->coe `(star 50 "solid" "blue"))}
-|===
-
-Possible responses:
-
-- We've never seen the function `star` before
-- We've never seen Strings used in a Circle of Evaluation before
-- We've never seen a function take in three inputs
-- We've never seen a function take in a mix of Numbers and Strings
-
-[.lesson-instruction]
-Can you figure out the Name and @vocab{Domain} for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
-
-Possible responses:
-
-- We know the name of the function is `star`, because that's what is at the top of the circle
-- We know it has three things in its Domain
-- We know the Domain consists of a Number and two Strings
-
-[.lesson-instruction]
-- But what about the @vocab{Range}? What do you think this expression will evaluate to? 
-- Convert this Circle to code and try out!
-- What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get. *If you get an error, read it!* It just might give you a hint about what to do...
-
-You've seen three @vocab{datatypes} already: Numbers, Strings and Booleans. Did we get back any of those? The @vocab{Range} of `star` is a datatype we haven't seen before: an `Image`!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -336,23 +254,20 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 
 - Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @ifproglang{wescheme}{ `(star 50)` } @ifproglang{pyret}{ `star(50)` }
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code `(star 50))} 
 
-- What error did we get? What _hint_ does it give us about how to use this function?
+- What error did we get? What _hint_ does it give us about how to use this function? _`star` has three elements in its Domain_
+
+- What happens if I don't give it those things?
+_We won't get the star we want, we'll probably get an error!_
+
+- If I give `star` what it needs, what do I get in return?
+_An Image of the star that matches the arguments_
 
 === Investigate
 [.lesson-instruction]
-@ifpathway{algebra}{
-- Have students turn to @printable-exercise{pages/exploring-image-functions.adoc} in the workbook.
-- Have students open a new program file and name it "Exploring Images".
-}
-@ifproglang{pyret}{
-- On Line 1 of the @vocab{Definitions area} (left side), type the words *include image* and press "Run". (This loads the *image* library.)
-}
-@ifpathway{data-science}{
-- Have students turn to @printable-exercise{pages/shapes-contracts.adoc} in the workbook.
-}
-Give students time to investigate image functions and see how many they can discover, using the Contracts page to organize their findings.
+@ifpathway{algebra}{Have students turn to the contracts pages in the back of their workbook and experiment in the editor to write code and figure out contracts for each of the shapes listed.}
+- Have students turn to @printable-exercise{pages/shapes-contracts.adoc} in the workbook and experiment in the editor to write code and figure out contracts for each of the shapes listed.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -363,89 +278,35 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 |===
 
 === Synthesize
-- *What image functions did you and your partner discover?*
-``rectangle``, `triangle`, `ellipse`, `circle`, etc.
-- *How did you decide what to try?*
-- *What error messages did you see?*
-_Input mismatches, missing parentheses, etc._
-- *How did you figure out what to do after seeing an error message?*
-_Read the error message, think about what the computer is trying to tell us, etc._
 
-== Making Sense of Contracts @duration{10 minutes}
+Make sure to save your work, so you can go back to it later!
 
-=== Overview
-This activity digs deeper into Contracts, and has students create their own Contracts trackers to take ownership of the concept and create an artifact they can refer back to.
+- What error messages did you see? _Input mismatches, missing parentheses, etc._
+- How did you figure out what to do after seeing an error message? _Read the error message, think about what the computer is trying to tell us, etc._
 
-=== Launch
-
-`star` has three elements in its Domain: A Number, a String, and another String.  
-
-- *What do these elements represent?*
-_The Number is the radius, the first String is the style (either `outline` or `solid`), the second String is the color._
-
-- *What happens if I don't give it those things?*
-_We won't get the star we want, we'll probably get an error!_
-
-- *If I give `star` what it needs, what do I get in return?*
-_An Image of the star that matches the arguments_
-
-- *`square` has the same Domain as `star`.  What do the arguments in `square` represent?*
-_length, style, color_
-
-- *Can different functions have the same Domain?  The same Range?  Are they still different functions?*
-_Yes, yes, and yes!_
-
-- *Can we come up with an example of two math functions that have the same Domain and Range?*
-
-[.lesson-point]
-When the input matches what the function consumes, the function produces the output we expect.
-
-*Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?*
-
-_An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
-
-
-=== Investigate
-[.lesson-instruction]
-- Students complete @printable-exercise{pages/reading-for-domain-and-range.adoc} with their partner.
-
-[.lesson-instruction]
-Students create a visual "Contracts page" either digitally or physically.  Ask students to think about how they visualize contracts in their own minds and how they could use that imagery to explain functions and their contracts to others.
-
-
-=== Possible Misconceptions
-
-Students are _very_ likely to randomly experiment, rather than actually using the Contracts page. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
-
-- How many items are in this function's Domain?
-- What is the _name_ of the 1st item in this function's Domain?
-- What is the _type_ of the 1st item in this function's Domain?
-- What is the _type_ of the Range?
-
-=== Synthesize
-You’ve learned about Numbers, Strings, Booleans, and Images. You’ve learned about operators and functions, and how they can be used to make shapes, strings, and more!
-
-One of the other skills you’ll learn in this class is how to diagnose and fix errors. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
+How to diagnose and fix errors is a skill you will developing throughout this class. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
 
 - What is the function that is generating that error?
 - What is the contract for that function?
 - Is the function getting what it needs, according to its Domain?
 
-By learning to use values, operations and functions, you are now familiar with the fundamental concepts needed to write simple programs. You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+You’ve learned about Numbers, Strings, Booleans, and Images. You’ve learned about operators and functions, and how they can be used to make shapes, strings, and more! You are now familiar with the fundamental concepts needed to write simple programs. @ifpathway{data-science}{You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.}
 
-Make sure to save your work, so you can go back to it later!
-
+--
+- Can different functions have the same Domain? _yes. `square` and `star` have the same Domain._
+- The same Range? _yes. The range for all of the polygons was _image._
+- Are they still different functions? _yes!_
+--
 
 == Additional Exercises:
 @ifproglang{pyret}{
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7, Matching Images to Code}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7, Matching Images to Code}
 }
 @ifproglang{wescheme}{
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fecf203a29e040d182be6c6?collections=5fbecc2b40d7aa0d844956f0, Matching Images to Code}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fecf203a29e040d182be6c6?collections=5fbecc2b40d7aa0d844956f0, Matching Images to Code}
 }
 - @opt-printable-exercise{pages/id-expr-pieces.adoc}
 - @opt-printable-exercise{pages/match-contracts-exprs1.adoc}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7, Matching Code to Images}
 - @opt-printable-exercise{pages/practicing-contracts-2.adoc}
 - @opt-printable-exercise{pages/matching-expressions-2.adoc}
 
