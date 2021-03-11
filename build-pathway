@@ -22,11 +22,14 @@ export EXPANDEDWARNINGS=
 eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
 SEMESTER_YEAR=$SEMESTER$YEAR
-JAVASCRIPTDELAY="--javascript-delay 5000"
+#JAVASCRIPTDELAY="--javascript-delay 5000"
+#JAVASCRIPTDELAY="--window-status ready_to_print"
+#JAVASCRIPTDELAY="--javascript-delay 100000 --window-status ready_to_print"
+JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"ready_to_print\"})' --window-status ready_to_print"
 
 ARGS=
 HELP=
-LASTMOD=2021-03-02 # last modified
+LASTMOD=2021-03-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -470,6 +473,7 @@ function resolveabbrevs() {
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
     mathjaxneeded=1
+    usesmathjax=1
   fi
   CODELANG=pyret
   if test "$PROGLANG" = wescheme; then
@@ -658,6 +662,7 @@ function checklinks() {
 
 function processadoc() {
   local f="$1"
+  local usesmathjax=
   fbase=${f%.adoc}
 
   if test ! -f "$f"; then
@@ -715,7 +720,12 @@ function processadoc() {
               ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
             fi
 
-            echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
+            wkdelayoption=
+            if test "$usesmathjax"; then
+              wkdelayoption="$JAVASCRIPTDELAY"
+            fi
+
+            echo '--enable-local-file-access --print-media-type --dpi 300' $wkdelayoption $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
@@ -929,6 +939,7 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
+  local usesmathjax=
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
 
@@ -974,7 +985,12 @@ function buildlessonplan() {
           cp index.shtml $TMPHTML
           removecodetags $TMPHTML
 
-          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+          wkdelayoption=
+          if test "$usesmathjax"; then
+            wkdelayoption="$JAVASCRIPTDELAY"
+          fi
+
+          echo '--enable-local-file-access --print-media-type --dpi 300' $wkdelayoption -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
       fi
     fi
@@ -1269,7 +1285,7 @@ function batchhtmltopdf() {
     fi
   done
   wait
-  rm -f $WKH2P_BATCH_BASE-split*
+  test $DEBUG || rm -f $WKH2P_BATCH_BASE-split*
 }
 
 function rmtmpfiles() {
