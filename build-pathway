@@ -223,7 +223,9 @@ function insertgdrivesave() {
   local TMPFILE=$TMPPFX-$f_head
 
   cat > $TMPFILE-1.txt <<EOF
-  <script>window.___gcfg = {
+  <script>
+  window.status = window.status || 'ready_to_print';
+  window.___gcfg = {
   parsetags: 'explicit'
   };
   </script>
@@ -473,7 +475,6 @@ function resolveabbrevs() {
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
     mathjaxneeded=1
-    usesmathjax=1
   fi
   CODELANG=pyret
   if test "$PROGLANG" = wescheme; then
@@ -517,6 +518,7 @@ function resolveabbrevs() {
   if test "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
       <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
@@ -662,7 +664,6 @@ function checklinks() {
 
 function processadoc() {
   local f="$1"
-  local usesmathjax=
   fbase=${f%.adoc}
 
   if test ! -f "$f"; then
@@ -720,12 +721,7 @@ function processadoc() {
               ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
             fi
 
-            wkdelayoption=
-            if test "$usesmathjax"; then
-              wkdelayoption="$JAVASCRIPTDELAY"
-            fi
-
-            echo '--enable-local-file-access --print-media-type --dpi 300' $wkdelayoption $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
+            echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME
             #test $DEBUG || rm $TMPHTML
@@ -939,7 +935,6 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
-  local usesmathjax=
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
 
@@ -985,12 +980,7 @@ function buildlessonplan() {
           cp index.shtml $TMPHTML
           removecodetags $TMPHTML
 
-          wkdelayoption=
-          if test "$usesmathjax"; then
-            wkdelayoption="$JAVASCRIPTDELAY"
-          fi
-
-          echo '--enable-local-file-access --print-media-type --dpi 300' $wkdelayoption -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
       fi
     fi
