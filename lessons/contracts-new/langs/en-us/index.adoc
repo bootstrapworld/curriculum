@@ -66,7 +66,7 @@ internet
 [.old-materials]
 Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit2/index.html, prior unit-based version}.
 
-== Applying Functions @duration{15 minutes}
+== Applying Functions @duration{10 minutes}
 
 === Overview
 Students learn how to apply functions in 
@@ -132,9 +132,7 @@ This activity introduces the notion of @vocab{Contracts}, which are a simple not
 
 === Launch
 
-When students typed 
-@ifproglang{pyret}{`triangle(50, "solid", "red")`}
-@ifproglang{wescheme}{`(triangle 50 "solid" "red")`} 
+When students typed @show{{(sexp->code `(triangle 50 "solid" "red"))} 
 into the editor, they created an example of a new Datatype, called an _Image_.
 
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
@@ -189,8 +187,8 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 }
 |===
 
-@ifpathway{algebra}{
-	Memorizing contracts is hard, and why memorize when we can just keep a log of them! Let's write them down so we can use them later! At the back of your workbook, you'll find pages with space to write down every contract you see in this course.
+
+Memorizing contracts is hard, and why memorize when we can just keep a log of them! Let's write them down so we can use them later! At the back of your workbook, you'll find pages with space to write down every contract you see in this course.
 	
 	@ifproglang{wescheme}{
  	Write the contracts for `+`, `-`, `*`, `/`, `sqr`, `sqrt` and `string-length` into the Contracts page.
@@ -200,7 +198,13 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 	}
 	}
 
-Open the editor and write code that satisfies each of these contracts. @ifpathway{algebra}{When you've figured out code for each of these, *write it down in the empty line beneath each contract*. These pages will become your reference for the remainder of the class!}
+Open the editor and write code for expressions that satisfy each of these contracts. When you've got a figure building, *record the code in the empty line beneath each contract*. These pages will become your reference for the remainder of the class!
+
+Here’s an example of another function. Type the code into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
+
+`string-contains("apples, pears, milk", "pears")`
+
+Once you figure it out, add it to your contracts page!
 
 [.lesson-point]
 When the input matches what the function consumes, the function produces the output we expect.
@@ -214,28 +218,13 @@ _An actor signs a contract agreeing to perform in a film in exchange for compens
 Complete pages @printable-exercise{pages/practicing-contracts.adoc}, @printable-exercise{pages/matching-expressions.adoc}, @printable-exercise{pages/reading-for-domain-and-range.adoc} and @ifproglang{pyret}{@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc5415a24be4c0d054d73b2, Matching Expressions and Contracts ONCE WE DECIDE ON CONTRACTS, FIX THIS ACTIVITY and PUBLISH THE LINK}
 } @ifproglang{wescheme}{https://teacher.desmos.com/activitybuilder/custom/6043cb3561acbf05f5863155, ONCE WE DECIDE ON CONTRACTS, FIX THIS ACTIVITY and PUBLISH THE LINK} to get some practice working with Contracts.
 
-Here’s an example of another function. Type it into the Interactions Area to see what it does. Can you figure out the contract, based on the example? 
-
-`string-contains("apples, pears, milk", "pears")`
-
-@ifpathway{algebra}{Add it to your contracts page!}
-
-=== Possible Misconceptions
-
-Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
-
-- How many items are in this function's Domain?
-- What is the _name_ of the 1st item in this function's Domain?
-- What is the _type_ of the 1st item in this function's Domain?
-- What is the _type_ of the Range?
-
 === Synthesize
 
 - What is the difference between a value like `17` and a type like `Number`?
 - For each expression where a function is given inputs, how many outputs are there? _For each collection of inputs that we give a function there is exactly one output._
 
 
-== Exploring Image Functions @duration{25 minutes}
+== Exploring Image Functions & Writing Contracts @duration{20 minutes}
 
 === Overview
 This activity digs deeper into Contracts, and has students create their own Contracts trackers to take ownership of the concept and create an artifact they can refer back to.  Students explore functions, producing all sorts of simple geometric shapes and images in the process. Making images is highly motivating, and encourages students to get better at both reading error messages and persisting in catching bugs.
@@ -249,6 +238,12 @@ This activity digs deeper into Contracts, and has students create their own Cont
 
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
 |===
+
+How to diagnose and fix errors is a skill you will be developing throughout this class. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
+
+- What is the function that is generating that error?
+- What is the contract for that function?
+- Is the function getting what it needs, according to its Domain?
 
 Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
 
@@ -264,10 +259,13 @@ _We won't get the star we want, we'll probably get an error!_
 - If I give `star` what it needs, what do I get in return?
 _An Image of the star that matches the arguments_
 
+- What is the contract for star?  _Star : Number String String : Image_
+
+- The contract for `square` also has Number String String as the Domain and Image as the Range. Does that mean the contracts the same? _No! The domain and range are the same, but the function name is different... and that's important because the `star` function does something very different with the inputs given than what the `square` function does!
+
 === Investigate
 [.lesson-instruction]
-@ifpathway{algebra}{Have students turn to the contracts pages in the back of their workbook and experiment in the editor to write code and figure out contracts for each of the shapes listed.}
-- Have students turn to @printable-exercise{pages/shapes-contracts.adoc} in the workbook and experiment in the editor to write code and figure out contracts for each of the shapes listed.
+Have students turn to the contracts pages in the back of their workbook and experiment in the editor to write code and figure out contracts for each of the shapes whose functions are listed. (If needed, you can print a copy of these @link{../../resources/contracts.pdf, contracts pages.}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -279,24 +277,64 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 
 === Synthesize
 
-Make sure to save your work, so you can go back to it later!
+- `square` and `star` have the same domain (number string string). Did you find any other shape functions with the same `domain` and `range`? _Yes! `triangle` and `circle`.
+- A lot of the `domains` for shape functions are the same, but some are different. Why did some shape functions need more inputs than others? 
+
+	* _`triangle` draws equilateral triangles and all equilateral triangles have three 60 degree angles and 3 equal sides, so one number for the size of the triangle is enough._
+	* _squares have four equal sides and all angles are 90 degrees, so one number for the size is enough._
+	* _the `rectangle` function makes rectangles of many different proportions. Some are long and skinny. Some have lengths and widths that are much closer together.  When the ratio of the length and width are adjustable like this, the `function` needs to know both dimensions._
+
+- Did any of the functions you explored require numbers that described something other than the size of the shape?
+	* _Some of the functions take in the number of sides of a shape or angle measures._
 
 - What error messages did you see? _Input mismatches, missing parentheses, etc._
 - How did you figure out what to do after seeing an error message? _Read the error message, think about what the computer is trying to tell us, etc._
-
-How to diagnose and fix errors is a skill you will developing throughout this class. Some of these errors will be _syntax errors_: a missing comma, an unclosed string, etc. All the other errors are _contract errors_. If you see an error and you know the syntax is right, ask yourself these two questions:
-
-- What is the function that is generating that error?
-- What is the contract for that function?
-- Is the function getting what it needs, according to its Domain?
 
 You’ve learned about Numbers, Strings, Booleans, and Images. You’ve learned about operators and functions, and how they can be used to make shapes, strings, and more! You are now familiar with the fundamental concepts needed to write simple programs. @ifpathway{data-science}{You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.}
 
 --
 - Can different functions have the same Domain? _yes. `square` and `star` have the same Domain._
 - The same Range? _yes. The range for all of the polygons was _image._
-- Are they still different functions? _yes!_
 --
+
+== Using Contracts increases efficiency (10minutes)
+
+=== Overview
+
+Students are given contracts for some more interesting image functions and see how much more efficient it is to write code when starting with a contract.
+
+=== Launch
+
+You investigated all of those image functions by guessing and checking what the contract might be and responding to error messages until the shapes built. If you'd started with a contract, it would have been a lot easier!
+
+=== Investigate
+
+I AM GOING TO WAIT TO KEEP WORKING ON THIS UNTIL WE HAVE AGREED ON WHETHER CONTRACTS WILL JUST INCLUDE DATATYPES OR ALSO INCLUDE VARIABLES. I WANT THERE TO BE A WORKBOOK PAGE THAT ASKS MORE DIRECT QUESTIONS ABOUT THESE 4 FUNCTIONS AND INCLUDES SOME IMAGES FOR INSPIRATION RATHER THAN BEING DEPENDENT ON THE TEACHER TO PROVIDE THEM. SINCE THIS IS ABOUT READING CONTRACTS, QUESTION STRUCTURE WILL DEPEND ON WHAT INFORMATION STUDENTS ARE BEING GIVEN.
+
+- Text: String String String : Image
+- Rhombus: Number Number String String : Image
+- Ellipse: Number Number String String : Image
+- Radial-star : Number Number Number String String : Image
+
+[.lesson-instruction]
+- Have students turn to @printable-exercise{pages/using-contracts.adoc} and use their editors to experiment. 
+- Once they've discovered how to build a version of each image function that satisfies them, have them record the example code in their contracts table. See if you can figure out what aspect of the image each of the inputs specifies. It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
+
+=== Synthesize
+
+Make sure that all students have completed the shape functions in their contracts pages with both contracts and example code so they have something to refer back to.
+
+- Which input determined the size of the Rhombus?  What did the other number input determine?
+- For some of you, the word ellipse was new. How would you describe what an ellipse looks like to someone who'd never seen one before?  Why did the contract for ellipse require to numbers? What happens when the two numbers are the same?
+
+=== Possible Misconceptions
+
+Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
+
+- How many items are in this function's Domain?
+- What is the _name_ of the 1st item in this function's Domain?
+- What is the _type_ of the 1st item in this function's Domain?
+- What is the _type_ of the Range?
 
 == Additional Exercises:
 @ifproglang{pyret}{
