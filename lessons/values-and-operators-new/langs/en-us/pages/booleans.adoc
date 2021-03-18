@@ -1,14 +1,7 @@
 = Booleans
 
-@vspace{1ex}
+*Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).* What will each of the expressions below evaluate to? _Write down your prediction in the blanks provided and then type the code into the interactions area to see what it returns._
 
-Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”). 
-
-What will each of the expressions below evaluate to? 
-
-Write down your prediction in the blanks provided and then type the code into the interactions area to see what it returns.
-
-@vspace{1ex}
 ++++
 <style>
 /** fitb CSS experiment **/
@@ -18,7 +11,7 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 ++++
 
 @ifproglang{pyret}{
-[cols="2, 2, 2, 3, 2, 2", frame="none", stripes="none"]
+[cols="3, 2, 2, 4, 2, 2", frame="none", stripes="none"]
 |===
 |			| *prediction:*| *pyret returns:*| | *prediction:*| *pyret returns:*
 |@n `3 <= 4`| @fitb{}{}	| @fitb{}{}	|@n `"a" > "b"`		| @fitb{}{}| @fitb{}{}
@@ -28,44 +21,10 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 |@n `5 >= 5`| @fitb{}{}	| @fitb{}{}	|@n `"a" <> "a"`	| @fitb{}{}| @fitb{}{}
 |@n `4 >= 6`| @fitb{}{}	| @fitb{}{}	|@n `"a" >= "a"`	| @fitb{}{}| @fitb{}{}	
 |===
-
-@vspace{1ex}
-
-@n In your own words, describe what `<` does.				
-@span{.blankline}{}
-
-@vspace{1ex}
-
-@n In your own words, describe what `>=` does.			
-@span{.blankline}{}
-
-@vspace{1ex}
-
-@n In your own words, describe what `<>` does.			 
-@span{.blankline}{}
-
-[cols="4, 2, 2", frame="none", stripes="none"]
-|===
-|											| *prediction:*	| *pyret returns:*
-|@n `string-equal("a tree", "trees")` 	 	| @fitb{}{}		| @fitb{}{}
-|@n `string-equal("tree", "tree")`		 	| @fitb{}{}		| @fitb{}{}
-|@n `string-contains("catnap", "cat")`	 	| @fitb{}{}		| @fitb{}{}
-|@n `string-contains("cat", "catnap")`	 	| @fitb{}{}		| @fitb{}{}
-|===
-
-@vspace{1ex}
-
-[cols=".>7, .>6", frame="none", stripes="none", grid="none"]
-|===
-|@n How many *Numbers* are there in the entire universe? 	| @fitb{}{} 
-|@n How many *Strings* are there in the entire universe?	| @fitb{}{} 
-|@n How many *Images* are there in the entire universe?		| @fitb{}{} 
-|@n How many *Booleans* are there in the entire universe?	| @fitb{}{} 
-|===
 }
 
 @ifproglang{wescheme}{
-[cols="2,2,2,3,2,2", frame="none", stripes="none"]
+[cols="3,2,2,4,2,2", frame="none", stripes="none"]
 |===
 |				| *prediction:*	| *wescheme returns:*	| 							| *prediction:*| *wescheme returns:*
 |@n `(<= 3 4)`	| @fitb{3ex}{}	| @fitb{3ex}{}			|@n `(string>? "a" "b")` 	| @fitb{3ex}{}	| @fitb{3ex}{}
@@ -75,7 +34,7 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 |@n `(>= 5 5)`	| @fitb{}{}		| @fitb{}{}				|@n `(string<>? "a" "a")`	| @fitb{}{}		| @fitb{}{}
 |@n `(>= 4 6)`	| @fitb{}{}		| @fitb{}{}				|@n `(string>=? "a" "a")`	| @fitb{}{}		| @fitb{}{}	
 |===
-
+}
 @vspace{1ex}
 
 @n In your own words, describe what `<` does.				
@@ -93,16 +52,28 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 
 @vspace{1ex}
 
+@ifproglang{wescheme}{
 @n In your own words, describe what `string=?` does.			
 @span{.blankline}{}
+}
+
+@ifproglang{pyret}{
+[cols="4, 2, 2", frame="none", stripes="none"]
+|===
+|											| *prediction:*	| *pyret returns:*
+|@n `string-equal("a tree", "trees")` 	 	| @fitb{}{}		| @fitb{}{}
+|@n `string-equal("tree", "tree")`		 	| @fitb{}{}		| @fitb{}{}
+|@n `string-contains("catnap", "cat")`	 	| @fitb{}{}		| @fitb{}{}
+|@n `string-contains("cat", "catnap")`	 	| @fitb{}{}		| @fitb{}{}
+|===
+}
 
 @vspace{1ex}
 
-[cols=".>7, .>6", frame="none", stripes="none", grid="none"]
+[cols=".>10, .>6", frame="none", stripes="none", grid="none"]
 |===
 |@n How many *Numbers* are there in the entire universe? 	| @fitb{}{} 
 |@n How many *Strings* are there in the entire universe?	| @fitb{}{} 
 |@n How many *Images* are there in the entire universe?		| @fitb{}{} 
 |@n How many *Booleans* are there in the entire universe?	| @fitb{}{} 
 |===
-}
