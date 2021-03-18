@@ -22,11 +22,14 @@ export EXPANDEDWARNINGS=
 eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
 SEMESTER_YEAR=$SEMESTER$YEAR
-JAVASCRIPTDELAY="--javascript-delay 5000"
+#JAVASCRIPTDELAY="--javascript-delay 5000"
+#JAVASCRIPTDELAY="--window-status ready_to_print"
+#JAVASCRIPTDELAY="--javascript-delay 100000 --window-status ready_to_print"
+JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"ready_to_print\"})' --window-status ready_to_print"
 
 ARGS=
 HELP=
-LASTMOD=2021-03-02 # last modified
+LASTMOD=2021-03-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -220,7 +223,9 @@ function insertgdrivesave() {
   local TMPFILE=$TMPPFX-$f_head
 
   cat > $TMPFILE-1.txt <<EOF
-  <script>window.___gcfg = {
+  <script>
+  window.status = window.status || 'ready_to_print';
+  window.___gcfg = {
   parsetags: 'explicit'
   };
   </script>
@@ -513,6 +518,7 @@ function resolveabbrevs() {
   if test "$mathjaxneeded"; then
     cat > mathjax.txt <<EOF
       <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
@@ -1269,7 +1275,7 @@ function batchhtmltopdf() {
     fi
   done
   wait
-  rm -f $WKH2P_BATCH_BASE-split*
+  test $DEBUG || rm -f $WKH2P_BATCH_BASE-split*
 }
 
 function rmtmpfiles() {
