@@ -13,19 +13,19 @@ Type this line of code into the interactions area and hit "Enter":  @show{(sexp-
 |===
 |@n
 | What is the name of this function?
-| @fitb{45ex}{}
+| @fitb{45ex}{ @show{(if *solutions-mode?* "*triangle*" "")}}
 
 |@n
 | What did the expression evaluate to?
-| @fitb{45ex}{}
+| @fitb{45ex}{ @show{(if *solutions-mode?* "*an image of a red triangle*" "")}}
 
 |@n
 | How many arguments does `triangle` expect?
-| @fitb{45ex}{}
+| @fitb{45ex}{ @show{(if *solutions-mode?* "*3*" "")}}
 
 |@n
 | What datatype does the `triangle` function produce? (Numbers? Strings? Booleans?)
-| @fitb{45ex}{}
+| @fitb{45ex}{ @show{(if *solutions-mode?* "*image*" "")}}
 
 |===
 
@@ -50,7 +50,7 @@ triangle(20, "solid" *"red"*)
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "There is a missing comma after solid" "" )}}}
 
 @vspace{2ex}
 
@@ -69,7 +69,7 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*The color is undefined*" "")}}}
 
 @vspace{2ex}
 
@@ -88,7 +88,7 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There are two many numbers*" "")}}}
 
 @vspace{2ex}
 
@@ -105,7 +105,7 @@ Function calls must not have space between the [.underline]*function expression*
 
 @vspace{3ex}
 
-Can you spot the mistake? 				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake? 				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There shouldn't be a space between triangle and the parentheses*" "")}}}
 }
 
 // /////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ Can you spot the mistake? 				@span{.right}{@fitb{60ex}{}}
 
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*It's missing a color*" "")}}}
 
 @vspace{2ex}
 
@@ -135,7 +135,7 @@ Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
 --
 @vspace{3ex}
 
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*The number should come first*" "")}}}
 
 @vspace{2ex}
 
@@ -146,7 +146,7 @@ Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
 [.underline]"at: line 1, column 0, in <interactions12>" 
 --
 @vspace{3ex}
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There are too many numbers*" "")}}}
 
 @n `(triangle 20 *solid* "red")` 	
 
@@ -156,7 +156,7 @@ Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
 [.underline]"at: line 1, column 0, in <interactions11>" 
 --
 @vspace{3ex}
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*solid is  missing quotes*" "")}}}
 @vspace{2ex}
 
 @n `(triangle 20 *"striped"* "red")`
@@ -167,6 +167,6 @@ Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
 at: line 1, column 0, in <interactions8>
 --
 @vspace{3ex}
-Can you spot the mistake?				@span{.right}{@fitb{60ex}{}}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*striped is not an available option*" "")}}}
 @vspace{2ex}
 }

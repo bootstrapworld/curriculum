@@ -99,11 +99,11 @@ There are lots of potential problems with duplicate code:
 - *Performance:* Why re-evaluate the same code a dozen times, when we can evaluate it _once_ and use the result as many times as we need?
 - *Maintainability:* Suppose we needed to change the size of the stars in the examples above. We would have to make sure every line is changed, which leaves a lot of room for error.
 
-Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression?
+Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
 === Investigate
 
-You already know how to do this in math: @math{x = 4 + 2} evaluates the expression, and _defines_ the nickname @math{x} to be the value 6. 
+You already know how to do this in math: @math{x = 6} evaluates the expression, and _defines_ the nickname @math{x} to be the value 6. 
 
 @ifproglang{wescheme}{
 WeScheme uses the word "define" to make this even clearer! We can type `(define x (+ 4 2))` to define `x` to be the value 6.
