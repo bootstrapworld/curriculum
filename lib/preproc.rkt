@@ -1636,14 +1636,15 @@
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
-  (cond [pyret (cond [(eq? e 'string=?) "string-equal"]
-                     [(eq? e 'sqrt) "num-sqrt"]
-                     [(eq? e 'sqr) "num-sqr"]
-                     [(eq? e 'expt) "num-expt"]
-                     [(eq? e 'pi) "num-pi"]
+  (cond [pyret (cond [(eq? e '+) "{plus}"]
                      [(eq? e '=) "=="]
-                     [(eq? e '+) "{plus}"]
+                     [(eq? e 'expt) "num-expt"]
                      [(eq? e 'frac) "/"]
+                     [(eq? e 'pi) "num-pi"]
+                     [(eq? e 'sqr) "num-sqr"]
+                     [(eq? e 'sqrt) "num-sqrt"]
+                     [(eq? e 'string-contains?) "string-contains"]
+                     [(eq? e 'string=?) "string-equal"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (format "~a" e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
