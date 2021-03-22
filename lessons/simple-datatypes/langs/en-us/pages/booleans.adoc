@@ -52,22 +52,25 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 
 @vspace{1ex}
 
-@ifproglang{wescheme}{
-@n In your own words, describe what `string=?` does.			
-@span{.blankline}{}
-}
-
 @ifproglang{pyret}{
-[cols="4, 2, 2", frame="none", stripes="none"]
+[cols="5, 2, 2", frame="none", stripes="none"]
 |===
-|											| *prediction:*	| *pyret returns:*
-|@n `string-equal("a tree", "trees")` 	 	| @fitb{}{}		| @fitb{}{}
-|@n `string-equal("tree", "tree")`		 	| @fitb{}{}		| @fitb{}{}
-|@n `string-contains("catnap", "cat")`	 	| @fitb{}{}		| @fitb{}{}
-|@n `string-contains("cat", "catnap")`	 	| @fitb{}{}		| @fitb{}{}
+|																| *prediction:*	| *pyret returns:*
+|@n @show{(sexp->code `(string-equal "a tree" "trees"))} 	 	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code `(string-equal "tree" "tree"))}		 	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code `(string-contains? "catnap", "cat"))}	 	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code `(string-contains? "cat" "catnap"))}	 	| @fitb{}{}		| @fitb{}{}
 |===
 }
 
+@ifproglang{wescheme}{
+[cols="5, 2, 2", frame="none", stripes="none"]
+|===
+|																| *prediction:*	| *wescheme returns:*
+|@n @show{(sexp->code `(string-contains? "catnap", "cat"))}	 	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code `(string-contains? "cat" "catnap"))}	 	| @fitb{}{}		| @fitb{}{}
+|===
+}
 @vspace{1ex}
 
 [cols=".>10, .>6", frame="none", stripes="none", grid="none"]
