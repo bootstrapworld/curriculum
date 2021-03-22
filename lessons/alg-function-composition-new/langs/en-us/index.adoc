@@ -60,11 +60,6 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them. The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
 
 === Launch
-Students should be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-and have their workbooks with a pen or pencil.
-
 Divide students into groups of 3-4, and distribute a set of Function Cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
 
 [.lesson-instruction]
@@ -77,7 +72,12 @@ Give students time to experiment with this. You can make the activity more chall
 === Investigate
 The contracts page in your workbook is just like the Function Cards from this activity. Your job as a programmer is to figure out how to compose those functions to get where you want to go, in the most clever or elegant way possible.
 
-Have students open to @printable-exercise{pages/composing-image-functions.adoc}.  Students create a text @vocab{image} of their name and experiment with their choice of these new functions.
+[.lesson-instruction]
+- Have students log into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+open a new program, and save it as Function Composition.  
+- Have students open to @printable-exercise{pages/function-composition-green-star.adoc}.  
 
 While students are exploring, be available for support but encourage student discussion to solve problems.  Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
 
@@ -86,6 +86,24 @@ Many questions can be addressed with these responses:
 - *Did you try drawing the Circle of Evaluation first?*
 - *Did you check the contract?*
 - *Have you pressed the Run button to save your Definitions changes?*
+
+When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing.
+
+[.lesson-instruction]
+Have students open to @printable-exercise{pages/function-composition-your-name.adoc}.
+
+Students create a text @vocab{image} of their name and experiment with other functions.
+
+Encourage students to practice writing *comments* in the code to describe what is being produced.
+@ifproglang{wescheme}{
+Use `;` at the beginning of a line to write a comment.
+}
+@ifproglang{pyret}{
+Use `#` at the beginning of a line to write a comment.
+}
+
+If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @ifproglang{pyret}{@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
+}
 
 === Synthesize
 - *What do all of these functions have in common?*
@@ -100,22 +118,14 @@ _The scale factor by which the image should grow or shrink_
 - *What does the number in `rotate` represent?*
 _The rotation angle, measured counterclockwise_
 
-- *Suppose I wrote the code*
-@ifproglang{wescheme}{ `(scale 3 (star 50 "solid" "red"))`. }
-@ifproglang{pyret}{ `scale(3, star(50, "solid", "red"))`. }
-  
-
-What’s another line of code I could write that would produce the exact same image?
-
-	@ifproglang{wescheme}{
-	`(star 150 "solid" "red")`
-	}
-	@ifproglang{pyret}{
-	`star(150, "solid", "red")`
-	}
-
 - *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the `text` function as an input for `flip-horizontal`?*
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+| @span{.title}{Fun with Images!}
+Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing. The Bootstrap: Flags lesson also dives deeper into image composition.
+|===
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -126,44 +136,27 @@ MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussio
 Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
 |===
 
-@ifproglang{pyret}{
-Additional practice with connecting code and images is available through this matching activity: @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition}
-}
-
-== Decomposing Image Problems @duration{25 minutes}
+== Composing more elegantly @duration{25 minutes}
 
 === Overview
-Students are given (simple, highly-structured) word problems involving creating images, and must map from the word problems to the names and order of functions needed to solve them. At this stage, the skill is quite brittle and hardly resembles the generalized problem-decomposition skill needed to solve complex word problems in algebra. This is merely the first introduction, and other lessons will deepen and broaden the idea.
+Students identify pairs of code that will create the same image and are asked to think about why we might choose one way of achieving our goal over the other.
 
 === Launch
-Create the Circles of Evaluation and write the code for the following images.  Write a new line of code for each exercise.
+*Suppose I wrote the code*
+@ifproglang{wescheme}{ `(scale 3 (star 50 "solid" "red"))`. }
+@ifproglang{pyret}{ `scale(3, star(50, "solid", "red"))`. }
 
-* a solid, green `star` of size 50
-* a solid, green `star` that is 3 times as large as the original (using the `scale` function)
-* a solid, green `star` that is ½ the size of the original (using the `scale` function)
-* a solid, green `star` of size 50 that is rotated 45 degrees (using the `rotate` function)
-* a solid, green `star` that is 3 times as large as the original and rotated 45 degrees.
+What’s another line of code I could write that would produce the exact same image?
+
+	@ifproglang{wescheme}{
+	`(star 150 "solid" "red")`
+	}
+	@ifproglang{pyret}{
+	`star(150, "solid", "red")`
+	}
 
 === Investigate
-Students complete @printable-exercise{pages/function-composition-practice.adoc}, practicing drawing Circles of Evaluation and writing code with their partner using different functions.
+Students complete @printable-exercise{pages/which-code-is-more-elegant.adoc}.
 
-When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing.
-
-[.lesson-instruction]
-Create an Image that uses the text function and at least 3 of the following functions:
-
-- `rotate`
-- `scale`
-- `overlay`
-- `flip-horizontal`
-- `flip-vertical`
-- any other image producing function (`triangle`, `star`, `circle`, `rectangle`, etc..)
-
-Students should practice writing *comments* in the code to describe what is being produced.
-@ifproglang{wescheme}{
-Use `;` at the beginning of a line to write a comment.
-}
-@ifproglang{pyret}{
-Use `#` at the beginning of a line to write a comment.
-}
-
+=== Synthesize
+How did you decide which code was more elegant?
