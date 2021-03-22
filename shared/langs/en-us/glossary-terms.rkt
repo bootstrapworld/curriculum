@@ -13,7 +13,7 @@ when it prints out the glossary for a particular unit
 (define *glossary-list*
   '(("accessor functions" "functions to extract values from a data structure")
     ("apply" "use a given function on some inputs")
-    ("arguments" "the inputs to a function; expressions for arguments follow the name of a function")
+    (("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function")
     ("ascending" "an order in which lower values appear first, and higher values appear after")
     ("average" "a number representing the center, or 'typical' value in a set of data")
     (("axis" "axes") "a number line on a scatter plot, used to place points that represent pairs of values in data sets")
