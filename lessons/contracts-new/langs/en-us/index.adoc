@@ -215,7 +215,7 @@ Here is an example of another function.
 
 @show{(sexp->code `(string-append "sun" "shine"))}
 
-Type it into the editor. What is its contract?  `string-append` -> String, String -> String_
+Type it into the editor. What is its contract?  `string-append` :: String, String -> String_
 --
 
 === Investigate
@@ -283,6 +283,7 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 
 - `square` and `star` have the same domain (number string string) and range (image). Did you find any other shape functions with the same `domain` and `range`? _Yes! `triangle` and `circle`._
 - Does having the same `domain` and `range` mean that the functions do the same things? _No! They make very different images!_
+- A lot of the `domains` for shape functions are the same, but some are different. Why did some shape functions need more inputs than others? 
 - Was it harder to find contracts for some of the functions than others? Why?
 - What error messages did you see? _Too few / too many arguments given, missing parentheses, etc._
 - How did you figure out what to do after seeing an error message? _Read the error message, think about what the computer is trying to tell us, etc._
@@ -299,23 +300,19 @@ You just investigated image functions by guessing and checking what the contract
 
 === Investigate
 
-- A lot of the `domains` for shape functions are the same, but some are different. Why did some shape functions need more inputs than others? 
-
-	* _The `triangle` function draws equilateral triangles and all equilateral triangles have three 60 degree angles and 3 equal sides, so one number for the size of the triangle is enough._
-	* _Squares have four equal sides and all angles are 90 degrees, so one number for the size is enough._
-	* _The `rectangle` function makes rectangles of many different proportions. Some are long and skinny. Some have lengths and widths that are much closer together.  When the ratio of the length and width are adjustable like this, the `function` needs to know both dimensions._
-
-- Did any of the functions you explored require numbers that described something other than the size of the shape?
-	* _Some of the functions take in the number of sides of a shape or angle measures._
-
-- Text: String String String : Image
-- Rhombus: Number Number String String : Image
-- Ellipse: Number Number String String : Image
-- Radial-star : Number Number Number String String : Image
-
 [.lesson-instruction]
 - Have students turn to  @printable-exercise{pages/using-contracts.adoc} and use their editors to experiment. 
 - Once they've discovered how to build a version of each image function that satisfies them, have them record the example code in their contracts table. See if you can figure out what aspect of the image each of the inputs specifies. It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
+
+What kind of triangle did `triangle` build? _The `triangle` function draws equilateral triangles_
+Only one of the inputs was a number. What did that number tell the computer? _the size of the triangle_
+What other numbers did the computer need to already know in order to build the `triangle` function?  _all equilateral triangles have three 60 degree angles and 3 equal sides_
+If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
+
+[lesson-instruction]
+Have students turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
+
+Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. If you have time, have students turn to @printable-exercise{pages/radial-star.adoc}.
 
 === Synthesize
 
