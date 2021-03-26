@@ -115,7 +115,7 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 @span{.clear}{}
 
 [.lesson-instruction]
-Have students turn to @printable-exercise{pages/complete-coe-from-arith.adoc} and @printable-exercise{pages/match-arith-coe.adoc} in the workbook and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions} to practice connecting expressions to circles of evaluation. 
+Have students turn to @printable-exercise{pages/complete-coe-from-arith.adoc} and @printable-exercise{pages/match-arith-coe.adoc} in the workbook and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions} to practice connecting expressions to Circles of Evaluation. 
 
 Optional: 
 If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
@@ -248,50 +248,72 @@ Have students share back what they learned from the Circles of Evaluation.
 
 == From Circles to Code @duration{optional}
 
+=== Overview
+
+Circles of Evaluation are a powerful tool that can be used without ever getting students on computers. If you have time to introduce students to the @ifproglang{wescheme}{@link{www.wescheme.org, wescheme}} @ifproglang{pyret}{@link{code.pyret.org, pyret}} editor, typing their code into the interactions area gives students a chance to get feedback on their use of parentheses as well as the satisfaction of seeing their code successfully evaluate the expressions they've generated.
+
 === Launch
 
 [.lesson-instruction]
- 
-Circles of Evaluation are also a great way to visualize _other_ functions we've never seen before.  Here are two Circles of Evaluation. One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right? 
-
-[cols="1,1", grid="none", frame="none"]
-|===
-| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
-|@show{(sexp->coe `(star 50 "solid" "blue"))}
-|===
-
-Possible responses:
-
-- We've never seen the function `star` before
-- We've never seen words used in a Circle of Evaluation before
-- We've never seen a function take in three inputs
-- We've never seen a function take in a mix of Numbers and words
-
-[.lesson-instruction]
-Can you figure out the Name for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
-
-Possible responses:
-
-- We know the name of the function is `star`, because that's what is at the top of the circle
+- Open @ifproglang{wescheme}{@link{www.wescheme.org, wescheme}} @ifproglang{pyret}{@link{code.pyret.org, pyret}} and click run.
+- For now, we are only going to be working in the interactions area on the right hand side of your screen.
+- Type @show{(sexp->code '(+ (* 8 2) (/ 6 3)))} into the interactions area.  
+- Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
+- Hit enter/return. What happens? _If you typed the code correctly you'll get 18. If you make a mistake with your typing, the computer should help you identify your mistake so that you can correct it and try it again!_
+- Take a few minutes to test each line of code you wrote before by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.
 
 === Explore
 
 [.lesson-instruction]
+--
+Here are two Circles of Evaluation. 
+
+[cols="1,1", grid="none", frame="none"]
+|===
+| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
+|@show{(sexp->coe `(text "Good work, gumshoe!" 50 "solid" "blue"))}
+|===
+
+One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right? 
+--
+_Possible responses:_
+
+- _We've never seen the function `text` before_
+- _We've never seen words used in a Circle of Evaluation before_
+- _We've never seen a function take in three inputs_
+- _We've never seen a function take in a mix of Numbers and words_
+
+[cols="1,1", grid="none", frame="none"]
+|===
+| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
+|@show{(sexp->coe `(text "Good work, gumshoe!" 50 "solid" "blue"))}
+|===
+
+
+[.lesson-instruction]
+--
+- Can you figure out the Name for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
+_We know the name of the function is `string`, because that's what is at the top of the circle._
 - What do you think this expression will evaluate to? 
-- Convert this Circle to code and try out!
+- Convert this Circle to code and try it out!
 - What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
 - What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
 - What does the `"solid"` mean to the computer? Try replacing it with different values, and see what you get. *If you get an error, read it!* It just might give you a hint about what to do...
 
+Here is another circle to explore.
+@show{(sexp->coe `(string-length "fun!"))}
+
+- What do you think this expression will evaluate to? 
+- Convert this Circle to code and try it out!
+--
+
 === Synthesize
 
-Now that we understand the structure of circles of evaluation, we can use them to write code for any function!
-
-You may want to assign traditional Order of Operations problems from your math book, but instead of asking them simply to compute the answer - or even list the steps - have them _draw the circle_.
+Now that we understand the structure of Circles of Evaluation, we can use them to write code for any function!
 
 == Additional Exercises
 
-* @opt-printable-exercise{pages/matching-coe-exp.pdf, A printable set of cards for physically matching expressions with circles of evaluation}
+* @opt-printable-exercise{pages/matching-coe-exp.pdf, A printable set of cards for physically matching expressions with Circles of Evaluation}
 * @opt-printable-exercise{pages/coe-to-code.adoc} 
 * @opt-printable-exercise{pages/coe-to-code2.adoc}
 
