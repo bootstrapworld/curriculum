@@ -983,6 +983,13 @@
                                                 (map string-trim (cdr args)) ",")]
                                    )
                               (display (make-link adocf rest-args #:include? #t) o))]
+                           [(string=? directive "lang-prereq")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (fprintf o "\ninclude::~a/~a/lang-prereq.adoc[]\n\n"
+                                     *progdir* *proglang*)]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
