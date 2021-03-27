@@ -122,6 +122,8 @@
 
 (define *exercises-done* '())
 
+(define *prereqs-used* #f)
+
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
@@ -837,6 +839,7 @@
         (print-menubar "index"))
       ;
       (define (expand-directives i o)
+        ;(printf "doing expand-directives\n")
         (let ([beginning-of-line? #t])
           (let loop ()
             (let ([c (read-char i)])
@@ -988,7 +991,10 @@
                               (error 'ERROR
                                      "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::~a/~a/lang-prereq.adoc[]\n\n"
+                            (unless *prereqs-used*
+                              ;(printf "Using prereqs!!\n")
+                              (set! *prereqs-used* '()))
+                            (fprintf o "\ninclude::~a/~a/lang-prereq-2.adoc[]\n\n"
                                      *progdir* *proglang*)]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
@@ -1225,6 +1231,9 @@
       (when *link-lint?*
         (close-output-port *internal-links-port*)
         (close-output-port *external-links-port*))
+
+      ;(when *prereqs-used*
+      ;  (printf "*** prereqs-used = ~s\n" *prereqs-used*))
 
       )))
 
@@ -1600,6 +1609,14 @@
                            ))]
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
 
+(define (add-prereq sym)
+  ;(printf "doing add-prereq ~s\n" sym)
+  (when (symbol? sym)
+    (unless (and (string=? *proglang* "pyret")
+                 (member sym '(+ - * /)))
+      (unless (member sym *prereqs-used*)
+        (set! *prereqs-used* (cons sym *prereqs-used*))))))
+
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
          [hole2 (if (string=? *proglang* "pyret")
@@ -1612,7 +1629,9 @@
             [(eq? e 'BSLeaveAHoleHere) hole] ;XXX used anymore?
             [(eq? e 'BSLeaveAHoleHere2) hole2]
             [(eq? e 'BSLeaveAHoleHere3) hole3]
-            [(and (eq? e 'frac) wescheme) '/]
+            [(and (eq? e 'frac) wescheme)
+             (add-prereq '/)
+             '/]
             [(and (answer? e) wescheme)
              (let ((e (cadr e)))
                (holes-to-underscores
@@ -1620,7 +1639,9 @@
                  #:wescheme #t))]
             [(pair? e) (cons (holes-to-underscores (car e) #:wescheme wescheme)
                              (holes-to-underscores (cdr e) #:wescheme wescheme))]
-            [else e]))))
+            [else
+              (add-prereq e)
+              e]))))
 
 (define (sexp->wescheme e)
   ;(printf "doing sexp->wescheme ~s\n" e)
