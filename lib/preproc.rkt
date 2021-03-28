@@ -12,6 +12,7 @@
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
+(require "collect-lang-prereq.rkt")
 ;(require "draw-dep-diag.rkt")
 
 (provide
@@ -994,8 +995,7 @@
                             (unless *prereqs-used*
                               ;(printf "Using prereqs!!\n")
                               (set! *prereqs-used* '()))
-                            (fprintf o "\ninclude::~a/~a/lang-prereq-2.adoc[]\n\n"
-                                     *progdir* *proglang*)]
+                            (fprintf o "\ninclude::./index-lang-prereq.asc[]\n\n")]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
@@ -1192,6 +1192,9 @@
 
       (when *lesson-plan*
         (accumulate-glossary-and-standards))
+
+      (when *lesson-plan* 
+        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))
 
       (when *lesson-plan*
         (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
@@ -1611,7 +1614,7 @@
 
 (define (add-prereq sym)
   ;(printf "doing add-prereq ~s\n" sym)
-  (when (symbol? sym)
+  (when (and *prereqs-used* (symbol? sym))
     (unless (and (string=? *proglang* "pyret")
                  (member sym '(+ - * /)))
       (unless (member sym *prereqs-used*)
