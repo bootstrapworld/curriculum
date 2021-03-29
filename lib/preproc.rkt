@@ -316,7 +316,15 @@
         (string-join
           (map (lambda (lesson)
                  (let ([lesson-title lesson]
-                       [lesson-title-file (format "../~a/index.titletxt" lesson)])
+                       [lesson-title-file (format "../~a/index.titletxt" lesson)]
+                       [lesson-prim-file (format "../~a/index.primtxt" lesson)])
+                   (when (file-exists? lesson-prim-file)
+                     (let ([prims (read-data-file lesson-prim-file #:mode 'forms)])
+                       (when (pair? prims)
+                         (unless *prereqs-used* (set! *prereqs-used* '()))
+                         (for ([prim prims])
+                           (add-prereq prim)))))
+
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
@@ -1193,7 +1201,7 @@
       (when *lesson-plan*
         (accumulate-glossary-and-standards))
 
-      (when *lesson-plan* 
+      (when *lesson-plan*
         (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))
 
       (when *lesson-plan*

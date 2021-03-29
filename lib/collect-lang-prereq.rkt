@@ -71,6 +71,12 @@
           [table-functions-used? (ormap (lambda (x) (member x *table-list*)) *prereqs-used*)]
           )
 
+      (call-with-output-file "index.primtxt"
+        (lambda (o)
+          (for ([prim *prereqs-used*])
+            (write prim o) (newline o)))
+        #:exists 'replace)
+
       (call-with-output-file (path-replace-extension in-file "-lang-prereq.asc")
         (lambda (o)
           (when (or number-functions-used?
