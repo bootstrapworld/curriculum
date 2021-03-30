@@ -136,27 +136,33 @@ MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussio
 Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
 |===
 
-== Composing more elegantly @duration{25 minutes}
+== Composing Multiple Ways @duration{Optional}
 
 === Overview
 Students identify pairs of code that will create the same image and are asked to think about why we might choose one way of achieving our goal over the other.
 
 === Launch
+
+[.lesson-instruction]
+--
+As is often true with solving math problems, there is often more than one way to compose an image.
+
 *Suppose I wrote the code*
 @ifproglang{wescheme}{ `(scale 3 (star 50 "solid" "red"))`. }
 @ifproglang{pyret}{ `scale(3, star(50, "solid", "red"))`. }
 
 What’s another line of code I could write that would produce the exact same image?
-
-	@ifproglang{wescheme}{
-	`(star 150 "solid" "red")`
-	}
-	@ifproglang{pyret}{
-	`star(150, "solid", "red")`
-	}
+	@show{(sexp->code `(star 150 "solid" "red"))}
+--
 
 === Investigate
-Students complete @printable-exercise{pages/which-code-is-more-elegant.adoc}.
+Students complete @printable-exercise{pages/more-than-one-way.adoc}.
 
 === Synthesize
-How did you decide which code was more elegant?
+There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal. 
+
+`image=? {two-colons} Image, Image -> Boolean`
+
+Do all of the expressions successfully build an image?
+Could we have written more expressions to create the same images?
+Are all of the ways to write the code equally efficient?

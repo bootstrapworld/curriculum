@@ -1,16 +1,31 @@
 = Using Contracts
 
-@vspace{1ex}
+Use the contract for each image function provided to write expressions to match the given images or descriptions.
 
-- Text :: String, String, String -> Image
-- Rhombus :: Number Number String String -> Image
-- Ellipse :: Number Number String String -> Image
-- Radial-star :: Number Number Number String String -> Image
-- isosceles-triangle
-- right-triangle
-- triangle-sas
-- triangle-asa
-- polygon-star star-polygon
+@show{(sexp->code `rhombus)}`{two-colons} Number, Number, String, String -> Image`
+
+[cols="1a,1a",stripes="none"]
+|===
+| @centered-image{../images/rhombus-200-90-solid-black.png} | @centered-image{../images/rhombus-200-50-solid-black.png}
+| @span{.blankline}{} 										| @span{.blankline}{}
+|===
+
+@show{(sexp->code `ellipse)}`{two-colons} Number, Number, String, String -> Image`
+
+[cols="1a,1a",stripes="none"]
+|===
+| @centered-image{../images/ellipse-50-150-outline-black.png} | @centered-image{../images/ellipse-150-50-solid-black.png}
+| @span{.blankline}{} 										| @span{.blankline}{}
+|===
+
+@show{(sexp->code `regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
+[cols="1a,1a",stripes="none"]
+|===
+| @centered-image{../images/reg-polygon-50-8-outline-black.png} | @centered-image{../images/regular-polygon-100-5-solid-black.png}
+| @span{.blankline}{} 										| @span{.blankline}{}
+|===
+
+@show{(sexp->code `polygon-star)}`{two-colons} Number, Number, Number, String, String -> Image`
 
 This file should provide the contracts for the functions listed above, be a guided reflection and should also reference images saved in the images folder.
 
