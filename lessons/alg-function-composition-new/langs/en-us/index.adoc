@@ -54,10 +54,8 @@
 [.old-materials]
 Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit2/index.html, prior unit-based version}.
 
-== Composing Functions @duration{20 minutes}
-
-=== Overview
-Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them. The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+== Composing Functions @duration{10 minutes}
+Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them.
 
 === Launch
 Divide students into groups of 3-4, and distribute a set of Function Cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
@@ -67,32 +65,40 @@ Divide students into groups of 3-4, and distribute a set of Function Cards to ea
 - I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`? (_10_!)
 - For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end. _You will need to use some functions more than once, and that's ok!_
 
-Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions. If two groups come up with different compositions that achieve the same end result, have them share their ideas!
-
 === Investigate
+Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions. 
+
+=== Synthesize
+If two groups come up with different compositions that achieve the same end result, have them share their ideas!
+
+== Composing Functions in Code @duration{20 minutes}
+
+=== Overview
+
+The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+
+=== Launch
+[.lesson-instruction]
 The contracts page in your workbook is just like the Function Cards from this activity. Your job as a programmer is to figure out how to compose those functions to get where you want to go, in the most clever or elegant way possible.
 
-[.lesson-instruction]
-- Have students log into
+=== Investigate
+
+Have students log into 
 @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-open a new program, and save it as Function Composition.  
-- Have students open to @printable-exercise{pages/function-composition-green-star.adoc}.  
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO)} }
+open a new program, save it as Function Composition and open to @printable-exercise{pages/function-composition-green-star.adoc}, in which they will be drawing circles of evaluation to help them write expressions to compose a series of images. 
+
+When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing. 
+
+Then have students open to @printable-exercise{pages/function-composition-your-name.adoc} in which they will create a text @vocab{image} of their name and experiment with other functions.
 
 While students are exploring, be available for support but encourage student discussion to solve problems.  Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
 
-Many questions can be addressed with these responses:
+*Many student questions can be addressed with these responses:*
 
-- *Did you try drawing the Circle of Evaluation first?*
-- *Did you check the contract?*
-- *Have you pressed the Run button to save your Definitions changes?*
-
-When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing.
-
-[.lesson-instruction]
-Have students open to @printable-exercise{pages/function-composition-your-name.adoc}.
-
-Students create a text @vocab{image} of their name and experiment with other functions.
+- Did you try drawing the Circle of Evaluation first?
+- Did you check the contract?
+- Have you pressed the Run button to save your Definitions changes?
 
 Encourage students to practice writing *comments* in the code to describe what is being produced.
 @ifproglang{wescheme}{
@@ -106,20 +112,23 @@ If you have time, you can also have students work with @printable-exercise{pages
 }
 
 === Synthesize
-- *What do all of these functions have in common?*
+[.lesson-instruciton]
+--
+- What do all of these functions have in common?
 _They all produce images, they all change some element of the original image_
 
-- *Does using one of these functions change the original image?*
+- Does using one of these functions change the original image?
 _No, it creates a whole new image_
 
-- *What does the number in `scale` represent?*
+- What does the number in `scale` represent?
 _The scale factor by which the image should grow or shrink_
 
-- *What does the number in `rotate` represent?*
+- What does the number in `rotate` represent?
 _The rotation angle, measured counterclockwise_
 
-- *The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the `text` function as an input for `flip-horizontal`?*
+- The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the `text` function as an input for `flip-horizontal`?
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
+--
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -145,11 +154,10 @@ Students identify pairs of code that will create the same image and are asked to
 
 [.lesson-instruction]
 --
-As is often true with solving math problems, there is often more than one way to compose an image.
+As is often true with solving math problems, there is more than one way to compose most images.
 
-*Suppose I wrote the code*
-@ifproglang{wescheme}{ `(scale 3 (star 50 "solid" "red"))`. }
-@ifproglang{pyret}{ `scale(3, star(50, "solid", "red"))`. }
+Suppose I wrote the code: @show{(sexp->code `(scale 3 (star 50 "solid" "red")))}.
+
 
 What’s another line of code I could write that would produce the exact same image?
 	@show{(sexp->code `(star 150 "solid" "red"))}
@@ -163,6 +171,8 @@ There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret
 
 `image=? {two-colons} Image, Image -> Boolean`
 
-Do all of the expressions successfully build an image?
-Could we have written more expressions to create the same images?
-Are all of the ways to write the code equally efficient?
+Use it to test whether all of the expressions you wrote successfully build the same images.
+
+[.lesson-instruction]
+- Could we have written more expressions to create the same images?
+- Are all of the ways to write the code equally efficient?
