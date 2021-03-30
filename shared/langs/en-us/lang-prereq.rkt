@@ -22,7 +22,8 @@
     (String
       (
        string-length
-       string-repeat string-contains
+       string-repeat 
+       string-contains
        )
       (
        "hello"
@@ -30,7 +31,9 @@
 
     (Boolean
       (
-       == < <= >= string-equal
+       == < > <> <= >= 
+       string-equal
+       and or
        )
       (
        true false
@@ -38,9 +41,12 @@
 
     (Image
       (
-       triangle circle star rectangle ellipse square text overlay
-       bar-chart pie-chart bar-chart-summarized pie-chart-summarized
-       histogram
+       triangle circle star square rectangle ellipse rhombus regular-polygon radial-star polygon-star 
+       text 
+       image-url
+       overlay put-image above beside below rotate scale flip-horizontal flip-vertical
+       bar-chart pie-chart box-plot scatter-plot histogram
+       bar-chart-summarized pie-chart-summarized modified-box-plot image-scatter-plot
        )
       ())
 
