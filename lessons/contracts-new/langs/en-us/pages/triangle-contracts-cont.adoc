@@ -9,28 +9,31 @@
 @n Match each `triangle-sas` expression (left) with the image it creates (right). 
 
 @vspace{1ex}
-[cols="^.^14a,^.^8a",stripes="none",grid="none",frame="none", options="header"]
+[cols="1,^.^14a,^.^8a,1",stripes="none",grid="none",frame="none", options="header"]
 |===
-|  Expression													| Image
-| @show{(sexp->code `(triangle-sas 120 45 70 "solid" "black"))} | @centered-image{../images/sas-120-90-70.png}
-| @show{(sexp->code `(triangle-sas 120 90 70 "solid" "black"))}	| @centered-image{../images/sas-120-135-70.png}
-| @show{(sexp->code `(triangle-sas 120 135 70 "solid" "black"))}| @centered-image{../images/sas-70-135-120.png}
-| @show{(sexp->code `(triangle-sas 70 135 120 "solid" "black"))}| @centered-image{../images/sas-120-45-70.png}
+|   | Expression													| Image                                         |
+| @n| @show{(sexp->code `(triangle-sas 120 45 70 "solid" "black"))} | @centered-image{../images/sas-120-90-70.png}	|A
+| @n| @show{(sexp->code `(triangle-sas 120 90 70 "solid" "black"))}	| @centered-image{../images/sas-120-135-70.png}	|B
+| @n| @show{(sexp->code `(triangle-sas 120 135 70 "solid" "black"))}| @centered-image{../images/sas-70-135-120.png}	|C
+| @n| @show{(sexp->code `(triangle-sas 70 135 120 "solid" "black"))}| @centered-image{../images/sas-120-45-70.png}	|D
 |===
 
 Be sure to add your favorite examples of each of the triangle functions to your contracts pages!
 
-Think about wow would you describe each of the arguments that @show{(sexp->code `triangle-sas) takes in to someone who'd never used the function before and annotate
+Think about wow would you describe each of the arguments that @show{(sexp->code `triangle-sas)} takes in to someone who'd never used the function before and annotate
 
-@show{(sexp->code `triangle-sas)}`{double-colon} 
+@show{(sexp->code `triangle-sas)}`{two-colons}` 
 [.indentedpara]
  
- @fitb{25em}{} `{double-colon} number,`
- @fitb{25em}{} `{double-colon} number,`
- @fitb{25em}{} `{double-colon} number,`
- @fitb{25em}{} `{double-colon} string,`
- @fitb{25em}{} `{double-colon} string` 
+ @fitb{25em}{} `{two-colons} number,`
+ @fitb{25em}{} `{two-colons} number,`
+ @fitb{25em}{} `{two-colons} number,`
+ @fitb{25em}{} `{two-colons} string,`
+ @fitb{25em}{} `{two-colons} string` 
+ __
+
 `-> image`
 
-If you have time, try building triangles using 
+If you have time, try building triangles using
+
 @show{(sexp->code `triangle-asa)}`{two-colons} number, number, number, string, string -> image`
