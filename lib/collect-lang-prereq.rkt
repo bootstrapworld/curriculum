@@ -2,7 +2,7 @@
 
 (require "lang-prereq.rkt")
 
-(provide create-lang-prereq-file)
+(provide store-functions-used create-lang-prereq-file)
 
 (define *prereqs-used* #f)
 (define *proglang* #f)
@@ -54,15 +54,25 @@
     (display "\n\n" o)
     ))
 
+(define (store-functions-used prereqs-used prim-file)
+
+  ;(printf "doing store-functions-used ~s ~s\n" prereqs-used prim-file)
+
+  (set! *prereqs-used* prereqs-used)
+
+  (let ([allowed-prims (list *number-list* *string-list* *boolean-list* *image-list* *table-list*)])
+
+    (call-with-output-file prim-file
+      (lambda (o)
+        (for ([prim *prereqs-used*])
+          (when (ormap (lambda (s) (member prim s))
+                       allowed-prims)
+            (write prim o) (newline o))))
+      #:exists 'append)))
+
 (define (create-lang-prereq-file prereqs-used proglang sym-to-adocstr-fn in-file)
-
-  ;(printf "doing create-lang-prereq-file ~s ~s ~s ~s\n" prereqs-used proglang sym-to-adocstr-fn in-file)
-
-  (when prereqs-used
-
-    (set! *prereqs-used* prereqs-used)
-    (set! *proglang* proglang)
-    (set! sym-to-adocstr sym-to-adocstr-fn)
+  (set! *proglang* proglang)
+  (set! sym-to-adocstr sym-to-adocstr-fn)
 
     (let ([number-functions-used? (ormap (lambda (x) (member x *number-list*)) *prereqs-used*)]
           [string-functions-used? (ormap (lambda (x) (member x *string-list*)) *prereqs-used*)]
@@ -70,19 +80,13 @@
           [image-functions-used? (ormap (lambda (x) (member x *image-list*)) *prereqs-used*)]
           [table-functions-used? (ormap (lambda (x) (member x *table-list*)) *prereqs-used*)]
           )
-
-      (call-with-output-file "index.primtxt"
-        (lambda (o)
-          (for ([prim *prereqs-used*])
-            (write prim o) (newline o)))
-        #:exists 'replace)
-
       (call-with-output-file (path-replace-extension in-file "-lang-prereq.asc")
         (lambda (o)
           (when (or number-functions-used?
                     string-functions-used?
                     boolean-functions-used?
-                    image-functions-used?)
+                    image-functions-used?
+                    table-functions-used?)
             (display "|Language Table\n" o)
             (display "|\n" o)
             (display "[.lang-features-table,cols=\"1a,4a,1a\"]\n" o)
@@ -96,5 +100,5 @@
             (display "!===\n\n" o)))
 
         #:exists 'replace))
-    ))
+    )
 

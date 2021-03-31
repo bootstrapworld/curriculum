@@ -123,7 +123,7 @@
 
 (define *exercises-done* '())
 
-(define *prereqs-used* #f)
+(define *prereqs-used* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -236,7 +236,7 @@
                             (let ((sublist-items (list-ref c0 1)))
                               (box-add-new! sublist-item sublist-items)))
                           (unless *lesson*
-                            (box-add-new! (list  lesson-title lesson pwy)
+                            (box-add-new! (list lesson-title lesson pwy)
                                           (list-ref c0 4)))))
                     (else
                       (let ((sublist-items
@@ -317,13 +317,15 @@
           (map (lambda (lesson)
                  (let ([lesson-title lesson]
                        [lesson-title-file (format "../~a/index.titletxt" lesson)]
-                       [lesson-prim-file (format "../~a/index.primtxt" lesson)])
-                   (when (file-exists? lesson-prim-file)
-                     (let ([prims (read-data-file lesson-prim-file #:mode 'forms)])
-                       (when (pair? prims)
-                         (unless *prereqs-used* (set! *prereqs-used* '()))
-                         (for ([prim prims])
-                           (add-prereq prim)))))
+                       [lesson-prim-file (format "../~a/index.primtxt" lesson)]
+                       [lesson-prim2-file (format "../~a/index.prim2txt" lesson)]
+                       )
+                   (for ([prim-file (list lesson-prim-file lesson-prim2-file)])
+                     (when (file-exists? prim-file)
+                       (let ([prims (read-data-file prim-file #:mode 'forms)])
+                         (when (pair? prims)
+                           (for ([prim prims])
+                             (add-prereq prim))))))
 
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
@@ -1000,9 +1002,7 @@
                               (error 'ERROR
                                      "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (unless *prereqs-used*
-                              ;(printf "Using prereqs!!\n")
-                              (set! *prereqs-used* '()))
+
                             (fprintf o "\ninclude::./index-lang-prereq.asc[]\n\n")]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
@@ -1201,8 +1201,19 @@
       (when *lesson-plan*
         (accumulate-glossary-and-standards))
 
-      (when *lesson-plan*
-        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))
+      ;(printf "pathwayrootdir = ~a\n" *pathway-root-dir*)
+      ;(printf "lesson = ~a\n" *lesson*)
+      ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
+
+      (let ([prim-file (if *lesson-plan* "index.primtxt"
+                           (if (and *workbook-page?* *lesson*)
+                               (format "~a~a/index.prim2txt"
+                                       *pathway-root-dir* *lesson*)
+                               #f))])
+        (when prim-file
+          (store-functions-used *prereqs-used* prim-file)
+          (when *lesson-plan*
+            (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))))
 
       (when *lesson-plan*
         (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
@@ -1233,7 +1244,7 @@
             )
           #:exists 'replace))
 
-      ;(printf "OTHERDIR = ~a\n"  (truthy-getenv "OTHERDIR"))
+      ;(printf "OTHERDIR = ~a\n" (truthy-getenv "OTHERDIR"))
       (unless (truthy-getenv "OTHERDIR")
         (asciidoctor out-file)
         ;(unless (truthy-getenv "DEBUG") (delete-file out-file))
@@ -1242,9 +1253,6 @@
       (when *link-lint?*
         (close-output-port *internal-links-port*)
         (close-output-port *external-links-port*))
-
-      ;(when *prereqs-used*
-      ;  (printf "*** prereqs-used = ~s\n" *prereqs-used*))
 
       )))
 
@@ -1393,7 +1401,7 @@
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
-               (format  " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
+               (format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
                (string-join
                  (map (lambda (dict)
                         (enclose-tag "option" ""
@@ -1578,7 +1586,7 @@
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(list? e) (let ([a (car e)])
-                     (cond [(and pyret (or (memq a *list-of-hole-symbols*)  ;XXX
+                     (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX
                                            (infix-op? a #:pyret #t)
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
@@ -1586,7 +1594,7 @@
                                    [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if wrap (format "({zwsp}~a{zwsp})" x) x)) ]
-                           [(and (not pyret) (or (memq a *list-of-hole-symbols*)  ;XXX
+                           [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
                                                  (infix-op? a #:pyret #f)
                                                  ))
                             (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
@@ -1622,7 +1630,7 @@
 
 (define (add-prereq sym)
   ;(printf "doing add-prereq ~s\n" sym)
-  (when (and *prereqs-used* (symbol? sym))
+  (when (and (or *lesson-plan* *workbook-page?*) (symbol? sym))
     (unless (and (string=? *proglang* "pyret")
                  (member sym '(+ - * /)))
       (unless (member sym *prereqs-used*)
@@ -1723,7 +1731,7 @@
                                                 (sexp->block-table e1 #:pyret pyret))
                                               (cdr e))])
                              (string-append
-                               (enclose-tag "tr"  ""
+                               (enclose-tag "tr" ""
                                  (enclose-tag "td" ".operator"
                                    (enclose-span ".operator" (sexp->block-table a #:pyret pyret))))
                                  (enclose-tag "tr" ""
@@ -1827,11 +1835,11 @@
 
 (define (contract-exercise/internal tag start-str colon-str)
   (string-append start-str
-    (enclose-span  ".contract-name.studentAnswer" "")
+    (enclose-span ".contract-name.studentAnswer" "")
     colon-str
-    (enclose-span  ".contract-domain.studentAnswer" "")
+    (enclose-span ".contract-domain.studentAnswer" "")
     " -> "
-    (enclose-span  ".contract-range.studentAnswer" "")))
+    (enclose-span ".contract-range.studentAnswer" "")))
 
 (define (contract-exercise tag)
   (contract-exercise/internal tag "; " ": "))
