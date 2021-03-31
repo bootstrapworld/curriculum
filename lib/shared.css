@@ -46,6 +46,8 @@ tr th.tableblock {
   font-size:        1rem;
 }
 
+.indentedpara { margin-left: 3em; }
+
 /* The footer at the bottom of every page */
 .acknowledgment {
   margin-top:       35px;
@@ -148,10 +150,7 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.fitb,
-.fitbruby,
-.blankline,
-.vskip {
+.fitb, .fitbruby, .blankline, .vskip {
   display:            inline-block;
   min-height:         15px;
   min-width:          5em;
@@ -173,12 +172,8 @@ tr th.tableblock {
 .lh-style li, .lh-style li p { line-height: 6ex; }
 .lh-style .fitb { line-height: 1 !important; }
 
-.studentAnswer::before,
-.quad::before,
-.fitb::before,
-.fitbruby::before,
-.vskip::before,
-.blankline::before {
+.studentAnswer::before, .quad::before, .fitb::before,
+.fitbruby::before, .vskip::before, .blankline::before {
   content: '\00200b';
 }
 
@@ -573,7 +568,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 }
 
 /* HACK FOR NOW: don't let editboxes break lines */
-.editbox {width: auto; background-color: #f7f7f8; margin: 0 0}
+.editbox { width: auto; background-color: #f7f7f8; margin: 0; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
