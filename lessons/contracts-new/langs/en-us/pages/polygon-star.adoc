@@ -3,20 +3,23 @@
 ++++
 <style>
 td { height: 20pt; }
-p { font-size: 0.9rem;}
+p { font-size: 0.9rem; margin: 0;}
 div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
 img { width: 55%; }
+.listingblock .highlight { padding: 0; }
+.forceShadedBlockWTF { background-color: #f7f7f8; }
 </style>
 ++++
 
-
+[.forceShadedBlockWTF]
 @show{(sexp->code `polygon-star)}`{two-colons} (`
 ```
-	side-length :: Number, 
-	number-of-points-on-polygon :: Number, 
-	polygon-points-skipped-to-connect-from-one-point-of-star-to-another :: Number, 
-	style-or-fill-mode :: String,
- 	color :: String
+	side-length    :: Number, 
+	total-points   :: Number, 
+	connect-every  :: Number, 
+	style          :: String,
+ 	color          :: String
+
 ) -> Image
 ```
 
