@@ -89,7 +89,7 @@
                     table-functions-used?)
             (display "|Language Table\n" o)
             (display "|\n" o)
-            (display "[.lang-features-table,cols=\"1a,4a,1a\"]\n" o)
+            (display "[.lang-features-table,cols=\"1a,4a,2a\"]\n" o)
             (display "!===\n\n" o)
             (display "!Types !Functions !Values\n\n" o)
             (when number-functions-used? (display-prereq-row 'Number o))
