@@ -1,0 +1,50 @@
+= Introduction to Programming
+
+*Programming languages* involve different @vocab{datatypes}, such as Numbers, Strings, and Booleans. 
+
+	- Numbers are values like `1`, `0.4`, `1/3`, and `-8261.003`. 
+	
+	** Numbers are _usually_  used for quantitative data and other values are _usually_  used as categorical data.
+	
+@ifproglang{pyret}{** In Pyret, any decimal _must_  start with a 0. `0.22` is valid, but `.22` is not.}
+	
+	- Strings are values like `"Emma"`, `"Rosanna"`, `"Jen and Ed"`, or even `"08/28/1980"`.
+	
+	** In this language, all strings _must_ be surrounded in quotation marks.
+	
+	- Booleans are either `true` or `false`.
+
+@ifproglang{pyret}{
+
+@vspace{1ex}
+
+*Operators* (like `+`, `-`, `*`, `<`, etc.) work the same way in Pyret that they do in math. 
+
+	- Operators are written between values, for example: `4 + 2`. 
+
+	- In Pyret, operators must always have a space around them. `4 + 2` is valid, but `4+2` is not.
+	
+	- If an expression has different operators, parentheses must be used to show order of operations. `4 + 2 + 6` and `4 + (2 * 6)` are valid, but `4 + 2 * 6` is not.
+} 
+
+@vspace{1ex}
+
+*Applying Functions* also works much the way it does in math. The function name is first, followed by a list of @vocab{arguments} @ifproglang{pyret}{in parentheses}.
+
+	- In math this could look like @math{f(5)} or @math{f(g(10, 4))}.
+	- In @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} this could look like @show{(sexp->code `(star 50, "solid", "red"))}.
+	- There are many other functions, for example @show{(sexp->code `num-sqr)}, @show{(sexp->code `num-sqrt)}, @show{(sexp->code `triangle)}, @show{(sexp->code `star)}, @show{(sexp->code `string-repeat)}, etc.  
+
+@vspace{1ex}
+
+Functions have @vocab{contracts}, which help explain how a function should be used. Every contract has three parts:
+
+	- The _Name_ of the function - literally, what it's called.
+	- The _Domain_ of the function - what  _types of values_ the function consumes, and in what order.
+	- The _Range_ of the function - what  _type of value_ the function produces.
+
+@vspace{1ex}
+
+*Value Definitions* (like `x = 4`, or `y = 9 + 6`) also work the way they do in math. Every value definition starts with @ifproglang{pyret}{a _name_, followed by an equals sign and then an expression} 
+@ifproglang{wescheme}{`(define` a name and then an expression}. 
+Once a value is defined, it can be referred to by name.

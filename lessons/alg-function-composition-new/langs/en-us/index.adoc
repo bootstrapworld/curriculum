@@ -61,15 +61,38 @@ Students are given a scaffolded activity that forces them to use the output of o
 Divide students into groups of 3-4, and distribute a set of Function Cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
 
 [.lesson-instruction]
-- Each group has a set of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be? (_10_!)
-- I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`? (_10_!)
-- For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end. _You will need to use some functions more than once, and that's ok!_
+- Each group has a set of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be? _10_
+- I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`? _10_
+- For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end. 
+- You will need to use some functions more than once, and that's ok!
 
 === Investigate
 Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions. 
 
 === Synthesize
 If two groups come up with different compositions that achieve the same end result, have them share their ideas!
+
+== Diagramming Function Composition
+
+=== Overview
+The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+
+=== Launch
+Three of the function cards we just used were for the functions `f`, `g` and `h`, which multiplied x by 3, added six and subtracted one, resepectively. We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?  
+
+- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
+- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
+- Then we would evaluate @math{f(27)}, tripling `9` to get `27`
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+
+=== Synthesize
+
+[.lesson-instruction]
+Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? _no!_
+Why not?
 
 == Composing Functions in Code @duration{20 minutes}
 
@@ -88,31 +111,26 @@ Have students log into
 @ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO)} }
 open a new program, save it as Function Composition and open to @printable-exercise{pages/function-composition-green-star.adoc}, in which they will be drawing circles of evaluation to help them write expressions to compose a series of images. 
 
-When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing. 
+- Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
+- When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing. 
 
 Then have students open to @printable-exercise{pages/function-composition-your-name.adoc} in which they will create a text @vocab{image} of their name and experiment with other functions.
 
-While students are exploring, be available for support but encourage student discussion to solve problems.  Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for Facilitation}
+While students are exploring, be available for support but encourage student discussion to solve problems. Many student questions can be addressed with these responses: _Did you try drawing the Circle of Evaluation first? Did you check the contract? Have you pressed the Run button to save your Definitions changes?_
 
-*Many student questions can be addressed with these responses:*
-
-- Did you try drawing the Circle of Evaluation first?
-- Did you check the contract?
-- Have you pressed the Run button to save your Definitions changes?
-
-Encourage students to practice writing *comments* in the code to describe what is being produced.
-@ifproglang{wescheme}{
-Use `;` at the beginning of a line to write a comment.
-}
-@ifproglang{pyret}{
-Use `#` at the beginning of a line to write a comment.
-}
+Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
+|===
 
 If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @ifproglang{pyret}{@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
 }
 
 === Synthesize
-[.lesson-instruciton]
+
+[.lesson-instruction]
 --
 - What do all of these functions have in common?
 _They all produce images, they all change some element of the original image_
@@ -130,11 +148,7 @@ _The rotation angle, measured counterclockwise_
 _Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
 --
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-| @span{.title}{Fun with Images!}
-Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing. The Bootstrap: Flags lesson also dives deeper into image composition.
-|===
+
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -143,6 +157,12 @@ Now that students have learned how to use all of these image-composing functions
 
 MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussion questions during the last 5 minutes of the Explore and ask students to discuss the questions with their partner, asking each other for explanation and details and coming up with the clearest, most precise answer they can.
 Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
+|===
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+| @span{.title}{Fun with Images!}
+Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing. The Bootstrap: Flags lesson also dives deeper into image composition.
 |===
 
 == Composing Multiple Ways @duration{Optional}

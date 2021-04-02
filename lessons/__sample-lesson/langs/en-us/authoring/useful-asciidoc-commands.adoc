@@ -35,9 +35,21 @@ Some asciidoc files use multiple languages! asciidoc, css, racket, mathjax...
 [.underline]underline 
 [.underline]"if you want to underline more than one word, put the phrase in quotes"
 
-`function name`
+@show{(sexp->code `code)}
+@show{(sexp->code `(coded sentences with "punctuation"))}
+We are trying to write all functions using `sexp->code` ... 
+It's special Dorai wizardry that will 
+- take whatever we write in racket and automatically translate it into pyret if the document is opened in a pyret version
+- autogenerate a list of functions used in the lesson plan and accompanying pages for a language prerequisites table
+- who knows what other fabulous things it will do by the time you're reading this ;)
 
-_``function name`` at the beginning of an italicized sentence_
+Widespread use of `sexp` in lesson plans is relatively recent, so you will also see code written like this. 
+- `code`
+_``code`` at the beginning of an italicized sentence_
+
+Feel free to update expressions you encounter to use `sexp->code`! 
+(And to use the alternate version of formatting code in text when wanting to format code that is outside the bounds of what `sexp` is used for.)
+
 
 @vocab{vocab word} _Flag a word as vocabulary if it is 1) focal to the lesson and 2) focal to the sentence you're using it in.  If you flag a word as a vocabulary word, be sure to add it to the glossary in both plural and singular form. The glossary is found in the curriculum directory (shared is at the same level as lessons and within that you will find glossary-terms.rkt)
 
@@ -129,6 +141,20 @@ The other formatting defines where in the cell the words end up being placed (se
 - ^ is center (horizontally or vertically)
 - > pushes to the right (horizontally) or bottom (vertically). 
 - ^.^ centers both horizontally & vertically 
+
+==== Inerting a table within a table
+[cols="1a,1a"]
+|===
+| add a to the column width to let asciidoc know to look out for something complicated 
+| and
+| use exlamation points instead of vertical bars to indicate the column breaks of the nested table 		
+|  [cols="1a,1a"]
+!===
+! this 	! part
+! is 	! nested
+!===
+|===
+
 
 === Programming Language specific content
 

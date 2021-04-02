@@ -11,20 +11,24 @@
 
 There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles!
 
+
 [.forceShading]
+[indented.para]
 --
 @show{(sexp->code `triangle)}`{two-colons} Number, String, String -> Image`
 
 @show{(sexp->code `right-triangle)}`{two-colons} Number, Number, String, String -> Image`
 
 @show{(sexp->code `isosceles-triangle)}`{two-colons} Number, Number, String, String -> Image`
+
+@show{(sexp->code `triangle-sas)}`{two-colons} Number, Number, Number, String, String -> Image`
 --
 
-@n Why do you think `triangle` can build a triangle with only one number, while `right-triangle` and `isosceles-triangle` need two numbers and `triangle-sas` and `triangle-asa` need three? 
+@n Why do you think @show{(sexp->code `triangle)} can build a triangle when given only one number, while @show{(sexp->code `right-triangle)} and @show{(sexp->code `isosceles-triangle)} need two numbers and @show{(sexp->code `triangle-sas)} needs three numbers? 
 
 @span{.blankline}{}
 @span{.blankline}{}
-@n When the computer reads @show{(sexp->code `(triangle 80 "solid" "red"))}, the function is using code supplied by the programmer who wrote the original `triangle` function. What other numbers besides 80 do you think the function is using to build the triangle?
+@n What other numbers besides `80` do you think @show{(sexp->code `triangle)} uses to build @show{(sexp->code `(triangle 80 "solid" "red"))}?
 
 @span{.blankline}{}
 
@@ -46,12 +50,17 @@ There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifpr
 @n Write `isosceles-triangle` expressions for the images below. _1 argument for each should be `100`._
 
 [.indented-para]
+--
 [cols="^.^8a, ^.^14a", stripes="none", grid="none", frame="none"]
 |===
 | @centered-image{../images/isosceles-100-30.png} 		| @fitb{25em}{}
 | @centered-image{../images/isosceles-100-130.png} 		| @fitb{25em}{}
 |===
-
+--
 @n What do you think the `numbers` in `isosceles-triangle` represent? 
+
+@span{.blankline}{}
+
+@n Write an expression that would build a *right-isosceles* triangle.
 
 @span{.blankline}{}
