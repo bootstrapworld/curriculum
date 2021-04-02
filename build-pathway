@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-03-11 # last modified
+LASTMOD=2021-04-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 VERSION=
@@ -781,16 +781,9 @@ function recursiveadoc() {
 
   for f in *.adoc; do
     if test -f "$f"; then
-      if test $NOPARALLEL; then
-        processadoc "$f"
-      else
-        processadoc "$f" &
-      fi
+      processadoc "$f"
     fi
   done
-  if test ! $NOPARALLEL; then
-    wait
-  fi
 
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
@@ -873,6 +866,7 @@ function checklessonplan() {
 function buildworkbookpages() {
   local L=$1
   cd $L
+  export LESSON=$L
   export LESSONSUBDIR=$L
   #
   repoDir="$TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE"
@@ -1000,11 +994,17 @@ function buildlessons() {
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
+    local L
     for L in $(cat workbook-lessons.txt); do
-      export LESSON=$L
-      buildworkbookpages $L
+      if test $NOPARALLEL; then
+        buildworkbookpages $L
+      else
+        buildworkbookpages $L &
+      fi
     done
-    export L=
+    if test ! $NOPARALLEL; then
+      wait
+    fi
   fi
   export PATHWAYROOTDIR=./
   export LESSON=
@@ -1016,6 +1016,7 @@ function buildlessonplans() {
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
+    local L
     for L in $(cat workbook-lessons.txt); do
       # needed?
       if test $NOPARALLEL; then
@@ -1027,7 +1028,6 @@ function buildlessonplans() {
     if test ! $NOPARALLEL; then
       wait
     fi
-    export L=
   fi
   export LESSONSUBDIR=
 }

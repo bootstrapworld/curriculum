@@ -1205,15 +1205,16 @@
       ;(printf "lesson = ~a\n" *lesson*)
       ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
 
-      (let ([prim-file (if *lesson-plan* "index.primtxt"
-                           (if (and *workbook-page?* *lesson*)
-                               (format "~a~a/index.prim2txt"
-                                       *pathway-root-dir* *lesson*)
-                               #f))])
-        (when prim-file
-          (store-functions-used *prereqs-used* prim-file)
-          (when *lesson-plan*
-            (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))))
+      (when (pair? *prereqs-used*)
+        (let ([prim-file (if *lesson-plan* "index.primtxt"
+                             (if (and *workbook-page?* *lesson*)
+                                 (format "~a~a/index.prim2txt"
+                                         *pathway-root-dir* *lesson*)
+                                 #f))])
+          (when prim-file
+            (store-functions-used *prereqs-used* prim-file)
+            (when *lesson-plan*
+              (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file)))))
 
       (when *lesson-plan*
         (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")
