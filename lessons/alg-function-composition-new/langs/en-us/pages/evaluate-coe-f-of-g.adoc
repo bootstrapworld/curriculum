@@ -1,32 +1,39 @@
+= Diagramming Function Composition
 
-= Function Composition -- f of g of h
+++++
+<style>
+.listingblock pre {padding: 0;} 
+.autonum::before { content: '('; }
+.topTable tr:first-child td * { background-color: #f7f7f8; }
+</style>
+++++
 
-[cols="1,1,1",stripes="none"]
+[.topTable, cols="1,1,1", stripes="none"]
 |===
-|  
-``
+a|
+----
 f :: Number -> Number
-consumes a number, multiplies it by 3, and produces the result
-``
-|
-``
+Consumes a number, multiplies by 3 to produce the result
+----
+a|
+----
 g :: Number -> Number
-consumes a number, adds six, and produces the result
-``
-|
-``
+Consumes a number, adds six to produce the result
+----
+a|
+----
 h :: Number -> Number
-consumes a number, subtracts one, and produces the result
-``
+Consumes a number, subtracts one to produce the result
+----
 |
-`f(x) = 3x`
+@math{ f(x) = 3x }
 |
-`g(x) = x + 6`
+@math{ g(x) = x + 6 }
 |
-`h(x) = x - 1`
+@math{ h(x) = x - 1 }
 |===
 
-For each Circle of Evaluation below, draw the equivalent Circle of Evaluation. Then write expressions for both versions of the Circle of Evaluation and evaluate them for `x = 4`.
+Four function compositions are written in the 1st column, represented as Circles of Evaluation. For each one, (1) translate it into the equivalent Circle for Order of Operations, (2) write expressions for _both_ versions of the Circles, and (3) evaluate them for @math{x = 4}. The first one has been completed for you.
 
 @do{
   (define expr1 '(-  (+ (* 3 x) 6) 1))
@@ -38,46 +45,51 @@ For each Circle of Evaluation below, draw the equivalent Circle of Evaluation. T
   (define code3 '(?ANS (?ANS ?ANS (?ANS ?ANS ?ANS)) ?ANS))
 }
 
-[cols="1,2,2a",stripes="none"]
+[cols="^1,^2,^3a", options="header", stripes="none"]
 |===
 
-|  						| Equivalent Circle of Evaluation  		| Code & Math
-| *Example:* @show{(sexp->coe `(f (g (h x))))} 		| @show{(sexp->coe `(* 3 (+ 6 (- x 1))))} 	| 
+| Function Composition
+| Order of Operations
+| Translate & Evaluate
 
-[cols="1,1"] 
+| @n  @show{(sexp->coe `(f (g (h x))))} 		
+| @show{(sexp->coe `(* 3 (+ 6 (- x 1))))} 	
+| 
+[cols="4,5"] 
 !=== 
-! 1st expression: 		! @fitb{10em}{@show{(sexp->code `(f (g (h x))))}}
-! 2nd expression: 		! @fitb{10em}{@show{(sexp->code `(* 3 (+ 6 (- x 1))))}} 
-! Evaluate for x = 4 	! @fitb{10em}{*@math{f(g(h(4)))} Evaluates to:* 27} 
+! Composition: 			! @show{(sexp->code `(f (g (h x))))}
+! Operations: 			! @show{(sexp->code `(* 3 (+ 6 (- x 1))))}
+! Evaluate for x = 4 	! @math{f(g(h(4))) = 27}
 !===
 
-| @n  @show{(sexp->coe `(h (g (f x))))}  			| @show{(sexp->coe expr4)} | 
-
-[cols="1,1"] 
+| @n  @show{(sexp->coe `(h (g (f x))))}
+| @show{(sexp->coe expr4)}
+|
+[cols="4,5"] 
 !=== 
-! 1st expression: 		! @fitb{10em}{}
-! 2nd expression: 		! @fitb{10em}{} 
-! Evaluate for x = 4 	! @fitb{10em}{} 
+! Composition: 			! 
+! Operations: 			!  
+! Evaluate for x = 4 	!  
 !===
 
-| @n  @show{(sexp->coe `(g (f (h x))))}  			| @show{(sexp->coe code2)} | 
-
-[cols="1,1"] 
+| @n  @show{(sexp->coe `(g (f (h x))))}
+| @show{(sexp->coe code2)} 
+|
+[cols="4,5"]
 !=== 
-! 1st expression: 		! @fitb{10em}{}
-! 2nd expression: 		! @fitb{10em}{} 
-! Evaluate for x = 4 	! @fitb{10em}{} 
+! Composition: 			! 
+! Operations: 			!  
+! Evaluate for x = 4 	!  
 !===
 
-| @n  @show{(sexp->coe `(h (f (g x))))}  			| @show{(sexp->coe code3)} |
-
-[cols="1,1"] 
+| @n  @show{(sexp->coe `(h (f (g x))))}
+| @show{(sexp->coe code3)}
+|
+[cols="4,5"]
 !=== 
-! 1st expression: 		! @fitb{10em}{}
-! 2nd expression: 		! @fitb{10em}{} 
-! Evaluate for x = 4 	! @fitb{10em}{} 
+! Composition: 			! 
+! Operations: 			!  
+! Evaluate for x = 4 	!  
 !===
 
 |===
-
-
