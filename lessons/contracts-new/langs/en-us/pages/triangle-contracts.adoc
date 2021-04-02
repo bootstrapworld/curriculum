@@ -1,15 +1,24 @@
 = Triangle Contracts
 
+++++
+<style>
+.forceShading { background: #f7f7f8; }
+</style>
+++++
+
 @n What kind of triangle does the `triangle` function produce?  @fitb{15em}{}
 @vspace{1ex}
 
 There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles!
 
-```
-triangle :: number, string, string -> image
-right-triangle :: number, number, string, string -> image
-isosceles-triangle :: number, number, string, string -> image
-```
+[.forceShading]
+--
+@show{(sexp->code `triangle)}`{two-colons} Number, String, String -> Image`
+
+@show{(sexp->code `right-triangle)}`{two-colons} Number, Number, String, String -> Image`
+
+@show{(sexp->code `isosceles-triangle)}`{two-colons} Number, Number, String, String -> Image`
+--
 
 @n Why do you think `triangle` can build a triangle with only one number, while `right-triangle` and `isosceles-triangle` need two numbers and `triangle-sas` and `triangle-asa` need three? 
 
