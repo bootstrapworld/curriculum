@@ -48,7 +48,9 @@
        bar-chart pie-chart box-plot scatter-plot histogram
        bar-chart-summarized pie-chart-summarized modified-box-plot image-scatter-plot
        )
-      ())
+      (
+      🔵🔺🔶
+      ))
 
     (Table
       (count .row-n .order-by .filter .build-column

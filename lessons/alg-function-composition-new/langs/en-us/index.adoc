@@ -29,7 +29,7 @@
 * @link{pages/function-cards.adoc, "Function Cards - print and cut"}
 
 @material-links
-
+ 
 | Supplemental Resources
 |
 - @link{https://www.google.com/search?q=random+number, Random Integer Generator}
@@ -78,9 +78,14 @@ If two groups come up with different compositions that achieve the same end resu
 The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
 
 === Launch
-Three of the function cards we just used were for the functions `f`, `g` and `h`, which multiplied x by 3, added six and subtracted one, resepectively. We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?  
+Three of the function cards we just used were for the functions `f`, `g` and `h`: 
+* `f` multiplied its input by 3
+* `g` added six to its input 
+* `h` subtracted one from its input 
 
-We could diagram the function composition using Circles of Evaluation, first using the function names, and then replacing those function names to make the math involved more visible.
+We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?  
+
+We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've translated that same expression into an Order of Operations, replacing the function names in each Circle of Evaluation with _what each function does_:
 
 [cols="^1,^2", options="header", stripes="none"]
 |===
@@ -104,7 +109,7 @@ Have students turn to @printable-exercise{pages/diagramming-function-composition
 
 [.lesson-instruction]
 --
-Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? _no!_
+Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? _No!_
 
 Why not? _order matters!_
 --
@@ -160,7 +165,7 @@ _The scale factor by which the image should grow or shrink_
 - What does the number in @show{(sexp->code `rotate)} represent?
 _The rotation angle, measured counterclockwise_
 
-- The domain and range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the @show{(sexp->code `text)} function as an input for @show{(sexp->code `flip-horizontal)}?
+- The Domain and Range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code `text)} function as an _input_ for @show{(sexp->code `flip-horizontal)}?
 _Because the @show{(sexp->code `text)} function produces an Image, which is then used as the input for @show{(sexp->code `flip-horizontal)}._
 --
 
@@ -184,13 +189,13 @@ Now that students have learned how to use all of these image-composing functions
 == Composing Multiple Ways @duration{Optional}
 
 === Overview
-Students identify pairs of code that will create the same image and are asked to think about why we might choose one way of achieving our goal over the other.
+Students identify multiple expressions that will create the same image, and think about the merits of one expression over another.
 
 === Launch
 
 [.lesson-instruction]
 --
-As is often true with solving math problems, there is more than one way to compose most images.
+As is often true with solving math problems, there is more than one way to get the same composed image.
 
 Suppose I wrote the code: @show{(sexp->code `(scale 3 (star 50 "solid" "red")))}.
 

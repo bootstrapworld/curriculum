@@ -537,7 +537,7 @@ div.circleevalsexp .expression {
 
 div.circleevalsexp .value {
   display:            inline-block;
-  margin:             10px 10px 5px 10px;
+  margin:             8px 5px;
   vertical-align:     top;
 }
 
@@ -550,6 +550,10 @@ div.circleevalsexp .operator {
   border-bottom:      solid 2px black;
   border-radius:      15px 15px 0px 0px;
 }
+
+/* Display ONLY 5px hspaces that are after the first one (keeps args centered) */
+div.circleevalsexp .hspace { display: none; }
+div.circleevalsexp .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
 
 /* When in operator position, drop the margins */
 div.circleevalsexp .operator .value { margin: 0px; }
