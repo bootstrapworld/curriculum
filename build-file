@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# html2pdf.sh f.html
+# build-file f.html
 #   creates corresponding PDF file in f.pdf
 #
-# html2pdf.sh -l f.html
+# build-file -l f.html
 #   same, but in landscape mode
 #
 # This script is only offered for debugging convenience. The
@@ -50,5 +50,6 @@ if test $LANDSCAPE; then
   ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
 fi
 
-echo wkhtmltopdf --enable-local-file-access --print-media-type --dpi 300 $JAVASCRIPTDELAY $ASPECT -q $ghtml $fpdf
+#echo wkhtmltopdf --enable-local-file-access --print-media-type --dpi 300 $JAVASCRIPTDELAY $ASPECT -q $ghtml $fpdf
+
 wkhtmltopdf --enable-local-file-access --print-media-type --dpi 300 $JAVASCRIPTDELAY $ASPECT -q $ghtml $fpdf

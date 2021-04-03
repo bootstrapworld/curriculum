@@ -1212,9 +1212,10 @@
                                          *pathway-root-dir* *lesson*)
                                  #f))])
           (when prim-file
-            (store-functions-used *prereqs-used* prim-file)
-            (when *lesson-plan*
-              (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file)))))
+            (store-functions-used *prereqs-used* prim-file))))
+
+      (when *lesson-plan*
+        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr in-file))
 
       (when *lesson-plan*
         (call-with-output-file (path-replace-extension in-file "-extra-mat.asc")

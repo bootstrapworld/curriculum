@@ -29,9 +29,10 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-02 # last modified
+LASTMOD=2021-04-03 # last modified
 PDFMARGIN=0mm
 SED=sed
+MDV=md5sum
 VERSION=
 NOPARALLEL=
 
@@ -130,6 +131,10 @@ fi
 
 if which gsed | grep -q .; then
   SED=gsed
+fi
+
+if which md5 | grep -q .; then
+  MDV=md5
 fi
 
 if ! which curl | grep -q .; then
@@ -863,6 +868,25 @@ function checklessonplan() {
 
 }
 
+function checkmd5nochange() {
+  distDir=$1
+  repoDir=$2
+  savef=$distDir/checksum.md5txt
+  newchecksum=$(find $repoDir -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  if test -f $savef; then
+    savedchecksum=$(cat $savef)
+    if test "$newchecksum" = "$savedchecksum"; then
+      echo 1
+    else
+      echo $newchecksum > $savef
+      echo
+    fi
+  else
+    echo $newchecksum > $savef
+    echo
+  fi
+}
+
 function buildworkbookpages() {
   local L=$1
   cd $L
@@ -872,15 +896,14 @@ function buildworkbookpages() {
   repoDir="$TOPDIR/$LESSONSUBDIR/langs/$LANGUAGE"
 
   DORECURSIVEADOC=1
-  if test ! $CHECKTARGET -a "$(ls -A .)" -a -f index.shtml; then
-    reponewestfile=$(find $repoDir -type f|xargs ls -tr|tail -1)
-    distnewestfile=$(find . -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-    if test $reponewestfile -ot $distnewestfile; then
+
+  if test ! $CHECKTARGET; then
+    if test $(checkmd5nochange . $repoDir); then
       DORECURSIVEADOC=
-    else
-      :
     fi
   fi
+
+  #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
 
   if test $DORECURSIVEADOC; then
 
@@ -1270,6 +1293,7 @@ function batchhtmltopdf() {
   split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
+    #echo doing batchhtmltopdf $f
     if test -f "$f"; then
       wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
     fi
@@ -1337,25 +1361,19 @@ function buildpathway() {
 
     if test ! $CHECKTARGET; then
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
-        distnewestfile=$(find $distDir/front-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-        reponewestfile=$(find $repoDir/front-matter -type f|xargs ls -tr|tail -1)
-        if test $distnewestfile -nt $reponewestfile; then
+        if test $(checkmd5nochange $distDir/front-matter $repoDir/front-matter); then
           REFRESHFRONTMATTER=
         fi
       fi
 
       if test -d $distDir/back-matter -a -d $repoDir/back-matter; then
-        distnewestfile=$(find $distDir/back-matter -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-        reponewestfile=$(find $repoDir/back-matter -type f|xargs ls -tr|tail -1)
-        if test $distnewestfile -nt $reponewestfile; then
+        if test $(checkmd5nochange $distDir/back-matter $repoDir/back-matter); then
           REFRESHBACKMATTER=
         fi
       fi
 
       if test -d $distDir/resources -a -d $repoDir/resources; then
-        distnewestfile=$(find $distDir/resources -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-        reponewestfile=$(find $repoDir/resources -type f|xargs ls -tr|tail -1)
-        if test $distnewestfile -nt $reponewestfile; then
+        if test $(checkmd5nochange $distDir/resources $repoDir/resources); then
           REFRESHRESOURCES=
         fi
       fi
@@ -1404,9 +1422,7 @@ function buildpathway() {
         if test -d "$repoLessonDir"; then
           DOCOPYDIR=1
           if test -z $CHECKTARGET -a "$(ls -A $lessonDir)"; then
-            reponewestfile=$(find $repoLessonDir -type f|xargs ls -tr|tail -1)
-            distnewestfile=$(find $lessonDir -type f|xargs ls -tr|grep -v '\.kp$'|grep -v '\.titletxt$'|tail -1)
-            if test $reponewestfile -ot $distnewestfile; then
+            if test $(checkmd5nochange $lessonDir $repoLessonDir); then
               DOCOPYDIR=
             fi
           fi
