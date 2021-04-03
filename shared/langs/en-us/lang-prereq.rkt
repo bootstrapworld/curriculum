@@ -41,7 +41,7 @@
 
     (Image
       (
-       triangle circle star square rectangle ellipse rhombus regular-polygon radial-star polygon-star 
+       star triangle circle square rectangle rhombus ellipse regular-polygon radial-star polygon-star 
        text 
        image-url
        overlay put-image above beside below rotate scale flip-horizontal flip-vertical

@@ -84,7 +84,7 @@ Students know about Numbers, Strings,
 - What will the expression @math{f(3)} evaluate to? _7_
 - The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? _1_
 
-@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from _variables_, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs. 
+@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs. 
 
 
 Have students log into  
@@ -95,6 +95,7 @@ Have students log into
 [.lesson-instruction]
 --
 - What is the name of this function? @ifproglang{pyret}{`num-sqrt`} @ifproglang{wescheme}{`sqrt`}
+
 - How many arguments does the function expect? _1_
 - What type of argument does the function expect? _Number_
 - Does the @ifproglang{pyret}{`num-sqrt`} @ifproglang{wescheme}{`sqrt`} function produce a Number? String? Boolean? _Number_
@@ -279,7 +280,7 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 === Synthesize
 [.lesson-instruction]
 --
-- `square` and `star` have the same domain (number string string) and range (image). Did you find any other shape functions with the same domain and range? _Yes! `triangle` and `circle`._
+- `square` and `star` have the same domain _(number, string, string)_ and range _(image)_. Did you find any other shape functions with the same domain and range? _Yes! `triangle` and `circle`._
 - Does having the same domain and range mean that the functions do the same things? _No! They make very different images!_
 - A lot of the domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others? 
 - For some of you, the word ellipse was new. How would you describe what an ellipse looks like to someone who'd never seen one before?  Why did the contract for ellipse require to numbers? What happens when the two numbers are the same?
@@ -288,7 +289,7 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 - How did you figure out what to do after seeing an error message? _Read the error message, think about what the computer is trying to tell us, etc._
 - Which input determined the size of the Rhombus?  What did the other number determine?
 --
-
+ 
 == Using Contracts increases efficiency @duration{10minutes}
 
 === Overview
@@ -301,7 +302,7 @@ You just investigated image functions by guessing and checking what the contract
 
 === Investigate
 
-Have students turn to  @printable-exercise{pages/using-contracts.adoc} and use their editors to experiment. 
+Have students turn to  @printable-exercise{pages/using-contracts.adoc}, @opt-printable-exercise{pages/using-contracts-cont.adoc} and use their editors to experiment. 
 
 Once they've discovered how to build a version of each image function that satisfies them, have them record the example code in their contracts table. See if you can figure out what aspect of the image each of the inputs specifies. It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
@@ -313,9 +314,9 @@ Once they've discovered how to build a version of each image function that satis
 - If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
 --
 
-Have students turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
+Have students turn to @printable-exercise{pages/triangle-contracts.adoc},  @printable-exercise{pages/triangle-contracts-cont.adoc} and use the contracts that are provided to write example expressions.
 
-Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. Have students turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help them match the images to the corresponding expressions.
+Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to give students a taste of it, you can have them turn to @opt-printable-exercise{pages/radial-star.adoc} and use the contract to help them match the images to the corresponding expressions and then to  @opt-printable-exercise{pages/polygon-star.adoc} to work with the detailed contract for a `polygon-star`. Both of these functions can generate a wide range of interesting shapes!
 
 === Synthesize
 
