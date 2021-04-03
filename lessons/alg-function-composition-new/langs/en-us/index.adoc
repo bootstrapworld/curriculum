@@ -80,6 +80,18 @@ The Circles of Evaluation are extended to provide a visual-spatial metaphor for 
 === Launch
 Three of the function cards we just used were for the functions `f`, `g` and `h`, which multiplied x by 3, added six and subtracted one, resepectively. We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?  
 
+We could diagram the function composition using Circles of Evaluation, first using the function names, and then replacing those function names to make the math involved more visible.
+
+[cols="^1,^2", options="header", stripes="none"]
+|===
+| Function Composition
+| Order of Operations
+| @show{(sexp->coe `(f (g (h x))))} 		
+| @show{(sexp->coe `(* 3 (+ (- x 1) 6)))} 	
+|===
+
+The circles show us that in order to evaluate @math{f(g(h(4))))}
+
 - First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
 - Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
 - Then we would evaluate @math{f(27)}, tripling `9` to get `27`
@@ -91,14 +103,16 @@ Have students turn to @printable-exercise{pages/diagramming-function-composition
 === Synthesize
 
 [.lesson-instruction]
+--
 Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? _no!_
-Why not?
 
+Why not? _order matters!_
+--
 == Composing Functions in Code @duration{20 minutes}
 
 === Overview
 
-The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+The Circles of Evaluation are extended to functions that do more than compute values.
 
 === Launch
 [.lesson-instruction]
@@ -109,7 +123,9 @@ The contracts page in your workbook is just like the Function Cards from this ac
 Have students log into 
 @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
 @ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO)} }
-open a new program, save it as Function Composition and open to @printable-exercise{pages/function-composition-green-star.adoc}, in which they will be drawing circles of evaluation to help them write expressions to compose a series of images. 
+open a new program and save it as Function Composition.
+
+Have students open to @printable-exercise{pages/function-composition-green-star.adoc}, in which they will be drawing circles of evaluation to help them write expressions to compose a series of images. 
 
 - Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
 - When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing. 
@@ -138,14 +154,14 @@ _They all produce images, they all change some element of the original image_
 - Does using one of these functions change the original image?
 _No, it creates a whole new image_
 
-- What does the number in `scale` represent?
+- What does the number in @show{(sexp->code `scale)} represent?
 _The scale factor by which the image should grow or shrink_
 
-- What does the number in `rotate` represent?
+- What does the number in @show{(sexp->code `rotate)} represent?
 _The rotation angle, measured counterclockwise_
 
-- The domain and range for `flip-horizontal` is Image -> Image.  Why can I use the `text` function as an input for `flip-horizontal`?
-_Because the `text` function produces an Image, which is then used as the input for `flip-horizontal`._
+- The domain and range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the @show{(sexp->code `text)} function as an input for @show{(sexp->code `flip-horizontal)}?
+_Because the @show{(sexp->code `text)} function produces an Image, which is then used as the input for @show{(sexp->code `flip-horizontal)}._
 --
 
 
@@ -189,7 +205,7 @@ Students complete @printable-exercise{pages/more-than-one-way.adoc}.
 === Synthesize
 There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal. 
 
-`image=? {two-colons} Image, Image -> Boolean`
+@show{(sexp->code `image=?)}`{two-colons} Image, Image -> Boolean`
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 

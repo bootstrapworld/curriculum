@@ -33,7 +33,7 @@ Consumes a number, subtracts one to produce the result
 @math{ h(x) = x - 1 }
 |===
 
-Four function compositions are written in the 1st column, represented as Circles of Evaluation. For each one, (1) translate it into the equivalent Circle for Order of Operations, (2) write expressions for _both_ versions of the Circles, and (3) evaluate them for @math{x = 4}. The first one has been completed for you.
+For each function composition diagrammed below, translate it into the equivalent Circle of Evaluation for Order of Operations. Then write expressions for _both_ versions of the Circles of Evaluation, and evaluate them for @math{x = 4}. The first one has been completed for you.
 
 @do{
   (define expr1 '(-  (+ (* 3 x) 6) 1))
@@ -53,12 +53,12 @@ Four function compositions are written in the 1st column, represented as Circles
 | Translate & Evaluate
 
 | @n  @show{(sexp->coe `(f (g (h x))))} 		
-| @show{(sexp->coe `(* 3 (+ 6 (- x 1))))} 	
+| @show{(sexp->coe `(* 3 (+ (- x 1) 6)))} 	
 | 
 [cols="4,5"] 
 !=== 
 ! Composition: 			! @show{(sexp->code `(f (g (h x))))}
-! Operations: 			! @show{(sexp->code `(* 3 (+ 6 (- x 1))))}
+! Operations: 			! @show{(sexp->code `(* 3 (+ (- x 1)6)))}
 ! Evaluate for x = 4 	! @math{f(g(h(4))) = 27}
 !===
 
@@ -87,9 +87,9 @@ Four function compositions are written in the 1st column, represented as Circles
 |
 [cols="4,5"]
 !=== 
-! Composition: 			! @fitb{9em}{} 
-! Operations: 			! @fitb{9em}{} 
-! Evaluate for x = 4 	! @fitb{9em}{} 
+! Composition: 			! @fitb{10em}{} 
+! Operations: 			! @fitb{10em}{} 
+! Evaluate for x = 4 	! @fitb{10em}{} 
 !===
 |===
 
