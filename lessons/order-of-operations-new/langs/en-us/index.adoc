@@ -6,7 +6,7 @@
 </style>
 ++++
 
-@lesson-description{Students learn to model arithmetic expressions with a visual tool for order of operations, known as "Circles of Evaluation".}
+@lesson-description{Students learn to model arithmetic expressions with a visual tool for Order of Operations, known as "Circles of Evaluation".}
 
 [@lesson-intro-table]
 |===
@@ -45,7 +45,7 @@
 |
 * Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
 * After the first few exercises in creating Circles of Evaluation, ask students whether they create them from the 'inside-out' (drawing the inner circles first) or from the 'outside-in.'  After they've given their responses, have them try using the OTHER way!
-* Up until now, we didn't have a visual spatial model for explaining the order of operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMDAS, etc)
+* Up until now, we didn't have a visual spatial model for explaining the Order of Operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMDAS, etc)
 * For a memory hook, model the "bug that crawls through the circle" explanation.
 * Students may benefit from using multiple colors to distinguish between the different smaller expressions and parentheses.
 
@@ -59,7 +59,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Order of Operations @duration{30 minutes}
 
 === Overview
-Students are given a challenging expression that exposes common misconceptions about order of operations. The goal is to demonstrate that a brittle, fixed notion of order of operations is _not good enough_, and lead students to a deeper understanding of Order of Operations as a grammatical device. The Circles of Evaluation are introduced as "sentence diagramming for arithmetic".
+Students are given a challenging expression that exposes common misconceptions about Order of Operations. The goal is to demonstrate that a brittle, fixed notion of Order of Operations is insufficient, and lead students to a deeper understanding of Order of Operations as a grammatical device. The Circles of Evaluation are introduced as "sentence diagramming for arithmetic".
 
 === Launch
 
@@ -68,9 +68,9 @@ Humans also use verbs like "throw", "run", "build" and "jump" to describe operat
 A mathematical expression is like a sentence: it’s an instruction for doing something. The expression @smath{(+ 4 5)} tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @smath{(+ 4 5)} evaluates to 9.
 
 @span{.right}{@image{images/pemdas.png, "", 300, ""}}
-Sometimes, we need multiple expressions to accomplish a task, and it will matter in which order they come. For example, if you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. The order of functions matters in mathematics, too.
+If you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
-Mathematicians didn’t always agree on the order of operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @smath{(+ 4 (- 2 1))}), we read the expression from left to right, applying the operations in the order in which they appear.
+Mathematicians didn’t always agree on the Order of Operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear.
 
 @span{.clear}{}
 
@@ -104,7 +104,7 @@ If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division fu
 @show{(sexp->coe '(/ 6 3))}
 @span{.clear}{}
 
-What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we divide 6 by that circle?
+What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
 
 *Circles can contain other Circles*
 
@@ -259,7 +259,7 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 - For now, we are only going to be working in the interactions area on the right hand side of your screen.
 - Type @show{(sexp->code '(+ (* 8 2) (/ 6 3)))} into the interactions area.  
 - Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
-- Hit enter/return. What happens? _If you typed the code correctly you'll get 18. If you make a mistake with your typing, the computer should help you identify your mistake so that you can correct it and try it again!_
+- Hit Enter (or Return) to evaluate this expression. What happens? _If you typed the code correctly you'll get 18. If you make a mistake with your typing, the computer should help you identify your mistake so that you can correct it and try it again!_
 - Take a few minutes to go back and test each line of code you wrote on the pages you've completed by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.
 
 === Explore
@@ -271,7 +271,7 @@ Here are two Circles of Evaluation.
 [cols="1,1", grid="none", frame="none"]
 |===
 | @span{.right}{@show{(sexp->coe `(* 10 -4))}}
-|@show{(sexp->coe `(text "Good work!" 50 "solid" "blue"))}
+|@show{(sexp->coe `(text "Good work!" 50 "solid" "red"))}
 |===
 
 One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right? 
@@ -286,14 +286,14 @@ _Possible responses:_
 [cols="1,1", grid="none", frame="none"]
 |===
 | @span{.right}{@show{(sexp->coe `(* 10 -4))}}
-|@show{(sexp->coe `(text "Good work!" 50 "solid" "blue"))}
+| @show{(sexp->coe `(text "Good work!" 50 "solid" "red"))}
 |===
 
 
 [.lesson-instruction]
 --
 - Can you figure out the Name for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
-_We know the name of the function is `string`, because that's what is at the top of the circle._
+_We know the name of the function is `text`, because that's what is at the top of the circle._
 - What do you think this expression will evaluate to? 
 - Convert this Circle to code and try it out!
 - What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
