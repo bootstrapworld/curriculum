@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-03 # last modified
+LASTMOD=2021-04-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -871,8 +871,8 @@ function checklessonplan() {
 function checkmd5nochange() {
   distDir=$1
   repoDir=$2
-  savef=$distDir/checksum.md5txt
-  newchecksum=$(find $repoDir -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  savef=$distDir/.checksum.md5txt
+  newchecksum=$(find $repoDir -type f -name \*.[at]\* -exec $MDV {} \; | $MDV | cut -d " " -f 1)
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
@@ -1320,6 +1320,34 @@ function rmtmpfiles() {
   find . -name $WKH2P_PFX-\* -delete
 }
 
+function copylessondir() {
+  #echo doing copylessondir $lessonDir
+  lessonDir=$1
+  mkdir -p $lessonDir
+  repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
+  if test -d "$repoLessonDir"; then
+    DOCOPYDIR=1
+    if test -z $CHECKTARGET -a "$(ls -A $lessonDir)"; then
+      if test $(checkmd5nochange $lessonDir $repoLessonDir); then
+        DOCOPYDIR=
+      fi
+    fi
+    if test $DOCOPYDIR; then
+      cp -pr $repoLessonDir/* $lessonDir
+      cd $lessonDir
+      checklessonplan $lessonDir
+      for subdir in *; do
+        if test -d "$subdir"; then
+          if test "$subdir" != solution-pages; then
+            adjustproglangsubdirs "$subdir"
+          fi
+        fi
+      done
+      cd ../..
+    fi
+  fi
+}
+
 function buildpathway() {
   cd $TOPDIR
 
@@ -1360,6 +1388,7 @@ function buildpathway() {
     fi
 
     if test ! $CHECKTARGET; then
+      #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
         if test $(checkmd5nochange $distDir/front-matter $repoDir/front-matter); then
           REFRESHFRONTMATTER=
@@ -1416,37 +1445,17 @@ function buildpathway() {
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/lessons\/\1/' > workbook-lessons.txt
+      # TODO parallelize
       for lessonDir in $(cat workbook-lessons.txt); do
-        mkdir -p $lessonDir
-        repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
-        if test -d "$repoLessonDir"; then
-          DOCOPYDIR=1
-          if test -z $CHECKTARGET -a "$(ls -A $lessonDir)"; then
-            if test $(checkmd5nochange $lessonDir $repoLessonDir); then
-              DOCOPYDIR=
-            fi
-          fi
-          if test $DOCOPYDIR; then
-            cp -pr $repoLessonDir/* $lessonDir
-          fi
+        if test $NOPARALLEL; then
+          copylessondir $lessonDir
+        else
+          copylessondir $lessonDir &
         fi
       done
-      cd lessons
-      for lsn in *; do
-        if test -d $lsn; then
-          cd $lsn
-          checklessonplan $lsn
-          for subdir in *; do
-            if test -d "$subdir"; then
-              if test "$subdir" != solution-pages; then
-                adjustproglangsubdirs "$subdir"
-              fi
-            fi
-          done
-          cd ..
-        fi
-      done
-      cd ..
+      if test ! $NOPARALLEL; then
+        wait
+      fi
     fi
 
     DOFRONTBACKRECURSIVE=1
@@ -1547,10 +1556,12 @@ function buildpathway() {
     # done
 
     # Shell version
-    makeworkbooktex workbook workbook-page-index.rkt
-    makeworkbooktex pd-workbook workbook-page-index.rkt
-    makeworkbooktex workbook-sols workbook-page-index.rkt
-    makeworkbooktex bm-contracts back-matter-contracts-index.rkt
+    if test ! $NOPDF; then
+      makeworkbooktex workbook workbook-page-index.rkt
+      makeworkbooktex pd-workbook workbook-page-index.rkt
+      makeworkbooktex workbook-sols workbook-page-index.rkt
+      makeworkbooktex bm-contracts back-matter-contracts-index.rkt
+    fi
 
     buildlessonplans
 

@@ -1,40 +1,36 @@
-= Applying Functions (Pyret)
-
-@comment{  This is @opt-printable-exercise{lkajdf.adoc} }
-
-Type this line of code into the interactions area and hit
-"Enter":  @show{(sexp->code `(string-contains? "abcdef" "bc"))}
+= Applying Functions
 
 Type this line of code into the interactions area and hit "Enter":  @show{(sexp->code `(triangle 50 "solid" "red"))}
 
 
-[cols="1,15,10", frame="none"]
+[cols="1,18,5", frame="none"]
 |===
-|1)
+|@n
 | What is the name of this function?
-| @fitb{45ex}{}
+| @fitb{15em}{ @show{(if *solutions-mode?* "*triangle*" "")}}
 
-|2)
+|@n
 | What did the expression evaluate to?
-| @fitb{45ex}{}
+| @fitb{15em}{ @show{(if *solutions-mode?* "*an image of a red triangle*" "")}}
 
-|3)
+|@n
 | How many arguments does `triangle` expect?
-| @fitb{45ex}{}
+| @fitb{15em}{ @show{(if *solutions-mode?* "*3*" "")}}
 
-|4)
+|@n
 | What data type does the `triangle` function produce? (Numbers? Strings? Booleans?)
-| @fitb{45ex}{}
-
+| @fitb{15em}{ @show{(if *solutions-mode?* "*image*" "")}}
 |===
-
 
 == Catching Bugs
 
+// /////////////////////////////////////////////////////////////
+
 @ifproglang{pyret}{
+
 The following lines of code are all BUGGY! Read the code and the error messages to identify the mistake.
 
-5) `triangle(20, "solid" "red")` 	
+@n `triangle(20, "solid" "red")` 	
 
 [.indentedpara]
 --
@@ -46,12 +42,11 @@ triangle(20, "solid" *"red"*)
 
 @vspace{3ex}
 
-Can you spot the mistake?
-@fitb{60ex}{}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "There is a missing comma after solid" "" )}}}
 
 @vspace{2ex}
 
-6) `triangle(20, "solid")`				
+@n `triangle(20, "solid")`				
 
 [.indentedpara]
 --
@@ -66,12 +61,11 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?
-@fitb{60ex}{}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*The color is undefined*" "")}}}
 
 @vspace{2ex}
 
-7) `triangle(20, 10, "solid", "red")`		
+@n `triangle(20, 10, "solid", "red")`		
 
 [.indentedpara]
 --
@@ -86,12 +80,11 @@ An [.underline]#application expression# expects the number of parameters and [.u
 
 @vspace{3ex}
 
-Can you spot the mistake?
-@fitb{60ex}{}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There are two many numbers*" "")}}}
 
 @vspace{2ex}
 
-8) `triangle (20, "solid", "red")` 		
+@n `triangle (20, "solid", "red")` 		
 
 [.indentedpara]
 --
@@ -104,12 +97,14 @@ Function calls must not have space between the [.underline]*function expression*
 
 @vspace{3ex}
 
-Can you spot the mistake? 
+Can you spot the mistake? 				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There shouldn't be a space between triangle and the parentheses*" "")}}}
 }
+
+// /////////////////////////////////////////////////////////////////
 
 @ifproglang{wescheme}{
 
-5) `(*triangle* 20 "solid")`
+@n `(*triangle* 20 "solid")`
 
 [.indentedpara]
 --
@@ -119,10 +114,51 @@ Can you spot the mistake?
 
 @vspace{3ex}
 
-Can you spot the mistake?
-@fitb{60ex}{}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*It's missing a color*" "")}}}
 
 @vspace{2ex}
 
+@n `(*triangle* "solid" "red" 20)`		
 
+[.indentedpara]
+--
+[.underline]triangle: expects a non-negative number as 1st argument, but given: [.underline]"solid"; other arguments were: [.underline]"red" [.underline]20
+[.underline]"at: line 1, column 0, in <interactions2>"
+--
+@vspace{3ex}
+
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*The number should come first*" "")}}}
+
+@vspace{2ex}
+
+@n `(*triangle* 20 40 "solid" "red")` 		
+
+[.indentedpara]
+[.underline]*triangle*: expects 3 arguments, but given 4: [.underline]20 [.underline]40 [.underline]solid [.underline]red
+[.underline]"at: line 1, column 0, in <interactions12>" 
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*There are too many numbers*" "")}}}
+
+@n `(triangle 20 *solid* "red")` 	
+
+[.indentedpara]
+--
+[.underline]*solid*: this variable is not defined
+[.underline]"at: line 1, column 0, in <interactions11>" 
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*solid is  missing quotes*" "")}}}
+@vspace{2ex}
+
+@n `(triangle 20 *"striped"* "red")`
+
+[.indentedpara]
+--
+[.underline]triangle: expects a style ("solid" / "outline") or an opacity value [0-255]) as 2nd argument, but given: "striped"; other arguments were: 20 "red"
+at: line 1, column 0, in <interactions8>
+--
+@vspace{3ex}
+Can you spot the mistake?				@span{.right}{@fitb{60ex}{ @show{(if *solutions-mode?* "*striped is not an available option*" "")}}}
+@vspace{2ex}
 }
