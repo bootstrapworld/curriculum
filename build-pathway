@@ -166,25 +166,71 @@ mkdir -p distribution/$LANGUAGE/courses
 
 echo '== Generated Documentation' > distribution/index.adoc
 
+if test $FORCE; then
+  rm -fr prog distribution/$LANGUAGE/lib
+fi
+
+function checkmd5nochange() {
+  distDir=$1
+  repoDir=$2
+  shallowP=$3
+  deptharg=
+  extraarg=
+  if test "$shallowP"; then
+    deptharg="-maxdepth 1"
+  else
+    extraarg="-name \*.[at]\*"
+  fi
+  savef=$distDir/.checksum.md5txt
+  newchecksum=$(find $repoDir $deptharg -type f $extraarg -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  if test -f $savef; then
+    savedchecksum=$(cat $savef)
+    if test "$newchecksum" = "$savedchecksum"; then
+      echo 1
+    else
+      echo $newchecksum > $savef
+      echo
+    fi
+  else
+    echo $newchecksum > $savef
+    echo
+  fi
+}
+
 mkdir -p prog
 
 export PROGDIR=$TOPDIR/prog
 
-cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
-
-# if $LANGUAGE != en-us, and
-# shared/langs/$LANGUAGE isn't sufficiently populated,
-# we'll put in the en-us files first and shadow them later
-#
-cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
-
-if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
-  cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+if test ! $(checkmd5nochange $PROGDIR $TOPDIR/shared/langs); then
+  #cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
+  cp -p $TOPDIR/lib/*.rkt $PROGDIR
+  cp -p $TOPDIR/lib/ano* $PROGDIR
+  cp -p $TOPDIR/lib/.hta* $PROGDIR
+  # if $LANGUAGE != en-us, and
+  # shared/langs/$LANGUAGE isn't sufficiently populated,
+  # we'll put in the en-us files first and shadow them later
+  #
+  cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
+  #
+  if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
+    cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+  fi
 fi
 
 cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
 
 #cp -p $TOPDIR/lib/.htp* distribution
+
+mkdir -p distribution/$LANGUAGE/lib
+
+if test ! $(checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow); then
+  overwrite 'copying' distribution/$LANGUAGE/lib
+  #echo !!! copying mathjax
+  cp -p $PROGDIR/*.css distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
+  rm -fr distribution/$LANGUAGE/lib/MathJax*
+  cp -pr $TOPDIR/lib/MathJax* distribution/$LANGUAGE/lib
+fi
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
@@ -468,7 +514,7 @@ function lintlesson() {
 
 function addanalytics() {
   local f=$1
-  cp $PROGDIR/analytics.txt .
+  cp $TOPDIR/lib/analytics.txt .
   $SED -i \
     -e '/^<body/r analytics.txt' \
     $f
@@ -803,7 +849,7 @@ function mkdirsolutionversionof() {
   local origDir="$1"
 
   if test -d solution-pages-2; then
-    echo DEADC0DE: solution-pages-2 shouldn\'t exist
+    #echo DEADC0DE: solution-pages-2 shouldn\'t exist
     rm -fr solution-pages-2
   fi
 
@@ -868,24 +914,6 @@ function checklessonplan() {
 
 }
 
-function checkmd5nochange() {
-  distDir=$1
-  repoDir=$2
-  savef=$distDir/.checksum.md5txt
-  newchecksum=$(find $repoDir -type f -name \*.[at]\* -exec $MDV {} \; | $MDV | cut -d " " -f 1)
-  if test -f $savef; then
-    savedchecksum=$(cat $savef)
-    if test "$newchecksum" = "$savedchecksum"; then
-      echo 1
-    else
-      echo $newchecksum > $savef
-      echo
-    fi
-  else
-    echo $newchecksum > $savef
-    echo
-  fi
-}
 
 function buildworkbookpages() {
   local L=$1
@@ -1333,6 +1361,7 @@ function copylessondir() {
       fi
     fi
     if test $DOCOPYDIR; then
+      #overwrite 'copying' $lessonDir
       cp -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
       checklessonplan $lessonDir
@@ -1420,10 +1449,10 @@ function buildpathway() {
     #mkdir -p distribution/$LANGUAGE/courses/$PATHWAY/lib
     #cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/courses/$PATHWAY/lib
 
-    mkdir -p distribution/$LANGUAGE/lib
-    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/lib
-    rm -fr distribution/$LANGUAGE/lib/MathJax*
-    cp -pr $PROGDIR/MathJax* distribution/$LANGUAGE/lib
+
+#    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/lib
+#    rm -fr distribution/$LANGUAGE/lib/MathJax*
+#    cp -pr $PROGDIR/MathJax* distribution/$LANGUAGE/lib
 
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
@@ -1740,7 +1769,7 @@ done
 
 asciidoctor index.adoc
 
-if test ! $DEBUG; then
-  rm -fr $PROGDIR
-fi
+#if test ! $DEBUG; then
+#  rm -fr $PROGDIR
+#fi
 
