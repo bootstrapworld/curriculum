@@ -163,13 +163,14 @@ echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
 mkdir -p distribution/$LANGUAGE/courses
-mkdir -p distribution/$LANGUAGE/lib
 
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $FORCE; then
   rm -fr prog distribution/$LANGUAGE/lib
 fi
+
+mkdir -p distribution/$LANGUAGE/lib
 
 function checkmd5nochange() {
   distDir=$1
