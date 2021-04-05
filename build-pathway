@@ -178,8 +178,6 @@ function checkmd5nochange() {
   extraarg=
   if test "$shallowP"; then
     deptharg="-maxdepth 1"
-  else
-    extraarg="-name \*.[at]\*"
   fi
   savef=$distDir/.checksum.md5txt
   newchecksum=$(find $repoDir $deptharg -type f $extraarg -exec $MDV {} \; | $MDV | cut -d " " -f 1)
@@ -914,7 +912,6 @@ function checklessonplan() {
 
 }
 
-
 function buildworkbookpages() {
   local L=$1
   cd $L
@@ -931,9 +928,8 @@ function buildworkbookpages() {
     fi
   fi
 
-  #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
-
   if test $DORECURSIVEADOC; then
+  #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
 
   if test ! -d pages; then
     echo
@@ -1353,9 +1349,12 @@ function copylessondir() {
   lessonDir=$1
   mkdir -p $lessonDir
   repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
+  #echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
+    #echo $repoLessonDir is a diry
     DOCOPYDIR=1
     if test -z $CHECKTARGET -a "$(ls -A $lessonDir)"; then
+      #echo doing checkmd5nochange $lessonDir $repoLessonDir
       if test $(checkmd5nochange $lessonDir $repoLessonDir); then
         DOCOPYDIR=
       fi
@@ -1446,14 +1445,6 @@ function buildpathway() {
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$LANGUAGE/courses/$PATHWAY
     fi
 
-    #mkdir -p distribution/$LANGUAGE/courses/$PATHWAY/lib
-    #cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/courses/$PATHWAY/lib
-
-
-#    cp -p $PROGDIR/*.png $PROGDIR/*.css $PROGDIR/*.js distribution/$LANGUAGE/lib
-#    rm -fr distribution/$LANGUAGE/lib/MathJax*
-#    cp -pr $PROGDIR/MathJax* distribution/$LANGUAGE/lib
-
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
     cd $DESTPATHWAYDIR
@@ -1474,7 +1465,6 @@ function buildpathway() {
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/lessons\/\1/' > workbook-lessons.txt
-      # TODO parallelize
       for lessonDir in $(cat workbook-lessons.txt); do
         if test $NOPARALLEL; then
           copylessondir $lessonDir
