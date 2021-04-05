@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-04 # last modified
+LASTMOD=2021-04-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -163,6 +163,7 @@ echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
 mkdir -p distribution/$LANGUAGE/courses
+mkdir -p distribution/$LANGUAGE/lib
 
 echo '== Generated Documentation' > distribution/index.adoc
 
@@ -213,21 +214,8 @@ if test ! $(checkmd5nochange $PROGDIR $TOPDIR/shared/langs); then
   if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
     cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
   fi
-fi
-
-cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
-
-#cp -p $TOPDIR/lib/.htp* distribution
-
-mkdir -p distribution/$LANGUAGE/lib
-
-if test ! $(checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow); then
-  overwrite 'copying' distribution/$LANGUAGE/lib
-  #echo !!! copying mathjax
-  cp -p $PROGDIR/*.css distribution/$LANGUAGE/lib
-  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
-  rm -fr distribution/$LANGUAGE/lib/MathJax*
-  cp -pr $TOPDIR/lib/MathJax* distribution/$LANGUAGE/lib
+  cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
+  # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
@@ -239,6 +227,15 @@ function overwrite() {
     echo $'\e[1A\e[K\033[?7l'$@
   fi
 }
+
+if test ! $(checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow); then
+  overwrite 'copying' distribution/$LANGUAGE/lib
+  #echo !!! copying mathjax
+  cp -p $PROGDIR/*.css distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
+  rm -fr distribution/$LANGUAGE/lib/MathJax*
+  cp -pr $TOPDIR/lib/MathJax* distribution/$LANGUAGE/lib
+fi
 
 function insertbodyid() {
   local f=$1
