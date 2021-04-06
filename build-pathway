@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-05 # last modified
+LASTMOD=2021-04-06 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -177,12 +177,11 @@ function checkmd5nochange() {
   repoDir=$2
   shallowP=$3
   deptharg=
-  extraarg=
   if test "$shallowP"; then
     deptharg="-maxdepth 1"
   fi
   savef=$distDir/.checksum.md5txt
-  newchecksum=$(find $repoDir $deptharg -type f $extraarg -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  newchecksum=$(cd $repoDir;find . $deptharg -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
@@ -917,6 +916,7 @@ function checklessonplan() {
 
 function buildworkbookpages() {
   local L=$1
+  #echo buildworkbookpages $L
   cd $L
   export LESSON=$L
   export LESSONSUBDIR=$L
@@ -927,6 +927,7 @@ function buildworkbookpages() {
 
   if test ! $CHECKTARGET; then
     if test $(checkmd5nochange . $repoDir); then
+      #echo no need to do recursive adoc
       DORECURSIVEADOC=
     fi
   fi
@@ -1349,9 +1350,10 @@ function copylessondir() {
   if test -d "$repoLessonDir"; then
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
-    if test -z $CHECKTARGET -a "$(ls -A $lessonDir)"; then
+    if test -z $CHECKTARGET; then
       #echo doing checkmd5nochange $lessonDir $repoLessonDir
       if test $(checkmd5nochange $lessonDir $repoLessonDir); then
+        #echo $lessonDir doesnt need copying
         DOCOPYDIR=
       fi
     fi
@@ -1359,6 +1361,8 @@ function copylessondir() {
       #overwrite 'copying' $lessonDir
       cp -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
+      # we'll set it again when we do the adoc'ing
+      rm -f .checksum.md5txt
       checklessonplan $lessonDir
       for subdir in *; do
         if test -d "$subdir"; then
@@ -1451,8 +1455,6 @@ function buildpathway() {
     rm -f $WKH2P_BATCH_BASE.txt; touch $WKH2P_BATCH_BASE.txt
 
     mkdir -p lessons workbook
-
-    #exit
 
     if test ! -f lesson-order.txt; then
       echo
