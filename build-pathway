@@ -828,9 +828,14 @@ function recursiveadoc() {
 
   for f in *.adoc; do
     if test -f "$f"; then
-      processadoc "$f"
+      if test $NOPARALLEL; then
+        processadoc "$f"
+      else
+        processadoc "$f" &
+      fi
     fi
   done
+  test ! $NOPARALLEL && wait
 
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
@@ -1040,16 +1045,11 @@ function buildlessons() {
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
+    # parallel?
     for L in $(cat workbook-lessons.txt); do
-      if test $NOPARALLEL; then
-        buildworkbookpages $L
-      else
-        buildworkbookpages $L &
-      fi
+      export LESSON=$L
+      buildworkbookpages $L
     done
-    if test ! $NOPARALLEL; then
-      wait
-    fi
   fi
   export PATHWAYROOTDIR=./
   export LESSON=
@@ -1070,9 +1070,7 @@ function buildlessonplans() {
         buildlessonplan $L &
       fi
     done
-    if test ! $NOPARALLEL; then
-      wait
-    fi
+    test ! $NOPARALLEL && wait
   fi
   export LESSONSUBDIR=
 }
@@ -1399,21 +1397,25 @@ function buildpathway() {
   else
     echo BUILDING PATHWAY: $LANGUAGE/$PATHWAY $langicon
     echo $'-----------------------------------------------------------\n'
-    mkdir -p distribution/$LANGUAGE/courses/$PATHWAY
+
+    export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
+
+    if test $FORCE; then
+      rm -fr $DESTPATHWAYDIR
+    fi
+
+    mkdir -p $DESTPATHWAYDIR
+
+    cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
+
+    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
+    distDir="$TOPDIR/$DESTPATHWAYDIR"
 
     REFRESHFRONTMATTER=1
     REFRESHBACKMATTER=1
     REFRESHRESOURCES=1
 
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
-    distDir="$TOPDIR/distribution/$LANGUAGE/courses/$PATHWAY"
-
-    rm -f $PROGDIR/pathway-local.rkt
-    if test -f $repoDir/pathway-local.rkt; then
-      cp -p $repoDir/pathway-local.rkt $PROGDIR
-    fi
-
-    if test ! $CHECKTARGET; then
+    if test ! $FORCE -a ! $CHECKTARGET; then
       #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
         if test $(checkmd5nochange $distDir/front-matter $repoDir/front-matter); then
@@ -1434,16 +1436,10 @@ function buildpathway() {
       fi
     fi
 
-    if test $FORCE; then
-      rm -fr distribution/$LANGUAGE/courses/$PATHWAY
-      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE distribution/$LANGUAGE/courses/$PATHWAY
-      rm -f pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-exercises.rkt.kp \
-        pathways/$SRCPATHWAY/langs/$LANGUAGE/resources/workbook-lessons-containing-exercises.rkt.kp
-    else
-      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* distribution/$LANGUAGE/courses/$PATHWAY
+    rm -f $PROGDIR/pathway-local.rkt
+    if test -f $repoDir/pathway-local.rkt; then
+      cp -p $repoDir/pathway-local.rkt $PROGDIR
     fi
-
-    export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
 
     cd $DESTPATHWAYDIR
 
@@ -1455,6 +1451,8 @@ function buildpathway() {
     rm -f $WKH2P_BATCH_BASE.txt; touch $WKH2P_BATCH_BASE.txt
 
     mkdir -p lessons workbook
+
+    #exit
 
     if test ! -f lesson-order.txt; then
       echo
@@ -1470,76 +1468,62 @@ function buildpathway() {
           copylessondir $lessonDir &
         fi
       done
-      if test ! $NOPARALLEL; then
-        wait
-      fi
+      test ! $NOPARALLEL && wait
     fi
 
-    DOFRONTBACKRECURSIVE=1
-    if test ! $CHECKTARGET; then
-      if test ! $REFRESHFRONTMATTER; then
-        if test ! $REFRESHBACKMATTER; then
-          DOFRONTBACKRECURSIVE=
-        else
-          :
-        fi
-      else
-        :
-      fi
-    fi
-
-    for d in front-matter back-matter; do
-      if test -d $d; then
-        cd $d
+    if test $REFRESHFRONTMATTER; then
+      if test -d front-matter; then
+        cd front-matter
         mkdirsolutionversionof $repoDir/$d
         cd ..
         adjustproglangsubdirs $d
       fi
-    done
+    fi
 
-    DORESOURCESRECURSIVE=1
-    if test ! $CHECKTARGET; then
-      if test ! $REFRESHRESOURCES; then
-        DORESOURCESRECURSIVE=
-      else
-        :
+    if test $REFRESHBACKMATTER; then
+      if test -d back-matter; then
+        cd back-matter
+        mkdirsolutionversionof $repoDir/$d
+        cd ..
+        adjustproglangsubdirs $d
       fi
     fi
 
     mkdir -p resources/protected
     cp -p $PROGDIR/.hta* resources/protected
 
-    cd resources
-    for d in *; do
-      if test -d $d; then
-        cd $d
-        mkdirsolutionversionof $repoDir/resources/$d
-        cd ..
-        adjustproglangsubdirs $d
-      fi
-    done
-    cd ..
-
-    #exit
+    if test $REFRESHRESOURCES; then
+      cd resources
+      for d in *; do
+        if test -d $d; then
+          cd $d
+          mkdirsolutionversionof $repoDir/resources/$d
+          cd ..
+          adjustproglangsubdirs $d
+        fi
+      done
+      cd ..
+    fi
 
     $PROGDIR/collect-workbook-pages.rkt
 
     buildlessons
 
-    #export PATHWAYROOTDIR=./
-
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/$d"
-
     export WORKBOOKPAGE=1
 
-    for d in front-matter back-matter; do
-      test -d "$d" || break
-
-      if test $DOFRONTBACKRECURSIVE; then
-        recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
-        touch "$d" # nudge timestamp
+    if test $REFRESHFRONTMATTER; then
+      if test -d front-matter; then
+        recursiveadoc front-matter "$PATHWAYROOTDIR" "$LESSONSUBDIR"
+        touch front-matter #why?
       fi
-    done
+    fi
+
+    if test $REFRESHBACKMATTER; then
+      if test -d back-matter; then
+        recursiveadoc back-matter "$PATHWAYROOTDIR" "$LESSONSUBDIR"
+        touch back-matter
+      fi
+    fi
 
     export WORKBOOKPAGE=
 
@@ -1548,9 +1532,7 @@ function buildpathway() {
     export PATHWAYROOTDIR=../
     export LESSONSUBDIR=resources
 
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE/resources"
-
-    if test $DORESOURCESRECURSIVE; then
+    if test $REFRESHRESOURCES; then
       for d in *; do
         if test -d "$d"; then
           adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
@@ -1561,7 +1543,7 @@ function buildpathway() {
 
     cd ..
 
-    if test $DORESOURCESRECURSIVE; then touch resources; fi
+    if test $REFRESHRESOURCES; then touch resources; fi
 
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
@@ -1583,8 +1565,6 @@ function buildpathway() {
     buildlessonplans
 
     buildpathwaynarrative
-
-    #buildteacherresource
 
     if test ! $NOPDF; then
       if test ! -f workbook-page-index.rkt; then
@@ -1622,9 +1602,7 @@ function buildpathway() {
             fi
           fi
         done
-        if test ! $NOPARALLEL; then
-          wait
-        fi
+        test ! $NOPARALLEL && wait
       fi
     fi
 

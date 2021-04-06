@@ -66,7 +66,7 @@
           (when (ormap (lambda (s) (member prim s))
                        allowed-prims)
             (write prim o) (newline o))))
-      #:exists 'append)))
+      #:exists 'replace)))
 
 (define (create-lang-prereq-file prereqs-used proglang sym-to-adocstr-fn in-file)
   ;(printf "doing create-lang-prereq-file ~s ~s ~s ~s\n" prereqs-used proglang sym-to-adocstr-fn in-file)

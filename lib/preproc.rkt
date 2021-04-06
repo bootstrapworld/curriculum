@@ -27,6 +27,8 @@
 
 (define *force* (truthy-getenv "FORCE"))
 
+(define *nopdf* (truthy-getenv "NOPDF"))
+
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
@@ -317,15 +319,18 @@
           (map (lambda (lesson)
                  (let ([lesson-title lesson]
                        [lesson-title-file (format "../~a/index.titletxt" lesson)]
-                       [lesson-prim-file (format "../~a/index.primtxt" lesson)]
-                       [lesson-prim2-file (format "../~a/index.prim2txt" lesson)]
-                       )
-                   (for ([prim-file (list lesson-prim-file lesson-prim2-file)])
-                     (when (file-exists? prim-file)
-                       (let ([prims (read-data-file prim-file #:mode 'forms)])
-                         (when (pair? prims)
-                           (for ([prim prims])
-                             (add-prereq prim))))))
+                       [diry (format "../~a" lesson)])
+                   (when (file-or-directory-type diry)
+                     (let ([lesson-prim-files (filter
+                                                (lambda (x)
+                                                  (path-has-extension? x #".primtxt"))
+                                                (directory-list diry)
+                                                )])
+                       (for ([prim-file lesson-prim-files])
+                         (let ([prims (read-data-file prim-file #:mode 'forms)])
+                           (when (pair? prims)
+                             (for ([prim prims])
+                               (add-prereq prim)))))))
 
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
@@ -366,6 +371,7 @@
 
 (define (workbook-pagenum lesson snippet)
   ;(printf "workbook-pagenum ~s ~s\n" lesson snippet)
+  ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
   (let* ([snippet.adoc
            (path->string
              (path-replace-extension snippet ".adoc"))]
@@ -426,11 +432,12 @@
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
-                          (unless (equal? link-type "opt-printable-exercise")
-                            (unless pagenum
-                              (unless error-cascade?
-                                (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
-                                        lesson link-type f))))
+                          (unless (or (equal? link-type "opt-printable-exercise")
+                                      *nopdf*
+                                      pagenum
+                                      error-cascade?)
+                            (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
+                                    lesson link-type f))
                           (cond [pagenum
                                   (let ([x (format "Page ~a" pagenum)])
                                     (if (string=? link-text "") x
@@ -1208,8 +1215,8 @@
       (when (pair? *prereqs-used*)
         (let ([prim-file (if *lesson-plan* "index.primtxt"
                              (if (and *workbook-page?* *lesson*)
-                                 (format "~a~a/index.prim2txt"
-                                         *pathway-root-dir* *lesson*)
+                                 (make-temporary-file "pageprim-~a.primtxt" #f
+                                                      (build-path *pathway-root-dir* *lesson*))
                                  #f))])
           (when prim-file
             (store-functions-used *prereqs-used* prim-file))))
