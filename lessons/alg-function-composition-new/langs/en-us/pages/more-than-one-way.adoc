@@ -1,59 +1,65 @@
+[.landscape]
 
 = More than one way to Compose an Image!
 
 ++++
 <style>
-.lesson-section-1 { border: 0px !important;	}
-.big 			  { font-size: 60pt;		}
+.forceShading { background: #f7f7f8; }
 </style>
 ++++
 
-For each expression below, identify another expressions that would compose the same image. 
 
-- The bank of expressions at the bottom of the page includes one option for each. 
-- If you have time, try to think of a second expression that would work!																				
+For each image below, identify 2 expressions could be used to compose it. _The bank of expressions at the bottom of the page includes one possible option for each image._
 
-@n @image{../images/vert-rect.png} @quad{2em} @show{(sexp->code '(rotate 90 (rectangle 200 100 "solid" "black")))}	
+[cols="1,^.^6,24", stripes="none"]																	
+|===
+a| @n
+a| @image{../images/vert-rect.png} 
+a|
+* @show{(sexp->code '(rotate 90 (rectangle 200 100 "solid" "black")))}	
+* @span{.blankline}{}
+* @span{.blankline}{}
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+a| @n
+a| @image{../images/square.png}
+a| 
+* @show{(sexp->code '(above (rectangle 200 100 "solid" "black")(rectangle 200 100 "solid" "black")))}	
+* @span{.blankline}{}
+* @span{.blankline}{}
 
-@n @image{../images/square.png} @quad{2em} @show{(sexp->code '(above (rectangle 100 50 "solid" "black")(rectangle 100 50 "solid" "black")))}	
+a| @n
+a| @image{../images/hor-rect.png}
+a| 
+* @show{(sexp->code '(scale 0.5 (rectangle 600 200 "solid" "black")))}	
+* @span{.blankline}{}
+* @span{.blankline}{}
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+a| ★
+a|  @image{../images/black-cross.png}
+a| 
+* @show{(sexp->code '(overlay (rectangle 100 200 "solid" "black")(rectangle 200 100 "solid" "black")))}
+* @span{.blankline}{}
+* @span{.blankline}{}
 
-@n @image{../images/t.png} @quad{2em}@show{(sexp->code '(scale 4 (rectangle 50 100 "solid" "black")))}		
+a| ★
+a|  @image{../images/t.png}
+a| 
+* @span{.blankline}{}
+* @span{.blankline}{}
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+|===
 
-@n @image{../images/hor-rect.png} @quad{2em}@show{(sexp->code '(rotate 90 (rectangle 50 100 "solid" "black")))}	
+[.forceShading]
+--
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+@show{(sexp->code '(beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black")))}		
 
-@n @show{(sexp->code '(beside (square 50 "solid" "black")(square 50 "solid" "black")))}	
+@show{(sexp->code '(above (rectangle 200 100 "solid" "black")(square 100 "solid" "black")))}
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+@show{(sexp->code '(scale-xy 1 2(square 100 "solid" "black")))}
 
-@n @show{(sexp->code '(beside (rectangle 25 100 "solid" "black")(rectangle 25 100 "solid" "black")))}	
+@show{(sexp->code '(scale 2 (rectangle 100 100 "solid" "black")))}
 
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}
+@show{(sexp->code '(above(rectangle 100 50 "solid" "black") (above(rectangle 200 100  "solid" "black") (rectangle 100 50 "solid" "black"))))}
 
-@n @show{(sexp->code '(scale-xy 1 0.5 (square 50 "solid" "black")))}
-
-- A: @fitb{35em}{}
-- B: @fitb{35em}{}									
-
-@span{.blankline}{}
-
-@show{(sexp->code '(rectangle 100 200 "solid" "black"))}
-@show{(sexp->code '(scale 2 (rectangle 100 200 "solid" "black")))}
-@show{(sexp->code '(scale 0.5 (rectangle 200 100 "solid" "black")))}
-@show{(sexp->code '(beside (rectangle 50 100 "solid" "black")(rectangle 50 100 "solid" "black")))}		
-@show{(sexp->code '(rotate 90 (rectangle 50 100 "solid" "black")))}
-@show{(sexp->code '(above (square 50 "solid" "black")(square 50 "solid" "black")))}
-@show{(sexp->code '(scale-xy 2 1 (square 25 "solid" "black")))}
+--
