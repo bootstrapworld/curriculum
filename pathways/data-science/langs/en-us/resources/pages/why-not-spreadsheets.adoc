@@ -1,0 +1,53 @@
+= Why Not Spreadsheets?
+
+++++
+<style>
+blockquote{ border: none; }
+.sect1 {border-top: 1px solid #efefed; }
+</style>
+++++
+
+Spreadsheets are great! They're one of the @link{https://en.wikipedia.org/wiki/VisiCalc, foundational "killer apps"} of the entire computing landscape. They can do a lot of jobs well, so why not Data Science?
+
+There are plenty of reasons why Data Scientists don't use spreadsheets, and @link{https://www.jessesadler.com/post/excel-vs-r/, Jesse Adler has already written at length about the subject}. Spreadsheets don't scale to the millions and billions of datapoints that modern Data Scientists use, but that's not their only limitation! In fact, many of the reasons that make spreadsheets unsuitable for industry also make them unsuitable for Data Science in K-12. In this document, we've compiled the "greatest hits" list: this is by no means exhaustive, but forms the primary reason why spreadsheets are a poor choice for those looking to teach Data Science in K-12.
+
+
+== Spreadsheets Hide Mistakes
+
+++++
+<blockquote>
+But teacher, it works! See? The computer still gave me an answer!
+</blockquote>
+++++
+
+Spreadsheets bend over backwards to "just work". They'll let you take the average of a column even if half the cells are empty, or even if they contain categorical data. They'll let treat rows like columns and columns like rows, even if you didn't mean to. But for teachers who care about rigor, this is deeply problematic. Instead of reinforcing what we're saying about paying attention to data and how it's used, spreadsheets actively undermine the sense-making by hiding nonsensical errors.
+
+And of course, students eventually _do_ encounter errors when using spreadsheets. But often, these errors come many steps after the original mistake, making it incredibly hard to figure out what actually when wrong. This can be incredibly frustrating for confident students, but it can be utterly destructive to students who may already feel unsure about whether this class is "for them".
+
+Programming languages, on the other hand, can give students feedback at the exact point where mistakes are made (and if the language is well-designed, that feedback can even been helpful! 😮).
+
+== Spreadsheets Penalize Exploration
+
+When students analyze a dataset, they might start out by making some charts and graphs. These spark other questions, and over time students begin to drill down deeper into the data itself:
+
+- Maybe we should analyze these crime stats by splitting them into violent v. non-violent crimes?
+- Is it really appropriate to group data on rabbits and dogs from the local animal shelter, given how different they are?
+- Comparing the number of girls at School A to School B isn't as useful as looking at the _percentage_ of the students who are female in each school.
+
+Filtering or transforming data is a critical part of Data Science, and ideally should be both easy to do and easy to un-do: if the consequences of a failed experiment are dire, students will be less likely to experiment! 
+
+In a programming language, this is easy:
+
+```
+# check out the gender breakdown of cats at the shelter
+cats = animals-table.filter(is-cat) 
+pie-chart(cats, "gender")
+```
+
+In a spreadsheet, students have to make a new table containing only the rows they want. And that means _duplicating the data_, so that one table represents the total population and another represent the subset they want. Suppose they discover an error in the data, and need to correct it? Now they need to change it in both places. Every filter or transformation they do potentially doubles the number of tables, making every mistake twice as expensive. When exploration is exponentially more expensive, students are far less likely to do it - and discouraging play is a terrible quality for a learning tool!
+
+== Spreadsheets Make It Easy to Lie
+
+When it comes to displaying data, the devil is in the details. By shifting the scale of an axis, tilting a pie chart, or playing fast-and-loose with bins in a histogram, it can be incredibly easy to produce a manipulative chart. Spreadsheets bury all of these tools deep inside menus and settings, so that a person who opens a spreadsheet sees the display and has to go looking to see if any games are being played behind the scenes. 
+
+A program, on the other hand, has all of these settings written in black-and-white: everything is in one place (the sourcecode!), and any tricks are out in the open. Teaching students to trust what they can read with their own two eyes is empowering. Teaching them that _maybe there's a setting they just haven't found yet_ is the opposite.
