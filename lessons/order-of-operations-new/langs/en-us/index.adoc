@@ -45,7 +45,6 @@
 |
 * Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
 * After the first few exercises in creating Circles of Evaluation, ask students whether they create them from the 'inside-out' (drawing the inner circles first) or from the 'outside-in.'  After they've given their responses, have them try using the OTHER way!
-* Up until now, we didn't have a visual spatial model for explaining the Order of Operations. Ask students to compare Circles of Evaluation to previous methods they've learned (PEMDAS, GEMDAS, etc)
 * For a memory hook, model the "bug that crawls through the circle" explanation.
 * Students may benefit from using multiple colors to distinguish between the different smaller expressions and parentheses.
 
@@ -63,14 +62,12 @@ Students are given a challenging expression that exposes common misconceptions a
 
 === Launch
 
-Humans also use verbs like "throw", "run", "build" and "jump" to describe operations on these nouns. Mathematics has @vocab{functions} - or "operations" - like addition and subtraction, which are operations performed on values. Just as you can "*spread* _mustard_ on _bread_", a person can also "*add* _four_ and _five_".
-
-A mathematical expression is like a sentence: it’s an instruction for doing something. The expression @smath{(+ 4 5)} tells us to add 4 and 5. To evaluate an expression, we follow the instructions in the expression. The expression @smath{(+ 4 5)} evaluates to 9.
+A mathematical expression is like an instruction: the expression @smath{(+ 4 5)} tells us to _add_ 4 and 5. To evaluate an expression, we follow the instruction. The expression @smath{(+ 4 5)} evaluates to 9.
 
 @span{.right}{@image{images/pemdas.png, "", 300, ""}}
-If you were to write instructions for making a sandwich, it would matter very much which instruction came first: melting the cheese, slicing the bread, spreading the mustard, etc. Sometimes we need multiple expressions in mathematics, and the order matters there, too!
+If you were to write instructions for getting dressed in the morning, it would matter very much which instruction came first (e.g. - putting on socks happens before putting on shoes). Sometimes we need more than one expression in mathematics, and the order matters there, too!
 
-Mathematicians didn’t always agree on the Order of Operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right summarizes the order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear.
+Mathematicians didn’t always agree on the Order of Operations, but now we have a common set of rules for how to evaluate expressions. The pyramid on the right is one way of summarizing this order. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (multiplication and division). Only after we have completed all of those operations can we move down to the lower level. If both operations are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear.
 
 @span{.clear}{}
 
@@ -86,9 +83,11 @@ But this set of rules is brittle, and doesn't always make it clear what we need 
 [.centered-image.big]
 @math{6 \div 2(1 + 2)}
 
-Order of Operations mneumonic devices like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
+Mneumonic devices for Order of Operations like PEMDAS, GEMDAS, etc. focus on how to compute the answer. What we need is a __better way to read math__.
 
-Instead of a rule for computing answers, let's start by diagramming the math itself! We can _draw the structure_ of this grammar in mathematics using something called the *Circles of Evaluation*. The rules are simple:
+==== Circles of Evaluation _help us read math_
+
+Instead of a rule for computing answers, let's start by diagramming the math itself! We can _draw the structure_ of a mathematical expression using something called the *Circles of Evaluation*. The rules are simple:
 
 [.lesson-point]
 1) Every Circle must have one - and only one! - function, written at the top.
@@ -119,7 +118,7 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 Have students turn to @printable-exercise{pages/complete-coe-from-arith.adoc} and @printable-exercise{pages/match-arith-coe.adoc} in the workbook and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions} to practice connecting expressions to Circles of Evaluation. 
 
 Optional: 
-If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
+If you are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
 
 * @opt-printable-exercise{pages/arith-to-coe.adoc} 
 * @opt-printable-exercise{pages/arith-to-coe2.adoc} 
@@ -129,7 +128,7 @@ If you are digging into Order or Operations and are looking for more practice wi
 * @opt-printable-exercise{pages/evaluate-coe.adoc}
 * @opt-printable-exercise{pages/evaluate-coe2.adoc}  
 
-*Circles of Evaluation _help us write code_*
+==== Circles of Evaluation _help us write code_
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation - also called the _function_ - at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
@@ -164,7 +163,7 @@ Practice creating Circles of Evaluation using the common operators (`+`, `-`, `*
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
 }
 
-*Circles of Evaluation _help us get the correct answer_*
+==== Circles of Evaluation _help us get the correct answer_
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
@@ -187,10 +186,20 @@ In this case, the student __failed to see the structure__, viewing the term to t
 |
 @span{.title}{Circles of Evaluation}
 
-The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
+The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of expressions, as a means of combating a harmful over-focus on _computing the answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
 |===
 
 === Investigate
+
+[.lesson-instruction]
+- Turn to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} page in the student workbook. Be sure to __draw all of the Circles first__ and check your work before converting to code.
+- Then complete @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}
+- If time allows, take turns entering the code into the editor with your partner.
+
+@ifproglang{pyret}{
+*Note:* In Pyret, we treat _operators_ like `+`, `-`, `*`, and `/` differently - they are written in between their inputs, just like in math. }
+
+We also use letters instead of symbols for function names, so taking the square root is written as @show{(sexp->code `sqrt)} and squaring is written as @show{(sexp->code `sqr)}.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -202,19 +211,6 @@ Circles of Evaluation are a great way to get older students to reengage with (an
 This is big conceptual terrain.  If you have time, the two pages in the student workbook that scaffold translating circles to code are a great place to start: (@printable-exercise{pages/complete-code-from-coe.adoc} and @printable-exercise{pages/match-coe-to-code.adoc}).  We have also included one page of more complex problems (@printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}) in the student workbook so that you're ready to challenge students who fly. 
 
 |===
-
-[.lesson-instruction]
-- Turn to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} page in the student workbook. Be sure to __draw all of the Circles first__ and check your work before converting to code.
-- Then complete @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}
-- If time allows, take turns entering the code into the editor with your partner.
-
-@ifproglang{pyret}{
-*Note:* In Pyret, we treat _operators_ like `+`, `-`, `*`, and `/` differently - they are written in between their inputs, just like in math. We also use letters instead of symbols for function names, so taking the square root is written as `num-sqrt` and squaring is written as `num-sqr`.
-}
-
-@ifproglang{wescheme}{
-*Note:* In WeScheme, we use `sqrt` as the name of the square root function, and `sqr` as the function that squares its input.
-}
 
 More practice connecting Arithmetic Expressions with Circles of Evaluation and Code:
 
@@ -247,6 +243,10 @@ MLR 7 - Compare and Connect: Gather students' graphic organizers to highlight an
 === Synthesis
 Have students share back what they learned from the Circles of Evaluation. 
 
+- Who preferred to work "inside-out", and who preferred "outside-in"?
+- Are there some problems that would work better with one approach than another?
+- If we translate @smath{(+ 1 2)} into a Circle of Evaluation, is there more than one Circle we could draw? Are they equally "correct"?
+
 == From Circles to Code @duration{optional}
 
 === Overview
@@ -265,8 +265,6 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 
 === Explore
 
-[.lesson-instruction]
---
 Here are two Circles of Evaluation. 
 
 [cols="1,1", grid="none", frame="none"]
@@ -275,8 +273,9 @@ Here are two Circles of Evaluation.
 |@show{(sexp->coe `(text "Good work!" 50 "solid" "red"))}
 |===
 
+[.lesson-instruction]
 One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right? 
---
+
 _Possible responses:_
 
 - _We've never seen the function `text` before_
