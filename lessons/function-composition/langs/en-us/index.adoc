@@ -1,0 +1,221 @@
+= Function Composition
+
+@lesson-description{Students encounter new image transformation functions and strengthen their understanding of Circles of Evaluation by using functions within other functions.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{contracts}
+
+| Lesson Goals
+| Students will be able to:
+
+* Demonstrate understanding of the Order of Operations
+* Use @vocab{Circles of Evaluation} to combine multiple @vocab{function}s, including non-Number producing functions
+
+| Student-facing Goals
+|
+* I can use Circles of Evaluation to combine many kinds of functions.
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1D5wjyyH2P4UvmknD-sblJxERWcrjUTeYq49FLWW4ST4/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1caLYYjErjnoX0e106RCoBsOOQp49caIMdulAn2GTRkE/, Lesson Slides}
+}
+
+* @link{pages/function-cards.adoc, "Function Cards - print and cut"}
+
+@material-links
+ 
+| Supplemental Resources
+|
+- @link{https://www.google.com/search?q=random+number, Random Integer Generator}
+- @link{https://teacher.desmos.com/activitybuilder/custom/5d991a674febfc7e0ff8cb15, Circles of Evaluation Review - Blank Template}
+
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Key Points For The Facilitator
+|
+* Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
+* When students encounter errors, encourage them to check their Contracts page and show their work using Circles of Evaluation.
+* Students will use their Contracts page frequently, so it should be kept in an accessible, convenient location.
+
+@lang-prereq
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit2/index.html, prior unit-based version}.
+
+== Composing Functions @duration{10 minutes}
+Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them.
+
+=== Launch
+Divide students into groups of 3-4, and distribute a set of Function Cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
+
+[.lesson-instruction]
+- Each group has a set of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be? _10_
+- I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`? _10_
+- For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end. 
+- You will need to use some functions more than once, and that's ok!
+
+=== Investigate
+Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions. 
+
+=== Synthesize
+If two groups come up with different compositions that achieve the same end result, have them share their ideas!
+
+== Diagramming Function Composition
+
+=== Overview
+The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+
+=== Launch
+Three of the function cards we just used were for the functions `f`, `g` and `h`: 
+* `f` multiplied its input by 3
+* `g` added six to its input 
+* `h` subtracted one from its input 
+
+We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?  
+
+We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
+
+[cols="^1,^2", options="header", stripes="none"]
+|===
+| Function Composition
+| Order of Operations
+| @show{(sexp->coe `(f (g (h x))))} 		
+| @show{(sexp->coe `(* 3 (+ (- x 1) 6)))} 	
+|===
+
+The circles show us that in order to evaluate @math{f(g(h(4))))}
+
+- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
+- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
+- Then we would evaluate @math{f(27)}, tripling `9` to get `27`
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+
+=== Synthesize
+
+[.lesson-instruction]
+--
+Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? _No!_
+
+Why not? _order matters!_
+--
+== Composing Functions in Code @duration{20 minutes}
+
+=== Overview
+
+The Circles of Evaluation are extended to functions that do more than compute values.
+
+=== Launch
+[.lesson-instruction]
+The contracts page in your workbook is just like the Function Cards from this activity. Your job as a programmer is to figure out how to compose those functions to get where you want to go, in the most clever or elegant way possible.
+
+=== Investigate
+
+Have students log into 
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO)} }
+open a new program and save it as Function Composition.
+
+Have students open to @printable-exercise{pages/function-composition-green-star.adoc}, in which they will be drawing circles of evaluation to help them write expressions to compose a series of images. 
+
+- Make sure students are using the @vocab{Definitions area} (left side) for code they want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
+- When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of your choosing. 
+
+Then have students open to @printable-exercise{pages/function-composition-your-name.adoc} in which they will create a text @vocab{image} of their name and experiment with other functions.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for Facilitation}
+While students are exploring, be available for support but encourage student discussion to solve problems. Many student questions can be addressed with these responses: _Did you try drawing the Circle of Evaluation first? Did you check the contract? Have you pressed the Run button to save your Definitions changes?_
+
+Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
+|===
+
+If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @ifproglang{pyret}{@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
+}
+
+=== Synthesize
+
+[.lesson-instruction]
+--
+- What do all of these functions have in common?
+_They all produce images, they all change some element of the original image_
+
+- Does using one of these functions change the original image?
+_No, it creates a whole new image_
+
+- What does the number in @show{(sexp->code `scale)} represent?
+_The scale factor by which the image should grow or shrink_
+
+- What does the number in @show{(sexp->code `rotate)} represent?
+_The rotation angle, measured counterclockwise_
+
+- The Domain and Range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code `text)} function as an _input_ for @show{(sexp->code `flip-horizontal)}?
+_Because the @show{(sexp->code `text)} function produces an Image, which is then used as the input for @show{(sexp->code `flip-horizontal)}._
+--
+
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for English Language Learners}
+
+MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussion questions during the last 5 minutes of the Explore and ask students to discuss the questions with their partner, asking each other for explanation and details and coming up with the clearest, most precise answer they can.
+Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
+|===
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+| @span{.title}{Fun with Images!}
+Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing. 
+
+Our @ifproglang{wescheme}{@link{../../../algebra-wescheme/lessons/flags/index.shtml, Flags lesson}} @ifproglang{pyret}{@link{../../../algebra-pyret/lessons/flags/index.shtml, Flags lesson}} also dives deeper into image composition.
+|===
+
+== Composing Multiple Ways @duration{Optional}
+
+=== Overview
+Students identify multiple expressions that will create the same image, and think about the merits of one expression over another.
+
+=== Launch
+
+[.lesson-instruction]
+--
+As is often true with solving math problems, there is more than one way to get the same composed image.
+
+Suppose I wrote the code: @show{(sexp->code `(scale 3 (star 50 "solid" "red")))}.
+
+
+What’s another line of code I could write that would produce the exact same image?
+	@show{(sexp->code `(star 150 "solid" "red"))}
+--
+
+=== Investigate
+Students complete @printable-exercise{pages/more-than-one-way.adoc}.
+
+=== Synthesize
+There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal. 
+
+@show{(sexp->code `image=?)}`{two-colons} Image, Image -> Boolean`
+
+Use it to test whether all of the expressions you wrote successfully build the same images.
+
+[.lesson-instruction]
+- Could we have written more expressions to create the same images?
+- Are all of the ways to write the code equally efficient?

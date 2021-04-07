@@ -7,6 +7,7 @@ export ADDEXERCISES=
 export CHECKTARGET=
 export DEBUG=
 export FORCE=
+export SUPERFORCE=
 export LANGUAGE=en-us
 export LINT=
 export NOPDF=
@@ -29,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-06 # last modified
+LASTMOD=2021-04-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -46,6 +47,9 @@ while test $# -ne 0; do
     DEBUG=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
+  elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
+    FORCE=1
+    SUPERFORCE=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
   elif test "$arg" = --language; then
@@ -166,7 +170,7 @@ mkdir -p distribution/$LANGUAGE/courses
 
 echo '== Generated Documentation' > distribution/index.adoc
 
-if test $FORCE; then
+if test $SUPERFORCE; then
   rm -fr prog distribution/$LANGUAGE/lib
 fi
 
@@ -1410,10 +1414,13 @@ function buildpathway() {
 
     mkdir -p $DESTPATHWAYDIR
 
-    cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
-
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/$DESTPATHWAYDIR"
+
+    if test ! $(checkmd5nochange $DESTPATHWAYDIR $repoDir); then
+      echo copying pathway $repoDir
+      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
+    fi
 
     REFRESHFRONTMATTER=1
     REFRESHBACKMATTER=1
