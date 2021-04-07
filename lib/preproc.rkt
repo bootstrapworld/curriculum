@@ -392,7 +392,7 @@
       #f))
 
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
-  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson pages-dir snippet link-text)
+  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
   (when (equal? lesson-dir *lesson*) (set! lesson-dir #f))
   (let* ([lesson (or lesson-dir *lesson*)]
          [g (string-append lesson "/" pages-dir "/" snippet)]
@@ -569,6 +569,7 @@
                [(regexp-match #rx"://" f)
                 (set! external-link? #t)
                 (check-link f #:external? #t)]
+               [(regexp-match #rx"^#" f) #f]
                [else
                  (when (path-has-extension? f ".adoc")
                    (let ([f.html (path-replace-extension f ".html")]
