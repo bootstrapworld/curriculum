@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-07 # last modified
+LASTMOD=2021-04-08 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1335,7 +1335,7 @@ function rmtmpfiles() {
   done
 
   for f in txt; do
-    find . -name \*.$f | grep -v 'workbook-pages\.txt' | xargs rm
+    find . -name \*.$f | grep -v '\(lesson-order\|workbook-pages\)\.txt' | xargs rm
   done
 
   for wbf in workbook pd-workbook; do
