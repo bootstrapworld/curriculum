@@ -1617,7 +1617,7 @@
                               (cond [(cons? lhs)
                                      (format "fun ~a: ~a end" lhs-c rhs-c)]
                                     [else
-                                      (format "var ~a = ~a" lhs-c rhs-c)]))]
+                                      (format "~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
                             (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
