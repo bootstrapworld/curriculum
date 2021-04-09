@@ -54,10 +54,6 @@ This activity introduces the problem with duplicate code, leveraging *Mathematic
 
 === Launch
 
-Students should be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     }. }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org }. }
-
 Take a look at the expressions below:
 
 @ifproglang{wescheme}{
@@ -101,34 +97,50 @@ There are lots of potential problems with duplicate code:
 
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
-=== Investigate
+--
+You already know how to do this in math: 
 
-You already know how to do this in math: @math{x = 4 + 2} evaluates the addition expression, and _defines_ the nickname @math{x} to be the computed value 6. 
+[.indentedpara]
+@math{x = 4} _defines_ the nickname @math{x} to be the value 4. 
+--
 
 @ifproglang{wescheme}{
-WeScheme uses the word "define" to make this even clearer! We can type `(define x (+ 4 2))` to define `x` to be the value 6.
+--
+WeScheme uses the word "define" to make this even clearer! 
+
+[.indentedpara]
+We can type `(define x (4))` to define `x` to be the value 4.
+--
 }
+
 @ifproglang{pyret}{
-Pyret is no different! We type `x = 4 + 2` to define `x` to be the value 6.
+--
+Pyret is no different! 
+
+[.indentedpara]
+We type `x = 4` to define `x` to be the value 4.
+--
 }
 
-[.lesson-instruction]
-- Start a new program, and type this code into the Interactions Area. 
-- What happens when you hit Enter?
-- Can you explain what happened or didn't happen?
+Once we've defined `x` to be the value 4 and clicked "run", anytime we use `x`, the computer will remember that it is _defined_ as 4.  We can _use_ that definition to get an answer. For example, @math{x + 2} will evaluate to 6.
 
-[.lesson-point]
-Expressions evaluate to answers. Definitions don't.
+Of course, the whole point of defining a value is so that it sticks around and can be used later! That's why programmers put their definitions on the _left-hand side_, known as the @vocab{Definitions Area}.
 
-Think back to math: @math{x = 4 + 2} doesn't have an "answer". All it does is tell us that anytime we see @math{x}, we know it stands for 6. We only see a result when we _use_ that definition. For example, @math{x \times 5} will evaluate to 30.
+=== Investigate
+
+
 
 [.lesson-instruction]
-On the computer, try using the definition of `x` by multiplying it by 5.
+- Open the @ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/view?publicId=Dus6Kaigy6, Defining Values Starter File}} @ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1dmCVwizoarLFep2-WkCH0PQKacB3MSql&v=04918ef, Defining Values Starter File}} and complete the notice and wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner. 
+- Complete the remaining questions and add some defintions of your own in the definitions area. Be sure to click *Run* again before you try testing them out.
 
-- *Why is defining values useful?*
-_Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
+=== Synthesize
+
 - *What data types can we define values for?*
 _All of them - Number, String, Image_
+
+- What values did you decide to define? When might they be useful?
+
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -138,11 +150,41 @@ _All of them - Number, String, Image_
 MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the programming-specific language, such as "define" and "value".
 |===
 
-Of course, the whole point of defining a value is so that it sticks around and can be used later! That's why programmers put their definitions on the _left-hand side_, known as the @vocab{Definitions Area}.
+== Using Defined Values
+
+=== Overview
+Now that we know _how_ to define values, we'll think about when it would be useful to define them and how to use them once we have.
+
+=== Launch
+
+Have students turn to @printable-exercise{pages/which-value-to-define.adoc} and work with their partners to identify which element(s) in the flags pictured they would want to define before composing the images.
+
 
 [.lesson-instruction]
-- Complete @printable-exercise{pages/defining-values-explore.adoc} in your student workbook. What else can you define?
-- Complete @printable-exercise{pages/defining-values-practice.adoc} with their partner.
+How did you decide what you would want to define?
+
+=== Investigate
+
+[.lesson-instruction]
+--
+- Now that we know how to define a value and when it might be useful to define a value, let's take a look at how to use defined values in our code.
+- Type @show{(sexp->coe `(radial-star 30 20 50 "solid" "yellow"))} into the @vocab{Interactions Area} and decide on a nickname for the image. _sun_
+
+@ifpathway{math}{
+Have students turn to @printable-exercise{pages/why-define-values-coe.adoc}	
+}
+
+- Using the nickname @ifpathway{math}{, @show{(sexp->code `sun)}}, define a value  in your @vocab{Definitions Area} @show{(sexp->code `(define sun (radial-star 30 20 50 "solid" "yellow")))}
+- Use the value you defined to write the code to scale the image to be 3 times as large. @show{(sexp->code `(scale 3 sun))}
+--
+
+
+Have students complete @printable-exercise{pages/writing-code-using-defined-values.adoc}
+
+=== Synthesize
+
+- *Why is defining values useful?*
+_Lets the programmer reuse code, saves time, lets the programmer make changes easily, allows us to more easily use elements inside other functions_
 
 == Cleaning Up Code @duration{20 minutes}
 
