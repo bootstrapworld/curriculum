@@ -1,0 +1,41 @@
+
+[.landscape]
+
+= Why Define Values?
+
+@n Complete the table using the first row as an example.
+
+@n Write the code to define the value of @show{(sexp->code `sun)}. @fitb{39em}
+
+@vspace{1ex}
+
+[cols="12a,^.^1a,5a", stripes="none", options="header"]
+|===
+| Original Circle of Evaluation & Code
+| &rarr;
+| Use the _defined value_ @show{(sexp->code `sun)} to simplify!
+
+| @show{(sexp->coe `(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| @show{(sexp->coe `(scale 3 sun))}
+
+| Code: @show{(sexp->code `(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| Code: @show{(sexp->code `(scale 3 sun))}
+
+| @show{(sexp->coe `(frame (radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| 
+
+| Code: @show{(sexp->code `(frame (radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| Code: 
+
+| @show{(sexp->coe `(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| 
+
+| Code: @show{(sexp->code `(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
+|&rarr;
+| Code: 
+|===
