@@ -1,7 +1,7 @@
 = Datasheet
 
 This directory contains two scripts `make-questionnaire.rkt` and
-`sanitize.rkt`.
+`expand-questionnaire.rkt`.
 
 1) `make-questionnaire.rkt` takes a datasheet spec file, say
 `D-dataset-admin.adoc`, and produces
@@ -55,6 +55,7 @@ introducing an itemization, you may put the entire tag
 narrative inside an open block, i.e., with “fence” lines that have a
 leading `--` and nothing else. E.g.,
 
+----
    :Description:
    --
    These questions relate to the Frobbotz dataset. Your
@@ -65,11 +66,12 @@ leading `--` and nothing else. E.g.,
 
    - Question 2
    --
+----
 
 (AsciiDoc needs a blank line (or beginning-of-file) above the
 first item in order to recognize an itemization list.)
 
-The `Description` tag above is a \fInot\fP
+The `Description` tag above is a _not_
 a question, so there is no expectation of an answer by the
 student. 
 
@@ -181,11 +183,11 @@ A `Makefile` is included for convenience:
 
     make questionnaires
 
-generates a new `*-author.adoc` file for each of the
-`*-admin.adoc` in the directory.
+generates a new `++*-author.adoc++` file for each of the
+`++*-admin.adoc++` in the directory.
 
     make
 
-generates HTML reports from all the `*-author.adoc` files in the
+generates HTML reports from all the `++*-author.adoc++` files in the
 directory. It is assumed that these student files have all been
 manually edited to reflect a student's answers.

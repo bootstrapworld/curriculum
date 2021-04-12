@@ -121,7 +121,7 @@
         (let loop ()
           (let ((ln (read-line i)))
             (unless (eof-object? ln)
-              ;(printf "XXX ln = ~s\n" ln)
+              ;(printf "ZZZ ln = ~s\n" ln)
               (when (regexp-match "^// +Question +:.+?: *$" ln)
                 (let ([tag (regexp-replace "^// +Question +(:.+?:) *$" ln "\\1")]
                       [answered? #f])
