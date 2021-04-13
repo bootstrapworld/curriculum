@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-08 # last modified
+LASTMOD=2021-04-13 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -91,7 +91,7 @@ done
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
 
-WKH2P_PFX=wkh2p-tmp
+WKH2P_PFX=.wkh2p-tmp
 
 NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
@@ -513,9 +513,9 @@ function lintlesson() {
 
 function addanalytics() {
   local f=$1
-  cp $TOPDIR/lib/analytics.txt .
+  cp $TOPDIR/lib/analytics.txt .analytics.txt
   $SED -i \
-    -e '/^<body/r analytics.txt' \
+    -e '/^<body/r .analytics.txt' \
     $f
 }
 
@@ -566,19 +566,19 @@ function resolveabbrevs() {
     -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
     $f
   if test "$mathjaxneeded"; then
-    cat > mathjax.txt <<EOF
+    cat > .mathjax.txt <<EOF
       <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
-      -e '/%INSERTMATHJAX/r mathjax.txt' \
+      -e '/%INSERTMATHJAX/r .mathjax.txt' \
       -e 's/%INSERTMATHJAX//' \
       $f
   fi
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
-    cat > codemirror.txt <<EOF
+    cat > .codemirror.txt <<EOF
     <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
     <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
     <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
@@ -588,7 +588,7 @@ EOF
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
-      -e '/%INSERTCODEMIRROR/r codemirror.txt' \
+      -e '/%INSERTCODEMIRROR/r .codemirror.txt' \
       -e 's/%INSERTCODEMIRROR//' \
       $f
   fi
@@ -695,7 +695,7 @@ function checklinks() {
   test "$LINT" || return
 
   local g="$1"
-  local f=${g%.*}.external-links.txt.kp
+  local f=.${g%.*}.external-links.txt.kp
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
@@ -703,7 +703,7 @@ function checklinks() {
     done
   fi
 
-  f=${g%.*}.internal-links.txt.kp
+  f=.${g%.*}.internal-links.txt.kp
 
   if test -s "$f"; then
     for h in $(cat "$f"); do
@@ -814,8 +814,8 @@ function recursiveadoc() {
 
   if test $LINT; then
     if test ! $OTHERDIR; then
-      if test -f workbook-pages-ls.txt.kp; then
-        for wbp in $(cat workbook-pages-ls.txt.kp); do
+      if test -f .workbook-pages-ls.txt.kp; then
+        for wbp in $(cat .workbook-pages-ls.txt.kp); do
           if test ! -f $wbp; then
             wbpadoc=${wbp%.*}.adoc
             if test ! -f $wbpadoc; then
@@ -907,7 +907,7 @@ function checklessonplan() {
 
   test -f index.asciidoc || return
 
-  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > index.titletxt
+  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .index.titletxt
 
   if test $ADDEXERCISES; then
     if test -f index.asciidoc; then
@@ -1045,13 +1045,13 @@ function buildlessonplan() {
 }
 
 function buildlessons() {
-  if test ! -f workbook-lessons.txt; then
+  if test ! -f .workbook-lessons.txt; then
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
     # parallel?
-    for L in $(cat workbook-lessons.txt); do
+    for L in $(cat .workbook-lessons.txt); do
       export LESSON=$L
       buildworkbookpages $L
     done
@@ -1062,12 +1062,12 @@ function buildlessons() {
 }
 
 function buildlessonplans() {
-  if test ! -f workbook-lessons.txt; then
+  if test ! -f .workbook-lessons.txt; then
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
-    for L in $(cat workbook-lessons.txt); do
+    for L in $(cat .workbook-lessons.txt); do
       # needed?
       if test $NOPARALLEL; then
         buildlessonplan $L
@@ -1081,25 +1081,25 @@ function buildlessonplans() {
 }
 
 function makeglossaryandstandards() {
-  if test -f pathway-glossary.asc; then
+  if test -f .pathway-glossary.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
-      -o pathway-glossary.shtml \
-      pathway-glossary.asc
-          insertbodyid pathway-glossary.shtml
-          resolveabbrevs pathway-glossary.shtml
+      -o .pathway-glossary.shtml \
+      .pathway-glossary.asc
+          insertbodyid .pathway-glossary.shtml
+          resolveabbrevs .pathway-glossary.shtml
   fi
-  if test -f pathway-standards.asc; then
+  if test -f .pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
-      -o pathway-standards.shtml \
-      pathway-standards.asc
-          insertbodyid pathway-standards.shtml
-          resolveabbrevs pathway-standards.shtml
+      -o .pathway-standards.shtml \
+      .pathway-standards.asc
+          insertbodyid .pathway-standards.shtml
+          resolveabbrevs .pathway-standards.shtml
   fi
 }
 
@@ -1133,14 +1133,14 @@ function buildpathwaynarrative() {
       mv index.html index.shtml
       export NARRATIVE=
       makeglossaryandstandards
-      if test -f pathway-lessons.asciidoc; then
-        if test pathway-lessons.asciidoc -nt pathway-lessons.shtml; then
-          rm -f pathway-lessons-comment.txt
+      if test -f .pathway-lessons.asciidoc; then
+        if test .pathway-lessons.asciidoc -nt .pathway-lessons.shtml; then
+          rm -f .pathway-lessons-comment.txt
           test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-          $PROGDIR/adoc-preproc.rkt pathway-lessons.asciidoc
-          mv pathway-lessons.html pathway-lessons.shtml
-          removelogos pathway-lessons.shtml
-          resolveabbrevs pathway-lessons.shtml
+          $PROGDIR/adoc-preproc.rkt .pathway-lessons.asciidoc
+          mv .pathway-lessons.html .pathway-lessons.shtml
+          removelogos .pathway-lessons.shtml
+          resolveabbrevs .pathway-lessons.shtml
         fi
       fi
       insertbodyid index.shtml
@@ -1162,8 +1162,8 @@ function makeworkbooktex() {
   local tgt=$1
   local wbpnf=$2
 
-  if test "$wbpnf" = workbook-page-index.rkt; then
-    local wbpnfkp=workbook-pagenum-index.rkt.kp
+  if test "$wbpnf" = .workbook-page-index.rkt; then
+    local wbpnfkp=.workbook-pagenum-index.rkt.kp
   else
     local wbpnfkp=$wbpnf.kp
   fi
@@ -1215,13 +1215,6 @@ function makeworkbooktex() {
         paginate=
       fi
 
-    #lessontitlefile=$lessondir/index.titletxt
-
-    #lessontitle=
-    #if test -f $lessontitlefile; then
-    #  lessontitle=$(cat $lessontitlefile)
-    #fi
-
     pagenum=$i
 
     freshlesson=
@@ -1229,11 +1222,8 @@ function makeworkbooktex() {
       freshlesson=1
     fi
 
-    #lessontitle=$(echo $lessontitle|$SED -e 's/&/\\\\&/')
-
     if test ! "$paginate"; then
       pagenum=
-      #lessontitle=
       i=$(expr $i - 1)
     fi
 
@@ -1244,7 +1234,7 @@ function makeworkbooktex() {
     if test "$freshlesson"; then
       currlesson=$lessondir
         echo >> $tgt.tex
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{.$tgt-$handle.pdf}" >> $tgt.tex
         if test "$tgt" = pd-workbook; then
       if echo $currlesson| grep -q 'lessons/'; then
         lessonplanpdf=$currlesson/index.pdf
@@ -1253,7 +1243,7 @@ function makeworkbooktex() {
         fi
 
     else
-      echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{$tgt-$handle.pdf}" >> $tgt.tex
+      echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{.$tgt-$handle.pdf}" >> $tgt.tex
 
     fi
 
@@ -1469,8 +1459,8 @@ function buildpathway() {
     else
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
-        $SED -e 's/^ *\(.*\)/lessons\/\1/' > workbook-lessons.txt
-      for lessonDir in $(cat workbook-lessons.txt); do
+        $SED -e 's/^ *\(.*\)/lessons\/\1/' > .workbook-lessons.txt
+      for lessonDir in $(cat .workbook-lessons.txt); do
         if test $NOPARALLEL; then
           copylessondir $lessonDir
         else
@@ -1565,10 +1555,10 @@ function buildpathway() {
 
     # Shell version
     if test ! $NOPDF; then
-      makeworkbooktex workbook workbook-page-index.rkt
-      makeworkbooktex pd-workbook workbook-page-index.rkt
-      makeworkbooktex workbook-sols workbook-page-index.rkt
-      makeworkbooktex bm-contracts back-matter-contracts-index.rkt
+      makeworkbooktex workbook .workbook-page-index.rkt
+      makeworkbooktex pd-workbook .workbook-page-index.rkt
+      makeworkbooktex workbook-sols .workbook-page-index.rkt
+      makeworkbooktex bm-contracts .back-matter-contracts-index.rkt
     fi
 
     buildlessonplans
@@ -1576,7 +1566,7 @@ function buildpathway() {
     buildpathwaynarrative
 
     if test ! $NOPDF; then
-      if test ! -f workbook-page-index.rkt; then
+      if test ! -f .workbook-page-index.rkt; then
         echo
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
@@ -1608,6 +1598,7 @@ function buildpathway() {
               $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
             else
               $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+              # $PROGDIR/make-workbook.rkt $wbf &
             fi
           fi
         done
@@ -1655,7 +1646,7 @@ function allthestandards() {
     test -d $d || continue
     db=${d%/}
     db=${db##*/}
-    f=$d/standards-in-pathway.txt.kp
+    f=$d/.standards-in-pathway.txt.kp
     if test -f $f; then
       sed -e "s/)\$/ \"$db\")/" $f >> all-standards.txt
     fi

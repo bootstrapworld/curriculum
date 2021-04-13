@@ -36,12 +36,19 @@
                     (cond [(eof-object? ln)
                            (if (null? ss) ln (reverse ss))]
                           [(regexp-match "^ *$" ln)
-                           (set! stop-line *lineno*)
-                           (reverse ss)]
+                           (cond [inside-double-dash? (loop (cons ln ss))]
+                                 [else
+                                   (set! stop-line *lineno*)
+                                   (reverse ss)])]
                           [(regexp-match "^-- *$" ln)
-                           (set! inside-double-dash? (not inside-double-dash?))
-                           (loop (cons ln ss))]
+                           (cond [inside-double-dash?
+                                   (set! inside-double-dash? #f)
+                                   (set! stop-line *lineno*)
+                                   (reverse (cons ln ss))]
+                                 [else (set! inside-double-dash? #t)
+                                       (loop (cons ln ss))])]
                           [else (loop (cons ln ss))])))])
+    ;(printf "ZZZ; read-graf returned ~s\n" lines)
     (if (null? lines)
         (read-graf i)
         (values lines start-line stop-line))))
@@ -121,7 +128,7 @@
           (fprintf o "// Questionnaire generated from ~a\n" *admin-file*)
           (let loop ()
             (let-values (((p line0 line-last) (read-graf i)))
-              ;(printf "XXX ~s ~s ~s\n" p line0 line-last)
+              ;(printf "ZZZ ~s ~s ~s\n" p line0 line-last)
               (unless (eof-object? p)
                 (process-graf p line0 line-last o i)
                 (loop)))))

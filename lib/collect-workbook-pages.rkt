@@ -22,12 +22,12 @@
 
 ;
 
-(define *lesson-order* (read-data-file "workbook-lessons.txt"))
+(define *lesson-order* (read-data-file ".workbook-lessons.txt"))
 
 (define (write-pages-info lesson-dir o #:paginate [paginate "yes"]
                           #:back-matter-port [back-matter-port #f])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
-         [exercise-pages-file (format "~a/pages/exercise-pages.txt.kp" lesson-dir)]
+         [exercise-pages-file (format "~a/pages/.exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
@@ -40,7 +40,7 @@
                   (read-data-file exercise-pages-file #:mode 'files)]
                  [else
                    '()])])
-    (let ([workbook-pages-ls-file (format "~a/pages/workbook-pages-ls.txt.kp" lesson-dir)])
+    (let ([workbook-pages-ls-file (format "~a/pages/.workbook-pages-ls.txt.kp" lesson-dir)])
       (with-handlers ([exn:fail?
                         (lambda (e)
                           (printf "WARNING: Couldn't open ~a\n" workbook-pages-ls-file))])
@@ -78,13 +78,13 @@
                              #t
                              (loop (+ k 1))))))))))))
 
-(call-with-output-file "workbook-page-index.rkt"
+(call-with-output-file ".workbook-page-index.rkt"
   (lambda (o)
     (fprintf o "(\n")
     (write-pages-info "front-matter" o #:paginate "no")
     (for ([lesson-dir *lesson-order*])
       (write-pages-info lesson-dir o))
-    (call-with-output-file "back-matter-contracts-index.rkt"
+    (call-with-output-file ".back-matter-contracts-index.rkt"
       (lambda (ob)
         (fprintf ob "(\n")
         (write-pages-info "back-matter" o #:paginate "no" #:back-matter-port ob)
