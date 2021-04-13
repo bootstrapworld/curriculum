@@ -39,8 +39,8 @@
   (define workbook-page-specs
     (call-with-input-file
       (if (string=? tgt "bm-contracts")
-          "back-matter-contracts-index.rkt"
-          "workbook-page-index.rkt") read))
+          ".back-matter-contracts-index.rkt"
+          ".workbook-page-index.rkt") read))
 
   (define dest.pdf (format "~a.pdf" dest))
 
@@ -86,7 +86,7 @@
                   (path-has-extension? docfile #".html"))
           (set! docfile (path-replace-extension docfile ".pdf")))
 
-        ;(printf "XXX doing ~s\n" docfile)
+        ;(printf "ZZZ doing ~s\n" docfile)
 
         (unless (file-exists? docfile)
           ;(printf "cwd= ~s ~s\n" (current-directory) (getenv "ABYSS"))
@@ -99,7 +99,7 @@
                  (if (char-ci=? (string-ref aspect 0) #\l)
                      "Qwest" "Q")
                  "output"
-                 (format "~a-~a.pdf" tgt handle)
+                 (format ".~a-~a.pdf" tgt handle)
                  "dont_ask"))))
   ;  (printf "pdftk done\n")
 
