@@ -593,6 +593,9 @@ EOF
       $f
   fi
   tif=${f%.*}-comment.txt
+  if test ! -f $tif; then
+    tif=.$tif
+  fi
   if test -f $tif; then
     $SED -i \
       -e '/^<body[^>]*>/s/<body[^>]*>/\0%INSERTCURRICULUMCOMMENT/' \
@@ -879,7 +882,7 @@ function mkdirsolutionversionof() {
 
 function checksinglelessonplan() {
   local L=$1
-  rm -f index.asciidoc
+  rm -f .index.asciidoc
   local copacetic=1
   for f in *.adoc; do
     if test ! -f $f; then
@@ -896,7 +899,7 @@ function checksinglelessonplan() {
     echo WARNING: Too many lesson plans in $L
   else
     for f in *.adoc; do
-      cp -p $f index.asciidoc
+      cp -p $f .index.asciidoc
     done
   fi
 }
@@ -905,14 +908,14 @@ function checklessonplan() {
   local L=$1
   checksinglelessonplan $L
 
-  test -f index.asciidoc || return
+  test -f .index.asciidoc || return
 
-  grep '^= ' index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .index.titletxt
+  grep '^= ' .index.asciidoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .index.titletxt
 
   if test $ADDEXERCISES; then
-    if test -f index.asciidoc; then
+    if test -f .index.asciidoc; then
       echo collecting exercises in $L
-      $PROGDIR/collect-exercises.rkt index.asciidoc
+      $PROGDIR/collect-exercises.rkt .index.asciidoc
     fi
   fi
 
@@ -992,16 +995,16 @@ function buildlessonplan() {
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
 
-  if test -f index.asciidoc -o -f index.html; then
+  if test -f .index.asciidoc -o -f .index.html; then
     export PATHWAYROOTDIR="../../"
     # there should be only one?
-    if test index.asciidoc -nt index.shtml; then
+    if test .index.asciidoc -nt index.shtml; then
       overwrite 'building' lesson plan: $L
-      rm -f index-comment.txt
+      rm -f .index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      $PROGDIR/adoc-preproc.rkt index.asciidoc
-      if test -f index.html; then
-        mv index.html index.shtml
+      $PROGDIR/adoc-preproc.rkt .index.asciidoc
+      if test -f .index.html; then
+        mv .index.html index.shtml
         insertbodyid index.shtml
         addanalytics index.shtml
         resolveabbrevs index.shtml
@@ -1011,8 +1014,8 @@ function buildlessonplan() {
         lintlesson index.shtml
         insertgdrivesave index.shtml
       fi
-    elif test index.html -nt index.shtml; then
-      mv index.html index.shtml
+    elif test .index.html -nt index.shtml; then
+      mv .index.html index.shtml
       # anything else?
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
@@ -1122,15 +1125,15 @@ function buildpathwaynarrative() {
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
     for f in *.adoc; do
-      cp -p $f index.asciidoc
+      cp -p $f .index.asciidoc
     done
-    if test index.asciidoc -nt index.shtml; then
+    if test .index.asciidoc -nt index.shtml; then
       echo building pathway narrative: $PATHWAY
       export NARRATIVE=1
-      rm -f index-comment.txt
+      rm -f .index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      $PROGDIR/adoc-preproc.rkt index.asciidoc
-      mv index.html index.shtml
+      $PROGDIR/adoc-preproc.rkt .index.asciidoc
+      mv .index.html index.shtml
       export NARRATIVE=
       makeglossaryandstandards
       if test -f .pathway-lessons.asciidoc; then
@@ -1279,15 +1282,15 @@ function buildteacherresource() {
     #export PATHWAYROOTDIR=../
     # there should be only one?
     for f in *.adoc; do
-      cp -p $f index.asciidoc
+      cp -p $f .index.asciidoc
     done
-    if test index.asciidoc -nt index.shtml; then
+    if test .index.asciidoc -nt index.shtml; then
       overwrite 'building' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
-      rm -f index-comment.txt
+      rm -f .index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      $PROGDIR/adoc-preproc.rkt index.asciidoc
-      mv index.html index.shtml
+      $PROGDIR/adoc-preproc.rkt .index.asciidoc
+      mv .index.html index.shtml
       export TEACHER_RESOURCES=
       insertbodyid index.shtml
       resolveabbrevs index.shtml
