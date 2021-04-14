@@ -50,7 +50,9 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == What's in Common? @duration{30 minutes}
 
 === Overview
-This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that can be re-used.
+This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that an be re-used.
+
+@ifproglang{pyret}{Note that in Pyret definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages.}
 
 === Launch
 
@@ -157,11 +159,7 @@ Now that we know _how_ to define values, we'll think about when it would be usef
 
 === Launch
 
-Have students turn to @printable-exercise{pages/which-value-to-define.adoc} and work with their partners to identify which element(s) in the flags pictured they would want to define before composing the images.
 
-
-[.lesson-instruction]
-How did you decide what you would want to define?
 
 === Investigate
 
@@ -200,42 +198,18 @@ Have students open the
 @ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1qUY9u9j_NfZM8PJwT9QKJKNlD3RPbSDE, Chinese flag starter file}
 } 
 
-. This file uses a function students haven't seen before! What is it? 
-. What is it its contract?
+. This file uses a function students haven't seen before! What is it? @show{(sexp->code `put-image)}
+. What is it its contract? `put-image :: Image, Number, Number, Image -> Image
 . Have them change the color of all the stars from yellow to black
 . Have them identify what structure is repeated
 . Have them use a value definition to simplify the code
 . Have them change the stars from black back to yellow
 
 *Optional* (for a longer time commitment):
-Have students choose a flag from this list of images: @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.
+Have students turn to @opt-printable-exercise{pages/which-value-to-define.adoc} and work with their partners to identify which element(s) in the flags pictured they would want to define before composing the images.  Then, have students choose a flag from this list of images: @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.
 
 === Synthesize
 How many reasons can students come up with for why defining values is useful?
-
-== Defining Values @duration{20 minutes}
-
-=== Overview
-Students learn how to define values in Pyret (note that these definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages).
-
-=== Launch
-Pyret allows us to define names for values using the `=` sign. In math, you’re probably used to seeing definitions like _x = 4_, which defines the name x to be the value 4. Pyret works the same way, and you’ve already seen two names defined in this file: `shelter-sheet` and `animals-table`. We generally write definitions on the left, in the Definitions Area. You can add your own definitions, for example:
-
-  my-name = "Maya"
-  sum = 2 + 2
-  kittens-are-cute = true
-
-[.lesson-instruction]
---
-With your partner, take turns adding definitions to this file:
-
-- Define a value with name `food`, whose value is a String representing your favorite food
-- Define a value with name `year`, whose value is a Number representing the current year
-- Define a value with name `likes-cats`, whose value is a Boolean that is `true` if you like cats and `false` if you don’t
---
-
-=== Synthesize
-Why is it useful to be able to define values, and refer to them by name?
 
 == Additional Exercises:
 
