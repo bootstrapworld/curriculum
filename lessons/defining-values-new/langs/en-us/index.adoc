@@ -100,15 +100,15 @@ There are lots of potential problems with duplicate code:
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
 --
-You already know how to do this in math: 
+You already know how to do this in math:
 
 [.indentedpara]
-@math{x = 4} _defines_ the nickname @math{x} to be the value 4. 
+@math{x = 4} _defines_ the nickname @math{x} to be the value 4.
 --
 
 @ifproglang{wescheme}{
 --
-WeScheme uses the word "define" to make this even clearer! 
+WeScheme uses the word "define" to make this even clearer!
 
 [.indentedpara]
 We can type `(define x (4))` to define `x` to be the value 4.
@@ -117,7 +117,7 @@ We can type `(define x (4))` to define `x` to be the value 4.
 
 @ifproglang{pyret}{
 --
-Pyret is no different! 
+Pyret is no different!
 
 [.indentedpara]
 We type `x = 4` to define `x` to be the value 4.
@@ -133,7 +133,7 @@ Of course, the whole point of defining a value is so that it sticks around and c
 
 
 [.lesson-instruction]
-- Open the @ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/view?publicId=Dus6Kaigy6, Defining Values Starter File}} @ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1dmCVwizoarLFep2-WkCH0PQKacB3MSql&v=04918ef, Defining Values Starter File}} and complete the notice and wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner. 
+- Open the @ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/view?publicId=Dus6Kaigy6, Defining Values Starter File}} @ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1dmCVwizoarLFep2-WkCH0PQKacB3MSql&v=04918ef, Defining Values Starter File}} and complete the notice and wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner.
 - Complete the remaining questions and add some defintions of your own in the definitions area. Be sure to click *Run* again before you try testing them out.
 
 === Synthesize
@@ -169,7 +169,7 @@ Now that we know _how_ to define values, we'll think about when it would be usef
 - Type @show{(sexp->code `(radial-star 30 20 50 "solid" "yellow"))} into the @vocab{Interactions Area} and decide on a nickname for the image. _sun_
 
 @ifpathway{algebra, ok}{
-Have students turn to @printable-exercise{pages/coe-why-define-values.adoc}	
+Have students turn to @printable-exercise{pages/coe-why-define-values.adoc}
 }
 
 - Using the nickname @ifpathway{algebra, ok}{, @show{(sexp->code `sun)}}, define a value  in your @vocab{Definitions Area} @show{(sexp->code `(define sun (radial-star 30 20 50 "solid" "yellow")))}
@@ -187,16 +187,16 @@ _Lets the programmer reuse code, saves time, lets the programmer make changes ea
 This activity is a chance to _play_ with new concepts, combining value definitions and function composition to create new shapes or to clean up code that generates shapes. The engaging nature of the activity is designed to motivate lots of experiments, each of which gives students a chance to practice applying those concepts.
 
 === Launch
-The ability to define values allows us to look for - and make use of - structure in our code or in our equations. What structure is repeated in this expression? 
+The ability to define values allows us to look for - and make use of - structure in our code or in our equations. What structure is repeated in this expression?
 
 @span{.center}{@math{(x + 1)^2 - \frac{4}{(x + 1)} \times -2(x + 1)}}
 
 === Investigate
-Have students open the 
+Have students open the
 @ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/openEditor?publicId=c5SB38KcVD, Chinese flag starter file.}
 }
 @ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1qUY9u9j_NfZM8PJwT9QKJKNlD3RPbSDE, Chinese flag starter file}
-} 
+}
 
 . This file uses a function students haven't seen before! What is it? @show{(sexp->code `put-image)}
 . What is it its contract? `put-image :: Image, Number, Number, Image -> Image
@@ -205,8 +205,16 @@ Have students open the
 . Have them use a value definition to simplify the code
 . Have them change the stars from black back to yellow
 
-*Optional* (for a longer time commitment):
-Have students turn to @opt-printable-exercise{pages/which-value-to-define.adoc} and work with their partners to identify which element(s) in the flags pictured they would want to define before composing the images.  Then, have students choose a flag from this list of images: @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World}, and recreate one (or more!) of the flags using `define` and any of the other functions they've learned so far.
+Have students turn to @opt-printable-exercise{pages/which-value-to-define.adoc} and work with their partners to identify which element(s) in the flags pictured they would want to define before composing the images.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+| @span{.title}{Optional: Fun with Flags!}
+Now that students have learned how to define values, you may want to give them an opportunity to practice.
+
+Our @ifproglang{wescheme}{@link{../../../algebra-wescheme/lessons/flags/index.shtml, Flags lesson}} @ifproglang{pyret}{@link{../../../algebra-pyret/lessons/flags/index.shtml, Flags lesson}} dives deeper into image composition and includes some starter files specifically focused on cleaning up code by defining values.
+|===
 
 === Synthesize
 How many reasons can students come up with for why defining values is useful?
