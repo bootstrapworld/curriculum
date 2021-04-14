@@ -472,7 +472,7 @@
   (display "%ENDCURRICULUMCOMMENT%" o))
 
 (define (display-header-comment prose o)
-  (call-with-output-file "index-comment.txt"
+  (call-with-output-file ".index-comment.txt"
     (lambda (o)
       (display "<!--" o)
       (display prose o)
@@ -760,7 +760,7 @@
                 (lambda (stco)
               (for ((lesson lessons))
                 (let ([lesson-asc-file
-                        (format "./lessons/~a/index.asc" lesson)]
+                        (format "./lessons/~a/.index.asc" lesson)]
                       [lesson-glossary-file
                         (format "./lessons/~a/.lesson-glossary.txt" lesson)]
                       [lesson-standards-file
@@ -805,7 +805,7 @@
                     (fprintf lo "[[~a]]~n" lesson)
                     (fprintf toco "<<~a>>~n" lesson)
                     (fprintf lo "== ~a\n" lesson-title)
-                    (fprintf lo "include::./lessons/~a/index.asc[leveloffset=+1,2..-1]~n~n"
+                    (fprintf lo "include::./lessons/~a/.index.asc[leveloffset=+1,2..-1]~n~n"
                              lesson)))))
                 #:exists 'replace))
             #:exists 'replace))
@@ -839,7 +839,8 @@
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* in-file)
     ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
-    (let* ([dot-in-file (string-append "." in-file)]
+    (let* ([dot-in-file (if *lesson-plan* in-file
+                            (string-append "." in-file))]
            [out-file (path-replace-extension in-file ".asc")]
            [html-file (path-replace-extension in-file ".html")]
            [first-subsection-reached? #f]
@@ -864,7 +865,7 @@
       (when (or *lesson-plan*
                 *narrative*
                 *teacher-resources*)
-        (print-menubar "index"))
+        (print-menubar ".index"))
       ;
       (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
