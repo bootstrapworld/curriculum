@@ -2,12 +2,14 @@
 
 #lang racket
 
+(define *version* 3)
+
 (define *admin-file*
   (let* ((args (current-command-line-arguments))
          (n (vector-length args)))
     (cond ((= n 0)
            (error 'make-questionnaire.rkt
-                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-datasets-admin.adoc"))
+                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-dataset-admin.adoc"))
           (else
             (let ((adminf (vector-ref args 0)))
             (when (> n 1)
@@ -20,103 +22,53 @@
 (define *author-file*
   (string-append *datasheet-name* "-author.adoc"))
 
-(define *lineno* 0)
+(define tag-re "^// +tag::(.+?)\\[\\] *$")
+(define common-answer-tag-re "^// +tag::(.+?-common-answer)\\[\\] *$")
 
-(define (read-a-line i)
-  (let ((ln (read-line i)))
-    (unless (eof-object? ln) (set! *lineno* (+ *lineno* 1)))
-    ln))
+(define (read-block i)
+  (let ([line (read-line i)])
+    (if (eof-object? line) (values 'eof #f #f)
+        (cond [(regexp-match common-answer-tag-re line)
+               => (lambda (r)
+                    (let ([tag (cadr r)])
+                      (read-tag-block i tag) (values 'admin #f #f)))]
+              [(regexp-match tag-re line)
+               => (lambda (r)
+                    (let ([tag (cadr r)])
+                      (values 'tag tag (read-tag-block i tag))))]
+              [(regexp-match "^\\[\\.admin] *$" line) (read-admin-block i) (values 'admin #f #f)]
+              [else (values 'passthru #f line)]))))
 
-(define (read-graf i)
-  (let* ([start-line (+ *lineno* 1)]
-         [stop-line -1]
-         [inside-double-dash? #f]
-         [lines (let loop ([ss '()])
-                  (let ([ln (read-a-line i)])
-                    (cond [(eof-object? ln)
-                           (if (null? ss) ln (reverse ss))]
-                          [(regexp-match "^ *$" ln)
-                           (cond [inside-double-dash? (loop (cons ln ss))]
-                                 [else
-                                   (set! stop-line *lineno*)
-                                   (reverse ss)])]
-                          [(regexp-match "^-- *$" ln)
-                           (cond [inside-double-dash?
-                                   (set! inside-double-dash? #f)
-                                   (set! stop-line *lineno*)
-                                   (reverse (cons ln ss))]
-                                 [else (set! inside-double-dash? #t)
-                                       (loop (cons ln ss))])]
-                          [else (loop (cons ln ss))])))])
-    ;(printf "ZZZ; read-graf returned ~s\n" lines)
-    (if (null? lines)
-        (read-graf i)
-        (values lines start-line stop-line))))
+(define (end-tag-line? line tag)
+  ;not really checking tag value for now
+  (regexp-match "^// +end(.+?)\\[\\] *$" line))
 
-(define (question-graf? p)
-  (let ([n (length p)])
-    (if (<= n 2) #f
-        (let ([l1 (list-ref p 0)]
-              [l2 (list-ref p 1)])
-          (and (regexp-match "^:[^ ]+: *$" l1)
-               (and
-                 (regexp-match "\\.question" l2)
-                 (not (regexp-match "\\.common" l2))))))))
+(define (read-tag-block i tag)
+  (let loop ([r '()])
+    (let ([line (read-line i)])
+      (cond [(eof-object? line) (error 'make-questionnaire.rkt "Unclosed tag ~a" tag)]
+            [(end-tag-line? line tag) (reverse r)]
+            [else (loop (cons line r))]))))
 
-(define (header-graf? p)
-  (and (= (length p) 1)
-       (regexp-match "^=" (list-ref p 0))))
+(define (read-admin-block i)
+  (let ([line1 (read-line i)])
+    (unless (eof-object? line1)
+      (if (regexp-match "^-- *$" line1)
+          (let loop ()
+            (let ([line (read-line i)])
+              (unless (or (eof-object? line) (regexp-match "^-- *$" line))
+                (loop))))
+          (let loop ()
+            (let ([line (read-line i)])
+              (unless (or (eof-object? line) (regexp-match "^ *$" line))
+                (loop))))))))
 
-(define (write-graf p o)
-  (display "\n" o)
-  (let ([n (length p)])
-    (let loop ([i 0])
-      (unless (>= i n)
-        (display (list-ref p i) o) (display "\n" o)
-        (loop (+ i 1))))))
-
-(define (write-question p line0 line-last o i)
-  (let* ([n (length p)]
-         [s1 (list-ref p 0)]
-         [s2 ""]
-         [tag (regexp-replace "^(:.+:) * $" s1 "\\1")])
-    (when (>= n 2) (set! s2 (list-ref p 1)))
-    (write-include p (+ line0 1) line-last o)
-    (flush-includes o)
-    (display "// " o)
-    (display "Question " o)
-    (display s1 o) (display "\n" o)
-    (display "//\n" o)
-    (let loop ([i 2])
-      (unless (>= i n)
-        (let ([s (list-ref p i)])
-          (display "// " o) (display s o) (display "\n" o))
-        (loop (+ i 1))))
-    (display "//\n\n\n\n" o)))
-
-(define *accumulating-includes?* #f)
-(define *include-start* #f)
-(define *include-stop* #f)
-
-(define (write-include p line0 line-last o)
-  (cond [*accumulating-includes?* (set! *include-stop* line-last)]
-        [else (set! *accumulating-includes?* #t)
-              (set! *include-start* line0)
-              (set! *include-stop* line-last)]))
-
-(define (flush-includes o)
-  (when *accumulating-includes?*
-    (fprintf o "include::~a[lines=~a..~a]\n" *admin-file* *include-start* *include-stop*)
-    (set! *accumulating-includes?* #f)))
-
-(define (process-graf p line0 line-last o i)
-  (cond [(null? p) (flush-includes o) #t]
-        [(question-graf? p)
-         (write-question p line0 line-last o i)]
-        [(header-graf? p)
-         (flush-includes o)
-         (write-graf p o)]
-        [else (write-include p line0 line-last o)])
+(define (display-commented-tag tag lines o)
+  (newline o)
+  (fprintf o "include::~a[tag=~a]\n" *admin-file* tag)
+  (for ([line lines])
+    (fprintf o "// ~a\n" line))
+  (newline o)
   )
 
 (define (gen-author-file)
@@ -125,12 +77,16 @@
     (lambda (i)
       (call-with-output-file *author-file*
         (lambda (o)
-          (fprintf o "// Questionnaire generated from ~a\n" *admin-file*)
+          (fprintf o "// Questionnaire generated from ~a by make-questionnaire.rkt v. ~a\n\n"
+                   *admin-file* *version*)
           (let loop ()
-            (let-values (((p line0 line-last) (read-graf i)))
-              ;(printf "ZZZ ~s ~s ~s\n" p line0 line-last)
-              (unless (eof-object? p)
-                (process-graf p line0 line-last o i)
+            (let-values ([(type tag block) (read-block i)])
+              (unless (eq? type 'eof)
+                (case type
+                  [(tag) (display-commented-tag tag block o)]
+                  [(admin) #f]
+                  [(passthru) (display block o) (newline o)]
+                  [else (error ' gen-author-file "read-block returned illegal block type")])
                 (loop)))))
         #:exists 'replace))))
 
