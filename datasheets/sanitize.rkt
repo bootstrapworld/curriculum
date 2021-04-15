@@ -23,13 +23,14 @@
 
 (define *final-file* (format "~a-final.adoc" *author-file-basename*))
 
+
 (define (name-final-file i)
   (let ([dataset-name #f])
     (let loop ()
       (let ([ln (read-line i)])
         (cond [(eof-object? ln) #f]
               [(regexp-match "^//" ln) (loop)]
-              [(regexp-match "^ *#" ln) (loop)]
+              [(regexp-match "^ *$" ln) (loop)]
               [else (set! dataset-name (string-trim ln))])))
     (when dataset-name
       (let ([prefix
@@ -41,7 +42,10 @@
                             "datasheet-for" admin-prefix))]
                     [else "datasheet-for"])])
         (set! *final-file*
-          (format "~a-~a.adoc" prefix dataset-name))))))
+          (format "~a-~a.adoc" prefix dataset-name))
+        (when (string=? *final-file* *author-file*)
+          (set! *final-file* (format "final-~a" *author-file*)))
+        ))))
 
 (define (skip-to-answer i)
   (let loop ()
@@ -54,6 +58,11 @@
 (define admin-tag-re "^// +tag::(.+?)\\[\\] *$")
 
 (define author-tag-re #f)
+
+(define (tag? ln admin?)
+  (let ([x (regexp-match (if admin? admin-tag-re author-tag-re) ln)])
+    (cond [(not x) #f]
+          [else (if (regexp-match "-common-answer" ln) #f x)])))
 
 (define (question-type? cblk)
   (if (= (length cblk) 0) #f
@@ -76,7 +85,7 @@
   (let loop ([ln first-line] [r '()])
     (unless ln (set! ln (read-line i)))
     (cond  [(or (eof-object? ln)
-                (regexp-match author-tag-re ln)
+                (tag? ln #f)
                 (regexp-match "^=" ln))
             (values (reverse r) ln)]
            [else (loop (read-line i) (cons ln r))])))
@@ -89,19 +98,13 @@
     (display ln o) (newline o)))
 
 (define (collect-tags #:admin? [admin? #f])
-  (let ([tag-re (if admin? admin-tag-re author-tag-re)]
-        [tags '()])
-    (when (not admin?)
-      #f
-      ;(printf "au tag = ~s\n" author-tag-re)
-      ;(printf "au file = ~s\n" *author-file*)
-      )
+  (let ([tags '()])
     (call-with-input-file (if admin? *admin-file* *author-file*)
       (lambda (i)
         (let loop ()
           (let ([ln (read-line i)])
             (unless (eof-object? ln)
-              (cond [(regexp-match tag-re ln)
+              (cond [(tag? ln admin?)
                      => (lambda (r)
                           (let ([tag (cadr r)])
                             (set! tags (cons tag tags))
@@ -162,7 +165,7 @@
           (unless ln (set! ln (read-line i)))
           (unless (eof-object? ln)
             (let ([next-line #f])
-              (cond [(regexp-match author-tag-re ln)
+              (cond [(tag? ln #f)
                      => (lambda (tag-holder)
                           (let-values ([(q next-ln) (read-comment-block i)])
                             ;(printf "comment-block = ~s\n" q)
@@ -200,7 +203,7 @@
             (unless (eof-object? ln)
               (let ([next-line #f])
                 (display ln o) (newline o)
-                (cond [(regexp-match author-tag-re ln)
+                (cond [(tag? ln #f)
                        => (lambda (tagholder)
                             (let-values ([(q next-ln) (read-comment-block i)])
                               (display-block q o)
