@@ -23,7 +23,6 @@
 
 (define *final-file* (format "~a-final.adoc" *author-file-basename*))
 
-
 (define (name-final-file i)
   (let ([dataset-name #f])
     (let loop ()
@@ -202,27 +201,35 @@
             (unless ln (set! ln (read-line i)))
             (unless (eof-object? ln)
               (let ([next-line #f])
-                (display ln o) (newline o)
                 (cond [(tag? ln #f)
-                       => (lambda (tagholder)
+                       => (lambda (tag-holder)
                             (let-values ([(q next-ln) (read-comment-block i)])
-                              (display-block q o)
                               (set! next-line next-ln)
                               (let ([q-type (question-type? q)])
                                 (when q-type
                                   (let-values ([(ans next-ln) (read-answer-block next-line i)])
                                     (set! next-line next-ln)
-                                    (fprintf o "[.answer]\n--\n")
                                     (let ([ans-given? (non-null-block? ans)])
-                                      (cond [(and (eq? q-type 'common)
-                                                 (not ans-given?))
+                                      (cond [(and (eq? q-type 'common) (not ans-given?))
+                                             (display ln o) (newline o)
+                                             (display-block q o)
+                                             (fprintf o "[.answer]\n--\n")
                                              (fprintf o "\ninclude::~a[tag=~a-common-answer]\n\n"
                                                       *admin-file*
-                                                      (cadr tagholder))]
-                                            [else (display-block ans o)]))
-                                    (fprintf o "--\n")
+                                                      (cadr tag-holder))
+                                             (fprintf o "--\n") ]
+                                            [(and (eq? q-type 'optional) (not ans-given?))
+                                             #f]
+                                            [else
+                                              (display ln o) (newline o)
+                                              (display-block q o)
+                                              (fprintf o "[.answer]\n--\n")
+                                              (display-block ans o)
+                                              (fprintf o "--\n")
+                                              ]))
                                     )))))]
-                      [else #f])
+                      [else
+                        (display ln o) (newline o)])
                 (loop next-line)))))
         #:exists 'replace))))
 
