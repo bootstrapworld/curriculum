@@ -67,14 +67,14 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Applying Functions @duration{10 minutes}
 
 === Overview
-Students learn how to apply functions in 
-	@ifproglang{pyret}{Pyret} 
-	@ifproglang{wescheme}{WeScheme}, 
+Students learn how to apply functions in
+	@ifproglang{pyret}{Pyret}
+	@ifproglang{wescheme}{WeScheme},
 reinforcing concepts from standard Algebra, and practice reading error messages to diagnose errors in code.
 
 === Launch
-Students know about Numbers, Strings, 
-	@ifproglang{pyret}{Booleans and Operators} 
+Students know about Numbers, Strings,
+	@ifproglang{pyret}{Booleans and Operators}
 	@ifproglang{wescheme}{and Booleans}
 -- all of which behave just like they do in math. But what about @vocab{functions}? Students may remember functions from algebra: @math{f(x) = x + 4}.
 
@@ -84,12 +84,12 @@ Students know about Numbers, Strings,
 - What will the expression @math{f(3)} evaluate to? _7_
 - The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? _1_
 
-@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs. 
+@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
 
 
-Have students log into  
+Have students log into
 @ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org (CPO))"}}
-@ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor, @ifproglang{pyret}{type the words *include image* on Line 1 of the Definitions area (left side) and press "Run" to load the image library. Then} type 
+@ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor, @ifproglang{pyret}{type the words *include image* on Line 1 of the Definitions area (left side) and press "Run" to load the image library. Then} type
  @show{(sexp->code `(sqrt 16))} into the interactions area and hit Enter.
 
 [.lesson-instruction]
@@ -102,7 +102,7 @@ Have students log into
 - What did the expression evaluate to? _4_
 --
 
-Have students type @show{(sexp->code `(string-length "rainbow"))} into the interactions area and hit Enter: 
+Have students type @show{(sexp->code `(string-length "rainbow"))} into the interactions area and hit Enter:
 
 [.lesson-instruction]
 --
@@ -114,16 +114,16 @@ Have students type @show{(sexp->code `(string-length "rainbow"))} into the inter
 --
 
 === Investigation
-Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(sexp->code `(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes! 
+Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(sexp->code `(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes!
 
 === Synthesize
-Debrief the activity with the class. 
+Debrief the activity with the class.
 
 [.lesson-instruction]
 --
 - What are the types of the arguments `triangle` was expecting? _A Number and 2 Strings_
 - How does the output relate to the inputs? _The Number determines the size and the Strings determine the style and color._
-- What kind of value was produced by that expression? _An Image! New data type!_ 
+- What kind of value was produced by that expression? _An Image! New data type!_
 - Which error messages did you encounter?
 --
 
@@ -135,7 +135,7 @@ This activity introduces the notion of @vocab{Contracts}, which are a simple not
 
 === Launch
 
-When students typed @show{(sexp->code `(triangle 50 "solid" "red"))} 
+When students typed @show{(sexp->code `(triangle 50 "solid" "red"))}
 into the editor, they created an example of a new @vocab{data type}, called an _Image_.
 
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
@@ -246,7 +246,7 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 
 - Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code `(star 50))} 
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code `(star 50))}
 
 - What error did we get? What _hint_ does it give us about how to use this function? _``star`` has three elements in its Domain_
 
@@ -263,7 +263,7 @@ _An Image of the star that matches the arguments_
 
 === Investigate
 [.lesson-instruction]
-- At the back of your workbook, you'll find pages with space to write down a contract and example or other notes for every function you see in this course.  The first few have been completed for you. You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class! 
+- At the back of your workbook, you'll find pages with space to write down a contract and example or other notes for every function you see in this course.  The first few have been completed for you. You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
 - Take the next 10 minutes to experiment with the image functions listed in the contracts pages.
 - When you've got working expressions, record the contracts and the code!
 
@@ -282,14 +282,14 @@ MLR 2 - Collect and Display: As students explore, walk the room and record stude
 --
 - `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? _Yes! `triangle` and `circle`._
 - Does having the same Domain and Range mean that the functions do the same things? _No! They make very different images!_
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others? 
+- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
 - For some of you, the word `ellipse` was new. How would you describe what an ellipse looks like to someone who'd never seen one before?  Why did the contract for `ellipse` require to numbers? What happens when the two numbers are the same?
 - Was it harder to find contracts for some of the functions than others? Why?
 - What error messages did you see? _Too few / too many arguments given, missing parentheses, etc._
 - How did you figure out what to do after seeing an error message? _Read the error message, think about what the computer is trying to tell us, etc._
 - Which input determined the size of the Rhombus?  What did the other number determine?
 --
- 
+
 == Contracts Help Us Write Code @duration{10minutes}
 
 === Overview
@@ -302,7 +302,7 @@ You just investigated image functions by guessing and checking what the contract
 
 === Investigate
 
-Have students turn to  @printable-exercise{pages/using-contracts.adoc}, @opt-printable-exercise{pages/using-contracts-cont.adoc} and use their editors to experiment. 
+Have students turn to  @printable-exercise{pages/using-contracts.adoc}, @opt-printable-exercise{pages/using-contracts-cont.adoc} and use their editors to experiment.
 
 Once they've discovered how to build a version of each image function that satisfies them, have them record the example code in their contracts table. See if you can figure out what aspect of the image each of the inputs specifies. It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
@@ -315,7 +315,7 @@ Once they've discovered how to build a version of each image function that satis
 --
 
 Have students turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
-If you are ready to dig into @show{(sexp->code `triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}. 
+If you are ready to dig into @show{(sexp->code `triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to give students a taste of it, you can have them turn to @opt-printable-exercise{pages/radial-star.adoc} and use the contract to help them match the images to the corresponding expressions and then to  @opt-printable-exercise{pages/polygon-star.adoc} to work with the detailed contract for a `polygon-star`. Both of these functions can generate a wide range of interesting shapes!
 
@@ -325,9 +325,9 @@ Make sure that all students have completed the shape functions in their contract
 
 [.lesson-instruction]
 --
-- How was it different to code expressions for the shape functions when you started with a contract?
+How was it different to code expressions for the shape functions when you started with a contract?
 
-- How to diagnose and fix errors is a skill we will continue working on developing. Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. All the other errors are @vocab{contract errors}. If you see an error and you know the syntax is right, ask yourself these three questions:
+How to diagnose and fix errors is a skill we will continue working on developing. Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. All the other errors are @vocab{contract errors}. If you see an error and you know the syntax is right, ask yourself these three questions:
 
 [.indentedpara]
 - What is the function that is generating that error?

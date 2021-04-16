@@ -50,7 +50,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == What's in Common? @duration{30 minutes}
 
 === Overview
-This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that an be re-used.
+This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that can be re-used.
 
 @ifproglang{pyret}{Note that in Pyret definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages.}
 
@@ -167,18 +167,13 @@ Have students open to @printable-exercise{chinese-flag.adoc} and use it to explo
 
 === Investigate
 
+- Have students open the editor and type @show{(sexp->code '(radial-star 30 20 50 "solid" "yellow"))} into the interactions area and click run.
+- Have students work in the Definitions area to define a value `sun` to be the image @show{(sexp->code '(radial-star 30 20 50 "solid" "yellow"))}.
+
 [.lesson-instruction]
---
-- Now that we know a) how to define a value and b) when it might be useful to define a value, let's take a look at how to use defined values in our code.
-- Type @show{(sexp->code '(radial-star 30 20 50 "solid" "yellow"))} into the @vocab{Interactions Area} and decide on a nickname for the image. _sun_
+Turn to @printable-exercise{pages/coe-why-define-values.adoc}.  The first row of the table in has been completed for you. Could I get a volunteer to explain what they see happening in that first row?
 
-@ifpathway{algebra}{
-Have students turn to @printable-exercise{pages/coe-why-define-values.adoc}
-}
-
-- Using the nickname @ifpathway{algebra}{, @show{(sexp->code 'sun)}}, define a value  in your @vocab{Definitions Area} @show{(sexp->code '(define sun (radial-star 30 20 50 "solid" "yellow")))}
-- Use the value you defined to write the code to scale the image to be 3 times as large. @show{(sexp->code '(scale 3 sun))}
---
+- Have students complete the page and test their code in the editor.
 
 === Synthesize
 
@@ -188,14 +183,10 @@ _Lets the programmer reuse code, saves time, lets the programmer make changes ea
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 | @span{.title}{Optional: Fun with Flags!}
-Now that students have learned how to define values, you may want to give them an opportunity to practice.
-
-Our @ifproglang{wescheme}{@link{../../../algebra-wescheme/lessons/flags/index.shtml, Flags lesson}} @ifproglang{pyret}{@link{../../../algebra-pyret/lessons/flags/index.shtml, Flags lesson}} dives deeper into image composition and includes some starter files specifically focused on cleaning up code by defining values.
+Now that students have learned how to define values, you may want to give them an opportunity to practice.  Our @ifproglang{wescheme}{@link{../../../algebra-wescheme/lessons/flags/index.shtml, Flags lesson}} @ifproglang{pyret}{@link{../../../algebra-pyret/lessons/flags/index.shtml, Flags lesson}} dives deeper into image composition and includes some starter files specifically focused on cleaning up code by defining values.
 |===
 
 == Additional Exercises:
 
-@ifpathway{algebra, ok}{
 * @printable-exercise{pages/writing-code-using-defined-values.adoc}
-}
 
