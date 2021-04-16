@@ -103,7 +103,7 @@
         '())))
 
 ;default values
-(define *copyright-name* "Bootstrap:Cosmology")
+(define *copyright-name* "Bootstrap")
 
 (define *copyright-info-file* (string-append *pathway-root-dir* "copyright-info.rkt"))
 
@@ -450,7 +450,7 @@
       (when *lesson-plan*
         (cond [(or (equal? link-type "opt-printable-exercise")
                    lesson-dir)
-               (let ([styled-link-output (string-append "[.optional.PrintableExercise]##"
+               (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
                                            link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
                    (set! *opt-printable-exercise-links*
@@ -604,7 +604,7 @@
                    (cons styled-link-output *online-exercise-links*)))))
 
            (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
-             (let ([styled-link-output (string-append "[.optional.OnlineExercise]##"
+             (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
                                          link-output "##")])
                (unless (member styled-link-output *opt-online-exercise-links*)
                  (set! *opt-online-exercise-links*
@@ -1103,8 +1103,8 @@
                                       (read-group i directive)
                                       (read-space i)]))]
                            [(string=? directive "ifpathway")
-                            (let ([pathway (read-group i directive)])
-                              (cond [(string=? pathway *pathway*)
+                            (let ([pathways (read-commaed-group i directive)])
+                              (cond [(member *pathway* pathways)
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
