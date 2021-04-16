@@ -670,8 +670,10 @@
           (display
             (enclose-span ".web-page-only"
               (format
-                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a]\n\n"
-                *lesson* lesson-title)) o))))))
+                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a]"
+                *lesson* lesson-title)) o)
+          (display "\n\n" o)
+          )))))
 
 (define (display-lesson-description desc o)
   (call-with-output-file ".index-desc.txt"
