@@ -320,18 +320,6 @@
                  (let ([lesson-title lesson]
                        [lesson-title-file (format "../~a/.index.titletxt" lesson)]
                        [diry (format "../~a" lesson)])
-                   (when (file-or-directory-type diry)
-                     (let ([lesson-prim-files (filter
-                                                (lambda (x)
-                                                  (path-has-extension? x #".primtxt"))
-                                                (directory-list diry)
-                                                )])
-                       (for ([prim-file lesson-prim-files])
-                         (let ([prims (read-data-file prim-file #:mode 'forms)])
-                           (when (pair? prims)
-                             (for ([prim prims])
-                               (add-prereq prim)))))))
-
                    (cond [(file-exists? lesson-title-file)
                           (set! lesson-title (call-with-input-file lesson-title-file read-line))]
                          [else
@@ -1233,6 +1221,12 @@
             (store-functions-used *prereqs-used* prim-file))))
 
       (when *lesson-plan*
+        (let ([prev-prim-file ".prevlesson.primtxt"])
+          (when (file-exists? prev-prim-file)
+            (let ([prims (read-data-file prev-prim-file #:mode 'forms)])
+              (when (pair? prims)
+                (for ([prim prims])
+                  (add-prereq prim))))))
         (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr dot-in-file))
 
       (when *lesson-plan*

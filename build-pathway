@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-13 # last modified
+LASTMOD=2021-04-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1070,15 +1070,13 @@ function buildlessonplans() {
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
+    local prevL=/dev/null
     for L in $(cat .workbook-lessons.txt); do
       # needed?
-      if test $NOPARALLEL; then
-        buildlessonplan $L
-      else
-        buildlessonplan $L &
-      fi
+      cat $prevL/.*primtxt > $L/.prevlesson.primtxt 2> /dev/null
+      buildlessonplan $L
+      prevL=$L
     done
-    test ! $NOPARALLEL && wait
   fi
   export LESSONSUBDIR=
 }
