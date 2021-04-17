@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-16 # last modified
+LASTMOD=2021-04-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -534,7 +534,7 @@ function resolveabbrevs() {
     -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
     -e 's/<\/pre>/<\/tt><\/pre>/g' \
     -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
-    -e 's/<\/code>/<\/tt><\/code>/g' \
+    -e 's/<\/code>\(,*\)/<\/tt>\1<\/code>/g' \
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
