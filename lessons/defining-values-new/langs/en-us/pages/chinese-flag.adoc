@@ -1,26 +1,27 @@
 = Defining Values - Chinese Flag
 
-@centered-image{../images/china-flag-starter-file.png}
+@ifproglang{wescheme}{@centered-image{../images/china-code-wescheme.png}}
+@ifproglang{pyret}{@centered-image{../images/china-code-pyret.png}}
 
-@n This file uses a function we haven’t seen before! What is it? @fitb{15em}{}
+@n This file uses a function we haven’t seen before! What is it? @fitb{15em}{@show{(if *solutions-mode?* "_put-image_" "")}}
 
-@n What is it its contract? @fitb{30em}{}
+@n What is its contract? @fitb{30em}{@show{(if *solutions-mode?* "_put-image :: Image, Number, Number, Image -> Image_" "")}}
 
 @n Highlight or circle the structure you see repeated in the code over and over again.(_Hint: it's code that makes a shape._)
 
 @n Define a value that could be used to simplify the code.
 
-@span{.blankline}
+@span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(define yellow-star (star 15 "solid" "yellow"))) "")}}
 
-@n Open the
-
-@ifproglang{wescheme}{
-@online-exercise{https://www.wescheme.org/openEditor?publicId=c5SB38KcVD, Chinese flag starter file.}
+@n Open the @ifproglang{wescheme}{
+@online-exercise{https://www.wescheme.org/open/editor?publicId=Gc01ngfMN0, Chinese flag starter file.}
 }
 @ifproglang{pyret}{
 @online-exercise{https://code.pyret.org/editor#share=1qUY9u9j_NfZM8PJwT9QKJKNlD3RPbSDE, Chinese flag starter file}
 }
-and click run.
+and click run. Then type @show{(sexp->code 'china)} into the interactions area and click *Enter*
+
+@n What value is @show{(sexp->code 'china)} defined as? @fitb{30em}{ @show{(if *solutions-mode?* "_the composed image of the Chinese flag_" "")}}
 
 @n Save a copy of the file and clean up the code using the value you defined. Click run and confirm that the new file builds the same image as the original.
 

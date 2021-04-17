@@ -5,7 +5,7 @@
 
 @n Complete the table using the first row as an example.
 
-@n Write the code to define the value of @show{(sexp->code 'sun)}. @fitb{39em}
+@n Write the code to define the value of @show{(sexp->code 'sun)}. @fitb{39em}{@show{(if *solutions-mode?* (sexp->code '(define sun (radial-star 30 20 50 "solid" "yellow"))) "")}}
 
 @vspace{1ex}
 
@@ -25,19 +25,19 @@
 
 | @show{(sexp->coe '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-|
+| {@show{(if *solutions-mode?* (sexp->coe '(frame sun)) "")}}
 
 | Code: @show{(sexp->code '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code:
+| Code: {@show{(if *solutions-mode?* (sexp->code '(frame sun)) "")}}
 
 | @show{(sexp->coe '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-|
+| {@show{(if *solutions-mode?* (sexp->coe '(overlay (text "sun" 30 "black") sun)) "")}}
 
 | Code: @show{(sexp->code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code:
+| Code: {@show{(if *solutions-mode?* (sexp->code '(overlay (text "sun" 30 "black") sun)) "")}}
 |===
 
 @n Test your code in the editor and make sure it produces what you would expect it to.
