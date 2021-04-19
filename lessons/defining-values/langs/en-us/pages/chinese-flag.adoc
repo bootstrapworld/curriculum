@@ -7,27 +7,23 @@
 
 @n What is its contract? @fitb{30em}{@show{(if *solutions-mode?* "_put-image {two-colons} Image, Number, Number, Image -> Image_" "")}}
 
-@n Highlight or circle the structure you see repeated in the code over and over again.
+@n Highlight or circle the structure you see repeated in the code over and over again. (_Hint: it's code that makes a shape._)  @show{(if *solutions-mode?* (sexp->code '(star 15 "solid" "yellow")) "")}
 
-(_Hint: it's code that makes a shape._)  @show{(if *solutions-mode?* (sexp->code '(star 15 "solid" "yellow")) "")}
-
-@n Define a value that could be used to simplify the code.
+@n Define a value for the repeated structure:
 
 @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(define yellow-star (star 15 "solid" "yellow"))) "")}}
 
 @n Open the @ifproglang{wescheme}{
 @online-exercise{https://www.wescheme.org/open/editor?publicId=Gc01ngfMN0, Chinese flag starter file.}
-}
-@ifproglang{pyret}{
+} @ifproglang{pyret}{
 @online-exercise{https://code.pyret.org/editor#share=1qUY9u9j_NfZM8PJwT9QKJKNlD3RPbSDE, Chinese flag starter file}
-}
-and click run. Then type @show{(sexp->code 'china)} into the interactions area and click *Enter*
+} and click Run. Then type @show{(sexp->code 'china)} into the interactions area and click *Enter*
 
-@n What value is @show{(sexp->code 'china)} defined as? @fitb{30em}{ @show{(if *solutions-mode?* "_the composed image of the Chinese flag_" "")}}
+@n What value is @show{(sexp->code 'china)} defined as? @fitb{30em}{ @show{(if *solutions-mode?* "_the image of the Chinese flag_" "")}}
 
-@n Save a copy of the file and clean up the code using the value you defined. Click run and confirm that the new file builds the same image as the original.
+@n *Save a copy* of the file, and simplify the flag code using the value you defined. Click Run, and confirm that you still get the same image as the original.
 
-@n Now change the color of all of the stars to black in both files. Then change the size of the stars.
+@n Now change the color of all of the stars to black, in both files. Then change the size of the stars.
 
 @n Why is it helpful to define values for repeated images?
 
