@@ -2,7 +2,7 @@
 
 @n On the line below, *write the Code* to define `PRIZE-STAR` as a pink, outline star of size 65.
 
-@span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(define PRIZE-STAR (star 65 "solid" "pink"))) "")}}
+@span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(define PRIZE-STAR (star 65 "outline" "pink"))) "")}}
 
 @vspace{1ex}
 
@@ -76,7 +76,8 @@ three times as big as the original
 
 *Circle of Evaluation:*
 
-@show{(sexp->coe '(scale 3(rotate 45 PRIZE-STAR)))}
+@show{(sexp->coe '(scale 3(rotate 45 PRIZE-STAR)))} or @show{(sexp->coe '(rotate 45 (scale 3 PRIZE-STAR)))}
+
 
 
 | *Code:* @show{(sexp->code '(rotate 45 PRIZE-STAR))}
