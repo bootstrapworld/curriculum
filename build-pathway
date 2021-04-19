@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-17 # last modified
+LASTMOD=2021-04-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1304,13 +1304,17 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  echo building all PDF files
   rm -f $WKH2P_BATCH_BASE-split*
   split -l $(expr 1 + $(wc -l $WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
     $WKH2P_BATCH_BASE.txt $WKH2P_BATCH_BASE-split
   for f in $WKH2P_BATCH_BASE-split*; do
     #echo doing batchhtmltopdf $f
     if test -f "$f"; then
+      if test ! $PDFpagesredone; then
+        echo building individual PDF pages
+        echo
+        export PDFpagesredone=1
+      fi
       wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
     fi
   done
@@ -1582,11 +1586,16 @@ function buildpathway() {
         fi
         cd ../courses/$PATHWAY
 
+        export PDFpagesredone=
         batchhtmltopdf
 
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
+        if test $PDFpagesredone; then
+          echo building workbook PDFs
+          echo
+        fi
         for wbf in workbook pd-workbook workbook-sols bm-contracts; do
           if test $DEBUG; then
             if test $NOPARALLEL; then
