@@ -41,7 +41,7 @@
 
 | Key Points for the Facilitator
 |
-* This lesson represents a big shift in thinking.  After some practice, students will not be limited to pre-existing functions!
+* This lesson represents a _big_ shift in thinking.  After some practice, students will not be limited to pre-existing functions!
 * Take plenty of time for the @vocab{Design Recipe} as students will return to it frequently in future lessons.
 
 @lang-prereq
@@ -67,26 +67,18 @@ on their computer.
 
 @centered-image{images/GreenTriangle.jpg, I Love Green Triangles, 400, align="center"}
 
-Confess to your students, "I LOVE green triangles." Challenge them to use the Definitions area to make as many DIFFERENT solid green triangles as they can in 2 minutes.
+This is a fun lesson to make silly! Dramatically confess to your students, "I LOVE green triangles!" Challenge them to use the Definitions Area to code as many unique, solid, green triangles as they can in 2 minutes.
 
-Walk around the room and give positive feedback on the green triangles.  After the 2 minutes, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
+Walk around the room and give positive feedback on the green triangles.  After the time is up, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
 
 For example:
-@ifproglang{wescheme}{
-```
-(triangle 30  "solid" "green")
-(triangle 12  "solid" "green")
-(triangle 500 "solid" "green")
-```
-}
 
-@ifproglang{pyret}{
-```
-triangle(30,  "solid", "green")
-triangle(12,  "solid", "green")
-triangle(500, "solid", "green")
-```
-}
+@show{(sexp->code `(triangle  30  "solid" "green"))}
+
+@show{(sexp->code `(triangle  12  "solid" "green"))}
+
+@show{(sexp->code `(triangle 500  "solid" "green"))}
+
 
 [.notice-box, cols="1", grid="none", stripes="none"]
 |===
@@ -122,7 +114,7 @@ For example:
 
 Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we gave it.
 
-Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Run through some sample examples before having the class add their own:
+Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Act out some examples before having the class add their own:
 
 @ifproglang{wescheme}{
 - You say: *gt 20!*
@@ -145,6 +137,7 @@ The student responds: _triangle(99, "solid", "green")!_
 We need to program the computer to be as smart as our volunteer. But how do we do that?
 
 WE NEED TO CHOOSE IF WE WANT TO SHOW THIS AS 3 STEPS OR 4 STEPS
+__I think three steps is conceptually easier, like $0.99 being magically cheaper than a dollar__
 
 [.lesson-instruction]
 To build our own functions, we’ll use a series of steps called the @vocab{Design Recipe}. The Design Recipe is a way to think through the behavior of a function. The Design Recipe has four steps, and we’ll go through them together to define our first function `gt`. Turn to @printable-exercise{pages/FastFunctions.adoc} to follow along.
@@ -278,9 +271,9 @@ _The editor lets us know that the function doesn't match the examples so that we
 
 Now that students know how to use the @vocab{Design Recipe} have them turn to the bottom of @printable-exercise{pages/FastFunctions.adoc} (or @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}) and define `bc`, `dot` and `sticker`.
 
-	Other options include:
-	*Word Problem: Write a function called `gold-star` that takes in a number and produces a solid, gold star of that given size.*
-	Write 2 examples and the definition of `gold-star` on the 'Fast Functions' handout.
+Other options include:
+*Word Problem: Write a function called `gold-star` that takes in a number and produces a solid, gold star of that given size.*
+Write 2 examples and the definition of `gold-star` on the 'Fast Functions' handout.
 
 For each problem, have them type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of their examples pass!
 
@@ -295,6 +288,8 @@ _Number_
 The Design Recipe is a powerful tool for solving word problems. In this lesson, students practiced using it on simple _programming problems_, but soon they'll be applying it to traditional math problems. Encourage them to make this connection on their own: can they think of a math problem in which this would be useful?
 
 IS THERE A REASON TO SAVE THIS FOR THE FUTURE? SEEMS WE COULD MAKE THAT CONNECTION HERE! THERE IS ONE DR PROBLEM FOR THAT IN @printable-exercise{pages/design-recipe-3.adoc}.} WHICH IS CURRENTLY ONLY USABLE FOR DATA SCIENCE BUT COULD BE MODIFIED
+
+__The only limitation here is time. In my experience, students really REALLY need to do two nearly-identical examples to build confidence. gt followed by bc is really helpful, but gt followed by a sterotypically "math" example doesn't make the connection.__
 
 == Additional Exercises: I FEEL TEMPTED TO MAKE A SECOND SECTION OF THIS LESSON PLAN TO ENGAGE PEOPLE WITH THESE
 
