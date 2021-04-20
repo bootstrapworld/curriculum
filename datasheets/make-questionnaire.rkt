@@ -9,7 +9,7 @@
          (n (vector-length args)))
     (cond ((= n 0)
            (error 'make-questionnaire.rkt
-                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-dataset-admin.adoc"))
+                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-dataset-admin.asciidoc"))
           (else
             (let ((adminf (vector-ref args 0)))
             (when (> n 1)
@@ -17,7 +17,7 @@
             adminf)))))
 
 (define *datasheet-name*
-  (regexp-replace "([^ ]+)-admin.adoc" *admin-file* "\\1"))
+  (regexp-replace "([^ ]+)-admin\\.a[sci]*doc" *admin-file* "\\1"))
 
 (define *author-file*
   (string-append *datasheet-name* "-author.adoc"))

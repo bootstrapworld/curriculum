@@ -602,7 +602,7 @@
 
          )]
         [else
-          (let ([f.asc (path-replace-extension f ".asc")])
+          (let ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".\\1.asc")])
             ;(printf "make-link checking ~s vs ~s\n" f.asc f)
             ;TODO: probably not needed anymore
             (cond [(file-exists? f.asc) (set! f f.asc)])
@@ -831,11 +831,12 @@
     ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
     (let* ([dot-in-file (if *lesson-plan* in-file
                             (string-append "." in-file))]
-           [out-file (path-replace-extension in-file ".asc")]
+           [out-file (path-replace-extension dot-in-file ".asc")]
            [html-file (path-replace-extension in-file ".html")]
            [first-subsection-reached? #f]
            [title-reached? #f]
            )
+      ;(printf "preproc ~a to ~a\n" in-file out-file)
       ;
       (when (or *link-lint?* #t)
         (let ([internal-links-file (path-replace-extension dot-in-file ".internal-links.txt.kp")]

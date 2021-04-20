@@ -4,7 +4,6 @@
 # Type build-pathway --help for help.
 
 export ADDEXERCISES=
-export CHECKTARGET=
 export DEBUG=
 export FORCE=
 export SUPERFORCE=
@@ -30,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-04-19 # last modified
+LASTMOD=2021-04-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -39,9 +38,7 @@ NOPARALLEL=
 
 while test $# -ne 0; do
   arg=$1; shift
-  if test "$arg" = --check-target -o "$arg" = -c; then
-    CHECKTARGET=1
-  elif test "$arg" = --add-exercises -o "$arg" = -e; then
+  if test "$arg" = --add-exercises -o "$arg" = -e; then
     ADDEXERCISES=1
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
@@ -94,6 +91,8 @@ TMPPFX=$(basename $TMPTMP)
 WKH2P_PFX=.wkh2p-tmp
 
 NUMCORES=$(getconf _NPROCESSORS_ONLN)
+
+export WORKBOOKPAGE=
 
 function displayhelp() {
   echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--no-pdf] [--lint] [--help] [--version] pathway ...
@@ -156,10 +155,6 @@ if test "$ARGS" = ""; then
   ARGS="pathways/*"
 fi
 
-if test $FORCE; then
-  CHECKTARGET=1
-fi
-
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
 echo link:README.html[Authoring Guide] >> index.adoc
@@ -176,27 +171,34 @@ fi
 
 mkdir -p distribution/$LANGUAGE/lib
 
+export RESULT=
+
 function checkmd5nochange() {
-  distDir=$1
-  repoDir=$2
-  shallowP=$3
-  deptharg=
+  local distDir=$1
+  local repoDir=$2
+  local shallowP=$3
+  #echo doing checkmd5nochange $distDir $repoDir
+  local deptharg=
+  RESULT=
   if test "$shallowP"; then
     deptharg="-maxdepth 1"
   fi
-  savef=$distDir/.checksum.md5txt
-  newchecksum=$(cd $repoDir;find . $deptharg -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  local savef=$distDir/.checksum.md5txt
+  local currdir=$(pwd)
+  cd $repoDir
+  newchecksum=$(find . $deptharg -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  cd $currdir
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
-      echo 1
+      RESULT=1
     else
+      #echo saving i $savef
       echo $newchecksum > $savef
-      echo
     fi
   else
+    #echo saving ii $savef
     echo $newchecksum > $savef
-    echo
   fi
 }
 
@@ -204,7 +206,9 @@ mkdir -p prog
 
 export PROGDIR=$TOPDIR/prog
 
-if test ! $(checkmd5nochange $PROGDIR $TOPDIR/shared/langs); then
+checkmd5nochange $PROGDIR $TOPDIR/shared/langs
+
+if test ! $RESULT; then
   #cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.rkt $PROGDIR
   cp -p $TOPDIR/lib/ano* $PROGDIR
@@ -232,7 +236,9 @@ function overwrite() {
   fi
 }
 
-if test ! $(checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow); then
+checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow
+
+if test ! $RESULT; then
   overwrite 'copying' distribution/$LANGUAGE/lib
   #echo !!! copying mathjax
   cp -p $PROGDIR/*.css distribution/$LANGUAGE/lib
@@ -307,6 +313,11 @@ EOF
     -e 's/<\/h1>.*/\0\n%INSERTGDRIVESAVE2/' \
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
     $f
+  if test $WORKBOOKPAGE; then
+    $SED -i \
+      -e 's/^<body class="/\0 workbookpage /' \
+      $f
+  fi
   if ! grep -q %INSERTGDRIVESAVE2 $f; then
     $SED -i \
       -e 's/<div id="header">/\0\n%INSERTGDRIVESAVE2/' \
@@ -728,7 +739,7 @@ function processadoc() {
     rm "$f"
   else
     fhtml=$fbase.html
-    fasc=$fbase.asc
+    fasc=.$fbase.asc
     fpdf=$fbase.pdf
     DOIT=
     DOITPDF=
@@ -745,6 +756,7 @@ function processadoc() {
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f $fbase-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+      #echo doing adoc-preproc of $f
       $PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
       if test -f "$fhtml"; then
@@ -843,6 +855,8 @@ function recursiveadoc() {
   done
   test ! $NOPARALLEL && wait
 
+  #test $DEBUG || rm -f *.adoc
+
   cd ..
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR"
   export LESSONSUBDIR="$oldLESSONSUBDIR"
@@ -932,12 +946,11 @@ function buildworkbookpages() {
 
   DORECURSIVEADOC=1
 
-  if test ! $CHECKTARGET; then
-    if test $(checkmd5nochange . $repoDir); then
+    checkmd5nochange . $repoDir
+    if test $RESULT; then
       #echo no need to do recursive adoc
       DORECURSIVEADOC=
     fi
-  fi
 
   if test $DORECURSIVEADOC; then
   #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
@@ -1106,16 +1119,18 @@ function makeglossaryandstandards() {
 
 function buildpathwaynarrative() {
   local copacetic=1
-  for f in *.adoc; do
-    if test ! -f $f; then copacetic=
-    fi
-  done
+  if test ! -f .index.asciidoc; then
+    for f in *.adoc; do
+      if test ! -f $f; then copacetic=
+      fi
+    done
+  fi
   if test ! "$copacetic"; then
     echo
     echo WARNING: No narrative in pathway $PATHWAY\; creating one
     echo "= $PATHWAY" > index.adoc
   fi
-  if ls *.adoc | wc -l | grep -vq '^ *1$'; then
+  if ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
     echo
     echo WARNING: Too many narratives in pathway $PATHWAY
   else
@@ -1123,7 +1138,9 @@ function buildpathwaynarrative() {
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
     for f in *.adoc; do
-      cp -p $f .index.asciidoc
+      if test -f $f; then
+        cp -p $f .index.asciidoc
+      fi
     done
     if test .index.asciidoc -nt index.shtml; then
       echo building pathway narrative: $PATHWAY
@@ -1266,21 +1283,25 @@ function buildteacherresource() {
   #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
   cp -p $PROGDIR/.hta* .
   local copacetic=1
-  for f in *.adoc; do
-    if test ! -f $f; then copacetic=
-    fi
-  done
+  if test ! -f .index.asciidoc; then
+    for f in *.adoc; do
+      if test ! -f $f; then copacetic=
+      fi
+    done
+  fi
   if test ! "$copacetic"; then
     echo
     echo WARNING: No teacher resource files in pathway $PATHWAY
-  elif ls *.adoc | wc -l | grep -vq '^ *1$'; then
+  elif ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
     echo
     echo WARNING: Too many teacher resource files in pathway $PATHWAY
   else
     #export PATHWAYROOTDIR=../
     # there should be only one?
     for f in *.adoc; do
-      cp -p $f .index.asciidoc
+      if test -f $f; then
+        cp -p $f .index.asciidoc
+      fi
     done
     if test .index.asciidoc -nt index.shtml; then
       overwrite 'building' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
@@ -1324,8 +1345,9 @@ function batchhtmltopdf() {
 
 function rmtmpfiles() {
   test $DEBUG && return
+  #echo doing rmtmpfiles
 
-  for f in adoc asciidoc aux log rkt tex title; do
+  for f in adoc aux log rkt tex title; do
     find . -name \*.$f -delete
   done
 
@@ -1349,15 +1371,14 @@ function copylessondir() {
   if test -d "$repoLessonDir"; then
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
-    if test -z $CHECKTARGET; then
       #echo doing checkmd5nochange $lessonDir $repoLessonDir
-      if test $(checkmd5nochange $lessonDir $repoLessonDir); then
+      checkmd5nochange $lessonDir $repoLessonDir
+      if test $RESULT; then
         #echo $lessonDir doesnt need copying
         DOCOPYDIR=
       fi
-    fi
     if test $DOCOPYDIR; then
-      #overwrite 'copying' $lessonDir
+      overwrite 'copying' $lessonDir
       cp -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
       # we'll set it again when we do the adoc'ing
@@ -1412,7 +1433,8 @@ function buildpathway() {
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/$DESTPATHWAYDIR"
 
-    if test ! $(checkmd5nochange $DESTPATHWAYDIR $repoDir); then
+    checkmd5nochange $DESTPATHWAYDIR $repoDir
+    if test ! $RESULT; then
       echo copying pathway $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
     fi
@@ -1421,26 +1443,27 @@ function buildpathway() {
     REFRESHBACKMATTER=1
     REFRESHRESOURCES=1
 
-    if test ! $FORCE -a ! $CHECKTARGET; then
       #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
-        if test $(checkmd5nochange $distDir/front-matter $repoDir/front-matter); then
+        checkmd5nochange $distDir/front-matter $repoDir/front-matter
+        if test $RESULT; then
           REFRESHFRONTMATTER=
         fi
       fi
 
       if test -d $distDir/back-matter -a -d $repoDir/back-matter; then
-        if test $(checkmd5nochange $distDir/back-matter $repoDir/back-matter); then
+        checkmd5nochange $distDir/back-matter $repoDir/back-matter
+        if test $RESULT; then
           REFRESHBACKMATTER=
         fi
       fi
 
       if test -d $distDir/resources -a -d $repoDir/resources; then
-        if test $(checkmd5nochange $distDir/resources $repoDir/resources); then
+        checkmd5nochange $distDir/resources $repoDir/resources
+        if test $RESULT; then
           REFRESHRESOURCES=
         fi
       fi
-    fi
 
     rm -f $PROGDIR/pathway-local.rkt
     if test -f $repoDir/pathway-local.rkt; then
