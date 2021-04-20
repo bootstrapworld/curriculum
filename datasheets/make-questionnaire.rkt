@@ -65,7 +65,7 @@
 
 (define (display-commented-tag tag lines o)
   (newline o)
-  (fprintf o "include::~a[tag=~a]\n" *admin-file* tag)
+  (fprintf o "@include{~a, tag=~a}\n" *admin-file* tag)
   (for ([line lines])
     (fprintf o "// ~a\n" line))
   (newline o)

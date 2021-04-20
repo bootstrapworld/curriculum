@@ -122,7 +122,7 @@
             (when x (set! *admin-file* (list-ref x 1))))))))
   (unless *admin-file*
     (set! *admin-file* "datasheet-for-dataset-admin.adoc"))
-  (set! author-tag-re (format "^include::~a\\[tag=(.+?)\\] *$" *admin-file*))
+  (set! author-tag-re (format "^@include{~a, tag=(.+?)} *$" *admin-file*))
   )
 
 (define (check-tag-integrity)
@@ -214,7 +214,8 @@
                                              (display ln o) (newline o)
                                              (display-block q o)
                                              (fprintf o "[.answer]\n--\n")
-                                             (fprintf o "\ninclude::~a[tag=~a-common-answer]\n\n"
+                                             (fprintf o
+                                                      "\n@include{~a, tag=~a-common-answer}\n\n"
                                                       *admin-file*
                                                       (cadr tag-holder))
                                              (fprintf o "--\n") ]

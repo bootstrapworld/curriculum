@@ -1102,6 +1102,8 @@
                                       (read-space i)]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
+                           [(string=? directive "Bootstrap")
+                            (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
