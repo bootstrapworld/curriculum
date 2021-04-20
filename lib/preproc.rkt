@@ -1118,7 +1118,7 @@
                                                      (expand-directives i o)
                                                      ))))))]
                            [else
-                             (printf "WARNING: Unrecognized directive @~a\n\n" directive)
+                             ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
                   [(and beginning-of-line? (char=? c #\=))
@@ -1224,6 +1224,8 @@
                                  #f))])
           (when prim-file
             (store-functions-used *prereqs-used* prim-file))))
+
+      (set! *prereqs-used* '())
 
       (when *lesson-plan*
         (let ([prev-prim-file ".prevlesson.primtxt"])
