@@ -9,13 +9,17 @@
 | Lesson Goals
 | Students will be able to:
 
-* Describe the usefulness of @vocab{functions}.
-* Create their own functions and @vocab{examples} given the constraints of a problem.
+* describe the usefulness of @vocab{functions}.
+* create their own functions and @vocab{examples} given the constraints of a problem.
+* define one-argument functions that consume a Number and produce an Image
+* define one-argument functions that consume a String and produce an Image
+* define one-argument functions that consume a Row and produce an Image
+
 
 | Student-Facing Lesson Goals
 |
 * I can explain why a function is useful.
-* I can plan and create my own function with examples.
+* I can write my own function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{Pyret}.
 
 | Materials
 |[.materials-links]
@@ -50,7 +54,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Identifying Repeated _Patterns_ @duration{30 minutes}
 
 === Overview
-As with the Defining Values lesson, students search for structure in a list of expressions. But this time, the structures are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
+Students have already searched for structure in a list of expressions in order to define values. Now, they'll search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
 
 === Launch
 
@@ -63,7 +67,7 @@ on their computer.
 
 @centered-image{images/GreenTriangle.jpg, I Love Green Triangles, 400, align="center"}
 
-Confess to your students, "I LOVE green triangles." Challenge them to use the @vocab{Definitions area} to make as many DIFFERENT solid green triangles as they can in 2 minutes. 
+Confess to your students, "I LOVE green triangles." Challenge them to use the Definitions area to make as many DIFFERENT solid green triangles as they can in 2 minutes.
 
 Walk around the room and give positive feedback on the green triangles.  After the 2 minutes, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
 
@@ -91,6 +95,7 @@ triangle(500, "solid", "green")
 
 Direct students to the various lines of code they came up with.
 What do you notice?  What do you wonder?
+
 |===
 
 - *Is there a pattern?*
@@ -100,7 +105,7 @@ _Yes, the code mostly stayed the same with one change each time._
 _The function name `triangle`, "solid", "green"._
 
 - *What changed?*
-_The number being given to `triangle`, or the @vocab{Number} input._
+_The number being given to `triangle`, or the Number input._
 
 - *What strategy did you use to create many different triangles?*
 _Answers vary: Pattern matching, copy and paste_
@@ -111,13 +116,11 @@ _We defined values in the Definitions area._
 We've learned how to define *values* when we want to create a shortcut to reuse the same code over and over.
 
 For example:
-@ifproglang{wescheme}{ (define myStar (star 50 "solid" "gold")) }
-
-@ifproglang{pyret}{ myStar = star(50, "solid", "gold") }
+@show{(sexp->code '(define PRIZE-STAR (star 65 "solid" "pink")))}
 
 *But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
 
-Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we gave it. 
+Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we gave it.
 
 Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Run through some sample examples before having the class add their own:
 
@@ -127,7 +130,7 @@ The student responds: _(triangle 20 "solid" "green")!_
 - You say: *gt 200!*
 The student responds: _(triangle 200 "solid" "green")!_
 - You say: *gt 99!*
-The student responds: _(triangle 99 "solid" "green")!_ 
+The student responds: _(triangle 99 "solid" "green")!_
 }
 
 @ifproglang{pyret}{
@@ -136,46 +139,46 @@ The student responds: _triangle(20, "solid", "green")!_
 - You say: *gt 200!*
 The student responds: _triangle(200, "solid", "green")!_
 - You say: *gt 99!*
-The student responds: _triangle(99, "solid", "green")!_ 
+The student responds: _triangle(99, "solid", "green")!_
 }
 
 We need to program the computer to be as smart as our volunteer. But how do we do that?
 
-=== Investigate
-Let's walk through an example of defining `gt`. Turn to @printable-exercise{pages/FastFunctions.adoc}.
+WE NEED TO CHOOSE IF WE WANT TO SHOW THIS AS 3 STEPS OR 4 STEPS
+
+[.lesson-instruction]
+To build our own functions, we’ll use a series of steps called the @vocab{Design Recipe}. The Design Recipe is a way to think through the behavior of a function. The Design Recipe has four steps, and we’ll go through them together to define our first function `gt`. Turn to @printable-exercise{pages/FastFunctions.adoc} to follow along.
 
 [.lesson-point]
 Word Problem: Write a function called `gt` that takes in a Number and produces a solid, green triangle of that given size.
 
-Have students follow along on the @printable-exercise{pages/FastFunctions.adoc} workbook page.
+*1. Write the _contract_ for this new function by looking at the word problem.*
 
-*1. Write the @vocab{contract} for this new function by looking at the word problem.* +
-- What does `gt` take in? +
-- _A Number_ +
+* What does `gt` take in? _A Number_
+* What does `gt` give back? _An Image._
 
-- What does `gt` give back? +
-- __An Image. Students may say "a triangle", follow up by asking what data type that triangle will be (Number, String, or Image)__
+[.indentedpara]
+--
+(Students may say "a triangle", follow up by asking what data type that triangle will be (Number, String, or Image)
+--
 
-So now, we've got our contract for the function!
+* So now, we've got our contract for the function!
 
-@ifproglang{wescheme}{
-`gt : Number -> Image`
-}
-@ifproglang{pyret}{
+[.indentedpara]
+--
 `gt {two-colons} Number -> Image`
-}
-
+--
 *2. Write some examples of how this function should work.*
-- If I typed
-@ifproglang{wescheme}{ `(gt 40)` }
-@ifproglang{pyret}{ `gt(40)` }
-, what would I want the program to do? +
-- _I'd want the computer the execute the code_
-@ifproglang{wescheme}{ `(triangle 40 "solid" "green")`.  }
-@ifproglang{pyret}{    `triangle(40, "solid", "green")`. }
-(This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!)
 
-*3. Circle and Label what is "change-able" - or _variable_ between the examples. Circle and label it with a name that describes it.* +
+- If I typed @show{(sexp->code '(gt 20))}, what would I want the program to do? +
+_I'd want the computer the execute the code_ @show{(sexp->code '(triangle 20 "solid" "green"))}.
+
+[.indentedpara]
+--
+(This is a tough question at first.  If students are unsure, remind them that we're just writing a shortcut for making green triangles so we don't have to type `triangle`, "solid", and "green" every time!)
+--
+
+*3. Circle what is "change-able" - or _variable_ between the examples and label it with a name that describes it.* +
 _The number is changing in each example.  We could name it "x", but "size" is a more accurate name._ +
 
 @ifproglang{wescheme}{
@@ -206,53 +209,100 @@ _The number is changing in each example.  We could name it "x", but "size" is a 
 - Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
 
 - Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
-
 |===
+
+
+
+To build our own functions, we’ll use a series of steps called the @vocab{Design Recipe}. The Design Recipe is a way to think through the behavior of a function, to make sure we don’t make any mistakes! The Design Recipe has three steps, and we’ll go through them together for our first function.
+
+[.lesson-instruction]
+Turn to @printable-exercise{pages/design-recipe-1.adoc} in your Student Workbook, and read the word problem at the top of the page.
+
+[.lesson-point]
+Step 1: Contract and Purpose
+
+The first thing we do is write a Contract for this function. You already know a lot about contracts: they tell us the Name, Domain and Range of the function. Our function is named `gt`, and it consumes a Number. It makes triangles, so the output will be an Image. A Purpose Statement is just a description of what the function does:
+
+----
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
+----
+
+Since the contract and purpose statement are notes for humans, we add the # symbol at the front of the line to turn them into comments.
+
+Be sure to check students’ contracts and purpose statements before having them move on!
+
+[.lesson-point]
+Step 2: Write Examples
+
+Examples are a way for us to tell the computer how our function should behave for a specific input. We can write as many examples as we want, but they must all be wrapped in an examples: block and an end statement. Examples start with the name of the function we’re writing, followed by an example input. Suppose we write `gt(10)`. What work do we have to do, in order to produce the right shape as a result? What if we write `gt(20)`?
+
+----
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
+examples:
+  gt(100) is triangle(100, "solid", "green")
+  gt(30)  is triangle(30, "solid", "green")
+end
+----
+
+[.lesson-point]
+Step 3: Define the Function
+
+We start with the `fun` keyword (short for “function”), followed by the name of our function and a set of parentheses. This is exactly how all of our examples started, too. But instead of writing `10` or `20`, we’ll use the label from our Domain. Then we add a colon (`:`) in place of `is`, and write out the work we did to get the answers for our examples. Finally, we finish with the `end` keyword.
+
+----
+# gt :: (size :: Number) -> Image
+# Consumes a size, and produces a solid green triangle of that size.
+examples:
+  gt(100) is triangle(100, "solid", "green")
+  gt(30)  is triangle(30, "solid", "green")
+end
+fun gt(size):
+  triangle(size, "solid", "green")
+end
+----
+
+=== Investigate
+
+Have students type the function definition for `gt` into the Definitions Area. Be sure to include the Contract, Purpose Statement, Examples _and_ your Definition! Once you have typed everything in, click "Run" and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
 
 [.lesson-instruction]
 --
-Have students type the Contract, Examples, and Definition of `gt` into a new WeScheme program (in the Definitions Area!), save their program as 'Defining Functions' and test out `gt` in the Interactions window.
+- What did you get back? _a little green triangle!_
+- Try changing one of the examples to be incorrect and click run again. What happens? +
+_An incorrect example could be @ifproglang{pyret}{`gt(10) is triangle(99, "solid", "green")`} @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle(99, "solid", "green")))`}_ +
 
-@printable-exercise{pages/FastFunctions.adoc} includes another sample problem at the top. Can students fill out the page to define `bc`?
-
+_The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
 --
+
+Now that students know how to use the @vocab{Design Recipe} have them turn to the bottom of @printable-exercise{pages/FastFunctions.adoc} (or @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}) and define `bc`, `dot` and `sticker`.
+
+	Other options include:
+	*Word Problem: Write a function called `gold-star` that takes in a number and produces a solid, gold star of that given size.*
+	Write 2 examples and the definition of `gold-star` on the 'Fast Functions' handout.
+
+For each problem, have them type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of their examples pass!
 
 === Synthesize
 - *What is the domain for `gt`?*
 _Number_
 
-- *Why might someone think the domain for `gt` contains a Number and two Strings, because that's the Domain of `triangle`?*  The function `gt` _uses_ `triangle`, but only needs one Number input because _that's the only part that's changing._
+- *Why might someone think the domain for `gt` contains a Number and two Strings?* The function `gt` _uses_ `triangle`, whose Domain is Number String String, but `gt` only needs one Number input because _that's the only part that's changing._
+- *Functions can consume values besides Numbers. What did sticker consume?*
 - *Why is defining functions useful to us as programmers?*
 
-== Practicing the Design Recipe @duration{flexible}
-
-=== Overview
-This is a chance for students to independently review the steps learned in the prior activity, with the teacher in a supporting role asking guiding questions and giving support when needed.  
-
-=== Launch
-*Word Problem: Write a function called `gold-star` that takes in a number and produces a solid, gold star of that given size.*
-
-* Write 2 examples and the definition of `gold-star` on the 'Fast Functions' handout.
-* Complete the `gold-star` example on the @printable-exercise{pages/FastFunctions.adoc} worksheet.
-
-@ifproglang{pyret}{
-* If you have time, you might also have students complete this matching activity @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples and Function Definitions}
-}
-
-=== Investigate
-[.lesson-instruction]
-- Design a problem for a function that takes in one input and returns a shape that uses that input. Your function's input could be a Number, as in the two examples, or a String.
-- Write two examples and a definition for your function
-- Complete the @printable-exercise{pages/MappingExamplesWithCoE.adoc, Mapping Examples with Circles of Evaluation} for the examples of your function.
-
-=== Synthesize
 The Design Recipe is a powerful tool for solving word problems. In this lesson, students practiced using it on simple _programming problems_, but soon they'll be applying it to traditional math problems. Encourage them to make this connection on their own: can they think of a math problem in which this would be useful?
 
-== Additional Exercises:
+IS THERE A REASON TO SAVE THIS FOR THE FUTURE? SEEMS WE COULD MAKE THAT CONNECTION HERE! THERE IS ONE DR PROBLEM FOR THAT IN @printable-exercise{pages/design-recipe-3.adoc}.} WHICH IS CURRENTLY ONLY USABLE FOR DATA SCIENCE BUT COULD BE MODIFIED
+
+== Additional Exercises: I FEEL TEMPTED TO MAKE A SECOND SECTION OF THIS LESSON PLAN TO ENGAGE PEOPLE WITH THESE
+
 @ifproglang{wescheme}{
 * @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5cdcaea0b4b8576069fdca4f, Review: Define Values & Fast Functions}
 * @opt-online-exercise{https://www.wescheme.org/openEditor?publicId=JCTcwYc57r, "Bug Hunting in WeScheme"}
 }
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8, FIX & publish THIS before it goes live}
 
 @ifproglang{pyret}{
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
@@ -260,11 +310,18 @@ The Design Recipe is a powerful tool for solving word problems. In this lesson, 
 * @opt-online-exercise{https://code.pyret.org/editor#share=1SFVHGrmn5byiJOC0sDunO2oz5fF7aQsW, "Bug Hunting in Pyret"}
 }
 
-* @printable-exercise{pages/match-examples-functions.adoc} 
+* @printable-exercise{pages/match-examples-functions.adoc}
 
-* @opt-printable-exercise{pages/create-contracts-examples1.adoc} 
+* @opt-printable-exercise{pages/create-contracts-examples1.adoc}
 
-* @opt-printable-exercise{pages/create-contracts-examples2.adoc} 
+* @opt-printable-exercise{pages/create-contracts-examples2.adoc}
 
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay & put-image}
-- @opt-printable-exercise{pages/fun-with-images.adoc}
+=== other fragments that might be useful...
+
+[.lesson-instruction]
+--
+- Design a problem for a function that takes in one input and returns a shape that uses that input. Your
+function's input could be a Number, as in the two examples, or a String.
+- Write two examples and a definition for your function
+--
+

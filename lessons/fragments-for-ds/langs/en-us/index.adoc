@@ -83,6 +83,48 @@ With your partner, take turns adding definitions to this file:
 === Synthesize
 Why is it useful to be able to define values, and refer to them by name?
 
+-------
+
+
+Or a function called `nametag` that consumes a _Row_ from the animals table, and draws that animal's name in purple letters.
+----
+fun nametag(r):
+  text(r["name"], 10, "purple")
+end
+----
+
+*NOTE:* for now, students will follow the pattern for row-consuming functions, so that both examples include a lookup operation. Eventually, however, students will write examples that do *not* contain lookups.
+
+---
+
+* create custom scatter plots, using functions they have defined
+
+== Custom Scatter Plot Images @duration{15 minutes}
+
+=== Overview
+Students discover _functions that consume other functions_, and compose a scatter plot function with one of the functions they've already defined.
+
+=== Launch
+Students have used Pyret functions that use Numbers, Strings, Images, and even Tables and Rows. Now they've written functions of their own that work with these data types. However, Pyret functions can even use _other functions_! Have students look at the Contract for `image-scatter-plot`:
+----
+ image-scatter-plot :: (t :: Table, xs :: String, ys :: String, f :: (Row -> Image)) -> Image
+----
+This function looks a lot like the regular `scatter-plot` function. It takes in a table, and the names of columns to use for x- and y-values. Take a closer look at the third input...
+----
+...f :: (Row -> Image)...
+----
+_That looks like the contract for a function!_ Indeed, the third input to `image-scatter-plot` is named `f`, which itself is a function that consumes Rows and produces Images. In fact, students have just defined a function that does exactly that!
+
+=== Investigate
+[.lesson-instruction]
+- Type `image-scatter-plot(animals-table, "pounds", "weeks", nametag)` into the Interactions Area.
+- What did you get?
+- What other scatter plots could we create?
+
+@ifpathway{data-science}{
+*Note:* the optional lesson @link{../if-expressions/, If Expressions} goes deeper into basic programming constructs, using `image-scatter-plot` to motivate more complex (and exciting!) plots.
+}
+
 FRAGMENT FOR MATH
 
 [.lesson-point]
