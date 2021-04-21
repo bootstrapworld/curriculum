@@ -167,28 +167,24 @@ mkdir -p distribution/$LANGUAGE/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr prog distribution/$LANGUAGE/lib
+  rm -fr prog distribution/$LANGUAGE/lib distribution/$LANGUAGE/extlib
 fi
 
 mkdir -p prog
 mkdir -p distribution/$LANGUAGE/lib
+mkdir -p distribution/$LANGUAGE/extlib
 
 export RESULT=
 
 function checkmd5nochange() {
   local distDir=$1
   local repoDir=$2
-  local shallowP=$3
   #echo doing checkmd5nochange $distDir $repoDir
-  local deptharg=
   RESULT=
-  if test "$shallowP"; then
-    deptharg="-maxdepth 1"
-  fi
   local savef=$distDir/.checksum.md5txt
   local currdir=$(pwd)
   cd $repoDir
-  newchecksum=$(find . $deptharg -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  newchecksum=$(find . -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
   cd $currdir
   if test -f $savef; then
     savedchecksum=$(cat $savef)
@@ -204,21 +200,17 @@ function checkmd5nochange() {
   fi
 }
 
-
 export PROGDIR=$TOPDIR/prog
 
 checkmd5nochange $PROGDIR $TOPDIR/shared/langs
 
 if test ! $RESULT; then
-  #cp -pr $TOPDIR/lib/* $TOPDIR/lib/.hta* $PROGDIR
-  cp -p $TOPDIR/lib/*.rkt $PROGDIR
-  cp -p $TOPDIR/lib/ano* $PROGDIR
-  cp -p $TOPDIR/lib/.hta* $PROGDIR
   # if $LANGUAGE != en-us, and
   # shared/langs/$LANGUAGE isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
   #
   cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   #
   if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
     cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
@@ -237,16 +229,16 @@ function overwrite() {
   fi
 }
 
+if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
+  cp -pr $TOPDIR/extlib/MathJax* distribution/$LANGUAGE/extlib
+fi
 
-checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib shallow
+checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib
 
 if test ! $RESULT; then
   overwrite 'copying' distribution/$LANGUAGE/lib
-  #echo !!! copying mathjax
-  cp -p $PROGDIR/*.css distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
-  rm -fr distribution/$LANGUAGE/lib/MathJax*
-  cp -pr $TOPDIR/lib/MathJax* distribution/$LANGUAGE/lib
 fi
 
 function insertbodyid() {
@@ -588,7 +580,7 @@ function resolveabbrevs() {
     $f
   if test "$mathjaxneeded"; then
     cat > .mathjax.txt <<EOF
-      <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script type="text/javascript" src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
