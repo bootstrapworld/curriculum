@@ -14,12 +14,12 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 [cols="3, 2, 2, 4, 2, 2", frame="none", stripes="none"]
 |===
 |			| *prediction:*| *pyret returns:*| | *prediction:*| *pyret returns:*
-|@n `3 <= 4`| @fitb{}{}	| @fitb{}{}	|@n `"a" > "b"`		| @fitb{}{}| @fitb{}{}
-|@n `3 == 2`| @fitb{}{}	| @fitb{}{}	|@n`"a" < "b"`		| @fitb{}{}| @fitb{}{}
-|@n `2 < 4`	| @fitb{}{}	| @fitb{}{}	|@n `"a" == "b"`	| @fitb{}{}| @fitb{}{}
-|@n `3 <> 3`| @fitb{}{}	| @fitb{}{}	|@n `"a" <> "b"`	| @fitb{}{}| @fitb{}{}
-|@n `5 >= 5`| @fitb{}{}	| @fitb{}{}	|@n `"a" <> "a"`	| @fitb{}{}| @fitb{}{}
-|@n `4 >= 6`| @fitb{}{}	| @fitb{}{}	|@n `"a" >= "a"`	| @fitb{}{}| @fitb{}{}	
+|@n @show{(sexp->code '(<= 3 4))}| @fitb{}{}	| @fitb{}{}	|@n `"a" > "b"`		| @fitb{}{}| @fitb{}{}
+|@n @show{(sexp->code '(= 3 2))}| @fitb{}{}	| @fitb{}{}	|@n`"a" < "b"`		| @fitb{}{}| @fitb{}{}
+|@n @show{(sexp->code '(< 2 4))}	| @fitb{}{}	| @fitb{}{}	|@n `"a" == "b"`	| @fitb{}{}| @fitb{}{}
+|@n @show{(sexp->code '(<> 3 3))}| @fitb{}{}	| @fitb{}{}	|@n `"a" <> "b"`	| @fitb{}{}| @fitb{}{}
+|@n @show{(sexp->code '(>= 5 5))}| @fitb{}{}	| @fitb{}{}	|@n `"a" <> "a"`	| @fitb{}{}| @fitb{}{}
+|@n @show{(sexp->code '(>= 4 6))}| @fitb{}{}	| @fitb{}{}	|@n `"a" >= "a"`	| @fitb{}{}| @fitb{}{}
 |===
 }
 
@@ -27,12 +27,12 @@ td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 [cols="3,2,2,4,2,2", frame="none", stripes="none"]
 |===
 |				| *prediction:*	| *wescheme returns:*	| 							| *prediction:*| *wescheme returns:*
-|@n `(<= 3 4)`	| @fitb{3ex}{}	| @fitb{3ex}{}			|@n `(string>? "a" "b")` 	| @fitb{3ex}{}	| @fitb{3ex}{}
-|@n `(= 3 2)`	| @fitb{}{}		| @fitb{}{}				|@n `(string<? "a" "b")`	| @fitb{}{}		| @fitb{}{}
-|@n `(< 2 4)`	| @fitb{}{}		| @fitb{}{}				|@n `(string=? "a" "b")`	| @fitb{}{}		| @fitb{}{}
-|@n `(<> 3 3)`	| @fitb{}{}		| @fitb{}{}				|@n `(string<>? "a" "b")`	| @fitb{}{}		| @fitb{}{}
-|@n `(>= 5 5)`	| @fitb{}{}		| @fitb{}{}				|@n `(string<>? "a" "a")`	| @fitb{}{}		| @fitb{}{}
-|@n `(>= 4 6)`	| @fitb{}{}		| @fitb{}{}				|@n `(string>=? "a" "a")`	| @fitb{}{}		| @fitb{}{}	
+|@n @show{(sexp->code '(<= 3 4))}	| @fitb{3ex}{}	| @fitb{3ex}{}			|@n @show{(sexp->code '(string>? "a" "b"))} 	| @fitb{3ex}{}	| @fitb{3ex}{}
+|@n @show{(sexp->code '(= 3 2))}	| @fitb{}{}		| @fitb{}{}				|@n @show{(sexp->code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code '(< 2 4))}	| @fitb{}{}		| @fitb{}{}				|@n @show{(sexp->code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code '(<> 3 3))}	| @fitb{}{}		| @fitb{}{}				|@n @show{(sexp->code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code '(>= 5 5))}	| @fitb{}{}		| @fitb{}{}				|@n @show{(sexp->code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{}
+|@n @show{(sexp->code '(>= 4 6))}	| @fitb{}{}		| @fitb{}{}				|@n @show{(sexp->code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{}
 |===
 }
 @vspace{1ex}

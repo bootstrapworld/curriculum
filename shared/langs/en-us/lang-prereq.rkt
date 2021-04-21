@@ -23,7 +23,7 @@
       (
        string-length
        string-repeat 
-       string-contains
+       string-contains?
        )
       (
        "hello"
@@ -33,6 +33,7 @@
       (
        == < > <> <= >= 
        string-equal
+       string<? string>? string=? string<>? string<=? string>=?
        and or
        )
       (
