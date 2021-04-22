@@ -1,4 +1,4 @@
-# last modified 2020-09-04
+# last modified 2021-04-21
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -74,6 +74,9 @@ for lang in $ALL_THE_LANGS; do
   if test $lib; then
     if test -d $lang/lib; then
       cp -pr $lang/lib deployables/$lang
+    fi
+    if test -d $lang/extlib; then
+      cp -pr $lang/extlib deployables/$lang
     fi
   fi
   for f in $lang/*html; do
