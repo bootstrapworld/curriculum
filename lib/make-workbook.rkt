@@ -39,8 +39,8 @@
   (define workbook-page-specs
     (call-with-input-file
       (if (string=? tgt "bm-contracts")
-          ".back-matter-contracts-index.rkt"
-          ".workbook-page-index.rkt") read))
+          ".cached/.back-matter-contracts-index.rkt"
+          ".cached/.workbook-page-index.rkt") read))
 
   (define dest.pdf (format "~a.pdf" dest))
 
@@ -99,7 +99,7 @@
                  (if (char-ci=? (string-ref aspect 0) #\l)
                      "Qwest" "Q")
                  "output"
-                 (format ".~a-~a.pdf" tgt handle)
+                 (format ".cached/.~a-~a.pdf" tgt handle)
                  "dont_ask"))))
   ;  (printf "pdftk done\n")
 

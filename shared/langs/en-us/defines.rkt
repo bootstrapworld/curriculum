@@ -115,7 +115,7 @@
 
 (define (print-menubar f)
   ;(printf "print-menubar ~s\n" f)
-  (call-with-output-file (string-append f "-comment.txt")
+  (call-with-output-file f
     (lambda (o)
       (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
     #:exists 'replace))

@@ -81,6 +81,7 @@
           [image-functions-used? (ormap (lambda (x) (member x *image-list*)) *prereqs-used*)]
           [table-functions-used? (ormap (lambda (x) (member x *table-list*)) *prereqs-used*)]
           )
+      ;TODO make file only when needed?
       (call-with-output-file (path-replace-extension in-file "-lang-prereq.asc")
         (lambda (o)
           (when (or number-functions-used?

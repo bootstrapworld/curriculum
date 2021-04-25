@@ -16,7 +16,7 @@
 
 (define *lesson* #f)
 
-(define *all-standards* (read-data-file "all-standards.txt" #:mode 'forms))
+(define *all-standards* (read-data-file ".cached/.all-standards.txt" #:mode 'forms))
 
 (let ([ss *all-standards*])
   (for ([s ss])
@@ -30,6 +30,6 @@
 
 ;(printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
 
-(create-standards-file "Standards" #t #f *standards-met* *dictionaries-represented*)
+(create-standards-file ".cached/Standards" #t #f *standards-met* *dictionaries-represented*)
 
 (void)
