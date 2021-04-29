@@ -1,41 +1,41 @@
 =  Creating Contracts From Examples
 
 @do{(define e1
-   (code #:multi-line #t 
-"(EXAMPLE (big-triangle 100 \"red\") 
+   (code #:multi-line #t
+"(EXAMPLE (big-triangle 100 \"red\")
          (triangle 100 \"solid\" \"red\"))
-(EXAMPLE (big-triangle 100 \"orange\") 
-         (triangle 100 \"solid\" \"orange\"))"))
+(EXAMPLE (big-triangle 200 \"orange\")
+         (triangle 200 \"solid\" \"orange\"))"))
 (define c1 (code "; big-triangle : Number String -> Image"))
 
 
 (define e2
    (code #:multi-line #t
-"(EXAMPLE (purple-square 15) 
-         (rectangle 15 15 \"outline\" \"purple\"))
-(EXAMPLE (purple-square 6) 
-         (rectangle 6 6 \"outline\" \"purple\"))"))
+"(EXAMPLE (purple-square 15)
+         (square 15 \"outline\" \"purple\"))
+(EXAMPLE (purple-square 6)
+         (square 6 \"outline\" \"purple\"))"))
 (define c2 (code "; purple-square : Number -> Image"))
 
 
 (define e3
    (code #:multi-line #t
-"(EXAMPLE (banner \"Game Today!\") 
+"(EXAMPLE (banner \"Game Today!\")
          (text \"Game Today!\" 50 \"red\"))
-(EXAMPLE (banner \"Go Team!\") 
+(EXAMPLE (banner \"Go Team!\")
          (text \"Go Team!\" 50 \"red\"))
-(EXAMPLE (banner \"Exit\") 
+(EXAMPLE (banner \"Exit\")
          (text \"Exit\" 50 \"red\"))"))
 (define c3 (code "; banner : String -> Image"))
 
 
 (define e4
    (code #:multi-line #t
-"(EXAMPLE (twinkle 5 \"outline\") 
+"(EXAMPLE (twinkle 5 \"outline\")
          (star 5 \"outline\" \"yellow\"))
-(EXAMPLE (twinkle 15 \"solid\") 
+(EXAMPLE (twinkle 15 \"solid\")
          (star 15 \"solid\" \"yellow\"))
-(EXAMPLE (twinkle 36 \"outline\") 
+(EXAMPLE (twinkle 36 \"outline\")
          (star 36 \"outline\" \"yellow\")"))
 (define c4 (code "; twinkle : Number String -> Image"))
 
@@ -44,9 +44,9 @@
    (code #:multi-line #t
 "(EXAMPLE (half 2)
          (/ 2 2))
-(EXAMPLE (half 4) 
+(EXAMPLE (half 4)
          (/ 4 2))
-(EXAMPLE (half 9) 
+(EXAMPLE (half 9)
          (/ 9 2))"))
 (define c5 (code "; half : Number -> Number"))
 
@@ -65,7 +65,7 @@
 (define answers-atop (map list answers-lst examples-lst))
 }
 
-@show{(exercise-handout 
+@show{(exercise-handout
 ;  #:title "Creating Contracts From Examples"
   #:instr "For each of the following collections of Examples, write the contract
            for the function above the examples."
