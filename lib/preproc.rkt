@@ -413,8 +413,9 @@
               (cons (list lesson f ex-ti) *exercises-done*))))))
     (when (or (not link-text) (string=? link-text ""))
       (let ([f.titletxt (path-replace-extension
-                          (string-append *pathway-root-dir* lesson "/" pages-dir ".cached/." snippet)
+                          (string-append *pathway-root-dir* lesson "/" pages-dir "/.cached/." snippet)
                           ".titletxt")])
+        ;(printf "f.titletxt is ~s\n" f.titletxt)
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
@@ -602,10 +603,12 @@
 
          )]
         [else
-          (let ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".\\1.asc")])
+          (let ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".cached/.\\1.asc")])
             ;(printf "make-link checking ~s vs ~s\n" f.asc f)
             ;TODO: probably not needed anymore
-            (cond [(file-exists? f.asc) (set! f f.asc)])
+            (when (file-exists? f.asc)
+              ;(printf "changing file from ~s to ~s\n" f f.asc)
+              (set! f f.asc))
             ;FIXME: avoid erroring include: if file doesn't exist?
             (format "include::~a[~a]" f link-text))]))
 
@@ -1293,7 +1296,7 @@
 
 (define (asciidoctor asc-file html-file)
   ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)
-  (system (format "~a -a pathwayrootdir=~a ~a -o ~a" *asciidoctor* 
+  (system (format "~a -a pathwayrootdir=~a ~a -o ~a" *asciidoctor*
                   *pathway-root-dir* asc-file html-file))
   (void)
   )
