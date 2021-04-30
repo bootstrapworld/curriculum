@@ -413,8 +413,9 @@
               (cons (list lesson f ex-ti) *exercises-done*))))))
     (when (or (not link-text) (string=? link-text ""))
       (let ([f.titletxt (path-replace-extension
-                          (string-append *pathway-root-dir* lesson "/" pages-dir ".cached/." snippet)
+                          (string-append *pathway-root-dir* lesson "/" pages-dir "/.cached/." snippet)
                           ".titletxt")])
+        ;(printf "f.titletxt is ~s\n" f.titletxt)
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
