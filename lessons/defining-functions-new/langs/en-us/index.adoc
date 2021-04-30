@@ -54,7 +54,10 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Identifying Repeated _Patterns_ @duration{15 minutes}
 
 === Overview
-Students have already searched for structure in a list of expressions in order to define values. Now, they'll search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
+@ifpathway{algebra, ok}{
+Students have already searched for structure in a list of expressions in order to define values.
+}
+In this lesson, students will build their flexibiltiy of thinking by engaging with multiple representations. Students will search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
 
 === Launch
 
@@ -71,7 +74,7 @@ This is a fun lesson to make silly! Dramatically confess to your students, "I LO
 
 Walk around the room and give positive feedback on the green triangles.  After the time is up, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
 
-[indented-para]
+[.indentedpara]
 --
 For example:
 
@@ -103,7 +106,7 @@ For example:
 *But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
 }
 
-Suppose we want to define a shortcut @vocab{function}called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
+Suppose we want to define a shortcut @vocab{function} called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 --
 
 Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Act out some examples before having the class add their own and record them on the board:
@@ -116,77 +119,95 @@ The student responds: _@show{(sexp->code '(triangle 200 "solid" "green"))}!_
 - You say: *gt 99!*
 The student responds: _@show{(sexp->code '(triangle 99 "solid" "green"))}!_
 
-=== Investigate
 [.lesson-instruction]
 We need to program the computer to be as smart as our volunteer. But how do we do that? Let's look at the examples we just came up with.
 
 @centered-image{images/examples-pyret.png, 400, align="center"}
 
 [.lesson-instruction]
-Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function.
+Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!
 
-We could define `gt` by giving it the variable `size`, instead of a number, and inserting the variable `size` into the `triangle` function, just as we did with the numbers.
+* What is the contract for `triangle`?
 
-@centered-image{images/gt-fun-pyret.png, 400, align="center"}
+[.indentedpara]
+--
+`triangle {two-colons} Number, String, String -> Image`
+--
 
-Have students turn to @printable-exercise{pages/match-examples-functions.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions} and match the examples provided to the corresponding function definitions.
-
-=== Synthesize
-
-[.lesson-instruction]
-How do you define a function from a list of examples?
-
-== Writing Contracts from Examples
-
-=== Launch
-
-* What does `gt` take in? _A Number_
-
-* Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` uses `triangle`, whose Domain is Number String String, but `gt` only needs one Number input because that's the only part that's changing._
-
-* What does `gt` give back? _An Image. (Students may say "a triangle", follow up by asking what data type that triangle will be...Number, String, or Image?)_
-
-* So, what's the contract for the function `gt`?
+* What is the contract for `gt`? _A Number_
 
 [.indentedpara]
 --
 `gt {two-colons} Number -> Image`
 --
 
+* Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+
+
 === Investigate
-Have students turn to @printable-exercise{pages/create-contracts-examples1.adoc} and/or @ifproglang{wescheme}{
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8, FIX & publish THIS before it goes live}
+
+
+Let's practice identifying the patterns in examples and using them to write contracts!
+
+
+Have students turn to @printable-exercise{pages/create-contracts-examples1.adoc}. If you have time, you may also want to have students complete @ifproglang{wescheme}{
+@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8, FIX & publish THIS before it goes live}
 }
 @ifproglang{pyret}{
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
-} and practice writing contracts for examples.
+@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
+}.
+
+
 
 === Synthesize
 
+Have students turn to a partner and compare the contracts they've written.
+[.lesson-instruction]
+- What strategies did you use to identify the contracts?
+- Were any of the contracts trickier to write than others?
 
-== The Design Recipe
+WONDERING IF MAYBE THIS WOULD MAKE MORE SENSE AS A MATCHING ACTIVITY?
 
-=== Overview
+== Defining Functions
 
 === Launch
 
-Have students turn to @printable-exercise{pages/design-recipe-1.adoc} and read the contract, examples and function definition for `gt` and type them into the Definitions Area (Contract, Examples and Definition!), click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
+[.lesson-instruction]
+--
+Just as we were able to give our volunteer instructions that let them take in `gt 20` and give us back @show{(sexp->code '(triangle 20 "solid" "green"))}, we can define any function we'd like in the *Definitions Area*.
+
+In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
+
+Turn to @printable-exercise{pages/match-examples-functions.adoc} and look at the definition of `gt` in the first row of the table.
+--
+@ifproglang{pyret}{
+@centered-image{images/gt-fun-pyret.png, 400, align="center"}
+}
 
 [.lesson-instruction]
- What did you get back? _a little green triangle!_
+Using `gt` as a model, match the mystery function examples to their corresponding definitions.
+
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}.
+
+[.lesson-instruction]
+What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
+
+Have students turn to @printable-exercise{pages/design-recipe-1.adoc}.
+
+[.lesson-instruction]
+- On the top half of the page you will see the contract, examples, and function defintion for `gt`. Type them into the Definitions Area (Contract, Examples and Definition!), click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
+- What did you get back? _a little green triangle!_
+- Try changing one of the examples to be incorrect and click run again. What happens?
+_The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
+
 
 === Investigate
+
 [.lesson-instruction]
---
-Try changing one of the examples to be incorrect +
- _An incorrect example could be_ @ifproglang{pyret}{`gt(10) is triangle(99, "solid", "green")`} @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle(99, "solid", "green")))`} +
-and click run again. What happens? +
-_The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
---
+Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
 
-Now that students know how to use the @vocab{Design Recipe} have them turn to the bottom of @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc} and define `bc`, `dot` and `sticker`.
-
-For each problem, have them type in the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of their examples pass!
+Then have them turn to @printable-exercise{pages/design-recipe-2.adoc} and complete the @vocab{Design Recipe} for `dot` and `sticker`.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -199,10 +220,19 @@ For each problem, have them type in the Contract, Purpose Statement, Examples an
 - Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
 |===
 
+If you have time, ask students to
+[.lesson-instruction]
+--
+- Design a problem for a function that takes in one input and returns a shape that uses that input. Your
+function's input could be a Number, as in the two examples, or a String.
+- Write two examples and a definition for your function
+--
+
 === Synthesize
 
 - *Functions can consume values besides Numbers. What did sticker consume?*
 - *Why is defining functions useful to us as programmers?*
+- How did you define a function in @ifproglang{WeScheme}{WeScheme} @ifproglang{Pyret}{Pyret}?
 
 The Design Recipe is a powerful tool for solving word problems. In this lesson, students practiced using it on simple _programming problems_, but soon they'll be applying it to traditional math problems. Encourage them to make this connection on their own: can they think of a math problem in which this would be useful?
 
@@ -221,12 +251,6 @@ The Design Recipe is a powerful tool for solving word problems. In this lesson, 
 
 === other fragments that might be useful...
 
-[.lesson-instruction]
---
-- Design a problem for a function that takes in one input and returns a shape that uses that input. Your
-function's input could be a Number, as in the two examples, or a String.
-- Write two examples and a definition for your function
---
 
 Other options include:
 *Word Problem: Write a function called `gold-star` that takes in a number and produces a solid, gold star of that given size.*

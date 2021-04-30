@@ -5,8 +5,8 @@
 "examples:
   big-triangle(100, \"red\") is
     triangle(100, \"solid\", \"red\")
-  big-triangle(100, \"orange\") is
-    triangle(100, \"solid\", \"orange\")
+  big-triangle(200, \"orange\") is
+    triangle(200, \"solid\", \"orange\")
 end"))
 
 (define c1 (code "big-triangle :: Number, String -> Image"))
@@ -40,8 +40,8 @@ end"))
 "examples:
   twinkle(5, \"outline\") is
     star(5, \"outline\", \"yellow\")
-  twinkle(15, \"outline\") is
-    star(15, \"outline\", \"yellow\")
+  twinkle(15, \"solid\") is
+    star(15, \"solid\", \"yellow\")
   twinkle(36, \"outline\") is
     star(36, \"outline\", \"yellow\")
 end"))
@@ -51,26 +51,16 @@ end"))
 (define e5
    (code #:multi-line #t
 "examples:
-  half(2) is 2 / 2
-  half(4) is 4 / 2
-  half(9) is 9 / 2
+  half(5) is 5 / 2
+  half(8) is 8 / 2
+  half(900) is 900 / 2
 end"))
 
 (define c5 (code "half :: Number -> Number"))
 
-(define e6
-   (code #:multi-line #t
-"examples:
-  how-long?(\"Soccer\") is 6
-  how-long?(\"Cupcakes\") is 8
-  how-long?(\"Hi Mom\") is 6
-  how-long?(\"Cheese pizza\") is 12
-end"))
 
-(define c6 (code "how-long? :: String -> Number"))
-
-(define examples-lst (list e1 e2 e3 e4 e5 e6 ))
-(define answers-lst (list c1 c2 c3 c4 c5 c6 ))
+(define examples-lst (list e1 e2 e3 e4 e5 ))
+(define answers-lst (list c1 c2 c3 c4 c5 ))
 (define answers-atop (map list answers-lst examples-lst))
 }
 
