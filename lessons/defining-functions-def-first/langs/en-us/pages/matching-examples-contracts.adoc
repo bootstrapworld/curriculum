@@ -5,43 +5,44 @@
 td { height: 20pt; }
 p { font-size: 0.9rem;}
 div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
+
+td:first-child {border-bottom: 1pt solid gray !important;}
+
 </style>
 ++++
 
 @do{(define e1
    (code #:multi-line #t
 "examples:
-  big-triangle(100, \"red\") is
-    triangle(100, \"solid\", \"red\")
-  big-triangle(200, \"orange\") is
-    triangle(200, \"solid\", \"orange\")
+  f(100, \"red\") is star(100, \"solid\", \"red\")
+  f(200, \"blue\") is star(200, \"solid\", \"blue\")
 end"))
 
-(define c1 (code "big-triangle :: Number, String -> Image"))
+(define c1 (code "f :: Number, String -> Image"))
 
 (define e2
    (code #:multi-line #t
 "examples:
-  mystery(15) is
+  f(15) is
     rectangle(15, 15, \"outline\", \"purple\")
-  mystery(6) is
+  f(6) is
     rectangle(6, 6, \"outline\", \"purple\")
 end"))
 
-(define c2 (code "mystery :: Number -> Image"))
+(define c2 (code "f :: Number -> Image"))
 
 (define e3
    (code #:multi-line #t
 "examples:
-  mystery(\"Game Today!\") is
+  f(\"Game Today!\") is
     text(\"Game Today!\", 50, \"red\")
-  mystery(\"Go Team!\") is
+  f(\"Go Team!\") is
     text(\"Go Team!\", 50, \"red\")
-  mystery(\"Exit\") is
+  f(\"Exit\") is
     text(\"Exit\", 50, \"red\")
 end"))
 
-(define c3 (code "mystery :: String -> Image"))
+(define c3 (code "f :: String -> Image"))
 
 (define e4
    (code #:multi-line #t
@@ -59,19 +60,19 @@ end"))
 (define e5
    (code #:multi-line #t
 "examples:
-  mystery(5) is 5 / 2
-  mystery(8) is 8 / 2
-  mystery(900) is 900 / 2
+  f(5) is 5 / 2
+  f(8) is 8 / 2
+  f(900) is 900 / 2
 end"))
 
 
-(define c5 (code "mystery :: Number -> Number"))
+(define c5 (code "f :: Number -> Number"))
 }
 
 _Match_ each set of examples (left) with the contract that best fits it(right).
 
 @vspace{1ex}
-[cols="<12a,^2a,1,^1a,.<8a",stripes="none",grid="none",frame="none", options="header"]
+[cols="<12a,^2a,1,^1a,.<6a",stripes="none",grid="none",frame="none", options="header"]
 |===
 |  Examples|  || |Contract
 | @show{e5}
