@@ -1,19 +1,17 @@
 ++++
 <style>
 /* Hide DR elements we want hidden */
-.recipe_purpose_statement{
+.recipe_purpose_statement, table.recipe_title {
  	display: none !important;
 }
+/* Make the instructions more prominent, to take the place of headers */
+.recipe_instructions * {
+	font-style: italic;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
 
-.recipe{ min-height: 25pt; }
-.recipe_contract span { margin-bottom: 0px; }
-.keyword_only {height: 20pt;}
-
-/* shade the contract */
-.recipe_contract { background: #eee; }
-
-/* maximize length of DR lines */
-.recipe_example_body, .recipe_definition_body {width: 90%; min-width: 340pt !important;}
 </style>
 ++++
 
@@ -22,16 +20,16 @@
 #:assess-design-recipe #f
 #:headless? #t
 #:show-funname-contract? #t
-#:domain-list '("(size {two-colons} Number)")
+#:domain-list '("(Number)")
 #:show-domains? #t
 #:range "Image"
 #:show-range? #t
 #:purpose "Consumes a size, and produces a solid green triangle of that size."
 #:show-purpose? #t
 #:num-examples 2
-#:example-list '(("10" "triangle(10, \"solid\", \"green\")")
-				 ("20" "triangle(20, \"solid\", \"green\")"))
-#:show-examples #f
+#:example-list '((10 "triangle(10, \"solid\", \"green\")")
+				 (20 "triangle(20, \"solid\", \"green\")"))
+#:show-examples #t
 #:param-list (list "size")
 #:show-funname-defn? #t
 #:show-params? #t
