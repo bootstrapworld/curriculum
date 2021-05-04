@@ -151,9 +151,9 @@ We need to program the computer to be as smart as our volunteer. But how do we d
 
 - Draw the table on the left below on the board.
 - We recommend starting by showing it without the equation at the bottom and talking students through the process of highlighting the variable & defining the function.
-- Once you have crowd-sourced the equation from the math side, show students how the same process of writing examples and defining the function would work in pyret syntax.
+- Once you have crowd-sourced the equation from the math side, show students how the same process of writing examples and defining the function would work in Pyret syntax.
 
-[cols="3,1,3", stripes="none", options="header"]
+[cols="3,^.^1,3", stripes="none", options="header"]
 |===
 | math
 |
@@ -169,7 +169,7 @@ Have students turn to @printable-exercise{pages/matching-examples-functions-math
 
 [.lesson-instruction]
 - Start by looking at each table and highlighting what is changing from the first row to the following rows.
-- Then, match each table to the function that describes it.
+- Then, match each table to the function that defines it.
 
 Now that we've seen how this works in math, let's go back to `gt`.
 
@@ -180,11 +180,14 @@ Now that we've seen how this works in math, let's go back to `gt`.
 In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
 
 Turn to @printable-exercise{pages/match-examples-functions.adoc} and look at the definition of `gt` in the first row of the table.
+--
 
 @ifproglang{pyret}{
 @centered-image{images/gt-fun-pyret.png, 400, align="center"}
 }
 
+[.lesson-instruction]
+--
 Using `gt` as a model, match the mystery function examples to their corresponding definitions.
 --
 
@@ -229,7 +232,7 @@ You may also want to have students complete @opt-online-exercise{https://teacher
 
 === Investigate
 
-Have students turn to @printable-exercise{pages/matching-contracts-examples.adoc}.
+Have students turn to @printable-exercise{pages/matching-examples-contracts.adoc}.
 
 Have students turn to a partner, compare their findings, and discuss their thinking about anything they didn't agree on at first.
 
@@ -238,7 +241,7 @@ Have students turn to a partner, compare their findings, and discuss their think
 - What strategies did you use to identify the contracts?
 - Were any of the contracts trickier to identify than others?
 
-Have students open @online-exercise{https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=04918ef}
+Have students open @online-exercise{https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=04918ef, the gt starter file}.
 
 [.lesson-instruction]
 - Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
@@ -251,7 +254,13 @@ Have students turn to @printable-exercise{pages/contracts-examples-definitions.a
 [.lesson-instruction]
 On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
 
-If you have time, ask students to
+If you have time, have students complete
+* @opt-online-exercise{https://www.wescheme.org/openEditor?publicId=JCTcwYc57r, "Bug Hunting in WeScheme"}
+}
+@ifproglang{pyret}{
+* @opt-online-exercise{https://code.pyret.org/editor#share=1SFVHGrmn5byiJOC0sDunO2oz5fF7aQsW, "Bug Hunting in Pyret"}
+}
+or ask students to
 [.lesson-instruction]
 --
 - Design a problem for a function that takes in one input and returns a shape that uses that input. Your
@@ -273,15 +282,10 @@ Write 2 examples and the definition of `gold-star` on the 'Fast Functions' hando
 }
 @ifproglang{pyret}{
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
-}.
-* @opt-printable-exercise{pages/create-contracts-examples2.adoc}
+}
 @ifproglang{wescheme}{
 * @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5cdcaea0b4b8576069fdca4f, Review: Define Values & Fast Functions}
-* @opt-online-exercise{https://www.wescheme.org/openEditor?publicId=JCTcwYc57r, "Bug Hunting in WeScheme"}
-}
-@ifproglang{pyret}{
-* @opt-online-exercise{https://code.pyret.org/editor#share=1SFVHGrmn5byiJOC0sDunO2oz5fF7aQsW, "Bug Hunting in Pyret"}
-}
+
 @ifpathway{data-science}{@printable-exercise{pages/design-recipe-3.adoc}
 }
 
