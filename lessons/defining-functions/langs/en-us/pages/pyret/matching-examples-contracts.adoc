@@ -14,17 +14,17 @@ td:first-child {border-bottom: 1pt solid gray !important;}
 @do{(define e1
    (code #:multi-line #t
 "examples:
-  f(100, \"red\") is star(100, \"solid\", \"red\")
-  f(200, \"blue\") is star(200, \"solid\", \"blue\")
+  f(\"pink\", 5) is star(5, \"solid\", \"pink\")
+  f(\"blue\", 8) is star(8, \"solid\", \"blue\")
 end"))
 
-(define c1 (code "f :: Number, String -> Image"))
+(define c1 (code "f :: String, Number -> Image"))
 
 (define e2
    (code #:multi-line #t
 "examples:
-  f(15) is
-    rectangle(15, 15, \"outline\", \"purple\")
+  f(1) is
+    rectangle(1, 1, \"outline\", \"purple\")
   f(6) is
     rectangle(6, 6, \"outline\", \"purple\")
 end"))
@@ -72,7 +72,7 @@ end"))
 _Match_ each set of examples (left) with the contract that best fits it(right).
 
 @vspace{1ex}
-[cols="<12a,^2a,1,^1a,.<6a",stripes="none",grid="none",frame="none", options="header"]
+[cols="<10a,^2a,1,^1a,>7a",stripes="none",grid="none",frame="none", options="header"]
 |===
 |  Examples|  || |Contract
 | @show{e5}
@@ -82,11 +82,11 @@ _Match_ each set of examples (left) with the contract that best fits it(right).
 | *2* @show{(if *solutions-mode?* "*C*" "")}|| *B* | @show{c3}
 @vspace{1ex}
 | @show{e1}
-| *3* @show{(if *solutions-mode?* "*D*" "")}|| *C* | @show{c2}
+| *3* @show{(if *solutions-mode?* "*E*" "")}|| *C* | @show{c2}
 @vspace{1ex}
 | @show{e3}
 | *4* @show{(if *solutions-mode?* "*B*" "")}|| *D* | @show{c4}
 @vspace{1ex}
 | @show{e4}
-| *5* @show{(if *solutions-mode?* "*D*" "")}||	   |
+| *5* @show{(if *solutions-mode?* "*D*" "")}|| *E* | @show{c1}
 |===
