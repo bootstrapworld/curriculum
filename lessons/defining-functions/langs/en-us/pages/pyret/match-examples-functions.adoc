@@ -1,8 +1,13 @@
-[.landscape]
-
 =  Matching Examples and Function Definitions
 
-Highlight the variables in `gt`.
+
+++++
+<style>
+td:first-child {border-bottom: 1pt solid gray !important;}
+</style>
+++++
+
+Highlight the variables in `gt` and label them with the word "size".
 @do{
 (define e0
    (code #:multi-line #t
@@ -21,7 +26,10 @@ end"))
 e0
 f0
 }
-Using `gt` as a model, match the remaining examples to their corresponding function definitions.
+
+@vspace{2ex}
+
+Highlight  and label the variables in the example lists below. Then, using `gt` as a model, match the examples to their corresponding function definitions.
 
 @do{
 ;apparent misalignment in second piece of each first example is intentional
@@ -30,70 +38,69 @@ Using `gt` as a model, match the remaining examples to their corresponding funct
 (define e1
    (code #:multi-line #t
 "examples:
-  mystery(\"red\") is circle(10, \"solid\", \"red\")
-  mystery(\"orange\") is circle(10, \"solid\", \"orange\")
+  f(\"red\") is circle(6, \"outline\", \"red\")
+  f(\"gray\") is circle(6, \"outline\", \"gray\")
 end"))
 
 (define f1
    (code #:multi-line #t
-"fun mystery(c):
-  circle(10, \"solid\", c)
+"fun f(c):
+  circle(6, \"outline\", c)
 end"))
 
 (define e2
    (code #:multi-line #t
 "examples:
-  mystery(30) is circle(30, \"solid\", \"red\")
-  mystery(10) is circle(10, \"solid\", \"red\")
+  f(3) is circle(3, \"solid\", \"red\")
+  f(9) is circle(9, \"solid\", \"red\")
 end"))
 
 
 (define f2
    (code #:multi-line #t
-"fun mystery(r):
+"fun f(r):
   circle(r, \"outline\", \"red\")
 end"))
 
 (define e3
    (code #:multi-line #t
 "examples:
-  mystery(30) is rectangle(30, 10, \"solid\", \"red\")
-  mystery(10) is rectangle(10, 10, \"solid\", \"red\")
+  f(7) is star(7, \"solid\", \"red\")
+  f(4) is star(4, \"solid\", \"red\")
 end"))
 
 (define f3
    (code #:multi-line #t
-"fun mystery(w):
-  rectangle(w, 10, \"outline\", \"red\")
+"fun f(w):
+  star(s, \"solid\", \"red\")
 end"))
 
 (define e4
    (code #:multi-line #t
 "examples:
-  mystery(30) is rectangle(20, 30, \"solid\", \"red\")
-  mystery(20) is rectangle(20, 20, \"solid\", \"red\")
-  mystery(10) is rectangle(20, 10, \"solid\", \"red\")
+  f(\"outline\") is star(5, \"solid\", \"red\")
+  f(\"solid\") is star(5 \"outline\", \"red\")
 end"))
 
 (define f4
    (code #:multi-line #t
-"fun mystery(h):
-  rectangle(20, h, \"solid\", \"red\")
+"fun f(style):
+  star(5, style, \"red\")
 end"))
 
 
 (define e5
    (code #:multi-line #t
 "examples:
-  mystery(2) is 2 + 2
-  mystery(4) is 4 + 4
-  mystery(5) is 5 + 5
+  f(2) is 2 + 2
+  f(4) is 4 + 4
+  f(5) is 5 + 5
 end"))
 
 
 (define f5
    (code #:multi-line #t
-"fun mystery(num):
+"fun f(num):
   num + num
 end"))
 
@@ -103,7 +110,7 @@ end"))
 }
 
 
-[cols="12,1,1,1,10",options="header",stripes="none",grid="none",frame="none"]
+[cols="14,1,1,1,10",options="header",stripes="none",grid="none",frame="none"]
 |===
 | Examples    |                                        ||       | Definition
 
