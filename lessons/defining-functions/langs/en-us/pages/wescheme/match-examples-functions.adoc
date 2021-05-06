@@ -2,10 +2,35 @@
 
 ++++
 <style>
-tt.pyret, tt.racket { font-size: .8rem; }
-td {padding: 20px 0px !important; }
+td:first-child {border-bottom: 1pt solid gray !important;}
 </style>
 ++++
+
+Highlight the variables in `gt` and label them with the word "size".
+@do{
+
+(define e0
+   (code #:multi-line #t
+"(EXAMPLE (gt 20) (triangle 20 \"solid\" \"green\"))"))
+
+(define e10
+   (code #:multi-line #t
+ (EXAMPLE (gt 45) (triangle 45 \"solid\" \"green\"))"))
+
+(define f0
+   (code #:multi-line #t
+"(gt size) (triangle size \"solid\" \"green\")"))
+}
+
+@show{
+e0
+e10
+f0
+}
+
+@vspace{2ex}
+
+Highlight and label the variables in the example lists below. Then, using `gt` as a model, match the examples to their corresponding function definitions.
 
 @do{
 
@@ -13,95 +38,86 @@ td {padding: 20px 0px !important; }
 ;to make code render aligned once scribbled
 
 (define e1
-   (code #:multi-line #t 
-"(EXAMPLE (mystery \"red\") 
-         (circle 10 \"solid\" \"red\"))
-(EXAMPLE (mystery \"orange\") 
-         (circle 10 \"solid\" \"orange\"))"))
+   (code #:multi-line #t
+"(EXAMPLE (f \"red\")
+   (circle 10 \"solid\" \"red\"))
+(EXAMPLE (f \"orange\")
+   (circle 10 \"solid\" \"orange\"))"))
 
 (define f1
    (code #:multi-line #t
-"(define (mystery c)
+"(define (f c)
   (circle 10 \"solid\" c))"))
 
 (define e2
    (code #:multi-line #t
-"(EXAMPLE (mystery 30) 
-         (circle 30 \"outline\" \"red\"))
-(EXAMPLE (mystery 10) 
-         (circle 10 \"outline\" \"red\"))"))
+"(EXAMPLE (f 30)
+   (circle 30 \"outline\" \"red\"))
+(EXAMPLE (f 10)
+   (circle 10 \"outline\" \"red\"))"))
 
 (define f2
    (code #:multi-line #t
-"(define (mystery r)
+"(define (f r)
   (circle r \"outline\" \"red\"))"))
 
 (define e3
    (code #:multi-line #t
-"(EXAMPLE (mystery 30) 
-         (rectangle 30 10 \"outline\" \"red\"))
-(EXAMPLE (mystery 10) 
-         (rectangle 10 10 \"outline\" \"red\"))"))
+"(EXAMPLE (f 3)
+   (star 3 \"outline\" \"red\"))
+(EXAMPLE (f 8)
+   (star 8 \"outline\" \"red\"))"))
 
 (define f3
    (code #:multi-line #t
-"(define (mystery w)
-  (rectangle w 10 \"outline\" \"red\"))"))
+"(define (f s)
+  (star s \"outline\" \"red\"))"))
 
 (define e4
    (code #:multi-line #t
-"(EXAMPLE (mystery 30) 
-         (rectangle 20 30 \"solid\" \"red\"))
-(EXAMPLE (mystery 20) 
-         (rectangle 20 20 \"solid\" \"red\"))
-(EXAMPLE (mystery 10) 
-         (rectangle 20 10 \"solid\" \"red\"))"))
+"(EXAMPLE (f \"red\")
+   (star 9 \"solid\" \"red\"))
+(EXAMPLE (f \"teal\")
+   (star 9 \"solid\" \"teal\"))
+(EXAMPLE (f \"pink\")
+   (star 9 \"solid\" \"pink\"))"))
 
 (define f4
    (code #:multi-line #t
-"(define (mystery h)
-  (rectangle 20 h \"solid\" \"red\"))"))
+"(define (f c)
+  (star 9 \"solid\" c))"))
 
 (define e5
    (code #:multi-line #t
-"(EXAMPLE (mystery 2) 
-         (+ 2 2))
-(EXAMPLE (mystery 4) 
-         (+ 4 4))
-(EXAMPLE (mystery 5) 
-         (+ 5 5))
-"))
+"(EXAMPLE (f 2)
+   (+ 2 2))
+(EXAMPLE (f 4)
+   (+ 4 4))
+(EXAMPLE (f 5)
+   (+ 5 5))"))
 
 (define f5
    (code #:multi-line #t
-"(define (mystery num)
+"(define (f num)
   (+ num num))"))
-
-(define f6
-   (code #:multi-line #t
-"(define (mystery num)
-  (* num 2))"))
 
 (define f7
    (code #:multi-line #t
-"(define (mystery h)
-  (rectangle 10 h \"solid\" \"red\"))"))
+"(define (f \"solid\")
+  (star 7 \"solid\" \"red\"))"))
 
 (define examples-lst (list e1 e2 e3 e4 e5))
 (define functions-lst (list f1 f2 f3 f4 f5))
-(define permuted-functions-lst (list f2 f6 f3 f5 f7 f1 f4))
+(define permuted-functions-lst (list f2 f3 f5 f1 f4))
 }
 
-Match the EXAMPLEs on the left with the definitions on the right. NOTE: Some definitions may not match any examples!
 
-
-[cols=".^12a,^.^2a,2a,^.^1a,.^8a",options="header",stripes="none",grid="none",frame="none"]
+[cols=".^10a,^.^2a,2a,^.^1a,.^10a",options="header",stripes="none",grid="none",frame="none"]
 |===
 | Examples    |                                        ||       | Definition
 | @show{e2}   |*2*@show{(if *solutions-mode?* "-E" "")}||*A*    | @show{f3}
-| @show{e5}   |*5*@show{(if *solutions-mode?* "-C" "")}||*B*    | @show{f6}
-| @show{e1}   |*1*@show{(if *solutions-mode?* "-F" "")}||*C*    | @show{f5}
-| @show{e4}   |*4*@show{(if *solutions-mode?* "-D" "")}||*D*    | @show{f4}
-| @show{e3}   |*3*@show{(if *solutions-mode?* "-A" "")}||*E*    | @show{f2}
-|             |*5*                                     ||*F*    | @show{f1}
+| @show{e5}   |*5*@show{(if *solutions-mode?* "-C" "")}||*B*    | @show{f5}
+| @show{e1}   |*1*@show{(if *solutions-mode?* "-F" "")}||*C*    | @show{f4}
+| @show{e4}   |*4*@show{(if *solutions-mode?* "-D" "")}||*D*    | @show{f2}
+| @show{e3}   |*3*@show{(if *solutions-mode?* "-A" "")}||*E*    | @show{f1}
 |===
