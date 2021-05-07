@@ -7,37 +7,17 @@
 
 (define *lessons-and-standards*
   '(
+; core
 
-   
-    ("functions-for-character-animation" 
-        "8.F.B"
-        "HSF.LE.B"
-        "MP.2"
-        "MP.4" ; STEMworks
-        "6.EE.B.6" ; STEMworks
-        "1B-AP-10" ; STEMworks
-        "2-AP-11"  ; STEMworks
-        "2-AP-17"  ; STEMworks
-        "2-AP-19"  ; STEMworks
-        "3A-AP-16" ; STEMworks
-        "3B-AP-14" ; STEMworks
-        "3B-AP-21" ; STEMworks
-        "OK.PA.A.1.2")
-    ("coordinates" 
-        "MP.2"
+    ("contracts" 
+        "8.F.A.1"
+        "HSF.IF.A.1"
+        "OK.PA.A.1.1" 
+        "HSF.IF.A.2"
+        "OK.A1.F.1.2"
         )
-    ("inequalities-collision"
-        "MP.3" ; STEMworks
-        "6.EE.B.6" ; STEMworks
-        "HSF.BF.A.1"
-        "HSF.BF.B"
-        "2-AP-11"  ; STEMworks
-        "2-AP-17"  ; STEMworks
-        "2-AP-19"  ; STEMworks
-        "3B-AP-14" ; STEMworks
-        "3B-AP-21" ; STEMworks
-        )
-    ("alg-defining-functions" 
+
+    ("defining-functions" 
         "MP.4" ; STEMworks
         "6.EE.B.6" ; STEMworks
         "HSF.IF.A" ; STEMworks
@@ -56,7 +36,19 @@
         "HSA.SSE.A.1"
         "OK.PA.A.1.1"
         "OK.PA.A.1.2")
-    ("alg-defining-values" 
+        "8.SP.A.1" 
+        "HS-SEP5-3" 
+        "HSF.BF.A.1" 
+        "P4" 
+        "6-8.Algorithms and Programming.Variables" 
+        "9-12.Algorithms and Programming.Modularity" 
+        "6-8.Algorithms and Programming.Modularity"
+        "OK.A1.F.1.3"
+        "OK.A1.A.1.1"
+        "OK.8.AP.PD.02"
+        )
+
+    ("defining-values" 
         "7.EE.B.4"
         "HSA.SSE.A.1"
         "MP.2"
@@ -64,6 +56,26 @@
         "OK.PA.A.3.1"
         "2-AP-14" ; STEMworks
         )
+
+    ("simple-dataypes" 
+        "OK.7.AP.A.01"
+        "OK.8.AP.C.01"
+        ) 
+; math
+   
+   ("combinatorics-permutation"
+        "HSS.CP.B.9"
+        "OK.SP.1.5"
+        )
+   ("combinatorics-combination"
+        "HSS.CP.B.9"
+        "OK.SP.1.5"
+        )
+    
+    ("coordinates" 
+        "MP.2"
+        )
+    
     ("distance-formula" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B" ; STEMworks
@@ -78,11 +90,6 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
-        )
-    ("contracts" 
-        "8.F.A.1"
-        "HSF.IF.A.1"
-        "OK.PA.A.1.1"
         )
     ("error-analysis" 
         "MP.2"
@@ -102,7 +109,7 @@
         "OK.3.AP.PD.03"
         "OK.6.AP.M.01"
         ) 
-    ("alg-function-composition" 
+    ("function-composition" 
         "6.EE.B.6" ; STEMworks
         "HSF.BF.A.1.C"
         "HSF.BF.A" ; STEMworks
@@ -112,6 +119,32 @@
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
+        "3B-AP-21" ; STEMworks
+        )
+    ("functions-for-character-animation" 
+        "8.F.B"
+        "HSF.LE.B"
+        "MP.2"
+        "MP.4" ; STEMworks
+        "6.EE.B.6" ; STEMworks
+        "1B-AP-10" ; STEMworks
+        "2-AP-11"  ; STEMworks
+        "2-AP-17"  ; STEMworks
+        "2-AP-19"  ; STEMworks
+        "3A-AP-16" ; STEMworks
+        "3B-AP-14" ; STEMworks
+        "3B-AP-21" ; STEMworks
+        "OK.PA.A.1.2")
+
+    ("inequalities-collision"
+        "MP.3" ; STEMworks
+        "6.EE.B.6" ; STEMworks
+        "HSF.BF.A.1"
+        "HSF.BF.B"
+        "2-AP-11"  ; STEMworks
+        "2-AP-17"  ; STEMworks
+        "2-AP-19"  ; STEMworks
+        "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         )
     ("inequalities1-simple" 
@@ -153,7 +186,7 @@
         "3A-AP-18" ; STEMworks
         "MP.6"
         )
-    ("alg-numbers-inside-videogames" 
+    ("numbers-inside-videogames" 
         "MP.2"
         )
     ("order-of-operations" 
@@ -250,21 +283,10 @@
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
         )
-    ("combinatorics-permutation"
-        "HSS.CP.B.9"
-        "OK.SP.1.5"
-        )
-   ("combinatorics-combination"
-        "HSS.CP.B.9"
-        "OK.SP.1.5"
-        )
 
     ;data science
     
-    ("ds-applying-functions" 
-        "HSF.IF.A.2"
-        "OK.A1.F.1.2"
-        )
+    
     ("checking-your-work" 
         "MP.3" ; STEMworks
         "HS-SEP5-4" 
@@ -307,25 +329,7 @@
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
         )
-    ("ds-defining-functions" 
-        "6.EE.B.6" ; STEMworks
-        "MP.4" ; STEMworks
-        "8.SP.A.1" 
-        "HS-SEP5-3" 
-        "HSF.IF.A" ; STEMworks
-        "HSF.BF.A.1" 
-        "1B-AP-15" ; STEMworks
-        "2-AP-14" 
-        "2-AP-17" 
-        "2-AP-19" 
-        "P4" 
-        "6-8.Algorithms and Programming.Variables" 
-        "9-12.Algorithms and Programming.Modularity" 
-        "6-8.Algorithms and Programming.Modularity"
-        "OK.A1.F.1.3"
-        "OK.A1.A.1.1"
-        "OK.8.AP.PD.02"
-        )
+    
       ("defining-table-functions" 
         "6.EE.B.6" ; STEMworks
         "HS-SEP5-3" 
@@ -521,10 +525,6 @@
         "P5"
         "OK.8.DA.S.01"
         )
-    ("ds-pyret-intro" 
-        "OK.7.AP.A.01"
-        "OK.8.AP.C.01"
-        ) 
     ("random-samples" 
         "HSS.IC.B.3" 
         "HS-SEP4-3" 
