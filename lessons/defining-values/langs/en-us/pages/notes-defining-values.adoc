@@ -1,35 +1,55 @@
-= Defining Values and Functions
+= Defining Values
+
+Math has *values* like @math{42}, @math{-98.1}, and @math{2/3}. It also has *expressions* like @math{1 \times 3}, @math{\sqrt{16}}, and @math{5 - 2}. Both of these evaluate to results, and typing any of them in as code produces some answer.
+
+@vspace{1ex}
 
 
-- We can define values in our program, giving them names that we can refer to later instead of re-typing the same thing over and over. This works the same way it does in math: @math{x = 5 + 1} defines the symbol @math{x} to be the number @math{6}. 
+However, Math also has *definitions*. These are different from exressions and values in that __they do not produce results__. Instead, they simply create names for values, so that those names can be re-used to make the Math simpler and more efficient.
 
-- In our language, we can define value by writing @show{(sexp->code `(define x (+ 5 1)))}. Here are a few value definitions:
-@ifproglang{wescheme}{
-----
-(define x (+ 5 1))
-(define y (* x 7))
-(define food "Pizza!")
-(define dot (circle y "solid" "red"))
-----	
-}
+@vspace{1ex}
+
+In math, definitions always have both a name and an expression. The name goes on the left and the value-producing expression goes on the right, separated by an equals sign:
+
+@math{x = 4}
+
+@math{y = 9 + x}
+
+@vspace{1ex}
+
+The name is defined to be the result of evaluating the expression. Using the above, examples, we get "x is defined to be 4, and y is defined to be @math{9 + x}". **Important: there is no "answer" to a definition**, and typing in a definition as code will produce no result.
+
+@vspace{1ex}
+
+Notice that __definitions can refer to previous definitions__. In the example above, the definition of `y` refers to `x`. But `x`, on the other hand, _cannot_ refer to `y`. One a value has been defined, it can be used in later expressions.
+
+@vspace{1ex}
 
 @ifproglang{pyret}{
-----
-x = 5 + 1
-y = x * 7
-food = "Pizza!"
-dot = circle(y, "solid", "red")
-----	
+In Pyret, these definitions are written the __exact same way__:
+}
+@ifproglang{wescheme}{
+In WeScheme, these definitions are written a little differently, making it clear that we're talking about definitions:
 }
 
-- We can also define new  *functions* in our language, to make it do things it didn't do before! To do this, we use a step-by-step process called the *Design Recipe*.
+Try typing these definitions into the Definitions Area on the left, clicking "Run", and then _using_ them in the Interactions Area on the right.
 
-** The first step is to write the  *Contract* for the function you want to build. Remember, a Contract must include the Name, Domain and Range for the function!
+@show{(sexp->code '(define x 4))}
 
-** Then we write a *Purpose Statement*, which is a short note that tells us what the function _should do_. Professional programmers work hard to write good purpose statements, so that other people can understand the code they wrote!
+@show{(sexp->code '(define y (+ 9 x)))}
 
-** The second step is to write at least two  *Examples*. These are lines of code that show what the function should do for a _specific_ input. Once we see examples of at least two inputs, we can _find a pattern_ and see which parts are changing and which parts aren't.
+@vspace{1ex}
 
-** Circle the parts that are changing, and label them with a short *variable name* that explains what they do.
+Just like in math, definitions in our programming language can only refer to previously-defined values.
 
-** Finally, the third step is to define the function itself! This is pretty easy after you have some examples to work from: we copy everything that didn't change, and replace the changeable stuff with the variable name!
+@vspace{1ex}
+
+Here are a few more value definitions. Feel free to type them in, and make sure you understand them.
+
+@show{(sexp->code '(define x (+ 5 1)) )}
+
+@show{(sexp->code '(define y (* x 7)) )}
+
+@show{(sexp->code '(define food "Pizza!") )}
+
+@show{(sexp->code '(define dot (circle y "solid" "red")) )}
