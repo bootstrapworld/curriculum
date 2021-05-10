@@ -610,7 +610,9 @@
               ;(printf "changing file from ~s to ~s\n" f f.asc)
               (set! f f.asc))
             ;FIXME: avoid erroring include: if file doesn't exist?
-            (format "include::~a[~a]" f link-text))]))
+            (if *lesson-plan*
+                (format "include::{lessonplandir}~a[~a]" f link-text)
+                (format "include::~a[~a]" f link-text)))]))
 
 (define *lesson-summary-file* #f)
 

@@ -3,7 +3,7 @@
 ++++
 <!--
 
-Visme URLs for tree diagrams: 
+Visme URLs for tree diagrams:
 - https://my.visme.co/view/epd0w63y-permutation-and-combination-2
 - https://my.visme.co/view/8rerg1ee-permutation-and-combination
 -->
@@ -30,7 +30,12 @@ Visme URLs for tree diagrams:
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1Bm5bFbuA9EXq22j77J9D6N0bMC9Q5tE4JfS4lIbJGYk/view, Lesson Slides}
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1tWJSJpUqAcbNJMHiisdRK2Igl5WfhFwoab8vwE_nb9M/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1Bm5bFbuA9EXq22j77J9D6N0bMC9Q5tE4JfS4lIbJGYk/, Lesson Slides}
+}
 
 @material-links
 
@@ -59,7 +64,7 @@ They advertise "an almost-endless number of dining experiences". In fact, Luigi 
 [.lesson-point]
 In Permutations, order matters!
 
-Luigi isn't going to give away free food just because you order four courses - he wants you to order four courses _in every possible order_! In situations where order matters, the set of possible options is called @vocab{permutations}. 
+Luigi isn't going to give away free food just because you order four courses - he wants you to order four courses _in every possible order_! In situations where order matters, the set of possible options is called @vocab{permutations}.
 
 [.lesson-point]
 With or without replacement?
@@ -92,7 +97,7 @@ But what about a 2-course meal? Each of our 1st-course choices has __another tre
 
 @span{.center}@image{images/6-2-course-permute-w-replacement.png}
 
-Every time we get to make a choice, each endpoint in our tree sprouts six more branches. 
+Every time we get to make a choice, each endpoint in our tree sprouts six more branches.
 
 [.lesson-instruction]
 - For practice with tree-diagrams and permutations, complete @printable-exercise{pages/tree-diagrams.adoc}.
@@ -165,7 +170,7 @@ We can visualize our four courses as a four-level tree, with each set of branche
 
 @span{.center}@image{images/4-4-course-permute-wo-replacement.png}
 
-If we start with Chicken, we can order: 
+If we start with Chicken, we can order:
 
 - Chicken, Pizza, Ravioli & Soup
 - Chicken, Pizza, Soup & Ravioli
@@ -174,7 +179,7 @@ If we start with Chicken, we can order:
 - Chicken, Soup, Ravioli & Pizza
 - Chicken, Soup, Pizza & Ravioli
 
-That's six different permutatons that start with Chicken, and we have four different other possible meals to start with. 
+That's six different permutatons that start with Chicken, and we have four different other possible meals to start with.
 
 We can compute the number of permutations-without-replacement by multiplying the number of choices as they shrink after each course: @math{4 \times 3 \times 2 \times 1 = 24}.
 
@@ -187,7 +192,7 @@ This lesson assumes that students are familiar with factorial notation (@math{n!
 
 Reminder: @math{0! = 1} @link{https://www.chilimath.com/lessons/intermediate-algebra/zero-factorial/, Click here for an explanation}.
 
-|=== 
+|===
 
 Now we could try all the permutations in just under a month!
 
@@ -195,7 +200,7 @@ Now we could try all the permutations in just under a month!
 
 In this situation, there might be six items on the menu, but we want to __stop multiplying after the first four items are chosen__.
 
-@math{6 \times 5 \times 4 \times 3 = 360} 
+@math{6 \times 5 \times 4 \times 3 = 360}
 
 We can write this by starting with our factorial notation from before (where every number from 6 to 1 is multiplied), and then "undoing" the @math{2 \times 1}. This takes the form of __dividing__:
 

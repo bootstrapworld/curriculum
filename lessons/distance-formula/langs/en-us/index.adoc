@@ -21,17 +21,17 @@
 |[.materials-links]
 
 @ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1MOaj1dgELlix6xa1bGG2j_cCoMonSmHEW-BKTkgK6rY/, Lesson Slides}
+* @link{https://docs.google.com/presentation/d/1qGx7kJSqxoX-2u8I_MAd-sganrwaXuWlWnUfjR4w5Uk/, Lesson Slides}
 }
 
 @ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1fjIeoQa5rAOxl7j4M_gXoswHPsOeXrSjfJA8xEXEFPM/, Lesson slides} 
+* @link{https://docs.google.com/presentation/d/198S74IxlOVJWS6kll2XJKqGda8AwfV4R89gqiwiTOlA/, Lesson slides}
 }
 @material-links
 
 | Supplemental Resources
-| 
-* @link{https://www.youtube.com/watch?v=i9-ZPGp1AJE&feature=youtu.be, This short video} introduces viewers to the nearly 4000 year old Babylonian tablet known as Plimpton 322, which contains a table of Pythagorean Triples that long predates Pythagoras, as well as to Babylonians use of the base 60 system. 
+|
+* @link{https://www.youtube.com/watch?v=i9-ZPGp1AJE&feature=youtu.be, This short video} introduces viewers to the nearly 4000 year old Babylonian tablet known as Plimpton 322, which contains a table of Pythagorean Triples that long predates Pythagoras, as well as to Babylonians use of the base 60 system.
 
 | Preparation
 |
@@ -82,7 +82,7 @@ _When the coordinates of the characters are really close to each other._
 [.lesson-instruction]
 Scroll down to the `distances-color` definition (look for `; 4. Collisions` in the file). Right now this value is defined to be the __empty string__ `""`. Change this to a color that will show up on your background, and click "Run".
 
-This setting will draw lines from your Player to each of the other characters, and then use those lines as the hypotenuse of right triangles! 
+This setting will draw lines from your Player to each of the other characters, and then use those lines as the hypotenuse of right triangles!
 
 The legs of these triangles show the distance in 1 dimension each (on the x- and y-axis). How is this calculated?
 
@@ -90,9 +90,9 @@ The legs of these triangles show the distance in 1 dimension each (on the x- and
 
 [.lesson-instruction]
 --
-Role-Play: Ask a volunteer to help role-play two characters colliding! 
+Role-Play: Ask a volunteer to help role-play two characters colliding!
 
-- Identify a "number line" on the floor (this can be done just by pointing, or with a visual aid). 
+- Identify a "number line" on the floor (this can be done just by pointing, or with a visual aid).
 - Make sure that you and your volunteer stand with feet as close together as possible, representing the infinitely small point that identifies your center.
 - Raise your arms to form a "T shape", representing the outer edges of the characters.
 - Emphasize that this represents _one dimension_ (perhaps the x- or y-axis).
@@ -126,7 +126,7 @@ You can extend this `line-length` activity into a lesson on absolute value and h
 === Synthesize
 Make absolutely certain that students understand that this function _always returns the positive distance_ between two points on a number line.
 
-What if we have points that are not on the same line? What if instead they differ by both the x- and y-coordinate? 
+What if we have points that are not on the same line? What if instead they differ by both the x- and y-coordinate?
 
 == Distance in 2 Dimensions @duration{30 minutes}
 
@@ -135,7 +135,7 @@ Students extend their understanding of _distance_ from one dimension to two, usi
 
 === Launch
 @span{.right}{@image{images/2d-distance.png}}
-Bring your volunteer (or choose a different one!) back up to the front of the class, and have them squat down on the floor to represent a difference in the y-coordinate between the player and a character. Repeat the role-play activity. 
+Bring your volunteer (or choose a different one!) back up to the front of the class, and have them squat down on the floor to represent a difference in the y-coordinate between the player and a character. Repeat the role-play activity.
 
 [.lesson-instruction]
 Suppose the Player is at (0, 4), and another game character is at (3, 0). Now there is a difference in both dimensions. How could we calculate distance _now?_
@@ -171,7 +171,7 @@ Turn to @printable-exercise{pages/distance-scaffold.adoc} in your student workbo
 Optional: Have students use this @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} to model the distance formula for these coordinates with the Circles of Evaluation. +
 
 [.lesson-instruction]
-Practice computing the distance between two _different_ points, by completing @printable-exercise{pages/distance-from-game-coordinates.adoc}. 
+Practice computing the distance between two _different_ points, by completing @printable-exercise{pages/distance-from-game-coordinates.adoc}.
 
 Optional: Have students complete another pair of these problems using @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
 
@@ -182,18 +182,18 @@ Using @printable-exercise{pages/distance.adoc}, write a function that takes in t
 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly. Finally, students fix the broken `distance` function in their game files. When they click "Run", the right triangles will appear with proper distances for the hypotenuse.
 
-If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg? 
+If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
 
 [.lesson-instruction]
 Take a look at the two examples on @printable-exercise{pages/distance-comparing-code.adoc}. There's a subtle difference between the two examples! What is it? Can you explain why they need to be written differently?
 
 === Common Misconceptions
 It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
-@ifproglang{wescheme}{ `...(sqrt (+ (sqr (line-length x1 y1)) (sqr (line-length x2 y2))))...` 
+@ifproglang{wescheme}{ `...(sqrt (+ (sqr (line-length x1 y1)) (sqr (line-length x2 y2))))...`
 instead of `...(sqrt (+ (sqr (line-length x2 x1)) (sqr (line-length y2 y1))))...` }
-@ifproglang{pyret}{ `...num-sqrt(num-sqr(line-length(x1,y1)) + num-sqr(line-length(x2, y2)))...` 
+@ifproglang{pyret}{ `...num-sqrt(num-sqr(line-length(x1,y1)) + num-sqr(line-length(x2, y2)))...`
 instead of `...num-sqrt(num-sqr(line-length(x2 - x1)) + num-sqr(line-length(y2 - y1)))...` }
 
-In this situation, remind students to look back at what they circled and labeled in the examples step. _This is why we label!_ 
+In this situation, remind students to look back at what they circled and labeled in the examples step. _This is why we label!_
 
 

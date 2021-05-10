@@ -18,7 +18,7 @@
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1N_B0npxLkwbQLGtCXSwDHxQJUHj5dFSislVNBftKZEc/, Lesson Slides}
+* @link{https://docs.google.com/presentation/d/1EZp_E7MUNi6fdYplzMKcwIrRigdPX4N-B1gdtSCSJ5M/, Lesson Slides}
 * @link{https://code.pyret.org/editor#share=1IWPbJK_hsxIGtbUJLz59tLeL_NE1p9FG&v=ebd213d, Table Methods Starter File}
 *  @link{pages/function-cards.adoc, Function Cards - Print and cut!}
 
@@ -44,7 +44,7 @@
 Students get some practice reading function definitions, and in the process they build knowledge that's needed later on in the lesson.
 
 === Launch
-Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1KYBve1W6-RAxICOSbWjVsELt_1ZwHWj7, Table Methods Starter File}, go to the File menu, and click "Save a Copy". 
+Let's see how much you remember about function definitions! Load the @link{https://code.pyret.org/editor#share=1KYBve1W6-RAxICOSbWjVsELt_1ZwHWj7, Table Methods Starter File}, go to the File menu, and click "Save a Copy".
 
 **NOTE: this file will NOT RUN until students have defined `animalA` and `animalB`. This is __by design__.**
 
@@ -132,12 +132,12 @@ Debrief with students. Some guiding questions on filtering:
 Students learn how to _build columns_, using the `.build-column` table method.
 
 === Launch
-Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for `.build-column` in their contracts pages. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function? 
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for `.build-column` in their contracts pages. The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function?
 
 === Investigate
 [.lesson-instruction]
-* Try typing `animals-table.build-column("old", is-old)` into the Interactions Area. 
-* Try typing `animals-table.build-column("sticker", label)` into the Interactions Area. 
+* Try typing `animals-table.build-column("old", is-old)` into the Interactions Area.
+* Try typing `animals-table.build-column("sticker", label)` into the Interactions Area.
 * What do you get? What do you think is going on?
 
 The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.
