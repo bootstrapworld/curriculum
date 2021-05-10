@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-05 # last modified
+LASTMOD=2021-05-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -742,16 +742,21 @@ function doadoc() {
   #echo using $fasc $fhtml
   test -d .cached || mkdir -p .cached
   local cachedirarg=
+  local lessonplandirarg=
   if test $nocache; then
     cachedirarg="-a cachedir="
+    lessonplandirarg="-a lessonplandir=../"
   else
     cachedirarg="-a cachedir=.cached/"
+    lessonplandirarg="-a lessonplandir="
   fi
+  #echo cachedirarg is $cachedirarg
+  #echo lessonplandirarg is $lessonplandirarg
 
   $PROGDIR/adoc-preproc.rkt $f
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
-      $cachedirarg \
+      $cachedirarg $lessonplandirarg \
       -a stylesheet=$PATHWAYROOTDIR../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $fasc -o $fhtml
