@@ -1,11 +1,74 @@
 = Defining Functions
 
-We can *define our own functions*, using a technique called the  *Design Recipe*.
+Functions can be viewed in _multiple representations_. You already know one of them: @vocab{Contracts}, which specify the Name, Domain, and Range of a function. Contracts are a way of thinking of functions as a _mapping_ between one set of data and another. For example, a mapping from Numbers to Strings:
 
--  We use the Design Recipe to help us define functions  *and think through problems clearly*.
+`f {two-colons} Number -> String`
 
-- The first step is to write a *Contract* and *Purpose Statement* for the function, which specify the Name, Domain and Range of the function and give a summary of what it does.
+@vspace{1ex}
 
-- The second step is to *write at least two examples*, which show how the function should work for specific inputs. These examples help us see patterns, and we express those patterns by *circling and labeling* what changes.
+Another way to view functions is with @vocab{Examples}. Examples are essentially input-output tables, showing what the function would do for a specific input:
 
-- The final step is to *define the function*, which generalizes our examples.
+
+[cols="2,1,3", stripes="none", grid="none" frame="none"]
+|===
+
+| [cols="1,1", stripes="none", options="header"]
+!===
+! Input ! Output
+! 1		! 3
+! 2		! 4
+! 3		! 5
+! 4		! 3
+!===
+
+|
+
+| [cols="1,1", stripes="none", options="header"]
+!===
+! How @math{f} is used 	! What @math{f} does
+! f(1)					! @math{1 + 2}
+! f(2)					! @math{2 + 2}
+! f(3)					! @math{3 + 2}
+! f(4)					! @math{4 + 2}
+!===
+
+|===
+
+@vspace{1ex}
+
+In our programming langauge, we focus on the last two columns and write them as code:
+
+@ifproglang{wescheme}{
+```
+(EXAMPLE (f 1) (+ 1 2))
+(EXAMPLE (f 2) (+ 2 2))
+(EXAMPLE (f 3) (+ 3 2))
+(EXAMPLE (f 4) (+ 4 2))
+```
+}
+@ifproglang{pyret}{
+```
+examples:
+  f(1) is 1 + 2
+  f(2) is 2 + 2
+  f(3) is 3 + 2
+  f(4) is 4 + 2
+end
+```
+}
+
+@vspace{1ex}
+
+Finally, we write a formal **function definition** ourselves. The pattern in the Examples becomes _abstract_ (or "general"), replacing the inputs with @vocab{variables}. In the example below, the same definition is written in both math and code:
+
+@math{f(x) = x + 2}
+
+@show{ (sexp->code '(define (f x) (+ x 2)) ) }
+
+@vspace{1ex}
+
+Look for connections between these three representations!
+
+- The function name is always the same, whether looking at the Contract, Examples, or Definition.
+- The number of inputs in the Examples is always the same as the number of types in the Domain, which is always the same as the number of variables in the Definition.
+- The "what the function does" pattern in the Examples is almost the same in the Definition, but with specific inputs replaced by variables.
