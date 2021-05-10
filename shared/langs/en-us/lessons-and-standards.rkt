@@ -35,7 +35,7 @@
         "3B-AP-21" ; STEMworks
         "HSA.SSE.A.1"
         "OK.PA.A.1.1"
-        "OK.PA.A.1.2")
+        "OK.PA.A.1.2"
         "8.SP.A.1" 
         "HS-SEP5-3" 
         "HSF.BF.A.1" 
@@ -63,19 +63,17 @@
         ) 
 ; math
    
-   ("combinatorics-permutation"
+    ("combinatorics-permutation"
         "HSS.CP.B.9"
         "OK.SP.1.5"
         )
-   ("combinatorics-combination"
+    ("combinatorics-combination"
         "HSS.CP.B.9"
         "OK.SP.1.5"
         )
-    
     ("coordinates" 
         "MP.2"
         )
-    
     ("distance-formula" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B" ; STEMworks
@@ -134,7 +132,8 @@
         "3A-AP-16" ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
-        "OK.PA.A.1.2")
+        "OK.PA.A.1.2"
+        )
 
     ("inequalities-collision"
         "MP.3" ; STEMworks
@@ -249,7 +248,8 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
-        "OK.A1.A.3.1")
+        "OK.A1.A.3.1"
+        )
     ("restating-the-problem" 
         "8.F.B"
         "HSF.BF.A.1"
