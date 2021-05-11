@@ -4,7 +4,7 @@
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{ds-applying-functions}
+@prereqs-stds{contracts}
 | Lesson Goals
 | Students will be able to...
 
@@ -81,10 +81,21 @@ Optional: As an extension, have students break into teams and come up with addit
 == Row and Column Lookups @duration{30 minutes}
 
 === Overview
-Students learn how to access individual rows from a table in Pyret, and how to access a particular column from those rows.
+Students learn how to define values in Pyret, and practice by defining Numbers, Strings, and Images. They also learn how to define an individual row from a table in Pyret, and how to access a particular column from that row.
 
 === Launch
 Have students open their saved Animals Starter File (or make a @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, new copy}), and click “Run”.
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
+
+  name = "Flannery"
+  age = 16
+  logo = star(50, "solid", "red")
+
+- What are the names given in each of these? __name, age, and logo__
+- What are the values? __the String "Flannery", the Number 16, and an Image of a solid red star__
+
+We can even define Rows from our tables!
 
 Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method: `animals-table.row-n(0)`
 
@@ -96,11 +107,21 @@ For practice, in the Interactions Area, use the `row-n` method to get the second
 
 What is the Domain of .row-n? What is the Range? Find the contract for this method in your contracts table. A table @vocab{method} is a special kind of function which always operates on a specific table. In our example, we always use .row-n with the animals table, so the number we pass in is always used to grab a particular row from animals-table.
 
+The code below will define the first row from the animals table:
+
+  sasha    = animals-table.row-n(0)
+
 Pyret also has a way for us to get at individual columns of a Row, by using a Row Accessor. Row accessors start with a Row value, followed by square brackets and the name of the column where the value can be found. Here are three examples that use row accessors to get at different columns from the first row in the animals-table:
 
   animals-table.row-n(0)["name"]
   animals-table.row-n(0)["age"]
   animals-table.row-n(0)["fixed"]
+
+And of course, we can use our defined name, substituting it in place of all the redundant code:
+
+  sasha["name"]
+  sasha["age"]
+  sasha["fixed"]
 
 === Investigate
 [.lesson-instruction]
