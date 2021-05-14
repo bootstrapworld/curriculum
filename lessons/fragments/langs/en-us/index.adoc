@@ -1,65 +1,41 @@
 = Fragments for DS
 
-== Introducing Datasets in Pyret @duration{10 minutes}
+== Question Types @duration{10 minutes}
 
 === Overview
-Students open up the Pyret environment (code.pyret.org, or "CPO") and see how tables look in Pyret.
+Students begin to categorize questions, sorting them into "lookup", "compute", and "relate" questions - as well as questions that simply can't be answered based on the data.
 
 === Launch
-The first few lines in the Definitions Area tell Pyret to `import` files from elsewhere, which contain tools we’ll want to use for this course. We’re importing a file called Bootstrap:Data Science, as well as files for working with Google Sheets, tables, and images:
+Once we have a dataset, we can start asking questions! But how do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
 
-  include shared-gdrive("Bootstrap-DataScience-...")
-  include gdrive-sheets
-  include tables
-  include image
+Most questions can be broken down into one of four categories:
 
-After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. (Notice the funny scramble of letters and numbers in that line of code? If you open up the Google Sheet, you'll find that same scramble in the address bar! That scramble is how the Pyret editor knows which spreadsheet to load.) After that, we see the following code:
+- *Lookup questions* -- These can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done! Examples of lookup questions might be “is Sunflower fixed?” or “How many legs does Felix have?”
 
-  # load the 'pets' sheet as a table called animals-table
-  animals-table = load-table: name, species, age, fixed, legs
-    source: pets-sheet.sheet-by-name("pets", true)
-  end
+- *Compute questions* -- These can be answered by computing an answer across a single column. Examples of computing questions might be “how much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
 
-The first line (starting with `#`) is called a _Comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called `animals-table`, which is loaded from the `shelter-sheet` defined above. We also create names for the columns: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
+- *Relate questions* -- These ones take the most work, because they require looking for relationships between multiple columns. Examples of analysis questions might be “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
 
-[.lesson-point]
-Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
-
-[.lesson-instruction]
-Click “Run”, and type `animals-table` into the Interactions Area to see what the table looks like in Pyret. Is it the same table you saw in Google Sheets? What is the same? What is different?
-
-In Data Science, every table is composed of cells, which are arranged in a grid of rows and columns. Most of the cells contain data, but _the first row and first column_ are special. The first row is called the @vocab{header row}, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the @vocab{identifier column}, which contains a unique ID for each row. Often, this will be the name of each individual in the table, or sometimes just an ID number.
-
-Below is an example of a table with one header row and two data rows:
-
-[.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
-|===
-| name | species | sex | age | fixed | legs | pounds | weeks
-| "Sasha" | "cat" | "female" | 1 | false | 4 | 6.5 | 3
-| "Mittens" | "cat" | "female" | 2 | true | 4 | 7.4 | 1
-|===
+- *Can't answer* -- These are questions that just can't be answered based on the available data. We might ask "are cats or dogs better for elderly owners?", but the Animals Dataset doesn't have information that we can use to answer it.
 
 === Investigate
 [.lesson-instruction]
-- How many variables are listed in the header row for the Animals Dataset? What are they called? What is being used for the identifier column in this dataset?
-- Try changing the name of one of the columns, and click "Run". What happens when you print out the table back in the Interactions Area?
-- What happens if you remove a column from the list? Or add an extra one?
+- Come up with examples for each type of question.
+- Look back at the Wonders you wrote on
+  @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are any of these Lookup, Compute, or Relate questions? Circle the question type that’s appropriate. Can you come up with additional examples for each type of question?
 
+=== Synthesize
+Have students share their questions with the class. Allow time for discussion!
 
-After the header, Pyret tables can have any number of @vocab{data rows}.
-Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_, as in the table below:
+Have students reflect on what they learned by writing on @printable-exercise{pages/whats-on-your-mind.adoc}. Some prompts that may be helpful:
 
-[.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
-|===
-| name | species | sex | age | fixed | legs | pounds | weeks
-|===
+* What new vocabulary did you learn?
+* What question was exciting to you, and what data would you need to answer it? Is that data Categorical or Quantitative?
+* What do you hope to learn in the next lesson?
 
-Pyret lets us use many different kinds of data. In the animals table, for example, there are Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false that an animal is fixed). Pyret has the usual arithmetic operators: addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).
+== Additional Exercises:
 
-To identify if an animal is male, we need to know if the value in the `sex` column is _equal_ to the string `"male"`. To sort the table by age, we need to know if one animal’s age is _less than_ another’s and should come before it. To filter the table to show only young animals, we might want to know if an animal’s age is _less than_ 2. Pyret has Boolean operators, too: equals (`==`), less-than (`<`), greater-than (`>`), as well as greater-than-or-equal (`>=`) and less-than-or-equal (`<=`).
-
-Additional Exercises -
-- @opt-printable-exercise{pages/boolean-operators.html, Boolean Operators}
+- @opt-printable-exercise{pages/what-can-you-answer.adoc}
 
 === Overview
 Students learn how to define values in Pyret (note that these definitions work the way variable substitution does in math, as opposed to variable assignment you may have seen in other programming languages).
