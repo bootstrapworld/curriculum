@@ -163,7 +163,7 @@
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
     (if *pyret?* "&#x23; " "&#x3b; ")
-    (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+    (encoded-ans ".recipe_name" funname *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
                  ((if *pyret?*
