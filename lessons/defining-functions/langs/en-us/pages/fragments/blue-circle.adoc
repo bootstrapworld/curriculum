@@ -25,20 +25,20 @@
 #:assess-design-recipe #f
 #:headless? #t
 #:show-funname-contract? #f
-#:domain-list '("(radius {two-colons} Number)")
+#:domain-list '(Number)
 #:show-domains? #f
 #:range "Image"
 #:show-range? #f
 #:purpose "Consumes a radius, and produces a solid blue circle with that radius."
 #:show-purpose? #f
 #:num-examples 2
-#:example-list '(("10" "circle(10, \"solid\", \"blue\")")
-				 ("20" "circle(20, \"solid\", \"blue\")"))
+#:example-list '((10 (circle 10 "solid" "blue"))
+				 (20 (circle 20 "solid" "blue")))
 #:show-examples #f
-#:param-list (list "radius")
+#:param-list '(radius)
 #:show-funname-defn? #f
 #:show-params? #f
-#:body "circle(radius, \"solid\", \"blue\")"
+#:body '(circle radius "solid" "blue")
 #:show-body? #f
 #:grid-lines? #f
 }

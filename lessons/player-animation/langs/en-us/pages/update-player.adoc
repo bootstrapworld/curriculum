@@ -1,5 +1,5 @@
 @design-recipe-exercise{ "update-player" "The player moves up and down by 20 pixels each time. Write a function called @funname, which takes in the player’s y-coordinate and the name of the key pressed (\"up\" or \"down\"), and returns the new y-coordinate."
-  #:domain-list (list "Number" "String")
+  #:domain-list '(Number String)
   #:range "Number"
   #:purpose "Produce new y-coordinate depending on key pressed"
   #:num-examples 4
@@ -8,7 +8,7 @@
                    (320 "down" (- 320 20))
                    (100 "down" (- 100 20)))
   #:show-examples '((#f #f #f) (#f #f #f) (#f #f #f) (#f #f #f))
-  #:param-list (list "y" "key")
+  #:param-list '(y key)
   #:show-params? #f
   #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
   #:show-body? #f
