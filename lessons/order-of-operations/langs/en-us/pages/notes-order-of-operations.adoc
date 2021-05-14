@@ -1,21 +1,15 @@
-= Starting to Program: Order of Operations &amp; Contracts
+= Order of Operations
 
+- The *Editor* is a software program we use to write Code. Our Editor allows us to experiment with Code on the right-hand side, in the  *Interactions Area*. For Code that we want to _keep_, we can put it on the left-hand side in the  *Definitions Area*. Clicking the "Run" button causes the computer to re-read everything in the Definitions Area and erase anything that was typed into the Interactions Area.
 
+@vspace{2ex}
 
-- The *Editor* is a software program we use to write Code. Our Editor allows us to experiment with Code on the right-hand side, in the  *Interactions Area*. For Code that we want to _keep_, we can put it on the left-hand side in the  *Definitions Area*. Clicking the "Run" button causes the computer to read and load everything in the Definitions Area and erase anything that was typed into the Interactions Area.
-
-- Our programming language has many types of  *values*:
-
-** *Numbers* can be integers like `42`, decimals like `0.5`, or even fractions like `1/3`. Clicking on a fraction or a decimal will cause it to switch from one to the other.
-
-** *Strings* are anything in quotes, such as `"Programming is fun!".`  A Number written in quotes is _still a String!_
-
-- Our language also has *functions* you've seen before, such as addition (`+`), subtraction (`-`), multiplication (`*`) and division (`/`).
-
-** *Order of Operations* is incredibly important when programming. To help us organize our math into something we can trust, we can _diagram_ a math expression using the *Circles of Evaluation*. For example, the expression @smath{(/ (- 1 4) (* 10 7))} can be diagrammed as shown below.
+- *Order of Operations* is incredibly important when programming. To help us organize our math into something we can trust, we can _diagram_ a math expression using the *Circles of Evaluation*. For example, the expression @smath{(/ (- 1 4) (* 10 7))} can be diagrammed as shown below.
 [.centered-image]
 @show{(sexp->coe `(/ (- 1 4) (* 10 7)))}
 @span{.clear}{}
+
+@vspace{2ex}
 
 @ifproglang{wescheme}{
 ** To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
@@ -24,11 +18,3 @@
 @ifproglang{pyret}{
 ** To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *function* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
 }
-
-- *Images* are pictures that are produced by functions. The `circle` function, for example, takes a Number as the radius, a String to determine if the circle should be `"solid"` or `"outline"`, and a String to specify the color. You can see the Circle of Evaluation and the Code below:
-[.centered-image]
-@show{(sexp->coe `(circle 50 "solid" "red"))}
-@show{(sexp->code `(circle 50 "solid" "red"))}
-@span{.clear}{}
-
-- There are a _lot_ of functions in this language! We can make many different shapes, manipulate Strings and Numbers, and a whole lot more. Keeping track of what every function takes in and what it gives back is impossible! To help us remember how to use each function, programmers write down something called a  *Contract*. Contracts include the *Name* of the function, what it takes in (called the  *Domain*) and what it gives back (called the  *Range*). You have space at the very back of your workbook to write all the Contracts for functions that you discover!
