@@ -53,6 +53,7 @@
         (string-multiply "&#x5f;" (string-length s)))))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
+  ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (cond [(eq? e 'string=?) "string-equal"]
                            [(eq? e 'sqrt) "num-sqrt"]
@@ -73,6 +74,11 @@
                               (if wrap
                                   (format "(~a)" x)
                                   x))]
+                           [(eq? a 'cond)
+                            (string-append "ask:\n"
+                              (string-join
+                                (map wescheme-cond-clause->pyret (cdr e)) "\n")
+                              "\nend")]
                            [else (format "~a(~a)"
                                          (wescheme->pyret a)
                                          (string-join
@@ -81,6 +87,15 @@
                                            ", "))]))]
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
+
+(define (wescheme-cond-clause->pyret e)
+  (let ([a (car e)])
+    (string-append "| "
+      (if (eq? a 'else) "otherwise"
+          (string-append (wescheme->pyret a)
+            " then"))
+      ": "
+      (wescheme->pyret (cadr e)))))
 
 (define (wescheme->pyret-s s)
   (wescheme->pyret (string->symbol s)))
@@ -148,7 +163,7 @@
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
     (if *pyret?* "&#x23; " "&#x3b; ")
-    (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+    (encoded-ans ".recipe_name" funname *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
                  ((if *pyret?*

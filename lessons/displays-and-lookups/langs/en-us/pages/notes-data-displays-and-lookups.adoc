@@ -11,23 +11,33 @@ Data scientists use data visualizations to gain better insights into their data,
 
 . *What display* is being used, given the variables being explored? If it's a quantitative variable, we might use a histogram or box plot. If it's categorical, we could use a pie or bar chart. If it's two quantitative variables, we probably want a scatter plot.
 
+== Defining Values, Looking up Rows and Columns
+
+We can define names for values in Pyret, the same way we do in math:
+
+```
+name = "Flannery"
+age = 16
+logo = star(50, "solid", "red")
+```
+
 When *looking up a data Row* from a Table, programmers use the `row-n` method. This method takes a single number as its input, which tells the computer which Row we want. _Note: Rows are numbered starting at zero!_
 
 For example:
 ```
-animals-table.row-n(0)  # access the 1st data row
-animals-table.row-n(16) # access the 17th data row
-``` 
+sasha   = animals-table.row-n(0)  # define sasha to be the first row
+mittens = animals-table.row-n(2)  # define sasha to be the third row
+```
 
 When *looking up a column* from a Row, programmers use square brackets and the name of the column they want.
 
 For example:
 ```
-animals-table.row-n(11)["age"]      # look up the age of the animal in the 12st data row
-animals-table.row-n(14)["species"]  # look up the species of the animal in the 15th data row
+animals-table.row-n(0)["age"]  # look up the age in the 1st row
+mittens["species"]             # look up the species in the third row
 ```
 
-Throughout the rest of the workbook, we will sometimes refer to animalA and animalB.  
+Throughout the rest of the workbook, we will sometimes refer to animalA and animalB as rows from the table.
 ```
 animalA = animals-table.row-n(4)
 animalB = animals-table.row-n(13)
