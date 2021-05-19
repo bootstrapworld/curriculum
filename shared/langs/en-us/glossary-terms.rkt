@@ -115,7 +115,7 @@ when it prints out the glossary for a particular unit
     (("predictor function" "predictor") "a function which, given a value from one data set, makes an educated guess at a related value in a different data set")
     ("produce" "to compute a value from an expression")
     ("programming language" "a set of rules for writing code that a computer can evaluate") 
-    ("purpose statement" "a brief description of what a function does")
+    ("purpose statement" "a concise, detailed description of what a function does with its inputs")
     (("quartiles" "quartile") "three values that divide a data set into four equal-sized groups")
     ("quantitative data" "number values for which arithmetic makes sense")
     (("r" "r-value") "a number between −1 and 1 that measures the direction and strength of a linear relationship between two quantitative variables (also known as correlation value)")

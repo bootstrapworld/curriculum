@@ -20,7 +20,7 @@
 | Materials
 |[.materials-links]
 * @link{https://docs.google.com/presentation/d/1axaJ184_1dFnHLkJd3kifWoadd8LWbfUitstW2kpRvo/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1Q7ZiIm0a7US2gZ0mD71E5r3n119Bp8pZ, Functions and Methods Starter File}
+* @link{https://code.pyret.org/editor#share=1Q7ZiIm0a7US2gZ0mD71E5r3n119Bp8pZ, Row Functions Starter File}
 
 @material-links
 
@@ -36,34 +36,21 @@
 @lang-prereq
 |===
 
-== Animal Safari! @duration{15 minutes}
+== Warmup @duration{5 minutes}
 
-=== Overview
-Students search through the animals dataset to find Rows that posesses specific properties, then define them at the top of their Starter File.
+Let's review using `.row-n` and value definitions...
 
-This serves as both a review of "defining values" from @link{../displays-and-lookups}, and a setup for the activities to follow.
-
-== Launch
-How comfortable are you using `.row-n` and value definitions?
-
-Here is some code that defines `dog-row` to be an animal from the animals table whose `species` column is `dog`:
-
-	dog-row = animals-table.row-n(30)
-
-In this case, it happens to be the Row for Healthcliff. Could we have used a different Row?
-
-=== Investigate
-Have students open the @link{https://code.pyret.org/editor#share=1Q7ZiIm0a7US2gZ0mD71E5r3n119Bp8pZ, Functions and Methods Starter File}, and save a copy.
+Open the @link{https://code.pyret.org/editor#share=1Q7ZiIm0a7US2gZ0mD71E5r3n119Bp8pZ, Row Functions Starter File}, save a copy, and click "Run".
 
 [.lesson-instruction]
 --
-Scroll until you see the definition for `fixed-row`. Take 10 minutes to complete as many of these challenges as possible, defining multiple Rows in your Starter File.
+Scroll until you see the definition for `cat-row`. What will you get back if you evaluate `cat-row` in the Interactions Area?
 
-- Define `unfixed-row` to be an animal whose `fixed` column is `false`
-- Define `young-row` to be an animal that is less than or equal to 5 years old
+We've defined a few rows for you already: `young-row`, `fixed-row`, and of course `cat-row`. Take a few minutes to define three more rows on the lines below:
+
 - Define `old-row` to be an animal that is greater than 5 years old
 - Define `dog-row` to be an animal that is a dog
-- Define `cat-row` to be an animal that is a cat
+- Define `unfixed-row` to be an animal whose `fixed` column is `false`
 --
 
 == Computing Images from Rows @duration{20 minutes}
@@ -74,10 +61,10 @@ Primary: Students use different representations of functions to define *Row-base
 Secondary: Students discover _functions that consume other functions_, and compose a scatter plot function with a function they've defined.
 
 === Launch
-The shelter wants to print nametags for all the animals, with their names written in red letters. Turn to @link{../ds-intro/pages/animals-dataset.pdf, The Animals Dataset}. Suppose you had a stack of blank nametags, and you needed to fill them out.
+The shelter wants to print nametags for all the animals, with their names written in red letters. Turn to @link{../ds-intro/pages/animals-dataset.pdf, The Animals Table} in your Student Workbook.
 
 [.lesson-instruction]
-In careful detail, exactly what would you do for each row?
+Suppose you had a stack of blank nametags, and you needed to fill them out. In careful detail, _exactly_ what would you do for each row?
 
 This would be pretty repetitive! Just like making green triangles in @link{../defining-functions/}, __there's got to be a better way!__ In this lesson, we'll learn a step-by-step process that helps us define functions, called the __Design Recipe__.
 
@@ -91,40 +78,34 @@ Step 1: Contract and Purpose
 [.lesson-instruction]
 - Scroll down until you find the Contract for `nametag`.
 - What is the Domain of this function? The Range?
-- The Purpose Statement is a way of describing the function in detail. What is the Purpose Statement for this function?
+- The @vocab{Purpose Statement} is a way of describing the function in detail. What is the Purpose Statement for this function?
 
 [.lesson-point]
 Step 2: Write Examples
 
 [.lesson-instruction]
 - Look at the first two examples. Can you explain what's going on?
-- These examples show us exactly what should be produced for the two Rows representing "Tinkles" and "Nori". But these examples only tell us part of the story! Where does the computer get those names from?
+- These examples show us exactly what should be produced for the two Rows representing "Miaulis" and "Nori". But these examples only tell us part of the story! Where does the computer get those names from?
 - Now look at the _last_ two examples. How are they related to the first?
 - The last two examples are the missing part of the puzzle. We get those names by __looking up the "name" column__ in the Row!
 
-The Contract and Purpose Statement should give us all the information we need to write our Examples correctly. If we have trouble writing our examples, that's a strong hint that we haven't thought through our Contract and Purpose.
-
-[.lesson-instruction]
-We can _also_ use these steps to check our work. Look at the Examples carefully - there is one mistake, where they don't match the Contract and Puropse. Can you find it?
+In the previous lesson, we learned that representations of functions have to match. That means we can use these steps to check our work! Look at the Examples carefully - there is one mistake, where the Examples don't quite match the Contract and Purpose. Can you find it?
 
 [.lesson-point]
 Step 3: Define the Function
 
-Those last examples provide the pattern that allows us to write our definition. Everything stays the same except the row itself. Just as we did for `gt`, we can circle and label the the Rows. In this case, `r` or `animal` would be a pretty good name for the Row that represents an animal in our table:
+Those last two examples provide the _pattern_ that allows us to write our definition. Everything stays the same except the Row itself. Just as we did for `gt`, we can circle and label the the Rows. In this case, `r` or `animal` would be a pretty good name for the Row that represents an animal in our table:
 
 	fun nametag(r): text(r["name"], 30, "red")
 	end
 
-[.lesson-instruction]
-- Try this new function on some of the animals you defined, by typing `nametag(unfixed-row)`, `nametag(dog-row)`, etc.
-
-Have students find find the contract for `image-scatter-plot` in their Contracts pages.
+Have students try this function on some of the animals they defined, by typing `nametag(unfixed-row)`, `nametag(dog-row)`, etc. Then have them find find the contract for `image-scatter-plot` in their Contracts pages.
 
 - How many things are the Domain of this function? What is the type of the first thing? The second? The third?
 - The fourth argument is something you've never seen before! What do you think it means?
 - Type `image-scatter-plot(animals-table, "pounds", "weeks", nametag)` into the Interactions Area.
-- What did you get? Does this help you explain what's going on in the fourth argument?
-- Try changing the color the name. We need to change it in multiple places, to make sure all the representations match!
+- What did you get? Does this help you explain what's the fourth argument is?
+- Try changing the color of the name. Remember: all the representations for the same function need to match! How many places do we need to change the color?
 
 *Note:* the optional lesson @link{../if-expressions/, If Expressions} goes deeper into basic programming constructs, using `image-scatter-plot` to motivate more complex (and exciting!) plots.
 
@@ -134,7 +115,7 @@ Scatter plots allow us to display two dimensions of data: the x-axis and the y-a
 - Copy and paste the entire Design Recipe (Contract and Purpose, Examples, and Definition) for `nametag`, so you have a second copy below the first.
 - Now, change this second copy to a function named `age-dot`, which consumes a Row and draws a solid blue circle using the age as the radius.
 - When you're done, click "Run" and make sure your examples pass!
-- Then type `image-scatter-plot(animals-table, "pounds", "weeks", nametag)` into the Interactions Area.
+- Then type `image-scatter-plot(animals-table, "pounds", "weeks", age-dot)` into the Interactions Area.
 
 === Synthesize
 Each step in the Design Recipe helps us write the step that follows!
@@ -145,7 +126,10 @@ Each step in the Design Recipe helps us write the step that follows!
 
 These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
 
-== Computing Booleans from Rows @duration{20 minutes}
+
+
+
+== Computing Booleans from Rows @duration{15 minutes}
 
 === Overview
 Students use different representations of functions to write functions that produce `true` and `false` by asking questions of Rows.
@@ -154,53 +138,39 @@ Students use different representations of functions to write functions that prod
 Let's try solving some other word problems using the Design Recipe, starting from scratch.
 
 [.lesson-instruction]
-Turn to @link{../ds-intro/pages/animals-dataset.pdf, The Animals Dataset}. For the first 10 rows in the table, and write `true` next to the animals that are dogs. For all the other animals, write `false`
+Turn to @link{../ds-intro/pages/animals-dataset.pdf, The Animals Dataset}. For the first 10 rows in the table, write `true` next to the animals that are cats and `false` next to all the ones which aren't.
 
 === Investigate
 
-[.lesson-instruction]
-Turn to @printable-exercise{pages/design-recipe-1.adoc} in your Student Workbook.
+How could we describe this work to the computer, so that we can define a function and make it do the work for us? Complete the following sentence: **For each Row, I...**
 
 [.lesson-point]
 Step 1: Contract and Purpose
 
-How could we describe this work to the computer, so that we can define a function and make it do the work for us? Complete the following sentence: **For each Row, I...**
 
 Since we're asking if an animal is a cat, we'll call our new function `is-cat`. What type of data is going in? What type is coming out?
 
 [.lesson-instruction]
-In your workbook, fill out the Contract and Purpose Statement for this function. Make sure your Purpose Statement includes all the details you need!
+Turn to @printable-exercise{pages/design-recipe-1.adoc} in your Student Workbook, and fill out the Contract and Purpose Statement for this function. Make sure your Purpose Statement includes all the details you need!
 
 [.lesson-point]
 Step 2:  Examples
 
-Using the `dog-row` and `cat-row` values defined earlier, write two examples for the `is-cat` function in your workbook. You may want to start with what you already know:
+[.lesson-instruction]
+Using the `dog-row` and `cat-row` values defined earlier, write examples for this function that _show their work_. If you're not sure what work to do, look back at the purpose statement!
 
 	examples:
-		is-cat(dog-row) is false
-		is-cat(cat-row) is true
-	end
-
-But how do we get those answers? The Purpose Statement shows us the answer! We looked up the column from our input row, and checked to see if that value was equal to `"cat"`! In, one example the result was `true`, and in the other it was `false`. So in our last two examples, we also expect to have a false expression and a true one.
-
-	examples:
-		is-cat(dog-row) is false
-		is-cat(cat-row) is true
 		is-cat(dog-row) is dog-row["species"] == "cat"
 		is-cat(cat-row) is cat-row["species"] == "cat"
 	end
 
-[.lesson-instruction]
-Make sure you have the completed examples in your workbook.
-
-**Now we can see the pattern!** In the last two examples, everything stays the same except for the row itself. Let's circle and label the the Rows. Now we're ready to define the function:
+**Now we can see the pattern!** Just as with `nametag`, the only thing changing is the Row itself. Once we circle and label the Rows, we're ready to define the function:
 
 	fun is-cat(r): r["species"] == "cat" end
 
 [.lesson-instruction]
 - Scroll further down in the file, until you find the Contract for `is-cat`.
-- Add an example block underneath the Purpose Statement.
-- Add the function definition under the example block.
+- Add the examples from your workbook. We've already provided one to get you started, but it doesn't show the work being done.
 - Try using this function in the Interactions Area with some of your predefined animals!
 - **On @printable-exercise{pages/design-recipe-1.adoc}, practice the Design Recipe by completing `is-young`.** When you've finished, type it into Pyret and try it out!
 
@@ -256,7 +226,6 @@ Have students share back their examples.
 Looking at the rows that include the lookup, _what is changing?_ Circle and label the changing part, then use that pattern to define the function.
 
 	fun lookup-fixed(r): r["fixed"] end
-
 
 [.lesson-instruction]
 - Scroll further down in the file, until you find the Contract for `lookup-fixed`.
