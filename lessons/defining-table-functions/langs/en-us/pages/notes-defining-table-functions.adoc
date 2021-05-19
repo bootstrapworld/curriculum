@@ -1,0 +1,30 @@
+= The Design Recipe
+
+Functions have multiple representations (e.g. - Contracts, Examples, and Definition), and each of these representations shows us a particular part of how the function should behave. By using these representations in a particular order - called the @vocab{Design Recipe} - we can build lots of functions, check our work, and document our thinking!
+
+== Contract and Purpose Statement
+The first step in the Design Recipe is to write the Contract. This means we have to be able to answer three questions:
+
+- What is the *Name* of the function we are defining?
+- What is the *Domain* of that function? (How many inputs, and what types?)
+- What is the *Range* of the function? (What is the type of the output?)
+
+The Purpose Statement is a way of adding detail to the Contract, using plain human language. A good Purpose Statement should always explain
+
+- What the input _represents_. (Is it dollars? Gallons? Miles? Animals?)
+- What the output _represents_. (Pounds? A picture of a triangle?)
+- All the information necessary to go from input to output. (Is the triangle solid? Red?)
+
+It's important to start with this representation, because it's the least detailed. If we can't answer _these_ questions, we shouldn't start writing code!
+
+== Examples
+The second step is work through some concrete examples, making sure that we know exactly what the function will do, given a few sample inputs. Remember: all of this information should be in the Contract and Purpose! That means the first step helps us write the second one, and if it doesn't then it means we should probably go back and see what we left out.
+
+The goal of the Examples step is to _find the pattern_ that represents what the function does. Does it always add 3? Does it always make a blue circle?
+
+Once we see the pattern, we can _circle and label what changes_. The stuff we circle should match the Domain in our Contract, and we should find the label written down in our Purpose Statement. If not, then we should check our work before proceeding.
+
+== Definition
+The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input.
+
+Once again, our previous step is a huge help: we can simply *copy everything that stays the same*, and replace the part that changes with the label we used.
