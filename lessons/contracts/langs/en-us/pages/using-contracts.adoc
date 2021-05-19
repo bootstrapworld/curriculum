@@ -8,22 +8,41 @@ Use the contracts to write expressions to generate images similar to those pictu
 --
 [cols="^.^1,^.^2",stripes="none"]
 |===
-| @centered-image{../images/ellipse-50-150-outline.png} 								| @span{.blankline}{} 						
-| @centered-image{../images/ellipse-150-50-solid.png}									| @span{.blankline}{}
-| What changes with the first number?      												| @span{.blankline}{}
-| What about the shape changes with the second Number?     								| @span{.blankline}{}
-| Write an expression using @show{(sexp->code `ellipse)} to produce a circle. 			| @span{.blankline}{}
+| @centered-image{../images/ellipse-50-150-outline.png}
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(ellipse 50 150 "outline" "black")) "")}}
+
+| @centered-image{../images/ellipse-150-50-solid.png}
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(ellipse 150 50 "solid" "black")) "")}}
+
+| What changes with the first number?
+| @span{.blankline}{@show{(if *solutions-mode?* "width" "")}}
+
+| What about the shape changes with the second Number?
+| @span{.blankline}{@show{(if *solutions-mode?* "width" "")}}
+| Write an expression using @show{(sexp->code `ellipse)} to produce a circle.
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(ellipse 50 50 "solid" "black")) "")}}
 |===
-[.center] 
+[.center]
 --
 @show{(sexp->code `regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
--- 
-[cols="^.^1,^.^2",stripes="none"] 
-|=== 
-| @centered-image{../images/reg-polygon-50-5-solid.png} 								| @span{.blankline}{} 
-| @centered-image{../images/reg-polygon-25-8-outline.png} 								| @span{.blankline}{} 
-| What changes with the first Number?      												| @span{.blankline}{}
-| What about the shape changes with the second Number?     								| @span{.blankline}{}
-| Use @show{(sexp->code `regular-polygon)} to write an expression for a square!			| @span{.blankline}{}
-| How would you describe a *regular polygon* to a friend?     							| @span{.blankline}{}
+--
+[cols="^.^1,^.^2",stripes="none"]
+|===
+| @centered-image{../images/reg-polygon-50-5-solid.png}
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(regular-polygon 50 5 "solid" "black")) "")}}
+
+| @centered-image{../images/reg-polygon-25-8-outline.png}
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(regular-polygon 25 8 "outline" "black")) "")}}
+
+| What changes with the first Number?
+| @span{.blankline}{@show{(if *solutions-mode?* "the length of each side" "")}}
+
+| What about the shape changes with the second Number?
+| @span{.blankline}{@show{(if *solutions-mode?* "the number of sides" "")}}
+
+| Use @show{(sexp->code `regular-polygon)} to write an expression for a square!
+| @span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(regular-polygon 50 4 "solid" "black")) "")}}
+
+| How would you describe a *regular polygon* to a friend?
+| @span{.blankline}{@show{(if *solutions-mode?* "a closed shape made of equal-length straight lines, all joined at the same angle"  "")}}
 |===

@@ -1650,6 +1650,10 @@
                                      (format "fun ~a: ~a end" lhs-c rhs-c)]
                                     [else
                                       (format "~a = ~a" lhs-c rhs-c)]))]
+                           [(and (eq? a 'list) pyret)
+                            (let* ([args (cdr e)]
+                                   [args-c (map (lambda (x) (sexp->arith x #:pyret #t)) args)])
+                              (format "[list: ~a]" (string-join args-c ", ")))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
                             (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
