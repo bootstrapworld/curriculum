@@ -57,63 +57,6 @@
 
 |===
 
-== Introducing Booleans @duration{20 minutes}
-
-=== Launch
-Students should be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-
-Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
-
-- @show{(sexp->coe '(+ 1 2))}
-- @show{(sexp->coe '(- 4 5))}
-- @show{(sexp->coe '(* 8 0))}
-
-Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they mean, what they will evaluate to, and what the code would look like.
-
-- @show{(sexp->coe '(> 1 2))}
-- @show{(sexp->coe '(< 4 5))}
-- @show{(sexp->coe '(= 8 0))}
-
-Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the outputs mean?
-
-Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new data type__, called a @vocab{Boolean}.
-
-=== Investigate
-
-@ifproglang{wescheme}{
-Have students open the @online-exercise{https://www.wescheme.org/openEditor?publicId=EA6R0E97nV, Boolean Starter File}
-}
-@ifproglang{pyret}{
-Have students open the @online-exercise{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File}
-}
-
-[.lesson-instruction]
-@ifproglang{wescheme}{
-- Explore the five functions in this starter file:  `odd?`, `even?`, `less-than-one?`, `continent?`,  `primary-color?`
-- All five functions produce @vocab{Booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
-}
-@ifproglang{pyret}{
-- Explore the five functions in this starter file:  `is-odd`, `is-even`, `is-less-than-one`, `is-continent`,  `is-primary-color`
-- All five functions produce @vocab{Booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
-}
-
-[.lesson-point]
-A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
-
-[.lesson-instruction]
-- Turn to @printable-exercise{boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function produce `true`, and inputs that will make each function `false`.
-
-@ifproglang{pyret}{Here is some additional practice with @link{../../../data-science/lessons/ds-pyret-intro/pages/booleans.html, Booleans}}
-
-=== Synthesize
-- Students will see functions on this page that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
-- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
-
-=== Common Misconceptions
-- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
-
 == Introducing Inequalities @duration{20 minutes}
 
 === Overview
