@@ -3,16 +3,16 @@
 @ifproglang{wescheme}{@centered-image{../images/china-code-wescheme.png}}
 @ifproglang{pyret}{@centered-image{../images/china-code-pyret.png}}
 
-@n This file uses a function we haven’t seen before! What is it? @fitb{15em}{@show{(if *solutions-mode?* "_put-image_" "")}}
+@n This file uses a function we haven’t seen before! What is it? @fitb{15em}{@showsoln{"_put-image_" }}
 
-@n What is its contract? @fitb{30em}{@show{(if *solutions-mode?* "_put-image {two-colons} Image, Number, Number, Image -> Image_" "")}}
+@n What is its contract? @fitb{30em}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}
 
 @n Highlight or circle the structure you see repeated in the code over and over again. +
-(_Hint: it's code that makes an entire shape._)  @show{(if *solutions-mode?* (sexp->code '(star 15 "solid" "yellow")) "")}
+(_Hint: it's code that makes an entire shape._)  @showsoln{(sexp->code '(star 15 "solid" "yellow")) }
 
 @n Define a value for the repeated structure:
 
-@span{.blankline}{@show{(if *solutions-mode?* (sexp->code '(define yellow-star (star 15 "solid" "yellow"))) "")}}
+@span{.blankline}{@showsoln{(sexp->code '(define yellow-star (star 15 "solid" "yellow"))) }}
 
 @n Open the @ifproglang{wescheme}{
 @online-exercise{https://www.wescheme.org/open/editor?publicId=Gc01ngfMN0, Chinese flag starter file.}
@@ -21,7 +21,7 @@
 } and click Run. +
 Then type `china` into the interactions area and click *Enter*.
 
-@n What value is `china` defined as? @fitb{25em}{ @show{(if *solutions-mode?* "_the image of the Chinese flag_" "")}}
+@n What value is `china` defined as? @fitb{25em}{ @showsoln{"_the image of the Chinese flag_" }}
 
 @n *Save a copy* of the file, and simplify the flag code using the value you defined. Click Run, and confirm that you still get the same image as the original.
 

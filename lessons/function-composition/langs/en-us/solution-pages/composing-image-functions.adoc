@@ -2,6 +2,7 @@
 
 You’ll be investigating these functions with your partner:
 
+@ifproglang{pyret}{
 ```
 # text :: String, Number, String -> Image
 # scale :: Number, Image -> Image
@@ -9,16 +10,27 @@ You’ll be investigating these functions with your partner:
 # flip-horizontal :: Image -> Image
 # flip-vertical :: Image -> Image
 ```
+}
+
+@ifproglang{wescheme}{
+```
+; text : String Number String -> Image
+; scale : Number Image -> Image
+; rotate : Number Image -> Image
+; flip-horizontal : Image -> Image
+; flip-vertical : Image -> Image
+```
+}
 
 1) Make an image of your name, in big purple letters. Draw the Circle of Evaluation and write the code that will create this image.
 
 @vspace{3ex}
 
-@show{(sexp->coe '(text "Eric" 24 "purple"))}
+@showsoln{(sexp->coe '(text "Eric" 24 "purple"))}
 
 @vspace{3ex}
 
-@show{(sexp->code '(text "Eric" 24 "purple"))}
+@showsoln{(sexp->code '(text "Eric" 24 "purple"))}
 
 @vspace{3ex}
 
@@ -26,11 +38,11 @@ You’ll be investigating these functions with your partner:
 
 @vspace{3ex}
 
-@show{(sexp->coe '(scale 0.5 (text "Sophie" 24 "purple")))}
+@showsoln{(sexp->coe '(scale 0.5 (text "Sophie" 24 "purple")))}
 
 @vspace{3ex}
 
-@show{(sexp->code '(scale 0.5 (text "Sophie" 24 "purple")))}
+@showsoln{(sexp->code '(scale 0.5 (text "Sophie" 24 "purple")))}
 
 @vspace{3ex}
 

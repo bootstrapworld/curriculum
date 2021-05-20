@@ -40,8 +40,8 @@ You’ll be investigating these two functions with your partner:
 | *Code:*
 
 | @centered-image{../images/purple-rhombus.png}
-| @show{(sexp->coe  'img)}
-| @show{(sexp->code 'img)}
+| @show{(sexp->coe  img)}
+| @show{(sexp->code img)}
 |===
 
 Using the image described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Be sure to test your code in the editor!
@@ -53,37 +53,37 @@ Using the image described above as the *original*, draw the Circles of Evaluatio
 
 *Circle of Evaluation:*
 
-@show{(if *solutions-mode?* (sexp->coe wide) "" )}
-@vspace{25ex}
+@showsoln{(sexp->coe wide)}
+@vspace{15ex}
 
-*Code:* @fitb{44ex}{@show{(if *solutions-mode?* (sexp->code wide) "")}}
+*Code:* @fitb{44ex}{@showsoln{(sexp->code wide) }}
 
 | @n A purple rhombus that is stretched 4 times as tall
 
 *Circle of Evaluation:*
 
-@show{(if *solutions-mode?* (sexp->coe tall) "")}
-@vspace{25ex}
+@showsoln{(sexp->coe tall) }
+@vspace{15ex}
 
-*Code:* @fitb{44ex}{@show{(if *solutions-mode?* (sexp->code tall) "")}}
+*Code:* @fitb{44ex}{@showsoln{(sexp->code tall) }}
 
 
 | @n  The tall rhombus overlayed on the wide rhombus.                                                                               .
 
 *Circle of Evaluation:*
 
-@show{(if *solutions-mode?* (sexp->coe `(overlay ,tall ,wide)) "")}
-@vspace{25ex}
+@showsoln{(sexp->coe `(overlay ,tall ,wide)) }
+@vspace{15ex}
 
-*Code:* @fitb{44ex}{@show{(if *solutions-mode?* (sexp->code `(overlay ,tall ,wide)) "" )}}
+*Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay ,tall ,wide)) }}
 
 | Challenge: Overlay a red version of the original rhombus on top of the last image you constructed.
 
 *Circle of Evaluation:*
 
-@show{(if *solutions-mode?* (sexp->coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) "" )}
-@vspace{25ex}
+@showsoln{(sexp->coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
+@vspace{15ex}
 
-*Code:* @fitb{44ex}{@show{(if *solutions-mode?* (sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) "" )}}
+*Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
 
 |===
