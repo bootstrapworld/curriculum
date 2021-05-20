@@ -1061,6 +1061,11 @@
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
+                           [(string=? directive "showsoln")
+                            (let ([exprs (read-group i directive #:scheme? #t)])
+                              (when *solutions-mode?*
+                                (for ([s (string-to-form exprs)])
+                                  (display (massage-arg s) o))))]
                            [(string=? directive "smath")
                             (let ([exprs (string-to-form (format "(sexp->math '~a)"
                                                  (read-group i directive #:scheme? #t)))])
