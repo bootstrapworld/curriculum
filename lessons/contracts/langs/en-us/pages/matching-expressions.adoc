@@ -8,26 +8,26 @@ div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
 </style>
 ++++
 
-_Match_ the contract (left) with the expression described by the function being used (right). 
+_Match_ the contract (left) with the expression described by the function being used (right).
 
 @vspace{1ex}
 [cols=">13a,^2a,1,^1a,.<13a",stripes="none",grid="none",frame="none", options="header"]
 |===
 |  Contract|  || |Expression
 | make-id +::+ (String, Number) -> Image
-| *1* @show{(if *solutions-mode?* "*B*" "")}|| *A* | @show{(sexp->code `(make-id "Savannah" "Lopez" 32))}
+| *1* @showsoln{"*B*" }|| *A* | @show{(sexp->code `(make-id "Savannah" "Lopez" 32))}
 @vspace{1ex}
 | make-id +::+ (String, Number, String) -> Image
-| *2* @show{(if *solutions-mode?* "*C*" "")}|| *B* | @show{(sexp->code `(make-id "Pilar" 17))}          
+| *2* @showsoln{"*C*" }|| *B* | @show{(sexp->code `(make-id "Pilar" 17))}
 @vspace{1ex}
 | make-id +::+ (String) -> Image
-| *3* @show{(if *solutions-mode?* "*E*" "")}|| *C* | @show{(sexp->code `(make-id "Akemi" 39 "red"))}
+| *3* @showsoln{"*E*" }|| *C* | @show{(sexp->code `(make-id "Akemi" 39 "red"))}
 @vspace{1ex}
 | make-id +::+ (String, String) -> Image
-| *4* @show{(if *solutions-mode?* "*D*" "")}|| *D* | @show{(sexp->code `(make-id "Raïssa" "McCracken"))}
+| *4* @showsoln{"*D*" }|| *D* | @show{(sexp->code `(make-id "Raïssa" "McCracken"))}
 @vspace{1ex}
 | make-id +::+ (String, String, Number) -> Image
-| *5* @show{(if *solutions-mode?* "*A*" "")}|| *E* | @show{(sexp->code `(make-id "von Einsiedel"))}
+| *5* @showsoln{"*A*" }|| *E* | @show{(sexp->code `(make-id "von Einsiedel"))}
 
 |===
 
@@ -37,17 +37,17 @@ _Match_ the contract (left) with the expression described by the function being 
 |===
 |  Contract|  || |Expression
 | is-capital +::+ (String, String) -> Boolean
-| *1* @show{(if *solutions-mode?* "*C*" "")}|| *A* | @show{(sexp->code `(show-pop "Juneau" "AK" 31848))}
+| *1* @showsoln{"*C*" }|| *A* | @show{(sexp->code `(show-pop "Juneau" "AK" 31848))}
 @vspace{1ex}
 | is-capital +::+ (String, String, String) -> Boolean
-| *2* @show{(if *solutions-mode?* "*E*" "")}|| *B* | @show{(sexp->code `(show-pop "San Juan" 395426))}          
+| *2* @showsoln{"*E*" }|| *B* | @show{(sexp->code `(show-pop "San Juan" 395426))}
 @vspace{1ex}
 | show-pop +::+ (String, Number) -> Image
-| *3* @show{(if *solutions-mode?* "*B*" "")}|| *C* | @show{(sexp->code `(is-capital "Accra" "Ghana"))}
+| *3* @showsoln{"*B*" }|| *C* | @show{(sexp->code `(is-capital "Accra" "Ghana"))}
 @vspace{1ex}
 | show-pop +::+ (String, String, Number) -> Image
-| *4* @show{(if *solutions-mode?* "*A*" "")}|| *D* | @show{(sexp->code `(show-pop 3751351 "Oklahoma"))}
+| *4* @showsoln{"*A*" }|| *D* | @show{(sexp->code `(show-pop 3751351 "Oklahoma"))}
 @vspace{1ex}
 | show-pop +::+ (Number, String) -> Number
-| *5* @show{(if *solutions-mode?* "*D*" "")}|| *E* | @show{(sexp->code `(is-capital "Albany" "NY" "USA"))}
+| *5* @showsoln{"*D*" }|| *E* | @show{(sexp->code `(is-capital "Albany" "NY" "USA"))}
 |===
