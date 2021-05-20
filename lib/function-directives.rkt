@@ -72,14 +72,14 @@
                                    [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if wrap
-                                  (format "(~a)" x)
+                                  (format "({zwsp}~a{zwsp})" x)
                                   x))]
                            [(eq? a 'cond)
                             (string-append "ask:\n"
                               (string-join
                                 (map wescheme-cond-clause->pyret (cdr e)) "\n")
                               "\nend")]
-                           [else (format "~a(~a)"
+                           [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a)
                                          (string-join
                                            (map (lambda (e1)
