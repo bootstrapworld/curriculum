@@ -1,41 +1,40 @@
-[.landscape]
 = Function Composition -- scale-xy
 
 ++++
 <style>
-.center, .centered-image {.padding: 0 !important;}
-
 /* We override width:100% to allow circles and vspace
 to share the same line */
 div.circleevalsexp { width: auto;}
+
+.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
+
+.center {padding: 0;}
+
+.draw tr:first-of-type { height: 3in; }
+.draw tr:last-of-type  { height: 6in; }
 </style>
 ++++
-
-You’ll be investigating these two functions with your partner:
-
-[.center]
-@ifproglang{wescheme}{
-```
-; scale/xy : Number Number Image -> Image       							 ; overlay : Image Image -> Image
-```
-}
-
-@ifproglang{pyret}{
-```
-# scale-xy :: Number, Number, Image -> Image      							 # overlay :: Image, Image -> Image
-```
-}
-
-
 @do{
 	(define img '(rhombus 40 90 "solid" "purple"))
 	(define wide `(scale/xy 4 1 ,img))
 	(define tall `(scale/xy 1 4 ,img))
 }
+You’ll be investigating these two functions with your partner:
 
-[cols="^.^1,^.^1,^.^1",stripes="none"]
+[.center]
+@ifproglang{wescheme}{
+```
+; scale/xy : Number Number Image -> Image        ; overlay : Image Image -> Image
+```
+}
+@ifproglang{pyret}{
+```
+# scale-xy :: Number, Number, Image -> Image       # overlay :: Image, Image -> Image
+```
+}
+[.demo, cols="^.^1,^.^2,^.^3",stripes="none",options="header"]
 |===
-| *The Image...*
+| *The Image:*
 | *Circle of Evaluation:*
 | *Code:*
 
@@ -44,9 +43,9 @@ You’ll be investigating these two functions with your partner:
 | @show{(sexp->code img)}
 |===
 
-Using the image described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Be sure to test your code in the editor!
+Starting with the image described above, write the Circles of Evaluation and Code for each exercise below. Be sure to test your code in the editor!
 
-[cols="1a,1a",stripes="none"]
+[.draw, cols="1a,1a",stripes="none"]
 |===
 
 | @n A purple rhombus that is stretched 4 times as wide.
@@ -54,36 +53,36 @@ Using the image described above as the *original*, draw the Circles of Evaluatio
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe wide)}
-@vspace{15ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code wide) }}
+*Code:*
+@showsoln{(sexp->code wide) }
 
 | @n A purple rhombus that is stretched 4 times as tall
 
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe tall) }
-@vspace{15ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code tall) }}
+*Code:*
+@showsoln{(sexp->code tall) }
 
 
-| @n  The tall rhombus overlayed on the wide rhombus.                                                                               .
+| @n  The tall rhombus overlayed on the wide rhombus.
 
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe `(overlay ,tall ,wide)) }
-@vspace{15ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay ,tall ,wide)) }}
+*Code:*
+@showsoln{(sexp->code `(overlay ,tall ,wide)) }
 
-| Challenge: Overlay a red version of the original rhombus on top of the last image you constructed.
+| Challenge: Overlay a red version of the original rhombus onto the last image you made.
 
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
-@vspace{15ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
+*Code:*
+@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
 
 |===

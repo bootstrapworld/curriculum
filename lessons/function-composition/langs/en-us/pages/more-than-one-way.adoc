@@ -3,12 +3,21 @@
 
 ++++
 <style>
-.forceShading { background: #f7f7f8; }
-.blankline {margin-top: 8px; !important;}
+.blankline { margin-top: 8px !important; text-align: left; }
 </style>
 ++++
 
 Read through these 4 expressions and try to picture the images they are composing. If you're not sure what they'll look like, type them into the interactions area of your editor and see if you can figure out how the code connects to the image.
+
+@do{
+  (define wide-rect '(beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black")))
+  (define tall-rect '(scale/xy 1 2 (square 100 "solid" "black")))
+  (define big-sq    '(scale 2 (rectangle 100 100 "solid" "black")))
+  (define plus      '(above (rectangle 100 50 "solid" "black")
+							(above
+								(rectangle 200 100 "solid" "black")
+								(rectangle 100 50 "solid" "black"))))
+}
 
 @ifproglang{pyret}{
 ```
@@ -25,7 +34,7 @@ above(
 @ifproglang{wescheme}{
 ```
 (beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black"))
-(scale-xy 1 2(square 100 "solid" "black"))
+(scale/xy 1 2(square 100 "solid" "black"))
 (scale 2 (rectangle 100 100 "solid" "black"))
 (above
 	(rectangle 100 50 "solid" "black")
@@ -37,35 +46,35 @@ above(
 
 For each image below, identify 2 expressions that could be used to compose it. _The bank of expressions at the top of the page includes one possible option for each image._
 
-[cols="1,^.^6,24", stripes="none"]
+[cols="^.^1,^.^6,24", stripes="none"]
 |===
 a| @n
 a| @image{../images/vert-rect.png}
 a|
 * @show{(sexp->code '(rotate 90 (rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{}
-* @span{.blankline}{}
+* @span{.blankline}{@showsoln{(sexp->code tall-rect)}}
+* @span{.blankline}{__answers may vary__}
 
 a| @n
 a| @image{../images/square.png}
 a|
 * @show{(sexp->code '(above (rectangle 200 100 "solid" "black")(rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{}
-* @span{.blankline}{}
+* @span{.blankline}{@showsoln{(sexp->code big-sq)}}
+* @span{.blankline}{__answers may vary__}
 
 a| @n
 a| @image{../images/hor-rect.png}
 a|
 * @show{(sexp->code '(scale 0.5 (rectangle 600 200 "solid" "black")))}
-* @span{.blankline}{}
-* @span{.blankline}{}
+* @span{.blankline}{@showsoln{(sexp->code wide-rect)}}
+* @span{.blankline}{__answers may vary__}
 
 a| ★
 a|  @image{../images/black-cross.png}
 a|
 * @show{(sexp->code '(overlay (rectangle 100 200 "solid" "black")(rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{}
-* @span{.blankline}{}
+* @span{.blankline}{@showsoln{(sexp->code plus)}}
+* @span{.blankline}{__answers may vary__}
 
 |===
 
