@@ -83,20 +83,33 @@ Step 1: Contract and Purpose
 [.lesson-point]
 Step 2: Write Examples
 
+```
+# nametag :: Row -> Image
+# consumes an animal, and draws the name in 15px red letters
+examples:
+  nametag(cat-row)   is text(        "Miaulis", 20, "red")
+  nametag(young-row) is text(           "Nori", 20, "red")
+
+  nametag(cat-row)   is text(  cat-row["name"], 20, "red")
+  nametag(young-row) is text(young-row["name"], 20, "red")
+end
+```
+
 [.lesson-instruction]
-- Look at the first two examples. Can you explain what's going on?
+- Look at the first two examples. Can you explain what these examples do?
 - These examples show us exactly what should be produced for the two Rows representing "Miaulis" and "Nori". But these examples only tell us part of the story! Where does the computer get those names from?
 - Now look at the _last_ two examples. How are they related to the first?
 - The last two examples are the missing part of the puzzle. We get those names by __looking up the "name" column__ in the Row!
+- In the previous lesson, we learned that representations of functions have to match. Look at the Examples carefully - **there is one mistake**, where the Examples don't quite match the Contract and Purpose. Can you find the bug?
 
-In the previous lesson, we learned that representations of functions have to match. That means we can use these steps to check our work! Look at the Examples carefully - there is one mistake, where the Examples don't quite match the Contract and Purpose. Can you find it?
+Make sure students have changed the `20` to `15`, matching the Purpose Statement.
 
 [.lesson-point]
 Step 3: Define the Function
 
 Those last two examples provide the _pattern_ that allows us to write our definition. Everything stays the same except the Row itself. Just as we did for `gt`, we can circle and label the the Rows. In this case, `r` or `animal` would be a pretty good name for the Row that represents an animal in our table:
 
-	fun nametag(r): text(r["name"], 30, "red")
+	fun nametag(r): text(r["name"], 15, "red")
 	end
 
 Have students try this function on some of the animals they defined, by typing `nametag(unfixed-row)`, `nametag(dog-row)`, etc. Then have them find find the contract for `image-scatter-plot` in their Contracts pages.
@@ -104,7 +117,7 @@ Have students try this function on some of the animals they defined, by typing `
 - How many things are the Domain of this function? What is the type of the first thing? The second? The third?
 - The fourth argument is something you've never seen before! What do you think it means?
 - Type `image-scatter-plot(animals-table, "pounds", "weeks", nametag)` into the Interactions Area.
-- What did you get? Does this help you explain what's the fourth argument is?
+- What did you get? Does this help you explain what the fourth argument is?
 - Try changing the color of the name. Remember: all the representations for the same function need to match! How many places do we need to change the color?
 
 *Note:* the optional lesson @link{../if-expressions/, If Expressions} goes deeper into basic programming constructs, using `image-scatter-plot` to motivate more complex (and exciting!) plots.
@@ -157,14 +170,17 @@ Turn to @printable-exercise{pages/design-recipe-1.adoc} in your Student Workbook
 Step 2:  Examples
 
 [.lesson-instruction]
-Using the `dog-row` and `cat-row` values defined earlier, write examples for this function that _show their work_. If you're not sure what work to do, look back at the purpose statement!
+Using the `dog-row` and `cat-row` values defined earlier, write examples for this function. If you're not sure what work to do, look back at the purpose statement! Ultimately, we want to write examples that _show their work_. But if you get stuck, you can always _start_ with examples that just show the answer.
 
 	examples:
+		is-cat(dog-row) is false
+		is-cat(cat-row) is true
+
 		is-cat(dog-row) is dog-row["species"] == "cat"
 		is-cat(cat-row) is cat-row["species"] == "cat"
 	end
 
-**Now we can see the pattern!** Just as with `nametag`, the only thing changing is the Row itself. Once we circle and label the Rows, we're ready to define the function:
+The last two examples are what we want, because **we can see the pattern!** Just as with `nametag`, the only thing changing is the Row itself. Once we circle and label the Rows, we're ready to define the function:
 
 	fun is-cat(r): r["species"] == "cat" end
 
@@ -206,7 +222,7 @@ Have students share back their Purpose Statements, and discuss.
 
 Since we're looking up the fixed column, we'll call our new function `lookup-fixed`. What type of data was going in? What type was coming out? This gives us the @vocab{Contract}:
 
-	# lookup-fixed :: Row -> Boolean
+	# lookup-fixed {two-colons} Row -> Boolean
 	# consumes an animal, and tells whether it is fixed
 
 [.lesson-instruction]
@@ -215,8 +231,6 @@ Write two examples for this function, using the `fixed-row` and `unfixed-row` th
 Have students share back their examples.
 
 	examples:
-		lookup-fixed(fixed-row)   is true
-		lookup-fixed(unfixed-row) is false
 		lookup-fixed(fixed-row)   is fixed-row["fixed"]
 		lookup-fixed(unfixed-row) is unfixed-row["fixed"]
 	end
