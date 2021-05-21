@@ -3,8 +3,10 @@
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 
-(provide *function-list*
-         get-function-name)
+(provide assess-design-recipe
+         design-recipe-exercise
+         get-function-name
+         contract contracts)
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
@@ -275,7 +277,7 @@
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
           (let ([body-s (expr-to-string body)])
-            (if (> (+ (string-length body-s) 
+            (if (> (+ (string-length body-s)
                       (string-length (expr-to-string funname))
                       (string-length (list-to-string args)))
                     *max-line-length*)
@@ -316,8 +318,8 @@
         (write-large ")")
         ; wrap the `is ...` code in its own element, so that wrapping works properly
 
-        (if (> (+ (string-length body) 
-                  (string-length funname) 
+        (if (> (+ (string-length body)
+                  (string-length funname)
                   (string-length args))
                 *max-line-length*)
             (string-append (write-clear)
@@ -743,8 +745,26 @@
                             #:headless? headless?
                             )))
 
-(define *function-list*
-  `(
-    ("assess-design-recipe" ,assess-design-recipe)
-    ("design-recipe-exercise" ,design-recipe-exercise)
-    ))
+(define (contract funname domain-list range #:single? [single? #t])
+  (string-append
+    (if single? "```\n" "")
+    (if *pyret?* "# " "; ")
+    (if *pyret?* (wescheme->pyret (string->symbol funname)) funname)
+    " "
+    (if *pyret?* "::" ":")
+    " "
+    ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
+    " -> "
+    range
+    (if single? "\n```\n" "")))
+
+(define (contracts . args)
+  (let ([res (string-append "```")])
+    (let loop ([args args])
+      (unless (null? args)
+        (set! res (string-append res
+                    "\n"
+                    (contract (list-ref args 0) (list-ref args 1) (list-ref args 2) #:single? #f)))
+        (loop (list-tail args 3))))
+    (set! res (string-append res "\n```\n"))
+    res))
