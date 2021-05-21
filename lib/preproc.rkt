@@ -1135,13 +1135,18 @@
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
-                           [(assoc directive *function-list*)
-                            => (lambda (f)
+                           [(or (string=? directive "assess-design-recipe")
+                                (string=? directive "design-recipe-exercise"))
+                            (let ([f (cond [(string=? directive "assess-design-recipe")
+                                            assess-design-recipe]
+                                           [(string=? directive "design-recipe-exercise")
+                                            design-recipe-exercise]
+                                           [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])])
                                  (let ([g (read-group i directive)])
                                    (let ([args (string-to-form g)])
                                      (let-values ([(key-list key-vals args)
                                                    (rearrange-args args)])
-                                                 (call-with-input-string (keyword-apply (cadr f) key-list key-vals args)
+                                                 (call-with-input-string (keyword-apply f key-list key-vals args)
                                                    (lambda (i)
                                                      (expand-directives i o)
                                                      ))))))]
