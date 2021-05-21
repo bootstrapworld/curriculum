@@ -1549,7 +1549,8 @@
   (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
 
 (define *common-infix-ops*
- '(+ - * / and or < > = <= >= frac))
+ '(+ - * / and or < > = <= >= <> frac
+     string=? string<? string<=? string>? string>=? string<>?))
 
 (define *pyret-infix-ops*
   (append *common-infix-ops*))
@@ -1746,7 +1747,12 @@
                      [(eq? e 'sqr) "num-sqr"]
                      [(eq? e 'sqrt) "num-sqrt"]
                      [(eq? e 'string-contains?) "string-contains"]
-                     [(eq? e 'string=?) "string-equal"]
+                     [(eq? e 'string=?) "=="]
+                     [(eq? e 'string<?) "<"]
+                     [(eq? e 'string<=?) "\\<="]
+                     [(eq? e 'string>?) ">"]
+                     [(eq? e 'string>=?) ">="]
+                     [(eq? e 'string<>?) "<>"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (format "~a" e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]

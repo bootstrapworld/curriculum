@@ -59,6 +59,13 @@
                            [(eq? e 'sqrt) "num-sqrt"]
                            [(eq? e 'sqr) "num-sqr"]
                            [(eq? e '=) "=="]
+                           [(eq? e '<=) "\\<="]
+                           [(eq? e 'string=?) "=="]
+                           [(eq? e 'string<?) "<"]
+                           [(eq? e 'string<=?) "\\<="]
+                           [(eq? e 'string>?) ">"]
+                           [(eq? e 'string>=?) ">="]
+                           [(eq? e 'string<>?) "<>"]
                            [else
                              (let ([es (format "~a" e)])
                                (cond [(regexp-match #rx"\\?$" es)
@@ -66,7 +73,9 @@
                                      [else es]))])]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
-                     (cond [(memq a '(+ - * / and or < > = <= >=))
+                     (cond [(memq a '(+ - * / and or < > = <= >= <>
+                                        string=? string<? string<=? string>? string>=? string<>?
+                                        ))
                             (let* ([a (wescheme->pyret a)]
                                    [lft (wescheme->pyret (list-ref e 1) #:wrap #t)]
                                    [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
