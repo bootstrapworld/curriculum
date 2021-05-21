@@ -1117,6 +1117,10 @@
                             (cond [*solutions-mode?* (display-begin-span #f o)]
                                   [else (read-group i directive)
                                         (read-space i)])]
+                           [(string=? directive "ifnotsoln")
+                            (cond [(not *solutions-mode?*) (display-begin-span #f o)]
+                                  [else (read-group i directive)
+                                        (read-space i)])]
                            [(string=? directive "ifpathway")
                             (let ([pathways (read-commaed-group i directive)])
                               (cond [(member *pathway* pathways)
