@@ -1,16 +1,17 @@
 = Defining Values - Chinese Flag
 
+@centered-image{../images/china-flag.png}
+
+@n What image do you see repeated in the flag? @fitb{20em}
+
+@n Highlight or circle all instances of the structure that makes the repeated image in the code below. +
+ @showsoln{(sexp->code '(star 15 "solid" "yellow")) }
+
 @ifproglang{wescheme}{@centered-image{../images/china-code-wescheme.png}}
 @ifproglang{pyret}{@centered-image{../images/china-code-pyret.png}}
 
-@n This file uses a function we haven’t seen before! What is it? @fitb{15em}{@showsoln{"_put-image_" }}
 
-@n What is its contract? @fitb{30em}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}
-
-@n Highlight or circle the structure you see repeated in the code over and over again. +
-(_Hint: it's code that makes an entire shape._)  @showsoln{(sexp->code '(star 15 "solid" "yellow")) }
-
-@n Define a value for the repeated structure:
+@n Write the code to define a value for the repeated structure.
 
 @span{.blankline}{@showsoln{(sexp->code '(define yellow-star (star 15 "solid" "yellow"))) }}
 
@@ -20,8 +21,6 @@
 @online-exercise{https://code.pyret.org/editor#share=1zfp_NOVn5MU6CBX7_r6U1zYwseNzZw06&v=04918ef, Chinese flag starter file}
 } and click Run. +
 Then type `china` into the interactions area and click *Enter*.
-
-@n What value is `china` defined as? @fitb{25em}{ @showsoln{"_the image of the Chinese flag_" }}
 
 @n *Save a copy* of the file, and simplify the flag code using the value you defined. Click Run, and confirm that you still get the same image as the original.
 
@@ -34,3 +33,12 @@ Then type `china` into the interactions area and click *Enter*.
 
 @span{.blankline}
 
+@vspace{1ex}
+
+*Challenge:*
+
+- This file uses a function we haven’t seen before! What is it? @fitb{15em}{@showsoln{"_put-image_" }}
+
+- Can you figure out its contract? _Hint: Focus on the last instance of the function._
+
+@span{.blankline}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}
