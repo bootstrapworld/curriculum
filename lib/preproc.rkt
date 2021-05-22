@@ -1755,6 +1755,7 @@
                      [(eq? e 'pi) "num-pi"]
                      [(eq? e 'sqr) "num-sqr"]
                      [(eq? e 'sqrt) "num-sqrt"]
+                     [(eq? e 'random) "num-random"]
                      [(eq? e 'string-contains?) "string-contains"]
                      [(eq? e 'string=?) "=="]
                      [(eq? e 'string<?) "<"]

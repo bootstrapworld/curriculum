@@ -57,9 +57,9 @@
 (define (wescheme->pyret e #:wrap [wrap #f])
   ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
   (cond [(number? e) (format "~a" e)]
-        [(symbol? e) (cond [(eq? e 'string=?) "string-equal"]
-                           [(eq? e 'sqrt) "num-sqrt"]
+        [(symbol? e) (cond [(eq? e 'sqrt) "num-sqrt"]
                            [(eq? e 'sqr) "num-sqr"]
+                           [(eq? e 'random) "num-random"]
                            [(eq? e '=) "=="]
                            [(eq? e '<=) "\\<="]
                            [(eq? e 'string=?) "=="]
@@ -72,6 +72,8 @@
                              (let ([es (format "~a" e)])
                                (cond [(regexp-match #rx"\\?$" es)
                                       (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
+                                     [(regexp-match #rx"/" es)
+                                      (regexp-replace #rx"/" es "-")]
                                      [else es]))])]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])
