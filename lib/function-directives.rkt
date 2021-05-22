@@ -72,8 +72,8 @@
                              (let ([es (format "~a" e)])
                                (cond [(regexp-match #rx"\\?$" es)
                                       (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
-                                     [(regexp-match #rx"/" es)
-                                      (regexp-replace #rx"/" es "-")]
+                                     [(regexp-match #rx"([a-z])/([a-z])" es)
+                                      (regexp-replace #rx"([a-z])/([a-z])" es "\\1-\\2")]
                                      [else es]))])]
         [(string? e) (format "~s" e)]
         [(list? e) (let ([a (car e)])

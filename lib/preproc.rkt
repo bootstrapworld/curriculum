@@ -1764,7 +1764,12 @@
                      [(eq? e 'string>=?) ">="]
                      [(eq? e 'string<>?) "<>"]
                      [(memq e '(* -)) (format "{zwsp}~a" e)]
-                     [else (format "~a" e)])]
+                     [else (let ([es (format "~a" e)])
+                               (cond [(regexp-match #rx"\\?$" es)
+                                      (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
+                                     [(regexp-match #rx"([a-z])/([a-z])" es)
+                                      (regexp-replace #rx"([a-z])/([a-z])" es "\\1-\\2")]
+                                     [else es]))])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
                          [(eq? e 'frac) "/"]
