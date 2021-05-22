@@ -14,7 +14,7 @@ definitions, and the Design Recipe.}
 | Students define functions based on a problem statement.
 
 | Materials
-|[.materials-links] 
+|[.materials-links]
 - Editing environment (Pyret Editor)
 - Design Recipe Sign
 
@@ -39,7 +39,7 @@ As an advanced Bootstrap module, Reactive pretty much _requires_ that students b
 Welcome back to Bootstrap! In Bootstrap:Algebra, you used a @vocab{programming language} called Racket to make your video games. We chose this language because it behaves like algebra, but there are many different languages you could use to make video games. In Bootstrap:Reactive, you’re going to learn a new language, called Pyret. Pyret has many of the features of Racket, but with a different @vocab{syntax} that looks more like popular languages such as Python. This unit will help you make the switch to Pyret syntax in no time!
 
 
-Open your workbook to @printable-exercise{pages/review-1.adoc}. Here we have a table, with examples of value definitions in Racket and Pyret. On the left-hand column, we’ve defined values in Racket, and on the right we have the same values defined in Pyret. For instance, the first line on the left-hand side says `(define AGE 14)`. Directly to the right, we have the Pyret @vocab{syntax}: `AGE = 14`, which does the same thing: defines a variable called AGE, which has a value of 14. 
+Open your workbook to @printable-exercise{pages/review-1.adoc}. Here we have a table, with examples of value definitions in Racket and Pyret. On the left-hand column, we’ve defined values in Racket, and on the right we have the same values defined in Pyret. For instance, the first line on the left-hand side says `(define AGE 14)`. Directly to the right, we have the Pyret @vocab{syntax}: `AGE = 14`, which does the same thing: defines a variable called AGE, which has a value of 14.
 
 === Investigate
 [.lesson-instruction]
@@ -100,10 +100,8 @@ How is this similar to what you've seen before? How is it different?
 === Launch
 It’s important to keep track of how functions work, and Bootstrap:Algebra introduced the idea of @vocab{Contracts}. The contract for the star function is shown below.
 
-----
-# star :: Number, String, String -> Image
-----
- 
+@show{ (contract "star" '("Number" "String" "String") "Image" )}
+
 Contracts summarize three pieces of essential information about a function:
 
 - The @vocab{Name} of the function: in this case, `star`.
@@ -111,7 +109,7 @@ Contracts summarize three pieces of essential information about a function:
 - The @vocab{Range} of this function, which is the type of data that the function produces: In this case, an Image!
 
 [.lesson-point]
-Every contract has three parts: Name, Domain and Range! 
+Every contract has three parts: Name, Domain and Range!
 
 A contract is a note we write to ourselves about how to use the function. Just as in Bootstrap:Algebra, it will be helpful to keep track of the contracts for each function you learn about. The last page in your workbook has a table labeled "`Contracts`", where you can (and should!) copy down each contract as you learn it. Contracts in Pyret are just as important as they are in Racket, and are written the same way. You write contracts as comments: pieces of text for humans only, which are ignored by the computer. In Racket we used a ; (semicolon) before Contracts, but in Pyret, just put a `#` (pound sign, or octothorpe) before a line of text to turn it into a comment!
 
@@ -119,11 +117,10 @@ A contract is a note we write to ourselves about how to use the function. Just a
 
 [.lesson-instruction]
 --
-The Contract for `+` is shown below.  
+The Contract for `+` is shown below.
 
-----
-#  +  :: Number, Number -> Number
-----
+@show{ (contract "+" '("Number" "Number") "Number") }
+
 Write down the Contracts for `*`, `-`, `/` and `num-sqrt` in your
 Contracts page. (You know `num-sqrt` as the `sqrt` function in
 Racket!)
@@ -152,7 +149,7 @@ Now you know how to define values in Pyret, and you know how to use Contracts fo
 [.lesson-instruction]
 Turn to @printable-exercise{pages/fast-funs-double.adoc} in your workbook.
 
-Here we have a function definition:  
+Here we have a function definition:
 
 ----
 # double :: Number -> Number
@@ -160,12 +157,12 @@ examples:
     double(5) is 2 * 5
     double(7) is 2 * 7
 end
- 
+
 fun double(n):
     2 * n
 end
 ----
- 
+
 [.lesson-point]
 Step 1: Write the Contract and Purpose Statement
 
@@ -183,7 +180,7 @@ Review the importance of definitions for students (Defining values helps cut dow
 [.lesson-point]
 Step 2: Give Examples
 
-In Bootstrap:Algebra you wrote EXAMPLES for every function, to show how the function could be used with some inputs. Those examples also worked to test your function, and would give you error messages if the expected result didn’t match the result produced by the function body. Pyret has the same thing, but written differently. Here are our examples for the function double:  
+In Bootstrap:Algebra you wrote EXAMPLES for every function, to show how the function could be used with some inputs. Those examples also worked to test your function, and would give you error messages if the expected result didn’t match the result produced by the function body. Pyret has the same thing, but written differently. Here are our examples for the function double:
 
 ----
 examples:
@@ -191,7 +188,7 @@ examples:
       double(7) is 2 * 7
 end
 ----
- 
+
 The key words here are `examples` and `is`. Pyret knows that anything within the `examples:` and `end` lines are your examples, and just like in Racket, we start with the name of the function and some input(s), followed by the code we expect to get back. This time, we have the word `is` between them, to say: _...test..._ is equivalent to _...result..._ Once you’ve defined the function itself, Pyret will automatically check your examples to make sure your results match the function body. If they don’t, you’ll get an error message, just like in Bootstrap:Algebra.
 
 Make sure students are writing Pyret code for the results of their `examples`. double(5) is 10, while technically correct, doesn’t show us the work and thought process behind the code, and makes it much harder to define the function in the next step. Writing examples is akin to "showing your work" in math class: You want to see how students arrived at their answers, not just that they have an answer. It is also much easier to debug a function using the design recipe, because you can check each section individually for errors. Writing examples for code is also called "unit testing," something professional programmers do all the time.
@@ -209,14 +206,14 @@ The only thing that changes is the Number being given to `triple` and multiplied
 
 [.lesson-point]
 Step 3:
-Define the function  
+Define the function
 
 ----
 fun double(n):
     2 * n
 end
 ----
- 
+
 Like writing examples, defining the function is just a bit different in Pyret. To start, we write the word `fun` instead of `define`. Then it’s just like you remember from Bootstrap:Algebra. Copy everything from your `examples` that doesn’t change (except for the word `is`!), and replace the changeable thing with the variable you picked. Don’t forget a colon ( `:` ) after your function header, and the word `end` at the end of the function body, to let the computer know you’re finished defining that function!
 
 [.lesson-instruction]
@@ -242,12 +239,11 @@ Students will make syntax errors when learning any new language. This workbook p
 === Overview
 
 === Launch
-You’ll be working with a lot of animations in Bootstrap:Reactive. In Bootstrap:Algebra, the way your game characters moved and where they were placed on the screen was mostly determined for you. In this course, you have all the control over your animation. To start, let’s practice making static scenes: images with no animation. Do you remember the put-image function from Racket? Pyret has the same function, and its contract should look familiar:  
+You’ll be working with a lot of animations in Bootstrap:Reactive. In Bootstrap:Algebra, the way your game characters moved and where they were placed on the screen was mostly determined for you. In this course, you have all the control over your animation. To start, let’s practice making static scenes: images with no animation. Do you remember the put-image function from Racket? Pyret has the same function, and its contract should look familiar:
 
-----
-# put-image : Image, Number, Number, Image -> Image
-----
- 
+
+@show{ (contract "put-image" '("Image" "Number" "Number" "Image") "Image") }
+
 [.lesson-instruction]
 --
 - Open the Take a hike! starter file.
@@ -259,16 +255,14 @@ You’ll be working with a lot of animations in Bootstrap:Reactive. In Bootstrap
 
 This piece of code uses the `put-image` function to place the image of the boat onto the `BACKGROUND` at the coordinates 750, 200. To find out the best place to put the image of the boat, first we had to find out how large the background image was. Two functions help with this:
 
-----
-# image-width :: Image -> Number
-----
- 
-which returns the width of the given image (in pixels), and  
+@show{ (contract "image-width" '("Image") "Number") }
 
-----
-# image-height :: Image -> Number
-----
- 
+
+which returns the width of the given image (in pixels), and
+
+@show{ (contract "image-height" '("Image") "Number") }
+
+
 which returns the height of the given image.
 
 [.lesson-instruction]
@@ -290,16 +284,15 @@ Now it’s time to create your own scene. To start,
 - Get some perspective: scale the image of the hiker higher on the mountain, so they appear smaller than the other hiker.
 - Find your own images to add to the scene using the `image-url` function. (This works just like the `image-url` function from Bootstrap:Algebra.
 
-----
-# image-url :: String -> Image
-----
---
+@show{ (contract "image-url" '("String") "Image") }
 
 *Hint:* Recall the image manipulation functions you used in Bootstrap:Algebra. These may come in handy!
 
 
-- `# scale :: Number, Image -> Image`
-- `# rotate :: Number, Image -> Image`
+@show{ (contracts
+"scale"  '("Number" "Image") "Image"
+"rotate" '("Number" "Image") "Image"
+)}
 
 In the upcoming lessons, students will be creating their own scenes from scratch, and then animating them. This activity is meant to familiarize students with the put-image function, and have them practice placing, moving, and scaling images onto a background. Once students have copied the necessary contracts into their workbook, this activity could be assigned for homework, or completed as an in-class activity.
 

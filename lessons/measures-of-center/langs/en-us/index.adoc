@@ -73,9 +73,7 @@ The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, o
 
 Pyret has a way for us to compute the mean of any quantitative column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
-----
-# mean :: (t :: Table, col :: String) -> Number
-----
+@show{ (contract "mean" '("Table" "String") "Number" )}
 
 [.lesson-instruction]
 What is its name? Domain? Range?
@@ -150,9 +148,7 @@ Mode is rarely used to summarize quantitative data. It is very common as a summa
 
 In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
-----
-# modes :: (t :: Table, col :: String) -> List<Number>
-----
+@show{ (contract "modes" '("Table" "String") "List<Number>" )}
 
 === Investigate
 [.lesson-instruction]

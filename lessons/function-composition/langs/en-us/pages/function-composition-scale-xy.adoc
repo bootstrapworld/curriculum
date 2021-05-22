@@ -5,6 +5,8 @@
 /* We override width:100% to allow circles and vspace
 to share the same line */
 div.circleevalsexp { width: auto;}
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
 
 .demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
 
@@ -21,17 +23,12 @@ div.circleevalsexp { width: auto;}
 }
 You’ll be investigating these two functions with your partner:
 
-[.center]
-@ifproglang{wescheme}{
-```
-; scale/xy : Number Number Image -> Image        ; overlay : Image Image -> Image
-```
-}
-@ifproglang{pyret}{
-```
-# scale-xy :: Number, Number, Image -> Image       # overlay :: Image, Image -> Image
-```
-}
+[.contracts, cols="5a, 4a", frame="none", grid="none"]
+|===
+| @show{ (contract "scale/xy" '("Number" "Number" "Image") "Image" )}
+| @show{ (contract "overlay" '("Image" "Images") "Image" )}
+|===
+
 [.demo, cols="^.^1,^.^2,^.^3",stripes="none",options="header"]
 |===
 | *The Image:*

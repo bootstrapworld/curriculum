@@ -5,30 +5,29 @@
 /* We override width:100% to allow circles and vspace
 to share the same line */
 div.circleevalsexp { width: auto;}
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
 </style>
 ++++
 
 You’ll be investigating these functions with your partner:
 
-@ifproglang{wescheme}{
-```
-; text :: String, Number, String -> image    ; frame :: Image -> Image
-; flip-horizontal :: Image -> Image          ; above :: Image, Image -> Image
-; flip-vertical :: Image -> Image            ; beside :: Image, Image -> Image
-```
-}
+[.contracts, cols="5a, 4a", frame="none", grid="none"]
+|===
+| @show{ (contracts
+"text" '("String" "Number" "String") "Image"
+"flip-horizontal" '("Image") "Image"
+"flip-vertical" '("Image") "Image"
+)}
 
-@ifproglang{pyret}{
-```
-# text :: String, Number, String -> Image   # frame :: Image -> Image
-# flip-horizontal :: Image -> Image         # above :: Image, Image -> Image
-# flip-vertical :: Image -> Image           # beside :: Image, Image -> Image
-```
-}
+| @show{ (contracts
+"frame" '("Image") "Image"
+"above" '("Image" "Image") "Image"
+"beside" '("Image" "Image") "Image"
+)}
+|===
 
-@do{
-	(define name-sexp '(text "X" 30 "red"))
-}
+@do{ (define name-sexp '(text "X" 30 "red")) }
 
 @n In the editor, write the code to make an image of your name in big letters in a color of your choosing using `text`.  Then draw the Circle of Evaluation and write the Code that will create the image.
 
