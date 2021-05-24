@@ -55,7 +55,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 This activity introduces the notion of @vocab{Contracts}, which are a simple notation for keeping track of the set all of possible inputs and outputs for a function. They are also closely related to the concept of a _function machine_, which is introduced as well. __Note: Contracts are based on the same notation found in Algebra!__
 
 === Launch
-@ifproglang{wescheme}{ 
+@ifproglang{wescheme}{
 Students should open @link{https://www.wescheme.org, WeScheme} in their browser, and click "Log In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Start a New Program".
 }
 
@@ -67,9 +67,9 @@ Students should open @link{https://code.Pyret.org, code.pyret.org (CPO) } in the
 For each input to a function, there is exactly one output
 
 @span{.right}{ @image{images/VerticalLineTest.png, "Source: Wikipedia", 250} }
-Functions are a lot like machines: values go in, something happens, and new values come out. Let's start with an example of a function we all know: adding two numbers! Addition is like a machine that takes in pairs of numbers and produces a sum. 
+Functions are a lot like machines: values go in, something happens, and new values come out. Let's start with an example of a function we all know: adding two numbers! Addition is like a machine that takes in pairs of numbers and produces a sum.
 
-Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output__ for the same input. Like any good machine, function machines must be *reliable*. 
+Consider the graphs on the right: for every input on the x-axis, a function will produce a _single_ output. If we draw a vertical line and it hits the graph more than once, it means there is __more than one output__ for the same input. Like any good machine, function machines must be *reliable*.
 
 Whenever we use any machine, we always think about what goes in and what comes out. A coffee maker takes in coffee beans and water, and produces coffee. A toaster takes in bread and produces toast. We don't have to know exactly how coffee makers or toasters work in order to _use_ them. All we need to know is what type of thing goes in and what type of thing should come out!
 
@@ -84,7 +84,7 @@ We use something called a @vocab{Contract} to keep track of what goes in and out
 [.lesson-point]
 The Contract for a function has three parts: the Name of the function, the @vocab{Domain}, and the @vocab{Range}
 
-- The Name is simply how we refer to the function: 
+- The Name is simply how we refer to the function:
 @ifproglang{wescheme}{`*`, `+`, `sqrt`, `sqr` etc.}
 @ifproglang{pyret}{`num-sqrt`, `num-sqr`, etc.}
 - The @vocab{Domain} tells us what the function "takes in", or _consumes_. These are also known as the _arguments_ to the function.
@@ -94,7 +94,7 @@ Memorizing contracts is hard, and why memorize when we can just keep a log of th
 
 [.lesson-instruction]
 - What does Multiplication need as an input? What does it produce?
-- What inputs does the Square Root function consume? What does it produce? 
+- What inputs does the Square Root function consume? What does it produce?
 - When we Square something, what does the Square function consume and produce?
 @ifproglang{wescheme}{
 - Write the contracts for `+`, `-`, `*`, `/`, `sqr`, and `sqrt` into the Contracts page.
@@ -138,9 +138,7 @@ Contracts are general. Expressions are specific.
 *Optional:* Have students make a @opt-printable-exercise{pages/frayer-model.pdf, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words.
 
 === Synthesize
-- What is wrong with the contract 
-@ifproglang{wescheme}{`; sqr : 4 -> 16`?}
-@ifproglang{pyret}{`# num-sqr : 4 -> 16`?}
+- What is wrong with the contract @show{(contract "sqr", ("4") "16")} ?
 - What is the difference between a value like `17` and a type like `Number`?
 
 == Exploring Image Functions @duration{25 minutes}
@@ -186,7 +184,7 @@ Possible responses:
 - We know the Domain consists of a Number and two Strings
 
 [.lesson-instruction]
-- But what about the @vocab{Range}? What do you think this expression will evaluate to? 
+- But what about the @vocab{Range}? What do you think this expression will evaluate to?
 - Convert this Circle to code and try out!
 - What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
 - What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
@@ -244,7 +242,7 @@ This activity digs deeper into Contracts, and has students create their own Cont
 
 === Launch
 
-`star` has three elements in its Domain: A Number, a String, and another String.  
+`star` has three elements in its Domain: A Number, a String, and another String.
 
 - *What do these elements represent?*
 _The Number is the radius, the first String is the style (either `outline` or `solid`), the second String is the color._
