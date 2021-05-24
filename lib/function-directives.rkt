@@ -299,7 +299,7 @@
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
-  (when (pair? body)
+  (unless (string? body)
     (set! body (wescheme->pyret body)))
   (when (pair? funname)
     (set! args (cdr funname))
@@ -747,7 +747,8 @@
                             #:headless? headless?
                             )))
 
-(define (contract funname domain-list range #:single? [single? #t])
+(define (contract funname domain-list range [purpose #f] #:single? [single? #t])
+  ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (string-append
     (if single? "```\n" "")
     (if *pyret?* "# " "; ")
@@ -758,15 +759,20 @@
     ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
     " -> "
     range
+    (if purpose
+        (string-append "\n"
+          (if *pyret?* "# " "; ")
+          purpose)
+        "")
     (if single? "\n```\n" "")))
 
 (define (contracts . args)
   (let ([res (string-append "```")])
     (let loop ([args args])
       (unless (null? args)
-        (set! res (string-append res
-                    "\n"
-                    (contract (list-ref args 0) (list-ref args 1) (list-ref args 2) #:single? #f)))
-        (loop (list-tail args 3))))
+        (set! res (string-append res "\n"
+                    (keyword-apply contract '(#:single?) '(#f)
+                                   (car args))))
+        (loop (cdr args))))
     (set! res (string-append res "\n```\n"))
     res))
