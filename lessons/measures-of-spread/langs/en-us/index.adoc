@@ -58,10 +58,14 @@ Besides looking at the median as center, and the spread between Q1 and Q3, we al
 
 We can use @vocab{box plots} to visualize all of this information. These plots are constructed using *just five numbers*, which makes them convenient ways to display both center and spread of a data set in a clear and simple way. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
-----
-# box-plot :: (t :: Table, column :: String) -> Image
-box-plot(animals-table, "pounds")
-----
+@show{
+(contract
+  "box-plot" '("Table", "String") "Image"
+  "Consumes a table and the name of the column to plot, and produces a box plot"
+)
+
+(sexp->code '(box-plot animals-table "pounds"))
+}
 
 [.lesson-point]
 Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
@@ -132,11 +136,11 @@ Histograms, box plots, and measures of center and spread are all different ways 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
-|
+a|
 @span{.title}{Modified Box Plots}
 More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
 
-`# modified-box-plot :: (t :: Table, column :: String) -> Image`
+@show{(contract "modified-box-plot" '("Table", "String") "Image" )}
 
 |===
 

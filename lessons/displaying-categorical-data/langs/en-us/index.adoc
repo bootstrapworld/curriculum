@@ -44,10 +44,9 @@ Students extend their understanding of Contracts and function application, learn
 
 === Launch
 Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image? The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}, and an example of using it:
-----
-# pie-chart :: (t :: Table, col :: String) -> Image
-pie-chart(animals-table, "legs")
-----
+
+@show{(contract "pie-chart" '("Table" "String") "Image" )}
+`pie-chart(animals-table, "legs")`
 
 [.lesson-instruction]
 - What is the Name of this function?
@@ -65,9 +64,8 @@ The function `pie-chart` consumes a Table of data, along with the _name of a *ca
 === Investigate
 Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
 
-----
-# bar-chart :: (t :: Table, col :: String) -> Image
-----
+@show{(contract "bar-chart" '("Table" "String") "Image" )}
+
 
 [.lesson-instruction]
 - Which column of the animals table tells us how many legs an animal has?
@@ -110,7 +108,7 @@ You will have many opportunities to use these concepts in this course, by writin
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
-|
+a|
 @span{.title}{Extension Activity}
 
 Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
@@ -121,9 +119,12 @@ What did we get back? `count` is a function that consumes a table and the name o
 
 - Use the `count` function to make a table showing the number of animals of each `sex` from the shelter.
 
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have another function:
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have the contract for another function:
 
-`# pie-chart-summarized :: (t :: Table, label :: String, data :: String) -> Image`
+@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
+
+And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
+
 `pie-chart-summarized(count(animals-table,"species"), "value", "count")`
 |===
 

@@ -2,11 +2,10 @@
 
 A “helpful” Data Scientist gives you access to the following functions:
 
-----
-# fixed-cats :: (animals :: Table) -> Table
-# consumes a table of animals, and produces a table containing only
-# cats that have been fixed, sorted from youngest-to-oldest
-----
+@show{(contract
+  "fixed-cats" '("Table") "Table"
+  "consumes a table of animals, and produces a table containing only cats that have been fixed, sorted from youngest-to-oldest"
+)}
 
 You can use the function, _but you can’t see the code for it!_ *How do you know if you
 can trust their code?*
@@ -19,7 +18,9 @@ can trust their code?*
 
 1) What other qualities would this subset need to have?
 
-@span{.blankline}{}
+@span{.blankline}{
+  @ifsoln{It should contain animals - especially cats - that are fixed and unfixed}
+}
 
 @span{.blankline}{}
 

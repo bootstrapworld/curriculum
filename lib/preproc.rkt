@@ -31,6 +31,11 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
+(unless (member *proglang* '("pyret" "wescheme"))
+  (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
+
+(define *pyret?* (string=? *proglang* "pyret"))
+
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
 (define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
@@ -1890,6 +1895,39 @@
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
           x))))
+
+(define (contract funname domain-list range [purpose #f] #:single? [single? #t])
+  ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
+  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
+    (add-prereq funname-sym)
+    (string-append
+      (if single? "```\n" "")
+      (if *pyret?* "# " "; ")
+      (if *pyret?* (wescheme->pyret funname-sym) funname)
+      " "
+      (if *pyret?* "::" ":")
+      " "
+      ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
+      " -> "
+      range
+      (if purpose
+          (string-append "\n"
+            (if *pyret?* "# " "; ")
+            purpose)
+          "")
+      (if single? "\n```\n" ""))))
+
+(define (contracts . args)
+  (let ([res (string-append "```")])
+    (let loop ([args args])
+      (unless (null? args)
+        (set! res (string-append res "\n"
+                    (keyword-apply contract '(#:single?) '(#f)
+                                   (car args))))
+        (loop (cdr args))))
+    (set! res (string-append res "\n```\n"))
+    res))
+
 
 (define elem string-append)
 
