@@ -6,14 +6,16 @@
 (provide assess-design-recipe
          design-recipe-exercise
          get-function-name
-         contract contracts)
+         wescheme->pyret
+         vars-to-commaed-string vars-to-string
+         )
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (unless (member *proglang* '("pyret" "wescheme"))
-  (error 'ERROR "function-directives: Unknown proglang ~a" *proglang*))
+  (error 'ERROR "function-directives.rkt: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
 
@@ -747,32 +749,3 @@
                             #:headless? headless?
                             )))
 
-(define (contract funname domain-list range [purpose #f] #:single? [single? #t])
-  ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
-  (string-append
-    (if single? "```\n" "")
-    (if *pyret?* "# " "; ")
-    (if *pyret?* (wescheme->pyret (string->symbol funname)) funname)
-    " "
-    (if *pyret?* "::" ":")
-    " "
-    ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
-    " -> "
-    range
-    (if purpose
-        (string-append "\n"
-          (if *pyret?* "# " "; ")
-          purpose)
-        "")
-    (if single? "\n```\n" "")))
-
-(define (contracts . args)
-  (let ([res (string-append "```")])
-    (let loop ([args args])
-      (unless (null? args)
-        (set! res (string-append res "\n"
-                    (keyword-apply contract '(#:single?) '(#f)
-                                   (car args))))
-        (loop (cdr args))))
-    (set! res (string-append res "\n```\n"))
-    res))
