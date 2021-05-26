@@ -4,7 +4,9 @@
 <style>
 /* We override width:100% to allow circles and vspace
 to share the same line */
-div.circleevalsexp { width: auto;}
+.grid tr:nth-child(1){ height: 150pt; }
+.grid tr:nth-child(3){ height: 320pt; }
+.grid tr:nth-child(odd) td {border-bottom: 0 !important;}
 .contracts td { padding: 0 !important; }
 .contracts .editbox { background: none; }
 
@@ -42,44 +44,36 @@ You’ll be investigating these two functions with your partner:
 
 Starting with the image described above, write the Circles of Evaluation and Code for each exercise below. Be sure to test your code in the editor!
 
-[.draw, cols="1a,1a",stripes="none"]
+[.grid, cols="1a,1a",stripes="none"]
 |===
 
 | @n A purple rhombus that is stretched 4 times as wide.
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe wide)}
-
-*Code:*
-@showsoln{(sexp->code wide) }
 
 | @n A purple rhombus that is stretched 4 times as tall
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe tall) }
 
-*Code:*
-@showsoln{(sexp->code tall) }
+| *Code:* @fitb{44ex}{@showsoln{(sexp->code wide) }}
+| *Code:* @fitb{44ex}{@showsoln{(sexp->code tall) }}
+
+
 
 
 | @n  The tall rhombus overlayed on the wide rhombus.
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(overlay ,tall ,wide)) }
 
-*Code:*
-@showsoln{(sexp->code `(overlay ,tall ,wide)) }
-
-| Challenge: Overlay a red version of the original rhombus onto the last image you made.
+| ★: Overlay a red rhombus onto the last image you made.
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
 
-*Code:*
-@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
+| *Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay ,tall ,wide)) }}
+| *Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
 
 |===
