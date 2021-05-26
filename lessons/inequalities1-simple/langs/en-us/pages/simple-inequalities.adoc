@@ -1,5 +1,11 @@
 = Simple Inequalities
 
+++++
+<style>
+.fitb{min-width: 6ex;}
+</style>
+++++
+
 For each Inequality listed below, identify 4 _solutions_ and 4 _non-solutions_.
 
 * *Solutions* will make the expression `true`.
@@ -14,32 +20,68 @@ The most critical number to understand is the one used to define the expression.
 [cols="3,8,8", options="header", frame="none"]
 |===
 | Expression
-|4 solutions: return `true`
+| 4 solutions: return `true`
 | 4 non-solutions: return `false`
 
-|@show{(sexp->code '(> x 2))}
-|@fitb{2ex}{@ifsoln{2.1}}, 	@fitb{2ex}{@ifsoln{pi}}, @fitb{2ex}{@ifsoln{ 5}}, @fitb{2ex}{@ifsoln{1000}}
-|@fitb{2ex}{@ifsoln{2}}, 	@fitb{2ex}{@ifsoln{0}},  @fitb{2ex}{@ifsoln{-1}}, @fitb{2ex}{@ifsoln{-333}}
+| @show{(sexp->code '(> x 2))}
+| 	@fitb{}{ @ifsoln{2.1}	},
+	@fitb{}{ @ifsoln{pi}	},
+	@fitb{}{ @ifsoln{5}		},
+	@fitb{}{ @ifsoln{1000}	}
+| 	@fitb{}{ @ifsoln{2}		},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{-1}	},
+	@fitb{}{ @ifsoln{-333}	}
 
-|@show{(sexp->code '(<= x -2))}
-|@fitb{2ex}{@ifsoln{-2}},   @fitb{2ex}{@ifsoln{-3}}, @fitb{2ex}{@ifsoln{-100}}, @fitb{2ex}{@ifsoln{-1111}}
-|@fitb{2ex}{@ifsoln{-1}}, 	@fitb{2ex}{@ifsoln{0}},  @fitb{2ex}{@ifsoln{3/4}}, @fitb{2ex}{@ifsoln{1200}}
+| @show{(sexp->code '(<= x -2))}
+| 	@fitb{}{ @ifsoln{-2}	},
+	@fitb{}{ @ifsoln{-3}	},
+	@fitb{}{ @ifsoln{-100}	},
+	@fitb{}{ @ifsoln{-1111}	}
+| 	@fitb{}{ @ifsoln{-1}	},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{3/4}	},
+	@fitb{}{ @ifsoln{1200}	}
 
-|@show{(sexp->code '(< x 3.5))}
-|@fitb{2ex}{@ifsoln{3}},    @fitb{2ex}{@ifsoln{2}}, @fitb{2ex}{@ifsoln{0}}, @fitb{2ex}{@ifsoln{-1.5}}
-|@fitb{2ex}{@ifsoln{3.5}}, 	@fitb{2ex}{@ifsoln{4}}, @fitb{2ex}{@ifsoln{10}}, @fitb{2ex}{@ifsoln{111}}
+| @show{(sexp->code '(< x 3.5))}
+| 	@fitb{}{ @ifsoln{3}		},
+	@fitb{}{ @ifsoln{2}		},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{-1.5}	}
+| 	@fitb{}{ @ifsoln{3.5}	},
+	@fitb{}{ @ifsoln{4}		},
+	@fitb{}{ @ifsoln{10}	},
+	@fitb{}{ @ifsoln{111}	}
 
-|@show{(sexp->code '(>= x -1))}
-|@fitb{2ex}{@ifsoln{-1}}, @fitb{2ex}{@ifsoln{0}},  @fitb{2ex}{@ifsoln{5/3}}, @fitb{2ex}{@ifsoln{36.8}}
-|@fitb{2ex}{@ifsoln{-2}}, @fitb{2ex}{@ifsoln{-5}}, @fitb{2ex}{@ifsoln{-10}}, @fitb{2ex}{@ifsoln{-25}}
+| @show{(sexp->code '(>= x -1))}
+| 	@fitb{}{ @ifsoln{-1}	},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{5/3}	},
+	@fitb{}{ @ifsoln{36.8}	}
+| 	@fitb{}{ @ifsoln{-2}	},
+	@fitb{}{ @ifsoln{-5}	},
+	@fitb{}{ @ifsoln{-10}	},
+	@fitb{}{ @ifsoln{-25}	}
 
-|@show{(sexp->code '(> x -4))}
-|@fitb{2ex}{@ifsoln{-3.5}},	@fitb{2ex}{@ifsoln{-1}}, @fitb{2ex}{@ifsoln{0}}, @fitb{2ex}{@ifsoln{17}}
-|@fitb{2ex}{@ifsoln{-4}}, 	@fitb{2ex}{@ifsoln{-5}}, @fitb{2ex}{@ifsoln{-8.5}}, @fitb{2ex}{@ifsoln{-1000}}
+| @show{(sexp->code '(> x -4))}
+| 	@fitb{}{ @ifsoln{-3.5}	},
+	@fitb{}{ @ifsoln{-1}	},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{17}	}
+| 	@fitb{}{ @ifsoln{-4}	},
+	@fitb{}{ @ifsoln{-5}	},
+	@fitb{}{ @ifsoln{-8.5}	},
+	@fitb{}{ @ifsoln{-1000}	}
 
-|@show{(sexp->code '(<> x 2))}
-|@fitb{2ex}{@ifsoln{-2}}, 	@fitb{2ex}{@ifsoln{0}}, @fitb{2ex}{@ifsoln{1.9}}, @fitb{2ex}{@ifsoln{2.1}}
-|@fitb{}{@ifsoln{2 is the only non-solution}}, @fitb{}{}, 	@fitb{}{}, @fitb{}{}
+| @show{(sexp->code '(<> x 2))}
+| 	@fitb{}{ @ifsoln{-2}	},
+	@fitb{}{ @ifsoln{0}		},
+	@fitb{}{ @ifsoln{1.9}	},
+	@fitb{}{ @ifsoln{2.1}	}
+| 	@fitb{}{@ifsoln{2 is the only non-solution}},
+	@fitb{}{},
+	@fitb{}{},
+	@fitb{}{}
 |===
 
 @vspace{1ex}
