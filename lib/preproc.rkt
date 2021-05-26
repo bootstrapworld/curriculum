@@ -126,6 +126,8 @@
 
 (define *standards-met* '())
 
+(define *lesson-prereqs* '())
+
 (define *dictionaries-represented* '())
 
 (define *exercises-done* '())
@@ -315,38 +317,44 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
-(define (display-prereqs-row other-lessons o)
-  ;(printf "doing display-prereqs-row ~a\n" other-lessons)
-  (display "\n| Prerequisites | " o)
-  (display
-    (if (null? other-lessons) "None"
-        (string-join
-          (map (lambda (lesson)
-                 (let ([lesson-title lesson]
-                       [lesson-title-file (format "../~a/.cached/.index.titletxt" lesson)]
-                       [diry (format "../~a" lesson)])
-                   (cond [(file-exists? lesson-title-file)
-                          (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-                         [else
-                           (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
-                   (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]" lesson lesson-title)))
-               other-lessons)
-          ", ")) o)
+(define (display-prereqs-bar o)
+  ;(printf "doing display-prereqs-bar in ~s\n" (current-directory) )
+  (let ([all-lessons (read-data-file (format "../../lesson-order.txt"))])
+    ;(printf "f : ~s\n" (file-exists? (format "../../lesson-order.txt")))
+    ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
+    (display "\n\n=== Lessons\n" o)
+    (display
+      (string-join
+        (map (lambda (lesson)
+               (let ([lesson-title lesson]
+                     [lesson-title-file (format "../~a/.cached/.index.titletxt" lesson)]
+                     [diry (format "../~a" lesson)])
+                 (cond [(file-exists? lesson-title-file)
+                        (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+                       [else
+                         (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
+                 (let ([lk
+                         (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]"
+                                 lesson lesson-title)])
+                   (if (member lesson *lesson-prereqs*)
+                       (enclose-span ".prerequisite" lk)
+                       lk))))
+             all-lessons)
+        ", ") o))
   (display "\n\n" o))
 
-(define (display-standards-row o)
-  ;(printf "doing display-standards-row\n")
+(define (display-standards-bar o)
+  ;(printf "doing display-standards-bar\n")
   (cond [(null? *standards-met*)
          (when *lesson-plan*
            (printf "WARNING: ~a: No standards specified\n\n" (errmessage-context)))]
         [else
-          (display "| " o)
-          (display-standards-selection o *narrative* *dictionaries-represented*)
+          ;(display "\n.Standards\n" o)
+          ;(display "| " o)
+          (display "\n\n=== Standards\n" o)
+          ;(display-standards-selection o *narrative* *dictionaries-represented*)
           (display
-            (string-append
-              "|\n"
-              "\n"
-              "include::{cachedir}.pathway-standards.asc[]\n") o)]))
+            "include::{cachedir}.pathway-standards.asc[]\n" o)]))
 
 (define (include-standards o) ;TODO obsolete?
   (display
@@ -354,7 +362,7 @@
       "\n\n\n"
       "[.left-header,cols=\"20a,80a\"]\n"
       "|===\n") o)
-  (display-standards-row o)
+  (display-standards-bar o)
   (display
     "\n|===\n\n" o))
 
@@ -706,7 +714,7 @@
       "\n\n\n"
       "[.left-header,cols=\"20a,80a\"]\n"
       "|===") o)
-  (display-prereqs-row other-lessons o)
+  (display-prereqs-bar other-lessons o)
   (display "|===\n\n" o))
 
 (define (link-to-lessons-in-pathway o)
@@ -844,6 +852,27 @@
                                           (create-end-tag "span")))]))])
       (string-append reg-space gd-space))))
 
+(define (add-lesson-prereqs immediate-prereqs)
+  ;(printf "immediate prereqs = ~s\n" immediate-prereqs)
+  ;(printf "lesson-prereq dir = ~s\n" (current-directory))
+  (set! *lesson-prereqs* immediate-prereqs)
+  (for ([lsn immediate-prereqs])
+    (let ([lsn-prereq-file (format "../~a/.cached/.lesson-prereq.txt" lsn)])
+      ;(printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
+      (when (file-exists? lsn-prereq-file)
+        (let ([pp (read-data-file lsn-prereq-file)])
+          ;(printf "pp are ~s\n" pp)
+          (for ([p pp])
+            ;(printf "trying p = ~s\n" p)
+            (unless (member p *lesson-prereqs*)
+              ;(printf "adding p = ~s\n" p)
+              (set! *lesson-prereqs* (cons p *lesson-prereqs*))))))))
+  (call-with-output-file ".cached/.lesson-prereq.txt"
+    (lambda (o)
+      (for ([p *lesson-prereqs*])
+        (display p o) (newline o)))
+    #:exists 'replace))
+
 (define (preproc-n-asciidoctor in-file)
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
@@ -924,8 +953,9 @@
                               (printf "WARNING: Directive @std is obsolete\n\n")
                               )]
                            [(string=? directive "prereqs-stds")
-                            (display-prereqs-row (read-commaed-group i directive) o)
-                            (display-standards-row o)
+                            (add-lesson-prereqs (read-commaed-group i directive))
+                            ;(display-prereqs-bar o)
+                            ;(display-standards-bar o)
                             ]
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
@@ -1238,6 +1268,18 @@
                 (fprintf o (create-copyright *copyright-name*))
                 (fprintf o "\n--\n")
                 )
+
+              (when *lesson-plan*
+                ;(printf "adding sidebar in ~s\n" (current-directory))
+                (display (create-begin-tag "div" ".sidebar") o)
+                ;(display "\n|===\n" o)
+                (display-prereqs-bar o)
+                (display-standards-bar o)
+                ;(display "\n|===\n" o)
+                (display (create-end-tag "div") o)
+
+                )
+
               )
 
             #:exists 'replace)))
@@ -1408,7 +1450,8 @@
   )
 
 (define (create-standards-section dict dict-standards-met op)
-  (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
+  ;(fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
+  (fprintf op "[.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
                   "== ~a Standards\n\n")
@@ -1461,7 +1504,7 @@
                   "Select particular standards from the following menu to see\n"
                   "which lessons meet those standards.\n"))
               o)]
-          [else (display "Relevant Standards" o)])
+          [else (display "\n\n.Relevant Standards\n" o)])
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
@@ -1488,7 +1531,7 @@
       (unless (empty? *standards-met*)
         (when *narrative*
           (display-standards-selection op *narrative* *dictionaries-represented*))
-        (when *lesson*
+        (when (and #f *lesson*)
           (fprintf op (string-append
                         "\n[.alignedStandardsIntro]\n"
                         "_Select one or more standards from the menu on the left (⌘-click "
@@ -1927,7 +1970,6 @@
         (loop (cdr args))))
     (set! res (string-append res "\n```\n"))
     res))
-
 
 (define elem string-append)
 
