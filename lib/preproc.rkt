@@ -1890,7 +1890,10 @@
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
 (define (code x #:multi-line [multi-line #t]) ;TODO or #f?
+  ;(printf "doing code ~s\n" x)
   (let ([pyret? (string=? *proglang* "pyret")])
+    (unless (string? x)
+      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")

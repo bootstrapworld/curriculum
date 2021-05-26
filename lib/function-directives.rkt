@@ -7,6 +7,7 @@
          design-recipe-exercise
          get-function-name
          wescheme->pyret
+         wescheme->wescheme
          vars-to-commaed-string vars-to-string
          )
 
@@ -55,6 +56,28 @@
       style)
     (if show? s
         (string-multiply "&#x5f;" (string-length s)))))
+
+(define (wescheme->wescheme e)
+  ;(printf "doing wescheme->wescheme ~s\n" e)
+  (cond [(string? e) (format "~s" e)]
+        [(not (pair? e)) (format "~a" e)]
+        [(list e) (let ([a (car e)])
+                    (cond [(and (eq? a 'cond) (> (length e) 1))
+                           (let* ([cond-clauses (cdr e)]
+                                  [first-cond-clause (car cond-clauses)])
+                             (string-append "(cond ["
+                               (string-join (map wescheme->wescheme first-cond-clause) " ")
+                               "]\n"
+                               (string-join
+                                 (map
+                                   (lambda (cl)
+                                     (string-append "      ["
+                                       (string-join (map wescheme->wescheme cl) " ")
+                                       "]"))
+                                   (cdr cond-clauses))
+                                 "\n")))]
+                          [else (string-append "(" (string-join wescheme->wescheme e) ")")]))]
+        [else (error ' wescheme->wescheme "")]))
 
 (define (wescheme->pyret e #:wrap [wrap #f])
   ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
