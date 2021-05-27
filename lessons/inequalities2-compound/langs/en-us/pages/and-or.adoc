@@ -1,31 +1,60 @@
-= Compound Inequalities -- Practice
+= Inequalities -- Practice
 
-Create the Circles of Evaluation, then convert the expressions into Code in the space provided.
+@do{
 
-@vspace{3ex}
+(define e1 '(and (< 2 5) (= 0 6)))
+(define e2 '(or (> 6 8) (< -4 1)))
+(define e3 '(and (string-equal "purple" "blue") (= (+ 3 5) 8)))
 
-1) 2 is less than 5, and 0 is equal to 6
+}
 
-@vspace{30ex}
-
-What will this evaluate to? @fitb{20ex}{}
-
-@vspace{3ex}
-
-2) 6 is greater than 8, or -4 is less than 1
-
-@vspace{30ex}
-
-What will this evaluate to? @fitb{20ex}{}
+Create the Circles of Evaluation, then convert the expressions into code in the space provided.
 
 @vspace{3ex}
 
-3) The String “purple” is the same as the String “blue”, and 3 plus 5 equals 8
 
-@vspace{30ex}
+@n 2 is less than 5, and 0 is equal to 6
 
-What will this evaluate to? @fitb{20ex}{}
+@showsoln{(sexp->coe e1)}
+@showsoln{(sexp->code e1)}
+@ifnotsoln{@vspace{10ex}}
+
+What will this evaluate to?
+@ifsoln{	@fitb{20ex}{_false_}}
+@ifnotsoln{ @fitb{20ex}{       }}
 
 @vspace{3ex}
 
-4) Write the contracts for `and` {amp} `or` in your Contracts page.
+
+@n 6 is greater than 8, or -4 is less than 1
+
+@showsoln{(sexp->coe e2)}
+@showsoln{(sexp->code e2)}
+@ifnotsoln{@vspace{10ex}}
+
+What will this evaluate to?
+@ifsoln{	@fitb{20ex}{_true_ }}
+@ifnotsoln{ @fitb{20ex}{       }}
+
+@vspace{3ex}
+
+
+@n The String “purple” is the same as the String “blue”, and 3 plus 5 equals 8
+
+@showsoln{(sexp->coe e3)}
+@showsoln{(sexp->code e3)}
+@ifnotsoln{@vspace{10ex}}
+
+What will this evaluate to?
+@ifsoln{	@fitb{20ex}{_false_}}
+@ifnotsoln{ @fitb{20ex}{       }}
+
+@vspace{3ex}
+
+
+@n Write the contracts for `and` {amp} `or` in your Contracts page.
+
+@showsoln{(contracts
+'("and" ("Boolean" "Boolean") "Boolean")
+'("or" ("Boolean" "Boolean") "Boolean")
+)}
