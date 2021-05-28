@@ -143,7 +143,7 @@
                                    [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if wrap
-                                  (format "({zwsp}~a{zwsp})" x)
+                                  (format "({empty}~a{empty})" x)
                                   x))]
                            [(eq? a 'cond)
                             (string-append "ask:\n"
@@ -189,7 +189,7 @@
                                                     "\n"
                                                     (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
-                           [else (format "~a{zwsp}({zwsp}~a{zwsp})"
+                           [else (format "~a{empty}({empty}~a{empty})"
                                          (wescheme->pyret a)
                                          (string-join
                                            (map (lambda (e1)
