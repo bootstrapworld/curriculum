@@ -1681,9 +1681,7 @@
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
-         [hole2 (if (string=? *proglang* "pyret")
-                    *hole2-symbol*
-                    (list hole hole hole))]
+         [hole2 *hole2-symbol*]
          [hole3 hole2])
     (lambda (e #:wescheme [wescheme #f])
       ;(printf "doing holes-to-underscores ~s\n" e)
