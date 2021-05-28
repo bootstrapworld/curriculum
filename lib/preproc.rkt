@@ -1893,7 +1893,7 @@
   ;(printf "doing code ~s\n" x)
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
-      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x)))
+      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:indent 0)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")

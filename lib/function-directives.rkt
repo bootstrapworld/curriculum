@@ -57,19 +57,22 @@
     (if show? s
         (string-multiply "&#x5f;" (string-length s)))))
 
-(define (wescheme->wescheme e)
+(define (wescheme->wescheme e #:indent [indent #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
   (cond [(string? e) (format "~s" e)]
         [(not (pair? e)) (format "~a" e)]
         [(list e) (let ([a (car e)])
                     (cond [(and (eq? a 'cond) (> (length e) 1))
-                           (let* ([cond-clauses (cdr e)]
-                                  [first-cond-clause (car cond-clauses)])
-                             (string-append "(cond\n"
+                           (let ([cond-clauses (cdr e)])
+                             (string-append
+                               "(cond\n"
                                (string-join
                                  (map
                                    (lambda (cl)
-                                     (string-append "  ["
+                                     (string-append
+                                       (if indent (make-string (+ indent 2) #\space) "")
+                                       "["
+                                       ;REVISIT should propagate indent to within cond-clauses?
                                        (string-join (map wescheme->wescheme cl) " ")
                                        "]"))
                                    (cdr cond-clauses))
@@ -77,17 +80,19 @@
                           [(and (eq? a 'define) (= (length e) 3))
                            (let* ([lhs (cadr e)] [rhs (caddr e)]
                                                  [lhs-s (wescheme->wescheme lhs)]
-                                                 [rhs-s (wescheme->wescheme rhs)]
+                                                 [rhs-s (wescheme->wescheme rhs #:indent
+                                                                            (and indent (+ indent 2)))]
                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)])
                              (string-append "(define " lhs-s
                                (if rhs-s-nl? "\n" " ")
+                               (if indent (make-string (+ indent 2) #\space) "")
                                rhs-s ")"))]
                           [else (string-append "("
                                   (string-join (map wescheme->wescheme e) " ")
                                   ")")]))]
         [else (error ' wescheme->wescheme "")]))
 
-(define (wescheme->pyret e #:wrap [wrap #f])
+(define (wescheme->pyret e #:wrap [wrap #f] #:indent [indent #f])
   ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (cond [(eq? e 'sqrt) "num-sqrt"]
@@ -123,16 +128,23 @@
                            [(eq? a 'cond)
                             (string-append "ask:\n"
                               (string-join
-                                (map wescheme-cond-clause->pyret (cdr e)) "\n")
-                              "\nend")]
+                                (map (lambda (e)
+                                       (wescheme-cond-clause->pyret
+                                         e #:indent indent))
+                                     (cdr e)) "\n")
+                              "\n"
+                              (if indent (make-string indent #\space) "")
+                              "end")]
                            [(eq? a 'define)
                             (let* ([lhs (cadr e)] [rhs (caddr e)]
                                                   [lhs-s (wescheme->pyret lhs)]
-                                                  [rhs-s (wescheme->pyret rhs)]
+                                                  [rhs-s (wescheme->pyret rhs #:indent
+                                                                          (and indent (+ indent 2)))]
                                                   [rhs-s-nl? (regexp-match "\n" rhs-s)])
                               (if (pair? lhs)
                                   (string-append "fun " lhs-s ":"
                                     (if rhs-s-nl? "\n" " ")
+                                    (if indent (make-string (+ indent 2) #\space) "")
                                     rhs-s
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
@@ -146,10 +158,12 @@
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
 
-(define (wescheme-cond-clause->pyret e)
+(define (wescheme-cond-clause->pyret e #:indent [indent #f])
   ;(printf "doing wescheme-cond-clause->pyret ~s\n" e)
   (let ([a (car e)])
-    (string-append "| "
+    (string-append
+      (if indent (make-string (+ indent 2) #\space) "")
+      "| "
       (if (eq? a 'else) "otherwise"
           (string-append (wescheme->pyret a)
             " then"))
