@@ -1,0 +1,113 @@
+[.landscape]
+= Contracts
+
+++++
+<style>
+#content > .paragraph {padding: 0px 5px;}
+</style>
+++++
+
+Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
+
+++++
+<style>
+td {padding: .1em .625em !important; height: 20pt;}
+</style>
+++++
+
+[cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+|Name||Domain||Range
+
+| `box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `modified-box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `image-scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `->`
+| `Image`
+5+|
+
+| `r-value`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Number`
+5+|
+
+| `lr-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `random-rows`
+| `{two-colons}`
+| `(t {two-colons} Table, num-rows {two-colons} Number)`
+| `->`
+| `Table`
+5+|
+
+| `<Table>.row-n`
+| `{two-colons}`
+| `(n {two-colons} Number)`
+| `->`
+| `Row`
+5+|
+
+| `<Table>.order-by`
+| `{two-colons}`
+| `(col {two-colons} String, increasing {two-colons} Boolean)`
+| `->`
+| `Table`
+5+|
+
+| `<Table>.filter`
+| `{two-colons}`
+| `(test {two-colons} (Row -> Boolean))`
+| `->`
+| `Table`
+5+|
+
+| `<Table>.build-column`
+| `{two-colons}`
+| `(col {two-colons} String, builder {two-colons} (Row -> Any))`
+| `->`
+| `Table`
+5+|
+
+| `bar-chart-summarized`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `pie-chart-summarized`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+|===
