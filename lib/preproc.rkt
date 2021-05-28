@@ -348,16 +348,6 @@
               "\n"
               "include::{cachedir}.pathway-standards.asc[]\n") o)]))
 
-(define (include-standards o) ;TODO obsolete?
-  (display
-    (string-append
-      "\n\n\n"
-      "[.left-header,cols=\"20a,80a\"]\n"
-      "|===\n") o)
-  (display-standards-row o)
-  (display
-    "\n|===\n\n" o))
-
 (define (include-glossary o)
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::{cachedir}.pathway-glossary.asc[]\n\n"))
@@ -692,22 +682,6 @@
     #:exists 'replace)
   (display desc o)
   (newline o))
-
-(define (display-lesson-dependencies other-lessons o) ;TODO obsolete?
-  ;  (call-with-output-file "index-dependencies.txt"
-  ;    (lambda (o)
-  ;      (fprintf o "(")
-  ;      (for ([lesson other-lessons])
-  ;        (fprintf o "~s " lesson))
-  ;      (fprintf o ")\n"))
-  ;    #:exists 'replace)
-  (display
-    (string-append
-      "\n\n\n"
-      "[.left-header,cols=\"20a,80a\"]\n"
-      "|===") o)
-  (display-prereqs-row other-lessons o)
-  (display "|===\n\n" o))
 
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway~n")
@@ -1166,7 +1140,6 @@
                                  [(check-first-subsection i o)
                                   (set! first-subsection-reached? #t)
                                   (when *lesson-plan*
-                                    ;(include-standards o)
                                     (include-glossary o))]
                                  [else #f])
                            (cond [*lesson*
@@ -1903,34 +1876,36 @@
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
-    (string-append
-      (if single? "```\n" "")
-      (if *pyret?* "# " "; ")
-      (if *pyret?* (wescheme->pyret funname-sym) funname)
-      " "
-      (if *pyret?* "::" ":")
-      " "
-      ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
-      " -> "
-      range
-      (if purpose
-          (string-append "\n"
-            (if *pyret?* "# " "; ")
-            purpose)
-          "")
-      (if single? "\n```\n" ""))))
+    (let ([s (string-append
+              ;(if single? "```\n" "")
+              (if *pyret?* "# " "; ")
+              (if *pyret?* (wescheme->pyret funname-sym) funname)
+              " "
+              (if *pyret?* "::" ":")
+              " "
+              ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
+              " -> "
+              range
+              (if purpose
+                  (string-append "\n"
+                    (if *pyret?* "# " "; ")
+                    purpose)
+                  "")
+              ;(if single? "\n```\n" "")
+              )])
+      (if single?
+          (enclose-textarea (if *pyret?* ".pyret" ".racket") s)
+          s))))
 
 (define (contracts . args)
-  (let ([res (string-append "```")])
+  (let ([res ""])
     (let loop ([args args])
       (unless (null? args)
         (set! res (string-append res "\n"
                     (keyword-apply contract '(#:single?) '(#f)
                                    (car args))))
         (loop (cdr args))))
-    (set! res (string-append res "\n```\n"))
-    res))
-
+    (enclose-textarea (if *pyret?* ".pyret" ".racket") res)))
 
 (define elem string-append)
 
