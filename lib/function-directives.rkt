@@ -65,13 +65,11 @@
                     (cond [(and (eq? a 'cond) (> (length e) 1))
                            (let* ([cond-clauses (cdr e)]
                                   [first-cond-clause (car cond-clauses)])
-                             (string-append "(cond ["
-                               (string-join (map wescheme->wescheme first-cond-clause) " ")
-                               "]\n"
+                             (string-append "(cond\n"
                                (string-join
                                  (map
                                    (lambda (cl)
-                                     (string-append "      ["
+                                     (string-append "  ["
                                        (string-join (map wescheme->wescheme cl) " ")
                                        "]"))
                                    (cdr cond-clauses))
