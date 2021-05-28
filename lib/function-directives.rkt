@@ -85,8 +85,24 @@
                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)])
                              (string-append "(define " lhs-s
                                (if rhs-s-nl? "\n" " ")
-                               (if indent (make-string (+ indent 2) #\space) "")
+                               (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
                                rhs-s ")"))]
+                          [(eq? a 'EXAMPLE)
+                           (let ([num-examples (/ (length (cdr e)) 2)])
+                             (let loop ([n num-examples] [e (cdr e)] [r ""])
+                               (if (= n 0) r
+                                   (let* ([lhs (car e)] [rhs (cadr e)]
+                                                        [lhs-s (wescheme->wescheme lhs)]
+                                                        [rhs-s (wescheme->wescheme rhs)])
+                                     (loop (- n 1) (cddr e)
+                                     (string-append r
+                                       (if (= n num-examples) "" "\n")
+                                       "(EXAMPLE\n"
+                                       (if indent (make-string (+ indent 2) #\space) "")
+                                       lhs-s
+                                       "\n"
+                                       (if indent (make-string (+ indent 2) #\space) "")
+                                       rhs-s ")"))))))]
                           [else (string-append "("
                                   (string-join (map wescheme->wescheme e) " ")
                                   ")")]))]
@@ -149,6 +165,20 @@
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
                                   (string-append lhs-s " = " rhs-s)))]
+                           [(eq? a 'EXAMPLE)
+                            (let ([num-examples (/ (length (cdr e)) 2)])
+                              (let loop ([n num-examples] [e (cdr e)] [r "examples:"])
+                                (if (= n 0)
+                                    (string-append r "\nend")
+                                    (let* ([lhs (car e)] [rhs (cadr e)]
+                                                         [lhs-s (wescheme->pyret lhs)]
+                                                         [rhs-s (wescheme->pyret rhs)])
+                                      (loop (- n 1) (cddr e)
+                                            (string-append r "\n"
+                                              (if indent (make-string (+ indent 2) #\space) "")
+                                              lhs-s " is \n"
+                                              (if indent (make-string (+ indent 4) #\space) "")
+                                              rhs-s))))))]
                            [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a)
                                          (string-join
