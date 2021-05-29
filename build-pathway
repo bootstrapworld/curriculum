@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-19 # last modified
+LASTMOD=2021-05-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1569,7 +1569,7 @@ function buildpathway() {
         cd front-matter
         mkdirsolutionversionof $repoDir/$d/front-matter
         cd ..
-        adjustproglangsubdirs $d
+        adjustproglangsubdirs front-matter
       fi
     fi
 
@@ -1578,7 +1578,7 @@ function buildpathway() {
         cd back-matter
         mkdirsolutionversionof $repoDir/$d/back-matter
         cd ..
-        adjustproglangsubdirs $d
+        adjustproglangsubdirs back-matter
       fi
     fi
 
