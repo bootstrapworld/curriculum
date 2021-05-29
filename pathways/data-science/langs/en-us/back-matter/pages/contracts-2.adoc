@@ -19,95 +19,74 @@ td {padding: .1em .625em !important; height: 20pt;}
 |===
 |Name||Domain||Range
 
-| `string-repeat`
-| `{two-colons}`
-| `String, Number`
+| `;` `rhombus`
+| `:`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `String`
-5+|`_string-repeat("cheetah ", 5)_`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(rhombus 20 50 "solid" "turquoise")_`}
 
-| `string-contains`
-| `{two-colons}`
-| `String, String`
+| `;` `right-triangle`
+| `:`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Boolean`
-5+|`_string-contains("rockstar", "star")_`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(right-triangle 20 50 "outline" "black")_`}
 
-| `num-sqr`
-| `{two-colons}`
-| `Number`
+| `;` `isosceles-triangle`
+| `:`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Number`
-5+|`_num-sqr(9)_`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(isosceles-triangle 100 30 "solid" "black")_`}
 
-| `num-sqrt`
-| `{two-colons}`
-| `Number`
+| `;` `radial-star`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-| `Number`
-5+|`_num-sqrt(25)_`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(radial-star  17 50 10 "solid" "orange")_`}
 
-| `num-min`
-| `{two-colons}`
-| `Number, Number`
+| `;` `star-polygon`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-| `Number`
-5+|`_num-min(80, 20)_`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(star-polygon 100 10 3 "outline" "yellow")_`}
 
-| `num-max`
+| `overlay`
 | `{two-colons}`
-| `Number, Number`
-| `->`
-| `Number`
-5+|`_num-max(80, 20)_`
-
-| `count`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Table`
-5+|`_count(animals-table, "species")_`
-
-| `mean`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Number`
-5+|`_mean(animals-table, "age")_`
-
-| `median`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Number`
-5+|`_median(animals-table, "age")_`
-
-| `modes`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `List<Number>`
-5+|`_modes(animals-table, "age")_`
-
-| `bar-chart`
-| `{two-colons}`
-| `Table, String`
+| `Image, Image`
 | `->`
 | `Image`
-5+|`_bar-chart(animals-table, "legs"_`)
+5+|`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`
 
-| `pie-chart`
+| `beside`
 | `{two-colons}`
-| `Table, String`
+| `Image, Image`
 | `->`
 | `Image`
-5+|`_pie-chart(animals-table, "species"_`)
+5+|`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`
 
-| `histogram`
+| `above`
 | `{two-colons}`
-| `(t {two-colons} Table, column {two-colons} String, bin-width {two-colons} Number)`
+| `Image, Image`
 | `->`
 | `Image`
-5+|`_histogram(animals-table, "age", 2)_`
+5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
+
+| `put-image`
+| `{two-colons}`
+| `Image, Number, Number, Image`
+| `->`
+| `Image`
+5+|`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`
+
+| `rotate`
+| `{two-colons}`
+| `Number, Image`
+| `->`
+| `Image`
+5+|`_rotate(35, rectangle(30, 80, "solid", "purple"))_`
 
 |===
