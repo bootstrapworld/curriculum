@@ -1087,7 +1087,7 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
-                              (cond [(string=? proglang *proglang*)
+                              (cond [(string-ci=? proglang *proglang*)
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
