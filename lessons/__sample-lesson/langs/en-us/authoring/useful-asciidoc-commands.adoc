@@ -1,6 +1,6 @@
 = Asciidoc Command Notes for New Authors - read (at least in part) as an asciidoc
 
-== Don't be afraid to ask! 
+== Don't be afraid to ask!
 
 	* Sometimes it's way more efficient to post a question to the curriculum remix team
 	* It might also be true that your work will surface a bug in something somebody else did and you won't be able to solve the problem alone!
@@ -9,7 +9,7 @@
 
 The one that seems to work the best is:
 
-@comment{}  
+@comment{}
 
 But you will also see:
 
@@ -29,33 +29,33 @@ Some asciidoc files use multiple languages! asciidoc, css, racket, mathjax...
 
 === Style
 
-- *bold* 
-- _italics_ 
+- *bold*
+- _italics_
 
-[.underline]underline 
+[.underline]underline
 [.underline]"if you want to underline more than one word, put the phrase in quotes"
 
 @show{(sexp->code `code)}
 @show{(sexp->code `(coded sentences with "punctuation"))}
-We are trying to write all functions using `sexp->code` ... 
-It's special Dorai wizardry that will 
+We are trying to write all functions using `sexp->code` ...
+It's special Dorai wizardry that will
 - take whatever we write in racket and automatically translate it into pyret if the document is opened in a pyret version
 - autogenerate a list of functions used in the lesson plan and accompanying pages for a language prerequisites table
 - who knows what other fabulous things it will do by the time you're reading this ;)
 
-Widespread use of `sexp` in lesson plans is relatively recent, so you will also see code written like this. 
+Widespread use of `sexp` in lesson plans is relatively recent, so you will also see code written like this.
 - `code`
 _``code`` at the beginning of an italicized sentence_
 
-Feel free to update expressions you encounter to use `sexp->code`! 
+Feel free to update expressions you encounter to use `sexp->code`!
 (And to use the alternate version of formatting code in text when wanting to format code that is outside the bounds of what `sexp` is used for.)
 
 
 Vocab words like @vocab{variable} get flagged using the @comment{@vocab{}} directive when they are:
 
-@n focal to the lesson and 
+@n focal to the lesson and
 
-@n focal to the sentence you're using it in.  
+@n focal to the sentence you're using it in.
 
 _If you flag a word as a vocabulary word, be sure to add it to the glossary in both plural and singular form. The glossary is found in the curriculum directory (shared is at the same level as lessons and within that you will find glossary-terms.rkt)_
 
@@ -65,6 +65,11 @@ _If you flag a word as a vocabulary word, be sure to add it to the glossary in b
 - rem stands for relative em (em is a unit equivalent to the width of the letter "m")
 
 == Formatting parts of the page
+
+=== To center text horizontally on the line
+
+[.center]
+this text will be centered
 
 === Vertical spaces between lines of text
 
@@ -92,7 +97,7 @@ These 4 directives are for links that appear in the lesson plan and should be au
 
 _Note: What is included in the workbook is determined by what is listed in the workbook-pages.txt file in the lesson's "pages" folder._
 
-@comment{ 
+@comment{
 - @printable-exercise{pages/whateverthepagetitleis.adoc} This is for workbook pages only and will automatically be shown with the title and the page number in the lesson plan.
 - @opt-printable-exercise{pages/whateverthepagetitleis.adoc} This is for pages that can be printed but are not going to be included in the workbook. W
 - @online-exercise{whateverthelink is} or  @online-exercise{whateverthelink is, however you want the link to be named in the lesson plan}. This link is designed for things that we expect all teachers to use while teaching the lesson
@@ -107,8 +112,8 @@ Lesson slides and other external links can also be linked using @link{}
 - and it's important to leave a space after the dash
 - and a blank line before the first line of the list
 
-* They can also be 
-* written using 
+* They can also be
+* written using
 * asterisks
 
 @n we have a special autonumbering command that will
@@ -127,7 +132,7 @@ Lesson slides and other external links can also be linked using @link{}
 
 === Tables
 
-In the code below, cols= could also be defined more simply as 4,2,3,1. 
+In the code below, cols= could also be defined more simply as 4,2,3,1.
 
 You can change the numbers to shift the ratio of the width of the columns and add or subtract numbers to increase or decrease the number of colummsn.
 
@@ -141,19 +146,19 @@ The other formatting defines where in the cell the words end up being placed (se
 
 ==== Aligning text within the table
 
-- without a dot, we mean horizontal alignment. 
-- With a dot, it's vertical alignment. 
-- < means to the left (horizontally) or top (vertically). 
+- without a dot, we mean horizontal alignment.
+- With a dot, it's vertical alignment.
+- < means to the left (horizontally) or top (vertically).
 - ^ is center (horizontally or vertically)
-- > pushes to the right (horizontally) or bottom (vertically). 
-- ^.^ centers both horizontally & vertically 
+- > pushes to the right (horizontally) or bottom (vertically).
+- ^.^ centers both horizontally & vertically
 
 ==== Inerting a table within a table
 [cols="1a,1a"]
 |===
-| add a to the column width to let asciidoc know to look out for something complicated 
+| add a to the column width to let asciidoc know to look out for something complicated
 | and
-| use exlamation points instead of vertical bars to indicate the column breaks of the nested table 		
+| use exlamation points instead of vertical bars to indicate the column breaks of the nested table
 |  [cols="1a,1a"]
 !===
 ! this 	! part
@@ -173,12 +178,12 @@ There are language specific commands (see asciidoc file):
 - @ifproglang{wescheme}{}
 - @ifproglang{pyret}{}
 
-There are also pathyway specific commands, which we only use sparingly to include optional pages in core materials (see asciidoc file): 
+There are also pathyway specific commands, which we only use sparingly to include optional pages in core materials (see asciidoc file):
 
 - @ifpathway{data-science}{}
 
 === Indentation
-You can use 
+You can use
 
 [.indentedpara]
 --
