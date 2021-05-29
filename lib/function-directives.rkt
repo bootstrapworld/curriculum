@@ -93,16 +93,20 @@
                                (if (= n 0) r
                                    (let* ([lhs (car e)] [rhs (cadr e)]
                                                         [lhs-s (wescheme->wescheme lhs)]
-                                                        [rhs-s (wescheme->wescheme rhs)])
+                                                        [rhs-s (wescheme->wescheme rhs)]
+                                                        [tot-len (+ (string-length lhs-s)
+                                                                    (string-length rhs-s))])
                                      (loop (- n 1) (cddr e)
-                                     (string-append r
-                                       (if (= n num-examples) "" "\n")
-                                       "(EXAMPLE\n"
-                                       (if indent (make-string (+ indent 2) #\space) "")
-                                       lhs-s
-                                       "\n"
-                                       (if indent (make-string (+ indent 2) #\space) "")
-                                       rhs-s ")"))))))]
+                                           (string-append r
+                                             (if (= n num-examples) "" "\n")
+                                             "(EXAMPLE\n"
+                                             (if indent (make-string (+ indent 2) #\space) "")
+                                             lhs-s
+                                             (if (< tot-len 35)
+                                                 " "
+                                                 (string-append "\n"
+                                                   (if indent (make-string (+ indent 2) #\space) "")))
+                                             rhs-s ")"))))))]
                           [else (string-append "("
                                   (string-join (map wescheme->wescheme e) " ")
                                   ")")]))]
@@ -139,7 +143,7 @@
                                    [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if wrap
-                                  (format "({zwsp}~a{zwsp})" x)
+                                  (format "({empty}~a{empty})" x)
                                   x))]
                            [(eq? a 'cond)
                             (string-append "ask:\n"
@@ -172,14 +176,21 @@
                                     (string-append r "\nend")
                                     (let* ([lhs (car e)] [rhs (cadr e)]
                                                          [lhs-s (wescheme->pyret lhs)]
-                                                         [rhs-s (wescheme->pyret rhs)])
+                                                         [rhs-s (wescheme->pyret rhs)]
+                                                         [tot-len (+ (string-length (format "~s" lhs))
+                                                                     (string-length (format "~s" rhs)))])
+                                      ;(printf "*** lhs-s = ~s; rhs-s = ~s\n" lhs-s rhs-s)
+                                      ;(printf "*** tot-len = ~s\n" tot-len)
                                       (loop (- n 1) (cddr e)
                                             (string-append r "\n"
                                               (if indent (make-string (+ indent 2) #\space) "")
-                                              lhs-s " is \n"
-                                              (if indent (make-string (+ indent 4) #\space) "")
+                                              lhs-s " is "
+                                              (if (< tot-len 35) ""
+                                                  (string-append
+                                                    "\n"
+                                                    (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
-                           [else (format "~a{zwsp}({zwsp}~a{zwsp})"
+                           [else (format "~a{empty}({empty}~a{empty})"
                                          (wescheme->pyret a)
                                          (string-join
                                            (map (lambda (e1)

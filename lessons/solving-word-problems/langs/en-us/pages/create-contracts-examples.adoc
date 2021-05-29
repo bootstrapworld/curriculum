@@ -7,14 +7,14 @@
           (big-triangle 100 "red") (triangle 100 "solid" "red")
           (big-triangle 200 "orange") (triangle 200 "solid" "orange"))))
 
-(define c1 (code "big-triangle :: Number, String -> Image"))
+(define c1 (contract "big-triangle" '("Number" "String") "Image"))
 
 (define e2
   (code '(EXAMPLE
            (purple-square 15) (rectangle 15 15 "outline" "purple")
            (purple-square 6)  (rectangle 6 6 "outline" "purple"))))
 
-(define c2 (code "purple-square :: Number -> Image"))
+(define c2 (contract "purple-square" '("Number") "Image"))
 
 (define e3
   (code '(EXAMPLE
@@ -22,7 +22,7 @@
            (banner "Go Team!") (text "Go Team!" 50 "red")
            (banner "Exit") (text "Exit" 50 "red"))))
 
-(define c3 (code "banner :: String -> Image"))
+(define c3 (contract "banner" '("String") "Image"))
 
 (define e4
   (code '(EXAMPLE
@@ -30,7 +30,7 @@
            (twinkle "solid" "pink") (star 5 "solid" "pink")
            (twinkle "outline" "grey") (star 5 "outline" "grey"))))
 
-(define c4 (code "twinkle :: String, String -> Image"))
+(define c4 (contract "twinkle" '("String" "String") "Image"))
 
 (define e5
   (code '(EXAMPLE
@@ -38,7 +38,7 @@
            (half 8) (/ 8 2)
            (half 900) (/ 900 2))))
 
-(define c5 (code "half :: Number -> Number"))
+(define c5 (contract "half" '("Number") "Number"))
 
 (define examples-lst (list e1 e2 e3 e4 e5 ))
 (define answers-lst (list c1 c2 c3 c4 c5 ))
