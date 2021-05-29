@@ -1,7 +1,7 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. For example:  `ellipse : Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "solid" "darkgreen")` will evaluate to an Image.
+Contracts tell us how to use a function. e.g.  `ellipse : Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "solid" "darkgreen")` will evaluate to an Image.
 
 ++++
 <style>
@@ -13,74 +13,76 @@ td {padding: .4em .625em !important; height: 15pt;}
 |===
 | Name    |       | Domain      |     | Range
 
-| `;` `above`
-| `{two-colons}`
-|
+| `;` `triangle/asa`
+| `:`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(triangle-asa 100 50 200 "solid" "turquoise")_`}
 
-| `;` `beside`
-| `{two-colons}`
-|
+| `;` `radial-star`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(radial-star  17 50 10 "solid" "orange")_`}
 
-| `;` `or`
-| `{two-colons}`
-|
+| `;` `star-polygon`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(star-polygon 100 10 3 "outline" "yellow")_`}
 
-| `;`  `and`
-| `{two-colons}`
-|
+| `;` `image-url`
+| `:`
+| @ifsoln{`String`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| `_(image-url "https://www.bootstrapworld.org/images/icon.png")_`
 
-| `;`
-| `{two-colons}`
-|
+| `;` `scale`
+| `:`
+| @ifsoln{`Number, Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(scale .8 (triangle 30 "solid" "red"))_`}
 
-| `;`
-| `{two-colons}`
-|
+| `;` `rotate`
+| `:`
+| @ifsoln{`Number, Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(rotate 35 (rectangle 30 80 "solid" "orange"))_`}
 
-| `;`
-| `{two-colons}`
-|
+| `;` `overlay`
+| `:`
+| @ifsoln{`Image, Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(overlay (star 30 "solid" "gold")(circle 30 "solid" "blue"))_`}
 
-| `;`
-| `{two-colons}`
-|
+| `;` `put-image`
+| `:`
+| @ifsoln{`Image, Number, Number, Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(put-image (star 30 "solid" "red") 50 150 (rectangle 300 200 "outline" "black"))_`}
 
-| `;`
-| `{two-colons}`
-|
+| `;` `flip-horizontal`
+| `:`
+| @ifsoln{`Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(flip-horizontal(text "Bootstrap is fun!" 60 "darkblue"))_`}
 
-| `;`
-| `{two-colons}`
-|
+| `;` `flip-vertical`
+| `:`
+| @ifsoln{`Image`}
 | `->`
-|
-5+|`;`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(flip-vertical(triangle 80 "solid" "lightgreen"))_`}
 
 |===
+
+
