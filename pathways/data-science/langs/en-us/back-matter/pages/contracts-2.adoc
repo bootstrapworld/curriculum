@@ -21,93 +21,93 @@ td {padding: .1em .625em !important; height: 20pt;}
 
 | `string-repeat`
 | `{two-colons}`
-| `(text {two-colons} String, repeat {two-colons} Number)`
+| `String, Number`
 | `->`
 | `String`
-5+|
+5+|`_string-repeat("cheetah ", 5)_`
 
 | `string-contains`
 | `{two-colons}`
-| `(text {two-colons} String, search-for {two-colons} String)`
+| `String, String`
 | `->`
 | `Boolean`
-5+|
+5+|`_string-contains("rockstar", "star")_`
 
 | `num-sqr`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| `Number`
 | `->`
 | `Number`
-5+|
+5+|`_num-sqr(9)_`
 
 | `num-sqrt`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| `Number`
 | `->`
 | `Number`
-5+|
+5+|`_num-sqrt(25)_`
 
 | `num-min`
 | `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
+| `Number, Number`
 | `->`
 | `Number`
-5+|
+5+|`_num-min(80, 20)_`
 
 | `num-max`
 | `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
+| `Number, Number`
 | `->`
 | `Number`
-5+|
+5+|`_num-max(80, 20)_`
 
 | `count`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `Table`
-5+|
+5+|`_count(animals-table, "species")_`
 
 | `mean`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `Number`
-5+|
+5+|`_mean(animals-table, "age")_`
 
 | `median`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `Number`
-5+|
+5+|`_median(animals-table, "age")_`
 
 | `modes`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `List<Number>`
-5+|
+5+|`_modes(animals-table, "age")_`
 
 | `bar-chart`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `Image`
-5+|
+5+|`_bar-chart(animals-table, "legs"_`)
 
 | `pie-chart`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Table, String`
 | `->`
 | `Image`
-5+|
+5+|`_pie-chart(animals-table, "species"_`)
 
 | `histogram`
 | `{two-colons}`
-| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
+| `(t {two-colons} Table, column {two-colons} String, bin-width {two-colons} Number)`
 | `->`
 | `Image`
-5+|
+5+|`_histogram(animals-table, "age", 2)_`
 
 |===
