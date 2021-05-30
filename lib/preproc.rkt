@@ -1879,7 +1879,7 @@
               (if *pyret?* "# " "; ")
               (if *pyret?* (wescheme->pyret funname-sym) funname)
               " "
-              (if *pyret?* "::" ":")
+              (if *pyret?* "{two-colons}" ":")
               " "
               ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
               " -> "
