@@ -1935,7 +1935,7 @@
   (contract-exercise/internal tag "; " ": "))
 
 (define (contract-exercise/pyret tag)
-  (contract-exercise/internal tag "" " :: "))
+  (contract-exercise/internal tag "# " " :: "))
 
 (define (create-itemlist #:style [style #f] items)
   ;(printf "doing create-itemlist ~s\n" items)
