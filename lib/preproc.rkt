@@ -1892,7 +1892,7 @@
               ;(if single? "\n```\n" "")
               )])
       (if single?
-          (enclose-textarea (if *pyret?* ".pyret" ".racket") s)
+          (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t)
           s))))
 
 (define (contracts . args)
@@ -1903,7 +1903,7 @@
                     (keyword-apply contract '(#:single?) '(#f)
                                    (car args))))
         (loop (cdr args))))
-    (enclose-textarea (if *pyret?* ".pyret" ".racket") res)))
+    (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
 
 (define elem string-append)
 
