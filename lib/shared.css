@@ -416,27 +416,28 @@ span.clear {
 .studentAnswerLong   { min-width: 140pt; }
 
 /* This class and the rule below it could be cleaned up */
-.wrapper {
+.wrapper p {
   font-family: Hack, "Courier New", monospace;
   width: 100%;
-  display: inline-block;
-  vertical-align: top;
+  display: flex;
+  display: -webkit-box; /* wkhtmltopdf uses this instead of flex */
+  flex-wrap: wrap;
 }
+.wescheme .wrapper p > *:nth-last-child(2),
+.pyret    .wrapper p > *:nth-last-child(1) {flex-grow:  1; -webkit-flex-grow: 1}
 
 .recipe_name, .recipe_domain, .recipe_range, .purpose_comment,
-.recipe_example_inputs, .recipe_example_body, .recipe_example_body_long,
+.recipe_example_inputs, .recipe_example_body,
 .recipe_variables, .recipe_definition_body,
 .recipe_cond, .questions, .answers {
   font-family:        Hack, "Courier New", monospace;
-  display:            inline-block;
   border-bottom:      solid 1pt black;
 }
 
 .recipe_name::after, .recipe_domain::after, .recipe_range::after,
-.recipe_purpose::after,
-.recipe_example_inputs::after, .recipe_example_body::after,
-.recipe_example_body_long::after,
-.recipe_definition_body::after, .recipe_variables::after {
+.recipe_purpose::after, .recipe_example_inputs::after, 
+.recipe_example_body::after, .recipe_variables::after,
+.recipe_definition_body::after {
   color: black;
 }
 
@@ -452,11 +453,7 @@ span.clear {
 .recipe_example_inputs{ min-width: 20%; }
 
 .pyret .recipe_name { text-align: right; }
-.wescheme .recipe_example_body { width: 100%; }
-.pyret    .recipe_example_body { width:  90%; }
-.recipe_example_body_long { width: 90%; }
-.recipe_example_body_wrap { margin-left: 12px; display: inline-block; min-width: 45%;}
-.pyret .recipe_example_body_wrap {min-width: 55%;}
+.recipe_example_body { min-width: 10em; margin-left: 1em;}
 .recipe_definition_body { width: 90%; }
 
 /* Piecewise Functions (ask/cond) branches */

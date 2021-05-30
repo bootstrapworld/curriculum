@@ -371,31 +371,16 @@
     (write-wrapper ".recipe.recipe_example_line"
       (lambda ()
         (string-append
-          ;(write-clear)
-          (write-large "(")
-          (write-spaced "EXAMPLE ")
-          (write-large "(")
+          (encoded-ans "" "(EXAMPLE (" #t)
           (encoded-ans ".recipe_name" funname show-funname?)
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
-          (write-large ")")
+          (encoded-ans "" ")" #t)
           (let ([body-s (expr-to-string body)])
-            (if (> (+ (string-length body-s)
-                      (string-length (expr-to-string funname))
-                      (string-length (list-to-string args)))
-                    *max-line-length*)
-                (string-append (write-clear)
-                  (encoded-ans "" "MMMMMMMMM" #f)
-                  (encoded-ans ".recipe_example_body_long"
-                               (string-append
-                                 (encoded-ans "" body-s show-body?)
-                                 (write-large ")"))
-                               #t))
-                (string-append
-                  (enclose-span ".recipe_example_body_wrap"
-                    (encoded-ans ".recipe_example_body" body-s show-body?))
-                  (write-large ")")
-                  )))
+            (string-append
+              (encoded-ans ".recipe_example_body" body-s show-body?)
+              (write-large ")")
+                  ))
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
@@ -420,24 +405,9 @@
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-        ; wrap the `is ...` code in its own element, so that wrapping works properly
-
-        (if (> (+ (string-length body)
-                  (string-length funname)
-                  (string-length args))
-                *max-line-length*)
-            (string-append (write-clear)
-              (encoded-ans "" "MMMMMMMMM" #f)
-              (encoded-ans ".recipe_example_body_long"
-                           (string-append
-                             (highlight-keywords "is ")
-                             (encoded-ans "" (highlight-keywords body) show-body?)) #t))
-            (enclose-span ".recipe_example_body_wrap"
-              (string-append
-                (highlight-keywords "is ")
-                (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-                )))
-        (write-clear)
+        (encoded-ans "" "__" #f)
+        (highlight-keywords " is ")
+        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         ))))
 
 (define (write-each-example funname args body show)
