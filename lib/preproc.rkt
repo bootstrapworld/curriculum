@@ -1632,7 +1632,7 @@
                                    [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
                                    [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
-                              (if wrap (format "({zwsp}~a{zwsp})" x) x)) ]
+                              (if wrap (format "({empty}~a{empty})" x) x)) ]
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
                                                  (infix-op? a #:pyret #f)
                                                  ))
@@ -1661,7 +1661,7 @@
                                     " { ( ~a ) }^ 2 "
                                     " { ~a }^ 2 ") xm))]
                            [else
-                             (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
+                             (format (if pyret "~a{empty}({empty}~a{empty})" "~a(~a)")
                                      (sexp->arith a #:pyret pyret #:parens parens)
                                      (string-join
                                        (map (lambda (e1)
@@ -1692,7 +1692,7 @@
             [(and (eq? e 'frac) wescheme)
              (add-prereq '/)
              '/]
-            [(and (answer? e) wescheme)
+            [(answer? e) ;(and (answer? e) wescheme)
              (let ((e (cadr e)))
                (holes-to-underscores
                  (if *solutions-mode?* e (answer->hole e))
@@ -1739,7 +1739,7 @@
                      [(eq? e 'string>?) ">"]
                      [(eq? e 'string>=?) ">="]
                      [(eq? e 'string<>?) "<>"]
-                     [(memq e '(* -)) (format "{zwsp}~a" e)]
+                     [(memq e '(* -)) (format "{empty}~a" e)]
                      [else (let ([es (format "~a" e)])
                                (cond [(regexp-match #rx"\\?$" es)
                                       (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
@@ -1749,7 +1749,7 @@
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
                          [(eq? e 'frac) "/"]
-                         [(memq e '(* -)) (format "{zwsp}~a" e)]
+                         [(memq e '(* -)) (format "{empty}~a" e)]
                          [else (format "~a" e)])]
         [else (cond [(eq? e '<=) " \\le "]
                     [(eq? e 'pi) " \\pi "]
@@ -1867,7 +1867,7 @@
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:indent 0)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
-      (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
+      (if pyret? (regexp-replace* " :: " x " :{empty}: ")
           x))))
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
@@ -1935,7 +1935,7 @@
   (contract-exercise/internal tag "; " ": "))
 
 (define (contract-exercise/pyret tag)
-  (contract-exercise/internal tag "" " :: "))
+  (contract-exercise/internal tag "# " " :: "))
 
 (define (create-itemlist #:style [style #f] items)
   ;(printf "doing create-itemlist ~s\n" items)
