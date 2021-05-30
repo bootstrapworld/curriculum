@@ -50,7 +50,7 @@
 
 (define (enclose-textarea classes s #:multi-line [multi-line #f])
   (let ([textarea "tt"]) ;shd be "textarea" eventually
-    (let ([ta (enclose-tag textarea classes (enclose-tag "code" "" s))])
+    (let ([ta (enclose-tag textarea classes s)])
       (if multi-line
           (enclose-div ".obeyspaces" ta)
           ta))))
@@ -63,7 +63,7 @@
     (set! x (regexp-replace "} *$" x "")))
   (set! x (regexp-replace* "\\\\over" x "/"))
   (set! x (regexp-replace* "\\\\sqrt" x "\\&radic;"))
-  (set! x (regexp-replace* "{empty}" x ""))
+  (set! x (regexp-replace* "{zwsp}" x ""))
   (set! x (regexp-replace* "\\\\gt" x ">"))
   (set! x (regexp-replace* "\\\\lt" x "<"))
   (set! x (regexp-replace* "\\\\leq" x "\\&le;"))
