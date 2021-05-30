@@ -196,9 +196,9 @@ _Note: There are some cases where the outermost parentheses can be removed from 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math `(+ 3 8)) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(+ 3 8)) }
-|*Code*					| &rarr; | @show{(sexp->code `(+ 3 8)) }
+|*Expression*			| &rarr; | @show{(sexp->math '(+ 3 8)) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(+ 3 8)) }
+|*Code*					| &rarr; | @show{(sexp->code '(+ 3 8)) }
 |===
 
 @ifproglang{wescheme}{
@@ -212,9 +212,9 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math `(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(sexp->code `(* 2 (+ 3 8))) }
+|*Expression*			| &rarr; | @show{(sexp->math '(* 2 (+ 3 8))) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(* 2 (+ 3 8))) }
+|*Code*					| &rarr; | @show{(sexp->code '(* 2 (+ 3 8))) }
 |===
 
 @ifproglang{wescheme}{
@@ -254,10 +254,10 @@ If time allows, take turns entering the code into the editor with your partner.
 
 We have included one page of more complex problems in the student workbook so that you're ready to challenge students who fly @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}.
 
-*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(sexp->code `sqrt)} as the name of the square root function, and @show{(sexp->code `sqr)} as the function that squares its input.
+*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(sexp->code 'sqrt)} as the name of the square root function, and @show{(sexp->code 'sqr)} as the function that squares its input.
 
 @ifproglang{pyret}{
-In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(sexp->code `(f x))} or @show{(sexp->code `(sqrt 9))}
+In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(sexp->code '(f x))} or @show{(sexp->code '(sqrt 9))}
 }
 
 

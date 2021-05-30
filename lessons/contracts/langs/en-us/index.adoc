@@ -90,7 +90,7 @@ Students know about Numbers, Strings,
 Have students log into
 @ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org (CPO)"}}
 @ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor, @ifproglang{pyret}{type the words *include image* on Line 1 of the Definitions area (left side) and press "Run" to load the image library. Then} type
- @show{(sexp->code `(sqrt 16))} into the interactions area and hit Enter.
+ @show{(sexp->code '(sqrt 16))} into the interactions area and hit Enter.
 
 [.lesson-instruction]
 --
@@ -102,7 +102,7 @@ Have students log into
 - What did the expression evaluate to? _4_
 --
 
-Have students type @show{(sexp->code `(string-length "rainbow"))} into the interactions area and hit Enter:
+Have students type @show{(sexp->code '(string-length "rainbow"))} into the interactions area and hit Enter:
 
 [.lesson-instruction]
 --
@@ -114,7 +114,7 @@ Have students type @show{(sexp->code `(string-length "rainbow"))} into the inter
 --
 
 === Investigation
-Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(sexp->code `(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes!
+Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(sexp->code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes!
 
 === Synthesize
 Debrief the activity with the class.
@@ -135,7 +135,7 @@ This activity introduces the notion of @vocab{Contracts}, which are a simple not
 
 === Launch
 
-When students typed @show{(sexp->code `(triangle 50 "solid" "red"))}
+When students typed @show{(sexp->code '(triangle 50 "solid" "red"))}
 into the editor, they created an example of a new @vocab{data type}, called an _Image_.
 
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
@@ -211,7 +211,7 @@ When the input matches what the function consumes, the function produces the out
 
 [.lesson-instruction]
 --
-Here is an example of another function. @show{(sexp->code `(string-append "sun" "shine"))}
+Here is an example of another function. @show{(sexp->code '(string-append "sun" "shine"))}
 
 Type it into the editor. What is its contract?  `string-append {two-colons} String, String -> String`
 --
@@ -246,7 +246,7 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 
 - Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code `(star 50))}
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code '(star 50))}
 
 - What error did we get? What _hint_ does it give us about how to use this function? _``star`` has three elements in its Domain_
 
@@ -314,7 +314,7 @@ Once they've discovered how to build a version of each image function that satis
 --
 
 Have students turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
-If you are ready to dig into @show{(sexp->code `triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
+If you are ready to dig into @show{(sexp->code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to give students a taste of it, have them turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help them match the images to the corresponding expressions. For more practice with detailed contracts you can have them turn to  @opt-printable-exercise{pages/star-polygon.adoc} to work with the detailed contract for a `star-polygon`. Both of these functions can generate a wide range of interesting shapes!
 
