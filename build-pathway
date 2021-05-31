@@ -1385,25 +1385,7 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  #echo doing batchhtmltopdf .cached/$WKH2P_BATCH_BASE.txt
-  rm -f .cached/$WKH2P_BATCH_BASE-split*
-  split -l $(expr 1 + $(wc -l .cached/$WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
-    .cached/$WKH2P_BATCH_BASE.txt .cached/$WKH2P_BATCH_BASE-split
-  for f in .cached/$WKH2P_BATCH_BASE-split*; do
-    #echo doing batchhtmltopdf $f
-    if test -f "$f"; then
-      if test ! $PDFpagesredone; then
-        echo building individual PDF pages
-        echo
-        export PDFpagesredone=1
-      fi
-      #wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
-      while read line; do wkhtmltopdf $line; done < $f > /dev/null 2>&1 &
-    fi
-  done
-  wait
-  #echo done doing batchhtmltopdf
-  test $DEBUG || rm -f .cached/$WKH2P_BATCH_BASE-split*
+  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt
 }
 
 function rmtmpfiles() {
