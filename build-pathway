@@ -1397,7 +1397,8 @@ function batchhtmltopdf() {
         echo
         export PDFpagesredone=1
       fi
-      wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
+      #wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
+      while read line; do wkhtmltopdf $line; done < $f > /dev/null 2>&1 &
     fi
   done
   wait
