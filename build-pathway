@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-29 # last modified
+LASTMOD=2021-05-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -221,6 +221,7 @@ if test ! $RESULT; then
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
+
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
 function overwrite() {
@@ -239,6 +240,7 @@ checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib
 
 if test ! $RESULT; then
   overwrite 'copying' distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
 fi
