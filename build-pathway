@@ -1176,7 +1176,7 @@ function buildpathwaynarrative() {
     done
   fi
   #echo copacetic I $copacetic
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No narrative in pathway $PATHWAY\; creating one
     echo "= $PATHWAY" > index.adoc
@@ -1346,7 +1346,7 @@ function buildteacherresource() {
       fi
     done
   fi
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No teacher resource files in pathway $PATHWAY
   elif ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
