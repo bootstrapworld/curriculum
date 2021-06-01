@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-31 # last modified
+LASTMOD=2021-06-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -220,7 +220,6 @@ if test ! $RESULT; then
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
-
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
@@ -1385,7 +1384,7 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt
+  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt >/dev/null 2>&1
 }
 
 function rmtmpfiles() {
