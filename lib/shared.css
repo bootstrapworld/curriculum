@@ -455,9 +455,9 @@ span.clear {
 .wescheme .recipe_example_body { width: 100%; }
 .pyret    .recipe_example_body { width:  90%; }
 .recipe_example_body_long { width: 90%; }
-.recipe_example_body_wrap { margin-left: 12px; display: inline-block; min-width: 45%;}
-.pyret .recipe_example_body_wrap {min-width: 55%;}
-.recipe_definition_body { width: 90%; }
+.recipe_example_body_wrap { margin-left: 12px; display: inline-block; min-width: 45%; white-space:nowrap;}
+.pyret .recipe_example_body_wrap {min-width: 55%; white-space:nowrap;}
+.recipe_definition_body { width: 90%;  white-space:nowrap;}
 
 /* Piecewise Functions (ask/cond) branches */
 .wescheme .questions  { width: 42%; }
@@ -639,6 +639,14 @@ table.sideways-pyret-table td:first-child p { font-weight: bold; }
 div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   display: inline-block;
 }
+
+
+/************************************************************************************
+ * CONTRACT TABLES 
+ */
+table.contracts-table {border-collapse: collapse;}
+table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
+table.contracts-table td {padding: .1em .625em !important; height: 28pt;}
 
 /************************************************************************************
 * DATASHEETS

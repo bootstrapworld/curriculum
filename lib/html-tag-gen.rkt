@@ -50,8 +50,6 @@
 
 (define (enclose-textarea classes s #:multi-line [multi-line #f])
   (let ([textarea "tt"]) ;shd be "textarea" eventually
-    (when (string=? classes ".pyret")
-      (set! s (enclose-tag "code" "" s)))
     (let ([ta (enclose-tag textarea classes s)])
       (if multi-line
           (enclose-div ".obeyspaces" ta)

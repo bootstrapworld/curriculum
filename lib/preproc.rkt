@@ -1692,7 +1692,7 @@
             [(and (eq? e 'frac) wescheme)
              (add-prereq '/)
              '/]
-            [(and (answer? e) wescheme)
+            [(answer? e) ;(and (answer? e) wescheme)
              (let ((e (cadr e)))
                (holes-to-underscores
                  (if *solutions-mode?* e (answer->hole e))
@@ -1879,7 +1879,7 @@
               (if *pyret?* "# " "; ")
               (if *pyret?* (wescheme->pyret funname-sym) funname)
               " "
-              (if *pyret?* "::" ":")
+              (if *pyret?* "{two-colons}" ":")
               " "
               ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
               " -> "
@@ -1892,7 +1892,7 @@
               ;(if single? "\n```\n" "")
               )])
       (if single?
-          (enclose-textarea (if *pyret?* ".pyret" ".racket") s)
+          (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t)
           s))))
 
 (define (contracts . args)
@@ -1903,7 +1903,7 @@
                     (keyword-apply contract '(#:single?) '(#f)
                                    (car args))))
         (loop (cdr args))))
-    (enclose-textarea (if *pyret?* ".pyret" ".racket") res)))
+    (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
 
 (define elem string-append)
 
@@ -1935,7 +1935,7 @@
   (contract-exercise/internal tag "; " ": "))
 
 (define (contract-exercise/pyret tag)
-  (contract-exercise/internal tag "" " :: "))
+  (contract-exercise/internal tag "# " " :: "))
 
 (define (create-itemlist #:style [style #f] items)
   ;(printf "doing create-itemlist ~s\n" items)

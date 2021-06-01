@@ -408,6 +408,7 @@
     (set! funname (car funname)))
   (unless (string? funname) (set! funname (format "~a" funname)))
   (set! args (list-to-commaed-string args))
+  ;(printf "list-to-commaed-string returned ~s\n" args)
   (cond [(null? body) (set! body "")]
         [(pair? body) (set! body (format "~a" body))])
   (set! body (regexp-replace* #rx"\n" body " "))
@@ -474,11 +475,8 @@
     (if (string=? ans "") " " ans)))
 
 (define (list-to-commaed-string xx)
-  (cond [(null? xx) " "]
-        [(= (length xx) 1) (format "~s" (car xx))]
-        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
-                (if (null? xx) r
-                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
+  ;(printf "doing list-to-commaed-string ~s\n" xx)
+  (string-join (map wescheme->pyret xx) ", "))
 
 (define (vars-to-string xx)
   (let ([ans (apply string-append

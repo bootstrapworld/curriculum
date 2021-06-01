@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-29 # last modified
+LASTMOD=2021-05-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -221,6 +221,7 @@ if test ! $RESULT; then
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
+
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
 function overwrite() {
@@ -239,6 +240,7 @@ checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib
 
 if test ! $RESULT; then
   overwrite 'copying' distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
 fi
@@ -1174,7 +1176,7 @@ function buildpathwaynarrative() {
     done
   fi
   #echo copacetic I $copacetic
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No narrative in pathway $PATHWAY\; creating one
     echo "= $PATHWAY" > index.adoc
@@ -1344,7 +1346,7 @@ function buildteacherresource() {
       fi
     done
   fi
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No teacher resource files in pathway $PATHWAY
   elif ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
@@ -1383,24 +1385,7 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  #echo doing batchhtmltopdf .cached/$WKH2P_BATCH_BASE.txt
-  rm -f .cached/$WKH2P_BATCH_BASE-split*
-  split -l $(expr 1 + $(wc -l .cached/$WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
-    .cached/$WKH2P_BATCH_BASE.txt .cached/$WKH2P_BATCH_BASE-split
-  for f in .cached/$WKH2P_BATCH_BASE-split*; do
-    #echo doing batchhtmltopdf $f
-    if test -f "$f"; then
-      if test ! $PDFpagesredone; then
-        echo building individual PDF pages
-        echo
-        export PDFpagesredone=1
-      fi
-      wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
-    fi
-  done
-  wait
-  #echo done doing batchhtmltopdf
-  test $DEBUG || rm -f .cached/$WKH2P_BATCH_BASE-split*
+  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt
 }
 
 function rmtmpfiles() {
