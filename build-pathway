@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-01 # last modified
+LASTMOD=2021-06-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -650,6 +650,7 @@ function shadowcopydir() {
   # targetdir = pages from repo
   local srcdir=$1
   local targetdir=$2
+  #echo doing shadowcopydir from $srcdir to $targetdir
   mkdir -p "$targetdir"
 
   for f in "$srcdir"/*; do
@@ -1446,6 +1447,7 @@ function copylessondir() {
 }
 
 function buildpathway() {
+  #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1549,21 +1551,17 @@ function buildpathway() {
     fi
 
     if test $REFRESHFRONTMATTER; then
-      if test -d front-matter; then
-        cd front-matter
-        mkdirsolutionversionof $repoDir/$d/front-matter
-        cd ..
-        adjustproglangsubdirs front-matter
-      fi
+      cd front-matter
+      mkdirsolutionversionof $repoDir/front-matter
+      cd ..
+      adjustproglangsubdirs front-matter
     fi
 
     if test $REFRESHBACKMATTER; then
-      if test -d back-matter; then
-        cd back-matter
-        mkdirsolutionversionof $repoDir/$d/back-matter
-        cd ..
-        adjustproglangsubdirs back-matter
-      fi
+      cd back-matter
+      mkdirsolutionversionof $repoDir/back-matter
+      cd ..
+      adjustproglangsubdirs back-matter
     fi
 
     mkdir -p resources/protected
@@ -1571,15 +1569,17 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then
       cd resources
+      mkdirsolutionversionof $repoDir/resources
       for d in *; do
         if test -d $d; then
           cd $d
           mkdirsolutionversionof $repoDir/resources/$d
           cd ..
-          adjustproglangsubdirs $d
+          #adjustproglangsubdirs $d
         fi
       done
       cd ..
+      adjustproglangsubdirs resources
     fi
 
     #exit
