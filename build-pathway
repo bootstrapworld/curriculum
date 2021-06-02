@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-01 # last modified
+LASTMOD=2021-06-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -175,13 +175,10 @@ mkdir -p prog
 mkdir -p distribution/$LANGUAGE/lib
 mkdir -p distribution/$LANGUAGE/extlib
 
-export RESULT=
-
 function checkmd5nochange() {
   local distDir=$1
   local repoDir=$2
   #echo doing checkmd5nochange $distDir $repoDir
-  RESULT=
   test -d $distDir/.cached || mkdir -p $distDir/.cached
   local savef=$distDir/.cached/.checksum.md5txt
   local currdir=$(pwd)
@@ -191,22 +188,22 @@ function checkmd5nochange() {
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
-      RESULT=1
+      return 0
     else
       #echo saving i $savef
       echo $newchecksum > $savef
+      return 1
     fi
   else
     #echo saving ii $savef
     echo $newchecksum > $savef
+    return 1
   fi
 }
 
 export PROGDIR=$TOPDIR/prog
 
-checkmd5nochange $PROGDIR $TOPDIR/shared/langs
-
-if test ! $RESULT; then
+if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $LANGUAGE != en-us, and
   # shared/langs/$LANGUAGE isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
@@ -235,9 +232,7 @@ if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
   cp -pr $TOPDIR/extlib/MathJax* distribution/$LANGUAGE/extlib
 fi
 
-checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib
-
-if test ! $RESULT; then
+if ! checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib; then
   overwrite 'copying' distribution/$LANGUAGE/lib
   cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
@@ -623,8 +618,8 @@ EOF
 }
 
 function adjustproglangsubdirs() {
-  #echo doing adjustproglangsubdirs "$@"
   local d=$1
+  #echo doing adjustproglangsubdirs $(pwd)/$d
 
   test -d "$d" || return
 
@@ -650,6 +645,7 @@ function shadowcopydir() {
   # targetdir = pages from repo
   local srcdir=$1
   local targetdir=$2
+  #echo doing shadowcopydir from $srcdir to $targetdir
   mkdir -p "$targetdir"
 
   for f in "$srcdir"/*; do
@@ -903,31 +899,20 @@ function recursiveadoc() {
   export OTHERDIR="$oldOTHERDIR"
 }
 
-function mkdirsolutionversionof() {
-  #echo doing mkdirsolutionversionof "$@"
+function mkdirsolutionversion() {
+  #echo doing mkdirsolutionversion
   test -d pages || return
 
   #echo PWD is $(pwd)
 
   test -d pages/.cached || mkdir -p pages/.cached
 
-  local origDir="$1"
-
   if test -d solution-pages-2; then
     #echo DEADC0DE: solution-pages-2 shouldn\'t exist
     rm -fr solution-pages-2
   fi
 
-  if test -d solution-pages; then
-    adjustproglangsubdirs solution-pages
-  fi
-
-  if test -d $origDir/pages; then
-    cp -pr $origDir/pages solution-pages-2
-    adjustproglangsubdirs solution-pages-2
-  else
-    mkdir solution-pages-2
-  fi
+  cp -pr pages solution-pages-2
 
   cp -p $PROGDIR/.hta* solution-pages-2
 
@@ -994,8 +979,7 @@ function buildworkbookpages() {
 
   DORECURSIVEADOC=1
 
-    checkmd5nochange . $repoDir
-    if test $RESULT; then
+    if checkmd5nochange . $repoDir; then
       #echo no need to do recursive adoc
       DORECURSIVEADOC=
     fi
@@ -1009,10 +993,7 @@ function buildworkbookpages() {
     mkdir pages
   fi
 
-  # subdir -> adjustproglangsubdirs moved
-
-  mkdirsolutionversionof $repoDir
-  #adjustproglangsubdirs solution-pages
+  mkdirsolutionversion
 
   #
   export PATHWAYROOTDIR="../../"
@@ -1416,8 +1397,7 @@ function copylessondir() {
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
       #echo doing checkmd5nochange $lessonDir $repoLessonDir
-      checkmd5nochange $lessonDir $repoLessonDir
-      if test $RESULT; then
+      if checkmd5nochange $lessonDir $repoLessonDir; then
         #echo $lessonDir doesnt need copying
         DOCOPYDIR=
       fi
@@ -1430,9 +1410,7 @@ function copylessondir() {
       checklessonplan $lessonDir
       for subdir in *; do
         if test -d "$subdir"; then
-          if test "$subdir" != solution-pages; then
-            adjustproglangsubdirs "$subdir"
-          fi
+          adjustproglangsubdirs "$subdir"
         fi
       done
       for subdir in *; do
@@ -1446,6 +1424,7 @@ function copylessondir() {
 }
 
 function buildpathway() {
+  #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1482,8 +1461,7 @@ function buildpathway() {
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/$DESTPATHWAYDIR"
 
-    checkmd5nochange $DESTPATHWAYDIR $repoDir
-    if test ! $RESULT; then
+    if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
       echo copying pathway $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
     fi
@@ -1494,22 +1472,19 @@ function buildpathway() {
 
       #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
-        checkmd5nochange $distDir/front-matter $repoDir/front-matter
-        if test $RESULT; then
+        if checkmd5nochange $distDir/front-matter $repoDir/front-matter; then
           REFRESHFRONTMATTER=
         fi
       fi
 
       if test -d $distDir/back-matter -a -d $repoDir/back-matter; then
-        checkmd5nochange $distDir/back-matter $repoDir/back-matter
-        if test $RESULT; then
+        if checkmd5nochange $distDir/back-matter $repoDir/back-matter; then
           REFRESHBACKMATTER=
         fi
       fi
 
       if test -d $distDir/resources -a -d $repoDir/resources; then
-        checkmd5nochange $distDir/resources $repoDir/resources
-        if test $RESULT; then
+        if checkmd5nochange $distDir/resources $repoDir/resources; then
           REFRESHRESOURCES=
         fi
       fi
@@ -1549,21 +1524,17 @@ function buildpathway() {
     fi
 
     if test $REFRESHFRONTMATTER; then
-      if test -d front-matter; then
-        cd front-matter
-        mkdirsolutionversionof $repoDir/$d/front-matter
-        cd ..
-        adjustproglangsubdirs front-matter
-      fi
+      cd front-matter
+      mkdirsolutionversion
+      cd ..
+      adjustproglangsubdirs front-matter
     fi
 
     if test $REFRESHBACKMATTER; then
-      if test -d back-matter; then
-        cd back-matter
-        mkdirsolutionversionof $repoDir/$d/back-matter
-        cd ..
-        adjustproglangsubdirs back-matter
-      fi
+      cd back-matter
+      mkdirsolutionversion
+      cd ..
+      adjustproglangsubdirs back-matter
     fi
 
     mkdir -p resources/protected
@@ -1571,26 +1542,22 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then
       cd resources
+      mkdirsolutionversion
       for d in *; do
         if test -d $d; then
           cd $d
-          mkdirsolutionversionof $repoDir/resources/$d
+          mkdirsolutionversion
           cd ..
-          adjustproglangsubdirs $d
+          #adjustproglangsubdirs $d
         fi
       done
       cd ..
+      adjustproglangsubdirs resources
     fi
-
-    #exit
 
     $PROGDIR/collect-workbook-pages.rkt
 
-    #exit
-
     buildlessons
-
-    #exit
 
     export WORKBOOKPAGE=1
 
@@ -1618,7 +1585,6 @@ function buildpathway() {
     if test $REFRESHRESOURCES; then
       for d in *; do
         if test -d "$d"; then
-          adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
           if test "$d" = datasheets; then
             export DATASHEETPAGE=1
           else
@@ -1729,12 +1695,15 @@ function buildpathway() {
     fi
   fi
   test $EXPANDEDWARNINGS || echo $'\033[?7h'
+
 }
 
 function allthestandards() {
   cd $TOPDIR
   cd distribution/$LANGUAGE
   export LANGROOTDIR=./
+  #echo doing allthestandards in $(pwd)
+  test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
   for d in courses/*; do
     test -d $d || continue
@@ -1745,7 +1714,6 @@ function allthestandards() {
       sed -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
     fi
   done
-  test -d .cached || mkdir -p .cached
   $PROGDIR/make-standards.rkt
   asciidoctor -a linkcss -a proglang=$PROGLANG \
     -a stylesheet=lib/curriculum.css \
