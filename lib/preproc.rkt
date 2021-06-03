@@ -1179,6 +1179,7 @@
           (call-with-output-file out-file
             (lambda (o)
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+                    [*narrative* (display "[.narrative]\n" o)]
                     )
               (expand-directives i o)
 
