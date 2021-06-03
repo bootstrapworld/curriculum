@@ -7,21 +7,6 @@ Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Nu
 |===
 | Name    			|	 | Domain      							|     	| Range
 
-
-| `;` `star-polygon`
-| `:`
-| @ifsoln{`Number, Number, Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_star-polygon(100, 10, 3, "outline", "yellow")_`}
-
-| `# image-url`
-| `{two-colons}`
-| @ifsoln{`String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_image-url("https://www.bootstrapworld.org/images/icon.png")_`}
-
 | `# scale`
 | `{two-colons}`
 | @ifsoln{`Number, Image`}
@@ -77,5 +62,20 @@ Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Nu
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`}
+
+| `#` `or`
+| `:`
+| @ifsoln{`Boolean, Boolean`}
+| `->`
+| @ifsoln{`Boolean`}
+5+| @ifsoln{`_(<= 3 2) or (>= 3 2)_`}
+
+| `#` `and`
+| `:`
+| @ifsoln{`Boolean Boolean`}
+| `->`
+| @ifsoln{`Boolean`}
+5+| @ifsoln{`_(<= 3 2) and (>= 3 2)_`}
+
 
 |===
