@@ -32,7 +32,7 @@
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
                  [else
-                   (printf "WARNING: missing ~a\n\n" workbook-pages-file)
+                   ;(printf "WARNING: missing ~a\n\n" workbook-pages-file)
                    '()])]
          [exercise-pages
            (cond [(not (truthy-getenv "ADDEXERCISES")) '()]

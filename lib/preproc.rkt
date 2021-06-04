@@ -1693,11 +1693,6 @@
             [(and (eq? e 'frac) wescheme)
              (add-prereq '/)
              '/]
-            [(answer? e) ;(and (answer? e) wescheme)
-             (let ((e (cadr e)))
-               (holes-to-underscores
-                 (if *solutions-mode?* e (answer->hole e))
-                 #:wescheme #t))]
             [(pair? e) (cons (holes-to-underscores (car e) #:wescheme wescheme)
                              (holes-to-underscores (cdr e) #:wescheme wescheme))]
             [else
@@ -1706,13 +1701,15 @@
 
 (define (sexp->wescheme e)
   ;(printf "doing sexp->wescheme ~s\n" e)
-  (enclose-textarea ".racket" (format "~s" (holes-to-underscores e #:wescheme #t)))
-  ;(enclose-textarea ".racket" (sexp->block e))
-  )
+  (let ([h (holes-to-underscores e #:wescheme #t)])
+    ;(printf "h2u retn'd ~s\n" h)
+    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
 
 (define (sexp->pyret e)
   ;(printf "doing sexp->pyret ~s\n" e)
-  (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
+  (let ([h (holes-to-underscores e)])
+    ;(printf "h2u retn'd ~s\n" h)
+    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t))))
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
@@ -1810,7 +1807,7 @@
                              )))]
         [else (error 'ERROR "sexp->block-table: unknown s-exp")]))
 
-(define (sexp->block e #:pyret [pyret #f])
+(define (sexp->block e #:pyret [pyret #f] #:wescheme [wescheme #f])
   ;(printf "doing sexp->block ~s ~a\n" e pyret)
   (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
         [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
@@ -1825,26 +1822,32 @@
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
-                             (sexp->block e #:pyret pyret))
-                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a"
-                                                 fill-len)
+                           (enclose-span
+                             (if wescheme
+                                 (format ".studentAnswerFilled~a" fill-len)
+                                 (format ".studentBlockAnswerFilled~a" fill-len))
+                             (sexp->block e #:pyret pyret #:wescheme wescheme))
+                           (enclose-span
+                             (if wescheme
+                                 (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
+                                 (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
                        (if (or (symbol? a) (answer? a))
                            (let ([args (intersperse-spaces
                                          (map (lambda (e1)
-                                                (sexp->block e1 #:pyret pyret))
+                                                (sexp->block e1 #:pyret pyret #:wescheme wescheme))
                                               (cdr e)) 'args)])
                              (string-append
                                (enclose-span ".lParen" "(")
-                               (enclose-span ".operator" (sexp->block a #:pyret pyret))
+                               (enclose-span ".operator"
+                                 (sexp->block a #:pyret pyret #:wescheme wescheme))
                                args
                                (enclose-span ".rParen" ")")))
                            (let ([parts (intersperse-spaces
                                           (map (lambda (e1)
-                                                 (sexp->block e1 #:pyret pyret))
+                                                 (sexp->block e1 #:pyret pyret #:wescheme wescheme))
                                                e) #f)])
                              (string-append
                                (enclose-span ".lParen" "(")
