@@ -1,0 +1,100 @@
+=  Do Examples Have the Same Contracts?
+
+@do{
+(define e1
+   (code '(EXAMPLE
+         (mystery 30) (* 30 50)
+         (mystery 10) (text "Welcome!" 10 "darkgreen"))))
+(define c1 "no match (the range types are different)")
+
+
+(define e2
+   (code '(EXAMPLE
+         (mystery 30 40) (- 40 (* 2 30))
+         (mystery 10 15) (- 15 (* 2 10)))))
+(define c2 (contract "mystery" '("Number" "Number") "Number"))
+
+
+(define e3
+   (code '(EXAMPLE
+         (mystery "New York") (text "New York" 20 "red")
+         (mystery 20) (text "New York" 20 "red"))))
+(define c3 "no match (the domain types are different)")
+
+
+(define e4
+   (code '(EXAMPLE
+         (mystery "green" 32) (circle 32 "outline" "green")
+         (mystery 18 "green") (circle 18 "outline" "green"))))
+(define c4 "no match (the domain types are in different orders)")
+
+(define e5
+   (code '(EXAMPLE
+         (mystery 6 9 10) (/ 6 (+ 9 10))
+         (mystery 3 7) (/ 3 (+ 7 10)))))
+(define c5 "no match (the domains have different numbers of arguments)")
+
+(define e6
+   (code '(EXAMPLE
+         (mystery "red" "blue") (text "blue" 25 "red")
+         (mystery "purple" "Go Team!") (text "Go Team!" 25 "purple"))))
+(define c6 (contract "mystery" '("String" "String") "Image"))
+
+
+(define e7
+   (code '(EXAMPLE
+         (mystery (circle 55 "outline" "black") 12)
+         (scale 12 (circle 55 "outline" "black"))
+         (mystery (rectangle 24 32 "outline" "purple") 5)
+         (scale 5 (rectangle 24 32 "outline" "purple")))))
+(define c7 (contract "mystery" '("Image" "Number") "Image"))
+
+
+}
+For each pairs of Examples below, decide whether the two examples
+have the same contract. If they do, fill in the contract in the space
+provided. If not, write a few words explaining why.
+
+@vspace{1ex}
+
+*@n* @showsoln{c1} @ifnotsoln{@fitb{40em}{}}
+
+@show{e1}
+
+@vspace{2ex}
+
+*@n* @showsoln{c2} @ifnotsoln{@fitb{40em}{}}
+
+@show{e2}
+
+@vspace{2ex}
+
+*@n* @showsoln{c3} @ifnotsoln{@fitb{40em}{}}
+
+@show{e3}
+
+@vspace{2ex}
+
+*@n* @showsoln{c4} @ifnotsoln{@fitb{40em}{}}
+
+@show{e4}
+
+@vspace{2ex}
+
+*@n* @showsoln{c5} @ifnotsoln{@fitb{40em}{}}
+
+@show{e5}
+
+@vspace{2ex}
+
+*@n* @showsoln{c6} @ifnotsoln{@fitb{40em}{}}
+
+@show{e6}
+
+@vspace{2ex}
+
+*@n* @showsoln{c7} @ifnotsoln{@fitb{40em}{}}
+
+@vspace{2ex}
+
+@show{e7}
