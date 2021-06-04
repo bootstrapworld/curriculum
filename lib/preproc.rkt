@@ -1179,6 +1179,7 @@
           (call-with-output-file out-file
             (lambda (o)
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+                    [*narrative* (display "[.narrative]\n" o)]
                     )
               (expand-directives i o)
 
@@ -1879,9 +1880,11 @@
               (if *pyret?* "# " "; ")
               (if *pyret?* (wescheme->pyret funname-sym) funname)
               " "
-              (if *pyret?* "{two-colons}" ":")
+              ; used to be single colon for WeScheme
+              "{two-colons}"
               " "
-              ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
+              ; used to not have commas in WeScheme
+              (vars-to-commaed-string domain-list)
               " -> "
               range
               (if purpose
