@@ -339,6 +339,14 @@ span.clear {
   width:              100%;
 }
 
+/**
+ * Auto-numbering. 
+ * Add a right-paren, unless it's inside a table.
+ */
+.autonum::after { content: ')'; }
+table autonum::after { content: none; }
+
+
 /*
 * Two Column Layout that spans page width, using DT and DD tags
 * Every other row is shaded for readability
@@ -661,22 +669,16 @@ table.contracts-table td {padding: .1em .625em !important; height: 28pt;}
     font-weight: bold;
 }
 
-/*
-.answer {
-    font-style: italic;
-}
-*/
-
 .optional::before {
     content: none;
 }
 
-.autonum::after { content: ')'; }
 
 .codetwo {
     font-family: monospace;
     background-color: #f7f7f8;
     color: black;
+    word-break: break-word;
 }
 
 /************************************************************************************
