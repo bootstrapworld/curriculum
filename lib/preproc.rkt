@@ -2004,26 +2004,6 @@
                   paddedcolA paddedcolB))
       "\n\n")))
 
-(define questions-and-answers two-col-layout)
-
-(define completion-exercise two-col-layout)
-
-(define (open-response-exercise colA answer-type)
-  (unless (member answer-type '("circeval" "code" "math" "text"))
-    (error 'ERROR "open-response-exercise: Unexpected answer type ~a\n" answer-type))
-  (two-col-layout colA '()
-                  #:rightcolextratag (string-append ".studentAnswer" "." answer-type)))
-
-(define (matching-exercise #:permute [permute #f]
-                           colA colB)
-  (let* ([colB (if permute (permute-list colB) colB)]
-         [nA (length colA)]
-         [nB (length colB)]
-         [paddedcolA (if (> nB nA) (pad-to colA nB "") colA)]
-         [paddedcolB (if (> nA nB) (pad-to colB nA "") colB)])
-    (two-col-layout #:layoutstyle ".matching"
-                    paddedcolA paddedcolB)))
-
 (define (get-index ans presented-order #:compare-with [compare-with eq?])
   (let loop ([i 0] [s presented-order])
     (cond [(null? s) -1]
@@ -2035,28 +2015,6 @@
     (lambda (i)
       (string (integer->char (+ a->int i))))))
 
-(define (matching-exercise-answers #:compare-with [compare-with eq?]
-                                   #:content-of-ans [content-of-ans #f]
-                                   #:some-no-match? [some-no-match? #f]
-                                   ques formatted-ans presented-ans)
-  (let ([annotated-ans
-          (map (lambda (ansF ansC)
-                 (let ([i (get-index ansC presented-ans
-                                     #:compare-with compare-with)]
-                       [label #f])
-                   (when (and (< i 0) (not some-no-match?))
-                     (error 'ERROR "matching-exercise-answers: Couldn't find ~a in ~a\n"
-                            ansC presented-ans))
-                   (enclose-div ".labeledRightColumn"
-                     (if (>= i 0)
-                         (let ([label (int->alpha i)])
-                           (string-append
-                             (enclose-span ".rightColumnLabel" label)
-                             ansF))
-                         (enclose-span ".matchLabelAns"
-                           "No matching answer")))))
-               formatted-ans (or content-of-ans formatted-ans))])
-    (two-col-layout #:layoutstyle ".solutions.matching" ques annotated-ans)))
 
 (define (exercise-evid-tags . x) #f)
 
