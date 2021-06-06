@@ -1705,20 +1705,20 @@
     ;(printf "h2u retn'd ~s\n" h)
     (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
 
-(define (sexp->pyret e)
+(define (sexp->pyret e #:parens [parens #f])
   ;(printf "doing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ;(printf "h2u retn'd ~s\n" h)
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t))))
+    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
-(define (sexp->code e)
-  ((if (string=? *proglang* "pyret")
-       sexp->pyret
-       sexp->wescheme) e))
+(define (sexp->code e #:parens [parens #f])
+  (if (string=? *proglang* "pyret")
+      (sexp->pyret e #:parens parens)
+      (sexp->wescheme e)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
