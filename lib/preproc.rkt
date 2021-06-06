@@ -1630,10 +1630,12 @@
                                            (infix-op? a #:pyret #t)
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
-                                   [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
-                                   [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
+                                   [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t
+                                                     #:parens parens)]
+                                   [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t
+                                                    #:parens parens)]
                                    [x (format "~a ~a ~a" lft a rt)])
-                              (if wrap (format "({empty}~a{empty})" x) x)) ]
+                              (if (or wrap parens) (format "({zwsp}~a{zwsp})" x) x)) ]
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
                                                  (infix-op? a #:pyret #f)
                                                  ))
@@ -1662,7 +1664,7 @@
                                     " { ( ~a ) }^ 2 "
                                     " { ~a }^ 2 ") xm))]
                            [else
-                             (format (if pyret "~a{empty}({empty}~a{empty})" "~a(~a)")
+                             (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
                                      (sexp->arith a #:pyret pyret #:parens parens)
                                      (string-join
                                        (map (lambda (e1)
@@ -1706,7 +1708,7 @@
     (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
 
 (define (sexp->pyret e #:parens [parens #f])
-  ;(printf "doing sexp->pyret ~s\n" e)
+  ;(printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ;(printf "h2u retn'd ~s\n" h)
     (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
@@ -2014,7 +2016,6 @@
   (let ([a->int (char->integer #\a)])
     (lambda (i)
       (string (integer->char (+ a->int i))))))
-
 
 (define (exercise-evid-tags . x) #f)
 
