@@ -322,7 +322,8 @@
   (let ([all-lessons (read-data-file (format "../../lesson-order.txt"))])
     ;(printf "f : ~s\n" (file-exists? (format "../../lesson-order.txt")))
     ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
-    (display "\n\n=== Lessons\n" o)
+    ;(display "\n\n=== Lessons\n" o)
+    (display (create-begin-tag "div" ".sidebarlessons") o)
     (display
       (string-join
         (map (lambda (lesson)
@@ -340,8 +341,11 @@
                        (enclose-span ".prerequisite" lk)
                        lk))))
              all-lessons)
-        ", ") o))
-  (display "\n\n" o))
+        ", ") o)
+    (newline o)
+    (display (create-end-tag "div") o)
+    (newline o)
+    ))
 
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
@@ -351,10 +355,14 @@
         [else
           ;(display "\n.Standards\n" o)
           ;(display "| " o)
-          (display "\n\n=== Standards\n" o)
+          ;(display "\n\n=== Standards\n" o)
+          (display (create-begin-tag "div" ".sidebarstandards") o)
           ;(display-standards-selection o *narrative* *dictionaries-represented*)
           (display
-            "include::{cachedir}.pathway-standards.asc[]\n" o)]))
+            "include::{cachedir}.pathway-standards.asc[]\n" o)
+          (display (create-end-tag "div") o)
+          (newline o)
+          ]))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -1245,7 +1253,9 @@
 
               (when *lesson-plan*
                 ;(printf "adding sidebar in ~s\n" (current-directory))
+                (newline o)
                 (display (create-begin-tag "div" ".sidebar") o)
+                (newline o)
                 ;(display "\n|===\n" o)
                 (display-prereqs-bar o)
                 (display-standards-bar o)
