@@ -5,31 +5,20 @@
 
 - In math, *Piecewise Functions* are functions that can behave one way for part of their Domain, and another way for a different part. In our pizza example, our function would act like @math{cost(pizzas) = 10 * pizzas} for anywhere from 1-5 pizzas. But after 5, it acts like @math{cost(pizzas) = 5 * pizzas}.
 
-- Piecewise functions are divided into "pieces". Each piece is divided into two parts: 
+- Piecewise functions are divided into "pieces". Each piece is divided into two parts:
 
-. How the function should behave 
+. How the function should behave
 . The domain where it behaves that way
 
 - Our programming language can be used to write piecewise functions, too! Just as in math, each piece has two parts:
-
-@ifproglang{wescheme}{
-----
-(define (cost pizzas)
+@show{
+(code '(define (cost pizzas)
   (cond
     [(< pizzas 6) (* 10 pizzas)]
-    [(>= pizzas 6) (* 5 pizzas)]))
-----
+    [(>= pizzas 6) (* 5 pizzas)])))
 }
 
-@ifproglang{pyret}{
-----
-fun cost(pizzas):
-  ask:
-    | pizzas < 6 then: 10 * pizzas
-    | pizzas >= 6 then: 5 * pizzas
-  end
-end
-----
-}
+@vspace{2ex}
 
-- Piecewise functions are powerful, and let us solve more complex problems. We can use piecewise functions in a video game to add or subtract from a character's x-coordinate, moving it left or right depending on which key was pressed.
+
+Piecewise functions are powerful, and let us solve more complex problems. We can use piecewise functions in a video game to add or subtract from a character's x-coordinate, moving it left or right depending on which key was pressed.

@@ -3,83 +3,78 @@
 
 Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(100, 50, "outline", "red")` will evaluate to an `Image`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    |       | Domain      |     | Range
-|`# string-equal`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-|`# string-contains`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| Name    			|	 | Domain      							|     	| Range
 
 | `# num-sqr`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| `Number`
+| `->`
+| `Number`
+5+|`_num-sqr(9)_`
 
 | `# num-sqrt`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| `Number`
+| `->`
+| `Number`
+5+|`_num-sqrt(25)_`
 
 |`# string-length`
-| `{two-colons}` 
-|
+| `{two-colons}`
+| `String`
 |`->`
-|
-5+|`#`
+| `Number`
+5+|`_string-length("Rainbow"}_`
+
+|`# string-contains`
+| `{two-colons}`
+|`String, String`
+|`->`
+|`Boolean`
+5+|`string-contains("catnap", "cat")`
 
 | `# triangle`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| `Number, String, String`
+| `->`
+| `Image`
+5+|`_triangle(80, "solid", "darkgreen")_`
 
 | `# star`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star(50, "solid", "teal")_`}
 
 | `# circle`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_circle(30, "outline", "fuchsia")_`}
 
 | `# square`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_square(10, "outline", "red")_`}
 
 | `# rectangle`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_rectangle(20, 80, "solid", "gold")_`}
+
+| `# rhombus`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_rhombus(20, 50, "solid", "turquoise")_`}
 
 |===

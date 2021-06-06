@@ -7,6 +7,7 @@
          design-recipe-exercise
          get-function-name
          wescheme->pyret
+         wescheme->wescheme
          vars-to-commaed-string vars-to-string
          )
 
@@ -56,7 +57,62 @@
     (if show? s
         (string-multiply "&#x5f;" (string-length s)))))
 
-(define (wescheme->pyret e #:wrap [wrap #f])
+(define (wescheme->wescheme e #:indent [indent #f])
+  ;(printf "doing wescheme->wescheme ~s\n" e)
+  (cond [(string? e) (format "~s" e)]
+        [(not (pair? e)) (format "~a" e)]
+        [(list e) (let ([a (car e)])
+                    (cond [(and (eq? a 'cond) (> (length e) 1))
+                           (let ([cond-clauses (cdr e)])
+                             (string-append
+                               "(cond\n"
+                               (string-join
+                                 (map
+                                   (lambda (cl)
+                                     (string-append
+                                       (if indent (make-string (+ indent 2) #\space) "")
+                                       "["
+                                       ;REVISIT should propagate indent to within cond-clauses?
+                                       (string-join (map wescheme->wescheme cl) " ")
+                                       "]"))
+                                   (cdr cond-clauses))
+                                 "\n")))]
+                          [(and (eq? a 'define) (= (length e) 3))
+                           (let* ([lhs (cadr e)] [rhs (caddr e)]
+                                                 [lhs-s (wescheme->wescheme lhs)]
+                                                 [rhs-s (wescheme->wescheme rhs #:indent
+                                                                            (and indent (+ indent 2)))]
+                                                 [rhs-s-nl? (regexp-match "\n" rhs-s)])
+                             (string-append "(define " lhs-s
+                               (if rhs-s-nl? "\n" " ")
+                               (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
+                               rhs-s ")"))]
+                          [(eq? a 'EXAMPLE)
+                           (let ([num-examples (/ (length (cdr e)) 2)])
+                             (let loop ([n num-examples] [e (cdr e)] [r ""])
+                               (if (= n 0) r
+                                   (let* ([lhs (car e)] [rhs (cadr e)]
+                                                        [lhs-s (wescheme->wescheme lhs)]
+                                                        [rhs-s (wescheme->wescheme rhs)]
+                                                        [tot-len (+ (string-length lhs-s)
+                                                                    (string-length rhs-s))])
+                                     (loop (- n 1) (cddr e)
+                                           (string-append r
+                                             (if (= n num-examples) "" "\n")
+                                             "(EXAMPLE\n"
+                                             (if indent (make-string (+ indent 2) #\space) "")
+                                             lhs-s
+                                             (if (< tot-len 35)
+                                                 " "
+                                                 (string-append "\n"
+                                                   (if indent (make-string (+ indent 2) #\space) "")))
+                                             rhs-s ")"))))))]
+                          [else (string-append "("
+                                  (string-join (map wescheme->wescheme e) " ")
+                                  ")")]))]
+        [else (error ' wescheme->wescheme "")]))
+
+(define (wescheme->pyret e #:wrap [wrap #f] #:indent [indent #f])
   ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (cond [(eq? e 'sqrt) "num-sqrt"]
@@ -87,14 +143,54 @@
                                    [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if wrap
-                                  (format "({zwsp}~a{zwsp})" x)
+                                  (format "({empty}~a{empty})" x)
                                   x))]
                            [(eq? a 'cond)
                             (string-append "ask:\n"
                               (string-join
-                                (map wescheme-cond-clause->pyret (cdr e)) "\n")
-                              "\nend")]
-                           [else (format "~a{zwsp}({zwsp}~a{zwsp})"
+                                (map (lambda (e)
+                                       (wescheme-cond-clause->pyret
+                                         e #:indent indent))
+                                     (cdr e)) "\n")
+                              "\n"
+                              (if indent (make-string indent #\space) "")
+                              "end")]
+                           [(eq? a 'define)
+                            (let* ([lhs (cadr e)] [rhs (caddr e)]
+                                                  [lhs-s (wescheme->pyret lhs)]
+                                                  [rhs-s (wescheme->pyret rhs #:indent
+                                                                          (and indent (+ indent 2)))]
+                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)])
+                              (if (pair? lhs)
+                                  (string-append "fun " lhs-s ":"
+                                    (if rhs-s-nl? "\n" " ")
+                                    (if indent (make-string (+ indent 2) #\space) "")
+                                    rhs-s
+                                    (if rhs-s-nl? "\n" " ")
+                                    "end")
+                                  (string-append lhs-s " = " rhs-s)))]
+                           [(eq? a 'EXAMPLE)
+                            (let ([num-examples (/ (length (cdr e)) 2)])
+                              (let loop ([n num-examples] [e (cdr e)] [r "examples:"])
+                                (if (= n 0)
+                                    (string-append r "\nend")
+                                    (let* ([lhs (car e)] [rhs (cadr e)]
+                                                         [lhs-s (wescheme->pyret lhs)]
+                                                         [rhs-s (wescheme->pyret rhs)]
+                                                         [tot-len (+ (string-length (format "~s" lhs))
+                                                                     (string-length (format "~s" rhs)))])
+                                      ;(printf "*** lhs-s = ~s; rhs-s = ~s\n" lhs-s rhs-s)
+                                      ;(printf "*** tot-len = ~s\n" tot-len)
+                                      (loop (- n 1) (cddr e)
+                                            (string-append r "\n"
+                                              (if indent (make-string (+ indent 2) #\space) "")
+                                              lhs-s " is "
+                                              (if (< tot-len 35) ""
+                                                  (string-append
+                                                    "\n"
+                                                    (if indent (make-string (+ indent 4) #\space) "")))
+                                              rhs-s))))))]
+                           [else (format "~a{empty}({empty}~a{empty})"
                                          (wescheme->pyret a)
                                          (string-join
                                            (map (lambda (e1)
@@ -103,9 +199,12 @@
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
 
-(define (wescheme-cond-clause->pyret e)
+(define (wescheme-cond-clause->pyret e #:indent [indent #f])
+  ;(printf "doing wescheme-cond-clause->pyret ~s\n" e)
   (let ([a (car e)])
-    (string-append "| "
+    (string-append
+      (if indent (make-string (+ indent 2) #\space) "")
+      "| "
       (if (eq? a 'else) "otherwise"
           (string-append (wescheme->pyret a)
             " then"))
@@ -204,7 +303,7 @@
               (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
-  ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a " num-examples example-list buggy-example-list)
+  ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a\n" num-examples example-list buggy-example-list)
   (string-append
     (write-title "Examples")
     "[.recipe.recipe_instructions]\n"
@@ -302,12 +401,14 @@
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
   (unless (string? body)
-    (set! body (wescheme->pyret body)))
+    (set! body (if (null? body) ""
+                   (wescheme->pyret body))))
   (when (pair? funname)
     (set! args (cdr funname))
     (set! funname (car funname)))
   (unless (string? funname) (set! funname (format "~a" funname)))
   (set! args (list-to-commaed-string args))
+  ;(printf "list-to-commaed-string returned ~s\n" args)
   (cond [(null? body) (set! body "")]
         [(pair? body) (set! body (format "~a" body))])
   (set! body (regexp-replace* #rx"\n" body " "))
@@ -374,11 +475,8 @@
     (if (string=? ans "") " " ans)))
 
 (define (list-to-commaed-string xx)
-  (cond [(null? xx) " "]
-        [(= (length xx) 1) (format "~s" (car xx))]
-        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
-                (if (null? xx) r
-                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
+  ;(printf "doing list-to-commaed-string ~s\n" xx)
+  (string-join (map wescheme->pyret xx) ", "))
 
 (define (vars-to-string xx)
   (let ([ans (apply string-append
@@ -499,6 +597,7 @@
                              (highlight-keywords body-line) *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
+  ;(printf "doing write-definition/pyret ~s ~s ~s\n" funname param-list body)
   (when (or (not body) (null? body)) (set! body ""))
   (unless (string? body) (set! body (wescheme->pyret body)))
       (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]

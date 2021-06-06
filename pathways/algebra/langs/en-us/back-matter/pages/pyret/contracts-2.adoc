@@ -3,83 +3,78 @@
 
 Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(50, 100, "solid", "teal")` will evaluate to an `Image`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    |       | Domain      |     | Range
-| `# rhombus`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| Name    			|	 | Domain      							|     	| Range
 
 | `# ellipse`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_ellipse(30, 70, "outline", "lightblue")_`}
 
 | `# text`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`String, Number, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_text("I'm thankful for...", 50, "green")_`}
 
 | `# regular-polygon`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_regular-polygon(8, 40, "solid", "red")_`}
+
+| `#` `right-triangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_right-triangle(20, 50, "outline", "black")_`}
+
+| `#` `isosceles-triangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_isosceles-triangle(100, 30, "solid", "black")_`}
 
 | `# radial-star`
-| `{two-colons}` 
-| Number, Number, Number, String, String
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_radial-star(17, 50, 10, "solid", "orange")_`}
+
+| `;` `star-polygon`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star-polygon(100, 10, 3, "outline", "yellow")_`}
+
+| `;` `triangle/sas`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(triangle-sas 200 50 100 "solid" "blue")_`}
+
+| `#` `triangle/asa`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_triangle-asa(100, 50, 200, "solid", "turquoise")_`}
 
 | `# image-url`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-| `# scale`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-| `# rotate`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-| `# overlay`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-| `# put-image`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_image-url("https://www.bootstrapworld.org/images/icon.png")_`}
 
 |===

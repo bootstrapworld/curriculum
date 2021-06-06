@@ -1,22 +1,29 @@
 = Practicing Contracts: Domain & Range
 
+++++
+<style>
+.forceShadedBlockWTF { background-color: #f7f7f8 !important; }
+</style>
+++++
+
 @vspace{1ex}
 
 Consider the following contract:
 
+[.forceShadedBlockWTF]
 ----
 is-beach-weather :: Number, String -> Boolean
 ----
 
-@n What is the *Name* of this function? @fitb{25em}{@showsoln{"_is-beach-weather_" }}
+@n What is the *Name* of this function? @fitb{25em}{@ifsoln{_is-beach-weather_}}
 
-@n How many arguments are in this function's  *Domain*? @fitb{18em}{@showsoln{"_2_" }}
+@n How many arguments are in this function's  *Domain*? @fitb{18em}{@ifsoln{_2_}}
 
-@n What is the *type* of this function's  *first argument*? @fitb{18em}{@showsoln{"_Number_" }}
+@n What is the *type* of this function's  *first argument*? @fitb{18em}{@ifsoln{_Number_}}
 
-@n What is the *type* of this function's  *second argument*? @fitb{17em}{@showsoln{"_String_" }}
+@n What is the *type* of this function's  *second argument*? @fitb{17em}{@ifsoln{_String_}}
 
-@n What is the *Range* of this function? @fitb{25em}{@showsoln{"_Boolean_" }}
+@n What is the *Range* of this function? @fitb{25em}{@ifsoln{_Boolean_}}
 
 @vspace{1ex}
 
@@ -24,33 +31,34 @@ is-beach-weather :: Number, String -> Boolean
 
 @vspace{1ex}
 
-A. @show{(sexp->code `(is-beach-weather 70 90))}
+A. @show{(sexp->code '(is-beach-weather 70 90))}
 
-B. @show{(sexp->code `(is-beach-weather 80 100 "cloudy"))}
+B. @show{(sexp->code '(is-beach-weather 80 100 "cloudy"))}
 
-C. @show{(sexp->code `(is-beach-weather "sunny" 90))}
+C. @show{(sexp->code '(is-beach-weather "sunny" 90))}
 
-D.@showsoln{"***" } @show{(sexp->code `(is-beach-weather 90 "stormy weather"))}
+D. @ifsoln{***} @show{(sexp->code '(is-beach-weather 90 "stormy weather"))}
 
 @vspace{1ex}
 
 Consider the following contract:
 
+[.forceShadedBlockWTF]
 ----
 cylinder :: Number, Number, String -> Image
 ----
 
-@n What is the *Name* of this function? @fitb{26em}{@showsoln{"_radius_" }}
+@n What is the *Name* of this function? @fitb{26em}{@ifsoln{_radius_}}
 
-@n How may arguments are in this function's *Domain*? @fitb{18em}{@showsoln{"_3_" }}
+@n How may arguments are in this function's *Domain*? @fitb{18em}{@ifsoln{_3_}}
 
-@n What is the *type* of this function's *first argument*? @fitb{18em}{@showsoln{"_Number_" }}
+@n What is the *type* of this function's *first argument*? @fitb{18em}{@ifsoln{_Number_}}
 
-@n What is the *type* of this function's *second argument*? @fitb{17em}{@showsoln{"_Number_" }}
+@n What is the *type* of this function's *second argument*? @fitb{17em}{@ifsoln{_Number_}}
 
-@n What is the *type* of this function's *third argument*? @fitb{18em}{@showsoln{"_String_" }}
+@n What is the *type* of this function's *third argument*? @fitb{18em}{@ifsoln{_String_}}
 
-@n What is the *Range* of this function? @fitb{25em}{@showsoln{"_Image_" }}.
+@n What is the *Range* of this function? @fitb{25em}{@ifsoln{_Image_}}
 
 @vspace{1ex}
 
@@ -58,10 +66,10 @@ cylinder :: Number, Number, String -> Image
 
 @vspace{1ex}
 
-A. @show{(sexp->code `(cylinder "red" 10 60))}
+A. @show{(sexp->code '(cylinder "red" 10 60))}
 
-B. @show{(sexp->code `(cylinder 30 "green"))}
+B. @show{(sexp->code '(cylinder 30 "green"))}
 
-C. @showsoln{"***" } @show{(sexp->code `(cylinder 10 25 "blue"))}
+C. @ifsoln{***} @show{(sexp->code '(cylinder 10 25 "blue"))}
 
-D. @show{(sexp->code `(cylinder 14 "orange" 25))}
+D. @show{(sexp->code '(cylinder 14 "orange" 25))}

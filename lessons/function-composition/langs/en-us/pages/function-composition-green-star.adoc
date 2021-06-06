@@ -1,10 +1,8 @@
 = Function Composition -- Green Star
-
 ++++
 <style>
-/* We override width:100% to allow circles and vspace
-to share the same line */
-div.circleevalsexp { width: auto;}
+tr:nth-child(odd){ height: 225pt; }
+tr:nth-child(odd) td {border-bottom: 0 !important;}
 </style>
 ++++
 
@@ -14,14 +12,14 @@ div.circleevalsexp { width: auto;}
 
 @vspace{2ex}
 
-1) Draw a Circle of Evaluation and write the Code for a  *solid, green star, size 50*.
+@n Draw a Circle of Evaluation and write the Code for a  *solid, green star, size 50*.
 
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe green-star) }
 @vspace{15ex}
 
-*Code:* @fitb{48ex}{@showsoln{(sexp->code green-star) }}
+*Code:* @fitb{40em}{@showsoln{(sexp->code green-star) }}
 
 @vspace{2ex}
 
@@ -31,44 +29,33 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 [cols="1a,1a",stripes="none"]
 |===
 
-| 2) A solid, green star, that is triple the size of the original (using `scale`)
-
+| @n A solid, green star, that is triple the size of the original (using `scale`)
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(scale 3 ,green-star)) }
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(scale 3 ,green-star)) }}
-
-
-| 3) A solid, green star, that is half the size of the original (using `scale`)
-
+| @n A solid, green star, that is half the size of the original (using `scale`)
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(scale 0.5 ,green-star)) }
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(scale 0.5 ,green-star)) }}
 
-| 4) A solid, green star of size 50 that has been rotated 45 degrees counter-clockwise
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 3 ,green-star)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 0.5 ,green-star)) }}
+
+| @n A solid, green star of size 50 that has been rotated 45 degrees counter-clockwise
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(rotate 50 ,green-star)) }
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(rotate 50 ,green-star)) }}
-
-| 5) A solid, green star that is 3 times the size of the original  *and* has been rotated 45 degrees
+| @n A solid, green star that is 3 times the size of the original  *and* has been rotated 45 degrees
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(scale 3 (rotate 50 ,green-star))) }
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(scale 3 (rotate 50 ,green-star))) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(rotate 50 ,green-star)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 3 (rotate 50 ,green-star))) }}
 
 |===
 

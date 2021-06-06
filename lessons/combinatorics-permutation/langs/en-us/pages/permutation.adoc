@@ -11,33 +11,47 @@ For each of the problems below, (1) figure out whether this involves permutation
 
 | 1
 | Joy has picked out seven outfits for the week. She intends to wear each of them once, but she hasn't chosen an order yet. How many different ways could she dress up this week?
-| Yes  {nbsp}  *_No_*
+| Yes  {nbsp}  *_NO_*
 | @math{permute\mbox{-}no\mbox{-}replace(7, 7)}
 @math{ = \frac{7!}{(7-7)!} }
 @math{ = \frac{7!}{(0)!} = \frac{5040}{1} = 5040}
 
 | 2
 | Mrs. Burke's cell phone has a 6-character password. Her son is trying to unlock it to play a game. How many possible passwords does he have to guess?
-| Yes  {nbsp}  No
-| 
+| @ifsoln{*_YES_*} @ifnotsoln{Yes}  {nbsp}  No
+| @ifsoln{
+@math{permute\mbox{-}w\mbox{-}replace(10, 6) = 10^{6} = 1,000,000}
+}
 
 | 3
 | The dentist has 8 different stickers to give away to the next patients `A` through `H`. How many different ways could she give them out?
-| Yes  {nbsp}  No
-| 
+| Yes  {nbsp}  @ifsoln{*_NO_*} @ifnotsoln{No}
+| @ifsoln{
+@math{permute\mbox{-}no\mbox{-}replace(8, 8) = \frac{8!}{(8 - 8)!}} +
+@math{8! \div 1 = 40,320}
+}
 
 | 4
 | Eric Allatta is the head chef at the top restaurant in Santa Fe. His speciality is four-color enchilada platter, with each enchilada covered in a different sauce. How many ways can he order them on the plate?
-| Yes  {nbsp}  No
-| 
+| Yes  {nbsp}  @ifsoln{*_NO_*} @ifnotsoln{No}
+| @ifsoln{
+@math{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!}} +
+@math{\frac{6!}{2!} = 360}
+}
 
 | 5
 | A magician opens a fresh deck of 52 cards, and asks an audience member to pick six of them. He says he'll guess all six - in order. What are the chances he'll guess them correctly?
-| Yes  {nbsp}  No
-| 
+| Yes  {nbsp}  @ifsoln{*_NO_*} @ifnotsoln{No}
+| @ifsoln{
+@math{permute\mbox{-}no\mbox{-}replace(52, 6) = \frac{52!}{(52 - 6)!}} +
+@math{\frac{52!}{46!} = 14,658,134,400} +
+His chances are one in nearly 15 million! That's a heck of a trick!}
 
 | 6
 | Emma is knitting a hat, and each row of stitching can be a different color. She has three different colors of yarn to choose from, and the hat has 30 rows. How many different designs could she make?
-| Yes {nbsp}   No
-| 
+| @ifsoln{*_YES_*} @ifnotsoln{Yes} {nbsp}   No
+| @ifsoln{
+@math{permute\mbox{-}w\mbox{-}replace(3, 8) = 3^{8} = 6,561}
+}
+
 |===

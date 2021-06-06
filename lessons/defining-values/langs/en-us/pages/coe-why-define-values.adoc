@@ -8,7 +8,7 @@
 
 @vspace{1ex}
 
-[cols="12a,^.^1a,5a", stripes="none", options="header"]
+[cols="11a,^.^1a,5a", stripes="none", options="header"]
 |===
 | Original Circle of Evaluation & Code
 | &rarr;
@@ -18,25 +18,31 @@
 |&rarr;
 | @show{(sexp->coe '(scale 3 sun))}
 
-| Code: @show{(sexp->code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
+| Code: +
+@show{(sexp->code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: @show{(sexp->code '(scale 3 sun))}
+| Code: +
+@show{(sexp->code '(scale 3 sun))}
 
 | @show{(sexp->coe '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | @showsoln{(sexp->coe '(frame sun)) }
 
-| Code: @show{(sexp->code '(frame (radial-star 30 20 50 "solid" "yellow")))}
+| Code: +
+@show{(sexp->code '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: @showsoln{(sexp->code '(frame sun)) }
+| Code: +
+@showsoln{(sexp->code '(frame sun)) }
 
 | @show{(sexp->coe '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | @showsoln{(sexp->coe '(overlay (text "sun" 30 "black") sun)) }
 
-| Code: @show{(sexp->code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
+| Code: +
+@show{(sexp->code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: @showsoln{(sexp->code '(overlay (text "sun" 30 "black") sun)) }
+| Code: +
+@showsoln{(sexp->code '(overlay (text "sun" 30 "black") sun)) }
 |===
 
 @n Test your code in the editor and make sure it produces what you would expect it to.

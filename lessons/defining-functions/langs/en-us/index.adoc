@@ -172,9 +172,9 @@ We need to program the computer to be as smart as our volunteer. But how do we d
 | Math
 |
 | WeScheme
-|@centered-image{images/table-to-prettify.png, 400, align="center"}
+|@centered-image{images/table-to-prettify.png, 800, align="center"}
 | ➞
-|@centered-image{images/math-fun-pyret-2.png, 400, align="center"}
+|@centered-image{images/math-fun-wescheme-2.png, 400, align="center"}
 |===
 }
 
@@ -187,7 +187,7 @@ Have students turn to @printable-exercise{pages/match-examples-definitions-math.
 - Start by looking at each table and highlighting what is changing from the first row to the following rows.
 - Then, match each table to the function that defines it.
 
-You may also want to have students complete {@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions}}
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions}
 
 Now that we've seen how this works in math, let's go back to `gt`.
 
@@ -202,7 +202,7 @@ Turn to @printable-exercise{pages/match-examples-definitions.adoc} and look at t
 --
 
 @ifproglang{pyret}{@centered-image{images/gt-fun-pyret.png, 400, align="center"}}
-@ifproglang{pyret}{@centered-image{images/gt-fun-wescheme.png, 400, align="center"}}
+@ifproglang{wescheme}{@centered-image{images/gt-fun-wescheme.png, 500, align="center"}}
 
 [.lesson-instruction]
 --
@@ -210,8 +210,8 @@ Using `gt` as a model, match the mystery function examples to their correspondin
 --
 
 You may also want to have students complete
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}.
+@ifproglang{pyret}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
+@ifproglang{wescheme}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}.
 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -241,7 +241,7 @@ You may also want to have students complete
 `triangle {two-colons} Number, String, String -> Image`
 --
 
-* What is the contract for `gt`? _A Number_
+* What is the contract for `gt`?
 
 [.indentedpara]
 --
@@ -256,18 +256,21 @@ Have students turn to @printable-exercise{pages/match-examples-contracts.adoc}.
 
 Confirm that everyone is on the same page before moving on. You may want to have students turn to a partner, compare their findings, and discuss their thinking about anything they didn't agree on at first.
 
-Have students open @online-exercise{https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=04918ef, the gt starter file}.
+Have students open
+@ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=04918ef, the gt starter file}}
+@ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ, the gt starter file}}.
 
 [.lesson-instruction]
 - Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
 - What did you get back? _a little green triangle!_
+- Take one minute and see how many different green triangles you can make using the `gt` function.
 - Try changing one of the examples to be incorrect and click run again. What happens?
 _The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
 
 Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 
 [.lesson-instruction]
-On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Purpose Statement, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
+On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
 
 If you have time, have students complete
 

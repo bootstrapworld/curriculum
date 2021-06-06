@@ -124,8 +124,9 @@ Students are introduced to the `lr-plot` function in Pyret, which performs a lin
 Pyret includes a powerful display, which (1) draws a scatterplot, (2) draws the line of best fit, and (3) even displays the equation for that line:
 
 ----
-# use linear regression to extract a predictor function
-# lr-plot :: (t :: Table, ls :: String, xs :: String, ys :: String) -> Image
+# lr-plot :: Table, String, String, String -> Image
+# consumes a table, and three column names: labels, x-vals and y-vals
+# produces a scatterplot, and draws the line of best fit
 lr-plot(animals-table, "name", "age", "weeks")
 ----
 

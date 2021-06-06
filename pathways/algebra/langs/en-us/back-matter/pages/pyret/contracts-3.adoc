@@ -3,83 +3,79 @@
 
 Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(100, 50, "solid", "fuchsia")` will evaluate to an `Image`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    |       | Domain      |     | Range
-| `# flip-horizontal`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| Name    			|	 | Domain      							|     	| Range
 
-|`#`
+| `# scale`
+| `{two-colons}`
+| @ifsoln{`Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_scale(0.8, triangle(30, "solid", "red"))_`}
+
+| `# rotate`
+| `{two-colons}`
+| @ifsoln{`Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_rotate(35, rectangle(30, 80, "solid", "purple"))_`}
+
+| `# overlay`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`}
+
+| `# put-image`
+| `{two-colons}`
+| @ifsoln{`Image, Number, Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`}
+
+| `# flip-horizontal`
+| `{two-colons}`
+| @ifsoln{`Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_flip-horizontal(text("Bootstrap is fun!", 60, "darkblue"))_`}
+
 | `# flip-vertical`
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_flip-vertical(triangle(80, "solid", "lightgreen"))_`}
 
 | `# above`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`}
 
 | `# beside`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `#` `or`
+| `:`
+| @ifsoln{`Boolean, Boolean`}
+| `->`
+| @ifsoln{`Boolean`}
+5+| @ifsoln{`_(<= 3 2) or (>= 3 2)_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `#` `and`
+| `:`
+| @ifsoln{`Boolean Boolean`}
+| `->`
+| @ifsoln{`Boolean`}
+5+| @ifsoln{`_(<= 3 2) and (>= 3 2)_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
-
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
 
 |===

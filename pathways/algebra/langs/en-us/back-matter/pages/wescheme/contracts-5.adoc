@@ -1,0 +1,82 @@
+[.landscape]
+= Contracts
+
+Contracts tell us how to use a function. e.g.  `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "solid" "lightblue")` will evaluate to an Image.
+
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+| Name    |       | Domain      |     | Range
+
+| `;` `above`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(above (triangle 30 "solid" "red")(square 30 "solid" "blue"))_`}
+
+| `;` `beside`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(beside (star 50 "solid" "orange")(circle 50 "solid" "green"))_`}
+
+| `;` `or`
+| `{two-colons}`
+| @ifsoln{`Boolean, Boolean`}
+| `->`
+| @ifsoln{`Boolean`}
+5+| @ifsoln{`_(or (<= 3 2) (>= 3 2))_`}
+
+| `;` `and`
+| `{two-colons}`
+| @ifsoln{`Boolean, Boolean`}
+| `->`
+| `Boolean`
+5+| @ifsoln{`_(and (<= 3 2) (>= 3 2))_`}
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| `;`
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| `;`
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| `;`
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| ``
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| `;`
+
+| `;`
+| `{two-colons}`
+|
+| `->`
+|
+5+| `;`
+
+|===
+
+

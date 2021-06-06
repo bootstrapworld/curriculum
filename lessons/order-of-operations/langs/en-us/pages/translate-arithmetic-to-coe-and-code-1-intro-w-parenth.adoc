@@ -1,4 +1,4 @@
-= Translate Arithmetic Expressions to Circles of Evaluation & Code (Intro)
+= Translate Arithmetic to Circles of Evaluation & Code (Intro)
 
 ++++
 <style>
@@ -20,24 +20,13 @@ Translate each of the arithmetic expressions below into Circles of Evaluation, t
   (define mat2 (sexp->math expr2 #:parens #t))
   (define mat3 (sexp->math expr3 #:parens #t))
   (define mat4 (sexp->math expr4 #:parens #t))
-
-  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
-  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
-  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
-  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
-
-  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
-  (define code2 (if *solutions-mode?* (sexp->code expr2) ""))
-  (define code3 (if *solutions-mode?* (sexp->code expr3) ""))
-  (define code4 (if *solutions-mode?* (sexp->code expr4) ""))
 }
 
-
-[cols=".^1a,^10a,^20a,^15a",options="header",stripes="none"]
+[cols="^.^1a,^.^10a,^.^20a,^.^15a",options="header",stripes="none"]
 |===
-|   | Arithmetic	| Circle of Evaluation		| Code
-|*1*| @show{mat1}	| @show{coe1}			| @show{code1}
-|*2*| @show{mat2}	| @show{coe2}			| @show{code2}
-|*3*| @show{mat3}	| @show{coe3}			| @show{code3}
-|*4*| @show{mat4}	| @show{coe4}			| @show{code4}
+|    | Arithmetic	  | Circle of Evaluation		    | Code
+|*@n*| @show{mat1}	| @showsoln{(sexp->coe expr1)}| @showsoln{(sexp->code expr1 #:parens true)}
+|*@n*| @show{mat2}	| @showsoln{(sexp->coe expr2)}| @showsoln{(sexp->code expr2 #:parens true)}
+|*@n*| @show{mat3}	| @showsoln{(sexp->coe expr3)}| @showsoln{(sexp->code expr3 #:parens true)}
+|*@n*| @show{mat4}	| @showsoln{(sexp->coe expr4)}| @showsoln{(sexp->code expr4 #:parens true)}
 |===

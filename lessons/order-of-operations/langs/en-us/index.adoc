@@ -191,11 +191,19 @@ Students learn how to use the Circles of Evaluation to translate arithmetic expr
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. After that, she crawls from left to right, visiting each of the inputs @ifproglang{wescheme}{to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
+@ifproglang{pyret}{
+Note: As in math, there are some cases where the outermost parentheses can be removed:
+
+- @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
+- @math{1 * (2 * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
+
+ You will likely see code written using this "shortcut", but it's always better to at least start with the parentheses to make sure your math/code is _correct_ before taking them out. **It is never wrong to include them!**}
+
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math `(+ 3 8)) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(+ 3 8)) }
-|*Code*					| &rarr; | @show{(sexp->code `(+ 3 8)) }
+|*Expression*			| &rarr; | @show{(sexp->math '(+ 3 8)) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(+ 3 8)) }
+|*Code*					| &rarr; | @show{(sexp->code '(+ 3 8)) }
 |===
 
 @ifproglang{wescheme}{
@@ -209,9 +217,9 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math `(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  `(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(sexp->code `(* 2 (+ 3 8))) }
+|*Expression*			| &rarr; | @show{(sexp->math '(* 2 (+ 3 8))) }
+|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(* 2 (+ 3 8))) }
+|*Code*					| &rarr; | @show{(sexp->code '(* 2 (+ 3 8))) }
 |===
 
 @ifproglang{wescheme}{
@@ -251,10 +259,10 @@ If time allows, take turns entering the code into the editor with your partner.
 
 We have included one page of more complex problems in the student workbook so that you're ready to challenge students who fly @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}.
 
-*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(sexp->code `sqrt)} as the name of the square root function, and @show{(sexp->code `sqr)} as the function that squares its input.
+*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(sexp->code 'sqrt)} as the name of the square root function, and @show{(sexp->code 'sqr)} as the function that squares its input.
 
 @ifproglang{pyret}{
-In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(sexp->code `(f x))} or @show{(sexp->code `(sqrt 9))}
+In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(sexp->code '(f x))} or @show{(sexp->code '(sqrt 9))}
 }
 
 
@@ -352,7 +360,6 @@ More practice connecting Circles of Evaluation to Code
 
 More 3-column practice connecting Arithmetic Expressions with Circles of Evaluation and Code:
 
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}
 
@@ -367,7 +374,6 @@ More 3-column practice with square roots:
 
 3-column challenge problems with brackets and exponents:
 
-* @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}

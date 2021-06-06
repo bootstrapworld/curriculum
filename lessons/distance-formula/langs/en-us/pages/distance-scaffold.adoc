@@ -7,7 +7,7 @@
 </style>
 ++++
 
-The distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(sexp->code `(line-length x1 x2))}. The distance between @math{y_{1}} and @math{y_{2}} is computed by @show{(sexp->code `(line-length y1 y2))}. Below is the equation to compute the hypotenuse of a right triangle with those amount for legs:
+The distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(sexp->code '(line-length x1 x2))}. The distance between @math{y_{1}} and @math{y_{2}} is computed by @show{(sexp->code '(line-length y1 y2))}. Below is the equation to compute the hypotenuse of a right triangle with those amount for legs:
 
 [.center.big]
 @math{\sqrt{line\mbox{-}length(x_{1}, x_{2})^2 + line\mbox{-}length(y_{1}, y_{2})^2}}
@@ -28,8 +28,11 @@ Suppose your player is at *(0, 2)* and a character is at *(4, 5)*. What is the d
 
 *2. Convert the Circle of Evaluation to Code below*.
 
+@ifnotsoln{
 [.center.big]
+@span{.blankline}{}
 
-@span{.blankline}
+@span{.blankline}{}
+}
 
-@span{.blankline}
+@showsoln{(sexp->code '(sqrt (+ (sqr (line-length x1 x2)) (line-length x1 x2))))}

@@ -9,6 +9,7 @@
   enclose-span
   enclose-div
   enclose-textarea
+  enclose-textarea-2
   enclose-math
 
   span-stack-present?
@@ -55,6 +56,12 @@
           (enclose-div ".obeyspaces" ta)
           ta))))
 
+(define (enclose-textarea-2 classes s #:multi-line [multi-line #f])
+  ;(printf "doing enclose-textarea-2 ~s\n" s)
+  (set! classes ".codetwo")
+  (let ([ta (enclose-tag "span" classes s)])
+    ta))
+
 (define (low-quality-math x)
   (set! x (regexp-replace* "\\\\;" x ""))
   (set! x (regexp-replace* "\\\\times" x "\\&times;"))
@@ -63,7 +70,7 @@
     (set! x (regexp-replace "} *$" x "")))
   (set! x (regexp-replace* "\\\\over" x "/"))
   (set! x (regexp-replace* "\\\\sqrt" x "\\&radic;"))
-  (set! x (regexp-replace* "{zwsp}" x ""))
+  (set! x (regexp-replace* "{empty}" x ""))
   (set! x (regexp-replace* "\\\\gt" x ">"))
   (set! x (regexp-replace* "\\\\lt" x "<"))
   (set! x (regexp-replace* "\\\\leq" x "\\&le;"))

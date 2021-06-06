@@ -1,0 +1,69 @@
+= Writing Examples from Purpose Statements
+
+We've provided contracts and purpose statements to describe four different functions. Write examples for each of those functions.
+
+++++
+<style>
+.recipe_word_problem { display: none; }
+.recipe_title:nth-of-type(3n+1) { padding-top: 5px; }
+.recipe_title:nth-of-type(3n),
+.recipe_title:nth-of-type(3n) + *,
+.recipe_title:nth-of-type(3n) + * + *,
+.recipe_title:nth-of-type(3n) + * + * + *,
+.recipe_title:nth-of-type(3n) + * + * + * + .keyword_only{
+  display: none
+}
+</style>
+++++
+
+@design-recipe-exercise{ "upside-down"
+"upside-down"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Image)
+#:show-domains? #t
+#:range "Image"
+#:show-range? #t
+#:purpose "Consumes an image, and flips it upside down by rotating it 180 degrees."
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  ((triangle 50 "solid" "yellow") (rotate 180 (triangle 50 "solid" "yellow")))
+  ((star    150 "solid" "blue")   (rotate 180 (star    150 "solid" "blue"))))
+#:show-examples #f
+#:param-list (list "img")
+#:show-funname-defn? #f
+#:show-params? #f
+#:body '(rotate 180 img)
+#:show-body? #f
+#:grid-lines? #f
+}
+
+@vspace{2ex}
+@span{.sectionbreak}{}
+@vspace{2ex}
+
+@design-recipe-exercise{ "product-squared"
+"product-squared"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Number Number)
+#:show-domains? #t
+#:range "Number"
+#:show-range? #t
+#:purpose "Consumes two numbers and squares their product"
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  (5 6 (sqr (* 5 6)))
+  (10 17 (sqr (* 10 17))))
+#:show-examples #f
+#:param-list '(a b)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body '(sqr (* a b))
+#:show-body? #f
+#:grid-lines? #f
+}

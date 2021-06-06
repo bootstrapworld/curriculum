@@ -2,11 +2,13 @@
 
 ++++
 <style>
-/* We override width:100% to allow circles and vspace
-to share the same line */
+/* Override width:100% to allow circles and vspace to share the same line */
 div.circleevalsexp { width: auto;}
+.grid tr:nth-child(odd){ height: 225pt; }
+.grid tr:nth-child(odd) td {border-bottom: 0 !important;}
 .contracts td { padding: 0 !important; }
 .contracts .editbox { background: none; }
+.contracts { background-color: #f7f7f8 !important; }
 </style>
 ++++
 
@@ -36,7 +38,7 @@ You’ll be investigating these functions with your partner:
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe name-sexp) }
-@vspace{15ex}
+@vspace{10ex}
 
 *Code:* @fitb{48ex}{@showsoln{(sexp->code name-sexp) }}
 
@@ -44,46 +46,37 @@ Using the "image of your name" described above as the *original*, draw the Circl
 
 @vspace{1ex}
 
-[cols="1a,1a",stripes="none"]
+[.grid, cols="1a,1a",stripes="none"]
 |===
 
 | @n The framed "image of your name".
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(frame ,name-sexp)) }
-@vspace{25ex}
-
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(frame ,name-sexp)) }}
 
 | @n The "image of your name" flipped vertically.
 
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(flip-vertical ,name-sexp)) }
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(flip-vertical ,name-sexp)) }}
+
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(frame ,name-sexp)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(flip-vertical ,name-sexp)) }}
 
 
 | @n  The "image of your name" above "the image of your name" flipped vertically.
 
-
 *Circle of Evaluation:*
-
 @showsoln{(sexp->coe `(above ,name-sexp (flip-vertical ,name-sexp))) }
-@vspace{25ex}
-
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(above ,name-sexp (flip-vertical ,name-sexp))) }}
 
 | @n The "image of your name" flipped horizontally beside "the image of your name".
-
 
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe `(beside ,name-sexp (flip-horizontal ,name-sexp)))}
-@vspace{25ex}
 
-*Code:* @fitb{44ex}{@showsoln{(sexp->code `(beside ,name-sexp (flip-horizontal ,name-sexp)))}}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(above  ,name-sexp (flip-vertical   ,name-sexp))) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(beside ,name-sexp (flip-horizontal ,name-sexp))) }}
 
 |===

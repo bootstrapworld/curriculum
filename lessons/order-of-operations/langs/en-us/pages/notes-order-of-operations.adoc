@@ -1,10 +1,6 @@
 = Order of Operations
 
-- The *Editor* is a software program we use to write Code. Our Editor allows us to experiment with Code on the right-hand side, in the  *Interactions Area*. For Code that we want to _keep_, we can put it on the left-hand side in the  *Definitions Area*. Clicking the "Run" button causes the computer to re-read everything in the Definitions Area and erase anything that was typed into the Interactions Area.
-
-@vspace{2ex}
-
-- *Order of Operations* is incredibly important when programming. To help us organize our math into something we can trust, we can _diagram_ a math expression using the *Circles of Evaluation*. For example, the expression @smath{(/ (- 1 4) (* 10 7))} can be diagrammed as shown below.
+*Order of Operations* is incredibly important when programming. To help us organize our math into something we can trust, we can _diagram_ a math expression using the *Circles of Evaluation*. For example, the expression @smath{(/ (- 1 4) (* 10 7))} can be diagrammed as shown below.
 [.centered-image]
 @show{(sexp->coe `(/ (- 1 4) (* 10 7)))}
 @span{.clear}{}
@@ -12,9 +8,9 @@
 @vspace{2ex}
 
 @ifproglang{wescheme}{
-** To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
+To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(sexp->code '(/ (- 1 4) (* 10 7)))}.
 }
 
 @ifproglang{pyret}{
-** To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *function* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
+To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *operation* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(sexp->code '(/ (- 1 4) (* 10 7)))}.
 }

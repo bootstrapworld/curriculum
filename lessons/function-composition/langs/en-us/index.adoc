@@ -58,7 +58,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them.
 
 === Launch
-Divide students into groups of 3-4, and distribute a set of Function Cards to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
+Divide students into groups of 3-4, and distribute a set of @link{pages/function-cards.adoc, "Function Cards"} to each group. Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficulty). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
 
 [.lesson-instruction]
 - Each group has a set of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be? _10_
@@ -159,14 +159,14 @@ _They all produce images, they all change some element of the original image_
 - Does using one of these functions change the original image?
 _No, it creates a whole new image_
 
-- What does the number in @show{(sexp->code `scale)} represent?
+- What does the number in @show{(sexp->code 'scale)} represent?
 _The scale factor by which the image should grow or shrink_
 
-- What does the number in @show{(sexp->code `rotate)} represent?
+- What does the number in @show{(sexp->code 'rotate)} represent?
 _The rotation angle, measured counterclockwise_
 
-- The Domain and Range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code `text)} function as an _input_ for @show{(sexp->code `flip-horizontal)}?
-_Because the @show{(sexp->code `text)} function produces an Image, which is then used as the input for @show{(sexp->code `flip-horizontal)}._
+- The Domain and Range for @show{(sexp->code 'flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code 'text)} function as an _input_ for @show{(sexp->code 'flip-horizontal)}?
+_Because the @show{(sexp->code 'text)} function produces an Image, which is then used as the input for @show{(sexp->code 'flip-horizontal)}._
 --
 
 
@@ -185,7 +185,7 @@ Student pairs can then share with another pair and compare their responses befor
 | @span{.title}{Fun with Images!}
 Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing.
 
-Our @ifproglang{wescheme}{@link{../../../algebra-wescheme/lessons/flags/index.shtml, Flags lesson}} @ifproglang{pyret}{@link{../../../algebra-pyret/lessons/flags/index.shtml, Flags lesson}} also dives deeper into image composition.
+Our @link{../flags/index.shtml, Flags lesson} also dives deeper into image composition.
 |===
 
 == Composing Multiple Ways @duration{Optional}
@@ -199,11 +199,11 @@ Students identify multiple expressions that will create the same image, and thin
 --
 As is often true with solving math problems, there is more than one way to get the same composed image.
 
-Suppose I wrote the code: @show{(sexp->code `(scale 3 (star 50 "solid" "red")))}.
+Suppose I wrote the code: @show{(sexp->code '(scale 3 (star 50 "solid" "red")))}.
 
 
 What’s another line of code I could write that would produce the exact same image?
-	@show{(sexp->code `(star 150 "solid" "red"))}
+	@show{(sexp->code '(star 150 "solid" "red"))}
 --
 
 === Investigate
@@ -212,7 +212,7 @@ Students complete @printable-exercise{pages/more-than-one-way.adoc}.
 === Synthesize
 There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal.
 
-@show{(sexp->code `image=?)}`{two-colons} Image, Image -> Boolean`
+@show{(sexp->code 'image=?)}`{two-colons} Image, Image -> Boolean`
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 

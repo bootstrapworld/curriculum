@@ -2,7 +2,7 @@
 
 ++++
 <style>
-td { height: 20pt; }
+td { height: 15pt; }
 p { font-size: 0.9rem; margin: 0;}
 div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
 img { width: 50%; }
@@ -11,13 +11,13 @@ img { width: 50%; }
 ++++
 
 [.forceShadedBlockWTF]
-@show{(sexp->code `radial-star)}`{two-colons} (`
+@show{(sexp->code 'radial-star)}`{two-colons} (`
 ```
-	points :: Number, 
-	center-radius :: Number, 
-	radius :: Number, 
+	points :: Number,
+	inner-radius :: Number,
+	full-radius :: Number,
 	style :: String,
- 	color :: String
+	color :: String
 ) -> Image
 
 ```
@@ -25,34 +25,38 @@ img { width: 50%; }
 Using the detailed contract above, match each image to the expression that describes it.
 
 @vspace{1ex}
-[cols="4,^2a,1,^1a,12a",stripes="none",grid="none",frame="none", options="header"]
+[cols="3,^.^3a,1,^.^1a,^.^12a",stripes="none",grid="none",frame="none", options="header"]
 |===
-|  Image |  || |  Expression
-| @centered-image{../images/radial-star-10-150-200-solid-black.png}
-| *1* @showsoln{"*D*" }|| *A* | @show{(sexp->code
-`(radial-star 5 50 200 "outline" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-5-50-200-solid-black.png}
-| *2* @showsoln{"*A*" }|| *B* | @show{(sexp->code `(radial-star 7 100 200 "solid" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-100-100-200-outline-black.png}
-| *3* @showsoln{"*G*" }|| *C* | @show{(sexp->code
-`(radial-star 7 100 200 "outline" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-100-20-200-outline-black.png}
-| *4* @showsoln{"*F*" }|| *D* | @show{(sexp->code `(radial-star 10 150 200 "solid" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-7-100-200-outline-black.png}
-| *5* @showsoln{"*C*" }|| *E* | @show{(sexp->code
-`(radial-star 10 20 200 "solid" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-7-100-200-solid-black.png}
-| *6* @showsoln{"*D*" }|| *F* | @show{(sexp->code
-`(radial-star 100 20 200 "solid" "black"))}
-@vspace{1ex}
-| @centered-image{../images/radial-star-10-20-200-solid-black.png}
-| *7* @showsoln{"*E*" }|| *G* | @show{(sexp->code
-`(radial-star 100 100 200 "outline" "black"))}
+|  Image
+|  ||
+|  Expression
 
+| @centered-image{../images/radial-star-10-150-200-solid-black.png}
+| *@n* @ifsoln{-D} || *A*
+| @show{(sexp->code '(radial-star 5 50 200 "outline" "black"))}
+
+| @centered-image{../images/radial-star-5-50-200-solid-black.png}
+| *@n* @ifsoln{-A} || *B*
+| @show{(sexp->code '(radial-star 7 100 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-100-100-200-outline-black.png}
+| *@n* @ifsoln{-G} || *C*
+| @show{(sexp->code '(radial-star 7 100 200 "outline" "black"))}
+
+| @centered-image{../images/radial-star-100-20-200-outline-black.png}
+| *@n* @ifsoln{-F} || *D*
+| @show{(sexp->code '(radial-star 10 150 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-7-100-200-outline-black.png}
+| *@n* @ifsoln{-C} || *E*
+| @show{(sexp->code '(radial-star 10 20 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-7-100-200-solid-black.png}
+| *@n* @ifsoln{-D} || *F*
+| @show{(sexp->code '(radial-star 100 20 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-10-20-200-solid-black.png}
+| *@n* @ifsoln{-E} || *G*
+| @show{(sexp->code '(radial-star 100 100 200 "outline" "black"))}
 
 |===
