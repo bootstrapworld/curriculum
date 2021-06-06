@@ -11,46 +11,35 @@
 @vspace{2ex}
 
 Translate each of the arithmetic expressions below into Circles of Evaluation, then translate them to Code.
+@ifsoln{*Teachers:* the solution code below is shown with only the _necessary_ parentheses. If a student chooses to add additional (correct) parentheses, they will still have the correct answer.}
 
 @do{
   (define expr1 '(- (+ (/ 45 (sqr 3)) (* 8 -2)) (sqrt 16)))
   (define expr2 '(- (+ 11 (/ (sqr (- 5 3)) 5) )(* 6 2)))
   (define expr3 '(+ (expt 2 3) (*(*(frac (+ (sqr 8) (sqr 4))(- 9 5)) 2) (- 9 (* 4 2)))))
-
-  (define mat1 (sexp->math expr1))
-  (define mat2 (sexp->math expr2))
-  (define mat3 (sexp->math expr3))
-
-  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
-  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
-  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
-
-  (define code1 (if *solutions-mode?* (sexp->code expr1) ""))
-  (define code2 (if *solutions-mode?* (sexp->code expr2) ""))
-  (define code3 (if *solutions-mode?* (sexp->code expr3) ""))
-
 }
 
-[cols=".^1a,^5a,^21a,^12a",options="header",stripes="none"]
+[cols=".^1a,^5a,^20a,^15a",options="header",stripes="none"]
 |===
-
 |
 | Arithmetic
 | Circle of Evaluation
 | Code
 
 |*@n*
-| @show{mat1}
-| @show{coe1}
-| @show{code1}
+| @show{    (sexp->math expr1)}
+| @showsoln{(sexp->coe  expr1)}
+| @showsoln{(sexp->code expr1)}
 
 |*@n*
-| @show{mat2}
-| @show{coe2}
-| @show{code2}
+| @show{    (sexp->math expr2)}
+| @showsoln{(sexp->coe  expr2)}
+| @showsoln{(sexp->code expr2)}
 
 |*@n*
-| @show{mat3}
-| @show{coe3}
-| @show{code3}
+| @show{    (sexp->math expr3)}
+| @showsoln{(sexp->coe  expr3)}
+| @showsoln{(sexp->code expr3)}
+
 |===
+

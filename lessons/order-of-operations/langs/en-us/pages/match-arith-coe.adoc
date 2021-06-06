@@ -24,20 +24,32 @@ Draw a line from each Circle of Evaluation on the left to the corresponding arit
   (define coe4 (sexp->coe expr4))
   (define coe5 (sexp->coe expr5))
 
-  (define mat1 (sexp->math expr1))
-  (define mat2 (sexp->math expr2))
-  (define mat3 (sexp->math expr3))
-  (define mat4 (sexp->math expr4))
-  (define mat5 (sexp->math expr5))
-
 }
 
-[cols="^.^10a,^.^2a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
+[cols="^.^10a,^.^3a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
 |===
-| Circle of Evaluation	 |					 ||       | Arithmetic Expression
-| @show{coe1}		|*@n*@showsoln{"-C" }||*A*    | @show{mat2}
-| @show{coe2}		|*@n*@showsoln{"-A" }||*B*    | @show{mat4}
-| @show{coe3}		|*@n*@showsoln{"-E" }||*C*    | @show{mat1}
-| @show{coe4}		|*@n*@showsoln{"-B" }||*D*    | @show{mat5}
-| @show{coe5}		|*@n*@showsoln{"-D" }||*E*    | @show{mat3}
+| Circle of Evaluation
+|||
+| Arithmetic Expression
+
+| @show{(sexp->coe expr1)}
+|*@n*@showsoln{"-C" }||*A*
+| @show{(sexp->math expr2 #:parens true)}
+
+| @show{(sexp->coe expr2)}
+|*@n*@showsoln{"-A" }||*B*
+| @show{(sexp->math expr4 #:parens true)}
+
+| @show{(sexp->coe expr3)}
+|*@n*@showsoln{"-E" }||*C*
+| @show{(sexp->math expr1 #:parens true)}
+
+| @show{(sexp->coe expr4)}
+|*@n*@showsoln{"-B" }||*D*
+| @show{(sexp->math expr5 #:parens true)}
+
+| @show{(sexp->coe expr5)}
+|*@n*@showsoln{"-D" }||*E*
+| @show{(sexp->math expr3 #:parens true)}
+
 |===

@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-02 # last modified
+LASTMOD=2021-06-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1469,6 +1469,10 @@ function buildpathway() {
     REFRESHFRONTMATTER=1
     REFRESHBACKMATTER=1
     REFRESHRESOURCES=1
+
+    test -d $repoDir/front-matter || REFRESHFRONTMATTER=
+    test -d $repoDir/back-matter || REFRESHBACKMATTER=
+    test -d $repoDir/resources || REFRESHRESOURCES=
 
       #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then

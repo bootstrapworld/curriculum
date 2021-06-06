@@ -9,6 +9,7 @@
   enclose-span
   enclose-div
   enclose-textarea
+  enclose-textarea-2
   enclose-math
 
   span-stack-present?
@@ -54,6 +55,12 @@
       (if multi-line
           (enclose-div ".obeyspaces" ta)
           ta))))
+
+(define (enclose-textarea-2 classes s #:multi-line [multi-line #f])
+  ;(printf "doing enclose-textarea-2 ~s\n" s)
+  (set! classes ".codetwo")
+  (let ([ta (enclose-tag "span" classes s)])
+    ta))
 
 (define (low-quality-math x)
   (set! x (regexp-replace* "\\\\;" x ""))

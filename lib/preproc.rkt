@@ -1630,10 +1630,12 @@
                                            (infix-op? a #:pyret #t)
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
-                                   [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t)]
-                                   [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t)]
+                                   [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t
+                                                     #:parens parens)]
+                                   [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t
+                                                    #:parens parens)]
                                    [x (format "~a ~a ~a" lft a rt)])
-                              (if wrap (format "({empty}~a{empty})" x) x)) ]
+                              (if (or wrap parens) (format "({zwsp}~a{zwsp})" x) x)) ]
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
                                                  (infix-op? a #:pyret #f)
                                                  ))
@@ -1662,7 +1664,7 @@
                                     " { ( ~a ) }^ 2 "
                                     " { ~a }^ 2 ") xm))]
                            [else
-                             (format (if pyret "~a{empty}({empty}~a{empty})" "~a(~a)")
+                             (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
                                      (sexp->arith a #:pyret pyret #:parens parens)
                                      (string-join
                                        (map (lambda (e1)
@@ -1693,11 +1695,6 @@
             [(and (eq? e 'frac) wescheme)
              (add-prereq '/)
              '/]
-            [(answer? e) ;(and (answer? e) wescheme)
-             (let ((e (cadr e)))
-               (holes-to-underscores
-                 (if *solutions-mode?* e (answer->hole e))
-                 #:wescheme #t))]
             [(pair? e) (cons (holes-to-underscores (car e) #:wescheme wescheme)
                              (holes-to-underscores (cdr e) #:wescheme wescheme))]
             [else
@@ -1706,22 +1703,24 @@
 
 (define (sexp->wescheme e)
   ;(printf "doing sexp->wescheme ~s\n" e)
-  (enclose-textarea ".racket" (format "~s" (holes-to-underscores e #:wescheme #t)))
-  ;(enclose-textarea ".racket" (sexp->block e))
-  )
+  (let ([h (holes-to-underscores e #:wescheme #t)])
+    ;(printf "h2u retn'd ~s\n" h)
+    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
 
-(define (sexp->pyret e)
-  ;(printf "doing sexp->pyret ~s\n" e)
-  (enclose-textarea ".pyret" (sexp->arith (holes-to-underscores e) #:pyret #t)))
+(define (sexp->pyret e #:parens [parens #f])
+  ;(printf "\ndoing sexp->pyret ~s\n" e)
+  (let ([h (holes-to-underscores e)])
+    ;(printf "h2u retn'd ~s\n" h)
+    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
-(define (sexp->code e)
-  ((if (string=? *proglang* "pyret")
-       sexp->pyret
-       sexp->wescheme) e))
+(define (sexp->code e #:parens [parens #f])
+  (if (string=? *proglang* "pyret")
+      (sexp->pyret e #:parens parens)
+      (sexp->wescheme e)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
@@ -1810,7 +1809,7 @@
                              )))]
         [else (error 'ERROR "sexp->block-table: unknown s-exp")]))
 
-(define (sexp->block e #:pyret [pyret #f])
+(define (sexp->block e #:pyret [pyret #f] #:wescheme [wescheme #f])
   ;(printf "doing sexp->block ~s ~a\n" e pyret)
   (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
         [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
@@ -1825,26 +1824,32 @@
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
-                             (sexp->block e #:pyret pyret))
-                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a"
-                                                 fill-len)
+                           (enclose-span
+                             (if wescheme
+                                 (format ".studentAnswerFilled~a" fill-len)
+                                 (format ".studentBlockAnswerFilled~a" fill-len))
+                             (sexp->block e #:pyret pyret #:wescheme wescheme))
+                           (enclose-span
+                             (if wescheme
+                                 (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
+                                 (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
                        (if (or (symbol? a) (answer? a))
                            (let ([args (intersperse-spaces
                                          (map (lambda (e1)
-                                                (sexp->block e1 #:pyret pyret))
+                                                (sexp->block e1 #:pyret pyret #:wescheme wescheme))
                                               (cdr e)) 'args)])
                              (string-append
                                (enclose-span ".lParen" "(")
-                               (enclose-span ".operator" (sexp->block a #:pyret pyret))
+                               (enclose-span ".operator"
+                                 (sexp->block a #:pyret pyret #:wescheme wescheme))
                                args
                                (enclose-span ".rParen" ")")))
                            (let ([parts (intersperse-spaces
                                           (map (lambda (e1)
-                                                 (sexp->block e1 #:pyret pyret))
+                                                 (sexp->block e1 #:pyret pyret #:wescheme wescheme))
                                                e) #f)])
                              (string-append
                                (enclose-span ".lParen" "(")
@@ -1880,9 +1885,11 @@
               (if *pyret?* "# " "; ")
               (if *pyret?* (wescheme->pyret funname-sym) funname)
               " "
-              (if *pyret?* "{two-colons}" ":")
+              ; used to be single colon for WeScheme
+              "{two-colons}"
               " "
-              ((if *pyret?* vars-to-commaed-string vars-to-string) domain-list)
+              ; used to not have commas in WeScheme
+              (vars-to-commaed-string domain-list)
               " -> "
               range
               (if purpose
@@ -1999,26 +2006,6 @@
                   paddedcolA paddedcolB))
       "\n\n")))
 
-(define questions-and-answers two-col-layout)
-
-(define completion-exercise two-col-layout)
-
-(define (open-response-exercise colA answer-type)
-  (unless (member answer-type '("circeval" "code" "math" "text"))
-    (error 'ERROR "open-response-exercise: Unexpected answer type ~a\n" answer-type))
-  (two-col-layout colA '()
-                  #:rightcolextratag (string-append ".studentAnswer" "." answer-type)))
-
-(define (matching-exercise #:permute [permute #f]
-                           colA colB)
-  (let* ([colB (if permute (permute-list colB) colB)]
-         [nA (length colA)]
-         [nB (length colB)]
-         [paddedcolA (if (> nB nA) (pad-to colA nB "") colA)]
-         [paddedcolB (if (> nA nB) (pad-to colB nA "") colB)])
-    (two-col-layout #:layoutstyle ".matching"
-                    paddedcolA paddedcolB)))
-
 (define (get-index ans presented-order #:compare-with [compare-with eq?])
   (let loop ([i 0] [s presented-order])
     (cond [(null? s) -1]
@@ -2029,29 +2016,6 @@
   (let ([a->int (char->integer #\a)])
     (lambda (i)
       (string (integer->char (+ a->int i))))))
-
-(define (matching-exercise-answers #:compare-with [compare-with eq?]
-                                   #:content-of-ans [content-of-ans #f]
-                                   #:some-no-match? [some-no-match? #f]
-                                   ques formatted-ans presented-ans)
-  (let ([annotated-ans
-          (map (lambda (ansF ansC)
-                 (let ([i (get-index ansC presented-ans
-                                     #:compare-with compare-with)]
-                       [label #f])
-                   (when (and (< i 0) (not some-no-match?))
-                     (error 'ERROR "matching-exercise-answers: Couldn't find ~a in ~a\n"
-                            ansC presented-ans))
-                   (enclose-div ".labeledRightColumn"
-                     (if (>= i 0)
-                         (let ([label (int->alpha i)])
-                           (string-append
-                             (enclose-span ".rightColumnLabel" label)
-                             ansF))
-                         (enclose-span ".matchLabelAns"
-                           "No matching answer")))))
-               formatted-ans (or content-of-ans formatted-ans))])
-    (two-col-layout #:layoutstyle ".solutions.matching" ques annotated-ans)))
 
 (define (exercise-evid-tags . x) #f)
 
