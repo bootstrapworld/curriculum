@@ -9,6 +9,7 @@
 @vspace{2ex}
 
 Write each Circle of Evaluation as a math expression and evaluate it.
+@ifsoln{*Teachers:* the answers below are shown with only the _necessary_ parentheses. If a student chooses to add additional (correct) parentheses, they will still have the correct answer.}
 
 @do{
   (define expr1 '(- 12 (* 2 5)))
@@ -17,49 +18,40 @@ Write each Circle of Evaluation as a math expression and evaluate it.
   (define expr4 '(* -7 (+ 9 (/ 14 2))))
   (define expr5 '(+ (/ 15 -3) (- 30 (+ 2 (* 7 3)))))
   (define expr6 '(- (* -3 (/ 8 2)) (+ 7 (/ 22 (- 15 4)))))
-
-  (define coe1 (sexp->coe expr1))
-  (define coe2 (sexp->coe expr2))
-  (define coe3 (sexp->coe expr3))
-  (define coe4 (sexp->coe expr4))
-  (define coe5 (sexp->coe expr5))
-  (define coe6 (sexp->coe expr6))
-
-  (define mat1 (sexp->math expr1))
-  (define mat2 (sexp->math expr2))
-  (define mat3 (sexp->math expr3))
-  (define mat4 (sexp->math expr4))
-  (define mat5 (sexp->math expr5))
-  (define mat6 (sexp->math expr6))
 }
 
-[cols=".^1a,^.^12a,^.^8a,^.^1a",options="header",stripes="none"]
+[cols=".^1a,^.^10a,^.^8a,^.^1a",options="header",stripes="none"]
 |===
 |    | Circle of Evaluation
 | Math Expression
 | Answer
 
-|*@n*| @show{coe1}
-| @showsoln{mat1 }
-| @showsoln{(eval expr1) }
+|*@n*| @show{(sexp->coe  expr1)}
+|  @showsoln{(sexp->math expr1)}
+|  @showsoln{(eval expr1) }
 
-|*@n*| @show{coe2}
-| @showsoln{mat2 }
-| @showsoln{(eval expr2) }
+|*@n*| @show{(sexp->coe  expr2)}
+|  @showsoln{(sexp->math expr2)}
+|  @showsoln{(eval expr2) }
 
-|*@n*| @show{coe3}
-| @showsoln{mat3 }
-| @showsoln{(eval expr3) }
+|*@n*| @show{(sexp->coe  expr3)}
+|  @showsoln{(sexp->math expr3)}
+|  @showsoln{(eval expr3) }
 
-|*@n*| @show{coe4}
-| @showsoln{mat4 }
-| @showsoln{(eval expr4) }
+|*@n*| @show{(sexp->coe  expr4)}
+|  @showsoln{(sexp->math expr4)}
+|  @showsoln{(eval expr4) }
 
-|*@n*| @show{coe5}
-| @showsoln{mat5 }
-| @showsoln{(eval expr5) }
+|*@n*| @show{(sexp->coe  expr5)}
+|  @showsoln{(sexp->math expr5)}
+|  @showsoln{(eval expr5) }
 
-|*@n*| @show{coe6}
-| @showsoln{mat6 }
-| @showsoln{(eval expr6) }
+|*@n*| @show{(sexp->coe  expr6)}
+|  @showsoln{(sexp->math expr6)}
+|  @showsoln{(eval expr6) }}
+
+|*@n*| @show{(sexp->coe  expr6)}
+|  @showsoln{(sexp->math expr6)}
+|  @showsoln{(eval expr6) }
 |===
+

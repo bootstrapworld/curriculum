@@ -11,29 +11,18 @@
 
 For each math expression on the left, draw its Circle of Evaluation on the right.
 
-
 @do{
   (define expr1 '(- 4 (- 6 17)))
   (define expr2 '(- (+ 25 14) 12))
   (define expr3 '(+ 1 (* 15 5)))
   (define expr4 '(/ 15 (+ 10 (* 4 -2))))
-
-  (define mat1 (sexp->math expr1))
-  (define mat2 (sexp->math expr2))
-  (define mat3 (sexp->math expr3))
-  (define mat4 (sexp->math expr4))
-
-  (define coe1 (if *solutions-mode?* (sexp->coe expr1) ""))
-  (define coe2 (if *solutions-mode?* (sexp->coe expr2) ""))
-  (define coe3 (if *solutions-mode?* (sexp->coe expr3) ""))
-  (define coe4 (if *solutions-mode?* (sexp->coe expr4) ""))
 }
 
 [cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
 |===
-|    | Math Expression  | Circle of Evaluation
-|*@n*| @show{mat1}    	| @show{coe1}
-|*@n*| @show{mat2}    	| @show{coe2}
-|*@n*| @show{mat3}    	| @show{coe3}
-|*@n*| @show{mat4}    	| @show{coe4}
+|    | Math Expression                | Circle of Evaluation
+|*@n*| @show{(sexp->math expr1)}    	| @showsoln{(sexp->coe expr1)}
+|*@n*| @show{(sexp->math expr2)}    	| @showsoln{(sexp->coe expr2)}
+|*@n*| @show{(sexp->math expr3)}    	| @showsoln{(sexp->coe expr3)}
+|*@n*| @show{(sexp->math expr4)}    	| @showsoln{(sexp->coe expr4)}
 |===
