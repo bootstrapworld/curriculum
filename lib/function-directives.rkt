@@ -49,7 +49,7 @@
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
   (let ([s-og (regexp-replace* #rx"{empty}" s "")])
-    ;(printf "encoded-ans ~s\n ~s\n ~s\n" show? s s-og)
+    ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
     (enclose-span
       (string-append
         (if (string=? style "") "" ".studentAnswer")
@@ -393,18 +393,23 @@
           (let ([body-s (expr-to-string body)])
             (if (longer-than? *max-line-length*
                                body-s (expr-to-string funname) (list-to-string args))
-                (string-append (write-clear)
-                  (encoded-ans "" "MMMMMMMMM" #f)
-                  (encoded-ans ".recipe_example_body_long"
-                               (string-append
+                (begin
+                  ;(printf "maxlinelen exceeded\n")
+                  (string-append (write-clear)
+                    (encoded-ans "" "MM" #f)
+                    (encoded-ans ".recipe_example_body_long"
                                  (encoded-ans "" body-s show-body?)
-                                 (write-large ")"))
-                               #t))
-                (string-append
-                  (enclose-span ".recipe_example_body_wrap"
-                    (encoded-ans ".recipe_example_body" body-s show-body?))
-                  (write-large ")")
-                  )))
+                                 #t)
+                    (write-large ")")))
+                (begin
+                  ;(printf "within maxlinelen\n")
+                  (string-append
+                    (enclose-span ""
+                      (string-append
+                        (encoded-ans "" "M" #f)
+                        (encoded-ans ".recipe_example_body_short" body-s show-body?)))
+                    (write-large ")")
+                    ))))
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
