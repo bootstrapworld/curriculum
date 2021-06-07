@@ -48,14 +48,16 @@
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
-  (enclose-span
-    (string-append
-      (if (string=? style "") "" ".studentAnswer")
-      (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
-      (if show? ".solution" ".blank")
-      style)
-    (if show? s
-        (string-multiply "&#x5f;" (string-length s)))))
+  (let ([s-og (regexp-replace* #rx"{empty}" s "")])
+    ;(printf "encoded-ans ~s\n ~s\n ~s\n" show? s s-og)
+    (enclose-span
+      (string-append
+        (if (string=? style "") "" ".studentAnswer")
+        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if show? ".solution" ".blank")
+        style)
+      (if show? s
+          (string-multiply "&#x5f;" (string-length s-og))))))
 
 (define (wescheme->wescheme e #:indent [indent #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
