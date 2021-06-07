@@ -421,23 +421,30 @@
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
+        (highlight-keywords " is")
         ; wrap the `is ...` code in its own element, so that wrapping works properly
 
         (if (> (+ (string-length body)
                   (string-length funname)
                   (string-length args))
-                *max-line-length*)
-            (string-append (write-clear)
-              (encoded-ans "" "MMMMMMMMM" #f)
-              (encoded-ans ".recipe_example_body_long"
-                           (string-append
-                             (highlight-keywords "is ")
-                             (encoded-ans "" (highlight-keywords body) show-body?)) #t))
-            (enclose-span ".recipe_example_body_wrap"
-              (string-append
-                (highlight-keywords "is ")
-                (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
-                )))
+               *max-line-length*)
+            (begin
+              ;(printf "maxlinelen exceeded\n")
+              (string-append (write-clear)
+                (encoded-ans "" "MMMMMM" #f)
+                (encoded-ans ".recipe_example_body_long"
+                             (string-append
+                               ;(highlight-keywords "is ")
+                               ;(encoded-ans "" "MM" #f)
+                               (encoded-ans "" (highlight-keywords body) show-body?)) #t)))
+            (begin
+              ;(printf "within maxlinelen\n")
+              (enclose-span ".recipe_example_body_wrap"
+                (string-append
+                  ;(highlight-keywords "is ")
+                  (encoded-ans "" "MMMM" #f)
+                  (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                  ))))
         (write-clear)
         ))))
 
