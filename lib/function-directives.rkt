@@ -32,7 +32,7 @@
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 80)
+(define *max-line-length* 70)
 ;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
 ;(define *max-wescheme-example-side-length* 30)
 ;(define *max-pyret-example-side-length* 30)
@@ -367,6 +367,15 @@
         "")
     ))
 
+(define (longer-than? len . exprs)
+  (let ([exprs-len (foldl + 0
+                     (map (lambda (e)
+                            (let ([e (regexp-replace* #rx"{empty}" e "")])
+                              (string-length e)))
+                          exprs))])
+    ;(printf "elen = ~s; len = ~s\n" exprs-len len)
+    (> exprs-len len)))
+
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
   (string-append
@@ -382,10 +391,8 @@
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
           (write-large ")")
           (let ([body-s (expr-to-string body)])
-            (if (> (+ (string-length body-s)
-                      (string-length (expr-to-string funname))
-                      (string-length (list-to-string args)))
-                    *max-line-length*)
+            (if (longer-than? *max-line-length*
+                               body-s (expr-to-string funname) (list-to-string args))
                 (string-append (write-clear)
                   (encoded-ans "" "MMMMMMMMM" #f)
                   (encoded-ans ".recipe_example_body_long"
@@ -426,14 +433,11 @@
         (highlight-keywords " is")
         ; wrap the `is ...` code in its own element, so that wrapping works properly
 
-        (if (> (+ (string-length body)
-                  (string-length funname)
-                  (string-length args))
-               *max-line-length*)
+        (if (longer-than? *max-line-length* body funname args)
             (begin
               ;(printf "maxlinelen exceeded\n")
               (string-append (write-clear)
-                (encoded-ans "" "MMMMMM" #f)
+                (encoded-ans "" "MMMM" #f)
                 (encoded-ans ".recipe_example_body_long"
                              (string-append
                                ;(highlight-keywords "is ")
@@ -441,11 +445,11 @@
                                (encoded-ans "" (highlight-keywords body) show-body?)) #t)))
             (begin
               ;(printf "within maxlinelen\n")
-              (enclose-span ".recipe_example_body_wrap"
+              (enclose-span ""
                 (string-append
                   ;(highlight-keywords "is ")
-                  (encoded-ans "" "MMMM" #f)
-                  (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+                  (encoded-ans "" "M" #f)
+                  (encoded-ans ".recipe_example_body_short" (highlight-keywords body) show-body?)
                   ))))
         (write-clear)
         ))))
