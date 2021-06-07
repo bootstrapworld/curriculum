@@ -359,7 +359,7 @@
           (display (create-begin-tag "div" ".sidebarstandards") o)
           ;(display-standards-selection o *narrative* *dictionaries-represented*)
           (display
-            "include::{cachedir}.pathway-standards.asc[]\n" o)
+            "\ninclude::.pathway-standards.asc[]\n" o)
           (display (create-end-tag "div") o)
           (newline o)
           ]))
@@ -676,6 +676,9 @@
     (display title o)
     (newline o)
     (newline o)
+    (when *lesson-plan*
+      (fprintf o "include::{cachedir}.index-sidebar.asc[]\n")
+      )
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
               (format "~a/~a/.cached/.index.titletxt" *pathway-root-dir* *lesson*)]
@@ -1252,15 +1255,17 @@
                 )
 
               (when *lesson-plan*
-                ;(printf "adding sidebar in ~s\n" (current-directory))
-                (newline o)
-                (display (create-begin-tag "div" ".sidebar") o)
-                (newline o)
-                ;(display "\n|===\n" o)
-                (display-prereqs-bar o)
-                (display-standards-bar o)
-                ;(display "\n|===\n" o)
-                (display (create-end-tag "div") o)
+                (call-with-output-file ".cached/.index-sidebar.asc"
+                  (lambda (o)
+                    (display (create-begin-tag "div" ".sidebar") o)
+                    (newline o)
+                    ;(display "\n|===\n" o)
+                    (display-prereqs-bar o)
+                    (display-standards-bar o)
+                    ;(display "\n|===\n" o)
+                    (display (create-end-tag "div") o)
+                    )
+                  #:exists 'replace)
 
                 )
 

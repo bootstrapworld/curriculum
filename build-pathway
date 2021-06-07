@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-04 # last modified
+LASTMOD=2021-06-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -732,6 +732,7 @@ function checklinks() {
 function doadoc() {
   local f="$1"
   local nocache="$2"
+  local lessonplan="$3"
   #echo doing doadoc "$@"
   local fbase=${f%.a*doc}
   local fasc=.cached/.$fbase.asc
@@ -740,7 +741,7 @@ function doadoc() {
   test -d .cached || mkdir -p .cached
   local cachedirarg=
   local lessonplandirarg=
-  if test $nocache; then
+  if test "$nocache" = nocache; then
     cachedirarg="-a cachedir="
     lessonplandirarg="-a lessonplandir=../"
   else
@@ -750,7 +751,13 @@ function doadoc() {
   #echo cachedirarg is $cachedirarg
   #echo lessonplandirarg is $lessonplandirarg
 
+  if test "$lessonplan" = lessonplan; then
+    touch .cached/.index-sidebar.asc
+    touch .cached/.pathway-standards.asc
+  fi
+
   $PROGDIR/adoc-preproc.rkt $f
+
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       $cachedirarg $lessonplandirarg \
@@ -790,7 +797,7 @@ function processadoc() {
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f .cached/.$fbase-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      #echo doing adoc-preproc of $f
+      #echo doing doadoc of $f
       doadoc $f
       #$PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
@@ -1044,7 +1051,7 @@ function buildlessonplan() {
       overwrite 'building' lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc
+      doadoc index.adoc 0 lessonplan
       #$PROGDIR/adoc-preproc.rkt index.adoc
       if test -f index.html; then
         mv index.html index.shtml
