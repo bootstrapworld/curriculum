@@ -32,7 +32,7 @@
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 70)
+(define *max-line-length* 50)
 ;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
 ;(define *max-wescheme-example-side-length* 30)
 ;(define *max-pyret-example-side-length* 30)
