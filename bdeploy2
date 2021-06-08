@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SEMESTER=fall
+YEAR=2021
+
+DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials
+
+echo start...
+
+cd
+cd tmp
+echo starting untar deployables
+tar jxf deployables.tar.bz2 -C $DEPLOY_DIR --transform "s/^deployables/$SEMESTER$YEAR/"
+echo finished untar deployables
+cd $DEPLOY_DIR
+echo starting chgrp
+chgrp -R cs-plt $SEMESTER$YEAR
+echo finished chgrp
+echo starting chmod
+find $SEMESTER$YEAR -type d|xargs chmod g+rwx,o+rx
+find $SEMESTER$YEAR -type f|xargs chmod g+rw,o+r
+echo finished chmod
