@@ -112,18 +112,12 @@ find deployables -name workbook-sols-\*.pdf -delete
 find deployables -name pd-workbook-\*.pdf -delete
 find deployables -name wkh2p-tmp\* -delete
 
-TAR=tar
-
-if which gtar | grep -q .; then
-  TAR=gtar
-fi
+find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 test -f deployables.tar.bz2 && rm deployables.tar.bz2
 
-chgrp -R cs-plt deployables
-
 echo Tarring up deployables...
-tar jcf deployables.tar.bz2 deployables --owner=$userid --group=cs-plt
+tar jcf deployables.tar.bz2 deployables
 
 echo Copying courses tarball to $userid@ssh.cs.brown.edu...
 scp deployables.tar.bz2 $userid@ssh.cs.brown.edu:tmp/.
