@@ -816,9 +816,11 @@ function processadoc() {
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
             removecodetags $TMPHTML
+            # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
             ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
+            # If it's a landscape page, the "fat margin" is on the left
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
+              ASPECT="-O Landscape --margin-top 12.7mm --margin-right 12.7mm --margin-bottom 12.7mm --margin-left 18mm"
             fi
 
             echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE

@@ -1,4 +1,4 @@
-# last modified 2021-04-21
+# last modified 2021-06-08
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -111,6 +111,8 @@ find deployables -name workbook-[A-Z]\*.pdf -delete
 find deployables -name workbook-sols-\*.pdf -delete
 find deployables -name pd-workbook-\*.pdf -delete
 find deployables -name wkh2p-tmp\* -delete
+
+find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 test -f deployables.tar.bz2 && rm deployables.tar.bz2
 

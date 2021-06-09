@@ -32,7 +32,7 @@
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 70)
+(define *max-line-length* 50)
 ;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
 ;(define *max-wescheme-example-side-length* 30)
 ;(define *max-pyret-example-side-length* 30)
@@ -101,8 +101,7 @@
                                      (loop (- n 1) (cddr e)
                                            (string-append r
                                              (if (= n num-examples) "" "\n")
-                                             "(EXAMPLE\n"
-                                             (if indent (make-string (+ indent 2) #\space) "")
+                                             "(EXAMPLE "
                                              lhs-s
                                              (if (< tot-len 35)
                                                  " "

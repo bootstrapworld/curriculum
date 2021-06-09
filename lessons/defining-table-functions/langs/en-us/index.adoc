@@ -171,7 +171,7 @@ Step 2: Write Examples
 
 [.lesson-instruction]
 Using the `dog-row` and `cat-row` values defined earlier, write examples for this function. If you're not sure what work to do, look back at the purpose statement! Ultimately, we want to write examples that _show their work_. But if you get stuck, you can always _start_ with examples that just show the answer.
-
+```
 	examples:
 		is-cat(dog-row) is false
 		is-cat(cat-row) is true
@@ -179,7 +179,7 @@ Using the `dog-row` and `cat-row` values defined earlier, write examples for thi
 		is-cat(dog-row) is dog-row["species"] == "cat"
 		is-cat(cat-row) is cat-row["species"] == "cat"
 	end
-
+```
 [.lesson-point]
 Step 3: Define the Function
 
@@ -228,19 +228,24 @@ Have students share back their Purpose Statements, and discuss.
 
 Since we're looking up the fixed column, we'll call our new function `lookup-fixed`. What type of data was going in? What type was coming out? This gives us the @vocab{Contract}:
 
-	# lookup-fixed :: Row -> Boolean
-	# consumes an animal, and tells whether it is fixed
+@show{ (contract "lookup-fixed" '("Row")
+"Boolean" "consumes an animal, and tells whether it is fixed")
+}
 
 [.lesson-instruction]
 Write two examples for this function, using the `fixed-row` and `unfixed-row` that you defined earlier.
 
 Have students share back their examples.
 
+```
 	examples:
+		lookup-fixed(fixed-row)   is true
+		lookup-fixed(unfixed-row) is false
+
 		lookup-fixed(fixed-row)   is fixed-row["fixed"]
 		lookup-fixed(unfixed-row) is unfixed-row["fixed"]
 	end
-
+```
 
 [.lesson-instruction]
 Looking at the rows that include the lookup, _what is changing?_ Circle and label the changing part, then use that pattern to define the function.
