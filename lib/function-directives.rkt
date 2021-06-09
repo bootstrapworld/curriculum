@@ -101,8 +101,7 @@
                                      (loop (- n 1) (cddr e)
                                            (string-append r
                                              (if (= n num-examples) "" "\n")
-                                             "(EXAMPLE\n"
-                                             (if indent (make-string (+ indent 2) #\space) "")
+                                             "(EXAMPLE "
                                              lhs-s
                                              (if (< tot-len 35)
                                                  " "
