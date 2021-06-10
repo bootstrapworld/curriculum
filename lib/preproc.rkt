@@ -324,25 +324,30 @@
     ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
-    (display
-      (string-join
-        (map (lambda (lesson)
-               (let ([lesson-title lesson]
-                     [lesson-title-file (format "../~a/.cached/.index.titletxt" lesson)]
-                     [diry (format "../~a" lesson)])
-                 (cond [(file-exists? lesson-title-file)
-                        (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-                       [else
-                         (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
-                 (let ([lk
-                         (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]"
-                                 lesson lesson-title)])
-                   (if (member lesson *lesson-prereqs*)
-                       (enclose-span ".prerequisite" lk)
-                       lk))))
-             all-lessons)
-        ", ") o)
-    (newline o)
+    ;(display "[.sidebarlessons]\n" o)
+    (display "*Pathway*\n" o)
+    ;(display "== Pathway\n" o)
+
+    ;(newline o)
+    (display (create-begin-tag "ul" "") o)
+    (for ([lesson all-lessons])
+      (let ([lesson-title lesson]
+            [lesson-title-file (format "../~a/.cached/.index.titletxt" lesson)]
+            [diry (format "../~a" lesson)])
+        (cond [(file-exists? lesson-title-file)
+               (set! lesson-title (call-with-input-file lesson-title-file read-line))]
+              [else
+                (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
+        (let ([lk
+                (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]"
+                        lesson lesson-title)])
+          (when (member lesson *lesson-prereqs*)
+              (set! lk (enclose-span ".prerequisite" lk)))
+          (display (enclose-tag "li" "" lk) o)
+          (newline o))))
+
+    (display (create-end-tag "ul") o)
+    ;(newline o)
     (display (create-end-tag "div") o)
     (newline o)
     ))
@@ -354,14 +359,21 @@
            (printf "WARNING: ~a: No standards specified\n\n" (errmessage-context)))]
         [else
           ;(display "\n.Standards\n" o)
-          ;(display "| " o)
           ;(display "\n\n=== Standards\n" o)
-          (display (create-begin-tag "div" ".sidebarstandards") o)
-          ;(display-standards-selection o *narrative* *dictionaries-represented*)
+          ;(display (create-begin-tag "div" ".sidebarstandards") o)
+          (display "\n[.sidebarstandards,cols=\"a\"]" o)
+          (display "\n|===\n" o)
+          (display "| " o)
+          ;(display "[.sidebarstandards]\n" o)
+          ;(display "== Standards\n" o)
+          (display "*Standards*\n" o)
+          (display-standards-selection o *narrative* *dictionaries-represented*)
+          (display " | \n" o)
           (display
             "\ninclude::.pathway-standards.asc[]\n" o)
-          (display (create-end-tag "div") o)
-          (newline o)
+          (display "|===\n" o)
+          ;(display (create-end-tag "div") o)
+          ;(newline o)
           ]))
 
 (define (include-glossary o)
@@ -677,7 +689,7 @@
     (newline o)
     (newline o)
     (when *lesson-plan*
-      (fprintf o "include::{cachedir}.index-sidebar.asc[]\n")
+      (fprintf o "include::{cachedir}.index-sidebar.asc[]\n\n")
       )
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
@@ -1219,9 +1231,11 @@
         (lambda (i)
           (call-with-output-file out-file
             (lambda (o)
+
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
                     )
+
               (expand-directives i o)
 
               (when *narrative*
@@ -1257,13 +1271,13 @@
               (when *lesson-plan*
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
-                    (display (create-begin-tag "div" ".sidebar") o)
-                    (newline o)
+                    (print-standards-js o)
+                    ;(display (create-begin-tag "div" ".sidebar") o)
                     ;(display "\n|===\n" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
                     ;(display "\n|===\n" o)
-                    (display (create-end-tag "div") o)
+                    ;(display (create-end-tag "div") o)
                     )
                   #:exists 'replace)
 
@@ -1440,7 +1454,7 @@
 
 (define (create-standards-section dict dict-standards-met op)
   ;(fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op "[.standards-~a]\n" dict)
+  (fprintf op "[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
                   "== ~a Standards\n\n")
@@ -1483,7 +1497,7 @@
   ;(printf "doing display-standards-selection\n")
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
-    (print-standards-js o)
+    ;(print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
@@ -1493,7 +1507,8 @@
                   "Select particular standards from the following menu to see\n"
                   "which lessons meet those standards.\n"))
               o)]
-          [else (display "\n\n.Relevant Standards\n" o)])
+          [else #f ;(display ".Relevant Standards\n" o)
+                ])
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
@@ -1505,10 +1520,12 @@
                           dict))
                       *dictionaries-represented*)
                  "")) o)
+    (newline o)
     (when narrative?
       (display (create-end-tag "div") o)
       (display (create-end-tag "div") o))
-    (display "\n\n" o)))
+    ;(display "\n\n" o)
+    ))
 
 (define (create-standards-file file *narrative* *lesson* *standards-met* *dictionaries-represented*)
   ;(printf "create-standards-file ~s ~s ~s ~s\n" *narrative* *lesson* *standards-met* *dictionaries-represented*)
@@ -1520,7 +1537,7 @@
       (unless (empty? *standards-met*)
         (when *narrative*
           (display-standards-selection op *narrative* *dictionaries-represented*))
-        (when (and #f *lesson*)
+        (when *lesson*
           (fprintf op (string-append
                         "\n[.alignedStandardsIntro]\n"
                         "_Select one or more standards from the menu on the left (⌘-click "
