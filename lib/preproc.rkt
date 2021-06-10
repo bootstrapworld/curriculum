@@ -1272,12 +1272,9 @@
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
                     (print-standards-js o)
-                    ;(display (create-begin-tag "div" ".sidebar") o)
-                    ;(display "\n|===\n" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    ;(display "\n|===\n" o)
-                    ;(display (create-end-tag "div") o)
+                    (display-comment "%ENDSIDEBARTABLE%" o)
                     )
                   #:exists 'replace)
 
