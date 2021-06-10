@@ -1005,8 +1005,16 @@
                               (error 'ERROR
                                      "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-
                             (fprintf o "\ninclude::{cachedir}.index-lang-prereq.asc[]\n\n")]
+                           [(string=? directive "add-prereq")
+                            (printf "doing add-prereq\n")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @add-prereq (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (let ([args (map string->symbol (read-commaed-group i directive))])
+                              (printf "args = ~s\n" args)
+                              (for-each add-prereq args))]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
