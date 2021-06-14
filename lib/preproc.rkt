@@ -1005,8 +1005,16 @@
                               (error 'ERROR
                                      "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-
                             (fprintf o "\ninclude::{cachedir}.index-lang-prereq.asc[]\n\n")]
+                           [(string=? directive "add-to-lang")
+                            ;(printf "doing add-to-lang\n")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @add-to-lang (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (let ([args (map string->symbol (read-commaed-group i directive))])
+                              ;(printf "args = ~s\n" args)
+                              (for-each add-prereq args))]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
@@ -1681,10 +1689,9 @@
 (define (add-prereq sym)
   ;(printf "doing add-prereq ~s\n" sym)
   (when (and (or *lesson-plan* *workbook-page?*) (symbol? sym))
-    (unless (and (string=? *proglang* "pyret")
-                 (member sym '(+ - * /)))
-      (unless (member sym *prereqs-used*)
-        (set! *prereqs-used* (cons sym *prereqs-used*))))))
+    ;use conditional here if you want to exclude some symbols
+    (unless (member sym *prereqs-used*)
+      (set! *prereqs-used* (cons sym *prereqs-used*)))))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]

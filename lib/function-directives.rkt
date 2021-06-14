@@ -255,7 +255,7 @@
 (define (write-section-header page-header funname)
   (format (string-append
             "\n\n[.designRecipeLayout]\n"
-            "== [.dr-title]##~a: ~a##\n")
+            "= [.dr-title]##~a: ~a##\n")
           page-header funname))
 
 (define (write-directions directions)
