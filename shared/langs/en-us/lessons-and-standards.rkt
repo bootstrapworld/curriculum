@@ -154,6 +154,7 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         )
+
     ("inequalities1-simple" 
         "7.EE.B.4"
         "HSF.IF.A.2"
@@ -164,12 +165,14 @@
         "6.EE.B.5"
         "6.EE.B.8"
         )
+
     ("inequalities2-compound" 
         "7.EE.B.4"
         "HSF.IF.A.2"
         "OK.PA.A.4.3"
         "HSS.CP.A.1"
         )
+
     ("inequalities3-sam"
         "HSA.CED.A.3"
         "HSA.CED.A.1"
@@ -183,6 +186,7 @@
         "OK.PA.A.4.3"
         "OK.A1.A.2"
         )    
+
     ("making-game-images" 
         "7.RP.A.1"
         "8.G.A.1"
@@ -243,7 +247,7 @@
         "HSA.SSE.A.1.B"
         "OK.PA.A.1.1"
         )      
-        
+
     ("problem-decomposition"
         "6.EE.B.6" ; STEMworks
         "7.EE.A.2" ; STEMworks
@@ -266,6 +270,7 @@
         "3B-AP-21" ; STEMworks
         "OK.A1.A.3.1"
         )
+        
     ("restating-the-problem" 
         "8.F.B"
         "HSF.BF.A.1"
@@ -273,6 +278,7 @@
         "MP.7"
         "OK.PA.A.1.2"
         )
+
     ("solving-word-problems" 
         "6.EE.B.6" ; STEMworks
         "MP.4" ; STEMworks
@@ -289,6 +295,7 @@
         "3B-AP-21" ; STEMworks
         "3B-AP-23" ; STEMworks
         )
+
     ("surface-area-rect-prism"
         "6.EE.B.6" ; STEMworks
         "MP.4" ; STEMworks
@@ -318,6 +325,7 @@
         "6-8.Computing Systems.Troubleshooting"
         "OK.L1.IC.C.02"
         )
+
     ("choosing-your-dataset" 
         "6.SP.A.1" ; STEMworks
         "HS-SEP1-3" 
@@ -329,6 +337,7 @@
         "P7"
         "OK.L1.DA.CVT.01"
         )
+
     ("correlations" 
         "MP.3" ; STEMworks
         "MP.4" ; STEMworks
@@ -363,6 +372,7 @@
         "6-8.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
         )
+
     ("displays-and-lookups" 
         "HS-SEP4-1" 
         "3A-DA-11" 
@@ -370,6 +380,7 @@
         "6-8.Data and Analysis.Inference and Models"
         "OK.8.DA.S.01"
         )
+
     ("ds-intro" 
         "MP.3" ; STEMworks
         "6.SP.A.1" ; STEMworks
@@ -378,6 +389,7 @@
         "OK.8.DA.CVT.01"
         "OK.5.DA.IM.01"
         )
+
     ("ethics-and-privacy" 
         "3A-AP-16" 
         "MP.3"    ; STEMworks
@@ -392,6 +404,7 @@
         "9-12.Impacts of Computing.Safety, Law, and Ethics"
         "OK.L1.IC.C.01"
         )
+
     ("grouped-samples"
         "6.EE.B.6" ; STEMworks
         "8.SP.A.1"
@@ -403,6 +416,7 @@
         "OK.PA.A.2.2"
         "OK.L1.IC.C.02"
         )
+
     ("if-expressions" 
         "HS-SEP4-5" 
         "2-DA-08" 
@@ -413,6 +427,7 @@
         "6-8.Data and Analysis.Inference and Models" 
         "9-12.Algorithms and Programming.Control"
         )
+
     ("histograms" 
         "MP.4" ; STEMworks
         "6.SP.B.4" ; STEMworks
@@ -424,6 +439,7 @@
         "3B-AP-14" 
         "P5"
         )
+
     ("histograms2" 
         "MP.4" ; STEMworks
         "6.SP.A.2" ; STEMworks
@@ -438,6 +454,7 @@
         "9-12.Data and Analysis.Visualization and Transformation"
         "OK.L1.AP.PD.05"
         )
+
     ("linearity"
         "6.EE.B.6" ; STEMworks
         "8.F.A.2"
@@ -458,6 +475,7 @@
         "CMP.7.5"
         "CMP.8.1"
         )
+
     ("linearity2"
         "6.EE.B.6" ; STEMworks
         "HSF.IF.A.1"
@@ -478,6 +496,7 @@
         "CMP.7.5"
         "CMP.8.1"
         )
+
     ("linear-regression" 
         "MP.4" ; STEMworks
         "HSS.ID.C.7" 
@@ -501,6 +520,7 @@
         "OK.L1.DA.IM.01"
         "CMP.8.1"
         )
+
     ("measures-of-center"
         "MP.3" ; STEMworks
         "6.SP.A"   ; STEMworks
@@ -515,6 +535,7 @@
         "CMP.6.7"
         "CMP.8.1"
         )
+
     ("measures-of-spread" 
         "MP.3" ; STEMworks
         "MP.4" ; STEMworks
@@ -533,6 +554,7 @@
         "6-8.Data and Analysis.Inference and Models"
         "CMP.6.7"
         )
+
     ("method-chaining" 
         "HS-SEP4-1" 
         "1B-AP-10" ; STEMworks
@@ -546,12 +568,14 @@
         "9-12.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
         )
+
     ("displaying-categorical-data"  
         "2-DA-08" 
         "3A-DA-11" 
         "P5"
         "OK.8.DA.S.01"
         )
+
     ("random-samples" 
         "HSS.IC.B.3" 
         "HS-SEP4-3" 
@@ -562,6 +586,7 @@
         "OK.L1.IC.C.02"
         "CMP.7.8"
         )
+
     ("scatter-plots"
         "HS-SEP6-1" 
         "6.SP.A" ; STEMworks
@@ -582,11 +607,13 @@
         "OK.L1.DA.IM.01"
         "CMP.8.1"
         )
+
     ("table-methods" 
         "HS-SEP4-6"
         "2-DA-08"
         "OK.L1.AP.M.02"
         )
+
     ("threats-to-validity" 
         "MP.3" ; STEMworks
         "HSS.IC.B.6" 
