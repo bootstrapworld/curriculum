@@ -67,13 +67,16 @@
         "HSS.CP.B.9"
         "OK.SP.1.5"
         )
+
     ("combinatorics-combination"
         "HSS.CP.B.9"
         "OK.SP.1.5"
         )
+
     ("coordinates" 
         "MP.2"
         )
+
     ("distance-formula" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B" ; STEMworks
@@ -88,10 +91,13 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
+        "CMP.8.2"
         )
+
     ("error-analysis" 
         "MP.2"
         )
+
     ("flags" 
         "HSN.Q.A" 
         "6.RP.A" 
@@ -107,6 +113,7 @@
         "OK.3.AP.PD.03"
         "OK.6.AP.M.01"
         ) 
+
     ("function-composition" 
         "6.EE.B.6" ; STEMworks
         "HSF.BF.A.1.C"
@@ -119,6 +126,7 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-21" ; STEMworks
         )
+
     ("functions-for-character-animation" 
         "8.F.B"
         "HSF.LE.B"
@@ -185,9 +193,11 @@
         "3A-AP-18" ; STEMworks
         "MP.6"
         )
+
     ("numbers-inside-videogames" 
         "MP.2"
         )
+
     ("order-of-operations" 
         "OK.PA.A.3"
         "OK.A1.A.3"
@@ -197,7 +207,10 @@
         "MP.2"
         "MP.3" ; STEMworks
         "MP.4" ; STEMworks
+        "CMP.6.1"
+        "CMP.7.2"
         )
+
     ("piecewise-functions" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B" ; STEMworks
@@ -211,7 +224,9 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.1"
+        "CMP.Alg-Ext.2"
         )
+
     ("player-animation" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B"   ; STEMworks
@@ -228,6 +243,7 @@
         "HSA.SSE.A.1.B"
         "OK.PA.A.1.1"
         )      
+        
     ("problem-decomposition"
         "6.EE.B.6" ; STEMworks
         "7.EE.A.2" ; STEMworks
@@ -282,6 +298,8 @@
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
+        "CMP.6.4"
+        "CMP.7.7"
         )
 
     ;data science
@@ -328,6 +346,7 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "CMP.8.1"
         )
     
       ("defining-table-functions" 
@@ -436,6 +455,8 @@
         "MP.7"
         "OK.PA.A.2.1"
         "OK.PA.A.2.2"
+        "CMP.7.5"
+        "CMP.8.1"
         )
     ("linearity2"
         "6.EE.B.6" ; STEMworks
@@ -454,6 +475,8 @@
         "OK.PA.A.2.3"
         "OK.A1.A.4.1"
         "OK.A1.F.3.1"
+        "CMP.7.5"
+        "CMP.8.1"
         )
     ("linear-regression" 
         "MP.4" ; STEMworks
@@ -476,6 +499,7 @@
         "9-12.Data and Analysis.Inference and Models"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "CMP.8.1"
         )
     ("measures-of-center"
         "MP.3" ; STEMworks
@@ -488,6 +512,8 @@
         "HS-SEP4-2"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2"
+        "CMP.6.7"
+        "CMP.8.1"
         )
     ("measures-of-spread" 
         "MP.3" ; STEMworks
@@ -505,6 +531,7 @@
         "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
+        "CMP.6.7"
         )
     ("method-chaining" 
         "HS-SEP4-1" 
@@ -533,6 +560,7 @@
         "OK.PA.A.2.2"
         "OK.PA.D.2.2"
         "OK.L1.IC.C.02"
+        "CMP.7.8"
         )
     ("scatter-plots"
         "HS-SEP6-1" 
@@ -552,6 +580,7 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "CMP.8.1"
         )
     ("table-methods" 
         "HS-SEP4-6"
