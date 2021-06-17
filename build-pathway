@@ -4,6 +4,7 @@
 # Type build-pathway --help for help.
 
 export ADDEXERCISES=
+export BOOK=
 export DEBUG=
 export FORCE=
 export SUPERFORCE=
@@ -29,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-04 # last modified
+LASTMOD=2021-06-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -40,6 +41,8 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
     ADDEXERCISES=1
+  elif test "$arg" = --book -o "$arg" = -b; then
+    BOOK=1; NOPDF=
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
   elif test "$arg" = --force -o "$arg" = -f; then
@@ -1409,15 +1412,15 @@ function copylessondir() {
       cd $lessonDir
       # we'll set it again when we do the adoc'ing
       rm -f .cached/.checksum.md5txt
+      for subdir in *; do
+        if test "$subdir" = pages -o "$subdir" = solution-pages; then
+          test -d $subdir/.cached || mkdir $subdir/.cached
+        fi
+      done
       checklessonplan $lessonDir
       for subdir in *; do
         if test -d "$subdir"; then
           adjustproglangsubdirs "$subdir"
-        fi
-      done
-      for subdir in *; do
-        if test "$subdir" = pages -o "$subdir" = solution-pages; then
-          test -d $subdir/.cached || mkdir $subdir/.cached
         fi
       done
       cd ../..
@@ -1615,7 +1618,7 @@ function buildpathway() {
     # done
 
     # Shell version
-    if test ! $NOPDF; then
+    if test $BOOK; then
       makeworkbooktex workbook .cached/.workbook-page-index.rkt
       makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
       makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
@@ -1648,27 +1651,29 @@ function buildpathway() {
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
-        if test $PDFpagesredone; then
-          echo building workbook PDFs
-          echo
-        fi
-        for wbf in workbook pd-workbook workbook-sols bm-contracts; do
-          if test $DEBUG; then
-            if test $NOPARALLEL; then
-              $PROGDIR/make-workbook.rkt $wbf
-            else
-              $PROGDIR/make-workbook.rkt $wbf &
-            fi
-          else
-            if test $NOPARALLEL; then
-              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
-            else
-              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
-              # $PROGDIR/make-workbook.rkt $wbf &
-            fi
+        if test $BOOK; then
+          if test $PDFpagesredone; then
+            echo building workbook PDFs
+            echo
           fi
-        done
-        test ! $NOPARALLEL && wait
+          for wbf in workbook pd-workbook workbook-sols bm-contracts; do
+            if test $DEBUG; then
+              if test $NOPARALLEL; then
+                $PROGDIR/make-workbook.rkt $wbf
+              else
+                $PROGDIR/make-workbook.rkt $wbf &
+              fi
+            else
+              if test $NOPARALLEL; then
+                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
+              else
+                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+                # $PROGDIR/make-workbook.rkt $wbf &
+              fi
+            fi
+          done
+          test ! $NOPARALLEL && wait
+        fi
       fi
     fi
 
