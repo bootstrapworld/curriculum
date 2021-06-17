@@ -93,7 +93,7 @@
 
 (define *workbook-pagenums*
   (if *lesson-plan*
-      (let ([f (string-append *pathway-root-dir* ".workbook-pagenum-index.rkt.kp")])
+      (let ([f (string-append *pathway-root-dir* ".cached/.workbook-page-index.rkt.kp")])
         (if (file-exists? f)
             (call-with-input-file f read)
             '()))

@@ -24,23 +24,38 @@
 (unless *pdftk*
   (printf "WARNING: pdftk not installed on your system\n"))
 
-(define (make-workbook tgt )
+(define (make-workbook tgt)
 
-  (define teacher-version
-    (member tgt '("workbook-sols" "bm-contracts")))
+  (define include-solutions?
+    (member tgt '("workbook-sols" "bm-contracts" "workbook-long-sols" "opt-exercises-sols")))
+
+  (define include-opt-exercises? ;ZZZ
+    (member tgt '("workbook-long" "pd-workbook-long" "workbook-long-sols"
+                  "opt-exercises" "opt-exercises-sols")))
 
   (define dest
     (cond [(string=? tgt "workbook") "workbook/workbook"]
           [(string=? tgt "pd-workbook") "resources/protected/pd-workbook"]
-          [(string=? tgt "workbook-sols") "resources/protected/workbook-sols"]
           [(string=? tgt "bm-contracts") "resources/contracts"]
+          [(string=? tgt "workbook-sols") "resources/protected/workbook-sols"]
+          [(string=? tgt "workbook-long") "workbook/workbook-long"]
+          [(string=? tgt "pd-workbook-long") "resources/protected/pd-workbook-long"]
+          [(string=? tgt "workbook-long-sols") "resources/protected/workbook-long-sols"]
+          [(string=? tgt "opt-exercises") "workbook/opt-exercises"]
+          [(string=? tgt "opt-exercises-sols") "resources/protected/opt-exercises-sols"]
           [else (error 'ERROR "deadc0de")]))
 
   (define workbook-page-specs
     (call-with-input-file
-      (if (string=? tgt "bm-contracts")
-          ".cached/.back-matter-contracts-index.rkt"
-          ".cached/.workbook-page-index.rkt") read))
+      (cond [(string=? tgt "bm-contracts")
+             ".cached/.back-matter-contracts-index.rkt"]
+            [(member tgt '("workbook" "pd-workbook" "workbook-sols"))
+             ".cached/.workbook-page-index.rkt"]
+            [(member tgt '("opt-exercises" "opt-exercises-sols"))
+             ".cached/.opt-exercises-index.rkt"]
+            [else
+              ".cached/.workbook-long-page-index.rkt"])
+      read))
 
   (define dest.pdf (format "~a.pdf" dest))
 
@@ -53,7 +68,7 @@
     (let* ([lesson-dir (list-ref f 0)]
            [lesson-workbook-page (list-ref f 1)]
            [g (build-path lesson-dir
-                          (if teacher-version "solution-pages" "pages")
+                          (if include-solutions? "solution-pages" "pages")
                           lesson-workbook-page)]
            [g (if (path-has-extension? g #".adoc")
                   (path-replace-extension g ".pdf") g)])
@@ -79,7 +94,7 @@
              [aspect (list-ref pdf-page-spec 3)])
 
         (set! docfile (build-path lessondir
-                                  (if teacher-version "solution-pages" "pages")
+                                  (if include-solutions? "solution-pages" "pages")
                                   docfile))
 
         (when (or (path-has-extension? docfile #".adoc")
@@ -124,7 +139,12 @@
 ;(printf "building workbook\n")
 
 (let ([arg (vector-ref (current-command-line-arguments) 0)])
-  (unless (member arg '("workbook" "pd-workbook" "workbook-sols" "bm-contracts"))
+  (unless (member arg '("workbook" "pd-workbook" "bm-contracts"
+                        "workbook-sols"
+                        "workbook-long" "pd-workbook-long"
+                        "workbook-long-sols"
+                        "opt-exercises" "opt-exercises-sols"
+                        ))
     (error 'ERROR "make-workbook.rkt: bad argument ~a" arg))
   (make-workbook arg))
 
