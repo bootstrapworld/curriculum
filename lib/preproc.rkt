@@ -535,6 +535,7 @@
        (ormap (lambda (x) (file-exists? (build-path f x)))
               (list "index.html"
                     "index.shtml"
+                    "index.adoc"
                     "index.asciidoc"))))
 
 (define (extract-domain-name f)
@@ -545,7 +546,8 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
-  ;(printf "doing make-link ~s ~s ~s\n" f link-text include?)
+  ;(printf "doing make-link ~s ~s ~s ~s\n" f link-text include? link-type)
+  ;(printf "pwd = ~s\n" (current-directory))
   (cond [(not include?)
 
          (let ([external-link? #f])
@@ -559,16 +561,21 @@
                [else
                  (when (path-has-extension? f ".adoc")
                    (let ([f.html (path-replace-extension f ".html")]
+                         [f.shtml (path-replace-extension f ".shtml")]
                          [f.pdf (path-replace-extension f ".pdf")])
                      (cond [(file-exists? f.html) (set! f f.html)]
+                           [(file-exists? f.shtml) (set! f f.shtml)]
                            [(file-exists? f.pdf) (set! f f.pdf)])))
-                 (unless (or (file-exists? f)
-                             (string=? f ".pathway-standards.shtml")
-                             (abbreviated-index-page? f))
-                   (check-link f)
-                   (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
-                           (errmessage-context)
-                           f))])
+                 ;(printf "link refers to ~a\n\n" f)
+                 (let ([short-ref? (abbreviated-index-page? f)])
+                   (unless (or (file-exists? f)
+                               (string=? f ".pathway-standards.shtml")
+                               short-ref?)
+                     (check-link f)
+                     (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                             (errmessage-context)
+                             f))
+                   (when short-ref? (set! f (build-path f "index.shtml"))))])
 
          (when (and (member link-type '("online-exercise" "opt-online-exercise"))
                     external-link?)
