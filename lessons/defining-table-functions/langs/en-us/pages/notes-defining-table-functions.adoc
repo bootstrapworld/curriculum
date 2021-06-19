@@ -9,18 +9,18 @@ The first step in the Design Recipe is to write the Contract. This means we have
 - What is the *Domain* of that function? (When dealing with Table Functions, the Domain is always `Row`)
 - What is the *Range* of the function? (What is the type of the output?)
 
-The Purpose Statement is a way of adding detail to the Contract, using plain human language. A good Purpose Statement should always explain
+The Purpose Statement is a way of adding detail to the Contract, using plain human language. A good Purpose Statement should always explain:
 
 - What the input _represents_. (Is it Animals? Schools? States?)
-- What the output _represents_. (Pounds? True of false? A picture of a triangle?)
+- What the output _represents_. (Pounds? True or false?)
 - All the information necessary to go from input to output.
 
 It's important to start with this representation, because it's the least detailed. If we can't answer _these_ questions, we shouldn't start writing code!
 
 == Examples
-The second step is work through some concrete examples, making sure that we know exactly what the function will do, given a few sample inputs. Remember: all of this information should be in the Contract and Purpose! That means the first step helps us write the second one, and if it doesn't then it means we should probably go back and see what we left out.
+The second step is work through some concrete examples, making sure that we know exactly what the function will do.
 
-The goal of the Examples step is to _find the pattern_ that represents what the function does. Sometimes we have to start by just focusing on what the answer should be. Suppose animalA is a lizard animal, and animalB isn't. We can imagine the answers for an `is-lizard` to be....
+The goal of the Examples step is to _find the pattern_ that represents what the function does. Sometimes we have to start by just focusing on what the answer should be. Suppose `animalA` is a lizard animal, and `animalB` isn't. We can imagine the answers for an `is-lizard` to be...
 
 ```
 examples:
@@ -40,9 +40,13 @@ end
 
 (And sometimes we can go straight to showing our work, doing the whole thing in one step!)
 
-Once we see the pattern, we can _circle and label what changes_. The stuff we circle should match the Domain in our Contract, and we should find the label written down in our Purpose Statement. If not, then we should check our work before proceeding.
+Once we see the pattern, we can _circle and label what changes_. In this case, only the animal itself changes!
 
 == Definition
 The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input.
 
-Once again, our previous step is a huge help: we can simply *copy everything that stays the same*, and replace the part that changes with the label we used.
+Once again, our previous step is a huge help: we can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
+
+```
+fun is-lizard(r): r["species"] == "lizard" end
+```
