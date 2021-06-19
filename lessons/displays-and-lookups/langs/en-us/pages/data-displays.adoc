@@ -1,68 +1,72 @@
 = Data Displays
 
-Fill in the tables below, then write the Pyret code that will make that display. The first column has been filled in for you.
+Fill in the tables below, then use Pyret to make the following displays. Record the code you used.
 
-1) A `pie-chart` showing the `species` of animals from the shelter.
-[cols="^1,^1,^1",options="header"]
-|===
-| Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
-|===
-
-*code:* @fitb{102ex}{}
+The first column has been filled in for you.
 
 @vspace{1ex}
 
-2) A `bar-chart` showing the `sex` of animals from the shelter.
+@n A `pie-chart` showing the `species` of animals from the shelter.
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
+| _All the animals_		| @ifsoln{_species_}	| @ifsoln{_pie chart_}
 |===
 
-*code:* @fitb{102ex}{}
+*code:* @fitb{102ex}{@ifsoln{`pie-chart(animals-table, "species")`}}
 
 @vspace{1ex}
 
-3) A `histogram` of the number of `pounds` that animals weigh.
+@n A `bar-chart` showing the `sex` of animals from the shelter.
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
+| _All the animals_		| @ifsoln{_sex_}		| @ifsoln{_bar chart_}
 |===
 
-*code:* @fitb{102ex}{}
+*code:* @fitb{102ex}{@ifsoln{`bar-chart(animals-table, "sex")`}}
 
 @vspace{1ex}
 
-4) A `box-plot` of the number of `pounds` that animals weigh.
+@n A `histogram` of the number of `pounds` that animals weigh.
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
+| _All the animals_		| @ifsoln{_pounds_}		| @ifsoln{_histogram_}
 |===
 
-*code:* @fitb{102ex}{}
+*code:* @fitb{102ex}{@ifsoln{`histogram(animals-table, "pounds", 10)`}}
 
 @vspace{1ex}
 
-5) A `scatter-plot`, using the animals' `species` as the labels, `age` as the x-axis, and `pounds` as the y-axis.
+@n A `box-plot` of the number of `pounds` that animals weigh.
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
+| _All the animals_		| @ifsoln{_pounds_}		| @ifsoln{_box plot_}
 |===
 
-*code:* @fitb{102ex}{}
+*code:* @fitb{102ex}{@ifsoln{`box-plot(animals-table, "pounds")`}}
 
 @vspace{1ex}
 
-6) A `scatterplot`, using the animals' `name` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
+@n A `scatter-plot`, using the animals' `species` as the labels, `age` as the x-axis, and `pounds` as the y-axis.
+[cols="^1,^1,^1",options="header"]
+|===
+| Which Rows?			| Which Column(s)?		| What Display?
+| _All the animals_		| @ifsoln{__species, age and pounds__}| @ifsoln{_scatter plot_}
+|===
+
+*code:* @fitb{102ex}{@ifsoln{`scatter-plot(animals-table, "species", "age", "pounds")`}}
+
+@vspace{1ex}
+
+@n A `scatterplot`, using the animals' `name` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis.
 
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What Display?
-| _All the animals_		| 						|
+| _All the animals_		| @ifsoln{__name, pounds and weeks__}| @ifsoln{_scatter plot_}
 |===
 
-*code:* @fitb{102ex}{}
+*code:* @fitb{102ex}{@ifsoln{`scatter-plot(animals-table, "name", "pounds", "weeks")`}}
