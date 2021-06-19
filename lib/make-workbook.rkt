@@ -27,18 +27,19 @@
 (define (make-workbook tgt )
 
   (define teacher-version
-    (member tgt '("workbook-sols" "bm-contracts")))
+    (member tgt '("workbook-sols" "bm-contracts-sols")))
 
   (define dest
     (cond [(string=? tgt "workbook") "workbook/workbook"]
           [(string=? tgt "pd-workbook") "resources/protected/pd-workbook"]
           [(string=? tgt "workbook-sols") "resources/protected/workbook-sols"]
-          [(string=? tgt "bm-contracts") "resources/contracts"]
+          [(string=? tgt "bm-contracts") "resources/pages/contracts"]
+          [(string=? tgt "bm-contracts-sols") "resources/solution-pages/contracts"]
           [else (error 'ERROR "deadc0de")]))
 
   (define workbook-page-specs
     (call-with-input-file
-      (if (string=? tgt "bm-contracts")
+      (if (member tgt '("bm-contracts" "bm-contracts-sols"))
           ".cached/.back-matter-contracts-index.rkt"
           ".cached/.workbook-page-index.rkt") read))
 
@@ -124,7 +125,7 @@
 ;(printf "building workbook\n")
 
 (let ([arg (vector-ref (current-command-line-arguments) 0)])
-  (unless (member arg '("workbook" "pd-workbook" "workbook-sols" "bm-contracts"))
+  (unless (member arg '("workbook" "pd-workbook" "workbook-sols" "bm-contracts" "bm-contracts-sols"))
     (error 'ERROR "make-workbook.rkt: bad argument ~a" arg))
   (make-workbook arg))
 

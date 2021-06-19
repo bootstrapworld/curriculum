@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-16 # last modified
+LASTMOD=2021-06-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1623,6 +1623,7 @@ function buildpathway() {
       makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
       makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
       makeworkbooktex bm-contracts .cached/.back-matter-contracts-index.rkt
+      makeworkbooktex bm-contracts-sols .cached/.back-matter-contracts-index.rkt
     fi
 
     buildlessonplans
@@ -1656,7 +1657,7 @@ function buildpathway() {
             echo building workbook PDFs
             echo
           fi
-          for wbf in workbook pd-workbook workbook-sols bm-contracts; do
+          for wbf in workbook pd-workbook workbook-sols bm-contracts bm-contracts-sols; do
             if test $DEBUG; then
               if test $NOPARALLEL; then
                 $PROGDIR/make-workbook.rkt $wbf
