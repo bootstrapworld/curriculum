@@ -24,7 +24,7 @@
 
 (define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt"))
 
-(define (write-pages-info lesson-dir o #:paginate [paginate "yes"]
+(define (write-pages-info lesson-dir o ol oe #:paginate [paginate "yes"]
                           #:back-matter-port [back-matter-port #f])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
@@ -36,8 +36,7 @@
                    ;(printf "WARNING: missing ~a\n\n" workbook-pages-file)
                    '()])]
          [exercise-pages
-           (cond [(not (truthy-getenv "ADDEXERCISES")) '()]
-                 [(file-exists? exercise-pages-file)
+           (cond [(file-exists? exercise-pages-file)
                   (read-data-file exercise-pages-file #:mode 'files)]
                  [else
                    '()])])
@@ -56,13 +55,16 @@
                 (set! paginate (list-ref page 2)))
               (fprintf o2 "~a\n" file)
               (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)
+              (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)
               (when (and back-matter-port (contracts-page? lesson-dir file))
                 (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
                          lesson-dir file (gen-handle) aspect paginate))
               ))
           ;
-          (for ([file exercise-pages])
-            (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")))
+          (for ([file exercise-pages]) ;TODO: move out of cwof
+            (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")
+            (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")
+            ))
         #:exists 'replace))))
 
 (define (contracts-page? dir file)
@@ -80,18 +82,31 @@
 
 (call-with-output-file ".cached/.workbook-page-index.rkt"
   (lambda (o)
-    (fprintf o "(\n")
-    (write-pages-info "front-matter" o #:paginate "no")
-    (for ([lesson-dir *lesson-order*])
-      (write-pages-info lesson-dir o))
-    (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
-      (lambda (ob)
-        (fprintf ob "(\n")
-        (write-pages-info "back-matter" o #:paginate "no" #:back-matter-port ob)
-        (fprintf ob ")\n")
-        )
-      #:exists 'replace)
-    (fprintf o ")\n"))
+    (call-with-output-file ".cached/.workbook-long-page-index.rkt"
+      (lambda (ol)
+        (call-with-output-file ".cached/.opt-exercises-index.rkt"
+          (lambda (oe)
+            (fprintf o "(\n")
+            (fprintf ol "(\n")
+            (fprintf oe "(\n")
+            ;TODO skip if dir nonexistent
+            (write-pages-info "front-matter" o ol oe #:paginate "no")
+            (for ([lesson-dir *lesson-order*])
+              (write-pages-info lesson-dir o ol oe))
+            (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
+              (lambda (ob)
+                (fprintf ob "(\n")
+                ;TODO skip if dir nonexistent
+                (write-pages-info "back-matter" o ol oe #:paginate "no" #:back-matter-port ob)
+                (fprintf ob ")\n")
+                )
+              #:exists 'replace)
+            (fprintf o ")\n")
+            (fprintf ol ")\n")
+            (fprintf oe ")\n")
+            )
+          #:exists 'replace))
+      #:exists 'replace))
   #:exists 'replace)
 
 (void)

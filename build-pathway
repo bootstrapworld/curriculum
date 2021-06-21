@@ -3,7 +3,6 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
-export ADDEXERCISES=
 export BOOK=
 export DEBUG=
 export FORCE=
@@ -30,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-19 # last modified
+LASTMOD=2021-06-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -40,16 +39,15 @@ NOPARALLEL=
 while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
-    ADDEXERCISES=1
+    :
   elif test "$arg" = --book -o "$arg" = -b; then
     BOOK=1; NOPDF=
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
+  elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
+    EXPANDEDWARNINGS=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
-  elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
-    FORCE=1
-    SUPERFORCE=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
   elif test "$arg" = --language; then
@@ -61,14 +59,13 @@ while test $# -ne 0; do
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
   elif test "$arg" = --proglang; then
-    PROGLANG=$1
-    shift
+    PROGLANG=$1; shift
+  elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
+    SUPERFORCE=1; FORCE=1
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1
     #
     # some common combos
-  elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
-    EXPANDEDWARNINGS=1
   elif test "$arg" = -df; then
     DEBUG=1; FORCE=1
   elif test "$arg" = -dfl; then
@@ -113,7 +110,9 @@ function displayhelp() {
   echo "                " An appropriate default is used depending on the pathway.
   echo "  " --debug: Keep around for inspection/debugging various temp files
   echo "           " in the \'distribution\' directory.
-  echo "  " --force: Regenerate doctree from scratch without relying on previous runs.
+  echo "  " --force, -f: Regenerate doctree from scratch without relying on previous runs.
+  echo "  " --superforce, -F: Regenerate doctree from scratch after updating code.
+  echo "  " --book, -b: Generate workbook PDFs.
   echo "  " --no-pdf: Don\'t generate PDF files. This is to speed things up
   echo "            " during debugging when PDF output isn\'t necessary.
   echo "  " --lint: \(1\) Ensure the summary tables in lesson plans have the required rows.
@@ -964,11 +963,9 @@ function checklessonplan() {
 
   grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
-  if test $ADDEXERCISES; then
-    if test -f index.adoc; then
-      echo collecting exercises in $L
-      $PROGDIR/collect-exercises.rkt index.adoc
-    fi
+  if test -f index.adoc; then
+    #echo collecting exercises in $L
+    $PROGDIR/collect-exercises.rkt index.adoc
   fi
 
 }
@@ -1222,11 +1219,7 @@ function makeworkbooktex() {
   local tgt=$1
   local wbpnf=$2
 
-  if test "$wbpnf" = .cached/.workbook-page-index.rkt; then
-    local wbpnfkp=.workbook-pagenum-index.rkt.kp
-  else
-    local wbpnfkp=$wbpnf.kp
-  fi
+  local wbpnfkp=$wbpnf.kp
 
   local i=
 
@@ -1295,11 +1288,11 @@ function makeworkbooktex() {
       currlesson=$lessondir
         echo >> $tgt.tex
         echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
-        if test "$tgt" = pd-workbook; then
-      if echo $currlesson| grep -q 'lessons/'; then
-        lessonplanpdf=$currlesson/index.pdf
-        echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
-      fi
+        if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
+          if echo $currlesson| grep -q 'lessons/'; then
+            lessonplanpdf=$currlesson/index.pdf
+            echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
+          fi
         fi
 
     else
@@ -1621,9 +1614,14 @@ function buildpathway() {
     if test $BOOK; then
       makeworkbooktex workbook .cached/.workbook-page-index.rkt
       makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
       makeworkbooktex bm-contracts .cached/.back-matter-contracts-index.rkt
       makeworkbooktex bm-contracts-sols .cached/.back-matter-contracts-index.rkt
+      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
+      makeworkbooktex workbook-long .cached/.workbook-long-page-index.rkt
+      makeworkbooktex pd-workbook-long .cached/.workbook-long-page-index.rkt
+      makeworkbooktex workbook-long-sols .cached/.workbook-long-page-index.rkt
+      makeworkbooktex opt-exercises .cached/.opt-exercises-index.rkt
+      makeworkbooktex opt-exercises-sols .cached/.opt-exercises-index.rkt
     fi
 
     buildlessonplans
@@ -1657,7 +1655,8 @@ function buildpathway() {
             echo building workbook PDFs
             echo
           fi
-          for wbf in workbook pd-workbook workbook-sols bm-contracts bm-contracts-sols; do
+          for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+            pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
             if test $DEBUG; then
               if test $NOPARALLEL; then
                 $PROGDIR/make-workbook.rkt $wbf
