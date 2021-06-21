@@ -578,6 +578,16 @@ function resolveabbrevs() {
     \
     -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
     $f
+  $SED -i \
+    -e '/^\/\/ %ENDSIDEBARSCRIPT%/,/^<\/script>/ s/<\/script>/\0\n<div class="sidebar">/' \
+    $f
+  $SED -i \
+    -e '/^%ENDSIDEBARTABLE%/,/^-->/ s/^-->/\0\n<\/div>/' \
+    $f
+  $SED -i \
+    -e '/^\/\/ %ENDSIDEBARSCRIPT%/d' \
+    -e '/^%ENDSIDEBARTABLE%/d' \
+    $f
   if test "$mathjaxneeded"; then
     cat > .cached/.mathjax.txt <<EOF
       <script type="text/javascript" src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
@@ -734,6 +744,7 @@ function checklinks() {
 function doadoc() {
   local f="$1"
   local nocache="$2"
+  local lessonplan="$3"
   #echo doing doadoc "$@"
   local fbase=${f%.a*doc}
   local fasc=.cached/.$fbase.asc
@@ -742,7 +753,7 @@ function doadoc() {
   test -d .cached || mkdir -p .cached
   local cachedirarg=
   local lessonplandirarg=
-  if test $nocache; then
+  if test "$nocache" = nocache; then
     cachedirarg="-a cachedir="
     lessonplandirarg="-a lessonplandir=../"
   else
@@ -752,7 +763,13 @@ function doadoc() {
   #echo cachedirarg is $cachedirarg
   #echo lessonplandirarg is $lessonplandirarg
 
+  if test "$lessonplan" = lessonplan; then
+    touch .cached/.index-sidebar.asc
+    touch .cached/.pathway-standards.asc
+  fi
+
   $PROGDIR/adoc-preproc.rkt $f
+
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       $cachedirarg $lessonplandirarg \
@@ -792,7 +809,7 @@ function processadoc() {
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f .cached/.$fbase-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      #echo doing adoc-preproc of $f
+      #echo doing doadoc of $f
       doadoc $f
       #$PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
@@ -1046,7 +1063,7 @@ function buildlessonplan() {
       overwrite 'building' lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc
+      doadoc index.adoc 0 lessonplan
       #$PROGDIR/adoc-preproc.rkt index.adoc
       if test -f index.html; then
         mv index.html index.shtml
