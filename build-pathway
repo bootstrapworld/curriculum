@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-21 # last modified
+LASTMOD=2021-06-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -314,10 +314,6 @@ EOF
   elif test $DATASHEETPAGE; then
     $SED -i \
       -e 's/^<body class="/\0datasheetpage /' \
-      $f
-  else
-    $SED -i \
-      -e 's/^<body class="/\0narrativepage /' \
       $f
   fi
   if ! grep -q %INSERTGDRIVESAVE2 $f; then
@@ -625,6 +621,11 @@ EOF
       -e '/^<body[^>]*>/s/<body[^>]*>/\0%INSERTCURRICULUMCOMMENT/' \
       -e '/%INSERTCURRICULUMCOMMENT/r '$tif \
       -e 's/%INSERTCURRICULUMCOMMENT//' \
+      $f
+  fi
+  if test ! $WORKBOOKPAGE -a ! $DATASHEETPAGE; then
+    $SED -i \
+      -e 's/^<body class="/\0narrativepage /' \
       $f
   fi
 }
