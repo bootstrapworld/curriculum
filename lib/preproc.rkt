@@ -29,6 +29,8 @@
 
 (define *nopdf* (truthy-getenv "NOPDF"))
 
+(define *book* (truthy-getenv "BOOK"))
+
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
 (unless (member *proglang* '("pyret" "wescheme"))
@@ -448,6 +450,7 @@
                         (let ([pagenum (workbook-pagenum lesson snippet)])
                           (unless (or (equal? link-type "opt-printable-exercise")
                                       *nopdf*
+                                      (not *book*)
                                       pagenum
                                       error-cascade?)
                             (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
