@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-22 # last modified
+LASTMOD=2021-06-28 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1148,10 +1148,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
       -B . \
-      -o .pathway-glossary.shtml \
+      -o pathway-glossary.shtml \
       .cached/.pathway-glossary.asc
-    insertbodyid .pathway-glossary.shtml
-    resolveabbrevs .pathway-glossary.shtml
+    insertbodyid pathway-glossary.shtml
+    resolveabbrevs pathway-glossary.shtml
   fi
   if test -f .cached/.pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
@@ -1159,10 +1159,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -B . \
-      -o .pathway-standards.shtml \
+      -o pathway-standards.shtml \
       .cached/.pathway-standards.asc
-    insertbodyid .pathway-standards.shtml
-    resolveabbrevs .pathway-standards.shtml
+    insertbodyid pathway-standards.shtml
+    resolveabbrevs pathway-standards.shtml
   fi
 }
 

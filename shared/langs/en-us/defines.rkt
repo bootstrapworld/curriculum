@@ -41,13 +41,13 @@
 (define (print-link-to-glossary o)
   (display
     (string-append
-      "\n- link:./.pathway-glossary.shtml[Glossary]\n"
+      "\n- link:./pathway-glossary.shtml[Glossary]\n"
       "-- A list of vocabulary words used in this pathway.\n") o))
 
 (define (print-link-to-standards o)
   (display
     (string-append
-      "\n- link:./.pathway-standards.shtml[Standards Alignment]\n"
+      "\n- link:./pathway-standards.shtml[Standards Alignment]\n"
       "-- Find out how our materials align with Common Core Content\n"
       "and Practice Standards, as well as the TEK and CSTA Standards.\n")
     o))
@@ -80,7 +80,7 @@
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
-(define (print-standards-js o)
+(define (print-standards-js o #:sidebar [sidebar #f])
   (display
     (string-append
       "\n++++\n"
@@ -110,7 +110,7 @@
       "  }\n"
       "  intro.style.display = introNeeded ? 'block' : 'none';\n"
       "}\n"
-      "// %ENDSIDEBARSCRIPT%\n"
+      (if sidebar "// %ENDSIDEBARSCRIPT%\n" "")
       "</script>\n"
       "++++\n\n") o))
 

@@ -597,7 +597,7 @@
                  ;(printf "link refers to ~a\n\n" f)
                  (let ([short-ref? (abbreviated-index-page? f)])
                    (unless (or (file-exists? f)
-                               (string=? f ".pathway-standards.shtml")
+                               (string=? f "pathway-standards.shtml")
                                short-ref?)
                      (check-link f)
                      (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
@@ -1286,7 +1286,7 @@
               (when *lesson-plan*
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
-                    (print-standards-js o)
+                    (print-standards-js o #:sidebar #t)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
                     (display-comment "%ENDSIDEBARTABLE%" o)
@@ -1465,8 +1465,7 @@
   )
 
 (define (create-standards-section dict dict-standards-met op)
-  ;(fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op "[.alignedStandards.standards-~a]\n" dict)
+  (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
                   "== ~a Standards\n\n")
@@ -1509,7 +1508,7 @@
   ;(printf "doing display-standards-selection\n")
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
-    ;(print-standards-js o)
+    (print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
