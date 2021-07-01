@@ -327,7 +327,7 @@
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
     ;(display "[.sidebarlessons]\n" o)
-    (display "*Pathway*\n" o)
+    (display "*Lessons*\n" o)
     ;(display "== Pathway\n" o)
 
     ;(newline o)
