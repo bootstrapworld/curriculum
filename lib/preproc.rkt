@@ -577,7 +577,7 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
-  ;(printf "doing make-link ~s ~s ~s ~s\n" f link-text include? link-type)
+  ;(printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
   ;(printf "pwd = ~s\n" (current-directory))
   (cond [(not include?)
 
@@ -613,6 +613,12 @@
            (let ([domain-name (extract-domain-name f)])
              (when domain-name
                (set! link-text (string-append link-text " (" domain-name ")")))))
+
+         (when (and *lesson-plan* (not external-link?) (equal? link-type "link") (equal? link-text ""))
+           (let ([lesson-title-file (find-relative-path (simple-form-path f)
+                                                        (build-path ".cached" ".index.titletxt"))])
+             (when (file-exists? lesson-title-file)
+               (set! link-text (call-with-input-file lesson-title-file read-line)))))
 
          (let ([link-output
                  (cond ((or *lesson-plan* *teacher-resources*)
@@ -981,15 +987,9 @@
                               (display (make-image (car args) (cdr args) #:centered? #t) o))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
-                           [(or (string=? directive "workbook-link")
-                                (string=? directive "exercise-link")
-                                (string=? directive "printable-exercise")
+                           [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 )
-                            (when (equal? directive "workbook-link")
-                              (set! directive "printable-exercise"))
-                            (when (equal? directive "exercise-link")
-                              (set! directive "opt-printable-exercise"))
                             (let* ([args (read-commaed-group i directive)]
                                    [n (length args)]
                                    [page (car args)]
@@ -1035,22 +1035,11 @@
                                            (printf "WARNING: Incorrect³ @workbook-link ~a\n\n" page)]))]
                                 [else
                                   (printf "WARNING: Incorrect⁴ @workbook-link ~a\n\n" page)]))]
-                           [(or (string=? directive "worksheet-link")
-                                (string=? directive "worksheet-include")
-                                (string=? directive "exercise-link"))
-                            ;TODO: Remove this after a while
-                            (error 'ERROR
-                                   "adoc-preproc: Obsolete directive ~a\n" directive)]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise")
-                                (string=? directive "activity-link")
                                 (string=? directive "ext-exercise-link"))
-                            (when (equal? directive "activity-link")
-                              (set! directive "online-exercise"))
                             (let* ([args (read-commaed-group i directive)]
-                                   [link-type (if (string=? directive "online-exercise")
-                                                  'online-exercise #f)]
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
