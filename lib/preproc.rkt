@@ -12,6 +12,7 @@
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
+(require "lessons-and-badges.rkt")
 (require "collect-lang-prereq.rkt")
 ;(require "draw-dep-diag.rkt")
 
@@ -128,6 +129,8 @@
 
 (define *standards-met* '())
 
+(define *badges-merited* '())
+
 (define *lesson-prereqs* '())
 
 (define *dictionaries-represented* '())
@@ -235,8 +238,9 @@
             (values sublist-item c dict)))))
 
 (define (add-standard x lesson-title lesson pwy o)
-  ;(printf "doing add-standard ~a ~a ~a\n" x lesson-title lesson pwy)
+  ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
   (let-values (((sublist-item c dict) (assoc-standards x)))
+    ;(printf "-> sbl= ~s c= ~s dict= ~s\n" sublist-item c dict)
     (when c (let ((std (list-ref c 0)))
               (when (and o *lesson*)
                 (fprintf o "**~a**: ~a~n~n"
@@ -260,6 +264,11 @@
                           (cons (list std sublist-items c dict
                                       (box (list (list lesson-title lesson pwy))))
                                 *standards-met*)))))))))
+
+(define (add-badge b)
+  ;(printf "doing add-badge ~s\n" b)
+  (unless (member b *badges-merited*)
+    (set! *badges-merited* (cons b *badges-merited*))))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -377,6 +386,24 @@
           ;(display (create-end-tag "div") o)
           ;(newline o)
           ]))
+
+(define (display-badges-bar o)
+  ;(printf "doing display-badges-bar\n")
+  (display (create-begin-tag "div" ".sidebarbadges") o)
+  (display (create-begin-tag "ul" "") o)
+  (cond [(null? *badges-merited*)
+         (when *lesson-plan*
+           (printf "WARNING: ~a: No badges specified\n" (errmessage-context)))]
+        [else
+          ;(printf "Badges are present for ~s\n" *lesson-plan*)
+          ;  {pathwayrootdir}../../Badges/badge.png
+          (for ([badge *badges-merited*])
+            (let ([img (format "image:{pathwayrootdir}../../Badges/~a.png[~a]" badge badge)])
+              (display (enclose-tag "li" "" img) o)
+              (newline o)))])
+  (display (create-end-tag "ul") o)
+  (display (create-end-tag "div") o)
+  (newline o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -913,6 +940,11 @@
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
+
+        (for ([x *lessons-and-badges*])
+          (when (string=? (car x) *lesson-plan*)
+            (for ([s (cdr x)])
+              (add-badge s))))
         )
       ;
       (when (or *lesson-plan*
@@ -1281,7 +1313,8 @@
                     (print-standards-js o #:sidebar #t)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    (display-comment "%ENDSIDEBARTABLE%" o)
+                    (display-badges-bar o)
+                    (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
 

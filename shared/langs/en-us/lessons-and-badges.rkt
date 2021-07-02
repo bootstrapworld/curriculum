@@ -3,9 +3,9 @@
 ;FIXME what wd be the canonical location of this file?
 ;      the pathway top dir?
 
-(provide *lessons-and-standards*)
+(provide *lessons-and-badges*)
 
-(define *lessons-and-standards*
+(define *lessons-and-badges*
   '(
 ; core
 
@@ -24,7 +24,7 @@
         ) 
 ; math
    
-    ("combinatorics-permutation"5"
+    ("combinatorics-permutation"
         )
 
     ("combinatorics-combination"
