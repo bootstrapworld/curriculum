@@ -219,7 +219,7 @@ td.halign-center div.circleevalsexp {
   width:      250px;
   height:     100%;
   background: #eee;
-  opacity:    0.5;
+  opacity:    0.2;
   border-left: solid 4px black;
   transition: opacity 0.2s;
   box-shadow: -1px 2px 6px black;
@@ -235,9 +235,9 @@ td.halign-center div.circleevalsexp {
   overflow:  scroll;
   padding: 10px;
 }
-.sidebarlessons li { margin-left:  15px; margin-bottom: 5px;}
-.sidebarlessons .prerequisite::before { content:'★'; position: relative; left: -21px; font-size: 0.9rem;} 
-.sidebarlessons .prerequisite a {margin-left:  -15px;}
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
+.sidebarlessons .prerequisite::after { content:'★'; } 
 .sidebarlessons strong {color: black; margin-left: 10px;}
 
 
@@ -248,6 +248,10 @@ td.halign-center div.circleevalsexp {
 .sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
+
+.sidebarbadges li {list-style-type: none; display: inline-block;}
+.sidebarbadges img {width: 75px; transition: width 0.5s; }
+.sidebarbadges img:hover {width: 200px; }
 
 /* Styling for the Materials section of the Lesson Summary */
 .materials-links {
