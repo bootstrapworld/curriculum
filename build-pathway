@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-02 # last modified
+LASTMOD=2021-07-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -217,8 +217,8 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
     cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
   fi
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
-  mkdir -p distribution/$LANGUAGE/Badges
-  cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/Badges
+  mkdir -p distribution/$LANGUAGE/lib/Badges
+  cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 

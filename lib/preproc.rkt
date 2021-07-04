@@ -396,9 +396,8 @@
            (printf "WARNING: ~a: No badges specified\n" (errmessage-context)))]
         [else
           ;(printf "Badges are present for ~s\n" *lesson-plan*)
-          ;  {pathwayrootdir}../../Badges/badge.png
           (for ([badge *badges-merited*])
-            (let ([img (format "image:{pathwayrootdir}../../Badges/~a.png[~a]" badge badge)])
+            (let ([img (format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)])
               (display (enclose-tag "li" "" img) o)
               (newline o)))])
   (display (create-end-tag "ul") o)
