@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-04 # last modified
+LASTMOD=2021-07-06 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -427,7 +427,7 @@ function modifygdrivepage() {
   $SED -i \
     -e 's/%GDRIVEEXTERNALHREF//g' \
     -e '/^ *<link rel="stylesheet".*\.css/d' \
-    -e '/^ *<script type="text\/javascript".*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
+    -e '/^ *<script .*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
     -e '/<span class="tooltiptext">.*<\/span>/d' \
     $f
   echo "<style>" > $TMPFILE.css
@@ -588,7 +588,7 @@ function resolveabbrevs() {
     $f
   if test "$mathjaxneeded"; then
     cat > .cached/.mathjax.txt <<EOF
-      <script type="text/javascript" src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
@@ -601,11 +601,11 @@ EOF
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
     <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
