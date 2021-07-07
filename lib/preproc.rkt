@@ -554,6 +554,7 @@
                         (printf "WARNING: Image file ~a not found\n\n" img))))))
   (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
+         [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
          [img-link-txt (string-append
