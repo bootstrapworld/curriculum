@@ -1563,9 +1563,10 @@
     ;(display "\n\n" o)
     ))
 
-(define (create-standards-file file *narrative* *lesson* *standards-met* *dictionaries-represented*)
-  ;(printf "create-standards-file ~s ~s ~s ~s\n" *narrative* *lesson* *standards-met* *dictionaries-represented*)
-  ;(printf "create-standards-file ~s ~s\n" *narrative* *lesson*)
+(define (create-standards-file file *narrative* *lesson*)
+  ;(printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
+  ;(printf "standards-met= ~s\n\n\n" *standards-met*)
+  ;(printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
   (when *narrative*
     (print-menubar (string-append file "-comment.txt")))
   (call-with-output-file (string-append file ".asc")
@@ -1590,7 +1591,7 @@
 
 (define (create-standards-subfile)
   ;(printf "doing create-standards-subfile\n")
-  (create-standards-file ".cached/.pathway-standards" *narrative* *lesson* *standards-met* *dictionaries-represented*))
+  (create-standards-file ".cached/.pathway-standards" *narrative* *lesson*))
 
 (define (accumulate-glossary-and-standards)
   ;(printf "doing accumulate-glossary-and-standards\n")
