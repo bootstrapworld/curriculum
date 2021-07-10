@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-06 # last modified
+LASTMOD=2021-07-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -542,10 +542,9 @@ function resolveabbrevs() {
     CODELANG=racket
   fi
   $SED -i \
-    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
-    -e 's/<\/pre>/<\/tt><\/pre>/g' \
-    -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
-    -e 's/<\/code>\(,*\)/<\/tt>\1<\/code>/g' \
+    -e 's/<pre>/<pre><code class="'$CODELANG'">/g' \
+    -e 's/<\/pre>/<\/code><\/pre>/g' \
+    -e 's/<code>/<code class="'$CODELANG'">/g' \
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
@@ -837,7 +836,7 @@ function processadoc() {
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
-            removecodetags $TMPHTML
+            #removecodetags $TMPHTML
             # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
             ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
             # If it's a landscape page, the "fat margin" is on the left
@@ -1092,7 +1091,7 @@ function buildlessonplan() {
           TEMPF=$(mktemp); rm -f $TEMPF
           TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
           cp index.shtml $TMPHTML
-          removecodetags $TMPHTML
+          #removecodetags $TMPHTML
 
           echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
