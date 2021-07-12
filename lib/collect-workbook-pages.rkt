@@ -28,7 +28,7 @@
                           #:back-matter-port [back-matter-port #f])
   (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
          [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
-         [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
+         [exercise-pages-ls-file (format "~a/pages/.cached/.exercise-pages-ls.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
@@ -36,8 +36,8 @@
                    ;(printf "WARNING: missing ~a\n\n" workbook-pages-file)
                    '()])]
          [exercise-pages
-           (cond [(file-exists? exercise-pages-file)
-                  (read-data-file exercise-pages-file #:mode 'files)]
+           (cond [(file-exists? exercise-pages-ls-file)
+                  (read-data-file exercise-pages-ls-file #:mode 'lines)]
                  [else
                    '()])])
     (with-handlers ([exn:fail?
@@ -61,11 +61,17 @@
                          lesson-dir file (gen-handle) aspect paginate))
               ))
           ;
-          (for ([file exercise-pages]) ;TODO: move out of cwof
-            (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")
-            (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) "portrait" "no")
-            ))
-        #:exists 'replace))))
+          )
+        #:exists 'replace)
+      (for ([page exercise-pages])
+        (let ([file (list-ref page 0)]
+              [aspect "portrait"]
+              [n (length page)])
+          (when (>= n 2)
+            (set! aspect (list-ref page 1)))
+          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect "no")
+          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect "no")
+          )))))
 
 (define (contracts-page? dir file)
   (let ([f (build-path dir "solution-pages" file)])

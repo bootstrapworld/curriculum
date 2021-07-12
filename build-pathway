@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-10 # last modified
+LASTMOD=2021-07-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -985,6 +985,15 @@ function checklessonplan() {
   if test -f index.adoc; then
     #echo collecting exercises in $L
     $PROGDIR/collect-exercises.rkt index.adoc
+    exerf=pages/.cached/.exercise-pages-ls.txt.kp
+    rm -f $exerf
+    for f in $(cat pages/.cached/.exercise-pages.txt.kp); do
+      if head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+        echo $f landscape >> $exerf
+      else
+        echo $f >> $exerf
+      fi
+    done
   fi
 
 }
