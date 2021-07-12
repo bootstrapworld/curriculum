@@ -471,20 +471,6 @@ function removecodetags() {
     $f
 }
 
-function moveheaderlogopos() {
-  #TODO: Not used anymore?
-  local f=$1
-  $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
-  $SED -i \
-    -e 's/^<h1>\(.*\)\(<span class="bootstrapheader".*\)$/\1<h1>\2/' \
-    temp.txt
-  $SED -i \
-    -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
-    -e '/^<div id="content">/r temp.txt' \
-    $f
-  rm temp.txt
-}
-
 function cleanuptitle() {
   local f=$1
   $SED -i \
@@ -985,11 +971,11 @@ function checklessonplan() {
   if test -f index.adoc; then
     #echo collecting exercises in $L
     $PROGDIR/collect-exercises.rkt index.adoc
-    exerf=pages/.cached/.exercise-pages.txt.kp
-    if test -f $exerf; then
-      exerfA=pages/.cached/.exercise-pages-ls.txt.kp
+    exerflist=pages/.cached/.exercise-pages-ls.txt.kp
+    if test -f $exerflist; then
+      exerfA=pages/.cached/.exercise-pages.txt.kp
       rm -f $exerfA
-      for f in $(cat $exerf); do
+      for f in $(cat $exerflist); do
         if test ${f%.adoc} = $f; then
           echo $f >> $exerfA
         elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
@@ -1590,6 +1576,41 @@ function buildpathway() {
       adjustproglangsubdirs resources
     fi
 
+    if test -d lessons; then
+      cd lessons
+      for d in *; do
+        if test -d "$d"; then
+          cd "$d"
+          if test -d pages; then
+            cd pages
+            if test -f workbook-pages.txt; then
+              test -d .cached || mkdir .cached
+              cd .cached
+              rm -f .workbook-pages.txt.kp
+
+              while read -r f; do
+                #echo finding aspect of "$f"
+                if echo "$f"|grep -q landscape; then
+                  echo $f >> .workbook-pages.txt.kp
+                elif test "${f%.adoc}" = "$f"; then
+                  echo $f >> .workbook-pages.txt.kp
+                elif head -5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
+                  echo $f landscape >> .workbook-pages.txt.kp
+                else
+                  echo $f >> .workbook-pages.txt.kp
+                fi
+              done < ../workbook-pages.txt
+
+              cd ..
+            fi
+            cd ..
+          fi
+          cd ..
+        fi
+      done
+      cd ..
+    fi
+
     $PROGDIR/collect-workbook-pages.rkt
 
     buildlessons
@@ -1636,12 +1657,6 @@ function buildpathway() {
 
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
-
-    # Racket version
-    # $PROGDIR/make-workbook-tex.rkt
-    # for tgt in workbook pd-workbook workbook-sols; do
-    #   $SED -i -e "s/==TARGET==/$tgt/" $tgt.tex
-    # done
 
     # Shell version
     if test $BOOK; then

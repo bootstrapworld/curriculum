@@ -26,9 +26,9 @@
 
 (define (write-pages-info lesson-dir o ol oe #:paginate [paginate "yes"]
                           #:back-matter-port [back-matter-port #f])
-  (let* ([workbook-pages-file (format "~a/pages/workbook-pages.txt" lesson-dir)]
+  (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
          [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
-         [exercise-pages-ls-file (format "~a/pages/.cached/.exercise-pages-ls.txt.kp" lesson-dir)]
+         [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
@@ -36,8 +36,8 @@
                    ;(printf "WARNING: missing ~a\n\n" workbook-pages-file)
                    '()])]
          [exercise-pages
-           (cond [(file-exists? exercise-pages-ls-file)
-                  (read-data-file exercise-pages-ls-file #:mode 'lines)]
+           (cond [(file-exists? exercise-pages-file)
+                  (read-data-file exercise-pages-file #:mode 'lines)]
                  [else
                    '()])])
     (with-handlers ([exn:fail?
