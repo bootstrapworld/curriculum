@@ -15,98 +15,69 @@ td {padding: .1em .625em !important; height: 20pt;}
 </style>
 ++++
 
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-
 |Name||Domain||Range
 
-| `triangle`
+| `num-min`
 | `{two-colons}`
-| `(side-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `(a {two-colons} Number, b{two-colons} Number)`
+| `->`
+| `Number`
+5+|
+
+| `num-max`
+| `{two-colons}`
+| `(a {two-colons} Number, b{two-colons} Number)`
+| `->`
+| `Number`
+5+|
+
+| `count`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Table`
+5+|
+
+| `mean`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Number`
+5+|
+
+| `median`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Number`
+5+|
+
+| `modes`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `List<Number>`
+5+|
+
+| `bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
 | `->`
 | `Image`
 5+|
 
-| `circle`
+| `pie-chart`
 | `{two-colons}`
-| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `(t {two-colons} Table, col {two-colons} String)`
 | `->`
 | `Image`
 5+|
 
-| `star`
+| `histogram`
 | `{two-colons}`
-| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `rectangle`
-| `{two-colons}`
-| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
-| `->`
-| `Image`
-5+|
-
-| `ellipse`
-| `{two-colons}`
-| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
-| `->`
-| `Image`
-5+|
-
-| `square`
-| `{two-colons}`
-| `(size-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `text`
-| `{two-colons}`
-| `(str {two-colons} String, size {two-colons} Number, color {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `overlay`
-| `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `beside`
-| `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `above`
-| `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `put-image`
-| `{two-colons}`
-| `(img1 {two-colons} Image, x {two-colons} Number, y {two-colons} Number, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `rotate`
-| `{two-colons}`
-| `(degree {two-colons} Number, img {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `scale`
-| `{two-colons}`
-| `(factor {two-colons} Number, img {two-colons} Image)`
+| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
 | `->`
 | `Image`
 5+|

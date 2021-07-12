@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-06-22 # last modified
+LASTMOD=2021-07-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -217,6 +217,8 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
     cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
   fi
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
+  mkdir -p distribution/$LANGUAGE/lib/Badges
+  cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
@@ -425,7 +427,7 @@ function modifygdrivepage() {
   $SED -i \
     -e 's/%GDRIVEEXTERNALHREF//g' \
     -e '/^ *<link rel="stylesheet".*\.css/d' \
-    -e '/^ *<script type="text\/javascript".*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
+    -e '/^ *<script .*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
     -e '/<span class="tooltiptext">.*<\/span>/d' \
     $f
   echo "<style>" > $TMPFILE.css
@@ -540,10 +542,9 @@ function resolveabbrevs() {
     CODELANG=racket
   fi
   $SED -i \
-    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
-    -e 's/<\/pre>/<\/tt><\/pre>/g' \
-    -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
-    -e 's/<\/code>\(,*\)/<\/tt>\1<\/code>/g' \
+    -e 's/<pre>/<pre><code class="'$CODELANG'">/g' \
+    -e 's/<\/pre>/<\/code><\/pre>/g' \
+    -e 's/<code>/<code class="'$CODELANG'">/g' \
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
@@ -578,15 +579,15 @@ function resolveabbrevs() {
     -e '/^\/\/ %ENDSIDEBARSCRIPT%/,/^<\/script>/ s/<\/script>/\0\n<div class="sidebar">/' \
     $f
   $SED -i \
-    -e '/^%ENDSIDEBARTABLE%/,/^-->/ s/^-->/\0\n<\/div>/' \
+    -e '/^%ENDSIDEBARSECTION%/,/^-->/ s/^-->/\0\n<\/p><\/div>/' \
     $f
   $SED -i \
     -e '/^\/\/ %ENDSIDEBARSCRIPT%/d' \
-    -e '/^%ENDSIDEBARTABLE%/d' \
+    -e '/^%ENDSIDEBARSECTION%/d' \
     $f
   if test "$mathjaxneeded"; then
     cat > .cached/.mathjax.txt <<EOF
-      <script type="text/javascript" src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
@@ -599,11 +600,11 @@ EOF
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
     <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -835,7 +836,7 @@ function processadoc() {
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
-            removecodetags $TMPHTML
+            #removecodetags $TMPHTML
             # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
             ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
             # If it's a landscape page, the "fat margin" is on the left
@@ -984,6 +985,20 @@ function checklessonplan() {
   if test -f index.adoc; then
     #echo collecting exercises in $L
     $PROGDIR/collect-exercises.rkt index.adoc
+    exerf=pages/.cached/.exercise-pages.txt.kp
+    if test -f $exerf; then
+      exerfA=pages/.cached/.exercise-pages-ls.txt.kp
+      rm -f $exerfA
+      for f in $(cat $exerf); do
+        if test ${f%.adoc} = $f; then
+          echo $f >> $exerfA
+        elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+          echo $f landscape >> $exerfA
+        else
+          echo $f >> $exerfA
+        fi
+      done
+    fi
   fi
 
 }
@@ -1090,7 +1105,7 @@ function buildlessonplan() {
           TEMPF=$(mktemp); rm -f $TEMPF
           TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
           cp index.shtml $TMPHTML
-          removecodetags $TMPHTML
+          #removecodetags $TMPHTML
 
           echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
@@ -1148,10 +1163,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
       -B . \
-      -o .pathway-glossary.shtml \
+      -o pathway-glossary.shtml \
       .cached/.pathway-glossary.asc
-    insertbodyid .pathway-glossary.shtml
-    resolveabbrevs .pathway-glossary.shtml
+    insertbodyid pathway-glossary.shtml
+    resolveabbrevs pathway-glossary.shtml
   fi
   if test -f .cached/.pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
@@ -1159,10 +1174,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -B . \
-      -o .pathway-standards.shtml \
+      -o pathway-standards.shtml \
       .cached/.pathway-standards.asc
-    insertbodyid .pathway-standards.shtml
-    resolveabbrevs .pathway-standards.shtml
+    insertbodyid pathway-standards.shtml
+    resolveabbrevs pathway-standards.shtml
   fi
 }
 

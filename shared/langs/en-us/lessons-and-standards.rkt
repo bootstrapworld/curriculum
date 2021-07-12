@@ -7,7 +7,8 @@
 
 (define *lessons-and-standards*
   '(
-; core
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CORE
 
     ("contracts" 
         "8.F.A.1"
@@ -15,10 +16,10 @@
         "OK.PA.A.1.1" 
         "HSF.IF.A.2"
         "OK.A1.F.1.2"
+        "IA.HSF.IF.A.1"
         )
 
     ("defining-functions" 
-        "MP.4" ; STEMworks
         "6.EE.B.6" ; STEMworks
         "HSF.IF.A" ; STEMworks
         "HSF.IF.A.2"
@@ -48,20 +49,27 @@
         "OK.8.AP.PD.02"
         )
 
-    ("defining-values" 
+    ("defining-values"
+        "6-8.Algorithms and Programming.Variables"
+        "6.EE.B.6"
         "7.EE.B.4"
         "HSA.SSE.A.1"
-        "MP.2"
-        "MP.7"
-        "OK.PA.A.3.1"
-        "2-AP-14" ; STEMworks
+        "IA.6.EE.B.6"
+        "OK.PA.A.3.1" 
+        "OK.3.A.V.01" ; identical standard
+        "OK.4.AP.V.01"; identical standard
+        "OK.5.AP.V.01"; identical standard
+        "2-AP-11"
+        "CMP.6.6" 
         )
 
     ("simple-dataypes" 
         "OK.7.AP.A.01"
         "OK.8.AP.C.01"
         ) 
-; math
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MATH
    
     ("combinatorics-permutation"
         "HSS.CP.B.9"
@@ -73,8 +81,9 @@
         "OK.SP.1.5"
         )
 
-    ("coordinates" 
-        "MP.2"
+    ("coordinates"
+        "IA.5.G.A.1" 
+        "5.G.A.1"
         )
 
     ("distance-formula" 
@@ -83,8 +92,6 @@
         "8.G.B" ; STEMworks <-- recommend we remove the sub-standards and keep this
         "8.G.B.7"
         "8.G.B.8" ; STEMworks
-        "MP.2"
-        "MP.3" ; STEMworks
         "OK.PA.GM.1.2"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
@@ -92,10 +99,6 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "CMP.8.2"
-        )
-
-    ("error-analysis" 
-        "MP.2"
         )
 
     ("flags" 
@@ -115,11 +118,11 @@
         ) 
 
     ("function-composition" 
+        "IA.HSF.BF.A.1.B"
+        "IA.HSF.BF.A.1.C"
         "6.EE.B.6" ; STEMworks
         "HSF.BF.A.1.C"
         "HSF.BF.A" ; STEMworks
-        "MP.1"
-        "MP.5"
         "OK.PA.A.3.1"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
@@ -130,8 +133,6 @@
     ("functions-for-character-animation" 
         "8.F.B"
         "HSF.LE.B"
-        "MP.2"
-        "MP.4" ; STEMworks
         "6.EE.B.6" ; STEMworks
         "1B-AP-10" ; STEMworks
         "2-AP-11"  ; STEMworks
@@ -144,7 +145,6 @@
         )
 
     ("inequalities-collision"
-        "MP.3" ; STEMworks
         "6.EE.B.6" ; STEMworks
         "HSF.BF.A.1"
         "HSF.BF.B"
@@ -155,15 +155,13 @@
         "3B-AP-21" ; STEMworks
         )
 
-    ("inequalities1-simple" 
-        "7.EE.B.4"
-        "HSF.IF.A.2"
-        "MP.1"
-        "MP.4"
-        "OK.PA.A.4.3"
+    ("inequalities1-simple"
         "6.EE.B.8"
         "6.EE.B.5"
         "6.EE.B.8"
+        "7.EE.B.4"
+        "HSF.IF.A.2"
+        "OK.PA.A.4.3"
         )
 
     ("inequalities2-compound" 
@@ -179,7 +177,6 @@
         "HSA.CED.A.3"
         "6.EE.B.8"
         "6.EE.B.6" ; STEMworks
-        "MP.4" ; STEMworks
         "7.EE.B" ; STEMworks
         "HSF.BF.B" ; STEMworks
         "HSF.BF.A.1.C" ; STEMworks
@@ -195,11 +192,9 @@
         "3A-AP-20" ; STEMworks
         "1B-IC-21" ; STEMworks
         "3A-AP-18" ; STEMworks
-        "MP.6"
         )
 
     ("numbers-inside-videogames" 
-        "MP.2"
         )
 
     ("order-of-operations" 
@@ -207,10 +202,6 @@
         "OK.A1.A.3"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
-        "MP.1"
-        "MP.2"
-        "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
         "CMP.6.1"
         "CMP.7.2"
         )
@@ -220,7 +211,6 @@
         "7.EE.B" ; STEMworks
         "HSA.SSE.A.1.A"
         "HSA.SSE.A.1.B"
-        "MP.8"
         "1B-AP-12" ; STEMworks
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
@@ -234,7 +224,6 @@
     ("player-animation" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B"   ; STEMworks
-        "MP.4"     ; STEMworks
         "3B-AP-22" ; STEMworks
         "1B-AP-10" ; STEMworks
         "2-AP-11"  ; STEMworks
@@ -256,10 +245,6 @@
         "HSF.BF.A.1"
         "HSF.BF.A.1.C" ; STEMworks
         "HSF.BF.B" ; STEMworks
-        "MP.1"
-        "MP.3"     ; STEMworks
-        "MP.4"     ; STEMworks
-        "MP.6"
         "1B-AP-11" ; STEMworks
         "2-AP-11"  ; STEMworks
         "2-AP-13"  ; STEMworks
@@ -274,31 +259,26 @@
     ("restating-the-problem" 
         "8.F.B"
         "HSF.BF.A.1"
-        "MP.1"
-        "MP.7"
         "OK.PA.A.1.2"
         )
 
     ("solving-word-problems" 
-        "6.EE.B.6" ; STEMworks
-        "MP.4" ; STEMworks
-        "7.EE.B" ; STEMworks
+        "6.EE.B.6"
+        "7.EE.B"
         "7.EE.B.4"
         "8.F.B"
         "HSF.IF.A.2"
         "OK.PA.A.1.3"
         "OK.PA.A.2.1"
-        "2-AP-11"  ; STEMworks
-        "2-AP-17"  ; STEMworks
-        "2-AP-19"  ; STEMworks
-        "3B-AP-14" ; STEMworks
-        "3B-AP-21" ; STEMworks
-        "3B-AP-23" ; STEMworks
+        "2-AP-11"
+        "2-AP-17"
+        "2-AP-19"
+        "3B-AP-14"
+        "3B-AP-21"
         )
 
     ("surface-area-rect-prism"
         "6.EE.B.6" ; STEMworks
-        "MP.4" ; STEMworks
         "6.G.A.4"
         "7.G.B.6"
         "OK.PA.GM.2.1"
@@ -309,11 +289,10 @@
         "CMP.7.7"
         )
 
-    ;data science
-    
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DATA SCIENCE
     
     ("checking-your-work" 
-        "MP.3" ; STEMworks
         "HS-SEP5-4" 
         "2-AP-17" 
         "3B-AP-21" 
@@ -339,8 +318,6 @@
         )
 
     ("correlations" 
-        "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
         "1B-DA-06" ; STEMworks
         "HSS.ID.C.9" 
         "HSS.ID.C.8" 
@@ -364,7 +341,6 @@
         "2-AP-13" 
         "2-AP-14" 
         "2-AP-17" 
-        "2-AP-19" 
         "3A-AP-17" 
         "3A-AP-18" 
         "P4" 
@@ -382,7 +358,6 @@
         )
 
     ("ds-intro" 
-        "MP.3" ; STEMworks
         "6.SP.A.1" ; STEMworks
         "SL.9-10.1" 
         "P7"
@@ -392,7 +367,6 @@
 
     ("ethics-and-privacy" 
         "3A-AP-16" 
-        "MP.3"    ; STEMworks
         "2-IC-23" ; STEMworks
         "3A-IC-24"; STEMworks
         "3A-IC-29"; STEMworks
@@ -429,7 +403,6 @@
         )
 
     ("histograms" 
-        "MP.4" ; STEMworks
         "6.SP.B.4" ; STEMworks
         "HSS.ID.A.3" 
         "HSS.ID.A.1" 
@@ -441,7 +414,6 @@
         )
 
     ("histograms2" 
-        "MP.4" ; STEMworks
         "6.SP.A.2" ; STEMworks
         "6.SP.B.4" ; STEMworks
         "6.SP.A"   ; STEMworks
@@ -465,11 +437,6 @@
         "HSF.IF.B.5"
         "HSF.IF.C"
         "HSF.IF.C.9"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
         "OK.PA.A.2.1"
         "OK.PA.A.2.2"
         "CMP.7.5"
@@ -483,11 +450,6 @@
         "HSF.IF.B.5"
         "HSF.IF.C"
         "HSF.IF.C.9"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
         "OK.PA.A.2.1"
         "OK.PA.A.2.2"
         "OK.PA.A.2.3"
@@ -498,7 +460,6 @@
         )
 
     ("linear-regression" 
-        "MP.4" ; STEMworks
         "HSS.ID.C.7" 
         "HSS.ID.C.8" 
         "HSS.ID.C.9" 
@@ -522,7 +483,6 @@
         )
 
     ("measures-of-center"
-        "MP.3" ; STEMworks
         "6.SP.A"   ; STEMworks
         "6.SP.A.2" ; STEMworks
         "6.SP.B.5.C";STEMworks
@@ -537,8 +497,6 @@
         )
 
     ("measures-of-spread" 
-        "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
         "6.SP.A"   ; STEMworks
         "6.SP.A.2" ; STEMworks
         "6.SP.B.4" ; STEMworks
@@ -615,7 +573,6 @@
         )
 
     ("threats-to-validity" 
-        "MP.3" ; STEMworks
         "HSS.IC.B.6" 
         "HS-SEP4-3"
         "HS-SEP1-7" 

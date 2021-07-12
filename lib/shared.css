@@ -214,19 +214,45 @@ td.halign-center div.circleevalsexp {
 .sidebar {
   display:    block;
   position:   fixed;
-  top:        0px;
-  right:      -200px;
+  top:        150px;
+  left:       calc(100% - 100px);
   width:      250px;
   height:     100%;
-  background: #75328A;
-  opacity:    0.5;
+  background: #eee;
+  opacity:    0.2;
+  border-top: solid 1px black;
   border-left: solid 4px black;
-  transition: right 0.2s;
-  box-shadow: -4px 2px 8px black;
+  transition: all 0.2s;
+  box-shadow: -1px 2px 6px black;
+  overflow:   scroll;
 }
 
-.sidebar:hover { right:  0px; }
+.sidebar:hover { opacity: 1;   left: calc(100% - 250px); }
+.sidebar .sidebarlessons ul { 
+  background: white; 
+  margin: 10px;
+  box-shadow: inset -4px 0px 4px black;
+  height:  250px;
+  overflow:  scroll;
+  padding: 10px;
+}
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
+.sidebarlessons .prerequisite::after { content:'★'; } 
+.sidebarlessons strong {color: black; margin-left: 10px;}
 
+
+.sidebarstandards div.standards-hierarchical-table {
+    display: none;
+}
+
+.sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
+    display: block;
+}
+
+.sidebarbadges li {list-style-type: none; display: inline-block;}
+.sidebarbadges img {width: 75px; transition: width 0.5s; }
+.sidebarbadges img:hover {width: 200px; }
 
 /* Styling for the Materials section of the Lesson Summary */
 .materials-links {
@@ -382,18 +408,6 @@ table .autonum::after { content: none; }
   display:            inline-block;
  }
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
-
-div.standards-hierarchical-table dl {
-    display: none;
-}
-
-div.standards-hierarchical-table div.title:hover + dl {
-    display: block;
-}
-
-.prerequisite {
-    background-color: lime;
-}
 
 /************************************************************************************
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
@@ -747,7 +761,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
 @media print {
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
-  .section-link { display: none; }
+  .sidebar, .section-link { display: none; }
 
   .LessonPlan .lessonSummary {
     break-after:  page !important;

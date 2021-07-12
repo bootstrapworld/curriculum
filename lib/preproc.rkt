@@ -12,6 +12,7 @@
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
+(require "lessons-and-badges.rkt")
 (require "collect-lang-prereq.rkt")
 ;(require "draw-dep-diag.rkt")
 
@@ -28,6 +29,8 @@
 (define *force* (truthy-getenv "FORCE"))
 
 (define *nopdf* (truthy-getenv "NOPDF"))
+
+(define *book* (truthy-getenv "BOOK"))
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
@@ -125,6 +128,8 @@
 (define *missing-glossary-items* '())
 
 (define *standards-met* '())
+
+(define *badges-merited* '())
 
 (define *lesson-prereqs* '())
 
@@ -233,8 +238,9 @@
             (values sublist-item c dict)))))
 
 (define (add-standard x lesson-title lesson pwy o)
-  ;(printf "doing add-standard ~a ~a ~a\n" x lesson-title lesson pwy)
+  ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
   (let-values (((sublist-item c dict) (assoc-standards x)))
+    ;(printf "-> sbl= ~s c= ~s dict= ~s\n" sublist-item c dict)
     (when c (let ((std (list-ref c 0)))
               (when (and o *lesson*)
                 (fprintf o "**~a**: ~a~n~n"
@@ -258,6 +264,11 @@
                           (cons (list std sublist-items c dict
                                       (box (list (list lesson-title lesson pwy))))
                                 *standards-met*)))))))))
+
+(define (add-badge b)
+  ;(printf "doing add-badge ~s\n" b)
+  (unless (member b *badges-merited*)
+    (set! *badges-merited* (cons b *badges-merited*))))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -325,7 +336,7 @@
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
     ;(display "[.sidebarlessons]\n" o)
-    (display "*Pathway*\n" o)
+    (display "*Lessons*\n" o)
     ;(display "== Pathway\n" o)
 
     ;(newline o)
@@ -375,6 +386,23 @@
           ;(display (create-end-tag "div") o)
           ;(newline o)
           ]))
+
+(define (display-badges-bar o)
+  ;(printf "doing display-badges-bar\n")
+  (display (create-begin-tag "div" ".sidebarbadges") o)
+  (display (create-begin-tag "ul" "") o)
+  (cond [(null? *badges-merited*)
+         (when *lesson-plan*
+           (printf "WARNING: ~a: No badges specified\n" (errmessage-context)))]
+        [else
+          ;(printf "Badges are present for ~s\n" *lesson-plan*)
+          (for ([badge *badges-merited*])
+            (let ([img (format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)])
+              (display (enclose-tag "li" "" img) o)
+              (newline o)))])
+  (display (create-end-tag "ul") o)
+  (display (create-end-tag "div") o)
+  (newline o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -448,6 +476,7 @@
                         (let ([pagenum (workbook-pagenum lesson snippet)])
                           (unless (or (equal? link-type "opt-printable-exercise")
                                       *nopdf*
+                                      (not *book*)
                                       pagenum
                                       error-cascade?)
                             (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
@@ -525,6 +554,7 @@
                         (printf "WARNING: Image file ~a not found\n\n" img))))))
   (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
          [rest-opts (if (pair? opts) (cdr opts) '())]
+         [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
          [commaed-opts (string-join rest-opts ", ")]
          [text-wo-url (clean-up-url-in-image-text text)]
          [img-link-txt (string-append
@@ -574,7 +604,7 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
-  ;(printf "doing make-link ~s ~s ~s ~s\n" f link-text include? link-type)
+  ;(printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
   ;(printf "pwd = ~s\n" (current-directory))
   (cond [(not include?)
 
@@ -597,7 +627,7 @@
                  ;(printf "link refers to ~a\n\n" f)
                  (let ([short-ref? (abbreviated-index-page? f)])
                    (unless (or (file-exists? f)
-                               (string=? f ".pathway-standards.shtml")
+                               (string=? f "pathway-standards.shtml")
                                short-ref?)
                      (check-link f)
                      (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
@@ -610,6 +640,12 @@
            (let ([domain-name (extract-domain-name f)])
              (when domain-name
                (set! link-text (string-append link-text " (" domain-name ")")))))
+
+         (when (and *lesson-plan* (not external-link?) (equal? link-type "link") (equal? link-text ""))
+           (let ([lesson-title-file (find-relative-path (simple-form-path f)
+                                                        (build-path ".cached" ".index.titletxt"))])
+             (when (file-exists? lesson-title-file)
+               (set! link-text (call-with-input-file lesson-title-file read-line)))))
 
          (let ([link-output
                  (cond ((or *lesson-plan* *teacher-resources*)
@@ -904,6 +940,11 @@
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
+
+        (for ([x *lessons-and-badges*])
+          (when (string=? (car x) *lesson-plan*)
+            (for ([s (cdr x)])
+              (add-badge s))))
         )
       ;
       (when (or *lesson-plan*
@@ -978,15 +1019,9 @@
                               (display (make-image (car args) (cdr args) #:centered? #t) o))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
-                           [(or (string=? directive "workbook-link")
-                                (string=? directive "exercise-link")
-                                (string=? directive "printable-exercise")
+                           [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 )
-                            (when (equal? directive "workbook-link")
-                              (set! directive "printable-exercise"))
-                            (when (equal? directive "exercise-link")
-                              (set! directive "opt-printable-exercise"))
                             (let* ([args (read-commaed-group i directive)]
                                    [n (length args)]
                                    [page (car args)]
@@ -1032,22 +1067,11 @@
                                            (printf "WARNING: Incorrect³ @workbook-link ~a\n\n" page)]))]
                                 [else
                                   (printf "WARNING: Incorrect⁴ @workbook-link ~a\n\n" page)]))]
-                           [(or (string=? directive "worksheet-link")
-                                (string=? directive "worksheet-include")
-                                (string=? directive "exercise-link"))
-                            ;TODO: Remove this after a while
-                            (error 'ERROR
-                                   "adoc-preproc: Obsolete directive ~a\n" directive)]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise")
-                                (string=? directive "activity-link")
                                 (string=? directive "ext-exercise-link"))
-                            (when (equal? directive "activity-link")
-                              (set! directive "online-exercise"))
                             (let* ([args (read-commaed-group i directive)]
-                                   [link-type (if (string=? directive "online-exercise")
-                                                  'online-exercise #f)]
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
@@ -1286,10 +1310,11 @@
               (when *lesson-plan*
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
-                    (print-standards-js o)
+                    (print-standards-js o #:sidebar #t)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    (display-comment "%ENDSIDEBARTABLE%" o)
+                    (display-badges-bar o)
+                    (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
 
@@ -1465,8 +1490,7 @@
   )
 
 (define (create-standards-section dict dict-standards-met op)
-  ;(fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op "[.alignedStandards.standards-~a]\n" dict)
+  (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
                   "== ~a Standards\n\n")
@@ -1509,7 +1533,7 @@
   ;(printf "doing display-standards-selection\n")
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
-    ;(print-standards-js o)
+    (print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
@@ -1539,9 +1563,10 @@
     ;(display "\n\n" o)
     ))
 
-(define (create-standards-file file *narrative* *lesson* *standards-met* *dictionaries-represented*)
-  ;(printf "create-standards-file ~s ~s ~s ~s\n" *narrative* *lesson* *standards-met* *dictionaries-represented*)
-  ;(printf "create-standards-file ~s ~s\n" *narrative* *lesson*)
+(define (create-standards-file file *narrative* *lesson*)
+  ;(printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
+  ;(printf "standards-met= ~s\n\n\n" *standards-met*)
+  ;(printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
   (when *narrative*
     (print-menubar (string-append file "-comment.txt")))
   (call-with-output-file (string-append file ".asc")
@@ -1566,7 +1591,7 @@
 
 (define (create-standards-subfile)
   ;(printf "doing create-standards-subfile\n")
-  (create-standards-file ".cached/.pathway-standards" *narrative* *lesson* *standards-met* *dictionaries-represented*))
+  (create-standards-file ".cached/.pathway-standards" *narrative* *lesson*))
 
 (define (accumulate-glossary-and-standards)
   ;(printf "doing accumulate-glossary-and-standards\n")
