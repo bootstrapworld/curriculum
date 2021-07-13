@@ -14,6 +14,7 @@
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
 (require "textbook-cmp-dictionary.rkt")
+(require "textbook-im-dictionary.rkt")
 
 (define *standards-list*
   (list
@@ -24,6 +25,7 @@
     (list "NGSS"    "Next-Gen Science" *ngss-standards-list*)
     (list "OK"      "Oklahoma" *ok-standards-list*)
     (list "CMP"     "Connected Math" *cmp-standards-list*)
+    (list "IM"      "Illustrative Math" *im-standards-list*)
     ))
 
 (define *disallowed-standards-list*
