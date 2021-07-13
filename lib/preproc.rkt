@@ -556,6 +556,7 @@
          [rest-opts (if (pair? opts) (cdr opts) '())]
          [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
          [commaed-opts (string-join rest-opts ", ")]
+         [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
          [text-wo-url (clean-up-url-in-image-text text)]
          [img-link-txt (string-append
             (enclose-span ".big" "&#x1f5bc;") "Show image")]
@@ -563,10 +564,10 @@
          [adoc-img
           (string-append
            (cond [*lesson-subdir*
-                   (format "image:{pathwayrootdir}~a/~a[~s, ~a]" *lesson-subdir*
+                   (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
                            img text-wo-url commaed-opts)]
                  [else
-                   (format "image:~a[~s, ~a]" img text-wo-url commaed-opts)])
+                   (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
            img-link)])
     ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
     (if (string=? text "")
@@ -1311,6 +1312,7 @@
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
                     (print-standards-js o #:sidebar #t)
+                    (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
                     (display-badges-bar o)

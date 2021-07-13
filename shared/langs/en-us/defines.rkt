@@ -110,7 +110,6 @@
       "  }\n"
       "  intro.style.display = introNeeded ? 'block' : 'none';\n"
       "}\n"
-      (if sidebar "// %ENDSIDEBARSCRIPT%\n" "")
       "</script>\n"
       "++++\n\n") o))
 
