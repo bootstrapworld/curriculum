@@ -1594,6 +1594,9 @@ function buildpathway() {
               cd .cached
               rm -f .workbook-pages.txt.kp
 
+              #ensure workbook-pages.txt ends in newline, or while isn't happy
+              $SED -i -e '$a\' ../workbook-pages.txt
+
               while read -r f; do
                 #echo finding aspect of "$f"
                 if echo "$f"|grep -q landscape; then
