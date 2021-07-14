@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-13 # last modified
+LASTMOD=2021-07-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1446,6 +1446,39 @@ function copylessondir() {
   fi
 }
 
+function collectworkbookpages() {
+  d="$1"
+  test ! -d "$d" && return
+  cd "$d"
+  if test -d pages; then
+    cd pages
+    if test -f workbook-pages.txt; then
+      test -d .cached || mkdir .cached
+      cd .cached
+      rm -f .workbook-pages.txt.kp
+      #ensure workbook-pages.txt ends in newline, or while isn't happy
+      $SED -i -e '$a\' ../workbook-pages.txt
+
+      while read -r f; do
+        #echo finding aspect of "$f"
+        if echo "$f"|grep -q landscape; then
+          echo $f >> .workbook-pages.txt.kp
+        elif test "${f%.adoc}" = "$f"; then
+          echo $f >> .workbook-pages.txt.kp
+        elif head -5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
+          echo $f landscape >> .workbook-pages.txt.kp
+        else
+          echo $f >> .workbook-pages.txt.kp
+        fi
+      done < ../workbook-pages.txt
+
+      cd ..
+    fi
+    cd ..
+  fi
+  cd ..
+}
+
 function buildpathway() {
   #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
@@ -1582,40 +1615,14 @@ function buildpathway() {
       adjustproglangsubdirs resources
     fi
 
+    for d in front-matter back-matter; do
+      collectworkbookpages "$d"
+    done
+
     if test -d lessons; then
       cd lessons
       for d in *; do
-        if test -d "$d"; then
-          cd "$d"
-          if test -d pages; then
-            cd pages
-            if test -f workbook-pages.txt; then
-              test -d .cached || mkdir .cached
-              cd .cached
-              rm -f .workbook-pages.txt.kp
-
-              #ensure workbook-pages.txt ends in newline, or while isn't happy
-              $SED -i -e '$a\' ../workbook-pages.txt
-
-              while read -r f; do
-                #echo finding aspect of "$f"
-                if echo "$f"|grep -q landscape; then
-                  echo $f >> .workbook-pages.txt.kp
-                elif test "${f%.adoc}" = "$f"; then
-                  echo $f >> .workbook-pages.txt.kp
-                elif head -5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
-                  echo $f landscape >> .workbook-pages.txt.kp
-                else
-                  echo $f >> .workbook-pages.txt.kp
-                fi
-              done < ../workbook-pages.txt
-
-              cd ..
-            fi
-            cd ..
-          fi
-          cd ..
-        fi
+        collectworkbookpages "$d"
       done
       cd ..
     fi
