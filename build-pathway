@@ -89,7 +89,9 @@ while test $# -ne 0; do
   fi
 done
 
-test $BOOK && NOPDF=
+
+test $BOOK && NOPDF= || NOPDF=1
+
 test $SUPERFORCE && FORCE=1
 
 TMPTMP=$(mktemp); rm -f $TMPTMP
