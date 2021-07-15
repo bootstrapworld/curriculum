@@ -1,113 +1,74 @@
 [.landscape]
 = Contracts
 
-++++
-<style>
-#content > .paragraph {padding: 0px 5px;}
-</style>
-++++
-
 Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
 
-++++
-<style>
-td {padding: .1em .625em !important; height: 20pt;}
-</style>
-++++
-
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 |Name||Domain||Range
 
-| `box-plot`
+
+| `put-image`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Image, Number, Number, Image`
 | `->`
 | `Image`
-5+|
+5+|`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`
 
-| `modified-box-plot`
+| `rotate`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Number, Image`
 | `->`
 | `Image`
-5+|
+5+|`_rotate(35, rectangle(30, 80, "solid", "purple"))_`
 
-| `scatter-plot`
+| `scale`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `Number, Image`
 | `->`
 | `Image`
-5+|
+5+|`_scale( 0.8, triangle(30, "solid", "red"))_`
 
-| `image-scatter-plot`
+| `string-repeat`
 | `{two-colons}`
-| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `String, Number`
 | `->`
-| `Image`
-5+|
+| `String`
+5+|`_string-repeat("cheetah ", 5)_`
 
-| `r-value`
+| `string-contains`
 | `{two-colons}`
-| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String)`
+| `String, String`
+| `->`
+| `Boolean`
+5+|`_string-contains("rockstar", "star")_`
+
+| `num-min`
+| `{two-colons}`
+| `Number, Number`
 | `->`
 | `Number`
-5+|
+5+|`_num-min(80, 20)_`
 
-| `lr-plot`
+| `num-max`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `Number, Number`
 | `->`
-| `Image`
-5+|
+| `Number`
+5+|`_num-max(80, 20)_`
 
-| `random-rows`
+| `count`
 | `{two-colons}`
-| `(t {two-colons} Table, num-rows {two-colons} Number)`
-| `->`
-| `Table`
-5+|
-
-| `<Table>.row-n`
-| `{two-colons}`
-| `(n {two-colons} Number)`
-| `->`
-| `Row`
-5+|
-
-| `<Table>.order-by`
-| `{two-colons}`
-| `(col {two-colons} String, increasing {two-colons} Boolean)`
+| `Table, String`
 | `->`
 | `Table`
-5+|
+5+|`_count(animals-table, "species")_`
 
-| `<Table>.filter`
+| `mean`
 | `{two-colons}`
-| `(test {two-colons} (Row -> Boolean))`
+| `Table, String`
 | `->`
-| `Table`
-5+|
-
-| `<Table>.build-column`
-| `{two-colons}`
-| `(col {two-colons} String, builder {two-colons} (Row -> Any))`
-| `->`
-| `Table`
-5+|
-
-| `bar-chart-summarized`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `pie-chart-summarized`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
-| `->`
-| `Image`
-5+|
+| `Number`
+5+|`_mean(animals-table, "age")_`
 
 |===

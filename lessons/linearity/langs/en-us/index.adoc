@@ -1,0 +1,304 @@
+= Linear Relationships
+
+++++
+<style>
+#content .graph-table img { width: 33%; }
+#content table .MathJax * { font-size: 0.7rem; }
+#content .sideways-pyret-table td, .sideways-pyret-table th {
+	padding: 0px !important; 
+	vertical-align: middle !important;
+	text-align: center !important;
+	min-height: 3rem;
+}
+</style>
+++++
+
+@lesson-description{Students explore the concept of linear relationships, as described by tables with graphs.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{}
+| Lesson Goals
+| Students will be able to...
+
+* match graphs to tables that represent the same relationship
+* identify linear and non-linear graphs and tables
+
+| Student-facing Lesson Goals
+|
+
+* I can match graphs to tables, if they both describe the same linear relationship
+* I can tell the difference between linear and non-linear relationships in tables and graphs
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1ihegdgsstshwg2wcZZO-BFr5hQHsqhR_JFlpThVP8WI/view, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Key Points for the Facilitator
+| This lesson is about two big ideas:
+* Connecting representations of Tables and Graphs
+* Lines are made of points (try to avoid refering to "lines" as much as "collections of points")
+* Linear relationships, defined as _rules that generate one value from another_. These rules form straight lines on a graph and sequences that change at a constant rate in a table
+
+| Supplemental Resources
+|
+* @link{https://teacher.desmos.com/activitybuilder/custom/58797d35d81a612605304b1f?collections=5da6476150c0c36a0caf8ffb, Graphing Stories (Desmos)}
+
+@lang-prereq
+|===
+
+== Simple Sequences and Straight Lines @duration{35 minutes}
+
+=== Overview
+Students explore the concept of _linearity_, as represented in tables and graphs.
+
+=== Launch
+Take a look at the following rows in a table and points on a graph:
+
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
+|===
+|
+
+[.pyret-table.first-table,cols="1,1",options="header"]
+!===
+! x ! y
+! 0 ! 0
+! 1 ! 2
+! 2 ! 4
+! 3 ! 6
+! 4 ! 8
+!===
+| @image{images/2x.png}
+|===
+
+[.lesson-instruction]
+- What do you *Notice*?
+- What do you *Wonder*?
+
+Each row in the Table represents an (x, y) point on the graph. The "x" column is a list of positions along the x-axis, and the "y" column is filled with values that are computed from those position according to some rule.
+
+[.lesson-instruction]
+Can you predict the next two rows in the table? The next points on the graph? __How did you arrive at your prediction?__
+
+Both the y-column in the table and the y-coordinates on the graph follow a _rule_, which dictates how @math{y} relates to @math{x}. We expect that rule to continue no matter what @math{x} is, continuing the line straight in both directions, and the sequence of values in the table to increase or decrease at a constant value for every additional row.
+
+[.lesson-point]
+*Linear Relationships*: Sequences that change at a constant rate, or points forming a straight line on a graph.
+
+Rules that behave this way are called @vocab{linear} relationships. If the rule for a table says the y-values always change by the same amount between x-values, it's linear. If the rule says that y-coordinates always change by the same amount between x-coordinates - drawing a straight line on the graph - it's linear.
+
+Linear relationships are _everywhere_:
+
+* A car is traveling at 50 miles per hour
+* Milk costs $2.50 per gallon
+* There are 18 wheels per tractor-trailer
+* A tree grows 2 inches per year
+* There are 30 students per teacher
+
+[.lesson-instruction]
+What other linear relationships can you think of?
+
+We can imagine of a horizontal, straight-line relationship where @math{y = 3} ("for all values of x, _y_ is three"). We can even imagine a vertical, straight-line relationship where @math{x = 3y} ("for all values of y, _x_ is three"). 
+
+[.lesson-point]
+*Linear Functions:* linear rules that only work from __x to y__.
+
+A linear relationship can exist from x-to-y, or from y-to-x. But a linear _function_ is strictly x-to-y. We can also describe this as "input-to-output", or "Domain to Range." **Not all linear relationships are linear functions!** Linear functions can only have one possible y-value for a single x-value, so our horizontal line @math{f(x) = 3} can be written as a function but our vertical line @math{f(y) = 3} cannot.
+
+=== Investigate
+
+Look at the two "sideways" data tables below. 
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 ! 5
+! y ! 2 ! 3 ! 4 ! 5 ! 6
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !   1 !   2 !   3 !   4 !   5
+! y ! -12 ! -14 ! -16 ! -18 ! -20
+!===
+
+|===
+
+- What do you *Notice?*
+- What do you *Wonder?*
+- Can you figure out what the next (x,y) pair should be for each of them?  
+- Can you guess what the y-value for each table would be when x is 0?
+
+We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). The "y" column, on the other hand is computed from the x-values according to some rule (or function!).
+
+When there is a @vocab{linear} relationship, the y-values change at a _constant rate_. If we were to graph those values, all of the points would fall on a straight line.
+
+[.lesson-instruction]
+- Complete @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+- Optional: Complete @printable-exercise{pages/match-tables-graphs.adoc}.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Pedagogy Note}
+
+To encourage students to look at the _points_ in the table and graph, it is useful to change the scale of the graphs so that all lines look the same. This prevents students from leaning on visual cues like "steepness" to bypass the learning objective.
+
+It can also be useful to list the points in the table __out of order__, both to focus students' attention on the points and to drive home that rows do not have to be ordered!
+|===
+
+[.lesson-point]
+Axes on a graph need an order. Rows in a table don't!
+
+The rows in a table are _discrete_. They preserve their meaning if the rows are shuffled into a different order. Ordering the rows in a table can make it easier for us to find the rule or function.
+
+In a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+
+[.lesson-instruction]
+Can you match tables and graphs, even if the rows are shuffled and the axes are changed? Complete @printable-exercise{pages/match-tables-graphs2.adoc}.
+
+=== Synthesize
+@vocab{Linear} relationships show up all the time in real life, so it's helpful to know how to think about them. We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. When a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
+
+== Linear, Non-Linear, or Bust!  @duration{20 minutes}
+
+=== Overview
+Students deepen their understanding of linearity, by seeing counterexamples (non-linear relationships), as well as tables and graphs for which there is _no_ relationship.
+
+=== Launch
+
+If all linear relationships can be shown as points on a graph, does that mean all graphs are linear? Look at the six graphs shown below:
+
+[.graph-table, stripes="none", frame="none"]
+|===
+| @image{images/constant-linear.png} 
+  @image{images/num-abs.png}
+  @image{images/num-sqrt.png}
+
+| @image{images/negative-linear.png}
+  @image{images/positive-linear.png}
+  @image{images/num-sqr.png}
+|===
+
+[.lesson-instruction]
+- What do you *Notice?*
+- What do you *Wonder?*
+
+Three of the graphs above show @vocab{linear} functions, and three show other, non-linear functions. As we can see, the linear graphs can be perfectly horizontal, slope upwards and to the right, or slope downwards to the right. NOTE: there are still clearly patterns in the non-linear relationships -- they just aren't linear!
+
+[.lesson-point]
+Linear relationships in a graph always appear as straight lines
+
+If all linear relationships can be shown as a tables, does that mean all tables are linear? Look at the six tables shown below:
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -2 ! -1 !  0 !  1 !  2
+! y ! -2 ! -3 ! -4 ! -5 ! -6
+!===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 !  4 !  5
+! y ! 1 ! 4 ! 9 ! 16 ! 25
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  12 !  13 !  14 !  15 !  16
+! y ! -12 ! -14 ! -16 ! -18 ! -20
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 5 ! 6 ! 7 ! 8 ! 9
+! y ! 3 ! 3 ! 3 ! 3 ! 3
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !  5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -10 ! -9 ! -8 !  -7 ! -6
+! y ! @math{\frac{-1}{10}} ! @math{\frac{-1}{9}} ! @math{\frac{-1}{8}} ! @math{\frac{-1}{7}} ! @math{\frac{-1}{6}}
+!===
+
+|===
+
+- What do you *Notice?*
+- What do you *Wonder?*
+- Can you figure out what the next x,y pair should be for each of them?  
+- Can you guess what the y-value for each table would be when x is 0?
+
+Three of the tables above show a @vocab{linear} function, and three show other, non-linear functions. As we can see, the linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease). NOTE: there are still clearly patterns in the non-linear relationships -- they just aren't linear!
+
+[.lesson-point]
+Linear relationships in a table show up as sequences that change at a constant rate. The y-value when x is zero is also the value where the line will cross the y-axis.
+
+Sometimes there is __no function__ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
+
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
+|===
+|
+
+[.pyret-table.first-table,cols="1,1",options="header"]
+!===
+! x ! y
+! 0 ! 13
+! 1 ! -2
+! 1 ! 16
+! 3 ! 0
+! 4 ! 54
+!===
+| @image{images/scatterplot.png}
+|===
+
+*PRO TIP:* If there are two different @math{y} values for the same @math{x}, it can't be a function! Think back to our vertical line @math{f(y) = 3}: x is three __all the time__, for an infinite number of y-values. If multiple y-values come from the same x-value, we know it's not a function.
+
+== Investigate
+[.lesson-instruction]
+--
+Can you tell when a relationship is a linear function? A non-linear one? Not a function at all? 
+
+- Complete @printable-exercise{linear-nonlinear-bust.adoc}
+- Complete @printable-exercise{linear-nonlinear-bust-graphs.adoc}
+--
+
+=== Synthesize
+Data has a "shape", and this shape can emerge when we look for patterns in that data. A @vocab{linear} function is one kind of pattern, and we can see it when viewing data as a table or a graph.
+
+== Additional Exercises:
+
+* @opt-online-exercise{https://docs.google.com/presentation/d/1IW5uMg491e33Av_XdGSivsAy28S9QSVivEYonpjTeF8/edit?usp=sharing, Interactive Peardeck activity where each student places a point on the graph following a rule and the collective effort reveals a graphic representation of the function}
+* @opt-printable-exercise{linear-nonlinear-bust-graphs-2.adoc}

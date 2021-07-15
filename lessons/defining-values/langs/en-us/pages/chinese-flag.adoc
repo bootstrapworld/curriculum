@@ -1,0 +1,48 @@
+= Defining Values - Chinese Flag
+
+@centered-image{../images/china-flag.png}
+
+@n What image do you see repeated in the flag? @fitb{20em}{@ifsoln{_small yellow stars_}}
+
+
+@n Highlight or circle all instances of the structure that makes the repeated image in the code below. +
+
+@n In the code below, highlight or circle all instances of the expression for that image. +
+  @ifsoln{_students should highlight or circle:_} @showsoln{(sexp->code '(star 15 "solid" "yellow")) }
+
+
+@ifproglang{wescheme}{@centered-image{../images/china-code-wescheme.png}}
+@ifproglang{pyret}{@centered-image{../images/china-code-pyret.png}}
+
+
+@n Write the code to define a value for the repeated expression.
+
+@span{.blankline}{@showsoln{(sexp->code '(define yellow-star (star 15 "solid" "yellow"))) }}
+
+@n Open the @ifproglang{wescheme}{
+@online-exercise{https://www.wescheme.org/open/editor?publicId=Gc01ngfMN0, Chinese flag starter file.}
+} @ifproglang{pyret}{
+@online-exercise{https://code.pyret.org/editor#share=1zfp_NOVn5MU6CBX7_r6U1zYwseNzZw06&v=04918ef, Chinese flag starter file}
+} and click Run. +
+Then type `china` into the interactions area and click *Enter*.
+
+@n *Save a copy* of the file, and simplify the flag code using the value you defined. Click Run, and confirm that you still get the same image as the original.
+
+@n Now change the color of all of the stars to black, in both files. Then change the size of the stars.
+
+@n Why is it helpful to define values for repeated images?
+
+
+@span{.blankline}
+
+@span{.blankline}
+
+@vspace{1ex}
+
+*Challenge:*
+
+- This file uses a function we haven’t seen before! What is it? @fitb{15em}{@showsoln{"_put-image_" }}
+
+- Can you figure out its contract? _Hint: Focus on the last instance of the function._
+
+@span{.blankline}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}

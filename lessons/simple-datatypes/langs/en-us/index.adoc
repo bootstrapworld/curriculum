@@ -1,0 +1,163 @@
+= Simple Data Types
+
+@add-to-lang{-,+,*,/}
+
+@lesson-description{Students begin to program in Pyret, learning about basic data types, and operations on those data types.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{}
+| Lesson Goals
+| Students will be able to...
+
+* Identify examples of the following data types: Numbers, Strings, and Booleans
+* Write Numbers, Strings, and Booleans in the Interactions Area
+* Write expressions that produce values of those types
+
+| Student-facing Lesson Goals
+|
+
+* I can tell if a value is a Number, String or a Boolean
+* I can explain the different between those types
+
+| Materials
+|[.materials-links]
+* @ifproglang{wescheme}{@link{https://docs.google.com/presentation/d/17tmGpF9zR5tGa9A8JH-cOYFeE4OpLqpw_8Je-oYSlOw/, Lesson Slides}}
+@ifproglang{pyret}{@link{https://docs.google.com/presentation/d/1zQRB5CC4VtYEcwHN-CjwJx7JWtUkdppMzaNrPZTHgOI/, Lesson Slides}}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* Decide how students will be grouped in pairs
+* Make sure student computers can access @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org(CPO)}} @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}
+
+| Supplemental Resources
+|
+
+| Key Points For The Facilitator
+|
+* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
+
+@lang-prereq
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit1/index.html, prior unit-based version}.
+
+== Numbers & Strings @duration{20 minutes}
+
+=== Overview
+Working together using a Driver/Navigator group setup, students experiment with the Editor. They explore Number and String datatypes, and how they behave in this programming language.
+
+=== Launch
+
+@span{.right}{@image{images/driver-navigator.png, "Driver/Navigator", 150, ""}}
+When programming in this class, you'll be working together using the _Driver/Navigator_ model. Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{The Driver/Navigator Model}
+
+This model of pair programming is extremely useful for teasing apart the "thinking" step from the "typing" one. Students - especially those who are new to text-based programming or typing itself - can struggle to put their thoughts into the programming environment. This model allows them to focus on _communicating their ideas_, but letting the Driver focus on the coding. Likewise, the Driver has a chance to focus on syntax and programming. Finally, the requirement that ideas are translated through another person's hands is an excellent scaffold for getting students talking about their thinking and about code.
+
+@link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
+|===
+
+@ifproglang{wescheme}{
+Students should open @link{https://www.wescheme.org, WeScheme} in their browser, and click "Log In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Start a New Program".
+}
+
+@ifproglang{pyret}{
+Students should open @link{https://code.Pyret.org, code.pyret.org (CPO) } in their browser, and click "Sign In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "Programs" page. This page is empty - they don't have any programs yet! Have them click "Open Editor".
+}
+
+@span{.right}{@image{images/editor.png, "Our Editing Environment", 300, ""}}
+This screen is called the @vocab{Editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+
+The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. This is like writing function definitions on a blackboard, and having students use those functions to compute answers on scrap paper.
+
+[.lesson-point]
+For now, we will only be writing programs in the *Interactions Area* on the right.
+
+@span{.clear}{}
+
+=== Investigate
+
+Math is a language, just like English, Spanish, or any other language. Languages have *nouns* (e.g. “ball”, “tomato”, etc.) and *verbs*, which are actions we can perform on these nouns (e.g. - I can “throw a ball”). Math and programming also have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).
+
+Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.
+
+Languages also have rules for *grammar*. _The cat sat._ is a sentence, whereas _The sat cat._ is nonsense, even though all the words are valid syntax. The order of the words matters!
+
+Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.
+
+[.lesson-instruction]
+--
+Have students complete @printable-exercise{numbers-n-strings.adoc}. Ask them to pay special attention to the error messages!
+
+- What did you Notice? What do you Wonder?
+- Did you get any error messages? What did you learn from them? _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc._
+--
+
+@ifproglang{pyret}{
+=== Common Misconceptions
+
+In Pyret, writing decimals as `.5` (without the leading zero) results in a @vocab{syntax error}. Make sure students understand that Pyret needs decimals to start with a zero!
+}
+
+=== Synthesize
+Our programming language knows about many types of numbers, and they behave pretty much the way they do in math.
+Discuss what students have learned:
+
+- Numbers and Strings evaluate to themselves.
+- Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
+
+@ifproglang{pyret}{
+- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.
+- In pyret, the @vocab{operators} work just like they do in math.
+- Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.
+- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
+
+Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
+
+- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
+- `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
+}
+
+== Booleans @duration{20 minutes}
+
+=== Overview
+This lesson introduces students to @vocab{Booleans}, a unique datatype with only two values: "true" and "false", and why they are useful in both the real world and the programming environment.
+
+=== Launch
+
+[.lesson-instruction]
+What's the answer: is 3 greater than 10?
+
+Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
+
+For example, some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.  Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
+
+[.lesson-instruction]
+Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
+
+=== Investigate
+[.lesson-instruction]
+--
+In pairs, students complete @printable-exercise{pages/booleans.adoc}, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
+--
+
+=== Synthesize
+Debrief student answers as a class.
+
+[.lesson-instruction]
+What sets Booleans apart from other data types?
+

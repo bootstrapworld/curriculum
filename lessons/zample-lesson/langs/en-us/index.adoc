@@ -1,0 +1,168 @@
+= Problem Decomposition
+
+change
+
+@lesson-description{Students take a closer look at how functions can work together by investigating the relationship between revenue, cost, and profit.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{__sample-lesson}
+| Lesson Goals
+| Students will be able to:
+
+* Write a @vocab{function} that explicitly uses another function.
+* Explain the benefits and drawbacks of functions that depend on each other.
+* Explain the difference between bottom-up and top-down strategies.
+
+| Student-Facing Lesson Goals
+|
+* I can explain the benefits and drawbacks of functions that use other functions.
+* I can write a function that uses another function.
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/19EBCxhhcbrT5GISLamjAHDwJmeGHznbFGH3RdocFZpM/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1IfRqUq_mfnmBdT55wen4gNBD0jyCqMpGl11VLZV76-s/, Lesson Slides}
+}
+
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Key Points for the Facilitator
+|
+* There are several ways to write the `profit` function - use this opportunity for discussion and to promote higher-order critical thinking.
+* If students are struggling with understanding the basics of the problem, start by coming up with examples of `cost` and `revenue`.  If Sally sells one glass, what is her total revenue?  How much does it cost her to produce that one glass?
+* Ensure students understand the difference between "revenue" and "profit", and that "cost" refers to the cost of _making_ the lemonade, not the amount Sally is charging.
+
+@lang-prereq
+
+|===
+
+== Problem Decomposition @duration{30 minutes}
+
+=== Overview
+Students are introduced to word problems that can be broken down into _multiple_ problems, the solutions to which can be composed to solve other problems. They adapt the Design Recipe to handle this situation.
+
+@show{(sexp->code '(string-length num-sqr + - /))}
+
+=== Launch
+Students should have their workbook, pencil, and be logged into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+and have their workbooks with a pen or pencil.
+
+Display the following image:
+
+@centered-image{images/LemonadeStand.png, Lemonade Stand Ideas, 400, align="center"}
+
+[.notice-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Notice and Wonder}
+
+Have students share everything they notice about the situations described above. Then, separately, have them share what they wonder.
+|===
+
+One example of a _relationship_ we can find in this situation is that Sally takes in $1.75 for every glass she sells: @math{revenue = \$1.75 \times glasses}
+
+[.lesson-instruction]
+What other relationships can you find here?
+
+(Give students a chance to discuss and brainstorm)
+
+- Every glass sold brings in $1.75 in *revenue*
+- Every glass sold costs $0.30 in *costs*, such as lemonds, sugar and water
+- Every glass sold brings in some amount of *profit*: it costs a certain amount to make, but it brings in another amount in revenue
+
+=== Investigate
+
+Students form groups and brainstorm their ideas for functions.  Students can use any strategies they've learned so far.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for English Language Learners}
+
+MLR 7 - Compare and Connect
+There are several correct ways to write the functions needed for Sally's Lemonade.  Have students compare methods and develop understanding and language related to mathematical representation and methods.  What are the advantages of the different solutions?  What are some drawbacks?
+|===
+
+- *What is the difference between _revenue_ and _profit_?*
+_Revenue is the total amount of money that comes in, profit is the remaining money after cost has been subtracted._
+
+- *How could Sally _increase_ her profits?*
+_By decreasing her costs, raising her prices (which increases revenue), by selling more lemonade._
+
+- *What is the _relationship_ between profit, cost, and revenue?*
+_Profit = Revenue - Cost_
+
+[.lesson-instruction]
+Students work with their partners to develop their function models for
+@printable-exercise{pages/zample-page1.adoc, revenue}, @printable-exercise{pages/zample-page2.adoc, cost}, and @printable-exercise{pages/zample-page3.adoc, profit}, using the Design Recipe.
+
+While students are working, walk the room and gauge student understanding.  There is more than one correct way to write the `profit` function!  Encourage discussion between students and push students to develop their thinking on the advantages and disadvantages of each correct solution.
+
+=== Synthesis
+This activity started with a situation, and students modeled that situation with functions. One part of the model was _profit_, which can be written several ways, for example:
+@ifproglang{wescheme}{
+```
+(define (profit g) (- (* 1.75 g) (* 0.30 g)))
+(define (profit g) (* (- 1.75 0.30) g))
+(define (profit g) (* 1.45 g))
+(define (profit g) (- (revenue g) (cost g)))
+```
+}
+@ifproglang{pyret}{
+```
+fun profit(g): (1.75 * g) - (0.30 * g) end
+fun profit(g): (1.75 - 0.30) * g end
+fun profit(g): 1.45 * g end
+fun profit(g): revenue(g) - cost(g) end
+```
+}
+
+- Which way is "best", and why?
+- If lemons gets more expensive, which way requires the least amount of change?
+- If sugar gets less expensive, which way requires the least amount of change?
+
+*Big Ideas*
+
+. `profit` can be _decomposed_ into a simple function that uses the `cost` and `revenue` functions.
+. Decomposing a problem allows us to solve it in smaller pieces, which are also easier to test!
+. These pieces can also be re-used, resulting in writing less code, and less _duplicate_ code.
+. Duplicate code means more places to make mistakes, especially when that code needs to be changed.
+
+== Top-Down vs. Bottom-Up @duration{20 minutes}
+
+=== Overview
+Students explore problem decomposition as an explicit strategy, and learn about two ways of decomposing.
+
+=== Launch
+[.lesson-point]
+_Top-Down_ and _Bottom-Up_ design are two different strategies for problem decomposition.
+
+*Bottom-Up:* start with the small, easy relationships first and then build our way to the larger relationships. In the Lemonade Stand, you defined `cost` and `revenue` first, and then put them together in `profit`.
+
+*Top-Down:* start with the "big picture" and then worry about the details later. We could have started with `profit`, and made a to-do list of the smaller pieces we’d build later
+
+=== Investigate
+Consider the following situation:
+
+__Jamal's trip requires him to drive 20mi to the airport, fly 9,000mi, and then take a bus 6mi to his hotel. His average speed driving to the airport is 40mph, the average speed of an airplane is 575mph, and the average speed of his bus is 15mph.__
+
+*Aside from time waiting for the plane or bus, how long is Jamal in transit?*
+
+This can be decomposed via Top-Down or Bottom-Up design. What functions would you define to solve this, and in what order? For extra credit, you can actually compute the answer!
+
+=== Synthesize
+Make sure that students see _both_ strategies, and have them discuss which they prefer and why.
+

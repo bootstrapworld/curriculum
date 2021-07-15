@@ -1,0 +1,48 @@
+= Matching Circles of Evaluation & Code
+
+++++
+<style>
+  #content td * {text-align: center;}
+  #content td {height: 110pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Draw a line from each Circle of Evaluation on the left to the corresponding Code on the right.
+
+@do{
+  (define expr1 '(* (- 1 1) (+ 1 1)))
+  (define expr2 '(- (+ 1 1) 1))
+  (define expr3 '(* (- 1 (+ 1 1)) 1))
+  (define expr4 '(+ (- 1 1) 1))
+  (define expr5 '(* (+ 1 1) (- (+ 1 1) 1)))
+}
+
+[cols="^.^8a,^.^3a,5a,^.^1a,^.^12a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Circle of Evaluation
+|||
+| Code
+
+| @show{(sexp->coe expr1)}
+|*@n*@showsoln{"-B"}  ||*A*
+| @show{(sexp->code expr3 #:parens true)}
+
+| @show{(sexp->coe expr2)}
+|*@n*@showsoln{"-D"}  ||*B*
+| @show{(sexp->code expr1 #:parens true)}
+
+| @show{(sexp->coe expr3)}
+|*@n*@showsoln{"-A"}  ||*C*
+| @show{(sexp->code expr5 #:parens true)}
+
+| @show{(sexp->coe expr4)}
+|*@n*@showsoln{"-E"}  ||*D*
+| @show{(sexp->code expr2 #:parens true)}
+
+| @show{(sexp->coe expr5)}
+|*@n*@showsoln{"-C"}  ||*E*
+| @show{(sexp->code expr4 #:parens true)}
+
+|===

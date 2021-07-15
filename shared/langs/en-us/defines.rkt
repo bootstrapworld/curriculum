@@ -75,12 +75,12 @@
 (define (print-link-to-forum o)
   (display
     (string-append
-      "\n- link:https://discourse.bootstrapworld.org[Bootstrap Discussion Forum]\n"
+      "\n- link:https://discourse.bootstrapworld.org[Online Community (Discourse)]\n"
       "-- Want to be kept up-to-date about Bootstrap events, workshops, and curricular\n"
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
-(define (print-standards-js o)
+(define (print-standards-js o #:sidebar [sidebar #f])
   (display
     (string-append
       "\n++++\n"
@@ -114,7 +114,8 @@
       "++++\n\n") o))
 
 (define (print-menubar f)
-  (call-with-output-file (string-append f "-comment.txt")
+  ;(printf "print-menubar ~s\n" f)
+  (call-with-output-file f
     (lambda (o)
       (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
     #:exists 'replace))

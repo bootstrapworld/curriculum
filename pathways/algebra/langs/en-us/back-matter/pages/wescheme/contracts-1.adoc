@@ -1,85 +1,77 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. For example:  `ellipse : Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "red")` will evaluate to an Image.
+Contracts tell us how to use a function. e.g.  `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "red")` will evaluate to an Image.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header",grid="rows",stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    |       | Domain      |     | Range
-| `;`
-| `:`
+| Name
 |
-| `->`
+| Domain
 |
-5+|`;`
+| Range
 
-| `;`
-| `:`
-|
+| `;` `+`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+| `_(+ 3 2)_`
 
-| `;`
-| `:`
-|
+| `;` `-`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+| `_(- 5 3)_`
 
-| `;`
-| `:`
-|
+| `;` `*`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+| `(* 2 4)`
 
-| `;`
-| `:`
-|
+| `;` `/`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+| `_(/ 8 2)_`
 
-| `;`
-| `:`
-|
+| `;` `sqrt`
+| `{two-colons}`
+| `Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+|`;` `_(sqrt 25)_`
 
-| `;`
-| `:`
-|
+| `;` `sqr`
+| `{two-colons}`
+| `Number`
 | `->`
-|
-5+|`;`
+| `Number`
+5+|`;` `_(sqr 5)_`
 
-| `;`
-| `:`
-|
+| `;` `string-length`
+| `{two-colons}`
+|	`String`
 | `->`
-|
-5+|`;`
+| `Number`
+5+| `_(string-length "Rainbow")_`
 
-| `;`
-| `:`
-|
+| `;` `<`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Boolean`
+5+| `_(< 3 2)_`
 
-| `;`
-| `:`
-|
+| `;` `>`
+| `{two-colons}`
+| `Number, Number`
 | `->`
-|
-5+|`;`
+| `Boolean`
+5+| `_(> 3 2)_`
 
 |===

@@ -1,0 +1,51 @@
+= Challenges for update-player
+
+For each of the challenges below, see if you can come up with two EXAMPLEs of how it should work!
+
+@n *Warping* - Program one key to "warp" the player to a set location, such as the center of the screen.
+
+@vspace{1ex}
+
+```
+examples:
+  update-player(128, "t") is  @fitb{20ex}{ 375 }
+
+  update-player(128  "b") is  @fitb{20ex}{ 125 }
+end                        
+```
+
+@n *Boundaries* - Change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen.
+
+@vspace{1ex}
+
+```
+examples:
+  update-player(480 "up") is  @fitb{20ex}{ 480 }
+
+  update-player(0 "down") is  @fitb{20ex}{ 0 }
+end                        
+```
+
+@n *Wrapping* - Add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa.
+
+@vspace{1ex}
+
+```
+examples:
+  update-player(490 "up") is  @fitb{20ex}{ 0 }
+
+  update-player(-10 "down") is @fitb{20ex}{ 480 }
+end                        
+```
+
+@n *Hiding* - Add a key that will make `PLAYER` seem to dis  @fitb{20ex}{appear, and reappear when the same key is  @fitb{20ex}{ pressed again.
+
+@vspace{1ex}
+
+```
+examples:
+  update-player(128 "h") is  	@fitb{20ex}{ -1 * 128 }
+
+  update-player(-391 "h") is  @fitb{20ex}{   -1 * -391 }
+end                        
+```

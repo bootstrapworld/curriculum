@@ -1,0 +1,48 @@
+= Using Contracts
+
+Use the contracts to write expressions to generate images similar to those pictured.
+
+[.center]
+--
+@show{(sexp->code 'ellipse)}`{two-colons} Number, Number, String, String -> Image`
+--
+[cols="^.^1,^.^2",stripes="none"]
+|===
+| @centered-image{../images/ellipse-50-150-outline.png}
+| @span{.blankline}{@showsoln{(sexp->code '(ellipse 50 150 "outline" "black")) }}
+
+| @centered-image{../images/ellipse-150-50-solid.png}
+| @span{.blankline}{@showsoln{(sexp->code '(ellipse 150 50 "solid" "black")) }}
+
+| What changes with the first number?
+| @span{.blankline}{@showsoln{"_width_" }}
+
+| What about the shape changes with the second Number?
+| @span{.blankline}{@showsoln{"_height_" }}
+| Write an expression using @show{(sexp->code 'ellipse)} to produce a circle.
+| @span{.blankline}{@showsoln{(sexp->code '(ellipse 50 50 "solid" "black")) }}
+|===
+[.center]
+--
+@show{(sexp->code 'regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
+--
+[cols="^.^1,^.^2",stripes="none"]
+|===
+| @centered-image{../images/reg-polygon-50-5-solid.png}
+| @span{.blankline}{@showsoln{(sexp->code '(regular-polygon 50 5 "solid" "black")) }}
+
+| @centered-image{../images/reg-polygon-25-8-outline.png}
+| @span{.blankline}{@showsoln{(sexp->code '(regular-polygon 25 8 "outline" "black")) }}
+
+| What changes with the first Number?
+| @span{.blankline}{@showsoln{"_the length of each side_" }}
+
+| What about the shape changes with the second Number?
+| @span{.blankline}{@showsoln{"_the number of sides_" }}
+
+| Use @show{(sexp->code 'regular-polygon)} to write an expression for a square!
+| @span{.blankline}{@showsoln{(sexp->code '(regular-polygon 50 4 "solid" "black")) }}
+
+| How would you describe a *regular polygon* to a friend?
+| @span{.blankline}{@showsoln{"_a closed shape made of equal-length straight lines, all joined at the same angle_"  }}
+|===

@@ -1,0 +1,16 @@
+@design-recipe-exercise{"rect-prism-sa"
+"Write a function @funname that takes in the width, length and height of a rectangular prism and calculates its surface area (the sum of the areas of each of its six sides)"
+#:headless? #t
+#:domain-list '(Number Number Number)
+#:range "Number"
+#:purpose "Consumes L, W, and H, calculates 2*L*W, 2*L*H, and 2*W*H"
+#:num-examples 2
+#:example-list '((10 20 30 (+ (+ (* 2 (* 10 20)) (* 2 (* 10 30))) (* 2 (* 20 30))))
+             	 ( 5 12 13 (+ (+ (* 2 (*  5 12)) (* 2 (*  5 13))) (* 2 (* 12 13)))))
+#:show-examples '((#f #f #f) (#f #f #f))
+#:param-list '(L W H)
+#:show-params? #f
+#:body '(+ (+ (* 2 (* L W)) (* 2 (* L H))) (* 2 (* W H)))
+#:show-body? #f
+#:grid-lines? #t
+}

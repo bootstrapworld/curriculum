@@ -17,7 +17,7 @@
 - Editing environment (Pyret Editor)
 - Student workbooks
 - Cutouts of Cat and Dog images
-- Cutouts of Pythagorean Theorem packets [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster 
+- Cutouts of Pythagorean Theorem packets [link:images/pythag1.png[1], link:images/pythag2.png[2] -- 1 per cluster
 - Student Games or the https://code.pyret.org/editor#share=0B9rKDmABYlJVT1FBd3RpQWFqbGM[Pyret Ninja Cat Starter] file preloaded on students’ machines
 
 @include{xtra/lang-table.adoc}
@@ -128,7 +128,7 @@ Remind students that @math{A} and @math{B} are the horizontal and vertical lengt
 --
 - Turn to Page 45 of your workbook - you’ll see the formula written out.
 - Draw out the circle of evaluation, starting with the simplest expression you can see first.
-- Once you have the circle of evaluation, translate it into Pyret code at the bottom of the page, starting with  
+- Once you have the circle of evaluation, translate it into Pyret code at the bottom of the page, starting with
 +
 ----
 check:
@@ -136,7 +136,7 @@ check:
 end
 ----
 --
- 
+
 Now you’ve got code that tells you the distance between the points (4, 2) and (0, 5). But we want to have it work for _any_ two points. It would be great if we had a function that would just take the x’s and y’s as input, and do the math for us.
 
 [.lesson-instruction]
@@ -196,7 +196,7 @@ We’ll need to make some more `if` branches for `next-state-tick`.
 - How do you get the `playery` out of the `GameState`? `playerx`?
 - How do you get the `dangerx` out of the `GameState`? `dangery`?
 --
- 
+
 ----
 if is-collision(
   g.playerx,
@@ -204,8 +204,8 @@ if is-collision(
   g.dangerx,
   g.dangery):   ...result...
 ----
- 
-Remember that `next-state-tick` produces a GameState, so what function should come first in our result?  
+
+Remember that `next-state-tick` produces a GameState, so what function should come first in our result?
 
 ----
 if is-collision(
@@ -223,16 +223,14 @@ game(
   ...targety...
   ...targetspeed...)
 ----
- 
+
 [.lesson-instruction]
 --
-And what should happen when the cat and dog collide? Can you think of a number that puts the dog off the screen on the left side? What about the dog’s y-coordinate? We could choose a number and always place it at the same y-coordinate each time, but then the game would be really easy! To make it more challenging, we’d like the dog to appear at a random y-coordinate each time it collides with the cat. Thankfully, Pyret has a function which produces a random number between zero and its input: 
+And what should happen when the cat and dog collide? Can you think of a number that puts the dog off the screen on the left side? What about the dog’s y-coordinate? We could choose a number and always place it at the same y-coordinate each time, but then the game would be really easy! To make it more challenging, we’d like the dog to appear at a random y-coordinate each time it collides with the cat. Thankfully, Pyret has a function which produces a random number between zero and its input:
 
-----
-# num-random :: Number -> Number
-----
+@show{ (contract "random" '("Number") "Number" )}
 --
- 
+
 ----
 if is-collision(
   g.playerx,
@@ -247,7 +245,7 @@ game(
   0,
   g.targetx,
   g.targety,
-  g.targetspeed) 
+  g.targetspeed)
 ----
 
 Collision detection must be part of the next-state-tick function because the game should be checking for a collision each time the GameState is updated, on every tick. Students may assume that draw-state should handle collision detection, but point out that the Range of draw-state is an Image, and their function must return a new GameState in order to set the locations of the characters after a collision.

@@ -2,12 +2,14 @@
 
 #lang racket
 
+(define *version* 3)
+
 (define *admin-file*
   (let* ((args (current-command-line-arguments))
          (n (vector-length args)))
     (cond ((= n 0)
            (error 'make-questionnaire.rkt
-                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-datasets-admin.adoc"))
+                  "Missing filename argument:\nSupply name of datasheet spec file, e.g., datasheet-for-dataset-admin.asciidoc"))
           (else
             (let ((adminf (vector-ref args 0)))
             (when (> n 1)
@@ -15,147 +17,78 @@
             adminf)))))
 
 (define *datasheet-name*
-  (regexp-replace "([^ ]+)-admin.adoc" *admin-file* "\\1"))
+  (regexp-replace "([^ ]+)-admin\\.a[sci]*doc" *admin-file* "\\1"))
 
-(define *student-file*
-  (string-append *datasheet-name* "-student.adoc"))
+(define *author-file*
+  (string-append *datasheet-name* "-author.adoc"))
 
-(define *lorem*
-  (string-append
-    "Ad rem est vero cum ratione. Optio dolor molestiae consequatur\n"
-    "perferendis sint amet eligendi. Minus unde odit quod officia sit\n"
-    "ut impedit facilis. Voluptatum alias illo et dolore impedit aut\n"
-    "vitae qui. Laborum itaque ipsa possimus et.\n"))
+(define tag-re "^// +tag::(.+?)\\[\\] *$")
+(define common-answer-tag-re "^// +tag::(.+?-common-answer)\\[\\] *$")
 
-(define *nudge*
-  (string-append
-    "//\n"
-    "// PLEASE MODIFY TEXT BELOW THIS LINE FOR YOUR ANSWER.\n\n"))
+(define (read-block i)
+  (let ([line (read-line i)])
+    (if (eof-object? line) (values 'eof #f #f)
+        (cond [(regexp-match common-answer-tag-re line)
+               => (lambda (r)
+                    (let ([tag (cadr r)])
+                      (read-tag-block i tag) (values 'admin #f #f)))]
+              [(regexp-match tag-re line)
+               => (lambda (r)
+                    (let ([tag (cadr r)])
+                      (values 'tag tag (read-tag-block i tag))))]
+              [(regexp-match "^\\[\\.admin] *$" line) (read-admin-block i) (values 'admin #f #f)]
+              [else (values 'passthru #f line)]))))
 
-(define *nudge-required*
-  (string-append
-    "//\n"
-    "// PLEASE WRITE YOUR ANSWER BELOW THIS LINE.\n\n"))
+(define (end-tag-line? line tag)
+  ;not really checking tag value for now
+  (regexp-match "^// +end(.+?)\\[\\] *$" line))
 
-(define *nudge-common*
-  (string-append
-    "//\n"
-    "// PLEASE WRITE YOUR ANSWER BELOW.\n"
-    "// (TO INSERT STANDARD REPLY, PLEASE WRITE :common:.)\n\n"))
+(define (read-tag-block i tag)
+  (let loop ([r '()])
+    (let ([line (read-line i)])
+      (cond [(eof-object? line) (error 'make-questionnaire.rkt "Unclosed tag ~a" tag)]
+            [(end-tag-line? line tag) (reverse r)]
+            [else (loop (cons line r))]))))
 
-(define *lineno* 0)
+(define (read-admin-block i)
+  (let ([line1 (read-line i)])
+    (unless (eof-object? line1)
+      (if (regexp-match "^-- *$" line1)
+          (let loop ()
+            (let ([line (read-line i)])
+              (unless (or (eof-object? line) (regexp-match "^-- *$" line))
+                (loop))))
+          (let loop ()
+            (let ([line (read-line i)])
+              (unless (or (eof-object? line) (regexp-match "^ *$" line))
+                (loop))))))))
 
-(define (read-a-line i)
-  (let ((ln (read-line i)))
-    (unless (eof-object? ln) (set! *lineno* (+ *lineno* 1)))
-    ln))
+(define (display-commented-tag tag lines o)
+  (newline o)
+  (fprintf o "@include{~a, tag=~a}\n" *admin-file* tag)
+  (for ([line lines])
+    (fprintf o "// ~a\n" line))
+  (newline o)
+  )
 
-(define (read-graf i #:non-trivial? [non-trivial? #f])
-  (let* ((start-line (+ *lineno* 1))
-         (stop-line -1)
-         (inside-double-dash? #f)
-         (lines
-           (let loop ((ss '()))
-             (let ((ln (read-a-line i)))
-               (cond ((eof-object? ln)
-                      (if (null? ss) ln (reverse ss)))
-                     ((regexp-match "^ *$" ln)
-                      (cond (inside-double-dash? (loop (cons ln ss)))
-                            (else (set! stop-line *lineno*)
-                                  (reverse ss))))
-                     ((regexp-match "^-- *$" ln)
-                      (set! inside-double-dash? (not inside-double-dash?))
-                      (loop (cons ln ss)))
-                     (else
-                       (loop (cons ln ss))))))))
-    (if (null? lines) (read-graf i #:non-trivial? non-trivial?)
-        (values lines start-line stop-line))))
-
-(define (tagged-graf? p)
-  (let ((line0 (list-ref p 0)))
-    (regexp-match "^:[^ ]+: *$" line0)))
-
-(define (common-answer? p)
-  (let ((line0 (list-ref p 0)))
-    (regexp-match "^\\[.answer\\] *$" line0)))
-
-(define (write-uncomment p o)
-  ;(printf "XXX doing write-comment ~s\n" p)
-  (let ((n (length p)))
-    (let loop ((i 0))
-      (unless (>= i n)
-        (display (regexp-replace "^// *" (list-ref p i) "") o)
-        (newline o)
-        (loop (+ i 1))))))
-
-(define (write-snippet p line1 line-last o i)
-  (let* ((n (length p))
-         (s1 (list-ref p 0))
-         (s2 "")
-         (question? #f)
-         (required? #f)
-         (common? #f)
-         (next-snippet #f)
-         (tag (regexp-replace "^(:.+:) *$" s1 "\\1")))
-    (when (>= n 2) (set! s2 (list-ref p 1))
-      (set! question? (regexp-match "\\.question" s2))
-      (set! required? (regexp-match "\\.required" s2))
-      (set! common? (regexp-match "\\.common" s2)))
-    (fprintf o "include::~a[lines=~a..~a]\n" *admin-file* line1 line-last)
-    (when common?
-      ;(printf "XXX reading stock answer\n")
-      (let-values (((ans-p ans-line0 ans-line-last) (read-graf i #:non-trivial? #t)))
-        ;(printf "XXX stock ans = ~s\n" ans-p)
-        (cond ((common-answer? ans-p)
-               (fprintf o "// common-answer::~a[lines=~a..~a]\n"
-                        *admin-file* (+ ans-line0 1) ans-line-last))
-              (else
-                (printf "Question ~a lacks stock answer\n" tag)
-                (set! next-snippet (lambda ()
-                                     (process-graf ans-p ans-line0 ans-line-last o i)))))))
-    (display "//\n// " o)
-    (display (cond (common? "Common Question")
-                   (required? "Required Question")
-                   (question? "Question")
-                   (else "_")) o)
-    (display " " o) (display s1 o) (newline o)
-    (display "//" o) (newline o)
-    (let loop ((i (if question? 2 1)))
-      (unless (>= i n)
-        (let ((s (list-ref p i)))
-          (display "// " o) (display s o) (newline o))
-        (loop (+ i 1))))
-    (display "//\n" o)
-    (when question?
-      (display (cond (common? *nudge-common*)
-                     (required? *nudge-required*)
-                     (else *nudge*)) o)
-      (unless (or common? required?)
-        (display *lorem* o)))
-    (newline o)
-    (when next-snippet (next-snippet))))
-
-(define (process-graf p line0 line-last o i)
-  (cond ((null? p) #t)
-        ((tagged-graf? p)
-         (write-snippet p (+ line0 1) line-last o i))
-        ((common-answer? p)
-         (printf "Stray stock answer above line ~a\n" *lineno*))
-        (else (write-uncomment p o)))
-  (newline o))
-
-(define (gen-student-file)
+(define (gen-author-file)
+  (printf "Making questionnaire ~a from ~a\n" *author-file* *admin-file*)
   (call-with-input-file *admin-file*
     (lambda (i)
-      (call-with-output-file *student-file*
+      (call-with-output-file *author-file*
         (lambda (o)
+          (fprintf o "// Questionnaire generated from ~a by make-questionnaire.rkt v. ~a\n\n"
+                   *admin-file* *version*)
           (let loop ()
-            (let-values (((p line0 line-last) (read-graf i)))
-              ;(printf "XXX ~s ~s ~s\n" p line0 line-last)
-              (unless (eof-object? p)
-                (process-graf p line0 line-last o i)
+            (let-values ([(type tag block) (read-block i)])
+              (unless (eq? type 'eof)
+                (case type
+                  [(tag) (display-commented-tag tag block o)]
+                  [(admin) #f]
+                  [(passthru) (display block o) (newline o)]
+                  [else (error ' gen-author-file "read-block returned illegal block type")])
                 (loop)))))
         #:exists 'replace))))
 
-(gen-student-file)
+(gen-author-file)
 

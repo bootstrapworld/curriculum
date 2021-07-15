@@ -1,0 +1,16 @@
+@design-recipe-exercise{"rideshare"
+"The cost of a ride is a starting price of $2.50, plus $1.50/mile. Write a function @funname, that takes in a number of miles and produces the cost of that right."
+#:headless? #t
+#:domain-list '(Number)
+#:range "Number"
+#:purpose "Consumes miles, multiplies by 1.50 and then adds 2.50 to produce the cost"
+#:num-examples 2
+#:example-list '((0 (+ 2.50 (* 0 1.50)))
+             (3 (+ 2.50 (* 3 1.50))))
+#:show-examples '((#f #f #f) (#f #f #f))
+#:param-list '(miles)
+#:show-params? #f
+#:body '(+ 2.50 (* miles 1.50))
+#:show-body? #f
+#:grid-lines? #t
+}

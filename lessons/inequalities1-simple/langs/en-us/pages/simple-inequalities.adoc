@@ -1,0 +1,87 @@
+= Simple Inequalities
+
+++++
+<style>
+#content .fitb{min-width: 3.5em;}
+#content td{height: 4ex;}
+#content td:first-child{padding: 0 !important;}
+</style>
+++++
+
+@vspace{1ex}
+
+Each inequality expression in the first column contains a number.
+
+Decide whether or not that number is a solution to the expression and place it in the appropriate column.
+
+Then identify 4 _solution_ and 4 _non-solution_ values for `x`.
+
+* *Solutions* will make the expression `true`.
+
+* *Non-Solutions* will make the expression `false`.
+
+Challenge yourself to use negatives, positives, fractions, decimals, etc. for your `x` values.
+
+@vspace{1ex}
+
+[cols="^.^5a, ^.^8, ^.^8", options="header", frame="none"]
+|===
+| Expression
+| 4 solutions that evaluate to `true`
+| 4 non-solutions that evaluate to `false`
+
+| @show{(sexp->code '(> x 2))}
+| @ifsoln{2.1, pi, 5, 1000	}
+| @ifsoln{2, 0, -1, -333	}
+
+| @show{(sexp->code '(<= x -2))}
+| @ifsoln{-2, -3, -100, -1111}
+| @ifsoln{-1, 0, 3/4, 1200	}
+
+| @show{(sexp->code '(< x 3.5))}
+| @ifsoln{3, 2, 0, -1.5		}
+| @ifsoln{3.5, 4, 10, 111	}
+
+| @show{(sexp->code '(>= x -1))}
+| @ifsoln{-1, 0, 5/3, 36.8	}
+| @ifsoln{-2, -5, -10, -25	}
+
+| @show{(sexp->code '(> x -4))}
+| @ifsoln{-3.5, -1, 0, 17	}
+| @ifsoln{-4, -5, -8.5, -1000	}
+
+| @show{(sexp->code '(<> x 2))}
+| @ifsoln{-2, 0, 1.9, 2.1	}
+| @ifsoln{2 is the only non-solution}
+
+|===
+
+@vspace{1ex}
+
+@n For which inequalities was the number from the expression part of the solution?
+
+@vspace{3ex}
+
+@fitb{60ex}{@ifsoln{(<= x -2) and (>= x -1)}}
+
+@vspace{1ex}
+
+@n For which inequalities was the number from the expression not part of the solution?
+
+@vspace{3ex}
+
+@fitb{60ex}{@ifsoln{(> x 2) and (< x 3.5) and (> x -4) and (<> x 2)}}
+
+@vspace{1ex}
+
+@n For which inequalities were the solutions on the left end of the number line?
+
+@vspace{3ex}
+@fitb{60ex}{@ifsoln{(<= x -2) and (< x 3.5) ... and (<> x 2) went both ways)}}
+
+@vspace{1ex}
+
+@n For which inequalities were the solutions on the right end of the number line?
+
+@vspace{3ex}
+@fitb{60ex}{@ifsoln{(> x 2) and (>= x -1) and (> x -4) ... and (<> x 2) was at both ends}}

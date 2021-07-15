@@ -1,0 +1,173 @@
+= Simple Inequalities
+
+@lesson-description{Students discover the `Boolean` data type. They then learn to identify solutions and non-solutions of inequalities.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{defining-functions}
+
+| Lesson Goals
+| Students will be able to:
+
+* Describe the solution set of a simple inequality
+
+| Student-Facing Lesson Goals
+|
+
+* I can find solutions and non-solutions to an inequality
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @online-exercise{https://docs.google.com/presentation/d/1JhmNzpikSfoe5g_XUBtghzsIyweSjjBrCnolHnkhFZY/, Lesson Slides}
+}
+
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1pEC8x-4HWVjc4EcTKGBTTVddtyNkx9tSS_7hKkvr7yA/, Lesson Slides}
+}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+* @link{https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0, Booleans Review}
+
+| Key Points for the Facilitator
+|* A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images.  But unlike those types, there are only _two_ values: `true` and `false`. While simple to explain, this different behavior can be confusing for some students.
+* Boolean-producing functions are essentially yes-or-no questions, so the names of the functions in this lesson read like questions.
+
+@ifproglang{wescheme}{
+* For example, `odd?` and `even?` (pronounced "odd-huh?" and "even-huh?" in Scheme) are both functions that ask if a given number is odd or even.
+* Role-playing can help students understand the jobs of `odd?` and `even?`.
+}
+
+@ifproglang{pyret}{
+* For example, `is-odd`, `is-even` are both functions that ask if a given number is odd or even.
+* Role-playing can help students understand the jobs of `is-odd` and `is-even`.
+}
+
+@lang-prereq
+
+|===
+
+== Introducing Booleans @duration{20 minutes}
+
+=== Launch
+Students should be logged into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+
+Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
+
+- @show{(sexp->coe '(+ 1 2))}
+- @show{(sexp->coe '(- 4 5))}
+- @show{(sexp->coe '(* 8 0))}
+
+Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they mean, what they will evaluate to, and what the code would look like.
+
+- @show{(sexp->coe '(> 1 2))}
+- @show{(sexp->coe '(< 4 5))}
+- @show{(sexp->coe '(= 8 0))}
+
+Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the outputs mean?
+
+Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new data type__, called a @vocab{Boolean}.
+
+=== Investigate
+
+@ifproglang{wescheme}{
+Have students open the @online-exercise{https://www.wescheme.org/openEditor?publicId=EA6R0E97nV, Boolean Starter File}
+}
+@ifproglang{pyret}{
+Have students open the @online-exercise{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File}
+}
+
+[.lesson-instruction]
+@ifproglang{wescheme}{
+- Explore the five functions in this starter file:  `odd?`, `even?`, `less-than-one?`, `continent?`,  `primary-color?`
+- All five functions produce @vocab{Booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
+}
+@ifproglang{pyret}{
+- Explore the five functions in this starter file:  `is-odd`, `is-even`, `is-less-than-one`, `is-continent`,  `is-primary-color`
+- All five functions produce @vocab{Booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
+}
+
+[.lesson-point]
+A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
+
+[.lesson-instruction]
+- Turn to @printable-exercise{boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function produce `true`, and inputs that will make each function `false`.
+
+=== Synthesize
+- Students will see functions on this page that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
+- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
+
+=== Common Misconceptions
+- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
+
+== Introducing Inequalities @duration{20 minutes}
+
+=== Overview
+Students discover (or expand their understanding of) inequalities by identifying solutions and non-solutions and connecting expressions to graphic representations.
+
+=== Launch
+
+@ifproglang{wescheme}{
+Have students open the @online-exercise{https://www.wescheme.org/view?publicId=EA6R0E97nV, Simple Inequalities Starter File.}
+}
+@ifproglang{pyret}{
+Have students open the @online-exercise{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.}
+}
+
+Equations typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. Inequalities, on the other hand, can have _infinite_ solutions.  Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  It is important that students are able to recognize that there are many possible solutions and non-solutions to an inequality and that they can identify whether or not a given number is or isn't part of the solution set.
+
+This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.
+
+[.lesson-point]
+The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).
+
+The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.
+
+@span{.center}{@image{images/inequality-works.png,"" ,""}}
+
+If their list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and they will get an error message encouraging them to adjust their list.
+
+@span{.center}{@image{images/not-quite.png,"" ,""}}
+
+Encourage students to use negatives, positives, fractions and decimals as they generate their lists.
+
+[.lesson-instruction]
+--
+The starter file includes an example.  Read the example code in the file carefully and click run to see the image it returns.  Discuss the code with your partner.
+
+- What do you Notice?
+- What do you Wonder?
+--
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Hiding Example Code}
+In order to stop seeing the examples written into the starter file code, students can comment out the example code by adding a # in front of each of the lines they want to hide.
+|===
+
+=== Investigate
+[.lesson-instruction]
+@ifproglang{wescheme}{
+Have students open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @online-exercise{https://www.wescheme.org/view?publicId=EA6R0E97nV, Simple Inequalities Starter File.}
+}
+@ifproglang{pyret}{
+Have students open to @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @online-exercise{https://code.pyret.org/editor#share=11BYRF8HhPyrAuPOttTxDDHoBhCnUyEmI&v=8c4da7d, Simple Inequalities Starter File.}
+}
+
+=== Synthesize
+- What patterns did you observe in how the inequalities worked?
+
+== Additional Exercises:
+- @opt-printable-exercise{pages/is-hot.adoc}

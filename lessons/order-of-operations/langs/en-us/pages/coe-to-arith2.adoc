@@ -1,0 +1,30 @@
+= Converting Circles of Evaluation to Arithmetic Expressions 2
+
+++++
+<style>
+  #content td {height: 150pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each Circle of Evaluation on left, write the Arithmetic expression on the right
+@ifsoln{*Teachers:* the answers below are shown with only the _necessary_ parentheses. If a student chooses to add additional (correct) parentheses, they will still have the correct answer.}
+
+@do{
+  (define expr1 '(/ 10 (* 2 (+ 3 1))))
+  (define expr2 '(/ 5 20))
+  (define expr3 '(+ (* 5 6) (/ 7 3)))
+  (define expr4 '(* 4 (+ -9 8)))
+  (define expr5 '(- (* 7 12) 8))
+}
+
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Arithmetic Expression
+|*@n*| @show{(sexp->coe expr1)}    | @showsoln{(sexp->math expr1) }
+|*@n*| @show{(sexp->coe expr2)}    | @showsoln{(sexp->math expr2) }
+|*@n*| @show{(sexp->coe expr3)}    | @showsoln{(sexp->math expr3) }
+|*@n*| @show{(sexp->coe expr4)}    | @showsoln{(sexp->math expr4) }
+|*@n*| @show{(sexp->coe expr5)}    | @showsoln{(sexp->math expr5) }
+|===

@@ -1,114 +1,74 @@
 [.landscape]
 = Contracts
 
-++++
-<style>
-#content > .paragraph {padding: 0px 5px;}
-</style>
-++++
-
 Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
 
-++++
-<style>
-td {padding: .1em .625em !important; height: 20pt;}
-</style>
-++++
-
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 
 |Name||Domain||Range
 
+| `num-sqr`
+| `{two-colons}`
+| `Number`
+| `->`
+| `Number`
+5+|`_num-sqr(9)_`
+
+| `num-sqrt`
+| `{two-colons}`
+| `Number`
+| `->`
+| `Number`
+5+|`_num-sqrt(25)_`
+
 | `triangle`
 | `{two-colons}`
-| `(side-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `Number, String, String`
 | `->`
 | `Image`
-5+|
+5+|`_triangle(80, "solid", "darkgreen")_`
 
 | `circle`
 | `{two-colons}`
-| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| @ifsoln{`Number, String, String`}
 | `->`
 | `Image`
-5+|
+5+| @ifsoln{`_circle(30, "outline", "fuchsia")_`}
 
 | `star`
 | `{two-colons}`
-| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| @ifsoln{`Number, String, String`}
 | `->`
-| `Image`
-5+|
-
-| `rectangle`
-| `{two-colons}`
-| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
-| `->`
-| `Image`
-5+|
-
-| `ellipse`
-| `{two-colons}`
-| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
-| `->`
-| `Image`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star(50, "solid", "teal")_`}
 
 | `square`
 | `{two-colons}`
-| `(size-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| @ifsoln{`Number, String, String`}
 | `->`
-| `Image`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_square(10, "outline", "red")_`}
+
+| `rectangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_rectangle(20, 80, "solid", "gold")_`}
 
 | `text`
 | `{two-colons}`
-| `(str {two-colons} String, size {two-colons} Number, color {two-colons} String)`
+| @ifsoln{`String, Number, String`}
 | `->`
-| `Image`
-5+|
+| @ifsoln{ `Image`}
+5+| @ifsoln{`_text("I'm thankful for...", 50, "green")_`}
 
-| `overlay`
+| `ellipse`
 | `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Image`
-5+|
-
-| `beside`
-| `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `above`
-| `{two-colons}`
-| `(img1 {two-colons} Image, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `put-image`
-| `{two-colons}`
-| `(img1 {two-colons} Image, x {two-colons} Number, y {two-colons} Number, img2 {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `rotate`
-| `{two-colons}`
-| `(degree {two-colons} Number, img {two-colons} Image)`
-| `->`
-| `Image`
-5+|
-
-| `scale`
-| `{two-colons}`
-| `(factor {two-colons} Number, img {two-colons} Image)`
-| `->`
-| `Image`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_ellipse(30, 70, "outline", "lightblue")_`}
 
 |===

@@ -1,0 +1,298 @@
+= Defining Functions
+
+@lesson-description{Students discover functions as an abstraction over a programming pattern, and are introduced to a structured approach to building them called the Design Recipe.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{defining-values}
+
+| Lesson Goals
+| Students will be able to:
+
+* identify patterns where a function would be useful
+* explain the difference between defined _values_ and _functions_
+* match examples, contracts, and definitions for the same function
+
+| Student-Facing Lesson Goals
+|
+* I can explain why a function is useful
+* I can connect contracts, examples, and definitions for a function
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1B9mESkR0VtlWSF712C0p35d0fNF1kiv_Ar33wIK297c/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1f58vvHsNgb-YumWEBH_J6o0L3Pc7AacBw-UxvCbYYIs/, Lesson Slides}
+}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+
+| Key Points for the Facilitator
+|
+* This lesson represents a _big_ shift in thinking.  After some practice, students will not be limited to pre-existing functions!
+
+@lang-prereq
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit4/index.html, prior unit-based version}
+
+== There's Got to Be a Better Way!	 @duration{15 minutes}
+
+=== Overview
+@ifpathway{algebra, ok}{
+Students have already searched for structure in a list of expressions in order to define values.
+}
+In this lesson, students will build their flexibiltiy of thinking by engaging with multiple representations. Students will search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
+
+=== Launch
+
+Students should have their workbook, pencil, and be logged into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+on their computer.
+
+@centered-image{images/ILoveGreenTriangles.jpg, I Love Green Triangles, 400, align="center"}
+
+@centered-image{images/GreenTriangle.jpg, I Love Green Triangles, 400, align="center"}
+
+This is a fun lesson to make silly! Dramatically confess to your students, "I LOVE green triangles!" Challenge them to use the Definitions Area to code as many unique, solid, green triangles as they can in 2 minutes.
+
+Walk around the room and give positive feedback on the green triangles. When the time is up, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
+
+[.indentedpara]
+--
+For example:
+
+@show{(sexp->code '(triangle  30  "solid" "green"))}
+
+@show{(sexp->code '(triangle  12  "solid" "green"))}
+
+@show{(sexp->code '(triangle 500  "solid" "green"))}
+--
+
+- *Is there a pattern?*
+_Yes, the code mostly stayed the same with one change each time._
+
+- *What stayed the same?*
+_The function name `triangle`, "solid", "green"._
+
+- *What changed?*
+_The size of the `triangle`, or the Number input._
+
+- *How many of you typed out the code from scratch each time? How many triangles were you able to code in a minute?*
+_Write this down so that you can compare to it later!!!_
+
+- *Did you know that there is a keyboard shortcut for making the previous line of code reappear in the interacions area?*
+@ifproglang{wescheme}{_alt/option up-arrow_}
+@ifproglang{pyret}{_up-arrow_}
+
+=== Investigate
+
+[.lesson-instruction]
+--
+@ifpathway{algebra, ok}{
+
+Our programming language allows us to define *values*. This lets us create "shortcuts" to reuse the same code over and over.
+
+For example:
+@show{(sexp->code '(define PRIZE-STAR (star 65 "solid" "pink")))}
+
+This code will let us write `PRIZE-STAR` wherever we want that same solid, pink star - without having write all the code again and again.
+
+*But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
+}
+
+Suppose we want to define a shortcut @vocab{function} called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
+--
+
+Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image. Act out some examples before having the class add their own and record them on the board:
+
+
+- You say: *gt 20!*
+The student responds: _@show{(sexp->code '(triangle 20 "solid" "green"))}!_
+- You say: *gt 200!*
+The student responds: _@show{(sexp->code '(triangle 200 "solid" "green"))}!_
+- You say: *gt 99!*
+The student responds: _@show{(sexp->code '(triangle 99 "solid" "green"))}!_
+
+=== Synthesize
+
+Thank your volunteer. Assuming they did a wonderful job, ask them:
+
+* How did you get to be so speedy at building green triangles? You seemed so confident! _Ideally they'll tell you that they had good instructions and that it was easy to follow the pattern_
+
+[.lesson-instruction]
+--
+Just as we were able to give our volunteer instructions that let them take in `gt 20` and give us back @show{(sexp->code '(triangle 20 "solid" "green"))}, we can define any function we'd like in the *Definitions Area*.
+--
+
+== Examples and Definitions
+
+=== Launch
+
+[.lesson-instruction]
+--
+We need to program the computer to be as smart as our volunteer. But how do we do that?  We already know how to do this in math!
+--
+
+- Draw the table on the left below on the board.
+- We recommend starting by showing it without the equation at the bottom and talking students through the process of highlighting the variable & defining the function.
+- Once you have crowd-sourced the equation from the math side, show students how the same process of writing examples and defining the function would work in Pyret syntax.
+
+@ifproglang{Pyret}{
+[cols="6,^.^1,6", stripes="none", options="header"]
+|===
+| Math
+|
+| Pyret
+|@centered-image{images/table-to-prettify.png, Math, align="center"}
+| ➞
+|@centered-image{images/math-fun-pyret-2.png, Pyret, align="center"}
+|===
+}
+
+@ifproglang{WeScheme}{
+[cols="6,^.^1,6", stripes="none", options="header"]
+|===
+| Math
+|
+| WeScheme
+|@centered-image{images/table-to-prettify.png, Math, align="center"}
+| ➞
+|@centered-image{images/math-fun-wescheme.png, WeScheme, align="center"}
+|===
+}
+
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
+
+[.lesson-instruction]
+- Start by looking at each table and highlighting what is changing from the first row to the following rows.
+- Then, match each table to the function that defines it.
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions}
+
+Now that we've seen how this works in math, let's go back to `gt`.
+
+@ifproglang{Pyret}{@centered-image{images/examples-pyret.png, 400, align="center"}}
+@ifproglang{WeScheme}{@centered-image{images/examples-wescheme.png, 400, align="center"}}
+
+[.lesson-instruction]
+--
+In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
+
+Turn to @printable-exercise{pages/match-examples-definitions.adoc} and look at the definition of `gt` in the first row of the table.
+--
+
+@ifproglang{pyret}{@centered-image{images/gt-fun-pyret.png, 400, align="center"}}
+@ifproglang{wescheme}{@centered-image{images/gt-fun-wescheme.png, 500, align="center"}}
+
+[.lesson-instruction]
+--
+Using `gt` as a model, match the mystery function examples to their corresponding definitions.
+--
+
+You may also want to have students complete
+@ifproglang{pyret}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
+@ifproglang{wescheme}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|@span{.title}{Connecting to Best Practices}
+
+- Writing the examples is like "showing your work" in math class.
+
+- Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
+
+- Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+|===
+
+=== Synthesize
+[.lesson-instruction]
+- What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
+- Why is defining functions useful to us as programmers?
+
+== Examples and Contracts
+
+=== Launch
+
+* What is the contract for `triangle`?
+
+[.indentedpara]
+--
+`triangle {two-colons} Number, String, String -> Image`
+--
+
+* What is the contract for `gt`?
+
+[.indentedpara]
+--
+`gt {two-colons} Number -> Image`
+--
+
+* Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-contracts.adoc}.
+
+Confirm that everyone is on the same page before moving on. You may want to have students turn to a partner, compare their findings, and discuss their thinking about anything they didn't agree on at first.
+
+Have students open
+@ifproglang{pyret}{@online-exercise{https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=04918ef, the gt starter file}}
+@ifproglang{wescheme}{@online-exercise{https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ, the gt starter file}}.
+
+[.lesson-instruction]
+- Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
+- What did you get back? _a little green triangle!_
+- Take one minute and see how many different green triangles you can make using the `gt` function.
+- Try changing one of the examples to be incorrect and click run again. What happens?
+_The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
+
+Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
+
+[.lesson-instruction]
+On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
+
+If you have time, have students complete
+
+* @opt-printable-exercise{pages/contracts-examples-definitions-2.adoc}
+@ifproglang{wescheme}{
+* @opt-online-exercise{https://www.wescheme.org/openEditor?publicId=JCTcwYc57r, "Bug Hunting in WeScheme"}
+}
+@ifproglang{pyret}{
+* @opt-online-exercise{https://code.pyret.org/editor#share=1SFVHGrmn5byiJOC0sDunO2oz5fF7aQsW, "Bug Hunting in Pyret"}
+}
+
+=== Synthesize
+
+- *Functions can consume values besides Numbers. What other datatypes did you see being consumed by these functions?*
+- Thumbs up? Thumbs to the side? or Thumbs down? How confident do you feel that you could write the contract, examples and function definition on your own if you were given a word problem about another shape function?
+
+== Additional Exercises:
+
+@ifproglang{wescheme}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
+}
+@ifproglang{pyret}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
+}
+
+
+
+
+

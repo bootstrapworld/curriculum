@@ -1,4 +1,4 @@
-# last modified 2020-09-02
+# last modified 2021-06-08
 
 userid=$1
 
@@ -20,34 +20,7 @@ tar jxf deployables.tar.bz2;
 chgrp -R cs-plt deployables;
 find deployables -type d|xargs chmod g+rwx,o+rx;
 find deployables -type f|xargs chmod g+rw,o+r;
-cd deployables;
-for lang in *; do
-  test -d \$lang || continue;
-  cd \$lang;
-  mkdir -p $DEPLOY_DIR/\$lang;
-  for f in *; do
-    if test -f \$f; then
-      rm -fr $DEPLOY_DIR/\$lang/\$f;
-      mv \$f $DEPLOY_DIR/\$lang;
-    elif test -d \$f; then
-      if test "\$f" = courses; then
-        cd courses;
-        for course in *; do
-          if test -d \$course; then
-            mkdir -p $DEPLOY_DIR/\$lang/courses;
-            rm -fr $DEPLOY_DIR/\$lang/courses/\$course;
-            mv \$course $DEPLOY_DIR/\$lang/courses;
-          fi
-        done;
-        cd ..;
-      else
-        mkdir -p $DEPLOY_DIR/\$lang/\$f;
-        cp -pr \$f/* $DEPLOY_DIR/\$lang/\$f;
-      fi
-    fi
-  done;
-  cd ..;
-done;
+cp -pr deployables/* $DEPLOY_DIR;
 EOF
 
 sshcmd1=$(cat sshcmd.tmp)

@@ -1,0 +1,189 @@
+= Making Game Images
+
+@lesson-description{Students practice using a new function alongside previously-learned functions to choose images for their game.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{defining-values}
+
+| Lesson Goals
+| Students will be able to:
+
+* Apply previous knowledge of @vocab{functions} to new situations
+* Use reasoning skills to select appropriate functions and combine their effects
+
+| Student-Facing Lesson Goals
+|
+* I can use different functions to transform @vocab{images}.
+* I can write definitions for my transformed images.
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1V6FGuMjDPcwp767AY0arxQ99kwnUCHo8Ifnzw5n6brQ/, Lesson Slides}
+* @link{pages/LinkingImagesGuide.pdf, Linking Images Guide - PDF}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/19wYdkpWnoMLAQW75pGDef6NzvBNkwMzO_kkdJBQdvpQ/, Lesson slides}
+* @link{pages/LinkingImagesGuide.pdf, Linking Images Guide - PDF}
+}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Supplemental Resources
+|
+
+| Key Points for the Facilitator
+|
+* Discuss copyright and fair use guidelines with your students.
+* Instructional time may vary based on students’ experience with using Google Image Search.
+* Check beforehand for any issues the school Internet security blocker might cause with searching for images.
+* There are two ways of importing images: linking directly to the image on the web or downloading the image to Google Drive and then using the "Insert" button.  See the "Linking Images Guide" below for more information on linking directly.
+* Encourage students to focus on finding and scaling each image as needed before moving on to the next one.
+
+@lang-prereq
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit3/index.html, prior unit-based version}.
+
+== The Game Starter File @duration{15 minutes}
+
+=== Overview
+This activity is primarily about _review and reading comprehension_, in which students open a large and unfamiliar file and must make sense of it using what they've seen before.
+
+=== Launch
+Students should have their workbook, pencil, and be logged into
+@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+and have their completed “Game Design” worksheet.
+
+By now you've learned about defining values, composing functions, and reading contracts. Taken together, that's a lot of code you're now able to understand! It's time to flex your reading skills, and look at the file you'll be working with to build your video game.
+
+*This file has code you haven't seen before! And that's ok!* For now, see what parts you recognize, and make sure you understand them.
+
+=== Investigate
+[,lesson-instruction]
+With their partner, students should load the
+@ifproglang{wescheme}{ @online-exercise{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, Blank Game Starter File }.
+}
+@ifproglang{pyret}{ @online-exercise{https://code.pyret.org/editor#share=1sdxxteW0ZpGXjdZQA-rBAqV2OEjLTfwF, Blank Game Starter File }.
+}
+
+[.notice-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Notice and Wonder}
+
+As students investigate the Game Starter File file with their partner, ask students to record what they Notice, and then what they Wonder.
+|===
+
+=== Synthesize
+
+- *What familiar things did you see in the Game Starter File file?*
+- *What were some unfamiliar things?  Any idea what they might do?*
+_Answers vary: new functions, comments, images_
+
+- *What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?*
+_``GAME-TITLE`` is a String, `BACKGROUND` is an Image_
+
+- *What does `SCREENSHOT` return in the @vocab{Interactions area}?*
+_An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
+
+- *Did anyone try pressing "Run"?  What happens when you press "Run"?*
+_Allow students to discuss what they see and what connections they see with the code_
+
+@ifproglang{wescheme}{
+- *What do you think `image-url` does?*
+}
+@ifproglang{pyret}{
+* *What do you think `image-url` does?*
+_Answers vary: It consumes a @vocab{String}, which is a URL (an image location on the Internet) and produces the @vocab{Image} inside our program_
+}
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{What is SCREENSHOT?}
+
+The Game Starter File defines several image values, such as `BACKGROUND`, `PLAYER`, etc. These definitions are using the running game, which appears when you click "Run". `SCREENSHOT` is defined as a fixed composition of the game images, placing each of them on top of the background at various (x,y) coordinates. It is used to give students a chance to see their characters onscreen before they've gotten them moving, and to give teachers an opportunity to reviw coordinates. It is _not_ in any way connected to the running game, so changes made to `SCREENSHOT` will not impact the game that appears when clicking "Run".
+|===
+
+== Finding Your Game Images @duration{flexible}
+
+=== Overview
+This activity is all about finding the right images for students' games. Since the internet never has _exactly_ the right image, students' need to get their games *just right* motivates them to confront the need for dilation, rotation, and reflection of the images they find. This, in turn feeds back into their understanding of Contracts and Function Composition.
+
+=== Launch
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Copyright and Fair Use}
+
+@span{.right}{ @image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
+https://www.resourcesforlife.com/docs/item6247",300,align="center"} }
+The students will be using images from the Internet for their game, and while this falls entirely under the "Educational Use" umbrella of Fair Use Guidelines, it is still important to make sure students of all ages understand the purpose of copyright law and the differences between educational and commercial purposes.
+@span{.clear}
+|===
+
+Guide the students through finding an image, saving it to their Drive, importing it into their program, and defining the image value as `PLAYER`.
+_Students will change this image later on their own, this is just for teaching purposes._
+
+[.lesson-point]
+How to find and save images to Google Drive....
+
+In your favorite search engine (we recommend @link{https://www.DuckDuckGo.com, DuckDuckGo}), search for an image and then click "Images".  Click "All Types" and select "Transparent" (In Google Image Search, it's under "Color -> Transparent").  This will filter and display images that have a transparent background, appearing as a light white/grey checkerboard pattern behind the character.
+
+@centered-image{images/transparent-image-search.png, "Finding Images on
+GIS, Source: Google Image Search, https://images.google.com" ,400,align="center"}
+
+Once an image has been selected, click it to expand and save the image to Google Drive. For file management, students may want to create a folder to store their game images.
+
+* If using a Chromebook, this is done by right-clicking and selecting "Google Drive" on the left for the save location.
+* On a PC or Mac follow this, @opt-printable-exercise{pages/SavingImagesGuide.pdf, quick guide to saving images to drive}.
+
+Once the image is saved to Google Drive, it can be brought into the program by using the
+@ifproglang{wescheme}{ "Images" }
+@ifproglang{pyret}{ "Insert" }
+button.  This will automatically bring in the image using the
+@ifproglang{wescheme}{ `bitmap-url` }
+@ifproglang{pyret}{ `image-url` }
+function, and students can run the code to see the image.
+
+=== Investigate
+What happens if the image we find needs to be made bigger or smaller? What if it needs to be rotated, or flipped?
+
+Students can define the image as a value and make changes to it with the image manipulation functions `scale`, `rotate`, `flip-horizontal`, and `flip-vertical`.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Strategies for English Language Learners}
+
+MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the functions, such as `scale` and `flip-horizontal`.
+|===
+
+[.lesson-instruction]
+With their partner, students search the Internet for images to use in their game.  They will need 4 images, one for each visual element of their game:
+
+- `BACKGROUND`
+- `PLAYER`
+- `DANGER`
+- `TARGET`
+
+Students should:
+
+- Save the chosen images to their Drive
+- Bring them into the programming environment
+- @vocab{Define} the images as values
+- Plan out how to resize and reorient them in their game
+- Make sure the final version of each image is defined as either `BACKGROUND`, `TARGET`, `DANGER`, or `PLAYER`
+
+When finished, students should be able to type `SCREENSHOT` in the interactions window and see all four of their images appropriately sized and oriented.

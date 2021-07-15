@@ -3,83 +3,72 @@
 
 Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(100, 50, "solid", "fuchsia")` will evaluate to an `Image`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    |       | Domain      |     | Range
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| Name    			|	 | Domain      							|     	| Range
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `#` `triangle-asa`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_triangle-asa(100, 50, 200, "solid", "turquoise")_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# image-url`
+| `{two-colons}`
+| @ifsoln{`String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_image-url("https://www.bootstrapworld.org/images/icon.png")_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# scale`
+| `{two-colons}`
+| @ifsoln{`Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_scale(0.8, triangle(30, "solid", "red"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# rotate`
+| `{two-colons}`
+| @ifsoln{`Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_rotate(35, rectangle(30, 80, "solid", "purple"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# overlay`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# put-image`
+| `{two-colons}`
+| @ifsoln{`Image, Number, Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# flip-horizontal`
+| `{two-colons}`
+| @ifsoln{`Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_flip-horizontal(text("Bootstrap is fun!", 60, "darkblue"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# flip-vertical`
+| `{two-colons}`
+| @ifsoln{`Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_flip-vertical(triangle(80, "solid", "lightgreen"))_`}
 
-|`#`
-| `{two-colons}` 
-|
-|`->`
-|
-5+|`#`
+| `# above`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`}
+
 
 |===

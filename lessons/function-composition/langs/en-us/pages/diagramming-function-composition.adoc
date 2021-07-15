@@ -1,0 +1,99 @@
+= Diagramming Function Composition
+
+++++
+<style>
+#content .listingblock pre {padding: 0;}
+#content .autonum::after { content: ')'; }
+#content .topTable tr:first-child td * { background-color: #f7f7f8; }
+</style>
+++++
+
+[.topTable, cols="1,1,1", stripes="none"]
+|===
+a|
+----
+f :: Number -> Number
+Consumes a number, multiplies by 3 to produce the result
+----
+a|
+----
+g :: Number -> Number
+Consumes a number, adds six to produce the result
+----
+a|
+----
+h :: Number -> Number
+Consumes a number, subtracts one to produce the result
+----
+|
+@math{ f(x) = 3x }
+|
+@math{ g(x) = x + 6 }
+|
+@math{ h(x) = x - 1 }
+|===
+
+For each function composition diagrammed below, translate it into the equivalent Circle of Evaluation for Order of Operations. Then write expressions for _both_ versions of the Circles of Evaluation, and evaluate them for @math{x = 4}. The first one has been completed for you.
+
+@do{
+  (define comp1 '(h (g (f x))))
+  (define expr1 '(-  (+ (* 3 x) 6) 1))
+
+  (define comp2 '(g (f (h x))))
+  (define expr2 '(+ (* 3 (- x 1)) 6))
+
+  (define comp3 '(h (f (g x))))
+  (define expr3 '(- (* 3 (+ x 6)) 1))
+
+  (define comp4 '(f (h (g x))))
+  (define expr4 '(* (- (+ x 6) 1) 3))
+}
+
+[cols="^1,^2,^3a", options="header", stripes="none"]
+|===
+
+| Function Composition
+| Order of Operations
+| Translate & Evaluate
+
+| @n  @show{(sexp->coe comp1)}
+|     @show{(sexp->coe expr1)}
+|
+[cols="4,5"]
+!===
+! Composition: 			! @show{(sexp->code comp1)}
+! Operations: 			! @show{(sexp->code expr1)}
+! Evaluate for x = 4 	! @math{h(g(f(4))) = 27}
+!===
+
+| @n  @show{(sexp->coe comp2)}
+|     @showsoln{(sexp->coe expr2) }
+|
+[cols="4,5"]
+!===
+! Composition: 			! @showsoln{(sexp->code comp2) }
+! Operations: 			! @showsoln{(sexp->code expr2) }
+! Evaluate for x = 4 	! @fitb{9em}{@showsoln{@math{g(f(h(4))) = 15} }}
+!===
+
+| @n  @show{(sexp->coe comp3)}
+|     @showsoln{(sexp->coe expr3) }
+|
+[cols="4,5"]
+!===
+! Composition: 			! @showsoln{(sexp->code comp3) }
+! Operations: 			! @showsoln{(sexp->code expr3) }
+! Evaluate for x = 4 	! @fitb{9em}{@showsoln{@math{h(f(g(4))) = 29} }
+!===
+
+| @n  @show{(sexp->coe comp4)}
+|     @showsoln{(sexp->coe expr4) }
+|
+[cols="4,5"]
+!===
+! Composition: 			! @showsoln{(sexp->code comp4) }
+! Operations: 			! @showsoln{(sexp->code expr4) }
+! Evaluate for x = 4 	! @fitb{10em}{@showsoln{@math{f(h(g(4))) = 27} }
+!===
+|===
+

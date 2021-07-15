@@ -1,0 +1,61 @@
+= Function Composition -- Green Star
+++++
+<style>
+#content tr:nth-child(odd){ height: 225pt; }
+#content tr:nth-child(odd) td {border-bottom: 0 !important;}
+</style>
+++++
+
+@do{
+	(define green-star '(star 50 "solid" "green"))
+}
+
+@vspace{2ex}
+
+@n Draw a Circle of Evaluation and write the Code for a  *solid, green star, size 50*.
+
+*Circle of Evaluation:*
+
+@showsoln{(sexp->coe green-star) }
+@vspace{15ex}
+
+*Code:* @fitb{40em}{@showsoln{(sexp->code green-star) }}
+
+@vspace{2ex}
+
+Using the star described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below.
+
+
+[cols="1a,1a",stripes="none"]
+|===
+
+| @n A solid, green star, that is triple the size of the original (using `scale`)
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(scale 3 ,green-star)) }
+
+| @n A solid, green star, that is half the size of the original (using `scale`)
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(scale 0.5 ,green-star)) }
+
+
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 3 ,green-star)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 0.5 ,green-star)) }}
+
+| @n A solid, green star of size 50 that has been rotated 45 degrees counter-clockwise
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(rotate 50 ,green-star)) }
+
+| @n A solid, green star that is 3 times the size of the original  *and* has been rotated 45 degrees
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(scale 3 (rotate 50 ,green-star))) }
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(rotate 50 ,green-star)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(scale 3 (rotate 50 ,green-star))) }}
+
+|===
+

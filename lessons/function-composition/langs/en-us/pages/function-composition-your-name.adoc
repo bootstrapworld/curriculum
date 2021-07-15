@@ -1,0 +1,82 @@
+= Function Composition -- Your Name
+
+++++
+<style>
+/* Override width:100% to allow circles and vspace to share the same line */
+#content div.circleevalsexp { width: auto;}
+#content .grid tr:nth-child(odd){ height: 225pt; }
+#content .grid tr:nth-child(odd) td {border-bottom: 0 !important;}
+#content .contracts td { padding: 0 !important; }
+#content .contracts .editbox { background: none; }
+#content .contracts { background-color: #f7f7f8 !important; }
+</style>
+++++
+
+You’ll be investigating these functions with your partner:
+
+[.contracts, cols="5a, 4a", frame="none", grid="none"]
+|===
+| @show{ (contracts
+'("text" ("String" "Number" "String") "Image")
+'("flip-horizontal" ("Image") "Image")
+'("flip-vertical" ("Image") "Image")
+)}
+
+| @show{ (contracts
+'("frame" ("Image") "Image")
+'("above" ("Image" "Image") "Image")
+'("beside" ("Image" "Image") "Image")
+)}
+|===
+
+@do{ (define name-sexp '(text "X" 30 "red")) }
+
+@n In the editor, write the code to make an image of your name in big letters in a color of your choosing using `text`.  Then draw the Circle of Evaluation and write the Code that will create the image.
+
+@vspace{1ex}
+
+*Circle of Evaluation:*
+
+@showsoln{(sexp->coe name-sexp) }
+@vspace{10ex}
+
+*Code:* @fitb{48ex}{@showsoln{(sexp->code name-sexp) }}
+
+Using the "image of your name" described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Test your ideas in the editor to make sure they work.
+
+@vspace{1ex}
+
+[.grid, cols="1a,1a",stripes="none"]
+|===
+
+| @n The framed "image of your name".
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(frame ,name-sexp)) }
+
+| @n The "image of your name" flipped vertically.
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(flip-vertical ,name-sexp)) }
+
+
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(frame ,name-sexp)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(flip-vertical ,name-sexp)) }}
+
+
+| @n  The "image of your name" above "the image of your name" flipped vertically.
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe `(above ,name-sexp (flip-vertical ,name-sexp))) }
+
+| @n The "image of your name" flipped horizontally beside "the image of your name".
+
+*Circle of Evaluation:*
+
+@showsoln{(sexp->coe `(beside ,name-sexp (flip-horizontal ,name-sexp)))}
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(above  ,name-sexp (flip-vertical   ,name-sexp))) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(beside ,name-sexp (flip-horizontal ,name-sexp))) }}
+
+|===

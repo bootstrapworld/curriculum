@@ -1,0 +1,105 @@
+= Randomness and Sample Size
+
+@add-to-lang{random-rows}
+
+@lesson-description{Students learn about random samples and statistical inference, as applied to the Animals Dataset. In the process, students get a light introduction to the role of sample size and the importance of statistical inference.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{defining-table-functions}
+| Lesson Goals
+| Students will be able to...
+
+* Take random samples from a population
+* Understand the need for random samples
+* Understand the role of sample size
+
+| Student-facing Lesson Goals
+|
+
+* Let's explore how random sampling can be used with datasets.
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1ZRxZgSJssoLzHe_a59Qw49mip0pwzcM-wVHqWTS8jTk/, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+
+* Make sure all materials have been gathered.
+* Decide how students will be grouped in pairs.
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Optional Projects
+|
+* @link{pages/food-habits-project.adoc, "Food Habits Project"}
+* @link{pages/time-use-project.adoc, "Time-Use Project"}
+
+@lang-prereq
+|===
+
+== Do Now
+[.lesson-instruction]
+Students should log into @link{https://code.pyret.org, CPO} open the @online-exercise{https://code.pyret.org/editor#share=1d3HuG_LjdX9HpfQPCmVmDG9mYml4nOX8&v=ebd213d, "Random Samples Starter File"}, and save a copy.
+
+== Flip the Script: Inference v. Probability @duration{30 minutes}
+
+=== Overview
+Statistical inference involves looking at a sample and trying to __infer something you don’t know__ about a larger population. This requires a sort of backwards reasoning, kind of like making a guess about a _cause_, based on the _effect_ that we see. To better understand the process of going from the sample back to the population, it helps to understand the more straightforward process of going from the population to a sample.  If the sample is random, we call this process Probability!
+
+In real life we typically don’t know what’s true for an entire population. But this probability thought-experiment will start with a larger population with _known_ properties (such as the fact that nearly half of the entire population are males). Then we’ll see what kind of behavior we tend to see in random samples taken from that population.
+
+=== Launch
+[.lesson-point]
+Inference Reasons Backwards; Probability Reasons Forwards
+
+One of the most useful tasks in Data Science is using sample data to _infer_ (guess) what’s true about the larger population from which the sample was taken. This process, called @vocab{statistical inference}, is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art! Early on, statisticians discovered that _random_ samples almost always work best.
+
+Suppose we want to estimate what percentage of all Americans plan to vote for a certain candidate. We can't ask everyone who they’re voting for, so pollsters instead take a _sample_ of Americans, and _generalize_ the opinion of the sample to estimate how Americans as a whole feel. But choosing a sample can be tricky...
+
+[.lesson-instruction]
+* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
+* How could we choose a representative subset, or _sample_ of American voters?
+* Would it be problematic to only sample a handful of voters? What do we gain by taking a larger sample?
+
+[.lesson-point]
+Before we infer something _unknown_ about a population from a sample, we need to know what makes a "good" sample!
+
+Sampling is a complicated issue. The main reason for doing inference is to guess about something that’s _unknown_ for the whole population. But a useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth. Another discovery (besides the value of randomness) that statisticians made early on was something that’s perfectly consistent with common sense: Larger samples are better than smaller ones, because they tend to get us closer to the truth about the whole population.
+
+Let’s see what happens if we switch from smaller to larger sample sizes, if we’re taking a random sample of shelter animals to infer what’s true about the larger population...
+
+=== Investigate
+The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter. How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
+
+[.lesson-instruction]
+- Divide the class into groups of 3-5 students.
+- Have students open the @online-exercise{https://code.pyret.org/editor#share=1d3HuG_LjdX9HpfQPCmVmDG9mYml4nOX8&v=ebd213d, Random Samples Starter File}, and click "Run".
+- Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
+
+=== Common Misconceptions
+Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Extension}
+
+In a statistics-focused class, or if appropriate for your learning goals, this is a great place to include more rigorous statistics content on @link{https://www.khanacademy.org/math/ap-statistics/estimating-confidence-ap/one-sample-z-interval-proportion/v/determining-sample-size-based-on-confidence-and-margin-of-error, sample size}, @link{https://www.youtube.com/watch?v=SRwMfEmKx3A, sampling bias}, etc.
+|===
+
+=== Synthesize
+Have students share how much better their larger samples are at guessing the truth about the whole population.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Project Options: Food Habits / Time Use}
+
+In both of these projects, students can gather data about their own lives, and use what they've learned in the class so far to analyze it. This project can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. See the project descriptions for @link{pages/food-habits-project.adoc} and @link{pages/time-use-project.adoc}.
+
+@span{.center}{__(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})__}
+|===

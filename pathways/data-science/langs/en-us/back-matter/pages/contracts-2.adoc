@@ -1,113 +1,73 @@
 [.landscape]
 = Contracts
 
-++++
-<style>
-#content > .paragraph {padding: 0px 5px;}
-</style>
-++++
-
 Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
 
-++++
-<style>
-td {padding: .1em .625em !important; height: 20pt;}
-</style>
-++++
-
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 |Name||Domain||Range
 
-| `string-repeat`
-| `{two-colons}`
-| `(text {two-colons} String, repeat {two-colons} Number)`
+| `;` `regular-polygon`
+| `:`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `String`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(regular-polygon  40 8 "solid" "red")_`}
 
-| `string-contains`
+| `#` `rhombus`
 | `{two-colons}`
-| `(text {two-colons} String, search-for {two-colons} String)`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Boolean`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(rhombus 20 50 "solid" "turquoise")_`}
 
-| `num-sqr`
+| `#` `right-triangle`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Number`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(right-triangle 20 50 "outline" "black")_`}
 
-| `num-sqrt`
+| `#` `isosceles-triangle`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| @ifsoln{`Number, Number, String, String`}
 | `->`
-| `Number`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(isosceles-triangle 100 30 "solid" "black")_`}
 
-| `num-min`
+| `#` `radial-star`
 | `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-| `Number`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(radial-star  17 50 10 "solid" "orange")_`}
 
-| `num-max`
+| `#` `star-polygon`
 | `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-| `Number`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(star-polygon 100 10 3 "outline" "yellow")_`}
 
-| `count`
+| `overlay`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `Table`
-5+|
-
-| `mean`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `Number`
-5+|
-
-| `median`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `Number`
-5+|
-
-| `modes`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `List<Number>`
-5+|
-
-| `bar-chart`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Image, Image`
 | `->`
 | `Image`
-5+|
+5+|`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`
 
-| `pie-chart`
+| `beside`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `Image, Image`
 | `->`
 | `Image`
-5+|
+5+|`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`
 
-| `histogram`
+| `above`
 | `{two-colons}`
-| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
+| `Image, Image`
 | `->`
 | `Image`
-5+|
+5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
 
 |===

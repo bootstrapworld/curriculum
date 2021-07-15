@@ -1,0 +1,69 @@
+= Writing Examples from Purpose Statements 2
+
+We've provided contracts and purpose statements to describe two different functions. Write examples for each of those functions.
+
+++++
+<style>
+#content .recipe_word_problem { display: none; }
+#content .recipe_title:nth-of-type(3n+1) { padding-top: 5px; }
+#content .recipe_title:nth-of-type(3n),
+#content .recipe_title:nth-of-type(3n) + *,
+#content .recipe_title:nth-of-type(3n) + * + *,
+#content .recipe_title:nth-of-type(3n) + * + * + *,
+#content .recipe_title:nth-of-type(3n) + * + * + * + .keyword_only {
+  display: none
+}
+</style>
+++++
+
+@design-recipe-exercise{ "half-image"
+"half-image"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(String)
+#:show-domains? #t
+#:range "Image"
+#:show-range? #t
+#:purpose "Consumes the url for an image, and produces that image scaled to half its size."
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  ("code.pyret.org/img/pyret-logo.png" (scale 0.5 (image-url "code.pyret.org/img/pyret-logo.png")))
+  ("bootstrapworld.org/images/icon.png" (scale 0.5 (image-url "bootstrapworld.org/images/icon.png"))))
+#:show-examples #f
+#:param-list '(url)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body '(scale 0.5 (image-url url))
+#:show-body? #f
+#:grid-lines? #f
+}
+
+@vspace{2ex}
+@span{.sectionbreak}{}
+@vspace{2ex}
+
+@design-recipe-exercise{ "triple"
+"triple"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Number)
+#:show-domains? #t
+#:range "Number"
+#:show-range? #t
+#:purpose "Consumes a Number and triples it."
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  (4 (* 4 3))
+  (10 (* 10 3)))
+#:show-examples #f
+#:param-list '(url)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body '(scale 0.5 url)
+#:show-body? #f
+#:grid-lines? #f
+}

@@ -1,0 +1,30 @@
+= Converting Circles of Evaluation to Code
+
+++++
+<style>
+  #content td {height: 150pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each Circle of Evaluation on the left-hand side, write the code for the Circle on the right-hand side
+@ifsoln{*Teachers:* the answers below are shown with only the _necessary_ parentheses. If a student chooses to add additional (correct) parentheses, they will still have the correct answer.}
+
+@do{
+  (define expr1 '(- (+ 17 16) (* 13 17)))
+  (define expr2 '(+ (* 12 5) 24))
+  (define expr3 '(- (* 4 13) (- 19 21)))
+  (define expr4 '(- 21 (* 4 13)))
+  (define expr5 '(- (- 19 9) (* (+ 10 9) -3)))
+}
+
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Code
+|*@n*| @show{(sexp->coe expr1)}    | @showsoln{(sexp->code expr1) }
+|*@n*| @show{(sexp->coe expr2)}    | @showsoln{(sexp->code expr2) }
+|*@n*| @show{(sexp->coe expr3)}    | @showsoln{(sexp->code expr3) }
+|*@n*| @show{(sexp->coe expr4)}    | @showsoln{(sexp->code expr4) }
+|*@n*| @show{(sexp->coe expr5)}    | @showsoln{(sexp->code expr5) }
+|===

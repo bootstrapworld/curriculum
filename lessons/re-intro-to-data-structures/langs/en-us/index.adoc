@@ -40,7 +40,7 @@ practice each by creating a "`digital bakery`".}
 == Review @duration{15 minutes}
 
 === Launch
-In the previous unit, you reviewed almost everything from Bootstrap:Algebra including Datatypes, Contracts, and the Design Recipe. In this unit you will go above and beyond all that, and learn an entirely new construct that will be the basis for everything you’ll do in Bootstrap:Reactive.
+In the previous unit, you reviewed almost everything from Bootstrap:Algebra including data types, Contracts, and the Design Recipe. In this unit you will go above and beyond all that, and learn an entirely new construct that will be the basis for everything you’ll do in Bootstrap:Reactive.
 
 Ask a few introductory review questions to test students’ understanding:
 
@@ -75,7 +75,7 @@ Step 1: Contract and Purpose Statement
 # Makes an outlined circle that has twice the given radius.
 ----
 
-Review the purpose of Contracts: once we know the Name, Domain, and Range of a function, it’s easy to write examples using those datatypes.
+Review the purpose of Contracts: once we know the Name, Domain, and Range of a function, it’s easy to write examples using those data types.
 
 [.lesson-point]
 Step 2: Examples
@@ -181,7 +181,7 @@ Turn to @printable-exercise{pages/next-position.adoc} in your workbook, read the
 # adding 5 to x and subtracting 5 from y
 ----
 
-Point out that we’re now using a new data type in a contract: next-position consumes two Numbers, and produces a DeliveryState. Once we’ve defined a new data structure using the above data block, we can use it just like other datatypes.
+Point out that we’re now using a new data type in a contract: next-position consumes two Numbers, and produces a DeliveryState. Once we’ve defined a new data structure using the above data block, we can use it just like other data types.
 
 Now for our two examples. Using, or @vocab{calling} `next-position` with two numbers is easy, but what happens to those numbers? We can’t return both at the same time...unless we use a data structure! To do so we’ll need to use the constructor function to make a structure from the data we already have.
 
@@ -235,13 +235,13 @@ Suppose you own a famous bakery. You bake things like cookies, pastries, and tar
 
 [.lesson-instruction]
 --
-For each of the following aspects of a cake, think about what datatype you might use to represent it:
+For each of the following aspects of a cake, think about what data type you might use to represent it:
 
 - The flavor of the cake. That could be "`Chocolate`", "`Strawberry`", "`Red Velvet`", or something else.
 - The number of layers
 - Whether or not the cake is an ice cream cake.
 
-What datatype could we use to represent the entire cake?
+What data type could we use to represent the entire cake?
 --
 
 Now that we know everything that is part of a cake, we can use a data structure to represent the cake itself. Let’s take a look at how this works.
@@ -252,7 +252,7 @@ Now that we know everything that is part of a cake, we can use a data structure 
 [.lesson-instruction]
 Open your workbook to @printable-exercise{pages/caketype.adoc}.
 
-On this page, we will define a data structure for cakes, which we call `CakeType` (since this is now a new data TYPE). At the top of this page we see a comment, stating what things are part of a `CakeType`. Below that is a line that says `data CakeType:`, which begins the definition of a new data structure, called CakeType. On the next line, we define the function that makes a CakeType (`cake`), and how _exactly_ to make a CakeType -- the names of each thing in a CakeType, and their data types. Each piece of information that makes up a cake (the flavor, etc) is called a @vocab{field}. A field has both a descriptive name (like `flavor`) and a datatype.
+On this page, we will define a data structure for cakes, which we call `CakeType` (since this is now a new data TYPE). At the top of this page we see a comment, stating what things are part of a `CakeType`. Below that is a line that says `data CakeType:`, which begins the definition of a new data structure, called CakeType. On the next line, we define the function that makes a CakeType (`cake`), and how _exactly_ to make a CakeType -- the names of each thing in a CakeType, and their data types. Each piece of information that makes up a cake (the flavor, etc) is called a @vocab{field}. A field has both a descriptive name (like `flavor`) and a data type.
 
 [.lesson-instruction]
 What name describes the first field in a `CakeType`? What data type can we use to represent it?
@@ -286,7 +286,7 @@ end
  
 This is the code that defines the `CakeType data` structure. It tells the computer what a `CakeType` is and what goes into it. It also defines its @vocab{constructor} function, called `cake`. To make a CakeType, you _must_ call the constructor function with three things: a `flavor`, which is a String, `layers`, a Number, and `is-iceCream`, which is a Boolean. Remember that order matters! For now, these are the only things that we’re going to keep track of in a CakeType, but you can imagine how you might extend it to include other information.
 
-Stress the importance of being able to define your own datatypes to students: no longer are they bound by the single values of numbers, strings, or booleans! Pyret allows you to define brand new Data Structures, containing any combination of values.
+Stress the importance of being able to define your own data types to students: no longer are they bound by the single values of numbers, strings, or booleans! Pyret allows you to define brand new Data Structures, containing any combination of values.
 
 [.lesson-instruction]
 Open the https://code.pyret.org/editor#share=0B9rKDmABYlJVa0cxbEpoSG1pT0k[Bakery] file and look at lines 3–8. Do they match what you have on your paper?
@@ -327,7 +327,7 @@ Define two new values for some of your favorite cakes. You can give them whateve
 @span{.right}{@centered-image{images/cake2.png, "", 400}}
 Repetition is key in this lesson. Have students identify each part of the `CakeType` for every one they’ve defined. What is the flavor of their first `CakeType`? Its number of layers? Ensure that students are using their inputs in the right order!
 
-At this point, you’ve worked with two different @vocab{Data Structures}: JumperStates and `CakeTypes`, and you’ve created different examples, or @vocab{instances}, of these structures. Instances are concrete uses of a datatype, just as 3 is a concrete Number (where Number is the type). Here, `CakeType` is the type, and `cake("Chocolate", 8, false)` is a concrete cake with specific values for each field. In programming, we create instances much more often than we create new data structures. For now, the important point is to recognize the difference between a structure _definition_ (the `data....` piece of code) and specific @vocab{instances} of a data structure (like `birthday-cake`, or `jumper(44, 75)`.
+At this point, you’ve worked with two different @vocab{Data Structures}: JumperStates and `CakeTypes`, and you’ve created different examples, or @vocab{instances}, of these structures. Instances are concrete uses of a data type, just as 3 is a concrete Number (where Number is the type). Here, `CakeType` is the type, and `cake("Chocolate", 8, false)` is a concrete cake with specific values for each field. In programming, we create instances much more often than we create new data structures. For now, the important point is to recognize the difference between a structure _definition_ (the `data....` piece of code) and specific @vocab{instances} of a data structure (like `birthday-cake`, or `jumper(44, 75)`.
 
 === Common Misconceptions
 Students often struggle with the difference between the _definition_ of a data structure and @vocab{instances} (items created from) that data structure. When students define `CakeType`, they haven’t created any specific cakes. They have defined a type that they can use to define specific cakes. If they have a specific cake, they can ask questions of it such as "is this a chocolate cake?"and produce an answer. If all they have is the `CakeType` definition, they can’t answer such questions. Some people like the analogy of a cookie cutter here – `CakeType` defines a cookie cutter, but doesn’t produce any cookies. To get a cookie, you use the cake constructor to define a specific cake with specific values for the fields.
@@ -344,7 +344,7 @@ Based on these instances of CakeTypes you just wrote:
 The three things in the domain of cake are, in fact, the three things that we have already listed on @printable-exercise{pages/caketype.adoc}! With data structures, the order is very important: we always want the first string in cake to be the CakeType’s flavor, the first number to be its number of layers, etc.
 
 ////
-CakeTypes are the first example of defining a new datatype that students will see, but Pyret allows you to define any number of new data structures to hold any combination of values. The important points to remember about creating structures at this point is that whenever the constructor function is called (in this case, cake), it must take in the same number and type of values as in the structure’s definition, and its inputs must be in the same order as the definition.
+CakeTypes are the first example of defining a new data type that students will see, but Pyret allows you to define any number of new data structures to hold any combination of values. The important points to remember about creating structures at this point is that whenever the constructor function is called (in this case, cake), it must take in the same number and type of values as in the structure’s definition, and its inputs must be in the same order as the definition.
 ////
 
 [.lesson-instruction]

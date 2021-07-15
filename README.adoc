@@ -573,6 +573,32 @@ use some extra directives like `@do`, `@show`, `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
 
+Sometimes, just a contract (part of a recipe) needs to be shown
+in the text. Use `@show` to call the Racket procedures `contract`
+(for a single contract)
+or `contracts` (for multiple).
+
+  @show{(contract "/" '("Number" "Number") "Number")}
+
+This states that the function name is `/`, its domain list is
+`("Number" "Number")` and its range is `"Number"`.
+
+  @show{(contract "/" '("Number" "Number") "Number" 
+    "divides one number by another")}
+
+adds an optional fourth argument stating the function's purpose.
+
+To show multiple contracts, 
+
+  @show{(contracts
+    '("/" '("Number" "Number") "Number" "divides one number by another")
+    '("*" '("Number" "Number") "Number" "multiples one number by another")
+   }
+
+Note that `contracts` takes a list of arguments. Also note that
+quoting each such argument obviates the need for quoting the
+domain-list argument.
+
 ==== Cross-references and pagination
 
 Both lesson plans and pathway narratives can refer to any files

@@ -1,0 +1,30 @@
+= Converting Circles of Evaluation to Code
+
+++++
+<style>
+  #content td * {text-align: left;}
+  #content td {height: 200pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each Circle of Evaluation on the left, write down the code on the right
+
+@do{
+  (define expr1 '(ellipse 30 50 "outline" "red"))
+  (define expr2 '(circle 30 "solid" "maroon"))
+  (define expr3 '(text "Springtime!" 20 "orange"))
+  (define expr4 '(star 60 "outline" "gold"))
+  (define expr5 '(rectangle (200/3) 300 "solid" "green"))
+}
+
+[cols=".^1a,^10a,^10a",options="header",stripes="none"]
+|===
+|   | Circle of Evaluation        | Code
+|*1*| @show{(sexp->coe expr1)}    | @showsoln{(sexp->code expr1) }
+|*2*| @show{(sexp->coe expr2)}    | @showsoln{(sexp->code expr2) }
+|*3*| @show{(sexp->coe expr3)}    | @showsoln{(sexp->code expr3) }
+|*4*| @show{(sexp->coe expr4)}    | @showsoln{(sexp->code expr4) }
+|*5*| @show{(sexp->coe expr4)}    | @showsoln{(sexp->code expr4) }
+|===

@@ -1,4 +1,4 @@
-# last modified 2020-09-04
+# last modified 2021-06-08
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -75,6 +75,9 @@ for lang in $ALL_THE_LANGS; do
     if test -d $lang/lib; then
       cp -pr $lang/lib deployables/$lang
     fi
+    if test -d $lang/extlib; then
+      cp -pr $lang/extlib deployables/$lang
+    fi
   fi
   for f in $lang/*html; do
     if test -f $f; then
@@ -108,6 +111,8 @@ find deployables -name workbook-[A-Z]\*.pdf -delete
 find deployables -name workbook-sols-\*.pdf -delete
 find deployables -name pd-workbook-\*.pdf -delete
 find deployables -name wkh2p-tmp\* -delete
+
+find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 test -f deployables.tar.bz2 && rm deployables.tar.bz2
 

@@ -1,0 +1,95 @@
+=  Do Examples Have the Same Contracts? (2)
+
+
+@do{(define e1
+   (code '(EXAMPLE
+      (mystery (triangle 70 "solid" "green")) (triangle 140 "solid" "green")
+      (mystery (circle 100 "solid" "blue")) (circle 200 "solid" "blue"))))
+(define c1 (contract "mystery" '("Image") "Image"))
+
+(define e2
+   (code '(EXAMPLE
+      (mystery "red") (triangle 140 "solid" "red")
+      (mystery "blue" "circle") (circle 140 "solid" "blue"))))
+(define c2 "no match (the domains have different numbers of arguments)")
+
+(define e3
+   (code '(EXAMPLE
+      (mystery "+" 4 5) (+ 4 5)
+      (mystery "sqrt" 25) (sqrt 25))))
+(define c3 "no match (the domains have different numbers of arguments)")
+
+(define e4
+   (code '(EXAMPLE
+      (mystery "circle" 4) (* pi (sqr 4))
+      (mystery "square" 5) (sqr 5))))
+(define c4 (contract "mystery" '("String" "Number") "Number"))
+
+(define e5
+   (code '(EXAMPLE
+      (mystery "dog") 3
+      (mystery "cat") "kitten")))
+(define c5 "no match (the range types are different)")
+
+
+(define e6
+   (code '(EXAMPLE
+      (mystery "dog")  3
+      (mystery "kitten") 6)))
+(define c6 (contract "mystery" '("String") "Number"))
+
+(define e7
+   (code '(EXAMPLE
+      (mystery 4 5 "big") (scale 2 (rectangle 4 5 "solid" "blue"))
+      (mystery 10 "small" 4) (scale .5 (rectangle 10 4 "solid" "blue")))))
+(define c7 "no match (the domains have different orders of arguments)")
+
+}
+
+For each pairs of Examples below, decide whether the two examples
+have the same contract. If they do, fill in the contract in the space
+provided. If not, write a few words explaining why.
+
+@vspace{1ex}
+
+*@n* @showsoln{c1} @ifnotsoln{@fitb{40em}{}}
+
+@show{e1}
+
+@vspace{2ex}
+
+*@n* @showsoln{c2} @ifnotsoln{@fitb{40em}{}}
+
+@show{e2}
+
+@vspace{2ex}
+
+*@n* @showsoln{c3} @ifnotsoln{@fitb{40em}{}}
+
+@show{e3}
+
+@vspace{2ex}
+
+*@n* @showsoln{c4} @ifnotsoln{@fitb{40em}{}}
+
+@show{e4}
+
+@vspace{2ex}
+
+*@n* @showsoln{c5} @ifnotsoln{@fitb{40em}{}}
+
+@show{e5}
+
+@vspace{2ex}
+
+*@n* @showsoln{c6} @ifnotsoln{@fitb{40em}{}}
+
+@show{e6}
+
+@vspace{2ex}
+
+*@n* @showsoln{c7} @ifnotsoln{@fitb{40em}{}}
+
+@vspace{2ex}
+
+@show{e7}

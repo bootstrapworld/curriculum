@@ -1,0 +1,92 @@
+= Matching Examples and Function Definitions
+
+++++
+<style>
+#content table tr td {height: 120pt; padding: 0; margin: 0;}
+#content td:first-child {border-bottom: 1pt solid gray !important;}
+#content td * {font-size: .8rem !important;}
+</style>
+++++
+
+Highlight the variables in `gt` and label them with the word "size".
+@do{
+
+(define e0
+   (code '(EXAMPLE (gt 20) (triangle 20 "solid" "green"))))
+
+(define e10
+   (code '(EXAMPLE (gt 45) (triangle 45 "solid" "green"))))
+
+(define f0
+   (sexp->code '(define (gt size) (triangle size "solid" "green"))))
+}
+
+@show{
+e0
+e10
+f0
+}
+
+@vspace{2ex}
+
+Highlight and label the variables in the example lists below. Then, using `gt` as a model, match the examples to their corresponding function definitions.
+
+@do{
+
+;apparent misalignment in second piece of each first example is intentional
+;to make code render aligned once scribbled
+
+(define e1
+   (code '(EXAMPLE
+      (f    "red") (circle 7 "solid" "red")
+      (f "orange") (circle 7 "solid" "teal"))))
+
+(define f1
+   (sexp->code '(define (f c) (circle 7 "solid" c))))
+
+(define e2
+   (code '(EXAMPLE
+      (f 30) (circle 8 "solid" "red")
+      (f 10) (circle 8 "outline" "red"))))
+
+(define f2
+   (sexp->code '(define (f r) (circle 8 s "red"))))
+
+(define e3
+   (code '(EXAMPLE
+      (f 3) (star 3 "outline" "red")
+      (f 8) (star 8 "outline" "red"))))
+
+(define f3
+   (sexp->code '(define (f s) (star s "outline" "red"))))
+
+(define e4
+   (code '(EXAMPLE
+      (f  "red") (star 9 "solid"  "red")
+      (f "grey") (star 9 "solid" "grey")
+      (f "pink") (star 9 "solid" "pink"))))
+
+(define f4
+   (sexp->code '(define (f c) (star 9 "solid" c))))
+
+(define e5
+   (code '(EXAMPLE
+      (f 2) (+ 2 2)
+      (f 4) (+ 4 4)
+      (f 5) (+ 5 5))))
+
+(define f5
+   (sexp->code '(define (f num) (+ num num))))
+
+}
+
+
+[cols=".^12a,^.^3a,1a,^.^1a,.^10a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Examples    |              ||       | Definition
+| @show{e2}   |*1*@ifsoln{-D}||*A*    | @show{f3}
+| @show{e5}   |*2*@ifsoln{-B}||*B*    | @show{f5}
+| @show{e1}   |*3*@ifsoln{-E}||*C*    | @show{f4}
+| @show{e4}   |*4*@ifsoln{-C}||*D*    | @show{f2}
+| @show{e3}   |*5*@ifsoln{-A}||*E*    | @show{f1}
+|===

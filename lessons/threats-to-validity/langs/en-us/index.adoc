@@ -1,0 +1,120 @@
+= Threats to Validity
+
+@lesson-description{Students consider possible threats to the validity of their analysis.}
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{linear-regression}
+| Lesson Goals
+| Students will be able to...
+
+* Define several types of Threats to Validity
+* Identify those threats by reading the description of an analysis
+* Identify those threats in their own analysis
+
+| Student-facing Lesson Goals
+|
+
+* Let's identify issues that could affect our data analysis.
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1YNCcL1QyycjooriYu68Y4eR6rG7vWZedfiUrOJSJ9Hc/, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+
+| Supplemental Resources
+|
+
+@lang-prereq
+|===
+
+== Threats to Validity @duration{20 minutes}
+
+=== Overview
+Students are introduced to the concept of _validity_, and a number of possible threats that might make an analysis invalid.
+
+=== Launch
+
+[.lesson-point]
+Survey says: “People prefer cats to dogs”
+
+As good Data Scientists, the staff at the animal shelter are constantly gathering data about their animals, their volunteers, and the people who come to visit. But just because they have data doesn’t mean the conclusions they draw from it are correct! For example: suppose they surveyed 1,000 cat-owners and found that 95% of them thought cats were the best pet. Could they really claim that people generally prefer cats to dogs?
+
+Have students share back what they think. The issue here is that cat-owners are not a representative sample of the population, so the claim is invalid.
+
+There’s more to data analysis than simply collecting data and crunching numbers. In the example of the cat-owning survey, the claim that “people prefer cats to dogs” is *invalid* because the data itself wasn’t representative of the whole population (of course cat-owners are partial to cats!). This is just one example of what are called @vocab{Threats to Validity}.
+
+There are several major threats to validity you should be on guard against:
+
+. *Selection bias* - Data was gathered from a biased, non-representative sample of the population. This is the problem with surveying cat owners to find out which animal is most loved. __Remember that, in general, randomness is the key to obtaining unbiased samples!__
+
+. *Bias in the study design* - Suppose you survey a random sample of pet owners that includes representative numbers of both cat and dog owners. But you ask them a “loaded” question like “Since annual vet care comes to about $300 for dogs and only about half of that for cats, would you say that owning a cat is less of a burden than owning a dog?” This could easily lead to a misrepresentation of people’s true opinions.
+
+. *Poor choice of summary* - Even if the selection is unbiased, sometimes outliers are so extreme that they shift the results of our analysis (such as the mean) in ways that don’t represent the population as a whole. For example, if the shelter happened to house a 100-year-old tortoise, and summarized its animals’ ages with the mean, this would inflate our perception of what age is typical.
+
+. *Confounding variables* - The gathered data does not take into account other factors that might influence a relationship. For example, a study might conclude that cat owners are more environmentally conscious: they’re more likely to use public transportation than dog owners. The confounding variable here could be urban versus rural dwelling: people who live in big cities are more likely to use public transportation and also more likely to own cats.
+
+This is just a small list of different threats to validity. There are plenty more!
+
+=== Investigate
+On @printable-exercise{pages/threats-to-validity-1.adoc} and @printable-exercise{pages/threats-to-validity-2.adoc}, you’ll find four different claims backed by four different datasets. Each one of those claims suffers from a serious threat to validity. Can you figure out what those threats are?
+
+=== Synthesize
+Give students time to discuss and share back.
+
+Life is messy, and there are _always_ threats to validity. Data Science is about doing the best you can to minimize those threats, and to be up front about what they are whenever you publish a finding. When you do your own analysis, make sure you include a discussion of the threats to validity!
+
+== Fake News! @duration{20 minutes}
+
+=== Overview
+Students are asked to consider the ways in which statistics are misused in popular culture, and become critical consumers of some statistical claims. Finally, they are given the opportunity to misuse their _own_ statistics, to better understand how someone might distort data for their own ends.
+
+=== Launch
+You've already seen a number of ways that statistics can be misused:
+
+. Using the mean instead of the median with heavily-skewed data
+. Using the wrong language when describing a Linear Regression
+. Using a correlation to imply causation
+
+There are other ways to mislead the audience as well:
+. **Intentionally using the wrong chart** - suppose the census asks for data from different groups of people, and gets _none_ from one group. That would be very suspicious! That group would show up as an empty space on bar chart, making the absence visible. A pie chart, however, would hide that absence completely - making it less likely that anyone would even notice that group had been "erased"!
+. **Changing the scale of a chart** - Changing the y-axis of a scatterplot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
+
+
+With all the news being shared through newspapers, television, radio, and social media, it’s important to be critical consumers of information!
+
+=== Investigate
+[.lesson-instruction]
+* On @printable-exercise{pages/fake-news.adoc}, you’ll find some deliberately misleading claims made by slimy Data Scientists. Can you figure out __why these claims should not be trusted___ ?
+* Once you’ve finished, consider your own dataset and analysis: what misleading claims could someone make about your work? Turn to @printable-exercise{pages/lies-darned-lies-n-statistics.adoc}, and come up with four misleading claims based on data or displays from your work.
+* Trade papers with another group, and see if you can figure out why each other’s claims are not to be trusted!
+
+=== Synthesize
+Have students share back their "lies". Was anyone able to stump the other group?
+
+== Your Analysis @duration{flexible}
+
+=== Overview
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+
+=== Launch
+In every analysis, there are always threats to validity. It's important to always be upfront about what those threats are, so that anyone who reads your analysis can make their own decision.
+
+=== Investigate
+[.lesson-instruction]
+- Students should fill in the @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.oibhqmncl1g1, Findings} portion of their Research Paper, discussing threats to validity and drawing conclusions from their linear regression results.
+
+== Additional Exercises:
+
+- @opt-printable-exercise{pages/identifying-threats-1.adoc}
+- @opt-printable-exercise{pages/identifying-threats-2.adoc}
+- @opt-printable-exercise{pages/identifying-threats-3.adoc}
+- @opt-printable-exercise{pages/threats-to-validity-project.adoc}

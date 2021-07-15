@@ -1,0 +1,28 @@
+= Creating Circles of Evaluation from Arithmetic Expressions 3
+
+++++
+<style>
+  #content td * {text-align: left;}
+  #content td {height: 175pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each expression on the left, draw its Circle of Evaluation on the right.
+
+@do{
+  (define expr1 '(* 9 (+ 17 2)))
+  (define expr2 '(* (+ 2 17) (- 12 8)))
+  (define expr3 '(- 19 (+ 12 11)))
+  (define expr4 '(frac 7 (* 7 (+ 9 8))))
+}
+
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|    | Math Expression                | Circle of Evaluation
+|*@n*| @show{(sexp->math expr1)}      | @showsoln{(sexp->coe expr1)}
+|*@n*| @show{(sexp->math expr2)}      | @showsoln{(sexp->coe expr2)}
+|*@n*| @show{(sexp->math expr3)}      | @showsoln{(sexp->coe expr3)}
+|*@n*| @show{(sexp->math expr4)}      | @showsoln{(sexp->coe expr4)}
+|===

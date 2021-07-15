@@ -1,0 +1,89 @@
+= Writing Code using Defined Values
+
+++++
+<style>
+#content div.circleevalsexp {width: auto !important; }
+#content tr:nth-child(odd) {height: 3.5in;}
+</style>
+++++
+@n On the line below, *write the Code* to define `PRIZE-STAR` as a pink, outline star of size 65.
+
+@span{.blankline}{@showsoln{(sexp->code '(define PRIZE-STAR (star 65 "outline" "pink"))) }}
+
+@vspace{1ex}
+
+Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and write the Code for each of the exercises. One Circle of Evaluation has been done for you.
+
+@vspace{1ex}
+
+
+[cols="<1a,<1a", stripes="none"]
+|===
+|
+--
+@n The outline of a pink star that is three times the size of the original (using `scale`)
+--
+
+@vspace{1ex}
+
+*Circle of Evaluation:*
+
+[.center]
+@show{(sexp->coe '(scale 3 PRIZE-STAR))}
+|
+--
+@n The outline of a pink star that is half the size of the original (using `scale`)
+--
+@vspace{1ex}
+
+*Circle of Evaluation:*
+
+[.center]
+@showsoln{(sexp->coe '(scale 0.5 PRIZE-STAR))}
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(scale 3 PRIZE-STAR))}}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(scale 0.5 PRIZE-STAR))}}
+
+
+|
+--
+@n  The outline of a pink star that is rotated 45 degrees
+
+_(It should be the same size as the original.)_
+--
+
+@vspace{1ex}
+
+*Circle of Evaluation:*
+@showsoln{(sexp->coe '(rotate 45 PRIZE-STAR))}
+|
+--
+@n The outline of a pink star that is three times as big as the original *and* has been rotated 45 degrees
+--
+
+@vspace{1ex}
+
+*Circle of Evaluation:*
+
+@showsoln{(sexp->coe '(scale 3(rotate 45 PRIZE-STAR)))}
+@ifsoln{_or_}
+@showsoln{(sexp->coe '(rotate 45 (scale 3 PRIZE-STAR)))}
+
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(rotate 45 PRIZE-STAR))}}
+| *Code:* @fitb{21em}{@showsoln{
+	(sexp->code '(scale 3(rotate 45 PRIZE-STAR)))}
+@ifsoln{_or_}
+@showsoln{(sexp->code '(rotate 45 (scale 3 PRIZE-STAR)))}
+}
+|===
+
+@vspace{1ex}
+
+@n How does defining values help you as a programmer?
+
+@span{.blankline}
+
+@span{.blankline}
+
+@span{.blankline}
+

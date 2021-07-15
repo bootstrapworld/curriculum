@@ -1,0 +1,55 @@
+= Matching Circles of Evaluation and Arithmetic Expressions
+
+++++
+<style>
+  #content td * {text-align: center;}
+  #content td {height: 150pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Draw a line from each Circle of Evaluation on the left to the corresponding arithmetic expression on the right.
+
+@do{
+  (define expr1 '(/ (* 1 1) 1))
+  (define expr2 '(/ 1 (* 1 1)))
+  (define expr3 '(* (- 1 1) (+ 1 1)))
+  (define expr4 '(- (+ 1 1) 1))
+  (define expr5 '(* (+ 1 (- 1 1)) (+ 1 1)))
+
+  (define coe1 (sexp->coe expr1))
+  (define coe2 (sexp->coe expr2))
+  (define coe3 (sexp->coe expr3))
+  (define coe4 (sexp->coe expr4))
+  (define coe5 (sexp->coe expr5))
+
+}
+
+[cols="^.^10a,^.^3a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Circle of Evaluation
+|||
+| Arithmetic Expression
+
+| @show{(sexp->coe expr1)}
+|*@n*@showsoln{"-C" }||*A*
+| @show{(sexp->math expr2 #:parens true)}
+
+| @show{(sexp->coe expr2)}
+|*@n*@showsoln{"-A" }||*B*
+| @show{(sexp->math expr4 #:parens true)}
+
+| @show{(sexp->coe expr3)}
+|*@n*@showsoln{"-E" }||*C*
+| @show{(sexp->math expr1 #:parens true)}
+
+| @show{(sexp->coe expr4)}
+|*@n*@showsoln{"-B" }||*D*
+| @show{(sexp->math expr5 #:parens true)}
+
+| @show{(sexp->coe expr5)}
+|*@n*@showsoln{"-D" }||*E*
+| @show{(sexp->math expr3 #:parens true)}
+
+|===

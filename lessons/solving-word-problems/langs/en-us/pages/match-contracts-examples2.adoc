@@ -1,0 +1,69 @@
+[.landscape]
+
+=  Matching Contracts and Examples 2
+
+++++
+<style>
+#content tt.pyret, tt.racket { font-size: .8rem; }
+#content td {padding: 20px 0px !important; }
+</style>
+++++
+
+@do{(define e5a
+   (code '(EXAMPLE (match 30)
+         (star (* 30 2) "outline" "purple"))))
+
+(define e5b
+   (code '(EXAMPLE (match 24)
+         (star (* 24 2) "outline" "purple"))))
+
+(define e6a
+   (code '(EXAMPLE (match (star 20 "outline" "red") 3)
+          (* 3
+            (image-height
+               (star 20 "outline" "red"))))))
+
+(define e6b
+   (code '(EXAMPLE (match (circle 10 "solid" "silver") 16)
+         (* 16
+            (image-height
+                (circle 10 "solid" "silver"))))))
+
+(define e7a
+   (code '(EXAMPLE (match "triangle" "blue")
+         (triangle 40 "outline" "blue"))))
+
+(define e8a
+   (code '(EXAMPLE (match (string-length "coffee") (string-length "tea"))
+         (+ 6 3))))
+
+(define e9a
+   (code '(EXAMPLE (match (string-length "tabletop"))
+         "8")))
+
+(define e9b
+   (code '(EXAMPLE (match 1.50)
+         "greater than 1")))
+
+(define c5 (contract "match" '("Number") "Image"))
+(define c6 (contract "match" '("Images" "Number") "Number"))
+(define c7 (contract "match" '("String" "String") "Image"))
+(define c8 (contract "match" '("Number" "Number") "Number"))
+(define c9 (contract "match" '("Number") "String"))
+
+}
+
+Match each Example on the left with the Contract on the right. NOTE: Multiple examples may match to the same contract!
+
+[cols=".^12a,^.^2a,2a,^.^1a,.^8a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Contract                   |                      ||       | Examples
+| @show{e9b}   |*1*@showsoln{"-A" }||       |
+| @show{e5b}   |*2*@showsoln{"-B" }||       |
+| @show{e9a}   |*3*@showsoln{"-A" }||*A*    | @show{c9}
+| @show{e6a}   |*4*@showsoln{"-E" }||*B*    | @show{c5}
+| @show{e6b}   |*5*@showsoln{"-E" }||*C*    | @show{c8}
+| @show{e7a}   |*6*@showsoln{"-D" }||*D*    | @show{c7}
+| @show{e5a}   |*7*@showsoln{"-B" }||*E*    | @show{c6}
+| @show{e8a}   |*8*@showsoln{"-C" }||       |
+|===

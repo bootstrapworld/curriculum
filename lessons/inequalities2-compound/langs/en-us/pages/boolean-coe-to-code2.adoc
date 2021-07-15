@@ -1,0 +1,32 @@
+= Converting Circles of Evaluation with Booleans to Code 2
+
+++++
+<style>
+  #content td {height: 150pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+For each Circle of Evaluation on the left-hand side, write the code for the Circle on the right-hand side
+
+@do{
+(define expr1 '(and (string=? place "safe")
+                    (or (>= x 50) (<= y 2))))
+(define expr2 '(and (or (= 6 7) (> 7 5)) (< 8 10)))
+(define expr3 '(string=? "6" "7"))
+(define expr4 '(> (+ 6 7) 15))
+(define expr5 '(or (= (* 6 5) 30) (< 8 9)))
+                 ;(= (string-length "Bananas") 8)
+
+}
+
+[cols=".^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Code
+|*@n*| @show{(sexp->coe expr1)}    | @showsoln{(sexp->code expr1) }
+|*@n*| @show{(sexp->coe expr2)}    | @showsoln{(sexp->code expr2) }
+|*@n*| @show{(sexp->coe expr3)}    | @showsoln{(sexp->code expr3) }
+|*@n*| @show{(sexp->coe expr4)}    | @showsoln{(sexp->code expr4) }
+|*@n*| @show{(sexp->coe expr5)}    | @showsoln{(sexp->code expr5) }
+|===

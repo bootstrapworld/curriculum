@@ -1,0 +1,48 @@
+= Compound Inequality Functions
+
+++++
+<style>
+#content td {
+	padding: .5625em 0 !important;
+	height: 200px;
+}
+#content td p, #content .centered-image{padding: 0px; margin:0px}
+</style>
+++++
+
+Each of the plots below was generated using the code `inequality(comp-ineq, [list: -1, 0, 1.6, 3, 5.2, 7, 8.1, 9] )`.  With the exception of the example, each plot below was defined using the numbers 3 and 7. Write the code for how `comp-ineq` was defined for each plot in the space provided.
+
+[cols="^.<1"]
+|===
+
+a| @centered-image{../images/comp-ineq0.png}
+
+@vspace{1ex}
+
+*code:* @fitb{40em}{@show{(sexp->code '(define (comp-ineq x) (and (> x 0) (<= x 8.1))))}}
+
+a| @centered-image{../images/comp-ineq2.png}
+
+@vspace{1ex}
+
+*code:* @fitb{40em}{@showsoln{(sexp->code '(define (comp-ineq x)(and (> x 3) (< x 7))))}}
+
+a| @centered-image{../images/comp-ineq3.png}
+
+@vspace{1ex}
+
+*code:* @fitb{40em}{@showsoln{(sexp->code '(define (comp-ineq x)(or (> x 3) (< x 7))))}}
+
+a| @centered-image{../images/comp-ineq4.png}
+
+@vspace{1ex}
+
+*code:* @fitb{40em}{@showsoln{(sexp->code '(define (comp-ineq x)(or (< x 3) (>= x 7))))}}
+
+a| @centered-image{../images/comp-ineq1.png}
+
+@vspace{1ex}
+
+*code:* @fitb{40em}{@showsoln{(sexp->code '(define (comp-ineq x)(and (< x 3) (> x 7))))}}
+
+|===

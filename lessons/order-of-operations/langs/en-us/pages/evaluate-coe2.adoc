@@ -1,0 +1,54 @@
+= Evaluating Circles of Evaluation 2
+
+++++
+<style>
+  #content td {height: 75pt;}
+</style>
+++++
+
+@vspace{2ex}
+
+Write each Circle of Evaluation as a math expression and evaluate it.
+@ifsoln{*Teachers:* the answers below are shown with only the _necessary_ parentheses. If a student chooses to add additional (correct) parentheses, they will still have the correct answer.}
+
+@do{
+  (define expr1 '(- 12 (* 2 5)))
+  (define expr2 '(+ (* 2 (+ 3 1)) 10))
+  (define expr3 '(+ (/ 56 (* 2 4)) (- -7 3)))
+  (define expr4 '(* -7 (+ 9 (/ 14 2))))
+  (define expr5 '(+ (/ 15 -3) (- 30 (+ 2 (* 7 3)))))
+  (define expr6 '(- (* -3 (/ 8 2)) (+ 7 (/ 22 (- 15 4)))))
+}
+
+[cols=".^1a,^.^10a,^.^8a,^.^1a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation
+| Math Expression
+| Answer
+
+|*@n*| @show{(sexp->coe  expr1)}
+|  @showsoln{(sexp->math expr1)}
+|  @showsoln{(eval expr1) }
+
+|*@n*| @show{(sexp->coe  expr2)}
+|  @showsoln{(sexp->math expr2)}
+|  @showsoln{(eval expr2) }
+
+|*@n*| @show{(sexp->coe  expr3)}
+|  @showsoln{(sexp->math expr3)}
+|  @showsoln{(eval expr3) }
+
+|*@n*| @show{(sexp->coe  expr4)}
+|  @showsoln{(sexp->math expr4)}
+|  @showsoln{(eval expr4) }
+
+|*@n*| @show{(sexp->coe  expr5)}
+|  @showsoln{(sexp->math expr5)}
+|  @showsoln{(eval expr5) }
+
+|*@n*| @show{(sexp->coe  expr6)}
+|  @showsoln{(sexp->math expr6)}
+|  @showsoln{(eval expr6) }
+
+|===
+
