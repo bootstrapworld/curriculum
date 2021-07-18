@@ -214,27 +214,28 @@ td.halign-center div.circleevalsexp {
 .sidebar {
   display:    block;
   position:   fixed;
-  top:        150px;
-  left:       calc(100% - 100px);
-  width:      250px;
-  height:     calc(100% - 150px);
+  top:        175px;
+  left:       -200px;
+  width:      225px;
+  height:     calc(100% - 175px);
   background: #eee;
   opacity:    0.2;
   border-top: solid 1px black;
-  border-left: solid 4px black;
+  border-right: solid 4px black;
   transition: all 0.2s;
   box-shadow: -1px 2px 6px black;
+  z-index:    9999;
   overflow:   scroll;
 }
 
-.sidebar:hover { opacity: 1;   left: calc(100% - 250px); }
+.sidebar:hover { opacity: 1;   left: 0px; }
 .sidebar .sidebarlessons ul { 
   background: white; 
-  margin: 10px;
-  box-shadow: inset -4px 0px 4px black;
-  height:  250px;
-  overflow:  scroll;
-  padding: 10px;
+  margin:     10px;
+  box-shadow: inset 4px 0px 4px black;
+  height:     250px;
+  overflow:   scroll;
+  padding:    10px;
 }
 .sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
 .sidebarlessons li:nth-child(odd) { background: #b7d89333; }
@@ -249,8 +250,8 @@ td.halign-center div.circleevalsexp {
 .sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
-
-.sidebarbadges li {list-style-type: none; display: inline-block;}
+.sidebarbadges ul { margin-left: 0px; text-align: center; }
+.sidebarbadges li { list-style-type: none; display: inline-block; }
 .sidebarbadges img {width: 75px; transition: width 0.5s; }
 .sidebarbadges img:hover {width: 200px; }
 
