@@ -13,8 +13,9 @@
 (require "standards-k12cs-dictionary.rkt")
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
-(require "textbook-cmp-dictionary.rkt")
+(require "standards-ia-dictionary.rkt")
 (require "textbook-im-dictionary.rkt")
+(require "textbook-cmp-dictionary.rkt")
 
 (define *standards-list*
   (list
@@ -24,6 +25,7 @@
     (list "K12CS"   "K-12CS" *k12cs-standards-list*)
     (list "NGSS"    "Next-Gen Science" *ngss-standards-list*)
     (list "OK"      "Oklahoma" *ok-standards-list*)
+    (list "IA"      "Iowa" *iowa-standards-list*)
     (list "CMP"     "Connected Math" *cmp-standards-list*)
     (list "IM"      "Illustrative Math" *im-standards-list*)
     ))
