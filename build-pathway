@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-14 # last modified
+LASTMOD=2021-07-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -834,6 +834,7 @@ function processadoc() {
             # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
             ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
             # If it's a landscape page, the "fat margin" is on the left
+            test -f $f || echo --- $f NOT FOUND!
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
               ASPECT="-O Landscape --margin-top 12.7mm --margin-right 12.7mm --margin-bottom 12.7mm --margin-left 18mm"
             fi
@@ -1467,10 +1468,15 @@ function collectworkbookpages() {
           echo $f >> .workbook-pages.txt.kp
         elif test "${f%.adoc}" = "$f"; then
           echo $f >> .workbook-pages.txt.kp
-        elif head -5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
-          echo $f landscape >> .workbook-pages.txt.kp
         else
-          echo $f >> .workbook-pages.txt.kp
+          g=${f%.adoc}.html
+          if test -f $f && head -n 5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
+            echo $f landscape >> .workbook-pages.txt.kp
+          elif test -f $g && head -n 60 ../"$g"|grep -q 'body.*landscape'; then
+            echo $f landscape >> .workbook-pages.txt.kp
+          else
+            echo $f >> .workbook-pages.txt.kp
+          fi
         fi
       done < ../workbook-pages.txt
 
