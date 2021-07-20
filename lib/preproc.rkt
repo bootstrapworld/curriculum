@@ -13,6 +13,7 @@
 (require "the-standards-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
 (require "lessons-and-badges.rkt")
+(require "lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
 ;(require "draw-dep-diag.rkt")
 
@@ -130,6 +131,8 @@
 (define *standards-met* '())
 
 (define *badges-merited* '())
+
+(define *textbooks-used* '())
 
 (define *lesson-prereqs* '())
 
@@ -270,6 +273,11 @@
   (unless (member b *badges-merited*)
     (set! *badges-merited* (cons b *badges-merited*))))
 
+(define (add-textbook tb)
+  ;(printf "doing add-textbook ~s\n" tb)
+  (unless (member tb *textbooks-used*)
+    (set! *textbooks-used* (cons tb *textbooks-used*))))
+
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
   (let ([vv (unbox bx)])
@@ -400,6 +408,22 @@
             (let ([img (format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)])
               (display (enclose-tag "li" "" img) o)
               (newline o)))])
+  (display (create-end-tag "ul") o)
+  (display (create-end-tag "div") o)
+  (newline o))
+
+(define (display-textbooks-bar o)
+  ;(printf "doing display-textbooks-bar\n")
+  (display (create-begin-tag "div" ".sidebartextbooks") o)
+  (display (create-begin-tag "ul" "") o)
+  (cond [(null? *textbooks-used*)
+         (when *lesson-plan*
+           (printf "WARNING: ~a: No textbooks specified\n" (errmessage-context)))]
+        [else
+          ;(printf "Textbooks present for ~s\n" *lesson-plan*)
+          (for ([bk *textbooks-used*])
+            (display (enclose-tag "li" "" bk) o)
+            (newline o))])
   (display (create-end-tag "ul") o)
   (display (create-end-tag "div") o)
   (newline o))
@@ -946,6 +970,11 @@
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-badge s))))
+
+        (for ([x *lessons-and-textbooks*])
+          (when (string=? (car x) *lesson-plan*)
+            (for ([s (cdr x)])
+              (add-textbook s))))
         )
       ;
       (when (or *lesson-plan*
@@ -1316,6 +1345,7 @@
                     (display-prereqs-bar o)
                     (display-standards-bar o)
                     (display-badges-bar o)
+                    (display-textbooks-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
