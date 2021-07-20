@@ -3,9 +3,9 @@
 ;FIXME what wd be the canonical location of this file?
 ;      the pathway top dir?
 
-(provide *lessons-and-standards*)
+(provide *lessons-and-textbooks*)
 
-(define *lessons-and-standards*
+(define *lessons-and-textbooks*
   '(
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CORE
