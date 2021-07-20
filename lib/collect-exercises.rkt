@@ -11,7 +11,7 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(define *exercises-list-file* "pages/.cached/.exercise-pages.txt.kp")
+(define *exercises-list-file* "pages/.cached/.exercise-pages-ls.txt.kp")
 
 (define *exercises-files* '())
 

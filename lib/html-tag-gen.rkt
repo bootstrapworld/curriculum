@@ -50,10 +50,10 @@
   (enclose-tag "div" classes s))
 
 (define (enclose-textarea classes s #:multi-line [multi-line #f])
-  (let ([textarea "tt"]) ;shd be "textarea" eventually
+  (let ([textarea "code"]) ;shd be "textarea" eventually
     (let ([ta (enclose-tag textarea classes s)])
       (if multi-line
-          (enclose-div ".obeyspaces" ta)
+          (enclose-span ".obeyspaces" ta)
           ta))))
 
 (define (enclose-textarea-2 classes s #:multi-line [multi-line #f])
