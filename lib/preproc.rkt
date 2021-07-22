@@ -415,6 +415,7 @@
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
   (display (create-begin-tag "div" ".sidebartextbooks") o)
+  (display "*Textbooks*\n" o)
   (display (create-begin-tag "ul" "") o)
   (cond [(null? *textbooks-used*)
          (when *lesson-plan*
@@ -1344,8 +1345,8 @@
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    (display-badges-bar o)
                     (display-textbooks-bar o)
+                    (display-badges-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)

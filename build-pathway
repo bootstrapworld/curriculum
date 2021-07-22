@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-18 # last modified
+LASTMOD=2021-07-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -574,7 +574,7 @@ function resolveabbrevs() {
     -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/<p>\(<div\)/\1/' \
     $f
   $SED -i \
-    -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="paragraph"><!--/' \
+    -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="sidebartitle">Toolbar<\/div><div class="paragraph"><!--/' \
     $f
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
