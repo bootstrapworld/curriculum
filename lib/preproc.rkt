@@ -1610,8 +1610,7 @@
         (when *lesson*
           (fprintf op (string-append
                         "\n[.alignedStandardsIntro]\n"
-                        "_Select one or more standards from the menu on the left (⌘-click "
-                        "on Mac, Ctrl-click elsewhere)._\n\n")))
+                        "_Click on a standard (or ⌘/Ctrl-Click multiple) from the menu on the left._\n\n")))
         (for ((dict *dictionaries-represented*))
           (let ([dict-standards-met
                   (filter (lambda (s) (string=? (list-ref s 3) dict))
