@@ -344,7 +344,7 @@
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
     ;(display "[.sidebarlessons]\n" o)
-    (display "*Lessons*\n" o)
+    (display "*Lessons* %SIDEBARLESSONSCHECKBOX%\n" o)
     ;(display "== Pathway\n" o)
 
     ;(newline o)
@@ -366,7 +366,6 @@
           (newline o))))
 
     (display (create-end-tag "ul") o)
-    ;(newline o)
     (display (create-end-tag "div") o)
     (newline o)
     ))
@@ -1563,10 +1562,9 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
-  ;(printf "doing display-standards-selection\n")
+  ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
-    (print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
