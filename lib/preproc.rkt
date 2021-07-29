@@ -11,6 +11,7 @@
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
+(require "the-textbook-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
 (require "lessons-and-badges.rkt")
 (require "lessons-and-textbooks.rkt")
@@ -420,10 +421,12 @@
          (when *lesson-plan*
            (printf "WARNING: ~a: No textbooks specified\n" (errmessage-context)))]
         [else
-          ;(printf "Textbooks present for ~s\n" *lesson-plan*)
+          ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
           (for ([bk *textbooks-used*])
-            (display (enclose-tag "li" "" bk) o)
-            (newline o))])
+            (let ([title (assoc bk *textbook-list*)])
+              (set! bk (if title (cadr title) bk))
+              (display (enclose-tag "li" "" bk) o)
+              (newline o)))])
   (display (create-end-tag "ul") o)
   (display (create-end-tag "div") o)
   (newline o))

@@ -8,7 +8,6 @@
 (require "standards-k12cs-dictionary.rkt")
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
-(require "textbook-cmp-dictionary.rkt")
 
 (require "lessons-and-standards.rkt")
 
