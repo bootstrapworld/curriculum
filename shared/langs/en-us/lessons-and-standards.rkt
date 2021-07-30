@@ -60,7 +60,6 @@
         "OK.4.AP.V.01"; identical standard
         "OK.5.AP.V.01"; identical standard
         "2-AP-11"
-        "CMP.6.6" 
         )
 
     ("simple-dataypes" 
@@ -98,7 +97,6 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
-        "CMP.8.2"
         )
 
     ("flags" 
@@ -202,8 +200,6 @@
         "OK.A1.A.3"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
-        "CMP.6.1"
-        "CMP.7.2"
         )
 
     ("piecewise-functions" 
@@ -218,7 +214,6 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.1"
-        "CMP.Alg-Ext.2"
         )
 
     ("player-animation" 
@@ -285,8 +280,6 @@
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
-        "CMP.6.4"
-        "CMP.7.7"
         )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -332,7 +325,6 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
-        "CMP.8.1"
         )
     
       ("defining-table-functions" 
@@ -439,8 +431,6 @@
         "HSF.IF.C.9"
         "OK.PA.A.2.1"
         "OK.PA.A.2.2"
-        "CMP.7.5"
-        "CMP.8.1"
         )
 
     ("linearity2"
@@ -455,8 +445,6 @@
         "OK.PA.A.2.3"
         "OK.A1.A.4.1"
         "OK.A1.F.3.1"
-        "CMP.7.5"
-        "CMP.8.1"
         )
 
     ("linear-regression" 
@@ -479,7 +467,6 @@
         "9-12.Data and Analysis.Inference and Models"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
-        "CMP.8.1"
         )
 
     ("measures-of-center"
@@ -492,8 +479,6 @@
         "HS-SEP4-2"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2"
-        "CMP.6.7"
-        "CMP.8.1"
         )
 
     ("measures-of-spread" 
@@ -510,7 +495,6 @@
         "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
-        "CMP.6.7"
         )
 
     ("method-chaining" 
@@ -542,7 +526,6 @@
         "OK.PA.A.2.2"
         "OK.PA.D.2.2"
         "OK.L1.IC.C.02"
-        "CMP.7.8"
         )
 
     ("scatter-plots"
@@ -563,7 +546,6 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
-        "CMP.8.1"
         )
 
     ("table-methods" 

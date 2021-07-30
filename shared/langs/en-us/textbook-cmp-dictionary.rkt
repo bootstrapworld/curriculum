@@ -1,8 +1,8 @@
 #lang racket
 
-(provide *cmp-standards-list*)
+(provide *cmp-textbook-list*)
 
-(define *cmp-standards-list*
+(define *cmp-textbook-list*
 '(
 
   ; We are borrowing the infrastructure used for standards alignment,

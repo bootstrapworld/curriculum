@@ -11,6 +11,7 @@
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
+(require "the-textbook-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
 (require "lessons-and-badges.rkt")
 (require "lessons-and-textbooks.rkt")
@@ -344,7 +345,7 @@
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
     ;(display "[.sidebarlessons]\n" o)
-    (display "*Lessons*\n" o)
+    (display "*Lessons* %SIDEBARLESSONSCHECKBOX%\n" o)
     ;(display "== Pathway\n" o)
 
     ;(newline o)
@@ -366,7 +367,6 @@
           (newline o))))
 
     (display (create-end-tag "ul") o)
-    ;(newline o)
     (display (create-end-tag "div") o)
     (newline o)
     ))
@@ -415,16 +415,18 @@
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
   (display (create-begin-tag "div" ".sidebartextbooks") o)
-  (display "*Textbooks*\n" o)
+  (display "*Textbook Alignment*\n" o)
   (display (create-begin-tag "ul" "") o)
   (cond [(null? *textbooks-used*)
          (when *lesson-plan*
            (printf "WARNING: ~a: No textbooks specified\n" (errmessage-context)))]
         [else
-          ;(printf "Textbooks present for ~s\n" *lesson-plan*)
+          ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
           (for ([bk *textbooks-used*])
-            (display (enclose-tag "li" "" bk) o)
-            (newline o))])
+            (let ([title (assoc bk *textbook-list*)])
+              (set! bk (if title (cadr title) bk))
+              (display (enclose-tag "li" "" bk) o)
+              (newline o)))])
   (display (create-end-tag "ul") o)
   (display (create-end-tag "div") o)
   (newline o))
@@ -1563,10 +1565,9 @@
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
-  ;(printf "doing display-standards-selection\n")
+  ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
-    (print-standards-js o)
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
