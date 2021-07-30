@@ -120,8 +120,6 @@
       "    const lesson = li.getElementsByClassName('prerequisite');\n"
       "    if (lesson.length === 0) {\n"
       "      li.style.display = checkedP ? 'none' : 'block';\n"
-      "    } else {\n"
-      "      li.style.display = checkedP ? 'block' : 'none';\n"
       "    }\n"
       "  }\n"
       "}\n"
