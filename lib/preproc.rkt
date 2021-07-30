@@ -415,7 +415,7 @@
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
   (display (create-begin-tag "div" ".sidebartextbooks") o)
-  (display "*Textbooks*\n" o)
+  (display "*Textbook Alignment*\n" o)
   (display (create-begin-tag "ul" "") o)
   (cond [(null? *textbooks-used*)
          (when *lesson-plan*
