@@ -374,25 +374,19 @@
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
   (cond [(null? *standards-met*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No standards specified\n\n" (errmessage-context)))]
+         (display (create-begin-tag "div" ".sidebarstandards") o)
+         (display "*Standards*: _None_" o)
+         (display (create-end-tag "div") o)
+         (display "\n" o)]
         [else
-          ;(display "\n.Standards\n" o)
-          ;(display "\n\n=== Standards\n" o)
-          ;(display (create-begin-tag "div" ".sidebarstandards") o)
           (display "\n[.sidebarstandards,cols=\"a\"]" o)
           (display "\n|===\n" o)
           (display "| " o)
-          ;(display "[.sidebarstandards]\n" o)
-          ;(display "== Standards\n" o)
           (display "*Standards* (click one)\n" o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
           (display " | \n" o)
-          (display
-            "\ninclude::.pathway-standards.asc[]\n" o)
+          (display "\ninclude::.pathway-standards.asc[]\n" o)
           (display "|===\n" o)
-          ;(display (create-end-tag "div") o)
-          ;(newline o)
           ]))
 
 (define (display-badges-bar o)
@@ -415,19 +409,19 @@
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
   (display (create-begin-tag "div" ".sidebartextbooks") o)
-  (display "*Textbook Alignment*\n" o)
-  (display (create-begin-tag "ul" "") o)
-  (cond [(null? *textbooks-used*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No textbooks specified\n" (errmessage-context)))]
-        [else
-          ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
-          (for ([bk *textbooks-used*])
-            (let ([title (assoc bk *textbook-list*)])
-              (set! bk (if title (cadr title) bk))
-              (display (enclose-tag "li" "" bk) o)
-              (newline o)))])
-  (display (create-end-tag "ul") o)
+  (display "*Textbook Alignment*" o)
+  (when (null? *textbooks-used*) (display ": _None_" o))
+  (display "\n" o)
+  (unless (null? *textbooks-used*)
+    ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
+    (display (create-begin-tag "ul" "") o)
+    (for ([bk *textbooks-used*])
+      (let ([title (assoc bk *textbook-list*)])
+        (set! bk (if title (cadr title) bk))
+        (display (enclose-tag "li" "" bk) o)
+        (newline o)))
+    (display (create-end-tag "ul") o)
+    )
   (display (create-end-tag "div") o)
   (newline o))
 
