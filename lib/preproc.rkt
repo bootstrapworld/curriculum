@@ -1561,6 +1561,7 @@
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
+    (when narrative? (print-standards-js o))
     (when narrative? (fprintf o "= Standards\n\n"))
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
