@@ -117,6 +117,7 @@
         "IM.6.7.11"
 	"IM.6.7.12"
 	"IM.8.1.1"
+	"IM.Alg1.1.1" ; Converted dashes to dots
 	)
 
     ("order-of-operations" 
