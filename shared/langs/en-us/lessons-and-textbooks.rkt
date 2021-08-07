@@ -1,11 +1,12 @@
 #lang racket
 
-;FIXME what wd be the canonical location of this file?
-;      the pathway top dir?
-
 (provide *lessons-and-textbooks*)
 
-(define *lessons-and-textbooks*)
+; *lessons-and-textbooks* is a list of sublists, where each
+; sublist is of the form ("lesson-name" "textbook-label-1" ...)
+
+(define *lessons-and-textbooks*
+  '(
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CORE
 
@@ -327,11 +328,11 @@
 	"IM.Alg1.3.4"
         )
 
-	; it appeared that this BS:DS lesson was missing from this file, so xbousquet added it on Aug 6th
-	; grades 6 - 8 alignment may be needed here
-	("simple-datatypes"
-		"IM.Alg1.1.6"
-	)
+    ; it appeared that this BS:DS lesson was missing from this file, so xbousquet added it on Aug 6th
+    ; grades 6 - 8 alignment may be needed here
+    ("simple-datatypes"
+            "IM.Alg1.1.6"
+    )
 
     ("table-methods" 
         )
@@ -343,9 +344,10 @@
 	"IM.Alg1.3.9"	
 	)
 	
-	; it appeared that this BS:DS lesson was missing from this file, so xbousquet added it on Aug 6th
-	; grades 6 - 8 alignment may be needed here
-	("visualizing-the-shape-of-data"
-		"IM.Alg1.1.4"
-	)
-    ))
+    ; it appeared that this BS:DS lesson was missing from this file, so xbousquet added it on Aug 6th
+    ; grades 6 - 8 alignment may be needed here
+    ("visualizing-the-shape-of-data"
+            "IM.Alg1.1.4"
+    )
+
+))

@@ -565,42 +565,47 @@
          result)))
 
 (define (make-image img opts #:centered? [centered? #f])
-  (let ((img-anonymized
-          (system-echo
-            (format "~a/anonymize-filename" *progdir*) img)))
-    (cond (img-anonymized (set! img img-anonymized))
-          (else (cond ((file-exists? img)
-                       (printf "WARNING: Image file ~a anonymization failed\n\n" img))
-                      (else
-                        (printf "WARNING: Image file ~a not found\n\n" img))))))
-  (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
-         [rest-opts (if (pair? opts) (cdr opts) '())]
-         [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
-         [commaed-opts (string-join rest-opts ", ")]
-         [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
-         [text-wo-url (clean-up-url-in-image-text text)]
-         [img-link-txt (string-append
-            (enclose-span ".big" "&#x1f5bc;") "Show image")]
-         [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
-         [adoc-img
-          (string-append
-           (cond [*lesson-subdir*
-                   (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
-                           img text-wo-url commaed-opts)]
-                 [else
-                   (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-           img-link)])
-    ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-    (if (string=? text "")
-        (if centered?
-            (enclose-span ".centered-image" adoc-img)
-            adoc-img)
-        (enclose-span
-          (string-append ".tooltip"
-            (if centered? ".centered-image" ""))
-          (string-append
-            (enclose-span ".tooltiptext" text) "\n"
-            adoc-img)))))
+  ;(printf "doing make-image ~s\n" img)
+  (let ([img-anonymized #f])
+    (unless *narrative*
+      ;(printf "anonymizing ~s\n" img)
+      (set! img-anonymized
+        (system-echo (format "~a/anonymize-filename" *progdir*) img))
+      (cond [img-anonymized
+              ;(printf "anon img is ~s\n" img-anonymized)
+              (set! img img-anonymized)]
+            [else (cond [(file-exists? img)
+                         (printf "WARNING: Image file ~a anonymization failed\n\n" img)]
+                        [else
+                          (printf "WARNING: Image file ~a not found\n\n" img)])]))
+    (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
+           [rest-opts (if (pair? opts) (cdr opts) '())]
+           [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
+           [commaed-opts (string-join rest-opts ", ")]
+           [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
+           [text-wo-url (clean-up-url-in-image-text text)]
+           [img-link-txt (string-append
+                           (enclose-span ".big" "&#x1f5bc;") "Show image")]
+           [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
+           [adoc-img
+             (string-append
+               (cond [*lesson-subdir*
+                       (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
+                               img text-wo-url commaed-opts)]
+                     [else
+                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
+               img-link)])
+      ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
+      (if (string=? text "")
+          (if centered?
+              (enclose-span ".centered-image" adoc-img)
+              adoc-img)
+          (enclose-span
+            (string-append ".tooltip"
+              (if centered? ".centered-image" ""))
+            (string-append
+              (enclose-span ".tooltiptext" text) "\n"
+              adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
   (when (or *link-lint?* #t)
@@ -1102,11 +1107,11 @@
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
-                              (set! link-text (string-trim link-text "\"")) ;XXX
+                              (set! link-text (string-trim link-text "\"")) ;XXX:
                               (display (make-link adocf link-text #:link-type directive) o))]
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive)]
-                                   [adocf (car args)] ;only one right? FIXME
+                                   [adocf (car args)] ;only one right? FIXME:
                                    [rest-args (string-join
                                                 (map string-trim (cdr args)) ",")]
                                    )
@@ -1766,7 +1771,7 @@
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(list? e) (let ([a (car e)])
-                     (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX
+                     (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
@@ -1776,7 +1781,7 @@
                                                     #:parens parens)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if (or wrap parens) (format "({zwsp}~a{zwsp})" x) x)) ]
-                           [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
+                           [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX:
                                                  (infix-op? a #:pyret #f)
                                                  ))
                             (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
@@ -1828,7 +1833,7 @@
     (lambda (e #:wescheme [wescheme #f])
       ;(printf "doing holes-to-underscores ~s\n" e)
       (cond [(or (null? e) (number? e) (string? e)) e]
-            [(eq? e 'BSLeaveAHoleHere) hole] ;XXX used anymore?
+            [(eq? e 'BSLeaveAHoleHere) hole] ;XXX: used anymore?
             [(eq? e 'BSLeaveAHoleHere2) hole2]
             [(eq? e 'BSLeaveAHoleHere3) hole3]
             [(and (eq? e 'frac) wescheme)

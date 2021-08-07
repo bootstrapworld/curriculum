@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-07-28 # last modified
+LASTMOD=2021-08-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -844,7 +844,7 @@ function processadoc() {
 
             echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
-            # checkifsinglepdfpage "$fpdf" #FIXME
+            # checkifsinglepdfpage "$fpdf" #FIXME:
             #test $DEBUG || rm $TMPHTML
           fi
         fi
@@ -1643,6 +1643,7 @@ function buildpathway() {
     buildlessons
 
     export WORKBOOKPAGE=1
+    export NARRATIVE=1 #NOTE: not really, but to prevent anonymizing shared image files
 
     if test $REFRESHFRONTMATTER; then
       if test -d front-matter; then
@@ -1682,6 +1683,7 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then touch resources; fi
 
+    export NARRATIVE=
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
 
