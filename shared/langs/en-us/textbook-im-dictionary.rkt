@@ -724,4 +724,4 @@
     "Using Quadratic Equations to Model Situations and Solve Problems")
 
   ; End of chapter/section list
- ))
+ )))
