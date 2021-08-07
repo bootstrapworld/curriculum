@@ -5,7 +5,8 @@
 
 (provide *lessons-and-textbooks*)
 
-(define *lessons-and-textbooks*)
+(define *lessons-and-textbooks*
+  '(
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CORE
 
@@ -348,4 +349,5 @@
 	("visualizing-the-shape-of-data"
 		"IM.Alg1.1.4"
 	)
-    ))
+    )
+)
