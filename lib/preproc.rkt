@@ -55,6 +55,8 @@
 
 (define *narrative* (truthy-getenv "NARRATIVE"))
 
+(define *boilerplate* (truthy-getenv "BOILERPLATE"))
+
 (define *teacher-resources* (truthy-getenv "TEACHER_RESOURCES"))
 
 (define *link-lint?* (truthy-getenv "LINT"))
@@ -567,7 +569,7 @@
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "doing make-image ~s\n" img)
   (let ([img-anonymized #f])
-    (unless *narrative*
+    (unless (or *narrative* *boilerplate*)
       ;(printf "anonymizing ~s\n" img)
       (set! img-anonymized
         (system-echo (format "~a/anonymize-filename" *progdir*) img))
@@ -1566,8 +1568,8 @@
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
-    (when narrative? (print-standards-js o))
     (when narrative? (fprintf o "= Standards\n\n"))
+    (when narrative? (print-standards-js o))
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
