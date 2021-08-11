@@ -55,6 +55,8 @@
 
 (define *narrative* (truthy-getenv "NARRATIVE"))
 
+(define *boilerplate* (truthy-getenv "BOILERPLATE"))
+
 (define *teacher-resources* (truthy-getenv "TEACHER_RESOURCES"))
 
 (define *link-lint?* (truthy-getenv "LINT"))
@@ -374,25 +376,19 @@
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
   (cond [(null? *standards-met*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No standards specified\n\n" (errmessage-context)))]
+         (display (create-begin-tag "div" ".sidebarstandards") o)
+         (display "*Standards*: _None_" o)
+         (display (create-end-tag "div") o)
+         (display "\n" o)]
         [else
-          ;(display "\n.Standards\n" o)
-          ;(display "\n\n=== Standards\n" o)
-          ;(display (create-begin-tag "div" ".sidebarstandards") o)
           (display "\n[.sidebarstandards,cols=\"a\"]" o)
           (display "\n|===\n" o)
           (display "| " o)
-          ;(display "[.sidebarstandards]\n" o)
-          ;(display "== Standards\n" o)
           (display "*Standards* (click one)\n" o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
           (display " | \n" o)
-          (display
-            "\ninclude::.pathway-standards.asc[]\n" o)
+          (display "\ninclude::.pathway-standards.asc[]\n" o)
           (display "|===\n" o)
-          ;(display (create-end-tag "div") o)
-          ;(newline o)
           ]))
 
 (define (display-badges-bar o)
@@ -415,19 +411,19 @@
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
   (display (create-begin-tag "div" ".sidebartextbooks") o)
-  (display "*Textbook Alignment*\n" o)
-  (display (create-begin-tag "ul" "") o)
-  (cond [(null? *textbooks-used*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No textbooks specified\n" (errmessage-context)))]
-        [else
-          ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
-          (for ([bk *textbooks-used*])
-            (let ([title (assoc bk *textbook-list*)])
-              (set! bk (if title (cadr title) bk))
-              (display (enclose-tag "li" "" bk) o)
-              (newline o)))])
-  (display (create-end-tag "ul") o)
+  (display "*Textbook Alignment*" o)
+  (when (null? *textbooks-used*) (display ": _None_" o))
+  (display "\n" o)
+  (unless (null? *textbooks-used*)
+    ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
+    (display (create-begin-tag "ul" "") o)
+    (for ([bk *textbooks-used*])
+      (let ([title (assoc bk *textbook-list*)])
+        (set! bk (if title (cadr title) bk))
+        (display (enclose-tag "li" "" bk) o)
+        (newline o)))
+    (display (create-end-tag "ul") o)
+    )
   (display (create-end-tag "div") o)
   (newline o))
 
@@ -571,42 +567,47 @@
          result)))
 
 (define (make-image img opts #:centered? [centered? #f])
-  (let ((img-anonymized
-          (system-echo
-            (format "~a/anonymize-filename" *progdir*) img)))
-    (cond (img-anonymized (set! img img-anonymized))
-          (else (cond ((file-exists? img)
-                       (printf "WARNING: Image file ~a anonymization failed\n\n" img))
-                      (else
-                        (printf "WARNING: Image file ~a not found\n\n" img))))))
-  (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
-         [rest-opts (if (pair? opts) (cdr opts) '())]
-         [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
-         [commaed-opts (string-join rest-opts ", ")]
-         [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
-         [text-wo-url (clean-up-url-in-image-text text)]
-         [img-link-txt (string-append
-            (enclose-span ".big" "&#x1f5bc;") "Show image")]
-         [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
-         [adoc-img
-          (string-append
-           (cond [*lesson-subdir*
-                   (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
-                           img text-wo-url commaed-opts)]
-                 [else
-                   (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-           img-link)])
-    ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-    (if (string=? text "")
-        (if centered?
-            (enclose-span ".centered-image" adoc-img)
-            adoc-img)
-        (enclose-span
-          (string-append ".tooltip"
-            (if centered? ".centered-image" ""))
-          (string-append
-            (enclose-span ".tooltiptext" text) "\n"
-            adoc-img)))))
+  ;(printf "doing make-image ~s\n" img)
+  (let ([img-anonymized #f])
+    (unless (or *narrative* *boilerplate*)
+      ;(printf "anonymizing ~s\n" img)
+      (set! img-anonymized
+        (system-echo (format "~a/anonymize-filename" *progdir*) img))
+      (cond [img-anonymized
+              ;(printf "anon img is ~s\n" img-anonymized)
+              (set! img img-anonymized)]
+            [else (cond [(file-exists? img)
+                         (printf "WARNING: Image file ~a anonymization failed\n\n" img)]
+                        [else
+                          (printf "WARNING: Image file ~a not found\n\n" img)])]))
+    (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
+           [rest-opts (if (pair? opts) (cdr opts) '())]
+           [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
+           [commaed-opts (string-join rest-opts ", ")]
+           [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
+           [text-wo-url (clean-up-url-in-image-text text)]
+           [img-link-txt (string-append
+                           (enclose-span ".big" "&#x1f5bc;") "Show image")]
+           [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
+           [adoc-img
+             (string-append
+               (cond [*lesson-subdir*
+                       (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
+                               img text-wo-url commaed-opts)]
+                     [else
+                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
+               img-link)])
+      ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
+      (if (string=? text "")
+          (if centered?
+              (enclose-span ".centered-image" adoc-img)
+              adoc-img)
+          (enclose-span
+            (string-append ".tooltip"
+              (if centered? ".centered-image" ""))
+            (string-append
+              (enclose-span ".tooltiptext" text) "\n"
+              adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
   (when (or *link-lint?* #t)
@@ -1108,11 +1109,11 @@
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
-                              (set! link-text (string-trim link-text "\"")) ;XXX
+                              (set! link-text (string-trim link-text "\"")) ;XXX:
                               (display (make-link adocf link-text #:link-type directive) o))]
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive)]
-                                   [adocf (car args)] ;only one right? FIXME
+                                   [adocf (car args)] ;only one right? FIXME:
                                    [rest-args (string-join
                                                 (map string-trim (cdr args)) ",")]
                                    )
@@ -1568,6 +1569,7 @@
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
+    (when narrative? (print-standards-js o))
     (when narrative? (display (create-begin-tag "div" ".standard-menu-container") o))
     (cond [narrative?
             (display
@@ -1771,7 +1773,7 @@
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(list? e) (let ([a (car e)])
-                     (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX
+                     (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
@@ -1781,7 +1783,7 @@
                                                     #:parens parens)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if (or wrap parens) (format "({zwsp}~a{zwsp})" x) x)) ]
-                           [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX
+                           [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX:
                                                  (infix-op? a #:pyret #f)
                                                  ))
                             (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
@@ -1833,7 +1835,7 @@
     (lambda (e #:wescheme [wescheme #f])
       ;(printf "doing holes-to-underscores ~s\n" e)
       (cond [(or (null? e) (number? e) (string? e)) e]
-            [(eq? e 'BSLeaveAHoleHere) hole] ;XXX used anymore?
+            [(eq? e 'BSLeaveAHoleHere) hole] ;XXX: used anymore?
             [(eq? e 'BSLeaveAHoleHere2) hole2]
             [(eq? e 'BSLeaveAHoleHere3) hole3]
             [(and (eq? e 'frac) wescheme)
