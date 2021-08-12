@@ -19,7 +19,7 @@
                       *k12cs-standards-list*
                       *ngss-standards-list*
                       *ok-standards-list*
-                      *cmp-standards-list*)])
+                      )])
   (for ([std-desc std-list])
     (let ([std (car std-desc)])
       (set! *all-the-standards*
