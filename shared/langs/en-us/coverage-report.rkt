@@ -8,6 +8,7 @@
 (require "standards-k12cs-dictionary.rkt")
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
+(require "standards-ia-dictionary.rkt")
 
 (require "lessons-and-standards.rkt")
 
@@ -19,6 +20,7 @@
                       *k12cs-standards-list*
                       *ngss-standards-list*
                       *ok-standards-list*
+                      *iowa-standards-list*
                       )])
   (for ([std-desc std-list])
     (let ([std (car std-desc)])
