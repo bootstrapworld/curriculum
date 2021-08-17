@@ -4,45 +4,45 @@
 
 @n Complete the table using the first row as an example.
 
-@n Write the code to define the value of @show{(sexp->code 'sun)}. @fitb{39em}{@showsoln{(sexp->code '(define sun (radial-star 30 20 50 "solid" "yellow"))) }}
+@n Write the code to define the value of @show{(sexp->code 'sunny)}. @fitb{39em}{@showsoln{(sexp->code '(define sunny (radial-star 30 20 50 "solid" "yellow"))) }}
 
 @vspace{1ex}
 
-[cols="10a,^.^1a,6a", stripes="none", options="header"]
+[cols="11a,^.^1a,5a", stripes="none", options="header"]
 |===
 | Original Circle of Evaluation & Code
 | &rarr;
-| Use the _defined value_ @show{(sexp->code 'sun)} to simplify!
+| Use the _defined value_ @show{(sexp->code 'sunny)} to simplify!
 
 | @show{(sexp->coe '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| @show{(sexp->coe '(scale 3 sun))}
+| @show{(sexp->coe '(scale 3 sunny))}
 
 | Code: +
 @show{(sexp->code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | Code: +
-@show{(sexp->code '(scale 3 sun))}
+@show{(sexp->code '(scale 3 sunny))}
 
 | @show{(sexp->coe '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| @showsoln{(sexp->coe '(frame sun)) }
+| @showsoln{(sexp->coe '(frame sunny)) }
 
 | Code: +
 @show{(sexp->code '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | Code: +
-@showsoln{(sexp->code '(frame sun)) }
+@showsoln{(sexp->code '(frame sunny)) }
 
 | @show{(sexp->coe '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| @showsoln{(sexp->coe '(overlay (text "sun" 30 "black") sun)) }
+| @showsoln{(sexp->coe '(overlay (text "sun" 30 "black") sunny)) }
 
 | Code: +
 @show{(sexp->code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | Code: +
-@showsoln{(sexp->code '(overlay (text "sun" 30 "black") sun)) }
+@showsoln{(sexp->code '(overlay (text "sun" 30 "black") sunny)) }
 |===
 
 @n Test your code in the editor and make sure it produces what you would expect it to.

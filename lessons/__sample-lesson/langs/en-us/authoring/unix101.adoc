@@ -1,0 +1,191 @@
+= Unix 101
+
+The window (whether on a bonafide Linux system, macOS, or WSL on
+Windows) in which you've been using various commands, including
+Git commands on the curriculum repository, is called a
+_terminal_.
+
+The terminal is like a listener that listens to your commands and
+does something appropriate, and listens for more.
+
+Each time it listens, it issues a _prompt_ such as
+
+  retabak@ABC-XYZ:~/src/curriculum$
+
+You enter your command at this prompt. 
+
+== Files and directories
+
+The prompt contains some
+information, some of it useful so you know where you are in your
+system. For instance,
+
+  ~/src/curriculum
+
+in the prompt is a _pathname_, and it tells you that your
+_current directory_ is `~/src/curriculum`, which means you are in
+the `curriculum` directory, which is in the `src` directory,
+which is in your `~` or _HOME_ directory.
+
+You can explicitly find out your current directory (in case the
+prompt isn't completely visible) with the command `pwd` (for
+Print Working Directory):
+
+  pwd
+
+All your data are in _files_, which are arranged in
+_directories_.  A directory is a file whose sole purpose is to
+contain other files (some of which may be directories).
+
+You are currently in
+some directory, and you can navigate to other directories using
+the command `cd` (for Change Directory).
+
+The command `ls` lists all the files in the current directory.
+You will notice that the files displayed by `ls` are color-coded.
+Files colored blue are directories.  You can use `cd` to go to
+any of these. E.g.,
+
+  cd pathways
+
+moves you in the file system so that you are currently in the
+directory called `pathways`. You can do `ls` in your new current
+directory, and go to further directories, which may be called
+_subdirectories_ to show that they're directories within
+directories. 
+
+If after doing `cd` to a subdirectory, you want to
+go back up to your original directory, do 
+
+  cd ..
+
+You can leap into nested subdirectories in a single bound, using
+the directory separator `/`. Thus, if your current directory
+contains the subdirectory `pathways`, and the latter contains
+another subdirectory `algebra`, you can do
+
+  cd pathways/algebra
+
+instead of typing
+
+  cd pathways
+
+followed by
+
+  cd algebra
+
+You can use the directory separator to get back up multiple
+directories too. Thus,
+
+  cd ../..
+
+is the same as typing
+
+  cd ..
+
+twice, and gets you back up two levels in the directory _tree_.
+
+Note that your terminal prompt already used the directory
+separator `/` to show you where you currently are, by listing the
+containing directories in order, e.g.,
+
+  ~/src/curriculum/pathways
+
+You can create a new subdirectory in your current directory with
+the command `mkdir`. E.g.,
+
+  mkdir blue
+
+creates a new, empty, subdirectory called `blue`. You can `cd` to
+it with `cd blue`, and typing `ls` will show you that it
+currently has nothing.
+
+You can remove a file with the `rm` command. E.g.,
+
+  rm discard.txt
+
+removes the file `discard.txt`.
+
+This only works for files that aren't directories. To remove a
+directory, add the option `-r`. E.g.,
+
+  rm -r blue
+
+removes the directory `blue`. Be careful with `rm` and `rm -r`.
+_Files and directories once removed can't be retrieved!_
+
+== Editing files
+
+You can create new files using a text editor. The text editor
+you'll be using is invoked with the command `nvim`.  Type 
+
+  nvim sample.adoc
+
+to open up the editor pointing to a new file called
+`sample.adoc`.
+
+The `nvim` editor has two main modes, Normal and Insert. When you
+start `nvim`, it's initially in Normal mode. You need to be in
+Insert mode in order to actually _insert_ anything in your file.
+To do this use the _editor command_ `i`, and type whatever you
+please.
+
+After you're done, type `ESC` (the escape key on the top left of
+your keyboard) to get back into Normal mode. Type `:` to put you
+in the editor's command line at the bottom of the screen, and `w`
+to write (i.e., save) your edits.  Type `:` followd `q` to quit.
+You will now be back at the terminal prompt, and typing `ls` will
+show you the newly created file `sample.adoc`.
+
+Get to know `i` and `ESC` very well. `i` gets you into Insert
+mode, and `ESC` gets you back into Normal mode. You mostly want
+to be in Normal mode unless you really want to insert text. As a
+visual aid, the editor will show `-- INSERT --` on the bottom
+line whenever you're in Insert mode.
+
+You can look at the contents of the file using the pager command
+`less`.
+
+  less sample.adoc
+
+You can exit the pager with `q`.
+
+You can re-edit the file by calling `nvim sample.adoc` again. Do
+so.
+
+Normal mode commands are used to move around in and perform large
+scale edits on files that aren't covered by simple insertion of
+text, which is done in Insert mode as we saw before.  Here are
+some important Normal mode commands:
+
+`h`, `j`, `k`, `l` move the cursor left, down, up, and right. You
+can also use the arrow keys, although you will find it easier to
+use `hjkl` as they are the _home row_ of your keyboard.
+
+`v` opens up a submode of Normal mode called Visual mode. Typing
+`hjkl` after `v` highlights the text covered. You can use `d` to
+delete it, then `i` to enter Insert mode and write replacement
+text.
+
+`:` opens up an editor command line at the bottom of your editor
+screen.
+
+`:e` can be used to open a new file to edit.
+
+`:w` writes ("saves") the changes you made recently.
+
+`:q` exits editing the file.
+
+`:e!` discards the changes you made to the current file,
+restoring the file as it was before the last save.
+
+There is clearly a lot more to the editor than these basics, but
+you will learn them as you need them. Here's a helpful Normal
+mode command you can use to learn the editor at your own pace:
+Type 
+
+  :Tutor
+
+and follow what it says. Don't worry about messing up the file
+that's offered by the tutor. Each time you start the tutor you'll
+get a clean uncorrupted file.

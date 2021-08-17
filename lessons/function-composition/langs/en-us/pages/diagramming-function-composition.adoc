@@ -2,9 +2,9 @@
 
 ++++
 <style>
-.listingblock pre {padding: 0;}
-.autonum::before { content: '('; }
-.topTable tr:first-child td * { background-color: #f7f7f8; }
+#content .listingblock pre {padding: 0;}
+#content .autonum::after { content: ')'; }
+#content .topTable tr:first-child td * { background-color: #f7f7f8; }
 </style>
 ++++
 
@@ -63,7 +63,7 @@ For each function composition diagrammed below, translate it into the equivalent
 !===
 ! Composition: 			! @show{(sexp->code comp1)}
 ! Operations: 			! @show{(sexp->code expr1)}
-! Evaluate for x = 4 	! @math{h(g(f(4))) = 27}
+! Evaluate for x = 4 	! @math{h(g(f(4))) = 17}
 !===
 
 | @n  @show{(sexp->coe comp2)}
@@ -73,7 +73,7 @@ For each function composition diagrammed below, translate it into the equivalent
 !===
 ! Composition: 			! @showsoln{(sexp->code comp2) }
 ! Operations: 			! @showsoln{(sexp->code expr2) }
-! Evaluate for x = 4 	! @fitb{9em}{@showsoln{@math{h(g(f(4))) = 27} }}
+! Evaluate for x = 4 	! @fitb{9em}{@showsoln{@math{g(f(h(4))) = 15} }}
 !===
 
 | @n  @show{(sexp->coe comp3)}

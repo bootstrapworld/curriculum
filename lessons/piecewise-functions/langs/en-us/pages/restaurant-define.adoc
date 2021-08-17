@@ -4,14 +4,16 @@
   #:range "Number"
   #:purpose "Given an item, produce the cost of that item"
   #:num-examples 4
-  #:example-list '(("hamburger" "6.00")
-                   ("pie" "2.25"))
+  #:example-list '(("hamburger" 6)
+                   ("onion rings" 3.5)
+                   ("fried tofu" 5.25)
+                   ("pie" 2.25))
   #:show-examples '((#f #f #f) (#f #f #f))
   #:param-list '(item)
   #:show-params? #f
   #:body '(cond
-[(string=? item "hamburger")     6.00]
-[(string=? item "onion rings")   3.50]
+[(string=? item "hamburger")     6]
+[(string=? item "onion rings")   3.5]
 [(string=? item "fried tofu")    5.25]
 [(string=? item "pie")           2.25]
 [else "Sorry, not on the menu!"])

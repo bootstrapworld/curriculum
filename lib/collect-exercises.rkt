@@ -11,7 +11,7 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(define *exercises-list-file* "pages/.exercise-pages.txt.kp")
+(define *exercises-list-file* "pages/.cached/.exercise-pages-ls.txt.kp")
 
 (define *exercises-files* '())
 
@@ -33,7 +33,8 @@
         (when (char=? c #\@)
           (let ([directive (read-word i)])
             ;(printf "ce directive= ~s\n" directive)
-            (cond [(member directive '("printable-exercise" "opt-printable-exercise"))
+            (cond [(member directive '(;"printable-exercise"
+                                       "opt-printable-exercise"))
                    (let* ([page (read-first-arg i directive)]
                           [compts (string-split page "/")])
                      ;(printf "doing ex ~s ~s\n" directive page)

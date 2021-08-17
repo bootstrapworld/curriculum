@@ -2,32 +2,30 @@
 
 ++++
 <style>
-.right{margin-right: 20ex; }
+#content .right{margin-right: 20ex; }
 </style>
 ++++
 
-Open the “Sam the Butterfly” starter file and press “Run”. 
-
-_Hi, Sam!_ 
+Open the “Sam the Butterfly” starter file and press “Run”. __(Hi, Sam!)__
 
 Move Sam around the screen using the arrow keys.
 
 @vspace{2ex}
 
-1) What do you notice about the program?
+@n What do you notice about the program?
 
 @vspace{6ex}
 
-2) What do you wonder?
+@n What do you wonder?
 
 @vspace{6ex}
 
-3) What do you see when Sam is at (0,0)?  Why is that?
-
+@n What do you see when Sam is at (0,0)?  Why is that?
+@ifsoln{_Sam is at the center of the screen, because the origin is at the middle_}
 @vspace{6ex}
 
-4) What changes as the butterfly moves left and right? 
-
+@n What changes as the butterfly moves left and right?
+@ifsoln{__Sam's x-coordinate__}
 
 @vspace{4ex}
 
@@ -36,6 +34,7 @@ Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight.
 @vspace{2ex}
 
 *How far to the left and right can Sam go and still remain visible?*
+@ifsoln{Sam can go to the left until their x-coordinate is less than -40, and to the right until x > 680}
 
 @vspace{2ex}
 
@@ -43,16 +42,19 @@ Use the new inequality functions to answer the following questions  _with code_:
 
 @vspace{2ex}
 
-5) Sam hasn't gone off the left edge of the screen as long as…
-@span{.right}{@fitb{30ex}{}}
+@n Sam hasn't gone off the left edge of the screen as long as…
+@span{.right}{@fitb{30ex}{@showsoln{(sexp->code '(> x -50)) } } }
 
 @vspace{2ex}
 
-6) Sam hasn't gone off the right edge of the screen as long as…
-@span{.right}{@fitb{30ex}{}}
+@n Sam hasn't gone off the right edge of the screen as long as…
+@span{.right}{@fitb{30ex}{@showsoln{(sexp->code '(< x 690)) } } }
 
 @vspace{2ex}
 
-7) Use the space below to draw Circles of Evaluation for these two expressions:
+@n Use the space below to draw Circles of Evaluation for these two expressions:
 
-@vspace{20ex}
+@span{.left}{ @showsoln{(sexp->coe '(> x -50)) } }
+
+@span{.right}{@showsoln{(sexp->coe '(< x 690)) } }
+

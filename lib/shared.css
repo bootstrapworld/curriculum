@@ -160,13 +160,12 @@ td.halign-center div.circleevalsexp {
   min-height:         15px;
   min-width:          5em;
   text-align:         center;
-  line-height:        1.2;
+  line-height:        18pt;
   border-bottom:      solid 1px black;
 }
 
 .fitbruby {
    position:          relative;
-   line-height:       20pt;
    margin-bottom:     12pt;
    padding:           0pt 0pt;
 }
@@ -175,7 +174,7 @@ td.halign-center div.circleevalsexp {
 .blankline { margin-top: 25px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 6ex; }
-.lh-style .fitb { line-height: 1 !important; }
+.lh-style .fitb { line-height: 18pt !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
 .fitbruby::before, .vskip::before, .blankline::before {
@@ -209,6 +208,71 @@ td.halign-center div.circleevalsexp {
 /* The summary table at the top of each lesson */
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
+
+
+/* The sidebar */
+.sidebar {
+  display:    block;
+  position:   fixed;
+  top:        175px;
+  left:       -205px;
+  width:      225px;
+  height:     calc(100% - 175px);
+  background: #eee;
+  opacity:    0.7;
+  border-top: solid 1px black;
+  border-right: solid 1px black;
+  transition: all 0.2s;
+  color:      black;
+  box-shadow: -1px 2px 6px black;
+  z-index:    9999;
+  overflow:   scroll;
+}
+
+.sidebar .sidebartitle {
+  transform: rotate(90deg) translate(148px, -48px);
+  height: 25px;
+  width: 330px;
+  background: #75328a;
+  padding-left: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.sidebar:hover { opacity: 1;   left: 0px; }
+.sidebar:hover .sidebartitle { display: none; }
+.sidebar .sidebarlessons { padding: 10px; }
+.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
+.sidebar .sidebarlessons ul { 
+  background: white; 
+  margin:     0px;
+  box-shadow: inset 4px 0px 4px black;
+  height:     250px;
+  overflow:   scroll;
+  padding:    10px;
+}
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
+.sidebarlessons .prerequisite::after { content:'★'; } 
+.sidebarlessons strong {color: black; }
+
+.sidebarstandards div.standards-hierarchical-table {
+    display: none;
+}
+
+.sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
+    display: block;
+}
+
+.sidebarstandards { padding-left: 10px; }
+
+.sidebartextbooks strong { color: black; }
+.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
+
+.sidebarbadges ul { margin-left: 0px; text-align: center; }
+.sidebarbadges li { list-style-type: none; display: inline-block; }
+.sidebarbadges img {width: 110px; transition: width 0.5s; }
+.sidebarbadges img:hover {width: 200px; }
 
 /* Styling for the Materials section of the Lesson Summary */
 .materials-links {
@@ -250,6 +314,7 @@ td.halign-center div.circleevalsexp {
   font-size:          0.8rem;
 }
 .lang-features-table p { font-family: monospace; }
+.lang-features-table .editbox { width: auto; }
 .lang-features-table tr:first-of-type, .lang-features-table tr:first-of-type p {
   background-color:   lightgray;
   font-weight:        bold;
@@ -339,6 +404,14 @@ span.clear {
   width:              100%;
 }
 
+/**
+ * Auto-numbering. 
+ * Add a right-paren, unless it's inside a table.
+ */
+.autonum::after { content: ')'; }
+table .autonum::after { content: none; }
+
+
 /*
 * Two Column Layout that spans page width, using DT and DD tags
 * Every other row is shaded for readability
@@ -356,24 +429,21 @@ span.clear {
  }
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
-.prerequisite {
-    background-color: lime;
-}
-
 /************************************************************************************
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
-.recipe { min-height: 37pt; } /* Lines where students should write need to be tall */
+.recipe { min-height: 35pt; } /* Lines where students should write need to be tall */
 .keyword_only { min-height: 20pt; } /* lines containing nothing to write on should be short */
 .recipe_instructions { min-height: 16pt; } /* instruction lines should be extra-short */
+.recipe p { margin: 0; } 
 
 :not(.recipe_instructions) + .keyword_only { margin: -8pt 0pt; }
 
 .studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
 .studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   margin-bottom:      10pt;
-  min-width:          100pt;
+  min-width:          105pt;
   line-height:        20pt;
   position:           relative;
   padding:            0pt;
@@ -383,7 +453,7 @@ span.clear {
 }
 .studentAnswer::after {
   position:           absolute;
-  bottom:             -18pt;
+  bottom:             -15pt;
   left:               0pt;
   font-size:          .65rem;
   width:              100%;
@@ -450,7 +520,7 @@ span.clear {
 .recipe_domain        { width: 55%; }
 .recipe_range         { width: 15%; }
 .recipe_purpose       { width: 93%; }
-.recipe_example_inputs{ min-width: 20%; }
+.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
 
 .pyret .recipe_name { text-align: right; }
 .recipe_example_body { min-width: 10em; margin-left: 1em;}
@@ -467,12 +537,20 @@ span.clear {
   color:              white;
   background:         gray;
   display:            block;
-  padding:            2px 10px;
-  font-size:          1.1rem;
+  padding:            1px 10px;
+  font-size:          1rem;
   font-weight:        bold;
   margin:             0px;
 }
-.recipe_title p::after { content: "\2B1C"; float: right; }
+.recipe_title p::after { 
+  width:              14pt;
+  height:             14pt;
+  margin-top:         2pt;
+  background:         white; 
+  color:              transparent; 
+  content:            "\2B1C"; 
+  float:              right; 
+}
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
 table.recipe_title    { border: 0px !important; }
@@ -525,7 +603,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
 div.circleevalsexp .expression {
   display:            inline-block;
   padding-top:        6px;
-  margin:             5px;
+  margin:             2px 5px;
   clear:              none;
   border:             2px solid black;
   background:         white;
@@ -637,6 +715,14 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   display: inline-block;
 }
 
+
+/************************************************************************************
+ * CONTRACT TABLES 
+ */
+table.contracts-table {border-collapse: collapse;}
+table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
+table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
+
 /************************************************************************************
 * DATASHEETS
 */
@@ -650,17 +736,17 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     font-weight: bold;
 }
 
-/*
-.answer {
-    font-style: italic;
-}
-*/
-
 .optional::before {
     content: none;
 }
 
-.autonum::after { content: ')'; }
+
+.codetwo {
+    font-family: monospace;
+    background-color: #f7f7f8;
+    color: black;
+    word-break: break-word;
+}
 
 /************************************************************************************
 * SCREEN MEDIA
@@ -672,8 +758,9 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     line-height:      45px;
   }
   /* Attempt to get the screen width to approximate printed width */
-  body:not(.LessonPlan, .landscape) { width: 7.5in; }
+  body:not(.LessonPlan, .landscape, .narrativepage) { width: 7.5in; }
   body.landscape { width: 10in; }
+  body.nonworkbookpage{ width: auto !important; }
 }
 
 /************************************************************************************
@@ -689,7 +776,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 @media print {
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
-  .section-link { display: none; }
+  .sidebar, .section-link { display: none; }
 
   .LessonPlan .lessonSummary {
     break-after:  page !important;
@@ -720,6 +807,10 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     display:          block !important;
   }
 
+  .recipe_example_body_short {
+    min-width: 20em;
+  }
+
   /* we need a right-hand padding to eliminate some weird clipping behavior */
   #header, #content {margin: 0px !important; padding: 0px; padding-right: 20px;}
 
@@ -732,7 +823,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     color:            black;
   }
   /* Override AsciiDoc print default */
-  a[href] { color: #F4AB3A !important; text-decoration: none !important; }
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
   table { margin: 0px; padding: 0px; }
 
@@ -769,10 +859,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   .workbookpage .acknowledgment {
    display: none !important; visibility: hidden; float: none;
   }
-
-  .recipe_title p { padding: 3px 5px; }
-  .recipe_title p::after { background: white; margin: 2pt; width: 18pt; height: 18pt;}
-  .designRecipeLayout .studentAnswer::after { font-size: .8rem; }
+  
+  .designRecipeLayout .studentAnswer::after { font-size: .7rem; }
 
   /* Workbook pages should have an inverted header, with a little space below */
   :not(body.LessonPlan) #header {
@@ -825,5 +913,9 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
    */
   .pyretkeyword{
     font-family: monospace;
+  }
+
+  .codetwo * {
+      color: black;
   }
 }

@@ -1,21 +1,27 @@
 @design-recipe-exercise{ "species-color" "We want to generate a custom dot for our `image-scatter-plot`, such that every species gets a unique color. Write a function called `species-color`, which takes in a Row from the animals table and returns a solid, 5px circle using a color you've chosen."
   #:domain-list (list "Row")
   #:range "Image"
-  #:purpose "Consumes an animal, and produces a solid, 5px dot. (Dogs=red, Cats=blue, Tarantulas=black, Rabbits=pink, Lizards=green"
+  #:purpose "Consumes an animal, and produces a solid, 5px dot."
   #:num-examples 2
-  #:example-list '((animalP    "circle(5px, \"solid\", \"red\")")
-                   (animalQ    "circle(5px, \"solid\", \"blue\")")
-                   (animalR    "circle(5px, \"solid\", \"black\")")
-                   (animalS    "circle(5px, \"solid\", \"pink\")")
-                   (animalT    "circle(5px, \"solid\", \"green\")"))
+  #:example-list '((animalP    (circle 5 "solid" "red"))
+                   (animalQ    (circle 5 "solid" "blue"))
+                   (animalR    (circle 5 "solid" "black"))
+                   (animalS    (circle 5 "solid" "pink"))
+                   (animalT    (circle 5 "solid" "green")))
   #:show-examples '(#f)
   #:param-list (list "r")
   #:show-params? #f
-  #:body "if (r[\"species\"] == \"dog\"):            circle(5, \"solid\", \"red\")
-          else if (r[\"species\"] == \"cat\"):       circle(5, \"solid\", \"blue\")
-          else if (r[\"species\"] == \"tarantula\"): circle(5, \"solid\", \"black\")
-          else if (r[\"species\"] == \"rabbit\"):    circle(5, \"solid\", \"pink\")
-          else if (r[\"species\"] == \"lizard\"):    circle(5, \"solid\", \"green\")
+  #:body (if *solutions-mode?* "if (r[\"species\"] == \"dog\"): circle(5, \"solid\", \"red\")
+else if (r[\"species\"] == \"cat\"): circle(5, \"solid\", \"blue\")
+else if (r[\"species\"] == \"tarantula\"): circle(5, \"solid\", \"black\")
+else if (r[\"species\"] == \"rabbit\"): circle(5, \"solid\", \"pink\")
+else if (r[\"species\"] == \"lizard\"): circle(5, \"solid\", \"green\")
           end"
+"blankline
+blankline
+blankline
+blankline
+blankline
+blankline")
   #:show-body? #f
   #:grid-lines? #t }

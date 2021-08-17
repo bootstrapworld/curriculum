@@ -1252,7 +1252,7 @@
   "Understand independence and conditional probability and use them to interpret data."
  )
  ("HSS.CP.A.1"
-  "Describe events as subsets of a sample space (the set of outcomes) using characteristics (or categories) of the outcomes, or as unions, intersections, or complements of other events ("or," "and," "not")."
+  "Describe events as subsets of a sample space (the set of outcomes) using characteristics (or categories) of the outcomes, or as unions, intersections, or complements of other events ('or', 'and', 'not')."
  )
  ("HSS.CP.A.2"
   "Understand that two events A and B are independent if the probability of A and B occurring together is the product of their probabilities, and use this characterization to determine if they are independent."

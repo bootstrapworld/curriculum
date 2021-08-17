@@ -1,9 +1,9 @@
 = Making Flags
 ++++
 <style>
-.whiteBG img {background: white;}
-.strategy-box .editbox { width: auto; }
-.lesson-instruction .editbox {width: auto;}
+#content .whiteBG img {background: white;}
+#content .strategy-box .editbox { width: auto; }
+#content .lesson-instruction .editbox {width: auto;}
 </style>
 ++++
 
@@ -29,32 +29,18 @@
 |[.materials-links]
 
 @ifproglang{wescheme}{
-* @link{hhttps://docs.google.com/presentation/d/1bKY5Ia-E72xEJIIJPia2hTGhAkJQN4iykPipSbyGcxA/, Lesson Slides}
+* @link{https://docs.google.com/presentation/d/1bKY5Ia-E72xEJIIJPia2hTGhAkJQN4iykPipSbyGcxA/, Lesson Slides}
 * @link{https://www.wescheme.org/openEditor?publicId=jH25JejavW, Flags Starter File}
-* @link{https://www.wescheme.org/openEditor?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}
+* @link{https://www.wescheme.org/openEditor?publicId=81WrTGQglP, "Flags of Netherlands, Ireland, Mauritius Starter File"}
 }
 
 @ifproglang{pyret}{
 * @link{https://docs.google.com/presentation/d/1gWn9ihsXQFcrS_5ZgPFM7LohDxONtUfAYUlpZBM0juo/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1z3fDFl23HAlW8HBONANVI9Z7cWSMAUFa&v=8c4da7d, Flags Starter File}
-* @link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Flags of Netherlands, Ireland, Mauritius Starter File"}
+* @link{https://code.pyret.org/editor#share=1VOKiUiHWWqwL9xfclQGtoCnyoMHL6nT3, Flags Starter File}
+* @link{https://code.pyret.org/editor#share=1MytZ-zfHpyO5p_M2M7Int6JzddFXhf4B, "Flags of Netherlands, Ireland, Mauritius Starter File"}
 }
 
 @material-links
-
-@ifproglang{wescheme}{
-* [.ExercisePage]#@link{https://www.wescheme.org/view?publicId=ve2gTEY06p, Flag of Alaska Starter File}#
-* [.ExercisePage]#@link{https://www.wescheme.org/view?publicId=8mMKtpZiZ5, Flag of Lebanon Starter File}#
-* [.ExercisePage]#@link{https://www.wescheme.org/view?publicId=6TJ0N2CJqU, Flag of Puerto Rico Starter File}#
-* [.ExercisePage]#@link{https://www.wescheme.org/view?publicId=SQRHKcqQvW, Flag of Trinidad and Tobago Starter File}#
-}
-
-@ifproglang{pyret}{
-* [.ExercisePage]#@link{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, Flag of Alaska Starter File}#
-* [.ExercisePage]#@link{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, Flag of Lebanon Starter File}#
-* [.ExercisePage]#@link{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, Flag of Puerto Rico Starter File}#
-* [.ExercisePage]#@link{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, Flag of Trinidad and Tobago Starter File}#
-}
 
 | Supplemental Resources
 |
@@ -124,7 +110,7 @@ Professional programmers work with teams who need to be able to follow each othe
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
 
 Have students open the
-@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=RZrcCDD89Q, "Flags of Netherlands, Ireland, Mauritius Starter File"}}
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=81WrTGQglP, "Flags of Netherlands, Ireland, Mauritius Starter File"}}
 @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1-fMBwqwUBIz2JYNFHmNa159uFTAClGrF&v=8c4da7d, "Flags of Netherlands, Ireland, Mauritius Starter File"} }
 , and click Run.
 
@@ -132,11 +118,11 @@ Have students open the
 --
 - Look at the code for the flag of the Netherlands.
 - How big is the flag?
-- What was the programmer thinking when she coded the height of the red stripe as @show{(sexp->code `(/ 200 3))}?
-- The center of the blue stripe is placed at (`150`, @show{(sexp->code `(/ 200 6))}).
+- What was the programmer thinking when she coded the height of the red stripe as @show{(sexp->code '(/ 200 3))}?
+- The center of the blue stripe is placed at (`150`, @show{(sexp->code '(/ 200 6))}).
 - How did the programmer know to use 150 as the x-coordinate?
-- What was the programmer thinking when she coded the y-coordinate as @show{(sexp->code `(/ 200 6))}?
-- Explain the thinking behind coding the redstripe's y-coordinate as @show{(sexp->code `(* 5 (/ 200 6)))}.
+- What was the programmer thinking when she coded the y-coordinate as @show{(sexp->code '(/ 200 6))}?
+- Explain the thinking behind coding the redstripe's y-coordinate as @show{(sexp->code '(* 5 (/ 200 6)))}.
 --
 
 Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
@@ -179,19 +165,21 @@ For each image, calculate what the x- and y-coordinates of the center should be.
 *4) Build the Image & Check that it Matches the Target Image*
 
 We stack the parts on top of the bottom image using the coordinates we found.
- __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
+__TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
 
- @ifproglang{pyret}{
- If you have time, these matching activities will support student thinking.
- - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, Scaling Flag Ratios}
- -@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay and put-image}
- }
+@ifproglang{pyret}{
+If you have time, these matching activities will support student thinking.
 
- @ifproglang{wescheme}{
- If you have time, these matching activities will support student thinking.
- - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169?collections=5fbecc2b40d7aa0d844956f0, Scaling Flag Ratios}
- -@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay and put-image}
- }
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, Scaling Flag Ratios}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay and put-image}
+}
+
+@ifproglang{wescheme}{
+If you have time, these matching activities will support student thinking.
+
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169?collections=5fbecc2b40d7aa0d844956f0, Scaling Flag Ratios}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay and put-image}
+}
 
 === Investigate
 
@@ -233,7 +221,7 @@ Be prepared that students might choose flags representing groups other than coun
 |
 @span{.title}{Ratio and Proportion}
 
-Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(sexp->code `(/ WIDTH 2))} and @show{(sexp->code `(/ HEIGHT 2))}.
+Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(sexp->code '(/ WIDTH 2))} and @show{(sexp->code '(/ HEIGHT 2))}.
 |===
 
 === Synthesize
@@ -248,10 +236,10 @@ Why is it useful to define each part of the flag first, before stitching the ima
 @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, the Alaska Flag Starter Code.}}
 @ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=ve2gTEY06p, the Alaska Flag Starter Code.}}
 
-- For practice scaling imported graphics, open @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1Z1dPVZv2THmPBTqaKgtwLtVdBSTJ4B29&v=8c4da7d, the Flag of Lebanon Starter Code.}}
-@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=8mMKtpZiZ5, the Flag of Lebanon Starter Code.}}
+- For practice scaling imported graphics, open @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1q6WBLu01OwhiNaGdb6rIellQEca6XzCr&v=8c4da7d, the Flag of Lebanon Starter Code.}}
+@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=x0nJrP1UYp, the Flag of Lebanon Starter Code.}}
 
-- For practice with composing more complex images, fix @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1WbqiwGj5mFYltiB2lB2OYwWQ-E0h9X4h&v=8c4da7d, this Code for the Puerto Rican flag.}}
+- For practice with composing more complex images, fix @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1iNeBnsFWSCcZz6Y70rpuTlbPZD6q0jKY, this Code for the Puerto Rican flag.}}
 @ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=6TJ0N2CJqU, this Code for the Puerto Rican flag.}}
 
 - If you’ve already studied Pythagorean Theorem and are ready to apply it, open @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Flag of Trinidad and Tobago Starter Code.}}

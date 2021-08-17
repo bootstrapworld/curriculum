@@ -22,47 +22,47 @@ shapeC = shapes-table.row-n(2)
 shapeD = shapes-table.row-n(3)
 ----
 
-1) _Match_ each Pyret expression (left) to the description of what it evaluates to (right).
+@n _Match_ each Pyret expression (left) to the description of what it evaluates to (right).
 
 [cols=">.^7a,^.^1a,5,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 
 | `shapeD`
-|*1*||*A*
+|*1*@ifsoln{-B}||*A*
 | Evaluates to `4`
 
 | `shapeA`
-|*2*||*B*
+|*2*@ifsoln{-G}||*B*
 | Evaluates to the last row in the table
 
 | `shapeB["corners"]`
-|*3*||*C*
+|*3*@ifsoln{-F}||*C*
 | Evaluates to `"square"`
 
 | `shapeC["is-round"]`
-|*4*||*D*
+|*4*@ifsoln{-E}||*D*
 | Evaluates to `true`
 
 | `shapeB["name"]`
-|*5*||*E*
+|*5*@ifsoln{-C}||*E*
 | Evaluates to `false`
 
 | `shapeA["corners"]`
-|*6*||*F*
+|*6*@ifsoln{-F}||*F*
 | Evaluates to `3`
 
 | `shapeD["name"] == "circle"`
-|*7*||*G*
+|*7*@ifsoln{-E}||*G*
 | Evaluates to the first row in the table
 |===
 
-2) Fill in the blanks (left) with the Pyret lookup code that will produce the value (right).
+@n Fill in the blanks (left) with the Pyret lookup code that will produce the value (right).
 
 [cols="1a,80a,19a"]
 |===
-| a. | @fitb{90ex}{}						| `"rectangle"`
-| b. | @fitb{90ex}{}						| `"square"`
-| c. | @fitb{90ex}{}						| `4`
-| d. | @fitb{90ex}{}						| `0`
-| e. | @fitb{90ex}{}						| `true`
+| a. | @fitb{90ex}{@ifsoln{`shapeC["name"]`}}		| `"rectangle"`
+| b. | @fitb{90ex}{@ifsoln{`shapeB["name"]`}}		| `"square"`
+| c. | @fitb{90ex}{@ifsoln{`shapeB["corners"]`}}	| `4`
+| d. | @fitb{90ex}{@ifsoln{`shapeD["corners"]`}}	| `0`
+| e. | @fitb{90ex}{@ifsoln{`shapeD["is-round"]`}}	| `true`
 |===

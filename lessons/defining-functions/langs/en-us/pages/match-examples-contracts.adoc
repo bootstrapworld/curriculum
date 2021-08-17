@@ -1,0 +1,58 @@
+[.landscape]
+= Matching Examples and Contracts
+
+++++
+<style>
+#content table tr td {height: 100pt; padding: 0; margin: 0;}
+#content p { font-size: 0.9rem;}
+#content div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
+#content td:first-child {border-bottom: 1pt solid gray !important;}
+
+</style>
+++++
+
+@do{
+(define e1
+   (code '(EXAMPLE
+    (f "pink" 5) (star 5 "solid" "pink")
+    (f "blue" 8) (star 8 "solid" "blue"))))
+(define c1 (contract "f" '("String" "Number") "Image"))
+
+(define e2
+   (code '(EXAMPLE
+    (f 1) (rectangle  1 1 "outline" "red")
+    (f 6) (rectangle 6 6 "outline" "red"))))
+(define c2 (contract "f" '("Number") "Image"))
+
+(define e3
+   (code '(EXAMPLE
+    (f "Hi!") (text "Hi!" 50 "red")
+    (f "Ciao!") (text "Ciao!" 50 "red"))))
+(define c3 (contract "f" '("String") "Image"))
+
+(define e4
+   (code '(EXAMPLE
+    (f 5 "outline") (star 5 "outline" "yellow")
+    (f 5 "solid") (star 5 "solid" "yellow"))))
+(define c4 (contract "f" '("Number" "String") "Image"))
+
+(define e5
+   (code '(EXAMPLE
+    (f  5) (/ 5 2)
+    (f  9) (/ 9 2)
+    (f 24) (/ 24 2))))
+(define c5 (contract "f" '("Number") "Number"))
+}
+
+Match each set of examples (left) with the contract that best describes it(right).
+
+@vspace{1ex}
+[cols="<.^10a,^.^2a,1,^.^1a,>.^8a",stripes="none",grid="none",frame="none", options="header"]
+|===
+|  Examples|               ||      |Contract
+| @show{e5}| *1*@ifsoln{-A}|| *A*  | @show{c5}
+| @show{e2}| *2*@ifsoln{-C}|| *B*  | @show{c3}
+| @show{e1}| *3*@ifsoln{-E}|| *C*  | @show{c2}
+| @show{e3}| *4*@ifsoln{-B}|| *D*  | @show{c4}
+| @show{e4}| *5*@ifsoln{-D}|| *E*  | @show{c1}
+|===

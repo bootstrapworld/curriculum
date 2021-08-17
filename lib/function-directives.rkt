@@ -32,7 +32,7 @@
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 80)
+(define *max-line-length* 50)
 ;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
 ;(define *max-wescheme-example-side-length* 30)
 ;(define *max-pyret-example-side-length* 30)
@@ -48,14 +48,16 @@
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
-  (enclose-span
-    (string-append
-      (if (string=? style "") "" ".studentAnswer")
-      (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
-      (if show? ".solution" ".blank")
-      style)
-    (if show? s
-        (string-multiply "&#x5f;" (string-length s)))))
+  (let ([s-og (regexp-replace* #rx"{empty}" s "")])
+    ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
+    (enclose-span
+      (string-append
+        (if (string=? style "") "" ".studentAnswer")
+        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if show? ".solution" ".blank")
+        style)
+      (if show? s
+          (string-multiply "&#x5f;" (string-length s-og))))))
 
 (define (wescheme->wescheme e #:indent [indent #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
@@ -99,8 +101,7 @@
                                      (loop (- n 1) (cddr e)
                                            (string-append r
                                              (if (= n num-examples) "" "\n")
-                                             "(EXAMPLE\n"
-                                             (if indent (make-string (+ indent 2) #\space) "")
+                                             "(EXAMPLE "
                                              lhs-s
                                              (if (< tot-len 35)
                                                  " "
@@ -254,7 +255,7 @@
 (define (write-section-header page-header funname)
   (format (string-append
             "\n\n[.designRecipeLayout]\n"
-            "== [.dr-title]##~a: ~a##\n")
+            "= [.dr-title]##~a: ~a##\n")
           page-header funname))
 
 (define (write-directions directions)
@@ -365,6 +366,15 @@
         "")
     ))
 
+(define (longer-than? len . exprs)
+  (let ([exprs-len (foldl + 0
+                     (map (lambda (e)
+                            (let ([e (regexp-replace* #rx"{empty}" e "")])
+                              (string-length e)))
+                          exprs))])
+    ;(printf "elen = ~s; len = ~s\n" exprs-len len)
+    (> exprs-len len)))
+
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
   ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
   (string-append
@@ -393,6 +403,7 @@
     (set! funname (car funname)))
   (unless (string? funname) (set! funname (format "~a" funname)))
   (set! args (list-to-commaed-string args))
+  ;(printf "list-to-commaed-string returned ~s\n" args)
   (cond [(null? body) (set! body "")]
         [(pair? body) (set! body (format "~a" body))])
   (set! body (regexp-replace* #rx"\n" body " "))
@@ -444,11 +455,8 @@
     (if (string=? ans "") " " ans)))
 
 (define (list-to-commaed-string xx)
-  (cond [(null? xx) " "]
-        [(= (length xx) 1) (format "~s" (car xx))]
-        [else (let loop ([xx (cdr xx)] [r (format "~s" (car xx))])
-                (if (null? xx) r
-                    (loop (cdr xx) (string-append r ", " (format "~s" (car xx))))))]))
+  ;(printf "doing list-to-commaed-string ~s\n" xx)
+  (string-join (map wescheme->pyret xx) ", "))
 
 (define (vars-to-string xx)
   (let ([ans (apply string-append

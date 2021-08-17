@@ -1,9 +1,9 @@
 #!/bin/bash
 
 SEMESTER=fall
-YEAR=2020
+YEAR=2021
 
-DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER_YEAR
+DEPLOY_DIR=/gpfs/main/authen/sys/web/cs/web/sites/bootstrapworld.org/materials/$SEMESTER$YEAR
 
 echo start...
 
@@ -22,36 +22,4 @@ echo starting chmod
 find deployables -type d|xargs chmod g+rwx,o+rx;
 find deployables -type f|xargs chmod g+rw,o+r;
 echo finished chmod
-cd deployables;
-for lang in *; do
-  test -d $lang || continue;
-  cd $lang;
-  mkdir -p $DEPLOY_DIR/$lang;
-  for f in *; do
-    if test -f $f; then
-      rm -fr $DEPLOY_DIR/$lang/$f;
-      mv $f $DEPLOY_DIR/$lang;
-    elif test -d $f; then
-      if test "$f" = courses; then
-        cd courses;
-        for course in *; do
-          echo starting copying course $course
-          if test -d $course; then
-            mkdir -p $DEPLOY_DIR/$lang/courses;
-            rm -fr $DEPLOY_DIR/$lang/courses/$course;
-            mv $course $DEPLOY_DIR/$lang/courses;
-          fi
-          echo finished copying course $course
-        done;
-        cd ..;
-      else
-        echo started copying non-course dir $f
-        mkdir -p $DEPLOY_DIR/$lang/$f;
-        cp -pr $f/* $DEPLOY_DIR/$lang/$f;
-        echo finished copying non-course dir $f
-      fi
-    fi
-  done;
-  cd ..;
-done;
-
+cp -pr deployables/* $DEPLOY_DIR

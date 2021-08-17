@@ -1,54 +1,49 @@
 [.landscape]
 = Contracts
 
-++++
-<style>
-#content > .paragraph {padding: 0px 5px;}
-</style>
-++++
-
 Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
 
-++++
-<style>
-td {padding: .1em .625em !important; height: 20pt;}
-</style>
-++++
-
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 |Name||Domain||Range
 
-| `;` `rhombus`
-| `:`
+| `;` `regular-polygon`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(regular-polygon  40 8 "solid" "red")_`}
+
+| `#` `rhombus`
+| `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(rhombus 20 50 "solid" "turquoise")_`}
 
-| `;` `right-triangle`
-| `:`
+| `#` `right-triangle`
+| `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(right-triangle 20 50 "outline" "black")_`}
 
-| `;` `isosceles-triangle`
-| `:`
+| `#` `isosceles-triangle`
+| `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(isosceles-triangle 100 30 "solid" "black")_`}
 
-| `;` `radial-star`
-| `:`
+| `#` `radial-star`
+| `{two-colons}`
 | @ifsoln{`Number, Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(radial-star  17 50 10 "solid" "orange")_`}
 
-| `;` `star-polygon`
-| `:`
+| `#` `star-polygon`
+| `{two-colons}`
 | @ifsoln{`Number, Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
@@ -74,19 +69,5 @@ td {padding: .1em .625em !important; height: 20pt;}
 | `->`
 | `Image`
 5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
-
-| `put-image`
-| `{two-colons}`
-| `Image, Number, Number, Image`
-| `->`
-| `Image`
-5+|`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`
-
-| `rotate`
-| `{two-colons}`
-| `Number, Image`
-| `->`
-| `Image`
-5+|`_rotate(35, rectangle(30, 80, "solid", "purple"))_`
 
 |===

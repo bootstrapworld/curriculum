@@ -2,11 +2,13 @@
 
 ++++
 <style>
-.forceShading { background: #f7f7f8; }
+#content .forceShading { background: #f7f7f8; }
 </style>
 ++++
 
-@n What kind of triangle does the `triangle` function produce?  @fitb{15em}{}
+@vspace{1ex}
+
+@n What kind of triangle does the `triangle` function produce?  @fitb{15em}{@ifsoln{_equilateral_}}
 @vspace{1ex}
 
 There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles!
@@ -14,23 +16,22 @@ There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifpr
 
 [.forceShading.indentedpara]
 --
-@show{(sexp->code `triangle)}`{two-colons} Number, String, String -> Image`
+@show{(sexp->code 'triangle)}`{two-colons} Number, String, String -> Image`
 
-@show{(sexp->code `right-triangle)}`{two-colons} Number, Number, String, String -> Image`
+@show{(sexp->code 'right-triangle)}`{two-colons} Number, Number, String, String -> Image`
 
-@show{(sexp->code `isosceles-triangle)}`{two-colons} Number, Number, String, String -> Image`
+@show{(sexp->code 'isosceles-triangle)}`{two-colons} Number, Number, String, String -> Image`
 
-@show{(sexp->code `triangle/sas)}`{two-colons} Number, Number, Number, String, String -> Image`
+@show{(sexp->code 'triangle/sas)}`{two-colons} Number, Number, Number, String, String -> Image`
 --
 
-@vspace{1ex}
 
-@n Why do you think @show{(sexp->code `triangle)} only needs one number, while @show{(sexp->code `right-triangle)} and @show{(sexp->code `isosceles-triangle)} need two numbers and @show{(sexp->code `triangle/sas)} needs three?
+@n Why do you think @show{(sexp->code 'triangle)} only needs one number, while @show{(sexp->code 'right-triangle)} and @show{(sexp->code 'isosceles-triangle)} need two numbers and @show{(sexp->code 'triangle/sas)} needs three?
 
 @span{.blankline}{@showsoln{"_triangle makes equilateral triangles, so the angle is fixed at 60°. right-triangle needs to_" }}
 @span{.blankline}{@showsoln{"_know the length of the two legs, and triangle/sas needs to know both sides AND an angle_" }}
 
-@n Write @show{(sexp->code `right-triangle)} expressions for the images below. _One argument for each should be `100`._
+@n Write @show{(sexp->code 'right-triangle)} expressions for the images below. _One argument for each should be `100`._
 
 [.indented-para]
 --
@@ -44,11 +45,11 @@ There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifpr
 |===
 --
 
-@n What do you think the numbers in @show{(sexp->code `right-triangle)} represent?
+@vspace{1ex}
 
-@span{.blankline}{@showsoln{"_the base and height of the triangle_" }}
+@n What do you think the numbers in @show{(sexp->code 'right-triangle)} represent? @fitb{21em}{@showsoln{"_base & height_" }}
 
-@n Write @show{(sexp->code `isosceles-triangle)} expressions for the images below. _1 argument for each should be `100`._
+@n Write @show{(sexp->code 'isosceles-triangle)} expressions for the images below. _1 argument for each should be `100`._
 
 [.indented-para]
 --
@@ -61,11 +62,11 @@ There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifpr
 | @fitb{30em}{@showsoln{(sexp->code '(isosceles-triangle 100 130 "solid" "black")) }}
 |===
 --
-@n What do you think the numbers in @show{(sexp->code `isosceles-triangle)} represent?
+@n What do you think the numbers in @show{(sexp->code 'isosceles-triangle)} represent?
 
-@span{.blankline}{@showsoln{"_The length of the sides, and the side of the angle between them_" }}
+@span{.blankline}{@showsoln{"_The length of the sides, and the size of the angle between them_" }}
 
-@n Write 2 expressions that would build *right-isosceles* triangles. Use @show{(sexp->code `right-triangle)} for one expression and @show{(sexp->code `isosceles-triangle)} for the other expression.
+@n Write 2 expressions that would build *right-isosceles* triangles. Use @show{(sexp->code 'right-triangle)} for one expression and @show{(sexp->code 'isosceles-triangle)} for the other expression.
 
 @span{.blankline}{@showsoln{(sexp->code '(right-triangle 100 100 "solid" "black")) }}
 @span{.blankline}{@showsoln{(sexp->code '(isosceles-triangle 100 90 "solid" "black")) }}

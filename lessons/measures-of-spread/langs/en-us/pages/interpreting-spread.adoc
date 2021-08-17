@@ -1,5 +1,11 @@
 = Interpreting Spread
 
+++++
+<style>
+#content tbody tr { height: 30pt; }
+</style>
+++++
+
 // use double-space before the *bold* text to address a text-kerning bug in wkhtmltopdf 0.12.5 (with patched qt)
 Consider the following dataset, representing the annual income of ten people.
 
@@ -7,21 +13,22 @@ All numbers represent __thousands of dollars__ (so `14` means "$14,000"):
 
   60, 10, 21, 180, 14, 20, 45, 35, 45, 170
 
-1) In the space below, rewrite this dataset in  *sorted order*.
+@n In the space below, rewrite this dataset in  *sorted order*.
 
 @ifsoln{_10, 14, 20, 21, 35, 45, 45, 60, 170, 180_}
 
-@vspace{1ex}
+@vspace{4ex}
 
-2) In the table below, compute the  *measures of center* for this dataset.
+@n In the table below, compute the  *measures of center* for this dataset.
 
 [cols="^1a,^1a,^1a",options='header']
 |===
-| Mean (Average) 	| Median 			| Mode(s)
+| Mean (Average) 	| Median 			      | Mode(s)
 | @ifsoln{_60_}		| @ifsoln{_40_}   	| @ifsoln{_45_}
+
 |===
 
-3) In the table below, compute the  *five number summary* of this dataset.
+@n In the table below, compute the  *five number summary* of this dataset.
 
 [cols="^1a,^1a,^1a,^1a,^1a",options='header']
 |===
@@ -29,13 +36,15 @@ All numbers represent __thousands of dollars__ (so `14` means "$14,000"):
 | Minimum 			| Q1				| Q2 (Median) 		| Q3 				| Maximum
 
 | @ifsoln{_10_}	  	| @ifsoln{_20_}  	| @ifsoln{_40_} 	| @ifsoln{_60_}  	| @ifsoln{_180_}
+
 |===
 
-4) On the number line below, draw a  *box plot* for this dataset.
+@n On the number line below, draw a  *box plot* for this dataset.
 
+@ifnotsoln{@centered-image{numline.svg, "", 800}}
 @ifsoln{@centered-image{boxplot.png, "", 800}}
 
-5) The following statements are _correct_ ... but misleading. Write down the reason why.
+@n The following statements are _correct_ ... but misleading. Write down the reason why.
 
 [cols="2a,5a"]
 
@@ -50,5 +59,6 @@ All numbers represent __thousands of dollars__ (so `14` means "$14,000"):
 
 | “This group is very low-income, the most common salary range is from $10k-$25k!”
 | @ifsoln{_Two data points - especially the extremes! - should not be used to summarize a dataset._}
+
 |===
 

@@ -2,6 +2,8 @@
 
 @lesson-description{Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
 
+@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
+
 [@lesson-intro-table]
 |===
 @prereqs-stds{contracts}
@@ -43,7 +45,10 @@
 Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
 
 === Launch
-Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image? The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}, and an example of using it:
+Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image?
+
+@ifproglang{pyret}{
+The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}, and an example of using it:
 
 @show{(contract "pie-chart" '("Table" "String") "Image" )}
 `pie-chart(animals-table, "legs")`
@@ -60,6 +65,12 @@ Hovering over a pie slice reveals the label, as well as the count and the percen
 We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
 The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `sex` across the shelter.
+}
+@ifproglang{codap}{
+write description explaining CODAP logistics or keep this description hidden
+
+}
+
 
 === Investigate
 Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
