@@ -8,9 +8,9 @@
 @vspace{2ex}
 
 @ifproglang{wescheme}{
-To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
+To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(sexp->code '(/ (- 1 4) (* 10 7)))}.
 }
 
 @ifproglang{pyret}{
-To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *operation* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(sexp->code `(/ (- 1 4) (* 10 7)))}.
+To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *operation* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(sexp->code '(/ (- 1 4) (* 10 7)) #:parens true)}.
 }

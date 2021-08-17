@@ -1,11 +1,5 @@
 = Chaining Methods
 
-++++
-<style>
-
-</style>
-++++
-
 You have the following functions defined below  (read them _carefully!_):
 
   fun is-fixed(r): r["fixed"]                 end
@@ -16,45 +10,45 @@ The table `t` below represents four animals from the shelter:
 
 [cols='5',options="header"]
 |===
-| name 			| sex		| age	| fixed 	| pounds
-| `"Toggle"`	| `"female"`| `3`	| `true`	| `48`
-| `"Fritz"`		| `"male"`	| `4`	| `true`	| `92`
-| `"Nori"`		| `"female"`| `6`	| `true`	| `35.3`
-| `"Maple"`		| `"female"`| `3`	| `true`	| `51.6`
+| name        | sex       | age | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3` | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4` | `true`  | `92`
+| `"Nori"`    | `"female"`| `6` | `true`  | `35.3`
+| `"Maple"`   | `"female"`| `3` | `true`  | `51.6`
 
 |===
 
 _Match_ each Pyret expression (left) to the description of what it does (right).
 
-[cols=".^12a,^.^1a,2,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+[cols=".^12a,^.^2a,2,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 
 |
 --
  t.order-by("age", true)
 --
-|*1*||*A*
+|*@n*@ifsoln{-C} ||*A*
 | Produces a table containing only Toggle and Maple
 
-| 
+|
 --
  t.filter(is-fixed)
 --
-|*2*||*B*
+|*@n*@ifsoln{-F} ||*B*
 | Produces a table of only young, fixed animals
 
 |
 --
  t.build-column("sticker", nametag)
 --
-|*3*||*C*
+|*@n*@ifsoln{-D} ||*C*
 | Produces a table, sorted youngest-to-oldest
 
 |
 --
  t.filter(is-young)
 --
-|*4*||*D*
+|*@n*@ifsoln{-A} ||*D*
 | Produces a table with an extra column, named "sticker"
 
 |
@@ -62,7 +56,7 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 t.filter(is-young)
   .filter(is-fixed)
 ----
-|*5*||*E*
+|*@n*@ifsoln{-B} ||*E*
 | Produces a table containing Maple and Toggle, in that order
 
 |
@@ -70,7 +64,7 @@ t.filter(is-young)
 t.filter(is-young)
   .order-by("pounds", false)
 ----
-|*6*||*F*
+|*@n*@ifsoln{-E} ||*F*
 | Produces a table containing the same four animals
 
 |
@@ -78,14 +72,14 @@ t.filter(is-young)
 t.build-column("label", nametag)
   .order-by("age", true)
 ----
-|*7*||*G*
+|*@n*@ifsoln{-H} ||*G*
 | Won’t run: will produce an error
 
 |
 --
- t.order-by("agee", false)
+ t.order-by("gendr", false)
 --
-|*8*||*H*
+|*@n*@ifsoln{-G} ||*H*
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
 
 |===

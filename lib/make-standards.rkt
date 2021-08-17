@@ -8,28 +8,19 @@
 (require "utils.rkt")
 (require "preproc.rkt")
 
-(define *standards-met* '())
-
-(define *dictionaries-represented* '())
-
 ;(print-menubar "standards")
-
-(define *lesson* #f)
 
 (define *all-standards* (read-data-file ".cached/.all-standards.txt" #:mode 'forms))
 
-(let ([ss *all-standards*])
-  (for ([s ss])
-    (let ([std (list-ref s 0)]
-          [ltitle (list-ref s 1)]
-          [lesson (list-ref s 2)]
-          [pwy (list-ref s 3)])
-      (add-standard std ltitle lesson pwy #f))))
+;(printf "all-standards= ~s\n\n" *all-standards*)
 
-;(printf "standards-met= ~s\n\n\n" *standards-met*)
+(for ([s *all-standards*])
+  (let ([std (list-ref s 0)]
+        [ltitle (list-ref s 1)]
+        [lesson (list-ref s 2)]
+        [pwy (list-ref s 3)])
+    (add-standard std ltitle lesson pwy #f)))
 
-;(printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
-
-(create-standards-file ".cached/Standards" #t #f *standards-met* *dictionaries-represented*)
+(create-standards-file ".cached/Standards" #t #f)
 
 (void)

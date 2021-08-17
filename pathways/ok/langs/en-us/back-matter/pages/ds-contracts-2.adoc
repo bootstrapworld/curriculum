@@ -15,99 +15,71 @@ td {padding: .1em .625em !important; height: 20pt;}
 </style>
 ++++
 
-[cols="4,1,10,1,2", options="header", grid="rows"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 |Name||Domain||Range
 
-| `string-repeat`
-| `{two-colons}`
-| `(text {two-colons} String, repeat {two-colons} Number)`
-| `->`
-| `String`
-5+|
-
-| `string-contains`
-| `{two-colons}`
-| `(text {two-colons} String, search-for {two-colons} String)`
-| `->`
-| `Boolean`
-5+|
-
-| `num-sqr`
-| `{two-colons}`
-| `(n {two-colons} Number)`
-| `->`
-| `Number`
-5+|
-
-| `num-sqrt`
-| `{two-colons}`
-| `(n {two-colons} Number)`
-| `->`
-| `Number`
-5+|
-
-| `num-min`
-| `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
-| `->`
-| `Number`
-5+|
-
-| `num-max`
-| `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
-| `->`
-| `Number`
-5+|
-
-| `count`
+| `box-plot`
 | `{two-colons}`
 | `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `modified-box-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `image-scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `->`
+| `Image`
+5+|
+
+| `r-value`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Number`
+5+|
+
+| `lr-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|
+
+| `random-rows`
+| `{two-colons}`
+| `(t {two-colons} Table, num-rows {two-colons} Number)`
 | `->`
 | `Table`
 5+|
 
-| `mean`
+| `<Table>.row-n`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `(n {two-colons} Number)`
 | `->`
-| `Number`
+| `Row`
 5+|
 
-| `median`
+| `<Table>.order-by`
 | `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
+| `(col {two-colons} String, increasing {two-colons} Boolean)`
 | `->`
-| `Number`
-5+|
-
-| `modes`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `List<Number>`
-5+|
-
-| `bar-chart`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `pie-chart`
-| `{two-colons}`
-| `(t {two-colons} Table, col {two-colons} String)`
-| `->`
-| `Image`
-5+|
-
-| `histogram`
-| `{two-colons}`
-| `(t {two-colons} Table, values {two-colons} String, bin-width {two-colons} Number)`
-| `->`
-| `Image`
+| `Table`
 5+|
 
 |===

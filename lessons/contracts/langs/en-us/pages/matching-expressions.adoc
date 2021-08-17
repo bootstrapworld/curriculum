@@ -2,9 +2,9 @@
 
 ++++
 <style>
-td { height: 20pt; padding-left: 0 !important; padding-right: 0 !important;}
-td * {font-size: .85rem !important;}
-.listingblock pre { padding: 0 !important; }
+#content td { height: 15pt; padding-left: 0 !important; padding-right: 0 !important;}
+#content td * {font-size: .85rem !important;}
+#content .listingblock pre { padding: 0 !important; }
 </style>
 ++++
 
@@ -15,31 +15,31 @@ _Match_ the contract (left) with the expression described by the function being 
 |===
 |  Contract|  || |Expression
 | @show{(contract "make-id" '("String" "Number") "Image")}
-| *1* @showsoln{"-*B*" }
+| *@n* @ifsoln{-B}
 || *A*
 | @show{(sexp->code '(make-id "Savannah" "Lopez" 32))}
 @vspace{1ex}
 
 | @show{(contract "make-id" '("String" "Number" "String") "Image")}
-| *2* @showsoln{"-*C*" }
+| *@n* @ifsoln{-C}
 || *B*
 | @show{(sexp->code '(make-id "Pilar" 17))}
 @vspace{1ex}
 
 | @show{(contract "make-id" '("String") "Image")}
-| *3* @showsoln{"-*E*" }
+| *@n* @ifsoln{-E}
 || *C*
 | @show{(sexp->code '(make-id "Akemi" 39 "red"))}
 @vspace{1ex}
 
 | @show{(contract "make-id" '("String" "String") "Image")}
-| *4* @showsoln{"-*D*" }
+| *@n* @ifsoln{-D}
 || *D*
 | @show{(sexp->code '(make-id "Raïssa" "McCracken"))}
 @vspace{1ex}
 
 | @show{(contract "make-id" '("String" "String" "Number") "Image")}
-| *5* @showsoln{"-*A*" }
+| *@n* @ifsoln{-A}
 || *E*
 | @show{(sexp->code '(make-id "von Einsiedel"))}
 
@@ -52,31 +52,31 @@ _Match_ the contract (left) with the expression described by the function being 
 |===
 |  Contract|  || |Expression
 | @show{(contract "is-capital" '("String" "String") "Boolean")}
-| *1* @showsoln{"-*C*" }
+| *@n* @ifsoln{-C}
 || *A*
 | @show{(sexp->code '(show-pop "Juneau" "AK" 31848))}
 @vspace{1ex}
 
 | @show{(contract "is-capital" '("String" "String" "String") "Boolean")}
-| *2* @showsoln{"-*E*" }
+| *@n* @ifsoln{-E}
 || *B*
 | @show{(sexp->code '(show-pop "San Juan" 395426))}
 @vspace{1ex}
 
 | @show{(contract "show-pop" '("String" "Number") "Image")}
-| *3* @showsoln{"-*B*" }
+| *@n* @ifsoln{-B}
 || *C*
 | @show{(sexp->code '(is-capital "Accra" "Ghana"))}
 @vspace{1ex}
 
 | @show{(contract "show-pop" '("String" "String" "Number") "Image")}
-| *4* @showsoln{"-*A*" }
+| *@n* @ifsoln{-A}
 || *D*
 | @show{(sexp->code '(show-pop 3751351 "Oklahoma"))}
 @vspace{1ex}
 
 | @show{(contract "show-pop" '("Number" "String") "Number")}
-| *5* @showsoln{"-*D*" }
+| *@n* @ifsoln{-D}
 || *E*
 | @show{(sexp->code '(is-capital "Albany" "NY" "USA"))}
 |===

@@ -1,7 +1,8 @@
+@ifproglang{wescheme}{
 @design-recipe-exercise{ "update-player" "The player moves up and down by 20 pixels each time. Write a function called @funname, which takes in the player’s y-coordinate and the name of the key pressed (\"up\" or \"down\"), and returns the new y-coordinate."
   #:domain-list '(Number String)
   #:range "Number"
-  #:purpose "Produce new y-coordinate depending on key pressed"
+  #:purpose "Consumes y-coordinate and key. Produces new y depending on key pressed"
   #:num-examples 4
   #:example-list '((320 "up" (+ 320 20))
                    (100 "up" (+ 100 20))
@@ -13,3 +14,22 @@
   #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
   #:show-body? #f
   #:grid-lines? #t }
+}
+
+@ifproglang{pyret}{
+@design-recipe-exercise{ "update-player" "The player moves up and down by 20 pixels each time. Write a function called @funname, which takes in the player’s x- and y-coordinate and the name of the key pressed (\"up\" or \"down\"), and returns the new y-coordinate."
+  #:domain-list '(Number Number String)
+  #:range "Number"
+  #:purpose "Consumes x, y and key. Produces new y depending on key pressed"
+  #:num-examples 4
+  #:example-list '((170 320 "up" (+ 320 20))
+                   (200 100 "up" (+ 100 20))
+                   ( 60 320 "down" (- 320 20))
+                   (100 495 "down" (- 100 20)))
+  #:show-examples '((#f #f #f) (#f #f #f) (#f #f #f) (#f #f #f))
+  #:param-list '(x y key)
+  #:show-params? #f
+  #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
+  #:show-body? #f
+  #:grid-lines? #t }
+}

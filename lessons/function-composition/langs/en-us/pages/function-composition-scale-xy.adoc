@@ -4,18 +4,19 @@
 <style>
 /* We override width:100% to allow circles and vspace
 to share the same line */
-.grid tr:nth-child(1){ height: 150pt; }
-.grid tr:nth-child(3){ height: 320pt; }
-.grid tr:nth-child(odd) td {border-bottom: 0 !important;}
-.contracts td { padding: 0 !important; }
-.contracts .editbox { background: none; }
+#content .grid tr:nth-child(1){ height: 150pt; }
+#content .grid tr:nth-child(3){ height: 320pt; }
+#content .grid tr:nth-child(odd) td {border-bottom: 0 !important;}
+#content .contracts td { padding: 0 !important; }
+#content .contracts .editbox { background: none; }
+#content .contracts { background-color: #f7f7f8 !important; }
 
-.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
+#content .demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
 
-.center {padding: 0;}
+#content .center {padding: 0;}
 
-.draw tr:first-of-type { height: 3in; }
-.draw tr:last-of-type  { height: 6in; }
+#content .draw tr:first-of-type { height: 3in; }
+#content .draw tr:last-of-type  { height: 6in; }
 </style>
 ++++
 @do{
@@ -30,6 +31,8 @@ You’ll be investigating these two functions with your partner:
 | @show{ (contract "scale/xy" '("Number" "Number" "Image") "Image" )}
 | @show{ (contract "overlay" '("Image" "Images") "Image" )}
 |===
+
+@vspace{1ex}
 
 [.demo, cols="^.^1,^.^2,^.^3",stripes="none",options="header"]
 |===
@@ -57,8 +60,8 @@ Starting with the image described above, write the Circles of Evaluation and Cod
 *Circle of Evaluation:*
 @showsoln{(sexp->coe tall) }
 
-| *Code:* @fitb{44ex}{@showsoln{(sexp->code wide) }}
-| *Code:* @fitb{44ex}{@showsoln{(sexp->code tall) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code wide) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code tall) }}
 
 
 
@@ -73,7 +76,7 @@ Starting with the image described above, write the Circles of Evaluation and Cod
 *Circle of Evaluation:*
 @showsoln{(sexp->coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
 
-| *Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay ,tall ,wide)) }}
-| *Code:* @fitb{44ex}{@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(overlay ,tall ,wide)) }}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
 
 |===

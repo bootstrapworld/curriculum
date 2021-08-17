@@ -3,50 +3,9 @@
 
 Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(50, 100, "solid", "teal")` will evaluate to an `Image`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 | Name    			|	 | Domain      							|     	| Range
-
-| `# triangle`
-| `{two-colons}`
-| `Number, String, String`
-| `->`
-| `Image`
-5+|`_triangle(80, "solid", "darkgreen")_`
-
-| `# star`
-| `{two-colons}`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_star(50, "solid", "teal")_`}
-
-| `# circle`
-| `{two-colons}`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_circle(30, "outline", "fuchsia")_`}
-
-| `# square`
-| `{two-colons}`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_square(10, "outline", "red")_`}
-
-| `# rectangle`
-| `{two-colons}`
-| @ifsoln{`Number, Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_rectangle(20, 80, "solid", "gold")_`}
 
 | `# rhombus`
 | `{two-colons}`
@@ -76,11 +35,39 @@ td {padding: .4em .625em !important; height: 15pt;}
 | @ifsoln{`Image`}
 5+| @ifsoln{`_regular-polygon(8, 40, "solid", "red")_`}
 
+| `#` `right-triangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_right-triangle(20, 50, "outline", "black")_`}
+
+| `#` `isosceles-triangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_isosceles-triangle(100, 30, "solid", "black")_`}
+
 | `# radial-star`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_radial-star(17, 50, 10, "solid", "orange")_`}
+
+| `;` `star-polygon`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star-polygon(100, 10, 3, "outline", "yellow")_`}
+
+| `;` `triangle-sas`
+| `:`
+| @ifsoln{`Number, Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(triangle-sas 200 50 100 "solid" "blue")_`}
 
 |===

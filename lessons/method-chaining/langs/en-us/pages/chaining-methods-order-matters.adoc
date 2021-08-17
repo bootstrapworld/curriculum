@@ -10,7 +10,7 @@ The table `t` below represents four animals from the shelter:
 
 [cols='5',options="header"]
 |===
-| name      | sex    | age   | fixed   | pounds
+| name      | sex       | age   | fixed   | pounds
 | `"Toggle"`| `"female"`| `3`   | `true`  | `48`
 | `"Fritz"` | `"male"`  | `4`   | `true`  | `92`
 | `"Nori"`  | `"female"`| `6`   | `true`  | `35.3`
@@ -23,20 +23,19 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 [cols=".^12a,^.^1a,2,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 
-| 
+|
 --
  t.order-by("kilos", true)
 --
-|*1*||*A*
+|*@n*@ifsoln{-D} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
-
 
 |
 ----
 t.filter(is-female)
   .build-column("kilos", kilograms)
 ----
-|*2*||*B*
+|*@n*@ifsoln{-A} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
 |
@@ -44,15 +43,15 @@ t.filter(is-female)
 t.build-column("kilos", kilograms)
   .filter(is-heavy)
 ----
-|*3*||*C*
-| Produces a table containing only Fritz, with a single extra column called `kilos`
+|*@n*@ifsoln{-C} ||*C*
+| Produces a table containing only Fritz.
 
 |
 ----
 t.filter(is-heavy)
   .build-column("kilos", kilograms)
 ----
-|*4*||*D*
+|*@n*@ifsoln{-D} ||*D*
 | Won’t run: will produce an error
 
 |
@@ -61,8 +60,8 @@ t.build-column("kilos", kilograms)
   .filter(is-heavy)
   .order-by("sex", true)
 ----
-|*5*||*E*
-| Produces a table containing only Fritz, with two extra columns
+|*@n*@ifsoln{-C} ||*E*
+| Produces a table containing only Fritz, with two extra columns.
 
 |
 ----
@@ -70,7 +69,7 @@ t.build-column("female", is-female)
   .build-column("kilos", kilograms)
   .filter(is-heavy)
 ----
-|*6*||*F*
+|*@n*@ifsoln{-E} ||*F*
 | Produces a table containing Maple and Fritz
 
 |===

@@ -2,8 +2,8 @@
 
 ++++
 <style>
-  td * {text-align: center;}
-  td {height: 150pt;}
+  #content td * {text-align: center;}
+  #content td {height: 110pt;}
 </style>
 ++++
 
@@ -19,12 +19,30 @@ Draw a line from each Circle of Evaluation on the left to the corresponding Code
   (define expr5 '(* (+ 1 1) (- (+ 1 1) 1)))
 }
 
-[cols="^.^10a,^.^2a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
+[cols="^.^8a,^.^3a,5a,^.^1a,^.^12a",options="header",stripes="none",grid="none",frame="none"]
 |===
-| Circle of Evaluation       |   									  ||       | Code
-| @show{(sexp->coe expr1)}   |*@n*@showsoln{"-B" }  ||*A*    | @show{(sexp->code expr3)}
-| @show{(sexp->coe expr2)}   |*@n*@showsoln{"-D" }  ||*B*    | @show{(sexp->code expr1)}
-| @show{(sexp->coe expr3)}   |*@n*@showsoln{"-A" }  ||*C*    | @show{(sexp->code expr5)}
-| @show{(sexp->coe expr4)}   |*@n*@showsoln{"-E" }  ||*D*    | @show{(sexp->code expr2)}
-| @show{(sexp->coe expr5)}   |*@n*@showsoln{"-C" }  ||*E*    | @show{(sexp->code expr4)}
+| Circle of Evaluation
+|||
+| Code
+
+| @show{(sexp->coe expr1)}
+|*@n*@showsoln{"-B"}  ||*A*
+| @show{(sexp->code expr3 #:parens true)}
+
+| @show{(sexp->coe expr2)}
+|*@n*@showsoln{"-D"}  ||*B*
+| @show{(sexp->code expr1 #:parens true)}
+
+| @show{(sexp->coe expr3)}
+|*@n*@showsoln{"-A"}  ||*C*
+| @show{(sexp->code expr5 #:parens true)}
+
+| @show{(sexp->coe expr4)}
+|*@n*@showsoln{"-E"}  ||*D*
+| @show{(sexp->code expr2 #:parens true)}
+
+| @show{(sexp->coe expr5)}
+|*@n*@showsoln{"-C"}  ||*E*
+| @show{(sexp->code expr4 #:parens true)}
+
 |===

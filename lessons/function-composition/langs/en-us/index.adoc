@@ -9,12 +9,14 @@
 | Lesson Goals
 | Students will be able to:
 
-* Demonstrate understanding of the Order of Operations
-* Use @vocab{Circles of Evaluation} to combine multiple @vocab{function}s, including non-Number producing functions
+* Use functions as building-blocks, composing them to achieve a desired affect
+* Diagram function composition using the Circles of Evaluation
+* Compose functions when programming
 
 | Student-facing Goals
 |
-* I can use Circles of Evaluation to combine many kinds of functions.
+* I can map a path from one number to another by composing functions
+* I can use Circles of Evaluation to show how functions can be composed
 
 | Materials
 |[.materials-links]
@@ -79,8 +81,11 @@ The Circles of Evaluation are extended to provide a visual-spatial metaphor for 
 
 === Launch
 Three of the function cards we just used were for the functions `f`, `g` and `h`:
+
 * `f` multiplied its input by 3
+
 * `g` added six to its input
+
 * `h` subtracted one from its input
 
 We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
@@ -146,8 +151,12 @@ While students are exploring, be available for support but encourage student dis
 Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
 |===
 
-If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
+If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
+@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
 }
+@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b?collections=5fbecc2b40d7aa0d844956f0, Function Composition Matching Activity}
+}
+
 
 === Synthesize
 
@@ -159,14 +168,14 @@ _They all produce images, they all change some element of the original image_
 - Does using one of these functions change the original image?
 _No, it creates a whole new image_
 
-- What does the number in @show{(sexp->code `scale)} represent?
+- What does the number in @show{(sexp->code 'scale)} represent?
 _The scale factor by which the image should grow or shrink_
 
-- What does the number in @show{(sexp->code `rotate)} represent?
+- What does the number in @show{(sexp->code 'rotate)} represent?
 _The rotation angle, measured counterclockwise_
 
-- The Domain and Range for @show{(sexp->code `flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code `text)} function as an _input_ for @show{(sexp->code `flip-horizontal)}?
-_Because the @show{(sexp->code `text)} function produces an Image, which is then used as the input for @show{(sexp->code `flip-horizontal)}._
+- The Domain and Range for @show{(sexp->code 'flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(sexp->code 'text)} function as an _input_ for @show{(sexp->code 'flip-horizontal)}?
+_Because the @show{(sexp->code 'text)} function produces an Image, which is then used as the input for @show{(sexp->code 'flip-horizontal)}._
 --
 
 
@@ -199,11 +208,11 @@ Students identify multiple expressions that will create the same image, and thin
 --
 As is often true with solving math problems, there is more than one way to get the same composed image.
 
-Suppose I wrote the code: @show{(sexp->code `(scale 3 (star 50 "solid" "red")))}.
+Suppose I wrote the code: @show{(sexp->code '(scale 3 (star 50 "solid" "red")))}.
 
 
 What’s another line of code I could write that would produce the exact same image?
-	@show{(sexp->code `(star 150 "solid" "red"))}
+	@show{(sexp->code '(star 150 "solid" "red"))}
 --
 
 === Investigate
@@ -212,7 +221,7 @@ Students complete @printable-exercise{pages/more-than-one-way.adoc}.
 === Synthesize
 There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal.
 
-@show{(sexp->code `image=?)}`{two-colons} Image, Image -> Boolean`
+@show{(sexp->code 'image=?)}`{two-colons} Image, Image -> Boolean`
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 

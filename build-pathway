@@ -3,7 +3,7 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
-export ADDEXERCISES=
+export BOOK=
 export DEBUG=
 export FORCE=
 export SUPERFORCE=
@@ -29,24 +29,29 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-05-29 # last modified
+LASTMOD=2021-08-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
 VERSION=
 NOPARALLEL=
 
+if test -f ./.build-pathway.rc; then
+  . ./.build-pathway.rc
+fi
+
 while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
-    ADDEXERCISES=1
+    :
+  elif test "$arg" = --book -o "$arg" = -b; then
+    BOOK=1
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
+  elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
+    EXPANDEDWARNINGS=1
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
-  elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
-    FORCE=1
-    SUPERFORCE=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
   elif test "$arg" = --language; then
@@ -58,14 +63,13 @@ while test $# -ne 0; do
   elif test "$arg" = --no-parallel -o "$arg" = --noparallel; then
     NOPARALLEL=1
   elif test "$arg" = --proglang; then
-    PROGLANG=$1
-    shift
+    PROGLANG=$1; shift
+  elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
+    SUPERFORCE=1
   elif test "$arg" = --version -o "$arg" = -v; then
     VERSION=1
     #
     # some common combos
-  elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
-    EXPANDEDWARNINGS=1
   elif test "$arg" = -df; then
     DEBUG=1; FORCE=1
   elif test "$arg" = -dfl; then
@@ -84,6 +88,11 @@ while test $# -ne 0; do
     ARGS="$ARGS $arg"
   fi
 done
+
+
+test $BOOK && NOPDF= || NOPDF=1
+
+test $SUPERFORCE && FORCE=1
 
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
@@ -110,7 +119,9 @@ function displayhelp() {
   echo "                " An appropriate default is used depending on the pathway.
   echo "  " --debug: Keep around for inspection/debugging various temp files
   echo "           " in the \'distribution\' directory.
-  echo "  " --force: Regenerate doctree from scratch without relying on previous runs.
+  echo "  " --force, -f: Regenerate doctree from scratch without relying on previous runs.
+  echo "  " --superforce, -F: Regenerate doctree from scratch after updating code.
+  echo "  " --book, -b: Generate workbook PDFs.
   echo "  " --no-pdf: Don\'t generate PDF files. This is to speed things up
   echo "            " during debugging when PDF output isn\'t necessary.
   echo "  " --lint: \(1\) Ensure the summary tables in lesson plans have the required rows.
@@ -123,9 +134,6 @@ function displayhelp() {
   exit
 }
 
-if test -f ./.build-pathway.rc; then
-  . ./.build-pathway.rc
-fi
 
 if test $HELP; then displayhelp; fi
 
@@ -175,13 +183,10 @@ mkdir -p prog
 mkdir -p distribution/$LANGUAGE/lib
 mkdir -p distribution/$LANGUAGE/extlib
 
-export RESULT=
-
 function checkmd5nochange() {
   local distDir=$1
   local repoDir=$2
   #echo doing checkmd5nochange $distDir $repoDir
-  RESULT=
   test -d $distDir/.cached || mkdir -p $distDir/.cached
   local savef=$distDir/.cached/.checksum.md5txt
   local currdir=$(pwd)
@@ -191,22 +196,22 @@ function checkmd5nochange() {
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
-      RESULT=1
+      return 0
     else
       #echo saving i $savef
       echo $newchecksum > $savef
+      return 1
     fi
   else
     #echo saving ii $savef
     echo $newchecksum > $savef
+    return 1
   fi
 }
 
 export PROGDIR=$TOPDIR/prog
 
-checkmd5nochange $PROGDIR $TOPDIR/shared/langs
-
-if test ! $RESULT; then
+if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $LANGUAGE != en-us, and
   # shared/langs/$LANGUAGE isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
@@ -218,6 +223,8 @@ if test ! $RESULT; then
     cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
   fi
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
+  mkdir -p distribution/$LANGUAGE/lib/Badges
+  cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
@@ -235,10 +242,9 @@ if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
   cp -pr $TOPDIR/extlib/MathJax* distribution/$LANGUAGE/extlib
 fi
 
-checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib
-
-if test ! $RESULT; then
+if ! checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib; then
   overwrite 'copying' distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
 fi
@@ -316,10 +322,6 @@ EOF
   elif test $DATASHEETPAGE; then
     $SED -i \
       -e 's/^<body class="/\0datasheetpage /' \
-      $f
-  else
-    $SED -i \
-      -e 's/^<body class="/\0nonworkbookpage /' \
       $f
   fi
   if ! grep -q %INSERTGDRIVESAVE2 $f; then
@@ -431,7 +433,7 @@ function modifygdrivepage() {
   $SED -i \
     -e 's/%GDRIVEEXTERNALHREF//g' \
     -e '/^ *<link rel="stylesheet".*\.css/d' \
-    -e '/^ *<script type="text\/javascript".*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
+    -e '/^ *<script .*\(codemirror\|runmode\|scheme2\|pyret-mode\|bootstraplesson\)/d' \
     -e '/<span class="tooltiptext">.*<\/span>/d' \
     $f
   echo "<style>" > $TMPFILE.css
@@ -473,20 +475,6 @@ function removecodetags() {
     -e 's/<code>\(<tt\)/\1/g' \
     -e 's/\(<\/tt>\)<\/code>/\1/g' \
     $f
-}
-
-function moveheaderlogopos() {
-  #TODO: Not used anymore?
-  local f=$1
-  $SED -ne '/^<h1>.*class="bootstraplogo".*<\/h1>$/p' $f > temp.txt
-  $SED -i \
-    -e 's/^<h1>\(.*\)\(<span class="bootstrapheader".*\)$/\1<h1>\2/' \
-    temp.txt
-  $SED -i \
-    -e '/^<h1>.*class="bootstraplogo".*<\/h1>$/d' \
-    -e '/^<div id="content">/r temp.txt' \
-    $f
-  rm temp.txt
 }
 
 function cleanuptitle() {
@@ -546,10 +534,9 @@ function resolveabbrevs() {
     CODELANG=racket
   fi
   $SED -i \
-    -e 's/<pre>/<pre><tt class="'$CODELANG'">/g' \
-    -e 's/<\/pre>/<\/tt><\/pre>/g' \
-    -e 's/<code>/<code><tt class="'$CODELANG'">/g' \
-    -e 's/<\/code>\(,*\)/<\/tt>\1<\/code>/g' \
+    -e 's/<pre>/<pre><code class="'$CODELANG'">/g' \
+    -e 's/<\/pre>/<\/code><\/pre>/g' \
+    -e 's/<code>/<code class="'$CODELANG'">/g' \
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
@@ -580,9 +567,24 @@ function resolveabbrevs() {
     \
     -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
     $f
+  $SED -i \
+    -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/\(<\/div>\)<\/p>/\1/' \
+    $f
+  $SED -i \
+    -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/<p>\(<div\)/\1/' \
+    $f
+  $SED -i \
+    -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="sidebartitle">Lesson Pathway, Standards and Practices<\/div><div class="paragraph"><!--/' \
+    $f
+  $SED -i \
+    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" type="checkbox" onchange="toggleNonPrereqDisplay()">\Prerequisites only /' \
+    $f
+  $SED -i \
+    -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
+    $f
   if test "$mathjaxneeded"; then
     cat > .cached/.mathjax.txt <<EOF
-      <script type="text/javascript" src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
@@ -595,11 +597,11 @@ EOF
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
     <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
-    <script type="text/javascript" src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
+    <script src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -619,11 +621,16 @@ EOF
       -e 's/%INSERTCURRICULUMCOMMENT//' \
       $f
   fi
+  if test ! $WORKBOOKPAGE -a ! $DATASHEETPAGE; then
+    $SED -i \
+      -e 's/^<body class="/\0narrativepage /' \
+      $f
+  fi
 }
 
 function adjustproglangsubdirs() {
-  #echo doing adjustproglangsubdirs "$@"
   local d=$1
+  #echo doing adjustproglangsubdirs $(pwd)/$d
 
   test -d "$d" || return
 
@@ -649,6 +656,7 @@ function shadowcopydir() {
   # targetdir = pages from repo
   local srcdir=$1
   local targetdir=$2
+  #echo doing shadowcopydir from $srcdir to $targetdir
   mkdir -p "$targetdir"
 
   for f in "$srcdir"/*; do
@@ -735,6 +743,7 @@ function checklinks() {
 function doadoc() {
   local f="$1"
   local nocache="$2"
+  local lessonplan="$3"
   #echo doing doadoc "$@"
   local fbase=${f%.a*doc}
   local fasc=.cached/.$fbase.asc
@@ -743,7 +752,7 @@ function doadoc() {
   test -d .cached || mkdir -p .cached
   local cachedirarg=
   local lessonplandirarg=
-  if test $nocache; then
+  if test "$nocache" = nocache; then
     cachedirarg="-a cachedir="
     lessonplandirarg="-a lessonplandir=../"
   else
@@ -753,7 +762,13 @@ function doadoc() {
   #echo cachedirarg is $cachedirarg
   #echo lessonplandirarg is $lessonplandirarg
 
+  if test "$lessonplan" = lessonplan; then
+    touch .cached/.index-sidebar.asc
+    touch .cached/.pathway-standards.asc
+  fi
+
   $PROGDIR/adoc-preproc.rkt $f
+
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       $cachedirarg $lessonplandirarg \
@@ -793,7 +808,7 @@ function processadoc() {
       overwrite 'building' /$LESSONSUBDIR/$f
       rm -f .cached/.$fbase-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      #echo doing adoc-preproc of $f
+      #echo doing doadoc of $f
       doadoc $f
       #$PROGDIR/adoc-preproc.rkt $f
       #test -f "$fhtml" || echo $fhtml not created
@@ -818,15 +833,18 @@ function processadoc() {
             TEMPF=$(mktemp); rm -f $TEMPF
             TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
             cp -p $fhtml $TMPHTML
-            removecodetags $TMPHTML
+            #removecodetags $TMPHTML
+            # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
             ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
+            # If it's a landscape page, the "fat margin" is on the left
+            test -f $f || echo --- $f NOT FOUND!
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              ASPECT="-O Landscape --margin-top 0mm --margin-right 20mm --margin-bottom 0mm --margin-left 20mm"
+              ASPECT="-O Landscape --margin-top 12.7mm --margin-right 12.7mm --margin-bottom 12.7mm --margin-left 18mm"
             fi
 
             echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
-            # checkifsinglepdfpage "$fpdf" #FIXME
+            # checkifsinglepdfpage "$fpdf" #FIXME:
             #test $DEBUG || rm $TMPHTML
           fi
         fi
@@ -902,31 +920,20 @@ function recursiveadoc() {
   export OTHERDIR="$oldOTHERDIR"
 }
 
-function mkdirsolutionversionof() {
-  #echo doing mkdirsolutionversionof "$@"
+function mkdirsolutionversion() {
+  #echo doing mkdirsolutionversion
   test -d pages || return
 
   #echo PWD is $(pwd)
 
   test -d pages/.cached || mkdir -p pages/.cached
 
-  local origDir="$1"
-
   if test -d solution-pages-2; then
     #echo DEADC0DE: solution-pages-2 shouldn\'t exist
     rm -fr solution-pages-2
   fi
 
-  if test -d solution-pages; then
-    adjustproglangsubdirs solution-pages
-  fi
-
-  if test -d $origDir/pages; then
-    cp -pr $origDir/pages solution-pages-2
-    adjustproglangsubdirs solution-pages-2
-  else
-    mkdir solution-pages-2
-  fi
+  cp -pr pages solution-pages-2
 
   cp -p $PROGDIR/.hta* solution-pages-2
 
@@ -973,10 +980,22 @@ function checklessonplan() {
 
   grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
-  if test $ADDEXERCISES; then
-    if test -f index.adoc; then
-      echo collecting exercises in $L
-      $PROGDIR/collect-exercises.rkt index.adoc
+  if test -f index.adoc; then
+    #echo collecting exercises in $L
+    $PROGDIR/collect-exercises.rkt index.adoc
+    exerflist=pages/.cached/.exercise-pages-ls.txt.kp
+    if test -f $exerflist; then
+      exerfA=pages/.cached/.exercise-pages.txt.kp
+      rm -f $exerfA
+      for f in $(cat $exerflist); do
+        if test ${f%.adoc} = $f; then
+          echo $f >> $exerfA
+        elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+          echo $f landscape >> $exerfA
+        else
+          echo $f >> $exerfA
+        fi
+      done
     fi
   fi
 
@@ -993,8 +1012,7 @@ function buildworkbookpages() {
 
   DORECURSIVEADOC=1
 
-    checkmd5nochange . $repoDir
-    if test $RESULT; then
+    if checkmd5nochange . $repoDir; then
       #echo no need to do recursive adoc
       DORECURSIVEADOC=
     fi
@@ -1008,10 +1026,7 @@ function buildworkbookpages() {
     mkdir pages
   fi
 
-  # subdir -> adjustproglangsubdirs moved
-
-  mkdirsolutionversionof $repoDir
-  #adjustproglangsubdirs solution-pages
+  mkdirsolutionversion
 
   #
   export PATHWAYROOTDIR="../../"
@@ -1062,7 +1077,7 @@ function buildlessonplan() {
       overwrite 'building' lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc
+      doadoc index.adoc 0 lessonplan
       #$PROGDIR/adoc-preproc.rkt index.adoc
       if test -f index.html; then
         mv index.html index.shtml
@@ -1088,7 +1103,7 @@ function buildlessonplan() {
           TEMPF=$(mktemp); rm -f $TEMPF
           TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
           cp index.shtml $TMPHTML
-          removecodetags $TMPHTML
+          #removecodetags $TMPHTML
 
           echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
         fi
@@ -1146,10 +1161,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
       -B . \
-      -o .pathway-glossary.shtml \
+      -o pathway-glossary.shtml \
       .cached/.pathway-glossary.asc
-    insertbodyid .pathway-glossary.shtml
-    resolveabbrevs .pathway-glossary.shtml
+    insertbodyid pathway-glossary.shtml
+    resolveabbrevs pathway-glossary.shtml
   fi
   if test -f .cached/.pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
@@ -1157,10 +1172,10 @@ function makeglossaryandstandards() {
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -B . \
-      -o .pathway-standards.shtml \
+      -o pathway-standards.shtml \
       .cached/.pathway-standards.asc
-    insertbodyid .pathway-standards.shtml
-    resolveabbrevs .pathway-standards.shtml
+    insertbodyid pathway-standards.shtml
+    resolveabbrevs pathway-standards.shtml
   fi
 }
 
@@ -1174,7 +1189,7 @@ function buildpathwaynarrative() {
     done
   fi
   #echo copacetic I $copacetic
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No narrative in pathway $PATHWAY\; creating one
     echo "= $PATHWAY" > index.adoc
@@ -1235,11 +1250,7 @@ function makeworkbooktex() {
   local tgt=$1
   local wbpnf=$2
 
-  if test "$wbpnf" = .cached/.workbook-page-index.rkt; then
-    local wbpnfkp=.workbook-pagenum-index.rkt.kp
-  else
-    local wbpnfkp=$wbpnf.kp
-  fi
+  local wbpnfkp=$wbpnf.kp
 
   local i=
 
@@ -1308,11 +1319,11 @@ function makeworkbooktex() {
       currlesson=$lessondir
         echo >> $tgt.tex
         echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pagenum}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
-        if test "$tgt" = pd-workbook; then
-      if echo $currlesson| grep -q 'lessons/'; then
-        lessonplanpdf=$currlesson/index.pdf
-        echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
-      fi
+        if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
+          if echo $currlesson| grep -q 'lessons/'; then
+            lessonplanpdf=$currlesson/index.pdf
+            echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
+          fi
         fi
 
     else
@@ -1344,7 +1355,7 @@ function buildteacherresource() {
       fi
     done
   fi
-  if test ! "$copacetic"; then
+  if test ! "$copacetic" -a ! -f index.shtml; then
     echo
     echo WARNING: No teacher resource files in pathway $PATHWAY
   elif ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
@@ -1383,24 +1394,7 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  #echo doing batchhtmltopdf .cached/$WKH2P_BATCH_BASE.txt
-  rm -f .cached/$WKH2P_BATCH_BASE-split*
-  split -l $(expr 1 + $(wc -l .cached/$WKH2P_BATCH_BASE.txt|$SED -e 's/^ *\([^ ]*\).*/\1/') / $NUMCORES) \
-    .cached/$WKH2P_BATCH_BASE.txt .cached/$WKH2P_BATCH_BASE-split
-  for f in .cached/$WKH2P_BATCH_BASE-split*; do
-    #echo doing batchhtmltopdf $f
-    if test -f "$f"; then
-      if test ! $PDFpagesredone; then
-        echo building individual PDF pages
-        echo
-        export PDFpagesredone=1
-      fi
-      wkhtmltopdf --read-args-from-stdin < $f >/dev/null 2>&1 &
-    fi
-  done
-  wait
-  #echo done doing batchhtmltopdf
-  test $DEBUG || rm -f .cached/$WKH2P_BATCH_BASE-split*
+  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt >/dev/null 2>&1
 }
 
 function rmtmpfiles() {
@@ -1432,8 +1426,7 @@ function copylessondir() {
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
       #echo doing checkmd5nochange $lessonDir $repoLessonDir
-      checkmd5nochange $lessonDir $repoLessonDir
-      if test $RESULT; then
+      if checkmd5nochange $lessonDir $repoLessonDir; then
         #echo $lessonDir doesnt need copying
         DOCOPYDIR=
       fi
@@ -1443,17 +1436,15 @@ function copylessondir() {
       cd $lessonDir
       # we'll set it again when we do the adoc'ing
       rm -f .cached/.checksum.md5txt
-      checklessonplan $lessonDir
-      for subdir in *; do
-        if test -d "$subdir"; then
-          if test "$subdir" != solution-pages; then
-            adjustproglangsubdirs "$subdir"
-          fi
-        fi
-      done
       for subdir in *; do
         if test "$subdir" = pages -o "$subdir" = solution-pages; then
           test -d $subdir/.cached || mkdir $subdir/.cached
+        fi
+      done
+      checklessonplan $lessonDir
+      for subdir in *; do
+        if test -d "$subdir"; then
+          adjustproglangsubdirs "$subdir"
         fi
       done
       cd ../..
@@ -1461,7 +1452,46 @@ function copylessondir() {
   fi
 }
 
+function collectworkbookpages() {
+  d="$1"
+  test ! -d "$d" && return
+  cd "$d"
+  if test -d pages; then
+    cd pages
+    if test -f workbook-pages.txt; then
+      test -d .cached || mkdir .cached
+      cd .cached
+      rm -f .workbook-pages.txt.kp
+      #ensure workbook-pages.txt ends in newline, or while isn't happy
+      $SED -i -e '$a\' ../workbook-pages.txt
+
+      while read -r f; do
+        #echo finding aspect of "$f"
+        if echo "$f"|grep -q landscape; then
+          echo $f >> .workbook-pages.txt.kp
+        elif test "${f%.adoc}" = "$f"; then
+          echo $f >> .workbook-pages.txt.kp
+        else
+          g=${f%.adoc}.html
+          if test -f $f && head -n 5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
+            echo $f landscape >> .workbook-pages.txt.kp
+          elif test -f $g && head -n 60 ../"$g"|grep -q 'body.*landscape'; then
+            echo $f landscape >> .workbook-pages.txt.kp
+          else
+            echo $f >> .workbook-pages.txt.kp
+          fi
+        fi
+      done < ../workbook-pages.txt
+
+      cd ..
+    fi
+    cd ..
+  fi
+  cd ..
+}
+
 function buildpathway() {
+  #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1498,8 +1528,7 @@ function buildpathway() {
     repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
     distDir="$TOPDIR/$DESTPATHWAYDIR"
 
-    checkmd5nochange $DESTPATHWAYDIR $repoDir
-    if test ! $RESULT; then
+    if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
       echo copying pathway $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
     fi
@@ -1508,24 +1537,25 @@ function buildpathway() {
     REFRESHBACKMATTER=1
     REFRESHRESOURCES=1
 
+    test -d $repoDir/front-matter || REFRESHFRONTMATTER=
+    test -d $repoDir/back-matter || REFRESHBACKMATTER=
+    test -d $repoDir/resources || REFRESHRESOURCES=
+
       #TODO parallelize
       if test -d $distDir/front-matter -a -d $repoDir/front-matter; then
-        checkmd5nochange $distDir/front-matter $repoDir/front-matter
-        if test $RESULT; then
+        if checkmd5nochange $distDir/front-matter $repoDir/front-matter; then
           REFRESHFRONTMATTER=
         fi
       fi
 
       if test -d $distDir/back-matter -a -d $repoDir/back-matter; then
-        checkmd5nochange $distDir/back-matter $repoDir/back-matter
-        if test $RESULT; then
+        if checkmd5nochange $distDir/back-matter $repoDir/back-matter; then
           REFRESHBACKMATTER=
         fi
       fi
 
       if test -d $distDir/resources -a -d $repoDir/resources; then
-        checkmd5nochange $distDir/resources $repoDir/resources
-        if test $RESULT; then
+        if checkmd5nochange $distDir/resources $repoDir/resources; then
           REFRESHRESOURCES=
         fi
       fi
@@ -1565,21 +1595,17 @@ function buildpathway() {
     fi
 
     if test $REFRESHFRONTMATTER; then
-      if test -d front-matter; then
-        cd front-matter
-        mkdirsolutionversionof $repoDir/$d/front-matter
-        cd ..
-        adjustproglangsubdirs front-matter
-      fi
+      cd front-matter
+      mkdirsolutionversion
+      cd ..
+      adjustproglangsubdirs front-matter
     fi
 
     if test $REFRESHBACKMATTER; then
-      if test -d back-matter; then
-        cd back-matter
-        mkdirsolutionversionof $repoDir/$d/back-matter
-        cd ..
-        adjustproglangsubdirs back-matter
-      fi
+      cd back-matter
+      mkdirsolutionversion
+      cd ..
+      adjustproglangsubdirs back-matter
     fi
 
     mkdir -p resources/protected
@@ -1587,28 +1613,37 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then
       cd resources
+      mkdirsolutionversion
       for d in *; do
         if test -d $d; then
           cd $d
-          mkdirsolutionversionof $repoDir/resources/$d
+          mkdirsolutionversion
           cd ..
-          adjustproglangsubdirs $d
+          #adjustproglangsubdirs $d
         fi
+      done
+      cd ..
+      adjustproglangsubdirs resources
+    fi
+
+    for d in front-matter back-matter; do
+      collectworkbookpages "$d"
+    done
+
+    if test -d lessons; then
+      cd lessons
+      for d in *; do
+        collectworkbookpages "$d"
       done
       cd ..
     fi
 
-    #exit
-
     $PROGDIR/collect-workbook-pages.rkt
-
-    #exit
 
     buildlessons
 
-    #exit
-
     export WORKBOOKPAGE=1
+    export BOILERPLATE=1
 
     if test $REFRESHFRONTMATTER; then
       if test -d front-matter; then
@@ -1634,7 +1669,6 @@ function buildpathway() {
     if test $REFRESHRESOURCES; then
       for d in *; do
         if test -d "$d"; then
-          adjustproglangsubdirs "$d" # TODO maybe in a separate loop so potential xrefs work
           if test "$d" = datasheets; then
             export DATASHEETPAGE=1
           else
@@ -1649,21 +1683,22 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then touch resources; fi
 
+    export BOILERPLATE=
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
 
-    # Racket version
-    # $PROGDIR/make-workbook-tex.rkt
-    # for tgt in workbook pd-workbook workbook-sols; do
-    #   $SED -i -e "s/==TARGET==/$tgt/" $tgt.tex
-    # done
-
     # Shell version
-    if test ! $NOPDF; then
+    if test $BOOK; then
       makeworkbooktex workbook .cached/.workbook-page-index.rkt
       makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
       makeworkbooktex bm-contracts .cached/.back-matter-contracts-index.rkt
+      makeworkbooktex bm-contracts-sols .cached/.back-matter-contracts-index.rkt
+      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
+      makeworkbooktex workbook-long .cached/.workbook-long-page-index.rkt
+      makeworkbooktex pd-workbook-long .cached/.workbook-long-page-index.rkt
+      makeworkbooktex workbook-long-sols .cached/.workbook-long-page-index.rkt
+      makeworkbooktex opt-exercises .cached/.opt-exercises-index.rkt
+      makeworkbooktex opt-exercises-sols .cached/.opt-exercises-index.rkt
     fi
 
     buildlessonplans
@@ -1692,27 +1727,30 @@ function buildpathway() {
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
-        if test $PDFpagesredone; then
-          echo building workbook PDFs
-          echo
-        fi
-        for wbf in workbook pd-workbook workbook-sols bm-contracts; do
-          if test $DEBUG; then
-            if test $NOPARALLEL; then
-              $PROGDIR/make-workbook.rkt $wbf
-            else
-              $PROGDIR/make-workbook.rkt $wbf &
-            fi
-          else
-            if test $NOPARALLEL; then
-              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
-            else
-              $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
-              # $PROGDIR/make-workbook.rkt $wbf &
-            fi
+        if test $BOOK; then
+          if test $PDFpagesredone; then
+            echo building workbook PDFs
+            echo
           fi
-        done
-        test ! $NOPARALLEL && wait
+          for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+            pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+            if test $DEBUG; then
+              if test $NOPARALLEL; then
+                $PROGDIR/make-workbook.rkt $wbf
+              else
+                $PROGDIR/make-workbook.rkt $wbf &
+              fi
+            else
+              if test $NOPARALLEL; then
+                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
+              else
+                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
+                # $PROGDIR/make-workbook.rkt $wbf &
+              fi
+            fi
+          done
+          test ! $NOPARALLEL && wait
+        fi
       fi
     fi
 
@@ -1745,12 +1783,15 @@ function buildpathway() {
     fi
   fi
   test $EXPANDEDWARNINGS || echo $'\033[?7h'
+
 }
 
 function allthestandards() {
   cd $TOPDIR
   cd distribution/$LANGUAGE
   export LANGROOTDIR=./
+  #echo doing allthestandards in $(pwd)
+  test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
   for d in courses/*; do
     test -d $d || continue
@@ -1761,7 +1802,6 @@ function allthestandards() {
       sed -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
     fi
   done
-  test -d .cached || mkdir -p .cached
   $PROGDIR/make-standards.rkt
   asciidoctor -a linkcss -a proglang=$PROGLANG \
     -a stylesheet=lib/curriculum.css \

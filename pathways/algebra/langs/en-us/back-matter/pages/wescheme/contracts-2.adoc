@@ -1,15 +1,9 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. e.g. `ellipse : Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "fuchsia")` will evaluate to an Image.
+Contracts tell us how to use a function. e.g. `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "fuchsia")` will evaluate to an Image.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="4,1,10,1,2", options="header",grid="rows",stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 
 |===
 
@@ -19,75 +13,68 @@ td {padding: .4em .625em !important; height: 15pt;}
 |
 | Range
 
+| `;` `=`
+| `{two-colons}`
+| `Number, Number`
+| `->`
+| `Boolean`
+5+| `_(= 3 2)_`
+
 | `;` `<=`
-| `:`
+| `{two-colons}`
 | `Number, Number`
 | `->`
 | `Boolean`
 5+| `_(<= 3 2)_`
 
 | `;` `>=`
-| `:`
+| `{two-colons}`
 | `Number, Number`
 | `->`
 | `Boolean`
 5+| `_(>= 3 2)_`
 
 | `;` `<>`
-| `:`
+| `{two-colons}`
 | `Number, Number`
 | `->`
 | `Boolean`
 5+| `_(<> 3 2)_`
 
 | `;` `string=?`
-| `:`
+| `{two-colons}`
 | `String, String`
 | `->`
 | `Boolean`
 5+| `(string=? "cat" "kitten")`
 
 | `;` `string>=?`
-| `:`
+| `{two-colons}`
 | `String, String`
 | `->`
 | `Boolean`
 5+| `(string>=? "ape" "zebra")`
 
 | `;` `string<=?`
-| `:`
+| `{two-colons}`
 | `String, String`
 | `->`
 | `Boolean`
 5+| `(string<=? "Abena" "Zoe")`
 
 | `;` `string<>?`
-| `:`
+| `{two-colons}`
 | `String, String`
 | `->`
 | `Boolean`
 5+| `(string<>? "crab" "crawfish")`
 
 | `;` `string-append`
-| `:`
+| `{two-colons}`
 | `String, String`
 | `->`
 | `String`
 5+| `(string-append "sun" "shine")`
-
-| `;` `triangle`
-| `:`
-| `Number, String, Sting`
-| `->`
-| `Image`
-5+| `_(triangle 80 "solid" "green")_`
-
-| `;` `star`
-| `:`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_(star 50 "solid" "teal")_`}
 
 |===
 

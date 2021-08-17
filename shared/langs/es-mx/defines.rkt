@@ -29,7 +29,7 @@
   (fprintf o "\n- link:./pathway-standards.html[Standards Alignment]\n")
 
 (define (print-link-to-forum o)
-  (fprintf o "\n- link:https://discourse.bootstrapworld.org[Bootstrap Discussion Forum]\n")
+  (fprintf o "\n- link:https://discourse.bootstrapworld.org[Online Community (Discourse)]\n")
   (fprintf o "--
 Want to be kept up-to-date about Bootstrap events, workshops, and curricular
 changes? Want to ask a question or pose a lesson idea for other Bootstrap
