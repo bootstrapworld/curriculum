@@ -2,7 +2,7 @@
 
 ++++
 <style>
-#content .forceShading { background: #f7f7f8; }
+#content .forceShading { background: #f7f7f8; font-size:0.8rem;}
 </style>
 ++++
 
@@ -14,15 +14,16 @@
 There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles!
 
 
-[.forceShading.indentedpara]
+[.forceShading]
 --
-@show{(sexp->code 'triangle)}` {two-colons} (size {two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
+@show{(sexp->code 'triangle)}`{two-colons} (size{two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
 
-@show{(sexp->code 'right-triangle)}`{two-colons} (base {two-colons} Number, height {two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
+@show{(sexp->code 'right-triangle)}`{two-colons} (base{two-colons}Number, height{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
 
-@show{(sexp->code 'isosceles-triangle)}`{two-colons} (leg-length {two-colons} Number, vertex-angle {two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
+@show{(sexp->code 'isosceles-triangle)}`{two-colons} (leg{two-colons}Number, angle{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
 --
 
+@vspace{1ex}
 
 @n Why do you think @show{(sexp->code 'triangle)} only needs one number, while @show{(sexp->code 'right-triangle)} and @show{(sexp->code 'isosceles-triangle)} need two numbers and @show{(sexp->code 'triangle/sas)} needs three?
 
