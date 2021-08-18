@@ -487,14 +487,21 @@ table .autonum::after { content: none; }
 
 /* This class and the rule below it could be cleaned up */
 .wrapper p {
+  clear:  both;
   font-family: Hack, "Courier New", monospace;
   width: 100%;
   display: flex;
   display: -webkit-box; /* wkhtmltopdf uses this instead of flex */
+  display: -webkit-flex;
   flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
 .wescheme .wrapper p > *:nth-last-child(2),
-.pyret    .wrapper p > *:nth-last-child(1) {flex-grow:  1; -webkit-flex-grow: 1}
+.pyret    .wrapper p > *:nth-last-child(1) {
+  flex-grow:  1;
+  -webkit-box-flex:  1;
+  -webkit-flex-grow: 1;
+}
 
 .recipe_name, .recipe_domain, .recipe_range, .purpose_comment,
 .recipe_example_inputs, .recipe_example_body,
