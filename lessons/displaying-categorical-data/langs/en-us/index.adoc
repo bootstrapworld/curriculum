@@ -42,7 +42,9 @@
 
 == Displaying Categorical Variables @duration{10 minutes}
 === Overview
-Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
+@ifproglang{pyret}{Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.}
+
+@ifproglang{codap}{Students use various Transformers on the Animals dataset to produce displays and plots.}
 
 === Launch
 Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image?
@@ -66,13 +68,29 @@ We can also resize the window by dragging its borders. This allows us to experim
 
 The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `sex` across the shelter.
 }
-@ifproglang{codap}{
-write description explaining CODAP logistics or keep this description hidden
 
+
+
+@ifproglang{codap}{
+Open the Animals Dataset in CODAP.
+
+[.lesson-instruction]
+- Click the `graph` icon from the menu in the upper left. What appears?
+- Select a dot with your mouse. What happens?
+- How do you think the position of each dots is determined?
+
+;;;;; can I add an image of the display that appears in CODAP?
+
+Initially, the data points are randomly distributed on the graph. Hovering over an orange dot reveals the `name` of that particular animal. Notice that when you hover over a particular dot, the table row for that animal is also highlighted in blue. When you hold the shift button, you can select multiple dots in the graphical display, or multiple rows in the table.
+
+Experiment with highlighting multiple table rows. Explore what happens when you set aside selected and / or unselected cases (available by selecting the eye icon to the right of the table and to the right of the graph).
+
+We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 }
 
 
 === Investigate
+@ifproglang{pyret}{
 Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
 
 @show{(contract "bar-chart" '("Table" "String") "Image" )}
@@ -84,44 +102,102 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 - Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 - When would you want to use one chart instead of another?
+}
+-
+@ifproglang{codap}{
+
+Once we have a graph of randomly distributed data points, we can drag attributes from the table to the axes to organize the data.
+
+Experiment with creating some bar charts in CODAP.
+[.lesson-instruction]
+- Drag the `fixed` attribute from the table to the y-axis. Now try dragging it to the x-axis. What do you notice?
+- Select the `configuration` icon to the right of the data display. Select `fuse dots into bars`
+- Now, make a bar chart showing how many animals there are of each sex.
+- Experiment with bar charts, dragging new attributes to the axes - or clicking on the axis title to display a menu of attributes.
+- Which types of attributes can be displayed with the dots fused into bars? For which types of attributes does CODAP instead offer to create a bar for each point?
+}
+
 
 === Common Misconceptions
+@ifprogroglang{pyret}{
 Pie charts and bar charts may show counts or percentages (in Pyret, pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables.
+}
+
+@ifproglang{codap}{
+Bar charts may show counts or percentages. (Try clicking the `ruler` icon to toggle between the two, or to show both simultaneously.) Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. A bar chart might be used to display two or more categorical variables. (Pie charts, which CODAP does not create, display only one categorical variable.)
+}
+
+
 
 === Synthesize
+@ifprogroglang{pyret}{
 Pie and Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
 Pie charts and bar charts are mostly used to _display categorical columns_.
 
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
+}
+
+@ifprogroglang{codap}{
+Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+
+[.lesson-point]
+Bar charts are mostly used to _display categorical columns_.
+
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
+}
+
+
 
 == Exploring other Displays @duration{30 minutes}
 
 === Overview
-Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
+@ifprogroglang{pyret}{
+Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
+
+@ifprogroglang{codap}{
+Students freely explore the CODAP display library. In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
+
 
 === Launch
-There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.
+@ifprogroglang{pyret}{
+There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.}
+
+@ifprogroglang{codap}{
+There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can figure out how to use them.}
 
 === Investigate
 [.lesson-instruction]
 Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
 
 === Common Misconceptions
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
+@ifproglang{pyret}{
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.}
+
+@ifproglang{codap}{
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.}
+
 
 === Synthesize
 
+@ifproglang{pyret}{
 Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
 
-You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.}
+
+
+@ifproglang{codap}{
+Today you’ve added more functions to your toolbox. You can create bar charts to visually display data, and even transform entire tables!
+
+You will have many opportunities to use these concepts in this course, by applying functions to answer data science questions.}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 a|
 @span{.title}{Extension Activity}
 
+@ifproglang{pyret}{
 Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
 
 What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
@@ -137,6 +213,22 @@ Sometimes the dataset we have is _already_ summarized in a table like this, and 
 And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
 
 `pie-chart-summarized(count(animals-table,"species"), "value", "count")`
+}
+
+@ifproglang{codap}{
+Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. CODAP has a Transformers plug-in that does exactly this! From the menu in the upper left, select `plugins`, then `Transformers`. Choose the `Count` transformer. Select the Animals dataset, and the `species` attribute.
+
+What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
+
+- Use the `count` transformer to make a table showing the number of animals that are `fixed` (or not) from the shelter.
+
+- Use the `count` transformer to make a table showing the number of animals of each `sex` from the shelter.
+
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. CODAP allows us to go create a data display from any table; all we need to do is select the table first.
+}
+
+
+
 |===
 
 
