@@ -50,9 +50,12 @@
 Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image?
 
 @ifproglang{pyret}{
-The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}, and an example of using it:
+The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
 
 @show{(contract "pie-chart" '("Table" "String") "Image" )}
+
+And here is an example of _using_ the function:
+
 `pie-chart(animals-table, "legs")`
 
 [.lesson-instruction]
@@ -103,7 +106,7 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 - When would you want to use one chart instead of another?
 }
--
+
 @ifproglang{codap}{
 
 Once we have a graph of randomly distributed data points, we can drag attributes from the table to the axes to organize the data.
@@ -119,7 +122,7 @@ Experiment with creating some bar charts in CODAP.
 
 
 === Common Misconceptions
-@ifprogroglang{pyret}{
+@ifproglang{pyret}{
 Pie charts and bar charts may show counts or percentages (in Pyret, pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables.
 }
 
@@ -130,7 +133,7 @@ Bar charts may show counts or percentages. (Try clicking the `ruler` icon to tog
 
 
 === Synthesize
-@ifprogroglang{pyret}{
+@ifproglang{pyret}{
 Pie and Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
@@ -139,7 +142,7 @@ Pie charts and bar charts are mostly used to _display categorical columns_.
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
 }
 
-@ifprogroglang{codap}{
+@ifproglang{codap}{
 Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
@@ -153,18 +156,18 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 == Exploring other Displays @duration{30 minutes}
 
 === Overview
-@ifprogroglang{pyret}{
+@ifproglang{pyret}{
 Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
 
-@ifprogroglang{codap}{
+@ifproglang{codap}{
 Students freely explore the CODAP display library. In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
 
 
 === Launch
-@ifprogroglang{pyret}{
+@ifproglang{pyret}{
 There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.}
 
-@ifprogroglang{codap}{
+@ifproglang{codap}{
 There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can figure out how to use them.}
 
 === Investigate

@@ -36,7 +36,7 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(unless (member *proglang* '("pyret" "wescheme"))
+(unless (member *proglang* '("pyret" "wescheme" "codap"))
   (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
