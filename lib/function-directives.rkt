@@ -598,8 +598,7 @@
                       (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                       (write-large "(")
                       (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
-                      (write-large ")")
-                      (write-spaced ":"))))
+                      (write-large "):"))))
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
                 (write-wrapper ".recipe.recipe_line"
