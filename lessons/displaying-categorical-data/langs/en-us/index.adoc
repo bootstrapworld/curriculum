@@ -1,6 +1,14 @@
 = Displaying Categorical Data
 
-@lesson-description{Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
+@lesson-description{
+
+@ifproglang{pyret}{
+Students learn to apply functions to entire Tables, generating pie charts and bar charts. They then explore other plotting and display functions that are part of the Data Science library.}
+
+@ifproglang{codap}{
+Students learn to apply generate bar charts. They then explore other plotting and display functions that are part of the CODAP data displays library.}}
+
+
 
 @add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
 
@@ -10,9 +18,17 @@
 | Lesson Goals
 | Students will be able to:
 
+@ifproglang{pyret}{
 * Read pie and bar charts
 * Explain the difference between pie and bar charts
 * Generate pie and bar charts (among others) from the Animals Dataset
+}
+
+@ifproglang{codap}{
+* Read bar charts
+* Generate bar charts (among other data displays) from the Animals Dataset
+* }
+
 
 | Student-facing Lesson Goals
 |
@@ -32,7 +48,7 @@
 * Decide how students will be grouped in pairs
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}
+* @ifproglang{pyret}{All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}}
 
 | Supplemental Resources
 |
@@ -82,7 +98,7 @@ Open the Animals Dataset in CODAP.
 - Select a dot with your mouse. What happens?
 - How do you think the position of each dots is determined?
 
-;;;;; can I add an image of the display that appears in CODAP?
+@span{.right}{@image{images/codap-initial-display.png,"" ,300}}
 
 Initially, the data points are randomly distributed on the graph. Hovering over an orange dot reveals the `name` of that particular animal. Notice that when you hover over a particular dot, the table row for that animal is also highlighted in blue. When you hold the shift button, you can select multiple dots in the graphical display, or multiple rows in the table.
 
@@ -160,7 +176,7 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
 
 @ifproglang{codap}{
-Students freely explore the CODAP display library. In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
+Students freely explore the CODAP data display library. In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
 
 
 === Launch
