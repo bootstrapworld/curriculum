@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-07 # last modified
+LASTMOD=2021-08-25 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1137,6 +1137,36 @@ function buildlessons() {
   export LESSONSUBDIR=.
 }
 
+function builddependencyjson() {
+  rm -f dependency-graph.js
+  echo "var graph = {" > dependency-graph.js
+  first=1
+  for L in $(cat .cached/.workbook-lessons.txt); do
+    if test $first; then
+      first=
+    else
+      echo "," >> dependency-graph.js
+    fi
+    Lbasename=${L#lessons/}
+    echo "  \"$Lbasename\" : {" >> dependency-graph.js
+    echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> dependency-graph.js
+    echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> dependency-graph.js
+    echo -n "    prerequisites: [" >> dependency-graph.js
+    pfirst=1
+    for p in $(cat $L/.cached/.lesson-prereq.txt); do
+      if test $pfirst; then
+        pfirst=
+      else
+        echo -n ", " >> dependency-graph.js
+      fi
+      echo -n "\"$p\"" >> dependency-graph.js
+    done
+    echo "]" >> dependency-graph.js
+    echo "  }" >> dependency-graph.js
+  done
+  echo "}" >> dependency-graph.js
+}
+
 function buildlessonplans() {
   if test ! -f .cached/.workbook-lessons.txt; then
     echo
@@ -1152,6 +1182,7 @@ function buildlessonplans() {
     done
   fi
   export LESSONSUBDIR=
+  builddependencyjson
 }
 
 function makeglossaryandstandards() {
