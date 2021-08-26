@@ -1159,6 +1159,7 @@ function builddependencyjson() {
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
         echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
         echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> $GRAPHFILE
+        echo "    keywords: \"\"," >> $GRAPHFILE
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
         for p in $(cat $L/.cached/.lesson-prereq.txt); do
