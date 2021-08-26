@@ -1170,6 +1170,17 @@ function builddependencyjson() {
           fi
           echo -n "\"$p\"" >> $GRAPHFILE
         done
+        echo "]," >> $GRAPHFILE
+        echo -n "    standards: [" >> $GRAPHFILE
+        pfirst=1
+        for s in $(sed -e 's/ /_/g' $L/.cached/.lesson-standards.txt); do
+          if test $pfirst; then
+            pfirst=
+          else
+            echo -n ", " >> $GRAPHFILE
+          fi
+          echo -n $s | sed -e 's/_/ /g' >> $GRAPHFILE
+        done
         echo "]" >> $GRAPHFILE
         echo "  }" >> $GRAPHFILE
       fi
