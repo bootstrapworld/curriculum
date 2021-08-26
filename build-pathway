@@ -29,7 +29,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-25 # last modified
+LASTMOD=2021-08-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1144,36 +1144,36 @@ function builddependencyjson() {
   echo "var graph = {" > $GRAPHFILE
   first=1
   for C in courses/*; do
-    if test -d $C; then
-      cd $C
-      for L in $(cat .cached/.workbook-lessons.txt); do
-        Lbasename=${L#lessons/}
-        if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
-          if test $first; then
-            first=
-          else
-            echo "," >> $GRAPHFILE
-          fi
-          #echo doing builddependencyjson $L in $C
-          echo "  \"$Lbasename\" : {" >> $GRAPHFILE
-          echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
-          echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> $GRAPHFILE
-          echo -n "    prerequisites: [" >> $GRAPHFILE
-          pfirst=1
-          for p in $(cat $L/.cached/.lesson-prereq.txt); do
-            if test $pfirst; then
-              pfirst=
-            else
-              echo -n ", " >> $GRAPHFILE
-            fi
-            echo -n "\"$p\"" >> $GRAPHFILE
-          done
-          echo "]" >> $GRAPHFILE
-          echo "  }" >> $GRAPHFILE
+    test -d "$C" || break
+    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then break; fi
+    cd $C
+    for L in $(cat .cached/.workbook-lessons.txt); do
+      Lbasename=${L#lessons/}
+      if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
+        if test $first; then
+          first=
+        else
+          echo "," >> $GRAPHFILE
         fi
-      done
-      cd ../..
-    fi
+        #echo doing builddependencyjson $L in $C
+        echo "  \"$Lbasename\" : {" >> $GRAPHFILE
+        echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
+        echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> $GRAPHFILE
+        echo -n "    prerequisites: [" >> $GRAPHFILE
+        pfirst=1
+        for p in $(cat $L/.cached/.lesson-prereq.txt); do
+          if test $pfirst; then
+            pfirst=
+          else
+            echo -n ", " >> $GRAPHFILE
+          fi
+          echo -n "\"$p\"" >> $GRAPHFILE
+        done
+        echo "]" >> $GRAPHFILE
+        echo "  }" >> $GRAPHFILE
+      fi
+    done
+    cd ../..
   done
   echo "}" >> $GRAPHFILE
 }
