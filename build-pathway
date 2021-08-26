@@ -1138,33 +1138,44 @@ function buildlessons() {
 }
 
 function builddependencyjson() {
-  rm -f dependency-graph.js
-  echo "var graph = {" > dependency-graph.js
+  cd $TOPDIR
+  cd distribution/$LANGUAGE
+  GRAPHFILE=$(pwd)/dependency-graph.js
+  echo "var graph = {" > $GRAPHFILE
   first=1
-  for L in $(cat .cached/.workbook-lessons.txt); do
-    if test $first; then
-      first=
-    else
-      echo "," >> dependency-graph.js
+  for C in courses/*; do
+    if test -d $C; then
+      cd $C
+      for L in $(cat .cached/.workbook-lessons.txt); do
+        Lbasename=${L#lessons/}
+        if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
+          if test $first; then
+            first=
+          else
+            echo "," >> $GRAPHFILE
+          fi
+          #echo doing builddependencyjson $L in $C
+          echo "  \"$Lbasename\" : {" >> $GRAPHFILE
+          echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
+          echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> $GRAPHFILE
+          echo -n "    prerequisites: [" >> $GRAPHFILE
+          pfirst=1
+          for p in $(cat $L/.cached/.lesson-prereq.txt); do
+            if test $pfirst; then
+              pfirst=
+            else
+              echo -n ", " >> $GRAPHFILE
+            fi
+            echo -n "\"$p\"" >> $GRAPHFILE
+          done
+          echo "]" >> $GRAPHFILE
+          echo "  }" >> $GRAPHFILE
+        fi
+      done
+      cd ../..
     fi
-    Lbasename=${L#lessons/}
-    echo "  \"$Lbasename\" : {" >> dependency-graph.js
-    echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> dependency-graph.js
-    echo "    description: \"$(cat $L/.cached/.index-desc.txt)\"," >> dependency-graph.js
-    echo -n "    prerequisites: [" >> dependency-graph.js
-    pfirst=1
-    for p in $(cat $L/.cached/.lesson-prereq.txt); do
-      if test $pfirst; then
-        pfirst=
-      else
-        echo -n ", " >> dependency-graph.js
-      fi
-      echo -n "\"$p\"" >> dependency-graph.js
-    done
-    echo "]" >> dependency-graph.js
-    echo "  }" >> dependency-graph.js
   done
-  echo "}" >> dependency-graph.js
+  echo "}" >> $GRAPHFILE
 }
 
 function buildlessonplans() {
@@ -1182,7 +1193,6 @@ function buildlessonplans() {
     done
   fi
   export LESSONSUBDIR=
-  builddependencyjson
 }
 
 function makeglossaryandstandards() {
@@ -1873,6 +1883,8 @@ for f in $ARGS; do
     buildpathway
   fi
 done
+
+builddependencyjson
 
 # only to shush now-benign error
 export PROGLANG=pyret
