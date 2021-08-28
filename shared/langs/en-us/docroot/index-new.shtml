@@ -94,7 +94,7 @@
         }
         ul.tab { display: table; width: 100%; }
         ul.tab .tablinks {display:  table-cell; }
-        .tablinks img {width: 150px;}
+        .tablinks img {width: 100%; max-width: 150px;}
     </style>
     <script src="dependency-graph.js"></script>
     <script>
@@ -218,8 +218,7 @@
 
         function makePathway() {
             var title = document.getElementById('pathwayName').value;
-            var lessons = checked.map(n => graph[n].title);
-            window.open(`customPathway.shtml?title=${title}&lessons=${lessons}`, '_blank').focus();
+            window.open(`customPathway.shtml?title=${title}&lessons=${checked}`, '_blank').focus();
         }
     </script>
 </head>
@@ -239,26 +238,26 @@
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
-                <li class="tablinks"><a href="courses/algebra-pyret"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
+                <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
                     <div id="algebra" class="tabcontent">
                         <h3>Recommended for: Grades 7-12</h3>
                         The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
                     </div>
                 </li>
-                <li class="tablinks"><a href="courses/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
+                <li class="tablinks"><a href="/materials/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
                     <div id="data" class="tabcontent">
                         <h3>Recommended for: Grades 7-12</h3>
                         What defines the greatest musician of all time? How is the population of your state changing? Does drinking milk really make you taller? Answering these questions involves collecting and manipulating data, from sports stats to record sales to census data.  This pathway teaches students to view programs as questions we ask of data.  Students form their own questions about the world around them, and learn how to analyze data critically and carefully to find answers.  Business, science, and history teachers can utilize this module to help students make inferences from data.  Math teachers can use this module to introduce foundational concepts in statistics.  It also works great as a module for AP CS Principles' unit on data!
                     </div>
                 </li>
-                <li class="tablinks"><a href="courses/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
+                <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
                     <div id="structures" class="tabcontent">
                         <h3>Recommended for: Grades 9-12</h3>
                         <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class.Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
                         </p>
                     </div>
                 </li>
-                <li class="tablinks"><a href="courses/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
+                <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
                     <div id="hoc" class="tabcontent">
                         <h3>Recommended for: Grades 9-10</h3>
                         Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.

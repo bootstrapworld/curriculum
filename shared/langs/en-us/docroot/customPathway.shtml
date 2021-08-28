@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Bootstrap: Materials</title>
+    <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
+    <style>
+    </style>
+    <script src="dependency-graph.js"></script>
+    <script>
+        function populateLessons() {
+            var search = location.search.substring(1);
+            var {title, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+            lessons = lessons.split(",");
+            console.log(title, lessons);
+            document.getElementById('pathwayTitle').innerHTML = title;
+            var lessonList = document.getElementById('lesson-list').children[0];
+            lessons.forEach(l => {
+                var lesson = graph[l];
+                var dt = document.createElement('dt');
+                dt.className = "hdlist1";
+                dt.innerHTML = `
+                    <dt class="hdlist1"><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>
+                        <dd>
+                            <p>${lesson.description}</p>
+                        </dd>
+                `;
+                lessonList.appendChild(dt);
+            });
+        }
+
+    </script>
+</head>
+
+<body onload="populateLessons()">
+    <!--#include virtual="/menubar.ssi" -->
+    <div id="body">
+        <div class="clearfix item">
+            <h1 id="pathwayTitle"></h1>
+            This is a custom pathway, created just for you!
+
+            <h2>Lesson Plans</h2>
+            <div class="sectionbody">
+                <div id="lesson-list" class="dlist">
+                    <dl>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
