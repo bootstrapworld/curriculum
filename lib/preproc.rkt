@@ -1036,6 +1036,12 @@
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
+                           [(string=? directive "year")
+                            (fprintf o "~a" (getenv "YEAR"))]
+                           [(string=? directive "season")
+                            (fprintf o "~a" (getenv "SEMESTER"))]
+                           [(string=? directive "empty")
+                            (read-group i directive)]
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
