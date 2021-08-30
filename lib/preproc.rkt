@@ -1039,7 +1039,7 @@
                            [(string=? directive "year")
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
-                            (fprintf o "~a" (getenv "SEMESTER"))]
+                            (fprintf o "~a" (string-titlecase (getenv "SEMESTER")))]
                            [(string=? directive "empty")
                             (read-group i directive)]
                            [(string=? directive "n")
