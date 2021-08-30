@@ -773,8 +773,9 @@
           (display
             (enclose-span ".web-page-only"
               (format
-                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a]"
-                *lesson* lesson-title)) o)
+                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a] (~a, ~a)"
+                *lesson* lesson-title 
+                (string-titlecase (getenv "SEMESTER")) (getenv "YEAR"))) o)
           (display "\n\n" o)
           )))))
 
@@ -1036,6 +1037,8 @@
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
+                           [(string=? directive "proglang")
+                            (fprintf o "~a" (string-titlecase (getenv "PROGLANG")))]
                            [(string=? directive "year")
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
