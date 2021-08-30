@@ -22,8 +22,8 @@
     (list "CSTA"    #f *csta-standards-list*)
     (list "K12CS"   "K-12CS" *k12cs-standards-list*)
     (list "NGSS"    "Next-Gen Science" *ngss-standards-list*)
-    (list "OK"      "Oklahoma" *ok-standards-list*)
-    (list "IA"      "Iowa" *iowa-standards-list*)
+    (list "Oklahoma" "Oklahoma" *ok-standards-list*)
+    (list "Iowa"    "Iowa" *iowa-standards-list*)
     ))
 
 (define *disallowed-standards-list*
