@@ -1127,6 +1127,7 @@ function buildlessons() {
   export LESSONSUBDIR=.
 }
 
+# Must be done sequentially, to handle prerequisite calculation
 function buildlessonplans() {
   if test ! -f .cached/.workbook-lessons.txt; then
     echo
