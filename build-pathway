@@ -21,6 +21,7 @@ export EXPANDEDWARNINGS=
 
 eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
+export SEMESTER YEAR
 SEMESTER_YEAR=$SEMESTER$YEAR
 #JAVASCRIPTDELAY="--javascript-delay 5000"
 #JAVASCRIPTDELAY="--window-status ready_to_print"
@@ -29,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-20 # last modified
+LASTMOD=2021-08-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -89,7 +90,6 @@ while test $# -ne 0; do
   fi
 done
 
-
 test $BOOK && NOPDF= || NOPDF=1
 
 test $SUPERFORCE && FORCE=1
@@ -99,7 +99,7 @@ TMPPFX=$(basename $TMPTMP)
 
 WKH2P_PFX=.wkh2p-tmp
 
-NUMCORES=$(getconf _NPROCESSORS_ONLN)
+export NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 export WORKBOOKPAGE=
 export DATASHEETPAGE=
@@ -133,7 +133,6 @@ function displayhelp() {
   echo Order of arguments/options doesn\'t matter.
   exit
 }
-
 
 if test $HELP; then displayhelp; fi
 
@@ -835,9 +834,9 @@ function processadoc() {
             # If it's a landscape page, the "fat margin" is on the left
             test -f $f || echo --- $f NOT FOUND!
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              echo $LESSONSUBDIR/$fhtml >> $PUPPETEER_LANDSCAPE_FILES
+              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_LANDSCAPE_FILES
             else
-              echo $LESSONSUBDIR/$fhtml >> $PUPPETEER_PORTRAIT_FILES
+              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_PORTRAIT_FILES
             fi
 
             # checkifsinglepdfpage "$fpdf" #FIXME:
@@ -1097,7 +1096,7 @@ function buildlessonplan() {
       if test ! $NOPDF; then
         if test index.shtml -nt index.pdf; then
           TEMPF=$(mktemp); rm -f $TEMPF
-          echo $LESSONSUBDIR/index.shtml >> $PUPPETEER_PORTRAIT_FILES
+          echo \, \"$LESSONSUBDIR/index.shtml\" >> $PUPPETEER_PORTRAIT_FILES
         fi
       fi
     fi
@@ -1113,13 +1112,13 @@ function buildlessonplan() {
 }
 
 function buildlessons() {
-  if test ! -f .cached/.workbook-lessons.txt; then
+  if test ! -f .cached/.workbook-lessons.txt.kp; then
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
     # parallel?
-    for L in $(cat .cached/.workbook-lessons.txt); do
+    for L in $(cat .cached/.workbook-lessons.txt.kp); do
       export LESSON=$L
       buildworkbookpages $L
     done
@@ -1129,14 +1128,68 @@ function buildlessons() {
   export LESSONSUBDIR=.
 }
 
+# Must be done sequentially, to handle prerequisite calculation
+function builddependencyjson() {
+  cd $TOPDIR
+  cd distribution/$LANGUAGE
+  GRAPHFILE=$(pwd)/dependency-graph.js
+  echo "var graph = {" > $GRAPHFILE
+  first=1
+  for C in courses/*; do
+    test -d "$C" || break
+    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then break; fi
+    cd $C
+    for L in $(cat .cached/.workbook-lessons.txt.kp); do
+      Lbasename=${L#lessons/}
+      if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
+        if test $first; then
+          first=
+        else
+          echo "," >> $GRAPHFILE
+        fi
+        #echo doing builddependencyjson $L in $C
+        echo "  \"$Lbasename\" : {" >> $GRAPHFILE
+        echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
+        echo "    description: \"$(cat $L/.cached/.index-desc.txt.kp)\"," >> $GRAPHFILE
+        echo "    keywords: \"\"," >> $GRAPHFILE
+        echo -n "    prerequisites: [" >> $GRAPHFILE
+        pfirst=1
+        for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
+          if test $pfirst; then
+            pfirst=
+          else
+            echo -n ", " >> $GRAPHFILE
+          fi
+          echo -n "\"$p\"" >> $GRAPHFILE
+        done
+        echo "]," >> $GRAPHFILE
+        echo -n "    standards: [" >> $GRAPHFILE
+        pfirst=1
+        for s in $(sed -e 's/ /_/g' $L/.cached/.lesson-standards.txt.kp); do
+          if test $pfirst; then
+            pfirst=
+          else
+            echo -n ", " >> $GRAPHFILE
+          fi
+          echo -n $s | sed -e 's/_/ /g' >> $GRAPHFILE
+        done
+        echo "]" >> $GRAPHFILE
+        echo "  }" >> $GRAPHFILE
+      fi
+    done
+    cd ../..
+  done
+  echo "}" >> $GRAPHFILE
+}
+
 function buildlessonplans() {
-  if test ! -f .cached/.workbook-lessons.txt; then
+  if test ! -f .cached/.workbook-lessons.txt.kp; then
     echo
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
     local prevL=/dev/null
-    for L in $(cat .cached/.workbook-lessons.txt); do
+    for L in $(cat .cached/.workbook-lessons.txt.kp); do
       # needed?
       cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
       buildlessonplan $L
@@ -1387,14 +1440,11 @@ function buildteacherresource() {
 
 function batchhtmltopdf() {
   #echo doing batchhtmltopdf in $(pwd)
-  for f in $(cat $PUPPETEER_PORTRAIT_FILES); do
-    #echo pdfing $f
-    node ../../lib/html2pdf.js portrait $f
-  done
-  for f in $(cat $PUPPETEER_LANDSCAPE_FILES); do
-    #echo pdfing $f
-    node ../../lib/html2pdf.js portrait $f
-  done
+  echo "] }" >> $PUPPETEER_PORTRAIT_FILES
+  echo "] }" >> $PUPPETEER_LANDSCAPE_FILES
+
+  # use --trace-warnings to debug
+  node ../../lib/html2pdf.js $PUPPETEER_PORTRAIT_FILES $PUPPETEER_LANDSCAPE_FILES
 }
 
 function rmtmpfiles() {
@@ -1572,10 +1622,10 @@ function buildpathway() {
 
     TEMPF=$(mktemp); rm -f $TEMPF
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
-    export PUPPETEER_PORTRAIT_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_portrait.txt
-    export PUPPETEER_LANDSCAPE_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_landscape.txt
-    rm -f $PUPPETEER_PORTRAIT_FILES $PUPPETEER_LANDSCAPE_FILES
-    touch $PUPPETEER_PORTRAIT_FILES $PUPPETEER_LANDSCAPE_FILES
+    export PUPPETEER_PORTRAIT_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_portrait.json
+    export PUPPETEER_LANDSCAPE_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_landscape.json
+    echo "{\"portrait\": [ \"ignore_file\"" > $PUPPETEER_PORTRAIT_FILES
+    echo "{\"landscape\": [ \"ignore_file\"" > $PUPPETEER_LANDSCAPE_FILES
 
     mkdir -p lessons workbook
 
@@ -1585,8 +1635,8 @@ function buildpathway() {
     else
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
-        $SED -e 's/^ *\(.*\)/lessons\/\1/' > .cached/.workbook-lessons.txt
-      for lessonDir in $(cat .cached/.workbook-lessons.txt); do
+        $SED -e 's/^ *\(.*\)/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
+      for lessonDir in $(cat .cached/.workbook-lessons.txt.kp); do
         if test $NOPARALLEL; then
           copylessondir $lessonDir
         else
@@ -1719,7 +1769,7 @@ function buildpathway() {
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
-          echo ../../lib/$ABYSS.html >> $PUPPETEER_PORTRAIT_FILES
+          echo \, \"../../lib/$ABYSS.html\" >> $PUPPETEER_PORTRAIT_FILES
         fi
         cd ../courses/$PATHWAY
 
@@ -1844,6 +1894,8 @@ for f in $ARGS; do
     buildpathway
   fi
 done
+
+builddependencyjson
 
 # only to shush now-benign error
 export PROGLANG=pyret

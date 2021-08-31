@@ -22,7 +22,7 @@
 
 ;
 
-(define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt"))
+(define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt.kp"))
 
 (define (write-pages-info lesson-dir o ol oe #:paginate [paginate "yes"]
                           #:back-matter-port [back-matter-port #f])

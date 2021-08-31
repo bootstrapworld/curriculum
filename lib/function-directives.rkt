@@ -15,7 +15,7 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(unless (member *proglang* '("pyret" "wescheme"))
+(unless (member *proglang* '("pyret" "wescheme" "codap"))
   (error 'ERROR "function-directives.rkt: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
@@ -277,7 +277,6 @@
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
-    (if *pyret?* "&#x23; " "&#x3b; ")
     (encoded-ans ".recipe_name" funname *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
@@ -288,8 +287,6 @@
     (encoded-ans ".recipe_range" range *show-range?*)
     "\n\n"
     "[.recipe.recipe_purpose_statement]\n"
-    (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
-    " "
     (write-purpose-prose purpose)))
 
 (define (write-purpose-prose purpose)

@@ -36,7 +36,7 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(unless (member *proglang* '("pyret" "wescheme"))
+(unless (member *proglang* '("pyret" "wescheme" "codap"))
   (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
 
 (define *pyret?* (string=? *proglang* "pyret"))
@@ -88,7 +88,7 @@
     (or x (string-append *pathway-root-dir* "../../"))))
 
 (define *pathway-lesson-order*
-  (string-append *pathway-root-dir* ".cached/.workbook-lessons.txt"))
+  (string-append *pathway-root-dir* ".cached/.workbook-lessons.txt.kp"))
 
 (define *pathway-exercises-file*
   (string-append *pathway-root-dir* "resources/.workbook-exercises.rkt.kp"))
@@ -773,13 +773,14 @@
           (display
             (enclose-span ".web-page-only"
               (format
-                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a]"
-                *lesson* lesson-title)) o)
+                "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a] (~a, ~a)"
+                *lesson* lesson-title 
+                (string-titlecase (getenv "SEMESTER")) (getenv "YEAR"))) o)
           (display "\n\n" o)
           )))))
 
 (define (display-lesson-description desc o)
-  (call-with-output-file ".cached/.index-desc.txt"
+  (call-with-output-file ".cached/.index-desc.txt.kp"
     (lambda (o)
       (display desc o) (newline o))
     #:exists 'replace)
@@ -800,7 +801,7 @@
       ;(printf "tackling lesson ~s\n" lesson)
       (let ([lesson-index-file (format "./lessons/~a/index.shtml" lesson)]
             [lesson-title-file (format "./lessons/~a/.cached/.index.titletxt" lesson)]
-            [lesson-desc-file (format "./lessons/~a/.cached/.index-desc.txt" lesson)]
+            [lesson-desc-file (format "./lessons/~a/.cached/.index-desc.txt.kp" lesson)]
             [lesson-title lesson]
             [lesson-description #f])
         (when (file-exists? lesson-title-file)
@@ -849,7 +850,7 @@
                       [lesson-glossary-file
                         (format "./lessons/~a/.cached/.lesson-glossary.txt" lesson)]
                       [lesson-standards-file
-                        (format "./lessons/~a/.cached/.lesson-standards.txt" lesson)]
+                        (format "./lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
                       [lesson-title-file
                         (format "./lessons/~a/.cached/.index.titletxt" lesson)]
                       [lesson-title lesson]
@@ -926,7 +927,7 @@
   ;(printf "lesson-prereq dir = ~s\n" (current-directory))
   (set! *lesson-prereqs* immediate-prereqs)
   (for ([lsn immediate-prereqs])
-    (let ([lsn-prereq-file (format "../~a/.cached/.lesson-prereq.txt" lsn)])
+    (let ([lsn-prereq-file (format "../~a/.cached/.lesson-prereq.txt.kp" lsn)])
       ;(printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
       (when (file-exists? lsn-prereq-file)
         (let ([pp (read-data-file lsn-prereq-file)])
@@ -936,7 +937,7 @@
             (unless (member p *lesson-prereqs*)
               ;(printf "adding p = ~s\n" p)
               (set! *lesson-prereqs* (cons p *lesson-prereqs*))))))))
-  (call-with-output-file ".cached/.lesson-prereq.txt"
+  (call-with-output-file ".cached/.lesson-prereq.txt.kp"
     (lambda (o)
       (for ([p *lesson-prereqs*])
         (display p o) (newline o)))
@@ -1036,6 +1037,14 @@
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
+                           [(string=? directive "proglang")
+                            (fprintf o "~a" (string-titlecase (getenv "PROGLANG")))]
+                           [(string=? directive "year")
+                            (fprintf o "~a" (getenv "YEAR"))]
+                           [(string=? directive "season")
+                            (fprintf o "~a" (string-titlecase (getenv "SEMESTER")))]
+                           [(string=? directive "empty")
+                            (read-group i directive)]
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
@@ -1631,7 +1640,7 @@
       (for ([s *glossary-items*])
         (fprintf op "~s~n" (car s))))
     #:exists 'replace)
-  (call-with-output-file ".cached/.lesson-standards.txt"
+  (call-with-output-file ".cached/.lesson-standards.txt.kp"
     (lambda (op)
       (for ([s *standards-met*])
         (fprintf op "~s~n" (car s))))

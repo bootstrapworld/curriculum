@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Bootstrap: Materials</title>
+    <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
+    <style>
+        #lessonExplorer {
+            width: 100%;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: scroll;
+            border: solid 1px black;
+        }
+        .lessonContainer {
+            display:    inline-table;
+            position:   relative;
+            height:     60px;
+            width:      150px;
+            color:      black;
+            text-align: center;
+            border:     solid 1px gray;
+            font-weight: bold;
+            margin:     10px;
+            background-color: white;
+            cursor:     pointer;
+            transition: background-color linear 0.5s;
+        }
+        .accessible {background-color: #3c3cff4f; }
+        .teaching {
+            opacity: 1; 
+            background-color: #a6dfba !important;
+            box-shadow: black 3px 3px 3px; 
+            animation: emphasize 1s cubic-bezier(.36,.07,.19,.97) both 1;
+            animation-play-state:  paused;
+        }
+        .lessonContainer .lessonTitle { vertical-align: middle; display: table-cell; }
+        .lessonDescription { 
+            visibility: hidden;
+            width: 200px;
+            font-weight: normal;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            box-shadow: black 3px 3px 3px; 
+        }
+        .rightTip { left: 100%; }
+        .leftTip  { right: 100%; }
+        .topTip   { bottom: 105%; left: 50%; margin-left: -100px;}
+
+        .lessonDescription::after {
+          content: "";
+          position: absolute;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent;
+        }
+
+        .rightTip::after { top:  10%; right: 100%; margin-left: -5px; border-right-color: black;}
+        .leftTip::after  { top:  10%; left:  100%; margin-left:  1px; border-left-color:  black;}
+        .topTip::after   { top: 100%; left:   50%; margin-top:   2px; border-top-color:   black;}
+
+        .lessonContainer:hover { background-color: #ccffcc; opacity: 1; z-index: 2;}
+        .lessonContainer:hover .lessonDescription { visibility: visible; }
+
+        .legend { 
+            display:  inline-block; 
+            border:  solid 1px black; 
+            height: 16px; 
+            width: 40px;
+            margin-right: 10px;
+            box-shadow: none !important;
+        }
+
+        #search { 
+            background: black; 
+            color: white; 
+            width:  100%; 
+            padding: 10px; 
+        }
+        #searchBox { width: 300px; margin: 0px 10px; }
+        .count {font-weight: bold;}
+        #pathwayButton { display: none; }
+
+        @keyframes emphasize {
+            10%, 90%      { transform: translate3d(-1px, 0, 0); }
+            20%, 80%      { transform: translate3d( 2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60%      { transform: translate3d( 4px, 0, 0); }
+        }
+        ul.tab { display: table; width: 100%; }
+        ul.tab .tablinks {display:  table-cell; }
+        .tablinks img {width: 100%; max-width: 150px;}
+    </style>
+    <script src="dependency-graph.js"></script>
+    <script>
+        var checked = []; // start out with no lessons checked
+        function drawLesson(key, info) {
+            var container = document.createElement("div");
+            var desc      = document.createElement("span");
+            container.id  = key;
+            container.className =  "lessonContainer"
+            container.innerHTML = `
+                <span class="lessonTitle">${info.title}</span>
+                <span class="lessonDescription rightTip">${info.description}</span>
+            `;
+            // main container clicks act as if they're on the checkbox
+            container.onclick = () => update(container);
+            return container;
+        }
+
+        // sort the lessons in ascending order of # prerequisites, and draw each one
+        function drawLessons(lessons) {
+            var lessons = Object.entries(graph);
+            lessons.sort((a,b) => 
+                a[1].prerequisites.length > b[1].prerequisites.length? 1 : -1);
+            lessons.forEach(l => {
+                document.getElementById('lessonExplorer').appendChild(drawLesson(l[0], l[1]));
+            });
+        }
+        var resizeTimeout;
+        function resize() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout( () => {
+                var containers = document.getElementsByClassName('lessonContainer');
+                var pageWidth = document.getElementById("lessonExplorer").offsetWidth;
+                if(containers.length == 0) return; // no lessons, so no work to do!
+                var containerWidth = containers[0].offsetWidth + 
+                    2*parseInt(getComputedStyle(containers[0]).marginLeft);
+                var rowCount = Math.floor(pageWidth/containerWidth)
+
+                var descriptions = document.getElementsByClassName('lessonDescription');
+                [...descriptions].forEach((d, i) => {
+                    var isBottomRow = ((descriptions.length - i) <= rowCount)
+                        && i > rowCount;
+                    var tipDirection = isBottomRow? "topTip"
+                        : (i+1)%rowCount? "rightTip" : "leftTip";
+                    d.className = "lessonDescription " + tipDirection;
+                });
+            }, 500);
+        }
+
+        function update(container) {
+            // new prereqs that require an emphasis effect
+            var newPreqs = [];
+
+            // if this comes from a container action, update the list of checked lessons
+            if(container) {
+                var name = container.id;
+                newPreqs = graph[name].prerequisites.filter(p => !checked.includes(p));
+                checked = container.classList.contains('teaching')?
+                    // remove the lesson, and any lesson that lists it as a prerequisite
+                    checked.filter(l => l !== name && !graph[l].prerequisites.includes(name))
+                    // add the lesson, and any of its prerequisites
+                    : [...new Set([name, ...checked , ...graph[name].prerequisites])];
+
+            }
+
+            // update the list of accessible lessons
+            var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
+                graph[name].prerequisites.every(p => checked.includes(p)));
+
+            // update the counts and summary display
+            document.getElementById("checkedCount").innerHTML = checked.length;
+            document.getElementById("accessibleCount").innerHTML = accessible.length - checked.length;
+            document.getElementById('summary').style.display = checked.length > 0? "block" : "none";
+            document.getElementById('selectedLessons').innerHTML = checked.map(n => 
+                graph[n].title).join(", ");
+
+            // update the lesson display
+            Object.getOwnPropertyNames(graph).forEach(name => {
+                var lesson = graph[name];
+                var container = document.getElementById(name);
+                container.style.animationPlayState = "paused";
+
+                // Add styles. If there are new prerequisites being added, animate them
+                if(checked.includes(name)) {
+                    container.classList.add("teaching"); 
+                    container.classList.remove("accessible");
+                    container.style.animationPlayState = newPreqs.includes(name)? "running" : "paused";
+                } else if(accessible.includes(name)) {
+                    container.classList.remove("teaching");
+                    container.classList.add("accessible");
+                } else {
+                    container.classList.remove("accessible", "teaching");
+                }
+            });
+        }
+        var searchTimeout;
+        function search() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout( () => {
+                var lessonContainers = [...document.querySelectorAll(".lessonContainer")];
+                var str = document.getElementById('searchBox').value;
+                var matches = Object.getOwnPropertyNames(graph).filter(n => {
+                    var data = Object.values(graph[n]).join(" ");
+                    return new RegExp("\\b" + str, "i").test(data);
+                });
+                lessonContainers.forEach(c => {
+                    c.style.display = matches.includes(c.id)? "inline-table" : "none";
+                });
+            }, 100);
+        }
+
+        var showButtonTimeout;
+        function showPathwayButton() {
+            clearTimeout(showButtonTimeout);
+            showButtonTimeout = setTimeout( () => {
+                var button = document.getElementById('pathwayButton');
+                var name = document.getElementById('pathwayName').value;
+                button.style.display =  (name.length > 0)? "inline-block" : "none";
+            }, 100)
+        }
+
+        function makePathway() {
+            var title = document.getElementById('pathwayName').value;
+            window.open(`customPathway.shtml?title=${title}&lessons=${checked}`, '_blank').focus();
+        }
+    </script>
+</head>
+
+<body onload="drawLessons(graph); update(); resize(); window.addEventListener('resize', resize);">
+    <!--#include virtual="/menubar.ssi" -->
+    <div id="body">
+        <div class="clearfix item">
+            <h1>Materials</h1>
+
+            We provide all of the our materials <span style="font-style: italic">free of charge</span>. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, but a curriculum based on 20 years&#8217; research has a lot of moving parts! 
+            <p/>
+            <h2>Pathways</h2>
+            In addition to our <a href="courses/hour-of-code/">Hour of Code</a> activities, we've created four curated <i>pathways</i>, representing different collections of our lessons grouped by learning goals. Each pathway is designed to be a <strong>curriculum in a box!</strong>, and comes with a detailed student workbook, narrative project, and curated teacher materials with everything from quizzes to solutions to rubrics.
+            <p/>
+            Each pathway is aligned to specific learning goals, aimed at specific content areas. Hover over any of the pathway icons below for more information, or click the icon to be taken to that pathway on our website!
+        </div>
+        <div id="pathways" class="item bottom-border">
+            <ul class="tab">
+                <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
+                    <div id="algebra" class="tabcontent">
+                        <h3>Recommended for: Grades 7-12</h3>
+                        The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
+                    </div>
+                </li>
+                <li class="tablinks"><a href="/materials/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
+                    <div id="data" class="tabcontent">
+                        <h3>Recommended for: Grades 7-12</h3>
+                        What defines the greatest musician of all time? How is the population of your state changing? Does drinking milk really make you taller? Answering these questions involves collecting and manipulating data, from sports stats to record sales to census data.  This pathway teaches students to view programs as questions we ask of data.  Students form their own questions about the world around them, and learn how to analyze data critically and carefully to find answers.  Business, science, and history teachers can utilize this module to help students make inferences from data.  Math teachers can use this module to introduce foundational concepts in statistics.  It also works great as a module for AP CS Principles' unit on data!
+                    </div>
+                </li>
+                <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
+                    <div id="structures" class="tabcontent">
+                        <h3>Recommended for: Grades 9-12</h3>
+                        <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class.Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
+                        </p>
+                    </div>
+                </li>
+                <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
+                    <div id="hoc" class="tabcontent">
+                        <h3>Recommended for: Grades 9-10</h3>
+                        Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="item bottom-border">
+            <h2>Build your own pathway</h2>
+            <span class="legend accessible"></span>Lessons that you can <i>teach immediately</i> are shaded in blue, based on what you have selected to teach.
+            <br/>
+            <span class="legend teaching"></span>When you click on a lesson to select it, that lesson will turn green. <u>NOTE: Any prerequisites for that lesson will also be selected.</u>
+            <p/>
+            <div id="search">
+                Looking for something specific? 
+                <input id="searchBox" type="search" onInput="search()"
+                placeholder="Search by Concept, Standard, or Keyword"/>
+            </div>
+            <p>
+            Having taught <span id="checkedCount" class="count">ERROR</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">ERROR</span> other lessons!
+            </p>
+            <div id="lessonExplorer"></div>
+            <p/>
+            <div id="summary">
+                <strong>You've selected the following lessons:</strong> <span id="selectedLessons"></span>. 
+                <p/>
+                We've created a custom pathway just for you, with links to all the lesson materials, workbook pages, activities, and more! Enter a name to see your personalized pathway, and bookmark the resulting page to return to it at any time!
+                <p/>
+                <input type="text" id="pathwayName" placeholder="Name your pathway" onInput="showPathwayButton()"/>
+                <input type="button" id="pathwayButton" value="My Custom Pathway" onclick="makePathway()" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
