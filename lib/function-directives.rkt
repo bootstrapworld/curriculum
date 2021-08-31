@@ -627,7 +627,7 @@
   )
 
 (define (write-large s #:tag [tag ""])
-  (enclose-span (string-append ".bigparen" tag) s))
+  (enclose-span (string-append ".studentAnswerCode" tag) s))
 
 (define *wrapper-block-level* 0)
 
