@@ -483,9 +483,7 @@
               (lambda ()
                 (string-append
                   (write-large "(")
-                  (write-spaced "define")
-                  (write-spaced " ")
-                  (write-large "(")
+                  (write-spaced "define (")
                   (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                   " "
                   (encoded-ans ".recipe_variables" (vars-to-string param-list) *show-params?*)
@@ -497,7 +495,8 @@
                         (string-append
                           (encoded-ans "" "__" #f)
                           (write-large "(")
-                          (encoded-ans ".recipe_cond" "cond" *show-body?*))))]
+                          (encoded-ans ".recipe_cond" "cond" *show-body?*)
+                          (encoded-ans "" "__" #f))))]
                   [else ""])
 
             (cond [cond?
@@ -517,7 +516,7 @@
                       (lambda ()
                         (string-append
                           (encoded-ans "" "__" #f)
-                          (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
+                          (write-large "))" #:tag ".studentAnswer"))))]
                   [else
                     ""
                     #|(write-wrapper ".recipe.recipe_line"
