@@ -92,6 +92,33 @@ _Answers may vary, let students drive the discussion, and don't give away the an
 === Investigate
 With their partners, students complete @printable-exercise{pages/left-and-right.adoc}.  Once finished, students can fix the corresponding functions in their Sam the Butterly file, and test them out.
 
+@ifproglang{pyret}{
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{"False" doesn't mean "Wrong"!}
+
+A lot of students - especially confident ones - may struggle to come up with an examples where `is-safe-left` returns `false`:
+
+``# Students hate writing the second one!
+examples:
+  is-safe-left( 89) is  89 > -50
+  is-safe-left(-65) is -65 > -50
+end``
+
+This misconception comes from confusing a statement that is "false" with a program that is "wrong". In the second example, above, the result of `is-safe-left(-65)` _is_ `false`, because "65 is greater than -50" _is a false statement_.
+
+Pyret includes some functionality that makes this more explicit, and can help resolve the misconception:
+
+``examples:
+  is-safe-left( 89) is true  because  89 > -50
+  is-safe-left(-65) is false because -65 > -50
+end``
+
+By writing the answer first ( `is-safe-left(-65) is false` ), it reduces anxiety about code being "wrong". Students can think of the `because` as _an explanation of why the answer is false_.
+|===
+}
+
 @ifproglang{wescheme}{
 Students will notice that fixing `safe-left?` keeps Sam from disappearing off the left, but fixing `safe-right?` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
 }

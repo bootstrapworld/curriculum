@@ -21,6 +21,7 @@ export EXPANDEDWARNINGS=
 
 eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
+export SEMESTER YEAR
 SEMESTER_YEAR=$SEMESTER$YEAR
 #JAVASCRIPTDELAY="--javascript-delay 5000"
 #JAVASCRIPTDELAY="--window-status ready_to_print"
@@ -29,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-27 # last modified
+LASTMOD=2021-08-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -89,7 +90,6 @@ while test $# -ne 0; do
   fi
 done
 
-
 test $BOOK && NOPDF= || NOPDF=1
 
 test $SUPERFORCE && FORCE=1
@@ -99,7 +99,7 @@ TMPPFX=$(basename $TMPTMP)
 
 WKH2P_PFX=.wkh2p-tmp
 
-NUMCORES=$(getconf _NPROCESSORS_ONLN)
+export NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 export WORKBOOKPAGE=
 export DATASHEETPAGE=
@@ -133,7 +133,6 @@ function displayhelp() {
   echo Order of arguments/options doesn\'t matter.
   exit
 }
-
 
 if test $HELP; then displayhelp; fi
 
@@ -830,19 +829,15 @@ function processadoc() {
       if test -f "$fhtml"; then
         if test ! $NOPDF; then
           if test $fhtml -nt $fpdf; then
-            TEMPF=$(mktemp); rm -f $TEMPF
-            TMPHTML=$WKH2P_PFX-tmp-$(basename $TEMPF).$fhtml
-            cp -p $fhtml $TMPHTML
             #removecodetags $TMPHTML
             # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
-            ASPECT="--margin-bottom 18mm --margin-right 12.7mm --margin-top 12.7mm --margin-left 12.7mm"
             # If it's a landscape page, the "fat margin" is on the left
             test -f $f || echo --- $f NOT FOUND!
             if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              ASPECT="-O Landscape --margin-top 12.7mm --margin-right 12.7mm --margin-bottom 12.7mm --margin-left 18mm"
+              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_LANDSCAPE_FILES
+            else
+              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_PORTRAIT_FILES
             fi
-
-            echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY $ASPECT -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/$fpdf >> $WKH2P_BATCH_FILE
 
             # checkifsinglepdfpage "$fpdf" #FIXME:
             #test $DEBUG || rm $TMPHTML
@@ -1101,11 +1096,7 @@ function buildlessonplan() {
       if test ! $NOPDF; then
         if test index.shtml -nt index.pdf; then
           TEMPF=$(mktemp); rm -f $TEMPF
-          TMPHTML=$WKH2P_PFX-$(basename $TEMPF).index.html
-          cp index.shtml $TMPHTML
-          #removecodetags $TMPHTML
-
-          echo '--enable-local-file-access --print-media-type --dpi 300' $JAVASCRIPTDELAY -q $LESSONSUBDIR/$TMPHTML $LESSONSUBDIR/index.pdf >> $WKH2P_BATCH_FILE
+          echo \, \"$LESSONSUBDIR/index.shtml\" >> $PUPPETEER_PORTRAIT_FILES
         fi
       fi
     fi
@@ -1137,6 +1128,7 @@ function buildlessons() {
   export LESSONSUBDIR=.
 }
 
+# Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
   cd $TOPDIR
   cd distribution/$LANGUAGE
@@ -1447,7 +1439,12 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  wkhtmltopdf --read-args-from-stdin < .cached/$WKH2P_BATCH_BASE.txt >/dev/null 2>&1
+  #echo doing batchhtmltopdf in $(pwd)
+  echo "] }" >> $PUPPETEER_PORTRAIT_FILES
+  echo "] }" >> $PUPPETEER_LANDSCAPE_FILES
+
+  # use --trace-warnings to debug
+  node ../../lib/html2pdf.js $PUPPETEER_PORTRAIT_FILES $PUPPETEER_LANDSCAPE_FILES
 }
 
 function rmtmpfiles() {
@@ -1625,8 +1622,10 @@ function buildpathway() {
 
     TEMPF=$(mktemp); rm -f $TEMPF
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
-    export WKH2P_BATCH_FILE=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE.txt
-    rm -f .cached/$WKH2P_BATCH_BASE.txt; touch .cached/$WKH2P_BATCH_BASE.txt
+    export PUPPETEER_PORTRAIT_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_portrait.json
+    export PUPPETEER_LANDSCAPE_FILES=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_landscape.json
+    echo "{\"portrait\": [ \"ignore_file\"" > $PUPPETEER_PORTRAIT_FILES
+    echo "{\"landscape\": [ \"ignore_file\"" > $PUPPETEER_LANDSCAPE_FILES
 
     mkdir -p lessons workbook
 
@@ -1770,7 +1769,7 @@ function buildpathway() {
           echo >> $ABYSS.adoc
           #touch $ABYSS.adoc
           asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
-          echo -q ../../lib/$ABYSS.html ../../lib/$ABYSS.pdf >> $WKH2P_BATCH_FILE
+          echo \, \"../../lib/$ABYSS.html\" >> $PUPPETEER_PORTRAIT_FILES
         fi
         cd ../courses/$PATHWAY
 

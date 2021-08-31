@@ -42,7 +42,7 @@ table, td.tableblock>.content { margin-bottom: 0px; }
 tr th.tableblock code, td.tableblock code { background: none; }
 td.tableblock pre { background: none !important; }
 tr th.tableblock {
-  background:       #cccccc;
+  background:       #cccccc !important;
   padding:          .25em .5em;
   font-size:        1rem;
 }
@@ -776,13 +776,14 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
  * PRINT MEDIA
  */
 @page {
-    size:             8.5in 11in;   /* normal letter size paper */
-    margin:           0.5in 0.5in 2in 0.5in !important; /* make room for page number */
+    /* size:             8.5in 11in;  */ /* puppeteer takes care of this */
+    margin:           0.5in 0.75in !important; /* make room for page number */
     orphans:          0; /* never break a paragraph across pages */
     widows:           0;
 }
 
 @media print {
+  html { -webkit-print-color-adjust: exact; }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
   .sidebar, .section-link { display: none; }
@@ -900,6 +901,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   body:not(.LessonPlan) .sect1 > h2:first-child,
   body:not(.LessonPlan) .sect1 > h3:first-child,
   body:not(.LessonPlan) .sect2 > h3:first-child {
+    -webkit-print-color-adjust: exact !important;
     width:            100%;
     background:       black;
     margin-top:       0px;

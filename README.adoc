@@ -6,9 +6,8 @@
 We describe here the directories and files in the `curriculum`
 directory, and how to use the programs provided.
 
-For a generated
-document tree, please see
-https://bootstrapworld.org/materials/spring2020/courses.
+For a generated document tree, please see
+https://bootstrapworld.org/materials/fall2021
 
 == Structure of the `curriculum` directory
 
@@ -142,8 +141,7 @@ shadowing content intended for teacher-only documents.)
 The file `pages/workbook-pages.txt` lists
 the pages -- one per line -- in the
 `pages` directory in the order in which they should show up in the
-final workbook.
-By default,
+final workbook. By default,
 these pages are rendered in portrait mode. If you desire a
 particular file `file.adoc` to be in landscape, its entry line in
 `workbook-pages.txt` should be `file.adoc" landscape` rather
@@ -155,8 +153,7 @@ can be stored in subdirectories, typically named `fragments`.
 
 Lesson pages are paginated by default when they show up in the
 workbook. If you don’t want a page to be populated, its entry
-line in
-`workbook-pages.txt` should be `file.adoc portrait
+line in `workbook-pages.txt` should be `file.adoc portrait
 nopagenum`. (The aspect should also be mentioned, even if it’s
 the default.)
 
@@ -193,7 +190,7 @@ it can be named anything (not necessarily `index.adoc`).
 The top dir contains the script `build-pathway`. It takes any
 number of pathway arguments, and/or any combination of the
 options `--add-exercises`, `--debug`, `--force`, `--help`, `--language`,
-`--lint`, `--no-pdf`,
+`--lint`, `--book`,
 `--no-parallel`, `--proglang`, and `--version`.
 
 If called with `--help` (aka `-h`) or `--version` (aka `-v`), the script displays a help message
@@ -252,9 +249,10 @@ the distribution directories for them currently have the suffix
 exclusively `pyret`-based pathways do without the `-pyret`
 suffix.
 
-Note that two workbook PDFs can be created, one for the students
-in the `workbook` directory; and another for teachers in the
-“protected” directory `resources/protected`.
+Note that three workbook PDFs can be created, two for the students
+in the `workbook` directory (with and without optional exercises
+included; and another for teachers in the “protected” directory 
+`resources/protected`.
 
 Pages under `resources/protected` may prompt you for a teacher
 password, which is available on signing up with Bootstrapworld.
@@ -262,11 +260,9 @@ password, which is available on signing up with Bootstrapworld.
 The pathway narrative web page `index.shtml` includes a link to
 `pathway-lessons.shtml`, which contains all the lesson plans
 associated with the pathway; the student
-workbook PDF; a page listing the standards met; and a glossary
-page for the terms used in the lessons.
 
-The option `--add-exercises` (aka `-e`) swells the workbooks with
-exercises following each lesson.
+PDF; a page listing the standards met; and a glossary
+page for the terms used in the lessons.
 
 === `build-pathway` debugging
 
@@ -297,8 +293,11 @@ debugging:
   strictly sequentially, without exploiting parallelism. This may
   be used to uncover bugs introduced by parallelism.
 
-- `--no-pdf` (aka `--nopdf` or `-n`) avoids PDF generation to speed up the debugging
-process.
+- `--book` generates PDFs for every page and solution-page, and merges 
+  them into `workbook.pdf` (normal student workbook), `long-workbook.pdf`,
+  (solutions for student workbook), `workbook-long.pdf` (workbook w/
+  optional exercises included) and `pd-workbook.pdf` (workbook w/ lesson
+  plans prepended to student workbook.
 
 == Deployment
 
@@ -455,9 +454,10 @@ install gnu-sed`).
 bookkeeping. Any version should do. I’m not using any
 bleeding-edge features of Racket.
 
-- PDF manipulators `wkhtmltopdf` and `pdftk`.  Standard
-installation as for Asciidoctor. (Get at least version 0.12.5 for
-`wkhtmltopdf`, to avoid `font-weight` bugs.)
+- PDF manipulator `pdftk`.  Standard installation as for Asciidoctor.
+
+- HTML -> PDF generator `puppeteer`, as well as `puppeteer-cluster` to build in parallel.  `sudo npm install puppeteer`
+to install the first, `sudo npm install puppeteer-cluster` for the second.
 
 - TeX containing `pdflatex`. Install a suitable TeX system for
 your OS (for Linux, it’s `texlive`).
@@ -602,10 +602,8 @@ domain-list argument.
 ==== Cross-references and pagination
 
 Both lesson plans and pathway narratives can refer to any files
-in any lessons, in particular, exercises
-or specific
-pages in a pathway workbook.  The relevant directive
-calls look like
+in any lessons, in particular, exercises or specific pages in a pathway 
+workbook.  The relevant directive calls look like
 
   @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
   @worksheet-link{lessonA/workbook-pages/pageA2.pdf, link-text}
@@ -640,8 +638,7 @@ path is not replaced by `exercises-sols`.)
 
 The directive `@worksheet-include` uses the same argument
 structure as `@worksheet-link` but instead of linking to its file
-argument
-it includes the contents of the file. E.g.,
+argument it includes the contents of the file. E.g.,
 a workbook page can include an exercise in the same lesson using
 
   @worksheet-include{exercises/exerciseA1.adoc}
