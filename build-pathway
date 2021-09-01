@@ -1136,8 +1136,8 @@ function builddependencyjson() {
   echo "var graph = {" > $GRAPHFILE
   first=1
   for C in courses/*; do
-    test -d "$C" || break
-    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then break; fi
+    test -d "$C" || continue
+    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
     cd $C
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       Lbasename=${L#lessons/}
@@ -1147,7 +1147,7 @@ function builddependencyjson() {
         else
           echo "," >> $GRAPHFILE
         fi
-        #echo doing builddependencyjson $L in $C
+        echo doing builddependencyjson $L in $C
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
         echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
         echo "    description: \"$(cat $L/.cached/.index-desc.txt.kp)\"," >> $GRAPHFILE
