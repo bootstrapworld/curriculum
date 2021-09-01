@@ -69,10 +69,6 @@
 
         .legend { 
             display:  inline-block; 
-            border:  solid 1px black; 
-            height: 16px; 
-            width: 40px;
-            margin-right: 10px;
             box-shadow: none !important;
         }
 
@@ -85,6 +81,16 @@
         #searchBox { width: 300px; margin: 0px 10px; }
         .count {font-weight: bold;}
         #pathwayButton { display: none; }
+        #reset { 
+            float:      right; 
+            font-size:  28pt;
+            margin-top: -4pt;
+            color:      white; 
+            background: none; 
+            border:     none;
+            text-decoration: none;
+        }
+        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
 
         @keyframes emphasize {
             10%, 90%      { transform: translate3d(-1px, 0, 0); }
@@ -190,6 +196,10 @@
                 }
             });
         }
+        function reset() {
+            checked = []; update();
+        }
+
         var searchTimeout;
         function search() {
             clearTimeout(searchTimeout);
@@ -229,12 +239,7 @@
         <div class="clearfix item">
             <h1>Materials</h1>
 
-            We provide all of the our materials <span style="font-style: italic">free of charge</span>. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, but a curriculum based on 20 years&#8217; research has a lot of moving parts! 
-            <p/>
-            <h2>Pathways</h2>
-            In addition to our <a href="courses/hour-of-code/">Hour of Code</a> activities, we've created four curated <i>pathways</i>, representing different collections of our lessons grouped by learning goals. Each pathway is designed to be a <strong>curriculum in a box!</strong>, and comes with a detailed student workbook, narrative project, and curated teacher materials with everything from quizzes to solutions to rubrics.
-            <p/>
-            Each pathway is aligned to specific learning goals, aimed at specific content areas. Hover over any of the pathway icons below for more information, or click the icon to be taken to that pathway on our website!
+            We provide all of our research-based materials free of charge. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways, that come with a detailed student workbook, narrative project, and teacher materials. You can also mix and match our materials by building your own pathway.
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
@@ -267,14 +272,20 @@
         </div>
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
-            <span class="legend accessible"></span>Lessons that you can <i>teach immediately</i> are shaded in blue, based on what you have selected to teach.
-            <br/>
-            <span class="legend teaching"></span>When you click on a lesson to select it, that lesson will turn green. <u>NOTE: Any prerequisites for that lesson will also be selected.</u>
+
+            <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
+            <ol>
+                <li>When you select a lesson, it and any prerequisite lessons will <span class="legend teaching">turn green</span>.</li>
+                <li>Lessons that are immediately accessible based on your selection are <span class="legend accessible">shaded in blue</span>.</li>
+            </ol>
+            <p/>
+            When you click on a lesson to select it, that lesson will turn green. <u>NOTE: Any prerequisites for that lesson will also be selected.</u>
             <p/>
             <div id="search">
                 Looking for something specific? 
                 <input id="searchBox" type="search" onInput="search()"
                 placeholder="Search by Concept, Standard, or Keyword"/>
+                <a href="javascript:reset()" id="reset" >&#8634;</a>
             </div>
             <p>
             Having taught <span id="checkedCount" class="count">ERROR</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">ERROR</span> other lessons!
