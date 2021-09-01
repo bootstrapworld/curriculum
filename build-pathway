@@ -1147,10 +1147,11 @@ function builddependencyjson() {
         else
           echo "," >> $GRAPHFILE
         fi
-        echo doing builddependencyjson $L in $C
+        titletxt=$(cat $L/.cached/.index.titletxt|sed -e 's/"/\\"/g')
+        desctxt=$(cat $L/.cached/.index-desc.txt.kp|sed -e 's/"/\\"/g')
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
-        echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
-        echo "    description: \"$(cat $L/.cached/.index-desc.txt.kp)\"," >> $GRAPHFILE
+        echo "    title: \"$titletxt\"," >> $GRAPHFILE
+        echo "    description: \"$desctxt\"," >> $GRAPHFILE
         echo "    keywords: \"\"," >> $GRAPHFILE
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
@@ -1180,6 +1181,10 @@ function builddependencyjson() {
     cd ../..
   done
   echo "}" >> $GRAPHFILE
+  # convert to UTF-16 to handle curlyquotes 
+  iconv -f UTF-8 -t UTF-16 $GRAPHFILE > tmp.txt
+  mv -f tmp.txt $GRAPHFILE
+  rm tmp.txt
 }
 
 function buildlessonplans() {
