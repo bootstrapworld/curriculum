@@ -6,7 +6,7 @@
 
 (define *progdir* (getenv "PROGDIR"))
 
-(preproc-n-asciidoctor
-  (vector-ref (current-command-line-arguments) 0))
+(for ([f (current-command-line-arguments)])
+  (preproc-n-asciidoctor f))
 
 (void)
