@@ -107,6 +107,14 @@
     <script src="dependency-graph.js"></script>
     <script>
         var checked = []; // start out with no lessons checked
+        // certain lessons are "special"
+        const first = ["numbers-inside-video-games","order-of-operations",
+            "coordinates", "ds-intro", "simple-datatypes"];
+        const math = ["solving-word-problems", "distance-formula", "displaying-categorical-data", 
+            "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation",
+            "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", 
+            "inequalities2-compound", "linear-regression","distance-formula"];
+
         function drawLesson(key, info) {
             var container = document.createElement("div");
             var desc      = document.createElement("span");
@@ -120,12 +128,18 @@
             container.onclick = () => update(container);
             return container;
         }
+        
+        function interestOrder(lessons) {
+            const preset = first.concat(math);
+            var rest = lessons.filter(l => !preset.includes(l));
+            rest.sort((a,b) =>
+                graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
+            return preset.concat(rest);
+        }
 
         // sort the lessons in ascending order of # prerequisites, and draw each one
         function drawLessons(lessons) {
-            var lessons = Object.keys(graph);
-            lessons.sort((a,b) => 
-                graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
+            var lessons = interestOrder(Object.keys(graph));
             lessons.forEach(l => {
                 document.getElementById('lessonExplorer').appendChild(drawLesson(l, graph[l]));
             });
