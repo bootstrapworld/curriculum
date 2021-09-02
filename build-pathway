@@ -800,7 +800,7 @@ function doadocs() {
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a cachedir=.cached/ -a lessonplandir= \
-      -a stylesheet=$PATHWAYROOTDIR../../lib/curriculum.css \
+      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $ff_asc
   fi
@@ -1152,10 +1152,10 @@ function buildlessons() {
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
-    # parallel?
+    # process lesson directories in parallel
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       export LESSON=$L
-      buildworkbookpages $L
+      buildworkbookpages $L &
     done
   fi
   export PATHWAYROOTDIR=./
