@@ -106,44 +106,46 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
-        var checked = []; // start out with no lessons checked
-        // certain lessons are "special"
-        const first = ["numbers-inside-video-games","order-of-operations",
-            "coordinates", "ds-intro", "simple-datatypes"];
-        const math = ["solving-word-problems", "distance-formula", "displaying-categorical-data", 
-            "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation",
-            "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", 
-            "inequalities2-compound", "linear-regression","distance-formula"];
+        // find out if there's a subject that was passed in
+        var subject, search = location.search.substring(1);
+        var subject = !search? "false"
+            : JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')["subject"] || "none";
+        console.log('subject is', subject);
 
-        function drawLesson(key, info) {
-            var container = document.createElement("div");
-            var desc      = document.createElement("span");
-            container.id  = key;
-            container.className =  "lessonContainer";
-            container.innerHTML = `
-                <span class="lessonTitle">${info.title}</span>
-                <span class="lessonDescription rightTip">${info.description}</span>
-            `;
-            // main container clicks act as if they're on the checkbox
-            container.onclick = () => update(container);
-            return container;
-        }
+        // swap "history" for "social studies"
+        if(subject == "social-studies") subject = "history";
+
+        // certain lessons are "preferred" depending on the subject
+        const subjectPreference = {
+            none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
+            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "solving-word-problems", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
+            history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
+            science : ["simple-datatypes", "ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
+            cs : ["ds-intro", "simple-datatypes", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
+        };
+
+        console.log('topLessons are', subjectPreference[subject]);
+        var checked = [];
         
-        function interestOrder(lessons) {
-            const preset = first.concat(math);
-            var rest = lessons.filter(l => !preset.includes(l));
+        // Starting with preferred lessons, then non-preferred lesson in prerequisite order,
+        // draw the container for each lesson and add it to the lesson explorer
+        function drawLessons(graph) {
+            var rest = Object.keys(graph).filter(l => 
+                !subjectPreference[subject].includes(l));
             rest.sort((a,b) =>
                 graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
-            return preset.concat(rest);
-        }
-
-        // sort the lessons in ascending order of # prerequisites, and draw each one
-        function drawLessons(lessons) {
-            var lessons = interestOrder(Object.keys(graph));
-            lessons.forEach(l => {
-                document.getElementById('lessonExplorer').appendChild(drawLesson(l, graph[l]));
+            subjectPreference[subject].concat(rest).forEach(l => {
+                const container = document.createElement("div");
+                container.id  = l;
+                container.className =  "lessonContainer";
+                container.innerHTML = `
+                    <span class="lessonTitle">${graph[l].title}</span>
+                    <span class="lessonDescription rightTip">${graph[l].description}</span>`;
+                container.onclick = () => update(container);
+                document.getElementById('lessonExplorer').appendChild(container);
             });
         }
+
         var resizeTimeout;
         function resize() {
             clearTimeout(resizeTimeout);
@@ -179,7 +181,6 @@
                     checked.filter(l => l !== name && !graph[l].prerequisites.includes(name))
                     // add the lesson, and any of its prerequisites
                     : [...new Set([name, ...checked , ...graph[name].prerequisites])];
-
             }
 
             checked.sort((a,b) => 
@@ -215,9 +216,9 @@
                 }
             });
         }
-        function reset() {
-            checked = []; update();
-        }
+
+        // uncheck all the lessons, then update
+        function reset() { checked = []; update(); }
 
         var searchTimeout;
         function search() {
