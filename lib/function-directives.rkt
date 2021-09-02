@@ -326,7 +326,7 @@
                                 [fun-call
                                   (case *proglang*
                                     [("wescheme") (car e)]
-                                    [("pyret") (take e n)])])
+                                    [("pyret" "codap") (take e n)])])
                            (write-each-example (car fun-call) (cdr fun-call) body #t)))
                        buggy-example-list)]
                  [else
@@ -475,7 +475,7 @@
            (set! show-args? (list-ref show 1))
            (set! show-body? (list-ref show 2))])
     ((case *proglang*
-       [("pyret") write-each-example/pyret]
+       [("pyret" "codap") write-each-example/pyret]
        [("wescheme") write-each-example/wescheme])
      funname show-funname? args show-args? body show-body?)))
 
@@ -654,7 +654,7 @@
 
 (define (write-definition funname param-list body)
   ((case *proglang*
-     [("pyret") write-definition/pyret]
+     [("pyret" "codap") write-definition/pyret]
      [("wescheme") write-definition/wescheme])
    funname param-list body))
 
