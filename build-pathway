@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-30 # last modified
+LASTMOD=2021-09-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1136,8 +1136,8 @@ function builddependencyjson() {
   echo "var graph = {" > $GRAPHFILE
   first=1
   for C in courses/*; do
-    test -d "$C" || break
-    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then break; fi
+    test -d "$C" || continue
+    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
     cd $C
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       Lbasename=${L#lessons/}
@@ -1147,10 +1147,11 @@ function builddependencyjson() {
         else
           echo "," >> $GRAPHFILE
         fi
-        #echo doing builddependencyjson $L in $C
+        titletxt=$(cat $L/.cached/.index.titletxt|sed -e 's/"/\\"/g')
+        desctxt=$(cat $L/.cached/.index-desc.txt.kp|sed -e 's/"/\\"/g')
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
-        echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
-        echo "    description: \"$(cat $L/.cached/.index-desc.txt.kp)\"," >> $GRAPHFILE
+        echo "    title: \"$titletxt\"," >> $GRAPHFILE
+        echo "    description: \"$desctxt\"," >> $GRAPHFILE
         echo "    keywords: \"\"," >> $GRAPHFILE
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
@@ -1180,6 +1181,10 @@ function builddependencyjson() {
     cd ../..
   done
   echo "}" >> $GRAPHFILE
+  # convert to UTF-16 to handle curlyquotes 
+  iconv -f UTF-8 -t UTF-16 $GRAPHFILE > tmp.txt
+  mv -f tmp.txt $GRAPHFILE
+  rm tmp.txt
 }
 
 function buildlessonplans() {
@@ -1290,10 +1295,21 @@ function buildpathwaynarrative() {
 
 function makeworkbooktex() {
 
-  #echo doing makeworkbooktex "$@"
+  echo doing makeworkbooktex "$@"
 
   local tgt=$1
-  local wbpnf=$2
+
+  local wbpnf=
+
+  if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
+    wbpnf=.cached/.back-matter-contracts-index.rkt
+  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
+    wbpnf=.cached/.workbook-page-index.rkt
+  elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    wbpnf=.cached/.opt-exercises-index.rkt
+  else
+    wbpnf=.cached/.workbook-long-page-index.rkt
+  fi
 
   local wbpnfkp=$wbpnf.kp
 
@@ -1741,16 +1757,16 @@ function buildpathway() {
 
     # Shell version
     if test $BOOK; then
-      makeworkbooktex workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex bm-contracts .cached/.back-matter-contracts-index.rkt
-      makeworkbooktex bm-contracts-sols .cached/.back-matter-contracts-index.rkt
-      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
-      makeworkbooktex workbook-long .cached/.workbook-long-page-index.rkt
-      makeworkbooktex pd-workbook-long .cached/.workbook-long-page-index.rkt
-      makeworkbooktex workbook-long-sols .cached/.workbook-long-page-index.rkt
-      makeworkbooktex opt-exercises .cached/.opt-exercises-index.rkt
-      makeworkbooktex opt-exercises-sols .cached/.opt-exercises-index.rkt
+      makeworkbooktex workbook
+      makeworkbooktex pd-workbook
+      makeworkbooktex bm-contracts
+      makeworkbooktex bm-contracts-sols
+      makeworkbooktex workbook-sols
+      makeworkbooktex workbook-long
+      makeworkbooktex pd-workbook-long
+      makeworkbooktex workbook-long-sols
+      makeworkbooktex opt-exercises
+      makeworkbooktex opt-exercises-sols
     fi
 
     buildlessonplans
