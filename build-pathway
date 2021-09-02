@@ -1155,8 +1155,13 @@ function buildlessons() {
     # process lesson directories in parallel
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       export LESSON=$L
-      buildworkbookpages $L &
+      if test $NOPARALLEL; then
+        buildworkbookpages $L
+      else
+        buildworkbookpages $L &
+      fi
     done
+    test ! $NOPARALLEL && wait
   fi
   export PATHWAYROOTDIR=./
   export LESSON=
