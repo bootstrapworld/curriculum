@@ -4,7 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Bootstrap: Materials</title>
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
+    <script src="/js/TextRotate.js" ></script>
+
     <style>
+        #pathways { min-height: 170px; transition: all 0.25s linear;}
+        #pathways:hover { min-height: 400px; }
         #lessonExplorer {
             width: 100%;
             min-height: 200px;
@@ -69,10 +73,6 @@
 
         .legend { 
             display:  inline-block; 
-            border:  solid 1px black; 
-            height: 16px; 
-            width: 40px;
-            margin-right: 10px;
             box-shadow: none !important;
         }
 
@@ -81,10 +81,22 @@
             color: white; 
             width:  100%; 
             padding: 10px; 
+            font-size:  12pt;
+            box-shadow: #cb76e6 1px 1px 2px;
         }
-        #searchBox { width: 300px; margin: 0px 10px; }
+        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
         .count {font-weight: bold;}
         #pathwayButton { display: none; }
+        #reset { 
+            float:      right; 
+            font-size:  28pt;
+            margin-top: -4pt;
+            color:      white; 
+            background: none; 
+            border:     none;
+            text-decoration: none;
+        }
+        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
 
         @keyframes emphasize {
             10%, 90%      { transform: translate3d(-1px, 0, 0); }
@@ -98,30 +110,52 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
-        var checked = []; // start out with no lessons checked
-        function drawLesson(key, info) {
-            var container = document.createElement("div");
-            var desc      = document.createElement("span");
-            container.id  = key;
-            container.className =  "lessonContainer"
-            container.innerHTML = `
-                <span class="lessonTitle">${info.title}</span>
-                <span class="lessonDescription rightTip">${info.description}</span>
-            `;
-            // main container clicks act as if they're on the checkbox
-            container.onclick = () => update(container);
-            return container;
+        // find out if there's a subject that was passed in
+        var subject, params = location.search.substring(1);
+        var subject = !params? "none"
+            : JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')["subject"] || "none";
+        console.log('subject is', subject);
+
+        // swap "history" for "social studies"
+        if(subject == "social-studies") subject = "history";
+
+        // certain lessons are "preferred" depending on the subject
+        const subjectPreference = {
+            none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
+            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "solving-word-problems", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
+            history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
+            science : ["simple-datatypes", "ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
+            cs : ["ds-intro", "simple-datatypes", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
+        };
+
+        console.log('topLessons are', subjectPreference[subject]);
+        var checked = [];
+        
+        // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
+        // draw the container for each lesson and add it to the lesson explorer
+        // 2) Get the search placeholder text rotating
+        // 3) Register the resize handler and do a resize
+        function draw() {
+            var rest = Object.keys(graph).filter(l => 
+                !subjectPreference[subject].includes(l));
+            rest.sort((a,b) =>
+                graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
+            subjectPreference[subject].concat(rest).forEach(l => {
+                const container = document.createElement("div");
+                container.id  = l;
+                container.className =  "lessonContainer";
+                container.innerHTML = `
+                    <span class="lessonTitle">${graph[l].title}</span>
+                    <span class="lessonDescription rightTip">${graph[l].description}</span>`;
+                container.onclick = () => update(container);
+                document.getElementById('lessonExplorer').appendChild(container);
+            });
+            function updatePlaceholder(e, txt) { e.placeholder = txt; }
+            registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            window.addEventListener('resize', resize);
+            resize();
         }
 
-        // sort the lessons in ascending order of # prerequisites, and draw each one
-        function drawLessons(lessons) {
-            var lessons = Object.entries(graph);
-            lessons.sort((a,b) => 
-                a[1].prerequisites.length > b[1].prerequisites.length? 1 : -1);
-            lessons.forEach(l => {
-                document.getElementById('lessonExplorer').appendChild(drawLesson(l[0], l[1]));
-            });
-        }
         var resizeTimeout;
         function resize() {
             clearTimeout(resizeTimeout);
@@ -157,8 +191,10 @@
                     checked.filter(l => l !== name && !graph[l].prerequisites.includes(name))
                     // add the lesson, and any of its prerequisites
                     : [...new Set([name, ...checked , ...graph[name].prerequisites])];
-
             }
+
+            checked.sort((a,b) => 
+                graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
 
             // update the list of accessible lessons
             var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
@@ -190,6 +226,10 @@
                 }
             });
         }
+
+        // uncheck all the lessons, then update
+        function reset() { checked = []; update(); }
+
         var searchTimeout;
         function search() {
             clearTimeout(searchTimeout);
@@ -223,18 +263,13 @@
     </script>
 </head>
 
-<body onload="drawLessons(graph); update(); resize(); window.addEventListener('resize', resize);">
+<body onload="draw(); update();  ">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div class="clearfix item">
             <h1>Materials</h1>
 
-            We provide all of the our materials <span style="font-style: italic">free of charge</span>. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, but a curriculum based on 20 years&#8217; research has a lot of moving parts! 
-            <p/>
-            <h2>Pathways</h2>
-            In addition to our <a href="courses/hour-of-code/">Hour of Code</a> activities, we've created four curated <i>pathways</i>, representing different collections of our lessons grouped by learning goals. Each pathway is designed to be a <strong>curriculum in a box!</strong>, and comes with a detailed student workbook, narrative project, and curated teacher materials with everything from quizzes to solutions to rubrics.
-            <p/>
-            Each pathway is aligned to specific learning goals, aimed at specific content areas. Hover over any of the pathway icons below for more information, or click the icon to be taken to that pathway on our website!
+            We provide all of our research-based materials free of charge. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways, that come with a detailed student workbook, narrative project, and teacher materials. You can also mix and match our materials by building your own pathway.
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
@@ -253,7 +288,7 @@
                 <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
                     <div id="structures" class="tabcontent">
                         <h3>Recommended for: Grades 9-12</h3>
-                        <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class.Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
+                        <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class. Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
                         </p>
                     </div>
                 </li>
@@ -267,14 +302,23 @@
         </div>
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
-            <span class="legend accessible"></span>Lessons that you can <i>teach immediately</i> are shaded in blue, based on what you have selected to teach.
-            <br/>
-            <span class="legend teaching"></span>When you click on a lesson to select it, that lesson will turn green. <u>NOTE: Any prerequisites for that lesson will also be selected.</u>
+
+            Lessons that you can teach immediately are <span class="legend accessible">shaded blue</span>.<br/>
+            <ul style="margin: 6px 0px;">
+                <li>When you click on a lesson you'd like to teach, that lesson - and its prerequisites - will <span class="legend teaching">turn green</span>.</li>
+                <li>All of the lessons available to you by completing the green lessons, will <span class="legend accessible">turn blue</span>.</li>
+            </ul>
             <p/>
+            <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
+            <p/>
+
             <div id="search">
                 Looking for something specific? 
                 <input id="searchBox" type="search" onInput="search()"
+                class="txt-rotate" data-period="2000" 
+                data-rotate='["Functions", "Privacy", "Ratios", "Games", "HSA.SSE.A.2", "Box Plots", "Ethics", "Order of Operations", "Methods"]'
                 placeholder="Search by Concept, Standard, or Keyword"/>
+                <a href="javascript:reset()" id="reset" >&#8634;</a>
             </div>
             <p>
             Having taught <span id="checkedCount" class="count">ERROR</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">ERROR</span> other lessons!

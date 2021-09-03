@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-08-30 # last modified
+LASTMOD=2021-09-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -777,76 +777,120 @@ function doadoc() {
   fi
 }
 
-function processadoc() {
-  local f="$1"
-  fbase=${f%.adoc}
+function doadocs() {
+  local ff="$@"
 
-  if test ! -f "$f"; then
-    if test "$dir" = "pages"; then
+  if test $# -eq 0; then
+    return
+  elif test $# -eq 1 -a ! -f $1; then
+    return
+  fi
+
+  test -d .cached || mkdir -p .cached
+
+  $PROGDIR/adoc-preproc.rkt $ff
+
+  local ff_asc=""
+  for f in $ff; do
+    fbase=${f%.adoc}
+    fasc=.cached/.$fbase.asc
+    ff_asc="$ff_asc $fasc"
+  done
+
+  if test ! $OTHERDIR; then
+    asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
+      -a cachedir=.cached/ -a lessonplandir= \
+      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
+      -a pathwayrootdir=$PATHWAYROOTDIR \
+      -B . $ff_asc
+  fi
+
+  for f in $ff; do
+    fbase=${f%.adoc}
+    fhtmlcached=.cached/.$fbase.html
+    fhtml=$fbase.html
+    if test -f "$fhtmlcached"; then
+      mv $fhtmlcached $fhtml
+      resolveabbrevs $fhtml
+      if test ! $OTHERDIR; then
+        insertgdrivesave $fhtml
+      fi
+    fi
+  done
+
+}
+
+function processadocs() {
+  if test $# -eq 0; then
+    if test "$dir" = pages; then
       echo No adoc files in $LESSONSUBDIR
     fi
-  elif echo $f|grep -q ' '; then
-    echo Discarding file \'$f\' with space in its name
-    rm "$f"
-  else
+    return
+  fi
+
+  local ff_given="$@"
+  local ff=
+  local ff_w_html=
+
+  for f in $ff_given; do
+    if test ! -f $f; then
+      #echo Not a valid adoc file $f in $(pwd)
+      continue
+    fi
+    if echo $f|grep -q ' '; then
+      echo Discarding file \'$f\' with space in its name
+      rm "$f"
+      continue
+    fi
+    DOIT=
+    DOITPDF=
+    fbase=${f%.adoc}
     fhtml=$fbase.html
     fasc=.cached/.$fbase.asc
     fpdf=$fbase.pdf
-    DOIT=
-    DOITPDF=
     if test $FORCE; then
-      DOIT=1;
+      DOIT=1
       if test ! $OTHERDIR; then DOITPDF=1; fi
-    elif test $OTHERDIR; then
-      if test $f -nt $fasc; then DOIT=1; fi
     else
-      if test $f -nt $fhtml; then DOIT=1; fi
-      if test $f -nt $fpdf; then DOITPDF=1; fi
+      if test $OTHERDIR; then
+        if test $f -nt $fasc; then DOIT=1; fi
+      else
+        if test $f -nt $fhtml; then DOIT=1; fi
+        if test $f -nt $fpdf; then DOITPDF=1; fi
+      fi
     fi
+    if test $NOPDF; then DOITPDF=; fi
     if test $DOIT; then
-      overwrite 'building' /$LESSONSUBDIR/$f
+      ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      #echo doing doadoc of $f
-      doadoc $f
-      #$PROGDIR/adoc-preproc.rkt $f
-      #test -f "$fhtml" || echo $fhtml not created
-      if test -f "$fhtml"; then
-        resolveabbrevs $fhtml
-        if test ! $OTHERDIR; then
-          insertgdrivesave $fhtml
-        fi
-      fi
-    fi
-    if test ! $OTHERDIR; then
-      if test ! $DEBUG; then
-        if test -f $fasc; then
-          rm $fasc
-        fi
-      fi
     fi
     if test $DOITPDF; then
-      if test -f "$fhtml"; then
-        if test ! $NOPDF; then
-          if test $fhtml -nt $fpdf; then
-            #removecodetags $TMPHTML
-            # All margins should be 12.7cm (1/2in), but leave a "fat margin" at the bottom for pagenums
-            # If it's a landscape page, the "fat margin" is on the left
-            test -f $f || echo --- $f NOT FOUND!
-            if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_LANDSCAPE_FILES
-            else
-              echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_PORTRAIT_FILES
-            fi
+      ff_w_html="$ff_w_html $f"
+    fi
+  done
 
-            # checkifsinglepdfpage "$fpdf" #FIXME:
-            #test $DEBUG || rm $TMPHTML
-          fi
+  doadocs $ff
+
+  for f in $ff_w_html; do
+    fbase=${f%.adoc}
+    fhtml=$fbase.html
+    fasc=.cached/.$fbase.asc
+    fpdf=$fbase.pdf
+    if test -f "$fhtml"; then
+      if test $fhtml -nt $fpdf; then
+        if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+          echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_LANDSCAPE_FILES
+        else
+          echo \, \"$LESSONSUBDIR/$fhtml\" >> $PUPPETEER_PORTRAIT_FILES
         fi
       fi
     fi
+  done
+
+  for f in $ff; do
     checklinks $f
-  fi
+  done
+
 }
 
 function recursiveadoc() {
@@ -895,16 +939,7 @@ function recursiveadoc() {
     fi
   fi
 
-  for f in *.adoc; do
-    if test -f "$f"; then
-      if test $NOPARALLEL; then
-        processadoc "$f"
-      else
-        processadoc "$f" &
-      fi
-    fi
-  done
-  test ! $NOPARALLEL && wait
+  processadocs *.adoc
 
   #test $DEBUG || rm -f *.adoc
 
@@ -1117,11 +1152,16 @@ function buildlessons() {
     echo WARNING: No lessons in pathway $PATHWAY
   else
     local L
-    # parallel?
+    # process lesson directories in parallel
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       export LESSON=$L
-      buildworkbookpages $L
+      if test $NOPARALLEL; then
+        buildworkbookpages $L
+      else
+        buildworkbookpages $L &
+      fi
     done
+    test ! $NOPARALLEL && wait
   fi
   export PATHWAYROOTDIR=./
   export LESSON=
@@ -1136,8 +1176,8 @@ function builddependencyjson() {
   echo "var graph = {" > $GRAPHFILE
   first=1
   for C in courses/*; do
-    test -d "$C" || break
-    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then break; fi
+    test -d "$C" || continue
+    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
     cd $C
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       Lbasename=${L#lessons/}
@@ -1147,10 +1187,11 @@ function builddependencyjson() {
         else
           echo "," >> $GRAPHFILE
         fi
-        #echo doing builddependencyjson $L in $C
+        titletxt=$(cat $L/.cached/.index.titletxt|sed -e 's/"/\\"/g')
+        desctxt=$(cat $L/.cached/.index-desc.txt.kp|sed -e 's/"/\\"/g')
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
-        echo "    title: \"$(cat $L/.cached/.index.titletxt)\"," >> $GRAPHFILE
-        echo "    description: \"$(cat $L/.cached/.index-desc.txt.kp)\"," >> $GRAPHFILE
+        echo "    title: \"$titletxt\"," >> $GRAPHFILE
+        echo "    description: \"$desctxt\"," >> $GRAPHFILE
         echo "    keywords: \"\"," >> $GRAPHFILE
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
@@ -1180,6 +1221,10 @@ function builddependencyjson() {
     cd ../..
   done
   echo "}" >> $GRAPHFILE
+  # convert to UTF-16 to handle curlyquotes
+  iconv -f UTF-8 -t UTF-16 $GRAPHFILE > tmp.txt
+  mv -f tmp.txt $GRAPHFILE
+  #rm tmp.txt
 }
 
 function buildlessonplans() {
@@ -1290,10 +1335,19 @@ function buildpathwaynarrative() {
 
 function makeworkbooktex() {
 
-  #echo doing makeworkbooktex "$@"
-
   local tgt=$1
-  local wbpnf=$2
+
+  local wbpnf=
+
+  if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
+    wbpnf=.cached/.back-matter-contracts-index.rkt
+  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
+    wbpnf=.cached/.workbook-page-index.rkt
+  elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    wbpnf=.cached/.opt-exercises-index.rkt
+  else
+    wbpnf=.cached/.workbook-long-page-index.rkt
+  fi
 
   local wbpnfkp=$wbpnf.kp
 
@@ -1741,16 +1795,16 @@ function buildpathway() {
 
     # Shell version
     if test $BOOK; then
-      makeworkbooktex workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex pd-workbook .cached/.workbook-page-index.rkt
-      makeworkbooktex bm-contracts .cached/.back-matter-contracts-index.rkt
-      makeworkbooktex bm-contracts-sols .cached/.back-matter-contracts-index.rkt
-      makeworkbooktex workbook-sols .cached/.workbook-page-index.rkt
-      makeworkbooktex workbook-long .cached/.workbook-long-page-index.rkt
-      makeworkbooktex pd-workbook-long .cached/.workbook-long-page-index.rkt
-      makeworkbooktex workbook-long-sols .cached/.workbook-long-page-index.rkt
-      makeworkbooktex opt-exercises .cached/.opt-exercises-index.rkt
-      makeworkbooktex opt-exercises-sols .cached/.opt-exercises-index.rkt
+      makeworkbooktex workbook
+      makeworkbooktex pd-workbook
+      makeworkbooktex bm-contracts
+      makeworkbooktex bm-contracts-sols
+      makeworkbooktex workbook-sols
+      makeworkbooktex workbook-long
+      makeworkbooktex pd-workbook-long
+      makeworkbooktex workbook-long-sols
+      makeworkbooktex opt-exercises
+      makeworkbooktex opt-exercises-sols
     fi
 
     buildlessonplans
