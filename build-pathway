@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-02 # last modified
+LASTMOD=2021-09-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -788,6 +788,7 @@ function doadocs() {
 
   test -d .cached || mkdir -p .cached
 
+  overwrite 'building' /$LESSONSUBDIR
   $PROGDIR/adoc-preproc.rkt $ff
 
   local ff_asc=""
@@ -1353,8 +1354,6 @@ function makeworkbooktex() {
 
   local i=
 
-  local TMPFILE=$TMPPFX.tex
-
   echo "
   %BS%documentclass{article}
   %BS%usepackage{pdfpages}
@@ -1374,10 +1373,7 @@ function makeworkbooktex() {
   %BS%fancyhf{}
   %
   %BS%begin{document}
-  " > $TMPFILE
-
-  cat $TMPFILE > $tgt.tex
-  rm $TMPFILE
+  " > $tgt.tex
 
   echo \( > $wbpnfkp
 
@@ -1594,6 +1590,144 @@ function collectworkbookpages() {
   cd ..
 }
 
+function makeworkbookpdf() {
+
+  local tgt=$1
+
+  local wbpnf=
+
+  local includesolutions=
+
+  local includeoptexercises=
+
+  local dest=
+
+  if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
+    includesolutions=1
+  fi
+
+  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    includeoptexercises=1
+  fi
+
+  if test "$tgt" = workbook; then
+    dest=workbook/$tgt
+  elif test "$tgt" = pd-workbook; then
+    dest=resources/protected/$tgt
+  elif test "$tgt" = bm-contracts; then
+    dest=resources/pages/contracts
+  elif test "$tgt" = bm-contracts-sols; then
+    dest=resources/solution-pages/contracts
+  elif test "$tgt" = workbook-sols; then
+    dest=resources/protected/$tgt
+  elif test "$tgt" = workbook-long; then
+    dest=workbook/$tgt
+  elif test "$tgt" = pd-workbook-long; then
+    dest=resources/protected/$tgt
+  elif test "$tgt" = workbook-long-sols; then
+    dest=resources/protected/$tgt
+  elif test "$tgt" = opt-exercises; then
+    dest=workbook/$tgt
+  elif test "$tgt" = opt-exercises-sols; then
+    dest=resources/protected/$tgt
+  else
+    echo Bad target $tgt; exit
+  fi
+
+  if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
+    wbpnf=.cached/.back-matter-contracts-index.rkt
+  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
+    wbpnf=.cached/.workbook-page-index.rkt
+  elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    wbpnf=.cached/.opt-exercises-index.rkt
+  elif test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols; then
+    wbpnf=.cached/.workbook-long-page-index.rkt
+  else
+    echo Bad II target $tgt; exit
+  fi
+
+  DOIT=$FORCE
+
+  if test ! $DOIT; then
+    cat $wbpnf |
+      while read -r pdfpagespec; do
+        if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
+          continue
+        fi
+        lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
+        workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
+        #handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+        #aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+        #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+        if test $includesolutions; then
+          docfile=$lessondir/solution-pages/$workbookpage
+        else
+          docfile=$lessondir/pages/$workbookpage
+        fi
+        docfileext=${docfile##*.}
+        if test "$docfileext" = adoc; then
+          docfile=${docfile%.adoc}.pdf
+        fi
+        if test $docfile -nt $dest.pdf; then
+          DOIT=1
+          break
+        fi
+      done
+  fi
+
+  if test ! $DOIT; then
+    #echo Dismissing $tgt
+    return
+  fi
+
+  cat $wbpnf |
+    while read -r pdfpagespec; do
+      if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
+        continue
+      fi
+      lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
+      workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
+      handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+      #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
+
+      if test $includesolutions; then
+        docfile=$lessondir/solution-pages/$workbookpage
+      else
+        docfile=$lessondir/pages/$workbookpage
+      fi
+
+      docfileext=${docfile##*.}
+      if test "$docfileext" = adoc -o "$docfileext" = html; then
+        docfile=${docfile%.*}.pdf
+      fi
+
+      if test ! -f $docfile; then
+        echo WARNING: Page $docfile not found; subbing blank page
+        docfile=../../lib/$ABYSS.pdf
+      fi
+
+      aspectarg=$Q
+      if test "$aspect" = l -o "$aspect" = L; then
+        aspectarg=Qwest
+      fi
+      pdftk Q=$docfile cat $aspectarg output .cached/.$tgt-$handle.pdf dont_ask
+    done
+
+    if test -f $tgt.pdf; then
+      rm $tgt.pdf
+    fi
+
+    if test -f $tgt.tex; then
+      pdflatex $tgt.tex
+    fi
+
+    if test -f $tgt.pdf; then
+      mv $tgt.pdf $dest.pdf
+    fi
+
+}
+
 function buildpathway() {
   #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
@@ -1795,16 +1929,15 @@ function buildpathway() {
 
     # Shell version
     if test $BOOK; then
-      makeworkbooktex workbook
-      makeworkbooktex pd-workbook
-      makeworkbooktex bm-contracts
-      makeworkbooktex bm-contracts-sols
-      makeworkbooktex workbook-sols
-      makeworkbooktex workbook-long
-      makeworkbooktex pd-workbook-long
-      makeworkbooktex workbook-long-sols
-      makeworkbooktex opt-exercises
-      makeworkbooktex opt-exercises-sols
+      for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+        pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+              if test $NOPARALLEL; then
+                makeworkbooktex $wbf
+              else
+                makeworkbooktex $wbf &
+              fi
+            done
+            test ! $NOPARALLEL && wait
     fi
 
     buildlessonplans
@@ -1838,20 +1971,19 @@ function buildpathway() {
             echo building workbook PDFs
             echo
           fi
-          for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
-            pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+          for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+            #echo pdfing $wbf
             if test $DEBUG; then
               if test $NOPARALLEL; then
-                $PROGDIR/make-workbook.rkt $wbf
+                makeworkbookpdf $wbf
               else
-                $PROGDIR/make-workbook.rkt $wbf &
+                makeworkbookpdf $wbf &
               fi
             else
               if test $NOPARALLEL; then
-                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1
+                makeworkbookpdf $wbf >/dev/null 2>&1
               else
-                $PROGDIR/make-workbook.rkt $wbf >/dev/null 2>&1 &
-                # $PROGDIR/make-workbook.rkt $wbf &
+                makeworkbookpdf $wbf >/dev/null 2>&1 &
               fi
             fi
           done

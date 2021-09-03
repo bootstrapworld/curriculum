@@ -4,39 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Bootstrap: Materials</title>
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
-        <script>
-            const placeHolderPeriod = 2000;
-            const carousel = ["Functions", "Privacy", "Ratios", "Games", "HSA.SSE.A.2", "Box Plots", "Ethics", "Order of Operations", "Methods"];
-            var TxtRotate = function() {
-              this.loopNum = 0;
-              this.txt = '';
-              this.tick();
-              this.isDeleting = false;
-            };
+    <script src="/js/TextRotate.js" ></script>
 
-            TxtRotate.prototype.tick = function() {
-              var i = this.loopNum % carousel.length;
-              var fullTxt = carousel[i];
-
-              this.txt = fullTxt.substring(0, this.txt.length + (this.isDeleting? -1 : 1));
-              document.getElementById('searchBox').placeholder = this.txt;
-
-              var delta = 100 - Math.random() * 100;
-              if (this.isDeleting) { delta /= 2; }
-
-              if (!this.isDeleting && this.txt === fullTxt) {
-                delta = placeHolderPeriod;
-                this.isDeleting = true;
-              } else if (this.isDeleting && this.txt === '') {
-                this.isDeleting = false;
-                this.loopNum++;
-                delta = 500;
-              }
-
-              var that = this;
-              setTimeout(function() { that.tick(); }, delta);
-            };
-    </script>
     <style>
         #pathways { min-height: 170px; transition: all 0.25s linear;}
         #pathways:hover { min-height: 400px; }
@@ -112,8 +81,10 @@
             color: white; 
             width:  100%; 
             padding: 10px; 
+            font-size:  12pt;
+            box-shadow: #cb76e6 1px 1px 2px;
         }
-        #searchBox { width: 300px; margin: 0px 10px; }
+        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
         .count {font-weight: bold;}
         #pathwayButton { display: none; }
         #reset { 
@@ -153,16 +124,18 @@
             none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
             math : ["numbers-inside-video-games","order-of-operations", "coordinates", "solving-word-problems", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
-            science : ["ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
+            science : ["simple-datatypes", "ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
             cs : ["ds-intro", "simple-datatypes", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
         };
 
         console.log('topLessons are', subjectPreference[subject]);
         var checked = [];
         
-        // Starting with preferred lessons, then non-preferred lesson in prerequisite order,
+        // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
         // draw the container for each lesson and add it to the lesson explorer
-        function drawLessons(graph) {
+        // 2) Get the search placeholder text rotating
+        // 3) Register the resize handler and do a resize
+        function draw() {
             var rest = Object.keys(graph).filter(l => 
                 !subjectPreference[subject].includes(l));
             rest.sort((a,b) =>
@@ -177,6 +150,10 @@
                 container.onclick = () => update(container);
                 document.getElementById('lessonExplorer').appendChild(container);
             });
+            function updatePlaceholder(e, txt) { e.placeholder = txt; }
+            registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            window.addEventListener('resize', resize);
+            resize();
         }
 
         var resizeTimeout;
@@ -286,7 +263,7 @@
     </script>
 </head>
 
-<body onload="drawLessons(graph); update(); resize(); window.addEventListener('resize', resize); new TxtRotate()">
+<body onload="draw(); update();  ">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div class="clearfix item">
@@ -327,17 +304,19 @@
             <h2>Build your own pathway</h2>
 
             Lessons that you can teach immediately are <span class="legend accessible">shaded blue</span>.<br/>
-            When you click on a lesson you'd like to teach:
-            <ol>
-                <li>It and any prerequisites for the lessons will <span class="legend teaching">turn green</span>.</li>
+            <ul style="margin: 6px 0px;">
+                <li>When you click on a lesson you'd like to teach, that lesson - and its prerequisites - will <span class="legend teaching">turn green</span>.</li>
                 <li>All of the lessons available to you by completing the green lessons, will <span class="legend accessible">turn blue</span>.</li>
-            </ol>
+            </ul>
             <p/>
             <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
             <p/>
+
             <div id="search">
                 Looking for something specific? 
                 <input id="searchBox" type="search" onInput="search()"
+                class="txt-rotate" data-period="2000" 
+                data-rotate='["Functions", "Privacy", "Ratios", "Games", "HSA.SSE.A.2", "Box Plots", "Ethics", "Order of Operations", "Methods"]'
                 placeholder="Search by Concept, Standard, or Keyword"/>
                 <a href="javascript:reset()" id="reset" >&#8634;</a>
             </div>
