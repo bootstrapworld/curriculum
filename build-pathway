@@ -1350,7 +1350,12 @@ function makeworkbooktex() {
     wbpnf=.cached/.workbook-long-page-index.rkt
   fi
 
-  local wbpnfkp=$wbpnf.kp
+  local wbpnfkp=
+
+  if test "$tgt" = workbook; then
+    wbpnfkp=$wbpnf.kp
+    echo \( > $wbpnfkp
+  fi
 
   local i=
 
@@ -1374,8 +1379,6 @@ function makeworkbooktex() {
   %
   %BS%begin{document}
   " > $tgt.tex
-
-  echo \( > $wbpnfkp
 
   local currlesson=
   local i=1
@@ -1406,8 +1409,10 @@ function makeworkbooktex() {
       i=$(expr $i - 1)
     fi
 
-    if test "$paginate"; then
-      echo \(\(\"$lessondir\" \"$workbookpage\"\) $pagenum\) >> $wbpnfkp
+    if test $wbpnfkp; then
+      if test "$paginate"; then
+        echo \(\(\"$lessondir\" \"$workbookpage\"\) $pagenum\) >> $wbpnfkp
+      fi
     fi
 
     if test "$freshlesson"; then
@@ -1434,7 +1439,9 @@ function makeworkbooktex() {
   echo '%BS%end{document}' >> $tgt.tex
   $SED -i -e 's/%BS%/\\/g' $tgt.tex
 
-  echo \) >> $wbpnfkp
+  if test $wbpnfkp; then
+    echo \) >> $wbpnfkp
+  fi
 }
 
 function buildteacherresource() {
