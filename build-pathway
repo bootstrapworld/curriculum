@@ -788,6 +788,7 @@ function doadocs() {
 
   test -d .cached || mkdir -p .cached
 
+  overwrite 'building' /$LESSONSUBDIR
   $PROGDIR/adoc-preproc.rkt $ff
 
   local ff_asc=""
@@ -1353,8 +1354,6 @@ function makeworkbooktex() {
 
   local i=
 
-  local TMPFILE=$TMPPFX.tex
-
   echo "
   %BS%documentclass{article}
   %BS%usepackage{pdfpages}
@@ -1374,10 +1373,7 @@ function makeworkbooktex() {
   %BS%fancyhf{}
   %
   %BS%begin{document}
-  " > $TMPFILE
-
-  cat $TMPFILE > $tgt.tex
-  rm $TMPFILE
+  " > $tgt.tex
 
   echo \( > $wbpnfkp
 
@@ -1795,16 +1791,15 @@ function buildpathway() {
 
     # Shell version
     if test $BOOK; then
-      makeworkbooktex workbook
-      makeworkbooktex pd-workbook
-      makeworkbooktex bm-contracts
-      makeworkbooktex bm-contracts-sols
-      makeworkbooktex workbook-sols
-      makeworkbooktex workbook-long
-      makeworkbooktex pd-workbook-long
-      makeworkbooktex workbook-long-sols
-      makeworkbooktex opt-exercises
-      makeworkbooktex opt-exercises-sols
+      for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+        pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+              if test $NOPARALLEL; then
+                makeworkbooktex $wbf
+              else
+                makeworkbooktex $wbf &
+              fi
+            done
+            test ! $NOPARALLEL && wait
     fi
 
     buildlessonplans
