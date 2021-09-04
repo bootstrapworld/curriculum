@@ -1352,8 +1352,6 @@ function makeworkbooktex() {
     wbpnf=.cached/.workbook-long-page-index.rkt
   fi
 
-
-
   local i=
 
   echo "
@@ -1389,17 +1387,14 @@ function makeworkbooktex() {
       handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
       pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
 
-
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=
       fi
-
 
       freshlesson=
       if test "$lessondir" != "$currlesson"; then
         freshlesson=1
       fi
-
 
       if test "$freshlesson"; then
         currlesson=$lessondir
@@ -1416,7 +1411,6 @@ function makeworkbooktex() {
         echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pageno}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
 
       fi
-
 
     done
 
@@ -2115,8 +2109,4 @@ for f in */*; do
 done
 
 asciidoctor index.adoc
-
-#if test ! $DEBUG; then
-#  rm -fr $PROGDIR
-#fi
 
