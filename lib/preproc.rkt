@@ -23,7 +23,8 @@
   add-standard
   box-add-new!
   create-standards-file
-  preproc-n-asciidoctor
+  preproc-adoc-file
+  initialize-autonumber-index
   )
 
 (define *progdir* (getenv "PROGDIR"))
@@ -149,6 +150,9 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+
+(define (initialize-autonumber-index)
+  (set! *autonumber-index* 1))
 
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
@@ -943,12 +947,12 @@
         (display p o) (newline o)))
     #:exists 'replace))
 
-(define (preproc-n-asciidoctor in-file)
+(define (preproc-adoc-file in-file)
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* in-file)
-    ;(printf "doing preproc-n-asciidoctor ~a\n" in-file)
+    ;(printf "doing preproc-adoc-file ~a\n" in-file)
     (let* ([dot-in-file (string-append "." in-file)]
            [out-file (build-path ".cached" (path-replace-extension dot-in-file ".asc"))]
            [html-file (path-replace-extension in-file ".html")]
@@ -1255,7 +1259,7 @@
                                             assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise")
                                             design-recipe-exercise]
-                                           [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])])
+                                           [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                                  (let ([g (read-group i directive)])
                                    (let ([args (string-to-form g)])
                                      (let-values ([(key-list key-vals args)
@@ -1305,7 +1309,7 @@
                                   (cond [(= (top-span-stack) 0)
                                          (display-end-span o)]
                                         [else (display c o)])]
-                                 [else (error 'ERROR "preproc-n-asciidoctor: deadc0de")])]
+                                 [else (error 'ERROR "preproc-adoc-file: deadc0de")])]
                           [else (display c o)])])
                 (loop))))))
       ;
