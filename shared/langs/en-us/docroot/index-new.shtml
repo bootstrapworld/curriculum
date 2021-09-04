@@ -128,6 +128,15 @@
             cs : ["ds-intro", "simple-datatypes", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
         };
 
+        // TODO(Emmanuel): remove after July 2022
+        const tmpLessonRename = {
+            'displaying-categorical-data' : "Bar & Pie Charts",
+            'measures-of-spread' : "Box Plots & Spread",
+            'measures-of-center' : "Mean, Median, & Mode",
+            'flags' : "Geometric Ratio and Proportion",
+            'inequalities2-compound': "Compound Inequalities",
+        }
+
         console.log('topLessons are', subjectPreference[subject]);
         var checked = [];
         
@@ -142,6 +151,7 @@
                 graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
             subjectPreference[subject].concat(rest).forEach(l => {
                 const container = document.createElement("div");
+                graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
                 container.className =  "lessonContainer";
                 container.innerHTML = `
