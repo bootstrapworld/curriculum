@@ -22,10 +22,13 @@
 
 ;
 
+(define *pageno* 0)
+
 (define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt.kp"))
 
-(define (write-pages-info lesson-dir o ol oe #:paginate [paginate "yes"]
+(define (write-pages-info lesson-dir o ol oe #:pageno [pageno "yes"]
                           #:back-matter-port [back-matter-port #f])
+  ;(printf "doing write-pages-info pageno = ~s\n" pageno)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
          [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
          [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
@@ -42,23 +45,31 @@
                    '()])])
     (with-handlers ([exn:fail?
                       (lambda (e)
-                        (printf "WARNING: Couldn't open ~a\n" workbook-pages-ls-file))])
+                        (printf "WARNING: collect-workbook-pages.rkt failed at ~s\n" lesson-dir)
+                        ;((error-display-handler) (exn-message e) e)
+                        ;(printf "WARNING: Couldn't open ~a\n" workbook-pages-ls-file)
+                        )])
       (call-with-output-file workbook-pages-ls-file
         (lambda (o2)
           (for ([page workbook-pages])
             (let ([file (list-ref page 0)]
                   [aspect "portrait"]
+                  [this-pageno pageno]
                   [n (length page)])
               (when (>= n 2)
                 (set! aspect (list-ref page 1)))
               (when (>= n 3)
-                (set! paginate (list-ref page 2)))
+                (set! this-pageno (list-ref page 2)))
+              (when (string-ci=? this-pageno "yes")
+                (set! *pageno* (+ *pageno* 1))
+                (set! this-pageno *pageno*))
+              ;(printf "this-pageno = ~s\n" this-pageno)
               (fprintf o2 "~a\n" file)
-              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)
-              (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect paginate)
+              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect this-pageno)
+              (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect this-pageno)
               (when (and back-matter-port (contracts-page? lesson-dir file))
                 (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
-                         lesson-dir file (gen-handle) aspect paginate))
+                         lesson-dir file (gen-handle) aspect this-pageno))
               ))
           ;
           )
@@ -96,14 +107,14 @@
             (fprintf ol "(\n")
             (fprintf oe "(\n")
             ;TODO skip if dir nonexistent
-            (write-pages-info "front-matter" o ol oe #:paginate "no")
+            (write-pages-info "front-matter" o ol oe #:pageno "no")
             (for ([lesson-dir *lesson-order*])
               (write-pages-info lesson-dir o ol oe))
             (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
               (lambda (ob)
                 (fprintf ob "(\n")
                 ;TODO skip if dir nonexistent
-                (write-pages-info "back-matter" o ol oe #:paginate "no" #:back-matter-port ob)
+                (write-pages-info "back-matter" o ol oe #:pageno "no" #:back-matter-port ob)
                 (fprintf ob ")\n")
                 )
               #:exists 'replace)
