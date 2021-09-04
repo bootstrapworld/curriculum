@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-03 # last modified
+LASTMOD=2021-09-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1385,7 +1385,7 @@ function makeworkbooktex() {
       lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
       workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
       handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=
