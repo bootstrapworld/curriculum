@@ -776,15 +776,22 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
     line-height:      2.5rem;
   }
   /* Attempt to get the screen width to approximate printed width */
-  body:not(.LessonPlan, .landscape, .narrativepage) { width: 7.5in;  }
-  body:not(.LessonPlan, .landscape, .narrativepage) #content { height: 100%; }
-  body.landscape { width: 9.75in; }
+  body.landscape:not(.LessonPlan, .narrativepage)   { width: 10.0in; height:  7.5in; }
+  body:not(.LessonPlan, .landscape, .narrativepage) { width:  7.5in; height: 10.0in; }
+  body:not(.LessonPlan, .landscape, .narrativepage) #content { 
+    height: 100%; border:1px solid red; 
+  }
   body.nonworkbookpage{ width: auto !important; }
 }
 
 /************************************************************************************
  * PRINT MEDIA
  */
+
+@page {
+  size: letter;
+  margin: 0.5in;
+}
 @media print {
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
@@ -833,7 +840,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   }
 
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  html, body { font-size:  9pt; }
 
   .recipe_example_body_short { min-width: 20em; }
   /* Override AsciiDoc print default */
