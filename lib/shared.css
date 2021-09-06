@@ -17,7 +17,7 @@ html, body {
 }
 
 p       { margin: 10px 0px; font-size: inherit; }
-code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
+code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
 a[href] { color: #F4AB3A; text-decoration: none; }
 mark    { background: none; color: inherit; }
 
@@ -27,14 +27,13 @@ h1 {
   font-family:    sans-serif;
 }
 h2 {
-  margin:         1ex 0px;
+  margin:         0 0 1ex 0; /* 1ex bottom margin */
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
 
-ul { line-height: inherit; }
-
-.ulist ul {margin-bottom: 0px;}
 /* unordered list spacing */
+ul { line-height: inherit; }
+.ulist ul {margin-bottom: 0px;}
 .ulist p  {margin: 5px 0px;}
 
 /* table format defaults */
@@ -45,10 +44,6 @@ tr th.tableblock {
   background:       #cccccc !important;
   padding:          .25em .5em;
   font-size:        1rem;
-}
-
-td.halign-center div.circleevalsexp {
-    text-align: center;
 }
 
 .indentedpara { margin-left: 3em; }
@@ -71,14 +66,14 @@ td.halign-center div.circleevalsexp {
   height:           37px !important;
   float:            right !important;
 }
-#footer { background: rgba(0,0,0,.5); padding: 0px; }
+#footer { background: rgba(0,0,0,0.5); padding: 0px; }
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
 
-#header, #content, #footer {margin: 0 !important; max-width: 9.5in;}
+#header, #content, #footer {margin: 0 !important; width: 7.5in;}
 .landscape #header, .landscape #content, .landscape #footer {
-  max-width: 130em !important;
+  max-width: 10in !important;
 }
 
 /* Warn the user the Save-to-Drive is broken on Safari */
@@ -91,7 +86,7 @@ td.halign-center div.circleevalsexp {
   margin-top:       75px;
   border-radius:    5px;
   font-size:        10pt;
-  line-height:      16pt;
+  line-height:      1rem;
 }
 
 /* outOfDate warning */
@@ -164,7 +159,7 @@ td.halign-center div.circleevalsexp {
   min-height:         15px;
   min-width:          5em;
   text-align:         center;
-  line-height:        18pt;
+  line-height:        1.5rem;
   border-bottom:      solid 1px black;
 }
 
@@ -175,10 +170,10 @@ td.halign-center div.circleevalsexp {
 }
 
 .vskip { margin-top: 25px; width: 100%; border-bottom: none;}
-.blankline { margin-top: 25px; width: 100%;}
+.blankline { margin-top: 15px; width: 100%;}
 
-.lh-style li, .lh-style li p { line-height: 6ex; }
-.lh-style .fitb { line-height: 18pt !important; }
+.lh-style li, .lh-style li p { line-height: 3rem; }
+.lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
 .fitbruby::before, .vskip::before, .blankline::before {
@@ -212,7 +207,6 @@ td.halign-center div.circleevalsexp {
 /* The summary table at the top of each lesson */
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
-
 
 /* The sidebar */
 .sidebar {
@@ -413,6 +407,19 @@ span.clear {
   width:              100%;
 }
 
+/************************************************************************************
+* WORKBOOK PAGES
+*/
+:not(body.LessonPlan) #header { margin-bottom:    5px !important; }
+body:not(.LessonPlan) #header> h1:first-child,
+body:not(.LessonPlan) .sect1 > h1:first-child,
+body:not(.LessonPlan) .sect1 > h2:first-child,
+body:not(.LessonPlan) .sect1 > h3:first-child,
+body:not(.LessonPlan) .sect2 > h3:first-child {
+  width:            100%;
+  padding:          5px 0px;
+}
+
 /**
  * Auto-numbering. 
  * Add a right-paren, unless it's inside a table.
@@ -426,7 +433,7 @@ table .autonum::after { content: none; }
 * Every other row is shaded for readability
 */
 .TwoColumnDD_DT dl {width: 100%; clear: both; overflow: hidden;}
-.TwoColumnDD_DT dl > * {padding: 0; margin: 0; float: left; width: 50%; clear: left; line-height:27px;}
+.TwoColumnDD_DT dl > * {padding: 0; margin: 0; float: left; width: 50%; clear: left; line-height:1.7rem;}
 .TwoColumnDD_DT dd {float: right; text-align: right; clear: none;}
 .TwoColumnDD_DT dd * {display: inline; }
 .TwoColumnDD_DT dd::before {content: '['; }
@@ -442,7 +449,7 @@ table .autonum::after { content: none; }
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
-.recipe { min-height: 35pt; } /* Lines where students should write need to be tall */
+.recipe { min-height: 3rem; } /* Lines where students should write need to be tall */
 .keyword_only { min-height: 20pt; } /* lines containing nothing to write on should be short */
 .recipe_instructions { min-height: 16pt; } /* instruction lines should be extra-short */
 .recipe p { margin: 0; } 
@@ -453,7 +460,7 @@ table .autonum::after { content: none; }
 .studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   margin-bottom:      10pt;
   min-width:          105pt;
-  line-height:        20pt;
+  line-height:        1.65rem;
   position:           relative;
   padding:            0pt;
   word-spacing:       4pt;
@@ -614,6 +621,8 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
 }
 
+td.halign-center div.circleevalsexp { text-align: center; }
+
 div.circleevalsexp .expression {
   display:            inline-block;
   padding-top:        6px;
@@ -636,7 +645,7 @@ div.circleevalsexp .value {
 div.circleevalsexp .operator {
   display:            block;
   height:             20px;
-  line-height:        16px;
+  line-height:        1rem;
   text-align:         center;
   width:              100%;
   border-bottom:      solid 2px black;
@@ -729,6 +738,12 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   display: inline-block;
 }
 
+.codetwo {
+    font-family: monospace;
+    background-color: #f7f7f8;
+    color: black;
+    word-break: break-word;
+}
 
 /************************************************************************************
  * CONTRACT TABLES 
@@ -738,29 +753,18 @@ table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
 table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
 
 /************************************************************************************
-* DATASHEETS
+* DATASHEETS (currently disabled)
+
+.question { font-style: normal; font-weight: bold; }
+.question p { font-weight: bold; }
+.optional::before { content: none; }
+.datasheetpage .sect1 { margin-top: 3.5ex; }
+.question:first-child { margin-top: 2ex; }
+.question:not(:first-child) { margin-top: 2.5ex; }
+.answer { margin-top: 1.5ex; }
+.answer:last-child { margin-bottom: 3.5ex; }
+
 */
-
-.question {
-    font-style: normal;
-    font-weight: bold;
-}
-
-.question p { /* this level of specifity needed for bold -- why? */
-    font-weight: bold;
-}
-
-.optional::before {
-    content: none;
-}
-
-
-.codetwo {
-    font-family: monospace;
-    background-color: #f7f7f8;
-    color: black;
-    word-break: break-word;
-}
 
 /************************************************************************************
 * SCREEN MEDIA
@@ -769,30 +773,29 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
-    line-height:      45px;
+    line-height:      2.5rem;
   }
   /* Attempt to get the screen width to approximate printed width */
-  body:not(.LessonPlan, .landscape, .narrativepage) { width: 7.5in; }
-  body.landscape { width: 10in; }
+  body:not(.LessonPlan, .landscape, .narrativepage) { width: 7.5in;  }
+  body:not(.LessonPlan, .landscape, .narrativepage) #content { height: 100%; }
+  body.landscape { width: 9.75in; }
   body.nonworkbookpage{ width: auto !important; }
 }
 
 /************************************************************************************
  * PRINT MEDIA
  */
-@page {
-    /* size:             8.5in 11in;  */ /* puppeteer takes care of this */
-    margin:           0.5in 0.75in !important; /* make room for page number */
-    orphans:          0; /* never break a paragraph across pages */
-    widows:           0;
-}
-
 @media print {
-  html { -webkit-print-color-adjust: exact; }
+  /* Elements we don't want printed */
+  ::-webkit-scrollbar { display:  none; }
+  a[href]::after { content: none !important; }
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  .workbookpage .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
+   display: none !important; visibility: hidden; float: none;
+  }
+
+  /* Page breaks in lesson content*/
   div#body{ position: static; } /* page-break fails on absolute positioning */
-
-  .sidebar, .section-link { display: none; }
-
   .LessonPlan .lessonSummary {
     break-after:  page !important;
     page-break-after:  always !important;
@@ -812,126 +815,29 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   thead { display: table-header-group; }
   tfoot { display: table-footer-group; }
 
-  div#body, body {
-    color:            black;
-    top:              0px;
-    left:             0px;
-    width:            100%;
-    padding:          0px;
-    margin:           0px;
-    display:          block !important;
-  }
-
-  .recipe_example_body_short {
-    min-width: 20em;
-  }
-
-  /* we need a right-hand padding to eliminate some weird clipping behavior */
-  #header, #content {margin: 0px !important; padding: 0px; padding-right: 20px;}
-
-  /* The summary table at the top of each lesson */
-  .left-header tr td:nth-child(1) { background-color: lightgray; }
-
-  ::-webkit-scrollbar {
-    width:            0px;
-    background:       transparent; /* make scrollbar transparent */
-    color:            black;
-  }
-  /* Override AsciiDoc print default */
-  p {margin: 0px; font-size: 1rem; font-weight: normal;}
-  table { margin: 0px; padding: 0px; }
-
-  div.circeval { min-height: 975px; }
-
-  /* Hide the cursor when printing */
-  .CodeMirror div.CodeMirror-cursor { visibility: hidden;}
-
-  #savetodrive-div, .copyright, #footer, #outOfDate,
-  .web-page-only {
-   display: none !important; visibility: hidden; float: none;
-  }
-
-  .datasheetpage .sect1 {
-      margin-top: 3.5ex;
-  }
-
-  .question:first-child {
-      margin-top: 2ex;
-  }
-
-  .question:not(:first-child) {
-      margin-top: 2.5ex;
-  }
-
-  .answer {
-      margin-top: 1.5ex;
-  }
-
-  .answer:last-child {
-      margin-bottom: 3.5ex;
-  }
-
-  .workbookpage .acknowledgment {
-   display: none !important; visibility: hidden; float: none;
-  }
-  
-  .designRecipeLayout .studentAnswer::after { font-size: .7rem; }
-
-  /* Workbook pages should have an inverted header, with a little space below */
-  :not(body.LessonPlan) #header {
-    background:       black;
-    color:            white;
-    margin-bottom:    5px !important;
-  }
-
-  /* More padding between sections */
-  .lesson-section-1 { margin-bottom: 20px; }
-
-  /* bold borders between sections */
-  .sect1+.sect1 { border-top: solid 3px black; }
-
-  a[href]:after { content: none !important; }
-
-  .questions    { min-width: 36%; width: auto; }
-  .answers      { width: auto; }
-
-  /* format code and strong/emphasized text for printing */
-  .pyret, .racket { font-size: 12pt; margin: 0px 6px; display: inline-block;}
-  .paragraph em, .paragraph strong{ margin: 0px 3px; }
-  strong { font-weight: 700; }
-
-  /* If we're NOT in a lesson plan, format the headers differently */
+  /* Change coloring of body text, lesson summary table, code, and WB page headers */
+  html { -webkit-print-color-adjust: exact; }
+  div#body, body { color: black; }
+  .LessonPlan .left-header tr td:nth-child(1) { background-color: lightgray; }
+  .LessonPlan .sect1+.sect1 { border-top: solid 3px black; }
+  :not(body.LessonPlan) #header { background: black; color: white; }
+  .listingblock pre:not(.highlight) { background: none !important; }
   body:not(.LessonPlan) #header> h1:first-child,
   body:not(.LessonPlan) .sect1 > h1:first-child,
   body:not(.LessonPlan) .sect1 > h2:first-child,
   body:not(.LessonPlan) .sect1 > h3:first-child,
   body:not(.LessonPlan) .sect2 > h3:first-child {
-    -webkit-print-color-adjust: exact !important;
-    width:            100%;
     background:       black;
-    margin-top:       0px;
     color:            white;
     text-align:       center;
-    display:          inline-block;
-    padding:          5px 0px;
   }
 
-  div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
-    display: inline-block;
-  }
+  /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
+  html, body { font-size:  9pt; }
 
-  /* Remove AsciiDoc's gray background for code chunks */
-  .listingblock pre:not(.highlight) { background: none !important; }
-
-  /* Work around a known issue with wkhtmltopdf, in which font-weight is not applied
-   * consistently for the same font. By switching to a different font, we can make
-   * font-weight work.
-   */
-  .pyretkeyword{
-    font-family: monospace;
-  }
-
-  .codetwo * {
-      color: black;
-  }
+  .recipe_example_body_short { min-width: 20em; }
+  /* Override AsciiDoc print default */
+  p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  .questions    { min-width: 36%; width: auto; }
+  .answers      { width: auto; }
 }
