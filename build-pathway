@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-04 # last modified
+LASTMOD=2021-09-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -96,6 +96,8 @@ test $SUPERFORCE && FORCE=1
 
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
+
+export ABYSS=page-not-found
 
 WKH2P_PFX=.wkh2p-tmp
 
@@ -877,7 +879,7 @@ function processadocs() {
     fhtml=$fbase.html
     fasc=.cached/.$fbase.asc
     fpdf=$fbase.pdf
-    if test -f "$fhtml"; then
+    if test -f "$fhtml" -a ""; then
       if test $fhtml -nt $fpdf; then
         if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
           echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\", \"aspect\": \"landscape\" }" >> $PUPPETEER_INPUT
@@ -1334,13 +1336,15 @@ function buildpathwaynarrative() {
   fi
 }
 
-function makeworkbooktex() {
+function makeworkbookjson() {
 
-  #echo doing makeworkbooktex "$@"
+  #echo doing makeworkbookjson "$@"
 
   local tgt=$1
 
   local wbpnf=
+  local includesolutions=
+  local includeoptexercises=
 
   if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
     wbpnf=.cached/.back-matter-contracts-index.rkt
@@ -1352,28 +1356,18 @@ function makeworkbooktex() {
     wbpnf=.cached/.workbook-long-page-index.rkt
   fi
 
-  local i=
+  if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
+    includesolutions=1
+  fi
 
-  echo "
-  %BS%documentclass{article}
-  %BS%usepackage{pdfpages}
-  %BS%usepackage{fancyhdr}
-  %
-  %BS%setlength%BS%topmargin{-0.375in}
-  %BS%setlength%BS%headheight{0in}
-  %BS%setlength%BS%headsep{0in}
-  %BS%setlength%BS%textheight{9.5in}
-  %BS%setlength%BS%textwidth{7.25in}
-  %BS%setlength%BS%oddsidemargin{-0.5in}
-  %BS%setlength%BS%evensidemargin{-0.5in}
-  %
-  %BS%pagestyle{fancy}
-  %BS%renewcommand{%BS%headrulewidth}{0pt}
-  %BS%lhead{}%BS%rhead{}
-  %BS%fancyhf{}
-  %
-  %BS%begin{document}
-  " > $tgt.tex
+  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    includeoptexercises=1
+  fi
+
+  #echo Initializing $PDFTK_INPUT_$tgt
+
+  rm -f $PDFTK_INPUT-$tgt
+  rm -f $PDFTK_INPUT-aspect-$tgt
 
   local currlesson=
 
@@ -1385,10 +1379,18 @@ function makeworkbooktex() {
       lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
       workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
       handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
       pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
+
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=
+      fi
+
+      if test ! "$pageno"; then
+        jsonpageno=false
+      else
+        jsonpageno=$pageno
       fi
 
       freshlesson=
@@ -1398,25 +1400,59 @@ function makeworkbooktex() {
 
       if test "$freshlesson"; then
         currlesson=$lessondir
-        echo >> $tgt.tex
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pageno}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
-        if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
-          if echo $currlesson| grep -q 'lessons/'; then
-            lessonplanpdf=$currlesson/index.pdf
-            echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
+        docfile=$currlesson/index.shtml
+        if test -f "$docfile"; then
+          echo ", { \"input\": \"$docfile\" }" >> $PUPPETEER_INPUT
+          if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
+            echo $currlesson/index.pdf >> $PDFTK_INPUT-$tgt
           fi
         fi
+      fi
+
+      if test $includesolutions; then
+        docfile=$lessondir/solution-pages/$workbookpage
+      else
+        docfile=$lessondir/pages/$workbookpage
+      fi
+
+      docfileext=${docfile##*.}
+
+      if test "$docfileext" = adoc; then
+        docfile=${docfile%.adoc}.html
+        docfileext=html
+      fi
+
+      if test "$docfileext" = html; then
+        if test -f "$docfile"; then
+          pageddocfile=${docfile%/*}/$PDFTK_PAGED-$tgt-$handle.html
+          #echo  cp -p $docfile $pageddocfile
+          cp -p $docfile $pageddocfile
+          if test "$pageno"; then
+            #echo correcting pno in $docfile $pageddocfile
+            sed -i -e 's/^<div id="footer">/\0'$pageno'/' $pageddocfile
+          fi
+          echo ", { \"input\": \"$pageddocfile\", \"aspect\": \"$aspect\", \"pageno\": $jsonpageno, \"output\": \".cached/.$tgt-$handle.pdf\" }" >> $PUPPETEER_INPUT
+
+          echo $handle=.cached/.$tgt-$handle.pdf >> $PDFTK_INPUT-$tgt
+        else
+          echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
+        fi
+
+      elif test ! -f $docfile; then
+        echo ../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
 
       else
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pageno}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
+        echo $docfile >> $PDFTK_INPUT-$tgt
 
       fi
 
-    done
+      if test $aspect = landscape; then
+        echo ${handle}west >> $PDFTK_INPUT-aspect-$tgt
+      else
+        echo ${handle} >> $PDFTK_INPUT-aspect-$tgt
+      fi
 
-  echo >> $tgt.tex
-  echo '%BS%end{document}' >> $tgt.tex
-  $SED -i -e 's/%BS%/\\/g' $tgt.tex
+    done
 
 }
 
@@ -1476,6 +1512,8 @@ function batchhtmltopdf() {
   echo "] }" >> $PUPPETEER_INPUT
 
   # use --trace-warnings to debug
+
+  echo in $(pwd) doing node ../../lib/html2pdf.js $PUPPETEER_INPUT
   node ../../lib/html2pdf.js $PUPPETEER_INPUT
 }
 
@@ -1491,9 +1529,7 @@ function rmtmpfiles() {
     find . -name \*.$f | grep -v '\(lesson-order\|workbook-pages\)\.txt' | xargs rm -f
   done
 
-  for wbf in workbook pd-workbook; do
-    rm -f $wbf-*.pdf
-  done
+  find . -name $PDFTK_PAGED\*.html -delete
 
   find . -name $WKH2P_PFX-\* -delete
 }
@@ -1576,21 +1612,9 @@ function makeworkbookpdf() {
 
   local tgt=$1
 
-  local wbpnf=
-
-  local includesolutions=
-
-  local includeoptexercises=
+  #echo doing makeworkbookpdf $tgt
 
   local dest=
-
-  if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
-    includesolutions=1
-  fi
-
-  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
-    includeoptexercises=1
-  fi
 
   if test "$tgt" = workbook; then
     dest=workbook/$tgt
@@ -1616,97 +1640,9 @@ function makeworkbookpdf() {
     echo Bad target $tgt; exit
   fi
 
-  if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
-    wbpnf=.cached/.back-matter-contracts-index.rkt
-  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
-    wbpnf=.cached/.workbook-page-index.rkt
-  elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
-    wbpnf=.cached/.opt-exercises-index.rkt
-  elif test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols; then
-    wbpnf=.cached/.workbook-long-page-index.rkt
-  else
-    echo Bad II target $tgt; exit
+  if test -f $PDFTK_INPUT-$tgt; then
+    pdftk $(cat $PDFTK_INPUT-$tgt) cat $(cat $PDFTK_INPUT-aspect-$tgt) output $dest.pdf
   fi
-
-  DOIT=$FORCE
-
-  if test ! $DOIT; then
-    cat $wbpnf |
-      while read -r pdfpagespec; do
-        if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
-          continue
-        fi
-        lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
-        workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-        #handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-        #aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-        #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-        if test $includesolutions; then
-          docfile=$lessondir/solution-pages/$workbookpage
-        else
-          docfile=$lessondir/pages/$workbookpage
-        fi
-        docfileext=${docfile##*.}
-        if test "$docfileext" = adoc; then
-          docfile=${docfile%.adoc}.pdf
-        fi
-        if test $docfile -nt $dest.pdf; then
-          DOIT=1
-          break
-        fi
-      done
-  fi
-
-  if test ! $DOIT; then
-    #echo Dismissing $tgt
-    return
-  fi
-
-  cat $wbpnf |
-    while read -r pdfpagespec; do
-      if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
-        continue
-      fi
-      lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
-      workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-      handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-      #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-
-      if test $includesolutions; then
-        docfile=$lessondir/solution-pages/$workbookpage
-      else
-        docfile=$lessondir/pages/$workbookpage
-      fi
-
-      docfileext=${docfile##*.}
-      if test "$docfileext" = adoc -o "$docfileext" = html; then
-        docfile=${docfile%.*}.pdf
-      fi
-
-      if test ! -f $docfile; then
-        echo WARNING: Page $docfile not found, subbing blank page
-        docfile=../../lib/$ABYSS.pdf
-      fi
-
-      aspectarg=$Q
-      if test "$aspect" = l -o "$aspect" = L; then
-        aspectarg=Qwest
-      fi
-      pdftk Q=$docfile cat $aspectarg output .cached/.$tgt-$handle.pdf dont_ask
-    done
-
-    if test -f $tgt.pdf; then
-      rm $tgt.pdf
-    fi
-
-    if test -f $tgt.tex; then
-      pdflatex $tgt.tex
-    fi
-
-    if test -f $tgt.pdf; then
-      mv $tgt.pdf $dest.pdf
-    fi
 
 }
 
@@ -1792,8 +1728,12 @@ function buildpathway() {
 
     TEMPF=$(mktemp); rm -f $TEMPF
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
-    export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_puppeteer.json
+    export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-puppeteer.json
+    export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
+    export PDFTK_PAGED=$WKH2P_BATCH_BASE-paged
     echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
+
+    #echo Initializing $PUPPETEER_INPUT
 
     mkdir -p lessons workbook
 
@@ -1912,13 +1852,14 @@ function buildpathway() {
       for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
         pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
               if test $NOPARALLEL; then
-                makeworkbooktex $wbf
+                makeworkbookjson $wbf
               else
-                makeworkbooktex $wbf &
+                makeworkbookjson $wbf &
               fi
             done
             test ! $NOPARALLEL && wait
     fi
+
 
     buildlessonplans
 
@@ -1930,7 +1871,6 @@ function buildpathway() {
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
-        export ABYSS=page-not-found
         if test ! -f $ABYSS.pdf; then
           echo '= PAGE NOT FOUND!' > $ABYSS.adoc
           echo >> $ABYSS.adoc
@@ -1941,6 +1881,8 @@ function buildpathway() {
 
         export PDFpagesredone=
         batchhtmltopdf
+
+        #exit
 
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
@@ -1970,6 +1912,8 @@ function buildpathway() {
         fi
       fi
     fi
+
+    exit
 
     buildteacherresource
 
