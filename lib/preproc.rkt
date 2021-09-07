@@ -101,9 +101,11 @@
 
 (define *workbook-pagenums*
   (if *lesson-plan*
-      (let ([f (string-append *pathway-root-dir* ".cached/.workbook-page-index.rkt.kp")])
+      (let ([f (string-append *pathway-root-dir* ".cached/.workbook-page-index.rkt")])
         (if (file-exists? f)
-            (call-with-input-file f read)
+            (let ([xx (call-with-input-file f read)])
+              (map (lambda (x) (list (list (list-ref x 0) (list-ref x 1)) (list-ref x 4))) xx)
+              )
             '()))
       '()))
 
