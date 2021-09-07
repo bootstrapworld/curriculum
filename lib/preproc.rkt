@@ -1209,8 +1209,11 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "fitb")
                             (let ([width (read-group i directive)])
-                              (display-begin-span
-                                ".fitb" o #:attribs (format "style=\"width: ~a\"" width)))]
+                              (if (string=? width "")
+                                (display-begin-span
+                                  ".fitb" o #:attribs "style=\"flex-grow: 1\"")
+                                (display-begin-span
+                                  ".fitb" o #:attribs (format "style=\"width: ~a\"" width))))]
                            [(string=? directive "fitbruby")
                             ;FIXME: text should be processed, see fitb above
                             (let* ([width (read-group i directive)]

@@ -20,6 +20,8 @@ p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
 a[href] { color: #F4AB3A; text-decoration: none; }
 mark    { background: none; color: inherit; }
+em, strong { margin: 0px 2px; }
+.listingblock pre { margin: 3px 0px; padding: 0; }
 
 h1 {
   font-size:      2rem;
@@ -33,8 +35,8 @@ h2 {
 
 /* unordered list spacing */
 ul { line-height: inherit; }
-.ulist ul {margin-bottom: 0px;}
-.ulist p  {margin: 5px 0px;}
+.ulist ul { margin-bottom: 0px; }
+.ulist p  { margin: 5px 0px; display: flex; flex-flow: wrap;}
 
 /* table format defaults */
 table, td.tableblock>.content { margin-bottom: 0px; }
@@ -66,7 +68,7 @@ tr th.tableblock {
   height:           37px !important;
   float:            right !important;
 }
-#footer { background: rgba(0,0,0,0.5); padding: 0px; }
+#footer { background: rgba(0,0,0,0.5); padding: 0px; height:  24px; }
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
@@ -172,7 +174,7 @@ tr th.tableblock {
 .vskip { margin-top: 25px; width: 100%; border-bottom: none;}
 .blankline { margin-top: 15px; width: 100%;}
 
-.lh-style li, .lh-style li p { line-height: 3rem; }
+.lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
@@ -666,14 +668,19 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
-  font-size:          .8rem;
+  font-size:          0.8rem;
   color:              #666;
   font-style:         normal;
   clear:              both;
 }
 
-/* HACK FOR NOW: don't let editboxes break lines */
-.editbox { width: auto; background-color: #f7f7f8; margin: 0; padding: 0 2px; }
+.editbox { 
+  width:              auto; 
+  background-color:   #f7f7f8; 
+  margin:             0 2px; 
+  padding:            0 2px; 
+}
+p .editbox { line-height: 1.6rem; vertical-align: baseline; font-size: 0.9rem; } 
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
@@ -787,11 +794,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
 /************************************************************************************
  * PRINT MEDIA
  */
-
-@page {
-  size: letter;
-  margin: 0.5in;
-}
 @media print {
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
@@ -840,7 +842,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   }
 
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-
+  html, body { font-size:      10pt; }
   .recipe_example_body_short { min-width: 20em; }
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
