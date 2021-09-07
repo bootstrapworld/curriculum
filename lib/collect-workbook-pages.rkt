@@ -4,21 +4,27 @@
 
 (require "utils.rkt")
 
-(define *handle-prefix* "")
-(define *handle-counter* 0)
+(define *pag-handle-prefix* "")
+(define *pag-handle-counter* 0)
+
+(define *nonpag-handle-prefix* "N")
+(define *nonpag-handle-counter* 0)
 
 (define *char-code-before-A* (sub1 (char->integer #\A)))
 
-(define (zero-out-handle)
-  (set! *handle-prefix* "")
-  (set! *handle-counter* 0))
+(define (gen-handle-pag)
+  (set! *pag-handle-counter* (+ *pag-handle-counter* 1))
+  (when (> *pag-handle-counter* 26)
+    (set! *pag-handle-prefix* (string-append *pag-handle-prefix* "Z"))
+    (set! *pag-handle-counter* 1))
+  (format "~a~a" *pag-handle-prefix* (integer->char (+ *char-code-before-A* *pag-handle-counter*))))
 
-(define (gen-handle)
-  (set! *handle-counter* (+ *handle-counter* 1))
-  (when (> *handle-counter* 26)
-    (set! *handle-prefix* (string-append *handle-prefix* "Z"))
-    (set! *handle-counter* 1))
-  (format "~a~a" *handle-prefix* (integer->char (+ *char-code-before-A* *handle-counter*))))
+(define (gen-handle-nonpag)
+  (set! *nonpag-handle-counter* (+ *nonpag-handle-counter* 1))
+  (when (> *nonpag-handle-counter* 26)
+    (set! *nonpag-handle-prefix* (string-append *nonpag-handle-prefix* "Z"))
+    (set! *nonpag-handle-counter* 1))
+  (format "~a~a" *nonpag-handle-prefix* (integer->char (+ *char-code-before-A* *nonpag-handle-counter*))))
 
 ;
 
@@ -65,11 +71,12 @@
                 (set! this-pageno *pageno*))
               ;(printf "this-pageno = ~s\n" this-pageno)
               (fprintf o2 "~a\n" file)
-              (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect this-pageno)
-              (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect this-pageno)
-              (when (and back-matter-port (contracts-page? lesson-dir file))
-                (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
-                         lesson-dir file (gen-handle) aspect this-pageno))
+              (let ([handle (gen-handle-pag)])
+                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect this-pageno)
+                (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect this-pageno)
+                (when (and back-matter-port (contracts-page? lesson-dir file))
+                  (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
+                           lesson-dir file handle aspect this-pageno)))
               ))
           ;
           )
@@ -80,9 +87,10 @@
               [n (length page)])
           (when (>= n 2)
             (set! aspect (list-ref page 1)))
-          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect "no")
-          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file (gen-handle) aspect "no")
-          )))))
+          (let ([handle (gen-handle-nonpag)])
+          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
+          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
+          ))))))
 
 (define (contracts-page? dir file)
   (let ([f (build-path dir "solution-pages" file)])
@@ -127,4 +135,3 @@
   #:exists 'replace)
 
 (void)
-
