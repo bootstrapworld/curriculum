@@ -601,6 +601,8 @@ EOF
     <script src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
     <script src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
     <script src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
+    <script src="${PATHWAYROOTDIR}../../dependency-graph.js"></script>
+    <script>var pathwayLessons=[${PATHWAYLESSONS}];</script>
 EOF
     $SED -i \
       -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -1190,10 +1192,12 @@ function builddependencyjson() {
         fi
         titletxt=$(cat $L/.cached/.index.titletxt|sed -e 's/"/\\"/g')
         desctxt=$(cat $L/.cached/.index-desc.txt.kp|sed -e 's/"/\\"/g')
+        pagestxt=$(cat $L/pages/workbook-pages.txt|sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
         echo "    title: \"$titletxt\"," >> $GRAPHFILE
         echo "    description: \"$desctxt\"," >> $GRAPHFILE
         echo "    keywords: \"\"," >> $GRAPHFILE
+        echo "    pages: [\"$pagestxt\"]," >> $GRAPHFILE
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
         for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
@@ -1801,6 +1805,7 @@ function buildpathway() {
       echo
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
     else
+      export PATHWAYLESSONS=\"$(cat lesson-order.txt|sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
