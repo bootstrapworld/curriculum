@@ -812,12 +812,16 @@ function doadocs() {
     fbase=${f%.adoc}
     fhtmlcached=.cached/.$fbase.html
     fhtml=$fbase.html
+    fpdf=$fbase.pdf
     if test -f "$fhtmlcached"; then
       mv $fhtmlcached $fhtml
       resolveabbrevs $fhtml
       if test ! $OTHERDIR; then
         insertgdrivesave $fhtml
       fi
+    fi
+    if test -f "$fpdf"; then
+      rm -f "$fpdf"
     fi
   done
 
@@ -833,7 +837,6 @@ function processadocs() {
 
   local ff_given="$@"
   local ff=
-  local ff_w_html=
 
   for f in $ff_given; do
     if test ! -f $f; then
@@ -846,49 +849,25 @@ function processadocs() {
       continue
     fi
     DOIT=
-    DOITPDF=
     fbase=${f%.adoc}
     fhtml=$fbase.html
     fasc=.cached/.$fbase.asc
-    fpdf=$fbase.pdf
     if test $FORCE; then
       DOIT=1
-      if test ! $OTHERDIR; then DOITPDF=1; fi
     else
       if test $OTHERDIR; then
         if test $f -nt $fasc; then DOIT=1; fi
       else
         if test $f -nt $fhtml; then DOIT=1; fi
-        if test $f -nt $fpdf; then DOITPDF=1; fi
       fi
     fi
-    if test $NOPDF; then DOITPDF=; fi
     if test $DOIT; then
       ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
     fi
-    if test $DOITPDF; then
-      ff_w_html="$ff_w_html $f"
-    fi
   done
 
   doadocs $ff
-
-  for f in $ff_w_html; do
-    fbase=${f%.adoc}
-    fhtml=$fbase.html
-    fasc=.cached/.$fbase.asc
-    fpdf=$fbase.pdf
-    if test -f "$fhtml" -a ""; then
-      if test $fhtml -nt $fpdf; then
-        if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-          echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\", \"aspect\": \"landscape\" }" >> $PUPPETEER_INPUT
-        else
-          echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
-        fi
-      fi
-    fi
-  done
 
   for f in $ff; do
     checklinks $f
@@ -1404,7 +1383,9 @@ function makeworkbookjson() {
         docfile=$currlesson/index.shtml
         if test -f "$docfile"; then
           if test "$tgt" = pd-workbook; then
-            echo ", { \"input\": \"$docfile\" }" >> $PUPPETEER_INPUT
+            if test "$docfile" -nt "$currlesson/index.pdf"; then
+              echo ", { \"input\": \"$docfile\" }" >> $PUPPETEER_INPUT
+            fi
           fi
           if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
             echo $currlesson/index.pdf >> $PDFTK_INPUT-$tgt
@@ -1418,30 +1399,38 @@ function makeworkbookjson() {
         docfile=$lessondir/pages/$workbookpage
       fi
 
-      echo workbookpage is $workbookpage
-      echo docfile is $docfile
-
       docfileext=${docfile##*.}
 
       if test "$docfileext" = adoc; then
         docfile=${docfile%.adoc}.html
         docfileext=html
+      elif test "$docfileext" = pdf; then
+        htmlfile=${docfile%.pdf}.html
+        if test -f $htmlfile; then
+          docfile=$htmlfile
+          docfileext=html
+        fi
       fi
+
+      #echo docfile $docfile docfileext $docfileext
 
       if test "$docfileext" = html; then
         if test -f "$docfile"; then
           if test "$tgt" = workbook-long -o "$tgt" = workbook-long-sols; then
-            echo cp -p .cached/.workbook-$prefixedHandle.pdf ${docfile%.html}.pdf >> $PDFTK_INPUT-local-pdfs.sh
             if test "$pageno"; then
               sed -i -e 's/^<div id="footer">/\0<div class=pagenumberholder>'$pageno'<\/div>/' $docfile
             fi
-            echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
+            pdffile=.cached/.workbook-$prefixedHandle.pdf
+            localpdffile=${docfile%.html}.pdf
+            if test ! -f "$localpdffile"; then
+              echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
+              echo cp -p .cached/.workbook-$prefixedHandle.pdf $localpdffile >> $PDFTK_INPUT-local-pdfs.sh
+            fi
           fi
 
           echo $handle=.cached/.workbook-$prefixedHandle.pdf >> $PDFTK_INPUT-$tgt
 
         else
-          echo subbing abyss file for $docfile
           echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
         fi
 
@@ -1521,8 +1510,12 @@ function batchhtmltopdf() {
   # use --trace-warnings to debug
 
   #echo in $(pwd) doing node ../../lib/html2pdf.js $PUPPETEER_INPUT
-  node ../../lib/html2pdf.js $PUPPETEER_INPUT
-  sh $PDFTK_INPUT-local-pdfs.sh
+  if grep -q input $PUPPETEER_INPUT; then
+    node ../../lib/html2pdf.js $PUPPETEER_INPUT
+    if test -f $PDFTK_INPUT-local-pdfs.sh; then
+      sh $PDFTK_INPUT-local-pdfs.sh
+    fi
+  fi
 }
 
 function rmtmpfiles() {
