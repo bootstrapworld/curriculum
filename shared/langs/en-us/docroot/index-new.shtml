@@ -110,6 +110,9 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
+        var registerTxtRotation = registerTxtRotation;
+        var graph = graph;
+
         // find out if there's a subject that was passed in
         var subject, params = location.search.substring(1);
         var subject = !params? "none"
@@ -140,7 +143,6 @@
             'checking-your-work' : "Evaluating Correctness"
         }
 
-        console.log('topLessons are', subjectPreference[subject]);
         var checked = [];
         
         // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
@@ -153,6 +155,11 @@
             rest.sort((a,b) =>
                 graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
             subjectPreference[subject].concat(rest).forEach(l => {
+                // if we don't have a matching lesson in the graph
+                if(!graph[l]) {
+                    console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
+                    return; 
+                }
                 const container = document.createElement("div");
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
@@ -164,7 +171,9 @@
                 document.getElementById('lessonExplorer').appendChild(container);
             });
             function updatePlaceholder(e, txt) { e.placeholder = txt; }
-            registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            if(registerTxtRotation) {
+                registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            }
             window.addEventListener('resize', resize);
             resize();
         }
@@ -174,11 +183,11 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout( () => {
                 var containers = document.getElementsByClassName('lessonContainer');
-                var pageWidth = document.getElementById("lessonExplorer").offsetWidth;
+                var pageWidth = document.getElementById("lessonExplorer").clientWidth;
                 if(containers.length == 0) return; // no lessons, so no work to do!
                 var containerWidth = containers[0].offsetWidth + 
                     2*parseInt(getComputedStyle(containers[0]).marginLeft);
-                var rowCount = Math.floor(pageWidth/containerWidth)
+                var rowCount = Math.floor(pageWidth/containerWidth);
 
                 var descriptions = document.getElementsByClassName('lessonDescription');
                 [...descriptions].forEach((d, i) => {
