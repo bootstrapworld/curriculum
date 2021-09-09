@@ -7,15 +7,27 @@
 ; Next-Generation Science Standards (NGSS)
 ; Science and Engineering Practices
 
-; The 8 NGSS Science and Engineering Practices do not have a predefined numbering system.  For this dictionary, subitems have been numbered for easier comprehension and use.  
+; NOTE(Emmanuel): 9/9/21 - Commenting out all the detailed standards, to focus on
+; the 8 primary practices
 
-; ES = Elementary School (Grades 3-5)
-; MS = Middle School (Grades 6-8)
-; HS = High School (Grades 9-12)
+("SEP.1" "Asking Questions and Defining Problems")
+("SEP.2" "Developing and Using Models")
+("SEP.3" "Planning and Carrying Out Investigations")
+("SEP.4" "Analyzing and Interpreting Data")
+("SEP.5" "Using Mathematics and Computational Thinking")
+("SEP.6" "Constructing Explanations and Designing Solutions")
+("SEP.7" "Engaging in Argument from Evidence")
+("SEP.8" "Obtaining, Evaluating, and Communicating Information")
 
+#|
+  ; The 8 NGSS Science and Engineering Practices do not have a predefined numbering system.  For this dictionary, subitems have been numbered for easier comprehension and use.  
 
-; SEP1 = Asking Questions and Defining Problems
+  ; ES = Elementary School (Grades 3-5)
+  ; MS = Middle School (Grades 6-8)
+  ; HS = High School (Grades 9-12)
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; SEP1 = Asking Questions and Defining Problems
   ("ES-SEP1-1"
   "Ask questions about what would happen if a variable is changed."
   )
@@ -83,6 +95,7 @@
   "Analyze complex real-world problems by specifying criteria and constraints for successful solutions."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP2 = Developing and Using Models
   
   ("ES-SEP2-1"
@@ -146,6 +159,7 @@
   "Develop and/or use a model (including mathematical and computational) to generate data to support explanations, predict phenomena, analyze systems, and/or solve problems."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP3 = Planning and Carrying Out Investigations
   
   ("ES-SEP3-1"
@@ -197,6 +211,7 @@
   "Manipulate variables and collect data about a complex model of a proposed process or system to identify failure points or improve performance relative to criteria for success or other variables."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP4 = Analyzing and Interpreting Data
   
   ("ES-SEP4-1"
@@ -257,6 +272,7 @@
   "Analyze data to identify design features or characteristics of the components of a proposed process or system to optimize it relative to criteria for success."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP5 = Using Mathematics and Computational Thinking
   
   ("ES-SEP5-1"
@@ -302,6 +318,7 @@
   "Apply ratios, rates, percentages, and unit conversions in the context of complicated measurement problems involving quantities with derived or compound units (such as mg/mL, kg/m3, acre-feet, etc.)."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP6 = Constructing Explanations and Designing Solutions
   
   ("ES-SEP6-1"
@@ -359,6 +376,7 @@
   "Design, evaluate, and/or refine a solution to a complex real-world problem, based on scientific knowledge, student-generated sources of evidence, prioritized criteria, and tradeoff considerations."
   )
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP7 = Engaging in Argument from Evidence
   
   ("ES-SEP7-1"
@@ -412,7 +430,8 @@
   ("HS-SEP7-6"
   "Evaluate competing design solutions to a real-world problem based on scientific ideas and principles, empirical evidence, and logical arguments regarding relevant factors (e.g. economic, societal, environmental, ethical considerations)."
   )
-  
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SEP8 = Obtaining, Evaluating, and Communicating Information
   
   ("ES-SEP8-1"
@@ -463,5 +482,7 @@
   ("HS-SEP8-5"
   "Communicate scientific and/or technical information or ideas (e.g. about phenomena and/or the process of development and the design and performance of a proposed process or system) in multiple formats (including orally, graphically, textually, and mathematically)."
   )
+|#
+
  ))
 
