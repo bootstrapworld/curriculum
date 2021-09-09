@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-07 # last modified
+LASTMOD=2021-09-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1394,12 +1394,6 @@ function makeworkbookjson() {
         pageno=
       fi
 
-      if test ! "$pageno"; then
-        jsonpageno=false
-      else
-        jsonpageno=$pageno
-      fi
-
       freshlesson=
       if test "$lessondir" != "$currlesson"; then
         freshlesson=1
@@ -1424,6 +1418,9 @@ function makeworkbookjson() {
         docfile=$lessondir/pages/$workbookpage
       fi
 
+      echo workbookpage is $workbookpage
+      echo docfile is $docfile
+
       docfileext=${docfile##*.}
 
       if test "$docfileext" = adoc; then
@@ -1433,23 +1430,18 @@ function makeworkbookjson() {
 
       if test "$docfileext" = html; then
         if test -f "$docfile"; then
-          #echo  cp -p $docfile $pageddocfile
-          #echo docfile is $docfile
-          #echo pageddocfile is $pageddocfile
           if test "$tgt" = workbook-long -o "$tgt" = workbook-long-sols; then
-            pageddocfile=${docfile%/*}/$PDFTK_PAGED-$prefixedHandle.html
-            cp -p $docfile $pageddocfile
             echo cp -p .cached/.workbook-$prefixedHandle.pdf ${docfile%.html}.pdf >> $PDFTK_INPUT-local-pdfs.sh
             if test "$pageno"; then
-              #echo correcting pno in $docfile $pageddocfile
-              sed -i -e 's/^<div id="footer">/\0'$pageno'/' $pageddocfile
+              sed -i -e 's/^<div id="footer">/\0<div class=pagenumberholder>'$pageno'<\/div>/' $docfile
             fi
-            echo ", { \"input\": \"$pageddocfile\", \"origInput\": \"$docfile\", \"aspect\": \"$aspect\", \"pageno\": $jsonpageno, \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
+            echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
           fi
 
           echo $handle=.cached/.workbook-$prefixedHandle.pdf >> $PDFTK_INPUT-$tgt
 
         else
+          echo subbing abyss file for $docfile
           echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
         fi
 
@@ -1534,7 +1526,7 @@ function batchhtmltopdf() {
 }
 
 function rmtmpfiles() {
-  find . -name $PDFTK_PAGED\*.html -delete
+  #find . -name $PDFTK_PAGED\*.html -delete
 
   test $DEBUG && return
   #echo doing rmtmpfiles
@@ -1747,7 +1739,6 @@ function buildpathway() {
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
     export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-puppeteer.json
     export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
-    export PDFTK_PAGED=$WKH2P_BATCH_BASE-paged
     echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
 
     #echo Initializing $PUPPETEER_INPUT
