@@ -1,6 +1,6 @@
 = Displaying Categorical Data
 
-@lesson-description{Students learn to generate pie charts and bar charts, and explore other plotting and display functions.}
+@lesson-description{Students learn to generate and compare pie charts & bar charts, explore other plotting & display functions, and (optionally) design an infographic.}
 
 @add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
 
@@ -19,13 +19,13 @@
 @ifproglang{codap}{
 * Read bar charts
 * Generate bar charts (among other data displays) from the Animals Dataset
-* }
+}
 
 
 | Student-facing Lesson Goals
 |
 
-* Let's use functions to create graphs from data.
+* Let's use functions to create pie charts, bar graphs and other data displays from Tables.
 
 | Materials
 |[.materials-links]
@@ -40,7 +40,8 @@
 * Decide how students will be grouped in pairs
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-* @ifproglang{pyret}{All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}}
+@ifproglang{pyret}{
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}}
 
 | Supplemental Resources
 |
@@ -52,7 +53,7 @@
 === Overview
 @ifproglang{pyret}{Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.}
 
-@ifproglang{codap}{Students use various Transformers on the Animals dataset to produce displays and plots.}
+@ifproglang{codap}{Students use the options on CODAP's _Measure_ menu to produce displays and plots of the Animals Dataset.}
 
 === Launch
 Have students ever seen any _pictures_ created from tables of data? Can they think of a situation when they'd want to consume a _Table_, and use that to produce an image?
@@ -69,15 +70,15 @@ And here is an example of _using_ the function:
 [.lesson-instruction]
 - What is the Name of this function?
 - How many inputs are in its @vocab{Domain}?
-- In the Interactions Area, type `pie-chart(animals-table, "sex")` and hit Enter. What happens?
+- In the Interactions Area, type `pie-chart(animals-table, "legs")` and hit Enter. What happens?
 
-@span{.right}{@image{images/sex-pie-chart.png,"" ,300}}
+@span{.right}{@image{images/legsp.png,"" ,300}}
 
-Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there are 15 females, representing 46.9% of the population.
+Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
 
 We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
-The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of `sex` across the shelter.
+The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of the number of `legs` across the shelter.
 }
 
 
@@ -88,7 +89,7 @@ Open the Animals Dataset in CODAP.
 [.lesson-instruction]
 - Click the `graph` icon from the menu in the upper left. What appears?
 - Select a dot with your mouse. What happens?
-- How do you think the position of each dots is determined?
+- How do you think the position of each dot is determined?
 
 @span{.right}{@image{images/codap-initial-display.png,"" ,300}}
 
@@ -108,58 +109,61 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 
 
 [.lesson-instruction]
-- Which column of the animals table tells us how many legs an animal has?
-- Use `bar-chart` to make a display showing how many animals there are of each sex.
+- Which column of the animals table tells us which species the animal is?
+- Use `bar-chart` to make a display showing how many animals there are of each species.
 - Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
 - When would you want to use one chart instead of another?
 }
 
-@ifproglang{codap}{
+To dig deeper into pie charts and bar charts, have students turn to @opt-printable-exercise{pie-chart-notice.adoc}, @opt-printable-exercise{bar-chart-notice.adoc}, @opt-printable-exercise{bar-and-pie-notice.adoc}, @opt-printable-exercise{matching-bar-to-pie.adoc}.
 
-Once we have a graph of randomly distributed data points, we can drag attributes from the table to the axes to organize the data.
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+a|
+@span{.title}{People aren't Hermaphrodite?}
+When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" it is no longer considered an acceptable term to apply to people.
+|===
+
+@ifproglang{codap}{
+Once we have a graph of randomly distributed data points, we can organize the data by dragging attributes from our _table_ to the axes of our graph.
 
 Experiment with creating some bar charts in CODAP.
 [.lesson-instruction]
 - Drag the `fixed` attribute from the table to the y-axis. Now try dragging it to the x-axis. What do you notice?
 - Select the `configuration` icon to the right of the data display. Select `fuse dots into bars`
-- Now, make a bar chart showing how many animals there are of each sex.
+- Now, make a bar chart showing how many animals there are of each species.
 - Experiment with bar charts, dragging new attributes to the axes - or clicking on the axis title to display a menu of attributes.
 - Which types of attributes can be displayed with the dots fused into bars? For which types of attributes does CODAP instead offer to create a bar for each point?
 }
 
-
 === Common Misconceptions
 @ifproglang{pyret}{
-Pie charts and bar charts may show counts or percentages (in Pyret, pie charts show percentages and bar charts show counts). Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. Also, a pie chart can only display one categorical variable but a bar chart might be used to display two or more categorical variables.
+Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
+
+A pie chart can only display one categorical variable, but a bar chart might be used to display two or more. Pie charts have a wedge for each represented category. Unlike in bar charts, empty categories will not be included in a pie chart. When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
 }
 
 @ifproglang{codap}{
-Bar charts may show counts or percentages. (Try clicking the `ruler` icon to toggle between the two, or to show both simultaneously.) Bar charts look a lot like histograms, which are actually quite different because they display quantitative data, not categorical. A bar chart might be used to display two or more categorical variables. (Pie charts, which CODAP does not create, display only one categorical variable.)
+Bar charts may show counts or percentages. (Try clicking the `ruler` icon to toggle between the two, or to show both simultaneously.) A bar chart might be used to display two or more categorical variables. (Pie charts, which CODAP does not create, display only one categorical variable.)
 }
 
-
+Note: Bar charts look a lot another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on @ifproglang{pyret}{pie- and} bar-charts.
 
 === Synthesize
-@ifproglang{pyret}{
-Pie and Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+Bar Charts @ifproglang{pyret}{and Pie Charts} display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
-Pie charts and bar charts are mostly used to _display categorical columns_.
+Bar Charts @ifproglang{pyret}{and Pie Charts} are mostly used to _display categorical columns_.
 
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
-}
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), @ifproglang{pyret}{the pie slices and bars} @ifproglang{codap}{they} can technically be placed in _any_ order, without changing the meaning of the chart.
 
-@ifproglang{codap}{
-Bar Charts display what portion of a sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
-
-[.lesson-point]
-Bar charts are mostly used to _display categorical columns_.
-
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
-}
-
-
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+a|
+@span{.title}{Mini Project: Making Infographics}
+Infographics are a powerful tool for communicating information, especially when made by people who actually understnad how to connect visuals to data in meaningful ways. @opt-printable-exercise{infographics.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper.
+|===
 
 == Exploring other Displays @duration{30 minutes}
 
@@ -168,15 +172,12 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
 
 @ifproglang{codap}{
-Students freely explore the CODAP data display library. In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
+Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
 
 
 === Launch
-@ifproglang{pyret}{
-There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.}
+There are _lots_ of @ifproglang{pyret}{other functions, for all} different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can @ifproglang{pyret}{use your knowledge of Contracts to} figure out how to use them.
 
-@ifproglang{codap}{
-There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can figure out how to use them.}
 
 === Investigate
 [.lesson-instruction]
@@ -199,9 +200,9 @@ You will have many opportunities to use these concepts in this course, by writin
 
 
 @ifproglang{codap}{
-Today you’ve added more functions to your toolbox. You can create bar charts to visually display data, and even transform entire tables!
+Today you’ve added more data displays to your toolbox. You can create bar charts to visually display data, and even transform entire tables!
 
-You will have many opportunities to use these concepts in this course, by applying functions to answer data science questions.}
+You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
