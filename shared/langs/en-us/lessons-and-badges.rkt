@@ -9,18 +9,28 @@
   '(
 ; core
 
-    ("contracts" 
+    ("contracts"
+         "SEP.8" 
+         "MLR.8"
         )
 
     ("defining-functions" 
         "MP.4" ; STEMworks
+        "MLR.7"
         )
 
     ("defining-values" 
         "MP.2"
+        "MP.7"
+        "MP.8"
+        "SEP.7"
+        "MLR.5"
+        "MLR.7"
         )
 
     ("simple-dataypes" 
+        "MLR.4"
+        "MP.6"        
         ) 
 ; math
    
