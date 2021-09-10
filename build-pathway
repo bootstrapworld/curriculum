@@ -225,7 +225,9 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   fi
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
   mkdir -p distribution/$LANGUAGE/lib/Badges
+  mkdir -p distribution/$LANGUAGE/lib/images
   cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
+  cp -pr $PROGDIR/images/* distribution/$LANGUAGE/lib/images
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
