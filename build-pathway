@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-09 # last modified
+LASTMOD=2021-09-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1159,7 +1159,8 @@ function builddependencyjson() {
   first=1
   for C in courses/*; do
     test -d "$C" || continue
-    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
+    if test "$C" = courses/lib; then continue; fi
+    #if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
     cd $C
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       Lbasename=${L#lessons/}
@@ -1174,7 +1175,10 @@ function builddependencyjson() {
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
         echo "    title: \"$titletxt\"," >> $GRAPHFILE
         echo "    description: \"$desctxt\"," >> $GRAPHFILE
-        echo "    keywords: \"\"," >> $GRAPHFILE
+        if test -f $L/.cached/.lesson-keywords.txt.kp; then
+          echo $L/.cached/.lesson-keywords.txt.kp exists
+          cat $L/.cached/.lesson-keywords.txt.kp >> $GRAPHFILE
+        fi
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
         for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
