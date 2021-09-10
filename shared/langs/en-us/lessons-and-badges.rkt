@@ -47,6 +47,8 @@
     ("distance-formula" 
         "MP.2"
         "MP.3" ; STEMworks
+        "SEP.5"
+        "MLR.8"
         )
 
     ("error-analysis" 
@@ -54,7 +56,15 @@
         )
 
     ("flags" 
-
+        "MLR.3"
+        "MLR.7"
+        "MP.1"
+        "MP.2"
+        "MP.4"
+        "MP.6"
+        "MP.7"
+        "MP.8"
+        "SEP.5"
         ) 
 
     ("function-composition" 
