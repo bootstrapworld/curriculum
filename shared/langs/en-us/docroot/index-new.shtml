@@ -11,10 +11,11 @@
         #pathways:hover { min-height: 400px; }
         #lessonExplorer {
             width: 100%;
-            min-height: 200px;
+            min-height: 300px;
             max-height: 400px;
             overflow-y: scroll;
             border: solid 1px black;
+            text-align: center;
         }
         .lessonContainer {
             display:    inline-table;
@@ -110,6 +111,10 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
+        // values that must be imported from external scripts
+        var registerTxtRotation = registerTxtRotation;
+        var graph = graph;
+
         // find out if there's a subject that was passed in
         var subject, params = location.search.substring(1);
         var subject = !params? "none"
@@ -122,7 +127,7 @@
         // certain lessons are "preferred" depending on the subject
         const subjectPreference = {
             none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
-            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "solving-word-problems", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
+            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
             science : ["simple-datatypes", "ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
             cs : ["ds-intro", "simple-datatypes", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
@@ -135,21 +140,28 @@
             'measures-of-center' : "Mean, Median, & Mode",
             'flags' : "Geometric Ratio and Proportion",
             'inequalities2-compound': "Compound Inequalities",
+            'if-expressions': "Image Scatter Plots",
+            'contracts': "Contracts: Name, Domain & Range",
+            'checking-your-work' : "Evaluating Correctness"
         }
-
-        console.log('topLessons are', subjectPreference[subject]);
+        var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
+        rest.sort((a,b) =>
+            graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
+        
         var checked = [];
+        var originalOrder = subjectPreference[subject].concat(rest);
         
         // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
         // draw the container for each lesson and add it to the lesson explorer
         // 2) Get the search placeholder text rotating
         // 3) Register the resize handler and do a resize
         function draw() {
-            var rest = Object.keys(graph).filter(l => 
-                !subjectPreference[subject].includes(l));
-            rest.sort((a,b) =>
-                graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
-            subjectPreference[subject].concat(rest).forEach(l => {
+            originalOrder.forEach(l => {
+                // if we don't have a matching lesson in the graph
+                if(!graph[l]) {
+                    console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
+                    return; 
+                }
                 const container = document.createElement("div");
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
@@ -161,7 +173,9 @@
                 document.getElementById('lessonExplorer').appendChild(container);
             });
             function updatePlaceholder(e, txt) { e.placeholder = txt; }
-            registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            if(registerTxtRotation) {
+                registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
+            }
             window.addEventListener('resize', resize);
             resize();
         }
@@ -171,11 +185,11 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout( () => {
                 var containers = document.getElementsByClassName('lessonContainer');
-                var pageWidth = document.getElementById("lessonExplorer").offsetWidth;
+                var pageWidth = document.getElementById("lessonExplorer").clientWidth;
                 if(containers.length == 0) return; // no lessons, so no work to do!
                 var containerWidth = containers[0].offsetWidth + 
                     2*parseInt(getComputedStyle(containers[0]).marginLeft);
-                var rowCount = Math.floor(pageWidth/containerWidth)
+                var rowCount = Math.floor(pageWidth/containerWidth);
 
                 var descriptions = document.getElementsByClassName('lessonDescription');
                 [...descriptions].forEach((d, i) => {
@@ -203,6 +217,7 @@
                     : [...new Set([name, ...checked , ...graph[name].prerequisites])];
             }
 
+            // sort with the shortest list of prereqs listing first
             checked.sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
 
@@ -238,21 +253,35 @@
         }
 
         // uncheck all the lessons, then update
-        function reset() { checked = []; update(); }
+        function reset() { 
+            document.getElementById('searchBox').value = ''; 
+            search(); // redo search with no search items
+            checked = []; 
+            update(); 
+        }
 
         var searchTimeout;
         function search() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout( () => {
+                const explorer = document.getElementById('lessonExplorer');
                 var lessonContainers = [...document.querySelectorAll(".lessonContainer")];
                 var str = document.getElementById('searchBox').value;
-                var matches = Object.getOwnPropertyNames(graph).filter(n => {
-                    var data = Object.values(graph[n]).join(" ");
-                    return new RegExp("\\b" + str, "i").test(data);
-                });
+
+                if(str) {
+                    matchIds = Object.getOwnPropertyNames(graph).filter(n => {
+                        var data = Object.values(graph[n]).join(" ");
+                        return new RegExp("\\b" + str, "i").test(data);
+                    });
+                } else {
+                    matchIds = [...originalOrder].reverse();
+                }
+                matches = matchIds.map(l => document.getElementById(l));
+                matches.forEach(l => explorer.insertBefore(l, explorer.firstChild));
                 lessonContainers.forEach(c => {
-                    c.style.display = matches.includes(c.id)? "inline-table" : "none";
+                    c.style.opacity = matchIds.includes(c.id)? "1" : "0.25";
                 });
+                resize();
             }, 100);
         }
 
@@ -279,7 +308,9 @@
         <div class="clearfix item">
             <h1>Materials</h1>
 
-            We provide all of our research-based materials free of charge. And of course, all of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, Common Core, CSTA, K12-CS, and more! We work hard to provide a "curriculum-in-a-box" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways, that come with a detailed student workbook, narrative project, and teacher materials. You can also mix and match our materials by building your own pathway.
+            Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
+
+            All of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
@@ -313,10 +344,11 @@
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
-            Lessons that you can teach immediately are <span class="legend accessible">shaded blue</span>.<br/>
+            Click to select the lessons you would like to teach!
+            <br/>
             <ul style="margin: 6px 0px;">
-                <li>When you click on a lesson you'd like to teach, that lesson - and its prerequisites - will <span class="legend teaching">turn green</span>.</li>
-                <li>All of the lessons available to you by completing the green lessons, will <span class="legend accessible">turn blue</span>.</li>
+                <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
+                <li>If you haven't select any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
             </ul>
             <p/>
             <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
@@ -331,12 +363,12 @@
                 <a href="javascript:reset()" id="reset" >&#8634;</a>
             </div>
             <p>
-            Having taught <span id="checkedCount" class="count">ERROR</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">ERROR</span> other lessons!
+            Having taught <span id="checkedCount" class="count">LOADING</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">LOADING</span> other lessons!
             </p>
             <div id="lessonExplorer"></div>
             <p/>
             <div id="summary">
-                <strong>You've selected the following lessons:</strong> <span id="selectedLessons"></span>. 
+                <strong>The lessons you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
                 <p/>
                 We've created a custom pathway just for you, with links to all the lesson materials, workbook pages, activities, and more! Enter a name to see your personalized pathway, and bookmark the resulting page to return to it at any time!
                 <p/>

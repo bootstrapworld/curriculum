@@ -38,7 +38,6 @@
         "OK.PA.A.1.1"
         "OK.PA.A.1.2"
         "8.SP.A.1" 
-        "HS-SEP5-3" 
         "HSF.BF.A.1" 
         "P4" 
         "6-8.Algorithms and Programming.Variables" 
@@ -286,7 +285,6 @@
 ;; DATA SCIENCE
     
     ("checking-your-work" 
-        "HS-SEP5-4" 
         "2-AP-17" 
         "3B-AP-21" 
         "1B-AP-15" ; STEMworks
@@ -300,7 +298,6 @@
 
     ("choosing-your-dataset" 
         "6.SP.A.1" ; STEMworks
-        "HS-SEP1-3" 
         "3A-AP-16" 
         "3A-AP-23" 
         "3B-AP-14" 
@@ -317,7 +314,6 @@
         "HSS.ID.B.6" 
         "8.SP.A.1" 
         "8.SP.A.2" 
-        "HS-SEP6-1" 
         "2-DA-09" 
         "3B-NI-05" 
         "3B-NI-07" 
@@ -329,7 +325,6 @@
     
       ("defining-table-functions" 
         "6.EE.B.6" ; STEMworks
-        "HS-SEP5-3" 
         "2-AP-13" 
         "2-AP-14" 
         "2-AP-17" 
@@ -342,7 +337,6 @@
         )
 
     ("displays-and-lookups" 
-        "HS-SEP4-1" 
         "3A-DA-11" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
@@ -364,7 +358,6 @@
         "3A-IC-29"; STEMworks
         "3A-IC-30"; STEMworks
         "P1" 
-        "HS-SEP7-1" 
         "9-12.Data and Analysis.Collection" 
         "9-12.Impacts of Computing.Culture" 
         "9-12.Impacts of Computing.Safety, Law, and Ethics"
@@ -374,7 +367,6 @@
     ("grouped-samples"
         "6.EE.B.6" ; STEMworks
         "8.SP.A.1"
-        "HS-SEP4-5" 
         "2-DA-08" 
         "2-DA-09" 
         "2-AP-11" 
@@ -384,7 +376,6 @@
         )
 
     ("if-expressions" 
-        "HS-SEP4-5" 
         "2-DA-08" 
         "2-AP-19" 
         "3B-NI-05" 
@@ -399,7 +390,6 @@
         "HSS.ID.A.3" 
         "HSS.ID.A.1" 
         "HSS.ID.A.2"
-        "HS-SEP2-1"  
         "3A-DA-11" 
         "3B-AP-14" 
         "P5"
@@ -411,7 +401,6 @@
         "6.SP.A"   ; STEMworks
         "HSS.ID.A.3" 
         "HSS.ID.A.1" 
-        "HS-SEP4-2"
         "1B-DA-06" ; STEMworks
         "3A-DA-11" 
         "3B-AP-14" 
@@ -458,7 +447,6 @@
         "8.SP.A.1" 
         "8.SP.A.2" 
         "8.SP.A.3" 
-        "HS-SEP3-5"
         "1B-DA-06" ; STEMworks 
         "1B-DA-07" ; STEMworks
         "3A-DA-11" 
@@ -476,7 +464,6 @@
         "6.SP.B.5" ; STEMworks
         "6.SP.B.5.D";STEMworks
         "HSS.ID.A.2";STEMworks
-        "HS-SEP4-2"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2"
         )
@@ -488,7 +475,6 @@
         "6.SP.B.5" ; STEMworks
         "6.SP.B.5.C"; STEMworks
         "HSS.ID.A.2";STEMworks
-        "HS-SEP4-2" 
         "HSS.ID.A.1" 
         "1B-DA-06" ; STEMworks
         "3A-DA-11" 
@@ -498,7 +484,6 @@
         )
 
     ("method-chaining" 
-        "HS-SEP4-1" 
         "1B-AP-10" ; STEMworks
         "2-AP-17" 
         "2-AP-13" 
@@ -520,7 +505,6 @@
 
     ("random-samples" 
         "HSS.IC.B.3" 
-        "HS-SEP4-3" 
         "2-DA-08" 
         "2-DA-09"
         "OK.PA.A.2.2"
@@ -529,7 +513,6 @@
         )
 
     ("scatter-plots"
-        "HS-SEP6-1" 
         "6.SP.A" ; STEMworks
         "8.SP.A.1" 
         "8.SP.A.2" 
@@ -549,15 +532,12 @@
         )
 
     ("table-methods" 
-        "HS-SEP4-6"
         "2-DA-08"
         "OK.L1.AP.M.02"
         )
 
     ("threats-to-validity" 
         "HSS.IC.B.6" 
-        "HS-SEP4-3"
-        "HS-SEP1-7" 
         "3B-NI-07" 
         "2-IC-21" ; STEMworks
         "P1" 
