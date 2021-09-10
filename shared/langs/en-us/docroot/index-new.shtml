@@ -11,10 +11,11 @@
         #pathways:hover { min-height: 400px; }
         #lessonExplorer {
             width: 100%;
-            min-height: 200px;
+            min-height: 300px;
             max-height: 400px;
             overflow-y: scroll;
             border: solid 1px black;
+            text-align: center;
         }
         .lessonContainer {
             display:    inline-table;
@@ -110,6 +111,7 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
+        // values that must be imported from external scripts
         var registerTxtRotation = registerTxtRotation;
         var graph = graph;
 
@@ -142,19 +144,19 @@
             'contracts': "Contracts: Name, Domain & Range",
             'checking-your-work' : "Evaluating Correctness"
         }
-
+        var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
+        rest.sort((a,b) =>
+            graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
+        
         var checked = [];
+        var originalOrder = subjectPreference[subject].concat(rest);
         
         // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
         // draw the container for each lesson and add it to the lesson explorer
         // 2) Get the search placeholder text rotating
         // 3) Register the resize handler and do a resize
         function draw() {
-            var rest = Object.keys(graph).filter(l => 
-                !subjectPreference[subject].includes(l));
-            rest.sort((a,b) =>
-                graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
-            subjectPreference[subject].concat(rest).forEach(l => {
+            originalOrder.forEach(l => {
                 // if we don't have a matching lesson in the graph
                 if(!graph[l]) {
                     console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
@@ -215,6 +217,7 @@
                     : [...new Set([name, ...checked , ...graph[name].prerequisites])];
             }
 
+            // sort with the shortest list of prereqs listing first
             checked.sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
 
@@ -250,21 +253,35 @@
         }
 
         // uncheck all the lessons, then update
-        function reset() { checked = []; update(); }
+        function reset() { 
+            document.getElementById('searchBox').value = ''; 
+            search(); // redo search with no search items
+            checked = []; 
+            update(); 
+        }
 
         var searchTimeout;
         function search() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout( () => {
+                const explorer = document.getElementById('lessonExplorer');
                 var lessonContainers = [...document.querySelectorAll(".lessonContainer")];
                 var str = document.getElementById('searchBox').value;
-                var matches = Object.getOwnPropertyNames(graph).filter(n => {
-                    var data = Object.values(graph[n]).join(" ");
-                    return new RegExp("\\b" + str, "i").test(data);
-                });
+
+                if(str) {
+                    matchIds = Object.getOwnPropertyNames(graph).filter(n => {
+                        var data = Object.values(graph[n]).join(" ");
+                        return new RegExp("\\b" + str, "i").test(data);
+                    });
+                } else {
+                    matchIds = [...originalOrder].reverse();
+                }
+                matches = matchIds.map(l => document.getElementById(l));
+                matches.forEach(l => explorer.insertBefore(l, explorer.firstChild));
                 lessonContainers.forEach(c => {
-                    c.style.display = matches.includes(c.id)? "inline-table" : "none";
+                    c.style.opacity = matchIds.includes(c.id)? "1" : "0.25";
                 });
+                resize();
             }, 100);
         }
 
@@ -327,10 +344,11 @@
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
-            Lessons that you can teach immediately are <span class="legend accessible">shaded blue</span>.<br/>
+            Click to select the lessons you would like to teach!
+            <br/>
             <ul style="margin: 6px 0px;">
-                <li>When you click on a lesson you'd like to teach, that lesson - and its prerequisites - will <span class="legend teaching">turn green</span>.</li>
-                <li>All of the lessons available to you by completing the green lessons, will <span class="legend accessible">turn blue</span>.</li>
+                <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
+                <li>If you haven't select any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
             </ul>
             <p/>
             <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
@@ -345,7 +363,7 @@
                 <a href="javascript:reset()" id="reset" >&#8634;</a>
             </div>
             <p>
-            Having taught <span id="checkedCount" class="count">ERROR</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">ERROR</span> other lessons!
+            Having taught <span id="checkedCount" class="count">LOADING</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">LOADING</span> other lessons!
             </p>
             <div id="lessonExplorer"></div>
             <p/>
