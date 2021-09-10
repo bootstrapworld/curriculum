@@ -173,7 +173,7 @@
     (let ([c (peek-char i)])
       (cond [(eof-object? c) #f]
             [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
-            [(or (char=? c #\newline)) (read-char i)]
+            ;[(or (char=? c #\newline)) (read-char i)]
             [else #f]))))
 
 (define (read-commaed-group i directive)
