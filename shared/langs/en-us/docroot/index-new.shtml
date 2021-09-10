@@ -265,24 +265,30 @@
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout( () => {
                 const explorer = document.getElementById('lessonExplorer');
-                var lessonContainers = [...document.querySelectorAll(".lessonContainer")];
                 var str = document.getElementById('searchBox').value;
+                var results;
 
                 if(str) {
-                    matchIds = Object.getOwnPropertyNames(graph).filter(n => {
-                        var data = Object.values(graph[n]).join(" ");
-                        return new RegExp("\\b" + str, "i").test(data);
+                    results = Object.getOwnPropertyNames(graph).map(id => {
+                        var data = Object.values(graph[id]).join(" ");
+                        var regexp = new RegExp("\\b" + str, "gi");
+                        return { id: id, matches: [...data.matchAll(regexp)].length };
                     });
                 } else {
-                    matchIds = [...originalOrder].reverse();
+                    results = originalOrder.map((id, i) => ({id: id, matches: 1}));
                 }
-                matches = matchIds.map(l => document.getElementById(l));
-                matches.forEach(l => explorer.insertBefore(l, explorer.firstChild));
-                lessonContainers.forEach(c => {
-                    c.style.opacity = matchIds.includes(c.id)? "1" : "0.25";
-                });
+                // sort the results in *reverse order*, since we append nodes at the beginning
+                results = results.sort((a, b) => a.matches > b.matches? -1 : 1);
+                console.log(results);
+                const bestMatch = results[0].matches;
+                const step = bestMatch? 1 / (bestMatch + 1) : 0.25; 
+                results.reverse().forEach(r => {
+                    const container = document.getElementById(r.id);
+                    container.style.opacity = (1 + r.matches) * step;
+                    explorer.insertBefore(container, explorer.firstChild)
+                })
                 resize();
-            }, 100);
+            }, 250);
         }
 
         var showButtonTimeout;
