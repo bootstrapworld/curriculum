@@ -142,6 +142,8 @@
 
 (define *lesson-prereqs* '())
 
+(define *lesson-keywords* '())
+
 (define *dictionaries-represented* '())
 
 (define *exercises-done* '())
@@ -173,7 +175,7 @@
     (let ([c (peek-char i)])
       (cond [(eof-object? c) #f]
             [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
-            [(or (char=? c #\newline)) (read-char i)]
+            ;[(or (char=? c #\newline)) (read-char i)]
             [else #f]))))
 
 (define (read-commaed-group i directive)
@@ -928,6 +930,11 @@
                                           (create-end-tag "span")))]))])
       (string-append reg-space gd-space))))
 
+(define (add-lesson-keywords kwds)
+  (for ([k kwds])
+    (unless (member k *lesson-keywords*)
+      (set! *lesson-keywords* (cons k *lesson-keywords*)))))
+
 (define (add-lesson-prereqs immediate-prereqs)
   ;(printf "immediate prereqs = ~s\n" immediate-prereqs)
   ;(printf "lesson-prereq dir = ~s\n" (current-directory))
@@ -986,6 +993,7 @@
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-textbook s))))
+
         )
       ;
       (when (or *lesson-plan*
@@ -1043,6 +1051,8 @@
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
+                           [(string=? directive "keywords")
+                            (add-lesson-keywords (read-commaed-group i directive))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (string-titlecase (getenv "PROGLANG")))]
                            [(string=? directive "year")
@@ -1436,7 +1446,18 @@
               (fprintf o "\n* ~a\n\n" x))
 
             )
-          #:exists 'replace))
+          #:exists 'replace)
+
+        (call-with-output-file ".cached/.lesson-keywords.txt.kp"
+          (lambda (o)
+            (let ([first? #t])
+            (display "    keywords: [" o)
+            (for ([k *lesson-keywords*])
+              (cond [first? (set! first? #f)]
+                    [else (display ", " o)])
+              (write k o))
+            (display "]," o) (newline o))))
+        )
 
       ;(printf "OTHERDIR = ~a\n" (truthy-getenv "OTHERDIR"))
       #|
