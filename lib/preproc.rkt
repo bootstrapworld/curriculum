@@ -175,7 +175,7 @@
     (let ([c (peek-char i)])
       (cond [(eof-object? c) #f]
             [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
-            ;[(or (char=? c #\newline)) (read-char i)]
+            [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
 (define (read-commaed-group i directive)
@@ -1003,13 +1003,15 @@
       ;
       (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
-        (let ([beginning-of-line? #t])
+        (let ([beginning-of-line? #t]
+              [possible-beginning-of-line? #f])
           (let loop ()
             (let ([c (read-char i)])
               (unless (eof-object? c)
                 (cond
                   [(char=? c #\@)
                    (set! beginning-of-line? #f)
+                   (set! possible-beginning-of-line? #f)
                    (let ([directive (read-word i)])
                      ;(printf "directive = ~s~%" directive)
                      (cond [(string=? directive "") (display c o)]
@@ -1242,22 +1244,22 @@
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
-                                      (read-space i)]))]
+                                      (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "ifsoln")
                             (cond [*solutions-mode?* (display-begin-span #f o)]
                                   [else (read-group i directive)
-                                        (read-space i)])]
+                                        (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifnotsoln")
                             (cond [(not *solutions-mode?*) (display-begin-span #f o)]
                                   [else (read-group i directive)
-                                        (read-space i)])]
+                                        (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifpathway")
                             (let ([pathways (read-commaed-group i directive)])
                               (cond [(member *pathway* pathways)
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
-                                      (read-space i)]))]
+                                      (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "Bootstrap")
@@ -1284,8 +1286,13 @@
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
+                  [(and possible-beginning-of-line? (char=? c #\|))
+                   (set! possible-beginning-of-line? #f)
+                   (newline o)
+                   (display c o)]
                   [(and beginning-of-line? (char=? c #\=))
                    (set! beginning-of-line? #f)
+                   (set! possible-beginning-of-line? #f)
                    (cond [title-reached?
                            (cond [first-subsection-reached? #f]
                                  [(check-first-subsection i o)
@@ -1308,9 +1315,11 @@
                              )])]
                   [(char=? c #\newline)
                    (newline o)
-                   (set! beginning-of-line? #t)]
+                   (set! beginning-of-line? #t)
+                   (set! possible-beginning-of-line? #f)]
                   [else
                     (set! beginning-of-line? #f)
+                    (set! possible-beginning-of-line? #f)
                     (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
                            (cond [(char=? c #\{)
                                   (unless (= (top-span-stack) 0)
