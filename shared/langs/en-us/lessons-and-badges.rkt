@@ -70,6 +70,9 @@
     ("function-composition" 
         "MP.1"
         "MP.5"
+        "SEP.5"
+        "MLR.3"
+        "MLR.7"
         )
 
     ("functions-for-character-animation" 
@@ -79,15 +82,19 @@
 
     ("inequalities-collision"
         "MP.3" ; STEMworks
+        "MLR.7"
         )
 
     ("inequalities1-simple" 
         "MP.1"
         "MP.4"
+        "MP.6"
+        "MLR.5"
         )
 
     ("inequalities2-compound" 
-
+        "MLR.5"
+        "MP.1"
         )
 
     ("inequalities3-sam"
@@ -106,7 +113,9 @@
         "MP.1"
         "MP.2"
         "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
+        "MP.4" ; 
+        "MLR.7"
+        "SEP.2"
         )
 
     ("piecewise-functions" 
