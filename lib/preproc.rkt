@@ -1456,7 +1456,8 @@
               (cond [first? (set! first? #f)]
                     [else (display ", " o)])
               (write k o))
-            (display "]," o) (newline o))))
+            (display "]," o) (newline o)))
+          #:exists 'replace)
         )
 
       ;(printf "OTHERDIR = ~a\n" (truthy-getenv "OTHERDIR"))
