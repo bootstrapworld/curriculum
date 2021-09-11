@@ -12,6 +12,7 @@
     ("contracts"
          "SEP.8" 
          "MLR.8"
+         "MLR.2"
         )
 
     ("defining-functions" 
@@ -26,6 +27,7 @@
         "SEP.7"
         "MLR.5"
         "MLR.7"
+        "MLR.8"
         )
 
     ("simple-dataypes" 
@@ -71,6 +73,7 @@
         "MP.1"
         "MP.5"
         "SEP.5"
+        "MLR.1"
         "MLR.3"
         "MLR.7"
         )
@@ -103,6 +106,7 @@
 
     ("making-game-images" 
         "MP.6"
+        "MLR.8"
         )
 
     ("numbers-inside-videogames" 
@@ -123,7 +127,10 @@
         )
 
     ("player-animation" 
+        "MP.3"
         "MP.4"     ; STEMworks
+        "MP.6"
+        "MLR.6"
         )      
 
     ("problem-decomposition"
@@ -131,11 +138,14 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
+        "MLR.7"
         )
         
     ("restating-the-problem" 
         "MP.1"
         "MP.7"
+        "MLR.6"
+        "MLR.1"
         )
 
     ("solving-word-problems" 
