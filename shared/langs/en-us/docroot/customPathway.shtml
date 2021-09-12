@@ -7,6 +7,13 @@
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
         .logo img { width: 300px; }
+        dl { counter-reset: term; }
+
+        dl > dt:before {
+            counter-increment: term;
+            content: counter(term) ".";
+            margin-right: 5px;
+        }
     </style>
     <script src="dependency-graph.js"></script>
     <script>
@@ -29,6 +36,17 @@
                 `;
                 lessonList.appendChild(dt);
             });
+
+            // update the list of accessible lessons
+            var accessibleList = document.getElementById('accessible-lesson-list');
+            var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
+                graph[name].prerequisites.every(p => lessons.includes(p)));
+
+            accessible.forEach(l => {
+                var li = document.createElement('li');
+                li.innerHTML = graph[l].title;
+                accessibleList.appendChild(li);
+            });
         }
 
     </script>
@@ -49,7 +67,7 @@
                 </div>
             </div>
 
-        <div class="clearfix item">
+        <div class="clearfix item bottom-border">
             <h2>Lesson Plans</h2>
             <div class="sectionbody">
                 <div id="lesson-list" class="dlist">
@@ -57,6 +75,14 @@
                     </dl>
                 </div>
             </div>
+        </div>
+
+        <div class="clearfix item bottom-border">
+            <h2>What's Next?</h2>
+            <p/>
+            Once your students have finished this pathway, there are plenty of other Bootstrap lessons your students are ready to dive into!
+            <ul id="accessible-lesson-list">
+            </ul>
         </div>
     </div>
 </body>

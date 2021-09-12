@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-04 # last modified
+LASTMOD=2021-09-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -96,6 +96,8 @@ test $SUPERFORCE && FORCE=1
 
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPPFX=$(basename $TMPTMP)
+
+export ABYSS=page-not-found
 
 WKH2P_PFX=.wkh2p-tmp
 
@@ -223,7 +225,9 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   fi
   cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
   mkdir -p distribution/$LANGUAGE/lib/Badges
+  mkdir -p distribution/$LANGUAGE/lib/images
   cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
+  cp -pr $PROGDIR/images/* distribution/$LANGUAGE/lib/images
   # TODO: may need to revisit for unforced LANGUAGE != en-us
 fi
 
@@ -576,7 +580,7 @@ function resolveabbrevs() {
     -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="sidebartitle">Lesson Pathway, Standards and Practices<\/div><div class="paragraph"><!--/' \
     $f
   $SED -i \
-    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" type="checkbox" onchange="toggleNonPrereqDisplay()">\Prerequisites only /' \
+    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" type="checkbox" onchange="toggleNonPrereqDisplay()">\Prerequisites only (★) /' \
     $f
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
@@ -812,12 +816,16 @@ function doadocs() {
     fbase=${f%.adoc}
     fhtmlcached=.cached/.$fbase.html
     fhtml=$fbase.html
+    fpdf=$fbase.pdf
     if test -f "$fhtmlcached"; then
       mv $fhtmlcached $fhtml
       resolveabbrevs $fhtml
       if test ! $OTHERDIR; then
         insertgdrivesave $fhtml
       fi
+    fi
+    if test -f "$fpdf"; then
+      rm -f "$fpdf"
     fi
   done
 
@@ -833,7 +841,6 @@ function processadocs() {
 
   local ff_given="$@"
   local ff=
-  local ff_w_html=
 
   for f in $ff_given; do
     if test ! -f $f; then
@@ -846,49 +853,25 @@ function processadocs() {
       continue
     fi
     DOIT=
-    DOITPDF=
     fbase=${f%.adoc}
     fhtml=$fbase.html
     fasc=.cached/.$fbase.asc
-    fpdf=$fbase.pdf
     if test $FORCE; then
       DOIT=1
-      if test ! $OTHERDIR; then DOITPDF=1; fi
     else
       if test $OTHERDIR; then
         if test $f -nt $fasc; then DOIT=1; fi
       else
         if test $f -nt $fhtml; then DOIT=1; fi
-        if test $f -nt $fpdf; then DOITPDF=1; fi
       fi
     fi
-    if test $NOPDF; then DOITPDF=; fi
     if test $DOIT; then
       ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
     fi
-    if test $DOITPDF; then
-      ff_w_html="$ff_w_html $f"
-    fi
   done
 
   doadocs $ff
-
-  for f in $ff_w_html; do
-    fbase=${f%.adoc}
-    fhtml=$fbase.html
-    fasc=.cached/.$fbase.asc
-    fpdf=$fbase.pdf
-    if test -f "$fhtml"; then
-      if test $fhtml -nt $fpdf; then
-        if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-          echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\", \"aspect\": \"landscape\" }" >> $PUPPETEER_INPUT
-        else
-          echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
-        fi
-      fi
-    fi
-  done
 
   for f in $ff; do
     checklinks $f
@@ -1180,7 +1163,8 @@ function builddependencyjson() {
   first=1
   for C in courses/*; do
     test -d "$C" || continue
-    if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
+    if test "$C" = courses/lib; then continue; fi
+    #if ! $(echo "$C"|grep -q '/\(algebra-\(pyret\|wescheme\)\|data-science\|ok\|physics\|reactive\)$'); then continue; fi
     cd $C
     for L in $(cat .cached/.workbook-lessons.txt.kp); do
       Lbasename=${L#lessons/}
@@ -1196,8 +1180,10 @@ function builddependencyjson() {
         echo "  \"$Lbasename\" : {" >> $GRAPHFILE
         echo "    title: \"$titletxt\"," >> $GRAPHFILE
         echo "    description: \"$desctxt\"," >> $GRAPHFILE
-        echo "    keywords: \"\"," >> $GRAPHFILE
         echo "    pages: [\"$pagestxt\"]," >> $GRAPHFILE
+        if test -f $L/.cached/.lesson-keywords.txt.kp; then
+          cat $L/.cached/.lesson-keywords.txt.kp >> $GRAPHFILE
+        fi
         echo -n "    prerequisites: [" >> $GRAPHFILE
         pfirst=1
         for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
@@ -1338,13 +1324,15 @@ function buildpathwaynarrative() {
   fi
 }
 
-function makeworkbooktex() {
+function makeworkbookjson() {
 
-  #echo doing makeworkbooktex "$@"
+  #echo doing makeworkbookjson "$@"
 
   local tgt=$1
 
   local wbpnf=
+  local includesolutions=
+  local includeoptexercises=
 
   if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
     wbpnf=.cached/.back-matter-contracts-index.rkt
@@ -1356,28 +1344,18 @@ function makeworkbooktex() {
     wbpnf=.cached/.workbook-long-page-index.rkt
   fi
 
-  local i=
+  if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
+    includesolutions=1
+  fi
 
-  echo "
-  %BS%documentclass{article}
-  %BS%usepackage{pdfpages}
-  %BS%usepackage{fancyhdr}
-  %
-  %BS%setlength%BS%topmargin{-0.375in}
-  %BS%setlength%BS%headheight{0in}
-  %BS%setlength%BS%headsep{0in}
-  %BS%setlength%BS%textheight{9.5in}
-  %BS%setlength%BS%textwidth{7.25in}
-  %BS%setlength%BS%oddsidemargin{-0.5in}
-  %BS%setlength%BS%evensidemargin{-0.5in}
-  %
-  %BS%pagestyle{fancy}
-  %BS%renewcommand{%BS%headrulewidth}{0pt}
-  %BS%lhead{}%BS%rhead{}
-  %BS%fancyhf{}
-  %
-  %BS%begin{document}
-  " > $tgt.tex
+  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+    includeoptexercises=1
+  fi
+
+  #echo Initializing $PDFTK_INPUT_$tgt
+
+  rm -f $PDFTK_INPUT-$tgt
+  rm -f $PDFTK_INPUT-aspect-$tgt
 
   local currlesson=
 
@@ -1389,7 +1367,16 @@ function makeworkbooktex() {
       lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
       workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
       handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
       pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
+
+      prefixedHandle=
+
+      if test "$includesolutions"; then
+        prefixedHandle=T-$handle
+      else
+        prefixedHandle=S-$handle
+      fi
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=
@@ -1402,25 +1389,75 @@ function makeworkbooktex() {
 
       if test "$freshlesson"; then
         currlesson=$lessondir
-        echo >> $tgt.tex
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pageno}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
-        if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
-          if echo $currlesson| grep -q 'lessons/'; then
-            lessonplanpdf=$currlesson/index.pdf
-            echo "%BS%includepdf[pages=-,pagecommand={%BS%lfoot{}%BS%cfoot{}%BS%rfoot{}}]{$lessonplanpdf}" >> $tgt.tex
+        docfile=$currlesson/index.shtml
+        if test -f "$docfile"; then
+          if test "$tgt" = pd-workbook; then
+            if test "$docfile" -nt "$currlesson/index.pdf"; then
+              echo ", { \"input\": \"$docfile\" }" >> $PUPPETEER_INPUT
+            fi
+          fi
+          if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
+            echo $currlesson/index.pdf >> $PDFTK_INPUT-$tgt
           fi
         fi
+      fi
+
+      if test $includesolutions; then
+        docfile=$lessondir/solution-pages/$workbookpage
+      else
+        docfile=$lessondir/pages/$workbookpage
+      fi
+
+      docfileext=${docfile##*.}
+
+      if test "$docfileext" = adoc; then
+        docfile=${docfile%.adoc}.html
+        docfileext=html
+      elif test "$docfileext" = pdf; then
+        htmlfile=${docfile%.pdf}.html
+        if test -f $htmlfile; then
+          docfile=$htmlfile
+          docfileext=html
+        fi
+      fi
+
+      #echo docfile $docfile docfileext $docfileext
+
+      if test "$docfileext" = html; then
+        if test -f "$docfile"; then
+          if test "$tgt" = workbook-long -o "$tgt" = workbook-long-sols; then
+            if test "$pageno"; then
+              sed -i -e 's/^<div id="footer">/\0<div class=pagenumberholder>'$pageno'<\/div>/' $docfile
+            fi
+            pdffile=.cached/.workbook-$prefixedHandle.pdf
+            localpdffile=${docfile%.html}.pdf
+            if test ! -f "$localpdffile"; then
+              echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
+              echo cp -p .cached/.workbook-$prefixedHandle.pdf $localpdffile >> $PDFTK_INPUT-local-pdfs.sh
+            fi
+          fi
+
+          echo $handle=.cached/.workbook-$prefixedHandle.pdf >> $PDFTK_INPUT-$tgt
+
+        else
+          echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
+        fi
+
+      elif test ! -f $docfile; then
+        echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
 
       else
-        echo "%BS%includepdf[pagecommand={%BS%lfoot{}%BS%cfoot{$pageno}%BS%rfoot{}}]{.cached/.$tgt-$handle.pdf}" >> $tgt.tex
+        echo $handle=$docfile >> $PDFTK_INPUT-$tgt
 
       fi
 
-    done
+      if test $aspect = landscape; then
+        echo ${handle}west >> $PDFTK_INPUT-aspect-$tgt
+      else
+        echo ${handle} >> $PDFTK_INPUT-aspect-$tgt
+      fi
 
-  echo >> $tgt.tex
-  echo '%BS%end{document}' >> $tgt.tex
-  $SED -i -e 's/%BS%/\\/g' $tgt.tex
+    done
 
 }
 
@@ -1480,10 +1517,19 @@ function batchhtmltopdf() {
   echo "] }" >> $PUPPETEER_INPUT
 
   # use --trace-warnings to debug
-  node ../../lib/html2pdf.js $PUPPETEER_INPUT
+
+  #echo in $(pwd) doing node ../../lib/html2pdf.js $PUPPETEER_INPUT
+  if grep -q input $PUPPETEER_INPUT; then
+    node ../../lib/html2pdf.js $PUPPETEER_INPUT
+    if test -f $PDFTK_INPUT-local-pdfs.sh; then
+      sh $PDFTK_INPUT-local-pdfs.sh
+    fi
+  fi
 }
 
 function rmtmpfiles() {
+  #find . -name $PDFTK_PAGED\*.html -delete
+
   test $DEBUG && return
   #echo doing rmtmpfiles
 
@@ -1493,10 +1539,6 @@ function rmtmpfiles() {
 
   for f in txt; do
     find . -name \*.$f | grep -v '\(lesson-order\|workbook-pages\)\.txt' | xargs rm -f
-  done
-
-  for wbf in workbook pd-workbook; do
-    rm -f $wbf-*.pdf
   done
 
   find . -name $WKH2P_PFX-\* -delete
@@ -1580,21 +1622,9 @@ function makeworkbookpdf() {
 
   local tgt=$1
 
-  local wbpnf=
-
-  local includesolutions=
-
-  local includeoptexercises=
+  #echo doing makeworkbookpdf $tgt
 
   local dest=
-
-  if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
-    includesolutions=1
-  fi
-
-  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
-    includeoptexercises=1
-  fi
 
   if test "$tgt" = workbook; then
     dest=workbook/$tgt
@@ -1620,97 +1650,10 @@ function makeworkbookpdf() {
     echo Bad target $tgt; exit
   fi
 
-  if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
-    wbpnf=.cached/.back-matter-contracts-index.rkt
-  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
-    wbpnf=.cached/.workbook-page-index.rkt
-  elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
-    wbpnf=.cached/.opt-exercises-index.rkt
-  elif test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols; then
-    wbpnf=.cached/.workbook-long-page-index.rkt
-  else
-    echo Bad II target $tgt; exit
+  if test -f $PDFTK_INPUT-$tgt; then
+    #echo doing pdftk $PDFTK_INPUT-$tgt
+    pdftk $(cat $PDFTK_INPUT-$tgt) cat $(cat $PDFTK_INPUT-aspect-$tgt) output $dest.pdf
   fi
-
-  DOIT=$FORCE
-
-  if test ! $DOIT; then
-    cat $wbpnf |
-      while read -r pdfpagespec; do
-        if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
-          continue
-        fi
-        lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
-        workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-        #handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-        #aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-        #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-        if test $includesolutions; then
-          docfile=$lessondir/solution-pages/$workbookpage
-        else
-          docfile=$lessondir/pages/$workbookpage
-        fi
-        docfileext=${docfile##*.}
-        if test "$docfileext" = adoc; then
-          docfile=${docfile%.adoc}.pdf
-        fi
-        if test $docfile -nt $dest.pdf; then
-          DOIT=1
-          break
-        fi
-      done
-  fi
-
-  if test ! $DOIT; then
-    #echo Dismissing $tgt
-    return
-  fi
-
-  cat $wbpnf |
-    while read -r pdfpagespec; do
-      if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
-        continue
-      fi
-      lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
-      workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-      handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-      #paginate=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\(.\).*/\1/')
-
-      if test $includesolutions; then
-        docfile=$lessondir/solution-pages/$workbookpage
-      else
-        docfile=$lessondir/pages/$workbookpage
-      fi
-
-      docfileext=${docfile##*.}
-      if test "$docfileext" = adoc -o "$docfileext" = html; then
-        docfile=${docfile%.*}.pdf
-      fi
-
-      if test ! -f $docfile; then
-        echo WARNING: Page $docfile not found, subbing blank page
-        docfile=../../lib/$ABYSS.pdf
-      fi
-
-      aspectarg=$Q
-      if test "$aspect" = l -o "$aspect" = L; then
-        aspectarg=Qwest
-      fi
-      pdftk Q=$docfile cat $aspectarg output .cached/.$tgt-$handle.pdf dont_ask
-    done
-
-    if test -f $tgt.pdf; then
-      rm $tgt.pdf
-    fi
-
-    if test -f $tgt.tex; then
-      pdflatex $tgt.tex
-    fi
-
-    if test -f $tgt.pdf; then
-      mv $tgt.pdf $dest.pdf
-    fi
 
 }
 
@@ -1796,8 +1739,11 @@ function buildpathway() {
 
     TEMPF=$(mktemp); rm -f $TEMPF
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
-    export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/${WKH2P_BATCH_BASE}_puppeteer.json
+    export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-puppeteer.json
+    export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
     echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
+
+    #echo Initializing $PUPPETEER_INPUT
 
     mkdir -p lessons workbook
 
@@ -1912,18 +1858,21 @@ function buildpathway() {
     export PATHWAYROOTDIR=./
     export LESSONSUBDIR=
 
+    rm -f $PDFTK_INPUT-local-pdfs.sh
+
     # Shell version
     if test $BOOK; then
       for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
         pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
               if test $NOPARALLEL; then
-                makeworkbooktex $wbf
+                makeworkbookjson $wbf
               else
-                makeworkbooktex $wbf &
+                makeworkbookjson $wbf &
               fi
             done
             test ! $NOPARALLEL && wait
     fi
+
 
     buildlessonplans
 
@@ -1935,7 +1884,6 @@ function buildpathway() {
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
         cd ../../lib
-        export ABYSS=page-not-found
         if test ! -f $ABYSS.pdf; then
           echo '= PAGE NOT FOUND!' > $ABYSS.adoc
           echo >> $ABYSS.adoc
@@ -1946,6 +1894,8 @@ function buildpathway() {
 
         export PDFpagesredone=
         batchhtmltopdf
+
+        #exit
 
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
@@ -2110,4 +2060,3 @@ for f in */*; do
 done
 
 asciidoctor index.adoc
-
