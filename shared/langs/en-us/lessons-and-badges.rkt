@@ -12,11 +12,11 @@
     ("contracts"
          "SEP.8" 
          "MLR.8"
-         "MLR.2"
+         "MLR.2"    ; strategy box in lesson
         )
 
     ("defining-functions" 
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         "MLR.7"
         )
 
@@ -48,7 +48,7 @@
 
     ("distance-formula" 
         "MP.2"
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         "SEP.5"
         "MLR.8"
         )
@@ -73,18 +73,18 @@
         "MP.1"
         "MP.5"
         "SEP.5"
-        "MLR.1"
+        "MLR.1"     ; strategy box in lesson
         "MLR.3"
         "MLR.7"
         )
 
     ("functions-for-character-animation" 
         "MP.2"
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )
 
     ("inequalities-collision"
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         "MLR.7"
         )
 
@@ -101,12 +101,12 @@
         )
 
     ("inequalities3-sam"
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )    
 
     ("making-game-images" 
         "MP.6"
-        "MLR.8"
+        "MLR.8"     ; strategy box in lesson
         )
 
     ("numbers-inside-videogames" 
@@ -116,8 +116,8 @@
     ("order-of-operations" 
         "MP.1"
         "MP.2"
-        "MP.3" ; STEMworks
-        "MP.4" ; 
+        "MP.3"      ; STEMworks
+        "MP.4"  
         "MLR.7"
         "SEP.2"
         )
@@ -128,9 +128,9 @@
 
     ("player-animation" 
         "MP.3"
-        "MP.4"     ; STEMworks
+        "MP.4"      ; STEMworks
         "MP.6"
-        "MLR.6"
+        "MLR.6"     ; strategy box in lesson
         )      
 
     ("problem-decomposition"
@@ -138,29 +138,29 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
-        "MLR.7"
+        "MLR.7"    ; strategy box in lesson
         )
         
     ("restating-the-problem" 
         "MP.1"
         "MP.7"
-        "MLR.6"
-        "MLR.1"
+        "MLR.6"     ; strategy box in lesson
+        "MLR.1"     ; strategy box in lesson
         )
 
     ("solving-word-problems" 
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )
 
     ("surface-area-rect-prism"
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )
 
     ;data science
     
     
     ("checking-your-work" 
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         )
 
     ("choosing-your-dataset" 
@@ -168,37 +168,45 @@
         )
 
     ("correlations" 
-        "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
+        "MP.3"      ; STEMworks
+        "MP.4"      ; STEMworks
+        "MLR.7"
         )
     
-      ("defining-table-functions" 
+    ("defining-table-functions" 
+        "MP.6"
+        "MP.8"
         )
 
     ("displays-and-lookups" 
-
+        "MP.3"
         )
 
     ("ds-intro" 
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         )
 
     ("ethics-and-privacy" 
-        "MP.3"    ; STEMworks
+        "MP.3"      ; STEMworks
         )
 
     ("grouped-samples"
+        "MP.2"
+        "MP.3"
         )
 
     ("if-expressions" 
+        "MP.1"
+        "MP.3"
+        "MLR.8"
         )
 
     ("histograms" 
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )
 
     ("histograms2" 
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
         )
 
     ("linearity"
@@ -218,39 +226,44 @@
         )
 
     ("linear-regression" 
-        "MP.4" ; STEMworks
+        "MP.4"      ; STEMworks
+        "MLR.8"
         )
 
     ("measures-of-center"
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         )
 
     ("measures-of-spread" 
-        "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
+        "MP.3"      ; STEMworks
+        "MP.4"      ; STEMworks
+        "MLR.7"
         )
 
     ("method-chaining" 
-
+        "MP.6"
+        "MLR.8"
         )
 
-    ("displaying-categorical-data"  
-
+    ("displaying-categorical-data" 
+        "MP.5"
+        "MP.6" 
         )
 
     ("random-samples" 
-
+        "MLR.1"
+        "MP.2"
         )
 
     ("scatter-plots"
-
+        "MP.2"
         )
 
     ("table-methods" 
-
+        "MP.4"
         )
 
     ("threats-to-validity" 
-        "MP.3" ; STEMworks
+        "MP.3"      ; STEMworks
         )
     ))
