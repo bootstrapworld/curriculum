@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-10 # last modified
+LASTMOD=2021-09-13 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1191,17 +1191,9 @@ function builddependencyjson() {
           echo -n "\"$p\"" >> $GRAPHFILE
         done
         echo "]," >> $GRAPHFILE
-        echo -n "    standards: [" >> $GRAPHFILE
-        pfirst=1
-        for s in $(sed -e 's/ /_/g' $L/.cached/.lesson-standards.txt.kp); do
-          if test $pfirst; then
-            pfirst=
-          else
-            echo -n ", " >> $GRAPHFILE
-          fi
-          echo -n $s | sed -e 's/_/ /g' >> $GRAPHFILE
-        done
-        echo "]" >> $GRAPHFILE
+        if test -f $L/.cached/.lesson-standards-w-prose.txt.kp; then
+          cat $L/.cached/.lesson-standards-w-prose.txt.kp >> $GRAPHFILE
+        fi
         echo "  }" >> $GRAPHFILE
       fi
     done

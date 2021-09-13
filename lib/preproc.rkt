@@ -1679,8 +1679,20 @@
     #:exists 'replace)
   (call-with-output-file ".cached/.lesson-standards.txt.kp"
     (lambda (op)
-      (for ([s *standards-met*])
-        (fprintf op "~s~n" (car s))))
+      (call-with-output-file ".cached/.lesson-standards-w-prose.txt.kp"
+        (lambda (op2)
+          (let ([first? #t])
+            (display "    standards: [" op2)
+            (for ([s *standards-met*])
+              (fprintf op "~s~n" (car s))
+              (let ([x (caddr s)])
+                (cond [first? (set! first? #f)]
+                      [else (display ", " op2)])
+                (fprintf op2 "~s, ~s" (car x) (cadr x)))
+              )
+            (display "]" op2) (newline op2)
+            ))
+        #:exists 'replace))
     #:exists 'replace)
   )
 
