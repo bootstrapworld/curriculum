@@ -12,6 +12,7 @@
     ("contracts"
          "SEP.8" 
          "MLR.8"
+         "MLR.2"
         )
 
     ("defining-functions" 
@@ -26,6 +27,7 @@
         "SEP.7"
         "MLR.5"
         "MLR.7"
+        "MLR.8"
         )
 
     ("simple-dataypes" 
@@ -47,6 +49,8 @@
     ("distance-formula" 
         "MP.2"
         "MP.3" ; STEMworks
+        "SEP.5"
+        "MLR.8"
         )
 
     ("error-analysis" 
@@ -54,12 +58,24 @@
         )
 
     ("flags" 
-
+        "MLR.3"
+        "MLR.7"
+        "MP.1"
+        "MP.2"
+        "MP.4"
+        "MP.6"
+        "MP.7"
+        "MP.8"
+        "SEP.5"
         ) 
 
     ("function-composition" 
         "MP.1"
         "MP.5"
+        "SEP.5"
+        "MLR.1"
+        "MLR.3"
+        "MLR.7"
         )
 
     ("functions-for-character-animation" 
@@ -69,15 +85,19 @@
 
     ("inequalities-collision"
         "MP.3" ; STEMworks
+        "MLR.7"
         )
 
     ("inequalities1-simple" 
         "MP.1"
         "MP.4"
+        "MP.6"
+        "MLR.5"
         )
 
     ("inequalities2-compound" 
-
+        "MLR.5"
+        "MP.1"
         )
 
     ("inequalities3-sam"
@@ -86,6 +106,7 @@
 
     ("making-game-images" 
         "MP.6"
+        "MLR.8"
         )
 
     ("numbers-inside-videogames" 
@@ -96,7 +117,9 @@
         "MP.1"
         "MP.2"
         "MP.3" ; STEMworks
-        "MP.4" ; STEMworks
+        "MP.4" ; 
+        "MLR.7"
+        "SEP.2"
         )
 
     ("piecewise-functions" 
@@ -104,7 +127,10 @@
         )
 
     ("player-animation" 
+        "MP.3"
         "MP.4"     ; STEMworks
+        "MP.6"
+        "MLR.6"
         )      
 
     ("problem-decomposition"
@@ -112,11 +138,14 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
+        "MLR.7"
         )
         
     ("restating-the-problem" 
         "MP.1"
         "MP.7"
+        "MLR.6"
+        "MLR.1"
         )
 
     ("solving-word-problems" 

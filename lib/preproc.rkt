@@ -142,6 +142,8 @@
 
 (define *lesson-prereqs* '())
 
+(define *lesson-keywords* '())
+
 (define *dictionaries-represented* '())
 
 (define *exercises-done* '())
@@ -173,7 +175,7 @@
     (let ([c (peek-char i)])
       (cond [(eof-object? c) #f]
             [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
-            [(or (char=? c #\newline)) (read-char i)]
+            [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
 (define (read-commaed-group i directive)
@@ -928,6 +930,11 @@
                                           (create-end-tag "span")))]))])
       (string-append reg-space gd-space))))
 
+(define (add-lesson-keywords kwds)
+  (for ([k kwds])
+    (unless (member k *lesson-keywords*)
+      (set! *lesson-keywords* (cons k *lesson-keywords*)))))
+
 (define (add-lesson-prereqs immediate-prereqs)
   ;(printf "immediate prereqs = ~s\n" immediate-prereqs)
   ;(printf "lesson-prereq dir = ~s\n" (current-directory))
@@ -986,6 +993,7 @@
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-textbook s))))
+
         )
       ;
       (when (or *lesson-plan*
@@ -995,13 +1003,15 @@
       ;
       (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
-        (let ([beginning-of-line? #t])
+        (let ([beginning-of-line? #t]
+              [possible-beginning-of-line? #f])
           (let loop ()
             (let ([c (read-char i)])
               (unless (eof-object? c)
                 (cond
                   [(char=? c #\@)
                    (set! beginning-of-line? #f)
+                   (set! possible-beginning-of-line? #f)
                    (let ([directive (read-word i)])
                      ;(printf "directive = ~s~%" directive)
                      (cond [(string=? directive "") (display c o)]
@@ -1043,6 +1053,8 @@
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
+                           [(string=? directive "keywords")
+                            (add-lesson-keywords (read-commaed-group i directive))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (string-titlecase (getenv "PROGLANG")))]
                            [(string=? directive "year")
@@ -1235,22 +1247,22 @@
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
-                                      (read-space i)]))]
+                                      (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "ifsoln")
                             (cond [*solutions-mode?* (display-begin-span #f o)]
                                   [else (read-group i directive)
-                                        (read-space i)])]
+                                        (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifnotsoln")
                             (cond [(not *solutions-mode?*) (display-begin-span #f o)]
                                   [else (read-group i directive)
-                                        (read-space i)])]
+                                        (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifpathway")
                             (let ([pathways (read-commaed-group i directive)])
                               (cond [(member *pathway* pathways)
                                      (display-begin-span #f o)]
                                     [else
                                       (read-group i directive)
-                                      (read-space i)]))]
+                                      (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "Bootstrap")
@@ -1277,8 +1289,13 @@
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
+                  [(and possible-beginning-of-line? (char=? c #\|))
+                   (set! possible-beginning-of-line? #f)
+                   (newline o)
+                   (display c o)]
                   [(and beginning-of-line? (char=? c #\=))
                    (set! beginning-of-line? #f)
+                   (set! possible-beginning-of-line? #f)
                    (cond [title-reached?
                            (cond [first-subsection-reached? #f]
                                  [(check-first-subsection i o)
@@ -1301,9 +1318,11 @@
                              )])]
                   [(char=? c #\newline)
                    (newline o)
-                   (set! beginning-of-line? #t)]
+                   (set! beginning-of-line? #t)
+                   (set! possible-beginning-of-line? #f)]
                   [else
                     (set! beginning-of-line? #f)
+                    (set! possible-beginning-of-line? #f)
                     (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
                            (cond [(char=? c #\{)
                                   (unless (= (top-span-stack) 0)
@@ -1439,7 +1458,19 @@
               (fprintf o "\n* ~a\n\n" x))
 
             )
-          #:exists 'replace))
+          #:exists 'replace)
+
+        (call-with-output-file ".cached/.lesson-keywords.txt.kp"
+          (lambda (o)
+            (let ([first? #t])
+            (display "    keywords: [" o)
+            (for ([k *lesson-keywords*])
+              (cond [first? (set! first? #f)]
+                    [else (display ", " o)])
+              (write k o))
+            (display "]," o) (newline o)))
+          #:exists 'replace)
+        )
 
       ;(printf "OTHERDIR = ~a\n" (truthy-getenv "OTHERDIR"))
       #|
@@ -1651,8 +1682,20 @@
     #:exists 'replace)
   (call-with-output-file ".cached/.lesson-standards.txt.kp"
     (lambda (op)
-      (for ([s *standards-met*])
-        (fprintf op "~s~n" (car s))))
+      (call-with-output-file ".cached/.lesson-standards-w-prose.txt.kp"
+        (lambda (op2)
+          (let ([first? #t])
+            (display "    standards: [" op2)
+            (for ([s *standards-met*])
+              (fprintf op "~s~n" (car s))
+              (let ([x (caddr s)])
+                (cond [first? (set! first? #f)]
+                      [else (display ", " op2)])
+                (write (string-append (car x) " : " (cadr x)) op2))
+              )
+            (display "]" op2) (newline op2)
+            ))
+        #:exists 'replace))
     #:exists 'replace)
   )
 
