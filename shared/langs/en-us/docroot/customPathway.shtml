@@ -19,15 +19,21 @@
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
     <script>
-        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
+        // load required symbols, trim the dependency graph
         const { PDFDocument, rgb, degrees } = PDFLib
-        var graph = graph, lessons = lessons;
+        var graph = graph, lessons = [], title = "Custom Pathway";
+        const lessonsToIgnore = ['__sample', 'zample-lesson', 'hoc-winter', 'hoc-wescheme-intro'];
+        lessonsToIgnore.forEach(l => delete graph[l]);
 
+        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
         function populateLessons() {
             var search = location.search.substring(1);
-            var {pathwayName, lessons: pathwayLessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+            var {title: pathwayName, lessons: pathwayLessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+            console.log(pathwayName, pathwayLessons);
+            title = pathwayName;
             lessons = pathwayLessons.split(",");
-            console.log(pathwayName, lessons);
+            console.log(title, lessons);
+
             document.getElementById('pathwayTitle').innerHTML = pathwayName;
             var lessonList = document.getElementById('lesson-list').children[0];
             lessons.forEach(l => {
@@ -66,14 +72,11 @@
                 .flat()
                 .map(p => p.replace(".adoc", ".pdf"))
                 .map(p => p.replace(" landscape", ""));
-            //console.log('pages will be loaded from:', pageUrls)
-console.log('processing', pageUrls);
 
           document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
 
         for (const [idx, url] of pageUrls.entries()) {
             const page = pdfDoc.addPage();
-console.log('processing', url);
             const page1Bytes = await fetch(url).then((res) => res.arrayBuffer());
             const [page_1]   = await pdfDoc.embedPdf(page1Bytes);
             const page_1Dims = page_1.scale(1.0);
@@ -102,7 +105,7 @@ console.log('processing', url);
 
             page.drawPage(page_1, {...page_1Dims, ...pageSettings});
 
-            document.getElementById('status').innerHTML = (idx+1) + " / " + pageUrls.length;
+            document.getElementById('status').innerHTML = (idx+1) +"/"+ pageUrls.length;
 
             if(idx <= 1 ) continue;
             page.drawText(String(idx - 1), {
@@ -116,7 +119,7 @@ console.log('processing', url);
 
           // Serialize the PDFDocument to bytes (a Uint8Array)
           const pdfBytes = await pdfDoc.save()
-          download(pdfBytes, "pdf-lib_pdf_page_embedding_example.pdf", "application/pdf");
+          download(pdfBytes, title + "- Student Workbook.pdf", "application/pdf");
         }
     </script>
 </head>
