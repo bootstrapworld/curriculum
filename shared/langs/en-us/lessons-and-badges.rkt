@@ -161,6 +161,7 @@
     
     ("checking-your-work" 
         "MP.3"      ; STEMworks
+        "SEP.3"
         )
 
     ("choosing-your-dataset" 
@@ -171,6 +172,7 @@
         "MP.3"      ; STEMworks
         "MP.4"      ; STEMworks
         "MLR.7"
+        "SEP.3"
         )
     
     ("defining-table-functions" 
@@ -193,6 +195,7 @@
     ("grouped-samples"
         "MP.2"
         "MP.3"
+        "SEP.3"
         )
 
     ("if-expressions" 
@@ -203,10 +206,12 @@
 
     ("histograms" 
         "MP.4"      ; STEMworks
+        "SEP.3"
         )
 
     ("histograms2" 
         "MP.4"      ; STEMworks
+        "SEP.3"
         )
 
     ("linearity"
@@ -228,16 +233,19 @@
     ("linear-regression" 
         "MP.4"      ; STEMworks
         "MLR.8"
+        "SEP.3"
         )
 
     ("measures-of-center"
         "MP.3"      ; STEMworks
+        "SEP.3"
         )
 
     ("measures-of-spread" 
         "MP.3"      ; STEMworks
         "MP.4"      ; STEMworks
         "MLR.7"
+        "SEP.3"
         )
 
     ("method-chaining" 
@@ -247,16 +255,19 @@
 
     ("displaying-categorical-data" 
         "MP.5"
-        "MP.6" 
+        "MP.6"
+        "SEP.3" 
         )
 
     ("random-samples" 
         "MLR.1"
         "MP.2"
+        "SEP.3"
         )
 
     ("scatter-plots"
         "MP.2"
+        "SEP.3"
         )
 
     ("table-methods" 
@@ -265,5 +276,6 @@
 
     ("threats-to-validity" 
         "MP.3"      ; STEMworks
+        "SEP.3"
         )
     ))
