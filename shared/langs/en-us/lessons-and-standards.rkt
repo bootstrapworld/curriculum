@@ -13,10 +13,16 @@
     ("contracts" 
         "8.F.A.1"
         "HSF.IF.A.1"
-        "OK.PA.A.1.1" 
         "HSF.IF.A.2"
-        "OK.A1.F.1.2"
         "IA.HSF.IF.A.1"
+        "OK.A1.F.1.2"
+        "OK.PA.A.1.1"
+        "OK.A1.F.1.2" 
+        "OK.A1.F.1.3"
+        "OK.A1.F.1.4"
+        "OK.5.GM.1.1"
+        "OK.6.GM.2.2"
+        "OK.G.2D.1.8"
         )
 
     ("defining-functions" 
@@ -35,14 +41,14 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "HSA.SSE.A.1"
-        "OK.PA.A.1.1"
-        "OK.PA.A.1.2"
         "8.SP.A.1" 
         "HSF.BF.A.1" 
         "P4" 
         "6-8.Algorithms and Programming.Variables" 
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
+        "OK.PA.A.1.1"
+        "OK.PA.A.1.2"
         "OK.A1.F.1.3"
         "OK.A1.A.1.1"
         "OK.8.AP.PD.02"
@@ -54,14 +60,21 @@
         "7.EE.B.4"
         "HSA.SSE.A.1"
         "IA.6.EE.B.6"
+        "OK.7.A.3.3"
         "OK.PA.A.3.1" 
+        "OK.A1.F.3.1"
         "OK.3.A.V.01" ; identical standard
         "OK.4.AP.V.01"; identical standard
         "OK.5.AP.V.01"; identical standard
         "2-AP-11"
         )
 
-    ("simple-dataypes" 
+    ("simple-dataypes"
+        "OK.6.A.1.3"
+        "OK.7.N.1.2"
+        "OK.7.N.1.1"
+        "OK.7.N.1.3"
+        "OK.7.N.2.4"
         "OK.7.AP.A.01"
         "OK.8.AP.C.01"
         ) 
@@ -82,6 +95,8 @@
     ("coordinates"
         "IA.5.G.A.1" 
         "5.G.A.1"
+        "OK.6.A.1.1"
+        "OK.L1.CS.D.01"
         )
 
     ("distance-formula" 
@@ -91,6 +106,8 @@
         "8.G.B.7"
         "8.G.B.8" ; STEMworks
         "OK.PA.GM.1.2"
+        "OK.G.2D.1.5"
+        "OK.G.RT.1.1"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
@@ -108,10 +125,14 @@
         "OK.MAP.4"
         "OK.PA.A.4"
         "OK.3.AP.A.01" 
-        "OK.4.AP.C.01"
         "OK.3.AP.M.01"
         "OK.3.AP.PD.03"
+        "OK.4.AP.C.01"
         "OK.6.AP.M.01"
+        "OK.8.AP.A.01"
+        "OK.6.A.1.1"
+        "OK.7.GM.4.1"
+        "OK.7.GM.4.2"
         ) 
 
     ("function-composition" 
@@ -120,7 +141,10 @@
         "6.EE.B.6" ; STEMworks
         "HSF.BF.A.1.C"
         "HSF.BF.A" ; STEMworks
+        "OK.A1.F.1.3"
         "OK.PA.A.3.1"
+        "OK.A1.F.3.2"
+        "OK.A1.F.3.3"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
@@ -139,6 +163,8 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.2"
+        "OK.8.AP.A.01"
+        "OK.PA.A.2.1"
         )
 
     ("inequalities-collision"
@@ -150,6 +176,10 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
+        "OK.PA.GM.1.2"
+        "OK.G.2D.1.5"
+        "OK.G.RT.1.1"
+        "OK.PA.GM.1.2"
         )
 
     ("inequalities1-simple"
@@ -158,14 +188,19 @@
         "6.EE.B.8"
         "7.EE.B.4"
         "HSF.IF.A.2"
+        "OK.6.A.3.1"
+        "OK.7.A.3.3"
         "OK.PA.A.4.3"
         )
 
     ("inequalities2-compound" 
         "7.EE.B.4"
         "HSF.IF.A.2"
-        "OK.PA.A.4.3"
         "HSS.CP.A.1"
+        "OK.PA.A.4.3"
+        "OK.6.A.3.1"
+        "OK.7.A.3.3"
+        "OK.A1.A.2.2"
         )
 
     ("inequalities3-sam"
@@ -179,6 +214,8 @@
         "HSF.BF.A.1.C" ; STEMworks
         "OK.PA.A.4.3"
         "OK.A1.A.2"
+        "OK.7.A.3.3"
+        "OK.A1.A.2.2"
         )    
 
     ("making-game-images" 
@@ -189,14 +226,19 @@
         "3A-AP-20" ; STEMworks
         "1B-IC-21" ; STEMworks
         "3A-AP-18" ; STEMworks
+        "OK.8.AP.A.01"
+        "OK.7.GM.4.1"
+        "OK.7.GM.4.2"
         )
 
     ("numbers-inside-videogames" 
+        "OK.L1.CS.D.01"
         )
 
     ("order-of-operations" 
         "OK.PA.A.3"
         "OK.A1.A.3"
+        "OK.7.A.4.2"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
         )
@@ -213,6 +255,8 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.1"
+        "OK.A1.F.1.4"
+        "OK.A2.F.1.8"
         )
 
     ("player-animation" 
@@ -253,7 +297,10 @@
     ("restating-the-problem" 
         "8.F.B"
         "HSF.BF.A.1"
+        "OK.8.AP.A.01"
         "OK.PA.A.1.2"
+        "OK.PA.A.1.3"
+        "OK.PA.A.2.1"
         )
 
     ("solving-word-problems" 
@@ -264,6 +311,7 @@
         "HSF.IF.A.2"
         "OK.PA.A.1.3"
         "OK.PA.A.2.1"
+        "OK.8.AP.A.01"
         "2-AP-11"
         "2-AP-17"
         "2-AP-19"
@@ -276,6 +324,8 @@
         "6.G.A.4"
         "7.G.B.6"
         "OK.PA.GM.2.1"
+        "OK.7.GM.1.1"
+        "OK.G.3D.1.1"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
@@ -305,6 +355,13 @@
         "3A-AP-17" ; STEMworks
         "P7"
         "OK.L1.DA.CVT.01"
+        "OK.L1.IC.C.02"
+        "OK.A1.D.1.1"
+        "OK.PA.D.1.1"
+        "OK.PA.A.2.2"
+        "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("correlations" 
@@ -334,6 +391,8 @@
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02" 
+        "OK.A1.D.2.1"
         )
 
     ("displays-and-lookups" 
@@ -341,6 +400,8 @@
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
         "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("ds-intro" 
@@ -373,6 +434,11 @@
         "P3"
         "OK.PA.A.2.2"
         "OK.L1.IC.C.02"
+        "OK.A1.D.1.1"
+        "OK.PA.D.1.1"
+        "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("if-expressions" 
@@ -383,6 +449,9 @@
         "P3" 
         "6-8.Data and Analysis.Inference and Models" 
         "9-12.Algorithms and Programming.Control"
+        "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "OK.A2.D.2.1"
         )
 
     ("histograms" 
@@ -393,6 +462,13 @@
         "3A-DA-11" 
         "3B-AP-14" 
         "P5"
+        "OK.L1.AP.PD.05"
+        "OK.A1.D.1.1" 
+        "OK.PA.D.1.1"
+        "OK.PA.A.2.2"
+        "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("histograms2" 
@@ -406,6 +482,13 @@
         "3B-AP-14" 
         "9-12.Data and Analysis.Visualization and Transformation"
         "OK.L1.AP.PD.05"
+        "OK.L1.AP.PD.05"
+        "OK.A1.D.1.1"
+        "OK.PA.D.1.1"
+        "OK.PA.A.2.2"
+        "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("linearity"
@@ -494,6 +577,8 @@
         "6-8.Algorithms and Programming.Control" 
         "9-12.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "OK.A1.D.2.1"
         )
 
     ("displaying-categorical-data"  
@@ -501,6 +586,8 @@
         "3A-DA-11" 
         "P5"
         "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
         )
 
     ("random-samples" 
@@ -533,6 +620,7 @@
 
     ("table-methods" 
         "2-DA-08"
+        "OK.A1.D.2.1"
         "OK.L1.AP.M.02"
         )
 
