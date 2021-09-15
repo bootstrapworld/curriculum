@@ -150,6 +150,9 @@ Justify why base area (B) and height (h) are multiplied to find the volume of a 
  ("OK.G.2D.1.8"
   "Construct logical arguments to prove triangle congruence (SSS, SAS, ASA, AAS and HL) and triangle similarity (AA, SSS, SAS)."
  )
+ ("OK.G.2D.1.5"
+  "Use coordinate geometry to represent and analyze line segments and polygons, including determining lengths, midpoints, and slopes of line segments."
+ )
  ("OK.G.3D.1.1"
   "Solve real-world and mathematical problems
 using the surface area and volume of prisms, cylinders,
@@ -157,6 +160,12 @@ pyramids, cones, spheres, and composites of these
 figures. Use nets, measuring devices, or formulas as
 appropriate."
  )
+ ("OK.G.RT.1.1"
+  "Apply the distance formula and the Pythagorean Theorem and its
+converse to solve real-world and mathematical problems, as approximate
+and exact values, using algebraic and logical reasoning (include Pythagorean
+Triples)."
+  )
  ("OK.A1.N.1"
   "Extend the understanding of number and operations to include square roots and cube roots."
  )
@@ -290,6 +299,9 @@ the denominator when necessary."
  ("OK.A1.D.2.4"
   "Apply probability concepts to real-world situations to make informed decisions."
  )
+ ("OK.A2.F.1.8"
+  "Graph piecewise functions with no more than three branches (including linear, quadratic, or exponential branches) and analyze the function by
+identifying the domain, range, intercepts, and intervals for which it is increasing, decreasing, and constant.")
 
  ; OK CS Standards
 
