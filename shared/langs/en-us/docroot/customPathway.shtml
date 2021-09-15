@@ -39,8 +39,12 @@
 
             // update the list of accessible lessons
             var accessibleList = document.getElementById('accessible-lesson-list');
-            var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
-                graph[name].prerequisites.every(p => lessons.includes(p)));
+            var accessible =  Object.getOwnPropertyNames(graph)
+                .filter(name => graph[name].prerequisites
+                    .every(p => lessons.includes(p)))
+                .filter(name => !lessons.includes(name));
+            console.log('lessons are', lessons);
+            console.log('accessible', accessible);
 
             accessible.forEach(l => {
                 var li = document.createElement('li');
