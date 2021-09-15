@@ -1,0 +1,58 @@
+= Git Command Notes for Authors
+
+== Commits
+
+@n `git add lessons/.../langs/en-us/.../...`
+
+@n `git commit -m "[DS] briefly describe the commit here (see #xxx)"`
+
+	* The brackets at the beginning of the quoted phrase are optional. They tag a branch: `[math]`, `[DS]` or `[core]`.
+	* The parentheses at the back are optional. They associate the commit with a git issue.
+
+=== To cancel a commit before you push - Useful when you forget to include the git issue and want the chance to change the words in the commit.
+
+	* `git reset HEAD~1`
+	* You can unstage multiple commits by repeating `git reset HEAD~1` or using `git reset HEAD~2` or `git reset HEAD~3`
+
+== Renaming or moving files
+
+	* `git mv lessons/contracts/langs/en-us/pages/graphs.adoc lessons/flags/langs/en-us/tables.adoc`
+	* The example code above both moves and renames the file.
+		- If you just want to rename it, don't change the location.
+		- If you just want to move it, don't change the name of the asciidoc.
+	* If you haven't committed the file yet, you can just click on it in sublime or in your finder window and change the name of the file there.
+
+== Making new files
+
+	* `cp lessons/contracts/langs/en-us/pages/graphs.adoc lessons/flags/langs/en-us/tables.adoc`
+	* This is useful when you want to make a new page with formatting similar to a page from another lesson.
+
+== Building Pathways
+
+	* `./build-pathway` will build all of the pathways
+	* You can get `./build-pathway` to appear by typing `./bu` and `tab`
+	* To specify pathways use:
+ 		- `./build-pathway data-science`
+ 		- `./build-pathway data-science --proglang codap`
+ 		- `./build-pathway algebra`
+ 		- `./build-pathway algebra --proglang wescheme`
+ 		- `./build-pathway algebra --proglang pyret`
+ 		- `./build-pathway __sample`
+	* When working intensively with one lesson it is often most efficient to go to `pathways/langs/en-us/lesson-order.txt`, add the lesson to the file and save it, and then `./build-pathway __sample`
+	* If you want to see the pdf version add `--book`
+	* If it's not building all of your changes:
+		- delete the lesson from the distribution folder in your directory
+		- use `-f` or `-F` to force it rebuild the pathway from scratch. It doesn't matter where you put the `-f` or `-F` in the command line.
+		- in extreme cases where Dorai has made big changes to the system, delete your entire distribution before building
+
+== Changing Directories
+
+	* `cd lessons/.../langs/en-us/.../...`
+	* `cd` or `cd ~` goes to your home directory
+	* `cd ..` goes up a level
+	* `cd ../..` goes up two levels
+
+== Comparing directories for changes
+
+	* `git diff --name-status "@{1 month ago}" "@{0 days ago}" | grep '^A'`
+	* You can do something like `git log --since="September 1, 2020" --name-only | grep adoc`   to get all the adoc files modified since that time.  You should also be able to use phrases like `--since="2 months ago"` or `--until="2 weeks ago"`
