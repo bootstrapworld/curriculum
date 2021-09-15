@@ -77,33 +77,26 @@
 
         for (const [idx, url] of pageUrls.entries()) {
             const page = pdfDoc.addPage();
-            const page1Bytes = await fetch(url).then((res) => res.arrayBuffer());
-            const [page_1]   = await pdfDoc.embedPdf(page1Bytes);
-            const page_1Dims = page_1.scale(1.0);
-            const landscape  = page_1Dims.width > page_1Dims.height;
-            const rightHand  = idx%2 == 0;
+            const bytes = await fetch(url).then((res) => res.arrayBuffer());
+            const [embedded] = await pdfDoc.embedPdf(bytes);
+            const dimensions = embedded.scale(1.0);
+            const isRightHand= idx%2 == 0;
 
             const portrait = {
-              x: (page.getWidth()  / 2) - page_1Dims.width  / 2,
-              y: (page.getHeight() / 2) - page_1Dims.height / 2,
+              x: (page.getWidth()  / 2) - dimensions.width  / 2,
+              y: (page.getHeight() / 2) - dimensions.height / 2,
             };
 
-            const landscapeRight = {
-              x: page.getWidth(),
-              y: 0,
-              rotate: degrees(90),
+            const landscape = {
+              x: isRightHand? page.getWidth() :        0        ,
+              y: isRightHand?       0         : page.getHeight(),
+              rotate: degrees(isRightHand? 90 : -90),
             };
 
-            const landscapeLeft = {
-              x: 0,
-              y: page.getHeight(),
-              rotate: degrees(-90),
-            };
+            const isLandscape  = dimensions.width > dimensions.height;
+            const pageSettings = isLandscape? landscape : portrait;
 
-            const pageSettings = landscape? (rightHand? landscapeRight : landscapeLeft) 
-              : portrait;
-
-            page.drawPage(page_1, {...page_1Dims, ...pageSettings});
+            page.drawPage(embedded, {...dimensions, ...pageSettings});
 
             document.getElementById('status').innerHTML = (idx+1) +"/"+ pageUrls.length;
 
@@ -113,7 +106,7 @@
               y: 35,
               size: 8,
               color: rgb(0,0,0),
-              rotateDegrees:landscape ? -90 : 0
+              rotateDegrees: isLandscape ? -90 : 0
             })
           }
 
