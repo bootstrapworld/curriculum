@@ -16,6 +16,27 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Set page dimensions */
+body.landscape:not(.LessonPlan, .narrativepage) { 
+  width: 10.0in;
+  height: 7.5in; 
+  border: 1px solid red; 
+}
+body:not(.LessonPlan, .landscape, .narrativepage) { 
+  width:  7.5in; 
+  height: 10.0in; 
+  border: 1px solid red; 
+}
+
+body.landscape:not(.LessonPlan, .narrativepage) #content { 
+  height: 95%;
+}
+
+body:not(.LessonPlan, .landscape, .narrativepage) #content { 
+  height: 90%; 
+}
+
+
 p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
 mark    { background: none; color: inherit; }
@@ -162,7 +183,7 @@ tr th.tableblock {
 
 .fitb, .fitbruby, .blankline, .vskip {
   display:            inline-block;
-  min-height:         15px;
+  min-height:         13px;
   min-width:          5em;
   text-align:         center;
   line-height:        1.5rem;
@@ -171,12 +192,12 @@ tr th.tableblock {
 
 .fitbruby {
    position:          relative;
-   margin-bottom:     12pt;
-   padding:           0pt 0pt;
+   margin-bottom:     1rem;
+   padding:           0;
 }
 
 .vskip { margin-top: 25px; width: 100%; border-bottom: none;}
-.blankline { margin-top: 15px; width: 100%;}
+.blankline { margin-top: 13px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
@@ -188,8 +209,8 @@ tr th.tableblock {
 
 .ruby {
   position:           absolute;
-  bottom:             -18pt;
-  left:               0pt;
+  bottom:             -1.1rem;
+  left:               0;
   font-size:          0.7rem;
   font-weight:        normal;
   width:              100%;
@@ -416,7 +437,7 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-:not(body.LessonPlan) #header { margin-bottom:    5px !important; }
+body:not(.LessonPlan) #header { margin-bottom:    5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
 body:not(.LessonPlan) .sect1 > h2:first-child,
@@ -457,10 +478,10 @@ table .autonum::after { content: none; }
 
 .recipe { min-height: 3rem; } /* Lines where students should write need to be tall */
 .keyword_only { min-height: 20pt; } /* lines containing nothing to write on should be short */
-.recipe_instructions { min-height: 16pt; } /* instruction lines should be extra-short */
+.recipe_instructions { min-height: 1.5rem; } /* instruction lines should be extra-short */
 .recipe p { margin: 0; } 
 
-:not(.recipe_instructions) + .keyword_only { margin: -8pt 0pt; }
+:not(.recipe_instructions) + .keyword_only { margin: -8pt 0; }
 
 .studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
 .studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
@@ -468,7 +489,7 @@ table .autonum::after { content: none; }
   min-width:          105pt;
   line-height:        1.65rem;
   position:           relative;
-  padding:            0pt;
+  padding:            0;
   word-spacing:       4pt;
   display:            inline-block;
   border-bottom:      solid 1px black;
@@ -482,7 +503,7 @@ table .autonum::after { content: none; }
   text-align:         center;
   font-style:         italic;
   font-family:        "Century Gothic";
-  word-spacing:       0pt;  /* don't inherit spacing from .studentAnswer */
+  word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
 }
 
 .studentAnswerUnfilled,.studentAnswerFilled,
@@ -650,8 +671,7 @@ div.circleevalsexp .value {
 
 div.circleevalsexp .operator {
   display:            block;
-  height:             20px;
-  line-height:        1rem;
+  height:             1.1rem;
   text-align:         center;
   width:              100%;
   border-bottom:      solid 2px black;
@@ -786,12 +806,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
     font-style:       italic;
     line-height:      2.5rem;
   }
-  /* Attempt to get the screen width to approximate printed width */
-  body.landscape:not(.LessonPlan, .narrativepage)   { width: 10.0in; height:  7.5in; }
-  body:not(.LessonPlan, .landscape, .narrativepage) { width:  7.5in; height: 10.0in; }
-  body:not(.LessonPlan, .landscape, .narrativepage) #content { 
-    height: 100%; border:1px solid red; 
-  }
   body.nonworkbookpage{ width: auto !important; }
 }
 
@@ -806,6 +820,9 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   .workbookpage .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
    display: none !important; visibility: hidden; float: none;
   }
+
+    /* Override AsciiDoc print default */
+  p {margin: 0px; font-size: 1rem; font-weight: normal;}
 
   /* Page breaks in lesson content*/
   div#body{ position: static; } /* page-break fails on absolute positioning */
@@ -847,10 +864,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   }
 
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  html, body { font-size:      10pt; }
+  html, body { font-size:      9pt; }
   .recipe_example_body_short { min-width: 20em; }
-  /* Override AsciiDoc print default */
-  p {margin: 0px; font-size: 1rem; font-weight: normal;}
   .questions    { min-width: 36%; width: auto; }
   .answers      { width: auto; }
 }
