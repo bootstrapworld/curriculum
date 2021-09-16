@@ -1,5 +1,12 @@
 = Critiquing Written Findings
 
+++++
+<style>
+td { height: 4rem !important; }
+.misleading td { height: 12rem !important; }
+</style>
+++++
+
 Consider the following dataset, representing the heaviest bench press (in
 lbs) for ten powerlifters:
 
@@ -7,37 +14,41 @@ lbs) for ten powerlifters:
 135, 95, 230, 135, 203, 55, 1075, 135, 110, 185
 ----
 
-1, In the space below, rewrite this dataset in sorted order.
+@vspace{3ex}
 
-@span{.vskip}{}
+@n In the space below, rewrite this dataset in sorted order.
 
-2, In the table below, compute the measures of center for this dataset.
+@span{.vskip}{@ifsoln{55, 95, 110, 135, 135, 135, 185, 203, 230, 1075}}
 
-[cols='3']
+
+@vspace{4ex}
+
+@n In the table below, compute the measures of center for this dataset.
+
+[cols="^1a,^1a,^1a", options="header"]
 |===
 
-| Mean (Average) | Median | Mode(s)
+| Mean (Average)	| Median 		| Mode(s)
 
-|@span{.vskip}{}||
+| @ifsoln{235.8}	| @ifsoln{135} 	| @ifsoln{135}
 |===
 
-3, The following statements are correct ... but misleading. Write down the
+@vspace{4ex}
+
+@n The following statements are correct ... but misleading. Write down the
 reason why.
 
-[cols="1a,3a",options='header']
+[.misleading, cols="1a,3a",options='header']
 |===
 | Statement | Why it’s misleading
 
-|
-“More personal records are set at 135 lbs than any other weight!”
-|
+| “More personal records are set at 135 lbs than any other weight!”
+| @ifsoln{This statement seems to imply that 135 pounds is a really common personal record. While the mode IS 135, the wide distribution of possibly weights makes mode a poor measure of center.}
 
-|
-“The average powerlifter can bench press 235 lbs.”
-|
+| “The average powerlifter can bench press 235 lbs.”
+| @ifsoln{This statement leads us to expect that at least half of all powerlifters can bench 235 pounds or more. In fact, half the powerlifters in this sample lift a _maximum_ of 135 pounds! The average is thrown off by an exteme outlier, who benched 1075 pounds!}
 
-|
-“With a median of 135, that means that half the people in this group can’t even lift 135 lbs.”
-|
+| “With a median of 135, that means that half the people in this group can’t even lift 135 lbs.”
+| @ifsoln{The median is the "middle number" in the dataset, but that doesn't mean half the values are less and the other half are greater! In fact, this dataset contains _three_ values that are 135, meaning that only 4-out-of-10 cannot lift 135 pounds.}
 
 |===
