@@ -39,8 +39,14 @@
 
             // update the list of accessible lessons
             var accessibleList = document.getElementById('accessible-lesson-list');
-            var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
-                graph[name].prerequisites.every(p => lessons.includes(p)));
+            var accessible =  Object.getOwnPropertyNames(graph)
+                .filter(name => graph[name].prerequisites
+                    .every(p => lessons.includes(p)))
+                .filter(name => !lessons.includes(name))
+                .sort((a,b) => 
+                graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
+            console.log('lessons are', lessons);
+            console.log('accessible', accessible);
 
             accessible.forEach(l => {
                 var li = document.createElement('li');
@@ -80,7 +86,7 @@
         <div class="clearfix item bottom-border">
             <h2>What's Next?</h2>
             <p/>
-            Once your students have finished this pathway, there are plenty of other Bootstrap lessons your students are ready to dive into!
+            Once your students have finished this pathway, there are plenty of other Bootstrap lessons your students are ready to dive into - without any additional !
             <ul id="accessible-lesson-list">
             </ul>
         </div>
