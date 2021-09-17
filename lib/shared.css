@@ -29,7 +29,7 @@ body:not(.LessonPlan, .landscape, .narrativepage) {
 }
 
 body.landscape:not(.LessonPlan, .narrativepage) #content { 
-  height: 95%;
+  height: 90%;
 }
 
 body:not(.LessonPlan, .landscape, .narrativepage) #content { 
@@ -100,7 +100,7 @@ tr th.tableblock {
 
 #header, #content, #footer {margin: 0 !important; width: 7.5in;}
 .landscape #header, .landscape #content, .landscape #footer {
-  max-width: 10in !important;
+  width: 10in !important; max-width: 10in !important;
 }
 
 /* Warn the user the Save-to-Drive is broken on Safari */
@@ -618,11 +618,10 @@ table.exercises_and_solutions tr td:last-child .content {
   max-height:         0px;
   overflow:           hidden;
   text-overflow:      ellipsis;
-  transition:         max-height linear 0.5s;
   display:            block;
 }
-table.exercises_and_solutions tr:hover td:last-child .content {
-  max-height: 300px; overflow: scroll;
+table.exercises_and_solutions > tbody > tr:hover > td:last-child  .content {
+  max-height: 300px; overflow-y: auto;
 }
 table.exercises_and_solutions table * { background: none !important; }
 table.exercises_and_solutions tr:hover {background: #7532892f !important; }
@@ -667,6 +666,7 @@ div.circleevalsexp .operator {
   display:            block;
   height:             1.1rem;
   text-align:         center;
+  line-height:        0.5rem;
   width:              100%;
   border-bottom:      solid 2px black;
   border-radius:      15px 15px 0px 0px;
@@ -806,7 +806,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
 /************************************************************************************
  * PRINT MEDIA
  */
-@media print {
+ @media print {
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
