@@ -42,7 +42,9 @@
             var accessible =  Object.getOwnPropertyNames(graph)
                 .filter(name => graph[name].prerequisites
                     .every(p => lessons.includes(p)))
-                .filter(name => !lessons.includes(name));
+                .filter(name => !lessons.includes(name))
+                .sort((a,b) => 
+                graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
             console.log('lessons are', lessons);
             console.log('accessible', accessible);
 
