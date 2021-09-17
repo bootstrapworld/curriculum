@@ -16,26 +16,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Set page dimensions */
-body.landscape:not(.LessonPlan, .narrativepage) { 
-  width: 10.0in;
-  height: 7.5in; 
-  border: 1px solid red; 
+/* These items should ALWAYS max-out pagewidth */
+#header, #content, #footer {
+  width: 100% !important; max-width: 100% !important;
 }
-body:not(.LessonPlan, .landscape, .narrativepage) { 
-  width:  7.5in; 
-  height: 10.0in; 
-  border: 1px solid red; 
-}
-
-body.landscape:not(.LessonPlan, .narrativepage) #content { 
-  height: 90%;
-}
-
-body:not(.LessonPlan, .landscape, .narrativepage) #content { 
+body:not(.LessonPlan, .narrativepage) #content { 
   height: 90%; 
 }
-
 
 p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
@@ -98,14 +85,9 @@ tr th.tableblock {
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
 
-#header, #content, #footer {margin: 0 !important; width: 7.5in;}
-.landscape #header, .landscape #content, .landscape #footer {
-  width: 10in !important; max-width: 10in !important;
-}
-
 /* Warn the user the Save-to-Drive is broken on Safari */
 #safariWarning { display: none; }
-#savetodrive-div:hover+#safariWarning {
+#savetodrive-div:hover + #safariWarning {
   display:          block;
   background:       #75328AAA;
   color:            white;
@@ -775,7 +757,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
  */
 table.contracts-table {border-collapse: collapse;}
 table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
-table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
+table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
 
 /************************************************************************************
 * DATASHEETS (currently disabled)
@@ -803,10 +785,20 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   body.nonworkbookpage{ width: auto !important; }
 }
 
+/* set page sizes and margins */
+body:not(.LessonPlan, .narrativepage, .landscape) {
+  width: 7.5in; height:  10in;
+}
+body.landscape:not( .LessonPlan, .narrativepage ) { 
+  width: 10in; height: 7.5in; page:  landscape; } /* define landscape page */
+
 /************************************************************************************
  * PRINT MEDIA
  */
- @media print {
+@page { size: letter portrait; margin: 0.5in; }
+@page landscape { size: letter landscape; margin: 0.5in; }
+
+@media print {
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
