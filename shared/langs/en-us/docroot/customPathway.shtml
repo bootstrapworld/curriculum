@@ -17,6 +17,10 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
+        // remove lessons that don't belong in the graph
+        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-wescheme-intro', 'hoc-winter'];
+        lessonsToIgnore.forEach(l => delete graph[l]);
+        
         function populateLessons() {
             var search = location.search.substring(1);
             var {title, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
