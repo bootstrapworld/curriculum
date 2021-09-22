@@ -4,9 +4,9 @@
 <style>
 /* We override width:100% to allow circles and vspace
 to share the same line */
-#content .grid tr:nth-child(1){ height: 150pt; }
-#content .grid tr:nth-child(3){ height: 320pt; }
-#content .grid tr:nth-child(odd) td {border-bottom: 0 !important;}
+#content .grid tr:nth-child(1){ height: 130pt; }
+#content .grid tr:nth-child(3){ height: 260pt; }
+#content .grid tr:nth-child(odd) td {border-bottom: 0 !important; padding: 0 5px; }
 #content .contracts td { padding: 0 !important; }
 #content .contracts .editbox { background: none; }
 #content .contracts { background-color: #f7f7f8 !important; }
@@ -17,6 +17,12 @@ to share the same line */
 
 #content .draw tr:first-of-type { height: 3in; }
 #content .draw tr:last-of-type  { height: 6in; }
+
+div.circleevalsexp .value {
+  display:            inline-block;
+  margin:             2px 5px;
+  vertical-align:     top;
+}
 </style>
 ++++
 @do{
@@ -31,8 +37,6 @@ You’ll be investigating these two functions with your partner:
 | @show{ (contract "scale/xy" '("Number" "Number" "Image") "Image" )}
 | @show{ (contract "overlay" '("Image" "Images") "Image" )}
 |===
-
-@vspace{1ex}
 
 [.demo, cols="^.^1,^.^2,^.^3",stripes="none",options="header"]
 |===
