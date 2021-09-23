@@ -1687,7 +1687,7 @@
               (fprintf op "~s~n" (car s))
               (let ([x (caddr s)])
                 (cond [first? (set! first? #f)]
-                      [else (display ", " op2)])
+                      [else (display ",\n                " op2)])
                 (write (string-append (car x) " : " (cadr x)) op2))
               )
             (display "]" op2) (newline op2)

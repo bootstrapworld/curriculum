@@ -1330,7 +1330,7 @@ function buildpathwaynarrative() {
 
 function makeworkbookjson() {
 
-  echo doing makeworkbookjson "$@"
+  #echo doing makeworkbookjson "$@"
 
   local tgt=$1
 
@@ -1593,7 +1593,7 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
-  echo doing collectworkbookpages $d
+  #echo doing collectworkbookpages $d
   cd "$d"
   if test -d pages; then
     cd pages
@@ -1630,7 +1630,14 @@ function collectworkbookpages() {
 }
 
 function buildpathwayworkbooks() {
-  echo building pathway workbooks for $TGTPATHWAY
+  #echo building pathway workbooks for $TGTPATHWAY in $(pwd)
+
+  #echo topdir is $TOPDIR
+
+  mkdir -p $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY/resources/pages
+  mkdir -p $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY/resources/solution-pages
+
+  node ../../lib/makeWorkbook.js
 }
 
 function buildpathway() {
@@ -1722,7 +1729,6 @@ function buildpathway() {
     export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
 
     echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
-
 
     #echo Initializing $PUPPETEER_INPUT
 
@@ -1998,8 +2004,6 @@ for f in $ARGS; do
 done
 
 builddependencyjson
-
-echo pwd is $(pwd)
 
 for f in $ARGS; do
   export SRCPATHWAY=$f
