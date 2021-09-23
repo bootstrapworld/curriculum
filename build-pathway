@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-20 # last modified
+LASTMOD=2021-09-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1330,9 +1330,11 @@ function buildpathwaynarrative() {
 
 function makeworkbookjson() {
 
-  #echo doing makeworkbookjson "$@"
+  echo doing makeworkbookjson "$@"
 
   local tgt=$1
+
+  local filesvar=
 
   local wbpnf=
   local includesolutions=
@@ -1348,6 +1350,28 @@ function makeworkbookjson() {
     wbpnf=.cached/.workbook-long-page-index.rkt
   fi
 
+  if test "$tgt" = workbook; then
+    filesvar=workbookFiles
+  elif test "$tgt" = pd-workbook; then
+    filesvar=pdWorkbookFiles
+  elif test "$tgt" = bm-contracts; then
+    filesvar=bmContractsFiles
+  elif test "$tgt" = bm-contracts-sols; then
+    filesvar=bmContractsSolsFiles
+  elif test "$tgt" = workbook-sols; then
+    filesvar=workbookSolsFiles
+  elif test "$tgt" = workbook-long; then
+    filesvar=workbookLongFiles
+  elif test "$tgt" = pd-workbook-long; then
+    filesvar=pdWorkbookLongFiles
+  elif test "$tgt" = workbook-long-sols; then
+    filesvar=workbookLongSolsFiles
+  elif test "$tgt" = opt-exercises; then
+    filesvar=optExercisesFiles
+  elif test "$tgt" = opt-exercises-sols; then
+    filesvar=optExercisesSolsFiles
+  fi
+
   if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
     includesolutions=1
   fi
@@ -1358,8 +1382,7 @@ function makeworkbookjson() {
 
   #echo Initializing $PDFTK_INPUT_$tgt
 
-  rm -f $PDFTK_INPUT-$tgt
-  rm -f $PDFTK_INPUT-aspect-$tgt
+  echo "{ \"fileList\": [" > $PDFTK_INPUT-$tgt.json
 
   local currlesson=
 
@@ -1373,14 +1396,6 @@ function makeworkbookjson() {
       handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
       aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
       pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
-
-      prefixedHandle=
-
-      if test "$includesolutions"; then
-        prefixedHandle=T-$handle
-      else
-        prefixedHandle=S-$handle
-      fi
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=
@@ -1429,39 +1444,30 @@ function makeworkbookjson() {
 
       if test "$docfileext" = html; then
         if test -f "$docfile"; then
+          localpdffile=${docfile%.html}.pdf
           if test "$tgt" = workbook-long -o "$tgt" = workbook-long-sols; then
-            if test "$pageno"; then
-              sed -i -e 's/^<div id="footer">/\0<div class=pagenumberholder>'$pageno'<\/div>/' $docfile
-            fi
-            pdffile=.cached/.workbook-$prefixedHandle.pdf
-            localpdffile=${docfile%.html}.pdf
             if test ! -f "$localpdffile"; then
-              echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \".cached/.workbook-$prefixedHandle.pdf\" }" >> $PUPPETEER_INPUT
-              echo cp -p .cached/.workbook-$prefixedHandle.pdf $localpdffile >> $PDFTK_INPUT-local-pdfs.sh
+              echo ", { \"input\": \"$docfile\", \"aspect\": \"$aspect\", \"output\": \"$localpdffile\" }" >> $PUPPETEER_INPUT
             fi
           fi
 
-          echo $handle=.cached/.workbook-$prefixedHandle.pdf >> $PDFTK_INPUT-$tgt
+          echo \"$localpdffile\", >> $PDFTK_INPUT-$tgt.json
 
         else
-          echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
+          echo \"../../lib/$ABYSS.pdf\", >> $PDFTK_INPUT-$tgt.json
         fi
 
       elif test ! -f $docfile; then
-        echo $handle=../../lib/$ABYSS.pdf >> $PDFTK_INPUT-$tgt
+        echo \"../../lib/$ABYSS.pdf\", >> $PDFTK_INPUT-$tgt.json
 
       else
-        echo $handle=$docfile >> $PDFTK_INPUT-$tgt
+        echo \"$docfile\", >> $PDFTK_INPUT-$tgt.json
 
-      fi
-
-      if test $aspect = landscape; then
-        echo ${handle}west >> $PDFTK_INPUT-aspect-$tgt
-      else
-        echo ${handle} >> $PDFTK_INPUT-aspect-$tgt
       fi
 
     done
+
+    echo " \"ignoreFile\" ] }" >> $PDFTK_INPUT-$tgt.json
 
 }
 
@@ -1587,6 +1593,7 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
+  echo doing collectworkbookpages $d
   cd "$d"
   if test -d pages; then
     cd pages
@@ -1622,43 +1629,8 @@ function collectworkbookpages() {
   cd ..
 }
 
-function makeworkbookpdf() {
-
-  local tgt=$1
-
-  #echo doing makeworkbookpdf $tgt
-
-  local dest=
-
-  if test "$tgt" = workbook; then
-    dest=workbook/$tgt
-  elif test "$tgt" = pd-workbook; then
-    dest=resources/protected/$tgt
-  elif test "$tgt" = bm-contracts; then
-    dest=resources/pages/contracts
-  elif test "$tgt" = bm-contracts-sols; then
-    dest=resources/solution-pages/contracts
-  elif test "$tgt" = workbook-sols; then
-    dest=resources/protected/$tgt
-  elif test "$tgt" = workbook-long; then
-    dest=workbook/$tgt
-  elif test "$tgt" = pd-workbook-long; then
-    dest=resources/protected/$tgt
-  elif test "$tgt" = workbook-long-sols; then
-    dest=resources/protected/$tgt
-  elif test "$tgt" = opt-exercises; then
-    dest=workbook/$tgt
-  elif test "$tgt" = opt-exercises-sols; then
-    dest=resources/protected/$tgt
-  else
-    echo Bad target $tgt; exit
-  fi
-
-  if test -f $PDFTK_INPUT-$tgt; then
-    #echo doing pdftk $PDFTK_INPUT-$tgt
-    pdftk $(cat $PDFTK_INPUT-$tgt) cat $(cat $PDFTK_INPUT-aspect-$tgt) output $dest.pdf
-  fi
-
+function buildpathwayworkbooks() {
+  echo building pathway workbooks for $TGTPATHWAY
 }
 
 function buildpathway() {
@@ -1744,8 +1716,13 @@ function buildpathway() {
     TEMPF=$(mktemp); rm -f $TEMPF
     export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
     export PUPPETEER_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-puppeteer.json
-    export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
+
+    #export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
+
+    export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
+
     echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
+
 
     #echo Initializing $PUPPETEER_INPUT
 
@@ -1877,7 +1854,6 @@ function buildpathway() {
             test ! $NOPARALLEL && wait
     fi
 
-
     buildlessonplans
 
     buildpathwaynarrative
@@ -1904,6 +1880,7 @@ function buildpathway() {
         #TODO:  ↓ not needed?
         export PATHWAYROOTDIR=./
 
+        if false; then
         if test $BOOK; then
           if test $PDFpagesredone; then
             echo building workbook PDFs
@@ -1926,6 +1903,7 @@ function buildpathway() {
             fi
           done
           test ! $NOPARALLEL && wait
+        fi
         fi
       fi
     fi
@@ -2020,6 +1998,34 @@ for f in $ARGS; do
 done
 
 builddependencyjson
+
+echo pwd is $(pwd)
+
+for f in $ARGS; do
+  export SRCPATHWAY=$f
+  export SRCPATHWAY=${SRCPATHWAY#pathways/}
+  export SRCPATHWAY=${SRCPATHWAY%/}
+  export TGTPATHWAY="$SRCPATHWAY"
+  if test "$PROGLANG" = ""; then
+    if test "$SRCPATHWAY" = algebra; then
+      export PROGLANG=wescheme
+      export TGTPATHWAY=algebra-wescheme
+      buildpathwayworkbooks
+      export PROGLANG=pyret
+      export TGTPATHWAY=algebra-pyret
+      buildpathwayworkbooks
+    else
+      export PROGLANG=pyret
+      buildpathwayworkbooks
+    fi
+    export PROGLANG=
+  else
+    if test "$SRCPATHWAY" = algebra; then
+      export TGTPATHWAY=algebra-$PROGLANG
+    fi
+    buildpathwayworkbooks
+  fi
+done
 
 # only to shush now-benign error
 export PROGLANG=pyret
