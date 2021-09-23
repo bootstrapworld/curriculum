@@ -17,7 +17,6 @@ html, body {
 }
 
 p       { margin: 10px 0px; font-size: inherit; }
-#content a[href] { color:  #2156a5 !important; }
 code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
 mark    { background: none; color: inherit; }
 
@@ -42,7 +41,7 @@ table, td.tableblock>.content { margin-bottom: 0px; }
 tr th.tableblock code, td.tableblock code { background: none; }
 td.tableblock pre { background: none !important; }
 tr th.tableblock {
-  background:       #cccccc;
+  background:       #cccccc !important;
   padding:          .25em .5em;
   font-size:        1rem;
 }
@@ -55,19 +54,28 @@ td.halign-center div.circleevalsexp {
 
 /* The footer at the bottom of every page */
 .acknowledgment {
-  margin-top:       35px;
-  border-top:       dashed 2px black;
-  padding-top:      20px;
-  padding-bottom:   5px;
-  font-size:        0.8rem;
-  font-style:       italic;
+  margin-top:       35px !important;
+  border-top:       dashed 2px black !important;
+  padding-top:      20px !important;
+  padding-bottom:   5px !important;
+  font-size:        0.8rem !important;
+  font-style:       italic !important;
+  line-height:      inherit !important;
+}
+.acknowledgment * {
+  line-height: inherit !important;
 }
 .acknowledgment img {
-  width:            94px;
-  height:           37px;
-  float:            right;
+  width:            94px !important;
+  height:           37px !important;
+  float:            right !important;
 }
 #footer { background: rgba(0,0,0,.5); padding: 0px; }
+
+#footer .pagenumberholder {
+    display: none;
+    visibility: hidden;
+}
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
@@ -219,11 +227,11 @@ td.halign-center div.circleevalsexp {
   width:      calc(100% - (225px + 895px));
   min-width:  200px;
   height:     100%;
-  overflow-y: scroll;
   background: #eee;
   opacity:    0.3;
-  border-left: solid 1px black;
+  border-left:solid 1px black;
   transition: all 0.5s;
+  color:      black;
   box-shadow: -1px 2px 6px black;
   z-index:    9999;
   overflow:   scroll;
@@ -233,27 +241,34 @@ input.sidebarinput { margin-left: 10px; }
 
 .sidebar .sidebartitle {
   display:  none;
-  transform: rotate(90deg) translate(99px, -100px);
+  /*
+  transform: rotate(90deg) translate(148px, -48px);
   height: 25px;
+  width: 330px;
   background: #75328a;
   padding-left: 10px;
   color: white;
   font-weight: bold;
+  */
 }
 
 .sidebar:hover { opacity: 1; }
 .sidebar:hover .sidebartitle { display: none; }
+.sidebar .sidebarlessons { padding: 10px; }
+.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
 .sidebar .sidebarlessons ul { 
   background: white; 
   margin:     10px;
   box-shadow: inset 4px 0px 4px black;
+  height:     250px;
+  overflow:   scroll;
   padding:    10px;
 }
 .sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
 .sidebarlessons .prerequisite::after { content:'★'; } 
-.sidebarlessons strong {color: black; margin-left: 10px;}
+.sidebarlessons strong {color: black; }
 
-.sidebartextbooks {display: none;}
 .sidebarstandards div.standards-hierarchical-table {
     display: none;
 }
@@ -261,9 +276,15 @@ input.sidebarinput { margin-left: 10px; }
 .sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
+
+.sidebarstandards { padding-left: 10px; }
+
+.sidebartextbooks strong { color: black; }
+.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
+
 .sidebarbadges ul { margin-left: 0px; text-align: center; }
 .sidebarbadges li { list-style-type: none; display: inline-block; }
-.sidebarbadges img {width: 75px; transition: width 0.5s; }
+.sidebarbadges img {width: 110px; transition: width 0.5s; }
 .sidebarbadges img:hover {width: 200px; }
 
 /* Styling for the Materials section of the Lesson Summary */
@@ -764,13 +785,14 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
  * PRINT MEDIA
  */
 @page {
-    size:             8.5in 11in;   /* normal letter size paper */
-    margin:           0.5in 0.5in 2in 0.5in !important; /* make room for page number */
+    /* size:             8.5in 11in;  */ /* puppeteer takes care of this */
+    margin:           0.5in 0.75in !important; /* make room for page number */
     orphans:          0; /* never break a paragraph across pages */
     widows:           0;
 }
 
 @media print {
+  html { -webkit-print-color-adjust: exact; }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
   .sidebar, .section-link { display: none; }
@@ -828,10 +850,21 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursor { visibility: hidden;}
 
-  #savetodrive-div, .copyright, #footer, #outOfDate,
+  #savetodrive-div, .copyright, #footer-text, #outOfDate,
   .web-page-only {
    display: none !important; visibility: hidden; float: none;
   }
+
+  #footer .pagenumberholder {
+      display: block;
+      visibility: visible;
+      background-color: white;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+  }
+
 
   .datasheetpage .sect1 {
       margin-top: 3.5ex;
@@ -888,6 +921,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 26pt;}
   body:not(.LessonPlan) .sect1 > h2:first-child,
   body:not(.LessonPlan) .sect1 > h3:first-child,
   body:not(.LessonPlan) .sect2 > h3:first-child {
+    -webkit-print-color-adjust: exact !important;
     width:            100%;
     background:       black;
     margin-top:       0px;
