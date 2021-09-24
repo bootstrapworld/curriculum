@@ -6,13 +6,13 @@ body {
 	margin: auto;
 	color: 	black !important;
 	width:	7.5in;
+	border: solid 1px red;
 	height:	10in;
 	-webkit-print-color-adjust: exact;
 }
 
 /* stuff we want to hide */
 #footer, .acknowledgment, #savetodrive-div { display: none !important; }
-
 h1:before {
 	content: url('../../images/Logo with Text.png');
  	display: block;
@@ -34,11 +34,15 @@ table tr:nth-child(6) { background: rgb(168, 228, 237); }
 table tr:nth-child(7) { background: rgb(234, 122, 122); }
 table tr td { padding: 5px; border: none !important; }
 
+#header, #header *, h1 { background: none !important; color: black !important; }
+
 /* Table footer will be used as our page footer */
 tfoot, tfoot tr { background: none !important; }
 tfoot { margin: 10px 0; }
 tfoot td { padding: 0 !important; }
 tfoot img { height: 50px; margin: 5px; }
+
+tbody tr:last-child img { background: white; }
 
 @media screen { table tr:before { content: none !important; }
 @media print {
@@ -46,10 +50,12 @@ tfoot img { height: 50px; margin: 5px; }
 	tfoot { position: fixed !important; bottom: 0 !important; }
 	table { page-break-before: avoid; }
 
+
 	/* Which row to break? */
-	table tr:nth-child(3):before {content:""; display: block; page-break-before: always;}
+	table tr:nth-child(99):before {content:""; display: block; page-break-before: always;}
 }
 </style>
+
 ++++
 
 Like CMP3, Bootstrap is field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners.  Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you’re already doing in your classroom. __Teaching 7th grade math with Bootstrap also addresses many CS Standards, including: 2-AP-1, 2-AP-10, 2-AP-11, 2-AP-13, 2-AP-14, 2-AP-17.__
