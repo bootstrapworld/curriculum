@@ -1393,9 +1393,8 @@ function makeworkbookjson() {
       fi
       lessondir=$(echo $pdfpagespec|$SED -e 's/^("\([^"]*\).*/\1/')
       workbookpage=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"\([^"]*\).*/\1/')
-      handle=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
-      pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
+      aspect=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"\([^"]*\).*/\1/')
+      pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
         pageno=false

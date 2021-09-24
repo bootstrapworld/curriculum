@@ -104,7 +104,7 @@
       (let ([f (string-append *pathway-root-dir* ".cached/.workbook-page-index.rkt")])
         (if (file-exists? f)
             (let ([xx (call-with-input-file f read)])
-              (map (lambda (x) (list (list (list-ref x 0) (list-ref x 1)) (list-ref x 4))) xx)
+              (map (lambda (x) (list (list (list-ref x 0) (list-ref x 1)) (list-ref x 3))) xx)
               )
             '()))
       '()))
@@ -442,12 +442,16 @@
 (define (workbook-pagenum lesson snippet)
   ;(printf "workbook-pagenum ~s ~s\n" lesson snippet)
   ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
+  #|
   (let* ([snippet.adoc
            (path->string
              (path-replace-extension snippet ".adoc"))]
          [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
                 (assoc (list lesson snippet) *workbook-pagenums*))])
-    (if c (cadr c) #f)))
+    (if c (cadr c) #f))
+  |#
+  #f
+  )
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
