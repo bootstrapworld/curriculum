@@ -788,13 +788,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
   body.nonworkbookpage{ width: auto !important; }
 }
 
-/* set page sizes and margins */
-body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; height:  10in;
-}
-body.landscape:not( .LessonPlan, .narrativepage ) { 
-  width: 10in; height: 7.5in; page:  landscape; } /* define landscape page */
-
 /************************************************************************************
  * PRINT MEDIA
  */
@@ -802,6 +795,13 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+  /* set page sizes and margins */
+  body:not(.LessonPlan, .narrativepage, .landscape) {
+    width: 7.5in; height:  10in;
+  }
+  body.landscape:not( .LessonPlan, .narrativepage ) { 
+    width: 10in; height: 7.5in; page:  landscape; } /* define landscape page */
+
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
