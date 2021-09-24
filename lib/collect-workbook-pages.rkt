@@ -28,11 +28,9 @@
 
 ;
 
-(define *pageno* 0)
-
 (define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt.kp"))
 
-(define (write-pages-info lesson-dir o ol oe #:pageno [pageno "yes"]
+(define (write-pages-info lesson-dir o ol oe #:pageno [pageno "true"]
                           #:back-matter-port [back-matter-port #f])
   ;(printf "doing write-pages-info pageno = ~s\n" pageno)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
@@ -66,9 +64,6 @@
                 (set! aspect (list-ref page 1)))
               (when (>= n 3)
                 (set! this-pageno (list-ref page 2)))
-              (when (string-ci=? this-pageno "yes")
-                (set! *pageno* (+ *pageno* 1))
-                (set! this-pageno *pageno*))
               ;(printf "this-pageno = ~s\n" this-pageno)
               (fprintf o2 "~a\n" file)
               (let ([handle (gen-handle-pag)])
@@ -88,8 +83,8 @@
           (when (>= n 2)
             (set! aspect (list-ref page 1)))
           (let ([handle (gen-handle-nonpag)])
-          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
-          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
+          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "false")
+          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "false")
           ))))))
 
 (define (contracts-page? dir file)
@@ -115,14 +110,14 @@
             (fprintf ol "(\n")
             (fprintf oe "(\n")
             ;TODO skip if dir nonexistent
-            (write-pages-info "front-matter" o ol oe #:pageno "no")
+            (write-pages-info "front-matter" o ol oe #:pageno "false")
             (for ([lesson-dir *lesson-order*])
               (write-pages-info lesson-dir o ol oe))
             (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
               (lambda (ob)
                 (fprintf ob "(\n")
                 ;TODO skip if dir nonexistent
-                (write-pages-info "back-matter" o ol oe #:pageno "no" #:back-matter-port ob)
+                (write-pages-info "back-matter" o ol oe #:pageno "false" #:back-matter-port ob)
                 (fprintf ob ")\n")
                 )
               #:exists 'replace)

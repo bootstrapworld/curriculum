@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-23 # last modified
+LASTMOD=2021-09-24 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1382,7 +1382,7 @@ function makeworkbookjson() {
 
   #echo Initializing $PDFTK_INPUT_$tgt
 
-  echo "{ \"fileList\": [" > $PDFTK_INPUT-$tgt.json
+  echo "{ \"fileList\": [ \"ignoreElement\" " > $PDFTK_INPUT-$tgt.json
 
   local currlesson=
 
@@ -1398,7 +1398,11 @@ function makeworkbookjson() {
       pageno=$(echo $pdfpagespec|$SED -e 's/^("[^"]*" *"[^"]*" *"[^"]*" *"[^"]*" *"\?\([^")]*\).*/\1/')
 
       if test "$pageno" = no -o "$pageno" = No -o "$pageno" = NO; then
-        pageno=
+        pageno=false
+      fi
+
+      if test "$pageno" != false; then
+        pageno=true
       fi
 
       freshlesson=
@@ -1451,23 +1455,23 @@ function makeworkbookjson() {
             fi
           fi
 
-          echo \"$localpdffile\", >> $PDFTK_INPUT-$tgt.json
+          echo ", { \"file\": \"$localpdffile\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
 
         else
-          echo \"../../lib/$ABYSS.pdf\", >> $PDFTK_INPUT-$tgt.json
+          echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
         fi
 
       elif test ! -f $docfile; then
-        echo \"../../lib/$ABYSS.pdf\", >> $PDFTK_INPUT-$tgt.json
+        echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
 
       else
-        echo \"$docfile\", >> $PDFTK_INPUT-$tgt.json
+        echo ", { \"file\": \"$docfile\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
 
       fi
 
     done
 
-    echo " \"ignoreFile\" ] }" >> $PDFTK_INPUT-$tgt.json
+    echo "] }" >> $PDFTK_INPUT-$tgt.json
 
 }
 
