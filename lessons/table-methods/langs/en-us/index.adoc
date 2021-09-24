@@ -37,9 +37,6 @@
 @ifproglang{pyret}{
 * All students should log into @link{https://code.pyret.org, CPO} and open the @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XXc7qv, Table Methods Starter File}}
 
-| Supplemental Resources
-|
-
 @lang-prereq
 |===
 
@@ -53,7 +50,7 @@ Students sort a column on a table by actually _changing_ the table.}
 
 === Launch
 @ifproglang{pyret}{
-Load the @link{https://code.pyret.org/editor#share=1Q7ZiIm0a7US2gZ0mD71E5r3n119Bp8pZ, Table Methods Starter File}, go to the File menu, and click "Save a Copy".
+Load the @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XXc7qv, Table Methods Starter File}, go to the File menu, and click "Save a Copy".
 
 This program has several things you've never seen before! This activity is about reading carefully, and trying to make sense of new code.}
 
@@ -68,14 +65,14 @@ Student work in groups or pairs.
 - Complete @printable-exercise{pages/row-and-function-definitions.adoc} in their student workbooks.
 - Complete @printable-exercise{pages/exploring-definitions.adoc} in their student workbooks.
 
-Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples:
+Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
 
-. The first example simply says that animalA is not a dog (`is-dog` returns `false`). We know this because we defined it to be a cat.
-. The second example shows us the actual work involved: we know the species of animalA is `"cat"`, and comparing that to the String `"dog"` will return false.
-. The third example shows __all the work__: given the Row `animalA`, we lookup the `"species"` column and compare it to the String `"dog"`.
+. The first example tells us that we should expect `is-dog` to return `false`. We defined this row to be a cat, so we want to see a `false` result!
+. The second example shows us some of the work involved: we know the species of the row is `"cat"`, and comparing that to the String `"dog"` will return false.
+. The third example shows __all the work__: given the `cat-row`, we lookup the value in the `"species"` column and compare it to the String `"dog"`.
 
 [.lesson-instruction]
-Write three similar examples, this time using `animalB`.
+Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
 }
 
 @ifproglang{codap}{
@@ -114,17 +111,17 @@ Have students find the contract for `.order-by` in their contracts pages. The `.
 The Transformers plugin allows students to transform datasets to produce new, distinct output datasets or values, instead of modifying the original input dataset itself. Have students find the contract for the `sort` transformer in their contracts pages. The `sort` method consumes a dataset to sort, a formula (“key expression”), an indication of the type the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
 
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
+[.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 a|
 @span{.title}{What's a Contract!?}
 Contracts help us keep track of the different Transformers we'll be using. Every contract has three imporant parts:
 
-1. The transformer’s name
+. The transformer’s name
 
-2. The domain of the transformer - the type(s) of data we give it
+. The domain of the transformer - the type(s) of data we give it
 
-3. The range of the transformer - the type of data the transformer produces
+. The range of the transformer - the type of data the transformer produces
 
 Check out the screenshot of the Transformers plugin below. What are the domain and range for `Sort`?
 

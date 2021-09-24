@@ -17,6 +17,10 @@
     </style>
     <script src="dependency-graph.js"></script>
     <script>
+        // remove lessons that don't belong in the graph
+        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-wescheme-intro', 'hoc-winter'];
+        lessonsToIgnore.forEach(l => delete graph[l]);
+        
         function populateLessons() {
             var search = location.search.substring(1);
             var {title, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
@@ -42,7 +46,9 @@
             var accessible =  Object.getOwnPropertyNames(graph)
                 .filter(name => graph[name].prerequisites
                     .every(p => lessons.includes(p)))
-                .filter(name => !lessons.includes(name));
+                .filter(name => !lessons.includes(name))
+                .sort((a,b) => 
+                graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
             console.log('lessons are', lessons);
             console.log('accessible', accessible);
 
@@ -84,7 +90,7 @@
         <div class="clearfix item bottom-border">
             <h2>What's Next?</h2>
             <p/>
-            Once your students have finished this pathway, there are plenty of other Bootstrap lessons your students are ready to dive into!
+            <strong>What's next?</strong> Once your students have finished this pathway, they've already completed all the prerequisites for the following lessons:
             <ul id="accessible-lesson-list">
             </ul>
         </div>

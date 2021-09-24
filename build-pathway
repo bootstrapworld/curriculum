@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-13 # last modified
+LASTMOD=2021-09-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -524,6 +524,14 @@ function addanalytics() {
     $f
 }
 
+function bumpcsspathdir() {
+  local f=$1
+  #echo doing bumpcsspathdir $f
+  $SED -i \
+    -e '/^<link.*curriculum.css/s/\.\.\(\/lib\/curriculum\.css\)/\1/' \
+    $f
+}
+
 function resolveabbrevs() {
   #echo doing resolveabbrevs "$@"
   local f=$1
@@ -805,7 +813,7 @@ function doadocs() {
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a cachedir=.cached/ -a lessonplandir= \
-      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
+      -a stylesheet=$PATHWAYROOTDIR../../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $ff_asc
   fi
@@ -817,6 +825,7 @@ function doadocs() {
     fpdf=$fbase.pdf
     if test -f "$fhtmlcached"; then
       mv $fhtmlcached $fhtml
+      bumpcsspathdir $fhtml
       resolveabbrevs $fhtml
       if test ! $OTHERDIR; then
         insertgdrivesave $fhtml
@@ -1859,7 +1868,6 @@ function buildpathway() {
             done
             test ! $NOPARALLEL && wait
     fi
-
 
     buildlessonplans
 
