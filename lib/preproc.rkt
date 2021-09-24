@@ -440,7 +440,7 @@
   (fprintf o "\n\ninclude::{cachedir}.pathway-glossary.asc[]\n\n"))
 
 (define (workbook-pagenum lesson snippet)
-  ;(printf "workbook-pagenum ~s ~s\n" lesson snippet)
+  ;(printf "doing workbook-pagenum ~s ~s\n" lesson snippet)
   ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
   #|
   (let* ([snippet.adoc
@@ -450,7 +450,7 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f))
   |#
-  #f
+  #t
   )
 
 (define (exercise-title f)
@@ -509,6 +509,7 @@
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
+                          ;(printf "link-type= ~s; nopdf= ~s; book= ~s; error-cascase= ~s\n" link-type *nopdf* *book* error-cascade?)
                           (unless (or (equal? link-type "opt-printable-exercise")
                                       *nopdf*
                                       (not *book*)
