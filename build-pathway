@@ -834,6 +834,11 @@ function doadocs() {
     if test -f "$fpdf"; then
       rm -f "$fpdf"
     fi
+    if test $RESOURCEDOCS; then
+      if test -f "$fhtml"; then
+        echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+      fi
+    fi
   done
 
 }
