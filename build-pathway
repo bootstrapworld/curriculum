@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-24 # last modified
+LASTMOD=2021-09-25 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2024,31 +2024,33 @@ done
 
 builddependencyjson
 
-for f in $ARGS; do
-  export SRCPATHWAY=$f
-  export SRCPATHWAY=${SRCPATHWAY#pathways/}
-  export SRCPATHWAY=${SRCPATHWAY%/}
-  export TGTPATHWAY="$SRCPATHWAY"
-  if test "$PROGLANG" = ""; then
-    if test "$SRCPATHWAY" = algebra; then
-      export PROGLANG=wescheme
-      export TGTPATHWAY=algebra-wescheme
-      buildpathwayworkbooks
-      export PROGLANG=pyret
-      export TGTPATHWAY=algebra-pyret
-      buildpathwayworkbooks
+if test ! $NOPDF; then
+  for f in $ARGS; do
+    export SRCPATHWAY=$f
+    export SRCPATHWAY=${SRCPATHWAY#pathways/}
+    export SRCPATHWAY=${SRCPATHWAY%/}
+    export TGTPATHWAY="$SRCPATHWAY"
+    if test "$PROGLANG" = ""; then
+      if test "$SRCPATHWAY" = algebra; then
+        export PROGLANG=wescheme
+        export TGTPATHWAY=algebra-wescheme
+        buildpathwayworkbooks
+        export PROGLANG=pyret
+        export TGTPATHWAY=algebra-pyret
+        buildpathwayworkbooks
+      else
+        export PROGLANG=pyret
+        buildpathwayworkbooks
+      fi
+      export PROGLANG=
     else
-      export PROGLANG=pyret
+      if test "$SRCPATHWAY" = algebra; then
+        export TGTPATHWAY=algebra-$PROGLANG
+      fi
       buildpathwayworkbooks
     fi
-    export PROGLANG=
-  else
-    if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-$PROGLANG
-    fi
-    buildpathwayworkbooks
-  fi
-done
+  done
+fi
 
 # only to shush now-benign error
 export PROGLANG=pyret
