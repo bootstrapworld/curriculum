@@ -79,11 +79,6 @@ tr th.tableblock {
 }
 #footer { background: rgba(0,0,0,0.5); padding: 0px; height:  24px; }
 
-#footer .pagenumberholder {
-    display: none;
-    visibility: hidden;
-}
-
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
 
@@ -502,7 +497,7 @@ table .autonum::after { content: none; }
   box-shadow: 2px 1px 5px black;
 }
 
-.studentAnswerShort  { min-width: 60pt;  }
+:not(.circleevalsexp) .studentAnswerShort  { min-width: 60pt;  }
 .studentAnswerMedium { min-width: 100pt; }
 .studentAnswerLong   { min-width: 140pt; }
 
@@ -786,6 +781,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
     line-height:      2.5rem;
   }
   body.nonworkbookpage{ width: auto !important; }
+  /* no pagenums on web pages */
+  #footer .pagenumberholder { display: none; }
 }
 
 /************************************************************************************
@@ -795,6 +792,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+
   /* set page sizes and margins */
   body:not(.LessonPlan, .narrativepage, .landscape) {
     width: 7.5in; height:  10in;
