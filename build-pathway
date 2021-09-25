@@ -524,6 +524,14 @@ function addanalytics() {
     $f
 }
 
+function bumpcsspathdir() {
+  local f=$1
+  #echo doing bumpcsspathdir $f
+  $SED -i \
+    -e '/^<link.*curriculum.css/s/\.\.\(\/lib\/curriculum\.css\)/\1/' \
+    $f
+}
+
 function resolveabbrevs() {
   #echo doing resolveabbrevs "$@"
   local f=$1
@@ -807,7 +815,7 @@ function doadocs() {
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a cachedir=.cached/ -a lessonplandir= \
-      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
+      -a stylesheet=$PATHWAYROOTDIR../../../lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $ff_asc
   fi
@@ -819,6 +827,7 @@ function doadocs() {
     fpdf=$fbase.pdf
     if test -f "$fhtmlcached"; then
       mv $fhtmlcached $fhtml
+      bumpcsspathdir $fhtml
       resolveabbrevs $fhtml
       if test ! $OTHERDIR; then
         insertgdrivesave $fhtml
@@ -826,6 +835,11 @@ function doadocs() {
     fi
     if test -f "$fpdf"; then
       rm -f "$fpdf"
+    fi
+    if test $RESOURCEDOCS; then
+      if test -f "$fhtml"; then
+        echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+      fi
     fi
   done
 
@@ -1828,6 +1842,7 @@ function buildpathway() {
     export LESSONSUBDIR=resources
 
     if test $REFRESHRESOURCES; then
+      export RESOURCEDOCS=1
       for d in *; do
         if test -d "$d"; then
           if test "$d" = datasheets; then
@@ -1838,6 +1853,7 @@ function buildpathway() {
           recursiveadoc "$d" "$PATHWAYROOTDIR" "$LESSONSUBDIR"
         fi
       done
+      export RESOURCEDOCS=
     fi
 
     cd ..

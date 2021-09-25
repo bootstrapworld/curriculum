@@ -45,7 +45,7 @@
 [.lesson-instruction]
 @ifproglang{pyret}{Students should log into @link{https://code.pyret.org, CPO} open the @online-exercise{https://code.pyret.org/editor#share=1d3HuG_LjdX9HpfQPCmVmDG9mYml4nOX8&v=ebd213d, "Expanded Animals Starter File"}, and save a copy.}
 
-@ifproglang{codap}{Students should log into CODAP and open Animals Dataset - Full population.}
+@ifproglang{codap}{Students should log into CODAP and open @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json, Animals Dataset - Full population}.}
 
 == Flip the Script: Inference v. Probability @duration{30 minutes}
 
@@ -75,6 +75,9 @@ Sampling is a complicated issue. The main reason for doing inference is to guess
 Let’s see what happens if we switch from smaller to larger sample sizes, if we’re taking a random sample of shelter animals to infer what’s true about the larger population...
 
 === Investigate
+
+@ifproglang{codap}{@span{.right}{@image{images/sampler-plugin-default.PNG,"" ,300}}}
+
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter. @ifproglang{pyret}{How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
 [.lesson-instruction]
@@ -87,7 +90,9 @@ The Animals Dataset we've been using is just one _sample_ taken from a very larg
 
 Direct students to select `Sampler` from the dropdown menu of Plugins. The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
 
-In the `Options` tab of the `Sampler`, students choose whether cases will be collected _with replacement_ or _without replacement_. Discuss with students which makes the most sense for our dataset.
+Before entering any specifications (number of items, number of samples) or interacting with the plugin any further, discuss with students the sampler in default mode. How many turquoise balls do they see? Why is there that amount? How about the brackets alongside the collection of turquoise balls? Why are there five?
+
+After a bit of noticing and wondering, invite students to go to the `Options` tab of the `Sampler`. Here, students choose whether cases will be collected _with replacement_ or _without replacement_. Discuss with students which makes the most sense for our dataset.
 
 [.lesson-instruction]
 - If a particular animal can be selected more than one time, then we are sampling _with replacement_.  In a drawing-names-from-a-hat scenario, we’d return each name to the hat after selecting it.
@@ -101,8 +106,8 @@ Now that students are comfortable using the `Sampler`, it's time to dig into the
 
 [.lesson-instruction]
 - Divide the class into groups of 3-5 students.
-- Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
-}
+- Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.}
+
 
 === Common Misconceptions
 Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
