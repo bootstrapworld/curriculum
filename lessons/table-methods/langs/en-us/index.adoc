@@ -98,17 +98,17 @@ Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` 
 
 === Overview
 @ifproglang{pyret}{
-Students learn to sort Rows of a Table in ascending or descending order, according to one column.}
+Students learn to sort rows of a table in ascending or descending order, according to one column.}
 
 @ifproglang{codap}{
-Using the `sort` transformer, students sort Rows of a Table in ascending or descending order, according to one column.}
+Using the `sort` transformer, students sort rows of a table in ascending or descending order, according to one column.}
 
 === Launch
 @ifproglang{pyret}{
 Have students find the contract for `.order-by` in their contracts pages. The `.order-by` method consumes a String (the name of the column by which we want to order) and a Boolean (true for ascending, false for descending). But what does it produce?}
 
 @ifproglang{codap}{
-The Transformers plugin allows students to transform datasets to produce new, distinct output datasets or values, instead of modifying the original input dataset itself. Have students find the contract for the `sort` transformer in their contracts pages. The `sort` method consumes a dataset to sort, a formula (“key expression”), an indication of the type the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
+The transformers plugin allows students to transform datasets to produce new, distinct output datasets or values, instead of modifying the original input dataset itself. Have students find the contract for the `sort` transformer in their contracts pages. The `sort` method consumes a dataset to sort, a formula (“key expression”), an indication of the type the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
 
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
@@ -118,14 +118,14 @@ a|
 Contracts help us keep track of the different Transformers we'll be using. Every contract has three imporant parts:
 
 . The transformer’s name
-
 . The domain of the transformer - the type(s) of data we give it
-
 . The range of the transformer - the type of data the transformer produces
 
-Check out the screenshot of the Transformers plugin below. What are the domain and range for `Sort`?
+Check out the screenshot of the transformers plugin below. What are the domain and range for `Sort`?
 
 @centered-image{images/sort-transformer-contract.PNG,"" ,300}
+
+Can you find a transformer that has `boolean` as its range? The transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
 
 |===
 }
@@ -218,7 +218,7 @@ Debrief with students. Some guiding questions on filtering:
 Students learn how to _build columns_, @ifproglang{pyret}{ using the `.build-column` table method} @ifproglang{codap}{using the `Build Attribute` transformer}.
 
 === Launch
-Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} in their contracts pages. @ifproglang{pyret}{The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function?} @ifproglang{codap}{The `Build Attribute` transformer makes a new copy of a dataset, and adds a new attribute. We must provide a dataset, a name for the new attribute, an existing collection to add the attribute to, a formula for the attribute’s values, and an indication of the type of value the formula will evaluate to.}
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Have students find the contract for @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} in their contracts pages. @ifproglang{pyret}{The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function?} @ifproglang{codap}{The `Build Attribute` transformer makes a new copy of a dataset, and adds a new attribute. We must provide a dataset, a name for the new attribute, an existing collection to add the attribute to, a formula for the attribute’s values, and an indication of the type of value the formula will evaluate to.}
 
 === Investigate
 [.lesson-instruction]
