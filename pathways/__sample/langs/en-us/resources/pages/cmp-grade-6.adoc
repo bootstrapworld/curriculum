@@ -2,27 +2,34 @@
 
 ++++
 <style>
+/* stuff we want to hide */
+#footer, .acknowledgment, #savetodrive-div { display: none !important; }
+
 body {
 	margin: auto;
 	color: 	black !important;
 	width:	7.5in;
-	border: solid 1px red;
 	height:	10in;
 	-webkit-print-color-adjust: exact;
 }
 
-/* stuff we want to hide */
-#footer, .acknowledgment, #savetodrive-div { display: none !important; }
+#header, #header *, h1 { background: none !important; color: black !important; }
+h1, h2, .footer { font-size: 12pt; margin: 0px 6px; text-align: center !important; }
 h1:before {
 	content: url('../../images/Logo with Text.png');
  	display: block;
 }
-h1, h2, tfoot td { font-size: 12pt; margin: 0px 6px; text-align: center !important; }
 .ulist p, em, strong, #content { padding: 0 !important; margin: 0 !important; }
 .funders { border: solid gray; border-width: 1px 0; margin: 10px 0; }
 
 /* Table formatting */
-table { order-collapse: separate; border-spacing: 2px 5px; border: none !important; }
+table {
+	order-collapse: separate;
+	border-spacing: 2px 5px;
+	border: none !important;
+	margin-bottom: 1.75in;
+	page-break-before: avoid;
+}
 tr th.tableblock, p { font-size: 0.8rem !important; margin: 0; }
 tr th.tableblock { background: rgb(182, 215, 168); padding: 2px; }
 table tr:nth-child(1) { background: rgb(207, 226, 243); }
@@ -32,27 +39,18 @@ table tr:nth-child(4) { background: rgb(226, 195, 242); }
 table tr:nth-child(5) { background: rgb(242, 195, 195); }
 table tr:nth-child(6) { background: rgb(168, 228, 237); }
 table tr:nth-child(7) { background: rgb(234, 122, 122); }
+tbody tr:nth-child(7) img { background: white; }
 table tr td { padding: 5px; border: none !important; }
 
-#header, #header *, h1 { background: none !important; color: black !important; }
+.footer { height: 1.3in; position: relative; margin: 10px auto; width: 7.5in; }
+.footer img { height: 50px; margin: 5px; }
 
-/* Table footer will be used as our page footer */
-tfoot, tfoot tr { background: none !important; }
-tfoot { margin: 10px 0; }
-tfoot td { padding: 0 !important; }
-tfoot img { height: 50px; margin: 5px; }
-
-tbody tr:last-child img { background: white; }
-
-@media screen { table tr:before { content: none !important; }
 @media print {
-	@page { size: letter portrait !important; }
-	tfoot { position: fixed !important; bottom: 0 !important; }
-	table { page-break-before: avoid; }
-
-
-	/* Which row to break? */
-	table tr:nth-child(99):before {content:""; display: block; page-break-before: always;}
+	.footer {
+		margin-top: -1.3in; /* always negate the height */
+		bottom: 0 !important;
+		page-break-before: always;
+	}
 }
 </style>
 ++++
@@ -61,7 +59,7 @@ Like CMP3, Bootstrap is field-tested and research-validated, with a focus on dee
 
 @vspace{1ex}
 
-[cols=".^1a,6a", stripes="none",options="header, footer"]
+[cols=".^1a,6a", stripes="none",options="header"]
 |===
 | *CMP Unit*
 | *Integrated Computing Lessons that can extend the CMP3 Unit*
@@ -103,11 +101,15 @@ _Statistics and Data Analysis_
 *Spread of a Dataset*
 
 - Simple code generates 5 number summaries, box plots and/or histograms for any dataset, connecting this generally abstract concept to real world analysis.
-2+| // footer row
+|===
+
+[.footer]
+--
 Excited to learn more? @link{http://bootstrapworld.org/materials/, Our materials} are free of charge, and we love training teachers to use them! @link{https://www.bootstrapworld.org/workshops/index.shtml, Sign up for a workshop} today!
 
 [.funders]
 Created with support from: @image{../../../../lib/images/nsf.png}
 
-www.BootstrapWorld.org  \|  contact@BootstrapWorld.org
-|===
+www.BootstrapWorld.org  |  contact@BootstrapWorld.org
+--
+
