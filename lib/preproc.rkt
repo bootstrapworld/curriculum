@@ -46,13 +46,19 @@
 
 (define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
 
-(define *pathway* (truthy-getenv "SRCPATHWAY"))
+(define *pathway* (or (truthy-getenv "SRCPATHWAY") ""))
 
 (define *lesson-plan* (truthy-getenv "LESSONPLAN"))
 
+;(printf "LESSONPLAN is ~s\n" *lesson-plan*)
+
 (define *lesson* (truthy-getenv "LESSON"))
 
+;(printf "LESSON is ~s\n" *lesson*)
+
 (define *lesson-subdir* (truthy-getenv "LESSONSUBDIR"))
+
+;(printf "LESSONSUBDIR is ~s\n" *lesson-subdir*)
 
 (define *narrative* (truthy-getenv "NARRATIVE"))
 
@@ -84,6 +90,14 @@
 
 (define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
 
+(define *dist-root-dir* (getenv "DISTROOTDIR"))
+
+;(printf "distrootdir= ~s\n" *dist-root-dir*)
+
+(define *target-pathway* (or (getenv "TGTPATHWAY") "notDoingPathway"))
+
+;(printf "tgtpathway= ~s\n" *target-pathway*)
+
 (define *lang-root-dir*
   (let ([x (truthy-getenv "LANGROOTDIR")])
     (or x (string-append *pathway-root-dir* "../../"))))
@@ -92,10 +106,12 @@
   (string-append *pathway-root-dir* ".cached/.workbook-lessons.txt.kp"))
 
 (define *pathway-exercises-file*
-  (string-append *pathway-root-dir* "resources/.workbook-exercises.rkt.kp"))
+  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-exercises.rkt.kp"))
+
+;(printf "pwyexf= ~s\n" *pathway-exercises-file*)
 
 (define *pathway-lessons-containing-exercises-file*
-  (string-append *pathway-root-dir* "resources/.workbook-lessons-containing-exercises.rkt.kp"))
+  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-lessons-containing-exercises.rkt.kp"))
 
 (define *in-file* #f)
 
@@ -468,10 +484,11 @@
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
   ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
   (when (equal? lesson-dir *lesson*) (set! lesson-dir #f))
+  ;(printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
   (let* ([lesson (or lesson-dir *lesson*)]
          [g (string-append lesson "/" pages-dir "/" snippet)]
          [g-in-pages (string-append lesson "/pages/" snippet)]
-         [f (string-append *pathway-root-dir* g)]
+         [f (string-append *dist-root-dir* "lessons/" g)]
          [f.src f]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
@@ -486,6 +503,7 @@
                                          (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
                                          (set! g (path-replace-extension g ".pdf"))]))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
+    ;(printf "f= ~s\n" f)
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
@@ -793,6 +811,7 @@
           )))))
 
 (define (display-lesson-description desc o)
+  ;(printf "doing display-lesson-description\n")
   (call-with-output-file ".cached/.index-desc.txt.kp"
     (lambda (o)
       (display desc o) (newline o))
@@ -983,6 +1002,8 @@
           (set! *internal-links-port* (open-output-file internal-links-file))
           (set! *external-links-port* (open-output-file external-links-file))))
       ;
+      ;(printf "*ternal links ports set up\n")
+      ;
       (when *lesson-plan*
         (for ([x *lessons-and-standards*])
           (when (string=? (car x) *lesson-plan*)
@@ -1088,6 +1109,7 @@
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 )
+                            ;(printf "doing ~s\n" directive)
                             (let* ([args (read-commaed-group i directive)]
                                    [n (length args)]
                                    [page (car args)]
@@ -1174,7 +1196,7 @@
                            [(string=? directive "lesson-description")
                             (unless *lesson-plan* ;TODO: or LESSON or both?
                               (error 'ERROR
-                                     "WARNING: @lesson-description (~a,~a) valid only in lesson plan"
+                                     "WARNING: @lesson-description (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (display-lesson-description (read-group i directive) o)]
                            [(string=? directive "all-exercises")
@@ -1262,6 +1284,7 @@
                                   [else (read-group i directive)
                                         (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifpathway")
+                            ;(printf "doing ifpathway ~s\n" *pathway*)
                             (let ([pathways (read-commaed-group i directive)])
                               (cond [(member *pathway* pathways)
                                      (display-begin-span #f o)]
@@ -1404,7 +1427,9 @@
       ;
 
       (when (or *lesson-plan* *narrative*)
-        (add-exercises)
+        ;no longer possible to append to pathway's file, as there
+        ;is no pathway at this stage
+        ;(add-exercises)
         (create-glossary-subfile))
 
       (when *lesson-plan*
@@ -1418,7 +1443,7 @@
         (let ([prim-file (if *lesson-plan* ".cached/.index.primtxt"
                              (if (and *workbook-page?* *lesson*)
                                  (make-temporary-file ".pageprim-~a.primtxt" #f
-                                                      (format "~a/~a/.cached" *pathway-root-dir*
+                                                      (format "~a/lessons/~a/.cached" *dist-root-dir*
                                                               *lesson*)
                                                       )
                                  #f))])
