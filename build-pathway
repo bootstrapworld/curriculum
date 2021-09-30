@@ -1248,23 +1248,21 @@ function builddependencyjson() {
       fi
       titletxt=$(cat $L/.cached/.index.titletxt|$SED -e 's/"/\\"/g')
       desctxt=$(cat $L/.cached/.index-desc.txt.kp|$SED -e 's/"/\\"/g')
-      pagestxt=$(cat $L/pages/.cached/.workbook-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g')
-      if test "$pagestxt"; then
-        pagestxt=\"$pagestxt\"
-      fi
+      pagestxt=$(cat $L/pages/.cached/.workbook-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
+      exerpagestxt=
       if test -f $L/pages/.cached/.exercise-pages-ls.txt.kp; then
-        exerpagestxt=$(cat $L/pages/.cached/.exercise-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g')
-      else
-        exerpagestxt=
+        exerpagestxt=$(cat $L/pages/.cached/.exercise-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
       fi
-      if test "$exerpagestxt"; then
-        exerpagestxt=\"$exerpagestxt\"
+      primstxt=
+      if test -f $L/.cached/.index-primitives.txt.kp; then
+        primstxt=$(cat $L/.cached/.index-primitives.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
       fi
       echo "  \"$Lbasename\" : {" >> $GRAPHFILE
       echo "    title: \"$titletxt\"," >> $GRAPHFILE
       echo "    description: \"$desctxt\"," >> $GRAPHFILE
       echo "    pages: [$pagestxt]," >> $GRAPHFILE
       echo "    exercisePages: [$exerpagestxt]," >> $GRAPHFILE
+      echo "    primitives: [$primstxt]," >> $GRAPHFILE
       if test -f $L/.cached/.lesson-keywords.txt.kp; then
         cat $L/.cached/.lesson-keywords.txt.kp >> $GRAPHFILE
       fi
@@ -1293,15 +1291,25 @@ function builddependencyjson() {
 }
 
 function buildlessonplans() {
-  echo doing buildlessonplans in $(pwd)
+  #echo doing buildlessonplans in $(pwd)
   cd $TOPDIR/distribution/$LANGUAGE/lessons
   export DISTROOTDIR=../
   local L
+  local copacetic
   #local prevL=/dev/null
   for L in *; do
     # needed?
     #cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
     buildlessonplan $L
+    copacetic=1
+    for f in $L/.cached/.*primtxt; do
+      if test ! -f $f; then
+        copacetic=
+      fi
+    done
+    if test $copacetic; then
+      cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
+    fi
     #prevL=$L
   done
   export LESSONSUBDIR=
