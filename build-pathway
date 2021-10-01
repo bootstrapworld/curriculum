@@ -610,13 +610,13 @@ EOF
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
-    <link rel="stylesheet" href="${PATHWAYROOTDIR}../../lib/codemirror.css" />
-    <script src="${PATHWAYROOTDIR}../../lib/codemirror.js"></script>
-    <script src="${PATHWAYROOTDIR}../../lib/runmode.js"></script>
-    <script src="${PATHWAYROOTDIR}../../lib/scheme2.js"></script>
-    <script src="${PATHWAYROOTDIR}../../lib/pyret-mode.js"></script>
-    <script src="${PATHWAYROOTDIR}../../lib/bootstraplesson.js"></script>
-    <script src="${PATHWAYROOTDIR}../../dependency-graph.js"></script>
+    <link rel="stylesheet" href="${DISTROOTDIR}/lib/codemirror.css" />
+    <script src="${DISTROOTDIR}/lib/codemirror.js"></script>
+    <script src="${DISTROOTDIR}/lib/runmode.js"></script>
+    <script src="${DISTROOTDIR}/lib/scheme2.js"></script>
+    <script src="${DISTROOTDIR}/lib/pyret-mode.js"></script>
+    <script src="${DISTROOTDIR}/lib/bootstraplesson.js"></script>
+    <script src="${DISTROOTDIR}/dependency-graph.js"></script>
     <script>var pathwayLessons=[${PATHWAYLESSONS}];</script>
 EOF
 $SED -i \
@@ -789,7 +789,7 @@ function doadoc() {
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       $cachedirarg $lessonplandirarg \
-      -a stylesheet=$PATHWAYROOTDIR../../lib/curriculum.css \
+      -a stylesheet=$DISTROOTDIR/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $fasc -o $fhtml
   fi
@@ -824,7 +824,7 @@ function doadocs() {
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       -a cachedir=.cached/ -a lessonplandir= \
-      -a stylesheet=$DISTROOTDIR../lib/curriculum.css \
+      -a stylesheet=$DISTROOTDIR/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -B . $ff_asc
   fi
@@ -1318,7 +1318,7 @@ function buildlessonplans() {
 function makeglossaryandstandards() {
   if test -f .cached/.pathway-glossary.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
-      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
+      -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Glossary' \
       -B . \
@@ -1329,7 +1329,7 @@ function makeglossaryandstandards() {
   fi
   if test -f .cached/.pathway-standards.asc; then
     asciidoctor -a linkcss -a proglang=$PROGLANG \
-      -a stylesheet=${PATHWAYROOTDIR}../../lib/curriculum.css \
+      -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
       -a title='Standards' \
       -B . \
