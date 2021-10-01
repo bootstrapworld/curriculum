@@ -1030,6 +1030,8 @@
                                   (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
+                           [(string=? directive "scrub")
+                            (read-group i directive)]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
