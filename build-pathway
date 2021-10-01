@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-09-30 # last modified
+LASTMOD=2021-10-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -791,6 +791,7 @@ function doadoc() {
       $cachedirarg $lessonplandirarg \
       -a stylesheet=$DISTROOTDIR/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
+      -a distrootdir=$DISTROOTDIR \
       -B . $fasc -o $fhtml
   fi
 }
@@ -826,6 +827,7 @@ function doadocs() {
       -a cachedir=.cached/ -a lessonplandir= \
       -a stylesheet=$DISTROOTDIR/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
+      -a distrootdir=$DISTROOTDIR \
       -B . $ff_asc
   fi
 
@@ -1320,6 +1322,7 @@ function makeglossaryandstandards() {
     asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
+      -a distrootdir=$DISTROOTDIR \
       -a title='Glossary' \
       -B . \
       -o pathway-glossary.shtml \
@@ -1331,6 +1334,7 @@ function makeglossaryandstandards() {
     asciidoctor -a linkcss -a proglang=$PROGLANG \
       -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
       -a pathwayrootdir=$PATHWAYROOTDIR \
+      -a distrootdir=$DISTROOTDIR \
       -a title='Standards' \
       -B . \
       -o pathway-standards.shtml \

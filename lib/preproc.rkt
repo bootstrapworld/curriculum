@@ -517,13 +517,12 @@
               (cons (list lesson f ex-ti) *exercises-done*))))))
     (when (or (not link-text) (string=? link-text ""))
       (let ([f.titletxt (path-replace-extension
-                          (string-append *pathway-root-dir* lesson "/" pages-dir "/.cached/." snippet)
+                          (string-append *dist-root-dir* "lessons/" lesson "/" pages-dir "/.cached/." snippet)
                           ".titletxt")])
-        ;(printf "f.titletxt is ~s\n" f.titletxt)
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-            (format "link:{pathwayrootdir}pass:[~a][~a~a~a]" g
+            (format "link:{distrootdir}lessons/pass:[~a][~a~a~a]" g
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
