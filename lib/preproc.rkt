@@ -522,7 +522,7 @@
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-            (format "link:{distrootdir}lessons/pass:[~a][~a~a~a]" g
+            (format "link:{distrootdir}lessons/pass:[~a][~a~a]" g
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
@@ -533,12 +533,7 @@
                                       pagenum
                                       error-cascade?)
                             (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
-                                    lesson link-type f))
-                          (cond [pagenum
-                                  (let ([x (format "Page ~a" pagenum)])
-                                    (if (string=? link-text "") x
-                                        (string-append " (" x ")")))]
-                                [else ""]))
+                                    lesson link-type f)))
                         "")
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
@@ -2148,4 +2143,3 @@
                                    (car args))))
         (loop (cdr args))))
     (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
-
