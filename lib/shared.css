@@ -217,61 +217,53 @@ tr th.tableblock {
 /******************************************************
  * The lesson sidebar 
  * first we hide the normal sidebar, then style our own
- * 
  */
-#sidebar > ul { display: none; }
-.sidebar {
-  display:    block;
-  position:   fixed;
-  top:        145px;
-  left:       0;
-  bottom:     0;
-  width:      200px;
-  min-width:  200px;
-  height:     100%;
-  background: #eee;
-  border-left:solid 1px black;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 6px black;
-  z-index:    9999;
-  overflow:   scroll;
-}
-
-input.sidebarinput { margin-left: 10px; }
-
-.sidebar .sidebartitle {
-  display:  none;
-}
-
-.sidebar:hover .sidebartitle { display: none; }
-.sidebar .sidebarlessons { padding: 10px; }
-.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
-.sidebar .sidebarlessons ul { 
-  background: white; 
-  margin:     10px;
-  box-shadow: inset 4px 0px 4px black;
-  height:     250px;
-  overflow:   scroll;
-  padding:    10px;
-}
-.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
-.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
-.sidebarlessons .prerequisite::after { content:'★'; } 
-.sidebarlessons strong {color: black; }
-
+ #sidebar > ul, .sidebar .sidebartitle, 
 .sidebarstandards div.standards-hierarchical-table {
     display: none;
 }
 
+.sidebar {
+  display:    block;
+  position:   fixed;
+  top:        0;
+  left:       0;
+  bottom:     0;
+  width:      210px;
+  padding:    10px;
+  background: #f9f2ff;
+  transition: all 0.5s;
+  color:      black;
+  box-shadow: -1px 2px 3px black;
+  z-index:    9999;
+  overflow-y: scroll;
+}
+.sidebar:hover { box-shadow: -1px 2px 10px black; }
+.sidebar > * + * { margin-bottom: 10px; }
+
+.sidebar strong { color: black; }
+
+.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
+.sidebar .sidebarlessons ul, .standardsAlignmentSelect { 
+  background: white; 
+  margin:     0;
+  box-shadow: inset 2px 0px 4px black;
+  max-height: 400px;
+  overflow:   scroll;
+  padding:    10px;
+  border:     none;
+}
+
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons .prerequisite::after { content:'★'; } 
+
+
+.sidebarstandards { background: none; border: none !important; }
+.sidebarstandards td { padding: 0; }
 .sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
 
-.sidebarstandards { padding-left: 10px; }
-
-.sidebartextbooks strong { color: black; }
-.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
 
 .sidebarbadges ul { margin-left: 0px; text-align: center; }
 .sidebarbadges li { list-style-type: none; display: inline-block; }
