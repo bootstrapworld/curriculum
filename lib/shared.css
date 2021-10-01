@@ -214,17 +214,22 @@ tr th.tableblock {
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
-/* The sidebar */
+/******************************************************
+ * The lesson sidebar 
+ * first we hide the normal sidebar, then style our own
+ * 
+ */
+#sidebar > ul { display: none; }
 .sidebar {
   display:    block;
   position:   fixed;
-  top:        0px;
-  left:       calc(225px + 895px);
-  width:      calc(100% - (225px + 895px));
+  top:        145px;
+  left:       0;
+  bottom:     0;
+  width:      200px;
   min-width:  200px;
   height:     100%;
   background: #eee;
-  opacity:    0.3;
   border-left:solid 1px black;
   transition: all 0.5s;
   color:      black;
@@ -237,18 +242,8 @@ input.sidebarinput { margin-left: 10px; }
 
 .sidebar .sidebartitle {
   display:  none;
-  /*
-  transform: rotate(90deg) translate(148px, -48px);
-  height: 25px;
-  width: 330px;
-  background: #75328a;
-  padding-left: 10px;
-  color: white;
-  font-weight: bold;
-  */
 }
 
-.sidebar:hover { opacity: 1; }
 .sidebar:hover .sidebartitle { display: none; }
 .sidebar .sidebarlessons { padding: 10px; }
 .sidebarlessons input[type="checkbox"] { margin-right: 5px; }
