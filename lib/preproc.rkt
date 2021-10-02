@@ -522,7 +522,7 @@
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-            (format "link:{distrootdir}lessons/pass:[~a][~a~a]" g
+            (format "link:{distrootdir}lessons/pass:[~a][~a~a~a]" g
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
