@@ -522,19 +522,8 @@
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-            (format "link:{distrootdir}lessons/pass:[~a][~a~a~a]" g
+            (format "link:{distrootdir}lessons/pass:[~a][~a~a]" g
                     link-text
-                    (if *lesson-plan*
-                        (let ([pagenum (workbook-pagenum lesson snippet)])
-                          ;(printf "link-type= ~s; nopdf= ~s; book= ~s; error-cascase= ~s\n" link-type *nopdf* *book* error-cascade?)
-                          (unless (or (equal? link-type "opt-printable-exercise")
-                                      *nopdf*
-                                      (not *book*)
-                                      pagenum
-                                      error-cascade?)
-                            (printf "WARNING: Lesson ~a: ~a used for non-workbook page ~a\n\n"
-                                    lesson link-type f)))
-                        "")
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(or (equal? link-type "opt-printable-exercise")
