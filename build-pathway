@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-01 # last modified
+LASTMOD=2021-10-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -786,7 +786,6 @@ function doadoc() {
 
   $PROGDIR/adoc-preproc.rkt $f
 
-
   if test ! $OTHERDIR; then
     asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
       $cachedirarg $lessonplandirarg \
@@ -859,7 +858,6 @@ function doadocs() {
           fi
     fi
   done
-
 
 }
 
@@ -1246,8 +1244,8 @@ function builddependencyjson() {
     #echo L is $L
     Lbasename=$L
     # the following sanity checks shdnt be needed
-    test -d "$L" || continue
-    if test "$L" = lib; then continue; fi
+    #test -d "$L" || continue
+    #if test "$L" = lib; then continue; fi
     if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
       if test $first; then
         first=
@@ -1607,7 +1605,7 @@ function buildteacherresource() {
 
 function batchhtmltopdf() {
   cd $TOPDIR/distribution/$LANGUAGE
-  echo doing batchhtmltopdf in $(pwd)
+  #echo doing batchhtmltopdf in $(pwd)
   echo "] }" >> $PUPPETEER_INPUT
 
   # use --trace-warnings to debug
@@ -1746,7 +1744,7 @@ function collectworkbookpages() {
 }
 
 function buildpathwayworkbooks() {
-  echo building pathway workbooks for $TGTPATHWAY in $(pwd)
+  #echo building pathway workbooks for $TGTPATHWAY in $(pwd)
 
   cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
 
@@ -1784,7 +1782,7 @@ function copycommonlessons() {
 }
 
 function buildpathway() {
-  echo doing buildpathway $TGTPATHWAY
+  #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1998,7 +1996,7 @@ function buildpathway() {
 
     cd $TOPDIR; cd $DESTPATHWAYDIR
 
-    echo PWD is $(pwd)
+    #echo PWD is $(pwd)
 
     if test ! $NOPDF; then
       if test ! -f .cached/.workbook-page-index.rkt; then
@@ -2157,6 +2155,33 @@ done
 #echo pathway building done
 
 builddependencyjson
+
+function buildpathwaytocs() {
+  cd $TOPDIR/distribution/$LANGUAGE/courses
+  export DISTROOTDIR=../
+  TOCSFILE=$TOPDIR/distribution/$LANGUAGE/pathway-tocs.js
+  echo "var pathwayTocs = {" > $TOCSFILE
+  first=1
+  for C in *; do
+    if test $first; then
+      first=
+    else
+      echo "," >> $TOCSFILE
+    fi
+    echo -n "   \"$C\": [" >> $TOCSFILE
+    thisPathwayLessons=
+    if test -f $C/.cached/.workbook-lessons.txt.kp; then
+      thisPathwayLessons=$(cat $C/.cached/.workbook-lessons.txt.kp|$SED -e 's/.*\/lessons\///'|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
+    fi
+    echo -n $thisPathwayLessons >> $TOCSFILE
+    echo -n "]" >> $TOCSFILE
+  done
+  echo >> $TOCSFILE
+  echo "}" >> $TOCSFILE
+
+}
+
+buildpathwaytocs
 
 if test ! $NOPDF; then
   for f in $ARGS; do
