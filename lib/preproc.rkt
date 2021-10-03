@@ -606,8 +606,7 @@
            [adoc-img
              (string-append
                (cond [*lesson-subdir*
-                       (format "image:{pathwayrootdir}~a/~a[~s~a]" *lesson-subdir*
-                               img text-wo-url commaed-opts)]
+                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)])
@@ -838,7 +837,7 @@
         ;(printf "lesson-description is ~s\n" lesson-description)
         (when (file-exists? lesson-index-file)
           ;(printf "~a exists\n" lesson-index-file)
-          (fprintf o "link:pass:[~a][~a] ::" lesson-index-file lesson-title)
+          (fprintf o "link:pass:[~a?pathway=~a][~a] ::" lesson-index-file *pathway* lesson-title)
           (if lesson-description
               (display lesson-description o)
               (display " {nbsp}" o)))
