@@ -803,7 +803,7 @@
   (newline o))
 
 (define (link-to-lessons-in-pathway o)
-  ;(printf "link-to-lessons-in-pathway~n")
+  ;(printf "link-to-lessons-in-pathway in ~s~n" (current-directory))
   ;
   (let ([lessons (read-data-file "lesson-order.txt")])
     ;(printf "lessons = ~s\n" lessons)
@@ -814,9 +814,9 @@
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       ;(printf "tackling lesson ~s\n" lesson)
-      (let ([lesson-index-file (format "./lessons/~a/index.shtml" lesson)]
-            [lesson-title-file (format "./lessons/~a/.cached/.index.titletxt" lesson)]
-            [lesson-desc-file (format "./lessons/~a/.cached/.index-desc.txt.kp" lesson)]
+      (let ([lesson-index-file (format "~alessons/~a/index.shtml" *dist-root-dir* lesson)]
+            [lesson-title-file (format "~alessons/~a/.cached/.index.titletxt" *dist-root-dir* lesson)]
+            [lesson-desc-file (format "~alessons/~a/.cached/.index-desc.txt.kp" *dist-root-dir* lesson)]
             [lesson-title lesson]
             [lesson-description #f])
         (when (file-exists? lesson-title-file)
@@ -847,75 +847,75 @@
         ;(newline o))
         (newline o)))
     (fprintf o "link:./.pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
+    (print-menubar ".cached/.pathway-lessons-comment.txt")
+    (call-with-output-file ".pathway-lessons.asciidoc"
+      (lambda (lo)
+        (fprintf lo "= Lessons Used in This Pathway~n~n")
+        (fprintf lo "include::.pathway-lessons-toc.asciidoc[]~n~n")
+        (call-with-output-file ".pathway-lessons-toc.asciidoc"
+          (lambda (toco)
+            (fprintf toco "[verse]~n")
+            (call-with-output-file ".cached/.standards-in-pathway.txt.kp"
+              (lambda (stco)
+                (for ((lesson lessons))
+                  ;(printf "tackling lesson i ~s\n" lesson)
+                  (let ([lesson-asc-file
+                          (format "~alessons/~a/.cached/.index.asc" *dist-root-dir* lesson)]
+                        [lesson-glossary-file
+                          (format "~alessons/~a/.cached/.lesson-glossary.txt" *dist-root-dir* lesson)]
+                        [lesson-standards-file
+                          (format "~alessons/~a/.cached/.lesson-standards.txt.kp"
+                                  *dist-root-dir* lesson)]
+                        [lesson-title-file
+                          (format "~alessons/~a/.cached/.index.titletxt" *dist-root-dir* lesson)]
+                        [lesson-title lesson]
+                        )
 
-      (print-menubar ".cached/.pathway-lessons-comment.txt")
-      (call-with-output-file ".pathway-lessons.asciidoc"
-        (lambda (lo)
-          (fprintf lo "= Lessons Used in This Pathway~n~n")
-          (fprintf lo "include::.pathway-lessons-toc.asciidoc[]~n~n")
-          (call-with-output-file ".pathway-lessons-toc.asciidoc"
-            (lambda (toco)
-              (fprintf toco "[verse]~n")
-              (call-with-output-file ".cached/.standards-in-pathway.txt.kp"
-                (lambda (stco)
-              (for ((lesson lessons))
-                ;(printf "tackling lesson i ~s\n" lesson)
-                (let ([lesson-asc-file
-                        (format "./lessons/~a/.cached/.index.asc" lesson)]
-                      [lesson-glossary-file
-                        (format "./lessons/~a/.cached/.lesson-glossary.txt" lesson)]
-                      [lesson-standards-file
-                        (format "./lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
-                      [lesson-title-file
-                        (format "./lessons/~a/.cached/.index.titletxt" lesson)]
-                      [lesson-title lesson]
-                      )
+                    (when (file-exists? lesson-title-file)
+                      ;(printf "~a exists i\n" lesson-title-file)
+                      (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
-                  (when (file-exists? lesson-title-file)
-                    ;(printf "~a exists i\n" lesson-title-file)
-                    (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+                    (when (file-exists? lesson-glossary-file)
+                      ;(printf "~a exists i\n" lesson-glossary-file)
+                      (call-with-input-file lesson-glossary-file
+                        (lambda (i)
+                          (let loop ()
+                            (let ([x (read i)])
+                              (unless (eof-object? x)
+                                (let ([s (assoc-glossary x *glossary-list*)])
+                                  (cond [s (unless (member s *glossary-items*)
+                                             (set! *glossary-items*
+                                               (cons s *glossary-items*)))]))
+                                (loop)))))))
+                    ;(printf "took care of pw glossary~n")
 
-                  (when (file-exists? lesson-glossary-file)
-                    ;(printf "~a exists i\n" lesson-glossary-file)
-                    (call-with-input-file lesson-glossary-file
-                      (lambda (i)
-                        (let loop ()
-                          (let ([x (read i)])
-                            (unless (eof-object? x)
-                              (let ([s (assoc-glossary x *glossary-list*)])
-                                (cond [s (unless (member s *glossary-items*)
-                                           (set! *glossary-items*
-                                             (cons s *glossary-items*)))]))
-                              (loop)))))))
-                  ;(printf "took care of pw glossary~n")
+                    (when (file-exists? lesson-standards-file)
+                      ;(printf "~a exists i\n" lesson-standards-file)
+                      (call-with-input-file lesson-standards-file
+                        (lambda (i)
+                          (let loop ()
+                            (let ([x (read i)])
+                              (unless (eof-object? x)
+                                (add-standard x lesson-title lesson #f lo)
+                                (fprintf stco "(~s ~s ~s)~n" x lesson-title lesson)
+                                (loop)))))))
 
-                  (when (file-exists? lesson-standards-file)
-                    ;(printf "~a exists i\n" lesson-standards-file)
-                    (call-with-input-file lesson-standards-file
-                      (lambda (i)
-                        (let loop ()
-                          (let ([x (read i)])
-                            (unless (eof-object? x)
-                              (add-standard x lesson-title lesson #f lo)
-                              (fprintf stco "(~s ~s ~s)~n" x lesson-title lesson)
-                              (loop)))))))
+                    ;(printf "took care of pw stds~n")
 
-                  ;(printf "took care of pw stds~n")
+                    ;(unless (file-exists? lesson-asc-file)
+                    ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
 
-                  ;(unless (file-exists? lesson-asc-file)
-                  ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
-
-                  (when (file-exists? lesson-asc-file)
-                    ;(printf "~a exists i\n" lesson-asc-file)
-                    (fprintf lo "[[~a]]~n" lesson)
-                    (fprintf toco "<<~a>>~n" lesson)
-                    (fprintf lo "== ~a\n" lesson-title)
-                    (fprintf lo "include::./lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
-                             lesson)))))
-                #:exists 'replace))
-            #:exists 'replace))
-        #:exists 'replace)
-      (newline o)))
+                    (when (file-exists? lesson-asc-file)
+                      ;(printf "~a exists i\n" lesson-asc-file)
+                      (fprintf lo "[[~a]]~n" lesson)
+                      (fprintf toco "<<~a>>~n" lesson)
+                      (fprintf lo "== ~a\n" lesson-title)
+                      (fprintf lo "include::~alessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
+                               *dist-root-dir* lesson)))))
+              #:exists 'replace))
+          #:exists 'replace))
+      #:exists 'replace)
+    (newline o)))
 
 (define (create-vspace ht)
   (let ([num (regexp-replace #rx"([0-9]*)ex" ht "\\1")])
@@ -1359,7 +1359,9 @@
 
               (expand-directives i o)
 
+              ;(printf "call link-to-lessons-in-pathway?\n")
               (when *narrative*
+                ;(printf "yes\n")
                 (link-to-lessons-in-pathway o))
 
               (set! *dictionaries-represented*
