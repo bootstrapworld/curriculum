@@ -90,6 +90,8 @@ while test $# -ne 0; do
   fi
 done
 
+#echo ARGS is $ARGS
+
 test $BOOK && NOPDF= || NOPDF=1
 
 test $SUPERFORCE && FORCE=1
@@ -163,8 +165,10 @@ if ! which wkhtmltopdf|grep -q .; then
 fi
 
 if test "$ARGS" = ""; then
-  ARGS="pathways/*"
+  ARGS=$(ls -d pathways/*)
 fi
+
+#echo ARGS is $ARGS
 
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
@@ -1083,10 +1087,11 @@ function buildworkbookpages() {
 
   DORECURSIVEADOC=1
 
-    if checkmd5nochange . $repoDir; then
-      #echo no need to do recursive adoc
-      DORECURSIVEADOC=
-    fi
+  #echo calling checkmd5nochange from buildworkbookpages
+  if checkmd5nochange . $repoDir; then
+    #echo no need to do recursive adoc
+    DORECURSIVEADOC=
+  fi
 
   if test $DORECURSIVEADOC; then
   #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
@@ -1636,10 +1641,10 @@ function rmtmpfiles() {
 function copylessondir() {
   lessonDir=$1
   #echo doing copylessondir $lessonDir
-  mkdir -p $lessonDir
   repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
   #echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
+    mkdir -p $lessonDir
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
     #echo calling checkmd5nochange $lessonDir $repoLessonDir
@@ -2057,6 +2062,29 @@ function buildpathway() {
 
 }
 
+function buildpathwaytocs() {
+  cd $TOPDIR/distribution/$LANGUAGE/courses
+  export DISTROOTDIR=../
+  TOCSFILE=$TOPDIR/distribution/$LANGUAGE/pathway-tocs.js
+  echo "var pathwayTocs = {" > $TOCSFILE
+  first=1
+  for C in *; do
+    if test $first; then
+      first=
+    else
+      echo "," >> $TOCSFILE
+    fi
+    echo -n "   \"$C\": [" >> $TOCSFILE
+    thisPathwayLessons=
+    if test -f $C/.cached/.workbook-lessons.txt.kp; then
+      thisPathwayLessons=$(cat $C/.cached/.workbook-lessons.txt.kp|$SED -e 's/.*\/lessons\///'|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
+    fi
+    echo -n $thisPathwayLessons >> $TOCSFILE
+    echo "]" >> $TOCSFILE
+  done
+  echo "}" >> $TOCSFILE
+}
+
 function allthestandards() {
   cd $TOPDIR
   cd distribution/$LANGUAGE
@@ -2120,15 +2148,18 @@ buildlessonplans
 
 #echo buildlessonplans finished
 
-#echo starting pathway building
+#echo starting pathway building on $ARGS in $(pwd)
 
 #exit # FIXME
 
 for f in $ARGS; do
+  #echo I doing $f
   export SRCPATHWAY=$f
   export SRCPATHWAY=${SRCPATHWAY#pathways/}
   export SRCPATHWAY=${SRCPATHWAY%/}
   export TGTPATHWAY="$SRCPATHWAY"
+  #echo SRCPATHWAY is $SRCPATHWAY
+  #echo TGTPATHWAY is $TGTPATHWAY
   if test "$PROGLANG" = ""; then
     if test "$SRCPATHWAY" = algebra; then
       export PROGLANG=wescheme
@@ -2150,36 +2181,9 @@ for f in $ARGS; do
   fi
 done
 
-#exit
-
-#echo pathway building done
+echo pathway building done
 
 builddependencyjson
-
-function buildpathwaytocs() {
-  cd $TOPDIR/distribution/$LANGUAGE/courses
-  export DISTROOTDIR=../
-  TOCSFILE=$TOPDIR/distribution/$LANGUAGE/pathway-tocs.js
-  echo "var pathwayTocs = {" > $TOCSFILE
-  first=1
-  for C in *; do
-    if test $first; then
-      first=
-    else
-      echo "," >> $TOCSFILE
-    fi
-    echo -n "   \"$C\": [" >> $TOCSFILE
-    thisPathwayLessons=
-    if test -f $C/.cached/.workbook-lessons.txt.kp; then
-      thisPathwayLessons=$(cat $C/.cached/.workbook-lessons.txt.kp|$SED -e 's/.*\/lessons\///'|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
-    fi
-    echo -n $thisPathwayLessons >> $TOCSFILE
-    echo -n "]" >> $TOCSFILE
-  done
-  echo >> $TOCSFILE
-  echo "}" >> $TOCSFILE
-
-}
 
 buildpathwaytocs
 
@@ -2210,8 +2214,6 @@ if test ! $NOPDF; then
     fi
   done
 fi
-
-#exit
 
 # only to shush now-benign error
 export PROGLANG=pyret
