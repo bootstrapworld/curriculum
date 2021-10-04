@@ -4,11 +4,35 @@
 
 (require "utils.rkt")
 
+(define *pag-handle-prefix* "")
+(define *pag-handle-counter* 0)
+
+(define *nonpag-handle-prefix* "N")
+(define *nonpag-handle-counter* 0)
+
+(define *char-code-before-A* (sub1 (char->integer #\A)))
+
+(define (gen-handle-pag)
+  (set! *pag-handle-counter* (+ *pag-handle-counter* 1))
+  (when (> *pag-handle-counter* 26)
+    (set! *pag-handle-prefix* (string-append *pag-handle-prefix* "Z"))
+    (set! *pag-handle-counter* 1))
+  (format "~a~a" *pag-handle-prefix* (integer->char (+ *char-code-before-A* *pag-handle-counter*))))
+
+(define (gen-handle-nonpag)
+  (set! *nonpag-handle-counter* (+ *nonpag-handle-counter* 1))
+  (when (> *nonpag-handle-counter* 26)
+    (set! *nonpag-handle-prefix* (string-append *nonpag-handle-prefix* "Z"))
+    (set! *nonpag-handle-counter* 1))
+  (format "~a~a" *nonpag-handle-prefix* (integer->char (+ *char-code-before-A* *nonpag-handle-counter*))))
+
 ;
+
+(define *pageno* 0)
 
 (define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt.kp"))
 
-(define (write-pages-info lesson-dir o ol oe #:pageno [pageno "true"]
+(define (write-pages-info lesson-dir o ol oe #:pageno [pageno "yes"]
                           #:back-matter-port [back-matter-port #f])
   ;(printf "doing write-pages-info pageno = ~s\n" pageno)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
@@ -42,13 +66,17 @@
                 (set! aspect (list-ref page 1)))
               (when (>= n 3)
                 (set! this-pageno (list-ref page 2)))
+              (when (string-ci=? this-pageno "yes")
+                (set! *pageno* (+ *pageno* 1))
+                (set! this-pageno *pageno*))
               ;(printf "this-pageno = ~s\n" this-pageno)
               (fprintf o2 "~a\n" file)
-              (fprintf o "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
-              (fprintf ol "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
-              (when (and back-matter-port (contracts-page? lesson-dir file))
-                (fprintf back-matter-port "(~s ~s ~s ~s)\n"
-                         lesson-dir file aspect this-pageno))
+              (let ([handle (gen-handle-pag)])
+                (fprintf o "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect this-pageno)
+                (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect this-pageno)
+                (when (and back-matter-port (contracts-page? lesson-dir file))
+                  (fprintf back-matter-port "(~s ~s ~s ~s ~s)\n"
+                           lesson-dir file handle aspect this-pageno)))
               ))
           ;
           )
@@ -59,9 +87,10 @@
               [n (length page)])
           (when (>= n 2)
             (set! aspect (list-ref page 1)))
-          (fprintf ol "(~s ~s ~s ~s)\n" lesson-dir file aspect "false")
-          (fprintf oe "(~s ~s ~s ~s)\n" lesson-dir file aspect "false")
-          )))))
+          (let ([handle (gen-handle-nonpag)])
+          (fprintf ol "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
+          (fprintf oe "(~s ~s ~s ~s ~s)\n" lesson-dir file handle aspect "no")
+          ))))))
 
 (define (contracts-page? dir file)
   (let ([f (build-path dir "solution-pages" file)])
@@ -86,14 +115,14 @@
             (fprintf ol "(\n")
             (fprintf oe "(\n")
             ;TODO skip if dir nonexistent
-            (write-pages-info "front-matter" o ol oe #:pageno "false")
+            (write-pages-info "front-matter" o ol oe #:pageno "no")
             (for ([lesson-dir *lesson-order*])
               (write-pages-info lesson-dir o ol oe))
             (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
               (lambda (ob)
                 (fprintf ob "(\n")
                 ;TODO skip if dir nonexistent
-                (write-pages-info "back-matter" o ol oe #:pageno "false" #:back-matter-port ob)
+                (write-pages-info "back-matter" o ol oe #:pageno "no" #:back-matter-port ob)
                 (fprintf ob ")\n")
                 )
               #:exists 'replace)

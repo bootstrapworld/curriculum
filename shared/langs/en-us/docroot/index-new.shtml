@@ -5,15 +5,113 @@
     <title>Bootstrap: Materials</title>
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <script src="/js/TextRotate.js" ></script>
+
+    <style>
+        #pathways { min-height: 170px; transition: all 0.25s linear;}
+        #pathways:hover { min-height: 400px; }
+        #lessonExplorer {
+            width: 100%;
+            overflow-y: scroll;
+            border: solid 1px black;
+            text-align: center;
+        }
+        .lessonContainer {
+            display:    inline-table;
+            position:   relative;
+            height:     60px;
+            width:      150px;
+            color:      black;
+            text-align: center;
+            border:     solid 1px gray;
+            font-weight: bold;
+            margin:     10px;
+            background-color: white;
+            cursor:     pointer;
+            transition: background-color linear 0.5s;
+        }
+        .accessible {background-color: #3c3cff4f; }
+        .teaching {
+            opacity: 1; 
+            background-color: #a6dfba !important;
+            box-shadow: black 3px 3px 3px; 
+            animation: emphasize 1s cubic-bezier(.36,.07,.19,.97) both 1;
+            animation-play-state:  paused;
+        }
+        .lessonContainer .lessonTitle { vertical-align: middle; display: table-cell; }
+        .lessonDescription { 
+            visibility: hidden;
+            width: 200px;
+            font-weight: normal;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            box-shadow: black 3px 3px 3px; 
+        }
+        .rightTip { left: 100%; }
+        .leftTip  { right: 100%; }
+        .topTip   { bottom: 105%; left: 50%; margin-left: -100px;}
+
+        .lessonDescription::after {
+          content: "";
+          position: absolute;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent;
+        }
+
+        .rightTip::after { top:  10%; right: 100%; margin-left: -5px; border-right-color: black;}
+        .leftTip::after  { top:  10%; left:  100%; margin-left:  1px; border-left-color:  black;}
+        .topTip::after   { top: 100%; left:   50%; margin-top:   2px; border-top-color:   black;}
+
+        .lessonContainer:hover { background-color: #ccffcc; opacity: 1; z-index: 2;}
+        .lessonContainer:hover .lessonDescription { visibility: visible; }
+
+        .legend { 
+            display:  inline-block; 
+            box-shadow: none !important;
+        }
+
+        #search { 
+            background: black; 
+            color: white; 
+            width:  100%; 
+            padding: 10px; 
+            font-size:  12pt;
+            box-shadow: #cb76e6 1px 1px 2px;
+        }
+        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
+        .count {font-weight: bold;}
+        #pathwayButton { display: none; }
+        #reset { 
+            float:      right; 
+            font-size:  28pt;
+            margin-top: -4pt;
+            color:      white; 
+            background: none; 
+            border:     none;
+            text-decoration: none;
+        }
+        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
+
+        @keyframes emphasize {
+            10%, 90%      { transform: translate3d(-1px, 0, 0); }
+            20%, 80%      { transform: translate3d( 2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60%      { transform: translate3d( 4px, 0, 0); }
+        }
+        ul.tab { display: table; width: 100%; }
+        ul.tab .tablinks {display:  table-cell; }
+        .tablinks img {width: 100%; max-width: 150px;}
+    </style>
     <script src="dependency-graph.js"></script>
     <script>
         // values that must be imported from external scripts
         var registerTxtRotation = registerTxtRotation;
         var graph = graph;
-
-        // clear lessons that are not part of the graph
-        const lessonsToIgnore = ['__sample', 'zample-lesson', 'hoc-winter', 'hoc-wescheme-intro'];
-        lessonsToIgnore.forEach(l => delete graph[l]);
 
         // find out if there's a subject that was passed in
         var subject, params = location.search.substring(1);
@@ -44,11 +142,6 @@
             'contracts': "Contracts: Name, Domain & Range",
             'checking-your-work' : "Evaluating Correctness"
         }
-
-        // remove lessons that don't belong in the graph
-        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-wescheme-intro', 'hoc-winter'];
-        lessonsToIgnore.forEach(l => delete graph[l]);
-
         var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
@@ -211,108 +304,6 @@
             window.open(`customPathway.shtml?title=${title}&lessons=${checked}`, '_blank').focus();
         }
     </script>
-    <style>
-        #pathways { min-height: 170px; transition: all 0.25s linear;}
-        #pathways:hover { min-height: 400px; }
-        #lessonExplorer {
-            width: 100%;
-            overflow-y: scroll;
-            border: solid 1px black;
-            text-align: center;
-        }
-        .lessonContainer {
-            display:    inline-table;
-            position:   relative;
-            height:     60px;
-            width:      150px;
-            color:      black;
-            text-align: center;
-            border:     solid 1px gray;
-            font-weight: bold;
-            margin:     10px;
-            background-color: white;
-            cursor:     pointer;
-            transition: background-color linear 0.5s;
-        }
-        .accessible {background-color: #3c3cff4f; }
-        .teaching {
-            opacity: 1; 
-            background-color: #a6dfba !important;
-            box-shadow: black 3px 3px 3px; 
-            animation: emphasize 1s cubic-bezier(.36,.07,.19,.97) both 1;
-            animation-play-state:  paused;
-        }
-        .lessonContainer .lessonTitle { vertical-align: middle; display: table-cell; }
-        .lessonDescription { 
-            visibility: hidden;
-            width: 200px;
-            font-weight: normal;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            box-shadow: black 3px 3px 3px; 
-        }
-        .rightTip { left: 100%; }
-        .leftTip  { right: 100%; }
-        .topTip   { bottom: 105%; left: 50%; margin-left: -100px;}
-
-        .lessonDescription::after {
-          content: "";
-          position: absolute;
-          border-width: 5px;
-          border-style: solid;
-          border-color: transparent;
-        }
-
-        .rightTip::after { top:  10%; right: 100%; margin-left: -5px; border-right-color: black;}
-        .leftTip::after  { top:  10%; left:  100%; margin-left:  1px; border-left-color:  black;}
-        .topTip::after   { top: 100%; left:   50%; margin-top:   2px; border-top-color:   black;}
-
-        .lessonContainer:hover { background-color: #ccffcc; opacity: 1; z-index: 2;}
-        .lessonContainer:hover .lessonDescription { visibility: visible; }
-
-        .legend { 
-            display:  inline-block; 
-            box-shadow: none !important;
-        }
-
-        #search { 
-            background: black; 
-            color: white; 
-            width:  100%; 
-            padding: 10px; 
-            font-size:  12pt;
-            box-shadow: #cb76e6 1px 1px 2px;
-        }
-        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
-        .count {font-weight: bold;}
-        #pathwayButton { display: none; }
-        #reset { 
-            float:      right; 
-            font-size:  28pt;
-            margin-top: -4pt;
-            color:      white; 
-            background: none; 
-            border:     none;
-            text-decoration: none;
-        }
-        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
-
-        @keyframes emphasize {
-            10%, 90%      { transform: translate3d(-1px, 0, 0); }
-            20%, 80%      { transform: translate3d( 2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60%      { transform: translate3d( 4px, 0, 0); }
-        }
-        ul.tab { display: table; width: 100%; }
-        ul.tab .tablinks {display:  table-cell; }
-        .tablinks img {width: 100%; max-width: 150px;}
-    </style>
-
 </head>
 
 <body onload="draw(); update();  ">
@@ -320,15 +311,10 @@
     <div id="body">
         <div class="clearfix item">
             <h1>Materials</h1>
-            <p>
+
             Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
-            </p>
-            <p>
+
             All of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
-            </p>
-            <p>
-            After Bootstrap,  students are prepared to tackle <a href="BeyondBootstrap.shtml">several college-level textbooks</a>, including one that bridges <strong>from Pyret to Python</strong>.
-            </p>
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
@@ -366,7 +352,7 @@
             <br/>
             <ul style="margin: 6px 0px;">
                 <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
-                <li>If you haven't selected any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
+                <li>If you haven't select any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
             </ul>
             <p/>
             <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.

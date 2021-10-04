@@ -5,15 +5,15 @@
 ++++
 <style>
 /** fitb CSS experiment **/
-#content td p { display: table; width: 100%; }
-#content td .fitb { display: table-cell; width: 90%; }
+#content td:nth-of-type(even) p { display: table; width: 100%; }
+#content td:nth-of-type(even) .fitb { display: table-cell; width: 90%; }
 #content td {padding-bottom: 0px !important;}
 #content table .autonum::after { content: ')'; }
 </style>
 ++++
 
 
-[.table1, cols="3,.>2,.>2,5,.>2,.>2", frame="none", grid="none", stripes="none"]
+[cols="3,.>2,.>2,5,.>2,.>2", frame="none", grid="none", stripes="none"]
 |===
 |								    		| *Prediction:*	| *Computer Returns:*
 |                                			| *Prediction:*	| *Computer Returns:*
@@ -62,7 +62,7 @@
 |@n @show{(sexp->code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 |@n @show{(sexp->code '(string=? "tree"   "tree"))}		 	 | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 }
-|@n @show{(sexp->code '(string-contains?  "catnap" "cat"))}  | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+|@n @show{(sexp->code '(string-contains?  "catnap" "cat"))} | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 |@n @show{(sexp->code '(string-contains?  "cat" "catnap"))}	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 |===
 

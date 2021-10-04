@@ -3,12 +3,7 @@
 ++++
 <style>
 #content div.circleevalsexp {width: auto !important; }
-#content tr:nth-child(odd) {height: 2.25in;}
-#content tr:nth-child(even) {height: 0.75in;}
-#content tr:nth-child(3) {height: 2.5in;}
-#content tr:nth-child(4) {height: 1in;}
-
-td .autonum:after {content: ") "; }
+#content tr:nth-child(odd) {height: 3.5in;}
 </style>
 ++++
 @n On the line below, *write the Code* to define `PRIZE-STAR` as a pink, outline star of size 65.
@@ -28,6 +23,9 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 --
 @n The outline of a pink star that is three times the size of the original (using `scale`)
 --
+
+@vspace{1ex}
+
 *Circle of Evaluation:*
 
 [.center]
@@ -36,13 +34,15 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 --
 @n The outline of a pink star that is half the size of the original (using `scale`)
 --
+@vspace{1ex}
+
 *Circle of Evaluation:*
 
 [.center]
 @showsoln{(sexp->coe '(scale 0.5 PRIZE-STAR))}
 
-| *Code:* @showsoln{(sexp->code '(scale 3 PRIZE-STAR))}
-| *Code:* @showsoln{(sexp->code '(scale 0.5 PRIZE-STAR))}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(scale 3 PRIZE-STAR))}}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(scale 0.5 PRIZE-STAR))}}
 
 
 |
@@ -51,22 +51,30 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 
 _(It should be the same size as the original.)_
 --
+
+@vspace{1ex}
+
 *Circle of Evaluation:*
 @showsoln{(sexp->coe '(rotate 45 PRIZE-STAR))}
 |
 --
 @n The outline of a pink star that is three times as big as the original *and* has been rotated 45 degrees
 --
+
+@vspace{1ex}
+
 *Circle of Evaluation:*
 
 @showsoln{(sexp->coe '(scale 3(rotate 45 PRIZE-STAR)))}
 @ifsoln{_or_}
 @showsoln{(sexp->coe '(rotate 45 (scale 3 PRIZE-STAR)))}
 
-| *Code:* @showsoln{(sexp->code '(rotate 45 PRIZE-STAR))}
-| *Code:* @showsoln{(sexp->code '(scale 3(rotate 45 PRIZE-STAR)))}
+| *Code:* @fitb{21em}{@showsoln{(sexp->code '(rotate 45 PRIZE-STAR))}}
+| *Code:* @fitb{21em}{@showsoln{
+	(sexp->code '(scale 3(rotate 45 PRIZE-STAR)))}
 @ifsoln{_or_}
 @showsoln{(sexp->code '(rotate 45 (scale 3 PRIZE-STAR)))}
+}
 |===
 
 @vspace{1ex}

@@ -16,11 +16,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-<<<<<<< HEAD
-=======
-#content { margin: 0; }
-
->>>>>>> master
 /* These items should ALWAYS max-out pagewidth */
 #header, #content, #footer {
   width: 100% !important; max-width: 100% !important;
@@ -81,14 +76,11 @@ tr th.tableblock {
   float:            right !important;
 }
 #footer { background: rgba(0,0,0,0.5); padding: 0px; height:  24px; }
-<<<<<<< HEAD
 
 #footer .pagenumberholder {
     display: none;
     visibility: hidden;
 }
-=======
->>>>>>> master
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
@@ -225,56 +217,70 @@ tr th.tableblock {
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
-<<<<<<< HEAD
 /* The sidebar */
-=======
-/******************************************************
- * The lesson sidebar 
- * first we hide the normal sidebar, then style our own
- */
- #sidebar > ul, .sidebar .sidebartitle, 
+.sidebar {
+  display:    block;
+  position:   fixed;
+  top:        0px;
+  left:       calc(225px + 895px);
+  width:      calc(100% - (225px + 895px));
+  min-width:  200px;
+  height:     100%;
+  background: #eee;
+  opacity:    0.3;
+  border-left:solid 1px black;
+  transition: all 0.5s;
+  color:      black;
+  box-shadow: -1px 2px 6px black;
+  z-index:    9999;
+  overflow:   scroll;
+}
+
+input.sidebarinput { margin-left: 10px; }
+
+.sidebar .sidebartitle {
+  display:  none;
+  /*
+  transform: rotate(90deg) translate(148px, -48px);
+  height: 25px;
+  width: 330px;
+  background: #75328a;
+  padding-left: 10px;
+  color: white;
+  font-weight: bold;
+  */
+}
+
+.sidebar:hover { opacity: 1; }
+.sidebar:hover .sidebartitle { display: none; }
+.sidebar .sidebarlessons { padding: 10px; }
+.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
+.sidebar .sidebarlessons ul { 
+  background: white; 
+  margin:     10px;
+  box-shadow: inset 4px 0px 4px black;
+  height:     250px;
+  overflow:   scroll;
+  padding:    10px;
+}
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
+.sidebarlessons .prerequisite::after { content:'★'; } 
+.sidebarlessons strong {color: black; }
+
 .sidebarstandards div.standards-hierarchical-table {
     display: none;
 }
 
->>>>>>> master
-.sidebar {
-  display:    block;
-  position:   fixed;
-  top:        0;
-  left:       0;
-  bottom:     0;
-  width:      210px;
-  padding:    10px;
-  background: #b7d893;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 3px black;
-  z-index:    9999;
-  overflow-y: scroll;
-}
-.sidebar:hover { box-shadow: -1px 2px 10px black; }
-.sidebar > * + * { margin-bottom: 10px; }
-.sidebar strong { color: black; }
-
-.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
-.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
-.sidebarlessons .prerequisite::after { content:'★'; } 
-.sidebarlessons ul, .standardsAlignmentSelect { 
-  margin:     0;
-  padding:    10px;
-  border:     none;
-}
-
-
-.sidebarstandards { background: none; border: none !important; }
-.sidebarstandards td { padding: 0; }
 .sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
 
+.sidebarstandards { padding-left: 10px; }
 
-.sidebarbadges { display: none; }
+.sidebartextbooks strong { color: black; }
+.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
+
 .sidebarbadges ul { margin-left: 0px; text-align: center; }
 .sidebarbadges li { list-style-type: none; display: inline-block; }
 .sidebarbadges img {width: 110px; transition: width 0.5s; }
@@ -413,11 +419,7 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-<<<<<<< HEAD
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
-=======
-body:not(.LessonPlan) #header { margin-bottom:    5px !important; }
->>>>>>> master
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
 body:not(.LessonPlan) .sect1 > h2:first-child,
@@ -458,15 +460,10 @@ table .autonum::after { content: none; }
 
 .recipe p { margin: 0; } 
 
-<<<<<<< HEAD
 :not(.recipe_instructions) + .keyword_only { margin: -4pt 0pt; }
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled, 
 .studentAnswerBlockUnfilled .studentBlockAnswerUnfilled,
 .studentBlockAnswerFilled, .pyretkeyword {
-=======
-.studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
-.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
->>>>>>> master
   margin-bottom:      0.8rem;
   min-width:          105pt;
   position:           relative;
@@ -484,10 +481,7 @@ table .autonum::after { content: none; }
   text-align:         center;
   font-style:         italic;
   font-family:        "Century Gothic";
-<<<<<<< HEAD
   content:            "\00A0";
-=======
->>>>>>> master
   word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
 }
 .studentAnswerCode, .pyretkeyword { border-bottom: none; min-width: unset;}
@@ -510,9 +504,7 @@ table .autonum::after { content: none; }
   box-shadow: 2px 1px 5px black;
 }
 
-.circleevalsexp .studentAnswerShort,
-.circleevalsexp .studentAnswerMedium  { min-width: 10pt;  }
-
+.studentAnswerShort  { min-width: 60pt;  }
 .studentAnswerMedium { min-width: 100pt; }
 .studentAnswerLong   { min-width: 140pt; }
 
@@ -661,7 +653,7 @@ div.circleevalsexp .expression {
 
 div.circleevalsexp .value {
   display:            inline-block;
-  margin:             8px 6px;
+  margin:             8px 5px;
   vertical-align:     top;
 }
 
@@ -671,7 +663,6 @@ div.circleevalsexp .operator {
   text-align:         center;
   line-height:        0.5rem;
   width:              100%;
-  padding:            0 0.5em;
   border-bottom:      solid 2px black;
   border-radius:      15px 15px 0px 0px;
 }
@@ -779,11 +770,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
  */
 table.contracts-table {border-collapse: collapse;}
 table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
-<<<<<<< HEAD
 table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
-=======
-table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
->>>>>>> master
 
 /************************************************************************************
 * DATASHEETS (currently disabled)
@@ -809,8 +796,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
     line-height:      2.5rem;
   }
   body.nonworkbookpage{ width: auto !important; }
-  /* no pagenums on web pages */
-  #footer .pagenumberholder { display: none; }
 }
 
 /* set page sizes and margins */
@@ -823,7 +808,6 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
 /************************************************************************************
  * PRINT MEDIA
  */
-<<<<<<< HEAD
 @page { size: letter portrait; margin: 0.5in; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
@@ -836,33 +820,6 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
    display: none !important; visibility: hidden; float: none;
   }
 
-=======
-@page { margin: 0.5in; }
-
-/* Do not set @page size: here as html2pdf.js needs to override
- * it */
-
-/* @page { size: letter portrait; margin: 0.5in; } */
-/* @page landscape { size: letter landscape; margin: 0.5in; } */
-
-@media print {
-
-  /* set page sizes and margins */
-  body:not(.LessonPlan, .narrativepage, .landscape) {
-    width: 7.5in; height:  10in;
-  }
-  body.landscape:not( .LessonPlan, .narrativepage ) { 
-    width: 10in; height: 7.5in; page:  landscape; } /* define landscape page */
-
-  /* Elements we don't want printed */
-  ::-webkit-scrollbar { display:  none; }
-  a[href]::after { content: none !important; }
-  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .workbookpage .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
-   display: none !important; visibility: hidden; float: none;
-  }
-
->>>>>>> master
     /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
 
