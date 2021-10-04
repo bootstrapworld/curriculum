@@ -104,7 +104,7 @@
       (let ([f (string-append *pathway-root-dir* ".cached/.workbook-page-index.rkt")])
         (if (file-exists? f)
             (let ([xx (call-with-input-file f read)])
-              (map (lambda (x) (list (list (list-ref x 0) (list-ref x 1)) (list-ref x 4))) xx)
+              (map (lambda (x) (list (list (list-ref x 0) (list-ref x 1)) (list-ref x 3))) xx)
               )
             '()))
       '()))
@@ -440,14 +440,18 @@
   (fprintf o "\n\ninclude::{cachedir}.pathway-glossary.asc[]\n\n"))
 
 (define (workbook-pagenum lesson snippet)
-  ;(printf "workbook-pagenum ~s ~s\n" lesson snippet)
+  ;(printf "doing workbook-pagenum ~s ~s\n" lesson snippet)
   ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
+  #|
   (let* ([snippet.adoc
            (path->string
              (path-replace-extension snippet ".adoc"))]
          [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
                 (assoc (list lesson snippet) *workbook-pagenums*))])
-    (if c (cadr c) #f)))
+    (if c (cadr c) #f))
+  |#
+  #t
+  )
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -505,6 +509,7 @@
                     link-text
                     (if *lesson-plan*
                         (let ([pagenum (workbook-pagenum lesson snippet)])
+                          ;(printf "link-type= ~s; nopdf= ~s; book= ~s; error-cascase= ~s\n" link-type *nopdf* *book* error-cascade?)
                           (unless (or (equal? link-type "opt-printable-exercise")
                                       *nopdf*
                                       (not *book*)
@@ -1025,6 +1030,8 @@
                                   (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
+                           [(string=? directive "scrub")
+                            (read-group i directive)]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
@@ -1690,7 +1697,7 @@
               (fprintf op "~s~n" (car s))
               (let ([x (caddr s)])
                 (cond [first? (set! first? #f)]
-                      [else (display ", " op2)])
+                      [else (display ",\n                " op2)])
                 (write (string-append (car x) " : " (cadr x)) op2))
               )
             (display "]" op2) (newline op2)
