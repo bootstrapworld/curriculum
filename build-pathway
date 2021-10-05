@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-04 # last modified
+LASTMOD=2021-10-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -164,7 +164,10 @@ if ! which wkhtmltopdf|grep -q .; then
   echo WARNING: Missing wkhtmltopdf: PDF workbooks can\t be created
 fi
 
+NOARGSGIVEN=
+
 if test "$ARGS" = ""; then
+  NOARGSGIVEN=1
   ARGS=$(ls -d pathways/*)
 fi
 
@@ -1810,13 +1813,21 @@ function copycommonlessons() {
 
   #echo currently in $(pwd)
 
-  for lessonDir in $TOPDIR/lessons/*; do
-    lessonDir=${lessonDir#*lessons/}
-    #echo calling copylessondir $lessonDir
-    copylessondir $lessonDir
-  done
+  if test $NOARGSGIVEN; then
+    for lessonDir in $TOPDIR/lessons/*; do
+      lessonDir=${lessonDir#*lessons/}
+      copylessondir $lessonDir
+    done
+  else
+    for pwy in $ARGS; do
+      for lessonDir in $(cat $TOPDIR/pathways/$pwy/langs/$LANGUAGE/lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+        copylessondir $lessonDir
+      done
+    done
+  fi
 
   cd $TOPDIR
+
 }
 
 function buildpathway() {
