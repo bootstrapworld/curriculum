@@ -3,9 +3,9 @@
 ;FIXME what wd be the canonical location of this file?
 ;      the pathway top dir?
 
-(provide *lessons-and-badges*)
+(provide *lessons-and-practices*)
 
-(define *lessons-and-badges*
+(define *lessons-and-practices*
   '(
 ; core
 
