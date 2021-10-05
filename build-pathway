@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-03 # last modified
+LASTMOD=2021-10-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -203,12 +203,12 @@ function checkmd5nochange() {
     if test "$newchecksum" = "$savedchecksum"; then
       return 0
     else
-      #echo saving i $savef
+      #echo saving I $savef
       echo $newchecksum > $savef
       return 1
     fi
   else
-    #echo saving ii $savef
+    #echo saving II $savef
     echo $newchecksum > $savef
     return 1
   fi
@@ -651,13 +651,14 @@ $SED -i \
 
 function adjustproglangsubdirs() {
   local d=$1
-  #echo doing adjustproglangsubdirs $(pwd)/$d
+  local pl=$2
+  #echo doing adjustproglangsubdirs $d $pl
   #echo PROGLANG is $PROGLANG
 
   test -d "$d" || return
 
-  if test -d "$d"/$PROGLANG; then
-    cp -p "$d"/$PROGLANG/* "$d"
+  if test -d "$d"/"$pl"; then
+    cp -p "$d"/"$pl"/* "$d"
   fi
 
   for lang in pyret wescheme; do
@@ -668,7 +669,7 @@ function adjustproglangsubdirs() {
 
   for subdir in "$d"/*; do
     if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir"
+      adjustproglangsubdirs "$subdir" "$pl"
     fi
   done
 }
@@ -767,6 +768,7 @@ function doadoc() {
   local nocache="$2"
   local lessonplan="$3"
   #echo doing doadoc "$@"
+  #echo PROGLANG Is $PROGLANG
   local fbase=${f%.a*doc}
   local fasc=.cached/.$fbase.asc
   local fhtml=$fbase.html
@@ -804,6 +806,7 @@ function doadoc() {
 function doadocs() {
   local ff="$@"
   #echo doing doadocs $ff
+  #echo PROGLANG is $PROGLANG
 
   if test $# -eq 0; then
     return
@@ -1086,22 +1089,26 @@ function buildworkbookpages() {
   #
   repoDir="$TOPDIR/lessons/$LESSONSUBDIR/langs/$LANGUAGE"
 
-  DORECURSIVEADOC=1
+  export PROGLANG=pyret
+  if test -f .cached/.wescheme; then
+    export PROGLANG=wescheme
+  fi
 
-  #echo calling checkmd5nochange from buildworkbookpages
-  if checkmd5nochange . $repoDir; then
-    #echo no need to do recursive adoc
-    DORECURSIVEADOC=
+  DORECURSIVEADOC=
+
+  if test -f .cached/.redo; then
+    DORECURSIVEADOC=1
+    rm -f .cached/.redo
   fi
 
   if test $DORECURSIVEADOC; then
-  #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
+    #echo !!! doing buildworkbookpages $L $DORECURSIVEADOC
 
-  if test ! -d pages; then
-    echo
-    echo WARNING: $L missing pages
-    mkdir pages
-  fi
+    if test ! -d pages; then
+      echo
+      echo WARNING: $L missing pages
+      mkdir pages
+    fi
 
   #echo calling mkdirsolutionversion in buildworkbookpages
   mkdirsolutionversion
@@ -1154,12 +1161,17 @@ function buildlessonplan() {
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
 
+  export PROGLANG=pyret
+  if test -f .cached/.wescheme; then
+    export PROGLANG=wescheme
+  fi
+
   if test -f index.adoc; then
     #export PATHWAYROOTDIR="../../"
     export PATHWAYROOTDIR="../courses/$TGTPATHWAY/"
     # there should be only one?
     if test index.adoc -nt index.shtml; then
-      overwrite 'building' lesson plan: $L
+      overwrite building lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc 0 lessonplan
@@ -1642,7 +1654,7 @@ function rmtmpfiles() {
 function copylessondir() {
   lessonDir=$1
   #echo doing copylessondir $lessonDir
-  repoLessonDir=$TOPDIR/$lessonDir/langs/$LANGUAGE
+  repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$LANGUAGE
   #echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
     mkdir -p $lessonDir
@@ -1655,13 +1667,16 @@ function copylessondir() {
     fi
     #echo checkmd5nochange done
     if test $DOCOPYDIR; then
-      #echo docopydir
-      overwrite 'copying' $lessonDir
+      #echo do copydir into $(pwd)
+      overwrite copying $lessonDir
       cp -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
       #echo I currently in $(pwd)
       # we'll set it again when we do the adoc'ing
-      rm -f .cached/.checksum.md5txt
+      mkdir -p .cached
+      #echo III deleting checksum.md5txt
+      #rm -f .cached/.checksum.md5txt
+      touch .cached/.redo
       for subdir in *; do
         if test "$subdir" = pages -o "$subdir" = solution-pages; then
           test -d $subdir/.cached || mkdir $subdir/.cached
@@ -1671,15 +1686,30 @@ function copylessondir() {
       #echo checklessonplan done
       for subdir in *; do
         if test -d "$subdir"; then
-          adjustproglangsubdirs "$subdir"
-          #echo done adjustproglangsubdirs $subdir
+          adjustproglangsubdirs "$subdir" pyret
         fi
       done
-      cd ../..
+      cd ..
+      if test -f $lessonDir/proglang.txt; then
+        for pl in $(cat $lessonDir/proglang.txt); do
+          if test "$pl" != pyret; then
+            cp -pr $lessonDir $lessonDir-$pl
+            cd $lessonDir-$pl
+            mkdir -p .cached
+            touch .cached/.$pl
+            touch .cached/.redo
+            for subdir in *; do
+              if test -d "$subdir"; then
+                adjustproglangsubdirs "$subdir" "$pl"
+              fi
+            done
+            cd ..
+          fi
+        done
+      fi
     fi
   fi
   #echo done copylessondir
-  #exit
 }
 
 function collectworkbookpages() {
@@ -1774,12 +1804,14 @@ function copycommonlessons() {
     rm -fr $DESTLANGDIR/lessons
   fi
 
-  cd $DESTLANGDIR
+  mkdir -p $DESTLANGDIR/lessons
+
+  cd $DESTLANGDIR/lessons
 
   #echo currently in $(pwd)
 
   for lessonDir in $TOPDIR/lessons/*; do
-    lessonDir=lessons/${lessonDir#*lessons/}
+    lessonDir=${lessonDir#*lessons/}
     #echo calling copylessondir $lessonDir
     copylessondir $lessonDir
   done
@@ -1826,9 +1858,11 @@ function buildpathway() {
     distDir="$TOPDIR/$DESTPATHWAYDIR"
 
     if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
-      echo copying pathway $repoDir
+      #echo copying pathway I $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
     fi
+
+    #echo copy pathway $SRCPATHWAY done
 
     REFRESHFRONTMATTER=1
     REFRESHBACKMATTER=1
@@ -1892,14 +1926,14 @@ function buildpathway() {
       cd front-matter
       mkdirsolutionversion
       cd ..
-      adjustproglangsubdirs front-matter
+      adjustproglangsubdirs front-matter $PROGLANG
     fi
 
     if test $REFRESHBACKMATTER; then
       cd back-matter
       mkdirsolutionversion
       cd ..
-      adjustproglangsubdirs back-matter
+      adjustproglangsubdirs back-matter $PROGLANG
     fi
 
     mkdir -p resources/protected
@@ -1917,7 +1951,7 @@ function buildpathway() {
         fi
       done
       cd ..
-      adjustproglangsubdirs resources
+      adjustproglangsubdirs resources $PROGLANG
     fi
 
     for d in front-matter back-matter; do
@@ -1938,8 +1972,6 @@ function buildpathway() {
         touch front-matter #why?
       fi
     fi
-
-    #exit #DEBUG
 
     if test $REFRESHBACKMATTER; then
       if test -d back-matter; then
@@ -2021,8 +2053,6 @@ function buildpathway() {
         export PDFpagesredone=
         cd $TOPDIR/distribution/$LANGUAGE
         batchhtmltopdf
-
-        #exit
 
         cd courses/$PATHWAY
 
@@ -2121,8 +2151,6 @@ if test "$PROGLANG" = ""; then
   export PROGLANG=pyret
 fi
 
-#echo setting PUPPETEER_INPUT in $(pwd)
-
 TEMPF=$(mktemp); rm -f $TEMPF
 export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
@@ -2131,27 +2159,11 @@ echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" >> $PUPPETEER_INPUT
 
 copycommonlessons
 
-#echo copycommonlessons finished
-
-#echo PWD is $(pwd)
-
 mkdir -p distribution/$LANGUAGE/.cached
 
 buildcommonlessons
 
-#echo buildcommonlessons finished
-
-#exit #FIXME
-
 buildlessonplans
-
-#exit # FIXME
-
-#echo buildlessonplans finished
-
-#echo starting pathway building on $ARGS in $(pwd)
-
-#exit # FIXME
 
 for f in $ARGS; do
   #echo I doing $f
@@ -2181,8 +2193,6 @@ for f in $ARGS; do
     buildpathway
   fi
 done
-
-echo pathway building done
 
 builddependencyjson
 
