@@ -1190,9 +1190,9 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
-                            (newline o)
-                            (fprintf o "link:./protected/workbook-sols.pdf[Teacher's Workbook, with Solutions]")
+                            ;(fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
+                            ;(newline o)
+                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])

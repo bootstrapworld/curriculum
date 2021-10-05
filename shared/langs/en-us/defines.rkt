@@ -55,7 +55,7 @@
 (define (print-link-to-student-workbook o)
   (display
     (string-append
-      "\n- link:./workbook/workbook.pdf[Student Workbook]\n"
+      "\n- link:./workbook/workbook.pdf[Workbook]\n"
       "-- Sometimes, the best way for students to get real thinking done\n"
       "is to step away from the keyboard! Our lesson plans are tightly integrated\n"
       "with the Student Workbook, allowing for paper-and-pencil practice and\n"
