@@ -13,7 +13,7 @@
 (require "the-standards-dictionaries.rkt")
 (require "the-textbook-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
-(require "lessons-and-badges.rkt")
+(require "lessons-and-practices.rkt")
 (require "lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
 ;(require "draw-dep-diag.rkt")
@@ -136,7 +136,7 @@
 
 (define *standards-met* '())
 
-(define *badges-merited* '())
+(define *practices-merited* '())
 
 (define *textbooks-used* '())
 
@@ -281,8 +281,8 @@
 
 (define (add-badge b)
   ;(printf "doing add-badge ~s\n" b)
-  (unless (member b *badges-merited*)
-    (set! *badges-merited* (cons b *badges-merited*))))
+  (unless (member b *practices-merited*)
+    (set! *practices-merited* (cons b *practices-merited*))))
 
 (define (add-textbook tb)
   ;(printf "doing add-textbook ~s\n" tb)
@@ -399,16 +399,17 @@
           (display "|===\n" o)
           ]))
 
-(define (display-badges-bar o)
-  ;(printf "doing display-badges-bar\n")
-  (display (create-begin-tag "div" ".sidebarbadges") o)
+(define (display-practices-bar o)
+  ;(printf "doing display-practices-bar\n")
+  (display (create-begin-tag "div" ".sidebarpractices") o)
+  (display "*Practices*" o)
   (display (create-begin-tag "ul" "") o)
-  (cond [(null? *badges-merited*)
+  (cond [(null? *practices-merited*)
          (when *lesson-plan*
-           (printf "WARNING: ~a: No badges specified\n" (errmessage-context)))]
+           (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))]
         [else
-          ;(printf "Badges are present for ~s\n" *lesson-plan*)
-          (for ([badge *badges-merited*])
+          ;(printf "Pracices are present for ~s\n" *lesson-plan*)
+          (for ([badge *practices-merited*])
             (let ([img (format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)])
               (display (enclose-tag "li" "" img) o)
               (newline o)))])
@@ -989,7 +990,7 @@
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
 
-        (for ([x *lessons-and-badges*])
+        (for ([x *lessons-and-practices*])
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
               (add-badge s))))
@@ -1393,7 +1394,7 @@
                     (display-prereqs-bar o)
                     (display-standards-bar o)
                     (display-textbooks-bar o)
-                    (display-badges-bar o)
+                    (display-practices-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
