@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-04 # last modified
+LASTMOD=2021-10-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -164,7 +164,10 @@ if ! which wkhtmltopdf|grep -q .; then
   echo WARNING: Missing wkhtmltopdf: PDF workbooks can\t be created
 fi
 
+NOARGSGIVEN=
+
 if test "$ARGS" = ""; then
+  NOARGSGIVEN=1
   ARGS=$(ls -d pathways/*)
 fi
 
@@ -250,7 +253,7 @@ if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
 fi
 
 if ! checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib; then
-  overwrite 'copying' distribution/$LANGUAGE/lib
+  overwrite copying distribution/$LANGUAGE/lib
   cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
@@ -1083,6 +1086,7 @@ function buildworkbookpages() {
   local L=$1
   #echo doing buildworkbookpages $L in $(pwd)
   export oldDISTROOTDIR="$DISTROOTDIR"
+  local oldPROGLANG="$PROGLANG"
   cd $L
   export LESSON=$L
   export LESSONSUBDIR=$L
@@ -1132,6 +1136,7 @@ function buildworkbookpages() {
 
   cd ..
 
+  export PROGLANG="$oldPROGLANG"
   export DISTROOTDIR="$oldDISTROOTDIR"
 }
 
@@ -1154,6 +1159,7 @@ function buildlessonplan() {
   #echo doing buildlessonplan $L in $(pwd)
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
+  local oldPROGLANG="$PROGLANG"
 
   cd $L
   export DISTROOTDIR=../../
@@ -1212,6 +1218,7 @@ function buildlessonplan() {
 
   export LESSONPLAN=
   export LESSONSUBDIR=$oldLESSONSUBDIR
+  export PROGLANG="$oldPROGLANG"
   export LESSON=
 }
 
@@ -1727,6 +1734,8 @@ function collectworkbookpages() {
       #ensure workbook-pages.txt ends in newline, or while isn't happy
       $SED -i -e '$a\' ../workbook-pages.txt
 
+      touch .workbook-pages-ls.txt.kp
+
       while read -r f; do
         #echo finding aspect of "$f"
         aspect=portrait
@@ -1810,13 +1819,21 @@ function copycommonlessons() {
 
   #echo currently in $(pwd)
 
-  for lessonDir in $TOPDIR/lessons/*; do
-    lessonDir=${lessonDir#*lessons/}
-    #echo calling copylessondir $lessonDir
-    copylessondir $lessonDir
-  done
+  if test $NOARGSGIVEN; then
+    for lessonDir in $TOPDIR/lessons/*; do
+      lessonDir=${lessonDir#*lessons/}
+      copylessondir $lessonDir
+    done
+  else
+    for pwy in $ARGS; do
+      for lessonDir in $(cat $TOPDIR/pathways/$pwy/langs/$LANGUAGE/lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+        copylessondir $lessonDir
+      done
+    done
+  fi
 
   cd $TOPDIR
+
 }
 
 function buildpathway() {
@@ -2147,10 +2164,6 @@ function allthestandards() {
   cd $TOPDIR
 }
 
-if test "$PROGLANG" = ""; then
-  export PROGLANG=pyret
-fi
-
 TEMPF=$(mktemp); rm -f $TEMPF
 export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
@@ -2179,7 +2192,7 @@ for f in $ARGS; do
       export TGTPATHWAY=algebra-wescheme
       buildpathway
       export PROGLANG=pyret
-      export TGTPATHWAY=algebra-pyret
+      export TGTPATHWAY=algebra
       buildpathway
     else
       export PROGLANG=pyret
@@ -2188,7 +2201,9 @@ for f in $ARGS; do
     export PROGLANG=
   else
     if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-$PROGLANG
+      if test "$PROGLANG" != pyret; then
+        export TGTPATHWAY=algebra-$PROGLANG
+      fi
     fi
     buildpathway
   fi
@@ -2210,7 +2225,6 @@ if test ! $NOPDF; then
         export TGTPATHWAY=algebra-wescheme
         buildpathwayworkbooks
         export PROGLANG=pyret
-        export TGTPATHWAY=algebra-pyret
         buildpathwayworkbooks
       else
         export PROGLANG=pyret
@@ -2219,7 +2233,9 @@ if test ! $NOPDF; then
       export PROGLANG=
     else
       if test "$SRCPATHWAY" = algebra; then
-        export TGTPATHWAY=algebra-$PROGLANG
+        if test "$PROGLANG" != pyret; then
+          export TGTPATHWAY=algebra-$PROGLANG
+        fi
       fi
       buildpathwayworkbooks
     fi
