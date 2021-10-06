@@ -1086,6 +1086,7 @@ function buildworkbookpages() {
   local L=$1
   #echo doing buildworkbookpages $L in $(pwd)
   export oldDISTROOTDIR="$DISTROOTDIR"
+  local oldPROGLANG="$PROGLANG"
   cd $L
   export LESSON=$L
   export LESSONSUBDIR=$L
@@ -1135,6 +1136,7 @@ function buildworkbookpages() {
 
   cd ..
 
+  export PROGLANG="$oldPROGLANG"
   export DISTROOTDIR="$oldDISTROOTDIR"
 }
 
@@ -1157,6 +1159,7 @@ function buildlessonplan() {
   #echo doing buildlessonplan $L in $(pwd)
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
+  local oldPROGLANG="$PROGLANG"
 
   cd $L
   export DISTROOTDIR=../../
@@ -1215,6 +1218,7 @@ function buildlessonplan() {
 
   export LESSONPLAN=
   export LESSONSUBDIR=$oldLESSONSUBDIR
+  export PROGLANG="$oldPROGLANG"
   export LESSON=
 }
 
@@ -2160,10 +2164,6 @@ function allthestandards() {
   cd $TOPDIR
 }
 
-if test "$PROGLANG" = ""; then
-  export PROGLANG=pyret
-fi
-
 TEMPF=$(mktemp); rm -f $TEMPF
 export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
@@ -2192,7 +2192,7 @@ for f in $ARGS; do
       export TGTPATHWAY=algebra-wescheme
       buildpathway
       export PROGLANG=pyret
-      export TGTPATHWAY=algebra-pyret
+      export TGTPATHWAY=algebra
       buildpathway
     else
       export PROGLANG=pyret
@@ -2201,7 +2201,9 @@ for f in $ARGS; do
     export PROGLANG=
   else
     if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-$PROGLANG
+      if test "$PROGLANG" != pyret; then
+        export TGTPATHWAY=algebra-$PROGLANG
+      fi
     fi
     buildpathway
   fi
@@ -2223,7 +2225,6 @@ if test ! $NOPDF; then
         export TGTPATHWAY=algebra-wescheme
         buildpathwayworkbooks
         export PROGLANG=pyret
-        export TGTPATHWAY=algebra-pyret
         buildpathwayworkbooks
       else
         export PROGLANG=pyret
@@ -2232,7 +2233,9 @@ if test ! $NOPDF; then
       export PROGLANG=
     else
       if test "$SRCPATHWAY" = algebra; then
-        export TGTPATHWAY=algebra-$PROGLANG
+        if test "$PROGLANG" != pyret; then
+          export TGTPATHWAY=algebra-$PROGLANG
+        fi
       fi
       buildpathwayworkbooks
     fi
