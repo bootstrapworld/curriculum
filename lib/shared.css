@@ -459,7 +459,42 @@ table .autonum::after { content: none; }
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
-.recipe p { margin: 0; } 
+/* We use tables (perhaps not the best idea) for our DR headings */
+table.recipe_title    { border: 0px !important; background: gray; }
+table.recipe_title td { padding: 0px; margin: 0px; border: none; }
+/* Style the white checkbox in the heading */
+.recipe_title p {
+  color:              white;
+  display:            block;
+  padding:            1px 4px;
+  font-weight:        bold;
+  margin:             0px;
+}
+.recipe_title p::after { 
+  width:              13pt;
+  height:             13pt;
+  margin-top:         1pt;
+  background:         white; 
+  color:              transparent; 
+  content:            "\2B1C"; 
+  float:              right; 
+}
+/* Under the heading comes the instructions */
+.recipe_instructions * { font-style: italic; font-size: .85rem; }
+
+/* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
+.recipe p { 
+  width:      100%;
+  clear:  both;
+  flex-wrap:  wrap;
+  display:    flex; 
+  margin:     0;
+}
+/* All code is inside a wrapper, so apply the code font */
+.wrapper p { font-family: Hack, "Courier New", monospace; }
+
+/* All "rubies" beneath student answers should be black */
+.recipe .studentAnswer::after { color: black; }
 
 :not(.recipe_instructions) + .keyword_only { margin: -4pt 0pt; }
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled, 
@@ -488,7 +523,6 @@ table .autonum::after { content: none; }
 .studentAnswerCode, .pyretkeyword { border-bottom: none; min-width: unset;}
 .studentAnswer .pyretkeyword { margin-bottom: 0; margin-right: 0; }
 
-
 .studentAnswerUnfilled,.studentAnswerFilled,
 .studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   min-width:          auto;
@@ -503,22 +537,12 @@ table .autonum::after { content: none; }
     line-height:      inherit;
 }
 
-.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
-  box-shadow: 2px 1px 5px black;
-}
-
 .studentAnswerShort  { min-width: 60pt;  }
 .studentAnswerMedium { min-width: 100pt; }
 .studentAnswerLong   { min-width: 140pt; }
 
-/* This class and the rule below it could be cleaned up */
-.wrapper p {
-  clear:  both;
-  font-family: Hack, "Courier New", monospace;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
+/* Maximize space for Domain, Purpose, and example/definition bodies */
+.recipe_domain, .recipe_purpose,
 .wescheme .wrapper p > *:nth-last-child(2),
 .pyret    .wrapper p > *:nth-last-child(1) {
   flex-grow:  1;
@@ -531,23 +555,18 @@ table .autonum::after { content: none; }
   font-family:        Hack, "Courier New", monospace;
   border-bottom:      solid 1pt black;
 }
-.recipe_cond { flex-grow: unset !important; min-width:  10%; }
-
-.recipe_name::after, .recipe_domain::after, .recipe_range::after,
-.recipe_purpose::after, .recipe_example_inputs::after, 
-.recipe_example_body::after, .recipe_variables::after,
-.recipe_definition_body::after {
-  color: black;
-}
 
 .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
   text-align: center;
 }
-.recipe_name          { min-width: 12%; }
-.recipe_domain        { width: 55%; }
-.recipe_range         { width: 15%; }
+
+.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+.recipe_name          { min-width: 20%; }
+.recipe_range         { min-width: 12%; }
 .recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
-.recipe_purpose       { width: 93%; }
+.recipe_variables     { min-width: 30%; white-space: nowrap; }
+
+/* Special styling for purpose statements (includes lang-specific comment) */
 .recipe_purpose, .recipe_contract .recipe_name { 
   padding-left:         1.5ex; 
   background-repeat-x:  no-repeat;
@@ -563,38 +582,13 @@ table .autonum::after { content: none; }
 .recipe_contract { background-repeat-y: no-repeat; }
 
 .pyret .recipe_name { text-align: right; }
-.recipe_example_body { min-width: 10em; margin-left: 1em;}
-.recipe_definition_body { width: 90%; }
+.recipe_example_body { margin-left: 1em;}
 
 /* Piecewise Functions (ask/cond) branches */
 .wescheme .questions  { width: 42%; }
 .wescheme .answers    { width: 42%; }
 .pyret    .questions  { width: 39%; }
 .pyret    .answers    { width: 44%; }
-
-/* Section title, with checkbox and step-specific instructions */
-.recipe_title p {
-  color:              white;
-  background:         gray;
-  display:            block;
-  padding:            1px 4px;
-  font-size:          1rem;
-  font-weight:        bold;
-  margin:             0px;
-}
-.recipe_title p::after { 
-  width:              13pt;
-  height:             13pt;
-  margin-top:         1pt;
-  background:         white; 
-  color:              transparent; 
-  content:            "\2B1C"; 
-  float:              right; 
-}
-.recipe_instructions * { font-style: italic; font-size: .85rem; }
-
-table.recipe_title    { border: 0px !important; }
-table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 
 /************************************************************************************
 * TEACHER RESOURCES PAGE
@@ -635,6 +629,12 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 /************************************************************************************
 * FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
 */
+
+/* When printing solutions, add a shadow for expressions */
+.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
+  box-shadow: 2px 1px 5px black;
+}
+
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
 }
@@ -801,12 +801,12 @@ table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
   body.nonworkbookpage{ width: auto !important; }
 }
 
-/* set page sizes and margins */
+/* set page width for screen (height is only set for print) */
 body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; height:  10in;
+  width: 7.5in;
 }
 body.landscape:not( .LessonPlan, .narrativepage ) { 
-  width: 10in; height: 7.5in; page:  landscape; } /* define landscape page */
+  width: 10in; page:  landscape; } /* define landscape page */
 
 /************************************************************************************
  * PRINT MEDIA
@@ -822,6 +822,11 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
   .workbookpage .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
    display: none !important; visibility: hidden; float: none;
   }
+
+  /* set page heights */
+  body:not(.LessonPlan, .narrativepage, .landscape) { height:  10in; }
+  body.landscape:not( .LessonPlan, .narrativepage ) { height: 7.5in; }
+
 
     /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
