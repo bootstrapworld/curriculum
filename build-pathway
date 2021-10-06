@@ -253,7 +253,7 @@ if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
 fi
 
 if ! checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib; then
-  overwrite 'copying' distribution/$LANGUAGE/lib
+  overwrite copying distribution/$LANGUAGE/lib
   cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
@@ -1729,6 +1729,8 @@ function collectworkbookpages() {
       rm -f .workbook-pages.txt.kp .workbook-pages-ls.txt.kp
       #ensure workbook-pages.txt ends in newline, or while isn't happy
       $SED -i -e '$a\' ../workbook-pages.txt
+
+      touch .workbook-pages-ls.txt.kp
 
       while read -r f; do
         #echo finding aspect of "$f"
