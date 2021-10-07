@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-05 # last modified
+LASTMOD=2021-10-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1073,8 +1073,8 @@ function checklessonplan() {
         fi
         #echo g is $g gext is $gext
         if test "$gext" = html; then
-          echo ", { \"input\": \"$L/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
-          echo ", { \"input\": \"$L/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
+          echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
+          echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
         fi
       done
     fi
@@ -1490,9 +1490,9 @@ function makeworkbookjson() {
     includeoptexercises=1
   fi
 
-  #echo Initializing $PDFTK_INPUT_$tgt
+  #echo Initializing $WORKBOOKINPUT_$tgt
 
-  echo "{ \"fileList\": [ \"ignoreElement\" " > $PDFTK_INPUT-$tgt.json
+  echo "{ \"fileList\": [ \"ignoreElement\" " > $WORKBOOKINPUT-$tgt.json
 
   local currlesson=
 
@@ -1524,7 +1524,7 @@ function makeworkbookjson() {
         docfile=$currlesson/index.shtml
         if test -f "$docfile"; then
           if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
-            echo $currlesson/index.pdf >> $PDFTK_INPUT-$tgt
+            echo $currlesson/index.pdf >> $WORKBOOKINPUT-$tgt
           fi
         fi
       fi
@@ -1554,23 +1554,23 @@ function makeworkbookjson() {
         if test -f "$docfile"; then
           localpdffile=${docfile%.html}.pdf
 
-          echo ", { \"file\": \"$localpdffile\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
+          echo ", { \"file\": \"$localpdffile\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
 
         else
-          echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
+          echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
         fi
 
       elif test ! -f $docfile; then
-        echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
+        echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
 
       else
-        echo ", { \"file\": \"$docfile\", \"paginate\": $pageno }" >> $PDFTK_INPUT-$tgt.json
+        echo ", { \"file\": \"$docfile\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
 
       fi
 
     done
 
-    echo "] }" >> $PDFTK_INPUT-$tgt.json
+    echo "] }" >> $WORKBOOKINPUT-$tgt.json
 
 }
 
@@ -1606,7 +1606,7 @@ function buildteacherresource() {
       done
     fi
     if test index.adoc -nt index.shtml; then
-      overwrite 'building' teacher resources: $PATHWAY "→" "resources" "→" *.adoc
+      overwrite building teacher resources: $PATHWAY "→" "resources" "→" *.adoc
       export TEACHER_RESOURCES=1
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
@@ -1642,7 +1642,6 @@ function batchhtmltopdf() {
 }
 
 function rmtmpfiles() {
-  #find . -name $PDFTK_PAGED\*.html -delete
 
   test $DEBUG && return
   #echo doing rmtmpfiles
@@ -1789,7 +1788,7 @@ function collectworkbookpages() {
 }
 
 function buildpathwayworkbooks() {
-  #echo building pathway workbooks for $TGTPATHWAY in $(pwd)
+  #echo building pathway workbooks for $TGTPATHWAY $SRCPATHWAY
 
   cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
 
@@ -1919,12 +1918,7 @@ function buildpathway() {
     export PATHWAYROOTDIR=./
     export DISTROOTDIR=../../
 
-    #TEMPF=$(mktemp); rm -f $TEMPF
-    #export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
-
-    #export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/$WKH2P_BATCH_BASE-pdftk
-
-    export PDFTK_INPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
+    export WORKBOOKINPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
 
     #mkdir -p lessons workbook
     mkdir -p  workbook
@@ -2067,9 +2061,8 @@ function buildpathway() {
         fi
         #cd ../courses/$PATHWAY
 
-        export PDFpagesredone=
         cd $TOPDIR/distribution/$LANGUAGE
-        batchhtmltopdf
+        #batchhtmltopdf
 
         cd courses/$PATHWAY
 
@@ -2178,6 +2171,8 @@ buildcommonlessons
 
 buildlessonplans
 
+#echo !!! building pathways
+
 for f in $ARGS; do
   #echo I doing $f
   export SRCPATHWAY=$f
@@ -2213,7 +2208,15 @@ builddependencyjson
 
 buildpathwaytocs
 
+#echo !!! building workbooks
+
 if test ! $NOPDF; then
+
+
+  cd $TOPDIR/distribution/$LANGUAGE
+  batchhtmltopdf
+
+
   for f in $ARGS; do
     export SRCPATHWAY=$f
     export SRCPATHWAY=${SRCPATHWAY#pathways/}
@@ -2225,6 +2228,7 @@ if test ! $NOPDF; then
         export TGTPATHWAY=algebra-wescheme
         buildpathwayworkbooks
         export PROGLANG=pyret
+        export TGTPATHWAY=algebra
         buildpathwayworkbooks
       else
         export PROGLANG=pyret
