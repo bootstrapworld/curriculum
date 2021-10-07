@@ -459,8 +459,9 @@ table .autonum::after { content: none; }
 table.recipe_title    { background: gray; }
 table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 .recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
-.recipe_title td:last-child {border: 3px solid gray; }
+.recipe_title td:last-child { border: 3px solid gray !important; }
 .recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
+
 /* Under the heading comes the instructions */
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
@@ -471,15 +472,17 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
   display:    flex; 
   flex-wrap:  wrap;
 }
+
+/* All student answers have a bottom-border, and a "ruby" printed in black */
 .recipe .studentAnswer { border-bottom: solid 1px black; }
+.recipe .studentAnswer::after { color: black; }
+
 /* All code is inside a wrapper, so apply the code font */
 .wrapper p, .wrapper .studentAnswer { font-family: Hack, "Courier New", monospace; }
 
-/* All "rubies" beneath student answers should be black */
-.recipe .studentAnswer::after { color: black; }
-
 :not(.recipe_instructions) + .keyword_only { margin: -4pt 0pt; }
 
+/* Note(Emmanuel): these could probably be a lot tighter */
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled, 
 .studentAnswerBlockUnfilled .studentBlockAnswerUnfilled,
 .studentBlockAnswerFilled, .pyretkeyword {
@@ -506,8 +509,8 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 .studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
 .studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
 
-.studentAnswerUnfilled,.studentAnswerFilled,
-.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
+.studentAnswerUnfilled, .studentBlockAnswerUnfilled,
+.studentAnswerFilled,   .studentBlockAnswerFilled {
   min-width:          auto;
 }
 
