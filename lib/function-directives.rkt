@@ -266,9 +266,9 @@
 
 (define (write-title title-text)
   (string-append
-    "\n\n[.recipe_title, cols=\"1a\"]\n"
+    "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
     "|===\n"
-    "| " title-text "\n"
+    "| " title-text "|\n"
     "|===\n\n"))
 
 (define (write-purpose funname domain-list range purpose)

@@ -75,7 +75,13 @@ tr th.tableblock {
   height:           37px !important;
   float:            right !important;
 }
-#footer { background: rgba(0,0,0,0.5); padding: 0px; height:  24px; }
+#footer { 
+  background: rgba(0,0,0,0.5); 
+  height:     24px; 
+  position:   fixed;
+  bottom:     0;
+  padding:    0;
+}
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
@@ -445,26 +451,16 @@ table .autonum::after { content: none; }
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
+.studentAnswerShort  { min-width: 60pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
+
 /* We use tables (perhaps not the best idea) for our DR headings */
-table.recipe_title    { border: 0px !important; background: gray; }
+table.recipe_title    { background: gray; }
 table.recipe_title td { padding: 0px; margin: 0px; border: none; }
-/* Style the white checkbox in the heading */
-.recipe_title p {
-  color:              white;
-  display:            block;
-  padding:            1px 4px;
-  font-weight:        bold;
-  margin:             0px;
-}
-.recipe_title p::after { 
-  width:              13pt;
-  height:             13pt;
-  margin-top:         1pt;
-  background:         white; 
-  color:              transparent; 
-  content:            "\2B1C"; 
-  float:              right; 
-}
+.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
+.recipe_title td:last-child {border: 3px solid gray; }
+.recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
 /* Under the heading comes the instructions */
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
@@ -524,10 +520,6 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
     line-height:      inherit;
 }
 
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
-
 /* Maximize space for Domain, Purpose, and example/definition bodies */
 .recipe_domain, .recipe_purpose,
 .wescheme .wrapper p > *:nth-last-child(2),
@@ -545,6 +537,9 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 .recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
 .recipe_variables     { min-width: 30%; white-space: nowrap; }
 
+/* in solutions mode, use the smallest possible space for function name */ 
+.solution.recipe_name { min-width: unset; }
+
 /* Special styling for purpose statements (includes lang-specific comment) */
 .recipe_purpose, .recipe_contract .recipe_name { 
   padding-left:         1.5ex; 
@@ -560,7 +555,6 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 }
 .recipe_contract { background-repeat-y: no-repeat; }
 
-.pyret .recipe_name { text-align: right; }
 .recipe_example_body { margin-left: 1em;}
 
 /* Piecewise Functions (ask/cond) branches */
@@ -782,10 +776,10 @@ table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
 
 /* set page width for screen (height is only set for print) */
 body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in;
+  width: 7.5in; min-height: 10in;
 }
 body.landscape:not( .LessonPlan, .narrativepage ) { 
-  width: 10in; page:  landscape; } /* define landscape page */
+  width: 10in; min-height: 7.5in; page:  landscape; } /* define landscape page */
 
 /************************************************************************************
  * PRINT MEDIA
