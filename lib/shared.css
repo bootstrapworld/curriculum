@@ -456,8 +456,8 @@ table .autonum::after { content: none; }
 .studentAnswerLong   { min-width: 140pt; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
-table.recipe_title    { background: gray; }
-table.recipe_title td { padding: 0px; margin: 0px; border: none; }
+table.recipe_title    { background: gray; border: gray; }
+table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
 .recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
 .recipe_title td:last-child { border: 3px solid gray !important; }
 .recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
@@ -563,10 +563,19 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 .recipe_example_body { margin-left: 1em;}
 
 /* Piecewise Functions (ask/cond) branches */
-.wescheme .questions  { width: 42%; }
-.wescheme .answers    { width: 42%; }
+.wescheme .questions  { width: 44%; }
+.wescheme .answers    { width: 45%; }
 .pyret    .questions  { width: 39%; }
 .pyret    .answers    { width: 44%; }
+.cond_clauses { position: relative; width: 100%; }
+.cond_clauses .studentAnswer { border-bottom: solid 1px black; }
+.wescheme .cond_clauses::after {  /* Add trailing parens for WeScheme */
+  content: ') )'; 
+  position: absolute; 
+  left: 98%; 
+  bottom: 1rem; 
+  font-size: inherit; 
+}
 
 /************************************************************************************
 * TEACHER RESOURCES PAGE
