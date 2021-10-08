@@ -2157,6 +2157,41 @@ function allthestandards() {
   cd $TOPDIR
 }
 
+function callonARGS() {
+  local subroutine=$1
+
+  for f in $ARGS; do
+    #echo I doing $f
+    export SRCPATHWAY=$f
+    export SRCPATHWAY=${SRCPATHWAY#pathways/}
+    export SRCPATHWAY=${SRCPATHWAY%/}
+    export TGTPATHWAY="$SRCPATHWAY"
+    #echo SRCPATHWAY is $SRCPATHWAY
+    #echo TGTPATHWAY is $TGTPATHWAY
+    if test "$PROGLANG" = ""; then
+      if test "$SRCPATHWAY" = algebra; then
+        export PROGLANG=wescheme
+        export TGTPATHWAY=algebra-wescheme
+        $subroutine
+        export PROGLANG=pyret
+        export TGTPATHWAY=algebra
+        $subroutine
+      else
+        export PROGLANG=pyret
+        $subroutine
+      fi
+      export PROGLANG=
+    else
+      if test "$SRCPATHWAY" = algebra; then
+        if test "$PROGLANG" != pyret; then
+          export TGTPATHWAY=algebra-$PROGLANG
+        fi
+      fi
+      $subroutine
+    fi
+  done
+}
+
 TEMPF=$(mktemp); rm -f $TEMPF
 export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
@@ -2173,36 +2208,7 @@ buildlessonplans
 
 #echo !!! building pathways
 
-for f in $ARGS; do
-  #echo I doing $f
-  export SRCPATHWAY=$f
-  export SRCPATHWAY=${SRCPATHWAY#pathways/}
-  export SRCPATHWAY=${SRCPATHWAY%/}
-  export TGTPATHWAY="$SRCPATHWAY"
-  #echo SRCPATHWAY is $SRCPATHWAY
-  #echo TGTPATHWAY is $TGTPATHWAY
-  if test "$PROGLANG" = ""; then
-    if test "$SRCPATHWAY" = algebra; then
-      export PROGLANG=wescheme
-      export TGTPATHWAY=algebra-wescheme
-      buildpathway
-      export PROGLANG=pyret
-      export TGTPATHWAY=algebra
-      buildpathway
-    else
-      export PROGLANG=pyret
-      buildpathway
-    fi
-    export PROGLANG=
-  else
-    if test "$SRCPATHWAY" = algebra; then
-      if test "$PROGLANG" != pyret; then
-        export TGTPATHWAY=algebra-$PROGLANG
-      fi
-    fi
-    buildpathway
-  fi
-done
+callonARGS buildpathway
 
 builddependencyjson
 
@@ -2212,38 +2218,11 @@ buildpathwaytocs
 
 if test ! $NOPDF; then
 
-
   cd $TOPDIR/distribution/$LANGUAGE
   batchhtmltopdf
 
+  callonARGS buildpathwayworkbooks
 
-  for f in $ARGS; do
-    export SRCPATHWAY=$f
-    export SRCPATHWAY=${SRCPATHWAY#pathways/}
-    export SRCPATHWAY=${SRCPATHWAY%/}
-    export TGTPATHWAY="$SRCPATHWAY"
-    if test "$PROGLANG" = ""; then
-      if test "$SRCPATHWAY" = algebra; then
-        export PROGLANG=wescheme
-        export TGTPATHWAY=algebra-wescheme
-        buildpathwayworkbooks
-        export PROGLANG=pyret
-        export TGTPATHWAY=algebra
-        buildpathwayworkbooks
-      else
-        export PROGLANG=pyret
-        buildpathwayworkbooks
-      fi
-      export PROGLANG=
-    else
-      if test "$SRCPATHWAY" = algebra; then
-        if test "$PROGLANG" != pyret; then
-          export TGTPATHWAY=algebra-$PROGLANG
-        fi
-      fi
-      buildpathwayworkbooks
-    fi
-  done
 fi
 
 # only to shush now-benign error
