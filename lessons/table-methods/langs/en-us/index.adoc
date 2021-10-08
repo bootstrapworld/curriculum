@@ -196,7 +196,7 @@ The `.filter` method walks through the table, applying whatever function it was 
 * This time, in the formula expression box, type `Age > 5`. What did you get?
 * Now try `Species = “dog”`
 
-The `Filter` transformer walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. Notice that the Domain for `Filter` says that test must be a formula, which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
+The `Filter` transformer walks through the table, applying whatever function it was given to each row, and produces a new table containing all the rows for which the function returned `true`. Notice that the Domain for `Filter` says that test must be a formula, which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
 
 === Common Misconceptions
 @ifproglang{pyret}{
@@ -230,7 +230,7 @@ Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or 
 The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.}
 
 @ifproglang{codap}{
-* Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`. In the formula expression box, type `Age > 5`. Apply the transformer. What happens?
+* Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`. In the formula expression box, type `Age < 5`. Apply the transformer. What happens?
 * This time, type `Species = “cat”`. What do you get? What do you think is going on?
 
 The `Build Attribute` transformer walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age > 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
