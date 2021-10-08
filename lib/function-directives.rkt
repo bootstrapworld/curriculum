@@ -500,8 +500,10 @@
                   [else ""])
 
             (cond [cond?
-                    (apply string-append
-                           (map write-cond-clause (cdr body)))]
+                    (write-wrapper ".cond_clauses" 
+                      (lambda () 
+                        (apply string-append
+                          (map write-cond-clause (cdr body)))))]
                   [else
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
@@ -511,21 +513,7 @@
                           (write-large ")")
                           )))])
 
-            (cond [cond?
-                    (write-wrapper ".recipe.recipe_line"
-                      (lambda ()
-                        (string-append
-                          (encoded-ans "" "__" #f)
-                          (write-large "))" #:tag ".studentAnswer"))))]
-                  [else
-                    ""
-                    #|(write-wrapper ".recipe.recipe_line"
-                      (lambda ()
-                        (string-append
-                          (encoded-ans "" "__" #f)
-                          (write-large ")"))))
-                    |#
-                    ])))))))
+            ))))))
 
 (define (write-body-line/pyret body-line)
   ;(printf "write-body-line-p ~s\n" body-line)
