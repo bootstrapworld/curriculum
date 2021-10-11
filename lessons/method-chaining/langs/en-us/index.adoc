@@ -53,7 +53,7 @@ Define the Compute functions on @printable-exercise{pages/design-recipe-1.adoc} 
 
 Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
 
-By using the `and` and `or` operators, we can _combine_ boolean tests @ifproglang{codap}{on a single function, like `Filter`}, as in: @ifproglang{pyret}{`(1 > 2) and ("a" == "b")`} @ifproglang{codap}{`Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
+By using the `and` and `or` operators, we can _combine_ boolean tests @ifproglang{codap}{on a single function, like `Filter`.} @ifproglang{pyret}{, as in: `(1 > 2) and ("a" == "b")`} @ifproglang{codap}{Once we've opened the `Filter` transformer, we would tell CODAP to keep all rows that satisfy `Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
 
 @ifproglang{pyret}{For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called "Method Chaining"!} @ifproglang{codap}{When we want to chain together _different_ transformers, however, this strategy will not work. We'll need to find another way!}
 |===
@@ -118,7 +118,7 @@ Let's break down the reporter's specifications:
 [.lesson-instruction]
 - Give the weight in kilograms.
 - Include only fixed animals.
-- Include only animals that weigh less than 9 kilograms.
+- Include only animals that weigh no more than 9 kilograms.
 - Order weight in kilograms from lightest to heaviest.
 - Update the table weekly to reflect the changing population of the shelter.
 
@@ -156,9 +156,9 @@ For this step, we’ll use `Build Attribute`, which makes a new copy of the data
 Here, we are going to apply the `Filter` transformer _not_ to our original Animals Dataset, but to the transformed copy of the original dataset. When we select `Dataset to Filter`, we must choose `BuildAttribute(Animals-Dataset)`. We will then specify that we want to keep all rows that satisfy `Fixed = “TRUE”`.
 
 [.lesson-instruction]
-- Include only animals that weigh less than 9 kilograms.
+- Include only animals that weigh no more than 9 kilograms.
 
-We are going to `Filter` again, but this time we apply the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `Filter{BuildAttribute(Animals-Dataset)`.
+We are going to `Filter` again, but this time we apply the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `Filter{BuildAttribute(Animals-Dataset)`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
 
 [.lesson-instruction]
 - Order weight in kilograms from lightest to heaviest.
