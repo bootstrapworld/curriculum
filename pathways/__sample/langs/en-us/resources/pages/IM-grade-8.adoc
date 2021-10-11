@@ -2,59 +2,20 @@
 
 ++++
 <style>
-/* stuff we want to hide */
-#footer, .acknowledgment, #savetodrive-div { display: none !important; }
-
-body {
-	margin: auto;
-	color: 	black !important;
-	width:	7.5in;
-	height:	10in;
-	-webkit-print-color-adjust: exact;
-}
-
-#header, #header *, h1 { background: none !important; color: black !important; }
-h1, h2, .footer { font-size: 12pt; margin: 0px 6px; text-align: center !important; }
-h1:before {
-	content: url('../../images/Logo with Text.png');
- 	display: block;
-}
-.ulist p, em, strong, #content { padding: 0 !important; margin: 0 !important; }
-.right {clear: both;}
-.funders { border: solid gray; border-width: 1px 0; margin: 10px 0; }
-
-/* Table formatting */
-table {
-	order-collapse: separate;
-	border-spacing: 2px 5px;
-	border: none !important;
-	margin-bottom: 1.75in;
-	page-break-before: avoid;
-}
-tr th.tableblock, p { font-size: 1rem !important; margin: 0; }
-tr th.tableblock { background: rgb(182, 215, 168); padding: 2px; }
-table tr:nth-child(1) { background: rgb(207, 226, 243); }
-table tr:nth-child(2) { background: rgb(255, 242, 204); }
-table tr:nth-child(3) { background: rgb(249, 203, 156); }
-table tr:nth-child(3) img { background: white; }
-table tr:nth-child(4) { background: rgb(226, 195, 242); }
-table tr:nth-child(5) { background: rgb(242, 195, 195); }
-table tr:nth-child(6) { background: rgb(168, 228, 237); }
-table tr:nth-child(7) { background: rgb(234, 122, 122); }
-table tr td { padding: 5px; border: none !important; }
-
-.footer { height: 1.3in; position: relative; margin: 10px auto; width: 7.5in; }
-.footer img { height: 50px; margin: 5px; border: none;}
-
-@media print {
-	.footer {
-		margin-top: -1.3in; /* always negate the height */
-		bottom: 0 !important;
-		page-break-before: always;
-	}
-}
+@import url("../../../../lib/alignment.css");
 </style>
 
+<style>
+// override default colors, so that the 4th row has the
+// same BG color as the 3rd, the 5th has the 4th, and so on
+table tr:nth-child(4) { background: rgb(249, 203, 156); }
+table tr:nth-child(5) { background: rgb(226, 195, 242); }
+table tr:nth-child(6) { background: rgb(242, 195, 195); }
+table tr:nth-child(7) { background: rgb(168, 228, 237); }
+
+// make the rocket image background white
+tr:nth-child(3) img { background: white; }
+</style>
 ++++
 
 Like IM, Bootstrap is field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners.  Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you’re already doing in your classroom. __Teaching Algebra 1 with Bootstrap also addresses many CS Standards, including: 2-AP-1, 2-AP-10, 2-AP-11, 2-AP-13, 2-AP-14, 2-AP-17.__
@@ -68,7 +29,7 @@ Like IM, Bootstrap is field-tested and research-validated, with a focus on deep 
 
 
 | @link{https://curriculum.illustrativemathematics.org/MS/teachers/3/1/index.html,*Rigid Transfromations and Congruence*}
-| @span{.right}{@image{../../images/function-comp-3-transparent.png, "", 145}}
+| @span{.right}{@image{../../images/function-comp-3-transparent.png, "", 135}}
 
 @link{https://www.bootstrapworld.org/materials/latest/en-us/courses/algebra-wescheme/lessons/function-composition/index.shtml,*Function Composition*}
 
@@ -77,7 +38,7 @@ Like IM, Bootstrap is field-tested and research-validated, with a focus on deep 
 - In seconds, students can adjust the degree of rotation and get visual feedback on how the numbers transform the images.
 
 | @link{https://curriculum.illustrativemathematics.org/MS/teachers/3/3/index.html,*Linear Relationships*}
-| @span{.right}{@image{../../images/linear-relationships.png, "", 145}}
+| @span{.right}{@image{../../images/linear-relationships.png, "", 135}}
 
 @link{https://www.bootstrapworld.org/materials/spring2021/en-us/courses/ok/lessons/ds-linearity/index.shtml, *Linear Relationships*}
 
@@ -93,7 +54,7 @@ Like IM, Bootstrap is field-tested and research-validated, with a focus on deep 
 | @link{https://curriculum.illustrativemathematics.org/MS/teachers/3/5/index.html,*Functions and Volume*}
 
 | @link{https://bootstrapworld.org/materials/latest/en-us/courses/algebra-wescheme/lessons/solving-word-problems/index.shtml,*Solving Word Problems*}
-@span{.right}{@image{../../images/solving-word-problems3-transparent.png, "", 145}}
+@span{.right}{@image{../../images/solving-word-problems3-transparent.png, "", 135}}
 
 - Students solve a classic function word problem about the velocity and height of a rocket - and then write simple code to see the rocket blast off.
 - Students can even modify the code to change the speed and direction of the rocket!
@@ -105,9 +66,9 @@ Like IM, Bootstrap is field-tested and research-validated, with a focus on deep 
 - Using the Design Recipe - a tool that empowers students both as coders and mathematicians - students solve word problems that interweave the development of the function concept with 3D geometry concepts.
 - In our engaging and interactive computing context, students are offered many opportunities to analyze word problems and identify the domain, range, and other quantities.
 
-@vspace{1ex}
+| @link{https://curriculum.illustrativemathematics.org/MS/teachers/3/5/index.html,*Functions and Volume* (cont)}
 
-@link{https://bootstrapworld.org/materials/latest/en-us/courses/algebra-wescheme/lessons/piecewise-functions/index.shtml,*Piecewise Functions*}
+| @link{https://bootstrapworld.org/materials/latest/en-us/courses/algebra-wescheme/lessons/piecewise-functions/index.shtml,*Piecewise Functions*}
 
 - A fictional restaurant owner, Alice, solicits students’ help in improving some code used to calculate customers' bills. As students analyze the code, they dig into the concept of piecewise functions in a meaningful and engaging new context.
 - Videogames rely on piecewise functions for player animation! The video game project offers an exciting opportunity to apply new and otherwise abstract mathematical knowledge.

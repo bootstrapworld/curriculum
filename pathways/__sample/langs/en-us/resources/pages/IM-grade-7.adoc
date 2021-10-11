@@ -2,57 +2,14 @@
 
 ++++
 <style>
-/* stuff we want to hide */
-#footer, .acknowledgment, #savetodrive-div { display: none !important; }
+@import url("../../../../lib/alignment.css");
 
-body {
-	margin: auto;
-	color: 	black !important;
-	width:	7.5in;
-	height:	10in;
-	-webkit-print-color-adjust: exact;
-}
-
-#header, #header *, h1 { background: none !important; color: black !important; }
-h1, h2, .footer { font-size: 12pt; margin: 0px 6px; text-align: center !important; }
-h1:before {
-	content: url('../../images/Logo with Text.png');
- 	display: block;
-}
-.ulist p, em, strong, #content { padding: 0 !important; margin: 0 !important; }
-.right {clear: both;}
-.funders { border: solid gray; border-width: 1px 0; margin: 10px 0; }
-
-/* Table formatting */
-table {
-	order-collapse: separate;
-	border-spacing: 2px 5px;
-	border: none !important;
-	margin-bottom: 1.75in;
-	page-break-before: avoid;
-}
-tr th.tableblock, p { font-size: 1rem !important; margin: 0; }
-tr th.tableblock { background: rgb(182, 215, 168); padding: 2px; }
-table tr:nth-child(1) { background: rgb(207, 226, 243); }
-table tr:nth-child(2) { background: rgb(255, 242, 204); }
-table tr:nth-child(3) { background: rgb(249, 203, 156); }
-table tr:nth-child(4) { background: rgb(226, 195, 242); }
-table tr:nth-child(5) { background: rgb(242, 195, 195); }
-table tr:nth-child(6) { background: rgb(168, 228, 237); }
-table tr:nth-child(7) { background: rgb(234, 122, 122); }
-tbody tr:nth-child(7) img { background: white; }
-table tr td { padding: 5px; border: none !important; }
-
-.footer { height: 1.3in; position: relative; margin: 10px auto; width: 7.5in; }
-.footer img { height: 50px; margin: 5px; border: none;}
-
-@media print {
-	.footer {
-		margin-top: -1.3in; /* always negate the height */
-		bottom: 0 !important;
-		page-break-before: always;
-	}
-}
+// override default colors, so that the 4th row has the
+// same BG color as the 3rd, the 5th has the 4th, and so on
+table tr:nth-child(4) { background: rgb(249, 203, 156); }
+table tr:nth-child(5) { background: rgb(226, 195, 242); }
+table tr:nth-child(6) { background: rgb(242, 195, 195); }
+table tr:nth-child(7) { background: rgb(168, 228, 237); }
 </style>
 
 ++++
@@ -98,8 +55,6 @@ Like Illustrative Mathematics, Bootstrap is field-tested and research-validated,
 - Instead of a list of rules to memorize, we use the Circles of Evaluation to expose the structure of the math involved in evaluating expressions. Check it out! It’s a powerful tool.
 - _Circles of Evaluation can be used without any programming!_
 
-@vspace{1ex}
-
 @link{https://www.bootstrapworld.org/materials/latest/en-us/courses/algebra-wescheme/lessons/inequalities1-simple/index.shtml, *Simple Inequalities*}
 
 - Simple code enables students to test solutions and non-solutions to inequalities, concretizing the concept by providing immediate visual feedback.
@@ -107,6 +62,9 @@ Like Illustrative Mathematics, Bootstrap is field-tested and research-validated,
 
 @vspace{1ex}
 
+|@link{https://curriculum.illustrativemathematics.org/MS/teachers/2/6/index.html,*Expressions, Equations, and Inequalities* (cont)}
+
+|
 @link{https://bootstrapworld.org/materials/latest/en-us/courses/algebra-pyret/lessons/inequalities3-sam/index.shtml,*Sam the Butterfly - Applying Inequalities*}
 
 @span{.right}{@image{../../images/sam-the-butterfly2.png, "", 100}}
