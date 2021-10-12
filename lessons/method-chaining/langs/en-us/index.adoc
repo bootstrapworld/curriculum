@@ -134,6 +134,7 @@ Order matters: Build, Filter, Order.
 Suppose we want to build a column and then use it to filter our table. If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
 
 @ifproglang{codap}{
+
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
@@ -142,7 +143,7 @@ Transformers can be saved! Saving a particular configuration of a transformer is
 
 Once a transformers is saved, students can abstract over a particular computation that they want to perform on the data (the way functions in Algebra are abstractions over computations in arithmetic).
 |===
-}
+
 Let’s go through how we might meet the journalist’s needs.
 
 [.lesson-instruction]
@@ -158,7 +159,7 @@ Here, we are going to apply the `Filter` transformer _not_ to our original Anima
 [.lesson-instruction]
 - Include only animals that weigh no more than 9 kilograms.
 
-We are going to `Filter` again, but this time we apply the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `Filter{BuildAttribute(Animals-Dataset)`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
+We are going to `Filter` again, but this time we apply the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `Filter(BuildAttribute(Animals-Dataset))`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
 
 [.lesson-instruction]
 - Order weight in kilograms from lightest to heaviest.
@@ -170,6 +171,7 @@ Remember - we want to be able to easily create a table that meets the journalist
 
 Because we’re using transformers, each time the Animals Table is updated, the journalist’s table will be updated, too! Try adding or removing a row from the original table and observe the ripple effect in your chained tables.
 
+}
 === Investigate
 [.lesson-point]
 When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{transformers}, it’s important to build first, then filter, and then order.
