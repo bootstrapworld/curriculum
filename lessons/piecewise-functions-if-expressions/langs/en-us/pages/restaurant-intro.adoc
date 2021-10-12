@@ -1,0 +1,54 @@
+= Welcome to Alice’s Restaurant!
+
+++++
+<style>
+#content tr {height: 40ex;}
+.editbox { width: 5in; } /* required to get contract+code to be same width */
+</style>
+++++
+
+Alice has hired you to improve some code used at the restaurant. The code we'll be improving on is shown below.
+
+*Read through the code line-by-line with your partner before writing down your
+observations in the tables below.*
+
+@show{
+(contract
+  "cost" '("String") "Number"
+  "given a item, produce the cost of that item")
+}
+
+@show{
+(code '(define (cost item)
+  (cond
+    [(string=? item "hamburger")     6.00]
+    [(string=? item "onion rings")   3.50]
+    [(string=? item "fried tofu")    5.25]
+    [(string=? item "pie")           2.25]
+    [else "Sorry, that's not on the menu!"])))
+}
+
+@vspace{2ex}
+
+[cols="1a,1a",stripes="none"]
+|===
+|
+--
+@n *I notice...*
+
+@ifsoln{__(sample responses)
+a function called `cost`, brackets, a function called `string=?`, numbers that look like prices, a contract and purpose statement, pizza toppings__}
+--
+|@n *I wonder...*
+
+@ifsoln{__(sample responses) What is `cond`? Is this all that’s on the menu? Can I add different toppings? How does the ‘cost’ function work? What are the brackets for? What does `string=?` do?__}
+
+|@n *Familiar things I see in the code*
+
+@ifsoln{__define, contract and purpose statement, Numbers and Strings, functions__}
+
+|4) *Unfamiliar things I see in the code*
+
+@ifsoln{__cond, string=?, [], else__}
+
+|===
