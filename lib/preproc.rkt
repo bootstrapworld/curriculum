@@ -451,7 +451,7 @@
                 (assoc (list lesson snippet) *workbook-pagenums*))])
     (if c (cadr c) #f))
   |#
-  #t
+  #f
   )
 
 (define (exercise-title f)
