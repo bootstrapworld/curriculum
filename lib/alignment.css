@@ -22,14 +22,17 @@ h1, h2, .footer { font-size: 12pt; margin: 0px 6px; text-align: center !importan
 
 /* Table formatting */
 table {
-  order-collapse: separate;
+  border-collapse: collapse !important;
   border-spacing: 2px 5px;
   border: none !important;
   margin-bottom: 1.75in;
   page-break-before: avoid;
 }
 table tbody tr td, table tr td { line-height: unset; }
-td { vertical-align: middle !important; }
+table.grid-all>tbody>tr>.tableblock { 
+  border:  solid 3px white !important;
+  vertical-align: middle !important; 
+}
 tr th.tableblock, p { font-size: 1rem !important; margin: 0; }
 tr th.tableblock { background: rgb(182, 215, 168); padding: 2px; }
 table tr td { padding: 5px; border: none !important; }
@@ -49,6 +52,14 @@ table tr:nth-child(7) { background: rgb(234, 122, 122); }
 .footer img { height: 50px; margin: 5px; border: none;}
 
 @media print {
+  tr {
+    break-inside:  auto !important; 
+    break-before: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: auto !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
   .footer {
     margin-top: -1.3in; /* always negate the height */
     bottom: 0 !important;
