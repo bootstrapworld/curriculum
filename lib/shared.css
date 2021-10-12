@@ -364,7 +364,20 @@ input.sidebarinput { margin-left: 10px; }
 }
 .sect1.lesson-section-1 h2:hover .section-link a {visibility: visible;}
 
-.lesson-instruction { margin: 1ex; background: #eee; }
+.lesson-instruction { 
+  min-height: 50px;
+  background: #eee; 
+  clear:      both;
+}
+.lesson-instruction > *:first-child { margin-left: 50px; }
+.lesson-instruction > *:first-child::before { 
+  content:  url('lesson-instruction.png'); 
+  height:   50px;
+  width:    50px;
+  float:    left;
+  margin-right: 10px;
+  margin-left:-50px;
+}
 
 .lesson-point {
   font-weight:        bold;
