@@ -6,7 +6,7 @@
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
 */
-html, body {
+body {
   font-size:      12pt;
   font-family:    'Lato', Arial, Helvetica, sans-serif;
   color:          #75328A;
@@ -794,20 +794,23 @@ table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
 * SCREEN MEDIA
 */
 @media screen{
+  html { height: 100%; display:  flex; }
+
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
     line-height:      2.5rem;
   }
-  body.nonworkbookpage{ width: auto !important; }
+  body.nonworkbookpage { width: auto !important; }
 }
 
-/* set page width for screen (height is only set for print) */
+/* set page width for screen, and range for height */
 body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; min-height: 10in;
+  width: 7.5in; min-height: 10in;  max-height: 11in;
 }
+/* define 'landscape' page type */
 body.landscape:not( .LessonPlan, .narrativepage ) { 
-  width: 10in; min-height: 7.5in; page:  landscape; } /* define landscape page */
+  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; } 
 
 /************************************************************************************
  * PRINT MEDIA
