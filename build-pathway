@@ -866,14 +866,15 @@ function doadocs() {
 
   for f in $ff; do
     fbase=${f%.adoc}
+    fhtml=$fbase.html
     fpdf=$fbase.pdf
     if test -f "$fpdf"; then
       rm -f "$fpdf"
     fi
     #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-    if test "$RESOURCEDOCS" = 1 -o "$LESSONSUBDIR" = ./front-matter/pages -o \
-      "$LESSONSUBDIR" = ./front-matter/solution-pages -o \
-      "$LESSONSUBDIR" = ./back-matter/pages -o "$LESSONSUBDIR" = ./back-matter/solution-pages; then
+    if test "$RESOURCEDOCS" = 1 -o \
+      "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
+      "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
           #echo doing it!
           echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
     fi
@@ -944,7 +945,11 @@ function recursiveadoc() {
   cd "$dir"
   export PATHWAYROOTDIR="$oldPATHWAYROOTDIR../"
   export DISTROOTDIR="$oldDISTROOTDIR../"
-  export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
+  if test "$oldLESSONSUBDIR" = "."; then
+    export LESSONSUBDIR="$dir"
+  else
+    export LESSONSUBDIR="$oldLESSONSUBDIR/$dir"
+  fi
 
   #echo LESSONSUBDIR is $LESSONSUBDIR
 
@@ -1952,6 +1957,7 @@ function buildpathway() {
 
     if test $REFRESHRESOURCES; then
       cd resources
+      test -d pages || mkdir -p pages
       mkdirsolutionversion
       for d in *; do
         if test -d $d; then
@@ -2158,6 +2164,7 @@ function doadocpostproc() {
   asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
 
   echo Postprocessing adoc output...
+
   for fhtmlcached in $(cat $ADOC_POSTPROC_WORKBOOKPAGE_INPUT); do
     #echo fhtmlcached= $fhtmlcached
     if test -f "$fhtmlcached"; then
@@ -2175,6 +2182,8 @@ function doadocpostproc() {
     fi
   done
 
+  echo Postprocessing wkbkpages done
+
   for fhtml in $(cat $ADOC_POSTPROC_NONOTHERDIR_INPUT); do
     #echo fhtml= $fhtml
     if test -f "$fhtml"; then
@@ -2182,6 +2191,8 @@ function doadocpostproc() {
       insertgdrivesave $fhtml
     fi
   done
+
+  echo Postprocessing nonotherdir done
 
   #echo DOING LESSONPLANs
   #echo doing $ADOC_POSTPROC_LESSONPLAN_INPUT
@@ -2218,6 +2229,8 @@ function doadocpostproc() {
     fi
   done
 
+  echo Postprocessing lessonplans done
+
   for fhtmlcached in $(cat $ADOC_POSTPROC_NARRATIVE_INPUT); do
     if test -f "$fhtmlcached"; then
       calculatedistrootdir $fhtmlcached
@@ -2233,6 +2246,8 @@ function doadocpostproc() {
       insertgdrivesave $fshtml
     fi
   done
+
+  echo Postprocessing narratives done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_RESOURCES_INPUT); do
     if test -f "$fhtmlcached"; then
@@ -2250,6 +2265,8 @@ function doadocpostproc() {
     fi
   done
 
+  echo Postprocessing teacherresources done
+
   for fhtmlcached in $(cat $ADOC_POSTPROC_ALLPATHWAYS_INPUT); do
     if test -f "$fhtmlcached"; then
       calculatedistrootdir $fhtmlcached
@@ -2263,6 +2280,8 @@ function doadocpostproc() {
       resolveabbrevs $fshtml
     fi
   done
+
+  echo Postprocessing allpathways done
 
   #exit #fixmE
 
