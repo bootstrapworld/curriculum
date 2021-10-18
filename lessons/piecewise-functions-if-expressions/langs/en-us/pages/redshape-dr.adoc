@@ -15,12 +15,12 @@
                     )
   #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
   #:param-list '(shape)
-  #:show-params? #f
+  #:show-params? #t
   #:body '(cond
 [(string=? shape "circle")     (circle 20 "solid" "red")]
 [(string=? shape "triangle")   (triangle 20 "solid" "red")]
 [(string=? shape "rectangle")  (rectangle 20 "solid" "red")]
 [(string=? shape "star")       (star 20 "solid" "red")]
-[else "Unknown shape name!"])
-  #:show-body? #f
+[else (text "Unknown shape name!" 20 "red")])
+  #:show-body? #t
   #:grid-lines? #t }
