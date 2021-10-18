@@ -2156,6 +2156,114 @@ function calculatedistrootdir() {
   #echo distrootdir for $f is $DISTROOTDIR
 }
 
+
+function postproc_workbookpage() {
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    calculatedistrootdir $fhtmlcached
+    fdir=${fhtmlcached%/.cached/.*html}
+    #echo  fdir= $fdir
+    fbase=${fhtmlcached##*/.}
+    #echo fbase= $fbase
+    fhtml=$fdir/$fbase
+    #echo fhtml= $fhtml
+    #echo moving $fhtmlcached to $fhtml
+    mv $fhtmlcached $fhtml
+    bumpcsspathdir $fhtml
+    resolveabbrevs $fhtml
+  fi
+}
+
+function postproc_nonotherdir() {
+  local f=$1
+  if test -f "$fhtml"; then
+    #echo fhtml= $fhtml
+    insertgdrivesave $fhtml
+  fi
+}
+
+function postproc_lessonplan() {
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    calculatedistrootdir $fhtmlcached
+    fdir=${fhtmlcached%/.cached/.*html}
+    #echo  fdir= $fdir
+    fbase=${fhtmlcached##*/.}
+    fbase=${fbase%.html}.shtml
+    #echo fbase= $fbase
+    fshtml=$fdir/$fbase
+    #echo fhtml= $fhtml
+    #echo moving $fhtmlcached to $fshtml
+    mv $fhtmlcached $fshtml
+    #echo doing insertbodyid
+    insertbodyid $fshtml
+    #echo doing addanalytics
+    addanalytics $fshtml
+    #echo doing resolveabbrevs
+    bumpcsspathdir $fshtml
+    resolveabbrevs $fshtml
+    #echo cleanuptitle
+    cleanuptitle $fshtml
+    #echo cleanupduration
+    cleanupduration $fshtml
+    #echo insertsectionselfie
+    insertsectionselfie $fshtml
+    #echo lintlesson
+    lintlesson $fshtml
+    #echo insertgdrivesave
+    insertgdrivesave $fshtml
+  fi
+}
+
+function postproc_narrative() {
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    calculatedistrootdir $fhtmlcached
+    fdir=${fhtmlcached%/.cached/.*html}
+    fbase=${fhtmlcached##*/.}
+    fbase=${fbase%.html}.shtml
+    fshtml=$fdir/$fbase
+    mv $fhtmlcached $fshtml
+    insertbodyid $fshtml
+    addanalytics $fshtml
+    bumpcsspathdir $fshtml
+    resolveabbrevs $fshtml
+    insertgdrivesave $fshtml
+  fi
+}
+
+function postproc_resources() {
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    calculatedistrootdir $fhtmlcached
+    fdir=${fhtmlcached%/.cached/.*html}
+    fbase=${fhtmlcached##*/.}
+    fbase=${fbase%.html}.shtml
+    fshtml=$fdir/$fbase
+    mv $fhtmlcached $fshtml
+    insertbodyid $fshtml
+    bumpcsspathdir $fshtml
+    resolveabbrevs $fshtml
+    cleanuptitle $fshtml
+    insertgdrivesave $fshtml
+  fi
+}
+
+function postproc_allpathways() {
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    calculatedistrootdir $fhtmlcached
+    fdir=${fhtmlcached%/.cached/.*html}
+    fbase=${fhtmlcached##*/.}
+    fbase=${fbase%.html}.shtml
+    fshtml=$fdir/$fbase
+    mv $fhtmlcached $fshtml
+    removelogos $fshtml
+    bumpcsspathdir $fshtml
+    resolveabbrevs $fshtml
+  fi
+}
+
 function doadocpostproc() {
   #echo doing doadocpostproc
   cd $TOPDIR/distribution/$LANGUAGE
@@ -2166,31 +2274,16 @@ function doadocpostproc() {
   echo Postprocessing adoc output...
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_WORKBOOKPAGE_INPUT); do
-    #echo fhtmlcached= $fhtmlcached
-    if test -f "$fhtmlcached"; then
-      calculatedistrootdir $fhtmlcached
-      fdir=${fhtmlcached%/.cached/.*html}
-      #echo  fdir= $fdir
-      fbase=${fhtmlcached##*/.}
-      #echo fbase= $fbase
-      fhtml=$fdir/$fbase
-      #echo fhtml= $fhtml
-      #echo moving $fhtmlcached to $fhtml
-      mv $fhtmlcached $fhtml
-      bumpcsspathdir $fhtml
-      resolveabbrevs $fhtml
-    fi
+    postproc_workbookpage $fhtmlcached &
   done
+  wait
 
   echo Postprocessing wkbkpages done
 
   for fhtml in $(cat $ADOC_POSTPROC_NONOTHERDIR_INPUT); do
-    #echo fhtml= $fhtml
-    if test -f "$fhtml"; then
-      #echo fhtml= $fhtml
-      insertgdrivesave $fhtml
-    fi
+    postproc_nonotherdir $fhtml &
   done
+  wait
 
   echo Postprocessing nonotherdir done
 
@@ -2198,88 +2291,30 @@ function doadocpostproc() {
   #echo doing $ADOC_POSTPROC_LESSONPLAN_INPUT
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_LESSONPLAN_INPUT); do
-    if test -f "$fhtmlcached"; then
-      calculatedistrootdir $fhtmlcached
-      fdir=${fhtmlcached%/.cached/.*html}
-      #echo  fdir= $fdir
-      fbase=${fhtmlcached##*/.}
-      fbase=${fbase%.html}.shtml
-      #echo fbase= $fbase
-      fshtml=$fdir/$fbase
-      #echo fhtml= $fhtml
-      #echo moving $fhtmlcached to $fshtml
-      mv $fhtmlcached $fshtml
-      #echo doing insertbodyid
-      insertbodyid $fshtml
-      #echo doing addanalytics
-      addanalytics $fshtml
-      #echo doing resolveabbrevs
-      bumpcsspathdir $fshtml
-      resolveabbrevs $fshtml
-      #echo cleanuptitle
-      cleanuptitle $fshtml
-      #echo cleanupduration
-      cleanupduration $fshtml
-      #echo insertsectionselfie
-      insertsectionselfie $fshtml
-      #echo lintlesson
-      lintlesson $fshtml
-      #echo insertgdrivesave
-      insertgdrivesave $fshtml
-    fi
+    postproc_lessonplan $fhtmlcached &
   done
+  wait
 
   echo Postprocessing lessonplans done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_NARRATIVE_INPUT); do
-    if test -f "$fhtmlcached"; then
-      calculatedistrootdir $fhtmlcached
-      fdir=${fhtmlcached%/.cached/.*html}
-      fbase=${fhtmlcached##*/.}
-      fbase=${fbase%.html}.shtml
-      fshtml=$fdir/$fbase
-      mv $fhtmlcached $fshtml
-      insertbodyid $fshtml
-      addanalytics $fshtml
-      bumpcsspathdir $fshtml
-      resolveabbrevs $fshtml
-      insertgdrivesave $fshtml
-    fi
+    postproc_narrative $fhtmlcached &
   done
+  wait
 
   echo Postprocessing narratives done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_RESOURCES_INPUT); do
-    if test -f "$fhtmlcached"; then
-      calculatedistrootdir $fhtmlcached
-      fdir=${fhtmlcached%/.cached/.*html}
-      fbase=${fhtmlcached##*/.}
-      fbase=${fbase%.html}.shtml
-      fshtml=$fdir/$fbase
-      mv $fhtmlcached $fshtml
-      insertbodyid $fshtml
-      bumpcsspathdir $fshtml
-      resolveabbrevs $fshtml
-      cleanuptitle $fshtml
-      insertgdrivesave $fshtml
-    fi
+    postproc_resources $fhtmlcached &
   done
+  wait
 
   echo Postprocessing teacherresources done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_ALLPATHWAYS_INPUT); do
-    if test -f "$fhtmlcached"; then
-      calculatedistrootdir $fhtmlcached
-      fdir=${fhtmlcached%/.cached/.*html}
-      fbase=${fhtmlcached##*/.}
-      fbase=${fbase%.html}.shtml
-      fshtml=$fdir/$fbase
-      mv $fhtmlcached $fshtml
-      removelogos $fshtml
-      bumpcsspathdir $fshtml
-      resolveabbrevs $fshtml
-    fi
+    postproc_allpathways $fhtmlcached &
   done
+  wait
 
   echo Postprocessing allpathways done
 
