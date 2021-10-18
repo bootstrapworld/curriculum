@@ -2156,7 +2156,6 @@ function calculatedistrootdir() {
   #echo distrootdir for $f is $DISTROOTDIR
 }
 
-
 function postproc_workbookpage() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
@@ -2269,7 +2268,11 @@ function doadocpostproc() {
   cd $TOPDIR/distribution/$LANGUAGE
 
   echo calling AsciiDoctor in batch mode...
-  asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+  if test -s $ADOC_INPUT; then
+    asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+  else
+    echo No adoc files need conversion!
+  fi
 
   echo Postprocessing adoc output...
 
@@ -2278,14 +2281,14 @@ function doadocpostproc() {
   done
   wait
 
-  echo Postprocessing wkbkpages done
+  #echo Postprocessing wkbkpages done
 
   for fhtml in $(cat $ADOC_POSTPROC_NONOTHERDIR_INPUT); do
     postproc_nonotherdir $fhtml &
   done
   wait
 
-  echo Postprocessing nonotherdir done
+  #echo Postprocessing nonotherdir done
 
   #echo DOING LESSONPLANs
   #echo doing $ADOC_POSTPROC_LESSONPLAN_INPUT
@@ -2295,30 +2298,28 @@ function doadocpostproc() {
   done
   wait
 
-  echo Postprocessing lessonplans done
+  #echo Postprocessing lessonplans done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_NARRATIVE_INPUT); do
     postproc_narrative $fhtmlcached &
   done
   wait
 
-  echo Postprocessing narratives done
+  #echo Postprocessing narratives done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_RESOURCES_INPUT); do
     postproc_resources $fhtmlcached &
   done
   wait
 
-  echo Postprocessing teacherresources done
+  #echo Postprocessing teacherresources done
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_ALLPATHWAYS_INPUT); do
     postproc_allpathways $fhtmlcached &
   done
   wait
 
-  echo Postprocessing allpathways done
-
-  #exit #fixmE
+  #echo Postprocessing allpathways done
 
 }
 
