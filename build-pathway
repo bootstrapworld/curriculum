@@ -355,7 +355,8 @@ EOF
     -e 's/%INSERTGDRIVESAVE[12]//' \
     $f
 
-  rm $TMPFILE-[12].txt
+  #echo deleting $TMPFILE 12 .txt
+  rm -f $TMPFILE-[12].txt
 
   $SED -i \
     -e 's/%INSERTGDRIVELESSONTITLE/'"$pageTitle"'/' \
@@ -545,21 +546,29 @@ function addanalytics() {
 
 function bumpcsspathdir() {
   local f=$1
-  #echo doing bumpcsspathdir $f
-  cat > .cached/.cssbump.txt <<EOF
-  <link rel="stylesheet" href="${DISTROOTDIR}lib/curriculum.css" />
+  local localDISTROOTDIR=$2
+
+  local f_head=${f%.*}
+  local TMPFILE=$f_head.$TMPAFX
+
+  cat > $TMPFILE-3.txt <<EOF
+  <link rel="stylesheet" href="${localDISTROOTDIR}lib/curriculum.css" />
 EOF
   $SED -i \
     -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
-    -e '/%INSERTLIBCURRICULUMCSS/r .cached/.cssbump.txt' \
+    -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
     -e 's/%INSERTLIBCURRICULUMCSS//' \
     -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
+
+  #echo deleting $TMPFILE-3.txt
+  rm -f $TMPFILE-3.txt
 }
 
 function resolveabbrevs() {
-  #echo doing resolveabbrevs "$@"
   local f=$1
+  local localDISTROOTDIR=$2
+  #echo doing resolveabbrevs $f $localDISTROOTDIR
   local mathjaxneeded=
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
@@ -632,14 +641,14 @@ EOF
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
-    <link rel="stylesheet" href="${DISTROOTDIR}lib/codemirror.css" />
-    <script src="${DISTROOTDIR}lib/codemirror.js"></script>
-    <script src="${DISTROOTDIR}lib/runmode.js"></script>
-    <script src="${DISTROOTDIR}lib/scheme2.js"></script>
-    <script src="${DISTROOTDIR}lib/pyret-mode.js"></script>
-    <script src="${DISTROOTDIR}lib/bootstraplesson.js"></script>
-    <script src="${DISTROOTDIR}dependency-graph.js"></script>
-    <script src="${DISTROOTDIR}pathway-tocs.js"></script>
+    <link rel="stylesheet" href="${localDISTROOTDIR}lib/codemirror.css" />
+    <script src="${localDISTROOTDIR}lib/codemirror.js"></script>
+    <script src="${localDISTROOTDIR}lib/runmode.js"></script>
+    <script src="${localDISTROOTDIR}lib/scheme2.js"></script>
+    <script src="${localDISTROOTDIR}lib/pyret-mode.js"></script>
+    <script src="${localDISTROOTDIR}lib/bootstraplesson.js"></script>
+    <script src="${localDISTROOTDIR}dependency-graph.js"></script>
+    <script src="${localDISTROOTDIR}pathway-tocs.js"></script>
     <script>var pathway='${PATHWAY}';</script>
 EOF
 $SED -i \
@@ -783,7 +792,6 @@ function checklinks() {
 
 function doadoc() {
   local f="$1"
-  local nocache="$2"
   #echo doing doadoc "$@"
   #echo PROGLANG Is $PROGLANG
   local fbase=${f%.a*doc}
@@ -791,22 +799,11 @@ function doadoc() {
   local fhtml=$fbase.html
   #echo using $fasc $fhtml
   test -d .cached || mkdir -p .cached
-  local cachedirarg=
-  local lessonplandirarg=
-  if test "$nocache" = nocache; then
-    cachedirarg="-a cachedir="
-    lessonplandirarg="-a lessonplandir=../"
-  else
-    cachedirarg="-a cachedir=.cached/"
-    lessonplandirarg="-a lessonplandir="
-  fi
-  #echo cachedirarg is $cachedirarg
-  #echo lessonplandirarg is $lessonplandirarg
 
   if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
     touch .cached/.pathway-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:lesson-plan \"$LESSONPLAN\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\")" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
@@ -2146,30 +2143,31 @@ function allthestandards() {
 function calculatedistrootdir() {
   local f=$1
   #echo doing calculatedistrootdir $f
-  doubledots=$(echo $f|$SED -e 's/\/\.\//\//g')
+  local doubledots=$(echo $f|$SED -e 's/\/\.\//\//g')
   #echo I doubledots= $doubledots
   doubledots=$(echo $doubledots|$SED -e 's/[^\/]//g')
   #echo II doubledots= $doubledots
   doubledots=$(echo $doubledots|$SED -e 's/^\///')
   #echo III doubledots= $doubledots
-  export DISTROOTDIR=$(echo $doubledots|$SED -e  's/\//..\//g')
-  #echo distrootdir for $f is $DISTROOTDIR
+  doubledots=$(echo $doubledots|$SED -e  's/\//..\//g')
+  #echo calculatedistrootdir for $f is $DISTROOTDIR
+  echo $doubledots
 }
 
 function postproc_workbookpage() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    calculatedistrootdir $fhtmlcached
-    fdir=${fhtmlcached%/.cached/.*html}
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    local fdir=${fhtmlcached%/.cached/.*html}
     #echo  fdir= $fdir
-    fbase=${fhtmlcached##*/.}
+    local fbase=${fhtmlcached##*/.}
     #echo fbase= $fbase
-    fhtml=$fdir/$fbase
+    local fhtml=$fdir/$fbase
     #echo fhtml= $fhtml
     #echo moving $fhtmlcached to $fhtml
-    mv $fhtmlcached $fhtml
-    bumpcsspathdir $fhtml
-    resolveabbrevs $fhtml
+    cp -p $fhtmlcached $fhtml
+    bumpcsspathdir $fhtml $localDISTROOTDIR
+    resolveabbrevs $fhtml $localDISTROOTDIR
   fi
 }
 
@@ -2184,7 +2182,7 @@ function postproc_nonotherdir() {
 function postproc_lessonplan() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    calculatedistrootdir $fhtmlcached
+    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     fdir=${fhtmlcached%/.cached/.*html}
     #echo  fdir= $fdir
     fbase=${fhtmlcached##*/.}
@@ -2199,8 +2197,8 @@ function postproc_lessonplan() {
     #echo doing addanalytics
     addanalytics $fshtml
     #echo doing resolveabbrevs
-    bumpcsspathdir $fshtml
-    resolveabbrevs $fshtml
+    bumpcsspathdir $fshtml $localDISTROOTDIR
+    resolveabbrevs $fshtml $localDISTROOTDIR
     #echo cleanuptitle
     cleanuptitle $fshtml
     #echo cleanupduration
@@ -2217,7 +2215,7 @@ function postproc_lessonplan() {
 function postproc_narrative() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    calculatedistrootdir $fhtmlcached
+    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     fdir=${fhtmlcached%/.cached/.*html}
     fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
@@ -2225,8 +2223,8 @@ function postproc_narrative() {
     mv $fhtmlcached $fshtml
     insertbodyid $fshtml
     addanalytics $fshtml
-    bumpcsspathdir $fshtml
-    resolveabbrevs $fshtml
+    bumpcsspathdir $fshtml $localDISTROOTDIR
+    resolveabbrevs $fshtml $localDISTROOTDIR
     insertgdrivesave $fshtml
   fi
 }
@@ -2234,15 +2232,15 @@ function postproc_narrative() {
 function postproc_resources() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    calculatedistrootdir $fhtmlcached
+    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     fdir=${fhtmlcached%/.cached/.*html}
     fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
     fshtml=$fdir/$fbase
     mv $fhtmlcached $fshtml
     insertbodyid $fshtml
-    bumpcsspathdir $fshtml
-    resolveabbrevs $fshtml
+    bumpcsspathdir $fshtml $localDISTROOTDIR
+    resolveabbrevs $fshtml $localDISTROOTDIR
     cleanuptitle $fshtml
     insertgdrivesave $fshtml
   fi
@@ -2251,15 +2249,15 @@ function postproc_resources() {
 function postproc_allpathways() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    calculatedistrootdir $fhtmlcached
+    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     fdir=${fhtmlcached%/.cached/.*html}
     fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
     fshtml=$fdir/$fbase
     mv $fhtmlcached $fshtml
     removelogos $fshtml
-    bumpcsspathdir $fshtml
-    resolveabbrevs $fshtml
+    bumpcsspathdir $fshtml $localDISTROOTDIR
+    resolveabbrevs $fshtml $localDISTROOTDIR
   fi
 }
 
@@ -2395,8 +2393,13 @@ export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-
 export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
 export ADOC_POSTPROC_ALLPATHWAYS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
 
-rm -f $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
-touch $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
+  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+
+touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
+  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
 
 copycommonlessons
 

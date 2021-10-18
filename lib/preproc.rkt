@@ -500,18 +500,23 @@
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
-    ;(printf "f= ~s\n" f)
+    ;(printf "f= ~s in ~s: ~s\n" f (current-directory) (file-exists? f))
     (cond [(path-has-extension? snippet ".adoc")
-           (let ([f.html (path-replace-extension f ".html")]
+           (let ([f.adoc f]
+                 [f.html (path-replace-extension f ".html")]
                  [f.pdf (path-replace-extension f ".pdf")])
-             (cond [(file-exists? f.html) (set! f f.html)
-                                          (set! g-in-pages (path-replace-extension g-in-pages ".html"))
-                                          (set! g (path-replace-extension g ".html"))]
-                   [(file-exists? f.pdf) (set! f f.pdf)
-                                         (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
-                                         (set! g (path-replace-extension g ".pdf"))]))]
+             (cond [(or (file-exists? f.html) (file-exists? f.adoc))
+                    ;(printf "I\n")
+                    (set! f f.html)
+                    (set! g-in-pages (path-replace-extension g-in-pages ".html"))
+                    (set! g (path-replace-extension g ".html"))]
+                   [(file-exists? f.pdf)
+                    ;(printf "II\n")
+                    (set! f f.pdf)
+                    (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
+                    (set! g (path-replace-extension g ".pdf"))]))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
-    ;(printf "f= ~s\n" f)
+    ;(printf "f'= ~s\n" f)
     (unless (file-exists? f)
       (set! error-cascade? #t)
       (check-link f)
@@ -530,8 +535,8 @@
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
     (let ([link-output
-            (format "link:{distrootdir}lessons/pass:[~a][~a~a]" g
-                    link-text
+            (format "link:~alessons/pass:[~a][~a~a]"
+                    *dist-root-dir* g link-text
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(or (equal? link-type "opt-printable-exercise")
@@ -970,36 +975,39 @@
     #:exists 'replace))
 
 (define (init-flags)
+  (set! *autonumber-index* 1)
+  (set! *containing-directory* #f)
+  (set! *dist-root-dir* #f)
   (set! *lesson* #f)
   (set! *lesson-plan* #f)
   (set! *narrative* #f)
-  (set! *teacher-resources* #f)
   (set! *other-dir* #f)
-  (set! *containing-directory* #f)
-  (set! *autonumber-index* 1)
+  (set! *teacher-resources* #f)
   )
 
 (define (preproc-adoc-file in-file
+                           #:all-pathway-lessons [all-pathway-lessons #f]
                            #:containing-directory [containing-directory ""]
-                           #:workbook-page [workbook-page #f]
+                           #:dist-root-dir [dist-root-dir ""]
                            #:lesson [lesson #f]
                            #:lesson-plan [lesson-plan #f]
-                           #:target-pathway [target-pathway #f]
                            #:narrative [narrative #f]
-                           #:resources [resources #f]
-                           #:all-pathway-lessons [all-pathway-lessons #f]
                            #:other-dir [other-dir #f]
+                           #:resources [resources #f]
+                           #:target-pathway [target-pathway #f]
+                           #:workbook-page [workbook-page #f]
                            #:z [z -1]
                            )
 
   (init-flags)
 
+  (set! *containing-directory* containing-directory)
+  (set! *dist-root-dir* dist-root-dir)
   (set! *lesson* lesson)
   (set! *lesson-plan* lesson-plan)
   (set! *narrative* narrative)
-  (set! *teacher-resources* resources)
   (set! *other-dir* other-dir)
-  (set! *containing-directory* containing-directory)
+  (set! *teacher-resources* resources)
 
   (when (and *lesson-plan* (not *lesson*))  ;fixme
     (set! *lesson* *lesson-plan*))
