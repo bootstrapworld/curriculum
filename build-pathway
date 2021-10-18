@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-07 # last modified
+LASTMOD=2021-10-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -97,7 +97,7 @@ test $BOOK && NOPDF= || NOPDF=1
 test $SUPERFORCE && FORCE=1
 
 TMPTMP=$(mktemp); rm -f $TMPTMP
-TMPPFX=$(basename $TMPTMP)
+TMPAFX=$(basename $TMPTMP)
 
 export ABYSS=page-not-found
 
@@ -261,6 +261,7 @@ fi
 
 function insertbodyid() {
   local f=$1
+  #echo doing insertbodyid $f
   $SED -i \
     -e 's/<body[^>]*>/\0\n<div id="body">/' \
     -e 's/<\/body>/<\/div>\n\0/' \
@@ -277,19 +278,24 @@ function insertgdrivesave() {
   local pageTitle=
   if test -f $f_head.adoc; then
     pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
-    pageTitle=$(echo $pageTitle|$SED -e 's/[“”]/\\\\"/g')
-    pageTitle=$(echo $pageTitle|$SED -e 's/\//\\\//g')
   fi
+
   if test ! "$pageTitle"; then
     pageTitle=$f_head
   fi
+
+  pageTitle=$(echo $pageTitle|$SED -e 's/[“”]/\\\\"/g')
+  pageTitle=$(echo $pageTitle|$SED -e 's/\//\\\//g')
+
   #echo pageTitle of $f_head.adoc is $pageTitle
   #FIXME: pathname should be corrected, again
   local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/$LANGUAGE/courses/$TGTPATHWAY/$LESSONSUBDIR
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\/$//'|$SED -e 's/\//\\\//g')
 
-  local TMPFILE=$TMPPFX-$f_head
+  local TMPFILE=$f_head.$TMPAFX
+
+  #echo TMPFILE is $TMPFILE
 
   cat > $TMPFILE-1.txt <<EOF
   <script>
@@ -326,6 +332,7 @@ EOF
     -e 's/<\/h1>.*/\0\n%INSERTGDRIVESAVE2/' \
     -e '/^<div id="body"/ s/id="body"/\0 onload="renderSaveToDrive()"/' \
     $f
+
   if test $WORKBOOKPAGE; then
     $SED -i \
       -e 's/^<body class="/\0workbookpage /' \
@@ -335,11 +342,13 @@ EOF
       -e 's/^<body class="/\0datasheetpage /' \
       $f
   fi
+
   if ! grep -q %INSERTGDRIVESAVE2 $f; then
     $SED -i \
       -e 's/<div id="header">/\0\n%INSERTGDRIVESAVE2/' \
       $f
   fi
+
   $SED -i \
     -e '/%INSERTGDRIVESAVE1/r '$TMPFILE-1.txt \
     -e '/%INSERTGDRIVESAVE2/r '$TMPFILE-2.txt \
@@ -450,7 +459,7 @@ function modifygdrivepage() {
   echo "<style>" > $TMPFILE.css
   #echo doing gdrive-import: PWD is $(pwd)
   #echo cat $DISTROOTDIR/lib/gdrive-import.css
-  cat $DISTROOTDIR/lib/gdrive-import.css >> $TMPFILE.css
+  cat lib/gdrive-import.css >> $TMPFILE.css
   echo "</style>" >> $TMPFILE.css
   $SED -i \
     -e '/<\/title>/r '$TMPFILE.css \
@@ -537,8 +546,14 @@ function addanalytics() {
 function bumpcsspathdir() {
   local f=$1
   #echo doing bumpcsspathdir $f
+  cat > .cached/.cssbump.txt <<EOF
+  <link rel="stylesheet" href="${DISTROOTDIR}lib/curriculum.css" />
+EOF
   $SED -i \
-    -e '/^<link.*curriculum.css/s/\.\.\(\/lib\/curriculum\.css\)/\1/' \
+    -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
+    -e '/%INSERTLIBCURRICULUMCSS/r .cached/.cssbump.txt' \
+    -e 's/%INSERTLIBCURRICULUMCSS//' \
+    -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
 }
 
@@ -609,7 +624,7 @@ function resolveabbrevs() {
       <script>window.status = "not_ready_to_print";</script>
 EOF
     $SED -i \
-      -e '/^<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
+      -e '/^ *<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
       -e '/%INSERTMATHJAX/r .cached/.mathjax.txt' \
       -e 's/%INSERTMATHJAX//' \
       $f
@@ -628,7 +643,7 @@ EOF
     <script>var pathway='${PATHWAY}';</script>
 EOF
 $SED -i \
-  -e '/^<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
+  -e '/^ *<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
   -e '/%INSERTCODEMIRROR/r .cached/.codemirror.txt' \
   -e 's/%INSERTCODEMIRROR//' \
   $f
@@ -769,7 +784,6 @@ function checklinks() {
 function doadoc() {
   local f="$1"
   local nocache="$2"
-  local lessonplan="$3"
   #echo doing doadoc "$@"
   #echo PROGLANG Is $PROGLANG
   local fbase=${f%.a*doc}
@@ -789,21 +803,26 @@ function doadoc() {
   #echo cachedirarg is $cachedirarg
   #echo lessonplandirarg is $lessonplandirarg
 
-  if test "$lessonplan" = lessonplan; then
+  if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
     touch .cached/.pathway-standards.asc
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:lesson-plan \"$LESSONPLAN\")" >> $ADOCABLES_INPUT
+    echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+    echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
+  elif test $NARRATIVE; then
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:narrative #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
+  elif test $TEACHER_RESOURCES; then
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:resources #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+    echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_RESOURCES_INPUT
+  elif test $ALLPATHWAYLESSONS; then
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:all-pathway-lessons #t)" >> $ADOCABLES_INPUT
+    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
   fi
 
-  $PROGDIR/adoc-preproc.rkt $f
-
-  if test ! $OTHERDIR; then
-    asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
-      $cachedirarg $lessonplandirarg \
-      -a stylesheet=${DISTROOTDIR}lib/curriculum.css \
-      -a pathwayrootdir=$PATHWAYROOTDIR \
-      -a distrootdir=$DISTROOTDIR \
-      -B . $fasc -o $fhtml
-  fi
 }
 
 function doadocs() {
@@ -819,54 +838,44 @@ function doadocs() {
 
   test -d .cached || mkdir -p .cached
 
-  overwrite 'building ' /$LESSONSUBDIR
-  #echo starting adoc-preproc.rkt $ff IN $(pwd)
-  $PROGDIR/adoc-preproc.rkt $ff
-  #echo FINISHED adoc-preproc.rkt $ff in $(pwd) DONE
+  overwrite building  /$LESSONSUBDIR
+
+  for f in $ff; do
+    if test $TGTPATHWAY; then
+      if test $OTHERDIR; then
+        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:other-dir #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+      else
+        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+        echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+        echo courses/$TGTPATHWAY/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
+      fi
+      echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+    else
+      if test $OTHERDIR; then
+        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\" #:other-dir #t)" >> $ADOCABLES_INPUT
+      else
+        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\")" >> $ADOCABLES_INPUT
+        echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+        echo lessons/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
+      fi
+      echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+    fi
+  done
 
   #echo DISTROOTDIR is $DISTROOTDIR
 
-  local ff_asc=""
   for f in $ff; do
     fbase=${f%.adoc}
-    fasc=.cached/.$fbase.asc
-    ff_asc="$ff_asc $fasc"
-  done
-
-  if test ! $OTHERDIR; then
-    #echo doing asciidoctor $ff_asc
-    asciidoctor -a linkcss -a proglang=$PROGLANG -a pathway=$SRCPATHWAY \
-      -a cachedir=.cached/ -a lessonplandir= \
-      -a stylesheet=${DISTROOTDIR}../lib/curriculum.css \
-      -a pathwayrootdir=$PATHWAYROOTDIR \
-      -a distrootdir=$DISTROOTDIR \
-      -B . $ff_asc
-  fi
-
-  for f in $ff; do
-    fbase=${f%.adoc}
-    fhtmlcached=.cached/.$fbase.html
-    fhtml=$fbase.html
     fpdf=$fbase.pdf
-    if test -f "$fhtmlcached"; then
-      mv $fhtmlcached $fhtml
-      bumpcsspathdir $fhtml
-      resolveabbrevs $fhtml
-      if test ! $OTHERDIR; then
-        #echo calling insertgdrivesave from doadocs
-        insertgdrivesave $fhtml
-      fi
-    fi
     if test -f "$fpdf"; then
       rm -f "$fpdf"
     fi
     #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-    if test "$RESOURCEDOCS" = 1 -o "$LESSONSUBDIR" = ./front-matter/pages -o "$LESSONSUBDIR" = ./front-matter/solution-pages -o \
+    if test "$RESOURCEDOCS" = 1 -o "$LESSONSUBDIR" = ./front-matter/pages -o \
+      "$LESSONSUBDIR" = ./front-matter/solution-pages -o \
       "$LESSONSUBDIR" = ./back-matter/pages -o "$LESSONSUBDIR" = ./back-matter/solution-pages; then
           #echo doing it!
-          if test -f "$fhtml"; then
-            echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
-          fi
+          echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
     fi
   done
 
@@ -941,6 +950,7 @@ function recursiveadoc() {
 
   for d in *; do
     if test -d "$d"; then
+      #echo recursively calling recursivadoc
       recursiveadoc "$d" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
     fi
   done
@@ -1180,7 +1190,7 @@ function buildlessonplan() {
       overwrite building lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc 0 lessonplan
+      doadoc index.adoc 0
       #$PROGDIR/adoc-preproc.rkt index.adoc
       if test -f index.html; then
         mv index.html index.shtml
@@ -1204,7 +1214,6 @@ function buildlessonplan() {
 
       if test ! $NOPDF; then
         if test index.shtml -nt index.pdf; then
-          TEMPF=$(mktemp); rm -f $TEMPF
           #echo PUPPETEER_INPUT is x $PUPPETEER_INPUT x
           echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\", \"debug\": \"ix\" }" >> $PUPPETEER_INPUT
         fi
@@ -1344,6 +1353,7 @@ function buildlessonplans() {
     #prevL=$L
   done
   export LESSONSUBDIR=
+  cd $TOPDIR/$DESTLANGDIR
 }
 
 function makeglossaryandstandards() {
@@ -1408,28 +1418,7 @@ function buildpathwaynarrative() {
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc
-      #$PROGDIR/adoc-preproc.rkt index.adoc
-      mv index.html index.shtml
       export NARRATIVE=
-      makeglossaryandstandards
-      if test -f .pathway-lessons.asciidoc; then
-        if test .pathway-lessons.asciidoc -nt .pathway-lessons.shtml; then
-          rm -f .cached/.pathway-lessons-comment.txt
-          test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-          export ALLPATHWAYLESSONS=1
-          doadoc .pathway-lessons.asciidoc nocache
-          #$PROGDIR/adoc-preproc.rkt .pathway-lessons.asciidoc
-          export ALLPATHWAYLESSONS=
-          mv .pathway-lessons.html .pathway-lessons.shtml
-          removelogos .pathway-lessons.shtml
-          resolveabbrevs .pathway-lessons.shtml
-        fi
-      fi
-      insertbodyid index.shtml
-      addanalytics index.shtml
-      resolveabbrevs index.shtml
-      #echo calling insertgdrivesave from buildpathwaynarrative
-      insertgdrivesave index.shtml
     fi
 
     checklinks index.shtml
@@ -1440,7 +1429,7 @@ function buildpathwaynarrative() {
 
 function makeworkbookjson() {
 
-  #echo doing makeworkbookjson "$@"
+  #echo doing makeworkbookjson "$@" in $(pwd)
 
   local tgt=$1
 
@@ -1548,7 +1537,8 @@ function makeworkbookjson() {
         fi
       fi
 
-      #echo docfile $docfile docfileext $docfileext
+      #echo docfile= $docfile
+      #echo docfileext= $docfileext
 
       if test "$docfileext" = html; then
         if test -f "$docfile"; then
@@ -1612,15 +1602,8 @@ function buildteacherresource() {
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc
       #$PROGDIR/adoc-preproc.rkt index.adoc
-      mv index.html index.shtml
-      export TEACHER_RESOURCES=
-      insertbodyid index.shtml
-      resolveabbrevs index.shtml
-      cleanuptitle index.shtml
-      #echo calling insertgdrivesave fromn buildteacherresource
-      insertgdrivesave index.shtml
     fi
-    checklinks index.shtml
+    #checklinks index.shtml
   fi
   cd ..
   export PATHWAYROOTDIR=./
@@ -1835,8 +1818,25 @@ function copycommonlessons() {
 
 }
 
+function buildworkbookjsons() {
+  cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
+
+  if test $BOOK; then
+    for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+      pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+          if test $NOPARALLEL; then
+            makeworkbookjson $wbf
+          else
+            makeworkbookjson $wbf &
+          fi
+        done
+        test ! $NOPARALLEL && wait
+  fi
+
+}
+
 function buildpathway() {
-  #echo doing buildpathway $TGTPATHWAY
+  echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -2025,21 +2025,6 @@ function buildpathway() {
     export DISTROOTDIR=../../
     export LESSONSUBDIR=
 
-    # Shell version
-    if test $BOOK; then
-      for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
-        pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
-              if test $NOPARALLEL; then
-                makeworkbookjson $wbf
-              else
-                makeworkbookjson $wbf &
-              fi
-            done
-            test ! $NOPARALLEL && wait
-    fi
-
-    #buildlessonplans
-
     #DEBUG
     buildpathwaynarrative
 
@@ -2052,13 +2037,6 @@ function buildpathway() {
         echo
         echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
       else
-        cd ../../lib
-        if test ! -f $ABYSS.pdf; then
-          echo '= PAGE NOT FOUND!' > $ABYSS.adoc
-          echo >> $ABYSS.adoc
-          asciidoctor -a linkcss -a stylesheet=./asciidoctor.css $ABYSS.adoc
-          echo ", { \"input\": \"lib/$ABYSS.html\", \"aspect\": \"portrait\", \"debug\":\"v\" }" >> $PUPPETEER_INPUT
-        fi
         #cd ../courses/$PATHWAY
 
         cd $TOPDIR/distribution/$LANGUAGE
@@ -2077,7 +2055,9 @@ function buildpathway() {
 
     rmtmpfiles
 
-  cd $TOPDIR
+    #echo PWD 3 is $(pwd)
+
+  cd $TOPDIR/distribution/$LANGUAGE
 
   if test $LINT; then
 
@@ -2157,6 +2137,156 @@ function allthestandards() {
   cd $TOPDIR
 }
 
+function calculatedistrootdir() {
+  local f=$1
+  #echo doing calculatedistrootdir $f
+  doubledots=$(echo $f|$SED -e 's/\/\.\//\//g')
+  #echo I doubledots= $doubledots
+  doubledots=$(echo $doubledots|$SED -e 's/[^\/]//g')
+  #echo II doubledots= $doubledots
+  doubledots=$(echo $doubledots|$SED -e 's/^\///')
+  #echo III doubledots= $doubledots
+  export DISTROOTDIR=$(echo $doubledots|$SED -e  's/\//..\//g')
+  #echo distrootdir for $f is $DISTROOTDIR
+}
+
+function doadocpostproc() {
+  #echo doing doadocpostproc
+  cd $TOPDIR/distribution/$LANGUAGE
+
+  echo calling AsciiDoctor in batch mode...
+  asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+
+  echo Postprocessing adoc output...
+  for fhtmlcached in $(cat $ADOC_POSTPROC_WORKBOOKPAGE_INPUT); do
+    #echo fhtmlcached= $fhtmlcached
+    if test -f "$fhtmlcached"; then
+      calculatedistrootdir $fhtmlcached
+      fdir=${fhtmlcached%/.cached/.*html}
+      #echo  fdir= $fdir
+      fbase=${fhtmlcached##*/.}
+      #echo fbase= $fbase
+      fhtml=$fdir/$fbase
+      #echo fhtml= $fhtml
+      #echo moving $fhtmlcached to $fhtml
+      mv $fhtmlcached $fhtml
+      bumpcsspathdir $fhtml
+      resolveabbrevs $fhtml
+    fi
+  done
+
+  for fhtml in $(cat $ADOC_POSTPROC_NONOTHERDIR_INPUT); do
+    #echo fhtml= $fhtml
+    if test -f "$fhtml"; then
+      #echo fhtml= $fhtml
+      insertgdrivesave $fhtml
+    fi
+  done
+
+  #echo DOING LESSONPLANs
+  #echo doing $ADOC_POSTPROC_LESSONPLAN_INPUT
+
+  for fhtmlcached in $(cat $ADOC_POSTPROC_LESSONPLAN_INPUT); do
+    if test -f "$fhtmlcached"; then
+      calculatedistrootdir $fhtmlcached
+      fdir=${fhtmlcached%/.cached/.*html}
+      #echo  fdir= $fdir
+      fbase=${fhtmlcached##*/.}
+      fbase=${fbase%.html}.shtml
+      #echo fbase= $fbase
+      fshtml=$fdir/$fbase
+      #echo fhtml= $fhtml
+      #echo moving $fhtmlcached to $fshtml
+      mv $fhtmlcached $fshtml
+      #echo doing insertbodyid
+      insertbodyid $fshtml
+      #echo doing addanalytics
+      addanalytics $fshtml
+      #echo doing resolveabbrevs
+      bumpcsspathdir $fshtml
+      resolveabbrevs $fshtml
+      #echo cleanuptitle
+      cleanuptitle $fshtml
+      #echo cleanupduration
+      cleanupduration $fshtml
+      #echo insertsectionselfie
+      insertsectionselfie $fshtml
+      #echo lintlesson
+      lintlesson $fshtml
+      #echo insertgdrivesave
+      insertgdrivesave $fshtml
+    fi
+  done
+
+  for fhtmlcached in $(cat $ADOC_POSTPROC_NARRATIVE_INPUT); do
+    if test -f "$fhtmlcached"; then
+      calculatedistrootdir $fhtmlcached
+      fdir=${fhtmlcached%/.cached/.*html}
+      fbase=${fhtmlcached##*/.}
+      fbase=${fbase%.html}.shtml
+      fshtml=$fdir/$fbase
+      mv $fhtmlcached $fshtml
+      insertbodyid $fshtml
+      addanalytics $fshtml
+      bumpcsspathdir $fshtml
+      resolveabbrevs $fshtml
+      insertgdrivesave $fshtml
+    fi
+  done
+
+  for fhtmlcached in $(cat $ADOC_POSTPROC_RESOURCES_INPUT); do
+    if test -f "$fhtmlcached"; then
+      calculatedistrootdir $fhtmlcached
+      fdir=${fhtmlcached%/.cached/.*html}
+      fbase=${fhtmlcached##*/.}
+      fbase=${fbase%.html}.shtml
+      fshtml=$fdir/$fbase
+      mv $fhtmlcached $fshtml
+      insertbodyid $fshtml
+      bumpcsspathdir $fshtml
+      resolveabbrevs $fshtml
+      cleanuptitle $fshtml
+      insertgdrivesave $fshtml
+    fi
+  done
+
+  for fhtmlcached in $(cat $ADOC_POSTPROC_ALLPATHWAYS_INPUT); do
+    if test -f "$fhtmlcached"; then
+      calculatedistrootdir $fhtmlcached
+      fdir=${fhtmlcached%/.cached/.*html}
+      fbase=${fhtmlcached##*/.}
+      fbase=${fbase%.html}.shtml
+      fshtml=$fdir/$fbase
+      mv $fhtmlcached $fshtml
+      removelogos $fshtml
+      bumpcsspathdir $fshtml
+      resolveabbrevs $fshtml
+    fi
+  done
+
+  #exit #fixmE
+
+}
+
+function doconversions() {
+  #echo doing doconversions
+  cd $TOPDIR/distribution/$LANGUAGE
+
+  $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
+
+  doadocpostproc $ADOC_INPUT
+
+  if test ! $NOPDF; then
+    if test ! -f lib/$ABYSS.pdf; then
+      echo '= PAGE NOT FOUND!' > lib/$ABYSS.adoc
+      echo >> lib/$ABYSS.adoc
+      asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css lib/$ABYSS.adoc
+      echo ", { \"input\": \"lib/$ABYSS.html\" }" >> $PUPPETEER_INPUT
+    fi
+
+  fi
+}
+
 function callonARGS() {
   local subroutine=$1
 
@@ -2192,11 +2322,26 @@ function callonARGS() {
   done
 }
 
-TEMPF=$(mktemp); rm -f $TEMPF
-export WKH2P_BATCH_BASE=$WKH2P_PFX-batchtmp-$(basename $TEMPF)
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
-export PUPPETEER_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/$WKH2P_BATCH_BASE-puppeteer.json
-echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" >> $PUPPETEER_INPUT
+export PUPPETEER_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-puppeteer.json
+echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
+
+export ADOCABLES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adocables.rkt
+echo '(' > $ADOCABLES_INPUT
+
+export ADOC_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-asciidoctor.txt.kp
+rm -f $ADOC_INPUT
+touch $ADOC_INPUT
+
+export ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-workbookpage.txt.kp
+export ADOC_POSTPROC_NONOTHERDIR_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-nonotherdir.txt.kp
+export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-lessonplan.txt.kp
+export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrative.txt.kp
+export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
+export ADOC_POSTPROC_ALLPATHWAYS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
+
+rm -f $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+touch $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
 
 copycommonlessons
 
@@ -2204,11 +2349,35 @@ mkdir -p distribution/$LANGUAGE/.cached
 
 buildcommonlessons
 
+export PROGLANG=pyret #fixme
+
+#echo PWDi is $(pwd)
+
 buildlessonplans
 
-#echo !!! building pathways
+#echo PWDii is $(pwd)
+
+#echo calling Racket on $PROGDIR/adocables-preproc.rkt
+
+#$PROGDIR/adocables-preproc.rkt .cached/.do-adocables.rkt #fixme
+
+#echo !!! calling buildpathway s
+
+#echo PWD 1 is $(pwd)
 
 callonARGS buildpathway
+
+#echo !!! buildpathway s done
+
+echo ')' >> $ADOCABLES_INPUT
+
+#echo PWD 2 is $(pwd)
+
+#$PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
+
+doconversions
+
+callonARGS buildworkbookjsons
 
 builddependencyjson
 
