@@ -1437,7 +1437,12 @@ function makeworkbookjson() {
 
   #echo doing makeworkbookjson "$@" in $(pwd)
 
+
+
   local tgt=$1
+  local tgtpathway=$2
+
+  local WORKBOOKINPUT=$TOPDIR/distribution/$LANGUAGE/courses/$tgtpathway/.cached/.filelist
 
   local filesvar=
 
@@ -1567,6 +1572,8 @@ function makeworkbookjson() {
     done
 
     echo "] }" >> $WORKBOOKINPUT-$tgt.json
+
+    #echo Finished with $WORKBOOKINPUT-$tgt.json
 
 }
 
@@ -1841,15 +1848,16 @@ function copycommonlessons() {
 }
 
 function buildworkbookjsons() {
+  #echo DOING buildworkbookjsons $TGTPATHWAY
   cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
 
   if test $BOOK; then
     for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
       pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
           if test $NOPARALLEL; then
-            makeworkbookjson $wbf
+            makeworkbookjson $wbf $TGTPATHWAY
           else
-            makeworkbookjson $wbf &
+            makeworkbookjson $wbf $TGTPATHWAY &
           fi
         done
         test ! $NOPARALLEL && wait
@@ -1941,7 +1949,7 @@ function buildpathway() {
     export PATHWAYROOTDIR=./
     export DISTROOTDIR=../../
 
-    export WORKBOOKINPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
+    #export WORKBOOKINPUT=$TOPDIR/$DESTPATHWAYDIR/.cached/.filelist
 
     #mkdir -p lessons workbook
     mkdir -p  workbook
