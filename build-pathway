@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-18 # last modified
+LASTMOD=2021-10-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1635,6 +1635,8 @@ function rmtmpfiles() {
   test $DEBUG && return
   #echo doing rmtmpfiles
 
+  cd $TOPDIR/distribution/$LANGUAGE
+
   for f in adoc aux log rkt tex title; do
     find . -name \*.$f -delete
   done
@@ -2529,3 +2531,5 @@ for f in */*; do
 done
 
 asciidoctor index.adoc
+
+rmtmpfiles
