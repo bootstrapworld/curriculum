@@ -1,0 +1,243 @@
+= Piecewise Functions and If-Expressions
+
+@lesson-description{Students learn how to define a function so that it behaves differently depending on the input.}
+
+
+[@lesson-intro-table]
+|===
+@prereqs-stds{inequalities1-simple}
+| Lesson Goals
+| Students will be able to:
+
+* Explain what a piecewise function is.
+* Give examples of inputs and outputs of a given @vocab{piecewise function}.
+
+| Student-Facing Lesson Goals
+|
+* I can describe how piecewise functions work.
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+*  @link{https://docs.google.com/presentation/d/1-ZNJiIr6H0Lo41L4ZrCxCJAi8Xsq1y1eAfIh7500R8Q/, Lesson Slides}
+}
+
+@ifproglang{pyret}{
+*  @link{https://docs.google.com/presentation/d/140rY1DJdQv9_ZBHJ2BMTJ8sPVjP86Soaqq1d1CBnlIk/, Lesson Slides}
+}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+
+| Key Points for the Facilitator
+|
+* The Design Recipe looks a bit different for piecewise, or @vocab{conditional}, @vocab{functions}.  Check that students are taking time to write @vocab{examples} and circle what is changing.
+
+@lang-prereq
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit7/index.html, prior unit-based version}
+
+== Intro to Piecewise Functions @duration{15 minutes}
+
+=== Overview
+Students are introduced to piecewise functions by way of a kinesthetic activity and then brainstorm real world applications of piecewise functions.
+
+Decide whether this activity would work better for your class if students stand up and spread out around the classroom or stay in their seats.
+
+=== Launch
+
+Give directions to distinct groups of students so that every student ends up with an activity to perform.  _For example:_
+
+[.lesson-instruction]
+--
+*Desk Option:*
+
+* If you have brown eyes, put your arms in the air.
+* If you have blue eyes, clasp your hands.
+* If you have green or hazel eyes, flap your arms like a chicken.
+
+*Standing option:*
+
+* If you had coffee this morning, make an X with your body.
+* If you didn't have coffee this morning, make a T with your body.
+--
+
+Debrief how students parsed the directions. You might do this while students are still in motion or it might work better with your class to stop the activity before discussing it.
+
+_Example Questions:_
+
+[.lesson-instruction]
+* Ask a student waving their arms in the air why they aren't flapping their arms like a chicken.
+* Ask a student making a T how they knew what to do.
+* Is this activity representing a function?
+* What is the input?
+* What is the output?
+_Since each student ("input") has only one action ("output"), it is still a function_.
+
+Up until now, almost all the functions students have seen can be described by a single rule. In this activity their behavior followed a _set of rules_ for which each input still had exactly one output. Make a big deal about this, so they recognize how big of a shift this is!
+
+Explain that students have just acted out what is called a _piecewise function_. The world is full of piecewise functions, so they appear in both math and the programming environment!
+
+=== Investigate
+
+Have students work with their partner to think of examples of piecewise functions.
+
+_Here are a few examples to get you started:_
+
+* Museums often charge admission and offer special discounted admission for students and another price for senior citizens. When the cashier rings up the cost for a family to visit, they will enter the number of student tickets separately from the general admission tickets and the number of senior citizen tickets, and the cash register will multiply the number of each kind of ticket times the appropriate price per ticket before adding them all together.
+* The US Postal Service charges a letter rate for envelopes under 3.5 ounces and between 3.5" x 5" and 6.125" and 11.5". Larger packages get billed at a different rate.
+* Many phone plans include data transmission at a certain speed up to a certain limit and once you've used up that data, the speed at which they deliver your files slows down.
+
+=== Synthesize
+Share your findings as a class.
+
+_You may also want to discuss whether square root and absolute values are piecewise functions._
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Partial Functions}
+
+For Algebra 2 or pre-calculus teachers, this is a useful time to address _partial functions_. The students who had purple eyes had _no rule at all_, meaning that the function was _undefined_ at those points. In the USPS example, the cost to mail tiny cards is also _undefined_ because the postal service doesn't ship packages that are too small.
+|===
+
+== Piecewise Functions in the Programming Environment @duration{20 minutes}
+
+=== Overview
+Having acted out a piecewise function, students take the first step towards writing one, by exploring one or two programs that make use of piecewise functions, developing their own understanding, and modifying the programs.
+
+=== Launch
+So far, all of the functions we know how to write have had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
+
+////
+The rule for `nametag` was to take a row and make an image of the animal's name in purple letters.
+////
+
+What if we want to write functions that apply different rules, depending on the input?
+
+=== Investigate
+
+[.lesson-instruction]
+
+////
+when Dorai makes the new starterfile directive, deploy it here!
+////
+
+@ifproglang{pyret}{
+- Open the @link{https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN&v=1904b2c, Red Shape starter file}.
+}
+@ifproglang{wescheme}{
+- Open the @link{https://www.wescheme.org/view?publicId=3R59t8bocG, Red Shape starter file}.
+}
+- Complete @printable-exercise{pages/redshape-explore.adoc} in your student workbooks.
+
+If you have more time to devote to piecewise functions or students who are ready to dive deeper, have them work with the @ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1ymyvlI7RTtq8lHh4VH3x1N3WlcZB650j, Mood Generator starter file}}
+@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=tMh8w524Bp, Mood Generator starter file}} using @printable-exercise{pages/MoodGenerator-explore.adoc} in their student workbooks.
+
+@ifproglang{pyret}{
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{More than one Way to Define Piecewise Functions!}
+
+There are multiple ways to write piecewise functions in Pyret. For those who are curious and have time to engage students with multiple methods, check out this @link{https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e&v=1904b2c, alternate version of the Mood Generator Starter File,} which makes use of `ask` instead of `if`. Writing a second Red Shape program using `ask` could be a good extension for some students.}
+|===
+
+=== Synthesize
+
+[.lesson-instruction]
+* How many examples are needed to fully test a piecewise function?
+
+_More than two! In fact, we need an example for every option!_
+
+[.lesson-instruction]
+* What changes in a piecewise function?
+
+_The input & what we want the program to do with the input_
+
+[.lesson-instruction]
+* What happened when you gave `red-shape` a shape that wasn't defined in the program?
+
+_The program told us that the shape was unknown.Think about other functions that don't work when we give them an invalid input, like dividing by zero!_
+
+
+[.lesson-instruction]
+* How would you explain how piecewise functions work?
+
+@ifproglang{pyret}{_Pyret allows us to write if-expressions, which contain:_
+
+. _the keyword `if`, followed by a condition._
+. _a colon (`:`), followed by a rule for what the function should do if the condition is `true`_
+. _an `else:`, followed by a rule for what to do if the condition is `false`_
+
+_We can chain them together to create multiple rules, with the last `else:` being our fallback in case every other condition is `false`._
+}
+
+@ifproglang{wescheme}{_WeScheme allows us to write piecewise functions as follows:_
+
+. _the keyword `cond`, followed by a list of conditions_
+. _each condition is a boolean expression, followed by a rule for what the function should do if the condition is `true`_
+. _ending with an `else` statement, being our fallback in case every other condition is `false`._
+}
+
+[.lesson-point]
+If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
+
+== How could we have used the Design Recipe to get here?
+
+=== Overview
+
+We'll think through how much of the Red Shape program we could have written if we'd started from scratch, using the Design Recipe.
+
+=== Launch
+
+Let's see how the Design Recipe could help us to write a piecewise function.
+
+=== Investigate
+[lesson-instruction]
+* Turn to @printable-exercise{redshape-dr.adoc}
+* How do the Contract and purppose statement compare to other Contracts we've seen?
+
+_The Contract and Purpose Statements don't change: we still write down the name, Domain and Range of our function, and we still write down all the information we need in our Purpose Statement (of course, now we might need to write a lot more, since there's more information!)._
+
+[lesson-instruction]
+* How do the examples compare to other examples we've seen.
+
+_The examples are also pretty similar: we write the name of the function, followed by some example inputs, and then we write what the function produces with those inputs._
+
+[lesson-instruction]
+* Circle and label everything that is change-able.
+* What changes?
+
+_Both the input and the output! When this is true, we know that we have to write a piecewise function, which defines what happens for *each* input._
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Pedagogy Note}
+
+Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function is _always_ equal to the number of labels in the example step, which is _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions.
+|===
+
+== Additional Resources:
+
+If you have more time for working with Piecewise Functions, we have another program for your students to explore and scaffolded pages to support them through the process!
+
+* @ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/openEditor?publicId=AcThgFgX9z, Alice's Restaurant starter file}
+}
+@ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1_TxgoUCDKY3WYn_Vu9J1_2LXkY1o0dx_, Alice's Restaurant starter file}
+}
+* @opt-printable-exercise{pages/restaurant-intro.adoc}
+* @opt-printable-exercise{pages/restaurant-explore.adoc}
+
+You may also want to have students create a _visual representation_ of how the computer moves through a conditional function.
+

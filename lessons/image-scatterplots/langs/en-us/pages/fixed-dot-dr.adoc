@@ -1,0 +1,23 @@
+@design-recipe-exercise{ "fixed-dot"
+"Write a function called @funname which looks at the fixed column of the animals table and generates 5-pixel dots that are green if the animal is fixed and red if the animal is not fixed."
+  #:show-funname-contract? #t
+  #:domain-list (list "Row")
+  #:show-domains? #t
+  #:range "Image"
+  #:show-range? #t
+  #:purpose "Lookup the value in the fixed column and produce a solid 5-pixel circle that is green if it's true and red if it's false."
+  #:show-purpose? #t
+  #:num-examples 2
+  #:example-list '((true       (circle 5 "solid" "green"))
+                   (false      (circle 5 "solid" "red"))
+                    )
+  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
+  #:param-list '(shape)
+  #:show-params? #t
+  #:body (if *solutions-mode?*
+"if (r[\"fixed\"] == true)         : circle(20, \"solid\", \"red\")
+else if (r[\"fixed\"] == false)   : circle(20, \"solid\", \"red\")
+end"
+"")
+  #:show-body? #t
+  #:grid-lines? #t }
