@@ -1,9 +1,172 @@
 (
-   ("StarterFileX"  ; no spaces in starter file shortname!
+    ; core ; no spaces in starter file shortname!
+    ("alices-restaurant"
+      ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2&v=1904b2c")
+      ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
+      )
+    ("gt"  
        ("pyret" "https://.....")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
+       )
+    ("mood-generator-ask" 
+       ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e&v=1904b2c")
        ("wescheme" "https://.....")
-       ("codap" "https://....."))
-    ("StarterFileY" ; no spaces in starter file shortname!
-       ...)
-   )
+       )
+    ("mood-generator-if-else" 
+       ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ&v=1904b2c")
+       )
+    ("red-shape"  
+       ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN&v=1904b2c")
+       ("wescheme" "https://.....")
+       )
+    
+    ; data-science
+    ("animals"  
+       ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi&v=1904b2c")
+       ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
+       )
+    ("bootstrap-ds"  
+       ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi&v=1904b2c")
+       )
+    ("custom-animals" 
+       ("pyret" "https://code.pyret.org/editor#share=1zjYggoFxpreTalJdDvlFPnQtcQNMyJiH&v=1904b2c")
+       )
+    ("expanded-animals" 
+       ("pyret" "https://code.pyret.org/editor#share=1Iu5I9lJt1oCho-l4xk7FucgtLq6cAUVr&v=1904b2c")
+       )
+    ("image-scatter-plot-w-range"
+      ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
+      )
+    ("image-scatter-plot-w-simple-helper-functions"
+      ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
+      )
+    ("piecewise-image-scatterplot"
+       ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0&v=1904b2c")
+       )
+    ("putting-it-all-together" 
+       ("pyret" "https://code.pyret.org/editor#share=1Qru5u76sBGvm4bB0KS8YSDKk4ED4qt5U&v=1904b2c")
+       )
+    ("row-functions"  
+       ("pyret" "https://code.pyret.org/editor#share=1-YuAea2oTVZcEyUNvEb-cg5qIB6n5V7n&v=1904b2c")
+       )
+    ("table-methods" 
+       ("pyret" "https://code.pyret.org/editor#share=1IkX5mu-XHHkxFlZVo7ZgLraoB18biUqA&v=1904b2c")
+       ("wescheme" "https://.....")
+       )
+    ("text-stats"  
+       ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP&v=1904b2c")
+       ("wescheme" "https://.....")
+       ("codap" "https://.....")
+       )
+    ("trust-but-verify"  
+       ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP&v=1904b2c")
+       )
+    ("word-length"  
+       ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb&v=1904b2c")
+       )
+
+   ; math
+    ("blank-game"  
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
+       )
+    ("boolean"
+      ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
+       )
+    ("bug-hunting"  
+       ("pyret" "https://code.pyret.org/editor#share=10eAHLb3ZAwlBCXPc9ordWvoElEIjUB8q&v=1904b2c")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=JCTcwYc57r")
+       )
+    ("combinatorics"  
+       ("pyret" "")
+       )
+    ("permutations-and-combinations"  
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=hHNjcj8rB6")
+       )
+    ("defining values"  
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6")
+       )
+    ("exploring-linearity-in-definitions"  
+       ("pyret" "")
+       )
+    ("exploring-linearity-in-graphs"  
+       ("pyret" "")
+       )
+    ("exploring-linearity-in-tables"  
+       ("pyret" "")
+       )
+    ("flag-mx" 
+       ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6&v=1904b2c")
+       ("wescheme" "")
+       )
+    ("flags-start" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=jH25JejavW")
+       )
+    ("flags-alaska" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=ve2gTEY06p")
+       )
+    ("flags-china" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/open/editor?publicId=Gc01ngfMN0")
+       )
+    ("flags-nl-fr-mauritius" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=81WrTGQglP, "Flags of Netherlands, Ireland, Mauritius Starter File")
+       )
+    ("flags-pr" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=6TJ0N2CJqU")
+       )
+    ("flags-trinidad" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=SQRHKcqQvW")
+       )
+    ("flags-lebanon" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=x0nJrP1UYp")
+       )
+    ("flags-panama"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=V4AfQydAHu")
+       )
+    ("ninja-cat" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/run?publicId=sggzRzgU5T")
+       )
+    ("rocket-height" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/openEditor?publicId=LGTVNvzrax")
+       )
+   ("sa-prism"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=3QDJBmzYp0")
+       )
+    ("sample-game-no-distance-lines"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=PJMfrSvGRl")
+       )
+    ("sample-game-w-distance"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=0bCivugY3P")
+       )
+    ("inequalities-simple"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=EA6R0E97nV")
+       )
+    ("inequalities-compound"
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=yFnDbsSnR7")
+       )
+    ("inequalities-sam" 
+       ("pyret" "")
+       ("wescheme" "https://www.wescheme.org/view?publicId=0elP8WrmfM")
+       )
+   
+    
+
  )
