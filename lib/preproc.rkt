@@ -1358,14 +1358,15 @@
                                            [(string=? directive "design-recipe-exercise")
                                             design-recipe-exercise]
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
-                                 (let ([g (read-group i directive)])
-                                   (let ([args (string-to-form g)])
-                                     (let-values ([(key-list key-vals args)
-                                                   (rearrange-args args)])
-                                                 (call-with-input-string (keyword-apply f key-list key-vals args)
-                                                   (lambda (i)
-                                                     (expand-directives i o)
-                                                     ))))))]
+                              (let ([g (read-group i directive)])
+                                (let ([args (string-to-form g)])
+                                  (let-values ([(key-list key-vals args)
+                                                (rearrange-args args)])
+                                    (let ([s (keyword-apply f key-list key-vals args)])
+                                      (call-with-input-string s
+                                        (lambda (i)
+                                          (expand-directives i o)
+                                          )))))))]
                            [else
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
