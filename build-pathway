@@ -36,6 +36,7 @@ SED=sed
 MDV=md5sum
 VERSION=
 NOPARALLEL=
+MAXBASHTHREADS=50
 
 if test -f ./.build-pathway.rc; then
   . ./.build-pathway.rc
@@ -1288,9 +1289,18 @@ function builddependencyjson() {
       else
         echo "," >> $GRAPHFILE
       fi
-      titletxt=$(cat $L/.cached/.index.titletxt|$SED -e 's/"/\\"/g')
-      desctxt=$(cat $L/.cached/.index-desc.txt.kp|$SED -e 's/"/\\"/g')
-      pagestxt=$(cat $L/pages/.cached/.workbook-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
+      titletxt=
+      if test -f $L/.cached/.index.titletxt; then
+        titletxt=$(cat $L/.cached/.index.titletxt|$SED -e 's/"/\\"/g')
+      fi
+      desctxt=
+      if test -f $L/.cached/.index-desc.txt.kp; then
+        desctxt=$(cat $L/.cached/.index-desc.txt.kp|$SED -e 's/"/\\"/g')
+      fi
+      pagestxt=
+      if test -f $L/pages/.cached/.workbook-pages-ls.txt.kp; then
+        pagestxt=$(cat $L/pages/.cached/.workbook-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
+      fi
       exerpagestxt=
       if test -f $L/pages/.cached/.exercise-pages-ls.txt.kp; then
         exerpagestxt=$(cat $L/pages/.cached/.exercise-pages-ls.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
@@ -1310,14 +1320,16 @@ function builddependencyjson() {
       fi
       echo -n "    prerequisites: [" >> $GRAPHFILE
       pfirst=1
-      for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
-        if test $pfirst; then
-          pfirst=
-        else
-          echo -n ", " >> $GRAPHFILE
-        fi
-        echo -n "\"$p\"" >> $GRAPHFILE
-      done
+      if test -f $L/.cached/.lesson-prereq.txt.kp; then
+        for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
+          if test $pfirst; then
+            pfirst=
+          else
+            echo -n ", " >> $GRAPHFILE
+          fi
+          echo -n "\"$p\"" >> $GRAPHFILE
+        done
+      fi
       echo "]," >> $GRAPHFILE
       if test -f $L/.cached/.lesson-standards-w-prose.txt.kp; then
         cat $L/.cached/.lesson-standards-w-prose.txt.kp >> $GRAPHFILE
@@ -1359,7 +1371,7 @@ function buildlessonplans() {
   end=`date +%s`
   runtime=$((end-start))
   #echo \ Completed in $runtime s
-  #echo \ 
+  #echo " "
 }
 
 function makeglossaryandstandards() {
@@ -1436,8 +1448,6 @@ function buildpathwaynarrative() {
 function makeworkbookjson() {
 
   #echo doing makeworkbookjson "$@" in $(pwd)
-
-
 
   local tgt=$1
   local tgtpathway=$2
@@ -1640,7 +1650,7 @@ function batchhtmltopdf() {
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 }
 
 function rmtmpfiles() {
@@ -1844,7 +1854,7 @@ function copycommonlessons() {
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 }
 
 function buildworkbookjsons() {
@@ -1890,7 +1900,7 @@ function buildpathway() {
     echo
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
-    echo $langicon BUILDING PATHWAY: $LANGUAGE/$PATHWAY 
+    echo $langicon BUILDING PATHWAY: $LANGUAGE/$PATHWAY
     echo $'-----------------------------------------------------------\n'
 
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
@@ -2115,7 +2125,7 @@ function buildpathway() {
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 }
 
 function buildpathwaytocs() {
@@ -2293,6 +2303,22 @@ function postproc_allpathways() {
   fi
 }
 
+
+function run_postproc() {
+  local postproc_func=$1
+  local bigfile=$2
+  rm -f $bigfile-split*
+  split -l $MAXBASHTHREADS $bigfile $bigfile-split
+  for smallfile in $bigfile-split*; do
+    if test -f "$smallfile"; then
+      for fhtml in $(cat $smallfile); do
+        $postproc_func $fhtml &
+      done
+      wait
+    fi
+  done
+}
+
 function doadocpostproc() {
   #echo doing doadocpostproc
   cd $TOPDIR/distribution/$LANGUAGE
@@ -2308,61 +2334,23 @@ function doadocpostproc() {
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 
   start=`date +%s`
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
-  for fhtmlcached in $(cat $ADOC_POSTPROC_WORKBOOKPAGE_INPUT); do
-    postproc_workbookpage $fhtmlcached &
-  done
-  wait
-
-  #echo Postprocessing wkbkpages done
-
-  for fhtml in $(cat $ADOC_POSTPROC_NONOTHERDIR_INPUT); do
-    postproc_nonotherdir $fhtml &
-  done
-  wait
-
-  #echo Postprocessing nonotherdir done
-
-  #echo DOING LESSONPLANs
-  #echo doing $ADOC_POSTPROC_LESSONPLAN_INPUT
-
-  for fhtmlcached in $(cat $ADOC_POSTPROC_LESSONPLAN_INPUT); do
-    postproc_lessonplan $fhtmlcached &
-  done
-  wait
-
-  #echo Postprocessing lessonplans done
-
-  for fhtmlcached in $(cat $ADOC_POSTPROC_NARRATIVE_INPUT); do
-    postproc_narrative $fhtmlcached &
-  done
-  wait
-
-  #echo Postprocessing narratives done
-
-  for fhtmlcached in $(cat $ADOC_POSTPROC_RESOURCES_INPUT); do
-    postproc_resources $fhtmlcached &
-  done
-  wait
-
-  #echo Postprocessing teacherresources done
-
-  for fhtmlcached in $(cat $ADOC_POSTPROC_ALLPATHWAYS_INPUT); do
-    postproc_allpathways $fhtmlcached &
-  done
-  wait
-
-  #echo Postprocessing allpathways done
+  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT
+  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
+  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
+  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
+  run_postproc postproc_allpathways $ADOC_POSTPROC_ALLPATHWAYS_INPUT
 
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 }
 
 function doconversions() {
@@ -2376,7 +2364,7 @@ function doconversions() {
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
-  echo \ 
+  echo " "
 
   doadocpostproc $ADOC_INPUT
 
@@ -2485,6 +2473,8 @@ echo ')' >> $ADOCABLES_INPUT
 #$PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
 doconversions
+
+echo BUILDING WORKBOOK JSONS
 
 callonARGS buildworkbookjsons
 
