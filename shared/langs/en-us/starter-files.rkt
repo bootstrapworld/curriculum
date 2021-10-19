@@ -1,8 +1,9 @@
 (
-   ("Starter File X" 
+   ("StarterFileX"  ; no spaces in starter file shortname!
        ("pyret" "https://.....")
        ("wescheme" "https://.....")
        ("codap" "https://....."))
-    ("Starter File Y" ...)
+    ("StarterFileY" ; no spaces in starter file shortname!
+       ...)
    )
  )
