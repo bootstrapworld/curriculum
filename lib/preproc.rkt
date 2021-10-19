@@ -497,27 +497,33 @@
          [g-in-pages (string-append lesson "/pages/" snippet)]
          [f (string-append "lessons/" g)]
          [f.src f]
+         [existent-file? #f]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
     ;(printf "f= ~s in ~s: ~s\n" f (current-directory) (file-exists? f))
-    (cond [(path-has-extension? snippet ".adoc")
+    (cond [(path-has-extension? f ".adoc")
            (let ([f.adoc f]
                  [f.html (path-replace-extension f ".html")]
                  [f.pdf (path-replace-extension f ".pdf")])
              (cond [(or (file-exists? f.html) (file-exists? f.adoc))
                     ;(printf "I\n")
                     (set! f f.html)
+                    (set! existent-file? #t)
                     (set! g-in-pages (path-replace-extension g-in-pages ".html"))
                     (set! g (path-replace-extension g ".html"))]
                    [(file-exists? f.pdf)
                     ;(printf "II\n")
                     (set! f f.pdf)
+                    (set! existent-file? #t)
                     (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
                     (set! g (path-replace-extension g ".pdf"))]))]
+          [(path-has-extension? f ".pdf")
+           (when (file-exists? f)
+             (set! existent-file? #t))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
     ;(printf "f'= ~s\n" f)
-    (unless (file-exists? f)
+    (unless existent-file?
       (set! error-cascade? #t)
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson link-type f))
@@ -678,21 +684,30 @@
                    (let ([f.adoc (path-replace-extension f ".adoc")]
                          [f.html (path-replace-extension f ".html")]
                          [f.shtml (path-replace-extension f ".shtml")]
-                         [f.pdf (path-replace-extension f ".pdf")])
-                     (cond [(file-exists? f.adoc) (set! f f.adoc)]
-                           [(file-exists? f.html) (set! f f.html)]
-                           [(file-exists? f.shtml) (set! f f.shtml)]
-                           [(file-exists? f.pdf) (set! f f.pdf)]))
-                   ;(printf "link refers to ~a\n\n" f)
-                   (let ([short-ref? (abbreviated-index-page? f)])
-                     (unless (or (file-exists? f)
-                                 (string=? f "pathway-standards.shtml")
-                                 short-ref?)
-                       (check-link f)
-                       (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
-                               (errmessage-context)
-                               f))
-                     (when short-ref? (set! f (build-path f "index.shtml"))))])
+                         [f.pdf (path-replace-extension f ".pdf")]
+                         [existent-file? #f])
+                     (cond [(file-exists? f.adoc)
+                            (set! existent-file? #t)
+                            (set! f f.html)]
+                           [(file-exists? f.html)
+                            (set! existent-file? #t)
+                            (set! f f.html)]
+                           [(file-exists? f.shtml)
+                            (set! existent-file? #t)
+                            (set! f f.shtml)]
+                           [(file-exists? f.pdf)
+                            (set! existent-file? #t)
+                            (set! f f.pdf)])
+                     ;(printf "link refers to ~a\n\n" f)
+                     (let ([short-ref? (abbreviated-index-page? f)])
+                       (unless (or existent-file?
+                                   (string=? f "pathway-standards.shtml")
+                                   short-ref?)
+                         (check-link f)
+                         (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                                 (errmessage-context)
+                                 f))
+                       (when short-ref? (set! f (build-path f "index.shtml")))))])
 
            (when (and (member link-type '("online-exercise" "opt-online-exercise"))
                       external-link?)
@@ -1182,7 +1197,8 @@
                                    (cond [(or (string=? second-compt "pages")
                                               (string=? second-compt "solution-pages"))
                                           (display (make-workbook-link
-                                                     (string-append "lessons/" first-compt)
+                                                     first-compt
+                                                     ;(string-append "lessons/" first-compt)
                                                      second-compt
                                                      third-compt link-text
                                                      #:link-type directive) o)]
