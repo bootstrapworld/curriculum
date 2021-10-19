@@ -1333,7 +1333,7 @@ function builddependencyjson() {
 }
 
 function buildlessonplans() {
-  #echo doing buildlessonplans in $(pwd)
+  start=`date +%s`
   cd $TOPDIR/distribution/$LANGUAGE/lessons
   export DISTROOTDIR=../
   local L
@@ -1356,6 +1356,10 @@ function buildlessonplans() {
   done
   export LESSONSUBDIR=
   cd $TOPDIR/$DESTLANGDIR
+  end=`date +%s`
+  runtime=$((end-start))
+  #echo \ Completed in $runtime s
+  #echo \ 
 }
 
 function makeglossaryandstandards() {
@@ -1659,7 +1663,7 @@ function copylessondir() {
     #echo checkmd5nochange done
     if test $DOCOPYDIR; then
       #echo do copydir into $(pwd)
-      overwrite copying $lessonDir
+      overwrite preparing $lessonDir
       cp -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
       #echo I currently in $(pwd)
@@ -1786,7 +1790,10 @@ function buildpathwayworkbooks() {
 }
 
 function copycommonlessons() {
-  #echo doing copycommonlessons
+  start=`date +%s`
+  echo 📁 PREPARING LESSONS
+  echo $'-----------------------------------------------------------\n'
+
   cd $TOPDIR
 
   export DESTLANGDIR=distribution/$LANGUAGE
@@ -1818,6 +1825,10 @@ function copycommonlessons() {
 
   cd $TOPDIR
 
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 }
 
 function buildworkbookjsons() {
@@ -1838,7 +1849,8 @@ function buildworkbookjsons() {
 }
 
 function buildpathway() {
-  echo doing buildpathway $TGTPATHWAY
+  start=`date +%s`
+  #echo doing buildpathway $TGTPATHWAY
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1861,7 +1873,7 @@ function buildpathway() {
     echo
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
-    echo BUILDING PATHWAY: $LANGUAGE/$PATHWAY $langicon
+    echo $langicon BUILDING PATHWAY: $LANGUAGE/$PATHWAY 
     echo $'-----------------------------------------------------------\n'
 
     export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
@@ -2056,7 +2068,7 @@ function buildpathway() {
 
     buildteacherresource
 
-    rmtmpfiles
+    #rmtmpfiles
 
     #echo PWD 3 is $(pwd)
 
@@ -2083,7 +2095,10 @@ function buildpathway() {
     fi
   fi
   test $EXPANDEDWARNINGS || echo $'\033[?7h'
-
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 }
 
 function buildpathwaytocs() {
@@ -2265,14 +2280,22 @@ function doadocpostproc() {
   #echo doing doadocpostproc
   cd $TOPDIR/distribution/$LANGUAGE
 
-  echo calling AsciiDoctor in batch mode...
+  start=`date +%s`
+  echo 👨‍💻CALLING ASCIIDOCTOR IN BATCH MODE
+  echo '-----------------------------------------------------------'
   if test -s $ADOC_INPUT; then
     asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
   else
     echo No adoc files need conversion!
   fi
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 
-  echo Postprocessing adoc output...
+  start=`date +%s`
+  echo 👨‍💻POST-PROCESSING HTML
+  echo '-----------------------------------------------------------'
 
   for fhtmlcached in $(cat $ADOC_POSTPROC_WORKBOOKPAGE_INPUT); do
     postproc_workbookpage $fhtmlcached &
@@ -2319,13 +2342,24 @@ function doadocpostproc() {
 
   #echo Postprocessing allpathways done
 
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 }
 
 function doconversions() {
   #echo doing doconversions
+  start=`date +%s`
   cd $TOPDIR/distribution/$LANGUAGE
 
+  echo 👨‍💻CALLING RACKET IN BATCH MODE
+  echo '-----------------------------------------------------------'
   $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 
   doadocpostproc $ADOC_INPUT
 
