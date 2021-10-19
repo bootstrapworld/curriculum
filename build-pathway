@@ -1624,10 +1624,16 @@ function batchhtmltopdf() {
 
   # use --trace-warnings to debug
 
-  #echo in $(pwd) doing node ../../lib/html2pdf.js $PUPPETEER_INPUT
+  start=`date +%s`
+  echo 🖨️PRINTING TO PDF
+  echo $'-----------------------------------------------------------\n'
   if grep -q input $PUPPETEER_INPUT; then
     node lib/html2pdf.js $PUPPETEER_INPUT
   fi
+  end=`date +%s`
+  runtime=$((end-start))
+  echo \ Completed in $runtime s
+  echo \ 
 }
 
 function rmtmpfiles() {
