@@ -30,13 +30,13 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-19 # last modified
+LASTMOD=2021-10-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
 VERSION=
 NOPARALLEL=
-MAXBASHTHREADS=50
+MAXBASHTHREADS=20
 
 if test -f ./.build-pathway.rc; then
   . ./.build-pathway.rc
@@ -1050,7 +1050,7 @@ function checksinglelessonplan() {
 
 function checklessonplan() {
   local L=$1
-  #echo doing checklessonplan $L
+  #echo doing checklessonplan $L in $(pwd)
   checksinglelessonplan $L
   test -d .cached || mkdir -p .cached
 
@@ -1723,6 +1723,7 @@ function copylessondir() {
                 adjustproglangsubdirs "$subdir" "$pl"
               fi
             done
+            checklessonplan $lessonDir-$pl
             cd ..
           fi
         done
@@ -1788,8 +1789,8 @@ function collectworkbookpages() {
           fi
           #echo g is $g gext is $gext
           if test "$gext" = html; then
-            echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
-            echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
+            echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iiia\" }" >> $PUPPETEER_INPUT
+            echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iva\" }" >> $PUPPETEER_INPUT
           fi
         fi
       done < ../workbook-pages.txt
@@ -1815,6 +1816,7 @@ function buildpathwayworkbooks() {
 }
 
 function copycommonlessons() {
+  #echo doing copycommonlessons
   start=`date +%s`
   echo 📁 PREPARING LESSONS
   echo $'-----------------------------------------------------------\n'
@@ -1875,9 +1877,26 @@ function buildworkbookjsons() {
 
 }
 
+function updatepathwaylist() {
+  local proglang=$1
+  test "$proglang" = pyret && return
+  test -f lesson-order.txt || return
+  rm -f lesson-order.txt.nu
+  touch lesson-order.txt.nu
+  local lessonDir=
+  for lessonDir in $(cat lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+    if test -d ../../lessons/$lessonDir-$proglang; then
+      echo $lessonDir-$proglang >> lesson-order.txt.nu
+    else
+      echo $lessonDir >> lesson-order.txt.nu
+    fi
+  done
+  cp -p lesson-order.txt.nu lesson-order.txt
+}
+
 function buildpathway() {
   start=`date +%s`
-  #echo doing buildpathway $TGTPATHWAY
+  #echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1917,6 +1936,11 @@ function buildpathway() {
     if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
       #echo copying pathway I $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
+      cd $DESTPATHWAYDIR
+      if test $PROGLANG != pyret; then
+        updatepathwaylist $PROGLANG
+      fi
+      cd $TOPDIR
     fi
 
     #echo copy pathway $SRCPATHWAY done
@@ -2303,7 +2327,6 @@ function postproc_allpathways() {
   fi
 }
 
-
 function run_postproc() {
   local postproc_func=$1
   local bigfile=$2
@@ -2446,7 +2469,7 @@ mkdir -p distribution/$LANGUAGE/.cached
 
 buildcommonlessons
 
-export PROGLANG=pyret #fixme
+#export PROGLANG=pyret #fixme
 
 #echo PWDi is $(pwd)
 
