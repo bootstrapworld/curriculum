@@ -13,9 +13,8 @@
        [args* (call-with-input-file adocables-file read)])
   (for ([args args*])
     ;(printf "processing ~s\n" args)
-    (let ([f (car args)]
-          [r1r2 (list-unzip (cdr args))])
-      ;(initialize-autonumber-index)
-      (keyword-apply preproc-adoc-file (car r1r2) (cadr r1r2) (list f)))))
+    (let-values ([(key-list val-list other-args)
+                  (rearrange-args args)])
+      (keyword-apply preproc-adoc-file key-list val-list other-args))))
 
 (void)

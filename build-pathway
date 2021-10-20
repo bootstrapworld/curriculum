@@ -804,19 +804,19 @@ function doadoc() {
   if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
     touch .cached/.pathway-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:narrative #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
   elif test $TEACHER_RESOURCES; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:resources #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_RESOURCES_INPUT
   elif test $ALLPATHWAYLESSONS; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:all-pathway-lessons #t)" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:all-pathway-lessons #t #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
   fi
@@ -841,18 +841,18 @@ function doadocs() {
   for f in $ff; do
     if test $TGTPATHWAY; then
       if test $OTHERDIR; then
-        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:other-dir #t #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:other-dir #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       else
-        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:target-pathway \"$TGTPATHWAY\")" >> $ADOCABLES_INPUT
+        echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
       fi
       echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
     else
       if test $OTHERDIR; then
-        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\" #:other-dir #t)" >> $ADOCABLES_INPUT
+        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\" #:other-dir #t #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       else
-        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\")" >> $ADOCABLES_INPUT
+        echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
         echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
         echo lessons/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
       fi
@@ -1193,7 +1193,7 @@ function buildlessonplan() {
       overwrite building lesson plan: $L
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc 0
+      doadoc index.adoc
       #$PROGDIR/adoc-preproc.rkt index.adoc
       if test -f index.html; then
         mv index.html index.shtml
@@ -1244,14 +1244,15 @@ function buildcommonlessons() {
   # process lesson directories in parallel
   for L in *; do
     export LESSON=$L
-    if test $NOPARALLEL; then
-      buildworkbookpages $L
-    else
-      buildworkbookpages $L &
-    fi
+    buildworkbookpages $L
+    # if test $NOPARALLEL; then
+    #   buildworkbookpages $L
+    # else
+    #   buildworkbookpages $L &
+    # fi
   done
 
-  test ! $NOPARALLEL && wait
+  # test ! $NOPARALLEL && wait
 
   #echo starting collectworkbookpages in $(pwd)
 
