@@ -1,23 +1,35 @@
 @design-recipe-exercise{ "fixed-dot"
-"Write a function called @funname which looks at the fixed column of the animals table and generates 5-pixel dots that are green if the animal is fixed and red if the animal is not fixed."
+"We want to generate a custom dot for our `image-scatter-plot`, to distinguish between animals that are fixed and unfixed. Write a function called @funname, which takes in a Row from the animals table and generates a 5-pixel solid green dot if the animal is fixed and a 5-pixel black dot if the animal is not fixed."
   #:show-funname-contract? #t
   #:domain-list (list "Row")
   #:show-domains? #t
   #:range "Image"
   #:show-range? #t
-  #:purpose "Lookup the value in the fixed column and produce a solid 5-pixel circle that is green if it's true and red if it's false."
+  #:purpose "Consumes an animal and produces a solid 5-pixel dot, green if it is fixed and black if not."
   #:show-purpose? #t
   #:num-examples 2
   #:example-list '((true       (circle 5 "solid" "green"))
-                   (false      (circle 5 "solid" "red"))
+                   (false      (circle 5 "solid" "black"))
                     )
-  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
-  #:param-list '(shape)
-  #:show-params? #t
+  #:show-examples `((#t #t #t #t) (#t #t #t #t))
+  #:param-list '(r)
+  #:show-params? #f
   #:body (if *solutions-mode?*
-"if (r[\"fixed\"] == true)         : circle(20, \"solid\", \"red\")
-else if (r[\"fixed\"] == false)   : circle(20, \"solid\", \"red\")
+"if (r[\"fixed\"] == true)         : circle(20, \"solid\", \"green\")
+else if (r[\"fixed\"] == false)   : circle(20, \"solid\", \"black\")
 end"
-"")
-  #:show-body? #t
+"blank-line
+blank-line")
+  #:show-body? #f
   #:grid-lines? #t }
+
+@comment{
+; #:body2 (if *solutions-mode?*
+; "if (r[\"fixed\"])         : circle(20, \"solid\", \"green\")
+; else: circle(20, \"solid\", \"black\")
+; end"
+; "blank-line
+; blank-line")
+;  #:show-body2? #f
+;  #:grid-lines? #t
+}
