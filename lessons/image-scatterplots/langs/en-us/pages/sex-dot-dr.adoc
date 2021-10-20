@@ -1,0 +1,28 @@
+@design-recipe-exercise{ "sex-dot"
+"We want to generate a custom dot for our `image-scatter-plot`, to distinguish female, hermaphrodite, and male animals. Write a function called @funname, which takes in a Row from the animals table and generates a 5-pixel solid dot: red if the animal is female, purple if the animal is hermaphrodite and black if the animal is male."
+  #:show-funname-contract? #f
+  #:domain-list (list "Row")
+  #:show-domains? #f
+  #:range "Image"
+  #:show-range? #f
+  #:purpose "Consumes an animal and produces a solid 5-pixel dot, red if female, purple if hermaphrodite, black if male."
+  #:show-purpose? #f
+  #:num-examples 3
+  #:example-list '(("female"          (circle 5 "solid" "red"))
+                   ("hermaphrodite"   (circle 5 "solid" "purple"))
+                   ("male"            (circle 5 "solid" "black"))
+                    )
+  #:show-examples #f
+  #:param-list '(r)
+  #:show-params? #f
+  #:body (if *solutions-mode?*
+"if (r[\"sex\"] == \"female\")                : circle(20, \"solid\", \"red\")
+else if (r[\"sex\"] == \"hermaphrodite\")   : circle(20, \"solid\", \"purple\")
+else if (r[\"sex\"] == \"male\")            : circle(20, \"solid\", \"black\")
+end"
+"blank-line
+blank-line
+blank-line
+blank-line")
+  #:show-body? #f
+  #:grid-lines? #t }
