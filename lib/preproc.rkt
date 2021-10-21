@@ -25,6 +25,7 @@
   create-standards-file
   preproc-adoc-file
   initialize-autonumber-index
+  rearrange-args
   )
 
 (define *progdir* (getenv "PROGDIR"))
@@ -35,7 +36,7 @@
 
 (define *book* (truthy-getenv "BOOK"))
 
-(define *proglang* (string-downcase (getenv "PROGLANG")))
+(define *proglang* "pyret")
 
 (define *containing-directory* "")
 
@@ -997,6 +998,7 @@
   (set! *lesson-plan* #f)
   (set! *narrative* #f)
   (set! *other-dir* #f)
+  (set! *proglang* "pyret")
   (set! *teacher-resources* #f)
   )
 
@@ -1011,6 +1013,7 @@
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
                            #:workbook-page [workbook-page #f]
+                           #:proglang [proglang "pyret"]
                            #:z [z -1]
                            )
 
@@ -1022,6 +1025,7 @@
   (set! *lesson-plan* lesson-plan)
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
+  (set! *proglang* proglang)
   (set! *teacher-resources* resources)
 
   (when (and *lesson-plan* (not *lesson*))  ;fixme
@@ -1129,7 +1133,7 @@
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive))]
                            [(string=? directive "proglang")
-                            (fprintf o "~a" (string-titlecase (getenv "PROGLANG")))]
+                            (fprintf o "~a" (string-titlecase *proglang*))]
                            [(string=? directive "year")
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
@@ -1360,6 +1364,7 @@
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                               (let ([g (read-group i directive)])
                                 (let ([args (string-to-form g)])
+                                  (set! args (append args (list '#:proglang *proglang*)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
