@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-20 # last modified
+LASTMOD=2021-10-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -862,25 +862,11 @@ function doadocs() {
 
   #echo DISTROOTDIR is $DISTROOTDIR
 
-  for f in $ff; do
-    fbase=${f%.adoc}
-    fhtml=$fbase.html
-    fpdf=$fbase.pdf
-    if test -f "$fpdf"; then
-      rm -f "$fpdf"
-    fi
-    #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-    if test "$RESOURCEDOCS" = 1 -o \
-      "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
-      "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
-          #echo doing it!
-          echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
-    fi
-  done
 
 }
 
 function processadocs() {
+  #echo doing processadocs $@
   if test $# -eq 0; then
     if test "$dir" = pages; then
       echo No adoc files in $LESSONSUBDIR
@@ -921,6 +907,24 @@ function processadocs() {
   done
 
   doadocs $ff
+
+  if test ! $NOPDF; then
+    for f in $ff_given; do
+      fbase=${f%.adoc}
+      fhtml=$fbase.html
+      fpdf=$fbase.pdf
+      if test -f "$fpdf"; then
+        rm -f "$fpdf"
+      fi
+      #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
+      if test "$RESOURCEDOCS" = 1 -o \
+        "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
+        "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
+              #echo doing it!
+              echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
+      fi
+    done
+  fi
 
   for f in $ff; do
     checklinks $f
@@ -1242,25 +1246,29 @@ function buildcommonlessons() {
   export DISTROOTDIR=../
   local L
   # process lesson directories in parallel
-  for L in *; do
-    export LESSON=$L
-    buildworkbookpages $L
-    # if test $NOPARALLEL; then
-    #   buildworkbookpages $L
-    # else
-    #   buildworkbookpages $L &
-    # fi
-  done
+  if test -f $RELEVANT_LESSONS_INPUT; then
+    for L in $(cat $RELEVANT_LESSONS_INPUT); do
+      export LESSON=$L
+      buildworkbookpages $L
+      # if test $NOPARALLEL; then
+      #   buildworkbookpages $L
+      # else
+      #   buildworkbookpages $L &
+      # fi
+    done
+  fi
 
   # test ! $NOPARALLEL && wait
 
   #echo starting collectworkbookpages in $(pwd)
 
-  export DOINGLESSON=1
-  for d in *; do
-    collectworkbookpages "$d"
-  done
-  export DOINGLESSON=
+  if test -f $RELEVANT_LESSONS_INPUT; then
+    export DOINGLESSON=1
+    for d in $(cat $RELEVANT_LESSONS_INPUT); do
+      collectworkbookpages "$d"
+    done
+    export DOINGLESSON=
+  fi
 
   cd $TOPDIR
   cd $DESTLANGDIR
@@ -1352,21 +1360,23 @@ function buildlessonplans() {
   local L
   local copacetic
   #local prevL=/dev/null
-  for L in *; do
-    # needed?
-    #cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
-    buildlessonplan $L
-    copacetic=1
-    for f in $L/.cached/.*primtxt; do
-      if test ! -f $f; then
-        copacetic=
+  if test -f $RELEVANT_LESSONS_INPUT; then
+    for L in $(cat $RELEVANT_LESSONS_INPUT); do
+      # needed?
+      #cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
+      buildlessonplan $L
+      copacetic=1
+      for f in $L/.cached/.*primtxt; do
+        if test ! -f $f; then
+          copacetic=
+        fi
+      done
+      if test $copacetic; then
+        cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
       fi
+      #prevL=$L
     done
-    if test $copacetic; then
-      cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
-    fi
-    #prevL=$L
-  done
+  fi
   export LESSONSUBDIR=
   cd $TOPDIR/$DESTLANGDIR
   end=`date +%s`
@@ -1703,7 +1713,7 @@ function copylessondir() {
           test -d $subdir/.cached || mkdir $subdir/.cached
         fi
       done
-      checklessonplan $lessonDir
+      #checklessonplan $lessonDir
       #echo checklessonplan done
       for subdir in *; do
         if test -d "$subdir"; then
@@ -1724,11 +1734,24 @@ function copylessondir() {
                 adjustproglangsubdirs "$subdir" "$pl"
               fi
             done
-            checklessonplan $lessonDir-$pl
+            #checklessonplan $lessonDir-$pl
             cd ..
           fi
         done
       fi
+    fi
+
+    echo $lessonDir >> $RELEVANT_LESSONS_INPUT
+    cd $lessonDir
+    checklessonplan $lessonDir
+    cd ..
+    if test -f $repoLessonDir/proglang.txt; then
+      for pl in $(cat $repoLessonDir/proglang.txt); do
+        echo $lessonDir-$pl >> $RELEVANT_LESSONS_INPUT
+        cd $lessonDir-$pl
+        checklessonplan $lessonDir-$pl
+        cd ..
+      done
     fi
   fi
   #echo done copylessondir
@@ -1938,6 +1961,8 @@ function buildpathway() {
       #echo copying pathway I $repoDir
       cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
       cd $DESTPATHWAYDIR
+      test -d .cached || mkdir -p .cached
+      touch .cached/.redopdf
       if test $PROGLANG != pyret; then
         updatepathwaylist $PROGLANG
       fi
@@ -2042,6 +2067,15 @@ function buildpathway() {
 
     export WORKBOOKPAGE=1
     export BOILERPLATE=1
+
+    if test $BOOK; then
+      if test -f .cached/.redopdf; then
+        REFRESHFRONTMATTER=1
+        REFRESHBACKMATTER=1
+        REFRESHRESOURCES=1
+        rm -f .cached/.redopdf
+      fi
+    fi
 
     if test $REFRESHFRONTMATTER; then
       if test -d front-matter; then
@@ -2455,14 +2489,18 @@ export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do
 export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrative.txt.kp
 export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
 export ADOC_POSTPROC_ALLPATHWAYS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
+export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-relevant-lessons.txt.kp
 
 rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
+  $RELEVANT_LESSONS_INPUT
 
 touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
+  $RELEVANT_LESSONS_INPUT
+
 
 copycommonlessons
 
