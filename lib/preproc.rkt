@@ -48,16 +48,17 @@
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
 (define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
+;FIXME
 
 (define *pathway* (or (truthy-getenv "SRCPATHWAY") ""))
 
-(define *lesson-plan* (truthy-getenv "LESSONPLAN"))
+(define *lesson-plan* #f)
 
 ;(printf "LESSONPLAN is ~s\n" *lesson-plan*)
 
 (define *other-dir* #f)
 
-(define *lesson* (truthy-getenv "LESSON"))
+(define *lesson* #f)
 
 ;(printf "LESSON is ~s\n" *lesson*)
 
@@ -65,7 +66,7 @@
 
 ;(printf "LESSONSUBDIR is ~s\n" *lesson-subdir*)
 
-(define *narrative* (truthy-getenv "NARRATIVE"))
+(define *narrative* #f)
 
 (define *boilerplate* (truthy-getenv "BOILERPLATE"))
 
@@ -537,7 +538,7 @@
               (cons (list lesson f ex-ti) *exercises-done*))))))
     (when (or (not link-text) (string=? link-text ""))
       (let ([f.titletxt (path-replace-extension
-                          (string-append *dist-root-dir* "lessons/" lesson "/" pages-dir "/.cached/." snippet)
+                          (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
                           ".titletxt")])
         (when (file-exists? f.titletxt)
           (set! link-text (call-with-input-file f.titletxt read-line)))))
@@ -784,15 +785,9 @@
   (let* ((title (read-line i))
          (title-txt (string-trim (regexp-replace "^=+ *" title ""))))
     (set! *page-title* title-txt)
-    (when (or *lesson-plan* *workbook-page?*)
-      (let ([title-file (if *workbook-page?*
-                            (path-replace-extension out-file ".titletxt")
-                            (build-path *containing-directory* ".cached" ".index.titletxt"))]
-            [title-txt (if *workbook-page?*
-                           (regexp-replace* #rx","
-                             (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1")
-                             "\\&#x2c;")
-                           title-txt)])
+    (unless *other-dir*
+      (let ([title-file (path-replace-extension out-file ".titletxt")]
+            [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
         (call-with-output-file title-file
           (lambda (o)
             (display title-txt o) (newline o))
