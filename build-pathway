@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-21 # last modified
+LASTMOD=2021-10-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -861,7 +861,6 @@ function doadocs() {
   done
 
   #echo DISTROOTDIR is $DISTROOTDIR
-
 
 }
 
@@ -2398,7 +2397,9 @@ function doadocpostproc() {
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
+  export WORKBOOKPAGE=1
   run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  export WORKBOOKPAGE=
   run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT
   run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
   run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
@@ -2500,7 +2501,6 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
   $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
   $RELEVANT_LESSONS_INPUT
-
 
 copycommonlessons
 
