@@ -1,4 +1,4 @@
-= Piecewise Functions and If-Expressions
+= Piecewise Functions and Conditionals
 
 @lesson-description{Students learn how to define a function so that it behaves differently depending on the input.}
 
@@ -10,12 +10,13 @@
 | Lesson Goals
 | Students will be able to:
 
-* Explain what a piecewise function is.
+* Explain what a piecewise function - or _conditional_ - is.
 * Give examples of inputs and outputs of a given @vocab{piecewise function}.
 
 | Student-Facing Lesson Goals
 |
-* I can describe how piecewise functions work.
+* I can describe how piecewise functions work in math.
+* I can describe how conditionals (like `if-then-else`, `cond`, etc.) work in programming.
 
 | Materials
 |[.materials-links]
@@ -103,9 +104,9 @@ Have students work with their partner to think of examples of piecewise function
 
 _Here are a few examples to get you started:_
 
-* Museums often charge admission and offer special discounted admission for students and another price for senior citizens. When the cashier rings up the cost for a family to visit, they will enter the number of student tickets separately from the general admission tickets and the number of senior citizen tickets, and the cash register will multiply the number of each kind of ticket times the appropriate price per ticket before adding them all together.
-* The US Postal Service charges a letter rate for envelopes under 3.5 ounces and between 3.5" x 5" and 6.125" and 11.5". Larger packages get billed at a different rate.
-* Many phone plans include data transmission at a certain speed up to a certain limit and once you've used up that data, the speed at which they deliver your files slows down.
+* Places like movie theaters and museums often have different ticket prices for students, children, and senior citizens. That means the total price can't be determined simply by asking how many tickets there are -- the price-per-person is conditioned on what kind of ticket is being purchased!
+* The US Postal Service charges a different rate for differently-sized letters and packages. That means the total price can't be determined just by asking how many things are being mailed -- the price is conditioned on what kind of things are shipped!
+* Many phone plans include a certain price-per-gigabyte for data, but only up to a maximum cutoff amout. After that, the price-per-gigabyte gets a lot higher. That means we can't calculate the cost simply by knowing how many gigabytes there are -- the cost is conditioned on what the cutoff is!
 
 === Synthesize
 Share your findings as a class.
@@ -120,7 +121,7 @@ _You may also want to discuss whether square root and absolute values are piecew
 For Algebra 2 or pre-calculus teachers, this is a useful time to address _partial functions_. The students who had purple eyes had _no rule at all_, meaning that the function was _undefined_ at those points. In the USPS example, the cost to mail tiny cards is also _undefined_ because the postal service doesn't ship packages that are too small.
 |===
 
-== Piecewise Functions in the Programming Environment @duration{20 minutes}
+== Conditionals in Programming @duration{20 minutes}
 
 === Overview
 Having acted out a piecewise function, students take the first step towards writing one, by exploring one or two programs that make use of piecewise functions, developing their own understanding, and modifying the programs.
@@ -132,7 +133,7 @@ So far, all of the functions we know how to write have had a _single rule_. The 
 The rule for `nametag` was to take a row and make an image of the animal's name in purple letters.
 ////
 
-What if we want to write functions that apply different rules, depending on the input?
+What if we want to write functions that apply different rules, based on certain conditions?
 
 === Investigate
 
@@ -187,8 +188,8 @@ _The program told us that the shape was unknown.Think about other functions that
 @ifproglang{pyret}{_Pyret allows us to write if-expressions, which contain:_
 
 . _the keyword `if`, followed by a condition._
-. _a colon (`:`), followed by a rule for what the function should do if the condition is `true`_
-. _an `else:`, followed by a rule for what to do if the condition is `false`_
+. _a colon (`:`), followed by a rule for what the function should do if the condition is `true` _
+. _an `else:`, followed by a rule for what to do if the condition is `false` _
 
 _We can chain them together to create multiple rules, with the last `else:` being our fallback in case every other condition is `false`._
 }
@@ -196,14 +197,11 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 @ifproglang{wescheme}{_WeScheme allows us to write piecewise functions as follows:_
 
 . _the keyword `cond`, followed by a list of conditions_
-. _each condition is a boolean expression, followed by a rule for what the function should do if the condition is `true`_
+. _each condition is a boolean expression, followed by a rule for what the function should do if the condition is `true` _
 . _ending with an `else` statement, being our fallback in case every other condition is `false`._
 }
 
-[.lesson-point]
-If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
-
-== How could we have used the Design Recipe to get here?
+== Extending the Design Recipe @duration{20 minutes}
 
 === Overview
 
@@ -216,21 +214,23 @@ Let's see how the Design Recipe could help us to write a piecewise function.
 === Investigate
 [lesson-instruction]
 * Turn to @printable-exercise{redshape-dr.adoc}
-* How do the Contract and purppose statement compare to other Contracts we've seen?
+* How do the Contract and purppse statement compare to other Contracts we've seen?
 
-_The Contract and Purpose Statements don't change: we still write down the name, Domain and Range of our function, and we still write down all the information we need in our Purpose Statement (of course, now we might need to write a lot more, since there's more information!)._
+_The Contract and Purpose Statements don't change: we still write down the name, Domain and Range of our function, and we still write down all the information we need in our Purpose Statement (of course, now we have more important information to write - like our condition(s)!)._
 
 [lesson-instruction]
-* How do the examples compare to other examples we've seen.
+* How do the examples compare to other examples we've seen?
 
 _The examples are also pretty similar: we write the name of the function, followed by some example inputs, and then we write what the function produces with those inputs._
 
 [lesson-instruction]
-* Circle and label everything that is change-able.
-* What changes?
+* Circle and label everything that is _change_-able.
+* What changes? What did you label?
 
-_Both the input and the output! When this is true, we know that we have to write a piecewise function, which defines what happens for *each* input._
+[.lesson-point]
+If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
 
+In this case, there are more things to circle-and-label in the examples than there are things in our Domain. Think back to our examples of piecewise functions (ticket sales, postage, cell-phone data plans, etc): knowing the input isn't enough - we also need to know the conditions!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
