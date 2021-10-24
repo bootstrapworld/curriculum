@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-23 # last modified
+LASTMOD=2021-10-24 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -628,6 +628,19 @@ function resolveabbrevs() {
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
     $f
+  #
+  cat > .cached/.bootstraplesson.txt <<EOF
+    <script src="${localDISTROOTDIR}lib/bootstraplesson.js"></script>
+    <script src="${localDISTROOTDIR}dependency-graph.js"></script>
+    <script src="${localDISTROOTDIR}pathway-tocs.js"></script>
+    <script>var pathway='${PATHWAY}';</script>
+EOF
+   $SED -i \
+    -e '/^ *<link.*curriculum\.css/s/^/%INSERTBOOTSTRAPLESSON\0/' \
+    -e '/%INSERTBOOTSTRAPLESSON/r .cached/.bootstraplesson.txt' \
+    -e 's/%INSERTBOOTSTRAPLESSON//' \
+    $f
+  #
   if test "$mathjaxneeded"; then
     cat > .cached/.mathjax.txt <<EOF
       <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
@@ -639,6 +652,7 @@ EOF
       -e 's/%INSERTMATHJAX//' \
       $f
   fi
+  #
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
     cat > .cached/.codemirror.txt <<EOF
@@ -647,10 +661,6 @@ EOF
     <script src="${localDISTROOTDIR}lib/runmode.js"></script>
     <script src="${localDISTROOTDIR}lib/scheme2.js"></script>
     <script src="${localDISTROOTDIR}lib/pyret-mode.js"></script>
-    <script src="${localDISTROOTDIR}lib/bootstraplesson.js"></script>
-    <script src="${localDISTROOTDIR}dependency-graph.js"></script>
-    <script src="${localDISTROOTDIR}pathway-tocs.js"></script>
-    <script>var pathway='${PATHWAY}';</script>
 EOF
 $SED -i \
   -e '/^ *<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
@@ -658,6 +668,7 @@ $SED -i \
   -e 's/%INSERTCODEMIRROR//' \
   $f
   fi
+  #
   tif=.cached/${f%.*}-comment.txt
   if test ! -f $tif; then
     tif=.cached/.${f%.*}-comment.txt
