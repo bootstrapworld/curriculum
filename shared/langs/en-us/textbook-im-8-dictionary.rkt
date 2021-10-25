@@ -1,8 +1,8 @@
 #lang racket
 
-(provide *im-textbook-list*)
+(provide *im-8-textbook-list*)
 
-(define *im-textbook-list*
+(define *im-8-textbook-list*
 '(
   ; Modeled after https://github.com/bootstrapworld/curriculum/blob/
   ; ada269498c15600c27452688218e202f333d5ae0/shared/langs/en-us/textbook-cmp-
@@ -97,4 +97,4 @@
     "Finding Distances in the Coordinate Plane")
 
   ; End of chapter/section list
- )))
+ ))

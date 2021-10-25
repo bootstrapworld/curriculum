@@ -140,6 +140,10 @@
 
 (define *textbooks-used* '())
 
+(define *textbooks-represented* '())
+
+(define *chapters-used* '())
+
 (define *lesson-prereqs* '())
 
 (define *lesson-keywords* '())
@@ -156,7 +160,11 @@
 (define *opt-printable-exercise-links* '())
 
 (define (initialize-autonumber-index)
-  (set! *autonumber-index* 1))
+  (set! *autonumber-index* 1)
+  (set! *textbooks-represented* '())
+  (set! *chapters-used* '())
+
+  )
 
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
@@ -251,6 +259,22 @@
               (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
             (values sublist-item c dict)))))
 
+(define (assoc-textbooks chapter-label)
+  ;(printf "doing assoc-textbooks ~s\n" chapter-label)
+  (let ([chapter-desc #f]
+        [textbook-name #f])
+    (for ([x *textbooks-list*])
+      (unless chapter-desc
+        (let ([this-textbook-name (car x)]
+              [this-textbook-chapters (cadr x)])
+          ;(printf "\n t-n = ~s\n t-cc = ~s\nn" this-textbook-name this-textbook-chapters)
+          (set! chapter-desc (assoc chapter-label this-textbook-chapters))
+          (when chapter-desc (set! textbook-name this-textbook-name)))))
+    ;(printf "chapter-desc = ~s; textbook-name = ~s\n" chapter-desc textbook-name)
+    (if chapter-desc
+        (values (cadr chapter-desc) textbook-name)
+        (values #f #f))))
+
 (define (add-standard x lesson-title lesson pwy o)
   ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
   (let-values (((sublist-item c dict) (assoc-standards x)))
@@ -284,10 +308,20 @@
   (unless (member b *practices-merited*)
     (set! *practices-merited* (cons b *practices-merited*))))
 
-(define (add-textbook tb)
-  ;(printf "doing add-textbook ~s\n" tb)
-  (unless (member tb *textbooks-used*)
-    (set! *textbooks-used* (cons tb *textbooks-used*))))
+;(define (add-textbook tb)
+;  ;(printf "doing add-textbook ~s\n" tb)
+;  (unless (member tb *textbooks-used*)
+;    (set! *textbooks-used* (cons tb *textbooks-used*))))
+
+(define (add-textbook-chapter chapter-label)
+  ;(printf "doing add-textbook-chapter ~s\n" chapter-label)
+  (unless (assoc chapter-label *chapters-used*)
+    (let-values ([(chapter-title textbook-label) (assoc-textbooks chapter-label)])
+      (when chapter-title
+        (unless (member textbook-label *textbooks-represented*)
+          (set! *textbooks-represented* (cons textbook-label *textbooks-represented*)))
+        (set! *chapters-used*
+          (cons (list chapter-label chapter-title textbook-label) *chapters-used*))))))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -419,22 +453,42 @@
 
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
-  (display (create-begin-tag "div" ".sidebartextbooks") o)
-  (display "*Textbook Alignment*" o)
-  (when (null? *textbooks-used*) (display ": _None_" o))
-  (display "\n" o)
-  (unless (null? *textbooks-used*)
-    ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
-    (display (create-begin-tag "ul" "") o)
-    (for ([bk *textbooks-used*])
-      (let ([title (assoc bk *textbook-list*)])
-        (set! bk (if title (cadr title) bk))
-        (display (enclose-tag "li" "" bk) o)
-        (newline o)))
-    (display (create-end-tag "ul") o)
-    )
-  (display (create-end-tag "div") o)
-  (newline o))
+  (cond [(null? *textbooks-represented*)
+         (display (create-begin-tag "div" ".sidebartextbooks") o)
+         (display "*Textbook Alignment*: _None_" o)
+         (display (create-end-tag "div") o)
+         (display "\n" o)]
+        [else
+          (display "\n[.sidebartextbooks,cols=\"a\"]" o)
+          (display "\n|===\n" o)
+          (display "| " o)
+          (display "*Textbook Alignment* (click one)\n" o)
+          (display-textbooks-selection o *textbooks-represented*)
+          (display " | \n" o)
+          ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
+          ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
+          (display "\ninclude::.index-textbooks.asc[]\n" o)
+          (display "|===\n" o)
+          ]))
+
+;(define (display-textbooks-bar-obsolete-fixme o)
+;  ;(printf "doing display-textbooks-bar\n")
+;  (display (create-begin-tag "div" ".sidebartextbooks") o)
+;  (display "*Textbook Alignment*" o)
+;  (when (null? *textbooks-used*) (display ": _None_" o))
+;  (display "\n" o)
+;  (unless (null? *textbooks-used*)
+;    ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
+;    (display (create-begin-tag "ul" "") o)
+;    (for ([bk *textbooks-used*])
+;      (let ([title (assoc bk *textbook-list*)])
+;        (set! bk (if title (cadr title) bk))
+;        (display (enclose-tag "li" "" bk) o)
+;        (newline o)))
+;    (display (create-end-tag "ul") o)
+;    )
+;  (display (create-end-tag "div") o)
+;  (newline o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -788,7 +842,7 @@
             (enclose-span ".web-page-only"
               (format
                 "Referenced from lesson link:{pathwayrootdir}~a/index.shtml[~a] (~a, ~a)"
-                *lesson* lesson-title 
+                *lesson* lesson-title
                 (string-titlecase (getenv "SEMESTER")) (getenv "YEAR"))) o)
           (display "\n\n" o)
           )))))
@@ -995,10 +1049,16 @@
             (for ([s (cdr x)])
               (add-badge s))))
 
+        ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
+        ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
+
         (for ([x *lessons-and-textbooks*])
           (when (string=? (car x) *lesson-plan*)
             (for ([s (cdr x)])
-              (add-textbook s))))
+              (add-textbook-chapter s))))
+
+        ;(printf "textbooks-represented = ~s\n" *textbooks-represented*)
+        ;(printf "chapters-used = ~s\n" *chapters-used*)
 
         )
       ;
@@ -1365,6 +1425,9 @@
               (when (or *narrative* *lesson-plan*)
                 (create-standards-subfile))
 
+              (when *lesson-plan*
+                (create-textbooks-subfile))
+
               (when *narrative*
                 (print-other-resources-intro o)
                 (print-link-to-glossary o)
@@ -1390,6 +1453,7 @@
                 (call-with-output-file ".cached/.index-sidebar.asc"
                   (lambda (o)
                     (print-standards-js o #:sidebar #t)
+                    (print-textbooks-js o)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
@@ -1655,6 +1719,42 @@
       (display (create-end-tag "div") o))
     ;(display "\n\n" o)
     ))
+
+(define (display-textbooks-selection o *textbooks-represented*)
+  (display (enclose-tag "select" ".textbooksAlignmentSelect"
+             #:attribs
+             (format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
+             (string-join
+               (map (lambda (textbook-label)
+                      (enclose-tag "option" ""
+                        #:attribs (format "value=\"textbook-~a\""
+                                          (regexp-replace* "\\." textbook-label "_"))
+                        textbook-label))
+                    *textbooks-represented*)
+               "")) o)
+  (newline o))
+
+(define (create-textbooks-subfile)
+  (let ([subf ".cached/.index-textbooks.asc"])
+    (call-with-output-file subf
+      (lambda (o)
+        (unless (empty? *chapters-used*)
+          (for ([textbook-label *textbooks-represented*])
+            ;(printf "doing textbook-label= ~s\n" textbook-label)
+            (let ([textbook-chapters-used
+                    (filter (lambda (s) (string=? (list-ref s 2) textbook-label))
+                            *chapters-used*)])
+              (unless (empty? textbook-chapters-used)
+                (fprintf o "\n[.alignedTextbooks.textbook-~a]\n"
+                         (regexp-replace* "\\." textbook-label "_"))
+                (fprintf o ".~a\n" textbook-label)
+                ;FIXME: class name should be more general, not refer to "standards"
+                (fprintf o "[.standards-hierarchical-table]\n")
+                (for ([s textbook-chapters-used])
+                  (fprintf o "~a:: " (list-ref s 0))
+                  (fprintf o "~a\n" (list-ref s 1)))))))
+        )
+      #:exists 'replace)))
 
 (define (create-standards-file file *narrative* *lesson*)
   ;(printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)

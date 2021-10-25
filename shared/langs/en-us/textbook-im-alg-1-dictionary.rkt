@@ -1,8 +1,8 @@
 #lang racket
 
-(provide *im-textbook-list*)
+(provide *im-alg-1-textbook-list*)
 
-(define *im-textbook-list*
+(define *im-alg-1-textbook-list*
 '(
   ; Modeled after https://github.com/bootstrapworld/curriculum/blob/
   ; ada269498c15600c27452688218e202f333d5ae0/shared/langs/en-us/textbook-cmp-
@@ -424,4 +424,4 @@
     "Using Quadratic Equations to Model Situations and Solve Problems")
 
   ; End of chapter/section list
- )))
+ ))

@@ -1,8 +1,8 @@
 #lang racket
 
-(provide *im-textbook-list*)
+(provide *im-6-textbook-list*)
 
-(define *im-textbook-list*
+(define *im-6-textbook-list*
 '(
   ; Modeled after https://github.com/bootstrapworld/curriculum/blob/
   ; ada269498c15600c27452688218e202f333d5ae0/shared/langs/en-us/textbook-cmp-
@@ -63,7 +63,7 @@
     "Evaluating Expressions with Exponents")
 
   ("IM.6.6.15"
-    "Equivalent Exponential Expressions"
+    "Equivalent Exponential Expressions")
 
   ("IM.6.6.16"
     "Two Related Quantities, Part 1")
@@ -139,4 +139,4 @@
     "Using Box Plots")
 
   ; End of chapter/section list
- )))
+ ))
