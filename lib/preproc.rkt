@@ -594,7 +594,7 @@
 (define (system-echo cmd . args)
   (let* ((x (apply process* cmd args))
          (i (car x))
-         (result (read i)))
+         (result (format "~a" (read i))))
     (close-input-port i)
     (close-output-port (cadr x))
     (close-input-port (cadddr x))
@@ -603,19 +603,21 @@
 
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "doing make-image ~s\n" img)
-  (let ([img (string-append *containing-directory* "/" img)]
-        [img-anonymized #f])
+  (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *boilerplate*)
       ;(printf "anonymizing ~s\n" img)
-      (set! img-anonymized
-        (system-echo (format "~a/anonymize-filename" *progdir*) img))
-      (cond [img-anonymized
-              ;(printf "anon img is ~s\n" img-anonymized)
-              (set! img img-anonymized)]
-            [else (cond [(file-exists? img)
-                         (printf "WARNING: Image file ~a anonymization failed\n\n" img)]
-                        [else
-                          (printf "WARNING: Image file ~a not found\n\n" img)])]))
+      (let ([img-anonymized (system-echo (format "~a/anonymize-filename" *progdir*) img)])
+        (cond [img-anonymized
+                ;(printf "anon img is ~s\n" img-anonymized)
+                (set! img img-anonymized)
+                (let ([img-anonymized-qn (string-append *containing-directory* "/"
+                                           img-anonymized)])
+                (when (file-exists? img-qn)
+                  (rename-file-or-directory img-qn
+                    (string-append *containing-directory* "/" img-anonymized)))
+                (unless (file-exists? img-anonymized-qn)
+                  (printf "WARNING: Image file ~a not found\n\n" img-qn)))]
+              [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
     (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
            [rest-opts (if (pair? opts) (cdr opts) '())]
            [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
