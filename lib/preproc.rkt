@@ -492,7 +492,7 @@
           (display " | \n" o)
           ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
           ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
-          (display "\ninclude::.index-textbooks.asc[]\n" o)
+          (fprintf o "\ninclude::.index-textbooks.asc[]\n")
           (display "|===\n" o)
           ]))
 
@@ -517,7 +517,7 @@
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
+  (fprintf o "\n\ninclude::{frompathwayroot}~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
 
 (define (workbook-pagenum lesson snippet)
   ;(printf "doing workbook-pagenum ~s ~s\n" lesson snippet)
@@ -853,7 +853,10 @@
     (newline o)
     (newline o)
     (when *lesson-plan*
-      (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
+      ;(printf "containing-dir= ~s\n" *containing-directory*)
+      (fprintf o "ifndef::frompathwayroot[:frompathwayroot: ]\n\n")
+      (fprintf o "include::{frompathwayroot}~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
+      ;(fprintf o "include::./.index-sidebar.asc[]\n\n")
       )
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
@@ -883,7 +886,7 @@
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway in ~s~n" (current-directory))
   ;
-  (let ([lessons (read-data-file "lesson-order.txt")])
+  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
     ;(printf "lessons = ~s\n" lessons)
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
@@ -926,13 +929,14 @@
         (newline o)))
     (fprintf o "link:./.pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
     (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
-    (call-with-output-file ".pathway-lessons.asciidoc"
+    (call-with-output-file (build-path *containing-directory* ".pathway-lessons.asciidoc")
       (lambda (lo)
-        (fprintf lo "= Lessons Used in This Pathway~n~n")
-        (fprintf lo "include::.pathway-lessons-toc.asciidoc[]~n~n")
-        (call-with-output-file ".pathway-lessons-toc.asciidoc"
+        (fprintf lo "= Lessons Used in This Pathway\n\n")
+        (fprintf lo ":frompathwayroot: ../../../\n\n")
+        (fprintf lo "include::~a/.pathway-lessons-toc.asciidoc[]\n\n" *containing-directory*)
+        (call-with-output-file (build-path *containing-directory* ".pathway-lessons-toc.asciidoc")
           (lambda (toco)
-            (fprintf toco "[verse]~n")
+            (fprintf toco "[verse]\n")
             (call-with-output-file (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
               (lambda (stco)
                 (for ((lesson lessons))
@@ -987,7 +991,7 @@
                       (fprintf lo "[[~a]]~n" lesson)
                       (fprintf toco "<<~a>>~n" lesson)
                       (fprintf lo "== ~a\n" lesson-title)
-                      (fprintf lo "include::~alessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
+                      (fprintf lo "\ninclude::~alessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
                                *dist-root-dir* lesson)))))
               #:exists 'replace))
           #:exists 'replace))
@@ -1290,7 +1294,7 @@
                               (error 'ERROR
                                      "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::~a/{cachedir}.index-lang-prereq.asc[]\n\n" *containing-directory*)]
+                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-lang-prereq.asc[]\n\n" *containing-directory*)]
                            [(string=? directive "add-to-lang")
                             ;(printf "doing add-to-lang\n")
                             (unless *lesson-plan*
@@ -1305,7 +1309,7 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n" *containing-directory*)]
+                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n" *containing-directory*)]
                            [(string=? directive "lesson-description")
                             (unless *lesson-plan* ;TODO: or LESSON or both?
                               (error 'ERROR
@@ -1809,7 +1813,7 @@
   (newline o))
 
 (define (create-textbooks-subfile)
-  (let ([subf ".cached/.index-textbooks.asc"])
+  (let ([subf (build-path *containing-directory* ".cached" ".index-textbooks.asc")])
     (call-with-output-file subf
       (lambda (o)
         (unless (empty? *chapters-used*)

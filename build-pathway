@@ -30,7 +30,7 @@ JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"read
 
 ARGS=
 HELP=
-LASTMOD=2021-10-24 # last modified
+LASTMOD=2021-10-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -822,14 +822,12 @@ function doadoc() {
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
+    echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_RESOURCES_INPUT
-  elif test $ALLPATHWAYLESSONS; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:all-pathway-lessons #t #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
-    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
   fi
 
 }
@@ -2358,14 +2356,11 @@ function postproc_resources() {
 }
 
 function postproc_allpathways() {
-  local fhtmlcached=$1
-  if test -f "$fhtmlcached"; then
-    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
-    fdir=${fhtmlcached%/.cached/.*html}
-    fbase=${fhtmlcached##*/.}
-    fbase=${fbase%.html}.shtml
-    fshtml=$fdir/$fbase
-    mv $fhtmlcached $fshtml
+  local fhtml=$1
+  if test -f "$fhtml"; then
+    localDISTROOTDIR=../../
+    fshtml=${fhtml%.html}.shtml
+    mv $fhtml $fshtml
     removelogos $fshtml
     bumpcsspathdir $fshtml $localDISTROOTDIR
     resolveabbrevs $fshtml $localDISTROOTDIR
