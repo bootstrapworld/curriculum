@@ -614,7 +614,8 @@
                                            img-anonymized)])
                 (when (file-exists? img-qn)
                   (rename-file-or-directory img-qn
-                    (string-append *containing-directory* "/" img-anonymized)))
+                    (string-append *containing-directory* "/" img-anonymized)
+                    #t))
                 (unless (file-exists? img-anonymized-qn)
                   (printf "WARNING: Image file ~a not found\n\n" img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
