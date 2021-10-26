@@ -108,7 +108,7 @@
        ("pyret" "https://code.pyret.org/editor#share=1O_3WGOcqaTzR7cuZY3ZSh5TEFg3ZNPV6&v=1904b2c")
        ("wescheme" "https://www.wescheme.org/openEditor?publicId=81WrTGQglP, )
        )
-    ("flags-pr" 
+    ("flags-pr" "Flag of Puerto Rico Starter File"
        ("pyret" "https://code.pyret.org/editor#share=1QX4pU7j2hK4rR0zfLXGAgEarCSsLVwqD&v=1904b2c")
        ("wescheme" "https://www.wescheme.org/view?publicId=6TJ0N2CJqU")
        )
