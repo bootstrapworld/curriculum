@@ -13,10 +13,14 @@
 
 (define *solutions-mode?* (truthy-getenv "SOLUTION"))
 
-(define *proglang* (string-downcase (getenv "PROGLANG")))
+(define *proglang* "pyret")
 
-(unless (member *proglang* '("pyret" "wescheme" "codap"))
-  (error 'ERROR "function-directives.rkt: Unknown proglang ~a" *proglang*))
+(define (set-proglang! proglang)
+  (set! *proglang* proglang)
+  (unless (member *proglang* '("pyret" "wescheme" "codap"))
+    (error 'ERROR "function-directives.rkt: Unknown proglang ~a"
+           *proglang*)))
+
 
 (define *pyret?* (string=? *proglang* "pyret"))
 
@@ -665,6 +669,7 @@
                      (write-large "{endsb}")))))
 
 (define (design-recipe-exercise funname directions
+                                #:proglang [proglang "pyret"]
                                 #:page-header (page-header "Word Problem")
                                 #:show-funname-contract? (show-funname-contract? #f)
                                 #:domain-list (domain-list '()) ; list of string
@@ -693,6 +698,8 @@
 
   ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
   ;should be overridden in solutions mode
+
+  (set-proglang! proglang)
 
   (set! *show-funname-contract?* show-funname-contract?)
   (set! *show-domains?* show-domains?)
@@ -768,6 +775,7 @@
 
 (define (assess-design-recipe
           funname directions
+          #:proglang [proglang "pyret"]
           #:domain-list (domain-list '()) ; list of string
           #:range (range #f)
           #:purpose (purpose #f)
@@ -779,6 +787,7 @@
           #:grid-lines? (grid-lines? #f)
           #:headless? (headless? #f)
           )
+  (set-proglang! proglang)
   (unless range (error 'ERROR "assess-design-recipe: range required"))
   (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
   (unless body (error 'ERROR "assess-design-recipe: body required"))

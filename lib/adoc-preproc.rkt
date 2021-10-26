@@ -5,7 +5,7 @@
 (require "preproc.rkt")
 
 (for ([f (current-command-line-arguments)])
-  (initialize-autonumber-index)
+  ;(initialize-autonumber-index)
   (preproc-adoc-file f))
 
 (void)

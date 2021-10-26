@@ -6,11 +6,13 @@
 
 ;
 
+;(printf "doing collect-workbook-pages.rkt\n")
+
 (define *lesson-order* (read-data-file ".cached/.workbook-lessons.txt.kp"))
 
 (define (write-pages-info lesson-dir o ol oe #:pageno [pageno "true"]
                           #:back-matter-port [back-matter-port #f])
-  ;(printf "doing write-pages-info pageno = ~s\n" pageno)
+  ;(printf "doing write-pages-info lesson-dir= ~s pageno= ~s\n" lesson-dir pageno)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
          [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
          [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
@@ -25,14 +27,13 @@
                   (read-data-file exercise-pages-file #:mode 'lines)]
                  [else
                    '()])])
+    ;(printf "workbook-pages= ~s\n" workbook-pages)
     (with-handlers ([exn:fail?
                       (lambda (e)
                         (printf "WARNING: collect-workbook-pages.rkt failed at ~s\n" lesson-dir)
+                        (printf "EXN: ~s\n"  e)
                         ;((error-display-handler) (exn-message e) e)
-                        ;(printf "WARNING: Couldn't open ~a\n" workbook-pages-ls-file)
                         )])
-      (call-with-output-file workbook-pages-ls-file
-        (lambda (o2)
           (for ([page workbook-pages])
             (let ([file (list-ref page 0)]
                   [aspect "portrait"]
@@ -43,7 +44,7 @@
               (when (>= n 3)
                 (set! this-pageno (list-ref page 2)))
               ;(printf "this-pageno = ~s\n" this-pageno)
-              (fprintf o2 "~a\n" file)
+              ;(fprintf o2 "~a\n" file)
               (fprintf o "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
               (fprintf ol "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
               (when (and back-matter-port (contracts-page? lesson-dir file))
@@ -51,8 +52,6 @@
                          lesson-dir file aspect this-pageno))
               ))
           ;
-          )
-        #:exists 'replace)
       (for ([page exercise-pages])
         (let ([file (list-ref page 0)]
               [aspect "portrait"]
