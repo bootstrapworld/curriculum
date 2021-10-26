@@ -68,7 +68,7 @@ In order to use the `image-scatter-plot` function, we have to first define a hel
 === Investigate
 
 [.lesson-instruction]
-Before we move one, let's turn off the automatic build of the `scatterplot` in the program by putting a `#` at the start of line.
+Before we move one, let's turn off the automatic build of the `scatterplot` in the program by putting a `#` at the start of line 14.
 
 Have students complete @printable-exercise{pages/image-scatterplot-explore.adoc}. In the process they will be asked to try to explain how the `image-scatter-plot` is generated and to write a new `Row -> Image` helper function in order to generate a second `image-scatter-plot`.
 
@@ -80,7 +80,7 @@ Have students complete @printable-exercise{pages/image-scatterplot-explore.adoc}
 * How does this `image-scatter-plot` use `speciestag`?
 
 
-@centered-image{../images/species-tag.png}
+@span{.center}{@image{images/species-tag.png, "species-tag", 450}
 
 [.lesson-instruction]
 * How did having the dots labeled with the species change your understanding of the data?
@@ -91,7 +91,14 @@ __ In the next lesson, students will learn how to do just that.  What other scat
 
 [.lesson-instruction]
 * What did the other helper functions do?
+
+`legs-tag` _made blue rings whose size was determined by the number of legs the animal had. `age-tag` made stars whose size was double the age of the animal._
+@span{.center}{@image{images/legs-tag.png, "legs-tag", 354} @image{images/age-tag.png, "age-tag", 350}}
+
+[.lesson-instruction]
 * What was the first step for generating an `image-scatter-plot` with the animals' names?
+
+_Writing a helper function_ `fun name-tag(r): text(r["name"], 15, "red") end`
 
 == Image-Scatterplots with Piecewise Functions @duration{20 minutes}
 
@@ -114,7 +121,7 @@ _To get more out of the `image-scatter-plot` function, we'll need to use piece-w
 
 Have students open the @link{https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0&v=1904b2c, Image Scatterplots with Piecewise Functions Starter File} and turn to @printable-exercise{pages/species-dot-explore.adoc} to record their thinking about the file.
 
-@span{.center}{@image{../images/age-v-weeks-species-dot.png, "Age v. Weeks Scatterplot", 400}}
+@span{.center}{@image{images/age-v-weeks-species-dot.png, "Age v. Weeks Scatterplot", 400}}
 
 [.lesson-instruction]
 * What do you Notice?
@@ -147,6 +154,7 @@ _If you have time or students who are ready for a challenge, you can also have t
 
 @comment{Emmanuel - can we insert some css that will make this table smaller, and have smaller font, since it's supposed to be an aside?}
 
+
 [cols="<1a,<1a", options="header"]
 |===
 | Using If-Else	| Using If
@@ -172,7 +180,7 @@ How do piecewise functions expand what is possible with the `image-scatterplot` 
 
 == Scatterplots with Custom Images
 
-* Show students @link{https://code.pyret.org/editor#share=1DeSbekzW7SMh4fnIN1_aVGYZu5EtRvRZ, this code}, which uses `image-url` and `scale` to generate icons of animals.
+* Show students @link{https://code.pyret.org/editor#share=1DeSbekzW7SMh4fnIN1_aVGYZu5EtRvRZ, this code}, which uses `image-url` and `scale` to generate icons of animals and have them turn to @printable-exercise{custom-image-explore.adoc}
 * What do they Notice? What do they Wonder? How might this scatterplot change our analysis?
 * How does using clip art help us to better understand the data?
 * What risks might there be to using clip art in displays?
