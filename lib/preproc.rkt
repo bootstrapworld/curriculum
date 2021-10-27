@@ -43,9 +43,9 @@
 (unless (member *proglang* '("pyret" "wescheme" "codap"))
   (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
 
-(define *pyret?* (string=? *proglang* "pyret"))
+(define *pyret?* #f)
 
-(define *solutions-mode?* (truthy-getenv "SOLUTION"))
+(define *solutions-mode?* #f)
 
 (define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
 ;FIXME
@@ -1049,8 +1049,8 @@
 
 (define (init-flags)
   (set! *autonumber-index* 1)
-  (set! *containing-directory* #f)
-  (set! *dist-root-dir* #f)
+  (set! *containing-directory* "")
+  (set! *dist-root-dir* "")
   (set! *lesson* #f)
   (set! *lesson-plan* #f)
   (set! *narrative* #f)
@@ -1071,6 +1071,7 @@
                            #:target-pathway [target-pathway #f]
                            #:workbook-page [workbook-page #f]
                            #:proglang [proglang "pyret"]
+                           #:solutions-mode [solutions-mode #f]
                            #:z [z -1]
                            )
 
@@ -1083,7 +1084,10 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
+  (set! *solutions-mode?* solutions-mode)
   (set! *teacher-resources* resources)
+
+  (set! *pyret?* (string=? *proglang* "pyret"))
 
   (when (and *lesson-plan* (not *lesson*))  ;fixme
     (set! *lesson* *lesson-plan*))
@@ -1427,7 +1431,9 @@
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                               (let ([g (read-group i directive)])
                                 (let ([args (string-to-form g)])
-                                  (set! args (append args (list '#:proglang *proglang*)))
+                                  (set! args (append args
+                                                     (list '#:proglang *proglang*
+                                                           '#:solutions-mode? *solutions-mode?*)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
