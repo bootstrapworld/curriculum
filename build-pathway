@@ -1489,7 +1489,8 @@ function makeworkbookjson() {
 
   if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
     wbpnf=.cached/.back-matter-contracts-index.rkt
-  elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
+  #elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
+  elif test "$tgt" = workbook -o "$tgt" = workbook-sols; then
     wbpnf=.cached/.workbook-page-index.rkt
   elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
     wbpnf=.cached/.opt-exercises-index.rkt
@@ -1499,8 +1500,10 @@ function makeworkbookjson() {
 
   if test "$tgt" = workbook; then
     filesvar=workbookFiles
-  elif test "$tgt" = pd-workbook; then
-    filesvar=pdWorkbookFiles
+  #elif test "$tgt" = pd-workbook; then
+  #  filesvar=pdWorkbookFiles
+  #elif test "$tgt" = pd-workbook-long; then
+  #  filesvar=pdWorkbookLongFiles
   elif test "$tgt" = bm-contracts; then
     filesvar=bmContractsFiles
   elif test "$tgt" = bm-contracts-sols; then
@@ -1509,8 +1512,6 @@ function makeworkbookjson() {
     filesvar=workbookSolsFiles
   elif test "$tgt" = workbook-long; then
     filesvar=workbookLongFiles
-  elif test "$tgt" = pd-workbook-long; then
-    filesvar=pdWorkbookLongFiles
   elif test "$tgt" = workbook-long-sols; then
     filesvar=workbookLongSolsFiles
   elif test "$tgt" = opt-exercises; then
@@ -1523,7 +1524,8 @@ function makeworkbookjson() {
     includesolutions=1
   fi
 
-  if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+  #if test "$tgt" = workbook-long -o "$tgt" = pd-workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
+  if test "$tgt" = workbook-long -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
     includeoptexercises=1
   fi
 
@@ -1559,11 +1561,11 @@ function makeworkbookjson() {
       if test "$freshlesson"; then
         currlesson=$lessondir
         docfile=$currlesson/index.shtml
-        if test -f "$docfile"; then
-          if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
-            echo $currlesson/index.pdf >> $WORKBOOKINPUT-$tgt
-          fi
-        fi
+        #if test -f "$docfile"; then
+        #  if test "$tgt" = pd-workbook -o "$tgt" = pd-workbook-long; then
+        #    echo $currlesson/index.pdf >> $WORKBOOKINPUT-$tgt
+        #  fi
+        #fi
       fi
 
       if test $includesolutions; then
@@ -1916,8 +1918,10 @@ function buildworkbookjsons() {
   cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
 
   if test $BOOK; then
-    for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
-      pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+    #for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+    #  pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+    for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
+      workbook-long-sols opt-exercises opt-exercises-sols ; do
           if test $NOPARALLEL; then
             makeworkbookjson $wbf $TGTPATHWAY
           else
