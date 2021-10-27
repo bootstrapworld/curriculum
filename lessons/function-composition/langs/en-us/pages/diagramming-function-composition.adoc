@@ -5,6 +5,8 @@
 #content .listingblock pre {padding: 0;}
 #content .autonum::after { content: ')'; }
 #content .topTable tr:first-child td * { background-color: #f7f7f8; }
+table table { border: none !important; }
+table table td { height: 4rem; }
 </style>
 ++++
 
@@ -46,7 +48,7 @@ For each function composition diagrammed below, translate it into the equivalent
   (define expr3 '(- (* 3 (+ x 6)) 1))
 
   (define comp4 '(f (h (g x))))
-  (define expr4 '(* (- (+ x 6) 1) 3))
+  (define expr4 '(* 3 (- (+ x 6) 1)))
 }
 
 [cols="^1,^2,^3a", options="header", stripes="none"]
@@ -59,7 +61,7 @@ For each function composition diagrammed below, translate it into the equivalent
 | @n  @show{(sexp->coe comp1)}
 |     @show{(sexp->coe expr1)}
 |
-[cols="4,5"]
+[cols=".^4,.^5"]
 !===
 ! Composition: 			! @show{(sexp->code comp1)}
 ! Operations: 			! @show{(sexp->code expr1)}
@@ -69,7 +71,7 @@ For each function composition diagrammed below, translate it into the equivalent
 | @n  @show{(sexp->coe comp2)}
 |     @showsoln{(sexp->coe expr2) }
 |
-[cols="4,5"]
+[cols=".^4,.^5"]
 !===
 ! Composition: 			! @showsoln{(sexp->code comp2) }
 ! Operations: 			! @showsoln{(sexp->code expr2) }
@@ -79,7 +81,7 @@ For each function composition diagrammed below, translate it into the equivalent
 | @n  @show{(sexp->coe comp3)}
 |     @showsoln{(sexp->coe expr3) }
 |
-[cols="4,5"]
+[cols=".^4,.^5"]
 !===
 ! Composition: 			! @showsoln{(sexp->code comp3) }
 ! Operations: 			! @showsoln{(sexp->code expr3) }
@@ -89,7 +91,7 @@ For each function composition diagrammed below, translate it into the equivalent
 | @n  @show{(sexp->coe comp4)}
 |     @showsoln{(sexp->coe expr4) }
 |
-[cols="4,5"]
+[cols=".^4,.^5"]
 !===
 ! Composition: 			! @showsoln{(sexp->code comp4) }
 ! Operations: 			! @showsoln{(sexp->code expr4) }

@@ -18,7 +18,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let’s learn how to start with one table and transform it into another.
+* Let’s learn how transform one table into another.
 
 | Materials
 |[.materials-links]
@@ -37,9 +37,6 @@
 @ifproglang{pyret}{
 * All students should log into @link{https://code.pyret.org, CPO}.
 
-| Supplemental Resources
-|
-
 @lang-prereq
 |===
 
@@ -57,25 +54,25 @@ Load the @link{https://code.pyret.org/editor#share=1hsALf5oOrWqrolayPIgIlYXrqk3i
 
 This program has several things you've never seen before! This activity is about reading carefully, and trying to make sense of new code.}
 
-@ifproglang{codap}{Open `Animals Dataset` in CODAP. You're going to sort various columns on the table by clicking on the attribute name, and selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.}
+@ifproglang{codap}{Open the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} in CODAP. How many animals' names start with the letter M?}
 
 === Investigate
 
-Student work in groups or pairs.
+Student work in groups or pairs. @ifproglang{codap}{They will sort various columns on the table by clicking the attribute name, and selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.}
 
 [.lesson-instruction]
 @ifproglang{pyret}{
 - Complete @printable-exercise{pages/row-and-function-definitions.adoc} in their student workbooks.
 - Complete @printable-exercise{pages/exploring-definitions.adoc} in their student workbooks.
 
-Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples:
+Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
 
-. The first example simply says that animalA is not a dog (`is-dog` returns `false`). We know this because we defined it to be a cat.
-. The second example shows us the actual work involved: we know the species of animalA is `"cat"`, and comparing that to the String `"dog"` will return false.
-. The third example shows __all the work__: given the Row `animalA`, we lookup the `"species"` column and compare it to the String `"dog"`.
+. The first example tells us that we should expect `is-dog` to return `false`. We defined this row to be a cat, so we want to see a `false` result!
+. The second example shows us some of the work involved: we know the species of the row is `"cat"`, and comparing that to the String `"dog"` will return false.
+. The third example shows __all the work__: given the `cat-row`, we lookup the value in the `"species"` column and compare it to the String `"dog"`.
 
 [.lesson-instruction]
-Write three similar examples, this time using `animalB`.
+Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
 }
 
 @ifproglang{codap}{
@@ -101,34 +98,40 @@ Write three similar examples, this time using `animalB`.
 
 === Overview
 @ifproglang{pyret}{
-Students learn to sort Rows of a Table in ascending or descending order, according to one column.}
+Students learn to sort rows of a table in ascending or descending order, according to one column.}
 
 @ifproglang{codap}{
-Using the `sort` transformer, students sort Rows of a Table in ascending or descending order, according to one column.}
+Using the `sort` transformer, students sort rows of a table in ascending or descending order, according to one column. When they use transformers, students are building and modifying a _copy_ of the original table.}
 
 === Launch
 @ifproglang{pyret}{
 Have students find the contract for `.order-by` in their contracts pages. The `.order-by` method consumes a String (the name of the column by which we want to order) and a Boolean (true for ascending, false for descending). But what does it produce?}
 
 @ifproglang{codap}{
-The Transformers plugin allows students to transform datasets to produce new, distinct output datasets or values, instead of modifying the original input dataset itself. Have students find the contract for the `sort` transformer in their contracts pages. The `sort` method consumes a dataset to sort, a formula (“key expression”), an indication of the type the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
+@span{.right}{@image{images/plugins-location.png,"", 300}}
+
+The transformers plugin allows students to transform datasets to produce new, distinct output datasets or values, instead of modifying the original input dataset itself.
+
+First, show students how they can access the transformers plugin (see screenshot on right), and invite them to explore the different transformers available.
+
+Have students find the contract for the `sort` transformer in their contracts pages. The `sort` transformer consumes a dataset to sort, a formula (“key expression”), an indication of the type the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
 
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 a|
 @span{.title}{What's a Contract!?}
-Contracts help us keep track of the different Transformers we'll be using. Every contract has three imporant parts:
+Contracts help us keep track of the different transformers we'll be using. Every contract has three imporant parts:
 
-. The transformer’s name
+- The transformer’s name
+- The domain of the transformer - the type(s) of data we give it
+- The range of the transformer - the type of data the transformer produces
 
-. The domain of the transformer - the type(s) of data we give it
+Check out the screenshot of the Transformers plugin below. What are the domain and range for `Filter`?
 
-. The range of the transformer - the type of data the transformer produces
+@centered-image{images/transformer-contract-example.png,"" ,300}
 
-Check out the screenshot of the Transformers plugin below. What are the domain and range for `Sort`?
-
-@centered-image{images/sort-transformer-contract.PNG,"" ,300}
+The transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
 
 |===
 }
@@ -148,6 +151,10 @@ Check out the screenshot of the Transformers plugin below. What are the domain a
 * Sort the animals table alphabetically by species.
 * Sort the animals table by how long it took for each animal to be adopted, in ascending order.}
 
+@ifproglang{codap}{
+=== Common Misconceptions
+Students may be more familiar with filters that actually change the table. In CODAP, all transformers produce a _brand new table_. Filtered tables are automatically saved; CODAP titles each new table `Filter(Animals-Dataset) {1}` - with the number in curly braces indicating how many times the transformer has been applied. When students apply a transformer, they have the option of selecting the original table from the dropdown menu, or a new table that they've generated. Students can also rename saved tables, if they’d like.}
+
 === Synthesize
 @ifproglang{pyret}{
 - What do `.order-by` and `.row-n` have in common? How are they different?
@@ -163,12 +170,11 @@ Check out the screenshot of the Transformers plugin below. What are the domain a
 Students learn how to _filter_ tables by removing Rows.
 
 === Launch
-@ifproglang{pyret}{
 Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the @ifproglang{pyret}{"filter method"} @ifproglang{codap}{"filter transformer"}, and have them _randomly choose_ a @link{pages/function-cards.adoc, Function Card}, and make sure they read it without showing it to anyone else.
 
 Have 6-8 students line up in front of the classroom, and have the filter @ifproglang{pyret}{method} @ifproglang{codap}{transformer} go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
 
-Ask the class: based on who sat and who stayed, _what function was on the card?_}
+Ask the class: based on who sat and who stayed, _what function was on the card?_
 
 [.lesson-point]
 @ifproglang{pyret}{
@@ -199,19 +205,16 @@ The `.filter` method walks through the table, applying whatever function it was 
 * This time, in the formula expression box, type `Age > 5`. What did you get?
 * Now try `Species = “dog”`
 
-The `Filter` transformer walks through the table, applying whatever function it was given to each row, and producing a new table containing all the rows for which the function returned `true`. Notice that the Domain for `Filter` says that test must be a formula, which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
+The `Filter` transformer walks through the table, applying whatever function it was given to each row, and produces a new table containing all the rows for which the function returned `true`. Notice that the Domain for `Filter` says that test must be a formula, which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
 
-=== Common Misconceptions
 @ifproglang{pyret}{
+=== Common Misconceptions
 Students often think that filtering a table _changes_ the table. In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.}
-
-@ifproglang{codap}{
-Students may be more familiar with filters that actually change the table. In CODAP, all transformers produce a _brand new table_. Filtered tables are automatically saved; CODAP titles each new table `Filter(Animals-Dataset) {1}` - with the number in curly braces indicating how many times the transformer has been applied. Students can also rename saved tables, if they’d like.}
 
 === Synthesize
 Debrief with students. Some guiding questions on filtering:
 
-- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `.filter` @ifproglang{pyret}{method} @ifproglang{codap}{transformer} help?
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the @ifproglang{pyret}{`.filter` method} @ifproglang{codap}{`Filter` transformer} help?
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 - Can you think of a situation where filtering fixed animals would be helpful?
 
@@ -221,7 +224,7 @@ Debrief with students. Some guiding questions on filtering:
 Students learn how to _build columns_, @ifproglang{pyret}{ using the `.build-column` table method} @ifproglang{codap}{using the `Build Attribute` transformer}.
 
 === Launch
-Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Or perhaps we want to add a "cute" column that just identifies the puppies and kittens? Have students find the contract for @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} in their contracts pages. @ifproglang{pyret}{The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function?} @ifproglang{codap}{The `Build Attribute` transformer makes a new copy of a dataset, and adds a new attribute. We must provide a dataset, a name for the new attribute, an existing collection to add the attribute to, a formula for the attribute’s values, and an indication of the type of value the formula will evaluate to.}
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. Have students find the contract for @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} in their contracts pages. @ifproglang{pyret}{The `.build-column` method is taking in a _function_ and a _string_. What is the contract for that function?} @ifproglang{codap}{The `Build Attribute` transformer makes a new copy of a dataset, and adds a new attribute. We must provide a dataset, a name for the new attribute, an existing collection to add the attribute to, a formula for the attribute’s values, and an indication of the type of value the formula will evaluate to.}
 
 === Investigate
 [.lesson-instruction]
@@ -233,19 +236,20 @@ Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or 
 The `.build-column` method walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it the `is-old` function, so the new table had an extra Boolean column for every animal, indicating whether or not it was young. Notice that the Domain for `.build-column` says that the builder must be a function which consumes a `Row` and produces some other value. If it consumes anything besides a single `Row`, we'll get an error.}
 
 @ifproglang{codap}{
-* Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`. In the formula expression box, type `Age > 5`. Apply the transformer. What happens?
-* This time, type `Species = “cat”`. What do you get? What do you think is going on?
+* Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`.
+* Enter `Young` as the `Name of New Attribute`. Select `cases` as the `Collection to Add To`. In the formula expression box, type `Age < 5`.  Apply the transformer. What happens?
+* Now, in the formula expression box, try typing `Species = “cat”`. What do you get? What do you think is going on?
 
-The `Build Attribute` transformer walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age > 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
+The `Build Attribute` transformer walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age < 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
 
 
 === Synthesize
 Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
 
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use @ifproglang{pyret}{`.build-column`} @ifproglang{pyret}{`Build Attribute`} to compute that for every row in the table.
 @ifproglang{pyret}{
 - The animals shelter might want to print nametags for every animal. They could build a column using the `text` function to have every animal's name in big, purple letters.}
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
+- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} to compute that for every row in the table.
 
 Being able to define functions @ifproglang{codap}{(what we are doing when we apply transformers)} is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 

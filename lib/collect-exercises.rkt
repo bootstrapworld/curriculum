@@ -36,10 +36,11 @@
             (cond [(member directive '(;"printable-exercise"
                                        "opt-printable-exercise"))
                    (let* ([page (read-first-arg i directive)]
-                          [compts (string-split page "/")])
+                          [compts (string-split page "/")]
+                          [num-compts (length compts)])
                      ;(printf "doing ex ~s ~s\n" directive page)
-                     (when (= (length compts) 2)
-                       (let ([f (cadr compts)])
+                     (when (<= 1 num-compts 2)
+                       (let ([f (list-ref compts (- num-compts 1))])
                          (unless (member f *exercises-files*)
                            (set! *exercises-files*
                              (cons f *exercises-files*))))))]

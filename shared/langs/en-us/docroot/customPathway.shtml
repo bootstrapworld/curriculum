@@ -16,13 +16,25 @@
         }
     </style>
     <script src="dependency-graph.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
     <script>
+        // load required symbols, trim the dependency graph
+        const { PDFDocument, rgb, degrees } = PDFLib
+        var graph = graph, lessons = [], title = "Custom Pathway";
+        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-winter', 'hoc-wescheme-intro'];
+        lessonsToIgnore.forEach(l => delete graph[l]);
+
+        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
         function populateLessons() {
             var search = location.search.substring(1);
-            var {title, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-            lessons = lessons.split(",");
+            var {title: pathwayName, lessons: pathwayLessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+            console.log(pathwayName, pathwayLessons);
+            title = pathwayName;
+            lessons = pathwayLessons.split(",");
             console.log(title, lessons);
-            document.getElementById('pathwayTitle').innerHTML = title;
+
+            document.getElementById('pathwayTitle').innerHTML = pathwayName;
             var lessonList = document.getElementById('lesson-list').children[0];
             lessons.forEach(l => {
                 var lesson = graph[l];
@@ -55,6 +67,59 @@
             });
         }
 
+        async function printWorkook(lessons, graph) {
+          const pdfDoc = await PDFDocument.create();
+            // print out wb page paths
+            var pageUrls = lessons
+                .map(l => graph[l].pages
+                    .filter(p => p !== "")
+                    .map(p => 
+                        "courses/algebra-pyret/" + "lessons/"+l+"/pages/"+p))
+                .flat()
+                .map(p => p.replace(".adoc", ".pdf"))
+                .map(p => p.replace(" landscape", ""));
+
+          document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
+
+        for (const [idx, url] of pageUrls.entries()) {
+            const page = pdfDoc.addPage();
+            const bytes = await fetch(url).then((res) => res.arrayBuffer());
+            const [embedded] = await pdfDoc.embedPdf(bytes);
+            const dimensions = embedded.scale(1.0);
+            const isRightHand= idx%2 == 0;
+
+            const portrait = {
+              x: (page.getWidth()  / 2) - dimensions.width  / 2,
+              y: (page.getHeight() / 2) - dimensions.height / 2,
+            };
+
+            const landscape = {
+              x: isRightHand? page.getWidth() :        0        ,
+              y: isRightHand?       0         : page.getHeight(),
+              rotate: degrees(isRightHand? 90 : -90),
+            };
+
+            const isLandscape  = dimensions.width > dimensions.height;
+            const pageSettings = isLandscape? landscape : portrait;
+
+            page.drawPage(embedded, {...dimensions, ...pageSettings});
+
+            document.getElementById('status').innerHTML = (idx+1) +"/"+ pageUrls.length;
+
+            if(idx <= 1 ) continue;
+            page.drawText(String(idx - 1), {
+              x: page.getWidth() / 2,
+              y: 35,
+              size: 8,
+              color: rgb(0,0,0),
+              rotateDegrees: isLandscape ? -90 : 0
+            })
+          }
+
+          // Serialize the PDFDocument to bytes (a Uint8Array)
+          const pdfBytes = await pdfDoc.save()
+          download(pdfBytes, title + "- Student Workbook.pdf", "application/pdf");
+        }
     </script>
 </head>
 
@@ -84,9 +149,14 @@
         </div>
 
         <div class="clearfix item bottom-border">
+            <button onclick="printWorkook(lessons, graph)">Print Workbook</button>
+            <span id="status"></span>
+        </div>
+
+        <div class="clearfix item bottom-border">
             <h2>What's Next?</h2>
             <p/>
-            Once your students have finished this pathway, there are plenty of other Bootstrap lessons your students are ready to dive into - without any additional !
+            <strong>What's next?</strong> Once your students have finished this pathway, they've already completed all the prerequisites for the following lessons:
             <ul id="accessible-lesson-list">
             </ul>
         </div>

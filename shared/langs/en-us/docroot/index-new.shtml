@@ -4,114 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Bootstrap: Materials</title>
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
-    <script src="/js/TextRotate.js" ></script>
-
-    <style>
-        #pathways { min-height: 170px; transition: all 0.25s linear;}
-        #pathways:hover { min-height: 400px; }
-        #lessonExplorer {
-            width: 100%;
-            overflow-y: scroll;
-            border: solid 1px black;
-            text-align: center;
-        }
-        .lessonContainer {
-            display:    inline-table;
-            position:   relative;
-            height:     60px;
-            width:      150px;
-            color:      black;
-            text-align: center;
-            border:     solid 1px gray;
-            font-weight: bold;
-            margin:     10px;
-            background-color: white;
-            cursor:     pointer;
-            transition: background-color linear 0.5s;
-        }
-        .accessible {background-color: #3c3cff4f; }
-        .teaching {
-            opacity: 1; 
-            background-color: #a6dfba !important;
-            box-shadow: black 3px 3px 3px; 
-            animation: emphasize 1s cubic-bezier(.36,.07,.19,.97) both 1;
-            animation-play-state:  paused;
-        }
-        .lessonContainer .lessonTitle { vertical-align: middle; display: table-cell; }
-        .lessonDescription { 
-            visibility: hidden;
-            width: 200px;
-            font-weight: normal;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            box-shadow: black 3px 3px 3px; 
-        }
-        .rightTip { left: 100%; }
-        .leftTip  { right: 100%; }
-        .topTip   { bottom: 105%; left: 50%; margin-left: -100px;}
-
-        .lessonDescription::after {
-          content: "";
-          position: absolute;
-          border-width: 5px;
-          border-style: solid;
-          border-color: transparent;
-        }
-
-        .rightTip::after { top:  10%; right: 100%; margin-left: -5px; border-right-color: black;}
-        .leftTip::after  { top:  10%; left:  100%; margin-left:  1px; border-left-color:  black;}
-        .topTip::after   { top: 100%; left:   50%; margin-top:   2px; border-top-color:   black;}
-
-        .lessonContainer:hover { background-color: #ccffcc; opacity: 1; z-index: 2;}
-        .lessonContainer:hover .lessonDescription { visibility: visible; }
-
-        .legend { 
-            display:  inline-block; 
-            box-shadow: none !important;
-        }
-
-        #search { 
-            background: black; 
-            color: white; 
-            width:  100%; 
-            padding: 10px; 
-            font-size:  12pt;
-            box-shadow: #cb76e6 1px 1px 2px;
-        }
-        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
-        .count {font-weight: bold;}
-        #pathwayButton { display: none; }
-        #reset { 
-            float:      right; 
-            font-size:  28pt;
-            margin-top: -4pt;
-            color:      white; 
-            background: none; 
-            border:     none;
-            text-decoration: none;
-        }
-        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
-
-        @keyframes emphasize {
-            10%, 90%      { transform: translate3d(-1px, 0, 0); }
-            20%, 80%      { transform: translate3d( 2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60%      { transform: translate3d( 4px, 0, 0); }
-        }
-        ul.tab { display: table; width: 100%; }
-        ul.tab .tablinks {display:  table-cell; }
-        .tablinks img {width: 100%; max-width: 150px;}
-    </style>
+    <script src="https://www.BootstrapWorld.org/js/TextRotate.js" ></script>
     <script src="dependency-graph.js"></script>
     <script>
         // values that must be imported from external scripts
         var registerTxtRotation = registerTxtRotation;
         var graph = graph;
+
+        // remove lessons that don't belong in the graph
+        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-wescheme-intro', 'hoc-winter'];
+        lessonsToIgnore.forEach(l => delete graph[l]);
 
         // find out if there's a subject that was passed in
         var subject, params = location.search.substring(1);
@@ -123,7 +25,7 @@
         if(subject == "social-studies") subject = "history";
 
         // certain lessons are "preferred" depending on the subject
-        const subjectPreference = {
+        var subjectPreference = {
             none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
             math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
@@ -132,7 +34,7 @@
         };
 
         // TODO(Emmanuel): remove after July 2022
-        const tmpLessonRename = {
+        var tmpLessonRename = {
             'displaying-categorical-data' : "Bar & Pie Charts",
             'measures-of-spread' : "Box Plots & Spread",
             'measures-of-center' : "Mean, Median, & Mode",
@@ -142,6 +44,38 @@
             'contracts': "Contracts: Name, Domain & Range",
             'checking-your-work' : "Evaluating Correctness"
         }
+
+        var projects = {
+            'Make an Infographic' : {
+                lesson: 'displaying-categorical-data',
+                description: 'dummy text',
+            },
+            'Draw a Flag' : {
+                lesson: 'flags',
+                description: 'dummy text',
+            },
+            'Make a Rocket Fly': {
+                lesson: 'solving-word-problems',
+                description: 'dummy text',
+            },
+            'Protect a Butterfly': {
+                lesson: 'inequalities3-sam',
+                description: 'dummy text',
+            },
+            'Make a Video Game' : {
+                lesson: 'inequalities-collision',
+                description: 'dummy text',
+            },
+            'Evaluate Your Stress Level' : {
+                lesson: 'measures-of-spread',
+                description: 'dummy text',
+            },
+            'Compare Your Snacking Habits' : {
+                lesson: 'random-samples',
+                description: 'dummy text',
+            },
+        }
+
         var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
@@ -160,13 +94,16 @@
                     console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
                     return; 
                 }
-                const container = document.createElement("div");
+                var container = document.createElement("div");
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
-                container.className =  "lessonContainer";
+                container.className =  "container";
                 container.innerHTML = `
-                    <span class="lessonTitle">${graph[l].title}</span>
-                    <span class="lessonDescription rightTip">${graph[l].description}</span>`;
+                    <span class="title">${graph[l].title}</span>
+                    <span class="description rightTip">
+                        ${graph[l].description}
+                        <a href="lessons/${l}/index.shtml">Check it out!</a>
+                    </span>`;
                 container.onclick = () => update(container);
                 document.getElementById('lessonExplorer').appendChild(container);
             });
@@ -174,6 +111,20 @@
             if(registerTxtRotation) {
                 registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
             }
+
+            var projectsExplorer = document.getElementById('projectExplorer');
+            Object.keys(projects).forEach(p => {
+                console.log(p);
+                var container = document.createElement("div");
+                container.id = p;
+                container.className = "container";
+                container.innerHTML = `
+                    <span class="title">${p}</span>
+                    <span class="description rightTip">
+                        ${projects[p].description}
+                    </span>`;
+                projectsExplorer.appendChild(container);
+            });
             window.addEventListener('resize', resize);
             resize();
         }
@@ -182,20 +133,20 @@
         function resize() {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout( () => {
-                var containers = document.getElementsByClassName('lessonContainer');
+                var containers = document.getElementsByClassName('container');
                 var pageWidth = document.getElementById("lessonExplorer").clientWidth;
                 if(containers.length == 0) return; // no lessons, so no work to do!
                 var containerWidth = containers[0].offsetWidth + 
                     2*parseInt(getComputedStyle(containers[0]).marginLeft);
                 var rowCount = Math.floor(pageWidth/containerWidth);
 
-                var descriptions = document.getElementsByClassName('lessonDescription');
+                var descriptions = document.getElementsByClassName('description');
                 [...descriptions].forEach((d, i) => {
                     var isBottomRow = ((descriptions.length - i) <= rowCount)
                         && i > rowCount;
                     var tipDirection = isBottomRow? "topTip"
                         : (i+1)%rowCount? "rightTip" : "leftTip";
-                    d.className = "lessonDescription " + tipDirection;
+                    d.className = "description " + tipDirection;
                 });
             }, 500);
         }
@@ -304,6 +255,109 @@
             window.open(`customPathway.shtml?title=${title}&lessons=${checked}`, '_blank').focus();
         }
     </script>
+    <style>
+        #pathways { min-height: 170px; transition: all 0.25s linear;}
+        #pathways:hover { min-height: 400px; }
+        #lessonExplorer, #projectExporer {
+            width: 100%;
+            overflow-y: scroll;
+            border: solid 1px black;
+            text-align: center;
+        }
+        .container {
+            display:    inline-table;
+            position:   relative;
+            height:     60px;
+            width:      150px;
+            color:      black;
+            text-align: center;
+            border:     solid 1px gray;
+            font-weight: bold;
+            margin:     10px;
+            background-color: white;
+            cursor:     pointer;
+            transition: background-color linear 0.5s;
+        }
+        .accessible {background-color: #3c3cff4f; }
+        .teaching {
+            opacity: 1; 
+            background-color: #a6dfba !important;
+            box-shadow: black 3px 3px 3px; 
+            animation: emphasize 1s cubic-bezier(.36,.07,.19,.97) both 1;
+            animation-play-state:  paused;
+        }
+        .container .title { vertical-align: middle; display: table-cell; }
+        .description { 
+            visibility: hidden;
+            width: 200px;
+            font-weight: normal;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            box-shadow: black 3px 3px 3px; 
+        }
+        .rightTip { left: 100%; }
+        .leftTip  { right: 100%; }
+        .topTip   { bottom: 105%; left: 50%; margin-left: -100px;}
+
+        .description a { color: yellow; }
+        .description::after {
+          content: "";
+          position: absolute;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent;
+        }
+
+        .rightTip::after { top:  10%; right: 100%; margin-left: -5px; border-right-color: black;}
+        .leftTip::after  { top:  10%; left:  100%; margin-left:  1px; border-left-color:  black;}
+        .topTip::after   { top: 100%; left:   50%; margin-top:   2px; border-top-color:   black;}
+
+        .container:hover { background-color: #ccffcc; opacity: 1; z-index: 2;}
+        .container:hover .description { visibility: visible; }
+
+        .legend { 
+            display:  inline-block; 
+            box-shadow: none !important;
+        }
+
+        #search { 
+            background: black; 
+            color: white; 
+            width:  100%; 
+            padding: 10px; 
+            font-size:  12pt;
+            box-shadow: #cb76e6 1px 1px 2px;
+        }
+        #searchBox { width: 300px; margin: 0px 10px; font-size:  12pt; }
+        .count {font-weight: bold;}
+        #pathwayButton { display: none; }
+        #reset { 
+            float:      right; 
+            font-size:  28pt;
+            margin-top: -4pt;
+            color:      white; 
+            background: none; 
+            border:     none;
+            text-decoration: none;
+        }
+        #reset:hover { text-shadow:  3px 1px 3px #cb76e6; }
+
+        @keyframes emphasize {
+            10%, 90%      { transform: translate3d(-1px, 0, 0); }
+            20%, 80%      { transform: translate3d( 2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60%      { transform: translate3d( 4px, 0, 0); }
+        }
+        ul.tab { display: table; width: 100%; }
+        ul.tab .tablinks {display:  table-cell; }
+        .tablinks img {width: 100%; max-width: 150px;}
+    </style>
+
 </head>
 
 <body onload="draw(); update();  ">
@@ -311,10 +365,15 @@
     <div id="body">
         <div class="clearfix item">
             <h1>Materials</h1>
-
+            <p>
             Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
-
+            </p>
+            <p>
             All of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
+            </p>
+            <p>
+            After Bootstrap,  students are prepared to tackle <a href="BeyondBootstrap.shtml">several college-level textbooks</a>, including one that bridges <strong>from Pyret to Python</strong>.
+            </p>
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
@@ -348,11 +407,18 @@
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
+            <h3>By project</h3>
+            Choose the projects you'd like your student to complete, and we'll fill in the lessons you need!
+            <div id="projectExplorer">
+            </div>
+
+
+            <h3>By lesson</h3>
             Click to select the lessons you would like to teach!
             <br/>
             <ul style="margin: 6px 0px;">
                 <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
-                <li>If you haven't select any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
+                <li>If you haven't selected any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
             </ul>
             <p/>
             <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
