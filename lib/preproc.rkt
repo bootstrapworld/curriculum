@@ -1793,13 +1793,21 @@
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
                (format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
-               (string-join
-                 (map (lambda (dict)
-                        (enclose-tag "option" ""
-                          #:attribs (format "value=\"standards-~a\"" dict)
-                          dict))
-                      *dictionaries-represented*)
-                 "")) o)
+               (string-append
+                 (if (null? *dictionaries-represented*) ""
+                     (let ([first-dict (car *dictionaries-represented*)])
+                       (enclose-tag "option" ""
+                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" first-dict)
+                         first-dict)))
+                 (string-join
+                   (map (lambda (dict)
+                          (enclose-tag "option" ""
+                            #:attribs (format "value=\"standards-~a\"" dict)
+                            dict))
+                        (if (null? *dictionaries-represented*) '()
+                            (cdr *dictionaries-represented*)))
+                   "")))
+             o)
     (newline o)
     (when narrative?
       (display (create-end-tag "div") o)
@@ -1811,14 +1819,23 @@
   (display (enclose-tag "select" ".textbooksAlignmentSelect"
              #:attribs
              (format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
-             (string-join
-               (map (lambda (textbook-label)
-                      (enclose-tag "option" ""
-                        #:attribs (format "value=\"textbook-~a\""
-                                          (regexp-replace* "\\." textbook-label "_"))
-                        textbook-label))
-                    *textbooks-represented*)
-               "")) o)
+             (string-append
+               (if (null? *textbooks-represented*) ""
+                   (let ([first-textbook (car *textbooks-represented*)])
+                     (enclose-tag "option" ""
+                       #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
+                                         (regexp-replace "\\." first-textbook "_"))
+                       first-textbook)))
+               (string-join
+                 (map (lambda (textbook-label)
+                        (enclose-tag "option" ""
+                          #:attribs (format "value=\"textbook-~a\""
+                                            (regexp-replace* "\\." textbook-label "_"))
+                          textbook-label))
+                      (if (null? *textbooks-represented*) '()
+                          (cdr *textbooks-represented*)))
+                 ""))) 
+           o)
   (newline o))
 
 (define (create-textbooks-subfile)
