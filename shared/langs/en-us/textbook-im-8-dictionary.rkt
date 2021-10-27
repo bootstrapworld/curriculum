@@ -27,7 +27,8 @@
   ; Illustrative Mathematics Grade 8 Unit 2: Dilations, Similarity, and Introducing Slope
 
   ("IM.8.2.1" 
-   "https://curriculum.illustrativemathematics.org/MS/teachers/3/2/index.html"
+   ; 👇  eventually we'll use following URI field, but not yet
+   ; "https://curriculum.illustrativemathematics.org/MS/teachers/3/2/index.html"
    "Projecting and Scaling")
 
   ; Illustrative Mathematics Grade 8 Unit 3: Linear Relationships

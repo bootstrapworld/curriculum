@@ -909,6 +909,8 @@ function processadocs() {
       fi
     fi
     if test $DOIT; then
+      fpdf=$fbase.pdf
+      test -f "$fpdf" && rm -f "$fpdf"
       ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
     fi
@@ -921,15 +923,14 @@ function processadocs() {
       fbase=${f%.adoc}
       fhtml=$fbase.html
       fpdf=$fbase.pdf
-      if test -f "$fpdf"; then
-        rm -f "$fpdf"
-      fi
       #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-      if test "$RESOURCEDOCS" = 1 -o \
-        "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
-        "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
-              #echo doing it!
-              echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
+      if test ! -f "$fpdf"; then
+        if test "$RESOURCEDOCS" = 1 -o \
+          "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
+          "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
+                  #echo doing it!
+                  echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
+        fi
       fi
     done
   fi
@@ -1089,17 +1090,24 @@ function checklessonplan() {
         else
           echo $f >> $exerfA
         fi
-        #echo g is $g
-        gext=${g##*.}
-        #echo gext is $gext
-        if test "$gext" = adoc; then
-          g=${g%.adoc}.html
-          gext=html
-        fi
-        #echo g is $g gext is $gext
-        if test "$gext" = html; then
-          echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
-          echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
+        if test ! $NOPDF; then
+          gext=${g##*.}
+          #echo gext is $gext
+          if test "$gext" = adoc; then
+            gbase=${g%.adoc}
+            g=$gbase.html
+            gext=html
+            gpdf=$gbase.pdf
+          fi
+          #echo g is $g gext is $gext
+          if test "$gext" = html; then
+            if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
+              echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
+            fi
+            if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
+              echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
+            fi
+          fi
         fi
       done
     fi
@@ -1228,7 +1236,7 @@ function buildlessonplan() {
       checklinks index.shtml
 
       if test ! $NOPDF; then
-        if test index.shtml -nt index.pdf; then
+        if test index.adoc -nt index.pdf; then
           #echo PUPPETEER_INPUT is x $PUPPETEER_INPUT x
           echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\", \"debug\": \"ix\" }" >> $PUPPETEER_INPUT
         fi
@@ -1655,8 +1663,12 @@ function buildteacherresource() {
 
 function batchhtmltopdf() {
   cd $TOPDIR/distribution/$LANGUAGE
-  #echo doing batchhtmltopdf in $(pwd)
+  # echo doing batchhtmltopdf in $(pwd)
   echo "] }" >> $PUPPETEER_INPUT
+
+  test $NOPDF && return
+
+  # echo continuing with batchhtmltopdf
 
   # use --trace-warnings to debug
 
@@ -1768,66 +1780,74 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
-  #echo doing collectworkbookpages $d
+  # echo doing collectworkbookpages $d
   cd "$d"
   if test -d pages; then
     cd pages
     if test -f workbook-pages.txt; then
-      #echo workbook-pages.txt found
+      # echo workbook-pages.txt found
       test -d .cached || mkdir .cached
-      cd .cached
-      rm -f .workbook-pages.txt.kp .workbook-pages-ls.txt.kp
+      # cd .cached
+      rm -f .cached/.workbook-pages.txt.kp .cached/.workbook-pages-ls.txt.kp
       #ensure workbook-pages.txt ends in newline, or while isn't happy
-      $SED -i -e '$a\' ../workbook-pages.txt
+      $SED -i -e '$a\' workbook-pages.txt
 
-      touch .workbook-pages-ls.txt.kp
+      touch .cached/.workbook-pages-ls.txt.kp
 
       while read -r f; do
-        #echo finding aspect of "$f"
+        # echo finding aspect of "$f"
         aspect=portrait
         g=$f
         if echo "$f"|grep -q landscape; then
-          echo $f >> .workbook-pages.txt.kp
+          echo $f >> .cached/.workbook-pages.txt.kp
           g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-          echo $g >> .workbook-pages-ls.txt.kp
+          echo $g >> .cached/.workbook-pages-ls.txt.kp
           aspect=landscape
         elif echo "$f"|grep -q portrait; then
-          echo $f >> .workbook-pages.txt.kp
+          echo $f >> .cached/.workbook-pages.txt.kp
           g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-          echo $g >> .workbook-pages-ls.txt.kp
+          echo $g >> .cached/.workbook-pages-ls.txt.kp
         elif test "${f%.adoc}" = "$f"; then
-          echo $f >> .workbook-pages.txt.kp
-          echo $f >> .workbook-pages-ls.txt.kp
+          echo $f >> .cached/.workbook-pages.txt.kp
+          echo $f >> .cached/.workbook-pages-ls.txt.kp
         else
-          g=${f%.adoc}.html
-          if test -f $f && head -n 5 ../"$f"|grep -q '^ *\[\.landscape\] *$'; then
-            echo $f landscape >> .workbook-pages.txt.kp
-            echo $f >> .workbook-pages-ls.txt.kp
+          if test -f $f && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
+            echo $f landscape >> .cached/.workbook-pages.txt.kp
+            echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
-          elif test -f $g && head -n 60 ../"$g"|grep -q 'body.*landscape'; then
-            echo $f landscape >> .workbook-pages.txt.kp
-            echo $f >> .workbook-pages-ls.txt.kp
+          elif test -f $g && head -n 60 "$g"|grep -q 'body.*landscape'; then
+            echo $f landscape >> .cached/.workbook-pages.txt.kp
+            echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
           else
-            echo $f >> .workbook-pages.txt.kp
-            echo $f >> .workbook-pages-ls.txt.kp
+            echo $f >> .cached/.workbook-pages.txt.kp
+            echo $f >> .cached/.workbook-pages-ls.txt.kp
           fi
         fi
-        if test $DOINGLESSON; then
-          gext=${g##*.}
-          if test "$gext" = adoc; then
-            g=${g%.adoc}.html
-            gext=html
-          fi
-          #echo g is $g gext is $gext
-          if test "$gext" = html; then
-            echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iiia\" }" >> $PUPPETEER_INPUT
-            echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iva\" }" >> $PUPPETEER_INPUT
+        if test ! $NOPDF; then
+          if test $DOINGLESSON; then
+            gext=${g##*.}
+            if test "$gext" = adoc; then
+              gbase=${g%.adoc}
+              g=$gbase.html
+              gext=html
+            elif test "$gext" = html; then
+              gbase=${g%.html}
+            fi
+            gpdf=$gbase.pdf
+            if test "$gext" = html; then
+              if test ! -f "$gpdf" -o "$g" -nt "$gpdf"; then
+                echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iiia\" }" >> $PUPPETEER_INPUT
+              fi
+              if test ! -f "../solution-pages/$gpdf" -o "../solution-pages/$g" -nt "../solution-pages/$gpdf"; then
+                echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iva\" }" >> $PUPPETEER_INPUT
+              fi
+            fi
           fi
         fi
-      done < ../workbook-pages.txt
+      done < workbook-pages.txt
 
-      cd ..
+
     fi
     cd ..
   fi
@@ -2552,10 +2572,11 @@ buildpathwaytocs
 
 #echo !!! building workbooks
 
+batchhtmltopdf
+
 if test ! $NOPDF; then
 
   cd $TOPDIR/distribution/$LANGUAGE
-  batchhtmltopdf
 
   callonARGS buildpathwayworkbooks
 
