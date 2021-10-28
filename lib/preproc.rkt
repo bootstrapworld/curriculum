@@ -1052,6 +1052,8 @@
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
+  (set! *standards-met* '())
+  (set! *dictionaries-represented* '())
   )
 
 (define (preproc-adoc-file in-file
