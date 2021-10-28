@@ -159,6 +159,7 @@
 (define *missing-glossary-items* '())
 
 (define *standards-met* '())
+;FIXME
 
 (define *practices-merited* '())
 
@@ -1049,14 +1050,8 @@
 
 (define (init-flags)
   (set! *autonumber-index* 1)
-  (set! *containing-directory* "")
-  (set! *dist-root-dir* "")
-  (set! *lesson* #f)
-  (set! *lesson-plan* #f)
-  (set! *narrative* #f)
-  (set! *other-dir* #f)
-  (set! *proglang* "pyret")
-  (set! *teacher-resources* #f)
+  (set! *glossary-items* '())
+  (set! *missing-glossary-items* '())
   )
 
 (define (preproc-adoc-file in-file
