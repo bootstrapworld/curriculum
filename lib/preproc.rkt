@@ -183,13 +183,12 @@
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
 
-
-
 (define (errmessage-context)
-  (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
-        [*lesson-plan* (format "Lesson plan ~a" *lesson-plan*)]
-        [*lesson-subdir* (format "Page ~a" *lesson-subdir*)]
-        [else ""]))
+  (let ([s ""])
+    (cond [*narrative* (set! s "Pathway narrative ")]
+          [*lesson-plan* (set! s "Lesson plan ")]
+          [*lesson* (set! s "Lesson ")])
+    (string-append s (errmessage-file-context))))
 
 (define (errmessage-file-context)
   ;(format "~a/~a" (current-directory) *in-file*)
@@ -667,7 +666,7 @@
                     (string-append *containing-directory* "/" img-anonymized)
                     #t))
                 (unless (file-exists? img-anonymized-qn)
-                  (printf "WARNING: Image file ~a not found\n\n" img-qn)))]
+                  (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
     (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
            [rest-opts (if (pair? opts) (cdr opts) '())]
@@ -1828,7 +1827,7 @@
                           textbook-label))
                       (if (null? *textbooks-represented*) '()
                           (cdr *textbooks-represented*)))
-                 ""))) 
+                 "")))
            o)
   (newline o))
 
