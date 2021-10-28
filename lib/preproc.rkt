@@ -721,8 +721,8 @@
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
   ;(printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
-  ;(printf "pwd = ~s\n" (current-directory))
-  (let ([external-link? #f])
+  (let ([external-link? #f]
+        [g f])
     (cond [(string=? f "") #f]
           [(regexp-match #rx"://" f) (set! external-link? #t)]
           [(regexp-match #rx"^#" f) #f]
@@ -735,33 +735,31 @@
                   (check-link f #:external? #t)]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   (let ([f.adoc (path-replace-extension f ".adoc")]
-                         [f.html (path-replace-extension f ".html")]
-                         [f.shtml (path-replace-extension f ".shtml")]
-                         [f.pdf (path-replace-extension f ".pdf")]
-                         [existent-file? #f])
-                     (cond [(file-exists? f.adoc)
+                   (let ([existent-file? #f])
+                     (cond [(file-exists? f)
+                            (set! existent-file? #t)]
+                           [(file-exists? (path-replace-extension f ".adoc"))
                             (set! existent-file? #t)
-                            (set! f f.html)]
-                           [(file-exists? f.html)
+                            (set! g (path-replace-extension g ".adoc"))]
+                           [(file-exists? (path-replace-extension f ".html"))
                             (set! existent-file? #t)
-                            (set! f f.html)]
-                           [(file-exists? f.shtml)
+                            (set! g (path-replace-extension g ".html"))]
+                           [(file-exists? (path-replace-extension f ".shtml"))
                             (set! existent-file? #t)
-                            (set! f f.shtml)]
-                           [(file-exists? f.pdf)
+                            (set! g (path-replace-extension g ".shtml"))]
+                           [(file-exists? (path-replace-extension f ".pdf"))
                             (set! existent-file? #t)
-                            (set! f f.pdf)])
+                            (set! g (path-replace-extension g ".pdf"))])
                      ;(printf "link refers to ~a\n\n" f)
-                     (let ([short-ref? (abbreviated-index-page? f)])
+                     (let ([short-ref? (abbreviated-index-page? g)])
                        (unless (or existent-file?
-                                   (string=? f "pathway-standards.shtml")
+                                   (string=? g "pathway-standards.shtml")
                                    short-ref?)
                          (check-link f)
                          (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
                                  (errmessage-context)
                                  f))
-                       (when short-ref? (set! f (build-path f "index.shtml")))))])
+                       (when short-ref? (set! g (build-path g "index.shtml")))))])
 
            (when (and (member link-type '("online-exercise" "opt-online-exercise"))
                       external-link?)
@@ -777,8 +775,8 @@
 
            (let ([link-output
                    (cond ((or *lesson-plan* *teacher-resources*)
-                          (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text))
-                         (else (format "link:pass:[~a][~a]" f link-text)))])
+                          (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text))
+                         (else (format "link:pass:[~a][~a]" g link-text)))])
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
