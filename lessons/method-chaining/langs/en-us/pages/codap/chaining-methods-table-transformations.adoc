@@ -1,0 +1,104 @@
+= Table Transformations with Method Chaining
+
+++++
+<style>
+#content table tr td { height: 12ex; padding: 0 0.5em; }
+#content table tr td pre {padding: .2em !important }
+</style>
+++++
+
+You have the following functions defined below  (read them _carefully!_):
+
+  fun is-fixed(r):  r["fixed"]                  end
+  fun is-young(r):  r["age"] < 4                end
+  fun nametag(r):   text(r["name"], 20, "red")  end
+  fun is-female(r): r["sex"] == "female"        end
+  fun kilograms(r): r["pounds"] / 2.2           end
+  fun is-heavy(r):  r["kilos"] > 25             end
+  fun is-cat(r):    r["species"] == "cat"       end
+  fun is-dog(r):    r["species"] == "dog"       end
+
+Assume that `animals-table` is defined, and represents all the animals at the shelter. Solve the word problems below using these functions with `filter`, `build-column`, and `order-by`.
+
+[cols="^.^1a, .^4a,.^10a"]
+|===
+| *@n*
+| Create a table of all female cats.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-female) # order doesn't matter here!
+   .filter(is-cat)
+----
+}
+
+| *@n*
+| Create a table of all young, fixed animals.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-young) # order doesn't matter here!
+   .filter(is-fixed)
+----
+}
+
+| *@n*
+| Create a table of all female dogs, converting their weight to kilograms.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-female) # order doesn't matter here!
+   .filter(is-dog)
+   .build-column("kilos", kilograms)
+----
+}
+
+| *@n*
+| Create a table of all heavy dogs.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-dog)
+   .build-column("kilos", kilograms)
+   .filter(is-heavy) # must come AFTER the build-column!
+----
+}
+
+| *@n*
+| Create a table of all young, fixed dogs, sorted from lightest to heaviest.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-young) # order doesn't matter here!
+   .filter(is-fixed)
+   .filter(is-dog)
+   .order-by("pounds", true)
+----
+}
+
+| *@n*
+| Create a table of all fixed, young animals, with an extra column showing images of their nametags.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-young) # order doesn't matter here!
+   .filter(is-fixed)
+   .build-column("tag", nametag) # sensible name
+----
+}
+
+| *@n*
+| Create a table of fixed, female cats, with a column showing images of their nametages, sorted heaviest-to-lightest by their weight in kilograms.
+|@ifsoln{
+----
+ animals-table
+   .filter(is-fixed) # order doesn't matter here!
+   .filter(is-female)
+   .filter(is-cat)
+   .build-column("tag", nametag) # sensible name
+   .build-column("kilos", kilograms)
+   .order-by("kilos", false)
+----
+}
+
+|===
