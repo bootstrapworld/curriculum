@@ -163,7 +163,7 @@
 
 (define *practices-merited* '())
 
-(define *textbooks-used* '())
+; (define *textbooks-used* '())
 
 (define *textbooks-represented* '())
 
@@ -1054,6 +1054,8 @@
   (set! *missing-glossary-items* '())
   (set! *standards-met* '())
   (set! *dictionaries-represented* '())
+  (set! *chapters-used* '())
+  (set! *textbooks-represented* '())
   )
 
 (define (preproc-adoc-file in-file
