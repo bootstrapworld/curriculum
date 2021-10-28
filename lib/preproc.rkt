@@ -24,7 +24,6 @@
   box-add-new!
   create-standards-file
   preproc-adoc-file
-  initialize-autonumber-index
   rearrange-args
   )
 
@@ -184,12 +183,7 @@
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
 
-(define (initialize-autonumber-index)
-  (set! *autonumber-index* 1)
-  (set! *textbooks-represented* '())
-  (set! *chapters-used* '())
 
-  )
 
 (define (errmessage-context)
   (cond [*narrative* (format "Pathway narrative ~a" *pathway*)]
@@ -1056,6 +1050,7 @@
   (set! *dictionaries-represented* '())
   (set! *chapters-used* '())
   (set! *textbooks-represented* '())
+  (set! *practices-merited* '())
   )
 
 (define (preproc-adoc-file in-file
