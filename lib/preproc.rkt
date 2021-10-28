@@ -1783,7 +1783,8 @@
     (when narrative? (display (create-begin-tag "div" "") o))
     (display (enclose-tag "select" ".standardsAlignmentSelect"
                #:attribs
-               (format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
+               ;(format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
+               " onchange=\"showStandardsAlignment()\""
                (string-append
                  (if (null? *dictionaries-represented*) ""
                      (let ([first-dict (car *dictionaries-represented*)])
@@ -1809,7 +1810,8 @@
 (define (display-textbooks-selection o *textbooks-represented*)
   (display (enclose-tag "select" ".textbooksAlignmentSelect"
              #:attribs
-             (format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
+             ;(format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
+             " onchange=\"showTextbooksAlignment()\""
              (string-append
                (if (null? *textbooks-represented*) ""
                    (let ([first-textbook (car *textbooks-represented*)])
