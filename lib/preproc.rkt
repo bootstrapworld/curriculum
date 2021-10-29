@@ -463,7 +463,8 @@
         [else
           ;(printf "Pracices are present for ~s\n" *lesson-plan*)
           (for ([badge *practices-merited*])
-            (let ([img (format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)])
+            (let ([img ;(format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)
+                    badge])
               (display (enclose-tag "li" "" img) o)
               (newline o)))])
   (display (create-end-tag "ul") o)
