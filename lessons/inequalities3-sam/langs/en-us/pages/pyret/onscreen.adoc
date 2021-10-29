@@ -1,0 +1,16 @@
+@design-recipe-exercise{ "onscreen?" "Use the Design Recipe to
+write a function @funname, which takes in an x- and y-coordinate,
+and checks to see if Sam is safe on the left while also being safe on the right."
+  #:domain-list '(Number Number)
+  #:range "Boolean"
+  #:purpose "Consumes an x- and y-coordinate, and produces true if Sam is on the screen"
+  #:num-examples 2
+  #:example-list '((100 20 (and (safe-left? 100) (safe-right? 100)))
+                   (-180 55 (and (safe-left? -180) (safe-right? -180))))
+  #:show-examples '((#f #f #f) (#f #f #f))
+  #:param-list '(x)
+  #:show-params? #f
+  #:body '(and (safe-left? x) (safe-right? x))
+  #:show-body? #f
+  #:grid-lines? #t
+}
