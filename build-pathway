@@ -23,14 +23,10 @@ eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
 export SEMESTER YEAR
 SEMESTER_YEAR=$SEMESTER$YEAR
-#JAVASCRIPTDELAY="--javascript-delay 5000"
-#JAVASCRIPTDELAY="--window-status ready_to_print"
-#JAVASCRIPTDELAY="--javascript-delay 100000 --window-status ready_to_print"
-JAVASCRIPTDELAY="--run-script 'MathJax.Hub.Queue(function(){window.status=\"ready_to_print\"})' --window-status ready_to_print"
 
 ARGS=
 HELP=
-LASTMOD=2021-10-28 # last modified
+LASTMOD=2021-10-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -493,14 +489,6 @@ function removelogos() {
     $f
 }
 
-function removecodetags() {
-  local f=$1
-  $SED -i \
-    -e 's/<code>\(<tt\)/\1/g' \
-    -e 's/\(<\/tt>\)<\/code>/\1/g' \
-    $f
-}
-
 function cleanuptitle() {
   local f=$1
   $SED -i \
@@ -691,12 +679,13 @@ $SED -i \
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
-  #echo doing adjustproglangsubdirs $d $pl
+  echo doing adjustproglangsubdirs $d $pl
   #echo PROGLANG is $PROGLANG
 
   test -d "$d" || return
 
   if test -d "$d"/"$pl"; then
+    echo copying "$d"/"$pl" to "$d"
     cp -p "$d"/"$pl"/* "$d"
   fi
 
@@ -1711,9 +1700,9 @@ function rmtmpfiles() {
 
 function copylessondir() {
   lessonDir=$1
-  #echo doing copylessondir $lessonDir
+  echo doing copylessondir $lessonDir
   repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$LANGUAGE
-  #echo repoLessonDir is $repoLessonDir
+  echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
     mkdir -p $lessonDir
     #echo $repoLessonDir is a diry
@@ -1740,17 +1729,13 @@ function copylessondir() {
           test -d $subdir/.cached || mkdir $subdir/.cached
         fi
       done
+      cd ..
       #checklessonplan $lessonDir
       #echo checklessonplan done
-      for subdir in *; do
-        if test -d "$subdir"; then
-          adjustproglangsubdirs "$subdir" pyret
-        fi
-      done
-      cd ..
       if test -f $lessonDir/proglang.txt; then
         for pl in $(cat $lessonDir/proglang.txt); do
           if test "$pl" != pyret; then
+            echo copying $lessonDir to $lessonDir-$pl
             cp -pr $lessonDir $lessonDir-$pl
             cd $lessonDir-$pl
             mkdir -p .cached
@@ -1766,6 +1751,13 @@ function copylessondir() {
           fi
         done
       fi
+      cd $lessonDir
+      for subdir in *; do
+        if test -d "$subdir"; then
+          adjustproglangsubdirs "$subdir" pyret
+        fi
+      done
+      cd ..
     fi
 
     echo $lessonDir >> $RELEVANT_LESSONS_INPUT
