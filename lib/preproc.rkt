@@ -16,6 +16,7 @@
 (require "lessons-and-practices.rkt")
 (require "lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
+(require "starter-files.rkt")
 ;(require "draw-dep-diag.rkt")
 
 (provide
@@ -1433,6 +1434,20 @@
                                         (lambda (i)
                                           (expand-directives i o)
                                           )))))))]
+                           [(string=? directive "starter-file")
+                            (let* ([lbl (read-group i directive)]
+                                   [c (assoc lbl *starter-files*)])
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Ill-named starter file ~a\n\n"
+                                             (errmessage-context) lbl)]
+                                    [else
+                                      (let* ([title (cadr c)]
+                                             [p (assoc *proglang* (cddr c))])
+                                        (cond [(not p)
+                                               (printf "WARNING: ~a: Starter file ~a missing for ~a\n\n"
+                                                       lbl *proglang*)]
+                                              [else
+                                                (fprintf o "link:pass:[~a][~a]" (cadr p) title)]))]))]
                            [else
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
