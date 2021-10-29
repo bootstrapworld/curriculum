@@ -45,46 +45,63 @@
             'checking-your-work' : "Evaluating Correctness"
         }
 
-        var projects = {
-            'Make an Infographic' : {
+        var projects = [
+            {
+                title: 'Make an Infographic',
                 lesson: 'displaying-categorical-data',
-                description: 'dummy text',
+                description: 'Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. This project is an opportunity for students to become more flexible math thinkers while tapping into their creativity, and can be made on the computer or with pencil and paper.',
             },
-            'Draw a Flag' : {
+            {
+                title: 'Draw a Flag',
                 lesson: 'flags',
-                description: 'dummy text',
+                description: 'Students recreate images of flags of varying complexity by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely.',
             },
-            'Make a Rocket Fly': {
+            {
+                title: 'Make a Rocket Fly',
                 lesson: 'solving-word-problems',
-                description: 'dummy text',
+                description: 'Students make a rocket blast off, with a flight path following linear (straight-line), quadratic (accelerating or up-and-down), or exponential paths - depending on your learning goals. ',
             },
-            'Protect a Butterfly': {
+            {
+                title: 'Protect a Butterfly',
                 lesson: 'inequalities3-sam',
                 description: 'dummy text',
             },
-            'Make a Video Game' : {
+            {
+                title: 'Make a Video Game',
                 lesson: 'inequalities-collision',
                 description: 'dummy text',
             },
-            'Evaluate Your Stress Level' : {
+            {
+                title: 'Evaluate Your Stress Level',
                 lesson: 'measures-of-spread',
-                description: 'dummy text',
+                description: 'People report being more and more stressed every day.  This trend is extending beyond adults, and is being reported by children and teenagers.  The amount of work people are responsible for has been increasing.  To understand what makes us feel stressed, students gather and analyze data about their own lives.',
             },
-            'Compare Your Snacking Habits' : {
+            {
+                title: 'Compare Your Snacking Habits',
                 lesson: 'random-samples',
-                description: 'dummy text',
+                description: 'Childhood obesity is a major problem in the U.S. Many have called for food producers to provide consumers with nutritional information so that consumers can make wiser choices. Students collect data on their own snacking habits, and compare it to national trends.',
             },
-        }
+        ];
+
+        // compute prerequisites for projects, add to graph
+        projects.forEach((p) => {
+            p.title = "Project: " + p.title;
+            p.prerequisites = graph[p.lesson].prerequisites;
+            p.type = "project";
+            graph[p.title] = p;
+        });
 
         var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
         
         var checked = [];
-        var originalOrder = subjectPreference[subject].concat(rest);
-        
-        // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
-        // draw the container for each lesson and add it to the lesson explorer
+        var originalOrder = projects.map(p => p.title).concat(subjectPreference[subject], rest);
+
+        // 1) Starting with projects, then preferred lessons, 
+        // then non-preferred lesson in prerequisite order,
+        // draw the container for each lesson and add it to the 
+        // lesson explorer
         // 2) Get the search placeholder text rotating
         // 3) Register the resize handler and do a resize
         function draw() {
@@ -98,6 +115,9 @@
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
                 container.className =  "container";
+                if(graph[l].type == "project") { 
+                    container.classList.add("project");
+                }
                 container.innerHTML = `
                     <span class="title">${graph[l].title}</span>
                     <span class="description rightTip">
@@ -105,26 +125,12 @@
                         <a href="lessons/${l}/index.shtml">Check it out!</a>
                     </span>`;
                 container.onclick = () => update(container);
-                document.getElementById('lessonExplorer').appendChild(container);
+                document.getElementById('materialExplorer').appendChild(container);
             });
             function updatePlaceholder(e, txt) { e.placeholder = txt; }
             if(registerTxtRotation) {
                 registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
             }
-
-            var projectsExplorer = document.getElementById('projectExplorer');
-            Object.keys(projects).forEach(p => {
-                console.log(p);
-                var container = document.createElement("div");
-                container.id = p;
-                container.className = "container";
-                container.innerHTML = `
-                    <span class="title">${p}</span>
-                    <span class="description rightTip">
-                        ${projects[p].description}
-                    </span>`;
-                projectsExplorer.appendChild(container);
-            });
             window.addEventListener('resize', resize);
             resize();
         }
@@ -134,7 +140,7 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout( () => {
                 var containers = document.getElementsByClassName('container');
-                var pageWidth = document.getElementById("lessonExplorer").clientWidth;
+                var pageWidth = document.getElementById("materialExplorer").clientWidth;
                 if(containers.length == 0) return; // no lessons, so no work to do!
                 var containerWidth = containers[0].offsetWidth + 
                     2*parseInt(getComputedStyle(containers[0]).marginLeft);
@@ -213,7 +219,7 @@
         function search() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout( () => {
-                const explorer = document.getElementById('lessonExplorer');
+                const explorer = document.getElementById('materialExplorer');
                 var str = document.getElementById('searchBox').value;
                 var results;
 
@@ -258,7 +264,7 @@
     <style>
         #pathways { min-height: 170px; transition: all 0.25s linear;}
         #pathways:hover { min-height: 400px; }
-        #lessonExplorer, #projectExporer {
+        #materialExplorer {
             width: 100%;
             overflow-y: scroll;
             border: solid 1px black;
@@ -277,6 +283,11 @@
             background-color: white;
             cursor:     pointer;
             transition: background-color linear 0.5s;
+        }
+        .project {
+            border-radius: 10px;
+            background: rgb(192,192,192);
+            padding:  10px;
         }
         .accessible {background-color: #3c3cff4f; }
         .teaching {
@@ -377,7 +388,7 @@
         </div>
         <div id="pathways" class="item bottom-border">
             <ul class="tab">
-                <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
+                <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra/images/Logo.png" alt="Bootstrap:Algebra"/></a>
                     <div id="algebra" class="tabcontent">
                         <h3>Recommended for: Grades 7-12</h3>
                         The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
@@ -407,21 +418,13 @@
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
-            <h3>By project</h3>
-            Choose the projects you'd like your student to complete, and we'll fill in the lessons you need!
-            <div id="projectExplorer">
-            </div>
-
-
-            <h3>By lesson</h3>
-            Click to select the lessons you would like to teach!
-            <br/>
-            <ul style="margin: 6px 0px;">
-                <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
-                <li>If you haven't selected any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
-            </ul>
+            <span class="legend teaching"><b>Where do you want to go?</b></span>
+            <br/>Click to select the projects or lessons you want to bring to your students! <i>When you select a project or lesson, it - <b>and its prerequisites</b> - will turn green.
             <p/>
-            <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
+            <span class="legend accessible"><b>What can you teach <i>tomorrow</i>?</b></span> 
+            <br/>If you haven't selected anything yet, the blue items can be taught with <i>no prerequisites.</i> The more lessons and projects you select, the more material is immediately within reach!
+            <p/>
+            Select as many projects or lessons as you'd like, then name and save your pathway.
             <p/>
 
             <div id="search">
@@ -435,10 +438,10 @@
             <p>
             Having taught <span id="checkedCount" class="count">LOADING</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">LOADING</span> other lessons!
             </p>
-            <div id="lessonExplorer"></div>
+            <div id="materialExplorer"></div>
             <p/>
             <div id="summary">
-                <strong>The lessons you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
+                <strong>The lessons or projects you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
                 <p/>
                 We've created a custom pathway just for you, with links to all the lesson materials, workbook pages, activities, and more! Enter a name to see your personalized pathway, and bookmark the resulting page to return to it at any time!
                 <p/>
