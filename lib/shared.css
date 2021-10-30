@@ -209,17 +209,8 @@ tr th.tableblock {
 #lesson-list dd:before{ display: inline; content: '::'; font-weight: 900; }
 
 /************************************************************************************
-* LESSON PAGE STYLES
+* LESSON SIDEBAR
 */
-
-.LessonPlan h2 { font-size: 2.2em; font-weight: normal; }
-.LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
-
-/* The summary table at the top of each lesson */
-.left-header tr td:nth-child(1) { background-color: #b7d893; }
-.left-header tr td:nth-child(1) p { font-weight: bold; }
-
-/* The sidebar */
 .sidebar {
   display:    block;
   position:   fixed;
@@ -227,6 +218,7 @@ tr th.tableblock {
   left:       calc(225px + 895px);
   width:      calc(100% - (225px + 895px));
   min-width:  200px;
+  padding:    10px; 
   height:     100%;
   background: #eee;
   opacity:    0.3;
@@ -237,16 +229,10 @@ tr th.tableblock {
   z-index:    9999;
   overflow:   scroll;
 }
-
-input.sidebarinput { margin-left: 10px; }
-
-.sidebar .sidebartitle {
-  display:  none;
-}
-
 .sidebar:hover { opacity: 1; }
-.sidebar:hover .sidebartitle { display: none; }
-.sidebar .sidebarlessons { padding: 10px; }
+.sidebar strong { color: black; }
+.sidebar li { list-style-type: none; margin-bottom: 5px;}
+
 .sidebarlessons input[type="checkbox"] { margin-right: 5px; }
 .sidebar .sidebarlessons ul { 
   background: white; 
@@ -256,29 +242,26 @@ input.sidebarinput { margin-left: 10px; }
   overflow:   scroll;
   padding:    10px;
 }
-.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
 .sidebarlessons li:nth-child(odd) { background: #b7d89333; }
 .sidebarlessons .prerequisite::after { content:'★'; } 
-.sidebarlessons strong {color: black; }
 
-div.standards-hierarchical-table {
-    display: none;
-}
+div.standards-hierarchical-table { display: none; }
+div.standards-hierarchical-table:hover div.title + dl { display: block; }
 
-div.standards-hierarchical-table:hover div.title + dl {
-    display: block;
-}
-
-.sidebarstandards { padding-left: 10px; }
-
-.sidebartextbooks strong { color: black; }
-.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
-
-/* .sidebarpractices { display: none; } */
 .sidebarpractices ul { margin-left: 0px; text-align: center; }
 .sidebarpractices li { list-style-type: none; display: inline-block; margin-left: 5em; }
-/* .sidebarpractices img {width: 110px; transition: width 0.5s; } */
-/* .sidebarpractices img:hover {width: 200px; } */
+
+
+/************************************************************************************
+* LESSON PAGE STYLES
+*/
+
+.LessonPlan h2 { font-size: 2.2em; font-weight: normal; }
+.LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
+
+/* The summary table at the top of each lesson */
+.left-header tr td:nth-child(1) { background-color: #b7d893; }
+.left-header tr td:nth-child(1) p { font-weight: bold; }
 
 /* Styling for the Materials section of the Lesson Summary */
 .materials-links {
