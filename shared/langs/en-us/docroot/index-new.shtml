@@ -72,12 +72,12 @@
                 description: 'dummy text',
             },
             {
-                title: 'Evaluate Your Stress Level',
+                title: 'Your Stress Level',
                 lesson: 'measures-of-spread',
                 description: 'People report being more and more stressed every day.  This trend is extending beyond adults, and is being reported by children and teenagers.  The amount of work people are responsible for has been increasing.  To understand what makes us feel stressed, students gather and analyze data about their own lives.',
             },
             {
-                title: 'Compare Your Snacking Habits',
+                title: 'Snacking Habits',
                 lesson: 'random-samples',
                 description: 'Childhood obesity is a major problem in the U.S. Many have called for food producers to provide consumers with nutritional information so that consumers can make wiser choices. Students collect data on their own snacking habits, and compare it to national trends.',
             },
@@ -91,12 +91,17 @@
             graph[p.title] = p;
         });
 
-        var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
+        // the "rest" are items that are not preferred or projects
+        var rest = Object.keys(graph).filter(title =>  
+            !( subjectPreference[subject].find(l => l.title == title) 
+                || projects.find(p => p.title == title)));
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
         
         var checked = [];
-        var originalOrder = projects.map(p => p.title).concat(subjectPreference[subject], rest);
+        var originalOrder = subjectPreference[subject].concat(
+            projects.map(p => p.title), rest);
+        console.log(originalOrder)
 
         // 1) Starting with projects, then preferred lessons, 
         // then non-preferred lesson in prerequisite order,
@@ -274,6 +279,7 @@
             display:    inline-table;
             position:   relative;
             height:     60px;
+            padding:    5px;
             width:      150px;
             color:      black;
             text-align: center;
@@ -286,8 +292,7 @@
         }
         .project {
             border-radius: 10px;
-            background: rgb(192,192,192);
-            padding:  10px;
+            background: rgb(255,143,143);
         }
         .accessible {background-color: #3c3cff4f; }
         .teaching {
@@ -418,11 +423,9 @@
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
-            <span class="legend teaching"><b>Where do you want to go?</b></span>
-            <br/>Click to select the projects or lessons you want to bring to your students! <i>When you select a project or lesson, it - <b>and its prerequisites</b> - will turn green.
+            <span class="legend teaching"><b>What do you want students to do?</b></span> - Click to select the projects or lessons you want to bring to your students! <i>When you select a project or lesson, it - <b>and its prerequisites</b> - will turn green.
             <p/>
-            <span class="legend accessible"><b>What can you teach <i>tomorrow</i>?</b></span> 
-            <br/>If you haven't selected anything yet, the blue items can be taught with <i>no prerequisites.</i> The more lessons and projects you select, the more material is immediately within reach!
+            <span class="legend accessible"><b>What can you teach <i>tomorrow</i>?</b></span> - If you haven't selected anything yet, the blue items can be taught with no prerequisites. As you select more lessons/projects, additional items will turn blue to indicate that they could be added without additional prerequisites.
             <p/>
             Select as many projects or lessons as you'd like, then name and save your pathway.
             <p/>
