@@ -1,13 +1,6 @@
 = What Table Do We Get?
 
-You have the following functions defined below @ifsoln{_read them _carefully!_}:
-
-  fun lookup-fixed(animal): animal["fixed"]                   end
-  fun is-dog(animal):       animal["species"] == "dog"        end
-  fun is-old(animal):       animal["age"] > 10                end
-  fun nametag(animal):      text(animal["name"], 20, "red")   end
-
-The table `t` below represents four animals from the shelter:
+The table below represents four animals from the shelter:
 
 [cols='6',options="header"]
 |===
@@ -53,37 +46,49 @@ Below is a list of expressions that use table methods. What table do we get, aft
 [cols=">.^15a, ^.^1a, 3, ^.^1a, .^15a",stripes="none",grid="none",frame="none"]
 |===
 
-| `t.order-by("age", true)`
+| `torder-by-age`
+| Transformer: `Sort`
+| Formula expression: `age`
+| Direction: `ascending`
 |*1*@ifsoln{-B} ||*A*
 | Produces a table with Toggle, Fritz, and Nori - but not Sunflower.
 
-| `t.order-by("pounds", false)`
+| `order-by-weight`
+| Transformer: `Sort`
+| Formula expression: `pounds`
+| Direction: `descending`
 |*2*@ifsoln{-F} ||*B*
 | Produces a table of all four animals, sorted youngest-to-oldest
 
-| `t.build-column("sticker", nametag)`
-|*3*@ifsoln{-H} ||*C*
+| `filter-is-old`
+| Transformer: `Filter`
+| Formula expressions: `Age > 10`
+|*3*@ifsoln{-C} ||*C*
 | Produces a table, with only Toggle.
 
-| `t.filter(is-old)`
-|*4*@ifsoln{-C}||*D*
+| `filter-is-fixed`
+| Transformer: `Filter`
+| Formula expression: `Fixed = TRUE`
+|*4*@ifsoln{-E}||*D*
 | Produces an identical table with an extra column called "dog", whose values are true, true, true, false
 
-| `t.filter(lookup-fixed)`
-|*5*@ifsoln{-E} ||*E*
+| `filter-is-dog`
+| Transformer: `Filter`
+| Formula expressions: `species = "dog"`
+|*5*@ifsoln{-A} ||*E*
 | Produces a table containing only Nori and Toggle.
 
-| `t.filter(is-dog)`
-|*6*@ifsoln{-A} ||*F*
+| `build-is-dog`
+| Transformer: `Build Attributer`
+| Formula expression: `species = "dog"`
+|*6*@ifsoln{-D} ||*F*
 | Produces a table with all four animals, sorted from heaviest to lightest.
 
-| `t.build-column("dog", is-dog)`
-|*7*@ifsoln{-D} ||*G*
+| `build-is-fixed`
+| Transformer: `Filter`
+| Formula expression: `fixed = "TRUE"`
+|*7*@ifsoln{-G} ||*G*
 | Won’t run: will produce an error
-
-| `t.filter(nametag)`
-|*8*@ifsoln{-G} ||*H*
-| Produces an identical table with an extra column called "sticker", whose values are images
 
 |===
 
