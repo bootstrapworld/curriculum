@@ -1,5 +1,14 @@
 = Image Scatterplots
 
+++++
+<style>
+.strategy-box { width: 100%; }
+
+.comparison * { font-size: 0.75rem !important; }
+.comparison td { background: #f7f7f8; padding: 0 !important; }
+.comparison .highlight { padding: 0 !important; }
+</style>
+++++
 @lesson-description{Image-scatter-plots expose deeper insight into subgroups within a population, motivating the need for more advanced analysis and adding if-expressions to students' programming toolkit.}
 
 [@lesson-intro-table]
@@ -37,7 +46,7 @@
 
 === Overview
 
-Students are introduced to their first `image-scatterplot`, which makes use of row lookups and `text` to label each dot with the name of the species. They then write code for a new `image-scatterplot`.
+Students are introduced to their first example of a _custom scatterplot_, which makes use of the `image-scatterplot` function function to replace each animals' dot with the name of the species. They then write code for another custom scatterplot.
 
 === Launch
 
@@ -47,7 +56,8 @@ Have students turn to @printable-exercise{scatterplot-explore.adoc} and give the
 * What did you notice?
 * What did you wonder?
 * Why does `scatter-plot` take in 3 Strings, when there are only two axes?
-* The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
+
+The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
 
 [.indentedpara]
 --
@@ -57,24 +67,24 @@ Have students turn to @printable-exercise{scatterplot-explore.adoc} and give the
 [.lesson-instruction]
 * What is the Domain of `image-scatter-plot`?
 
-_table, string, string and... what is that last part?... a function that consumes a Row and produces an Image!_
+_Table, String, String and... what is that last part?... a Function that consumes a Row and produces an Image!_
 
 [.lesson-point]
-In order to use the `image-scatter-plot` function, we have to first define a helper function that will lookup a Row and describe how to use the information it looked up to generate an Image.
+In order to use the `image-scatter-plot` function, we have to first define a helper function that consumes a Row and produces an image, using the information it looks up in the Row.
 
 === Investigate
 
 [.lesson-instruction]
-Before we move one, let's turn off the automatic build of the `scatterplot` in the program by putting a `#` at the start of line 14.
+Before we move on, let's turn off the evaluation of the `scatterplot` expression in the program by putting a `#` at the start of line 14.
 
-Have students complete @printable-exercise{pages/image-scatterplot-explore.adoc}. In the process they will be asked to try to explain how the `image-scatter-plot` is generated and to write a new `Row -> Image` helper function in order to generate a second `image-scatter-plot`.
+Have students complete @printable-exercise{pages/image-scatterplot-explore.adoc}. In the process they will be asked to try to explain how the `image-scatter-plot` is generated and to write a new `Row -> Image` helper function in order to generate a second custom scatterplot.
 
 === Synthesize
 
 [.lesson-instruction]
-* What Dataype is `species-tag`?
 * What does `species-tag` do?
-* How does this `image-scatter-plot` use `speciestag`?
+* How does this `image-scatter-plot` use `species-tag`?
+* What data type is `species-tag`?
 
 
 @span{.center}{@image{images/species-tag.png, "species-tag", 450}
@@ -82,9 +92,10 @@ Have students complete @printable-exercise{pages/image-scatterplot-explore.adoc}
 [.lesson-instruction]
 * How did having the dots labeled with the species change your understanding of the data?
 
-Make sure to direct the conversation _back to Data Science!_
-__This scatterplot makes it clear that we may want to analyze each species separately, rather than grouping them all together!
-__ In the next lesson, students will learn how to do just that.  What other scatter plots might this be useful for?
+Make sure to direct the conversation back to _Data Science!_
+__This scatterplot makes it clear that we may want to analyze each species separately, rather than grouping them all together!__ In the next lesson, students will learn how to do just that.
+
+What other scatter plots might this be useful for?
 
 [.lesson-instruction]
 * What did the other helper functions do?
@@ -97,18 +108,18 @@ __ In the next lesson, students will learn how to do just that.  What other scat
 
 _Writing a helper function_ `fun name-tag(r): text(r["name"], 15, "red") end`
 
-== Image-Scatterplots with Piecewise Functions @duration{20 minutes}
+== Image-Scatterplots with Conditionals @duration{20 minutes}
 
 === Overview
-Students discover how to use piecewise functions to change dot colors and sizes, how "dot appearance" can be used to show more data in a scatterplot, and why that would be valuable.
+Students discover how to use conditionals - piecewise functions in math - to change dot colors and sizes, how "dot appearance" can be used to show more data in a scatterplot, and why that would be valuable.
 
 === Launch
 [.lesson-instruction]
-So far, we've seen that the `scatter-plot` function makes uniform blue dots  and the `image-scatter-plot` function can label each point with a text image or a different sized dot or star. What other ideas do you have for how scatterplots could visually help us to understand data better? In other words, how else could we make scatterplots be more interesting than the ones with plain blue dots?
+So far, we've seen that the `scatter-plot` function makes uniform blue dots  and the `image-scatter-plot` function can label each point with some text, a different sized dot, or a star. What other ideas do you have for how scatterplots could visually help us to understand data better? How else could we make scatterplots be more interesting than the ones with plain blue dots?
 
 _Students might suggest using other colors, using letters, using numbers, using coordinates, using different shapes, using different sizes, etc._
 
-_To get more out of the `image-scatter-plot` function, we'll need to use piece-wise functions._
+_To get more out of the `image-scatter-plot` function, we'll need to use conditional functions._
 
 @comment{
 [.lesson-instruction]
@@ -123,8 +134,8 @@ Have students open the @link{https://code.pyret.org/editor#share=1SOLAau653CYFY0
 [.lesson-instruction]
 * What do you Notice?
 * What do you Wonder?
-* How is this program similar to the last one we looked at?
-* How is this code different from the program that made the `image-scatter-plot` with species labels?
+* How is this program similar to the that made the `image-scatter-plot` with species labels?
+* How is this code different?
 * What does this new visualization tell us about the relationship between age and weeks?
 * What other analysis would be helpful here?
 
@@ -136,7 +147,7 @@ Using @opt-printable-exercise{species-dot.adoc}, talk students through how the d
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
-* From looking at the examples, how do we know that we need to write a piecewise function?
+* From looking at the examples, how do we know that we need to write a conditional/piecewise function?
 
 Have students turn to @printable-exercise{sex-dot-dr.adoc} and use the design recipe to write a new helper function that will make different color dots based on the animals' sex.
 
@@ -147,29 +158,39 @@ Once they've got the Contract and Purpose Statement, have them come up with `exa
 [.lesson-instruction]
 Once another student _and_ the teacher have checked your work, type the `sex-dot` function into your starter file, and use it to make an `image-scatter-plot` using `age` as the x-axis and `weeks` as the y-axis.
 
-_If you have time or students who are ready for a challenge, you can also have them make a scatter-plot for dots distinguishing whether the animal is fixed or not using the directions at the end of the starter file or @opt-printable-exercise{fixed-dot-dr.adoc}.  Note: Students will discover that this doesn't work exactly like the other two functions they've seen because Fixed is a Boolean column. The code will work if written in either of the following ways:_
 
-@comment{Emmanuel - can we insert some css that will make this table smaller, and have smaller font, since it's supposed to be an aside?}
-
-
-[cols="<1a,<1a", options="header"]
+[.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
-| `fixed-dot` Using If-Else	| `fixed-dot` Using If
 |
-`fun fixed-dot(r):
-  if       (r["fixed"] == true)  : circle(5, "solid", "green")
-  else if  (r["fixed"] == false) : circle(5, "solid", "black")
+@span{.title}{ Optional: When your conditional is _already_ a Boolean }
+If you have time or students who are ready for a challenge, you can also have them make a scatter-plot for dots distinguishing whether the animal is fixed or not using the directions at the end of the starter file or @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column! The code will work if written in either of the following ways:
+[.comparison, cols="<4a,<3a", options="header"]
+!===
+! Checking the Boolean
+! Using the Boolean Directly
+
+!
+```
+fun fixed-dot(r):
+  if      (r["fixed"] == true) : circle(5, "solid", "green")
+  else if (r["fixed"] == false): circle(5, "solid", "black")
   end
-end`
-|
-`fun fixed-dot(r):
-  if r["fixed"] : circle(5, "solid", "green")
+end
+```
+!
+```
+fun fixed-dot(r):
+  if r["fixed"]: circle(5, "solid", "green")
   else: circle(5, "solid", "black")
   end
-end`
-|===
+end
+```
+!===
 
 For students who are really ready for a challenge, direct them to the @opt-online-exercise{https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c, Image Scatterplots with Value Ranges Starter File} and @opt-printable-exercise{value-range-dot-explore.adoc}
+
+|===
+
 
 === Synthesize
 
