@@ -557,13 +557,14 @@ EOF
 function resolveabbrevs() {
   local f=$1
   local localDISTROOTDIR=$2
+  local fdir=$(dirname $f)
   #echo doing resolveabbrevs $f $localDISTROOTDIR
   local mathjaxneeded=
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
     mathjaxneeded=1
   fi
-  CODELANG=pyret
+  local CODELANG=pyret
   if test "$PROGLANG" = wescheme; then
     CODELANG=racket
   fi
@@ -617,49 +618,56 @@ function resolveabbrevs() {
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
     $f
   #
-  cat > .cached/.bootstraplesson.txt <<EOF
+  # echo inserting bootstraplesson.js etc in $f in $(pwd)
+  if test ! -f $fdir/.cached/.bootstraplesson.txt; then
+  cat > $fdir/.cached/.bootstraplesson.txt <<EOF
     <script src="${localDISTROOTDIR}lib/bootstraplesson.js"></script>
     <script src="${localDISTROOTDIR}dependency-graph.js"></script>
     <script src="${localDISTROOTDIR}pathway-tocs.js"></script>
     <script>var pathway='${PATHWAY}';</script>
 EOF
+  fi
    $SED -i \
     -e '/^ *<link.*curriculum\.css/s/^/%INSERTBOOTSTRAPLESSON\0/' \
-    -e '/%INSERTBOOTSTRAPLESSON/r .cached/.bootstraplesson.txt' \
+    -e "/%INSERTBOOTSTRAPLESSON/r $fdir/.cached/.bootstraplesson.txt" \
     -e 's/%INSERTBOOTSTRAPLESSON//' \
     $f
   #
   if test "$mathjaxneeded"; then
-    cat > .cached/.mathjax.txt <<EOF
+    if test ! -f $fdir/.cached/.mathjax.txt; then
+    cat > $fdir/.cached/.mathjax.txt <<EOF
       <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
+    fi
     $SED -i \
       -e '/^ *<link.*curriculum\.css/s/^/%INSERTMATHJAX\0/' \
-      -e '/%INSERTMATHJAX/r .cached/.mathjax.txt' \
+      -e "/%INSERTMATHJAX/r $fdir/.cached/.mathjax.txt" \
       -e 's/%INSERTMATHJAX//' \
       $f
   fi
   #
   if test "$codemirrorneeded"; then
     #FIXME: is codemirror.css needed?
-    cat > .cached/.codemirror.txt <<EOF
+    if test ! -f $fdir/.cached/.codemirror.t; then
+    cat > $fdir/.cached/.codemirror.txt <<EOF
     <link rel="stylesheet" href="${localDISTROOTDIR}lib/codemirror.css" />
     <script src="${localDISTROOTDIR}lib/codemirror.js"></script>
     <script src="${localDISTROOTDIR}lib/runmode.js"></script>
     <script src="${localDISTROOTDIR}lib/scheme2.js"></script>
     <script src="${localDISTROOTDIR}lib/pyret-mode.js"></script>
 EOF
+    fi
 $SED -i \
   -e '/^ *<link.*curriculum\.css/s/^/%INSERTCODEMIRROR\0/' \
-  -e '/%INSERTCODEMIRROR/r .cached/.codemirror.txt' \
+  -e "/%INSERTCODEMIRROR/r $fdir/.cached/.codemirror.txt" \
   -e 's/%INSERTCODEMIRROR//' \
   $f
   fi
   #
-  tif=.cached/${f%.*}-comment.txt
+  tif=$fdir/.cached/${f%.*}-comment.txt
   if test ! -f $tif; then
-    tif=.cached/.${f%.*}-comment.txt
+    tif=$fdir/.cached/.${f%.*}-comment.txt
   fi
   if test -f $tif; then
     #echo tif for $f is $tif
@@ -2299,6 +2307,7 @@ function calculatedistrootdir() {
 
 function postproc_workbookpage() {
   local fhtmlcached=$1
+  # echo doing postproc_workbookpage $fhtmlcached
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
@@ -2412,6 +2421,7 @@ function run_postproc() {
         $postproc_func $fhtml &
       done
       wait
+      #FIXME: unparallelize for $NOPARALLEL?
     fi
   done
 }
