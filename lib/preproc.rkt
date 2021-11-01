@@ -828,14 +828,19 @@
   (when (and (string=? *pathway* "algebra")
              (or *narrative* *lesson-plan*))
     ;(printf "doing display-alternative-proglang\n")
-    (let ([other-proglang (if (string=? *proglang* "pyret") "wescheme" "pyret")]
-          [other-proglang-cased (if (string=? *proglang* "pyret") "WeScheme" "Pyret")])
+    (let ([other-proglang-cased (if (string=? *proglang* "pyret") "WeScheme" "Pyret")])
       (display
         (enclose-span ".other-proglang"
-          (format "link:{pathwayrootdir}../algebra-~a/~a[(Also available for ~a)]"
-                  other-proglang
-                  (cond [*narrative* "index.shtml"]
-                        [*lesson-plan* (format "lessons/~a/index.shtml" *lesson-plan*)])
+          (format "link:~a~a[(Also available for ~a)]"
+                  *dist-root-dir*
+                  (cond [*narrative*
+                          (let ([other-proglang (if (string=? *proglang* "pyret") "-wescheme" "")])
+                            (format "courses/algebra~a/index.shtml" other-proglang))]
+                        [*lesson-plan*
+                          (let ([other-lesson (if (string=? *proglang* "pyret")
+                                                  (format "~a-wescheme" *lesson-plan*)
+                                                  (regexp-replace "-wescheme$" *lesson-plan* ""))])
+                            (format "lessons/~a/index.shtml" other-lesson))])
                   other-proglang-cased)) o)
       (newline o)
       (newline o))))
