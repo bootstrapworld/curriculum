@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-10-30 # last modified
+LASTMOD=2021-11-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -808,13 +808,13 @@ function doadoc() {
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
   elif test $TEACHER_RESOURCES; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_RESOURCES_INPUT
   fi
@@ -838,21 +838,23 @@ function doadocs() {
 
   otherdirarg="#f"
   solutionsmodearg="#f"
+  boilerplate="#f"
 
   test $OTHERDIR && otherdirarg="#t"
   test $SOLUTION && solutionsmodearg="#t"
+  test $BOILERPLATE && boilerplate="#t"
 
 
   for f in $ff; do
     if test $TGTPATHWAY; then
-      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
       fi
       echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
     else
-      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
         echo lessons/$LESSONSUBDIR/${f%.adoc}.html >> $ADOC_POSTPROC_NONOTHERDIR_INPUT
@@ -1648,6 +1650,7 @@ function buildteacherresource() {
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc
       #$PROGDIR/adoc-preproc.rkt index.adoc
+      export TEACHER_RESOURCES=
     fi
     #checklinks index.shtml
   fi

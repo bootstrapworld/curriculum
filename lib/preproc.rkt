@@ -655,7 +655,7 @@
 (define (make-image img opts #:centered? [centered? #f])
   ;(printf "doing make-image ~s\n" img)
   (let ([img-qn (string-append *containing-directory* "/" img)])
-    (unless (or *narrative* *boilerplate*)
+    (unless (or *narrative* *target-pathway* *teacher-resources*)
       ;(printf "anonymizing ~s\n" img)
       (let ([img-anonymized (system-echo (format "~a/anonymize-filename" *progdir*) img)])
         (cond [img-anonymized
@@ -988,8 +988,8 @@
                       (fprintf lo "[[~a]]~n" lesson)
                       (fprintf toco "<<~a>>~n" lesson)
                       (fprintf lo "== ~a\n" lesson-title)
-                      (fprintf lo "\ninclude::~alessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
-                               *dist-root-dir* lesson)))))
+                      (fprintf lo "\ninclude::lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
+                               lesson)))))
               #:exists 'replace))
           #:exists 'replace))
       #:exists 'replace)
@@ -1078,6 +1078,7 @@
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
   (set! *solutions-mode?* solutions-mode)
+  (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
@@ -1541,7 +1542,7 @@
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
                 (fprintf o (create-acknowledgment))
-                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:lib/CCbadge.png[], window=\"_blank\"]\n")
+                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
                 (fprintf o (create-copyright *copyright-name*))
                 (fprintf o "\n--\n")
                 )
