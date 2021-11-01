@@ -722,14 +722,6 @@ function shadowcopydir() {
   done
 }
 
-function checkifsinglepdfpage() {
-  local fpdf="$1"
-
-  NUMPAGES=$(pdftk $fpdf dump_data|grep NumberOfPages|$SED -e 's/NumberOfPages:  *\([0-9][0-9]*\).*/\1/')
-
-  test "$NUMPAGES" = 1 || (echo;echo WARNING: $fpdf has $NUMPAGES pages)
-}
-
 function checkeachinternallink() {
   local f="$1"
   local containingf="$2"
