@@ -1290,6 +1290,21 @@ function buildcommonlessons() {
   export LESSONSUBDIR=.
 }
 
+function proglangversion() {
+  local f=$1
+
+  for pl in codap wescheme; do
+    if test $(echo $f|grep "\-${pl}$"); then
+      local g=${f%-*}
+      if test -d $g; then
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
   #echo doing builddependencyjson
@@ -1299,6 +1314,9 @@ function builddependencyjson() {
   echo "var graph = {" > $GRAPHFILE
   first=1
   for L in *; do
+    if proglangversion $L; then
+      continue
+    fi
     #echo L is $L
     Lbasename=$L
     # the following sanity checks shdnt be needed
