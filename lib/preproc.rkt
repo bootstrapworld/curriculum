@@ -727,14 +727,17 @@
         [g f])
     (cond [(string=? f "") #f]
           [(regexp-match #rx"://" f) (set! external-link? #t)]
+          [(regexp-match #rx"^mailto:" f) (set! external-link? #t)]
           [(regexp-match #rx"^#" f) #f]
           [else (set! f (string-append *containing-directory* "/" f))])
+    ;(printf "ext link = ~s\n" external-link?)
     (cond [(not include?)
            (cond [(string=? f "")
                   (printf "WARNING: ~a: @link with no file argument\n\n"
                           (errmessage-context))]
                  [(regexp-match #rx"://" f)
                   (check-link f #:external? #t)]
+                 [(regexp-match #rx"^mailto:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    (let ([existent-file? #f])
@@ -752,8 +755,11 @@
                            [(file-exists? (path-replace-extension f ".pdf"))
                             (set! existent-file? #t)
                             (set! g (path-replace-extension g ".pdf"))])
-                     ;(printf "link refers to ~a\n\n" f)
-                     (let ([short-ref? (abbreviated-index-page? g)])
+                     (when existent-file?
+                       (set! f (build-path *containing-directory* g)))
+                    ;(printf "link ~a refers to ~a\n\n" g f)
+                     (let ([short-ref? (abbreviated-index-page? f)])
+                       ;(printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml")
                                    short-ref?)
