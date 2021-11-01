@@ -762,6 +762,7 @@
                        ;(printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml")
+                                   (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
                          (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
