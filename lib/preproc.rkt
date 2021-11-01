@@ -921,9 +921,9 @@
                         (loop))))
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
-        (when (file-exists? lesson-index-file)
-          ;(printf "~a exists\n" lesson-index-file)
-          (fprintf o "link:pass:[~a?pathway=~a][~a] ::" lesson-index-file *pathway* lesson-title)
+        (when #t
+          ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *pathway* lesson-title)
           (if lesson-description
               (display lesson-description o)
               (display " {nbsp}" o)))
