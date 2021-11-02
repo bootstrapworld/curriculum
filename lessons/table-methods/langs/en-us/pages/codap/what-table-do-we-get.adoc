@@ -43,50 +43,67 @@ The table below represents four animals from the shelter:
 
 Below is a list of expressions that use table methods. What table do we get, after evaluating each one? _Match_ each expression@ifsoln{_left_} to the table we get @ifsoln{_right_}.
 
-[cols=">.^15a, ^.^1a, 3, ^.^1a, .^15a",stripes="none",grid="none",frame="none"]
+[cols=">.^20a, ^.^1a, 3, ^.^1a, .^15a",stripes="none",grid="none",frame="none"]
 |===
 
-| `torder-by-age`
-| Transformer: `Sort`
-| Formula expression: `age`
-| Direction: `ascending`
+| `order-by-age`
+
+Transformer: Sort
+
+Formula expression: age
+
+Direction: ascending
+
 |*1*@ifsoln{-B} ||*A*
 | Produces a table with Toggle, Fritz, and Nori - but not Sunflower.
 
 | `order-by-weight`
-| Transformer: `Sort`
-| Formula expression: `pounds`
-| Direction: `descending`
+
+Transformer: Sort
+
+Formula expression: pounds
+
+Direction: descending
 |*2*@ifsoln{-F} ||*B*
 | Produces a table of all four animals, sorted youngest-to-oldest
 
 | `filter-is-old`
-| Transformer: `Filter`
-| Formula expressions: `Age > 10`
+
+Transformer: Filter
+
+Formula expressions: Age > 10
 |*3*@ifsoln{-C} ||*C*
 | Produces a table, with only Toggle.
 
 | `filter-is-fixed`
-| Transformer: `Filter`
-| Formula expression: `Fixed = TRUE`
+
+Transformer: Filter
+
+Formula expression: Fixed = TRUE
 |*4*@ifsoln{-E}||*D*
 | Produces an identical table with an extra column called "dog", whose values are true, true, true, false
 
 | `filter-is-dog`
-| Transformer: `Filter`
-| Formula expressions: `species = "dog"`
+
+Transformer: Filter
+
+Formula expression: species = "dog"
 |*5*@ifsoln{-A} ||*E*
 | Produces a table containing only Nori and Toggle.
 
 | `build-is-dog`
-| Transformer: `Build Attributer`
-| Formula expression: `species = "dog"`
+
+Transformer: Build Attribute
+
+Formula expression: species = "dog"
 |*6*@ifsoln{-D} ||*F*
 | Produces a table with all four animals, sorted from heaviest to lightest.
 
 | `build-is-fixed`
-| Transformer: `Filter`
-| Formula expression: `fixed = "TRUE"`
+
+Transformer: Filter
+
+Formula expression: fixed = "TRUE"
 |*7*@ifsoln{-G} ||*G*
 | Won’t run: will produce an error
 
