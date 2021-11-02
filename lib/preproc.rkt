@@ -402,11 +402,50 @@
                 [else
                   (loop (cdr args) (cons arg r))])))))
 
+(define (this-proglang-lesson? this-lesson all-lessons)
+  (let ([result 0])
+    (cond [(string=? *proglang* "pyret")
+           (set! result #t)
+           ;if lesson has suffix -otherproglang and deleting that suffix
+           ;gives a lesson that is present, then don't include
+           (for ([-other-proglang '("-codap$" "-wescheme$")])
+             (when (regexp-match -other-proglang this-lesson)
+               (let ([this-lesson-delete-proglang
+                       (regexp-replace -other-proglang this-lesson "")])
+                 (when (member this-lesson-delete-proglang all-lessons)
+                   (set! result #f)))))]
+          [else
+            (set! result #f)
+            (let ([-this-proglang (string-append "-" *proglang* "$")])
+              ;if lesson has suffix -thisproglang, include
+              (cond [(regexp-match -this-proglang this-lesson)
+                     (set! result #t)]
+                    [else
+                      (set! result #t)
+                      ;if lesson has suffix -otherproglang, and deleting
+                      ;that suffix gives a lesson that is present, don't include
+                      (for ([-other-proglang '("-codap$" "-wescheme$")])
+                        (unless (string=? -this-proglang -other-proglang)
+                          (when (regexp-match -other-proglang this-lesson)
+                            (let ([this-lesson-delete-proglang
+                                    (regexp-replace -other-proglang this-lesson "")])
+                              (when (member this-lesson-delete-proglang all-lessons)
+                                (set! result #f))))))
+                      (when result
+                        ;if lesson with suffix -thisproglang exists, don't include
+                        (let ([lesson-proglang (string-append this-lesson "-" *proglang*)])
+                          (when (member lesson-proglang all-lessons)
+                            (set! result #f))))]))])
+    result))
+
 (define (display-prereqs-bar o)
-  ;(printf "doing display-prereqs-bar in ~s\n" (current-directory) )
-  (let ([all-lessons (read-data-file (format "../../lesson-order.txt"))])
+  ;(printf "doing display-prereqs-bar in ~s\n" *in-file* )
+  (let* ([all-lessons (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))]
+         [relevant-lessons (filter (lambda (x) (this-proglang-lesson? x all-lessons))
+                                   all-lessons)])
     ;(printf "f : ~s\n" (file-exists? (format "../../lesson-order.txt")))
     ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
+    ;(printf "*lesson-prereqs* = ~s\n" *lesson-prereqs*)
     ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
     ;(display "[.sidebarlessons]\n" o)
@@ -415,7 +454,7 @@
 
     ;(newline o)
     (display (create-begin-tag "ul" "") o)
-    (for ([lesson all-lessons])
+    (for ([lesson relevant-lessons])
       (let ([lesson-title lesson]
             [lesson-title-file (build-path *containing-directory* 'up lesson ".cached" ".index.titletxt")])
         (cond [(file-exists? lesson-title-file)
@@ -423,9 +462,11 @@
               [else
                 (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
         (let ([lk
-                (format "link:{pathwayrootdir}lessons/pass:[~a]/index.shtml[~a]"
+                (format "link:~alessons/pass:[~a]/index.shtml[~a]"
+                        *dist-root-dir*
                         lesson lesson-title)])
           (when (member lesson *lesson-prereqs*)
+            ;(printf "lesson ~s is prereq\n" lesson)
               (set! lk (enclose-span ".prerequisite" lk)))
           (display (enclose-tag "li" "" lk) o)
           (newline o))))
@@ -1047,11 +1088,13 @@
             (unless (member p *lesson-prereqs*)
               ;(printf "adding p = ~s\n" p)
               (set! *lesson-prereqs* (cons p *lesson-prereqs*))))))))
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-prereq.txt.kp")
-    (lambda (o)
-      (for ([p *lesson-prereqs*])
-        (display p o) (newline o)))
-    #:exists 'replace))
+  (let ([this-lsn-prereq-file (build-path *containing-directory* ".cached" ".lesson-prereq.txt.kp")])
+    ;(printf "writing to prereq-file = ~s\n" this-lsn-prereq-file)
+    (call-with-output-file this-lsn-prereq-file
+      (lambda (o)
+        (for ([p *lesson-prereqs*])
+          (display p o) (newline o)))
+      #:exists 'replace)))
 
 (define (init-flags)
   (set! *autonumber-index* 1)
@@ -1062,6 +1105,7 @@
   (set! *chapters-used* '())
   (set! *textbooks-represented* '())
   (set! *practices-merited* '())
+  (set! *lesson-prereqs* '())
   )
 
 (define (preproc-adoc-file in-file
@@ -1198,7 +1242,8 @@
                             (let ([args (read-commaed-group i directive)])
                               (printf "WARNING: Directive @std is obsolete\n\n")
                               )]
-                           [(string=? directive "prereqs-stds")
+                           [(or (string=? directive "prereqs-stds")
+                                (string=? directive "lesson-prereqs"))
                             (add-lesson-prereqs (read-commaed-group i directive))
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
