@@ -7,98 +7,118 @@
 </style>
 ++++
 
-You have the following functions defined below  (read them _carefully!_):
+You have created and save the following Transformers. (Read them _carefully!_)
 
-  fun is-fixed(r):  r["fixed"]                  end
-  fun is-young(r):  r["age"] < 4                end
-  fun nametag(r):   text(r["name"], 20, "red")  end
-  fun is-female(r): r["sex"] == "female"        end
-  fun kilograms(r): r["pounds"] / 2.2           end
-  fun is-heavy(r):  r["kilos"] > 25             end
-  fun is-cat(r):    r["species"] == "cat"       end
-  fun is-dog(r):    r["species"] == "dog"       end
-
-Assume that `animals-table` is defined, and represents all the animals at the shelter. Solve the word problems below using these functions with `filter`, `build-column`, and `order-by`.
-
-[cols="^.^1a, .^4a,.^10a"]
+[cols="5,5,5"]
 |===
+|@span{.center}{*`filter-is-fixed`*}
+
+Transformer: Filter
+
+Formula expression: Fixed = “TRUE”
+
+|@span{.center}{*`filter-is-young`*}
+
+Transformer: Filter
+
+Formula expression: Age < 4
+
+|@span{.center}{*`filter-is-female`*}
+
+Transformer: Filter
+
+Formula expression: Sex = “female”
+
+|@span{.center}{*`build-kilos`*}
+
+Transformer: Build Attribute
+
+Name of new attribute: Kilos
+
+Formula expression: Weight (lbs) / 2.2
+
+|@span{.center}{*`filter-is-heavy`*}
+
+Transformer: Filter
+
+Formula expression: Kilos > 25
+
+|@span{.center}{*`filter-is-dog`*}
+
+Transformer: Filter
+
+Formula expression: Species =  “dog”
+
+|@span{.center}{*`filter-is-cat`*}
+
+Transformer: Filter
+
+Formula expression: Species = cat
+
+|
+|
+|===
+
+@vspace{1ex}
+
+Solve the word problems below using the Transformers listed above.
+
+[cols="^.^1a,.^2a,.^1a,.^4a,.^4a"]
+|===
+|
+| Prompt
+| Does order matter?
+| List the transformers in order.
+| Use function notation.
+
 | *@n*
 | Create a table of all female cats.
-|@ifsoln{
-----
- animals-table
-   .filter(is-female) # order doesn't matter here!
-   .filter(is-cat)
-----
-}
+| No
+|Apply `filter-is-female`.
+
+Apply `filter-is-cat`.
+| filter-is-cat(filter-is-female(animals-table))
 
 | *@n*
 | Create a table of all young, fixed animals.
-|@ifsoln{
-----
- animals-table
-   .filter(is-young) # order doesn't matter here!
-   .filter(is-fixed)
-----
-}
+| @ifsoln{No}
+| @ifsoln{
+Apply `filter-is-young`.
+
+Apply `filter-is-fixed`.}
+| @ifsoln{filter-is-young(filter-is-fixed(animals-table))}
 
 | *@n*
 | Create a table of all female dogs, converting their weight to kilograms.
-|@ifsoln{
-----
- animals-table
-   .filter(is-female) # order doesn't matter here!
-   .filter(is-dog)
-   .build-column("kilos", kilograms)
-----
-}
+| @ifsoln{No}
+| @ifsoln{
+Apply `filter-is-female`.
+
+Apply `filter-is-dog`.
+
+Apply `build-kilos`.}
+| @ifsoln{filter-is-female(filter-is-dog(animals-table))}
 
 | *@n*
 | Create a table of all heavy dogs.
-|@ifsoln{
-----
- animals-table
-   .filter(is-dog)
-   .build-column("kilos", kilograms)
-   .filter(is-heavy) # must come AFTER the build-column!
-----
-}
+| @ifsoln{Yes}
+| @ifsoln{
+Apply `filter-is-dog`.
+
+Apply `build-kilos`.
+
+Apply `filter-is-heavy`.}
+| @ifsoln{filter-is-dog(build-kilos(filter-is-heavy(animals-table))}
 
 | *@n*
 | Create a table of all young, fixed dogs, sorted from lightest to heaviest.
-|@ifsoln{
-----
- animals-table
-   .filter(is-young) # order doesn't matter here!
-   .filter(is-fixed)
-   .filter(is-dog)
-   .order-by("pounds", true)
-----
-}
+| @ifsoln{No}
+| @ifsoln{
+Apply `filter-is-young`.
 
-| *@n*
-| Create a table of all fixed, young animals, with an extra column showing images of their nametags.
-|@ifsoln{
-----
- animals-table
-   .filter(is-young) # order doesn't matter here!
-   .filter(is-fixed)
-   .build-column("tag", nametag) # sensible name
-----
-}
+Apply `filter-is-fixed`.
 
-| *@n*
-| Create a table of fixed, female cats, with a column showing images of their nametages, sorted heaviest-to-lightest by their weight in kilograms.
-|@ifsoln{
-----
- animals-table
-   .filter(is-fixed) # order doesn't matter here!
-   .filter(is-female)
-   .filter(is-cat)
-   .build-column("tag", nametag) # sensible name
-   .build-column("kilos", kilograms)
-   .order-by("kilos", false)
-----
-}
+Apply `filter-is-dog`.}
+| @ifsoln{filter-is-young(filter-is-fixed(filter-is-dog(animals-table)))}
 
 |===
