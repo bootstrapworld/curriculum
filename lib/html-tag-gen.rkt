@@ -12,6 +12,7 @@
   enclose-textarea-2
   enclose-math
 
+  erase-span-stack!
   span-stack-present?
   top-span-stack
   increment-top-span-stack
@@ -102,6 +103,9 @@
 (struct span (real? [nesting #:mutable]))
 
 (define *span-stack* '())
+
+(define (erase-span-stack!)
+  (set! *span-stack* '()))
 
 (define (span-stack-present?)
   (pair? *span-stack*))

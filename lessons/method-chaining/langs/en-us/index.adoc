@@ -27,7 +27,7 @@
 |
 * Make sure all materials have been gathered
 * Decide how students will be grouped in pairs
-* Computer for each student (or pair), with access to the internet* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}
+* Computer for each student (or pair), with access to the internet. All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 
 @lang-prereq
@@ -53,7 +53,7 @@ Define the Compute functions on @printable-exercise{pages/design-recipe-1.adoc} 
 
 Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
 
-By using the `and` and `or` operators, we can _combine_ boolean tests @ifproglang{codap}{on a single function, like `Filter`}, as in: @ifproglang{pyret}{`(1 > 2) and ("a" == "b")`} @ifproglang{codap}{`Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
+By using the `and` and `or` operators, we can _combine_ boolean tests @ifproglang{codap}{on a single function, like `Filter`.} @ifproglang{pyret}{, as in: `(1 > 2) and ("a" == "b")`} @ifproglang{codap}{Once we've opened the `Filter` transformer, we would tell CODAP to keep all rows that satisfy `Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
 
 @ifproglang{pyret}{For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called "Method Chaining"!} @ifproglang{codap}{When we want to chain together _different_ transformers, however, this strategy will not work. We'll need to find another way!}
 |===
@@ -110,15 +110,14 @@ animals-table
 @ifproglang{codap}{
 Now that we are doing more sophisticated analyses, we might find ourselves in a situation where we want to use a series of transformers!
 
-Let’s say that a journalist comes to the shelter. She wants to write a story about a successful pet adoption--but she has a very specific set of criteria. The reporter wants to report on the adoption of a fixed animal that weighs no more than 9 kilograms. She wants to consider all eligible animals in order from lightest to heaviest.
+Let’s say that a journalist comes to the shelter. She wants to write a story about a successful pet adoption--but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms. She wants to consider all eligible animals in order from lightest to heaviest.
 
 This reporter also informs you that it might take some time for her to find the perfect pet adoption scenario. Until she finds what she’s looking for, she wants a weekly updated list of the pets who meet her criteria.
 
 Let's break down the reporter's specifications:
 [.lesson-instruction]
 - Give the weight in kilograms.
-- Include only fixed animals.
-- Include only animals that weigh less than 9 kilograms.
+- Include only animals that weigh no more than 9 kilograms.
 - Order weight in kilograms from lightest to heaviest.
 - Update the table weekly to reflect the changing population of the shelter.
 
@@ -134,42 +133,35 @@ Order matters: Build, Filter, Order.
 Suppose we want to build a column and then use it to filter our table. If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
 
 @ifproglang{codap}{
+
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
-@span{.title}{Tip: Saving Transformers}
-Transformers can be saved! Saving a particular configuration of a transformer is useful so that the transformer can be easily accessed in the future. When we save a transformer, we’ll want to give it a useful name and purpose statement, just like we practiced earlier in this lesson.
+@span{.title}{Tip: Saving Transformers and Renaming Tables}
 
-Once a transformers is saved, students can abstract over a particular computation that they want to perform on the data (the way functions in Algebra are abstractions over computations in arithmetic).
+Saving a particular configuration of a transformer is useful so that the transformer can be easily accessed in the future. When we save a transformer, we want to give it a useful name and purpose statement, just like we practiced earlier in this lesson. Just as functions in algebra can be re-used with multiple inputs, Transformers can be re-used with multiple tables.
+
+We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(Sort(Filter(BuildAttribute(Animals-Dataset))))`. That's a lot of parentheses! As an alternative, student might consider using the following table names in this activity: `animals-in-kg`, followed by `light-animals-in-kg`, and then `ordered-light-animals-in-kg`).
 |===
-}
+
 Let’s go through how we might meet the journalist’s needs.
 
-[.lesson-instruction]
 - Give the weight in kilograms.
 
 For this step, we’ll use `Build Attribute`, which makes a new copy of the dataset, adding a `Weight (kgs)` column. (Hint: To get from pounds to kilograms, divide by 2.205.)
 
-[.lesson-instruction]
-- Include only fixed animals.
+- Include only animals that weigh no more than 9 kilograms.
 
-Here, we are going to apply the `Filter` transformer _not_ to our original Animals Dataset, but to the transformed copy of the original dataset. When we select `Dataset to Filter`, we must choose `BuildAttribute(Animals-Dataset)`. We will then specify that we want to keep all rows that satisfy `Fixed = “TRUE”`.
+We are going to `Filter` now, applying the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `(BuildAttribute(Animals-Dataset))`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
 
-[.lesson-instruction]
-- Include only animals that weigh less than 9 kilograms.
-
-We are going to `Filter` again, but this time we apply the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `Filter{BuildAttribute(Animals-Dataset)`.
-
-[.lesson-instruction]
 - Order weight in kilograms from lightest to heaviest.
 
 Remember - we want to be able to easily create a table that meets the journalist’s specifications, so we’ll want to use the `Sort` transformer here, rather than the `Sort` dropdown option that appears when we click `Weight`. Be sure to select the correct dataset to sort!
 
-[.lesson-instruction]
 - Update the table weekly to reflect the changing population of the shelter.
 
 Because we’re using transformers, each time the Animals Table is updated, the journalist’s table will be updated, too! Try adding or removing a row from the original table and observe the ripple effect in your chained tables.
-
+}
 === Investigate
 [.lesson-point]
 When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{transformers}, it’s important to build first, then filter, and then order.

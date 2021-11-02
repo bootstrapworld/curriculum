@@ -45,46 +45,68 @@
             'checking-your-work' : "Evaluating Correctness"
         }
 
-        var projects = {
-            'Make an Infographic' : {
+        var projects = [
+            {
+                title: 'Make an Infographic',
                 lesson: 'displaying-categorical-data',
-                description: 'dummy text',
+                description: 'Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. This project is an opportunity for students to become more flexible math thinkers while tapping into their creativity, and can be made on the computer or with pencil and paper.',
             },
-            'Draw a Flag' : {
+            {
+                title: 'Draw a Flag',
                 lesson: 'flags',
-                description: 'dummy text',
+                description: 'Students recreate images of flags of varying complexity by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely.',
             },
-            'Make a Rocket Fly': {
+            {
+                title: 'Make a Rocket Fly',
                 lesson: 'solving-word-problems',
-                description: 'dummy text',
+                description: 'Students make a rocket blast off, with a flight path following linear (straight-line), quadratic (accelerating or up-and-down), or exponential paths - depending on your learning goals. ',
             },
-            'Protect a Butterfly': {
+            {
+                title: 'Protect a Butterfly',
                 lesson: 'inequalities3-sam',
-                description: 'dummy text',
+                description: 'Students apply inequalities in the plane to protect a butterfly from going too far to each side of the screen, then explore compound inequalties (union/intersection and AND/OR to protect the butterfly on all sides at once.',
             },
-            'Make a Video Game' : {
+            {
+                title: 'Make a Video Game',
                 lesson: 'inequalities-collision',
-                description: 'dummy text',
+                description: 'Students build a videogame of their own design! Every game must have a player (their avatar), a danger (something to avoid), and a target (something to chase). Students build their world using function composition, animate their characters through linear functions, detect boundaries with compound inequalities, and detect collisions with the distance formula. This project can be extended into more complex movement (quadratic, exponential, trigonometric) and "cheat codes" (piecewise/conditional) functions.',
             },
-            'Evaluate Your Stress Level' : {
+            {
+                title: 'Your Stress Level',
                 lesson: 'measures-of-spread',
-                description: 'dummy text',
+                description: 'People report being more and more stressed every day.  This trend is extending beyond adults, and is being reported by children and teenagers.  The amount of work people are responsible for has been increasing.  To understand what makes us feel stressed, students gather and analyze data about their own lives.',
             },
-            'Compare Your Snacking Habits' : {
+            {
+                title: 'Snacking Habits',
                 lesson: 'random-samples',
-                description: 'dummy text',
+                description: 'Childhood obesity is a major problem in the U.S. Many have called for food producers to provide consumers with nutritional information so that consumers can make wiser choices. Students collect data on their own snacking habits, and compare it to national trends.',
             },
-        }
+        ];
 
-        var rest = Object.keys(graph).filter(l =>  !subjectPreference[subject].includes(l));
+        // compute prerequisites for projects, add to graph
+        projects.forEach((p) => {
+            p.title = "Project: " + p.title;
+            p.prerequisites = graph[p.lesson].prerequisites;
+            p.type = "project";
+            graph[p.title] = p;
+            subjectPreference[subject].push(p.title);
+        });
+        // Always put subject preference and projects first!
+        var firstContainers = subjectPreference[subject].concat(projects)
+        // Sort the "rest" by prerequisite
+        var rest = Object.keys(graph)
+            .filter(l => !firstContainers.includes(l));
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
-        
+
         var checked = [];
-        var originalOrder = subjectPreference[subject].concat(rest);
-        
-        // 1) Starting with preferred lessons, then non-preferred lesson in prerequisite order,
-        // draw the container for each lesson and add it to the lesson explorer
+        var originalOrder = firstContainers.concat(rest);
+        console.log('rest is', rest, 'originalOrder', originalOrder);
+
+        // 1) Starting with projects, then preferred lessons, 
+        // then non-preferred lesson in prerequisite order,
+        // draw the container for each lesson and add it to the 
+        // lesson explorer
         // 2) Get the search placeholder text rotating
         // 3) Register the resize handler and do a resize
         function draw() {
@@ -98,6 +120,9 @@
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
                 container.className =  "container";
+                if(graph[l].type == "project") { 
+                    container.classList.add("project");
+                }
                 container.innerHTML = `
                     <span class="title">${graph[l].title}</span>
                     <span class="description rightTip">
@@ -105,26 +130,12 @@
                         <a href="lessons/${l}/index.shtml">Check it out!</a>
                     </span>`;
                 container.onclick = () => update(container);
-                document.getElementById('lessonExplorer').appendChild(container);
+                document.getElementById('materialExplorer').appendChild(container);
             });
             function updatePlaceholder(e, txt) { e.placeholder = txt; }
             if(registerTxtRotation) {
                 registerTxtRotation(document.getElementById("searchBox"), updatePlaceholder);
             }
-
-            var projectsExplorer = document.getElementById('projectExplorer');
-            Object.keys(projects).forEach(p => {
-                console.log(p);
-                var container = document.createElement("div");
-                container.id = p;
-                container.className = "container";
-                container.innerHTML = `
-                    <span class="title">${p}</span>
-                    <span class="description rightTip">
-                        ${projects[p].description}
-                    </span>`;
-                projectsExplorer.appendChild(container);
-            });
             window.addEventListener('resize', resize);
             resize();
         }
@@ -134,7 +145,7 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout( () => {
                 var containers = document.getElementsByClassName('container');
-                var pageWidth = document.getElementById("lessonExplorer").clientWidth;
+                var pageWidth = document.getElementById("materialExplorer").clientWidth;
                 if(containers.length == 0) return; // no lessons, so no work to do!
                 var containerWidth = containers[0].offsetWidth + 
                     2*parseInt(getComputedStyle(containers[0]).marginLeft);
@@ -213,7 +224,7 @@
         function search() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout( () => {
-                const explorer = document.getElementById('lessonExplorer');
+                const explorer = document.getElementById('materialExplorer');
                 var str = document.getElementById('searchBox').value;
                 var results;
 
@@ -228,7 +239,6 @@
                 }
                 // sort the results in *reverse order*, since we append nodes at the beginning
                 results = results.sort((a, b) => a.matches > b.matches? -1 : 1);
-                console.log(results);
                 const bestMatch = results[0].matches;
                 const step = bestMatch? 1 / (bestMatch + 1) : 0.25; 
                 results.reverse().forEach(r => {
@@ -258,16 +268,19 @@
     <style>
         #pathways { min-height: 170px; transition: all 0.25s linear;}
         #pathways:hover { min-height: 400px; }
-        #lessonExplorer, #projectExporer {
+        #materialExplorer {
             width: 100%;
-            overflow-y: scroll;
+            overflow: auto;
             border: solid 1px black;
             text-align: center;
+            border-top:none;
+            border-bottom:none;
         }
         .container {
             display:    inline-table;
             position:   relative;
-            height:     60px;
+            height:     80px;
+            padding:    5px;
             width:      150px;
             color:      black;
             text-align: center;
@@ -277,6 +290,11 @@
             background-color: white;
             cursor:     pointer;
             transition: background-color linear 0.5s;
+        }
+        #materialExplorer div.container:last-child{ margin-bottom: 150px; }
+        .project {
+            border-radius: 10px;
+            border: 2px solid rgb(255,143,143);
         }
         .accessible {background-color: #3c3cff4f; }
         .teaching {
@@ -365,6 +383,36 @@
     <div id="body">
         <div class="clearfix item">
             <h1>Materials</h1>
+            <div id="pathways" class="item bottom-border">
+                <ul class="tab">
+                    <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra/images/Logo.png" alt="Bootstrap:Algebra"/></a>
+                        <div id="algebra" class="tabcontent">
+                            <h3>Recommended for: Grades 7-12</h3>
+                            The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
+                        </div>
+                    </li>
+                    <li class="tablinks"><a href="/materials/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
+                        <div id="data" class="tabcontent">
+                            <h3>Recommended for: Grades 7-12</h3>
+                            What defines the greatest musician of all time? How is the population of your state changing? Does drinking milk really make you taller? Answering these questions involves collecting and manipulating data, from sports stats to record sales to census data.  This pathway teaches students to view programs as questions we ask of data.  Students form their own questions about the world around them, and learn how to analyze data critically and carefully to find answers.  Business, science, and history teachers can utilize this module to help students make inferences from data.  Math teachers can use this module to introduce foundational concepts in statistics.  It also works great as a module for AP CS Principles' unit on data!
+                        </div>
+                    </li>
+                    <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
+                        <div id="structures" class="tabcontent">
+                            <h3>Recommended for: Grades 9-12</h3>
+                            <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class. Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
+                        <div id="hoc" class="tabcontent">
+                            <h3>Recommended for: Grades 9-10</h3>
+                            Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <p>
             Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
             </p>
@@ -375,53 +423,14 @@
             After Bootstrap,  students are prepared to tackle <a href="BeyondBootstrap.shtml">several college-level textbooks</a>, including one that bridges <strong>from Pyret to Python</strong>.
             </p>
         </div>
-        <div id="pathways" class="item bottom-border">
-            <ul class="tab">
-                <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
-                    <div id="algebra" class="tabcontent">
-                        <h3>Recommended for: Grades 7-12</h3>
-                        The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
-                    </div>
-                </li>
-                <li class="tablinks"><a href="/materials/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
-                    <div id="data" class="tabcontent">
-                        <h3>Recommended for: Grades 7-12</h3>
-                        What defines the greatest musician of all time? How is the population of your state changing? Does drinking milk really make you taller? Answering these questions involves collecting and manipulating data, from sports stats to record sales to census data.  This pathway teaches students to view programs as questions we ask of data.  Students form their own questions about the world around them, and learn how to analyze data critically and carefully to find answers.  Business, science, and history teachers can utilize this module to help students make inferences from data.  Math teachers can use this module to introduce foundational concepts in statistics.  It also works great as a module for AP CS Principles' unit on data!
-                    </div>
-                </li>
-                <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
-                    <div id="structures" class="tabcontent">
-                        <h3>Recommended for: Grades 9-12</h3>
-                        <a href="courses/reactive">Bootstrap:Reactive</a></b> goes deeper into programming, building events and data structures on top of the foundation laid by our intro course and allowing students to build far more sophisticated programs. We've listed the breakdown of concepts in the table below, so you can find the best fit for your class. Students learn how the world-based event loop that drives their Bootstrap:Algebra game works, and use it to create animations using simple datatypes for their world. They then learn about data structures, and design a World structure for a sophisticated game of their own design.
-                        </p>
-                    </div>
-                </li>
-                <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
-                    <div id="hoc" class="tabcontent">
-                        <h3>Recommended for: Grades 9-10</h3>
-                        Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.
-                    </div>
-                </li>
-            </ul>
-        </div>
         <div class="item bottom-border">
             <h2>Build your own pathway</h2>
 
-            <h3>By project</h3>
-            Choose the projects you'd like your student to complete, and we'll fill in the lessons you need!
-            <div id="projectExplorer">
-            </div>
-
-
-            <h3>By lesson</h3>
-            Click to select the lessons you would like to teach!
-            <br/>
-            <ul style="margin: 6px 0px;">
-                <li>When you select a lesson, it - <b>and its prerequisites</b> - will <span class="legend teaching">turn green</span>.</li>
-                <li>If you haven't selected any lesson yet, the <span class="legend accessible">blue ones</span> are lessons you can teach right away, with <i>no prerequisites.</i> And the more lessons you select, the more lessons are immediately within reach!</li>
-            </ul>
+            <span class="legend teaching"><b>What do you want students to do?</b></span> - Click to select the projects or lessons you want to bring to your students! <i>When you select a project or lesson, it - <b>and its prerequisites</b> - will turn green.</i>
             <p/>
-            <b>Select</b> as many lessons as you'd like to include in your pathway before naming and saving.
+            <span class="legend accessible"><b>What can you teach <u><i>tomorrow?</i></u></b></span> - If you haven't selected anything yet, the blue items can be taught with no prerequisites. As you select more lessons/projects, additional items will turn blue to indicate that they could be added without additional prerequisites.
+            <p/>
+            Select as many projects or lessons as you'd like, then name and save your pathway.
             <p/>
 
             <div id="search">
@@ -435,10 +444,10 @@
             <p>
             Having taught <span id="checkedCount" class="count">LOADING</span> Bootstrap lessons, you can <i>immediately</i> jump into <span id="accessibleCount" class="count">LOADING</span> other lessons!
             </p>
-            <div id="lessonExplorer"></div>
+            <div id="materialExplorer"></div>
             <p/>
             <div id="summary">
-                <strong>The lessons you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
+                <strong>The lessons or projects you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
                 <p/>
                 We've created a custom pathway just for you, with links to all the lesson materials, workbook pages, activities, and more! Enter a name to see your personalized pathway, and bookmark the resulting page to return to it at any time!
                 <p/>

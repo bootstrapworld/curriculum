@@ -66,6 +66,7 @@
         "OK.3.A.V.01" ; identical standard
         "OK.4.AP.V.01"; identical standard
         "OK.5.AP.V.01"; identical standard
+        "1B-AP-09"
         "2-AP-11"
         )
 
@@ -77,6 +78,7 @@
         "OK.7.N.2.4"
         "OK.7.AP.A.01"
         "OK.8.AP.C.01"
+        "2-AP-11"
         ) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -111,6 +113,7 @@
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
+        "3B-AP-10"
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         )
@@ -133,6 +136,7 @@
         "OK.6.A.1.1"
         "OK.7.GM.4.1"
         "OK.7.GM.4.2"
+        "3A-AP-18"
         ) 
 
     ("function-composition" 
@@ -191,6 +195,7 @@
         "OK.6.A.3.1"
         "OK.7.A.3.3"
         "OK.PA.A.4.3"
+        "3B-AP-10"
         )
 
     ("inequalities2-compound" 
@@ -201,6 +206,7 @@
         "OK.6.A.3.1"
         "OK.7.A.3.3"
         "OK.A1.A.2.2"
+        "3B-AP-10"
         )
 
     ("inequalities3-sam"
@@ -216,11 +222,13 @@
         "OK.A1.A.2"
         "OK.7.A.3.3"
         "OK.A1.A.2.2"
+        "3B-AP-10"
         )    
 
     ("making-game-images" 
         "7.RP.A.1"
         "8.G.A.1"
+        "1B-AP-12"
         "1B-AP-14" ; STEMworks
         "2-AP-16"  ; STEMworks
         "3A-AP-20" ; STEMworks
@@ -248,6 +256,7 @@
         "7.EE.B" ; STEMworks
         "HSA.SSE.A.1.A"
         "HSA.SSE.A.1.B"
+        "1B-AP-10"
         "1B-AP-12" ; STEMworks
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
@@ -264,6 +273,7 @@
         "7.EE.B"   ; STEMworks
         "3B-AP-22" ; STEMworks
         "1B-AP-10" ; STEMworks
+        "1B-AP-12"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks

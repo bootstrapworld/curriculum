@@ -11,18 +11,18 @@
          vars-to-commaed-string vars-to-string
          )
 
-(define *solutions-mode?* (truthy-getenv "SOLUTION"))
+(define *solutions-mode?* #f)
 
 (define *proglang* "pyret")
 
+(define *pyret?* #t)
+
 (define (set-proglang! proglang)
   (set! *proglang* proglang)
+  (set! *pyret?* (string=? *proglang* "pyret"))
   (unless (member *proglang* '("pyret" "wescheme" "codap"))
     (error 'ERROR "function-directives.rkt: Unknown proglang ~a"
            *proglang*)))
-
-
-(define *pyret?* (string=? *proglang* "pyret"))
 
 (define *show-funname-contract?* #f)
 (define *show-domains?* #f)
@@ -270,9 +270,9 @@
 
 (define (write-title title-text)
   (string-append
-    "\n\n[.recipe_title, cols=\"1a\"]\n"
+    "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
     "|===\n"
-    "| " title-text "\n"
+    "| " title-text "|\n"
     "|===\n\n"))
 
 (define (write-purpose funname domain-list range purpose)
@@ -281,7 +281,6 @@
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
-    (if *pyret?* "&#x23; " "&#x3b; ")
     (encoded-ans ".recipe_name" funname *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
@@ -292,8 +291,6 @@
     (encoded-ans ".recipe_range" range *show-range?*)
     "\n\n"
     "[.recipe.recipe_purpose_statement]\n"
-    (enclose-span ".purpose_comment" (if *pyret?* "#" ";"))
-    " "
     (write-purpose-prose purpose)))
 
 (define (write-purpose-prose purpose)
@@ -385,34 +382,16 @@
     (write-wrapper ".recipe.recipe_example_line"
       (lambda ()
         (string-append
-          ;(write-clear)
-          (write-large "(")
-          (write-spaced "EXAMPLE ")
-          (write-large "(")
+          (encoded-ans "" "(EXAMPLE (" #t)
           (encoded-ans ".recipe_name" funname show-funname?)
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
-          (write-large ")")
+          (encoded-ans "" ")" #t)
           (let ([body-s (expr-to-string body)])
-            (if (longer-than? *max-line-length*
-                               body-s (expr-to-string funname) (list-to-string args))
-                (begin
-                  ;(printf "maxlinelen exceeded\n")
-                  (string-append (write-clear)
-                    (encoded-ans "" "MM" #f)
-                    (encoded-ans ".recipe_example_body_long"
-                                 (encoded-ans "" body-s show-body?)
-                                 #t)
-                    (write-large ")")))
-                (begin
-                  ;(printf "within maxlinelen\n")
-                  (string-append
-                    (enclose-span ""
-                      (string-append
-                        (encoded-ans "" "M" #f)
-                        (encoded-ans ".recipe_example_body_short" body-s show-body?)))
-                    (write-large ")")
-                    ))))
+            (string-append
+              (encoded-ans ".recipe_example_body" body-s show-body?)
+              (write-large ")")
+                  ))
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
@@ -438,28 +417,9 @@
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-        (highlight-keywords " is")
-        ; wrap the `is ...` code in its own element, so that wrapping works properly
-
-        (if (longer-than? *max-line-length* body funname args)
-            (begin
-              ;(printf "maxlinelen exceeded\n")
-              (string-append (write-clear)
-                (encoded-ans "" "MMMM" #f)
-                (encoded-ans ".recipe_example_body_long"
-                             (string-append
-                               ;(highlight-keywords "is ")
-                               ;(encoded-ans "" "MM" #f)
-                               (encoded-ans "" (highlight-keywords body) show-body?)) #t)))
-            (begin
-              ;(printf "within maxlinelen\n")
-              (enclose-span ""
-                (string-append
-                  ;(highlight-keywords "is ")
-                  (encoded-ans "" "M" #f)
-                  (encoded-ans ".recipe_example_body_short" (highlight-keywords body) show-body?)
-                  ))))
-        (write-clear)
+        (encoded-ans "" "__" #f)
+        (highlight-keywords " is ")
+        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         ))))
 
 (define (write-each-example funname args body show)
@@ -527,9 +487,7 @@
               (lambda ()
                 (string-append
                   (write-large "(")
-                  (write-spaced "define")
-                  (write-spaced " ")
-                  (write-large "(")
+                  (write-spaced "define (")
                   (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                   " "
                   (encoded-ans ".recipe_variables" (vars-to-string param-list) *show-params?*)
@@ -541,12 +499,15 @@
                         (string-append
                           (encoded-ans "" "__" #f)
                           (write-large "(")
-                          (encoded-ans ".recipe_cond" "cond" *show-body?*))))]
+                          (encoded-ans ".recipe_cond" "cond" *show-body?*)
+                          (encoded-ans "" "__" #f))))]
                   [else ""])
 
             (cond [cond?
-                    (apply string-append
-                           (map write-cond-clause (cdr body)))]
+                    (write-wrapper ".cond_clauses" 
+                      (lambda () 
+                        (apply string-append
+                          (map write-cond-clause (cdr body)))))]
                   [else
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
@@ -556,21 +517,7 @@
                           (write-large ")")
                           )))])
 
-            (cond [cond?
-                    (write-wrapper ".recipe.recipe_line"
-                      (lambda ()
-                        (string-append
-                          (encoded-ans "" "__" #f)
-                          (write-large "))" #:tag ".studentAnswer.recipe_definition_body"))))]
-                  [else
-                    ""
-                    #|(write-wrapper ".recipe.recipe_line"
-                      (lambda ()
-                        (string-append
-                          (encoded-ans "" "__" #f)
-                          (write-large ")"))))
-                    |#
-                    ])))))))
+            ))))))
 
 (define (write-body-line/pyret body-line)
   ;(printf "write-body-line-p ~s\n" body-line)
@@ -639,8 +586,7 @@
                       (encoded-ans ".recipe_name" funname *show-funname-defn?*)
                       (write-large "(")
                       (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
-                      (write-large ")")
-                      (write-spaced ":"))))
+                      (write-large "):"))))
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
                 (write-wrapper ".recipe.recipe_line"
@@ -672,7 +618,7 @@
   )
 
 (define (write-large s #:tag [tag ""])
-  (enclose-span (string-append ".bigparen" tag) s))
+  (enclose-span (string-append ".studentAnswerCode" tag) s))
 
 (define *wrapper-block-level* 0)
 
@@ -724,6 +670,7 @@
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
+                                #:solutions-mode? [solutions-mode? #f]
                                 #:page-header (page-header "Word Problem")
                                 #:show-funname-contract? (show-funname-contract? #f)
                                 #:domain-list (domain-list '()) ; list of string
@@ -754,6 +701,8 @@
   ;should be overridden in solutions mode
 
   (set-proglang! proglang)
+
+  (set! *solutions-mode?* solutions-mode?)
 
   (set! *show-funname-contract?* show-funname-contract?)
   (set! *show-domains?* show-domains?)
@@ -830,6 +779,7 @@
 (define (assess-design-recipe
           funname directions
           #:proglang [proglang "pyret"]
+          #:solutions-mode? [solutions-mode? #f]
           #:domain-list (domain-list '()) ; list of string
           #:range (range #f)
           #:purpose (purpose #f)
@@ -842,6 +792,7 @@
           #:headless? (headless? #f)
           )
   (set-proglang! proglang)
+  (set! *solutions-mode?* solutions-mode?)
   (unless range (error 'ERROR "assess-design-recipe: range required"))
   (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
   (unless body (error 'ERROR "assess-design-recipe: body required"))
