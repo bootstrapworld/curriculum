@@ -1106,6 +1106,7 @@
   (set! *textbooks-represented* '())
   (set! *practices-merited* '())
   (set! *lesson-prereqs* '())
+  (erase-span-stack!)
   )
 
 (define (preproc-adoc-file in-file
@@ -1511,6 +1512,7 @@
                              (display c o) (display directive o)
                              #f]))]
                   [(and possible-beginning-of-line? (char=? c #\|))
+                   (set! beginning-of-line? #f) ;FIXME check if needed
                    (set! possible-beginning-of-line? #f)
                    (newline o)
                    (display c o)]
