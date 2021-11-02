@@ -460,7 +460,7 @@
         (cond [(file-exists? lesson-title-file)
                (set! lesson-title (call-with-input-file lesson-title-file read-line))]
               [else
-                (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson-subdir* lesson)])
+                (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson* lesson)])
         (let ([lk
                 (format "link:~alessons/pass:[~a]/index.shtml[~a]"
                         *dist-root-dir*
