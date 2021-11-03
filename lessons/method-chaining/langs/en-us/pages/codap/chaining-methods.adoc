@@ -1,12 +1,58 @@
 = Chaining Methods
 
-You have the following functions defined below (read them _carefully!_):
+You have created and save the following Transformers. (Read them _carefully!_)
 
-  fun is-fixed(r): r["fixed"]                 end
-  fun is-young(r): r["age"] < 4               end
-  fun nametag(r):  text(r["name"], 20, "red") end
+[cols="5,5,5"]
+|===
+|@span{.center}{*`filter-is-fixed`*}
 
-The table `t` below represents four animals from the shelter:
+Transformer: Filter
+
+Formula expression: Fixed = “TRUE”
+
+|@span{.center}{*`filter-is-young`*}
+
+Transformer: Filter
+
+Formula expression: Age < 4
+
+|@span{.center}{*`order-by-sex`*}
+
+Transformer: Sort
+
+Formula expression: Sex
+
+Direction: descending
+
+|@span{.center}{*`order-by-age`*}
+
+Transformer: Sort
+
+Formula expression: Age
+
+Direction: ascending
+
+|@span{.center}{*`order-by-pounds`*}
+
+Transformer: Sort
+
+Formula expression: Pounds
+
+Direction: descending
+
+|@span{.center}{*`order-by-sex`*}
+
+Transformer: Sort
+
+Formula expression: Sex
+
+Direction: descending
+
+|===
+
+@vspace{1ex}
+
+The table below represents four animals from the shelter:
 
 [cols='5',options="header"]
 |===
@@ -18,68 +64,72 @@ The table `t` below represents four animals from the shelter:
 
 |===
 
-_Match_ each Pyret expression (left) to the description of what it does (right).
+@vspace{1ex}
 
-[cols=".^10a,^.^2a,3,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+Below is a list of Transformers and their unique formula expressions. What table do we get, after evaluating each one? Match the instructions on the left with the outcome on the right.
+
+
+[cols=".^3a, ^.^1a, 1, ^.^1a, .^5a",stripes="none",grid="none",frame="none"]
 |===
 
-|
-----
- t.order-by("age", true)
-----
-|*@n*@ifsoln{-C} ||*A*
+| Apply `order-by-age`
+
+@vspace{1ex}
+
+|*1*@ifsoln{-C} ||*A*
 | Produces a table containing only Toggle and Maple
 
-|
-----
- t.filter(is-fixed)
-----
-|*@n*@ifsoln{-F} ||*B*
+@vspace{1ex}
+
+| Apply `filter-is-fixed`
+
+@vspace{1ex}
+
+
+|*2*@ifsoln{-E} ||*B*
 | Produces a table of only young, fixed animals
 
-|
-----
- t.build-column("sticker", nametag)
-----
-|*@n*@ifsoln{-D} ||*C*
-| Produces a table, sorted youngest-to-oldest
+@vspace{1ex}
 
-|
-----
- t.filter(is-young)
-----
-|*@n*@ifsoln{-A} ||*D*
-| Produces a table with an extra column, named "sticker"
+| Apply `filter-is-young`
 
-|
-----
-t.filter(is-young)
-  .filter(is-fixed)
-----
-|*@n*@ifsoln{-B} ||*E*
+@vspace{1ex}
+
+|*3*@ifsoln{-D} ||*C*
+| Produces a table, sorted youngest to oldest
+
+@vspace{1ex}
+
+| First, apply `filter-is-young`
+
+Next, apply `filter-is-fixed`
+
+@vspace{1ex}
+
+|*4*@ifsoln{-A}||*D*
 | Produces a table containing Maple and Toggle, in that order
 
-|
-----
-t.filter(is-young)
-  .order-by("pounds", false)
-----
-|*@n*@ifsoln{-E} ||*F*
+@vspace{1ex}
+
+| First, apply `filter-is-young`
+
+Next, apply `order-by-pounds`
+
+@vspace{1ex}
+
+|*5*@ifsoln{-D} ||*E*
 | Produces a table containing the same four animals
 
-|
-----
-t.build-column("label", nametag)
-  .order-by("age", true)
-----
-|*@n*@ifsoln{-H} ||*G*
-| Won’t run: will produce an error
+@vspace{1ex}
 
-|
---
- t.order-by("sx", false)
---
-|*@n*@ifsoln{-G} ||*H*
-| Produces a table with an extra "label" column, sorted youngest-to-oldest
+| Apply `order-by-pounds`
+
+@vspace{1ex}
+
+|*6*@ifsoln{-D} ||*F*
+| Produces a table of all four animals, with Fritz first
+
+@vspace{1ex}
 
 |===
+
