@@ -3,66 +3,119 @@
 
 ++++
 <style>
-#content tbody tr { height: 40pt; }
-#content tbody td { vertical-align: middle !important; }
-
-/** fitb CSS experiment **/
-#content td:nth-of-type(2) p { display: table; overflow: hidden; }
-#content td:nth-of-type(2) .fitb { display: table-cell;  }
-#content td:nth-of-type(2) .pyret, td:nth-of-type(2) .wescheme {display: table-cell; white-space: pre; margin: 0px; padding: 0px;}
-#content td:nth-of-type(2) .editbox {white-space: pre; display: inline-block;}
+.blanks tr { height: 0.75in; }
 </style>
 ++++
 
-Use method chaining to define the *grouped samples* below, using the helper functions that you've already defined: `is-old`, `is-young`, `is-cat`, `is-dog`, `is-female`, `is-fixed`, and `name-has-s`. We’ve given you the solution for the first sample, to get you started.
+You’ve already created and saved the following transformers: `filter-is-old`, `filter-is-young`, `filter-is-cat`, `filter-is-dog`, `filter-is-female`, `filter-is-fixed`, and `filter-has-s-name`.  Provide the transformers you would apply in the order you would use them. We’ve given you the solution for the first sample, to get you started.
 
 @vspace{2ex}
 
 @ifsoln{__Students answers will vary the order of the methods chained__}
-[cols="1a,5a, 20a",options="header"]
+
+[.blanks, cols="^.^1a,.^2a,.^4a,.^4a"]
 |===
 |
 | Subset
-| The code to define that subset
+| List the transformers in order.
+| Use function notation.
 
-| @n
+| *@n*
 | Kittens
-| `kittens = animals-table.filter(is-cat).filter(is-young)`
+|Apply `filter-is-young`.
 
-| @n
+Apply `filter-is-cat`.
+| filter-is-young(filter-is-cat(animals-table))
+
+| *@n*
 | Puppies
-| @ifsoln{`young-dogs = animals-table.filter(is-young).filter(is-dog)`}
+| @ifsoln{
+Apply `filter-is-dog`.
 
-| @n
+Apply `filter-is-young`.}
+| @ifsoln{filter-is-dog(filter-is-young(animals-table))}
+
+| *@n*
 | Fixed Cats
-| @ifsoln{`fixed-cats = animals-table.filter(is-fixed).filter(is-cat)`}
+| @ifsoln{
+Apply `filter-is-fixed`.
 
-| @n
-| Cats with “s” in their name
-| @ifsoln{`s-cats = animals-table.filter(is-cat).filter(has-s-name)`}
+Apply `filter-is-cat`.
+}
+| @ifsoln{filter-is-fixed(filter-is-cat(animals-table))}
 
-| @n
+| *@n*
+| Cats with "s" in their name
+| @ifsoln{
+Apply `filter-has-s-name`.
+
+Apply `filter-is-cat`.
+}
+| @ifsoln{filter-has-s-name(filter-is-cat(animals-table))}
+
+| *@n*
 | Old Dogs
-| @ifsoln{`old = animals-table.filter(is-dog).filter(is-old)`}
+| @ifsoln{
+Apply `filter-is-old`.
 
-| @n
+Apply `filter-is-dog`.
+}
+| @ifsoln{filter-is-old(filter-is-dog(animals-table))}
+
+
+| *@n*
 | Fixed Animals
-| @ifsoln{`fixed = animals-table.filter(is-fixed)`}
+| @ifsoln{
+Apply `filter-is-fixed`.
+}
+| @ifsoln{(filter-is-fixed(animals-table))}
 
-| @n
+
+| *@n*
 | Old Female Cats
-| @ifsoln{`old-f-cats = animals-table.filter(is-old).filter(is-female).filter(is-cat)`}
+| @ifsoln{
+Apply `filter-is-female`.
 
-| @n
+Apply `filter-is-cat`.
+
+Apply `filter-is-old`.}
+| @ifsoln{filter-is-female(filter-is-cat(filter-is-old(animals-table)))}
+
+
+| *@n*
 | Fixed Kittens
-| @ifsoln{`young-fixed-cats = fixed-cats.filter(is-young)`}
+| @ifsoln{
 
-| @n
+Apply `filter-is-fixed`.
+
+Apply `filter-is-cat`.
+
+Apply `filter-is-young`}
+| @ifsoln{filter-is-fixed(filter-is-cat(filter-is-young(animals-table)))}
+
+
+| *@n*
 | Fixed Female Dogs
-| @ifsoln{`fixed-female-dogs = fixed.filter(is-female).filter(is-dog)`}
+| @ifsoln{
+Apply `filter-is-fixed`.
 
-| @n
+Apply `filter-is-female`.
+
+Apply `filter-is-dog`.}
+| @ifsoln{filter-is-fixed(filter-is-female(filter-is-dog(animals-table)))}
+
+
+| *@n*
 | Old Fixed Female Cats
-| @ifsoln{`old-fixed-f-cats = old-f-cats.filter(is-fixed)`}
+| @ifsoln{
+Apply `filter-is-old`.
+
+Apply `filter-is-fixed`.
+
+Apply `filter-is-female`.
+
+Apply `filter-is-cat`}
+| @ifsoln{filter-is-old(filter-is-fixed(filter-is-female(filter-is-cat(animals-table))))}
 
 |===
+
