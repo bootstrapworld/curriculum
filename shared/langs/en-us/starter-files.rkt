@@ -37,13 +37,13 @@
   ("expanded-animals" "Expanded Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Iu5I9lJt1oCho-l4xk7FucgtLq6cAUVr&v=1904b2c")
    )
-  ("image-scatter-plot-w-range" "Image Scatterplots with Dots Representing a Range of Values"
+  ("image-scatter-plot-w-range" "Dots for Value Ranges Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
    )
-  ("image-scatter-plot-w-simple-helper-functions" "Image Scatterplot Starter File"
+  ("image-scatter-plot" "Image Scatter Plot Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
    )
-  ("piecewise-image-scatterplot" "Image Scatterplot with Piecewise Functions Starter File"
+  ("piecewise-image-scatter-plot" "Image Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0&v=1904b2c")
    )
   ("putting-it-all-together" "Putting it all Together Starter File"
