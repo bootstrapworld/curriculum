@@ -41,7 +41,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
    )
   ("image-scatter-plot" "Image Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1Yskwvzbe5CSMX3F1fveEOgrL3ms2cxHV&v=1904b2c")
    )
   ("piecewise-image-scatter-plot" "Image Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0&v=1904b2c")
