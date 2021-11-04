@@ -70,6 +70,25 @@
         "2-AP-11"
         )
 
+    ("piecewise-functions-conditionals" 
+        "6.EE.B.6" ; STEMworks
+        "7.EE.B" ; STEMworks
+        "HSA.SSE.A.1.A"
+        "HSA.SSE.A.1.B"
+        "1B-AP-10" ; STEMworks
+        "1B-AP-12" ; STEMworks
+        "2-AP-11"  ; STEMworks
+        "2-AP-17"  ; STEMworks
+        "2-AP-19"  ; STEMworks
+        "3B-AP-14" ; STEMworks
+        "3B-AP-21" ; STEMworks
+        "OK.PA.A.1.1"
+        "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "P3" 
+        "9-12.Algorithms and Programming.Control"
+        )
+
     ("simple-dataypes"
         "OK.6.A.1.3"
         "OK.7.N.1.2"
@@ -249,23 +268,6 @@
         "OK.7.A.4.2"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
-        )
-
-    ("piecewise-functions" 
-        "6.EE.B.6" ; STEMworks
-        "7.EE.B" ; STEMworks
-        "HSA.SSE.A.1.A"
-        "HSA.SSE.A.1.B"
-        "1B-AP-10"
-        "1B-AP-12" ; STEMworks
-        "2-AP-11"  ; STEMworks
-        "2-AP-17"  ; STEMworks
-        "2-AP-19"  ; STEMworks
-        "3B-AP-14" ; STEMworks
-        "3B-AP-21" ; STEMworks
-        "OK.PA.A.1.1"
-        "OK.A1.F.1.4"
-        "OK.A2.F.1.8"
         )
 
     ("player-animation" 
@@ -451,19 +453,6 @@
         "OK.6.D.1.3"
         )
 
-    ("if-expressions" 
-        "2-DA-08" 
-        "2-AP-19" 
-        "3B-NI-05" 
-        "1B-AP-10" ; STEMworks
-        "P3" 
-        "6-8.Data and Analysis.Inference and Models" 
-        "9-12.Algorithms and Programming.Control"
-        "OK.L1.AP.M.01"
-        "OK.L1.AP.M.02"
-        "OK.A2.D.2.1"
-        )
-
     ("histograms" 
         "6.SP.B.4" ; STEMworks
         "HSS.ID.A.3" 
@@ -499,6 +488,25 @@
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        )
+
+    ("image-scatter-plots"
+        "OK.A1.F.1.4"
+        "OK.A2.F.1.8"
+        "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "HSA.SSE.A.1.B"
+        "1B-AP-10"     ; STEMworks
+        "1B-AP-12"     ; STEMworks
+        "2-AP-11"      ; STEMworks
+        "2-AP-17"      ; STEMworks
+        "2-AP-19"      ; STEMworks
+        "3B-AP-14"     ; STEMworks
+        "3B-NI-05"
+        "2-DA-08"
+        "P3"
+        "6-8.Data and Analysis.Inference and Models" 
+        "9-12.Algorithms and Programming.Control"
         )
 
     ("linearity"

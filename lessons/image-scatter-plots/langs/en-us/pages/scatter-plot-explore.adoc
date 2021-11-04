@@ -3,6 +3,7 @@
 ++++
 <style>
 #content tbody tr { height: 2in; }
+#content .forceShading { background-color: #f7f7f8; }
 </style>
 ++++
 
@@ -26,7 +27,17 @@
 
 @n This file also uses the function `image-scatter-plot` whose contract is:
 
-`image-scatter-plot {two-colons} (t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image)) -> Image`
+[.forceShading]
+--
+```
+image-scatter-plot :: (
+  t :: Table,
+  xs :: String,
+  ys :: String,
+  f  :: (Row -> Image)
+) -> Image
+```
+--
 
 What is its Domain?
 

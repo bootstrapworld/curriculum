@@ -7,14 +7,18 @@
 .comparison * { font-size: 0.75rem !important; }
 .comparison td { background: #f7f7f8; padding: 0 !important; }
 .comparison .highlight { padding: 0 !important; }
+
+#content .forceShading { background-color: #f7f7f8; }
 </style>
 ++++
-@lesson-description{Image-scatter-plots expose deeper insight into subgroups within a population, motivating the need for more advanced analysis and adding if-expressions to students' programming toolkit.}
+
+
+@lesson-description{Image-scatter-plots expose deeper insight into subgroups within a population, motivating the need for more advanced analysis. Students get a chance to apply their understanding of if-expressions and defining functions.}
 
 [@lesson-intro-table]
 |===
 
-@prereqs-stds{defining-functions, piecewise-functions-conditionals}
+@lesson-prereqs{defining-functions, piecewise-functions-conditionals}
 
 | Lesson Goals
 | Students will be able to...
@@ -48,7 +52,7 @@
 
 === Overview
 
-Students are introduced to their first example of a _custom scatter plot_, which makes use of the `image-scatter-plot` function function to replace each animals' dot with the name of the species. They then write code for another custom scatter plot.
+Students are introduced to their first example of a _custom scatter plot_, which makes use of the @show{(sexp->code 'image-scatter-plot)} function to replace each animals' dot with the name of the species. They then write code for another custom scatter plot.
 
 === Launch
 
@@ -57,13 +61,20 @@ Have students turn to @printable-exercise{scatter-plot-explore.adoc} and give th
 [.lesson-instruction]
 * What did you notice?
 * What did you wonder?
-* Why does `scatter-plot` take in 3 Strings, when there are only two axes?
+* Why does @show{(sexp->code 'scatter-plot)} take in 3 Strings, when there are only two axes?
 
 The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
 
-[.indentedpara]
+[.forceShading]
 --
-`image-scatter-plot {two-colons} (t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image)) -> Image`
+```
+image-scatter-plot :: (
+  t :: Table,
+  xs :: String,
+  ys :: String,
+  f  :: (Row -> Image)
+) -> Image
+```
 --
 
 [.lesson-instruction]
@@ -97,10 +108,9 @@ How did having the dots labeled with the species change your understanding of th
 Make sure to direct the conversation back to _Data Science!_
 __This scatter plot makes it clear that we may want to analyze each species separately, rather than grouping them all together!__ In the Grouped Samples lesson, students will learn how to do just that.
 
-What other scatter plots might this be useful for?
-
 [.lesson-instruction]
-What did the other helper functions do?
+* What other scatter plots might this be useful for?
+* What did the other helper functions do?
 
 `legs-tag` _made blue rings whose size was determined by the number of legs the animal had. `age-tag` made stars whose size was double the age of the animal._
 @span{.center}{@image{images/legs-tag.png, "legs-tag", 383} @image{images/age-tag.png, "age-tag", 392}}
