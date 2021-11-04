@@ -1,12 +1,64 @@
 = Chaining Methods 2: Order Matters
 
-You have the following functions defined below (read them _carefully!_):
+++++
+<style>
+.matching tr { height: 0.65in; }
+</style>
+++++
 
-  fun is-female(r): r["sex"] == "female"  end
-  fun kilograms(r): r["pounds"] / 2.2     end
-  fun is-heavy(r):  r["kilos"] > 25       end
+You have created and save the following Transformers. (Read them _carefully!_)
 
-The table `t` below represents four animals from the shelter:
+[cols="5,5,5"]
+|===
+|@span{.center}{*`build-kilos`*}
+
+Transformer: Build Attribute
+
+Name of attribute: kilos
+
+Formula expression: pounds/2.2
+
+|@span{.center}{*`order-by-kilos`*}
+
+Transformer: Sort
+
+Formula expression: kilos
+
+Direction: ascending
+
+|@span{.center}{*`filter-is-female`*}
+
+Transformer: Filter
+
+Formula expression: sex = “female”
+
+|@span{.center}{*`filter-is-heavy`*}
+
+Transformer: Filter
+
+Formula expression: kilos > 25
+
+|@span{.center}{*`order-by-sex`*}
+
+Transformer: Sort
+
+Formula expression: sex
+
+Direction: ascending
+
+|@span{.center}{*`build-is-female`*}
+
+Transformer: Build Attribute
+
+Name of new attribute: is-female
+
+Formula expression: sex = "female"
+
+|===
+
+@vspace{1ex}
+
+The table below represents four animals from the shelter:
 
 [cols='5',options="header"]
 |===
@@ -18,59 +70,47 @@ The table `t` below represents four animals from the shelter:
 
 |===
 
-_Match_ each Pyret expression (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
+@vspace{1ex}
 
-[cols=".^10a,^.^2a,3,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+_Match_ each set of CODAP instructions to the description of what it does (right). *Note: one description might match multiple expressions!*
+
+[.matching, cols=".^4a, ^.^1a, 1, ^.^1a, .^4a",stripes="none",grid="none",frame="none"]
 |===
 
-|
-----
- t.order-by("kilos", true)
-----
-|*@n*@ifsoln{-D} ||*A*
+| Apply `order-by-kilos`
+|*1*@ifsoln{-D} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
-|
-----
-t.filter(is-female)
-  .build-column("kilos", kilograms)
-----
-|*@n*@ifsoln{-A} ||*B*
+| Apply `filter-is-female` +
+Next, apply `build-kilos`
+|*2*@ifsoln{-A} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
-|
-----
-t.build-column("kilos", kilograms)
-  .filter(is-heavy)
-----
-|*@n*@ifsoln{-C} ||*C*
+| Apply `build-kilos`
+Next, apply `filter-is-heavy`
+|*3*@ifsoln{-C} ||*C*
 | Produces a table containing only Fritz.
 
-|
-----
-t.filter(is-heavy)
-  .build-column("kilos", kilograms)
-----
-|*@n*@ifsoln{-D} ||*D*
+
+| First, apply `filter-is-haevy` +
+Next, apply `build-kilos`
+|*4*@ifsoln{-D}||*D*
 | Won’t run: will produce an error
 
-|
-----
-t.build-column("kilos", kilograms)
-  .filter(is-heavy)
-  .order-by("sex", true)
-----
-|*@n*@ifsoln{-C} ||*E*
+
+| First, apply `build-kilos` +
+Next, apply `filter-is-heavy` +
+Next, apply `order-by-sex`
+|*5*@ifsoln{-C} ||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
-|
-----
-t.build-column("female", is-female)
-  .build-column("kilos", kilograms)
-  .filter(is-heavy)
-----
-|*@n*@ifsoln{-E} ||*F*
+| Apply `build-is-female` +
+Apply `build-kilos` +
+Apply `filter-is-heavy`
+|*6*@ifsoln{-E} ||*F*
 | Produces a table containing Maple and Fritz
 
+
 |===
+
 
