@@ -6,6 +6,7 @@
 
 '(
   ; core ; no spaces in starter file shortname!
+
   ("alices-restaurant" "Alice's Restaurant Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
@@ -15,11 +16,11 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
    )
   ("mood-generator" "Mood Generator Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
    )
-  ("mood-generator-if-else" "Mood Generator If-Else Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ&v=1904b2c")
+  ("mood-generator-ask" "Alternater Version of the Mood Generator Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e&v=1904b2c")
    )
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN&v=1904b2c")
@@ -27,6 +28,7 @@
    )
 
   ; data-science
+
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi&v=1904b2c")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
@@ -66,6 +68,7 @@
    )
 
   ; math
+  
   ("blank-game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1_zdXA85BkkMqNvKXVdBcjq01foimuXkC&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
