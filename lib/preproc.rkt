@@ -183,6 +183,7 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+(define *starter-file-links* '())
 
 (define (errmessage-context)
   (let ([s ""])
@@ -1110,6 +1111,7 @@
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
+  (set! *starter-file-links* '())
   (erase-span-stack!)
   )
 
@@ -1510,7 +1512,11 @@
                                                (printf "WARNING: ~a: Starter file ~a missing for ~a\n\n"
                                                        lbl *proglang*)]
                                               [else
-                                                (fprintf o "link:pass:[~a][~a]" (cadr p) title)]))]))]
+                                                (let* ([link-output (format "link:pass:[~a][~a]" (cadr p) title)]
+                                                       [styled-link-output (string-append "[.StarterFile]##" link-output "##")])
+                                                  (unless (member styled-link-output *starter-file-links*)
+                                                    (set! *starter-file-links* (cons styled-link-output *starter-file-links*)))
+                                                  (display link-output o))]))]))]
                            [else
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1694,6 +1700,9 @@
               (fprintf o "\n* ~a\n\n" x))
 
             (for ([x (reverse *opt-online-exercise-links*)])
+              (fprintf o "\n* ~a\n\n" x))
+
+            (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
             )
