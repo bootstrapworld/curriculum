@@ -1525,7 +1525,9 @@
                                                (printf "WARNING: ~a: Starter file ~a missing for ~a\n\n"
                                                        lbl *proglang*)]
                                               [else
-                                                (let* ([link-output (format "link:pass:[~a][~a]" (cadr p) title)]
+                                                (let* ([link-output (format "link:pass:[~a][~a~a]" (cadr p) title
+                                                                            (if *lesson-plan* ", window=\"_blank\"" "")
+                                                                            )]
                                                        [styled-link-output (string-append "[.StarterFile]##" link-output "##")])
                                                   (unless (member styled-link-output *starter-file-links*)
                                                     (set! *starter-file-links* (cons styled-link-output *starter-file-links*)))
