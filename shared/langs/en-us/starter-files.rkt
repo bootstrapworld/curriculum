@@ -24,7 +24,7 @@
    )
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN&v=1904b2c")
-   ("wescheme" "https://www.wescheme.org/view?publicId=JW8YpLN7PS")
+   ("wescheme" "https://www.wescheme.org/view?publicId=n4DkTyYbQh")
    )
 
   ; data-science

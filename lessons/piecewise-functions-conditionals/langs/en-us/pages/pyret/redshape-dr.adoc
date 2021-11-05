@@ -7,24 +7,21 @@
   #:show-range? #t
   #:purpose "Given a shape name, produce a solid, red, 20-pixel image of the shape."
   #:show-purpose? #t
-  #:num-examples 4
+  #:num-examples 3
   #:example-list '(("circle"     (circle 20 "solid" "red"))
-                   ("triangle"   (triangle 20 "solid" "red"))
-                   ("rectangle"  (rectangle 20 "solid" "red"))
+                   ("square"     (square 20 "solid" "red"))
                    ("star"       (star 20 "solid" "red"))
                     )
-  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
+  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) )
   #:param-list '(shape)
   #:show-params? #f
   #:body (if *solutions-mode?*
 "if (shape == \"circle\")         : circle(20, \"solid\", \"red\")
-else if (shape == \"triangle\")   : triangle(20, \"solid\", \"red\")
-else if (shape ==  \"rectangle\") : rectangle(20, \"solid\", \"red\")
+else if (shape ==  \"square\")    : square(20, \"solid\", \"red\")
 else if (shape ==  \"star\")      : star(20, \"solid\", \"red\")
 else                              : text(\"Unknown shape name!\", 20, \"red\")
 end"
 "blankline
-blankline
 blankline
 blankline
 blankline")
