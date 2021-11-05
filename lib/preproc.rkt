@@ -184,6 +184,7 @@
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
 (define *starter-file-links* '())
+(define *opt-project-links* '())
 
 (define (errmessage-context)
   (let ([s ""])
@@ -583,10 +584,61 @@
                     [else (loop)])))))
       #f))
 
+(define (dispatch-make-workbook-link page-compts link-text directive)
+  (let ([first-compt (car page-compts)])
+    (case (length page-compts)
+      [(1)
+       (cond [*lesson*
+               (make-workbook-link #f
+                 "pages"
+                 first-compt
+                 link-text
+                 #:link-type directive)]
+             [else
+               (printf "WARNING: Incorrect¹ @~a ~a\n\n"
+                       directive page-compts)
+               ""])]
+      [(2)
+       (let ([second-compt (cadr page-compts)])
+         (cond [(and (or (string=? first-compt "pages")
+                         (string=? first-compt "solution-pages"))
+                     *lesson-plan*)
+                (make-workbook-link #f
+                  first-compt
+                  (cadr page-compts)
+                  link-text
+                  #:link-type directive)]
+               [else
+                 ;TODO should these just be warnings
+                 ;with the @workbook-link converted to plain @link ?
+                 ;(printf "*lesson* is ~s\n" *lesson*)
+                 (printf "WARNING: Incorrect² @~a ~a\n\n"
+                         directive page-compts)
+                 ""]))]
+      [(3)
+       (let ([second-compt (cadr page-compts)]
+             [third-compt (caddr page-compts)])
+         (cond [(or (string=? second-compt "pages")
+                    (string=? second-compt "solution-pages"))
+                (make-workbook-link
+                  first-compt
+                  ;(string-append "lessons/" first-compt)
+                  second-compt
+                  third-compt link-text
+                  #:link-type directive)]
+               [else
+                 (printf "WARNING: Incorrect³ @~a ~a\n\n"
+                         directive page-compts)
+                 ""]))]
+      [else
+        (printf "WARNING: Incorrect⁴ @~a ~a\n\n"
+                directive page-compts)
+        ""])))
+
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
-  ;(printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
+  ; (printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
   (when (equal? lesson-dir *lesson*) (set! lesson-dir #f))
-  ;(printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
+  ; (printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
   (let* ([lesson (or lesson-dir *lesson*)]
          [g (string-append lesson "/" pages-dir "/" snippet)]
          [g-in-pages (string-append lesson "/pages/" snippet)]
@@ -596,7 +648,7 @@
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
-    ;(printf "f= ~s in ~s: ~s\n" f (current-directory) (file-exists? f))
+    ; (printf "f= ~s in ~s: ~s\n" f (current-directory) (file-exists? f))
     (cond [(path-has-extension? f ".adoc")
            (let ([f.adoc f]
                  [f.html (path-replace-extension f ".html")]
@@ -617,7 +669,7 @@
            (when (file-exists? f)
              (set! existent-file? #t))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
-    ;(printf "f'= ~s\n" f)
+    ; (printf "f'= ~s\n" f)
     (unless existent-file?
       (set! error-cascade? #t)
       (check-link f)
@@ -640,15 +692,15 @@
                     *dist-root-dir* g link-text
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
-        (cond [(or (equal? link-type "opt-printable-exercise")
-                   lesson-dir)
+        (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
                                            link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
                    (set! *opt-printable-exercise-links*
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
-              [else
+
+              [(equal? link-type "printable-exercise")
                 (let ([styled-link-output (string-append "[.PrintableExercise]##" link-output "##")])
                   (unless (findf (lambda (L) (equal? (cadr L) styled-link-output))
                                  *printable-exercise-links*)
@@ -764,7 +816,7 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
-  ;(printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
+  ; (printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
   (let ([external-link? #f]
         [g f])
     (cond [(string=? f "") #f]
@@ -772,7 +824,7 @@
           [(regexp-match #rx"^mailto:" f) (set! external-link? #t)]
           [(regexp-match #rx"^#" f) #f]
           [else (set! f (string-append *containing-directory* "/" f))])
-    ;(printf "ext link = ~s\n" external-link?)
+    ; (printf "ext link = ~s\n" external-link?)
     (cond [(not include?)
            (cond [(string=? f "")
                   (printf "WARNING: ~a: @link with no file argument\n\n"
@@ -799,9 +851,9 @@
                             (set! g (path-replace-extension g ".pdf"))])
                      (when existent-file?
                        (set! f (build-path *containing-directory* g)))
-                    ;(printf "link ~a refers to ~a\n\n" g f)
+                    ; (printf "link ~a refers to ~a\n\n" g f)
                      (let ([short-ref? (abbreviated-index-page? f)])
-                       ;(printf "g = ~s is valid short-ref\n" g)
+                       ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml")
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
@@ -841,6 +893,8 @@
                  (unless (member styled-link-output *opt-online-exercise-links*)
                    (set! *opt-online-exercise-links*
                      (cons styled-link-output *opt-online-exercise-links*)))))
+
+             ; (printf "make-link outputting ~s\n" link-output)
 
              link-output)
 
@@ -1112,6 +1166,7 @@
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
   (set! *starter-file-links* '())
+  (set! *opt-project-links* '())
   (erase-span-stack!)
   )
 
@@ -1293,50 +1348,8 @@
                                    [page-compts (regexp-split #rx"/" page)]
                                    [first-compt (car page-compts)])
                               ;
-                              (case (length page-compts)
-                                [(1)
-                                 (cond [*lesson*
-                                         (display (make-workbook-link #f
-                                                    "pages"
-                                                    first-compt
-                                                    link-text
-                                                    #:link-type directive) o)]
-                                       [else
-                                         (printf "WARNING: Incorrect¹ @~a ~a\n\n"
-                                                 directive page)])]
-                                [(2)
-                                 (let ([second-compt (cadr page-compts)])
-                                   (cond [(and (or (string=? first-compt "pages")
-                                                   (string=? first-compt "solution-pages"))
-                                               *lesson-plan*)
-                                          (display (make-workbook-link #f
-                                                                       first-compt
-                                                                       (cadr page-compts)
-                                                                       link-text
-                                                                       #:link-type directive) o)]
-                                         [else
-                                           ;TODO should these just be warnings
-                                           ;with the @workbook-link converted to plain @link ?
-                                           ;(printf "*lesson* is ~s\n" *lesson*)
-                                           (printf "WARNING: Incorrect² @~a ~a\n\n"
-                                                   directive page)]))]
-                                [(3)
-                                 (let ([second-compt (cadr page-compts)]
-                                       [third-compt (caddr page-compts)])
-                                   (cond [(or (string=? second-compt "pages")
-                                              (string=? second-compt "solution-pages"))
-                                          (display (make-workbook-link
-                                                     first-compt
-                                                     ;(string-append "lessons/" first-compt)
-                                                     second-compt
-                                                     third-compt link-text
-                                                     #:link-type directive) o)]
-                                         [else
-                                           (printf "WARNING: Incorrect³ @~a ~a\n\n"
-                                                   directive page)]))]
-                                [else
-                                  (printf "WARNING: Incorrect⁴ @~a ~a\n\n"
-                                          directive page)]))]
+                              (display (dispatch-make-workbook-link page-compts link-text directive) o)
+                              )]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise")
@@ -1517,6 +1530,20 @@
                                                   (unless (member styled-link-output *starter-file-links*)
                                                     (set! *starter-file-links* (cons styled-link-output *starter-file-links*)))
                                                   (display link-output o))]))]))]
+                           [(string=? directive "opt-project")
+                            (let* ([arg1 (read-commaed-group i directive)]
+                                   [project-file (car arg1)]
+                                   [project-title (cadr arg1)]
+                                   [rubric-file (read-group i directive)]
+                                   [project-file-compts (regexp-split #rx"/" project-file)]
+                                   [rubric-file-compts (regexp-split #rx"/" rubric-file)]
+                                   [rubric-link-output (dispatch-make-workbook-link rubric-file-compts "" "rubric-file")]
+                                   [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
+                              (let ([styled-project-link-output (string-append "[.OptProject]##" project-link-output "##")])
+                                (unless (assoc styled-project-link-output *opt-project-links*)
+                                  (set! *opt-project-links*
+                                    (cons (list styled-project-link-output rubric-link-output) *opt-project-links*))))
+                               (display project-link-output o))]
                            [else
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1685,6 +1712,11 @@
 
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
+
+            ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
+
+            (for ([x (reverse *opt-project-links*)])
+              (fprintf o "\n* {startsb}~a{endsb} {startsb}~a{endsb}\n\n" (car x) (cadr x)))
 
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *printable-exercise-links*
