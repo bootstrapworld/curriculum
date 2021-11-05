@@ -1683,6 +1683,9 @@
               (unless (file-exists? workbook-pages-ls-file)
                 (error 'ERROR "File ~a not found" workbook-pages-ls-file))
 
+            (for ([x (reverse *starter-file-links*)])
+              (fprintf o "\n* ~a\n\n" x))
+
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *printable-exercise-links*
                              (lambda (x y)
@@ -1700,9 +1703,6 @@
               (fprintf o "\n* ~a\n\n" x))
 
             (for ([x (reverse *opt-online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-
-            (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
             )
