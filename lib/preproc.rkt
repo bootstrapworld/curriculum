@@ -1106,6 +1106,10 @@
   (set! *textbooks-represented* '())
   (set! *practices-merited* '())
   (set! *lesson-prereqs* '())
+  (set! *online-exercise-links* '())
+  (set! *opt-online-exercise-links* '())
+  (set! *printable-exercise-links* '())
+  (set! *opt-printable-exercise-links* '())
   (erase-span-stack!)
   )
 
