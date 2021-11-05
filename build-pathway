@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-01 # last modified
+LASTMOD=2021-11-08 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -813,6 +813,10 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-standards.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -2334,13 +2338,13 @@ function postproc_nonotherdir() {
 function postproc_lessonplan() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
-    fdir=${fhtmlcached%/.cached/.*html}
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    local fdir=${fhtmlcached%/.cached/.*html}
     #echo  fdir= $fdir
-    fbase=${fhtmlcached##*/.}
+    local fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
     #echo fbase= $fbase
-    fshtml=$fdir/$fbase
+    local fshtml=$fdir/$fbase
     #echo fhtml= $fhtml
     #echo moving $fhtmlcached to $fshtml
     mv $fhtmlcached $fshtml
@@ -2367,11 +2371,11 @@ function postproc_lessonplan() {
 function postproc_narrative() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
-    fdir=${fhtmlcached%/.cached/.*html}
-    fbase=${fhtmlcached##*/.}
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    local fdir=${fhtmlcached%/.cached/.*html}
+    local fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
-    fshtml=$fdir/$fbase
+    local fshtml=$fdir/$fbase
     mv $fhtmlcached $fshtml
     insertbodyid $fshtml
     addanalytics $fshtml
@@ -2381,14 +2385,30 @@ function postproc_narrative() {
   fi
 }
 
+function postproc_narrativeaux() {
+  # echo doing postproc_narrativeaux $1
+  local fhtmlcached=$1
+  if test -f "$fhtmlcached"; then
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    local fdir=${fhtmlcached%/.cached/.*html}
+    local fbase=${fhtmlcached##*/.}
+    fbase=${fbase%.html}.shtml
+    local fshtml=$fdir/$fbase
+    mv $fhtmlcached $fshtml
+    insertbodyid $fshtml
+    bumpcsspathdir $fshtml $localDISTROOTDIR
+    resolveabbrevs $fshtml $localDISTROOTDIR
+  fi
+}
+
 function postproc_resources() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
-    localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
-    fdir=${fhtmlcached%/.cached/.*html}
-    fbase=${fhtmlcached##*/.}
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    local fdir=${fhtmlcached%/.cached/.*html}
+    local fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
-    fshtml=$fdir/$fbase
+    local fshtml=$fdir/$fbase
     mv $fhtmlcached $fshtml
     insertbodyid $fshtml
     bumpcsspathdir $fshtml $localDISTROOTDIR
@@ -2401,8 +2421,8 @@ function postproc_resources() {
 function postproc_allpathways() {
   local fhtml=$1
   if test -f "$fhtml"; then
-    localDISTROOTDIR=../../
-    fshtml=${fhtml%.html}.shtml
+    local localDISTROOTDIR=../../
+    local fshtml=${fhtml%.html}.shtml
     mv $fhtml $fshtml
     removelogos $fshtml
     bumpcsspathdir $fshtml $localDISTROOTDIR
@@ -2453,6 +2473,7 @@ function doadocpostproc() {
   run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT
   run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
   run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
+  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
   run_postproc postproc_allpathways $ADOC_POSTPROC_ALLPATHWAYS_INPUT
 
@@ -2538,17 +2559,18 @@ export ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.
 export ADOC_POSTPROC_NONOTHERDIR_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-nonotherdir.txt.kp
 export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-lessonplan.txt.kp
 export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrative.txt.kp
+export ADOC_POSTPROC_NARRATIVEAUX_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrativeaux.txt.kp
 export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
 export ADOC_POSTPROC_ALLPATHWAYS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
 export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-relevant-lessons.txt.kp
 
 rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
-  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
+  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
   $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
-  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT \
+  $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
   $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
   $RELEVANT_LESSONS_INPUT
 
