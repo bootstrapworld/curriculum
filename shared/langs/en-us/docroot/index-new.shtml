@@ -17,7 +17,7 @@
 
         // find out if there's a subject that was passed in
         var subject, params = location.search.substring(1);
-        var subject = !params? "none"
+        var subject = !params? "math"
             : JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')["subject"] || "none";
         console.log('subject is', subject);
 
@@ -26,7 +26,6 @@
 
         // certain lessons are "preferred" depending on the subject
         var subjectPreference = {
-            none : ["numbers-inside-video-games","order-of-operations", "coordinates", "ds-intro", "simple-datatypes"],
             math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities2-compound", "linear-regression","distance-formula", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
             science : ["simple-datatypes", "ds-intro", "numbers-inside-video-games", "simple-datatypes", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
