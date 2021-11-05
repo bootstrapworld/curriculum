@@ -1537,13 +1537,12 @@
                                    [rubric-file (read-group i directive)]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
-                                   [rubric-link-output (dispatch-make-workbook-link rubric-file-compts "" "rubric-file")]
+                                   [rubric-link-output (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")]
                                    [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
-                              (let ([styled-project-link-output (string-append "[.OptProject]##" project-link-output "##")])
-                                (unless (assoc styled-project-link-output *opt-project-links*)
-                                  (set! *opt-project-links*
-                                    (cons (list styled-project-link-output rubric-link-output) *opt-project-links*))))
-                               (display project-link-output o))]
+                              (unless (assoc project-link-output *opt-project-links*)
+                                (set! *opt-project-links*
+                                  (cons (list project-link-output rubric-link-output) *opt-project-links*)))
+                              (display project-link-output o))]
                            [else
                              ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1716,7 +1715,7 @@
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
 
             (for ([x (reverse *opt-project-links*)])
-              (fprintf o "\n* {startsb}~a{endsb} {startsb}~a{endsb}\n\n" (car x) (cadr x)))
+              (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x)))
 
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *printable-exercise-links*
