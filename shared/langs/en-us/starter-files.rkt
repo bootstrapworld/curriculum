@@ -19,7 +19,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
    )
-  ("mood-generator-ask" "Alternater Version of the Mood Generator Starter File"
+  ("mood-generator-ask" "Alternate Version of the Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e&v=1904b2c")
    )
   ("red-shape" "Red Shape Starter File"
