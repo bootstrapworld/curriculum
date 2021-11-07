@@ -699,7 +699,6 @@
                    (set! *opt-printable-exercise-links*
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
-
               [(equal? link-type "printable-exercise")
                 (let ([styled-link-output (string-append "[.PrintableExercise]##" link-output "##")])
                   (unless (findf (lambda (L) (equal? (cadr L) styled-link-output))
@@ -987,6 +986,17 @@
     #:exists 'replace)
   (display desc o)
   (newline o))
+
+(define (link-to-opt-projects o)
+  ; (printf "doing link-to-opt-projects\n")
+  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
+    (for ([lesson lessons])
+      (let ([lesson-opt-links (read-data-file (format "lessons/~a/.cached/.index-opt-proj.rkt.kp" lesson) #:mode 'forms)])
+        ; (printf "lesson-opt-links for ~s is ~s\n" lesson lesson-opt-links)
+        (for ([x lesson-opt-links])
+          (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n"
+                   (regexp-replace "^link:" (car x) "link:../")
+                   (regexp-replace "^link:" (cadr x) "link:../")))))))
 
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway in ~s~n" (current-directory))
@@ -1572,9 +1582,10 @@
                            (display-title i o out-file)
                            (display-alternative-proglang o)
                            (when *teacher-resources*
-                             ;(printf "teacher resource autoloading stuff\n")
+                             ; (printf "teacher resource autoloading stuff\n")
                              (newline o)
                              (fprintf o (create-workbook-links))
+                             (link-to-opt-projects o)
                              ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
@@ -1716,8 +1727,15 @@
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
 
-            (for ([x (reverse *opt-project-links*)])
-              (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x)))
+            (let ([opt-proj-links (reverse *opt-project-links*)])
+              (call-with-output-file (path-replace-extension out-file "-opt-proj.rkt.kp")
+                (lambda (o)
+                  (for ([link-pair opt-proj-links])
+                    (write link-pair o)
+                    (newline o))))
+
+              (for ([x opt-proj-links])
+                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
 
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *printable-exercise-links*
