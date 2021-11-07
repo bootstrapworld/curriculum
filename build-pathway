@@ -812,7 +812,7 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+    echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-standards.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
@@ -2418,7 +2418,7 @@ function postproc_resources() {
   fi
 }
 
-function postproc_allpathways() {
+function postproc_allpwylessons() {
   local fhtml=$1
   if test -f "$fhtml"; then
     local localDISTROOTDIR=../../
@@ -2475,7 +2475,7 @@ function doadocpostproc() {
   run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
   run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
-  run_postproc postproc_allpathways $ADOC_POSTPROC_ALLPATHWAYS_INPUT
+  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
 
   end=`date +%s`
   runtime=$((end-start))
@@ -2561,17 +2561,17 @@ export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do
 export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrative.txt.kp
 export ADOC_POSTPROC_NARRATIVEAUX_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrativeaux.txt.kp
 export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
-export ADOC_POSTPROC_ALLPATHWAYS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
+export ADOC_POSTPROC_ALLPWYLESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
 export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-relevant-lessons.txt.kp
 
 rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPATHWAYS_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 copycommonlessons
