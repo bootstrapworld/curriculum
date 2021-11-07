@@ -2160,16 +2160,16 @@
                      #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
   ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
-                                    (if pyret (enclose-span ".value.wescheme-boolean" x) x))]
+                                    (if pyret x (enclose-span ".value.wescheme-boolean" x)))]
         [(number? e) (let ([x (format "~a" e)])
-                       (if pyret (enclose-span ".value.wescheme-number" x) x))]
+                       (if pyret x (enclose-span ".value.wescheme-number" x)))]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
-                       (if pyret (enclose-span ".value.wescheme-symbol" x) x))]
+                       (if pyret x (enclose-span ".value.wescheme-symbol" x)))]
         [(string? e) (let ([x (format "~s" e)])
-                       (if pyret (enclose-span ".value.wescheme-string" x) x))]
+                       (if pyret x (enclose-span ".value.wescheme-string" x)))]
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
@@ -2256,13 +2256,13 @@
               e]))))
 
 (define (sexp->wescheme e)
-  ;(printf "doing sexp->wescheme ~s\n" e)
+  ; (printf "doing sexp->wescheme ~s\n" e)
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ;(printf "h2u retn'd ~s\n" h)
     (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
 
 (define (sexp->pyret e #:parens [parens #f])
-  ;(printf "\ndoing sexp->pyret ~s\n" e)
+  ; (printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ;(printf "h2u retn'd ~s\n" h)
     (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
@@ -2312,13 +2312,13 @@
 
 (define (sexp->block-table e #:pyret [pyret #f])
   ;(printf "doing sexp->block-table ~s ~a\n" e pyret)
-  (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
-        [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
-        [(number? e) (enclose-span ".value.wescheme-number" (format "~a" e))]
-        [(string? e) (enclose-span ".value.wescheme-string" (format "~s" e))]
-        [(boolean? e) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
+  (cond [(member e '(true false)) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
+        [(eq? e 'else) (enclose-span (if pyret "" ".wescheme-keyword") "else")]
+        [(number? e) (enclose-span (if pyret ".value" ".value.wescheme-number") (format "~a" e))]
+        [(string? e) (enclose-span (if pyret ".value" ".value.wescheme-string") (format "~s" e))]
+        [(boolean? e) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
         [(symbol? e)
-         (enclose-span ".value.wescheme-symbol"
+         (enclose-span (if pyret ".value" ".value.wescheme-symbol")
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
@@ -2327,7 +2327,8 @@
                        (if *solutions-mode?*
                            (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
                            (sexp->block-table e #:pyret pyret))
-                           (enclose-span (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a"
+                           (enclose-span (format ".value~a.studentBlockAnswerUnfilled~a"
+                                                 (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
@@ -2365,13 +2366,13 @@
 
 (define (sexp->block e #:pyret [pyret #f] #:wescheme [wescheme #f])
   ;(printf "doing sexp->block ~s ~a\n" e pyret)
-  (cond [(member e '(true false)) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
-        [(eq? e 'else) (enclose-span ".wescheme-keyword" "else")]
-        [(number? e) (enclose-span ".value.wescheme-number" (format "~a" e))]
-        [(string? e) (enclose-span ".value.wescheme-string" (format "~s" e))]
-        [(boolean? e) (enclose-span ".value.wescheme-boolean" (format "~a" e))]
+  (cond [(member e '(true false)) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
+        [(eq? e 'else) (enclose-span (if pyret "" ".wescheme-keyword") "else")]
+        [(number? e) (enclose-span (if pyret ".value" ".value.wescheme-number") (format "~a" e))]
+        [(string? e) (enclose-span (if pyret ".value" ".value.wescheme-string") (format "~s" e))]
+        [(boolean? e) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
         [(symbol? e)
-         (enclose-span ".value.wescheme-symbol"
+         (enclose-span (if pyret ".value" ".value.wescheme-symbol")
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
@@ -2386,7 +2387,7 @@
                            (enclose-span
                              (if wescheme
                                  (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
-                                 (format ".value.wescheme-symbol.studentBlockAnswerUnfilled~a" fill-len))
+                                 (format ".value.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (car e)])
                      (enclose-span ".expression"
