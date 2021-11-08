@@ -1,6 +1,6 @@
 #lang racket
 
-(provide *starter-files*)
+(provide *starter-files*) 
 
 (define *starter-files*
 
@@ -56,6 +56,7 @@
    )
   ("table-methods" "Table Methods Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1IkX5mu-XHHkxFlZVo7ZgLraoB18biUqA&v=1904b2c")
+   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("text-stats"  "Text Stats Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP&v=1904b2c")
@@ -69,7 +70,7 @@
 
   ; math
   
-  ("blank-game"  "Blank Game Starter File"
+  ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1_zdXA85BkkMqNvKXVdBcjq01foimuXkC&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
    )
@@ -85,7 +86,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=hHNjcj8rB6")
    )
-  ("defining values"  "Defining Values Starter File"
+  ("defining-values"  "Defining Values Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nHYxDhgOsbQ-jI7OMZLcgcTJ8HFxPWCL&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6")
    )
@@ -102,15 +103,19 @@
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=SnLx13yt5W")
    )
-  ("flags-start" "Flags Starter File"
+  ("flags" "Flags Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=jH25JejavW")
    )
-  ("flags-alaska" "Alaskan Flag Starter File"
+  ("flags-ak" "Alaskan Flag Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=ve2gTEY06p")
    )
-  ("flags-nl-fr-mauritius" "Flags of Netherland, France & Mauritius Starter File"
+  ("flags-china" "Chinese Flag Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1pi0API2gERKokehisGvg7717xaHHPEui&v=1904b2c")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=Vl5yocVoU4")
+   )
+  ("flags-2" "Flags of Netherland, France & Mauritius Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1O_3WGOcqaTzR7cuZY3ZSh5TEFg3ZNPV6&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=81WrTGQglP")
    )
@@ -129,7 +134,7 @@
   ("flags-panama" "Flag of Panama Starter File"
    ("wescheme" "https://www.wescheme.org/view?publicId=V4AfQydAHu")
    )
-  ("ninja-cat" "Ninja Cat Starter File"
+  ("ninja-cat" "Ninja Cat Game"
    ("pyret" "https://code.pyret.org/editor#share=1VB-XBcSzgYKnObyIH8BdCmiworNRLlvM")
    ("wescheme" "https://www.wescheme.org/run?publicId=sggzRzgU5T")
    )
@@ -137,7 +142,7 @@
    ("pyret" "https://code.pyret.org/editor#share=12Fa8MT2kZY7fFUYfsuRcHwOK0a5Vma-V&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=LGTVNvzrax")
    )
-  ("sa-prism" "Surface Area of a Prism Starter File"
+  ("prism" "Surface Area of a Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1UjWTxWi6FeDpKvP-n1o-EWhmGPDzbWPC&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=3QDJBmzYp0")
    )

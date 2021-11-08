@@ -2,10 +2,12 @@
 
 @lesson-description{Students learn about Categorical and Quantitative data, are introduced to Tables by way of the Animals Dataset, and consider what questions can and cannot be answered with available data.}
 
+@lesson-prereqs{}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@prereqs-stds{}
-
 | Lesson Goals
 | Students will be able to...
 
@@ -22,7 +24,6 @@
 |[.materials-links]
 * @link{https://docs.google.com/presentation/d/1TUkgAt5qc4vcsTIbDx5dhhLfY8VzMXz2eyg9D7T-an8/, Lesson Slides}
 * @link{pages/OpeningQuestions.adoc, Opening Questions}
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}
 * @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Dataset (spreadsheet)}
 @material-links
 
@@ -31,7 +32,7 @@
 * Decide how the first activity (opening questions) will be run. Will questions be printed for each student, group of students, or posted around the room. *Note:* these are just ideas to get you started. Use questions that you know will interest __your__ students!
 * Decide how students will be grouped in pairs.* You will need a computer for each student (or pair), with access to the internet
 * Each student (or pair of students) should have a Google Account.
-* Make sure student computers can access @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet} and the @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}.
+* Make sure student computers can access @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet} and the @starter-file{animals}.
 * Students should have link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook] and something to write with.
 
 
@@ -142,7 +143,7 @@ Let's take a look at our programming environment, and see what the Animals Datas
 
 [.lesson-instruction]
 --
-Open the @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
+Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
 
 Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
 --
@@ -157,12 +158,9 @@ Click "Run" to tell Pyret to read the code on the left-hand side. Anytime someth
 - What happens?
 - Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
 
-The first few lines on the lefthand side of the screen tell Pyret to `import` files from elsewhere, which contain tools we’ll want to use for this course. We’re importing a file called Bootstrap:Data Science, as well as files for working with Google Sheets, tables, and images:
+The first line on the lefthand side of the screen tell Pyret to `import` files from elsewhere, which contain tools we’ll want to use for this course. We’re importing a file called Bootstrap:Data Science, as well as files for working with Google Sheets, tables, and images:
 
-  include shared-gdrive("Bootstrap-DataScience-...")
-  include gdrive-sheets
-  include tables
-  include image
+  use context shared-gdrive("Bootstrap-DataScience-...")
 
 After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. (Notice the funny scramble of letters and numbers in that line of code? If you open up the Google Sheet, you'll find that same scramble in the address bar! That scramble is how the Pyret editor knows which spreadsheet to load.) After that, we see the following code:
 
