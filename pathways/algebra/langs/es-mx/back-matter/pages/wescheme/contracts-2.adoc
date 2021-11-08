@@ -1,0 +1,80 @@
+[.landscape]
+= Contracts
+
+Contracts tell us how to use a function. e.g. `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "fuchsia")` will evaluate to an Image.
+
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
+
+|===
+
+| Name
+|
+| Domain
+|
+| Range
+
+| `;` `=`
+| `{two-colons}`
+| `Number, Number`
+| `->`
+| `Boolean`
+5+| `_(= 3 2)_`
+
+| `;` `<=`
+| `{two-colons}`
+| `Number, Number`
+| `->`
+| `Boolean`
+5+| `_(<= 3 2)_`
+
+| `;` `>=`
+| `{two-colons}`
+| `Number, Number`
+| `->`
+| `Boolean`
+5+| `_(>= 3 2)_`
+
+| `;` `<>`
+| `{two-colons}`
+| `Number, Number`
+| `->`
+| `Boolean`
+5+| `_(<> 3 2)_`
+
+| `;` `string=?`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+| `(string=? "cat" "kitten")`
+
+| `;` `string>=?`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+| `(string>=? "ape" "zebra")`
+
+| `;` `string<=?`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+| `(string<=? "Abena" "Zoe")`
+
+| `;` `string<>?`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+| `(string<>? "crab" "crawfish")`
+
+| `;` `string-append`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `String`
+5+| `(string-append "sun" "shine")`
+
+|===
+

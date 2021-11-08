@@ -1,0 +1,18 @@
+@assess-design-recipe{"state-tax"
+"Some states have different tax rates. New York is 8%, Pennsylvania is 3%, and Delaware is 0%. All other states are 5%. Write a function that takes in the price of an item and returns how much the tax will be on the item."
+    #:headless? #t
+	#:domain-list (list "String")
+	#:range "Number"
+	#:purpose "Given the state and an item's price, return the tax on that item"
+	#:buggy-example-list
+	'([tax "Delaware" "0.0 + price"]
+	  [tax "Georgia" "0.05 + price"])
+	#:param-list (list "state price")
+	#:body
+	"ask:
+	  | state == \"Pennsylvania\" then: 0.03 * price
+	  | state == \"New York\" then: 0.08 * price
+	  | state == \"Delaware\" then: 0.0 * price
+	  | otherwise: 0.05 * price
+	end"
+} 
