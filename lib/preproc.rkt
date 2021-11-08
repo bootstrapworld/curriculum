@@ -1725,18 +1725,6 @@
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
-
-            (let ([opt-proj-links (reverse *opt-project-links*)])
-              (call-with-output-file (path-replace-extension out-file "-opt-proj.rkt.kp")
-                (lambda (o)
-                  (for ([link-pair opt-proj-links])
-                    (write link-pair o)
-                    (newline o))))
-
-              (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
-
             (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
                    [xx (sort *printable-exercise-links*
                              (lambda (x y)
@@ -1749,6 +1737,17 @@
 
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
+
+            ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
+            (let ([opt-proj-links (reverse *opt-project-links*)])
+              (call-with-output-file (path-replace-extension out-file "-opt-proj.rkt.kp")
+                (lambda (o)
+                  (for ([link-pair opt-proj-links])
+                    (write link-pair o)
+                    (newline o))))
+
+              (for ([x opt-proj-links])
+                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
 
             (for ([x (reverse *opt-printable-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
