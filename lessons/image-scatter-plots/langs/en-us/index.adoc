@@ -49,9 +49,11 @@
 @lang-prereq
 |===
 
-== Intro to Image-Scatter-Plots @duration{15 minutes}
+== Intro to Image-Scatter-Plots @duration{20 minutes}
 
 === Overview
+
+You experimented with scatter plots briefly when you explored all the various displays Pyret can make. We'll talk about the statistical use and meaning of scatter plots later; for now we're just going to play with them and extend our knowledge a bit.
 
 Students are introduced to their first example of a _custom scatter plot_, which makes use of the @show{(sexp->code 'image-scatter-plot)} function to replace each animals' dot with the name of the species. They then write code for another custom scatter plot.
 
@@ -89,7 +91,7 @@ In order to use the `image-scatter-plot` function, we have to first define a hel
 === Investigate
 
 [.lesson-instruction]
-Before we move on, let's turn off the evaluation of the `scatter-plot` expression in the program by putting a `#` at the start of line 14.
+Before we move on, let’s comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 14. This will "turn off" the expression, by telling Pyret to ignore that line.
 
 Have students complete @printable-exercise{pages/image-scatter-plot-explore.adoc}. In the process they will be asked to try to explain how the `image-scatter-plot` is generated and to write a new `Row -> Image` helper function in order to generate a second custom scatter plot.
 
@@ -121,7 +123,7 @@ What was the first step for generating an `image-scatter-plot` with the animals'
 
 _Writing a helper function_ `fun name-tag(r): text(r["name"], 15, "red") end`
 
-== Image Scatter Plots with Conditionals @duration{20 minutes}
+== Image Scatter Plots with Conditionals @duration{25 minutes}
 
 === Overview
 Students discover how to use conditionals - piecewise functions in math - to change dot colors and sizes, how "dot appearance" can be used to show more data in a scatter plot, and why that would be valuable.
@@ -209,7 +211,7 @@ For students who are really ready for a challenge, direct them to the @starter-f
 
 How do piecewise functions expand what is possible with the `image-scatter-plot` function?
 
-== Scatter Plots with Custom Images
+== Scatter Plots with Custom Images @duration{10 minutes}
 
 Have students turn to @opt-printable-exercise{pages/custom-image-explore.adoc} and show them the @starter-file{custom-animals}, which uses `image-url` and `scale` to generate icons of animals.
 
@@ -222,10 +224,4 @@ Give them a couple of minutes to notice and wonder about the code and complete t
 * How does using clip art help us to better understand the data?
 * What risks might there be to using clip art in displays?
 * We have seen a lot of different `image-scatter-plot` styles today. What ideas do you have for how `image-scatter-plot` could be used to deepen the analysis of your dataset?
-
-
-////
-(For now, the scatter plot is _purely_ to give students practice with contracts and displays. They are *not* expected to know much about scatter plots at this point.)
-@schanzer - Do you still see this as true?
-////
 
