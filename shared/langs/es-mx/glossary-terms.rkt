@@ -1,3 +1,6 @@
+#lang racket
+
+(provide *glossary-list*)
 
 #|
 Glossary for terminology used in the notes.  The first entry of each entry can be either
@@ -6,7 +9,8 @@ If a list of keys is provided, the generated glossary will use the first in the 
 when it prints out the glossary for a particular unit
 |#
 
-  (("funciones de acceso" "funciones para extraer valores de una estructura de datos")
+(define *glossary-list*
+  '(("funciones de acceso" "funciones para extraer valores de una estructura de datos")
     ("aplicando" "use una función dada en algunas entradas")
     (("argumento" "argumentos") "las entradas de una función, las expresiones de los argumentos siguen el nombre de una función")
     ("ascendente" "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después")
@@ -59,7 +63,7 @@ when it prints out the glossary for a particular unit
     (("frequency bar chart" "frequency bar charts") "A bar chart in which each the length of each bar corresponds to the frequency of a particular value")
     ("handler" "Connects an event (like a tick or keypress) and a function within a reactor")
     (("header" "headers") "the titles of each column of a table, usually shown at the top")
-    (“función auxiliar” “Una función invocada desde otras funciones con el propósito de realizar una tarea concreta requerida por éstas” “operador”)
+    ("función auxiliar" "Una función invocada desde otras funciones con el propósito de realizar una tarea concreta requerida por éstas" "operador")
     ("header" "The part of a table that identifies the names of each column")
     (("histograma" "histogramas") "Un gráfico de barras de frecuencia especial en el que cada barra cuenta la frecuencia de los valores que aparecen en un cierto intervalo.")
     ("eje horizontal" "eje en un diagrama de dispersión que va de izquierda a derecha")
@@ -79,7 +83,7 @@ when it prints out the glossary for a particular unit
     (("moda" "modas") "el valor (o valores) que ocurren con mayor frecuencia en un conjunto de datos")
     ("nombre" "cómo nos referimos a una función o valor definido en un idioma (ejemplos: +, *, estrella, círculo)")
     ("negative correlation" "relationship in which one variable increases as the other decreases, and vice versa")
-    (("operador" “operadores”) “un símbolo que manipula dos números y produce un resultado”)
+    (("operador" "operadores") "un símbolo que manipula dos números y produce un resultado")
     (("order" "orders" "ordering") "An arrangement of data according to some pattern")
     (("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas.")
     ("funciones por trozos" "una función que calcula diferentes expresiones basadas en su entrada")
@@ -110,4 +114,4 @@ when it prints out the glossary for a particular unit
     ("variable" "algo que cambia")
     ("nombre de variable" "nombre de la información que puede ser diferente cada vez que se utiliza una función")
     ("eje vertical" "El eje en un gráfico de dispersión que corre arriba y abajo")
-    )
+    ))

@@ -4,6 +4,7 @@
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
+(require "common-defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
 (require "create-workbook-links.rkt")

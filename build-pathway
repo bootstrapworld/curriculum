@@ -1255,7 +1255,7 @@ function buildlessonplan() {
 }
 
 function buildcommonlessons() {
-  #echo doing buildcommonlessons
+  # echo doing buildcommonlessons
   cd $TOPDIR
   cd $DESTLANGDIR
   cd lessons
@@ -1635,7 +1635,7 @@ function makeworkbookjson() {
 }
 
 function buildteacherresource() {
-  #echo doing buildteacherresource
+  # echo doing buildteacherresource
   cd resources
   export PATHWAYROOTDIR=../
   export DISTROOTDIR=../../../
@@ -1725,9 +1725,13 @@ function rmtmpfiles() {
 
 function copylessondir() {
   lessonDir=$1
-  #echo doing copylessondir $lessonDir
-  repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$LANGUAGE
-  #echo repoLessonDir is $repoLessonDir
+  # echo doing copylessondir $lessonDir
+  local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$LANGUAGE
+  if test ! -d $repoLessonDir -a $LANGUAGE != en-us; then
+    repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/en-us
+  fi
+
+  # echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
     mkdir -p $lessonDir
     #echo $repoLessonDir is a diry
@@ -1892,7 +1896,7 @@ function buildpathwayworkbooks() {
 }
 
 function copycommonlessons() {
-  #echo doing copycommonlessons
+  # echo doing copycommonlessons
   start=`date +%s`
   echo 📁 PREPARING LESSONS
   echo $'-----------------------------------------------------------\n'
@@ -1921,7 +1925,11 @@ function copycommonlessons() {
     done
   else
     for pwy in $ARGS; do
-      for lessonDir in $(cat $TOPDIR/pathways/$pwy/langs/$LANGUAGE/lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$LANGUAGE/lesson-order.txt
+      if test ! -f $lessonOrderFile -a $LANGUAGE != en-us; then
+        lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
+      fi
+      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *$'|grep -v '^ *;'); do
         copylessondir $lessonDir
       done
     done
@@ -1956,6 +1964,7 @@ function buildworkbookjsons() {
 }
 
 function updatepathwaylist() {
+  # echo doing updatepathwaylist
   local proglang=$1
   test "$proglang" = pyret && return
   test -f lesson-order.txt || return
@@ -1974,7 +1983,7 @@ function updatepathwaylist() {
 
 function buildpathway() {
   start=`date +%s`
-  #echo doing buildpathway $TGTPATHWAY using $PROGLANG
+  # echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
 
   PATHWAY=$TGTPATHWAY
@@ -1993,7 +2002,12 @@ function buildpathway() {
 
   echo
 
-  if test ! -d pathways/$SRCPATHWAY/langs/$LANGUAGE; then
+  local pwydir=pathways/$SRCPATHWAY/langs/$LANGUAGE
+  if test ! -d $pwydir -a $LANGUAGE != en-us; then
+    pwydir=pathways/$SRCPATHWAY/langs/en-us
+  fi
+
+  if test ! -d $pwydir; then
     echo
     echo WARNING: No pathway $PATHWAY/$LANGUAGE
   else
@@ -2008,12 +2022,12 @@ function buildpathway() {
 
     mkdir -p $DESTPATHWAYDIR
 
-    repoDir="$TOPDIR/pathways/$SRCPATHWAY/langs/$LANGUAGE"
+    repoDir="$TOPDIR/$pwydir"
     distDir="$TOPDIR/$DESTPATHWAYDIR"
 
     if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
-      #echo copying pathway I $repoDir
-      cp -pr pathways/$SRCPATHWAY/langs/$LANGUAGE/* $DESTPATHWAYDIR
+      # echo copying pathway I $repoDir
+      cp -pr $pwydir/* $DESTPATHWAYDIR
       cd $DESTPATHWAYDIR
       test -d .cached || mkdir -p .cached
       touch .cached/.redopdf
@@ -2023,7 +2037,7 @@ function buildpathway() {
       cd $TOPDIR
     fi
 
-    #echo copy pathway $SRCPATHWAY done
+    # echo copy pathway $SRCPATHWAY done
 
     REFRESHFRONTMATTER=1
     REFRESHBACKMATTER=1
@@ -2543,6 +2557,8 @@ function callonARGS() {
     fi
   done
 }
+
+# echo Starting the build...
 
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
 export PUPPETEER_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-puppeteer.json
