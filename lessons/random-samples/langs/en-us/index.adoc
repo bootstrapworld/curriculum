@@ -1,12 +1,12 @@
 = Randomness and Sample Size
 
-@add-to-lang{random-rows}
-
 @lesson-description{Students learn about random samples and statistical inference, as applied to the Animals Dataset. In the process, students get a light introduction to the role of sample size and the importance of statistical inference.}
 
 @lesson-prereqs{defining-table-functions}
 
 @keywords{}
+
+@add-to-lang{random-rows}
 
 [@lesson-intro-table]
 |===
@@ -40,17 +40,7 @@
 @lang-prereq
 |===
 
-FIXME 
-== Do Now
-[.lesson-instruction]
-@ifproglang{pyret}{Students should log into @link{https://code.pyret.org, CPO} open the @online-exercise{https://code.pyret.org/editor#share=1LHyOKYgYZcMHMJQMPqir-brfd9jtUFQZ, "More Animals Starter File"}, and save a copy.}
-
-@ifproglang{codap}{Students should log into CODAP and open @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json, Animals Dataset - Full population}.}
-
 == Flip the Script: Inference v. Probability @duration{30 minutes}
-=======
-== Flip the Script: Inference v. Probability @duration{45 minutes}
-END FIXME
 
 === Overview
 Statistical inference involves looking at a sample and trying to __infer something you don’t know__ about a larger population. This requires a sort of backwards reasoning, kind of like making a guess about a _cause_, based on the _effect_ that we see. To better understand the process of going from the sample back to the population, it helps to understand the more straightforward process of going from the population to a sample.  If the sample is random, we call this process Probability!
@@ -77,26 +67,24 @@ Sampling is a complicated issue. The main reason for doing inference is to guess
 
 Let’s see what happens if we switch from smaller to larger sample sizes, if we’re taking a random sample of shelter animals to infer what’s true about the larger population...
 
-[.lesson-instruction]
-@ifproglang{pyret}{Students should log into @link{https://code.pyret.org, CPO} open the @online-exercise{https://code.pyret.org/editor#share=1d3HuG_LjdX9HpfQPCmVmDG9mYml4nOX8&v=ebd213d, "Expanded Animals Starter File"}, and save a copy.}
-
-@ifproglang{codap}{Students should log into CODAP and open @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json, Animals Dataset - Full population}.}
-
 === Investigate
 
 @ifproglang{codap}{@span{.right}{@image{images/sampler-plugin-default.PNG,"" ,300}}}
 
-The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter. @ifproglang{pyret}{How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
+The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter.
+
+@ifproglang{pyret}{How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
 [.lesson-instruction]
 - Divide the class into groups of 3-5 students.
-- Have students open the @online-exercise{https://code.pyret.org/editor#share=1LHyOKYgYZcMHMJQMPqir-brfd9jtUFQZ, More Animals Starter File}, and click "Run".
+- Have students open the @starter-file{expanded-animals}, save a copy and click "Run".
 - Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
-- For a deeper exploration of the impact of sample size, have students complete @opt-printable-exercise{pages/predictions-from-samples.adoc}}
+- For a deeper exploration of the impact of sample size, have students complete @opt-printable-exercise{pages/predictions-from-samples.adoc}
+}
 
 @ifproglang{codap}{We're going to analyze which is better at guessing the truth about an entire population - a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
 
-Direct students to select `Sampler` from the Plugins dropdown menu. The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+Direct students to open the @starter-file{expanded-animals} and select `Sampler` from the Plugins dropdown menu. The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
 
 Before entering any specifications (number of items, number of samples) or interacting with the plugin any further, discuss with students the sampler in default mode, and invite them to _notice and wonder_. Possible wonderings include: How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?
 
@@ -115,8 +103,8 @@ Now that students are comfortable using the `Sampler`, it's time to dig into the
 [.lesson-instruction]
 - Divide the class into groups of 3-5 students.
 - Let students know that they want `large-sample` (on the worksheet) to be its own unique table. To produce a new table using `Sampler`, reopen the plugin rather than simply modifying the number of items.
-- Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.}
-
+- Have students complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
+}
 
 === Common Misconceptions
 Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
@@ -137,7 +125,7 @@ Have students share. Were larger samples always better for guessing the truth ab
 |
 @span{.title}{Project Options: Food Habits / Time Use}
 
-In both of these projects, students can gather data about their own lives, and use what they've learned in the class so far to analyze it. This project can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. See the project descriptions for @opt-preojct{pages/food-habits-project.adoc, Food Habits Project}{} and @opt-project{pages/time-use-project.adoc, "Time Use Project"}{}.
+In both of these projects, students can gather data about their own lives, and use what they've learned in the class so far to analyze it. This project can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. See the project descriptions for @opt-project{pages/food-habits-project.adoc, Food Habits Project}{} and @opt-project{pages/time-use-project.adoc, "Time Use Project"}{}.
 
 @span{.center}{__(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})__}
 |===
