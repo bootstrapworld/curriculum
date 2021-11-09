@@ -38,6 +38,7 @@
    )
   ("expanded-animals" "Expanded Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Iu5I9lJt1oCho-l4xk7FucgtLq6cAUVr&v=1904b2c")
+   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json")
    )
   ("image-scatter-plot-w-range" "Dots for Value Ranges Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A&v=1904b2c")
@@ -99,7 +100,7 @@
   ("exploring-linearity-in-tables"  "Exploring Linearity in Tables Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1n9x5gSOiBbmfo-VLZIirB8P1NjkjS3gS&")
    )
-  ("flag-mx" "Flag of Mexico Starter File"
+  ("flags-mx" "Flag of Mexico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=SnLx13yt5W")
    )
