@@ -17,9 +17,9 @@
 
 (define *standards-list*
   (list
+    (list "CSTA"    #f *csta-standards-list*)
     (list "CC-ELA"  "Common Core ELA" *cc-ela-standards-list*)
     (list "CC-Math" "Common Core Math" *cc-math-standards-list*)
-    (list "CSTA"    #f *csta-standards-list*)
     (list "K12CS"   "K-12CS" *k12cs-standards-list*)
     (list "NGSS"    "Next-Gen Science" *ngss-standards-list*)
     (list "Oklahoma" "Oklahoma" *ok-standards-list*)

@@ -1647,8 +1647,10 @@
                 ;(printf "yes\n")
                 (link-to-lessons-in-pathway o))
 
-              (set! *dictionaries-represented*
-                (sort *dictionaries-represented* string-ci<=?))
+              (let ([dict-rep *dictionaries-represented*])
+                (set! *dictionaries-represented*
+                  (filter (lambda (x) (member x dict-rep))
+                          (map car *standards-list*))))
 
               (when (or *narrative* *lesson-plan*)
                 (create-standards-subfile))
