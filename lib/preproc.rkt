@@ -1766,7 +1766,8 @@
                 (lambda (o)
                   (for ([link-pair opt-proj-links])
                     (write link-pair o)
-                    (newline o))))
+                    (newline o)))
+                #:exists 'replace)
 
               (for ([x opt-proj-links])
                 (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
