@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-08 # last modified
+LASTMOD=2021-11-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1764,8 +1764,9 @@ function copylessondir() {
       if test -f $lessonDir/proglang.txt; then
         for pl in $(cat $lessonDir/proglang.txt); do
           if test "$pl" != pyret; then
-            #echo copying $lessonDir to $lessonDir-$pl
-            cp -pr $lessonDir $lessonDir-$pl
+            mkdir -p $lessonDir-$pl
+            # echo copying $lessonDir to $lessonDir-$pl
+            cp -pr $lessonDir/* $lessonDir-$pl
             cd $lessonDir-$pl
             mkdir -p .cached
             touch .cached/.$pl
