@@ -11,7 +11,7 @@ when it prints out the glossary for a particular unit
 
 (define *glossary-list*
   '(("funciones de acceso" "funciones para extraer valores de una estructura de datos")
-    ("aplicando" "use una función dada en algunas entradas")
+    (aplicando" "use una función dada en algunas entradas")
     (("argumento" "argumentos") "las entradas de una función, las expresiones de los argumentos siguen el nombre de una función")
     ("ascendente" "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después")
     ("el promedio" "Un número que representa el centro o valor 'típico' en un conjunto de datos. Resultado que se obtiene al dividir la suma de varias cantidades por el número de sumandos.")
@@ -19,7 +19,7 @@ when it prints out the glossary for a particular unit
     (("bar chart" "bar charts") "a visualization in which a data set is represented by vertical bars, with length proportional to values")
     (("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo")
     ("booleano" "un tipo de datos con dos valores: true y false")
-    (("diagrama de caja" "diagrama de caja y bigotes") "El diagrama de caja (también conocido como diagrama de caja y bigotes) es una forma de mostrar la distribución de datos basada en el resumen de cinco números: mínimo (el valor más bajo), primer cuartil, mediana, tercer cuartil y máximo (el valor más alto).")
+    ( #| boxplot |# ("diagrama de caja" "diagrama de caja y bigotes") "El diagrama de caja (también conocido como diagrama de caja y bigotes) es una forma de mostrar la distribución de datos basada en el resumen de cinco números: mínimo (el valor más bajo), primer cuartil, mediana, tercer cuartil y máximo (el valor más alto).")
     (("llamada" "llamadas") "Utilizando una función dándole entradas")
     (("category" "categories") "the set of possible values that a value in a categorical data set can have")
     ("categorical data" "kind of data with a value that has a fixed number of possible values")
