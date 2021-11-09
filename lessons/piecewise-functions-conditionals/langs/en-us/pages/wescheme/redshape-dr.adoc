@@ -1,0 +1,26 @@
+@design-recipe-exercise{ "red-shape"
+"A friend loves red shapes so we've decided to write a program that makes it easy to generate them. Write a function called @funname which takes in the name of a shape and makes a 20-pixel, solid, red image of the shape."
+  #:show-funname-contract? #t
+  #:domain-list '(String)
+  #:show-domains? #t
+  #:range "Image"
+  #:show-range? #t
+  #:purpose "Given a shape name, produce a solid, red, 20-pixel image of the shape."
+  #:show-purpose? #t
+  #:num-examples 4
+  #:example-list '(("circle"     (circle 20 "solid" "red"))
+                   ("triangle"   (triangle 20 "solid" "red"))
+                   ("rectangle"  (rectangle 20 "solid" "red"))
+                   ("star"       (star 20 "solid" "red"))
+                    )
+  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
+  #:param-list '(shape)
+  #:show-params? #f
+  #:body '(cond
+[(string=? shape "circle")     (circle 20 "solid" "red")]
+[(string=? shape "triangle")   (triangle 20 "solid" "red")]
+[(string=? shape "rectangle")  (rectangle 20 "solid" "red")]
+[(string=? shape "star")       (star 20 "solid" "red")]
+[else (text "Unknown shape name!" 20 "red")])
+  #:show-body? #f
+  #:grid-lines? #t }

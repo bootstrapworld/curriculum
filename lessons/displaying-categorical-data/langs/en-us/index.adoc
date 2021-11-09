@@ -2,11 +2,14 @@
 
 @lesson-description{Students learn to generate and compare pie charts & bar charts, explore other plotting & display functions, and (optionally) design an infographic.}
 
+@lesson-prereqs{contracts}
+
+@keywords{}
+
 @add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
 
 [@lesson-intro-table]
 |===
-@prereqs-stds{contracts}
 | Lesson Goals
 | Students will be able to:
 
@@ -21,7 +24,6 @@
 * Generate bar charts (among other data displays) from the Animals Dataset
 }
 
-
 | Student-facing Lesson Goals
 |
 
@@ -30,7 +32,6 @@
 | Materials
 |[.materials-links]
 * @link{https://docs.google.com/presentation/d/1c6gMXPZV3duwHQje6H55NkHKUkPjJDwOBRk74hPDk6o/, Lesson slides}
-* @link{https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK, Animals Starter File}
 
 @material-links
 
@@ -41,7 +42,7 @@
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 @ifproglang{pyret}{
-* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK, open a new one}}
+* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new @starter-file{animals}.}
 
 | Supplemental Resources
 | @link{https://informationisbeautiful.net/, Information is Beautiful}
@@ -172,17 +173,19 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 |===
 a|
 @span{.title}{Mini Project: Making Infographics}
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-printable-exercise{infographics.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @opt-printable-exercise{infographic-rubric.adoc} to highlight for you and your students what a truly excellent infographic includes.
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, "Making an Infographic" }{infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper.
 |===
 
 == Exploring other Displays @duration{30 minutes}
 
 === Overview
 @ifproglang{pyret}{
-Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
+Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
+}
 
 @ifproglang{codap}{
-Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
+Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.
+}
 
 
 === Launch
@@ -193,7 +196,8 @@ There are _lots_ of @ifproglang{pyret}{other functions, for all} different kinds
 - Have students open a scatterplot of randomly positioned points derived from the Animals Dataset by clicking on the `graph` icon again.
 - Direct them to select the `ruler` icon. What happens when they select to `show count`?
 - Now, have students drag the `Weight` attribute to the X-axis and select the ruler icon, again. Which options appear, now? Why are they different?
-- Finally, with `Weight` still on the X-axis, invite students to drag `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon, this time?}
+- Finally, with `Weight` still on the X-axis, invite students to drag `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon, this time?
+}
 
 === Investigate
 [.lesson-instruction]
@@ -201,10 +205,12 @@ Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exe
 
 === Common Misconceptions
 @ifproglang{pyret}{
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.}
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
+}
 
 @ifproglang{codap}{
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.}
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.
+}
 
 
 === Synthesize
@@ -212,12 +218,14 @@ There are _many_ possible misconceptions about displays that students may encoun
 @ifproglang{pyret}{
 Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
 
-You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.}
+You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+}
 
 @ifproglang{codap}{
 Today you’ve added more data displays to your toolbox. You can create bar charts to visually display data, and even transform entire tables!
 
-You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.}
+You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.
+}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===

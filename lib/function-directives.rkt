@@ -11,18 +11,18 @@
          vars-to-commaed-string vars-to-string
          )
 
-(define *solutions-mode?* (truthy-getenv "SOLUTION"))
+(define *solutions-mode?* #f)
 
 (define *proglang* "pyret")
 
+(define *pyret?* #t)
+
 (define (set-proglang! proglang)
   (set! *proglang* proglang)
+  (set! *pyret?* (string=? *proglang* "pyret"))
   (unless (member *proglang* '("pyret" "wescheme" "codap"))
     (error 'ERROR "function-directives.rkt: Unknown proglang ~a"
            *proglang*)))
-
-
-(define *pyret?* (string=? *proglang* "pyret"))
 
 (define *show-funname-contract?* #f)
 (define *show-domains?* #f)
@@ -670,6 +670,7 @@
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
+                                #:solutions-mode? [solutions-mode? #f]
                                 #:page-header (page-header "Word Problem")
                                 #:show-funname-contract? (show-funname-contract? #f)
                                 #:domain-list (domain-list '()) ; list of string
@@ -700,6 +701,8 @@
   ;should be overridden in solutions mode
 
   (set-proglang! proglang)
+
+  (set! *solutions-mode?* solutions-mode?)
 
   (set! *show-funname-contract?* show-funname-contract?)
   (set! *show-domains?* show-domains?)
@@ -776,6 +779,7 @@
 (define (assess-design-recipe
           funname directions
           #:proglang [proglang "pyret"]
+          #:solutions-mode? [solutions-mode? #f]
           #:domain-list (domain-list '()) ; list of string
           #:range (range #f)
           #:purpose (purpose #f)
@@ -788,6 +792,7 @@
           #:headless? (headless? #f)
           )
   (set-proglang! proglang)
+  (set! *solutions-mode?* solutions-mode?)
   (unless range (error 'ERROR "assess-design-recipe: range required"))
   (unless purpose (error 'ERROR "assess-design-recipe: purpose required"))
   (unless body (error 'ERROR "assess-design-recipe: body required"))

@@ -6,16 +6,17 @@
 /************************************************************************************
 * OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
 */
-body {
+html, body {
   font-size:      12pt;
   font-family:    'Lato', Arial, Helvetica, sans-serif;
   color:          #75328A;
-  width:          100%; /* needed to undo effect of html{display:flex} */
   break-inside:   auto !important;
   display:        block !important;
   page-break-inside: auto !important;
   -webkit-font-smoothing: antialiased;
 }
+
+#content { margin: 0; }
 
 /* These items should ALWAYS max-out pagewidth */
 #header, #content, #footer {
@@ -24,6 +25,13 @@ body {
 body:not(.LessonPlan, .narrativepage) #content { 
   height: 90%; 
 }
+
+/* set page sizes and margins */
+body:not(.LessonPlan, .narrativepage, .landscape) {
+  width: 7.5in;
+}
+body.landscape:not( .LessonPlan, .narrativepage ) { 
+  width: 10in; page:  landscape; } /* define landscape page */
 
 p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
@@ -76,13 +84,7 @@ tr th.tableblock {
   height:           37px !important;
   float:            right !important;
 }
-#footer { 
-  background: rgba(0,0,0,0.5); 
-  height:     24px; 
-  position:   fixed;
-  bottom:     0;
-  padding:    0;
-}
+#footer { background: rgba(0,0,0,0.5); padding: 0px; height:  24px; }
 
 /* Hide anything that we only want seen on Google drive */
 .gdrive-only { display: none; visibility: hidden; }
@@ -219,66 +221,56 @@ tr th.tableblock {
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
 .left-header tr td:nth-child(1) p { font-weight: bold; }
 
-/* The sidebar */
-.sidebar {
-  display:    block;
-  position:   fixed;
-  top:        0px;
-  left:       calc(225px + 895px);
-  width:      calc(100% - (225px + 895px));
-  min-width:  200px;
-  height:     100%;
-  background: #eee;
-  opacity:    0.3;
-  border-left:solid 1px black;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 6px black;
-  z-index:    9999;
-  overflow:   scroll;
-}
-
-input.sidebarinput { margin-left: 10px; }
-
-.sidebar .sidebartitle {
-  display:  none;
-}
-
-.sidebar:hover { opacity: 1; }
-.sidebar:hover .sidebartitle { display: none; }
-.sidebar .sidebarlessons { padding: 10px; }
-.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
-.sidebar .sidebarlessons ul { 
-  background: white; 
-  margin:     10px;
-  box-shadow: inset 4px 0px 4px black;
-  height:     250px;
-  overflow:   scroll;
-  padding:    10px;
-}
-.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
-.sidebarlessons li:nth-child(odd) { background: #b7d89333; }
-.sidebarlessons .prerequisite::after { content:'★'; } 
-.sidebarlessons strong {color: black; }
-
-div.standards-hierarchical-table {
+/******************************************************
+ * The lesson sidebar 
+ * first we hide the normal sidebar, then style our own
+ */
+ #sidebar > ul, .sidebar .sidebartitle, 
+.sidebarstandards div.standards-hierarchical-table {
     display: none;
 }
 
-div.standards-hierarchical-table:hover div.title + dl {
+.sidebar {
+  display:    block;
+  position:   fixed;
+  top:        0;
+  left:       0;
+  bottom:     0;
+  width:      210px;
+  padding:    10px;
+  background: #b7d893;
+  transition: all 0.5s;
+  color:      black;
+  box-shadow: -1px 2px 3px black;
+  z-index:    9999;
+  overflow-y: scroll;
+}
+.sidebar:hover { box-shadow: -1px 2px 10px black; }
+.sidebar > * + * { margin-bottom: 10px; }
+.sidebar strong { color: black; }
+
+.sidebarlessons input[type="checkbox"] { margin-right: 5px; }
+.sidebarlessons li { list-style-type: none; margin-bottom: 5px;}
+.sidebarlessons .prerequisite::after { content:'★'; } 
+.sidebarlessons ul, .standardsAlignmentSelect { 
+  margin:     0;
+  padding:    10px;
+  border:     none;
+}
+
+
+.sidebarstandards { background: none; border: none !important; }
+.sidebarstandards td { padding: 0; }
+.sidebarstandards div.standards-hierarchical-table:hover div.title + dl {
     display: block;
 }
 
-.sidebarstandards { padding-left: 10px; }
 
-.sidebartextbooks strong { color: black; }
-.sidebartextbooks { padding-top: 10px; padding-bottom: 10px; padding-left: 10px; }
-
-.sidebarpractices { display: none; }
-.sidebarpractices ul { margin-left: 0px; text-align: center; }
-.sidebarpractices li { list-style-type: none; display: inline-block; }
-.sidebarpractices img {width: 110px; transition: width 0.5s; }
-.sidebarpractices img:hover {width: 200px; }
+.sidebarbadges { display: none; }
+.sidebarbadges ul { margin-left: 0px; text-align: center; }
+.sidebarbadges li { list-style-type: none; display: inline-block; }
+.sidebarbadges img {width: 110px; transition: width 0.5s; }
+.sidebarbadges img:hover {width: 200px; }
 
 /* Styling for the Materials section of the Lesson Summary */
 .materials-links {
@@ -312,6 +304,12 @@ div.standards-hierarchical-table:hover div.title + dl {
 .materials-links:hover {max-height: 1000px;}
 .Optional {font-style: italic;}
 .Optional::before {content: "Optional: "; color: gray;}
+
+.OptProject {font-style: italic;}
+.OptProject::before {content: "Optional Project: "; color: gray;}
+
+/* .StarterFile {font-style: italic;} */
+/* .StarterFile::before {content: "Starter File: "; color: gray;} */
 
 /* Language and Standards Tables */
 .lang-features-table * {
@@ -427,7 +425,7 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
+body:not(.LessonPlan) #header { margin-bottom:    5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
 body:not(.LessonPlan) .sect1 > h2:first-child,
@@ -466,42 +464,11 @@ table .autonum::after { content: none; }
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
+.recipe p { margin: 0; } 
 
-/* We use tables (perhaps not the best idea) for our DR headings */
-table.recipe_title    { background: gray; border: gray; }
-table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
-.recipe_title td:last-child { border: 3px solid gray !important; }
-.recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
-
-/* Under the heading comes the instructions */
-.recipe_instructions * { font-style: italic; font-size: .85rem; }
-
-/* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-.recipe p { 
-  width:      100%;
-  margin:     0;
-  display:    flex; 
-  flex-wrap:  wrap;
-}
-
-/* All student answers have a bottom-border, and a "ruby" printed in black */
-.recipe .studentAnswer { border-bottom: solid 1px black; }
-.recipe .studentAnswer::after { color: black; }
-
-/* All code is inside a wrapper, so apply the code font */
-.wrapper p, .wrapper .studentAnswer { font-family: Hack, "Courier New", monospace; }
-
-:not(.recipe_instructions) + .keyword_only { margin: -4pt 0pt; }
-
-/* Note(Emmanuel): these could probably be a lot tighter */
-.studentAnswerCode, .studentAnswer, .studentAnswerUnfilled, 
-.studentAnswerBlockUnfilled .studentBlockAnswerUnfilled,
-.studentBlockAnswerFilled {
-  margin-bottom:      0.85rem;
+.studentAnswer, .studentAnswerUnfilled, .studentAnswerBlockUnfilled
+.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
+  margin-bottom:      0.8rem;
   min-width:          105pt;
   position:           relative;
   padding:            0;
@@ -509,8 +476,7 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
   display:            inline-block;
   border-bottom:      solid 1px black;
 }
-.pyretkeyword { margin: 0.25rem 0; }
-.studentAnswerCode::after, .studentAnswer::after {
+.studentAnswer::after {
   position:           absolute;
   bottom:             -1rem;
   left:               0;
@@ -519,14 +485,11 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
   text-align:         center;
   font-style:         italic;
   font-family:        "Century Gothic";
-  content:            "\00A0";
   word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
 }
-.studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
-.studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
 
-.studentAnswerUnfilled, .studentBlockAnswerUnfilled,
-.studentAnswerFilled,   .studentBlockAnswerFilled {
+.studentAnswerUnfilled,.studentAnswerFilled,
+.studentBlockAnswerUnfilled,.studentBlockAnswerFilled {
   min-width:          auto;
 }
 
@@ -539,58 +502,91 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
     line-height:      inherit;
 }
 
-/* Maximize space for Domain, Purpose, and example/definition bodies */
-.recipe_domain, .recipe_purpose,
-.wescheme .wrapper p > *:nth-last-child(2),
-.pyret    .wrapper p > *:nth-last-child(1) {
-  flex-grow:  1;
+.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
+  box-shadow: 2px 1px 5px black;
 }
+
+.circleevalsexp .studentAnswerShort,
+.circleevalsexp .studentAnswerMedium  { min-width: 10pt;  }
+
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
+
+/* This class and the rule below it could be cleaned up */
+.wrapper {
+  font-family: Hack, "Courier New", monospace;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.recipe_name, .recipe_domain, .recipe_range, .purpose_comment,
+.recipe_example_inputs, .recipe_example_body, .recipe_example_body_long,
+.recipe_example_body_short,
+.recipe_variables, .recipe_definition_body,
+.recipe_cond, .questions, .answers {
+  font-family:        Hack, "Courier New", monospace;
+  display:            inline-block;
+  border-bottom:      solid 1pt black;
+}
+
+.recipe_name::after, .recipe_domain::after, .recipe_range::after,
+.recipe_purpose::after,
+.recipe_example_inputs::after, .recipe_example_body::after,
+.recipe_example_body_long::after,
+.recipe_example_body_short::after,
+.recipe_definition_body::after, .recipe_variables::after {
+  color: black;
+}
+
+.purpose_comment { border-bottom: none; vertical-align: top; }
 
 .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
   text-align: center;
 }
-
-.recipe_cond { flex-grow: unset !important; min-width:  10%; }
-.recipe_name          { min-width: 20%; }
-.recipe_range         { min-width: 12%; }
+.recipe_name          { min-width: 15%; }
+.recipe_domain        { width: 55%; }
+.recipe_range         { width: 15%; }
+.recipe_purpose       { width: 93%; }
 .recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
-.recipe_variables     { min-width: 30%; white-space: nowrap; }
 
-/* in solutions mode, use the smallest possible space for function name */ 
-.solution.recipe_name { min-width: 5em; }
-.pyret .solution.recipe_name { text-align: right; } /* no whitespace in pyret */
-
-/* Special styling for purpose statements (includes lang-specific comment) */
-.recipe_purpose, .recipe_contract .recipe_name { 
-  padding-left:         1.5ex; 
-  background-repeat-x:  no-repeat;
-  background-size:      0.4rem calc(1rem + 8pt);
-  background-position-y:4pt;
-  background-image:     url('data:image/png;base64,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');
-}
-.pyret .recipe_purpose, .pyret .recipe_contract .recipe_name {
-  background-size:       0.8rem calc(1rem + 10pt);
-  background-position-y: 0pt;
-  background-image:      url('data:image/png;base64,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'); 
-}
-.recipe_contract { background-repeat-y: no-repeat; }
-
-.recipe_example_body { margin-left: 1em;}
+.pyret .recipe_name { text-align: right; }
+.wescheme .recipe_example_body { width: 100%; }
+.pyret    .recipe_example_body { width:  90%; }
+.recipe_example_body_long { width: 90%; }
+.recipe_example_body_wrap { margin-left: 12px; display: inline-block; min-width: 45%; white-space:nowrap;}
+.pyret .recipe_example_body_wrap {min-width: 55%; white-space:nowrap;}
+.recipe_definition_body { width: 90%;  white-space:nowrap;}
 
 /* Piecewise Functions (ask/cond) branches */
-.wescheme .questions  { width: 44%; }
-.wescheme .answers    { width: 45%; }
+.wescheme .questions  { width: 42%; }
+.wescheme .answers    { width: 47%; }
 .pyret    .questions  { width: 39%; }
 .pyret    .answers    { width: 44%; }
-.cond_clauses { position: relative; width: 100%; }
-.cond_clauses .studentAnswer { border-bottom: solid 1px black; }
-.wescheme .cond_clauses::after {  /* Add trailing parens for WeScheme */
-  content: ') )'; 
-  position: absolute; 
-  left: 98%; 
-  bottom: 1rem; 
-  font-size: inherit; 
+
+/* Section title, with checkbox and step-specific instructions */
+.recipe_title p {
+  color:              white;
+  background:         gray;
+  display:            block;
+  padding:            1px 4px;
+  font-size:          1rem;
+  font-weight:        bold;
+  margin:             0px;
 }
+.recipe_title p::after { 
+  width:              13pt;
+  height:             13pt;
+  margin-top:         1pt;
+  background:         white; 
+  color:              transparent; 
+  content:            "\2B1C"; 
+  float:              right; 
+}
+.recipe_instructions * { font-style: italic; font-size: .85rem; }
+
+table.recipe_title    { border: 0px !important; }
+table.recipe_title td { padding: 0px; margin: 0px; border: none; }
 
 /************************************************************************************
 * TEACHER RESOURCES PAGE
@@ -631,12 +627,6 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 /************************************************************************************
 * FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
 */
-
-/* When printing solutions, add a shadow for expressions */
-.studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
-  box-shadow: 2px 1px 5px black;
-}
-
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
 }
@@ -658,7 +648,7 @@ div.circleevalsexp .expression {
 
 div.circleevalsexp .value {
   display:            inline-block;
-  margin:             8px 5px;
+  margin:             8px 6px;
   vertical-align:     top;
 }
 
@@ -668,6 +658,7 @@ div.circleevalsexp .operator {
   text-align:         center;
   line-height:        0.5rem;
   width:              100%;
+  padding:            0 0.5em;
   border-bottom:      solid 2px black;
   border-radius:      15px 15px 0px 0px;
 }
@@ -724,7 +715,7 @@ span.cm-scheme-rparen                     { color: black;}
 .cm-type                                  { color: #374049; }
 .cm-function-name                         { color: #374049; }
 .cm-unterminated-string                   { color: red; font-weight: bold; }
-.pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
+.pyretkeyword                             { font-weight: 900; }
 
 /* class for tables containing Pyret data */
 table.pyret-table {
@@ -775,7 +766,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
  */
 table.contracts-table {border-collapse: collapse;}
 table.contracts-table tr:nth-child(odd) {border-top: solid 2px black;}
-table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
+table.contracts-table td {padding: .1em .625em !important; height: 24pt;}
 
 /************************************************************************************
 * DATASHEETS (currently disabled)
@@ -795,43 +786,36 @@ table.contracts-table td {padding: .1em .625em !important; height: 25pt;}
 * SCREEN MEDIA
 */
 @media screen{
-  html { height: 100%; display:  flex; }
-
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
     line-height:      2.5rem;
   }
-  body.nonworkbookpage { width: auto !important; }
+  body.nonworkbookpage{ width: auto !important; }
+  /* no pagenums on web pages */
+  #footer .pagenumberholder { display: none; }
 }
-
-/* set page width for screen, and range for height */
-body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; min-height: 10in;  max-height: 11in;
-}
-/* define 'landscape' page type */
-body.landscape:not( .LessonPlan, .narrativepage ) { 
-  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; } 
 
 /************************************************************************************
  * PRINT MEDIA
  */
-@page { size: letter portrait; margin: 0.5in; }
-@page landscape { size: letter landscape; margin: 0.5in; }
+@page { margin: 0.5in; }
+
+/* Do not set @page size: here as html2pdf.js needs to override
+ * it */
+
+/* @page { size: letter portrait; margin: 0.5in; } */
+/* @page landscape { size: letter landscape; margin: 0.5in; } */
 
 @media print {
+
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .workbookpage .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
+  .workbookpage, .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
    display: none !important; visibility: hidden; float: none;
   }
-
-  /* set page heights */
-  body:not(.LessonPlan, .narrativepage, .landscape) { height:  10in; }
-  body.landscape:not( .LessonPlan, .narrativepage ) { height: 7.5in; }
-
 
     /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
@@ -864,6 +848,14 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
   .LessonPlan .sect1+.sect1 { border-top: solid 3px black; }
   :not(body.LessonPlan) #header { background: black; color: white; }
   .listingblock pre:not(.highlight) { background: none !important; }
+
+  /* set page heights */
+  body:not(.LessonPlan, .narrativepage, .landscape) {
+    height:  10in;
+  }
+  body.landscape:not( .LessonPlan, .narrativepage ) { 
+    height: 7.5in;
+  }
 
   body:not(.LessonPlan) #header> h1:first-child,
   body:not(.LessonPlan) .sect1 > h1:first-child,

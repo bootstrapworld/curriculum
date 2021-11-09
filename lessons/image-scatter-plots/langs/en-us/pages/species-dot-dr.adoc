@@ -1,0 +1,36 @@
+@design-recipe-exercise{ "species-dot" "We want to generate a custom dot for our `image-scatter-plot`, such that every species gets a unique color. Write a function called @funname, which takes in a Row from the animals table and returns a solid, 5px circle using black for dog, orange for cat, pink for rabbit, red for tarantula, green for lizard and blue for snail."
+  #:show-funname-contract? #t
+  #:domain-list (list "Row")
+  #:show-domains? #t
+  #:range "Image"
+  #:show-range? #t
+  #:purpose "Consumes an animal and produces a solid 5-pixel dot, black if dog, orange if cat, pink if rabbit, red if tarantula, green if lizard and blue if snail."
+  #:show-purpose? #t
+  #:num-examples 6
+  #:example-list '(("dog"         (circle 5 "solid" "black"))
+                   ("cat"         (circle 5 "solid" "orange"))
+                   ("rabbit"      (circle 5 "solid" "pink"))
+                   ("tarantula"   (circle 5 "solid" "red"))
+                   ("lizard"      (circle 5 "solid" "green"))
+                   ("snail"       (circle 5 "solid" "blue")))
+  #:show-examples #t
+  #:param-list (list "r")
+  #:show-funname-defn? #t
+  #:show-params? #t
+  #:body (if *solutions-mode?*
+"if (r[\"species\"] == \"dog\"): circle(5, \"solid\", \"black\")
+else if (r[\"species\"] == \"cat\"): circle(5, \"solid\", \"orange\")
+else if (r[\"species\"] == \"rabbit\"): circle(5, \"solid\", \"pink\")
+else if (r[\"species\"] == \"tarantula\"): circle(5, \"solid\", \"red\")
+else if (r[\"species\"] == \"lizard\"): circle(5, \"solid\", \"green\")
+else if (r[\"species\"] == \"snail\"): circle(5, \"solid\", \"blue\")
+          end"
+"if (r[\"species\"] == \"dog\"): circle(5, \"solid\", \"black\")
+else if (r[\"species\"] == \"cat\"): circle(5, \"solid\", \"orange\")
+else if (r[\"species\"] == \"rabbit\"): circle(5, \"solid\", \"pink\")
+else if (r[\"species\"] == \"tarantula\"): circle(5, \"solid\", \"red\")
+else if (r[\"species\"] == \"lizard\"): circle(5, \"solid\", \"green\")
+else if (r[\"species\"] == \"snail\"): circle(5, \"solid\", \"blue\")
+          end")
+  #:show-body? #t
+  #:grid-lines? #t }

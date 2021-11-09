@@ -1,0 +1,54 @@
+= Alice's Restaurant - Explore
+
+++++
+<style>
+#content :not(.openblock.acknowledgment) p { line-height: 23pt; }
+#content .editbox {width: auto;}
+</style>
+++++
+
+Alice's code has some new elements we haven't seen before, so let's experiment a bit to figure out how it works! *Open the @starter-file{alices-restaurant}, click “Run”, and try using the `cost` function in the Interactions window.*
+
+@vspace{2ex}
+
+@n What does @show{(sexp->code '(cost "hamburger"))} evaluate to?
+@fitb{30ex}{@ifsoln{_6_}}
+
+
+@n What does @show{(sexp->code '(cost "pie"))} evaluate to?
+@fitb{30ex}{@ifsoln{_2.25_}}
+
+
+@n What if you ask for @show{(sexp->code '(cost "fries"))}?
+@fitb{30ex}{@ifsoln{__"Sorry, that's not on the menu!"__}}
+
+
+@n Explain what the function is doing in your own words.
+@span{.blankline}{}
+@span{.blankline}{}
+@span{.blankline}{}
+
+
+@n What is the function's name? @fitb{20ex}{@ifsoln{cost}}
+Domain? @fitb{20ex}{@ifsoln{String}} Range? @fitb{20ex}{@ifsoln{Number}}
+
+
+@n What is the name of its variable?
+@fitb{30ex}{@ifsoln{menu-item}}
+
+
+@n Alice says onion rings have gone up to $3.75. Change the `cost` function to reflect this.
+
+
+@n Try adding menu items of your own. What's your favorite?
+
+
+@n For an unknown food item, the function produces the String `"That's not on the menu!"` Is this a problem? Why or why not?
+
+@span{.blankline}{}
+@span{.blankline}{}
+
+
+@n Suppose Alice wants to calculate the price of a hamburger, _including a 5% sales tax_. Draw a Circle of Evaluation for the expression below.
+
+@ifsoln{@show{(sexp->coe `(* 1.05 (cost "hamburger")))}}

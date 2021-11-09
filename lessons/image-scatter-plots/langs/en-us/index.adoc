@@ -1,0 +1,227 @@
+= Image Scatter Plots
+
+++++
+<style>
+.strategy-box { width: 100%; }
+
+.comparison * { font-size: 0.75rem !important; }
+.comparison td { background: #f7f7f8; padding: 0 !important; }
+.comparison .highlight { padding: 0 !important; }
+
+#content .forceShading { background-color: #f7f7f8; }
+</style>
+++++
+
+@lesson-description{Image-scatter-plots expose deeper insight into subgroups within a population, motivating the need for more advanced analysis. Students get a chance to apply their understanding of if-expressions and defining functions.}
+
+@lesson-prereqs{defining-functions, piecewise-functions-conditionals}
+
+@keywords{piecewise, piece-wise, scatterplot, scatterplots, image scatterplots, Scatterplot, Scatterplots}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* make image scatter plots using helper functions
+* make custom image scatter plots using if-then-else expressions
+* recognize the merit of analyzing subgroups of a sample set
+
+| Student-facing Lesson Goals
+|
+* Let's explore a new Pyret function that lets us make more interesting scatter plots.
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1foIZjn6ADpzck0gw-L3f_MEZpt7dnTvBVL2HxuHTwPE/, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered
+* Decide how students will be grouped in pairs
+* Computer for each student (or pair), with access to the internet
+* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
+* All students should log into @link{https://code.pyret.org, "code.pyret.org (CPO)"}.
+
+@lang-prereq
+|===
+
+== Intro to Image-Scatter-Plots @duration{20 minutes}
+
+=== Overview
+
+You experimented with scatter plots briefly when you explored all the various displays Pyret can make. We'll talk about the statistical use and meaning of scatter plots later; for now we're just going to play with them and extend our knowledge a bit.
+
+Students are introduced to their first example of a _custom scatter plot_, which makes use of the @show{(sexp->code 'image-scatter-plot)} function to replace each animals' dot with the name of the species. They then write code for another custom scatter plot.
+
+=== Launch
+
+Have students open the @starter-file{image-scatter-plot}, and complete @printable-exercise{scatter-plot-explore.adoc}.
+
+[.lesson-instruction]
+* What did you notice?
+* What did you wonder?
+* Why does the @show{(sexp->code 'scatter-plot)} function take in 3 Strings, when there are only two axes?
+
+The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
+
+[.forceShading]
+--
+```
+image-scatter-plot :: (
+  t :: Table,
+  xs :: String,
+  ys :: String,
+  f  :: (Row -> Image)
+) -> Image
+```
+--
+
+[.lesson-instruction]
+What is the Domain of `image-scatter-plot`?
+
+_Table, String, String and... what is that last part?... a Function that consumes a Row and produces an Image!_
+
+[.lesson-point]
+In order to use the `image-scatter-plot` function, we have to first define a helper function that consumes a Row and produces an image, using  information it looks up in the Row.
+
+=== Investigate
+
+[.lesson-instruction]
+Before we move on, let’s comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 14. This will "turn off" the expression, by telling Pyret to ignore that line.
+
+Have students complete @printable-exercise{pages/image-scatter-plot-explore.adoc}. In the process they will be asked to try to explain how the `image-scatter-plot` is generated and to write a new `Row -> Image` helper function in order to generate a second custom scatter plot.
+
+=== Synthesize
+
+[.lesson-instruction]
+* What does the `species-tag` function do?
+* How does this `image-scatter-plot` use `species-tag`?
+* What data type is `species-tag`?
+
+
+@span{.center}{@image{images/species-tag.png, "species-tag", 450}
+
+[.lesson-instruction]
+How did having the dots labeled with the species change your understanding of the data?
+
+Make sure to direct the conversation back to *Data Science!*
+__This scatter plot makes it clear that we may want to analyze each species separately, rather than grouping them all together!__ In the Grouped Samples lesson, students will learn how to do just that.
+
+[.lesson-instruction]
+* What other scatter plots might this be useful for?
+* What did the other helper functions do?
+
+The `legs-tag` function _made blue rings whose size was determined by the number of legs the animal had. `age-tag` made stars whose size was double the age of the animal._
+@span{.center}{@image{images/legs-tag.png, "legs-tag", 415} @image{images/age-tag.png, "age-tag", 403}}
+
+[.lesson-instruction]
+What was the first step for generating an `image-scatter-plot` with the animals' names?
+
+_Writing a helper function_ `fun name-tag(r): text(r["name"], 15, "red") end`
+
+== Image Scatter Plots with Conditionals @duration{25 minutes}
+
+=== Overview
+Students discover how to use conditionals - piecewise functions in math - to change dot colors and sizes, how "dot appearance" can be used to show more data in a scatter plot, and why that would be valuable.
+
+=== Launch
+[.lesson-instruction]
+So far, we've seen that the `scatter-plot` function makes uniform blue dots  and the `image-scatter-plot` function can label each point with some text, a different sized dot, or a star. What other ideas do you have for how scatter plots could visually help us to understand data better? How else could we make scatter plots be more interesting than the ones with plain blue dots?
+
+_Students might suggest using other colors, using letters, using numbers, using coordinates, using different shapes, using different sizes, etc._
+
+_To get more out of the `image-scatter-plot` function, we'll need to use conditional functions._
+
+@comment{
+[.lesson-instruction]
+* Take a moment and make a prediction. How do you think the age of an animal impacts how long it takes to be adopted?
+* Which of these scatter plots best matches your prediction?
+}
+
+Have students open the @starter-file{piecewise-image-scatter-plot} and turn to @printable-exercise{pages/species-dot-explore.adoc} to record their thinking about the file.
+
+@span{.center}{@image{images/age-v-weeks-species-dot.png, "Age v. Weeks Scatter Plot", 450}}
+
+[.lesson-instruction]
+* What do you Notice?
+* What do you Wonder?
+* How is this program similar to the one that made the `image-scatter-plot` with species labels?
+* How is this code different?
+* What does this new visualization tell us about the relationship between age and weeks?
+* What other analysis would be helpful here?
+
+=== Investigate
+
+Using @opt-printable-exercise{species-dot-dr.adoc}, talk students through how the design recipe could be used to write `species-dot`.
+
+[.lesson-instruction]
+* What is the contract for `species-dot`?
+* What is the purpose of `species-dot`?
+* How many examples do we need to write?
+* From looking at the examples, how do we know that we need to write a conditional/piecewise function?
+
+Have students turn to @printable-exercise{sex-dot-dr.adoc} and use the design recipe to write a new helper function that will make different color dots based on the animals' sex.
+
+Make sure that students write the Contract and Purpose Statement __first__ , and check in with their partner __and__ the teacher before proceeding.
+
+Once they've got the Contract and Purpose Statement, have them come up with `examples:` for _each sex_. Once again, have them check with a partner _and_ the teacher before finishing the page.
+
+[.lesson-instruction]
+Once another student _and_ the teacher have checked your work, type the `sex-dot` function into your starter file, and use it to make an `image-scatter-plot` using `age` as the x-axis and `weeks` as the y-axis.
+
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{ Optional: When your conditional is _already_ a Boolean }
+If you have time or students who are ready for a challenge, you can also have them make a scatter plot for dots distinguishing whether the animal is fixed or not using the directions at the end of the starter file or @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column! The code will work if written in either of the following ways:
+[.comparison, cols="<4a,<3a", options="header"]
+!===
+! Checking the Boolean
+! Using the Boolean Directly
+
+!
+```
+fun fixed-dot(r):
+  if      (r["fixed"] == true) : circle(5, "solid", "green")
+  else if (r["fixed"] == false): circle(5, "solid", "black")
+  end
+end
+```
+!
+```
+fun fixed-dot(r):
+  if r["fixed"]: circle(5, "solid", "green")
+  else: circle(5, "solid", "black")
+  end
+end
+```
+!===
+
+For students who are really ready for a challenge, direct them to the @starter-file{image-scatter-plot-w-range} and @opt-printable-exercise{value-range-dot-explore.adoc}
+
+|===
+
+
+=== Synthesize
+
+How do piecewise functions expand what is possible with the `image-scatter-plot` function?
+
+== Scatter Plots with Custom Images @duration{10 minutes}
+
+Have students turn to @opt-printable-exercise{pages/custom-image-explore.adoc} and show them the @starter-file{custom-animals}, which uses `image-url` and `scale` to generate icons of animals.
+
+Give them a couple of minutes to notice and wonder about the code and complete the first couple of questions before running the program to reveal the scatter plot.
+
+[.lesson-instruction]
+* What do you Notice? What do you Wonder?
+* How is this code similar to other code we've seen?
+* How is this program different from other programs we've seen using `image-scatter-plot`?
+* How does using clip art help us to better understand the data?
+* What risks might there be to using clip art in displays?
+* We have seen a lot of different `image-scatter-plot` styles today. What ideas do you have for how `image-scatter-plot` could be used to deepen the analysis of your dataset?
+

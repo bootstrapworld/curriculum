@@ -1,0 +1,72 @@
+= Red Shape - Explore
+
+++++
+<style>
+#content tbody tr { height: 3in}
+</style>
+++++
+
+@n Open the @starter-file{red-shape}, and read through the code you find there. This code contains new programming that you haven't seen yet! Take a moment to list everything you Notice, and then everything you Wonder...
+
+@vspace{2ex}
+
+[cols="^1,^1", options="header"]
+|===
+| *Notice* 		| *Wonder*
+| @ifsoln{_(sample responses) I notice a contract and a purpose statement. I see examples.  I notice what looks like a function definition, but I see if/else in there_}
+| @ifsoln{(sample responses) I wonder what if/else are all about...}
+
+|===
+
+@vspace{2ex}
+
+@n What happens if you click run and type @ifproglang{pyret}{red-shape("ellipse")} @ifproglang{wescheme}{(red-shape "ellipse")}?
+
+@span{.blankline}{
+	@ifsoln{_It says "Unknown shape name" in red._}
+}
+
+@vspace{2ex}
+
+@n Add *another example* for "triangle".
+
+@ifsoln{
+@ifproglang{pyret}{`red-shape("triangle") is triangle(20 "solid" "red")`}
+@ifproglang{wescheme}{`(EXAMPLE (red-shape "triangle") (triangle 20 "solid" "red"))`}
+}
+
+@vspace{2ex}
+
+@n Add another line of code to the definition, to define what the function should do with the input "triangle".
+
+@ifsoln{
+@ifproglang{pyret}{`else if (shape == "triangle"): triangle(20 "solid" "red")`}
+@ifproglang{wescheme}{`[(string=? shape "triangle") (triangle 20 "solid" "red")]`}
+}
+
+@vspace{2ex}
+
+@n Come up with some new shapes, and add them to the code. Make sure you include examples or you will get an error message!
+
+@ifsoln{_(depends on student choice - look for missing quotes, new lines in the definition without lines in the examples, etc.)_}
+
+@vspace{2ex}
+
+@n In your own words, describe how _piecewise functions_ work in this programming environment.
+
+@span{.blankline}{
+	@ifsoln{
+@ifproglang{pyret}{_Every if-expression has a test, which contains a boolean expression. If the test is true, Pyret evaluates whatever comes after it._}
+@ifproglang{wescheme}{_There is a list of conditionals that begin with boolean expressions. WeScheme checks to see if each of them is true and, if they are, evaluates whatever comes after the boolean expression._}
+}
+
+@span{.blankline}{
+	@ifsoln{_Otherwise, it evaluates whatever comes after the `else`_}
+}
+
+@span{.blankline}
+
+@span{.blankline}
+
+@vspace{2ex}
+

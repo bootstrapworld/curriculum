@@ -11,9 +11,12 @@ Visme URLs for tree diagrams:
 
 @lesson-description{Students explore the concept of permutations, computing the possible number of outcomes when choosing n items from m possibilities in a variety of real-world situations.}
 
+@lesson-prereqs{solving-word-problems}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@prereqs-stds{solving-word-problems}
 | Lesson Goals
 | Students will be able to...
 
@@ -91,11 +94,11 @@ It's useful to use __tree diagrams__, so we can see what our possible choices ar
 
 Let's diagram all permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, Ravioli, Soup or Ziti. That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
 
-@span{.center}@image{images/6-1-course-permute-w-replacement.png}
+@span{.center}{@image{images/6-1-course-permute-w-replacement.png}}
 
 But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it! After we've picked our first course, how many options do we have for the second? If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna (L-L), Lasagna & Pizza (L-P), Lasagna & Chicken (L-C), Lasagna & Ravioli (L-R), Lasagna & Soup (L-S), or Lasagna & Ziti (L-Z).  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 
-@span{.center}@image{images/6-2-course-permute-w-replacement.png}
+@span{.center}{@image{images/6-2-course-permute-w-replacement.png}}
 
 Every time we get to make a choice, each endpoint in our tree sprouts six more branches.
 
@@ -158,17 +161,17 @@ Now how long would it take to try every permutation?
 
 Let's start by drawing the tree diagram for 1st place:
 
-@span{.center}@image{images/4-1-course-permute-wo-replacement.png}
+@span{.center}{@image{images/4-1-course-permute-wo-replacement.png}}
 
 There are *four* possible items we could eat for our first course, so we have 4 possible branches. After we eat that course, it's time to order the second course! How many branches are there for the second course, under each first course choice?
 
-@span{.center}@image{images/4-2-course-permute-wo-replacement.png}
+@span{.center}{@image{images/4-2-course-permute-wo-replacement.png}}
 
 We can't order the same thing twice so once we've eaten Pizza for the first course, there are only _three_ possible items left to choose from: Chicken, Ravioli and Soup. If we start with Chicken, we can't order Chicken again, but we can choose from Pizza, Ravioli & Soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
 
 We can visualize our four courses as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. In the tree diagram below, you can see a _partial_ drawing of all four courses.
 
-@span{.center}@image{images/4-4-course-permute-wo-replacement.png}
+@span{.center}{@image{images/4-4-course-permute-wo-replacement.png}}
 
 If we start with Chicken, we can order:
 
@@ -225,10 +228,6 @@ In Pyret, we can compute the factorial of 6 with the `factorial` function. For e
 - What are some real-world examples of each?
 
 == Additional Exercises:
-@ifproglang{pyret}{
-* @opt-online-exercise{https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi, Permutations and Combinations Starter File} - provides students with a chance to view all the permutations and combinations for Luigi's menu.
-}
-@ifproglang{wescheme}{
-* @opt-online-exercise{https://www.wescheme.org/view?publicId=hHNjcj8rB6, Permutations and Combinations Starter File} - provides students with a chance to view all the permutations and combinations for Luigi's menu.
+* @starter-file{permuations-and-combinations} provides students with a chance to view all the permutations and combinations for Luigi's menu.
 }
 * @opt-printable-exercise{tree-diagrams2.adoc}
