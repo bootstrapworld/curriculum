@@ -185,6 +185,7 @@
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
 (define *starter-file-links* '())
+(define *opt-starter-file-links* '())
 (define *opt-project-links* '())
 
 (define (errmessage-context)
@@ -905,7 +906,9 @@
               ;TODO: probably not needed anymore
 
               ;FIXME: avoid erroring include: if file doesn't exist?
-              (format "include::~a[~a]" f.asc link-text))])))
+              (format "include::~a~a[~a]"
+                      (if *lesson-plan* "{frompathwayroot}" "")
+                      f.asc link-text))])))
 
 (define *lesson-summary-file* #f)
 
@@ -1177,6 +1180,7 @@
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
   (set! *starter-file-links* '())
+  (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (erase-span-stack!)
   )
@@ -1523,25 +1527,36 @@
                                         (lambda (i)
                                           (expand-directives i o)
                                           )))))))]
-                           [(string=? directive "starter-file")
+                           [(or (string=? directive "starter-file")
+                                (string=? directive "opt-starter-file"))
                             (let* ([lbl (read-group i directive)]
-                                   [c (assoc lbl *starter-files*)])
+                                   [c (assoc lbl *starter-files*)]
+                                   [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
-                                     (printf "WARNING: ~a: Ill-named starter file ~a\n\n"
-                                             (errmessage-context) lbl)]
+                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
+                                             (errmessage-context) directive lbl)]
                                     [else
                                       (let* ([title (cadr c)]
                                              [p (assoc *proglang* (cddr c))])
                                         (cond [(not p)
-                                               (printf "WARNING: ~a: Starter file ~a missing for ~a\n\n"
-                                                       lbl *proglang*)]
+                                               (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
+                                                      directive lbl *proglang*)]
                                               [else
                                                 (let* ([link-output (format "link:pass:[~a][~a~a]" (cadr p) title
                                                                             (if *lesson-plan* ", window=\"_blank\"" "")
                                                                             )]
-                                                       [styled-link-output (string-append "[.StarterFile]##" link-output "##")])
-                                                  (unless (member styled-link-output *starter-file-links*)
-                                                    (set! *starter-file-links* (cons styled-link-output *starter-file-links*)))
+                                                       [styled-link-output
+                                                         (format "[~a.StarterFile]##~a##"
+                                                                 (if opt? ".Optional" "")
+                                                                 link-output)])
+                                                  (cond [opt?
+                                                          (unless (member styled-link-output *opt-starter-file-links*)
+                                                            (set! *opt-starter-file-links*
+                                                              (cons styled-link-output *opt-starter-file-links*)))]
+                                                        [else
+                                                          (unless (member styled-link-output *starter-file-links*)
+                                                            (set! *starter-file-links*
+                                                              (cons styled-link-output *starter-file-links*)))])
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive)]
@@ -1550,7 +1565,13 @@
                                    [rubric-file (read-group i directive)]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
-                                   [rubric-link-output (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")]
+                                   [rubric-link-output
+                                     (cond [(string=? rubric-file "")
+                                            (printf "WARNING: ~a: rubric file empty for @~a{~a}\n\n"
+                                                    (errmessage-context) directive project-file)
+                                            ""]
+                                           [else
+                                             (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")])]
                                    [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
@@ -1749,6 +1770,9 @@
 
               (for ([x opt-proj-links])
                 (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
+
+            (for ([x (reverse *opt-starter-file-links*)])
+              (fprintf o "\n* ~a\n\n" x))
 
             (for ([x (reverse *opt-printable-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
