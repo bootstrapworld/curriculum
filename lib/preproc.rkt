@@ -904,7 +904,9 @@
               ;TODO: probably not needed anymore
 
               ;FIXME: avoid erroring include: if file doesn't exist?
-              (format "include::~a[~a]" f.asc link-text))])))
+              (format "include::~a~a[~a]"
+                      (if *lesson-plan* "{frompathwayroot}" "")
+                      f.asc link-text))])))
 
 (define *lesson-summary-file* #f)
 
@@ -1549,7 +1551,13 @@
                                    [rubric-file (read-group i directive)]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
-                                   [rubric-link-output (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")]
+                                   [rubric-link-output
+                                     (cond [(string=? rubric-file "")
+                                            (printf "WARNING: ~a: rubric file empty for @~a{~a}\n\n"
+                                                    (errmessage-context) directive project-file)
+                                            ""]
+                                           [else
+                                             (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")])]
                                    [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
