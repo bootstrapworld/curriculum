@@ -586,6 +586,7 @@
       #f))
 
 (define (dispatch-make-workbook-link page-compts link-text directive)
+  ; (printf "doing dispatch-make-workbook-link ~s ~s ~s\n" page-compts link-text directive)
   (let ([first-compt (car page-compts)])
     (case (length page-compts)
       [(1)
@@ -981,9 +982,9 @@
           (display "\n\n" o)
           )))))
 
-(define (display-lesson-description desc o)
-  ;(printf "doing display-lesson-description\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".index-desc.txt.kp")
+(define (display-lesson-description desc auxfile o)
+  ; (printf "doing display-lesson-description ~s\noutputting to ~s\n" desc auxfile)
+  (call-with-output-file auxfile
     (lambda (o)
       (display desc o) (newline o))
     #:exists 'replace)
@@ -1401,13 +1402,13 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n" *containing-directory*)]
-                           [(string=? directive "lesson-description")
-                            (unless *lesson-plan* ;TODO: or LESSON or both?
-                              (error 'ERROR
-                                     "WARNING: @lesson-description (~a, ~a) valid only in lesson plan"
-                                     *lesson-subdir* *in-file*))
-                            (display-lesson-description (read-group i directive) o)]
+                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
+                                     *containing-directory*)]
+                           [(or (string=? directive "lesson-description")
+                                (string=? directive "description"))
+                            (display-lesson-description (read-group i directive)
+                                                        (path-replace-extension out-file "-desc.txt.kp")
+                                                        o)]
                            [(string=? directive "all-exercises")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -1560,8 +1561,7 @@
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive)]
                                    [project-file (car arg1)]
-                                   [project-title (cadr arg1)]
-                                   [rubric-file (read-group i directive)]
+                                   [rubric-file (if (> (length arg1) 1) (cadr arg1) "")]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
                                    [rubric-link-output
@@ -1570,8 +1570,10 @@
                                                     (errmessage-context) directive project-file)
                                             ""]
                                            [else
-                                             (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")])]
-                                   [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
+                                             (dispatch-make-workbook-link
+                                               rubric-file-compts "rubric" "rubric-file")])]
+                                   [project-link-output (dispatch-make-workbook-link
+                                                          project-file-compts #f directive)])
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
