@@ -72,7 +72,7 @@
   ; math
   
   ("game"  "Blank Game Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1_zdXA85BkkMqNvKXVdBcjq01foimuXkC&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
    )
   ("boolean" "Boolean Starter File"
@@ -92,13 +92,13 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6")
    )
   ("exploring-linearity-in-definitions"  "Exploring Linearity in Definitions Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1AQi6tgmr8WsR9wXfi_8ylra1pnb0wUh9")
+   ("pyret" "https://code.pyret.org/editor#share=1HqgHT0HYeAIViIZ37YC9MFlj2euoOwYb&v=1904b2c")
    )
   ("exploring-linearity-in-graphs"  "Exploring Linearity in Graphs Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1VpOqRgXqWaNgJf8YHAeRqnFU5W6qTLiN")
+   ("pyret" "https://code.pyret.org/editor#share=1e_B5iwBeA58yGQ2FyfG_jNf05MuryFYS&v=1904b2c")
    )
   ("exploring-linearity-in-tables"  "Exploring Linearity in Tables Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1n9x5gSOiBbmfo-VLZIirB8P1NjkjS3gS&")
+   ("pyret" https://code.pyret.org/editor#share=1eelb-3bcUy6loIJ0oHAk9NJjKgtiRVmn&v=1904b2c")
    )
   ("flags-mx" "Flag of Mexico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6&v=1904b2c")
@@ -140,11 +140,11 @@
    ("wescheme" "https://www.wescheme.org/run?publicId=sggzRzgU5T")
    )
   ("rocket-height" "Rocket Height Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=12Fa8MT2kZY7fFUYfsuRcHwOK0a5Vma-V&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=LGTVNvzrax")
    )
   ("prism" "Surface Area of a Prism Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1UjWTxWi6FeDpKvP-n1o-EWhmGPDzbWPC&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=3QDJBmzYp0")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
