@@ -1561,7 +1561,7 @@
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive)]
                                    [project-file (car arg1)]
-                                   [rubric-file (cadr arg1)]
+                                   [rubric-file (if (> (length arg1) 1) (cadr arg1) "")]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
                                    [rubric-link-output
