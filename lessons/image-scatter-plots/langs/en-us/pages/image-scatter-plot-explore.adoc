@@ -1,16 +1,16 @@
 = Image Scatter Plot - Explore
 
-Before we build `image-scatter-plot(animals-table, "pounds", "weeks", species-tag)` ...
+Let's think about this expression before we evaluate it... `image-scatter-plot(animals-table, "pounds", "weeks", species-tag)`
 
 @n What Datatype is `species-tag`? @fitb{30em}{@ifsoln{_a function!_}}
 
-@n What does `species-tag` do when you run the program? (_Hint: look for its definition in the @starter-file{image-scatter-plot}!_)
+@n What is the function of `species-tag`? (_Hint: look for its definition in the @starter-file{image-scatter-plot}!_)
 
 @span{.blankline}{@ifsoln{_It consumes a row and makes a red image of the species name in size 15._}}
 
 @span{.blankline}{}
 
-@n Think about what you expect this `image-scatter-plot` to look like. Then test it out and describe the image you see.
+@n Think about what you expect this `image-scatter-plot` to look like. Then click run and type the expression into the interactions area to test it out.  Describe the image you see.
 
 @span{.blankline}{@ifsoln{_Each of the points on the plot is labeled with its species name in red._}}
 
@@ -40,14 +40,14 @@ Before we build `image-scatter-plot(animals-table, "pounds", "weeks", species-ta
 
 @span{.blankline}{}
 
-@n What would be the first step to making a new `image-scatter-plot` that compares pounds and weeks to adoption, where each point was labeled with the name of the animal instead of its species?
+@n What would `image-scatter-plot` need in order to generate a scatter plot comparing pounds and weeks to adoption, where each point is labeled with the name of the animal?
 
-@span{.blankline}{@ifsoln{_We'd need to make a_ `name-tag` _helper function._}}
+@span{.blankline}{@ifsoln{_a_ `name-tag` _helper function._}}
 
-@span{.blankline}{}
 
-@n Make the new `image-scatter-plot` described above. Record your new helper function here:
+@n Make the new `image-scatter-plot` described above. Record the new code you wrote here:
 
 @span{.blankline}{@ifsoln{ `fun name-tag(r): text(r["name"], 15, "red") end`}}
 
+@span{.blankline}{@ifsoln{ `image-scatter-plot(animals-table, "pounds", "weeks", name-tag)`}}
 
