@@ -20,17 +20,7 @@
         "MLR.7"
         )
 
-    ("defining-values" 
-        "MP.2"
-        "MP.7"
-        "MP.8"
-        "SEP.7"
-        "MLR.5"
-        "MLR.7"
-        "MLR.8"
-        )
-
-    ("simple-dataypes" 
+    ("simple-data-types" 
         "MLR.4"
         "MP.6"        
         ) 
@@ -46,6 +36,16 @@
         "MP.2"
         )
 
+    ("defining-values" 
+        "MP.2"
+        "MP.7"
+        "MP.8"
+        "SEP.7"
+        "MLR.5"
+        "MLR.7"
+        "MLR.8"
+        )
+    
     ("distance-formula" 
         "MP.2"
         "MP.3"      ; STEMworks
@@ -83,11 +83,6 @@
         "MP.4"      ; STEMworks
         )
 
-    ("inequalities-collision"
-        "MP.3"      ; STEMworks
-        "MLR.7"
-        )
-
     ("inequalities1-simple" 
         "MP.1"
         "MP.4"
@@ -103,6 +98,11 @@
     ("inequalities3-sam"
         "MP.4"      ; STEMworks
         )    
+
+    ("inequalities-collision"
+        "MP.3"      ; STEMworks
+        "MLR.7"
+        )   
 
     ("making-game-images" 
         "MP.6"
@@ -120,10 +120,6 @@
         "MP.4"  
         "MLR.7"
         "SEP.2"
-        )
-
-    ("piecewise-functions" 
-        "MP.8"
         )
 
     ("player-animation" 
@@ -165,7 +161,7 @@
         )
 
     ("choosing-your-dataset" 
-
+        
         )
 
     ("correlations" 
@@ -174,6 +170,10 @@
         "MLR.7"
         "SEP.3"
         )
+
+    ("custom-scatter-plots" 
+        "MP.7"      
+        )    
     
     ("defining-table-functions" 
         "MP.6"
@@ -183,6 +183,12 @@
     ("displays-and-lookups" 
         "MP.3"
         )
+
+    ("displaying-categorical-data" 
+        "MP.5"
+        "MP.6"
+        "SEP.3" 
+        )   
 
     ("ds-intro" 
         "MP.3"      ; STEMworks
@@ -196,12 +202,6 @@
         "MP.2"
         "MP.3"
         "SEP.3"
-        )
-
-    ("if-expressions" 
-        "MP.1"
-        "MP.3"
-        "MLR.8"
         )
 
     ("histograms" 
@@ -253,10 +253,8 @@
         "MLR.8"
         )
 
-    ("displaying-categorical-data" 
-        "MP.5"
-        "MP.6"
-        "SEP.3" 
+    ("piecewise-functions-conditionals" 
+        "MP.8"
         )
 
     ("random-samples" 

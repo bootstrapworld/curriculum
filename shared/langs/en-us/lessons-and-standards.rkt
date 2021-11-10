@@ -89,7 +89,7 @@
         "9-12.Algorithms and Programming.Control"
         )
 
-    ("simple-dataypes"
+    ("simple-data-types"
         "OK.6.A.1.3"
         "OK.7.N.1.2"
         "OK.7.N.1.1"
@@ -490,7 +490,7 @@
         "OK.6.D.1.3"
         )
 
-    ("image-scatter-plots"
+    ("custom-scatter-plots"
         "OK.A1.F.1.4"
         "OK.A2.F.1.8"
         "OK.L1.AP.M.01"
