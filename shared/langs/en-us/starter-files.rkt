@@ -84,7 +84,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=JCTcwYc57r")
    )
   ("permutations-and-combinations"  "Permutations and Combinations Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1nrGFh4nQGzcmi1caHlWoPSM1mH8kJqNi")
+   ("pyret" "https://code.pyret.org/editor#share=1pOwcDplD2vidTIvBMrBI5fVZ2jmk369Q")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=hHNjcj8rB6")
    )
   ("defining-values"  "Defining Values Starter File"
