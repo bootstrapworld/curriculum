@@ -40,13 +40,13 @@
    ("pyret" "https://code.pyret.org/editor#share=1Iu5I9lJt1oCho-l4xk7FucgtLq6cAUVr")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json")
    )
-  ("image-scatter-plot-w-range" "Dots for Value Ranges Starter File"
+  ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A")
    )
-  ("image-scatter-plot" "Image Scatter Plot Starter File"
+  ("custom-scatter-plot" "Custom Scatter Plot Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Yskwvzbe5CSMX3F1fveEOgrL3ms2cxHV")
    )
-  ("piecewise-image-scatter-plot" "Image Scatter Plot with Piecewise Functions Starter File"
+  ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0")
    )
   ("putting-it-all-together" "Putting it all Together Starter File"
