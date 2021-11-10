@@ -98,7 +98,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1e_B5iwBeA58yGQ2FyfG_jNf05MuryFYS")
    )
   ("exploring-linearity-in-tables"  "Exploring Linearity in Tables Starter File"
-   ("pyret" https://code.pyret.org/editor#share=1eelb-3bcUy6loIJ0oHAk9NJjKgtiRVmn")
+   ("pyret" "https://code.pyret.org/editor#share=1eelb-3bcUy6loIJ0oHAk9NJjKgtiRVmn")
    )
   ("flags-mx" "Flag of Mexico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6")
