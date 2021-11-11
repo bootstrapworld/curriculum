@@ -1253,8 +1253,9 @@
       ;
       ;
       (when *lesson-plan*
+
         (for ([x *lessons-and-standards*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
 
@@ -1267,7 +1268,7 @@
         ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
 
         (for ([x *lessons-and-textbooks*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-textbook-chapter s))))
 
