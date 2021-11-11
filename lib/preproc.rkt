@@ -55,6 +55,8 @@
 
 (define *lesson-plan* #f)
 
+(define *lesson-plan-base* #f)
+
 ;(printf "LESSONPLAN is ~s\n" *lesson-plan*)
 
 (define *other-dir* #f)
@@ -587,6 +589,7 @@
       #f))
 
 (define (dispatch-make-workbook-link page-compts link-text directive)
+  ; (printf "doing dispatch-make-workbook-link ~s ~s ~s\n" page-compts link-text directive)
   (let ([first-compt (car page-compts)])
     (case (length page-compts)
       [(1)
@@ -982,9 +985,9 @@
           (display "\n\n" o)
           )))))
 
-(define (display-lesson-description desc o)
-  ;(printf "doing display-lesson-description\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".index-desc.txt.kp")
+(define (display-lesson-description desc auxfile o)
+  ; (printf "doing display-lesson-description ~s\noutputting to ~s\n" desc auxfile)
+  (call-with-output-file auxfile
     (lambda (o)
       (display desc o) (newline o))
     #:exists 'replace)
@@ -1219,6 +1222,15 @@
   (when (and *lesson-plan* (not *lesson*))  ;fixme
     (set! *lesson* *lesson-plan*))
 
+  (set! *lesson-plan-base* *lesson-plan*)
+  (when *lesson-plan*
+    (unless *pyret?*
+      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
+        (unless (string=? *lesson-plan* x)
+          (set! *lesson-plan-base* x)))))
+
+  ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
                                        (exn-message e) (errmessage-file-context)))])
@@ -1242,13 +1254,14 @@
       ;
       ;
       (when *lesson-plan*
+
         (for ([x *lessons-and-standards*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
 
         (for ([x *lessons-and-practices*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-badge s))))
 
@@ -1256,7 +1269,7 @@
         ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
 
         (for ([x *lessons-and-textbooks*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-textbook-chapter s))))
 
@@ -1402,13 +1415,13 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n" *containing-directory*)]
-                           [(string=? directive "lesson-description")
-                            (unless *lesson-plan* ;TODO: or LESSON or both?
-                              (error 'ERROR
-                                     "WARNING: @lesson-description (~a, ~a) valid only in lesson plan"
-                                     *lesson-subdir* *in-file*))
-                            (display-lesson-description (read-group i directive) o)]
+                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
+                                     *containing-directory*)]
+                           [(or (string=? directive "lesson-description")
+                                (string=? directive "description"))
+                            (display-lesson-description (read-group i directive)
+                                                        (path-replace-extension out-file "-desc.txt.kp")
+                                                        o)]
                            [(string=? directive "all-exercises")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -1561,8 +1574,7 @@
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive)]
                                    [project-file (car arg1)]
-                                   [project-title (cadr arg1)]
-                                   [rubric-file (read-group i directive)]
+                                   [rubric-file (if (> (length arg1) 1) (cadr arg1) "")]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
                                    [rubric-link-output
@@ -1571,8 +1583,10 @@
                                                     (errmessage-context) directive project-file)
                                             ""]
                                            [else
-                                             (dispatch-make-workbook-link rubric-file-compts "rubric" "rubric-file")])]
-                                   [project-link-output (dispatch-make-workbook-link project-file-compts project-title directive)])
+                                             (dispatch-make-workbook-link
+                                               rubric-file-compts "rubric" "rubric-file")])]
+                                   [project-link-output (dispatch-make-workbook-link
+                                                          project-file-compts #f directive)])
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
@@ -1647,8 +1661,10 @@
                 ;(printf "yes\n")
                 (link-to-lessons-in-pathway o))
 
-              (set! *dictionaries-represented*
-                (sort *dictionaries-represented* string-ci<=?))
+              (let ([dict-rep *dictionaries-represented*])
+                (set! *dictionaries-represented*
+                  (filter (lambda (x) (member x dict-rep))
+                          (map car *standards-list*))))
 
               (when (or *narrative* *lesson-plan*)
                 (create-standards-subfile))
