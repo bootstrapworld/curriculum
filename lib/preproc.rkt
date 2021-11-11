@@ -54,6 +54,8 @@
 
 (define *lesson-plan* #f)
 
+(define *lesson-plan-base* #f)
+
 ;(printf "LESSONPLAN is ~s\n" *lesson-plan*)
 
 (define *other-dir* #f)
@@ -1219,6 +1221,15 @@
   (when (and *lesson-plan* (not *lesson*))  ;fixme
     (set! *lesson* *lesson-plan*))
 
+  (set! *lesson-plan-base* *lesson-plan*)
+  (when *lesson-plan*
+    (unless *pyret?*
+      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
+        (unless (string=? *lesson-plan* x)
+          (set! *lesson-plan-base* x)))))
+
+  ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
                                        (exn-message e) (errmessage-file-context)))])
@@ -1242,13 +1253,14 @@
       ;
       ;
       (when *lesson-plan*
+
         (for ([x *lessons-and-standards*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-standard s #f *lesson-plan* #f #f))))
 
         (for ([x *lessons-and-practices*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-badge s))))
 
@@ -1256,7 +1268,7 @@
         ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
 
         (for ([x *lessons-and-textbooks*])
-          (when (string=? (car x) *lesson-plan*)
+          (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
               (add-textbook-chapter s))))
 
