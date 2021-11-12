@@ -27,9 +27,14 @@
 ; math
    
     ("combinatorics-permutation"
+        "SEP.5"
+        "MP.4"
         )
 
     ("combinatorics-combination"
+        "SEP.5"
+        "MP.4"
+        "MP.5"
         )
 
     ("coordinates" 
@@ -161,7 +166,9 @@
         )
 
     ("choosing-your-dataset" 
-        
+        "MP.2"
+        "MP.5"
+        "SEP.3"
         )
 
     ("correlations" 
