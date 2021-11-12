@@ -7,7 +7,7 @@ export BOOK=
 export DEBUG=
 export FORCE=
 export SUPERFORCE=
-export LANGUAGE=en-us
+export NATLANG=en-us
 export LINT=
 export NOPDF=
 export PROGLANG=
@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-09 # last modified
+LASTMOD=2021-11-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -52,8 +52,8 @@ while test $# -ne 0; do
     FORCE=1
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=1
-  elif test "$arg" = --language; then
-    LANGUAGE=$1; shift
+  elif test "$arg" = --natlang -o "$arg" = --language; then
+    NATLANG=$1; shift
   elif test "$arg" = --lint -o "$arg" = -l -o "$arg" = --verify-links; then
     LINT=1
   elif test "$arg" = --no-pdf -o "$arg" = --nopdf -o "$arg" = -n; then
@@ -93,6 +93,8 @@ test $BOOK && NOPDF= || NOPDF=1
 
 test $SUPERFORCE && FORCE=1
 
+LANGUAGE=$NATLANG
+
 TMPTMP=$(mktemp); rm -f $TMPTMP
 TMPAFX=$(basename $TMPTMP)
 
@@ -107,14 +109,14 @@ export DATASHEETPAGE=
 export ALLPATHWAYLESSONS=
 
 function displayhelp() {
-  echo Usage: build-pathway [--language L] [--proglang P] [--debug] [--force] [--no-pdf] [--lint] [--help] [--version] pathway ...
+  echo Usage: build-pathway [--natlang L] [--proglang P] [--debug] [--force] [--no-pdf] [--lint] [--help] [--version] pathway ...
   echo
   echo Builds a document tree for the given pathway argument\(s\)
   echo under the \'distribution\' directory. If no pathway arg supplied,
   echo builds for all pathways in the \'pathways\' directory.
   echo
   echo Options:
-  echo "  " --language L: Build doctree for natural language L. Default: en-us
+  echo "  " --natlang L: Build doctree for natural language L. Default: en-us
   echo "  " --proglang P: Build doctree for programming language P.
   echo "                " P is one of wescheme, pyret.
   echo "                " An appropriate default is used depending on the pathway.
@@ -176,17 +178,17 @@ echo link:README.html[Authoring Guide] >> index.adoc
 echo >> index.adoc
 echo https://github.com/bootstrapworld/curriculum[\`curriculum\` Repo] >> index.adoc
 
-mkdir -p distribution/$LANGUAGE/courses
+mkdir -p distribution/$NATLANG/courses
 
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr prog distribution/$LANGUAGE/lib distribution/$LANGUAGE/extlib
+  rm -fr prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
 fi
 
 mkdir -p prog
-mkdir -p distribution/$LANGUAGE/lib
-mkdir -p distribution/$LANGUAGE/extlib
+mkdir -p distribution/$NATLANG/lib
+mkdir -p distribution/$NATLANG/extlib
 
 function checkmd5nochange() {
   local distDir=$1
@@ -217,22 +219,22 @@ function checkmd5nochange() {
 export PROGDIR=$TOPDIR/prog
 
 if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
-  # if $LANGUAGE != en-us, and
-  # shared/langs/$LANGUAGE isn't sufficiently populated,
+  # if $NATLANG != en-us, and
+  # shared/langs/$NATLANG isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
   #
   cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
-  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   #
-  if test $LANGUAGE != en-us -a -d $TOPDIR/shared/langs/$LANGUAGE; then
-    cp -pr $TOPDIR/shared/langs/$LANGUAGE/* $PROGDIR
+  if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
+    cp -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
-  cp -pr $PROGDIR/docroot/* distribution/$LANGUAGE
-  mkdir -p distribution/$LANGUAGE/lib/Badges
-  mkdir -p distribution/$LANGUAGE/lib/images
-  cp -pr $PROGDIR/Badges/* distribution/$LANGUAGE/lib/Badges
-  cp -pr $PROGDIR/images/* distribution/$LANGUAGE/lib/images
-  # TODO: may need to revisit for unforced LANGUAGE != en-us
+  cp -pr $PROGDIR/docroot/* distribution/$NATLANG
+  mkdir -p distribution/$NATLANG/lib/Badges
+  mkdir -p distribution/$NATLANG/lib/images
+  cp -pr $PROGDIR/Badges/* distribution/$NATLANG/lib/Badges
+  cp -pr $PROGDIR/images/* distribution/$NATLANG/lib/images
+  # TODO: may need to revisit for unforced NATLANG != en-us
 fi
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
@@ -245,15 +247,15 @@ function overwrite() {
   fi
 }
 
-if test ! -d distribution/$LANGUAGE/extlib/MathJax*; then
-  cp -pr $TOPDIR/extlib/MathJax* distribution/$LANGUAGE/extlib
+if test ! -d distribution/$NATLANG/extlib/MathJax*; then
+  cp -pr $TOPDIR/extlib/MathJax* distribution/$NATLANG/extlib
 fi
 
-if ! checkmd5nochange distribution/$LANGUAGE/lib $TOPDIR/lib; then
-  overwrite copying distribution/$LANGUAGE/lib
-  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$LANGUAGE/lib
+if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
+  overwrite copying distribution/$NATLANG/lib
+  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
-  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$LANGUAGE/lib
+  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
 fi
 
 function insertbodyid() {
@@ -286,7 +288,7 @@ function insertgdrivesave() {
 
   #echo pageTitle of $f_head.adoc is $pageTitle
   #FIXME: pathname should be corrected, again
-  local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/$LANGUAGE/courses/$TGTPATHWAY/$LESSONSUBDIR
+  local hrefPrefix=https://www.bootstrapworld.org/materials/$SEMESTER_YEAR/$NATLANG/courses/$TGTPATHWAY/$LESSONSUBDIR
 
   hrefPrefix=$(echo $hrefPrefix|$SED -e 's/\/$//'|$SED -e 's/\//\\\//g')
 
@@ -1122,7 +1124,7 @@ function buildworkbookpages() {
   export LESSON=$L
   export LESSONSUBDIR=$L
   #
-  repoDir="$TOPDIR/lessons/$LESSONSUBDIR/langs/$LANGUAGE"
+  repoDir="$TOPDIR/lessons/$LESSONSUBDIR/langs/$NATLANG"
 
   export PROGLANG=pyret
   if test -f .cached/.wescheme; then
@@ -1312,9 +1314,9 @@ function proglangversion() {
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
   #echo doing builddependencyjson
-  cd $TOPDIR/distribution/$LANGUAGE/lessons
+  cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
-  GRAPHFILE=$TOPDIR/distribution/$LANGUAGE/dependency-graph.js
+  GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
   echo "var graph = {" > $GRAPHFILE
   first=1
   for L in *; do
@@ -1389,7 +1391,7 @@ function builddependencyjson() {
 
 function buildlessonplans() {
   start=`date +%s`
-  cd $TOPDIR/distribution/$LANGUAGE/lessons
+  cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   local L
   local copacetic
@@ -1497,7 +1499,7 @@ function makeworkbookjson() {
   local tgt=$1
   local tgtpathway=$2
 
-  local WORKBOOKINPUT=$TOPDIR/distribution/$LANGUAGE/courses/$tgtpathway/.cached/.filelist
+  local WORKBOOKINPUT=$TOPDIR/distribution/$NATLANG/courses/$tgtpathway/.cached/.filelist
 
   local filesvar=
 
@@ -1683,7 +1685,7 @@ function buildteacherresource() {
 }
 
 function batchhtmltopdf() {
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
   # echo doing batchhtmltopdf in $(pwd)
   echo "] }" >> $PUPPETEER_INPUT
 
@@ -1710,7 +1712,7 @@ function rmtmpfiles() {
   test $DEBUG && return
   #echo doing rmtmpfiles
 
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
 
   for f in adoc aux log rkt tex title; do
     find . -name \*.$f -delete
@@ -1726,8 +1728,8 @@ function rmtmpfiles() {
 function copylessondir() {
   lessonDir=$1
   # echo doing copylessondir $lessonDir
-  local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$LANGUAGE
-  if test ! -d $repoLessonDir -a $LANGUAGE != en-us; then
+  local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$NATLANG
+  if test ! -d $repoLessonDir -a $NATLANG != en-us; then
     repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/en-us
   fi
 
@@ -1886,14 +1888,14 @@ function collectworkbookpages() {
 function buildpathwayworkbooks() {
   #echo building pathway workbooks for $TGTPATHWAY $SRCPATHWAY
 
-  cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
+  cd $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY
 
   #echo topdir is $TOPDIR
 
-  #mkdir -p $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY/resources/pages
-  #mkdir -p $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY/resources/solution-pages
+  #mkdir -p $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY/resources/pages
+  #mkdir -p $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY/resources/solution-pages
 
-  node $TOPDIR/distribution/$LANGUAGE/lib/makeWorkbook.js
+  node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
 }
 
 function copycommonlessons() {
@@ -1904,7 +1906,7 @@ function copycommonlessons() {
 
   cd $TOPDIR
 
-  export DESTLANGDIR=distribution/$LANGUAGE
+  export DESTLANGDIR=distribution/$NATLANG
 
   mkdir -p $DESTLANGDIR
 
@@ -1926,8 +1928,8 @@ function copycommonlessons() {
     done
   else
     for pwy in $ARGS; do
-      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$LANGUAGE/lesson-order.txt
-      if test ! -f $lessonOrderFile -a $LANGUAGE != en-us; then
+      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
+      if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
       for lessonDir in $(cat $lessonOrderFile|grep -v '^ *$'|grep -v '^ *;'); do
@@ -1946,7 +1948,7 @@ function copycommonlessons() {
 
 function buildworkbookjsons() {
   #echo DOING buildworkbookjsons $TGTPATHWAY
-  cd $TOPDIR/distribution/$LANGUAGE/courses/$TGTPATHWAY
+  cd $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY
 
   if test $BOOK; then
     #for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
@@ -2003,19 +2005,19 @@ function buildpathway() {
 
   echo
 
-  local pwydir=pathways/$SRCPATHWAY/langs/$LANGUAGE
-  if test ! -d $pwydir -a $LANGUAGE != en-us; then
+  local pwydir=pathways/$SRCPATHWAY/langs/$NATLANG
+  if test ! -d $pwydir -a $NATLANG != en-us; then
     pwydir=pathways/$SRCPATHWAY/langs/en-us
   fi
 
   if test ! -d $pwydir; then
     echo
-    echo WARNING: No pathway $PATHWAY/$LANGUAGE
+    echo WARNING: No pathway $PATHWAY/$NATLANG
   else
-    echo $langicon BUILDING PATHWAY: $LANGUAGE/$PATHWAY
+    echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY
     echo $'-----------------------------------------------------------\n'
 
-    export DESTPATHWAYDIR=distribution/$LANGUAGE/courses/$PATHWAY
+    export DESTPATHWAYDIR=distribution/$NATLANG/courses/$PATHWAY
 
     if test $FORCE; then
       rm -fr $DESTPATHWAYDIR
@@ -2085,7 +2087,7 @@ function buildpathway() {
 
     if test ! -f lesson-order.txt; then
       echo
-      echo WARNING: No lesson-order.txt in pathway $PATHWAY/$LANGUAGE
+      echo WARNING: No lesson-order.txt in pathway $PATHWAY/$NATLANG
     else
       export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
@@ -2205,11 +2207,11 @@ function buildpathway() {
     if test ! $NOPDF; then
       if test ! -f .cached/.workbook-page-index.rkt; then
         echo
-        echo WARNING: No workbook index file in pathway $PATHWAY/$LANGUAGE
+        echo WARNING: No workbook index file in pathway $PATHWAY/$NATLANG
       else
         #cd ../courses/$PATHWAY
 
-        cd $TOPDIR/distribution/$LANGUAGE
+        cd $TOPDIR/distribution/$NATLANG
         #batchhtmltopdf
 
         cd courses/$PATHWAY
@@ -2227,7 +2229,7 @@ function buildpathway() {
 
     #echo PWD 3 is $(pwd)
 
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
 
   if test $LINT; then
 
@@ -2257,9 +2259,9 @@ function buildpathway() {
 }
 
 function buildpathwaytocs() {
-  cd $TOPDIR/distribution/$LANGUAGE/courses
+  cd $TOPDIR/distribution/$NATLANG/courses
   export DISTROOTDIR=../
-  TOCSFILE=$TOPDIR/distribution/$LANGUAGE/pathway-tocs.js
+  TOCSFILE=$TOPDIR/distribution/$NATLANG/pathway-tocs.js
   echo "var pathwayTocs = {" > $TOCSFILE
   first=1
   for C in *; do
@@ -2281,7 +2283,7 @@ function buildpathwaytocs() {
 
 function allthestandards() {
   cd $TOPDIR
-  cd distribution/$LANGUAGE
+  cd distribution/$NATLANG
   export LANGROOTDIR=./
   #echo doing allthestandards in $(pwd)
   test -d .cached || mkdir -p .cached
@@ -2463,7 +2465,7 @@ function run_postproc() {
 
 function doadocpostproc() {
   #echo doing doadocpostproc
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
 
   start=`date +%s`
   echo 👨‍💻CALLING ASCIIDOCTOR IN BATCH MODE
@@ -2501,7 +2503,7 @@ function doadocpostproc() {
 function doconversions() {
   #echo doing doconversions
   start=`date +%s`
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
 
   echo 👨‍💻CALLING RACKET IN BATCH MODE
   echo '-----------------------------------------------------------'
@@ -2562,24 +2564,24 @@ function callonARGS() {
 # echo Starting the build...
 
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
-export PUPPETEER_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-puppeteer.json
+export PUPPETEER_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-puppeteer.json
 echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
 
-export ADOCABLES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adocables.rkt
+export ADOCABLES_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adocables.rkt
 echo '(' > $ADOCABLES_INPUT
 
-export ADOC_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-asciidoctor.txt.kp
+export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.txt.kp
 rm -f $ADOC_INPUT
 touch $ADOC_INPUT
 
-export ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-workbookpage.txt.kp
-export ADOC_POSTPROC_NONOTHERDIR_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-nonotherdir.txt.kp
-export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-lessonplan.txt.kp
-export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrative.txt.kp
-export ADOC_POSTPROC_NARRATIVEAUX_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-narrativeaux.txt.kp
-export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-resources.txt.kp
-export ADOC_POSTPROC_ALLPWYLESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-adoc-postproc-allpathways.txt.kp
-export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$LANGUAGE/.cached/.do-relevant-lessons.txt.kp
+export ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-workbookpage.txt.kp
+export ADOC_POSTPROC_NONOTHERDIR_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-nonotherdir.txt.kp
+export ADOC_POSTPROC_LESSONPLAN_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-lessonplan.txt.kp
+export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-narrative.txt.kp
+export ADOC_POSTPROC_NARRATIVEAUX_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-narrativeaux.txt.kp
+export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-resources.txt.kp
+export ADOC_POSTPROC_ALLPWYLESSONS_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-allpathways.txt.kp
+export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-relevant-lessons.txt.kp
 
 rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
@@ -2593,7 +2595,7 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT $ADOC_POSTPROC_NONOTHERDIR_INPUT \
 
 copycommonlessons
 
-mkdir -p distribution/$LANGUAGE/.cached
+mkdir -p distribution/$NATLANG/.cached
 
 buildcommonlessons
 
@@ -2639,7 +2641,7 @@ batchhtmltopdf
 
 if test ! $NOPDF; then
 
-  cd $TOPDIR/distribution/$LANGUAGE
+  cd $TOPDIR/distribution/$NATLANG
 
   callonARGS buildpathwayworkbooks
 
