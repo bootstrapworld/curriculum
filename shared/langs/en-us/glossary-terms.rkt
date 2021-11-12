@@ -17,7 +17,6 @@ when it prints out the glossary for a particular unit
     ("apply" "use a given function on some inputs")
     (("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function")
     ("ascending" "an order in which lower values appear first, and higher values appear after")
-    of values in datasets")
     (("bar chart" "bar charts") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
     (("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
     ("Boolean" "a type of data with two values: true and false")
