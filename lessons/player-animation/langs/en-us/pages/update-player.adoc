@@ -4,11 +4,11 @@
   #:range "Number"
   #:purpose "Consumes y-coordinate and key. Produces new y depending on key pressed"
   #:num-examples 4
-  #:example-list '((320 "up" (+ 320 20))
-                   (100 "up" (+ 100 20))
+  #:example-list '((300 "up" (+ 300 20))
+                   (160 "up" (+ 160 20))
                    (320 "down" (- 320 20))
                    (100 "down" (- 100 20)))
-  #:show-examples '((#f #f #f) (#f #f #f) (#f #f #f) (#f #f #f))
+  #:show-examples '((#t #t #f) (#f #f #f) (#f #f #f) (#f #f #f))
   #:param-list '(y key)
   #:show-params? #f
   #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
@@ -22,11 +22,11 @@
   #:range "Number"
   #:purpose "Consumes x, y and key. Produces new y depending on key pressed"
   #:num-examples 4
-  #:example-list '((170 320 "up" (+ 320 20))
+  #:example-list '((100 200 "up" (+ 200 20))
                    (200 100 "up" (+ 100 20))
                    ( 60 320 "down" (- 320 20))
                    (100 495 "down" (- 100 20)))
-  #:show-examples '((#f #f #f) (#f #f #f) (#f #f #f) (#f #f #f))
+  #:show-examples '((#t #t #f) (#f #f #f) (#f #f #f) (#f #f #f))
   #:param-list '(x y key)
   #:show-params? #f
   #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
