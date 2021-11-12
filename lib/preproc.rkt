@@ -1680,10 +1680,10 @@
                 (print-link-to-teacher-resources o)
                 (print-link-to-forum o))
 
-              (unless (truthy-getenv "OTHERDIR")
+              (unless *other-dir*
                 (fprintf o "\n\n"))
 
-              (unless (or (truthy-getenv "OTHERDIR") (truthy-getenv "NOCOLOPHON"))
+              (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
