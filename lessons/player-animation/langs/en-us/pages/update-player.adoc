@@ -29,7 +29,16 @@
   #:show-examples '((#t #t #f) (#f #f #f) (#f #f #f) (#f #f #f))
   #:param-list '(x y key)
   #:show-params? #f
-  #:body '(cond [(string=? "up" key) (+ y 20)] [(string=? "down" key) (- y 20)] [else y])
+  #:body (if *solutions-mode?*
+"if key == \"up\"         : y + 20
+else if key == \"down\"   : y - 20
+else: y
+end"
+"blank-line
+blank-line
+blank-line
+blank-line
+blank-line")
   #:show-body? #f
   #:grid-lines? #t }
 }
