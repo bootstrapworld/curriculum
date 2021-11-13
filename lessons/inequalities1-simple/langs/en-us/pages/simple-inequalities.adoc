@@ -25,32 +25,39 @@ Challenge yourself to use negatives, positives, fractions, decimals, etc. for yo
 
 @vspace{1ex}
 
-[cols="^.^5a, ^.^8, ^.^8", options="header", frame="none"]
+[cols="^.^1, ^.^5a, ^.^8, ^.^8", options="header", frame="none"]
 |===
+|
 | Expression
 | 4 solutions that evaluate to `true`
 | 4 non-solutions that evaluate to `false`
 
+| a
 | @show{(sexp->code '(> x 2))}
 | @ifsoln{2.1, pi, 5, 1000	}
 | @ifsoln{2, 0, -1, -333	}
 
+| b
 | @show{(sexp->code '(<= x -2))}
 | @ifsoln{-2, -3, -100, -1111}
 | @ifsoln{-1, 0, 3/4, 1200	}
 
+| c
 | @show{(sexp->code '(< x 3.5))}
 | @ifsoln{3, 2, 0, -1.5		}
 | @ifsoln{3.5, 4, 10, 111	}
 
+| d
 | @show{(sexp->code '(>= x -1))}
 | @ifsoln{-1, 0, 5/3, 36.8	}
 | @ifsoln{-2, -5, -10, -25	}
 
+| e
 | @show{(sexp->code '(> x -4))}
 | @ifsoln{-3.5, -1, 0, 17	}
 | @ifsoln{-4, -5, -8.5, -1000	}
 
+| f
 | @show{(sexp->code '(<> x 2))}
 | @ifsoln{-2, 0, 1.9, 2.1	}
 | @ifsoln{2 is the only non-solution}
