@@ -1216,19 +1216,6 @@ function buildlessonplan() {
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc
-      #$PROGDIR/adoc-preproc.rkt index.adoc
-      if test -f index.html; then
-        mv index.html index.shtml
-        insertbodyid index.shtml
-        addanalytics index.shtml
-        resolveabbrevs index.shtml
-        cleanuptitle index.shtml
-        cleanupduration index.shtml
-        insertsectionselfie index.shtml
-        lintlesson index.shtml
-        #echo calling insertgdrivesave from buildlessonplan
-        insertgdrivesave index.shtml
-      fi
     else
       if test -f pathway-missing-glossary-items.rkt.kp; then
         $PROGDIR/glossary-warnings.rkt
