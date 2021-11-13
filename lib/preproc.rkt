@@ -444,7 +444,7 @@
     result))
 
 (define (display-prereqs-bar o)
-  ;(printf "doing display-prereqs-bar in ~s\n" *in-file* )
+  ; (printf "doing display-prereqs-bar in ~s\n" *in-file* )
   (let* ([all-lessons (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))]
          [relevant-lessons (filter (lambda (x) (this-proglang-lesson? x all-lessons))
                                    all-lessons)])
@@ -460,12 +460,15 @@
     ;(newline o)
     (display (create-begin-tag "ul" "") o)
     (for ([lesson relevant-lessons])
+      ; (printf "... doing ~s\n" lesson)
       (let ([lesson-title lesson]
             [lesson-title-file (build-path *containing-directory* 'up lesson ".cached" ".index.titletxt")])
         (cond [(file-exists? lesson-title-file)
                (set! lesson-title (call-with-input-file lesson-title-file read-line))]
               [else
-                (printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson* lesson)])
+                #f
+                ;(printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson* lesson)
+                ])
         (let ([lk
                 (format "link:~alessons/pass:[~a]/index.shtml[~a]"
                         *dist-root-dir*
@@ -1145,7 +1148,7 @@
       (set! *lesson-keywords* (cons k *lesson-keywords*)))))
 
 (define (add-lesson-prereqs immediate-prereqs)
-  ;(printf "immediate prereqs = ~s\n" immediate-prereqs)
+  ; (printf "doing add-lesson-prereqs ~s ~s\n" *lesson-plan* immediate-prereqs)
   ;(printf "lesson-prereq dir = ~s\n" (current-directory))
   (set! *lesson-prereqs* immediate-prereqs)
   (for ([lsn immediate-prereqs])
