@@ -459,6 +459,7 @@
 
     ;(newline o)
     (display (create-begin-tag "ul" "") o)
+    #|
     (for ([lesson relevant-lessons])
       ; (printf "... doing ~s\n" lesson)
       (let ([lesson-title lesson]
@@ -478,6 +479,7 @@
               (set! lk (enclose-span ".prerequisite" lk)))
           (display (enclose-tag "li" "" lk) o)
           (newline o))))
+    |#
 
     (display (create-end-tag "ul") o)
     (display (create-end-tag "div") o)
