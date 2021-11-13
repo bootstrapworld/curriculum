@@ -48,10 +48,11 @@
 
 (define *solutions-mode?* #f)
 
-(define *workbook-page?* (truthy-getenv "WORKBOOKPAGE"))
-;FIXME
+(define *workbook-page?* (truthy-getenv "WORKBOOKPAGE")) ;FIXME
 
-(define *pathway* (or (truthy-getenv "SRCPATHWAY") ""))
+; (define *pathway* (or (truthy-getenv "SRCPATHWAY") "")) ;fixme
+
+(define *pathway* "BOGUSPATHWAY")
 
 (define *lesson-plan* #f)
 
@@ -65,7 +66,7 @@
 
 ;(printf "LESSON is ~s\n" *lesson*)
 
-(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR"))
+(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR")) ;fixme
 
 ;(printf "LESSONSUBDIR is ~s\n" *lesson-subdir*)
 
@@ -97,7 +98,7 @@
                 (eval x *adoc-namespace*)
                 (loop)))))))))
 
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR"))
+(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;fixme
 
 ;(define *dist-root-dir* (getenv "DISTROOTDIR"))
 
@@ -105,9 +106,7 @@
 
 ;(printf "distrootdir= ~s\n" *dist-root-dir*)
 
-(define *target-pathway* (or (getenv "TGTPATHWAY") "notDoingPathway"))
-
-;(printf "tgtpathway= ~s\n" *target-pathway*)
+(define *target-pathway* "notDoingPathway")
 
 (define *lang-root-dir*
   (let ([x (truthy-getenv "LANGROOTDIR")])
@@ -1041,7 +1040,7 @@
         ;(printf "lesson-description is ~s\n" lesson-description)
         (when #t
           ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *pathway* lesson-title)
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
           (if lesson-description
               (display lesson-description o)
               (display " {nbsp}" o)))
@@ -1185,6 +1184,21 @@
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
+
+  (set! *pyret?* (string=? *proglang* "pyret"))
+
+  (when (and *lesson-plan* (not *lesson*))  ;fixme
+    (set! *lesson* *lesson-plan*))
+
+  (set! *lesson-plan-base* *lesson-plan*)
+  (when *lesson-plan*
+    (unless *pyret?*
+      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
+        (unless (string=? *lesson-plan* x)
+          (set! *lesson-plan-base* x)))))
+
+  ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+
   (erase-span-stack!)
   )
 
@@ -1204,8 +1218,6 @@
                            #:z [z -1]
                            )
 
-  (init-flags)
-
   (set! *containing-directory* containing-directory)
   (set! *dist-root-dir* dist-root-dir)
   (set! *lesson* lesson)
@@ -1217,19 +1229,7 @@
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
 
-  (set! *pyret?* (string=? *proglang* "pyret"))
-
-  (when (and *lesson-plan* (not *lesson*))  ;fixme
-    (set! *lesson* *lesson-plan*))
-
-  (set! *lesson-plan-base* *lesson-plan*)
-  (when *lesson-plan*
-    (unless *pyret?*
-      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
-        (unless (string=? *lesson-plan* x)
-          (set! *lesson-plan-base* x)))))
-
-  ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+  (init-flags)
 
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
