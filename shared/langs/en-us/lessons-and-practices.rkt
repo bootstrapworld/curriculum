@@ -32,7 +32,7 @@
 
     ("simple-dataypes" 
         "MLR.4"
-        "MP.6"        
+        "MP.6"
         ) 
 ; math
    

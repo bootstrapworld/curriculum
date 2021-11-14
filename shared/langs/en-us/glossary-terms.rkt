@@ -49,7 +49,7 @@ when it prints out the glossary for a particular unit
     ("design recipe" "a sequence of steps that helps people document, test, and write functions")
     ("direction" "of a relationship between two quantitative variables: whether they tend to increase together, or if as one goes up the other tends to go down")
     ("domain" "the type or set of inputs that a function expects")
-    ("dot-accessors" "a way to extract the values of fields an instance")
+    ("dot accessor" "a way to extract the values of fields an instance")
     ("driver" "in pair programming, the person who is doing the typing")
     (("edge" "edges") "the line segments where the faces of solid figures meet in each of the three dimensions.")
     ("editor" "software in which you can write and evaluate code")

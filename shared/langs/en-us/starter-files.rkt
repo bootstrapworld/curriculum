@@ -5,7 +5,10 @@
 (define *starter-files*
 
 '(
-  ; core ; no spaces in starter file shortname!
+  ; no spaces in starter file shortname!
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; CORE
+
   ("alices-restaurant" "Alice's Restaurant Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
@@ -158,5 +161,39 @@
    ("pyret" "https://code.pyret.org/editor#share=1muE7xY-NKW5IJLeOnAu9Q31JUT6ns_n7&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=0elP8WrmfM")
    )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; REACTIVE
+  ("package-delivery" "Package Delivery Starter File"
+   ("pyret" "")
+  )
+
+  ("cake-bakery" "Bakery Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1lSittPaSqyeDXAmYmLX8epCIDU4FCFlH")
+  )
+
+  ("sunset" "Sunset Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=13RRDcl13HkfNp0Ue7jQUhBNZIumSNxfP")
+  )
+
+  ("what-to-wear" "What to Wear Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=15fUR1QAF-O5HIDq95QnctdsdVNfF1Tde")
+  )
+
+  ("moving-character" "Moving Character Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1pmuumO3gEC44--2zxp5fjK6k20lCYt-t")
+  )
+
+  ("virtual-pet" "Virtual Pet Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=15WcPmjNM-qAZGs9BakA7prvOVMqbBkxU")
+  )
+
+  ("ninja-cat-collisions", "Ninja Cat Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1TGw11fcBMAS0j2CCRWZm5_6GuBWVMBPq")
+  )
+
+  ("watermelon-smash" "Watermelon Smash Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1-gNiFJeQenO3e_9LVbPw6ucl4lZrTA6R")
+  )
 
   ))

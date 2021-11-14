@@ -1,6 +1,6 @@
 = Structures, Reactors, and Animations
 
-@description{Students implement animation using a modified Model-View-Controller paradigm called Reactors. Using a data structure to represent the position of an object, they write `draw`  functions to draw single frame from instances of that structure and `update` functions to generate new instances from previous ones. They learn how to use Reactors to combine their structure and functions into a complete animation.}
+@description{Students implement animation using a modified Model-View-Controller paradigm called Reactors. Using a data structure to represent the position of an object, they write `draw-state`  functions to draw single frame from instances of that structure and `next-state-tick` functions to generate new instances from previous ones. They learn how to use Reactors to combine their structure and functions into a complete animation.}
 
 [@lesson-intro-table]
 |===
@@ -17,8 +17,8 @@
 |[.materials-links]
 
 | Preparation
-- Computer for each student (or pair), running the Pyret Editor
-- The https://code.pyret.org/editor#share=0B9rKDmABYlJVSm94cFA4T3R2NTA[sunset starter file] loaded on student machines
+- Make sure all materials have been gathered
+- Decide how students will be grouped in pairs
 
 @lang-prereq
 |===
@@ -37,7 +37,7 @@ Let’s create an animation of a sunset. The sun will start at the top-left corn
 
 @centered-image{images/sunset1.gif, "", 800}
 
-In Bootstrap:Algebra, we talked about how an animation is made of a sequence of images that we flip through quickly. We continue to think of an animation as a sequence of images in Bootstrap:Reactive. For example, here are the first three frames of the sunset animation:
+An animation is made of a sequence of images that we flip through quickly. We continue to think of an animation as a sequence of images in Bootstrap:Reactive. For example, here are the first three frames of the sunset animation:
 
 @centered-image{images/sunset2.png, "", 800}
 
@@ -61,7 +61,7 @@ On your worksheet, fill in the table just below the three images to indicate wha
 Hopefully, you identified two pieces of changing information: the x-coordinate of the sun and the y-coordinate of the sun. Each image also contains the horizon (the brown rectangle), but that is the same in every frame. Let’s write down a data structure that captures the two coordinates.
 
 [.lesson-instruction]
-Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then fill in the SunsetState data structure definition that we started for you at the bottom of the page. Use sunset as the name of the constructor.
+Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then turn to @printable-exercise{pages/blank-type.adoc} and fill in the `SunsetState` data structure definition at the top of the page. Use `sunset` as the name of the constructor.
 
 You should have come up with something like this: a data block with numbers for the two coordinates.
 
@@ -75,9 +75,11 @@ data SunsetState:
 end
 ----
 
-The term state is used in computer science to refer to the details of a program at a specific point in time. Here, we use it to refer to the details that are unique to a single frame of the animation.
+Have students open the @starter-file{sunset}, and confirm that the data definition in their notes matches the definition in the file.
 
-We have the students copy the images into the workbook partly to make sure they understand what images they are working with and partly so that they have a self-contained worksheet page for later reference.
+The term "state" is used in computer science to refer to the details of a program at a specific point in time. Here, we use it to refer to the details that are unique to a single frame of the animation.
+
+Have students copy the images into the workbook partly to make sure they understand what images they are working with, and partly so that they have a self-contained worksheet page for later reference.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -104,7 +106,7 @@ Go to @printable-exercise{pages/draw-state.adoc} in your workbook and develop th
 
 You may have noticed that we used `SunsetState` instead of `sunset` as the domain name. Remember that `sunset` is just the name of the constructor, while `SunsetState` is the name of the type. We use `SunsetState` whenever we need a type name for the domain or range. 
 
-We can now draw one frame, but an animation needs many frames. How can we draw multiple frames? Let’s simply the problem a bit: if you have the instance for one frame, how do we compute the instance for the next frame? Note we didn’t ask how to produce the image for the next frame. We only asked how to produce the next `SunsetState` instance. Why? We just wrote `draw-state`, which produces the image from a `SunsetState`. So if we can produce the instance for the next frame, we can use `draw-state` to produce the image.
+We can now draw one frame, but an animation needs many frames. How can we draw multiple frames? Let’s simply the problem a bit: if you have the instance for one frame, how do we compute the instance for the next frame? Note we didn’t ask how to produce the _image_ for the next frame. We only asked how to produce the next `SunsetState` instance. Why? We just wrote `draw-state`, which produces the image from a `SunsetState`. So if we can produce the instance for the next frame, we can use `draw-state` to produce the image.
 
 [.lesson-point]
 Step 3: Produce the next frame instance
@@ -230,7 +232,6 @@ You have just seen the incredible power of functions in programming! Functions l
 An animation that only changes one number (e.g. - the x-coordinate of a plane flying across the sky, or the y-coordinate of a balloon floating upwards) uses that number as the Reactor state. But what if we wanted to do something more complex, which relied on keeping track of more than one number? This activity uses more complex animation to motivate the need for data structures.
 
 === Launch
-@span{.right}{@centered-image{images/cowjump.gif, "", 400}}
 You’ve learned the components of an animation in Pyret. The data structure for the state lies at the heart of the animation: each of the initial state, the `draw-state` function and the `next-state-tick` function are based on the data structure you choose. Being able to figure out the data structure you need for an animation is therefore a critical skills in making your own animations. In this lesson, we are going to practice identifying the data and creating the data structures for various animations. We will not write the entire animation. We are just going to practice identifying the data and writing the data structures.
 
 @span{.clear}{}
@@ -240,6 +241,8 @@ Figuring out the data structure is actually one of the most creative tasks in pr
 
 
 === Investigate
+@span{.right}{@centered-image{images/cowjump.gif, "", 200}}
+
 *Exercise: Jumping Cow* -- Look at this animation of a cow jumping over the moon.
 
 [.lesson-instruction]
@@ -272,7 +275,7 @@ In this case, there are two pieces of information: the x-coordinate of the cycli
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `BikeState` to capture the data in this animation.
 
 
-@span{.right}{@centered-image{images/pulsingstar.gif, "", 400}}
+@span{.right}{@centered-image{images/pulsingstar.gif, "", 200}}
 *Exercise: Pulsing Star* -- Look at this animation of a star that pulses as it moves across the sky.
 
 [.lesson-instruction]
@@ -295,7 +298,7 @@ What type did you choose for the field that tracks the direction of growth? You 
 The type for tracking direction of growth gives potential for a good discussion. None of these answers are wrong. If they were to use the boolean or the string, however, their next-state-tick function would need a conditional to decide whether to add or subtract from the current size. In this exercise, they aren’t writing the animations, so this is less of an issue. Our real goal is to get them to imagine animations and to identify the state information that underlies each one.
 ////
 
-@span{.right}{@centered-image{images/dimmer.gif, "", 400}}
+@span{.right}{@centered-image{images/dimmer.gif, "", 200}}
 *Exercise: Light Dimmer* -- Look at this animation of a slider to control the brightness of a light.
 
 [.lesson-instruction]

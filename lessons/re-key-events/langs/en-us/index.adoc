@@ -17,10 +17,6 @@
 - Class poster (List of rules, design recipe, course calendar)
 - Editing environment (Pyret Editor)
 
-| Preparation
-- The https://code.pyret.org/editor#share=0B9rKDmABYlJVVWk4MGJidEtsRWc[Moving Character] file preloaded on students’ machines
-- The https://code.pyret.org/editor#share=0B9rKDmABYlJVXy00M1VteEZxaHM[Virtual Pet Starter] file preloaded on students’ machines
-
 @lang-prereq
 |===
 
@@ -33,7 +29,7 @@ Students learn about _events_, and add key-event handling to their games.
 We’ve already seen one kind of interactivity in our programs: getting the next state from the current state on a tick-event. This is perfect for animations that happen on their own, without any user intervention. In a game, that might be clouds moving across the sky or a ball bouncing on its own. An important kind of behavior in _interactive_ programs is to respond user input, such as keypresses. A keypress, like the tick of a clock, is a kind of @vocab{event}, and we’ll re-use the idea of an event handler like `on-tick` and a function like `next-state-tick`. For key-events, the event @vocab{handler} is called `on-key`, and our function `next-state-key` will compute the next state from the current one after a key event. We’re going to use this idea to build up a @vocab{reactor} with a character moving in two dimensions, where the movement is triggered by keypresses.
 
 [.lesson-instruction]
-Open up the @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVVWk4MGJidEtsRWc, Moving Character} Starter File.
+Open up the @starter-file{moving-character}.
 
 It contains a data block for representing a character’s position (`CharState`) that has an x and y position.
 
@@ -127,7 +123,7 @@ This activity introduces students to Reactor programs that use key-events _and_ 
 Now, you’ve seen how to use functions to compute the next state in a game or animation for both tick and key events. We can combine these to make an interactive "`digital-pet`" from scratch!
 
 [.lesson-instruction]
-Open the Virtual Pet Starter file. Run it. You will see a frame come up, showing a cat face and green status bars for the cat’s sleep and hunger.
+Open the @starter-file{virtual-pet}. Run it. You will see a frame come up, showing a cat face and green status bars for the cat’s sleep and hunger.
 
 Notice that not much is happening! To make this game more interesting, we want to add three behaviors to it:
 
@@ -156,9 +152,9 @@ Next, we consider the tables that summarize what now changes in the animation.
 [.lesson-instruction]
 What changes between frames now that didn’t in the starter file for the virtual pet?
 
-The worksheet identifies that both hunger and sleep are changing in new ways. Since they `aren’t` new fields, this feature is completely dependent on existing data, and we don’t need to add any new fields. We therefore leave the second table empty (since we aren’t adding new fields).
+The worksheet identifies that both hunger and sleep are changing in new ways. Since they aren’t new fields, this feature is completely dependent on existing data. We therefore leave the second table empty (since we aren’t adding new fields).
 
-Next, we identify the components that we need to write or update. We don’t need to change the data definition at all, because no new fields were added. We _may_ need to update draw-state function, since the size of the bars changes. We definitely need to write the `next-state-tick` function, which doesn’t yet exist. We do not need to address anything about keypresses with this feature, so `next-state-key` is untouched. Since `next-state-tick` has been added for this feature, we need to add a `on-tick` handler to the reactor.
+Next, we identify the components that we need to write or update. We don’t need to change the data definition at all, because no new fields were added. We _may_ need to update the `draw-state` function, since the size of the bars changes. We definitely need to write the `next-state-tick` function, which doesn’t yet exist. We do not need to address anything about keypresses with this feature, so `next-state-key` is untouched. Since `next-state-tick` has been added for this feature, we need to add a `on-tick` handler to the reactor.
 
 Now that we’ve planned what work needs to be done (on paper), we can start thinking about the code. As always, we write examples before we write functions, so we are clear on what we are trying to do.
 
