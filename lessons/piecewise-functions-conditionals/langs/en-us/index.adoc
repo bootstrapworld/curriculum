@@ -17,7 +17,7 @@
 | Student-Facing Lesson Goals
 |
 * I can describe how piecewise functions work in math.
-* I can describe how conditionals (like `if-then-else`, `cond`, etc.) work in programming.
+* I can describe how conditionals work in programming.
 
 | Materials
 |[.materials-links]
@@ -51,14 +51,14 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Intro to Piecewise Functions @duration{15 minutes}
 
 === Overview
-Students are introduced to piecewise functions by way of a kinesthetic activity and then brainstorm real world applications of piecewise functions.
+Students are introduced to piecewise functions through a kinesthetic activity, and then brainstorm real world applications of piecewise functions.
 
 Decide whether this activity would work better for your class if students stand up and spread out around the classroom or stay in their seats.
 
 === Launch
 
 [.lesson-instruction]
-How would you describe what a function is?
+How would you explain a _function_ to someone else? What are some rules that all functions follow?
 
 [.lesson-point]
 A function has exactly one output for each input.
@@ -88,9 +88,9 @@ Ask a student making an O with their arms how they knew what to do._
 
 _Since each student ("input") has only one action ("output"), it is still a function_.
 
-Up until now, almost all of the functions students have seen can be described by a single rule. In this activity their behavior followed a _set of rules_ for which each input still had exactly one output. Make a big deal about this, so they recognize how big of a shift this is!
+Up until now, all of the functions students have seen can be described by a single rule. In this activity their behavior followed a _set of rules_ for which each input still had exactly one output. Make a big deal about this, so they recognize how big of a shift this is!
 
-Explain that students have just acted out what is called a _piecewise function_. The world is full of piecewise functions, so they appear in both math and the programming environment!
+Explain that students have just acted out what is called a _piecewise function_ in math, and a _conditional_ in programming. The world is full of piecewise functions and conditionals!
 
 [.lesson-instruction]
 --
@@ -143,7 +143,7 @@ _You may also want to discuss whether square root and absolute values are piecew
 |
 @span{.title}{Partial Functions}
 
-For Algebra 2 or pre-calculus teachers, this is a useful time to address _partial functions_. The students who had purple eyes had _no rule at all_, meaning that the function was _undefined_ at those points. In the USPS example, the cost to mail tiny cards is also _undefined_ because the postal service doesn't ship packages that are too small.
+For Algebra 2 or pre-calculus teachers, this is a useful time to address _partial functions_. The students who had purple eyes (@FLANNERY-purple eyes?) had _no rule at all_, meaning that the function was _undefined_ at those points. In the USPS example, the cost to mail tiny cards is also _undefined_ because the postal service doesn't ship packages that are too small.
 |===
 
 == Conditionals in Programming @duration{20 minutes}
@@ -152,7 +152,7 @@ For Algebra 2 or pre-calculus teachers, this is a useful time to address _partia
 Having acted out a piecewise function, students take the first step towards writing one, by exploring one or two programs that make use of piecewise functions, developing their own understanding, and modifying the programs.
 
 === Launch
-So far, all of the functions we know how to write have had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
+So far, all of the functions we've written had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
 
 ////
 The rule for `nametag` was to take a row and make an image of the animal's name in purple letters.
@@ -175,30 +175,20 @@ If you have more time to devote to piecewise functions or students who are ready
 |
 @span{.title}{More than one Way to Define Piecewise Functions!}
 
-There are multiple ways to write piecewise functions in Pyret. For those who are curious and have time to engage students with multiple methods, check out this @opt-starter-file{mood-generator-ask}, which makes use of `ask` instead of `if`. Writing a second Red Shape program using `ask` could be a good extension for some students.
+There are several conditional expessions in Pyret. For those who are curious, check out this @opt-starter-file{mood-generator-ask}, which makes use of `ask` instead of `if`. Pyret's `ask` construct is similar to the `switch` or `case` statements in other languages. Writing a second Red Shape program using `ask` could be a good extension for some students.
 |===
 }
 
 === Synthesize
 
 [.lesson-instruction]
-* How many examples are needed to fully test a piecewise function?
-
-_More than two! In fact, we need an example for every option! (And in some cases there is a "default" `else` or `otherwise` option, which we should write an example to test, too!)_
-
-[.lesson-instruction]
-* What changes in a piecewise function?
-
-_The input & what we want the program to do with the input_
-
-[.lesson-instruction]
 * What happened when you gave `red-shape` a shape that wasn't defined in the program?
 
-_The program told us that the shape was unknown.Think about other functions that don't work when we give them an invalid input, like dividing by zero!_
+_The program told us that the shape was unknown. Think about other functions that don't work when we give them an invalid input, like dividing by zero!_
 
 
 [.lesson-instruction]
-* How would you explain how piecewise functions work?
+* What is the syntax for writing piecewise functions?
 
 @ifproglang{pyret}{_Pyret allows us to write if-expressions, which contain:_
 
@@ -220,7 +210,7 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 
 === Overview
 
-We'll think through how much of the Red Shape program we could have written if we'd started from scratch, using the Design Recipe.
+Students think through how much of the Red Shape program we could have written using the Design Recipe.
 
 === Launch
 
@@ -254,6 +244,18 @@ In this case, there are more things to circle-and-label in the examples than the
 
 Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function was _always_ equal to the number of labels in the example step, which was _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions. When it doesn't hold, that's how we _know_ we need a piecewise function!
 |===
+
+=== Synthesize
+
+[.lesson-instruction]
+* How many examples are needed to fully test a piecewise function with four "pieces"?
+
+_More than two! In fact, we need an example for every option - every "piece"! (And in some cases there is a "default" `else` or `otherwise` option, which we should write an example to test, too!)_
+
+[.lesson-instruction]
+* What changes in a piecewise function?
+
+_The input, and also the **rule the function applies to the input**_
 
 == Additional Resources:
 
