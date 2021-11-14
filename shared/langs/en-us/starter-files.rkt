@@ -165,7 +165,7 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; REACTIVE
   ("package-delivery" "Package Delivery Starter File"
-   ("pyret" "")
+   ("pyret" "https://code.pyret.org/editor#share=1RKJNrC2eRxO8apsA0UKbLZAMGD73Xk5D")
   )
 
   ("cake-bakery" "Bakery Starter File"
@@ -186,6 +186,14 @@
 
   ("virtual-pet" "Virtual Pet Starter File"
    ("pyret" "https://code.pyret.org/editor#share=15WcPmjNM-qAZGs9BakA7prvOVMqbBkxU")
+  )
+
+  ("single-number" "Single-Number State Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1p4oviyUQ-EGuo12Y3wHeAdG8xJjOKtkE")
+  )
+
+  ("two-number" "Two-Number State Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1Az8Xd4ZcMwqezo8vAldQOrfQkRvi2H8N")
   )
 
   ("ninja-cat-collisions", "Ninja Cat Starter File"
