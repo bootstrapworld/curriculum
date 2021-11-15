@@ -29,6 +29,8 @@
   rearrange-args
   )
 
+; (printf "\nglossary-list= ~s\n\n" *glossary-list*)
+
 (define *progdir* (getenv "PROGDIR"))
 
 (define *force* (truthy-getenv "FORCE"))
@@ -82,6 +84,8 @@
 
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
+
+(define *natlang-glossary-list* '())
 
 (define-namespace-anchor *adoc-namespace-anchor*)
 
@@ -1089,7 +1093,7 @@
                           (let loop ()
                             (let ([x (read i)])
                               (unless (eof-object? x)
-                                (let ([s (assoc-glossary x *glossary-list*)])
+                                (let ([s (assoc-glossary x *natlang-glossary-list*)])
                                   (cond [s (unless (member s *glossary-items*)
                                              (set! *glossary-items*
                                                (cons s *glossary-items*)))]))
@@ -1203,6 +1207,20 @@
           (set! *lesson-plan-base* x)))))
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+
+  (set! *natlang-glossary-list*
+    (let ([natlang (string->symbol (getenv "NATLANG"))])
+      ; (printf "\nnatlang= ~s\n\n" natlang)
+      (let loop ([gl *glossary-list*] [ngl '()])
+        (if (null? gl) ngl
+            (let loop2 ([xx (car gl)])
+              (if (null? xx) (loop (cdr gl) ngl)
+                  (let ([x (car xx)])
+                    (if (eq? (car x) natlang)
+                        (loop (cdr gl) (cons (cdr x) ngl))
+                        (loop2 (cdr xx))))))))))
+
+  ; (printf "\nnatlang-glossary-list = ~s\n\n" *natlang-glossary-list*)
 
   (erase-span-stack!)
   )
@@ -1322,7 +1340,7 @@
                                          (create-end-tag "span")) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg *glossary-list*)])
+                                   [s (assoc-glossary arg *natlang-glossary-list*)])
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
                               (display (enclose-span ".vocab" arg) o)
