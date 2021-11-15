@@ -21,6 +21,6 @@
         [pwy (list-ref s 3)])
     (add-standard std ltitle lesson pwy #f)))
 
-(create-standards-file ".cached/Standards" #t #f)
+(create-standards-file ".cached/.Standards" #t #f)
 
 (void)

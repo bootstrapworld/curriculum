@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-13 # last modified
+LASTMOD=2021-11-15 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1408,33 +1408,6 @@ function buildlessonplans() {
   #echo " "
 }
 
-function makeglossaryandstandards() {
-  if test -f .cached/.pathway-glossary.asc; then
-    asciidoctor -a linkcss -a proglang=$PROGLANG \
-      -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
-      -a pathwayrootdir=$PATHWAYROOTDIR \
-      -a distrootdir=$DISTROOTDIR \
-      -a title='Glossary' \
-      -B . \
-      -o pathway-glossary.shtml \
-      .cached/.pathway-glossary.asc
-    insertbodyid pathway-glossary.shtml
-    resolveabbrevs pathway-glossary.shtml
-  fi
-  if test -f .cached/.pathway-standards.asc; then
-    asciidoctor -a linkcss -a proglang=$PROGLANG \
-      -a stylesheet=${DISTROOTDIR}/lib/curriculum.css \
-      -a pathwayrootdir=$PATHWAYROOTDIR \
-      -a distrootdir=$DISTROOTDIR \
-      -a title='Standards' \
-      -B . \
-      -o pathway-standards.shtml \
-      .cached/.pathway-standards.asc
-    insertbodyid pathway-standards.shtml
-    resolveabbrevs pathway-standards.shtml
-  fi
-}
-
 function buildpathwaynarrative() {
   #echo doing buildpathwaynarrative
   local copacetic=1
@@ -2285,14 +2258,9 @@ function allthestandards() {
     fi
   done
   $PROGDIR/make-standards.rkt
-  asciidoctor -a linkcss -a proglang=$PROGLANG \
-    -a stylesheet=lib/curriculum.css \
-    -a title='Standards' \
-    -o Standards.shtml \
-    -B . \
-    .cached/Standards.asc
-  insertbodyid Standards.shtml
-  resolveabbrevs Standards.shtml
+
+  echo .cached/.Standards.asc >> $ADOC_INPUT
+  echo .cached/.Standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
 
   if test ! $DEBUG; then rm -f *.asc *.txt; fi
 
@@ -2394,10 +2362,10 @@ function postproc_narrativeaux() {
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
-    local fdir=${fhtmlcached%/.cached/.*html}
+    local fdir=${fhtmlcached%.cached/.*html}
     local fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
-    local fshtml=$fdir/$fbase
+    local fshtml=$fdir$fbase
     mv $fhtmlcached $fshtml
     insertbodyid $fshtml
     bumpcsspathdir $fshtml $localDISTROOTDIR
@@ -2487,6 +2455,19 @@ function doadocpostproc() {
   echo " "
 }
 
+function createabyss() {
+  echo doing createabyss
+  cd $TOPDIR/distribution/$NATLANG
+  if test ! $NOPDF; then
+    if test ! -f lib/$ABYSS.pdf; then
+      echo = PAGE NOT FOUND! > lib/$ABYSS.adoc
+      echo >> lib/$ABYSS.adoc
+      echo lib/$ABYSS.adoc >> $ADOC_INPUT
+      echo ", { \"input\": \"lib/$ABYSS.html\" }" >> $PUPPETEER_INPUT
+    fi
+  fi
+}
+
 function doconversions() {
   #echo doing doconversions
   start=`date +%s`
@@ -2499,6 +2480,9 @@ function doconversions() {
   runtime=$((end-start))
   echo \ Completed in $runtime s
   echo " "
+
+  createabyss
+  allthestandards
 
   doadocpostproc $ADOC_INPUT
 
@@ -2633,49 +2617,5 @@ if test ! $NOPDF; then
   callonARGS buildpathwayworkbooks
 
 fi
-
-# only to shush now-benign error
-export PROGLANG=pyret
-
-allthestandards
-
-echo >> index.adoc
-echo .{nbsp} >> index.adoc
-
-for f in distribution/*/*; do
-  f=${f%/}
-  g=${f#distribution/}
-  pwy=${g%/*}
-  lang=${g#*/}
-  docf=$f/index.shtml
-  if test -f $docf; then
-    echo >> index.adoc
-    echo \* link:pass:[$docf][$pwy Narrative \($lang\)] >> index.adoc
-  fi
-done
-
-if test README.html -ot README.adoc; then
-  asciidoctor README.adoc
-fi
-
-asciidoctor index.adoc
-
-cd distribution
-
-echo >> index.adoc
-echo .{nbsp} >> index.adoc
-
-for f in */*; do
-  f=${f%/}
-  pwy=${f%/*}
-  lang=${f#*/}
-  docf=$f/index.shtml
-  if test -f $docf; then
-    echo >> index.adoc
-    echo \* link:pass:[$docf][$pwy Narrative \($lang\)] >> index.adoc
-  fi
-done
-
-asciidoctor index.adoc
 
 rmtmpfiles
