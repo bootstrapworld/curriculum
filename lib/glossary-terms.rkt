@@ -15,10 +15,18 @@ when it prints out the glossary for a particular unit
 (define *glossary-list*
   '(
 
-    ((en-us "accessor functions" "functions to extract values from a data structure"))
-    ((en-us "apply" "use a given function on some inputs"))
-    ((en-us ("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function"))
-    ((en-us "ascending" "an order in which lower values appear first, and higher values appear after"))
+    ((en-us "accessor functions" "functions to extract values from a data structure")
+     (es-mx "funciones de acceso" "funciones para extraer valores de una estructura de datos"))
+
+    ((en-us "apply" "use a given function on some inputs")
+     (es-mx "aplicando" "use una función dada en algunas entradas"))
+
+    ((en-us ("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function")
+     (es-mx ("argumento" "argumentos") "las entradas de una función, las expresiones de los argumentos siguen el nombre de una función"))
+
+    ((en-us "ascending" "an order in which lower values appear first, and higher values appear after")
+     (es-mx "ascendente" "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después"))
+
     ((en-us ("bar chart" "bar charts") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category"))
     ((en-us ("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin"))
     ((en-us "Boolean" "a type of data with two values: true and false"))
