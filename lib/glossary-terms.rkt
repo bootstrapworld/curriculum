@@ -1,7 +1,5 @@
 #lang racket
 
-#| REMEMBER TO ADD ALL ENTRIES AND BIG CHANGES TO SPANISH GLOSSARY |#
-
 (provide *glossary-list*)
 
 #|
