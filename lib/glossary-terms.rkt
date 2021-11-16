@@ -217,7 +217,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("interquartile range" "IQR") "(IQR) is one possible measure of spread, based on dividing a dataset into four parts. The values that divide each part are called the first quartile (Q1), the median, and third quartile (Q3). IQR is calculated as Q3 minus Q1.")
       (es-mx ("rango intercuartil" "IQR") "IQR está basada en la división de un conjunto de datos en cuatro partes. Los valores que dividen cada parte se denominan primer cuartil (Q1), mediana y tercer cuartil (Q3). IQR se calcula como Q3 menos Q1."))
     
-    ((en-us ("intersection" "intersections") "the set of values that makes both inequalities true"))
+    ((en-us ("intersection" "intersections") "the set of values that makes both inequalities true")
+      (es-mx ("intersección") "el conjunto de valores que hace que ambas desigualdades sean verdaderas"))
     
     ((en-us ("legal expression") "code that follows the Code Rules for a language")
     (es-mx ("expresión legal") "expresión que sigue las Reglas de Código para un lenguaje de programación"))
@@ -227,10 +228,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as a straight line or written as a sequence of numbers that change at a constant rate")
       (es-mx ("lineal" "relación lineal") "una regla que calcula una cantidad a partir de otra, que se puede representar gráficamente como una línea recta o que se puede escribir como una secuencia de números que cambian a una tasa constante"))
     
-    ((en-us ("linear regression") "a type of analysis that models the relationship between two quantitative variables. The result is known as a regression line, or line of best fit."))
+    ((en-us ("linear regression") "a type of analysis that models the relationship between two quantitative variables. The result is known as a regression line, or line of best fit.")
+      (es-mx ("regresión lineal") "un tipo de análisis que modela la relación entre dos variables cuantitativas. El resultado se conoce como línea de regresión o línea de mejor ajuste"))
     
     ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables")
-      (es-mx ("regresión lineal" "línea de mejor ajuste" "línea de tendencia" "mejor ajuste" "recta de mejor ajuste") "resume la relación (si es lineal) entre dos variables cuantitativas"))
+      (es-mx ("línea de mejor ajuste" "línea de tendencia" "mejor ajuste" "recta de mejor ajuste") "resume la relación (si es lineal) entre dos variables cuantitativas"))
     
     ((en-us ("list" "lists") "a data structure containing a sequence of values"))
     
@@ -253,23 +255,29 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("navigator") "in pair programming, the person who has their eyes on the screen helping the driver"))
     
-    ((en-us ("negative correlation") "relationship in which one variable increases as the other decreases, and vice versa"))
+    ((en-us ("negative correlation") "relationship in which one variable increases as the other decreases, and vice versa")
+      (es-mx ("correlación negativa") "una relación en la que una variable incrementa a medida que la otra disminuye, y viceversa"))
     
-    ((en-us ("nonlinear") "a pattern that is not a straight line when it is graphed"))
+    ((en-us ("nonlinear") "a pattern that is not a straight line when it is graphed")
+      (es-mx ("relación no lineal" "no lineal") "un patrón que no es una línea recta cuando se grafica"))
     
-    ((en-us ("normal" "normal distribution") "A normal distribution has a particular symmetric shape that bulges in the middle and tapers at the ends."))
+    ((en-us ("normal" "normal distribution") "A normal distribution has a particular symmetric shape that bulges in the middle and tapers at the ends.")
+      (es-mx ("distribución normal") "Una distribución normal tiene una forma simétrica particular que es más ancha en el medio y se estrecha en los extremos."))
     
-    ((en-us ("number") "a data type representing a real number"))
+    ((en-us ("number") "a data type representing a real number")
+      (es-mx ("número") "un tipo de datos que representa un número real"))
     
     ((en-us ("operator" "operators") "a symbol that manipulates two Numbers and produces a result")
     (es-mx ("operador" "operadores") "un símbolo que manipula dos números y produce un resultado"))
     
-    ((en-us ("order" "orders" "ordering") "an arrangement of data according to some pattern"))
+    ((en-us ("order" "orders" "ordering") "an arrangement of data according to some pattern")
+      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
     
     ((en-us ("outlier" "outliers") "a data point that is unusually far above or below most of the others")
     (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
     
-    ((en-us ("permutation" "permutations") "the number of possible arrangements in a collection of items where the order of the selection matters (ABC and CBA would be considered different permutations)"))
+    ((en-us ("permutation" "permutations") "the number of possible arrangements in a collection of items where the order of the selection matters (ABC and CBA would be considered different permutations)")
+      (es-mx ("permutación") "el número de arreglos posibles en una colección de elementos donde el orden de la selección importa (ABC y CBA se considerarían permutaciones diferentes)"))
     
     ((en-us ("piecewise function" "piecewise functions") "a function that computes different expressions based on its input")
     (es-mx ("funciones por trozos") "una función que calcula diferentes expresiones basadas en su entrada"))
@@ -310,11 +318,13 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("range of a dataset") "the distance between minimum and maximum values"))
 
-    ((en-us ("rate") "A comparison of two related quantities"))
+    ((en-us ("rate") "A comparison of two related quantities")
+      (es-mx ("tasa") "Una comparación de dos cantidades relacionadas"))
     
     ((en-us ("reactor") "a value that contains a current state, and functions for updating, drawing, and interacting with that state"))
     
-    ((en-us ("rectangular prism" "rectangular prisms") "a solid figure which has 6 faces, all of which are rectangular"))
+    ((en-us ("rectangular prism" "rectangular prisms") "a solid figure which has 6 faces, all of which are rectangular")
+      (es-mx ("prisma rectangular") "una figura sólida que tiene 6 caras, todas las cuales son rectangulares"))
     
     ((en-us ("refactor" "refactoring") "the process of changing the style or structure of a program's code, without changing the program's behavior"))
     
@@ -340,7 +350,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right."))
     
     ((en-us ("slope") "the steepness of a straight line on a graph")
-      (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
+    (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
     
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center"))
     
@@ -355,7 +365,8 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("surface area") "the sum of the areas of the faces of a polyhedron or the total area that the surface of a solid object occupies"))
     
-    ((en-us ("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values."))
+    ((en-us ("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
+      (es-mx ("distribución simétrica" "simétrica") "Una distribución simétrica tiene una forma equilibrada, lo que muestra que es tan probable que la variable tome valores más bajos como valores más altos."))
     
     ((en-us ("syntax") "the set of rules that defines a language, whether it be spoken, written, or programmed.")
     (es-mx ("sintaxis") "El conjunto de reglas que define un lenguaje, ya sea que se hable, se escriba o se programe."))
@@ -371,7 +382,8 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("threats to validity") "factors that can undermine the conclusion of a study"))
     
-    ((en-us ("union") "the set of values that makes either or both of a set of inequalities true"))
+    ((en-us ("union") "the set of values that makes either or both of a set of inequalities true")
+      (es-mx ("unión" "unión de conjuntos") "el conjunto de valores que hace que una o ambas desigualdades sean verdaderas"))
     
     ((en-us ("unit test") "an example showing the use of a function with a specific value or values, and the answer it should produce")
     (es-mx ("unidad de prueba") "un ejemplo que muestra el uso de una función con un valor o valores específicos y la respuesta que debe producir"))
@@ -388,6 +400,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("vertical axis" "y-axis") "number line on a coordinate plane that runs from bottom to top, indicating values in that direction")
     (es-mx ("eje vertical") "El eje en un gráfico de dispersión que corre arriba y abajo"))
     
-    ((en-us ("y-intercept") "The point where a line or curve crosses the y-axis of a graph"))
+    ((en-us ("y-intercept") "The point where a line or curve crosses the y-axis of a graph")
+      (es-mx ("intercepto" "intercepto vertical" "intersección en el eje Y") "El punto donde la recta o curva cruza el eje vertical (y)."))
 
     ))
