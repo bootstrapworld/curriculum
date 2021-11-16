@@ -208,7 +208,7 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as straight line or written as a sequence of numbers that change at a constant rate"))
     
-    ((en-us ("linear regression") "modeling the relationship between two quantitative variables using a straight line"))
+    ((en-us ("linear regression") "a type of analysis that models the relationship between two quantitative variables. The result is known as a regression line, or line of best fit."))
     
     ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables"))
     
