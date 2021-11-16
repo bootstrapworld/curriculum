@@ -14,16 +14,16 @@ when it prints out the glossary for a particular unit
   '(
 
     ((en-us ("accessor functions") "functions to extract values from a data structure")
-    (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
+     (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
 
     ((en-us ("apply") "use a given function on some inputs")
-    (es-mx ("aplicando") "use una función dada en algunas entradas"))
+     (es-mx ("aplicando") "use una función dada en algunas entradas"))
 
     ((en-us ("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function")
-    (es-mx ("argumento" "argumentos") "las entradas de una función; las expresiones de los argumentos siguen el nombre de una función"))
+     (es-mx ("argumento" "argumentos") "las entradas de una función; las expresiones de los argumentos siguen el nombre de una función"))
 
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
-    (es-mx ("ascendente") "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después"))
+     (es-mx ("ascendente") "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después"))
 
     ((en-us ("axis") "A number line on a scatter plot, used to place points that represent pairs of values in data sets")
     #|(es-mx ("eje" "ejes") "...")|#)
@@ -32,57 +32,70 @@ when it prints out the glossary for a particular unit
     #|(es-mx ("gráfico de barras") "...")|#)
 
     ((en-us ("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
-    (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
+     (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
 
     ((en-us ("Boolean") "a type of data with two values: true and false")
-    (es-mx ("booleano") "un tipo de datos con dos valores: true y false"))
+     (es-mx ("booleano") "un tipo de datos con dos valores: true y false"))
 
     ((en-us ("box plot" "box plots") "the box plot (a.k.a. box-and whisker-plot) is a way of displaying a distribution of data based on the five-number summary: minimum, first quartile, median, third quartile, and maximum")
-    (es-mx ("diagrama de caja" "diagrama de caja y bigotes") "El diagrama de caja (también conocido como diagrama de caja y bigotes) es una forma de mostrar la distribución de datos basada en el resumen de cinco números: mínimo (el valor más bajo), primer cuartil, mediana, tercer cuartil y máximo (el valor más alto)."))
+     (es-mx ("diagrama de caja" "diagrama de caja y bigotes") "El diagrama de caja (también conocido como diagrama de caja y bigotes) es una forma de mostrar la distribución de datos basada en el resumen de cinco números: mínimo (el valor más bajo), primer cuartil, mediana, tercer cuartil y máximo (el valor más alto)."))
 
     ((en-us ("calling" "calls") "using a function by giving it inputs")
-    (es-mx ("llamada" "llamadas") "Utilizando una función dándole entradas"))
+     (es-mx ("llamada" "llamadas") "Utilizando una función dándole entradas"))
 
-    ((en-us ("category" "categories") "the set of possible values that a value in a categorical dataset can have"))
+    ((en-us ("category" "categories") "the set of possible values that a value in a categorical dataset can have")
+     (es-mx("categoría") "el conjunto de valores posibles que puede tener un valor en un conjunto de datos categórico"))
 
-    ((en-us "categorical data" "data whose values are qualities that are not subject to the laws of arithmetic."))
+    ((en-us ("categorical data") "data whose values are qualities that are not subject to the laws of arithmetic.")
+     (es-mx ("datos categóricos") "datos cuyos valores son cualidades que no están sujetas a las leyes de la aritmética"))
 
     ((en-us ("circle of evaluation" "circles of evaluation") "a 'sentence diagram' of the structure of a mathematical expression")
-    (es-mx ("círculo de evaluación") "un diagrama de la estructura de una expresión (aritmética o código)"))
+     (es-mx ("círculo de evaluación") "un diagrama de la estructura de una expresión (aritmética o código)"))
 
     ((en-us ("clause") "a question and its corresponding answer in a conditional expression")
-    (es-mx ("cláusula") "una pregunta y su respuesta correspondiente en una expresión condicional"))
+     (es-mx ("cláusula") "una pregunta y su respuesta correspondiente en una expresión condicional"))
     
-    ((en-us ("chart" "charts") "visual reprsentations of how values in a dataset are distributed"))
+    ((en-us ("chart" "charts") "visual reprsentations of how values in a dataset are distributed")
+     (es-mx ("gráfico") "Representacion visual de cómo se distribuyen los valores en un conjunto de datos."))
 
-    ((en-us ("column" "columns") "set of values in a table of a particular type.  Every row has exactly 1 element in every column"))
+    ((en-us ("column" "columns") "set of values in a table of a particular type.  Every row has exactly 1 element in every column")
+     (es-mx ("columna") "conjunto de valores en una tabla de un tipo particular. Cada fila tiene exactamente 1 elemento en cada columna."))
 
-    ((en-us ("combination" "combinations") "the number of possible arrangements in a collection of items where the order of the selection does NOT matter. (ABC and CBA would be considered the same combination)"))
+    ((en-us ("combination" "combinations") "the number of possible arrangements in a collection of items where the order of the selection does NOT matter. (ABC and CBA would be considered the same combination.)")
+     (es-mx ("combinación") "el número de arreglos posibles en una colección de artículos donde el orden de la selección NO importa. ABC y CBA se considerarían la misma combinación.)"))
 
     ((en-us ("conditional") "a code expression made of questions and answers")
-    (es-mx ("condicional") "una expresión de código hecha de preguntas y respuestas"))
+     (es-mx ("condicional") "una expresión de código hecha de preguntas y respuestas"))
 
     ((en-us ("constructor") "a function that creates instances of a data structure")
-    (es-mx ("función constructor") "La función que crea una estructura de datos particular"))
+     (es-mx ("función constructor") "La función que crea una estructura de datos particular"))
 
     ((en-us ("contract" "contracts") "a statement of the name, domain, and range of a function")
-    (es-mx ("contrato") "una declaración del nombre, dominio y rango de una función"))
+     (es-mx ("contrato") "una declaración del nombre, dominio y rango de una función"))
 
-    ((en-us ("contract error" "contract errors") "errors where the code makes sense, but uses a function with the wrong number or type of arguments"))
+    ((en-us ("contract error" "contract errors") "errors where the code makes sense, but uses a function with the wrong number or type of arguments")
+     (es-mx ("error de contrato") "errores donde el código tiene sentido, pero usa una función con el número o tipo de argumentos incorrectos"))
 
-    ((en-us ("coordinate" "coordinates") "a number or set of numbers describing an object's location"))
+    ((en-us ("coordinate" "coordinates" "coordinate pair") "a number or set of numbers describing an object's location")
+     (es-mx ("coordenada") "un número o conjunto de números que describen la ubicación de un objeto" "sistema de coordenadas"))
 
-    ((en-us ("coordinate plane") "a grid formed by a pair of intersecting horizontal and vertical number lines"))
+    ((en-us ("coordinate plane") "a grid formed by a pair of intersecting horizontal and vertical number lines")
+      (es-mx ("plano coordinado" "plano de coordinadas" "plano cartesiano" "sistema cartesiano") "una cuadrícula formada por un par de rectas numéricas horizontales y verticales que se cruzan"))
 
-    ((en-us ("correlation" "correlations") "a single number somewhere between -1 and +1 that reports the direction and strength of the linear relationship between two quantitative variables (also known as the r-value)"))
+    ((en-us ("correlation" "correlations") "a single number somewhere between -1 and +1 that reports the direction and strength of the linear relationship between two quantitative variables (also known as the r-value)")
+      (es-mx ("correlación") "un número entre -1 y +1 que informa la dirección y la fuerza de la relación lineal entre dos variables cuantitativas (también conocido como el valor R)"))
 
-    ((en-us ("data block") "code that lists the name, constructor(s), and field(s) of a data structure"))
+    ((en-us ("data block") "code that lists the name, constructor(s), and field(s) of a data structure")
+      (es-mx ("bloque de datos") "código que enumera el nombre, los constructores y los campos de una estructura de datos"))
 
-    ((en-us ("data row" "data rows") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual"))
+    ((en-us ("data row" "data rows") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
+      (es-mx ("fila de datos") "datos estructurados de un conjunto de datos que normalmente informa toda la información recopilada sobre un individuo determinado"))
 
-    ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers"))
+    ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers")
+      (es-mx ("Ciencia de Datos") "la ciencia de recoleccionar, organizar y sacar conclusiones generales a partir de datos, con la ayuda de computadoras"))
 
-    ((en-us ("dataset" "datasets") "a collection of related information that is composed of separate elements, but can be manipulated as a unit by a computer"))
+    ((en-us ("dataset" "datasets") "a collection of related information that is composed of separate elements, but can be manipulated as a unit by a computer")
+      (es-mx ("conjunto de datos") "una colección de información relacionada que se compone de elementos separados, pero que una computadora puede manipular como una unidad"))
 
     ((en-us ("data structure") "a datatype which packages several datatypes as fields")
     (es-mx ("estructura de datos" "estructuras de datos") "Un grupo de valores que se pueden devolver como un único tipo de datos"))
@@ -90,7 +103,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("data types" "data type") "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
     (es-mx ("tipo de datos" "tipos de datos") "Una manera de clasificar valores, como: Número, Cadena, Imagen o Booleano"))
 
-    ((en-us ("debug") "to find and fix errors in one's code"))
+    ((en-us ("debug") "to find and fix errors in one's code")
+      (es-mx ("depurar") "encontrar y corregir errores en el código"))
 
     ((en-us ("define") "to associate a descriptive name with a value")
     (es-mx ("definir") "asociar un nombre descriptivo con un valor"))
@@ -98,12 +112,14 @@ when it prints out the glossary for a particular unit
     ((en-us ("definitions area") "the left-most text box in the Editor where definitions for values and functions are written")
     (es-mx ("área de definiciones") "el cuadro de texto en el Editor, donde se escriben definiciones de valores y funciones"))
 
-    ((en-us ("descending") "an order in which higher values appear first, and lower values appear after"))
+    ((en-us ("descending") "an order in which higher values appear first, and lower values appear after")
+      (es-mx ("descendiente") "Los valores ordenados con el valor más grande primero, el segundo más grande siguiente, continuando así hasta que el más pequeño esté al final"))
 
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
     (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
-    ((en-us ("direction") "of a relationship between two quantitative variables: whether they tend to increase together, or if as one goes up the other tends to go down"))
+    ((en-us ("direction") "the relationship between two quantitative variables: whether they tend to increase together, or whether as one goes up the other tends to go down")
+      (es-mx ("dirección") "la relación entre dos variables cuantitativas - si es que tienden a incrementar juntas, o si, a medida que una sube, la otra tiende a bajar"))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
     (es-mx ("dominio") "el tipo de datos que espera una función"))
@@ -118,7 +134,8 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("editor") "software in which you can write and evaluate code"))
 
-    ((en-us ("entry" "entries") "a single value in a table, belonging to a particular row and column"))
+    ((en-us ("entry" "entries") "a single value in a table, belonging to a particular row and column")
+      (es-mex ("entrada") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
     ((en-us ("error message" "error messages") "information from the computer about errors in code")
     (es-mx ("mensaje de error" "mensajes de error") "información del equipo sobre errores en el código"))
@@ -197,7 +214,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("interactions area") "the right-most text box in the Editor, where expressions are entered to be evaluated")
     (es-mx ("área de interacciones") "el cuadro de texto a la derecha en el Editor, donde se ingresan las expresiones para ser evaluadas"))
     
-    ((en-us ("interquartile range" "IQR") "(IQR) is one possible measure of spread, based on dividing a dataset into four parts. The values that divide each part are called the first quartile (Q1), the median, and third quartile (Q3). IQR is calculated as Q3 minus Q1."))
+    ((en-us ("interquartile range" "IQR") "(IQR) is one possible measure of spread, based on dividing a dataset into four parts. The values that divide each part are called the first quartile (Q1), the median, and third quartile (Q3). IQR is calculated as Q3 minus Q1.")
+      (es-mx ("rango intercuartil" "IQR") "IQR está basada en la división de un conjunto de datos en cuatro partes. Los valores que dividen cada parte se denominan primer cuartil (Q1), mediana y tercer cuartil (Q3). IQR se calcula como Q3 menos Q1."))
     
     ((en-us ("intersection" "intersections") "the set of values that makes both inequalities true"))
     
@@ -206,11 +224,13 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("library" "libraries") "a collection of functions that can be made available to our program by using include"))
     
-    ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as straight line or written as a sequence of numbers that change at a constant rate"))
+    ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as a straight line or written as a sequence of numbers that change at a constant rate")
+      (es-mx ("lineal" "relación lineal") "una regla que calcula una cantidad a partir de otra, que se puede representar gráficamente como una línea recta o que se puede escribir como una secuencia de números que cambian a una tasa constante"))
     
     ((en-us ("linear regression") "modeling the relationship between two quantitative variables using a straight line"))
     
-    ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables"))
+    ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables")
+      (es-mx ("regresión lineal" "línea de mejor ajuste" "línea de tendencia" "mejor ajuste" "recta de mejor ajuste") "resume la relación (si es lineal) entre dos variables cuantitativas"))
     
     ((en-us ("list" "lists") "a data structure containing a sequence of values"))
     
@@ -260,7 +280,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("pixel" "pixels") "the smallest unit that makes up a digital image. The more pixels, the more detailed an image or video can appear."))
     
     ((en-us ("positive correlation") "relationship in which one variable increases as the other increases, and vice versa")
-    (es-mx ("correlación positiva") " una relación en la que los valores de ambas variables tienden a aumentar juntos"))
+    (es-mx ("correlación positiva") "una relación en la que los valores de ambas variables tienden a aumentar juntos"))
     
     ((en-us ("predictor function" "predictor") "a function which, given a value from one dataset, makes an educated guess at a related value in a different dataset"))
     
@@ -292,18 +312,14 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("rate") "A comparison of two related quantities"))
     
-    ((en-us "reactor" "a value that contains a current state, and functions for updating, drawing, and 
-    interacting with that state"))
+    ((en-us ("reactor") "a value that contains a current state, and functions for updating, drawing, and interacting with that state"))
     
     ((en-us ("rectangular prism" "rectangular prisms") "a solid figure which has 6 faces, all of which are rectangular"))
     
     ((en-us ("refactor" "refactoring") "the process of changing the style or structure of a program's code, without changing the program's behavior"))
     
     ((en-us ("response variable" "response") "the variable in a relationship that is presumed to be affected by the other variable"))
-    
-    ((en-us ("row" "rows") "item(s) in a table, which consist of some group of values; each table is a collection of rows")
-    (es-mx ("fila" "filas") "elementos horizontales en una tabla, que consisten en algún grupo de valores; cada tabla es una colección de filas"))
-    
+        
     ((en-us ("sample" "samples") "a set of individuals or objects collected or selected from a statistical population by a defined procedure"))
     
     ((en-us ("sample instances") "a collection of single instances, or also used to describe illustrative instances that we use to provide examples of a data structure"))
@@ -323,7 +339,8 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right."))
     
-    ((en-us ("slope") "the steepness of a straight line on a graph"))
+    ((en-us ("slope") "the steepness of a straight line on a graph")
+      (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
     
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center"))
     
