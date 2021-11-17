@@ -1196,7 +1196,7 @@
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
-  (when (and *lesson-plan* (not *lesson*))  ;fixme
+  (when (and *lesson-plan* (not *lesson*))  ;fixme, we shouldn't be relying on this!
     (set! *lesson* *lesson-plan*))
 
   (set! *lesson-plan-base* *lesson-plan*)
@@ -1235,7 +1235,7 @@
                            #:other-dir [other-dir #f]
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
-                           #:workbook-page [workbook-page #f]
+                           #:workbook-page [workbook-page #f]  ;FIXME, not used?
                            #:proglang [proglang "pyret"]
                            #:solutions-mode [solutions-mode #f]
                            #:z [z -1]
@@ -1258,13 +1258,13 @@
                                (printf "ERROR: ~a in ~s\n\n"
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* (build-path containing-directory in-file))
-    ;(printf "doing preproc-adoc-file ~a\n" *in-file*)
+    ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
     (let* ([dot-in-file (string-append "." in-file)]
            [out-file (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc"))]
            [first-subsection-reached? #f]
            [title-reached? #f]
            )
-      ;(printf "preproc ~a to ~a\n" *in-file* out-file)
+      ; (printf "preproc ~a to ~a\n" *in-file* out-file)
       ;
       (when (or *link-lint?* #t)
         (let ([internal-links-file (path-replace-extension out-file ".internal-links.txt.kp")]
@@ -1425,7 +1425,7 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-lang-prereq.asc[]\n\n" *containing-directory*)]
                            [(string=? directive "add-to-lang")
-                            ;(printf "doing add-to-lang\n")
+                            ; (printf "doing add-to-lang\n")
                             (unless *lesson-plan*
                               (error 'ERROR
                                      "WARNING: @add-to-lang (~a, ~a) valid only in lesson plan"
@@ -1750,18 +1750,23 @@
       ;(printf "lesson = ~a\n" *lesson*)
       ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
 
+      ; (printf "\nprereqs-used= ~s\n\n" *prereqs-used*)
+
       (when (pair? *prereqs-used*)
+        ; (printf "lessonplan?= ~s; lesson?= ~s\n\n" *lesson-plan* *lesson*)
         (let ([prim-file (if *lesson-plan*
                              (build-path *containing-directory* ".cached" ".index.primtxt")
-                             (if (and *workbook-page?* *lesson*)
+                             (if *lesson*
                                  (make-temporary-file ".pageprim-~a.primtxt" #f
                                                       (format "lessons/~a/.cached"
                                                               *lesson*)
                                                       )
                                  #f))])
           (when prim-file
+            ; (printf "writing prereqs-used to ~s\n\n" prim-file)
             (store-functions-used *prereqs-used* prim-file))))
 
+      ; (printf "nulling out prereqs-used\n\n")
       (set! *prereqs-used* '())
 
       (when *lesson-plan*
@@ -2294,9 +2299,10 @@
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
 
 (define (add-prereq sym)
-  ;(printf "doing add-prereq ~s\n" sym)
-  (when (and (or *lesson-plan* *workbook-page?*) (symbol? sym))
+  ; (printf "doing add-prereq ~s\n" sym)
+  (when (and (or *lesson-plan* *lesson*) (symbol? sym))
     ;use conditional here if you want to exclude some symbols
+    ; (printf "it's happening\n")
     (unless (member sym *prereqs-used*)
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
 
