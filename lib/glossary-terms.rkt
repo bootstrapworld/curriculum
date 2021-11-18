@@ -34,7 +34,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
 
-    ((en-us ("Boolean") "a type of data with two values: true and false")
+    ((en-us ("Boolean" "Booleans") "a type of data with two values: true and false")
      (es-mx ("booleano") "un tipo de datos con dos valores: true y false"))
 
     ((en-us ("box plot" "box plots") "the box plot (a.k.a. box-and whisker-plot) is a way of displaying a distribution of data based on the five-number summary: minimum, first quartile, median, third quartile, and maximum")
@@ -205,7 +205,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("identifier column") "a column of unique values which identify all the individual rows (e.g. - 
     student IDs, SSNs, etc)"))
     
-    ((en-us ("image") "a type of data for pictures")
+    ((en-us ("image" "images") "a type of data for pictures")
     (es-mx ("imagen") "un tipo de datos para imágenes"))
     
     ((en-us ("instance") "a specific, packaged value of a data structure that contains other values in its fields")
@@ -382,13 +382,13 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("threats to validity") "factors that can undermine the conclusion of a study"))
     
-    ((en-us ("union") "the set of values that makes either or both of a set of inequalities true")
+    ((en-us ("union" "unions") "the set of values that makes either or both of a set of inequalities true")
       (es-mx ("unión" "unión de conjuntos") "el conjunto de valores que hace que una o ambas desigualdades sean verdaderas"))
     
     ((en-us ("unit test") "an example showing the use of a function with a specific value or values, and the answer it should produce")
     (es-mx ("unidad de prueba") "un ejemplo que muestra el uso de una función con un valor o valores específicos y la respuesta que debe producir"))
     
-    ((en-us ("value") "a specific piece of data, like 5 or \"hello\"")
+    ((en-us ("value" "values") "a specific piece of data, like 5 or \"hello\"")
     (es-mx ("valor" "valores") "una pieza específica de datos, como 5 o \" hello \""))
     
     ((en-us ("variable" "variables") "a letter or symbol that stands in for a value or expression")
