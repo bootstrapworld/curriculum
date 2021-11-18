@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-15 # last modified
+LASTMOD=2021-11-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1189,7 +1189,7 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
-  #echo doing buildlessonplan $L in $(pwd)
+  # echo doing buildlessonplan $L in $(pwd)
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
   local oldPROGLANG="$PROGLANG"
@@ -1300,7 +1300,7 @@ function proglangversion() {
 
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
-  #echo doing builddependencyjson
+  # echo doing builddependencyjson
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
@@ -1377,27 +1377,17 @@ function builddependencyjson() {
 }
 
 function buildlessonplans() {
+  # echo %%% doing buildlessonplans
   start=`date +%s`
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   local L
-  local copacetic
   #local prevL=/dev/null
   if test -f $RELEVANT_LESSONS_INPUT; then
     for L in $(cat $RELEVANT_LESSONS_INPUT); do
       # needed?
       #cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
       buildlessonplan $L
-      copacetic=1
-      for f in $L/.cached/.*primtxt; do
-        if test ! -f $f; then
-          copacetic=
-        fi
-      done
-      if test $copacetic; then
-        cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
-      fi
-      #prevL=$L
     done
   fi
   export LESSONSUBDIR=
@@ -1406,6 +1396,38 @@ function buildlessonplans() {
   runtime=$((end-start))
   #echo \ Completed in $runtime s
   #echo " "
+}
+
+function collectprimitives() {
+  # echo doing collectprimitives in $(pwd)
+
+  cd $TOPDIR/distribution/$NATLANG/lessons
+
+  local L
+  local copacetic
+  local f
+
+  if test -f $RELEVANT_LESSONS_INPUT; then
+    for L in $(cat $RELEVANT_LESSONS_INPUT); do
+      # needed?
+      #cat $prevL/.cached/.*primtxt > $L/.cached/.prevlesson.primtxt 2> /dev/null
+      copacetic=1
+      # echo %%% $L has $L/.cached/.*primtxt
+      for f in $L/.cached/.*primtxt; do
+        if test ! -f $f; then
+          # echo %%% Not copacetic
+          copacetic=
+        fi
+      done
+      if test $copacetic; then
+        # echo putting the primtxts in $L/.cached/.index-primitives.txt.kp
+        cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
+      fi
+      #prevL=$L
+    done
+  fi
+
+
 }
 
 function buildpathwaynarrative() {
@@ -2456,7 +2478,7 @@ function doadocpostproc() {
 }
 
 function createabyss() {
-  echo doing createabyss
+  # echo doing createabyss
   cd $TOPDIR/distribution/$NATLANG
   if test ! $NOPDF; then
     if test ! -f lib/$ABYSS.pdf; then
@@ -2597,6 +2619,8 @@ echo ')' >> $ADOCABLES_INPUT
 #$PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
 doconversions
+
+collectprimitives
 
 echo BUILDING WORKBOOK JSONS
 
