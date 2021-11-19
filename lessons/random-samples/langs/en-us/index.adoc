@@ -70,8 +70,6 @@ Let’s see what happens if we switch from smaller to larger sample sizes, if we
 
 === Investigate
 
-@ifproglang{codap}{@span{.right}{@image{images/sampler-plugin-default.PNG,"" ,300}}}
-
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter. @ifproglang{pyret}{How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
 [.lesson-instruction]
@@ -82,19 +80,34 @@ The Animals Dataset we've been using is just one _sample_ taken from a very larg
 
 @ifproglang{codap}{We're going to analyze which is better at guessing the truth about an entire population - a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
 
-Direct students to select `Sampler` from the Plugins dropdown menu. The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+[.lesson-instruction]
+Select `Sampler` from the Plugins dropdown menu.
 
-Before entering any specifications (number of items, number of samples) or interacting with the plugin any further, discuss with students the sampler in default mode, and invite them to _notice and wonder_. Possible wonderings include: How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?
+@ifproglang{codap}{@centered-image{images/sampler-plugin-default.PNG,"" ,250}}
 
-Prompt students to go to the `Options` tab of the `Sampler`. Here, students choose whether cases will be collected _with replacement_ or _without replacement_. Discuss with students which makes the most sense for our dataset.
+The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
 
 [.lesson-instruction]
-- If a particular animal can be selected more than one time, then we are sampling _with replacement_.  In a drawing-names-from-a-hat scenario, we’d return each name to the hat after selecting it.
-- If a particular animal can be selected only one time, then we are sampling _without replacement_. In a drawing-names-from-a-hat scenario, we’d remove each name from the hat after selecting it.
+What do you _notice_ about the `Sampler`? What do you _wonder_?
 
-Next, students must designate the number of items to select, and the number of samples to collect. CODAP’s defaults are 5 items and 3 samples. Discuss with students what it would mean to select three samples of five items each.
+Possible wonderings include: How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?
 
-Explain that our first sample - the small sample - will include 10 animals. After entering the correct specifications (1 collection of 10 items), students should click `Start` to observe the sampling simulation. After the simulation is complete, a hierarchical table (titled `experiment/samples/items`) will be populated. Take a moment to ensure that students understand all the components of the new table they’ve created. Then, direct students to rename the table (by clicking on its title) `small-sample`.
+[.lesson-instruction]
+- Select the `Options` tab of the `Sampler`.
+- Which makes the most sense for our dataset: collecting cases _with replacement_ or _without replacement_?
+
+Note: If a particular animal can be selected more than one time, then we are sampling _with replacement_.  In a drawing-names-from-a-hat scenario, we’d return each name to the hat after selecting it. If a particular animal can be selected only one time, then we are sampling _without replacement_. In a drawing-names-from-a-hat scenario, we’d remove each name from the hat after selecting it.
+
+[.lesson-instruction]
+- Designate the number of items to select and the number of samples to collect.
+- What would it mean to select three samples of five items each? (These are CODAP's default settings.)
+- Enter the correct specifications for 1 collection of 10 items.
+-  Click `Start` to observe the sampling simulation.
+
+After the simulation is complete, a hierarchical table (titled `experiment/samples/items`) will be populated. Ensure that students understand all the components of the new table they’ve created.
+
+[.lesson-instruction]
+- Rename the table (by clicking on its title) `small-sample`.
 
 Now that students are comfortable using the `Sampler`, it's time to dig into the data.
 
