@@ -76,7 +76,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("contract error" "contract errors") "errors where the code makes sense, but uses a function with the wrong number or type of arguments")
      (es-mx ("error de contrato") "errores donde el código tiene sentido, pero usa una función con el número o tipo de argumentos incorrectos"))
 
-    ((en-us ("coordinate" "coordinates" "coordinate pair") "a number or set of numbers describing an object's location")
+    ((en-us ("coordinate" "coordinate pair") "a number or set of numbers describing an object's location")
      (es-mx ("coordenada") "un número o conjunto de números que describen la ubicación de un objeto" "sistema de coordenadas"))
 
     ((en-us ("coordinate plane") "a grid formed by a pair of intersecting horizontal and vertical number lines")

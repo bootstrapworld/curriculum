@@ -243,22 +243,23 @@
                         [else (loop2 (+ j 1) #f #f)]))))))))
 
 (define (assoc-glossary term L)
-  ;(printf "doing assoc-glossary ~s ~n" term)
+  ; (printf "doing assoc-glossary ~s ~n" term)
   (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
                              (substring term 0 (- (string-length term) 1))
                              "")])
-    ;(printf "naive sing = ~s~n" naive-singular)
+    ; (printf "naive sing = ~s~n" naive-singular)
     (let loop ([L L])
       (if (null? L) #f
           (let* ([c (car L)]
                  [lhs (car c)])
-            ;(printf "lhs = ~s~n" lhs)
+            ; (printf "lhs = ~s~n" lhs)
             (or (cond [(string? lhs)
                        (and (or (string-ci=? lhs term)
                                 (string-ci=? lhs naive-singular))
                             c)]
                       [(list? lhs)
-                       (and (memf (lambda (x) (string-ci=? x term)) lhs)
+                       (and (memf (lambda (x) (or (string-ci=? x term)
+                                                  (string-ci=? x naive-singular))) lhs)
                             (list (car lhs) (cadr c)))]
                       [else #f])
                 (loop (cdr L))))))))
