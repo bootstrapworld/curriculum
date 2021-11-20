@@ -243,22 +243,23 @@
                         [else (loop2 (+ j 1) #f #f)]))))))))
 
 (define (assoc-glossary term L)
-  ;(printf "doing assoc-glossary ~s ~n" term)
+  ; (printf "doing assoc-glossary ~s ~n" term)
   (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
                              (substring term 0 (- (string-length term) 1))
                              "")])
-    ;(printf "naive sing = ~s~n" naive-singular)
+    ; (printf "naive sing = ~s~n" naive-singular)
     (let loop ([L L])
       (if (null? L) #f
           (let* ([c (car L)]
                  [lhs (car c)])
-            ;(printf "lhs = ~s~n" lhs)
+            ; (printf "lhs = ~s~n" lhs)
             (or (cond [(string? lhs)
                        (and (or (string-ci=? lhs term)
                                 (string-ci=? lhs naive-singular))
                             c)]
                       [(list? lhs)
-                       (and (memf (lambda (x) (string-ci=? x term)) lhs)
+                       (and (memf (lambda (x) (or (string-ci=? x term)
+                                                  (string-ci=? x naive-singular))) lhs)
                             (list (car lhs) (cadr c)))]
                       [else #f])
                 (loop (cdr L))))))))
@@ -1544,12 +1545,10 @@
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
-                           [(or (string=? directive "assess-design-recipe")
-                                (string=? directive "design-recipe-exercise"))
-                            (let ([f (cond [(string=? directive "assess-design-recipe")
-                                            assess-design-recipe]
-                                           [(string=? directive "design-recipe-exercise")
-                                            design-recipe-exercise]
+                           [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe"))
+                            (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
+                                           [(string=? directive "design-recipe-exercise") design-recipe-exercise]
+                                           [(string=? directive "design-codap-recipe") design-codap-recipe]
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                               (let ([g (read-group i directive)])
                                 (let ([args (string-to-form g)])
@@ -1615,7 +1614,7 @@
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
                               (display project-link-output o))]
                            [else
-                             ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
+                             ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
                   [(and possible-beginning-of-line? (char=? c #\|))
