@@ -957,11 +957,11 @@
     "[.recipe.recipe_contract]\n"
     (encoded-ans ".recipe_name" transformer-name *show-funname-contract?*)
     ":"
-    (encoded-ans ".recipe_doman" (vars-to-commaed-string domain-list) *show-domains?*)
+    (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
     "->"
     (encoded-ans ".recipe_range" range *show-range?*)
     "\n\n"
-    "[recipe.recipe_purpose_statement]\n"
+    "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)
     "\n\n"
     "[.recipe.recipe_line]\n"
