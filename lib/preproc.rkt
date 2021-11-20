@@ -1544,12 +1544,10 @@
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
-                           [(or (string=? directive "assess-design-recipe")
-                                (string=? directive "design-recipe-exercise"))
-                            (let ([f (cond [(string=? directive "assess-design-recipe")
-                                            assess-design-recipe]
-                                           [(string=? directive "design-recipe-exercise")
-                                            design-recipe-exercise]
+                           [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe"))
+                            (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
+                                           [(string=? directive "design-recipe-exercise") design-recipe-exercise]
+                                           [(string=? directive "design-codap-recipe") design-codap-recipe]
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                               (let ([g (read-group i directive)])
                                 (let ([args (string-to-form g)])
@@ -1615,7 +1613,7 @@
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
                               (display project-link-output o))]
                            [else
-                             ;(printf "WARNING: Unrecognized directive @~a\n\n" directive)
+                             ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
                   [(and possible-beginning-of-line? (char=? c #\|))

@@ -9,6 +9,7 @@
          wescheme->pyret
          wescheme->wescheme
          vars-to-commaed-string vars-to-string
+         design-codap-recipe
          )
 
 (define *solutions-mode?* #f)
@@ -504,8 +505,8 @@
                   [else ""])
 
             (cond [cond?
-                    (write-wrapper ".cond_clauses" 
-                      (lambda () 
+                    (write-wrapper ".cond_clauses"
+                      (lambda ()
                         (apply string-append
                           (map write-cond-clause (cdr body)))))]
                   [else
@@ -824,4 +825,146 @@
                             #:assess-design-recipe #t
                             #:headless? headless?
                             )))
+
+;;;; CODAP design recipe
+
+(define *show-transformer-contract?* #f)
+(define *show-input-examples* #f)
+(define *show-output-examples* #f)
+(define *show-formula-expression?* #f)
+
+(define (write-transformer transformer-name)
+  (string-append
+    (write-title "Transformer (circle one) X Filter Transform Build")
+    "[.recipe.codap_transformer]\n"
+    (format "Name: ~a\n\n" transformer-name)))
+
+(define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
+  ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
+  (string-append
+    (write-title "Example Tables")
+    "[.recipe.recipe_instructions]\n"
+    "What gets filtered/transformed/built? In the sample tables below, add the relevant columns.\n\n"
+
+    (let* ([input-header (if (null? input-rows) #f (car input-rows))]
+           [output-header (if (null? output-rows) #f (car output-rows))]
+           [num-input-cols (if input-header (length input-header) 2)]
+           [num-output-cols (if output-header (length output-header) 2)]
+           [input-rows (if input-header (cdr input-rows) input-rows)]
+           [output-rows (if output-header (cdr output-rows) output-rows)]
+           )
+      (string-append
+        "[cols=\"1a,1a\"]\n"
+        "|===\n"
+        "|\n\n"
+        (format "[.cols=~a]\n" num-input-cols)
+        (write-each-example-table input-header input-rows  *show-input-examples* stipulated-num-input-rows num-input-cols)
+        "|\n\n"
+        (write-each-example-table output-header output-rows  *show-output-examples* stipulated-num-output-rows num-output-cols)
+        "\n\n"
+        "|===\n\n"))))
+
+(define (write-each-example-table header rows show-rows stipulated-num-rows num-cols)
+  ; (printf "doing write-each-example-table ~s ~s ~s ~s ~s\n" header rows show-rows stipulated-num-rows num-cols)
+  (let* ([num-given-rows (length rows)]
+         [num-blank-rows (max 0 (- stipulated-num-rows num-given-rows))])
+    (string-append
+      "[.cols=~a]\n"
+      "!===\n\n"
+      (apply string-append
+        (map (lambda (x) (string-append "! " x)) header))
+      "\n"
+      (apply string-append
+        (append
+          (map (lambda (ro s)
+                 (cond [s (string-append (apply string-append (map (lambda (x) (string-append "! " x)) ro)) "\n")]
+                       [else (string-append (apply string-append (map (lambda (x) "! ") (build-list num-cols (lambda (x) 'ignore)))) "\n")]))
+               rows
+               (cond [(eq? show-rows #t) (build-list num-given-rows (lambda (i) #t))]
+                     [(eq? show-rows #f) (build-list num-given-rows (lambda (i) #f))]
+                     [else (let* ([num-rows-after-shown-ones (max 0 (- num-given-rows (length show-rows)))]
+                                  [modified-show-examples (append show-rows (build-list num-rows-after-shown-ones (lambda (i) #f)))]
+                                  [modified-show-examples (take modified-show-examples num-given-rows)])
+                             modified-show-examples)]))
+          (map (lambda (x) "! ") (build-list (* num-blank-rows num-cols) (lambda (i) 'ignore)))))
+      "\n"
+      "!===\n\n"
+      )))
+
+(define (design-codap-recipe transformer-name directions
+                             #:proglang [proglang "codap"]
+                             #:solutions-mode? [solutions-mode? #f]
+                             #:page-header [page-header "Word Problem"]
+                             #:show-transformer-contract? [show-transformer-contract? #f]
+                             #:domain-list [domain-list '()]
+                             #:show-domains? [show-domains? #f]
+                             #:range [range ""]
+                             #:show-range? [show-range? #f]
+                             #:purpose [purpose ""]
+                             #:show-purpose? [show-purpose? #f]
+                             #:num-input-examples [num-input-examples 1]
+                             #:num-output-examples [num-output-examples 1]
+                             #:input-examples [input-examples '()]
+                             #:output-examples [output-examples '()]
+                             #:show-input-examples [show-input-examples '()]
+                             #:show-output-examples [show-output-examples '()]
+                             #:show-formula-expression? [show-formula-expression? #f]
+                             #:formula-expression [formula-expression ""]
+                             #:headless? [headless? #f]
+                             )
+
+  (set! *solutions-mode?* solutions-mode?)
+
+  (set! *show-transformer-contract?* show-transformer-contract?)
+  (set! *show-domains?* show-domains?)
+  (set! *show-range?* show-range?)
+  (set! *show-purpose?* show-purpose?)
+  (set! *show-input-examples* show-input-examples)
+  (set! *show-output-examples* show-output-examples)
+  (set! *show-formula-expression?* show-formula-expression?)
+
+  (when *solutions-mode?*
+    (set! *show-funname-contract?* #t)
+    (set! *show-domains?* #t)
+    (set! *show-range?* #t)
+    (set! *show-purpose?* #t)
+    (set! *show-input-examples* #t)
+    (set! *show-output-examples* #t)
+    (set! *show-formula-expression?* #t))
+
+  ;any error check here?
+
+  (string-append
+
+    (if headless? ""
+        (write-section-header page-header transformer-name))
+
+    (write-directions directions)
+
+    (write-transformer transformer-name)
+
+    (write-example-tables   input-examples output-examples num-input-examples num-output-examples)
+
+    (write-formula-expression transformer-name domain-list range purpose formula-expression)
+
+    )
+
+  )
+
+(define (write-formula-expression transformer-name domain-list range purpose body)
+  (string-append
+    (write-title "Formula Expression")
+    "[.recipe.recipe_contract]\n"
+    (encoded-ans ".recipe_name" transformer-name *show-funname-contract?*)
+    ":"
+    (encoded-ans ".recipe_doman" (vars-to-commaed-string domain-list) *show-domains?*)
+    "->"
+    (encoded-ans ".recipe_range" range *show-range?*)
+    "\n\n"
+    "[recipe.recipe_purpose_statement]\n"
+    (write-purpose-prose purpose)
+    "\n\n"
+    "[.recipe.recipe_line]\n"
+    body
+    "\n\n"))
 
