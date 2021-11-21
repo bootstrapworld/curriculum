@@ -215,42 +215,44 @@ tr th.tableblock {
   display:    block;
   position:   fixed;
   top:        0px;
-  left:       calc(225px + 895px);
-  width:      calc(100% - (225px + 895px));
-  min-width:  200px;
-  padding:    10px; 
+  left:       0px;
+  width:      235px;
   height:     100%;
-  background: #eee;
+  background: #b7d89377;
   opacity:    0.3;
-  border-left:solid 1px black;
   transition: all 0.5s;
   color:      black;
   box-shadow: -1px 2px 6px black;
   z-index:    9999;
   overflow:   scroll;
 }
+.sidebar > * { margin: 10px !important; }
+.sidebar label { display: inline; font-size: 0.8rem; }
+
 .sidebar:hover { opacity: 1; }
-.sidebar strong { color: black; }
+.sidebar strong { color: black; margin: 0; }
 .sidebar li { list-style-type: none; margin-bottom: 5px;}
 
 .sidebarlessons input[type="checkbox"] { margin-right: 5px; }
 .sidebar .sidebarlessons ul { 
   background: white; 
-  margin:     10px;
+  margin:     0px;
   box-shadow: inset 4px 0px 4px black;
   height:     250px;
   overflow:   scroll;
   padding:    10px;
+  font-size:  0.8rem !important;
 }
 .sidebarlessons li:nth-child(odd) { background: #b7d89333; }
 .sidebarlessons .prerequisite::after { content:'★'; } 
 
-div.standards-hierarchical-table:hover div.title + dl { display: block; }
+.sidebar table { background: none !important; border: none; width: auto; }
+.sidebar table td, .sidebar table tr { padding: 0; background: none; border: 0; }
+.sidebar table .title { display: none; }
+.sidebar table dl * { font-size:  0.75rem !important; margin: 0; }
+.sidebar table dt { margin-top: 10px; }
 
-.sidebarpractices ul { margin-left: 0px; text-align: center; }
-.sidebarpractices li { list-style-type: none; display: inline-block; margin-left: 5em; }
-
-
+.sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
 /************************************************************************************
 * LESSON PAGE STYLES
 */
