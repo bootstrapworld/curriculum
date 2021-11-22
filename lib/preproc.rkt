@@ -12,6 +12,7 @@
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "the-standards-dictionaries.rkt")
+(require "the-practices-dictionaries.rkt")
 (require "the-textbook-dictionaries.rkt")
 (require "lessons-and-standards.rkt")
 (require "lessons-and-practices.rkt")
@@ -334,8 +335,8 @@
                                       (box (list (list lesson-title lesson pwy))))
                                 *standards-met*)))))))))
 
-(define (add-badge b)
-  ;(printf "doing add-badge ~s\n" b)
+(define (add-practice b)
+  ;(printf "doing add-practice ~s\n" b)
   (unless (member b *practices-merited*)
     (set! *practices-merited* (cons b *practices-merited*))))
 
@@ -519,11 +520,14 @@
            (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))]
         [else
           ;(printf "Pracices are present for ~s\n" *lesson-plan*)
-          (for ([badge *practices-merited*])
-            (let ([img ;(format "image:{pathwayrootdir}../../lib/Badges/~a.png[~a]" badge badge)
-                    badge])
-              (display (enclose-tag "li" "" img) o)
-              (newline o)))])
+          (for ([practice *practices-merited*])
+            (let ([practice-desc (assoc practice *practices-list*)])
+              (cond [practice-desc
+                      (display (enclose-tag "li" ""
+                                 (string-append practice ": " (cadr practice-desc))) o)
+                      (newline o)]
+                    [else
+                      (printf "WARNING: Practice ~a not found\n" practice)])))])
   (display (create-end-tag "ul") o)
   (display (create-end-tag "div") o)
   (newline o))
@@ -1287,7 +1291,7 @@
         (for ([x *lessons-and-practices*])
           (when (string=? (car x) *lesson-plan-base*)
             (for ([s (cdr x)])
-              (add-badge s))))
+              (add-practice s))))
 
         ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
         ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
