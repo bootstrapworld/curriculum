@@ -226,7 +226,7 @@ tr th.tableblock {
   z-index:    9999;
   overflow:   scroll;
 }
-.sidebar > * { margin: 10px !important; }
+.sidebar > * { margin: 0px 10px !important; }
 .sidebar label { display: inline; font-size: 0.8rem; }
 
 .sidebar:hover { opacity: 1; }
@@ -249,7 +249,10 @@ tr th.tableblock {
 .sidebar table { background: none !important; border: none; width: auto; }
 .sidebar table td, .sidebar table tr { padding: 0; background: none; border: 0; }
 .sidebar table .title { display: none; }
-.sidebar table dl * { font-size:  0.75rem !important; margin: 0; }
+.sidebar dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
+.sidebar dl { line-height: 0.4rem; }
+.sidebar dd::after { content: '\A'; white-space: pre; }
+.sidebar dt::after { content: ' -'; white-space: pre; }
 .sidebar table dt { margin-top: 10px; }
 
 .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
