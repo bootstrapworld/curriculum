@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-11-17 # last modified
+LASTMOD=2021-11-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -560,7 +560,8 @@ function resolveabbrevs() {
   local f=$1
   local localDISTROOTDIR=$2
   local fdir=$(dirname $f)
-  #echo doing resolveabbrevs $f $localDISTROOTDIR
+  local fbase=${f##*/}
+  # echo doing resolveabbrevs $f $localDISTROOTDIR
   local mathjaxneeded=
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
@@ -667,12 +668,15 @@ $SED -i \
   $f
   fi
   #
-  tif=$fdir/.cached/${f%.*}-comment.txt
+  # echo Trying to find tif
+  tif=$fdir/.cached/${fbase%.*}-comment.txt
+  # echo Try $tif
   if test ! -f $tif; then
-    tif=$fdir/.cached/.${f%.*}-comment.txt
+    tif=$fdir/.cached/.${fbase%.*}-comment.txt
+    # echo Try2 $tif
   fi
   if test -f $tif; then
-    #echo tif for $f is $tif
+    # echo tif for $f is $tif
     $SED -i \
       -e '/^<body[^>]*>/s/<body[^>]*>/\0%INSERTCURRICULUMCOMMENT/' \
       -e '/%INSERTCURRICULUMCOMMENT/r '$tif \
