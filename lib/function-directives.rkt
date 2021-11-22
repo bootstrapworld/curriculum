@@ -843,7 +843,7 @@
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   (string-append
     (write-title "Example Tables")
-    "[.recipe.recipe_instructions]\n"
+    "[.recipe.recipe_instructions.codap_example_tables]\n"
     "What gets filtered/transformed/built? In the sample tables below, add the relevant columns.\n\n"
 
     (let* ([input-header (if (null? input-rows) #f (car input-rows))]
@@ -857,9 +857,10 @@
         "[cols=\"1a,1a\"]\n"
         "|===\n"
         "|\n\n"
-        (format "[.cols=~a]\n" num-input-cols)
+        (format "[.cols=~a, options=header]\n" num-input-cols)
         (write-each-example-table input-header input-rows  *show-input-examples* stipulated-num-input-rows num-input-cols)
         "|\n\n"
+        (format "[.cols=~a, options=header]\n" num-output-cols)
         (write-each-example-table output-header output-rows  *show-output-examples* stipulated-num-output-rows num-output-cols)
         "\n\n"
         "|===\n\n"))))
