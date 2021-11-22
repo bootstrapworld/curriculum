@@ -833,8 +833,8 @@ function doadoc() {
 
 function doadocs() {
   local ff="$@"
-  #echo doing doadocs $ff
-  #echo PROGLANG is $PROGLANG
+  # echo doing doadocs $ff
+  # echo PROGLANG is $PROGLANG
 
   if test $# -eq 0; then
     return
@@ -878,7 +878,7 @@ function doadocs() {
 }
 
 function processadocs() {
-  #echo doing processadocs $@
+  # echo doing processadocs $@
   if test $# -eq 0; then
     if test "$dir" = pages; then
       echo No adoc files in $LESSONSUBDIR
@@ -1133,6 +1133,8 @@ function buildworkbookpages() {
   export PROGLANG=pyret
   if test -f .cached/.wescheme; then
     export PROGLANG=wescheme
+  elif test -f .cached/.codap; then
+    export PROGLANG=codap
   fi
 
   DORECURSIVEADOC=
@@ -2596,31 +2598,15 @@ mkdir -p distribution/$NATLANG/.cached
 
 buildcommonlessons
 
-#export PROGLANG=pyret #fixme
-
-#echo PWDi is $(pwd)
 
 buildlessonplans
 
-#echo PWDii is $(pwd)
-
-#echo calling Racket on $PROGDIR/adocables-preproc.rkt
-
-#$PROGDIR/adocables-preproc.rkt .cached/.do-adocables.rkt #fixme
-
-#echo !!! calling buildpathway s
-
-#echo PWD 1 is $(pwd)
 
 callonARGS buildpathway
 
-#echo !!! buildpathway s done
 
 echo ')' >> $ADOCABLES_INPUT
 
-#echo PWD 2 is $(pwd)
-
-#$PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
 doconversions
 
@@ -2634,7 +2620,6 @@ builddependencyjson
 
 buildpathwaytocs
 
-#echo !!! building workbooks
 
 batchhtmltopdf
 
