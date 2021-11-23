@@ -6,9 +6,13 @@
 
 (require "practices-mlr-dictionary.rkt")
 (require "practices-sj-dictionary.rkt")
+(require "practices-sep-dictionary.rkt")
+(require "practices-cc-dictionary.rkt")
 
 (define *practices-list*
   (append
     *mlr-practices-list*
-    *sj-practices-list*)
+    *sj-practices-list*
+    *sep-practices-list*
+    *cc-practices-list*)
   )

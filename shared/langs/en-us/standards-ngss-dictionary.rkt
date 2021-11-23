@@ -4,21 +4,8 @@
 
 (define *ngss-standards-list*
 '(
-; Next-Generation Science Standards (NGSS)
-; Science and Engineering Practices
-
 ; NOTE(Emmanuel): 9/9/21 - Commenting out all the detailed standards, to focus on
 ; the 8 primary practices
-
-("SEP.1" "Asking Questions and Defining Problems")
-("SEP.2" "Developing and Using Models")
-("SEP.3" "Planning and Carrying Out Investigations")
-("SEP.4" "Analyzing and Interpreting Data")
-("SEP.5" "Using Mathematics and Computational Thinking")
-("SEP.6" "Constructing Explanations and Designing Solutions")
-("SEP.7" "Engaging in Argument from Evidence")
-("SEP.8" "Obtaining, Evaluating, and Communicating Information")
-
 #|
   ; The 8 NGSS Science and Engineering Practices do not have a predefined numbering system.  For this dictionary, subitems have been numbered for easier comprehension and use.  
 
