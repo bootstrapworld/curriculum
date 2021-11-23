@@ -514,6 +514,7 @@
   ;(printf "doing display-practices-bar\n")
   (display (create-begin-tag "div" ".sidebarpractices") o)
   (display "*Practices*" o)
+  (display "\n\n" o)
   (display (create-begin-tag "ul" "") o)
   (cond [(null? *practices-merited*)
          (when *lesson-plan*
@@ -523,12 +524,13 @@
           (for ([practice *practices-merited*])
             (let ([practice-desc (assoc practice *practices-list*)])
               (cond [practice-desc
-                      (display (enclose-tag "li" ""
-                                 (string-append practice ": " (cadr practice-desc))) o)
+                      (display practice o)
+                      (display ":: " o)
+                      (display (cadr practice-desc) o)
                       (newline o)]
                     [else
                       (printf "WARNING: Practice ~a not found\n" practice)])))])
-  (display (create-end-tag "ul") o)
+  (display "\n\n" o)
   (display (create-end-tag "div") o)
   (newline o))
 
@@ -551,25 +553,6 @@
           (fprintf o "\ninclude::.index-textbooks.asc[]\n")
           (display "|===\n" o)
           ]))
-
-;(define (display-textbooks-bar-obsolete-fixme o)
-;  ;(printf "doing display-textbooks-bar\n")
-;  (display (create-begin-tag "div" ".sidebartextbooks") o)
-;  (display "*Textbook Alignment*" o)
-;  (when (null? *textbooks-used*) (display ": _None_" o))
-;  (display "\n" o)
-;  (unless (null? *textbooks-used*)
-;    ;(printf "Textbooks present for ~s: ~s\n" *lesson-plan* *textbooks-used*)
-;    (display (create-begin-tag "ul" "") o)
-;    (for ([bk *textbooks-used*])
-;      (let ([title (assoc bk *textbook-list*)])
-;        (set! bk (if title (cadr title) bk))
-;        (display (enclose-tag "li" "" bk) o)
-;        (newline o)))
-;    (display (create-end-tag "ul") o)
-;    )
-;  (display (create-end-tag "div") o)
-;  (newline o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
