@@ -25,6 +25,7 @@ body:not(.LessonPlan, .narrativepage) #content {
   height: 90%; 
 }
 
+a       { color:  #2156a5 !important; }
 p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 20px !important; }
 mark    { background: none; color: inherit; }
@@ -218,7 +219,7 @@ tr th.tableblock {
 }
 
 .sidebar {
-  animation:  0.25s ease-out 0s 1 slideInFromLeft;
+  animation:  0.5s ease-out 0s 1 slideInFromLeft;
   display:    block;
   position:   fixed;
   top:        0px;
@@ -228,14 +229,15 @@ tr th.tableblock {
   background: #e8f3dd;
   transition: all 0.5s;
   color:      black;
-  box-shadow: -1px 2px 6px black;
+  box-shadow: -1px 2px 4px black;
   z-index:    9999;
   overflow:   scroll;
 }
 .sidebar > * { margin: 0px 10px !important; }
 .sidebar label { display: inline; font-size: 0.8rem; }
+.sidebar select { border:  none; }
 
-.sidebar * { opacity: 0.75; transition: opacity 0.5s; }
+.sidebar > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
 .sidebar:hover * { opacity: 1; }
 .sidebar strong { color: black; margin: 0; }
 .sidebar li { list-style-type: none; margin-bottom: 5px;}
@@ -244,7 +246,7 @@ tr th.tableblock {
 .sidebar .sidebarlessons ul { 
   background: white; 
   margin:     0px;
-  box-shadow: inset 4px 0px 4px black;
+  box-shadow: inset -1px 0px 2px gray;
   max-height: 250px;
   overflow:   scroll;
   padding:    10px;
@@ -259,7 +261,7 @@ tr th.tableblock {
 .sidebar dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
 .sidebar dl { line-height: 0.4rem; }
 .sidebar dd::after { content: '\A'; white-space: pre; }
-.sidebar dt::after { content: ' -'; white-space: pre; }
+.sidebar dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
 .sidebar table dt { margin-top: 10px; }
 
 .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
