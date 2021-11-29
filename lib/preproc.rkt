@@ -2491,25 +2491,29 @@
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
-    (let ([s (string-append
-              ;(if single? "```\n" "")
-              (if *pyret?* "# " "; ")
-              (if *pyret?* (wescheme->pyret funname-sym) funname)
-              " "
-              ; used to be single colon for WeScheme
-              "{two-colons}"
-              " "
-              ; used to not have commas in WeScheme
-              (vars-to-commaed-string domain-list)
-              " -> "
-              range
-              (if purpose
-                  (string-append "\n"
-                    (if *pyret?* "# " "; ")
-                    purpose)
-                  "")
-              ;(if single? "\n```\n" "")
-              )])
+    (let* (
+      [prefix (cond 
+                [(string=? *proglang* "pyret") "# "]
+                [(string=? *proglang* "wescheme") "m "]
+                [(string=? *proglang* "codap") ""])]
+      [s (string-append
+          prefix
+          (if *pyret?* (wescheme->pyret funname-sym) funname)
+          " "
+          ; used to be single colon for WeScheme
+          "{two-colons}"
+          " "
+          ; used to not have commas in WeScheme
+          (vars-to-commaed-string domain-list)
+          " -> "
+          range
+          (if purpose
+              (string-append "\n"
+                prefix
+                purpose)
+              "")
+          ;(if single? "\n```\n" "")
+          )])
       (if single?
           (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t)
           s))))
