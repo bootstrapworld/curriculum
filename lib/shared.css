@@ -465,6 +465,7 @@ table .autonum::after { content: none; }
 * DESIGN RECIPE AND STUDENT ANSWER STYLING
 */
 
+/* Note(Emmanuel): use display:flex and get rid of these! */
 .studentAnswerShort  { min-width: 60pt;  }
 .studentAnswerMedium { min-width: 100pt; }
 .studentAnswerLong   { min-width: 140pt; }
@@ -539,9 +540,13 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 }
 
 /* CODAP-specific formatting */
+.codap .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
+.codap_transformer_type, .codap_transformer_type p { margin: 0 1rem; }
+.recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
 .codap_example_tables+table table * { margin: 0; padding: 0; }
 .codap_example_tables+table table * { text-align: center; height: 2rem; }
+.codap .recipe_domain, .codap .recipe_range { width:  40%; }
 
 /* Maximize space for Domain, Purpose, and example/definition bodies */
 .recipe_domain, .recipe_purpose,
