@@ -1,0 +1,31 @@
+@design-codap-recipe{"filter-is-old"
+  "Create and save a transformer that consumes a row of the animals table and computes whether it is more than 12 years old."
+#:domain-list '("Row")
+#:range "Boolean"
+#:num-input-examples 2
+#:num-output-examples 2
+#:input-examples '(("Name" "Age (years)") ("Sasha" "1") ("Felix" "16"))
+#:output-examples '(("Name" "Age (years)") ("Felix" "16"))
+#:show-input-examples '(#t #t)
+#:show-output-examples '(#t)
+#:purpose "Consumes an animal, and computes whether its age is > 12"
+#:formula-expression "Age > 12"
+}
+
+
+@span{.sectionbreak}{}
+
+
+@design-codap-recipe{"build-s-names"
+  "Create and save a transformer which returns true if an animal’s name contains the letter `s`."
+#:domain-list '("Row")
+#:range "Boolean"
+#:num-input-examples 2
+#:num-output-examples 2
+#:input-examples '(("Name" "Species") ("Sasha" "cat") ("Felix" "cat"))
+#:output-examples '(("Name" "Species" "S name") ("Sasha" "cat" "true") ("Felix" "cat" "false"))
+#:show-input-examples '(#t #t)
+#:show-output-examples '(#t #t)
+#:purpose "Consumes an animal, and computes whether its name contains an `s`"
+#:formula-expression "includes(Name,s)"
+}
