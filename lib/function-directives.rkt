@@ -836,17 +836,17 @@
 (define (write-transformer transformer-name)
   (string-append
     (string-append
-      "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
+      "\n\n[.recipe_title.transformer_type, cols=\"100a,1a\"]\n"
       "|===\n"
-      "| Transformer (circle one) "
+      "| Transformer (check one) "
 
       "\n[.codap_transformer_type]\nFilter"
       "\n[.codap_transformer_type]\nTransform"
       "\n[.codap_transformer_type]\nBuild"
       "|\n"
       "|===\n\n")
-    "[.recipe.codap_transformer.studentAnswer]\n"
-    (format "Name: ~a\n\n" transformer-name)))
+    "[.recipe.recipe_name.studentAnswer]\n"
+    transformer-name))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -904,7 +904,7 @@
 (define (design-codap-recipe transformer-name directions
                              #:proglang [proglang "codap"]
                              #:solutions-mode? [solutions-mode? #f]
-                             #:page-header [page-header "Word Problem"]
+                             #:page-header [page-header "Transformer"]
                              #:show-transformer-contract? [show-transformer-contract? #f]
                              #:domain-list [domain-list '()]
                              #:show-domains? [show-domains? #f]

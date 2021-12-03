@@ -540,8 +540,23 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 }
 
 /* CODAP-specific formatting */
+/* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
+
+.codap .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+
+
 .codap .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
-.codap_transformer_type, .codap_transformer_type p { margin: 0 1rem; }
+.codap .recipe_name { display: flex; }
+.codap_transformer_type { margin: 0 2.5rem; }
+.codap_transformer_type p::before { 
+  content: ""; 
+  width: 18px; 
+  height: 18px; 
+  background: white; 
+  display: inline-block;
+  margin:  0 2px 4px 0;
+  vertical-align: middle;
+} 
 .recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
 .codap_example_tables+table table * { margin: 0; padding: 0; }
