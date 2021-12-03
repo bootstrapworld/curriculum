@@ -302,6 +302,8 @@ the denominator when necessary."
  ("OK.A2.F.1.8"
   "Graph piecewise functions with no more than three branches (including linear, quadratic, or exponential branches) and analyze the function by
 identifying the domain, range, intercepts, and intervals for which it is increasing, decreasing, and constant.")
+ ("OK.A2.D.2.1"
+  "Evaluate reports based on data published in the media by identifying the source of the data, the design of the study, and the way the data are analyzed and displayed. Given spreadsheets, tables, or graphs, recognize and analyze distortions in data displays. Show how graphs and data can be distorted to support different points of view.")
 
  ; OK CS Standards
 
