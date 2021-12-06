@@ -70,7 +70,7 @@
         "2-AP-11"
         )
 
-    ("simple-dataypes"
+    ("simple-datatypes"
         "OK.6.A.1.3"
         "OK.7.N.1.2"
         "OK.7.N.1.1"
@@ -390,7 +390,7 @@
         "OK.L1.DA.IM.01"
         )
     
-      ("defining-table-functions" 
+    ("defining-table-functions" 
         "6.EE.B.6" ; STEMworks
         "2-AP-13" 
         "2-AP-14" 
@@ -403,6 +403,18 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02" 
         "OK.A1.D.2.1"
+        )
+
+    ("displaying-categorical-data"  
+        "2-DA-08" 
+        "3A-DA-11" 
+        "P5"
+        "OK.8.DA.S.01"
+        "OK.7.D.1.2"
+        "OK.6.D.1.3"
+        "SJ.2"
+        "SJ.4"
+        "SJ.7"
         )
 
     ("displays-and-lookups" 
@@ -451,19 +463,6 @@
         "OK.6.D.1.3"
         )
 
-    ("if-expressions" 
-        "2-DA-08" 
-        "2-AP-19" 
-        "3B-NI-05" 
-        "1B-AP-10" ; STEMworks
-        "P3" 
-        "6-8.Data and Analysis.Inference and Models" 
-        "9-12.Algorithms and Programming.Control"
-        "OK.L1.AP.M.01"
-        "OK.L1.AP.M.02"
-        "OK.A2.D.2.1"
-        )
-
     ("histograms" 
         "6.SP.B.4" ; STEMworks
         "HSS.ID.A.3" 
@@ -501,6 +500,19 @@
         "OK.6.D.1.3"
         )
 
+    ("if-expressions" 
+        "2-DA-08" 
+        "2-AP-19" 
+        "3B-NI-05" 
+        "1B-AP-10" ; STEMworks
+        "P3" 
+        "6-8.Data and Analysis.Inference and Models" 
+        "9-12.Algorithms and Programming.Control"
+        "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "OK.A2.D.2.1"
+        )
+    
     ("linearity"
         "6.EE.B.6" ; STEMworks
         "8.F.A.2"
@@ -589,15 +601,6 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
         "OK.A1.D.2.1"
-        )
-
-    ("displaying-categorical-data"  
-        "2-DA-08" 
-        "3A-DA-11" 
-        "P5"
-        "OK.8.DA.S.01"
-        "OK.7.D.1.2"
-        "OK.6.D.1.3"
         )
 
     ("random-samples" 
