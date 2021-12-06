@@ -835,9 +835,18 @@
 
 (define (write-transformer transformer-name)
   (string-append
-    (write-title "Transformer (circle one) X Filter Transform Build")
-    "[.recipe.codap_transformer]\n"
-    (format "Name: ~a\n\n" transformer-name)))
+    (string-append
+      "\n\n[.recipe_title.transformer_type, cols=\"100a,1a\"]\n"
+      "|===\n"
+      "| Transformer (check one) "
+
+      "\n[.codap_transformer_type]\nFilter"
+      "\n[.codap_transformer_type]\nTransform"
+      "\n[.codap_transformer_type]\nBuild"
+      "|\n"
+      "|===\n\n")
+    "[.recipe.recipe_name.studentAnswer]\n"
+    transformer-name))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -895,7 +904,7 @@
 (define (design-codap-recipe transformer-name directions
                              #:proglang [proglang "codap"]
                              #:solutions-mode? [solutions-mode? #f]
-                             #:page-header [page-header "Word Problem"]
+                             #:page-header [page-header "Transformer"]
                              #:show-transformer-contract? [show-transformer-contract? #f]
                              #:domain-list [domain-list '()]
                              #:show-domains? [show-domains? #f]
@@ -956,8 +965,6 @@
   (string-append
     (write-title "Formula Expression")
     "[.recipe.recipe_contract]\n"
-    (encoded-ans ".recipe_name" transformer-name *show-funname-contract?*)
-    ":"
     (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
     "->"
     (encoded-ans ".recipe_range" range *show-range?*)
@@ -965,7 +972,7 @@
     "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)
     "\n\n"
-    "[.recipe.recipe_line]\n"
+    "[.recipe.recipe_formula.studentAnswer]\n"
     body
     "\n\n"))
 

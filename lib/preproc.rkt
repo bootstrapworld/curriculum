@@ -496,14 +496,14 @@
   ;(printf "doing display-standards-bar\n")
   (cond [(null? *standards-met*)
          (display (create-begin-tag "div" ".sidebarstandards") o)
-         (display "*Standards*: _None_" o)
+         (display "*Standards in this Lesson*: _None_" o)
          (display (create-end-tag "div") o)
          (display "\n" o)]
         [else
           (display "\n[.sidebarstandards,cols=\"a\"]" o)
           (display "\n|===\n" o)
           (display "| " o)
-          (display "*Standards*\n" o)
+          (display "*Standards in this Lesson*\n" o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
           (display " | \n" o)
           (display "\ninclude::.pathway-standards.asc[]\n" o)
@@ -513,7 +513,7 @@
 (define (display-practices-bar o)
   ;(printf "doing display-practices-bar\n")
   (display (create-begin-tag "div" ".sidebarpractices") o)
-  (display "*Practices*" o)
+  (display "*Practices in this Lesson*" o)
   (display "\n\n" o)
   (display (create-begin-tag "ul" "") o)
   (cond [(null? *practices-merited*)
@@ -2215,16 +2215,16 @@
                      #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
   ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
-                                    (if pyret x (enclose-span ".value.wescheme-boolean" x)))]
+                                    (if pyret (enclose-span ".value.wescheme-boolean" x) x))]
         [(number? e) (let ([x (format "~a" e)])
-                       (if pyret x (enclose-span ".value.wescheme-number" x)))]
+                       (if pyret (enclose-span ".value.wescheme-number" x) x))]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
-                       (if pyret x (enclose-span ".value.wescheme-symbol" x)))]
+                       (if pyret (enclose-span ".value.wescheme-symbol" x) x))]
         [(string? e) (let ([x (format "~s" e)])
-                       (if pyret x (enclose-span ".value.wescheme-string" x)))]
+                       (if pyret (enclose-span ".value.wescheme-string" x) x))]
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
@@ -2491,25 +2491,29 @@
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
-    (let ([s (string-append
-              ;(if single? "```\n" "")
-              (if *pyret?* "# " "; ")
-              (if *pyret?* (wescheme->pyret funname-sym) funname)
-              " "
-              ; used to be single colon for WeScheme
-              "{two-colons}"
-              " "
-              ; used to not have commas in WeScheme
-              (vars-to-commaed-string domain-list)
-              " -> "
-              range
-              (if purpose
-                  (string-append "\n"
-                    (if *pyret?* "# " "; ")
-                    purpose)
-                  "")
-              ;(if single? "\n```\n" "")
-              )])
+    (let* (
+      [prefix (cond 
+                [(string=? *proglang* "pyret") "# "]
+                [(string=? *proglang* "wescheme") "m "]
+                [(string=? *proglang* "codap") ""])]
+      [s (string-append
+          prefix
+          (if *pyret?* (wescheme->pyret funname-sym) funname)
+          " "
+          ; used to be single colon for WeScheme
+          "{two-colons}"
+          " "
+          ; used to not have commas in WeScheme
+          (vars-to-commaed-string domain-list)
+          " -> "
+          range
+          (if purpose
+              (string-append "\n"
+                prefix
+                purpose)
+              "")
+          ;(if single? "\n```\n" "")
+          )])
       (if single?
           (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t)
           s))))

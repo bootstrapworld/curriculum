@@ -615,7 +615,7 @@ function resolveabbrevs() {
     -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="paragraph"><!--/' \
     $f
   $SED -i \
-    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" id="prereq" type="checkbox" onchange="toggleNonPrereqDisplay()">\<label for="prereq"\>Prerequisites only (★)<label\>/' \
+    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" id="prereq" type="checkbox" onchange="toggleNonPrereqDisplay()">\<label for="prereq"\>Prerequisites for this lesson (★)<label\>/' \
     $f
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
@@ -639,7 +639,7 @@ EOF
   if test "$mathjaxneeded"; then
     if test ! -f $fdir/.cached/.mathjax.txt; then
     cat > $fdir/.cached/.mathjax.txt <<EOF
-      <script src="${PATHWAYROOTDIR}../../extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${localDISTROOTDIR}/extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     fi
@@ -2612,7 +2612,7 @@ doconversions
 
 collectprimitives
 
-echo BUILDING WORKBOOK JSONS
+echo BUILDING PAGELIST JSON FOR LESSONS
 
 callonARGS buildworkbookjsons
 

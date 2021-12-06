@@ -231,7 +231,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("linear regression") "a type of analysis that models the relationship between two quantitative variables. The result is known as a regression line, or line of best fit.")
       (es-mx ("regresión lineal") "un tipo de análisis que modela la relación entre dos variables cuantitativas. El resultado se conoce como línea de regresión o línea de mejor ajuste"))
     
-    ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines") "summarizes the relationship (if linear) between two quantitative variables")
+    ((en-us ("line of best fit" "lines of best fit" "regression line" "regression lines" "least squares line") "summarizes the relationship (if linear) between two quantitative variables")
       (es-mx ("línea de mejor ajuste" "línea de tendencia" "mejor ajuste" "recta de mejor ajuste") "resume la relación (si es lineal) entre dos variables cuantitativas"))
     
     ((en-us ("list" "lists") "a data structure containing a sequence of values"))
