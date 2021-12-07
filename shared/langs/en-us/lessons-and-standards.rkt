@@ -415,6 +415,11 @@
         "SJ.2"
         "SJ.4"
         "SJ.7"
+        "6.RP.A"
+        "7.RP.A"
+        "7.RP.A.3"
+        "7.SP.B"
+        "HSS.ID.A"
         )
 
     ("displays-and-lookups" 
@@ -569,6 +574,7 @@
         "6.SP.B.5" ; STEMworks
         "6.SP.B.5.D";STEMworks
         "HSS.ID.A.2";STEMworks
+        "HSS.ID.A.3"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2"
         )
@@ -581,6 +587,7 @@
         "6.SP.B.5.C"; STEMworks
         "HSS.ID.A.2";STEMworks
         "HSS.ID.A.1" 
+        "HSS.ID.A.3"
         "1B-DA-06" ; STEMworks
         "3A-DA-11" 
         "P5" 
