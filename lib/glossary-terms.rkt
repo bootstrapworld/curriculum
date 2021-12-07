@@ -25,11 +25,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en lo cual los más bajos aparecen primero y los más grandes aparecen después"))
 
-    ((en-us ("axis") "A number line on a scatter plot, used to place points that represent pairs of values in data sets")
-    #|(es-mx ("eje" "ejes") "...")|#)
+    ((en-us ("axis") "A reference line, used to determine the position of a coordinate")
+     (es-mx ("eje" "ejes") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
 
     ((en-us ("bar chart" "bar charts") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
-    #|(es-mx ("gráfico de barras") "...")|#)
+    (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre valores de categoría; la altura de cada barra refleja el recuento o el porcentaje de valores de datos en esa categoría "))
 
     ((en-us ("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
@@ -98,67 +98,70 @@ when it prints out the glossary for a particular unit
       (es-mx ("conjunto de datos") "una colección de información relacionada que se compone de elementos separados, pero que una computadora puede manipular como una unidad"))
 
     ((en-us ("data structure") "a datatype which packages several datatypes as fields")
-    (es-mx ("estructura de datos" "estructuras de datos") "Un grupo de valores que se pueden devolver como un único tipo de datos"))
+     (es-mx ("estructura de datos" "estructuras de datos") "Un grupo de valores que se pueden devolver como un único tipo de datos"))
 
     ((en-us ("data types" "data type") "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
-    (es-mx ("tipo de datos" "tipos de datos") "Una manera de clasificar valores, como: Número, Cadena, Imagen o Booleano"))
+     (es-mx ("tipo de datos" "tipos de datos") "Una manera de clasificar valores, como: Número, Cadena, Imagen o Booleano"))
 
     ((en-us ("debug") "to find and fix errors in one's code")
-      (es-mx ("depurar") "encontrar y corregir errores en el código"))
+     (es-mx ("depurar") "encontrar y corregir errores en el código"))
 
     ((en-us ("define") "to associate a descriptive name with a value")
-    (es-mx ("definir") "asociar un nombre descriptivo con un valor"))
+     (es-mx ("definir") "asociar un nombre descriptivo con un valor"))
 
     ((en-us ("definitions area") "the left-most text box in the Editor where definitions for values and functions are written")
-    (es-mx ("área de definiciones") "el cuadro de texto en el Editor, donde se escriben definiciones de valores y funciones"))
+     (es-mx ("área de definiciones") "el cuadro de texto en el Editor, donde se escriben definiciones de valores y funciones"))
 
     ((en-us ("descending") "an order in which higher values appear first, and lower values appear after")
-      (es-mx ("descendiente") "Los valores ordenados con el valor más grande primero, el segundo más grande siguiente, continuando así hasta que el más pequeño esté al final"))
+     (es-mx ("descendiente") "Los valores ordenados con el valor más grande primero, el segundo más grande siguiente, continuando así hasta que el más pequeño esté al final"))
 
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
-    (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
+     (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
     ((en-us ("direction") "the relationship between two quantitative variables: whether they tend to increase together, or whether as one goes up the other tends to go down")
-      (es-mx ("dirección") "la relación entre dos variables cuantitativas - si es que tienden a incrementar juntas, o si, a medida que una sube, la otra tiende a bajar"))
+     (es-mx ("dirección") "la relación entre dos variables cuantitativas - si es que tienden a incrementar juntas, o si, a medida que una sube, la otra tiende a bajar"))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
-    (es-mx ("dominio") "el tipo de datos que espera una función"))
+     (es-mx ("dominio") "el tipo de datos que espera una función"))
 
     ((en-us ("dot accessor") "a way to extract the values of fields an instance")
-    #|(es-mx "dot-accessors" "Una manera de extraer valores de una estructura de datos")|#)
+     (es-mx "dot-accessors" "Una manera de extraer valores de una estructura de datos"))
     
     ((en-us ("driver") "in pair programming, the person who is doing the typing"))
     
     ((en-us ("edge" "edges") "the line segments where the faces of solid figures meet in each of the 
-    three dimensions."))
+    three dimensions.")
+     (es-mx ("borde") "El segmento de recta donde se encuentran dos caras."))
     
-    ((en-us ("editor") "software in which you can write and evaluate code"))
+    ((en-us ("editor") "software in which code can be written and evaluated")
+     (es-mx ("editor") "software en el que se puede escribir y evaluar código"))
 
     ((en-us ("entry" "entries") "a single value in a table, belonging to a particular row and column")
-      (es-mex ("entrada") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
+     (es-mx ("entrada") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
     ((en-us ("error message" "error messages") "information from the computer about errors in code")
-    (es-mx ("mensaje de error" "mensajes de error") "información del equipo sobre errores en el código"))
+     (es-mx ("mensaje de error" "mensajes de error") "información del equipo sobre errores en el código"))
 
     ((en-us ("evaluate") "perform the computation in an expression, producing an answer")
-    (es-mx ("evaluar") "realizar el cálculo en una expresión, producir una respuesta"))
+     (es-mx ("evaluar") "realizar el cálculo en una expresión, producir una respuesta"))
 
     ((en-us ("evaluates to") "the result of computing an expression")
-    (es-mx ("equivale a" "equivale") "el resultado de calcular una expresión"))
+     (es-mx ("equivale a" "equivale") "el resultado de calcular una expresión"))
 
     ((en-us ("event") "something that happens outside of a running program, which the program can respond to")
-    (es-mx ("eventos") "algo que sucede fuera de un programa en ejecución, al que el programa puede responder"))
+     (es-mx ("eventos") "algo que sucede fuera de un programa en ejecución, al que el programa puede responder"))
     
     ((en-us ("event-based programming") "a style of programming in which every functions are written to respond to mouse-clicks, keypresses, etc.")
-    (es-mx ("programacion basada en eventos") "un estilo de programación en el que se escriben todas las funciones para responder a los clics del ratón, pulsaciones de teclas, etc."))
+     (es-mx ("programacion basada en eventos") "un estilo de programación en el que se escriben todas las funciones para responder a los clics del ratón, pulsaciones de teclas, etc."))
     
     ((en-us ("example" "examples" "Examples") "shows the use of a function on specific inputs and the computation the function should perform on those inputs")
-    (es-mx ("ejemplos") "muestra el uso de una función en entradas específicas y el cálculo que debe realizar la función en esas entradas"))
+     (es-mx ("ejemplos") "muestra el uso de una función en entradas específicas y el cálculo que debe realizar la función en esas entradas"))
 
-    ((en-us ("examples block") "code that lists examples starting with 'examples:' and ends with 'end'"))
+    ((en-us ("examples block") "code that lists examples")
+      (es-mx ("bloque de ejemplos") "código que enumera ejemplos"))
     
-    ((en-us ("explanatory variable" "explanatory") "the variable in a relationship that is presumed to impact the other variable"))
-    
+    ((en-us ("explanatory variable" "explanatory") "the variable in a relationship that is presumed to impact the outcome or \"response variable\", generally plotted on the x-axis of a scatter plot"))
+
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
     (es-mx ("expresión" "expresiones") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
     
@@ -166,14 +169,13 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("extract") "to construct a list using data from a particular column in a table"))
     
-    ((en-us ("face" "faces") "the shapes on the outside of a figure"))
+    ((en-us ("face" "faces") "the flat surfaces on the outside of a solid figure")
+      (ex-mx ("cara") "las superficies planas en el exterior de una figura sólida"))
     
     ((en-us ("field") "a part of a data structure that has a name and holds a single value of a specified datatype"))
     
     ((en-us ("form") "of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way"))
     
-    ((en-us ("frequency bar chart" "frequency bar charts") "a bar chart in which each the length of each bar corresponds to the frequency of a particular value"))
-
     ((en-us ("function" "functions") "a mathematical object that consumes inputs and produces an output")
     (es-mx ("función" "funciones") "un objeto matemático que toma en algunas entradas y produce una salida"))
     
@@ -285,7 +287,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("pie chart" "pie charts") "a display that uses areas of a circular pie's slices to show percentages in each category")
     (es-mx ("gráfico circular") "Un gráfico donde el tamaño de cada sector circular corresponde a un valor en el conjunto de datos. Un recurso estadístico que se utiliza para representar porcentajes y proporciones"))
     
-    ((en-us ("pixel" "pixels") "the smallest unit that makes up a digital image. The more pixels, the more detailed an image or video can appear."))
+    ((en-us ("pixel" "pixels") "the smallest unit that makes up a digital image. The more pixels, the more detailed an image or video can appear.")
+      (es-mx ("pixel") "el elemento más pequeño en la que se puede descomponer una imagen digital. Cuantos más píxeles, más detallada puede aparecer una imagen o un video."))
     
     ((en-us ("positive correlation") "relationship in which one variable increases as the other increases, and vice versa")
     (es-mx ("correlación positiva") "una relación en la que los valores de ambas variables tienden a aumentar juntos"))
@@ -316,7 +319,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("range") "the type or set of outputs that a function produces")
     (es-mx ("rango") "el tipo de datos que produce una función o la diferencia entre el valor más alto y el más bajo"))
     
-    ((en-us ("range of a dataset") "the distance between minimum and maximum values"))
+    ((en-us ("range of a dataset") "the distance between minimum and maximum values")
+      (es-mx ("rango de un conjunto de datos") "la distancia entre los valores mínimo y máximo"))
 
     ((en-us ("rate") "A comparison of two related quantities")
       (es-mx ("tasa") "Una comparación de dos cantidades relacionadas"))
@@ -328,7 +332,7 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("refactor" "refactoring") "the process of changing the style or structure of a program's code, without changing the program's behavior"))
     
-    ((en-us ("response variable" "response") "the variable in a relationship that is presumed to be affected by the other variable"))
+    ((en-us ("response variable" "response") "the variable in a relationship that is presumed to be affected by the explanatory variable, generally plotted on the y-axis of a scatter plot"))
         
     ((en-us ("sample" "samples") "a set of individuals or objects collected or selected from a statistical population by a defined procedure"))
     
