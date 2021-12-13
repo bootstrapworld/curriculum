@@ -252,7 +252,7 @@ The `.build-column` method walks through the table, applying whatever function i
 * Enter `Young` as the `Name of New Attribute`. Select `cases` as the `Collection to Add To`. In the formula expression box, type `Age < 5`.  Apply the transformer. What happens?
 * Now, in the formula expression box, try typing `Species = “cat”`. What do you get? What do you think is going on?
 
-The `Build Attribute` transformer walks through the table, applying whatever function it was given to each row. Whatever the function produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age < 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
+The `Build Attribute` Transformer walks through the table, applying whatever formula expression it was given to each row. Whatever the formula expression produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age < 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
 
 
 === Synthesize
@@ -263,7 +263,7 @@ Debrief with students. Ask them if they can think of a situation where they woul
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
 - A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use @ifproglang{pyret}{`.build-column`} @ifproglang{codap}{`Build Attribute`} to compute that for every row in the table.
 
-Being able to define functions @ifproglang{codap}{(what we are doing when we apply transformers)} is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
+Being able to define @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers} is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 
 @ifproglang{pyret}{Functions are a powerful tool, and the next two lessons are all about thinking in terms of functions and how to build them. In the next lesson, we'll learn how to view functions in three different ways. By making sure each representation matches the other two, it gives us a chance to check our work - twice! The lesson after that turns our attention back to Data Analysis, building functions specifically for analyzing our dataset.}
 
