@@ -502,6 +502,9 @@ identifying the domain, range, intercepts, and intervals for which it is increas
  ("OK.6.A.1.1"
   "Plot integer- and rational-valued (limited to halves and fourths) ordered-pairs as coordinates in all four quadrants and recognize the reflective relationships among coordinates that differ only by their signs."
  )
+ ("OK.6.A.1.3"
+  "Use and evaluate variables in expressions, equations, and inequalities that arise from various contexts, including determining when or if, for a given value of the variable, an equation or inequality involving a variable is true or false."
+ )
  ("OK.6.A.3.1"
   "Represent real-world or mathematical situations using expressions, equations and inequalities involving variables and rational numbers."
  )
@@ -510,6 +513,15 @@ identifying the domain, range, intercepts, and intervals for which it is increas
  )
  ("OK.6.CS.D.01" 
   "Evaluate existing computing devices and recommend improvements to design based on analysis of personal interaction with the device."
+ )
+ ("OK.7.N.1.1"
+  "Know that every rational number can be written as the ratio of two integers or as a terminating or repeating decimal."
+ )
+ ("OK.7.N.1.2"
+  "Compare and order rational numbers expressed in various forms using the symbols <, >, and =."
+ )
+ ("OK.7.N.1.3"
+  "Recognize and generate equivalent representations of rational numbers, including equivalent fractions."
  )
  ("OK.7.CS.D.01"
   "Evaluate existing computing devices and recommend improvements to design based on analysis of how other users interact with the device."
