@@ -1,6 +1,9 @@
 = Table Methods
+@ifproglang{pyret}{
+@description{Students learn about _table methods_, which allow them to order, filter, and build columns to extend the animals table.}}
+@ifproglang{codap}{
+@description{Students learn about _Transformers_, which allow them to order, filter, and build columns to extend the animals table.}}
 
-@description{Students learn about _table methods_, which allow them to order, filter, and build columns to extend the animals table.}
 
 @add-to-lang{.order-by, .filter, .build-column}
 
@@ -22,8 +25,12 @@
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1EZp_E7MUNi6fdYplzMKcwIrRigdPX4N-B1gdtSCSJ5M/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XXc7qv, Table Methods Starter File}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1EZp_E7MUNi6fdYplzMKcwIrRigdPX4N-B1gdtSCSJ5M/, Lesson Slides}}
+@ifproglang{codap}{
+* @link{https://docs.google.com/presentation/d/1fONyy_r4GHysWMf4n3eKcYxtO4GfBYTKznRQRFrYoG4/edit?usp=sharing, Lesson Slides}}
+@ifproglang{pyret}{
+* @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XXc7qv, Table Methods Starter File}}
 *  @link{pages/function-cards.adoc, Function Cards - Print and cut!}
 
 @material-links
@@ -39,8 +46,10 @@
 
 @lang-prereq
 |===
-
-== Introducing Function Definitions @duration{15 minutes}
+@ifproglang{pyret}{
+== Introducing Function Definitions @duration{15 minutes}}
+@ifproglang{codap}{
+== Ordering Tables, Part 1 @duration{15 minutes}}
 
 === Overview
 @ifproglang{pyret}{
@@ -94,14 +103,18 @@ Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` 
 
 . Can you think of a situation where CODAP's default behavior - to alter the table each time we sort it - might inhibit more sophisticated data analysis?}
 
-== Ordering Tables @duration{10 minutes}
+@ifproglang{pyret}{
+== Ordering Tables @duration{10 minutes}}
+
+@ifproglang{codap}{
+== Ordering Tables, Part 2 @duration{10 minutes}}
 
 === Overview
 @ifproglang{pyret}{
 Students learn to sort rows of a table in ascending or descending order, according to one column.}
 
 @ifproglang{codap}{
-Using the `sort` transformer, students sort rows of a table in ascending or descending order, according to one column. When they use transformers, students are building and modifying a _copy_ of the original table.}
+Using the `Sort` Transformer, students sort rows of a table in ascending or descending order, according to one column. When they use transformers, students are building and modifying a _copy_ of the original table.}
 
 === Launch
 @ifproglang{pyret}{
@@ -114,7 +127,7 @@ The Transformers plugin allows students to transform datasets to produce new, di
 
 First, show students how they can access the Transformers plugin (see screenshot on right), and invite them to explore the different Transformers available.
 
-Explain to students that `sort` Transformer consumes a dataset to sort, a formula (“key expression”), an indication of the _type_ the formula evaluates to, and a sort direction (ascending or descending). But what does it produce?
+Explain to students that the `Sort` Transformer consumes: (1) a dataset; (2) a formula; (3) the _type_ that the formula evaluates to; and (4) a sort direction (ascending or descending). But what does it produce?
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
@@ -169,7 +182,7 @@ Students may be more familiar with filters that actually change the table. In CO
 Students learn how to _filter_ tables by removing Rows.
 
 === Launch
-Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the @ifproglang{pyret}{"filter method"} @ifproglang{codap}{"filter transformer"}, and have them _randomly choose_ a @link{pages/function-cards.adoc, Function Card}, and make sure they read it without showing it to anyone else.
+Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the @ifproglang{pyret}{"filter method"} @ifproglang{codap}{"Filter Transformer"}, and have them _randomly choose_ a @link{pages/function-cards.adoc, Function Card}, and make sure they read it without showing it to anyone else.
 
 Have 6-8 students line up in front of the classroom, and have the filter @ifproglang{pyret}{method} @ifproglang{codap}{transformer} go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
 
@@ -182,7 +195,7 @@ The `.filter` method takes a _function_, and produces a new table containing onl
 Suppose we want to get a table of only animals that have been fixed? Have students find the contract for `.filter` in their contracts pages. The `.filter` method is taking in a _function_. What is the contract for that function? Where have we seen functions-taking-functions before?}
 
 @ifproglang{codap}{
-The `Filter` transformer takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true.
+The `Filter` Transformer takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true.
 
 Suppose we want to get a table of only animals that have been fixed? The `Filter` transformer consumes a dataset to filter and a formula expression that evaluates to either true or false.}
 
