@@ -1,6 +1,11 @@
 = Method Chaining
 
-@description{Students learn how to chain Methods together, and define more sophisticated subsets. }
+@ifproglang{pyret}{
+@description{Students learn how to chain Methods together, and define more sophisticated subsets.}}
+
+
+@ifproglang{codap}{
+@description{Students learn how to chain Transformers together, and define more sophisticated subsets.}}
 
 [@lesson-intro-table]
 |===
@@ -8,18 +13,27 @@
 | Lesson Goals
 | Students will be able to...
 
-* Use method chaining to write more sophisticated analyses using less code
-* Identify bugs introduced by chaining methods in the wrong order
+* Use method chaining to write more sophisticated analyses using @ifproglang{pyret}{less code} @ifproglang{codap}{fewer clicks}
+* Identify bugs introduced by chaining @ifproglang{methods} @ifproglang{codap}{Transformers} in the wrong order
 
 | Student-facing Lesson Goals
 |
 
-* Let's practice writing functions and combining methods together.
+@ifproglang{pyret}{
+* Let's practice writing functions and combining methods together.}
+@ifproglang{codap}{
+* Let's practice combining Transformers together.}
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1jBoQJfEf8-SuAEEu3Y-u_aYdEEjAQEjOM4G-kv6I9y4/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1jBoQJfEf8-SuAEEu3Y-u_aYdEEjAQEjOM4G-kv6I9y4/, Lesson Slides}}
+@ifproglang{codap}{
+* @link{https://docs.google.com/presentation/d/1xL947djoE8HWIQhBbTPoZtBWDDZ_MHdhuVGGs9jBOU8/edit?usp=sharing/, Lesson Slides}}
+@ifproglang{pyret}{
+* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}}
+@ifproglang{codap}{
+* @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset in CODAP}}
 
 @material-links
 
@@ -44,9 +58,8 @@ The Design Recipe is a powerful tool for solving problems by writing @ifproglang
 
 === Investigate
 [.lesson-instruction]
-@ifproglang{pyret}{Define the Compute functions on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.}
+Define the @ifproglang{pyret}{Compute functions on} @ifproglang{codap}{Transformers and formula expressions on} @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
 
-@ifproglang{codap}{Define the Transformers and formula expressions on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -143,7 +156,7 @@ Suppose we want to build a column and then use it to filter our table. If we use
 
 Saving a particular configuration of a transformer is useful so that the transformer can be easily accessed in the future. When we save a transformer, we want to give it a useful name and purpose statement, just like we practiced earlier in this lesson. Just as functions in algebra can be re-used with multiple inputs, Transformers can be re-used with multiple tables.
 
-We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(Sort(Filter(BuildAttribute(Animals-Dataset))))`. That's a lot of parentheses! As an alternative, student might consider using the following table names in this activity: `animals-in-kg`, followed by `light-animals-in-kg`, and then `ordered-light-animals-in-kg`).
+We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(Sort(Filter(BuildAttribute(Animals-Dataset))))`. That's a lot of parentheses! As an alternative, student might consider using the following table names in this activity: `animals-in-kg`, followed by `light-animals-in-kg`, and then `ordered-light-animals-in-kg`.
 |===
 
 Let’s go through how we might meet the journalist’s needs.
