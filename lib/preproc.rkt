@@ -2215,22 +2215,22 @@
                      #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
   ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
-                                    (if pyret x (enclose-span ".value.wescheme-boolean" x)))]
+                                    (if (or pyret tex) x (enclose-span ".value.wescheme-boolean" x)))]
         [(number? e) (let ([x (format "~a" e)])
-                       (if pyret x (enclose-span ".value.wescheme-number" x)))]
+                       (if (or pyret tex) x (enclose-span ".value.wescheme-number" x)))]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".studentAnswer" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
-                       (if pyret x (enclose-span ".value.wescheme-symbol" x)))]
+                       (if (or pyret tex) x (enclose-span ".value.wescheme-symbol" x)))]
         [(string? e) (let ([x (format "~s" e)])
-                       (if pyret x (enclose-span ".value.wescheme-string" x)))]
+                       (if (or pyret tex) x (enclose-span ".value.wescheme-string" x)))]
         [(answer? e) (let* ([e (cadr e)]
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
                            (enclose-span (format ".studentAnswerFilled~a" fill-len)
-                             (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens))
+                             (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex))
                            (enclose-span (format ".studentAnswerUnfilled~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
@@ -2241,9 +2241,9 @@
                                            ))
                             (let* ([a (sexp->arith a #:pyret #t)]
                                    [lft (sexp->arith (list-ref e 1) #:pyret #t #:wrap #t
-                                                     #:parens parens)]
+                                                     #:parens parens #:tex tex)]
                                    [rt (sexp->arith (list-ref e 2) #:pyret #t #:wrap #t
-                                                    #:parens parens)]
+                                                    #:parens parens #:tex tex)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if (or wrap parens) (format "({zwsp}~a{zwsp})" x) x)) ]
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX:
@@ -2254,8 +2254,8 @@
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
-                                   [lhs-c (sexp->arith lhs #:pyret #t)]
-                                   [rhs-c (sexp->arith rhs #:pyret #t)])
+                                   [lhs-c (sexp->arith lhs #:pyret #t #:tex tex)]
+                                   [rhs-c (sexp->arith rhs #:pyret #t #:tex tex)])
                               (cond [(cons? lhs)
                                      (format "fun ~a: ~a end" lhs-c rhs-c)]
                                     [else
@@ -2265,20 +2265,20 @@
                                    [args-c (map (lambda (x) (sexp->arith x #:pyret #t)) args)])
                               (format "[list: ~a]" (string-join args-c ", ")))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
-                            (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens))]
+                            (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens #:tex tex))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
                             (let* ([x (cadr e)]
-                                   [xm (sexp->arith x #:parens parens)])
+                                   [xm (sexp->arith x #:parens parens #:tex tex)])
                               (format
                                 (if (list? x)
                                     " { ( ~a ) }^ 2 "
                                     " { ~a }^ 2 ") xm))]
                            [else
                              (format (if pyret "~a{zwsp}({zwsp}~a{zwsp})" "~a(~a)")
-                                     (sexp->arith a #:pyret pyret #:parens parens)
+                                     (sexp->arith a #:pyret pyret #:parens parens #:tex tex)
                                      (string-join
                                        (map (lambda (e1)
-                                              (sexp->arith e1 #:pyret pyret #:parens parens))
+                                              (sexp->arith e1 #:pyret pyret #:parens parens #:tex tex))
                                             (cdr e))
                                        ", "))]
                            ))]
