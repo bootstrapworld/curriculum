@@ -29,8 +29,14 @@
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1c6gMXPZV3duwHQje6H55NkHKUkPjJDwOBRk74hPDk6o/, Lesson slides}
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1c6gMXPZV3duwHQje6H55NkHKUkPjJDwOBRk74hPDk6o/, Lesson slides}}
+@ifproglang{codap}{
+* @link{https://docs.google.com/presentation/d/1FVwv_rUm0JQd2LRh0aExHnW6hLmE-4NnOVnB7_XvWe8/edit?usp=sharing, Lesson slides}}
+@ifproglang{pyret}{
+* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}}
+@ifproglang{codap}{
+* @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset in CODAP}}
 
 @material-links
 
@@ -49,7 +55,10 @@
 @lang-prereq
 |===
 
-== Displaying Categorical Variables @duration{10 minutes}
+@ifproglang{pyret}{
+== Displaying Categorical Variables @duration{10 minutes}}
+@ifproglang{codap}{
+== Welcome to CODAP! @duration{10 minutes}}
 === Overview
 @ifproglang{pyret}{Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.}
 
@@ -94,17 +103,19 @@ Open the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared
 
 - Select a dot with your mouse. What happens?
 - How do you think the position of each dot is determined?
+- What happens when you select a table row? How about multiple table rows?
+- What happens when you click the "eye" icon (to the right of the graph or the table, depending on which is selected)?
 --
 
 @span{.right}{@image{images/codap-initial-display.png,"" ,300}}
 
 **If students report that a blank graph appears (rather than a scatterplot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).**
 
-Initially, the data points are randomly distributed on the graph. Selecting an orange dot reveals the `name` of that particular animal. Notice that when you select a particular dot, the table row for that animal is also highlighted in blue. When you hold the shift button, you can select multiple dots in the graphical display, or multiple rows in the table.
+Initially, the data points are randomly distributed on the graph. Selecting an orange dot reveals the `name` of that particular animal. Selecting a particular dot causes the table row for that animal to be highlighted in blue. Holding the shift button allows students to select multiple dots in the graphical display, or multiple rows in the table.
 
-Experiment with highlighting multiple table rows. Explore what happens when you set aside selected and / or unselected cases (available by selecting the eye icon to the right of the table and to the right of the graph).
+Students should observe that when they select a table row (or multiple table rows), the corresponding dots change from orange to turquoise. When they set aside selected and / or unselected cases (by using the "eye" icon), they can temporarily alter the amount of pets in the dataset (with the option to restore to the original dataset).
 
-We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+Students can also resize the window by dragging its borders.
 }
 
 
@@ -124,9 +135,9 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 }
 
 @ifproglang{codap}{
-Once we have a graph of randomly distributed data points, we can organize the data by dragging attributes from our _table_ to the axes of our graph.
+Once we have a graph of randomly distributed data points, we can organize the data by selecting attributes from our _table_ that we want to appear on the axes of our graph.
 
-Experiment with creating some bar charts in CODAP.
+Experiment with creating some bar charts in CODAP by following the steps below.
 [.lesson-instruction]
 - Select the y-axis on your graph (where it says "Click here"). On the drop-down menu that appears, select `fixed`. What do you notice?
 - Now select the x-axis on your graph and select `fixed`. How does the graph change?
@@ -182,7 +193,7 @@ Infographics are a powerful tool for communicating information, especially when 
 Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
 
 @ifproglang{codap}{
-Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and develop better intuition for the programming constructs they’ve seen before.}
+Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and get comfortable with CODAP as a platform for doing data science.}
 
 
 === Launch
@@ -190,10 +201,10 @@ There are _lots_ of @ifproglang{pyret}{other functions, for all} different kinds
 
 @ifproglang{codap}{
 [.lesson-instruction]
-- Have students open a scatterplot of randomly positioned points derived from the Animals Dataset by clicking on the `graph` icon again.
-- Direct them to select the `ruler` icon. What happens when they select to `show count`?
-- Now, have students drag the `Weight` attribute to the X-axis and select the ruler icon, again. Which options appear, now? Why are they different?
-- Finally, with `Weight` still on the X-axis, invite students to drag `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon, this time?}
+- Have students open a scatterplot of randomly positioned points derived from the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} by clicking on the `graph` icon again.
+- Direct them to select the `ruler` icon. What happens when they select `show count`?
+- Now, have students drag or select the `Weight` attribute to the X-axis, and then select the ruler icon, again. Which options appear now? Why are they different?
+- Finally, with `Weight` still on the X-axis, invite students to drag or select `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon this time?}
 
 === Investigate
 [.lesson-instruction]
@@ -219,12 +230,12 @@ Today you’ve added more data displays to your toolbox. You can create bar char
 
 You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.}
 
+@ifproglang{pyret}{
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 a|
 @span{.title}{Extension Activity}
 
-@ifproglang{pyret}{
 Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
 
 What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
@@ -240,24 +251,8 @@ Sometimes the dataset we have is _already_ summarized in a table like this, and 
 And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
 
 `pie-chart-summarized(count(animals-table,"species"), "value", "count")`
-}
-
-@ifproglang{codap}{
-Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. CODAP has a Transformers plug-in that does exactly this! From the menu in the upper left, select `plugins`, then `Transformers`. Choose the `Count` transformer. Select the Animals dataset, and the `species` attribute.
-
-What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
-
-- Use the `count` transformer to make a table showing the number of animals that are `fixed` (or not) from the shelter.
-
-- Use the `count` transformer to make a table showing the number of animals of each `sex` from the shelter.
-
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. CODAP allows us to go create a data display from any table; all we need to do is select the table first.
-}
-
-
-
 |===
-
+}
 
 == Additional Exercises:
 @opt-printable-exercise{pages/plot-practice.adoc}
