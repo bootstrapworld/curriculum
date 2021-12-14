@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-12-13 # last modified
+LASTMOD=2021-12-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1786,10 +1786,13 @@ function copylessondir() {
     cd ..
     if test -f $repoLessonDir/proglang.txt; then
       for pl in $(cat $repoLessonDir/proglang.txt); do
-        echo $lessonDir-$pl >> $RELEVANT_LESSONS_INPUT
-        cd $lessonDir-$pl
-        checklessonplan $lessonDir-$pl
-        cd ..
+        local lessonDirPl=$lessonDir-$pl
+        if test -d $lessonDirPl; then
+          echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
+          cd $lessonDirPl
+          checklessonplan $lessonDirPl
+          cd ..
+        fi
       done
     fi
   fi
