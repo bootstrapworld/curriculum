@@ -2564,6 +2564,16 @@ function callonARGS() {
   done
 }
 
+function makebilingualglossary() {
+  cd $TOPDIR
+
+  $PROGDIR/make-bilingual-glossary.rkt
+  mv bilingual-glossary.adoc distribution/en-us/lib
+  asciidoctor -a linkcss -a stylesheet=asciidoctor.css distribution/en-us/lib/bilingual-glossary.adoc
+  rm distribution/en-us/lib/bilingual-glossary.adoc
+
+}
+
 # echo Starting the build...
 
 mkdir -p $TOPDIR/distribution/$LANGUAGE/.cached
@@ -2634,5 +2644,8 @@ if test ! $NOPDF; then
   callonARGS buildpathwayworkbooks
 
 fi
+
+makebilingualglossary
+
 
 rmtmpfiles
