@@ -358,6 +358,7 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right.")
       (es-mx ("sesgo a la derecha") "..."))
+
     
     ((en-us ("slope") "the steepness of a straight line on a graph")
     (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
