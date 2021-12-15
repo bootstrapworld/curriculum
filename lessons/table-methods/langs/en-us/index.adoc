@@ -63,7 +63,8 @@ Load the @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XX
 
 This program has several things you've never seen before! This activity is about reading carefully, and trying to make sense of new code.}
 
-@ifproglang{codap}{Open the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} in CODAP. How many animals' names start with the letter M?}
+@ifproglang{codap}{Open the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
+}
 
 === Investigate
 
@@ -85,7 +86,7 @@ Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` 
 }
 
 @ifproglang{codap}{
-- Sort the animals alphabetically by name.
+- Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
 - Sort the animals by age, from youngest to oldest.
 - Sort the animals from heaviest to lightest.
 - Sort the animals table by how long it took for each animal to be adopted, in ascending order.}
@@ -132,7 +133,7 @@ Explain to students that the `Sort` Transformer consumes: (1) a dataset; (2) a f
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 a|
-@span{.title}{What's a Contract!?}
+@span{.title}{What's a Contract?!}
 Contracts help us keep track of the different transformers we'll be using. Every contract has three imporant parts:
 
 - The transformer’s name
@@ -157,7 +158,7 @@ The transformer `mean` doesn't display a contract. What type of data do you thin
 * Sort the animals table by how long it took for each animal to be adopted, in ascending order.}
 
 @ifproglang{codap}{
-* Open the `Transformer` plugin, and choose the transformer `Sort`. Select `animals-dataset`. In the formula expression box, type `sortItems(Name)`. Select `ascending` as the direction. What happens?
+* Open the `Transformer` plugin, and choose the transformer `Sort`. Select `animals-dataset`. In the formula expression box, type `sortItems(Name)`. Select `ascending` as the direction and `Apply Tranformer`. What happens?
 * Next, see what happens when you select `descending`.
 * Sort the animals table from heaviest to lightest.
 * Sort the animals table alphabetically by species.
@@ -250,7 +251,7 @@ The `.build-column` method walks through the table, applying whatever function i
 @ifproglang{codap}{
 * Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`.
 * Enter `Young` as the `Name of New Attribute`. Select `cases` as the `Collection to Add To`. In the formula expression box, type `Age < 5`.  Apply the transformer. What happens?
-* Now, in the formula expression box, try typing `Species = “cat”`. What do you get? What do you think is going on?
+* Now, enter `is-cat` as the `Name of New Attribute` and try typing `Species = “cat”` if the formula expression box. What do you get? What do you think is going on?
 
 The `Build Attribute` Transformer walks through the table, applying whatever formula expression it was given to each row. Whatever the formula expression produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age < 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.}
 
