@@ -267,29 +267,24 @@
 
 (define (assoc-standards std)
   ;(printf "doing assoc-standards ~s\n" std)
-  (let* ([std-bits (regexp-split #rx"&" std)] ;TODO This is probly obsolete now
-         [std (list-ref std-bits 0)]
-         [sublist-item #f]
-         [c #f]
-         [dict #f])
+  (let ([c #f]
+        [dict #f])
     (for ((x *disallowed-standards-list*))
       (unless c
         (let ([stds-list (caddr x)])
           (set! c (assoc std stds-list)))))
     ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
-    (cond (c (values #f #f #f))
-          (else
+    (cond [c (values #f #f)]
+          [else
             (for ([x *standards-list*])
               (unless c
                 (let ([stds-list (caddr x)])
                   (set! c (assoc std stds-list))
                   (when c (set! dict (car x))))))
             ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
-            (when (>= (length std-bits) 3)
-              (set! sublist-item (string->number (list-ref std-bits 2))))
             (unless c
               (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
-            (values sublist-item c dict)))))
+            (values c dict)])))
 
 (define (assoc-textbooks chapter-label)
   ;(printf "doing assoc-textbooks ~s\n" chapter-label)
@@ -309,31 +304,24 @@
 
 (define (add-standard x lesson-title lesson pwy o)
   ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
-  (let-values (((sublist-item c dict) (assoc-standards x)))
-    ;(printf "-> sbl= ~s c= ~s dict= ~s\n" sublist-item c dict)
-    (when c (let ((std (list-ref c 0)))
+  (let-values ([(c dict) (assoc-standards x)])
+    ;(printf "-> c= ~s dict= ~s\n" c dict)
+    (when c (let ([std (list-ref c 0)])
               (when (and o *lesson*)
                 (fprintf o "**~a**: ~a~n~n"
                          std (list-ref c 1)))
-              (cond ((assoc std *standards-met*)
+              (cond [(assoc std *standards-met*)
                      => (lambda (c0)
-                          (when sublist-item
-                            (let ((sublist-items (list-ref c0 1)))
-                              (box-add-new! sublist-item sublist-items)))
                           (unless *lesson*
                             (box-add-new! (list lesson-title lesson pwy)
-                                          (list-ref c0 4)))))
-                    (else
-                      (let ((sublist-items
-                              (box (if sublist-item
-                                       (list sublist-item)
-                                       '()))))
-                        (unless (member dict *dictionaries-represented*)
-                          (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
-                        (set! *standards-met*
-                          (cons (list std sublist-items c dict
-                                      (box (list (list lesson-title lesson pwy))))
-                                *standards-met*)))))))))
+                                          (list-ref c0 3))))]
+                    [else
+                      (unless (member dict *dictionaries-represented*)
+                        (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
+                      (set! *standards-met*
+                        (cons (list std  c dict
+                                    (box (list (list lesson-title lesson pwy))))
+                              *standards-met*))])))))
 
 (define (add-practice b)
   ;(printf "doing add-practice ~s\n" b)
@@ -1927,11 +1915,9 @@
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for ([s dict-standards-met])
-    ;(printf "s= ~s\n" s)
-    (let ([sublist-items (unbox (list-ref s 1))]
-          [s (list-ref s 2)]
+    (let ([s (list-ref s 1)]
           ;[dict (list-ref s 3)]
-          [lessons (unbox (list-ref s 4))])
+          [lessons (unbox (list-ref s 3))])
       (fprintf op "~a:: " (car s))
       (fprintf op "~a\n" (cadr s))
       (unless *lesson*
@@ -1954,9 +1940,7 @@
                                    (format " link:./lessons/pass:[~a]/index.shtml[~a]"
                                            lesson ltitle)])))
                        lessons) ";"))))
-      (for ([n sublist-items])
-        (fprintf op "** ~a~%" (list-ref s (+ n 1)))
-        )))
+      ))
   (fprintf op "\n\n"))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -2061,7 +2045,7 @@
           (display-standards-selection op *narrative* *dictionaries-represented*))
         (for ((dict *dictionaries-represented*))
           (let ([dict-standards-met
-                  (filter (lambda (s) (string=? (list-ref s 3) dict))
+                  (filter (lambda (s) (string=? (list-ref s 2) dict))
                           *standards-met*)])
             (unless (empty? dict-standards-met) ;it will never be empty!
               (create-standards-section
@@ -2090,7 +2074,7 @@
             (display "    standards: [" op2)
             (for ([s *standards-met*])
               (fprintf op "~s~n" (car s))
-              (let ([x (caddr s)])
+              (let ([x (cadr s)])
                 (cond [first? (set! first? #f)]
                       [else (display ",\n                " op2)])
                 (write (string-append (car x) " : " (cadr x)) op2))
