@@ -125,7 +125,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("dominio") "el tipo de datos que espera una función"))
 
     ((en-us ("dot accessor") "a way to extract the values of fields an instance")
-     (es-mx "dot-accessors" "Una manera de extraer valores de una estructura de datos"))
+     (es-mx ("dot-accessors") "Una manera de extraer valores de una estructura de datos"))
     
     ((en-us ("driver") "in pair programming, the person who is doing the typing"))
     
@@ -158,9 +158,10 @@ when it prints out the glossary for a particular unit
      (es-mx ("ejemplos") "muestra el uso de una función en entradas específicas y el cálculo que debe realizar la función en esas entradas"))
 
     ((en-us ("examples block") "code that lists examples")
-      (es-mx ("bloque de ejemplos") "código que enumera ejemplos"))
+     (es-mx ("bloque de ejemplos") "código que enumera ejemplos"))
     
-    ((en-us ("explanatory variable" "explanatory") "the variable in a relationship that is presumed to impact the outcome or \"response variable\", generally plotted on the x-axis of a scatter plot"))
+    ((en-us ("explanatory variable" "explanatory") "any variable that could impact the \"response variable\", generally plotted on the x-axis of a scatter plot")
+      (es-mx ("variable explicativa") "cualquier factor que pueda influir en la variable de respuesta, generalmente graficada en el eje x de un diagrama de dispersión."))
 
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
     (es-mx ("expresión" "expresiones") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
@@ -332,7 +333,8 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("refactor" "refactoring") "the process of changing the style or structure of a program's code, without changing the program's behavior"))
     
-    ((en-us ("response variable" "response") "the variable in a relationship that is presumed to be affected by the explanatory variable, generally plotted on the y-axis of a scatter plot"))
+    ((en-us ("response variable" "response") "the variable in a relationship that is presumed to be affected by the explanatory variable, generally plotted on the y-axis of a scatter plot")
+      (es-mx ("variable de respuesta") "una variable de respuesta es una cantidad particular sobre la que hacemos una pregunta en nuestro estudio, generalmente graficada en el eje y de un diagrama de dispersión"))
         
     ((en-us ("sample" "samples") "a set of individuals or objects collected or selected from a statistical population by a defined procedure"))
     
@@ -343,15 +345,19 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("select" "selects" "selecting") "a query that creates a table containing only a subset of a specified table's columns"))
     
-    ((en-us ("shape") "The aspect of a dataset that tells which values are more or less common"))
+    ((en-us ("shape") "The aspect of a dataset that tells which values are more or less common")
+      )
     
     ((en-us ("sieve") "a table query that creates a table containing only rows that satisfy a boolean expression"))
     
-    ((en-us ("skew" "skewness") "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than be separated by a gap (as with outliers)."))
+    ((en-us ("skew" "skewness") "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than be separated by a gap (as with outliers).")
+      (es-mx ("sesgo de una distribución") ""))
     
-    ((en-us ("skewed left" "skew left" "left skew") "A distribution is skewed left if there are a few values that are fairly low compared to the bulk of data values. A display of the data will show a longer tail to the left."))
+    ((en-us ("skewed left" "skew left" "left skew") "A distribution is skewed left if there are a few values that are fairly low compared to the bulk of data values. A display of the data will show a longer tail to the left.")
+      (es-mx ("sesgo a la izquierda") ""))
     
-    ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right."))
+    ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right.")
+      (es-mx ("sesgo a la derecha")))
     
     ((en-us ("slope") "the steepness of a straight line on a graph")
     (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
