@@ -4,7 +4,7 @@
 
 (require "defines.rkt")
 (require "html-tag-gen.rkt")
-(require "the-standards-dictionaries.rkt")
+(require "standards/the-standards-dictionaries.rkt")
 (require "utils.rkt")
 (require "preproc.rkt")
 

@@ -265,6 +265,9 @@
         "MP.5"
         "MP.6"
         "SEP.3" 
+        "SJ.2"
+        "SJ.4"
+        "SJ.7"
         )
 
     ("random-samples" 
