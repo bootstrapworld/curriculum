@@ -351,13 +351,13 @@ when it prints out the glossary for a particular unit
     ((en-us ("sieve") "a table query that creates a table containing only rows that satisfy a boolean expression"))
     
     ((en-us ("skew" "skewness") "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than be separated by a gap (as with outliers).")
-      (es-mx ("sesgo de una distribución") ""))
+      (es-mx ("sesgo de una distribución") "..."))
     
     ((en-us ("skewed left" "skew left" "left skew") "A distribution is skewed left if there are a few values that are fairly low compared to the bulk of data values. A display of the data will show a longer tail to the left.")
-      (es-mx ("sesgo a la izquierda") ""))
+      (es-mx ("sesgo a la izquierda") "..."))
     
     ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A display of the data will show a longer tail to the right.")
-      (es-mx ("sesgo a la derecha")))
+      (es-mx ("sesgo a la derecha") "..."))
     
     ((en-us ("slope") "the steepness of a straight line on a graph")
     (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
@@ -373,7 +373,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("string") "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
     (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
     
-    ((en-us ("surface area") "the sum of the areas of the faces of a polyhedron or the total area that the surface of a solid object occupies"))
+    ((en-us ("surface area") "the sum of the areas of the faces of a solid figure (polyhedron) or the total area that the surface of the object occupies"))
     
     ((en-us ("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
       (es-mx ("distribución simétrica" "simétrica") "Una distribución simétrica tiene una forma equilibrada, lo que muestra que es tan probable que la variable tome valores más bajos como valores más altos."))
