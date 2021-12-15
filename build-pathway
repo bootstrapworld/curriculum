@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-12-14 # last modified
+LASTMOD=2021-12-15 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2568,9 +2568,9 @@ function makebilingualglossary() {
   cd $TOPDIR
 
   $PROGDIR/make-bilingual-glossary.rkt
-  mv bilingual-glossary.adoc distribution/en-us/lib
-  asciidoctor -a linkcss -a stylesheet=asciidoctor.css distribution/en-us/lib/bilingual-glossary.adoc
-  rm distribution/en-us/lib/bilingual-glossary.adoc
+  mv bilingual-glossary.adoc distribution/$NATLANG/lib
+  asciidoctor -a linkcss -a stylesheet=asciidoctor.css distribution/$NATLANG/lib/bilingual-glossary.adoc
+  rm distribution/$NATLANG/lib/bilingual-glossary.adoc
 
 }
 
