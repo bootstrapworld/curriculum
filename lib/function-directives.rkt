@@ -845,8 +845,10 @@
       "\n[.codap_transformer_type]\nBuild"
       "|\n"
       "|===\n\n")
-    "[.recipe.recipe_name.studentAnswer]\n"
-    transformer-name))
+    "[.recipe]\n"
+    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
+    transformer-name
+    "</span></p>\n++++"))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -972,7 +974,9 @@
     "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)
     "\n\n"
-    "[.recipe.recipe_formula.studentAnswer]\n"
+    "[.recipe]\n"
+    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_formula\">"
     body
+    "</span></p>\n++++"
     "\n\n"))
 
