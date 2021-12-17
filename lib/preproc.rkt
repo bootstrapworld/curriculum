@@ -981,13 +981,28 @@
 (define (link-to-opt-projects o)
   ; (printf "doing link-to-opt-projects\n")
   (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
+    (unless (null? lessons)
+      (fprintf o "\n\n- *Projects*\n\n"))
     (for ([lesson lessons])
-      (let ([lesson-opt-links (read-data-file (format "lessons/~a/.cached/.index-opt-proj.rkt.kp" lesson) #:mode 'forms)])
+      (let ([lesson-opt-links (read-data-file
+                                (format "lessons/~a/.cached/.index-opt-proj.rkt.kp" lesson)
+                                #:mode 'forms)])
         ; (printf "lesson-opt-links for ~s is ~s\n" lesson lesson-opt-links)
         (for ([x lesson-opt-links])
-          (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n"
-                   (regexp-replace "^link:" (car x) "link:../")
-                   (regexp-replace "^link:" (cadr x) "link:../")))))))
+          (let* ([proj-link (car x)]
+                 [proj-desc proj-link])
+            (set! proj-desc (regexp-replace "^link:\\.\\./\\.\\./" proj-desc ""))
+            (set! proj-desc (regexp-replace "\\]\\[.*\\]$" proj-desc ""))
+            (set! proj-desc (regexp-replace "pass:\\[" proj-desc ""))
+            (set! proj-desc (regexp-replace "pages/" proj-desc "pages/.cached/."))
+            (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
+            (fprintf o "\n** *~a* {startsb}~a{endsb}\n~a\n\n"
+                     (regexp-replace "^link:" proj-link "link:../")
+                     (regexp-replace "^link:" (cadr x) "link:../")
+                     (if (file-exists? proj-desc)
+                         (string-append "+\n"
+                           (call-with-input-file proj-desc port->string))
+                         ""))))))))
 
 (define (link-to-lessons-in-pathway o)
   ;(printf "link-to-lessons-in-pathway in ~s~n" (current-directory))
