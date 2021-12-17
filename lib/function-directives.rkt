@@ -257,6 +257,9 @@
                           lines) "\n"))])
         (if (string=? res "") " " res))))
 
+(define (write-proglang)
+  (enclose-span (format ".headless-design-recipe.FOR~a" *proglang*) ""))
+
 (define (write-section-header page-header funname)
   (format (string-append
             "\n\n[.designRecipeLayout]\n"
@@ -762,7 +765,8 @@
 
   (string-append
 
-    (if headless? ""
+    (if headless?
+        (write-proglang)
         (write-section-header page-header funname))
 
     (write-directions directions)
@@ -948,7 +952,8 @@
 
   (string-append
 
-    (if headless? ""
+    (if headless?
+        (write-proglang)
         (write-section-header page-header transformer-name))
 
     (write-directions directions)
