@@ -996,11 +996,11 @@
             (set! proj-desc (regexp-replace "pass:\\[" proj-desc ""))
             (set! proj-desc (regexp-replace "pages/" proj-desc "pages/.cached/."))
             (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
-            (fprintf o "\n** *~a* {startsb}~a{endsb}\n~a\n\n"
+            (fprintf o "+\n*~a* {startsb}~a{endsb}\n~a\n"
                      (regexp-replace "^link:" proj-link "link:../")
                      (regexp-replace "^link:" (cadr x) "link:../")
                      (if (file-exists? proj-desc)
-                         (string-append "+\n"
+                         (string-append " "
                            (call-with-input-file proj-desc port->string))
                          ""))))))))
 
