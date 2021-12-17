@@ -664,12 +664,12 @@
       (check-link f)
       (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson link-type f))
     (when (member link-type '("printable-exercise" "opt-printable-exercise"))
-      (let ([f (format "../~a" g-in-pages)])
-        (unless (ormap (lambda (e) (and (equal? (car e) lesson)
-                                        (equal? (cadr e) f))) *exercises-done*)
-          (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
-            (set! *exercises-done*
-              (cons (list lesson f ex-ti) *exercises-done*))))))
+      (let ([f (format "~a" g-in-pages)])
+        (unless lesson-dir
+          (unless (ormap (lambda (e) (equal? (car e) f)) *exercises-done*)
+            (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
+              (set! *exercises-done*
+                (cons (list f ex-ti) *exercises-done*)))))))
     (when (or (not link-text) (string=? link-text ""))
       (let ([f.titletxt (path-replace-extension
                           (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
@@ -1184,6 +1184,7 @@
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
+  (set! *exercises-done* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1726,6 +1727,9 @@
             #:exists 'replace)))
       ;
 
+      (when *lesson-plan*
+        (add-exercises))
+
       (when (or *lesson-plan* *narrative*)
         ;no longer possible to append to pathway's file, as there
         ;is no pathway at this stage
@@ -1845,45 +1849,59 @@
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
   ;(printf "pwrd = ~s\n" *pathway-root-dir*)
   ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
-  (let* ([all-lessons (read-data-file *pathway-lesson-order* #:mode 'files)]
-         [lessons-with-exx (read-data-file *pathway-lessons-containing-exercises-file* #:mode 'forms)]
-         [lessons (sort lessons-with-exx #:key car
-                        (lambda (x y)
-                          (< (index-of all-lessons x) (index-of all-lessons y))))]
-         [exx (read-data-file *pathway-exercises-file* #:mode 'forms)])
+  ; (printf "cwd is ~s\n" (current-directory))
+  (let* ([pathway-lesson-order
+           (build-path "courses" *target-pathway* ".cached/.workbook-lessons.txt.kp")]
+         [all-lessons (read-data-file pathway-lesson-order #:mode 'files)]
+         [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
+         [lessons-with-exx
+           (filter (lambda (f)
+                      (file-exists? (build-path f ".cached/.lesson-exercises.rkt.kp")))
+                   all-lessons)]
+         [exx (map (lambda (lsn)
+                     (list lsn
+                           (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
+                                           #:mode 'forms)))
+                   lessons-with-exx)])
+    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order
+    ;         (file-exists? pathway-lesson-order))
+    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
+    ; (printf "exx is ~s\n" exx)
     ;(printf "lessons= ~s\n\nexercises= ~s\n" lessons exx)
+
     (unless (null? exx)
-      ;(printf "exercises found in ~s\n" *pathway-exercises-file*)
       (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
       (fprintf o "|===\n")
-      (for ([lsn lessons])
-        (let* ([lsn-dir (car lsn)]
-               [lsn-exx (filter (lambda (x) (string=? (car x) lsn-dir)) exx)])
-          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n" lsn-dir (cadr lsn))
-          (for ([ex lsn-exx])
-            ;(printf "ex = ~s ~a\n" ex (length ex))
-            (let* ([ti (list-ref ex 2)]
-                   [exer (list-ref ex 1)]
+      (for ([lsn-exx exx])
+        ; (printf "lsn-exx is ~s\n" lsn-exx)
+        (let ([lsn (car lsn-exx)]
+              [exx (cadr lsn-exx)])
+          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n"
+                   lsn
+                   (call-with-input-file (build-path lsn ".cached/.index.titletxt")
+                     port->string))
+          (for ([ex exx])
+            (let* ([ti (list-ref ex 1)]
+                   [exer (list-ref ex 0)]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-              (fprintf o "!~a ![ link:~a[exercise] : link:~a[solution] ]\n" ti exer soln)))
+              (fprintf o "!~a ![ link:lessons/~a[exercise] : link:lessons/~a[solution] ]\n"
+                       ti exer soln)))
           (fprintf o "!===\n")))
-      (fprintf o "|===\n\n"))))
+      (fprintf o "|===\n"))))
 
 (define (add-exercises)
   ;(printf "doing add-exercises\n")
   (when (and *force* (cons? *exercises-done*))
     ;(printf "doing add-exercises I\n")
     (set! *exercises-done* (reverse *exercises-done*))
-    (call-with-output-file *pathway-exercises-file*
-      (lambda (o)
-        (for ([ex *exercises-done*])
-          (fprintf o "~s\n" ex)))
-      #:exists 'append)
-    (call-with-output-file *pathway-lessons-containing-exercises-file*
-      (lambda (o)
-        (fprintf o "(\"lessons/~a\" ~s)\n" *lesson-plan* *page-title*))
-      #:exists 'append)
-    ))
+    (let ([lesson-exercises-file
+            (build-path *containing-directory* ".cached" ".lesson-exercises.rkt.kp")])
+      (call-with-output-file lesson-exercises-file
+        (lambda (o)
+          (for ([ex *exercises-done*])
+            (fprintf o "~s\n" ex)))
+        #:exists 'replace)
+      )))
 
 (define (create-glossary-subfile)
   ;(printf "doing create-glossary-and-standards-subfiles ~a ~a ~a\n" *narrative*)
@@ -2491,7 +2509,7 @@
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
     (let* (
-      [prefix (cond 
+      [prefix (cond
                 [(string=? *proglang* "pyret") "# "]
                 [(string=? *proglang* "wescheme") "m "]
                 [(string=? *proglang* "codap") ""])]
