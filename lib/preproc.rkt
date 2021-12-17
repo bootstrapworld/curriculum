@@ -2011,7 +2011,7 @@
                    (let ([first-textbook (car *textbooks-represented*)])
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
-                                         (regexp-replace "\\." first-textbook "_"))
+                                         (regexp-replace* "\\." first-textbook "_"))
                        first-textbook)))
                (string-join
                  (map (lambda (textbook-label)
