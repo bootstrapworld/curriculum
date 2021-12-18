@@ -6,20 +6,12 @@
 
 [@lesson-intro-table]
 |===
-@lesson-prereqs{contracts}
+@lesson-prereqs{}
 | Lesson Goals
 | Students will be able to:
 
-@ifproglang{pyret}{
-* Read pie and bar charts
-* Explain the difference between pie and bar charts
-* Generate pie and bar charts (among others) from the Animals Dataset
-}
-
-@ifproglang{codap}{
 * Read bar charts
 * Generate bar charts (among other data displays) from the Animals Dataset
-}
 
 
 | Student-facing Lesson Goals
@@ -29,14 +21,8 @@
 
 | Materials
 |[.materials-links]
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1FVwv_rUm0JQd2LRh0aExHnW6hLmE-4NnOVnB7_XvWe8/edit?usp=sharing, Lesson slides}}
-@ifproglang{codap}{
-* @link{https://docs.google.com/presentation/d/1MaNFBTVZIBXsvfn8I4f_0IQhoXYQHgEWkqGtQda2DG8/edit?usp=sharing, Lesson slides}}
-@ifproglang{pyret}{
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}}
-@ifproglang{codap}{
-* @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset in CODAP}}
+* @link{https://docs.google.com/presentation/d/1MaNFBTVZIBXsvfn8I4f_0IQhoXYQHgEWkqGtQda2DG8/edit?usp=sharing, Lesson slides}
+* @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset in CODAP}
 
 @material-links
 
@@ -46,8 +32,7 @@
 * Decide how students will be grouped in pairs
 * Computer for each student (or pair), with access to the internet
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-@ifproglang{pyret}{
-* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}}
+
 
 | Supplemental Resources
 | @link{https://informationisbeautiful.net/, Information is Beautiful}
@@ -55,44 +40,15 @@
 @lang-prereq
 |===
 
-@ifproglang{pyret}{
-== Displaying Categorical Variables @duration{10 minutes}}
-@ifproglang{codap}{
-== Welcome to CODAP! @duration{10 minutes}}
+== Welcome to CODAP! @duration{10 minutes}
 === Overview
-@ifproglang{pyret}{Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.}
 
-@ifproglang{codap}{Students use the options on CODAP's _Measure_ menu to produce displays and plots of the Animals Dataset.}
+Students use the options on CODAP's _Measure_ menu to produce displays and plots of the Animals Dataset.
 
 === Launch
 Where have you seen infographics and graphs used to display data in the real world?
 
-@ifproglang{pyret}{
-The library included at the top of the file includes some helper functions that are useful for Data Science, which we will use throughout this course. Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
 
-@show{(contract "pie-chart" '("Table" "String") "Image" )}
-
-And here is an example of _using_ the function:
-
-`pie-chart(animals-table, "legs")`
-
-[.lesson-instruction]
-- What is the Name of this function?
-- How many inputs are in its @vocab{Domain}?
-- In the Interactions Area, type `pie-chart(animals-table, "legs")` and hit Enter. What happens?
-
-@span{.right}{@image{images/legsp.png,"" ,300}}
-
-Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
-
-We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
-
-The function `pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of the number of `legs` across the shelter.
-}
-
-
-
-@ifproglang{codap}{
 Open the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} in CODAP.
 
 [.lesson-instruction]
@@ -116,25 +72,10 @@ Initially, the data points are randomly distributed on the graph. Selecting an o
 Students should observe that when they select a table row (or multiple table rows), the corresponding dots change from orange to turquoise. When they set aside selected and / or unselected cases (by using the "eye" icon), they can temporarily alter the amount of pets in the dataset (with the option to restore to the original dataset).
 
 Students can also resize the window by dragging its borders.
-}
 
 
 === Investigate
-@ifproglang{pyret}{
-Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
 
-@show{(contract "bar-chart" '("Table" "String") "Image" )}
-
-
-[.lesson-instruction]
-- Which column of the animals table tells us which species the animal is?
-- Use `bar-chart` to make a display showing how many animals there are of each species.
-- Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
-- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
-- When would you want to use one chart instead of another?
-}
-
-@ifproglang{codap}{
 Once we have a graph of randomly distributed data points, we can organize the data by selecting attributes from our _table_ that we want to appear on the axes of our graph.
 
 Experiment with creating some bar charts in CODAP by following the steps below.
@@ -146,13 +87,9 @@ Experiment with creating some bar charts in CODAP by following the steps below.
 - Now, make a bar chart showing how many animals there are of each species by changing the variable on the x-axis to `species`.
 - Experiment with bar charts, either by clicking on the axis title to display a menu of attributes or dragging column title from the table to the axes.
 - Which types of attributes can be displayed with the dots fused into bars? For which types of attributes does CODAP instead offer to create a bar for each point?
-}
-@ifproglang{pyret}{
-To dig deeper into pie charts and bar charts, have students turn to @opt-printable-exercise{pie-chart-notice.adoc}, @opt-printable-exercise{bar-chart-notice.adoc}, @opt-printable-exercise{bar-and-pie-notice.adoc}, @opt-printable-exercise{matching-bar-to-pie.adoc}.
-}
-@ifproglang{codap}{
+
 To dig deeper into bar charts, have students turn to @opt-printable-exercise{bar-chart-notice.adoc}.
-}
+
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -163,96 +100,51 @@ When students make a display of the `sex` of the animals, they will see that som
 
 
 === Common Misconceptions
-@ifproglang{pyret}{
-Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
 
-A pie chart can only display one categorical variable, but a bar chart might be used to display two or more. Pie charts have a wedge for each represented category. Unlike in bar charts, empty categories will not be included in a pie chart. When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
-}
-
-Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on @ifproglang{pyret}{pie- and} bar charts.
+Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on bar charts.
 
 === Synthesize
-Bar Charts @ifproglang{pyret}{and Pie Charts} display how much of the sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+Bar Charts display how much of the sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
 
 [.lesson-point]
-Bar Charts @ifproglang{pyret}{and Pie Charts} are mostly used to _display categorical columns_.
+Bar Charts are mostly used to _display categorical columns_.
 
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), @ifproglang{pyret}{the pie slices and bars} @ifproglang{codap}{they} can technically be placed in _any_ order, without changing the meaning of the chart.
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 a|
 @span{.title}{Mini Project: Making Infographics}
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @opt-printable-exercise{pages/infographic-rubric.adoc, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 |===
 
 == Exploring other Displays @duration{30 minutes}
 
 === Overview
-@ifproglang{pyret}{
-Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.}
-
-@ifproglang{codap}{
-Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and get comfortable with CODAP as a platform for doing data science.}
+Students freely explore the CODAP data display options available to them when they select the ruler icon (also known as the Measure menu). In doing so, they experiment with new charts and get comfortable with CODAP as a platform for doing data science.
 
 
 === Launch
-There are _lots_ of @ifproglang{pyret}{other functions, for all} different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can @ifproglang{pyret}{use your knowledge of Contracts to} figure out how to use them.
+There are _lots_ of different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can figure out how to use them.
 
-@ifproglang{codap}{
 [.lesson-instruction]
 - Have students open a scatterplot of randomly positioned points derived from the @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json, Animals Dataset} by clicking on the `graph` icon again.
 - Direct them to select the `ruler` icon. What happens when they select `show count`?
 - Now, have students drag or select the `Weight` attribute to the X-axis, and then select the ruler icon, again. Which options appear now? Why are they different?
-- Finally, with `Weight` still on the X-axis, invite students to drag or select `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon this time?}
+- Finally, with `Weight` still on the X-axis, invite students to drag or select `Time to Adoption` to the Y-axis. Which options appear when they select the ruler icon this time?
 
 === Investigate
 [.lesson-instruction]
 Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
 
 === Common Misconceptions
-@ifproglang{pyret}{
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.}
-
-@ifproglang{codap}{
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.}
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.
 
 
 === Synthesize
-
-@ifproglang{pyret}{
-Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
-
-You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.}
-
-@ifproglang{codap}{
 Today you’ve added more data displays to your toolbox. You can create bar charts to visually display data, and even transform entire tables!
 
-You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.}
-
-@ifproglang{pyret}{
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-a|
-@span{.title}{Extension Activity}
-
-Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
-
-What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
-
-- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) from the shelter.
-
-- Use the `count` function to make a table showing the number of animals of each `sex` from the shelter.
-
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have the contract for another function:
-
-@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
-
-And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
-
-`pie-chart-summarized(count(animals-table,"species"), "value", "count")`
-|===
-}
+You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.
 
 == Additional Exercises:
 @opt-printable-exercise{pages/plot-practice.adoc}

@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-12-15 # last modified
+LASTMOD=2021-12-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -691,6 +691,26 @@ $SED -i \
   fi
 }
 
+function addproglang() {
+  local f=$1
+  # echo doing addproglang $f
+  local proglangneeded=
+  if grep -q 'class="headless-design-recipe.FORpyret"' $f; then
+    proglangneeded=pyret
+  elif grep -q 'class="headless-design-recipe.FORwescheme"' $f; then
+    proglangneeded=wescheme
+  elif grep -q 'class="headless-design-recipe.FORcodap"' $f; then
+    proglangneeded=codap
+  fi
+  if test "$proglangneeded"; then
+    echo proglangneeded yes
+    $SED -i \
+      -e 's/^<body class="/\0'$proglangneeded' /' \
+      -e 's/<span class="headless-design-recipe.FOR[a-z]*"><\/span>//' \
+      $f
+  fi
+}
+
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
@@ -854,7 +874,6 @@ function doadocs() {
   test $OTHERDIR && otherdirarg="#t"
   test $SOLUTION && solutionsmodearg="#t"
   test $BOILERPLATE && boilerplate="#t"
-
 
   for f in $ff; do
     if test $TGTPATHWAY; then
@@ -1304,7 +1323,6 @@ function proglangversion() {
   return 1
 }
 
-
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
   # echo doing builddependencyjson
@@ -1433,7 +1451,6 @@ function collectprimitives() {
       #prevL=$L
     done
   fi
-
 
 }
 
@@ -1869,7 +1886,6 @@ function collectworkbookpages() {
           fi
         fi
       done < workbook-pages.txt
-
 
     fi
     cd ..
@@ -2328,6 +2344,7 @@ function postproc_workbookpage() {
     cp -p $fhtmlcached $fhtml
     bumpcsspathdir $fhtml $localDISTROOTDIR
     resolveabbrevs $fhtml $localDISTROOTDIR
+    addproglang $fhtml
   fi
 }
 
@@ -2612,15 +2629,11 @@ mkdir -p distribution/$NATLANG/.cached
 
 buildcommonlessons
 
-
 buildlessonplans
-
 
 callonARGS buildpathway
 
-
 echo ')' >> $ADOCABLES_INPUT
-
 
 doconversions
 
@@ -2634,7 +2647,6 @@ builddependencyjson
 
 buildpathwaytocs
 
-
 batchhtmltopdf
 
 if test ! $NOPDF; then
@@ -2646,6 +2658,5 @@ if test ! $NOPDF; then
 fi
 
 makebilingualglossary
-
 
 rmtmpfiles

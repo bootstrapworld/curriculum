@@ -2,7 +2,7 @@
 
 
 [.datasheet]
-= Esports Earnings
+= Refugees 2018
 
 [.question]
 --
@@ -19,10 +19,10 @@
 
 [.answer-roman]
 --
+This dataset looks at the countries of the world in 2018, recording the percent share of global refugees who originated from each country, as well as the personal security, civil liberty, and human development score of each country.
 
-This dataset includes data from 1998-2020 that comes from https://www.esportsearnings.com, a publicly-sourced repository of information on esports earnings.
+
 --
-
 [.question]
 --
 //Write one of the following descriptors in the space below:
@@ -36,10 +36,10 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
-
 - This data set has a limited number of categories, making it accessible to any student.
---
 
+
+--
 [.question]
 --
 //Write one of the following descriptors in the space below:
@@ -53,11 +53,13 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+- The columns of this data set are defined to allow students to start analysis without much additional coding.
 
-- The columns of this data set require calculations to convert data before students start making graphs.
-- **Column Titles:** game, release-date, genre, total-earnings (total earnings of all players in all tournaments), online-earnings (total earnings of all players in online-only tournaments), total-winners (total number of tournament winners in all tournaments), total tournaments (total number of tournaments that took place from the release date to 2020)
+**Column Titles:** Country, Region, Percent of Global Population, Percent of Global Refugees Originating from This Country, Personal Security Index, Democracy Category, Civil Liberties Index, Human Development Index
+
+
+
 --
-
 [.question]
 *Have students...*
 --
@@ -73,13 +75,17 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+- *define a function* little-liberty, which returns true if a country's civil liberties index is between 6 & 7.
+- *define a function* much-liberty, which returns true if a country's civil liberties index is between 1 & 2.
+- *define a function* little-security, which returns true if a country’s personal security index is <40.
+- *define a function* much-security, which returns true if a country’s personal security index is >60.
+- *define a function* little-development, which returns true if a country’s human development index is <0.4.
+- *define a function* much-development, which returns true if a country’s human development index is >0.6.
+- *define a function* high-indices, which returns true if a country's much-liberty, much-security, & much-development all return true.
 
-- **define** a function online-ratio, which returns the ratio of online-earnings to total-earnings for a game.
-- **define** a function annual-earnings, which returns the average earnings per year since the release date for a game.
 --
-
 [.question]
-**Heads Up**
+*Heads Up*
 --
 //If there are outliers teachers should be aware of, please note them below. For example:
 //
@@ -90,8 +96,7 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
-
-- Note that since the data is publicly sourced, there are games with no earnings and no tournaments. Additionally, the nature of the data means that there are a few extremely large outliers that the student will have to deal with when analyzing the data.
+- Only three countries are in the Oceania category, and the same for the North America category.
 
 
 --
@@ -109,10 +114,9 @@ This dataset includes data from 1998-2020 that comes from https://www.esportsear
 
 [.answer-roman]
 --
+- To compare regions of the world, a sieving/filtering function should be created to filter out countries by region.
 
-- The data for many less popular games varies greatly due to one-off tournaments. Additionally, the number of games with zero tournaments and zero players may vary, as the data is publicly sourced. Thus, it is recommended that comparisons between genres be done with subsets containing the games with the highest earnings, as much more data is available for those games.
 
-- Other metrics that may be interesting to the student for analysis are the average earnings per year since release and the average number of tournaments per year since the release year of the game or 1998--whichever comes second.
-
-- Keep in mind that the data only includes tournaments that occur from 1998 to 2020, even though some of the games included in the data set were released before 1998.
 --
+[.question]
+//Any other comments?
