@@ -1876,7 +1876,8 @@
         ; (printf "lsn-exx is ~s\n" lsn-exx)
         (let ([lsn (car lsn-exx)]
               [exx (cadr lsn-exx)])
-          (fprintf o "|link:../~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n"
+          (fprintf o "|link:~a~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n"
+                   *dist-root-dir*
                    lsn
                    (call-with-input-file (build-path lsn ".cached/.index.titletxt")
                      port->string))
@@ -1884,8 +1885,8 @@
             (let* ([ti (list-ref ex 1)]
                    [exer (list-ref ex 0)]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-              (fprintf o "!~a ![ link:lessons/~a[exercise] : link:lessons/~a[solution] ]\n"
-                       ti exer soln)))
+              (fprintf o "!~a ![ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
+                       ti *dist-root-dir* exer *dist-root-dir* soln)))
           (fprintf o "!===\n")))
       (fprintf o "|===\n"))))
 
