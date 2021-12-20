@@ -49,7 +49,7 @@
 @ifproglang{pyret}{
 == Introducing Function Definitions @duration{15 minutes}}
 @ifproglang{codap}{
-== Ordering Tables, Part 1 @duration{15 minutes}}
+== Sorting Tables, Part 1 @duration{15 minutes}}
 
 === Overview
 @ifproglang{pyret}{
@@ -108,7 +108,7 @@ Optional: Add three _true_ examples for `is-dog`, this time using the `dog-row` 
 == Ordering Tables @duration{10 minutes}}
 
 @ifproglang{codap}{
-== Ordering Tables, Part 2 @duration{10 minutes}}
+== Sorting Tables, Part 2 @duration{10 minutes}}
 
 === Overview
 @ifproglang{pyret}{
@@ -134,17 +134,17 @@ Explain to students that the `Sort` Transformer consumes: (1) a dataset; (2) a f
 |===
 a|
 @span{.title}{What's a Contract?!}
-Contracts help us keep track of the different transformers we'll be using. Every contract has three imporant parts:
+Contracts help us keep track of the different Transformers we'll be using. Every contract has three imporant parts:
 
-- The transformer’s name
-- The domain of the transformer - the type(s) of data we give it
-- The range of the transformer - the type of data the transformer produces
+- The Transformer’s name
+- The domain of the Transformer - the type(s) of data we give it
+- The range of the Transformer - the type of data the transformer produces
 
 Check out the screenshot of the Transformers plugin below. What are the domain and range for `Filter`?
 
 @centered-image{images/transformer-contract-example.png,"" ,300}
 
-The transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
+The Transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
 
 |===
 }
@@ -218,7 +218,7 @@ The `.filter` method walks through the table, applying whatever function it was 
 * This time, in the formula expression box, type `Age > 5`. What did you get?
 * Now try `Species = “dog”`
 
-The `Filter` transformer walks through the table, applying whatever function it was given to each row, and produces a new table containing all the rows for which the function returned `true`. Notice that the Domain for `Filter` says that test must be a formula, which consumes a `Row` and produces a `Boolean`. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
+The `Filter` Transformer walks through the table, applying whatever formula it was given to each row, and produces a new table containing all the rows for which the formula returned `true`. Notice that `Filter` takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.}
 
 @ifproglang{pyret}{
 === Common Misconceptions

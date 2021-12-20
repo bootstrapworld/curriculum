@@ -1,3 +1,4 @@
+@ifproglang{pyret}{
 = Defining Row Functions &amp; Using Table Methods
 
 *Methods* are special functions that are attached to pieces of data. We use them to manipulate Tables. 
@@ -16,3 +17,22 @@
 - Contracts for methods are different from other functions. They include the type of the data as part of their names. For example:
 + 
 `<table>.row-n {two-colons} (index {two-colons} Number) -> Row`
+}
+
+
+@ifproglang{codap}{
+= Three Transformers: Sort, Filter, and Build Attribute
+
+*Transformers* allow you to transform datasets to produce new, distinct output datasets, instead of modifying the original input dataset itself. We use them to manipulate tables.
+
+- Contracts for Transformers have three imporant parts: the Transformer’s name; the domain of the Transformer (the type(s) of data we give it); and the range of the Transformer (the type of data the transformer produces).
+
+- In this course, the three primary Transformers we'll be using are:
+
+** `Sort` - *consumes* a dataset, a column/attribute, an indication of the _type_ the formula evaluates to, and a sort direction (ascending or descending); `Sort` *produces* a copy of the input dataset, with cases sorted by the selected column/attribute.
+** `Filter` - *consumes* a dataset to filter and a formula expression that evaluates to either true or false. `Filter` *produces* a copy of the input dataset that only has the cases for which the formula was true.
+** `Build Attribute` - *consumes* a dataset, a name for the new column/attribute, a collection to add the attribute to, a formula expression for the attribute's values, and the data type formula will expression will evaluate to. `Built attribute` *produces*
+a copy of the input dataset, with the new attribute added.
+
+- Each of the above Transformers is attached to a formula expression. It's important to get the formula expressoin just right, or the Transformer will produce an error. The formula expression might just be a column/attribute (this is always the case for `Sort`!) or it might require a Boolean (this is often true for `Build Attribute` and `Filter`).
+}
