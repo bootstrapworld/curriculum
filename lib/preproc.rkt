@@ -1632,7 +1632,7 @@
                            (display-alternative-proglang o)
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
-                             (newline o)
+                             (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              (fprintf o (create-workbook-links))
                              (link-to-opt-projects o)
                              ;(display-exercise-collation o)
