@@ -2,12 +2,17 @@
   "Define a Transformer called `filter-is-dog`, whose formula consumes a `Row` of the animals table and computes where the animal is a dog."
 #:domain-list '("Row")
 #:range "Boolean"
-#:num-input-examples 2
+#:num-input-examples 3
 #:num-output-examples 2
 #:input-examples '(("name" "species") ("sasha" "cat") ("fritz" "dog") ("toggle" "dog"))
 #:output-examples '(("name" "species") ("fritz" "dog") ("toggle" "dog"))
-#:show-input-examples '(#t #t #f #f)
-#:show-output-examples '(#t #f #f)
-#:purpose "prose"
-#:formula-expression "code x y z"
+#:purpose "consumes an animal and computes whether the species is \"dog\""
+#:formula-expression "Species = \"dog\""
+#:show-input-examples '(#f #f #f #f)
+#:show-output-examples '(#f #f #f)
+#:show-transformer-contract? #f
+#:show-domains? #f
+#:show-purpose? #f
+#:show-range? #f
+#:show-formula-expression? #f
 }
