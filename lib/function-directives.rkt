@@ -851,7 +851,7 @@
       "|===\n\n")
     "[.recipe]\n"
     "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
-    transformer-name
+    (if *show-transformer-contract?* transformer-name "")
     "</span></p>\n++++"))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -940,7 +940,7 @@
   (set! *show-formula-expression?* show-formula-expression?)
 
   (when *solutions-mode?*
-    (set! *show-funname-contract?* #t)
+    (set! *show-transformer-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
     (set! *show-purpose?* #t)
@@ -960,7 +960,7 @@
 
     (write-transformer transformer-name)
 
-    (write-example-tables   input-examples output-examples num-input-examples num-output-examples)
+    (write-example-tables input-examples output-examples num-input-examples num-output-examples)
 
     (write-formula-expression transformer-name domain-list range purpose formula-expression)
 
@@ -981,7 +981,7 @@
     "\n\n"
     "[.recipe]\n"
     "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_formula\">"
-    body
+    (if *show-formula-expression?* body "")
     "</span></p>\n++++"
     "\n\n"))
 
