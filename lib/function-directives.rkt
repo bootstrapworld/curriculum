@@ -834,26 +834,39 @@
 
 (define *show-transformer-name?* #f)
 (define *show-transformer-contract?* #f)
+(define *show-transformer-type?* #f)
 (define *show-input-examples* #f)
 (define *show-output-examples* #f)
 (define *show-formula-expression?* #f)
 
-(define (write-transformer transformer-name)
-  (string-append
-    (string-append
-      "\n\n[.recipe_title.transformer_type, cols=\"100a,1a\"]\n"
-      "|===\n"
-      "| Transformer (check one) "
+(define (write-transformer transformer-name transformer-type)
+  (when transformer-type
+    (set! transformer-type (string-downcase transformer-type)))
+  (let ([style-transformer-type
+          (lambda (type)
+            (if (and *show-transformer-type?* transformer-type
+                     (string=? transformer-type type))
+                ".codap_transformer_type_checked"
+                ".codap_transformer_type"))])
 
-      "\n[.codap_transformer_type]\nFilter"
-      "\n[.codap_transformer_type]\nTransform"
-      "\n[.codap_transformer_type]\nBuild"
-      "|\n"
-      "|===\n\n")
+  (string-append
+    "\n\n[.recipe_title.transformer_type, cols=\"100a,1a\"]\n"
+    "|===\n"
+    "| Transformer (check one) "
+    (format
+      (string-append
+        "\n[~a]\nFilter"
+        "\n[~a]\nTransform"
+        "\n[~a]\nBuild")
+      (style-transformer-type "filter")
+      (style-transformer-type "transform")
+      (style-transformer-type "build"))
+    "|\n"
+    "|===\n\n"
     "[.recipe]\n"
     "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
     (if *show-transformer-name?* transformer-name "")
-    "</span></p>\n++++"))
+    "</span></p>\n++++")))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -914,6 +927,8 @@
                              #:page-header [page-header "Transformer"]
                              #:show-transformer-name? [show-transformer-name? #f]
                              #:show-transformer-contract? [show-transformer-contract? #f]
+                             #:show-transformer-type? [show-transformer-type? #f]
+                             #:transformer-type [transformer-type #f]
                              #:domain-list [domain-list '()]
                              #:show-domains? [show-domains? #f]
                              #:range [range ""]
@@ -935,6 +950,7 @@
 
   (set! *show-transformer-name?* show-transformer-name?)
   (set! *show-transformer-contract?* show-transformer-contract?)
+  (set! *show-transformer-type?* show-transformer-type?)
   (set! *show-domains?* show-domains?)
   (set! *show-range?* show-range?)
   (set! *show-purpose?* show-purpose?)
@@ -945,6 +961,7 @@
   (when *solutions-mode?*
     (set! *show-transformer-name?* #t)
     (set! *show-transformer-contract?* #t)
+    (set! *show-transformer-type?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
     (set! *show-purpose?* #t)
@@ -962,7 +979,7 @@
 
     (write-directions directions)
 
-    (write-transformer transformer-name)
+    (write-transformer transformer-name transformer-type)
 
     (write-example-tables input-examples output-examples num-input-examples num-output-examples)
 
@@ -988,4 +1005,3 @@
     (if *show-formula-expression?* body "")
     "</span></p>\n++++"
     "\n\n"))
-
