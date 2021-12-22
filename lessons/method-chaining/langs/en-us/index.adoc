@@ -4,7 +4,6 @@
 @description{Students learn how to chain Methods together, and define more sophisticated subsets.}
 }
 
-
 @ifproglang{codap}{
 @description{Students learn how to chain Transformers together, and define more sophisticated subsets.}
 }
@@ -16,6 +15,7 @@
 | Students will be able to...
 
 * Use method chaining to write more sophisticated analyses using @ifproglang{pyret}{less code} @ifproglang{codap}{fewer clicks}
+
 * Identify bugs introduced by chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers} in the wrong order
 
 | Student-facing Lesson Goals
@@ -45,8 +45,8 @@
 |
 * Make sure all materials have been gathered
 * Decide how students will be grouped in pairs
-* Computer for each student (or pair), with access to the internet. @ifproglang{pyret}{All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}
-* }
+* Computer for each student (or pair), with access to the internet. @ifproglang{pyret}{All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}}
+
 * link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
 
 @lang-prereq
@@ -143,14 +143,14 @@ Let's break down the reporter's specifications:
 
 The journalist has a lot of needs!
 
-Fortunately, in CODAP, we can use the result of one transformer as an input to another. In other words: transformers can be chained, resulting in a sequence of datasets, each a transformed version of the previous. Any updates made to an input dataset will flow through and affect its outputs. If you have a chain of transformed datasets and you change the original dataset, the updates will flow through the chain.
+Fortunately, in CODAP, we can use the result of one Transformer as an input to another. In other words: Transformers can be chained, resulting in a sequence of datasets, each a transformed version of the previous. Any updates made to an input dataset will flow through and affect its outputs. If you have a chain of transformed datasets and you change the original dataset, the updates will flow through the chain.
 
-As you chain together transformers, it is important to remember the following:
+As you chain together Transformers, it is important to remember the following:
 }
 [.lesson-point]
 Order matters: Build, Filter, Sort.
 
-Suppose we want to build a column and then use it to filter our table. If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
+Suppose we want to build a column and then use it to filter our table. If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
 
 @ifproglang{codap}{
 
@@ -159,7 +159,7 @@ Suppose we want to build a column and then use it to filter our table. If we use
 |
 @span{.title}{Tip: Saving Transformers and Renaming Tables}
 
-Saving a particular configuration of a transformer is useful so that the transformer can be easily accessed in the future. When we save a transformer, we want to give it a useful name and purpose statement, just like we practiced earlier in this lesson. Just as functions in algebra can be re-used with multiple inputs, Transformers can be re-used with multiple tables.
+Saving a particular configuration of a Transformer is useful so that the Transformer can be easily accessed in the future. When we save a Transformer, we want to give it a useful name and purpose statement, just like we practiced earlier in this lesson. Just as functions in algebra can be re-used with multiple inputs, Transformers can be re-used with multiple tables.
 
 We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(Sort(Filter(BuildAttribute(Animals-Dataset))))`. That's a lot of parentheses! As an alternative, student might consider using the following table names in this activity: `animals-in-kg`, followed by `light-animals-in-kg`, and then `ordered-light-animals-in-kg`.
 |===
@@ -172,25 +172,25 @@ For this step, we’ll use `Build Attribute`, which makes a new copy of the data
 
 - Include only animals that weigh no more than 9 kilograms.
 
-We are going to `Filter` now, applying the transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `(BuildAttribute(Animals-Dataset))`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
+We are going to `Filter` now, applying the Transformer to the dataset we created in the previous step. In the dropdown menu of datasets, our dataset is named `(BuildAttribute(Animals-Dataset))`. We will want to keep all rows where `Weight (kgs)` is less than or equal to 9.
 
 - Order weight in kilograms from lightest to heaviest.
 
-Remember - we want to be able to easily create a table that meets the journalist’s specifications, so we’ll want to use the `Sort` transformer here, rather than the `Sort` dropdown option that appears when we click `Weight`. Be sure to select the correct dataset to sort!
+Remember - we want to be able to easily create a table that meets the journalist’s specifications, so we’ll want to use the `Sort` Transformer here, rather than the `Sort` dropdown option that appears when we click `Weight`. Be sure to select the correct dataset to sort!
 
 - Update the table weekly to reflect the changing population of the shelter.
 
-Because we’re using transformers, each time the Animals Table is updated, the journalist’s table will be updated, too! Try adding or removing a row from the original table and observe the ripple effect in your chained tables.
+Because we’re using Transformers, each time the Animals Table is updated, the journalist’s table will be updated, too! Try adding or removing a row from the original table and observe the ripple effect in your chained tables.
 }
 === Investigate
 [.lesson-point]
-When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{transformers}, it’s important to build first, then filter, and then order.
+When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers}, it’s important to build first, then filter, and then order.
 
 How well do you know your table methods? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} in your Student Workbook to find out.
 
 
 === Synthesize
-As our analysis gets more complex, chaining @ifproglang{pyret}{methods} @ifproglang{codap}{transformers} is a great way to re-use work we've already done. And less duplicate work means a smaller chance of bugs. Composing operations is a powerful way to work, so it’s critical to think carefully when we use it!
+As our analysis gets more complex, chaining is a great way to re-use work we've already done. And less duplicate work means a smaller chance of bugs. Chaining is a powerful way to work, so it’s critical to think carefully when we use it!
 
 
 == Additional Exercises
