@@ -832,6 +832,7 @@
 
 ;;;; CODAP design recipe
 
+(define *show-transformer-name?* #f)
 (define *show-transformer-contract?* #f)
 (define *show-input-examples* #f)
 (define *show-output-examples* #f)
@@ -851,7 +852,7 @@
       "|===\n\n")
     "[.recipe]\n"
     "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
-    (if *show-transformer-contract?* transformer-name "")
+    (if *show-transformer-name?* transformer-name "")
     "</span></p>\n++++"))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -911,6 +912,7 @@
                              #:proglang [proglang "codap"]
                              #:solutions-mode? [solutions-mode? #f]
                              #:page-header [page-header "Transformer"]
+                             #:show-transformer-name? [show-transformer-name? #f]
                              #:show-transformer-contract? [show-transformer-contract? #f]
                              #:domain-list [domain-list '()]
                              #:show-domains? [show-domains? #f]
@@ -931,6 +933,7 @@
 
   (set! *solutions-mode?* solutions-mode?)
 
+  (set! *show-transformer-name?* show-transformer-name?)
   (set! *show-transformer-contract?* show-transformer-contract?)
   (set! *show-domains?* show-domains?)
   (set! *show-range?* show-range?)
@@ -940,6 +943,7 @@
   (set! *show-formula-expression?* show-formula-expression?)
 
   (when *solutions-mode?*
+    (set! *show-transformer-name?* #t)
     (set! *show-transformer-contract?* #t)
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
