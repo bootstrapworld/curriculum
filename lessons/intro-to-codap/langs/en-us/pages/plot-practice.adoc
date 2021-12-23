@@ -3,26 +3,31 @@
 ++++
 <style>
 .blankline { margin-bottom: 0.5rem; }
-td, th, .center { padding: 0 !important; }
-td p { display: flex; }
-td p .fitbruby { flex-grow: 1; }
-.ulist p { margin: 0; }
+td, th, .center { padding: 0 !important; vertical-align: middle; }
+p { margin: 0 !important; }
+.checklist li { margin: 0; padding: 0; }
 </style>
 ++++
 
 Fill in the tables, then use CODAP to make the following displays.
 
 @n A bar chart showing the `species` of animals from the shelter.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
 |@span{.center}{*Configuration*}
 
 |
-@fitbruby{}{ @ifsoln{_species_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+}
 
-@fitbruby{}{ @ifsoln{_NA_} }{Column used as y-axis}
+@ifsoln{
+@fitbruby{}{_species_}{[column used as x-axis]}
+@fitbruby{}{_n/a_}{[column used as y-axis]}
+}
 
 |
 * [ ] Quantitative
@@ -39,17 +44,22 @@ Fill in the tables, then use CODAP to make the following displays.
 @vspace{1ex}
 
 @n A bar chart showing how many animals are fixed or not.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
 |@span{.center}{*Configuration*}
 
 |
-@fitbruby{}{ @ifsoln{_fixed_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+}
 
-@fitbruby{}{ @ifsoln{_NA_} }{Column used as y-axis}
-
+@ifsoln{
+@fitbruby{}{_fixed_}{[column used as x-axis]}
+@fitbruby{}{_n/a_}{[column used as y-axis]}
+}
 |
 * [ ] Quantitative
 * [ ] Categorical
@@ -64,16 +74,22 @@ Fill in the tables, then use CODAP to make the following displays.
 @vspace{1ex}
 
 @n A histogram of the number of `pounds` that animals weigh.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
 |@span{.center}{*Configuration*}
 
 |
-@fitbruby{}{ @ifsoln{_Weight_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+}
 
-@fitbruby{}{ @ifsoln{_NA_} }{Column used as y-axis}
+@ifsoln{
+@fitbruby{}{_pounds_}{[column used as x-axis]}
+@fitbruby{}{_n/a_}{[column used as y-axis]}
+}
 
 |
 * [ ] Quantitative
@@ -90,7 +106,7 @@ Fill in the tables, then use CODAP to make the following displays.
 @vspace{1ex}
 
 @n A scatter-plot, using the animals `name` as the labels, `age` as the x-axis, and `pounds` as the y-axis, for all the animals from the shelter.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
@@ -98,9 +114,17 @@ Fill in the tables, then use CODAP to make the following displays.
 
 
 |
-@fitbruby{}{ @ifsoln{_Age_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+@fitbruby{100%}{}{[(optional) column used for labels]}
+}
 
-@fitbruby{}{ @ifsoln{_Weight_} }{Column used as y-axis}
+@ifsoln{
+@fitbruby{}{_age_}{[column used as x-axis]}
+@fitbruby{}{_pounds_}{[column used as y-axis]}
+@fitbruby{100%}{_name_}{[(optional) column used for labels]}
+}
 
 |
 * [ ] Quantitative
@@ -113,13 +137,9 @@ Fill in the tables, then use CODAP to make the following displays.
 
 |===
 
-Do you need to change the column to be used for points' labels? Explain.
-
-
-@span{.blankline}{}
 
 @n A scatter-plot, using the animals `species` as the labels, `age` as the x-axis, and `weeks` as the y-axis, for all the animals from the shelter.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
@@ -127,9 +147,17 @@ Do you need to change the column to be used for points' labels? Explain.
 
 
 |
-@fitbruby{}{ @ifsoln{_Age_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+@fitbruby{100%}{}{[(optional) column used for labels]}
+}
 
-@fitbruby{}{ @ifsoln{_Weight_} }{Column used as y-axis}
+@ifsoln{
+@fitbruby{}{_age_}{[column used as x-axis]}
+@fitbruby{}{_weeks_}{[column used as y-axis]}
+@fitbruby{100%}{_species_}{[(optional) column used for labels]}
+}
 
 |
 * [ ] Quantitative
@@ -142,23 +170,26 @@ Do you need to change the column to be used for points' labels? Explain.
 
 |===
 
-Do you need to change the column to be used for points' labels? Explain.
-
-
-@span{.blankline}{}
 
 @n (Challenge) A least squares line, using the animals `species` as the labels, `pounds` as the x-axis, and `weeks` as the y-axis, for all the animals from the shelter.
-[cols="5a,5a,5a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
 |@span{.center}{*Column / Attribute*}
 |@span{.center}{*Type of Data*}
 |@span{.center}{*Measure*}
 
 |
-@fitbruby{}{ @ifsoln{_Age_} }{Column used as x-axis}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+@fitbruby{100%}{}{[(optional) column used for labels]}
+}
 
-@fitbruby{}{ @ifsoln{_Weight_} }{Column used as y-axis}
-
+@ifsoln{
+@fitbruby{}{_pounds_}{[column used as x-axis]}
+@fitbruby{}{_weeks_}{[column used as y-axis]}
+@fitbruby{100%}{_species_}{[(optional) column used for labels]}
+}
 |
 * [ ] Quantitative
 * [ ] Categorical
@@ -169,5 +200,3 @@ Do you need to change the column to be used for points' labels? Explain.
 * [ ] No need to make a selection
 
 |===
-
-Do you need to change the column to be used for points' labels? Explain.
