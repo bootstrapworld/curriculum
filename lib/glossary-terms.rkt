@@ -257,7 +257,7 @@ when it prints out the glossary for a particular unit
     (es-mx ("nombre") "cómo nos referimos a una función o valor definido en un idioma (ejemplos: +, *, estrella, círculo)"))
     
     ((en-us ("navigator") "in pair programming, the person who has their eyes on the screen directing the driver")
-      (es-mx) "navegadora" "en programación en pareja, la persona con los ojos en la pantalla, dirigiendo al conductor")
+     (es-mx "navegadora" "en programación en pareja, la persona con los ojos en la pantalla, dirigiendo al conductor"))
     
     ((en-us ("negative correlation") "relationship in which one variable increases as the other decreases, and vice versa")
       (es-mx ("correlación negativa") "una relación en la que una variable incrementa a medida que la otra disminuye, y viceversa"))
@@ -344,11 +344,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("scatter plot" "scatter plots") "a display of the relationship between two quantitative variables, graphing each explanatory value on the x axis and the accompanying response on the y axis")
     (es-mx ("gráfico de dispersión")  "Un gráfico donde los puntos se colocan en los ejes según pares de valores."))
     
-    ((en-us ("shape") "The aspect of a dataset that tells which values are more or less common")
-      (es-mx) ("forma de una distribución")  ""    )
-    
-    ((en-us ("sieve") "a table query that creates a table containing only rows that satisfy a boolean expression"))
-    
+    ((en-us ("shape") "The aspect of a dataset - visible in a histogram or box plot - that describes which values are more or less common.")
+     (es-mx ("forma de una distribución")  ""    ))
+        
     ((en-us ("skew" "skewness") "lack of balance in a dataset’s shape, arising from more values that are unusually low or high. Such values tend to trail off, rather than be separated by a gap (as with outliers).")
       (es-mx ("sesgo de una distribución") "..."))
     
@@ -362,14 +360,14 @@ when it prints out the glossary for a particular unit
     (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
     
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center")
-      (es-mx) ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro")
+     (es-mx ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro"))
     
     ((en-us ("state") "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")
       (es-mx ("estado") "el valor de un sistema que cambia en cualquier momento (es decir, un semáforo puede estar en un estado 'rojo', 'amarillo' o 'verde'). En Pyret, el estado de un reactor es su valor actual."))
     
     ((en-us ("statistical inference") "using information from a sample to draw conclusions about the larger population from which the sample was taken"))
     
-    ((en-us ("strength") "of a relationship between two quantitative variables: the extent to which knowing the value of one variable tells us something about the value of the other"))
+    ((en-us ("strength") "of a relationship between two quantitative variables: how much the value of one variable tells us about the value of the other"))
     
     ((en-us ("string") "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
     (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
@@ -386,11 +384,7 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("table" "tables") "a data structure that stores data as rows, with entries in particular columns")
     (es-mx ("tabla de datos") "una colección de datos organizados en filas y columnas."))
-    
-    ((en-us ("table plan") "a sequence of steps that helps people write code for several table queries, in order to solve a problem"))
-    
-    ((en-us ("table query" "table queries") "an expression that consumes tables and creates a new table object"))
-    
+        
     ((en-us ("threats to validity") "factors that can undermine the conclusion of a study"))
     
     ((en-us ("union" "unions") "the set of values that makes either or both of a set of inequalities true")
