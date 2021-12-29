@@ -70,7 +70,7 @@
         "2-AP-11"
         )
 
-    ("simple-datatypes"
+    ("simple-data-types"
         "OK.6.A.1.3"
         "OK.7.N.1.2"
         "OK.7.N.1.1"

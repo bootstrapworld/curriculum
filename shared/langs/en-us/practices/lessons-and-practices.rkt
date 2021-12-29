@@ -30,7 +30,7 @@
         "MLR.8"
         )
 
-    ("simple-dataypes" 
+    ("simple-data-types" 
         "MLR.4"
         "MP.6"
         ) 
