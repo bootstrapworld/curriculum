@@ -35,7 +35,7 @@
 		"IM.Alg1.4.2"
 	)
 
-    ("simple-dataypes" 
+    ("simple-data-types" 
 		"IM.6.7.8"
 		"IM.6.7.9"
 		"IM.6.7.10"
