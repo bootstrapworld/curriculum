@@ -97,7 +97,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("dataset" "datasets") "a collection of related information that is composed of separate elements, but can be manipulated as a unit by a computer")
       (es-mx ("conjunto de datos") "una colección de información relacionada que se compone de elementos separados, pero que una computadora puede manipular como una unidad"))
 
-    ((en-us ("data structure") "a datatype which packages several datatypes as fields")
+    ((en-us ("data structure") "a 'container' data type, which has fields that can hold other data (e.g. - a 'coordinate' is a data structure holding two number fields x and y")
      (es-mx ("estructura de datos" "estructuras de datos") "Un grupo de valores que se pueden devolver como un único tipo de datos"))
 
     ((en-us ("data types" "data type") "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
@@ -211,7 +211,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("image" "images") "a type of data for pictures")
     (es-mx ("imagen") "un tipo de datos para imágenes"))
     
-    ((en-us ("instance") "a specific, packaged value of a data structure that contains other values in its fields")
+    ((en-us ("instance") "a specific example of a data structure, with specific values for each field (e.g. - (4,5) is an instance of an (x,y) coordinate")
     (es-mx ("instancias") "valores específicos de datos"))
     
     ((en-us ("interactions area") "the right-most text box in the Editor, where expressions are entered to be evaluated")
