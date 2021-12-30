@@ -125,7 +125,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("dominio") "el tipo de datos que espera una función"))
 
     ((en-us ("dot accessor") "a way to extract the values of fields an instance")
-     (es-mx ("dot-accessors") "Una manera de extraer valores de una estructura de datos"))
+     (es-mx ("accesor de puntos") "Una manera de extraer valores de una estructura de datos"))
     
     ((en-us ("driver") "in pair programming, the person who is doing the typing, as directed by the navigator")
      (es-mx ("conductora") "en programación en pareja, la persona que tiene manos en las teclas, y sigue las indicaciones de la navegadora"))
@@ -195,7 +195,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("frecuencia") "con qué frecuencia aparece un valor particular en un conjunto de datos"))
     
     ((en-us ("grouped sample" "grouped samples") "a non-random subset of individuals chosen from a larger set, where the individuals belong to a specific group")
-     (es-mx ("muestra en grupo") "un subconjunto no aleatorio de individuos elegidos de un conjunto de datos más grande, donde los individuos pertenecen a un grupo específico"))
+     (es-mx ("muestra agrupada") "un subconjunto no aleatorio de individuos elegidos de un conjunto de datos más grande, donde los individuos pertenecen a un grupo específico"))
     
     ((en-us ("handler") "Connects an event (like a tick or keypress) and a function within a reactor")
      (es-mx ("manejador") "Conecta un evento (como un tic o pulsación de tecla) y una función dentro de un reactor"))
@@ -292,7 +292,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
     
     ((en-us ("outlier" "outliers") "a data point that is unusually far above or below most of the others")
-     (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
+     (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos."))
     
     ((en-us ("permutation" "permutations") "the number of possible arrangements in a collection of items where the order of the selection matters (ABC and CBA would be considered different permutations)")
      (es-mx ("permutación") "el número de arreglos posibles en una colección de elementos donde el orden de la selección importa (ABC y CBA se considerarían permutaciones diferentes)"))
