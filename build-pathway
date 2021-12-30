@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-12-20 # last modified
+LASTMOD=2021-12-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2562,7 +2562,7 @@ function callonARGS() {
         export TGTPATHWAY=algebra-wescheme
         $subroutine
         export PROGLANG=pyret
-        export TGTPATHWAY=algebra
+        export TGTPATHWAY=algebra-pyret
         $subroutine
       else
         export PROGLANG=pyret
@@ -2571,9 +2571,7 @@ function callonARGS() {
       export PROGLANG=
     else
       if test "$SRCPATHWAY" = algebra; then
-        if test "$PROGLANG" != pyret; then
-          export TGTPATHWAY=algebra-$PROGLANG
-        fi
+        export TGTPATHWAY=algebra-$PROGLANG
       fi
       $subroutine
     fi
