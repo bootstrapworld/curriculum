@@ -836,6 +836,7 @@
 (define *show-transformer-name?* #f)
 (define *show-transformer-contract?* #f)
 (define *show-transformer-type?* #f)
+(define *show-example-headers?* #f)
 (define *show-input-examples* #f)
 (define *show-output-examples* #f)
 (define *show-formula-expression?* #f)
@@ -903,7 +904,7 @@
       "[.cols=~a]\n"
       "!===\n\n"
       (apply string-append
-        (map (lambda (x) (string-append "! " x)) header))
+        (map (lambda (x) (string-append "! " (if *show-example-headers?* x ""))) header))
       "\n"
       (apply string-append
         (append
@@ -940,6 +941,7 @@
                              #:num-output-examples [num-output-examples 1]
                              #:input-examples [input-examples '()]
                              #:output-examples [output-examples '()]
+                             #:show-example-headers? [show-example-headers? #t]
                              #:show-input-examples [show-input-examples '()]
                              #:show-output-examples [show-output-examples '()]
                              #:show-formula-expression? [show-formula-expression? #f]
@@ -955,6 +957,7 @@
   (set! *show-domains?* show-domains?)
   (set! *show-range?* show-range?)
   (set! *show-purpose?* show-purpose?)
+  (set! *show-example-headers?* show-example-headers?)
   (set! *show-input-examples* show-input-examples)
   (set! *show-output-examples* show-output-examples)
   (set! *show-formula-expression?* show-formula-expression?)
@@ -966,6 +969,7 @@
     (set! *show-domains?* #t)
     (set! *show-range?* #t)
     (set! *show-purpose?* #t)
+    (set! *show-example-headers?* #t)
     (set! *show-input-examples* #t)
     (set! *show-output-examples* #t)
     (set! *show-formula-expression?* #t))
