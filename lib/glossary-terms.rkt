@@ -97,8 +97,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("dataset" "datasets") "a collection of related information that is composed of separate elements, but can be manipulated as a unit by a computer")
      (es-mx ("conjunto de datos") "una colección de información relacionada que se compone de elementos separados, pero que una computadora puede manipular como una unidad"))
 
-    ((en-us ("data structure") "a 'container' data type, which has fields that can hold other data (e.g. - a 'coordinate' is a data structure holding number fields x and y")
-     (es-mx ("estructura de datos" "estructuras de datos") "Un grupo de valores que se pueden devolver como un único tipo de datos"))
+    ((en-us ("data structure") "a 'container' data type, which has fields that can hold other data (e.g. - a 'coordinate' is a data structure holding number fields x and y)")
+     (es-mx ("estructura de datos" "estructuras de datos") "un tipo de datos, que tiene campos que pueden contener otros datos (por ejemplo, una 'coordenada' es una estructura de datos que contiene campos numéricos x e y)"))
 
     ((en-us ("data types" "data type") "a way of classifying values, such as: Number, String, Image, Boolean, or any user-defined data structure")
      (es-mx ("tipo de datos" "tipos de datos") "Una manera de clasificar valores, como: Número, Cadena, Imagen o Booleano"))
@@ -223,7 +223,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("imagen") "un tipo de datos para imágenes"))
     
     ((en-us ("instance") "a specific example of a data structure, with specific values for each field (e.g. - (4,5) is an instance of an (x,y) coordinate")
-    (es-mx ("instancias") "valores específicos de datos"))
+    (es-mx ("instancia") "un ejemplo específico de una estructura de datos, con valores específicos para cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y)"))
     
     ((en-us ("interactions area") "the right-most text box in the Editor, where expressions are entered to be evaluated")
      (es-mx ("área de interacciones") "el cuadro de texto a la derecha en el Editor, donde se ingresan las expresiones para ser evaluadas"))
@@ -291,8 +291,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("order" "orders" "ordering") "an arrangement of data according to some pattern")
      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
     
-    ((en-us ("outlier" "outliers") "a data point that is unusually far above or below most of the others")
-     (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos."))
+    ((en-us ("outlier" "outliers") "observations whose values ​​are very different from the other observations in the same data set, perhaps due to experimental error. Outliers can also be indicative of data belonging to a different population from the rest of the established samples.")
+     (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes a las otras observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
     
     ((en-us ("permutation" "permutations") "the number of possible arrangements in a collection of items where the order of the selection matters (ABC and CBA would be considered different permutations)")
      (es-mx ("permutación") "el número de arreglos posibles en una colección de elementos donde el orden de la selección importa (ABC y CBA se considerarían permutaciones diferentes)"))

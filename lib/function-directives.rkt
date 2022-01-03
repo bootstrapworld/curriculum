@@ -263,8 +263,9 @@
 (define (write-section-header page-header funname)
   (format (string-append
             "\n\n[.designRecipeLayout]\n"
-            "= [.dr-title]##~a: ~a##\n")
-          page-header funname))
+            "= [.dr-title]##~a~a##\n")
+          page-header
+          (if funname (format ": ~a" funname) "")))
 
 (define (write-directions directions)
   (format (string-append
@@ -924,7 +925,7 @@
 (define (design-codap-recipe transformer-name directions
                              #:proglang [proglang "codap"]
                              #:solutions-mode? [solutions-mode? #f]
-                             #:page-header [page-header "Transformer"]
+                             #:page-header [page-header "Design Recipe"]
                              #:show-transformer-name? [show-transformer-name? #f]
                              #:show-transformer-contract? [show-transformer-contract? #f]
                              #:show-transformer-type? [show-transformer-type? #f]
@@ -975,7 +976,7 @@
 
     (if headless?
         (write-proglang)
-        (write-section-header page-header transformer-name))
+        (write-section-header page-header #f))
 
     (write-directions directions)
 
