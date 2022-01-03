@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2021-12-29 # last modified
+LASTMOD=2022-01-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -952,7 +952,7 @@ function processadocs() {
           "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
           "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
                   #echo doing it!
-                  echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\", \"debug\": \"vii\" }" >> $PUPPETEER_INPUT
+                  echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
         fi
       fi
     done
@@ -1125,10 +1125,10 @@ function checklessonplan() {
           #echo g is $g gext is $gext
           if test "$gext" = html; then
             if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iii\" }" >> $PUPPETEER_INPUT
+              echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
             fi
             if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iv\" }" >> $PUPPETEER_INPUT
+              echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
             fi
           fi
         fi
@@ -1252,7 +1252,7 @@ function buildlessonplan() {
       if test ! $NOPDF; then
         if test index.adoc -nt index.pdf; then
           #echo PUPPETEER_INPUT is x $PUPPETEER_INPUT x
-          echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\", \"debug\": \"ix\" }" >> $PUPPETEER_INPUT
+          echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
         fi
       fi
     fi
@@ -1876,10 +1876,10 @@ function collectworkbookpages() {
             gpdf=$gbase.pdf
             if test "$gext" = html; then
               if test ! -f "$gpdf" -o "$g" -nt "$gpdf"; then
-                echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iiia\" }" >> $PUPPETEER_INPUT
+                echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
               fi
               if test ! -f "../solution-pages/$gpdf" -o "../solution-pages/$g" -nt "../solution-pages/$gpdf"; then
-                echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\", \"debug\": \"iva\" }" >> $PUPPETEER_INPUT
+                echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
               fi
             fi
           fi
@@ -2586,6 +2586,8 @@ function makebilingualglossary() {
   asciidoctor -a linkcss -a stylesheet=asciidoctor.css distribution/$NATLANG/lib/bilingual-glossary.adoc
   rm distribution/$NATLANG/lib/bilingual-glossary.adoc
 
+  echo ", { \"input\": \"lib/bilingual-glossary.html\" }" >> $PUPPETEER_INPUT
+
 }
 
 # echo Starting the build...
@@ -2644,6 +2646,8 @@ builddependencyjson
 
 buildpathwaytocs
 
+makebilingualglossary
+
 batchhtmltopdf
 
 if test ! $NOPDF; then
@@ -2653,7 +2657,5 @@ if test ! $NOPDF; then
   callonARGS buildpathwayworkbooks
 
 fi
-
-makebilingualglossary
 
 rmtmpfiles
