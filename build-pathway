@@ -113,7 +113,7 @@ function displayhelp() {
   echo
   echo Builds a document tree for the given pathway argument\(s\)
   echo under the \'distribution\' directory. If no pathway arg supplied,
-  echo builds for all pathways in the \'pathways\' directory.
+  echo builds for all courses in the \'courses\' directory.
   echo
   echo Options:
   echo "  " --natlang L: Build doctree for natural language L. Default: en-us
@@ -167,7 +167,7 @@ NOARGSGIVEN=
 
 if test "$ARGS" = ""; then
   NOARGSGIVEN=1
-  ARGS=$(ls -d pathways/*)
+  ARGS=$(ls -d courses/*)
 fi
 
 #echo ARGS is $ARGS
@@ -1935,9 +1935,9 @@ function copycommonlessons() {
     done
   else
     for pwy in $ARGS; do
-      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
+      local lessonOrderFile=$TOPDIR/courses/$pwy/langs/$NATLANG/lesson-order.txt
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
-        lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
+        lessonOrderFile=$TOPDIR/courses/$pwy/langs/en-us/lesson-order.txt
       fi
       for lessonDir in $(cat $lessonOrderFile|grep -v '^ *$'|grep -v '^ *;'); do
         copylessondir $lessonDir
@@ -2012,9 +2012,9 @@ function buildpathway() {
 
   echo
 
-  local pwydir=pathways/$SRCPATHWAY/langs/$NATLANG
+  local pwydir=courses/$SRCPATHWAY/langs/$NATLANG
   if test ! -d $pwydir -a $NATLANG != en-us; then
-    pwydir=pathways/$SRCPATHWAY/langs/en-us
+    pwydir=courses/$SRCPATHWAY/langs/en-us
   fi
 
   if test ! -d $pwydir; then
@@ -2551,7 +2551,7 @@ function callonARGS() {
   for f in $ARGS; do
     #echo I doing $f
     export SRCPATHWAY=$f
-    export SRCPATHWAY=${SRCPATHWAY#pathways/}
+    export SRCPATHWAY=${SRCPATHWAY#courses/}
     export SRCPATHWAY=${SRCPATHWAY%/}
     export TGTPATHWAY="$SRCPATHWAY"
     #echo SRCPATHWAY is $SRCPATHWAY
