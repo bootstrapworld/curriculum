@@ -183,6 +183,9 @@
         "OK.G.2D.1.5"
         "OK.G.RT.1.1"
         "OK.PA.GM.1.2"
+        "OK.6.AP.M.01"
+        "OK.7.AP.M.01"
+        "OK.8.AP.M.01"
         )
 
     ("inequalities1-simple"
@@ -221,7 +224,14 @@
         "OK.A1.A.2"
         "OK.7.A.3.3"
         "OK.A1.A.2.2"
+        "OK.6.AP.C.01"
+        "OK.7.AP.C.01"
+        "OK.6.AP.M.01"
+        "OK.7.AP.M.01"
+        "OK.8.AP.M.01"
+        "OK.L1.AP.A.01" 
         "3B-AP-10"
+        "OK.L2.AP.M.03"
         )    
 
     ("making-game-images" 
@@ -265,6 +275,7 @@
         "OK.PA.A.1.1"
         "OK.A1.F.1.4"
         "OK.A2.F.1.8"
+        "OK.6.AP.C.01"
         )
 
     ("player-animation" 
@@ -282,6 +293,7 @@
         "HSA.SSE.A.1.A"
         "HSA.SSE.A.1.B"
         "OK.PA.A.1.1"
+        "OK.L2.AP.PD.07"
         )      
 
     ("problem-decomposition"
@@ -301,15 +313,27 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "OK.A1.A.3.1"
+        "OK.7.CS.T.01"
+        "OK.8.CS.T.01"
+        "OK.6.AP.M.01"
+        "OK.7.AP.M.01"
+        "OK.8.AP.M.01"
+        "OK.L1.AP.M.01"
         )
         
     ("restating-the-problem" 
         "8.F.B"
         "HSF.BF.A.1"
+        "OK.6.AP.A.01"
+        "OK.6.AP.PD.05"
+        "OK.7.AP.A.01"
+        "OK.7.AP.PD.05"
         "OK.8.AP.A.01"
+        "OK.8.AP.PD.05"
         "OK.PA.A.1.2"
         "OK.PA.A.1.3"
         "OK.PA.A.2.1"
+        "OK.L2.AP.PD.05"
         )
 
     ("solving-word-problems" 
@@ -321,6 +345,9 @@
         "OK.PA.A.1.3"
         "OK.PA.A.2.1"
         "OK.8.AP.A.01"
+        "OK.6.AP.PD.03"
+        "OK.7.AP.PD.03"
+        "OK.L2.AP.PD.05"
         "2-AP-11"
         "2-AP-17"
         "2-AP-19"
@@ -333,8 +360,10 @@
         "6.G.A.4"
         "7.G.B.6"
         "OK.PA.GM.2.1"
+        "OK.7.AP.A.01"
         "OK.7.GM.1.1"
         "OK.G.3D.1.1"
+        "OK.L1.AP.A.01" 
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
@@ -371,6 +400,7 @@
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        "OK.8.IC.SI.01"
         )
 
     ("correlations" 
@@ -446,6 +476,9 @@
         "9-12.Impacts of Computing.Culture" 
         "9-12.Impacts of Computing.Safety, Law, and Ethics"
         "OK.L1.IC.C.01"
+        "OK.4.NI.C.01"
+        "OK.L1.IC.SLE.03"
+        "OK.L1.IC.SLE.02"
         )
 
     ("grouped-samples"
@@ -512,6 +545,8 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
         "OK.A2.D.2.1"
+        "OK.6.AP.C.01"
+        "OK.7.AP.C.01"
         )
     
     ("linearity"
@@ -589,6 +624,7 @@
         "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
+        "OK.6.D.1.3"
         )
 
     ("method-chaining" 

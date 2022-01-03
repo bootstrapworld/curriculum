@@ -728,7 +728,7 @@ identifying the domain, range, intercepts, and intervals for which it is increas
   "Differentiate between appropriate and inappropriate content on the Internet, and identify unethical and illegal online behavior."
  )
  ("OK.7.IC.SLE.01"
-  "Explain the connection between the longevity  of data on the Internet, personal online identity, and personal privacy."
+  "Explain the connection between the longevity of data on the Internet, personal online identity, and personal privacy."
  )
  ("OK.8.IC.SLE.01"
   "Discuss the social impacts and ethical considerations associated with cybersecurity, including the positive and malicious purposes of hacking."
@@ -737,8 +737,7 @@ identifying the domain, range, intercepts, and intervals for which it is increas
   "Explain how abstractions hide the underlying implementation details of computing systems embedded in everyday objects."
  )
  ("OK.L1.CS.HS.01"
-  "Explain the interactions between
-  application software, system software, and hardware."
+  "Explain the interactions between application software, system software, and hardware."
  )
  ("OK.L2.CS.HS.01"
   "Identify and categorize roles of an operating system."
