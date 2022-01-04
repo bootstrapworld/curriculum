@@ -822,12 +822,13 @@
                  [(regexp-match #rx"^mailto:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
+                   ;fixme following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
-                           [(file-exists? (path-replace-extension f ".adoc"))
-                            (set! existent-file? #t)
-                            (set! g (path-replace-extension g ".adoc"))]
+                           ; [(file-exists? (path-replace-extension f ".adoc"))
+                           ;  (set! existent-file? #t)
+                           ;  (set! g (path-replace-extension g ".adoc"))]
                            [(file-exists? (path-replace-extension f ".html"))
                             (set! existent-file? #t)
                             (set! g (path-replace-extension g ".html"))]
