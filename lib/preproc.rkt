@@ -898,6 +898,10 @@
                       (if *lesson-plan* "{frompathwayroot}" "")
                       f.asc link-text))])))
 
+(define (make-pathway-link f link-text)
+  (enclose-span ".pathway-link"
+    (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
+
 (define *lesson-summary-file* #f)
 
 (define *asciidoctor*
@@ -1394,6 +1398,12 @@
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
+                           [(string=? directive "pathwaylink")
+                            (let* ([args (read-commaed-group i directive)]
+                                   [adocf (car args)]
+                                   [link-text (string-join (map string-trim (cdr args)) ", ")])
+                              (set! link-text (string-trim link-text "\""))
+                              (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise")
