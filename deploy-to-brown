@@ -1,15 +1,14 @@
-# last modified 2021-08-10
+# last modified 2022-01-05
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
 
 SEMESTER=spring
-YEAR=2021
+YEAR=2022
 
 ############################################################################
 
 userid=
-pwy=
 lib=
 
 while test $# -ne 0; do
@@ -18,8 +17,6 @@ while test $# -ne 0; do
     lib=lib
   elif test -z "$userid"; then
     userid=$arg
-  else
-    pwy=$arg
   fi
 done
 
@@ -41,6 +38,7 @@ ALL_THE_LANGS="en-us es-mx"
 
 for lang in $ALL_THE_LANGS; do
   mkdir -p deployables/$lang/courses
+  mkdir -p deployables/$lang/lessons
 done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
@@ -72,37 +70,27 @@ function copyCourse() {
 
 for lang in $ALL_THE_LANGS; do
   if test $lib; then
-    if test -d $lang/lib; then
-      cp -pr $lang/lib deployables/$lang
-    fi
     if test -d $lang/extlib; then
       cp -pr $lang/extlib deployables/$lang
     fi
   fi
-  for f in $lang/*html; do
+  for f in $lang/*; do
     if test -f $f; then
       cp -p $f deployables/$lang
     fi
   done
-done
-
-if test $pwy; then
-  if test "$pwy" = algebra; then
-    copyCourse algebra-pyret
-    copyCourse algebra-wescheme
-  else
-    copyCourse $pwy
+  if test -d $lang/lib; then
+    cp -pr $lang/lib deployables/$lang
   fi
-else
-  copyCourse algebra-pyret
-  copyCourse algebra-wescheme
-  copyCourse data-science
-  copyCourse flags
-  copyCourse hour-of-code
-  copyCourse ok
-  copyCourse physics
-  copyCourse reactive
-fi
+  if test -d $lang/lessons; then
+    cp -pr $lang/lessons deployables/$lang
+    correctgdriveurls deployables/$lang/lessons
+  fi
+  if test -d $lang/courses; then
+    cp -pr $lang/courses deployables/$lang
+    correctgdriveurls deployables/$lang/courses
+  fi
+done
 
 for f in adoc asc asciidoc aux log rkt rkt.kp tex titletxt txt txt.kp DS_Store; do
   find deployables -name \*.$f -delete
