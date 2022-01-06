@@ -19,11 +19,6 @@
 (define (print-lessons-intro o)
   (display
     (string-append
-      "\n"
-      "We provide all of our materials _free of charge_,\n"
-      "to anyone who is interested in using our lesson plans or student\n"
-      "workbooks.\n"
-      "\n"
       "== Lesson Plans\n\n") o))
 
 (define (print-other-resources-intro o)
