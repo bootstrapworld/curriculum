@@ -59,27 +59,36 @@
       ; (printf "doing lyst = ~s\n" opt)
       (for ([desc lyst])
         (set! counters
-          (cons (list (car desc) (cadr desc) (box 0)) counters)))
+          (cons (list (car desc) (cadr desc) (box "") (box 0)) counters)))
 
       (set! counters (reverse counters))
 
       (for ([lesson-entry lesson-entries])
-        (let ([lesson-vals (cdr lesson-entry)])
-          (for ([val lesson-vals])
-            (let ([c (assoc val counters)])
+        (let ([lesson-name (car lesson-entry)]
+              [lesson-referents (cdr lesson-entry)])
+          (for ([referent lesson-referents])
+            (let ([c (assoc referent counters)])
               (when c
-                (let ([b (caddr c)])
-                  (set-box! b (+ (unbox b) 1))))))))
+                (let* ([b (caddr c)]
+                       [count-box (cadddr c)]
+                       [lessons (unbox b)]
+                       [count (unbox count-box)])
+                  (set-box! b (string-append lessons
+                                (if (= count 0) "" ", ")
+                                lesson-name))
+                  (set-box! count-box (+ count 1))
+                  ))))))
 
       (fprintf o "[.coverageElement.~a]\n" opt)
       (fprintf o "[cols=\"2a,1a,7a\"]\n")
       (fprintf o "|===\n")
       (for ([entry counters])
-        (let ([std (car entry)] [desc (cadr entry)] [count (unbox (caddr entry))])
+        (let ([std (car entry)] [desc (cadr entry)] [lessons (unbox (caddr entry))]
+                                [count (unbox (cadddr entry))])
           (set! desc (regexp-replace* "\\|" desc "\\&#x7c;"))
-          (if (= count 0)
-              (fprintf o "| [.unused]#~a# | [.unused]#~a# | [.unused]#~a#\n" std count desc)
-              (fprintf o "| ~a | ~a | ~a\n" std count desc)))
+          (if (string=? lessons "")
+              (fprintf o "| [.unused]#~a# | [.unused]#none# | [.unused]#~a#\n" std desc)
+              (fprintf o "| ~a | ~a (~a) | ~a\n" std lessons count desc)))
         )
       (fprintf o "|===\n\n")
       )))
