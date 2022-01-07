@@ -8,6 +8,7 @@
       "\n++++\n"
       "<style>\n"
       ".unused { background-color: #ffdddd; }\n"
+      ".coverageElement { display: none; }\n"
       "</style>\n"
 
       "<script>\n"
