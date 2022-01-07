@@ -52,6 +52,7 @@
         "OK.A1.F.1.3"
         "OK.A1.A.1.1"
         "OK.8.AP.PD.02"
+        "OK.L2.AP.PD.03"
         )
 
     ("defining-values"
@@ -329,6 +330,7 @@
         "OK.7.AP.A.01"
         "OK.7.AP.PD.05"
         "OK.8.AP.A.01"
+        "OK.8.AP.PD.04"
         "OK.8.AP.PD.05"
         "OK.PA.A.1.2"
         "OK.PA.A.1.3"
@@ -347,6 +349,7 @@
         "OK.8.AP.A.01"
         "OK.6.AP.PD.03"
         "OK.7.AP.PD.03"
+        "OK.8.AP.PD.03"
         "OK.L2.AP.PD.05"
         "2-AP-11"
         "2-AP-17"
@@ -441,6 +444,8 @@
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        "OK.6.DA.S.01"
+        "OK.7.DA.S.01"
         "6.RP.A"
         "7.RP.A"
         "7.RP.A.3"
@@ -476,9 +481,10 @@
         "9-12.Impacts of Computing.Culture" 
         "9-12.Impacts of Computing.Safety, Law, and Ethics"
         "OK.L1.IC.C.01"
-        "OK.4.NI.C.01"
-        "OK.L1.IC.SLE.03"
         "OK.L1.IC.SLE.02"
+        "OK.L1.IC.SLE.03"
+        "OK.L2.IC.C.01"
+        "OK.L2.IC.SLE.01"
         )
 
     ("grouped-samples"
@@ -493,8 +499,10 @@
         "OK.A1.D.1.1"
         "OK.PA.D.1.1"
         "OK.8.DA.S.01"
+        "OK.8.DA.CVT.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        "OK.L1.AP.A.01"
         )
 
     ("histograms" 
@@ -596,6 +604,7 @@
         "9-12.Data and Analysis.Inference and Models"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "OK.L2.DA.CVT.01"
         )
 
     ("measures-of-center"
@@ -625,6 +634,11 @@
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
         "OK.6.D.1.3"
+        "OK.6.DA.CVT.01"
+        "OK.7.DA.CVT.01"
+        "OK.7.D.1.2"
+        "OK.8.DA.S.01"
+        "OK.L2.DA.CVT.02"
         )
 
     ("method-chaining" 
@@ -640,6 +654,8 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
         "OK.A1.D.2.1"
+        "OK.7.AP.M.01"
+        "OK.8.AP.M.01"
         )
 
     ("random-samples" 
@@ -674,6 +690,8 @@
         "2-DA-08"
         "OK.A1.D.2.1"
         "OK.L1.AP.M.02"
+        "OK.7.AP.A.01"
+        "OK.L2.AP.M.03"
         )
 
     ("threats-to-validity" 
@@ -684,5 +702,6 @@
         "6-8.Data and Analysis.Collection" 
         "9-12.Data and Analysis.Inference and Models"
         "OK.L1.IC.C.02"
+        "OK.8.IC.SI.01"
         )
     ))
