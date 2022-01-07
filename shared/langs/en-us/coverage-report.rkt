@@ -2,7 +2,7 @@
 
 #lang racket
 
-;(require "coverage-dropdown.rkt")
+(require "coverage-dropdown.rkt")
 
 ;standards
 
