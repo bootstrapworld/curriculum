@@ -15,11 +15,11 @@
 
 (define *textbooks-list*
   (list
-    (list "CMP" *cmp-textbook-list*)
-    (list "IM.6" *im-6-textbook-list*)
-    (list "IM.7" *im-7-textbook-list*)
-    (list "IM.8" *im-8-textbook-list*)
-    (list "IM.Alg.1" *im-alg-1-textbook-list*)
+    (list "CMP" #f *cmp-textbook-list*)
+    (list "IM.6" #f *im-6-textbook-list*)
+    (list "IM.7" #f *im-7-textbook-list*)
+    (list "IM.8" #f *im-8-textbook-list*)
+    (list "IM.Alg.1" #f *im-alg-1-textbook-list*)
 
     ))
 

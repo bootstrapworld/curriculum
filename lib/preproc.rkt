@@ -293,7 +293,7 @@
     (for ([x *textbooks-list*])
       (unless chapter-desc
         (let ([this-textbook-name (car x)]
-              [this-textbook-chapters (cadr x)])
+              [this-textbook-chapters (caddr x)])
           ;(printf "\n t-n = ~s\n t-cc = ~s\nn" this-textbook-name this-textbook-chapters)
           (set! chapter-desc (assoc chapter-label this-textbook-chapters))
           (when chapter-desc (set! textbook-name this-textbook-name)))))
@@ -509,15 +509,16 @@
            (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))]
         [else
           ;(printf "Pracices are present for ~s\n" *lesson-plan*)
-          (for ([practice *practices-merited*])
-            (let ([practice-desc (assoc practice *practices-list*)])
-              (cond [practice-desc
-                      (display practice o)
-                      (display ":: " o)
-                      (display (cadr practice-desc) o)
-                      (newline o)]
-                    [else
-                      (printf "WARNING: Practice ~a not found\n" practice)])))])
+          (let ([flat-practices-list (caddr (car *practices-list*))])
+            (for ([practice *practices-merited*])
+              (let ([practice-desc (assoc practice flat-practices-list)])
+                (cond [practice-desc
+                        (display practice o)
+                        (display ":: " o)
+                        (display (cadr practice-desc) o)
+                        (newline o)]
+                      [else
+                        (printf "WARNING: Practice ~a not found\n" practice)]))))])
   (display "\n\n" o)
   (display (create-end-tag "div") o)
   (newline o))

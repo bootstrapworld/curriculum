@@ -1,6 +1,6 @@
 #lang racket
 
-(provide 
+(provide
   *practices-list*
   )
 
@@ -10,9 +10,11 @@
 (require "practices-cc-dictionary.rkt")
 
 (define *practices-list*
-  (append
-    *mlr-practices-list*
-    *sj-practices-list*
-    *sep-practices-list*
-    *cc-practices-list*)
-  )
+  (list
+    (list "Practices" #f
+          (append
+            *mlr-practices-list*
+            *sj-practices-list*
+            *sep-practices-list*
+            *cc-practices-list*)
+          )))
