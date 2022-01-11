@@ -986,9 +986,8 @@
 
 (define (link-to-opt-projects o)
   ; (printf "doing link-to-opt-projects\n")
-  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
-    (unless (null? lessons)
-      (fprintf o "\n\n- *Projects*\n\n"))
+  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))]
+        [projects-title-done? #f])
     (for ([lesson lessons])
       (let ([lesson-opt-links (read-data-file
                                 (format "lessons/~a/.cached/.index-opt-proj.rkt.kp" lesson)
@@ -1002,6 +1001,9 @@
             (set! proj-desc (regexp-replace "pass:\\[" proj-desc ""))
             (set! proj-desc (regexp-replace "pages/" proj-desc "pages/.cached/."))
             (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
+            (unless projects-title-done?
+              (set! projects-title-done? #t)
+              (fprintf o "\n\n- *Projects*\n\n"))
             (fprintf o "+\n*~a* {startsb}~a{endsb}\n~a\n"
                      (regexp-replace "^link:" proj-link "link:../")
                      (regexp-replace "^link:" (cadr x) "link:../")
