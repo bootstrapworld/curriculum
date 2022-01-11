@@ -266,7 +266,7 @@
                 (loop (cdr L))))))))
 
 (define (assoc-standards std)
-  ;(printf "doing assoc-standards ~s\n" std)
+  ; (printf "doing assoc-standards ~s\n" std)
   (let ([c #f]
         [dict #f])
     (for ((x *disallowed-standards-list*))
@@ -276,15 +276,19 @@
     ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
     (cond [c (values #f #f)]
           [else
-            (for ([x *standards-list*])
+            (let ([std-desc #f])
+              (for ([x *standards-list*])
+                (unless c
+                  (let ([stds-list (caddr x)])
+                    (set! c (assoc std stds-list))
+                    (when c
+                      (set! std-desc (cadr c))
+                      (set! dict (car x))))))
+              ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
               (unless c
-                (let ([stds-list (caddr x)])
-                  (set! c (assoc std stds-list))
-                  (when c (set! dict (car x))))))
-            ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
-            (unless c
-              (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
-            (values c dict)])))
+                (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
+              ; (printf "assoc-standards returned ~s ~s\n" c dict)
+              (values std-desc dict))])))
 
 (define (assoc-textbooks chapter-label)
   ;(printf "doing assoc-textbooks ~s\n" chapter-label)
@@ -306,10 +310,10 @@
   ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
   (let-values ([(c dict) (assoc-standards x)])
     ;(printf "-> c= ~s dict= ~s\n" c dict)
-    (when c (let ([std (list-ref c 0)])
+    (when c (let ([std x])
               (when (and o *lesson*)
                 (fprintf o "**~a**: ~a~n~n"
-                         std (list-ref c 1)))
+                         std c))
               (cond [(assoc std *standards-met*)
                      => (lambda (c0)
                           (unless *lesson*
@@ -1956,6 +1960,7 @@
   )
 
 (define (create-standards-section dict dict-standards-met op)
+  ; (printf "doing create-standards-section\n")
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
@@ -1963,11 +1968,12 @@
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for ([s dict-standards-met])
-    (let ([s (list-ref s 1)]
+    (let ([std-name (list-ref s 0)]
+          [std-desc (list-ref s 1)]
           ;[dict (list-ref s 3)]
           [lessons (unbox (list-ref s 3))])
-      (fprintf op "~a:: " (car s))
-      (fprintf op "~a\n" (cadr s))
+      (fprintf op "~a:: " std-name)
+      (fprintf op "~a\n" std-desc)
       (unless *lesson*
         (when (> (length lessons) 0)
           (fprintf op "{startsb}See: ~a.{endsb}\n"
@@ -1985,7 +1991,7 @@
                                    (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
                                            pwy lesson ltitle)]
                                  [else
-                                   (format " link:./lessons/pass:[~a]/index.shtml[~a]"
+                                   (format " link:./../../lessons/pass:[~a]/index.shtml[~a]"
                                            lesson ltitle)])))
                        lessons) ";"))))
       ))
@@ -2081,9 +2087,9 @@
       #:exists 'replace)))
 
 (define (create-standards-file file *narrative* *lesson*)
-  ;(printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
-  ;(printf "standards-met= ~s\n\n\n" *standards-met*)
-  ;(printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
+  ; (printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
+  ; (printf "standards-met= ~s\n\n\n" *standards-met*)
+  ; (printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
   (when *narrative*
     (print-menubar (string-append file "-comment.txt")))
   (call-with-output-file (string-append file ".asc")
@@ -2102,13 +2108,13 @@
     #:exists 'replace))
 
 (define (create-standards-subfile)
-  ;(printf "doing create-standards-subfile\n")
+  ; (printf "doing create-standards-subfile\n")
   (create-standards-file
     (format "~a/.cached/.pathway-standards" *containing-directory*)
     *narrative* *lesson*))
 
 (define (accumulate-glossary-and-standards)
-  ;(printf "doing accumulate-glossary-and-standards\n")
+  ; (printf "doing accumulate-glossary-and-standards\n")
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt")
     (lambda (op)
       (for ([s *glossary-items*])
@@ -2121,12 +2127,14 @@
           (let ([first? #t])
             (display "    standards: [" op2)
             (for ([s *standards-met*])
-              (fprintf op "~s~n" (car s))
+              (let ([std-name (car s)]
+                    [std-desc (cadr s)])
+              (fprintf op "~s~n" std-name)
               (let ([x (cadr s)])
                 (cond [first? (set! first? #f)]
                       [else (display ",\n                " op2)])
-                (write (string-append (car x) " : " (cadr x)) op2))
-              )
+                (write (string-append std-name " : " std-desc) op2))
+              ))
             (display "]" op2) (newline op2)
             ))
         #:exists 'replace))
