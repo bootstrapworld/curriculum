@@ -1,0 +1,18 @@
+#!/bin/bash
+
+BROKEN_INTERNAL_LINKS=
+
+for f in "$@"; do
+
+  if ! test -f "$f"; then
+    BROKEN_INTERNAL_LINKS=1
+    echo
+    echo WARNING: Invalid internal link $f
+  fi
+done
+
+if test $BROKEN_INTERNAL_LINKS; then
+  echo 👎 Broken internal links found
+else
+  echo 👍 No broken internal links found
+fi
