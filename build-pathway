@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-03 # last modified
+LASTMOD=2022-01-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -42,9 +42,7 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
     :
-  elif test "$arg" = --book -o "$arg" = -b; then
-    BOOK=1
-  elif test "$arg" = --pdf -o "$arg" = -b; then
+  elif test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=1
   elif test "$arg" = --debug -o "$arg" = -d; then
     DEBUG=1
@@ -251,7 +249,7 @@ fi
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
   cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
-  cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/.hta* $PROGDIR
+  cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
   cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
 fi
 
@@ -753,67 +751,6 @@ function shadowcopydir() {
   done
 }
 
-function checkeachinternallink() {
-  local f="$1"
-  local containingf="$2"
-
-  if ! test -f "$f"; then
-    export BROKEN_INTERNAL_LINKS=1
-    test $EXPANDEDWARNINGS || echo $'\033[?7h'
-    echo
-    echo WARNING: Invalid internal link $f in $LESSONSUBDIR/$containingf
-  fi
-}
-
-function checkeachexternallink() {
-  local f="$1"
-
-  local invalid=
-
-  # possible alternative? wget -q --spider $f
-  curl -Is $f > .temp.txt
-
-  if test ! -s .temp.txt; then
-    invalid=1
-  elif ! cat .temp.txt|head -n 1|grep -q 302; then
-    :
-  elif cat .temp.txt|head -n 1|grep -q 200; then
-    if cat .temp.txt|grep -q '^Connection: close'; then
-      invalid=1
-    fi
-  fi
-
-  rm .temp.txt
-
-  if test $invalid; then
-    export BROKEN_EXTERNAL_LINKS=1
-    echo
-    echo WARNING: Invalid external link $f
-  fi
-
-}
-
-function checklinks() {
-  test "$LINT" || return
-
-  local g="$1"
-  local f=.cached/.${g%.*}.external-links.txt.kp
-
-  if test -s "$f"; then
-    for h in $(cat "$f"); do
-      checkeachexternallink "$h"
-    done
-  fi
-
-  f=.${g%.*}.internal-links.txt.kp
-
-  if test -s "$f"; then
-    for h in $(cat "$f"); do
-      checkeachinternallink "$h" "$g"
-    done
-  fi
-}
-
 function doadoc() {
   local f="$1"
   #echo doing doadoc "$@"
@@ -955,9 +892,9 @@ function processadocs() {
     done
   fi
 
-  for f in $ff; do
-    checklinks $f
-  done
+  # for f in $ff; do
+  #   # checklinks $f
+  # done
 
 }
 
@@ -1244,7 +1181,7 @@ function buildlessonplan() {
       fi
     fi
     if test -f index.shtml; then
-      checklinks index.shtml
+      # checklinks index.shtml
 
       if test ! $NOPDF; then
         if test index.adoc -nt index.pdf; then
@@ -1488,7 +1425,7 @@ function buildpathwaynarrative() {
       export NARRATIVE=
     fi
 
-    checklinks index.shtml
+    # checklinks index.shtml
     #verifylinks
 
   fi
@@ -1998,8 +1935,6 @@ function buildpathway() {
   export LESSONSUBDIR=.
   export SOLUTION=
   export BROKEN_WORKBOOK_PAGES=
-  export BROKEN_INTERNAL_LINKS=
-  export BROKEN_EXTERNAL_LINKS=
 
   langicon=💀
 
@@ -2235,26 +2170,14 @@ function buildpathway() {
 
   cd $TOPDIR/distribution/$NATLANG
 
-  if test $LINT; then
+  # if test $LINT; then
 
-    if test $BROKEN_WORKBOOK_PAGES; then
-      echo 👎 Broken workbook pages in $PATHWAY
-    else
-      echo 👍 No broken workbook pages in $PATHWAY
-    fi
+  #   if test $BROKEN_WORKBOOK_PAGES; then
+  #     echo 👎 Broken workbook pages in $PATHWAY
+  #   else
+  #     echo 👍 No broken workbook pages in $PATHWAY
+  #   fi
 
-    if test $BROKEN_INTERNAL_LINKS; then
-      echo 👎 Broken internal links in $PATHWAY
-    else
-      echo 👍 No broken internal links in $PATHWAY
-    fi
-
-    if test $BROKEN_EXTERNAL_LINKS; then
-      echo 👎 Broken external links in $PATHWAY
-    else
-      echo 👍 No broken external links in $PATHWAY
-    fi
-  fi
   test $EXPANDEDWARNINGS || echo $'\033[?7h'
   end=`date +%s`
   runtime=$((end-start))
@@ -2542,6 +2465,15 @@ function doconversions() {
   fi
 }
 
+function dolinkcheck() {
+  test $LINT || return
+
+  find . -type f -name \.*external-links.txt.kp -exec cat {} \; | xargs $PROGDIR/checkexternallinks
+
+  find . -type f -name \.*internal-links.txt.kp -exec cat {} \; | xargs $PROGDIR/checkinternallinks
+
+}
+
 function callonARGS() {
   local subroutine=$1
 
@@ -2632,6 +2564,8 @@ callonARGS buildpathway
 echo ')' >> $ADOCABLES_INPUT
 
 doconversions
+
+dolinkcheck
 
 collectprimitives
 
