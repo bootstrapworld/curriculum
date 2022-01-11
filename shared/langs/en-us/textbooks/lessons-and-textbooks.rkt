@@ -328,7 +328,7 @@
 
     ; it appeared that this BS:DS lesson was missing from this file, so xbousquet added it on Aug 6th
     ; grades 6 - 8 alignment may be needed here
-    ("simple-datatypes"
+    ("simple-data-types"
         "IM.Alg1.1.6"
     )
 
