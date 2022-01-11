@@ -19,7 +19,6 @@
         var subject, params = location.search.substring(1);
         var subject = !params? "math"
             : JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')["subject"] || "none";
-        console.log('subject is', subject);
 
         // swap "history" for "social studies"
         if(subject == "social-studies") subject = "history";
@@ -48,53 +47,70 @@
             {
                 title: 'Make an Infographic',
                 lesson: 'displaying-categorical-data',
+                prerequisites: ['displaying-categorical-data'],
                 description: 'Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. This project is an opportunity for students to become more flexible math thinkers while tapping into their creativity, and can be made on the computer or with pencil and paper.',
             },
             {
                 title: 'Draw a Flag',
                 lesson: 'flags',
+                prerequisites: ['flags'],
                 description: 'Students recreate images of flags of varying complexity by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely.',
             },
             {
                 title: 'Make a Rocket Fly',
                 lesson: 'solving-word-problems',
+                prerequisites: ['solving-word-problems'],
                 description: 'Students make a rocket blast off, with a flight path following linear (straight-line), quadratic (accelerating or up-and-down), or exponential paths - depending on your learning goals. ',
             },
             {
                 title: 'Protect a Butterfly',
                 lesson: 'inequalities3-sam',
+                prerequisites: ['inequalities3-sam'],
                 description: 'Students apply inequalities in the plane to protect a butterfly from going too far to each side of the screen, then explore compound inequalties (union/intersection and AND/OR to protect the butterfly on all sides at once.',
             },
             {
                 title: 'Make a Video Game',
                 lesson: 'inequalities-collision',
+                prerequisites: ['inequalities-collision', 'inequalities2-compound'],
                 description: 'Students build a videogame of their own design! Every game must have a player (their avatar), a danger (something to avoid), and a target (something to chase). Students build their world using function composition, animate their characters through linear functions, detect boundaries with compound inequalities, and detect collisions with the distance formula. This project can be extended into more complex movement (quadratic, exponential, trigonometric) and "cheat codes" (piecewise/conditional) functions.',
             },
             {
                 title: 'Your Stress Level',
                 lesson: 'measures-of-spread',
+                prerequisites: ['measures-of-spread'],
                 description: 'People report being more and more stressed every day.  This trend is extending beyond adults, and is being reported by children and teenagers.  The amount of work people are responsible for has been increasing.  To understand what makes us feel stressed, students gather and analyze data about their own lives.',
             },
             {
                 title: 'Snacking Habits',
                 lesson: 'random-samples',
+                prerequisites: ['random-samples'],
                 description: 'Childhood obesity is a major problem in the U.S. Many have called for food producers to provide consumers with nutritional information so that consumers can make wiser choices. Students collect data on their own snacking habits, and compare it to national trends.',
             },
         ];
 
-        // compute prerequisites for projects, add to graph
+        // add projects to graph
         projects.forEach((p) => {
             p.title = "Project: " + p.title;
-            p.prerequisites = graph[p.lesson].prerequisites;
             p.type = "project";
             graph[p.title] = p;
-            subjectPreference[subject].push(p.title);
         });
-        // Always put subject preference and projects first!
-        var firstContainers = subjectPreference[subject].concat(projects)
-        // Sort the "rest" by prerequisite
+
+        // used with [].filter to produce an array of unique elts
+        const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+        const getPrereqs = (l) => {
+            return graph[l].prerequisites.concat(...graph[l].prerequisites.map(getPrereqs));
+        }
+
+        // recursively compute all prerequisites for each lesson and project
+        Object.keys(graph).forEach(k =>
+            graph[k].prerequisites = getPrereqs(k).filter(onlyUnique));
+
+        // Always put "preferred lessons" for each subject preference first,
+        // and put the rest in their own array
+        var firstContainers = subjectPreference[subject];
         var rest = Object.keys(graph)
             .filter(l => !firstContainers.includes(l));
+        // Sort the "rest" by prerequisite
         rest.sort((a,b) =>
             graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
 
@@ -382,6 +398,9 @@
     <div id="body">
         <div class="clearfix item">
             <h1>Materials</h1>
+            <p>
+            Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
+            </p>
             <div id="pathways" class="item bottom-border">
                 <ul class="tab">
                     <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
@@ -412,9 +431,6 @@
                 </ul>
             </div>
 
-            <p>
-            Bootstrap is completely free, field-tested and research-validated, with a focus on deep exploration that supports and engages all kinds of learners. Our integrated computing modules have been proven to support math transfer and can be mixed and matched to supplement what you're already doing in your classroom.
-            </p>
             <p>
             All of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
             </p>
@@ -448,10 +464,12 @@
             <div id="summary">
                 <strong>The lessons or projects you've selected - and their prerequisites! - are:</strong> <span id="selectedLessons"></span>. 
                 <p/>
+<!--                
                 We've created a custom pathway just for you, with links to all the lesson materials, workbook pages, activities, and more! Enter a name to see your personalized pathway, and bookmark the resulting page to return to it at any time!
                 <p/>
                 <input type="text" id="pathwayName" placeholder="Name your pathway" onInput="showPathwayButton()"/>
                 <input type="button" id="pathwayButton" value="My Custom Pathway" onclick="makePathway()" />
+-->                
             </div>
         </div>
     </div>
