@@ -1991,8 +1991,8 @@
                                    (format " link:courses/pass:[~a]/lessons/pass:[~a]/index.shtml[~a]"
                                            pwy lesson ltitle)]
                                  [else
-                                   (format " link:./../../lessons/pass:[~a]/index.shtml[~a]"
-                                           lesson ltitle)])))
+                                   (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                           lesson *target-pathway* ltitle)])))
                        lessons) ";"))))
       ))
   (fprintf op "\n\n"))
