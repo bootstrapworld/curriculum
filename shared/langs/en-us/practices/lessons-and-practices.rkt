@@ -18,6 +18,7 @@
     ("defining-functions" 
         "MP.4"      ; STEMworks
         "MLR.7"
+        "MLR.3"     ; page focused just on this
         )
 
     ("defining-values" 
