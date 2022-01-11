@@ -2468,9 +2468,9 @@ function doconversions() {
 function dolinkcheck() {
   test $LINT || return
 
-  find . -type f -name \.*external-links.txt.kp -exec cat {} \; | xargs $PROGDIR/checkexternallinks
+  find . -type f -name \.\*external-links.txt.kp | xargs $PROGDIR/checkexternallinks
 
-  find . -type f -name \.*internal-links.txt.kp -exec cat {} \; | xargs $PROGDIR/checkinternallinks
+  find . -type f -name \.\*internal-links.txt.kp | xargs $PROGDIR/checkinternallinks
 
 }
 
