@@ -839,6 +839,8 @@ function processadocs() {
       echo No adoc files in $LESSONSUBDIR
     fi
     return
+  elif test $# -eq 1 -a ! -f $1; then
+    return
   fi
 
   local ff_given="$@"
@@ -888,7 +890,9 @@ function processadocs() {
           "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
           "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
                   #echo doing it!
-                  echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+                  if test ! $OTHERDIR; then
+                    echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+                  fi
         fi
       fi
     done
