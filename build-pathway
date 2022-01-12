@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-11 # last modified
+LASTMOD=2022-01-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -512,12 +512,14 @@ function insertsectionselfie() {
 function lintlesson() {
   local f=$1
 
+  containingFile=${f%.shtml}.adoc
+
   test $LINT || return
 
   for g in Prerequisites 'Lesson Goals' Materials Preparation 'Relevant Standards'; do
     if ! grep -q "^<p>$g\>" $f; then
       echo
-      echo WARNING: Lesson $LESSONPLAN missing summary-table row for \"$g\"
+      echo WARNING: Lesson $containingFile missing summary-table row for \"$g\"
     fi
   done
 
