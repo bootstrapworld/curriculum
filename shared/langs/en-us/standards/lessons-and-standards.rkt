@@ -704,4 +704,109 @@
         "OK.L1.IC.C.02"
         "OK.8.IC.SI.01"
         )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; REACTIVE
+
+    ("re-intro-to-data-structures" 
+        "1B-AP-12" 
+        "1B-AP-17"
+        "2-AP-11"
+        "2-AP-14"
+        "P4"
+        "9-12.Algorithms and Programming.Variables"
+        "6-8.Algorithms and Programming.Variables"
+        )
+
+    ("re-structures-reactors-animations" 
+        "1B-AP-09" 
+        "1B-AP-10"
+        "1B-AP-12"
+        "2-AP-10"
+        "2-AP-11"
+        "3B-AP-13"
+        "P5"
+        )
+
+    ("re-functions-that-ask-questions" 
+        "1B-AP-17" 
+        "2-AP-14"
+        "2-AP-17"
+        "3B-AP-21"
+        "3B-AP-22"
+        "P5"
+        "6-8.Algorithms and Programming.Control"
+        )
+
+    ("re-key-events" 
+        "1B-AP-09" 
+        "1B-AP-10"
+        "1B-AP-12"
+        "2-AP-14"
+        "2-AP-17"
+        "P5"
+        )
+
+    ("re-refactoring" 
+        "1B-AP-11" 
+        "1B-AP-12"
+        "1B-AP-15"
+        "2-AP-13"
+        "2-AP-14"
+        "3A-AP-15"
+        "3A-AP-17"
+        "6-8.Algorithms and Programming.Modularity"
+        )
+
+    ("re-your-own-drawing-functions" 
+        "1B-AP-09" 
+        "2-AP-14"
+        "3A-AP-16"
+        "P5"
+        )
+
+    ("re-build-your-own-animation" 
+        "1B-AP-09" 
+        "2-AP-12"
+        "3A-AP-16"
+        )
+
+    ("re-adding-collisions" 
+        "1B-AP-09" 
+        "1B-AP-10"
+        "3B-AP-14"
+        )
+
+    ("re-scoring" 
+        "2-AP-14"
+        "2-AP-17"
+        "3A-AP-18"
+        "3B-AP-22"
+        )
+
+    ("re-adding-levels" 
+        "2-AP-12"
+        "3A-AP-18"
+        "3B-AP-14"
+        )
+
+    ("re-making-pong" 
+        "2-AP-12"
+        "2-AP-17"
+        )
+
+    ("re-nested-structures" 
+        "1B-AP-11" 
+        "2-AP-12"
+        "2-AP-13"
+        "3A-AP-15"
+        "3A-AP-17"
+        )
+
+    ("re-timers" 
+        "3A-AP-18"
+        "3B-AP-14"
+        "3B-AP-22"
+        )
+
     ))
