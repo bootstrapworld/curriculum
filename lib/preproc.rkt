@@ -1961,9 +1961,7 @@
 (define (create-standards-section dict dict-standards-met op)
   ; (printf "doing create-standards-section ~s ~s\n" dict dict-standards-met)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
-  (fprintf op (if *lesson*
-                  ".~a Standards\n"
-                  "== ~a Standards\n\n")
+  (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
            (expand-dict-abbrev dict))
   (fprintf op "[.standards-hierarchical-table]~%")
   (for ([s dict-standards-met])
@@ -1974,9 +1972,7 @@
           [lessons (unbox (list-ref s 3))])
       (when (> (length std-cell) 2)
         (set! std-link (list-ref std-cell 2)))
-      (if std-link
-          (fprintf op "link:~a[~a]:: " std-link std-name)
-          (fprintf op "~a:: " std-name))
+      (fprintf op "~a:: " std-name)
       (fprintf op "~a\n" (cadr std-cell))
       (unless *lesson*
         (when (> (length lessons) 0)
