@@ -282,13 +282,12 @@
                   (let ([stds-list (caddr x)])
                     (set! c (assoc std stds-list))
                     (when c
-                      (set! std-desc (cadr c))
                       (set! dict (car x))))))
               ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
               (unless c
                 (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
               ; (printf "assoc-standards returned ~s ~s\n" c dict)
-              (values std-desc dict))])))
+              (values c dict))])))
 
 (define (assoc-textbooks chapter-label)
   ;(printf "doing assoc-textbooks ~s\n" chapter-label)
@@ -306,26 +305,26 @@
         (values (cadr chapter-desc) textbook-name)
         (values #f #f))))
 
-(define (add-standard x lesson-title lesson pwy o)
-  ;(printf "doing add-standard x= ~s ttl= ~s lsn= ~s pwy= ~s\n" x lesson-title lesson pwy)
-  (let-values ([(c dict) (assoc-standards x)])
+(define (add-standard std lesson-title lesson pwy o)
+  ; (printf "doing add-standard std= ~s ttl= ~s lsn= ~s pwy= ~s\n" std lesson-title lesson pwy)
+  (let-values ([(c dict) (assoc-standards std)])
     ;(printf "-> c= ~s dict= ~s\n" c dict)
-    (when c (let ([std x])
-              (when (and o *lesson*)
-                (fprintf o "**~a**: ~a~n~n"
-                         std c))
-              (cond [(assoc std *standards-met*)
-                     => (lambda (c0)
-                          (unless *lesson*
-                            (box-add-new! (list lesson-title lesson pwy)
-                                          (list-ref c0 3))))]
-                    [else
-                      (unless (member dict *dictionaries-represented*)
-                        (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
-                      (set! *standards-met*
-                        (cons (list std  c dict
-                                    (box (list (list lesson-title lesson pwy))))
-                              *standards-met*))])))))
+    (when c
+      (when (and o *lesson*)
+        (fprintf o "**~a**: ~a~n~n"
+                 std (cadr c)))
+      (cond [(assoc std *standards-met*)
+             => (lambda (c0)
+                  (unless *lesson*
+                    (box-add-new! (list lesson-title lesson pwy)
+                                  (list-ref c0 3))))]
+            [else
+              (unless (member dict *dictionaries-represented*)
+                (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
+              (set! *standards-met*
+                (cons (list std c dict
+                            (box (list (list lesson-title lesson pwy))))
+                      *standards-met*))]))))
 
 (define (add-practice b)
   ;(printf "doing add-practice ~s\n" b)
@@ -1960,7 +1959,7 @@
   )
 
 (define (create-standards-section dict dict-standards-met op)
-  ; (printf "doing create-standards-section\n")
+  ; (printf "doing create-standards-section ~s ~s\n" dict dict-standards-met)
   (fprintf op "\n[.alignedStandards.standards-~a]\n" dict)
   (fprintf op (if *lesson*
                   ".~a Standards\n"
@@ -1969,11 +1968,16 @@
   (fprintf op "[.standards-hierarchical-table]~%")
   (for ([s dict-standards-met])
     (let ([std-name (list-ref s 0)]
-          [std-desc (list-ref s 1)]
+          [std-cell (list-ref s 1)]
+          [std-link #f]
           ;[dict (list-ref s 3)]
           [lessons (unbox (list-ref s 3))])
-      (fprintf op "~a:: " std-name)
-      (fprintf op "~a\n" std-desc)
+      (when (> (length std-cell) 2)
+        (set! std-link (list-ref std-cell 2)))
+      (if std-link
+          (fprintf op "link:~a[~a]:: " std-link std-name)
+          (fprintf op "~a:: " std-name))
+      (fprintf op "~a\n" (cadr std-cell))
       (unless *lesson*
         (when (> (length lessons) 0)
           (fprintf op "{startsb}See: ~a.{endsb}\n"
@@ -2128,12 +2132,12 @@
             (display "    standards: [" op2)
             (for ([s *standards-met*])
               (let ([std-name (car s)]
-                    [std-desc (cadr s)])
+                    [std-cell (cadr s)])
               (fprintf op "~s~n" std-name)
               (let ([x (cadr s)])
                 (cond [first? (set! first? #f)]
                       [else (display ",\n                " op2)])
-                (write (string-append std-name " : " std-desc) op2))
+                (write (string-append std-name " : " (cadr std-cell)) op2))
               ))
             (display "]" op2) (newline op2)
             ))
