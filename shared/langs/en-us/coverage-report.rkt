@@ -53,7 +53,7 @@
 
   (for ([dictionary dictionaries])
     ; (printf "doing dictionary ~s\n" dictionary)
-    (let ([lyst (list-ref dictionary (- (length dictionary) 1))]
+    (let ([lyst (list-ref dictionary 2)]
           [opt (sanitize-css-id (car dictionary))]
           [counters '()])
       ; (printf "doing lyst = ~s\n" opt)
