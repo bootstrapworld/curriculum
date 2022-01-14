@@ -6,29 +6,6 @@
 '(
   ; https://K12CS Frameworkss
 
-  ;;;;;;;;;;;;;; Practices ;;;;;;;;;;;;;;;;;;;;;;
-  ("P1"
-   "Fostering an Inclusive Computing Culture"
-   )
-  ("P2"
-   "Collaborating Around Computing"
-   )
-  ("P3"
-   "Recognizing and Defining Computational Problems"
-   )
-  ("P4"
-   "Developing and Using Abstractions"
-   )
-  ("P5"
-   "Creating Computational Artifacts"
-   )
-  ("P6"
-   "Testing and Refining Computational Artifacts"
-   )
-  ("P7"
-   "Communicating About Computing"
-   )
-
   ;;;;;;;;;;;;;; Computing Systems ;;;;;;;;;;;;;;;;;;;;;;
   ("9-12.Computing Systems.Devices"
    "Computing devices are often integrated with other systems, including biological, mechanical, and social systems. These devices can share data with one another. The usability, dependability, security, and accessibility of these devices, and the systems they are integrated with, are important considerations in their design as they evolve."

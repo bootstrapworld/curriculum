@@ -1,8 +1,5 @@
 #lang racket
 
-;FIXME what wd be the canonical location of this file?
-;      the pathway top dir?
-
 (provide *lessons-and-standards*)
 
 (define *lessons-and-standards*
@@ -43,7 +40,6 @@
         "HSA.SSE.A.1"
         "8.SP.A.1" 
         "HSF.BF.A.1" 
-        "P4" 
         "6-8.Algorithms and Programming.Variables" 
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
@@ -381,7 +377,6 @@
         "1B-AP-15" ; STEMworks
         "2-AP-17"  ; STEMworks
         "3B-AP-21" ; STEMworks
-        "P6" 
         "9-12.Computing Systems.Troubleshooting" 
         "6-8.Computing Systems.Troubleshooting"
         "OK.L1.IC.C.02"
@@ -394,7 +389,6 @@
         "3B-AP-14" 
         "1B-AP-11" ; STEMworks
         "3A-AP-17" ; STEMworks
-        "P7"
         "OK.L1.DA.CVT.01"
         "OK.L1.IC.C.02"
         "OK.A1.D.1.1"
@@ -416,7 +410,6 @@
         "2-DA-09" 
         "3B-NI-05" 
         "3B-NI-07" 
-        "P5" 
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
@@ -429,7 +422,6 @@
         "2-AP-17" 
         "3A-AP-17" 
         "3A-AP-18" 
-        "P4" 
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
         "OK.L1.AP.M.01"
@@ -440,7 +432,6 @@
     ("displaying-categorical-data"  
         "2-DA-08" 
         "3A-DA-11" 
-        "P5"
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
@@ -465,7 +456,6 @@
     ("ds-intro" 
         "6.SP.A.1" ; STEMworks
         "SL.9-10.1" 
-        "P7"
         "OK.8.DA.CVT.01"
         "OK.5.DA.IM.01"
         )
@@ -476,7 +466,6 @@
         "3A-IC-24"; STEMworks
         "3A-IC-29"; STEMworks
         "3A-IC-30"; STEMworks
-        "P1" 
         "9-12.Data and Analysis.Collection" 
         "9-12.Impacts of Computing.Culture" 
         "9-12.Impacts of Computing.Safety, Law, and Ethics"
@@ -493,7 +482,6 @@
         "2-DA-08" 
         "2-DA-09" 
         "2-AP-11" 
-        "P3"
         "OK.PA.A.2.2"
         "OK.L1.IC.C.02"
         "OK.A1.D.1.1"
@@ -512,7 +500,6 @@
         "HSS.ID.A.2"
         "3A-DA-11" 
         "3B-AP-14" 
-        "P5"
         "OK.L1.AP.PD.05"
         "OK.A1.D.1.1" 
         "OK.PA.D.1.1"
@@ -547,7 +534,6 @@
         "2-AP-19" 
         "3B-NI-05" 
         "1B-AP-10" ; STEMworks
-        "P3" 
         "6-8.Data and Analysis.Inference and Models" 
         "9-12.Algorithms and Programming.Control"
         "OK.L1.AP.M.01"
@@ -630,7 +616,6 @@
         "HSS.ID.A.3"
         "1B-DA-06" ; STEMworks
         "3A-DA-11" 
-        "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Inference and Models"
         "OK.6.D.1.3"
@@ -647,7 +632,6 @@
         "2-AP-13" 
         "3A-AP-17" 
         "3A-AP-18" 
-        "P3" 
         "9-12.Algorithms and Programming.Control" 
         "6-8.Algorithms and Programming.Control" 
         "9-12.Algorithms and Programming.Modularity"
@@ -679,7 +663,6 @@
         "3A-DA-12" ; STEMworks
         "3A-DA-11" 
         "3B-NI-05" 
-        "P5" 
         "9-12.Data and Analysis.Visualization and Transformation" 
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
@@ -698,7 +681,6 @@
         "HSS.IC.B.6" 
         "3B-NI-07" 
         "2-IC-21" ; STEMworks
-        "P1" 
         "6-8.Data and Analysis.Collection" 
         "9-12.Data and Analysis.Inference and Models"
         "OK.L1.IC.C.02"
@@ -713,7 +695,6 @@
         "1B-AP-17"
         "2-AP-11"
         "2-AP-14"
-        "P4"
         "9-12.Algorithms and Programming.Variables"
         "6-8.Algorithms and Programming.Variables"
         )
@@ -725,7 +706,6 @@
         "2-AP-10"
         "2-AP-11"
         "3B-AP-13"
-        "P5"
         )
 
     ("re-functions-that-ask-questions" 
@@ -734,7 +714,6 @@
         "2-AP-17"
         "3B-AP-21"
         "3B-AP-22"
-        "P5"
         "6-8.Algorithms and Programming.Control"
         )
 
@@ -744,7 +723,6 @@
         "1B-AP-12"
         "2-AP-14"
         "2-AP-17"
-        "P5"
         )
 
     ("re-refactoring" 
@@ -762,7 +740,6 @@
         "1B-AP-09" 
         "2-AP-14"
         "3A-AP-16"
-        "P5"
         )
 
     ("re-build-your-own-animation" 

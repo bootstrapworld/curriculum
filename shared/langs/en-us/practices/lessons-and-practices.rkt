@@ -1,13 +1,18 @@
 #lang racket
 
-;FIXME what wd be the canonical location of this file?
-;      the pathway top dir?
-
 (provide *lessons-and-practices*)
 
 (define *lessons-and-practices*
   '(
 ; core
+
+    ("who-are-programmers" 
+        "SJ.1"
+        "SJ.2"
+        "SJ.4"
+        "SJ.10"
+        "P1"
+        ) 
 
     ("contracts"
          "SEP.8" 
@@ -19,6 +24,7 @@
         "MP.4"      ; STEMworks
         "MLR.7"
         "MLR.3"     ; page focused just on this
+        "P4" 
         )
 
     ("defining-values" 
@@ -41,7 +47,6 @@
         "SJ.2"
         "SJ.4"
         "SJ.10"
-
         ) 
 ; math
    
@@ -171,10 +176,11 @@
     ("checking-your-work" 
         "MP.3"      ; STEMworks
         "SEP.3"
+        "P6" 
         )
 
     ("choosing-your-dataset" 
-
+        "P7"
         )
 
     ("correlations" 
@@ -187,6 +193,7 @@
     ("defining-table-functions" 
         "MP.6"
         "MP.8"
+        "P4" 
         )
 
     ("displays-and-lookups" 
@@ -195,22 +202,26 @@
 
     ("ds-intro" 
         "MP.3"      ; STEMworks
+        "P7"
         )
 
     ("ethics-and-privacy" 
         "MP.3"      ; STEMworks
+        "P1" 
         )
 
     ("grouped-samples"
         "MP.2"
         "MP.3"
         "SEP.3"
+        "P3"
         )
 
     ("if-expressions" 
         "MP.1"
         "MP.3"
         "MLR.8"
+        "P3" 
         )
 
     ("histograms" 
@@ -260,6 +271,7 @@
     ("method-chaining" 
         "MP.6"
         "MLR.8"
+        "P3" 
         )
 
     ("displaying-categorical-data" 
@@ -289,5 +301,52 @@
     ("threats-to-validity" 
         "MP.3"      ; STEMworks
         "SEP.3"
+        "P1" 
         )
-    ))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; REACTIVE
+
+    ("re-intro-to-data-structures" 
+        "P4"
+        )
+
+    ("re-structures-reactors-animations" 
+        "P5"
+        )
+
+    ("re-functions-that-ask-questions" 
+        "P5"
+        )
+
+    ("re-key-events" 
+        "P5"
+        )
+
+    ("re-refactoring" 
+        )
+
+    ("re-your-own-drawing-functions" 
+        "P5"
+        )
+
+    ("re-build-your-own-animation" 
+        )
+
+    ("re-adding-collisions" 
+        )
+
+    ("re-scoring" 
+        )
+
+    ("re-adding-levels" 
+        )
+
+    ("re-making-pong" 
+        )
+
+    ("re-nested-structures" 
+        )
+
+    ("re-timers" 
+        )
+))

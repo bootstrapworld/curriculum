@@ -8,6 +8,7 @@
 (require "practices-sj-dictionary.rkt")
 (require "practices-sep-dictionary.rkt")
 (require "practices-cc-dictionary.rkt")
+(require "practices-k12cs-dictionary.rkt")
 
 (define *practices-list*
   (list
