@@ -1,0 +1,48 @@
+[.landscape]
+= Matching Circles of Evaluation & Code
+
+++++
+<style>
+  table { height: 95%; }
+  td, td p { text-align: left; margin: 0; }
+  .content { height: 100%; } /* maximize cell content */
+  .autonum { font-weight: bold; font-size: 1.5rem; }
+  .MathJax { display: block; margin-top: 2ex; }
+</style>
+++++
+
+Cut out the cards in the table below, mix them up, and try to match the Circle of Evaluation with the Arithmetic Expression.
+
+@do{
+  (define expr1 '(+ -2 5))
+  (define expr2 '(+ 10 2))
+  (define expr3 '(+ 5 (* 10 -2)))
+  (define expr4 '(+ (/ 10 -2) 5))
+  (define expr5 '(* 2 (- -10 5)))
+  (define expr6 '(* 5 (/ -10 -2)))
+  (define expr7 '(/ (- 10 2) (+ 10 5)))
+  (define expr8 '(- -2 (* 10 (+ 5 2))))
+}
+
+[cols="^.^1a,^.^1a,^.^1a,^.^1a",stripes="none"]
+|===
+|@n @show{(sexp->coe expr1)}
+|@span{.autonum}{A} @show{(sexp->math expr1 #:parens true)}
+|@n @show{(sexp->coe expr2)}
+|@span{.autonum}{B} @show{(sexp->math expr2 #:parens true)}
+
+|@n @show{(sexp->coe expr3)}
+|@span{.autonum}{C} @show{(sexp->math expr3 #:parens true)}
+|@n @show{(sexp->coe expr4)}
+|@span{.autonum}{D} @show{(sexp->math expr4 #:parens true)}
+
+|@n @show{(sexp->coe expr5)}
+|@span{.autonum}{E} @show{(sexp->math expr5 #:parens true)}
+|@n @show{(sexp->coe expr6)}
+|@span{.autonum}{F} @show{(sexp->math expr6 #:parens true)}
+
+|@n @show{(sexp->coe expr7)}
+|@span{.autonum}{G} @show{(sexp->math expr7 #:parens true)}
+|@n @show{(sexp->coe expr8)}
+|@span{.autonum}{H} @show{(sexp->math expr8 #:parens true)}
+|===

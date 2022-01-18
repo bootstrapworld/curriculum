@@ -20,7 +20,12 @@
 
 | Materials
 |[.materials-links]
+@ifproglang{pyret}{
 * @link{https://docs.google.com/presentation/d/1-LPRD7C7xtfHDGeze4v71q53qf5gJgJ-F68pjKY9KCs/, Lesson slides}
+}
+@ifproglang{codap}{
+* @link{https://docs.google.com/presentation/d/1QGQgB__gZkNjx5JvTJ-Tu3jcbhB3wBv8W7-oMviBL7k/edit#slide=id.g930a424983_0_29,  Lesson slides}
+}
 
 @material-links
 
@@ -29,8 +34,10 @@
 * Make sure all materials have been gathered
 * Decide how students will be grouped in pairs
 * Computer for each student (or pair), with access to the internet
-* link:{pathwayrootdir}/workbook/workbook.pdf[Student workbook], and something to write with
-* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new @starter-file{animals}.
+* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
+@ifproglang{pyret}{
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new one from @starter-file{animals}.
+}
 
 @lang-prereq
 |===
@@ -96,12 +103,14 @@ dogs  = animals-table.filter(is-dog)
 --
 A “kitten” is an animal who _is a cat_ and who _is young_. How would you define a table of just kittens?
 
-* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{formulas} will compute whether or not an animal is a kitten. @ifproglang{codap}{Note the use of the word "and"!}
+* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{sequence of Transformers} will compute whether or not an animal is a kitten.
 
 * Can you fill in the code for the other grouped samples?
 @ifproglang{pyret}{
 * When you're done, type these definitions into the Definitions Area.}
-* Make a bar chart showing the distribution of `sex` in the `kittens` subset@ifproglang{pyret}{, by typing `bar-chart(kittens, "sex")`.}
+
+* Make a bar chart showing the distribution of `sex` in the `kittens` subset @ifproglang{pyret}{, by typing `bar-chart(kittens, "sex")`}.
+
 * Make bar charts showing the `sex` column for every grouped sample. Which one best represents the distribution of species for the whole population? Why?
 --
 

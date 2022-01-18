@@ -1,18 +1,30 @@
 #lang racket
 
-(require "lang-prereq.rkt")
+(require json)
 
 (provide store-functions-used create-lang-prereq-file)
+
+(define lang-table-file "lib/langtable.js")
+
+(define *language-table*
+  (cond [(not (file-exists? lang-table-file)) '()]
+        [else
+          (call-with-input-file lang-table-file
+            (lambda (i)
+              (read i) (read i) (read i)
+              (string->jsexpr
+              (port->string i))))]))
+
 
 (define *prereqs-used* #f)
 (define *proglang* #f)
 (define sym-to-adocstr #f)
 
-(define *number-list* (cadr (assoc 'Number *language-table*)))
-(define *string-list* (cadr (assoc 'String *language-table*)))
-(define *boolean-list* (cadr (assoc 'Boolean *language-table*)))
-(define *image-list* (cadr (assoc 'Image *language-table*)))
-(define *table-list* (cadr (assoc 'Table *language-table*)))
+(define *number-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Number) 'primitives)))
+(define *string-list* (map string->symbol (hash-ref (hash-ref *language-table* 'String) 'primitives)))
+(define *boolean-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Boolean) 'primitives)))
+(define *image-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Image) 'primitives)))
+(define *table-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Table) 'primitives)))
 
 (define (display-prereq-row name o)
   ;(printf "doing display-prereq-row ~s\n" name)
@@ -23,9 +35,9 @@
                        [(eq? name 'Image) "Image"]
                        [(eq? name 'Table) "Table"]
                        )]
-         [name-data (assoc name *language-table*)]
-         [name-fns (cadr name-data)]
-         [name-vals (caddr name-data)]
+         [name-data (hash-ref *language-table* name)]
+         [name-fns (hash-ref name-data 'primitives)]
+         [name-vals (hash-ref name-data 'values)]
          [fns (filter (lambda (x) (member x *prereqs-used*))
                       name-fns)]
          [n (length fns)])
@@ -82,6 +94,7 @@
           [table-functions-used? (ormap (lambda (x) (member x *table-list*)) *prereqs-used*)]
           )
       ;TODO make file only when needed?
+      ;(printf "outputting to ~s\n" (path-replace-extension in-file "-lang-prereq.asc"))
       (call-with-output-file (path-replace-extension in-file "-lang-prereq.asc")
         (lambda (o)
           (when (or number-functions-used?

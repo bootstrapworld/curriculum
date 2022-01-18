@@ -14,6 +14,7 @@
 
 [@lesson-intro-table]
 |===
+
 | Lesson Goals
 | Students will be able to:
 
@@ -96,6 +97,7 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Circles of Evaluation}
 
@@ -153,6 +155,7 @@ Suppose another student tells you that @smath{(+ 1 (* 2 3))} can be rewritten as
 The first Circle is just the original expression. The second expression represents what the (incorrect) commutativity transformation gives us:
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
+
 | @show{(sexp->coe '(+ 1 (* 2 3)))}
 | __ ? __ &rarr;
 | @show{(sexp->coe '(+ 2 (* 1 3)))}
@@ -172,6 +175,7 @@ You may also want to have students complete @printable-exercise{pages/complete-c
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Pedagogy Note}
 
@@ -205,6 +209,7 @@ You will likely see code written using this "shortcut", but it's always better t
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
+
 |*Expression*			| &rarr; | @show{(sexp->math '(+ 3 8)) }
 |*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(+ 3 8)) }
 |*Code*					| &rarr; | @show{(sexp->code '(+ 3 8)) }
@@ -221,6 +226,7 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
+
 |*Expression*			| &rarr; | @show{(sexp->math '(* 2 (+ 3 8))) }
 |*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(* 2 (+ 3 8))) }
 |*Code*					| &rarr; | @show{(sexp->code '(* 2 (+ 3 8))) }
@@ -236,6 +242,7 @@ What would the code look like for these circles?
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
+
 |@show{(sexp->coe '(/ 6 (+ 1 2)))}		| @show{(sexp->coe '(* (- 10 5) 6))}
 |@show{(sexp->code '(/ 6 (+ 1 2)))}		| @show{(sexp->code '(* (- 10 5) 6))}
 |===
@@ -273,6 +280,7 @@ In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their i
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Strategies For English Language Learners}
 
@@ -306,6 +314,7 @@ Here are two Circles of Evaluation.
 
 [cols="1,1", grid="none", frame="none"]
 |===
+
 | @span{.right}{@show{(sexp->coe `(* 10 -4))}}
 | @show{(sexp->coe `(text "Good work!" 50 "red"))}
 |===
@@ -347,7 +356,7 @@ Now that we understand the structure of Circles of Evaluation, we can use them t
 
 If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
 
-* @opt-printable-exercise{pages/matching-coe-exp.pdf, A printable set of cards for physically matching expressions with Circles of Evaluation}
+* @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}
 * @opt-printable-exercise{pages/arith-to-coe.adoc}
 * @opt-printable-exercise{pages/arith-to-coe2.adoc}
 * @opt-printable-exercise{pages/arith-to-coe3.adoc}

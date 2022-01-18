@@ -5,7 +5,9 @@
 (define *starter-files*
 
 '(
-  ; core ; no spaces in starter file shortname!
+  ; no spaces in starter file shortname!
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; CORE
 
   ("alices-restaurant" "Alice's Restaurant Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2")
@@ -30,7 +32,7 @@
   ; data-science
 
   ("animals" "Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi")
+   ("pyret" "https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("custom-animals" "Custom Animals Starter File"
@@ -63,7 +65,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP")
    )
   ("trust-but-verify"  "Trust but Verify Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP")
+   ("pyret" "https://code.pyret.org/editor#share=1DBYGJDOlIARaWI3pBVzjPp6eewkQJGHW")
    )
   ("word-length"  "Word Length Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
@@ -167,5 +169,47 @@
    ("pyret" "https://code.pyret.org/editor#share=1muE7xY-NKW5IJLeOnAu9Q31JUT6ns_n7")
    ("wescheme" "https://www.wescheme.org/view?publicId=0elP8WrmfM")
    )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; REACTIVE
+  ("package-delivery" "Package Delivery Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1RKJNrC2eRxO8apsA0UKbLZAMGD73Xk5D")
+  )
+
+  ("cake-bakery" "Bakery Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1lSittPaSqyeDXAmYmLX8epCIDU4FCFlH")
+  )
+
+  ("sunset" "Sunset Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=13RRDcl13HkfNp0Ue7jQUhBNZIumSNxfP")
+  )
+
+  ("what-to-wear" "What to Wear Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=15fUR1QAF-O5HIDq95QnctdsdVNfF1Tde")
+  )
+
+  ("moving-character" "Moving Character Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1pmuumO3gEC44--2zxp5fjK6k20lCYt-t")
+  )
+
+  ("virtual-pet" "Virtual Pet Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=15WcPmjNM-qAZGs9BakA7prvOVMqbBkxU")
+  )
+
+  ("single-number" "Single-Number State Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1p4oviyUQ-EGuo12Y3wHeAdG8xJjOKtkE")
+  )
+
+  ("two-number" "Two-Number State Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1Az8Xd4ZcMwqezo8vAldQOrfQkRvi2H8N")
+  )
+
+  ("ninja-cat-collisions", "Ninja Cat Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1TGw11fcBMAS0j2CCRWZm5_6GuBWVMBPq")
+  )
+
+  ("watermelon-smash" "Watermelon Smash Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1-gNiFJeQenO3e_9LVbPw6ucl4lZrTA6R")
+  )
 
   ))

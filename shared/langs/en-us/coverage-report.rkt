@@ -2,59 +2,115 @@
 
 #lang racket
 
-(require "standards-cc-ela-dictionary.rkt")
-(require "standards-cc-math-dictionary.rkt")
-(require "standards-csta-dictionary.rkt")
-(require "standards-k12cs-dictionary.rkt")
-(require "standards-ngss-dictionary.rkt")
-(require "standards-ok-dictionary.rkt")
-(require "standards-ia-dictionary.rkt")
+(require "coverage-dropdown.rkt")
 
-(require "lessons-and-standards.rkt")
+;standards
 
-(define *all-the-standards* '())
+(require "standards/lessons-and-standards.rkt")
 
-(for ([std-list (list *cc-ela-standards-list*
-                      *cc-math-standards-list*
-                      *csta-standards-list*
-                      *k12cs-standards-list*
-                      *ngss-standards-list*
-                      *ok-standards-list*
-                      *iowa-standards-list*
-                      )])
-  (for ([std-desc std-list])
-    (let ([std (car std-desc)])
-      (set! *all-the-standards*
-        (cons (list std (box 0)) *all-the-standards*)))))
+(require "standards/the-standards-dictionaries.rkt")
 
-(for ([lesson-line *lessons-and-standards*])
-  (let ([lesson-stds (cdr lesson-line)])
-    (for ([std lesson-stds])
-      (let ([c (assoc std *all-the-standards*)])
-        (when c
-          (let ([b (cadr c)])
-            (set-box! b (+ (unbox b) 1))))))))
+;textbooks
+
+(require "textbooks/lessons-and-textbooks.rkt")
+
+(require "textbooks/the-textbook-dictionaries.rkt")
+
+;practices
+
+(require "practices/lessons-and-practices.rkt")
+
+(require "practices/the-practices-dictionaries.rkt")
+
+;;;;;;;;;;;;;
+
+(define (sanitize-css-id id)
+  (regexp-replace* "\\." id "_"))
+
+(define (display-selection o )
+  (display "\n++++\n" o)
+  (display "<select class=\"coverageAlignmentSelect\" onchange=\"showCoverageAlignment()\">\n" o)
+  (display "<optgroup label=\"Standards\">\n" o)
+  (for ([categ *standards-list*])
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ)))
+    )
+  (display "</optgroup>\n" o)
+  ;
+  (display "<optgroup label=\"Textbooks\">\n" o)
+  (for ([categ *textbooks-list*])
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
+  (display "</optgroup>\n" o)
+  ;
+  (display "<optgroup label=\"Practices\">\n" o)
+  (for ([categ *practices-list*])
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
+  (display "</optgroup>\n" o)
+  (display "</select>\n" o)
+  (display "++++\n" o))
+
+(define (display-subreport o title lesson-entries dictionaries)
+  ; (printf "doing display-subreport ~s  \n" title  )
+
+  (for ([dictionary dictionaries])
+    ; (printf "doing dictionary ~s\n" dictionary)
+    (let ([lyst (list-ref dictionary 2)]
+          [opt (sanitize-css-id (car dictionary))]
+          [counters '()])
+      ; (printf "doing lyst = ~s\n" opt)
+      (for ([desc lyst])
+        (set! counters
+          (cons (list (car desc) (cadr desc) (box "") (box 0)) counters)))
+
+      (set! counters (reverse counters))
+
+      (for ([lesson-entry lesson-entries])
+        (let ([lesson-name (car lesson-entry)]
+              [lesson-referents (cdr lesson-entry)])
+          (for ([referent lesson-referents])
+            (let ([c (assoc referent counters)])
+              (when c
+                (let* ([b (caddr c)]
+                       [count-box (cadddr c)]
+                       [lessons (unbox b)]
+                       [count (unbox count-box)])
+                  (set-box! b (string-append lessons
+                                (if (= count 0) "" ", ")
+                                lesson-name))
+                  (set-box! count-box (+ count 1))
+                  ))))))
+
+      (fprintf o "[.coverageElement.~a]\n" opt)
+      (fprintf o "[cols=\"2a,1a,7a\"]\n")
+      (fprintf o "|===\n")
+      (for ([entry counters])
+        (let ([std (car entry)] [desc (cadr entry)] [lessons (unbox (caddr entry))]
+                                [count (unbox (cadddr entry))])
+          (set! desc (regexp-replace* "\\|" desc "\\&#x7c;"))
+          (if (string=? lessons "")
+              (fprintf o "| [.unused]#~a# | [.unused]#none# | [.unused]#~a#\n" std desc)
+              (fprintf o "| ~a | ~a (~a) | ~a\n" std lessons count desc)))
+        )
+      (fprintf o "|===\n\n")
+      )))
 
 (call-with-output-file "coverage-report.adoc"
   (lambda (o)
-    (fprintf o "= Coverage of Standards\n\n")
+    (fprintf o "= Coverage Report\n\n")
 
-    (fprintf o "Each line shows the name of the standard followed by the number of times it's used. ")
+    (fprintf
+      o "Each line shows the name of the standard/practice/textbook followed by the number of times it's used.\n")
     (fprintf o "If a standard is not used at all, the line is highlighted in red.\n\n")
 
-    (fprintf o "++++\n")
-    (fprintf o "<style>\n")
-    (fprintf o ".unused { background-color: darkred; color: white; }\n")
-    (fprintf o "</style>\n")
-    (fprintf o "++++\n\n")
+    (print-coverage-script-n-style o)
+    (display-selection o)
 
-    (fprintf o "[verse]\n")
-    (for ([std-desc *all-the-standards*])
-      (let ([std (car std-desc)] [count (unbox (cadr std-desc))])
-        (if (= count 0)
-            (fprintf o "[.unused]#~a \t ~a#\n" std count)
-            (fprintf o "~a \t ~a\n" std count))))
-    (fprintf o "\n\n")
+    (display-subreport o "Standards" *lessons-and-standards* *standards-list*)
+
+    (display-subreport o "Textbooks" *lessons-and-textbooks* *textbooks-list*)
+
+    (display-subreport o "Practices" *lessons-and-practices* *practices-list*)
+
     )
+
   #:exists 'replace)
 
