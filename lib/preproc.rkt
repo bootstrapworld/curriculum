@@ -1076,7 +1076,7 @@
                   (let ([lesson-asc-file
                           (format "lessons/~a/.cached/.index.asc" lesson)]
                         [lesson-glossary-file
-                          (format "lessons/~a/.cached/.lesson-glossary.txt" lesson)]
+                          (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
                         [lesson-standards-file
                           (format "lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
                         [lesson-title-file
@@ -2115,7 +2115,7 @@
 
 (define (accumulate-glossary-and-standards)
   ; (printf "doing accumulate-glossary-and-standards\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt")
+  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt.kp")
     (lambda (op)
       (for ([s *glossary-items*])
         (fprintf op "~s~n" (car s))))
