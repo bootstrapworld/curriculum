@@ -17,5 +17,6 @@
             *mlr-practices-list*
             *sj-practices-list*
             *sep-practices-list*
-            *cc-practices-list*)
+            *cc-practices-list*
+            *k12cs-practices-list*)
           )))
