@@ -26,11 +26,16 @@ body:not(.LessonPlan, .narrativepage) #content {
 }
 
 a       { color:  #2156a5 !important; }
-p       { margin: 10px 0px; font-size: inherit; }
+p       { margin: 10px 0px; font-size: inherit; line-height: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
 mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
 .listingblock pre { margin: 3px 0px; padding: 0; }
+/* assume all p tags inside .paragraph are 100% width */
+.paragraph p { 
+  display: flex; 
+  flex-wrap: wrap;
+} 
 
 h1 {
   font-size:      2rem;
