@@ -178,6 +178,10 @@
         "MP.3"      ; STEMworks
         "SEP.3"
         "P6" 
+        "SJ.12"
+        "SJ.13"
+        "SJ.14"
+        "SJ.15"
         )
 
     ("choosing-your-dataset" 
