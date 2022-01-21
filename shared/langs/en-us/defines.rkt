@@ -2,10 +2,14 @@
 
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
+(require "course-specifics.rkt")
 
 (provide
   print-lessons-intro
+  print-course-logo
   print-other-resources-intro
+  print-teach-remotely
+  print-ordering-workbooks
   print-link-to-glossary
   print-link-to-standards
   print-link-to-student-workbook
@@ -39,6 +43,40 @@
     (string-append
       "\n- link:./pathway-glossary.shtml[Glossary]\n"
       "-- A list of vocabulary words used in this pathway.\n") o))
+
+(define (print-teach-remotely o)
+  (display
+    (string-append
+      "== Teaching Remotely?\n"
+      "\n"
+      "If you're teaching remotely, we've assembed an link:../../ImplementationNotes.shtml[Implementation Notes] page that makes\n"
+      "specific recommendations for in-person v. remote instruction.\n"
+      "\n") o))
+
+(define (print-course-logo course make-image o)
+  ; (printf "doing print-course-logo ~s\n" course)
+  (display
+    (let* ([c (assoc course *course-names*)]
+          [course-name (if c (cadr c) "Bootstrap")])
+      (string-append
+        "= "
+        course-name "\n\n"
+        "[.logo]\n"
+        (make-image "images/Logo.png" (list (if c (cadr c) "Bootstrap")))
+        "\n\n")) o))
+
+(define (print-ordering-workbooks course o)
+  (display
+    (string-append
+      "== Ordering Student Workbooks?\n"
+      "\n"
+      "While we give our workbooks away as a PDF (see below), we understand that printing them yourself can be expensive!\n"
+      "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
+      "link:"
+      (let ([c (assoc course *lulu-links*)])
+        (if c (cadr c) "missing-link"))
+      "[Click here to order].\n"
+      "\n") o))
 
 (define (print-link-to-standards o)
   (display
@@ -75,9 +113,4 @@
       "-- Want to be kept up-to-date about Bootstrap events, workshops, and curricular\n"
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
-
-
-
-
-
 

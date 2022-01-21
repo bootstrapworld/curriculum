@@ -739,7 +739,7 @@
          result)))
 
 (define (make-image img opts #:centered? [centered? #f])
-  ;(printf "doing make-image ~s\n" img)
+  ; (printf "doing make-image ~s\n" img)
   (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *target-pathway* *teacher-resources*)
       ;(printf "anonymizing ~s\n" img)
@@ -1686,10 +1686,10 @@
 
               (expand-directives i o)
 
-              ;(printf "call link-to-lessons-in-pathway?\n")
-              (when *narrative*
-                ;(printf "yes\n")
-                (link-to-lessons-in-pathway o))
+              ;;(printf "call link-to-lessons-in-pathway?\n")
+              ;(when *narrative*
+              ;  ;(printf "yes\n")
+              ;  (link-to-lessons-in-pathway o))
 
               (let ([dict-rep *dictionaries-represented*])
                 (set! *dictionaries-represented*
@@ -1703,6 +1703,10 @@
                 (create-textbooks-subfile))
 
               (when *narrative*
+                (print-course-logo *target-pathway* make-image o)
+                (link-to-lessons-in-pathway o)
+                (print-ordering-workbooks *target-pathway* o)
+                (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-link-to-glossary o)
                 (print-link-to-standards o)

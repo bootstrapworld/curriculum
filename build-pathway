@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-12 # last modified
+LASTMOD=2022-01-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1394,47 +1394,37 @@ function collectprimitives() {
 }
 
 function buildpathwaynarrative() {
-  #echo doing buildpathwaynarrative
-  local copacetic=1
+  # echo doing buildpathwaynarrative $PWD
+  if test ! -f index.adoc; then
+    touch index.adoc
+  elif test -s index.adoc; then
+    echo
+    echo WARNING: Old-style index.adoc found in pathway $PATHWAY
+    rm -f index.adoc
+    touch index.adoc
+  fi
+
+  export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
   if test ! -f index.adoc; then
     for f in *.adoc; do
-      if test ! -f $f; then copacetic=
+      if test -f $f; then
+        mv $f index.adoc
       fi
     done
   fi
-  #echo copacetic I $copacetic
-  if test ! "$copacetic" -a ! -f index.shtml; then
-    echo
-    echo WARNING: No narrative in pathway $PATHWAY\; creating one
-    echo "= $PATHWAY" > index.adoc
+  if test index.adoc -nt index.shtml; then
+    echo building pathway narrative: $PATHWAY
+    export NARRATIVE=1
+    rm -f .cached/.index-comment.txt
+    test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+    doadoc index.adoc
+    export NARRATIVE=
   fi
-  if ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
-    echo
-    echo WARNING: Too many narratives in pathway $PATHWAY
-  else
-    #cp -p $PROGDIR/*.css .
-    export PATHWAYROOTDIR=./
-    export LESSONSUBDIR=
-    if test ! -f index.adoc; then
-      for f in *.adoc; do
-        if test -f $f; then
-          mv $f index.adoc
-        fi
-      done
-    fi
-    if test index.adoc -nt index.shtml; then
-      echo building pathway narrative: $PATHWAY
-      export NARRATIVE=1
-      rm -f .cached/.index-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc
-      export NARRATIVE=
-    fi
 
-    # checklinks index.shtml
-    #verifylinks
+  # checklinks index.shtml
+  #verifylinks
 
-  fi
 }
 
 function makeworkbookjson() {
