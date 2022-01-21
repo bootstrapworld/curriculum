@@ -70,7 +70,7 @@
     (string-append
       "== Ordering Student Workbooks?\n"
       "\n"
-      "While we give our workbooks away as a PDF (see below), we understand that printing them yourself can be expensive!\n"
+      "While we give our workbooks away as a PDF, we understand that printing them yourself can be expensive!\n"
       "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
       "link:"
       (let ([c (assoc course *lulu-links*)])
@@ -82,8 +82,9 @@
   (display
     (string-append
       "\n- link:./pathway-standards.shtml[Standards Alignment]\n"
-      "-- Find out how our materials align with Common Core Content\n"
-      "and Practice Standards, as well as the TEK and CSTA Standards.\n")
+      "-- Find out how our materials align with National and State\n"
+      "Standards, as well as some of the most commonly used math\n"
+      " textbooks.\n")
     o))
 
 (define (print-link-to-student-workbook o)
