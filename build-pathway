@@ -38,6 +38,10 @@ if test -f ./.build-pathway.rc; then
   . ./.build-pathway.rc
 fi
 
+if test -f ./.build-pathway.env; then
+  . ./.build-pathway.env
+fi
+
 while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
