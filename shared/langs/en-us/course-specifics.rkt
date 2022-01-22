@@ -2,7 +2,8 @@
 
 (provide
   *course-names*
-  *lulu-links*)
+  *course-workbook-links*
+  *course-banners*)
 
 (define *course-names*
   '(
@@ -17,10 +18,14 @@
     ("reactive" "Bootstrap:Reactive")
     ))
 
-(define *lulu-links*
+(define *course-workbook-links*
   '(
     ("algebra-wescheme" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ed-campos-and-jennifer-poole-and-flannery-denny/bootstrapalgebra-student-workbook-wescheme/paperback/product-4j9rmj.html")
     ("algebra-pyret" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ed-campos-and-jennifer-poole-and-flannery-denny/bootstrapalgebra-student-workbook-pyret/paperback/product-6j9zek.html")
     ("data-science" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-flannery-denny/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
     ("data-science-codap" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-flannery-denny/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
+    ))
+
+(define *course-banners*
+  '(
     ))

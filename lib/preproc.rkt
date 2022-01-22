@@ -1704,6 +1704,7 @@
 
               (when *narrative*
                 (print-course-logo *target-pathway* make-image o)
+                (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
                 (print-ordering-workbooks *target-pathway* o)
                 (print-teach-remotely o)

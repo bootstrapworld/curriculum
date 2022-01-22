@@ -7,6 +7,7 @@
 (provide
   print-lessons-intro
   print-course-logo
+  print-course-banner
   print-other-resources-intro
   print-teach-remotely
   print-ordering-workbooks
@@ -55,28 +56,41 @@
 
 (define (print-course-logo course make-image o)
   ; (printf "doing print-course-logo ~s\n" course)
-  (display
-    (let* ([c (assoc course *course-names*)]
-          [course-name (if c (cadr c) "Bootstrap")])
+  (let* ([c (assoc course *course-names*)]
+         [course-name (if c (cadr c) "Bootstrap")])
+    (display
       (string-append
         "= "
         course-name "\n\n"
         "[.logo]\n"
         (make-image "images/Logo.png" (list (if c (cadr c) "Bootstrap")))
-        "\n\n")) o))
+        "\n\n") o)))
+
+(define (print-course-banner course o)
+  (let* ([c (assoc course *course-banners*)]
+         [banr (if c (cadr c) "")])
+      (display
+        (string-append
+          "\n\n"
+          "[.course-banner]\n"
+          "--"
+          banr
+          "\n"
+          "--"
+          "\n\n") o)))
 
 (define (print-ordering-workbooks course o)
-  (display
-    (string-append
-      "== Ordering Student Workbooks?\n"
-      "\n"
-      "While we give our workbooks away as a PDF, we understand that printing them yourself can be expensive!\n"
-      "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
-      "link:"
-      (let ([c (assoc course *lulu-links*)])
-        (if c (cadr c) "missing-link"))
-      "[Click here to order].\n"
-      "\n") o))
+  (let ([c (assoc course *course-workbook-links*)])
+    (display
+      (string-append
+        "== Ordering Student Workbooks?\n"
+        "\n"
+        "While we give our workbooks away as a PDF, we understand that printing them yourself can be expensive!\n"
+        "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
+        "link:"
+        (if c (cadr c) "missing-link")
+        "[Click here to order].\n"
+        "\n") o)))
 
 (define (print-link-to-standards o)
   (display
