@@ -73,7 +73,7 @@
         (string-append
           "\n\n"
           "[.course-banner]\n"
-          "--"
+          "--\n"
           banr
           "\n"
           "--"
