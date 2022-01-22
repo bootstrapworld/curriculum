@@ -28,4 +28,6 @@
 
 (define *course-banners*
   '(
+    ("algebra-wescheme" "")
+    ("algebra-pyret" "The earlier version of our materials is also available https://bootstrapworld.org/materials/spring2020/courses/algebra/es-mx/index.shtml[en Español]. Let us know if you can mailto:contact@BootstrapWorld.org[lend a hand] translating the new version!")
     ))
