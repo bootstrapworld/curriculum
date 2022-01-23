@@ -1016,7 +1016,7 @@
                          ""))))))))
 
 (define (link-to-lessons-in-pathway o)
-  ;(printf "link-to-lessons-in-pathway in ~s~n" (current-directory))
+  ; (printf "link-to-lessons-in-pathway\n")
   ;
   (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
     ;(printf "lessons = ~s\n" lessons)
@@ -1101,6 +1101,8 @@
                                                (cons s *glossary-items*)))]))
                                 (loop)))))))
                     ;(printf "took care of pw glossary~n")
+
+                    ; (printf "*** ~s's ~s exists? ~s\n" lesson lesson-standards-file (file-exists? lesson-standards-file))
 
                     (when (file-exists? lesson-standards-file)
                       ;(printf "~a exists i\n" lesson-standards-file)
@@ -1696,16 +1698,15 @@
                   (filter (lambda (x) (member x dict-rep))
                           (map car *standards-list*))))
 
-              (when (or *narrative* *lesson-plan*)
-                (create-standards-subfile))
-
               (when *lesson-plan*
+                (create-standards-subfile)
                 (create-textbooks-subfile))
 
               (when *narrative*
                 (print-course-logo *target-pathway* make-image o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
+                (create-standards-subfile)
                 (print-ordering-workbooks *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
