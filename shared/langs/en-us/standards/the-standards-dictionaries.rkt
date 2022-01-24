@@ -2,6 +2,7 @@
 
 (provide
   *standards-list*
+  *dict-canonical-order*
   *disallowed-standards-list*
   expand-dict-abbrev
   disallow-standards
@@ -18,14 +19,16 @@
 (define *standards-list*
   (list
     ; nickname expanded-name list URI
-    (list "CSTA" "CSTA" *csta-standards-list* "https://csteachers.org/page/standards")
-    (list "CC-ELA" "Common Core ELA" *cc-ela-standards-list* "http://corestandards.org/ELA-Literacy/")
     (list "CCSS-Math" "Common Core Math" *cc-math-standards-list* "http://corestandards.org/Math/")
+    (list "CC-ELA" "Common Core ELA" *cc-ela-standards-list* "http://corestandards.org/ELA-Literacy/")
+    (list "CSTA" "CSTA" *csta-standards-list* "https://csteachers.org/page/standards")
     (list "K12CS" "K-12CS" *k12cs-standards-list* "https://k12cs.org")
     (list "NGSS" "Next-Gen Science" *ngss-standards-list* "https://www.nextgenscience.org/")
     (list "Oklahoma" "Oklahoma" *ok-standards-list* "https://sde.ok.gov/oklahoma-academic-standards")
     (list "Iowa" "Iowa" *iowa-standards-list* "https://iowacore.gov/standards/iowa-core-standards")
     ))
+
+(define *dict-canonical-order* (map car *standards-list*))
 
 (define *disallowed-standards-list*
   '())

@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-21 # last modified
+LASTMOD=2022-01-24 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -769,7 +769,7 @@ function doadoc() {
 
   if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
-    touch .cached/.pathway-standards.asc
+    touch .cached/.index-standards.asc
     echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
@@ -780,9 +780,9 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -2208,26 +2208,38 @@ function buildpathwaytocs() {
   echo "}" >> $TOCSFILE
 }
 
-function allthestandards() {
+function allthealignments() {
   cd $TOPDIR
   cd distribution/$NATLANG
   export LANGROOTDIR=./
-  #echo doing allthestandards in $(pwd)
+  #echo doing allthealignments in $(pwd)
   test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
   for d in courses/*; do
     test -d $d || continue
     db=${d%/}
     db=${db##*/}
+
     f=$d/.cached/.standards-in-pathway.txt.kp
     if test -f $f; then
       $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
     fi
-  done
-  $PROGDIR/make-standards.rkt
 
-  echo .cached/.Standards.asc >> $ADOC_INPUT
-  echo .cached/.Standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    f=$d/.cached/.textbooks-in-pathway.txt.kp
+    if test -f $f; then
+      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-textbooks.txt
+    fi
+
+    f=$d/.cached/.practices-in-pathway.txt.kp
+    if test -f $f; then
+      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-practices.txt
+    fi
+  done
+
+  $PROGDIR/make-alignments.rkt
+
+  echo .cached/.Alignments.asc >> $ADOC_INPUT
+  echo .cached/.Alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
 
   if test ! $DEBUG; then rm -f *.asc *.txt; fi
 
@@ -2450,7 +2462,7 @@ function doconversions() {
   echo " "
 
   createabyss
-  allthestandards
+  allthealignments
 
   doadocpostproc $ADOC_INPUT
 
