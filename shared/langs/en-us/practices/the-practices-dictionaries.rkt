@@ -2,6 +2,7 @@
 
 (provide
   *practices-list*
+  *flat-practices-list*
   )
 
 (require "practices-mlr-dictionary.rkt")
@@ -20,3 +21,5 @@
             *cc-practices-list*
             *k12cs-practices-list*)
           )))
+
+(define *flat-practices-list* (caddr (car *practices-list*)))
