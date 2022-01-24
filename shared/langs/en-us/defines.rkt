@@ -95,7 +95,7 @@
 (define (print-link-to-standards o)
   (display
     (string-append
-      "\n- link:./pathway-standards.shtml[Standards Alignment]\n"
+      "\n- link:./pathway-alignments.shtml[Standards Alignment]\n"
       "-- Find out how our materials align with National and State\n"
       "Standards, as well as some of the most commonly used math\n"
       " textbooks.\n")

@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-21 # last modified
+LASTMOD=2022-01-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -769,7 +769,7 @@ function doadoc() {
 
   if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
-    touch .cached/.pathway-standards.asc
+    touch .cached/.index-standards.asc
     echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
@@ -780,9 +780,9 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -2450,7 +2450,7 @@ function doconversions() {
   echo " "
 
   createabyss
-  allthestandards
+  # allthestandards #fixme
 
   doadocpostproc $ADOC_INPUT
 

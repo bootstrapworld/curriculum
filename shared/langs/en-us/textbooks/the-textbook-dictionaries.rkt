@@ -1,7 +1,9 @@
 #lang racket
 
 (provide
-  *textbooks-list*)
+  *textbooks-list*
+  expand-textbook-abbrev
+  )
 
 (require "textbook-cmp-dictionary.rkt")
 (require "textbook-im-6-dictionary.rkt")
@@ -22,4 +24,8 @@
     (list "IM.Alg.1" #f *im-alg-1-textbook-list*)
 
     ))
+
+(define (expand-textbook-abbrev tbk)
+  ;nothing special for now, but may add an external link in the future
+  tbk)
 
