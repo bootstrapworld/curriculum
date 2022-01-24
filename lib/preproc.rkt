@@ -1745,7 +1745,7 @@
                 (print-course-logo *target-pathway* make-image o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
-                (create-alignments-subfile 
+                (create-alignments-subfile
                   (string-append *containing-directory* "/.cached/.pathway-alignments"))
                 (print-ordering-workbooks *target-pathway* o)
                 (print-teach-remotely o)
@@ -2191,10 +2191,6 @@
            o)
   (newline o))
 
-
-
-
-
 (define (sanitize-css-id id)
   (regexp-replace* "\\." id "_"))
 
@@ -2254,6 +2250,11 @@
       (unless (and (empty? *standards-met*)
                    (empty? *chapters-used*)
                    (empty? *practices-merited*))
+        (set! *dictionaries-represented*
+          (sort *dictionaries-represented*
+                (lambda (a b)
+                  (< (index-of *dict-canonical-order* a)
+                     (index-of *dict-canonical-order* b)))))
         (display-alignments-selection o)
         (create-standards-subfile-port o)
         (create-textbooks-subfile-port o)
@@ -2261,11 +2262,9 @@
         ))
     #:exists 'replace))
 
-
-
-
 (define (create-standards-subfile-port o)
   (unless (empty? *standards-met*)
+
     (for ((dict *dictionaries-represented*))
       (let ([dict-standards-met
               (filter (lambda (s) (string=? (list-ref s 2) dict))
