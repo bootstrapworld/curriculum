@@ -11,21 +11,19 @@
 (require "textbook-im-8-dictionary.rkt")
 (require "textbook-im-alg-1-dictionary.rkt")
 
-; (define *textbook-list*
-;   (append *cmp-textbook-list*
-;           *im-textbook-list*))
-
 (define *textbooks-list*
   (list
-    (list "CMP" #f *cmp-textbook-list*)
-    (list "IM.6" #f *im-6-textbook-list*)
-    (list "IM.7" #f *im-7-textbook-list*)
-    (list "IM.8" #f *im-8-textbook-list*)
-    (list "IM.Alg.1" #f *im-alg-1-textbook-list*)
+    (list "CMP" #f *cmp-textbook-list* "https://connectedmath.msu.edu/")
+    (list "IM.6" #f *im-6-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.7" #f *im-7-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.8" #f *im-8-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.Alg.1" #f *im-alg-1-textbook-list* "https://illustrativemathematics.org/")
 
     ))
 
 (define (expand-textbook-abbrev tbk)
-  ;nothing special for now, but may add an external link in the future
-  tbk)
+  (let ([x (assoc tbk *textbooks-list*)])
+    (if x
+        (format "link:~a[~a]" (list-ref x 3) tbk)
+        tbk)))
 
