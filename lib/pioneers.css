@@ -1,0 +1,41 @@
+
+/* hide/adjust template elements */
+h1, #savetodrive-div, .acknowledgment { display: none !important; }
+#content {
+  margin: 0;
+  padding: 0;
+  height: 100% !important;
+  position: absolute;
+  text-align: center !important;
+}
+
+.posterImage {
+  min-width:    6in;
+  max-width:    7in;
+  border-radius:  20px;
+  border:     20px solid black;
+  display:    inline-block;
+}
+.posterImage p { margin: 0; padding: 0; }
+.posterImage img { width: 100%; max-width: 5.5in; }
+
+.name p, .title p, .text p {
+  font-weight:  bold  !important;
+  font-family:  Helvetica  !important;
+  width:      100% !important;
+}
+.name p  { font-size: 40pt !important; text-transform: uppercase; }
+.title p { font-size: 16pt !important; text-transform: uppercase; }
+.text p  { font-size: 10pt !important; font-weight: normal !important; }
+
+.text p, .footer { text-align: left !important; }
+.footer img { float: right; width: 200px; }
+.footer { font-size: 9pt; position: absolute; bottom: 0; background: white; }
+
+@media print {
+  .footer {
+    margin-top: -1.3in; /* always negate the height */
+    bottom: 0 !important;
+    page-break-before: always;
+  }
+}
