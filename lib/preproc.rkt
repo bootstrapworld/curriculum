@@ -880,9 +880,11 @@
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
-                         (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
-                                 (errmessage-context)
-                                 f))
+                         ; This warning is too eager. Leave it to --lint
+                         ; (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                         ;         (errmessage-context)
+                         ;         f)
+                         )
                        (when short-ref? (set! g (build-path g "index.shtml")))))])
 
            (when (and (member link-type '("online-exercise" "opt-online-exercise"))
