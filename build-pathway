@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-24 # last modified
+LASTMOD=2022-01-25 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1400,23 +1400,21 @@ function collectprimitives() {
 function buildpathwaynarrative() {
   # echo doing buildpathwaynarrative $PWD
   if test ! -f index.adoc; then
-    touch index.adoc
-  elif test -s index.adoc; then
-    echo
-    echo WARNING: Old-style index.adoc found in pathway $PATHWAY -- ignoring
-    rm -f index.adoc
-    touch index.adoc
-  fi
-
-  export PATHWAYROOTDIR=./
-  export LESSONSUBDIR=
-  if test ! -f index.adoc; then
     for f in *.adoc; do
       if test -f $f; then
         mv $f index.adoc
       fi
     done
   fi
+  if test ! -f index.adoc; then
+    touch index.adoc
+  elif test -s index.adoc; then
+    echo
+    echo WARNING: Using custom narrative index.adoc found in pathway $PATHWAY
+  fi
+
+  export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
   if test index.adoc -nt index.shtml; then
     echo building pathway narrative: $PATHWAY
     export NARRATIVE=1

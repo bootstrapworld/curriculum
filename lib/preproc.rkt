@@ -170,13 +170,15 @@
 (define *standards-met* '())
 ;FIXME
 
-(define *practices-merited* '())
-
 ; (define *textbooks-used* '())
 
 (define *textbooks-represented* '())
 
 (define *chapters-used* '())
+
+(define *practices-merited* '())
+
+(define *practice-categories-represented* '())
 
 (define *lesson-prereqs* '())
 
@@ -308,6 +310,17 @@
           )
         (values #f #f))))
 
+(define (assoc-practice practice-label)
+  (let ([practice-cell #f]
+        [practice-category-name #f])
+    (for ([x *practices-list*])
+      (unless practice-cell
+        (set! practice-cell (assoc practice-label (list-ref x 2)))
+        (when practice-cell (set! practice-category-name (list-ref x 0)))))
+    (if practice-cell
+        (values (cadr practice-cell) practice-category-name)
+        (values #f #f))))
+
 (define (add-standard std lesson-title lesson pwy)
   ; (printf "doing add-standard std= ~s ttl= ~s lsn= ~s pwy= ~s\n" std lesson-title lesson pwy)
   (let-values ([(std-desc dict) (assoc-standards std)])
@@ -344,15 +357,21 @@
                       *chapters-used*))]))))
 
 (define (add-practice practice-label lesson-title lesson pwy)
-  (cond [(assoc practice-label *practices-merited*)
-         => (lambda (c)
-              (unless *lesson*
-                (box-add-new! (list lesson-title lesson pwy)
-                              (list-ref c 1))))]
-        [else
-          (set! *practices-merited*
-            (cons (list practice-label (box (list (list lesson-title lesson pwy))))
-                  *practices-merited*))]))
+  (let-values ([(practice-desc practice-category-name) (assoc-practice practice-label)])
+    (when practice-category-name
+      (cond [(assoc practice-label *practices-merited*)
+             => (lambda (c)
+                  (unless *lesson*
+                    (box-add-new! (list lesson-title lesson pwy) (list-ref c 3))))]
+            [else
+              (unless (member practice-category-name *practice-categories-represented*)
+                (set! *practice-categories-represented*
+                  (cons practice-category-name *practice-categories-represented*)))
+              ; (printf "practice-categ-repd bumped to ~s\n" *practice-categories-represented*)
+              (set! *practices-merited*
+                (cons (list practice-label practice-desc practice-category-name
+                            (box (list (list lesson-title lesson pwy))))
+                      *practices-merited*))]))))
 
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
@@ -861,9 +880,11 @@
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
-                         (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
-                                 (errmessage-context)
-                                 f))
+                         ; This warning is too eager. Leave it to --lint
+                         ; (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                         ;         (errmessage-context)
+                         ;         f)
+                         )
                        (when short-ref? (set! g (build-path g "index.shtml")))))])
 
            (when (and (member link-type '("online-exercise" "opt-online-exercise"))
@@ -1228,6 +1249,7 @@
   (set! *chapters-used* '())
   (set! *textbooks-represented* '())
   (set! *practices-merited* '())
+  (set! *practice-categories-represented* '())
   (set! *lesson-prereqs* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
@@ -2082,47 +2104,46 @@
                              chapter-lessons) ";")))])))
     (fprintf o "\n\n")))
 
-(define (create-practices-section o)
-  (fprintf o "\n[~a.practices-practices]\n"
-           (if *lesson* "" ".coverageElement"))
-  (fprintf o (if *lesson* ".Practices" "== Practices\n\n"))
-  (for ([p *practices-merited*])
-    (let ([p-name (list-ref p 0)]
-          [p-lessons (unbox (list-ref p 1))]
-          [p-desc #f])
-      (let ([c (assoc p-name *flat-practices-list*)])
-        (when c (set! p-desc (cadr c))))
-      ; (printf "p-name = ~s\n" p-name)
-      ; (printf "p-lessons = ~s\n" p-lessons)
-      (cond [*lesson* (display p-name o) (display #\space o)]
-            [else
-              ; (fprintf o "~a:: {nbsp}\n\n" p)
-              (fprintf o "~a::" p-name)
-              (when p-desc
-                (fprintf o " ~a." p-desc))
-              (when (> (length p-lessons) 0)
-                (fprintf o " {startsb}See: ~a.{endsb}"
-                         (string-join
-                           (map
-                             (lambda (x)
-                               (let ([ltitle (list-ref x 0)]
-                                     [lesson (list-ref x 1)]
-                                     [pwy (list-ref x 2)])
-                                 (cond [pwy
-                                         (cond [(string=? pwy "algebra-pyret")
-                                                (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                               [(string=? pwy "algebra-wescheme")
-                                                (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                         (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                  lesson ltitle)]
-                                       [else
-                                         (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                 lesson *target-pathway* ltitle)])))
-                             p-lessons) ";"))
-                         )
-              (fprintf o "\n\n")
-              ])))
-  (fprintf o "\n\n"))
+(define (create-practices-section practice-categ practices o)
+  ; (printf "doing create-practices-section ~s ~s\n" practice-categ practices)
+  (unless (empty? practices)
+    (fprintf o "\n[~a.practices-~a]\n"
+             (if *lesson* "" ".coverageElement") (sanitize-css-id practice-categ))
+    (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
+             (expand-practice-abbrev practice-categ))
+    (for ([p practices])
+      (let ([p-name (list-ref p 0)]
+            [p-desc (list-ref p 1)]
+            [p-lessons (unbox (list-ref p 3))])
+        (cond [*lesson* (display p-name o) (display #\space o)]
+              [else
+                ; (fprintf o "~a:: {nbsp}\n\n" p)
+                (fprintf o "~a::" p-name)
+                (when p-desc
+                  (fprintf o " ~a." p-desc))
+                (when (> (length p-lessons) 0)
+                  (fprintf o " {startsb}See: ~a.{endsb}"
+                           (string-join
+                             (map
+                               (lambda (x)
+                                 (let ([ltitle (list-ref x 0)]
+                                       [lesson (list-ref x 1)]
+                                       [pwy (list-ref x 2)])
+                                   (cond [pwy
+                                           (cond [(string=? pwy "algebra-pyret")
+                                                  (set! ltitle (string-append ltitle "^(Pyret)^"))]
+                                                 [(string=? pwy "algebra-wescheme")
+                                                  (set! ltitle (string-append ltitle "^(WeScheme)^"))])
+                                           (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                   lesson ltitle)]
+                                         [else
+                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                   lesson *target-pathway* ltitle)])))
+                               p-lessons) ";"))
+                  )
+                (fprintf o "\n\n")
+                ])))
+    (fprintf o "\n\n")))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
@@ -2232,10 +2253,16 @@
                             *textbooks-represented*)
                        "")))
 
-               (if (empty? *practices-merited*) ""
-                   (enclose-tag "option" ""
-                     #:attribs (format "value=\"practices-practices\"")
-                     "Practices"))
+               (if (empty? *practice-categories-represented*) ""
+                   (enclose-tag "optgroup" ""
+                     #:attribs "label=\"Practices\""
+                     (string-join
+                       (map (lambda (pce)
+                              (enclose-tag "option" ""
+                                #:attribs (format "value=\"practices-~a\"" (sanitize-css-id pce))
+                                pce))
+                            *practice-categories-represented*)
+                       "")))
 
                )) o)
   (newline o)
@@ -2285,8 +2312,13 @@
           textbook-chapters-used o)))))
 
 (define (create-practices-subfile-port o)
+  ; (printf "doing create-practices-subfile-port with practices-merited= ~s\n" *practices-merited*)
+  ; (printf "practice-categories-repd= ~s\n" *practice-categories-represented*)
   (unless (empty? *practices-merited*)
-    (create-practices-section o)))
+    (for ([practice-categ *practice-categories-represented*])
+      (let ([practices-in-this-categ
+              (filter (lambda (s) (string=? (list-ref s 2) practice-categ)) *practices-merited*)])
+        (create-practices-section practice-categ practices-in-this-categ o)))))
 
 (define (create-standards-subfile)
   (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])

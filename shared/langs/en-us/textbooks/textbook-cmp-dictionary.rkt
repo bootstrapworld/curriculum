@@ -15,25 +15,25 @@
     "Comparing Bits and Pieces: Ratios, Rational Numbers and Equivalence")
 
   ("CMP.6.3" 
-    "Let’s be Rational: Understanding Fraction Operations ")
+    "Let’s be Rational: Understanding Fraction Operations")
 
   ("CMP.6.4" 
     ; The DR recipes we made for OK in restating the problem could connect nicely here, but it feels like a bit of a stretch to suggest that they would just pop into DR here.
-    "Covering and Surrounding: Two Dimensional Measurement ")
+    "Covering and Surrounding: Two Dimensional Measurement")
 
   ("CMP.6.5" 
-    "Decimal Ops: Computing with Decimals and Percents ")
+    "Decimal Ops: Computing with Decimals and Percents")
 
   ("CMP.6.6" 
     ; coordinates lesson could be an extension for this lesson if we figured out how to communicate that to teachers
     "Variables and Patterns: Focus on Algebra") 
 
   ("CMP.6.7" 
-    "Data About Us: Statistics and Data Analysis ")
+    "Data About Us: Statistics and Data Analysis")
 
   ("CMP.7.1"
     ; image functions from the contracts lesson could be a really nice extension activity for this unit. 
-    "Shapes and Designs: Two Dimensional Geometry ")
+    "Shapes and Designs: Two Dimensional Geometry")
 
   ("CMP.7.2" "Accentuate the Negative: Integers and Rational Numbers")
 
@@ -47,7 +47,7 @@
 
   ("CMP.7.5" 
     ;There are also some DR problems connected to this unit.
-    "Moving Straight Ahead: Linear Relationships ")
+    "Moving Straight Ahead: Linear Relationships")
 
   ("CMP.7.6" 
     ; This feels like a gap in our materials that we might fill soon?
@@ -62,7 +62,7 @@
     "Samples and Populations: Making Comparisons and Predictions")
   
   ("CMP.8.1" 
-    "Thinking with Mathematical Models: Linear and Inverse Variations ")
+    "Thinking with Mathematical Models: Linear and Inverse Variations")
 
   ("CMP.8.2" 
     "Looking for Pythagoras: The Pythagorean Theorem")
