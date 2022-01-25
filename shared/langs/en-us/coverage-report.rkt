@@ -41,8 +41,10 @@
     (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
   (display "</optgroup>\n" o)
   ;
+  (display "<optgroup label=\"Practices\">\n" o)
   (for ([categ *practices-list*])
     (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
+  (display "</optgroup>\n" o)
   (display "</select>\n" o)
   (display "++++\n" o))
 
