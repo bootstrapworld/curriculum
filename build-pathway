@@ -1751,6 +1751,7 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
+  # echo doing collectworkbookpages in $(pwd)
   # echo doing collectworkbookpages $d
   cd "$d"
   if test -d pages; then
@@ -1769,7 +1770,9 @@ function collectworkbookpages() {
         # echo finding aspect of "$f"
         aspect=portrait
         g=$f
-        if echo "$f"|grep -q landscape; then
+        if echo "$f"|grep -q '^ *;'; then
+          :
+        elif echo "$f"|grep -q landscape; then
           echo $f >> .cached/.workbook-pages.txt.kp
           g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
           echo $g >> .cached/.workbook-pages-ls.txt.kp
