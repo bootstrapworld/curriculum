@@ -520,7 +520,7 @@ function lintlesson() {
 
   test $LINT || return
 
-  for g in Prerequisites 'Lesson Goals' Materials Preparation 'Relevant Standards'; do
+  for g in 'Lesson Goals' Materials Preparation; do
     if ! grep -q "^<p>$g\>" $f; then
       echo
       echo WARNING: Lesson $containingFile missing summary-table row for \"$g\"
@@ -2578,8 +2578,6 @@ echo ')' >> $ADOCABLES_INPUT
 
 doconversions
 
-dolinkcheck
-
 collectprimitives
 
 echo BUILDING PAGELIST JSON FOR LESSONS
@@ -2593,6 +2591,8 @@ buildpathwaytocs
 makebilingualglossary
 
 batchhtmltopdf
+
+dolinkcheck
 
 if test ! $NOPDF; then
 
