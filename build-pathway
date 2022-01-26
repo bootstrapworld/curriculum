@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-25 # last modified
+LASTMOD=2022-01-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1785,11 +1785,11 @@ function collectworkbookpages() {
           echo $f >> .cached/.workbook-pages.txt.kp
           echo $f >> .cached/.workbook-pages-ls.txt.kp
         else
-          if test -f $f && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
+          if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
             echo $f landscape >> .cached/.workbook-pages.txt.kp
             echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
-          elif test -f $g && head -n 60 "$g"|grep -q 'body.*landscape'; then
+          elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
             echo $f landscape >> .cached/.workbook-pages.txt.kp
             echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
