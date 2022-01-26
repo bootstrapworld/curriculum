@@ -19,7 +19,6 @@
 (require "textbooks/lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
-;(require "draw-dep-diag.rkt")
 
 (provide
   assoc-standards
@@ -153,8 +152,8 @@
       (call-with-input-file *copyright-info-file* read)
       '()))
 
-(cond ((assoc "name" *copyright-info*) =>
-       (lambda (c) (set! *copyright-name* (cadr c)))))
+(cond [(assoc "name" *copyright-info*)
+       => (lambda (c) (set! *copyright-name* (cadr c)))])
 
 (define *glossary-items* '())
 
@@ -266,7 +265,7 @@
   ; (printf "doing assoc-standards ~s\n" std)
   (let ([c #f]
         [dict #f])
-    (for ((x *disallowed-standards-list*))
+    (for ([x *disallowed-standards-list*])
       (unless c
         (let ([stds-list (caddr x)])
           (set! c (assoc std stds-list)))))
@@ -752,9 +751,9 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (system-echo cmd . args)
-  (let* ((x (apply process* cmd args))
-         (i (car x))
-         (result (format "~a" (read i))))
+  (let* ([x (apply process* cmd args)]
+         [i (car x)]
+         [result (format "~a" (read i))])
     (close-input-port i)
     (close-output-port (cadr x))
     (close-input-port (cadddr x))
@@ -899,9 +898,9 @@
                  (set! link-text (call-with-input-file lesson-title-file read-line)))))
 
            (let ([link-output
-                   (cond ((or *lesson-plan* *teacher-resources*)
-                          (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text))
-                         (else (format "link:pass:[~a][~a]" g link-text)))])
+                   (cond [(or *lesson-plan* *teacher-resources*)
+                          (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text)]
+                         [else (format "link:pass:[~a][~a]" g link-text)])])
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
@@ -937,12 +936,6 @@
 
 (define *lesson-summary-file* #f)
 
-(define *asciidoctor*
-  (format "asciidoctor -a linkcss -a proglang=~a -a pathway=~a -a stylesheet=~alib/curriculum.css"
-          *proglang*
-          (getenv "SRCPATHWAY")
-          *lang-root-dir*))
-
 (define *standards-dictionaries*
   (map car *standards-list*))
 
@@ -970,8 +963,8 @@
       (newline o))))
 
 (define (display-title i o out-file)
-  (let* ((title (read-line i))
-         (title-txt (string-trim (regexp-replace "^=+ *" title ""))))
+  (let* ([title (read-line i)]
+         [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
     (set! *page-title* title-txt)
     (unless *other-dir*
       (let ([title-file (path-replace-extension out-file ".titletxt")]
@@ -1052,7 +1045,6 @@
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
-    ;(draw-dependency-diagram lessons o)
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       ;(printf "tackling lesson ~s\n" lesson)
@@ -1090,105 +1082,113 @@
         (newline o)))
     (fprintf o "link:./.pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
     (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
-    (call-with-output-file (build-path *containing-directory* ".pathway-lessons.asciidoc")
-      (lambda (lo)
+    (let ([lo (open-output-file
+                (build-path *containing-directory* ".pathway-lessons.asciidoc")
+                #:exists 'replace)]
+          [toco (open-output-file
+                  (build-path *containing-directory* ".pathway-lessons-toc.asciidoc")
+                  #:exists 'replace)]
+          [st-o (open-output-file
+                  (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
+                  #:exists 'replace)]
+          [tb-o (open-output-file
+                  (build-path *containing-directory* ".cached" ".textbooks-in-pathway.txt.kp")
+                  #:exists 'replace)]
+          [pr-o (open-output-file
+                  (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
+                  #:exists 'replace)])
         (fprintf lo "= Lessons Used in This Pathway\n\n")
         (fprintf lo ":frompathwayroot: ../../../\n\n")
         (fprintf lo "include::~a/.pathway-lessons-toc.asciidoc[]\n\n" *containing-directory*)
-        (call-with-output-file (build-path *containing-directory* ".pathway-lessons-toc.asciidoc")
-          (lambda (toco)
-            (fprintf toco "[verse]\n")
-            (call-with-output-file (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
-              (lambda (st-o)
-                (call-with-output-file (build-path *containing-directory* ".cached" ".textbooks-in-pathway.txt.kp")
-                  (lambda (tb-o)
-                    (call-with-output-file (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
-                      (lambda (pr-o)
-                        (for ((lesson lessons))
-                          ;(printf "tackling lesson i ~s\n" lesson)
-                          (let ([lesson-asc-file
-                                  (format "lessons/~a/.cached/.index.asc" lesson)]
-                                [lesson-glossary-file
-                                  (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
-                                [lesson-standards-file
-                                  (format "lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
-                                [lesson-chapters-file
-                                  (format "lessons/~a/.cached/.lesson-chapters.txt.kp" lesson)]
-                                [lesson-practices-file
-                                  (format "lessons/~a/.cached/.lesson-practices.txt.kp" lesson)]
-                                [lesson-title-file
-                                  (format "lessons/~a/.cached/.index.titletxt" lesson)]
-                                [lesson-title lesson]
-                                )
+        (fprintf toco "[verse]\n")
+        (for ([lesson lessons])
+          ;(printf "tackling lesson i ~s\n" lesson)
+          (let ([lesson-asc-file
+                  (format "lessons/~a/.cached/.index.asc" lesson)]
+                [lesson-glossary-file
+                  (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
+                [lesson-standards-file
+                  (format "lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
+                [lesson-chapters-file
+                  (format "lessons/~a/.cached/.lesson-chapters.txt.kp" lesson)]
+                [lesson-practices-file
+                  (format "lessons/~a/.cached/.lesson-practices.txt.kp" lesson)]
+                [lesson-title-file
+                  (format "lessons/~a/.cached/.index.titletxt" lesson)]
+                [lesson-title lesson]
+                )
 
-                            (when (file-exists? lesson-title-file)
-                              ;(printf "~a exists i\n" lesson-title-file)
-                              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+            (when (file-exists? lesson-title-file)
+              ;(printf "~a exists i\n" lesson-title-file)
+              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
-                            (when (file-exists? lesson-glossary-file)
-                              ;(printf "~a exists i\n" lesson-glossary-file)
-                              (call-with-input-file lesson-glossary-file
-                                (lambda (i)
-                                  (let loop ()
-                                    (let ([x (read i)])
-                                      (unless (eof-object? x)
-                                        (let ([s (assoc-glossary x *natlang-glossary-list*)])
-                                          (cond [s (unless (member s *glossary-items*)
-                                                     (set! *glossary-items*
-                                                       (cons s *glossary-items*)))]))
-                                        (loop)))))))
-                            ;(printf "took care of pw glossary~n")
+            (when (file-exists? lesson-glossary-file)
+              ;(printf "~a exists i\n" lesson-glossary-file)
+              (call-with-input-file lesson-glossary-file
+                (lambda (i)
+                  (let loop ()
+                    (let ([x (read i)])
+                      (unless (eof-object? x)
+                        (let ([s (assoc-glossary x *natlang-glossary-list*)])
+                          (cond [s (unless (member s *glossary-items*)
+                                     (set! *glossary-items*
+                                       (cons s *glossary-items*)))]))
+                        (loop)))))))
+            ;(printf "took care of pw glossary~n")
 
-                            ; (printf "*** ~s's ~s exists? ~s\n" lesson lesson-standards-file (file-exists? lesson-standards-file))
+            ; (printf "*** ~s's ~s exists? ~s\n" lesson lesson-standards-file (file-exists? lesson-standards-file))
 
-                            (when (file-exists? lesson-standards-file)
-                              ;(printf "~a exists i\n" lesson-standards-file)
-                              (call-with-input-file lesson-standards-file
-                                (lambda (i)
-                                  (let loop ()
-                                    (let ([x (read i)])
-                                      (unless (eof-object? x)
-                                        (add-standard x lesson-title lesson #f)
-                                        (fprintf st-o "(~s ~s ~s)\n" x lesson-title lesson)
-                                        (loop)))))))
+            (when (file-exists? lesson-standards-file)
+              ;(printf "~a exists i\n" lesson-standards-file)
+              (call-with-input-file lesson-standards-file
+                (lambda (i)
+                  (let loop ()
+                    (let ([x (read i)])
+                      (unless (eof-object? x)
+                        (add-standard x lesson-title lesson #f)
+                        (fprintf st-o "(~s ~s ~s)\n" x lesson-title lesson)
+                        (loop)))))))
 
-                            ;(printf "took care of pw stds~n")
+            ;(printf "took care of pw stds~n")
 
-                            (when (file-exists? lesson-chapters-file)
-                              (call-with-input-file lesson-chapters-file
-                                (lambda (i)
-                                  (let loop ()
-                                    (let ([x (read i)])
-                                      (unless (eof-object? x)
-                                        (add-textbook-chapter x lesson-title lesson #f)
-                                        (fprintf tb-o "(~s ~s ~s)\n" x lesson-title lesson)
-                                        (loop)))))))
+            (when (file-exists? lesson-chapters-file)
+              (call-with-input-file lesson-chapters-file
+                (lambda (i)
+                  (let loop ()
+                    (let ([x (read i)])
+                      (unless (eof-object? x)
+                        (add-textbook-chapter x lesson-title lesson #f)
+                        (fprintf tb-o "(~s ~s ~s)\n" x lesson-title lesson)
+                        (loop)))))))
 
-                            (when (file-exists? lesson-practices-file)
-                              (call-with-input-file lesson-practices-file
-                                (lambda (i)
-                                  (let loop ()
-                                    (let ([x (read i)])
-                                      (unless (eof-object? x)
-                                        (add-practice x lesson-title lesson #f)
-                                        (fprintf pr-o "(~s ~s ~s)\n" x lesson-title lesson)
-                                        (loop)))))))
+            (when (file-exists? lesson-practices-file)
+              (call-with-input-file lesson-practices-file
+                (lambda (i)
+                  (let loop ()
+                    (let ([x (read i)])
+                      (unless (eof-object? x)
+                        (add-practice x lesson-title lesson #f)
+                        (fprintf pr-o "(~s ~s ~s)\n" x lesson-title lesson)
+                        (loop)))))))
 
-                            ;(unless (file-exists? lesson-asc-file)
-                            ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
+            ;(unless (file-exists? lesson-asc-file)
+            ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
 
-                            (when (file-exists? lesson-asc-file)
-                              ;(printf "~a exists i\n" lesson-asc-file)
-                              (fprintf lo "[[~a]]~n" lesson)
-                              (fprintf toco "<<~a>>~n" lesson)
-                              (fprintf lo "== ~a\n" lesson-title)
-                              (fprintf lo "\ninclude::lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
-                                       lesson)))))
-                      #:exists 'replace))
-                  #:exists 'replace))
-              #:exists 'replace))
-          #:exists 'replace))
-      #:exists 'replace)
+            (when (file-exists? lesson-asc-file)
+              ;(printf "~a exists i\n" lesson-asc-file)
+              (fprintf lo "[[~a]]~n" lesson)
+              (fprintf toco "<<~a>>~n" lesson)
+              (fprintf lo "== ~a\n" lesson-title)
+              (fprintf lo "\ninclude::lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
+                       lesson))))
+
+    (close-output-port lo)
+    (close-output-port toco)
+    (close-output-port st-o)
+    (close-output-port tb-o)
+    (close-output-port pr-o)
+
+    )
     (newline o)))
 
 (define (create-vspace ht)
@@ -1305,7 +1305,6 @@
                            #:target-pathway [target-pathway #f]
                            #:proglang [proglang "pyret"]
                            #:solutions-mode [solutions-mode #f]
-                           #:z [z -1]
                            )
 
   (set! *containing-directory* containing-directory)
@@ -1336,11 +1335,9 @@
       (when (or *link-lint?* #t)
         (let ([internal-links-file (path-replace-extension out-file ".internal-links.txt.kp")]
               [external-links-file (path-replace-extension out-file ".external-links.txt.kp")])
-          (when (file-exists? internal-links-file) (delete-file internal-links-file))
-          (when (file-exists? external-links-file) (delete-file external-links-file))
           ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
-          (set! *internal-links-port* (open-output-file internal-links-file))
-          (set! *external-links-port* (open-output-file external-links-file))))
+          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
+          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
       ;
       ;
       (when *lesson-plan*
@@ -1418,10 +1415,6 @@
                                         (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
                                       (printf "WARNING: Item ~s not found in glossary\n\n"
                                               arg)]))]
-                           [(string=? directive "std")
-                            (let ([args (read-commaed-group i directive)])
-                              (printf "WARNING: Directive @std is obsolete\n\n")
-                              )]
                            [(or (string=? directive "prereqs-stds")
                                 (string=? directive "lesson-prereqs"))
                             (add-lesson-prereqs (read-commaed-group i directive))
@@ -1924,13 +1917,6 @@
 
       )))
 
-(define (asciidoctor asc-file html-file)
-  ;(printf "asciidoctor ~a with pathwayrootdir=~a\n" file *pathway-root-dir*)
-  (system (format "~a -a pathwayrootdir=~a ~a -o ~a" *asciidoctor*
-                  *pathway-root-dir* asc-file html-file))
-  (void)
-  )
-
 (define (display-exercise-collation o)
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
   ;(printf "pwrd = ~s\n" *pathway-root-dir*)
@@ -2293,7 +2279,7 @@
 (define (create-standards-subfile-port o)
   (unless (empty? *standards-met*)
 
-    (for ((dict *dictionaries-represented*))
+    (for ([dict *dictionaries-represented*])
       (let ([dict-standards-met
               (filter (lambda (s) (string=? (list-ref s 2) dict))
                       *standards-met*)])
@@ -2425,17 +2411,17 @@
   (append *common-infix-ops* '(expt)))
 
 (define (infix-op? e #:pyret [pyret #f])
-  (cond ((not (list? e)) (memq e (if pyret *pyret-infix-ops* *arith-infix-ops*)))
-        ((memq (car e) '(?ANSWER ?ANS))
-         (let ((a (cadr e)))
-           (memq a (if pyret *pyret-infix-ops* *arith-infix-ops*))))
-        (else #f)))
+  (cond [(not (list? e)) (memq e (if pyret *pyret-infix-ops* *arith-infix-ops*))]
+        [(memq (car e) '(?ANSWER ?ANS))
+         (let ([a (cadr e)])
+           (memq a (if pyret *pyret-infix-ops* *arith-infix-ops*)))]
+        [else #f]))
 
 (define (answer->hole e)
-  (let ((n (string-length (format "~a" e))))
-    (cond ((< n 3) 'BSLeaveAHoleHere)
-          ((< n 10) 'BSLeaveAHoleHere2)
-          (else 'BSLeaveAHoleHere3))))
+  (let ([n (string-length (format "~a" e))])
+    (cond [(< n 3) 'BSLeaveAHoleHere]
+          [(< n 10) 'BSLeaveAHoleHere2]
+          [else 'BSLeaveAHoleHere3])))
 
 (define (answer-fill-length e)
   (let ([n (string-length (format "~a" e))])
