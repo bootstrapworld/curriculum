@@ -46,16 +46,9 @@
 
 (define *containing-directory* "")
 
-(unless (member *proglang* '("pyret" "wescheme" "codap"))
-  (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
-
 (define *pyret?* #f)
 
 (define *solutions-mode?* #f)
-
-(define *workbook-page?* (truthy-getenv "WORKBOOKPAGE")) ;FIXME
-
-; (define *pathway* (or (truthy-getenv "SRCPATHWAY") "")) ;fixme
 
 (define *pathway* "BOGUSPATHWAY")
 
@@ -530,15 +523,18 @@
 
 (define (display-practices-bar o)
   ;(printf "doing display-practices-bar\n")
-  (display (create-begin-tag "div" ".sidebarpractices") o)
-  (display "*Practices in this Lesson*" o)
-  (display "\n\n" o)
-  (display (create-begin-tag "ul" "") o)
   (cond [(null? *practices-merited*)
          (when *lesson-plan*
-           (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))]
+           (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))
+         (display (create-begin-tag "div" ".sidebarpractices") o)
+         (display "*Practices in this Lesson*: _None_" o)
+         (display (create-end-tag "div") o)
+         (newline o) ]
         [else
           ;(printf "Pracices are present for ~s\n" *lesson-plan*)
+          (display (create-begin-tag "div" ".sidebarpractices") o)
+          (display "*Practices in this Lesson*" o)
+          (display "\n\n" o)
           (for ([practice *practices-merited*])
             (let* ([p (car practice)]
                    [practice-desc (assoc p *flat-practices-list*)])
@@ -548,10 +544,10 @@
                       (display (cadr practice-desc) o)
                       (newline o)]
                     [else
-                      (printf "WARNING: Practice ~a not found\n" practice)])))])
-  (display "\n\n" o)
-  (display (create-end-tag "div") o)
-  (newline o))
+                      (printf "WARNING: Practice ~a not found\n" practice)])))
+          (display "\n\n" o)
+          (display (create-end-tag "div") o)
+          (newline o)]))
 
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
@@ -812,6 +808,7 @@
               adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
+  ; (printf "doing check-link ~s ~s\n" f external?)
   (when (or *link-lint?* #t)
     (cond [external? (display f *external-links-port*)
                      (newline *external-links-port*)]
@@ -841,6 +838,7 @@
     (cond [(string=? f "") #f]
           [(regexp-match #rx"://" f) (set! external-link? #t)]
           [(regexp-match #rx"^mailto:" f) (set! external-link? #t)]
+          [(regexp-match #rx"^javascript:" f) #f]
           [(regexp-match #rx"^#" f) #f]
           [else (set! f (string-append *containing-directory* "/" f))])
     ; (printf "ext link = ~s\n" external-link?)
@@ -851,6 +849,7 @@
                  [(regexp-match #rx"://" f)
                   (check-link f #:external? #t)]
                  [(regexp-match #rx"^mailto:" f) #f]
+                 [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    ;fixme following probly obsolete?
@@ -1260,6 +1259,9 @@
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
 
+  (unless (member *proglang* '("pyret" "wescheme" "codap"))
+    (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
+
   (set! *pyret?* (string=? *proglang* "pyret"))
 
   (when (and *lesson-plan* (not *lesson*))  ;fixme, we shouldn't be relying on this!
@@ -1301,7 +1303,6 @@
                            #:other-dir [other-dir #f]
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
-                           #:workbook-page [workbook-page #f]  ;FIXME, not used?
                            #:proglang [proglang "pyret"]
                            #:solutions-mode [solutions-mode #f]
                            #:z [z -1]
