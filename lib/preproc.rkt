@@ -812,6 +812,7 @@
               adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
+  ; (printf "doing check-link ~s ~s\n" f external?)
   (when (or *link-lint?* #t)
     (cond [external? (display f *external-links-port*)
                      (newline *external-links-port*)]
@@ -841,6 +842,7 @@
     (cond [(string=? f "") #f]
           [(regexp-match #rx"://" f) (set! external-link? #t)]
           [(regexp-match #rx"^mailto:" f) (set! external-link? #t)]
+          [(regexp-match #rx"^javascript:" f) #f]
           [(regexp-match #rx"^#" f) #f]
           [else (set! f (string-append *containing-directory* "/" f))])
     ; (printf "ext link = ~s\n" external-link?)
@@ -851,6 +853,7 @@
                  [(regexp-match #rx"://" f)
                   (check-link f #:external? #t)]
                  [(regexp-match #rx"^mailto:" f) #f]
+                 [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    ;fixme following probly obsolete?
