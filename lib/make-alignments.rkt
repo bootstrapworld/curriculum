@@ -2,8 +2,6 @@
 
 #lang racket
 
-(require "defines.rkt")
-(require "html-tag-gen.rkt")
 (require "utils.rkt")
 (require "preproc.rkt")
 

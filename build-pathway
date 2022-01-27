@@ -2481,9 +2481,17 @@ function doconversions() {
 function dolinkcheck() {
   test $LINT || return
 
+  local timestart=`date +%s`
+  echo 👨‍💻CHECKING LINKS
+  echo '-----------------------------------------------------------'
+
   find . -type f -name \.\*external-links.txt.kp | xargs $PROGDIR/checkexternallinks
 
   find . -type f -name \.\*internal-links.txt.kp | xargs $PROGDIR/checkinternallinks
+
+  local timeend=`date +%s`
+  echo \ Completed in $((timeend-timestart)) s
+  echo " "
 
 }
 
@@ -2581,6 +2589,7 @@ doconversions
 collectprimitives
 
 echo BUILDING PAGELIST JSON FOR LESSONS
+echo " "
 
 callonARGS buildworkbookjsons
 
