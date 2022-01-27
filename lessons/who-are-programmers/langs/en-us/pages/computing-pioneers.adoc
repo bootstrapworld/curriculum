@@ -70,7 +70,7 @@ const { PDFDocument, rgb, degrees } = PDFLib
 
 async function printPioneers() {
   	const pdfDoc = await PDFDocument.create();
-	urls = pioneers.map(p => `../pdfs/${p}.pdf`);
+	urls = pioneers.map(p => `../pages/${p}.pdf`);
     for (const url of urls) {
 	    const page = pdfDoc.addPage();
 	    const bytes = await fetch(url).then((res) => res.arrayBuffer());
