@@ -60,7 +60,7 @@ list.className = "thumbnailList";
 
 pioneers.forEach((p) => {
 	var li = document.createElement('li');
-	li.innerHTML = `<a href="../pdfs/${p}.pdf"><img src="../thumbs/${p}.png"></a>`;
+	li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../images/${p}.png"></a>`;
 	list.appendChild(li);
 });
 document.getElementsByClassName('thumbnails').item(0).appendChild(list);
@@ -81,7 +81,7 @@ async function printPioneers() {
 	      y: (page.getHeight() / 2) - dimensions.height / 2,
 	    };
 	    page.drawPage(embedded, {...dimensions, ...pageSettings});
-	});
+	};
 	const pdfBytes = await pdfDoc.save()
 	download(pdfBytes, "ComputingPioneers.pdf", "application/pdf");
 }
