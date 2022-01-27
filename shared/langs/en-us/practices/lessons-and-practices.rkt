@@ -4,6 +4,10 @@
 
 (define *lessons-and-practices*
   '(
+
+; dummy alignments for sample lessons
+    ("__sample-lesson" "SJ.1")
+    ("zample-lesson" "SJ.1")
 ; core
 
     ("who-are-programmers" 
@@ -53,10 +57,14 @@
 ; math
    
     ("combinatorics-permutation"
-        )
+        "MP.4"
+        "MP.7"
+        "SEP.5")
 
     ("combinatorics-combination"
-        )
+        "MP.4"
+        "MP.7"
+        "SEP.5")
 
     ("coordinates" 
         "MP.2"
@@ -328,6 +336,8 @@
         )
 
     ("re-refactoring" 
+        "P3"
+        "P4"
         )
 
     ("re-your-own-drawing-functions" 
@@ -335,23 +345,37 @@
         )
 
     ("re-build-your-own-animation" 
+        "P3"
+        "P4"
         )
 
     ("re-adding-collisions" 
+        "P3"
+        "P4"
         )
 
     ("re-scoring" 
+        "P4"
+        "P6"
         )
 
     ("re-adding-levels" 
+        "P3"
+        "P6"
         )
 
-    ("re-making-pong" 
+    ("re-making-pong"
+        "P3"
+        "P4"
         )
 
     ("re-nested-structures" 
+        "P3"
+        "P4"
         )
 
     ("re-timers" 
+        "P3"
+        "P4"
         )
 ))
