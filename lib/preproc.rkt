@@ -1757,7 +1757,7 @@
                 (create-standards-subfile)
                 (create-textbooks-subfile))
 
-              (when *narrative*
+              (when (and *narrative* (not title-reached?))
                 (print-course-logo *target-pathway* make-image o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)

@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-26 # last modified
+LASTMOD=2022-01-27 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -777,12 +777,16 @@ function doadoc() {
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
-    echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+    if test $AUTOGEN_NARRATIVE; then
+      echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
+      echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+    fi
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    if test $AUTOGEN_NARRATIVE; then
+      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
+      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    fi
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -1114,6 +1118,7 @@ function buildworkbookpages() {
       echo
       echo WARNING: $L missing pages
       mkdir pages
+      touch pages/workbook-pages.txt
     fi
 
   #echo calling mkdirsolutionversion in buildworkbookpages
@@ -1399,6 +1404,7 @@ function collectprimitives() {
 
 function buildpathwaynarrative() {
   # echo doing buildpathwaynarrative $PWD
+  export AUTOGEN_NARRATIVE=1
   if test ! -f index.adoc; then
     for f in *.adoc; do
       if test -f $f; then
@@ -1409,6 +1415,7 @@ function buildpathwaynarrative() {
   if test ! -f index.adoc; then
     touch index.adoc
   elif test -s index.adoc; then
+    export AUTOGEN_NARRATIVE=
     echo
     echo WARNING: Using custom narrative index.adoc found in pathway $PATHWAY
   fi
@@ -1424,6 +1431,7 @@ function buildpathwaynarrative() {
     export NARRATIVE=
   fi
 
+  export AUTOGEN_NARRATIVE=
   # checklinks index.shtml
   #verifylinks
 
