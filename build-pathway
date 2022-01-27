@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-18 # last modified
+LASTMOD=2022-01-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -36,6 +36,10 @@ MAXBASHTHREADS=20
 
 if test -f ./.build-pathway.rc; then
   . ./.build-pathway.rc
+fi
+
+if test -f ./.build-pathway.env; then
+  . ./.build-pathway.env
 fi
 
 while test $# -ne 0; do
@@ -516,7 +520,7 @@ function lintlesson() {
 
   test $LINT || return
 
-  for g in Prerequisites 'Lesson Goals' Materials Preparation 'Relevant Standards'; do
+  for g in 'Lesson Goals' Materials Preparation; do
     if ! grep -q "^<p>$g\>" $f; then
       echo
       echo WARNING: Lesson $containingFile missing summary-table row for \"$g\"
@@ -765,7 +769,7 @@ function doadoc() {
 
   if test $LESSONPLAN; then
     touch .cached/.index-sidebar.asc
-    touch .cached/.pathway-standards.asc
+    touch .cached/.index-standards.asc
     echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
@@ -776,9 +780,9 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -1394,47 +1398,35 @@ function collectprimitives() {
 }
 
 function buildpathwaynarrative() {
-  #echo doing buildpathwaynarrative
-  local copacetic=1
+  # echo doing buildpathwaynarrative $PWD
   if test ! -f index.adoc; then
     for f in *.adoc; do
-      if test ! -f $f; then copacetic=
+      if test -f $f; then
+        mv $f index.adoc
       fi
     done
   fi
-  #echo copacetic I $copacetic
-  if test ! "$copacetic" -a ! -f index.shtml; then
+  if test ! -f index.adoc; then
+    touch index.adoc
+  elif test -s index.adoc; then
     echo
-    echo WARNING: No narrative in pathway $PATHWAY\; creating one
-    echo "= $PATHWAY" > index.adoc
+    echo WARNING: Using custom narrative index.adoc found in pathway $PATHWAY
   fi
-  if ls *.adoc 2> /dev/null | wc -l | grep -vq '^ *[01]$'; then
-    echo
-    echo WARNING: Too many narratives in pathway $PATHWAY
-  else
-    #cp -p $PROGDIR/*.css .
-    export PATHWAYROOTDIR=./
-    export LESSONSUBDIR=
-    if test ! -f index.adoc; then
-      for f in *.adoc; do
-        if test -f $f; then
-          mv $f index.adoc
-        fi
-      done
-    fi
-    if test index.adoc -nt index.shtml; then
-      echo building pathway narrative: $PATHWAY
-      export NARRATIVE=1
-      rm -f .cached/.index-comment.txt
-      test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
-      doadoc index.adoc
-      export NARRATIVE=
-    fi
 
-    # checklinks index.shtml
-    #verifylinks
-
+  export PATHWAYROOTDIR=./
+  export LESSONSUBDIR=
+  if test index.adoc -nt index.shtml; then
+    echo building pathway narrative: $PATHWAY
+    export NARRATIVE=1
+    rm -f .cached/.index-comment.txt
+    test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
+    doadoc index.adoc
+    export NARRATIVE=
   fi
+
+  # checklinks index.shtml
+  #verifylinks
+
 }
 
 function makeworkbookjson() {
@@ -1759,6 +1751,7 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
+  # echo doing collectworkbookpages in $(pwd)
   # echo doing collectworkbookpages $d
   cd "$d"
   if test -d pages; then
@@ -1777,7 +1770,9 @@ function collectworkbookpages() {
         # echo finding aspect of "$f"
         aspect=portrait
         g=$f
-        if echo "$f"|grep -q landscape; then
+        if echo "$f"|grep -q '^ *;'; then
+          :
+        elif echo "$f"|grep -q landscape; then
           echo $f >> .cached/.workbook-pages.txt.kp
           g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
           echo $g >> .cached/.workbook-pages-ls.txt.kp
@@ -1790,11 +1785,11 @@ function collectworkbookpages() {
           echo $f >> .cached/.workbook-pages.txt.kp
           echo $f >> .cached/.workbook-pages-ls.txt.kp
         else
-          if test -f $f && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
+          if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
             echo $f landscape >> .cached/.workbook-pages.txt.kp
             echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
-          elif test -f $g && head -n 60 "$g"|grep -q 'body.*landscape'; then
+          elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
             echo $f landscape >> .cached/.workbook-pages.txt.kp
             echo $f >> .cached/.workbook-pages-ls.txt.kp
             aspect=landscape
@@ -2214,26 +2209,38 @@ function buildpathwaytocs() {
   echo "}" >> $TOCSFILE
 }
 
-function allthestandards() {
+function allthealignments() {
   cd $TOPDIR
   cd distribution/$NATLANG
   export LANGROOTDIR=./
-  #echo doing allthestandards in $(pwd)
+  #echo doing allthealignments in $(pwd)
   test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
   for d in courses/*; do
     test -d $d || continue
     db=${d%/}
     db=${db##*/}
+
     f=$d/.cached/.standards-in-pathway.txt.kp
     if test -f $f; then
       $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
     fi
-  done
-  $PROGDIR/make-standards.rkt
 
-  echo .cached/.Standards.asc >> $ADOC_INPUT
-  echo .cached/.Standards.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    f=$d/.cached/.textbooks-in-pathway.txt.kp
+    if test -f $f; then
+      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-textbooks.txt
+    fi
+
+    f=$d/.cached/.practices-in-pathway.txt.kp
+    if test -f $f; then
+      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-practices.txt
+    fi
+  done
+
+  $PROGDIR/make-alignments.rkt
+
+  echo .cached/.Alignments.asc >> $ADOC_INPUT
+  echo .cached/.Alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
 
   if test ! $DEBUG; then rm -f *.asc *.txt; fi
 
@@ -2456,7 +2463,7 @@ function doconversions() {
   echo " "
 
   createabyss
-  allthestandards
+  allthealignments
 
   doadocpostproc $ADOC_INPUT
 
@@ -2474,9 +2481,17 @@ function doconversions() {
 function dolinkcheck() {
   test $LINT || return
 
+  local timestart=`date +%s`
+  echo 👨‍💻CHECKING LINKS
+  echo '-----------------------------------------------------------'
+
   find . -type f -name \.\*external-links.txt.kp | xargs $PROGDIR/checkexternallinks
 
   find . -type f -name \.\*internal-links.txt.kp | xargs $PROGDIR/checkinternallinks
+
+  local timeend=`date +%s`
+  echo \ Completed in $((timeend-timestart)) s
+  echo " "
 
 }
 
@@ -2571,11 +2586,10 @@ echo ')' >> $ADOCABLES_INPUT
 
 doconversions
 
-dolinkcheck
-
 collectprimitives
 
 echo BUILDING PAGELIST JSON FOR LESSONS
+echo " "
 
 callonARGS buildworkbookjsons
 
@@ -2586,6 +2600,8 @@ buildpathwaytocs
 makebilingualglossary
 
 batchhtmltopdf
+
+dolinkcheck
 
 if test ! $NOPDF; then
 

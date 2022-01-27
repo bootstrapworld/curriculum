@@ -1,0 +1,58 @@
+
+/* hide/adjust template elements */
+h1, #savetodrive-div, .acknowledgment { display: none !important; }
+#content {
+  margin:     0;
+  padding:    0;
+  height:     99% !important;
+  position:   absolute;
+  text-align: center !important;
+}
+
+a, #content { color: black !important; }
+.posterImage {
+  min-width:    5in;
+  max-width:    7in;
+  border-radius:20px;
+  border:       20px solid black;
+  display:      inline-block;
+}
+.posterImage  p  { margin: 0; padding: 0; display: inline-block;}
+.posterImage img { min-width: 5in; max-width: 7in; max-height: 5.35in;}
+
+.name p, .title p, .text p { 
+  font-family: Helvetica !important; width: 100% !important; margin: 1rem 0;
+}
+.name p, .title p { 
+  line-height:    1; 
+  text-transform: uppercase; 
+  font-weight:    bold  !important;
+}
+.name p  { font-size: 44pt !important; }
+.title p { font-size: 16pt !important; margin-bottom: 2rem;}
+.text p  { font-size: 12pt !important; text-align: justify !important; line-height: 1.3; }
+
+.footer { 
+  font-size:  8pt; 
+  position:   absolute; 
+  bottom:     0; 
+  background: white; 
+  text-align: left !important;
+  width:      7.5in;
+}
+.footer p { width: 5.25in; line-height:  1.2 }
+.footer img { 
+  position: absolute; 
+  width:    200px; 
+  bottom:   0;
+  right:    0;
+  filter:   grayscale(100%); 
+}
+
+@media print {
+  .footer {
+    margin-top: -1.3in; /* always negate the height */
+    bottom: 0 !important;
+    page-break-before: always;
+  }
+}
