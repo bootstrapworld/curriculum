@@ -1042,47 +1042,81 @@ function checklessonplan() {
 
   grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
-  if test -f index.adoc; then
-    #echo collecting exercises in $L
-    $PROGDIR/collect-exercises.rkt index.adoc
-    exerflist=pages/.cached/.exercise-pages-ls.txt.kp
-    if test -f $exerflist; then
-      #echo checklessonplan I
-      exerfA=pages/.cached/.exercise-pages.txt.kp
-      rm -f $exerfA
-      for f in $(cat $exerflist); do
-        #echo checklessonplan II $f
-        aspect=portrait
-        g=$f
-        if test ${f%.adoc} = $f; then
-          echo $f >> $exerfA
-        elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
-          echo $f landscape >> $exerfA
-        else
-          echo $f >> $exerfA
+  local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
+
+  #echo collecting exercises in $L
+  $PROGDIR/collect-exercises.rkt index.adoc
+  exerflist=pages/.cached/.exercise-pages-ls.txt.kp
+  if test -f $exerflist; then
+    #echo checklessonplan I
+    exerfA=pages/.cached/.exercise-pages.txt.kp
+    rm -f $exerfA
+    for f in $(cat $exerflist); do
+      #echo checklessonplan II $f
+      aspect=portrait
+      g=$f
+      if test ${f%.adoc} = $f; then
+        echo $f >> $exerfA
+      elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+        # aspect=landscape # ? FIXME
+        echo $f landscape >> $exerfA
+      else
+        echo $f >> $exerfA
+      fi
+      if test ! $NOPDF; then
+        gext=${g##*.}
+        #echo gext is $gext
+        if test "$gext" = adoc; then
+          gbase=${g%.adoc}
+          g=$gbase.html
+          gext=html
+          gpdf=$gbase.pdf
         fi
-        if test ! $NOPDF; then
-          gext=${g##*.}
-          #echo gext is $gext
-          if test "$gext" = adoc; then
-            gbase=${g%.adoc}
-            g=$gbase.html
-            gext=html
-            gpdf=$gbase.pdf
+        #echo g is $g gext is $gext
+        if test "$gext" = html; then
+          if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
           fi
-          #echo g is $g gext is $gext
-          if test "$gext" = html; then
-            if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-            fi
-            if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-            fi
+          if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
           fi
         fi
-      done
-    fi
+      fi
+    done
   fi
+
+  wbpages=pages/workbook-pages.txt
+  if test ! -f $wbpages; then
+    wbpages=/dev/null
+  fi
+  if test ! -f $exerflist; then
+    exerflist=/dev/null
+  fi
+
+  for f in pages/*.adoc; do
+    test ! -f "$f" && break
+    fpdf=${f%.adoc}.pdf
+    fhtml=${f%.adoc}.html
+    grep -q "$f" $wbpages $exerflist && continue
+    grep -q "$fpdf" $wbpages $exerflist && continue
+    grep -q "$fhtml" $wbpages $exerflist && continue
+
+    aspect=portrait
+    if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+      #aspect=landscape # ? FIXME
+      :
+    fi
+    if test ! $NOPDF; then
+      g=${f#pages/}
+      g=${g%.adoc}
+      if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
+        echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+      fi
+      if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
+        echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+      fi
+    fi
+  done
 
 }
 
