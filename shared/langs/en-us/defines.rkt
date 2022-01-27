@@ -67,17 +67,17 @@
         "\n\n") o)))
 
 (define (print-course-banner course o)
-  (let* ([c (assoc course *course-banners*)]
-         [banr (if c (cadr c) "")])
+  (let ([c (assoc course *course-banners*)])
+    (when c
       (display
         (string-append
           "\n\n"
           "[.course-banner]\n"
           "--\n"
-          banr
+          (cadr c)
           "\n"
           "--"
-          "\n\n") o)))
+          "\n\n") o))))
 
 (define (print-ordering-workbooks course o)
   (let ([c (assoc course *course-workbook-links*)])
