@@ -14,11 +14,11 @@
 (define *textbooks-list*
   (list
     ; nickname expanded-name list URI
-    (list "CMP" #f *cmp-textbook-list* "https://connectedmath.msu.edu/")
-    (list "IM.6" #f *im-6-textbook-list* "https://illustrativemathematics.org/")
-    (list "IM.7" #f *im-7-textbook-list* "https://illustrativemathematics.org/")
-    (list "IM.8" #f *im-8-textbook-list* "https://illustrativemathematics.org/")
-    (list "IM.Alg.1" #f *im-alg-1-textbook-list* "https://illustrativemathematics.org/")
+    (list "CMP" "Connected Math" *cmp-textbook-list* "https://connectedmath.msu.edu/")
+    (list "IM.6" "IM 6 Math™" *im-6-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.7" "IM 7 Math™" *im-7-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.8" "IM 8 Math™" *im-8-textbook-list* "https://illustrativemathematics.org/")
+    (list "IM.Alg.1" "IM Algebra 1" *im-alg-1-textbook-list* "https://illustrativemathematics.org/")
 
     ))
 
