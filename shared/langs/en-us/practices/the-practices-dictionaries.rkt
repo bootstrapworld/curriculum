@@ -15,7 +15,7 @@
 (define *practices-list*
   (list
     ; nickname expanded-name list URI
-    (list "MLR" "Mathematical Learnig Routines" *mlr-practices-list*
+    (list "MLR" "Mathematical Learning Routines" *mlr-practices-list*
           "https://achievethecore.org/peersandpedagogy/developing-math-language-routines/")
     (list "SJ" "Social Justice Standards" *sj-practices-list*
           "https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf")
@@ -28,6 +28,6 @@
 (define (expand-practice-abbrev pce)
   (let ([x (assoc pce *practices-list*)])
     (if x
-        (format "link:~a[~a]" (list-ref x 3) pce)
+        (format "link:~a[~a]" (list-ref x 3) (or (list-ref x 1) pce))
         pce)))
 
