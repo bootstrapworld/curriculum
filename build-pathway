@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-27 # last modified
+LASTMOD=2022-01-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2306,6 +2306,7 @@ function calculatedistrootdir() {
 function postproc_workbookpage() {
   local fhtmlcached=$1
   # echo doing postproc_workbookpage $fhtmlcached
+  export WORKBOOKPAGE=1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
@@ -2320,6 +2321,7 @@ function postproc_workbookpage() {
     resolveabbrevs $fhtml $localDISTROOTDIR
     addproglang $fhtml
   fi
+  export WORKBOOKPAGE=
 }
 
 function postproc_nonotherdir() {
@@ -2433,10 +2435,11 @@ function run_postproc() {
   for smallfile in $bigfile-split*; do
     if test -f "$smallfile"; then
       for fhtml in $(cat $smallfile); do
+        # $postproc_func $fhtml
+      #FIXME: unparallelize for $NOPARALLEL?
         $postproc_func $fhtml &
       done
-      wait
-      #FIXME: unparallelize for $NOPARALLEL?
+      # wait #not needed because there's a superwait enclosing this
     fi
   done
 }
@@ -2462,15 +2465,17 @@ function doadocpostproc() {
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
-  export WORKBOOKPAGE=1
-  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-  export WORKBOOKPAGE=
-  run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT
-  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
-  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
-  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
-  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+  # export WORKBOOKPAGE=1
+  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT &
+  # export WORKBOOKPAGE=
+  run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT &
+  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT &
+  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT &
+  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT &
+  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT &
+  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT &
+
+  wait
 
   end=`date +%s`
   runtime=$((end-start))
