@@ -125,7 +125,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("dominio") "el tipo de datos que espera una función"))
 
     ((en-us ("dot accessor") "a way to extract the values of fields an instance")
-     (es-mx ("accesor de puntos") "Una manera de extraer valores de una estructura de datos"))
+     (es-mx ("punto-accesor") "Una manera de extraer valores de una estructura de datos"))
     
     ((en-us ("driver") "in pair programming, the person who is doing the typing, as directed by the navigator")
      (es-mx ("conductora") "en programación en pareja, la persona que tiene manos en las teclas, y sigue las indicaciones de la navegadora"))
