@@ -1764,6 +1764,7 @@
 
               (when (and *narrative* (not title-reached?))
                 (print-course-logo *target-pathway* make-image o)
+                (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
                 (create-alignments-subfile
