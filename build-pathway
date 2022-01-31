@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-29 # last modified
+LASTMOD=2022-01-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -768,9 +768,16 @@ function doadoc() {
   test -d .cached || mkdir -p .cached
 
   if test $LESSONPLAN; then
+    # echo doing doadoc LESSONPLAN in $(pwd)
+    local otherproglang="#f"
+    if test -f proglang.txt; then
+      if grep -q wescheme proglang.txt; then
+        otherproglang="#t"
+      fi
+    fi
     touch .cached/.index-sidebar.asc
     touch .cached/.index-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang $otherproglang)" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then

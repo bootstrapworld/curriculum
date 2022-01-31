@@ -43,6 +43,8 @@
 
 (define *proglang* "pyret")
 
+(define *other-proglang* #f)
+
 (define *containing-directory* "")
 
 (define *pyret?* #f)
@@ -942,9 +944,10 @@
 (define *page-title* #f)
 
 (define (display-alternative-proglang o)
-  (when (and (string=? *pathway* "algebra")
+  ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglang* *target-pathway* *narrative* *lesson-plan*)
+  (when (and *other-proglang*
              (or *narrative* *lesson-plan*))
-    ;(printf "doing display-alternative-proglang\n")
+    ; (printf "doing display-alternative-proglang really\n")
     (let ([other-proglang-cased (if (string=? *proglang* "pyret") "WeScheme" "Pyret")])
       (display
         (enclose-span ".other-proglang"
@@ -1304,6 +1307,7 @@
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
                            #:proglang [proglang "pyret"]
+                           #:other-proglang [other-proglang #f]
                            #:solutions-mode [solutions-mode #f]
                            )
 
@@ -1314,6 +1318,7 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
+  (set! *other-proglang* other-proglang)
   (set! *solutions-mode?* solutions-mode)
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
