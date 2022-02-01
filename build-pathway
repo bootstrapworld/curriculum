@@ -26,7 +26,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-31 # last modified
+LASTMOD=2022-02-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -773,19 +773,26 @@ function doadoc() {
     # echo doing doadoc LESSONPLAN in $(pwd)
     if test -f proglang.txt; then
       if grep -q wescheme proglang.txt; then
-        otherproglang="#t"
+        otherproglang="$otherproglang \"wescheme\""
       fi
+      if grep -q codap proglang.txt; then
+        otherproglang="$otherproglang \"codap\""
+      fi
+      otherproglang="($otherproglang)"
     fi
     touch .cached/.index-sidebar.asc
     touch .cached/.index-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang $otherproglang)" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
     if test "$SRCPATHWAY" = algebra; then
-      otherproglang="#t"
+      otherproglang="($otherproglang \"wescheme\")"
     fi
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglang $otherproglang)" >> $ADOCABLES_INPUT
+    if test "$SRCPATHWAY" = data-science -o "$SRCPATHWAY" = data-science-codap; then
+      otherproglang="($otherproglang \"codap\")"
+    fi
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     if test $AUTOGEN_NARRATIVE; then

@@ -948,22 +948,45 @@
   (when (and *other-proglang*
              (or *narrative* *lesson-plan*))
     ; (printf "doing display-alternative-proglang really\n")
-    (let ([other-proglang-cased (if (string=? *proglang* "pyret") "WeScheme" "Pyret")])
-      (display
-        (enclose-span ".other-proglang"
-          (format "link:~a~a[(Also available for ~a)]"
-                  *dist-root-dir*
-                  (cond [*narrative*
-                          (let ([other-proglang (if (string=? *proglang* "pyret") "-wescheme" "")])
-                            (format "courses/algebra~a/index.shtml" other-proglang))]
-                        [*lesson-plan*
-                          (let ([other-lesson (if (string=? *proglang* "pyret")
-                                                  (format "~a-wescheme" *lesson-plan*)
-                                                  (regexp-replace "-wescheme$" *lesson-plan* ""))])
-                            (format "lessons/~a/index.shtml" other-lesson))])
-                  other-proglang-cased)) o)
-      (newline o)
-      (newline o))))
+    (display
+      (enclose-span ".other-proglang"
+        (string-append "(Also available in "
+          (string-join
+            (filter (lambda (x) x)
+                    (map (lambda (x)
+                           (cond [(not x) #f]
+                                 [(string=? x "wescheme")
+                                  (cond [*narrative*
+                                          (cond [(member *target-pathway* '("algebra-wescheme" "algebra-pyret"))
+                                                 (format "link:~acourses/algebra-~a/index.shtml[~a]" *dist-root-dir*
+                                                         (if (string=? *proglang* "pyret") "wescheme" "pyret")
+                                                         (if (string=? *proglang* "pyret") "WeScheme" "Pyret"))]
+                                                [else #f])]
+                                        [*lesson-plan*
+                                          (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                                  (if (string=? *proglang* "pyret")
+                                                      (string-append *lesson-plan* "-wescheme")
+                                                      (regexp-replace "-wescheme$" *lesson-plan* ""))
+                                                  (if (string=? *proglang* "pyret") "WeScheme" "Pyret"))]
+                                        [else #f])]
+                                 [(string=? x "codap")
+                                  (cond [*narrative*
+                                          (cond [(member *target-pathway* '("data-science" "data-science-codap"))
+                                                 (format "link:~acourses/data-science~a/index.shtml[~a]" *dist-root-dir*
+                                                         (if (string=? *proglang* "pyret") "-codap" "")
+                                                         (if (string=? *proglang* "pyret") "CODAP" "Pyret"))]
+                                                [else #f])]
+                                        [*lesson-plan*
+                                          (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                                  (if (string=? *proglang* "pyret")
+                                                      (string-append *lesson-plan* "-codap")
+                                                      (regexp-replace "-codap$" *lesson-plan* ""))
+                                                  (if (string=? *proglang* "pyret") "CODAP" "Pyret"))]
+                                        [else #f])]
+                                 [else #f]))
+                         *other-proglang*)) ", ") ")")) o)
+    (newline o)
+    (newline o)))
 
 (define (display-title i o out-file)
   (let* ([title (read-line i)]
