@@ -20,6 +20,10 @@
         "P1"
         ) 
 
+    ("codap-transformers" 
+        "MP.4"
+        )
+
     ("contracts"
          "SEP.8" 
          "MLR.8"
@@ -133,7 +137,7 @@
         "MLR.8"     ; strategy box in lesson
         )
 
-    ("numbers-inside-videogames" 
+    ("numbers-inside-video-games" 
         "MP.2"
         "MP.4"
         )
