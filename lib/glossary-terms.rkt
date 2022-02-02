@@ -19,8 +19,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("apply") "use a given function on some inputs")
      (es-mx ("aplicar") "dar argumentos a una función"))
 
-    ((en-us ("argument" "arguments") "the inputs to a function; expressions for arguments follow the name of a function")
-     (es-mx ("argumento" "argumentos") "las entradas de una función; las expresiones de los argumentos siguen el nombre de una función"))
+    ((en-us ("argument" "arguments") "the inputs to a function; the expressions for each argument follow the function name")
+     (es-mx ("argumento" "argumentos") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
 
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
@@ -123,8 +123,9 @@ información recopilada sobre un individuo particular"))
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
      (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
-    ((en-us ("direction") "the relationship between two quantitative variables: whether they tend to increase together, or whether as one goes up the other tends to go down")
-     (es-mx ("dirección") "la relación entre dos variables cuantitativas - peden incrementarse a la vez o mientras que una de ellas crece la otra decrece"))
+    ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
+     (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen
+juntas o una incrementa mientras la otra decrece"))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
@@ -242,9 +243,8 @@ cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y))"))
     ((en-us ("legal expression") "code that follows the Code Rules for a language")
      (es-mx ("expresión legal") "expresión que sigue las Reglas de Código para un lenguaje de programación"))
     
-    ((en-us ("library" "libraries") "a collection of functions that can be made available to our program by using \"include\" ")
-     (es-mx ("biblioteca") "una colección de funciones las cuales están disponibles en nuestro programa
-usando \"include\" "))
+    ((en-us ("library" "libraries") "a file containing definitions (functions, values, etc) that can be imported into another program")
+     (es-mx ("biblioteca") "un archivo que contiene definiciones (funciones, valores, etc.) que se pueden importar a otro programa"))
     
     ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as a straight line or written as a sequence of numbers that change at a constant rate")
      (es-mx ("lineal" "relación lineal") "una regla que calcula una cantidad a partir de otra, que se puede representar gráficamente como una línea recta o que se puede escribir como una secuencia de números que cambian a una tasa constante"))
