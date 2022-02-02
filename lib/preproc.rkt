@@ -2781,7 +2781,7 @@
     (let* (
       [prefix (cond
                 [(string=? *proglang* "pyret") "# "]
-                [(string=? *proglang* "wescheme") "m "]
+                [(string=? *proglang* "wescheme") "; "]
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
