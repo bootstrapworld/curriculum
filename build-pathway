@@ -13,7 +13,6 @@ export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 export EXPANDEDWARNINGS=
-
 export ASCIIDOCNODE=
 
 #SEMESTER=spring
@@ -48,6 +47,8 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
     :
+  elif test "$arg" = --adocjs; then
+    ASCIIDOCNODE=1
   elif test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=1
   elif test "$arg" = --debug -o "$arg" = -d; then
