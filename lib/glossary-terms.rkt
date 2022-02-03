@@ -29,9 +29,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("eje" "ejes") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
 
     ((en-us ("bar chart" "bar charts") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
-     (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los
-valores de una categoría; la altura de cada barra refleja el número o el
-porcentaje de los valores en esa categoría"))
+     (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
     ((en-us ("bin" "bins") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
@@ -45,8 +43,8 @@ porcentaje de los valores en esa categoría"))
     ((en-us ("calling" "calls") "using a function by giving it inputs")
      (es-mx ("llamada" "llamadas") "Uso de una función dándole valores"))
 
-    ((en-us ("category" "categories") "the set of possible values that a value in a categorical dataset can have")
-     (es-mx("categoría") "el conjunto de valores posibles que puede tener un valor en un conjunto de datos categórico"))
+    ((en-us ("category" "categories") "unique value(s) in a categorical dataset")
+     (es-mx("categoría") "valores únicos en un conjunto de datos categórico"))
 
     ((en-us ("categorical data") "data whose values are qualities that are not subject to the laws of arithmetic.")
      (es-mx ("datos categóricos") "datos cuyos valores son cualidades que no están sujetas a las leyes de la aritmética"))
@@ -64,9 +62,7 @@ porcentaje de los valores en esa categoría"))
      (es-mx ("columna") "conjunto particular de valores en una tabla. Cada fila tiene exactamente 1 elemento en cada columna."))
 
     ((en-us ("combination" "combinations") "the number of possible arrangements in a collection of items where the order of the selection does NOT matter. (ABC and CBA would be considered the same combination.)")
-     (es-mx ("combinación") "el número de arreglos posibles con los elementos de un conjunto, donde el
-orden de los elementos usados NO importa. (ABC y CBA se consideran la
-misma combinación.)"))
+     (es-mx ("combinación") "el número de arreglos posibles con los elementos de un conjunto, donde el orden de los elementos usados NO importa. (ABC y CBA se consideran la misma combinación.)"))
 
     ((en-us ("conditional") "a code expression made of questions and answers")
      (es-mx ("condicional") "una expresión de código compuesta de preguntas y respuestas"))
@@ -93,8 +89,7 @@ misma combinación.)"))
      (es-mx ("bloque de datos") "código que enumera el nombre, los constructores y los elementos de una estructura de datos"))
 
     ((en-us ("data row" "data rows") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
-     (es-mx ("fila de datos") "un conjunto de datos estructurados que usualmente representa toda la
-información recopilada sobre un individuo particular"))
+     (es-mx ("fila de datos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
 
     ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers")
      (es-mx ("Ciencia de Datos") "la ciencia de recopilar, organizar y extraer conclusiones generales a partir de datos, con la ayuda de computadoras"))
@@ -124,8 +119,7 @@ información recopilada sobre un individuo particular"))
      (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
     ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
-     (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen
-juntas o una incrementa mientras la otra decrece"))
+     (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen juntas o una incrementa mientras la otra decrece"))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
@@ -158,8 +152,7 @@ juntas o una incrementa mientras la otra decrece"))
      (es-mx ("programacion basada en eventos") "un estilo de programación en el que se escriben todas las funciones para responder a los clics del ratón, pulsaciones de teclas, etc."))
     
     ((en-us ("example" "examples" "Examples") "shows the use of a function on specific inputs and the computation the function should perform on those inputs")
-     (es-mx ("ejemplos") "muestran el uso de una función con argumentos específicos y el cálculo que
-debe realizar la función con esos argumentos"))
+     (es-mx ("ejemplos") "muestran el uso de una función con argumentos específicos y el cálculo que debe realizar la función con esos argumentos"))
 
     ((en-us ("examples block") "code that lists examples")
      (es-mx ("bloque de ejemplos") "código que enumera ejemplos"))
@@ -189,12 +182,10 @@ debe realizar la función con esos argumentos"))
      (es-mx ("función" "funciones") "un objeto matemático que consume argumentos y produce un resultado"))
     
     ((en-us ("function block") "code that names a function, lists its variables, and states the expression to compute when the function is used")
-     (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión
-a evaluar cuando se utiliza la función"))
+     (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión a evaluar cuando se utiliza la función"))
     
     ((en-us ("function definition" "function definitions") "code that names a function, lists its variables, and states the expression to compute when the function is used")
-     (es-mx ("definición de función") "que designa una función, enumera sus variables e indica la expresión a evaluar
-cuando se utiliza la función"))
+     (es-mx ("definición de función") "que designa una función, enumera sus variables e indica la expresión a evaluar cuando se utiliza la función"))
 
     ((en-us ("frequency" "frequencies") "how often a particular value appears in a dataset")
      (es-mx ("frecuencia") "el número de veces que aparece un valor particular en un conjunto de datos"))
@@ -220,16 +211,14 @@ cuando se utiliza la función"))
     ((en-us ("hypotenuse") "the side opposite the 90-degree angle in a right triangle")
      (es-mx ("hipotenusa") "el lado opuesto al ángulo de 90 grados en un triángulo rectángulo"))
     
-    ((en-us ("identifier column") "a column of unique values which identify all the individual rows (e.g. - 
-    student IDs, SSNs, etc)")
+    ((en-us ("identifier column") "a column of unique values which identify all the individual rows (e.g. - student IDs, SSNs, etc)")
      (es-mx ("columna de identificador") "una columna de valores únicos, que identifican todas las filas (por ejemplo - número de passaporte, número de estudiante, etc.)"))
     
     ((en-us ("image" "images") "a type of data for pictures")
      (es-mx ("imagen") "un tipo de datos para representaciones visuales"))
     
     ((en-us ("instance") "a specific example of a data structure, with specific values for each field (e.g. - (4,5) is an instance of an (x,y) coordinate")
-    (es-mx ("instancia") "un ejemplo específico de una estructura de datos, con valores específicos para
-cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y))"))
+    (es-mx ("instancia") "un ejemplo específico de una estructura de datos, con valores específicos para cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y))"))
     
     ((en-us ("interactions area") "the right-most text box in the Editor, where expressions are entered to be evaluated")
      (es-mx ("área de interacciones") "el cuadro de texto a la derecha en el Editor, donde se ingresan las expresiones para ser evaluadas"))
@@ -268,8 +257,7 @@ cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y))"))
      (es-mx ("mediana") "el elemento intermedio de un conjunto de datos cuantitativos ordenados."))
     
     ((en-us ("method") "a function that is only associated with an instance of a data type, which consumes inputs and produces an output based on that instance")
-     (es-mx ("método") "una función que solo está asociada con una instancia de un tipo de dato; la
-función consume argumentos y produce resultados basado en esa instancia"))
+     (es-mx ("método") "una función que solo está asociada con una instancia de un tipo de dato; la función consume argumentos y produce resultados basado en esa instancia"))
     
     ((en-us ("mode" "modes") "the most commonly appearing categorical or quantitative value or values in a dataset")
      (es-mx ("moda" "modas") "el valor (o valores) que ocurren con mayor frecuencia en un conjunto de datos"))
@@ -413,8 +401,7 @@ función consume argumentos y produce resultados basado en esa instancia"))
      (es-mx ("sintaxis") "El conjunto de reglas que define un lenguaje, ya sea que sea escrito, hablado o programado."))
     
     ((en-us ("syntax error" "syntax errors") "errors where the computer cannot make sense of the code (e.g. - missing commas, missing parentheses, unclosed strings)")
-     (es-mx ("errores de sintaxis") "errores en los que la computadora no puede entender en el código (por ejemplo,
-comas faltantes, paréntesis faltantes, cadenas sin cerrar)"))
+     (es-mx ("errores de sintaxis") "errores en los que la computadora no puede entender en el código (por ejemplo, comas faltantes, paréntesis faltantes, cadenas sin cerrar)"))
     
     ((en-us ("table" "tables") "a data structure that stores data as rows, with entries in particular columns")
      (es-mx ("tabla de datos") "una colección de datos organizados en filas y columnas."))
