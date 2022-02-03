@@ -13,6 +13,7 @@ export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 export EXPANDEDWARNINGS=
+export ASCIIDOCNODE=
 
 #SEMESTER=spring
 #MONTH=$(date +%m)
@@ -26,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-02-01 # last modified
+LASTMOD=2022-02-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -46,6 +47,8 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
     :
+  elif test "$arg" = --adocjs; then
+    ASCIIDOCNODE=1
   elif test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=1
   elif test "$arg" = --debug -o "$arg" = -d; then
@@ -546,12 +549,21 @@ function bumpcsspathdir() {
   cat > $TMPFILE-3.txt <<EOF
   <link rel="stylesheet" href="${localDISTROOTDIR}lib/curriculum.css" />
 EOF
+  if test $ASCIIDOCNODE; then
+  $SED -i \
+    -e '/^<link.*asciidoctor\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
+    -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
+    -e 's/%INSERTLIBCURRICULUMCSS//' \
+    -e 's/<link DISCARD .*asciidoctor\.css.*>//' \
+    $f
+    else
   $SED -i \
     -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
     -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
     -e 's/%INSERTLIBCURRICULUMCSS//' \
     -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
+  fi
 
   #echo deleting $TMPFILE-3.txt
   rm -f $TMPFILE-3.txt
@@ -2470,7 +2482,16 @@ function doadocpostproc() {
   echo 👨‍💻CALLING ASCIIDOCTOR IN BATCH MODE
   echo '-----------------------------------------------------------'
   if test -s $ADOC_INPUT; then
-    asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+    if test ! $ASCIIDOCNODE; then
+      asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+    else
+      echo Trying node asciidoctor!
+      $SED -i -e 's/.*/"\0", /' $ADOC_INPUT
+      $SED -i -e '1s/^/let adocFiles = [/' $ADOC_INPUT
+      echo "]; " >> $ADOC_INPUT
+      echo "module.exports = adocFiles;" >> $ADOC_INPUT
+      node lib/callAdoc.js $ADOC_INPUT
+    fi
   else
     echo No adoc files need conversion!
   fi
@@ -2614,7 +2635,9 @@ echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
 export ADOCABLES_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adocables.rkt
 echo '(' > $ADOCABLES_INPUT
 
-export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.txt.kp
+# export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.txt.kp
+export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.js
+
 rm -f $ADOC_INPUT
 touch $ADOC_INPUT
 
