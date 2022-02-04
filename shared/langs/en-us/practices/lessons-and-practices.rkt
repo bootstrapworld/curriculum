@@ -10,6 +10,8 @@
         "SJ.1"
         "SJ.2"
         "SJ.4"
+        "SJ.7"
+        "SJ.8"
         "SJ.10"
         "P1"
         ) 
@@ -229,6 +231,8 @@
     ("ethics-and-privacy" 
         "MP.3"      ; STEMworks
         "P1" 
+        "SJ.12"
+        "SJ.13"
         )
 
     ("grouped-samples"
@@ -296,6 +300,7 @@
         "MLR.1"
         "MP.2"
         "SEP.3"
+        "SJ.10"
         )
 
     ("scatter-plots"

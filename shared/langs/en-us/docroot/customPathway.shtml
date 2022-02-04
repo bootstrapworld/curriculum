@@ -68,7 +68,7 @@
         }
 
         async function printWorkook(lessons, graph) {
-          const pdfDoc = await PDFDocument.create();
+            const pdfDoc = await PDFDocument.create();
             // print out wb page paths
             var pageUrls = lessons
                 .map(l => graph[l].pages
@@ -79,7 +79,7 @@
                 .map(p => p.replace(".adoc", ".pdf"))
                 .map(p => p.replace(" landscape", ""));
 
-          document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
+            document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
 
         for (const [idx, url] of pageUrls.entries()) {
             const page = pdfDoc.addPage();
