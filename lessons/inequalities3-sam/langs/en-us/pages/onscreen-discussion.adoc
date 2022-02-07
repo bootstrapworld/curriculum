@@ -17,7 +17,11 @@
 
 [.indentedpara]
 
-@show{(sexp->code '(define (onscreen? y) (and (>= y -30) (<= y 510))))}
+@show{(sexp->code '(define (safe-bottom? y) (> y -40)))}
+
+@show{(sexp->code '(define (safe-top? y) (< y 520)))}
+
+@show{(sexp->code '(define (onscreen? y) (and (> y -40) (< y 520))))}
 
 
 @vspace{2ex}
@@ -34,7 +38,7 @@
 
 @vspace{15ex}
 
-@n Which strategy do you prefer?
+@n Which strategy do you prefer? Why?
 
 @vspace{15ex}
 
