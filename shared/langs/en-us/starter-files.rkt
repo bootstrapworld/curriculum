@@ -126,6 +126,10 @@
    ("pyret" "https://code.pyret.org/editor#share=1H1yf0uFJgiT6NBHqW8kh_JjLKHNQRXpH&v=1904b2c")
    ("wescheme" "https://www.wescheme.org/view?publicId=x0nJrP1UYp")
    )
+  ("flags-turkey" "Flag of Turkey Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=17HZOT0Y6rHAmwv8BZNN9YIsoqI7yWmHj&v=1904b2c")
+   ("wescheme" "https://www.wescheme.org/view?publicId=0Sdq8F2b3q")
+   )
   ("flags-panama" "Flag of Panama Starter File"
    ("wescheme" "https://www.wescheme.org/view?publicId=V4AfQydAHu")
    )
