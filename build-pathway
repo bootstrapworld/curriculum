@@ -13,6 +13,7 @@ export NOPDF=
 export PROGLANG=
 export TOPDIR=$(pwd)
 export EXPANDEDWARNINGS=
+export ASCIIDOCNODE=
 
 #SEMESTER=spring
 #MONTH=$(date +%m)
@@ -26,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-01-26 # last modified
+LASTMOD=2022-02-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -46,6 +47,8 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
     :
+  elif test "$arg" = --adocjs; then
+    ASCIIDOCNODE=1
   elif test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=1
   elif test "$arg" = --debug -o "$arg" = -d; then
@@ -546,12 +549,21 @@ function bumpcsspathdir() {
   cat > $TMPFILE-3.txt <<EOF
   <link rel="stylesheet" href="${localDISTROOTDIR}lib/curriculum.css" />
 EOF
+  if test $ASCIIDOCNODE; then
+  $SED -i \
+    -e '/^<link.*asciidoctor\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
+    -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
+    -e 's/%INSERTLIBCURRICULUMCSS//' \
+    -e 's/<link DISCARD .*asciidoctor\.css.*>//' \
+    $f
+    else
   $SED -i \
     -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
     -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
     -e 's/%INSERTLIBCURRICULUMCSS//' \
     -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
+  fi
 
   #echo deleting $TMPFILE-3.txt
   rm -f $TMPFILE-3.txt
@@ -613,7 +625,7 @@ function resolveabbrevs() {
     -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/<p>\(<div\)/\1/' \
     $f
   $SED -i \
-    -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div class="paragraph"><!--/' \
+    -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div id="toggle"><\/div><div class="paragraph"><!--/' \
     $f
   $SED -i \
     -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" id="prereq" type="checkbox" onchange="toggleNonPrereqDisplay()">\<label for="prereq"\>Prerequisites for this lesson ★<label\>/' \
@@ -767,22 +779,44 @@ function doadoc() {
   #echo using $fasc $fhtml
   test -d .cached || mkdir -p .cached
 
+  local otherproglang="#f"
+
   if test $LESSONPLAN; then
+    # echo doing doadoc LESSONPLAN in $(pwd)
+    if test -f proglang.txt; then
+      if grep -q wescheme proglang.txt; then
+        otherproglang="$otherproglang \"wescheme\""
+      fi
+      if grep -q codap proglang.txt; then
+        otherproglang="$otherproglang \"codap\""
+      fi
+      otherproglang="($otherproglang)"
+    fi
     touch .cached/.index-sidebar.asc
     touch .cached/.index-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+    if test "$SRCPATHWAY" = algebra; then
+      otherproglang="($otherproglang \"wescheme\")"
+    fi
+    if test "$SRCPATHWAY" = data-science -o "$SRCPATHWAY" = data-science-codap; then
+      otherproglang="($otherproglang \"codap\")"
+    fi
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
-    echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+    if test $AUTOGEN_NARRATIVE; then
+      echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
+      echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+    fi
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    if test $AUTOGEN_NARRATIVE; then
+      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
+      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+    fi
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -1038,47 +1072,81 @@ function checklessonplan() {
 
   grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
-  if test -f index.adoc; then
-    #echo collecting exercises in $L
-    $PROGDIR/collect-exercises.rkt index.adoc
-    exerflist=pages/.cached/.exercise-pages-ls.txt.kp
-    if test -f $exerflist; then
-      #echo checklessonplan I
-      exerfA=pages/.cached/.exercise-pages.txt.kp
-      rm -f $exerfA
-      for f in $(cat $exerflist); do
-        #echo checklessonplan II $f
-        aspect=portrait
-        g=$f
-        if test ${f%.adoc} = $f; then
-          echo $f >> $exerfA
-        elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
-          echo $f landscape >> $exerfA
-        else
-          echo $f >> $exerfA
+  local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
+
+  #echo collecting exercises in $L
+  $PROGDIR/collect-exercises.rkt index.adoc
+  exerflist=pages/.cached/.exercise-pages-ls.txt.kp
+  if test -f $exerflist; then
+    #echo checklessonplan I
+    exerfA=pages/.cached/.exercise-pages.txt.kp
+    rm -f $exerfA
+    for f in $(cat $exerflist); do
+      #echo checklessonplan II $f
+      aspect=portrait
+      g=$f
+      if test ${f%.adoc} = $f; then
+        echo $f >> $exerfA
+      elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+        # aspect=landscape # ? FIXME
+        echo $f landscape >> $exerfA
+      else
+        echo $f >> $exerfA
+      fi
+      if test ! $NOPDF; then
+        gext=${g##*.}
+        #echo gext is $gext
+        if test "$gext" = adoc; then
+          gbase=${g%.adoc}
+          g=$gbase.html
+          gext=html
+          gpdf=$gbase.pdf
         fi
-        if test ! $NOPDF; then
-          gext=${g##*.}
-          #echo gext is $gext
-          if test "$gext" = adoc; then
-            gbase=${g%.adoc}
-            g=$gbase.html
-            gext=html
-            gpdf=$gbase.pdf
+        #echo g is $g gext is $gext
+        if test "$gext" = html; then
+          if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
           fi
-          #echo g is $g gext is $gext
-          if test "$gext" = html; then
-            if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-            fi
-            if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
-              echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-            fi
+          if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
           fi
         fi
-      done
-    fi
+      fi
+    done
   fi
+
+  wbpages=pages/workbook-pages.txt
+  if test ! -f $wbpages; then
+    wbpages=/dev/null
+  fi
+  if test ! -f $exerflist; then
+    exerflist=/dev/null
+  fi
+
+  for f in pages/*.adoc; do
+    test ! -f "$f" && break
+    fpdf=${f%.adoc}.pdf
+    fhtml=${f%.adoc}.html
+    grep -q "$f" $wbpages $exerflist && continue
+    grep -q "$fpdf" $wbpages $exerflist && continue
+    grep -q "$fhtml" $wbpages $exerflist && continue
+
+    aspect=portrait
+    if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+      #aspect=landscape # ? FIXME
+      :
+    fi
+    if test ! $NOPDF; then
+      g=${f#pages/}
+      g=${g%.adoc}
+      if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
+        echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+      fi
+      if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
+        echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+      fi
+    fi
+  done
 
 }
 
@@ -1114,6 +1182,7 @@ function buildworkbookpages() {
       echo
       echo WARNING: $L missing pages
       mkdir pages
+      touch pages/workbook-pages.txt
     fi
 
   #echo calling mkdirsolutionversion in buildworkbookpages
@@ -1399,6 +1468,7 @@ function collectprimitives() {
 
 function buildpathwaynarrative() {
   # echo doing buildpathwaynarrative $PWD
+  export AUTOGEN_NARRATIVE=1
   if test ! -f index.adoc; then
     for f in *.adoc; do
       if test -f $f; then
@@ -1409,6 +1479,7 @@ function buildpathwaynarrative() {
   if test ! -f index.adoc; then
     touch index.adoc
   elif test -s index.adoc; then
+    export AUTOGEN_NARRATIVE=
     echo
     echo WARNING: Using custom narrative index.adoc found in pathway $PATHWAY
   fi
@@ -1424,6 +1495,7 @@ function buildpathwaynarrative() {
     export NARRATIVE=
   fi
 
+  export AUTOGEN_NARRATIVE=
   # checklinks index.shtml
   #verifylinks
 
@@ -2264,6 +2336,7 @@ function calculatedistrootdir() {
 function postproc_workbookpage() {
   local fhtmlcached=$1
   # echo doing postproc_workbookpage $fhtmlcached
+  export WORKBOOKPAGE=1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
@@ -2278,6 +2351,7 @@ function postproc_workbookpage() {
     resolveabbrevs $fhtml $localDISTROOTDIR
     addproglang $fhtml
   fi
+  export WORKBOOKPAGE=
 }
 
 function postproc_nonotherdir() {
@@ -2391,10 +2465,11 @@ function run_postproc() {
   for smallfile in $bigfile-split*; do
     if test -f "$smallfile"; then
       for fhtml in $(cat $smallfile); do
+        # $postproc_func $fhtml
+      #FIXME: unparallelize for $NOPARALLEL?
         $postproc_func $fhtml &
       done
-      wait
-      #FIXME: unparallelize for $NOPARALLEL?
+      # wait #not needed because there's a superwait enclosing this
     fi
   done
 }
@@ -2407,7 +2482,16 @@ function doadocpostproc() {
   echo 👨‍💻CALLING ASCIIDOCTOR IN BATCH MODE
   echo '-----------------------------------------------------------'
   if test -s $ADOC_INPUT; then
-    asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+    if test ! $ASCIIDOCNODE; then
+      asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+    else
+      echo Trying node asciidoctor!
+      $SED -i -e 's/.*/"\0", /' $ADOC_INPUT
+      $SED -i -e '1s/^/let adocFiles = [/' $ADOC_INPUT
+      echo "]; " >> $ADOC_INPUT
+      echo "module.exports = adocFiles;" >> $ADOC_INPUT
+      node lib/callAdoc.js $ADOC_INPUT
+    fi
   else
     echo No adoc files need conversion!
   fi
@@ -2420,15 +2504,17 @@ function doadocpostproc() {
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
-  export WORKBOOKPAGE=1
-  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-  export WORKBOOKPAGE=
-  run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT
-  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
-  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
-  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
-  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
+  # export WORKBOOKPAGE=1
+  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT &
+  # export WORKBOOKPAGE=
+  run_postproc postproc_nonotherdir $ADOC_POSTPROC_NONOTHERDIR_INPUT &
+  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT &
+  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT &
+  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT &
+  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT &
+  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT &
+
+  wait
 
   end=`date +%s`
   runtime=$((end-start))
@@ -2549,7 +2635,9 @@ echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $PUPPETEER_INPUT
 export ADOCABLES_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adocables.rkt
 echo '(' > $ADOCABLES_INPUT
 
-export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.txt.kp
+# export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.txt.kp
+export ADOC_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-asciidoctor.js
+
 rm -f $ADOC_INPUT
 touch $ADOC_INPUT
 

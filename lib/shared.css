@@ -41,6 +41,7 @@ h2 {
   margin:         0 0 1ex 0; /* 1ex bottom margin */
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
+#header>h1:only-child { border-bottom: none; }
 
 /* unordered list spacing */
 ul { line-height: inherit; }
@@ -248,6 +249,27 @@ tr th.tableblock {
   z-index:    9999;
   overflow:   scroll;
 }
+.sidebar.closed {
+  left:  -225px;
+  width: 265px;
+  height: 30px;
+}
+.sidebar .paragraph { width: 205px; }
+.sidebar #toggle:after { content: '≫'; font-size: 20px;}
+.sidebar:not(.closed) #toggle:after { content: '»'; }
+
+.sidebar #toggle {
+  top:    0;
+  right:  0;
+  position: absolute;
+  width:  40px;
+  height: 30px;
+  text-align:  center;
+  border: 0;
+  margin: 0 !important;
+  background: #75328A77;
+}
+
 .sidebar > * { margin: 0px 10px !important; }
 .sidebar label { display: inline; font-size: 0.8rem; }
 .sidebar select { border:  none; }
@@ -257,6 +279,7 @@ tr th.tableblock {
 .sidebar strong { color: black; margin: 0; }
 .sidebar li { list-style-type: none; margin-bottom: 5px;}
 
+.sidebarlessons { margin-top:  10px; }
 .sidebarlessons input[type="checkbox"] { margin-right: 5px; }
 .sidebar .sidebarlessons ul { 
   background: white; 

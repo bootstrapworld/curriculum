@@ -4,9 +4,13 @@
 
 (define *lessons-and-practices*
   '(
+
+; dummy alignments for sample lessons
+    ("__sample-lesson" "SJ.1")
+    ("zample-lesson" "SJ.1")
 ; core
 
-    ("who-are-programmers" 
+    ("computing-needs-all-voices" 
         "SJ.1"
         "SJ.2"
         "SJ.4"
@@ -15,6 +19,10 @@
         "SJ.10"
         "P1"
         ) 
+
+    ("codap-transformers" 
+        "MP.4"
+        )
 
     ("contracts"
          "SEP.8" 
@@ -43,15 +51,15 @@
 ; math
    
     ("combinatorics-permutation"
-        "SEP.5"
         "MP.4"
-        )
+        "MP.7"
+        "SEP.5")
 
     ("combinatorics-combination"
-        "SEP.5"
         "MP.4"
-        "MP.5"
-        )
+        ; "MP.5" -- needed? FIXME
+        "MP.7"
+        "SEP.5")
 
     ("coordinates" 
         "MP.2"
@@ -130,8 +138,9 @@
         "MLR.8"     ; strategy box in lesson
         )
 
-    ("numbers-inside-videogames" 
+    ("numbers-inside-video-games" 
         "MP.2"
+        "MP.4"
         )
 
     ("order-of-operations" 
@@ -333,29 +342,45 @@
         )
 
     ("re-refactoring" 
+        "P3"
+        "P4"
         )
 
     ("re-your-own-drawing-functions" 
         )
 
     ("re-build-your-own-animation" 
+        "P3"
+        "P4"
         )
 
     ("re-adding-collisions" 
+        "P3"
+        "P4"
         )
 
     ("re-scoring" 
+        "P4"
+        "P6"
         )
 
     ("re-adding-levels" 
+        "P3"
+        "P6"
         )
 
-    ("re-making-pong" 
+    ("re-making-pong"
+        "P3"
+        "P4"
         )
 
     ("re-nested-structures" 
+        "P3"
+        "P4"
         )
 
     ("re-timers" 
+        "P3"
+        "P4"
         )
 ))
