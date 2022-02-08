@@ -51,13 +51,6 @@
         "MLR.4"
         "MP.6"
         ) 
-
-    ("who-are-programmers" 
-        "SJ.1"
-        "SJ.2"
-        "SJ.4"
-        "SJ.10"
-        ) 
 ; math
    
     ("combinatorics-permutation"
