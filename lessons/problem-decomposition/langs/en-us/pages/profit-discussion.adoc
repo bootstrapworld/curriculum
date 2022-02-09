@@ -1,0 +1,31 @@
+= Profit Discussion
+
+There's more than one way to write a function that will calculate the profit that Sally makes selling lemonade.  Below are four possibilities.
+
+[cols="2a, 2a", stripes="none"]
+|===
+| *Khalil's Strategy:*	| *Samaria's Strategy:*
+| @show{sexp->code '(define (profit g) (- (* 1.75 g) (* 0.30 g)))}
+| @show{sexp->code '(define (profit g) (* (- 1.75 0.30) g))}
+| *Alenka's Strategy:*	| *Fauzi's Strategy:*
+| @show{sexp->code '(define (profit g) (* 1.45 g))}
+| @show{sexp->code '(define (revenue g) (* 1.75 g))}
+@show{sexp->code '(define (cost g) (* 0.30 g))}
+@show{sexp->code '(define (profit g) (- (revenue g) (cost g)))}
+|==
+
+@n Whose strategy do you think is the "best"? Why?
+
+@vspace{5ex}
+
+@n If the ingredients gets more expensive, which function is easiest to update?
+
+@vspace{5ex}
+
+@n Which function would force you to start from scratch if something about her pricing changed?
+
+@vspace{5ex}
+
+@n If a friend wanted to start a chocolate chip cookie business, which would be the most useful as a model?
+
+@vspace{5ex}
