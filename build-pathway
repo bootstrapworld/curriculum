@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-02-03 # last modified
+LASTMOD=2022-02-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2465,9 +2465,9 @@ function run_postproc() {
   for smallfile in $bigfile-split*; do
     if test -f "$smallfile"; then
       for fhtml in $(cat $smallfile); do
-        # $postproc_func $fhtml
-      #FIXME: unparallelize for $NOPARALLEL?
-        $postproc_func $fhtml &
+        #FIXME: unparallelize for $NOPARALLEL?
+        # $postproc_func $fhtml &
+        $postproc_func $fhtml
       done
       # wait #not needed because there's a superwait enclosing this
     fi
