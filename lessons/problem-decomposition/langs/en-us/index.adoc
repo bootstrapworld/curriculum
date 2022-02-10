@@ -78,7 +78,7 @@ What other relationships can you find here?
 
 - Every glass sold brings in $1.75 in *revenue*
 - Every glass sold brings in some amount of *profit*: it costs a certain amount to make, but it brings in another amount in revenue
-- The total cost of the bike will be depend on the taxrate.
+- The total cost of the bike will be depend on the tax rate.
 - In order to figure out how many lemonade sales it will take to pay for the bike, we'd need to to divide the cost (with tax) by the profit per glass.
 
 === Investigate
@@ -88,7 +88,7 @@ Have students work with their partners to define functions for `revenue` and `co
 [.lesson-instruction]
 --
 - *What is the difference between _revenue_ and _profit_?*
-_Revenue is the total amount of money that comes in, profit is the remaining money after cost has been subtracted._
+_Revenue is the total amount of money that comes in, profit is the remaining money *after cost has been subtracted*._
 
 - *How could Sally _increase_ her profits?*
 _By decreasing her costs, raising her prices (which increases revenue), by selling more lemonade._
@@ -115,8 +115,8 @@ There are several correct ways to write the functions needed for Sally's Lemonad
 
 This activity started with a situation, and students modeled that situation with functions. One part of the model was _profit_, which can be written several ways. Have students turn to @printable-exercise{pages/profit-discussion.adoc} and reflect on the four function definitions presented. Give them a few minutes.
 
-////
-, for example:
+
+The four definitions of `profit` from this workbook page are shown here:
 
 @ifproglang{wescheme}{
 ```
@@ -134,19 +134,25 @@ fun profit(g): 1.45 * g end
 fun profit(g): revenue(g) - cost(g) end
 ```
 }
-////
+
 [.lesson-instruction]
-- Which of these four function definitions do you think is "best", and why?
-- Did anyone have additional ideas for how to define a _profit_ function?
-- If lemons gets more expensive, which way requires the least amount of change?
-- Which is the most repurposable option, if, for example, a friend started a cookie stand?
+- Which of these four `profit` definitions do you think is "best", and why?
+- Did anyone have additional ideas for how to define a `profit` function?
+- If lemons get more expensive, which definitions of `profit` need to be changed?
+- If Sally raises her prices, which definitions of `profit` need to be changed?
+- Which definition of `profit` is the most flexible?
+
+[.lesson-point]
+Decomposing a problem allows us to solve it in smaller pieces
+
+`profit` can be _decomposed_ into a simpler function that uses the `cost` and `revenue` functions.
 
 *Big Ideas*
 
-. `profit` can be _decomposed_ into a simple function that uses the `cost` and `revenue` functions.
-. Decomposing a problem allows us to solve it in smaller pieces, which are also easier to test!
-. These pieces can also be re-used, resulting in writing less code, and less _duplicate_ code.
-. Duplicate code means more places to make mistakes, especially when that code needs to be changed.
+. Smaller pieces are _easier to think about_, and to test!
+. These pieces can also be _re-used_! Like lego pieces, smaller functions can be used to build all kinds of things.
+. Re-using code means _less code_ overall. Less code means fewer places to make mistakes.
+. Re-using code means _less duplicate code_. When code needs to be changed, that change only needs to made in one place, instead of in multiple places.
 
 == Top-Down vs. Bottom-Up @duration{20 minutes}
 
@@ -156,8 +162,6 @@ Students explore problem decomposition as an explicit strategy, and learn about 
 === Launch
 [.lesson-point]
 _Top-Down_ and _Bottom-Up_ design are two different strategies for problem decomposition.
-
-*Bottom-Up:* start with the small, easy relationships first and then build our way to the larger relationships. In the Lemonade Stand, you defined `cost` and `revenue` first, and then put them together in `profit`.
 
 *Top-Down:* start with the "big picture" and then worry about the details later. We could have started with `profit`, and made a to-do list of the smaller pieces we’d build later
 
