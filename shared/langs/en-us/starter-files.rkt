@@ -52,6 +52,9 @@
   ("custom-scatter-plot" "Custom Scatter Plot Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Yskwvzbe5CSMX3F1fveEOgrL3ms2cxHV")
    )
+  ("height" "Age vs. Height Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1prqCzfZWJ-kuXJMclmi1qyE0cSdziLiV&v=1904b2c")
+   )
   ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0")
    )
