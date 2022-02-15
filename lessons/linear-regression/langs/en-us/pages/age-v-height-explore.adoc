@@ -1,42 +1,57 @@
 = Age vs. Height Explore
 
-Open the @starter-file{height} and click run.
+++++
+<style>
+.lr-table td { padding: 0 2ex; }
+.lr-table td p { margin: 0; }
+</style>
+++++
+
+Open the @starter-file{height} and click Run.
 
 @n Take a look at the code in the Definitions Area. What do you notice? What do you wonder?
 
-@vspace{10ex}
+@span{.blankline}{@ifsoln{_Answers will vary_}}
+@span{.blankline}{}
+@span{.blankline}{}
 
-@n Build `image-scatter-plot(h-table, "age", "height", dot)`.  Try to visualize the line of best fit for just the blue dots. Then try to visualize the line of best fit for just the red stars. How do you think they would compare? Which line do you think would be steeper? Do the points lead back toward the same y-intercept or do you expect one line to start higher than the other? ALTERNATIVELY WE COULD ASK What new information do you learn from this display?
+@n Build `image-scatter-plot(h-table, "age", "height", dot)`.  Try to visualize the line of best fit for just the blue dots. Then try to visualize the line of best fit for just the red stars. How do you think they would compare? Which line do you think would be steeper?
 
-@ifsoln{_Answers will vary_}
-@vspace{5ex}
+@span{.blankline}{@ifsoln{_Answers will vary_}}
+@span{.blankline}{}
+@span{.blankline}{}
 
 
+@n Make three linear regression plots comparing `age` and `height`, and record the results for each in the table below:
 
-@n Now build `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`.
+- The whole population: `lr-plot(h-table, "gender-id", "age", "height")`
+- Females only: `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`
+- Males only: `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`
 
-[cols="^1,^1,^1", options="header"]
+
+[.lr-table]
+[cols="^.^1,^.^1,^.^1,^.^1", options="header"]
 |===
-| predictor function 		| rate of change			| y-intercept				
-| @ifsoln{_48 in_}			| @ifsoln{_65 in_} 			| 	@ifsoln{_48 in_}	
-@vspace{5ex}
+| Sample 	| rate of change 		| y-intercept			| R value
+| All		| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
+| Females	| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
+| Males		| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
 |=== 
-
 
 
 @n Now build `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
 
 [cols="^1,^1,^1", options="header"]
 |===
-| predictor function 		| rate of change			| y-intercept				
-| @ifsoln{_48 in_}			| @ifsoln{_65 in_} 			| @ifsoln{_48 in_}
-@vspace{5ex}
+| rate of change 		| y-intercept			| R value
+| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
+@vspace{2ex}
 |=== 
 
 @n What makes it difficult to compare these two plots visually?
-@ifsoln{_The axes are labelled differently_}
 
-@vspace{8ex}
+@span{.blankline}{ @ifsoln{_The axes are labelled differently_} }
+@span{.blankline}{}
 
 Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust the window of the interactive plot so that:
 
@@ -45,12 +60,14 @@ Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust th
 | x-min: 	| x-max:	| y-min:	| y-max:
 | 6.5		| 12.5 		| 	40		| 70
 |===
-and click `ReDraw`.
+and click `Redraw`.
 
-Then, rebuild `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`, make the same adjustments and click `ReDraw`.
+Do the same for `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
 
 @vspace{1ex}
 
 @n How do the two plots compare now that their windows match?
 
-@vspace{5ex}
+@span{.blankline}{ @ifsoln{_Answers will vary_} }
+@span{.blankline}{}
+@span{.blankline}{}
