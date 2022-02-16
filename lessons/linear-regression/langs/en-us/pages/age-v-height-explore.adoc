@@ -32,26 +32,20 @@ Open the @starter-file{height} and click Run.
 [.lr-table]
 [cols="^.^1,^.^1,^.^1,^.^1", options="header"]
 |===
-| Sample 	| rate of change 		| y-intercept			| R value
-| All		| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
-| Females	| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
-| Males		| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
+| Sample 	| rate of change 		| y-intercept				| R value
+| All		| @ifsoln{_3.061_}		| @ifsoln{_25.175_} 		| @ifsoln{_+0.740_}
+| Females	| @ifsoln{_3.481_}		| @ifsoln{_21.338_} 		| @ifsoln{_+0.696_}
+| Males		| @ifsoln{_2.747_}		| @ifsoln{_27.882_} 		| @ifsoln{_+.802_}
 |=== 
 
-
-@n Now build `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
-
-[cols="^1,^1,^1", options="header"]
-|===
-| rate of change 		| y-intercept			| R value
-| @ifsoln{_48 in_}		| @ifsoln{_65 in_} 		| @ifsoln{_48 in_}
-@vspace{2ex}
-|=== 
+@vspace{1ex}
 
 @n What makes it difficult to compare these two plots visually?
 
 @span{.blankline}{ @ifsoln{_The axes are labelled differently_} }
 @span{.blankline}{}
+
+@vspace{1ex}
 
 Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust the window of the interactive plot so that:
 
@@ -60,14 +54,12 @@ Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust th
 | x-min: 	| x-max:	| y-min:	| y-max:
 | 6.5		| 12.5 		| 	40		| 70
 |===
-and click `Redraw`.
-
-Do the same for `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
+and click `Redraw`.  Then, do the same for `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
 
 @vspace{1ex}
 
 @n How do the two plots compare now that their windows match?
 
-@span{.blankline}{ @ifsoln{_Answers will vary_} }
-@span{.blankline}{}
-@span{.blankline}{}
+@span{.blankline}{ @ifsoln{_Answers will vary. The girls seem to be growing faster._} }
+@span{.blankline}{@ifsoln{_The dots on the boys' graph are clustered more closely around the line._}}
+@span{.blankline}{@ifsoln{_There are no seven-year-old girls in the dataset!_}}
