@@ -131,6 +131,8 @@ For more practice, have them complete our card sort on @opt-online-exercise{ htt
 
 Have students complete @printable-exercise{pages/reflection-correlations.adoc}, which includes a series of probing questions that get at the common misconceptions listed above. Discuss the questions as a class.
 
+If time permits, you might also want to have them complete @opt-printable-exercise{pages/identifying-form-matching.adoc}.
+
 == Summarizing Correlations using r-value @duration{10 minutes}
 
 === Overview
@@ -148,47 +150,35 @@ If it works for you, give students five minutes to play a few rounds of the onli
 
 Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, and, if it is, use @math{r} to summarize direction and strength.
 
-=== Synthesize
-
 Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
-
-== Corrrelations in the Animals Dataset
-
-=== Investiage
-
-[.lesson-instruction]
-- In the Interactions Area, create a scatter plot for the Animals Dataset, using `"pounds"` as the xs and `"weeks"` as the ys.
-- *Form:* Does the point cloud appear linear or non-linear?
-- *Direction:* If it's linear, does it appear to go up or down as you move from left to right?
-- *Strength:* Is the point cloud tightly packed, or loosely dispersed?
-- Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero, closer to ±1, or in between?
-- Have Pyret compute the @math{r}-value, by typing `r-value(animals-table, "pounds", "weeks")`. Does this match your prediction?
-- Repeat this process using `"age"` as the xs. Is this correlation stronger or weaker than the correlation for `"pounds"`? What does that _mean_?
-
-=== Synthesize
-It is useful to ask students probing questions, to help address the misconceptions listed above. Some examples:
-
-- What is the difference between a _weak_ relationship and a _negative_ relationship?
-- What is the difference between a _strong_ relationship and a _positive_ relationship?
-- If we find a strong relationship in a sample, can we always infer that relationship holds for the whole population?
-- Suppose we have two correlations, one drawn from 10 data points and one drawn from 50. If both correlations are identical in direction and strength, should we trust them equally when making an inference about the larger population?
 
 [.lesson-point]
 Correlation does NOT imply causation.
 
 It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
 
-Here are some possible correlations that have absolutely no causal relationship; they come about either by chance or because both of them are related to another variable that’s (often) lurking in the background.
+Have students turn to @printable-exercise{correlation-is-not-causation.adoc}
 
-- For a certain psychology test, the amount of time a student studied was negatively correlated with their score! (Struggling students _needed_ to study more; they would have done even worse if they'd studied less!)
-- Weekly data gathered in a city throughout the year showed a positive correlation between ice cream consumption and drowning deaths. (Warmer weather affects both; they have no effect on one another.)
-- A negative correlation was found between how much time students talked on the phone and how much they weighed. (Gender is a confounder: women tend to weigh less and talk more than men.)
+=== Synthesize
 
-Here are a few real correlations, drawn from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
-- “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (@math{r} = 0.98)
-- “Average per-person consumption of chicken” v. “U.S. crude oil imports” (@math{r} = 0.95)
-- “Marriage rate in Wyoming” v. “Domestic production of cars” (@math{r} = 0.99)
-- “Number of people who get tangled in their own bedsheets” v. “Amount of cheese consumed that year” (@math{r} = 0.95)
+
+== Correlations in the Animals Dataset
+
+=== Overview
+Students apply what they've learned about correlations to the Animals Dataset
+
+=== Launch
+Let's look for correlations in the Animals Dataset.
+
+=== Investigate
+
+Have students complete @printable-exercise{correlations-animals.adoc}.
+
+=== Synthesize
+
+Which corresponded more strongly with time to adoption, `age` or `pounds`? What does this _mean_?
+
+If time allows, you may want to emphasize the point that correlation does not imply causation by having students look at the nonsense claims that could be made from the graphs of real world data on the @link{http://tylervigen.com/, Spurious Correlations website}.
 
 == Your Analysis @duration{flexible}
 
@@ -212,5 +202,3 @@ Did you need to filter out certain rows in order to get those correlations?
 
 After looking at the scatter plot for our animal shelter, do you still agree with the claim on @printable-exercise{scatter-plots/pages/disproving-claim.adoc}? (Perhaps they need more information, or to see the analysis broken down separately by animal!)
 
-== Additional Exercises:
-- @opt-printable-exercise{pages/identifying-form-matching.adoc}
