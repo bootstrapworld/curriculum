@@ -1734,7 +1734,7 @@ function rmtmpfiles() {
 
 function copylessondir() {
   lessonDir=$1
-  # echo doing copylessondir $lessonDir
+  # echo doing copylessondir $lessonDir in $(pwd)
   local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$NATLANG
   if test ! -d $repoLessonDir -a $NATLANG != en-us; then
     repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/en-us
@@ -1742,6 +1742,9 @@ function copylessondir() {
 
   # echo repoLessonDir is $repoLessonDir
   if test -d "$repoLessonDir"; then
+    if test $FORCE; then
+      rm -fr $lessonDir
+    fi
     mkdir -p $lessonDir
     #echo $repoLessonDir is a diry
     DOCOPYDIR=1
@@ -1919,12 +1922,6 @@ function copycommonlessons() {
   cd $TOPDIR
 
   export DESTLANGDIR=distribution/$NATLANG
-
-  mkdir -p $DESTLANGDIR
-
-  if test $FORCE; then
-    rm -fr $DESTLANGDIR/lessons
-  fi
 
   mkdir -p $DESTLANGDIR/lessons
 
