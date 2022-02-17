@@ -136,6 +136,8 @@
             '()))
       '()))
 
+(define *workbook-pages* '())
+
 ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
 
 (define *external-url-index*
@@ -662,6 +664,7 @@
          [f (string-append "lessons/" g)]
          [f.src f]
          [existent-file? #f]
+         [non-workbook-page? #f]
          [error-cascade? #f])
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
@@ -674,6 +677,10 @@
                     ;(printf "I\n")
                     (set! f f.html)
                     (set! existent-file? #t)
+                    (when (and existent-file? (equal? link-type "printable-exercise")
+                               (not (member snippet *workbook-pages*)))
+                      (set! non-workbook-page? #t)
+                      (set! existent-file? #f))
                     (set! g-in-pages (path-replace-extension g-in-pages ".html"))
                     (set! g (path-replace-extension g ".html"))]
                    [(file-exists? f.pdf)
@@ -690,7 +697,9 @@
     (unless existent-file?
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: Lesson ~a: ~a refers to nonexistent file ~a\n\n" lesson link-type f))
+      (printf "WARNING: Lesson ~a: ~a refers to ~a file ~a\n\n" lesson link-type
+              (if non-workbook-page? "non-workbook" "nonexistent")
+              f))
     (when (member link-type '("printable-exercise" "opt-printable-exercise"))
       (let ([f (format "~a" g-in-pages)])
         (unless lesson-dir
@@ -1284,6 +1293,7 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
+  (set! *workbook-pages* '())
 
   (unless (member *proglang* '("pyret" "wescheme" "codap"))
     (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
@@ -1299,6 +1309,14 @@
       (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
         (unless (string=? *lesson-plan* x)
           (set! *lesson-plan-base* x)))))
+
+  (when *lesson-plan*
+    (let ([workbook-pages-ls-file
+            (format "lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp" *lesson*)])
+      (unless (file-exists? workbook-pages-ls-file)
+        (error 'ERROR "File ~a not found" workbook-pages-ls-file))
+      (set! *workbook-pages*
+        (read-data-file workbook-pages-ls-file #:mode 'files))))
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
@@ -1882,25 +1900,18 @@
       (when *lesson-plan*
         (call-with-output-file (path-replace-extension out-file "-extra-mat.asc")
           (lambda (o)
-            (let ([workbook-pages-ls-file
-                    (format "lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp"
-                            *lesson*
-                            )])
-              (unless (file-exists? workbook-pages-ls-file)
-                (error 'ERROR "File ~a not found" workbook-pages-ls-file))
 
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (let* ([workbook-pages (read-data-file workbook-pages-ls-file #:mode 'files)]
-                   [xx (sort *printable-exercise-links*
-                             (lambda (x y)
-                               (let ([x-i (index-of workbook-pages (car x))]
-                                     [y-i (index-of workbook-pages (car y))])
-                                 (cond [(and x-i y-i) (< x-i y-i)]
-                                       [else #f]))))])
-                (for ([x xx])
-                  (fprintf o "\n* ~a\n\n" (cadr x)))))
+            (let ([xx (sort *printable-exercise-links*
+                            (lambda (x y)
+                              (let ([x-i (index-of *workbook-pages* (car x))]
+                                    [y-i (index-of *workbook-pages* (car y))])
+                                (cond [(and x-i y-i) (< x-i y-i)]
+                                      [else #f]))))])
+              (for ([x xx])
+                (fprintf o "\n* ~a\n\n" (cadr x))))
 
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
