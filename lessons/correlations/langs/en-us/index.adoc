@@ -42,10 +42,10 @@
 @lang-prereq
 |===
 
-== Correlations have _Form_ @duration{10 minutes}
+== Correlations have _Form_ @duration{5 minutes}
 
 === Overview
-Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. This builds intuition for determining if the @vocab{form} is linear, in which case we can proceed to correlation and linear regression.
+Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. Determining that  a @vocab{form} is linear is a prerequisite for proceeding to correlation and linear regression.
 
 === Launch
 By now we have learned ways to summarize a single quantitative variable, like the `age` of an animal in our dataset: report the center, spread, and shape of the distribution. Together, those numbers tell us what age is typical, how much the ages vary, and what kind of age values are usual or unusual. We could do the same for for animals' weights (or any other quantitative column).
@@ -58,13 +58,15 @@ Rather than summarizing each distribution in one dimension, we can summarize a _
 _Form:_ whether a relationship is linear or not
 
 === Investigate
-The relationship between two quantitative variables can take many forms - some patterns are _linear_, and appear as a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
+The relationship between two quantitative variables can take many forms - some patterns are _linear_, and cluster around a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
 
 [.lesson-instruction]
-Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, non-linear or if there's no relationship at all.
+Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks to complete _just the first question_ for each scatter plot, identifying whether the relationship is linear, non-linear or if there's no relationship at all.
 
 === Synthesize
-Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and only linear relationships make sense if we want to summarize with a correlation.
+Confirm that students have correctly identified which of the scatterplots can be described as linear relationships.
+
+Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -75,13 +77,12 @@ In an AP Statistics class or full-year Data Science class, it's appropriate to d
 |===
 
 
-== Correlations have __Direction & Strength__ @duration{20 minutes}
+== Correlations have __Direction__ @duration{10 minutes}
 
 === Overview
-Once students have learned to identify a possible linear relationship, they can turn their attention to other qualities of that relationship: its _direction_ and _strength_. Each of these is expressed in the @math{r}-value, which students learn to read.
+Once students have learned to identify a possible linear relationship, they can turn their attention to other qualities of that relationship, like its _direction_.
 
 === Launch
-Assuming a relationship is linear, data scientists calculate a single number called "correlation" - or @math{r}-value - that reports both the direction and strength.
 
 [.lesson-point]
 _Direction:_ whether a linear relationship is positive or negative.
@@ -90,6 +91,23 @@ A linear relationship between two quantitative variables is _positive_ if, in ge
 
 - *Positive* relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
 - *Negative* relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
+
+=== Investigate
+Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks and focus __just on the second question__, determining whether each of the relationships they previously identified as linear is positive or negative.
+
+For more practice, have students complete our card sort on @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/6018cc371c5b92526b6a96d, Identifying Direction}.
+
+=== Synthesize
+It only makes sense to look for direction in linear relationships!
+
+Confirm that students have correctly identified the direction of each linear relationship.
+
+== Correlations have __Strength__ @duration{10 minutes}
+
+=== Overview
+We'll explore another quality of a possible linear relationship: its _strength_.
+
+=== Launch
 
 [.lesson-point]
 _Strength:_ how closely the two variables are correlated.
@@ -100,22 +118,43 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 - A relationship is *weak* if x tells us little about y (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 === Investigate
-Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and whether it is strong or weak.
+Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks and focus on the third questions for each scatter plot, identifying whether the relationship is strong or weak.
+
+For more practice, have them complete our card sort on @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, Identifying Strength}.
+
+=== Common Misconceptions
+- Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
+- Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
+- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
+
+=== Synthesize
+
+Have students complete @printable-exercise{pages/reflection-correlations.adoc}, which includes a series of probing questions that get at the common misconceptions listed above. Discuss the questions as a class.
+
+== Summarizing Correlations using r-value @duration{10 minutes}
+
+=== Overview
+Now that students know how to identify _direction_ and _strength_ for linear relationships, they'll learn to read how these are expressed in the @math{r}-value.
+
+=== Launch
 
 The correlation @vocab{r} is a number (falling anywhere from -1 to +1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
 
 An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 or ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
 
+If it works for you, give students five minutes to play a few rounds of the online game @link{http://guessthecorrelation.com/, Guess the Correlation} to develop intuition with r-values. (This will require creating an account.)
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, and, if it is, use @math{r} to summarize direction and strength.
+
+=== Synthesize
+
 Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
-Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, and use @math{r} to summarize direction and strength.
+== Corrrelations in the Animals Dataset
 
-_If you have time for more practice, we recommend:_
-
-- _our card sort activities on @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/6018cc371c5b92526b6a96d, identifying direction} and @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, identifying strength}_
-- _the online game @link{http://guessthecorrelation.com/, Guess the Correlation} to develop intuition with r-values_
-
-@vspace{1ex}
+=== Investiage
 
 [.lesson-instruction]
 - In the Interactions Area, create a scatter plot for the Animals Dataset, using `"pounds"` as the xs and `"weeks"` as the ys.
@@ -125,11 +164,6 @@ _If you have time for more practice, we recommend:_
 - Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero, closer to ±1, or in between?
 - Have Pyret compute the @math{r}-value, by typing `r-value(animals-table, "pounds", "weeks")`. Does this match your prediction?
 - Repeat this process using `"age"` as the xs. Is this correlation stronger or weaker than the correlation for `"pounds"`? What does that _mean_?
-
-=== Common Misconceptions
-- Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
-- Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
-- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
 
 === Synthesize
 It is useful to ask students probing questions, to help address the misconceptions listed above. Some examples:
