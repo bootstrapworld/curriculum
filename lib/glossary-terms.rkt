@@ -175,8 +175,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("field") "a part of a data structure that has a name and holds a single value of a specified data type")
      (es-mx ("campo") "una parte de una estructura de datos que tiene un nombre y contiene un solo valor de un tipo específico"))
     
-    ((en-us ("form") "of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
-     (es-mx ("forma") "de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
+    ((en-us ("form") "the shape of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
+     (es-mx ("forma") "la forma de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
     
     ((en-us ("function" "functions") "a mathematical object that consumes inputs and produces an output")
      (es-mx ("función" "funciones") "un objeto matemático que consume argumentos y produce un resultado"))
