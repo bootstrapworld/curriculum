@@ -115,8 +115,8 @@
     (string-append
       "\n- link:./resources/index.shtml[Teacher-Only Resources]\n"
       "-- We also offer several teachers-only materials, including an\n"
-      "answer key to the student workbook, a quick-start guide to making the final\n"
-      "project, and pre- and post-tests for teachers who are participating in our\n"
+      "answer key to the student workbook, keys to all the exercises,\n"
+      "and pre- and post-tests for teachers who are participating in our\n"
       "research study. For access to these materials, please fill out the\n"
       "link:https://docs.google.com/a/bootstrapworld.org/spreadsheet/viewform?formkey=dHpQc0VHV2dBU2tSN1ptMktBUmtoZWc6MQ#gid=0[password request form].\n"
       "We'll get back to you soon with the necessary login information.\n") o))
