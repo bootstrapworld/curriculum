@@ -1,55 +1,61 @@
 = Profit - More than one Way!
 
-Four students defined their `profit` functions as shown below.
+++++
+<style>
+td { padding: 0 !important; margin: 0; }
+td p { margin: 0 !important; }
+.blankline{ text-align: left; font-style: italic; }
+</style>
+++++
 
-@vspace{1ex}
-
-*Khalil's Strategy:*
-
-[.indentedpara]
-@show{(sexp->code '(define (profit g) (- (* 1.75 g) (* 0.30 g))))}
-
-@vspace{1ex}
-
-*Samaria's Strategy:*
-
-[.indentedpara]
-@show{(sexp->code '(define (profit g) (* (- 1.75 0.30) g)))}
-
-@vspace{1ex}
-
-*Alenka's Strategy:*
-
-[.indentedpara]
-@show{(sexp->code '(define (profit g) (* 1.45 g)))}
-
-@vspace{1ex}
-
-*Fauzi's Strategy:*
-
+Four students defined the same `revenue` and `cost` functions, show below:
 [.indentedpara]
 --
 @show{(sexp->code '(define (revenue g) (* 1.75 g)))}
 
 @show{(sexp->code '(define (cost g) (* 0.30 g)))}
-
-@show{(sexp->code '(define (profit g) (- (revenue g) (cost g))))}
 --
 
 @vspace{1ex}
 
-@n Whose strategy do you think is the "best"? Why?
+However, they came up with *four different definitions* for `profit`:
 
-@vspace{10ex}
+@vspace{1ex}
 
-@n If Sally decides to change the price of the lemonade, which function is easiest to update? Why?
+[cols="1a,5a", frame="none", grid="none", stripes="none"]
+|===
+| *Khalil:* | @show{(sexp->code '(define (profit g) (- (* 1.75 g) (* 0.30 g))))}
+| *Samaria:*| @show{(sexp->code '(define (profit g) (* (- 1.75 0.30) g)))}
+| *Alenka:* | @show{(sexp->code '(define (profit g) (* 1.45 g)))}
+| *Fauzi:* 	| @show{(sexp->code '(define (profit g) (- (revenue g) (cost g))))}
+|===
 
-@vspace{10ex}
+@vspace{1ex}
 
-@n Which function definition would require you to start from scratch if pricing changed?
+@n Which of these four definitions do you think is "best", and why?
 
-@vspace{10ex}
+@span{.blankline}{@ifsoln{Answers may vary, but they should be sensible!}}
+@span{.blankline}{@ifsoln{ A student might argue that Khalil's definition is "closest to the word problem",}}
+@span{.blankline}{@ifsoln{or that Alenka's is the "fastest" since the computation is already done.}}
+@span{.blankline}{@ifsoln{Fauzi's solution uses the other definitions to do its work, and is the most readable.}}
 
-@n If a friend wanted to start a chocolate chip cookie business, whose code would be the most useful to use as a model?
+@n If lemons get more expensive, which definitions of `profit` need to be changed?
 
-@vspace{10ex}
+@span{.blankline}{@ifsoln{Everyone but Fauzi's definition needs to be changed}}
+@span{.blankline}{}
+@span{.blankline}{}
+@span{.blankline}{}
+
+@n If Sally raises her prices, which definitions of `profit` need to be changed?
+
+@span{.blankline}{@ifsoln{Everyone but Fauzi's definition needs to be changed}}
+@span{.blankline}{}
+@span{.blankline}{}
+@span{.blankline}{}
+
+@n Which definition of `profit` is the most flexible? Why?
+
+@span{.blankline}{@ifsoln{Fauzi's definition describes profit as `revenue - cost`,}}
+@span{.blankline}{@ifsoln{and can be used with _any_ revenue and cost functions.}}
+@span{.blankline}{}
+@span{.blankline}{}
