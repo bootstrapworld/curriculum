@@ -157,7 +157,7 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
-        "MLR.7"    ; strategy box in lesson
+        "MLR.7"    
         )
         
     ("restating-the-problem" 
