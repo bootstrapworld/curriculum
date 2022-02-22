@@ -7,7 +7,7 @@ td p { margin: 0; }
 </style>
 ++++
 
-Open the @starter-file{height} and click Run.
+Open the @starter-file{height} and click Run to interact with data from another sample of students.
 
 @n Take a look at the code in the Definitions Area. What do you notice? What do you wonder?
 
@@ -32,13 +32,13 @@ Open the @starter-file{height} and click Run.
 [cols="^.^1,^.^1,^.^1,^.^1", options="header"]
 |===
 | Sample 	| rate of change 		| y-intercept				| R value
-| All		| @ifsoln{_3.061_}		| @ifsoln{_25.175_} 		| @ifsoln{_+0.740_}
-| Females	| @ifsoln{_3.481_}		| @ifsoln{_21.338_} 		| @ifsoln{_+0.696_}
-| Males		| @ifsoln{_2.747_}		| @ifsoln{_27.882_} 		| @ifsoln{_+.802_}
+| All		| @ifsoln{_2.398_}		| @ifsoln{_24.037_} 		| @ifsoln{_+0.912_}
+| Females	| @ifsoln{_2.588_}		| @ifsoln{_23.803_} 		| @ifsoln{_+0.967_}
+| Males		| @ifsoln{_2.125_}		| @ifsoln{_25.628_} 		| @ifsoln{_+.946_}
 |=== 
 
 
-@n What makes it difficult to compare these two plots visually?
+@n What makes it difficult to compare these plots visually?
 
 @span{.blankline}{ @ifsoln{_The axes are labelled differently_} }
 @span{.blankline}{}
@@ -49,13 +49,18 @@ Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust th
 [cols="^1,^1,^1,^1" options="header"]
 |===
 | x-min: 	| x-max:	| y-min:	| y-max:
-| 6.5		| 12.5 		| 	40		| 70
+| 6.5		| 12.5 		| 	40		| 60
 |===
 and click `Redraw`.  Then, do the same for `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
 
 
-@n How do the two plots compare now that their windows match?
+@n How do the plots compare now that their windows match?
 
-@span{.blankline}{ @ifsoln{_Answers will vary. The girls seem to be growing faster._} }
-@span{.blankline}{@ifsoln{_The dots on the boys' graph are clustered more closely around the line._}}
-@span{.blankline}{@ifsoln{_There are no seven-year-old girls in the dataset!_}}
+@span{.blankline}{@ifsoln{_Answers will vary. The girls seem to be growing faster._}}
+@span{.blankline}{@ifsoln{_The dots stray farther from the predictor line on the plot that includes all students._}}
+@span{.blankline}{}
+
+@n What happens if you compare the students' height in inches to their height in centimeters by plotting `lr-plot(h-table, "gender-id", "height-cm", "height")`?
+
+@span{.blankline}{@ifsoln{_All of the dots fall on the predictor line and the r-value is 1!_}}
+@span{.blankline}{@ifsoln{_(This is because someone's height in inches correspods exactly to their height in centimeters.)_}}
