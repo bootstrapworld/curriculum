@@ -10,6 +10,10 @@
   print-link-to-forum
   )
 
+;please add definitions for
+; print-course-logo print-course-banner print-teach-remotely print-preparation
+; print-ordering-workbooks
+
 (define (print-lessons-intro o)
   (fprintf o "Proporcionamos todos nuestros materiales @italic{de forma gratuita}, a cualquier persona que esté interesada en usar nuestros planes de lección o libros de ejercicios para estudiantes.
 

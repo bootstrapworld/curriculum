@@ -942,6 +942,7 @@
                       f.asc link-text))])))
 
 (define (make-pathway-link f link-text)
+  ; (printf "doing make-pathway-link ~s ~s\n" f link-text)
   (enclose-span ".pathway-link"
     (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
 
@@ -1552,6 +1553,14 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)]
+                           [(string=? directive "preparation")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @preparation (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (print-preparation
+                              (make-pathway-link "workbook/workbook.pdf" "Student workbook")
+                              o)]
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (display-lesson-description (read-group i directive)
