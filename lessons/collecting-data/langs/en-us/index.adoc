@@ -1,0 +1,188 @@
+= Collecting Data
+
+@description{Students learn about the importance of careful data collection, by confronting a "dirty" dataset. They then design a simple survey of their own, gather their data, and import it into Pyret}
+
+@lesson-prereqs{displaying-categorical-data}
+
+@keywords{Survey, Data Collection}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+- Identify different data-hygiene problems that can mess up analysis
+- Use response validation in Google Forms
+- Import data from a Google Sheet into Pyret
+
+| Student-facing Lesson Goals
+|
+
+* Knowing when data is "dirty" - and should be avoided!
+* Knowing how to collect clean data
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/TBD, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+* Make sure all materials have been gathered.
+* Decide how students will be grouped in pairs.
+* Computer for each student (or pair), with access to the internet
+* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
+* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new one @starter-file{animals}.
+
+@lang-prereq
+|===
+
+== When Data Gets Dirty! @duration{XYZ minutes}
+
+=== Overview
+Students are given a spreadsheet containing "dirty" and unusable data. They first brainstorm reasons why it's problematic, then import it into Pyret and confirm.
+
+=== Launch
+Visualizing and analyzing a dataset is great, but what if we want to gather our _own_ data? A company might want to survey its customers to see if they are happy with the product, or we might want to gather data on plant growth to see whether a plant grows faster with a lot or a little sun. The CDC might gather data on symptoms to see how serious a disease is, or an airline could gather data on fuel usage to see which airplane routes are the most efficient.
+
+We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest! *But not all data is created equal....*
+
+[.lesson-point]
+Only _clean_ data can be properly analyzed.
+
+What does it mean for data to be clean? What does it mean for data to be dirty?
+
+[.lesson-instruction]
+Have students open @link{dirty-data, Height v. Wingspan (Dirty)}, and turn to @printable-exercise{pages/dirty-explore.adoc}.
+
+There are many different ways that data can be dirty!
+
+. Missing Data - When a dataset has blanks, it means that some data is missing. Deleting an entire row because one cell is blank means deleting all the good data from the other cells. Making up a value for the empty cell is like lying, by inventing data that could influence our results.
+
+. Wrong Type - Suppose we are collecting the heights of students, and everyone inputs their height in inches. This gives us a nice column full of numbers, which is easy to analyze. But what happens if someone writes "I'm SO TALL" as their height? We can't make a histogram or scatter plot from a string! And we don't know how tall they actually are, so this is _also_ missing data.
+
+. Wrong Units - Continuing our example, we might hav e
+
+=== Investigate
+
+
+
+
+=== Synthesize
+Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and only linear relationships make sense if we want to summarize with a correlation.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Going Deeper}
+
+In an AP Statistics class or full-year Data Science class, it's appropriate to discuss non-linear relationships here. In a dedicated computer science class, it may also be appropriate to talk about _transforming_ the x- or y-axis (using `.build-column`!) via a quadratic, exponential, or logarithmic function and then looking for a linear pattern in the resulting scatter plot. All of these are *extensions* to the materials presented here.
+|===
+
+
+== Correlations have __Direction & Strength__ @duration{20 minutes}
+
+=== Overview
+Once students have learned to identify a possible linear relationship, they can turn their attention to other qualities of that relationship: its _direction_ and _strength_. Each of these is expressed in the @math{r}-value, which students learn to read.
+
+=== Launch
+Assuming a relationship is linear, data scientists calculate a single number called "correlation" - or @math{r}-value - that reports both the direction and strength.
+
+[.lesson-point]
+_Direction:_ whether a linear relationship is positive or negative.
+
+A linear relationship between two quantitative variables is _positive_ if, in general, the scatter plot points are sloping up: smaller x values tend to go with smaller y values, and larger x values tend to go with larger y values. The relationship is _negative_ if points slope down: smaller x values tend to go with _larger_ y values, and larger x values tend to go with _smaller_ y values.
+
+- *Positive* relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
+- *Negative* relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
+
+[.lesson-point]
+_Strength:_ how closely the two variables are correlated.
+
+How well does knowing the x-value allow us to predict what the y-value will be?
+
+- A relationship is *strong* if knowing the x-value of a data point gives us a very good idea of what its y-value will be (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+- A relationship is *weak* if x tells us little about y (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+
+=== Investigate
+Have students turn to @printable-exercise{pages/identifying-form.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is positive or negative, and whether it is strong or weak.
+
+The correlation @vocab{r} is a number (falling anywhere from -1 to +1) that tells us the direction and strength of a linear relationship between two variables. @math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
+
+An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 or ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+
+Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
+
+Have students turn to @printable-exercise{pages/identifying-form-open-ended.adoc} in their student workbooks. For each scatter plot, identify whether the relationship is linear, and use @math{r} to summarize direction and strength.
+
+_If you have time for more practice, we recommend:_
+
+- _our card sort activities on @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/6018cc371c5b92526b6a96d, identifying direction} and @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, identifying strength}_
+- _the online game @link{http://guessthecorrelation.com/, Guess the Correlation} to develop intuition with r-values_
+
+@vspace{1ex}
+
+[.lesson-instruction]
+- In the Interactions Area, create a scatter plot for the Animals Dataset, using `"pounds"` as the xs and `"weeks"` as the ys.
+- *Form:* Does the point cloud appear linear or non-linear?
+- *Direction:* If it's linear, does it appear to go up or down as you move from left to right?
+- *Strength:* Is the point cloud tightly packed, or loosely dispersed?
+- Would you predict that the @math{r}-value is positive or negative? Will it be closer to zero, closer to ±1, or in between?
+- Have Pyret compute the @math{r}-value, by typing `r-value(animals-table, "pounds", "weeks")`. Does this match your prediction?
+- Repeat this process using `"age"` as the xs. Is this correlation stronger or weaker than the correlation for `"pounds"`? What does that _mean_?
+
+=== Common Misconceptions
+- Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
+- Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
+- Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
+
+=== Synthesize
+It is useful to ask students probing questions, to help address the misconceptions listed above. Some examples:
+
+- What is the difference between a _weak_ relationship and a _negative_ relationship?
+- What is the difference between a _strong_ relationship and a _positive_ relationship?
+- If we find a strong relationship in a sample, can we always infer that relationship holds for the whole population?
+- Suppose we have two correlations, one drawn from 10 data points and one drawn from 50. If both correlations are identical in direction and strength, should we trust them equally when making an inference about the larger population?
+
+[.lesson-point]
+Correlation does NOT imply causation.
+
+It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
+
+Here are some possible correlations that have absolutely no causal relationship; they come about either by chance or because both of them are related to another variable that’s (often) lurking in the background.
+
+- For a certain psychology test, the amount of time a student studied was negatively correlated with their score! (Struggling students _needed_ to study more; they would have done even worse if they'd studied less!)
+- Weekly data gathered in a city throughout the year showed a positive correlation between ice cream consumption and drowning deaths. (Warmer weather affects both; they have no effect on one another.)
+- A negative correlation was found between how much time students talked on the phone and how much they weighed. (Gender is a confounder: women tend to weigh less and talk more than men.)
+
+Here are a few real correlations, drawn from the @link{http://tylervigen.com/, Spurious Correlations website}. If time allows, have your students explore the site to see more!
+- “Number of people who drowned after falling out of a fishing boat” v. “Marriage rate in Kentucky” (@math{r} = 0.98)
+- “Average per-person consumption of chicken” v. “U.S. crude oil imports” (@math{r} = 0.95)
+- “Marriage rate in Wyoming” v. “Domestic production of cars” (@math{r} = 0.99)
+- “Number of people who get tangled in their own bedsheets” v. “Amount of cheese consumed that year” (@math{r} = 0.95)
+
+== Your Analysis @duration{flexible}
+
+=== Overview
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results.
+
+*Note: this activity can be done as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+
+=== Launch
+What correlations do you think there are in your dataset? Would you like to investigate a subset of your data to find those correlations?
+
+=== Investigate
+[.lesson-instruction]
+- Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
+- Turn to @printable-exercise{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
+- Investigate these correlations. If you need blank Design Recipes, you can find them at the back of your workbook, just before the Contracts.
+
+=== Synthesize
+What correlations did you find?
+Did you need to filter out certain rows in order to get those correlations?
+
+After looking at the scatter plot for our animal shelter, do you still agree with the claim on @printable-exercise{scatter-plots/pages/disproving-claim.adoc}? (Perhaps they need more information, or to see the analysis broken down separately by animal!)
+
+== Additional Exercises:
+- @opt-printable-exercise{pages/identifying-form-matching.adoc}

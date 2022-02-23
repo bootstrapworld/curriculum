@@ -281,7 +281,7 @@
         "SEP.3"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "MP.3"      ; STEMworks
         "MP.4"      ; STEMworks
         "MLR.7"
