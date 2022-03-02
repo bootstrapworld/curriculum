@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-02-17 # last modified
+LASTMOD=2022-03-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2446,20 +2446,28 @@ function postproc_allpwylessons() {
 }
 
 function run_postproc() {
+
   local postproc_func=$1
   local bigfile=$2
+  # local start=`date +%s`
+  # echo 👨‍💻POST-PROCESSING HTML $postproc_func $bigfile
+  # echo '-----------------------------------------------------------'
   rm -f $bigfile-split*
   split -l $MAXBASHTHREADS $bigfile $bigfile-split
   for smallfile in $bigfile-split*; do
     if test -f "$smallfile"; then
       for fhtml in $(cat $smallfile); do
-        #FIXME: unparallelize for $NOPARALLEL?
-        # $postproc_func $fhtml &
-        $postproc_func $fhtml
+        $postproc_func $fhtml &
       done
-      # wait #not needed because there's a superwait enclosing this
+      wait
     fi
   done
+
+  # local end=`date +%s`
+  # local runtime=$((end-start))
+  # echo \ Completed in $runtime s
+  # echo " "
+
 }
 
 function doadocpostproc() {
@@ -2493,14 +2501,12 @@ function doadocpostproc() {
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
-  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT &
-  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT &
-  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT &
-  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT &
-  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT &
-  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT &
-
-  wait
+  run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
+  run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
+  run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+  run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
+  run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
 
   end=`date +%s`
   runtime=$((end-start))
