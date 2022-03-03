@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-03-02 # last modified
+LASTMOD=2022-03-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -169,6 +169,9 @@ NOARGSGIVEN=
 
 if test "$ARGS" = ""; then
   NOARGSGIVEN=1
+  if test ! $PROGLANG; then
+    PROGLANG=pyret
+  fi
   ARGS=$(ls -d pathways/*)
 fi
 
@@ -1150,21 +1153,20 @@ function checklessonplan() {
 
 function buildworkbookpages() {
   local L=$1
-  #echo doing buildworkbookpages $L in $(pwd)
+
+  if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
+    return
+  elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
+    return
+  fi
+
+  # echo doing buildworkbookpages $L in $(pwd)
+
   export oldDISTROOTDIR="$DISTROOTDIR"
   local oldPROGLANG="$PROGLANG"
   cd $L
   export LESSON=$L
   export LESSONSUBDIR=$L
-  #
-  repoDir="$TOPDIR/lessons/$LESSONSUBDIR/langs/$NATLANG"
-
-  export PROGLANG=pyret
-  if test -f .cached/.wescheme; then
-    export PROGLANG=wescheme
-  elif test -f .cached/.codap; then
-    export PROGLANG=codap
-  fi
 
   DORECURSIVEADOC=
 
@@ -1225,6 +1227,12 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
+  if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
+    return
+  elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
+    return
+  fi
+
   # echo doing buildlessonplan $L in $(pwd)
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
@@ -1235,13 +1243,6 @@ function buildlessonplan() {
   export LESSONSUBDIR=$L
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
-
-  export PROGLANG=pyret
-  if test -f .cached/.wescheme; then
-    export PROGLANG=wescheme
-  elif test -f .cached/.codap; then
-    export PROGLANG=codap
-  fi
 
   if test -f index.adoc; then
     #export PATHWAYROOTDIR="../../"
@@ -2584,25 +2585,25 @@ function callonARGS() {
     export TGTPATHWAY="$SRCPATHWAY"
     #echo SRCPATHWAY is $SRCPATHWAY
     #echo TGTPATHWAY is $TGTPATHWAY
-    if test "$PROGLANG" = ""; then
+
+    if test "$PROGLANG" = pyret; then
       if test "$SRCPATHWAY" = algebra; then
-        export PROGLANG=wescheme
-        export TGTPATHWAY=algebra-wescheme
-        $subroutine
-        export PROGLANG=pyret
         export TGTPATHWAY=algebra-pyret
-        $subroutine
-      else
-        export PROGLANG=pyret
-        $subroutine
       fi
-      export PROGLANG=
-    else
+    elif test "$PROGLANG" = wescheme; then
       if test "$SRCPATHWAY" = algebra; then
-        export TGTPATHWAY=algebra-$PROGLANG
+        export TGTPATHWAY=algebra-wescheme
+      else
+        return
       fi
-      $subroutine
+    elif test "$PROGLANG" = codap; then
+      if test "$SRCPATHWAY" != data-science -o "$SRCPATHWAY" != data-science-codap; then
+        return
+      fi
     fi
+
+    $subroutine
+
   done
 }
 
