@@ -169,11 +169,10 @@ NOARGSGIVEN=
 
 if test "$ARGS" = ""; then
   NOARGSGIVEN=1
+  if test ! $PROGLANG; then
+    PROGLANG=pyret
+  fi
   ARGS=$(ls -d pathways/*)
-fi
-
-if test ! $PROGLANG; then
-  PROGLANG=pyret
 fi
 
 #echo ARGS is $ARGS
@@ -2009,7 +2008,7 @@ function buildpathway() {
       cd $DESTPATHWAYDIR
       test -d .cached || mkdir -p .cached
       touch .cached/.redopdf
-      if test "$PROGLANG" != pyret; then
+      if test $PROGLANG != pyret; then
         updatepathwaylist $PROGLANG
       fi
       cd $TOPDIR
