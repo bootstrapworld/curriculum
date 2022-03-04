@@ -88,7 +88,7 @@
   
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
    )
   ("boolean" "Boolean Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
