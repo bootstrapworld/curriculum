@@ -1094,6 +1094,25 @@ function checklessonplan() {
       else
         echo $f >> $exerfA
       fi
+      if test ! $NOPDF; then
+        gext=${g##*.}
+        #echo gext is $gext
+        if test "$gext" = adoc; then
+          gbase=${g%.adoc}
+          g=$gbase.html
+          gext=html
+          gpdf=$gbase.pdf
+        fi
+        #echo g is $g gext is $gext
+        if test "$gext" = html; then
+          if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+          fi
+          if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
+            echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+          fi
+        fi
+      fi
     done
   fi
 
@@ -1115,7 +1134,8 @@ function checklessonplan() {
 
     aspect=portrait
     if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-      aspect=landscape
+      #aspect=landscape # ? FIXME
+      :
     fi
     if test ! $NOPDF; then
       g=${f#pages/}
@@ -1785,23 +1805,18 @@ function copylessondir() {
       cd ..
     fi
 
-    if test "$PROGLANG" = pyret; then
-      echo $lessonDir >> $RELEVANT_LESSONS_INPUT
-      cd $lessonDir
-      checklessonplan $lessonDir
-      cd ..
-    fi
-
+    echo $lessonDir >> $RELEVANT_LESSONS_INPUT
+    cd $lessonDir
+    checklessonplan $lessonDir
+    cd ..
     if test -f $repoLessonDir/proglang.txt; then
       for pl in $(cat $repoLessonDir/proglang.txt); do
         local lessonDirPl=$lessonDir-$pl
         if test -d $lessonDirPl; then
-          if test "$PROGLANG" = "$pl"; then
-            echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
-            cd $lessonDirPl
-            checklessonplan $lessonDirPl
-            cd ..
-          fi
+          echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
+          cd $lessonDirPl
+          checklessonplan $lessonDirPl
+          cd ..
         fi
       done
     fi
@@ -1857,6 +1872,27 @@ function collectworkbookpages() {
           else
             echo $f >> .cached/.workbook-pages.txt.kp
             echo $f >> .cached/.workbook-pages-ls.txt.kp
+          fi
+        fi
+        if test ! $NOPDF; then
+          if test $DOINGLESSON; then
+            gext=${g##*.}
+            if test "$gext" = adoc; then
+              gbase=${g%.adoc}
+              g=$gbase.html
+              gext=html
+            elif test "$gext" = html; then
+              gbase=${g%.html}
+            fi
+            gpdf=$gbase.pdf
+            if test "$gext" = html; then
+              if test ! -f "$gpdf" -o "$g" -nt "$gpdf"; then
+                echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+              fi
+              if test ! -f "../solution-pages/$gpdf" -o "../solution-pages/$g" -nt "../solution-pages/$gpdf"; then
+                echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+              fi
+            fi
           fi
         fi
       done < workbook-pages.txt
@@ -2512,6 +2548,15 @@ function doconversions() {
 
   doadocpostproc $ADOC_INPUT
 
+  if test ! $NOPDF; then
+    if test ! -f lib/$ABYSS.pdf; then
+      echo '= PAGE NOT FOUND!' > lib/$ABYSS.adoc
+      echo >> lib/$ABYSS.adoc
+      asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css lib/$ABYSS.adoc
+      echo ", { \"input\": \"lib/$ABYSS.html\" }" >> $PUPPETEER_INPUT
+    fi
+
+  fi
 }
 
 function dolinkcheck() {
