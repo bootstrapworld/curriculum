@@ -873,20 +873,11 @@ function doadocs() {
 }
 
 function processadocs() {
-  # echo doing processadocs $@
-  if test $# -eq 0; then
-    if test "$dir" = pages; then
-      echo No adoc files in $LESSONSUBDIR
-    fi
-    return
-  elif test $# -eq 1 -a ! -f $1; then
-    return
-  fi
+  # echo doing processadocs
 
-  local ff_given="$@"
   local ff=
 
-  for f in $ff_given; do
+  for f in *.adoc; do
     if test ! -f $f; then
       #echo Not a valid adoc file $f in $(pwd)
       continue
@@ -921,21 +912,35 @@ function processadocs() {
   doadocs $ff
 
   if test ! $NOPDF; then
-    for f in $ff_given; do
-      fbase=${f%.adoc}
-      fhtml=$fbase.html
-      fpdf=$fbase.pdf
-      #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-      if test ! -f "$fpdf"; then
-        if test "$RESOURCEDOCS" = 1 -o \
-          "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
-          "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
-                  #echo doing it!
-                  if test ! $OTHERDIR; then
-                    echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
-                  fi
-        fi
+    local tryhtml=
+    for ext in adoc html; do
+      if test "$ext" = html; then
+        test ! $tryhtml && break
       fi
+      for f in *.$ext; do
+        if test ! -f "$f"; then
+          test "$ext" = adoc && tryhtml=1
+          break
+        fi
+        if test "$ext" = adoc; then
+          fbase=${f%.adoc}
+        else 
+          fbase=${f%.html}
+        fi
+        fhtml=$fbase.html
+        fpdf=$fbase.pdf
+        #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
+        if test ! -f "$fpdf"; then
+          if test "$RESOURCEDOCS" = 1 -o \
+            "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
+            "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
+                      #echo doing it!
+                      if test ! $OTHERDIR; then
+                        echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+                      fi
+          fi
+        fi
+      done
     done
   fi
 
@@ -1002,7 +1007,7 @@ function recursiveadoc() {
     fi
   fi
 
-  processadocs *.adoc
+  processadocs 
 
   #test $DEBUG || rm -f *.adoc
 
@@ -1067,13 +1072,12 @@ function checksinglelessonplan() {
 
 function checklessonplan() {
   local L=$1
-  #echo doing checklessonplan $L in $(pwd)
+  # echo doing checklessonplan $L in $(pwd)
   checksinglelessonplan $L
   test -d .cached || mkdir -p .cached
 
-  test -f index.adoc || return
-
-  grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
+  if test -f index.adoc; then
+    grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
@@ -1098,39 +1102,65 @@ function checklessonplan() {
       fi
     done
   fi
-
-  wbpages=pages/workbook-pages.txt
-  if test ! -f $wbpages; then
-    wbpages=/dev/null
-  fi
-  if test ! -f $exerflist; then
-    exerflist=/dev/null
   fi
 
-  for f in pages/*.adoc; do
-    test ! -f "$f" && break
-    fpdf=${f%.adoc}.pdf
-    fhtml=${f%.adoc}.html
-    grep -q "$f" $wbpages $exerflist && continue
-    grep -q "$fpdf" $wbpages $exerflist && continue
-    grep -q "$fhtml" $wbpages $exerflist && continue
+  # wbpages=pages/workbook-pages.txt
+  # if test ! -f $wbpages; then
+  #   wbpages=/dev/null
+  # fi
+  # if test ! -f $exerflist; then
+  #   exerflist=/dev/null
+  # fi
 
-    aspect=portrait
-    if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-      aspect=landscape
-    fi
-    if test ! $NOPDF; then
-      g=${f#pages/}
-      g=${g%.adoc}
+  if test ! $NOPDF; then
+    local tryhtml=
+    for ext in adoc html; do
+      if test "$ext" = html; then
+        test ! $tryhtml && break
+      fi
+      for f in pages/*.$ext; do
+        # echo checklessonplan doing $f
+        if test ! -f "$f"; then
+          test "$ext" = adoc && tryhtml=1
+          break
+        fi
+        if test "$ext" = adoc; then
+          g=${f%.adoc}
+        else
+          g=${f%.html}
+        fi
+        fpdf=$g.pdf
+        fhtml=$g.html
+        # grep -q "$f" $wbpages $exerflist && continue
+        # grep -q "$fpdf" $wbpages $exerflist && continue
+        # grep -q "$fhtml" $wbpages $exerflist && continue
 
-      if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
-        echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-      fi
-      if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
-        echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-      fi
-    fi
-  done
+        # echo confirmed
+
+        aspect=portrait
+        #fixme what if html
+        if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+          aspect=landscape
+        fi
+        g=${g#pages/}
+
+        # if test ! -f "pages/$g.pdf"; then
+        #   echo pages/$g.pdf doesnt exist
+        # fi
+        # if test "pages/$g.html" -nt "pages/$g.pdf"; then
+        #   echo pages/$g.html is nt pages/$g.pdf
+        # fi
+
+
+        if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
+          echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 1 }" >> $PUPPETEER_INPUT
+        fi
+        if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
+          echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 2 }" >> $PUPPETEER_INPUT
+        fi
+      done
+    done
+  fi
 
 }
 
@@ -2611,6 +2641,7 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 copycommonlessons
+
 
 mkdir -p distribution/$NATLANG/.cached
 
