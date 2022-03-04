@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-03-03 # last modified
+LASTMOD=2022-03-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -911,7 +911,8 @@ function processadocs() {
     fi
     if test $DOIT; then
       fpdf=$fbase.pdf
-      test -f "$fpdf" && rm -f "$fpdf"
+      # unfortunately following doesn't work if repo supplies both f.adoc and f.pdf
+      # test -f "$fpdf" && rm -f "$fpdf"
       ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
     fi
@@ -1121,6 +1122,7 @@ function checklessonplan() {
     if test ! $NOPDF; then
       g=${f#pages/}
       g=${g%.adoc}
+
       if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
         echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
       fi
