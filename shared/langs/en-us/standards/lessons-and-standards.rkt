@@ -609,7 +609,7 @@
         "OK.PA.D.1.2"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "6.SP.A"   ; STEMworks
         "6.SP.A.2" ; STEMworks
         "6.SP.B.4" ; STEMworks

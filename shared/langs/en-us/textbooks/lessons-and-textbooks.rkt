@@ -290,7 +290,7 @@
 		"IM.Alg1.1.11"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "CMP.6.7"
 		"IM.6.8.15"
 		"IM.6.8.16"

@@ -46,6 +46,7 @@ h2 {
   margin:         0 0 1ex 0; /* 1ex bottom margin */
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
+#header>h1:only-child { border-bottom: none; }
 
 /* unordered list spacing */
 ul { line-height: inherit; }
@@ -160,6 +161,9 @@ tr th.tableblock {
 .tooltip:hover .tooltiptext { opacity: 1; }
 
 .alignedStandards { display: none; }
+
+.coverageElement { display: none; }
+
 .standard-menu-container {
   padding:          10px;
   display:          flex;
@@ -171,7 +175,7 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.fitb, .fitbruby, .blankline, .vskip {
+.fitb, .fitbruby, .blankline {
   display:            inline-block;
   min-height:         13px;
   min-width:          5em;
@@ -186,14 +190,13 @@ tr th.tableblock {
    padding:           0;
 }
 
-.vskip { margin-top: 25px; width: 100%; border-bottom: none;}
-.blankline { margin-top: 13px; width: 100%;}
+.blankline { margin-bottom: 13px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
-.fitbruby::before, .vskip::before, .blankline::before {
+.fitbruby::before, .blankline::before {
   content: '\00200b';
 }
 
@@ -213,6 +216,18 @@ tr th.tableblock {
 #lesson-list dt { margin-top: 15px; display: inline-block;}
 #lesson-list dd:after{ display: block; content: '';}
 #lesson-list dd:before{ display: inline; content: '::'; font-weight: 900; }
+
+.course-banner {
+  font-style: italic;
+  background: #B6D990aa;
+  border: #75328A 1px dashed;
+  padding: 5px;
+  margin-bottom: 2rem;
+}
+.course-banner a {
+  color: black;
+  text-decoration: underline;
+}
 
 /************************************************************************************
 * LESSON SIDEBAR
@@ -238,6 +253,27 @@ tr th.tableblock {
   z-index:    9999;
   overflow:   scroll;
 }
+.sidebar.closed {
+  left:  -225px;
+  width: 265px;
+  height: 30px;
+}
+.sidebar .paragraph { width: 205px; }
+.sidebar #toggle:after { content: '≫'; font-size: 20px;}
+.sidebar:not(.closed) #toggle:after { content: '«'; }
+
+.sidebar #toggle {
+  top:    0;
+  right:  0;
+  position: absolute;
+  width:  40px;
+  height: 30px;
+  text-align:  center;
+  border: 0;
+  margin: 0 !important;
+  background: #75328A77;
+}
+
 .sidebar > * { margin: 0px 10px !important; }
 .sidebar label { display: inline; font-size: 0.8rem; }
 .sidebar select { border:  none; }
@@ -247,6 +283,7 @@ tr th.tableblock {
 .sidebar strong { color: black; margin: 0; }
 .sidebar li { list-style-type: none; margin-bottom: 5px;}
 
+.sidebarlessons { margin-top:  10px; }
 .sidebarlessons input[type="checkbox"] { margin-right: 5px; }
 .sidebar .sidebarlessons ul { 
   background: white; 
@@ -402,6 +439,7 @@ tr th.tableblock {
   width:              75%;
   margin:             15px auto;
   display:            block;
+  clear:              both;
 }
 .strategy-box { border-color: #1a73b5 !important; }
 .notice-box   { border-color: #7747a5 !important; }
@@ -716,7 +754,7 @@ div.circleevalsexp .hspace { display: none; }
 div.circleevalsexp .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
 
 /* When in operator position, drop the margins */
-div.circleevalsexp .operator .value { margin: 0px; }
+div.circleevalsexp .operator .value { margin: 0 0.5rem; }
 /* Don't show parens in Circle mode */
 div.circleevalsexp .lParen, div.circleevalsexp .rParen { display: none; }
 
@@ -736,6 +774,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   background-color:   #f7f7f8; 
   margin:             0 2px; 
   padding:            0 2px; 
+  text-align:         left;
 }
 p .editbox { line-height: 1.6rem; vertical-align: baseline; font-size: 0.9rem; } 
 
@@ -864,7 +903,7 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .workbookpage, .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
+  .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
    display: none !important; visibility: hidden; float: none;
   }
 

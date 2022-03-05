@@ -1,0 +1,158 @@
+= Collecting Data
+
+++++
+<style>
+img { border: solid 1px; box-shadow: 1px 1px 1px 0px gray; }
+.hygiene-tools li { margin-left: 3rem; margin-bottom: 4ex; max-width: 550px; }
+</style>
+++++
+
+@description{Students learn about the importance of careful data collection, by confronting a "dirty" dataset. They then design a simple survey of their own, gather their data, and import it into Pyret}
+
+@lesson-prereqs{displaying-categorical-data}
+
+@keywords{Survey, Data Collection}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+- Identify different data-hygiene problems that can mess up analysis
+- Use response validation in Google Forms
+- Import data from a Google Sheet into Pyret
+
+| Student-facing Lesson Goals
+|
+
+* Knowing when data is "dirty" - and should be avoided!
+* Knowing how to collect clean data
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/TBD, Lesson Slides}
+
+@material-links
+
+| Preparation
+|
+@preparation
+* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new one @starter-file{animals}.
+
+@lang-prereq
+|===
+
+== When Data Gets Dirty! @duration{20 minutes}
+
+=== Overview
+Students are given a spreadsheet containing "dirty" and unusable data. They first brainstorm reasons why it's problematic, then import it into Pyret and confirm.
+
+=== Launch
+Visualizing and analyzing a dataset is great, but what if we want to gather our _own_ data? A company might want to survey its customers to see if they are happy with the product, or we might want to gather data on plant growth to see whether a plant grows faster with a lot or a little sun. The CDC might gather data on symptoms to see how serious a disease is, or an airline could gather data on fuel usage to see which airplane routes are the most efficient.
+
+We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest! *But not all data is created equal....*
+
+[.lesson-point]
+Only _clean_ data can be properly analyzed.
+
+What does it mean for data to be clean? What does it mean for data to be dirty? Humans make mistakes, and that can happen when if are collecting data or entering data. Either way, the result is dirty data...and there is a _lot_ of dirty data out there that Data Scientists have to deal with!
+
+=== Investigate
+
+There are many different ways that data can be dirty! Let's take a look at some dirty data...
+
+[.lesson-instruction]
+Have students open @link{https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing, New Animals!}, and complete @printable-exercise{pages/dirty-explore.adoc} in pairs or small groups.
+
+. Missing Data - A column containing some cells with data, but some cells left blank.
+
+. Inconsistent Types - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
+
+. Inconsistent Units - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
+
+[.lesson-instruction]
+Have students share their findings from @printable-exercise{pages/dirty-explore.adoc}.
+
+Pyret is pretty smart, and does a lot of checking to make sure data is clean before analyzing it. But suppose it didn't...
+
+. What would happen if you tried to make a pie chart from a categorical column, but three of the cells were blank?
+. What would happen if you tried to take a histogram of a quantitative column, but half the cells were Strings instead of Numbers?
+. What would happen if you made a scatter plot examining `pounds` v. `weeks`, but two of the cells in the `weeks` column were actually showing the _days_ to adoption?
+
+Sometimes, there's an easy way to clean up the data. Chanel and Bibbles have string values for their weights, but we can easily those types and units to be numbers representing pounds.
+
+But what if the data is missing, like the `weight` for our dogs? Or what if it's weird data that we know is wrong but we don't know how to fix it, like the `time to adoption` for Boss and Bibbles?
+
+[.lesson-point]
+It's never as simple as just deleting dirty rows!
+
+Suppose we decided to delete all the rows with blank cells, removing Rover, Susie Q, and Happy. How might that bias our analysis? __Removing all the dogs makes it look like this shelter doesn't have any!__
+
+Suppose we decided to delete all the rows with weird data, having inconsistent types or units we don't recognize? We could delete Boss and Bibbles, but how might that bias our analysis? __Removing all the female lizards might affect the kind of food or habitat the shelter needs to buy!__
+
+=== Common Misconceptions
+TBD
+
+=== Synthesize
+
+These animal examples were a useful way to illustrate the problem, but dirty data shows up _everywhere_. Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
+
+. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
+. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
+. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
+
+
+== Collecting Clean Data @duration{20 minutes}
+
+=== Overview
+Students open a survey (a google form) containing "bad" questions. They identify why the questions are problematic, and then create a copy of the survey with their proposed fixes.
+
+=== Launch
+The way we ask questions - and check responses - plays a big role in how clean our data is.
+
+It is often said that a person's height is exactly as their "wingspan" (the length from fingertip to fingertip when their arms are outstretched). Suppose we want to test this for ourselves, by surveying students at a school.
+
+Open @starter-file{bad-survey}, so that students can see it on the projector, tv, or their own screens.This Google form has _intentionally designed to gather bad data!_ Can you see anything wrong with it?
+
+[.lesson-instruction]
+Have students open @starter-file{bad-survey}, and complete @printable-exercise{bad-survey.adoc} in pairs or small groups.
+
+While it's almost impossible to _guarantee_ 100% clean data, most survey tools include advanced options to help Data Scientists like get data that is as clean possible. Here's an overview of those tools:
+
+[.hygiene-tools]
+--
+. @span{.right}{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
+@span{.clear}{}
+
+. @span{.right}{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondants to select multiple grades!
+@span{.clear}{}
+
+. @span{.right}{@image{images/description.png}} *Adding a Description* - Sometimes it's helpful to just add instructions! This can remind respondants to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
+@span{.clear}{}
+
+. *Adding Validation* - When you need to use an open-response question, there's always a risk of garbage data. Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Nobody answering this survey is 10 inches tall, so this helps prevent garbage data as well! Questions B and E would benefit from some validation. @span{.right}{@image{images/validation.png}}
+@span{.clear}{}
+--
+
+=== Investigate
+
+[.lesson-instruction]
+- Have students @link{https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy, Make a Copy of the bad survey}, and work in pairs or small groups to fix it!
+- Have student share back what changes they made, and what they discussed.
+
+=== Synthesize
+
+- Have you ever taken a survey, where you just _know_ the questions are going to result in bad data?
+- When someone conducts a survey and provides a dataset from it, is it important for them to share the survey? Why or why not?
+- When someone share dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Project Option: Designing a Survey}
+
+In this project, students come up with a research question and @opt-project{survey-design.adoc, survey-design-rubric.adoc} to gather data to answer it. They exchange surveys and try to "hack" each other's study with garbage data. Teachers can have their students import the resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they've already learned.
+
+Finally, this project can also be used to support _original data collection_ in the final research paper.
+|===

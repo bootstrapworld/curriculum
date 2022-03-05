@@ -1,0 +1,70 @@
+= Moving in Two Dimensions
+
+++++
+<style>
+	.autonum { margin-top: 2rem; display: inline-block; }
+	.center  { padding-bottom: 0; }
+	.obeyspaces {
+		white-space: pre-wrap;
+    	width: 100%;
+    	display: inline-block;
+		margin-bottom: 1rem;
+    	text-align: center;
+	}
+</style>
+++++
+
+@show{
+  (contract "update-danger" '("Number") "Number"
+	"takes in danger's x-coordinate and produces the next one")
+}
+
+This function takes in the danger’s x-coordinate and produces the next one, but it doesn't do anything with the y-coordinate. That's why our `DANGER` can only move left or right! Suppose we wanted to change the function, so it updates the character by _moving diagonally_...
+
+@n *Stop and think!* What, if anything, will have to change about the Domain?
+@span{.blankline}{ }
+
+@n To move diagonally, we need the function to be aware of both the x _and_ the y-coordinate. It will have to consume both x and y, so the Domain will change to `Number Number`. What other functions have you used that consume two Numbers?
+@span{.blankline}{ }
+
+@n *Stop and think!* What, if anything, will have to change about the Range?
+@span{.blankline}{ }
+
+The Range can't just be one Number, since an (x, y) coordinate has two Numbers. One idea might be to write the contract this way:
+
+@show{
+  (contract "update-danger" '("Number Number") "Number Number"
+	"take in danger's x- and y-coordinate, and produces the next x- and next y-coordinate")
+}
+
+Unfortunately, that contract breaks an important rule about functions: **Given an input, _all functions must produce one output!_**
+
+Fortunately, our programming language has another data type, called a `Posn`. A `Posn` - short for "position" - is a piece of data that contains two Numbers! We can make a `posn` to represent the position (100, 200) with the following code:
+
+@span{.center}{
+@show{ (sexp->code '(make-posn 100 200)) }
+}
+
+@n On the computer, try making a `Posn` or two. What expression will make a `Posn` representing the origin? @fitb{10em}{@showsoln{(sexp->code '(make-posn 0 0))}}
+
+@n Write the contract for the `make-posn` function on the line below.
+
+@ifnotsoln{
+@span{.blankline}{}
+}
+
+@showsoln{ (contract "make-posn" '("Number Number") "Posn") }
+
+@n On the lines below, write the *new contract and purpose* for `update-danger`, so that it produces a `Posn` instead of a Number.
+
+@ifnotsoln{
+@span{.blankline}{}
+@span{.blankline}{}
+}
+
+@showsoln{
+	(contract "update-danger" '("Number Number") "Posn"
+		"takes in danger's x- and y-coordinate, and returns a Posn")
+}
+
+@n In your game file, change your contract, purpose, examples, and definition to make your `DANGER` and `TARGET` move in two dimensions!

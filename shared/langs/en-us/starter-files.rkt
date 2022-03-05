@@ -31,8 +31,12 @@
 
   ; data-science
 
+  ("context" "Blank Dataset Starter File for Bootstrap:Data Science"
+    ("pyret" "https://code.pyret.org/editor#share=1HOkwUMWFgB3bR50JykQc2aWEw8iUo9GM")
+    )
+
   ("animals" "Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1")
+   ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("custom-animals" "Custom Animals Starter File"
@@ -47,6 +51,9 @@
    )
   ("custom-scatter-plot" "Custom Scatter Plot Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Yskwvzbe5CSMX3F1fveEOgrL3ms2cxHV")
+   )
+  ("height" "Age vs. Height Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1prqCzfZWJ-kuXJMclmi1qyE0cSdziLiV")
    )
   ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0")
@@ -70,12 +77,18 @@
   ("word-length"  "Word Length Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
    )
+  ("dirty-data"  "New Animals! Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
+   )
+  ("bad-survey"  "Height vs. Wingspan"
+   ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
+   )
 
   ; math
   
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
    )
   ("boolean" "Boolean Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
@@ -133,6 +146,10 @@
   ("flags-lebanon" "Flag of Lebanon Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1H1yf0uFJgiT6NBHqW8kh_JjLKHNQRXpH")
    ("wescheme" "https://www.wescheme.org/view?publicId=x0nJrP1UYp")
+   )
+  ("flags-turkey" "Flag of Turkey Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=17HZOT0Y6rHAmwv8BZNN9YIsoqI7yWmHj")
+   ("wescheme" "https://www.wescheme.org/view?publicId=0Sdq8F2b3q")
    )
   ("flags-panama" "Flag of Panama Starter File"
    ("wescheme" "https://www.wescheme.org/view?publicId=V4AfQydAHu")

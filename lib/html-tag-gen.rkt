@@ -1,7 +1,5 @@
 #lang racket
 
-(require "utils.rkt")
-
 (provide
   create-begin-tag
   create-end-tag

@@ -4,15 +4,25 @@
 
 (define *lessons-and-practices*
   '(
+
+; dummy alignments for sample lessons
+    ("__sample-lesson" "SJ.1")
+    ("zample-lesson" "SJ.1")
 ; core
 
-    ("who-are-programmers" 
+    ("computing-needs-all-voices" 
         "SJ.1"
         "SJ.2"
         "SJ.4"
+        "SJ.7"
+        "SJ.8"
         "SJ.10"
         "P1"
         ) 
+
+    ("codap-transformers" 
+        "MP.4"
+        )
 
     ("contracts"
          "SEP.8" 
@@ -31,25 +41,18 @@
         "MLR.4"
         "MP.6"
         ) 
-
-    ("who-are-programmers" 
-        "SJ.1"
-        "SJ.2"
-        "SJ.4"
-        "SJ.10"
-        ) 
 ; math
    
     ("combinatorics-permutation"
-        "SEP.5"
         "MP.4"
-        )
+        "MP.7"
+        "SEP.5")
 
     ("combinatorics-combination"
-        "SEP.5"
         "MP.4"
-        "MP.5"
-        )
+        ; "MP.5" -- needed? FIXME
+        "MP.7"
+        "SEP.5")
 
     ("coordinates" 
         "MP.2"
@@ -128,8 +131,9 @@
         "MLR.8"     ; strategy box in lesson
         )
 
-    ("numbers-inside-videogames" 
+    ("numbers-inside-video-games" 
         "MP.2"
+        "MP.4"
         )
 
     ("order-of-operations" 
@@ -153,7 +157,7 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
-        "MLR.7"    ; strategy box in lesson
+        "MLR.7"    
         )
         
     ("restating-the-problem" 
@@ -178,6 +182,10 @@
         "MP.3"      ; STEMworks
         "SEP.3"
         "P6" 
+        "SJ.12"
+        "SJ.13"
+        "SJ.14"
+        "SJ.15"
         )
 
     ("choosing-your-dataset" 
@@ -225,6 +233,8 @@
     ("ethics-and-privacy" 
         "MP.3"      ; STEMworks
         "P1" 
+        "SJ.12"
+        "SJ.13"
         )
 
     ("grouped-samples"
@@ -271,7 +281,7 @@
         "SEP.3"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "MP.3"      ; STEMworks
         "MP.4"      ; STEMworks
         "MLR.7"
@@ -292,6 +302,7 @@
         "MLR.1"
         "MP.2"
         "SEP.3"
+        "SJ.10"
         )
 
     ("scatter-plots"
@@ -324,29 +335,45 @@
         )
 
     ("re-refactoring" 
+        "P3"
+        "P4"
         )
 
     ("re-your-own-drawing-functions" 
         )
 
     ("re-build-your-own-animation" 
+        "P3"
+        "P4"
         )
 
     ("re-adding-collisions" 
+        "P3"
+        "P4"
         )
 
     ("re-scoring" 
+        "P4"
+        "P6"
         )
 
     ("re-adding-levels" 
+        "P3"
+        "P6"
         )
 
-    ("re-making-pong" 
+    ("re-making-pong"
+        "P3"
+        "P4"
         )
 
     ("re-nested-structures" 
+        "P3"
+        "P4"
         )
 
     ("re-timers" 
+        "P3"
+        "P4"
         )
 ))

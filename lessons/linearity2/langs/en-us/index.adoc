@@ -37,10 +37,7 @@
 
 | Preparation
 |
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
-* Computer for each student (or pair), with access to the internet
-* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
+@preparation
 
 | Key Points for the Facilitator
 |
@@ -66,23 +63,39 @@ Every linear relationship has two properties:
 
 1) The sequence of y-values always changes at a constant rate - called @vocab{slope} - increasing or decreasing by the same amount for each value. On a graph, this value refers to both the "steepness" and "direction" of the line.
 
-- If it goes up as we go from left to right, the slope is *positive*.
-- If it goes down as we from from left to right, the slope is *negative*.
-- If it stays perfectly horizontal, the slope is *zero*.
+[cols="^1,^1, ^1"]
+|===
+| If it goes up as we go from left to right, the slope is *positive*.
+| If it goes down as we go from left to right, the slope is *negative*.
+| If it stays perfectly horizontal, the slope is *zero*.
+| @centered-image{images/positive.png}
+| @centered-image{images/negative.png}
+| @centered-image{images/horizontal.png}
+|===
 
-2) The y-value when @math{x = 0} is called the @vocab{y-intercept}, On a graph, this value is where the line "intercepts" the y-axis.
+2) The y-value when @math{x = 0} is called the @vocab{y-intercept}. On a graph, this value is where the line "intercepts" the y-axis.
+
+[cols="^1,^1"]
+|===
+|
+@centered-image{images/negy.png}
+|
+@centered-image{images/posy.png}
+|===
 
 Take a look at the following Table (shown sideways, with rows going from left-to-right):
 
 [.sideways-pyret-table]
 |===
 
-| x | 1 | 2 | 3 | 4
-| y | 3 | 5 | 7 | 9
+| x | -1 | 0 | 1 | 2 | 3 | 4
+| y | -1 | 1 | 3 | 5 | 7 | 9
 |===
 
+@vspace{1ex}
+
 [.lesson-instruction]
-- Compute how much y increases for each increase in x to identify the @vocab{slope}.
+- Compute how much y increases as x increases by 1. We call this the @vocab{slope}.
 - Identify the @vocab{y-intercept} by finding the y-value when @math{x = 0}.
 - What strategies did you use to compute the slope and y-intercept?
 
@@ -97,40 +110,49 @@ But life isn't always so simple!
 - What if the other rows were __out of order__?
 - What if we only had a few random rows, for @math{x = 3} and @math{x = 1}?
 
-The slope and y-intercept in this table are much harder to find, because the x-values are out of order and we can't see a value for @math{x = 0}:
+The slope and y-intercept in this table are harder to find, because the x-values don't go up by 1 and we can't see a value for @math{x = 0}:
 
 [.sideways-pyret-table]
 |===
 
-| x | 3 | 2 | 4 |  6 | 1
-| y | 6 | 4 | 8 | 12 | 2
+| x |  2 | 5 | 8  | 11
+| y |  3 | 9 | 15 | 21
 |===
 
+The slope and y-intercept in this table are even harder to find, because the x-values are out of order!
+
+[.sideways-pyret-table]
+|===
+
+| x | 3 | 20 | 5  |  9 | 1
+| y | 5 | 56 | 11 | 23 | -1
+|===
+
+@vspace{1ex}
+
 [.lesson-instruction]
-How do we find the @vocab{slope} and @vocab{y-intercept} for this function, _without_ having to sort or extend the table?
+How do we find the @vocab{slope} and @vocab{y-intercept} for these functions, _without_ having to sort or extend the table?
 
-If we had the line for this function, we could generate as many points as we need to fill in the table, or to compute the @vocab{slope} and @vocab{y-intercept}. Can we reconstruct that line?
+We can exploit the fact that all linear functions form _straight lines_, and a straight line can be defined with only __two points!__ That means it is always possible to compute @vocab{slope} and @vocab{y-intercept}, as long as we have just two rows in our table or two points on our graph!
 
 [.lesson-instruction]
-How many points do we need to draw a straight line?
+Now that we know it's _possible_, how might we compute the slope and y-intercept, using only two rows in the table?
 
-We can exploit the fact that all linear function form _straight lines_, and a straight line can be defined with only __two points!__. That means it is always possible to compute @vocab{slope} and @vocab{y-intercept}, as long as we have just two rows in our table or two points on our graph!
+Leave some time for group discussion...
 
-Now that we know it's _possible_, how do we do it?
+@vspace{1ex}
 
-Leave some time for group discussion:
-[.lesson-instruction]
-How might we compute the slope and y-intercept, using only two rows in the table?
+*TO FIND THE SLOPE: Find any two pairs of values in the table, and divide the difference in y's by the difference in x's.*
 
-*1) SLOPE: find any two pairs of values in the table, and divide the difference in y's by the difference in x's.*
+This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
 
-This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function. This is often called "change in y over change in x", or __"rise over run"__.
+This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\frac{rise}{run}}.
 
-Taking the first two pairs of values in the table, this gives us @math{\frac{36 - 24}{17 - 11}}, which simplifies to @math{\frac{12}{6}}, for a slope of @math{2}.
+Taking the first two pairs of values in the last table, this gives us @math{\frac{56 - 5}{20 - 3}}, which simplifies to @math{\frac{15}{17}}, for a slope of @math{3}.
 
 [.lesson-instruction]
 * Pick two other pairs of values from the table and compute the @vocab{slope}. Did you get the same answer?
-* Are there other strategies could we have used to find the slope?
+* Are there other strategies we could have used to find the slope?
 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -144,11 +166,11 @@ Some texts refer to "four ways to draw straight lines on a graph": sloping up an
 Once students are comfortable computing slope, try having them compute the slope of a vertical line. They will quickly realize that this results in a zero in the denominator! This can be a good review of divide-by-zero, and forms the foundation of what will eventually generalize to the vertical line test.
 |===
 
-*2) Y-INTERCEPT: multiply any x in the table by the slope, and subtract the result from the corresponding y.*
+*TO FIND THE Y-INTERCEPT: Multiply any x in the table by the slope, and subtract the result from the corresponding y.*
 
 You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work!
 
-Let's use the last pair of values in the table to demonstrate this shortcut: Starting with the @math{x} value of 9, multiplying @math{9 \times 2} gives us @math{18}. The corresponding @math{y} is 20, so the y-intercept is @math{20 - 18 = 2}.
+Let's use the same pair of values in the table to demonstrate this shortcut: Starting with the @math{x} value of 3, multiplying @math{3 \times 3} gives us @math{9}. The corresponding @math{y} when @math{x}is 3 is 5, so the y-intercept is @math{5 - 9 = -4}.
 
 [.lesson-instruction]
 * Pick another row in the table and compute the @vocab{y-intercept}. Did you get the same answer?
@@ -165,7 +187,7 @@ Can you identify the slope and y-intercept of a linear function in a table? In a
 - @starter-file{exploring-linearity-in-graphs}
 
 === Synthesize
-@vocab{Slope} and @vocab{y-intercept} form the essence of linear function. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+@vocab{Slope} and @vocab{y-intercept} form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
 
 == Defining Linear Functions @duration{40 minutes}
 
@@ -181,8 +203,8 @@ Fortunately, a *function definition* can be used to summarize an entire table or
 |===
 
 | Function Notation 		| Pyret Code
-|@math{f(x) = 6x - 10} 		| `fun f(x): (6 * x) - 10`
-|@math{f(x) = -10 + 6x} 	| `fun f(x): -10 + (6 * x)`
+|@math{f(x) = 6x - 10} 		| `fun f(x): (6 * x) - 10 end`
+|@math{f(x) = -10 + 6x} 	| `fun f(x): -10 + (6 * x) end`
 |===
 
 As with tables and graphs, a function definition can reveal whether or not it is linear.
@@ -211,7 +233,7 @@ To check our work, we can apply the function to the x-value in each Row in the t
 
 === Investigate
 
-Let's get some practice working with Function Definitions
+*Let's get some practice working with Function Definitions*
 [.lesson-instruction]
 --
 - Complete @printable-exercise{slope-and-y-def.adoc}

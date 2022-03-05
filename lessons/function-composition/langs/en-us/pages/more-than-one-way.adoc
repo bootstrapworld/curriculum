@@ -3,7 +3,7 @@
 
 ++++
 <style>
-#content .blankline { margin-top: 8px !important; text-align: left; }
+#content .blankline { margin-bottom: 6px !important; text-align: left; }
 </style>
 ++++
 
@@ -22,8 +22,11 @@ Read through these 4 expressions and try to picture the images they are composin
 @ifproglang{pyret}{
 ```
 beside(rectangle(200, 100, "solid", "black"), square(100, "solid", "black"))
+
 scale-xy(1, 2, square(100, "solid", "black"))
+
 scale(2, rectangle(100, 100, "solid", "black"))
+
 above(
 	rectangle(100, 50, "solid", "black"),
 	above(
@@ -34,8 +37,11 @@ above(
 @ifproglang{wescheme}{
 ```
 (beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black"))
+
 (scale/xy 1 2(square 100 "solid" "black"))
+
 (scale 2 (rectangle 100 100 "solid" "black"))
+
 (above
 	(rectangle 100 50 "solid" "black")
 	(above
@@ -43,7 +49,6 @@ above(
 		(rectangle 100 50 "solid" "black")))
 ```
 }
-
 For each image below, identify 2 expressions that could be used to compose it. _The bank of expressions at the top of the page includes one possible option for each image._
 
 [cols="^.^1,^.^6,24", stripes="none"]
@@ -51,30 +56,29 @@ For each image below, identify 2 expressions that could be used to compose it. _
 a| @n
 a| @image{../images/vert-rect.png}
 a|
-* @show{(sexp->code '(rotate 90 (rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{@showsoln{(sexp->code tall-rect)}}
-* @span{.blankline}{@ifsoln{__answers may vary__}}
+@span{.blankline}{@showsoln{(sexp->code tall-rect)}}
+@span{.blankline}{@showsoln{(sexp->code '(rotate 90 (rectangle 200 100 "solid" "black")))}}
+@span{.blankline}{}
 
 a| @n
 a| @image{../images/square.png}
 a|
-* @show{(sexp->code '(above (rectangle 200 100 "solid" "black")(rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{@showsoln{(sexp->code big-sq)}}
-* @span{.blankline}{@ifsoln{__answers may vary__}}
+@span{.blankline}{@showsoln{(sexp->code big-sq)}}
+@span{.blankline}{@showsoln{(sexp->code '(above (rectangle 200 100 "solid" "black")(rectangle 200 100 "solid" "black")))}}
+@span{.blankline}{}
 
 a| @n
 a| @image{../images/hor-rect.png}
 a|
-* @show{(sexp->code '(scale 0.5 (rectangle 600 200 "solid" "black")))}
-* @span{.blankline}{@showsoln{(sexp->code wide-rect)}}
-* @span{.blankline}{@ifsoln{__answers may vary__}}
+@span{.blankline}{@showsoln{(sexp->code wide-rect)}}
+@span{.blankline}{@showsoln{(sexp->code '(scale 0.5 (rectangle 600 200 "solid" "black")))}}
 
 a| ★
 a|  @image{../images/black-cross.png}
 a|
-* @show{(sexp->code '(overlay (rectangle 100 200 "solid" "black")(rectangle 200 100 "solid" "black")))}
-* @span{.blankline}{@showsoln{(sexp->code plus)}}
-* @span{.blankline}{@ifsoln{__answers may vary__}}
+@span{.blankline}{@showsoln{(sexp->code plus)}}
+@span{.blankline}{@showsoln{(sexp->code '(overlay (rectangle 100 200 "solid" "black")(rectangle 200 100 "solid" "black")))}}
+@span{.blankline}{}
 
 |===
 

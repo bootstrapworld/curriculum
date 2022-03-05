@@ -34,8 +34,7 @@
 
 | Preparation
 |
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
+@preparation
 
 | Key Points for the Facilitator
 |
@@ -89,13 +88,10 @@ Students once again see function composition at work, as they compose a simple i
 Knowing how far apart our characters are is the first step. We still need the computer to be asking: "True or False: is there a collision?"
 
 === Investigate
-Using
-@ifproglang{wescheme}{ @printable-exercise{pages/collide.adoc}, }
-@ifproglang{pyret}{ @printable-exercise{pages/collide.adoc}, }
-have students write a function that takes in two coordinate pairs (four numbers) of the `PLAYER` and a character (`(px, py)` and `(cx, cy)`), and and returns `true` if they are within 50 @vocab{pixels} of each other.
+Using @printable-exercise{pages/collide.adoc}, have students write a function that takes in two coordinate pairs (four numbers) of the `PLAYER` and a character (`(px, py)` and `(cx, cy)`), and and returns `true` if they are within 50 @vocab{pixels} of each other.
 
 === Synthesize
-- You started by writing the `distance` function first, and then `collide?` Is this *Top-Down* or *Bottom-Up* decomposition?
+- You started by writing the `distance` function first, and then  @show{(sexp->code `collision?)}. Is this *Top-Down* or *Bottom-Up* decomposition?
 - Explicitly point out that this function is easy to write because we can _re-use_ the distance function.
 - Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @link{../problem-decomposition, previous lessons}. Problem Decomposition is powerful!
 

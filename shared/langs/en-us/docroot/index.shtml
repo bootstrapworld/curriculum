@@ -25,16 +25,15 @@
 
         // certain lessons are "preferred" depending on the subject
         var subjectPreference = {
-            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "measures-of-spread","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities1-simple", "inequalities2-compound", "linear-regression", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
+            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "displaying-categorical-data", "scatter-plots", "histograms", "box-plots","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities1-simple", "inequalities2-compound", "linear-regression", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "displaying-categorical-data", "flags", "histograms", "histograms2"],
-            science : ["simple-data-types", "ds-intro", "numbers-inside-video-games", "simple-data-types", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "measures-of-spread"],
+            science : ["simple-data-types", "ds-intro", "numbers-inside-video-games", "simple-data-types", "displaying-categorical-data", "scatter-plots", "histograms", "histograms2", "measures-of-center", "box-plots"],
             cs : ["ds-intro", "simple-data-types", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
         };
 
         // TODO(Emmanuel): remove after July 2022
         var tmpLessonRename = {
             'displaying-categorical-data' : "Bar & Pie Charts",
-            'measures-of-spread' : "Box Plots & Spread",
             'measures-of-center' : "Mean, Median, & Mode",
             'flags' : "Geometric Ratio and Proportion",
             'inequalities2-compound': "Compound Inequalities",
@@ -76,8 +75,8 @@
             },
             {
                 title: 'Your Stress Level',
-                lesson: 'measures-of-spread',
-                prerequisites: ['measures-of-spread'],
+                lesson: 'box-plots',
+                prerequisites: ['box-plots'],
                 description: 'People report being more and more stressed every day.  This trend is extending beyond adults, and is being reported by children and teenagers.  The amount of work people are responsible for has been increasing.  To understand what makes us feel stressed, students gather and analyze data about their own lives.',
             },
             {
@@ -204,8 +203,12 @@
             document.getElementById("checkedCount").innerHTML = checked.length;
             document.getElementById("accessibleCount").innerHTML = accessible.length - checked.length;
             document.getElementById('summary').style.display = checked.length > 0? "block" : "none";
-            document.getElementById('selectedLessons').innerHTML = checked.map(n => 
-                graph[n].title).join(", ");
+            checked.forEach(t => {
+                var link = document.createElement('a');
+                link.href = "lessons/" + (graph[t].lesson || t);
+                link.innerHTML = graph[t].title + ", ";
+                document.getElementById('selectedLessons').appendChild(link);
+            });
 
             // update the lesson display
             Object.getOwnPropertyNames(graph).forEach(name => {
@@ -406,13 +409,19 @@
                     <li class="tablinks"><a href="/materials/algebra"><img src="courses/algebra-pyret/images/Logo.png" alt="Bootstrap:Algebra"/></a>
                         <div id="algebra" class="tabcontent">
                             <h3>Recommended for: Grades 7-12</h3>
-                            The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-standards.shtml">aligned</a> to National and State Standards for Mathematics.  
+                            The Bootstrap:Algebra pathway applies mathematical concepts and introductory programming principles. Students use an <i>algebraic programming language</i> to build flags using function composition, make a rocket blast off using linear, quadratic (or even exponential) functions, protect a butterfly using inequalities, and even create a complete videogame! And of course, all materials are <a href="courses/algebra-pyret/pathway-alignments.shtml">aligned</a> to National and State Standards for Mathematics.  
                         </div>
                     </li>
                     <li class="tablinks"><a href="/materials/data-science"><img src="courses/data-science/images/Logo.png" alt="Bootstrap:Data Science"/></a>
                         <div id="data" class="tabcontent">
                             <h3>Recommended for: Grades 7-12</h3>
                             What defines the greatest musician of all time? How is the population of your state changing? Does drinking milk really make you taller? Answering these questions involves collecting and manipulating data, from sports stats to record sales to census data.  This pathway teaches students to view programs as questions we ask of data.  Students form their own questions about the world around them, and learn how to analyze data critically and carefully to find answers.  Business, science, and history teachers can utilize this module to help students make inferences from data.  Math teachers can use this module to introduce foundational concepts in statistics.  It also works great as a module for AP CS Principles' unit on data!
+                        </div>
+                    </li>
+                    <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
+                        <div id="hoc" class="tabcontent">
+                            <h3>Recommended for: Grades 9-10</h3>
+                            Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.
                         </div>
                     </li>
                     <li class="tablinks"><a href="/materials/reactive"><img src="courses/reactive/images/Logo.png" alt="Bootstrap:Reactive"/></a>
@@ -422,24 +431,18 @@
                             </p>
                         </div>
                     </li>
-                    <li class="tablinks"><a href="/materials/physics"><img src="courses/physics/images/Logo.png" alt="Bootstrap:Physics"/></a>
-                        <div id="hoc" class="tabcontent">
-                            <h3>Recommended for: Grades 9-10</h3>
-                            Our Physics pathway helps students understand basic physics concepts by incorporating computer programming as one of the key tools for building models of the physical world. Targeted to ninth grade, during which every student is expected to take science, this initiative is designed to spark students' interest in subjects related to science, technology, engineering, and math (STEM) for the rest of their academic careers. This initiative also combats a root cause of inequality of opportunity in pursuing STEM careers: disparate access to quality teaching in middle and high school. The module is aligned to the <a href="https://www.aapt.org/Resources/physicsfirst.cfm">Physics First</a> course, allowing teachers to easily embed computational modeling in their physics classes.
-                        </div>
-                    </li>
                 </ul>
             </div>
 
             <p>
-            All of our courses are <a href="Standards.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
+            All of our courses are <a href="Alignments.shtml">aligned to National and State Standards</a> - including NGSS, CCSS, CSTA, K12-CS, and more! We work hard to provide an "everything you need, all in one place" experience, offering <a href="courses/hour-of-code/">Hour of Code</a> activities and four curated pathways that come with a detailed student workbook, teacher materials, and an optional capstone project that ties the entire course together. You can also mix and match our materials by building your own pathway.
             </p>
             <p>
             After Bootstrap,  students are prepared to tackle <a href="BeyondBootstrap.shtml">several college-level textbooks</a>, including one that bridges <strong>from Pyret to Python</strong>.
             </p>
         </div>
         <div class="item bottom-border">
-            <h2>Build your own pathway</h2>
+            <h2 id="BuildYourOwn">Build your Own Pathway</h2>
 
             <span class="legend teaching"><b>What do you want students to do?</b></span> - Click to select the projects or lessons you want to bring to your students! <i>When you select a project or lesson, it - <b>and its prerequisites</b> - will turn green.</i>
             <p/>
