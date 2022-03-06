@@ -1,0 +1,174 @@
+= Functions as Examples and Definitions
+
+@description{Students learn to connect function descriptions across three representations: Contracts (a mapping between Domain and Range), Examples (a list of discrete inputs and outputs), and Definitions (symbolic).}
+
+@lesson-prereqs{contracts}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+
+* match examples, contracts, and definitions for the same function
+
+| Student-Facing Lesson Goals
+|
+* I can connect contracts, examples, and definitions for a function.
+
+| Materials
+|[.materials-links]
+
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1B9mESkR0VtlWSF712C0p35d0fNF1kiv_Ar33wIK297c/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/1f58vvHsNgb-YumWEBH_J6o0L3Pc7AacBw-UxvCbYYIs/, Lesson Slides}
+}
+
+@material-links
+
+| Preparation
+|
+@preparation
+
+@lang-prereq
+
+|===
+
+== Function of Notation
+
+=== Overview
+
+=== Launch
+
+Now that we've seen how this works in math, let's go back to `gt`.
+
+@ifproglang{Pyret}{@centered-image{images/examples-pyret.png, "gt Examples", 400}}
+@ifproglang{WeScheme}{@centered-image{images/examples-wescheme.png, "gt Examples", 400}}
+
+[.lesson-instruction]
+--
+In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
+--
+
+@ifproglang{Pyret}{
+[cols="6,^.^1,6", stripes="none", options="header"]
+|===
+
+| Math
+|
+| Pyret
+|@centered-image{images/table-to-prettify.png, Math Examples}
+| ➞
+|@centered-image{images/math-fun-pyret-2.png, Pyret Examples}
+|===
+}
+
+@ifproglang{WeScheme}{
+[cols="6,^.^1,6", stripes="none", options="header"]
+|===
+
+| Math
+|
+| WeScheme
+|@centered-image{images/table-to-prettify.png, Math Examples}
+| ➞
+|@centered-image{images/math-fun-wescheme.png, WeScheme Examples}
+|===
+}
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
+
+[.lesson-instruction]
+- Start by looking at each table and highlighting what is changing from the first row to the following rows.
+- Then, match each table to the function that defines it.
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|@span{.title}{Connecting to Best Practices}
+
+- Writing the examples is like "showing your work" in math class.
+
+- Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
+
+- Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+|===
+
+=== Synthesize
+
+== Examples and Contracts
+
+=== Launch
+
+_This launch could be a full-class conversation in real time, or you might want to give students a chance to "decide and defend" first (MLR.3) by completing @opt-printable-exercise{gt-domain-debate.adoc}._
+
+* What is the contract for `triangle`?
+
+[.indentedpara]
+--
+`triangle {two-colons} Number, String, String -> Image`
+--
+
+* What is the contract for `gt`?
+
+[.indentedpara]
+--
+`gt {two-colons} Number -> Image`
+--
+
+* Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-contracts.adoc}.
+
+Confirm that everyone is on the same page before moving on. You may want to have students turn to a partner, compare their findings, and discuss their thinking about anything they didn't agree on at first.
+
+Have students open
+@starter-file{gt}
+
+[.lesson-instruction]
+- Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
+- What did you get back? _a little green triangle!_
+- Take one minute and see how many different green triangles you can make using the `gt` function.
+- Try changing one of the examples to be incorrect and click run again. What happens?
+_The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
+
+Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
+
+[.lesson-instruction]
+On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
+
+If you have time, have students complete
+
+* @opt-printable-exercise{pages/contracts-examples-definitions-2.adoc}
+* @opt-starter-file{bug-hunting}
+
+=== Synthesize
+
+- *Functions can consume values besides Numbers. What other data types did you see being consumed by these functions?*
+- Thumbs up? Thumbs to the side? or Thumbs down? How confident do you feel that you could write the contract, examples and function definition on your own if you were given a word problem about another shape function?
+
+== Additional Exercises:
+
+@ifproglang{wescheme}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
+}
+@ifproglang{pyret}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
+}
+
+
+
+
+
