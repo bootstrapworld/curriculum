@@ -1,4 +1,4 @@
-= Functions as Examples and Definitions
+= Functions in Math
 
 @description{Students learn to connect function descriptions across three representations: Contracts (a mapping between Domain and Range), Examples (a list of discrete inputs and outputs), and Definitions (symbolic).}
 
@@ -43,42 +43,37 @@
 === Overview
 
 === Launch
+We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
 
-Now that we've seen how this works in math, let's go back to `gt`.
+@show{(sexp->code '(define (gt size)(triangle size "solid" "green")))}
 
-@ifproglang{Pyret}{@centered-image{images/examples-pyret.png, "gt Examples", 400}}
-@ifproglang{WeScheme}{@centered-image{images/examples-wescheme.png, "gt Examples", 400}}
-
-[.lesson-instruction]
---
-In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
---
-
-@ifproglang{Pyret}{
-[cols="6,^.^1,6", stripes="none", options="header"]
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 											| Final Product
+| @show{(sexp->code '(gt 10))} 		| @show{(sexp->code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png}
+| @show{(sexp->code '(gt 20))} 		| @show{(sexp->code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png}
+| @show{(sexp->code '(gt 30))} 		| @show{(sexp->code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png}
+| @show{(sexp->code '(gt 40))} 		| @show{(sexp->code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png}
+| @show{(sexp->code '(gt 50))} 		| @show{(sexp->code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png}
 |===
 
-| Math
-|
-| Pyret
-|@centered-image{images/table-to-prettify.png, Math Examples}
-| ➞
-|@centered-image{images/math-fun-pyret-2.png, Pyret Examples}
-|===
-}
+Function Notation in math works the same way. We replace the variable with the given value and then compute the value of the expression.
 
-@ifproglang{WeScheme}{
-[cols="6,^.^1,6", stripes="none", options="header"]
-|===
+@ifproglang{pyret}{
+@show{(sexp->code '(define (f x)(+ x 8)))}
 
-| Math
-|
-| WeScheme
-|@centered-image{images/table-to-prettify.png, Math Examples}
-| ➞
-|@centered-image{images/math-fun-wescheme.png, WeScheme Examples}
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 						| Final Product
+| @show{(sexp->code '(f 10))} 		| @show{(sexp->code '(+ 10 8))} 		| 18
+| @show{(sexp->code '(f 20))} 		| @show{(sexp->code '(+ 20 8))} 		| 28
+| @show{(sexp->code '(f 30))} 		| @show{(sexp->code '(+ 30 8))} 		| 38
+| @show{(sexp->code '(f 40))} 		| @show{(sexp->code '(+ 40 8))} 		| 48
+| @show{(sexp->code '(f 50))} 		| @show{(sexp->code '(+ 50 8))} 		| 58
 |===
 }
+
+@ifproglang{wescheme}{How do we want to format this for wescheme so that it looks as close to what it looks like in pyret as possible?}
 
 === Investigate
 
@@ -95,68 +90,8 @@ You may also want to have students complete @opt-online-exercise{https://teacher
 |===
 
 |@span{.title}{Connecting to Best Practices}
-
-- Writing the examples is like "showing your work" in math class.
-
-- Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
-
-- Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
 |===
-
-=== Synthesize
-
-== Examples and Contracts
-
-=== Launch
-
-_This launch could be a full-class conversation in real time, or you might want to give students a chance to "decide and defend" by completing @opt-printable-exercise{gt-domain-debate.adoc}._
-
-* What is the contract for `triangle`?
-
-[.indentedpara]
---
-`triangle {two-colons} Number, String, String -> Image`
---
-
-* What is the contract for `gt`?
-
-[.indentedpara]
---
-`gt {two-colons} Number -> Image`
---
-
-* Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
-
-
-=== Investigate
-
-Have students turn to @printable-exercise{pages/match-examples-contracts.adoc}.
-
-Confirm that everyone is on the same page before moving on. You may want to have students turn to a partner, compare their findings, and discuss their thinking about anything they didn't agree on at first.
-
-Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
-
-[.lesson-instruction]
-On the top half of the page you will see the contract, examples, and function defintion for `gt`. Using `gt` as a model, complete the contract, examples and function defintion for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
-
-If you have time, have students complete
-
-* @opt-printable-exercise{pages/contracts-examples-definitions-2.adoc}
-* @opt-starter-file{bug-hunting}
-
-=== Synthesize
-
-- *Functions can consume values besides Numbers. What other data types did you see being consumed by these functions?*
-- Thumbs up? Thumbs to the side? or Thumbs down? How confident do you feel that you could write the contract, examples and function definition on your own if you were given a word problem about another shape function?
-
-== Additional Exercises:
-
-@ifproglang{wescheme}{
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
-}
-@ifproglang{pyret}{
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
-}
 
 
 
