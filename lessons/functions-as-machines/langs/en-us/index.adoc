@@ -161,85 +161,90 @@ Thank your volunteer. Assuming they did a wonderful job, ask them:
 [.lesson-instruction]
 --
 Just as we were able to give our volunteer instructions that let them take in `gt 20` and give us back
-+
+
 @show{(sexp->code '(triangle 20 "solid" "green"))}, we can define any function we'd like in the *Definitions Area*.
 --
 
-== Identifying and Describing the Pattern
+== Identifying and Describing the Pattern @duration{flexible}
 
 === Overview
+Students will see look for what's changing in the examples, label it with a variable and use that information to write a function definition. Students will also think about how the Domain of `gt` differs from the Domain of `triangle`. By the end of the lesson they will have defined other functions and matched function definitions to example blocks.
 
 === Launch
 
 [.lesson-instruction]
 --
 We need to program the computer to be as smart as our volunteer. But how do we do that?
---
 
 In order to define a function, we need to identify what's changing and what stays the same.
 Let's take a look at some examples for `gt`.
+--
 
 @ifproglang{Pyret}{@centered-image{images/examples-pyret.png, "gt Examples", 400}}
 @ifproglang{WeScheme}{@centered-image{images/examples-wescheme.png, "gt Examples", 400}}
 
 [.lesson-instruction]
-In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
-
-Have students open @starter-file{gt}. And find the function definition.
+Then we can define our function by replacing what changes with a variable that describes it.
 
 @ifproglang{pyret}{@centered-image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
 @ifproglang{wescheme}{@centered-image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
+
+Have students turn to @printable-exercise{gt-domain-debate.adoc} and write a response to help the characters sort out whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
+
+[.lesson-instruction]
+In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer inserted into the `triangle` function. Everything else stayed the same no matter what!  We need to define `gt` in terms of the variable `size`, instead of in terms of a specific number.
+
+Have students open the @starter-file{gt}. They'll see the Contracts, some Examples and the Function Definition.
 
 [.lesson-instruction]
 - Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
 - What did you get back? _a little green triangle!_
 - Take one minute and see how many different green triangles you can make using the `gt` function.
+- Try changing one of the examples to be incorrect.
+- Click run. What happens?
+_The editor lets us know that the function doesn't match the examples so that we can fix our mistake! Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!_
 
 === Investigate
-[.lesson-instruction]
---
-Turn to @printable-exercise{pages/match-examples-definitions.adoc}. You will see the definition of `gt` in the first row of the table. Circle the numbers that are changing and label them with the word `size`.
 
-Then, using `gt` as a model, identify and label what is changing in each of the mystery example blocks and match them to their corresponding definitions.
---
+Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
+
+[.lesson-instruction]
+On the top half of the page you will see the contract, examples, and function defintion for `gt`.
+Circle what is changing and label it with the word `size`. The names of the variables should reflect what they represent.
+
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 
 |@span{.title}{Connecting to Best Practices}
 
-- Have students circle what is changing and label it with a proper variable name.  The name of the variable should reflect what it represents, such as `size`.
-
-- Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  It's like "showing your work" in math class. Don't skip this step!
+Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  It's like "showing your work" in math class. Don't skip this step!
 |===
 
-You may also want to have students complete
-@ifproglang{pyret}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
-@ifproglang{wescheme}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}.
+[.lesson-instruction]
+--
+We've successfully defined a function to satisfy my love of green triangles, but other people have other favorite shapes and we need to be able to meet their needs, too. Let's take what we've learned to define some other functions.
 
+Using `gt` as a model, complete the contract, examples and function definition for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
+
+When you're done, continue on to @printable-exercise{pages/contracts-examples-definitions-2.adoc} and @printable-exercise{pages/contracts-examples-definitions-3.adoc}.
+--
+
+As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents. When you have about 10 minutes to spare, redirect your class to the matching activity.
+
+[.lesson-instruction]
+Now that you've had some time to practice writing function definitions, turn to @printable-exercise{pages/match-examples-definitions.adoc}. You will see the definition of `gt` at the top. Using `gt` as a model, identify and label what is changing in each of the mystery example blocks and match them to their corresponding definitions.
 
 === Synthesize
 [.lesson-instruction]
-- What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 - Why is defining functions useful to us as programmers?
+- What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 - Functions can consume values besides Numbers. What other data types did you see being consumed by these functions?
 
-== Defining Other Functions
+== Additional Practice
 
-=== Overview
-
-=== Launch
-
-We've successfully defined a function to make green triangles for me, but they're not everyone's favorite. So, let's take what we've learned to define some other functions.
-
-=== Investigate
-
-[.lesson-instruction]
-- Open the @starter-file{gt} and try changing one of the examples to be incorrect.
-- Click run. What happens?
-_The editor lets us know that the function doesn't match the examples so that we can fix our mistake! Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!_
-
-Have students turn to @printable-exercise{defining-functions.adoc}. As they complete each definition, they should type the examples and definitions into the `Definitions Area` of the @starter-file{gt}, click run and test them out.
-
-=== Synthesize
-
+- @ifproglang{pyret}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
+@ifproglang{wescheme}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}
+- @ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}}
+@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}}
+- @opt-printable-exercise{match-examples-contracts.adoc}
