@@ -36,31 +36,71 @@
 
 |===
 
+== Do Now:
+Give each student a small piece of graph paper and a piece of tape or a post-it and have them draw a rectangle and hang it on the board in the front of the room.
+
 == Functions Have Exactly One Output for Each Input @duration{20 minutes}
 
 === Overview
 
 === Launch
-Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us. Whereas humans are flexible and can make game-time decisions about all sorts of things, machines need to be programmed to know what to do with whatever comes their way.
 
-For example, a safe human driver will slow down as they approach a curve or see brake lights up ahead, but if a car's cruise control has been set at 60mph, a human will have to turn off the cruise control in order to slow down the vehicle when driving at 60mph isn't safe anymore.  Similarly, a vending machine can be programmed to release a granola bar if the granola bar button is pushed and the corresponding amount of money is supplied, but it can't decide which kind of snack we'd like to eat this afternoon.
+[.lesson-instruction]
+--
+- Look at this beautiful collection of rectangles! What do they all have in common? _They all have 4 sides and 4 right angles._
+- Could @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} have used the `rectangle` function to make this collection of rectangles with the directions I gave you? _No! You are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in. Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make._
+- What is the Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? _Number, Number, String, String_
+- What happens if we don't give `rectangle` the arguments to satisfy its Domain? _We get an error message!_
+--
+
+[.indentedpara]
+--
+@ifproglang{pyret}{`3 arguments were passed to the operator. The operator evaluated to a function accepting 4 parameters. An application expression expects the number of parameters and arguments to be the same.`}
+@ifproglang{wescheme}{`rectangle: expects 4 arguments, but given 3`}
+--
+
+[.lesson-instruction]
+--
+- Do any of the rectangles that you see hanging on the board have enough in common that we could define a function like `gt` to make them?
+--
+
+Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us.
+
+For example, a safe human driver will slow down as they approach a curve or see brake lights up ahead, but if we turn on cruise control at 60mph, the car will keep driving at 60mph, no matter what happens, until a human tells it to stop.
+
+Similarly, a vending machine that's programmed to release a granola bar when the granola bar button is pushed and the corresponding amount of money is supplied, can't decide what snack you want for you when you're too hungry to make the decision for yourself.
 
 === Investigate
 
+We can test a graph to see whether or not it's a function by imagining a series of vertical lines. If there is any vertical line that can be drawn that would intersect more than one point on the graph, the graph is not a function.
+
+[cols="^1,^1"]
+|===
+| *Passes the Vertical Line Test	-> Is a Function*
+| *Fails the Vertical Line Test -> Is Not a Function*
+|@image{images/pass-test.png, "a squiggly line going from left to right"}
+|@image{images/fail-test.png, "a v opening to the right with a vertical line that intersects the v twice"}
+|===
+
 Have students turn to printable-exercise{function-or-not-real-world.adoc}
 
-Have students turn to printable-exercise{function-or-not-graph.adoc}
+Have students turn to @printable-exercise{functions-graphs.adoc} and @printable-exercise{functions-graphs-2.adoc}.
 
-Have students turn to printable-exercise{function-or-not-table.adoc}
+Have students turn to @printable-exercise{functions-tables.adoc}.
 
 === Synthesize
-
 
 == Functions Have A Domain & A Range @duration{20 minutes}
 
 === Overview
 
 === Launch
+
+[.lesson-instruction]
+Draw a rectangle.
+
+
+
 
 === Investigate
 
@@ -71,6 +111,14 @@ Have students turn to printable-exercise{function-or-not-table.adoc}
 === Overview
 
 === Launch
+
+Some functions look like a lines, vs, and curves. These are continuous.
+
+Others looks like a collection of dots. These are discrete.
+
+Sometimes it makes sense to connect the dots and sometimes it doesn't. half a nickel, half a person, degrees
+
+For example.
 
 === Investigate
 
@@ -87,10 +135,3 @@ at: line 17, column 9, in <definitions>_}
 was not satisfied by the value.}
 @ifproglang{wescheme}{_string=?: expects a string as 1st argument, but given: 8; other arguments were: "happy"_}
 
-@ifproglang{pyret}{3 arguments were passed to the operator.
-
-The operator evaluated to a function accepting 4 parameters.
-
-An application expression expects the number of parameters and arguments to be the same.}
-
-@ifproglang{wescheme}{rectangle: expects 4 arguments, but given 3}
