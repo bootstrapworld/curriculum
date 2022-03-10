@@ -1,0 +1,31 @@
+== Contract Errors
+
+What is wrong with each of the code samples below?
+
+[cols=".^6, 5a", options="header", frame="none"]
+|===
+| Code
+| What's the error?
+
+| @show{(sexp->code '(+ 1 "Maya"))}
+| @ifsoln{Cannot add a number and a string}
+
+| @show{(sexp->code '(and (> 3 0) (+ 1 2)))}
+| @ifsoln{`and` needs two Booleans, and `(+ 1 2)` is a Number}
+
+| @show{(sexp->code '(or "true" "false"))}
+| @ifsoln{`or` needs two Booleans, not two Strings}
+
+| @show{(sexp->code '(string-length 52))}
+| @ifsoln{52 is a Number but `string-length` needs a String}
+
+| @show{(sexp->code '(rectangle "solid" "blue" 6 7))}
+| @ifsoln{Arguments are in the wrong order}
+
+| @show{(sexp->code '(circle 20 "red"))}
+| @ifsoln{Not enough arguments}
+
+| @show{(sexp->code '(star 20 50 "solid" "red"))}
+| @ifsoln{Too many arguments}
+
+|===
