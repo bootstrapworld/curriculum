@@ -1,43 +1,33 @@
 = Debugging
 
-@description{Students will demonstrate understanding of functions and syntax by analyzing, critiquing, and correcting code.}
+@description{Students confront various kinds of bugs and errors, and develop strategies for fixing them!}
 
-@lesson-prereqs{}
+@lesson-prereqs{defining-functions}
 
-@keywords{}
+@keywords{syntax, error, debug, debugging, testing}
 
 [@lesson-intro-table]
 |===
-|Lesson Goals
-|Students will be able to:
+| Lesson Goals
+| Students will be able to:
 
-* Analyze the work of another and provide constructive feedback
-* Identify and correct syntax errors independently
+* Identify and explain the difference between syntax, contract, and logic errors
+* Use strategies to correct each kind of error
 
-|Student-Facing Lesson Goals
+| Student-Facing Lesson Goals
 |
-* I can analyze someone else's work and give them useful feedback
-* I can find and correct errors in code myself.
+* I know different kinds of coding errors, and can tell which is which
+* I know how to read an error message, and use it to help fix an error
 
-|Key Points for the Facilitator
+| Key Points for the Facilitator
 |
-* This task provides many opportunities for the facilitator to probe student understanding through questioning and observation.
-* There may be more than one way to correct some of the errors.
-* This lesson can also be facilitated without computers by asking students to correct and comment on code that has been printed out.
+* Meta-cognition is especially important here. Make sure you give _lots_ of space for students to discuss their bug-fixing strategies
+* Productive struggle is critical in this lesson, to build up students' confidence in their ability to fix their own mistakes
 
-|Prerequisites
-|
-* Students should be familiar with Circles of Evaluation.
-* Students should be familiar with the Design Recipe.
 
 |Materials
-|
-
-* https://docs.google.com/presentation/d/1XHBuzc3lsbDL2ILg7gRmMny-SPg1TM10a1dFqYQANTA/view[Lesson Slides]
-
-Bootstrap Formative Assessments
-
-* https://teacher.desmos.com/activitybuilder/custom/5a15e2b3dcb86b2b9fda3d19[Unit 5 Bootstrap Algebra Review] (Desmos Activity)
+|[.materials-links]
+* @link{TBD, Lesson Slides}
 
 @material-links
 
@@ -47,38 +37,90 @@ Bootstrap Formative Assessments
 
 |===
 
-== Get Ready:
+== Syntax Errors @duration{15 min}
 
-Students should have their computer, contracts page, and pencil.
+=== Overview
+Students are introduced to _syntax errors_, the error messages they generate, and how to read those errors and fix them.
 
-== Launch: (10 min)
+=== Launch
+People often think that computers can't make mistakes, because they are "just machines". But who builds those machines? Who programs them? _Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*
 
-[.notice-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Notice and Wonder}
+Knowing how find and fix mistakes is a valuable skill for any programmer, and the kind of logical thinking you gain by fixing errors can help you find mistakes _outside_ of a prgram as well!
 
-Notice and Wonder
-|===
+When you Run a program, you expect the computer to do three things:
+. Read the code
+. Run the code
+. Give you the correct result
 
-Launch task
+In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases:
 
-== Explore: (10 min)
+. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
 
-Explore task
+. @vocab{Type Errors} or @vocab{Contract errors} - Code that produces a value that breaks a function's contract, preventing the computer from _running_ the program any further. For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors, but `"hello"` is a String and the `circle` function is expecting a Number! Like syntax errors, contract errors will also result in an error message.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Strategies for English Language Learners}
+. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
-MLR
-|===
+=== Investigate
+Syntax errors mean the computer cannot even _read_ the code. Here are a few simple examples - can you find the syntax error?
 
-== Discuss: (10 min)
+- `"hello`
+- @ifproglang{pyret}{`1+2`} @ifproglang{wescheme}{`(+ 1 2`}
 
-* Discussion questions
 
-== Practice: (10 min)
+[.lesson-instruction]
+In pairs or small groups, complete @printable-exercise{syntax-errors.adoc}. For each piece of code, be sure to discuss as a team before deciding on the mistake.
 
-Practice task
+=== Synthesize
+
+Have students share back their findings. Leave time for discussion!
+
+. Which syntax errors were the easiest to find? The hardest?
+. Which error messages were the most helpful? Least hepful?
+. Which syntax errors do _you_ make the most often?
+. What strategies could we use to avoid making them in the first place?
+. What strategies could we use to fix them faster?
+
+== Contract Errors @duration{15 min}
+
+=== Overview
+Students are introduced to _type errors_ - also known as _contract errors_. They read the error messages they generate, and discuss strategies to fix them.
+
+=== Launch
+With no syntax errors, the computer and read our code and try to run it. But a running program can still have problems! Here are a few examples of programs that have perfect syntax, but will generate an error when we try to run them. Can you spot the problem?
+
+@show{(sexp->code '(+ 1 "Zari"))}
+
+@show{(sexp->code '(triangle "50" "solid" "blue"))}
+
+@show{(sexp->code '(or "true" false))}
+
+=== Investigate
+[.lesson-instruction]
+In pairs or small groups, complete @printable-exercise{contract-errors.adoc}. For each piece of code, be sure to discuss as a team before deciding on the mistake.
+
+=== Synthesize
+
+Have students share back their findings. Leave time for discussion!
+
+. Which contract errors were the easiest to find? The hardest?
+. Which error messages were the most helpful? Least hepful?
+. Which contract errors do _you_ make the most often?
+. What strategies could we use to avoid making them in the first place?
+. What strategies could we use to fix them faster?
+
+== Logic Errors @duration{20 min}
+
+=== Overview
+Students are introduced to _logic errors_, which are most often mistakes in *thinking* rather than *coding*.
+
+=== Launch
+Ho-ming wanted to write a function to produce green triangles, so she defined it this way:
+
+@show{(sexp->code '(define (gt size) (triangle 100 "solid" "green")))}
+
+She clicked Run and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(sexp->code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
+
+Did she have a syntax error? Why or why not?
+Did she have a type error? Why or why not?
+
+=== Investigate
