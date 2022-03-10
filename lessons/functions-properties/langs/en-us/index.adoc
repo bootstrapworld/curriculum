@@ -1,4 +1,4 @@
-= Properties of Functions
+= Functions in Math
 @description{Students learn about the properties of functions.}
 
 @lesson-prereqs{}
@@ -37,21 +37,35 @@
 |===
 
 == Do Now:
-Give each student a small piece of graph paper and a piece of tape or a post-it and have them draw a rectangle and hang it on the board in the front of the room.
+Give each student a small piece of graph paper or a post-it. Have them draw a rectangle and hang it on the board in the front of the room.
 
-== Functions Have Exactly One Output for Each Input @duration{20 minutes}
+[.lesson-instruction]
+--
+- Look at this beautiful collection of rectangles! How did you know how to make such a beautiful collection of rectangles?! _All rectangles have 4 sides and 4 right angles._
+- We can also make beautiful rectangles in the programming environment, but @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} couldn't have made this collection with my instructions. Why not?
+
+_We are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in. Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make. The Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? is Number, Number, String, String and if we don't give `rectangle` the arguments to satisfy its Domain we get an error message!_
+--
+
+=== Extension:
+
+[.lesson-instruction]
+--
+- We could figure out how to make all of these rectangles in  using the `rectangle` function.
+- What new functions could we define that would save us time if wanted to make the collection of images you've made by hand in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}?
+
+_This will depend on what students produced, but, for example:_
+* _If some are solid and some are outline we might define `solid-rectangle` and ``outline-rectangle``_
+* _If there a few predominant colors we might define `red-rectangle`, `blue-rectangle`, etc._
+* _If there are several 3x5 rectangles we might define ``rectangle-3-5``_
+--
+
+== Functions: Exactly One Output for Each Set of Inputs @duration{20 minutes}
 
 === Overview
 
 === Launch
 
-[.lesson-instruction]
---
-- Look at this beautiful collection of rectangles! What do they all have in common? _They all have 4 sides and 4 right angles._
-- Could @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} have used the `rectangle` function to make this collection of rectangles with the directions I gave you? _No! You are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in. Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make._
-- What is the Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? _Number, Number, String, String_
-- What happens if we don't give `rectangle` the arguments to satisfy its Domain? _We get an error message!_
---
 
 [.indentedpara]
 --
@@ -64,11 +78,11 @@ Give each student a small piece of graph paper and a piece of tape or a post-it 
 - Do any of the rectangles that you see hanging on the board have enough in common that we could define a function like `gt` to make them?
 --
 
-Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us.
+Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us, but they are only as good as the directions we give them!
 
-For example, a safe human driver will slow down as they approach a curve or see brake lights up ahead, but if we turn on cruise control at 60mph, the car will keep driving at 60mph, no matter what happens, until a human tells it to stop.
+For example, a vending machine that's programmed to release a granola bar when the granola bar button is pushed and the corresponding amount of money is supplied, can't decide what snack you want when you're too hungry to make the decision for yourself.
 
-Similarly, a vending machine that's programmed to release a granola bar when the granola bar button is pushed and the corresponding amount of money is supplied, can't decide what snack you want for you when you're too hungry to make the decision for yourself.
+If we turn on cruise control at 60mph, the car will keep driving at 60mph, more consistently than a human could, no matter what happens. But, a safe human driver will slow down as they approach a curve or see brake lights up ahead, and a car that's been instructed to drive at 60mph will keep doing just that until a human tells it to stop.
 
 === Investigate
 
@@ -134,4 +148,60 @@ at: line 17, column 9, in <definitions>_}
 @ifproglang{pyret}{The function application failed because the 3ⁿᵈ argument evaluated to an unexpected value. An annotation
 was not satisfied by the value.}
 @ifproglang{wescheme}{_string=?: expects a string as 1st argument, but given: 8; other arguments were: "happy"_}
+
+== Function of Notation
+
+=== Overview
+
+=== Launch
+We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
+
+@show{(sexp->code '(define (gt size)(triangle size "solid" "green")))}
+
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 											| Final Product
+| @show{(sexp->code '(gt 10))} 		| @show{(sexp->code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png}
+| @show{(sexp->code '(gt 20))} 		| @show{(sexp->code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png}
+| @show{(sexp->code '(gt 30))} 		| @show{(sexp->code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png}
+| @show{(sexp->code '(gt 40))} 		| @show{(sexp->code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png}
+| @show{(sexp->code '(gt 50))} 		| @show{(sexp->code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png}
+|===
+
+Function Notation in math works the same way. We replace the variable with the given value and then compute the value of the expression.
+
+@ifproglang{pyret}{
+@show{(sexp->code '(define (f x)(+ x 8)))}
+
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 						| Final Product
+| @show{(sexp->code '(f 10))} 		| @show{(sexp->code '(+ 10 8))} 		| 18
+| @show{(sexp->code '(f 20))} 		| @show{(sexp->code '(+ 20 8))} 		| 28
+| @show{(sexp->code '(f 30))} 		| @show{(sexp->code '(+ 30 8))} 		| 38
+| @show{(sexp->code '(f 40))} 		| @show{(sexp->code '(+ 40 8))} 		| 48
+| @show{(sexp->code '(f 50))} 		| @show{(sexp->code '(+ 50 8))} 		| 58
+|===
+}
+
+@ifproglang{wescheme}{How do we want to format this for wescheme so that it looks as close to what it looks like in pyret as possible?}
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
+
+[.lesson-instruction]
+- Start by looking at each table and highlighting what is changing from the first row to the following rows.
+- Then, match each table to the function that defines it.
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|@span{.title}{Connecting to Best Practices}
+Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+|===
+
 
