@@ -1606,7 +1606,7 @@
                               (display
                                 (create-vspace height)
                                  o))]
-                           [(member directive '("quad" "hspace"))
+                           [(string=? directive "hspace")
                             (let ([width (read-group i directive)])
                               (display
                                 (string-append
