@@ -5,11 +5,11 @@
 	#:range "Boolean"
 	#:purpose "Check if a name is longer than 20 characters"
 	#:buggy-example-list 
-	'([(long-name? "John Joseph Jingleheimer Schmidt") (> (string-length "John Joseph Jingleheimer Schmidt") 10)]
-	  [(long-name? "Jos Jaime Juarez") (> (string-length "Jos Jaime Juarez") 10)])
-	#:buggy-funname-defn "long?"
+	'([(long-name? "John Joseph Jingleheimer Schmidt") (> (string-length "John Joseph Jingleheimer Schmidt") 20)]
+	  [(long-name? "Jos Jaime Juarez") (> (string-length "Jos Jaime Juarez") 200)])
+	#:buggy-funname-defn "long-name?"
 	#:param-list (list "name")
-	#:body '(< name 20)
+	#:body 'long-name?
 }
                        
                                 

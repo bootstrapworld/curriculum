@@ -403,6 +403,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("syntax error" "syntax errors") "errors where the computer cannot make sense of the code (e.g. - missing commas, missing parentheses, unclosed strings)")
      (es-mx ("errores de sintaxis") "errores en los que la computadora no puede entender en el código (por ejemplo, comas faltantes, paréntesis faltantes, cadenas sin cerrar)"))
     
+    ((en-us ("logic error" "logic errors") "errors in the way a programmer is thinking about a problem")
+     (es-mx ("errores de logica") "errores en la forma en que un programador está pensando en un problema"))
+
     ((en-us ("table" "tables") "a data structure that stores data as rows, with entries in particular columns")
      (es-mx ("tabla de datos") "una colección de datos organizados en filas y columnas."))
         

@@ -3,13 +3,13 @@
     #:headless? #t
 	#:domain-list (list "Number")
 	#:range "Boolean"
-	#:purpose "Given an x-coordinate, returns true if the coordinate is less than -50"
+	#:purpose "Given an x-coordinate, check if Sam is onscreen or not"
 	#:buggy-example-list 
-	'([(offscreen? 60) true]
-	  [(offscreen? 800) false])
-	#:buggy-funname-defn "off-screen"
+	'([(offscreen?  60) true]
+	  [(offscreen? 200) true])
+	#:buggy-funname-defn "onscreen?"
 	#:param-list (list "x-coord")
-	#:body '(and (< x-coord -50) (> x-coord 690))
+	#:body '(and (> x-coord -50) (< x-coord 690))
 }
                        
                                 
