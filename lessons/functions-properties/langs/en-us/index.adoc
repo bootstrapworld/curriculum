@@ -1,4 +1,4 @@
-= Functions in Math
+= Properties of Functions
 @description{Students learn about the properties of functions.}
 
 @lesson-prereqs{}
@@ -11,11 +11,13 @@
 | Lesson Goals
 | Students will be able to:
 
-* Test whether or not a graph is a function using the vertical line test.
+* Test whether or not a graph represents a function using the vertical line test.
+* Identify whether or not a table represents a function.
 
 | Student-Facing Lesson Goals
 |
 * I can identify which graphs are functions and which aren't using the vertical line test.
+* I can identify whether or not a table represents a function.
 
 | Materials
 |[.materials-links]
@@ -30,7 +32,9 @@
 
 | Preparation
 |
+* Rulers or straight edges might be useful in supporting students during the section of the lesson that focuses on the vertical line test.
 @preparation
+
 
 @lang-prereq
 
@@ -41,52 +45,76 @@ Give each student a small piece of graph paper or a post-it. Have them draw a re
 
 [.lesson-instruction]
 --
-- Look at this beautiful collection of rectangles! How did you know how to make such a beautiful collection of rectangles?! _All rectangles have 4 sides and 4 right angles._
-- We can also make beautiful rectangles in the programming environment, but @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} couldn't have made this collection with my instructions. Why not?
+Look at this collection of rectangles! How did you know how to make such a beautiful collection of rectangles?! _All rectangles have 4 sides and 4 right angles._
 
-_We are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in. Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make. The Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? is Number, Number, String, String and if we don't give `rectangle` the arguments to satisfy its Domain we get an error message!_
+*We can also make rectangles in the programming environment, but @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} couldn't have made this collection with my instructions. Why not?*
+
+- _We are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in._
+- _Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make._
+- _The Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? is Number, Number, String, String and if we don't give `rectangle` the arguments to satisfy its Domain we get an error message!_
 --
 
 === Extension:
 
 [.lesson-instruction]
 --
-- We could figure out how to make all of these rectangles in  using the `rectangle` function.
-- What new functions could we define that would save us time if wanted to make the collection of images you've made by hand in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}?
+We could figure out how to make all of these rectangles in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} using the `rectangle` function, but it might be faster if we looked for some groups within this collection of images and defined some new functions.
+
+*What functions would you recommend we define?*
 
 _This will depend on what students produced, but, for example:_
-* _If some are solid and some are outline we might define `solid-rectangle` and ``outline-rectangle``_
-* _If there a few predominant colors we might define `red-rectangle`, `blue-rectangle`, etc._
-* _If there are several 3x5 rectangles we might define ``rectangle-3-5``_
+
+- _If some are solid and some are outline we might define `solid-rectangle` and ``outline-rectangle``_
+- _If there a few predominant colors we might define `red-rectangle`, `blue-rectangle`, etc._
+- _If there are several 3x5 rectangles we might define ``rectangle-3-5``_
+
+*How many of the images we drew by hand would each of our new functions be able to build?*
 --
 
-== Functions: Exactly One Output for Each Set of Inputs @duration{20 minutes}
+== Functions have a Single Output for Each Set of Inputs @duration{20 minutes}
 
 === Overview
 
+Students will think about the importance of assigning a single output to each input through the lens of vending machines.
+
 === Launch
-
-
-[.indentedpara]
---
-@ifproglang{pyret}{`3 arguments were passed to the operator. The operator evaluated to a function accepting 4 parameters. An application expression expects the number of parameters and arguments to be the same.`}
-@ifproglang{wescheme}{`rectangle: expects 4 arguments, but given 3`}
---
 
 [.lesson-instruction]
 --
-- Do any of the rectangles that you see hanging on the board have enough in common that we could define a function like `gt` to make them?
+Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us, but they aren't mind readers, so we need to supply the inputs and define what we want our machine to do with each of those sets of inputs!
+
+For example, a vending machine can be programmed to release a drink.
+
+- What inputs need to be satisfied in order for the machine to release the drink? _usually $ and a selection_
+- If we want to be able to choose which drink we want, we need to have a different button for each option.
+- If we want orange gatorade, and the people who decided what was in the machine didn't put it on the list, the machine won't be able to give it to us.
+- If we wanted gatorade and the button said, "gatorade, iced tea, lemonade", the machine would not get enough information to be able to give us what we wanted.
+- If we realize that the machine is always selling out of gatorade and never selling iced tea, *we can make two different buttons do the same thing*: dispense gatorade.
 --
-
-Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us, but they are only as good as the directions we give them!
-
-For example, a vending machine that's programmed to release a granola bar when the granola bar button is pushed and the corresponding amount of money is supplied, can't decide what snack you want when you're too hungry to make the decision for yourself.
-
-If we turn on cruise control at 60mph, the car will keep driving at 60mph, more consistently than a human could, no matter what happens. But, a safe human driver will slow down as they approach a curve or see brake lights up ahead, and a car that's been instructed to drive at 60mph will keep doing just that until a human tells it to stop.
 
 === Investigate
 
-We can test a graph to see whether or not it's a function by imagining a series of vertical lines. If there is any vertical line that can be drawn that would intersect more than one point on the graph, the graph is not a function.
+Have students complete @printable-exercise{vending.adoc}.
+
+=== Synthesize
+
+Confirm that students have correctly identified which vending machine scenarios represent functions.
+
+
+== Identifying Functions from Graphs
+
+=== Overview
+
+Students learn to use the vertical line test to determine whether or not a graph is a function.
+
+=== Launch
+
+[.lesson-instruction]
+--
+Graphing functions is similar to this vending machine situation. We can write rules that take in an x-value and produce a y-value. Different x-values can yield the same y-value. But each x-value can only be associated with one y-value.
+
+We can test a graph to see whether or not it's a function using the "vertical line test". Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, the graph is not a function.
+--
 
 [cols="^1,^1"]
 |===
@@ -96,62 +124,58 @@ We can test a graph to see whether or not it's a function by imagining a series 
 |@image{images/fail-test.png, "a v opening to the right with a vertical line that intersects the v twice"}
 |===
 
-Have students turn to printable-exercise{function-or-not-real-world.adoc}
-
-Have students turn to @printable-exercise{functions-graphs.adoc} and @printable-exercise{functions-graphs-2.adoc}.
-
-Have students turn to @printable-exercise{functions-tables.adoc}.
-
-=== Synthesize
-
-== Functions Have A Domain & A Range @duration{20 minutes}
-
-=== Overview
-
-=== Launch
+=== Investigate
 
 [.lesson-instruction]
-Draw a rectangle.
+Turn to @printable-exercise{functions-graphs.adoc} and use a straight edge and a pencil to draw vertical lines on each of the graphs and determine whether or not they are functions. When you finish, go on to @printable-exercise{functions-graphs-2.adoc}.
 
+As students work, circulate around the room and make sure that they are actually drawing vertical lines on the graphs. Some students may benefit from circling the point where each vertical line intersects the graph.
 
-
-
-=== Investigate
-
-
-
-== Functions Can Be Discrete or Continuous @duration{30 minutes}
-
-=== Overview
-
-=== Launch
-
-Some functions look like a lines, vs, and curves. These are continuous.
-
-Others looks like a collection of dots. These are discrete.
-
-Sometimes it makes sense to connect the dots and sometimes it doesn't. half a nickel, half a person, degrees
-
-For example.
-
-=== Investigate
+Once all of your students have completed the first page, redirect the class to @printable-exercise{notice-wonder-functions.adoc}.
 
 === Synthesize
 
+Confirm that students have correctly identified which graphs represent functions.
 
-Error Messages
+[.lesson-instruction]
+- What did you notice?
+- What did you wonder?
 
-@ifproglang{pyret}{_The declaration of animal-img shadows a previous declaration of animal-img._
-@ifproglang{wescheme}{_mood: this name has a previous definition and cannot be re-defined
-at: line 17, column 9, in <definitions>_}
+== Identifying Functions from Tables
 
-@ifproglang{pyret}{The function application failed because the 3ⁿᵈ argument evaluated to an unexpected value. An annotation
-was not satisfied by the value.}
-@ifproglang{wescheme}{_string=?: expects a string as 1st argument, but given: 8; other arguments were: "happy"_}
+=== Overview
+
+Students apply their understanding of how to use the vertical line test on graphs to learn to recognize whetherer or not tables are functions.
+
+=== Launch
+
+Have students turn to @printable-exercise{how-tables-fail-vertical-line-test.adoc} and follow the directions.
+
+Circulate around the room verifying that students are remembering how to use the vertical line test and correctly identifying which tables represent functions.
+
+[.lesson-instruction]
+How can we identify whether or not a table of values represents a function? _If an x-value appears more than once in the table and has a different y-value each time, we know it can't be a function._
+
+=== Investigate
+
+[.lesson-instruction]
+Turn to @printable-exercise{functions-tables.adoc} and look at the values in each table carefully to determine whether or not it represents functions. If it's not a function, circle or highlight the points that let you know it can't be a function. When you're done, turn to @printable-exercise{notice-wonder-functions.adoc} and add any new notices or wonders you may have.
+
+As students work, circulate around the room and make sure that they are actually circling or highlighting the points on the tables that tell them that the table doesn't represent a function.
+
+=== Synthesize
+
+Confirm that students have correctly identified which graphs represent functions.
+
+[.lesson-instruction]
+- What did you notice?
+- What did you wonder?
 
 == Function of Notation
 
 === Overview
+
+Students connect their understanding of image functions to function notation in math.
 
 === Launch
 We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
@@ -203,5 +227,6 @@ You may also want to have students complete @opt-online-exercise{https://teacher
 |@span{.title}{Connecting to Best Practices}
 Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
 |===
+
 
 
