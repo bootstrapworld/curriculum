@@ -34,6 +34,8 @@
 (define *show-params?* #f)
 (define *show-body?* #f)
 
+(define *table-marker* "|")
+
 (define *div-nesting* 0)
 
 (define *max-wescheme-cond-side-length* 32)
@@ -276,9 +278,9 @@
 (define (write-title title-text)
   (string-append
     "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
-    "|===\n"
-    "| " title-text "|\n"
-    "|===\n\n"))
+    *table-marker* "===\n"
+    *table-marker* " " title-text *table-marker* "\n"
+    *table-marker* "===\n\n"))
 
 (define (write-purpose funname domain-list range purpose)
   (string-append
@@ -700,6 +702,7 @@
                                 #:lang (lang 'racket)
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 #:headless? (headless? #f)
+                                #:nested-in-table? [nested-in-table? #f]
                                 )
 
   ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
@@ -717,6 +720,8 @@
   (set! *show-funname-defn?* show-funname-defn?)
   (set! *show-params?* show-params?)
   (set! *show-body?* show-body?)
+
+  (set! *table-marker* (if nested-in-table? "!" "|"))
 
   #|
   (unless *solutions-mode?*
@@ -796,6 +801,7 @@
           #:body (body #f) ; a string
           #:grid-lines? (grid-lines? #f)
           #:headless? (headless? #f)
+          #:nested-in-table? [nested-in-table? #f]
           )
   (set-proglang! proglang)
   (set! *solutions-mode?* solutions-mode?)
@@ -829,6 +835,7 @@
                             #:grid-lines? grid-lines?
                             #:assess-design-recipe #t
                             #:headless? headless?
+                            #:nested-in-table? nested-in-table?
                             )))
 
 ;;;; CODAP design recipe
