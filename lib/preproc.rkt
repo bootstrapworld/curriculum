@@ -2606,13 +2606,13 @@
   ; (printf "doing sexp->wescheme ~s\n" e)
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ;(printf "h2u retn'd ~s\n" h)
-    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
+    (enclose-textarea ".racket" (sexp->block h #:wescheme #t))))
 
 (define (sexp->pyret e #:parens [parens #f])
   ; (printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ;(printf "h2u retn'd ~s\n" h)
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
+    (enclose-textarea ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
