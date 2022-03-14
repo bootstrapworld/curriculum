@@ -747,7 +747,7 @@
     (and (not (eof-object? result))
          result)))
 
-(define (make-image img opts #:centered? [centered? #f])
+(define (make-image img text rest-opts #:centered? [centered? #f])
   ; (printf "doing make-image ~s\n" img)
   (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *target-pathway* *teacher-resources*)
@@ -765,8 +765,7 @@
                 (unless (file-exists? img-anonymized-qn)
                   (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
-    (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
-           [rest-opts (if (pair? opts) (cdr opts) '())]
+    (let* ([text (clean-up-image-text text)]
            [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
            [commaed-opts (string-join rest-opts ", ")]
            [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
@@ -1465,10 +1464,16 @@
                               (set! *autonumber-index* n))]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (display (make-image (car args) (cdr args)) o))]
+                              (cond [(< (length args) 2)
+                                     (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
+                                    [else
+                                      (display (make-image (car args) (cadr args) (cddr args)) o)]))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (display (make-image (car args) (cdr args) #:centered? #t) o))]
+                              (cond [(< (length args) 2)
+                                     (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
+                                    [else
+                                      (display (make-image (car args) (cadr args) (cddr args) #:centered? #t) o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
                            [(or (string=? directive "printable-exercise")
