@@ -11,20 +11,28 @@
 
 Highlight the variables in `gt` and label them with the word "size".
 
-@do{
+@ifproglang{pyret}{
+*examples:*
+[.indentedpara]
+--
+`gt(20) is triangle(20, "solid", "green")`
 
-(define e0
-   (code '(EXAMPLE
-      (gt 20) (triangle 20 "solid" "green")
-      (gt 50) (triangle 50 "solid" "green"))))
+`gt(50) is triangle(50, "solid", "green")`
+--
+*end*
 
-(define f0
-   (sexp->code '(define (gt size) (gt size "solid" "green"))))
+*fun* `gt(size): triangle(size, "solid", "green")` *end*}
+
+
+@ifproglang{wescheme}{
+--
+`(EXAMPLE (gt 20) (triangle 20 "solid" "green"))`
+
+`(EXAMPLE (gt 50) (triangle 50 "solid" "green"))`
+
+`(define (gt size) (gt size "solid" "green"))`
+--
 }
-
-@show{e0}
-
-@show{f0}
 
 Highlight and label the variables in the example lists below. Then, using `gt` as a model, match the examples to their corresponding function definitions.
 
