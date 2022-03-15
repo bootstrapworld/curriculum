@@ -1419,6 +1419,12 @@
                            [(string=? directive "span")
                             (display-begin-span (read-group i directive) o)
                             ]
+                           [(string=? directive "left")
+                            (display-begin-span ".left" o)]
+                           [(string=? directive "right")
+                            (display-begin-span ".right" o)]
+                           [(string=? directive "center")
+                            (display-begin-span ".center" o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if title-reached?
