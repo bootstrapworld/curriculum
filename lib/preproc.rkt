@@ -1614,7 +1614,7 @@
                             (let ([width (read-group i directive)])
                               (if (string=? width "")
                                 (display-begin-span
-                                  ".fitb" o #:attribs "style=\"flex-grow: 1\"")
+                                  ".fitb" o)
                                 (display-begin-span
                                   ".fitb" o #:attribs (format "style=\"width: ~a\"" width))))]
                            [(string=? directive "fitbruby")

@@ -31,11 +31,23 @@ code    { display: inline-block; padding: 0 !important; line-height: 1rem !impor
 mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
 .listingblock pre { margin: 3px 0px; padding: 0; }
-/* assume all p tags inside .paragraph are 100% width */
-.paragraph p { 
-  display: flex; 
-  flex-wrap: wrap;
-} 
+
+body:not(.LessonPlan) .paragraph {width: 100%; }
+body:not(.LessonPlan) p {
+  width:  100%;
+  overflow: hidden; 
+  position: relative;
+  min-height: 1.5rem;
+  margin:  5px 0px;
+}
+body:not(.LessonPlan) .paragraph p > .fitb {
+  float: right; 
+  clear:  right;
+  position: absolute;
+  bottom:  0;
+  width: 100%;
+  margin-left: 10px;
+}
 
 h1 {
   font-size:      2rem;
