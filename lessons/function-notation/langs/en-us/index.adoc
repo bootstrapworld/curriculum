@@ -1,0 +1,111 @@
+= Function Notation - Math
+
+@description{Students learn to read function notation.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+
+* Identify the value that an expression such as f(3) produces from a function definition, table, or graph.
+
+| Student-Facing Lesson Goals
+|
+* I can find the value of an expression such as f(3), given a table, graph or equation describing f(x).
+
+| Materials
+|[.materials-links]
+@ifproglang{wescheme}{
+* @link{https://docs.google.com/presentation/d/1uDxsuY87FFkeMowOOU6WImTdfeQLaJm8iEroE6nDsmY/, Lesson Slides}
+}
+@ifproglang{pyret}{
+* @link{https://docs.google.com/presentation/d/10mZzi6_jEIcAd4v9zdFiGHij_PNc98d3myeoLNUuuYM/, Lesson Slides}
+}
+
+@material-links
+
+| Preparation
+|
+@preparation
+
+
+@lang-prereq
+
+|===
+
+== Function Notation
+
+=== Overview
+
+Students connect their understanding of image functions to function notation in math.
+
+=== Launch
+We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
+
+@show{(sexp->code '(define (gt size)(triangle size "solid" "green")))}
+
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 											| Final Product
+| @show{(sexp->code '(gt 10))} 		| @show{(sexp->code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
+| @show{(sexp->code '(gt 20))} 		| @show{(sexp->code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
+| @show{(sexp->code '(gt 30))} 		| @show{(sexp->code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
+| @show{(sexp->code '(gt 40))} 		| @show{(sexp->code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png, green triangle 40}
+| @show{(sexp->code '(gt 50))} 		| @show{(sexp->code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png, green triangle 50}
+|===
+
+Function Notation in math works the same way. We replace the variable with the given value and then compute the value of the expression.
+
+@ifproglang{pyret}{
+@show{(sexp->code '(define (f x)(+ x 8)))}
+
+[cols="2,3,1"]
+|===
+| Function Expression 				| What it Produces 						| Final Product
+| @show{(sexp->code '(f 10))} 		| @show{(sexp->code '(+ 10 8))} 		| 18
+| @show{(sexp->code '(f 20))} 		| @show{(sexp->code '(+ 20 8))} 		| 28
+| @show{(sexp->code '(f 30))} 		| @show{(sexp->code '(+ 30 8))} 		| 38
+| @show{(sexp->code '(f 40))} 		| @show{(sexp->code '(+ 40 8))} 		| 48
+| @show{(sexp->code '(f 50))} 		| @show{(sexp->code '(+ 50 8))} 		| 58
+|===
+}
+
+@ifproglang{wescheme}{How do we want to format this for wescheme so that it looks as close to what it looks like in pyret as possible?}
+
+=== Investigate
+
+Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
+
+[.lesson-instruction]
+- Start by looking at each table and highlighting what is changing from the first row to the following rows.
+- Then, match each table to the function that defines it.
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|@span{.title}{Connecting to Best Practices}
+Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
+|===
+
+== Using Function Notation to Describe Values
+
+=== Overview
+
+=== Launch
+
+
+=== Investigate
+
+Have students complete @printable-exercise{function-notation-graphs.adoc} and @printable-exercise{function-notation-tables.adoc}
+
+=== Synthesize
+
+

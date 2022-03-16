@@ -3,6 +3,7 @@
 (provide
   read-word
   *make-read-group
+  read-commaed-group
   )
 
 (define (read-word i)
@@ -75,3 +76,31 @@
                                  (errmessage-file-context) directive)
                          ""])))])
     read-group))
+
+(define (read-commaed-group i directive read-group)
+  (let* ([g (read-group i directive)]
+         [n (string-length g)])
+    (let loop ([i 0] [r '()])
+      (if (>= i n)
+          (map string-trim (reverse r))
+          (let loop2 ([j i] [in-string? #f] [in-escape? #f])
+            (if (>= j n) (loop j (cons (substring g i j) r))
+                (let ([c (string-ref g j)])
+                  (cond [(eof-object? c)
+                         ; (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
+                         ;        directive *lesson-subdir* *in-file*)
+                         (error 'ERROR "read-commaed-group: Runaway directive ~a" directive)
+                         ]
+                        [in-escape?
+                          (loop2 (+ j 1) in-string? #f)]
+                        [(char=? c #\\)
+                         (loop2 (+ j 1) in-string? #t)]
+                        [in-string?
+                          (if (char=? c #\")
+                              (loop2 (+ j 1) #f #f)
+                              (loop2 (+ j 1) #t #f))]
+                        [(char=? c #\")
+                         (loop2 (+ j 1) #t #f)]
+                        [(char=? c #\,)
+                         (loop (+ j 1) (cons (substring g i j) r))]
+                        [else (loop2 (+ j 1) #f #f)]))))))))
