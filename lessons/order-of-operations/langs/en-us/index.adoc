@@ -73,12 +73,12 @@ A mathematical expression is an instruction for doing something, which specifies
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
-@span{.right}{@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}}
+@right{@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}}
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
 The pyramid on the right is a model for summarizing the order of operations. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (operations in parentheses and other grouping symbols). Only after we have completed all of those operations can we move down to the lower level. If both operations from the same level are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear. This set of rules is brittle, and doesn't always make it clear what we need to do. Mnemonic devices for the order of operations like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
 
-@span{.clear}{}
+@clear
 
 [.lesson-instruction]
 Check out the expression below. What do you think the answer is?  This math problem went viral on social media recently, with math teachers arguing about what the answer was! Why might they disagree on the solution?
@@ -119,7 +119,7 @@ If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division fu
 
 [.centered-image]
 @show{(sexp->coe '(/ 6 3))}
-@span{.clear}{}
+@clear
 
 What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
 
@@ -130,21 +130,21 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 
 [.centered-image]
 @show{(sexp->coe '(/ 6 (+ 1 2)))}
-@span{.clear}{}
+@clear
 
 [.lesson-instruction]
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 [.centered-image]
 @show{(sexp->coe '(* 5 6))}
-@span{.clear}{}
+@clear
 
 [.lesson-instruction]
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 [.centered-image]
 @show{(sexp->coe '(* (- 10 5) 6))}
-@span{.clear}{}
+@clear
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
@@ -315,7 +315,7 @@ Here are two Circles of Evaluation.
 [cols="1,1", grid="none", frame="none"]
 |===
 
-| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
+| @right{@show{(sexp->coe `(* 10 -4))}}
 | @show{(sexp->coe `(text "Good work!" 50 "red"))}
 |===
 
