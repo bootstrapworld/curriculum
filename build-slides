@@ -1,0 +1,73 @@
+#!/bin/bash
+
+topdir=$(pwd)
+
+progdir=$topdir/prog
+
+SED=sed
+
+if which gsed|grep -q .; then
+  SED=gsed
+fi
+
+bootstraproot=$(cat lib/slidesroot.txt|$SED -e 1q)
+
+proglang=pyret
+
+if test ! -d distribution; then
+  echo WARNING: Did not find any built pathways
+  exit
+else
+  cd distribution
+fi
+
+for natlang in *; do
+ test -d $natlang || continue
+ cd $natlang
+ export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
+ if test -d lessons; then
+   cd lessons
+   for lsn in *; do
+     test -d $lsn || continue
+     export LESSON="$lsn"
+     cd $LESSON
+     # echo Doing $LESSON
+     proglang=pyret
+     repoLESSON=$LESSON
+     if test -f .cached/.wescheme; then
+       proglang=wescheme
+       repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
+     elif test -f .cached/.codap; then
+       proglang=codap
+       repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
+     fi
+
+     # echo proglang is $proglang
+
+     idfile=slides-id-$proglang.txt
+     if test -f slides.md; then
+       $progdir/slides-preproc.rkt slides.md
+       if test -f slides.mkd; then
+         title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
+         if test -f "$idfile"; then
+           id=$(cat "$idfile"|$SED -e 1q)
+           md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > /dev/null 2>&1
+         else
+           md2gslides slides.mkd -n -t "$title" --use-fileio > "$idfile" 2> /dev/null
+           $SED -i -e 's/.*docs\.google\.com\/presentation\/d\///' "$idfile"
+           cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
+           echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+         fi
+         cat "$idfile"|$SED -e 1q|$SED -e 's/^/https:\/\/docs.google.com\/presentation\/d\//' > slides-$proglang.url
+       else
+         echo WARNING: slides.md failed preprocessing
+       fi
+     else
+       echo WARNING: Lesson \'$LESSON\' doesn\'t have slides.md
+     fi
+     cd ..
+   done
+   cd ..
+ fi
+ cd ..
+done
