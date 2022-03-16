@@ -73,7 +73,7 @@
         "= "
         course-name "\n\n"
         "[.logo]\n"
-        (make-image "images/Logo.png" (list (if c (cadr c) "Bootstrap")))
+        (make-image "images/Logo.png" (if c (cadr c) "Bootstrap") '())
         "\n\n") o)))
 
 (define (print-course-banner course o)

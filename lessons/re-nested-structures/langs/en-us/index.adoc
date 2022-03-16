@@ -96,7 +96,7 @@ Print out the following code screenshot for the nested link:images/Nested-Pinwhe
 
 Point out the differences in underlining between the two code screenshots. Note that when students finish this activity, both of the animations will look the same- but one program will have been much more straightforward to modify! We wrote a bit more code at the beginning to set up the nested structures, but that paid off later by giving us more flexibility to change the behavior of the pinwheels.
 
-@centered-image{images/adding-speed.png, "", 800}
+@centered-image{images/adding-speed.png, Adding speed, 800}
 
 Just by looking at the differences on paper, we can see the difference in complexity of changing our animations. In order to make each pinwheel spin at a different speed, much more of the non-nested program will need to change, as opposed to the nested version where only the `Pinwheel` structure, `STARTING-PINWHEELS` instance, and the `update-pinwheel` function need to be edited.
 
@@ -118,7 +118,7 @@ and underline or highlight the places in the code you would need to edit in orde
 Optonal: For practice, have students make this change in both programs on the computer. Have them pay special attention to their helper functions- will they be able to use the existing update-pinwheel in the non-nested version of the animation?
 ////
 
-@centered-image{images/adding-x-coordinates.png, "", 800}
+@centered-image{images/adding-x-coordinates.png, Adding x-coordinates, 800}
 
 As before, we end up underlining, and needing to change _much_ more of the code in the non-nested version of the animation. We also may realize something important about the non-nested code: if both a pinwheel’s angle of rotation _and_ its x-coordinate are changing, we’re no longer able to use our `update-pinwheel` @vocab{helper function}. Previously, this function consumed an angle and speed, and added these numbers together to produce the new angle. However, since functions can only return one thing at a time, we can’t use this function to produce the updated angle and updated x-coordinate. Instead, the work of decreasing the x-coordinate must be done inside `next-state-tick`. Writing that code is nothing new, but wouldn’t it be nice to leave `next-state-tick` alone, and update each pinwheel individually inside the @vocab{helper function}?
 

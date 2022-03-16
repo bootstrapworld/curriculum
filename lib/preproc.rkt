@@ -217,31 +217,7 @@
             [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
-(define (read-commaed-group i directive)
-  (let* ([g (read-group i directive)]
-         [n (string-length g)])
-    (let loop ([i 0] [r '()])
-      (if (>= i n)
-          (map string-trim (reverse r))
-          (let loop2 ([j i] [in-string? #f] [in-escape? #f])
-            (if (>= j n) (loop j (cons (substring g i j) r))
-                (let ([c (string-ref g j)])
-                  (cond [(eof-object? c)
-                         (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
-                                directive *lesson-subdir* *in-file*)]
-                        [in-escape?
-                          (loop2 (+ j 1) in-string? #f)]
-                        [(char=? c #\\)
-                         (loop2 (+ j 1) in-string? #t)]
-                        [in-string?
-                          (if (char=? c #\")
-                              (loop2 (+ j 1) #f #f)
-                              (loop2 (+ j 1) #t #f))]
-                        [(char=? c #\")
-                         (loop2 (+ j 1) #t #f)]
-                        [(char=? c #\,)
-                         (loop (+ j 1) (cons (substring g i j) r))]
-                        [else (loop2 (+ j 1) #f #f)]))))))))
+
 
 (define (assoc-glossary term L)
   ; (printf "doing assoc-glossary ~s ~n" term)
@@ -771,7 +747,7 @@
     (and (not (eof-object? result))
          result)))
 
-(define (make-image img opts #:centered? [centered? #f])
+(define (make-image img text rest-opts #:centered? [centered? #f])
   ; (printf "doing make-image ~s\n" img)
   (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *target-pathway* *teacher-resources*)
@@ -789,8 +765,7 @@
                 (unless (file-exists? img-anonymized-qn)
                   (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
-    (let* ([text (if (pair? opts) (clean-up-image-text (car opts)) "")]
-           [rest-opts (if (pair? opts) (cdr opts) '())]
+    (let* ([text (clean-up-image-text text)]
            [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
            [commaed-opts (string-join rest-opts ", ")]
            [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
@@ -1444,6 +1419,14 @@
                            [(string=? directive "span")
                             (display-begin-span (read-group i directive) o)
                             ]
+                           [(string=? directive "left")
+                            (display-begin-span ".left" o)]
+                           [(string=? directive "right")
+                            (display-begin-span ".right" o)]
+                           [(string=? directive "center")
+                            (display-begin-span ".center" o)]
+                           [(string=? directive "clear")
+                            (display (enclose-tag "span" "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if title-reached?
@@ -1473,12 +1456,12 @@
                                               arg)]))]
                            [(or (string=? directive "prereqs-stds")
                                 (string=? directive "lesson-prereqs"))
-                            (add-lesson-prereqs (read-commaed-group i directive))
+                            (add-lesson-prereqs (read-commaed-group i directive read-group))
                             ;(display-prereqs-bar o)
                             ;(display-standards-bar o)
                             ]
                            [(string=? directive "keywords")
-                            (add-lesson-keywords (read-commaed-group i directive))]
+                            (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (string-titlecase *proglang*))]
                            [(string=? directive "year")
@@ -1497,28 +1480,33 @@
                                 (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
                               (set! *autonumber-index* n))]
                            [(string=? directive "image")
-                            (let ([args (read-commaed-group i directive)])
-                              (display (make-image (car args) (cdr args)) o))]
+                            (let ([args (read-commaed-group i directive read-group)])
+                              (cond [(< (length args) 2)
+                                     (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
+                                    [else
+                                      (display (make-image (car args) (cadr args) (cddr args)) o)]))]
                            [(string=? directive "centered-image")
-                            (let ([args (read-commaed-group i directive)])
-                              (display (make-image (car args) (cdr args) #:centered? #t) o))]
+                            (let ([args (read-commaed-group i directive read-group)])
+                              (cond [(< (length args) 2)
+                                     (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
+                                    [else
+                                      (display (make-image (car args) (cadr args) (cddr args) #:centered? #t) o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 )
                             ;(printf "doing ~s\n" directive)
-                            (let* ([args (read-commaed-group i directive)]
+                            (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (car args)]
                                    [link-text (if (> n 1) (cadr args) "")]
-                                   [page-compts (regexp-split #rx"/" page)]
-                                   [first-compt (car page-compts)])
+                                   [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
                            [(string=? directive "pathwaylink")
-                            (let* ([args (read-commaed-group i directive)]
+                            (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (car args)]
                                    [link-text (string-join (map string-trim (cdr args)) ", ")])
                               (set! link-text (string-trim link-text "\""))
@@ -1527,14 +1515,14 @@
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise")
                                 (string=? directive "ext-exercise-link"))
-                            (let* ([args (read-commaed-group i directive)]
+                            (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (car args)]
                                    [link-text (string-join
                                                 (map string-trim (cdr args)) ", ")])
                               (set! link-text (string-trim link-text "\"")) ;XXX:
                               (display (make-link adocf link-text #:link-type directive) o))]
                            [(string=? directive "include")
-                            (let* ([args (read-commaed-group i directive)]
+                            (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (car args)] ;only one right? FIXME:
                                    [rest-args (string-join
                                                 (map string-trim (cdr args)) ",")]
@@ -1552,7 +1540,7 @@
                               (error 'ERROR
                                      "WARNING: @add-to-lang (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (let ([args (map string->symbol (read-commaed-group i directive))])
+                            (let ([args (map string->symbol (read-commaed-group i directive read-group))])
                               ;(printf "args = ~s\n" args)
                               (for-each add-prereq args))]
                            [(string=? directive "material-links")
@@ -1615,7 +1603,7 @@
                               (display
                                 (create-vspace height)
                                  o))]
-                           [(string=? directive "quad")
+                           [(string=? directive "hspace")
                             (let ([width (read-group i directive)])
                               (display
                                 (string-append
@@ -1661,7 +1649,7 @@
                                         (set! possible-beginning-of-line? (read-space i))])]
                            [(string=? directive "ifpathway")
                             ;(printf "doing ifpathway ~s\n" *pathway*)
-                            (let ([pathways (read-commaed-group i directive)])
+                            (let ([pathways (read-commaed-group i directive read-group)])
                               (cond [(member *pathway* pathways)
                                      (display-begin-span #f o)]
                                     [else
@@ -1700,7 +1688,7 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let* ([title (cadr c)]
+                                      (let ([title (cadr c)]
                                              [p (assoc *proglang* (cddr c))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
@@ -1723,7 +1711,7 @@
                                                               (cons styled-link-output *starter-file-links*)))])
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
-                            (let* ([arg1 (read-commaed-group i directive)]
+                            (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (car arg1)]
                                    [rubric-file (if (> (length arg1) 1) (cadr arg1) "")]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
@@ -2631,13 +2619,13 @@
   ; (printf "doing sexp->wescheme ~s\n" e)
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ;(printf "h2u retn'd ~s\n" h)
-    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))))
+    (enclose-textarea ".racket" (sexp->block h #:wescheme #t))))
 
 (define (sexp->pyret e #:parens [parens #f])
   ; (printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ;(printf "h2u retn'd ~s\n" h)
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
+    (enclose-textarea ".pyret" (sexp->arith h #:pyret #t #:parens parens))))
 
 (define (sexp->math e #:parens [parens #f])
   ;(printf "doing sexp->math ~s p:~s\n" e parens)
