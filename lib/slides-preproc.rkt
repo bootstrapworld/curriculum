@@ -7,14 +7,18 @@
 
 (define *in-file* "doesnt-exist")
 
-(define *proglang* "pyret")
+(define *proglang* (or (getenv "PROGLANG") "pyret"))
 
 (define (errmessage-file-context)
   *in-file*)
 
-(define *bootstrap-root* "https://bootstrapworld.org/materials/latest/en-us/lessons/")
+(define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX") 
+                               "https://bootstrapworld.org/materials/latest/en-us/lessons"))
 
-(define *lesson* "noname")
+(define *lesson* (or (getenv "LESSON") "__sample-lesson"))
+
+(define (make-image img text)
+  (format "![~a](~a)" text img))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -23,11 +27,11 @@
          [page-components (regexp-split #rx"/" page)]
          [fq-uri (case (length page-components)
                    [(1)
-                    (apply build-path *bootstrap-root* *lesson* "pages" page-components)]
+                    (apply build-path *bootstrap-prefix* *lesson* "pages" page-components)]
                    [(2)
-                    (apply build-path *bootstrap-root* *lesson* page-components)]
+                    (apply build-path *bootstrap-prefix* *lesson* page-components)]
                    [(3)
-                    (apply build-path *bootstrap-root* page-components)]
+                    (apply build-path *bootstrap-prefix* page-components)]
                    [else
                      (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
                      ""])])
@@ -68,12 +72,9 @@
                (let ([directive (read-word i)])
                  (cond [(string=? directive "") (display c o)]
                        [(string=? directive "@") (display c o)]
-                       [(string=? directive "bootstraproot")
-                        (let ([x (read-group i directive)])
-                          (set! *bootstrap-root* x)) ]
-                       [(string=? directive "lesson")
-                        (let ([x (read-group i directive)])
-                          (set! *lesson* x))]
+                       [(string=? directive "image")
+                        (let ([args (read-commaed-group i directive read-group)])
+                          (display (make-image (car args) (cadr args)) o))]
                        [(member directive '("printable-exercise" "opt-printable-exercise"))
                         (let ([args (read-commaed-group i directive read-group)])
                           (display (fully-qualify-link args directive) o))]
@@ -83,6 +84,13 @@
                        [(member directive '("starter-file" "opt-starter-file"))
                         (let ([lbl (read-group i directive)])
                           (display (starter-file-link lbl) o))]
+                       [(string=? directive "ifproglang")
+                        (let* ([proglang (read-group i directive)]
+                               [fragment (read-group i directive)])
+                          (when (string-ci=? proglang *proglang*)
+                            (call-with-input-string fragment
+                              (lambda (i)
+                                (expand-directives i o)))))]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])

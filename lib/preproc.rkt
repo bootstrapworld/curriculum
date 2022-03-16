@@ -1425,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "clear")
+                            (display (enclose-tag "span" "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if title-reached?

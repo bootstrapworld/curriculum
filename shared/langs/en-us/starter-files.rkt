@@ -85,7 +85,7 @@
    )
 
   ; math
-  
+   
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
@@ -95,8 +95,8 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
    )
   ("bug-hunting"  "Bug Hunting Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=10eAHLb3ZAwlBCXPc9ordWvoElEIjUB8q")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=JCTcwYc57r")
+   ("pyret" "https://code.pyret.org/editor#share=1JEeZjzctaJ9fD77rWXqrorqCwlZrDx9H")
+   ("wescheme" "https://www.wescheme.org/view?publicId=nwVEttw9ZY")
    )
   ("permutations-and-combinations"  "Permutations and Combinations Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1pOwcDplD2vidTIvBMrBI5fVZ2jmk369Q")
@@ -160,7 +160,7 @@
    )
   ("rocket-height" "Rocket Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=LGTVNvzrax")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=Tl7bbvF9Kw")
    )
   ("prism" "Surface Area of a Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")

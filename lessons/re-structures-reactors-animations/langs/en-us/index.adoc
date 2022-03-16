@@ -234,14 +234,14 @@ An animation that only changes one number (e.g. - the x-coordinate of a plane fl
 === Launch
 You’ve learned the components of an animation in Pyret. The data structure for the state lies at the heart of the animation: each of the initial state, the `draw-state` function and the `next-state-tick` function are based on the data structure you choose. Being able to figure out the data structure you need for an animation is therefore a critical skills in making your own animations. In this lesson, we are going to practice identifying the data and creating the data structures for various animations. We will not write the entire animation. We are just going to practice identifying the data and writing the data structures.
 
-@span{.clear}{}
+@clear
 ****
 Figuring out the data structure is actually one of the most creative tasks in programming. More complex problems can be captured through multiple data structures. For example, we might have some information that could be computed from other information, so we have to decide what data to include and what to compute. Or, we might want to combine multiple smaller data structures into a larger one, having a data structure for a coordinate (with both x- and y-positions), and a data structure for a character that has a coordinate and a color. We don’t expect that you can envision all of these possibilities right now. We do want you to be aware that students may come up with different ideas, and that this is appropriate and interesting at this stage. Your students can have some valuable discussions about design once they start brainstorming different ways to organize data for a problem.
 ****
 
 
 === Investigate
-@span{.right}{@centered-image{images/cowjump.gif, Cow jump, 200}}
+@right{@centered-image{images/cowjump.gif, Cow jump, 200}}
 
 *Exercise: Jumping Cow* -- Look at this animation of a cow jumping over the moon.
 
@@ -261,13 +261,13 @@ Fill in the table of what fields you need for each piece of changing information
 If students want to include the image in the state, that is fine too. Examples like this are good for raising discussion about what parts of an animation depend on one another. The image doesn’t need to be in the state, but it isn’t wrong to include it
 there either.
 
-@span{.right}{@centered-image{images/cycling.gif, Cycling, 400}}
+@right{@centered-image{images/cycling.gif, Cycling, 400}}
 *Exercise: Bicycle Ride* -- Look at this animation of a person riding a bicycle along a street.
 
 [.lesson-instruction]
 Go to the next animation worksheet page in the workbook. Draw three frames from this animation. Choose ones that highlight differences across the frames. The frames don’t need to be consecutive. Then, fill in the table of what information changes across the frames.
 
-@span{.clear}{}
+@clear
 
 In this case, there are two pieces of information: the x-coordinate of the cyclist, and the angle of rotation of the bike tires.
 
@@ -275,7 +275,7 @@ In this case, there are two pieces of information: the x-coordinate of the cycli
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `BikeState` to capture the data in this animation.
 
 
-@span{.right}{@centered-image{images/pulsingstar.gif, Pulsing star, 200}}
+@right{@centered-image{images/pulsingstar.gif, Pulsing star, 200}}
 *Exercise: Pulsing Star* -- Look at this animation of a star that pulses as it moves across the sky.
 
 [.lesson-instruction]
@@ -283,7 +283,7 @@ Go to next animation worksheet page in the workbook. Draw three frames from this
 
 When you chose which frames to draw, did you show the star getting smaller and then getting larger again?
 
-@span{.clear}{}
+@clear
 [.lesson-instruction]
 Fill in the table of what information changes across the frames.
 
@@ -298,7 +298,7 @@ What type did you choose for the field that tracks the direction of growth? You 
 The type for tracking direction of growth gives potential for a good discussion. None of these answers are wrong. If they were to use the boolean or the string, however, their next-state-tick function would need a conditional to decide whether to add or subtract from the current size. In this exercise, they aren’t writing the animations, so this is less of an issue. Our real goal is to get them to imagine animations and to identify the state information that underlies each one.
 ////
 
-@span{.right}{@centered-image{images/dimmer.gif, Dimmer, 200}}
+@right{@centered-image{images/dimmer.gif, Dimmer, 200}}
 *Exercise: Light Dimmer* -- Look at this animation of a slider to control the brightness of a light.
 
 [.lesson-instruction]
@@ -309,7 +309,7 @@ When you chose which frames to draw, did you include the far left position when 
 [.lesson-instruction]
 Fill in the table of what information changes across the frames.
 
-@span{.clear}{}
+@clear
 In this case, we see two things changing: the y-coordinate of the slider and the brightness of the light. You could have one field for each of these. Or, you could just have a field for the y-coordinate and compute the brightness from that value (you can control the brightness of a shape by putting a number from 0 to 255 in place of `"solid"` or `"outline"` in the arguments to the shape-image functions).
 
 [.lesson-instruction]
