@@ -27,17 +27,12 @@ for natlang in *; do
      cd $LESSON
      # echo Doing $LESSON
      proglang=pyret
+     repoLESSON=$LESSON
      if test -f .cached/.wescheme; then
        proglang=wescheme
+       repoLESSON=$(echo $LESSON|sed -e 's/-wescheme$//')
      elif test -f .cached/.codap; then
        proglang=codap
-     fi
-
-     repoLESSON=$LESSON
-
-     if test "$proglang" = wescheme; then
-       repoLESSON=$(echo $LESSON|sed -e 's/-wescheme$//')
-     elif test "$proglang" = codap; then
        repoLESSON=$(echo $LESSON|sed -e 's/-codap$//')
      fi
 
