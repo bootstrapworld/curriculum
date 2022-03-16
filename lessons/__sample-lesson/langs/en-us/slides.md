@@ -54,3 +54,15 @@ This is a link
 @link{https://code.pyret.org}
 
 ---
+
+# Proglang-dependent
+
+@ifproglang{pyret}{
+@link{https://www.bootstrapworld.org}
+}
+
+@ifproglang{codap}{
+@link{https://ds26gte.github.io}
+}
+
+---
