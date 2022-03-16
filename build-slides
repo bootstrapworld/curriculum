@@ -12,7 +12,7 @@ fi
 
 bootstraproot=$(cat lib/slidesroot.txt|$SED -e 1q)
 
-proglang=pyret
+export PROGLANG=pyret
 
 if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
@@ -32,19 +32,19 @@ for natlang in *; do
      export LESSON="$lsn"
      cd $LESSON
      # echo Doing $LESSON
-     proglang=pyret
+     PROGLANG=pyret
      repoLESSON=$LESSON
      if test -f .cached/.wescheme; then
-       proglang=wescheme
+       PROGLANG=wescheme
        repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
      elif test -f .cached/.codap; then
-       proglang=codap
+       PROGLANG=codap
        repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
      fi
 
-     # echo proglang is $proglang
+     # echo PROGLANG is $PROGLANG
 
-     idfile=slides-id-$proglang.txt
+     idfile=slides-id-$PROGLANG.txt
      if test -f slides.md; then
        $progdir/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
@@ -58,7 +58,7 @@ for natlang in *; do
            cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
            echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
          fi
-         cat "$idfile"|$SED -e 1q|$SED -e 's/^/https:\/\/docs.google.com\/presentation\/d\//' > slides-$proglang.url
+         cat "$idfile"|$SED -e 1q|$SED -e 's/^/https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.url
        else
          echo WARNING: slides.md failed preprocessing
        fi
