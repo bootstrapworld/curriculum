@@ -1,6 +1,6 @@
-= Functions: Contracts, Examples & Definitions
+= Functions Make Life Easier!
 
-@description{Students learn to connect function descriptions across three representations: Contracts (a mapping between Domain and Range), Examples (a list of discrete inputs and outputs), and Definitions (symbolic).}
+@description{Students discover that they can make their own functions.}
 
 @lesson-prereqs{contracts}
 
@@ -14,13 +14,11 @@
 
 * identify patterns where a function would be useful
 * define their own function
-* match examples, contracts, and definitions for the same function
 
 | Student-Facing Lesson Goals
 |
 * I can explain why a function is useful.
 * I can write my own function.
-* I can connect contracts, examples, and definitions for a function.
 
 | Materials
 |[.materials-links]
@@ -47,9 +45,6 @@
 
 |===
 
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit4/index.html, prior unit-based version}
-
 == There's Got to Be a Better Way!	 @duration{15 minutes}
 
 === Overview
@@ -71,7 +66,7 @@ on their computer.
 
 This is a fun lesson to make silly! Dramatically confess to your students, "I LOVE green triangles!" Challenge them to use the Definitions Area to code as many unique, solid, green triangles as they can in 2 minutes.
 
-Walk around the room and give positive feedback on the green triangles. When the time is up, ask for some examples of green triangles that they wrote and copy them to the board.  Be specific and attend to precision with the @vocab{syntax} such that students can visually spot the pattern between the different lines of code.
+Walk around the room and give positive feedback on the green triangles. When the time is up, ask for some examples of green triangles that they wrote and copy them to the board.
 
 [.indentedpara]
 --
@@ -182,14 +177,29 @@ In order to define a function, we need to identify what's changing and what stay
 Let's take a look at some examples for `gt`.
 --
 
-@ifproglang{Pyret}{@centered-image{images/examples-pyret.png, "gt Examples", 400}}
-@ifproglang{WeScheme}{@centered-image{images/examples-wescheme.png, "gt Examples", 400}}
+[.center]
+--
+@show{(sexp->code '(gt 5))} --> @show{(sexp->code '(triangle 5 "solid" "green"))}
+
+@show{(sexp->code '(gt 10))} --> @show{(sexp->code '(triangle 10 "solid" "green"))}
+
+@show{(sexp->code '(gt 25))} --> @show{(sexp->code '(triangle 25 "solid" "green"))}
+
+@show{(sexp->code '(gt 100))} --> @show{(sexp->code '(triangle 100 "solid" "green"))}
+
+@show{(sexp->code '(gt 220))} --> @show{(sexp->code '(triangle 220 "solid" "green"))}
+--
 
 [.lesson-instruction]
-Then we can define our function by replacing what changes with a variable that describes it.
+- What's Changing? _The size. Everything else is the same in every single example!_ *Highlight or circle the numbers in the gt column and in the triangle column to help students see that they're the only thing changing!*
+- We can define our function by replacing the numbers that change with a variable that describes them. In this case, `size` would be a logical variable.
+*Draw arrows to the two highlighted columns and label them with th word size.*
 
-@ifproglang{pyret}{@centered-image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
-@ifproglang{wescheme}{@centered-image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
+@center{@show{(sexp->code '(gt size))} --> @show{(sexp->code '(triangle size "solid" "green"))}}
+
+The way we write this in the editor is
+
+@center{@show{(sexp->code '(define (gt size)(triangle size "solid" "green")))}}
 
 Have students turn to @printable-exercise{gt-domain-debate.adoc} and "decide and defend" whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
 
@@ -199,25 +209,23 @@ In the case of `gt`, the domain was a number and that number stood for the `size
 
 Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
 --
-Have students open the @starter-file{gt}. They'll see the Contract, some Examples and the Function Definition.
+Have students open the @starter-file{gt}. They'll see the definition for gt.
 
 [.lesson-instruction]
 - Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
 - What did you get back? _a little green triangle!_
 - Take one minute and see how many different green triangles you can make using the `gt` function.
-- Try changing one of the examples to be incorrect.
-- Click run. What happens?
-_The editor lets us know that the function doesn't match the examples so that we can fix our mistake! Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!_
 
 === Investigate
 
-Have students turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
-
 [.lesson-instruction]
-On the top half of the page you will see the contract, examples, and function defintion for `gt`.
-Circle what is changing and label it with the word `size`. The names of the variables should reflect what they represent.
+--
+We've successfully defined a function to satisfy my love of green triangles, but other people have other favorite shapes and we need to be able to meet their needs, too. Let's take what we've learned to define some other functions.
 
+What if we wanted to define a function `rs` to make red squares?
 
+Have students turn to @printable-exercise{rs.adoc}
+--
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 
@@ -226,14 +234,7 @@ Circle what is changing and label it with the word `size`. The names of the vari
 Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  It's like "showing your work" in math class. Don't skip this step!
 |===
 
-[.lesson-instruction]
---
-We've successfully defined a function to satisfy my love of green triangles, but other people have other favorite shapes and we need to be able to meet their needs, too. Let's take what we've learned to define some other functions.
 
-Using `gt` as a model, complete the contract, examples and function definition for `bc`.  Then type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
-
-When you're done, continue on to @printable-exercise{pages/contracts-examples-definitions-2.adoc} and @printable-exercise{pages/contracts-examples-definitions-3.adoc}.
---
 
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents. When you have about 10 minutes to spare, redirect your class to the matching activity.
 
