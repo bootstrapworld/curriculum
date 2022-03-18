@@ -1,31 +1,38 @@
 == Contract Errors
 
-What is wrong with each of the code samples below?
+Match the code on the left to the contract error on the right. If you get stuck, try typing the expression into the editor and see what happens!
 
-[cols=".^6, 5a", options="header", frame="none"]
+[cols=".^8a, <.^2a, ^.^1a, 10a", options="header", stripes="none", grid="none", frame="none"]
 |===
 | Code
 | What's the error?
 
 | @show{(sexp->code '(+ 1 "Maya"))}
-| @ifsoln{Cannot add a number and a string}
+| 1 - +(C)+} | A
+| arguments are used in the wrong order
 
 | @show{(sexp->code '(and (> 3 0) (+ 1 2)))}
-| @ifsoln{`and` needs two Booleans, and `(+ 1 2)` is a Number}
+| 2 - +(D)+} | B
+| too many arguments are given
 
 | @show{(sexp->code '(or "true" "false"))}
-| @ifsoln{`or` needs two Booleans, not two Strings}
+| 3 - +(E)+} | C
+| the function/operator requires input types to match
 
 | @show{(sexp->code '(string-length 52))}
-| @ifsoln{52 is a Number but `string-length` needs a String}
+| 4 - +(F)+} | D
+| Boolean and number are used in place of 2 Booleans
 
 | @show{(sexp->code '(rectangle "solid" "blue" 6 7))}
-| @ifsoln{Arguments are in the wrong order}
+| 5 - +(A)+} | E
+| strings are used in place of Booleans
 
 | @show{(sexp->code '(circle 20 "red"))}
-| @ifsoln{Not enough arguments}
+| 6 - +(G)+} | F
+| the function is looking for a string and none is given
 
 | @show{(sexp->code '(star 20 50 "solid" "red"))}
-| @ifsoln{Too many arguments}
+| 7 - +(B)+} | G
+| some arguments are missing
 
 |===
