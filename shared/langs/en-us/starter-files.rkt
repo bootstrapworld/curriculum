@@ -17,6 +17,9 @@
    ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
    )
+  ("bc" "bc Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1Smei9pZ0b-y2yCzfyweBKQZAUixkim6b&v=1904b2c")
+    )
   ("mood-generator" "Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
