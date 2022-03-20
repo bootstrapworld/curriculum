@@ -26,7 +26,7 @@ body:not(.LessonPlan, .narrativepage) #content {
 }
 
 a       { color:  #2156a5 !important; }
-p       { margin: 10px 0px; font-size: inherit; line-height: inherit; }
+p       { margin: 10px 0px; font-size: inherit; }
 code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
 mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
@@ -38,12 +38,16 @@ body:not(.LessonPlan) p {
   overflow: hidden; 
   position: relative;
   min-height: 1.5rem;
-  margin:  5px 0px;
+  margin:  2px 0px;
 }
-body:not(.LessonPlan) p > .fitb {
+/* Empty p tags should have no height */
+body:not(.LessonPlan) p:empty { min-height: 0; }
+/* Stretch elements should expand to the end of the page */
+body:not(.LessonPlan) p > .stretch {
   float: right; 
   clear:  right;
   position: absolute;
+  text-align: left;
   bottom:  0;
   width: 100%;
   margin-left: 10px;
@@ -191,8 +195,8 @@ tr th.tableblock {
   display:            inline-block;
   min-height:         13px;
   min-width:          5em;
-  text-align:         left;
-  line-height:        1.5rem;
+  text-align:         center;
+  line-height:        1rem;
   border-bottom:      solid 1px black;
 }
 
