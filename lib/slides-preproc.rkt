@@ -7,7 +7,7 @@
 
 (define *in-file* "doesnt-exist")
 
-(define *proglang* "pyret")
+(define *proglang* (or (getenv "PROGLANG") "pyret"))
 
 (define (errmessage-file-context)
   *in-file*)
@@ -84,6 +84,13 @@
                        [(member directive '("starter-file" "opt-starter-file"))
                         (let ([lbl (read-group i directive)])
                           (display (starter-file-link lbl) o))]
+                       [(string=? directive "ifproglang")
+                        (let* ([proglang (read-group i directive)]
+                               [fragment (read-group i directive)])
+                          (when (string-ci=? proglang *proglang*)
+                            (call-with-input-string fragment
+                              (lambda (i)
+                                (expand-directives i o)))))]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])
