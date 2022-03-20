@@ -192,7 +192,7 @@
             }
 
             // sort with the shortest list of prereqs listing first
-            checked.sort((a,b) => 
+            checked.filter(onlyUnique).sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
 
             // update the list of accessible lessons
