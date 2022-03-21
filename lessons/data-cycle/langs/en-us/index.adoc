@@ -1,0 +1,145 @@
+= The Data Cycle
+
+@description{Students are introduced to the Data Cycle, a four-step scaffold for getting an answer from a dataset - and then generating the next question! Students learn to identify - and ask - statistical questions, by comparing and contrasting them with other kinds of questions.}
+
+@lesson-prereqs{ds-intro}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+* Articulate the parts of the Data Cycle
+* Tell the difference between Lookup, Arithmetic, and Statistical questions
+* Come up with their own examples of Lookup, Arithmetic, and Statistical questions
+
+| Student-facing Lesson Goals
+|
+
+* Let's think about what it means to ask questions of data, and the steps to do it
+* Not all questions are created equal! Let's learn the difference between them
+
+| Materials
+|[.materials-links]
+@ifproglang{pyret}{
+* @link{TBD, Lesson slides}
+}
+@ifproglang{codap}{
+* @link{TBD,  Lesson slides}
+}
+
+@material-links
+
+| Preparation
+|
+@preparation
+@ifproglang{pyret}{
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new one from @starter-file{animals}.
+}
+
+@lang-prereq
+|===
+
+== Telling Your Data Story @duration{10 minutes}
+
+=== Overview
+Students learn about the _Data Cycle_, which helps them get situated in the process of analyzing the datasets they will select in this lesson. They browse through the library of provided datasets, and choose one they want to work with. NOTE: the selection process can also be done as a homework assignment, if all students have internet access at home.
+
+=== Launch
+Data Science is all about _asking questions of data_. Sometimes the answer is easy to compute. Sometimes the answer to a question is _already in the dataset_ - no computation needed!  And sometimes the answer just sparks more questions!
+
+Data Scientists ask a ton of questions, and each question adds a chapter to the story of their research. Even if a question is a dead-end, it's valuable to share what the question was and what work you did to answer it!
+
+@right{@image{images/data-cycle.png, "A circular progression: (1) Ask Questions, (2) Consider Data, (3) Analyze Data, (4) Interpret Data, and starting over", 400}}
+The Data Cycle[*] is a _roadmap_, which helps guide us in the process of data analysis.
+
+(Step 1) We start by *Asking Questions* - statistical questions that can be answered with data.
+
+(Step 2) Then we *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset that meets our needs.
+
+(Step 3) Then it's on to *Analyzing the Data*, in which we produce data displays and new tables of filtered or transformed data in order to identify patterns and relationships.
+
+(Step 4) Finally, we *Interpret the Data*, in which we answer our questions and summarize the results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.
+
+=== Investigate
+[.lesson-instruction]
+Have students complete ...TBD - cart sort activity?...
+
+=== Synthesize
+
+- Why is it important to share every data story, even if it winds up being a dead end?
+- Suppose you asked a question and the answer only sparked more questions. Does that mean you didn't ask the right question to begin with?
+
+Each chapter in the Data Story is valuable, and the Data Cycle represents each chapter you plan to add. In this lesson, we're going to focus on the first part of the cycle.
+
+== Ask Questions @duration{20 minutes}
+
+=== Overview
+Students begin to categorize questions, sorting them into "lookup", "arithmetic", and "statistical" questions - as well as questions that simply can't be answered based on the data.
+
+=== Launch
+@right{@image{images/AskQuestions.png, "Ask Questions icon", 200}} How do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
+
+Most questions can be broken down into one of three categories:
+
+- *Lookup questions* -- These can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done! Examples of lookup questions might be “is Sunflower fixed?” or “How many legs does Felix have?”
+
+- *Arithmetic questions* -- These can be answered by computing an answer across a single column. Examples of computing questions might be “how much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
+
+- *Statistical questions* -- These questions are where things get interesting, because the answer is never just a single number or row. If we asked "how old are animals at the shelter", there are lots of ways to answer: we could report back the average age, or the age that shows up most frequently. Examples of statistical questions might be "how long does it take for an animal to get adopted?" or "What's a typical age for the cats?". And some statistical questions deal with _relationships between *two* columns_: “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
+
+=== Investigate
+
+[.lesson-instruction]
+- Turn to @printable-exercise{which-question-type.adoc}, and identify which questions are of what type. *For now, ignore the "Row" and "Column" questions in the table at the bottom.*
+- Look at the Wonders you wrote on @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are these Lookup, Arithmetic, or Statistical questions?
+- Complete @printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
+
+=== Common Misconceptions
+- Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.
+- They may think that "what's the average weight of the animals" is a statistical question, because "average" is a term that shows up in statistics. But computing the average is just pure arithmetic! A _statistical_ question would be "what's the typical weight of an animal?", because it does not specify a particular arithmetic process. The answer could be the mean, the median, or even the mode! Figuring out which one to use depends on the distribution of the data, which we'll discuss more in a later lesson.
+
+=== Synthesize
+
+- How would you explain the difference between Lookup. Arithmetic, and Statistical questions?
+- When you looked back at your Wonders from the Animals Dataset, were they mostly Lookup questions? Arithmetic? Statistical?
+- What are some examples of statistical questions the owner of a sports team might ask? Or a researcher who is trying to see if a cancer drug is effective? Or a principal who wants to know what will help their students the most?
+
+== Consider Data @duration{20 minutes}
+
+=== Overview
+Students bridge from a human-language question into something more formal, by specifying the rows and columns they would need to examine.
+
+=== Launch
+Once we have our question, it's time to figure out what data we'll need to answer it!
+
+[.lesson-point]
+When considering data, we ask "Which Rows?" and "Which Column(s)?"
+
+@right{@image{images/ConsiderData.png, "Consider Data icon", 200}} Tables are composed of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.
+
+Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.
+
+If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
+
+[.lesson-instruction]
+- If our question is "how old is mittens?", what rows do we need? What column(s)? _We only need one row for mittens, and we just need the `age` column_
+- If our question is "who is the heaviest animal?", what rows do we need? What column(s)? _We need to compare every row, and we only look at the `pounds` column_
+
+=== Investigate
+
+[.lesson-instruction]
+- Return to @printable-exercise{which-question-type.adoc}. For each question, which rows would you need to answer them? Which columns would you look at? Write your answers in the last two columns of the table at the bottom.
+- Complete @printable-exercise{which-rows-which-columns.adoc}.
+- Look at the questions you wrote for @printable-exercise{question-types-animals.adoc}. What rows and columns do you need to answer each one?
+
+=== Common Misconceptions
+- Students often forget that questions like "who is the oldest?" or "what is the most?" require looking at _every row_ in the table.
+
+=== Synthesize
+
+- What is the largest number of rows needed for a Lookup question? The smallest?
+- What is the largest number of rows needed for an Arithmetic question? The smallest?
+- What is the largest number of rows needed for a Statistical question? The smallest?
