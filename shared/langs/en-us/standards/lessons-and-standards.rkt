@@ -67,6 +67,14 @@
         "2-AP-11"
         )
 
+    ("debugging" 
+        "1B-AP-15"
+        "OK.3.AP.PD.03"
+        "OK.4.AP.PD.03"
+        "OK.5.AP.PD.03" 
+        "OK.L1.CS.T.01"
+        )
+
     ("piecewise-functions-conditionals" 
         "6.EE.B.6" ; STEMworks
         "7.EE.B" ; STEMworks
