@@ -4,7 +4,7 @@
 
 @description{Students use displays to answer questions, focusing on which displays make sense for the data they are working with. They also learn how to extract individual rows from a table, and columns from a row. }
 
-@lesson-prereqs{contracts}
+@lesson-prereqs{contracts, data-cycle}
 
 @keywords{}
 
@@ -39,42 +39,52 @@
 == Displaying Data @duration{20 minutes}
 
 === Overview
-Students get some more practice applying the plotting functions and working with Contracts, and begin to shift the focus from _programming_ to _data visualization_. This activity stresses a hard programming skill (reading Contracts) with formal reading comprehension (identifying key portions of the sentence).
+Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before. This activity stresses a hard programming skill (reading Contracts) with formal reading comprehension (identifying key portions of a statistical instruction).
 
 === Launch
-The Contracts page in the back of students' workbooks contains @vocab{contracts} for many plotting functions.
 
-Suppose we wanted to generate a display showing the ratio of fixed to un-fixed animals from the shelter? How do we go from a simple sentence to working code that makes a data display?
+@right{@image{images/data-cycle.png, "A circular progression: (1) Ask Questions, (2) Consider Data, (3) Analyze Data, (4) Interpret Data, and starting over", 150}}
+Let's return to the Data Cycle, which describes the process of asking a question, considering the data we need, analyzing that data, and interpreting it. Sometimes the answers we get from our analysis spark new questions, leading to another round of the cycle. Each turn of the Data Cycle adds a chapter to our data story.
+
+[.lesson-instruction]
+- What are the three types of questions we can ask of a dataset?
+- Can you explain the differences between them?
+- When we consider the data needed for a question, what two questions do we ask?
+
+@right{@image{images/AnalyzeData.png, "Analyze Data icon", 200}} Once we've asked our question and considered the data, it's time to do some analysis! This might involve making a new table, or making a data display like a chart or a graph. _But how do we know what to make?_
+
+Suppose we want to find the ratio of fixed to un-fixed animals from the shelter. As always, we start by asking *which rows* we're talking about. In this case, it's all the animals from the shelter. We also need to know *which column(s)* - or "which variable(s)" - we are displaying. In this case, it's the `fixed` column.
 
 [.lesson-point]
-To make a data display, we ask "Which Rows?", "Which Column(s)?", and "What Display?"
+After considering Rows and Columns, it's time to ask _"What are we Creating?"_
 
-@right{@image{images/AnalysisPipeline.png, "which rows? which columns? which display?"}}
+Is it a histogram? Bar chart? Scatter plots are essential for displaying relationships _between_ columns, but the other displays only deal with one column. Some displays work for @vocab{categorical data}, and others are for @vocab{quantitative data}.
 
-. We start by asking *which rows* we're talking about. In this case, it's all the animals from the shelter.
-. We also need to know *which column(s)* - or "which variable(s)" - we are displaying. In this case, it's the `fixed` column.
-. Finally, we need to know *which display* we are using. Is it a histogram? Bar chart? Scatter plots are essential for displaying relationships _between_ columns, but the other displays only deal with one column. Some displays work for @vocab{categorical data}, and others are for @vocab{quantitative data}.
+In this lesson, our goal is to expore the different kinds of displays we can make in Pyret, and what kinds of data each display is good for. For now, *this is all about exploring!* For example, you may not know how to read a histogram yet, but our goal today is to just figure out how to _make one_ in Pyret.
 
-Once we can answer these questions, all we need to do is find the Contract for that display and fill in the Domain!
-
-To display the categorical data, we can choose between pie and bar charts. Which one of these two is best, and why?
-@clear
+The Contracts page in the back of the student workbooks contains @vocab{contracts} for many functions that make displays. Once we know what to create, we can find the Contract for that display and start writing code!
 
 === Investigate
+Let's get some practice going from questions to code, and making data displays in the process!
+
+[.lesson-instruction]
+Turn to @printable-exercise{pages/data-displays.adoc}, and see if you can fill in these three parts for a number of data display instructions. When you're finished, try to make the display in Pyret using the appropriate function.
+
 Do you know what kind of data is used for each display?
 
 [.lesson-instruction]
 Turn to @printable-exercise{pages/type-v-display.adoc}, and see if you can identify what kind of data each display needs!
 
-Let's get some practice going from questions to code, making visualizations.
-
-[.lesson-instruction]
-Turn to @printable-exercise{pages/data-displays.adoc}, and see if you can fill in these three parts for a number of data display requests. When you're finished, try to make the display in Pyret using the appropriate function.
+=== Common Misconceptions
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop a little familiarity, and to get more practice reading Contracts.
 
 === Synthesize
 Debrief the activity with students.
 
-Optional: As an extension, have students break into teams and come up with additional Data Display challenges, then race to see which team can complete the other team's challenges first!
+- What displays can be used with categorical data?
+- What displays can be used with quantitative data?
+- What displays work with only one column of data?
+- What displays work with two or more columns of data?
 
 == Row and Column Lookups @duration{30 minutes}
 
@@ -94,7 +104,12 @@ Sometimes we have a value that we want to use again and again, and it makes sens
 - What are the values? __the String "Flannery", the Number 16, and an Image of a solid red star__
 
 === Investigate
-We can even define Rows from our tables!
+[.lesson-instruction]
+How many rows do we need to answer a Lookup question?
+(Make sure sure students understand we only need one!)
+
+@right{@image{images/AskQuestions.png,Ask Questions icon, 100}}
+Let's talk about the code we can write, to let us answer a Lookup question by defining a row.
 
 Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method:
 
@@ -140,4 +155,7 @@ What happens when you evaluate `animalA` in the Interactions Area?
 Have students share their answers, and see if there are any common questions that arise.
 
 == Additional Exercises:
--  @opt-printable-exercise{pages/more-practice-w-lookups.adoc}
+- @opt-printable-exercise{pages/more-practice-w-lookups.adoc}
+- @opt-printable-exercise{pages/exploring-displays1.adoc}
+- @opt-printable-exercise{pages/exploring-displays2.adoc}
+- @opt-printable-exercise{pages/plot-practice.adoc}

@@ -88,8 +88,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("data block") "code that lists the name, constructor(s), and field(s) of a data structure")
      (es-mx ("bloque de datos") "código que enumera el nombre, los constructores y los elementos de una estructura de datos"))
 
-    ((en-us ("data row" "data rows") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
-     (es-mx ("fila de datos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
+    ((en-us ("data row" "data rows" "cases") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
+     (es-mx ("fila de datos" "casos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
 
     ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers")
      (es-mx ("Ciencia de Datos") "la ciencia de recopilar, organizar y extraer conclusiones generales a partir de datos, con la ayuda de computadoras"))
