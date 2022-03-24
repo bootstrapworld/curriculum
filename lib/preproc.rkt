@@ -1590,7 +1590,7 @@
                                 (for ([s (string-to-form exprs)])
                                   (display (massage-arg s) o))))]
                            [(string=? directive "smath")
-                            (let ([exprs (string-to-form (format "(sexp->math '~a)"
+                            (let ([exprs (string-to-form (format "(math '~a)"
                                                  (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
@@ -2425,8 +2425,8 @@
                (cons (hspace 1) ans)
                ans))))
 
-(define (sexp->coe e)
-  ;(printf "sexp->coe ~s\n" e)
+(define (coe e)
+  ;(printf "coe ~s\n" e)
   (string-append
     ;enclosing following in span .gdrive-only doesn't seem to work
     (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
@@ -2445,6 +2445,9 @@
 
 (define (answer? e)
   (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
+
+(define (fitb? e)
+  (and (list? e) (memq (car e) '(?FITB))))
 
 (define *common-infix-ops*
  '(+ - * / and or < > = <= >= <> frac
@@ -2517,7 +2520,7 @@
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
                      #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
-  ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
+  ; (printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
                                     (if (or pyret tex) x (enclose-span ".value.wescheme-boolean" x)))]
         [(number? e) (let ([x (format "~a" e)])
@@ -2539,6 +2542,10 @@
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
                              )))]
+        [(fitb? e)
+         ; (printf "found fitb ~s\n" e)
+         (let ([e (cadr e)])
+                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (car e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
@@ -2633,11 +2640,12 @@
     (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))
     ))
 
-(define (sexp->math e #:parens [parens #f])
-  ;(printf "doing sexp->math ~s p:~s\n" e parens)
+(define (math e #:parens [parens #f])
+  ;(printf "doing math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e #:parens [parens #f])
+  ; (printf "doing sexp->code ~s\n" e)
   (if (string=? *proglang* "pyret")
       (sexp->pyret e #:parens parens)
       (sexp->wescheme e)))
@@ -2697,6 +2705,8 @@
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
+        [(fitb? e) (let ([e (cadr e)])
+                     (enclose-tag "span" "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (car e)])
                      (enclose-tag "table" ".gdrive-only.expression"
                        (if (or (symbol? a) (infix-op? a))
@@ -2782,13 +2792,13 @@
   (when (string? exp)
     (set! exp (with-input-from-string exp read)))
   (cond [(string=? form "circofeval")
-         (sexp->coe exp)]
+         (coe exp)]
         [(member form (list "code" "text"))
                  (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
-(define (code x #:multi-line [multi-line #t]) ;TODO or #f?
-  ;(printf "doing code ~s\n" x)
+(define (cm-code x #:multi-line [multi-line #t]) ;TODO or #f?
+  ; (printf "doing cm-code ~s\n" x)
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:indent 0)))
@@ -2796,6 +2806,17 @@
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{empty}: ")
           x))))
+
+(define (tree-member? xx tree)
+  (cond [(list? tree) (ormap (lambda (subtree) (tree-member? xx subtree)) tree)]
+        [(list? xx) (ormap (lambda (x) (eq? x tree)) xx)]
+        [else (eq? xx tree)]))
+
+(define (code x #:multi-line [multi-line #t] #:parens [parens #f])
+  ; (printf "doing code ~s\n" x)
+  (if (tree-member? '(?ANS ?ANSWER ?FITB) x)
+      (sexp->code x #:parens parens)
+      (cm-code x #:multi-line multi-line)))
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)

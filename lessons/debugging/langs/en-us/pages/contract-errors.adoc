@@ -14,31 +14,31 @@ Match the code on the left to the contract error on the right. If you get stuck,
 ||
 | What's the error?
 
-| @show{(sexp->code '(num-expt 1 "2"))}
+| @show{(code '(num-expt 1 "2"))}
 | 1 @ifsoln{ - +(C)+} | A
 | arguments are used in the wrong order
 
-| @show{(sexp->code '(and (> 3 0) (+ 1 2)))}
+| @show{(code '(and (> 3 0) (+ 1 2)))}
 | 2 @ifsoln{ - +(D)+} | B
 | too many arguments are given
 
-| @show{(sexp->code '(or "true" "false"))}
+| @show{(code '(or "true" "false"))}
 | 3 @ifsoln{ - +(E)+} | C
 | the function/operator requires input types to match
 
-| @show{(sexp->code '(string-length 52))}
+| @show{(code '(string-length 52))}
 | 4 @ifsoln{ - +(F)+} | D
 | Boolean and number are used in place of 2 Booleans
 
-| @show{(sexp->code '(rectangle "solid" "blue" 6 7))}
+| @show{(code '(rectangle "solid" "blue" 6 7))}
 | 5 @ifsoln{ - +(A)+} | E
 | strings are used in place of Booleans
 
-| @show{(sexp->code '(circle 20 "red"))}
+| @show{(code '(circle 20 "red"))}
 | 6 @ifsoln{ - +(G)+} | F
 | the function is looking for a string and none is given
 
-| @show{(sexp->code '(star 20 50 "solid" "red"))}
+| @show{(code '(star 20 50 "solid" "red"))}
 | 7 @ifsoln{ - +(B)+} | G
 | some arguments are missing
 

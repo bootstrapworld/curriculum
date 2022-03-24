@@ -178,8 +178,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("form") "the shape of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
      (es-mx ("forma") "la forma de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
     
-    ((en-us ("function" "functions") "a mathematical object that consumes inputs and produces an output")
-     (es-mx ("función" "funciones") "un objeto matemático que consume argumentos y produce un resultado"))
+    ((en-us ("function" "functions") "a relation from a set of inputs to a set of possible outputs, where each input is related to exactly one output")
+     (es-mx ("función" "funciones") "una relación que consume argumentos y produce un resultado"))
     
     ((en-us ("function block") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión a evaluar cuando se utiliza la función"))

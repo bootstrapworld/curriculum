@@ -11,17 +11,16 @@ Alice's code has some new elements we haven't seen before, so let's experiment a
 
 @vspace{2ex}
 
-@n What does @show{(sexp->code '(cost "hamburger"))} evaluate to?
+@n What does @show{(code '(cost "hamburger"))} evaluate to?
 @fitb{}{@ifsoln{_6_}}
 
 
-@n What does @show{(sexp->code '(cost "pie"))} evaluate to?
+@n What does @show{(code '(cost "pie"))} evaluate to?
 @fitb{}{@ifsoln{_2.25_}}
 
 
-@n What if you ask for @show{(sexp->code '(cost "fries"))}?
+@n What if you ask for @show{(code '(cost "fries"))}?
 @fitb{}{@ifsoln{__"Sorry, that's not on the menu!"__}}
-
 
 @n Explain what the function is doing in your own words.
 @span{.blankline}{}
@@ -51,4 +50,4 @@ Domain? @fitb{}{@ifsoln{Number}}
 
 @n Suppose Alice wants to calculate the price of a hamburger, _including a 5% sales tax_. Draw a Circle of Evaluation for the expression below.
 
-@ifsoln{@show{(sexp->coe `(* 1.05 (cost "hamburger")))}}
+@ifsoln{@show{(coe `(* 1.05 (cost "hamburger")))}}
