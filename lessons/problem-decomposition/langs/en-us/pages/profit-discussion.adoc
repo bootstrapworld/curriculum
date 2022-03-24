@@ -11,9 +11,9 @@ td p { margin: 0 !important; }
 Four students defined the same `revenue` and `cost` functions, shown below:
 [.indentedpara]
 --
-@show{(sexp->code '(define (revenue g) (* 1.75 g)))}
+@show{(code '(define (revenue g) (* 1.75 g)))}
 
-@show{(sexp->code '(define (cost g) (* 0.30 g)))}
+@show{(code '(define (cost g) (* 0.30 g)))}
 --
 
 @vspace{1ex}
@@ -24,10 +24,10 @@ However, they came up with *four different definitions* for `profit`:
 
 [cols="1a,5a", frame="none", grid="none", stripes="none"]
 |===
-| *Khalil:* | @show{(sexp->code '(define (profit g) (- (* 1.75 g) (* 0.30 g))))}
-| *Samaria:*| @show{(sexp->code '(define (profit g) (* (- 1.75 0.30) g)))}
-| *Alenka:* | @show{(sexp->code '(define (profit g) (* 1.45 g)))}
-| *Fauzi:* 	| @show{(sexp->code '(define (profit g) (- (revenue g) (cost g))))}
+| *Khalil:* | @show{(code '(define (profit g) (- (* 1.75 g) (* 0.30 g))))}
+| *Samaria:*| @show{(code '(define (profit g) (* (- 1.75 0.30) g)))}
+| *Alenka:* | @show{(code '(define (profit g) (* 1.45 g)))}
+| *Fauzi:* 	| @show{(code '(define (profit g) (- (revenue g) (cost g))))}
 |===
 
 @vspace{1ex}
