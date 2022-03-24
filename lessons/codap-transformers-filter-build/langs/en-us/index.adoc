@@ -1,5 +1,5 @@
 = Transformers
-@description{Students learn about _Transformers_, which allow them to order, filter, and build columns to extend the animals table.}
+@description{Students learn more about _Transformers_, including `Build` and `Filter`.}
 
 @add-to-lang{.order-by, .filter, .build-column}
 
@@ -9,7 +9,6 @@
 | Lesson Goals
 | Students will be able to...
 
-* order the Animals Dataset by a number of criteria
 * filter the Animals Dataset by species, fixed status, and age
 * add a column to the Animals Dataset
 
@@ -30,86 +29,6 @@
 
 @lang-prereq
 |===
-== Sorting Tables, Part 1 @duration{15 minutes}
-
-=== Overview
-Students sort a column on a table by actually _changing_ the table.
-
-=== Launch
-
-Open the @starter-file{animals} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
-
-
-=== Investigate
-
-Student work in groups or pairs. They will sort various columns on the table by clicking the attribute name and then selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.
-
-[.lesson-instruction]
-- Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
-- Sort the animals by age, from youngest to oldest.
-- Sort the animals from heaviest to lightest.
-- Sort the animals table by how long it took for each animal to be adopted, in ascending order.
-
-=== Synthesize
-
-. Can you think of a situation when it would be useful to sort animals from heaviest to lightest?
-
-. Does sorting `animals-table` produce a _new_ table, or change the existing one? How do you know?
-
-. Can you think of a situation where CODAP's default behavior - to alter the table each time we sort it - might inhibit more sophisticated data analysis?
-
-== Sorting Tables, Part 2 @duration{10 minutes}
-
-=== Overview
-Using the `Sort` Transformer, students sort rows of a table in ascending or descending order, according to one column.
-
-=== Launch
-@right{@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers can be found", 300}
-
-The Transformers plugin allows students to transform datasets to produce new, distinct datasets rather than modifying the original dataset itself. When they use transformers, students are building and modifying a _copy_ of the original table - enabling easy low-stakes "what if?" exploration.
-
-First, show students how they can access the Transformers plugin (see screenshot on right). Invite students to explore the different Transformers available.
-
-Explain to students that, for the `Sort` Transformer to do its job, we must provide it with _four_ different pieces of information. More specifically, `Sort` requires:
-- a dataset
-- the _type_ that the formula evaluates to
-- a formula
-- a sort direction (ascending or descending).
-
-But what does it produce?
-
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-a|
-@span{.title}{What's a Contract?!}
-Contracts help us keep track of the different Transformers we'll be using, and how they operate on each Row of a table. Every contract has three imporant parts:
-
-- The Transformer’s _Name_
-- The _Domain_ of the Transformer Expression - The type(s) of data we give it. For our purposes, this will always be a single `Row` of the table.
-- The _Range_ of the Transformer Expression - The type of data the transformer produces from that Row
-
-Check out the screenshot of the Transformers plugin below. What are the domain and range for `Filter`?
-
-@centered-image{images/transformer-contract-example.png, transformer contract example,300}
-
-The Transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
-
-|===
-
-=== Investigate
-[.lesson-instruction]
-* Open the `Transformer` plugin, and choose the transformer `Sort`. Select `animals-dataset`. In the formula expression box, type `Name`. Select `ascending` as the direction and `Apply Tranformer`. What happens?
-* Next, see what happens when you select `descending`.
-* Sort the animals table from heaviest to lightest.
-* Sort the animals table alphabetically by species.
-* Sort the animals table by how long it took for each animal to be adopted, in ascending order.
-
-=== Common Misconceptions
-Students may be more familiar with filters that actually change the table. In CODAP, all transformers produce a _brand new table_. Filtered tables are automatically saved; CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times the transformer has been applied. When students apply a transformer, they have the option of selecting the original table from the dropdown menu, or a new table that they've generated. Students can also rename saved tables, if they’d like.
-
-=== Synthesize
-- Does the transformer `Sort` produce a _new_ table, or change the existing one?
-- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
 
 == Filtering Tables @duration{20 minutes}
 

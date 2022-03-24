@@ -1,5 +1,5 @@
 = Transformers
-@description{Students learn about _Transformers_, which allow them to order, filter, and build columns to extend the animals table.}
+@description{Students learn two different ways to sort - by modifying the table, and by using a _Transformer_ to build and modify a copy of the table.}
 
 @add-to-lang{.order-by, .filter, .build-column}
 
@@ -9,9 +9,9 @@
 | Lesson Goals
 | Students will be able to...
 
+* write a Purpose Statement
+*
 * order the Animals Dataset by a number of criteria
-* filter the Animals Dataset by species, fixed status, and age
-* add a column to the Animals Dataset
 
 | Student-facing Lesson Goals
 |
@@ -111,63 +111,6 @@ Students may be more familiar with filters that actually change the table. In CO
 - Does the transformer `Sort` produce a _new_ table, or change the existing one?
 - You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
 
-== Filtering Tables @duration{20 minutes}
-
-=== Overview
-Students learn how to _filter_ tables by removing Rows.
-
-=== Launch
-Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the "Filter Transformer", and have them _randomly choose_ a function card from from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set, and make sure they read it without showing it to anyone else.
-
-Have 6-8 students line up in front of the classroom, and have the filter transformer go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
-
-Ask the class: based on who sat and who stayed, _what function was on the card?_
-
-[.lesson-point]
-The `Filter` Transformer takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true.
-
-Suppose we want to get a table of only animals that have been fixed? The `Filter` transformer consumes a dataset to filter and a formula expression that evaluates to either true or false.
-
-=== Investigate
-
-[.lesson-instruction]
-* Open the `Transformer` plugin, and choose the transformer `Filter`. Select `animals-dataset`. In the formula expression box, type `Fixed = “TRUE”`. Apply the transformer. What happens?
-* Does CODAP mind if you forget to capitalize? What about if you leave out quotation marks?  Examine the error messages that appear if you are just a little careless as you enter text into the formula expression box.
-* This time, in the formula expression box, type `Age > 5`. What did you get?
-* Now try `Species = “dog”`
-
-The `Filter` Transformer walks through the table, applying whatever formula it was given to each row, and produces a new table containing all the rows for which the formula returned `true`. Notice that `Filter` takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
-
-=== Synthesize
-Debrief with students. Some guiding questions on filtering:
-
-- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` transformer help?
-- If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
-- Can you think of a situation where filtering fixed animals would be helpful?
-
-== Building Columns @duration{10 minutes}
-
-=== Overview
-Students learn how to _build columns_, using the `Build Attribute` transformer.
-
-=== Launch
-Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. The `Build Attribute` transformer makes a new copy of a dataset, and adds a new attribute. We must provide a dataset, a name for the new attribute, an existing collection to add the attribute to, a formula for the attribute’s values, and an indication of the type of value the formula will evaluate to.
-
-=== Investigate
-[.lesson-instruction]
-* Open the `Transformer` plugin, and choose the transformer `Build Attribute.` Select `animals-dataset`.
-* Enter `Young` as the `Name of New Attribute`. Select `cases` as the `Collection to Add To`. In the formula expression box, type `Age < 5`.  Apply the transformer. What happens?
-* Now, enter `is-cat` as the `Name of New Attribute` and try typing `Species = “cat”` in the formula expression box. What do you get? What do you think is going on?
-
-The `Build Attribute` Transformer walks through the table, applying whatever formula expression it was given to each row. Whatever the formula expression produces for that row becomes the value of our new column, which is named based on the string it was given. In the first example, we gave it `Age < 5`, so the new table had an extra Boolean column for every animal, indicating whether or not it was young.
-
-=== Synthesize
-Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
-
-- A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use  to compute that for every row in the table.
-
-Being able to define  is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 
 
 == Additional Exercises:
