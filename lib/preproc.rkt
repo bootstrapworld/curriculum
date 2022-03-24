@@ -1590,7 +1590,7 @@
                                 (for ([s (string-to-form exprs)])
                                   (display (massage-arg s) o))))]
                            [(string=? directive "smath")
-                            (let ([exprs (string-to-form (format "(sexp->math '~a)"
+                            (let ([exprs (string-to-form (format "(math '~a)"
                                                  (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
@@ -2425,8 +2425,8 @@
                (cons (hspace 1) ans)
                ans))))
 
-(define (sexp->coe e)
-  ;(printf "sexp->coe ~s\n" e)
+(define (coe e)
+  ;(printf "coe ~s\n" e)
   (string-append
     ;enclosing following in span .gdrive-only doesn't seem to work
     (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
@@ -2640,8 +2640,8 @@
     (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))
     ))
 
-(define (sexp->math e #:parens [parens #f])
-  ;(printf "doing sexp->math ~s p:~s\n" e parens)
+(define (math e #:parens [parens #f])
+  ;(printf "doing math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e #:parens [parens #f])
@@ -2792,7 +2792,7 @@
   (when (string? exp)
     (set! exp (with-input-from-string exp read)))
   (cond [(string=? form "circofeval")
-         (sexp->coe exp)]
+         (coe exp)]
         [(member form (list "code" "text"))
                  (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))

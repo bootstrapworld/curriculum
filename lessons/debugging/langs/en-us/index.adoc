@@ -91,11 +91,11 @@ Students are introduced to _contract errors_. They read the error messages they 
 === Launch
 With no syntax errors, the computer can read our code and try to run it. But a running program can still have problems! Here are a few examples of programs that have perfect syntax, but will generate an error when we try to run them. Can you spot the problem?
 
-@show{(sexp->code '(+ 1 "Zari"))}
+@show{(code '(+ 1 "Zari"))}
 
-@show{(sexp->code '(triangle "50" "solid" "blue"))}
+@show{(code '(triangle "50" "solid" "blue"))}
 
-@show{(sexp->code '(or "true" false))}
+@show{(code '(or "true" false))}
 
 [.lesson-point]
 Contract Errors prevent the computer from _running_ code
@@ -125,9 +125,9 @@ Key point: This is where good habits like writing thorough examples and good com
 === Launch
 Ho-ming wanted to write a function to produce green triangles, and she just wanted to straight to coding the definition:
 
-@show{(sexp->code '(define (gt size) (triangle 100 "solid" "green")))}
+@show{(code '(define (gt size) (triangle 100 "solid" "green")))}
 
-She clicked Run and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(sexp->code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
+She clicked Run and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
 
 Did she have a syntax error? Why or why not?
 Did she have a contract error? Why or why not?

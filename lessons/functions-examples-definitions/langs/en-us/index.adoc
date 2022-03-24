@@ -67,11 +67,11 @@ Walk around the room and give positive feedback on the green triangles. When the
 --
 For example:
 
-@show{(sexp->code '(triangle  30  "solid" "green"))}
+@show{(code '(triangle  30  "solid" "green"))}
 
-@show{(sexp->code '(triangle  12  "solid" "green"))}
+@show{(code '(triangle  12  "solid" "green"))}
 
-@show{(sexp->code '(triangle 500  "solid" "green"))}
+@show{(code '(triangle 500  "solid" "green"))}
 --
 
 - *Is there a pattern?*
@@ -99,7 +99,7 @@ _Write this down so that you can compare to it later!!!_
 Our programming language allows us to define *values*. This lets us create "shortcuts" to reuse the same code over and over.
 
 For example:
-@show{(sexp->code '(define PRIZE-STAR (star 65 "solid" "pink")))}
+@show{(code '(define PRIZE-STAR (star 65 "solid" "pink")))}
 
 This code will let us write `PRIZE-STAR` wherever we want that same solid, pink star - without having write all the code again and again.
 
@@ -107,8 +107,8 @@ This code will let us write `PRIZE-STAR` wherever we want that same solid, pink 
 }
 
 Suppose we want to define a shortcut @vocab{function} called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
-What will _@show{(sexp->code '(gt 5))}_ produce?
-_@show{(sexp->code '(triangle 5 "solid" "green"))}!_
+What will _@show{(code '(gt 5))}_ produce?
+_@show{(code '(triangle 5 "solid" "green"))}!_
 --
 
 Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image.
@@ -124,18 +124,18 @@ Let' try it.
 
 - You say: *gt 5!*
 +
-The student responds: _@show{(sexp->code '(triangle 5 "solid" "green"))}!_
+The student responds: _@show{(code '(triangle 5 "solid" "green"))}!_
 +
 *Note: Have the actor ignore the punctuation, and just say "triangle 5 solid green!"*
 - You say: *gt 20!*
 +
-The student responds: _@show{(sexp->code '(triangle 20 "solid" "green"))}!_
+The student responds: _@show{(code '(triangle 20 "solid" "green"))}!_
 - You say: *gt 200!*
 +
-The student responds: _@show{(sexp->code '(triangle 200 "solid" "green"))}!_
+The student responds: _@show{(code '(triangle 200 "solid" "green"))}!_
 - You say: *gt 99!*
 +
-The student responds: _@show{(sexp->code '(triangle 99 "solid" "green"))}!_
+The student responds: _@show{(code '(triangle 99 "solid" "green"))}!_
 
 [.lesson-instruction]
 --
@@ -154,7 +154,7 @@ Thank your volunteer. Assuming they did a wonderful job, ask them:
 --
 Just as we were able to give our volunteer instructions that let them take in `gt 20` and give us back
 
-@show{(sexp->code '(triangle 20 "solid" "green"))}, we can define any function we'd like in the *Definitions Area*.
+@show{(code '(triangle 20 "solid" "green"))}, we can define any function we'd like in the *Definitions Area*.
 --
 
 == Identifying and Describing the Pattern @duration{flexible}
@@ -192,7 +192,7 @@ Why might someone think the domain for `gt` contains a Number and two Strings? _
 Have students open the @starter-file{gt}. They'll see the Contract, some Examples and the Function Definition.
 
 [.lesson-instruction]
-- Click *Run* and evaluate @show{(sexp->code '(gt 10))} in the Interactions Area.
+- Click *Run* and evaluate @show{(code '(gt 10))} in the Interactions Area.
 - What did you get back? _a little green triangle!_
 - Take one minute and see how many different green triangles you can make using the `gt` function.
 - Try changing one of the examples to be incorrect.

@@ -106,19 +106,19 @@ This starter file includes two special functions.
 
 `and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
 
-@show{ (sexp->code '(define (gt5 x) (> x 5))) }
+@show{ (code '(define (gt5 x) (> x 5))) }
 
-@show{ (sexp->code '(define (lte15 x) (<= x 15))) }
+@show{ (code '(define (lte15 x) (<= x 15))) }
 
-@show{ (sexp->code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
 @span{.center}{@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities" ,""}}
 
-@show{ (sexp->code '(define (lt5 x) (< x 5))) }
+@show{ (code '(define (lt5 x) (< x 5))) }
 
-@show{ (sexp->code '(define (gte15 x) (>= x 15))) }
+@show{ (code '(define (gte15 x) (>= x 15))) }
 
-@show{ (sexp->code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
 _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
 
@@ -126,19 +126,19 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 `or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
 
-@show{ (sexp->code '(define (lt5 x) (< x 5))) }
+@show{ (code '(define (lt5 x) (< x 5))) }
 
-@show{ (sexp->code '(define (gte15 x) (>= x 15))) }
+@show{ (code '(define (gte15 x) (>= x 15))) }
 
-@show{ (sexp->code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
 @span{.center}{@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities" ,""}}
 
-@show{ (sexp->code '(define (gt5 x) (> x 5))) }
+@show{ (code '(define (gt5 x) (> x 5))) }
 
-@show{ (sexp->code '(define (lte15 x) (<= x 15))) }
+@show{ (code '(define (lte15 x) (<= x 15))) }
 
-@show{ (sexp->code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
 _Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
 
@@ -149,8 +149,8 @@ Turn to @printable-exercise{compound-inequality-solutions.adoc} and explore the 
 
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality.
 
-@show{ (sexp->code '(define (fiveto15 x)(and (> x 5) (<= x 15)))) }
-@show{ (sexp->code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }
+@show{ (code '(define (fiveto15 x)(and (> x 5) (<= x 15)))) }
+@show{ (code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }
 
 [.lesson-instruction]
 Turn to @printable-exercise{compound-inequality-functions.adoc} and have students write code to describe the compound inequalities pictured.
