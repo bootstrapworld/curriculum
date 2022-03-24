@@ -10,7 +10,7 @@
     ("zample-lesson" "SJ.1")
 ; core
 
-    ("computing-needs-all-voices" 
+    ("computing-needs-fall-voices" 
         "SJ.1"
         "SJ.2"
         "SJ.4"
@@ -35,6 +35,12 @@
         "MLR.7"
         "MLR.3"     ; page focused just on this
         "P4" 
+        )
+
+    ("debugging" 
+        "MP.6"
+        "P2"
+        "P6"
         )
 
     ("simple-data-types" 
