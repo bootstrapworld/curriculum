@@ -2437,6 +2437,9 @@
 (define (answer? e)
   (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
 
+(define (fitb? e)
+  (and (list? e) (memq (car e) '(?FITB))))
+
 (define *common-infix-ops*
  '(+ - * / and or < > = <= >= <> frac
      string=? string<? string<=? string>? string>=? string<>?))
@@ -2508,7 +2511,7 @@
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
                      #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
-  ;(printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
+  ; (printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
                                     (if (or pyret tex) x (enclose-span ".value.wescheme-boolean" x)))]
         [(number? e) (let ([x (format "~a" e)])
@@ -2530,6 +2533,10 @@
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
                              )))]
+        [(fitb? e)
+         ; (printf "found fitb ~s\n" e)
+         (let ([e (cadr e)])
+                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (car e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
@@ -2689,6 +2696,8 @@
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
+        [(fitb? e) (let ([e (cadr e)])
+                     (enclose-tag "span" "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (car e)])
                      (enclose-tag "table" ".gdrive-only.expression"
                        (if (or (symbol? a) (infix-op? a))
@@ -2795,7 +2804,8 @@
         [else (eq? xx tree)]))
 
 (define (code x #:multi-line [multi-line #t] #:parens [parens #f])
-  (if (tree-member? '(?ANS ?ANSWER) x)
+  ; (printf "doing code ~s\n" x)
+  (if (tree-member? '(?ANS ?ANSWER ?FITB) x)
       (sexp->code x #:parens parens)
       (cm-code x #:multi-line multi-line)))
 
