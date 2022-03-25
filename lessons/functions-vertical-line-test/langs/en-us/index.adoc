@@ -1,5 +1,5 @@
-= Properties of Functions
-@description{Students learn about the properties of functions.}
+= The Vertical Line Test
+@description{Students learn to distinguish functions from other relations.}
 
 @lesson-prereqs{}
 
@@ -11,11 +11,13 @@
 | Lesson Goals
 | Students will be able to:
 
+* Generate points for a graph from a rule.
 * Test whether or not a graph represents a function using the vertical line test.
 * Identify whether or not a table represents a function.
 
 | Student-Facing Lesson Goals
 |
+* I can use a rule to generate points for a graph.
 * I can identify which graphs are functions and which aren't using the vertical line test.
 * I can identify whether or not a table represents a function.
 
@@ -32,84 +34,59 @@
 
 | Preparation
 |
+* Decide whether you want to have students interact directly with the @link{https://docs.google.com/presentation/d/1IW5uMg491e33Av_XdGSivsAy28S9QSVivEYonpjTeF8/edit?usp=sharing, Interactive Function Activity} on their computers or whether it would be easier for your situation to project each graph from the peardeck on the white board and have students come up to add points that satisfy the rules or dictate points that satisfy the rules to a scribe who will add them to the graph.
 * Rulers or straight edges might be useful in supporting students during the section of the lesson that focuses on the vertical line test.
 
 @lang-prereq
 
 |===
 
-== Do Now:
-Give each student a small piece of graph paper or a post-it. Have them draw a rectangle and hang it on the board in the front of the room.
-
-[.lesson-instruction]
---
-Look at this collection of rectangles! How did you know how to make such a beautiful collection of rectangles?! _All rectangles have 4 sides and 4 right angles._
-
-*We can also make rectangles in the programming environment, but @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} couldn't have made this collection with my instructions. Why not?*
-
-- _We are flexible humans and made game-time decisions about size, color, ratio of length to width, and whether or not to color the rectangles in._
-- _Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make._
-- _The Domain for `rectangle` in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}? is Number, Number, String, String and if we don't give `rectangle` the arguments to satisfy its Domain we get an error message!_
---
-
-=== Extension:
-
-[.lesson-instruction]
---
-We could figure out how to make all of these rectangles in @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} using the `rectangle` function, but it might be faster if we looked for some groups within this collection of images and defined some new functions.
-
-*What functions would you recommend we define?*
-
-_This will depend on what students produced, but, for example:_
-
-- _If some are solid and some are outline we might define `solid-rectangle` and ``outline-rectangle``_
-- _If there a few predominant colors we might define `red-rectangle`, `blue-rectangle`, etc._
-- _If there are several 3x5 rectangles we might define ``rectangle-3-5``_
-
-*How many of the images we drew by hand would each of our new functions be able to build?*
---
-
-== Functions have a Single Output for Each Set of Inputs @duration{20 minutes}
+== Functions: Each Set of Inputs has One Output @duration{10 minutes}
 
 === Overview
 
-Students will think about the importance of assigning a single output to each input through the lens of vending machines.
+Students work collaboratively to generate visual representations of functions, using rules to make coordinate pairs.
 
 === Launch
 
+Select a volunteer to come to the board and draw a rectangle. While they're on their way, have the rest of your students draw a rectangle in their notebook.
+
 [.lesson-instruction]
---
-Functions are labor-saving devices that allow humans to give machines instructions about the work we want them to do for us, but they aren't mind readers, so we need to supply the inputs and define what we want our machine to do with each of those sets of inputs!
+- Thank you! How did you know to draw just what I was looking for? _All rectangles have 4 sides and 4 right angles._
+- Did all of you draw rectangles with 4 sides and 4 right angles? _Yes_
+- Do all of your rectangles look just like this one? _No!_
+- Why Not? _Didn't specify ratio, size, color, fill, etc._
+- *We can also make rectangles in the programming environment, but @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} couldn't have made this rectangle with my instructions. Why not?* _Machines need to be given the specific set of inputs that they are programmed to expect and use those inputs to make exactly what they've been programmed to make. The Domain for `rectangle` is Number, Number, String, String and if we don't give `rectangle` the arguments to satisfy its Domain we get an error message, not a `rectangle`!_
+- In the real world it is also usually useful to be able to specify exactly which rectangle I'm expecting. If I print copies for you, I expect them to be 8.5 x 11, like all of the other pages in your notebooks and folders. If someone loads giant paper in the tray, my copies will neither look good, nor will they fit in your notebooks. Similarly, when the business manager tries to print a bunch of addresses on envelopes on her printer, the job will get messed up if someone puts paper in the envelope drawer.
 
-For example, a vending machine can be programmed to release a drink.
-
-- What inputs need to be satisfied in order for the machine to release the drink? _usually $ and a selection_
-- If we want to be able to choose which drink we want, we need to have a different button for each option.
-- If we want orange gatorade, and the people who decided what was in the machine didn't put it on the list, the machine won't be able to give it to us.
-- If we wanted gatorade and the button said, "gatorade, iced tea, lemonade", the machine would not get enough information to be able to give us what we wanted.
-- If we realize that the machine is always selling out of gatorade and never selling iced tea, *we can make two different buttons do the same thing*: dispense gatorade.
---
+[.lesson-point]
+Functions are reliable. If we give them what they need, they produce the same thing with that same collection of inputs every time.
 
 === Investigate
 
-Have students complete @printable-exercise{vending.adoc}.
+Just as we can give the `rectangle` function inputs and it will produce an image, we can make graphs of functions by feeding inputs (x-values) into a rule that produces outputs (y-values). The resulting x-y pairs describe the location of points that will satisfy the rule. We can repeat the process with an infinite number of x-values to produce a line or a curve or any other shape of function.
+
+[.lesson-instruction]
+* On each slide of the @online-exercise{https://docs.google.com/presentation/d/1IW5uMg491e33Av_XdGSivsAy28S9QSVivEYonpjTeF8/edit?usp=sharing, Interative Function Activity}, we'll see a graph and a rule.
+* Each of you will choose an x-value that is within the domain of the graph, apply the rule to your x-value to get a y-value, and then place a dot on the graph whose coordinates are the @math{x} you put in and the @math{y} you got back.
+* When all of our dots appear on the screen together, we'll end up with a visual representation of the function!
+
+_You might just want to do a few of these slides, or you might do lots of them._
 
 === Synthesize
+[.lesson-instruction]
+How can we make a graph of a function from its rule?
 
-Confirm that students have correctly identified which vending machine scenarios represent functions.
-
-
-== Identifying Functions from Graphs
+== Vertical Line Test
 
 === Overview
 
 Students learn to use the vertical line test to determine whether or not a graph is a function.
 
 === Launch
-
 [.lesson-instruction]
 --
-Graphing functions is similar to this vending machine situation. We can write rules that take in an x-value and produce a y-value. Different x-values can yield the same y-value. But each x-value can only be associated with one y-value.
+We can write rules that take in an x-value and produce a y-value. Different x-values can yield the same y-value. But each x-value can only be associated with one y-value.
 
 We can test a graph to see whether or not it's a function using the "vertical line test". Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, the graph is not a function.
 --
@@ -125,7 +102,7 @@ We can test a graph to see whether or not it's a function using the "vertical li
 === Investigate
 
 [.lesson-instruction]
-Turn to @printable-exercise{functions-graphs.adoc} and use a straight edge and a pencil to draw vertical lines on each of the graphs and determine whether or not they are functions. When you finish, go on to @printable-exercise{functions-graphs-2.adoc}.
+Turn to @printable-exercise{functions-graphs.adoc} and use a straight edge and a pencil to draw vertical lines on each of the graphs to help you determine whether or not they are functions. When you finish, go on to @printable-exercise{functions-graphs-2.adoc}.
 
 As students work, circulate around the room and make sure that they are actually drawing vertical lines on the graphs. Some students may benefit from circling the point where each vertical line intersects the graph.
 
@@ -136,8 +113,8 @@ Once all of your students have completed the first page, redirect the class to @
 Confirm that students have correctly identified which graphs represent functions.
 
 [.lesson-instruction]
-- What did you notice?
-- What did you wonder?
+- What did you notice? _Answers will vary... Functions could be lines, curves, v-shaped or scatterplots!_
+- What did you wonder? _Answers will vary.. Why might some scatterplots represent functions and others not? Are there other forms that functions can take? How do you end up with a circle on a graph?_
 
 == Identifying Functions from Tables
 
@@ -157,7 +134,7 @@ How can we identify whether or not a table of values represents a function? _If 
 === Investigate
 
 [.lesson-instruction]
-Turn to @printable-exercise{functions-tables.adoc} and look at the values in each table carefully to determine whether or not it represents functions. If it's not a function, circle or highlight the points that let you know it can't be a function. When you're done, turn to @printable-exercise{notice-wonder-functions.adoc} and add any new notices or wonders you may have.
+Turn to @printable-exercise{functions-tables.adoc} and look at the values in each table carefully to determine whether or not it represents functions. If it's not a function, circle or highlight the points that let you know it can't be a function. When you're done, turn to @printable-exercise{notice-wonder-functions.adoc} and add any new notices or wonders you may have. Then turn to @printable-exercise{functions-tables-graphs.adoc}
 
 As students work, circulate around the room and make sure that they are actually circling or highlighting the points on the tables that tell them that the table doesn't represent a function.
 
@@ -166,65 +143,7 @@ As students work, circulate around the room and make sure that they are actually
 Confirm that students have correctly identified which graphs represent functions.
 
 [.lesson-instruction]
-- What did you notice?
-- What did you wonder?
-
-== Function of Notation
-
-=== Overview
-
-Students connect their understanding of image functions to function notation in math.
-
-=== Launch
-We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
-
-@show{(code '(define (gt size)(triangle size "solid" "green")))}
-
-[cols="2,3,1"]
-|===
-| Function Expression 				| What it Produces 											| Final Product
-| @show{(code '(gt 10))} 		| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
-| @show{(code '(gt 20))} 		| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
-| @show{(code '(gt 30))} 		| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
-| @show{(code '(gt 40))} 		| @show{(code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png, green triangle 40}
-| @show{(code '(gt 50))} 		| @show{(code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png, green triangle 50}
-|===
-
-Function Notation in math works the same way. We replace the variable with the given value and then compute the value of the expression.
-
-@ifproglang{pyret}{
-@show{(code '(define (f x)(+ x 8)))}
-
-[cols="2,3,1"]
-|===
-| Function Expression 				| What it Produces 						| Final Product
-| @show{(code '(f 10))} 		| @show{(code '(+ 10 8))} 		| 18
-| @show{(code '(f 20))} 		| @show{(code '(+ 20 8))} 		| 28
-| @show{(code '(f 30))} 		| @show{(code '(+ 30 8))} 		| 38
-| @show{(code '(f 40))} 		| @show{(code '(+ 40 8))} 		| 48
-| @show{(code '(f 50))} 		| @show{(code '(+ 50 8))} 		| 58
-|===
-}
-
-@ifproglang{wescheme}{How do we want to format this for wescheme so that it looks as close to what it looks like in pyret as possible?}
-
-=== Investigate
-
-Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
-
-[.lesson-instruction]
-- Start by looking at each table and highlighting what is changing from the first row to the following rows.
-- Then, match each table to the function that defines it.
-
-You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
-
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|@span{.title}{Connecting to Best Practices}
-Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
-|===
-
+- What did you notice? _Answers will vary... It can still be a function if y-values repeats. It didn't matter whether or not the x-values followed a pattern. It was easier for me to read the tables when the x-values were in order._
+- What did you wonder? _Why weren't the x-values always in order? If the points were on a graph, would they be connected? Can there ever be decimal values for x and y? What would these tables look like on a graph?_
 
 
