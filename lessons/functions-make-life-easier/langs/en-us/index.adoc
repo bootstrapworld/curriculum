@@ -32,11 +32,6 @@
 
 @material-links
 
-| Preparation
-|
-@preparation
-
-
 | Key Points for the Facilitator
 |
 * This lesson represents a _big_ shift in thinking.  After some practice, students will not be limited to pre-existing functions!
@@ -55,16 +50,11 @@ In this lesson, students will build their flexibiltiy of thinking by engaging wi
 
 === Launch
 
-Students should have their workbook, pencil, and be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-on their computer.
+This is a fun lesson to make silly! Dramatically confess to your students, "I LOVE green triangles!" Challenge them to use the Definitions Area to code as many unique, solid, green triangles as they can in 2 minutes.
 
 @centered-image{images/ILoveGreenTriangles.jpg, I Love Green Triangles, 400, align="center"}
 
 @centered-image{images/GreenTriangle.jpg, I Love Green Triangles, 400, align="center"}
-
-This is a fun lesson to make silly! Dramatically confess to your students, "I LOVE green triangles!" Challenge them to use the Definitions Area to code as many unique, solid, green triangles as they can in 2 minutes.
 
 Walk around the room and give positive feedback on the green triangles. When the time is up, ask for some examples of green triangles that they wrote and copy them to the board.
 
@@ -88,7 +78,8 @@ _The function name `triangle`, "solid", "green"._
 - *What changed?*
 _The size of the `triangle`, or the Number input._
 
-- *How many of you typed out the code from scratch each time? How many triangles were you able to code in a minute?*
+- *How many of you typed out the code from scratch each time?*
+- *How many triangles were you able to code in a minute?*
 _Write this down so that you can compare to it later!!!_
 
 - *Did you know that there is a keyboard shortcut for making the previous line of code reappear in the interactions area?*
@@ -100,16 +91,12 @@ _Write this down so that you can compare to it later!!!_
 [.lesson-instruction]
 --
 @ifpathway{algebra, ok}{
-
 Our programming language allows us to define *values*. This lets us create "shortcuts" to reuse the same code over and over.
 
 For example:
-@show{(code '(define PRIZE-STAR (star 65 "solid" "pink")))}
+@show{(code '(define PRIZE-STAR (star 65 "solid" "pink")))} allows us to make the same solid, pink star anywhere we want, just by writing `PRIZE-STAR` - without having to write all of the code again and again.
 
-This code will let us write `PRIZE-STAR` wherever we want that same solid, pink star - without having write all the code again and again.
-
-*But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*
-}
+*But to make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.*}
 
 Suppose we want to define a shortcut @vocab{function} called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 What will _@show{(code '(gt 5))}_ produce?
@@ -165,7 +152,7 @@ Just as we were able to give our volunteer instructions that let them take in `g
 == Identifying and Describing the Pattern @duration{flexible}
 
 === Overview
-Students will see look for what's changing in the examples, label it with a variable and use that information to write a function definition. Students will also think about how the Domain of `gt` differs from the Domain of `triangle`. By the end of the lesson they will have defined other functions and matched function definitions to example blocks.
+Students will look for what's changing in the examples, label it with a variable and use that information to write a function definition. Students will also think about how the Domain of `gt` differs from the Domain of `triangle`. By the end of the lesson they will have defined functions of their own design.
 
 === Launch
 
@@ -193,7 +180,9 @@ Let's take a look at some examples for `gt`.
 [.lesson-instruction]
 - What's Changing? _The size. Everything else is the same in every single example!_ *Highlight or circle the numbers in the gt column and in the triangle column to help students see that they're the only thing changing!*
 - We can define our function by replacing the numbers that change with a variable that describes them. In this case, `size` would be a logical variable.
-*Draw arrows to the two highlighted columns and label them with th word size.*
+- *Draw arrows to the two highlighted columns and label them with the word size.*
+
+If we keep everything that stayed the same and replace the numbers that changed with `size`, it looks like this:
 
 @center{@show{(code '(gt size))} --> @show{(code '(triangle size "solid" "green"))}}
 
@@ -216,7 +205,7 @@ Have students open the @starter-file{gt} and click run.
 - What did you get back? _a little green triangle!_
 - Take one minute and see how many different green triangles you can make using the `gt` function.
 - How many were you able to make?
-- How did making green triangles with `gt` compare to making them with our previous strategy?
+- How did making green triangles with `gt` compare to making them with your previous strategy?
 
 === Investigate
 
@@ -226,7 +215,7 @@ We've successfully defined a function to satisfy my love of green triangles, but
 
 What if we wanted to define a function `rs` to make solid red squares of whatever size we give them?
 
-Have students turn to @printable-exercise{rs.adoc}.
+Have students complete @printable-exercise{rs.adoc}, add their new function definitions to their @starter-file{gt} and test them out, before moving on to @printable-exercise{define-your-own.adoc}.
 --
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
