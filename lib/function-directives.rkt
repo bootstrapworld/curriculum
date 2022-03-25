@@ -1003,7 +1003,7 @@
 
 (define (write-formula-expression transformer-name domain-list range purpose body)
   (string-append
-    (write-title "Formula Expression")
+    (write-title "Formula (Contract, Purpose Statement, and Expression)")
     "[.recipe.recipe_contract]\n"
     (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
     "->"
