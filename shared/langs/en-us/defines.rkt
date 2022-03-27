@@ -62,6 +62,7 @@
       workbook-link
       " and something to write with\n"
       "* Computer for each student (or pair), with access to the internet\n"
+      "* If using the Language Table visual, view the link:javascript:showLangTable()[current state of the language] at this point in the pathway"
       ) o))
 
 (define (print-course-logo course make-image o)
