@@ -1528,12 +1528,6 @@
                                                 (map string-trim (cdr args)) ",")]
                                    )
                               (display (make-link adocf rest-args #:include? #t) o))]
-                           [(string=? directive "lang-prereq")
-                            (unless *lesson-plan*
-                              (error 'ERROR
-                                     "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
-                                     *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-lang-prereq.asc[]\n\n" *containing-directory*)]
                            [(string=? directive "add-to-lang")
                             ; (printf "doing add-to-lang\n")
                             (unless *lesson-plan*
