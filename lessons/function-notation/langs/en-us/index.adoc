@@ -1,4 +1,4 @@
-= Function Notation - Math
+= Function Notation
 
 @description{Students learn to read function notation.}
 
@@ -16,7 +16,7 @@
 
 | Student-Facing Lesson Goals
 |
-* I can find the value of an expression such as f(3), given a table, graph or equation describing f(x).
+* I can find the value of an expression such as f(3), given a table, graph or equation defining f(x).
 
 | Materials
 |[.materials-links]
@@ -35,18 +35,20 @@
 
 |===
 
-== Function Notation
+== Function Notation - Substitution @duration{15 minutes}
 
 === Overview
 
 Students connect their understanding of image functions to function notation in math.
 
 === Launch
-We've seen how functions like `gt` replace a variable in the function expression with the given value to produce an image.
+
+[.lesson-instruction]
+We've seen how we can produce images using functions like `gt` by substituting specific inputs for the variables in the definition.
 
 @show{(code '(define (gt size)(triangle size "solid" "green")))}
 
-[cols="2,3,1"]
+[cols="2,3,1", options="header"]
 |===
 | Function Expression 				| What it Produces 											| Final Product
 | @show{(code '(gt 10))} 		| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
@@ -56,11 +58,14 @@ We've seen how functions like `gt` replace a variable in the function expression
 | @show{(code '(gt 50))} 		| @show{(code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png, green triangle 50}
 |===
 
-Function Notation in math works the same way. We replace the variable with the given value and then compute the value of the expression.
+@vspace{1ex}
+
+[.lesson-instruction]
+In math class, we often use Function Notation to describe `Number` &rarr; `Number` functions.  We can compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition, just as we did with `gt`.
 
 @show{(code '(define (f x)(+ x 8)))}
 
-[cols="2,3,1"]
+[cols="2,3,1", options="header"]
 |===
 | Function Expression 		| What it Produces 				| Final Product
 | @math{f(10)} 				| @show{(code '(+ 10 8))} 		| 18
@@ -72,7 +77,7 @@ Function Notation in math works the same way. We replace the variable with the g
 
 === Investigate
 
-Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc}.
+Have students turn to @printable-exercise{pages/match-examples-definitions-math.adoc} and @printable-exercise{pages/function-notation-substitution.adoc}.
 
 [.lesson-instruction]
 - Start by looking at each table and highlighting what is changing from the first row to the following rows.
@@ -80,25 +85,82 @@ Have students turn to @printable-exercise{pages/match-examples-definitions-math.
 
 You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
 
+=== Synthesize
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
+[.lesson-instruction]
+--
+What question could we ask that would return the same result as the expression @math{f(3)}?
 
-|@span{.title}{Connecting to Best Practices}
-Writing examples and identifying the variables lays the groundwork for writing the function, which is especially important as the functions get more complex.  Don't skip this step!
-|===
-
-== Using Function Notation to Describe Values
+** _What is the value of @math{x + 8} when @math{x} is 3?_
+--
+== Function Notation - Graphs @duration{15 minutes}
 
 === Overview
 
+Students will learn to use Function Notation to describe specific values displayed in Graphs.
+
 === Launch
 
+[.lesson-instruction]
+--
+If @math{f(x) = x - 5} what is the value of @math{f(7)}?
+
+** _@math{2}. Because if we substitute 7 for x we get @math{7 - 5 = 2}_
+
+Let's take a look at the graph of @math{f(x) = x - 5}...
+--
+
+@centered-image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
+
+[.lesson-instruction]
+* How could we have determined that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?
+** _We could have looked for a point whose x-coordinate was 2 and found the point (7, 2), the y-value is 2, which tells us that the output of the function when x is 7 is 2._
+* From looking at the graph, what is the value of @math{f(3)}?
+** _-2_
+* What other values on this graph could we describe using function notation?
+** _answers will vary... for example, @math{f(0) = -5} ...or... @math{f(0.5) = -4.5}_
 
 === Investigate
 
-Have students complete @printable-exercise{function-notation-graphs.adoc} and @printable-exercise{function-notation-tables.adoc}
+Have students complete @printable-exercise{function-notation-graphs.adoc}
+
+=== Synthesize
+[.lesson-instruction]
+* Can you think of any values that it would be difficult to determine from one of these graphs?
+** _It would be hard to be precise for many of the points on the graphs that curve. For example, @math{f(4)} on the second graph would have to be a decimal value and it's hard to know exactly what the decimal should be..._
+
+== Function Notation - Tables @duration{15 minutes}
+
+=== Overview
+
+Students will learn to use Function Notation to describe specific values displayed in Tables.
+
+=== Launch
+
+[.lesson-instruction]
+* Now let's take a look at a table of values that satisfy the function @math{f(x) = x - 5} and think about how could we have determined the value of @math{f(7)} from looking at the table.
+** _We would just look for 7 in the x-column and see that the value beside it is 2._
+* Looking at the table, what is the value of @math{f(-10)}?
+
+@vspace{1ex}
+
+[.sideways-pyret-table]
+|===
+| x | -10 | -5  | 5 | 7 | 13
+| y | -15 | -10 | 0 | 2 | 8
+|===
+
+=== Investigate
+
+Have students complete @printable-exercise{function-notation-tables.adoc}
 
 === Synthesize
 
+[.lesson-instruction]
+* What did you Notice?
+* What did you Wonder?
+* A few of the tables did not represent functions. Which ones?
+** _the last one in the top row, the last one in the middle row and the 3rd one in the bottom row._
+* How did the fact that those tables weren't functions impact our ability to describe a value using function notation?
+** _When x appeared more than once in the table and was associated with different outputs, it wasn't clear what number the expression should evaluate to._
 
