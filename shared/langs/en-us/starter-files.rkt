@@ -15,7 +15,7 @@
    )
   ("gt" "gt Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
+   ("wescheme" "https://www.wescheme.org/view?publicId=KCEKxaxJ4l")
    )
   ("bc" "bc Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1Smei9pZ0b-y2yCzfyweBKQZAUixkim6b&v=1904b2c")
