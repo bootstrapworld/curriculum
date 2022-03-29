@@ -10,7 +10,7 @@
     ("zample-lesson" "SJ.1")
 ; core
 
-    ("computing-needs-fall-voices" 
+    ("computing-needs-all-voices" 
         "SJ.1"
         "SJ.2"
         "SJ.4"

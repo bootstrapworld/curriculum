@@ -39,7 +39,7 @@
     )
 
   ("animals" "Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1pc0CiS0YsL_62yLARUAYNkGBIZvhm2gi")
+   ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("custom-animals" "Custom Animals Starter File"

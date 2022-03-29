@@ -650,17 +650,18 @@
                  [f.html (path-replace-extension f ".html")]
                  [f.pdf (path-replace-extension f ".pdf")])
              (cond [(or (file-exists? f.html) (file-exists? f.adoc))
-                    ;(printf "I\n")
+                    ; (printf "I\n")
                     (set! f f.html)
                     (set! existent-file? #t)
                     (when (and existent-file? (equal? link-type "printable-exercise")
+                               (not lesson-dir)
                                (not (member snippet *workbook-pages*)))
                       (set! non-workbook-page? #t)
                       (set! existent-file? #f))
                     (set! g-in-pages (path-replace-extension g-in-pages ".html"))
                     (set! g (path-replace-extension g ".html"))]
                    [(file-exists? f.pdf)
-                    ;(printf "II\n")
+                    ; (printf "II\n")
                     (set! f f.pdf)
                     (set! existent-file? #t)
                     (set! g-in-pages (path-replace-extension g-in-pages ".pdf"))
@@ -669,7 +670,7 @@
            (when (file-exists? f)
              (set! existent-file? #t))]
           [else (set! f.src (path-replace-extension f ".adoc"))])
-    ; (printf "f'= ~s\n" f)
+    ; (printf "f'= ~s exf= ~s\n" f existent-file?)
     (unless existent-file?
       (set! error-cascade? #t)
       (check-link f)
@@ -1528,12 +1529,6 @@
                                                 (map string-trim (cdr args)) ",")]
                                    )
                               (display (make-link adocf rest-args #:include? #t) o))]
-                           [(string=? directive "lang-prereq")
-                            (unless *lesson-plan*
-                              (error 'ERROR
-                                     "WARNING: @lang-prereq (~a, ~a) valid only in lesson plan"
-                                     *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-lang-prereq.asc[]\n\n" *containing-directory*)]
                            [(string=? directive "add-to-lang")
                             ; (printf "doing add-to-lang\n")
                             (unless *lesson-plan*

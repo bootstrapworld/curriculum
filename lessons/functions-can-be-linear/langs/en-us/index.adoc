@@ -38,6 +38,9 @@
 
 @material-links
 
+| Preparation
+| @preparation
+
 | Key Points for the Facilitator
 |
 
@@ -45,7 +48,6 @@
 * Linear functions can be represented as straight lines on a graph or sequences that change at a constant rate in a table.
 * Stress that Graphs, Definitions, and Tables are all __different ways of viewing the same function__. The misconception to fight against is the idea that @math{f(x) = 3x + 2} is somehow the "real" function, with the graph being "the thing the function draws."
 
-@lang-prereq
 
 |===
 
@@ -295,7 +297,7 @@ Students refine their understanding of linearity, identifying properties like @v
 === Launch
 
 [.lesson-point]
-All linear relationships are defined by slope and y-intercept
+All linear relationships are defined by slope and y-intercept.
 
 Every linear relationship has two properties:
 
@@ -435,14 +437,18 @@ Students explore function definitions as a way of expressing linear relationship
 === Launch
 Writing out an entire table or graph - even if it's just two rows or two points! - can be time-consuming. It also forces other people to compute the slope and y-intercept by hand!
 
-Fortunately, a *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center! Let's see a function definition, written both as regular function notation and as Pyret code. NOTE: the slope and y-intercept can be written in any order!
+Fortunately, a *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center! The slope-intercept form of the line includes the slope as the coefficient of x and the y-intercept as the number being added (or subtracted).  You will often see the slope-intercept form desribed as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.
+
+While it is common to write the x-term first and the y-intercept second, they can be written in any order!
+
+Let's take a look at how function definitions writting using function notation compare to Pyret code.
 
 [cols="^1,^1",options="header"]
 |===
 
-| Function Notation 		| Pyret Code
-|@math{f(x) = 6x - 10} 		| `fun f(x): (6 * x) - 10 end`
-|@math{f(x) = -10 + 6x} 	| `fun f(x): -10 + (6 * x) end`
+| Function Notation 		  | Pyret Code
+|@math{f(x) = 6x - 10} 		| @show{(code '(fun f(x): (6 * x) - 10 end))}
+|@math{f(x) = -10 + 6x} 	| @show{(code '(fun f(x): -10 + (6 * x) end))}
 |===
 
 As with tables and graphs, a function definition can reveal whether or not it is linear.
@@ -454,8 +460,8 @@ If the line is perfectly horizontal, the @vocab{slope} will be zero, making the 
 [cols="^1,^1",options="header"]
 |===
 
-| "Visible" Slope	 		| "Invisible" Slope
-|@math{f(x) = 0x + 22}		| @math{f(x) = 22}
+| "Visible" Slope	 		       | "Invisible" Slope
+|@math{f(x) = 0x + 22}		   | @math{f(x) = 22}
 |===
 
 If the line crosses the y-axis at zero, the y-intercept will be @math{0}. This can make that term "invisible"! In the example below, a linear function with a y-intercept of zero is shown with and without this term:
