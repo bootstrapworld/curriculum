@@ -35,44 +35,46 @@
 
 |===
 
-== Function Notation - Substitution @duration{15 minutes}
+== Function Notation (Definitions) @duration{15 minutes}
 
 === Overview
 
-Students connect their understanding of image functions to function notation in math.
+Students connect their understanding of functions definitions in Pyret to function definitions in math.
 
 === Launch
 
-[.lesson-instruction]
-We've seen how we can produce images using functions like `gt` by substituting specific inputs for the variables in the definition.
+We've seen how functions like `gt` can be defined, and then @vocab{applied} to a number to create a green triangle. And once `gt` is defined, we can use it with many different numbers to create many different triangles - all without having to write out `"solid"`, `"green"`, etc.
+
+But how does this function _work?_
+
+When we apply a function to the inputs it needs, we *substitute* those inputs for the variables in the definition.
 
 @show{(code '(define (gt size)(triangle size "solid" "green")))}
 
-[cols="2,3,1", options="header"]
+[cols="^.^2,^.^3,^.^1", options="header"]
 |===
-| Function Expression 				| What it Produces 											| Final Product
-| @show{(code '(gt 10))} 		| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
-| @show{(code '(gt 20))} 		| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
-| @show{(code '(gt 30))} 		| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
-| @show{(code '(gt 40))} 		| @show{(code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png, green triangle 40}
-| @show{(code '(gt 50))} 		| @show{(code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png, green triangle 50}
+| Function Application 		| Substituted Input				| Final Product
+| @show{(code '(gt 10))}	| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
+| @show{(code '(gt 20))}	| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
+| @show{(code '(gt 30))}	| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
+| @show{(code '(gt 40))}	| @show{(code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png, green triangle 40}
+| @show{(code '(gt 50))}	| @show{(code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png, green triangle 50}
 |===
 
 @vspace{1ex}
 
-[.lesson-instruction]
-In math class, we often use Function Notation to describe `Number` &rarr; `Number` functions.  We can compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition, just as we did with `gt`.
+Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! Just as in programming, *we compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition*, just as we did with `gt`.
 
-@show{(code '(define (f x)(+ x 8)))}
+@show{(code '(define (f x) (+ x 8)))}
 
-[cols="2,3,1", options="header"]
+[cols="^.^2,^.^3,^.^1", options="header"]
 |===
-| Function Expression 		| What it Produces 				| Final Product
-| @math{f(10)} 				| @show{(code '(+ 10 8))} 		| 18
-| @math{f(20)} 				| @show{(code '(+ 20 8))} 		| 28
-| @math{f(30)} 				| @show{(code '(+ 30 8))} 		| 38
-| @math{f(40)} 				| @show{(code '(+ 40 8))} 		| 48
-| @math{f(50)} 				| @show{(code '(+ 50 8))} 		| 58
+| Function Application 	| Substituted Input 		| Final Product
+| @math{f(10)} 			| @show{(code '(+ 10 8))} 	| 18
+| @math{f(20)} 			| @show{(code '(+ 20 8))} 	| 28
+| @math{f(30)} 			| @show{(code '(+ 30 8))} 	| 38
+| @math{f(40)} 			| @show{(code '(+ 40 8))} 	| 48
+| @math{f(50)} 			| @show{(code '(+ 50 8))} 	| 58
 |===
 
 === Investigate
@@ -89,21 +91,21 @@ You may also want to have students complete @opt-online-exercise{https://teacher
 
 [.lesson-instruction]
 --
-What question could we ask that would return the same result as the expression @math{f(3)}?
+Given the function @math{f(x) = x + 8}, what question could we ask that would return the same result as the expression @math{f(3)}?
 
 ** _What is the value of @math{x + 8} when @math{x} is 3?_
 --
-== Function Notation - Graphs @duration{15 minutes}
+== Function Notation (Graphs) @duration{15 minutes}
 
 === Overview
 
-Students will learn to use Function Notation to describe specific values displayed in Graphs.
+Students will learn to connect function definitions to Graphs.
 
 === Launch
 
 [.lesson-instruction]
 --
-If @math{f(x) = x - 5} what is the value of @math{f(7)}?
+If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
 
 ** _@math{2}. Because if we substitute 7 for x we get @math{7 - 5 = 2}_
 
@@ -118,7 +120,7 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 * From looking at the graph, what is the value of @math{f(3)}?
 ** _-2_
 * What other values on this graph could we describe using function notation?
-** _answers will vary... for example, @math{f(0) = -5} ...or... @math{f(0.5) = -4.5}_
+** _Answers will vary... for example, @math{f(0) = -5} ...or... @math{f(0.5) = -4.5}_
 
 === Investigate
 
@@ -129,16 +131,16 @@ Have students complete @printable-exercise{function-notation-graphs.adoc}
 * Can you think of any values that it would be difficult to determine from one of these graphs?
 ** _It would be hard to be precise for many of the points on the graphs that curve. For example, @math{f(4)} on the second graph would have to be a decimal value and it's hard to know exactly what the decimal should be..._
 
-== Function Notation - Tables @duration{15 minutes}
+== Function Notation (Tables) @duration{15 minutes}
 
 === Overview
 
-Students will learn to use Function Notation to describe specific values displayed in Tables.
+Students will learn to connect function definitions to input-output Tables.
 
 === Launch
 
 [.lesson-instruction]
-* Now let's take a look at a table of values that satisfy the function @math{f(x) = x - 5} and think about how could we have determined the value of @math{f(7)} from looking at the table.
+* Let's take a look at a table of input-output pairs that satisfy the function @math{f(x) = x - 5}, and think about how could we have determined the value of @math{f(7)} from looking at the table.
 ** _We would just look for 7 in the x-column and see that the value beside it is 2._
 * Looking at the table, what is the value of @math{f(-10)}?
 
