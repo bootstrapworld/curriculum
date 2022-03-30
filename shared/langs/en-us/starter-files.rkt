@@ -114,10 +114,10 @@
    ("pyret" "https://code.pyret.org/editor#share=1HqgHT0HYeAIViIZ37YC9MFlj2euoOwYb")
    )
   ("exploring-linearity-in-graphs"  "Exploring Linearity in Graphs Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1e_B5iwBeA58yGQ2FyfG_jNf05MuryFYS")
+   ("pyret" "https://code.pyret.org/editor#share=1fMvN_n9vEUfjy_a0vaIN3LOWkS1SFhu_&v=1904b2c")
    )
   ("exploring-linearity-in-tables"  "Exploring Linearity in Tables Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1eelb-3bcUy6loIJ0oHAk9NJjKgtiRVmn")
+   ("pyret" "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP&v=1904b2c")
    )
   ("flags-mx" "Flag of Mexico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6")
