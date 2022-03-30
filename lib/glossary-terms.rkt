@@ -16,8 +16,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("accessor functions") "functions to extract values from a data structure")
      (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
 
-    ((en-us ("apply") "use a given function on some inputs")
-     (es-mx ("aplicar") "dar argumentos a una función"))
+    ((en-us ("apply" "applying" "applied") "use a given function on some inputs")
+     (es-mx ("aplicar" "applicado" "applicada") "dar argumentos a una función"))
 
     ((en-us ("argument" "arguments") "the inputs to a function; the expressions for each argument follow the function name")
      (es-mx ("argumento" "argumentos") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
