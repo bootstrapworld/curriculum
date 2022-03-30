@@ -14,11 +14,12 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
    )
   ("gt" "gt Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
+   ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY&v=1904b2c")
+   
    )
   ("bc" "bc Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1Smei9pZ0b-y2yCzfyweBKQZAUixkim6b&v=1904b2c")
+    ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0&v=1904b2c")
+    ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
     )
   ("mood-generator" "Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
