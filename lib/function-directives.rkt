@@ -44,6 +44,8 @@
 ;(define *max-wescheme-example-side-length* 30)
 ;(define *max-pyret-example-side-length* 30)
 
+(define *max-pyret-example-clause-length* 60)
+
 (define *funname* #f)
 
 (define (get-function-name) *funname*)
@@ -187,13 +189,13 @@
                                                          [rhs-s (wescheme->pyret rhs)]
                                                          [tot-len (+ (string-length (format "~s" lhs))
                                                                      (string-length (format "~s" rhs)))])
-                                      ;(printf "*** lhs-s = ~s; rhs-s = ~s\n" lhs-s rhs-s)
-                                      ;(printf "*** tot-len = ~s\n" tot-len)
+                                      ; (printf "*** lhs-s = ~s; rhs-s = ~s\n" lhs-s rhs-s)
+                                      ; (printf "*** tot-len = ~s\n" tot-len)
                                       (loop (- n 1) (cddr e)
                                             (string-append r "\n"
                                               (if indent (make-string (+ indent 2) #\space) "")
                                               lhs-s " is "
-                                              (if (< tot-len 35) ""
+                                              (if (< tot-len *max-pyret-example-clause-length*) ""
                                                   (string-append
                                                     "\n"
                                                     (if indent (make-string (+ indent 4) #\space) "")))
