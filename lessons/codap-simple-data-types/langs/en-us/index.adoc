@@ -22,7 +22,7 @@
 |
 
 * I can tell if a value is a Number, String or a Boolean
-* I can explain the different between those types
+* I can explain the difference between those types
 
 | Materials
 |[.materials-links]
@@ -49,7 +49,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Numbers & Strings @duration{20 minutes}
 
 === Overview
-Working together using a Driver/Navigator group setup, students experiment with the Editor. They explore Number and String data types, and how they behave in this programming language.
+Students experiment with CODAP. They explore Number and String data types, and how they behave in CODAP.
 
 === Launch
 
@@ -67,33 +67,24 @@ This model of pair programming is extremely useful for teasing apart the "thinki
 @link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
 |===
 
-@ifproglang{wescheme}{
-Students should open @link{https://www.wescheme.org, WeScheme} in their browser, and click "Log In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "My Programs" page. This page is empty - they don't have any programs yet! Have them click "Start a New Program".
-}
+Open the @starter-file{animals} in CODAP.
 
-@ifproglang{pyret}{
-Students should open @link{https://code.Pyret.org, code.pyret.org (CPO) } in their browser, and click "Sign In". This will ask them to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show them the "Programs" page. This page is empty - they don't have any programs yet! Have them click "Open Editor".
-}
+Invite students to play in CODAP! Challenge them to do the following:
 
-@right{@image{images/editor.png, "Our Editing Environment", 300, ""}}
-This screen is called the @vocab{Editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+[.lesson-instruction]
+--
+- Make a graph
+- Move a table or graph
+- Drag an attribute (like weight, name, or sex) to a graph's axis.
+- Drag a 2nd attribute to a graph's axis.
+- Add an attribute to the table called `test`
+--
 
-The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. This is like writing function definitions on a blackboard, and having students use those functions to compute answers on scrap paper.
-
-[.lesson-point]
-For now, we will only be writing programs in the *Interactions Area* on the right.
-
-@clear
+Ensure that all students have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table.
 
 === Investigate
 
-Math is a language, just like English, Spanish, or any other language. Languages have *nouns* (e.g. “ball”, “tomato”, etc.) and *verbs*, which are actions we can perform on these nouns (e.g. - I can “throw a ball”). Math and programming also have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).
-
-Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.
-
-Languages also have rules for *grammar*. _The cat sat._ is a sentence, whereas _The sat cat._ is nonsense, even though all the words are valid syntax. The order of the words matters!
-
-Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.
+In their `test` column, students will experiment with _numbers_ and _strings_. In order to complete the worksheet below, students must first select `test` on their Table and then choose `Edit formula` from the drop-down menu that appears. For each direction on the worksheet below, students must re-open the `Edit Formula` box.
 
 [.lesson-instruction]
 --
@@ -103,37 +94,27 @@ Have students complete @printable-exercise{numbers-n-strings.adoc}. Ask them to 
 - Did you get any error messages? What did you learn from them? _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc._
 --
 
-@ifproglang{pyret}{
-=== Common Misconceptions
-
-In Pyret, writing decimals as `.5` (without the leading zero) results in a @vocab{syntax error}. Make sure students understand that Pyret needs decimals to start with a zero!
-}
-
 === Synthesize
-Our programming language knows about many types of numbers, and they behave pretty much the way they do in math.
-Discuss what students have learned:
+CODAP knows about many types of numbers, and they behave pretty much the way they do in math. Discuss what students have learned:
 
 - Numbers and Strings evaluate to themselves.
-- Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
+- CODAP converts fractions into decimals automatically.
 - Anything in quotes is a String, even something like `"42"`.
 - Strings _must_ have quotation marks on both sides.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together (or _concatenate_) two strings, or a number and a string.
+- CODAP knows the order of operations.
+- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
 
-@ifproglang{pyret}{
-- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.
-- In pyret, the @vocab{operators} work just like they do in math.
-- Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.
-- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
+Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
 
-Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
-
-- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
+- `6 / 0`. In this case, CODAP obeys the same rules as humans, and gives an error.
 - `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
 }
 
 == Booleans @duration{20 minutes}
 
 === Overview
-This lesson introduces students to @vocab{Booleans}, a unique data type with only two values: "true" and "false", and why they are useful in both the real world and the programming environment.
+This lesson introduces students to Booleans, a unique data type with only two values: "true" and "false", and why they are useful in both the real world and the programming environment.
 
 === Launch
 
