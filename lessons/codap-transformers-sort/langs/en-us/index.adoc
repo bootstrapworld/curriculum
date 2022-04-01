@@ -58,53 +58,100 @@ Student work in groups or pairs. They will sort various columns on the table by 
 Using the `Sort` Transformer, students sort rows of a table in ascending or descending order, according to one column.
 
 === Launch
-@right{@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers can be found", 300}
+The Transformers plugin allows students to build and modify a _copy_ of the original table - enabling easy low-stakes "what if?" exploration.
+@center{@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers can be found", 350}
 
-The Transformers plugin allows students to transform datasets to produce new, distinct datasets rather than modifying the original dataset itself. When they use transformers, students are building and modifying a _copy_ of the original table - enabling easy low-stakes "what if?" exploration.
 
-First, show students how they can access the Transformers plugin (see screenshot on right). Invite students to explore the different Transformers available.
+[.lesson-instruction]
+--
+- Login to the Animal Starters File in CODAP.
+- Access the Transformers plugin (see image above).
+- Explore the different Transformers available, especially those categorized under “Construction.”
+- What do you notice? What do you wonder?
+--
 
-Explain to students that, for the `Sort` Transformer to do its job, we must provide it with _four_ different pieces of information. More specifically, `Sort` requires:
-- a dataset
-- the _type_ that the formula evaluates to
-- a formula
-- a sort direction (ascending or descending).
+Tell students that we are going to create a copy of the Animals dataset in which the animals are organized alphabetically by name. To do this, we will use the `Sort` Transformer. Once students have opened the `Sort` Transformer, invite them to play with it and make guesses about its components. *NEED IMAGE OF FINALIZED TRANSFORMER UI HERE*
 
-But what does it produce?
-
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-a|
-@span{.title}{What's a Contract?!}
-Contracts help us keep track of the different Transformers we'll be using, and how they operate on each Row of a table. Every contract has three imporant parts:
-
-- The Transformer’s _Name_
-- The _Domain_ of the Transformer Expression - The type(s) of data we give it. For our purposes, this will always be a single `Row` of the table.
-- The _Range_ of the Transformer Expression - The type of data the transformer produces from that Row
-
-Check out the screenshot of the Transformers plugin below. What are the domain and range for `Filter`?
-
-@centered-image{images/transformer-contract-example.png, transformer contract example,300}
-
-The Transformer `mean` doesn't display a contract. What type of data do you think `mean` must consume? Why?
-
-|===
+[.lesson-instruction]
+--
+- What do you notice? What do you wonder?
+- Why might it be useful to name the Transformer?
+- What do you think a _purpose statement_ is?
+--
 
 === Investigate
+
+In order to apply this Transformer, we’ll need to provide it with several important pieces of information:
+
+@n *Transformer name*. Describe to students that we want to give each Transformer a useful name, one which clearly conveys precisely what that Transformer does. Generally, a brief hyphenated description works - for instance: `order-by-weight`.
+
 [.lesson-instruction]
-* Open the `Transformer` plugin, and choose the transformer `Sort`. Select `animals-dataset`. In the formula expression box, type `Name`. Select `ascending` as the direction and `Apply Tranformer`. What happens?
-* Next, see what happens when you select `descending`.
-* Sort the animals table from heaviest to lightest.
-* Sort the animals table alphabetically by species.
-* Sort the animals table by how long it took for each animal to be adopted, in ascending order.
+--
+- What would be a good name for a Transformer that organizes the table alphabetically by animals’ names?
+- Type that name in the box. (A good option is `order-by-name`.)
+--
+
+@n *Dataset*. CODAP needs to know _which_ dataset to apply the Transformer to. Note: Transformers create a copy of the original dataset. After applying this Transformer, students will see _two_ datasets in the drop-down menu.
+
+[.lesson-instruction]
+--
+- Click “Select a Dataset.”
+- How many datasets appear on the drop-down menu?
+- How many datasets do you think will appear in this drop-down menu after we apply order-by-name?
+--
+
+@n *Contract*. Contracts help us keep track of the different Transformers we’ll be using, and how they operate on each Row of a table.
+
+Every contract has a _domain_ and a _range_.  The Domain of the Transformer Expression is the type(s) of data we give it. For our purposes, this will always be a single Row of the table. The Range of the Transformer Expression is the type of data the transformer produces from that Row.
+
+[.lesson-instruction]
+--
+- Select the drop-down menu that appears at the end of the contract, representing the Range.
+- What different data types are listed here?
+- What data type do you think is the output for this Transformer?
+--
+
+For now, it is important to understand that contracts are a simple notation (domain → range) for keeping track of the set of all possible inputs and outputs for a Transformer. Students will get lots of practice with contracts as they work with Transformers in this lesson and others.
+
+@n  *Purpose Statement*. The Purpose Statement is  a concise, detailed description of what a Transformer does with its inputs. The purpose statement is a comment in the code - something the computer doesn’t actually read. It is a note that students write for their future selves.
+
+[.lesson-instruction]
+--
+- What would be an appropriate purpose statement for order-by-name?
+- Type in your purpose statement.
+--
+
+@n *The Expression.* For sort, the expression is simply the column that we want to sort.
+
+[.lesson-instrcution]
+--
+- Notice that as you begin to type, CODAP offers suggestions that you can select.
+- It is absolutely essential that capitalization and spelling match the capitalization and spelling on the data table.
+- When entering a string, remember the quotation marks!
+--
+
+@n *The Direction*
+
+[.lesson-instruction]
+--
+- Choose ascending to sort from A to Z.
+- Choose descending to sort from Z to A.
+--
+
+Now that students have investigated the Transformer user interface for `sort`, they are ready to independently apply their knowledge.
+
+[.lesson-instruction]
+--
+- Complete XXX worksheet for additional practice.
+--
 
 === Common Misconceptions
-Students may be more familiar with filters that actually change the table. In CODAP, all transformers produce a _brand new table_. Filtered tables are automatically saved; CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times the transformer has been applied. When students apply a transformer, they have the option of selecting the original table from the dropdown menu, or a new table that they've generated. Students can also rename saved tables, if they’d like.
+Students may be more familiar with a `sort` functionality that actually change the table. CODAP Transformers produce a _brand new table_. These new and modified tables are automatically saved. CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
 
 === Synthesize
-- Does the transformer `Sort` produce a _new_ table, or change the existing one?
+- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
 - You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
-
+- When would it be advantageous to use the `Sort` Transformer? When might it be disadvantageous?
 
 
 == Additional Exercises:
