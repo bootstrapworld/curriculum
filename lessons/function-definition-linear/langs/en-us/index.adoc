@@ -1,0 +1,162 @@
+= Defining Linear Functions
+
+++++
+<style>
+#content .small-table {max-width: 75%}
+#content .graph-table img {width: 33%;}
+</style>
+++++
+
+@description{Students explore the concept of slope and y-intercept in linear relationships, using function definitions as a third representation (alongside tables and graphs).}
+
+@lesson-prereqs{linearity, defining-functions}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* define linear functions using slope and y-intercept
+* match different representations of the same linear relationship
+
+| Student-facing Lesson Goals
+|
+
+* I can define a function to express a linear relationship and identify the slope and y-intercept in a function definition.
+* I can match different representations of the same linear relationship
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1qrJreWyRD_wsEzOaFsuvYgKl8VsvJCZpPcv0TDXOqLw/view, Lesson Slides}
+
+@material-links
+
+| Key Points for the Facilitator
+|
+
+* Lines are made of points (try to avoid refering to "lines" as much as "collections of points")
+* Linear functions can be represented as straight lines on a graph or as sequences that change at a constant rate in a table.
+* Stress that Graphs, Definitions, and Tables are all __different ways of viewing the same function__. The misconception to fight against is the idea that @math{f(x) = 3x + 2} is somehow the "real" function, with the graph being "the thing the function draws."
+
+
+|===
+
+== Defining Linear Functions @duration{40 minutes}
+
+=== Overview
+Students explore function definitions as a way of expressing linear relationships, and construct tables and graphs from those definitions.
+
+=== Launch
+A *function definition* can be used to summarize an entire table or graph by putting the @vocab{slope} and @vocab{y-intercept} front-and-center!
+
+@ifproglang{pyret}{
+Here we see a function definition written using pyret notation and using function notation.
+
+@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}}
+
+The *slope-intercept form of the line* includes the slope as the coefficient of x and the y-intercept as the numerical term.  You will hear people describe this form as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.
+
+
+While it is common to write the x-term first and the y-intercept second, they can be written in any order!
+
+[cols="^1a,^1a",options="header"]
+|===
+
+| Function Notation       | @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} Code
+|@math{f(x) = 6x - 10}    | @show{(code '(define (f x) (- (* 6 x) 10)))}
+|@math{f(x) = -10 + 6x}   | @show{(code '(define (f x) (+ -10 (* 6 x))))}
+|===
+
+Sometimes, when the slope and/or y-interecept equal zero, one of these two terms will not be included in the definition, but both terms are always implied.
+
+When the slope is zero (and the line is horizontal)... we may choose whether or not to write the slope term.
+[cols="^1,^1",options="header"]
+|===
+
+| "Visible" Slope            | "Invisible" Slope
+|@math{f(x) = 0x + 22}       | @math{f(x) = 22}
+|===
+
+When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)... we may choose whether or not to write the slope term.
+
+[cols="^1,^1",options="header"]
+|===
+
+| "Visible" y-intercept   | "Invisible" y-intercept
+|@math{f(x) = 3.2x + 0}   | @math{f(x) = 3.2x}
+|===
+
+To check our work, we can apply the function to the x-value in each Row in the table, it produces the y-value! Instead of writing endless rows repeating the rule or drawing an entire graph, we can just declare the rule itself by defining the function.
+
+As with tables and graphs, a function definition can also reveal whether or not the function is linear. Functions that are not linear will follow other forms, for example they may include exponents or absolute values.
+
+=== Investigate
+
+*Let's start by idenitifying the slope and y-intercept from function definitions.*
+
+- @printable-exercise{slope-and-y-def.adoc}
+
+[.indentedpara]
+--
+_More practice is available through our desmos card sort activities:_
+
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions"}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, "Identifying slope in Tables, Graphs & Definitions of Linear Functions"}
+--
+
+*Let's connect definitions to tables and graphs.*
+
+[.lesson-instruction]
+Writing down the slope and y-intercept beneath each representation will help!
+
+- @printable-exercise{match-definitions-tables.adoc}
+- @printable-exercise{match-definitions-graphs.adoc}
+
+[.indentedpara]
+--
+_More matching practice is available through our desmos card sort activities._
+
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Definitions"}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, "Matching Graphs and Definitions of Linear Functions"}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, "Matching Graphs and Definitions of Linear Functions 2"}
+--
+
+[.lesson-instruction]
+What strategies did you use?
+
+*Let's write our own definitions from tables and graphs!*
+
+- @printable-exercise{definitions-from-tables.adoc}
+- @printable-exercise{definitions-from-graphs.adoc}
+
+[.lesson-instruction]
+What strategies did you use?
+
+
+*Let's connect all three function representations!*
+
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, "Matching Function Definitions, Tables and Graphs"}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, "Matching Function Definitions, Tables and Graphs 2"}
+
+[.lesson-instruction]
+What strategies did you use?
+
+=== Common Misconceptions
+It is common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
+
+=== Synthesize
+Function definitions are a way of talking about relationships between quantities: milk costs $0.59/gallon, a stone falls at @math{9.8m/s^2}, or there are 30 students for every teacher at a school. If we can figure out the relationship between a small sample of data, we can __make predictions__ about what happens next. We can see these relationships as tables, graphs, or symbols in a definition. We can even think about them as a mapping between @vocab{Domain} and @vocab{Range}!
+
+When we talk about functions, it's helpful to be able to switch between representations, and see the connections between them.
+
+
+== Additional Exercises:
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbecf6ee47d820d0a06ef09, "Matching Graphs & Definitions of Functions (not just linear!)"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge)"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Definitions of Linear Functions"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, "Matching Tables, Graphs, and Definitions of Functions (challenge!)"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7ce016ed10402e547aa7, "Matching Tables, Graphs, and Definitions of Functions (challenge!)"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674?collections=5fbe7484d81cab0ca7a8bcfb, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge!)"}
