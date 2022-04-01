@@ -1,0 +1,142 @@
+= Simple Data Types
+
+@description{Students begin to program, explorings how Numbers, Strings, Booleans and operations on those data types work in this programming language.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+@add-to-lang{ -, +, * , / }
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Identify examples of the following data types: Numbers, Strings, and Booleans
+* Write Numbers, Strings, and Booleans in the Interactions Area
+* Write expressions that produce values of those types
+
+| Student-facing Lesson Goals
+|
+
+* I can tell if a value is a Number, String or a Boolean
+* I can explain the difference between those types
+
+| Materials
+|[.materials-links]
+* @ifproglang{wescheme}{@link{https://docs.google.com/presentation/d/17tmGpF9zR5tGa9A8JH-cOYFeE4OpLqpw_8Je-oYSlOw/, Lesson Slides}}
+@ifproglang{pyret}{@link{https://docs.google.com/presentation/d/1zQRB5CC4VtYEcwHN-CjwJx7JWtUkdppMzaNrPZTHgOI/, Lesson Slides}}
+
+@material-links
+
+| Preparation
+|
+* Make sure student computers can access @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org(CPO)}} @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}
+
+| Key Points For The Facilitator
+|
+* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
+@preparation
+
+
+|===
+
+[.old-materials]
+Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit1/index.html, prior unit-based version}.
+
+== Numbers & Strings @duration{20 minutes}
+
+=== Overview
+Students experiment with CODAP. They explore Number and String data types, and how they behave in CODAP.
+
+=== Launch
+
+@right{@image{images/driver-navigator.png, "Driver/Navigator", 150, ""}}
+When programming in this class, you'll be working together using the _Driver/Navigator_ model. Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{The Driver/Navigator Model}
+
+This model of pair programming is extremely useful for teasing apart the "thinking" step from the "typing" one. Students - especially those who are new to text-based programming or typing itself - can struggle to put their thoughts into the programming environment. This model allows them to focus on _communicating their ideas_, but letting the Driver focus on the coding. Likewise, the Driver has a chance to focus on syntax and programming. Finally, the requirement that ideas are translated through another person's hands is an excellent scaffold for getting students talking about their thinking and about code.
+
+@link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
+|===
+
+Open the @starter-file{animals} in CODAP.
+
+Invite students to play in CODAP! Challenge them to do the following:
+
+[.lesson-instruction]
+--
+- Make a graph
+- Move a table or graph
+- Drag an attribute (like weight, name, or sex) to a graph's axis.
+- Drag a 2nd attribute to a graph's axis.
+- Add an attribute to the table called `test`
+--
+
+Ensure that all students have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table.
+
+=== Investigate
+
+In their `test` column, students will experiment with _numbers_ and _strings_. In order to complete the worksheet below, students must first select `test` on their Table and then choose `Edit formula` from the drop-down menu that appears. For each direction on the worksheet below, students must re-open the `Edit Formula` box.
+
+[.lesson-instruction]
+--
+Have students complete @printable-exercise{numbers-n-strings.adoc}. Ask them to pay special attention to the error messages!
+
+- What did you Notice? What do you Wonder?
+- Did you get any error messages? What did you learn from them? _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc._
+--
+
+=== Synthesize
+CODAP knows about many types of numbers, and they behave pretty much the way they do in math. Discuss what students have learned:
+
+- Numbers and Strings evaluate to themselves.
+- CODAP converts fractions into decimals automatically.
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together (or _concatenate_) two strings, or a number and a string.
+- CODAP knows the order of operations.
+- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
+
+Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
+
+- `6 / 0`. In this case, CODAP obeys the same rules as humans, and gives an error.
+- `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
+}
+
+== Booleans @duration{20 minutes}
+
+=== Overview
+This lesson introduces students to Booleans, a unique data type with only two values: "true" and "false", and why they are useful in both the real world and the programming environment.
+
+=== Launch
+
+[.lesson-instruction]
+What's the answer: is 3 greater than 10?
+
+Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
+
+For example, some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.  Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
+
+[.lesson-instruction]
+Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
+
+=== Investigate
+[.lesson-instruction]
+--
+In pairs, students complete @printable-exercise{pages/booleans.adoc}, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
+--
+
+=== Synthesize
+Debrief student answers as a class.
+
+[.lesson-instruction]
+What sets Booleans apart from other data types?
+
