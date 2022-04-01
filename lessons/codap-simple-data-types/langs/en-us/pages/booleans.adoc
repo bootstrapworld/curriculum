@@ -18,24 +18,24 @@
 |								    		| *Prediction:*	| *Computer Returns:*
 |                                			| *Prediction:*	| *Computer Returns:*
 
-|@n @show{(code '(<= 3 4))}   		| @fitb{}{}  | @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string>? "a" "b"))} | @fitb{}{}  | @fitb{}{@ifsoln{_false_}}
+|@n  `3 <= 4`    		| @fitb{}{}  | @fitb{}{@ifsoln{_true_}}
+|@n  `"a" > "b"` 		| @fitb{}{}  | @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(= 3 2))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}
-|@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+|@n  `3 = 2`				| @fitb{}{}	| @fitb{}{@ifsoln{_false_}
+|@n  `"a" < "b"`			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
 
-|@n @show{(code '(< 2 4))}			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+|@n  `2 < 4`				| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+|@n  `"a" = "b"`			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(>= 5 5))}			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string<>? "a" "a"))}| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+|@n  `5 >= 5`			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+|@n  `"a" !> "a"`		| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(>= 4 6))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string>=? "a" "a"))}| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+|@n  `4 >= 6`			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+|@n  `"a" >= "a"`		| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
 
 
-|@n @show{(code '(<> 3 3))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string<>? "a" "b"))}| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+|@n  `3 !> 3`			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+|@n  `"a" !> "b"`		| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
 |===
 
 @vspace{1ex}
@@ -58,12 +58,9 @@
 [cols="5, .>2, .>2", frame="none", grid="none", stripes="none"]
 |===
 |															 | *Prediction:*	| *Computer Returns:*
-@ifproglang{wescheme}{
-|@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string=? "tree"   "tree"))}		 	 | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-}
-|@n @show{(code '(string-contains?  "catnap" "cat"))}  | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string-contains?  "cat" "catnap"))}	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+
+|@n `includes("cat", "catnap")`  | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+|@n `includes("catnap" "cat")`	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 |===
 
 @vspace{1ex}
