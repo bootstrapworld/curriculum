@@ -26,19 +26,18 @@
 
 | Materials
 |[.materials-links]
-* @ifproglang{wescheme}{@link{https://docs.google.com/presentation/d/17tmGpF9zR5tGa9A8JH-cOYFeE4OpLqpw_8Je-oYSlOw/, Lesson Slides}}
-@ifproglang{pyret}{@link{https://docs.google.com/presentation/d/1zQRB5CC4VtYEcwHN-CjwJx7JWtUkdppMzaNrPZTHgOI/, Lesson Slides}}
+* @link{https://docs.google.com/presentation/d/17tmGpF9zR5tGa9A8JH-cOYFeE4OpLqpw_8Je-oYSlOw/, Lesson Slides}
 
 @material-links
 
 | Preparation
 |
-* Make sure student computers can access @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org(CPO)}} @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}
+@preparation
+
 
 | Key Points For The Facilitator
 |
 * Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
-@preparation
 
 
 |===
@@ -49,7 +48,7 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 == Numbers & Strings @duration{20 minutes}
 
 === Overview
-Students experiment with CODAP. They explore Number and String data types, and how they behave in CODAP.
+Students experiment with CODAP. They explore Number and String data types, and investigate how these data types behave in CODAP.
 
 === Launch
 
@@ -67,9 +66,7 @@ This model of pair programming is extremely useful for teasing apart the "thinki
 @link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
 |===
 
-Open the @starter-file{animals} in CODAP.
-
-Invite students to play in CODAP! Challenge them to do the following:
+Students should open the @starter-file{animals} in CODAP. Then, invite them to play in CODAP! Challenge students to do the following:
 
 [.lesson-instruction]
 --
@@ -80,11 +77,11 @@ Invite students to play in CODAP! Challenge them to do the following:
 - Add an attribute to the table called `test`
 --
 
-Ensure that all students have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table.
+Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. *NEED SCREENSHOT*
 
 === Investigate
 
-In their `test` column, students will experiment with _numbers_ and _strings_. In order to complete the worksheet below, students must first select `test` on their Table and then choose `Edit formula` from the drop-down menu that appears. For each direction on the worksheet below, students must re-open the `Edit Formula` box.
+In their `test` column, students will experiment with _numbers_ and _strings_. In order to complete the worksheet below, students must first select `test` on their Table and then choose `Edit formula` from the drop-down menu that appears. For each directive on the worksheet below, students must re-open the `Edit Formula` box, delete their entry - and then input the next entry. *NEED SCREENSHOT*
 
 [.lesson-instruction]
 --
@@ -101,7 +98,7 @@ CODAP knows about many types of numbers, and they behave pretty much the way the
 - CODAP converts fractions into decimals automatically.
 - Anything in quotes is a String, even something like `"42"`.
 - Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together (or _concatenate_) two strings, or a number and a string.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together two strings, or a number and a string.
 - CODAP knows the order of operations.
 - Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
 
@@ -109,7 +106,6 @@ Error messages are a way for CODAP to explain what went wrong, and are a helpful
 
 - `6 / 0`. In this case, CODAP obeys the same rules as humans, and gives an error.
 - `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
-}
 
 == Booleans @duration{20 minutes}
 
@@ -140,3 +136,70 @@ Debrief student answers as a class.
 [.lesson-instruction]
 What sets Booleans apart from other data types?
 
+== Applying Functions @duration{10 minutes}
+
+=== Overview
+Students learn how to apply functions CODAP, reinforcing concepts from standard Algebra.
+
+=== Launch
+Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about @vocab{functions}? Students may remember functions from algebra: @math{f(x) = x + 4}.
+
+[.lesson-instruction]
+- What is the name of this function? _f_
+- The expression @math{f(2)} applies the function @math{f} to the number 2. What will it evaluate to? _6_
+- What will the expression @math{f(3)} evaluate to? _7_
+- The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? _1_
+
+@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! CODAP has lots of built-in functions, which we can use to play with our dataset.
+
+In their `test` column, have students type `sqrt(16)`.
+
+[.lesson-instruction]
+--
+- What is the name of this function? `sqrt`
+- How many arguments does the function expect? _1_
+- What type of argument does the function expect? _Number_
+- Does the `sqrt` function produce a Number? String? Boolean? _Number_
+- What did the expression evaluate to? _4_
+--
+What happens if we apply `sqrt` to an attribute (column), rather than a number?
+
+[.lesson-instruction]
+--
+- Enter `sqrt(Weight)`
+- What do you observe?
+- How about `sqrt(Legs)`?
+- What happens when we enter `sqrt(Name)`?
+--
+
+Have students type `stringLength("rainbow")` into the interactions area and hit `Enter`. Next try `stringLength(Name)`
+
+[.lesson-instruction]
+--
+- What is the name of this function? _stringLength_
+- How many arguments does `stringLength` expect? _1_
+- What type of argument does the function expect? _String_
+- What does the expression evaluate to? _7_
+- Does the `stringLength` function produce a Number? String? Boolean? _Number_
+--
+
+=== Investigation
+
+[.lesson-instruction]
+--
+- Create a column called `AgeNextYear` that uses a function to add one year to each animal’s age.
+- Create a column called `RoundedWeight` that uses a function to give the weight of each animal rounded to the nearest whole number.
+- Create a column called `Old` that uses a function to indicate which animals are  over 5 years old.
+--
+
+
+
+=== Synthesize
+Debrief the activity with the class.
+
+[.lesson-instruction]
+--
+- Think about the new columns you created using functions. How did the input of the function relate to the output?
+- What kind of error messages did you encounter, if any?
+
+--
