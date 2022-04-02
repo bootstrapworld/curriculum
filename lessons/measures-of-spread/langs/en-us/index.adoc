@@ -1,24 +1,23 @@
-= Probability and Inference
+= Measures of Spread
 
-@description{DESCRIPTION HERE}
+@description{Students learn how standard deviation serves as Data Scientists' most common measure of spread: It reports how far all the values in a data set tend to be from their mean. When we looked at box plots, we visualized spread  based on range and interquartile range. Now we’ll look at histograms and picture the spread in terms of standard deviation.}
 
-@lesson-prereqs{}
+@lesson-prereqs{box-plots}
 
-@keywords{}
+@keywords{Standard Deviation, StdDev}
 
 [@lesson-intro-table]
 |===
 | Lesson Goals
 | Students will be able to...
 
-- something
-- something else
+- apply one approach to measuring and displaying spread of a data set
+- compare and contrast information displayed in a box plot and a histogram
 
 | Student-facing Lesson Goals
 |
 
-* Let's do something
-* Let's do something else
+* Let’s compare different uses for box plots and histograms when talking about data.
 
 | Materials
 |[.materials-links]
@@ -35,18 +34,94 @@
 
 |===
 
-== SECTION 1 @duration{15 minutes}
+== Standard Deviation to Measure Spread @duration{30 minutes}
 
 === Overview
-Overview
+Students review the notion of spread. After intuiting the typical distance of values from their mean, they are guided to better understand the calculation of standard deviation through simple annotations on a histogram.
+
 
 === Launch
-A short, fun, engaging activity, video, or discussion of a learning goal
+Unless a data set has extreme outliers or skewness, we prefer mean to median as our measure of center, because the mean provides information from _all_ the data values, not just one or two. Similarly, we’d like a measure of spread that tells us about more than just a few key data points, as reported in the range and interquartile range. By far the most useful way to summarize the center and @vocab{spread} of a quantitative data set is to report its @vocab{mean} and @vocab{standard deviation}.
+
+A shelter may report that the mean age of their cats is 3 years, which is certainly a useful summary, but it leaves out a lot of important information. Are most of the cats young adults around 3 years old, or does the shelter mainly have kittens and “elderly” cats towards the end of their life expectancy? There are all sorts of spreads possible for a data set that has a mean of 3.
+
+To get a better feel for spread, let’s think about a very familiar variable: household size. The mean of all household sizes in the U.S. is roughly 2.5. Which one of these would be a good guess for the standard deviation, which reports the typical distance of values from their mean: 0.3, or 1.5, or 3,  or 15? The correct answer probably isn’t obvious to you—yet! But it should become clear after we consider what we already know from experience.
+
+First, think about households whose number of people is pretty close to the mean (2.5): those that have either 2 or 3 people, so their distance  from the mean is 0.5. Throughout the U.S. (and probably also in your class at school) it’s quite common to have a household size that is 0.5 away from the mean. There are also plenty of American households with 1 or 4 people; in either case, that’s a distance of 1.5 from the mean (2.5). There will be some households with 5 or 6 people but very few with 7 or more people. So distance from the mean only rarely goes beyond a value of 4.5.
+
+Putting all this information together, we know that it’s most common for household sizes to be 0.5, or 1.5, or 2.5 away from the mean. Rolling those distances all together into one number that reports the typical distance from the mean, the only answer that makes sense is 1.5! (0.3 would be way too small, and 3 or 15 would be way too large.) Sure enough, the standard deviation for household size in the U.S. is roughly 1.5.
+
+[.lesson-point]
+Standard deviation measures spread of a data set by calculating the square root of the average squared distance of all the data values from their mean.
+
+The messy calculations involved in finding standard deviation are best left to computer software (such as Pyret). What’s really important for students—and their teachers—is to focus on getting an intuitive feel for how standard deviation measures spread. To accomplish this, let’s revisit our variable for ages of cats.
+
+@right{@image{images/histogram-with-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8"}} A set of 10 shelter cats, as shown in the histogram here, has a mean age of 3. It’s telling us the typical size of all the values taken together. Looking at the histogram for 10 cat ages, it makes sense that overall they average out to 3: the intervals run from 1-8, and there are more values in the bottom half of the intervals than in the top half so we'd expect the mean to be slightly lower than 4.
+
+To eyeball the standard deviation on a histogram, we need to picture the typical size of all the distances from the mean.
+
 
 === Investigate
-Productive struggle with that goal
+[.lesson-instruction]
+Turn to  @printable-exercise{std-dev-cat-age.adoc}, and complete the information describing each histogram by filling in the blanks.
+
+Now that you’ve thought about individual distances from the mean, it’s time to think about rolling all of these distances into one "typical" distance.
+
+@right{@image{images/histogram-with-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. Arrows are superimposed on the image, pointing from the mean to the center of each interval."}} In this image, we've drawn an arrow for each datapoint from the mean to each of the intervals that contains the it. The 3-year-old cat's age is the closest one to the mean: its distance is zero! Other ages have various distances from the mean, with the furthest being the 7-year-old: its distance is 4 years away from 3 years. (The histogram shown here represents each age distance as a red arrow.)
+
+Now you need to stretch your visual imagination a bit: if we roll all 10 age distances from the mean into a single number that reports what’s typical, which one of these seems closest: 1, 2, 4, or 5?
+
+A value of 1 seems too small, because the cats’ ages tend to be more than just 1 year away from 3. Values of 4 or 5 would be too large—after all, there’s only one cat with an age as much as 4 years away from 3. Therefore, our best guess out of the options provided would be 2. Sure enough, calculating the square root of average squared distances from the mean results in a standard deviation of 2.3.
+
+Below is the contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
+
+```
+# stdev :: (t :: Table, col :: String) -> Number
+stdev(animals-table, "pounds")
+```
+
+To get a better feel for both mean and standard deviation, it helps to recognize that data scientists don’t just pull their formulas out of thin air—they arise as truths about the natural, physical world around us! The following two activities make the physical roles of mean and standard deviation more concrete.
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Kinesthetic Activity}
+
+Just as the @vocab{mean} can be connected to the physical world (see @link{../measures-of-center, "Measures of Center"}), @vocab{standard deviation} can as well! In this case, the physical analogy is the "moment of inertia": the amount of energy needed to start or stop a body spinning around its center of gravity.
+
+If you are spinning in an office chair with your arms out wide, pulling them in will make you spin faster. A figure skater uses this same trick to spin faster or slower, by pushing their arms out or pulling them in.
+
+TODO(Emmanuel)
+
+|===
 
 === Synthesize
-Activities or discussion questions that are targeted at deeper understanding and synthesis
+TODO(Emmanuel)
 
+
+== Comparing Standard Deviations @duration{10 minutes}
+
+=== Overview
+Students compare centers and—more importantly—spreads of two quantitative data sets by comparing their histograms. Both mean and standard deviation can be affected by outliers and/or skewness.
+
+
+=== Launch
+__"What happens to the center and spread of a histogram if we add an unusually high value to the data set? How does such a change affect the dataset’s mean and standard deviation?"__
+
+Let’s examine the histogram for our cat age data set, including an additional outlier age of 16 years.
+
+@right{@image{images/histogram-with-outlier.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An 11th cat has been added at 16 years."}} Here is the same histogram we saw before, but now with an 11th cat that is 16 years old.
+
+[.lesson-instruction]
+- What will this outlier do to the mean?
+- What will this outlier do to the standard deviation?
+
+=== Investigate
+[.lesson-instruction]
+- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set.
+- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
+
+
+=== Synthesize
+Extreme values affect both the mean and standard deviation of a data set, but somewhat differently. Unusually low values decrease the mean, while unusually high values increase it. Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction. Students can propose adding or removing specific extreme values in any of the columns of the Animals dataset, and predict how the mean and standard deviation would change.
 
