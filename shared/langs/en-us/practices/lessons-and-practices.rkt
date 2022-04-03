@@ -294,7 +294,7 @@
         "SEP.3"
         )
 
-    ("measures-of-spread" 
+    ("standard-deviation" 
         "MP.3"
         "MP.4"
         "P5"
