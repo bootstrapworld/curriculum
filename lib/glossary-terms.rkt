@@ -379,6 +379,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center")
      (es-mx ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro"))
     
+    ((en-us ("standard deviation") "a number that measures spread of a data set using the typical distance of values from their mean")
+     (es-mx ("Desviación Estándar") "un número que mide la dispersión de un conjunto de datos usando la distancia típica de los valores desde su media"))
+
     ((en-us ("state") "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")
      (es-mx ("estado") "el valor de un sistema que cambia en cualquier momento (es decir, un semáforo puede estar en un estado 'rojo', 'amarillo' o 'verde'). En Pyret, el estado de un reactor es su valor actual."))
     
