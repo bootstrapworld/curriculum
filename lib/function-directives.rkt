@@ -174,7 +174,7 @@
                               (if (pair? lhs)
                                   (string-append "fun " lhs-s ":"
                                     (if rhs-s-nl? "\n" " ")
-                                    (if indent (make-string (+ indent 2) #\space) "")
+                                    (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
                                     rhs-s
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
