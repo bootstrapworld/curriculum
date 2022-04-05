@@ -2831,7 +2831,7 @@
           " "
           ; used to not have commas in WeScheme
           (vars-to-commaed-string domain-list)
-          " -> "
+          " ‑> "
           range
           (if purpose
               (string-append "\n"
