@@ -1,6 +1,6 @@
 = Solving Word Problems Using the Design Recipe
 
-@description{Students are introduced to the Design Recipe as a scaffold for breaking down word problems into chunks that will support them in writing code and apply it to fixing a file that launches a rocket!}
+@description{Students are introduced to the Design Recipe as a scaffold for breaking down word problems into smaller steps. They apply the Design Recipe to fixing a file that launches a rocket!}
 
 @lesson-prereqs{defining-functions}
 
@@ -41,8 +41,9 @@
 
 | Key Points for the Facilitator
 |
-* The *purpose statement* is a comment in the code - something the computer doesn't read.  It is important for readability of their code - there may be other people looking at their code and using their functions!
-* Remind students that the domain and range of a function must be one or more of the @vocab{data types} (Number, String, Image, Boolean, etc.) they've learned so far.
+* Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. *Comments* are parts of a program that the computer ignores - they are for human eyes only!
+* The *purpose statement* is a structured way of restating the problem. In a computer program, it's written as a _comment_ in the code - something the computer doesn't read.
+* Remind students that the Domain and Range of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like "Integers", "Rationals", etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
 * If students struggle with creating the examples, use the Circle of Evaluation mapping activity or use role-playing to help students build up their understanding around the concept.
 
 
@@ -58,31 +59,38 @@ In this lesson students build on what they already know about multiple represent
 
 === Launch
 
-A word problem is a description of a situation.
+A word problem is a description of a situation, but seeing the math behind the words can be challenging!
 
-Seeing the math behind the words can be challenging!
+In this lesson, you're going to learn a strategy for breaking down word problems, called the *Design Recipe*. You've actually seen most of the steps of the Design Recipe, but you _haven't_ seen how to put them together. There's also one part you haven't seen yet: _writing a purpose statement_.
 
-In this lesson, you're going to learn a strategy for breaking down word problems, called the *Design Recipe*. You've actually seen most of the steps of the Design Recipe, but there's one part you haven't seen: _writing a purpose statement_. On its own, a contract is not enough information to generate examples and write a function definition. We need to know what the @vocab{function} is supposed to do with what it takes in. Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
+On its own, a contract is not enough information to generate examples and write a function definition. For example, the contract for `circle` says it needs a Number and two Strings, but that's not the whole story! We can't use negative numbers for the radius, we can only use `"solid"` or `"outline"` for the first String, and the last String has to be a color!
+
+Contracts are great, but we need more detail! Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
 
 [.lesson-instruction]
 * On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four purposes statements. Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
 * What pairs did you come up with?
+* What do you Notice about those purpose statements? Do they have anything in common?
 
+[.lesson-point]
 Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
+* Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
+* For more practice, have students complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
 
-For more practice, have students complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+A good purpose statement must have three things:
+. A description of what the function _consumes_
+. A description of what the function _produces_
+. All the _relevant information_ about how to produce that output
 
 === Investigate
 
-Have students turn to @printable-exercise{fixing-purpose.adoc} and identify what important information got left out of each of the purpose statements!
+Have students turn to @printable-exercise{fixing-purpose.adoc} and identify (1) what important information got left out of each of the purpose statements, and (2) what unecessary information got included!
 
 [.lesson-instruction]
-* What important information was missing from the first purpose statement that you would need to solve the problem?
-* What important information was missing from the second purpose statement that you would need to solve the problem?
-* What important information was missing from the third purpose statement that you would need to solve the problem?
+* What important information was missing from the each purpose statement that you would need to solve the problem?
+* What extra information was included, that wasn't needed to solve the problem?
 
 === Synthesize
 What are the important elements of purpose statements?
@@ -94,13 +102,15 @@ Why are purpose statements useful?
 |
 @span{.title}{The Design Recipe in your Classroom}
 
-The three steps of the Design Recipe are designed to mirror best practices that you may already be using in your classroom. The Design Recipe is merely a collection of those practices, assembled in a structured way.
+The three steps of the Design Recipe are designed to mirror best practices that you may _already be using in your classroom_. It's merely a collection of those practices, assembled in a structured way with great care taken to connecting each practice with the others.
+
+There is nothing about the Design Recipe is that specific to "coding". In fact, the teachers that get the most benefit from it are careful to use it in both programming and traditional math word problems: when students see the application to both, they are far more likely to buy into it.
 
 Writing the Contract and Purpose Statement is where students _understand_ the word problem. If you have your students restate the problem in their own words, draw pictures, or underline the inputs and outputs in the word problem, __you're already using this practice!__
 
-Writing examples and circles-and-and labeling what changes is where students _apply_ their understanding. If you have your students work through some concrete examples before jumping straight to variables and formulas, and ask them "what's the rule?" or "what's the pattern?", __you're already using this practice!__.
+Writing examples and circles-and-labeling what changes is where students _apply_ their understanding. If you have your students work through some concrete examples before jumping straight to variables and formulas, and ask them "what's the rule?" or "what's the pattern?", __you're already using this practice!__.
 
-The order of the recipe is a recommendation based on years of research about what works for most students, but that doesn't mean this order works best for every student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
+The order of the recipe is a recommendation based on 20+ years of research about what works for most students, but that doesn't mean this order works best for every student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
 |===
 
 == Rocket Height! @duration{25 minutes}
@@ -115,27 +125,24 @@ Have students open the @starter-file{rocket-height} and look at the code before 
 [.lesson-instruction]
 What do you Notice? What do you Wonder?
 
-Have students click run to see the simulation start to run on their computer.
+Have students click Run to see the simulation start running on their computer.
 
 [.lesson-instruction]
 * What happens when you press the space bar? _the seconds change, but the rocket doesn't move!_
 * What were you expecting to happen? _the rocket would move!_
 * What happens when you press `b`? _the seconds go back down, but the rocket height stays at 0_
 * Is `rocket-height` working? _no_
+* Close the window with the rocket, so you can see the code.
 
-Have students close the window with the rocket.
-
-[.lesson-instruction]
-We should get a warning when we run a function that isn't working!
+It would be nice to get a warning when a function doesn't work right!
 
 Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.
 
-Have students type @show{(code '(rocket-height 0))} into the interactions area.
-
 [.lesson-instruction]
-* As the program is currently written, what happens when I give the `rocket-height` function an input of 0? _It returns 0._
+* Type @show{(code '(rocket-height 0))} into the interactions area.
+* As the program is currently written, what happens when we give the `rocket-height` function an input of 0? _It returns 0._
 * Is that what we want it to do? _yes!_
-* As the program is currently written, what happens when I give the `rocket-height` function an input of 10? _It returns 0._
+* As the program is currently written, what happens when we give the `rocket-height` function an input of 10? _It returns 0._
 * Is that what we want it to do? _no!_
 * Why did the examples pass? _Because the programmer only gave it one example! We should always provide at least two examples. More complex functions will require us to think about what range of examples will be necessary to test that our function does what we want it to!_
 
@@ -171,16 +178,20 @@ For students needing more specific instructions about exploring the file, try th
 
 For teachers who cover quadratic and exponential functions or have students who need more of a challenge, here are some fun prompts:
 
-- Can you make the rocket fly faster? Slower?
-- Can you make the rocket sink down instead of fly up?
-- Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
-- Can you make the rocket blast off _and then land again_?
-- Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
-- Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
-- Can you make the rocket fly to the edge of the the universe?
+- *Changing slope:* Can you make the rocket fly faster? Slower?
+- *Changing sign:* Can you make the rocket sink down instead of fly up?
+- *Motivating Quadratic Functions:* Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
+- *Practicing the Quadratic Formula:* Can you make the rocket blast off _and then land again_?
+- *More practice:* Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
+- *More practice:* Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
+- *Motivating Exponential Functions:* Can you make the rocket fly to the edge of the the universe?
 |===
 
-== Additional Exercises:
+== Additional Exercises
+The Design Recipe, with multiple steps and connections bewteen them, can be a heavily lift. However, it is an extraordinarily powerful pedagogical practice that pays especially large dividends when it comes to word problems in math. With a high fixed cost, the Design Recipe is not something to use "occasionally": teachers who use it more get far more out of it, and teachers who use it less find it's not worth the effort.
+
+To help you apply it to more of your scope and sequence, we've provided a library of Design Recipe worksheets which apply to many common problems. We hope that you will be inspired by this library, and begin using the Design Recipe with more of the problems in your book!
+
 - @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}
 - @opt-printable-exercise{dr-restaurants.adoc}
 - @opt-printable-exercise{dr-direct-variation.adoc}
