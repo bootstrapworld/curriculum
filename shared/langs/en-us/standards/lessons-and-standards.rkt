@@ -703,6 +703,29 @@
         "OK.L2.DA.CVT.02"
         )
 
+    ("standard-deviation" 
+        "6.SP.A"   ; STEMworks
+        "6.SP.A.2" ; STEMworks
+        "6.SP.B.4" ; STEMworks
+        "6.SP.B.5" ; STEMworks
+        "6.SP.B.5.C"; STEMworks
+        "HSS.ID.A.2";STEMworks
+        "HSS.ID.A.1" 
+        "HSS.ID.A.2" 
+        "HSS.ID.A.3"
+        "1B-DA-06" ; STEMworks
+        "3A-DA-11" 
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models"
+        ;"HS-SEP4-2" granular NGSS standards are not yet enabled
+        "OK.6.D.1.3"
+        "OK.6.DA.CVT.01"
+        "OK.7.DA.CVT.01"
+        "OK.7.D.1.2"
+        "OK.8.DA.S.01"
+        "OK.L2.DA.CVT.02"
+        )
+
     ("method-chaining" 
         "1B-AP-10" ; STEMworks
         "2-AP-17" 

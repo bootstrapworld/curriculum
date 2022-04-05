@@ -294,6 +294,12 @@
         "SEP.3"
         )
 
+    ("standard-deviation" 
+        "MP.3"
+        "MP.4"
+        "P5"
+        )
+
     ("method-chaining" 
         "MP.6"
         "MLR.8"

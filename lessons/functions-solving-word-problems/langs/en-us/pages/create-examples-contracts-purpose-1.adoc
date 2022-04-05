@@ -16,26 +16,26 @@ We've provided contracts and purpose statements to describe two different functi
 </style>
 ++++
 
-@design-recipe-exercise{ "product-squared"
-"product-squared"
+@design-recipe-exercise{ "triple"
+"triple"
 #:assess-design-recipe #f
 #:headless? #t
 #:show-funname-contract? #t
-#:domain-list '(Number Number)
+#:domain-list '(Number)
 #:show-domains? #t
 #:range "Number"
 #:show-range? #t
-#:purpose "Consumes two numbers and squares their product"
+#:purpose "Consumes a Number and triples it."
 #:show-purpose? #t
 #:num-examples 2
 #:example-list '(
-  (5 6 (sqr (* 5 6)))
-  (10 17 (sqr (* 10 17))))
+  (4 (* 4 3))
+  (10 (* 10 3)))
 #:show-examples #f
-#:param-list '(a b)
+#:param-list '(url)
 #:show-funname-defn? #f
 #:show-params? #f
-#:body '(sqr (* a b))
+#:body '(scale 0.5 url)
 #:show-body? #f
 #:grid-lines? #f
 }
@@ -43,7 +43,6 @@ We've provided contracts and purpose statements to describe two different functi
 @vspace{2ex}
 @span{.sectionbreak}{}
 @vspace{2ex}
-
 
 @design-recipe-exercise{ "upside-down"
 "upside-down"

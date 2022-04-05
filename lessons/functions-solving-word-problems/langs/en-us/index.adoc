@@ -1,11 +1,12 @@
 = Solving Word Problems Using the Design Recipe
 
-@description{Students are introduced to the Design Recipe as a scaffold for breaking down word problems into chunks that will support them in writing code.}
+@description{Students are introduced to the Design Recipe as a scaffold for breaking down word problems into chunks that will support them in writing code and apply it to fixing a file that launches a rocket!}
 
 @lesson-prereqs{defining-functions}
 
 @keywords{}
 
+[@lesson-intro-table]
 |===
 
 | Lesson Goals
@@ -32,8 +33,6 @@
 
 @material-links
 
-| Preparation
-| @preparation
 
 @ifproglang{wescheme}{
 | Supplemental Resources
@@ -58,106 +57,36 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 In this lesson students build on what they already know about multiple representations of functions (contracts, examples and definitions) to write purpose statements and gain fluency with the Design Recipe.
 
 === Launch
-Have students turn to @printable-exercise{pages/create-contracts-examples.adoc} and write contracts for the examples provided.
 
+A word problem is a description of a situation.
 
-=== Investigate
-Of course, solving equations is something that calculators and computers can do for us! That's where word problems come in: a word problem is a description of a situation, and the trick is to figure out the mathematical relationships that describe it. Figuring out the relationships that govern everything from the fuel efficiency of an engine to the best way to build a bridge is where math gets creative, applied, and fun!
+Seeing the math behind the words can be challenging!
 
-But seeing the math behind the words can be challenging! In this lesson, you're going to learn a strategy for breaking down word problems, called the *Design Recipe*.
-
-You've actually seen most of the steps of the Design Recipe, but there's one part you haven't seen: _writing a purpose statement_. On its own, a contract is not enough information to generate examples and write a function definition. We need to know what the @vocab{function} is supposed to do with what it takes in. Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
+In this lesson, you're going to learn a strategy for breaking down word problems, called the *Design Recipe*. You've actually seen most of the steps of the Design Recipe, but there's one part you haven't seen: _writing a purpose statement_. On its own, a contract is not enough information to generate examples and write a function definition. We need to know what the @vocab{function} is supposed to do with what it takes in. Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc} and read the purpose statements. What do you notice? What do you wonder?
+* On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four purposes statements. Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
+* What pairs did you come up with?
 
-Debrief the notice and wonder as a class. Then have students write examples that satisfy each of the contracts and purpose statements on @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}.
+Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 
-OPTIONAL: For more practice, have students complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+[.lesson-instruction]
+Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
+
+For more practice, have students complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+
+=== Investigate
+
+Have students turn to @printable-exercise{fixing-purpose.adoc} and identify what important information got left out of each of the purpose statements!
+
+[.lesson-instruction]
+* What important information was missing from the first purpose statement that you would need to solve the problem?
+* What important information was missing from the second purpose statement that you would need to solve the problem?
+* What important information was missing from the third purpose statement that you would need to solve the problem?
 
 === Synthesize
 What are the important elements of purpose statements?
 Why are purpose statements useful?
-
-== Writing Linear Functions @duration{25 minutes}
-
-=== Overview
-Students are given a non-working program, which uses a linear function to determine the height of a rocket after a given length of time. The "broken" code is provided to lower cognitive load, allowing students to focus on comprehension (reading the code) and making use of structure (identifying where it's broken).
-
-=== Launch
-
-Ask students to open the @starter-file{rocket-height}. By typing @ifproglang{wescheme}{`(start rocket-height)`} @ifproglang{pyret}{`start(rocket-height)`}, they will see the simulation start to run on their computer.
-
-[.notice-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
-@span{.title}{Notice and Wonder}
-
-What do you notice about this program?  What do you wonder?
-|===
-
-Survey the class on their "Notices" and "Wonders" and record on the board before moving on to the discussion.
-
-[.lesson-instruction]
-- Is `rocket-height` working?
-- Why do you think it's not working?
-- What do you think the *purpose* of this function is?  How do you know?
-
-- What is the domain of `rocket-height`?
-_Number_
-
-- What is the range of `rocket-height`? How do you know?
-_Number, we can tell by looking at the @vocab{contract} for the function._
-
-- As the program is currently written, what happens when I give the function an input of 5?  15?  One million?
-_It always returns 0._
-
-=== Investigate
-
-Let's use the Design Recipe to fix `rocket-height`, and get comfortable with writing *purpose statements*.
-
-Have students turn to @printable-exercise{pages/rocket-height.adoc}, read the problem statement with their partner and write down the @vocab{Contract} and @vocab{purpose statement}. Then, given the contract and purpose statement, write two examples of how `rocket-height` should work after two different lengths of time.
-
-[.lesson-instruction]
-- Circle and label what's changing in the two examples, just as you did with the green triangle function before.
-- Choose a good variable name for what's changing.
-- Write the function definition using the variable name.
-
-Once the Design Recipe has been completed in the workbook, students can type the code into the `rocket-height` program, replacing any incorrect code with their own code.
-
-=== Synthesize
-- What was the problem?
-- What mistake(s) did the programmer make?
-- Where in the Design Recipe did they first go astray?
-
-_The Design Recipe allows us to trace mistakes back to the source!_
-
-== More Interesting Functions @duration{flexible}
-
-=== Overview
-For teachers who cover quadratic and exponential functions, this activity deepens students' understanding of functions and extends the Design Recipe to include those. This can also be a useful activity for students who finish early, or who need more of a challenge.
-
-=== Launch
-Now that `rocket-height` is working correctly, explore the rest of the file and try the following:
-
-- Remove the comment from before the `(start rocket-height)` and test the program.
-- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.
-- Try out `(space rocket-height)`
-- Try out `(everything rocket-height)`
-
-=== Investigate
-[.lesson-instruction]
-- Can you make the rocket fly faster? Slower?
-- Can you make the rocket sink down instead of fly up?
-- Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
-- Can you make the rocket blast off _and then land again_?
-- Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
-- Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
-- Can you make the rocket fly to the edge of the the universe?
-
-=== Synthesize
-Debrief - what did students try? Have students share their experiments with one another!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -174,24 +103,92 @@ Writing examples and circles-and-and labeling what changes is where students _ap
 The order of the recipe is a recommendation based on years of research about what works for most students, but that doesn't mean this order works best for every student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
 |===
 
+== Rocket Height! @duration{25 minutes}
+
+=== Overview
+Students are given a non-working program, which uses a linear function to determine the height of a rocket after a given length of time. The "broken" code is provided to lower cognitive load, allowing students to focus on comprehension (reading the code) and making use of structure (identifying where it's broken).
+
+=== Launch
+
+Have students open the @starter-file{rocket-height} and look at the code before they click run.
+
+[.lesson-instruction]
+What do you Notice? What do you Wonder?
+
+Have students click run to see the simulation start to run on their computer.
+
+[.lesson-instruction]
+* What happens when you press the space bar? _the seconds change, but the rocket doesn't move!_
+* What were you expecting to happen? _the rocket would move!_
+* What happens when you press `b`? _the seconds go back down, but the rocket height stays at 0_
+* Is `rocket-height` working? _no_
+
+Have students close the window with the rocket.
+
+[.lesson-instruction]
+We should get a warning when we run a function that isn't working!
+
+Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.
+
+Have students type @show{(code '(rocket-height 0))} into the interactions area.
+
+[.lesson-instruction]
+* As the program is currently written, what happens when I give the `rocket-height` function an input of 0? _It returns 0._
+* Is that what we want it to do? _yes!_
+* As the program is currently written, what happens when I give the `rocket-height` function an input of 10? _It returns 0._
+* Is that what we want it to do? _no!_
+* Why did the examples pass? _Because the programmer only gave it one example! We should always provide at least two examples. More complex functions will require us to think about what range of examples will be necessary to test that our function does what we want it to!_
+
+[.lesson-point]
+We should always test a function definition against at least 2 examples!
+
+=== Investigate
+
+Let's use the Design Recipe to fix `rocket-height` and get comfortable with writing *purpose statements*.
+
+Have students complete @printable-exercise{pages/rocket-height.adoc}.
+
+As they work, circle the room and make sure that their @vocab{purpose statements} are strong enough that they could write examples without looking at the original word problem. Encourage students to circle what's changing in their examples and label with descriptive variables.
+
+[.lesson-instruction]
+Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own. When it's working correctly, explore the other functions in the file.
+
+For students needing more specific instructions about exploring the file, try the following:
+- Remove the comment from before the `(start rocket-height)` and test the program.
+- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.
+- Try out `(space rocket-height)`
+- Try out `(everything rocket-height)`
+
+=== Synthesize
+
+- What problems did you fix in the starter file?
+- What did the other functions do?
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Rocket-Height Challenges}
+
+For teachers who cover quadratic and exponential functions or have students who need more of a challenge, here are some fun prompts:
+
+- Can you make the rocket fly faster? Slower?
+- Can you make the rocket sink down instead of fly up?
+- Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
+- Can you make the rocket blast off _and then land again_?
+- Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
+- Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
+- Can you make the rocket fly to the edge of the the universe?
+|===
 
 == Additional Exercises:
 - @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}
-- @opt-printable-exercise{pages/examples-same-contracts1.adoc}
-- @opt-printable-exercise{pages/examples-same-contracts2.adoc}
-- @opt-printable-exercise{pages/match-contracts-examples1.adoc}
-- @opt-printable-exercise{pages/match-contracts-examples2.adoc}
-
-== DR Exercsises to find a home for
-- @opt-printable-exercise{dr-direct-variation.adoc, Design Recipe: Direct Variation}
-- @opt-printable-exercise{dr-exercise-1.adoc, Design Recipe Practice (1)}
-- @opt-printable-exercise{dr-exercise-2.adoc, Design Recipe Practice (2)}
-- @opt-printable-exercise{dr-exercise-3.adoc, Design Recipe Practice (3)}
-- @opt-printable-exercise{dr-slope-intercept-1.adoc, Design Recipe: Linear Relationships (1)}
-- @opt-printable-exercise{dr-neg-slope.adoc, Design Recipe: Linear Relationships (2)}
-- @opt-printable-exercise{dr-geometry-rectangles.adoc, Design Recipe: Geometry - Rectangles}
-- @opt-printable-exercise{dr-geometry-rect-prism.adoc, Design Recipe: Geometry - Rectangular Prisms}
-- @opt-printable-exercise{dr-geometry-circles.adoc, Design Recipe: Geometry - Circles}
-- @opt-printable-exercise{dr-geometry-cylinder.adoc, Design Recipe: Geometry - Cylinders}
-
-There are more pages of problems that focus on geometry and linear functions in the additional exercises section at the end of this lesson.
+- @opt-printable-exercise{dr-restaurants.adoc}
+- @opt-printable-exercise{dr-direct-variation.adoc}
+- @opt-printable-exercise{dr-slope-intercept-1.adoc}
+- @opt-printable-exercise{dr-neg-slope.adoc}
+- @opt-printable-exercise{dr-geometry-rectangles.adoc}
+- @opt-printable-exercise{dr-geometry-rect-prism.adoc}
+- @opt-printable-exercise{dr-geometry-circles.adoc}
+- @opt-printable-exercise{dr-geometry-cylinder.adoc}
+- @opt-printable-exercise{dr-breaking-even.adoc}
+- @opt-printable-exercise{dr-marquee.adoc}
