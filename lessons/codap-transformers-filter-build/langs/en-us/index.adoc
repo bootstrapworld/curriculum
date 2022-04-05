@@ -31,24 +31,22 @@
 Students learn how to _filter_ tables by removing Rows.
 
 === Launch
-Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the "Filter Transformer", and have them _randomly choose_ a function card from from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set, and make sure they read it without showing it to anyone else.
+Explain to students that you have "Transformer Cards". Each card describes the purpose statement of a Transformer that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the `Filter` Transformer, and have them _randomly choose_ a "Transformer Card" from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set, and make sure they read it without showing it to anyone else.
 
-Have 6-8 students line up in front of the classroom, and have the filter transformer go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
+Have 6-8 students line up in front of the classroom, and have the `Filter` Transformer go to each student and say "stay" or "sit" depending on whether their expression would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
 
-Ask the class: based on who sat and who stayed, _what function was on the card?_
+Ask the class: based on who sat and who stayed, _what expression was on the card?_
 
 [.lesson-point]
-The `Filter` Transformer takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true.
-
-Suppose we want to get a table of only animals that have been fixed? The `Filter` transformer consumes a dataset to filter and a formula expression that evaluates to either true or false.
+The `Filter` Transformer takes a dataset and produces a copy of it that contains only the cases for which the given expression evaluates to true.
 
 === Investigate
 
 [.lesson-instruction]
-* Open the `Transformer` plugin, and choose the transformer `Filter`. Select `animals-dataset`. In the formula expression box, type `Fixed = “TRUE”`. Apply the transformer. What happens?
-* Does CODAP mind if you forget to capitalize? What about if you leave out quotation marks?  Examine the error messages that appear if you are just a little careless as you enter text into the formula expression box.
+* Open the `Transformer` plugin, and choose the Transformer `Filter`. Select `animals-dataset`. In the formula expression box, type `Fixed = true`. Apply the transformer. What happens?
 * This time, in the formula expression box, type `Age > 5`. What did you get?
 * Now try `Species = “dog”`
+* Does CODAP mind if you forget to capitalize? What about if you leave out quotation marks?  Examine the error messages that appear if you are just a little careless as you enter text into the formula expression box.
 
 The `Filter` Transformer walks through the table, applying whatever formula it was given to each row, and produces a new table containing all the rows for which the formula returned `true`. Notice that `Filter` takes a dataset and produces a copy of it that contains only the cases for which the given formula evaluates to true. If it consumes anything besides a single `Row`, or if it produces anything else besides a `Boolean`, we'll get an error.
 
