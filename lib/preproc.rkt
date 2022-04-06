@@ -1544,7 +1544,8 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)]
+                                     *containing-directory*)
+                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
                            [(string=? directive "preparation")
                             (unless *lesson-plan*
                               (error 'ERROR
@@ -2831,7 +2832,7 @@
           " "
           ; used to not have commas in WeScheme
           (vars-to-commaed-string domain-list)
-          " -> "
+          " ‑> "
           range
           (if purpose
               (string-append "\n"
