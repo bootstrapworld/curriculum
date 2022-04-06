@@ -116,7 +116,6 @@ After looking at the point clouds, we are left with a few questions:
 * In the second column, circle whether the slope of the line (which is the same as the _direction_ of the correlation) is positive or negative.
 
 === Common Misconceptions
-* *Don't call it "accuracy"!* One of the most common misconceptions about Linear Regression is that the @math{r} or @math{r}-squared value is a _measure of accuracy._ For example, a student who sees a very high @math{r}-value when plotting age vs. weeks might say "this prediction is 95% accurate." But these values only speak to _how much variation in the y-axis can be explained by variation in the x-axis_, so the statement should be "95% of the variation in weeks can be explained by variation in the age."
 * *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three datapoints!
 
 === Synthesize
@@ -198,21 +197,18 @@ A common misconception is that "more data is always better", and the age-v-heigh
 |===
 
 === Synthesize
-[.lesson-instruction]
---
-- Which ages made sense to calculate the heights for using the linear regression? Why?
-[.indentedpara]
---
-__A predictor only _makes sense within the range of the data that was used to generate it_. For example, a regression line predicting weight from height based only on adults could predict an infant to have a weight less than zero!
 
-Statistical models are just proxies for the real world, drawn from a limited sample of data: they might make a useful prediction in the range of that data, but once we try to extrapolate beyond that data we may quickly get into trouble!__
---
+A predictor __only makes sense within the range of the data that was used to generate it__. For example, a regression line predicting weight from height based only on adults could predict an infant to have a weight less than zero!
+
+Statistical models are just proxies for the real world, drawn from a limited sample of data: they might make a useful prediction in the range of that data, but once we try to extrapolate beyond that data we may quickly get into trouble!
+
+[.lesson-instruction]
+- Which ages made sense to calculate the heights for using the linear regression? Why?
 - How tall did the equation expect a ninety-year-old human to be?! _about 301 inches!_
 - Did anyone figure out how tall would that be in feet? _over 25 feet!_
---
 
 
-== Interpreting LR Plots in Pyret @duration{20 minutes}
+== Interpreting LR Plots @duration{20 minutes}
 
 === Overview
 Students learn how to _write_ about the results of a linear regression, using proper statistical terminology and thinking through the many ways this language can be misused.
@@ -237,12 +233,14 @@ At the bottom of the page we have the _Data Story_ for this question, which incl
 
 === Investigate
 
-- Turn to @printable-exercise{pages/regression-analysis-1.adoc}, and conduct your own Data Cycle with the Animals Dataset.
-- When you have your results in Pyret, write your Data Story at the bottom of the page.
-
+[.lesson-instruction]
+- Turn to @printable-exercise{pages/describing-relationships-1.adoc}
+- Using the language you saw on @printable-exercise{pages/regression-analysis-example.adoc}, how would you write up the findings on this page?
+- Optional: for more practice, students can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
 
 === Common Misconceptions
-Students often think it doesn’t matter which variable is assigned to be x and which is y in a regression. It’s true that you’ll get the same correlation either way---for example, @math{r=+0.442} whether your scatter plot shows `weeks` v. `pounds` or `pounds` v. `weeks`. *However, the regression line _is_ different, due to the math involved in minimizing _vertical_ distances from the line, not horizontal*.
+* *Don't call it "accuracy"!* One of the most common misconceptions about Linear Regression is that the @math{r} or @math{r}-squared value is a _measure of accuracy._ For example, a student who sees a very high @math{r}-value when plotting age vs. weeks might say "this prediction is 95% accurate." But these values only speak to _how much variation in the y-axis can be explained by variation in the x-axis_, so the statement should be "95% of the variation in weeks can be explained by variation in the age."
+* *X and Y matter!* The correlation coefficient will be the same, even if you swap the x- and y-axes. However, the _interpretation_ of the display is different! The column used for the x-axis will always be interpreted as "the explanation" for the "result" seen in the y-axis. It's fine to say that being older tends to make an animal take longer to be adopted, but it is *not true* that taking longer to be adopted makes an animal older!
 
 === Synthesize
 Have students read their text aloud, to get comfortable with the phrasing.
@@ -257,7 +255,7 @@ Now that you've gotten some practice performing linear regression on the Animals
 
 === Investigate
 [.lesson-instruction]
-- Ask your questions and tell your story on @printable-exercise{pages/regression-analysis-2.adoc}.
+- Ask your questions and tell your story on @printable-exercise{pages/regression-analysis-1.adoc}.
 - Students should fill in the @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#, Correlations} portion of their Research Paper, using the scatter plots and linear regression plots they've constructed for their dataset and explaining what they show.
 
 === Synthesize
@@ -280,5 +278,4 @@ In this project, students analyze @opt-project{olympics-project.adoc, olympics-p
 
 == Additional Exercises:
 
-- @opt-printable-exercise{pages/describing-relationships-1.adoc, Describing Relationships}
-- @opt-printable-exercise{pages/describing-relationships-2.adoc, Describing Relationships (2)}
+- @opt-printable-exercise{pages/describing-relationships-2.adoc}

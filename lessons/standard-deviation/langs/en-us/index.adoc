@@ -44,7 +44,7 @@ Students review the notion of spread itself, and build up to the formula by anno
 
 When summarizing a column, we'd like to use a measure that gathers data from every value. Sometimes we can't - like when the data is heavily skewed - but otherwise that's our preference.
 
-We already have method of measuring spread: calculating the 5 Number Summary, and then using it to generate the @vocab{Range of the dataset} and the @vocab{Interquartile Range}. These five numbers can be visualized as a box-plot, and give us a sense for how the data is spread out. Unfortunately, that measure of spread relies on _just five numbers_, and doesn't take any other datapoints into account!
+We already have one method of measuring spread: calculating the Five Number Summary, and then using it to generate the @vocab{Range of a dataset} and the @vocab{Interquartile Range}. These five numbers can be visualized as a box-plot, and give us a sense for how the data is spread out. Unfortunately, that measure of spread relies on _just five numbers_, and doesn't take any other datapoints into account. It's a lot like using the median when we could be using the mean.
 
 Fortunately, there's another measure we can use! By far the most useful way to summarize the center and @vocab{spread} of a quantitative data set is to report its @vocab{mean} and @vocab{standard deviation}.
 
@@ -56,11 +56,11 @@ The Animal Shelter Bureau reports that the mean age of shelter cats is 3 years.
 - Can you think of a _different_ spread of four ages that would have the same mean?
 - How many can you think of?
 
-There are all sorts of spreads possible for a data set that has a mean of 3. We could imagine a shelter where every cat is between 1 and 5, so each cat only deviates from the mean by 1-2 years! But we could also imagine a shelter with lots of kittens and old cats, where every cat deviates by as much as 10 years from the mean!
+There are all sorts of data sets that have a mean of 3. We could imagine a shelter where every cat is between 1 and 5, so each cat only deviates from the mean by 1-2 years! But we could also imagine a shelter with lots of kittens and old cats, where every cat deviates by as much as 10 years from the mean!
 
-Instead of focusing on the five datapoints used in our 5-number summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
+Instead of focusing on the five datapoints used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. @right{@image{images/histogram-with-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. The mean is labeled at 3.", 450}} In other words, we want to know what kind of deviation is "standard" for all the points. +
 
-@right{@image{images/histogram-with-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8", 450}} A set of 10 shelter cats, as shown in the histogram here, has a *mean age of 3*. Looking at the histogram for ten cat ages, it makes sense that they average out to 3: the intervals run from 1 to 8, and there are more values in the bottom half of the intervals than in the top half so we'd expect the mean to be slightly lower than 4.
+A set of 10 shelter cats, as shown in the histogram here, has a *mean age of 3*. Looking at the histogram for ten cat ages, it makes sense that they average out to 3: the intervals run from 1 to 8, and there are more values in the bottom half of the intervals than in the top half so we'd expect the mean to be slightly lower than 4.
 
 === Investigate
 Now that you’ve thought about individual distances from the mean, it’s time to think about rolling all of these distances into one "typical" distance.
@@ -74,7 +74,7 @@ How far away is each data point from 3?
 
 @clear
 
-@right{@image{images/histogram-w-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An arrow points to the mean at 3, and more arrows show the distance between the mean and each interval.", 450}} In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
+@right{@image{images/histogram-w-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An arrow points to the mean at 3, and more arrows show the distance between the mean and each poin in the first interval.", 450}} In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
 [.lesson-instruction]
 --
@@ -90,7 +90,8 @@ The actual formula for computing standard deviation involves squaring each of th
 Complete numbers 8-10 of @printable-exercise{std-dev-cat-age.adoc}.
 
 === Synthesize
-TODO(Emmanuel)
+- Can you explain why two datasets can have the same mean, but different standard deviations?
+- What kind of dataset would have a standard deviation of zero?
 
 == Comparing Standard Deviations @duration{10 minutes}
 
@@ -121,12 +122,28 @@ What is the standard deviation for the weights of _all_ the animals at our datas
 === Investigate
 [.lesson-instruction]
 - Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set.
-- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
+- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 
 === Synthesize
 - How much did adding an outlier change the mean? The standard deviation?
 - Extreme values affect both the mean and standard deviation of a data set.
 - Unusually low values _decrease_ the mean, while unusually high values _increase_ it. Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
 
-== Your Analysis
+== Your Analysis @duration{flexible}
 
+=== Overview
+Students repeat the previous activity, this time applying it to their own dataset and interpreting their own results. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+
+=== Investigate
+
+[.lesson-instruction]
+- Fill out @printable-exercise{pages/analysis-stdev.adoc} in your Student Workbook. Choose one of the columns you explored with box-plots and measures of center, and look at the standard deviation of that column.
+- Add your findings to the research paper.
+
+
+=== Synthesize
+Have students share their findings with one another.
+
+
+== Additional Exercises:
+- @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}
