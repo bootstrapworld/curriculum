@@ -1,53 +1,41 @@
 = Data Cycle: Regression Analysis (Example)
 
-[cols="^.^1, ^.^3, .^20", frame="none", grid="none", stripes="none"]
+[.data-cycle, cols="^.^3, .^20", frame="none", stripes="none"]
 |===
-| @n
 | @image{../images/AskQuestions.png, "Ask Questions icon"}
 |
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-@hspace{1em} +a.+ What question do you have? @fitb{20em}{How much does Age determine Adoption time for cats?}
+@fitbruby{100%}{How much does Age determine Adoption time for cats?}{What question do you have?}
 
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-@hspace{1em} +b.+ What type of question is this? (circle one) @hspace{1.5em} _Lookup_ @hspace{1.5em} _Arithmetic_ @hspace{1.5em} @ifsoln{*Statistical*} @ifnotsoln{_Statistical_}
+@fitb{100%}{}
 
-| @n
+What type of question is this? (circle one) @hspace{1.5em} _Lookup_ @hspace{1.5em} *Arithmetic* @hspace{1.5em} _Statistical_
+
 | @image{../images/ConsiderData.png, "Consider Data icon"}
 |
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-@hspace{1em} +a.+ Rows: @fitbruby{30em}{_cats at the shelter_}{Just the cats, fixed rabbits, etc.}
+@fitbruby{100%}{cats at the shelter}{What Rows? (Just the cats, fixed rabbits, etc.)}
 
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-@hspace{1em} +b.+ Column(s): @fitbruby{28em}{name, age, and weeks}{age, weight-in-kilograms, weeks, etc.}
+@fitbruby{100%}{name, age, and weeks}{Which Column(s)? (age, weight-in-kilograms, weeks, etc.)}
 
-| @n
-| @image{../images/AnalyzeData.png, "Analyze Data icon"}
+| @image{../images/AnalyzeData.png, "Analyze icon"}
 |
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-+a.+ What table or display will you create? _(🌟Then go create it!🌟)_
+@fitbruby{100%}{fun is-cat(r): r["species"] == "cat" end}{If you only need *_some_* rows, define your filter function here (Need help? Use the Design Recipe!)}
 
-@fitbruby{95%}{lr-plot of weeks v. age for cats}{box-plot of pounds, pie-chart of species, table of dogs sorted by age, etc.}
+@fitbruby{100%}{}{If you need to make a *_new_* column, define your builder function here (Need help? Use the Design Recipe!)}
 
-+b.+ @fitbruby{95%}{lr-plot(animals-table.filter(is-cat), "name", "age", "weeks")}{Write the Pyret code here. Use the line below if needed!}
+@fitbruby{100%}{lr-plot(animals-table.filter(is-cat), "name", "age", "weeks")}{Write the code that will make the table or display you want.}
 
-@fitb{99%}{}
-
-| @n
 | @image{../images/InterpretData.png, "Interpret icon"}
 |
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-+a.+ What did it tell you? What can you infer?
+@fitbruby{100%}{The slope is positive (0.23) and R=0.566, so there is a moderate relationship}{What did you find out? What can you infer?}
 
-@fitb{95%}{The slope is positive (0.23) and R=0.566, so there is a moderate relationship }
+@fitb{100%}{}
 
-// wrap this in +...+ so that asciidoctor doesn't try to manage lists for us
-+b.+ What new question(s) does this raise?
+@fitbruby{100%}{Is the relationship different for other animals?}{What new question(s) does this raise?}
 
-@fitb{95%}{Is the relationship different for other animals?}
-
-@fitb{95%}{Is the relationship different for fixed v. unfixed cats?}
+@fitb{100%}{Is the relationship different for fixed v. unfixed cats?}
 |===
+
 
 _Write your Data Story below:_
 
-@n I performed a linear regression on a sample of @fitbruby{60ex}{_cats from the shelter_}{dataset or subset} and found @fitbruby{80ex}{_a moderate (r=0.566), positive_}{a weak/strong/moderate (R=...), positive/negative} correlation between @fitbruby{60ex}{_age of the cats (in years)_}{[x-axis]} and @fitbruby{60ex}{_number of weeks to adoption_}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{_year_}{[x-axis units]} increase in @fitbruby{30ex}{_age_}{[x-axis]} is associated with a @fitbruby{30ex}{_0.23 week_}{[slope, y-units]} @fitbruby{30ex}{_increase_}{[increase/decrease]} in @fitbruby{30ex}{_adoption time_}{[y-axis]}.
+I performed a linear regression on a sample of @fitbruby{60ex}{cats at the shelter}{dataset or subset} and found @fitbruby{80ex}{moderate, positive}{a weak/strong/moderate (R=...), positive/negative} correlation between @fitbruby{60ex}{age}{[x-axis]} and @fitbruby{60ex}{time to adoption}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{year}{[x-axis units]} increase in @fitbruby{20ex}{age}{[x-axis]} is associated with a @fitbruby{30ex}{.23}{[slope, y-units]} @fitbruby{30ex}{week}{[increase/decrease]} in @fitbruby{30ex}{time to adoption}{[y-axis]}.

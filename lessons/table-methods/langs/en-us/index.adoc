@@ -1,7 +1,7 @@
 = Table Methods
 @description{Students learn about _table methods_, which allow them to order, filter, and build columns to extend the animals table.}
 
-@lesson-prereqs{defining-functions}
+@lesson-prereqs{functions-solving-word-problems}
 
 @keywords{filter, filtering}
 
@@ -94,11 +94,29 @@ Have students find the contract for `.order-by` in their contracts pages. The `.
 Students learn how to _filter_ tables by removing Rows.
 
 === Launch
-Explain to students that you have "Function Cards", which describe the purpose statement of a function that consumes a Row from a table of students, and produces a Boolean (e.g. - "this student is wearing glasses"). Select a volunteer to be the "filter method", and have them _randomly choose_ a function card from from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set, and make sure they read it without showing it to anyone else.
+Announce to the class that you are going to select 6-8 students, each of whom will represent a  unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
 
-Have 6-8 students line up in front of the classroom, and have the filter method go to each student and say "stay" or "sit" depending on whether their function would return true or false for that student. If they say "sit", the student sits down. If they say "stay", the student stays standing.
+Tell the class that you are going to select a volunteer who will play the role of… The Filter Method!
 
-Ask the class: based on who sat and who stayed, _what function was on the card?_
+Hand the Filter Method a function card from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set.  Publicly tell that student that this is __their function__. Instruct them to review their function’s name, contract, and purpose statement, but to keep that information a secret.
+
+Explain to the class that the Filter Method will walk from one student to the next, referring to their unique function (on the card) in order to determine if each student should stand or sit.
+
+Here’s how that might look if the Filter Method chose a function called `likes-pizza`.
+
+Filter Method to Student 1: Do you like pizza?
+
+Student 1: Yes
+
+Filter Method: Remain standing. (Student 1 remains standing.)
+
+Filter Method to Student 2: Do you like pizza?
+
+Student 2: No.
+
+Filter Method: Sit down. (Student 2 sits.)
+
+After the Filter Method has applied the function to each student, ask the class: Based on who sat and who stayed, what function was the Filter Method applying? _What does the Filter Method do to a dataset?_
 
 [.lesson-point]
 The `.filter` method takes a _function_, and produces a new table containing only rows for which the function returns `true`.

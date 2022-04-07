@@ -447,13 +447,9 @@
     ;(printf "f : ~s\n" (file-exists? (format "../../lesson-order.txt")))
     ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
     ;(printf "*lesson-prereqs* = ~s\n" *lesson-prereqs*)
-    ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
-    ;(display "[.sidebarlessons]\n" o)
-    (display "*Lessons* %SIDEBARLESSONSCHECKBOX%\n" o)
-    ;(display "== Pathway\n" o)
+    (display "*Lessons*\n" o)
 
-    ;(newline o)
     (display (create-begin-tag "ul" "") o)
     #|
     (for ([lesson relevant-lessons])
@@ -1544,8 +1540,7 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)
-                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
+                                     *containing-directory*)]
                            [(string=? directive "preparation")
                             (unless *lesson-plan*
                               (error 'ERROR
