@@ -52,7 +52,7 @@ Student work in groups or pairs. They will sort various columns on the table by 
 
 . Can you think of a situation where CODAP's default behavior - to alter the table each time we sort it - might inhibit more sophisticated data analysis?
 
-== Sorting Tables, Part 2 @duration{10 minutes}
+== Sorting Tables, Part 2 @duration{20 minutes}
 
 === Overview
 Using the `Sort` Transformer, students sort rows of a table in ascending or descending order, according to one column.
@@ -77,6 +77,7 @@ Tell students that we are going to create a copy of the Animals dataset in which
 - What do you notice? What do you wonder?
 - Why might it be useful to name the Transformer?
 - What do you think a _purpose statement_ is?
+- What do you think a _contract_ is?
 --
 
 === Investigate
@@ -102,7 +103,7 @@ In order to apply this Transformer, we’ll need to provide it with several impo
 
 @n *Contract*. Contracts help us keep track of the different Transformers we’ll be using, and how they operate on each Row of a table.
 
-Every contract has a _domain_ and a _range_.  The Domain of the Transformer Expression is the type(s) of data we give it. For our purposes, this will always be a single Row of the table. The Range of the Transformer Expression is the type of data the transformer produces from that Row.
+Every contract has a _domain_ and a _range_.  The Domain of the Transformer Expression is the type(s) of data we give it. For our purposes, this will always be a single Row of the table. The Range of the Transformer Expression is the type of data the Transformer produces from that Row.
 
 [.lesson-instruction]
 --
@@ -113,12 +114,12 @@ Every contract has a _domain_ and a _range_.  The Domain of the Transformer Expr
 
 For now, it is important to understand that contracts are a simple notation (domain → range) for keeping track of the set of all possible inputs and outputs for a Transformer. Students will get lots of practice with contracts as they work with Transformers in this lesson and others.
 
-@n  *Purpose Statement*. The Purpose Statement is  a concise, detailed description of what a Transformer does with its inputs. The purpose statement is a comment in the code - something the computer doesn’t actually read. It is a note that students write for their future selves.
+@n  *Purpose Statement*. The Purpose Statement is  a concise, detailed description of what a Transformer does with its inputs. The Purpose Statement is a comment in the code - something the computer doesn’t actually read. It is a note that students write for their future selves.
 
 [.lesson-instruction]
 --
-- What would be an appropriate purpose statement for order-by-name?
-- Type in your purpose statement.
+- What would be an appropriate Purpose Statement for `order-by-name`?
+- Type in your Purpose Statement.
 --
 
 @n *The Expression.* For sort, the expression is simply the column that we want to sort.
@@ -126,7 +127,7 @@ For now, it is important to understand that contracts are a simple notation (dom
 [.lesson-instruction]
 --
 - Notice that as you begin to type, CODAP offers suggestions that you can select.
-- It is absolutely essential that capitalization and spelling match the capitalization and spelling on the data table.
+- It is absolutely essential that the capitalization and spelling match the capitalization and spelling on the data table.
 - When entering a string, remember the quotation marks!
 --
 
@@ -139,7 +140,7 @@ For now, it is important to understand that contracts are a simple notation (dom
 --
 
 === Common Misconceptions
-Students may be more familiar with a `sort` functionality that actually change the table. CODAP Transformers produce a _brand new table_. These new and modified tables are automatically saved. CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
+Students may be more familiar with a `Sort` functionality that actually changes the table. CODAP Transformers produce a _brand new table_. These new and modified tables are automatically saved. CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
 
 === Synthesize
 - Does the Transformer `Sort` produce a _new_ table, or change the existing one?
