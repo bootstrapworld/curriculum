@@ -164,31 +164,31 @@
    )
   ("rocket-height" "Rocket Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=Tl7bbvF9Kw")
+   ("wescheme" "hhttps://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")
-   ("wescheme" "https://www.wescheme.org/view?publicId=3QDJBmzYp0")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=3QDJBmzYp0")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
-   ("wescheme" "https://www.wescheme.org/view?publicId=PJMfrSvGRl")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=PJMfrSvGRl")
    )
   ("sample-game-w-distance" "Sample Game with Distance Lines Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W")
-   ("wescheme" "https://www.wescheme.org/view?publicId=0bCivugY3P")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=0bCivugY3P")
    )
   ("inequalities-simple" "Simple Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Nfd30NVNwPzDu0C02dsCbmKecbMVfcQV")
-   ("wescheme" "https://www.wescheme.org/view?publicId=EA6R0E97nV")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
    )
   ("inequalities-compound" "Compound Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=11M7tp22-lOwYK9jJD67mM_RP836ikARd")
-   ("wescheme" "https://www.wescheme.org/view?publicId=yFnDbsSnR7")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=yFnDbsSnR7")
    )
   ("inequalities-sam" "Sam the Butterfly Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1muE7xY-NKW5IJLeOnAu9Q31JUT6ns_n7")
-   ("wescheme" "https://www.wescheme.org/view?publicId=0elP8WrmfM")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM")
    )
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
