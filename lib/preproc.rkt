@@ -1544,8 +1544,7 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)
-                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
+                                     *containing-directory*)]
                            [(string=? directive "preparation")
                             (unless *lesson-plan*
                               (error 'ERROR
