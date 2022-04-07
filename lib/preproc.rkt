@@ -447,13 +447,9 @@
     ;(printf "f : ~s\n" (file-exists? (format "../../lesson-order.txt")))
     ;(printf "doing display-prereqs-bar ~s\n" all-lessons )
     ;(printf "*lesson-prereqs* = ~s\n" *lesson-prereqs*)
-    ;(display "\n\n=== Lessons\n" o)
     (display (create-begin-tag "div" ".sidebarlessons") o)
-    ;(display "[.sidebarlessons]\n" o)
-    (display "*Lessons* %SIDEBARLESSONSCHECKBOX%\n" o)
-    ;(display "== Pathway\n" o)
+    (display "*Lessons*\n" o)
 
-    ;(newline o)
     (display (create-begin-tag "ul" "") o)
     #|
     (for ([lesson relevant-lessons])
