@@ -36,45 +36,38 @@
 Students review the notion of spread itself, and build up to the formula by annotating histograms.
 
 === Launch
-[.lesson-instruction]
-* When should we use the @vocab{mean} instead of the median?
-** When there isn't much skew.
-* In that situation, _why_ should we use the mean instead of the median?
-** Because the mean includes data from every value, instead of just one or two values.
-
-When summarizing a column, we'd like to use a measure that gathers data from every value. Sometimes we can't - like when the data is heavily skewed - but otherwise that's our preference.
-
-We already have one method of measuring spread: calculating the Five Number Summary, and then using it to generate the @vocab{Range of a dataset} and the @vocab{Interquartile Range}. These five numbers can be visualized as a box-plot, and give us a sense for how the data is spread out. Unfortunately, that measure of spread relies on _just five numbers_, and doesn't take any other datapoints into account. It's a lot like using the median when we could be using the mean.
-
-Fortunately, there's another measure we can use! By far the most useful way to summarize the center and @vocab{spread} of a quantitative data set is to report its @vocab{mean} and @vocab{standard deviation}.
-
 [.lesson-point]
 The Animal Shelter Bureau reports that the mean age of shelter cats is 3 years.
 
+Does this mean all the cats are close to 3 years old? Why or why not?
+
 [.lesson-instruction]
+--
+Let's take a look at some cats from our shelter.
+
+- Turn to @printable-exercise{std-dev-cat-age.adoc}, and complete numbers 1-4.
+- What did you get for the mean? Does it match what the Animal Shelter Bureau says?
 - Can you think of four ages, such that the mean age for all of them is 3?
 - Can you think of a _different_ spread of four ages that would have the same mean?
-- How many can you think of?
+- How many different sets of four ages can you think of, which all have a mean of 3?
+--
 
-There are all sorts of data sets that have a mean of 3. We could imagine a shelter where every cat is between 1 and 5, so each cat only deviates from the mean by 1-2 years! But we could also imagine a shelter with lots of kittens and old cats, where every cat deviates by as much as 10 years from the mean!
+Without a measure of @vocab{spread}, just knowing the mean doesn't tell us enough about the shape of the data. When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box-plot. Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
 
-Instead of focusing on the five datapoints used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. @right{@image{images/histogram-with-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. The mean is labeled at 3.", 450}} In other words, we want to know what kind of deviation is "standard" for all the points. +
+[.lesson-point]
+@vocab{Standard deviation} is the most useful way to summarize @vocab{spread} of a quantitative column.
 
-A set of 10 shelter cats, as shown in the histogram here, has a *mean age of 3*. Looking at the histogram for ten cat ages, it makes sense that they average out to 3: the intervals run from 1 to 8, and there are more values in the bottom half of the intervals than in the top half so we'd expect the mean to be slightly lower than 4.
+Instead of focusing on the handful of datapoints used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
 === Investigate
-Now that you’ve thought about individual distances from the mean, it’s time to think about rolling all of these distances into one "typical" distance.
 
-[.lesson-instruction]
-Complete numbers 1-5 of @printable-exercise{std-dev-cat-age.adoc}.
-
-@right{@image{images/histogram-w-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An arrow is superimposed, pointing to the mean at 3.", 450}} In this image, we've drawn an arrow to the mean at 3.
+@right{@image{images/histogram-w-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. A star labeling the mean is drawn on the x-axis at 3.", 450}} In this image, we've drawn a star to show the mean at 3. But there are all sorts of data sets that have a mean of 3. We could imagine a shelter where every cat is between 2 and 4, so each cat only deviates from the mean by 1 year! But we could also imagine a shelter with lots of kittens and a few old cats, where every cat deviates by as much as 10 years from the mean!
 
 How far away is each data point from 3?
 
 @clear
 
-@right{@image{images/histogram-w-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An arrow points to the mean at 3, and more arrows show the distance between the mean and each poin in the first interval.", 450}} In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
+@right{@image{images/histogram-w-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. A star labeling the mean is drawn on the x-axis at 3, and  arrows show the distance between the mean and each point in the first interval.", 450}} In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
 [.lesson-instruction]
 --
@@ -84,7 +77,7 @@ Complete numbers 6 and 7 of @printable-exercise{std-dev-cat-age.adoc}. Now we ne
 - Why did you choose the number you did?
 --
 
-The actual formula for computing standard deviation involves squaring each of those distances, adding all the squares together, and then taking the square root of the sum. Can you think of any other time you've had to take the square root of a sum-of-squared-distances? (_HINT: think right triangles...)_
+The actual formula for computing standard deviation involves squaring each of those distances, adding all the squares together, finding the average square, and then taking the square root of the average. Can you think of any other time you've had to take the square root of a sum-of-squared-distances? (_HINT: think right triangles...)_
 
 [.lesson-instruction]
 Complete numbers 8-10 of @printable-exercise{std-dev-cat-age.adoc}.
@@ -93,7 +86,7 @@ Complete numbers 8-10 of @printable-exercise{std-dev-cat-age.adoc}.
 - Can you explain why two datasets can have the same mean, but different standard deviations?
 - What kind of dataset would have a standard deviation of zero?
 
-== Comparing Standard Deviations @duration{10 minutes}
+== Comparing Standard Deviations @duration{20 minutes}
 
 === Overview
 Students compare centers and (more importantly) spreads - of two quantitative data sets by comparing their histograms. Both mean and standard deviation can be affected by outliers and/or skewness.
@@ -116,13 +109,17 @@ What is the standard deviation for the weights of _all_ the animals at our datas
 @right{@image{images/histogram-with-outlier.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An 11th cat has been added at 16 years.", 450}} Here is the same histogram we saw before, but now with an 11th cat that is 16 years old. That's quite an outlier!
 
 [.lesson-instruction]
-- What will this outlier do to the mean?
-- What will this outlier do to the standard deviation?
+- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set.
+- What did this outlier do to the mean?
+- What did this outlier do to the standard deviation?
+- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 
 === Investigate
+
+Take together, the mean and standard deviation tell us where the data is centered and how far the data strays from that center. For example, when writing about the ages of cats in our shelter, we might say "the mean age is 3 and the standard devation is 2.4, so most cats are between the ages of 1 and 5 years old."
+
 [.lesson-instruction]
-- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set.
-- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
+- Turn to @printable-exercise{pages/analysis-stdev-animals.adoc} to get some practice using the Data Cycle to ask and answer questions about the spread of a column.
 
 === Synthesize
 - How much did adding an outlier change the mean? The standard deviation?
@@ -143,7 +140,3 @@ Students repeat the previous activity, this time applying it to their own datase
 
 === Synthesize
 Have students share their findings with one another.
-
-
-== Additional Exercises:
-- @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}
