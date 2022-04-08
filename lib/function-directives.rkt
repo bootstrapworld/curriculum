@@ -1035,21 +1035,21 @@
 (define (data-cycle instructions
                     #:proglang [proglang #f]
                     #:solutions-mode? [solutions-mode? #f]
-                    #:question [question #f]
+                    #:question [question ""]
                     #:show-question? [show-question? #f]
-                    #:rows [rows '()]
+                    #:rows [rows ""]
                     #:show-rows? [show-rows? #f]
-                    #:cols [cols '()]
+                    #:cols [cols ""]
                     #:show-cols? [show-cols? #f]
-                    #:filter-fn [filter-fn #f]
+                    #:filter-fn [filter-fn ""]
                     #:show-filter? [show-filter? #f]
-                    #:build-fn [build-fn #f]
+                    #:build-fn [build-fn ""]
                     #:show-build? [show-build? #f]
-                    #:expression [expression #f]
+                    #:expression [expression ""]
                     #:show-expression? [show-expression? #f]
-                    #:finding [finding #f]
+                    #:finding [finding ""]
                     #:show-finding? [show-finding? #f]
-                    #:new-question [new-question #f]
+                    #:new-question [new-question ""]
                     #:show-new-question? [show-new-question? #f]
                     )
 
@@ -1075,7 +1075,7 @@
     (set! *show-new-question?* #t))
 
   (string-append
-    "[.data-cycle, cols=\"^,^3, .^20\", stripes=\"none\"]\n"
+    "[.data-cycle, cols=\"^.^3, .^20\", stripes=\"none\"]\n"
     "|===\n"
     "| "
     "image:../images/AskQuestions.png[Ask Questions icon]"

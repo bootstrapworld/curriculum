@@ -146,14 +146,17 @@
     (display (create-end-tag "span") o)))
 
 (define (fitbruby width text ruby)
+  (when (string=? width "")
+    (set! width "100%"))
   (string-append
     (create-begin-tag "span" ".fitbruby" #:attribs
-                      (format "style=\"width: ~a\"" width))
-    (string-append
-      text
-      (create-begin-tag "span" ".ruby")
-      ruby
-      (create-end-tag "span"))
+                      (if (string=? width "")
+                          "style=\"flex-grow: 1\""
+                          (format "style=\"width: ~a\"" width)))
+    text
+    (create-begin-tag "span" ".ruby")
+    ruby
+    (create-end-tag "span")
     (create-end-tag "span")))
 
 (define (fitb width text)
