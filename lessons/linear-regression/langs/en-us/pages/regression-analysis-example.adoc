@@ -1,40 +1,23 @@
 = Data Cycle: Regression Analysis (Example)
 
-[.data-cycle, cols="^.^3, .^20", frame="none", stripes="none"]
-|===
-| @image{../images/AskQuestions.png, "Ask Questions icon"}
-|
-@fitbruby{100%}{How much does Age determine Adoption time for cats?}{What question do you have?}
-
-@fitb{100%}{}
-
-What type of question is this? (circle one) @hspace{1.5em} _Lookup_ @hspace{1.5em} *Arithmetic* @hspace{1.5em} _Statistical_
-
-| @image{../images/ConsiderData.png, "Consider Data icon"}
-|
-@fitbruby{100%}{cats at the shelter}{What Rows? (Just the cats, fixed rabbits, etc.)}
-
-@fitbruby{100%}{name, age, and weeks}{Which Column(s)? (age, weight-in-kilograms, weeks, etc.)}
-
-| @image{../images/AnalyzeData.png, "Analyze icon"}
-|
-@fitbruby{100%}{fun is-cat(r): r["species"] == "cat" end}{If you only need *_some_* rows, define your filter function here (Need help? Use the Design Recipe!)}
-
-@fitbruby{100%}{}{If you need to make a *_new_* column, define your builder function here (Need help? Use the Design Recipe!)}
-
-@fitbruby{100%}{lr-plot(animals-table.filter(is-cat), "name", "age", "weeks")}{Write the code that will make the table or display you want.}
-
-| @image{../images/InterpretData.png, "Interpret icon"}
-|
-@fitbruby{100%}{The slope is positive (0.23) and R=0.566, so there is a moderate relationship}{What did you find out? What can you infer?}
-
-@fitb{100%}{}
-
-@fitbruby{100%}{Is the relationship different for other animals?}{What new question(s) does this raise?}
-
-@fitb{100%}{Is the relationship different for fixed v. unfixed cats?}
-|===
-
+@data-cycle{ ""
+  #:question "How much does Age determine Adoption time for cats?"
+  #:show-question? #t
+  #:rows "cats at the shelter"
+  #:show-rows? #t
+  #:cols "name, age, and weeks"
+  #:show-cols? #t
+  #:filter-fn "fun is-cat(r): r[\"species\"] == \"cat\" end"
+  #:show-filter? #t
+  #:build-fn ""
+  #:show-build? #f
+  #:expression "lr-plot(animals-table.filter(is-cat), \"name\", \"age\", \"weeks\")"
+  #:show-expression? #t
+  #:finding "The slope is positive (0.23) and R=0.566, so there is a moderate, positive relationship"
+  #:show-finding? #t
+  #:new-question "Is the relationship different for other animals?"
+  #:show-new-question? #t
+}
 
 _Write your Data Story below:_
 
