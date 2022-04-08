@@ -180,7 +180,7 @@
    )
   ("inequalities-simple" "Simple Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Nfd30NVNwPzDu0C02dsCbmKecbMVfcQV")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ")
    )
   ("inequalities-compound" "Compound Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=11M7tp22-lOwYK9jJD67mM_RP836ikARd")
