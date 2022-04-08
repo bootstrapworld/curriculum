@@ -17,6 +17,10 @@
   decrement-top-span-stack
   display-begin-span
   display-end-span
+
+  fitbruby
+  fitb
+  hspace
   )
 
 (define (create-begin-tag tag-name classes #:attribs [attribs #f])
@@ -140,3 +144,29 @@
 (define (display-end-span o)
   (when (span-real? (pop-span-stack))
     (display (create-end-tag "span") o)))
+
+(define (fitbruby width text ruby)
+  (string-append
+    (create-begin-tag "span" ".fitbruby" #:attribs
+                      (format "style=\"width: ~a\"" width))
+    (string-append
+      text
+      (create-begin-tag "span" ".ruby")
+      ruby
+      (create-end-tag "span"))
+    (create-end-tag "span")))
+
+(define (fitb width text)
+  (string-append
+    (if (string=? width "")
+        (create-begin-tag "span" ".fitb" #:attribs "style=\"flex-grow: 1\"")
+        (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
+    text
+    (create-end-tag "span")))
+
+(define (hspace width)
+  (string-append
+    (create-begin-tag "span" ".quad" #:attribs
+                      (format "style=\"width: ~a\"" width))
+    (create-end-tag "span"))
+  )
