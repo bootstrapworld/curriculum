@@ -10,6 +10,7 @@
          wescheme->wescheme
          vars-to-commaed-string vars-to-string
          design-codap-recipe
+         data-cycle
          )
 
 (define *solutions-mode?* #f)
@@ -1019,3 +1020,109 @@
     (if *show-formula-expression?* body "")
     "</span></p>\n++++"
     "\n\n"))
+
+;;;; Data cycle
+
+(define *show-question?* #f)
+(define *show-rows?* #f)
+(define *show-cols?* #f)
+(define *show-filter?* #f)
+(define *show-build?* #f)
+(define *show-expression?* #f)
+(define *show-finding?* #f)
+(define *show-new-question?* #f)
+
+(define (data-cycle instructions
+                    #:proglang [proglang #f]
+                    #:solutions-mode? [solutions-mode? #f]
+                    #:question [question #f]
+                    #:show-question? [show-question? #f]
+                    #:rows [rows '()]
+                    #:show-rows? [show-rows? #f]
+                    #:cols [cols '()]
+                    #:show-cols? [show-cols? #f]
+                    #:filter-fn [filter-fn #f]
+                    #:show-filter? [show-filter? #f]
+                    #:build-fn [build-fn #f]
+                    #:show-build? [show-build? #f]
+                    #:expression [expression #f]
+                    #:show-expression? [show-expression? #f]
+                    #:finding [finding #f]
+                    #:show-finding? [show-finding? #f]
+                    #:new-question [new-question #f]
+                    #:show-new-question? [show-new-question? #f]
+                    )
+
+  (set! *solutions-mode?* solutions-mode?)
+
+  (set! *show-question?* show-question?)
+  (set! *show-rows?* show-rows?)
+  (set! *show-cols?* show-cols?)
+  (set! *show-filter?* show-filter?)
+  (set! *show-build?* show-build?)
+  (set! *show-expression?* show-expression?)
+  (set! *show-finding?* show-finding?)
+  (set! *show-new-question?* show-new-question?)
+
+  (when *solutions-mode?*
+    (set! *show-question?* #t)
+    (set! *show-rows?* #t)
+    (set! *show-cols?* #t)
+    (set! *show-filter?* #t)
+    (set! *show-build?* #t)
+    (set! *show-expression?* #t)
+    (set! *show-finding?* #t)
+    (set! *show-new-question?* #t))
+
+  (string-append
+    "[.data-cycle, cols=\"^,^3, .^20\", stripes=\"none\"]\n"
+    "|===\n"
+    "| "
+    "image:../images/AskQuestions.png[Ask Questions icon]"
+    "\n"
+    "|\n"
+    (fitbruby "" question "What question do you have?")
+    "\n\n"
+    (fitb "" "")
+    "\n\n"
+    "What type of question is this? (circle one) "
+    (hspace "1.5em")
+    " Lookup "
+    (hspace "1.5em")
+    " Arithmetic "
+    (hspace "1.5em")
+    " Statistical"
+    "\n\n"
+    "| "
+    "image:../images/ConsiderData.png[Consider Data icon]"
+    "\n"
+    "|\n"
+    (fitbruby "" rows "What Rows? (Just the cats, fixed rabbits, etc.)")
+    "\n\n"
+    (fitbruby "" cols "What Columns? (age, weight-in-kilograms, weeks, etc.)")
+    "\n\n"
+    "| "
+    "image:../images/AnalyzeData.png[Analyze icon]"
+    "\n"
+    "|\n"
+    (fitbruby "" filter-fn "If you only need _*some*_ rows, define your filter function here (Need help? Use the Design Recipe!)")
+    "\n\n"
+    (fitbruby "" build-fn "If you need to make a _*new*_ column, define your builder function  here (Need help? Use the Design Recipe!)")
+    "\n\n"
+    (fitbruby "" expression "Write the code that will make the table or display what you want.")
+    "\n\n"
+    "| "
+    "image:../images/InterpretData.png[Interpret icon]"
+    "\n"
+    "|\n"
+    (fitbruby "" finding "What did you find out? What can you infer?")
+    "\n\n"
+    (fitb "" "")
+    "\n\n"
+    (fitbruby "" new-question "What new question(s) does this raise?")
+    "\n\n"
+    (fitb "" "")
+    "\n"
+    "|==="
+    "\n\n")
+  )
