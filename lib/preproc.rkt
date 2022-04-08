@@ -1653,10 +1653,11 @@
                            [(assoc directive *macro-list*)
                             => (lambda (s)
                                  (display (cadr s) o))]
-                           [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe"))
+                           [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe" "data-cycle"))
                             (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise") design-recipe-exercise]
                                            [(string=? directive "design-codap-recipe") design-codap-recipe]
+                                           [(string=? directive "data-cycle") data-cycle]
                                            [else (error 'ERROR "preproc-adoc-file: deadc0de")])])
                               (let ([g (read-group i directive)])
                                 (let ([args (string-to-form g)])
