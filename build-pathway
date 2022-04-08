@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-03-04 # last modified
+LASTMOD=2022-04-08 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -719,7 +719,7 @@ function addproglang() {
   if test "$proglangneeded"; then
     $SED -i \
       -e 's/^<body class="/\0'$proglangneeded' /' \
-      -e 's/<span class="headless-design-recipe.FOR[a-z]*"><\/span>//' \
+      -e 's/<p><span class="headless-design-recipe.FOR[a-z]*"><\/span><\/p>//' \
       $f
   fi
 }
