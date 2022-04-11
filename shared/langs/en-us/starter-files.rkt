@@ -13,21 +13,28 @@
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
    )
-  ("gt" "gt Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
-   ("wescheme" "https://www.wescheme.org/view?publicId=KCEKxaxJ4l")
-   )
+  
+  ("collaboration" "Collaboration Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN&v=1904b2c"))
+  
   ("bc" "bc Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0&v=1904b2c")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
     )
+  ("gt" "gt Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
+   ("wescheme" "https://www.wescheme.org/view?publicId=KCEKxaxJ4l")
+   )
+
   ("mood-generator" "Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
    )
+  
   ("mood-generator-ask" "Alternate Version of the Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e")
    )
+  
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN")
    ("wescheme" "https://www.wescheme.org/view?publicId=n4DkTyYbQh")

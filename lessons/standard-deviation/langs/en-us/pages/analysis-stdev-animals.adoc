@@ -2,40 +2,25 @@
 
 The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks? Use the Data Cycle to find out. Write your findings on the lines below, in response to the question.
 
-[.data-cycle, cols="^.^3, .^20", frame="none", stripes="none"]
-|===
-| @image{../images/AskQuestions.png, "Ask Questions icon"}
-|
-@fitbruby{100%}{Do the animals all get adopted in around the same length of time?}{What question do you have?}
 
-@fitb{100%}{}
-
-What type of question is this? (circle one) @hspace{1.5em} _Lookup_ @hspace{1.5em} _Arithmetic_ @hspace{1.5em} _Statistical_
-
-| @image{../images/ConsiderData.png, "Consider Data icon"}
-|
-@fitbruby{100%}{}{What Rows? (Just the cats, fixed rabbits, etc.)}
-
-@fitbruby{100%}{}{Which Column(s)? (age, weight-in-kilograms, weeks, etc.)}
-
-| @image{../images/AnalyzeData.png, "Analyze icon"}
-|
-@fitbruby{100%}{}{If you only need *_some_* rows, define your filter function here (Need help? Use the Design Recipe!)}
-
-@fitbruby{100%}{}{If you need to make a *_new_* column, define your builder function here (Need help? Use the Design Recipe!)}
-
-@fitbruby{100%}{}{Write the code that will make the table or display you want.}
-
-| @image{../images/InterpretData.png, "Interpret icon"}
-|
-@fitbruby{100%}{}{What did you find out? What can you infer?}
-
-@fitb{100%}{}
-
-@fitbruby{100%}{}{What new question(s) does this raise?}
-
-@fitb{100%}{}
-|===
+@data-cycle{ ""
+  #:question "Do the animals all get adopted in around the same length of time?"
+  #:show-question? #t
+  #:rows "All of them"
+  #:show-rows? #f
+  #:cols "weeks"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression "stdev(animals-table, \"weeks\")"
+  #:show-expression? #f
+  #:finding "With a standard deviation of more than 6 weeks, there's a lot of variability"
+  #:show-finding? #f
+  #:new-question "Do all species have this much variability?"
+  #:show-new-question? #f
+}
 
 "If the average adoption time is 5.75 weeks, do all the animals get adopted in roughly 4-6 weeks?"
 
