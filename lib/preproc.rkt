@@ -928,6 +928,7 @@
 (define (display-alternative-proglang o)
   ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglang* *target-pathway* *narrative* *lesson-plan*)
   (when (and *other-proglang*
+             (not (null? *other-proglang*))
              (or *narrative* *lesson-plan*))
     ; (printf "doing display-alternative-proglang really\n")
     (display
@@ -937,33 +938,41 @@
             (filter (lambda (x) x)
                     (map (lambda (x)
                            (cond [(not x) #f]
-                                 [(string=? x "wescheme")
+                                 [(and (string=? *proglang* "pyret") (string=? x "wescheme"))
                                   (cond [*narrative*
-                                          (cond [(member *target-pathway* '("algebra-wescheme" "algebra-pyret"))
-                                                 (format "link:~acourses/algebra-~a/index.shtml[~a]" *dist-root-dir*
-                                                         (if (string=? *proglang* "pyret") "wescheme" "pyret")
-                                                         (if (string=? *proglang* "pyret") "WeScheme" "Pyret"))]
+                                          (cond [(member *target-pathway* '("algebra-pyret"))
+                                                 (format "link:~acourses/algebra-wescheme/index.shtml[WeScheme]" *dist-root-dir*)]
                                                 [else #f])]
                                         [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
-                                                  (if (string=? *proglang* "pyret")
-                                                      (string-append *lesson-plan* "-wescheme")
-                                                      (regexp-replace "-wescheme$" *lesson-plan* ""))
-                                                  (if (string=? *proglang* "pyret") "WeScheme" "Pyret"))]
+                                          (format "link:~alessons/~a-wescheme/index.shtml[WeScheme]" *dist-root-dir*
+                                                  *lesson-plan*)]
                                         [else #f])]
-                                 [(string=? x "codap")
+                                 [(and (string=? *proglang* "wescheme") (string=? x "pyret"))
                                   (cond [*narrative*
-                                          (cond [(member *target-pathway* '("data-science" "data-science-codap"))
-                                                 (format "link:~acourses/data-science~a/index.shtml[~a]" *dist-root-dir*
-                                                         (if (string=? *proglang* "pyret") "-codap" "")
-                                                         (if (string=? *proglang* "pyret") "CODAP" "Pyret"))]
+                                          (cond [(member *target-pathway* '("algebra-wescheme"))
+                                                 (format "link:~acourses/algebra-pyret/index.shtml[Pyret]" *dist-root-dir*)]
                                                 [else #f])]
                                         [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
-                                                  (if (string=? *proglang* "pyret")
-                                                      (string-append *lesson-plan* "-codap")
-                                                      (regexp-replace "-codap$" *lesson-plan* ""))
-                                                  (if (string=? *proglang* "pyret") "CODAP" "Pyret"))]
+                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                                      (regexp-replace "-wescheme$" *lesson-plan* ""))]
+                                        [else #f])]
+                                 [(and (string=? *proglang* "pyret") (string=? x "codap"))
+                                  (cond [*narrative*
+                                          (cond [(member *target-pathway* '("data-science"))
+                                                 (format "link:~acourses/data-science-codap/index.html[CODAP]" *dist-root-dir*)]
+                                                [else #f])]
+                                        [*lesson-plan*
+                                          (format "link:~alessons/~a-codap/index.shtml[CODAP]" *dist-root-dir*
+                                                  *lesson-plan*)]
+                                        [else #f])]
+                                 [(and (string=? *proglang* "codap") (string=? x "pyret"))
+                                  (cond [*narrative*
+                                          (cond [(member *target-pathway* '("data-science-codap"))
+                                                 (format "link:~acourses/data-science/index.shtml[Pyret]" *dist-root-dir*)]
+                                                [else #f])]
+                                        [*lesson-plan*
+                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                                      (regexp-replace "-codap$" *lesson-plan* ""))]
                                         [else #f])]
                                  [else #f]))
                          *other-proglang*)) ", ") ")")) o)
