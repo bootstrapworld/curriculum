@@ -31,7 +31,8 @@
                        (let ([x (read-line i)])
                          (if (eof-object? x) (reverse xx)
                              (let ([x (unquote-string (string-trim x))])
-                               (loop (if (or (regexp-match #rx";" x) (string=? x "")) xx
+                               (set! x (regexp-replace " *;.*$" x ""))
+                               (loop (if (string=? x "") xx
                                          (cons x xx)))))))]
             [(lines) (let loop ([xx '()])
                        (let ([x (read-line i)])

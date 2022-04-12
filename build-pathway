@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-04-11 # last modified
+LASTMOD=2022-04-12 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1970,7 +1970,7 @@ function copycommonlessons() {
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
-      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *$'|grep -v '^ *;'); do
+      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
         copylessondir $lessonDir
       done
     done
@@ -2012,7 +2012,7 @@ function updatepathwaylist() {
   rm -f lesson-order.txt.nu
   touch lesson-order.txt.nu
   local lessonDir=
-  for lessonDir in $(cat lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+  for lessonDir in $(cat lesson-order.txt|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
     if test -d ../../lessons/$lessonDir-$proglang; then
       echo $lessonDir-$proglang >> lesson-order.txt.nu
     else
@@ -2125,8 +2125,9 @@ function buildpathway() {
       echo
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$NATLANG
     else
-      export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
+      # export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
+        $SED -e 's/;.*//' |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
     fi
