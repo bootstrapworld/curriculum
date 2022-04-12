@@ -10,7 +10,6 @@
   print-course-banner
   print-other-resources-intro
   print-teach-remotely
-  print-preparation
   print-ordering-workbooks
   print-link-to-glossary
   print-link-to-standards
@@ -54,13 +53,6 @@
       "If you're teaching remotely, we've assembed an link:../../ImplementationNotes.shtml[Implementation Notes] page that makes\n"
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
-
-(define (print-preparation workbook-link o)
-  (display
-    (string-append
-      "* Students should have " workbook-link " and something to write with\n"
-      "* If using the Language Table visual, view the link:javascript:showLangTable()[current state of the language] at this point in the pathway"
-      ) o))
 
 (define (print-course-logo course make-image o)
   ; (printf "doing print-course-logo ~s\n" course)

@@ -30,17 +30,30 @@
          "MLR.2"    ; strategy box in lesson
         )
 
-    ("defining-functions" 
-        "MP.4"      ; STEMworks
-        "MLR.7"
-        "MLR.3"     ; page focused just on this
-        "P4" 
-        )
-
     ("debugging" 
         "MP.6"
         "P2"
         "P6"
+        )
+    
+    ("functions-make-life-easier"
+        "MP.6"
+        "MP.7"
+        "MP.8"
+        "P4" )
+
+    ("functions-examples-definitions"
+        "MP.6"
+        "MP.7"
+        "MP.8"
+        )
+
+    ("functions-collaboration" 
+        "MP.1"
+        "MP.3"
+        "MP.4"      ; STEMworks
+        "MP.7"
+        "MLR.7"
         )
 
     ("simple-data-types" 
@@ -96,6 +109,40 @@
         "MP.8"
         "SEP.5"
         ) 
+
+    ("functions-vertical-line-test"
+        "MP.2"
+        "MP.4"
+        "MP.8"
+        )
+
+    ("function-notation"
+        "MP.7"
+        "MP.4"
+        "MP.6")
+
+    ("functions-can-be-linear"
+        "MP.1"
+        "MP.2"
+        "MP.3"
+        "MP.5"
+        "MP.7"
+        )
+
+    ("function-definition-linear"
+        "MP.1"
+        "MP.2"
+        "MP.3"
+        "MP.5"
+        "MP.7"
+        )
+
+    ("functions-dr"
+        "MP.1"
+        "MP.7"
+        "MLR.6"     ; strategy box in lesson
+        "MLR.1"     
+        )
 
     ("function-composition" 
         "MP.1"
@@ -164,17 +211,6 @@
         "MP.4"     ; STEMworks
         "MP.6"
         "MLR.7"    
-        )
-        
-    ("restating-the-problem" 
-        "MP.1"
-        "MP.7"
-        "MLR.6"     ; strategy box in lesson
-        "MLR.1"     ; strategy box in lesson
-        )
-
-    ("solving-word-problems" 
-        "MP.4"      ; STEMworks
         )
 
     ("surface-area-rect-prism"
@@ -258,22 +294,6 @@
     ("histograms2" 
         "MP.4"      ; STEMworks
         "SEP.3"
-        )
-
-    ("linearity"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
-        )
-
-    ("linearity2"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
         )
 
     ("linear-regression" 
