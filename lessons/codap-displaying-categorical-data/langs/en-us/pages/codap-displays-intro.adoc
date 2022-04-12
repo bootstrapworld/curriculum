@@ -1,49 +1,28 @@
-= Expressions in CODAP
+= Data Displays in CODAP
 
-Make sure you’re logged into CODAP, and have created a new column titled `test` in the Animals Dataset. In order to follow each of these directives, you must first select `test`, and then choose `Edit formula` from the drop-down menu that appears. You will be typing into the `Edit Formula` box.
+Make sure you’re logged into CODAP, with the Animals Dataset open. Create a graph of randomly generated points by selecting the `Graph` icon, and then respond to the following prompts.
 
-@vspace{2ex}
+== Creating Bar Charts in CODAP
 
-== `sqrt(16)`
+@n Select the y-axis on your graph (where it says "Click here"). On the drop-down menu that apperas, select `fixed`. (_If you prefer, you may also drag the attribute name from the table to the y-axis_) What do you notice?
+ @span{.blankline}{@ifsoln{_A dot plot forms, categorizing animals as fixed (true) and not fixed (false). The labels for the dot plot are on the y-axis. The dots are stacked horizontally._}}
 
-@n How many arguments does `sqrt` expect?
- @span{.blankline}{@ifsoln{_1_}}
+@n Now select the x-axis on your graph and select `fixed`. How does the graph change?
+ @span{.blankline}{@ifsoln{_The labels move from the y-axis to the x-axis, and the dots are stacked vertically._}}
 
-@n What type of argument does the expression expect?
- @span{.blankline}{@ifsoln{_Number._}}
+@n Select the `configuration` icon (which looks like a bar graph) to the right of the data display. Select `fuse dots into bars`
 
-@n Does `sqrt` produce a Number, String, Boolean?
- @span{.blankline}{@ifsoln{_Number._}}
+@n Click the `ruler` icon; test out each of the two options available (count and percentage). What happens?
+ @span{.blankline}{@ifsoln{_When I select "count," I see the number of animals represented by each bar. When I select "percentage," the percentage of animals represented by each bar appears._}}
 
-@n What did the expression evaluate to?
- @span{.blankline}{@ifsoln{_4_}}
+@n Now, make a bar chart showing how many animals there are of each species by changing the variable on the x-axis to `species`. Can you figure out how to reconfigure the bar chart as a dot plot?
+@span{.blankline}{@ifsoln{_To reconfigure as a dot plot, select the `configuration` icon and deselect `fuse dots into bars`._}}
 
+== Numerical versus Categorical Displays
 
-== `sqrt(x)`
+@n Create a graph with `weight` on the x-axis. Then, click on `weight` so that a drop-down menu appears. From this drop-down menu, choose `Treat as Categorical`, and observe how the graph changes. What is going on?
+@span{.blankline}{@ifsoln{_CODAP is no longer interpreting weight as numerical data. Rather, creating many categories; each weight category contains just 1 or 2 animals._}}
 
-@n Enter `sqrt(Weight)`. What do you observe?
- @span{.blankline}{@ifsoln{_CODAP finds the square root of each animal's weight_}}
+@n Can you `fuse dots into bars` when treating `weight` categorically? Numerically? Why does CODAP _sometimes_ invite you to `fuse dots into bars` - but other times the option does not appear?
+@span{.blankline}{@ifsoln{_Bar charts show categories, therefore are conducive to representing categorical data. They classify, rathern than measure_}}
 
-@n How about `sqrt(Legs)`?
- @span{.blankline}{@ifsoln{_CODAP finds the square root of each animal's legs for `sqrt(Legs)`._}}
-
-What about `sqrt(Name)`?
- @span{.blankline}{@ifsoln{_CODAP produces an error message because it cannot find the square root of a string, only a number._}}
-
-== `stringLength(x)`
-
-@n How many arguments does `stringLength` expect?
- @span{.blankline}{@ifsoln{_1_}}
-
-@n What type of argument does `stringLength` expect?
- @span{.blankline}{@ifsoln{_String_}}
-
-
-@n What does the expression `stringLegnth("rainbow")` evaluate to?
- @span{.blankline}{@ifsoln{_7, which is how many letters are in the string "rainbow"_}}
-
-@n What happens when you enter `stringLength(Name)`
- @span{.blankline}{@ifsoln{_7, CODAP finds the amount of letters in each animal's `Name` _}}
-
-@n Does `stringLength` produce a Number? String? Boolean?
- @span{.blankline}{@ifsoln{_Number_}}
