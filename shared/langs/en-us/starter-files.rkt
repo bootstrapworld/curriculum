@@ -15,10 +15,10 @@
    )
   
   ("collaboration" "Collaboration Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN&v=1904b2c"))
+    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN"))
   
   ("bc" "bc Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0&v=1904b2c")
+    ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
     )
   ("gt" "gt Starter File"
@@ -61,7 +61,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A")
    )
   ("custom-scatter-plot" "Custom Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Yskwvzbe5CSMX3F1fveEOgrL3ms2cxHV")
+   ("pyret" "https://code.pyret.org/editor#share=1FzG3Bc20MxIjohamjQsYUJ3MfYeoMHfF")
    )
   ("height" "Age vs. Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1prqCzfZWJ-kuXJMclmi1qyE0cSdziLiV")
@@ -76,7 +76,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1-YuAea2oTVZcEyUNvEb-cg5qIB6n5V7n")
    )
   ("table-methods" "Table Methods Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1IkX5mu-XHHkxFlZVo7ZgLraoB18biUqA")
+   ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("text-stats"  "Text Stats Starter File"
@@ -121,18 +121,18 @@
    ("pyret" "https://code.pyret.org/editor#share=1HqgHT0HYeAIViIZ37YC9MFlj2euoOwYb")
    )
   ("exploring-linearity-in-graphs"  "Exploring Linearity in Graphs Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1fMvN_n9vEUfjy_a0vaIN3LOWkS1SFhu_&v=1904b2c")
+   ("pyret" "https://code.pyret.org/editor#share=1fMvN_n9vEUfjy_a0vaIN3LOWkS1SFhu_")
    )
   ("exploring-linearity-in-tables"  "Exploring Linearity in Tables Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP&v=1904b2c")
-   )
-  ("flags-mx" "Flag of Mexico Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6")
-   ("wescheme" "https://www.wescheme.org/view?publicId=SnLx13yt5W")
+   ("pyret" "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP")
    )
   ("flags" "Flags Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr")
    ("wescheme" "https://www.wescheme.org/view?publicId=jH25JejavW")
+   )
+  ("flags-mx" "Flag of Mexico Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6")
+   ("wescheme" "https://www.wescheme.org/view?publicId=SnLx13yt5W")
    )
   ("flags-ak" "Alaskan Flag Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX")
@@ -197,7 +197,10 @@
    ("pyret" "https://code.pyret.org/editor#share=1muE7xY-NKW5IJLeOnAu9Q31JUT6ns_n7")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM")
    )
-
+  ("sallys-lemonade" "Sally's Lemonade Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1VmH2V3ByFOA_-Fwh-IR1dLC_9XIYGc6U")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin")
+   )
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; REACTIVE
   ("package-delivery" "Package Delivery Starter File"
