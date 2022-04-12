@@ -14,7 +14,7 @@
 
 @description{Custom scatter plots expose deeper insight into subgroups within a population, motivating the need for more advanced analysis. Students get a chance to apply their understanding of if-expressions and defining functions.}
 
-@lesson-prereqs{functions-solving-word-problems, piecewise-functions-conditionals}
+@lesson-prereqs{scatter-plots, functions-examples-definitions}
 
 @keywords{piecewise, piece-wise, scatterplot, scatterplots, image scatterplots, Scatterplot, Scatterplots, bubble chart, scatter chart}
 
@@ -49,18 +49,21 @@
 
 === Overview
 
-You experimented with scatter plots briefly when you explored all the various displays Pyret can make. We'll talk about the statistical use and meaning of scatter plots later; for now we're just going to play with them and extend our knowledge a bit.
+You've experimented with scatter plots, which allow us to see the relationship between two quantitative columns in a dataset by drawing a blue dot for each data point. But by combining scatter plots with function definitions, we can make those dots _much_ more interesting!
 
 Students are introduced to their first example of a _custom scatter plot_, which makes use of the @show{(code 'image-scatter-plot)} function to replace each animals' dot with the name of the species. They then write code for another custom scatter plot.
 
 === Launch
 
-Have students open the @starter-file{custom-scatter-plot}, and complete @printable-exercise{scatter-plot-explore.adoc}.
+Have students open the @starter-file{custom-scatter-plot}, click "Run", and read through the code.
 
 [.lesson-instruction]
+* What are the names of the functions you see defined here? What do they do?
 * What did you notice?
 * What did you wonder?
 * Why does the @show{(code 'scatter-plot)} function take in 3 Strings, when there are only two axes?
+* Define a row called `sasha`, which is the first row in the table (index 0).
+* Define a row called `snuffles`, which is the second row in the table (index 1).
 
 The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
 
@@ -136,7 +139,7 @@ What other ideas do you have for how else we could make scatter plots be more in
 
 _Students might suggest using other colors, using letters, using numbers, using coordinates, using different shapes, using different sizes, etc._
 
-_To get more out of the `image-scatter-plot` function, we'll need to use conditional functions._
+_To get more out of the `image-scatter-plot` function, we'll need to use a different kind of function called a "piecewise function"._
 
 @comment{
 [.lesson-instruction]
@@ -158,15 +161,14 @@ Have students open the @starter-file{piecewise-custom-scatter-plot} and turn to 
 
 === Investigate
 
-Using @opt-printable-exercise{species-dot-dr.adoc}, talk students through how the design recipe could be used to write `species-dot`.
+Using @opt-printable-exercise{species-dot-dr.adoc}, talk students through what the Contract, Examples, and Definition for a piecewise function might look like.
 
 [.lesson-instruction]
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
-* From looking at the examples, how do we know that we need to write a conditional/piecewise function?
 
-Have students turn to @printable-exercise{sex-dot-dr.adoc} and use the design recipe to write a new helper function that will make different color dots based on the animals' sex.
+Have students turn to @printable-exercise{sex-dot-dr.adoc} and write a new helper function that will make differently-colored dots based on the animals' sex.
 
 Make sure that students write the Contract and Purpose Statement __first__ , and check in with their partner __and__ the teacher before proceeding.
 

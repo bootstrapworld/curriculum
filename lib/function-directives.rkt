@@ -1097,7 +1097,7 @@
     "image:../images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
-    (fitbruby "" rows "What Rows? (Just the cats, fixed rabbits, etc.)")
+    (fitbruby "" rows "What Rows? (All the rows, just the cats, fixed dogs, etc.)")
     "\n\n"
     (fitbruby "" cols "What Columns? (age, weight-in-kilograms, weeks, etc.)")
     "\n\n"
