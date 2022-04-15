@@ -1,66 +1,33 @@
-= Practice Plotting
+= Sort Transformer
 
-++++
-<style>
-.blankline { margin-bottom: 0.5rem; }
-td, th, .center { padding: 0 !important; vertical-align: middle; }
-p { margin: 0 !important; }
-.checklist li { margin: 0; padding: 0; }
-</style>
-++++
+Make sure you’re logged into CODAP with the Animals Dataset open. Open the Transformers plugin, and select `Sort`.
 
-Fill in the tables, predict what the graph will look like (a rough sketch is fine!), and then use CODAP to make the following displays.
+@vspace{2ex}
 
-@n A bar chart showing the `sex` of animals from the shelter.
-[cols="1a,1a,1a", options="header"]
-|===
-|@span{.center}{*Column / Attribute*}
-|@span{.center}{*Type of Data*}
-|@span{.center}{*Configuration*}
+== Creating a Sort Transformer
 
-|
-@ifnotsoln{
-@fitbruby{100%}{}{[column used as x-axis]}
-@fitbruby{100%}{}{[column used as y-axis]}
-}
+@n Select `Sort` from the drop-down menu of Transformers.
 
-@ifsoln{
-@fitbruby{}{_sex_}{[column used as x-axis]}
-@fitbruby{}{_n/a_}{[column used as y-axis]}
-}
+@n Enter a Transformer Name. We want to give each Transformer a useful name, one which clearly describes what that Transformer does. Generally, a brief hyphenated description works - for instance: `order-by-weight`. What would be a good name for a Transformer that organizes the table alphabetically by animal' names?
+ @span{.blankline}{@ifsoln{_order-by-name._}}
 
-|
-* [ ] Quantitative
-* [ ] Categorical
+@n Select the appropriate dataset. Which dataset do you want CODAP to apply this Transformer to?
+ @span{.blankline}{@ifsoln{_Animals Dataset_}}
 
-|
-* [ ] Points
-* [ ] Fuse dots into bars
-* [ ] Bar for each point
-* [ ] Group into bins
+@n Select _sort by attribute_ as the sort method.
 
-|===
+@n Select `Name` as the attribute to sort.
 
+@n Which direction will you select? Why?
+ @span{.blankline}{@ifsoln{_"Ascending" sorts from A to Z, so I will select that._}}
 
-[cols="1a", options="header"]
-|===
-|@span{.center}{*Sketch the chart below:*}
+== Applying and Saving the Sort Transformer
 
-|
-@vspace{20ex}
+@n Apply the Transformer. What happens?
+ @span{.blankline}{@ifsoln{_A copy of the original dataset is created._}}
 
-|
+@n What do you notice about the name of the new dataset?
+ @span{.blankline}{@ifsoln{_It has `Sort`, the Transformer name, at the front, with the name of the original dataset in parentheses._}}
 
-|===
-
-[cols="1a", options="header"]
-|===
-|@span{.center}{*What do you think the display tells us?*}
-
-|
-@vspace{10ex}
-
-|
-
-|===
-
+@n What happens when you save a Transformer? How is saving a Transformer different from saving a dataset?
+ @span{.blankline}{@ifsoln{_When I save a Transformer, a small box appears that has my Transformer's name at the top. I will now be able to use the Transformer again, without inputting all of the different specifications._}}

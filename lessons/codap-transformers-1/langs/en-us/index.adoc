@@ -24,7 +24,7 @@
 @material-links
 
 |===
-== Sorting Tables, Part 1 @duration{15 minutes}
+== Sorting Tables, Part 1 @duration{10 minutes}
 
 === Overview
 Students _change a table,_ sorting it by a particular column.
@@ -44,13 +44,19 @@ Student work in groups or pairs. They will sort various columns on the table by 
 - Sort the animals from heaviest to lightest.
 - Sort the animals table by how long it took for each animal to be adopted, in ascending order.
 
-=== Synthesize
+Now, direct students to go to the hamburger menu in the upper left corner and select "Save" from the drop-down menu. Students will be prompted to login to Google and enter their login credentials, linking CODAP with their Google Drive. After saving the sorted table, tell students to close CODAP.
 
-. Can you think of a situation when it would be useful to sort animals from heaviest to lightest?
+You might even pretend that the online portion of class is over; you're about to do a bit of performing for students in order to illustrate a point.
+
+Now: dramatically tell students that you forgot something! You REALLY need to know which animal was the third animal on the original table. Direct students to reopen the saved  file (they can access it by selecting the hamburger icon again). Tell them they must _undo_ any sorting and then consult the original list.
+
+Students will discover that they in fact _cannot_ undo their actions, thereby uncovering one of the primary limitations of this type of table transformation.
+
+=== Synthesize
 
 . Does sorting `animals-table` produce a _new_ table, or change the existing one? How do you know?
 
-. Can you think of a situation where CODAP's default behavior - to alter the table each time we sort it - might inhibit more sophisticated data analysis?
+. Can you think of another scenario (like the one you manufactured, above) when the inability to revert to the original table might cause problems?
 
 == Sorting Tables, Part 2 @duration{20 minutes}
 
@@ -76,71 +82,20 @@ We are going to create a copy of the Animals dataset in which the animals are or
 --
 - What do you notice? What do you wonder?
 - Why might it be useful to name the Transformer?
-- What do you think a _purpose statement_ is?
-- What do you think a _contract_ is?
 --
 
 === Investigate
 
-In order to apply this Transformer, we’ll need to provide it with several important pieces of information:
+In order to apply this Transformer, we’ll need to provide it with several important pieces of information: a name, a dataset to sort, a sort method, an attribute to sort, and a direction.
 
-@n *Transformer name*. Describe to students that we want to give each Transformer a useful name, one which clearly describes what that Transformer does. Generally, a brief hyphenated description works - for instance: `order-by-weight`.
-
-[.lesson-instruction]
---
-- What would be a good name for a Transformer that organizes the table alphabetically by animals’ names?
-- Type that name in the box. (A good option is `order-by-name`.)
---
-
-@n *Dataset*. CODAP needs to know _which_ dataset to apply the Transformer to. Note: Transformers create a copy of the original dataset. After applying this Transformer, students will see _two_ datasets in the drop-down menu.
+Initially, students might question the value of using a Transformer to sort. Using the Transformer will quite likely feel more laborious than using the sort functionality embedded in CODAP. Encourage students to experiment with all of the functionality that the Transformers offer; invite them to be curious and playful as they work, to consider the possibilities afforded by Transformers.
 
 [.lesson-instruction]
 --
-- Click “Select a Dataset.”
-- How many datasets appear on the drop-down menu?
-- How many datasets do you think will appear in this drop-down menu after we apply order-by-name?
+- Complete the worksheet to experiment with using the `Sort` Transformer.
 --
 
-@n *Contract*. Contracts help us keep track of the different Transformers we’ll be using, and how they operate on each Row of a table.
-
-Every contract has a _domain_ and a _range_.  The Domain of the Transformer Expression is the type(s) of data we give it. For our purposes, this will always be a single Row of the table. The Range of the Transformer Expression is the type of data the Transformer produces from that Row.
-
-[.lesson-instruction]
---
-- Select the drop-down menu that appears at the end of the contract, representing the Range.
-- What different data types are listed here?
-- What data type do you think is the output for this Transformer?
---
-
-For now, it is important to understand that contracts are a simple notation (domain → range) for keeping track of the set of all possible inputs and outputs for a Transformer's expression. Students will get lots of practice with contracts as they work with Transformers in this lesson and others.
-
-@n  *Purpose Statement*. The Purpose Statement is  a concise, detailed description of what a Transformer does with its inputs. The Purpose Statement is a comment in the code - something the computer doesn’t actually read. It is a note that students write for their future selves.
-
-[.lesson-instruction]
---
-- What would be an appropriate Purpose Statement for `order-by-name`?
-- Type in your Purpose Statement.
---
-
-@n *The Expression.* For sort, the expression is simply the column that we want to sort.
-
-[.lesson-instruction]
---
-- Notice that as you begin to type, CODAP offers suggestions that you can select.
-- It is absolutely essential that the capitalization and spelling match the capitalization and spelling on the data table.
-- When entering a String, remember the quotation marks!
---
-
-@n *The Direction*
-
-[.lesson-instruction]
---
-- Choose ascending to sort from A to Z.
-- Choose descending to sort from Z to A.
---
-
-=== Common Misconceptions
-Students may be more familiar with a `Sort` functionality that actually changes the table. CODAP Transformers produce a _brand new table_. These new and modified tables are automatically saved. CODAP titles each new table with a number in curly braces at the end (for example, `Filter(Animals-Dataset) {1}` ) to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
+Note that new and modified tables created by Transformers are automatically saved. Each new table is titled first with the Transformer name, then the name of the dataset (in parentheses), followed by a number in curly braces at the end to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
 
 === Synthesize
 - Does the Transformer `Sort` produce a _new_ table, or change the existing one?
