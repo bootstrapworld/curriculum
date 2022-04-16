@@ -1083,7 +1083,7 @@
     "|\n"
     (fitbruby "" question "What question do you have?")
     "\n\n"
-    (fitb "" "")
+    (fitb "100%" "")
     "\n\n"
     "What type of question is this? (circle one) "
     (hspace "1.5em")
@@ -1117,11 +1117,11 @@
     "|\n"
     (fitbruby "" finding "What did you find out? What can you infer?")
     "\n\n"
-    (fitb "" "")
+    (fitb "100%" "")
     "\n\n"
     (fitbruby "" new-question "What new question(s) does this raise?")
     "\n\n"
-    (fitb "" "")
+    (fitb "100%" "")
     "\n"
     "|==="
     "\n\n")
