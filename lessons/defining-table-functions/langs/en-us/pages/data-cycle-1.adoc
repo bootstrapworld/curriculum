@@ -1,0 +1,45 @@
+= Sophisticated Analysis
+
+To complete this analysis, you will need to have finished @opt-printable-exercise{is-dog.adoc}, @opt-printable-exercise{days.adoc}, and @opt-printable-exercise{is-young.adoc}.
+
+
+@data-cycle{ ""
+  #:question "How many young dogs are fixed v. unfixed?"
+  #:show-question? #t
+  #:rows "young dogs"
+  #:show-rows? #f
+  #:cols "fixed"
+  #:show-cols? #f
+  #:filter-fn "fun is-dog(r): r[\"species\"] == \"dog\" end, fun is-young(r): r[\"age\"] < 4 end"
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression "pie-chart(animals-table.filter(is-dog).filter(is-young), \"fixed\")"
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+@span{.sectionbreak}{}
+
+
+@data-cycle{ ""
+  #:question "Is there a relationship between weight and days-to-adoption for dogs?"
+  #:show-question? #t
+  #:rows "dogs"
+  #:show-rows? #f
+  #:cols "pounds and days"
+  #:show-cols? #f
+  #:filter-fn "fun is-dog(r): r[\"species\"] == \"dog\" end"
+  #:show-filter? #f
+  #:build-fn "fun days-to-adopt(r): r[\"weeks\"] * 7 end"
+  #:show-build? #f
+  #:expression "scatter-plot(animals-table.filter(is-dog).build-column(days-to-adopt, \"days\"), \"name\", \"pounds\", \"days\")"
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
