@@ -4,66 +4,67 @@
 
 ++++
 <style>
-/** fitb CSS experiment **/
-#content td p { display: table; width: 100%; }
-#content td .fitb { display: table-cell; width: 90%; }
-#content td {padding-bottom: 0px !important;}
+#content td {padding: 0.6rem 0px !important}
 #content table .autonum::after { content: ')'; }
+#content th { text-align: center !important; }
 </style>
 ++++
 
 
-[.table1, cols="3,.>2,.>2,5,.>2,.>2", frame="none", grid="none", stripes="none"]
+[.table1, cols="3, .>2, .>2, 3, 3, .>2, .>2", frame="none", grid="none", stripes="none" options="header"]
 |===
-|								    		| *Prediction:*	| *Computer Returns:*
-|                                			| *Prediction:*	| *Computer Returns:*
+|								    	| *Prediction*	| *Result*
+||                                		| *Prediction*	| *Result*
 
-|@n @show{(code '(<= 3 4))}   		| @fitb{}{}  | @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string>? "a" "b"))} | @fitb{}{}  | @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(<= 3 4))}   			| @fitb{}{}  	| @fitb{}{@ifsoln{_true_}}
+||@n @show{(code '(string>? "a" "b"))} 	| @fitb{}{}  	| @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(= 3 2))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}
-|@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(= 3 2))}				| @fitb{}{}		| @fitb{}{@ifsoln{_false_}
+||@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 
-|@n @show{(code '(< 2 4))}			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(< 2 4))}				| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+||@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(>= 5 5))}			| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string<>? "a" "a"))}| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(>= 5 5))}			| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+||@n @show{(code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 
-|@n @show{(code '(>= 4 6))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string>=? "a" "a"))}| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(>= 4 6))}			| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+||@n @show{(code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 
 
-|@n @show{(code '(<> 3 3))}			| @fitb{}{}	| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string<>? "a" "b"))}| @fitb{}{}	| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(<> 3 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+||@n @show{(code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 |===
 
 @vspace{1ex}
 
 @n In your own words, describe what `<` does.
-@span{.blankline}{@ifsoln{_checks whether the first number is smaller than the second number, returns true if it is and false if it isn't_}}
+
+@fitb{}{@ifsoln{_checks whether the first number is smaller than the second number, returns true if it is and false if it isn't_}}
 
 @vspace{1ex}
 
 @n In your own words, describe what `>=` does.
-@span{.blankline}{@ifsoln{_checks whether the first number is greater than or equal to the second number, returns true if it is and false if it isn't_}}
+
+@fitb{}{@ifsoln{_checks whether the first number is greater than or equal to the second number, returns true if it is and false if it isn't_}}
 
 @vspace{1ex}
 
 @n In your own words, describe what `<>` does.
-@span{.blankline}{@ifsoln{_checks whether the to numbers are unequal, returns true if they're unequal and false if they're equal_}}
+
+@fitb{}{@ifsoln{_checks whether the to numbers are unequal, returns true if they're unequal and false if they're equal_}}
 
 @vspace{1ex}
 
 [cols="5, .>2, .>2", frame="none", grid="none", stripes="none"]
 |===
-|															 | *Prediction:*	| *Computer Returns:*
+|													 | *Prediction:*	| *Result:*
 @ifproglang{wescheme}{
 |@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string=? "tree"   "tree"))}		 	 | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+|@n @show{(code '(string=? "tree"   "tree"))}		 | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
 }
-|@n @show{(code '(string-contains?  "catnap" "cat"))}  | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string-contains?  "cat" "catnap"))}	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+|@n @show{(code '(string-contains?  "catnap" "cat"))}| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+|@n @show{(code '(string-contains?  "cat" "catnap"))}| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
 |===
 
 @vspace{1ex}

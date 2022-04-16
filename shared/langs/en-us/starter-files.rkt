@@ -88,10 +88,13 @@
   ("word-length"  "Word Length Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
    )
+  ("fav-desserts" "Survey of Eighth Graders and their Favorite Desserts Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1C0fkmeUSgEmFBsjv0kEKqLefDRuo770n&v=1904b2c")
+    )
   ("dirty-data"  "New Animals! Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
    )
-  ("bad-survey"  "Height vs. Wingspan"
+  ("bad-survey"  "Height vs. Wingspan Survey"
    ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
    )
 

@@ -32,6 +32,27 @@ mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
 .listingblock pre { margin: 3px 0px; padding: 0; }
 
+body:not(.LessonPlan) .paragraph {width: 100%; }
+body:not(.LessonPlan) p {
+  width:        100%;
+  overflow:     hidden; 
+  position:     relative;
+  min-height:   1.75rem;
+  margin:       2px 0px;
+}
+/* Empty p tags should take up no space */
+body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
+/* Stretch elements should expand to the end of the page */
+body:not(.LessonPlan) p > .stretch {
+  float:        right; 
+  clear:        right;
+  position:     absolute;
+  text-align:   left;
+  bottom:       0;
+  width:        100%;
+  margin-left:  10px;
+}
+
 h1 {
   font-size:      2rem;
   font-weight:    bold;
@@ -114,7 +135,7 @@ tr th.tableblock {
   margin-left:      auto;
   margin-right:     auto;
   text-align:       center !important;
-  padding:          2ex 0ex;
+  padding:          1ex 0ex;
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
@@ -198,10 +219,11 @@ tr th.tableblock {
 .ruby {
   position:           absolute;
   bottom:             -1.1rem;
-  left:               0;
-  font-size:          0.7rem;
+  text-align:         center;
+  font-size:          0.65rem;
   font-weight:        normal;
   width:              100%;
+  transform:          translate(-50%, 0);
 }
 
 /************************************************************************************
@@ -518,7 +540,7 @@ table .autonum::after { content: none; }
 /* Data Cycle tables should have borders */
 .data-cycle { border-collapse: collapse; }
 .data-cycle td:first-of-type { background: lightgray; border: solid white; }
-.data-cycle .ruby { color: #666; }
+.data-cycle .ruby { color: #666; text-align: left; transform:  none; left: 0; }
 .data-cycle td p,.data-cycle td p > * { font-size: 0.75rem; }
 .data-cycle .fitbruby, .data-cycle .fitb { 
   text-align: left; font-style: italic; font-size:  1rem;
@@ -533,7 +555,7 @@ table .autonum::after { content: none; }
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { background: gray; border: gray; }
 table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
+.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 .recipe_title td:last-child { border: 3px solid gray !important; }
 .recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
 
@@ -541,9 +563,10 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
 /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-.recipe p {
+body:not(.LessonPlan) .recipe p {
   width:      100%;
   margin:     0;
+  min-height: 1.5rem;
   display:    flex;
   flex-wrap:  wrap;
 }
@@ -569,12 +592,12 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
   display:            inline-block;
   border-bottom:      solid 1px black;
 }
-.pyretkeyword { margin: 0.25rem 0; }
+.pyretkeyword { margin: 4px 0; line-height: 1rem; }
 .studentAnswerCode::after, .studentAnswer::after {
   position:           absolute;
   bottom:             -1rem;
   left:               0;
-  font-size:          .65rem;
+  font-size:          .60rem;
   width:              100%;
   text-align:         center;
   font-style:         italic;
@@ -930,6 +953,7 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
 
     /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  #content { margin: auto; }
 
   /* Page breaks in lesson content*/
   div#body{ position: static; } /* page-break fails on absolute positioning */
