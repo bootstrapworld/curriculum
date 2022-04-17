@@ -931,10 +931,7 @@
              (not (null? *other-proglang*))
              (or *narrative* *lesson-plan*))
     ; (printf "doing display-alternative-proglang really\n")
-    (display
-      (enclose-span ".other-proglang"
-        (string-append "(Also available in "
-          (string-join
+    (let ([other-proglang-links
             (filter (lambda (x) x)
                     (map (lambda (x)
                            (cond [(not x) #f]
@@ -954,7 +951,7 @@
                                                 [else #f])]
                                         [*lesson-plan*
                                           (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                      (regexp-replace "-wescheme$" *lesson-plan* ""))]
+                                                  (regexp-replace "-wescheme$" *lesson-plan* ""))]
                                         [else #f])]
                                  [(and (string=? *proglang* "pyret") (string=? x "codap"))
                                   (cond [*narrative*
@@ -972,11 +969,18 @@
                                                 [else #f])]
                                         [*lesson-plan*
                                           (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                      (regexp-replace "-codap$" *lesson-plan* ""))]
+                                                  (regexp-replace "-codap$" *lesson-plan* ""))]
                                         [else #f])]
                                  [else #f]))
-                         *other-proglang*)) ", ") ")")) o)
-    (newline o)
+                         *other-proglang*))])
+      (unless (null? other-proglang-links)
+        (display
+          (enclose-span ".other-proglang"
+            (string-append "(Also available in "
+              (string-join
+                other-proglang-links
+                ", ") ")")) o)
+        (newline o)))
     (newline o)))
 
 (define (display-title i o out-file)
