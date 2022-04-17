@@ -1695,8 +1695,8 @@
                                                                             (if *lesson-plan* ", window=\"_blank\"" "")
                                                                             )]
                                                        [styled-link-output
-                                                         (format "[~a.StarterFile]##~a##"
-                                                                 (if opt? ".Optional" "")
+                                                         (format "[StarterFile~a]##~a##"
+                                                                 (if opt? " Optional" "")
                                                                  link-output)])
                                                   (cond [opt?
                                                           (unless (member styled-link-output *opt-starter-file-links*)
