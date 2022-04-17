@@ -89,7 +89,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
    )
   ("fav-desserts" "Survey of Eighth Graders and their Favorite Desserts Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1C0fkmeUSgEmFBsjv0kEKqLefDRuo770n&v=1904b2c")
+    ("pyret" "https://code.pyret.org/editor#share=1C0fkmeUSgEmFBsjv0kEKqLefDRuo770n")
     )
   ("dirty-data"  "New Animals! Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
