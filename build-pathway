@@ -1094,6 +1094,9 @@ function checklessonplan() {
       g=$f
       if test ${f%.adoc} = $f; then
         echo $f >> $exerfA
+      elif test ! -f pages/$f; then
+        echo
+        echo WARNING: Exercise file pages/$f not found
       elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
         # aspect=landscape # ? FIXME
         echo $f landscape >> $exerfA
