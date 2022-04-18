@@ -51,11 +51,6 @@
 
 (define (get-function-name) *funname*)
 
-(define (string-multiply s n)
-  (let loop ([n n] [r ""])
-    (if (= n 0) r
-        (loop (- n 1) (string-append r s)))))
-
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
   (let ([s-og (regexp-replace* #rx"{empty}" s "")])
@@ -1081,7 +1076,7 @@
     "image:../images/AskQuestions.png[Ask Questions icon]"
     "\n"
     "|\n"
-    (fitbruby "" question "What question do you have?")
+    (fitbruby "" question "What question do you have?" *show-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
@@ -1097,29 +1092,29 @@
     "image:../images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
-    (fitbruby "" rows "What Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)")
+    (fitbruby "" rows "What Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)" *show-rows?*)
     "\n\n"
-    (fitbruby "" cols "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)")
+    (fitbruby "" cols "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)" *show-cols?*)
     "\n\n"
     "| "
     "image:../images/AnalyzeData.png[Analyze icon]"
     "\n"
     "|\n"
-    (fitbruby "" filter-fn "If you only need _*some*_ rows, define your filter function here (Need help? Use the Design Recipe!)")
+    (fitbruby "" filter-fn "If you only need _*some*_ rows, define your filter function here (Need help? Use the Design Recipe!)" *show-filter?*)
     "\n\n"
-    (fitbruby "" build-fn "If you need to make a _*new*_ column, define your builder function  here (Need help? Use the Design Recipe!)")
+    (fitbruby "" build-fn "If you need to make a _*new*_ column, define your builder function  here (Need help? Use the Design Recipe!)" *show-build?*)
     "\n\n"
-    (fitbruby "" expression "Write the code that will make the table or display what you want.")
+    (fitbruby "" expression "Write the code that will make the table or display what you want." *show-expression?*)
     "\n\n"
     "| "
     "image:../images/InterpretData.png[Interpret icon]"
     "\n"
     "|\n"
-    (fitbruby "" finding "What did you find out? What can you infer?")
+    (fitbruby "" finding "What did you find out? What can you infer?" *show-finding?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (fitbruby "" new-question "What new question(s) does this raise?")
+    (fitbruby "" new-question "What new question(s) does this raise?" *show-new-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n"

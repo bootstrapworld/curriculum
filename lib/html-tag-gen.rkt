@@ -18,6 +18,7 @@
   display-begin-span
   display-end-span
 
+  string-multiply
   fitbruby
   fitb
   hspace
@@ -145,7 +146,12 @@
   (when (span-real? (pop-span-stack))
     (display (create-end-tag "span") o)))
 
-(define (fitbruby width text ruby)
+(define (string-multiply s n)
+  (let loop ([n n] [r ""])
+    (if (= n 0) r
+        (loop (- n 1) (string-append r s)))))
+
+(define (fitbruby width text ruby [show? #t])
   (when (string=? width "")
     (set! width "100%"))
   (string-append
@@ -153,18 +159,18 @@
                       (if (string=? width "")
                           "style=\"flex-grow: 1\""
                           (format "style=\"width: ~a\"" width)))
-    text
+    (if show? text "")
     (create-begin-tag "span" ".ruby")
     ruby
     (create-end-tag "span")
     (create-end-tag "span")))
 
-(define (fitb width text)
+(define (fitb width text [show? #t])
   (string-append
     (if (string=? width "")
         (create-begin-tag "span" ".fitb" #:attribs "style=\"flex-grow: 1\"")
         (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
-    text
+    (if show? text "")
     (create-end-tag "span")))
 
 (define (hspace width)
