@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-04-12 # last modified
+LASTMOD=2022-04-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1357,31 +1357,52 @@ function buildcommonlessons() {
 function proglangversion() {
   local f=$1
 
-  for pl in codap wescheme; do
-    if test $(echo $f|grep "\-${pl}$"); then
-      local g=${f%-*}
-      if test -d $g; then
-        return 0
-      fi
+  if test $(echo $f|grep "\-wescheme"); then
+    local g=${f%-wescheme}
+    if test -f $g/index.shtml; then
+      return 1
+    else
+      return 0
     fi
-  done
-  return 1
+
+  elif test $(echo $f|grep "\-codap"); then
+    local g=${f%-codap}
+    if test -f $g/index.shtml; then
+      return 1
+    elif test -f $g-wescheme/index.shtml; then
+      return 1
+    else
+      return 0
+    fi
+
+  elif test -f $f/index.shtml; then
+    return 0
+
+  else
+    return 1
+  fi
 }
 
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
-  # echo doing builddependencyjson
+  # echo doing builddependencyjson "$@"
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
   echo "var graph = {" > $GRAPHFILE
   first=1
   for L in *; do
-    if proglangversion $L; then
+    # echo try proglangversion $L
+    if ! proglangversion $L; then
       continue
     fi
-    #echo L is $L
+    # echo L is $L
     Lbasename=$L
+    if test $(echo $L|grep "\-wescheme"); then
+      Lbasename=${L%-wescheme}
+    elif test $(echo $L|grep "\-codap"); then
+      Lbasename=${L%-codap}
+    fi
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
     #if test "$L" = lib; then continue; fi
