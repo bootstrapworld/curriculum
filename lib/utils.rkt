@@ -22,7 +22,7 @@
   (string-trim s "\""))
 
 (define (read-data-file f #:mode [mode 'files])
-  ;(printf "doing read-data-file ~s ~s\n" f mode)
+  ; (printf "doing read-data-file ~s ~s\n" f mode)
   (if (not (file-exists? f)) '()
       (call-with-input-file f
         (lambda (i)
@@ -31,7 +31,7 @@
                        (let ([x (read-line i)])
                          (if (eof-object? x) (reverse xx)
                              (let ([x (unquote-string (string-trim x))])
-                               (set! x (regexp-replace " *;.*$" x ""))
+                               (set! x (regexp-replace "[ \t]*;.*$" x ""))
                                (loop (if (string=? x "") xx
                                          (cons x xx)))))))]
             [(lines) (let loop ([xx '()])
