@@ -1445,6 +1445,17 @@
                                   ))]
                            [(string=? directive "scrub")
                             (read-group i directive)]
+                           [(string=? directive "page-of-lines")
+                            (let ([n (string->number (read-group i directive))])
+                              ; (printf "doing @page-of-lines ~s\n" n)
+                              (let loop ([i 0])
+                                (unless (>= i n)
+                                  ; (display-begin-span ".fitb.stretch" o)
+                                  (display-begin-span ".blankline" o)
+                                  (display-end-span o)
+                                  (newline o)
+                                  (newline o)
+                                  (loop (+ i 1)))))]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
