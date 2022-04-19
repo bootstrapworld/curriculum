@@ -1,33 +1,47 @@
-= Sort Transformer
+= Filter, Transform, Build
 
-Make sure you’re logged into CODAP with the Animals Dataset open. Open the Transformers plugin, and select `Sort`.
+Make sure you’re logged into CODAP with the Animals Dataset open.
 
 @vspace{2ex}
 
-== Creating a Sort Transformer
+== Creating a Filter Transformer
 
-@n Select `Sort` from the drop-down menu of Transformers.
+@n Open the Transformers plugin, and select `Filter`.
 
-@n Enter a Transformer Name. We want to give each Transformer a useful name, one which clearly describes what that Transformer does. Generally, a brief hyphenated description works - for instance: `order-by-weight`. What would be a good name for a Transformer that organizes the table alphabetically by animal' names?
- @span{.blankline}{@ifsoln{_order-by-name._}}
+@n Enter a `filter-is-fixed` as the Transformer name. What does this name tell you about the Transformer you are creating?
+ @span{.blankline}{@ifsoln{_The Transformer will filter out only animals that are fixed._}}
 
 @n Select the appropriate dataset. Which dataset do you want CODAP to apply this Transformer to?
  @span{.blankline}{@ifsoln{_Animals Dataset_}}
 
-@n Select _sort by attribute_ as the sort method.
+@n Examine the contract. Why does the provided contract make sense?
+ @span{.blankline}{@ifsoln{_The expression will consume a Row and produce a Boolean._}}
 
-@n Select `Name` as the attribute to sort.
+@n Write a purpose statement.
+@span{.blankline}{@ifsoln{_The expression will consume a Row and produce a Boolean._}}
 
-@n Which direction will you select? Why?
- @span{.blankline}{@ifsoln{_"Ascending" sorts from A to Z, so I will select that._}}
+@n Enter `Fixed = true` as the expression.
 
-== Applying and Saving the Sort Transformer
+@n Select `Apply Transformer`. What happens?
+ @span{.blankline}{@ifsoln{_A copy of the original dataset is created, with only animals that are fixed._}}
 
-@n Apply the Transformer. What happens?
- @span{.blankline}{@ifsoln{_A copy of the original dataset is created._}}
+== Creating a Transform Transformer
 
-@n What do you notice about the name of the new dataset?
- @span{.blankline}{@ifsoln{_It has `Sort`, the Transformer name, at the front, with the name of the original dataset in parentheses._}}
+@n Now select `Transform Attribute` in the Transformer plugin.
 
-@n What happens when you save a Transformer? How is saving a Transformer different from saving a dataset?
- @span{.blankline}{@ifsoln{_When I save a Transformer, a small box appears that has my Transformer's name at the top. I will now be able to use the Transformer again, without inputting all of the different specifications._}}
+@n Enter `transform-is-young` as the name.
+
+@n Select the Animals Dataset.
+
+@n What would be an appropriate name for our altered attribute?
+@span{.blankline}{@ifsoln{Students can select the attribute name `Age` and reame it `Young`.}}
+
+@n Examine the contract. A domain is provided (row), but not a range. What is the desired output for `transform-is-young`?
+
+@n Let's write a purpose statement. Whta do you think we want a Transformer called `transform-is-young` to do?
+
+@n Enter `Age < 5` as the expression.
+
+@n Apply the Transformer. To define the Transformer for future use, select `Save`.
+
+@n Now, try creating a Transformer called `weight-in-kg`
