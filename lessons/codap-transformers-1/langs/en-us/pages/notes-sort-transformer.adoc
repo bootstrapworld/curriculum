@@ -1,13 +1,13 @@
-= Using Transformers: Sort
+= Using Transformers: Sort, Filter, Transform Attribute, Build Attribute
 
 *Transformers* allow you to transform datasets to produce new, distinct output datasets, instead of modifying the original input dataset itself. We use them to manipulate tables and enable low-stakes "what if?" exploration.
 
 - In this course, we'll be using a variety of Transformers.
 
-** `Sort` - We must provide `Sort` with a dataset, an attribute to sort, and a sort direction. `Sort` *produces* a copy of the input dataset, with cases sorted by the selected attribute.
-** `Filter` - *consumes* a dataset to filter and a formula expression that evaluates to either true or false. `Filter` *produces* a copy of the input dataset that only has the cases for which the formula was true.
-** `Transform Attribute` -
-** `Build Attribute` - *consumes* a dataset, a name for the new column/attribute, a collection to add the attribute to, a formula expression for the attribute's values, and the data type formula will expression will evaluate to. `Built attribute` *produces* a copy of the input dataset, with the new attribute added.
+** `Sort` - We must provide `Sort` with a dataset, an attribute to sort, and a sort direction. `Sort` produces a copy of the input dataset, with cases sorted by the selected attribute.
+** `Filter` - We must provide `Filter` with an expression that evaluates to either true or false. `Filter` then produces a copy of the input dataset that only has the cases for which the formula was true.
+** `Transform Attribute` - We provide `Transform Attribute` with a formula to evaluate the new values. `Transform Attribute` produces a copy of the input dataset with the designated row transformed.
+** `Build Attribute` - We provide a formula expression that to evaluate the attribute's new values. `Build attribute` produces a copy of the input dataset with the new attribute added.
 
 - With the exception of `Sort`, each of the above Transformers is attached to a formula expression. It's important to get the formula expressoin just right, or the Transformer will produce an error.
 }

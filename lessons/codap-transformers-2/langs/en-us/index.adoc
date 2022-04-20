@@ -37,7 +37,21 @@ Announce to the class that you are going to select 6-8 students, each of whom wi
 
 Tell the class that you are going to select a volunteer who will play the role of… The Filter Transformer!
 
-Hand the Filter Transformer an Expression card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__. Instruct them to review their expression's name, contract, and purpose statement, but to keep that information a secret.
+Hand the Filter Transformer an Expression card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__. Instruct them to review their expression's *Contract* and *Purpose Statement*, but to keep that information a secret.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+a|
+@span{.title}{Contracts and Purpose Statements}
+
+A *contract* is a statement of the _domain_ and _range_ of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+
+A *Purpose Statement* is a way of describing what an expression does.
+
+|===
+
 
 Explain to the class that the Filter Transformer will walk from one student to the next, referring to the expression (on the card) in order to determine if each student should stand or sit.
 
@@ -62,55 +76,29 @@ The `Filter` Transformer takes an _expression_, and produces a new table contain
 
 === Investigate
 
-Explain to students that they are going to practice using the `Filter` Transformer; doing so will require them to determin the correct Boolean expression to let CODAP know which cases stay and which cases sit.
-
-Walk students through the process of creating a `Transformer` named `filter-is-fixed`.
+Explain to students that they are going to practice using the `Filter` Transformer in the @starter-file{animals} in CODAP. As they complete the worksheet, encourage students to pay close attention as they enter information into the `Transformer` plugin. What happens if they forget to select a dataset from the drop-down menu? When does the text change colors? Does CODAP mind if spelling is off? What happens when students 'Save'?
 
 [.lesson-instruction]
-* Open the Transformer plugin and select `Filter`.
-* Enter the `filter-is-fixed` as the Transformer name. What does this name tell you about the Transformer we are creating?
-* Select `animals-dataset`.
-* Examine the contract. Why does the provided contract make sense?
-* Let's write a purpose statement. What do you think a `Transformer` called `filter-is-fixed` ought to do?
-* Enter `Fixed = true` as the experssion.
-* Select `Apply Transformer`.
-
-Encourage students to pay close attention to details as they enter information into the `Transformers` plugin. What happens if they forget to select a dataset from the drop-down menu? When does the text change colors? Does CODAP mind if spelling is off? What happens when they students 'Save'?
-
-Invite students to create Transformers (and copies of the dataset) for the following scenarios.
-
-[.lesson-instruction]
-* Customize a Transformer called `filter-is-old` that creates a new dataset with animals older than 5 years.
-* Customize a Transformer called `filter-is-dog` that creates a new dataset with only dogs.
-
-The `Filter` Transformer walks through the table, applying its _expression_ to each row. It then produces a new table containing all the rows for which the expression returned `true`.
+Complete the worksheet @printable-exercise{pages/codap-filter.adoc} in the @starter-file{animals} in CODAP..
 
 === Synthesize
 Debrief with students. Some guiding questions on filtering:
 
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Trasnformer's _expression_?
 - Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
-- If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
-- Can you think of a situation where filtering fixed animals would be helpful?
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
 
 == Transforming Columns @duration{10 minutes}
 
 === Overview
-Students learn how to _build columns_ using the `Transform Attribute` Transformer.
+Students learn how to _transform columns_ using the `Transform Attribute` Transformer.
 
 === Launch
 Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. The `Transform Attribute` Transformer makes that possible! .
 
 === Investigate
 [.lesson-instruction]
-* Open the Transformer plugin and select `Transform Attribute`.
-* Enter `transform-is-young` as the name. What does this name tell you about the Transformer we are creating?
-* Select `animals-dataset`.
-* What would be an appropriate name for our altered attribute? (Students can select the attribute name `Age` and rename it `Young`.)
-* Examine the contract. A domain is provided (row), but not a range. What is the desired output for `transform-is-young`?
-* Let's write a purpose statement. What do you think we want a Transformer called `transform-is-young` to do?
-* Enter `Age < 5` as the expression.
-* Apply the Transformer. To define the Transformer for future use, select `Save`.
-* Now, try creating a Transformer called `build-is-cat`.
+Complete the worksheet @printable-exercise{pages/codap-transform.adoc} in the @starter-file{animals} in CODAP.
 
 The `Transform Attribute` Transformer walks through the table, applying whatever expression it was given to each row. Whatever the expression produces for that row becomes the value of the column, which we can rename by selecting it. In the first example, we gave the Transformer `Age < 5` as its expression, so the new table replaced the age with an indication of whether each animal is young (`true`) or not (`false`).
 
@@ -135,15 +123,7 @@ So far, we've used Transformers to _filter_ and to _transform an attribute_. The
 Now that students have some familiarity with creating and defining Transformers, invite them to explore `Build Attribute` to see if they can determine what it does. (It creates an additional column in the dataset, rather than _transforming_ the existing column.)
 
 [.lesson-instruction]
-* Open the Transformer plugin and select `Build Attribute`.
-* Enter `build-is-heavy` as the name. What does this name tell you about the Transformer we are creating?
-* Select `animals-dataset`.
-* * What would be an appropriate name for our _new_ attribute?
-* Examine the contract. A domain is provided (row), but not a range. What is the desired output for `build-is-heavy`?
-* Let's write a purpose statement. What do you think we want a Transformer called `build-is-heavy` to do?
-* Enter `Weight > 40` as the expression.
-* Apply the Transformer.
-* To define the Transformer for future use, select `Save`.
+Complete the worksheet @printable-exercise{pages/codap-build.adoc} in the @starter-file{animals} in CODAP..
 
 
 === Synthesize
