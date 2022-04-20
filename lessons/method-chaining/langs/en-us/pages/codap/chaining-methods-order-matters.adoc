@@ -1,4 +1,4 @@
-= Chaining Methods 2: Order Matters
+= Chaining 2: Order Matters
 
 ++++
 <style>
@@ -16,13 +16,13 @@ Transformer: Build Attribute
 
 Name of attribute: kilos
 
-Formula expression: pounds/2.2
+Expression: pounds/2.2
 
 |@span{.center}{*`order-by-kilos`*}
 
 Transformer: Sort
 
-Formula expression: kilos
+Attribute: kilos
 
 Direction: ascending
 
@@ -30,19 +30,19 @@ Direction: ascending
 
 Transformer: Filter
 
-Formula expression: sex = “female”
+Expression: sex = “female”
 
 |@span{.center}{*`filter-is-heavy`*}
 
 Transformer: Filter
 
-Formula expression: kilos > 25
+Expression: kilos > 25
 
 |@span{.center}{*`order-by-sex`*}
 
 Transformer: Sort
 
-Formula expression: sex
+Attribute: sex
 
 Direction: ascending
 
@@ -52,7 +52,7 @@ Transformer: Build Attribute
 
 Name of new attribute: is-female
 
-Formula expression: sex = "female"
+Expression: sex = "female"
 
 |===
 
@@ -87,6 +87,7 @@ Next, apply `build-kilos`
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
 | Apply `build-kilos`
+
 Next, apply `filter-is-heavy`
 |*3*@ifsoln{-C} ||*C*
 | Produces a table containing only Fritz.

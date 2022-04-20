@@ -1,4 +1,4 @@
-= Method Chaining
+= Chaining
 
 @ifproglang{pyret}{
 @description{Students learn how to chain Methods together, and define more sophisticated subsets.}
@@ -17,7 +17,7 @@
 | Lesson Goals
 | Students will be able to...
 
-* Use method chaining to write more sophisticated analyses using @ifproglang{pyret}{less code} @ifproglang{codap}{fewer clicks}
+* Use chaining to write more sophisticated analyses using @ifproglang{pyret}{less code} @ifproglang{codap}{fewer clicks}
 
 * Identify bugs introduced by chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers} in the wrong order
 
@@ -128,16 +128,17 @@ animals-table
 @ifproglang{codap}{
 Now that we are doing more sophisticated analyses, we might find ourselves in a situation where we want to use a series of Transformers!
 
-Describe for your students the following scenario: a journalist comes to the shelter. She wants to write a story about a successful pet adoption--but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms. She wants to review the an updated copy of the dataset each week, which shows all eligible animals.
+Describe for your students the following scenario: a journalist comes to the shelter who wants to write a story about a successful pet adoption--but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms. She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.
+
+In CODAP, we can use the result of one Transformer as the dataset for another Transformer! To help the journalist, you decide that you want to use *two* Transformers: _Build Attribute_ and _Filter_. But in which order?
 
 [.lesson-instruction]
-- What formula would a  Transformer named `weight-in-kg` require? (To convert pounds to kilograms, divide by 2.205.)
-- How about `filter-if-light`?
-- In this scenario, which Transformer should we apply _first_ - `weight-in-kg` or `filter-if-light`? Why?
+- The _Build Attribute_ Transformer we must define uses this formula: `pounds/2.205`. It also requires that we provide a name for our new attribute, such as `kilograms`.
+- The _Filter_ Transformer that we must define uses this formula: `kilograms<9`.
+- Which of the two above Transformers should we apply _first_, `weight-in-kg` or `filter-if-light`?
+- What do you predict will happen if we apply them in the wrong order? Why?
 
-In CODAP, we can use the result of one Transformer as an input to another. In other words: Transformers can be chained, resulting in a sequence of datasets, each a transformed version of the previous. Any updates made to an input dataset will flow through and affect its outputs. If you change the original dataset (by adding or removing an animal, for example), the updates will flow through the chain.
-
-As you chain together Transformers, it is important to remember the following:
+A perk of applying Transformers, rather than manipulating the dataset, is that any updates made to the original dataset will flow through the chain. As you chain together Transformers, it is important to remember the following:
 }
 [.lesson-point]
 Order matters: Build / Transform, Filter, Sort.
