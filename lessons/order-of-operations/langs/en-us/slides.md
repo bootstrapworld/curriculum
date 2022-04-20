@@ -6,7 +6,9 @@
 
 # Order of Operations
 
-If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. Sometimes we need multiple expressions in mathematics, and the order matters there, too!
+If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. 
+
+Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
 ---
 
@@ -47,7 +49,7 @@ If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division fun
 
 [.centered-image]
 @show{(coe '(/ 6 3))}
-@clear
+
 
 ---
 # Order of Operations
