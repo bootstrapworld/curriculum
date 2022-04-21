@@ -4,6 +4,9 @@
 <style>
 #content p { margin: 0; }
 .paragraph { min-height: 0.33in; }
+th { text-align: center !important; }
+td .editbox { font-size: 0.75rem; }
+td { padding: 0.5rem 0 !important; }
 </style>
 ++++
 
@@ -30,14 +33,21 @@ Make sure you've opened the @starter-file{table-methods} on your computer.
 
 @n All 3 of the examples on lines 28-32 achieve the same thing, at different levels of abstraction.  Think about what each example is doing and write a similar example using `dog-row`
 
-[cols='2',options="header"]
+[cols='1,1', options="header"]
 |===
-| Examples with `cat-row`							| Similar example with `dog-row`
-| is-dog(cat-row) is false							|
+| Examples with `cat-row`
+| Similar example with `dog-row`
+
+| `is-dog(cat-row) is false`
+| @ifsoln{`is-dog(dog-row) is true`}
 2+| __What is this example doing?__
-| is-dog(cat-row) is "cat" == "dog"					|
+
+| `is-dog(cat-row) is "cat" == "dog"`
+| @ifsoln{`is-dog(dog-row) is "dog" == "dog"`}
 2+| __What is this example doing?__
-| is-dog(cat-row) is cat-row["species"] == "dog"	|
+
+| `is-dog(cat-row) is cat-row["species"] == "dog"`
+| @ifsoln{`is-dog(dog-row) is dog-row["species"] == "dog"`}
 2+| __What is this example doing?__
 |===
 
@@ -47,22 +57,12 @@ Make sure you've opened the @starter-file{table-methods} on your computer.
 
 @n Evaluate `is-dog(cat-row)`. What do you get? @fitb{}{@ifsoln{`false`}}
 
-@n What does `is-old` do?
+@n What does `is-old` do? @fitb{}{@ifsoln{_Looks up the age of the row, and asks if it is greater than 10_}}
 
-@fitb{}{@ifsoln{_Looks up the age of the row, and asks if it is greater than 10_}}
+@n What does `lookup-name` do? @fitb{}{@ifsoln{_looks up the value in the `name` column_}}
 
-@n What does `lookup-name` do?
+@n What does `lookup-fixed` do? @fitb{}{@ifsoln{_looks up the value in the `fixed` column_}}
 
-@fitb{}{@ifsoln{_looks up the value in the `name` column_}}
+@n What does `label` do? @fitb{}{@ifsoln{_prints the animal's name in red_}}
 
-@n What does `lookup-fixed` do?
-
-@fitb{}{@ifsoln{_looks up the value in the `fixed` column_}}
-
-@n What does `label` do?
-
-@fitb{}{@ifsoln{_prints the animal's name in red_}}
-
-@n What does `kilos` do?
-
-@fitb{}{@ifsoln{_divides the pounds by 2.2_}}
+@n What does `kilos` do? @fitb{}{@ifsoln{_divides the pounds by 2.2_}}
