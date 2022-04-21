@@ -894,20 +894,21 @@
         "|===\n"
         "|\n\n"
         (format "[.cols=~a, options=header]\n" num-input-cols)
-        (write-each-example-table input-header input-rows  *show-input-examples* stipulated-num-input-rows num-input-cols)
+        (write-each-example-table #t input-header input-rows  *show-input-examples* stipulated-num-input-rows num-input-cols)
         "|\n\n"
         (format "[.cols=~a, options=header]\n" num-output-cols)
-        (write-each-example-table output-header output-rows  *show-output-examples* stipulated-num-output-rows num-output-cols)
+        (write-each-example-table #f output-header output-rows  *show-output-examples* stipulated-num-output-rows num-output-cols)
         "\n\n"
         "|===\n\n"))))
 
-(define (write-each-example-table header rows show-rows stipulated-num-rows num-cols)
+(define (write-each-example-table is-input header rows show-rows stipulated-num-rows num-cols)
   ; (printf "doing write-each-example-table ~s ~s ~s ~s ~s\n" header rows show-rows stipulated-num-rows num-cols)
   (let* ([num-given-rows (length rows)]
          [num-blank-rows (max 0 (- stipulated-num-rows num-given-rows))])
     (string-append
-      "[.cols=~a]\n"
-      "!===\n\n"
+      "[.ExampleTableTitle]\n"
+      (if is-input "Original Table" "Transformed Table")
+      "\n!===\n\n"
       (apply string-append
         (map (lambda (x) (string-append "! " (if *show-example-headers?* x ""))) header))
       "\n"
@@ -1001,7 +1002,7 @@
 
 (define (write-formula-expression transformer-name domain-list range purpose body)
   (string-append
-    (write-title "Formula (Contract, Purpose Statement, and Expression)")
+    (write-title "Contents (Contract, Purpose Statement, and Expression)")
     "[.recipe.recipe_contract]\n"
     (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
     "->"
