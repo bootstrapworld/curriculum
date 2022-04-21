@@ -151,7 +151,7 @@
     (if (= n 0) r
         (loop (- n 1) (string-append r s)))))
 
-(define (fitbruby width text ruby [show? #t])
+(define (fitbruby width text ruby-classes [show? #t])
   (when (string=? width "")
     (set! width "100%"))
   (string-append
@@ -160,8 +160,7 @@
                           "style=\"flex-grow: 1\""
                           (format "style=\"width: ~a\"" width)))
     (if show? text "")
-    (create-begin-tag "span" ".ruby")
-    ruby
+    (create-begin-tag "span" (string-append ".ruby" ruby-classes))
     (create-end-tag "span")
     (create-end-tag "span")))
 

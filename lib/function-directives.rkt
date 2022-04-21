@@ -1076,45 +1076,45 @@
     "image:../images/AskQuestions.png[Ask Questions icon]"
     "\n"
     "|\n"
-    (fitbruby "" question "What question do you have?" *show-question?*)
+    (fitbruby "" question ".data-cycle-question" *show-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    "What type of question is this? (circle one) "
+    (enclose-span ".data-cycle-type-of-question" "")
     (hspace "1.5em")
-    " Lookup "
+    (enclose-span ".data-cycle-lookup" "")
     (hspace "1.5em")
-    " Arithmetic "
+    (enclose-span ".data-cycle-arithmetic" "")
     (hspace "1.5em")
-    " Statistical"
+    (enclose-span ".data-cycle-statistical" "")
     "\n\n"
     "| "
     "image:../images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
-    (fitbruby "" rows "What Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)" *show-rows?*)
+    (fitbruby "" rows ".data-cycle-rows" *show-rows?*)
     "\n\n"
-    (fitbruby "" cols "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)" *show-cols?*)
+    (fitbruby "" cols ".data-cycle-cols" *show-cols?*)
     "\n\n"
     "| "
     "image:../images/AnalyzeData.png[Analyze icon]"
     "\n"
     "|\n"
-    (fitbruby "" filter-fn "If you only need _*some*_ rows, define your filter function here (Need help? Use the Design Recipe!)" *show-filter?*)
+    (fitbruby "" filter-fn ".data-cycle-filter" *show-filter?*)
     "\n\n"
-    (fitbruby "" build-fn "If you need to make a _*new*_ column, define your builder function  here (Need help? Use the Design Recipe!)" *show-build?*)
+    (fitbruby "" build-fn ".data-cycle-build" *show-build?*)
     "\n\n"
-    (fitbruby "" expression "Write the code that will make the table or display what you want." *show-expression?*)
+    (fitbruby "" expression ".data-cycle-expression" *show-expression?*)
     "\n\n"
     "| "
     "image:../images/InterpretData.png[Interpret icon]"
     "\n"
     "|\n"
-    (fitbruby "" finding "What did you find out? What can you infer?" *show-finding?*)
+    (fitbruby "" finding ".data-cycle-finding" *show-finding?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (fitbruby "" new-question "What new question(s) does this raise?" *show-new-question?*)
+    (fitbruby "" new-question ".data-cycle-new-question" *show-new-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n"
