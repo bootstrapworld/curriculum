@@ -25,8 +25,8 @@ img { border: solid 1px; box-shadow: 1px 1px 1px 0px gray; }
 | Student-facing Lesson Goals
 |
 
-* Knowing when data is "dirty" - and should be avoided!
-* Knowing how to collect clean data
+* Know when data is "dirty" - and should be avoided!
+* Know how to collect clean data
 
 | Materials
 |[.materials-links]
@@ -54,7 +54,7 @@ There are many interesting datasets out there to visualize and analyze, but what
 * An airline could gather data on fuel usage to see which airplane routes are the most efficient.
 * We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest!
 
-*Not all data is created equal....* Only _clean_ data can be properly processed and analyzed.
+*Not all data is created equal.* Only _clean_ data can be properly processed and analyzed.
 
 [.lesson-point]
 What does it mean for data to be clean? What does it mean for data to be dirty?
@@ -67,7 +67,7 @@ Humans make mistakes, and that can happen when we are collecting data or enterin
 There is a _lot_ of dirty data out there that Data Scientists have to deal with!
 
 
-Let's take a look at some dirty data...
+Let's take a look at some dirty data.
 
 [.lesson-instruction]
 Have students open the @starter-file{fav-desserts} and answer the questions on @printable-exercise{survey-analysis.adoc}.
@@ -87,8 +87,13 @@ This could be an opportunity to have students practice cleaning data and importi
 
 == Cleaning Data @duration{15 minutes}
 
-Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Have students
-open @link{https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing, New Animals!} and complete @printable-exercise{pages/dirty-explore.adoc} in pairs or small groups.
+=== Overview
+Students analyze a sample dataset to consider the different ways that data can be dirty.
+
+
+=== Launch
+
+Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Here are four ways that data can be dirty:
 
 . Missing Data - A column containing some cells with data, but some cells left blank.
 
@@ -96,16 +101,21 @@ open @link{https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwH
 
 . Inconsistent Units - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
 
-. Inconsistent Naming -
+. Inconsistent Naming - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
 
 [.lesson-instruction]
-Have students share their findings from @printable-exercise{pages/dirty-explore.adoc}.
+- Open @link{https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing, New Animals!} and complete @printable-exercise{pages/dirty-explore.adoc} in pairs or small groups.
+
+Have students share their results when they are finished.
+
+=== Investigate
 
 Pyret is pretty smart, and does a lot of checking to make sure data is clean before analyzing it. But many tools - like Google Sheets, Microsoft Excel, etc. - don't. Suppose you tried to analyze this data in a tool that doesn't do all this checking...
 
-. What would happen if you tried to make a pie chart from a categorical column, but three of the cells were blank?
-. What would happen if you tried to take a histogram of a quantitative column, but half the cells were Strings instead of Numbers?
-. What would happen if you made a scatter plot examining `pounds` v. `weeks`, but two of the cells in the `weeks` column were actually showing the _days_ to adoption?
+[.lesson-instruction]
+- What would happen if you tried to make a pie chart from a categorical column, but three of the cells were blank?
+- What would happen if you tried to take a histogram of a quantitative column, but half the cells were Strings instead of Numbers?
+- What would happen if you made a scatter plot examining `pounds` v. `weeks`, but two of the cells in the `weeks` column were actually showing the _days_ to adoption?
 
 Sometimes, there's an easy way to clean up the data. Chanel and Bibbles have string values for their weights, but we can easily change them to be numbers representing pounds.
 
@@ -169,7 +179,7 @@ While it's almost impossible to _guarantee_ 100% clean data, most survey tools i
 - Have you ever taken a survey, where the answer you want to give isn't listed?
 - Have you ever taken a survey, where you just _know_ the questions are going to result in bad data?
 - When someone conducts a survey and provides a dataset from it, is it important for them to share the survey? Why or why not?
-- When someone share dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
+- When someone shares a dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
