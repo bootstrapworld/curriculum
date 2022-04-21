@@ -1,98 +1,57 @@
 @import url("./shared.css");
 
-.recipe_name::after {
-  content: "function name";
-}
+.Optional::before {content: "Optional: ";}
+.OptProject::before { content: "Optional Project "; }
 
-.codap .recipe_name::after {
-  content: "transformer name";
-}
+/*****************************************************
+ * DESIGN RECIPE
+ */
+.recipe_name::after           { content: "function name"; }
+.codap .recipe_name::after    { content: "transformer name"; }
 
-.recipe_purpose::after {
-  content: "what does the function do?";
-}
+.recipe_purpose::after        { content: "what does the function do?"; }
+.codap .recipe_purpose::after { content: "Purpose: what does the formula do for each row?"; }
 
-.codap .recipe_purpose::after {
-  content: "Purpose: what does the formula do for each row?";
-}
-
-.recipe_domain::after {
-  content: "domain";
-}
-
-.recipe_range::after {
-  content: "range";
-}
-
-.recipe_variables::after {
-  content: "variable(s)";
-}
-
-.recipe_example_inputs::after {
-  content: "input(s)";
-}
-
+.recipe_domain::after         { content: "domain"; }
+.recipe_range::after          { content: "range"; }
+.recipe_variables::after      { content: "variable(s)"; }
+.recipe_example_inputs::after { content: "input(s)"; }
 .recipe_example_body::after,
 .recipe_example_body_short::after,
 .recipe_example_body_long::after {
   content: "what the function produces";
 }
 
-.recipe_definition_body::after {
-  content: "what the function does with those variable(s)";
-}
-
+.recipe_definition_body::after{ content: "what the function does with those variable(s)"; }
 .codap .recipe_formula::after {
   content: 'i.e. Weight < 20 or Species = "rabbit". Pay careful attention to capitalization and quotation marks.';
 }
 
-.Optional::before {content: "Optional: ";}
-.OptProject::before { content: "Optional Project "; }
-
-.data-cycle .data-cycle-question::after {
-  content: "What question do you have?";
-}
-
-.data-cycle .data-cycle-type-of-question::after {
-  content: "What type of question is this? (circle one) ";
-}
-
-.data-cycle .data-cycle-lookup::after {
-  content: " Lookup ";
-}
-
-.data-cycle .data-cycle-arithmetic::after {
-  content: " Arithmetic ";
-}
-
-.data-cycle .data-cycle-statistical::after {
-  content: " Statistical ";
-}
-
-.data-cycle .data-cycle-rows::after {
+/*****************************************************
+ * DATA CYCLE 
+ */
+.data-cycle-question::after { content: "What question do you have?"; }
+.data-cycle-type-of-question::after { content: "What type of question is this? (circle one) "; }
+.data-cycle-lookup::after     { content: " Lookup "; }
+.data-cycle-arithmetic::after { content: " Arithmetic "; }
+.data-cycle-statistical::after{ content: " Statistical "; }
+.data-cycle-rows::after {
   content: "What Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)";
 }
-
-.data-cycle .data-cycle-cols::after {
-  content: "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)";
-}
-
-.data-cycle .data-cycle-filter::after {
+.data-cycle-cols::after   { content: "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)"; }
+.data-cycle-filter::after {
   content: "If you only need some rows, define your filter function here (Need help? Use the Design Recipe!)";
 }
-
-.data-cycle .data-cycle-build::after {
+.codap .data-cycle-filter::after {
+  content:  "If you only need some rows, write an expression for your Filter Transformer here."
+}
+.data-cycle-build::after {
   content: "If you need to make a new column, define your builder function here (Need help? Use the Design Recipe!)";
 }
-
-.data-cycle .data-cycle-expression::after {
-  content: "Write the code that will make the table or display what you want.";
+.codap .data-cycle-build::after{
+  content: "If you need to Transform or Build an attribute, write the expression for your Transformer here.";
 }
-
-.data-cycle .data-cycle-finding::after {
-  content: "What did you find out? What can you infer?";
-}
-
-.data-cycle .data-cycle-new-question::after {
-  content: "What new question(s) does this raise?";
-}
+.data-cycle-expression::after   { content: "Write the code that will make the table or display what you want."; }
+.codap .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(3) { display: none; }
+.data-cycle-finding::after      { content: "What did you find out? What can you infer?"; }
+.data-cycle-new-question::after { content: "What new question(s) does this raise?"; }
