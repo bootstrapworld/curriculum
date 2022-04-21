@@ -2,49 +2,55 @@
 /* hide/adjust template elements */
 h1, #savetodrive-div, .acknowledgment { display: none !important; }
 #content {
-  margin:     0;
-  padding:    0;
-  height:     99% !important;
-  position:   absolute;
-  text-align: center !important;
+  margin:           0;
+  padding:          0;
+  height:           99% !important;
+  position:         absolute;
+  text-align:       center !important;
 }
 
 body { margin:  0.5in; }
 
 a, #content { color: black !important; }
 .posterImage {
-  width:        auto !important;
-  min-width:    5in;
-  max-width:    7in;
-  border-radius:20px;
-  border:       20px solid black;
-  display:      inline-block;
-  margin:       0 !important;
+  width:            auto !important;
+  min-width:        5in;
+  max-width:        7in;
+  border-radius:    20px;
+  border:           20px solid black;
+  display:          inline-block;
+  margin:           0 !important;
+  margin-left:      1rem !important;  /* make up for the width of the credit */
 }
 .posterImage::after { content: ' '; display: block; }
 .posterImage  p  { 
-  margin: 0 !important; 
-  padding: 0; 
-  display: inline-block; 
-  overflow: unset !important;
+  margin:           0 !important; 
+  padding:          0; 
+  display:          inline-block; 
+  overflow:         unset !important;
+  vertical-align:   bottom;
 }
 .posterImage img { 
-  min-width: 5in; 
-  max-width: 7in; 
-  max-height: 5.35in; 
-  margin-left: 0.7rem !important;  /* make up for the width of the credit */
+  min-width:        5in; 
+  max-width:        7in; 
+  max-height:       5.35in; 
 }
 
 .credit { 
-  writing-mode: vertical-rl; 
+  writing-mode:     vertical-rl; 
   text-orientation: mixed; 
-  width: 0.7rem !important; 
-  display: inline;
+  width:            1rem !important; 
+  height:           5.35in; 
+  display:          inline-table;
+  vertical-align:   bottom;
+  margin-bottom:    20px;
 }
 .credit p { 
-  min-height: unset !important; 
-  margin: 0 !important; 
-  font-size: 0.6rem !important; 
+  min-height:       unset !important; 
+  margin:           0 !important; 
+  font-size:        0.6rem !important; 
+  line-height:      0.6rem;
+  text-align:       right;
 }
 
 .name p, .title p, .text p { 
