@@ -124,7 +124,6 @@
     ("functions-can-be-linear"
         "MP.1"
         "MP.2"
-        "MP.3"
         "MP.5"
         "MP.7"
         )

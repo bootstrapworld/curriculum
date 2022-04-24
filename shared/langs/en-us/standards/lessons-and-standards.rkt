@@ -25,12 +25,9 @@
         "OK.G.2D.1.8"
         )
 
-    ("defining-functions" 
+    ("functions-make-life-easier" 
         "6.EE.B.6" ; STEMworks
-        "HSF.IF.A" ; STEMworks
-        "HSF.IF.A.2"
         "HSF.IF.B"
-        "HSF.IF.C"
         "7.EE.B.4"
         "8.F.B"
         "1B-AP-15" ; STEMworks
@@ -41,8 +38,6 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "HSA.SSE.A.1"
-        "8.SP.A.1" 
-        "HSF.BF.A.1" 
         "6-8.Algorithms and Programming.Variables" 
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
@@ -55,6 +50,56 @@
         "OK.MAP.5"
         "OK.MAP.6"
         "OK.3.AP.PD.01"
+        )
+
+    ("functions-examples-definitions"
+        "HSF.IF.C"
+        "6.EE.B.6" ; STEMworks)
+
+    ("functions-dr" 
+        "8.F.B"
+        "7.EE.B"
+        "HSF.BF.A.1"
+        "HSF.IF.C"
+        "OK.6.AP.A.01"
+        "OK.6.AP.PD.05"
+        "OK.7.AP.A.01"
+        "OK.7.AP.PD.05"
+        "OK.8.AP.A.01"
+        "OK.8.AP.PD.04"
+        "OK.8.AP.PD.05"
+        "OK.PA.A.1.2"
+        "OK.PA.A.1.3"
+        "OK.PA.A.2"
+        "OK.PA.A.2.1"
+        "OK.L2.AP.PD.05"
+        "OK.MAP.7"
+        "OK.3.AP.PD.01"
+        "OK.3.AP.PD.04"
+        "OK.4.AP.PD.04"
+        "OK.5.AP.PD.04"
+        )
+
+    ("functions-collaboration" 
+        "6.EE.B.6"
+        "7.EE.B"
+        "7.EE.B.4"
+        "8.F.B"
+        "OK.PA.A.1.3"
+        "OK.PA.A.2"
+        "OK.PA.A.2.1"
+        "OK.8.AP.A.01"
+        "OK.6.AP.PD.03"
+        "OK.7.AP.PD.03"
+        "OK.8.AP.PD.03"
+        "OK.L2.AP.PD.05"
+        "2-AP-11"
+        "2-AP-17"
+        "2-AP-19"
+        "3B-AP-14"
+        "3B-AP-21"
+        "OK.3.AP.PD.01"
+        "OK.L2.AP.M.01"
         )
 
     ("defining-values"
@@ -190,6 +235,51 @@
         "2-AP-19"  ; STEMworks
         "3B-AP-21" ; STEMworks
         )
+
+    ("function-notation"
+        "HSF.IF.A" ; STEMworks  <- recommend we keep this, and remove sub-standards
+        "HSF.IF.A.2"
+        "HSF.IF.B.5")
+
+    ("functions-can-be-linear"
+        "HSF.IF.C"
+        "HSF.BF.A.1" 
+        "8.EE.B"
+        "8.F.A.2"
+        "8.F.B.4"
+        "8.EE.B.5"
+        "8.EE.B.6"
+        "HSF.IF.B.5"
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2"
+        "OK.PA.A.2.4"
+        "OK.A1.F.2.1")
+
+    ("functions-vertical-line-test"
+        "HSF.IF.C"
+        "HSF.BF.A.1" 
+        )
+
+    ("function-definition-linear"
+        "8.EE.B"
+        "8.EE.B.5"
+        "6.EE.B.6" ; STEMworks
+        "HSF.IF.A.1"
+        "HSF.IF.A.2"
+        
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2"
+        "OK.PA.A.2.3"
+        "OK.A1.A.4"
+        "OK.A1.A.4.1"
+        "OK.A1.F.3"
+        "OK.A1.F.3.1"
+        "OK.PA.A.2.4"
+        "OK.A1.F.2.1")
 
     ("functions-for-character-animation" 
         "8.F.B"
@@ -366,51 +456,6 @@
         "OK.7.AP.M.01"
         "OK.8.AP.M.01"
         "OK.L1.AP.M.01"
-        )
-        
-    ("restating-the-problem" 
-        "8.F.B"
-        "HSF.BF.A.1"
-        "OK.6.AP.A.01"
-        "OK.6.AP.PD.05"
-        "OK.7.AP.A.01"
-        "OK.7.AP.PD.05"
-        "OK.8.AP.A.01"
-        "OK.8.AP.PD.04"
-        "OK.8.AP.PD.05"
-        "OK.PA.A.1.2"
-        "OK.PA.A.1.3"
-        "OK.PA.A.2"
-        "OK.PA.A.2.1"
-        "OK.L2.AP.PD.05"
-        "OK.MAP.7"
-        "OK.3.AP.PD.01"
-        "OK.3.AP.PD.04"
-        "OK.4.AP.PD.04"
-        "OK.5.AP.PD.04"
-        )
-
-    ("solving-word-problems" 
-        "6.EE.B.6"
-        "7.EE.B"
-        "7.EE.B.4"
-        "8.F.B"
-        "HSF.IF.A.2"
-        "OK.PA.A.1.3"
-        "OK.PA.A.2"
-        "OK.PA.A.2.1"
-        "OK.8.AP.A.01"
-        "OK.6.AP.PD.03"
-        "OK.7.AP.PD.03"
-        "OK.8.AP.PD.03"
-        "OK.L2.AP.PD.05"
-        "2-AP-11"
-        "2-AP-17"
-        "2-AP-19"
-        "3B-AP-14"
-        "3B-AP-21"
-        "OK.3.AP.PD.01"
-        "OK.L2.AP.M.01"
         )
 
     ("surface-area-rect-prism"
@@ -611,40 +656,6 @@
         "9-12.Algorithms and Programming.Control"
         )
 
-    ("linearity"
-        "6.EE.B.6" ; STEMworks
-        "8.F.A.2"
-        "8.F.B.4"
-        "8.EE.B.5"
-        "HSF.IF.A" ; STEMworks  <- recommend we keep this, and remove sub-standards
-        "HSF.IF.A.2"
-        "HSF.IF.B.5"
-        "HSF.IF.C"
-        "HSF.IF.C.9"
-        "OK.PA.A.2.1"
-        "OK.PA.A.2.2"
-        "OK.PA.A.2.4"
-        "OK.A1.F.2.1"
-        )
-
-    ("linearity2"
-        "6.EE.B.6" ; STEMworks
-        "HSF.IF.A.1"
-        "HSF.IF.A.2"
-        "HSF.IF.B.5"
-        "HSF.IF.C"
-        "HSF.IF.C.9"
-        "OK.PA.A.2.1"
-        "OK.PA.A.2.2"
-        "OK.PA.A.2.3"
-        "OK.A1.A.4"
-        "OK.A1.A.4.1"
-        "OK.A1.F.3"
-        "OK.A1.F.3.1"
-        "OK.PA.A.2.4"
-        "OK.A1.F.2.1"
-        )
-
     ("linear-regression" 
         "HSS.ID.C.7" 
         "HSS.ID.C.8" 
@@ -750,6 +761,8 @@
 
     ("random-samples" 
         "HSS.IC.B.3" 
+        "7.SP.A"
+        "7.SP.A.1"
         "2-DA-08" 
         "2-DA-09"
         "OK.PA.A.2.2"
