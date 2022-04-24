@@ -117,9 +117,9 @@
         )
 
     ("function-notation"
-        "MP.7"
         "MP.4"
-        "MP.6")
+        "MP.6"
+        "MP.7")
 
     ("functions-can-be-linear"
         "MP.1"
