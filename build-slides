@@ -49,7 +49,7 @@ for natlang in *; do
        $progdir/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
          title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
-         if test -f "$idfile"; then
+         if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
            md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > /dev/null 2>&1
          else
