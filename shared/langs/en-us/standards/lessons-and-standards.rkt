@@ -8,7 +8,8 @@
 ;; CORE
 
     ("computing-needs-all-voices"
-        "OK.6.IC.C.01")
+        "OK.6.IC.C.01"
+        )
 
     ("contracts" 
         "8.F.A.1"
@@ -54,7 +55,8 @@
 
     ("functions-examples-definitions"
         "HSF.IF.C"
-        "6.EE.B.6" ; STEMworks)
+        "6.EE.B.6" ; STEMworks
+        )
 
     ("functions-dr" 
         "8.F.B"
@@ -239,7 +241,8 @@
     ("function-notation"
         "HSF.IF.A" ; STEMworks  <- recommend we keep this, and remove sub-standards
         "HSF.IF.A.2"
-        "HSF.IF.B.5")
+        "HSF.IF.B.5"
+        )
 
     ("functions-can-be-linear"
         "HSF.IF.C"
@@ -255,7 +258,8 @@
         "OK.PA.A.2.1"
         "OK.PA.A.2.2"
         "OK.PA.A.2.4"
-        "OK.A1.F.2.1")
+        "OK.A1.F.2.1"
+        )
 
     ("functions-vertical-line-test"
         "HSF.IF.C"
@@ -268,7 +272,6 @@
         "6.EE.B.6" ; STEMworks
         "HSF.IF.A.1"
         "HSF.IF.A.2"
-        
         "HSF.IF.C"
         "HSF.IF.C.9"
         "OK.PA.A.2.1"
@@ -279,7 +282,8 @@
         "OK.A1.F.3"
         "OK.A1.F.3.1"
         "OK.PA.A.2.4"
-        "OK.A1.F.2.1")
+        "OK.A1.F.2.1"
+        )
 
     ("functions-for-character-animation" 
         "8.F.B"
@@ -813,7 +817,8 @@
         "OK.A1.D.1.2"
         "OK.3.DA.CVT.01"
         "OK.4.DA.CVT.01"
-        "OK.5.DA.CVT.01")
+        "OK.5.DA.CVT.01"
+        )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REACTIVE
