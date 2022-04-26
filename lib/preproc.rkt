@@ -1101,15 +1101,8 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (fprintf o "link:./.pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
     (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
-    (let ([lo (open-output-file
-                (build-path *containing-directory* ".pathway-lessons.asciidoc")
-                #:exists 'replace)]
-          [toco (open-output-file
-                  (build-path *containing-directory* ".pathway-lessons-toc.asciidoc")
-                  #:exists 'replace)]
-          [st-o (open-output-file
+    (let ([st-o (open-output-file
                   (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
                   #:exists 'replace)]
           [tb-o (open-output-file
@@ -1118,10 +1111,6 @@
           [pr-o (open-output-file
                   (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
                   #:exists 'replace)])
-        (fprintf lo "= Lessons Used in This Pathway\n\n")
-        (fprintf lo ":frompathwayroot: ../../../\n\n")
-        (fprintf lo "include::~a/.pathway-lessons-toc.asciidoc[]\n\n" *containing-directory*)
-        (fprintf toco "[verse]\n")
         (for ([lesson lessons])
           ;(printf "tackling lesson i ~s\n" lesson)
           (let ([lesson-asc-file
@@ -1195,16 +1184,8 @@
             ;(unless (file-exists? lesson-asc-file)
             ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
 
-            (when (file-exists? lesson-asc-file)
-              ;(printf "~a exists i\n" lesson-asc-file)
-              (fprintf lo "[[~a]]~n" lesson)
-              (fprintf toco "<<~a>>~n" lesson)
-              (fprintf lo "== ~a\n" lesson-title)
-              (fprintf lo "\ninclude::lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
-                       lesson))))
+            ))
 
-    (close-output-port lo)
-    (close-output-port toco)
     (close-output-port st-o)
     (close-output-port tb-o)
     (close-output-port pr-o)

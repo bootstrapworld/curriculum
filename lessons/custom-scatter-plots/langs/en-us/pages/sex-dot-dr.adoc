@@ -1,5 +1,27 @@
+= Word Problem: sex-dot
+++++
+<style>
+/* Hide DR elements we want hidden */
+#content .recipe_purpose_statement, table.recipe_title {
+  display: none !important;
+}
+/* Make the instructions more prominent, to take the place of headers */
+#content .recipe_instructions * {
+  font-style: italic;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
+.pyret .recipe_name {
+    text-align: center;
+}
+
+</style>
+++++
+
 @design-recipe-exercise{ "sex-dot"
 "We want to generate a custom dot for our `image-scatter-plot`, to distinguish female, hermaphrodite, and male animals. Write a function called @funname, which takes in a Row from the animals table and generates a 5-pixel solid dot: red if the animal is female, purple if the animal is hermaphrodite and black if the animal is male."
+  #:headless? #t
   #:show-funname-contract? #f
   #:domain-list (list "Row")
   #:show-domains? #f
