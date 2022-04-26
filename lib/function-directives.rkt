@@ -675,6 +675,7 @@
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
+                                #:dist-root-dir [dist-root-dir ""]
                                 #:solutions-mode? [solutions-mode? #f]
                                 #:page-header (page-header "Word Problem")
                                 #:show-funname-contract? (show-funname-contract? #f)
@@ -788,6 +789,7 @@
 (define (assess-design-recipe
           funname directions
           #:proglang [proglang "pyret"]
+          #:dist-root-dir [dist-root-dir ""]
           #:solutions-mode? [solutions-mode? #f]
           #:domain-list (domain-list '()) ; list of string
           #:range (range #f)
@@ -1030,6 +1032,7 @@
 
 (define (data-cycle instructions
                     #:proglang [proglang #f]
+                    #:dist-root-dir [dist-root-dir ""]
                     #:solutions-mode? [solutions-mode? #f]
                     #:question [question ""]
                     #:show-question? [show-question? #f]
@@ -1074,7 +1077,7 @@
     "[.data-cycle, cols=\"^.^3, .^20\", stripes=\"none\"]\n"
     "|===\n"
     "| "
-    "image:../images/AskQuestions.png[Ask Questions icon]"
+    "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
     "\n"
     "|\n"
     (fitbruby "" question ".data-cycle-question" *show-question?*)
@@ -1090,7 +1093,7 @@
     (enclose-span ".data-cycle-statistical" "")
     "\n\n"
     "| "
-    "image:../images/ConsiderData.png[Consider Data icon]"
+    "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
     (fitbruby "" rows ".data-cycle-rows" *show-rows?*)
@@ -1098,7 +1101,7 @@
     (fitbruby "" cols ".data-cycle-cols" *show-cols?*)
     "\n\n"
     "| "
-    "image:../images/AnalyzeData.png[Analyze icon]"
+    "image:" dist-root-dir "lib/images/AnalyzeData.png[Analyze icon]"
     "\n"
     "|\n"
     (fitbruby "" filter-fn ".data-cycle-filter" *show-filter?*)
@@ -1108,7 +1111,7 @@
     (fitbruby "" expression ".data-cycle-expression" *show-expression?*)
     "\n\n"
     "| "
-    "image:../images/InterpretData.png[Interpret icon]"
+    "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
     "\n"
     "|\n"
     (fitbruby "" finding ".data-cycle-finding" *show-finding?*)
