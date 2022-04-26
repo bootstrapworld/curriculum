@@ -265,6 +265,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("name") "how we refer to a function or value defined in a language (examples: +, *, star, circle)")
      (es-mx ("nombre") "cómo nos referimos a una función o valor definido en un idioma (ejemplos: +, *, star, circle)"))
     
+    ((en-us ("null hypothesis") "the hypothesis that there is no significant difference between specified populations, any observed difference being due to sampling or experimental error.")
+     (es-mx ("hipótesis nula") "la hipótesis de que no hay diferencia significativa entre poblaciones específicas, cualquier diferencia observada se debe a un error de muestreo o experimental."))
+
     ((en-us ("navigator") "in pair programming, the person who has their eyes on the screen directing the driver")
      (es-mx "navegadora" "en programación en pareja, la persona con los ojos en la pantalla, dirigiendo al conductor"))
     
