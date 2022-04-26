@@ -42,7 +42,7 @@
 
   ; data-science
 
-  ("context" "Blank Dataset Starter File for Bootstrap:Data Science"
+  ("blank-ds" "Blank Dataset Starter File for Bootstrap:Data Science"
     ("pyret" "https://code.pyret.org/editor#share=1HOkwUMWFgB3bR50JykQc2aWEw8iUo9GM")
     )
 
