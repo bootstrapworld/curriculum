@@ -1660,6 +1660,7 @@
                                 (let ([args (string-to-form g)])
                                   (set! args (append args
                                                      (list '#:proglang *proglang*
+                                                           '#:dist-root-dir *dist-root-dir*
                                                            '#:solutions-mode? *solutions-mode?*)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
