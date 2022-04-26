@@ -16,8 +16,48 @@
   @ifsoln{_students should highlight or circle:_} @showsoln{(code '(star 15 "solid" "yellow")) }
 
 
-@ifproglang{wescheme}{@centered-image{../images/china-code-wescheme.png, China code WeScheme}}
-@ifproglang{pyret}{@centered-image{../images/china-code-pyret.png, China code Pyret}}
+@ifproglang{wescheme}{
+----
+(define China
+  (put-image (
+   rotate 40 (star 15 "solid" "yellow"))
+   120 175
+       (put-image (
+        rotate 80 (star 15 "solid" "yellow"))
+        140 150
+            (put-image (
+             rotate 60 (star 15 "solid" "yellow"))
+             140 120
+                 (put-image (
+                  rotate 40 (star 15 "solid" "yellow"))
+                  120 90
+                      (put-image (
+                       scale 3 (star 15 "solid" "yellow"))
+                       60 140
+                          (rectangle 300 200 "solid" "red")))))))
+----
+}
+
+@ifproglang{pyret}{
+----
+china =
+  put-image(
+    rotate(40,star(15,"solid","yellow")),
+    120, 175,
+    put-image(
+      rotate(80,star(15,"solid","yellow")),
+      140, 150,
+      put-image(
+        rotate(60,star(15,"solid","yellow")),
+        140, 120,
+        put-image(
+          rotate(40,star(15,"solid","yellow")),
+          120, 90,
+          put-image(scale(3,star(15,"solid","yellow")),
+            60, 140,
+            rectangle(300, 200, "solid", "red"))))))
+----
+}
 
 
 @n Write the code to define a value for the repeated expression.
