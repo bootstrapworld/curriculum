@@ -1022,8 +1022,10 @@
     (lambda (o)
       (display desc o) (newline o))
     #:exists 'replace)
+  (display "\n\n[.description]\n" o)
   (display desc o)
-  (newline o))
+  (display "\n\n" o)
+  )
 
 (define (link-to-opt-projects o)
   ; (printf "doing link-to-opt-projects\n")
