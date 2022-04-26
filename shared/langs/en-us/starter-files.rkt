@@ -182,7 +182,7 @@
    )
   ("prism" "Surface Area of a Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=3QDJBmzYp0")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=ZduhqzWFbx")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
