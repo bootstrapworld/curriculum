@@ -526,23 +526,18 @@
 
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
-  (cond [(null? *textbooks-represented*)
-         (display (create-begin-tag "div" ".sidebartextbooks") o)
-         (display "*Textbook Alignment*: _None_" o)
-         (display (create-end-tag "div") o)
-         (display "\n" o)]
-        [else
-          (display "\n[.sidebartextbooks,cols=\"a\"]" o)
-          (display "\n|===\n" o)
-          (display "| " o)
-          (display "*Textbook Alignment*\n" o)
-          (display-textbooks-selection o *textbooks-represented*)
-          (display " | \n" o)
-          ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
-          ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
-          (fprintf o "\ninclude::.index-textbooks.asc[]\n")
-          (display "|===\n" o)
-          ]))
+  (unless (null? *textbooks-represented*)
+    (display "\n[.sidebartextbooks,cols=\"a\"]" o)
+    (display "\n|===\n" o)
+    (display "| " o)
+    (display "*Textbook Alignment*\n" o)
+    (display-textbooks-selection o *textbooks-represented*)
+    (display " | \n" o)
+    ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
+    ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
+    (fprintf o "\ninclude::.index-textbooks.asc[]\n")
+    (display "|===\n" o)
+    ))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -1101,15 +1096,8 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (fprintf o "link:./.pathway-lessons.shtml[All the lessons] :: This is a single page that contains all the lessons listed above.\n")
     (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
-    (let ([lo (open-output-file
-                (build-path *containing-directory* ".pathway-lessons.asciidoc")
-                #:exists 'replace)]
-          [toco (open-output-file
-                  (build-path *containing-directory* ".pathway-lessons-toc.asciidoc")
-                  #:exists 'replace)]
-          [st-o (open-output-file
+    (let ([st-o (open-output-file
                   (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
                   #:exists 'replace)]
           [tb-o (open-output-file
@@ -1118,10 +1106,6 @@
           [pr-o (open-output-file
                   (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
                   #:exists 'replace)])
-        (fprintf lo "= Lessons Used in This Pathway\n\n")
-        (fprintf lo ":frompathwayroot: ../../../\n\n")
-        (fprintf lo "include::~a/.pathway-lessons-toc.asciidoc[]\n\n" *containing-directory*)
-        (fprintf toco "[verse]\n")
         (for ([lesson lessons])
           ;(printf "tackling lesson i ~s\n" lesson)
           (let ([lesson-asc-file
@@ -1195,16 +1179,8 @@
             ;(unless (file-exists? lesson-asc-file)
             ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
 
-            (when (file-exists? lesson-asc-file)
-              ;(printf "~a exists i\n" lesson-asc-file)
-              (fprintf lo "[[~a]]~n" lesson)
-              (fprintf toco "<<~a>>~n" lesson)
-              (fprintf lo "== ~a\n" lesson-title)
-              (fprintf lo "\ninclude::lessons/~a/.cached/.index.asc[leveloffset=+1,2..-1]~n~n"
-                       lesson))))
+            ))
 
-    (close-output-port lo)
-    (close-output-port toco)
     (close-output-port st-o)
     (close-output-port tb-o)
     (close-output-port pr-o)
@@ -1679,6 +1655,7 @@
                                 (let ([args (string-to-form g)])
                                   (set! args (append args
                                                      (list '#:proglang *proglang*
+                                                           '#:dist-root-dir *dist-root-dir*
                                                            '#:solutions-mode? *solutions-mode?*)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
@@ -1802,6 +1779,8 @@
                     )
 
               (expand-directives i o)
+
+              (set! *practices-merited* (reverse *practices-merited*))
 
               ;;(printf "call link-to-lessons-in-pathway?\n")
               ;(when *narrative*
