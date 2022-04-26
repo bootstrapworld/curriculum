@@ -1780,6 +1780,8 @@
 
               (expand-directives i o)
 
+              (set! *practices-merited* (reverse *practices-merited*))
+
               ;;(printf "call link-to-lessons-in-pathway?\n")
               ;(when *narrative*
               ;  ;(printf "yes\n")
