@@ -63,7 +63,8 @@ for natlang in *; do
            cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
            echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
          fi
-         cat "$idfile"|$SED -e 1q|$SED -e 's/^/https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.url
+         cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+         $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
        else
          echo WARNING: slides.md failed preprocessing
        fi
