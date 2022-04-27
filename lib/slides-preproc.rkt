@@ -12,13 +12,20 @@
 (define (errmessage-file-context)
   *in-file*)
 
-(define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX") 
+(define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")
                                "https://bootstrapworld.org/materials/latest/en-us/lessons"))
 
 (define *lesson* (or (getenv "LESSON") "__sample-lesson"))
 
 (define (make-image img text)
   (format "![~a](~a)" text img))
+
+(define (make-math text)
+  (string-append
+    "$$$ math\n"
+    text
+    "\n"
+    "$$$\n"))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -45,15 +52,15 @@
 
 (define (starter-file-link lbl)
   (let ([c (assoc lbl *starter-files*)])
-    (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl) 
+    (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
-          [else 
+          [else
             (let ([title (cadr c)]
                   [p (assoc *proglang* (cddr c))])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
-                    [else 
+                    [else
                       (format "[~a](~a)" title (cadr p))]))])))
 
 (define read-group
@@ -91,6 +98,9 @@
                             (call-with-input-string fragment
                               (lambda (i)
                                 (expand-directives i o)))))]
+                       [(string=? directive "math")
+                        (let ([text (read-group i directive)])
+                          (display (make-math text) o))]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])

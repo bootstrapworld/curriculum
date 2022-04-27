@@ -933,6 +933,7 @@
 
 (define (design-codap-recipe transformer-name directions
                              #:proglang [proglang "codap"]
+                             #:dist-root-dir [dist-root-dir ""]
                              #:solutions-mode? [solutions-mode? #f]
                              #:page-header [page-header "Design Recipe"]
                              #:show-transformer-name? [show-transformer-name? #f]

@@ -7,19 +7,31 @@
 </style>
 ++++
 
-Use the contracts to write expressions to generate images similar to those pictured.
-
 [.center]
 --
 @show{(code 'ellipse)}`{two-colons} Number, Number, String, String -> Image`
 --
-[cols="^.^1,^.^2",stripes="none"]
+[cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/ellipse-50-150-outline.png, black outline of an ellipse that's about 3 times as tall as it is wide}
-| @fitb{}{@showsoln{(code '(ellipse 50 150 "outline" "black")) }}
+|
+[cols="1", stripes="none"]
+!===
+!Use the contract to write an expression that generates a similar image:
+!
+@vspace{1ex}
 
+@fitb{}{@showsoln{(code '(ellipse 50 150 "outline" "black")) }}
+!===
 | @centered-image{../images/ellipse-150-50-solid.png, solid black ellipse that's about 3 times as wide as it is tall}
-| @fitb{}{@showsoln{(code '(ellipse 150 50 "solid" "black")) }}
+| [cols="1", stripes="none"]
+!===
+!Use the contract to write an expression that generates a similar image:
+!
+@vspace{1ex}
+
+@fitb{}{@showsoln{(code '(ellipse 150 50 "solid" "black")) }}
+!===
 
 | What changes with the first number?
 | @fitb{}{@showsoln{"_width_" }}
@@ -29,17 +41,36 @@ Use the contracts to write expressions to generate images similar to those pictu
 | Write an expression using @show{(code 'ellipse)} to produce a circle.
 | @fitb{}{@showsoln{(code '(ellipse 50 50 "solid" "black")) }}
 |===
+
 [.center]
 --
 @show{(code 'regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
 --
-[cols="^.^1,^.^2",stripes="none"]
+[cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/reg-polygon-50-5-solid.png, solid black pentagon}
-| @fitb{}{@showsoln{(code '(regular-polygon 50 5 "solid" "black")) }}
+|
+
+[cols="1", stripes="none"]
+!===
+!Use the contract to write an expression that generates a similar image:
+!
+@vspace{1ex}
+
+@fitb{}{@showsoln{(code '(regular-polygon 50 5 "solid" "black")) }}
+!===
 
 | @centered-image{../images/reg-polygon-25-8-outline.png, black outline of an octagon}
-| @fitb{}{@showsoln{(code '(regular-polygon 25 8 "outline" "black")) }}
+|
+
+[cols="1", stripes="none"]
+!===
+!Use the contract to write an expression that generates a similar image:
+!
+@vspace{1ex}
+
+@fitb{}{@showsoln{(code '(regular-polygon 25 8 "outline" "black")) }}
+!===
 
 | What changes with the first Number?
 | @fitb{}{@showsoln{"_the length of each side_" }}
