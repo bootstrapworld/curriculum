@@ -62,9 +62,23 @@ Have students share back their sample results, and their predictions after 6 sam
 
 Which samples seem to support the null hypothesis? Which ones undermine it? In Statistics and Data Science, samples like these do not *prove* any claim about the coins! Instead, they either _produce evidence for or against_ a claim.
 
-The larger the sample, the more evidence we have to support or reject the @vocab{null hypothesis}. The chances of getting tails from a fair coin three times in a row are pretty good! Maybe it was just the luck of the draw, but the coin is still fair. But 10 times in a row? 100 times? We might say "there's a one in a million chance of a fair coin coming up tails 100 times, so I don't trust the coin!"
+The larger the sample, the more evidence we have to support or reject the @vocab{null hypothesis}. The chances of getting heads from a fair coin three times in a row are pretty good: one-in-8! Maybe it was just the luck of the draw, and the coin is still fair. But what are the chances of flipping "head" 10 times in a row? 100 times? We might say "There's a one in a million chance of a fair coin coming up heads 100 times. No _way_ is this coin fair!"
 
-Statisticians use slightly more fomal language for this. In fact, they even have a special name for the chance of a null hypothesis, called the *p-value*. A Data Scientist or Statistician would say "this sample suggests the coin is weighted (p<0.000001)", meaning "the chances of a fair coin turning up heads 100 times in a row is one-in-one-million"
+But of course, there is a way. It's just...incredibly unlikely.
+
+[.lesson-point]
+p-value: the likelyhood that a pattern is found in a sample, when no such pattern exists in the population
+
+Statisticians would use more formal language to describe this highly unlikely, "one in a million chance". They call it the *p-value*, and use a decimal to represent the chance.
+
+[options="header"]
+|===
+| Most people say...					| Statisticians say...
+| "There's a one-in-10 chance of this!"	| "The p-value is 0.1"
+| "There's a one-in-100 chance of this!"| "The p-value is 0.01"
+| "There's a two-in-100 chance of this!"| "The p-value is 0.02"
+| "There's a one-in-a million chance!"	| "The p-value is 0.000001"
+|===
 
 === Common Misconceptions
 Students may think that _any_ sample from a fair coin should have an equal number of heads and tails outcomes. That's not true at all! A fair coin _might_ land on "tails" three times in a row! The fact that this is possible doesn't mean it's _likely_. Landing on "tails" five times in row? Still possible, but much less likely.
@@ -72,10 +86,11 @@ Students may think that _any_ sample from a fair coin should have an equal numbe
 This is where arithmetic thinking and statistical thinking diverge: it's not a question of what is _possible_, but rather what is _probable_.
 
 === Synthesis
+- Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?
 - Could a coin come up "heads" twice in a row, and still be a fair coin? Why or why not?
 - What about 10 times in a row? 20?
 - What is the relationship between how weighted a coin is, and how many samples you need to figure it out?
-- Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?
+- In your own words, can you explain what a p-value is?
 
 A fair coin should come up heads about 50% of the time. If a coin came up heads 100% of the time, it wouldn't take long to figure out what something was up! But a coin that comes up heads just 60% of the time would need a much larger sample to be detected. There's a connection to be found here, between _sample size_ and _deviation_.  A subtle deviation might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!
 
