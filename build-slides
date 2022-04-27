@@ -51,7 +51,12 @@ for natlang in *; do
          title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
          if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
-           md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > /dev/null 2>&1
+           md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>/dev/null
+           if grep -q 'Unable to generate slides' .tmp.txt; then
+             echo Slides failed for $LESSON/slides.mkd
+             cat .tmp.txt
+           fi
+           rm .tmp.txt
          else
            md2gslides slides.mkd -n -t "$title" --use-fileio > "$idfile" 2> /dev/null
            $SED -i -e 's/.*docs\.google\.com\/presentation\/d\///' "$idfile"
