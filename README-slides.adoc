@@ -2,40 +2,67 @@
 
 == Install md2gslides
 
-The NPM module `md2gslides` is better installed from the git
-clone than directly from the NPM registry as the latter has some
-bugs.
-
-Do -- presumably in `~/src/` --
-
+. Install `md2googleslides`, ideally as a sibling of the curriculum
+folder. If you're already in the curriculum folder, the following
+will create the folder in the proper place:
+----
+  cd ../
   git clone https://github.com/googleworkspace/md2googleslides
+  cd md2googleslides
   npm install
+----
 
-Doing `sudo npm install` didn't work for me, and won't for you
-either likely, because the node setup is so different between
-root and userid (and probably highly tuned for your userid). So
-you need to hand-copy the `md2gslides`-related stuff to your
-`/usr/local`, as follows:
+Note: we're installing from GitHub instead of npm, because the npm
+module is out of date and contains several bugs.
 
+2. You need to hand-copy the `md2gslides`-related stuff to your
+`/usr/local`, as follows. This will require you to know your <USERID>
+and the <PATH> to the `md2googleslides` folder you created in step 1.
+For example, my username is schanzer, and both the md2googleslides
+folder and the curriculum folder live in `Documents/Bootstrap/Development/`
+
+----
   cd /usr/local/lib/node_modules
-  ln -sf ~userid/src/md2googleslides md2gslides
+  ln -sf ~schanzer/Documents/Bootstrap/Development/md2googleslides md2gslides
   
   cd /usr/local/bin
   ln -sf ../lib/node_modules/md2gslides/bin/md2gslides.js md2gslides
+----
 
 == Authentication
 
-Create a directory `.md2googleslides` in your home directory, and
-copy into it the file `client_id.json` (which I will supply to
-you -- I am not sure it is
-safe to put it in the repo as that would make it public). Ensure
-that your preferred email address is included as an allowed user.
+1. Create a directory `.md2googleslides` in your home directory
 
-== First use
+----
+  cd ~/
+  mkdir .md2googleslides
+----
 
-Your first use of `md2gslides` will give you a token and ask you
-to enter it into a given website. Do so. You won't need to do
-this step again.
+2. Talk to Dorai! Ensure that he has added your preferred email
+address is to the Google API settings, and then have him send you
+the `client_id.json` file through a secure channel. Put this file
+inside the `~/.md2googleslides` folder.
+
+== First Use
+
+1. In your terminal window, run md2gslides on a simple, dummy file.
+
+----
+  md2gslides ../curriculum/lib/dummy-slide.md -n -t TITLE --use-fileio
+----
+
+This will generate some terminal output. The first line looks something like
+
+`Authorize this app by visiting this url:
+https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=...`
+
+2. Copy the _entire URL_ (it's quite long!) into a new browser window. This
+will ask you to grant permission for `md2gslides` to construct google
+slides for you, which requires two different permissions. Check both boxes
+and continue. Eventually you will reach a web page that contains a code.
+
+3. Copy that code, and paste it back into your terminal. This closes the loop
+between md2gslides and Google, authenticating your computer. You're ready to rock!
 
 == Subsequent uses
 
@@ -55,11 +82,4 @@ You will be encouraged to add it to your repo and push it so this
 presentation id is used in perpetuity.  (If someone else has
 already done it, you won't need to do it. You'll will just reuse
 this presentation id.)
-
-
-
-
-   
-
-
 
