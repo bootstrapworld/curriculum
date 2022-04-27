@@ -1,0 +1,65 @@
+= Building slides
+
+== Install md2gslides
+
+The NPM module `md2gslides` is better installed from the git
+clone than directly from the NPM registry as the latter has some
+bugs.
+
+Do -- presumably in `~/src/` --
+
+  git clone https://github.com/googleworkspace/md2googleslides
+  npm build
+
+Doing `sudo npm install` didn't work for me, and won't for you
+either likely, because the node setup is so different between
+root and userid (and probably highly tuned for your userid). So
+you need to hand-copy the `md2gslides`-related stuff to your
+`/usr/local`, as follows:
+
+  cd /usr/local/lib/node_modules
+  ln -sf ~userid/src/md2googleslides md2gslides
+  
+  cd /usr/local/bin
+  ln -sf ../lib/node_modules/md2googleslides/bin/md2gslides.js md2gslides
+
+== Authentication
+
+Create a directory `.md2googleslides` in your home directory, and
+copy into it the file `client_id.json` (which I will supply to
+you -- I am not sure it is
+safe to put it in the repo as that would make it public). Ensure
+that your preferred email address is included as an allowed user.
+
+== First use
+
+Your first use of `md2gslides` will give you a token and ask you
+to enter it into a given website. Do so. You won't need to do
+this step again.
+
+== Subsequent uses
+
+The script `build-slides` should be called after building a pathway (i.e.,
+with a `distribution` directory populated with the built pathways
+of your choice). This will build all the slides.md files in the
+built lessons.
+
+(The standard location for slides.md is in the lesson directory,
+alongside its lesson plan adoc. It's ok if a lesson doesn't have
+a slides.md.)
+
+If a slides.md is being pushed to Google Slides for the first
+time, a small file containing its Google presentation id is
+created in your view of the repo (not just the `distribution`).
+You will be encouraged to add it to your repo and push it so this
+presentation id is used in perpetuity.  (If someone else has
+already done it, you won't need to do it. You'll will just reuse
+this presentation id.)
+
+
+
+
+   
+
+
+
