@@ -1,6 +1,30 @@
 ---
 
-# The Numberx Inside Video Games
+# The III Numbers Inside Video Games
+
+---
+
+# Order of Operations
+
+If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. 
+
+Sometimes we need multiple expressions in mathematics, and the order matters there, too!
+
+---
+
+# Order of Operations
+
+@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
+
+Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
+
+---
+
+# How About Some Math
+
+A formula:
+
+@math{6 \div 2(1 + 2)}
 
 ---
 

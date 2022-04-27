@@ -1313,7 +1313,7 @@
                            #:target-pathway [target-pathway #f]
                            #:proglang [proglang "pyret"]
                            #:other-proglang [other-proglang #f]
-                           #:solutions-mode [solutions-mode #f]
+                           #:solutions-mode? [solutions-mode? #f]
                            )
 
   (set! *containing-directory* containing-directory)
@@ -1324,7 +1324,7 @@
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
   (set! *other-proglang* other-proglang)
-  (set! *solutions-mode?* solutions-mode)
+  (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
 

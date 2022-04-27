@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-04-26 # last modified
+LASTMOD=2022-04-27 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -850,13 +850,13 @@ function doadocs() {
 
   for f in $ff; do
     if test $TGTPATHWAY; then
-      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
       fi
       echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
     else
-      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
       fi
