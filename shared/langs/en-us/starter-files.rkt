@@ -222,6 +222,10 @@
    ("pyret" "https://code.pyret.org/editor#share=13RRDcl13HkfNp0Ue7jQUhBNZIumSNxfP")
   )
 
+  ("dimmer-switch" "Light Switch Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1TJVPlYOKEPBDPTp25YMMVGhz5YlctYnj")
+  )
+
   ("what-to-wear" "What to Wear Starter File"
    ("pyret" "https://code.pyret.org/editor#share=15fUR1QAF-O5HIDq95QnctdsdVNfF1Tde")
   )
