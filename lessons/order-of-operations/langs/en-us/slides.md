@@ -5,7 +5,9 @@
 @scrub{Flannery's sample slide file form Order of Operations. Modified so it goes through.}
 
 ---
+# Order of Operations
 
+---
 # Order of Operations
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. 
@@ -17,6 +19,8 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 # Order of Operations
 
 @image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
+
+{.column}
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
@@ -42,8 +46,9 @@ That means that Numbers (e.g. - @math{3}, @math{-29}, @math{77.01}...) are still
 
 If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
 
-@show{(coe '(/ 6 3))}
+{.column}
 
+@image{images/coe1.png, a}
 
 ---
 # Order of Operations
@@ -58,7 +63,9 @@ Circles can contain other Circles
 
 We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!
 
-@show{(coe '(/ 6 (+ 1 2)))}
+{.column}
+
+@image{images/coe2.png, a}
 
 ---
 
@@ -66,13 +73,16 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
-@show{(coe '(* 5 6))}
+{.column}
 
+@image{images/coe3.png, a}
 
 
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
-@show{(coe '(* (- 10 5) 6))}
+{.column}
+
+@image{images/coe4.png, a}
 
 This is a link
 
@@ -105,7 +115,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 
 @table{3}
 |*Expression*			| &rarr; | @show{(math '(+ 3 8)) }
-|*Circle of Evaluation*	| &rarr; | @show{(coe  '(+ 3 8)) }
+|*Circle of Evaluation*	| &rarr; | @image{images/coe5.png, a}
 |*Code*					| &rarr; | @show{(code '(+ 3 8)) }
 
 ---
@@ -114,7 +124,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 
 @table{3}
 |*Expression*			| &rarr; | @show{(math '(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(coe  '(* 2 (+ 3 8))) }
+|*Circle of Evaluation*	| &rarr; | @image{images/coe6.png, a}
 |*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8))) }
 
 ---
@@ -126,15 +136,15 @@ What would the code look like for these circles?
 
 
 @table{2}
-|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
+|@image{images/coe7.png, a}				| @image{images/coe8.png, a}
 
 ---
 # From Circles of Evaluation to Code
 
 
 @table{2}
-|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
-|@show{(code '(/ 6 (+ 1 2)))}		| @show{(code '(* (- 10 5) 6))}
+|@image{images/coe9.png, a}				| @image{images/coe10.png, a}
+|@show{(code '(/ 6 (+ 1 2)))}			| @show{(code '(* (- 10 5) 6))}
 
 ---
 # From Circles of Evaluation to Code
@@ -169,9 +179,10 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 @scrub{Here are two Circles of Evaluation.}
 
 @table{2}
-| @show{(coe `(* 10 -4))}
-| @show{(coe `(text "Good work!" 50 "red"))}
+| @image{images/coe11.png, a}
+| @image{images/coe12.png, a}
 
+{.column}
 One of them is familiar, but the other is very different from what you've been working with. 
 
 - What's different about the Circle on the right?
@@ -182,8 +193,11 @@ One of them is familiar, but the other is very different from what you've been w
 ---
 # Testing out your Code
 
+@image{images/coe13.png, a}
+
+{.column}
+
 Here is another circle to explore.
-@show{(coe `(string-length "fun!"))}
 
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
