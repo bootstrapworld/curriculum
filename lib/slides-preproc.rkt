@@ -100,6 +100,7 @@
          [local-dir ""]
          [local-file ""]
          [fq-uri-dir ""]
+         [local-dir-file ""]
          )
     (case (length page-components)
       [(1)
@@ -117,17 +118,18 @@
       [else
         (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
         ""])
+    (set! local-dir-file (build-path local-dir local-file))
     (unless link-text
       (let* ([local-cached-file (build-path local-dir ".cached" (string-append "." local-file))]
              [local-title-file (path-replace-extension local-cached-file ".titletxt")])
         ; (printf "title file is ~s\n" local-title-file)
         (set! link-text
-          (if (file-exists? local-title-file)
-              (call-with-input-file local-title-file read-line)
-              page))))
+          (cond [(file-exists? local-title-file)
+                 (call-with-input-file local-title-file read-line)]
+                [(file-exists? local-dir-file) local-dir-file]
+                [else (format "<broken link: ~a>" local-dir-file)]))))
     (when (path-has-extension? local-file ".adoc")
-      (let* ([local-dir-file (build-path local-dir local-file)]
-             [f.pdf (path-replace-extension local-dir-file ".pdf")]
+      (let* ([f.pdf (path-replace-extension local-dir-file ".pdf")]
              [f.html (path-replace-extension local-dir-file ".html")])
         ; (printf "III ~s in ~s\n" local-dir-file (current-directory))
         ; (printf "III f.pdf is ~s\n" f.pdf)
