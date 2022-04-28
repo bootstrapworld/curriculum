@@ -78,7 +78,7 @@
     (string-append "<code>" x "</code>")))
 
 (define (coe exp)
-  (format "~s" exp))
+  (format "<code>~s</code>" exp))
 
 (define math code)
 
