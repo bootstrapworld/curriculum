@@ -73,7 +73,7 @@
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
     (set! x (regexp-replace* "{empty}" x ""))
-    x))
+    (string-append "<code>" x "</code>")))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
