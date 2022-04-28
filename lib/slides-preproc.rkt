@@ -3,6 +3,7 @@
 #lang racket
 
 (require "readers.rkt")
+(require "utils.rkt")
 (require "starter-files.rkt")
 (require "function-directives.rkt")
 
@@ -10,10 +11,11 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-
 (define *use-mathjax-for-math?* #f)
 
 (define *in-file* "doesnt-exist")
+
+(define *progdir* (getenv "PROGDIR"))
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
 
@@ -29,6 +31,14 @@
   *in-file*)
 
 (define (make-image img text)
+  ; (printf "make-image ~s\n" img)
+  (unless (file-exists? img)
+    ; (printf "image ~s doesnt exist\n" img)
+    (let ([img-anonymized
+            (system-echo (format "~a/anonymize-filename" *progdir*) img)])
+      ; (printf "anon image file is ~s\n" img-anonymized)
+      (when img-anonymized
+        (set! img img-anonymized))))
   (format "![~a](~a)" text img))
 
 (define (make-math text)
@@ -78,26 +88,56 @@
     (string-append "<code>" x "</code>")))
 
 (define (coe exp)
-  (format "~s" exp))
+  (format "<code>~s</code>" exp))
 
 (define math code)
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
          [page (car args)]
-         [link-text (if (> num-args 1) (cadr args) "")]
+         [link-text (if (> num-args 1) (cadr args) #f)]
          [page-components (regexp-split #rx"/" page)]
-         [fq-uri (case (length page-components)
-                   [(1)
-                    (apply build-path *bootstrap-prefix* *lesson* "pages" page-components)]
-                   [(2)
-                    (apply build-path *bootstrap-prefix* *lesson* page-components)]
-                   [(3)
-                    (apply build-path *bootstrap-prefix* page-components)]
-                   [else
-                     (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
-                     ""])])
-    (format "[~a](~a)" link-text fq-uri)))
+         [local-dir ""]
+         [local-file ""]
+         [fq-uri-dir ""]
+         )
+    (case (length page-components)
+      [(1)
+       (set! local-dir "pages")
+       (set! local-file (car page-components))
+       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/pages"))]
+      [(2)
+       (set! local-dir (car page-components))
+       (set! local-file (cadr page-components))
+       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/" local-dir))]
+      [(3)
+       (set! local-dir (build-path 'up (car page-components) (cadr page-components)))
+       (set! local-file (caddr page-components))
+       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" (car page-components) "/" (cadr page-components)))]
+      [else
+        (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
+        ""])
+    (unless link-text
+      (let* ([local-cached-file (build-path local-dir ".cached" (string-append "." local-file))]
+             [local-title-file (path-replace-extension local-cached-file ".titletxt")])
+        ; (printf "title file is ~s\n" local-title-file)
+        (set! link-text
+          (if (file-exists? local-title-file)
+              (call-with-input-file local-title-file read-line)
+              page))))
+    (when (path-has-extension? local-file ".adoc")
+      (let* ([local-dir-file (build-path local-dir local-file)]
+             [f.pdf (path-replace-extension local-dir-file ".pdf")]
+             [f.html (path-replace-extension local-dir-file ".html")])
+        ; (printf "III ~s in ~s\n" local-dir-file (current-directory))
+        ; (printf "III f.pdf is ~s\n" f.pdf)
+        ; (printf "III f.html is ~s\n" f.html)
+        (cond [(file-exists? f.html)
+               (set! local-file (path->string (path-replace-extension local-file ".html")))]
+              [(file-exists? f.pdf)
+               (set! local-file (path->string (path-replace-extension local-file ".pdf")))])))
+    (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
+      (format "[~a](~a)" link-text fq-uri))))
 
 (define (external-link args directive)
   (let* ([num-args (length args)]
@@ -168,15 +208,15 @@
                             (display (massage-arg s) o)))]
                        [(string=? directive "table")
                         (let ([n (string->number (read-group i directive))])
-                          (let loop ([n n])
-                            (unless (<= n 0)
-                              (display "|_" o)
-                              (loop (- n 1))))
+                          (let loop ([j n])
+                            (unless (<= j 0)
+                              (display (if (= j n) "|DELETE THIS ROW" "|_") o)
+                              (loop (- j 1))))
                           (newline o)
-                          (let loop ([n n])
-                            (unless (<= n 0)
+                          (let loop ([j n])
+                            (unless (<= j 0)
                               (display "|---" o)
-                              (loop (- n 1)))))]
+                              (loop (- j 1)))))]
                        [(string=? directive "scrub")
                         (read-group i directive)]
                        [else (display c o) (display directive o)]))]

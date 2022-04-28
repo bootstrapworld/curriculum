@@ -36,7 +36,7 @@
 @material-links
 |===
 
-== How to Spot a Cheater @duration{10 minutes}
+== How to Spot a Scam @duration{10 minutes}
 
 === Overview
 Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "how many samples do we need, to determine whether a coin is fair or not?"
@@ -111,14 +111,25 @@ In the coin-flip activity we took samples of each coin, then used our knowledge 
 
 Suppose we want to estimate what percentage of all Americans plan to vote for a certain candidate.  We can't ask everyone who they’re voting for, so pollsters instead take a _sample_ of Americans, and _generalize_ the opinion of the sample to estimate how Americans as a whole feel. Just like our coin-flip, we can start out assuming that the vote is split equally. Flipping a coin 10 times isn't enough to prove that it's weighted, and polling 10 people isn't enough to prove that one candidate is in the lead. _Sample size matters!_
 
-[.lesson-instruction]
-* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
-* How could we choose a representative subset, or _sample_ of American voters?
-* Would it be problematic to only sample a handful of voters? What do we gain by taking a larger sample?
+There's more to taking a good sample than just taking a _big_ sample. Suppose you want to take a survey of people's faiths in your neighborhood. There's a church right down the street, so we could get a nice big sample by asking everyone there!
 
-The main reason for doing inference is to guess about something that’s _unknown_ for the whole population. A useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth.
+[.lesson-instruction]
+* Taking a sample of whoever is nearby is called a _convenience sample_. Why is a convenience sample a problem here?
+* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
+
+[.lesson-point]
+Bad samples can be an accident - or malice!
+
+When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people.
+
+* A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"
+* A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!
+* A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!
+
+Can you think of other examples where biased sampling has been used - or could be used - to harm people?
 
 === Investigate
+The main reason for doing inference is to guess about something that’s _unknown_ for the whole population. A useful step along the way is to practice with situations where we happen to _know_ what’s true for the whole population. As an exercise, we can keep taking random samples from that population and see how close they tend to get us to the truth.
 
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter. @ifproglang{pyret}{How much can we infer about the whole population of hundreds of animals, by looking at just this one sample? Let’s see what happens if we switch from smaller to larger sample sizes.
 
