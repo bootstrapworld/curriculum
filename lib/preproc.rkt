@@ -722,16 +722,6 @@
 (define (clean-up-url-in-image-text text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (system-echo cmd . args)
-  (let* ([x (apply process* cmd args)]
-         [i (car x)]
-         [result (format "~a" (read i))])
-    (close-input-port i)
-    (close-output-port (cadr x))
-    (close-input-port (cadddr x))
-    (and (not (eof-object? result))
-         result)))
-
 (define (make-image img text rest-opts #:centered? [centered? #f])
   ; (printf "doing make-image ~s\n" img)
   (let ([img-qn (string-append *containing-directory* "/" img)])
