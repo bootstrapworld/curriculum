@@ -28,6 +28,12 @@ A formula:
 
 ---
 
+# Some code
+
+@show{(code '(* 2 (+ 3 8)))}
+
+---
+
 # Lesson Goals
 
 Students will be able to:

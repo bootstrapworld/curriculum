@@ -4,6 +4,12 @@
 
 (require "readers.rkt")
 (require "starter-files.rkt")
+(require "function-directives.rkt")
+
+(define-namespace-anchor *slides-namespace-anchor*)
+
+(define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
+
 
 (define *use-mathjax-for-math?* #f)
 
@@ -11,13 +17,16 @@
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
 
-(define (errmessage-file-context)
-  *in-file*)
-
 (define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")
                                "https://bootstrapworld.org/materials/latest/en-us/lessons"))
 
 (define *lesson* (or (getenv "LESSON") "__sample-lesson"))
+
+(define (massage-arg arg)
+  (eval arg *slides-namespace*))
+
+(define (errmessage-file-context)
+  *in-file*)
 
 (define (make-image img text)
   (format "![~a](~a)" text img))
@@ -59,6 +68,12 @@
                             [else (loop s (cons a r))]))]))])
     ; (printf "returning ~s\n" ans)
     (string-append "<code>" (list->string ans) "</code>")))
+
+(define (code exp)
+  (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
+    ;what about codap
+    (set! x (regexp-replace* "{empty}" x ""))
+    x))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -135,6 +150,10 @@
                        [(string=? directive "math")
                         (let ([text (read-group i directive)])
                           (display (make-math text) o))]
+                       [(string=? directive "show")
+                        (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                          (for ([s exprs])
+                            (display (massage-arg s) o)))]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])
