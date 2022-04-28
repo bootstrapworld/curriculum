@@ -4,6 +4,7 @@
   truthy-getenv
   ferror
   file-mtime
+  system-echo
   read-data-file
   )
 
@@ -17,6 +18,17 @@
 
 (define (file-mtime f)
   (if (file-exists? f) (file-or-directory-modify-seconds f) 0))
+
+(define (system-echo cmd . args)
+  (let* ([x (apply process* cmd args)]
+         [i (car x)]
+         [result (format "~a" (read i))])
+    (close-input-port i)
+    (close-output-port (cadr x))
+    (close-input-port (cadddr x))
+    (and (not (eof-object? result))
+         result)))
+
 
 (define (unquote-string s)
   (string-trim s "\""))

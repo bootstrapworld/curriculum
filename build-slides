@@ -2,7 +2,7 @@
 
 topdir=$(pwd)
 
-progdir=$topdir/prog
+export PROGDIR=$topdir/prog
 
 SED=sed
 
@@ -46,7 +46,7 @@ for natlang in *; do
 
      idfile=slides-id-$PROGLANG.txt
      if test -f slides.md; then
-       $progdir/slides-preproc.rkt slides.md
+       $PROGDIR/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
          title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
          if test -s "$idfile"; then
