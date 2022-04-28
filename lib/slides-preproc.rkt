@@ -60,6 +60,8 @@
                                      ; (printf "tackling2 ~s ~s\n" w s-rest)
                                      (cond [(equal? w '(#\v #\i #\d))
                                             (loop s-rest (cons #\÷ r))]
+                                           [(equal? w '(#\s #\e #\m #\i #\t))
+                                            (loop s-rest (cons #\× r))]
                                            [else (loop s-rest (append w r))]))]
                             [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
                                      (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
@@ -74,6 +76,11 @@
     ;what about codap
     (set! x (regexp-replace* "{empty}" x ""))
     (string-append "<code>" x "</code>")))
+
+(define (coe exp)
+  (format "~s" exp))
+
+(define math code)
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -150,10 +157,28 @@
                        [(string=? directive "math")
                         (let ([text (read-group i directive)])
                           (display (make-math text) o))]
+                       [(string=? directive "smath")
+                        (let* ([text (read-group i directive #:scheme? #t)]
+                               [exprs (string-to-form (format "(math '~a)" text))])
+                          (for ([s exprs])
+                            (display (massage-arg s) o)))]
                        [(string=? directive "show")
                         (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                           (for ([s exprs])
                             (display (massage-arg s) o)))]
+                       [(string=? directive "table")
+                        (let ([n (string->number (read-group i directive))])
+                          (let loop ([n n])
+                            (unless (<= n 0)
+                              (display "|_" o)
+                              (loop (- n 1))))
+                          (newline o)
+                          (let loop ([n n])
+                            (unless (<= n 0)
+                              (display "|---" o)
+                              (loop (- n 1)))))]
+                       [(string=? directive "scrub")
+                        (read-group i directive)]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])
