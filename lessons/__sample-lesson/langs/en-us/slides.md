@@ -16,9 +16,11 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 
 # Order of Operations
 
-@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
-
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
+
+{.column}
+
+@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
 
 ---
 
