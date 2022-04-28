@@ -370,13 +370,6 @@
     (for ([i section-level])
       (display #\= o))))
 
-(define (string-to-form s)
-  (call-with-input-string s
-    (lambda (i)
-      (let loop ([r '()])
-        (let ([x (read i)])
-          (if (eof-object? x) (reverse r)
-              (loop (cons x r))))))))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)

@@ -2,6 +2,7 @@
 
 (provide
   read-word
+  string-to-form
   *make-read-group
   read-commaed-group
   )
@@ -25,6 +26,14 @@
           (let ([c (string-ref s i)])
             (cond [(char=? c #\") (loop (+ i 1) (cons c (cons #\\ r)))]
                   [else (loop (+ i 1) (cons c r))]))))))
+
+(define (string-to-form s)
+  (call-with-input-string s
+    (lambda (i)
+      (let loop ([r '()])
+        (let ([x (read i)])
+          (if (eof-object? x) (reverse r)
+              (loop (cons x r))))))))
 
 (define (*make-read-group code errmessage-file-context)
   (letrec ([read-group
