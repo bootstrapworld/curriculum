@@ -28,7 +28,6 @@
 * @link{https://docs.google.com/presentation/d/1TUkgAt5qc4vcsTIbDx5dhhLfY8VzMXz2eyg9D7T-an8/, Lesson Slides}}
 @ifproglang{codap}{
 * @link{https://docs.google.com/presentation/d/1uanCgMrudgpODM5gz6d4tPaMANsgoEiuTtF9PqLfp_o/, Lesson Slides}}
-* @link{pages/OpeningQuestions.html, Opening Questions}
 * @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Dataset (spreadsheet)}
 @material-links
 
@@ -41,7 +40,6 @@
 |
 @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's going on in this Graph?}
 
-
 |===
 
 == Introduction @duration{20 minutes}
@@ -51,30 +49,38 @@ Students look at opening questions, either at their desks or in a walk around th
 
 === Launch
 [.lesson-instruction]
-- Give students 2 minutes to choose a question that grabs their attention, and group themselves by question. Ideally, no student will be the only one interested in that question.
-- Have students spend 2 minutes coming up with a hypothesis about what the answer is, and explaining why. Does every student in a single question-grouping have the same answer?
+- Give students 2 minutes to choose a question that grabs their attention from @opt-printable-exercise{pages/OpeningQuestions.adoc}, __or other questions of your own design__, and group themselves by question. Ideally, no student will be the only one interested in that question.
+- Have students spend 2 minutes coming up with a hypothesis about what the answer is, and explaining why.
+- Do students in each group agree about the answers to their question?
 
 === Investigate
 [.lesson-instruction]
-- __What information would you collect to answer this question?__ Give students 5 minutes to think about what information they would need to collect, to find the answer.
+What information would you collect to answer the question you selected? _Give students 5 minutes to think about what information they would need to collect, to find the answer._
 
 === Common Misconceptions
 Students may lean towards questions about _individuals_, instead of questions about what's true for a _group of individuals_ who vary from one to another. For example, instead of wondering what movie gets the highest rating, they should ask what's the typical rating for movies in a list, or how much those ratings tend to vary.
 
 === Synthesize
-Have students share back the different data they would gather to answer their questions. For each question, students would likely have to gather many different kinds of data. If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.
+Have students share back the different data they would gather to answer their questions. For each question, students would likely have to gather many different kinds of data.
 
-What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased? We can't survey every school in the world, get data on every movie ever made, or every police action - but we can do an analysis for a _sample_ of them, and try to infer something about all of them as a whole. These questions quickly turn into a discussion about data -- how you assess it, how you interpret the results, and what you can _infer_ from those results.  The process of learning from data is called @vocab{Data Science}. Data science techniques are used by scientists, business people, politicians, sports analysts, and hundreds of other different fields to ask and answer questions about data.
+* If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.
+* What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased?
+* We can't survey every school in the world, get data on every movie ever made, or every police action - but we can do an analysis for a _sample_ of them, and try to infer something about all of them as a whole.
+
+These questions quickly turn into a discussion about data -- how you assess it, how you interpret the results, and what you can _infer_ from those results.
+
+[.lesson-point]
+The process of learning from data is called @vocab{Data Science}. Data science techniques are used by scientists, business people, politicians, sports analysts, and hundreds of other different fields to ask and answer questions about data.
 @ifproglang{pyret}{
 We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.}
 
 == Optional: Which Questions _can_ we Answer? @duration{10 minutes}
 
 === Overview
-Datasets are useful for answering questions, but they can't answer all the questions that we will wonder about for a given topic.  In this activity students will look at a small dataset about a cyclist's training rides and think about how they could use the table to answer the question or why they cannot answer the question from the table.
+Datasets are useful for answering questions, but they can't answer all the questions that we will wonder about for a given topic.  In this activity students will look at a small dataset about a cyclist's training rides and think about how they could use the table to answer each question or why a question cannot be answered using the table.
 
 === Launch
-[.lesson-instruction]
+
 Which of you like to ride bikes? What data might you collect about bike rides?
 
 === Investigate
@@ -112,28 +118,33 @@ This table contains data from an animal shelter, listing animals that have been 
 - If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, spreadsheet file}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?
 - Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.
 
-Any two animals in our dataset may have different ages, weights, etc. Each of these is called a *variable* in the dataset.
-
-Data Scientists work with two broad kinds of data: Categorical Data and Quantitative Data. @vocab{Categorical Data} is used to _classify_, not measure. Categories aren’t subject to the laws of arithmetic. For example, we couldn’t ask if “cat is more than lizard”, and it doesn’t make sense to "find the average ZIP code” in a list of addresses. “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
-
-[.lesson-instruction]
-What are some other categorical variables you see in this table?
-
-@vocab{Quantitative Data} @ifproglang{codap}{- sometimes referred to as Numeric Data - }is used to measure an amount of something, or to compare two pieces of data to see which is _less or more_. If we want to ask “how much” or “which is most”, we’re talking about Quantitative Data. "Pounds" is a quantitative variable, because we can talk about whether one animal weighs more than another or ask what the average weight of animals in the shelter is.
+Any two animals in our dataset may have different ages, weights, etc. Each of these is called a *variable* in the dataset. Data Scientists work with two broad kinds of data: Categorical Data and Quantitative Data. Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on _how that data is being used!_
 
 [.lesson-point]
 We use @vocab{Categorical Data} to answer “what kind?”, and @vocab{Quantitative Data} to answer "how much?".
 
+@vocab{Categorical Data} is used to _classify_, not measure. Categories aren’t subject to the laws of arithmetic.
+
+* “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
+* We couldn’t ask if “cat is more than lizard” and it doesn’t make sense to "find the average ZIP code” in a list of addresses.
+
+[.lesson-instruction]
+What are some other categorical variables you see in this table?
+
+@vocab{Quantitative Data} @ifproglang{codap}{- sometimes referred to as Numeric Data - }is used to measure an amount of something, or to compare two pieces of data to see which is _less or more_.
+
+* "Pounds" is a quantitative variable, because we can talk about whether one animal weighs more than another or ask what the average weight of animals in the shelter is.
+* If we want to ask “how much” or “which is most”, we’re talking about Quantitative Data.
+
 [.lesson-instruction]
 --
-* Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on _how that data is being used!_ Can you figure out which is which?
-* Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
+Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
 --
 
 === Synthesize
 Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
 
-Data Science is all about using a smaller sample of data to make educated guesses about a larger population. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals from this particular shelter, it might tell us something about the average age of animals from other shelters.
+__Data Science is all about using a smaller sample of data to make educated guesses about a larger population. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals from this particular shelter, it might tell us something about the average age of animals from other shelters.__
 
 @ifproglang{pyret}{
 == Meet Pyret! @duration{10 minutes}
