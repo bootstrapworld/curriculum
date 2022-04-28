@@ -4,28 +4,83 @@
 
 (require "readers.rkt")
 (require "starter-files.rkt")
+(require "function-directives.rkt")
+
+(define-namespace-anchor *slides-namespace-anchor*)
+
+(define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
+
+
+(define *use-mathjax-for-math?* #f)
 
 (define *in-file* "doesnt-exist")
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
-
-(define (errmessage-file-context)
-  *in-file*)
 
 (define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")
                                "https://bootstrapworld.org/materials/latest/en-us/lessons"))
 
 (define *lesson* (or (getenv "LESSON") "__sample-lesson"))
 
+(define (massage-arg arg)
+  (eval arg *slides-namespace*))
+
+(define (errmessage-file-context)
+  *in-file*)
+
 (define (make-image img text)
   (format "![~a](~a)" text img))
 
 (define (make-math text)
+  ; (printf "doing make-math ~s\n" text)
+  ((if *use-mathjax-for-math?* make-mathjax-math make-ascii-math) text))
+
+(define (make-mathjax-math text)
   (string-append
     "$$$ math\n"
     text
     "\n"
     "$$$\n"))
+
+(define (read-math-rev-word s)
+  (let loop ([s (cdr s)] [r (list (car s))])
+    (if (null? s) (values r s)
+        (let ([a (car s)])
+          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (cdr s) (cons a r))]
+                [else (values r s)])))))
+
+(define (make-ascii-math text)
+  ; (printf "doing make-ascii-math ~s\n" text)
+  (let ([ans (let loop ([s (string->list text)] [r '()])
+            (cond [(null? s) (reverse r)]
+                  [else (let ([a (car s)] [s (cdr s)])
+                          ; (printf "tackling ~s, ~s\n" a s)
+                          (case a
+                            [(#\\) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     ; (printf "tackling2 ~s ~s\n" w s-rest)
+                                     (cond [(equal? w '(#\v #\i #\d))
+                                            (loop s-rest (cons #\÷ r))]
+                                           [(equal? w '(#\s #\e #\m #\i #\t))
+                                            (loop s-rest (cons #\× r))]
+                                           [else (loop s-rest (append w r))]))]
+                            [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
+                            [(#\_) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     (loop s-rest (append '(#\> #\b #\u #\s #\/ #\<) w '(#\> #\b #\u #\s #\<) r)))]
+                            [else (loop s (cons a r))]))]))])
+    ; (printf "returning ~s\n" ans)
+    (string-append "<code>" (list->string ans) "</code>")))
+
+(define (code exp)
+  (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
+    ;what about codap
+    (set! x (regexp-replace* "{empty}" x ""))
+    (string-append "<code>" x "</code>")))
+
+(define (coe exp)
+  (format "~s" exp))
+
+(define math code)
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -77,6 +132,7 @@
             (cond
               [(char=? c #\@)
                (let ([directive (read-word i)])
+                 ; (printf "directive is ~s\n" directive)
                  (cond [(string=? directive "") (display c o)]
                        [(string=? directive "@") (display c o)]
                        [(string=? directive "image")
@@ -101,6 +157,28 @@
                        [(string=? directive "math")
                         (let ([text (read-group i directive)])
                           (display (make-math text) o))]
+                       [(string=? directive "smath")
+                        (let* ([text (read-group i directive #:scheme? #t)]
+                               [exprs (string-to-form (format "(math '~a)" text))])
+                          (for ([s exprs])
+                            (display (massage-arg s) o)))]
+                       [(string=? directive "show")
+                        (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                          (for ([s exprs])
+                            (display (massage-arg s) o)))]
+                       [(string=? directive "table")
+                        (let ([n (string->number (read-group i directive))])
+                          (let loop ([n n])
+                            (unless (<= n 0)
+                              (display "|_" o)
+                              (loop (- n 1))))
+                          (newline o)
+                          (let loop ([n n])
+                            (unless (<= n 0)
+                              (display "|---" o)
+                              (loop (- n 1)))))]
+                       [(string=? directive "scrub")
+                        (read-group i directive)]
                        [else (display c o) (display directive o)]))]
               [else
                 (display c o)])
