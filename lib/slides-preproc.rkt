@@ -5,6 +5,8 @@
 (require "readers.rkt")
 (require "starter-files.rkt")
 
+(define *use-mathjax-for-math?* #f)
+
 (define *in-file* "doesnt-exist")
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
@@ -21,11 +23,42 @@
   (format "![~a](~a)" text img))
 
 (define (make-math text)
+  ; (printf "doing make-math ~s\n" text)
+  ((if *use-mathjax-for-math?* make-mathjax-math make-ascii-math) text))
+
+(define (make-mathjax-math text)
   (string-append
     "$$$ math\n"
     text
     "\n"
     "$$$\n"))
+
+(define (read-math-rev-word s)
+  (let loop ([s (cdr s)] [r (list (car s))])
+    (if (null? s) (values r s)
+        (let ([a (car s)])
+          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (cdr s) (cons a r))]
+                [else (values r s)])))))
+
+(define (make-ascii-math text)
+  ; (printf "doing make-ascii-math ~s\n" text)
+  (let ([ans (let loop ([s (string->list text)] [r '()])
+            (cond [(null? s) (reverse r)]
+                  [else (let ([a (car s)] [s (cdr s)])
+                          ; (printf "tackling ~s, ~s\n" a s)
+                          (case a
+                            [(#\\) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     ; (printf "tackling2 ~s ~s\n" w s-rest)
+                                     (cond [(equal? w '(#\v #\i #\d))
+                                            (loop s-rest (cons #\÷ r))]
+                                           [else (loop s-rest (append w r))]))]
+                            [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
+                            [(#\_) (let-values ([(w s-rest) (read-math-rev-word s)])
+                                     (loop s-rest (append '(#\> #\b #\u #\s #\/ #\<) w '(#\> #\b #\u #\s #\<) r)))]
+                            [else (loop s (cons a r))]))]))])
+    ; (printf "returning ~s\n" ans)
+    (string-append "<code>" (list->string ans) "</code>")))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -77,6 +110,7 @@
             (cond
               [(char=? c #\@)
                (let ([directive (read-word i)])
+                 ; (printf "directive is ~s\n" directive)
                  (cond [(string=? directive "") (display c o)]
                        [(string=? directive "@") (display c o)]
                        [(string=? directive "image")

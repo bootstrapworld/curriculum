@@ -24,7 +24,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 
 A formula:
 
-@math{6 \div 2(1 + 2)}
+@math{6^2 \div 2(1 + 2)}
 
 ---
 
