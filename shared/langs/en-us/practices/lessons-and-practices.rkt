@@ -333,7 +333,7 @@
         "MLR.1"
         "MP.2"
         "SEP.3"
-        "SJ.10"
+        "SJ.13"
         )
 
     ("scatter-plots"
