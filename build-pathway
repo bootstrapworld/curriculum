@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-04-27 # last modified
+LASTMOD=2022-04-28 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -69,6 +69,8 @@ while test $# -ne 0; do
     NOPARALLEL=1
   elif test "$arg" = --proglang; then
     PROGLANG=$1; shift
+  elif test "$arg" = --slides -o "$arg" = -s; then
+    SLIDES=1
   elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
     SUPERFORCE=1
   elif test "$arg" = --version -o "$arg" = -v; then
@@ -2769,3 +2771,9 @@ if test ! $NOPDF; then
 fi
 
 rmtmpfiles
+
+cd $TOPDIR
+
+if test $SLIDES; then
+  ./build-slides
+fi
