@@ -45,7 +45,7 @@
       (when img-anonymized
         (set! img img-anonymized))))
   (if (> *num-images-processed* *max-images-processed*)
-      (format "{-- INSERT IMAGE ~a HERE --}" img)
+      (format "**-- INSERT IMAGE ~a HERE --**" img)
       (format "![~a](~a)" text img)))
 
 (define (make-math text)
