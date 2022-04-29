@@ -1,0 +1,90 @@
+#!/bin/bash
+
+if test $# -ne 1; then
+  echo build-slide needs exactly one lesson argument
+  exit
+fi
+
+topdir=$(pwd)
+
+export PROGDIR=$topdir/prog
+
+SED=sed
+
+if which gsed|grep -q .; then
+  SED=gsed
+fi
+
+bootstraproot=$(cat lib/slidesroot.txt|$SED -e 1q)
+
+export PROGLANG=pyret
+
+if test ! -d distribution; then
+  echo WARNING: Did not find any built pathways
+  exit
+else
+  cd distribution
+fi
+
+lsn=$1
+
+for natlang in *; do
+  test -d $natlang || continue
+  cd $natlang
+  export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
+  if test -d lessons; then
+    cd lessons
+    if test ! -d $lsn; then
+      echo Lesson $lsn not found in distribution
+      break
+    fi
+    export LESSON="$lsn"
+    cd $LESSON
+    # echo Doing $LESSON
+    PROGLANG=pyret
+    repoLESSON=$LESSON
+    if test -f .cached/.wescheme; then
+      PROGLANG=wescheme
+      repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
+    elif test -f .cached/.codap; then
+      PROGLANG=codap
+      repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
+    fi
+
+     # echo PROGLANG is $PROGLANG
+
+     idfile=slides-id-$PROGLANG.txt
+     if test -f slides.md; then
+       $PROGDIR/slides-preproc.rkt slides.md
+       if test -f slides.mkd; then
+         title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
+         if test -s "$idfile"; then
+           id=$(cat "$idfile"|$SED -e 1q)
+           # echo md2gslides with id $id
+           md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>/dev/null
+           # md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
+           if grep -q 'Unable to generate slides' .tmp.txt; then
+             echo Slides failed for $LESSON/slides.mkd
+             cat .tmp.txt
+           fi
+           # rm .tmp.txt
+         else
+           # echo md2gslides without id
+           md2gslides slides.mkd -n -t "$title" --use-fileio > "$idfile" 2> /dev/null
+           $SED -i -e 's/.*docs\.google\.com\/presentation\/d\///' "$idfile"
+           cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
+           echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+         fi
+         cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+         $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
+       else
+         echo WARNING: slides.md failed preprocessing
+       fi
+     else
+       echo WARNING: Lesson \'$LESSON\' doesn\'t have slides.md
+     fi
+     cd ..
+     cd ..
+  fi
+  cd ..
+done
