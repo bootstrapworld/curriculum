@@ -13,6 +13,10 @@
 
 (define *use-mathjax-for-math?* #f)
 
+(define *max-images-processed* 6)
+
+(define *num-images-processed* 0)
+
 (define *in-file* "doesnt-exist")
 
 (define *progdir* (getenv "PROGDIR"))
@@ -32,6 +36,7 @@
 
 (define (make-image img text)
   ; (printf "make-image ~s\n" img)
+  (set! *num-images-processed* (+ *num-images-processed* 1))
   (unless (file-exists? img)
     ; (printf "image ~s doesnt exist\n" img)
     (let ([img-anonymized
@@ -39,7 +44,9 @@
       ; (printf "anon image file is ~s\n" img-anonymized)
       (when img-anonymized
         (set! img img-anonymized))))
-  (format "![~a](~a)" text img))
+  (if (> *num-images-processed* *max-images-processed*)
+      (format "{-- INSERT IMAGE ~a HERE --}" img)
+      (format "![~a](~a)" text img)))
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
