@@ -226,6 +226,11 @@
                             (unless (<= j 0)
                               (display "|---" o)
                               (loop (- j 1)))))]
+                       [(string=? directive "vocab")
+                        (let ([arg (read-group i directive)])
+                          (display "<b><i>" o)
+                          (display arg o)
+                          (display "</i></b>" o))]
                        [(string=? directive "scrub")
                         (read-group i directive)]
                        [else (display c o) (display directive o)]))]
