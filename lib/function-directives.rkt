@@ -152,25 +152,38 @@
                                   (format "({empty}~a{empty})" x)
                                   x))]
                            [(eq? a 'cond)
-                            (string-append "ask:\n"
-                              (string-join
-                                (map (lambda (e)
-                                       (wescheme-cond-clause->pyret
-                                         e #:indent indent))
-                                     (cdr e)) "\n")
-                              "\n"
-                              (if indent (make-string indent #\space) "")
-                              "end")]
+                            (let* ([clauses (cdr e)]
+                                   [n (- (length clauses) 1)])
+                              (let loop ([i n] [r '("end")])
+                                (if (< i 0) (string-join
+                                              (map (lambda (c)
+                                                     (string-append
+                                                       (if indent  (make-string indent #\space) "")
+                                                       c)
+                                                     ) r)
+                                              "\n")
+                                    (let ([clause (list-ref clauses i)])
+                                      (loop (- i 1) (cons
+                                                      (string-append
+                                                        (cond [(and (= i n) (eq? (car clause) 'else))
+                                                               (string-append "else: "  (wescheme->pyret (cadr clause)))]
+                                                              [(= i 0)
+                                                               (string-append "if " (wescheme->pyret (car clause)) ": " (wescheme->pyret (cadr clause)))]
+                                                              [else
+                                                                (string-append "else if " (wescheme->pyret (car clause)) ": " (wescheme->pyret (cadr clause)))]))
+                                                      r))))))]
                            [(eq? a 'define)
                             (let* ([lhs (cadr e)] [rhs (caddr e)]
                                                   [lhs-s (wescheme->pyret lhs)]
                                                   [rhs-s (wescheme->pyret rhs #:indent
                                                                           (and indent (+ indent 2)))]
-                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)])
+                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)]
+                                                  [rhs-s-if? (regexp-match "^ *if " rhs-s)]
+                                                  )
                               (if (pair? lhs)
                                   (string-append "fun " lhs-s ":"
                                     (if rhs-s-nl? "\n" " ")
-                                    (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
+                                    (if (and rhs-s-nl? indent) (make-string (if rhs-s-if? indent (+ indent 2)) #\space) "")
                                     rhs-s
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
@@ -204,18 +217,6 @@
                                            ", "))]))]
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
-
-(define (wescheme-cond-clause->pyret e #:indent [indent #f])
-  ;(printf "doing wescheme-cond-clause->pyret ~s\n" e)
-  (let ([a (car e)])
-    (string-append
-      (if indent (make-string (+ indent 2) #\space) "")
-      "| "
-      (if (eq? a 'else) "otherwise"
-          (string-append (wescheme->pyret a)
-            " then"))
-      ": "
-      (wescheme->pyret (cadr e)))))
 
 (define (wescheme->pyret-s s)
   (wescheme->pyret (string->symbol s)))
