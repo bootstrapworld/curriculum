@@ -813,7 +813,7 @@
         "OK.3.DA.IM.01"
         )
 
-    ("collecting-data"
+    ("data-collection"
         "OK.A1.D.1.2"
         "OK.3.DA.CVT.01"
         "OK.4.DA.CVT.01"

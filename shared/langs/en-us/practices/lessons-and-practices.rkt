@@ -243,6 +243,25 @@
         "SEP.3"
         )
 
+    ("data-collection"
+        "MP.3"
+        "MP.5"
+        "P2"
+        "P6"
+        "MLR.3"
+        "MLR.5"
+        "SEP.8"
+        )
+
+    ("data-cycle"
+        "MP.6"
+        "MP.5"
+        "P3"
+        "SEP.4"
+        "SEP.7"
+        "SEP.8"
+        )
+
     ("custom-scatter-plots" 
         "MP.7"      
         )    
