@@ -70,13 +70,18 @@ for natlang in *; do
            # rm .tmp.txt
          else
            # echo md2gslides without id
-           md2gslides slides.mkd -n -t "$title" --use-fileio > "$idfile" 2> /dev/null
-           $SED -i -e 's/.*docs\.google\.com\/presentation\/d\///' "$idfile"
-           cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
-           echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+           md2gslides slides.mkd -n -t "$title" --use-fileio > .tmp.txt 2> /dev/null
+           if grep -q 'Unable to generate slides' .tmp.txt; then
+             echo Slides failed for $LESSON/slides.mkd
+             cat .tmp.txt
+           else
+             grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
+             cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
+             echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+             cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+             $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
+           fi
          fi
-         cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
-         $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
        else
          echo WARNING: slides.md failed preprocessing
        fi
