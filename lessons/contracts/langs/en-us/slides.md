@@ -68,9 +68,9 @@ The `triangle` function can make lots of different triangles! The size, style an
 
 As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
 
-. *Name* -- the name of the function, which we type in whenever we want to use it
-. *Domain* -- the type(s) of data we give to the function
-. *Range* -- the type of data the function produces
+. **Name** -- the name of the function, which we type in whenever we want to use it
+. **Domain** -- the type(s) of data we give to the function
+. **Range** -- the type of data the function produces
 
 ---
 # Contracts
