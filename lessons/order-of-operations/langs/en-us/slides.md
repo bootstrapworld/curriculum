@@ -183,6 +183,7 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 | @image{images/coe12.png, a}
 
 {.column}
+
 One of them is familiar, but the other is very different from what you've been working with. 
 
 - What's different about the Circle on the right?
