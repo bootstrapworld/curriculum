@@ -2,8 +2,6 @@
 
 # Order of Operations
 
-@scrub{Flannery's sample slide file form Order of Operations. Modified so it goes through.}
-
 ---
 # Order of Operations
 
