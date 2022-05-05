@@ -13,7 +13,7 @@
 
 (define *use-mathjax-for-math?* #f)
 
-(define *max-images-processed* 6)
+(define *max-images-processed* 1000)
 
 (define *num-images-processed* 0)
 
