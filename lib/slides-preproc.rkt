@@ -214,7 +214,8 @@
                           (display (starter-file-link lbl) o))]
                        [(string=? directive "ifproglang")
                         (let* ([proglang (read-group i directive)]
-                               [fragment (read-group i directive)])
+                               [fragment (read-group i directive #:multiline? #t)])
+                          ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
                           (when (string-ci=? proglang *proglang*)
                             (call-with-input-string fragment
                               (lambda (i)
