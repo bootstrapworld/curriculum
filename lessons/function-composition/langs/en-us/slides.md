@@ -59,6 +59,7 @@ The circles show us that in order to evaluate @math{f(g(h(4))))}
 # Diagramming Function Composition
 
 Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+
 ---
 # Diagramming Function Composition
 
