@@ -13,7 +13,8 @@
 
 (define *use-mathjax-for-math?* #f)
 
-(define *max-images-processed* 6)
+;if md2gslides can't handle too many images, set this to a small number, e.g., 6
+(define *max-images-processed* #f)
 
 (define *num-images-processed* 0)
 
@@ -44,7 +45,7 @@
       ; (printf "anon image file is ~s\n" img-anonymized)
       (when img-anonymized
         (set! img img-anonymized))))
-  (if (> *num-images-processed* *max-images-processed*)
+  (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
       (format "**-- INSERT IMAGE ~a HERE --**" img)
       (format "![~a](~a)" text img)))
 
@@ -98,6 +99,21 @@
   (format "<code>~s</code>" exp))
 
 (define math code)
+
+(define (contract funname domain-list range)
+  (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
+         [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
+        [prefix (cond [(string=? *proglang* "pyret") "# "]
+                      [(string=? *proglang* "wescheme") "; "]
+                      [(string=? *proglang* "codap") ""])]
+        [s (string-append
+             prefix
+             funname-str
+             " :: "
+             (vars-to-commaed-string domain-list)
+             " -> "
+             range)])
+    (format "<code>~a</code>" s)))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]

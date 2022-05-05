@@ -12,6 +12,8 @@ If you were to write instructions for getting ready for school, it would matter 
 
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
+@show{(contract "gt" '("Number") "Number")}
+
 ---
 
 # Order of Operations
