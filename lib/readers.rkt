@@ -37,7 +37,7 @@
 
 (define (*make-read-group code errmessage-file-context)
   (letrec ([read-group
-             (lambda (i directive #:scheme? [scheme? #f])
+             (lambda (i directive #:scheme? [scheme? #f] #:multiline? [multiline? #f])
                (let ([c (peek-char i)])
                  (cond [(char=? c #\{)
                         (read-char i)
@@ -49,7 +49,8 @@
                           (let ([c (read-char i)])
                             (cond [(eof-object? c)
                                    (printf "Read so far: ~s\n"
-                                           (string-trim (list->string (reverse r))))
+                                           (let ([s (list->string (reverse r))])
+                                             (if multiline? s (string-trim s))))
                                    (error 'ERROR "read-group: Runaway directive ~a" directive)]
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)
@@ -70,14 +71,15 @@
                                   [(char=? c #\")
                                    (loop (cons c r) #f nesting #t #f)]
                                   [(member c '(#\space #\tab #\newline #\return))
-                                   (if scheme?
+                                   (if (or scheme? multiline?)
                                        (loop (cons c r) #f nesting #f #f)
                                        (loop (if in-space? r (cons #\space r)) #t nesting #f #f))]
                                   [(char=? c #\{)
                                    (loop (cons c r) #f (+ nesting 1) #f #f)]
                                   [(char=? c #\})
                                    (if (= nesting 0)
-                                       (string-trim (list->string (reverse r)))
+                                       (let ([s (list->string (reverse r))])
+                                         (if multiline? s (string-trim s)))
                                        (loop (cons c r) #f (- nesting 1) #f #f))]
                                   [else (loop (cons c r) #f nesting #f #f)])))]
                        [else
