@@ -10,7 +10,7 @@ Take turns playing the @starter-file{ninja-cat} in pairs.
 Turn to @printable-exercise{pages/NoticeAndWonder.adoc}. 
 
 1. Write down what you _notice_ about the game.
-*"Notice"s should be statements, not questions - What stood out to you? What do you remember?*
+*"Notice"s should be statements, not questions. What stood out to you? What do you remember?*
 
 1. Write down what you _wonder_ about the game? 
 *What questions do you have about how it works?*

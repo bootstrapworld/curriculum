@@ -73,11 +73,10 @@ Complete @printable-exercise{numbers-n-strings.adoc}. Pay special attention to t
 - What did you learn from them? 
 
 <!--
-    Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc.
+Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
 
-    @ifproglang{pyret}{Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a @vocab{syntax error}. Make sure students understand that Pyret needs decimals to start with a zero!}
-    
-    -->
+Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
+ -->
 
 ---
 
@@ -132,7 +131,7 @@ Similarly, when you log into your email, the computer asks for your password and
 Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
 ---
-# Booelans
+# Booleans
 
 Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
 
