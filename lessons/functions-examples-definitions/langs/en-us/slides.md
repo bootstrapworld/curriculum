@@ -1,6 +1,6 @@
 ---
 
-# Solving Word Problems with the Design Recipe
+# Functions: Contracts, Examples & Definitions
 
 ---
 # Three Representations of a Function
