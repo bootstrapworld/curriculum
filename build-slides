@@ -70,9 +70,11 @@ for natlang in *; do
              grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
              cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
              echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
-             cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
-             $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
            fi
+         fi
+         if test -f "$idfile"; then
+           cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+           $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
          fi
        else
          echo WARNING: slides.md failed preprocessing
