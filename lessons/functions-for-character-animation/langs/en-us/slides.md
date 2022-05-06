@@ -39,7 +39,3 @@ Click Run to see `DANGER` and `TARGET` move across the screen independently!
 Once you have successfully gotten `update-target` and `update-danger` working, you can change the functions to make the characters move in whichever direction and whatever speed you want!  
 
 *Be sure to modify your purpose statements and examples if you change your functions.*
-
-<!--
-Have students complete @opt-printable-exercise{pages/2d-character-movement.adoc} to learn how to modify these functions to allow movement in the x __and__ y directions!
--->
