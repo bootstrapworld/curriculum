@@ -2,7 +2,7 @@
 
 @description{Students learn to generate and compare pie charts & bar charts, explore other plotting & display functions, and (optionally) design an infographic.}
 
-@lesson-prereqs{contracts, data-cycle}
+@lesson-prereqs{contracts}
 
 @keywords{}
 
@@ -46,7 +46,7 @@
 == Pie and Bar Charts @duration{30 minutes}
 
 === Overview
-Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots. They practice the Data Cycle worksheet, now extending into the Analysis phase of the cycle.
+Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
 
 === Launch
 [.lesson-instruction]
@@ -100,30 +100,6 @@ To dig deeper into pie charts and bar charts, have students complete @opt-printa
 [.lesson-instruction]
 Have students complete @printable-exercise{matching-bar-to-pie.adoc}.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-a|
-@span{.title}{Extension Activity}
-
-Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
-
-What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
-
-- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) from the shelter.
-
-- Use the `count` function to make a table showing the number of animals of each `sex` from the shelter.
-
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have the contract for another function:
-
-@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
-
-And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
-
-`pie-chart-summarized(count(animals-table,"species"), "value", "count")`
-
-|===
-
 === Common Misconceptions
 
 * Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
@@ -155,45 +131,68 @@ a|
 Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/rubric-infographic.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 |===
 
-== Analyzing and Interpreting @duration{20 minutes}
+
+== Exploring other Displays @duration{25 minutes}
 
 === Overview
-Students return to the Data Cycle, focusing on the "Analyze Data" step and using it to build pie and bar charts to answer questions.
+
+Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
 
 === Launch
-Now that you're comfortable making pie and bar charts in Pyret, let's talk about how to use those categorical visualizations in our Data Cycle.
-
-Suppose we start with a simple question: __what's the ratio of fixed to unfixed animals at the shelter?__ Let's use the Data Cycle to get an answer.
-
-@left{@image{images/AskQuestions.png, "Ask Questions icon", 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed animals and the unfixed animals, then compare the totals.
-
-@vspace{1ex}
-
-@left{@image{images/ConsiderData.png, "Consider Data icon", 100}} We know that we'll need to count every single animal, so we want all the rows. And once we've picked the rows we care about, the only column we want is the `fixed` column.
-
-@vspace{1ex}
-
-@left{@image{images/AnalyzeData.png, "Analyze Data icon", 100}} We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is a slightly better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
-
-[.lesson-instruction]
-Have students make their pie- or bar-charts. Point out that if they aren't sure how to make one, the Contract Page has all the answers!
-
-@vspace{1ex}
-
-@left{@image{images/InterpretData.png, "Interpret Data icon", 100}} What did our charts tell us? Did we answer the question? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
+There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts andto figure out how to use them.
 
 === Investigate
-Now it's time to practice the complete Data Cycle on your own! For now, you'll start with pre-defined questions. Soon, however, you'll be writing the questions yourselves.
+[.lesson-instruction]
+Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
+
+Different displays work with different kinds of data.
 
 [.lesson-instruction]
-Complete @printable-exercise{analyzing-categorical-data.adoc}
+Turn to @printable-exercise{pages/type-v-display.adoc}, and see if you can identify what kind of data each display needs!
+
+Have students share their answers and discuss.
+
+=== Common Misconceptions
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
 
 === Synthesize
-- How did you choose between a pie-chart or a bar-chart?
-- What connections do you see between the "Consider Data" step, and the "Analyze Data" step?
-- Do you expect those two steps to match all of the time? Why or why not?
-- Did you find the answers in the Interpret Data step? If so, what were they?
-- What other questions did your analysis raise?
+
+* What displays did you find that work with just one column of data?
+** _pie and bar charts, histograms and box plots_
+* What displays did you find that work with more than one column of data?
+** _scatter plots and lr-plots_
+* What displays did you find that work with _categorical_ data?
+** _pie and bar charts_
+* What displays did you find that work with _quantitative_ data?
+** _histograms, box plots, scatterplots, and lr-plots_
+
+Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
+
+You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+a|
+@span{.title}{Extension Activity}
+
+Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
+
+What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
+
+- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) from the shelter.
+
+- Use the `count` function to make a table showing the number of animals of each `sex` from the shelter.
+
+Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have the contract for another function:
+
+@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
+
+And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
+
+`pie-chart-summarized(count(animals-table, "species"), "value", "count")`
+
+|===
 
 == Additional Exercises
 - @opt-printable-exercise{bar-chart-notice.adoc}
