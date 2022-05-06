@@ -449,12 +449,13 @@ install gnu-sed`).
 
 - Bash. Keeps all the scripts humming.
 
-- Racket, to do preprocessing and other bookkeeping. Any version should do. I’m not using any
-bleeding-edge features of Racket.
+- Racket, to do preprocessing and other bookkeeping. Any version should do. We're not using any bleeding-edge features of Racket.
 
-- HTML -> PDF generator `puppeteer`, as well as `puppeteer-cluster` to build in parallel.  `sudo npm install puppeteer` to install the first, `sudo npm install puppeteer-cluster` for the second.
-
-- PDF collection and page numbering is done using `pdf-lib`. This can be installed via `sudo npm install pdf-lib`.
+- Several `npm` packages, all of which are installed by running `npm install`:
+-- `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
+-- `puppeteer-cluster` to build the hundreds of pages we have in parallel.
+-- `pdf-lib`, which handles collecting all the PDFs and adding page numbers
+-- `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
 
 - `curl`. Use brew to install.
 
