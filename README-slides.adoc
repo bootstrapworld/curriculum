@@ -1,34 +1,5 @@
 = Building slides
 
-== Install md2gslides
-
-. Install `md2googleslides`, ideally as a sibling of the curriculum
-folder. If you're already in the curriculum folder, the following
-will create the folder in the proper place:
-----
-  cd ../
-  git clone https://github.com/googleworkspace/md2googleslides
-  cd md2googleslides
-  npm install
-----
-
-Note: we're installing from GitHub instead of npm, because the npm
-module is out of date and contains several bugs.
-
-2. You need to hand-copy the `md2gslides`-related stuff to your
-`/usr/local`, as follows. This will require you to know your <USERID>
-and the <PATH> to the `md2googleslides` folder you created in step 1.
-For example, my username is schanzer, and both the md2googleslides
-folder and the curriculum folder live in `Documents/Bootstrap/Development/`
-
-----
-  cd /usr/local/lib/node_modules
-  ln -sf ~schanzer/Documents/Bootstrap/Development/md2googleslides md2gslides
-  
-  cd /usr/local/bin
-  ln -sf ../lib/node_modules/md2gslides/bin/md2gslides.js md2gslides
-----
-
 == Authentication
 
 1. Create a directory `.md2googleslides` in your home directory
@@ -43,12 +14,11 @@ address is to the Google API settings, and then have him send you
 the `client_id.json` file through a secure channel. Put this file
 inside the `~/.md2googleslides` folder.
 
-== First Use
 
-1. In your terminal window, `cd` into the curriculum folder and run md2gslides on a simple, dummy file.
+3. In your terminal window, _manually_ run md2gslides on a simple, dummy file.
 
 ----
-  md2gslides lib/dummy-slides.md -n -t TITLE --use-fileio
+  node node_modules/md2googleslides/bin/md2gslides lib/dummy-slides.md -n -t TITLE --use-fileio
 ----
 
 This will generate some terminal output. The *first line* of the output looks something like
@@ -82,4 +52,3 @@ You will be encouraged to add it to your repo and push it so this
 presentation id is used in perpetuity.  (If someone else has
 already done it, you won't need to do it. You'll will just reuse
 this presentation id.)
-
