@@ -505,7 +505,7 @@
                         (string-append
                           (encoded-ans "" "__" #f)
                           (write-large "(")
-                          (encoded-ans ".recipe_cond" "cond" *show-body?*)
+                          (encoded-ans ".recipe_cond" "cond" #t)
                           (encoded-ans "" "__" #f))))]
                   [else ""])
 
@@ -526,7 +526,7 @@
             ))))))
 
 (define (write-body-line/pyret body-line)
-  ;(printf "write-body-line-p ~s\n" body-line)
+  ; (printf "write-body-line-p ~s\n" body-line)
   (write-wrapper ".recipe.recipe_line"
     (lambda ()
       (string-append
@@ -564,6 +564,17 @@
                                       (encoded-ans ".answers" action *show-body?*))])))]
                        [else
                          (encoded-ans "" body-line *show-body?*)]))]
+              [(or (string-prefix? body-line "if ")
+                   (string-prefix? body-line "else if ")
+                   (string-prefix? body-line "else: "))
+               (let* ([n (cond [(string-prefix? body-line "if ") 3]
+                               [(string-prefix? body-line "else if ") 8]
+                               [(string-prefix? body-line "else: ") 6])]
+                      [leadup (substring body-line 0 n)]
+                      [kode (substring body-line n)])
+                 (string-append
+                   (highlight-keywords leadup)
+                   (encoded-ans ".answers" (highlight-keywords kode) *show-body?*)))]
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else

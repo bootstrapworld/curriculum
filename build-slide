@@ -61,8 +61,8 @@ for natlang in *; do
          if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
            # echo md2gslides with id $id
-           md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>/dev/null
-           # md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
+           node $topdir/node_modules/md2googleslides/bin/md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>/dev/null
+           # node $topdir/node_modules/md2googleslides/bin/md2gslides slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
              cat .tmp.txt
@@ -70,7 +70,7 @@ for natlang in *; do
            # rm .tmp.txt
          else
            # echo md2gslides without id
-           md2gslides slides.mkd -n -t "$title" --use-fileio > .tmp.txt 2> /dev/null
+           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" --use-fileio > .tmp.txt 2> /dev/null
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
              cat .tmp.txt
