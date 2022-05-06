@@ -33,6 +33,7 @@
 
 | Preparation
 |
+* *You know your students best!* You can use the sample @opt-printable-exercise{pages/OpeningQuestions.adoc} we've provided, but we recommend changing or adding your own questions that are _appropriate, relevant, and engaging_ for your students.
 * Decide how the first activity (opening questions) will be run: will questions be printed for each student, group of students, or posted around the room? *Note:* these are just ideas to get you started. Use questions that you know will interest __your__ students!
 * Make sure student computers can access @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet} and the @starter-file{animals}.
 
@@ -49,13 +50,14 @@ Students look at opening questions, either at their desks or in a walk around th
 
 === Launch
 [.lesson-instruction]
-- Give students 2 minutes to choose a question that grabs their attention from @opt-printable-exercise{pages/OpeningQuestions.adoc}, __or other questions of your own design__, and group themselves by question. Ideally, no student will be the only one interested in that question.
-- Have students spend 2 minutes coming up with a hypothesis about what the answer is, and explaining why.
+- Look at the provided list of @opt-printable-exercise{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. Arrange yourselves into groups based on the question you like, making sure that each group has between 2-5 people.
+- Have each person in the group quickly share their _gut reaction_: What do you think the answer is?
+- After sharing, have each person share their reasoning.
 - Do students in each group agree about the answers to their question?
 
 === Investigate
 [.lesson-instruction]
-What information would you collect to answer the question you selected? _Give students 5 minutes to think about what information they would need to collect, to find the answer._
+What information would you collect to answer the question you selected? _Take 5 minutes to think about what information you would need to collect, to find the answer._
 
 === Common Misconceptions
 Students may lean towards questions about _individuals_, instead of questions about what's true for a _group of individuals_ who vary from one to another. For example, instead of wondering what movie gets the highest rating, they should ask what's the typical rating for movies in a list, or how much those ratings tend to vary.
@@ -106,7 +108,7 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 |===
 
 === Launch
-Have students open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc} in their Student Workbooks.
+Have students open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{animals-dataset.adoc} in their Student Workbooks.
 
 === Investigate
 This table contains data from an animal shelter, listing animals that have been adopted. We’ll be analyzing this table as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
@@ -156,18 +158,13 @@ Students open up the Pyret environment (code.pyret.org, or "CPO") and see the An
 Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
 
 [.lesson-instruction]
---
-Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
-
-Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
---
-
-[.lesson-instruction]
-Click "Run" to tell Pyret to read the code on the left-hand side. Anytime something on the left changes, we need to click "Run" to give Pyret the hint that something has changed.
+- Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
+- Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
 
 === Investigate
 
 [.lesson-instruction]
+- Click "Run" to tell Pyret to read the code on the left-hand side. (Anytime something on the left changes, we need to click "Run" to give Pyret the hint that something has changed!)
 - On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.
 - What happens?
 - Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
@@ -176,7 +173,7 @@ The first line on the lefthand side of the screen tell Pyret to `import` files f
 
   use context shared-gdrive("Bootstrap-DataScience-...")
 
-After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. (Notice the funny scramble of letters and numbers in that line of code? If you open up the Google Sheet, you'll find that same scramble in the address bar! That scramble is how the Pyret editor knows which spreadsheet to load.) After that, we see the following code:
+After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at! After that, we see the following code:
 
   # load the 'pets' sheet as a table called animals-table
   animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks

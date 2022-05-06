@@ -34,10 +34,10 @@
 
 |===
 
-== Displaying Data @duration{20 minutes}
+== Analyzing Data @duration{20 minutes}
 
 === Overview
-Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before. This activity stresses a hard programming skill (reading Contracts) with formal reading comprehension (identifying key portions of a statistical instruction).
+Students progress to the third step in the Data Cycle, by combining the "Consider Data" stepwith their knowledge of Contracts to help them _Analyze_ that data.
 
 === Launch
 
@@ -49,40 +49,32 @@ Let's return to the Data Cycle, which describes the process of asking a question
 - Can you explain the differences between them?
 - When we consider the data needed for a question, what two questions do we ask?
 
-@right{@image{images/AnalyzeData.png, "Analyze Data icon", 200}} Once we've asked our question and considered the data, it's time to do some analysis! This might involve making a new table, or making a data display like a chart or a graph. _But how do we know what to make?_
+Let's return to the example we used earlier, when we wanted to find the ratio of fixed to un-fixed animals from the shelter.
 
-Suppose we want to find the ratio of fixed to un-fixed animals from the shelter. As always, we start by asking *which rows* we're talking about. In this case, it's all the animals from the shelter. We also need to know *which column(s)* - or "which variable(s)" - we are displaying. In this case, it's the `fixed` column.
+@left{@image{images/AskQuestions.png, "Ask Questions icon", 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed animals and the unfixed animals, then compare the totals.
 
-[.lesson-point]
-After considering Rows and Columns, it's time to ask _"What are we Creating?"_
+@vspace{1ex}
 
-Is it a histogram? Bar chart? Scatter plots are essential for displaying relationships _between_ columns, but the other displays only deal with one column. Some displays work for @vocab{categorical data}, and others are for @vocab{quantitative data}.
+@left{@image{images/ConsiderData.png, "Consider Data icon", 100}} To consider the data, we ask *which rows* we're talking about. Is it just the dogs? Just animals more than 5 years old? We know that we'll need to count every single animal, so we want all the rows. We also need to know *which column(s)* we are displaying. In this case, it's the `fixed` column.
 
-In this lesson, our goal is to expore the different kinds of displays we can make in Pyret, and what kinds of data each display is good for. For now, *this is all about exploring!* For example, you may not know how to read a histogram yet, but our goal today is to just figure out how to _make one_ in Pyret.
+@vspace{1ex}
 
-The Contracts page in the back of the student workbooks contains @vocab{contracts} for many functions that make displays. Once we know what to create, we can find the Contract for that display and start writing code!
+@left{@image{images/AnalyzeData.png, "Analyze Data icon", 100}} What kinds of displays can help us analyze a single, categorical column? We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
+
+Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
 
 === Investigate
 Let's get some practice going from questions to code, and making data displays in the process!
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/data-displays.adoc}, and see if you can fill in these three parts for a number of data display instructions. When you're finished, try to make the display in Pyret using the appropriate function.
+Turn to @printable-exercise{pages/analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in Pyret.
 
-Do you know what kind of data is used for each display?
+Have students share their results. What did their charts tell them?
 
-[.lesson-instruction]
-Turn to @printable-exercise{pages/type-v-display.adoc}, and see if you can identify what kind of data each display needs!
-
-=== Common Misconceptions
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop a little familiarity, and to get more practice reading Contracts.
+@left{@image{images/InterpretData.png, "Interpret Data icon", 100}} In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 === Synthesize
-Debrief the activity with students.
-
-- What displays can be used with categorical data?
-- What displays can be used with quantitative data?
-- What displays work with only one column of data?
-- What displays work with two or more columns of data?
+How do Contracts and the Data Cycle work together, to help us figure out what program will answer our questions?
 
 == Row and Column Lookups @duration{30 minutes}
 
@@ -154,6 +146,4 @@ Have students share their answers, and see if there are any common questions tha
 
 == Additional Exercises:
 - @opt-printable-exercise{pages/more-practice-w-lookups.adoc}
-- @opt-printable-exercise{pages/exploring-displays-1.adoc}
-- @opt-printable-exercise{pages/exploring-displays-2.adoc}
 - @opt-printable-exercise{pages/plot-practice.adoc}
