@@ -53,16 +53,18 @@ Students discover the need for distance calculation (first in one dimension, the
 [.lesson-instruction]
 Open your saved Game Starter File, which should have the Target and Danger moving on their own. Your Player should respond to keypresses, and the Target and Danger should re-appear after they leave the screen. It's almost fully-playable!
 
+*Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use if you're demoing on the board.*
+
 {empty}
 
-- What seems to be missing from this game?
--- _The characters aren't doing anything when they collide._
+* What seems to be missing from this game?
+** _The characters aren't doing anything when they collide._
 
-- What does it mean for characters to 'hit' one another? To collide?
--- _They have to be close enough to touch._
+* What does it mean for characters to 'hit' one another? To collide?
+** _They have to be close enough to touch._
 
-- How will the computer know when the characters have collided?
--- _When the coordinates of the characters are really close to each other._
+* How will the computer know when the characters have collided?
+** _When the coordinates of the characters are really close to each other._
 
 @right{@image{images/screenshot.jpg, "game image: astronaut and space craft on a landscape, with a right triangle showing the horizontal, vertical and diagonal distance between them"}}
 [.lesson-instruction]
@@ -71,6 +73,8 @@ Scroll down to `4. Collisions` in the file and look for the `distances-color` de
 This setting will draw lines from your Player to each of the other characters, and then use those lines as the hypotenuse of right triangles!
 
 The legs of these triangles show the distance in 1 dimension each (on the x- and y-axis). How is this calculated?
+
+*Here's a link to a @opt-starter-file{sample-game-w-distance} to use if you're demoing on the board.*
 
 @span{.clear}
 
@@ -155,7 +159,7 @@ A student who asks whether it's a problem when @math{x_2 - x_1} is negative is d
 Turn to @printable-exercise{pages/distance-on-coordinate-plane.adoc} and look at how line-length is used in the code. See if you can figure out how to write the code for the second problem.
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/distance-scaffold.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
+Turn to @printable-exercise{pages/distance-coe.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
 
 Optional: Have students use this @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} to model the distance formula for these coordinates with the Circles of Evaluation. +
 
@@ -167,7 +171,7 @@ Optional: Have students complete another pair of these problems using @opt-print
 Debrief these workbook pages - or have students pair-and-share - before moving on to writing the full distance function.
 
 [.lesson-instruction]
-Using @printable-exercise{pages/distance.adoc}, write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{x_1, y_1}) and (@math{x_2, y_2}) and returns the distance between those two points. __HINT:__ the code you wrote in @printable-exercise{pages/distance-scaffold.adoc} can be used to give you your first example! +
+Using @printable-exercise{pages/distance.adoc}, write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{x_1, y_1}) and (@math{x_2, y_2}) and returns the distance between those two points. __HINT:__ the code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example! +
 
 Students can test their `distance` function using *Pythagorean triples*, such as (3, 4, 5) or (5, 12, 13), to make sure the function is calculating the distance correctly. Finally, students fix the broken `distance` function in their game files. When they click "Run", the right triangles will appear with proper distances for the hypotenuse.
 

@@ -188,7 +188,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=PJMfrSvGRl")
    )
-  ("sample-game-w-distance" "Sample Game with Distance Lines Starter File"
+  ("sample-game-w-distance" "Sample Game with Distance Lines Made Visible"
    ("pyret" "https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=0bCivugY3P")
    )
