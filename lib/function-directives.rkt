@@ -124,6 +124,8 @@
         [(symbol? e) (cond [(eq? e 'sqrt) "num-sqrt"]
                            [(eq? e 'sqr) "num-sqr"]
                            [(eq? e 'random) "num-random"]
+                           [(eq? e 'make-posn) "posn"]
+                           [(eq? e 'abs) "num-abs"]
                            [(eq? e '=) "=="]
                            [(eq? e '<=) "\\<="]
                            [(eq? e 'string=?) "=="]
