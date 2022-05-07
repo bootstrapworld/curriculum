@@ -175,7 +175,7 @@ What if we want to write functions that apply different rules, based on certain 
 - Open the @starter-file{red-shape}.
 - Complete @printable-exercise{pages/red-shape-explore.adoc} in your student workbooks.
 
-If you have more time to devote to piecewise functions or students who are ready to dive deeper, have them work with the @opt-starter-file{mood-generator} using @opt-printable-exercise{pages/mood-generator-explore.adoc} in their student workbooks. _Students will enjoy getting to use emojis!_ **Note: Even though emojis look like images, they are actually characters in a string! They can be accessed from your keyboard, just like any other character.**
+_If you have more time to devote to piecewise functions or students who are ready to dive deeper, have them work with the @opt-starter-file{mood-generator} using @opt-printable-exercise{pages/mood-generator-explore.adoc}. Students will enjoy getting to use emojis! **Note: Even though emojis look like images, they are actually characters in a string! They can be accessed from your keyboard, just like any other character.**_
 
 @ifproglang{pyret}{
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -263,7 +263,7 @@ Once we know that we're dealing with multiple patterns, we're ready to define th
 [.lesson-point]
 Each pattern comes with a question
 
-In this example, we have four patterns:
+*In this example, we have four patterns:*
 
 - sometimes we produce `(circle 20 "solid" "red")`
 - sometimes we produce `(triangle 20 "solid" "red")`
@@ -271,28 +271,28 @@ In this example, we have four patterns:
 - sometimes we produce `(star 20 "solid" "red")`
 - sometimes we produce `(text "Unknown shape name!" 20 "red")`
 
-To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").
+*To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").*
 
 * When should we make circles?
-** When `shape === "circle"`
+** When `shape == "circle"`
 * When should we make triangles?
-** When `shape === "triangle"`
+** When `shape == "triangle"`
 * When should we make rectangles?
-** When `shape === "rectangle"`
+** When `shape == "rectangle"`
 * When should we make stars?
-** When `shape === "star"`
+** When `shape == "star"`
 * When should we draw the "Unknown shape name" text?
 ** When `shape` is....anything `else`
 
-Adding the questions to our pattern gives us:
+*Adding the questions to our pattern gives us:*
 
-- When `shape === "circle"`...we produce `(circle 20 "solid" "red")`
-- When `shape === "triangle"`...we produce `(triangle 20 "solid" "red")`
-- When `shape === "rectangle"`...we produce `(rectangle 20 20 "solid" "red")`
-- When `shape === "star"`...we produce `(star 20 "solid" "red")`
+- When `shape == "circle"`...we produce `(circle 20 "solid" "red")`
+- When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`
+- When `shape == "rectangle"`...we produce `(rectangle 20 20 "solid" "red")`
+- When `shape == "star"`...we produce `(star 20 "solid" "red")`
 - When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`
 
-This practically gives away the body of our function definition!
+*This practically gives away the body of our function definition!*
 
 @show{
 (code '(define (cost item)
@@ -303,7 +303,6 @@ This practically gives away the body of our function definition!
     [(string=? shape "star")       (star 20 "solid" "red")]
 	[else (text "Unknown shape name!" 20 "red")])))
 }
-
 
 === Synthesize
 
