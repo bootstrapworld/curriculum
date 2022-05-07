@@ -52,7 +52,8 @@ They explore @vocab{scatter plots}, which are visualizations that show the relat
 === Launch
 [.lesson-instruction]
 - Do you think that younger animals get adopted faster? Why or why not?
-- What kind of display would be helpful here?
+- What kind of data is `age`? What kind of data is `weeks`?
+- What kind of display would help us analyze the relationship between age and adoption time?
 
 Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box-plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
@@ -108,7 +109,12 @@ As our sample size increases, however, the chance of us __seeing a pattern by ra
 Students apply what they've learned about scatter plots to the Data Cycle, using it to answer questions about relationships in the animals dataset.
 
 === Launch
-What other factors might contribute to how long an animal takes to get adopted? _Many! For example, many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be._
+[.lesson-instruction]
+It age the only factor that determines how long it takes for an animal to get adopted?
+
+Have students discuss.
+
+Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be. Bigger dogs are not welcome in many apartments. Perhaps the weight of an animal influences the adoption time!
 
 [.lesson-instruction]
 Take a look at the animals dataset, either in your workbook or on the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, google sheet}. Do you think there's a relationship between `weight` and `weeks` in this table? Why or why not?
@@ -199,7 +205,13 @@ For practice, consider each of the following relationships (phrased as "how is t
 - Are there any unusual observations?
 --
 
-=== Synthesize
-Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship, like the last one!
+Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
 
-It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there! What should we do to explore this?
+=== Synthesize
+It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
+
+It might be nice if the dots in our scatter plot were different colors or shapes, depending on the species. That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a contract like:
+
+`species-dot :: (r :: Row) -> Image`
+
+This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet! The next few lessons are all about _defining functions of our own_, and extending Pyret to deepen our analysis, create more useful and engaging charts, and dig further into our data.
