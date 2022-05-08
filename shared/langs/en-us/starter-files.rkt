@@ -101,7 +101,7 @@
   ("bad-survey"  "Height vs. Wingspan Survey"
    ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
    )
-  ("paper-exploration" "Data Set Exploration"
+  ("exploration-paper" "Data Set Exploration"
     ("pyret" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy")
     ("codap" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"))
   ("research-paper" "Research Paper"
