@@ -2,7 +2,7 @@
 
 @description{Students select a real world dataset to investigate for the remainder of the course. They begin their analysis by identifying categorical and quantitative columns, and defining a few random and logical subsets.}
 
-@lesson-prereqs{grouped-samples}
+@lesson-prereqs{scatter-plots}
 
 @keywords{}
 
@@ -24,7 +24,8 @@
 |[.materials-links]
 * @link{https://docs.google.com/presentation/d/1yqz9a9O_PsXpzRzHVN4tFRNZ3FIbdVxzzSBRcJg-4p0/, Lesson Slides}
 * @link{https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK&v=1904b2c, Animals Starter File}
-* @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/copy, Research Paper template}
+* @starter-file{exploration-paper}
+* @starter-file{research-paper}
 
 @material-links
 
@@ -72,18 +73,12 @@ Below is a list of every dataset already provided to students, with a correspond
 _Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @link{https://youtu.be/uqm9F_tmIho, tutorial video} for help importing your own data into Pyret.
 
 === Investigate
-Have students choose a dataset that is interesting to them! They should have at least two questions that the dataset can help them answer, and write them on @printable-exercise{pages/whats-on-your-mind.adoc}.
+Have students choose a dataset that is interesting to them!
 
 @include{fragments/dataset-table.adoc}
 
 [.lesson-instruction]
---
-Open the @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/copy, Research Paper template}, and save a copy.
-
-- Students fill in their first and last name(s), the teacher name on the first page of the Research Paper.
-- Students should also copy the link to the dataset (spreadsheet), and paste it into the first page of the Research Paper.
-- Students should click "Publish" in their Pyret Starter File, then copy/paste the resulting link into the first page of the Research Paper.
---
+Look at the spreadsheet for your dataset. What do you *Notice*? What do you *Wonder*? Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that _can_ be answered by their dataset and one that _cannot_.
 
 === Synthesize
 Have students share their datasets and their questions.
@@ -93,7 +88,7 @@ For the rest of this course, students will be learning new programming and Data 
 == Exploring Your Dataset @duration{flexible}
 
 === Overview
-Students apply what they've learned about describing and making subsets from the Animals Dataset to their own dataset. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+Students apply what they've learned about describing and making subsets from the Animals Dataset to their own dataset. *Note: this section should be broken up across multiple days!* Students should complete each of the investigate sections, then leave ample classtime for discussion and peer-sharing.
 
 === Launch
 By now you've already learned what to do when you approach a new dataset. With the Animals Dataset, you first read the data itself, and wrote down your Notice and Wonders. You described the columns in the Animals Dataset, identifying which were categorical and which were quantitative, and whether they were Numbers, Strings, Booleans, etc. Finally, you used the Design Recipe and table methods to make random and logical subsets.
@@ -101,23 +96,47 @@ By now you've already learned what to do when you approach a new dataset. With t
 Now, you're doing to do the same thing _with your own dataset._
 
 === Investigate
-[.lesson-instruction]
-- Have students look at the spreadsheet for their dataset. What do they *Notice*? What do they *Wonder*? Have them complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that _can_ be answered by their dataset and one that _cannot_.
-- In the Definitions Area, students use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
-- In the Definitions Area, students use `.row-n` to define *at least three* values, representing different rows in your table.
-- Have students think about subsets that might be useful for their dataset. Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
-- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.6cy9t2stox4e, My Dataset} portion of their Research Paper.
-- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.h6dvbsrt7r00, Categorical Visualizations} portion of their Research Paper, by generating pie and bar charts for their dataset and explaining what they show.
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
+- Make a copy of @starter-file{exploration-paper}, and open the starter file for your chosen dataset.
+- Why does this dataset matter? Where did it come from? Complete the
+- In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
+- In the Definitions Area, use `.row-n` to define *at least three* values, representing different rows in your table.
+
+Have students share which datasets they chose, and why they are interesting or important to them.
 
 [.lesson-instruction]
-Choose one categorical column from your dataset, and try making a bar or pie-chart for the whole table. Now try making the same display for each of your subsets. Which is most representative of the entire column in the table?
+- What is the distribution of data in your categorical columns? Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
+- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of the exploration document.
+- How are the quantitative columns in your dataset distributed? @printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to explore two quantitative columns with histograms and box plots.
+- Then add these displays - and your interpretations! - to "Making Displays" section.
+- Do these displays bring up any interesting questions? If so, add them to the end of the document.
+
+Have students share their findings. Were any of them surprising? What, if any, outliers did they discover when making histograms and box-plots?
+
+[.lesson-instruction]
+- How is this distribution represented in terms of measures of center and spread? Complete @printable-exercise{shape-of-my-dataset.adoc}, and complete the "Measures of Center and Spread" section of the exploration document.
+- What is the standard deviation for these columns? Complete @printable-exercise{analysis-stdev.adoc}, and add your findings to the "Measures of Center and Spread" section.
+- Do these measures bring up any interesting questions? If so, add them to the end of the document.
+
+Have students share their findings. Are some colums more spread out - with a larger standard deviation - than others? What measures of center makes the most sense for one column or another?
+
+[.lesson-instruction]
+- Do you suspect any relationships _between_ quantitative columns in your dataset? Use the Data Cycle to generate some scatter plots, and add them to the "Making Displays" section of the exploration document.
+- Do these displays bring up any interesting questions? If so, add them to the end of the document.
+
+Have students share their findings.
+
+[.lesson-instruction]
+- Open the @starter-file{research-paper}, and save a copy.
+- Fill in your first and last name(s), and your teacher's name on the first page of the research paper.
+- Copy the link to the dataset (spreadsheet), and paste it onto the first page of the research paper.
+- Click "Publish" in their Pyret Starter File, then copy/paste the resulting link into the first page of the research paper.
+- Using the last section of your Exploration document to identify a research question you would like to pursue.
+- Find the displays, measures of center, and measures of spread that are relevant to this question, and add them to the research paper. Be sure to include your interpretations, so that all of your data stories combine into a coherent paper!
 
 === Synthesize
 
-Have students share which subsets they created for their datasets.
+The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
 
-
-[*] From the @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}
+Does your dataset contain any sub-groups? If so, what are they?

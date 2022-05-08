@@ -2,9 +2,9 @@
 
 @description{Students are introduced to Histograms by comparing them to bar charts, learning to construct them by hand and in the programming environment.}
 
-@lesson-prereqs{defining-table-functions}
+@lesson-prereqs{displays-and-lookups, displaying-categorical-data}
 
-@keywords{}
+@keywords{histogram, bin, interval}
 
 [@lesson-intro-table]
 |===
@@ -31,16 +31,6 @@
 
 |===
 
-== Review @duration{20 minutes}
-
-Have students open their Animals Starter File, and click “Run”. (If they do not have this file, or if something has happened to it, they can always make a new @starter-file{animals} copy.)
-
-
-[.lesson-instruction]
-- Turn to @printable-exercise{pages/design-recipe.adoc}, and write the functions you see there. When you’re ready, type the contracts, purpose statements, examples and definitions into the Definitions Area.
-- Use the `.build-column` method to add a new column to the animals table, showing the weight of every animal in kilograms.
-- Use the `image-scatter-plot` function to plot all of the animals, putting `age` on the x-axis, number of `weeks` in the shelter on the y-axis, and `smart-dot` as our function.
-
 == Introducing Histograms @duration{20 minutes}
 
 === Overview
@@ -49,14 +39,19 @@ Students look at a bar chart and a histogram, compare/contrast them, and make ob
 === Launch
 
 [.lesson-instruction]
-Have students complete @printable-exercise{pages/summarizing-columns.adoc}.
+- Turn to @printable-exercise{pages/summarizing-columns.adoc}, which contains a table of data, two kinds of displays, and some questions.
+- Answer the questions at the bottom of the page.
 
+@right{@image{pages/pet-numbers.png, "bar chart with 3 columns: cat (3), dog (3), rabbit (1). There is a space between each of the bars.", 250}}
 The display on the left side of that page is a @vocab{Bar chart}.
 
 - The x-axis lists the values of a categorical variable (`species`).
 - The y-axis shows the @vocab{frequency} of categorical values in the dataset.
 - This chart happens to show the categorical values in alphabetical order from left to right, but it would be fine to re-order them any way we wish. The bar for “dogs” could have been drawn before the one for “cats”, without changing the meaning of the display. _It never makes sense to talk about the “shape” of a categorical dataset_, since that shape holds no meaning.
 
+@vspace{2ex}
+
+@right{@image{pages/pet-weights.png, "histogram showing that there are 4 animals that weight between 0 and 10 pounds, one that weighs between 10 and 20, one that weighs between 30 and 40, and one that weighs between 50 and 60.", 250}}
 The display on the right side is called a @vocab{histogram}.
 
 - Histograms show the distribution of _quantitative_ data.
@@ -69,7 +64,7 @@ To build a histogram, we start by sorting all of the numbers in our column from 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
-@span{.title}{Kinesthetic Activity}
+@span{.title}{Optional: Kinesthetic Activity}
 
 Divide the class into groups, and give each group a ball of playdough. Have the groups roll the dough into a thick cylinder, then divide that cylinder in half. Then, have them take one of the halves and cut that in half _again_, then cut one of the resulting pieces in half once more. This will form *four* chunks of playdough, with a ratio of *1:1:2:4*
 
@@ -94,7 +89,7 @@ Note that intervals on this display include the left endpoint but not the right.
 === Synthesize
 Review: How are histograms and bar charts different?
 
-== Choosing the Right Bin Size @duration{15 minutes}
+== Choosing the Right Bin Size @duration{30 minutes}
 
 === Overview
 Students make histograms from the animals-dataset, and explore different bin sizes.
@@ -130,7 +125,9 @@ Some observations you can share with the class, to get them started:
 If someone asked what was a typical adoption time, we could say: “Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!” Without looking at the histogram’s shape, we could not have drawn this conclusion.
 
 [.lesson-instruction]
-What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?
+- What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?
+- What would the histogram look like if every animal was adopted in roughly the same length of time?
+- See if you can match descriptions to histograms, by completing @printable-exercise{reading-histograms.adoc}
 
 === Synthesize
 *Have students talk about the bin sizes they tried*. Encourage open discussion as much as possible here, so that students can make their own meaning about bin sizes before moving on to the next point.

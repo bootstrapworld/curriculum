@@ -90,13 +90,16 @@ Earlier, you learned how to define values in Pyret. We can define Numbers, Strin
 
 Let's use this skill to define __Tables...__}
 
-=== Investigate
 @ifproglang{pyret}{
 We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:
 ----
 dogs  = animals-table.filter(is-dog)
 ----
+
+The `.filter` method walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `.filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `.filter`.
 }
+
+=== Investigate
 
 [.lesson-instruction]
 --
@@ -148,3 +151,25 @@ Let's start with question: __what's the ratio of fixed to unfixed *cats* at the 
 === Synthesize
 - What connections do you see between the "Consider Data" and "Analyze Data" steps?
 - How do we know when we need to filter? How do we know when we _don't?_
+
+== Your Analysis @duration{flexible}
+
+=== Overview
+Students apply their knowledge of table methods, defining table functions, and the Design Recipe to create grouped samples for their dataset.
+
+=== Launch
+Think about your own dataset. Are there grouped samples that you'd like to explore separately? Here are a few examples, taken from some of the sample datasets:
+
+- In the RI Schools dataset, it might be good to create grouped samples for public v. charter schools
+- In the Movies dataset, it might be valuable to create grouped samples for modern movies, and analyze them sepatately from older movies.
+- In the US Presidents dataset, it could be useful to make a grouped sample for each political party.
+
+=== Investigate
+What grouped samples make sense for your dataset?
+
+[.lesson-instruction]
+- Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
+- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
+
+=== Synthesize
+Have students share the grouped samples they created for their datasets. After each share-back, ask the class if they have suggestions for other possible grouped samples.

@@ -43,7 +43,7 @@
   ; data-science
 
   ("blank-ds" "Blank Dataset Starter File for Bootstrap:Data Science"
-    ("pyret" "https://code.pyret.org/editor#share=1HOkwUMWFgB3bR50JykQc2aWEw8iUo9GM")
+    ("pyret" "https://code.pyret.org/editor#share=1L_TTcE1dv0XtgVg8HW89LfDtRgpcJnkA")
     )
 
   ("animals" "Animals Starter File"
@@ -101,6 +101,12 @@
   ("bad-survey"  "Height vs. Wingspan Survey"
    ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
    )
+  ("paper-exploration" "Data Set Exploration"
+    ("pyret" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy")
+    ("codap" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"))
+  ("research-paper" "Research Paper"
+    ("pyret" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy")
+    ("codap" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"))
 
   ; math
    
