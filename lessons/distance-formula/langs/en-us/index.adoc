@@ -95,14 +95,14 @@ _Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use
 | Emphasize that this represents _one dimension_ (perhaps the x-axis).
 | With the volunteer, stand about 10 steps away from one another and side-step towards each other one step at a time, while asking the class, "True or False? We are colliding!" __Be sure to only accept "true" and "false" as responses - not "yes" and "no"!__
 | Ask the class how far apart you and your volunteer are. How they would calculate this if you were standing on a number line and they could see the actual coordinates under your feet?
-| After a few iterations, try switching places and repeating. _Point out that students always subtract the smaller number from the larger one, regardless of the character order!_
+| After a few iterations, try switching places and repeating. _Point out that students always subtract the smaller number from the larger one, regardless of the character order!_ *The results are always positive.*
 | Do this until students can clearly see that collision happens when the two characters are _touching_ or
 _overlapping_ in some way - NOT when they are _at the same point._
 |===
 
 === Investigate
 
-Our game computes distance using a function called `line-length`. Let's explore how it works!
+Our game computes 1-dimensional distance (vertical or horizontal) using a function called `line-length`. Let's explore how it works!
 
 [.lesson-instruction]
 * Find the `line-length` function in your game files and take a minute to look at the code.
@@ -131,13 +131,13 @@ Students learn early on that distance in 1-dimension is computed via @math{\lver
 
 Most math textbook, however, show the distance formula without connecting back to that theorem.
 
-@math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}
+@center{  @math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}  }
 
 A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on!
 
 Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connect back to the Pythagorean Theorem itself. This effectively rewrites the distance formula as:
 
-@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}
+@center{  @math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
 
 |===
 == Distance in 2 Dimensions @duration{30 minutes}
@@ -181,7 +181,7 @@ _Note: If it's been a long time since your students have used the Pythagorean Th
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
-@span{.title}{Connecting Pythagorean Theorem to VideoGames}
+@span{.title}{Connecting Pythagorean Theorem to Videogames}
 We recommend carving out 4.5 minutes and wowing your students with @link{https://www.youtube.com/watch?v=Ln7myXQx8TM, Tova Brown's Video of a Geometric Proof of the Pythagorean Theorem and its application to finding distance between game characters}. Then have them try explaining the proof to one another.
 
 In our case, the lengths A and B are computed by the `line-length` function we already have!
@@ -192,10 +192,10 @@ Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've pr
 === Investigate
 
 [.lesson-instruction]
-* Turn to @printable-exercise{pages/distance-on-coordinate-plane.adoc} and look at how line-length is used in the code. See if you can figure out how to write the code for the second problem.
-* Then turn to @printable-exercise{pages/distance-coe.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
+* Turn to @printable-exercise{distance-on-coordinate-plane.adoc} and look at how line-length is used in the code. See if you can figure out how to write the code for the second problem.
+* Then turn to @printable-exercise{distance-coe.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
 
-Optional: Have students use this @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} to model the distance between two point with the Circles of Evaluation, Code, Computations and a Graph. +
+Optional: Have students use this @opt-printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} to model the distance between two point with the Circles of Evaluation, Code, Computations and a Graph. +
 
 [.lesson-instruction]
 Practice computing the distance between two _different_ points, by completing @printable-exercise{pages/distance-from-game-coordinates.adoc}.
