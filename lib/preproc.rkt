@@ -1886,8 +1886,10 @@
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (car x))]
                                     [y-i (index-of *workbook-pages* (car y))])
-                                (cond [(and x-i y-i) (< x-i y-i)]
-                                      [else #f]))))])
+                                (unless x-i (set! x-i -1))
+                                (unless y-i (set! y-i -1))
+                                (cond [(and (= x-i -1) (= y-i -1)) #t]
+                                      [else (< x-i y-i)]))))])
               (for ([x xx])
                 (fprintf o "\n* ~a\n\n" (cadr x))))
 
