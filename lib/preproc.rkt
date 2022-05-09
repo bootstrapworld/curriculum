@@ -1659,11 +1659,12 @@
                                              (errmessage-context) directive lbl)]
                                     [else
                                       (let ([title (cadr c)]
-                                             [p (assoc *proglang* (cddr c))])
+                                            [p (assoc *proglang* (cddr c))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                      (errmessage-context) directive lbl *proglang*)]
                                               [else
+                                                (unless (<= (length p) 2) (set! title (caddr p)))
                                                 (let* ([link-output (format "link:pass:[~a][~a~a]" (cadr p) title
                                                                             (if *lesson-plan* ", window=\"_blank\"" "")
                                                                             )]
