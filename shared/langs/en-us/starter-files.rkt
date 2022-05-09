@@ -1,11 +1,12 @@
 #lang racket
 
-(provide *starter-files*) 
+(provide *starter-files*
+         *do-not-autoinclude-in-material-links*)
 
 (define *starter-files*
 
 '(
-  
+
   ("editor" "the editor"
     ("pyret" "code.pyret.org" "code.pyret.org (CPO)")
     ("wescheme" "wescheme.org" "WeScheme")
@@ -19,10 +20,10 @@
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
    )
-  
+
   ("collaboration" "Collaboration Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN"))
-  
+
   ("bc" "bc Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
@@ -36,11 +37,11 @@
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
    )
-  
+
   ("mood-generator-ask" "Alternate Version of the Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e")
    )
-  
+
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN")
    ("wescheme" "https://www.wescheme.org/view?publicId=n4DkTyYbQh")
@@ -115,7 +116,7 @@
     ("codap" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"))
 
   ; math
-   
+
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
@@ -267,3 +268,6 @@
   )
 
   ))
+
+(define *do-not-autoinclude-in-material-links*
+  '("editor"))

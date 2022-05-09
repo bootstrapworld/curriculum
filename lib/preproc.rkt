@@ -1672,7 +1672,9 @@
                                                          (format "[StarterFile~a]##~a##"
                                                                  (if opt? " Optional" "")
                                                                  link-output)])
-                                                  (cond [opt?
+                                                  (cond [(member lbl *do-not-autoinclude-in-material-links*)
+                                                         #f]
+                                                        [opt?
                                                           (unless (member styled-link-output *opt-starter-file-links*)
                                                             (set! *opt-starter-file-links*
                                                               (cons styled-link-output *opt-starter-file-links*)))]
