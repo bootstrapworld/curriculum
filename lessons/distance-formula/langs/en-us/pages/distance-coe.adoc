@@ -4,6 +4,8 @@
 <style>
 #content .editbox{width: auto;}
 #content .MathJax{display: inline; }
+#content .compare tbody tr { height: 6rem; }
+td { padding: 0 0.5rem !important; }
 </style>
 ++++
 
@@ -12,21 +14,43 @@ The distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(code '(
 [.center.big]
 @math{\sqrt{line\mbox{-}length(x_{2}, x_{1})^2 + line\mbox{-}length(y_{2}, y_{1})^2}}
 
-Suppose your player is at *(0, 2)* and a character is at *(4, 5)*. What is the distance between them? With your pencil, label which numbers represent @math{x_{1}}, @math{y_{1}}, @math{x_{2}} and @math{y_{2}}. The equation to compute the distance between these points is:
+Suppose your player is at *(0, 2)* and a character is at *(4, 5)*. What is the distance between them?
+
+*1. Identify the values of @math{x_{1}}, @math{y_{1}}, @math{x_{2}}, and @math{y_{2}}*
+
+[cols="^.<1a,^.<1a,^.<1a,^.<1a", stripes="none"]
+|===
+| @math{x_{1}} | @math{y_{1}} | @math{x_{2}} | @math{y_{2}}
+
+| _(x-value of 1st point)_
+| _(y-value of 1st point)_
+| _(x-value of 2nd point)_
+| _(y-value of 2nd point)_
+
+| @vspace{2ex}
+|
+|
+|
+
+|===
+
+The equation to compute the distance between these points is:
 
 [.center.big]
 @math{\sqrt{line\mbox{-}length(4, 0)^2 + line\mbox{-}length(5, 2)^2}}
 
-*1. Translate the expression above, for (0,2) and (4,5) into a Circle of Evaluation below*.
+*2. Translate the expression above, for (0,2) and (4,5) into a Circle of Evaluation below*.
 
-@vspace{5ex}
+_Hint: In our programming language @show{(code 'sqr)} is used for @math{x^2} and @show{(code 'sqrt)} is used for @math{\sqrt{x}}_
+
+@vspace{1ex}
 
 [.center]
-@image{circles-of-distance.png, circles of distance}
+@image{../images/coe-distance.png, circles of distance}
 
-@vspace{5ex}
+@vspace{1ex}
 
-*2. Convert the Circle of Evaluation to Code below*.
+*3. Convert the Circle of Evaluation to Code below*.
 
 @ifnotsoln{
 @fitb{}{}
