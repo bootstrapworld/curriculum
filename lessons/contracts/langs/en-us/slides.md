@@ -94,6 +94,8 @@ Contracts are general. Expressions are specific.
 
 Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
 
+{.column}
+
 @table{5}
 | **Name** 				|	| **Domain**				|		| **Range**
 @ifproglang{wescheme}{
