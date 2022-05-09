@@ -273,10 +273,6 @@
         "P4" 
         )
 
-    ("displays-and-lookups" 
-        "MP.3"
-        )
-
     ("bar-and-pie-charts" 
         "MP.5"
         "MP.6"

@@ -499,6 +499,7 @@
         "3B-AP-14" 
         "1B-AP-11" ; STEMworks
         "3A-AP-17" ; STEMworks
+        "3A-DA-11" 
         "OK.L1.DA.CVT.01"
         "OK.L1.IC.C.02"
         "OK.PA.D.1"
@@ -509,6 +510,8 @@
         "OK.7.D.1.2"
         "OK.6.D.1.3"
         "OK.8.IC.SI.01"
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models"
         )
 
     ("correlations" 
@@ -554,15 +557,6 @@
         "7.RP.A.3"
         "7.SP.B"
         "HSS.ID.A"
-        )
-
-    ("displays-and-lookups" 
-        "3A-DA-11" 
-        "9-12.Data and Analysis.Visualization and Transformation" 
-        "6-8.Data and Analysis.Inference and Models"
-        "OK.8.DA.S.01"
-        "OK.7.D.1.2"
-        "OK.6.D.1.3"
         )
 
     ("ds-intro" 

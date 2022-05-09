@@ -1,0 +1,124 @@
+= Row and Column Lookups
+
+@add-to-lang{.row-n}
+
+@description{Students learn how to extract individual rows from a table, and columns from a row.}
+
+@lesson-prereqs{contracts, bar-and-pie-charts}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Given a human-language request for a data display involving the entire Animals Dataset, break it down into parts and generate the display.
+* Given a Table, use the `row-n` method to extract any Row from that table
+* Given a Row, use the column lookups to extract the value of any column in the Row
+
+| Student-facing Lesson Goals
+|
+
+* Let's practice making data displays to answer our questions about the data and retrieving information from tables.
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1CwvnamtZ5irPTuvbzgmv02HM7w5Aa54SmR3JOBpJ6Iw/, Lesson Slides}
+@material-links
+
+| Preparation
+|
+* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new @starter-file{animals}.
+
+|===
+
+== Row Lookups @duration{30 minutes}
+
+=== Overview
+Students learn how to define values in Pyret, and practice by defining Numbers, Strings, and Images. They also learn how to define an individual row from a table in Pyret.
+
+=== Launch
+Have students open their saved Animals Starter File (or make a new @starter-file{animals} copy), and click “Run”.
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
+
+  name = "Flannery"
+  age = 16
+  logo = star(50, "solid", "red")
+
+- What are the names given in each of these? __name, age, and logo__
+- What are the values? __the String "Flannery", the Number 16, and an Image of a solid red star__
+
+=== Investigate
+[.lesson-instruction]
+How many rows do we need to answer a Lookup question?
+(Make sure sure students understand we only need one!)
+
+@right{@image{images/AskQuestions.png, Ask Questions icon, 100}}
+Let's talk about the code we can write, to let us answer a Lookup question by defining a row.
+
+Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method:
+
+  animals-table.row-n(0)
+
+[.lesson-point]
+Don't forget: data rows start at index _zero_!
+
+[.lesson-instruction]
+In the Interactions Area, use the `row-n` method to get the second and third data rows.
+
+What is the Domain of .row-n? What is the Range? Find the contract for this method in your contracts table. A table @vocab{method} is a special kind of function which always operates on a specific table. In our example, we always use .row-n with the animals table, so the number we pass in is always used to grab a particular row from animals-table.
+
+The code below will define the first row from the animals table:
+
+  sasha    = animals-table.row-n(0)
+
+[.lesson-instruction]
+- Open the Starter File for your own dataset
+- In the Animals Dataset, there are logical subsets that we might want to analyze: dogs, cats, lizards, etc. Does _your_ dataset have logical subsets? What are they?
+- In the first section of your file, use the `.row-n` method to define at least three rows from your table.
+- If you have multiple subsets, make sure you have a row from each one defined!
+
+=== Synthesize
+- Which rows did the students choose?
+- How did they choose them?
+
+
+== Row Lookups @duration{25 minutes}
+
+=== Overview
+Students learn how to access a particular column from a row.
+
+=== Launch
+Pyret also has a way for us to get at individual columns of a Row, by using a Row Accessor. Row accessors start with a Row value, followed by square brackets and the name of the column where the value can be found. Here are three examples that use row accessors to get at different columns from the first row in the animals-table:
+
+  animals-table.row-n(0)["name"]
+  animals-table.row-n(0)["age"]
+  animals-table.row-n(0)["fixed"]
+
+And of course, we can use our defined name, substituting it in place of all the redundant code:
+
+  sasha["name"]
+  sasha["age"]
+  sasha["fixed"]
+
+[.lesson-instruction]
+- How would you get the `weeks` column out of the _second_ row? The third?
+- Complete the exercises on @printable-exercise{lookup-questions.adoc}.
+- Complete @printable-exercise{pages/more-practice-w-lookups.adoc}
+
+Flip back to page 2 of your workbook and look at The Animals Dataset. Which row is animalA? Label it in the margin next to the dataset. Which row is animalB?  Label it in the margin next to the dataset.
+
+Now turn back to your screen.
+What happens when you evaluate `animalA` in the Interactions Area?
+
+[.lesson-instruction]
+- Define _at least_ two additional values to be animals from the `animals-table`, called `animalC` and `animalD`.
+
+=== Synthesize
+Have students share their answers, and see if there are any common questions that arise.
+
+== Additional Exercises:
+- @opt-printable-exercise{pages/plot-practice.adoc}
