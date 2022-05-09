@@ -277,7 +277,7 @@
         "MP.3"
         )
 
-    ("displaying-categorical-data" 
+    ("bar-and-pie-charts" 
         "MP.5"
         "MP.6"
         "SEP.3" 
