@@ -304,7 +304,7 @@
 		"IM.Alg1.4.3"
         )
 
-    ("displaying-categorical-data" 
+    ("bar-and-pie-charts" 
         "IM.8.6.1"
 		"IM.8.6.2"
 		"IM.Alg1.1.2"

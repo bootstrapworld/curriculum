@@ -1659,11 +1659,12 @@
                                              (errmessage-context) directive lbl)]
                                     [else
                                       (let ([title (cadr c)]
-                                             [p (assoc *proglang* (cddr c))])
+                                            [p (assoc *proglang* (cddr c))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                      (errmessage-context) directive lbl *proglang*)]
                                               [else
+                                                (unless (<= (length p) 2) (set! title (caddr p)))
                                                 (let* ([link-output (format "link:pass:[~a][~a~a]" (cadr p) title
                                                                             (if *lesson-plan* ", window=\"_blank\"" "")
                                                                             )]
@@ -1886,8 +1887,10 @@
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (car x))]
                                     [y-i (index-of *workbook-pages* (car y))])
-                                (cond [(and x-i y-i) (< x-i y-i)]
-                                      [else #f]))))])
+                                (unless x-i (set! x-i -1))
+                                (unless y-i (set! y-i -1))
+                                (cond [(and (= x-i -1) (= y-i -1)) #t]
+                                      [else (< x-i y-i)]))))])
               (for ([x xx])
                 (fprintf o "\n* ~a\n\n" (cadr x))))
 

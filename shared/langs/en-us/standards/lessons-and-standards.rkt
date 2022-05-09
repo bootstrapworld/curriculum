@@ -541,7 +541,7 @@
         "OK.3.AP.PD.01"
         )
 
-    ("displaying-categorical-data"  
+    ("bar-and-pie-charts"  
         "2-DA-08" 
         "3A-DA-11" 
         "OK.8.DA.S.01"
