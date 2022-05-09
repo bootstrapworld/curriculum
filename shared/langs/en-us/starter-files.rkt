@@ -5,6 +5,12 @@
 (define *starter-files*
 
 '(
+  
+  ("editor" "the editor"
+    ("pyret" "code.pyret.org" "code.pyret.org (CPO)")
+    ("wescheme" "wescheme.org" "WeScheme")
+    )
+
   ; no spaces in starter file shortname!
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; CORE
