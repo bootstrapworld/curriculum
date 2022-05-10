@@ -3,6 +3,7 @@
 topdir=$(pwd)
 
 export PROGDIR=$topdir/prog
+templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 SED=sed
 
@@ -66,7 +67,8 @@ for natlang in *; do
          else
            # echo md2gslides without id
            # md2gslides slides.mkd -n -t "$title" --use-fileio > "$idfile" 2> /dev/null
-           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" --use-fileio > .tmp.txt 2> /dev/null
+           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt 
+
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
              cat .tmp.txt
