@@ -8,6 +8,7 @@ fi
 topdir=$(pwd)
 
 export PROGDIR=$topdir/prog
+templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 SED=sed
 
@@ -61,7 +62,7 @@ for natlang in *; do
          if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
            # echo md2gslides with id $id
-           node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>/dev/null
+           node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt
            # node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
@@ -70,7 +71,7 @@ for natlang in *; do
            # rm .tmp.txt
          else
            # echo md2gslides without id
-           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" --use-fileio > .tmp.txt 2> /dev/null
+           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt 
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
              if grep -q 'must be less than the endIndex' .tmp.txt; then

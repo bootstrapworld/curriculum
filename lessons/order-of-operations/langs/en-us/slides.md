@@ -1,11 +1,10 @@
 ---
+{layout="Math Title Slide"}
 
 # Order of Operations
 
 ---
-# Order of Operations
-
----
+{layout="Launch"}
 # Order of Operations
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. 
@@ -13,17 +12,15 @@ If you were to write instructions for getting ready for school, it would matter 
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
 ---
-
+{layout="Launch"}
 # Order of Operations
-
-@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
-
-{.column}
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
----
+@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
 
+---
+{layout="Launch"}
 # Order of Operations
 
 @math{6 \div 2(1 + 2)}
@@ -49,6 +46,7 @@ If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division fun
 @image{images/coe1.png, a}
 
 ---
+{layout="Launch"}
 # Order of Operations
 
 What if we want to use multiple functions?  How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
@@ -87,19 +85,21 @@ This is a link
 @link{https://docs.google.com/presentation/d/1eLe5LmYNfVBN_6Yw6K41UIpLTO1GOfy2295HrbjlKhk/, Lesson Slides}
 
 ---
-
+{layout="Investigate"}
 # Order of Operations
 
 Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. (Ignore the code column for now! We will come back to it later.)
 
 ---
-# Order of Operaations
+{layout="Investigate"}
+# Order of Operations
 
 For more practice with this, turn to:
 @printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc}
 @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
@@ -109,6 +109,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 - Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
 ---
+{layout="Investigate - Driver/Navigator"}
 # From Circles of Evaluation to Code
 
 @table{3}
@@ -117,6 +118,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 |*Code*					| &rarr; | @show{(code '(+ 3 8)) }
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 
@@ -126,6 +128,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 |*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8))) }
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 @scrub{
@@ -137,6 +140,7 @@ What would the code look like for these circles?
 |@image{images/coe7.png, a}				| @image{images/coe8.png, a}
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 
@@ -145,6 +149,7 @@ What would the code look like for these circles?
 |@show{(code '(/ 6 (+ 1 2)))}			| @show{(code '(* (- 10 5) 6))}
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 If you have time, start with the two pages in the student workbook that scaffold translating circles to code: 
@@ -153,6 +158,7 @@ If you have time, start with the two pages in the student workbook that scaffold
 - @printable-exercise{pages/match-coe-to-code.adoc}.
 
 ---
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 Now that we know how to translate Circles of Evaluation into Code, turn back to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc}.
@@ -162,6 +168,7 @@ Once you confirm that your code is correct, continue on to @printable-exercise{p
 Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}
 
 ---
+{layout="Investigate - Driver/Navigator"}
 # Testing out your Code
 
 - Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)} } and click run.
@@ -190,6 +197,7 @@ One of them is familiar, but the other is very different from what you've been w
 - Convert this Circle to code and try it out!
 
 ---
+
 # Testing out your Code
 
 @image{images/coe13.png, a}
@@ -202,6 +210,7 @@ Here is another circle to explore.
 - Convert this Circle to code and try it out!
 
 ---
+{layout="Supplemental"}
 # Additional Practice
 
 If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
@@ -239,7 +248,6 @@ More 3-column practice with square roots:
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}
-
 
 
 
