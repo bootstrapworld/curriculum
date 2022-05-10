@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-04-29 # last modified
+LASTMOD=2022-05-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -257,8 +257,9 @@ function overwrite() {
   fi
 }
 
-if test ! -d distribution/$NATLANG/extlib/MathJax*; then
-  cp -pr $TOPDIR/extlib/MathJax* distribution/$NATLANG/extlib
+if test ! -d distribution/$NATLANG/extlib/mathjax; then
+  cp -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
+  rm -fr distribution/$NATLANG/extlib/mathjax/[CLRptu]*
 fi
 
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
@@ -658,7 +659,7 @@ EOF
   if test "$mathjaxneeded"; then
     if test ! -f $fdir/.cached/.mathjax.txt; then
     cat > $fdir/.cached/.mathjax.txt <<EOF
-      <script src="${localDISTROOTDIR}/extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${localDISTROOTDIR}/extlib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     fi
