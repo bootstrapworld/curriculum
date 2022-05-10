@@ -259,6 +259,7 @@ function overwrite() {
 
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
   cp -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
+  rm -fr distribution/$NATLANG/extlib/mathjax/[CLRptu]*
 fi
 
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
