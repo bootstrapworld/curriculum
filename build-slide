@@ -99,7 +99,9 @@ for natlang in *; do
          fi
          if test -f "$idfile"; then
            cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a target="_blank" href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
-           $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
+           timestamp=$(date +%c)
+           $SED -i -e 's/$/">Google Slides generated INSERTTIMESTAMP<\/a>/' slides-$PROGLANG.html
+           $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
          fi
        else
          echo WARNING: slides.md failed preprocessing
