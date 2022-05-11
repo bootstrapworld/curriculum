@@ -188,19 +188,13 @@
 
 (define (preproc-slides-file in-file)
   (set! *in-file* in-file)
-  (let ([out-file (path-replace-extension in-file ".mkd")]
-        [title-read? #f])
+  (let ([out-file (path-replace-extension in-file ".mkd")])
 
     (define (expand-directives i o)
       (let loop ()
         (let ([c (read-char i)])
           (unless (eof-object? c)
             (cond
-              [(char=? c #\#)
-               (display c o)
-               (unless title-read?
-                 (set! title-read? #t)
-                 (display " AUTO-GEN:" o))]
               [(char=? c #\@)
                (let ([directive (read-word i)])
                  ; (printf "directive is ~s\n" directive)
