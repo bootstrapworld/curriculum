@@ -13,9 +13,16 @@ Make as many unique, solid, green triangles as you can in 2 minutes.
 
 @image{images/green-triangle.jpg, a}
 
+<!--
+Screenshot responses and/or share the class total at this point...
+We’ll be making a comparison to this achievement later in the lesson.
+-->
+
 ---
 {layout="Launch"}
 # There's Got to Be a Better Way!  
+
+Look at the examples below and consider the following: What is constant? What stays the same? What is variable? What changes?
 
 @show{(code '(triangle  30  "solid" "green"))}
 
@@ -23,9 +30,6 @@ Make as many unique, solid, green triangles as you can in 2 minutes.
 
 @show{(code '(triangle 500  "solid" "green"))}
 
-What is constant? What stays the same?
-
-What is variable? What changes?
 
 ---
 {layout="Investigate"}
@@ -83,36 +87,23 @@ When I say, "*gt 99!*".
 Make it clear to the class that the function's Name is "gt," that they expect a Number, and will produce an Image. Act out some examples before having the class add their own and record them on the board. -->
 
 ---
-{layout="Investigate"}
-# There's Got to Be a Better Way!  
-
-
-We gave our volunteer instructions that let them take in `gt 20` and give us back
-@show{(code '(triangle 20 "solid" "green"))}.
-
-We can define any function we'd like in the *Definitions Area*! We just need to program the computer to be as smart as our volunteer.
-
----
 {layout="Synthesize"}
 # Identifying and Describing the Pattern
 
 How was `gt` so speedy at building green triangles?
 
-How can we program the computer to be as smart as our volunteer? In order to define a function, we need to identify what's changing and what stays the same. 
+How can we program the computer to be as smart as our volunteer? 
+
+In order to define a function, we need to identify what's changing and what stays the same. Once we've done that, we can defin eany function we'd like in the _Definitions Area_!
 
 ---
 
 # Identifying and Describing the Pattern
 
-Let's take a look at some examples for `gt`.
+On the next slide, we'll take a look at some examples for `gt`.
 
-@show{(code '(gt 5))} &rarr; @show{(code '(triangle 5 "solid" "green"))}
-@show{(code '(gt 10))} &rarr; @show{(code '(triangle 10 "solid" "green"))}
-@show{(code '(gt 25))} &rarr; @show{(code '(triangle 25 "solid" "green"))}
-@show{(code '(gt 100))} &rarr; @show{(code '(triangle 100 "solid" "green"))}
-@show{(code '(gt 220))} &rarr; @show{(code '(triangle 220 "solid" "green"))}
-
-- What's Changing?
+As you look at the examples, consider the following: 
+- What's changing?
 - How do we define our function? 
 - What would be a logical variable?
 
@@ -120,19 +111,41 @@ Let's take a look at some examples for `gt`.
 
 # Identifying and Describing the Pattern
 
-If we keep everything that stayed the same and substitute `size` for the numbers that changed, it looks like this:
+Here are some examples for `gt`.
 
-@center{@show{(code '(gt size))} &rarr; @show{(code '(triangle size "solid" "green"))}}
+@show{(code '(gt 5))} &rarr; @show{(code '(triangle 5 "solid" "green"))}
 
-The way we write this in the editor is
+@show{(code '(gt 10))} &rarr; @show{(code '(triangle 10 "solid" "green"))}
 
-@center{@show{(code '(define (gt size)(triangle size "solid" "green")))}}
+@show{(code '(gt 25))} &rarr; @show{(code '(triangle 25 "solid" "green"))}
+
+@show{(code '(gt 100))} &rarr; @show{(code '(triangle 100 "solid" "green"))}
+
+@show{(code '(gt 220))} &rarr; @show{(code '(triangle 220 "solid" "green"))}
+
+<!--
+Highlight or circle the numbers in the gt column and in the triangle column to help students see that they’re the only thing changing! Draw arrows to the two highlighted columns and label them with the word size.
+  -->
 
 ---
 
 # Identifying and Describing the Pattern
 
-Turn to @printable-exercise{gt-domain-debate.adoc} and "decide and defend" whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
+If we keep everything that stayed the same and substitute `size` for the numbers that changed, it looks like this:
+
+@show{(code '(gt size))} &rarr; @show{(code '(triangle size "solid" "green"))}
+
+The way we write this in the editor is
+
+@show{(code '(define (gt size)(triangle size "solid" "green")))}
+
+---
+
+# Identifying and Describing the Pattern
+
+Turn to @printable-exercise{gt-domain-debate.adoc}.
+
+Who is correct - Kermit or Oscar?
 
 Why might someone think the domain for `gt` contains a Number and two Strings? 
 
@@ -140,22 +153,20 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 
 # Identifying and Describing the Pattern
 
-- Have students open the @starter-file{gt} and click run.
-- Evaluate @show{(code '(gt 10))} in the Interactions Area.
-- What did you get back?
-- Take one minute and see how many different green triangles you can make using the `gt` function.
-- How many were you able to make?
+- Open the @starter-file{gt} and click run.
+- Evaluate @show{(code '(gt 10))} in the Interactions Area. What do you get back?
+- In one minute, how many different green triangles you can make?!
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
 ---
 
 # Identifying and Describing the Pattern
 
-We've successfully defined a function to satisfy my love of green triangles, but other people have other favorite shapes and we need to be able to meet their needs, too. 
+Other people have other favorite shapes. We need to be able to meet their needs, too! 
 
-What if we wanted to define a function `rs` to make solid red squares of whatever size we give them?
+What if we wanted to define a function `rs` to make solid red squares of whatever size we provide?
 
-Complete @printable-exercise{rs.adoc}, add your new function definitions to your @starter-file{gt} and test them out, before moving on to @printable-exercise{sun.adoc} and @printable-exercise{define-your-own.adoc}
+Complete @printable-exercise{rs.adoc} Add your new function definitions to your @starter-file{gt} and test them out before moving on to @printable-exercise{sun.adoc} and @printable-exercise{define-your-own.adoc}
 
 <!--
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
@@ -166,4 +177,4 @@ As students work, walk around the room and make sure that they are circling what
 # Identifying and Describing the Pattern
 
 - Why is defining functions useful to us as programmers?
-- In math class we mostly see functions that consume numbers and produce numbers, but functions can consume values besides Numbers! What other data types did you see being consumed by these functions?
+- In math class we mostly see functions that consume numbers and produce numbers. What other data types did you see being consumed by these functions?
