@@ -429,35 +429,36 @@ If conflicts arise, you will be given a way to resolve them.
 The following external programs are needed to construct documents from
 this repo:
 
-- Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
-(The format is AsciiDoc, the program that converts it is
-Asciidoctor. I wish we had this neat nomenclatural separation for
-other programs too.) To install it,
+- A Unix-like environment. If you're already on Linux, you're there.
+    -- If you're on Windows, you'll want to install [WSL2](https://www.windowscentral.com/how-install-wsl2-windows-10) to give yourself a Linux environment first.
+    -- If you're on macOS, your environment will need some additional unix tools. You'll want to install [Homebrew](https://brew.sh/) first.
+
+- Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL)
+
+- Racket, to do preprocessing and other bookkeeping. Any version should do. We're not using any bleeding-edge features of Racket. You'll want to [download DrRacket](https://download.racket-lang.org/) and make sure the `racket` binary is in your `$PATH`.
+
+- Asciidoctor, a Ruby program, to generate HTML from AsciiDoc. (The format is AsciiDoc, the program that converts it is Asciidoctor. I wish we had this neat nomenclatural separation for other programs too.) To install it,
 +
   sudo apt-get install asciidoctor
 +
-on Linux machines, and
+on Linux/WSL, and
 +
   brew install asciidoctor
 +
 on macOS.
 +
 
-- GNU sed. This is pre-installed on Linux, but may need to be
-explicitly installed on macOS, using `brew` as above (i.e., `brew
-install gnu-sed`).
+- GNU `sed`. This is pre-installed on Linux/WSL, but may need to be
+explicitly installed on macOS, using `brew install gnu-sed`.
 
-- Bash. Keeps all the scripts humming.
+- A current version of `curl`. This is pre-installed on Linux/WSL, but may need to be
+explicitly updated on macOS, using `brew install curl`.
 
-- Racket, to do preprocessing and other bookkeeping. Any version should do. We're not using any bleeding-edge features of Racket.
-
-- Several `npm` packages, all of which are installed by running `npm install`:
--- `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
--- `puppeteer-cluster` to build the hundreds of pages we have in parallel.
--- `pdf-lib`, which handles collecting all the PDFs and adding page numbers
--- `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
-
-- `curl`. Use brew to install.
+- Several `npm` packages, *all of which* are installed by running `npm install`:
+    - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
+    - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
+    - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
+    - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
 
 == Authoring guidelines
 
