@@ -51,6 +51,8 @@ To make a shortcut that _changes_, we need to define a _function_.
 
 Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 
+Who wants to be `gt`?!
+
 <!--
 Ask for a volunteer to act out gt.
 -->
@@ -80,7 +82,7 @@ When I say, "*gt 20!*",
 When I say, "*gt 200!*",
 `gt` replies, "*triangle 200 solid green!*"
 
-When I say, "*gt 99!*".
+When I say, "*gt 99!*",
 `gt` replies, "*triangle 99 solid green!*"
 
 <!--
@@ -94,7 +96,7 @@ How was `gt` so speedy at building green triangles?
 
 How can we program the computer to be as smart as our volunteer? 
 
-In order to define a function, we need to identify what's changing and what stays the same. Once we've done that, we can defin eany function we'd like in the _Definitions Area_!
+In order to define a function, we need to identify what's changing and what stays the same. Once we've done that, we can define any function we'd like in the _Definitions Area_!
 
 ---
 
@@ -110,8 +112,6 @@ As you look at the examples, consider the following:
 ---
 
 # Identifying and Describing the Pattern
-
-Here are some examples for `gt`.
 
 @show{(code '(gt 5))} &rarr; @show{(code '(triangle 5 "solid" "green"))}
 
