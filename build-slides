@@ -1,5 +1,11 @@
 #!/bin/bash
 
+regenid=
+
+if test $# -ne 0 -a "$1" = -f; then
+  regenid=1
+fi
+
 topdir=$(pwd)
 
 export PROGDIR=$topdir/prog
@@ -46,6 +52,10 @@ for natlang in *; do
      # echo PROGLANG is $PROGLANG
 
      idfile=slides-id-$PROGLANG.txt
+     if test $regenid; then
+       rm -f $idfile
+     fi
+
      if test -f slides.md; then
        $PROGDIR/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
@@ -78,7 +88,7 @@ for natlang in *; do
            fi
          fi
          if test -f "$idfile"; then
-           cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+           cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a target="_blank" href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
            $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
          fi
        else
