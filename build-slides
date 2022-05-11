@@ -60,6 +60,7 @@ for natlang in *; do
        $PROGDIR/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
          title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
+         title="AUTO-GEN:$title"
          if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
            # echo md2gslides with id $id
