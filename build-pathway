@@ -3,6 +3,11 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
+if test ! -d ./node_modules -o ! -d ./node_modules/md2googleslides -o ! -d ./node_modules/mathjax; then
+  echo Required node modules missing. Run \`npm install\` before calling $0.
+  exit
+fi
+
 export BOOK=
 export DEBUG=
 export FORCE=
@@ -27,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-05-10 # last modified
+LASTMOD=2022-05-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum

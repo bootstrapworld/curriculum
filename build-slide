@@ -1,8 +1,19 @@
 #!/bin/bash
 
-if test $# -ne 1; then
-  echo build-slide needs exactly one lesson argument
+regenid=
+lsn=
+
+if test $# -eq 0; then
+  echo build-slide needs a lesson argument
   exit
+else
+  while test $# -ne 0; do
+    if test "$1" = -f; then
+      regenid=1; shift
+    else
+      lsn="$1"; shift
+    fi
+  done
 fi
 
 topdir=$(pwd)
@@ -26,8 +37,6 @@ if test ! -d distribution; then
 else
   cd distribution
 fi
-
-lsn=$1
 
 for natlang in *; do
   test -d $natlang || continue
@@ -55,10 +64,14 @@ for natlang in *; do
      # echo PROGLANG is $PROGLANG
 
      idfile=slides-id-$PROGLANG.txt
+     if test $regenid; then
+       rm -f $idfile
+     fi
      if test -f slides.md; then
        $PROGDIR/slides-preproc.rkt slides.md
        if test -f slides.mkd; then
          title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
+         title="AUTO-GEN:$title"
          if test -s "$idfile"; then
            id=$(cat "$idfile"|$SED -e 1q)
            # echo md2gslides with id $id
@@ -86,8 +99,10 @@ for natlang in *; do
            fi
          fi
          if test -f "$idfile"; then
-           cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
-           $SED -i -e 's/$/">Google Slides<\/a>/' slides-$PROGLANG.html
+           cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a target="_blank" href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+           timestamp=$(date +%c)
+           $SED -i -e 's/$/">Google Slides generated INSERTTIMESTAMP<\/a>/' slides-$PROGLANG.html
+           $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
          fi
        else
          echo WARNING: slides.md failed preprocessing
