@@ -3,6 +3,7 @@
 # The Numbers Inside Video Games
 
 ---
+{layout="Launch"}
 # Reverse Engineering a Video Game
 
 Take turns playing the @starter-file{ninja-cat} in pairs.
@@ -20,6 +21,7 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 -->
 
 ---
+{layout="Investigate"}
 # Reverse Engineering a Video Game
 
 Complete @printable-exercise{pages/ReverseEngineerGame.adoc} with your partner.
@@ -31,6 +33,7 @@ Common Misconceptions:
 -->
 
 ---
+{layout="Synthesize"}
 # Reverse Engineering a Video Game
 
 While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.
@@ -43,6 +46,7 @@ While we see images on a screen, the computer only sees a small set of numbers, 
 - How many numbers would we need to make a modern game?
 
 ---
+{layout="Launch"}
 # Connecting to Real Games 
 
 What are your favorite current video games?
@@ -52,6 +56,7 @@ What are your favorite current video games?
 -->
 
 ---
+{layout="Investigate"}
 # Connecting to Real Games 
 
 Let's focus on one of the games we just brainstormed.
@@ -75,6 +80,7 @@ The goal here is not to discourage students from the possibility of eventually c
 -->
 
 ---
+{layout="Synthesize"}
 # Connecting to Real Games 
 
 Are we likely to create games like the ones you researched?
