@@ -233,7 +233,10 @@
                           (for ([s exprs])
                             (display (massage-arg s) o)))]
                        [(string=? directive "table")
-                        (let ([n (or (string->number (read-group i directive)) 0)])
+                        (let* ([args (read-commaed-group i directive read-group)]
+                               [n-args (length args)]
+                               [n (if (= n-args 0) 0 (or (string->number (car args)) #f))])
+                          (when (<= n-args 1) (set! n 0))
                           (when (> n 0)
                             (let loop ([j n])
                               (unless (<= j 0)
