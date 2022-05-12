@@ -3,6 +3,7 @@
 # Functions: Contracts, Examples & Definitions
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 Open the @starter-file{bc}. You'll see the Contract, some Examples and the Function Definition for `gt`.
@@ -10,6 +11,7 @@ Open the @starter-file{bc}. You'll see the Contract, some Examples and the Funct
 What do you notice? What do you wonder?
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 We know that...
@@ -32,6 +34,7 @@ We know that...
 @ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} files. Let's take a look!
@@ -50,6 +53,7 @@ If we use the correct syntax, we can include all three of these function represe
 
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!
@@ -59,6 +63,7 @@ OPTIONAL: If students feel confident with the Circles of Evaluation but less con
 -->
 
 ---
+{layout="Investigate"}
 # Three Representations of a Function
 
 Complete:
@@ -80,12 +85,14 @@ There are many more materials for students to work with in the Additional Practi
 -->
 
 ---
+{layout="Synthesize"}
 # Three Representations of a Function
 
 - What strategies did you use to match the @vocab{examples} with the @vocab{contracts}?
 - What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 
 ---
+{layout="Launch"}
 # Defining bc and Other Functions
 
 Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
@@ -97,6 +104,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * Click “Run”, and make sure all of the examples pass!
 
 ---
+{layout="Investigate"}
 # Defining bc and Other Functions
 
 Complete @printable-exercise{pages/contracts-examples-definitions-stars.adoc} and @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
@@ -106,6 +114,7 @@ As students work, walk around the room and make sure that they are circling what
 -->
 
 ---
+{layout="Synthesize"}
 # Defining bc and Other Functions
 
 - How were each of the representations helpful?
