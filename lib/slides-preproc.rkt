@@ -233,16 +233,14 @@
                           (for ([s exprs])
                             (display (massage-arg s) o)))]
                        [(string=? directive "table")
-                        (let ([n (or (string->number (read-group i directive)) 0)])
+                        (let* ([args (read-commaed-group i directive read-group)]
+                               [n-args (length args)]
+                               [n (if (= n-args 0) 0 (or (string->number (car args)) 0))])
+                          (when (>= n-args 2) (set! n 0))
                           (when (> n 0)
                             (let loop ([j n])
                               (unless (<= j 0)
                                 (display (if (= j n) "|DELETE THIS ROW" "|_") o)
-                                (loop (- j 1))))
-                            (newline o)
-                            (let loop ([j n])
-                              (unless (<= j 0)
-                                (display "|---" o)
                                 (loop (- j 1))))))]
                        [(string=? directive "vocab")
                         (let ([arg (read-group i directive)])
