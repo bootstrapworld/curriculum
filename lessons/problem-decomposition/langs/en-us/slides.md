@@ -3,6 +3,7 @@
 # Problem Decomposition
 
 ---
+{layout="Launch"}
 # Problem Decomposition 
 
 @image{images/LemonadeStand.png, "Lemonade Stand Ideas including: charge $1.75, ask mom about cups, new bike = $198, how much lemonade? sugar? lemons? powdered drink mix?"}
@@ -22,6 +23,7 @@
 -->
 
 ---
+{layout="Investigate"}
 # Problem Decomposition 
 
 Complete @printable-exercise{pages/revenue-and-cost.adoc}. 
@@ -29,6 +31,7 @@ Complete @printable-exercise{pages/revenue-and-cost.adoc}.
 *Note: The information you need to write the cost function is provided in the Design Recipe word problem!*
 
 ---
+{layout="Investigate"}
 # Problem Decomposition 
 
 - What is the difference between _revenue_ and _profit_?
@@ -38,6 +41,7 @@ Complete @printable-exercise{pages/revenue-and-cost.adoc}.
 - What is the _relationship_ between profit, cost, and revenue?
 
 ---
+{layout="Investigate"}
 # Problem Decomposition 
 
 - Complete @printable-exercise{pages/profit.adoc}, using the Design Recipe.
@@ -53,11 +57,13 @@ As students finish, or for homework, you may also want them to figure out how ma
 -->
 
 ---
+{layout="Synthesize"}
 # Problem Decomposition 
 
 Turn to @printable-exercise{pages/profit-discussion.adoc} and take a few minutes to reflect on the four function definitions presented.
 
 ---
+{layout="Synthesize"}
 # Problem Decomposition 
 
 @ifproglang{wescheme}{
@@ -88,6 +94,7 @@ fun profit(g): revenue(g) - cost(g) end
 -->
 
 ---
+{layout="Synthesize"}
 # Problem Decomposition 
 
 Decomposing a problem allows us to solve it in smaller pieces.
@@ -100,11 +107,13 @@ Decomposing a problem allows us to solve it in smaller pieces.
 1. Re-using code means _less duplicate code_. When code needs to be changed, that change only needs to made in one place, instead of in multiple places.
 
 ---
+{layout="Launch"}
 # Top-Down vs. Bottom-Up 
 
 _Top-Down_ and _Bottom-Up_ design are two different strategies for problem decomposition.
 
 ---
+{layout="Launch"}
 # Top-Down vs. Bottom-Up 
 
 @image{images/top-down-coe.png,a}
@@ -114,6 +123,7 @@ _Top-Down_ and _Bottom-Up_ design are two different strategies for problem decom
 *Top-Down:* start with the "big picture" and then worry about the details later. We could have started with `profit`, and made a to-do list of the smaller pieces we’d build later. _This is the same approach as building your Circle of Evaluation outside-in!_
 
 ---
+{layout="Launch"}
 # Top-Down vs. Bottom-Up 
 
 @image{images/bottom-up-coe.png,a}
@@ -124,6 +134,7 @@ _Top-Down_ and _Bottom-Up_ design are two different strategies for problem decom
 
 
 ---
+{layout="Investigate"}
 # Top-Down vs. Bottom-Up 
 
 Consider the following situation:
@@ -137,6 +148,7 @@ Take a moment to think: What would your first step be if you were trying to figu
 Then turn to @printable-exercise{topdown-bottomup-discussion.adoc}.
 
 ---
+{layout="Synthesize"}
 # Top-Down vs. Bottom-Up 
 
 * Whose strategy was top-down? How do you know?
