@@ -241,6 +241,11 @@
                             (let loop ([j n])
                               (unless (<= j 0)
                                 (display (if (= j n) "|DELETE THIS ROW" "|_") o)
+                                (loop (- j 1))))
+                            (newline o)
+                            (let loop ([j n])
+                              (unless (<= j 0)
+                                (display "|---" o)
                                 (loop (- j 1))))))]
                        [(string=? directive "vocab")
                         (let ([arg (read-group i directive)])
