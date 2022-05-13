@@ -3,6 +3,7 @@
 # Simple Inequalities
 
 ---
+{layout="Launch"}
 # Introducing Booleans 
 
 @table{3}
@@ -18,6 +19,7 @@ Log into
 and see what the code evaluates to.
 
 ---
+{layout="Launch"}
 # Introducing Booleans 
 
 @table{3}
@@ -36,6 +38,7 @@ What did the expressions evaluate to?
 What do they think the outputs mean?
 
 ---
+{layout="Launch"}
 # Introducing Booleans 
 
 Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. 
@@ -43,6 +46,7 @@ Values like `true` and `false` obviously aren't Numbers or Images. But they also
 We've found a __new data type__, called a @vocab{Boolean}.
 
 ---
+{layout="Investigate"}
 # Introducing Booleans
 
 * Open the @starter-file{boolean}.
@@ -61,11 +65,13 @@ We've found a __new data type__, called a @vocab{Boolean}.
 }
 
 ---
+{layout="Investigate"}
 # Introducing Booleans 
 
 A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
 
 ---
+{layout="Investigate"}
 # Introducing Booleans 
 
 * Turn to @printable-exercise{boolean-functions.adoc} and use the @starter-file{boolean} to complete the questions.
@@ -81,6 +87,7 @@ Common Misconceptions
 -->
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 Equations typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. 
@@ -90,6 +97,7 @@ Inequalities, on the other hand, can have _infinite_ solutions.
 Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 * Open the @starter-file{inequalities-simple}.  It includes an example.  
@@ -99,6 +107,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 * What do you Wonder?
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.
@@ -110,6 +119,7 @@ The resulting plot shows the number line, with all solution values shaded in blu
 @image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}}
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 If your list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and you will get an error message encouraging you to adjust their list.
@@ -117,6 +127,7 @@ If your list of 8 values doesn't include an equal number of solutions and non-so
 @image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}
 
 ---
+{layout="Investigate"}
 # Introducing Inequalities
 
 Open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
@@ -128,6 +139,7 @@ In order to stop seeing the examples written into the starter file code, student
 -->
 
 ---
+{layout="Synthesize"}
 # Introducing Inequalities
 
 - What patterns did you observe in how the inequalities worked?
