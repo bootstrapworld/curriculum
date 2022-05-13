@@ -3,7 +3,7 @@
 # Simple Data Types
 
 ---
-
+{layout="Launch"}
 # Numbers & Strings 
 
 @image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}}
@@ -17,7 +17,7 @@ Each group can only have one "Driver" - their hands are on the keyboard, and the
 If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
 
 ---
-
+{layout="Launch"}
 # Numbers & Strings
 
 @ifproglang{wescheme}{
@@ -37,7 +37,7 @@ Click "Open Editor".
 }
 
 ---
-
+{layout="Launch"}
 # Numbers & Strings
 
 @image{images/editor.png, "Our Editing Environment with the Definitions are on the left and the Interactions Area on the right", 300, ""}}
@@ -51,7 +51,7 @@ The @vocab{Definitions Area} is where programmers define values and functions th
 For now, we will only be writing programs in the *Interactions Area* on the right.
 
 ---
-
+{layout="Investigate"}
 # Numbers & Strings
 
 Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).
@@ -65,7 +65,7 @@ Keeping the importance of *syntax* and *grammar* in mind is helpful when learnin
 Complete @printable-exercise{numbers-n-strings.adoc}. Pay special attention to the error messages!
 
 ---
-
+{layout="Investigate"}
 # Numbers & Strings
 
 - What did you Notice? What do you Wonder?
@@ -79,7 +79,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
  -->
 
 ---
-
+{layout="Synthesize"}
 # Numbers & Strings
 
 We have learned that in our programming language:
@@ -102,11 +102,13 @@ Error messages are a way for Pyret to explain what went wrong, and are a really 
 }
 
 ---
+{layout="Launch"}
 # Booleans 
 
 What's the answer: is 3 greater than 10?
 
 ---
+{layout="Launch"}
 # Booleans
 
 Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
@@ -117,6 +119,7 @@ For example, some rollercoasters with loops require passengers to be a minimum h
 @image{images/roller-coaster.png, a}
 
 --- 
+{layout="Launch"}
 # Booleans
 
 Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
@@ -126,16 +129,19 @@ Similarly, when you log into your email, the computer asks for your password and
 @image{images/login.png, a}
 
 ---
+{layout="Launch"}
 # Booleans
 
 Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
 ---
+{layout="Investigate"}
 # Booleans
 
 Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
 
 ---
+{layout="Synthesize"}
 # Booleans
 
 What sets Booleans apart from other data types?

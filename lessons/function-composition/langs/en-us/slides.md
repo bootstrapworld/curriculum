@@ -3,6 +3,7 @@
 # Function Composition
 
 ---
+{layout="Launch"}
 # Composing Functions 
 
 For this activity we will be working in groups of 3-4 students.
@@ -10,6 +11,7 @@ For this activity we will be working in groups of 3-4 students.
 - Each group has a set of @link{pages/function-cards.html, "Function Cards"}, each of which takes an input and produces an output. 
 
 ---
+{layout="Launch"}
 # Composing Functions
 
 - If we start with `4` and give it to the function `add6`, what will the output be? 
@@ -19,6 +21,7 @@ For this activity we will be working in groups of 3-4 students.
 - What would happen if I composed `add6` with `double` _and_ with `half`? 
  
 ---
+{layout="Launch"}
 # Composing Functions
 
 I will be providing "starting" and "ending" numbers using this @link{https://www.google.com/search?q=random+number, random integer generator}.
@@ -30,6 +33,7 @@ You will need to use some functions more than once, and that's ok!
 If you're ready for a challenge, try to find the _shortest path_ from start to end, using the smallest number of compositions.
 
 ---
+{layout="Launch"}
 # Diagramming Function Composition
 
 Three of the function cards we just used were for the functions `f`, `g` and `h`:
@@ -43,6 +47,7 @@ Three of the function cards we just used were for the functions `f`, `g` and `h`
 We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
 
 ---
+{layout="Launch"}
 # Diagramming Function Composition
 
 We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
@@ -56,11 +61,13 @@ The circles show us that in order to evaluate @math{f(g(h(4))))}
 - Then we would evaluate @math{f(27)}, tripling `9` to get `27`
 
 ---
+{layout="Investigate"}
 # Diagramming Function Composition
 
 Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
 
 ---
+{layout="Synthesize"}
 # Diagramming Function Composition
 
 Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? 
@@ -70,6 +77,7 @@ Why not? _order matters!_
 -->
 
 ---
+{layout="Launch"}
 # Composing Functions in Code 
 
 Log into
@@ -78,6 +86,7 @@ Log into
 open a new program and save it as Function Composition.
 
 ---
+{layout="Investigate"}
 # Composing Functions in Code 
 
 Open to @printable-exercise{pages/function-composition-green-star.adoc}.
@@ -98,6 +107,7 @@ Encourage students to practice writing comments in the code to describe what is 
 -->
 
 ---
+{layout="Investigate"}
 # Composing Functions in Code
 
 If you have time, work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
@@ -107,6 +117,7 @@ If you have time, work with @printable-exercise{pages/function-composition-scale
 }
 
 ---
+{layout="Synthesize"}
 # Composing Functions in Code
 
 - What do all of these functions have in common?
@@ -123,6 +134,7 @@ Our @link{../flags/index.shtml, Flags lesson} also dives deeper into image compo
 -->
 
 ---
+{layout="Launch"}
 # Composing Multiple Ways 
 
 As is often true with solving math problems, there is more than one way to get the same composed image.
@@ -137,11 +149,13 @@ What’s another line of code I could write that would produce the exact same im
 -->
 
 ---
+{layout="Investigate"}
 # Composing Multiple Ways 
 
-Students complete @printable-exercise{pages/more-than-one-way.adoc}.
+Complete @printable-exercise{pages/more-than-one-way.adoc}.
 
 ---
+{layout="Synthesize"}
 # Composing Multiple Ways 
 
 There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal.

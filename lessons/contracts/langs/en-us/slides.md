@@ -3,6 +3,7 @@
 # Contracts 
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 You may remember functions from algebra: @math{f(x) = x + 4}.
@@ -13,6 +14,7 @@ You may remember functions from algebra: @math{f(x) = x + 4}.
 - The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? 
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 @vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
@@ -30,6 +32,7 @@ Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
 - What did the expression evaluate to?
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
@@ -41,6 +44,7 @@ Type @show{(code '(string-length "rainbow"))} into the interactions area and hit
 - Does the `string-length` function produce a Number? String? Boolean? _Number_
 
 ---
+{layout="Investigation"}
 # Applying Functions
 
 Complete @printable-exercise{pages/applying-functions.adoc} 
@@ -48,6 +52,7 @@ Complete @printable-exercise{pages/applying-functions.adoc}
 When you finish, try changing the expression @show{(code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then try changing colors and sizes!
 
 ---
+{layout="Synthesize"}
 # Applying Functions
 
 - What are the types of the arguments `triangle` was expecting? _A Number and 2 Strings_
@@ -56,6 +61,7 @@ When you finish, try changing the expression @show{(code '(triangle 50 "solid" "
 - Which error messages did you encounter?
 
 ---
+{layout="Launch"}
 # Contracts
 
 When you typed @show{(code '(triangle 50 "solid" "red"))}
@@ -64,6 +70,7 @@ into the editor, you created an example of a new @vocab{data type}, called an _I
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
 
 ---
+{layout="Launch"}
 # Contracts
 
 As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
@@ -73,6 +80,7 @@ As you can imagine, there are many other functions for making images, each with 
 . **Range** -- the type of data the function produces
 
 ---
+{layout="Launch"}
 # Contracts
 
 The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
@@ -90,6 +98,7 @@ Contracts are general. Expressions are specific.
 -->
 
 ---
+{layout="Launch"}
 # Contracts
 
 Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
@@ -125,11 +134,13 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 }
 
 ---
+{layout="Launch"}
 # Contracts
 
 When the input matches what the function consumes, the function produces the output we expect.
 
 ---
+{layout="Launch"}
 # Contracts
 
 Here is an example of another function. @show{(code '(string-append "sun" "shine"))}
@@ -137,17 +148,20 @@ Here is an example of another function. @show{(code '(string-append "sun" "shine
 Type it into the editor. What is its contract? `string-append {two-colons} String, String -> String`
 
 ---
+{layout="Investigate"}
 # Contracts
 
 Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc} to get some practice working with Contracts.
 
 ---
+{layout="Synthesize"}
 # Contracts
 
 - What is the difference between a value like `17` and a type like `Number`?
 - For each expression where a function is given inputs, how many outputs are there? 
 
 ---
+{layout="Launch"}
 # Exploring Image Functions
 
 Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
@@ -165,6 +179,8 @@ The error messages in this environment are _designed_ to be as student-friendly 
 -->
 
 ---
+{layout="Investigate"}
+
 # Exploring Image Functions
 
 - At the back of your workbook, you'll find pages with space to write down a contract and example or other notes for every function you see in this course.  The first few have been completed for you. You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
@@ -174,6 +190,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 (If you don't have a workbook, you can use these @opt-printable-exercise{image-contracts.adoc, contracts pages})
 
 ---
+{layout="Synthesize"}
 # Exploring Image Functions
 
 - `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? 
@@ -185,6 +202,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 - Which input determined the size of the Rhombus?  What did the other number determine?
 
 ---
+{layout="Launch"}
 # Contracts Help Us Write Code
 
 Turn to @printable-exercise{pages/using-contracts.adoc} and @opt-printable-exercise{pages/using-contracts-cont.adoc} and experiment with the functions in the editor.
@@ -194,6 +212,7 @@ Once you've discovered how to build a version of each image function that satisf
 It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 - What kind of triangle did `triangle` build? 
@@ -202,6 +221,7 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 - If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 Turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
@@ -209,6 +229,7 @@ Turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts
 If you are ready to dig into @show{(code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to get a taste of it, turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help you match the images to the corresponding expressions. 
@@ -218,6 +239,7 @@ For more practice with detailed contracts you can turn to  @opt-printable-exerci
 Both of these functions can generate a wide range of interesting shapes!
 
 ---
+{layout="Synthesize"}
 # Contracts Help Us Write Code
 
 - How was it different to code expressions for the shape functions when you started with a contract?
@@ -225,6 +247,7 @@ Both of these functions can generate a wide range of interesting shapes!
 - Why did the contract for `ellipse` require two numbers? What happened when the two numbers were the same?
 
 ---
+{layout="Synthesize"}
 # Contracts Help Us Write Code
 
 How to diagnose and fix errors is a skill we will continue working on developing. Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 

@@ -3,6 +3,7 @@
 # Defining Values
 
 ---
+{layout="Launch"}
 # What's in Common? 
 
 Take a look at the expressions below:
@@ -35,6 +36,7 @@ rotate(45, scale(3, star(50, "solid", "green")))
 - What would happen if you were asked to change the color of all the stars to gold?
 
 ---
+{layout="Launch"}
 # What's in Common? 
 
 Duplicate code is almost always bad!
@@ -46,11 +48,13 @@ There are lots of potential problems with duplicate code:
 - *Maintainability:* Suppose we needed to change the size of the stars in the examples above. We would have to make sure every line is changed, which leaves a lot of room for error.
 
 ---
+{layout="Launch"}
 # What's in Common? 
 
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
 ---
+{layout="Launch"}
 # What's in Common? 
 
 You already know how to do this in math:
@@ -67,6 +71,7 @@ We can type ``(define x (4))`` to define ``x`` to be the value 4.
 }
 
 ---
+{layout="Launch"}
 # What's in Common? 
 
 Once we've defined `x` to be the value 4 and clicked "run", anytime we use `x`, the computer will remember that it is _defined_ as 4.  We can _use_ that definition to get an answer. For example, @math{x + 2} will evaluate to 6.
@@ -74,12 +79,14 @@ Once we've defined `x` to be the value 4 and clicked "run", anytime we use `x`, 
 Of course, the whole point of defining a value is so that it sticks around and can be used later! That's why programmers put their definitions on the _left-hand side_, known as the @vocab{Definitions Area}.
 
 ---
+{layout="Investigate"}
 # What's in Common? 
 
 - Open the @starter-file{defining-values} and complete the notice and wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner.
 - Complete the remaining questions and add some definitions of your own in the definitions area. Be sure to click *Run* again before you try testing them out.
 
 ---
+{layout="Synthesize"}
 # What's in Common? 
 
 - *What data types can we define values for?*
@@ -87,6 +94,7 @@ Of course, the whole point of defining a value is so that it sticks around and c
 - What values did you decide to define? When might they be useful?
 
 ---
+{layout="Launch"}
 # Using Defined Values
 
 Now that we know _how_ to define values, we've got two more things to consider:
@@ -95,6 +103,7 @@ Now that we know _how_ to define values, we've got two more things to consider:
 * How to _use_ them once we have
 
 ---
+{layout="Launch"}
 # Using Defined Values
 
 Open to @printable-exercise{chinese-flag.adoc}
@@ -104,12 +113,14 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 -->
 
 ---
+{layout="Investigate"}
 # Using Defined Values
 
 - Open the editor and type @show{(code '(radial-star 30 20 50 "solid" "yellow"))} into the interactions area and click run.
 - Work in the Definitions area to define a value `sun` to be the image @show{(code '(radial-star 30 20 50 "solid" "yellow"))}.
 
 ---
+{layout="Investigate"}
 # Using Defined Values
 
 - Turn to @printable-exercise{pages/coe-why-define-values.adoc}.
@@ -120,6 +131,7 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 - Complete the page and test your code in the editor.
 
 ---
+{layout="Synthesize"}
 # Using Defined Values
 
 Why is defining values useful?
