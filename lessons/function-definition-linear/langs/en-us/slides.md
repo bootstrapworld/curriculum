@@ -127,7 +127,7 @@ When we talk about functions, it's helpful to be able to switch between represen
 {layout="Synthesize"}
 # Defining Linear Functions
 
-Additional Exercises:
+Additional Exercises
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbecf6ee47d820d0a06ef09, "Matching Graphs & Definitions of Functions (not just linear!)"}
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge)"}
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Definitions of Linear Functions"}
