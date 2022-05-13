@@ -142,9 +142,9 @@ In order to stop seeing the examples written into the starter file code, student
 {layout="Synthesize"}
 # Introducing Inequalities
 
-- What patterns did you observe in how the inequalities worked?
+What patterns did you observe in how the inequalities worked?
 
 ---
-# Additional Exercises:
+# Additional Exercises
 
-- @opt-printable-exercise{pages/is-hot.adoc}
+@opt-printable-exercise{pages/is-hot.adoc}
