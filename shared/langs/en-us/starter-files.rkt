@@ -239,6 +239,14 @@
     ("pyret" "https://code.pyret.org/editor#share=1TJVPlYOKEPBDPTp25YMMVGhz5YlctYnj")
   )
 
+  ("cow-jump-moon" "Cow Jumping Over the Moon Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1E-V-o_ukmvOTQ8czRCHixAU7Q_5dhuP_")
+  )
+
+  ("pulsing-star" "Pulsing Star"
+    ("pyret" "https://code.pyret.org/editor#share=1H-9AqmPVoyqvV2WBW6TOGMacifoJ0Ax6")
+  )
+
   ("what-to-wear" "What to Wear Starter File"
    ("pyret" "https://code.pyret.org/editor#share=15fUR1QAF-O5HIDq95QnctdsdVNfF1Tde")
   )
@@ -257,6 +265,10 @@
 
   ("two-number" "Two-Number State Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Az8Xd4ZcMwqezo8vAldQOrfQkRvi2H8N")
+  )
+
+  ("1-paddle-pong" "1-Paddle Pong"
+   ("pyret" "https://code.pyret.org/editor#share=17eTxETEbKs1C62rRoeq_LjBHgljEdbia")
   )
 
   ("ninja-cat-collisions", "Ninja Cat Starter File"
