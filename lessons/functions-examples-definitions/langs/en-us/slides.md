@@ -74,10 +74,15 @@ Complete:
 
 And/or these desmos card sort activities:
 
-- @ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}}
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}}
-- @ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}
+@ifproglang{wescheme}{
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}
+}
+
+@ifproglang{pyret}{
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
+}
 
 
 <!--
