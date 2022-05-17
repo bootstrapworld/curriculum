@@ -87,13 +87,13 @@ What would the Circle of Evaluation for @math{5 \times 6} look like?
 {layout="Launch"}
 # Order of Operations
 
-How about the Circle of Evaluation for         @math{(10 - 5) \times 6}?
+How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 ---
 {layout="Launch"}
 # Order of Operations
 
-How about the Circle of Evaluation for         @math{(10 - 5) \times 6}?
+How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 @image{images/coe4.png, a}
 
@@ -230,9 +230,7 @@ What did you learn from Circles of Evaluation?
 {layout="Investigate"}
 # Testing out your Code
 
-Look at the two Circles of Evaluation on the right.
-
-One of them is familiar, but the other is very different from what you've been working with. 
+Look at the two Circles of Evaluation below. One of them is familiar, but the other is very different!
 
 - What's different about the Circle on the right?
 - Can you figure out the Name for the function in the second Circle?
