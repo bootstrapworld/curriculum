@@ -6,15 +6,14 @@
 {layout="Launch"}
 # Numbers & Strings 
 
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}}
-
-{.column}
-
-When programming in this class, you'll be working together using the _Driver/Navigator_ model. 
+When programming in this class, you'll be working together using the Driver/Navigator model. 
 
 Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. 
 
 If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+
+@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
+
 
 ---
 {layout="Launch"}
@@ -40,15 +39,13 @@ Click "Open Editor".
 {layout="Launch"}
 # Numbers & Strings
 
-@image{images/editor.png, "Our Editing Environment with the Definitions are on the left and the Interactions Area on the right", 300, ""}}
+The @vocab{Editor} looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
 
-{.column}
+The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. 
 
-This screen is called the @vocab{Editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+For now, we will only be writing programs in the *Interactions Area*.
 
-The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. This is like writing function definitions on a blackboard, and having students use those functions to compute answers on scrap paper.
-
-For now, we will only be writing programs in the *Interactions Area* on the right.
+@image{images/editor.png, a}
 
 ---
 {layout="Investigate"}
@@ -88,18 +85,21 @@ We have learned that in our programming language:
 - Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
 - Anything in quotes is a String, even something like `"42"`.
 - Strings _must_ have quotation marks on both sides.
-
-@ifproglang{pyret}{
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.
 - In pyret, the @vocab{operators} work just like they do in math.
 - Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.
 - Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
 
+
+---
+{layout="Synthesize"}
+# Numbers & Strings
+
 Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
 
 - `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
 - `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
-}
+
 
 ---
 {layout="Launch"}
@@ -114,7 +114,6 @@ What's the answer: is 3 greater than 10?
 Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
 
 For example, some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.  
-{.column}
 
 @image{images/roller-coaster.png, a}
 
@@ -124,15 +123,9 @@ For example, some rollercoasters with loops require passengers to be a minimum h
 
 Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
 
-{.column}
+Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
 @image{images/login.png, a}
-
----
-{layout="Launch"}
-# Booleans
-
-Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
 ---
 {layout="Investigate"}

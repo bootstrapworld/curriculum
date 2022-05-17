@@ -19,8 +19,13 @@ You may remember functions from algebra: @math{f(x) = x + 4}.
 
 @vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
 
+
+---
+{layout="Launch"}
+# Applying Functions
+
 Log into
-@ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org (CPO)"}}
+@ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)}}
 @ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor and press "Run" to load the image library. 
 
 Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
@@ -37,11 +42,20 @@ Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
 
 Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
 
+- What is the name of this function? 
+- How many arguments does `string-length` expect?
+- What type of argument does the function expect? 
+- What does the expression evaluate to? 
+- Does the `string-length` function produce a Number? String? Boolean?
+
+<!--
 - What is the name of this function? _string-length_
 - How many arguments does `string-length` expect? _1_
 - What type of argument does the function expect? _String_
 - What does the expression evaluate to? _7_
 - Does the `string-length` function produce a Number? String? Boolean? _Number_
+-->
+
 
 ---
 {layout="Investigation"}
@@ -55,10 +69,17 @@ When you finish, try changing the expression @show{(code '(triangle 50 "solid" "
 {layout="Synthesize"}
 # Applying Functions
 
+- What are the types of the arguments `triangle` was expecting? 
+- How does the output relate to the inputs?
+- What kind of value was produced by that expression? 
+- Which error messages did you encounter?
+
+<!--
 - What are the types of the arguments `triangle` was expecting? _A Number and 2 Strings_
 - How does the output relate to the inputs? _The Number determines the size and the Strings determine the style and color._
 - What kind of value was produced by that expression? _An Image! New data type!_
 - Which error messages did you encounter?
+-->
 
 ---
 {layout="Launch"}
@@ -75,9 +96,11 @@ The `triangle` function can make lots of different triangles! The size, style an
 
 As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
 
-. **Name** -- the name of the function, which we type in whenever we want to use it
-. **Domain** -- the type(s) of data we give to the function
-. **Range** -- the type of data the function produces
+- **Name** - the name of the function, which we type in whenever we want to use it
+
+- **Domain** - the type(s) of data we give to the function
+
+- **Range** - the type of data the function produces
 
 ---
 {layout="Launch"}
@@ -103,35 +126,7 @@ Contracts are general. Expressions are specific.
 
 Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
 
-{.column}
-
-@table{5}
-| **Name** 				|	| **Domain**				|		| **Range**
-@ifproglang{wescheme}{
-|`;` `+`				| :	| `Number, Number` 			|	->	| `Number`
-|`;` `-` 				| :	| `Number, Number` 			|	->	| `Number`
-|`;` `/`				| : | `Number, Number`			|	->	| `Number`
-|`;` `*`				| : | `Number, Number`			|	->	| `Number`
-|`;` `sqr`				| :	| `Number`  				|	->	| `Number`
-|`;` `sqrt`				| :	| `Number` 					|	->	| `Number`
-|`;` `<`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `>`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `<=`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `>=`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `==`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `<>`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `string-equal?`	| : | `String, String`			|	->	| `Boolean`
-|`;` `string-contains?`	| : | `String, String`			|	->	| `Boolean`
-|`;` `string-length`	| :	| `String` 					|	->	| `Number`
-|`;` `triangle`			| : | `Number, String, String`	|	->	| `Image`
-}
-@ifproglang{pyret}{
-|`#` `num-sqr`			| ::| `Number`  				|	->	| `Number`
-|`#` `num-sqrt`			| ::| `Number` 					|	->	| `Number`
-|`#` `string-contains`	| ::| `String, String`			|	->	| `Boolean`
-|`#` `string-length`	| ::| `String`					|	->	| `Number`
-|`#` `triangle`			| ::| `Number, String, String`	|	->	| `Image`
-}
+@image{images/sample-contracts-table.png, "a"}
 
 ---
 {layout="Launch"}
@@ -143,10 +138,15 @@ When the input matches what the function consumes, the function produces the out
 {layout="Launch"}
 # Contracts
 
-Here is an example of another function. @show{(code '(string-append "sun" "shine"))}
+Here is an example of another function:
 
-Type it into the editor. What is its contract? `string-append {two-colons} String, String -> String`
+@show{(code '(string-append "sun" "shine"))}
 
+Type it into the editor. What is its contract? 
+
+<!--
+contract: `string-append :: String, String -> String`
+-->
 ---
 {layout="Investigate"}
 # Contracts
@@ -207,7 +207,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 Turn to @printable-exercise{pages/using-contracts.adoc} and @opt-printable-exercise{pages/using-contracts-cont.adoc} and experiment with the functions in the editor.
 
-Once you've discovered how to build a version of each image function that satisfies you, record the example code in your contracts table. S
+Once you've discovered how to build a version of each image function that satisfies you, record the example code in your contracts table. 
 
 It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
