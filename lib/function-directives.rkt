@@ -134,6 +134,7 @@
                            [(eq? e 'string>?) ">"]
                            [(eq? e 'string>=?) ">="]
                            [(eq? e 'string<>?) "<>"]
+                           [(eq? e 'image=?) "images-equal"]
                            [else
                              (let ([es (format "~a" e)])
                                (cond [(regexp-match #rx"\\?$" es)
