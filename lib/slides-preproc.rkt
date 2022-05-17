@@ -95,8 +95,39 @@
     (set! x (regexp-replace* "{empty}" x ""))
     (string-append "<code>" x "</code>")))
 
-(define (coe exp)
+(define (old-coe exp)
   (format "<code>~s</code>" exp))
+
+(define (coe exp)
+  (string-append "$$$ html\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
+    "<style>\n"
+    ".circleevalsexp { width: unset !important; }\n"
+    "</style>\n"
+    "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
+    (coe-spans exp)
+    "</div>\n"
+    "$$$\n"))
+
+(define (coe-spans exp)
+  (cond [(list? exp)
+         (let ([opr (car exp)] [opds (cdr exp)])
+           (string-append "<span class=\"expression\">\n"
+             "<span class=\"lParen\">(</span>\n"
+             "<span class=\"operator\">\n"
+             (coe-spans opr)
+             "</span>\n"
+             (if (null? opds) "" "<span class=\"hspace\">&nbsp;</span>\n")
+             (string-join
+               (map coe-spans opds)
+               "<span class=\"hspace\">&nbsp;</span>\n")
+             "<span class=\"rParen\">)</span>\n"
+             "</span>\n"))]
+        [else
+          (string-append "<span class=\"value\">"
+            (format "~a" exp) "</span>\n")]))
 
 (define math code)
 
