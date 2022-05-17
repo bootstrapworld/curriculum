@@ -54,11 +54,17 @@ We can diagram the function composition using Circles of Evaluation (see first c
 
 @image{images/fghx.png, a}
 
+---
+{layout="Launch"}
+
+# Diagramming Function Composition
 The circles show us that in order to evaluate @math{f(g(h(4))))}
 
 - First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
 - Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
 - Then we would evaluate @math{f(27)}, tripling `9` to get `27`
+
+@image{images/fghx.png, a}
 
 ---
 {layout="Investigate"}
@@ -80,10 +86,8 @@ Why not? _order matters!_
 {layout="Launch"}
 # Composing Functions in Code 
 
-Log into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO)} }
-open a new program and save it as Function Composition.
+Log into @link{https://code.pyret.org, code.pyret.org (CPO)}.
+Open a new program and save it as Function Composition.
 
 ---
 {layout="Investigate"}
@@ -139,13 +143,14 @@ Our @link{../flags/index.shtml, Flags lesson} also dives deeper into image compo
 
 As is often true with solving math problems, there is more than one way to get the same composed image.
 
-Suppose I wrote the code: @show{(code '(scale 3 (star 50 "solid" "red")))}.
+Suppose I wrote the code: 
 
+@show{(code '(scale 3 (circle 50 "solid" "red")))}
 
 What’s another line of code I could write that would produce the exact same image?
     
 <!-- 
-@show{(code '(star 150 "solid" "red"))}
+	@show{(code '(circle 150 "solid" "red"))}
 -->
 
 ---
@@ -158,9 +163,9 @@ Complete @printable-exercise{pages/more-than-one-way.adoc}.
 {layout="Synthesize"}
 # Composing Multiple Ways 
 
-There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that let's us test whether or not two images are equal.
+There is a special function in Pyret that let's us test whether or not two images are equal.
 
-@show{(code 'image=?)}`{two-colons} Image, Image -> Boolean`
+`images-equal :: Image, Image -> Boolean`
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 
