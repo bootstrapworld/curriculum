@@ -269,6 +269,7 @@ If you see an error and you know the syntax is right, ask yourself these three q
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Exercises:
 
 @ifproglang{pyret}{

@@ -120,6 +120,7 @@ As students work, walk around the room and make sure that they are circling what
 - Why is it important to write examples in our code?
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 - @opt-printable-exercise{pages/examples-same-contracts1.adoc}

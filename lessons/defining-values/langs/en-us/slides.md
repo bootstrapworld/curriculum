@@ -137,6 +137,7 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 Why is defining values useful?
 
 ---
+{layout="Supplemental"}
 # Additional Exercises:
 
 * @printable-exercise{pages/writing-code-using-defined-values.adoc}

@@ -170,6 +170,7 @@ There is a special function in Pyret that let's us test whether or not two image
 Use it to test whether all of the expressions you wrote successfully build the same images.
 
 ---
+{layout="Synthesize"}
 # Composing Multiple Ways 
 
 - Could we have written more expressions to create the same images?
