@@ -2630,27 +2630,8 @@
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
   (cond [pyret (cond [(eq? e '+) "{plus}"]
-                     [(eq? e '=) "=="]
-                     [(eq? e 'expt) "num-expt"]
-                     [(eq? e 'frac) "/"]
-                     [(eq? e 'pi) "num-pi"]
-                     [(eq? e 'sqr) "num-sqr"]
-                     [(eq? e 'sqrt) "num-sqrt"]
-                     [(eq? e 'random) "num-random"]
-                     [(eq? e 'string-contains?) "string-contains"]
-                     [(eq? e 'string=?) "=="]
-                     [(eq? e 'string<?) "<"]
-                     [(eq? e 'string<=?) "\\<="]
-                     [(eq? e 'string>?) ">"]
-                     [(eq? e 'string>=?) ">="]
-                     [(eq? e 'string<>?) "<>"]
                      [(memq e '(* -)) (format "{empty}~a" e)]
-                     [else (let ([es (format "~a" e)])
-                               (cond [(regexp-match #rx"\\?$" es)
-                                      (regexp-replace #rx"(.*)\\?$" es "is-\\1")]
-                                     [(regexp-match #rx"([a-z])/([a-z])" es)
-                                      (regexp-replace #rx"([a-z])/([a-z])" es "\\1-\\2")]
-                                     [else es]))])]
+                     [else (wescheme-symbol->pyret e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
                          [(eq? e 'frac) "/"]
