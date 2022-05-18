@@ -127,7 +127,8 @@
              "</span>\n"))]
         [else
           (string-append "<span class=\"value\">"
-            (format "~a" exp) "</span>\n")]))
+            (wescheme-symbol->pyret exp)
+            "</span>\n")]))
 
 (define math code)
 
