@@ -67,8 +67,9 @@ Let's focus on one of the games we just brainstormed.
 
 *Optional:* Use the Internet to research these questions and compare the actual numbers to your estimates.
 
-<!--
-There's a lot of variability, especially between game consoles and cell phone games! But here's a few sample numbers:
+---
+{layout="Investigate"}
+# Connecting to Real Games 
 
 @table{4}
 | Title								| Time		| Team Size 	| Budget
@@ -76,6 +77,10 @@ There's a lot of variability, especially between game consoles and cell phone ga
 | Final Fantasy VII					| 3 years	| 100+			| 40-45m
 | Shadow of the Tomb Raider			| 3+ years	| 100+			| 75m+
 
+There's a lot of variability, especially between game consoles and cell phone games! These are just a few examples.
+
+
+<!--
 The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
 -->
 
