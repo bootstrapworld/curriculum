@@ -25,7 +25,7 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 
 * Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
-* For more practice, have students complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+* For more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
 
 ---
 {layout="Launch"}
@@ -43,7 +43,7 @@ A good purpose statement must have three things:
 {layout="Investigate"}
 # The Design Recipe 
 
-Turn to @printable-exercise{fixing-purpose.adoc} and identify 
+Turn to @printable-exercise{fixing-purpose.adoc} and identify: 
 
 1. What important information got left out of each of the purpose statements?
 
@@ -80,9 +80,7 @@ Click Run to see the simulation start running on your computer.
 {layout="Launch"}
 # Rocket Height! 
 
-It would be nice to get a warning when a function doesn't work right!
-
-Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.
+It would be nice to get a warning when a function doesn't work right! Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.
 
 * Type @show{(code '(rocket-height 0))} into the interactions area.
 * As the program is currently written, what happens when we give the `rocket-height` function an input of 0? 
@@ -113,7 +111,7 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 
 Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own. When it's working correctly, explore the other functions in the file.
 
-For students needing more specific instructions about exploring the file, try the following:
+Here are some suggestions to guide you:
 - Remove the comment from before the `(start rocket-height)` and test the program.
 - Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.
 - Try out `(space rocket-height)`
@@ -139,6 +137,7 @@ For teachers who cover quadratic and exponential functions or have students who 
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 - @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}
