@@ -14,13 +14,10 @@ What do you notice? What do you wonder?
 {layout="Launch"}
 # Three Representations of a Function
 
-We know that...
+- Every function has a contract.
+@image{images/gt-contract.png, "a"}
 
-1. Every function has a contract.
-
-@show{(contract "gt" '("Number" ) "Number")}
-
-1. We can write examples illustrating how a function should work to help us identify the pattern.
+- We can write examples illustrating how a function should work to help us identify the pattern.
 
 @ifproglang{Pyret}{
 @image{images/examples-pyret.png, "gt Examples", 400}}
@@ -28,7 +25,7 @@ We know that...
 @ifproglang{WeScheme}{
 @image{images/examples-wescheme.png, "gt Examples", 400}}
 
-1. Function definitions replace whatever changes in the examples with a variable describing what changes.
+- Function definitions replace whatever changes in the examples with a variable describing what changes.
 
 @ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
 @ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
@@ -41,16 +38,13 @@ If we use the correct syntax, we can include all three of these function represe
 
 * Click *Run*.
 @ifproglang{pyret}{
-* What message do you get back? _Looks shipshape, all 5 tests passed, mate!_
+* What message do you get back? 
 * What do you think that message means?
-** _The editor has checked to see whether the 5 examples work with the function definition and they do!_
 }
 * Change
 @ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
 @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
 * Click run. What happens?
-** _The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
-
 
 ---
 {layout="Launch"}
