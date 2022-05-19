@@ -17,7 +17,6 @@ Take a look at the expressions below:
 (rotate 45 (star 50 "solid" "green"))
 (rotate 45 (scale 3 (star 50 "solid" "green")))
 ```
-
 - What code do they all have in common?
 }
 
@@ -29,7 +28,6 @@ scale(0.5, star(50, "solid", "green"))
 rotate(45, star(50, "solid", "green"))
 rotate(45, scale(3, star(50, "solid", "green")))
 ```
-
 - What code do they all have in common?
 }
 
