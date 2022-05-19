@@ -124,7 +124,7 @@ Contracts are general. Expressions are specific.
 {layout="Launch"}
 # Contracts
 
-Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
+Let’s take a look at some functions we've seen before:
 
 @image{images/sample-contracts-table.png, "a"}
 
@@ -164,15 +164,15 @@ Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printab
 {layout="Launch"}
 # Exploring Image Functions
 
-Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
+Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?{style="font-size:14pt"}
 
-- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? 
-- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}
-- What error did we get? What _hint_ does it give us about how to use this function? 
-- What happens if I don't give it those things?
-- If I give `star` what it needs, what do I get in return?
-- What is the contract for star? 
-- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
+- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? {style="font-size:14pt"}
+- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}{style="font-size:14pt"}
+- What error did we get? What _hint_ does it give us about how to use this function? {style="font-size:14pt"}
+- What happens if I don't give it those things?{style="font-size:14pt"}
+- If I give `star` what it needs, what do I get in return?{style="font-size:14pt"}
+- What is the contract for star? {style="font-size:14pt"}
+- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? {style="font-size:14pt"}
 
 <!--
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
@@ -193,13 +193,13 @@ The error messages in this environment are _designed_ to be as student-friendly 
 {layout="Synthesize"}
 # Exploring Image Functions
 
-- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? 
-- Does having the same Domain and Range mean that the functions do the same things? 
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
-- Was it harder to find contracts for some of the functions than others? Why?
-- What error messages did you see? 
-- How did you figure out what to do after seeing an error message? 
-- Which input determined the size of the Rhombus?  What did the other number determine?
+- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? {style="font-size:16pt"}
+- Does having the same Domain and Range mean that the functions do the same things? {style="font-size:16pt"}
+- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?{style="font-size:16pt"}
+- Was it harder to find contracts for some of the functions than others? Why?{style="font-size:16pt"}
+- What error messages did you see? {style="font-size:16pt"}
+- How did you figure out what to do after seeing an error message? {style="font-size:16pt"}
+- Which input determined the size of the Rhombus?  What did the other number determine?{style="font-size:16pt"}
 
 ---
 {layout="Launch"}
