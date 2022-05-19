@@ -2462,8 +2462,8 @@
 (define answer-block-fill-length answer-fill-length)
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
-                          #:parens [parens #f] #:first [first #f])
-  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens first)
+                          #:parens [parens #f] #:firstarg [firstarg #f])
+  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens firstarg)
   (let ([n (length e)])
     (if (and (eq? a 'frac) (= n 2))
         (format "{{~a} \\over {~a}}"
@@ -2478,7 +2478,7 @@
                [rest-e (if (>= n 1) (rest e) '())]
                [arg1 (and e1
                          (sexp->arith e1 #:pyret #f #:wrap #t
-                                      #:encloser a #:parens parens #:first #t #:tex #t))]
+                                      #:encloser a #:parens parens #:firstarg #t #:tex #t))]
                [args (map (lambda (e1) (sexp->arith e1 #:pyret #f #:wrap #t
                                                     #:encloser a #:parens parens #:tex #t)) rest-e)]
                [args (if e1 (cons arg1 args) args)]
@@ -2486,11 +2486,11 @@
           (let ([ans (if (and wrap (or (not encloser)
                                        parens
                                        (and (eq? encloser '+)
-                                            (if first
+                                            (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
                                        (and (eq? encloser '-)
-                                            (if first
+                                            (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
                                        (and (eq? encloser '*) (not (memq a '(* / frac expt))))))
@@ -2500,7 +2500,7 @@
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
-                     #:encloser [encloser #f] #:parens [parens #f] #:first [first #f] #:tex [tex #f])
+                     #:encloser [encloser #f] #:parens [parens #f] #:firstarg [firstarg #f] #:tex [tex #f])
   ; (printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
                                     (if (or pyret tex) x (enclose-span ".value.wescheme-boolean" x)))]
@@ -2542,7 +2542,7 @@
                                                  (infix-op? a #:pyret #f)
                                                  ))
                             (infix-sexp->math a (rest e) #:wrap wrap #:encloser encloser
-                                              #:parens parens #:first first)]
+                                              #:parens parens #:firstarg firstarg)]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
