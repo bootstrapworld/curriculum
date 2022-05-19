@@ -11,12 +11,11 @@ Open the @starter-file{bc}. You'll see the Contract, some Examples and the Funct
 What do you notice? What do you wonder?
 
 ---
-{layout="LaunchR"}
+{layout="Launch"}
 # Three Representations of a Function
 
-- Every function has a contract.
-
-- We can write examples illustrating how a function should work to help us identify the pattern.
+- Every function has a contract.{style="font-size:15pt"}
+- We can write examples illustrating how a function should work to help us identify the pattern.{style="font-size:15pt"}
 
 @ifproglang{Pyret}{
 @image{images/examples-pyret.png, "gt Examples", 400}}
@@ -24,7 +23,7 @@ What do you notice? What do you wonder?
 @ifproglang{WeScheme}{
 @image{images/examples-wescheme.png, "gt Examples", 400}}
 
-- Function definitions replace whatever changes in the examples with a variable describing what changes.
+- Function definitions replace whatever changes in the examples with a variable describing what changes.{style="font-size:15pt"}
 
 @ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
 @ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
@@ -65,7 +64,7 @@ Complete:
 - @printable-exercise{match-examples-definitions.adoc}
 - @printable-exercise{create-contracts-examples.adoc}
 
-And/or these desmos card sort activities:
+And/or these Desmos card sort activities:
 
 @ifproglang{wescheme}{
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
