@@ -6,12 +6,10 @@
 {layout="Launch"}
 # Introducing Booleans 
 
-Convert these Circles of Evaluation into code.
-
-@ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
+Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
 @ifproglang{pyret}{Then, log into @link{https://code.pyret.org, code.pyret.org (CPO)} and see what the code evaluates to.}
 
-@image{images/set-of-coes1.png, a}
+@image{images/set-of-coes1.png, a}{width="550"}
 
 
 ---
@@ -26,7 +24,7 @@ You've never seen Circles of Evaluation like these before... but you can probabl
 What did the expressions evaluate to? 
 What do they think the outputs mean?
 
-@image{images/set-of-coes2.png, a}
+@image{images/set-of-coes2.png, a}{width="550"}
 
 ---
 {layout="Launch"}
@@ -107,7 +105,7 @@ The solution set is shaded in blue, with points shaded green (solution) and red 
 
 The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:14pt"}
 
-@image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}
+@image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}{width="550"}
 
 ---
 {layout="Launch"}
@@ -115,7 +113,7 @@ The resulting plot shows the number line, with all solution values shaded in blu
 
 If your list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and you will get an error message encouraging you to adjust their list.
 
-@image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}
+@image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}{width="550"}
 
 ---
 {layout="Investigate"}
