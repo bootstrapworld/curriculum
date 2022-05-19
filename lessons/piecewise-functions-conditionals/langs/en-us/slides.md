@@ -3,6 +3,7 @@
 # Piecewise Functions and Conditionals
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 How would you explain a _function_ to someone else? What are some rules that all functions follow?
@@ -12,6 +13,7 @@ A function has exactly one output for each input.
 -->
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 Today we are going to act out a special kind of function.
@@ -29,6 +31,7 @@ Ask a student making an O with their arms how they knew what to do._
 -->
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 * What is the input of the function we just acted out?
@@ -40,6 +43,7 @@ _Since each student ("input") has only one action ("output"), it is still a func
 -->
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 Up until now, all of the functions we have seen can be described by a single rule. 
@@ -51,6 +55,7 @@ This is called a _piecewise function_ in math, and a _conditional_ in programmin
 The world is full of piecewise functions and conditionals!
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 Let's try acting out another set of rules.
@@ -65,6 +70,7 @@ _Some students should have nothing to do. Others should look confused as to what
 -->
 
 ---
+{layout="Launch"}
 # Intro to Piecewise Functions
 
 This set of rules doesn't seem to have worked quite as well as the last...
@@ -79,20 +85,22 @@ _Because people wearing a tshirt were told to do two conflicting things! And peo
 -->
 
 ---
+{layout="Investigate"}
 # Intro to Piecewise Functions
 
-Work with your partner to think of real-world examples of piecewise functions.
+Work with your partner to think of real-world examples of piecewise functions.{style="font-size:16pt"}
 
-_Here are a few examples to get you started:_
+_Here are a few examples to get you started:_{style="font-size:16pt"}
 
-* Places like movie theaters and museums often have different ticket prices for students, children, and senior citizens. That means the total price can't be determined simply by asking how many tickets there are -- the price-per-person is conditioned on what kind of ticket is being purchased!
+* Places like movie theaters and museums often have different ticket prices for students, children, and senior citizens. That means the total price can't be determined simply by asking how many tickets there are -- the price-per-person is conditioned on what kind of ticket is being purchased!{style="font-size:16pt"}
 
-* The US Postal Service charges a different rate for differently-sized letters and packages. That means the total price can't be determined just by asking how many things are being mailed -- the price is conditioned on what kind of things are shipped!
+* The US Postal Service charges a different rate for differently-sized letters and packages. That means the total price can't be determined just by asking how many things are being mailed -- the price is conditioned on what kind of things are shipped!{style="font-size:16pt"}
 
 <!-- Many phone plans include a certain price-per-gigabyte for data, but only up to a maximum cutoff amout. After that, the price-per-gigabyte gets a lot higher. That means we can't calculate the cost simply by knowing how many gigabytes there are -- the cost is conditioned on what the cutoff is!
 -->
 
 ---
+{layout="Synthesize"}
 # Intro to Piecewise Functions
 
 Share one of the examples you and your partner came up with.
@@ -102,6 +110,7 @@ _You may also want to discuss whether square root and absolute values are piecew
 -->
 
 ---
+{layout="Launch"}
 # Conditionals in Programming 
 
 So far, all of the functions we've written had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
@@ -109,6 +118,7 @@ So far, all of the functions we've written had a _single rule_. The rule for `gt
 What if we want to write functions that apply different rules, based on certain conditions?
 
 ---
+{layout="Investigate"}
 # Conditionals in Programming 
 
 - Open the @starter-file{red-shape}.
@@ -117,6 +127,7 @@ What if we want to write functions that apply different rules, based on certain 
 _Your teacher may also have you work with the @opt-starter-file{mood-generator} using @printable-exercise{pages/MoodGenerator-explore.adoc}_
 
 ---
+{layout="Synthesize"}
 # Conditionals in Programming 
 
 What happened when you gave `red-shape` a shape that wasn't defined in the program?
@@ -126,6 +137,7 @@ _The program told us that the shape was unknown. Think about other functions tha
 -->
 
 ---
+{layout="Synthesize"}
 # Conditionals in Programming 
 
 What is the syntax for writing piecewise functions?
@@ -149,6 +161,7 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 -->
 
 ---
+{layout="Launch"}
 # Extending the Design Recipe 
 
 Let's see how the Design Recipe could help us to write a piecewise function.
@@ -163,25 +176,27 @@ _The examples are also pretty similar: we write the name of the function, follow
 -->
 
 ---
+{layout="Investigate"}
 # Extending the Design Recipe 
 
-* Circle and label everything that is *change*able on @printable-exercise{redshape-dr.adoc}.
-* What changes? What did you label?
+* Circle and label everything that is *change*able on @printable-exercise{redshape-dr.adoc}.{style="font-size:16pt"}
+* What changes? What did you label?{style="font-size:16pt"}
 
-If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
+If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.{style="font-size:16pt"}
 
-In this case, there are more things to circle-and-label in the examples than there are things in our Domain. Think back to our examples of piecewise functions (ticket sales, postage, cell-phone data plans, etc): knowing the input isn't enough - we also need to know the conditions!
+In this case, there are more things to circle-and-label in the examples than there are things in our Domain. Think back to our examples of piecewise functions (ticket sales, postage, cell-phone data plans, etc): knowing the input isn't enough - we also need to know the conditions!{style="font-size:16pt"}
 
-_Your teacher may also have you work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._
+_Your teacher may also have you work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:16pt"}
 
 <!--
 Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function was _always_ equal to the number of labels in the example step, which was _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions. When it doesn't hold, that's how we _know_ we need a piecewise function!
 -->
 
 ---
+{layout="Investigate"}
 # Extending the Design Recipe 
 
-*In this example, we have four patterns:*
+In this example, we have four patterns:
 
 - sometimes we produce `(circle 20 "solid" "red")`
 - sometimes we produce `(triangle 20 "solid" "red")`
@@ -190,25 +205,22 @@ Up until now, there's been a pattern that students may not have noticed: the num
 - sometimes we produce `(text "Unknown shape name!" 20 "red")`
 
 ---
+{layout="Investigate"}
 # Extending the Design Recipe 
 
-*To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").*
+To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").
 
-* When should we make circles?
-** When `shape == "circle"`
-* When should we make triangles?
-** When `shape == "triangle"`
-* When should we make rectangles?
-** When `shape == "rectangle"`
-* When should we make stars?
-** When `shape == "star"`
-* When should we draw the "Unknown shape name" text?
-** When `shape` is....anything `else`
+* When should we make circles? When `shape == "circle"`
+* When should we make triangles? When `shape == "triangle"`
+* When should we make rectangles? When `shape == "rectangle"`
+* When should we make stars? When `shape == "star"`
+* When should we draw the "Unknown shape name" text? When `shape` is....anything `else`
 
 ---
+{layout="Investigate"}
 # Extending the Design Recipe 
 
-*Adding the questions to our pattern gives us:*
+Adding the questions to our pattern gives us:
 
 - When `shape == "circle"`...we produce `(circle 20 "solid" "red")`
 - When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`
@@ -217,21 +229,15 @@ Up until now, there's been a pattern that students may not have noticed: the num
 - When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`
 
 ---
+{layout="Investigate"}
 # Extending the Design Recipe 
 
-*This practically gives away the body of our function definition!*
+This practically gives away the body of our function definition!
 
-@show{
-(code '(define (cost item)
-  (cond
-    [(string=? shape "circle")     (circle 20 "solid" "red")]
-    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
-    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
-    [(string=? shape "star")       (star 20 "solid" "red")]
-	[else (text "Unknown shape name!" 20 "red")])))
-}
+@image{images/cost-code.png, "a"}{width="700"}
 
 ---
+{layout="Synthesize"}
 # Extending the Design Recipe 
 
 * How many examples are needed to fully test a piecewise function with four "pieces"?
@@ -244,7 +250,8 @@ Up until now, there's been a pattern that students may not have noticed: the num
 -->
 
 ---
-# Additional Practice:
+{layout="Supplemental"}
+# Additional Practice
 
 * @opt-starter-file{alices-restaurant}
 * @opt-printable-exercise{pages/restaurant-intro.adoc}

@@ -35,7 +35,7 @@
 (define (errmessage-file-context)
   *in-file*)
 
-(define (make-image img text)
+(define (make-image img text [width #f])
   ; (printf "make-image ~s\n" img)
   (set! *num-images-processed* (+ *num-images-processed* 1))
   (unless (file-exists? img)
@@ -47,7 +47,8 @@
         (set! img img-anonymized))))
   (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
       (format "**-- INSERT IMAGE ~a HERE --**" img)
-      (format "![~a](~a)" text img)))
+      (format "![~a](~a)~a" text img
+              (if width (format "{width=~a}" width) ""))))
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
@@ -61,17 +62,17 @@
     "$$$\n"))
 
 (define (read-math-rev-word s)
-  (let loop ([s (cdr s)] [r (list (car s))])
+  (let loop ([s (rest s)] [r (list (first s))])
     (if (null? s) (values r s)
-        (let ([a (car s)])
-          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (cdr s) (cons a r))]
+        (let ([a (first s)])
+          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (rest s) (cons a r))]
                 [else (values r s)])))))
 
 (define (make-ascii-math text)
   ; (printf "doing make-ascii-math ~s\n" text)
   (let ([ans (let loop ([s (string->list text)] [r '()])
             (cond [(null? s) (reverse r)]
-                  [else (let ([a (car s)] [s (cdr s)])
+                  [else (let ([a (first s)] [s (rest s)])
                           ; (printf "tackling ~s, ~s\n" a s)
                           (case a
                             [(#\\) (let-values ([(w s-rest) (read-math-rev-word s)])
@@ -80,6 +81,10 @@
                                             (loop s-rest (cons #\÷ r))]
                                            [(equal? w '(#\s #\e #\m #\i #\t))
                                             (loop s-rest (cons #\× r))]
+                                           [(equal? w '(#\t #\g))
+                                            (loop s-rest (cons #\> r))]
+                                           [(equal? w '(#\e #\l))
+                                            (loop s-rest (cons #\≤ r))]
                                            [else (loop s-rest (append w r))]))]
                             [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
                                      (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
@@ -95,8 +100,40 @@
     (set! x (regexp-replace* "{empty}" x ""))
     (string-append "<code>" x "</code>")))
 
-(define (coe exp)
+(define (old-coe exp)
   (format "<code>~s</code>" exp))
+
+(define (coe exp)
+  (string-append "$$$ html\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
+    "<style>\n"
+    ".circleevalsexp { width: unset !important; }\n"
+    "</style>\n"
+    "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
+    (coe-spans exp)
+    "</div>\n"
+    "$$$\n"))
+
+(define (coe-spans exp)
+  (cond [(list? exp)
+         (let ([opr (first exp)] [opds (rest exp)])
+           (string-append "<span class=\"expression\">\n"
+             "<span class=\"lParen\">(</span>\n"
+             "<span class=\"operator\">\n"
+             (coe-spans opr)
+             "</span>\n"
+             (if (null? opds) "" "<span class=\"hspace\">&nbsp;</span>\n")
+             (string-join
+               (map coe-spans opds)
+               "<span class=\"hspace\">&nbsp;</span>\n")
+             "<span class=\"rParen\">)</span>\n"
+             "</span>\n"))]
+        [else
+          (string-append "<span class=\"value\">"
+            (wescheme-symbol->pyret exp)
+            "</span>\n")]))
 
 (define math code)
 
@@ -117,8 +154,8 @@
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
-         [page (car args)]
-         [link-text (if (> num-args 1) (cadr args) #f)]
+         [page (first args)]
+         [link-text (if (> num-args 1) (second args) #f)]
          [page-components (regexp-split #rx"/" page)]
          [local-dir ""]
          [local-file ""]
@@ -128,16 +165,16 @@
     (case (length page-components)
       [(1)
        (set! local-dir "pages")
-       (set! local-file (car page-components))
+       (set! local-file (first page-components))
        (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/pages"))]
       [(2)
-       (set! local-dir (car page-components))
-       (set! local-file (cadr page-components))
+       (set! local-dir (first page-components))
+       (set! local-file (second page-components))
        (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/" local-dir))]
       [(3)
-       (set! local-dir (build-path 'up (car page-components) (cadr page-components)))
-       (set! local-file (caddr page-components))
-       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" (car page-components) "/" (cadr page-components)))]
+       (set! local-dir (build-path 'up (first page-components) (second page-components)))
+       (set! local-file (third page-components))
+       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" (first page-components) "/" (second page-components)))]
       [else
         (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
         ""])
@@ -166,8 +203,8 @@
 
 (define (external-link args directive)
   (let* ([num-args (length args)]
-         [link (car args)]
-         [link-text (if (> num-args 1) (cadr args) "")])
+         [link (first args)]
+         [link-text (if (> num-args 1) (second args) "")])
     (format "[~a](~a)" link-text link)))
 
 (define (starter-file-link lbl)
@@ -175,16 +212,16 @@
     (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
           [else
-            (let ([title (cadr c)]
-                  [p (assoc *proglang* (cddr c))])
+            (let ([title (second c)]
+                  [p (assoc *proglang* (rest (rest c)))])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
-                      (format "[~a](~a)" title (cadr p))]))])))
+                      (format "[~a](~a)" title (second p))]))])))
 
 (define read-group
-  (*make-read-group (lambda z (car z)) errmessage-file-context))
+  (*make-read-group (lambda z (first z)) errmessage-file-context))
 
 (define (preproc-slides-file in-file)
   (set! *in-file* in-file)
@@ -201,8 +238,9 @@
                  (cond [(string=? directive "") (display c o)]
                        [(string=? directive "@") (display c o)]
                        [(string=? directive "image")
-                        (let ([args (read-commaed-group i directive read-group)])
-                          (display (make-image (car args) (cadr args)) o))]
+                        (let* ([args (read-commaed-group i directive read-group)]
+                               [n (length args)])
+                          (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
                        [(member directive '("printable-exercise" "opt-printable-exercise"))
                         (let ([args (read-commaed-group i directive read-group)])
                           (display (fully-qualify-link args directive) o))]
@@ -233,16 +271,20 @@
                           (for ([s exprs])
                             (display (massage-arg s) o)))]
                        [(string=? directive "table")
-                        (let ([n (string->number (read-group i directive))])
-                          (let loop ([j n])
-                            (unless (<= j 0)
-                              (display (if (= j n) "|DELETE THIS ROW" "|_") o)
-                              (loop (- j 1))))
-                          (newline o)
-                          (let loop ([j n])
-                            (unless (<= j 0)
-                              (display "|---" o)
-                              (loop (- j 1)))))]
+                        (let* ([args (read-commaed-group i directive read-group)]
+                               [n-args (length args)]
+                               [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
+                          (when (>= n-args 2) (set! n 0))
+                          (when (> n 0)
+                            (let loop ([j n])
+                              (unless (<= j 0)
+                                (display (if (= j n) "|DELETE THIS ROW" "|_") o)
+                                (loop (- j 1))))
+                            (newline o)
+                            (let loop ([j n])
+                              (unless (<= j 0)
+                                (display "|---" o)
+                                (loop (- j 1))))))]
                        [(string=? directive "vocab")
                         (let ([arg (read-group i directive)])
                           (display "<b><i>" o)

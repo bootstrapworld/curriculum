@@ -15,12 +15,12 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 @show{(contract "gt" '("Number") "Number")}
 
 ---
-
+{Layout="Launch"}
 # Order of Operations
 
-Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
+Using curly braces immediately after a parsed expression (like a paragraph, a heading, or even just a formatted snippet) allows you to specify a custom style using a limited subset of CSS. This is handy if you have a LOT of text, and need to make it smaller to prevent it from overflowing.{style="font-size:8pt; color:green;"}
 
-{.column}
+And the next paragraph goes back to normal!
 
 @image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
 
@@ -107,50 +107,6 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 ---
 # From Circles of Evaluation to Code
 
-@table{3}
-|*Expression*			| &rarr; | @show{(math '(+ 3 8)) }
-|*Circle of Evaluation*	| &rarr; | @show{(coe  '(+ 3 8)) }
-|*Code*					| &rarr; | @show{(code '(+ 3 8)) }
-
----
-# From Circles of Evaluation to Code
-
-
-@table{3}
-|*Expression*			| &rarr; | @show{(math '(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(coe  '(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8))) }
-
----
-# From Circles of Evaluation to Code
-
-@scrub{
-What would the code look like for these circles?
-}
-
-
-@table{2}
-|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
-
----
-# From Circles of Evaluation to Code
-
-
-@table{2}
-|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
-|@show{(code '(/ 6 (+ 1 2)))}		| @show{(code '(* (- 10 5) 6))}
-
----
-# From Circles of Evaluation to Code
-
-If you have time, start with the two pages in the student workbook that scaffold translating circles to code: 
-
-- @printable-exercise{pages/complete-code-from-coe.adoc} 
-- @printable-exercise{pages/match-coe-to-code.adoc}.
-
----
-# From Circles of Evaluation to Code
-
 Now that we know how to translate Circles of Evaluation into Code, turn back to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc}.
 
 Once you confirm that your code is correct, continue on to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}
@@ -172,9 +128,8 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 
 @scrub{Here are two Circles of Evaluation.}
 
-@table{2}
-| @show{(coe `(* 10 -4))}
-| @show{(coe `(text "Good work!" 50 "red"))}
+@show{(coe `(* 10 -4))}
+@show{(coe `(text "Good work!" 50 "red"))}
 
 One of them is familiar, but the other is very different from what you've been working with. 
 

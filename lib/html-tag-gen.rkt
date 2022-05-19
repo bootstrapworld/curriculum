@@ -114,23 +114,23 @@
   (pair? *span-stack*))
 
 (define (top-span-stack)
-  (span-nesting (car *span-stack*)))
+  (span-nesting (first *span-stack*)))
 
 (define (grow-span-stack span-type)
   (set! *span-stack* (cons (span span-type 0) *span-stack*)))
 
 (define (pop-span-stack)
-  (let ([a (car *span-stack*)])
-    (set! *span-stack* (cdr *span-stack*))
+  (let ([a (first *span-stack*)])
+    (set! *span-stack* (rest *span-stack*))
     a))
 
 (define (increment-top-span-stack)
-  (let* ([top-span (car *span-stack*)]
+  (let* ([top-span (first *span-stack*)]
         [n (span-nesting top-span)])
     (set-span-nesting! top-span (+ n 1))))
 
 (define (decrement-top-span-stack)
-  (let* ([top-span (car *span-stack*)]
+  (let* ([top-span (first *span-stack*)]
          [n (span-nesting top-span)])
     (when (<= n 0)
       (error 'ERROR "Bad @span: Check missing braces"))

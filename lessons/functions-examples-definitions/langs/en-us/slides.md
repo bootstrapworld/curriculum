@@ -3,6 +3,7 @@
 # Functions: Contracts, Examples & Definitions
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 Open the @starter-file{bc}. You'll see the Contract, some Examples and the Function Definition for `gt`.
@@ -10,15 +11,11 @@ Open the @starter-file{bc}. You'll see the Contract, some Examples and the Funct
 What do you notice? What do you wonder?
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
-We know that...
-
-1. Every function has a contract.
-
-@show{(contract "gt" '("Number" ) "Number")}
-
-1. We can write examples illustrating how a function should work to help us identify the pattern.
+- Every function has a contract.{style="font-size:15pt"}
+- We can write examples illustrating how a function should work to help us identify the pattern.{style="font-size:15pt"}
 
 @ifproglang{Pyret}{
 @image{images/examples-pyret.png, "gt Examples", 400}}
@@ -26,30 +23,29 @@ We know that...
 @ifproglang{WeScheme}{
 @image{images/examples-wescheme.png, "gt Examples", 400}}
 
-1. Function definitions replace whatever changes in the examples with a variable describing what changes.
+- Function definitions replace whatever changes in the examples with a variable describing what changes.{style="font-size:15pt"}
 
 @ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
 @ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} files. Let's take a look!
 
 * Click *Run*.
 @ifproglang{pyret}{
-* What message do you get back? _Looks shipshape, all 5 tests passed, mate!_
+* What message do you get back? 
 * What do you think that message means?
-** _The editor has checked to see whether the 5 examples work with the function definition and they do!_
 }
 * Change
 @ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
 @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
 * Click run. What happens?
-** _The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
-
 
 ---
+{layout="Launch"}
 # Three Representations of a Function
 
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!
@@ -59,6 +55,7 @@ OPTIONAL: If students feel confident with the Circles of Evaluation but less con
 -->
 
 ---
+{layout="Investigate"}
 # Three Representations of a Function
 
 Complete:
@@ -67,12 +64,17 @@ Complete:
 - @printable-exercise{match-examples-definitions.adoc}
 - @printable-exercise{create-contracts-examples.adoc}
 
-And/or these desmos card sort activities:
+And/or these Desmos card sort activities:
 
-- @ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}}
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}}
-- @ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}
+@ifproglang{wescheme}{
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}
+}
+
+@ifproglang{pyret}{
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}
+}
 
 
 <!--
@@ -80,12 +82,14 @@ There are many more materials for students to work with in the Additional Practi
 -->
 
 ---
+{layout="Synthesize"}
 # Three Representations of a Function
 
 - What strategies did you use to match the @vocab{examples} with the @vocab{contracts}?
 - What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 
 ---
+{layout="Launch"}
 # Defining bc and Other Functions
 
 Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
@@ -97,6 +101,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * Click “Run”, and make sure all of the examples pass!
 
 ---
+{layout="Investigate"}
 # Defining bc and Other Functions
 
 Complete @printable-exercise{pages/contracts-examples-definitions-stars.adoc} and @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
@@ -106,12 +111,14 @@ As students work, walk around the room and make sure that they are circling what
 -->
 
 ---
+{layout="Synthesize"}
 # Defining bc and Other Functions
 
 - How were each of the representations helpful?
 - Why is it important to write examples in our code?
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 - @opt-printable-exercise{pages/examples-same-contracts1.adoc}

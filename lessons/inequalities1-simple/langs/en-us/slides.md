@@ -3,39 +3,31 @@
 # Simple Inequalities
 
 ---
+{layout="Launch"}
 # Introducing Booleans 
 
-@table{3}
-| @image{images/coe1.png,a} | @image{images/coe2.png,a} | @image{images/coe3.png,a}
+Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
+@ifproglang{pyret}{Then, log into @link{https://code.pyret.org, code.pyret.org (CPO)} and see what the code evaluates to.}
 
-{.column}
+@image{images/set-of-coes1.png, a}{width="550"}
 
-Convert these Circles of Evaluation into code.
-
-Log into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO) } }
-and see what the code evaluates to.
 
 ---
+{layout="Launch"}
 # Introducing Booleans 
-
-@table{3}
-| @image{images/coe4.png,a} | @image{images/coe5.png,a} | @image{images/coe6.png,a}
-
-{.column}
 
 You've never seen Circles of Evaluation like these before... but you can probably convert them to code!
 
-Type your code into 
-
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO) } }
+@ifproglang{wescheme}{Type your code into @link{https://www.wescheme.org, WeScheme}}
+@ifproglang{pyret}{Type your code into @link{https://code.pyret.org, code.pyret.org (CPO)}}
 
 What did the expressions evaluate to? 
 What do they think the outputs mean?
 
+@image{images/set-of-coes2.png, a}{width="550"}
+
 ---
+{layout="Launch"}
 # Introducing Booleans 
 
 Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. 
@@ -43,6 +35,7 @@ Values like `true` and `false` obviously aren't Numbers or Images. But they also
 We've found a __new data type__, called a @vocab{Boolean}.
 
 ---
+{layout="Investigate"}
 # Introducing Booleans
 
 * Open the @starter-file{boolean}.
@@ -61,11 +54,13 @@ We've found a __new data type__, called a @vocab{Boolean}.
 }
 
 ---
+{layout="Investigate"}
 # Introducing Booleans 
 
 A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
 
 ---
+{layout="Investigate"}
 # Introducing Booleans 
 
 * Turn to @printable-exercise{boolean-functions.adoc} and use the @starter-file{boolean} to complete the questions.
@@ -81,6 +76,7 @@ Common Misconceptions
 -->
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 Equations typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. 
@@ -90,6 +86,7 @@ Inequalities, on the other hand, can have _infinite_ solutions.
 Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 * Open the @starter-file{inequalities-simple}.  It includes an example.  
@@ -99,24 +96,27 @@ Inequality expressions divide all of the numbers in the universe into two catego
 * What do you Wonder?
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
-This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.
+This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.{style="font-size:14pt"}
 
-The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).
+The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).{style="font-size:14pt"}
 
-The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.
+The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:14pt"}
 
-@image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}}
+@image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}{width="550"}
 
 ---
+{layout="Launch"}
 # Introducing Inequalities
 
 If your list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and you will get an error message encouraging you to adjust their list.
 
-@image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}
+@image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}{width="550"}
 
 ---
+{layout="Investigate"}
 # Introducing Inequalities
 
 Open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
@@ -128,11 +128,13 @@ In order to stop seeing the examples written into the starter file code, student
 -->
 
 ---
+{layout="Synthesize"}
 # Introducing Inequalities
 
-- What patterns did you observe in how the inequalities worked?
+What patterns did you observe in how the inequalities worked?
 
 ---
-# Additional Exercises:
+{layout="Supplemental"}
+# Additional Exercises
 
-- @opt-printable-exercise{pages/is-hot.adoc}
+@opt-printable-exercise{pages/is-hot.adoc}

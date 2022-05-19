@@ -1,8 +1,9 @@
----
+git ---
 
 # Compound Inequalities: Solutions & Non-Solutions
 
 ---
+{layout="Launch"}
 # Introducing Compound Inequalities
 
 We use inequalities for lots of things:
@@ -14,6 +15,7 @@ We use inequalities for lots of things:
 What other examples can you come up with?
 
 ---
+{layout="Launch"}
 # Introducing Compound Inequalities
 
 Many times we need to _combine_ inequalities:
@@ -28,6 +30,7 @@ Guide students through other examples of `and` and `or` with various statements,
 -->
 
 ---
+{layout="Investigate"}
 # Introducing Compound Inequalities
 
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
@@ -35,6 +38,7 @@ Both mathematics and programming have ways of combining - or _composing_ - inequ
 Complete @printable-exercise{pages/boolean-coe-to-code1.adoc} and @printable-exercise{pages/and-or.adoc}.
 
 ---
+{layout="Synthesize"}
 # Introducing Compound Inequalities
 
 - Expressions using `and` only produce `true` if both of their sub-expressions are `true`.
@@ -45,7 +49,8 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 -->
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Launch"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Identify 4 solutions and 4 non-solutions for each of the following inequalities.
 
@@ -53,7 +58,8 @@ Identify 4 solutions and 4 non-solutions for each of the following inequalities.
 * @math{x \le 15}
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Launch"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 What about the solution set of @math{x \gt 5} `and` @math{x \le 15}?  What numbers make both of these inequality expressions true?
 
@@ -61,14 +67,16 @@ How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numb
 
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Open @starter-file{inequalities-compound}, read the code carefully and click run to see the graphs you've just considered.
 
 This starter file includes two special functions.
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 `and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
 
@@ -78,10 +86,11 @@ This starter file includes two special functions.
 
 @show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
-@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}
+@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}{style="width:550pt"}
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @show{ (code '(define (lt5 x) (< x 5))) }
 
@@ -91,10 +100,11 @@ This starter file includes two special functions.
 
 _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
 
-@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}
+@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}{style="width:550pt"}
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 `or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
 
@@ -104,10 +114,11 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 @show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
-@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}
+@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}{style="width:550pt"}
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @show{ (code '(define (gt5 x) (> x 5))) }
 
@@ -117,15 +128,17 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 _Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
 
-@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}
+@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Turn to @printable-exercise{compound-inequality-solutions.adoc} and explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality.
 
@@ -140,12 +153,14 @@ Turn to @printable-exercise{compound-inequality-functions.adoc} and write code t
 -->
 
 ---
-# Solutions and Non-Solutions of Compound Inequalities
+{layout="Synthesize"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 How did the graphs of intersections and unions differ?
 
 ---
-# Additional Exercises:
+{layout="Supplemental"}
+# Additional Exercises
 
-- @opt-printable-exercise{pages/boolean-coe-to-code2.adoc}
+@opt-printable-exercise{pages/boolean-coe-to-code2.adoc}
 

@@ -32,18 +32,18 @@
   (display "<select class=\"coverageAlignmentSelect\" onchange=\"showCoverageAlignment()\">\n" o)
   (display "<optgroup label=\"Standards\">\n" o)
   (for ([categ *standards-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ)))
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ)))
     )
   (display "</optgroup>\n" o)
   ;
   (display "<optgroup label=\"Textbooks\">\n" o)
   (for ([categ *textbooks-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ))))
   (display "</optgroup>\n" o)
   ;
   (display "<optgroup label=\"Practices\">\n" o)
   (for ([categ *practices-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (car categ))))
+    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ))))
   (display "</optgroup>\n" o)
   (display "</select>\n" o)
   (display "++++\n" o))
@@ -54,23 +54,23 @@
   (for ([dictionary dictionaries])
     ; (printf "doing dictionary ~s\n" dictionary)
     (let ([lyst (list-ref dictionary 2)]
-          [opt (sanitize-css-id (car dictionary))]
+          [opt (sanitize-css-id (first dictionary))]
           [counters '()])
       ; (printf "doing lyst = ~s\n" opt)
       (for ([desc lyst])
         (set! counters
-          (cons (list (car desc) (cadr desc) (box "") (box 0)) counters)))
+          (cons (list (first desc) (second desc) (box "") (box 0)) counters)))
 
       (set! counters (reverse counters))
 
       (for ([lesson-entry lesson-entries])
-        (let ([lesson-name (car lesson-entry)]
-              [lesson-referents (cdr lesson-entry)])
+        (let ([lesson-name (first lesson-entry)]
+              [lesson-referents (rest lesson-entry)])
           (for ([referent lesson-referents])
             (let ([c (assoc referent counters)])
               (when c
-                (let* ([b (caddr c)]
-                       [count-box (cadddr c)]
+                (let* ([b (third c)]
+                       [count-box (fourth c)]
                        [lessons (unbox b)]
                        [count (unbox count-box)])
                   (set-box! b (string-append lessons
@@ -83,8 +83,8 @@
       (fprintf o "[cols=\"2a,1a,7a\"]\n")
       (fprintf o "|===\n")
       (for ([entry counters])
-        (let ([std (car entry)] [desc (cadr entry)] [lessons (unbox (caddr entry))]
-                                [count (unbox (cadddr entry))])
+        (let ([std (first entry)] [desc (second entry)] [lessons (unbox (third entry))]
+                                [count (unbox (fourth entry))])
           (set! desc (regexp-replace* "\\|" desc "\\&#x7c;"))
           (if (string=? lessons "")
               (fprintf o "| [.unused]#~a# | [.unused]#none# | [.unused]#~a#\n" std desc)

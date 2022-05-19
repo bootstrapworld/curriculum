@@ -21,11 +21,11 @@
 
 (define (system-echo cmd . args)
   (let* ([x (apply process* cmd args)]
-         [i (car x)]
+         [i (first x)]
          [result (format "~a" (read i))])
     (close-input-port i)
-    (close-output-port (cadr x))
-    (close-input-port (cadddr x))
+    (close-output-port (second x))
+    (close-input-port (fourth x))
     (and (not (eof-object? result))
          result)))
 

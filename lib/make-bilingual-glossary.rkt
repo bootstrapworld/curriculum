@@ -20,15 +20,15 @@
       (let ([en-entry (assoc 'en-us entry)]
             [es-entry (assoc 'es-mx entry)])
         (if en-entry
-            (let* ([kwds (cadr en-entry)]
+            (let* ([kwds (second en-entry)]
                    [kwd (if (list? kwds) (string-join kwds ", ") kwds)]
-                   [desc (caddr en-entry)])
+                   [desc (third en-entry)])
               (fprintf o "~a :: ~a\n\n" kwd desc))
             (fprintf o "[.missing]#missing entry# :: ...\n\n"))
         (if es-entry
-            (let* ([kwds (cadr es-entry)]
-                   [kwd (if (list? kwds) (string-join (cadr es-entry) ", ") kwds)]
-                   [desc (caddr es-entry)])
+            (let* ([kwds (second es-entry)]
+                   [kwd (if (list? kwds) (string-join (second es-entry) ", ") kwds)]
+                   [desc (third es-entry)])
               (fprintf o "~a :: ~a\n\n" kwd desc))
             (fprintf o "[.missing]#missing entry# :: ...\n\n"))
         (fprintf o "'''\n\n"))))

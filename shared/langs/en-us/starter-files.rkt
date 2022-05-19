@@ -19,36 +19,41 @@
   ("alices-restaurant" "Alice's Restaurant Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
-   )
+  )
 
   ("collaboration" "Collaboration Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN"))
+    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN")
+  )
 
   ("bc" "bc Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1_FBRxM-CzjOaCEj7XCe7J9zk27fd11l0")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=2eMcXop5hZ")
-    )
+  )
   ("gt" "gt Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
    ("wescheme" "https://www.wescheme.org/view?publicId=KCEKxaxJ4l")
-   )
+  )
 
+  ("bug-hunting"  "Bug Hunting Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1JEeZjzctaJ9fD77rWXqrorqCwlZrDx9H")
+   ("wescheme" "https://www.wescheme.org/view?publicId=nwVEttw9ZY")
+  )
   ("mood-generator" "Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
    ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
-   )
+  )
 
   ("mood-generator-ask" "Alternate Version of the Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e")
-   )
+  )
 
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN")
    ("wescheme" "https://www.wescheme.org/view?publicId=n4DkTyYbQh")
-   )
+  )
 
-  ; data-science
-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; DATA SCIENCE
   ("blank-ds" "Blank Dataset Starter File for Bootstrap:Data Science"
     ("pyret" "https://code.pyret.org/editor#share=1L_TTcE1dv0XtgVg8HW89LfDtRgpcJnkA")
     )
@@ -115,8 +120,8 @@
     ("pyret" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy")
     ("codap" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"))
 
-  ; math
-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; MATH
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
@@ -124,10 +129,6 @@
   ("boolean" "Boolean Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
-   )
-  ("bug-hunting"  "Bug Hunting Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1JEeZjzctaJ9fD77rWXqrorqCwlZrDx9H")
-   ("wescheme" "https://www.wescheme.org/view?publicId=nwVEttw9ZY")
    )
   ("permutations-and-combinations"  "Permutations and Combinations Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1pOwcDplD2vidTIvBMrBI5fVZ2jmk369Q")
@@ -221,6 +222,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1VmH2V3ByFOA_-Fwh-IR1dLC_9XIYGc6U")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin")
    )
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; REACTIVE
   ("package-delivery" "Package Delivery Starter File"
@@ -237,6 +239,14 @@
 
   ("dimmer-switch" "Light Switch Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1TJVPlYOKEPBDPTp25YMMVGhz5YlctYnj")
+  )
+
+  ("cow-jump-moon" "Cow Jumping Over the Moon Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1E-V-o_ukmvOTQ8czRCHixAU7Q_5dhuP_")
+  )
+
+  ("pulsing-star" "Pulsing Star"
+    ("pyret" "https://code.pyret.org/editor#share=1H-9AqmPVoyqvV2WBW6TOGMacifoJ0Ax6")
   )
 
   ("what-to-wear" "What to Wear Starter File"
@@ -257,6 +267,10 @@
 
   ("two-number" "Two-Number State Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Az8Xd4ZcMwqezo8vAldQOrfQkRvi2H8N")
+  )
+
+  ("1-paddle-pong" "1-Paddle Pong"
+   ("pyret" "https://code.pyret.org/editor#share=17eTxETEbKs1C62rRoeq_LjBHgljEdbia")
   )
 
   ("ninja-cat-collisions", "Ninja Cat Starter File"

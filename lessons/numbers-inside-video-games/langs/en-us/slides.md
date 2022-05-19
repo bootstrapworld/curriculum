@@ -3,6 +3,7 @@
 # The Numbers Inside Video Games
 
 ---
+{layout="Launch"}
 # Reverse Engineering a Video Game
 
 Take turns playing the @starter-file{ninja-cat} in pairs.
@@ -20,6 +21,7 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 -->
 
 ---
+{layout="Investigate"}
 # Reverse Engineering a Video Game
 
 Complete @printable-exercise{pages/ReverseEngineerGame.adoc} with your partner.
@@ -31,18 +33,20 @@ Common Misconceptions:
 -->
 
 ---
+{layout="Synthesize"}
 # Reverse Engineering a Video Game
 
-While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.
+While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.{style="font-size:16pt"}
 
-- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?
-- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?
-- How many numbers would we need if the dog could also move up and down?
-- How many numbers would we need to have a two-player game?
-- How many numbers would we need if the entire game was in 3d?
-- How many numbers would we need to make a modern game?
+- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:16pt"}
+- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:16pt"}
+- How many numbers would we need if the dog could also move up and down?{style="font-size:16pt"}
+- How many numbers would we need to have a two-player game?{style="font-size:16pt"}
+- How many numbers would we need if the entire game was in 3d?{style="font-size:16pt"}
+- How many numbers would we need to make a modern game?{style="font-size:16pt"}
 
 ---
+{layout="Launch"}
 # Connecting to Real Games 
 
 What are your favorite current video games?
@@ -52,6 +56,7 @@ What are your favorite current video games?
 -->
 
 ---
+{layout="Investigate"}
 # Connecting to Real Games 
 
 Let's focus on one of the games we just brainstormed.
@@ -62,8 +67,9 @@ Let's focus on one of the games we just brainstormed.
 
 *Optional:* Use the Internet to research these questions and compare the actual numbers to your estimates.
 
-<!--
-There's a lot of variability, especially between game consoles and cell phone games! But here's a few sample numbers:
+---
+{layout="Investigate"}
+# Connecting to Real Games 
 
 @table{4}
 | Title								| Time		| Team Size 	| Budget
@@ -71,10 +77,15 @@ There's a lot of variability, especially between game consoles and cell phone ga
 | Final Fantasy VII					| 3 years	| 100+			| 40-45m
 | Shadow of the Tomb Raider			| 3+ years	| 100+			| 75m+
 
+There's a lot of variability, especially between game consoles and cell phone games! These are just a few examples.
+
+
+<!--
 The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
 -->
 
 ---
+{layout="Synthesize"}
 # Connecting to Real Games 
 
 Are we likely to create games like the ones you researched?

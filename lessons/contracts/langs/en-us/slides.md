@@ -3,6 +3,7 @@
 # Contracts 
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 You may remember functions from algebra: @math{f(x) = x + 4}.
@@ -13,12 +14,18 @@ You may remember functions from algebra: @math{f(x) = x + 4}.
 - The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? 
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 @vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
 
+
+---
+{layout="Launch"}
+# Applying Functions
+
 Log into
-@ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org (CPO)"}}
+@ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)}}
 @ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor and press "Run" to load the image library. 
 
 Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
@@ -30,17 +37,28 @@ Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
 - What did the expression evaluate to?
 
 ---
+{layout="Launch"}
 # Applying Functions
 
 Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
 
+- What is the name of this function? 
+- How many arguments does `string-length` expect?
+- What type of argument does the function expect? 
+- What does the expression evaluate to? 
+- Does the `string-length` function produce a Number? String? Boolean?
+
+<!--
 - What is the name of this function? _string-length_
 - How many arguments does `string-length` expect? _1_
 - What type of argument does the function expect? _String_
 - What does the expression evaluate to? _7_
 - Does the `string-length` function produce a Number? String? Boolean? _Number_
+-->
+
 
 ---
+{layout="Investigation"}
 # Applying Functions
 
 Complete @printable-exercise{pages/applying-functions.adoc} 
@@ -48,14 +66,23 @@ Complete @printable-exercise{pages/applying-functions.adoc}
 When you finish, try changing the expression @show{(code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then try changing colors and sizes!
 
 ---
+{layout="Synthesize"}
 # Applying Functions
 
+- What are the types of the arguments `triangle` was expecting? 
+- How does the output relate to the inputs?
+- What kind of value was produced by that expression? 
+- Which error messages did you encounter?
+
+<!--
 - What are the types of the arguments `triangle` was expecting? _A Number and 2 Strings_
 - How does the output relate to the inputs? _The Number determines the size and the Strings determine the style and color._
 - What kind of value was produced by that expression? _An Image! New data type!_
 - Which error messages did you encounter?
+-->
 
 ---
+{layout="Launch"}
 # Contracts
 
 When you typed @show{(code '(triangle 50 "solid" "red"))}
@@ -64,15 +91,19 @@ into the editor, you created an example of a new @vocab{data type}, called an _I
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
 
 ---
+{layout="Launch"}
 # Contracts
 
 As you can imagine, there are many other functions for making images, each with a different set of arguments. For each of these functions, we need to keep track of three things:
 
-. **Name** -- the name of the function, which we type in whenever we want to use it
-. **Domain** -- the type(s) of data we give to the function
-. **Range** -- the type of data the function produces
+- **Name** - the name of the function, which we type in whenever we want to use it
+
+- **Domain** - the type(s) of data we give to the function
+
+- **Range** - the type of data the function produces
 
 ---
+{layout="Launch"}
 # Contracts
 
 The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
@@ -90,81 +121,66 @@ Contracts are general. Expressions are specific.
 -->
 
 ---
+{layout="Launch"}
 # Contracts
 
-Let’s take a look at the Name, Domain, and Range of the functions we've seen before:
+Let’s take a look at some functions we've seen before:
 
-{.column}
-
-@table{5}
-| **Name** 				|	| **Domain**				|		| **Range**
-@ifproglang{wescheme}{
-|`;` `+`				| :	| `Number, Number` 			|	->	| `Number`
-|`;` `-` 				| :	| `Number, Number` 			|	->	| `Number`
-|`;` `/`				| : | `Number, Number`			|	->	| `Number`
-|`;` `*`				| : | `Number, Number`			|	->	| `Number`
-|`;` `sqr`				| :	| `Number`  				|	->	| `Number`
-|`;` `sqrt`				| :	| `Number` 					|	->	| `Number`
-|`;` `<`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `>`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `<=`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `>=`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `==`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `<>`				| : | `Number, Number`			|	->	| `Boolean`
-|`;` `string-equal?`	| : | `String, String`			|	->	| `Boolean`
-|`;` `string-contains?`	| : | `String, String`			|	->	| `Boolean`
-|`;` `string-length`	| :	| `String` 					|	->	| `Number`
-|`;` `triangle`			| : | `Number, String, String`	|	->	| `Image`
-}
-@ifproglang{pyret}{
-|`#` `num-sqr`			| ::| `Number`  				|	->	| `Number`
-|`#` `num-sqrt`			| ::| `Number` 					|	->	| `Number`
-|`#` `string-contains`	| ::| `String, String`			|	->	| `Boolean`
-|`#` `string-length`	| ::| `String`					|	->	| `Number`
-|`#` `triangle`			| ::| `Number, String, String`	|	->	| `Image`
-}
+@image{images/sample-contracts-table.png, "a"}
 
 ---
+{layout="Launch"}
 # Contracts
 
 When the input matches what the function consumes, the function produces the output we expect.
 
 ---
+{layout="Launch"}
 # Contracts
 
-Here is an example of another function. @show{(code '(string-append "sun" "shine"))}
+Here is an example of another function:
 
-Type it into the editor. What is its contract? `string-append {two-colons} String, String -> String`
+@show{(code '(string-append "sun" "shine"))}
 
+Type it into the editor. What is its contract? 
+
+<!--
+contract: `string-append :: String, String -> String`
+-->
 ---
+{layout="Investigate"}
 # Contracts
 
 Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc} to get some practice working with Contracts.
 
 ---
+{layout="Synthesize"}
 # Contracts
 
 - What is the difference between a value like `17` and a type like `Number`?
 - For each expression where a function is given inputs, how many outputs are there? 
 
 ---
+{layout="Launch"}
 # Exploring Image Functions
 
-Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
+Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?{style="font-size:14pt"}
 
-- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? 
-- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}
-- What error did we get? What _hint_ does it give us about how to use this function? 
-- What happens if I don't give it those things?
-- If I give `star` what it needs, what do I get in return?
-- What is the contract for star? 
-- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
+- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? {style="font-size:14pt"}
+- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}{style="font-size:14pt"}
+- What error did we get? What _hint_ does it give us about how to use this function? {style="font-size:14pt"}
+- What happens if I don't give it those things?{style="font-size:14pt"}
+- If I give `star` what it needs, what do I get in return?{style="font-size:14pt"}
+- What is the contract for star? {style="font-size:14pt"}
+- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? {style="font-size:14pt"}
 
 <!--
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
 -->
 
 ---
+{layout="Investigate"}
+
 # Exploring Image Functions
 
 - At the back of your workbook, you'll find pages with space to write down a contract and example or other notes for every function you see in this course.  The first few have been completed for you. You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
@@ -174,26 +190,29 @@ The error messages in this environment are _designed_ to be as student-friendly 
 (If you don't have a workbook, you can use these @opt-printable-exercise{image-contracts.adoc, contracts pages})
 
 ---
+{layout="Synthesize"}
 # Exploring Image Functions
 
-- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? 
-- Does having the same Domain and Range mean that the functions do the same things? 
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
-- Was it harder to find contracts for some of the functions than others? Why?
-- What error messages did you see? 
-- How did you figure out what to do after seeing an error message? 
-- Which input determined the size of the Rhombus?  What did the other number determine?
+- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? {style="font-size:16pt"}
+- Does having the same Domain and Range mean that the functions do the same things? {style="font-size:16pt"}
+- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?{style="font-size:16pt"}
+- Was it harder to find contracts for some of the functions than others? Why?{style="font-size:16pt"}
+- What error messages did you see? {style="font-size:16pt"}
+- How did you figure out what to do after seeing an error message? {style="font-size:16pt"}
+- Which input determined the size of the Rhombus?  What did the other number determine?{style="font-size:16pt"}
 
 ---
+{layout="Launch"}
 # Contracts Help Us Write Code
 
 Turn to @printable-exercise{pages/using-contracts.adoc} and @opt-printable-exercise{pages/using-contracts-cont.adoc} and experiment with the functions in the editor.
 
-Once you've discovered how to build a version of each image function that satisfies you, record the example code in your contracts table. S
+Once you've discovered how to build a version of each image function that satisfies you, record the example code in your contracts table. 
 
 It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 - What kind of triangle did `triangle` build? 
@@ -202,6 +221,7 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 - If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 Turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
@@ -209,6 +229,7 @@ Turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts
 If you are ready to dig into @show{(code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 ---
+{layout="Investigate"}
 # Contracts Help Us Write Code
 
 Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to get a taste of it, turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help you match the images to the corresponding expressions. 
@@ -218,6 +239,7 @@ For more practice with detailed contracts you can turn to  @opt-printable-exerci
 Both of these functions can generate a wide range of interesting shapes!
 
 ---
+{layout="Synthesize"}
 # Contracts Help Us Write Code
 
 - How was it different to code expressions for the shape functions when you started with a contract?
@@ -225,6 +247,7 @@ Both of these functions can generate a wide range of interesting shapes!
 - Why did the contract for `ellipse` require two numbers? What happened when the two numbers were the same?
 
 ---
+{layout="Synthesize"}
 # Contracts Help Us Write Code
 
 How to diagnose and fix errors is a skill we will continue working on developing. Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 
@@ -246,6 +269,7 @@ If you see an error and you know the syntax is right, ask yourself these three q
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Exercises:
 
 @ifproglang{pyret}{

@@ -28,7 +28,7 @@
     (list "Iowa" "Iowa" *iowa-standards-list* "https://iowacore.gov/standards/iowa-core-standards")
     ))
 
-(define *dict-canonical-order* (map car *standards-list*))
+(define *dict-canonical-order* (map first *standards-list*))
 
 (define *disallowed-standards-list*
   '())

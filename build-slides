@@ -70,9 +70,8 @@ for natlang in *; do
              echo Slides failed for $LESSON/slides.mkd
              if grep -q 'must be less than the endIndex' .tmp.txt; then
                echo You likely have a slide with text preceding table
-             else
-               cat .tmp.txt
              fi
+             cat .tmp.txt
            fi
            # rm .tmp.txt
          else
@@ -83,9 +82,8 @@ for natlang in *; do
              echo Slides failed for $LESSON/slides.mkd
              if grep -q 'must be less than the endIndex' .tmp.txt; then
                echo You likely have a slide with text preceding table
-             else
-               cat .tmp.txt
              fi
+             cat .tmp.txt
            else
              grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
              cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
