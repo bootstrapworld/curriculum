@@ -157,7 +157,7 @@
       '()))
 
 (cond [(assoc "name" *copyright-info*)
-       => (lambda (c) (set! *copyright-name* (cadr c)))])
+       => (lambda (c) (set! *copyright-name* (second c)))])
 
 (define *glossary-items* '())
 
@@ -227,8 +227,8 @@
     ; (printf "naive sing = ~s~n" naive-singular)
     (let loop ([L L])
       (if (null? L) #f
-          (let* ([c (car L)]
-                 [lhs (car c)])
+          (let* ([c (first L)]
+                 [lhs (first c)])
             ; (printf "lhs = ~s~n" lhs)
             (or (cond [(string? lhs)
                        (and (or (string-ci=? lhs term)
@@ -237,9 +237,9 @@
                       [(list? lhs)
                        (and (memf (lambda (x) (or (string-ci=? x term)
                                                   (string-ci=? x naive-singular))) lhs)
-                            (list (car lhs) (cadr c)))]
+                            (list (first lhs) (second c)))]
                       [else #f])
-                (loop (cdr L))))))))
+                (loop (rest L))))))))
 
 (define (assoc-standards std)
   ; (printf "doing assoc-standards ~s\n" std)
@@ -247,21 +247,21 @@
         [dict #f])
     (for ([x *disallowed-standards-list*])
       (unless c
-        (let ([stds-list (caddr x)])
+        (let ([stds-list (third x)])
           (set! c (assoc std stds-list)))))
     ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
     (cond [c (values #f #f)]
           [else (for ([x *standards-list*])
                   (unless c
-                    (let ([stds-list (caddr x)])
+                    (let ([stds-list (third x)])
                       (set! c (assoc std stds-list))
                       (when c
-                        (set! dict (car x))))))
+                        (set! dict (first x))))))
                 ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
                 (unless c
                   (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
-                ; (printf "assoc-standards returned ~s ~s\n" (and c (cadr c)) dict)
-                (values (and c (cadr c)) dict)])))
+                ; (printf "assoc-standards returned ~s ~s\n" (and c (second c)) dict)
+                (values (and c (second c)) dict)])))
 
 (define (assoc-textbooks chapter-label)
   ; (printf "doing assoc-textbooks ~s\n" chapter-label)
@@ -269,16 +269,16 @@
         [textbook-name #f])
     (for ([x *textbooks-list*])
       (unless chapter-desc
-        (let ([this-textbook-name (car x)]
-              [this-textbook-chapters (caddr x)])
+        (let ([this-textbook-name (first x)]
+              [this-textbook-chapters (third x)])
           ;(printf "\n t-n = ~s\n t-cc = ~s\nn" this-textbook-name this-textbook-chapters)
           (set! chapter-desc (assoc chapter-label this-textbook-chapters))
           (when chapter-desc (set! textbook-name this-textbook-name)))))
     ;(printf "chapter-desc = ~s; textbook-name = ~s\n" chapter-desc textbook-name)
     (if chapter-desc
         (begin
-          ; (printf "assoc-textbooks returned ~s ~s\n" (cadr chapter-desc) textbook-name)
-          (values (cadr chapter-desc) textbook-name)
+          ; (printf "assoc-textbooks returned ~s ~s\n" (second chapter-desc) textbook-name)
+          (values (second chapter-desc) textbook-name)
           )
         (values #f #f))))
 
@@ -290,7 +290,7 @@
         (set! practice-cell (assoc practice-label (list-ref x 2)))
         (when practice-cell (set! practice-category-name (list-ref x 0)))))
     (if practice-cell
-        (values (cadr practice-cell) practice-category-name)
+        (values (second practice-cell) practice-category-name)
         (values #f #f))))
 
 (define (add-standard std lesson-title lesson pwy)
@@ -381,20 +381,20 @@
   (define (sort-keyword-args args)
     (let ([args-paired (let loop ([args args] [r '()])
                          (if (null? args) r
-                               (loop (cddr args)
-                                     (cons (list (car args) (massage-arg (cadr args)))
+                               (loop (rest (rest args))
+                                     (cons (list (first args) (massage-arg (second args)))
                                          r))))])
-      (sort args-paired keyword<? #:key car)))
+      (sort args-paired keyword<? #:key first)))
 
   (let loop ([args args] [r '()])
     (if (null? args)
         (values '() '() (reverse r))
-        (let ([arg (car args)])
+        (let ([arg (first args)])
           (cond [(keyword? arg)
                  (let ([kvkv (sort-keyword-args args)])
-                   (values (map car kvkv) (map cadr kvkv) (reverse r)))]
+                   (values (map first kvkv) (map second kvkv) (reverse r)))]
                 [else
-                  (loop (cdr args) (cons arg r))])))))
+                  (loop (rest args) (cons arg r))])))))
 
 (define (this-proglang-lesson? this-lesson all-lessons)
   (let ([result 0])
@@ -504,12 +504,12 @@
           (display "*Practices in this Lesson*" o)
           (display "\n\n" o)
           (for ([practice *practices-merited*])
-            (let* ([p (car practice)]
+            (let* ([p (first practice)]
                    [practice-desc (assoc p *flat-practices-list*)])
               (cond [practice-desc
                       (display p o)
                       (display ":: " o)
-                      (display (cadr practice-desc) o)
+                      (display (second practice-desc) o)
                       (newline o)]
                     [else
                       (printf "WARNING: Practice ~a not found\n" practice)])))
@@ -545,7 +545,7 @@
              (path-replace-extension snippet ".adoc"))]
          [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
                 (assoc (list lesson snippet) *workbook-pagenums*))])
-    (if c (cadr c) #f))
+    (if c (second c) #f))
   |#
   #f
   )
@@ -564,7 +564,7 @@
 
 (define (dispatch-make-workbook-link page-compts link-text directive)
   ; (printf "doing dispatch-make-workbook-link ~s ~s ~s\n" page-compts link-text directive)
-  (let ([first-compt (car page-compts)])
+  (let ([first-compt (first page-compts)])
     (case (length page-compts)
       [(1)
        (cond [*lesson*
@@ -578,13 +578,13 @@
                        directive page-compts)
                ""])]
       [(2)
-       (let ([second-compt (cadr page-compts)])
+       (let ([second-compt (second page-compts)])
          (cond [(and (or (string=? first-compt "pages")
                          (string=? first-compt "solution-pages"))
                      *lesson-plan*)
                 (make-workbook-link #f
                   first-compt
-                  (cadr page-compts)
+                  (second page-compts)
                   link-text
                   #:link-type directive)]
                [else
@@ -595,8 +595,8 @@
                          directive page-compts)
                  ""]))]
       [(3)
-       (let ([second-compt (cadr page-compts)]
-             [third-compt (caddr page-compts)])
+       (let ([second-compt (second page-compts)]
+             [third-compt (third page-compts)])
          (cond [(or (string=? second-compt "pages")
                     (string=? second-compt "solution-pages"))
                 (make-workbook-link
@@ -664,7 +664,7 @@
     (when (member link-type '("printable-exercise" "opt-printable-exercise"))
       (let ([f (format "~a" g-in-pages)])
         (unless lesson-dir
-          (unless (ormap (lambda (e) (equal? (car e) f)) *exercises-done*)
+          (unless (ormap (lambda (e) (equal? (first e) f)) *exercises-done*)
             (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
               (set! *exercises-done*
                 (cons (list f ex-ti) *exercises-done*)))))))
@@ -688,7 +688,7 @@
 
               [(equal? link-type "printable-exercise")
                 (let ([styled-link-output (string-append "[.PrintableExercise]##" link-output "##")])
-                  (unless (findf (lambda (L) (equal? (cadr L) styled-link-output))
+                  (unless (findf (lambda (L) (equal? (second L) styled-link-output))
                                  *printable-exercise-links*)
                     (set! *printable-exercise-links* (cons (list snippet styled-link-output)
                                                            *printable-exercise-links*))))]))
@@ -787,7 +787,7 @@
 (define (extract-domain-name f)
   (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
     (and x
-         (let ([y (car x)])
+         (let ([y (first x)])
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
@@ -899,7 +899,7 @@
 (define *lesson-summary-file* #f)
 
 (define *standards-dictionaries*
-  (map car *standards-list*))
+  (map first *standards-list*))
 
 (define *page-title* #f)
 
@@ -1020,7 +1020,7 @@
                                 #:mode 'forms)])
         ; (printf "lesson-opt-links for ~s is ~s\n" lesson lesson-opt-links)
         (for ([x lesson-opt-links])
-          (let* ([proj-link (car x)]
+          (let* ([proj-link (first x)]
                  [proj-desc proj-link])
             (set! proj-desc (regexp-replace "^link:\\.\\./\\.\\./" proj-desc ""))
             (set! proj-desc (regexp-replace "\\]\\[.*\\]$" proj-desc ""))
@@ -1032,7 +1032,7 @@
               (fprintf o "\n\n- *Projects*\n\n"))
             (fprintf o "+\n*~a* {startsb}~a{endsb}\n~a\n"
                      (regexp-replace "^link:" proj-link "link:../")
-                     (regexp-replace "^link:" (cadr x) "link:../")
+                     (regexp-replace "^link:" (second x) "link:../")
                      (if (file-exists? proj-desc)
                          (string-append " "
                            (call-with-input-file proj-desc port->string))
@@ -1272,12 +1272,12 @@
       ; (printf "\nnatlang= ~s\n\n" natlang)
       (let loop ([gl *glossary-list*] [ngl '()])
         (if (null? gl) ngl
-            (let loop2 ([xx (car gl)])
-              (if (null? xx) (loop (cdr gl) ngl)
-                  (let ([x (car xx)])
-                    (if (eq? (car x) natlang)
-                        (loop (cdr gl) (cons (cdr x) ngl))
-                        (loop2 (cdr xx))))))))))
+            (let loop2 ([xx (first gl)])
+              (if (null? xx) (loop (rest gl) ngl)
+                  (let ([x (first xx)])
+                    (if (eq? (first x) natlang)
+                        (loop (rest gl) (cons (rest x) ngl))
+                        (loop2 (rest xx))))))))))
 
   ; (printf "\nnatlang-glossary-list = ~s\n\n" *natlang-glossary-list*)
 
@@ -1345,24 +1345,24 @@
       (when *lesson-plan*
 
         (for ([x *lessons-and-standards*])
-          (when (string=? (car x) *lesson-plan-base*)
-            (for ([s (cdr x)])
+          (when (string=? (first x) *lesson-plan-base*)
+            (for ([s (rest x)])
               (add-standard s #f *lesson-plan* #f))))
 
         ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
         ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
 
         (for ([x *lessons-and-textbooks*])
-          (when (string=? (car x) *lesson-plan-base*)
-            (for ([s (cdr x)])
+          (when (string=? (first x) *lesson-plan-base*)
+            (for ([s (rest x)])
               (add-textbook-chapter s #f *lesson-plan* #f))))
 
         ;(printf "textbooks-represented = ~s\n" *textbooks-represented*)
         ;(printf "chapters-used = ~s\n" *chapters-used*)
 
         (for ([x *lessons-and-practices*])
-          (when (string=? (car x) *lesson-plan-base*)
-            (for ([s (cdr x)])
+          (when (string=? (first x) *lesson-plan-base*)
+            (for ([s (rest x)])
               (add-practice s #f *lesson-plan* #f))))
 
         )
@@ -1466,13 +1466,17 @@
                               (cond [(< (length args) 2)
                                      (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
                                     [else
-                                      (display (make-image (car args) (cadr args) (cddr args)) o)]))]
+                                      (display (make-image (first args) (second args) 
+                                                           (rest (rest args))) 
+                                               o)]))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
                               (cond [(< (length args) 2)
                                      (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
                                     [else
-                                      (display (make-image (car args) (cadr args) (cddr args) #:centered? #t) o)]))]
+                                      (display (make-image (first args) (second args) 
+                                                           (rest (rest args)) #:centered? #t) 
+                                               o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
                            [(or (string=? directive "printable-exercise")
@@ -1481,16 +1485,16 @@
                             ;(printf "doing ~s\n" directive)
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
-                                   [page (car args)]
-                                   [link-text (if (> n 1) (cadr args) "")]
+                                   [page (first args)]
+                                   [link-text (if (> n 1) (second args) "")]
                                    [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
                            [(string=? directive "pathwaylink")
                             (let* ([args (read-commaed-group i directive read-group)]
-                                   [adocf (car args)]
-                                   [link-text (string-join (map string-trim (cdr args)) ", ")])
+                                   [adocf (first args)]
+                                   [link-text (string-join (map string-trim (rest args)) ", ")])
                               (set! link-text (string-trim link-text "\""))
                               (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
@@ -1498,16 +1502,16 @@
                                 (string=? directive "opt-online-exercise")
                                 (string=? directive "ext-exercise-link"))
                             (let* ([args (read-commaed-group i directive read-group)]
-                                   [adocf (car args)]
+                                   [adocf (first args)]
                                    [link-text (string-join
-                                                (map string-trim (cdr args)) ", ")])
+                                                (map string-trim (rest args)) ", ")])
                               (set! link-text (string-trim link-text "\"")) ;XXX:
                               (display (make-link adocf link-text #:link-type directive) o))]
                            [(string=? directive "include")
                             (let* ([args (read-commaed-group i directive read-group)]
-                                   [adocf (car args)] ;only one right? FIXME:
+                                   [adocf (first args)] ;only one right? FIXME:
                                    [rest-args (string-join
-                                                (map string-trim (cdr args)) ",")]
+                                                (map string-trim (rest args)) ",")]
                                    )
                               (display (make-link adocf rest-args #:include? #t) o))]
                            [(string=? directive "add-to-lang")
@@ -1629,7 +1633,7 @@
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
                             => (lambda (s)
-                                 (display (cadr s) o))]
+                                 (display (second s) o))]
                            [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe" "data-cycle"))
                             (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise") design-recipe-exercise]
@@ -1658,14 +1662,14 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([title (cadr c)]
-                                            [p (assoc *proglang* (cddr c))])
+                                      (let ([title (second c)]
+                                            [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                      (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (unless (<= (length p) 2) (set! title (caddr p)))
-                                                (let* ([link-output (format "link:pass:[~a][~a~a]" (cadr p) title
+                                                (unless (<= (length p) 2) (set! title (third p)))
+                                                (let* ([link-output (format "link:pass:[~a][~a~a]" (second p) title
                                                                             (if *lesson-plan* ", window=\"_blank\"" "")
                                                                             )]
                                                        [styled-link-output
@@ -1685,8 +1689,8 @@
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
-                                   [project-file (car arg1)]
-                                   [rubric-file (if (> (length arg1) 1) (cadr arg1) "")]
+                                   [project-file (first arg1)]
+                                   [rubric-file (if (> (length arg1) 1) (second arg1) "")]
                                    [project-file-compts (regexp-split #rx"/" project-file)]
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
                                    [rubric-link-output
@@ -1778,7 +1782,7 @@
               (let ([dict-rep *dictionaries-represented*])
                 (set! *dictionaries-represented*
                   (filter (lambda (x) (member x dict-rep))
-                          (map car *standards-list*))))
+                          (map first *standards-list*))))
 
               (when *lesson-plan*
                 (create-standards-subfile)
@@ -1887,14 +1891,14 @@
 
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
-                              (let ([x-i (index-of *workbook-pages* (car x))]
-                                    [y-i (index-of *workbook-pages* (car y))])
+                              (let ([x-i (index-of *workbook-pages* (first x))]
+                                    [y-i (index-of *workbook-pages* (first y))])
                                 (unless x-i (set! x-i -1))
                                 (unless y-i (set! y-i -1))
                                 (cond [(and (= x-i -1) (= y-i -1)) #t]
                                       [else (< x-i y-i)]))))])
               (for ([x xx])
-                (fprintf o "\n* ~a\n\n" (cadr x))))
+                (fprintf o "\n* ~a\n\n" (second x))))
 
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -1909,7 +1913,7 @@
                 #:exists 'replace)
 
               (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (car x) (cadr x))))
+                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (first x) (second x))))
 
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -1969,8 +1973,8 @@
       (fprintf o "|===\n")
       (for ([lsn-exx exx])
         ; (printf "lsn-exx is ~s\n" lsn-exx)
-        (let ([lsn (car lsn-exx)]
-              [exx (cadr lsn-exx)])
+        (let ([lsn (first lsn-exx)]
+              [exx (second lsn-exx)])
           (fprintf o "|link:~a~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n"
                    *dist-root-dir*
                    lsn
@@ -2006,15 +2010,15 @@
     (lambda (op)
       (unless (empty? *glossary-items*)
         (set! *glossary-items*
-          (sort *glossary-items* #:key car string-ci<=?))
+          (sort *glossary-items* #:key first string-ci<=?))
         (when *narrative*
           (fprintf op "= Glossary\n\n"))
         (when *lesson*
           (fprintf op ".Glossary\n\n"))
         (fprintf op "[.glossary]~%")
         (for ([s *glossary-items*])
-          ;(fprintf op "* *~a*: ~a~%" (car s) (cadr s))
-          (fprintf op "~a:: ~a~%" (car s) (cadr s)))
+          ;(fprintf op "* *~a*: ~a~%" (first s) (second s))
+          (fprintf op "~a:: ~a~%" (first s) (second s)))
         (fprintf op "~%~%")))
     #:exists 'replace)
 
@@ -2178,7 +2182,7 @@
                " onchange=\"showStandardsAlignment()\""
                (string-append
                  (if (null? *dictionaries-represented*) ""
-                     (let ([first-dict (car *dictionaries-represented*)])
+                     (let ([first-dict (first *dictionaries-represented*)])
                        (enclose-tag "option" ""
                          #:attribs (format "selected=\"selected\" value=\"standards-~a\"" first-dict)
                          first-dict)))
@@ -2188,7 +2192,7 @@
                             #:attribs (format "value=\"standards-~a\"" dict)
                             dict))
                         (if (null? *dictionaries-represented*) '()
-                            (cdr *dictionaries-represented*)))
+                            (rest *dictionaries-represented*)))
                    "")))
              o)
     (newline o)
@@ -2205,7 +2209,7 @@
              " onchange=\"showTextbooksAlignment()\""
              (string-append
                (if (null? *textbooks-represented*) ""
-                   (let ([first-textbook (car *textbooks-represented*)])
+                   (let ([first-textbook (first *textbooks-represented*)])
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
                                          (regexp-replace* "\\." first-textbook "_"))
@@ -2217,7 +2221,7 @@
                                             (regexp-replace* "\\." textbook-label "_"))
                           textbook-label))
                       (if (null? *textbooks-represented*) '()
-                          (cdr *textbooks-represented*)))
+                          (rest *textbooks-represented*)))
                  "")))
            o)
   (newline o))
@@ -2308,7 +2312,7 @@
                       *standards-met*)])
         (create-standards-section
           dict
-          (sort dict-standards-met #:key car string-ci<=?) o)))))
+          (sort dict-standards-met #:key first string-ci<=?) o)))))
 
 (define (create-textbooks-subfile-port o)
   (unless (empty? *chapters-used*)
@@ -2346,7 +2350,7 @@
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt.kp")
     (lambda (op)
       (for ([s *glossary-items*])
-        (fprintf op "~s~n" (car s))))
+        (fprintf op "~s~n" (first s))))
     #:exists 'replace)
   ;
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-standards.txt.kp")
@@ -2356,10 +2360,10 @@
           (let ([first? #t])
             (display "    standards: [" op2)
             (for ([s *standards-met*])
-              (let ([std-name (car s)]
-                    [std-desc (cadr s)])
+              (let ([std-name (first s)]
+                    [std-desc (second s)])
               (fprintf op "~s~n" std-name)
-              (let ([x (cadr s)])
+              (let ([x (second s)])
                 (cond [first? (set! first? #f)]
                       [else (display ",\n                " op2)])
                 (write (string-append std-name " : " std-desc) op2))
@@ -2372,13 +2376,13 @@
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-chapters.txt.kp")
     (lambda (op)
       (for ([s *chapters-used*])
-        (fprintf op "~s~n" (car s))))
+        (fprintf op "~s~n" (first s))))
     #:exists 'replace)
   ;
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-practices.txt.kp")
     (lambda (op)
       (for ([p *practices-merited*])
-        (fprintf op "~s\n" (car p))))
+        (fprintf op "~s\n" (first p))))
     #:exists 'replace)
   )
 
@@ -2391,7 +2395,7 @@
 (define (intersperse-spaces args funargs?)
   (define (intersperse-spaces-aux args)
     (if (null? args) args
-        (let ([a (car args)] [d (cdr args)])
+        (let ([a (first args)] [d (rest args)])
           (if (null? d) (list a)
               (cons a
                     (cons (hspace 1)
@@ -2421,10 +2425,10 @@
   (list *hole-symbol* *hole2-symbol* *hole3-symbol*))
 
 (define (answer? e)
-  (and (list? e) (memq (car e) '(?ANSWER ?ANS))))
+  (and (list? e) (memq (first e) '(?ANSWER ?ANS))))
 
 (define (fitb? e)
-  (and (list? e) (memq (car e) '(?FITB))))
+  (and (list? e) (memq (first e) '(?FITB))))
 
 (define *common-infix-ops*
  '(+ - * / and or < > = <= >= <> frac
@@ -2438,8 +2442,8 @@
 
 (define (infix-op? e #:pyret [pyret #f])
   (cond [(not (list? e)) (memq e (if pyret *pyret-infix-ops* *arith-infix-ops*))]
-        [(memq (car e) '(?ANSWER ?ANS))
-         (let ([a (cadr e)])
+        [(memq (first e) '(?ANSWER ?ANS))
+         (let ([a (second e)])
            (memq a (if pyret *pyret-infix-ops* *arith-infix-ops*)))]
         [else #f]))
 
@@ -2470,8 +2474,8 @@
                          [(eq? a 'frac) "\\div"]
                          [(eq? a 'expt) "^"]
                          [else a])]
-               [e1 (if (>= n 1) (car e) #f)]
-               [rest-e (if (>= n 1) (cdr e) '())]
+               [e1 (if (>= n 1) (first e) #f)]
+               [rest-e (if (>= n 1) (rest e) '())]
                [arg1 (and e1
                          (sexp->arith e1 #:pyret #f #:wrap #t
                                       #:encloser a #:parens parens #:first #t #:tex #t))]
@@ -2509,7 +2513,7 @@
                        (if (or pyret tex) x (enclose-span ".value.wescheme-symbol" x)))]
         [(string? e) (let ([x (format "~s" e)])
                        (if (or pyret tex) x (enclose-span ".value.wescheme-string" x)))]
-        [(answer? e) (let* ([e (cadr e)]
+        [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
@@ -2521,9 +2525,9 @@
                              )))]
         [(fitb? e)
          ; (printf "found fitb ~s\n" e)
-         (let ([e (cadr e)])
+         (let ([e (second e)])
                      (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
-        [(list? e) (let ([a (car e)])
+        [(list? e) (let ([a (first e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
                                            ))
@@ -2537,7 +2541,7 @@
                            [(and (not pyret) (or (memq a *list-of-hole-symbols*) ;XXX:
                                                  (infix-op? a #:pyret #f)
                                                  ))
-                            (infix-sexp->math a (cdr e) #:wrap wrap #:encloser encloser
+                            (infix-sexp->math a (rest e) #:wrap wrap #:encloser encloser
                                               #:parens parens #:first first)]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
@@ -2549,13 +2553,13 @@
                                     [else
                                       (format "~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'list) pyret)
-                            (let* ([args (cdr e)]
+                            (let* ([args (rest e)]
                                    [args-c (map (lambda (x) (sexp->arith x #:pyret #t)) args)])
                               (format "[list: ~a]" (string-join args-c ", ")))]
                            [(and (eq? a 'sqrt) (= (length e) 2) (not pyret))
-                            (format "\\sqrt{ ~a }" (sexp->arith (cadr e) #:parens parens #:tex tex))]
+                            (format "\\sqrt{ ~a }" (sexp->arith (second e) #:parens parens #:tex tex))]
                            [(and (eq? a 'sqr) (= (length e) 2) (not pyret))
-                            (let* ([x (cadr e)]
+                            (let* ([x (second e)]
                                    [xm (sexp->arith x #:parens parens #:tex tex)])
                               (format
                                 (if (list? x)
@@ -2567,7 +2571,7 @@
                                      (string-join
                                        (map (lambda (e1)
                                               (sexp->arith e1 #:pyret pyret #:parens parens #:tex tex))
-                                            (cdr e))
+                                            (rest e))
                                        ", "))]
                            ))]
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
@@ -2593,8 +2597,8 @@
             [(and (eq? e 'frac) wescheme)
              (add-prereq '/)
              '/]
-            [(pair? e) (cons (holes-to-underscores (car e) #:wescheme wescheme)
-                             (holes-to-underscores (cdr e) #:wescheme wescheme))]
+            [(pair? e) (cons (holes-to-underscores (first e) #:wescheme wescheme)
+                             (holes-to-underscores (rest e) #:wescheme wescheme))]
             [else
               (add-prereq e)
               e]))))
@@ -2654,7 +2658,7 @@
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
-        [(answer? e) (let* ([e (cadr e)]
+        [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
                            (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
@@ -2663,14 +2667,14 @@
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
-        [(fitb? e) (let ([e (cadr e)])
+        [(fitb? e) (let ([e (second e)])
                      (enclose-tag "span" "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
-        [(list? e) (let ([a (car e)])
+        [(list? e) (let ([a (first e)])
                      (enclose-tag "table" ".gdrive-only.expression"
                        (if (or (symbol? a) (infix-op? a))
                            (let ([args (map (lambda (e1)
                                                 (sexp->block-table e1 #:pyret pyret))
-                                              (cdr e))])
+                                              (rest e))])
                              (string-append
                                (enclose-tag "tr" ""
                                  (enclose-tag "td" ".operator"
@@ -2710,7 +2714,7 @@
            (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
                   "{nbsp}{nbsp}{nbsp}"]
                  [else (sym-to-adocstr e #:pyret pyret)]))]
-        [(answer? e) (let* ([e (cadr e)]
+        [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
                            (enclose-span
@@ -2723,13 +2727,13 @@
                                  (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
                                  (format ".value.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
-        [(list? e) (let ([a (car e)])
+        [(list? e) (let ([a (first e)])
                      (enclose-span ".expression"
                        (if (or (symbol? a) (answer? a))
                            (let ([args (intersperse-spaces
                                          (map (lambda (e1)
                                                 (sexp->block e1 #:pyret pyret #:wescheme wescheme))
-                                              (cdr e)) 'args)])
+                                              (rest e)) 'args)])
                              (string-append
                                (enclose-span ".lParen" "(")
                                (enclose-span ".operator"
@@ -2813,6 +2817,6 @@
       (unless (null? args)
         (set! res (string-append res "\n"
                     (keyword-apply contract '(#:single?) '(#f)
-                                   (car args))))
-        (loop (cdr args))))
+                                   (first args))))
+        (loop (rest args))))
     (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))

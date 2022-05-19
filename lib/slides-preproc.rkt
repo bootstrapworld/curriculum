@@ -61,17 +61,17 @@
     "$$$\n"))
 
 (define (read-math-rev-word s)
-  (let loop ([s (cdr s)] [r (list (car s))])
+  (let loop ([s (rest s)] [r (list (first s))])
     (if (null? s) (values r s)
-        (let ([a (car s)])
-          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (cdr s) (cons a r))]
+        (let ([a (first s)])
+          (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (rest s) (cons a r))]
                 [else (values r s)])))))
 
 (define (make-ascii-math text)
   ; (printf "doing make-ascii-math ~s\n" text)
   (let ([ans (let loop ([s (string->list text)] [r '()])
             (cond [(null? s) (reverse r)]
-                  [else (let ([a (car s)] [s (cdr s)])
+                  [else (let ([a (first s)] [s (rest s)])
                           ; (printf "tackling ~s, ~s\n" a s)
                           (case a
                             [(#\\) (let-values ([(w s-rest) (read-math-rev-word s)])
@@ -113,7 +113,7 @@
 
 (define (coe-spans exp)
   (cond [(list? exp)
-         (let ([opr (car exp)] [opds (cdr exp)])
+         (let ([opr (first exp)] [opds (rest exp)])
            (string-append "<span class=\"expression\">\n"
              "<span class=\"lParen\">(</span>\n"
              "<span class=\"operator\">\n"
@@ -149,8 +149,8 @@
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
-         [page (car args)]
-         [link-text (if (> num-args 1) (cadr args) #f)]
+         [page (first args)]
+         [link-text (if (> num-args 1) (second args) #f)]
          [page-components (regexp-split #rx"/" page)]
          [local-dir ""]
          [local-file ""]
@@ -160,16 +160,16 @@
     (case (length page-components)
       [(1)
        (set! local-dir "pages")
-       (set! local-file (car page-components))
+       (set! local-file (first page-components))
        (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/pages"))]
       [(2)
-       (set! local-dir (car page-components))
-       (set! local-file (cadr page-components))
+       (set! local-dir (first page-components))
+       (set! local-file (second page-components))
        (set! fq-uri-dir (string-append *bootstrap-prefix* "/" *lesson* "/" local-dir))]
       [(3)
-       (set! local-dir (build-path 'up (car page-components) (cadr page-components)))
-       (set! local-file (caddr page-components))
-       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" (car page-components) "/" (cadr page-components)))]
+       (set! local-dir (build-path 'up (first page-components) (second page-components)))
+       (set! local-file (third page-components))
+       (set! fq-uri-dir (string-append *bootstrap-prefix* "/" (first page-components) "/" (second page-components)))]
       [else
         (printf "WARNING: Incorrect @~a ~a\n\n" directive page-components)
         ""])
@@ -198,8 +198,8 @@
 
 (define (external-link args directive)
   (let* ([num-args (length args)]
-         [link (car args)]
-         [link-text (if (> num-args 1) (cadr args) "")])
+         [link (first args)]
+         [link-text (if (> num-args 1) (second args) "")])
     (format "[~a](~a)" link-text link)))
 
 (define (starter-file-link lbl)
@@ -207,16 +207,16 @@
     (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
           [else
-            (let ([title (cadr c)]
-                  [p (assoc *proglang* (cddr c))])
+            (let ([title (second c)]
+                  [p (assoc *proglang* (rest (rest c)))])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
-                      (format "[~a](~a)" title (cadr p))]))])))
+                      (format "[~a](~a)" title (second p))]))])))
 
 (define read-group
-  (*make-read-group (lambda z (car z)) errmessage-file-context))
+  (*make-read-group (lambda z (first z)) errmessage-file-context))
 
 (define (preproc-slides-file in-file)
   (set! *in-file* in-file)
@@ -267,7 +267,7 @@
                        [(string=? directive "table")
                         (let* ([args (read-commaed-group i directive read-group)]
                                [n-args (length args)]
-                               [n (if (= n-args 0) 0 (or (string->number (car args)) 0))])
+                               [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
                           (when (>= n-args 2) (set! n 0))
                           (when (> n 0)
                             (let loop ([j n])
