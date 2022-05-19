@@ -163,7 +163,7 @@ Complete @printable-exercise{pages/more-than-one-way.adoc}.
 {layout="Synthesize"}
 # Composing Multiple Ways 
 
-There is a special function in Pyret that let's us test whether or not two images are equal.
+There is a special function in Pyret that lets us test whether or not two images are equal.
 
 `images-equal :: Image, Image -> Boolean`
 
