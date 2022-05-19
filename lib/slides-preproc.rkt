@@ -35,7 +35,7 @@
 (define (errmessage-file-context)
   *in-file*)
 
-(define (make-image img text width)
+(define (make-image img text [width #f])
   ; (printf "make-image ~s\n" img)
   (set! *num-images-processed* (+ *num-images-processed* 1))
   (unless (file-exists? img)
@@ -47,7 +47,8 @@
         (set! img img-anonymized))))
   (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
       (format "**-- INSERT IMAGE ~a HERE --**" img)
-      (format "![~a](~a){width=~a}" text img width)))
+      (format "![~a](~a)~a" text img
+              (if width (format "{width=~a}" width) ""))))
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
@@ -233,8 +234,9 @@
                  (cond [(string=? directive "") (display c o)]
                        [(string=? directive "@") (display c o)]
                        [(string=? directive "image")
-                        (let ([args (read-commaed-group i directive read-group)])
-                          (display (make-image (first args) (second args) (third args)) o))]
+                        (let* ([args (read-commaed-group i directive read-group)]
+                               [n (length args)])
+                          (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
                        [(member directive '("printable-exercise" "opt-printable-exercise"))
                         (let ([args (read-commaed-group i directive read-group)])
                           (display (fully-qualify-link args directive) o))]
