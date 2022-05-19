@@ -88,13 +88,13 @@ _Because people wearing a tshirt were told to do two conflicting things! And peo
 {layout="Investigate"}
 # Intro to Piecewise Functions
 
-Work with your partner to think of real-world examples of piecewise functions.
+Work with your partner to think of real-world examples of piecewise functions.{style="font-size:16pt"}
 
-_Here are a few examples to get you started:_
+_Here are a few examples to get you started:_{style="font-size:16pt"}
 
-* Places like movie theaters and museums often have different ticket prices for students, children, and senior citizens. That means the total price can't be determined simply by asking how many tickets there are -- the price-per-person is conditioned on what kind of ticket is being purchased!
+* Places like movie theaters and museums often have different ticket prices for students, children, and senior citizens. That means the total price can't be determined simply by asking how many tickets there are -- the price-per-person is conditioned on what kind of ticket is being purchased!{style="font-size:16pt"}
 
-* The US Postal Service charges a different rate for differently-sized letters and packages. That means the total price can't be determined just by asking how many things are being mailed -- the price is conditioned on what kind of things are shipped!
+* The US Postal Service charges a different rate for differently-sized letters and packages. That means the total price can't be determined just by asking how many things are being mailed -- the price is conditioned on what kind of things are shipped!{style="font-size:16pt"}
 
 <!-- Many phone plans include a certain price-per-gigabyte for data, but only up to a maximum cutoff amout. After that, the price-per-gigabyte gets a lot higher. That means we can't calculate the cost simply by knowing how many gigabytes there are -- the cost is conditioned on what the cutoff is!
 -->
@@ -179,14 +179,14 @@ _The examples are also pretty similar: we write the name of the function, follow
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-* Circle and label everything that is *change*able on @printable-exercise{redshape-dr.adoc}.
-* What changes? What did you label?
+* Circle and label everything that is *change*able on @printable-exercise{redshape-dr.adoc}.{style="font-size:16pt"}
+* What changes? What did you label?{style="font-size:16pt"}
 
-If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
+If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.{style="font-size:16pt"}
 
-In this case, there are more things to circle-and-label in the examples than there are things in our Domain. Think back to our examples of piecewise functions (ticket sales, postage, cell-phone data plans, etc): knowing the input isn't enough - we also need to know the conditions!
+In this case, there are more things to circle-and-label in the examples than there are things in our Domain. Think back to our examples of piecewise functions (ticket sales, postage, cell-phone data plans, etc): knowing the input isn't enough - we also need to know the conditions!{style="font-size:16pt"}
 
-_Your teacher may also have you work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._
+_Your teacher may also have you work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:16pt"}
 
 <!--
 Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function was _always_ equal to the number of labels in the example step, which was _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions. When it doesn't hold, that's how we _know_ we need a piecewise function!
@@ -196,7 +196,7 @@ Up until now, there's been a pattern that students may not have noticed: the num
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-*In this example, we have four patterns:*
+In this example, we have four patterns:
 
 - sometimes we produce `(circle 20 "solid" "red")`
 - sometimes we produce `(triangle 20 "solid" "red")`
@@ -208,24 +208,19 @@ Up until now, there's been a pattern that students may not have noticed: the num
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-*To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").*
+To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").
 
-* When should we make circles?
-** When `shape == "circle"`
-* When should we make triangles?
-** When `shape == "triangle"`
-* When should we make rectangles?
-** When `shape == "rectangle"`
-* When should we make stars?
-** When `shape == "star"`
-* When should we draw the "Unknown shape name" text?
-** When `shape` is....anything `else`
+* When should we make circles? When `shape == "circle"`
+* When should we make triangles? When `shape == "triangle"`
+* When should we make rectangles? When `shape == "rectangle"`
+* When should we make stars? When `shape == "star"`
+* When should we draw the "Unknown shape name" text? When `shape` is....anything `else`
 
 ---
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-*Adding the questions to our pattern gives us:*
+Adding the questions to our pattern gives us:
 
 - When `shape == "circle"`...we produce `(circle 20 "solid" "red")`
 - When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`
@@ -237,17 +232,9 @@ Up until now, there's been a pattern that students may not have noticed: the num
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-*This practically gives away the body of our function definition!*
+This practically gives away the body of our function definition!
 
-@show{
-(code '(define (cost item)
-  (cond
-    [(string=? shape "circle")     (circle 20 "solid" "red")]
-    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
-    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
-    [(string=? shape "star")       (star 20 "solid" "red")]
-	[else (text "Unknown shape name!" 20 "red")])))
-}
+@image{images/cost-code.png, "a"}{width="700"}
 
 ---
 {layout="Synthesize"}
@@ -263,6 +250,7 @@ Up until now, there's been a pattern that students may not have noticed: the num
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Practice
 
 * @opt-starter-file{alices-restaurant}
