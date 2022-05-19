@@ -3,14 +3,14 @@
 # Simple Data Types
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Numbers & Strings 
 
-When programming in this class, you'll be working together using the Driver/Navigator model. 
+When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
 
-Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. 
+Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. {style="font-size:16pt"} 
 
-If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
 
 @image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
 
@@ -36,14 +36,14 @@ Click "Open Editor".
 }
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Numbers & Strings
 
-The @vocab{Editor} looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+The @vocab{Editor} looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.{style="font-size:17pt"} 
 
-The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. 
+The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions.{style="font-size:16pt"}  
 
-For now, we will only be writing programs in the *Interactions Area*.
+For now, we will only be writing programs in the *Interactions Area*.{style="font-size:16pt"} 
 
 @image{images/editor.png, a}
 
@@ -51,15 +51,15 @@ For now, we will only be writing programs in the *Interactions Area*.
 {layout="Investigate"}
 # Numbers & Strings
 
-Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).
+Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:15pt"} 
 
-Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.
+Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.{style="font-size:15pt"} 
 
-Languages also have rules for *grammar*. The order of the words matters!
+Languages also have rules for *grammar*. The order of the words matters!{style="font-size:15pt"} 
 
-Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.
+Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.{style="font-size:15pt"} 
 
-Complete @printable-exercise{numbers-n-strings.adoc}. Pay special attention to the error messages!
+Complete @printable-exercise{numbers-n-strings.adoc}. Pay special attention to the error messages!{style="font-size:15pt"} 
 
 ---
 {layout="Investigate"}
@@ -79,16 +79,16 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 {layout="Synthesize"}
 # Numbers & Strings
 
-We have learned that in our programming language:
+We have learned that in our programming language:{style="font-size:16pt"} 
 
-- Numbers and Strings evaluate to themselves.
-- Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
-- Anything in quotes is a String, even something like `"42"`.
-- Strings _must_ have quotation marks on both sides.
-- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.
-- In pyret, the @vocab{operators} work just like they do in math.
-- Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.
-- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
+- Numbers and Strings evaluate to themselves.{style="font-size:16pt"} 
+- Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!{style="font-size:16pt"} 
+- Anything in quotes is a String, even something like `"42"`.{style="font-size:16pt"} 
+- Strings _must_ have quotation marks on both sides.{style="font-size:16pt"} 
+- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:16pt"} 
+- In pyret, the @vocab{operators} work just like they do in math.{style="font-size:16pt"} 
+- Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:16pt"} 
+- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:16pt"} 
 
 
 ---
@@ -108,17 +108,17 @@ Error messages are a way for Pyret to explain what went wrong, and are a really 
 What's the answer: is 3 greater than 10?
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Booleans
 
-Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
+Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!{style="font-size:15pt"} 
 
-For example, some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.  
+For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
 
 @image{images/roller-coaster.png, a}
 
 --- 
-{layout="Launch"}
+{layout="LaunchR"}
 # Booleans
 
 Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.

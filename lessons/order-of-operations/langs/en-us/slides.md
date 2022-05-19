@@ -12,12 +12,12 @@ If you were to write instructions for getting ready for school, it would matter 
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Order of Operations
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
-@image{images/pemdas.png, "a", 300, ""}
+@image{images/pemdas.png, "pmedas pyramid", 300, ""}
 
 ---
 {layout="Launch"}
@@ -28,26 +28,20 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Order of Operations
 
-*Circles of Evaluation* allow us to draw the structure of mathematics. The rules are simple:
+*Circles of Evaluation* allow us to draw the structure of mathematics. The rules are simple:{style="font-size:15pt"}
 
-Rule #1: Every Circle must have one - and only one! - function, written at the top.
+Rule #1: Every Circle must have one - and only one! - function, written at the top.{style="font-size:15pt"}
 
-That means that Numbers are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we draw a Circle.
+That means that Numbers are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we draw a Circle.{style="font-size:15pt"}
 
-@image{images/coe1.png, a}
+Rule #2: The inputs to the function are written left-to-right, in the middle of the Circle.{style="font-size:15pt"}
 
----
-{layout="Launch"}
-# Order of Operations
+If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.{style="font-size:15pt"}
 
-Rule #2: The inputs to the function are written left-to-right, in the middle of the Circle.
-
-If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
-
-@image{images/coe1.png, a}
+@image{images/coe1.png, "circle of evaluation for 6 / 3"}
 
 ---
 {layout="Launch"}
@@ -98,7 +92,7 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 @image{images/coe4.png, a}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Order of Operations
 
 Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. (Ignore the code column for now! We will come back to it later.)
@@ -108,8 +102,9 @@ Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-
 # Order of Operations
 
 For more practice with this, turn to:
-@printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc}
-@online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
+- @printable-exercise{pages/complete-coe-from-arith.adoc}
+- @printable-exercise{pages/match-arith-coe.adoc}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
 
 ---
 {layout="Investigate"}
@@ -126,26 +121,18 @@ It is always better to at least start with the parentheses before taking them ou
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-Expression: @show{(math '(+ 3 8)) }
+@image{images/coe-set1.png, a}
 
-Circle of Evaluation: @image{images/coe7.png, a}
-
-Code: @show{(code '(+ 3 8)) }
 
 ---
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-Expression: @show{(math '(* 2 (+ 3 8))) }
-
-Circle of Evaluation: @image{images/coe8.png, a}
-
-Code: @show{(code '(* 2 (+ 3 8))) }
+@image{images/coe-set2.png, a}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
-
 
 What would the code look like for this circle?
 
@@ -156,7 +143,7 @@ What would the code look like for this circle?
 -->
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 
@@ -168,7 +155,7 @@ What would the code look like for this circle?
 -->
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 What would the code look like for this circle?
@@ -227,7 +214,7 @@ What did you learn from Circles of Evaluation?
 - Test each line of code you wrote by typing them into the Interactions Area. Use the error messages to edit your code to get it working.
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Testing out your Code
 
 Look at the two Circles of Evaluation below. One of them is familiar, but the other is very different!
@@ -237,23 +224,23 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
 
-@image{images/coe11.png, a}
-@image{images/coe12.png, a}
+@image{images/coe-pair.png, a}
 
 <!--
 	Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
 -->
 
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Testing out your Code
-
-@image{images/coe13.png, a}
 
 Here is another circle to explore.
 
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
+
+@image{images/coe13.png, a}
+
 
 ---
 {layout="Supplemental"}
