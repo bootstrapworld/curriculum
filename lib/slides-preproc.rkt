@@ -11,7 +11,7 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-(define *use-mathjax-for-math?* #f)
+(define *use-mathjax-for-math?* #t)
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed* #f)
@@ -81,6 +81,10 @@
                                             (loop s-rest (cons #\÷ r))]
                                            [(equal? w '(#\s #\e #\m #\i #\t))
                                             (loop s-rest (cons #\× r))]
+                                           [(equal? w '(#\t #\g))
+                                            (loop s-rest (cons #\> r))]
+                                           [(equal? w '(#\e #\l))
+                                            (loop s-rest (cons #\≤ r))]
                                            [else (loop s-rest (append w r))]))]
                             [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
                                      (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
