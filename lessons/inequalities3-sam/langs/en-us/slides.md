@@ -3,6 +3,7 @@
 # Sam the Butterfly - Applying Inequalities
 
 ---
+{layout="Launch"}
 # Introducing Sam 
 
 Open the @starter-file{inequalities-sam} and click "Save A Copy."
@@ -17,11 +18,13 @@ Turn to @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click run an
 -->
 
 ---
+{layout="Launch"}
 # Introducing Sam 
 
 There are three functions defined in @starter-file{inequalities-sam}. What are they?
 
 ---
+{layout="Launch"}
 # Introducing Sam 
 
 - What should @ifproglang{pyret}{`is-safe-left`} @ifproglang{wescheme}{`safe-left?`} do?
@@ -31,6 +34,7 @@ There are three functions defined in @starter-file{inequalities-sam}. What are t
 - What should @ifproglang{pyret}{`is-onscreen`} @ifproglang{wescheme}{`onscreen?`} do?
 
 ---
+{layout="Investigate"}
 # Introducing Sam 
 With your partners, complete @printable-exercise{pages/left-and-right.adoc}.  
 
@@ -51,13 +55,10 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 -->
 
 ---
+{layout="Launch"}
 # Protecting Sam on Both Sides
 
-@table{2}
-| Sam is safe on the left when... 	| Sam is safe on the right when...
-| @show{ (code '(> x -50))}	 		| @show{ (code '(< x 690))}
-| @image{images/masks.png,a}	 	| @image{images/masks.png,a}
-| @show{(code '(safe-left?))} 		| @show{(code '(safe-right?))}
+@image{images/sam-slide.png, "a"}{width="700"}
 
 <!--
 Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. Give them 1 minute to read the contract and code, as written in the program.
@@ -128,15 +129,19 @@ Have students complete @printable-exercise{pages/onscreen.adoc}. When this funct
 -->
 
 ---
+{layout="Investigate"}
 # Protecting Sam on Both Sides
-
-@image{images/onscreen.png,a}
-
-{.column}
 
 What does is-onscreen check for?  What should it check for?
 
+
+
+@image{images/onscreen.png,a}{width="500"}
+
+
+
 ---
+{layout="Investigate"}
 # Protecting Sam on Both Sides
 
 Complete @printable-exercise{pages/onscreen.adoc}. 
@@ -149,6 +154,7 @@ What if we wanted to keep Sam safe on the top and bottom edges of the screen as 
 -->
 
 ---
+{layout="Launch"}
 # Boundary Detection in the Game 
 
 Open your in-progress game file and press Run.
@@ -162,6 +168,7 @@ Open your in-progress game file and press Run.
 - How can we make the computer understand when an image has moved off the screen? 
 
 ---
+{layout="Investigate"}
 # Boundary Detection in the Game 
 
 @ifproglang{wescheme}{
@@ -180,6 +187,7 @@ Common Misconceptions:
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 - @opt-printable-exercise{pages/onscreen-discussion.adoc}

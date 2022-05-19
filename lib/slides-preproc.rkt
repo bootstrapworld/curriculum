@@ -228,74 +228,88 @@
   (let ([out-file (path-replace-extension in-file ".mkd")])
 
     (define (expand-directives i o)
-      (let loop ()
-        (let ([c (read-char i)])
-          (unless (eof-object? c)
-            (cond
-              [(char=? c #\@)
-               (let ([directive (read-word i)])
-                 ; (printf "directive is ~s\n" directive)
-                 (cond [(string=? directive "") (display c o)]
-                       [(string=? directive "@") (display c o)]
-                       [(string=? directive "image")
-                        (let* ([args (read-commaed-group i directive read-group)]
-                               [n (length args)])
-                          (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
-                       [(member directive '("printable-exercise" "opt-printable-exercise"))
-                        (let ([args (read-commaed-group i directive read-group)])
-                          (display (fully-qualify-link args directive) o))]
-                       [(member directive '("link" "online-exercise" "opt-online-exercise" "ext-exercise-link"))
-                        (let ([args (read-commaed-group i directive read-group)])
-                        (display (external-link args directive) o)) ]
-                       [(member directive '("starter-file" "opt-starter-file"))
-                        (let ([lbl (read-group i directive)])
-                          (display (starter-file-link lbl) o))]
-                       [(string=? directive "ifproglang")
-                        (let* ([proglang (read-group i directive)]
-                               [fragment (read-group i directive #:multiline? #t)])
-                          ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
-                          (when (string-ci=? proglang *proglang*)
-                            (call-with-input-string fragment
-                              (lambda (i)
-                                (expand-directives i o)))))]
-                       [(string=? directive "math")
-                        (let ([text (read-group i directive)])
-                          (display (make-math text) o))]
-                       [(string=? directive "smath")
-                        (let* ([text (read-group i directive #:scheme? #t)]
-                               [exprs (string-to-form (format "(math '~a)" text))])
-                          (for ([s exprs])
-                            (display (massage-arg s) o)))]
-                       [(string=? directive "show")
-                        (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                          (for ([s exprs])
-                            (display (massage-arg s) o)))]
-                       [(string=? directive "table")
-                        (let* ([args (read-commaed-group i directive read-group)]
-                               [n-args (length args)]
-                               [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
-                          (when (>= n-args 2) (set! n 0))
-                          (when (> n 0)
-                            (let loop ([j n])
-                              (unless (<= j 0)
-                                (display (if (= j n) "|DELETE THIS ROW" "|_") o)
-                                (loop (- j 1))))
-                            (newline o)
-                            (let loop ([j n])
-                              (unless (<= j 0)
-                                (display "|---" o)
-                                (loop (- j 1))))))]
-                       [(string=? directive "vocab")
-                        (let ([arg (read-group i directive)])
-                          (display "<b><i>" o)
-                          (display arg o)
-                          (display "</i></b>" o))]
-                       [(string=? directive "scrub")
-                        (read-group i directive)]
-                       [else (display c o) (display directive o)]))]
-              [else
-                (display c o)])
-            (loop)))))
+      (let ([table-header-newlines #f]
+            [num-table-columns 0]
+            )
+        (let loop ()
+          (let ([c (read-char i)])
+            (unless (eof-object? c)
+              (cond
+                [(and table-header-newlines (char=? c #\newline))
+                 (set! table-header-newlines (- table-header-newlines 1))
+                 (when (= table-header-newlines 0)
+                   (set! table-header-newlines #f)
+                   (newline o)
+                   (let loop ([j num-table-columns])
+                     (unless (<= j 0)
+                       (display "|---" o)
+                       (loop (- j 1)))))
+                 (newline o)]
+                [(char=? c #\@)
+                 (let ([directive (read-word i)])
+                   ; (printf "directive is ~s\n" directive)
+                   (cond [(string=? directive "") (display c o)]
+                         [(string=? directive "@") (display c o)]
+                         [(string=? directive "image")
+                          (let* ([args (read-commaed-group i directive read-group)]
+                                 [n (length args)])
+                            (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
+                         [(member directive '("printable-exercise" "opt-printable-exercise"))
+                          (let ([args (read-commaed-group i directive read-group)])
+                            (display (fully-qualify-link args directive) o))]
+                         [(member directive '("link" "online-exercise" "opt-online-exercise" "ext-exercise-link"))
+                          (let ([args (read-commaed-group i directive read-group)])
+                            (display (external-link args directive) o)) ]
+                         [(member directive '("starter-file" "opt-starter-file"))
+                          (let ([lbl (read-group i directive)])
+                            (display (starter-file-link lbl) o))]
+                         [(string=? directive "ifproglang")
+                          (let* ([proglang (read-group i directive)]
+                                 [fragment (read-group i directive #:multiline? #t)])
+                            ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
+                            (when (string-ci=? proglang *proglang*)
+                              (call-with-input-string fragment
+                                (lambda (i)
+                                  (expand-directives i o)))))]
+                         [(string=? directive "math")
+                          (let ([text (read-group i directive)])
+                            (display (make-math text) o))]
+                         [(string=? directive "smath")
+                          (let* ([text (read-group i directive #:scheme? #t)]
+                                 [exprs (string-to-form (format "(math '~a)" text))])
+                            (for ([s exprs])
+                              (display (massage-arg s) o)))]
+                         [(string=? directive "show")
+                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                            (for ([s exprs])
+                              (display (massage-arg s) o)))]
+                         [(string=? directive "table")
+                          (let* ([args (read-commaed-group i directive read-group)]
+                                 [n-args (length args)]
+                                 [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
+                            (cond [(>= n-args 2)
+                                   (set! table-header-newlines 2)
+                                   (set! num-table-columns n)]
+                                  [else (let loop ([j n])
+                                          (unless (<= j 0)
+                                            (display (if (= j n) "|DELETE THIS ROW" "|_") o)
+                                            (loop (- j 1))))
+                                        (newline o)
+                                        (let loop ([j n])
+                                          (unless (<= j 0)
+                                            (display "|---" o)
+                                            (loop (- j 1))))]))]
+                         [(string=? directive "vocab")
+                          (let ([arg (read-group i directive)])
+                            (display "<b><i>" o)
+                            (display arg o)
+                            (display "</i></b>" o))]
+                         [(string=? directive "scrub")
+                          (read-group i directive)]
+                         [else (display c o) (display directive o)]))]
+                [else
+                  (display c o)])
+              (loop))))))
 
     (call-with-input-file in-file
       (lambda (i)

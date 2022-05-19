@@ -19,14 +19,11 @@ You may remember functions from algebra: @math{f(x) = x + 4}.
 
 @vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
 
-
 ---
 {layout="Launch"}
 # Applying Functions
 
-Log into
-@ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)}}
-@ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}, open the editor and press "Run" to load the image library. 
+Log into @starter-file{editor} open the editor and press "Run" to load the image library. 
 
 Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
 
