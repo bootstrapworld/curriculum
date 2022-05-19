@@ -11,7 +11,7 @@
 * One example of a _relationship_ we can find in this situation is that every glass sold incurs *costs*... Sally will need lemons, sugar, powdered drink mix, cups, and water.
 * What other relationships can you find here?
 
-@image{images/LemonadeStand.png, "Lemonade Stand Ideas including: charge $1.75, ask mom about cups, new bike = $198, how much lemonade? sugar? lemons? powdered drink mix?", 1000}
+@image{images/LemonadeStand.png, "Lemonade Stand Ideas including: charge $1.75, ask mom about cups, new bike = $198, how much lemonade? sugar? lemons? powdered drink mix?"}
 
 <!--
 - Every glass sold brings in $1.75 in *revenue*
