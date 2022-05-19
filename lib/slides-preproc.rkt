@@ -11,7 +11,7 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-(define *use-mathjax-for-math?* #t)
+(define *use-mathjax-for-math?* #f)
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed* #f)
