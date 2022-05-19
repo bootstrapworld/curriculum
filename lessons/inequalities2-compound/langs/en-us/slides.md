@@ -75,7 +75,7 @@ Open @starter-file{inequalities-compound}, read the code carefully and click run
 This starter file includes two special functions.
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 `and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
@@ -86,10 +86,10 @@ This starter file includes two special functions.
 
 @show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
-@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}
+@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}{style="width:550pt"}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @show{ (code '(define (lt5 x) (< x 5))) }
@@ -100,10 +100,10 @@ This starter file includes two special functions.
 
 _Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
 
-@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}
+@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}{style="width:550pt"}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 `or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
@@ -114,10 +114,10 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 @show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
-@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}
+@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}{style="width:550pt"}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @show{ (code '(define (gt5 x) (> x 5))) }
@@ -128,7 +128,7 @@ _Note: Some pairs of inequalities do not intersect at all and therefore have *no
 
 _Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
 
-@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}
+@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
 
 ---
 {layout="Investigate"}
