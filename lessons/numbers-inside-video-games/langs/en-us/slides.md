@@ -36,14 +36,14 @@ Common Misconceptions:
 {layout="Synthesize"}
 # Reverse Engineering a Video Game
 
-While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.
+While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.{style="font-size:16pt"}
 
-- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?
-- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?
-- How many numbers would we need if the dog could also move up and down?
-- How many numbers would we need to have a two-player game?
-- How many numbers would we need if the entire game was in 3d?
-- How many numbers would we need to make a modern game?
+- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:16pt"}
+- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:16pt"}
+- How many numbers would we need if the dog could also move up and down?{style="font-size:16pt"}
+- How many numbers would we need to have a two-player game?{style="font-size:16pt"}
+- How many numbers would we need if the entire game was in 3d?{style="font-size:16pt"}
+- How many numbers would we need to make a modern game?{style="font-size:16pt"}
 
 ---
 {layout="Launch"}
