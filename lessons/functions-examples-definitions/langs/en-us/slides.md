@@ -11,11 +11,10 @@ Open the @starter-file{bc}. You'll see the Contract, some Examples and the Funct
 What do you notice? What do you wonder?
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Three Representations of a Function
 
 - Every function has a contract.
-@image{images/gt-contract.png, "a"}
 
 - We can write examples illustrating how a function should work to help us identify the pattern.
 

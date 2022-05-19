@@ -89,7 +89,7 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
-@image{images/coe4.png, a}
+@image{images/coe4.png, a}{width="250"}	
 
 ---
 {layout="InvestigateC"}
@@ -121,46 +121,46 @@ It is always better to at least start with the parentheses before taking them ou
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set1.png, a}
+@image{images/coe-set1.png, a}{width="700"}
 
 
 ---
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set2.png, a}
+@image{images/coe-set2.png, a}{width="700"}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 What would the code look like for this circle?
 
-@image{images/coe7.png, a}			
+@image{images/coe7.png, a}{width="200"}			
 
 
 <!-- 3 + 8
 -->
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 
 What would the code look like for this circle?
 
- @image{images/coe8.png, a}
+ @image{images/coe8.png, a}{width="200"}	
 
 <!-- 2 * ( 3 + 8 )
 -->
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # From Circles of Evaluation to Code
 
 What would the code look like for this circle?
 
-@image{images/coe9.png, a}		
+@image{images/coe9.png, a}{width="200"}			
 
 <!-- 6 + (1 + 2) 
 -->
@@ -172,7 +172,7 @@ What would the code look like for this circle?
 
 What would the code look like for this circle?
 
-@image{images/coe10.png, a}
+@image{images/coe10.png, a}{width="200"}		
 
 <!-- (10 - 5) * 6
 -->
