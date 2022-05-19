@@ -80,14 +80,14 @@ Click Run to see the simulation start running on your computer.
 {layout="Launch"}
 # Rocket Height! 
 
-It would be nice to get a warning when a function doesn't work right! Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.
+It would be nice to get a warning when a function doesn't work right! Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
-* Type @show{(code '(rocket-height 0))} into the interactions area.
-* As the program is currently written, what happens when we give the `rocket-height` function an input of 0? 
-* Is that what we want it to do? 
-* As the program is currently written, what happens when we give the `rocket-height` function an input of 10? 
-* Is that what we want it to do?
-* Why did the examples pass? 
+* Type @show{(code '(rocket-height 0))} into the interactions area.{style="font-size:17pt"}
+* As the program is currently written, what happens when we give the `rocket-height` function an input of 0? {style="font-size:17pt"}
+* Is that what we want it to do? {style="font-size:17pt"}
+* As the program is currently written, what happens when we give the `rocket-height` function an input of 10?{style="font-size:17pt"} 
+* Is that what we want it to do?{style="font-size:17pt"}
+* Why did the examples pass? {style="font-size:17pt"}
 
 <!--
 We should always test a function definition against at least 2 examples!
@@ -109,13 +109,13 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 {layout="Investigate"}
 # Rocket Height! 
 
-Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own. When it's working correctly, explore the other functions in the file.
+Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own. When it's working correctly, explore the other functions in the file.{style="font-size:16pt"}
 
-Here are some suggestions to guide you:
-- Remove the comment from before the `(start rocket-height)` and test the program.
-- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.
-- Try out `(space rocket-height)`
-- Try out `(everything rocket-height)`
+Here are some suggestions to guide you:{style="font-size:16pt"}
+- Remove the comment from before the `(start rocket-height)` and test the program.{style="font-size:16pt"}
+- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.{style="font-size:16pt"}
+- Try out `(space rocket-height)`{style="font-size:16pt"}
+- Try out `(everything rocket-height)`{style="font-size:16pt"}
 
 ---
 {layout="Synthesize"}
