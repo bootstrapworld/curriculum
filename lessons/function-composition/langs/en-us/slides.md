@@ -47,7 +47,7 @@ Three of the function cards we just used were for the functions `f`, `g` and `h`
 We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Diagramming Function Composition
 
 We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
@@ -55,7 +55,7 @@ We can diagram the function composition using Circles of Evaluation (see first c
 @image{images/fghx.png, a}
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 
 # Diagramming Function Composition
 The circles show us that in order to evaluate @math{f(g(h(4))))}
