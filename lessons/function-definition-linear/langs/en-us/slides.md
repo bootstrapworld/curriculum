@@ -124,7 +124,7 @@ If we can figure out the relationship between a small sample of data, we can __m
 When we talk about functions, it's helpful to be able to switch between representations, and see the connections between them.
 
 ---
-{layout="Synthesize"}
+{layout="Supplemental"}
 # Defining Linear Functions
 
 Additional Exercises

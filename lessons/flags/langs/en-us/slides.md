@@ -136,6 +136,7 @@ Which flags were the easiest to make? The hardest?
 Why is it useful to define each part of the flag first, before stitching the images together?
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 - @opt-starter-file{flags-pr} This starter file provide students with an image of a flag and code that starts out generating a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
