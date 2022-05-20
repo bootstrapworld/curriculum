@@ -199,11 +199,11 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ZduhqzWFbx")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
+   ("pyret" "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl")
    ("wescheme" "https://www.wescheme.org/view?publicId=QweXHnMPxg")
    )
   ("sample-game-w-distance" "Sample Game with Distance Lines Made Visible"
-   ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
+   ("pyret" "https://code.pyret.org/editor#share=1R8uAFAeYRy5L6FydesOBLHQHFtQEGxGV")
    ("wescheme" "https://www.wescheme.org/view?publicId=QgT6PtTZ2v")
    )
   ("sample-game-2d" "Sample Game with 2D Motion"
