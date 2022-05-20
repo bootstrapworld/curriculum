@@ -67,6 +67,7 @@ Identify the contract, and interpret what the function is currently doing.
 Let's complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc} together.
 
 ---
+{layout="InvestigateDN"}
 # Animation
 
 Copy the code for `update-danger` into your starter file and click Run.{style="font-size:15pt"}
@@ -78,3 +79,13 @@ Click Run to see `DANGER` and `TARGET` move across the screen independently!{sty
 Once you have successfully gotten `update-target` and `update-danger` working, you can change the functions to make the characters move in whichever direction and whatever speed you want!  {style="font-size:15pt"}
 
 Be sure to modify your purpose statements and examples if you change your functions.{style="font-size:15pt"}
+
+---
+{layout="Synthesize"}
+
+# Synthesize
+Connecting the code to the underlying math is important - especially if you want to customize your game!
+
+- What part of the function controls the character's _speed?_
+- What part of the function controls the character's _direction?_
+- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the Domain? What about the Range?
