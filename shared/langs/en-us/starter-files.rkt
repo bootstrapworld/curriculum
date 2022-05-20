@@ -200,12 +200,16 @@
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=PJMfrSvGRl")
+   ("wescheme" "https://www.wescheme.org/view?publicId=QweXHnMPxg")
    )
   ("sample-game-w-distance" "Sample Game with Distance Lines Made Visible"
-   ("pyret" "https://code.pyret.org/editor#share=1y1eWn1YyDDqilj0MFqEpMy4egVh-G81W")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=0bCivugY3P")
+   ("pyret" "https://code.pyret.org/editor#share=1g_3AqB4v6Jtq6TzcIHYNTkvlW9B6dLHS")
+   ("wescheme" "https://www.wescheme.org/view?publicId=QgT6PtTZ2v")
    )
+  ("sample-game-2d" "Sample Game with 2D Motion"
+   ("pyret" "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW")
+   ("wescheme" "https://www.wescheme.org/view?publicId=QweXHnMPxg")
+  )
   ("inequalities-simple" "Simple Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Nfd30NVNwPzDu0C02dsCbmKecbMVfcQV")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ")
