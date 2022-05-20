@@ -3,7 +3,7 @@
 # Simple Inequalities
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Introducing Booleans 
 
 Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
@@ -13,7 +13,7 @@ Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log i
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Introducing Booleans 
 
 You've never seen Circles of Evaluation like these before... but you can probably convert them to code!
@@ -96,19 +96,19 @@ Inequality expressions divide all of the numbers in the universe into two catego
 * What do you Wonder?
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Introducing Inequalities
 
-This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.{style="font-size:14pt"}
+This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.{style="font-size:13pt"}
 
-The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).{style="font-size:14pt"}
+The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).{style="font-size:13pt"}
 
-The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:14pt"}
+The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:13pt"}
 
 @image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}{width="550"}
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Introducing Inequalities
 
 If your list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and you will get an error message encouraging you to adjust their list.
