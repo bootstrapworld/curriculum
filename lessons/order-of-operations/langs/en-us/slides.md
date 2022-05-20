@@ -23,7 +23,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 {layout="Launch"}
 # Order of Operations
 
-@math{6 \div 2(1 + 2)}
+@math{6 \div 2(1 + 2)}{font-size:36pt}
 
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 

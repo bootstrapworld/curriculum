@@ -38,12 +38,12 @@ Common Misconceptions:
 
 While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.{style="font-size:16pt"}
 
-- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:16pt"}
-- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:16pt"}
-- How many numbers would we need if the dog could also move up and down?{style="font-size:16pt"}
-- How many numbers would we need to have a two-player game?{style="font-size:16pt"}
-- How many numbers would we need if the entire game was in 3d?{style="font-size:16pt"}
-- How many numbers would we need to make a modern game?{style="font-size:16pt"}
+- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:14pt"}
+- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:14pt"}
+- How many numbers would we need if the dog could also move up and down?{style="font-size:14pt"}
+- How many numbers would we need to have a two-player game?{style="font-size:14pt"}
+- How many numbers would we need if the entire game was in 3d?{style="font-size:14pt"}
+- How many numbers would we need to make a modern game?{style="font-size:14pt"}
 
 ---
 {layout="Launch"}
@@ -71,7 +71,7 @@ Let's focus on one of the games we just brainstormed.
 {layout="Investigate"}
 # Connecting to Real Games 
 
-@table{4}
+@table{4,header}
 | Title								| Time		| Team Size 	| Budget
 | Call of Duty: Modern Warfare 2	| 2 years	| 500+			| 50m+
 | Final Fantasy VII					| 3 years	| 100+			| 40-45m
