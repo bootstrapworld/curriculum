@@ -8,8 +8,9 @@
 
 You may remember that there are two strategies for decomposing problems:
 
-. *Top-Down:* Describe the problem at a high level, then fill in the details later
-. *Bottom-Up:* Focus on the smaller parts that you're sure of, then build them together to get the big picture
+- *Top-Down:* Describe the problem at a high level, then fill in the details later
+
+- *Bottom-Up:* Focus on the smaller parts that you're sure of, then build them together to get the big picture
 
 ---
 {layout="Investigate"}
@@ -27,6 +28,7 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 
 - Which strategy did you use?
 - Did anyone start out with one, and then switch to another?
+- Which was easier for you?
 
 ---
 {layout="Launch"}
@@ -35,6 +37,8 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 Knowing how far apart our characters are is a good first step... but we still need the computer to be asking: "True or False: is there a collision?"
 
 Turn to @printable-exercise{pages/collision.adoc} and write a function that takes in two coordinate pairs (four numbers) of the `PLAYER` and a character (`(px, py)` and `(cx, cy)`), and returns `true` if they are within 50 @vocab{pixels} of each other.
+
+Fix the `is-collision` function in your game file, and click Run!
 
 ---
 {layout="Synthesize"}
@@ -48,6 +52,7 @@ We wrote the `distance` function first, and then  @show{(code 'collision?)}. Is 
 -->
 
 ---
+{layout="Supplemental"}
 # Additional Exercises
 
 If you've already worked with flags, @opt-starter-file{flags-trinidad}
