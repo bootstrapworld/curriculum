@@ -1044,7 +1044,7 @@
         (for ([page lesson-notes-pages])
           (unless notes-title-done?
             (set! notes-title-done? #t)
-            (fprintf o "\n\n- *Notes*\n\n"))
+            (fprintf o "\n\n- *All Lesson Notes*\n\n"))
           (set! page (regexp-replace ".adoc$" page ""))
           (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
                 [link-text page])
