@@ -67,6 +67,7 @@ Identify the contract, and interpret what the function is currently doing.
 Let's complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc} together.
 
 ---
+{layout="Investigate"}
 # Animation
 
 Copy the code for `update-danger` into your starter file and click Run.{style="font-size:15pt"}
