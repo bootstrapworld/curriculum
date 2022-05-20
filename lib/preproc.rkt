@@ -217,8 +217,6 @@
             [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
-
-
 (define (assoc-glossary term L)
   ; (printf "doing assoc-glossary ~s ~n" term)
   (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
@@ -369,7 +367,6 @@
     (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
     (for ([i section-level])
       (display #\= o))))
-
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
@@ -1038,6 +1035,23 @@
                            (call-with-input-file proj-desc port->string))
                          ""))))))))
 
+(define (link-to-notes-pages o)
+  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))]
+        [notes-title-done? #f])
+    (for ([lesson lessons])
+      (let ([lesson-notes-pages (read-data-file
+                                  (format "lessons/~a/pages/.cached/.workbook-notes-pages-ls.txt.kp" lesson))])
+        (for ([page lesson-notes-pages])
+          (unless notes-title-done?
+            (set! notes-title-done? #t)
+            (fprintf o "\n\n- *Notes*\n\n"))
+          (set! page (regexp-replace ".adoc$" page ""))
+          (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
+                [link-text page])
+            (when (file-exists? title-file)
+              (set! link-text (call-with-input-file title-file read-line)))
+            (fprintf o "+\n*link:../../../lessons/~a/pages/~a.html[~a]*\n" lesson page link-text)))))))
+
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
   ;
@@ -1466,16 +1480,16 @@
                               (cond [(< (length args) 2)
                                      (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
                                     [else
-                                      (display (make-image (first args) (second args) 
-                                                           (rest (rest args))) 
+                                      (display (make-image (first args) (second args)
+                                                           (rest (rest args)))
                                                o)]))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
                               (cond [(< (length args) 2)
                                      (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
                                     [else
-                                      (display (make-image (first args) (second args) 
-                                                           (rest (rest args)) #:centered? #t) 
+                                      (display (make-image (first args) (second args)
+                                                           (rest (rest args)) #:centered? #t)
                                                o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
@@ -1738,6 +1752,7 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              (fprintf o (create-workbook-links))
                              (link-to-opt-projects o)
+                             (link-to-notes-pages o)
                              ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
