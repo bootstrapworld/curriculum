@@ -3,18 +3,21 @@
 # Player Animation
 
 ---
+{layout="Launch"}
 # Defining Piecewise Functions 
 
 You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code in @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
 @ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or workbook, and refresh your memory on how they work.
 
 ---
+{layout="Launch"}
 # Defining Piecewise Functions
 
 - What controlled the speed of your characters?
 - What controlled the _direction_ of your characters?
 
 ---
+{layout="Launch"}
 # Defining Piecewise Functions
 
 If we wanted our `PLAYER` to go up all the time, we would already know how to do that. If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that. But we want the player to go up _only_ when the "up" arrow is pressed, and down when the "down" arrow is pressed. 
@@ -22,6 +25,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 **Do we know how to make a function behave differently, based on its input?**
 
 ---
+{layout="Investigate"}
 # Defining Piecewise Functions
 
 * Open your *Game Project file* and look for `update-player`.
@@ -40,19 +44,20 @@ _When the user presses the "up" key, the y-coordinate should increase, the progr
 -->
 
 ---
+{layout="InvestigateC"}
 # Defining Piecewise Functions
 
-@image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" }
-
-{.column}
-
 Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your *Game Project file* and test it out.
+
+@image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" }{width="250"}
+
 
 <!--
 Students often think of this function as returning a _relative distance_ (e.g. "it adds 20"), instead of an absolute coordinate (e.g. "the new y-coordinate is the old y plus 20")
 -->
 
 ---
+{layout="Synthesize"}
 # Defining Piecewise Functions
 
 - How is this function similar to the piecewise functions you've seen before? How is it different?
@@ -61,6 +66,7 @@ Students often think of this function as returning a _relative distance_ (e.g. "
 - Suppose your little brother or sister walks by and hits a random key. What should happen if you hit a random key that doesn’t have a meaning in your function? What happens now?
 
 ---
+{layout="Launch"}
 # Cheat Codes and Customizations 
 
 @ifproglang{wescheme}{
@@ -72,22 +78,24 @@ Reminder: Use `#` to add comments to code!
 Adding useful comments to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
 ---
+{layout="Investigate"}
 # Cheat Codes and Customizations 
 
-Now is your time to customize your game! Try implementing some of the following features, or make your own!
+Now is your time to customize your game! Try implementing some of the following features, or make your own!{style="font-size:15pt"}
 
-* Warping - program one key to "warp" the player to a set location, such as the center of the screen
-* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen
-* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
-* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
+* Warping - program one key to "warp" the player to a set location, such as the center of the screen{style="font-size:15pt"}
+* Boundaries - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen{style="font-size:15pt"}
+* Wrapping - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa{style="font-size:15pt"}
+* Hiding - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again{style="font-size:15pt"}
 
-Complete at least one of the @printable-exercise{pages/challenges.adoc} before turning to your computer.
+Complete at least one of the @printable-exercise{pages/challenges.adoc} before turning to your computer.{style="font-size:15pt"}
 
 <!--
 It's likely that once they hear other students' ideas, they will want more time to try them out. If time allows, give students additional _slices_ of "hacking time", bringing them back to share each other's ideas and solutions before sending them off to program some more. This dramatically ramps up the creativity and engagement in the classroom, giving better results than having one long stretch of programming time.
 -->
 
 ---
+{layout="Synthesize"}
 # Cheat Codes and Customizations 
 
 * What would it take to make the player move left and right? 
