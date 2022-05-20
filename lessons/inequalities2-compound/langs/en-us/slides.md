@@ -75,58 +75,58 @@ Open @starter-file{inequalities-compound}, read the code carefully and click run
 This starter file includes two special functions.
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-`and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
+`and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both inequalities true. {style="font-size:13pt"}
 
-@show{ (code '(define (gt5 x) (> x 5))) }
+@show{ (code '(define (gt5 x) (> x 5))) }{style="font-size:13pt"}
 
-@show{ (code '(define (lte15 x) (<= x 15))) }
+@show{ (code '(define (lte15 x) (<= x 15))) }{style="font-size:13pt"}
 
-@show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:13pt"}
 
 @image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}{style="width:550pt"}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-@show{ (code '(define (lt5 x) (< x 5))) }
+@show{ (code '(define (lt5 x) (< x 5))) }{style="font-size:15pt"}
 
-@show{ (code '(define (gte15 x) (>= x 15))) }
+@show{ (code '(define (gte15 x) (>= x 15))) }{style="font-size:15pt"}
 
-@show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:15pt"}
 
-_Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
+Note: Some pairs of inequalities do not intersect at all and therefore have no solutions.{style="font-size:15pt"}
 
 @image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}{style="width:550pt"}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-`or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
+`or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.{style="font-size:13pt"}
 
-@show{ (code '(define (lt5 x) (< x 5))) }
+@show{ (code '(define (lt5 x) (< x 5))) }{style="font-size:13pt"}
 
-@show{ (code '(define (gte15 x) (>= x 15))) }
+@show{ (code '(define (gte15 x) (>= x 15))) }{style="font-size:13pt"}
 
 @show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
 
 @image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}{style="width:550pt"}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-@show{ (code '(define (gt5 x) (> x 5))) }
+@show{ (code '(define (gt5 x) (> x 5))) }{style="font-size:14pt"}
 
-@show{ (code '(define (lte15 x) (<= x 15))) }
+@show{ (code '(define (lte15 x) (<= x 15))) }{style="font-size:14pt"}
 
-@show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:14pt"}
 
-_Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities._
+Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities.{style="font-size:14pt"}
 
 @image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
 
