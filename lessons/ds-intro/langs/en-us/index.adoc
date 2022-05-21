@@ -1,4 +1,4 @@
-= Introduction to Computational Data Science
+= Introduction to Data Science
 
 @description{Students learn about Categorical and Quantitative data, are introduced to Tables by way of the Animals Dataset, and consider what questions can and cannot be answered with available data.}
 
@@ -49,11 +49,17 @@
 Students look at opening questions, either at their desks or in a walk around the room. They select a question they are personally interested in, and think about the data required to answer that question. This process draws a direct line between answering questions they care about and the basics of data science.
 
 === Launch
+
 [.lesson-instruction]
+@image{images/questions.png, 250, "Thought bubbles with question marks"}
 - Look at the provided list of @opt-printable-exercise{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. Arrange yourselves into groups based on the question you like, making sure that each group has between 2-5 people.
 - Have each person in the group quickly share their _gut reaction_: What do you think the answer is?
 - After sharing, have each person share their reasoning.
-- Do students in each group agree about the answers to their question?
+- Does everyone in your group agree about the answers to their question?
+
+
+Note: Students are VERY likely to try and explain their reasonsing when they give their gut answers. This can taint the answers of other students in the group - emphasize that this is about exposing our "gut reaction" or bias.
+
 
 === Investigate
 [.lesson-instruction]
@@ -63,7 +69,13 @@ What information would you collect to answer the question you selected? _Take 5 
 Students may lean towards questions about _individuals_, instead of questions about what's true for a _group of individuals_ who vary from one to another. For example, instead of wondering what movie gets the highest rating, they should ask what's the typical rating for movies in a list, or how much those ratings tend to vary.
 
 === Synthesize
-Have students share back the different data they would gather to answer their questions. For each question, students would likely have to gather many different kinds of data.
+
+For each group...
+
+- What were your gut reactions?
+- Did the question wind up being too vague? What did you need to do to make it specific?
+- What data would you gather?
+- What, if anything, were you surprised about?
 
 * If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.
 * What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased?
@@ -110,12 +122,19 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 Have students open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc} in their Student Workbooks.
 
 === Investigate
+
+@image{images/notice-and-wonder.png, 200, "Eyeglasses and Question Mark"}
 This table contains data from an animal shelter, listing animals that have been adopted. We’ll be analyzing this table as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
 
 [.lesson-instruction]
 - Turn to @printable-exercise{pages/questions-and-column-descriptions.adoc} in your Student Workbook. What do you __Notice__ about this dataset? Write down your observations in the first column.
 - Sometimes, looking at data sparks questions. What do you __Wonder__ about this dataset, and why? Write down your questions in the second column.
 - There’s a third column, called “Answered by Dataset” -- we’re going to return to that later, so you can ignore it for now.
+
+Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
+
+
+[.lesson-instruction]
 - If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, spreadsheet file}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?
 - Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.
 
@@ -124,7 +143,7 @@ Any two animals in our dataset may have different ages, weights, etc. Each of th
 [.lesson-point]
 We use @vocab{Categorical Data} to answer “what kind?”, and @vocab{Quantitative Data} to answer "how much?".
 
-@vocab{Categorical Data} is used to _classify_, not measure. Categories aren’t subject to the laws of arithmetic.
+@vocab{Categorical Data} is used to _classify_, not measure. The laws of arithmetic do not make sense when it comes to categorical data.
 
 * “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
 * We couldn’t ask if “cat is more than lizard” and it doesn’t make sense to "find the average ZIP code” in a list of addresses.
@@ -139,13 +158,13 @@ What are some other categorical variables you see in this table?
 
 [.lesson-instruction]
 --
-Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
+- What are some other quantitative variables in this table?
+- Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
 --
 
 === Synthesize
-Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
 
-__Data Science is all about using a smaller sample of data to make educated guesses about a larger population. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals from this particular shelter, it might tell us something about the average age of animals from other shelters.__
+Data Science is all about using a *smaller sample of data to make educated guesses about a larger population*. It’s important to remember that tables are only a _sample_ of a larger population: this table describes some animals, but obviously it isn’t every animal in the world! Still, if we took the average age of the animals from this particular shelter, it might tell us something about the average age of animals from other shelters.
 
 @ifproglang{pyret}{
 == Meet Pyret! @duration{10 minutes}
@@ -154,6 +173,7 @@ __Data Science is all about using a smaller sample of data to make educated gues
 Students open up the Pyret environment (code.pyret.org, or "CPO") and see the Animals Dataset reflected there.
 
 === Launch
+@image{images/pyret.png, 200, "Pyret Logo"}
 Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
 
 [.lesson-instruction]
@@ -168,9 +188,9 @@ Let's take a look at our programming environment, and see what the Animals Datas
 - What happens?
 - Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
 
-The first line on the lefthand side of the screen tell Pyret to `import` files from elsewhere, which contain tools we’ll want to use for this course. We’re importing a file called Bootstrap:Data Science, as well as files for working with Google Sheets, tables, and images:
+The first line on the lefthand side of the screen tells Pyret to use a file we've provided, which contain tools we’ll want to use for this course.
 
-  use context shared-gdrive("Bootstrap-DataScience-...")
+`use context shared-gdrive("Bootstrap-DataScience-...")`
 
 After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at! After that, we see the following code:
 
@@ -221,6 +241,5 @@ Once you know how to program, you can do a _lot_ with datasets:
 
 In this course, you'll be learning to do all three in Pyret: Display, Filter, and Build.
 
-What are some other examples each?
 }
 
