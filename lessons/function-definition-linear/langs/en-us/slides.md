@@ -18,21 +18,16 @@ Linear functions are defined by their slope and y-intercept.
 
 Here we see a function definition written using pyret notation and using function notation.
 
-@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}}
-
 The *slope-intercept form of the line* includes the slope as the coefficient of x and the y-intercept as the numerical term.  You will hear people describe this form as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.
 
-
 While it is common to write the x-term first and the y-intercept second, they can be written in any order!
+
+@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}}
+
 
 ---
 {layout="Launch"}
 # Defining Linear Functions
-
-@table{2}
-|Function Notation       | Pyret Code
-|@math{f(x) = 6x - 10}    | @show{(code '(define (f x) (- (* 6 x) 10)))}
-|@math{f(x) = -10 + 6x}   | @show{(code '(define (f x) (+ -10 (* 6 x))))}
 
 When the slope is zero (and the line is horizontal)... we may choose whether or not to write the slope term.
 
@@ -40,16 +35,8 @@ When the slope is zero (and the line is horizontal)... we may choose whether or 
 {layout="Launch"}
 # Defining Linear Functions
 
-@table{2}
-| "Visible" Slope            | "Invisible" Slope
-|@math{f(x) = 0x + 22}       | @math{f(x) = 22}
-
-
 When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)... we may choose whether or not to write the slope term.
 
-@table{2}
-| "Visible" y-intercept   | "Invisible" y-intercept
-|@math{f(x) = 3.2x + 0}   | @math{f(x) = 3.2x}
 
 ---
 {layout="Launch"}
@@ -68,8 +55,8 @@ Let's start by identifying the slope and y-intercept from function definitions.
 - @printable-exercise{slope-and-y-def.adoc}
 
 For more practice: 
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions"}
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, "Identifying slope in Tables, Graphs & Definitions of Linear Functions"}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, Identifying slope in Tables, Graphs & Definitions of Linear Functions}
 
 ---
 {layout="Investigate"}
@@ -81,9 +68,9 @@ Let's connect definitions to tables and graphs. Writing down the slope and y-int
 - @printable-exercise{match-definitions-graphs.adoc}
 
 For more practice:
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, "Matching Tables and Definitions"}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, "Matching Graphs and Definitions of Linear Functions"}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, "Matching Graphs and Definitions of Linear Functions 2"}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, Matching Tables and Definitions}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, Matching Graphs and Definitions of Linear Functions}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Definitions of Linear Functions 2}
 
 What strategies did you use?
 
@@ -104,8 +91,8 @@ What strategies did you use?
 
 Let's connect all three function representations!
 
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, "Matching Function Definitions, Tables and Graphs"}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, "Matching Function Definitions, Tables and Graphs 2"}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe74ac877d890d3e1a49cc?collections=5fbe7484d81cab0ca7a8bcfb, Matching Function Definitions, Tables and Graphs}
+- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe782a6dcb980d4c87b78d?collections=5fbecc2b40d7aa0d844956f0, Matching Function Definitions, Tables and Graphs 2}
 
 What strategies did you use?
 
@@ -128,9 +115,9 @@ When we talk about functions, it's helpful to be able to switch between represen
 # Defining Linear Functions
 
 Additional Exercises
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbecf6ee47d820d0a06ef09, "Matching Graphs & Definitions of Functions (not just linear!)"}
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge)"}
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, "Identifying Linearity in Tables, Graphs & Definitions of Linear Functions"}
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, "Matching Tables, Graphs, and Definitions of Functions (challenge!)"}
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7ce016ed10402e547aa7, "Matching Tables, Graphs, and Definitions of Functions (challenge!)"}
-* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674?collections=5fbe7484d81cab0ca7a8bcfb, "Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge!)"}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbecf6ee47d820d0a06ef09, Matching Graphs & Definitions of Functions (not just linear!)}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674, Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge)}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc26797b575200bae86929c, Identifying Linearity in Tables, Graphs & Definitions of Linear Functions}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc261b2b575200bae8691fd, Matching Tables, Graphs, and Definitions of Functions (challenge!)}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7ce016ed10402e547aa7, Matching Tables, Graphs, and Definitions of Functions (challenge!)}
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe38c56f875180d2adb6674?collections=5fbe7484d81cab0ca7a8bcfb, Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions (challenge!)}
