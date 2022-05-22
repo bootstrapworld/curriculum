@@ -59,13 +59,13 @@ Data Scientists ask a ton of questions, and each question adds a chapter to the 
 @right{@image{images/data-cycle.png, "A circular progression: (1) Ask Questions, (2) Consider Data, (3) Analyze Data, (4) Interpret Data, and starting over", 400}}
 The Data Cycle[*] is a _roadmap_, which helps guide us in the process of data analysis.
 
-(Step 1) We start by *Asking Questions* - questions that can be answered with data.
+Step 1) We *Ask Questions* - which can be answered with data.
 
-(Step 2) Then we *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset that meets our needs.
+(Step 2) We *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset.
 
-(Step 3) Then it's on to *Analyzing the Data*, in which we produce data displays and new tables of filtered or transformed data in order to identify patterns and relationships.
+(Step 3) We *Analyze the Data*, to produce data displays and new tables of filtered or transformed data, to identify patterns and relationships.
 
-(Step 4) Finally, we *Interpret the Data*, in which we answer our questions and summarize the results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.
+(Step 4) We *Interpret the Data*, answering questions and summarizing results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.
 
 === Investigate
 
@@ -78,7 +78,7 @@ What other questions might come from counting the ratio of fixed to unfixed anim
 
 This is a short example of a *Data Story* - a description of how each step in the Data Cycle was used to go from a question to an answer, and then to the next question. When analyzing a real dataset, Data Scientists might explore lots of questions, resulting in many different Data Stories to tell.
 
-Each chapter in the Data Story is valuable, and the Data Cycle represents each chapter you plan to add. In this lesson, we're going to focus on the first part of the cycle.
+Each chapter in the Data Story is valuable, and the Data Cycle represents each chapter you plan to add.
 
 == Ask Questions @duration{15 minutes}
 
@@ -90,16 +90,18 @@ Students begin to categorize questions, sorting them into "lookup", "arithmetic"
 
 Most questions can be broken down into one of four categories:
 
-- *Lookup questions* -- These can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done! Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"
+- *Lookup questions* can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done! Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"
 
-- *Arithmetic questions* -- These can be answered by computing an answer across a single column. Examples of arithemetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
+- *Arithmetic questions* can be answered by computing an answer across a single column. Examples of arithemetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
 
-- *Statistical questions* -- These questions are where things get interesting, because the answer is never black and white. If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report back the average age, the age that shows up most frequently or the range of the ages. Other  examples of statistical questions might include "How long does it take for an animal to get adopted?" or "What's a typical age for the cats?". There are also some statistical questions that deal with _relationships between *two* columns_: “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
+- *Statistical questions* are where things get interesting. If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report back the average age, the age that shows up most frequently or the range of the ages. Other  examples of statistical questions might include "How long does it take for an animal to get adopted?" or "What's a typical age for the cats?". There are also some statistical questions that deal with _relationships between *two* columns_: “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
 
-- *Questions we can't answer* -- There are plenty of questions that can't be answered with the available data. We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won't help us answer that question, so as Data Scientists we might need to do some research _beyond the data_. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
+- *Questions we can't answer* would need data that we don't have. We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won't help us answer that question, so as Data Scientists we might need to do some research _beyond the data_. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 
 * What kind of question is "Are more animals fixed or unfixed?"?
 ** It's an _arithmetic question_.
+* What kind of question is "How old is Toggle?"
+** It's a _lookup question_.
 
 === Investigate
 
@@ -129,16 +131,17 @@ Once we have our question, it's time to figure out what data we'll need to answe
 [.lesson-point]
 When considering data, we ask "Which Rows?" and "Which Column(s)?"
 
-@right{@image{images/ConsiderData.png, "Consider Data icon", 200}} Tables are composed of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.
+@right{@image{images/ConsiderData.png, "Consider Data icon", 200}} Tables are made of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.
 
 Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.
 
 If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
 
 [.lesson-instruction]
-- If our question is "How old is Mittens?", what rows do we need? What column(s)? _We only need one row for Mittens, and we just need the `age` column_
-- If our question is "Which animal is the heaviest?", what rows do we need? What column(s)? _We need to compare every row, and we only look at the `pounds` column_
-
+* If our question is "How old is Mittens?", what rows do we need? What column(s)?
+** _We only need one row for Mittens, and we just need the `age` column_
+* If our question is "Which animal is the heaviest?", what rows do we need? What column(s)?
+** _We need to compare every row, and we only look at the `pounds` column_
 * What rows and columns did we need to answer "Are more animals fixed or unfixed?"?
 ** We needed to look at _all_ the rows, but the only column we care about is `fixed`.
 
@@ -163,7 +166,9 @@ Students progress to the third step in the Data Cycle, by combining the "Conside
 
 === Launch
 
-@left{@image{images/AnalyzeData.png, "Analyze Data icon", 100}} What kinds of displays can help us analyze whether there are more fixed or unfixed animals? We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
+@left{@image{images/AnalyzeData.png, "Analyze Data icon", 100}} What kinds of displays can help us analyze whether there are more fixed or unfixed animals? We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice.
+
+Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
 
 Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
 
@@ -175,9 +180,9 @@ Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fi
 
 Have students share their results. What did their charts tell them?
 
-@left{@image{images/InterpretData.png, "Interpret Data icon", 100}} In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
-
 === Synthesize
+@right{@image{images/InterpretData.png, "Interpret Data icon", 100}} In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
+
 How do Contracts and the Data Cycle work together, to help us figure out what program will answer our questions?
 
 
