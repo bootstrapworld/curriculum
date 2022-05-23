@@ -6,12 +6,22 @@
 
 ---
 {layout="Launch"}
+
+I LOVE Green Triangles!{style="font-size:22pt"}
+
+Write the code to make a solid green triangle of size 50!{style="font-size:22pt"}
+
+@image{images/green-triangles-more.png, a}
+
+
+
+---
+{layout="Launch"}
 # There's Got to Be a Better Way!  
-Make as many unique, solid, green triangles as you can in 2 minutes.
+Make as many unique, solid, green triangles as you can in 2 minutes.{style="font-size:22pt"}
 
-@image{images/i-love-green-triangles.jpg, a}
 
-@image{images/green-triangle.jpg, a}
+@image{images/green-triangles-still-more.png, a}
 
 <!--
 Screenshot responses and/or share the class total at this point...
@@ -99,7 +109,7 @@ How can we program the computer to be as smart as our volunteer?
 In order to define a function, we need to identify what's changing and what stays the same. Once we've done that, we can define any function we'd like in the _Definitions Area_!
 
 ---
-
+{layout="Launch"}
 # Identifying and Describing the Pattern
 
 On the next slide, we'll take a look at some examples for `gt`.
@@ -110,7 +120,7 @@ As you look at the examples, consider the following:
 - What would be a logical variable?
 
 ---
-
+{layout="Launch"}
 # Identifying and Describing the Pattern
 
 @show{(code '(gt 5))} &rarr; @show{(code '(triangle 5 "solid" "green"))}
@@ -128,7 +138,7 @@ Highlight or circle the numbers in the gt column and in the triangle column to h
   -->
 
 ---
-
+{layout="Launch"}
 # Identifying and Describing the Pattern
 
 If we keep everything that stayed the same and substitute `size` for the numbers that changed, it looks like this:
@@ -140,7 +150,7 @@ The way we write this in the editor is
 @show{(code '(define (gt size)(triangle size "solid" "green")))}
 
 ---
-
+{layout="Launch"}
 # Identifying and Describing the Pattern
 
 Turn to @printable-exercise{gt-domain-debate.adoc}.
@@ -150,7 +160,7 @@ Who is correct - Kermit or Oscar?
 Why might someone think the domain for `gt` contains a Number and two Strings? 
 
 ---
-
+{layout="Launch"}
 # Identifying and Describing the Pattern
 
 - Open the @starter-file{gt} and click run.
@@ -159,7 +169,7 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
 ---
-
+{layout="Investigate"}
 # Identifying and Describing the Pattern
 
 Other people have other favorite shapes. We need to be able to meet their needs, too! 
@@ -173,7 +183,7 @@ As students work, walk around the room and make sure that they are circling what
  -->
 
 ---
-
+{layout="Synthesize"}
 # Identifying and Describing the Pattern
 
 - Why is defining functions useful to us as programmers?
