@@ -13,21 +13,33 @@ A *function definition* is a way of summarizing a relationship. You've seen how 
 Linear functions are defined by their slope and y-intercept.
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Defining Linear Functions
 
-Here we see a function definition written using pyret notation and using function notation.
+Here we see a function definition written using pyret notation and using function notation.{style="font-size:15pt"}
 
-The *slope-intercept form of the line* includes the slope as the coefficient of x and the y-intercept as the numerical term.  You will hear people describe this form as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.
+The *slope-intercept form of the line* includes the slope as the coefficient of x and the y-intercept as the numerical term.  You will hear people describe this form as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.{style="font-size:15pt"}
 
-While it is common to write the x-term first and the y-intercept second, they can be written in any order!
-
-@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}}
-
+@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}{style="font-size:15pt"}
 
 ---
 {layout="Launch"}
 # Defining Linear Functions
+
+@table{2}
+| Function Notation        | @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} Code
+| @math{f(x) = 6x - 10}    | @show{(code '(define (f x) (- (* 6 x) 10)))}
+| @math{f(x) = -10 + 6x}   | @show{(code '(define (f x) (+ -10 (* 6 x))))}
+
+While it is common to write the x-term first and the y-intercept second, they can be written in any order!
+
+---
+{layout="Launch"}
+# Defining Linear Functions
+
+@table{2}
+| "Visible" Slope            | "Invisible" Slope
+|@math{f(x) = 0x + 22}       | @math{f(x) = 22}
 
 When the slope is zero (and the line is horizontal)... we may choose whether or not to write the slope term.
 
@@ -35,8 +47,11 @@ When the slope is zero (and the line is horizontal)... we may choose whether or 
 {layout="Launch"}
 # Defining Linear Functions
 
-When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)... we may choose whether or not to write the slope term.
+@table{2}
+| "Visible" y-intercept   | "Invisible" y-intercept
+|@math{f(x) = 3.2x + 0}   | @math{f(x) = 3.2x}
 
+When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)... we may choose whether or not to write the slope term.
 
 ---
 {layout="Launch"}
