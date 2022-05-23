@@ -77,18 +77,18 @@ The arithmetic mean is the number that "balances" all the other numbers in the s
 === Investigate
 
 [.lesson-instruction]
-Open your “Animals Starter File”. (If you do not have this file, or if something has happened to it, you can always make a new copy @starter-file{animals}.)
+Open your saved “Animals Starter File”. (If you do not have this file, or if something has happened to it, you can always make a new copy @starter-file{animals}.)
 
 If we plotted all the pounds values as points on a number line, what could we say about the average of those values? Is there a midpoint? Is there a point that shows up most often? Each of these are different ways of “measuring center”.
 
-The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, or "average". In general, the mean of a dataset is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
+The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, or "average". The mean of a dataset is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
 
 Pyret has a way for us to compute the mean of any quantitative column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
 @show{ (contract "mean" '("Table" "String") "Number" )}
 
 [.lesson-instruction]
-What is its name? Domain? Range?
+What is the function's name? Domain? Range?
 
 Notice that calculating the mean requires being able to add and divide, so the mean only makes sense for quantitative data. For example, the mean of a list of Presidents doesn’t make sense. Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.
 
@@ -96,7 +96,7 @@ Type `mean(animals-table, "pounds")`. What does this give us?
 Does this support the Bureau’s claims?
 
 [.lesson-instruction]
-Open your workbooks to @printable-exercise{summarizing-columns-in-animals.adoc}. Under the “measures of center” section, fill in the computed mean.
+Open your workbooks to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, fill in the computed mean.
 
 == Median @duration{15 minutes}
 
@@ -108,7 +108,7 @@ You computed the mean of that column to be almost exactly 41 pounds. That IS the
 
 _Kujo and Mr. Peanutbutter!_
 
-In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it distorts things for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off left or right of center.
+In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it distorts things for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
 
 [.lesson-instruction]
 Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the skew towards the right, with a huge number of animals clumped to the left?
@@ -137,7 +137,11 @@ The algorithm for finding the median of a quantitative column is:
 * For practice, compute the mean and median for the weeks and age columns.
 
 === Synthesize
-By looking at the histogram, we can develop an intuition for whether it's probably better to use the mean or median. Pronounced left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up. Either way, such shapes distort the mean as a measure of what’s typical for the dataset. Data scientists generally prefer to use the mean as their measure of center, because it contains information from every single data value. However, if a dataset has substantial skewness or outliers, they use median to report the center .
+By looking at the histogram, we can see that it's probably better to use the mean or median.
+
+Strong left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up above the median.
+
+Mean is generally the best measure of center, because it includes information from every single point. But it's inaccurate for highly-skewed datasets, so statisticians fall back to the median.
 
 
 == Modes @duration{25 minutes}
@@ -146,7 +150,9 @@ By looking at the histogram, we can develop an intuition for whether it's probab
 Students learn about the mode(s) of a dataset, how to compute the mode, and when it is appropriate to use this as a measure of center.
 
 === Launch
-The third measure of center is called the @vocab{mode} of a dataset. The @vocab{mode} of a dataset is the value that appears _most often_. Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one mode in the list of most common values: many datasets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
+The third measure of center is called the @vocab{modes} of a dataset. The @vocab{modes} of a dataset are the values that appear _most often_.
+
+Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one mode in the list of most common values: many datasets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
 
   1, 2, 3, 4
   1, 2, 2, 3, 4
@@ -169,7 +175,7 @@ Compute the `modes` of the `pounds` column, and add it to @printable-exercise{pa
 === Synthesize
 The most common number of pounds an animal weighs is 6.5! That’s well below our mean and even our median, which is further evidence of outliers or skewness.
 
-At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize animal weights isn’t ideal. Our mean weight agrees with their findings, but we have three reasons to suspect that @vocab{mean} isn’t the best value to use:
+At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize animal weights isn’t ideal. We have three reasons to suspect that @vocab{mean} isn’t the best value to use:
 
 - The median is only 13.4 pounds.
 - The mode of our dataset is only 6.5 pounds, which suggests a cluster of animals that weigh less than one-sixth the mean.
@@ -181,11 +187,11 @@ Do you trust this statement? Why or why not? Consider how many policies or laws 
 
 You now have three different ways to measure center in a dataset. But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! Here are some guidelines for when to use one measurement over the other:
 
-- If the data is doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
+- If the data doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
 
-*NOTE:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes that's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
+*NOTE:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 
 == Additional Exercises
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}
