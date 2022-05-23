@@ -41,20 +41,13 @@ Are there curves or lines that a function could not make? Why or why not?
 {layout="Launch"}
 # Identifying Functions from Graphs
 
-We can test a graph to see whether or not it's a function using the "vertical line test". 
+We can test a graph to see whether or not it's a function using the "vertical line test". {style="font-size:13pt"}
 
-Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, it means the same input can have more than one output and the relationship is not a function.
+@image{images/two-graphs-for-vertical-line-test.png, "one graph that passes the test, another that fails it"}{width="550"}
 
----
-{layout="Launch"}
-# Identifying Functions from Graphs
-
-
-Passes the Vertical Line Test &rarr; Is a Function
-@image{images/pass-test.png, a}
-
-Fails the Vertical Line Test &rarr; Is Not a Function
-@image{images/fail-test.png, a}
+<!--
+	Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, it means the same input can have more than one output and the relationship is not a function.
+-->
 
 ---
 {layout="Investigate"}
@@ -106,7 +99,7 @@ As students work, circulate around the room and make sure that they are actually
 -->
 
 ---
-{Layout="Synthesize"}
+{layout="Synthesize"}
 # Identifying Functions from Tables
 
 What did you Notice? 
