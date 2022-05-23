@@ -1,5 +1,5 @@
 ---
-
+{layout="Core Title Slide"}
 # Contracts 
 
 ---
@@ -23,7 +23,7 @@ You may remember functions from algebra: @math{f(x) = x + 4}.
 {layout="Launch"}
 # Applying Functions
 
-Log into @starter-file{editor} open the editor and press "Run" to load the image library. 
+Log into @starter-file{editor}  and press "Run" to load the image library. 
 
 Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
 
@@ -55,10 +55,10 @@ Type @show{(code '(string-length "rainbow"))} into the interactions area and hit
 
 
 ---
-{layout="Investigation"}
+{layout="Investigate-DN"}
 # Applying Functions
 
-Complete @printable-exercise{pages/applying-functions.adoc} 
+With your partner, complete @printable-exercise{pages/applying-functions.adoc} 
 
 When you finish, try changing the expression @show{(code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then try changing colors and sizes!
 
@@ -145,10 +145,12 @@ Type it into the editor. What is its contract?
 contract: `string-append :: String, String -> String`
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Contracts
 
-Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc} to get some practice working with Contracts.
+With your partner, complete: 
+- @printable-exercise{pages/practicing-contracts.adoc} 
+- @printable-exercise{pages/matching-expressions.adoc} 
 
 ---
 {layout="Synthesize"}
@@ -161,30 +163,34 @@ Complete pages @printable-exercise{pages/practicing-contracts.adoc} and @printab
 {layout="Launch"}
 # Exploring Image Functions
 
-Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?{style="font-size:14pt"}
-
-- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? {style="font-size:14pt"}
-- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}{style="font-size:14pt"}
-- What error did we get? What _hint_ does it give us about how to use this function? {style="font-size:14pt"}
-- What happens if I don't give it those things?{style="font-size:14pt"}
-- If I give `star` what it needs, what do I get in return?{style="font-size:14pt"}
-- What is the contract for star? {style="font-size:14pt"}
-- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? {style="font-size:14pt"}
+Suppose we had never seen `star` before. How could we figure out how to use it, using the helpful error messages?
+- Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? 
+- If it's a function, we know that it will need an open parentheses and at least one input. Try @show{(code '(star 50))}
+- What error did we get? What _hint_ does it give us about how to use this function? 
+- What happens if I don't give it those things?
+- If I give `star` what it needs, what do I get in return?
 
 <!--
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
 -->
 
 ---
-{layout="Investigate"}
+{layout="Launch"}
+# Exploring Image Functions
+
+
+- What is the contract for star? 
+- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
+
+---
+{layout="Investigate-DN"}
 
 # Exploring Image Functions
 
-- At the back of your workbook, you'll find pages with space to write down a contract and example or other notes for every function you see in this course.  The first few have been completed for you. You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
-- Take the next 10 minutes to experiment with the image functions listed in the contracts pages.
+- Take the next 10 minutes to experiment with the image functions listed in the contracts pages (at the back of your workbook, or printed by your teacher).
 - When you've got working expressions, record the contracts and the code!
 
-(If you don't have a workbook, you can use these @opt-printable-exercise{image-contracts.adoc, contracts pages})
+You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
 
 ---
 {layout="Synthesize"}
@@ -218,22 +224,14 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 - If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Contracts Help Us Write Code
 
-Turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
+Complete @printable-exercise{pages/triangle-contracts.adoc}.
 
-If you are ready to dig into @show{(code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
-
----
-{layout="Investigate"}
-# Contracts Help Us Write Code
-
-Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to get a taste of it, turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help you match the images to the corresponding expressions. 
-
-For more practice with detailed contracts you can turn to  @opt-printable-exercise{pages/star-polygon.adoc} to work with `star-polygon`. 
-
-Both of these functions can generate a wide range of interesting shapes!
+- Optional: @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
+- Optional: @printable-exercise{pages/radial-star.adoc} 
+- Optional:  @opt-printable-exercise{pages/star-polygon.adoc} 
 
 ---
 {layout="Synthesize"}
