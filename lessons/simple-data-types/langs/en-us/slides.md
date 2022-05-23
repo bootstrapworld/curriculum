@@ -51,23 +51,33 @@ For now, we will only be writing programs in the *Interactions Area*.{style="fon
 {layout="Investigate"}
 # Numbers & Strings
 
-Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:15pt"} 
+Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:16pt"} 
 
-Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.{style="font-size:15pt"} 
+Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.{style="font-size:16pt"} 
 
-Languages also have rules for *grammar*. The order of the words matters!{style="font-size:15pt"} 
+Languages also have rules for *grammar*. The order of the words matters!{style="font-size:16pt"} 
 
-Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.{style="font-size:15pt"} 
+Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!{style="font-size:16pt"} 
 
-Complete @printable-exercise{numbers-n-strings.adoc}. Pay special attention to the error messages!{style="font-size:15pt"} 
+---
+{layout="Investigate-DN"}
+# Numbers & Strings
+
+Complete @printable-exercise{numbers-n-strings.adoc}. 
+
+Pay special attention to the error messages!
 
 ---
 {layout="Investigate"}
 # Numbers & Strings
 
-- What did you Notice? What do you Wonder?
-- Did you get any error messages? 
-- What did you learn from them? 
+What did you Notice? 
+
+What do you Wonder?
+
+Did you get any error messages? 
+
+What did you learn from them? 
 
 <!--
 Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
@@ -128,7 +138,7 @@ Brainstorm other scenarios where Booleans are useful in and out of the programmi
 @image{images/login.png, a}
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Booleans
 
 Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
