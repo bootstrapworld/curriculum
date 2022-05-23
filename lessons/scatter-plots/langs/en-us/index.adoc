@@ -62,7 +62,7 @@ But what we really want is a display that will help us search for *a relationshi
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
-Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
+Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the data set will be a point on the scatter plot with `age` for x and `weeks` for y.
 
@@ -88,8 +88,8 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 `scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`
 
 [.lesson-instruction]
-* Open your “Animals Starter File”. (If you do not have this file, or if something has happened to it, you can always make a new copy of the @starter-file{animals}.)
-* Make a scatter plot that displays the relationship between age and adoption time.
+* Open your saved “Animals Starter File”. (You can always make a new copy of the @starter-file{animals}.)
+* Make a scatter plot that displays the relationship between `age` and adoption time (`weeks)`.
 * Are there any patterns or trends that you see here?
 
 === Synthesize
@@ -97,7 +97,7 @@ Have students report back on their findings from the starter file and on @printa
 
 Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
 
-@right{@image{images/no-relationship.png, "A scatter plot with no relationship", 250}} Think back to our discussion of random sampling and statistical inference, and look at the scatter plot you drew on @printable-exercise{pages/creating-scatterplot.adoc}. In this case, the @vocab{null hypothesis} is that there is no relationship between these two columns. The image on the right shows a collection of points, with no pattern.
+@right{@image{images/no-relationship.png, "A scatter plot with no relationship", 250}} Think back to our discussion of random sampling and statistical inference. In this case, the @vocab{null hypothesis} is that there is no relationship between these two columns. The image on the right shows a collection of points, with no pattern.
 
 @clear
 
@@ -122,7 +122,7 @@ Have students discuss.
 Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be. Bigger dogs are not welcome in many apartments. Perhaps the weight of an animal influences the adoption time!
 
 [.lesson-instruction]
-Take a look at the animals dataset, either in your workbook or on the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, google sheet}. Do you think there's a relationship between `weight` and `weeks` in this table? Why or why not?
+Take a look at the animals dataset, either in your workbook or on the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, google sheet}. Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 
 Let's use the Data Cycle to explore whether there's a connection between weight and adoption time.
 
@@ -130,13 +130,14 @@ Let's use the Data Cycle to explore whether there's a connection between weight 
 [.lesson-instruction]
 Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}.
 
+Discuss as a class:
 - What did you find when you looked at the scatter-plot?
 - Does there appear to be a pattern or trend?
 - What might be problematic about including every species in the same scatter plot of weight?
-- What followup questions do you have?
+- What follow-up questions do you have?
 
 [.lesson-instruction]
-Write your question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and complete the Data Cycle for your new question.
+Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and complete the Data Cycle for your new question.
 
 === Synthesize
 We’ve got a lot of tools in our toolkit that help us think about an entire _column_ of a dataset:
@@ -160,7 +161,7 @@ Students are asked to identify patterns in their scatter plots. This activity bu
 
 Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
 
-@centered-image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}
+@center{@image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}}
 
 @clear
 
@@ -177,7 +178,7 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 Project the scatter plot at the front of the room, and have students come up to the plot to point out their patterns.
 |===
 
-A straight-line pattern in the cloud of points suggests a linear relationship between two columns. If we can pinpoint a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
+A straight-line pattern in the cloud of points suggests a linear relationship between two columns. If we can find a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
 
 Do any data points seem unusually far away from the main cloud of points? Which animals are those? These points are called *unusual observations*. Unusual observations in a scatter plot are like outliers in a histogram, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
 
@@ -193,7 +194,7 @@ Unusual observations are _always_ worth thinking about!
 [.lesson-point]
 It's not just about the numbers!
 
-In the animation below, we see a scatter plot and some numbers computed from that plot. These numbers represent properties of the dataset (you'll learn more about them in later lessons!). While the patterns in the scatter plot vary wildly between a circular pattern and no pattern at all, the numbers that summarize dataset barely change at all!
+These numbers and scatterplot both come from the same datasets (you'll learn more about those numbers in later lessons!). The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
 
 @image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
 
@@ -201,21 +202,22 @@ Data Scientists and Statisticians use their eyes all the time. Sometimes there's
 
 [.lesson-instruction]
 --
-For practice, consider each of the following relationships (phrased as "how is the _explanatory variable_ related to the _response variable_"). First think about whether you'd expect the variables to be related, then make the scatterplot to see if your hunch seems correct. If you see any *unusual observations*, try to explain them!
+For practice, consider each of the following relationships. First think about what you _expect_, then make the scatter plot to see if it supports your hunch.
 
 - How are the `pounds` of an animal related to its `age`?
 - How are the number of `weeks` it takes for an animal to be adopted related to its number of `legs`?
 - How are the number of `legs` an animal has related to its `age`?
-- Do you see a linear (straight-line) relationship in any of these, evidenced by a cloud of points that’s clearly rising or falling from left to right?
+- Do you see a linear (straight-line) relationship in any of these?
 - Are there any unusual observations?
 --
 
+=== Synthesize
+
 Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
 
-=== Synthesize
 It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
 
-It might be nice if the dots in our scatter plot were different colors or shapes, depending on the species. That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a contract like:
+**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a contract like:
 
 `species-dot :: (r :: Row) -> Image`
 
@@ -227,19 +229,22 @@ This function could take in a row from the animals table, and draw a special dot
 Students apply what they've learned to their own dataset.
 
 === Launch
-What are the quantitative columns in _your_ dataset? How are they distributed?
+What relationships do you think might be lurking in _your_ dataset?
+
+Which pairs of columns would you like to examine?
 
 === Investigate
 
 [.lesson-instruction]
-- Do you suspect any relationships _between_ quantitative columns in your dataset?
 - Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, use the Data Cycle to generate some scatter plots, and add them to the "Making Displays" section of your exploration document.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 === Synthesize
-Have students share their findings.
 
-- Which relationships did they look for?
-- Do they see any possible relationships or trends?
-- The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
+- Which relationships did you look for?
+- Do you see any possible relationships or trends?
+- What do those findings mean?
+- What new questions come up for you?
+
+The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
 - Does your dataset contain any sub-groups? If so, what are they?
