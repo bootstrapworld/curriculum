@@ -38,19 +38,19 @@
 This activity focuses on _describing shape_ based on a histogram. Students learn about "left skewed", "right skewed", and "symmetric" data, and what those descriptions tell us about a dataset.
 
 === Launch
-@right{@centered-image{images/skew-right.png, skew right, 300, ""}}
+@right{@image{images/skew-right.png, skew right, 300, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right"}}
 
 Shape is one way to _summarize_ information in a dataset, to quickly describe what values are more or less common. Data Scientists spend a lot of time looking at data displays to examine their shape! There are lots of insights that can only be found by looking at a display, which we lose by focusing only on numbers (@link{https://www.autodesk.com/research/publications/same-stats-different-graphs, this page from Autodesk} is a wonderful example!).
 
 [.lesson-point]
-Histograms create __fixed-size__ bins, which contain varying numbers of datapoints.
+Histograms create __fixed-size__ bins, which contain varying numbers of data points.
 
 We can think of the data being "squeezed" into these fixed bins, like globs of pizza dough being pushed into tubes. When there isn't much data that fits into a bin, the tube is mostly empty. But when lots of datapoints fall within a bin, the dough stacks up in the tube. This is why the height of a histogram bar tells us how much data is "squeezed" into that bin!
 
 Consider the image on the right: most of the data points are clustered on the left side, and it contains a few unusually high values way off to the right. We might describe this histogram by saying that it is _“skewed right, or has high outliers.”_
 
 @span{.clear}
-Here are the most common shapes that we see for real-world datasets:
+Let's look at some real-world examples of the most common shapes:
 
 [.lesson-point]
 Symmetric: values are balanced on either side of the middle.
@@ -58,44 +58,32 @@ Symmetric: values are balanced on either side of the middle.
 @right{@image{images/symmetric.png, "A hill-shaped histogram, with both sides sloping away from the peak equally", 300}}
 In a @vocab{symmetric} distribution, it’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle. Examples:
 
-- Heights of 12-year-olds would have a symmetric shape. It’s just as likely for a 12-year-old to be a certain number of inches below average height as it is to be that number of inches above average height.
-- In a standardized test, most students score fairly close to what’s average. Also, we see just as many students scoring a certain number of points above average as we see scoring that same number of points below average. The shape is symmetric (and bulges in the middle because most students score fairly close to what’s average).
+- It’s just as likely for a 12yr old to be a certain number of inches below average height as it is to be that number of inches above average height.
+- In a standardized test, most students score fairly close to what’s average. Some students score above average, and just as many score below. The shape is symmetric.
 
 [.lesson-point]
 Skewed left, or low outliers.
 
-@right{@image{images/left.png, "A hill-shaped histogram, with a clump of taller bars on the right side, and smaller bars trailing off to the left side", 300}}
+@right{@image{images/left-w-foot.png, "A hill-shaped histogram, with a clump of taller bars on the right side, and smaller bars trailing off to the left=", 300}}
 
 In a distribution that is @vocab{skewed left}, values are clumped around what’s typical, but they trail off to the left with a few unusually low values. Examples:
 
-- Number of teeth that adults have in their mouths would be skewed left or have low outliers. Most adults will have close to a full set of 32 teeth, but a few of them with serious dental problems would have a very small number of teeth. We won’t get anyone in our dataset who has 10 or 20 _extra_ teeth in their mouths!
+- Most adults will have close to a full set of 32 teeth, but a few hockey players might have a very small number of teeth. We won’t get anyone in our dataset who has 10 or 20 _extra_ teeth in their mouths!
 - If the school cafeteria mostly buys canned goods in large commercial sizes, but buys a few items in household sizes, then if we looked at the ounces per can we’d see a shape that has left skewness and/or low outliers.
+
+A skew-left distibution will look like the toes on your left foot!
 
 [.lesson-point]
 Skewed right, or high outliers.
 
-@right{@image{images/right.png, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right side", 300}}
+@right{@image{images/right-w-foot.png, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right side", 300}}
 
 In a distribution that is @vocab{skewed right}, values are clumped around what’s typical, but they trail off to the right with a few unusually high values. We see this shape often in the real world, because there are many variables -- like “income” or “time spent on the phone” -- for which a few individuals have unusually high values, which aren’t balanced out by unusually low values (things like “income” and “phone time” can’t be less than zero). Examples:
 
-- Age when a woman in the U.S. gives birth would be skewed right or have high outliers. A few women would be unusually old (40+ years), above the average age of 26 (check the tabloids!), but none of them could be even close to 40 years below average to balance things out!
+- Age when a woman in the U.S. gives birth would be skewed right or have high outliers. A few women would be much older (40+ years) than the average age of 26 (check the tabloids!), but none of them could be even close to 40 years _below_ average to balance things out!
 - A dataset of earnings almost always shows right skewness or high outliers, because there are usually a few values that are so far above average, they can’t be balanced out by any values that are so far below average. (Earnings can’t be negative.)
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Outliers: Do they stay or do they go?}
-
-@right{@image{images/height-outlier.png, "Histogram with a low outlier", 300}}
-Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in. __Is there really a 6in tall 12 year old?__ Probably not! This could very well be a typo (maybe someone meant to type "60" instead of "6"?). "Junk" data is harmful, because it can drastically change your results!
-
-@right{@image{images/stadium-outlier.png, "Histogram with a high outlier", 300}}
-Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes. __Did it really take someone 35m to find their seat?__ Well, that's very possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!
-
-An outlier can be "junk" data that you need to throw away as part of your analysis, or it could be a really important part of your analysis! As a data scientist, *an outlier is a reason to look closer*. And whether you decide to keep or remove it from your dataset, make sure you *explain your reasons* in your writeup!
-
-|===
-
+A skew-right distibution will look like the toes on your right foot!
 
 === Investigate
 [.lesson-instruction]
@@ -111,16 +99,21 @@ An outlier can be "junk" data that you need to throw away as part of your analys
 - On @printable-exercise{pages/identifying-shape-histograms.adoc}, describe the shape of the histograms you see there.
 - On @printable-exercise{pages/shape-of-animals-dataset.adoc}, describe the pounds histogram and another one you make yourself. When writing down what you notice, try to use the language Data Scientists use, discussing both skew and outliers.
 
-*Challenge Questions:*
+[.lesson-point]
+Outliers: Do they stay or do they go?}
 
-- Compare histograms for the `pounds` column of both cats and dogs in the dataset. Are their shapes different? How much overlap is there?
-- Compare histograms for the `age` column of both cats and dogs in the dataset. Are their shapes different? How much overlap is there?
-- Can you explain why the amount of overlap between these two distributions is different?
+@right{@image{images/height-outlier.png, "Histogram with a low outlier", 300}}
+Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in. __Is there really a 6in tall 12 year old?__ Probably not! This could very well be a typo (maybe someone meant to type "60" instead of "6"?). "Junk" data is harmful, because it can drastically change your results!
+
+@right{@image{images/stadium-outlier.png, "Histogram with a high outlier", 300}}
+Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes. __Did it really take someone 35m to find their seat?__ Well, that's very possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!
+
+An outlier can be "junk" data that you need to throw away as part of your analysis, or it could be a really important part of your analysis! As a data scientist, *an outlier is a reason to look closer*. And whether you decide to keep or remove it from your dataset, make sure you *explain your reasons* in your writeup!
+
+Turn to @printable-exercise{pages/outliers-discussion.adoc}, and reflect on whether an outlier should be preserved or removed for analysis.
 
 === Synthesize
 Discuss as a class, making sure students agree on the description of the shape.
-
-This lesson included a discussion of @vocab{outliers}, and how data scientists deal with them. Have students turn to @printable-exercise{pages/outliers-discussion.adoc}, and reflect on whether an outlier should be preserved or removed for analysis. Give them a few minutes.
 
 Histograms are a powerful way to display a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a quantitative dataset. In the next unit, we’ll explore the other two: center and spread.
 
@@ -130,18 +123,18 @@ Histograms are a powerful way to display a dataset and see its @vocab{shape}. Bu
 Students apply what they've learned to their own dataset.
 
 === Launch
-What are the quantitative columns in _your_ dataset? How are they distributed?
+How would you describe the shape of the quantitative columns in _your_ dataset?
 
 === Investigate
 
 [.lesson-instruction]
 - How are the quantitative columns in your dataset distributed?
 @printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to explore two quantitative columns with histograms.
-- Then add these displays - and your interpretations! - to "Making Displays" section.
+- Then add these displays - and your interpretations! - to the "Making Displays" section of your @starter-file{exploration-paper}.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 === Synthesize
-Have students share their findings. Were any of them surprising? What, if any, outliers did they discover when making histograms?
+Share your findings. Were any of them surprising? What, if any, outliers did you discover when making histograms?
 
 
 @scrub{
