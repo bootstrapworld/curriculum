@@ -33,13 +33,11 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 
 *Circles of Evaluation* allow us to draw the structure of mathematics. The rules are simple:{style="font-size:15pt"}
 
-Rule #1: Every Circle must have one - and only one! - function, written at the top.{style="font-size:15pt"}
+__Rule #1:__ Every Circle must have one - and only one! - operator written at the top.
 
-That means that Numbers are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we draw a Circle.{style="font-size:15pt"}
+__Rule #2:__ The inputs to the function are written left-to-right, in the middle of the Circle.
 
-Rule #2: The inputs to the function are written left-to-right, in the middle of the Circle.{style="font-size:15pt"}
-
-If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.{style="font-size:15pt"}
+__Rule #3:__ Circles can contain other circles. 
 
 @image{images/coe1.png, "circle of evaluation for 6 / 3"}
 
@@ -50,18 +48,14 @@ If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division fun
 What if we want to use multiple functions?  
 
 How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
- 
+
 ---
 {layout="Launch"}
 # Order of Operations
 
-Circles can contain other Circles.
+Circles can contain other Circles. We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!{style="font-size:15pt"}
 
-We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!
-
-{.column}
-
-@image{images/coe2.png, a}
+@image{images/coe2.png, a}{width="200"}	
 
 ---
 {layout="Launch"}
@@ -95,7 +89,9 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 {layout="InvestigateC"}
 # Order of Operations
 
-Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. (Ignore the code column for now! We will come back to it later.)
+Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. 
+
+Ignore the code column for now! We will come back to it later.
 
 ---
 {layout="Investigate"}
@@ -136,7 +132,7 @@ It is always better to at least start with the parentheses before taking them ou
 
 What would the code look like for this circle?
 
-@image{images/coe7.png, a}{width="200"}			
+@image{images/coe7.png, a}{width="175"}			
 
 
 <!-- 3 + 8
@@ -184,7 +180,7 @@ What would the code look like for this circle?
 Scaffolded practice: 
 
 - @printable-exercise{pages/complete-code-from-coe.adoc} 
-- @printable-exercise{pages/match-coe-to-code.adoc}.
+- @printable-exercise{pages/match-coe-to-code.adoc}
 
 ---
 {layout="Investigate"}
@@ -203,10 +199,10 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 What did you learn from Circles of Evaluation?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Testing out your Code
 
-- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, pyret} } and click run.
+- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}@ifproglang{pyret}{@link{https://code.pyret.org, pyret} } and click run.
 - For now, we'll work in the interactions area on the right.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} 
 - Notice how the editor highlights pairs of parentheses.
@@ -214,15 +210,15 @@ What did you learn from Circles of Evaluation?
 - Test each line of code you wrote by typing them into the Interactions Area. Use the error messages to edit your code to get it working.
 
 ---
-{layout="InvestigateC"}
+{layout="InvestigateC-DN"}
 # Testing out your Code
 
-Look at the two Circles of Evaluation below. One of them is familiar, but the other is very different!
+Look at the two Circles of Evaluation below. One of them is familiar, but the other is very different!{style="font-size:15pt"}
 
-- What's different about the Circle on the right?
-- Can you figure out the Name for the function in the second Circle?
-- What do you think this expression will evaluate to?
-- Convert this Circle to code and try it out!
+- What's different about the Circle on the right?{style="font-size:15pt"}
+- Can you figure out the Name for the function in the second Circle?{style="font-size:15pt"}
+- What do you think this expression will evaluate to?{style="font-size:15pt"}
+- Convert this Circle to code and try it out!{style="font-size:15pt"}
 
 @image{images/coe-pair.png, a}
 
@@ -231,15 +227,15 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 -->
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate-DN"}
 # Testing out your Code
 
-Here is another circle to explore.
+Here is another circle to explore.{style="font-size:16pt"}
 
-- What do you think this expression will evaluate to?
-- Convert this Circle to code and try it out!
+- What do you think this expression will evaluate to? {style="font-size:16pt"}
+- Convert this Circle to code and try it out!{style="font-size:16pt"}
 
-@image{images/coe13.png, a}
+@image{images/coe13.png, a}{width="150"}
 
 
 ---
