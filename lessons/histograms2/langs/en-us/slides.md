@@ -80,13 +80,12 @@ Think about the toes on your right foot!
 {layout="Investigate"}
 # Describing Shape
 
-- Make a histogram for the pounds column in the animals table, sorting the animals into 20-pound bins:
-- Would you describe the shape of your histogram as being skewed left, skewed right, or symmetric?
-- Which one of these statements is justified by the histogram’s shape?
-
-_1. A few of the animals were unusually light.
-2. A few of the animals were unusually heavy.
-3. It was just as likely for an animal to be a certain amount below or above average weight._
+* Make a histogram for the pounds column in the animals table, sorting the animals into 20-pound bins:
+* Would you describe the shape of your histogram as being skewed left, skewed right, or symmetric?
+* Which one of these statements is justified by the histogram’s shape?
+  * _A few of the animals were unusually light_
+  * _A few of the animals were unusually heavy_
+  * _It was just as likely for an animal to be a certain amount below or above average weight._
 
 
 <!--
