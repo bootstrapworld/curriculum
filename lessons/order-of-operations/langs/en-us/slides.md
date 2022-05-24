@@ -23,7 +23,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 {layout="Launch"}
 # Order of Operations
 
-@math{6 \div 2(1 + 2)}{font-size:36pt}
+@math{6 \div 2(1 + 2)}{style="font-size:36pt"}
 
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 
@@ -235,7 +235,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 - What do you think this expression will evaluate to? {style="font-size:16pt"}
 - Convert this Circle to code and try it out!{style="font-size:16pt"}
 
-@image{images/coe13.png, a}{width="150"}
+@image{images/coe13.png, circle of evaluation}{width="150"}
 
 
 ---
