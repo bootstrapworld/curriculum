@@ -1,5 +1,5 @@
 ---
-
+{layout="Math Title Slide"}
 # Functions: Contracts, Examples & Definitions
 
 ---
@@ -14,25 +14,38 @@ What do you notice? What do you wonder?
 {layout="Launch"}
 # Three Representations of a Function
 
-- Every function has a contract.{style="font-size:15pt"}
-- We can write examples illustrating how a function should work to help us identify the pattern.{style="font-size:15pt"}
+Every function has a contract: {style="font-size:22pt"}
 
-@ifproglang{Pyret}{
-@image{images/examples-pyret.png, "gt Examples", 400}}
 
-@ifproglang{WeScheme}{
-@image{images/examples-wescheme.png, "gt Examples", 400}}
-
-- Function definitions replace whatever changes in the examples with a variable describing what changes.{style="font-size:15pt"}
-
-@ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition", 400}}
-@ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition", 500}}
+@show{(contract "gt" '("Number" ) "Number")} {style="font-size:22pt"}
 
 ---
 {layout="Launch"}
 # Three Representations of a Function
 
-If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} files. Let's take a look!
+We can write examples illustrating how a function should work to help us identify the pattern.
+
+
+@ifproglang{Pyret}{
+@image{images/examples-pyret.png, "gt Examples"}}{width="450"}
+
+@ifproglang{WeScheme}{
+@image{images/examples-wescheme.png, "gt Examples"}}{width="450"}
+
+---
+{layout="Launch"}
+# Three Representations of a Function
+
+Function definitions replace whatever changes in the examples with a variable describing what changes.
+
+@ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition"}}{width="550"}
+@ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition"}}{width="550"}
+
+---
+{layout="Launch"}
+# Three Representations of a Function
+
+If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret}@ifproglang{wescheme}{WeScheme} files. Let's take a look!
 
 * Click *Run*.
 @ifproglang{pyret}{
@@ -42,7 +55,7 @@ If we use the correct syntax, we can include all three of these function represe
 * Change
 @ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
 @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
-* Click run. What happens?
+* Click *Run*. What happens?
 
 ---
 {layout="Launch"}
@@ -55,7 +68,7 @@ OPTIONAL: If students feel confident with the Circles of Evaluation but less con
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Three Representations of a Function
 
 Complete:
@@ -89,7 +102,7 @@ There are many more materials for students to work with in the Additional Practi
 - What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Defining bc and Other Functions
 
 Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
@@ -98,13 +111,15 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * Circle what is changing and label it with the word `size`. 
 * Using `gt` as a model, complete the contract, examples and function definition for `bc`.  
 * Then type the Contract, Examples and Definition into the Definitions Area. 
-* Click “Run”, and make sure all of the examples pass!
+* Click *Run*, and make sure all of the examples pass!
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Defining bc and Other Functions
 
-Complete @printable-exercise{pages/contracts-examples-definitions-stars.adoc} and @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
+Complete:
+- @printable-exercise{pages/contracts-examples-definitions-stars.adoc} 
+- @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
 
 <!--
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
