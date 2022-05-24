@@ -75,7 +75,7 @@ Why not? _order matters!_
 -->
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Composing Functions in Code 
 
 - Log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open a new program.
@@ -134,7 +134,7 @@ What’s another line of code I could write that would produce the exact same im
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Composing Multiple Ways 
 
 Complete @printable-exercise{pages/more-than-one-way.adoc}.
