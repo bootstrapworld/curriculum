@@ -1,5 +1,5 @@
 ---
-
+{layout="Math Title Slide"}
 # Simple Data Types
 
 ---
@@ -71,13 +71,13 @@ Pay special attention to the error messages!
 {layout="Investigate"}
 # Numbers & Strings
 
-What did you Notice? 
+- What did you Notice? 
 
-What do you Wonder?
+- What do you Wonder?
 
-Did you get any error messages? 
+- Did you get any error messages? 
 
-What did you learn from them? 
+- What did you learn from them? 
 
 <!--
 Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
@@ -89,16 +89,14 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 {layout="Synthesize"}
 # Numbers & Strings
 
-We have learned that in our programming language:{style="font-size:16pt"} 
-
-- Numbers and Strings evaluate to themselves.{style="font-size:16pt"} 
-- Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!{style="font-size:16pt"} 
-- Anything in quotes is a String, even something like `"42"`.{style="font-size:16pt"} 
-- Strings _must_ have quotation marks on both sides.{style="font-size:16pt"} 
-- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:16pt"} 
-- In pyret, the @vocab{operators} work just like they do in math.{style="font-size:16pt"} 
-- Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:16pt"} 
-- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:16pt"} 
+- Numbers and Strings evaluate to themselves.{style="font-size:17pt"} 
+- Our Editor is pretty smart. When we click on a rational number, it switches between showing a fraction and decimal.{style="font-size:17pt"} 
+- Anything in quotes is a String, even something like `"42"`.{style="font-size:17pt"} 
+- Strings _must_ have quotation marks on both sides.{style="font-size:17pt"} 
+- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
+- In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
+- When there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:17pt"} 
+- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:17pt"} 
 
 
 ---
