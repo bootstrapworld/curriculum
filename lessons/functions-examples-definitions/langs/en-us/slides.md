@@ -55,7 +55,7 @@ If we use the correct syntax, we can include all three of these function represe
 * Change
 @ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
 @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
-* Click run. What happens?
+* Click *Run*. What happens?
 
 ---
 {layout="Launch"}
@@ -111,7 +111,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * Circle what is changing and label it with the word `size`. 
 * Using `gt` as a model, complete the contract, examples and function definition for `bc`.  
 * Then type the Contract, Examples and Definition into the Definitions Area. 
-* Click “Run”, and make sure all of the examples pass!
+* Click *Run*, and make sure all of the examples pass!
 
 ---
 {layout="Investigate-DN"}
