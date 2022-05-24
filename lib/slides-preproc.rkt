@@ -132,7 +132,9 @@
              "</span>\n"))]
         [else
           (string-append "<span class=\"value\">"
-            (wescheme-symbol->pyret exp)
+            (if (symbol? exp)
+                (wescheme-symbol->pyret exp)
+                (format "~s" exp))
             "</span>\n")]))
 
 (define math code)
