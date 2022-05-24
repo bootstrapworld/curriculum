@@ -196,16 +196,21 @@ You will be adding to these contract pages and referring back to them for the re
 {layout="Synthesize"}
 # Exploring Image Functions
 
-- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range? {style="font-size:16pt"}
-- Does having the same Domain and Range mean that the functions do the same things? {style="font-size:16pt"}
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?{style="font-size:16pt"}
-- Was it harder to find contracts for some of the functions than others? Why?{style="font-size:16pt"}
-- What error messages did you see? {style="font-size:16pt"}
-- How did you figure out what to do after seeing an error message? {style="font-size:16pt"}
-- Which input determined the size of the Rhombus?  What did the other number determine?{style="font-size:16pt"}
+- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range?
+- Does having the same Domain and Range mean that the functions do the same things? 
+- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
 
 ---
-{layout="Launch"}
+{layout="Synthesize"}
+# Exploring Image Functions
+
+- Was it harder to find contracts for some of the functions than others? Why?
+- What error messages did you see? 
+- How did you figure out what to do after seeing an error message? 
+- Which input determined the size of the Rhombus?  What did the other number determine?
+
+---
+{layout="Launch-DN"}
 # Contracts Help Us Write Code
 
 Turn to @printable-exercise{pages/using-contracts.adoc} and @opt-printable-exercise{pages/using-contracts-cont.adoc} and experiment with the functions in the editor.

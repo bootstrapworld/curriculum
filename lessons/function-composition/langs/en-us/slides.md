@@ -1,4 +1,5 @@
 ---
+{layout="Math Title Slide"}
 
 # Function Composition
 
@@ -8,29 +9,32 @@
 
 For this activity we will be working in groups of 3-4 students.
 
-- Each group has a set of @link{pages/function-cards.html, "Function Cards"}, each of which takes an input and produces an output. 
+Each group has a set of @link{pages/function-cards.html, "Function Cards"}, each of which takes an input and produces an output. 
 
 ---
 {layout="Launch"}
 # Composing Functions
 
-- If we start with `4` and give it to the function `add6`, what will the output be? 
+Each __function card__ has a Contract (Name, Domain, Range), and a description of what it does. 
 
-- If we start with 4 compose `add6` and `double`, the `10` gets passed into the second function, and doubled to produce `20`. 
+Starting with 4, 
+- you could play the `add 1` card to turn it into 5.
+- you could play `add 6` and turn it into 10.
 
-- What would happen if I composed `add6` with `double` _and_ with `half`? 
+What other cards could you play to get from 4 to 10? 
  
 ---
 {layout="Launch"}
 # Composing Functions
 
-I will be providing "starting" and "ending" numbers using this @link{https://www.google.com/search?q=random+number, random integer generator}.
+Select the cards you would play with to get from the starting number to the ending number. 
+- Start at 4, end at 26
+- Start at -22, end at 13
+- Start at 64, end at 0
 
-For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end.
+Let's try some more numbers from this @link{https://www.google.com/search?q=random+number, random integer generator}.
 
-You will need to use some functions more than once, and that's ok!
-
-If you're ready for a challenge, try to find the _shortest path_ from start to end, using the smallest number of compositions.
+You will need to use some functions more than once, and that's ok! If you're ready for a challenge, try to find the _shortest path_ from start to end, using the smallest number of compositions.
 
 ---
 {layout="Launch"}
@@ -38,45 +42,33 @@ If you're ready for a challenge, try to find the _shortest path_ from start to e
 
 Three of the function cards we just used were for the functions `f`, `g` and `h`:
 
-* `f` multiplied its input by 3
+* `f` multiplies its input by 3
 
-* `g` added six to its input
+* `g` adds six to its input
 
-* `h` subtracted one from its input
+* `h` subtracts one from its input
 
-We can compose those function in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
-
----
-{layout="LaunchC"}
-# Diagramming Function Composition
-
-We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
-
-@image{images/fghx.png, a}
+We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
 
 ---
 {layout="LaunchC"}
-
 # Diagramming Function Composition
-The circles show us that in order to evaluate @math{f(g(h(4))))}
 
-- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
-- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
-- Then we would evaluate @math{f(27)}, tripling `9` to get `27`
+The circles of evaluation for @math{f(g(h(4)))} would look like this:
 
 @image{images/fghx.png, a}
-
+ 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Diagramming Function Composition
 
-Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+Complete @printable-exercise{pages/diagramming-function-composition.adoc} with your partner.
 
 ---
 {layout="Synthesize"}
 # Diagramming Function Composition
 
-Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? 
+Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? {style="font-size:26pt"}
 
 <!--
 Why not? _order matters!_
@@ -86,19 +78,16 @@ Why not? _order matters!_
 {layout="Launch"}
 # Composing Functions in Code 
 
-Log into @link{https://code.pyret.org, code.pyret.org (CPO)}.
-Open a new program and save it as Function Composition.
-
----
-{layout="Investigate"}
-# Composing Functions in Code 
-
-Open to @printable-exercise{pages/function-composition-green-star.adoc}.
-
-- Make sure you are using the @vocab{Definitions area} (left side) for code you want to keep and are using the @vocab{Interactions area} (right side) to test code or try out new ideas.
-- When you are finished, check your work, and then change the color of all of the stars to “gold” or another color of your choosing.
-
-Then open to @printable-exercise{pages/function-composition-your-name.adoc}
+- Log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open a new program.
+- Type `include image` in the definitions area.
+- Save the file as "Function Composition".
+- Complete the following @printable-exercise{pages/function-composition-green-star.adoc}. When you're done, change the color of all the stars in the file to gold. 
+- Then try @printable-exercise{pages/function-composition-your-name.adoc}.
+- If you have time, work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
+@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
+}
+@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b?collections=5fbecc2b40d7aa0d844956f0, Function Composition Matching Activity}
+}
 
 <!--
 While students are exploring, be available for support but encourage student discussion to solve problems. Many student questions can be addressed with these responses:
@@ -110,15 +99,6 @@ Have you pressed the Run button to save your Definitions changes?
 Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
 -->
 
----
-{layout="Investigate"}
-# Composing Functions in Code
-
-If you have time, work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
-}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b?collections=5fbecc2b40d7aa0d844956f0, Function Composition Matching Activity}
-}
 
 ---
 {layout="Synthesize"}
@@ -159,13 +139,14 @@ What’s another line of code I could write that would produce the exact same im
 
 Complete @printable-exercise{pages/more-than-one-way.adoc}.
 
----
-{layout="Synthesize"}
-# Composing Multiple Ways 
-
 There is a special function in Pyret that lets us test whether or not two images are equal.
 
-`images-equal :: Image, Image -> Boolean`
+
+@ifproglang{pyret}{
+`images-equal :: Image, Image -> Boolean`}
+
+@ifproglang{wescheme}{
+	`image=? :: Image, Image -> Boolean`}
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 
