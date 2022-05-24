@@ -13,7 +13,7 @@
 - What kind of data is `age`? What kind of data is `weeks`?
 - What kind of display would help us analyze the relationship between age and adoption time?
 
-Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box-plots, that help us explore the _distribution_ of values in a _quantitative_ column.{font-size:14pt}
+Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box-plots, that help us explore the _distribution_ of values in a _quantitative_ column.{style="font-size:14pt"}
 
 <!--
 

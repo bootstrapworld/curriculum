@@ -112,12 +112,12 @@ Let's use this skill to define _Tables..._
 {layout="Launch"}
 # Grouped Samples
 
-We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{font-size:14pt}
+We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{style="font-size:14pt"}
 ```
 dogs  = animals-table.filter(is-dog)
 ```
 
-The `.filter` method walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `.filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `.filter`.{font-size:14pt}
+The `.filter` method walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `.filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `.filter`.{style="font-size:14pt"}
 
 }
 ---

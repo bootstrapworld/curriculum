@@ -11,7 +11,7 @@
 # Confirming Analysis
 Samples are taken in Data Science and Computer Programming for two different reasons. One of the main purposes of Data Science is to take a representative sample from a larger population, and use information from the sample to infer what’s true about the whole population. 
 
-In programming, we often extract a smaller Table from a larger one, for the purpose of testing that our code seems to do what it’s supposed to. In this lesson, we focus on the tasks of programmers, and consider best practices for setting up a Testing Table that helps us check our code.{font-size:14pt}
+In programming, we often extract a smaller Table from a larger one, for the purpose of testing that our code seems to do what it’s supposed to. In this lesson, we focus on the tasks of programmers, and consider best practices for setting up a Testing Table that helps us check our code.{style="font-size:14pt"}
 
 <!--
 
@@ -40,9 +40,9 @@ Programmers need to think in terms of _Testing Tables_ that best serve the purpo
 
 A good Testing Table should be _representative_ of the population, and _relevant_ to what’s being analyzed. A good Testing Table should have...
 
-- _At least_ the columns that matter -- whether we’ll be ordering or filtering by those columns.{font-size:14pt}
-- Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.{font-size:14pt}
-- Rows that aren’t already sorted, if our analysis is supposed to sort for us.{font-size:14pt}
+- _At least_ the columns that matter -- whether we’ll be ordering or filtering by those columns.{style="font-size:14pt"}
+- Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.{style="font-size:14pt"}
+- Rows that aren’t already sorted, if our analysis is supposed to sort for us.{style="font-size:14pt"}
 <!--
 
 -->

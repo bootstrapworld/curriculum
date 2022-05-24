@@ -53,9 +53,9 @@ And here is an example of _using_ the function:
 
 @left{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}}
 
-Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.{font-size:14pt}
+Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.{style="font-size:14pt"}
 
-We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.{font-size:14pt}
+We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.{style="font-size:14pt"}
 
 
 <!--
@@ -66,13 +66,13 @@ We can also resize the window by dragging its borders. This allows us to experim
 # Launch
 
 
-`pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer counts the number of times that each value appears.{font-size:14pt}
+`pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer counts the number of times that each value appears.{style="font-size:14pt"}
 
-Then it draws a slice for each value, with the size being the percentage of cells with that value.{font-size:14pt}  
+Then it draws a slice for each value, with the size being the percentage of cells with that value.{style="font-size:14pt"}
 
-This pie chart shows the distribution of the number of `legs` across the shelter.{font-size:14pt}
+This pie chart shows the distribution of the number of `legs` across the shelter.{style="font-size:14pt"}
 
-Can you make a pie chart for the `sex` column?{font-size:14pt}
+Can you make a pie chart for the `sex` column?{style="font-size:14pt"}
 
 <!--
 When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.

@@ -182,7 +182,7 @@ But there's more to taking a good sample than just taking a _big_ sample. Suppos
 
 When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people.
 
-A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"{font-size:14pt}
+For example: A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"{style="font-size:14pt"}
 
 <!--
 * A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!

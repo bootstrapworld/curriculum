@@ -38,13 +38,13 @@ Data Scientists ask a ton of questions, and each question adds a chapter to the 
 
 The Data Cycle is a _roadmap_, which helps guide us in the process of data analysis.
 
-(Step 1) We *Ask Questions* - which can be answered with data.{font-size:14pt}
+(Step 1) We *Ask Questions* - which can be answered with data.{style="font-size:14pt"}
 
-(Step 2) We *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset.{font-size:14pt}
+(Step 2) We *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset.{style="font-size:14pt"}
 
-(Step 3) We *Analyze the Data*, to produce data displays and new tables of filtered or transformed data, to identify patterns and relationships.{font-size:14pt}
+(Step 3) We *Analyze the Data*, to produce data displays and new tables of filtered or transformed data, to identify patterns and relationships.{style="font-size:14pt"}
 
-(Step 4) We *Interpret the Data*, answering questions and summarizing results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.{font-size:14pt}
+(Step 4) We *Interpret the Data*, answering questions and summarizing results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.{style="font-size:14pt"}
 
 <!--
 
@@ -145,9 +145,9 @@ When considering the data we need to answer a question, we ask "Which Rows?" and
 {layout="Launch"}
 # Consider Data
 
-Tables are made of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.{font-size:14pt}
+Tables are made of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.{style="font-size:14pt"}
 
-Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.{font-size:14pt}
+Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.{style="font-size:14pt"}
 
 ---
 {layout="LaunchR"}
@@ -205,7 +205,7 @@ How does asking "which rows? which columns?" help us figure out what code to wri
 
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
-We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{font-size:14pt}
+We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{style="font-size:14pt"}
 
 ---
 {layout="LaunchR"}
@@ -214,7 +214,7 @@ We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
 
-Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{font-size:14pt}
+Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{style="font-size:14pt"}
 
 Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
 

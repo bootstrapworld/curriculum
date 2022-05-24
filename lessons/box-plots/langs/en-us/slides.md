@@ -44,12 +44,12 @@ There are differences in every class of students. Not everyone likes the same mu
 # Making Box Plots
 
 @image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}
-Suppose we lined up all animals' weights from smallest to largest, and then split them into two equal groups by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking things further:{font-size:16pt}
+Suppose we lined up all animals' weights from smallest to largest, and then split them into two equal groups by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking things further:{style="font-size:16pt"}
 
-- The middle of the lighter half of animals is called the first @vocab{quartile} - or "Q1"{font-size:14pt}
-- The middle of the heavier half of animals is the third quartile (or "Q3"){font-size:14pt}
+- The middle of the lighter half of animals is called the first @vocab{quartile} - or "Q1"{style="font-size:14pt"}
+- The middle of the heavier half of animals is the third quartile (or "Q3"){style="font-size:14pt"}
 
-Once we find these numbers, we can say that the middle half of the animals’ weights are spread between Q1 and Q3.{font-size:16pt}
+Once we find these numbers, we can say that the middle half of the animals’ weights are spread between Q1 and Q3.{style="font-size:16pt"}
 
 
 <!--
@@ -220,10 +220,10 @@ Box plots and Histograms can both tell us a lot about the shape of a dataset, bu
 {layout="Synthesize"}
 # Synthesize
 
-Histograms, box plots, and measures of center and spread are all different ways to get at the @vocab{shape} of our data. It's important to get comfortable using every tool in the toolbox when discussing shape!{font-size:14pt}
+Histograms, box plots, and measures of center and spread are all different ways to get at the @vocab{shape} of our data. It's important to get comfortable using every tool in the toolbox when discussing shape!{style="font-size:14pt"}
 
 
-We started talking about measures of center with a single question: __is "average" the right measure to use when talking about animals' weights?__ Now that we've explored the spread of the dataset, do you agree or disagree that average is the right summary?{font-size:14pt}
+We started talking about measures of center with a single question: __is "average" the right measure to use when talking about animals' weights?__ Now that we've explored the spread of the dataset, do you agree or disagree that average is the right summary?{style="font-size:14pt"}
 <!--
 
 -->

@@ -173,7 +173,11 @@ Create an `lr-plot` for the `animals-table`, using `"names"` for the labels, `"a
 {layout="Launch"}
 # Linear Regression in Pyret
 
-The resulting scatterplot looks like those we’ve seen before, but it has a few important additions. First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red), in the form @math{f(x) = mx + b}. In this plot, we can see that the slope of the line is 0.792, which means that on average, each extra year of age results in an extra 0.792 weeks of waiting to be adopted (about 5 or 6 extra days). By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted. For example, we predict a 5-year-old animal to be adopted in @math{0.792(5) + 2.285 = 6.245} weeks. That’s the y-value exactly on the line at x=5.{font-size:14pt}
+The resulting scatterplot looks like those we’ve seen before, but it has a few important additions. 
+
+First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red), in the form @math{f(x) = mx + b}. In this plot, we can see that the slope of the line is 0.792, which means that on average, each extra year of age results in an extra 0.792 weeks of waiting to be adopted (about 5 or 6 extra days). 
+
+By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted. For example, we predict a 5-year-old animal to be adopted in @math{0.792(5) + 2.285 = 6.245} weeks. That’s the y-value exactly on the line at x=5.{style="font-size:14pt"}
 
 ---
 {layout="Launch"}
@@ -225,7 +229,7 @@ A predictor _only makes sense within the range of the data that was used to gene
 # Interpreting LR Plots
 
 
-How well can you interpret the results of a linear regression analysis? How would you explain it to someone else?{font-size:26pt}
+How well can you interpret the results of a linear regression analysis? How would you explain it to someone else?{style="font-size:26pt"}
 
 ---
 {layout="Launch"}

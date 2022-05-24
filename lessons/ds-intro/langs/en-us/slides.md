@@ -67,9 +67,9 @@ Share backs!
 {layout="Synthesize"}
 # Synthesize
 
-If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.{font-size:14pt}
-* What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased?{font-size:14pt}
-* We can't survey every school in the world, get data on every movie ever made, or every police action - but we can do an analysis for a _sample_ of them, and try to infer something about all of them as a whole.{font-size:14pt}
+If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.{style="font-size:14pt"}
+* What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased?{style="font-size:14pt"}
+* We can't survey every school in the world, get data on every movie ever made, or every police action - but we can do an analysis for a _sample_ of them, and try to infer something about all of them as a whole.{style="font-size:14pt"}
 
 <!--
 
@@ -82,7 +82,7 @@ If we wanted to find out if small schools are better than big schools, for examp
 The process of learning from data is called @vocab{Data Science}. Data science techniques are used by scientists, business people, politicians, sports analysts, and hundreds of other different fields to ask and answer questions about data.
 
 @ifproglang{pyret}{
-We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.{font-size:14pt}
+We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.{style="font-size:14pt"}
 
 }
 <!--
@@ -130,9 +130,9 @@ Have students share back their noticings (statements) and wonderings (questions)
 
 # Meet the Animals!
 
-- If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, spreadsheet file}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?{font-size:16pt}
+- If you look at the bottom of the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, spreadsheet file}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?{style="font-size:16pt"}
 
-- Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.{font-size:16pt}
+- Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.{style="font-size:16pt"}
 
 <!--
 
@@ -249,7 +249,7 @@ The first line (starting with `#`) is called a _Comment_. Comments are notes for
 
 *Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.*
 
-Every table is made of cells, which are arranged in a grid of rows and columns. _The first row and first column_ are special. The first row is called the @vocab{header row}, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the @vocab{identifier column}, which contains a unique ID for each row. Often, this will be the name of each individual in the table, or sometimes just an ID number.{font-size:14pt}
+Every table is made of cells, which are arranged in a grid of rows and columns. _The first row and first column_ are special. The first row is called the @vocab{header row}, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the @vocab{identifier column}, which contains a unique ID for each row. Often, this will be the name of each individual in the table, or sometimes just an ID number.{style="font-size:14pt"}
 
 ---
 {layout="Investigate"}
@@ -263,7 +263,7 @@ Every table is made of cells, which are arranged in a grid of rows and columns. 
 Here is an example of a table with one header row and two data rows:
 
 After the header, Pyret tables can have any number of @vocab{data rows}.
-Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_.{font-size: 14pt}
+Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_.{style="font-size: 14pt"}
 
 }
 
@@ -278,8 +278,8 @@ Each data row has values for every column variable (nothing can be left empty!).
 
 Once you know how to program, you can do a _lot_ with datasets:
 
-- Sometimes they want to *filter* a table, showing only a few of the rows. For example we might only want to look at animals where `species` is equal to `"dog"`.{font-size:14pt}
-- Or perhaps we want to *build* a column! For example, there could be a vaccination for all cats under the age of 3, and we want to add a `needs-vaccine` column that says `true` for cats under the age of 3, and `false` for everyone else.{font-size:14pt}
+- Sometimes they want to *filter* a table, showing only a few of the rows. For example we might only want to look at animals where `species` is equal to `"dog"`.{style="font-size:14pt"}
+- Or perhaps we want to *build* a column! For example, there could be a vaccination for all cats under the age of 3, and we want to add a `needs-vaccine` column that says `true` for cats under the age of 3, and `false` for everyone else.{style="font-size:14pt"}
 
 In this course, you'll be learning to do all three in Pyret: Display, Filter, and Build.
 
