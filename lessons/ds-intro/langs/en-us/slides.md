@@ -187,7 +187,7 @@ Still, if we took the average age of the animals from this particular shelter, i
 @image{images/pyret.png, 200, "Pyret Logo"}
 
 - Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
-- Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+- Next, click the "File" menu and select "Save a Copy". **This will save a copy of the file into your own account, so that you can make changes and retrieve them later.**
 
 <!--
 Students will need to use a valid Google credential to log in. They can use school accounts, personal accounts, YouTube accounts, etc. Some teachers create a single account for the whole class to share.

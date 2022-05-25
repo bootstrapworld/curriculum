@@ -1,7 +1,5 @@
 ---
-
 {layout="DS Title Slide"}
-
 # Displaying Categorical Data
 
 <!--
@@ -11,15 +9,17 @@
 {layout="Launch"}
 # Pie and Bar Charts
 
-
-Where have you seen infographics and graphs used to display data in the real world?
+- Open your saved @starter-file{animals}, or make a new copy.
+- Where have you seen infographics and graphs used to display data in the real world?
 
 <!--
-Solicit student ideas, and provide some of your own
+Solicit student ideas for infographics, and/or provide some of your own
 -->
 ---
 {layout="LaunchR"}
-# Launch
+# Pie and Bar Charts
+
+@left{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs", 300}}
 
 Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
 
@@ -29,13 +29,12 @@ And here is an example of _using_ the function:
 
 `pie-chart(animals-table, "legs")`
 
-
 <!--
 
 -->
 ---
 {layout="Launch"}
-# Launch
+# Pie and Bar Charts
 
 `pie-chart(animals-table, "legs")`
 
@@ -43,36 +42,33 @@ And here is an example of _using_ the function:
 - How many inputs are in its @vocab{Domain}?
 - In the Interactions Area, type `pie-chart(animals-table, "legs")` and hit "Enter". What happens?
 
-
 <!--
 
 -->
 ---
-{layout="Launch"}
-# Launch
+{layout="LaunchR"}
+# Pie and Bar Charts
 
 @left{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}}
 
-Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.{style="font-size:14pt"}
+Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
 
-We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.{style="font-size:14pt"}
-
+We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
 <!--
 
 -->
 ---
 {layout="Launch"}
-# Launch
+# Pie and Bar Charts
 
+`pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer counts the number of times that each value appears.
 
-`pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer counts the number of times that each value appears.{style="font-size:14pt"}
+Then it draws a slice for each value, with the size being the percentage of cells with that value.
 
-Then it draws a slice for each value, with the size being the percentage of cells with that value.{style="font-size:14pt"}
+This pie chart shows the distribution of the number of `legs` across the shelter.
 
-This pie chart shows the distribution of the number of `legs` across the shelter.{style="font-size:14pt"}
-
-Can you make a pie chart for the `sex` column?{style="font-size:14pt"}
+Can you make a pie chart for the `sex` column?
 
 <!--
 When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
@@ -80,8 +76,8 @@ When students make a display of the `sex` of the animals, they will see that som
 -->
 
 ---
-{layout="InvestigateDN"}
-# Investigate
+{layout="Investigate-DN"}
+# Pie and Bar Charts
 
 Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
 
@@ -95,7 +91,7 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 -->
 ---
 {layout="Investigate"}
-# Investigate
+# Pie and Bar Charts
 
 - Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
 - What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
@@ -109,7 +105,7 @@ To dig deeper into pie charts and bar charts, have students complete @opt-printa
 -->
 ---
 {layout="Synthesize"}
-# Synthesize
+# Pie and Bar Charts
 
 * What strategies did you use to match the bar charts to the pie charts?
 * Which displays do you find it easier to interpret? Why?
@@ -125,7 +121,7 @@ Common Misconceptions
 -->
 ---
 {layout="Synthesize"}
-# Synthesize
+# Pie and Bar Charts
 
 Bar Charts and Pie Charts are mostly used to _display categorical columns_.
 
@@ -138,18 +134,17 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 {layout="Launch"}
 # Exploring other Displays
 
-There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them!
+There are _lots_ of other functions, for all different kinds of data displays. 
+
+Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them!
 
 
 <!--
 
 -->
 ---
-{layout="InvestigateR"}
-# Synthesize
-
-@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}
-
+{layout="Investigate-DN"}
+# Exploring other Displays
 
 Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
 
@@ -158,8 +153,8 @@ There are _many_ possible misconceptions about displays that students may encoun
 -->
 
 ---
-{layout="InvesitgateR"}
-# Investigate
+{layout="InvestigateR"}
+# Exploring other Displays
 
 @image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}
 
@@ -173,7 +168,7 @@ There are _many_ possible misconceptions about displays that students may encoun
 -->
 ---
 {layout="Synthesize"}
-# Synthesize
+# Exploring other Displays
 
 * What displays did you find that work with just one column of data?
 * What displays did you find that work with more than one column of data?
