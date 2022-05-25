@@ -43,7 +43,7 @@
 
 |===
 
-== Introduction @duration{20 minutes}
+== Questions that Matter @duration{20 minutes}
 
 === Overview
 Students look at opening questions, either at their desks or in a walk around the room. They select a question they are personally interested in, and think about the data required to answer that question. This process draws a direct line between answering questions they care about and the basics of data science.
@@ -78,8 +78,7 @@ For each group...
 - What, if anything, were you surprised about?
 
 * If we wanted to find out if small schools are better than big schools, for example, we might want to gather data on SAT scores, college acceptance, etc. Each of these is a *variable* in our dataset: any two schools we look at could _vary_ by each of them.
-* What is the most popular movie of all time? Is Climate Change real? How long do quarterbacks tend to stay in the league? Is Stop-and-Frisk racially biased?
-* We can't survey every school in the world, get data on every movie ever made, or every police action - but we can do an analysis for a _sample_ of them, and try to infer something about all of them as a whole.
+* We can't survey every school in the world (or get data on every movie ever made, or every police action!) but we can analyze a _sample_ of them, and try to infer something about all of them as a whole.
 
 These questions quickly turn into a discussion about data -- how you assess it, how you interpret the results, and what you can _infer_ from those results.
 
@@ -188,18 +187,22 @@ Let's take a look at our programming environment, and see what the Animals Datas
 - What happens?
 - Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
 
-The first line on the lefthand side of the screen tells Pyret to use a file we've provided, which contain tools we’ll want to use for this course.
+The first line on the left-hand side of the screen tells Pyret to use a file we've provided, which contain tools we’ll want to use for this course.
 
 `use context shared-gdrive("Bootstrap-DataScience-...")`
 
-After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet. This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at! After that, we see the following code:
+After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet.
+
+`shelter-sheet = load-spreadsheet("https://docs.google.com....")`
+
+This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at! After that, we see the following code:
 
   # load the 'pets' sheet as a table called animals-table
   animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
     source: pets-sheet.sheet-by-name("pets", true)
   end
 
-The first line (starting with `#`) is called a _Comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called `animals-table`, which is loaded from the `shelter-sheet` defined above. We also create names for the columns: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
+The first line (starting with `#`) is called a _Comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called animals-table, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 
 [.lesson-point]
 Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
@@ -239,7 +242,5 @@ Once you know how to program, you can do a _lot_ with datasets:
 - Sometimes they want to *filter* a table, showing only a few of the rows. For example we might only want to look at animals where `species` is equal to `"dog"`.
 - Or perhaps we want to *build* a column! For example, there could be a vaccination for all cats under the age of 3, and we want to add a `needs-vaccine` column that says `true` for cats under the age of 3, and `false` for everyone else.
 
-In this course, you'll be learning to do all three in Pyret: Display, Filter, and Build.
-
-}
+In this course, you'll learn how to do all three: Display, Filter, and Build.
 
