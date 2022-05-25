@@ -104,10 +104,26 @@ Now, you're doing to do the same thing **with your own dataset.**
 - In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
 
 ---
+{layout="InvestigateR"}
+# Exploring Your Dataset 
+
+@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+
+What are the categorical columns in _your_ dataset? How are the values distributed?
+
+- What is the distribution of data in your categorical columns? Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
+- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of your @starter-file{exploration-paper}.
+- Do these displays bring up any interesting questions? If so, add them to the end of the document.
+
+---
 {layout="Synthesize"}
 # Exploring Your Dataset 
 
-Have students share which datasets they chose, and why they are interesting or important to them.
+@image{images/InterpretData.png, "Interpret Data icon", 100}
+
+- What dataset did you choose? 
+- Why is it interesting or important to you?
+- What did your pie and bar charts tell you?
 
 <!--
 

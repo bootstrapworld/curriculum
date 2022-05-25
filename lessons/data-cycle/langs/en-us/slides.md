@@ -10,10 +10,11 @@
 {layout="Launch"}
 # Telling Your Data Story
 
-Are more animals fixed or unfixed?
+**Are more animals fixed or unfixed?**
 
-- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset} in your student workbooks, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet} and the @starter-file{animals} in a new tab.
-- You and your partner are going to answer a simple question: *"are more animals fixed or unfixed?"*
+- Open your saved @starter-file{animals}, or make a new copy.
+- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset} in your student workbooks, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
+- You and your partner are going to answer a simple question: **are more animals fixed or unfixed?**
 
 <!--
 
@@ -24,7 +25,7 @@ Are more animals fixed or unfixed?
 
 Data Science is all about _asking questions of data_. Sometimes the answer is easy to compute. Sometimes the answer to a question is _already in the dataset_ - no computation needed.  And sometimes the answer just sparks more questions!
 
-Data Scientists ask a ton of questions, and each question adds a chapter to the story of their research. Even if a question is a dead-end, it's valuable to share what the question was and what work you did to answer it!
+Data Scientists ask a ton of questions, and each question adds a chapter to their **data story**. Even if a question turns out to be a dead-end, it's valuable to share what the question was and what work you did to answer it!
 
 <!--
 
@@ -35,16 +36,15 @@ Data Scientists ask a ton of questions, and each question adds a chapter to the 
 
 @image{images/data-cycle.png, "A circular progression: (1) Ask Questions, (2) Consider Data, (3) Analyze Data, (4) Interpret Data, and starting over", 400}
 
-
 The Data Cycle is a _roadmap_, which helps guide us in the process of data analysis.
 
-(Step 1) We *Ask Questions* - which can be answered with data.{style="font-size:14pt"}
+1) We **Ask Questions** - which can be answered with data.{style="font-size:14pt"}
 
-(Step 2) We *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset.{style="font-size:14pt"}
+2) We **Consider Data**. This could be done by conducting a survey, observing and recording data, or finding a dataset.{style="font-size:14pt"}
 
-(Step 3) We *Analyze the Data*, to produce data displays and new tables of filtered or transformed data, to identify patterns and relationships.{style="font-size:14pt"}
+3) We **Analyze the Data**, to produce data displays and new tables of filtered or transformed data, to identify patterns and relationships.{style="font-size:14pt"}
 
-(Step 4) We *Interpret the Data*, answering questions and summarizing results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.{style="font-size:14pt"}
+4) We **Interpret the Data**, answering questions and summarizing results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.{style="font-size:14pt"}
 
 <!--
 
@@ -53,7 +53,9 @@ The Data Cycle is a _roadmap_, which helps guide us in the process of data analy
 {layout="Synthesize"}
 # Telling Your Data Story
 
-This was a pretty small, specific question, and it was straightforward to answer it. But the answers to even simple questions can lead to more interesting questions down the road!
+**Are more animals fixed or unfixed?**
+
+This was a pretty specific question, and it was straightforward to answer it. But the answers to even simple questions can lead to more interesting questions down the road!
 
 _What other questions might come from counting the ratio of fixed to unfixed animals?_
 
@@ -66,7 +68,9 @@ _What other questions might come from counting the ratio of fixed to unfixed ani
 
 @image{images/AskQuestions.png, "Ask Questions icon", 200}
 
-How do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
+**How do we know what questions to ask?**
+
+There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
 
 ---
 {layout="Launch"}
@@ -74,13 +78,13 @@ How do we know what questions to ask? There’s an art to asking the right quest
 
 Most questions can be broken down into one of four categories:
 
-- *Lookup questions* can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done! 
+- **Lookup questions** can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
 
-- *Arithmetic questions* can be answered by computing an answer across a single column.
+- **Arithmetic questions** can be answered by computing an answer across a single column.{style="font-size:16pt"}
 
-- *Statistical questions* are where things get interesting! If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...
+- **Statistical questions** are where things get interesting! If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
 
-- *Questions we can't answer* would need data that we don't have. 
+- **Questions we can't answer** would need data that we don't have. {style="font-size:16pt"}
 
 <!--
 Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"
@@ -95,7 +99,9 @@ We might wonder where the animal shelter is located, or what time of year the da
 {layout="LaunchR"}
 # Ask Questions
 
-Lookup, Arithmetic, Statistical, or Can't Answer?
+@image{images/AskQuestions.png, "Ask Questions icon", 200}
+
+**Lookup, Arithmetic, Statistical, or Can't Answer?**
 
 * What kind of question is "Are more animals fixed or unfixed?"
 * What kind of question is "How old is Toggle?"
@@ -139,23 +145,20 @@ Lookup, Arithmetic, Statistical, or Can't Answer?
 
 @image{images/ConsiderData.png, "Consider Data icon", 200}
 
-When considering the data we need to answer a question, we ask "Which Rows?" and "Which Column(s)?"
+When considering data, we ask:
+
+* **Which Rows** do we need?
+* **Which Column(s)** do we care about?
 
 ---
 {layout="Launch"}
 # Consider Data
 
-Tables are made of *Rows* and *Columns*. Each Row represents one member of our population. In the Animals Dataset, each row is a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.{style="font-size:14pt"}
+Tables are made of **Rows** and **Columns**. 
 
-Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.{style="font-size:14pt"}
+Each Row represents one member of our population. In the Animals Dataset, each row represents a single animal. In a dataset of temperature readings, each row might represent the temperature at a particular hour.{style="font-size:16pt"}
 
----
-{layout="LaunchR"}
-# Consider Data
-
-@image{images/ConsiderData.png, "Consider Data icon", 200}
-
-If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
+Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.{style="font-size:16pt"}
 
 ---
 {layout="LaunchR"}
@@ -163,8 +166,18 @@ If we want to know which cat is the heaviest, we _only care about rows for cats_
 
 @image{images/ConsiderData.png, "Consider Data icon", 200}
 
-* If our question is "How old is Mittens?", what rows do we need? What column(s)?
-* If our question is "Which animal is the heaviest?", what rows do we need? What column(s)?
+If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. 
+
+If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
+
+---
+{layout="LaunchR"}
+# Consider Data
+
+@image{images/ConsiderData.png, "Consider Data icon", 200}
+
+* If our question is "How old is Mittens?", what rows and column(s) do we need? 
+* If our question is "Which animal is the heaviest?", what rows and column(s) do we need? 
 * What rows and columns did we need to answer "Are more animals fixed or unfixed?"?
 
 <!--
@@ -195,7 +208,7 @@ Common Misconceptions
 
 Debrief your answers!
 
-How does asking "which rows? which columns?" help us figure out what code to write?
+How does asking "Which rows? Which columns?" help us figure out what code to write?
 
 ---
 {layout="LaunchR"}
@@ -203,9 +216,24 @@ How does asking "which rows? which columns?" help us figure out what code to wri
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
+Once we know what data we need, we can turn our attention to what we want to build with it!
+
+- Do we need to filter out certain rows and make a new table?
+- Do we need a pie chart?
+- Should we make a histogram?
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
-We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{style="font-size:14pt"}
+---
+{layout="LaunchR"}
+# Analyzing Data
+
+@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+
+**Are more animals fixed or unfixed?**
+
+We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. 
+
+Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
 
 ---
 {layout="LaunchR"}
@@ -213,17 +241,15 @@ We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
-
-Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_{style="font-size:14pt"}
+Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
 
 Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
 
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Analyzing Data
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
-
 
 Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in Pyret.
 
@@ -243,27 +269,3 @@ In this case, we got a clear answer to our question. But perhaps that's not the 
 <!--
 Have students share their results. What did their charts tell them?
 -->
-
----
-{layout="Launch"}
-# Your Own Analysis
-
-What are the categorical columns in _your_ dataset? How are the values distributed?
-
----
-{layout="Launch"}
-# Your Own Analysis
-
-What are the categorical columns in _your_ dataset? How are the values distributed?
-
-- What is the distribution of data in your categorical columns? Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
-- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of your @starter-file{exploration-paper}.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
-
----
-{layout="Synthesize"}
-# Analyzing Data
-
-Share your findings. Were any of them surprising?
-
----
