@@ -1418,7 +1418,7 @@
                                   (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(string=? directive "scrub")
+                           [(member directive '("scrub" "slideLayout"))
                             (read-group i directive)]
                            [(string=? directive "page-of-lines")
                             (let ([n (string->number (read-group i directive))])

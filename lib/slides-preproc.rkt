@@ -278,6 +278,11 @@
                               (call-with-input-string fragment
                                 (lambda (i)
                                   (expand-directives i o)))))]
+                         [(member directive '("left" "right" "center"))
+                          (let ([fragment (read-group i directive #:multiline? #t)])
+                            (call-with-input-string fragment
+                              (lambda (i)
+                                (expand-directives i o))))]
                          [(string=? directive "math")
                           (let ([text (read-group i directive)])
                             (display (make-math text) o))]
@@ -313,6 +318,9 @@
                             (display "</i></b>" o))]
                          [(string=? directive "scrub")
                           (read-group i directive)]
+                         [(string=? directive "slideLayout")
+                          (let ([x (read-group i directive)])
+                            (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
                          [else (display c o) (display directive o)]))]
                 [else
                   (display c o)])
