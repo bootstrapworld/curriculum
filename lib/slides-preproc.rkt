@@ -278,6 +278,11 @@
                               (call-with-input-string fragment
                                 (lambda (i)
                                   (expand-directives i o)))))]
+                         [(member directive '("left" "right" "center"))
+                          (let ([fragment (read-group i directive #:multiline? #t)])
+                            (call-with-input-string fragment
+                              (lambda (i)
+                                (expand-directives i o))))]
                          [(string=? directive "math")
                           (let ([text (read-group i directive)])
                             (display (make-math text) o))]
