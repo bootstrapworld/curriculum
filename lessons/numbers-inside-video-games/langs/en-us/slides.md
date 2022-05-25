@@ -1,4 +1,5 @@
 ---
+{layout="Math Title Slide"}
 
 # The Numbers Inside Video Games
 
@@ -11,10 +12,8 @@ Take turns playing the @starter-file{ninja-cat} in pairs.
 Turn to @printable-exercise{pages/NoticeAndWonder.adoc}. 
 
 1. Write down what you _notice_ about the game.
-*"Notice"s should be statements, not questions. What stood out to you? What do you remember?*
 
-1. Write down what you _wonder_ about the game? 
-*What questions do you have about how it works?*
+1. Write down what you _wonder_ about the game?
 
 <!--
 This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding in literature}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look at the game. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's going on in this Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
@@ -36,14 +35,12 @@ Common Misconceptions:
 {layout="Synthesize"}
 # Reverse Engineering a Video Game
 
-While we see images on a screen, the computer only sees a small set of numbers, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more numbers.{style="font-size:16pt"}
-
-- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:14pt"}
-- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:14pt"}
-- How many numbers would we need if the dog could also move up and down?{style="font-size:14pt"}
-- How many numbers would we need to have a two-player game?{style="font-size:14pt"}
-- How many numbers would we need if the entire game was in 3d?{style="font-size:14pt"}
-- How many numbers would we need to make a modern game?{style="font-size:14pt"}
+- If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:16pt"}
+- How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:16pt"}
+- How many numbers would we need if the dog could also move up and down?{style="font-size:16pt"}
+- How many numbers would we need to have a two-player game?{style="font-size:16pt"}
+- How many numbers would we need if the entire game was in 3d?{style="font-size:16pt"}
+- How many numbers would we need to make a modern game?{style="font-size:16pt"}
 
 ---
 {layout="Launch"}
