@@ -32,7 +32,7 @@ Guide students through other examples of `and` and `or` with various statements,
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Introducing Compound Inequalities
 
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
@@ -74,7 +74,7 @@ How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numb
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Open @starter-file{inequalities-compound}.
@@ -140,7 +140,7 @@ Some @vocab{unions}, like the one below, include *all real numbers*; they have *
 @image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Turn to @printable-exercise{compound-inequality-solutions.adoc}.
@@ -148,7 +148,7 @@ Turn to @printable-exercise{compound-inequality-solutions.adoc}.
 Explore the compound inequalities listed using the @starter-file{inequalities-compound}. Identify solutions and non-solutions for each.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality.
