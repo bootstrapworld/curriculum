@@ -23,7 +23,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 {layout="Launch"}
 # Order of Operations
 
-@math{6 \div 2(1 + 2)}{style="font-size:36pt"}
+__@math{6 \div 2(1 + 2)}__{style="font-size:46pt"}
 
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 
@@ -89,7 +89,7 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 {layout="InvestigateC"}
 # Order of Operations
 
-Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. 
+Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} and draw Circles of Evaluation for each of the expressions. 
 
 Ignore the code column for now! We will come back to it later.
 
@@ -235,8 +235,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 - What do you think this expression will evaluate to? {style="font-size:16pt"}
 - Convert this Circle to code and try it out!{style="font-size:16pt"}
 
-@image{images/coe13.png, circle of evaluation}{width="150"}
-
+@show{(coe '(string-length "fun!"))}
 
 ---
 {layout="Supplemental"}
