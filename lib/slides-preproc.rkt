@@ -318,6 +318,9 @@
                             (display "</i></b>" o))]
                          [(string=? directive "scrub")
                           (read-group i directive)]
+                         [(string=? directive "slideLayout")
+                          (let ([x (read-group i directive)])
+                            (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
                          [else (display c o) (display directive o)]))]
                 [else
                   (display c o)])
