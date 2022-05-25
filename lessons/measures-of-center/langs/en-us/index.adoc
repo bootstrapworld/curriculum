@@ -111,22 +111,21 @@ _Kujo and Mr. Peanutbutter!_
 In this case, the mean is being thrown off by a few extreme data points. These extreme points are called @vocab{outliers}, because they fall far outside of the rest of the dataset. Calculating the mean is great when all the points are fairly balanced on either side of the middle, but it distorts things for datasets with extreme outliers. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
 
 [.lesson-instruction]
-Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the skew towards the right, with a huge number of animals clumped to the left?
+Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the huge number of animals clumped to the left, with Kujo and Mr. Peanutbutter as outliers skewed to the right?
 
 A different way to measure center is to line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger. This is the @vocab{median}, or “middle” value of a list.
 
 As an example, consider this list of ACT scores:
 
-  25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32
+`25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 
 Here 29 is the median, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
 
 The algorithm for finding the median of a quantitative column is:
 
-. Sort the numbers (we did this for you in the above example).
-. Cross out the highest number.
-. Cross out the lowest number.
-. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers.
+. Sort the numbers
+. Cross out the highest and lowest number
+. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers
 
 === Investigate
 [.lesson-instruction]
