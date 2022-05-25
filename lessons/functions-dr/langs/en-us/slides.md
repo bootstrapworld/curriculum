@@ -1,6 +1,6 @@
 ---
-
-# Solving Word Problems
+{layout="Math Title Slide"}
+# Solving Word Problems with the Design Recipe
 
 ---
 {layout="Launch"}
@@ -57,7 +57,7 @@ Turn to @printable-exercise{fixing-purpose.adoc} and identify:
 * Why are purpose statements useful?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Rocket Height! 
 
 Open the @starter-file{rocket-height} and look at the code before you click run.
@@ -65,7 +65,7 @@ Open the @starter-file{rocket-height} and look at the code before you click run.
 What do you Notice? What do you Wonder?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Rocket Height! 
 
 Click Run to see the simulation start running on your computer.
@@ -77,10 +77,10 @@ Click Run to see the simulation start running on your computer.
 * Close the window with the rocket, so you can see the code.
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Rocket Height! 
 
-It would be nice to get a warning when a function doesn't work right! Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
+Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
 * Type @show{(code '(rocket-height 0))} into the interactions area.{style="font-size:17pt"}
 * As the program is currently written, what happens when we give the `rocket-height` function an input of 0? {style="font-size:17pt"}
@@ -105,17 +105,42 @@ Complete @printable-exercise{pages/rocket-height.adoc}.
 As students work, circle the room and make sure that their @vocab{purpose statements} are strong enough that they could write examples without looking at the original word problem. Encourage students to circle what's changing in their examples and label with descriptive variables.
 -->
 
+
 ---
 {layout="Investigate"}
+# Rocket Height
+
+@image{images/rocket-height-contract.png, a}{width="700"}
+
+
+---
+{layout="Investigate"}
+# Rocket Height
+
+@image{images/rocket-height-dr.png, a}{width="700"}
+
+
+
+---
+{layout="Investigate-DN"}
 # Rocket Height! 
 
-Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own. When it's working correctly, explore the other functions in the file.{style="font-size:16pt"}
+Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own.
 
-Here are some suggestions to guide you:{style="font-size:16pt"}
-- Remove the comment from before the `(start rocket-height)` and test the program.{style="font-size:16pt"}
-- Put the comment back in front of `(start rocket-height)`, remove the comment from `(graph rocket-height)`, and test the program.{style="font-size:16pt"}
-- Try out `(space rocket-height)`{style="font-size:16pt"}
-- Try out `(everything rocket-height)`{style="font-size:16pt"}
+Be sure to add the contract, purpose statement, and examples.
+
+Save your work when you're done!
+
+
+---
+{layout="Investigate-DN"}
+# Rocket Height!
+
+At the bottom of the Definitions area, you'll see some commented lines of code with instructions. 
+
+You already know what `(start rocket-height)` does. 
+- What about `(space rocket-height)`?
+- Try out `(everything rocket-height)`, too!
 
 ---
 {layout="Synthesize"}

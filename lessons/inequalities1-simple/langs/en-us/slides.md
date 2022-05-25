@@ -1,5 +1,5 @@
 ---
-
+{layout="Math Title Slide"}
 # Simple Inequalities
 
 ---
@@ -7,7 +7,7 @@
 # Introducing Booleans 
 
 Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
-@ifproglang{pyret}{Then, log into @link{https://code.pyret.org, code.pyret.org (CPO)} and see what the code evaluates to.}
+@ifproglang{pyret}{Then, log into @link{https://code.pyret.org, code.pyret.org (CPO)} and see what the code evaluates to.}{style="font-size:24pt"}
 
 @image{images/set-of-coes1.png, a}{width="550"}
 
@@ -16,13 +16,7 @@ Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log i
 {layout="LaunchC"}
 # Introducing Booleans 
 
-You've never seen Circles of Evaluation like these before... but you can probably convert them to code!
-
-@ifproglang{wescheme}{Type your code into @link{https://www.wescheme.org, WeScheme}}
-@ifproglang{pyret}{Type your code into @link{https://code.pyret.org, code.pyret.org (CPO)}}
-
-What did the expressions evaluate to? 
-What do they think the outputs mean?
+Hypothesize: What do these Circles of Evaluation mean? What do they evaluate to?{style="font-size:24pt"}
 
 @image{images/set-of-coes2.png, a}{width="550"}
 
@@ -35,7 +29,7 @@ Values like `true` and `false` obviously aren't Numbers or Images. But they also
 We've found a __new data type__, called a @vocab{Boolean}.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Introducing Booleans
 
 * Open the @starter-file{boolean}.
@@ -54,13 +48,7 @@ We've found a __new data type__, called a @vocab{Boolean}.
 }
 
 ---
-{layout="Investigate"}
-# Introducing Booleans 
-
-A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
-
----
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Introducing Booleans 
 
 * Turn to @printable-exercise{boolean-functions.adoc} and use the @starter-file{boolean} to complete the questions.
@@ -86,7 +74,7 @@ Inequalities, on the other hand, can have _infinite_ solutions.
 Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Introducing Inequalities
 
 * Open the @starter-file{inequalities-simple}.  It includes an example.  
@@ -101,9 +89,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 
 This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.{style="font-size:13pt"}
 
-The solution set is shaded in blue, with points shaded green (solution) and red (non-solution).{style="font-size:13pt"}
-
-The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:13pt"}
+The solution set is shaded in blue, with points shaded green (solution) and red (non-solution). The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:13pt"}
 
 @image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}{width="550"}
 
@@ -116,10 +102,12 @@ If your list of 8 values doesn't include an equal number of solutions and non-so
 @image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}{width="550"}
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Introducing Inequalities
 
-Open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
+Open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner.
+
+Identify solutions and non-solutions to each inequality and test them in the @starter-file{inequalities-simple}.
 
 <!--
 Encourage students to use negatives, positives, fractions and decimals as they generate their lists.
