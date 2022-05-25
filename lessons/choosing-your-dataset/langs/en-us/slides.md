@@ -1,5 +1,4 @@
 ---
-
 {layout="DS Title Slide"}
 
 # Choosing Your Dataset
@@ -25,9 +24,9 @@ Be sure to review student answers!
 
 We live in a world filled with data, gathered about almost every subject you can imagine.
 
-- Climate sensors are gathering data on temperature, humidity, oxygen and more...practically everywhere on the globe.
-- Census data tracks the number of different groups of people, as well as their education, income level, and more.
-- Companies like Facebook, Amazon, and Google gather massive amounts of data on the websites you visit, what you chat about online, what you purchase, etc.
+- **Climate sensors** are gathering data on temperature, humidity, oxygen and more...practically everywhere on the globe.
+- **Census data** tracks the number of different groups of people, as well as their education, income level, and more.
+- Companies like **Facebook, Amazon, and Google** gather massive amounts of data on the websites you visit, what you chat about online, what you purchase, etc.
 
 <!--
 
@@ -104,10 +103,8 @@ Now, you're doing to do the same thing **with your own dataset.**
 - In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Exploring Your Dataset 
-
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
 What are the categorical columns in _your_ dataset? How are the values distributed?
 
@@ -116,7 +113,7 @@ What are the categorical columns in _your_ dataset? How are the values distribut
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 ---
-{layout="Synthesize"}
+{layout="SynthesizeR"}
 # Exploring Your Dataset 
 
 @image{images/InterpretData.png, "Interpret Data icon", 100}
