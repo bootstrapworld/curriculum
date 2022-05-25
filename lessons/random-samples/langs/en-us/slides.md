@@ -155,7 +155,7 @@ Suppose we want to estimate what percentage of all Americans plan to vote for a 
 {layout="Launch"}
 # Probability v. Inference
 
-Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to prove that one candidate is in the lead. But if we survey enough people we can infer something about the whole population.
+Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to prove that one candidate is in the lead. _But if we survey enough people_ we can infer something about the whole population.
 
 **Sample size matters!**
 <!--
@@ -166,8 +166,8 @@ Just like our coin-flip, we can start out with the null hypothesis: assuming tha
 {layout="Launch"}
 # Probability v. Inference
 
-But there's more to taking a good sample than just taking a _big_ sample. Suppose you want to take a survey of people's faiths in your neighborhood. There's a Baptist church right down the street, so we could get a nice big sample by asking everyone there!
-
+**But there's more to taking a good sample than just taking a _big_ sample.**
+* We're taking a survey of religions in our neighborhood. There's a Baptist church right down the street, so we could get a nice big sample by asking everyone there...right?
 * Taking a sample of whoever is nearby is called a _convenience sample_. Why is a convenience sample a problem in this example?
 * Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
 
@@ -180,11 +180,12 @@ But there's more to taking a good sample than just taking a _big_ sample. Suppos
 
 **Why would someone want a BAD sample?**
 
-When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people.
+When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! _But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people._
 
 For example: A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"{style="font-size:14pt"}
 
 <!--
+Another example
 * A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!
 -->
 ---
