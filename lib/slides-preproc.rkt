@@ -85,9 +85,11 @@
                                             (loop s-rest (cons #\> r))]
                                            [(equal? w '(#\t #\l))
                                             (loop s-rest (cons #\< r))]
-                                           [(equal? w '(#\e #\l))
+                                           [(or (equal? w '(#\e #\l))
+                                                (equal? w '(#\q #\e #\l)))
                                             (loop s-rest (cons #\≤ r))]
-                                           [(equal? w '(#\e #\g))
+                                           [(or (equal? w '(#\e #\g))
+                                                (equal? w '(#\q #\e #\g)))
                                             (loop s-rest (cons #\≥ r))]
                                            [else (loop s-rest (append w r))]))]
                             [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
