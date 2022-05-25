@@ -49,15 +49,29 @@ Complete @printable-exercise{pages/row-and-function-definitions.adoc}.
 
 Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
 
-. The first example tells us that we should expect `is-dog` to return `false`. We defined this row to be a cat, so we want to see a `false` result!
-. The second example shows us some of the work involved: we know the species of the row is `"cat"`, and comparing that to the String `"dog"` will return false.
+```
+examples:
+  is-dog(cat-row) is false
+  is-dog(cat-row) is "cat" == "dog"
+  is-dog(cat-row) is cat-row["species"] == "dog"
+end
+```
+
+. The first example just tells us the answer we think we'll get back. `cat-row` is NOT a dog, so we expect `false`!
+. The second example shows us some of the work involved: we know the species of the row is `"cat"`, and comparing that to the String `"dog"` will return `false`.
 . The third example shows __all the work__: given the `cat-row`, we lookup the value in the `"species"` column and compare it to the String `"dog"`.
 
 [.lesson-instruction]
 Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
 
 === Synthesize
-Have students explain what each function does. Challenge them to use terminology like "looks up the value in the X column" when describing a lookup.
+* Who can explain what `is-old` does?
+* Who can explain what `lookup-name` does?
+* Who can explain what `is-fixed` does?
+* Who can explain what `label` does?
+* Who can explain what `kilos` does?
+
+Challenge them to use terminology like "looks up the value in the X column" when describing a lookup.
 
 
 == Ordering, Filtering, and Building @duration{30 minutes}
@@ -66,13 +80,20 @@ Have students explain what each function does. Challenge them to use terminology
 Students learn to sort rows of a table in ascending or descending order, filter the rows using a Boolean-producing function, and build a new column.
 
 === Launch
-
 Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room. Tell the class that you are going to select a volunteer who will play the role of… *Order*!
 
 [.lesson-point]
+* Each of you represents a Row in a table of students
+* Standing together, you represent a _sample_ of the class, stored in a table.
+* Like you, each student has columns like "First Name", "Last Name", "Birthday", "Favorite Food", etc.
+
 A Table is a collection of Rows. And we can _do things_ to collections!
 
+One thing we can do is *order the rows by some criteria*. What are some ways to sort this table?
+
 Announce to your volunteer "Sort the Rows by height, from smallest to largest!", and have them do it. Then announce to your volunteer "Sort the Rows by height, from largest to smallest!", and have them do it.
+
+Solicit other ideas, like sorting by birthday. Try sorting in ascending **and** descending order!
 
 Give the volunteer a round of applause, and then tell the class that you are going to select another volunteer who will play the role of… *Filter*!
 
@@ -94,34 +115,43 @@ Have your Filter volunteer go through all their peers, applying their card to ea
 [.lesson-instruction]
 Based on who sat and who stayed, what was on the card?
 
+=== Investigate
 Pyret Tables have their own methods for sorting, filtering, and more.
 
-=== Investigate
 [.lesson-instruction]
 Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
 
-Have the class explain how the `.order-by` method works. `.order-by` consumes a String (the name of the column by which to sort) and a Boolean (`true` for ascending, `false` for descending).
-
-Does sorting the `animals-table` produce a _new_ table, or change the existing one? How could we test this?
+* How does the `.order-by` method work?
+** `.order-by` consumes a String (the name of the column by which to sort) and a Boolean (`true` for ascending, `false` for descending), and sorts the rows according to that column.
+* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
+** It creates a new one
+* How could we test this?
+** Sort the table, then evaluate `animals-table` and see if it stayed sorted
 
 [.lesson-instruction]
 Complete questions 7-13 on @printable-exercise{exploring-methods.adoc}
 
-Have the class explain how the `.filter` method works. `.filter` takes a _function_, and produces a new table containing only rows for which the function returns `true`.
+* How does the `.filter` method work?
+** `.filter` takes a _function_, and produces a new table containing only rows for which the function returns `true`.
+* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
+** It creates a new one
 
 [.lesson-instruction]
 Complete questions 14-16 on @printable-exercise{exploring-methods.adoc}
 
-Have the class explain how the `.build-column` method works. `.build-column` takes in a String and a _function_, and produces a new table with an extra column. It uses the String for the column title, and fills in the values by applying the function to every Row.
+* How the `.build-column` method work?
+** `.build-column` takes in a String and a _function_, and produces a new table with an extra column. It uses the String for the column title, and fills in the values by applying the function to every Row.
+* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
+** It creates a new one
 
 [.lesson-instruction]
-How well do you understand these methods? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
+Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
 
 === Common Misconceptions
 *Students often think that these methods _change_ the table!* In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.
 
 === Synthesize
-Debrief with students. Being able to define functions and use them with Table Methods is a _huge_ upgrade in our ability to analyze data!
+Being able to define functions and use them with Table Methods is a _huge_ upgrade in our ability to analyze data!
 
 - Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `.filter` method help?
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
