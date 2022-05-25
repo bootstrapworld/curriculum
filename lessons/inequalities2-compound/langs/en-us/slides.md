@@ -1,4 +1,6 @@
-git ---
+---
+
+{layout="Math Title Slide"}
 
 # Compound Inequalities: Solutions & Non-Solutions
 
@@ -35,14 +37,23 @@ Guide students through other examples of `and` and `or` with various statements,
 
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
 
-Complete @printable-exercise{pages/boolean-coe-to-code1.adoc} and @printable-exercise{pages/and-or.adoc}.
+Complete:
+
+- @printable-exercise{pages/boolean-coe-to-code1.adoc}
+- @printable-exercise{pages/and-or.adoc}
 
 ---
 {layout="Synthesize"}
 # Introducing Compound Inequalities
 
-- Expressions using `and` only produce `true` if both of their sub-expressions are `true`.
-- Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.
+Expressions using `and` only produce `true` if both of their sub-expressions are `true`.
+Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.
+
+True or False?
+- I'm wearing a red shirt and I'm a math teacher.
+- I'm an NBA basketball star or I'm having pizza for lunch.
+
+Write your own compound boolean statements.
 
 <!--
 When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
@@ -57,10 +68,6 @@ Identify 4 solutions and 4 non-solutions for each of the following inequalities.
 * @math{x \gt 5}
 * @math{x \le 15}
 
----
-{layout="Launch"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
 What about the solution set of @math{x \gt 5} `and` @math{x \le 15}?  What numbers make both of these inequality expressions true?
 
 How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numbers make at least one of these inequality expressions true?
@@ -70,9 +77,11 @@ How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numb
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Open @starter-file{inequalities-compound}, read the code carefully and click run to see the graphs you've just considered.
+Open @starter-file{inequalities-compound}.
 
-This starter file includes two special functions.
+Read the code and click run to see the graphs you've just considered.
+
+This starter file includes two special functions...
 
 ---
 {layout="InvestigateC"}
@@ -98,7 +107,7 @@ This starter file includes two special functions.
 
 @show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:15pt"}
 
-Note: Some pairs of inequalities do not intersect at all and therefore have no solutions.{style="font-size:15pt"}
+Some pairs of inequalities do not intersect at all and therefore have no solutions.{style="font-size:15pt"}
 
 @image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}{style="width:550pt"}
 
@@ -112,7 +121,7 @@ Note: Some pairs of inequalities do not intersect at all and therefore have no s
 
 @show{ (code '(define (gte15 x) (>= x 15))) }{style="font-size:13pt"}
 
-@show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
+@show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:13pt"}
 
 @image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}{style="width:550pt"}
 
@@ -126,7 +135,7 @@ Note: Some pairs of inequalities do not intersect at all and therefore have no s
 
 @show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:14pt"}
 
-Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have have *infinite solutions* that satisfy at least one of the inequalities.{style="font-size:14pt"}
+Some @vocab{unions}, like the one below, include *all real numbers*; they have *infinite solutions* that satisfy at least one of the inequalities.{style="font-size:14pt"}
 
 @image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
 
@@ -134,7 +143,9 @@ Note: Some @vocab{unions}, like the one below, include *all real numbers*; they 
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Turn to @printable-exercise{compound-inequality-solutions.adoc} and explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+Turn to @printable-exercise{compound-inequality-solutions.adoc}.
+
+Explore the compound inequalities listed using the @starter-file{inequalities-compound}. Identify solutions and non-solutions for each.
 
 ---
 {layout="Investigate"}
