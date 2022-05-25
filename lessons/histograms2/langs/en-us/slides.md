@@ -13,7 +13,9 @@
 
 Shape is one way to _summarize_ information in a dataset, to quickly describe what values are more or less common. 
 
-Data Scientists spend a lot of time looking at data displays to examine their shape! There are lots of insights that can only be found by looking at a display, which we lose by focusing only on numbers.
+**It's about more than numbers!** Data Scientists spend a lot of time looking at data displays to examine their shape! 
+
+If all you look at is the numbers, you lose a lot of insight into your dataset.
 
 <!--
 
@@ -24,7 +26,7 @@ Data Scientists spend a lot of time looking at data displays to examine their sh
 
 **Histograms create __fixed-size__ bins, which contain varying numbers of data points.**
 
-We can think of the data being "squeezed" into these fixed bins, like globs of pizza dough being pushed into tubes. When there isn't much data that fits into a bin, the tube is mostly empty. But when lots of datapoints fall within a bin, the dough stacks up in the tube. This is why the height of a histogram bar tells us how much data is "squeezed" into that bin!
+We can think of the data being "squeezed" into these fixed bins, like globs of pizza dough being pushed into tubes. When there isn't much data that fits into a bin, the tube is mostly empty. But when lots of data points fall within a bin, the dough stacks up in the tube. This is why the height of a histogram bar tells us how much data is "squeezed" into that bin!
 
 <!--
 
@@ -35,9 +37,9 @@ We can think of the data being "squeezed" into these fixed bins, like globs of p
 
 @image{images/skew-right.png, skew right, 300, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right"}
 
-Consider the image on the right: most of the data points are clustered on the left side, and it contains a few unusually high values way off to the right. We might describe this histogram by saying that it is _“skewed right, or has high outliers.”_
+Consider the image on the right: most of the data points are clustered on the left side, and it contains a few unusually high values way off to the right. But how do we describe this shape, and what does it mean?
 
-Let's look at some real-world examples of the most common shapes:
+Let's look at some real-world examples of the most common shapes...
 
 <!--
 
@@ -80,6 +82,7 @@ Think about the toes on your right foot!
 {layout="Investigate"}
 # Describing Shape
 
+* Open your saved @starter-file{animals}, or make a new copy.
 * Make a histogram for the pounds column in the animals table, sorting the animals into 20-pound bins:
 * Would you describe the shape of your histogram as being skewed left, skewed right, or symmetric?
 * Which one of these statements is justified by the histogram’s shape?
@@ -129,7 +132,7 @@ An outlier can be "junk" data that you need to throw away as part of your analys
 
 As a data scientist, *an outlier is a reason to look closer*. 
 
-And whether you decide to keep or remove it from your dataset, make sure you *explain your reasons* in your writeup!
+And whether you decide to keep or remove it from your dataset, make sure you *explain your reasons* in your write-up!
 
 Turn to @printable-exercise{pages/outliers-discussion.adoc}, and reflect on whether an outlier should be preserved or removed for analysis.
 
@@ -137,7 +140,7 @@ Turn to @printable-exercise{pages/outliers-discussion.adoc}, and reflect on whet
 {layout="Synthesize"}
 # Synthesize
 
-Histograms are a powerful way to display a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a quantitative dataset. In the next unit, we’ll explore the other two: center and spread.
+Histograms are a powerful way to display a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a quantitative dataset. In the next lessons, we’ll explore the other two: center and spread.
 
 <!--
 
@@ -170,8 +173,6 @@ Were any of them surprising?
 
 What, if any, outliers did you discover when making histograms?
 
-
 <!--
 
 -->
----
