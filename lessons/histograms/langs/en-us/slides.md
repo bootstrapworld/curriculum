@@ -84,7 +84,9 @@ Note that intervals on this display include the left endpoint but not the right.
 
 **The size of the bins matters a lot!**
 
-Bins that are too small will hide the shape of the data by breaking it into too many short bars. Bins that are too large will hide the shape by squeezing the data into just a few tall bars. In the last exercise, the bins were provided for you. But how do you choose a good bin-size?
+Bins that are too small will hide the shape of the data by breaking it into too many short bars. Bins that are too large will hide the shape by squeezing the data into just a few tall bars. In the last exercise, the bins were provided for you. 
+
+But how do you choose a good bin-size?
 
 <!--
 
@@ -95,6 +97,7 @@ Bins that are too small will hide the shape of the data by breaking it into too 
 
 Suppose we want to know how long it takes for animals from the shelter to be adopted.
 
+* Open your saved @starter-file{animals}, or make a new copy.
 * Find the contract for the `histogram` function.
 * Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10.
 * How many took between 0 and 10 weeks? Between 10 and 20?
@@ -118,9 +121,11 @@ Some observations you can share with the class, to get them started:
 {layout="Investigate"}
 # Introducing Histograms
 
+**How do you describe a histogram?**
+
 If someone asked what was a typical adoption time, we could say: “Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!” 
 
-Without looking at the histogram’s shape, we could not have given this description!
+It would have been hard to give this summary by reading through the table, but the histogram makes it easy to see!
 
 See if you can match descriptions to histograms, by completing @printable-exercise{reading-histograms.adoc}
 
