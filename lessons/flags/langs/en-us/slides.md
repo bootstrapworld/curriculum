@@ -26,7 +26,7 @@ The width of the rectangle is 300 and the height is 200. What coordinates for th
 @image{images/moving-red-dot.png, "Four images of a modified Japanese flag with the red dot's location moving"}{width="550"}
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Putting Images Together
 
 Open the @starter-file{flags} and click Run. There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer. {style="font-size:16pt"}
@@ -39,7 +39,7 @@ In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Putting Images Together
 
 1. Type `japan-flag` into the Interactions Area. What do you get back?
@@ -48,7 +48,7 @@ In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're
 1. What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Putting Images Together
 
 1. Open the @starter-file{flags-2} and click Run.
@@ -89,7 +89,7 @@ __TIP: don't cram all the code into one line! If you break it up into new lines 
 -->
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Making Flags
 
 Matching activities to support student thinking:
@@ -99,7 +99,7 @@ Matching activities to support student thinking:
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Making Flags
 
 
@@ -123,7 +123,7 @@ Why is it useful to define each part of the flag first, before stitching the ima
 {layout="Supplemental"}
 # Additional Exercises
 
-- @opt-starter-file{flags-pr} This starter file provide students with an image of a flag and code that starts out generating a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.{style="font-size:15pt"}
+- @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.{style="font-size:15pt"}
 
 - @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to define shapes before building the image.{style="font-size:15pt"}
 
