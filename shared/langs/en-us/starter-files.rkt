@@ -250,7 +250,7 @@
   )
 
   ("pulsing-star" "Pulsing Star"
-    ("pyret" "https://code.pyret.org/editor#share=1H-9AqmPVoyqvV2WBW6TOGMacifoJ0Ax6")
+    ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
   )
 
   ("what-to-wear" "What to Wear Starter File"
@@ -274,8 +274,8 @@
   )
 
   ("1-paddle-pong" "1-Paddle Pong"
-   ("pyret" "https://code.pyret.org/editor#share=17eTxETEbKs1C62rRoeq_LjBHgljEdbia")
-  )
+   ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
+  )          
 
   ("ninja-cat-collisions", "Ninja Cat Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1TGw11fcBMAS0j2CCRWZm5_6GuBWVMBPq")
