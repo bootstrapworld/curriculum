@@ -74,7 +74,7 @@ Do this until students can clearly see it’s when the two characters are 'touch
 @image{images/role-play2.png, "dog and ninja cat on a number line"}{width="750"}
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Distance in 1 Dimension
 
 
@@ -117,12 +117,12 @@ If two coordinates differ by their y-values, this function will tell us how far 
 But what if the coordinates differ by both x and y...?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Distance in 2 Dimensions
 
 Scroll down to `4. Collisions` in your game file and look for the `distances-color` definition. 
 
-Right now this value is defined to be the __empty string__ `""`. Change this to a color that will show up on your background, and click "Run".
+Right now this value is defined to be the __empty string__ `""`. Change this to a color that will show up on your background, and click _Run_.
 
 
 This setting will draw lines from your Player to each of the other characters, and then uses those lines as the hypotenuse of right triangles!
@@ -166,18 +166,18 @@ Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've pr
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
 - Turn to @printable-exercise{distance-on-coordinate-plane.adoc} and look at how line-length is used in the code. See if you can figure out how to write the code for the second problem.
-- Then turn to @printable-exercise{distance-coe.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
-- Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circle of evaluation, code, computation and a sketch on a graph.
+- Then turn to @printable-exercise{distance-coe.adoc}. Convert this expression to a Circle of Evaluation, and then to code.
+- Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circles of evaluation, code, computation and a sketch on a graph.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
-For more practice writing code to generate the distance between two fixed points, use:
+For more practice writing code to generate the distance between two fixed points, complete:
 
 * @printable-exercise{pages/distance-from-game-coordinates.adoc}
 * @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
@@ -195,19 +195,17 @@ All of the practice we've done so far today focused on a screenshot of a moment 
 But, as we play our games, the characters are constantly changing locations!
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
-In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!{style="font-size:16pt"}
+Turn to @printable-exercise{pages/distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
 
-Turn to @printable-exercise{pages/distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.{style="font-size:16pt"}
+__HINT:__ The code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!
 
-__HINT:__ the code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!{style="font-size:16pt"}
-
-When you're done, fix the broken `distance` function in your game file, click "Run" and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.{style="font-size:16pt"}
+When you're done, fix the broken `distance` function in your game file, click _Run_ and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
 Extension:
