@@ -17,7 +17,7 @@ The Design Recipe is a powerful tool for solving problems by writing @ifproglang
 {layout="Investigate"}
 # Design Recipe Practice
 
-- Open your saved @starter-file{animals}.
+- Open your saved @starter-file{animals}, or make a new copy.
 - Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
 
 
@@ -41,7 +41,7 @@ The Design Recipe is a powerful tool for solving problems by writing @ifproglang
 # Chaining
 
 Now that we are doing more sophisticated analyses, we might write the following:
-```{style="font-size:13pt"}
+```{style="font-size:14pt"}
 # get a table with the nametags of all 
 # the fixed animals, ordered by species
 with-labels = animals-table.build-column("labels", nametag)
@@ -58,7 +58,7 @@ result = fixed-with-labels.order-by("species", true)
 
 That's a lot of code, and it also requires us to come up with names for each intermediate step! Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
 
-```{style="font-size:14pt"}
+```
 # get a table with the nametags of all 
 # the fixed animals, ordered by species
 result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
@@ -68,7 +68,7 @@ result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by
 # Chaining
 
 It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “`.`” to make it more readable. Here’s the exact same code, written with each method on its own line:
-```{style="font-size:14pt"}
+```
 # get a table with the nametags of all 
 # the fixed animals, order by species
 animals-table
@@ -81,7 +81,7 @@ animals-table
 {layout="Launch"}
 # Chaining
 
-```{style="font-size:14pt"}
+```{style="font-size:16pt"}
 # get a table with the nametags of all 
 # the fixed animals, order by species
 animals-table
@@ -89,7 +89,8 @@ animals-table
   .filter(is-fixed)
   .order-by("species", true)
 ```
-This code takes the `animals-table`, and builds a new column. According to our Contracts Page, `.build-column` produces a new Table, and that’s the Table whose `.filter` method we use. That method produces _yet another Table_, and we call that Table’s `order-by` method. The Table that comes back from that is our final result.{style="font-size:14pt"}
+This code takes the `animals-table`, and builds a new column called `label`. `.build-column` produces a new Table...and we that Table's whose `.filter` method. 
+`.filter` produces _yet another Table_ (of all fixed animals) and we call _that_ Table’s `order-by` method. The Table produced by `.order-by` is our final result.{style="font-size:15pt"}
 <!--
 **Teaching Tip**
 Use different color markers to draw _nested boxes_ around each part of the expression, showing where each Table came from.
@@ -99,13 +100,9 @@ Use different color markers to draw _nested boxes_ around each part of the expre
 {layout="Launch"}
 # Chaining
 
-We know that order of operations matters when playing with Numbers - but what about playing with Tables? 
+**Suppose we want to build a column, and then use it to filter our table.**
 
-- You can't sort or filter a Table by a column you haven't built yet! _Building has to come first._
-- It's unnecessary to sort rows that you're going to filter out anyway. _Filtering comes next._
-
-**Order matters: Build, Filter, Sort.**
-
+If we use methods in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
 }
 
 @ifproglang{codap}{
@@ -158,18 +155,10 @@ We also encourage students to rename tables descriptively. By the end of this ex
 }
 
 ---
-{layout="Launch"}
-# Chaining
-
-Suppose we want to build a column and then use it to filter our table. 
-
-If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
-
----
 {layout="Investigate"}
 # Chaining
 
-**Order matters: Build / Transform, Filter, Sort.**
+**Order matters: Build @ifproglang{codap}{/Transform}, Filter, Sort.**
 
 How well do you know your table methods? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} to find out.
 
@@ -177,11 +166,18 @@ How well do you know your table methods? Complete @printable-exercise{pages/chai
 {layout="Synthesize"}
 # Chaining
 
-As our analysis gets more complex, chaining is a great way to re-use work we've already done. And less duplicate work means a smaller chance of bugs. Chaining is a powerful way to work, so it’s critical to think carefully when we use it!
+Share your answers - which expressions will produce errors? Why?
+
+As our analysis gets more complex, chaining is a great way to **re-use code we've already written**. 
+
+Less code means a **smaller chance of bugs**. 
 
 <!--
 Ask students about their answers to @printable-exercise{pages/chaining-methods-order-matters.adoc}. Which ones produce an error? Why do will they produce an error, and how can this be fixed?
 -->
+
+@ifproglang{codap}{
+
 ---
 {layout="Supplemental"}
 # Additional Exercises
@@ -191,3 +187,4 @@ Ask students about their answers to @printable-exercise{pages/chaining-methods-o
 <!--
 
 -->
+}

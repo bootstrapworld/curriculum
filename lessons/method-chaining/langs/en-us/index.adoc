@@ -103,8 +103,7 @@ That's a lot of code, and it also requires us to come up with names for each int
 result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
 ```
 
-This code takes the `animals-table`, and builds a new column. According to our Contracts Page, `.build-column` produces a new Table, and that’s the Table whose `.filter` method we use. That method produces _yet another Table_, and we call that Table’s `order-by` method. The Table that comes back from that is our final result.
-
+This code takes the `animals-table`, and builds a new column called `label`. `.build-column` produces a new Table...and we that Table's whose `.filter` method. `.filter` produces _yet another Table_ (of all fixed animals) and we call _that_ Table’s `order-by` method. The Table produced by `.order-by` is our final result.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -168,8 +167,11 @@ How well do you know your table methods? Complete @printable-exercise{pages/chai
 === Synthesize
 Ask students about their answers to @printable-exercise{pages/chaining-methods-order-matters.adoc}. Which ones produce an error? Why do will they produce an error, and how can this be fixed?
 
-As our analysis gets more complex, chaining is a great way to re-use work we've already done. And less duplicate work means a smaller chance of bugs. Chaining is a powerful way to work, so it’s critical to think carefully when we use it!
+As our analysis gets more complex, chaining is a great way to re-use code we've already written. And less code means a smaller chance of bugs.
 
+@ifproglang{codap}{
 
 == Additional Exercises
 - @opt-printable-exercise{pages/chaining-methods-table-transformations.adoc}
+
+}
