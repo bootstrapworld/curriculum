@@ -98,8 +98,8 @@ Row Actors, _Liiiiine up!_
 
 (6-8 students, lined up facing the class)
 
-* Each of you represents a Row in a table of students
-* Standing together, you represent a _sample_ of the class, stored in a table.
+* **Each of you represents a Row** in a table of students
+* Together, you represent a _sample_ of the class, stored in a table.
 * Like you, each student has columns like "First Name", "Last Name", "Birthday", "Favorite Food", etc.
 
 <!--
@@ -155,7 +155,7 @@ AFTER they are done, ask: "Based on who sat and who stayed, what was on the card
 
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
 Pyret Tables have their own methods for sorting, filtering, and more!
@@ -173,39 +173,68 @@ Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
 3. Sort the table, then evaluate `animals-table` and see if it stayed sorted
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-Complete questions 7-13 on @printable-exercise{exploring-methods.adoc}
+* Complete questions 7-13 on @printable-exercise{exploring-methods.adoc}
+* Find the contract for `.filter` in your Contracts page. 
 
-1. How does the `.filter` method work?
-2. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
+1. What is its Domain?
+2. How does the `.filter` method work?
+3. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
 
 <!--
 **ANSWERS**
-1. `.filter` takes a _function_, and produces a new table containing only rows for which the function returns `true`.
-2. It creates a new one
+1. `.filter` takes a _Boolean-producing function_
+2. It produces a new table containing only rows for which the function returns `true`.
+3. It creates a new one
 -->
+---
+{layout="Investigate-DN"}
+# Ordering, Filtering, and Building
+
+`<Table>.filter :: (test :: (Row ->Boolean)) -> Table`{style="font-size:16pt;font-weight:bold"}
+
+`.filter` consumes a _Boolean-producing function_, and walks through the table applying it to each Row. 
+
+If the function produces `true`, the Row is copied to a new Table. 
+
+When the last Row is visited, the method produces the new Table.
+
+---
+{layout="Investigate-DN"}
+# Ordering, Filtering, and Building
+
+* Complete questions 14-16 on @printable-exercise{exploring-methods.adoc}
+* Find the contract for `.build-column` in your Contracts page. 
+
+1. What is its Domain?
+2. How the `.build-column` method work?
+3. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
+
+<!--
+**ANSWERS**
+1. `.build-column` takes in a String and a _function_
+2. It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
+3. It creates a new one
+-->
+---
+{layout="Investigate-DN"}
+# Ordering, Filtering, and Building
+
+`<Table>.build-column :: (col::Str, f::(Row->Any)) -> Table`{style="font-size:16pt;font-weight:bold"}
+
+`.build-column` consumes a String and a _function_, and walks through the table applying it to each Row. 
+
+It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
+
+When the last Row is visited, the method produces the new Table.
+
 ---
 {layout="Investigate"}
 # Ordering, Filtering, and Building
 
-Complete questions 14-16 on @printable-exercise{exploring-methods.adoc}
-
-1. How the `.build-column` method work?
-2. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
-
-<!--
-**ANSWERS**
-1. `.build-column` takes in a String and a _function_, and produces a new table with an extra column. It uses the String for the column title, and fills in the values by applying the function to every Row.
-
-2. It creates a new one
--->
----
-{layout="Investigate"}
-# Ordering, Filtering, and Building
-
-Want some more practice? Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
+Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
 
 
 ---
