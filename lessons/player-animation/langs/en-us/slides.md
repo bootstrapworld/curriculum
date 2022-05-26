@@ -1,13 +1,13 @@
 ---
-
+{layout="Math Title Slide"}
 # Player Animation
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Defining Piecewise Functions 
 
 You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code in @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or workbook, and refresh your memory on how they work.
+@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or your workbook, and refresh your memory on how they work.
 
 ---
 {layout="Launch"}
@@ -25,10 +25,10 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 **Do we know how to make a function behave differently, based on its input?**
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Defining Piecewise Functions
 
-* Open your *Game Project file* and look for `update-player`.
+* Open your saved copy of the @starter-file{game} and look for `update-player`.
 * What is the contract for `update-player`?
 * What does each part of the domain and range represent?
 * How does the y-coordinate of `PLAYER` change when the user presses the "up" key?
@@ -78,7 +78,7 @@ Reminder: Use `#` to add comments to code!
 Adding useful comments to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Cheat Codes and Customizations 
 
 Now is your time to customize your game! Try implementing some of the following features, or make your own!{style="font-size:15pt"}

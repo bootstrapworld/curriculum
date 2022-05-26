@@ -1,5 +1,5 @@
 ---
-
+{layout="Math Title Slide"}
 # Collision Detection - Distance and Inequality
 
 ---
@@ -8,12 +8,12 @@
 
 You may remember that there are two strategies for decomposing problems:
 
-- *Top-Down:* Describe the problem at a high level, then fill in the details later
+- __Top-Down__: Describe the problem at a high level, then fill in the details later.
 
-- *Bottom-Up:* Focus on the smaller parts that you're sure of, then build them together to get the big picture
+- __Bottom-Up__: Focus on the smaller parts that you're sure of, then build them together to get the big picture.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Problem Decomposition Returns! 
 
 **Decide which strategy you want to use for this word problem.**
@@ -31,7 +31,7 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 - Which was easier for you?
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Collision Detection 
 
 Knowing how far apart our characters are is a good first step... but we still need the computer to be asking: "True or False: is there a collision?"
