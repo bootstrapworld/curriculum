@@ -46,6 +46,8 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 {layout="Launch"}
 # Animation
 
+Open your saved copy of the @starter-file{game}.
+
 - What did you notice about the movement of TARGET and DANGER? What was changing about them?
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 
@@ -61,7 +63,7 @@ What jobs could we hand over to the computer to make it possible for us to play 
 {layout="Investigate-DN"}
 # Animation
 
-Open your game starter file and examine the `update-danger` function.
+Open your saved copy of the @starter-file{game} and examine the `update-danger` function.
 Identify the contract, and interpret what the function is currently doing.
 
 Let's complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc} together.
