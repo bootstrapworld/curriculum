@@ -7,7 +7,7 @@
 # Defining Piecewise Functions 
 
 You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code in @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or workbook, and refresh your memory on how they work.
+@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or your workbook, and refresh your memory on how they work.
 
 ---
 {layout="Launch"}
