@@ -21,7 +21,7 @@ When looking at a scatter plot of animals, it looks like the amount an animal we
 
 @image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}
 
-But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
+But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.{style="font-size: 16pt"}
 
 <!--
 
@@ -32,9 +32,9 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 
 @image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}
 
-- Looking at this scatterplot, does it make sense to analyze all the animals together? Why or why not?
-- Are there some questions where it would be important to break up the animals into species-specific samples? What are they?
-- Are there some questions where it would be important to keep the whole population together? What are they?
+- Looking at this scatterplot, does it make sense to analyze all the animals together? Why or why not?{style="font-size: 16pt"}
+- Are there some questions where it would be important to break up the animals into species-specific samples? What are they?{style="font-size: 16pt"}
+- Are there some questions where it would be important to keep the whole population together? What are they?{style="font-size: 16pt"}
 
 <!--
 Divide the class into groups of 3-4, with one student identified as the "reporter". Have the groups answer these questions.
@@ -54,7 +54,7 @@ Report back on your answers to these questions!
 -->
 ---
 {layout="Synthesize"}
-# Launch with image on the right
+# Problems with a Single Population
 
 You've been handed a dataset from a country where half the people have access to amazing medical care, and the others have none at all. 
 
@@ -66,7 +66,7 @@ You've been handed a dataset from a country where half the people have access to
 -->
 ---
 {layout="Synthesize"}
-# Launch with image on the right
+# Problems with a Single Population
 
 If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. 
 
@@ -79,9 +79,9 @@ But if we ask the same question about the two groups _separately_, we would disc
 {layout="Launch"}
 # Grouped Samples
 
-Depending on the question we're asking, it makes more sense to ask them about "just the cats" or "just the dogs". 
+Depending on the question we're asking, sometimes it makes more sense to ask about "just the cats" or "just the dogs".
 
-Averaging every animal together will give us an answer, but they may not be _useful_ answers.
+**Averaging every animal together will give us an answer, but they may not be _useful_ answers.**
 
 <!--
 
@@ -112,19 +112,20 @@ Let's use this skill to define _Tables..._
 {layout="Launch"}
 # Grouped Samples
 
-We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{style="font-size:14pt"}
+We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{style="font-size:16pt"}
 ```
 dogs  = animals-table.filter(is-dog)
 ```
-
-The `.filter` method walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `.filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `.filter`.{style="font-size:14pt"}
+The `.filter` method walks across each row in the table, and passes it to the `is-dog` function.{style="font-size:16pt"}
+**If `is-dog` produces `true`, `.filter` adds it to a new table.** Otherwise, it just silently moves on to the next row.{style="font-size:16pt"}}
+Finally, we define the name `dogs` to be the table produced by `.filter`.{style="font-size:16pt"}
 
 }
 ---
 {layout="Investigate"}
 # Grouped Samples
 
-A “kitten” is an animal who _is a cat_ and who _is young_. How would you define a table of just kittens?
+A “kitten” is an animal who _is a cat_ and who _is young_. **How would you define a table of just kittens?**
 
 * Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{sequence of Transformers} will compute whether or not an animal is a kitten.
 * Can you fill in the @ifproglang{pyret}{code} @ifproglang{codap}{function notation} for the other grouped samples?
@@ -149,15 +150,19 @@ Debrief with students. Thoughtful question: how could we filter _and_ sort a tab
 
 Making grouped and random samples is a powerful skill, which allows us to dig deeper than just making charts or asking questions about a whole dataset. 
 
-Now that we know how to make subsets, we can make much more sophisticated displays!
+**Now that we know how to make subsets, we can make much more sophisticated displays!**
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Displaying Samples
 
-Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
+@image{images/AskQuestions.png, "Ask Questions icon", 100} 
 
-**Is this a lookup, arithmetic, or statistical question?**
+__What's the ratio of fixed to unfixed *cats* at the shelter?__ 
+
+Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
+
+**1) Is this a lookup, arithmetic, or statistical question?**
 <!--
 Have students discuss their answers
 -->
@@ -166,9 +171,13 @@ Have students discuss their answers
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
+@image{images/AskQuestions.png, "Ask Questions icon", 100} 
 
-**What rows do we need? What columns?**
+1) Is this a lookup, arithmetic, or statistical question?
+
+This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
+
+**2) What rows do we need? What columns?**
 <!--
 Have students discuss their answers
 -->
@@ -179,9 +188,11 @@ Have students discuss their answers
 
 @image{images/ConsiderData.png, "Consider Data icon", 100}
 
+2) What rows do we need? What columns?
+
 We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
 
-**What kind of table or display are we building?**
+**3) What kind of table or display are we building?**
 
 <!--
 Have students discuss their answers
@@ -192,9 +203,11 @@ Have students discuss their answers
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
-We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is a slightly better choice. Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
+3) What kind of table or display are we building?
 
-**What did our displays tell us?**
+We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice. We've decided what to make and we know which rows and columns we're plotting, so the next step is to _write the code!_
+
+**4) What did our displays tell us?**
 
 <!--
 Have students discuss their answers
@@ -205,9 +218,11 @@ Have students discuss their answers
 
 @image{images/InterpretData.png, "Interpret Data icon", 100}
 
-In this case, we got a clear answer to our question. But perhaps that's not the end of the story! 
+4) What did our displays tell us?
 
-We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
+In this case, we found out exactly how many fixed v. unfixed cats there are. But perhaps that's not the end of the story! 
+
+We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 ---
 {layout="Synthesize"}
@@ -220,17 +235,17 @@ We might be curious about whether a higher percentage of dogs are spayed and neu
 {layout="Launch"}
 # Your Analysis
 
-Think about your own dataset. Are there grouped samples that you'd like to explore separately? Here are a few examples, taken from some of the sample datasets:
+Are there grouped samples that you'd like to explore in your own dataset? Here are a few examples, taken from some of the sample datasets:
 
-- In the RI Schools dataset, it might be good to create grouped samples for public v. charter schools
-- In the Movies dataset, it might be valuable to create grouped samples for modern movies, and analyze them separately from older movies.
-- In the US Presidents dataset, it could be useful to make a grouped sample for each political party.
+- In the RI Schools dataset, it might be good to create grouped samples for **public v. charter schools**
+- In the Movies dataset, it might be valuable to create grouped samples for **modern v. older movies**, and analyze them separately.
+- In the US Presidents dataset, it could be useful to make a grouped sample for **each political party**.
 
 ---
 {layout="Launch"}
 # Your Analysis
 
-- What grouped samples make sense for your dataset?
+- **What grouped samples make sense for your dataset?**
 - Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
 - Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
 
