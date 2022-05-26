@@ -65,6 +65,9 @@ With your partner, complete @printable-exercise{pages/left-and-right.adoc}.
 
 When you're finished, fix the corresponding functions in your @starter-file{inequalities-sam} and test it out.
 
+Note: When you type in `is-safe-right`, it may not do what you expect...
+
+
 <!--
 **False isn't wrong!**	
 Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_, such as when Sam is offscreen.
@@ -78,6 +81,12 @@ Students will notice that fixing `safe-left?` keeps Sam from disappearing off th
 Students will notice that fixing `is-safe-left` keeps Sam from disappearing off the left, but fixing `is-safe-right` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
 }
 -->
+
+---
+{layout="Investigate"}
+# Introducing Sam
+
+@image{images/safe-left-dr.png, a}{width="700"}
 
 ---
 {layout="Synthesize"}
