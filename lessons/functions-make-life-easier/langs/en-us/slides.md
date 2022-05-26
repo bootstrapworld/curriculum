@@ -160,7 +160,7 @@ Who is correct - Kermit or Oscar?
 Why might someone think the domain for `gt` contains a Number and two Strings? 
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Identifying and Describing the Pattern
 
 - Open the @starter-file{gt} and click run.
@@ -169,7 +169,7 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Identifying and Describing the Pattern
 
 Other people have other favorite shapes. We need to be able to meet their needs, too! 
