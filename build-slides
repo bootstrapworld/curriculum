@@ -1,5 +1,14 @@
 #!/bin/bash
 
+eval $(grep '^SEMESTER=' ./deploy-to-brown)
+eval $(grep '^YEAR=' ./deploy-to-brown)
+if test -n "$SEMESTER" -a -n "$YEAR"; then
+  semesterYear=$SEMESTER$YEAR
+else
+  semesterYear=latest
+fi
+bootstraproot=https://bootstrapworld.org/materials/$semesterYear
+
 regenid=
 
 if test $# -ne 0 -a "$1" = -f; then
@@ -16,8 +25,6 @@ SED=sed
 if which gsed|grep -q .; then
   SED=gsed
 fi
-
-bootstraproot=$(cat lib/slidesroot.txt|$SED -e 1q)
 
 export PROGLANG=pyret
 
