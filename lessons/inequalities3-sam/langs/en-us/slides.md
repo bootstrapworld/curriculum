@@ -1,14 +1,14 @@
 ---
-
+{layout="Math Title Slide"}
 # Sam the Butterfly - Applying Inequalities
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Introducing Sam 
 
-Open the @starter-file{inequalities-sam} and click "Save A Copy."
+Open the @starter-file{inequalities-sam} and click "Save a copy."
 
-Turn to @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click run and use the arrow keys to investigate the program with your partner.
+Turn to @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click _Run_ and use the arrow keys to investigate the program with your partner.
 
 <!--
 * What is something you noticed about this program?
@@ -19,24 +19,49 @@ Turn to @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click run an
 
 ---
 {layout="Launch"}
-# Introducing Sam 
+# Introducing Sam
 
-There are three functions defined in @starter-file{inequalities-sam}. What are they?
+- What is something you noticed about this program?
+- What do you see when Sam is at (0,0)?  Why is that? 
+- How far can Sam go to the left and stay on the screen? 
+- How could we write this as an @vocab{expression}? 
+
+<!--
+- What is something you noticed about this program? _As Sam moves, the @vocab{coordinates} are displayed at the top of the screen; the coordinates are all in the 1st quadrant; etc._
+- What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
+- How far can Sam go to the left and stay on the screen? _Up to, but not beyond, an x of -40._
+- How could we write this as an @vocab{expression}? _Appropriate responses are @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}._
+-->
 
 ---
 {layout="Launch"}
 # Introducing Sam 
 
-- What should @ifproglang{pyret}{`is-safe-left`} @ifproglang{wescheme}{`safe-left?`} do?
+Every time Sam moves, we want to check and see if Sam is safe.
 
-- What should @ifproglang{pyret}{`is-safe-right`} @ifproglang{wescheme}{`safe-right?`} do?
-
-- What should @ifproglang{pyret}{`is-onscreen`} @ifproglang{wescheme}{`onscreen?`} do?
+There are three functions defined in @starter-file{inequalities-sam}. What are they?
 
 ---
-{layout="Investigate"}
+{layout="Launch"}
+# Introducing Sam
+
+- What _should_ our left-checking function do?
+
+- What _should_ our right-checking function do?
+
+- What _should_ @ifproglang{pyret}{`is-onscreen`} @ifproglang{wescheme}{`onscreen?`} do?
+
+
+<!--
+- What _should_ our left-checking function do? _Check to see if x is greater than -50_
+- What _should_ our right-checking function do? _Check to see if x is less than 690_
+- What should `onscreen?` do? _Answers may vary. Let students drive the discussion, and don't give away the answer!_
+-->
+
+---
+{layout="Investigate-DN"}
 # Introducing Sam 
-With your partners, complete @printable-exercise{pages/left-and-right.adoc}.  
+With your partner, complete @printable-exercise{pages/left-and-right.adoc}.  
 
 When you're finished, fix the corresponding functions in your @starter-file{inequalities-sam} and test it out.
 
@@ -55,98 +80,119 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 -->
 
 ---
+{layout="Synthesize"}
+# Introducing Sam
+
+@ifproglang{pyret}{
+- Does `is-safe-left` work correctly? How do you know?
+- Does `is-safe-right` work correctly? How do you know?
+}
+
+@ifproglang{wescheme}{
+- Does `safe-left?` work correctly? How do you know?
+- Does `safe-right?` work correctly? How do you know?
+}
+Don’t trust the behavior of a complex system! Examples are where you look first. If they all pass, that’s a strong hint that the bug is elsewhere...
+
+
+---
 {layout="Launch"}
 # Protecting Sam on Both Sides
 
 @image{images/sam-slide.png, "a"}{width="700"}
 
 <!--
-Recruit three student volunteers to roleplay the functions `safe-left?`, `safe-right?` and `onscreen?`. Give them 1 minute to read the contract and code, as written in the program.
+@ifproglang{wescheme}{
+*Note:* In this programming language, question marks are pronounced "huh?". So `safe-left?` would be pronounced "safe left huh?" This can be a source of some amusement for students!
+}
 
-- As in the previous lesson, ask the volunteers what their name, Domain and Range are, and then test them out by calling out their name, followed by a number. (For example, "(safe-left? 20)!", "(safe-right? -100)!", "(onscreen? 829)!") *Note"* the code for `onscreen` _calls the safe-left function!_. So the student roleplaying `onscreen` should turn to `safe-left` and give the input to them.
+Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
+
+Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @ifproglang{wescheme}{`safe-left?` and `safe-right?`} @ifproglang{pyret}{`is-safe-left` and `is-safe-right`} will respond with either "true" or "false".
+
+The function @ifproglang{wescheme}{`onscreen`?} @ifproglang{pyret}{`is-onscreen`}, however, will call the `safe-left` function! So the student roleplaying @ifproglang{wescheme}{`onscreen`?}@ifproglang{pyret}{`is-onscreen`} should turn to `safe-left` and give the input to them.
 
 For example:
 @ifproglang{wescheme}{
 
-- *Facilitator*: "onscreen-huh 70"
-- *onscreen?* (turns to safe-left?): "safe-left-huh 70"
-- *safe-left?*: "true"
-- *onscreen?* (turns back to facilitator): "true" +
+- Facilitator: "onscreen-huh 70"
+- onscreen? (turns to safe-left?): "safe-left-huh 70"
+- safe-left?: "true"
+- onscreen? (turns back to facilitator): "true" +
 {empty} +
 
-- *Facilitator*: "onscreen-huh -100"
-- *onscreen?* (turns to safe-left?): "safe-left-huh -100"
-- *safe-left?*: "false"
-- *onscreen?* (turns back to facilitator): "false" +
+- Facilitator: "onscreen-huh -100"
+- onscreen? (turns to safe-left?): "safe-left-huh -100"
+- safe-left?: "false"
+- onscreen? (turns back to facilitator): "false" +
 {empty} +
 
-- *Facilitator*: "onscreen-huh 900"
-- *onscreen?* (turns to safe-left?): "safe-left-huh 900"
-- *safe-left?*: "true"
-- *onscreen?* (turns back to facilitator): "true" +
-{empty} +
+- Facilitator: "onscreen-huh 900"
+- onscreen? (turns to safe-left?): "safe-left-huh 900"
+- safe-left?: "true"
+- onscreen? (turns back to facilitator): "true"
 
-*Ask the rest of the class*
-
-- What is the problem with `onscreen?`? +
-_It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
-
-- How can `onscreen?` check with both? +
-_It needs to talk to `safe-left?` AND ``safe-right?``_
-
+Hopefully your students will notice that `safe-right?` did not participate in this roleplay scenario at all!
 }
 
 @ifproglang{pyret}{
-- *Facilitator*: "is-onscreen 70"
-- *is-onscreen* (turns to is-safe-left): "is-safe-left 70"
-- *is-safe-left*: "true"
-- *is-onscreen* (turns back to facilitator): "true" +
+- Facilitator: "is-onscreen 70"
+- is-onscreen (turns to is-safe-left): "is-safe-left 70"
+- is-safe-left: "true"
+- is-onscreen (turns back to facilitator): "true" +
 {empty} +
 
-- *Facilitator*: "is-onscreen -100"
-- *is-onscreen* (turns to is-safe-left): "safe-left-huh -100"
-- *is-safe-left*: "false"
-- *is-onscreen* (turns back to facilitator): "false" +
+- Facilitator: "is-onscreen -100"
+- is-onscreen (turns to is-safe-left): "is-safe-left -100"
+- is-safe-left: "false"
+- is-onscreen (turns back to facilitator): "false" +
 {empty} +
 
-- *Facilitator*: "is-onscreen 900"
-- *is-onscreen* (turns to is-safe-left): "safe-left-huh 900"
-- *is-safe-left*: "true"
-- *is-onscreen* (turns back to facilitator): "true" +
-{empty} +
+- Facilitator: "is-onscreen 900"
+- is-onscreen (turns to is-safe-left): "is-safe-left 900"
+- is-safe-left: "true"
+- is-onscreen (turns back to facilitator): "true"
 
-*Ask the rest of the class*
-
-- What is the problem with `is-onscreen`? +
-_It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
-
-- How can `is-onscreen` check with both? +
-_It needs to talk to `is-safe-left` AND ``is-safe-right``_
+Hopefully your students will notice that `is-safe-right` did not participate in this roleplay scenario at all!
 }
-
-Have students complete @printable-exercise{pages/onscreen.adoc}. When this function is entered into the editor, students should now see that Sam is protected on _both_ sides of the screen.
-
 -->
 
 ---
 {layout="Investigate"}
 # Protecting Sam on Both Sides
 
-What does is-onscreen check for?  What should it check for?
+@ifproglang{wescheme}{
+What is the problem with `onscreen?`? How can we fix it?
+}
+
+@ifproglang{pyret}{
+What is the problem with `is-onscreen`? How can we fix it?
+}
 
 
+<!--
+@ifproglang{wescheme}{
+- What is the problem with `onscreen?`? _It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
+- How can `onscreen?` check with both? _It needs to talk to `safe-left?` AND ``safe-right?``_
+}
+
+@ifproglang{pyret}{
+- What is the problem with `is-onscreen`? _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
+- How can `is-onscreen` check with both? _It needs to talk to `is-safe-left` AND ``is-safe-right``_.
+}
+-->
 
 @image{images/onscreen.png,a}{width="500"}
 
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Protecting Sam on Both Sides
 
 Complete @printable-exercise{pages/onscreen.adoc}. 
 
-When you're done, select a driver to share to their screen, and protect Sam on both sides!
+When you're done, select a driver to share to their screen, and modify the @starter-file{inequalities-sam} to protect Sam on both sides!
 
 <!--
 Extension Option
@@ -154,21 +200,21 @@ What if we wanted to keep Sam safe on the top and bottom edges of the screen as 
 -->
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Boundary Detection in the Game 
 
-Open your in-progress game file and press Run.
+Open your in-progress game file and press _Run_.
 
 - How are the `TARGET` and `DANGER` behaving right now? 
 
 - What do we want to change? 
 
-- How do we know when an image has moved off the screen? 
+- What happens to an image's x-coordinates when it moves off the screen? 
 
 - How can we make the computer understand when an image has moved off the screen? 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Boundary Detection in the Game 
 
 @ifproglang{wescheme}{
@@ -178,13 +224,22 @@ Apply what you learned from Sam the Butterly to fix the `safe-left?`, `safe-righ
 Apply what you learned from Sam the Butterly to fix the `is-safe-left`, `is-safe-right`, and `is-onscreen` functions in your code.
 }
 
-*Note: If you figured out the challenge of how to keep Sam safe on top and bottom, should not use the additional code they wrote.*
-
 <!--
 Common Misconceptions:
 - Students will need to test their code with their images to see if the boundaries are correct for them.  Students with large images may need to use slightly wider boundaries, or vice versa for small images.  In some cases, students may have to go back and rescale their images if they are too large or too small for the game.
 - Students may be surprised that the same code that "traps Sam" also "resets the `DANGER` and `TARGET` ". It's critical to explain that these functions do _neither_ of those things! All they do is test if a coordinate is within a certain range on the x-axis. There is other code (hidden in the teachpack) that determines _what to do if the coordinate is offscreen_. The ability to re-use function is one of the most powerful features of mathematics - and programming!
 -->
+
+---
+{layout="Synthesize"}
+# Boundary Detection in the Game
+
+The same code that "trapped" Sam also "resets" the `DANGER` and the `TARGET`. What is actually going on?
+
+<!--
+- Students may be surprised that the same code that "traps Sam" also "resets the `DANGER` and `TARGET` ". It's critical to explain that these functions do _neither_ of those things! All they do is test if a coordinate is within a certain range on the x-axis. There is other code (hidden in the teachpack) that determines _what to do if the coordinate is offscreen_. The ability to re-use function is one of the most powerful features of mathematics - and programming!
+-->
+
 
 ---
 {layout="Supplemental"}
