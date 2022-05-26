@@ -153,7 +153,7 @@ sasha["fixed"]
 - Complete the exercises on @printable-exercise{lookup-questions.adoc}.
 - Complete @printable-exercise{pages/more-practice-w-lookups.adoc}
 
-* Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @link{../ds-intro/pages/animals-dataset.adoc}.
+* Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @link{../ds-intro/pages/animals-dataset.adoc, The Animals Table}.
 
 - Which row is `animalA`? Label it in the margin next to the dataset. Which row is `animalB`?  
 - Label it in the margin next to the dataset.
