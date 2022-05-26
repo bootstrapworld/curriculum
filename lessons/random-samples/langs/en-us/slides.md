@@ -106,7 +106,7 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 
 A fair coin should land on heads about 50% of the time. If a coin landed on heads _100%_ of the time, it wouldn't take long to figure out that something was up!
 
-But a trick coin that comes up heads 60% of the time would need a much larger sample to be detected. There's a connection to be found here, between _sample size_ and _deviation_.  A subtle deviation might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!
+But a trick coin that comes up heads 60% of the time would need a much larger sample to be detected. There's a connection to be found here, between _sample size_ and _deviation_. **A subtle deviation might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!**
 
 <!--
 
@@ -215,7 +215,7 @@ How much can we infer about the whole population of hundreds of animals, by look
 
 Let’s see what happens if we switch from smaller to larger sample sizes.
 
-- Open the @starter-file{expanded-animals}, save a copy and click "Run".
+- **Open** the @starter-file{expanded-animals}, **save** a copy and click "**Run**".
 - Complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
 - Optional: complete @opt-printable-exercise{pages/predictions-from-samples.adoc}
 
