@@ -59,7 +59,7 @@ Report back on your answers to these questions!
 You've been handed a dataset from a country where half the people have access to amazing medical care, and the others have none at all. 
 
 * Why might it be important to look at a subset of a population?
-* Why is it sometimes bad to only take random samples?
+* Why is it sometimes bad to blindly take random samples?
 
 <!--
 
