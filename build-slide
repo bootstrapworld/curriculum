@@ -1,5 +1,15 @@
 #!/bin/bash
 
+
+eval $(grep '^SEMESTER=' ./deploy-to-brown)
+eval $(grep '^YEAR=' ./deploy-to-brown)
+if test -n "$SEMESTER" -a -n "$YEAR"; then
+  semesterYear=$SEMESTER$YEAR
+else
+  semesterYear=latest
+fi
+bootstraproot=https://bootstrapworld.org/materials/$semesterYear
+
 regenid=
 lsn=
 
@@ -26,8 +36,6 @@ SED=sed
 if which gsed|grep -q .; then
   SED=gsed
 fi
-
-bootstraproot=$(cat lib/slidesroot.txt|$SED -e 1q)
 
 export PROGLANG=pyret
 
@@ -87,7 +95,7 @@ for natlang in *; do
            # rm .tmp.txt
          else
            # echo md2gslides without id
-           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt 
+           $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt
            if grep -q 'Unable to generate slides' .tmp.txt; then
              echo Slides failed for $LESSON/slides.mkd
              if grep -q 'must be less than the endIndex' .tmp.txt; then
