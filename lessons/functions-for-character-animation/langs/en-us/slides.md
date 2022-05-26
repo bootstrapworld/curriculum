@@ -1,5 +1,5 @@
 ---
-
+{layout="Math Title Slide"}
 # Functions for Character Animation
 
 ---
@@ -58,7 +58,7 @@ What jobs could we hand over to the computer to make it possible for us to play 
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Animation
 
 Open your game starter file and examine the `update-danger` function.
@@ -67,7 +67,7 @@ Identify the contract, and interpret what the function is currently doing.
 Let's complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc} together.
 
 ---
-{layout="InvestigateDN"}
+{layout="Investigate-DN"}
 # Animation
 
 Copy the code for `update-danger` into your starter file and click Run.{style="font-size:15pt"}
