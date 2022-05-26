@@ -219,7 +219,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=yFnDbsSnR7")
    )
   ("inequalities-sam" "Sam the Butterfly Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1muE7xY-NKW5IJLeOnAu9Q31JUT6ns_n7")
+   ("pyret" "https://code.pyret.org/editor#share=13d5j4CAfaHu1Y1DzPBvqapzO-Gpr9BrH")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM")
    )
   ("sallys-lemonade" "Sally's Lemonade Starter File"

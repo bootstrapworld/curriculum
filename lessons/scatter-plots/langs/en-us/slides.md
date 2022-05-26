@@ -13,7 +13,7 @@
 - What kind of data is `age`? What kind of data is `weeks`?
 - What kind of display would help us analyze the relationship between age and adoption time?
 
-Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box-plots, that help us explore the _distribution_ of values in a _quantitative_ column.{style="font-size:14pt"}
+**Pie** and **bar charts** help us see the _frequency_ of values in a _categorical_ column. **Histograms** and **box plots** help us explore the _distribution_ of values in a _quantitative_ column.
 
 <!--
 
@@ -22,7 +22,7 @@ Pie and Bar charts help us see the _frequency_ of values in a _categorical_ colu
 {layout="Launch"}
 # Making Scatter Plots
 
-What we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
+What we really want is a display that will help us search for **a relationship between two quantitative columns**, and that's exactly what scatter plots do.
 
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
@@ -46,7 +46,7 @@ The first one makes sense, and reflects our suspicion that age plays a role in a
 {layout="Investigate"}
 # Making Scatter Plots
 
-Complete @printable-exercise{pages/creating-scatterplot.adoc} in your Student Workbook, to get a feel for making scatter plots by hand.
+Complete @printable-exercise{pages/creating-scatterplot.adoc}, to get a feel for making scatter plots by hand.
 
 <!--
 
@@ -59,17 +59,17 @@ When you created the scatter plot by hand, you started with a Table. Then you pl
 
 The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels, xs, and ys. Here's the contract:
 
-`scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`
+`scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`{style="font-size:15pt"}
 
 <!--
 
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Making Scatter Plots
 
 * Open your saved “Animals Starter File”. (You can always make a new copy of the @starter-file{animals}.)
-* Make a scatter plot that displays the relationship between `age` and adoption time (`weeks)`.
+* Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
 * Are there any patterns or trends that you see here?
 
 <!--
@@ -117,12 +117,12 @@ _Perhaps the **weight** of an animal influences the adoption time!_
 {layout="Launch"}
 # The Data Cycle
 
-Take a look at the animals dataset, either in your workbook or on the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, google sheet}. 
+Take a look at the animals dataset, either in your workbook or on the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, spreadsheet}. 
 
 Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # The Data Cycle
 
 Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}.
@@ -135,7 +135,7 @@ Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-pl
 Pose these questions to the whole class, and debrief as a large group.
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # The Data Cycle
 
 Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and complete the Data Cycle for your new question.
@@ -162,13 +162,15 @@ What new questions did the Data Cycle lead you to ask? What did you find?
 {layout="LaunchC"}
 # Looking for Trends
 
-Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
+Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted. **Do you see a trend?**
 
 @image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Looking for Trends
+
+@image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}
 
 A straight-line pattern in the cloud of points suggests a linear relationship between two columns. 
 
@@ -190,7 +192,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **Unusual observations are _always_ worth thinking about!**
 
-- Sometimes they’re just random. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
+- Sometimes they’re _just random_. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
 
 ---
 {layout="Launch"}
@@ -198,7 +200,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **Unusual observations are _always_ worth thinking about!**
 
-- Sometimes they can give you a deeper insight into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
+- Sometimes they can give you a _deeper insight_ into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
 
 ---
 {layout="Launch"}
@@ -206,7 +208,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **Unusual observations are _always_ worth thinking about!**
 
-- Sometimes unusual observations are the points we are looking for! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
+- Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
 ---
 {layout="InvestigateC"}
@@ -214,7 +216,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **It's not just about the numbers!**
 
-These numbers and scatter plot both come from the same datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
+These numbers and scatter plot both come from the same datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize the dataset barely change at all!
 
 
 @image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
@@ -230,7 +232,7 @@ Until we really look at the _shape_ of the data, we aren't seeing the whole pict
 This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.autodesk.com/research/publications/same-stats-different-graphs, Autodesk website}!
 -->
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Looking for Trends
 
 For practice, consider each of the following relationships. First think about what you _expect_, then make the scatter plot to see if it supports your hunch.
@@ -276,7 +278,7 @@ What relationships do you think might be lurking in _your_ dataset?
 Which pairs of columns would you like to examine?
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Your Own Analysis
 
 - Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, use the Data Cycle to generate some scatter plots, and add them to the "Making Displays" section of your exploration document.

@@ -13,7 +13,7 @@
 
 Some medicines are dosed by weight: heavier animals need a larger dose that could be dangerous for smaller animals. 
 
-If someone from the shelter needs to give a dose of medicine to the animals, is the “average” the best estimate we can use?
+If someone from the shelter needs to give a dose of medicine to the animals, **is the “average” the best estimate we can use**?
 
 <!--
 
@@ -33,10 +33,10 @@ Summarizing a big dataset means that some information gets lost, so it’s impor
 {layout="Launch"}
 # Mean
 
-- Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.
-- Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.
-- Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.
-- When buying uniforms for a sports team, a coach might look for the most common size that the players wear.
+- Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.{style="font-size:14pt"}
+- Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.{style="font-size:14pt"}
+- Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.{style="font-size:14pt"}
+- When buying uniforms for a sports team, a coach might look for the most common size that the players wear.{style="font-size:14pt"}
 
 _Can you think of other examples where someone uses a number or two to summarize something complex?_
 
@@ -47,7 +47,9 @@ Every kind of summary has situations in which it does a good job of reporting wh
 {layout="Launch"}
 # Mean
 
-One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.  But there are many different ways to define "center", and each method has strengths and weaknesses.
+One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.
+
+**But there are many different ways to define "center", and each method has strengths and weaknesses.**
 
 <!--
 
@@ -56,7 +58,7 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 {layout="Investigate"}
 # Mean
 
-Open your saved “Animals Starter File”. (Or make a new copy: @starter-file{animals}.)
+* Open your saved @starter-file{animals}, or make a new copy.
 
 If we plotted all the pounds values as points on a number line, what could we say about the **average** of those values? Is there a **midpoint**? Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
 
@@ -124,7 +126,7 @@ The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided 
 {layout="Launch"}
 # Median
 
-Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the skew towards the right, with a huge number of animals clumped to the left?
+Make a `histogram` of the `pounds` column, and try different bin sizes. Can you see the huge number of animals clumped to the left, with Kujo and Mr. Peanutbutter as outliers skewed to the right? 
 
 A different way to measure center is to line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger. This is the @vocab{median}, or “middle” value of a list.
 
@@ -138,16 +140,15 @@ A different way to measure center is to line up all of the data points -- in ord
 
 Consider this list of ACT scores:
 
-  25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32
+`25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 
 Here 29 is the median, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
 
 The algorithm for finding the median of a quantitative column is:
 
-. Sort the numbers (we did this for you in the above example).
-. Cross out the highest number.
-. Cross out the lowest number.
-. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers.
+1. Sort the numbers{style="font-size:16pt"}
+2. Cross out the highest and lowest numbers{style="font-size:16pt"}
+3. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers{style="font-size:16pt"}
 <!--
 
 -->
@@ -190,17 +191,17 @@ Median and Mean always produce one number, but if two or more values are equally
   1, 1, 2, 3, 4, 4
 ```
 
-- The first dataset has _no mode at all!_
-- The mode of the second dataset is 2, since 2 appears more than any other number.
-- The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
+- The first dataset has no mode at all!{style="font-size:14pt"}
+- The mode of the second dataset is 2, since 2 appears more than any other number.{style="font-size:14pt"}
+- The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.{style="font-size:14pt"}
 ---
 {layout="Launch"}
 # Modes
 
 In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
-```
-@show{ (contract "modes" '("Table" "String") "List<Number>" )}
-```
+
+@show{ (contract "modes" '("Table" "String") "List" )}
+
 ---
 {layout="Investigate"}
 # Modes
@@ -228,7 +229,7 @@ We have three reasons to suspect that @vocab{mean} isn’t the best value to use
 {layout="Synthesize"}
 # Modes
 
-_“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."_
+**“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."**
 
 Do you trust this statement? Why or why not? Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
 

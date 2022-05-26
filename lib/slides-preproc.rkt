@@ -270,6 +270,15 @@
                          [(member directive '("printable-exercise" "opt-printable-exercise"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (fully-qualify-link args directive) o))]
+                         [(string=? directive "opt-project")
+                          (let* ([arg1 (read-commaed-group i directive read-group)]
+                                 [project-file (first arg1)]
+                                 [rubric-file (and (> (length arg1) 1) (second arg1))])
+                            (display (fully-qualify-link (list project-file) directive) o)
+                            (when rubric-file
+                              (display " [" o)
+                              (display (fully-qualify-link (list rubric-file "rubric") directive) o)
+                              (display "]" o)))]
                          [(member directive '("link" "online-exercise" "opt-online-exercise" "ext-exercise-link"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (external-link args directive) o)) ]
