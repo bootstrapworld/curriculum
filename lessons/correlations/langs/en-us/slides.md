@@ -1,6 +1,5 @@
 ---
 {layout="DS Title Slide"}
-
 # Correlations
 <!--
 
@@ -24,11 +23,11 @@ Together, those numbers tell us what value is **typical**, how much the values *
 {layout="Launch"}
 # Correlations have _Form_
 
-But those analyses tell us nothing about the _relationship_ between animals' ages and weights. 
+But those analyses tell us nothing about the **relationship** between animals' ages and weights. 
 
-In order to understand such relationships, we have to expand our view from a one column to two. 
+In order to understand such relationships, we have to expand our view from one column to two. 
 
-This goes hand-in-hand with expanding our display from a 1-dimensional histogram or box-plot to a 2-dimensional scatter plot.
+This goes hand-in-hand with expanding our display **from a 1-dimensional histogram or box-plot to a 2-dimensional scatter plot.**
 
 <!--
 
@@ -54,7 +53,7 @@ The first thing we need to ask is whether the @vocab{form} of the relationship i
 
 @image{images/2NL.gif, "A scatter plot showing a non-linear (curved) relationships"}
 
-Some patterns are _linear_, and cluster around a straight line sloping up or down. Some patterns are _non-linear_, and may look like a curve or an arc. And sometimes there is no pattern or relationship at all!
+Some patterns are **linear**, and cluster around a straight line sloping up or down. Some patterns are **non-linear**, and may look like a curve or an arc. And sometimes there is **no relationship** or pattern at all!
 
 Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship is linear, non-linear or if there's no relationship at all.
 
@@ -80,9 +79,9 @@ Data Scientists use their eyes all the time! It doesn't make sense to search for
 
 **_Direction:_ whether a linear relationship is positive or negative.**
 
-- *Positive:* the line slopes up as we look from left-to-right. Positive relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
+- **Positive:** the line slopes up as we look from left-to-right. Positive relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
 
-- *Negative:* the line slopes _down_ as we look from left-to-right. Negative relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
+- **Negative:** the line slopes _down_ as we look from left-to-right. Negative relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
 <!--
 -->
@@ -113,8 +112,8 @@ Why do you think that is?
 
 **_Strength:_ how closely the two variables are correlated.**
 
-- A relationship is *strong* if knowing the x-value of a data point gives us a very good idea of what its y-value will be. A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
-- A relationship is *weak* if x tells us little about y. A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+- **A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be**. A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+- **A relationship is weak if x tells us little about y**. A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 <!--
 Example of a strong relationship: knowing a student's age gives us a very good idea of what grade they're in
@@ -164,7 +163,7 @@ Statisticians and Data Scientists have a shorter way of describing all three, ca
 {layout="Launch"}
 # Summarizing Correlations using r-values
 
-@math{r} is positive or negative depending on whether the correlation is positive or negative. 
+**@math{r} is positive or negative depending on whether the correlation is positive or negative.**
 
 *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
 
@@ -175,11 +174,11 @@ Statisticians and Data Scientists have a shorter way of describing all three, ca
 {layout="Launch"}
 # Summarizing Correlations using r-values
 
-An @math{r}-value of about ±0.65 or ±0.70 or more is generally considered a strong correlation. 
+An @math{r}-value of about **±0.65 or ±0.70 or more is generally considered a strong correlation**. 
 
-Anything between ±0.35 and ±0.65 is “moderately correlated”. 
+Anything between **±0.35 and ±0.65 is “moderately correlated”**. 
 
-Anything less than about ±0.25 or ±0.35 may be considered weak. 
+Anything less than about **±0.25 or ±0.35 may be considered weak**. 
 
 **However, these cutoffs are not an exact science!** In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
 
@@ -197,7 +196,7 @@ If it works for you, give students five minutes to play a few rounds of the onli
 {layout="Investigate"}
 # Summarizing Correlations using r-values
 
-Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. 
+**Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_.**
 
 If the correlation between adoption time and age for a representative sample of about 30 of our shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
@@ -218,7 +217,8 @@ If time allows, you may want to emphasize the point that correlation does not im
 # Summarizing Correlations using r-values
 
 - Let's look for correlations in the Animals Dataset!
-- Open the @starter-file{animals} and complete @printable-exercise{correlations-animals.adoc}.
+- Open your saved @starter-file{animals}, or make a new copy.
+- Complete @printable-exercise{correlations-animals.adoc}.
 
 ---
 {layout="Synthesize"}
@@ -238,7 +238,6 @@ _The correlation with `"pounds"` is higher, meaning that an animal's weight is a
 
 - What correlations do you think there are in your dataset? 
 - Would you like to investigate a grouped sample (subset) of your data to find those correlations?
-- Open the @starter-file{animals} and complete @printable-exercise{correlations-animals.adoc}.
 
 ---
 {layout="Investigate"}
