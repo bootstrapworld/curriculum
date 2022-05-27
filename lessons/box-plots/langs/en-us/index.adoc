@@ -42,23 +42,19 @@ Students are introduced to the notion of _spread_ in a dataset. They learn about
 When we explored measures of center, we tried to answer a question about "typical" values:
 
 [.lesson-point]
-_The Animal Shelter Bureau says a typical pet weighs almost 41 pounds_
+_FACT: The Animal Shelter Bureau says the average pet weighs almost 41 pounds_
 
-This is helpful, but it really doesn't tell the whole story. Maybe all the pets weigh between 35 and 45 pounds, so nobody is more than 5-6 pounds from the mean. But we could _also_ have an average of 41 pounds, with snuggles the Tarantula weighing hardly anything and Kujo weighing more than 150!
+How useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
+
 
 So once we have our summary for a "normal value", it's likely we'll ask another question:
 
 [.lesson-point]
-If a typical pet is 41 pounds, just _how_ typical is that?
+_If the average pet is 41 pounds, just **how typical** is that?_
 
-There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! But some classes are more different than others. How do we measure the spread of a population?
+There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! Some classes are more different than others. How do we measure the @vocab{spread} of a population?
 
-@right{@image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}}Suppose we lined up all animals' weights from smallest to largest, and then split them into two equal groups by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking things further:
-
-- The middle of the lighter half of animals is called the first @vocab{quartile} - or "Q1"
-- The middle of the heavier half of animals is the third quartile (also called "Q3").
-
-Since each quartile has exactly 1/4th of the animals in it, we know that the "middle half" of the animals’ weights are spread between Q1 and Q3.
+@right{@image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}}Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking the _median of each half_, splitting the population into four equal-sized @vocab{quartiles}.
 
 [.lesson-instruction]
 The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less. What animals does the *third* quartile represent?
@@ -68,12 +64,12 @@ Besides looking at the median as center, and the spread between Q1 and Q3, we al
 Splitting a dataset into @vocab{quartiles} gives us five numbers that we can play with to measure spread. To summarize what we've seen so far:
 
 . Minimum: _the smallest value in a dataset_
-. Q2 / Median: _the middle value in a dataset_
-. Q1: _the value that falls between the minimum and Q2_
-. Q3: _the value that falls between the minimum and Q2_
+. Q2 / Median: _the middle value (median) in a dataset_
+. Q1: _the median that falls between the minimum and Q2_
+. Q3: _the median that falls between and Q2 and the maximum_
 . Maximum: _the largest value in a dataset_
 
-Taken together these are called the *5 Number Summary* of a dataset, and this summary is one tool for calculating spread. We can use these numbers to calculate two new values:
+Taken together these are called the **5 Number Summary** of a dataset, and this summary is one tool for calculating spread. We can use these numbers to calculate two new values:
 
 - Minimum - Maximum = *Range*:  _the distance spanned by the extreme values in the dataset_
 - Q3 - Q1 = *IQR*:  _the "Interquartile Range", or the distance spanned by the middle half of the data_
@@ -81,30 +77,28 @@ Taken together these are called the *5 Number Summary* of a dataset, and this su
 === Investigate
 We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
-@show{
-(contract
-  "box-plot" '("Table", "String") "Image"
-  "Consumes a table and the name of the column to plot, and produces a box plot"
-)
-
-(code '(box-plot animals-table "pounds"))
-}
+```
+box-plot :: (t::Table, col::String) -> Image
+# Consumes a table and the name of the column
+# to plot, and produces a box plot"
+box-plot(animals-table, "pounds")
+```
 
 [.lesson-point]
 Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
 
 [.lesson-instruction]
-Type in this expression in the Interactions Area, and see the resulting plot.
+Type in this into the Interactions Area, and see the resulting plot.
 
 @right{@image{images/5-plot.png, 5 plot, 400}}
 
 This plot shows us the center and spread in our dataset according to those five numbers.
 
-- The *minimum* value in the dataset (at the left of “whisker”). In our dataset, that’s just 0.1 pounds.
-- The *First Quartile (Q1)* (the left edge of the box), is computed by taking _the median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.
-- The *Median* value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.
-- The *Third Quartile (Q3)* (the right edge of the box), which is computed by taking _the median of the upper half of the values_. That’s 60.4 pounds in our dataset.
-- The *maximum* value in the dataset (at the right of the “whisker”). In our dataset, that’s 172 pounds.
+- **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.
+- **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.
+- **Q2** / Median value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.
+- **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.
+- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.
 
 [.lesson-instruction]
 * Turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
@@ -116,16 +110,18 @@ It is extremely common for students to forget that every quartile _always_ inclu
 
 === Synthesize
 
-- What percentage of points make up the first quartile (Q1)?
+- What percentage of points make up the Q1?
 ** _25%_
-- What percentage of points make up the second quartile (Q2)?
+- What percentage of points make up Q2?
 ** _25%_
-- What percentage of points make up the third quartile (Q3)?
+- What percentage of points make up Q3?
 ** _25%_
-- What percentage of points make up the fourth quartile (Q4)?
+- What percentage of points make up Q4?
 ** _25%_
 - What percentage of points make up the Interquartile Range (IQR)?
 ** _50%_
+- What percentage of points make up the Range?
+** _100%_
 
 == Interpreting Box Plots
 
@@ -144,9 +140,9 @@ Box plots and histograms give us two different views on the concept of shape.
 
 [.cols="^1,^1", options="header"]
 |===
-|           | Groups          | Intervals
-| Box Plots | 4, equal sized  | any size
-| Histograms| any number, not equal| equal size
+|               | Intervals | Points-per-Interval
+| **Box Plots** | Variable  | Fixed
+| **Histograms**| Fixed     | Variable
 |===
 
 *Histograms:* fixed intervals (“bins”) with variable numbers of data points in each one. Points “pile up in bins”, so we can see how many are in each. __Larger bars show where the clusters are.__
@@ -178,7 +174,7 @@ a|
 @span{.title}{Modified Box Plots}
 More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
 
-@show{(contract "modified-box-plot" '("Table", "String") "Image" )}
+`modified-box-plot :: (t::Table, col::String) -> Image`
 
 |===
 
@@ -211,10 +207,10 @@ Are they clumped on the right, with a few outliers skewing to the left? Or are t
 
 [.lesson-instruction]
 - How are the quantitative columns in your dataset distributed?
-@printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to explore two quantitative columns with box plots.
+@printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to **explore two quantitative columns with box plots**.
 - Then add these displays - and your interpretations! - to "Making Displays" section.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
-- How is this distribution represented in terms of measures of center and spread? Complete @printable-exercise{shape-of-my-dataset.adoc}, and complete the "Measures of Center and Spread" section of the exploration document.
+- Complete @printable-exercise{shape-of-my-dataset.adoc}, and **explain the connection between measures of center and your box plots**. - Complete the "Measures of Center and Spread" section of the @starter-file{exploration-paper}.
 
 === Synthesize
 Have students share their findings.
