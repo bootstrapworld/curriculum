@@ -51,7 +51,7 @@ Review student answers, paying particular attention to the connections between "
 
 Take a closer look at the four examples in this file:
 
-```{style="font-size:12pt"}
+```{style="font-size:12pt;font-weight:bold"}
 # weeks-dot :: Row -> Image
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
@@ -71,7 +71,7 @@ end
 {layout="Launch"}
 # Computing Images from Rows
 
-```{style="font-size:12pt"}
+```{style="font-size:12pt;font-weight:bold"}
 examples:
   weeks-dot(cat-row)   is circle(5 *          4,         "solid", "green")
   weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
@@ -90,7 +90,7 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 {layout="Launch"}
 # Computing Images from Rows
 
-```{style="font-size:12pt"}
+```{style="font-size:12pt;font-weight:bold"}
 examples:
   weeks-dot(cat-row)   is circle(5 *          4,         "solid", "green")
   weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
@@ -98,7 +98,7 @@ examples:
   weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
-```{font-size:14pt}
+```
 
 In those first examples, where are the number `4` and `1` coming from?
 
@@ -109,8 +109,8 @@ In those first examples, where are the number `4` and `1` coming from?
 Each step in the Design Recipe helps us write the next one.
 
 - If we can't write our Contract and Purpose, it means we haven't thought through the problem enough. Better to find this out _before_ we write the rest of our function!
-- If we're having trouble writing our Examples, we can check our Contract and Purpose for hints.
-- If we're having trouble writing the Definition, we can check our Examples for hints.
+- If we're having trouble writing our Examples, **we can check our Contract and Purpose for hints.**
+- If we're having trouble writing the Definition, **we can check our Examples  to see the pattern.**
 
 These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
 
@@ -138,15 +138,15 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 
 **Set 1**
 
-- @opt-printable-exercise{is-dog.adoc}
-- @opt-printable-exercise{days.adoc}
-- @opt-printable-exercise{is-young.adoc}
+- @opt-printable-exercise{is-dog.adoc}{style="font-size:16pt"}
+- @opt-printable-exercise{days.adoc}{style="font-size:16pt"}
+- @opt-printable-exercise{is-young.adoc}{style="font-size:16pt"}
 
 **Set 2**
 
-- @opt-printable-exercise{is-old.adoc}
-- @opt-printable-exercise{kilos.adoc}
-- @opt-printable-exercise{is-cat.adoc}
+- @opt-printable-exercise{is-old.adoc}{style="font-size:16pt"}
+- @opt-printable-exercise{kilos.adoc}{style="font-size:16pt"}
+- @opt-printable-exercise{is-cat.adoc}{style="font-size:16pt"}
 
 <!--
 2. Choose which set of word problems you are going to start with and give each student within each group a different word problem.
@@ -167,7 +167,7 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 @printable-exercise{data-cycle-1.adoc}
 
 
-**Set 2**
+**Set 2 - Putting it all together**
 
 @printable-exercise{data-cycle-2.adoc}
 
