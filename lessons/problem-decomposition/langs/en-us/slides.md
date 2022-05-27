@@ -90,6 +90,7 @@ Which of these four `profit` definitions do you think is "best", and why?
 
 ---
 {layout="Synthesize"}
+# Problem Decomposition 
 
 Suppose the cost of lemons goes up. Which solution(s) would need to be changed?
 
@@ -126,14 +127,24 @@ These pieces are __reusable__, resulting in writing __less code__, and __less du
 Duplicate code means more places to make mistakes, especially when that code needs to be changed.
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Top-Down vs. Bottom-Up 
 
-__Top-Down and Bottom-Up design are two different strategies for problem decomposition.__
+@show{(coe '(... (revenue g) (cost g)))}
 
-__Bottom-Up__: start with the small, easy relationships first and then build our way to the larger relationships. In the Lemonade Stand, you defined `cost` and `revenue` first, and then put them together in `profit`. 
+_Top-Down and Bottom-Up design are two different strategies for problem decomposition._
 
-__Top-Down__: Start with the "big picture" and then worry about the details later. We could have started with `profit`, and made a to-do list of the smaller pieces we’d build later.
+**Bottom-Up:** start with the small, easy relationships like `revenue` and `cost` first. How are they connected with the outer circle? You'll get there eventually, but __we can leave it blank for now (`...`)__. In the Lemonade Stand, you defined `cost` and `revenue` first, and then put them together in `profit`. _This is the same approach as building your Circle of Evaluation inside-out!_
+
+---
+{layout="LaunchR"}
+# Top-Down vs. Bottom-Up 
+
+@show{(coe '(- ...revenue... ...cost...))}
+
+_Top-Down and Bottom-Up design are two different strategies for problem decomposition._
+
+**Top-Down:** start with the "big picture" and then worry about the details later. We could have started with `profit` as @show{(code '(- revenue cost))}, and __fill in the details of `revenue` and `cost` later (thus the `...`)__. _This is the same approach as building your Circle of Evaluation outside-in!_
 
 ---
 {layout="Investigate"}
