@@ -16,6 +16,10 @@ Computers use numbers to represent a character’s position on screen, using num
 {layout="Launch"}
 # Navigating a Grid
 
+But one number line isn't enough!
+
+@image{images/coordinate-bkgrd.png, "quadrant 1 of a coordinate plane"}
+@image{images/dog.png, dog character}
 
 <!--
 	What is the coordinate of the Dog, if it’s on the left-hand edge of the screen?
