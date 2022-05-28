@@ -126,6 +126,17 @@ These pieces are __reusable__, resulting in writing __less code__, and __less du
 
 Duplicate code means more places to make mistakes, especially when that code needs to be changed.
 
+
+---
+{layout="LaunchR"}
+# Top-Down vs. Bottom-Up 
+
+Which one of these circles of evaluation shows a Top-Down approach to problem decomposition?{style="font-size:24"}
+
+Which one is Bottom-Up?{style="font-size:24"}
+
+@image{images/COEs-top-bottom.png, "two circles of evaluation showing top-down and bottom-up solving strategies"}{width="250"}
+
 ---
 {layout="LaunchR"}
 # Top-Down vs. Bottom-Up 

@@ -1,40 +1,111 @@
 ---
 
-{layout=" Title Slide"}
+{layout="Math Title Slide"}
 
-# 
+# Making Game Images
+
+---
+{layout="Launch"}
+# The Game Starter File
+
+By now you’ve learned about defining values, composing functions, and reading contracts. 
+
+Taken together, that’s a lot of code you’re now able to understand! 
+
+It’s time to flex your reading skills, and look at the file you’ll be working with to build your video game.
+
+
+---
+{layout="Investigate"}
+# The Game Starter File
+
+Read through the @starter-file{game}.
+
+This file contains a lot of code! Some of it you haven’t seen before.
+
+Going line-by-line, talk with your group about what you think each line does.
+
+
+---
+{layout="Synthesize"}
+# The Game Starter File
+
+- What familiar things did you see in the Game Starter File file?
+- What were some unfamiliar things?  Any idea what they might do?
+- What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?
+- What does `SCREENSHOT` return in the @vocab{Interactions area}?
+- Did anyone try pressing "Run"?  What happens when you press "Run"?*
+
+@ifproglang{wescheme}{
+- What do you think `image-url` does?
+}
+@ifproglang{pyret}{
+* What do you think `image-url` does?
+}
+
+
 <!--
+- *What familiar things did you see in the Game Starter File file?*
+- *What were some unfamiliar things?  Any idea what they might do?*
+_Answers vary: new functions, comments, images_
 
+- *What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?*
+_``GAME-TITLE`` is a String, `BACKGROUND` is an Image_
+
+- *What does `SCREENSHOT` return in the @vocab{Interactions area}?*
+_An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
+
+- *Did anyone try pressing "Run"?  What happens when you press "Run"?*
+_Allow students to discuss what they see and what connections they see with the code_
+
+@ifproglang{wescheme}{
+- *What do you think `image-url` does?*
+}
+@ifproglang{pyret}{
+* *What do you think `image-url` does?*
+_Answers vary: It consumes a @vocab{String}, which is a URL (an image location on the Internet) and produces the @vocab{Image} inside our program_
+}
 -->
----
-{layout="Launch"}
-# 
 
 ---
 {layout="Launch"}
-# 
+# Finding Your Game Images
 
----
-{layout="InvestigateR"}
-# 
+`image-url :: String  ->  Image`
 
-
----
-{layout="SynthesizeR"}
-# 
-
+- This function takes in a web address for an image, and produces the image! (Is it in your contracts page?)
+- You can use `rotate`, `scale`, etc. with this image!
+- Save a copy to your account
 
 
 ---
-{layout="Synthesize"}
-# 
+{layout="Launch"}
+# Finding Your Game Images
 
----
-{layout="Synthesize"}
-# 
-
+@image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
+https://www.resourcesforlife.com/docs/item6247",300,align="center"} 
 
 
 ---
-{layout="Supplemental"}
-#
+{layout="Investigate"}
+# Finding Your Game Images
+
+Find an image you like, making sure it’s transparent. Then Save it using a good name.
+
+
+---
+{layout="Investigate"}
+# Finding Your Game Images
+
+Upload to GDrive, and make sure sharing settings allow anyone with the link to view.
+
+
+---
+{layout="Investigate"}
+# Finding Your Game Images
+
+Open your game file
+
+Click Insert > Images, and select an image
+
+It will insert the code to display the image using image-url.
