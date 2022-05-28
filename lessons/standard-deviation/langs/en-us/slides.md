@@ -208,5 +208,5 @@ What can standard deviation tell you about quantitative columns in _your_ datase
 # Your Own Analysis
 
 - Share your findings!
-- Are some colums more spread out - with a larger standard deviation - than others?
+- Are some columns more spread out - with a larger standard deviation - than others?
 - What does that mean about your data?
