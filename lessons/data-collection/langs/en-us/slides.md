@@ -12,11 +12,11 @@
 
 There are lots of reasons to gather data:
 
-* A company might want to survey its customers to see if they are happy with the product.
-* We might want to gather data on plant growth to see whether a plant grows faster with a lot or a little sun.
+* A company might want to survey its customers to see if they are happy with the product.{style="font-size:16pt"}
+* We might want to gather data on plant growth to see whether a plant grows faster with a lot or a little sun.{style="font-size:16pt"}
 * The CDC might gather data on symptoms to see how serious a disease is
-* An airline could gather data on fuel usage to see which airplane routes are the most efficient.
-* We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest!
+* An airline could gather data on fuel usage to see which airplane routes are the most efficient.{style="font-size:16pt"}
+* We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest!{style="font-size:16pt"}
 
 <!--
 
@@ -58,9 +58,9 @@ Open the @starter-file{fav-desserts} and answer the questions on @printable-exer
 
 Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Here are four ways that data can be dirty:
 
-- **Missing Data** - A column containing some cells with data, but some cells left blank.
+(1) **Missing Data** - A column containing some cells with data, but some cells left blank.
 
-- **Inconsistent Types** - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
+(2) **Inconsistent Types** - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
 
 ---
 {layout="Launch"}
@@ -68,9 +68,9 @@ Sometimes data is so "dirty" that it can't even be processed by tools like Pyret
 
 Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Here are four ways that data can be dirty:
 
-- **Inconsistent Units** - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
+(3) **Inconsistent Units** - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
 
-- **Inconsistent Naming** - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
+(4) **Inconsistent Naming** - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
 
 ---
 {layout="Launch"}
@@ -118,23 +118,25 @@ Suppose we decided to delete all the rows with weird data, having inconsistent t
 
 Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
 
-1. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
-2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
-3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
+1. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?{style="font-size:16pt"}
+2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?{style="font-size:16pt"}
+3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?{style="font-size:16pt"}
 
 ---
 {layout="Launch"}
 # Data Hygiene
 
-The way we ask questions - and check responses - plays a big role in how clean our data is.
+**The way we ask questions - and check responses - plays a big role in how clean our data is.**
 
 A person's height is generally the same as their "wingspan" (the length from fingertip to fingertip). 
 
-Suppose we want to test this for ourselves, by surveying students at a school.
+Suppose we want to test this for ourselves, by surveying students at a school...
 
 ---
 {layout="Launch"}
 # Data Hygiene
+
+Suppose we want to test this for ourselves, by surveying students at a school...
 
 @starter-file{bad-survey} was _intentionally designed to gather bad data!_ Can you see anything wrong with it?
 
