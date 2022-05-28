@@ -10,20 +10,16 @@
 {layout="Launch"}
 # Threats to Validity
 
-*Survey says: “People prefer cats to dogs”*
+**Survey says: “People prefer cats to dogs”**
 
-As good Data Scientists, the staff at the animal shelter are constantly gathering data about their animals, their volunteers, and the people who come to visit. But just because they have data doesn’t mean the conclusions they draw from it are correct! For example: suppose they surveyed 1,000 cat-owners and found that 95% of them thought cats were the best pet. Could they really claim that people generally prefer cats to dogs?
+As good Data Scientists, the staff at the animal shelter are constantly gathering data about their animals, their volunteers, and the people who come to visit. But just because they have data doesn’t mean the conclusions they draw from it are correct! 
+
+For example: suppose they surveyed 1,000 cat-owners and found that 95% of them thought cats were the best pet. Could they really claim that people generally prefer cats to dogs?
 
 
 <!--
 Have students share back what they think. The issue here is that cat-owners are not a representative sample of the population, so the claim is invalid.
 -->
----
-{layout="Launch"}
-# Threats to Validity
-
-For example: suppose they surveyed 1,000 cat-owners and found that 95% of them thought cats were the best pet. Could they really claim that people generally prefer cats to dogs?
-
 ---
 {layout="Launch"}
 # Threats to Validity
@@ -39,13 +35,9 @@ This is just one example of what are called @vocab{Threats to Validity}.
 {layout="Launch"}
 # Threats to Validity
 
-1) *Selection bias* - Data was gathered from a biased sample of the population. This is the problem with surveying _cat owners_ to find out which animal is most loved!
+(1) **Selection bias** - Data was gathered from a biased sample of the population. This is the problem with surveying _cat owners_ to find out which animal is most loved!
 
----
-{layout="Launch"}
-# Threats to Validity
-
-2) *Bias in the study design* - Data was gathered using a “loaded” question like “Since annual vet care comes to about $300 for dogs and only about half of that for cats, would you say that owning a cat is less of a burden than owning a dog?” This could easily lead to a misrepresentation of people’s true opinions. 
+(2) **Bias in the study design** - Data was gathered using a “loaded” question like “Since annual vet care comes to about $300 for dogs and only about half of that for cats, would you say that owning a cat is less of a burden than owning a dog?” This could easily lead to a misrepresentation of people’s true opinions. 
 
 <!--
 
@@ -54,13 +46,9 @@ This is just one example of what are called @vocab{Threats to Validity}.
 {layout="Launch"}
 # Threats to Validity
 
-3) *Poor choice of summary data* - Even if the selection is unbiased, sometimes outliers are so extreme that they shift the results of our analysis in ways that don’t represent the population as a whole. If the shelter happened to house a 100-year-old tortoise, and summarized its animals’ ages with the _mean_, this would inflate our perception of what age is typical.
+(3) **Poor choice of summary data** - Even if the selection is unbiased, sometimes outliers are so extreme that they make the mean completely useless at best - and misleading at worst.
 
----
-{layout="Launch"}
-# Threats to Validity
-
-4) *Confounding variables* - The gathered data doesn't take into account other factors that might influence a relationship. A study might conclude that cat owners are more environmentally conscious: they’re more likely to use public transportation than dog owners. The confounding variable here could be urban v. rural: people who live in big cities are more likely to use public transportation, and also more likely to own cats! 
+(4) **Confounding variables** - A study might find that cat owners are more likely to use public transportation than dog owners. But it's not that owning a cat means you drive less: people who live in big cities are more likely to use public transportation, _and_ also more likely to own cats.  
 
 More examples of confounding variables can be found in @link{../correlations/pages/correlation-is-not-causation.html, Correlation is Not Causation}.
 
@@ -68,9 +56,11 @@ More examples of confounding variables can be found in @link{../correlations/pag
 {layout="Investigate"}
 # Threats to Validity
 
-On @printable-exercise{pages/threats-to-validity-1.adoc} and @printable-exercise{pages/threats-to-validity-2.adoc}, you’ll find four different claims backed by four different datasets. Each one of those claims suffers from a serious threat to validity. Can you figure out what those threats are?
+On @printable-exercise{pages/threats-to-validity-1.adoc} and @printable-exercise{pages/threats-to-validity-2.adoc}, you’ll find four different claims backed by four different datasets. 
 
-If you have time, you may also want students to respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
+Each one of those claims suffers from a serious threat to validity. Can you figure out what those threats are?
+
+Optional: respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
 
 <!--
 
@@ -79,7 +69,9 @@ If you have time, you may also want students to respond to @opt-printable-exerci
 {layout="Synthesize"}
 # Threats to Validity
 
-Life is messy, and there are _always_ threats to validity. Data Science is about doing the best you can to minimize those threats, and to be up front about what they are whenever you publish a finding. When you do your own analysis, make sure you include a discussion of the threats to validity!
+**Life is messy, and there are _always_ threats to validity**
+
+Data Science is about doing the best you can to minimize those threats, and to be up front about what they are whenever you publish a finding. When you do your own analysis, make sure you include a discussion of the threats to validity!
 
 <!--
 
@@ -103,9 +95,9 @@ You've already seen a number of ways that statistics can be misused:
 
 There are other ways to mislead the audience as well:
 
-*Intentionally using the wrong chart* - suppose the census asks for data from different groups of people, and gets _none_ from one group. That would be very suspicious! The missing group would be an empty space on bar chart, but a pie chart would hide that absence completely - making it less likely that anyone would even notice that group had been "erased"!
+**Intentionally using the wrong chart** - suppose the census asks for data from different groups of people, and gets _none_ from one group. That would be very suspicious! The missing group would be an empty space on bar chart, but a pie chart would hide that absence completely - making it less likely that anyone would even notice that group had been "erased"!
 
-*Changing the scale of a chart* - Changing the y-axis of a scatterplot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
+**Changing the scale of a chart** - Changing the y-axis of a scatterplot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
 
 ---
 {layout="Launch"}
@@ -120,8 +112,8 @@ With all the news being shared through newspapers, television, radio, and social
 {layout="Investigate"}
 # Fake News!
 
-* On @printable-exercise{pages/fake-news.adoc}, you’ll find some deliberately misleading claims made by slimy Data Scientists. Can you figure out _why these claims should not be trusted_ ?
-* Once you’ve finished, consider your own dataset and analysis: what misleading claims could someone make about your work? Turn to @printable-exercise{pages/lies-darned-lies-n-statistics.adoc}, and come up with four misleading claims based on data or displays from your work.
+* On @printable-exercise{pages/fake-news.adoc}, you’ll find some deliberately misleading claims made by slimy Data Scientists. **Why shouldn't these claims should be trusted?**
+* Once you’ve finished, consider your own dataset and analysis: what misleading claims could someone make about your work? Turn to @printable-exercise{pages/lies-darned-lies-n-statistics.adoc}, and **come up with four misleading claims based on data or displays from your work.**
 
 <!--
 Have students trade papers with another group, and see if you can figure out why each other’s claims are not to be trusted!
@@ -180,4 +172,3 @@ What threats to validity to you find? What were they?
 <!--
 
 -->
----
