@@ -87,21 +87,24 @@ https://www.resourcesforlife.com/docs/item6247",300,align="center"}
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Finding Your Game Images
 
 Find an image you like, making sure it’s transparent. Then Save it using a good name.
 
 
+@{youtube}(VO7fTACB87w)
+
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Finding Your Game Images
 
 Upload to GDrive, and make sure sharing settings allow anyone with the link to view.
 
+@{youtube}(fXQcnrvxBd0)
 
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Finding Your Game Images
 
 Open your game file
@@ -109,3 +112,13 @@ Open your game file
 Click Insert > Images, and select an image
 
 It will insert the code to display the image using image-url.
+
+@{youtube}(bWxNXTrGQOE)
+
+---
+{layout="Synthesize"}
+# Finding Your Game Images
+
+
+- What functions were most useful in helping you customize your images to make your game look and feel how you want it?
+- How did you make use of function composition in customizing your images?
