@@ -1,0 +1,450 @@
+= Functions Can Be Linear
+
+++++
+<style>
+#content .small-table {max-width: 75%}
+#content .graph-table img {width: 33%;}
+</style>
+++++
+
+@description{Students explore the concept of slope and y-intercept in linear relationships, using function definitions as a third representation (alongside tables and graphs).}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* identify linear and non-linear graphs and tables
+* identify the slope and y-intercept for a relationship shown as a table or graph
+* match different representations of the same linear relationship
+
+| Student-facing Lesson Goals
+|
+
+* I can match graphs to tables, if they both describe the same linear relationship
+* I can tell the difference between linear and non-linear relationships in tables and graphs
+* Given a table or graph showing a linear relationship, I can compute the slope and y-intercept
+
+| Materials
+|[.materials-links]
+* @link{https://docs.google.com/presentation/d/1qrJreWyRD_wsEzOaFsuvYgKl8VsvJCZpPcv0TDXOqLw/view, Lesson Slides}
+
+@material-links
+
+| Key Points for the Facilitator
+|
+
+* Lines are made of points (try to avoid refering to "lines" as much as "collections of points")
+* Linear functions can be represented as straight lines on a graph or as sequences that change at a constant rate in a table.
+* Stress that Graphs, Definitions, and Tables are all __different ways of viewing the same function__. The misconception to fight against is the idea that @math{f(x) = 3x + 2} is somehow the "real" function, with the graph being "the thing the function draws."
+|===
+
+== Simple Sequences and Straight Lines @duration{15 minutes}
+
+=== Overview
+Students explore the concept of _linearity_, as represented in tables and graphs.
+
+=== Launch
+Have students turn to @printable-exercise{notice-wonder-linearity.adoc}, where they'll notice and wonder about the rows in this table and the points on this graph:
+
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
+|===
+
+|
+
+[.pyret-table.first-table,cols="^1,^1",options="header"]
+!===
+! x ! y
+! 0 ! 0
+! 1 ! 2
+! 2 ! 4
+! 3 ! 6
+! 4 ! 8
+!===
+| @image{images/2x.png, "graph of a line passing through the points (0,0) (1,2) (2,4) (3,6) (4,8)"}
+|===
+
+[.lesson-instruction]
+- What do you *Notice*?
+- What do you *Wonder*?
+
+_Each row in the Table represents an (x, y) point on the graph. The "x" column is a list of positions along the x-axis, and the "y" column is filled with values that are computed from those position according to some rule._
+
+[.lesson-instruction]
+Can you predict the next two rows in the table? The next points on the graph? *How did you arrive at your prediction?*
+
+The y-column in the table and the y-coordinates on the graph follow a _rule_, which dictates how @math{y} relates to @math{x}. When @math{x} goes up or down by 1, @math{y} goes up or down by 2. We expect that rule to continue for all values of @math{x}, continuing the line and extending the table in both directions, forever.
+
+[.lesson-point]
+*Linear Relationships*: Sequences that change at a constant rate, or points forming a straight line on a graph.
+
+Rules that behave this way are called @vocab{linear} relationships. In a linear relationship, if the x-values in a table increase at a constant rate, the y-values in the table will also change at a constant rate. When we plot the x and y-coordinates on a graph, the contant rate of change translates to all of the points falling on the same line and that line not only includes the points represented in the table, but also all of the coordinate pairs that satisfy the same rule, including lots of points whose x and y values are fractions and decimals.
+
+Linear relationships are _everywhere_:
+
+* "A car is traveling at 50 miles per hour"
+* "Milk costs $2.50 per gallon"
+* "There are 18 wheels on every tractor-trailer"
+* "A tree grows 2 inches each year"
+* "There are 30 students per teacher"
+
+[.lesson-instruction]
+What other linear relationships can you think of?
+
+=== Investigate
+
+Have students turn to @printable-exercise{notice-wonder-tables.adoc}, where they'll notice and wonder about these two "sideways" data tables.
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 ! 4 ! 5
+! y ! 2 ! 3 ! 4 ! 5 ! 6
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !   1 !   2 !   3 !   4 !   5
+! y ! -12 ! -14 ! -16 ! -18 ! -20
+!===
+
+|===
+
+[.lesson-instruction]
+- What do you *Notice?*
+- What do you *Wonder?*
+- Can you figure out what the next (x,y) pair should be for each of them?
+- Can you guess what the y-value for each table would be when x is 0?
+
+We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). The "y" column, on the other hand is computed from the x-values according to some function.
+
+When there is a @vocab{linear} relationship, the y-values change at a _constant rate_. If we were to graph those values, all of the points would fall on a straight line.
+
+- Have students complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+- If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+
+
+[.lesson-point]
+Axes on a graph need an order. Rows in a table don't!
+
+The rows in a table are _discrete_. They preserve their meaning if the rows are shuffled into a different order. Ordering the rows in a table can make it easier for us to find the function.
+
+In a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Pedagogy Note}
+
+To encourage students to look at the _points_ in the table and on the graph, it can be useful to change the scale of the graphs to prevent students from leaning on visual cues like "steepness" to bypass the learning objective.
+
+It can also be useful to list the points in the table __out of order__, both to focus students' attention on the points and to drive home that rows do not have to be ordered!
+|===
+
+=== Synthesize
+@vocab{Linear} relationships show up all the time in real life, so it's helpful to know how to think about them. We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
+
+== Linear, Non-Linear, or Bust!  @duration{15 minutes}
+
+=== Overview
+Students deepen their understanding of linearity, by seeing counterexamples (non-linear relationships), as well as tables and graphs for which there is _no_ relationship.
+
+=== Launch
+
+Have students turn to @printable-exercise{graphs-all-linear.adoc}, where they'll Notice & Wonder about the six graphs below and consider the question,
+*If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?*
+
+[.graph-table, stripes="none", frame="none"]
+|===
+
+| @image{images/constant-linear.png, "horizontal line crossing the y-axis at 48"}
+  @image{images/num-abs.png, "upside-down v-shaped graph with its vertex at the origin"}
+  @image{images/num-sqrt.png, "two curves meeting at the origin"}
+
+| @image{images/negative-linear.png, "a diagonal line, sloping downward from left to right"}
+  @image{images/positive-linear.png, "a diagonal line, sloping updward from left to right"}
+  @image{images/num-sqr.png, "a u-shaped graph, opening upward, with its vertex at the origin"}
+|===
+
+[.lesson-instruction]
+- What do you *Notice?*
+- What do you *Wonder?*
+
+[.lesson-point]
+Linear relationships in a graph always appear as straight lines
+
+Three of the graphs above represent @vocab{linear} relationships, and three show other, non-linear relationships. As we can see, the linear graphs can go in lots of directions and non-linear relationships can follow patterns that aren't linear!
+
+Have students turn to @printable-exercise{tables-all-linear.adoc}, where they'll Notice & Wonder about the six tables below and consider the question,
+*If all linear relationships can be shown as tables, does that mean all tables are linear?*
+
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -2 ! -1 !  0 !  1 !  2
+! y ! -2 ! -3 ! -4 ! -5 ! -6
+!===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 !  4 !  5
+! y ! 1 ! 4 ! 9 ! 16 ! 25
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  12 !  13 !  14 !  15 !  16
+! y ! -12 ! -14 ! -16 ! -18 ! -20
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 5 ! 6 ! 7 ! 8 ! 9
+! y ! 3 ! 3 ! 3 ! 3 ! 3
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !  5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -10 ! -9 ! -8 !  -7 ! -6
+! y ! @math{\frac{-1}{10}} ! @math{\frac{-1}{9}} ! @math{\frac{-1}{8}} ! @math{\frac{-1}{7}} ! @math{\frac{-1}{6}}
+!===
+
+|===
+
+[.lesson-instruction]
+- What do you *Notice?*
+- What do you *Wonder?*
+- Can you figure out what the next (x,y) pair should be for each of them?
+- Can you guess what the y-value for each table would be when x is 0?
+
+[.lesson-point]
+Linear relationships in a table show up as sequences that change at a constant rate. The y-value when x is zero is also the value where the line will cross the y-axis.
+
+Three of the tables above show @vocab{linear} relationships, and three show other, non-linear relationships. As we can see, the linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease) as the x-values increase. While the other tables may show patterns, they aren't linear!
+
+Sometimes there is __no function__ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
+
+[cols="^.^1a,^.^1a", grid="none", frame="none"]
+|===
+
+|
+
+[.pyret-table.first-table,cols="1,1",options="header"]
+!===
+! x ! y
+! 0 ! 13
+! 1 ! -2
+! 1 ! 16
+! 3 ! 0
+! 4 ! 54
+!===
+| @image{images/scatterplot.png, scatter plot with no apparent pattern}
+|===
+
+=== Investigate
+[.lesson-instruction]
+--
+* Can you tell when a relationship is a linear function? A non-linear one? Not a function at all?
+* Can someone remind us how to tell whether or not a graph represents a function? _It has to pass the vertical line test!_
+--
+
+Have students complete @printable-exercise{linear-nonlinear-bust.adoc} and perhaps also @opt-printable-exercise{linear-nonlinear-bust-graphs.adoc} and @opt-printable-exercise{linear-nonlinear-bust-graphs-2.adoc}.
+
+=== Synthesize
+Data has a "shape", and this shape can emerge when we look for patterns in that data. A @vocab{linear} function is one kind of pattern, and we can see it when viewing data as a table or a graph.
+
+== Slope and y-Intercept from Tables @duration{15 minutes}
+
+=== Overview
+Students refine their understanding of linearity, identifying properties like @vocab{slope} and @vocab{y-intercept} in tables.
+
+=== Launch
+
+[.lesson-point]
+All linear relationships are defined by slope and y-intercept.
+
+Every linear relationship has two properties:
+
+1) The sequence of y-values always changes at a constant rate - called @vocab{slope} - increasing or decreasing by the same amount for each change in the x-value.
+
+2) The y-value when @math{x = 0} is called the @vocab{y-intercept}.
+
+Have students turn to @printable-exercise{slope-int-tables-intro.adoc} and facilitate a discussion about the three tables on the page.
+
+
+[.lesson-instruction]
+--
+* Take a look at the first table.
+[.sideways-pyret-table]
+|===
+
+| x | -1 | 0 | 1 | 2 | 3 | 4
+| y | -1 | 1 | 3 | 5 | 7 | 9
+|===
+* Compute how much y increases as x increases by 1. We call this the @vocab{slope}.
+** _We can see that the y-values increase by 2 each time x increases by 1, giving us a @vocab{slope} of 2._
+** _Some students may need an explicit demonstration of subtracting two adjacent y-values in order to recognize that they are changing by 2._
+* Identify the @vocab{y-intercept} by finding the y-value when @math{x = 0}.
+** _The row for @math{x = 0} tells us that the @vocab{y-intercept} is 1._
+* What strategies did you use to compute the slope and y-intercept?
+** _Leave some time for group discussion of strategies!_
+--
+
+Life isn't always so simple!
+
+- What if the table didn't include x = 0?
+- What if the x-values didn't increase by 1?
+- What if the other rows were __out of order__?
+- What if we only had a few random rows, for @math{x = 3} and @math{x = 1}?
+
+[.lesson-instruction]
+--
+* Try extending the second table and filling in the missing rows to find the slope and y-intercept.
+[.sideways-pyret-table]
+|===
+
+| x |  2 | 5 | 8  | 11
+| y |  3 | 9 | 15 | 21
+|===
+* What strategies did you use to extend the table?
+--
+
+How do we find the @vocab{slope} and @vocab{y-intercept} for these functions, _without_ having to sort or extend the table?
+
+We can exploit the fact that all linear functions form _straight lines_, and a straight line can be defined with only __two points!__ That means it is always possible to compute @vocab{slope} and @vocab{y-intercept}, as long as we have just two rows in our table or two points on our graph!
+
+[.lesson-instruction]
+You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work! How might we compute the slope and y-intercept, using only two rows in the table?
+
+Leave some time for group discussion...
+
+@vspace{1ex}
+
+*TO FIND THE SLOPE: Find any two pairs of values in the table, and divide the difference in y's by the difference in x's.*
+
+This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
+
+This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\frac{rise}{run}}.
+
+[.sideways-pyret-table]
+|===
+
+| x | 3 | 20 | 5  |  9 | 1
+| y | 5 | 56 | 11 | 23 | -1
+|===
+
+Taking the first two pairs of values in the last table, this gives us @math{\frac{56 - 5}{20 - 3}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
+
+[.lesson-instruction]
+* Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
+* Are there other strategies we could have used to find the slope?
+
+@vspace{1ex}
+
+*TO FIND THE Y-INTERCEPT: Multiply any x in the table by the slope, and subtract the result from the corresponding y.*
+
+Let's use the the pair (20, 56) from the table to demonstrate this shortcut:
+
+Starting with the @math{x} value of 20, multiplying by the slope (@math{20 \times 3}) gives us @math{60}.
+
+Looking at the table... when @math{x} is 20, @math{y} is 56.
+
+The y-intercept is @math{56 - 60 = -4}.
+
+[.lesson-instruction]
+* Pick another row in the third table and compute the @vocab{y-intercept}. Did you get the same answer?
+* Are there other strategies we could have used to find the y-intercept?
+
+=== Investigate
+Let's get some practice identifying the slope and y-intercept of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
+
+=== Synthesize
+@vocab{Slope} and @vocab{y-intercept} form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+
+== Slope and Y-Intercept from Graphs
+
+=== Overview
+Students refine their understanding of linearity, identifying properties like @vocab{slope} and @vocab{y-intercept} from graphs.
+
+=== Launch
+On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
+
+[cols="^1,^1"]
+|===
+|
+@centered-image{images/negy.png, "graph: diagonal line crosses the y-axis at (0,-1.5)"}
+|
+@centered-image{images/posy.png, "graph: horizontal line crosses the y-axis at (0,1)"}
+|===
+
+On a graph, the slope refers to both the "steepness" and "direction" of the line.
+
+[cols="^1,^1, ^1"]
+|===
+| If it goes up as we go from left to right, the slope is *positive*.
+| If it goes down as we go from left to right, the slope is *negative*.
+| If it stays perfectly horizontal, the slope is *zero*.
+| @centered-image{images/positive.png, "graph: diagonal line sloping upwards from left to right"}
+| @centered-image{images/negative.png, "graph: diagonal line sloping downward from left to right"}
+| @centered-image{images/horizontal.png, "graph: horizontal line"}
+|===
+
+We can compute the @vocab{slope} from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
+
+@centered-image{images/slope.png, "graph of a diagonal line passing through (0,1) and (5,4) showing how to calculate the slope is 3/5", 600}
+
+=== Investigate
+Let's get some practice identifying the slope and y-intercept of a linear function in a graph by completing @printable-exercise{slope-and-y-graphs.adoc}
+
+@ifproglang{pyret}{
+If you have time, you could also have students work with:
+
+- @opt-starter-file{exploring-linearity-in-tables} to make predictions about linearity, slope, and y-intercepts from tables before their graphs are revealed
+- @opt-starter-file{exploring-linearity-in-graphs} to think about linearity, positive/negative/zero slopes and y-intercepts from interactive graphs
+}
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Pedagogy Note}
+
+Some texts refer to "four ways to draw straight lines on a graph": sloping up and to the right, down and to the left, horizontal, or _vertical_. When thinking only in terms of straight lines on a graph, this is technically correct! However, just because we can draw those lines doesn't make them _functions_, and it doesn't mean they all have a defined slope!
+
+Once students are comfortable computing slope, try having them compute the slope of a vertical line. They will quickly realize that this results in a zero in the denominator, which makes the slope _undefined_! This can be a good review of divide-by-zero and another lens for thinking about the vertical line test.
+|===
+
+=== Synthesize
+@vocab{Slope} and @vocab{y-intercept} form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample. For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+
