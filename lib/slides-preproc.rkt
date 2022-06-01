@@ -231,6 +231,7 @@
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
+                      (unless (<= (length p) 2) (set! title (third p)))
                       (format "[~a](~a)" title (second p))]))])))
 
 (define read-group
