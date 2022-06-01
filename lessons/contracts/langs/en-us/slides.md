@@ -1,58 +1,89 @@
 ---
 {layout="Core Title Slide"}
 # Contracts 
+<!-- 
 
----
-{layout="Launch"}
-# Applying Functions
-
-You may remember functions from algebra: @math{f(x) = x + 4}.
-
-- What is the name of this function?
-- The expression @math{f(2)} applies the function @math{f} to the number 2. What will it evaluate to? 
-- What will the expression @math{f(3)} evaluate to? 
-- The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? 
-
----
-{layout="Launch"}
-# Applying Functions
-
-@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
-
----
-{layout="Launch"}
-# Applying Functions
-
-Log into @starter-file{editor}  and press "Run" to load the image library. 
-
-Then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
-
-- What is the name of this function? 
-- How many arguments does the function expect? 
-- What type of argument does the function expect? 
-- Does the @show{(code 'sqrt)} function produce a Number? String? Boolean? 
-- What did the expression evaluate to?
-
----
-{layout="Launch"}
-# Applying Functions
-
-Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
-
-- What is the name of this function? 
-- How many arguments does `string-length` expect?
-- What type of argument does the function expect? 
-- What does the expression evaluate to? 
-- Does the `string-length` function produce a Number? String? Boolean?
-
-<!--
-- What is the name of this function? _string-length_
-- How many arguments does `string-length` expect? _1_
-- What type of argument does the function expect? _String_
-- What does the expression evaluate to? _7_
-- Does the `string-length` function produce a Number? String? Boolean? _Number_
 -->
+---
+{layout="Launch"}
+# Applying Functions
 
+Programming languages have **nouns** and **verbs**. 
+
+Verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a sandwich". "Throw" and "Eat" are verbs, and "ball" and "sandwich" are nouns.
+
+In programming, **values are like nouns**. You've learned about _values_ in our programming language, like Numbers (`42`, `-8.3`, etc), Strings (`"hello!"`), and Booleans (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `*` - each of which _does something_ to Numbers.}
+
+---
+{layout="Launch"}
+# Applying Functions
+
+In programming, our verbs are called @vocab{functions}. A function is like a machine, and it does three things:
+- It takes in some values (called @vocab{arguments})
+- It _does something_ to those values
+- It produces a new value
+
+Let's play with a few functions, to get the hang of it.
+
+---
+{layout="Launch"}
+# Applying Functions
+
+- Log into @starter-file{editor}
+- Open the editor and press "Run", then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
+- What part of this expression is the _value_?
+- What is the name of this function? @show{(code 'sqrt)}
+- How many arguments are we giving to this function?
+- What is the type of the argument we are giving to `sqrt`?
+- What did @show{(code 'sqrt)} produce?
+- What type of data did `sqrt` produce?
+<!--
+- Log into
+- What part of this expression is the _value_?
+** _16_
+- What is the name of this function? @show{(code 'sqrt)}
+- How many arguments are we giving to this function?
+** _1_
+- What is the type of the argument we are giving to `sqrt`?
+** _A Number_
+- What did @show{(code 'sqrt)} produce?
+** _4_
+- What type of data did `sqrt` produce?
+** _Number_
+
+**Encourage students to try giving different arguments to `sqrt`. Does it only work with Numbers? Does it only take one Number?**
+
+-->
+---
+{layout="Launch"}
+# Applying Functions
+
+- Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
+- What is the name of this function?
+- How many arguments does `string-length` expect?
+- What type of argument does the function expect?
+- What does the expression evaluate to?
+- What type of data did `string-length` produce?
+<!--
+- What is the name of this function?
+** _string-length_
+- How many arguments does `string-length` expect?
+** _1_
+- What type of argument does the function expect?
+** _String_
+- What does the expression evaluate to?
+** _7_
+- What type of data did `string-length` produce?
+** _Number_
+
+**Encourage students to try giving different arguments to `string-length`. Does it only work with Strings? Does it only take one String? What does it do?**
+
+@ifproglang{pyret}{
+**This is a terrific opportunity to remind students of function notation, which Pyret mirrors precisely!**
+
+Note that @vocab{arguments} (or "inputs") are the _values_ passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with those arguments! Pyret has lots of built-in functions, which we can use to write more interesting programs.
+}
+-->
 
 ---
 {layout="Investigate-DN"}
