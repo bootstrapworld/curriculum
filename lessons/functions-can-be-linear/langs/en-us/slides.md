@@ -1,6 +1,6 @@
 ---
 
-{layout=" Title Slide"}
+{layout="Math Title Slide"}
 
 # Functions Can Be Linear
 
@@ -10,7 +10,7 @@
 
 What do you Notice? What do you Wonder?
 
-@image{images/notice-wonder.png, "table and line graph"}
+@image{images/notice-wonder.png, "table and line graph"}{width="700"}
 
 <!--
 Students can record their responses on  @printable-exercise{notice-wonder-linearity.adoc}.
@@ -31,7 +31,7 @@ The y-column in the table and the y-coordinates on the graph follow a _rule_, wh
 *Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Simple Sequences and Straight Lines
 
 Linear relationships are _everywhere_:
@@ -52,8 +52,7 @@ What do you Notice? What do you Wonder?
 
 Can you figure out what the next (x,y) pair should be for each of them? Can you guess what the y-value for each table would be when x is 0?
 
-@image{images/sideways-table-1.png, a}
-@image{images/sideways-table-2.png, a}
+@image{images/sideways-table-pair.png, a}
 
 <!--
 	Students can record their responses on @printable-exercise{notice-wonder-tables.adoc}.
@@ -64,7 +63,7 @@ Can you figure out what the next (x,y) pair should be for each of them? Can you 
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, Matching Tables to Graphs}.
 
 If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
@@ -93,9 +92,9 @@ Linear relationships can be represented as tables and graphs.
 {layout="Launch"}
 # Linear, Non-Linear, or Bust!
 
-What do you Notice? What do you Wonder? If all linaer relationships can be shown as points on a graph, does that mean all graphs are linear?
+What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
 
-@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}
+@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
 
 <!---
 	Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
@@ -148,7 +147,7 @@ Sometimes there is no function that will give us a particular table or graph! Ta
 
 
 * Can you tell when a relationship is a linear function? A non-linear one? Not a function at all?
-* Can someone remind us how to tell whether or not a graph represents a function? _It has to pass the vertical line test!_
+* Can someone remind us how to tell whether or not a graph represents a function? 
 
 Complete:
 - @printable-exercise{linear-nonlinear-bust.adoc} 
@@ -181,7 +180,7 @@ Every linear relationship has two properties:
 
 Turn to @printable-exercise{slope-int-tables-intro.adoc}
 
-- In the table above: How much does y increase as x increases by 1? 
+- In the table below: How much does y increase as x increases by 1? 
 - What is the y-intercept? (Figure this out by finding the y-value when @math{x = 0}.)
 
 ---
@@ -277,15 +276,15 @@ For example: If we know a car is moving at a consistent speed, all we need to kn
 
 On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
-@image{images/slope-graphs.png, "two linear graphs"}
+@image{images/y-intercept-graphs.png, "two linear graphs"}
 
 ---
 {layout="Launch"}
-@ Slope and Y-Intercept from Graphs
+# Slope and Y-Intercept from Graphs
 
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
 
-@image{images/slope-graphs.png}
+@image{images/slope-graphs.png, "graphs demonstrating slopes"}
 
 
 ---
@@ -294,7 +293,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 
 We can compute the slope from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
 
-@image{images/slope-2-points.png}
+@image{images/slope-2-points.png, "lines from two points"}
 
 ---
 {layout="Investigate"}
