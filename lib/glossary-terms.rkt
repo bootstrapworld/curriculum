@@ -118,6 +118,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
      (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
+    ((en-us ("dimension") "a measurement of something in a particular direction, especially its height, length, or width")
+     (es-mx ("dimensión") "una medida de algo en una dirección particular, especialmente su altura, largo o ancho"))
+
     ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
      (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen juntas o una incrementa mientras la otra decrece"))
 
