@@ -1,9 +1,10 @@
 ---
-
 {layout="Math Title Slide"}
-
 # Making Game Images
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # The Game Starter File
@@ -34,7 +35,7 @@ Going line-by-line, talk with your group about what you think each line does.
 - What were some unfamiliar things?  Any idea what they might do?
 - What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?
 - What does `SCREENSHOT` return in the @vocab{Interactions area}?
-- Did anyone try pressing "Run"?  What happens when you press "Run"?*
+- Did anyone try pressing Run?  What happens when you press Run?*
 
 @ifproglang{wescheme}{
 - What do you think `image-url` does?
@@ -83,28 +84,28 @@ _Answers vary: It consumes a @vocab{String}, which is a URL (an image location o
 # Finding Your Game Images
 
 @image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
-https://www.resourcesforlife.com/docs/item6247",300,align="center"} 
+https://www.resourcesforlife.com/docs/item6247",300,align="center"}
 
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Finding Your Game Images
 
-Find an image you like, making sure it’s transparent. Then Save it using a good name.
+Find an image you like, making sure it’s transparent. Then save it using a good name.
 
 
-@{youtube}(VO7fTACB87w)
+@[youtube](VO7fTACB87w)
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Finding Your Game Images
 
 Upload to GDrive, and make sure sharing settings allow anyone with the link to view.
 
-@{youtube}(fXQcnrvxBd0)
+@[youtube](fXQcnrvxBd0)
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Finding Your Game Images
 
 Open your game file
@@ -113,7 +114,7 @@ Click Insert > Images, and select an image
 
 It will insert the code to display the image using image-url.
 
-@{youtube}(bWxNXTrGQOE)
+@[youtube](bWxNXTrGQOE)
 
 ---
 {layout="Synthesize"}

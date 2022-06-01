@@ -181,19 +181,6 @@ Let's take a look at our programming environment, and see what the Animals Datas
 - Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
 - Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-
-|
-@span{.title}{Why import a sheet into Pyret?}
-
-- When Pyret imports a sheet, it allows us to keep the original sheet separate from our work environment. We can't delete or overwrite rows, cells, or columns, guaranteeing that these kinds of human errors will not jeopardize the validity of our analysis.
-- Pyret holds us accountable for using clean and complete data so that all displays can be trusted. _When using a spreadsheet, which will make a pie-chart out of any column, no matter what's missing, each cell has to be checked by hand, in order for any data displays to be trusted!_
-- When we filter and build columns in Pyret we make new tables. This means that we can always go back to the original. _When working with spreadsheets we have to choose between making copies of tables or modifying the original table. Modifying the table means we can never go back to the original. And if we discover that we need to remove two of the dogs from our analysis, and we've made copies, we need to remember to remove those dogs from every copy!_
-- The ability to undo a mistake is highly beneficial for students, teachers, and Data Scientists alike!
-- For students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
-|===
-
 === Investigate
 
 [.lesson-instruction]
@@ -210,7 +197,26 @@ After that, we see a line of code that _defines_ `shelter-sheet` to be a spreads
 
 `shelter-sheet = load-spreadsheet("https://docs.google.com....")`
 
-This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at! After that, we see the following code:
+This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at!
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{What Happens when Pyret loads a spreadsheet?}
+
+- When using a spreadsheet, we can make a pie-chart out of any collection of cells - even if those cells are blank, contain mismatched data, or contain data from multiple, unrelated tables! This can jeopardize our analysis, so each cell has to be checked by hand in order for any data displays to be trusted!
+- When Pyret imports a sheet, it reads all the cells and builds something it calls a _Table_. The original spreadsheet is still out there, exactly as it used to be! And when building that Table, Pyret does __all of the cell checks automatically__, and holds us accountable for using clean and complete data so that all displays can be trusted.
+- Each time we sort, filter or change a Table, Pyret makes a _new Table_. This means that we explore one transformation or another, or even multiple transformations together...and can always go back as many steps as we want.
+- When working with spreadsheets we have to choose between making "backup" copies of sheets at every step, or modifying the original sheet. Modifying the sheet makes it really hard to undo. And making copies means the same data is duplicated in many places, so a change in one sheet needs to be replicated _by hand_ in other sheets.
+
+This kind of tedious busywork - or the inability to undo a mistake - is problematic for students, teachers, and Data Scientists alike!
+
+For younger students, the strictness of programming may outweigh the benefits. But for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
+
+|===
+
+After that, we see the following code:
 
   # load the 'pets' sheet as a table called animals-table
   animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
