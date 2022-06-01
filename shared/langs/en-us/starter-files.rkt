@@ -194,7 +194,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf")
    ("wescheme" "hhttps://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
-  ("prism" "Surface Area of a Prism Starter File"
+  ("prism" "Surface Area of a Rectangular Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ZduhqzWFbx")
    )
