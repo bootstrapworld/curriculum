@@ -185,16 +185,13 @@ Let's take a look at our programming environment, and see what the Animals Datas
 |===
 
 |
-@span{.title}{Why Not Spreadsheets?}
+@span{.title}{Why import a sheet into Pyret?}
 
-Spreadsheets are great tool for making a quick chart here and there. And programming languages are _so strict!_ So why don't Data Scientists use spreadsheets? Well, it turns out that being strict is a good thing!
-
-- Spreadsheets don't enforce any notion of _tables._ Columns A-F can mean one thing in rows 2-20, and something else entirely in rows 21-40! That makes it easy to make mistakes, or to have one table bleed into another. That means the spreadsheet must be carefully checked to ensure no mistakes were made.
-- Spreadsheets don't care if a cell is blank. They'll let you make a pie-chart out of and column, no matter what's in it or what's missing. _That means each cell has to be checked by hand_, in order for any data displays to be trusted!
-- Suppose you have a table full of animals, and you'd like to filter out all the dogs. Then you also want to convert pounds to kilograms. Spreadsheets make it possible, but force users to choose between _making copies_ of tables (`animals-original`, `animals-dogs`, `animals-kilos`, etc.) or _modifying the original table_. But what happens if we discover that we need to remove two of the dogs from our analysis? If we've made copies, we need to remember to remove those dogs from every copy. And modifying the table means we can never go back to the original.
-
-For younger students, the strictness of programming may outweigh the benefits. But for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
-This kind of tedious busywork - or the inability to undo a mistake - is problematic for students, teachers, and Data Scientists alike!
+- When Pyret imports a sheet, it allows us to keep the original sheet separate from our work environment. We can't delete or overwrite rows, cells, or columns, guaranteeing that these kinds of human errors will not jeopardize the validity of our analysis.
+- Pyret holds us accountable for using clean and complete data so that all displays can be trusted. _When using a spreadsheet, which will make a pie-chart out of any column, no matter what's missing, each cell has to be checked by hand, in order for any data displays to be trusted!_
+- When we filter and build columns in Pyret we make new tables. This means that we can always go back to the original. _When working with spreadsheets we have to choose between making copies of tables or modifying the original table. Modifying the table means we can never go back to the original. And if we discover that we need to remove two of the dogs from our analysis, and we've made copies, we need to remember to remove those dogs from every copy!_
+- The ability to undo a mistake is highly beneficial for students, teachers, and Data Scientists alike!
+- For students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
 |===
 
 === Investigate
