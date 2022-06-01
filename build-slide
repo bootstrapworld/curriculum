@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 eval $(grep '^SEMESTER=' ./deploy-to-brown)
 eval $(grep '^YEAR=' ./deploy-to-brown)
 if test -n "$SEMESTER" -a -n "$YEAR"; then
@@ -10,7 +9,14 @@ else
 fi
 bootstraproot=https://bootstrapworld.org/materials/$semesterYear
 
+SED=sed
+
+if which gsed|grep -q .; then
+  SED=gsed
+fi
+
 regenid=
+proglang=pyret
 lsn=
 
 if test $# -eq 0; then
@@ -20,22 +26,26 @@ else
   while test $# -ne 0; do
     if test "$1" = -f; then
       regenid=1; shift
+    elif test "$1" = --proglang; then
+      shift; proglang="$1"; shift
     else
       lsn="$1"; shift
     fi
   done
 fi
 
+if test "$proglang" = wescheme; then
+  lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
+  lsn=$lsn-wescheme
+elif test "$proglang" = codap; then
+  lsn=$(echo $lsn|$SED -e 's/-codap$//')
+  lsn=$lsn-codap
+fi
+
 topdir=$(pwd)
 
 export PROGDIR=$topdir/prog
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
-
-SED=sed
-
-if which gsed|grep -q .; then
-  SED=gsed
-fi
 
 export PROGLANG=pyret
 
