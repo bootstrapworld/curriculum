@@ -495,7 +495,21 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-body:not(.LessonPlan) { font-size: 10.5pt; }
+/* set page dimensions */
+body.workbookpage:not(.landscape) {
+  width: 7.5in; min-height: 10in;  max-height: 11in;
+}
+/* define 'landscape' page type */
+body.workbookpage.landscape {
+  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
+
+/* we use the same font-size for print and screen, and zoom the page
+ * in a @screen{...} CSS rule
+ */
+body.workbookpage {
+  font-size: 9pt;
+  padding:   0;
+}
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
@@ -921,28 +935,17 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     line-height:      2.5rem;
   }
   body.nonworkbookpage { width: auto !important; }
-  /* set page width for screen, and range for height */
-  body:not(.LessonPlan, .narrativepage, .landscape) {
-    width: 7.5in; min-height: 10in;  max-height: 11in;
-  }
-  /* define 'landscape' page type */
-  body.landscape:not( .LessonPlan, .narrativepage ) {
-    width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
-
-  /* add some left-padding to improve readability on screens */
-  body.workbookpage, body.LessonPlan #body { padding-left: 2em; }
 
   /* on WB pages, set font size to same as print and then zoom the page */
-  body.workbookpage #content {
-    height:    10in;
-    font-size: 9pt;
-    padding:   0;
-  }
+
   body.workbookpage {
     transform-origin: left top; 
     transform: scale(1.25); 
-    min-height: calc(11in * 1.25);
+    min-height: calc(11in * 1.25) !important;
   }
+
+  /* add some left-padding to improve readability on screens */
+  body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 }
 
 /************************************************************************************
@@ -964,7 +967,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   body:not(.LessonPlan, .narrativepage, .landscape) { height:  10in; }
   body.landscape:not( .LessonPlan, .narrativepage ) { height: 7.5in; }
 
-    /* Override AsciiDoc print default */
+  /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
   #content { margin: auto; }
 
