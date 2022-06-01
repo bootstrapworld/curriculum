@@ -17,16 +17,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* These items should ALWAYS max-out pagewidth */
+/* These items should ALWAYS max-out pagewidth, and have no padding */
 #header, #content, #footer {
-  width: 100% !important; max-width: 100% !important;
-}
-
-body.workbookpage { padding-left: 1em; }
-body.workbookpage #content {
-  height:    10in;
-  font-size: 9pt;
-  padding:   0;
+  width: 100% !important; max-width: 100% !important; padding: 0;
 }
 
 a       { color:  #2156a5 !important; }
@@ -502,7 +495,7 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-body:not(.LessonPlan) { font-size: 9pt; }
+body:not(.LessonPlan) { font-size: 10.5pt; }
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
@@ -821,7 +814,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   padding:            0 2px;
   text-align:         left;
 }
-p .editbox { line-height: 1.2rem; vertical-align: baseline; }
+p .editbox { line-height: 1.2rem; vertical-align: baseline; font-size: 0.9rem; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
@@ -919,7 +912,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
 /************************************************************************************
 * SCREEN MEDIA
 */
-@media screen{
+@media screen {
   html { height: 100%; display:  flex; }
 
   .web-page-only {
@@ -928,15 +921,29 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     line-height:      2.5rem;
   }
   body.nonworkbookpage { width: auto !important; }
-}
+  /* set page width for screen, and range for height */
+  body:not(.LessonPlan, .narrativepage, .landscape) {
+    width: 7.5in; min-height: 10in;  max-height: 11in;
+  }
+  /* define 'landscape' page type */
+  body.landscape:not( .LessonPlan, .narrativepage ) {
+    width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
 
-/* set page width for screen, and range for height */
-body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; min-height: 10in;  max-height: 11in;
+  /* add some left-padding to improve readability on screens */
+  body.workbookpage, body.LessonPlan #body { padding-left: 2em; }
+
+  /* on WB pages, set font size to same as print and then zoom the page */
+  body.workbookpage #content {
+    height:    10in;
+    font-size: 9pt;
+    padding:   0;
+  }
+  body.workbookpage {
+    transform-origin: left top; 
+    transform: scale(1.25); 
+    min-height: calc(11in * 1.25);
+  }
 }
-/* define 'landscape' page type */
-body.landscape:not( .LessonPlan, .narrativepage ) {
-  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
 
 /************************************************************************************
  * PRINT MEDIA
