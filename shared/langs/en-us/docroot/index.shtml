@@ -25,7 +25,7 @@
 
         // certain lessons are "preferred" depending on the subject
         var subjectPreference = {
-            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "bar-and-pie-charts", "scatter-plots", "histograms", "box-plots","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "solving-word-problems", "flags", "inequalities1-simple", "inequalities2-compound", "linear-regression", "combinatorics-combination", "combinatorics-permutation", "linearity", "linearity2", "problem-decomposition"],
+            math : ["numbers-inside-video-games","order-of-operations", "coordinates", "distance-formula", "function-composition", "bar-and-pie-charts", "scatter-plots", "histograms", "box-plots","functions-for-character-animation", "inequalities3-sam", "surface-area-rect-prism", "measures-of-center", "functions-dr", "flags", "inequalities1-simple", "inequalities2-compound", "linear-regression", "combinatorics-combination", "combinatorics-permutation", "function-definition-linear", "functions-can-be-linear", "problem-decomposition"],
             history : ["ds-intro", "ethics-and-privacy", "threats-to-validity", "correlations", "bar-and-pie-charts", "flags", "histograms", "histograms2"],
             science : ["simple-data-types", "ds-intro", "numbers-inside-video-games", "simple-data-types", "bar-and-pie-charts", "scatter-plots", "histograms", "histograms2", "measures-of-center", "box-plots"],
             cs : ["ds-intro", "simple-data-types", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "method-chaining", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
@@ -35,8 +35,6 @@
         var tmpLessonRename = {
             'measures-of-center' : "Mean, Median, & Mode",
             'flags' : "Geometric Ratio and Proportion",
-            'inequalities2-compound': "Compound Inequalities",
-            'if-expressions': "Image Scatter Plots",
             'contracts': "Contracts: Name, Domain & Range",
             'checking-your-work' : "Evaluating Correctness"
         }
@@ -56,8 +54,8 @@
             },
             {
                 title: 'Make a Rocket Fly',
-                lesson: 'solving-word-problems',
-                prerequisites: ['solving-word-problems'],
+                lesson: 'functions-dr',
+                prerequisites: ['functions-dr'],
                 description: 'Students make a rocket blast off, with a flight path following linear (straight-line), quadratic (accelerating or up-and-down), or exponential paths - depending on your learning goals. ',
             },
             {
@@ -96,6 +94,9 @@
         // used with [].filter to produce an array of unique elts
         const onlyUnique = (value, index, self) => self.indexOf(value) === index;
         const getPrereqs = (l) => {
+            if(!graph[l]) {
+                throw "an unknown lesson was passed to getPrereqs:" + l;
+            }
             return graph[l].prerequisites.concat(...graph[l].prerequisites.map(getPrereqs));
         }
 
