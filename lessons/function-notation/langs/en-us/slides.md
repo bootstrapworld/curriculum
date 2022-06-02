@@ -76,8 +76,8 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 {layout="LaunchC"}
 # Function Notation (Graphs)
 
-* How could we determine that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?
-* What is the value of @math{f(3)}?
+* How could we determine that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?{style="font-size:15pt"}
+* What is the value of @math{f(3)}?{style="font-size:15pt"}
 
 @image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
 
@@ -94,7 +94,7 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 {layout="LaunchC"}
 # Function Notation (Graphs)
 
-We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatterplot below.
+We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatterplot below.{style="font-size:15pt"}
 
 @image{images/sp.png, "scatterplot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
 
