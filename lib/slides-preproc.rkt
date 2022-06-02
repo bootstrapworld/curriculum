@@ -70,6 +70,7 @@
 
 (define (make-ascii-math text)
   ; (printf "doing make-ascii-math ~s\n" text)
+  (set! text (regexp-replace* "\\\\frac{([^}]+)}{([^}]+)}" text "\\1/\\2"))
   (let ([ans (let loop ([s (string->list text)] [r '()])
             (cond [(null? s) (reverse r)]
                   [else (let ([a (first s)] [s (rest s)])
