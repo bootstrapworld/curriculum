@@ -73,7 +73,7 @@ Have students turn to @printable-exercise{notice-wonder-linearity.adoc}, where t
 - What do you *Notice*?
 - What do you *Wonder*?
 
-_Each row in the Table represents an (x, y) point on the graph. The "x" column is a list of positions along the x-axis, and the "y" column is filled with values that are computed from those position according to some rule._
+_Each row in the Table represents an (x, y) point on the graph. The "x" column is a list of positions along the x-axis, and the "y" column is filled with values that are computed from those positions according to some rule._
 
 [.lesson-instruction]
 Can you predict the next two rows in the table? The next points on the graph? *How did you arrive at your prediction?*
@@ -144,7 +144,7 @@ When there is a @vocab{linear} relationship, the y-values change at a _constant 
 [.lesson-point]
 Axes on a graph need an order. Rows in a table don't!
 
-The rows in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
+The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
 they preserve their meaning if the rows are shuffled into a different order.
 
 On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
@@ -261,7 +261,7 @@ Linear relationships in a table show up as sequences that change at a constant r
 
 Three of the tables above show @vocab{linear} relationships, and three show other, non-linear relationships. As we can see, the linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease) as the x-values increase. While the other tables may show patterns, they aren't linear!
 
-Sometimes there is __no function__ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
+Sometimes there is __no function__ that will give us a particular table or graph! Take a look at the table and graph below. Can you predict the next two rows? Where will the next point be?
 
 [cols="^.^1a,^.^1a", grid="none", frame="none"]
 |===
@@ -308,7 +308,7 @@ Every linear relationship has two properties:
 
 2) The y-value when @math{x = 0} is called the @vocab{y-intercept}.
 
-Have students turn to @printable-exercise{slope-int-tables-intro.adoc} and facilitate a discussion about the three tables on the page.
+Have students turn to @printable-exercise{slope-int-tables-intro.adoc} and facilitate a discussion.
 
 
 [.lesson-instruction]
@@ -324,21 +324,22 @@ Have students turn to @printable-exercise{slope-int-tables-intro.adoc} and facil
 ** _We can see that the y-values increase by 2 each time x increases by 1, giving us a @vocab{slope} of 2._
 ** _Some students may need an explicit demonstration of subtracting two adjacent y-values in order to recognize that they are changing by 2._
 * Identify the @vocab{y-intercept} by finding the y-value when @math{x = 0}.
-** _The row for @math{x = 0} tells us that the @vocab{y-intercept} is 1._
+** _The @vocab{y-intercept} is 1._
 * What strategies did you use to compute the slope and y-intercept?
 ** _Leave some time for group discussion of strategies!_
+* Complete @printable-exercise{slope-int-tables-basic.adoc} for more practice with this before we move on to more complicated tables.
 --
 
 Life isn't always so simple!
 
 - What if the table didn't include x = 0?
 - What if the x-values didn't increase by 1?
-- What if the other rows were __out of order__?
-- What if we only had a few random rows, for @math{x = 3} and @math{x = 1}?
+- What if the x-values were __out of order__?
+- What if we only had two random coordinate pairs?
 
 [.lesson-instruction]
 --
-* Try extending the second table and filling in the missing rows to find the slope and y-intercept.
+* Try extending the second table and filling in the missing points to find the slope and y-intercept.
 [.sideways-pyret-table]
 |===
 
@@ -350,10 +351,10 @@ Life isn't always so simple!
 
 How do we find the @vocab{slope} and @vocab{y-intercept} for these functions, _without_ having to sort or extend the table?
 
-We can exploit the fact that all linear functions form _straight lines_, and a straight line can be defined with only __two points!__ That means it is always possible to compute @vocab{slope} and @vocab{y-intercept}, as long as we have just two rows in our table or two points on our graph!
+We can exploit the fact that all linear functions form _straight lines_, and a straight line can be defined with only __two points!__ That means it is always possible to compute @vocab{slope} and @vocab{y-intercept}, as long as we have two coordinate pairs!
 
 [.lesson-instruction]
-You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work! How might we compute the slope and y-intercept, using only two rows in the table?
+You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work! How might we compute the slope and y-intercept, using only points from the table?
 
 Leave some time for group discussion...
 
@@ -374,6 +375,10 @@ This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\fra
 
 Taking the first two pairs of values in the last table, this gives us @math{\frac{56 - 5}{20 - 3}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
 
+We would get the same answer if we subtracted the coordinates in the opposite order... @math{\frac{5 - 56}{3 - 20} = \frac{-51}{-17} = 3}.
+
+But, we have to take the first x-coordinate from the same point we take the first y-coordinate from or we'll end up with the opposite and wrong slope, in this case @math{\frac{56 - 5}{3 - 20} = \frac{51}{-17} = -3}.
+
 [.lesson-instruction]
 * Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
 * Are there other strategies we could have used to find the slope?
@@ -391,7 +396,7 @@ If the y-intercept were 0, the @math{y}-value for @math{x = 20} would be @math{6
 We subtract @math{56 - 60} to find out that the y-intercept is @math{-4}.
 
 [.lesson-instruction]
-* Pick another row in the third table and compute the @vocab{y-intercept}. Did you get the same answer?
+* Pick another point from the third table and compute the @vocab{y-intercept}. Did you get the same answer?
 * Are there other strategies we could have used to find the y-intercept?
 
 === Investigate
@@ -428,7 +433,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 | @centered-image{images/horizontal.png, "graph: horizontal line"}
 |===
 
-We can compute the @vocab{slope} from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
+We can compute the @vocab{slope} from a graph the same way we would with a table, by picking two points we know the exact coordinates of.
 
 @centered-image{images/slope.png, "graph of a diagonal line passing through (0,1) and (5,4) showing how to calculate the slope is 3/5", 600}
 
