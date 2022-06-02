@@ -36,7 +36,7 @@ Word Problem Set 2:
 <!--
 Once completed, the set of functions generated from these Word Problem Set 1 can be used to fix the code in this @opt-starter-file{collaboration}. If all the functions are defined correctly, the starter file will then generate a cool image!
 
-A third option is to use any of the practice problems in the workbook that students haven't solved before. There is a large collection of math problems that would work well with the Design Recipe in our @link{bootstrapworld.org/materials/latest/en-us/functions-solving-word-problems, Solving Word Problems Using the Design Recipe} lesson.
+A third option is to use any of the practice problems in the workbook that students haven't solved before. There is a large collection of math problems that would work well with the Design Recipe in our @link{bootstrapworld.org/materials/latest/en-us/functions-dr, Solving Word Problems Using the Design Recipe} lesson.
 -->
 
 ---
