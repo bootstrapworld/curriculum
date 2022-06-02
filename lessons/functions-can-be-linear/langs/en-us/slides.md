@@ -50,7 +50,9 @@ What other linear relationships can you think of?
 
 What do you Notice? What do you Wonder? 
 
-Can you figure out what the next (x,y) pair should be for each of them? Can you guess what the y-value for each table would be when x is 0?
+Can you figure out what the next (x,y) pair should be for each of them? 
+
+Can you guess what the y-value for each table would be when x is 0?
 
 @image{images/sideways-tables-pair.png, "a"}
 
