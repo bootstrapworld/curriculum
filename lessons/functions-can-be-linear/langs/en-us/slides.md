@@ -31,7 +31,7 @@ The y-column in the table and the y-coordinates on the graph follow a _rule_, wh
 *Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
 ---
-{layout="LaunchR"}
+{layout="Launch"}
 # Simple Sequences and Straight Lines
 
 Linear relationships are _everywhere_:
@@ -45,14 +45,16 @@ Linear relationships are _everywhere_:
 What other linear relationships can you think of?
 
 ---
-{layout="Investigate"}
+{layout="InvestigateR"}
 # Simple Sequences and Straight Lines
 
 What do you Notice? What do you Wonder? 
 
-Can you figure out what the next (x,y) pair should be for each of them? Can you guess what the y-value for each table would be when x is 0?
+Can you figure out what the next (x,y) pair should be for each of them? 
 
-@image{images/sideways-table-pair.png, a}
+Can you guess what the y-value for each table would be when x is 0?
+
+@image{images/sideways-tables-pair.png, "a"}
 
 <!--
 	Students can record their responses on @printable-exercise{notice-wonder-tables.adoc}.
@@ -89,7 +91,7 @@ Linear relationships can be represented as tables and graphs.
 - While a table represents a sample of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
@@ -111,7 +113,7 @@ Three of the graphs on the previous slide represent @vocab{linear} relationships
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as tables, does that mean all tables are linear?
@@ -132,7 +134,7 @@ Three of the tables on the previous slide show linear relationships, and three s
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
 Sometimes there is no function that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
@@ -271,7 +273,7 @@ Let's get some practice identifying the slope and y-intercept of a linear functi
 For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Slope and Y-Intercept from Graphs
 
 On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
@@ -279,7 +281,7 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 @image{images/y-intercept-graphs.png, "two linear graphs"}
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Slope and Y-Intercept from Graphs
 
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
@@ -288,7 +290,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Slope and Y-Intercept from Graphs
 
 We can compute the slope from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
