@@ -195,7 +195,7 @@
    ("wescheme" "hhttps://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Rectangular Prism Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")
+   ("pyret" "https://code.pyret.org/editor#share=1FMhoHcIv8Fb7MT460dlQDwV4ISWBIXp0&v=6788e10")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=ZduhqzWFbx")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"

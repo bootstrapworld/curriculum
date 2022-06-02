@@ -1,5 +1,5 @@
 ---
-{layout="Math Title Slide"}
+{layout="Core Title Slide"}
 # Functions Make Life Easier
 
 <!--
