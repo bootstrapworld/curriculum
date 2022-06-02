@@ -169,6 +169,7 @@ Complete @printable-exercise{function-notation-tables.adoc}
 
 ---
 {layout="Synthesize"}
+#Function Notation (Tables)
 
 What did you Notice?
 
