@@ -35,19 +35,6 @@ This goes hand-in-hand with expanding our display **from a 1-dimensional histogr
 
 -->
 ---
-{layout="Launch"}
-# Correlations have _Form_
-
-**_Form:_ whether a relationship is linear, non-linear or undefined**{style="font-size:30pt"}
-
-We want to search for a _linear relationship_ between two quantitative variables. 
-
-The first thing we need to ask is whether the @vocab{form} of the relationship is linear, non-linear...or has no form at all!
-
-<!--
-
--->
----
 {layout="LaunchR"}
 # Correlations have _Form_
 
@@ -94,12 +81,6 @@ Which scatter plots seem to have _no relationships_?
 Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships!
 -->
 ---
-{layout="Launch"}
-# Correlations have _Direction_
-
-**_Direction:_ whether a linear relationship is positive or negative.**{style="font-size:30pt"}
-
----
 {layout="LaunchR"}
 # Correlations have _Direction_
 
@@ -144,11 +125,6 @@ Why do you think that is?
 <!--
 
 -->
----
-{layout="Launch"}
-# Correlations have _Strength_
-
-**_Strength:_ how closely the two variables are correlated.**{style="font-size:30pt"}
 
 ---
 {layout="LaunchR"}
