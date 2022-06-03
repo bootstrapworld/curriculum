@@ -82,7 +82,7 @@
         "OK.5.AP.PD.04"
         )
 
-    ("functions-collaboration" 
+    ("functions-problem-solving-together" 
         "6.EE.B.6"
         "7.EE.B"
         "7.EE.B.4"
