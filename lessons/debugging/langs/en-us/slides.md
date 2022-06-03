@@ -11,21 +11,20 @@
 People often think that computers can't make mistakes, because they are "just machines". But who builds those machines? Who programs them? _Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Syntax Errors
 
-In the 1940s, computers weren't made from tiny microprocessors. They were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
+In the 1940s, computers were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
 
 
 @image{images/hopper.jpg, "Grace Hopper"} 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Syntax Errors
 
-She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*
+She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*{style="font-size:13pt"}
 
-Knowing how to find and fix bugs is a valuable skill for any programmer, and the kind of logical thinking you gain by fixing errors can help you find mistakes _outside_ of a program as well!
 
 @image{images/bug.jpg, "First Computer Bug"} 
 
@@ -33,18 +32,20 @@ Knowing how to find and fix bugs is a valuable skill for any programmer, and the
 {layout="Launch"}
 # Syntax Errors
 
-When you Run a program, you expect the computer to do three things: (1) read the code; (2) run the code; and (3) give you the result you expected.
+Knowing how to find and fix bugs is a valuable skill for any programmer, and the kind of logical thinking you gain by fixing errors can help you find mistakes _outside_ of a program as well!
 
-In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases:
+When you Run a program, you expect the computer to do three things: 
+- Read the code
+- Run the code
+- Give you the result you expected
 
-. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. 
-. @vocab{Contract Errors} - Code that produces a value that breaks a function's contract, preventing the computer from _running_ the program any further. Like syntax errors, contract errors will also result in an error message.
-. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
+In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases: sytax errors, contract errors, and logic errors. 
 
 <!--
-    Syntax errors are are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
+- @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message.   Syntax errors are are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
+- @vocab{Contract Errors} - Code that produces a value that breaks a function's contract, preventing the computer from _running_ the program any further. Like syntax errors, contract errors will also result in an error message.    Contract errors -  For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! 
+- @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
-    Contract errors -  For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! 
 -->
 
 ---
@@ -56,7 +57,14 @@ Here are a few simple examples of syntax errors - can you find the problem?
 - `"hello`
 - @ifproglang{pyret}{``1+2``} @ifproglang{wescheme}{``(+ 1 2``}
 
-Syntax Errors prevent the computer from _reading_ code
+
+
+---
+{layout="Investigate"}
+# Syntax Errors 
+
+Syntax Errors prevent the computer from _reading_ code.
+
 
 ---
 {layout="Investigate-DN"}
@@ -88,7 +96,12 @@ With no syntax errors, the computer can read our code and try to run it. But a r
 
 @show{(code '(or "true" false))}
 
+---
+{layout="Launch"}
+# Contract Errors
+
 Contract Errors prevent the computer from _running_ code. A program might be running along just fine, but as soon as a function is given the wrong type of value, the program halts with an error!
+
 
 ---
 {layout="Investigate-DN"}
@@ -101,11 +114,11 @@ Contract Errors prevent the computer from _running_ code. A program might be run
 {layout="Synthesize"}
 # Contract Errors 
 
-. Which contract errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least hepful?
-. Which contract errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which contract errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least hepful?
+- Which contract errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 ---
 {layout="Launch"}
@@ -157,9 +170,10 @@ The Design Recipe helps us avoid logic errors, by demanding that we think throug
 
 ---
 {layout="Synthesize"}
+# Logic Errors
 
 Logic Errors happen in the programmer's mind, _not_ in the code. The best way to help prevent them is to think things through completely!
 
-. Did you find any logic errors that you've made in the past?
-. What can you do in your own programming, to minimize the chances of logic errors?
+- Did you find any logic errors that you've made in the past?
+- What can you do in your own programming, to minimize the chances of logic errors?
 
