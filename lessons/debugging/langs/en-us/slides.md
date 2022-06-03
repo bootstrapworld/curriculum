@@ -14,7 +14,7 @@ People often think that computers can't make mistakes, because they are "just ma
 {layout="LaunchC"}
 # Syntax Errors
 
-In the 1940s, computers were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
+In the 1940s, computers were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.{style="font-size:15pt"}
 
 
 @image{images/hopper.jpg, "Grace Hopper"} 
@@ -23,7 +23,7 @@ In the 1940s, computers were made from large wires, vacuum tubes, gears and dial
 {layout="LaunchC"}
 # Syntax Errors
 
-She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*{style="font-size:13pt"}
+She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. This moth is the origin of the term "bug" in programming. {style="font-size:13pt"}
 
 
 @image{images/bug.jpg, "First Computer Bug"} 
@@ -39,7 +39,7 @@ When you Run a program, you expect the computer to do three things:
 - Run the code
 - Give you the result you expected
 
-In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases: sytax errors, contract errors, and logic errors. 
+In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases: syntax errors, contract errors, and logic errors. 
 
 <!--
 - @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message.   Syntax errors are are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
@@ -60,15 +60,10 @@ Here are a few simple examples of syntax errors - can you find the problem?
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Syntax Errors 
 
 Syntax Errors prevent the computer from _reading_ code.
-
-
----
-{layout="Investigate-DN"}
-# Syntax Errors
 
 - In pairs or small groups, complete @printable-exercise{syntax-errors.adoc}. 
 - For each piece of code, be sure to discuss as a team before deciding on the mistake.
@@ -76,13 +71,13 @@ Syntax Errors prevent the computer from _reading_ code.
 
 ---
 {layout="Synthesize"}
-# Sytnax Errors
+# Syntax Errors
 
-. Which syntax errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least hepful?
-. Which syntax errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which syntax errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least helpful?
+- Which syntax errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 ---
 {layout="Launch"}
@@ -97,15 +92,10 @@ With no syntax errors, the computer can read our code and try to run it. But a r
 @show{(code '(or "true" false))}
 
 ---
-{layout="Launch"}
+{layout="Investigate-DN"}
 # Contract Errors
 
 Contract Errors prevent the computer from _running_ code. A program might be running along just fine, but as soon as a function is given the wrong type of value, the program halts with an error!
-
-
----
-{layout="Investigate-DN"}
-# Contract Errors
 
 - In pairs or small groups, complete @printable-exercise{contract-errors.adoc}. 
 - For each piece of code, be sure to discuss as a team before deciding on the mistake.
@@ -115,7 +105,7 @@ Contract Errors prevent the computer from _running_ code. A program might be run
 # Contract Errors 
 
 - Which contract errors were the easiest to find? The hardest?
-- Which error messages were the most helpful? Least hepful?
+- Which error messages were the most helpful? Least helpful?
 - Which contract errors do _you_ make the most often?
 - What strategies could we use to avoid making them in the first place?
 - What strategies could we use to fix them faster?
