@@ -24,7 +24,7 @@ __Sally runs a lemonade stand, which charges $1.75/glass. It costs her $0.30/gla
 -->
 
 ---
-{layout="Investigate-DN"}
+{layout="Investigate"}
 # Problem Decomposition 
 
 Complete @printable-exercise{pages/revenue-and-cost.adoc}. 
@@ -72,7 +72,8 @@ Turn to @printable-exercise{pages/profit-discussion.adoc} and take a few minutes
 # Problem Decomposition 
 
 @ifproglang{wescheme}{
-```(define (profit g) (- (* 1.75 g) (* 0.30 g)))
+```
+(define (profit g) (- (* 1.75 g) (* 0.30 g)))
 (define (profit g) (* (- 1.75 0.30) g))
 (define (profit g) (* 1.45 g))
 (define (profit g) (- (revenue g) (cost g)))
@@ -100,7 +101,8 @@ Suppose the cost of lemons goes up. Which solution(s) would need to be changed?
 What if Sally charges $2/glass? Which solution(s) would need to be changed?
 
 @ifproglang{wescheme}{
-```(define (profit g) (- (* 1.75 g) (* 0.30 g)))
+```
+(define (profit g) (- (* 1.75 g) (* 0.30 g)))
 (define (profit g) (* (- 1.75 0.30) g))
 (define (profit g) (* 1.45 g))
 (define (profit g) (- (revenue g) (cost g)))
@@ -128,17 +130,6 @@ Decomposing a problem allows us to solve it in smaller pieces, which are also __
 These pieces are __reusable__, resulting in writing __less code__, and __less duplicate code__.
 
 Duplicate code means more places to make mistakes, especially when that code needs to be changed.
-
-
----
-{layout="LaunchR"}
-# Top-Down vs. Bottom-Up 
-
-Which one of these circles of evaluation shows a Top-Down approach to problem decomposition?{style="font-size:24"}
-
-Which one is Bottom-Up?{style="font-size:24"}
-
-@image{images/COEs-top-bottom.png, "two circles of evaluation showing top-down and bottom-up solving strategies"}{width="250"}
 
 ---
 {layout="LaunchR"}
