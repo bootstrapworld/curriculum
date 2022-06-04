@@ -61,7 +61,7 @@ The circles of evaluation for @math{f(g(h(4)))} would look like this:
 @image{images/fghx.png, a}
  
 ---
-{layout="Investigate-DN"}
+{layout="Investigate"}
 # Diagramming Function Composition
 
 Complete @printable-exercise{pages/diagramming-function-composition.adoc} with your partner.
@@ -80,9 +80,8 @@ Why not? _order matters!_
 {layout="Launch-DN"}
 # Composing Functions in Code 
 
-- Log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open a new program.
-- Type `include image` in the definitions area.
-- Save the file as "Function Composition".
+- Log into @starter-file{editor}, and open a new program.
+- Save the file as "Function Composition", and click "Run".
 - Complete the following @printable-exercise{pages/function-composition-green-star.adoc}. When you're done, change the color of all the stars in the file to gold. 
 - Then try @printable-exercise{pages/function-composition-your-name.adoc}.
 - If you have time, work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
@@ -110,7 +109,7 @@ Encourage students to practice writing comments in the code to describe what is 
 - Does using one of these functions change the original image?
 - What does the number in @show{(code 'scale)} represent?
 - What does the number in @show{(code 'rotate)} represent?
-- The Domain and Range for @show{(code 'flip-horizontal)} is Image -> Image.  Why can I use the output of the @show{(code 'text)} function as an _input_ for @show{(code 'flip-horizontal)}?
+- The Domain and Range for @show{(code 'flip-horizontal)} is `Image -> Image`.  Why can we use the output of the @show{(code 'text)} function as an _input_ for @show{(code 'flip-horizontal)}?
 
 <!-- 
 Fun with Images!
@@ -141,14 +140,9 @@ What’s another line of code I could write that would produce the exact same im
 
 Complete @printable-exercise{pages/more-than-one-way.adoc}.
 
-There is a special function in Pyret that lets us test whether or not two images are equal.
+There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that lets us test whether or not two images are equal.
 
-
-@ifproglang{pyret}{
-`images-equal :: Image, Image -> Boolean`}
-
-@ifproglang{wescheme}{
-	`image=? :: Image, Image -> Boolean`}
+@show{(code 'image=?)}` :: Image, Image -> Boolean`
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 
