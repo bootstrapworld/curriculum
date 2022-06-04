@@ -55,7 +55,7 @@ In math, if we define a value, like @math{x = 4},
 we can evaluate expressions using that value, like @math{x + 2}.
 
 @ifproglang{wescheme}{
-WeScheme uses the word "define" to make this even clearer! We can type `(define x (4))` to define `x` to be the value 4.
+WeScheme uses the word "define" to make this even clearer! We can type `(define x 4)` to define `x` to be the value 4.
 }
 
 @ifproglang{pyret}{
@@ -89,7 +89,7 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 -->
 
 ---
-{layout="Investigate-DN"}
+{layout="Investigate"}
 # Using Defined Values
 
 Define `sun` to be the image: 
