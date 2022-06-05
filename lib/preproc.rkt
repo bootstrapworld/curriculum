@@ -1613,7 +1613,11 @@
                                   (create-begin-tag "span" ".fitbruby" #:attribs
                                                     (format "style=\"width: ~a\"" width))
                                   (string-append
-                                    text
+                                    (call-with-input-string text
+                                      (lambda (i)
+                                        (call-with-output-string
+                                          (lambda (o)
+                                            (expand-directives i o)))))
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))
