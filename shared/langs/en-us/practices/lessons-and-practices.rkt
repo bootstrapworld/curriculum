@@ -287,7 +287,7 @@
         "P7"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
         "MP.3"      ; STEMworks
         "P1" 
         "SJ.12"
