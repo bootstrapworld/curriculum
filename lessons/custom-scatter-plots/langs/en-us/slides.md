@@ -180,12 +180,12 @@ Math teachers alike may want their students to confront piecewise functions more
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
-* Complete the Design Recipe on @opt-printable-exercise{sex-dot-dr.adoc} to write a new helper function that will make differently-colored dots based on the animals' sex.
+* OPTIONAL: Complete @opt-printable-exercise{sex-dot-dr.adoc}, to write a new helper function that will make differently-colored dots based on the animals' sex.
 
 <!--
-Make sure that students write the Contract and Purpose Statement __first__ , and check in with their partner __and__ the teacher before proceeding.
+Make sure that students write the Contract __first__ , and check in with their partner __and__ the teacher before proceeding.
 
-Once they've got the Contract and Purpose Statement, have them come up with `examples:` for _each sex_. Once again, have them check with a partner _and_ the teacher before finishing the page.
+Once they've got the Contract, have them come up with `examples:` for _each sex_. Once again, have them check with a partner _and_ the teacher before finishing the page.
 -->
 
 ---
