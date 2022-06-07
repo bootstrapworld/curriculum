@@ -747,13 +747,16 @@ table.contract-table tr:nth-child(4n+4) { background-color: #f2f2f2; }
 td.tableblock .listingblock { margin-bottom: 0 !important; }
 
 /************************************************************************************
-* FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
+* FORMATTING OF CIRCLES, AND TEXT CODE
 */
 
 /* When printing solutions, add a shadow for expressions */
 .studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
   box-shadow: 2px 1px 5px black;
 }
+
+/* override asciidoc default when bold-facing text inside code-blocks */
+.pyret strong, .wescheme strong { margin: 0; padding: 0; }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
@@ -817,6 +820,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   padding:            0 2px;
   text-align:         left;
 }
+.editbox:empty { display: none; } /* If empty after JS post-processing, hide */
 p .editbox { line-height: 1.2rem; vertical-align: baseline; font-size: 0.9rem; }
 
 /* WESCHEME COLORS */
