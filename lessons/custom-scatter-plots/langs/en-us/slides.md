@@ -136,10 +136,15 @@ The `legs-tag` function _made blue rings whose size was determined by the number
 * What data type is `species-tag`?
 ** _A function that consumes a Row and produces an Image_
 -->
+---
+{layout="Synthesize"}
+# Image Scatter Plots
+
+* How might `image-scatter-plot` be useful in your _own_ analysis?
 
 ---
 {layout="Launch"}
-# Using Conditionals
+# OPTIONAL: Using Conditionals
 So far, we've seen that...
 
 * the `scatter-plot` function makes uniform blue dots

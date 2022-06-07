@@ -182,6 +182,7 @@ Have students compose their solutions to the three word problems together to com
 
 - Why is it helpful to use each of these steps in the Design Recipe?
 - What step do you find the most challenging right now? The easiest?
+- What are some functions you might want to define for your _own_ analysis?
 
 <!--
 

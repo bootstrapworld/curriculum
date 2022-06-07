@@ -64,7 +64,7 @@ What code can we write, to let us define a single row?
 
 Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. For example, we can get the first data row in a table by using the `.row-n` method:
 
-  animals-table.row-n(0)
+`animals-table.row-n(0)`
 
 [.lesson-point]
 Don't forget: data rows start at index _zero_!
@@ -83,15 +83,22 @@ The code below will define the first row from the animals table:
 
 `sasha = animals-table.row-n(0)`
 
+It's often better to name our Row definitions according to the _property we care about_. In this case, the fact that this row is a cat is _much_ more interesting than the fact that her name is Sasha:
+
+`cat-row = animals-table.row-n(0)`
+
 [.lesson-instruction]
-- In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, etc. What are the subsets in _your_ dataset?
-- Open the Starter File for your dataset
-- In the first section of your file, use the `.row-n` method to define at least three rows from your table.
-- If you have multiple subsets, make sure you have a row from each one defined!
+- In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young ones, etc.
+- Complete @printable-exercise{pages/defining-rows.adoc}.
+- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
+
+[.lesson-point]
+The rows you added will be used later!
+
 
 === Synthesize
-- Which grouped samples did you choose?
-- Which rows did you define?
+- We named rows by a lot of different properties (e.g. - their species, sex, etc). What are some other properties of rows in this dataset that we could use?
+- What are some properties of **your dataset** that you might want to define rows for?
 
 == Column Lookups @duration{25 minutes}
 
@@ -107,9 +114,9 @@ We can also access _columns_ of a Row, by using a *Row Accessor*. Row accessors 
 
 And of course, we can use our defined name, substituting it in place of all the redundant code:
 
-  sasha["name"]
-  sasha["age"]
-  sasha["fixed"]
+  cat-row["name"]
+  cat-row["age"]
+  cat-row["fixed"]
 
 == Investigate
 
@@ -117,15 +124,5 @@ And of course, we can use our defined name, substituting it in place of all the 
 - Complete the exercises on @printable-exercise{lookup-questions.adoc}.
 - Complete @printable-exercise{pages/more-practice-w-lookups.adoc}
 
-Flip back to page 2 of your workbook and look at The Animals Dataset.
-
-[.lesson-instruction]
-- Complete @printable-exercise{pages/defining-rows.adoc}.
-- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
-
-[.lesson-point]
-The rows you added will be used later!
-
 === Synthesize
 - Why is it important to be able to define individual rows?
-- We named rows by a lot of different properties (e.g. - their species, sex, etc). What are some other properties of rows in this dataset that we could use?
