@@ -94,7 +94,7 @@ _Table, String, String and... what is that last part?... **a Function that consu
 {layout="Investigate"}
 # Image Scatter Plots
 
-- Comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 15. This will "turn off" the expression, by telling Pyret to ignore that line.
+- Comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 53. This will "turn off" the expression, by telling Pyret to ignore that line.
 - Complete @printable-exercise{pages/custom-scatter-plot-explore.adoc}.
 
 <!--
