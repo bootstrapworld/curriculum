@@ -216,6 +216,12 @@
         "MP.4"      ; STEMworks
         )
 
+    ("project-video-game"
+        "P2"
+        "P5"
+        "P6"
+        )
+
     ;data science
     
     
@@ -366,6 +372,27 @@
         "SEP.3"
         "P1" 
         )
+
+    ("project-exploration-paper"
+        "P1"
+        "P2"
+        "P5"
+        "P6"
+        "SJ.7"
+        "SJ.13"
+        "SJ.14"
+        )
+
+    ("project-research-paper"
+        "P1"
+        "P2"
+        "P5"
+        "P6"
+        "SJ.7"
+        "SJ.12"
+        "SJ.13"
+        "SJ.14"
+        )    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REACTIVE
 
