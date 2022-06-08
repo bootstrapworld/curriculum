@@ -7,6 +7,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Launch"}
+# There's Got to Be a Better Way!  
 
 I LOVE Green Triangles!{style="font-size:22pt"}
 
@@ -19,6 +20,7 @@ Write the code to make a solid green triangle of size 50!{style="font-size:22pt"
 ---
 {layout="Launch"}
 # There's Got to Be a Better Way!  
+
 Make as many unique, solid, green triangles as you can in 2 minutes.{style="font-size:22pt"}
 
 
@@ -164,7 +166,8 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 {layout="Launch-DN"}
 # Identifying and Describing the Pattern
 
-- Open the @starter-file{gt} and click run.
+- Open the @starter-file{gt}, and save a copy of your own
+- Click Run
 - Evaluate @show{(code '(gt 10))} in the Interactions Area. What do you get back?
 - In one minute, how many different green triangles you can make?!
 - How did making green triangles with `gt` compare to making them with your previous strategy?
