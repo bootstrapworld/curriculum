@@ -192,7 +192,7 @@
    )
   ("rocket-height" "Rocket Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf")
-   ("wescheme" "hhttps://www.wescheme.org/openEditor?publicId=N47mpskeWS")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Rectangular Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1FMhoHcIv8Fb7MT460dlQDwV4ISWBIXp0&v=6788e10")
