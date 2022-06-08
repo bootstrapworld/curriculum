@@ -31,16 +31,16 @@
   )
   ("gt" "gt Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1wvO-su91pFXQJcsIAa5IUOVcUea06YuY")
-   ("wescheme" "https://www.wescheme.org/view?publicId=KCEKxaxJ4l")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=KCEKxaxJ4l")
   )
 
   ("bug-hunting"  "Bug Hunting Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1JEeZjzctaJ9fD77rWXqrorqCwlZrDx9H")
-   ("wescheme" "https://www.wescheme.org/view?publicId=nwVEttw9ZY")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=nwVEttw9ZY")
   )
   ("mood-generator" "Mood Generator Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ")
-   ("wescheme" "https://www.wescheme.org/view?publicId=BheDrtcEvA")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=BheDrtcEvA")
   )
 
   ("mood-generator-ask" "Alternate Version of the Mood Generator Starter File"
@@ -49,7 +49,7 @@
 
   ("red-shape" "Red Shape Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QW7KtZHbAPdP1vjyI9-jXx7pSXrwzWJN")
-   ("wescheme" "https://www.wescheme.org/view?publicId=n4DkTyYbQh")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=n4DkTyYbQh")
   )
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -149,15 +149,15 @@
    )
   ("flags" "Flags Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr")
-   ("wescheme" "https://www.wescheme.org/view?publicId=jH25JejavW")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=jH25JejavW")
    )
   ("flags-mx" "Flag of Mexico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6")
-   ("wescheme" "https://www.wescheme.org/view?publicId=SnLx13yt5W")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=SnLx13yt5W")
    )
   ("flags-ak" "Alaskan Flag Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX")
-   ("wescheme" "https://www.wescheme.org/view?publicId=ve2gTEY06p")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p")
    )
   ("flags-china" "Chinese Flag Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1pi0API2gERKokehisGvg7717xaHHPEui")
@@ -169,22 +169,22 @@
    )
   ("flags-pr" "Flag of Puerto Rico Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1QX4pU7j2hK4rR0zfLXGAgEarCSsLVwqD")
-   ("wescheme" "https://www.wescheme.org/view?publicId=6TJ0N2CJqU")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=6TJ0N2CJqU")
    )
   ("flags-trinidad" "Flag of Trinidad and Tobago Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1-TtjC_NYZTtT5U0T3HSdvcfBHb90bh2n")
-   ("wescheme" "https://www.wescheme.org/view?publicId=SQRHKcqQvW")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=SQRHKcqQvW")
    )
   ("flags-lebanon" "Flag of Lebanon Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1H1yf0uFJgiT6NBHqW8kh_JjLKHNQRXpH")
-   ("wescheme" "https://www.wescheme.org/view?publicId=x0nJrP1UYp")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=x0nJrP1UYp")
    )
   ("flags-turkey" "Flag of Turkey Starter File"
    ("pyret" "https://code.pyret.org/editor#share=17HZOT0Y6rHAmwv8BZNN9YIsoqI7yWmHj")
-   ("wescheme" "https://www.wescheme.org/view?publicId=0Sdq8F2b3q")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=0Sdq8F2b3q")
    )
   ("flags-panama" "Flag of Panama Starter File"
-   ("wescheme" "https://www.wescheme.org/view?publicId=V4AfQydAHu")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=V4AfQydAHu")
    )
   ("ninja-cat" "Ninja Cat Game"
    ("pyret" "https://code.pyret.org/editor#share=1VB-XBcSzgYKnObyIH8BdCmiworNRLlvM")
@@ -192,7 +192,7 @@
    )
   ("rocket-height" "Rocket Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf")
-   ("wescheme" "hhttps://www.wescheme.org/openEditor?publicId=N47mpskeWS")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Rectangular Prism Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1FMhoHcIv8Fb7MT460dlQDwV4ISWBIXp0&v=6788e10")
@@ -200,15 +200,15 @@
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl")
-   ("wescheme" "https://www.wescheme.org/view?publicId=QweXHnMPxg")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg")
    )
   ("sample-game-w-distance" "Sample Game with Distance Lines Made Visible"
    ("pyret" "https://code.pyret.org/editor#share=1R8uAFAeYRy5L6FydesOBLHQHFtQEGxGV")
-   ("wescheme" "https://www.wescheme.org/view?publicId=QgT6PtTZ2v")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=QgT6PtTZ2v")
    )
   ("sample-game-2d" "Sample Game with 2D Motion"
    ("pyret" "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW")
-   ("wescheme" "https://www.wescheme.org/view?publicId=QweXHnMPxg")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg")
   )
   ("inequalities-simple" "Simple Inequalities Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1Nfd30NVNwPzDu0C02dsCbmKecbMVfcQV")
