@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Functions for Character Animation
+# Functions for Character Animation{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -49,8 +49,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 {layout="Launch"}
 # Animation
 
-Open your saved copy of the @starter-file{game}.
-
+- Open your saved copy of the @starter-file{game} in a new tab
 - What did you notice about the movement of TARGET and DANGER? What was changing about them?
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 
@@ -66,10 +65,9 @@ What jobs could we hand over to the computer to make it possible for us to play 
 {layout="Investigate-DN"}
 # Animation
 
-Open your saved copy of the @starter-file{game} and examine the `update-danger` function.
-Identify the contract, and interpret what the function is currently doing.
-
-Let's complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc} together.
+- In your saved copy of the @starter-file{game}, examine the `update-danger` function
+- Identify the contract, and interpret what the function is currently doing
+- Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
 
 ---
 {layout="Investigate-DN"}
