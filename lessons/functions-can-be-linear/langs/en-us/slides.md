@@ -17,35 +17,7 @@ Students can record their responses on  @printable-exercise{notice-wonder-linear
 -->
 
 ---
-{layout="Launch"}
-# Simple Sequences and Straight Lines
-
-Can you predict the next two rows in the table? The next points on the graph? How did you arrive at your prediction?
-
----
-{layout="Launch"}
-# Simple Sequences and Straight Lines
-
-The y-column in the table and the y-coordinates on the graph follow a _rule_, which dictates how @math{y} relates to @math{x}. When @math{x} goes up or down by 1, @math{y} goes up or down by 2. We expect that rule to continue for all values of @math{x}, continuing the line and extending the table in both directions, forever.
-
-*Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
-
----
-{layout="Launch"}
-# Simple Sequences and Straight Lines
-
-Linear relationships are _everywhere_:
-
-* "A car is traveling at 50 miles per hour"
-* "Milk costs $2.50 per gallon"
-* "There are 18 wheels on every tractor-trailer"
-* "A tree grows 2 inches each year"
-* "There are 30 students per teacher"
-
-What other linear relationships can you think of?
-
----
-{layout="InvestigateR"}
+{layout="LaunchR"}
 # Simple Sequences and Straight Lines
 
 What do you Notice? What do you Wonder? 
@@ -57,8 +29,16 @@ Can you guess what the y-value for each table would be when x is 0?
 @image{images/sideways-tables-pair.png, "a"}
 
 <!--
-	Students can record their responses on @printable-exercise{notice-wonder-tables.adoc}.
+	Students can record their responses on @printable-exercise{notice-wonder-linearity.adoc}.
 -->
+
+---
+{layout="Launch"}
+# Simple Sequences and Straight Lines
+
+We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). When we notice that x-values change at a _constant rate_ and the y-values also change at a _constant rate_, we know that if we were to plot those values on a graph, all of the points would fall on a straight line.
+
+*Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
 
 ---
@@ -74,21 +54,19 @@ If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Axes on a graph need an order. Rows in a table don’t!
+Axes on a graph need an order. Rows in a table don't!
 
-The rows in a table are discrete. They preserve their meaning if the rows are shuffled into a different order.
+The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
+they preserve their meaning if the rows are shuffled into a different order.
 
-In a graph, the points on the x-axis cannot be shuffled, because the x-axis must always be ordered. We can stretch the scale of the axes to making the lines look different, but the points will always be in the same order.
+On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+
 
 ---
 {layout="Synthesize"}
 # Simple Sequences and Straight Lines
 
-Linear relationships show up all the time in real life, so it’s helpful to know how to think about them. 
-
-Linear relationships can be represented as tables and graphs. 
-- Tables only show us some points on a line, whereas a line itself is made up of an infinite number of points. 
-- While a table represents a sample of some larger trend, the graph is a way of seeing the trend itself.
+We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
 {layout="LaunchC"}
@@ -144,7 +122,7 @@ Sometimes there is no function that will give us a particular table or graph! Ta
 
 
 ---
-{layout="Launch"}
+{layout="Investigate"}
 # Linear, Non-Linear, or Bust!
 
 

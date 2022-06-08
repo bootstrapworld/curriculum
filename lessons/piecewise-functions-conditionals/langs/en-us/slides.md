@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Piecewise Functions and Conditionals
+# Piecewise Functions and Conditionals{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -100,8 +100,8 @@ __What if we want to write functions that apply different rules, based on certai
 {layout="Investigate-DN"}
 # Conditionals in Programming 
 
-- Open the @starter-file{red-shape}.
-- Complete @printable-exercise{pages/red-shape-explore.adoc}.
+- Open the @starter-file{red-shape}
+- Complete @printable-exercise{pages/red-shape-explore.adoc}
 
 <!--
 You may also have students work with the @opt-starter-file{mood-generator} using @printable-exercise{pages/mood-generator-explore.adoc}_

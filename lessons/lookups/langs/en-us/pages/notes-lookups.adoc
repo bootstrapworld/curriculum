@@ -12,20 +12,22 @@ When *looking up a data Row* from a Table, programmers use the `row-n` method. T
 
 For example:
 ```
-sasha   = animals-table.row-n(0)  # define sasha to be the first row
-mittens = animals-table.row-n(2)  # define mittens to be the third row
+sasha   = animals-table.row-n(0)  # define Sasha to be the first row
+mittens = animals-table.row-n(2)  # define Mittens to be the third row
+```
+
+When we define these rows, it's more useful to name them based on their _properties_, rather than their identifiers:
+```
+cat-row = animals-table.row-n(0)  # Sasha is a cat
+dog-row = animals-table.row-n(10) # Toggle is a dog
 ```
 
 When *looking up a column* from a Row, programmers use square brackets and the name of the column they want.
 
 For example:
 ```
-animals-table.row-n(0)["age"]  # look up the age in the 1st row
-mittens["species"]             # look up the species in the third row
-```
-
-Throughout the rest of the workbook, we will sometimes refer to animalA and animalB as rows from the table.
-```
-animalA = animals-table.row-n(4)
-animalB = animals-table.row-n(13)
+# these two lines do the same thing! We can use the defined name to simplify our code
+animals-table.row-n(0)["age"]  # look up Sasha's age (in row 0)
+cat-row["species"]             # look up Sasha's age (using the defined name)
+dog-row["age"]				   # look up Toggle's age (using the defined name)
 ```

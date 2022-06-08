@@ -1,16 +1,6 @@
 = Defining Table Functions
 
-You've already seen that functions have multiple representations:
-
-* Contract and Purpose Statement
-* Examples
-* Definition
-
-Each of these representations shows us a particular part of how the function should behave. The Design Recipe shows us how to _connect those representations_, using each one to help us write and check the others.
-
-== Using the Design Recipe with Rows
-
-The steps of the Design Recipe don't change, but we can make some adjustments when working with Rows to filter tables and build columns! Let's try a concrete example:
+The steps of the Design Recipe don't change just because we're working with Rows, but we can make some adjustments when using Row-consuming functions to filter tables and build columns! Let's try a concrete example:
 
 _Write a function `is-lizard`, which tells us whether an animal is a lizard._
 
@@ -58,7 +48,7 @@ Once we see the pattern, we can _circle and label what changes_. In this case, o
 == Definition
 The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input. It's no different when working with Rows.
 
-Once again, our previous step is a huge help: we can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
+Once again, our previous step is a huge help. We can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
 
 ```
 fun is-lizard(r): r["species"] == "lizard" end
