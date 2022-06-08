@@ -21,7 +21,7 @@ Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log i
 
 Hypothesize: What do these Circles of Evaluation mean? What do they evaluate to?{style="font-size:24pt"}
 
-@image{images/set-of-coes2.png, a}{width="550"}
+@image{images/set-of-coes2.png, a}{width="750"}
 
 ---
 {layout="Launch"}
