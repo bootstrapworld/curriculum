@@ -1,11 +1,11 @@
 ---
-
 {layout="DS Title Slide"}
-
 # Custom Scatter Plots
-<!--
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+
 ---
 {layout="LaunchR"}
 # Image Scatter Plots
@@ -94,7 +94,7 @@ _Table, String, String and... what is that last part?... **a Function that consu
 {layout="Investigate"}
 # Image Scatter Plots
 
-- Comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 15. This will "turn off" the expression, by telling Pyret to ignore that line.
+- Comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 53. This will "turn off" the expression, by telling Pyret to ignore that line.
 - Complete @printable-exercise{pages/custom-scatter-plot-explore.adoc}.
 
 <!--
@@ -136,10 +136,15 @@ The `legs-tag` function _made blue rings whose size was determined by the number
 * What data type is `species-tag`?
 ** _A function that consumes a Row and produces an Image_
 -->
+---
+{layout="Synthesize"}
+# Image Scatter Plots
+
+* How might `image-scatter-plot` be useful in your _own_ analysis?
 
 ---
 {layout="Launch"}
-# Using Conditionals
+# OPTIONAL: Using Conditionals
 So far, we've seen that...
 
 * the `scatter-plot` function makes uniform blue dots
@@ -175,12 +180,12 @@ Math teachers alike may want their students to confront piecewise functions more
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
-* Complete the Design Recipe on @opt-printable-exercise{sex-dot-dr.adoc} to write a new helper function that will make differently-colored dots based on the animals' sex.
+* OPTIONAL: Complete @opt-printable-exercise{sex-dot-dr.adoc}, to write a new helper function that will make differently-colored dots based on the animals' sex.
 
 <!--
-Make sure that students write the Contract and Purpose Statement __first__ , and check in with their partner __and__ the teacher before proceeding.
+Make sure that students write the Contract __first__ , and check in with their partner __and__ the teacher before proceeding.
 
-Once they've got the Contract and Purpose Statement, have them come up with `examples:` for _each sex_. Once again, have them check with a partner _and_ the teacher before finishing the page.
+Once they've got the Contract, have them come up with `examples:` for _each sex_. Once again, have them check with a partner _and_ the teacher before finishing the page.
 -->
 
 ---

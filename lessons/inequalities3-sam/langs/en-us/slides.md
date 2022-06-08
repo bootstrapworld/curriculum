@@ -1,14 +1,18 @@
 ---
 {layout="Math Title Slide"}
-# Sam the Butterfly - Applying Inequalities
+# Sam the Butterfly - Applying Inequalities{style="font-size:36pt"}
+
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 
 ---
 {layout="Launch-DN"}
 # Introducing Sam 
 
-Open the @starter-file{inequalities-sam} and click "Save a copy."
-
-Turn to @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click _Run_ and use the arrow keys to investigate the program with your partner.
+- Open the @starter-file{inequalities-sam} in a new tab
+- Save a copy of your own
+- Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 
 <!--
 * What is something you noticed about this program?

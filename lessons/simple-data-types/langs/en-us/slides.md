@@ -1,6 +1,10 @@
 ---
-{layout="Math Title Slide"}
+{layout="Core Title Slide"}
 # Simple Data Types
+
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 
 ---
 {layout="LaunchR"}
@@ -51,7 +55,7 @@ For now, we will only be writing programs in the *Interactions Area*.{style="fon
 {layout="Investigate"}
 # Numbers & Strings
 
-Math and programming are languages. They have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:16pt"} 
+Math and programming are languages. **Instead of nouns, they have _values_**, like the numbers 1, 2 and 3. **Instead of verbs, they have _functions_**, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:16pt"} 
 
 Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.{style="font-size:16pt"} 
 
@@ -93,6 +97,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 - Our Editor is pretty smart. When we click on a rational number, it switches between showing a fraction and decimal.{style="font-size:17pt"} 
 - Anything in quotes is a String, even something like `"42"`.{style="font-size:17pt"} 
 - Strings _must_ have quotation marks on both sides.{style="font-size:17pt"} 
+@ifproglang{pyret}{
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
 - In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
 - When there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:17pt"} 
@@ -108,7 +113,7 @@ Error messages are a way for Pyret to explain what went wrong, and are a really 
 - `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
 - `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
 
-
+}
 ---
 {layout="Launch"}
 # Booleans 

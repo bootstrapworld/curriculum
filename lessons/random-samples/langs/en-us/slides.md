@@ -1,8 +1,10 @@
 ---
 {layout="DS Title Slide"}
+# Probability, Inference, & Sample Size
 
-# Random Sampling
-
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="LaunchR"}
 # How to Spot a Scam

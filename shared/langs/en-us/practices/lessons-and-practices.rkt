@@ -48,7 +48,7 @@
         "MP.8"
         )
 
-    ("functions-collaboration" 
+    ("functions-problem-solving-together" 
         "MP.1"
         "MP.3"
         "MP.4"      ; STEMworks
@@ -287,7 +287,7 @@
         "P7"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
         "MP.3"      ; STEMworks
         "P1" 
         "SJ.12"

@@ -1,7 +1,10 @@
 ---
-{layout="Math Title Slide"}
-# Solving Word Problems with the Design Recipe
+{layout="Core Title Slide"}
+# Solving Word Problems with the Design Recipe{font-size:36pt}
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # The Design Recipe 
@@ -14,7 +17,8 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 {layout="Launch"}
 # The Design Recipe 
 
-* On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four purposes statements. Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
+* On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four purposes statements. 
+* Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
 * What pairs did you come up with?
 * What do you Notice about those purpose statements? Do they have anything in common?
 
@@ -60,9 +64,9 @@ Turn to @printable-exercise{fixing-purpose.adoc} and identify:
 {layout="Launch-DN"}
 # Rocket Height! 
 
-Open the @starter-file{rocket-height} and look at the code before you click run.
-
-What do you Notice? What do you Wonder?
+* Open the @starter-file{rocket-height} in a new tab, and Save/Remix a copy of your own.
+* Read the code before you click Run.
+* What do you Notice? What do you Wonder?
 
 ---
 {layout="Launch-DN"}

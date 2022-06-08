@@ -1,14 +1,14 @@
 ---
-
 {layout="Core Title Slide"}
-
 # Computing Needs All Voices
 
 ---
 {layout="Launch"}
 # Who writes the Code?
 
-We're going to watch this @online-exercise{https://www.youtube.com/watch?v=nKIu9yen5nc, 5-minute clip} and take a few minutes to write down our notices and wonders @printable-exercise{NoticeAndWonder.adoc, here}.
+We're going to watch this five-minute clip and take a few minutes to write down our Notices and Wonders @printable-exercise{NoticeAndWonder.adoc, here}.
+
+@[youtube](nKIu9yen5nc)
 
 <!--
 Pedagogy Note: Notice and Wonder!
@@ -30,6 +30,8 @@ What did you Wonder?
 
 We're going to take a gallery walk of some pioneers in computing and math.
 
+@image{images/pioneers-header.png, "Images of a diverse group of people who are pioneers in computing and mathematics"}{width="950"}
+
 <!--To do a gallery walk, you will need to print and hang posters of @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}. If you aren't doing a gallery walk, decide on another format for engaging students with these pioneers.
 -->
 
@@ -37,7 +39,7 @@ We're going to take a gallery walk of some pioneers in computing and math.
 {layout="Synthesize"}
 # Who writes the Code?
 
-Take a few minutes to write about the @printable-exercise{windows-mirrors.adoc} you encoutnered in the video and posters.
+Take a few minutes to write about the @printable-exercise{windows-mirrors.adoc} you encountered in the video and posters.
 
 
 
@@ -55,7 +57,7 @@ Complete the Ketchup Use Google Form.
 {layout="Investigate"}
 # Advantages of Diverse Teams in Tech
 
-Read this LA Tiems article, @online-exercise{https://www.latimes.com/business/technology/la-diversity-right-thing-snap-story.html, Perspective: A solution to tech’s lingering diversity problem? Try thinking about ketchup}.
+Read this LA Times article, @online-exercise{https://www.latimes.com/business/technology/la-diversity-right-thing-snap-story.html, Perspective: A solution to tech’s lingering diversity problem? Try thinking about ketchup}.
 
 Then complete @printable-exercise{advantages-of-diverse-teams.adoc}.
 
@@ -63,8 +65,12 @@ Then complete @printable-exercise{advantages-of-diverse-teams.adoc}.
 {layout="Synthesize"}
 # Advantages of Diverse Teams in Tech
 
-What are your takeaways from the article?
-
+* The author argues that tech companies with diverse teams have an advantage. Why?{style="font-size:16pt"}
+* What suggestions did the article offer for tech companies looking to diversify their teams?{style="font-size:16pt"}
+* What is one thing of interest to you in the author’s bio?{style="font-size:16pt"}
+* Think of a time when you had an idea that felt out of the box. Did you share your idea? Why or why not?{style="font-size:16pt"}
+* Can you think of a time when someone else had a strategy or idea that you would never have thought of, but was interesting to you and/or pushed your thinking to a new level?{style="font-size:16pt"}
+* Based on your experience of exceptions to mainstream assumptions, propose another pair of questions that could be used in place of "Where do you keep your ketchup?" and "What would you reach for instead?".{style="font-size:16pt"}
 
 ---
 {layout="Synthesize"}

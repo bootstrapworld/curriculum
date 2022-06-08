@@ -626,8 +626,8 @@
     ;g = relative pathname of the linked file from pathway-root-dir
     ;f = its fully qualified pathname
     ; (printf "f= ~s in ~s: ~s\n" f (current-directory) (file-exists? f))
-    (cond [(path-has-extension? f ".adoc")
-           (let ([f.adoc f]
+    (cond [(or (path-has-extension? f ".adoc") (path-has-extension? f ".html"))
+           (let ([f.adoc (path-replace-extension f ".adoc")]
                  [f.html (path-replace-extension f ".html")]
                  [f.pdf (path-replace-extension f ".pdf")])
              (cond [(or (file-exists? f.html) (file-exists? f.adoc))
@@ -1613,7 +1613,11 @@
                                   (create-begin-tag "span" ".fitbruby" #:attribs
                                                     (format "style=\"width: ~a\"" width))
                                   (string-append
-                                    text
+                                    (call-with-input-string text
+                                      (lambda (i)
+                                        (call-with-output-string
+                                          (lambda (o)
+                                            (expand-directives i o)))))
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))

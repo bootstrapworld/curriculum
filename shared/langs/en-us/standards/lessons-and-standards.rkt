@@ -82,7 +82,7 @@
         "OK.5.AP.PD.04"
         )
 
-    ("functions-collaboration" 
+    ("functions-problem-solving-together" 
         "6.EE.B.6"
         "7.EE.B"
         "7.EE.B.4"
@@ -566,7 +566,7 @@
         "OK.5.DA.IM.01"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
         "3A-AP-16" 
         "2-IC-23" ; STEMworks
         "3A-IC-24"; STEMworks

@@ -2,12 +2,14 @@
 {layout="Math Title Slide"}
 # Player Animation
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch-DN"}
 # Defining Piecewise Functions 
 
-You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code in @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{ @link{https://code.pyret.org, code.pyret.org (CPO) } } or your workbook, and refresh your memory on how they work.
+You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your saved @starter-file{game} file, and refresh your memory on how they work.
 
 ---
 {layout="Launch"}
@@ -28,7 +30,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 {layout="Investigate-DN"}
 # Defining Piecewise Functions
 
-* Open your saved copy of the @starter-file{game} and look for `update-player`.
+* Open your saved copy of the @starter-file{game} in a new tab, and look for `update-player`.
 * What is the contract for `update-player`?
 * What does each part of the domain and range represent?
 * How does the y-coordinate of `PLAYER` change when the user presses the "up" key?

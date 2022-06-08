@@ -1,9 +1,10 @@
 ---
-
 {layout="Math Title Slide"}
-
 # Function Notation
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # Function Notation (Definitions)
@@ -14,7 +15,7 @@ But how does this function work?
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Function Notation (Definitions)
 
 When we apply a function to the inputs it needs, we substitute those inputs for the variables in the definition.
@@ -22,7 +23,7 @@ When we apply a function to the inputs it needs, we substitute those inputs for 
 @image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}
 
 ---
-{layout="InvestigateR"}
+{layout="InvestigateC"}
 # Function Notation (Definitions)
 
 Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! 
@@ -62,7 +63,7 @@ You can think of @math{f(3)} as a question.
 -->
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Function Notation (Graphs)
 
 If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
@@ -72,12 +73,11 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 @image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Function Notation (Graphs)
 
-* How could we have determined that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?
-* From looking at the graph, what is the value of @math{f(3)}?
-* What other values on this graph could we describe using function notation?
+* How could we determine that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?{style="font-size:15pt"}
+* What is the value of @math{f(3)}?{style="font-size:15pt"}
 
 @image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
 
@@ -85,18 +85,16 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 <!--
 * How could we have determined that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?
 ** _We could have looked for a point whose x-coordinate was 2 and found the point (7, 2), the y-value is 2, which tells us that the output of the function when x is 7 is 2._
-* From looking at the graph, what is the value of @math{f(3)}?
+* What is the value of @math{f(3)}?
 ** _-2_
-* What other values on this graph could we describe using function notation?
-** _Answers will vary... for example, @math{f(0) = -5} ...or... @math{f(0.5) = -4.5}_
 -->
 
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Function Notation (Graphs)
 
-We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatterplot below.
+We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatterplot below.{style="font-size:15pt"}
 
 @image{images/sp.png, "scatterplot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
 
@@ -171,6 +169,7 @@ Complete @printable-exercise{function-notation-tables.adoc}
 
 ---
 {layout="Synthesize"}
+#Function Notation (Tables)
 
 What did you Notice?
 

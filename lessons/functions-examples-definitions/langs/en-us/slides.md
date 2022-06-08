@@ -1,7 +1,10 @@
 ---
-{layout="Math Title Slide"}
+{layout="Core Title Slide"}
 # Functions: Contracts, Examples & Definitions
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # Three Representations of a Function
@@ -26,11 +29,7 @@ Every function has a contract: {style="font-size:22pt"}
 We can write examples illustrating how a function should work to help us identify the pattern.
 
 
-@ifproglang{Pyret}{
-@image{images/examples-pyret.png, "gt Examples"}}{width="450"}
-
-@ifproglang{WeScheme}{
-@image{images/examples-wescheme.png, "gt Examples"}}{width="450"}
+@image{images/examples.png, "gt Examples", 500}
 
 ---
 {layout="Launch"}
@@ -38,8 +37,7 @@ We can write examples illustrating how a function should work to help us identif
 
 Function definitions replace whatever changes in the examples with a variable describing what changes.
 
-@ifproglang{pyret}{@image{images/gt-fun-pyret.png, "gt Function Definition"}}{width="550"}
-@ifproglang{wescheme}{@image{images/gt-fun-wescheme.png, "gt Function Definition"}}{width="550"}
+@image{images/gt-fun.png, "gt Function Definition", 600}
 
 ---
 {layout="Launch"}
@@ -49,13 +47,12 @@ If we use the correct syntax, we can include all three of these function represe
 
 * Click *Run*.
 @ifproglang{pyret}{
-* What message do you get back? 
-* What do you think that message means?
+* What message do you get back?{style="font-size:16pt"}
+* What do you think that message means?{style="font-size:16pt"}
 }
-* Change
-@ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
-@ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
-* Click *Run*. What happens?
+* Change @ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
+@ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}{style="font-size:16pt"}
+* Click *Run*. What happens?{style="font-size:16pt"}
 
 ---
 {layout="Launch"}

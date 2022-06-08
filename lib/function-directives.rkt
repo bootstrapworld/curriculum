@@ -1145,6 +1145,8 @@
     (fitbruby "" new-question ".data-cycle-new-question" *show-new-question?*)
     "\n\n"
     (fitb "100%" "")
+    "\n\n"
+    (fitb "100%" "")
     "\n"
     "|==="
     "\n\n")

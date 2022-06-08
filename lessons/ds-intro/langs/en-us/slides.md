@@ -1,11 +1,11 @@
 ---
-
 {layout="DS Title Slide"}
 
 # Introduction to Data Science
 <!--
-
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+
 ---
 {layout="LaunchR"}
 # Questions that Matter

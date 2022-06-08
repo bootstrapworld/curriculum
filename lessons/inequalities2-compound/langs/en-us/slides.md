@@ -1,8 +1,10 @@
 ---
-
 {layout="Math Title Slide"}
+# Compound Inequalities: Solutions & Non-Solutions{style="font-size:36pt"}
 
-# Compound Inequalities: Solutions & Non-Solutions
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 
 ---
 {layout="Launch"}
@@ -154,7 +156,7 @@ Explore the compound inequalities listed using the @starter-file{inequalities-co
 Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality.
 
 @show{ (code '(define (fiveto15 x)(and (> x 5) (<= x 15)))) }
-@show{ (code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }
+@show{ (code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }{style="font-size:16pt"}
 
 Turn to @printable-exercise{compound-inequality-functions.adoc} and write code to describe the compound inequalities pictured.
 

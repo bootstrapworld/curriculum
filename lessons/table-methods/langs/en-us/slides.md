@@ -1,9 +1,9 @@
 ---
 {layout="DS Title Slide"}
-
 # Table Methods
-<!--
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
@@ -245,7 +245,6 @@ Being able to define functions and use them with Table Methods is a _huge_ upgra
 
 - Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `.filter` method help?
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
-- The animals shelter might want to print nametags for every animal. They could build a column using the `label` function to have every animal's name in big, purple letters.
 
 <!--
 **Common Misconceptions**
@@ -257,3 +256,5 @@ Being able to define functions and use them with Table Methods is a _huge_ upgra
 
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
 - A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `.build-column` to compute that for every row in the table.
+- **What are some ways you might want to filter _your_ dataset?**
+- **What are some columns you might want to build for _your_ dataset?**

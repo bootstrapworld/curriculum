@@ -224,7 +224,7 @@
 		"IM.Alg1.1.1"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
 		; no solid alignment to IM.Alg1
         )
 

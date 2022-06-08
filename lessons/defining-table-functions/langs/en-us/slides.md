@@ -1,13 +1,13 @@
 ---
-
 {layout="DS Title Slide"}
 # Defining Table Functions
-<!--
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
-# Computing Images from Rows
+# Reviewing Function Definition 
 
 By now you've had a chance to explore functions on their own, thinking of them in terms of several different representations:
 
@@ -22,7 +22,7 @@ Now it's time to use those representations to help us work with Tables!
 -->
 ---
 {layout="Launch"}
-# Computing Images from Rows
+# Reviewing Function Definition 
 
 - Open the @starter-file{row-functions}, save a copy, and click "Run".
 - Scroll until you see the definition for `cat-row`. What will you get back if you evaluate `cat-row` in the Interactions Area?
@@ -36,7 +36,7 @@ Now it's time to use those representations to help us work with Tables!
 -->
 ---
 {layout="Investigate"}
-# Computing Images from Rows
+# Reviewing Function Definition 
 
 The Design Recipe uses multiple representations of functions in a specific order, to help us solve problems. Let's look at an example to see how this works!
 
@@ -46,8 +46,8 @@ _Complete the rest of @printable-exercise{making-connections.adoc}._
 Review student answers, paying particular attention to the connections between "Contract and Purpose" and "Examples".
 -->
 ---
-{layout="Launch"}
-# Computing Images from Rows
+{layout="Investigate"}
+# Reviewing Function Definition 
 
 Take a closer look at the four examples in this file:
 
@@ -68,8 +68,8 @@ end
 
 -->
 ---
-{layout="Launch"}
-# Computing Images from Rows
+{layout="Investigate"}
+# Reviewing Function Definition 
 
 ```{style="font-size:12pt;font-weight:bold"}
 examples:
@@ -87,8 +87,8 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 
 -->
 ---
-{layout="Launch"}
-# Computing Images from Rows
+{layout="Investigate"}
+# Reviewing Function Definition 
 
 ```{style="font-size:12pt;font-weight:bold"}
 examples:
@@ -182,6 +182,7 @@ Have students compose their solutions to the three word problems together to com
 
 - Why is it helpful to use each of these steps in the Design Recipe?
 - What step do you find the most challenging right now? The easiest?
+- What are some functions you might want to define for your _own_ analysis?
 
 <!--
 

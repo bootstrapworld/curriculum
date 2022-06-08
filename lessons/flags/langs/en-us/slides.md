@@ -1,9 +1,10 @@
 ---
-
 {layout="Math Title Slide"}
-
 # Making Flags
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # Putting Images Together 
@@ -12,6 +13,7 @@ As you've already seen, `overlay` sticks two images together, so that the _cente
 
 ---
 {layout="Launch"}
+# Putting Images Together
 
 Think of the background image as a sheet of graph paper with the origin (0,0) in the bottom left corner.
 
@@ -32,6 +34,10 @@ The width of the rectangle is 300 and the height is 200. What coordinates for th
 Open the @starter-file{flags} and click Run. There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer. {style="font-size:16pt"}
 
 Professional programmers use comments __all the time__.{style="font-size:16pt"}
+
+---
+{layout="Investigate-DN"}
+# Putting Images Together
 
 Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.{style="font-size:16pt"}
 

@@ -1,9 +1,11 @@
 ---
 {layout="DS Title Slide"}
 # Correlations
-<!--
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+
 ---
 {layout="Launch"}
 # Correlations have _Form_
@@ -38,22 +40,29 @@ This goes hand-in-hand with expanding our display **from a 1-dimensional histogr
 
 @image{images/1b1.gif, "A scatter plot showing a linear (straight-line) relationship"}
 
-**_Form:_ whether a relationship is linear, non-linear or undefined**
+_Form:_ whether a relationship is **linear**, non-linear or undefined
 
-We want to search for a _linear relationship_ between two quantitative variables. But linear relationships only make sense if the scatter plot follows a _straight-line pattern!_ 
+**Linear relationships** only make sense if the scatter plot follows a _straight-line pattern_, as in this scatter plot. 
 
-The first thing we need to ask is whether the @vocab{form} of the relationship is linear...or not.
-
-<!--
-
--->
 ---
 {layout="InvestigateR"}
 # Correlations have _Form_
 
 @image{images/2NL.gif, "A scatter plot showing a non-linear (curved) relationships"}
 
-Some patterns are **linear**, and cluster around a straight line sloping up or down. Some patterns are **non-linear**, and may look like a curve or an arc. And sometimes there is **no relationship** or pattern at all!
+_Form:_ whether a relationship is linear, **non-linear** or undefined
+
+Some patterns are **non-linear**, and may look like a curve or an arc. That means there _is_ a relationship, but we can't use linear regression to measure it.
+
+---
+{layout="InvestigateR"}
+# Correlations have _Form_
+
+@image{images/B.gif,"A scatter plot showing no relationship"}
+
+_Form:_ whether a relationship is linear, non-linear or **undefined**
+
+And sometimes there is **no relationship** or pattern at all! That means there's no predictable change in the y-axis as we go from one side of the x-axis to the other.
 
 Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship is linear, non-linear or if there's no relationship at all.
 
@@ -61,10 +70,8 @@ Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just th
 Have the class discuss their answers
 -->
 ---
-{layout="SynthesizeR"}
+{layout="Synthesize"}
 # Correlations have _Form_
-
-@image{images/B.gif,"A scatter plot showing no relationship"}
 
 - Which scatter plots seem to have _linear_ relationships?
 - Which scatter plots seem to have _non-linear_ relationships?
@@ -74,12 +81,22 @@ Which scatter plots seem to have _no relationships_?
 Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships!
 -->
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Correlations have _Direction_
 
-**_Direction:_ whether a linear relationship is positive or negative.**
+@right{@image{images/C.gif, "A scatter plot, having a tight point cloud with a positive slope", 200}}
+
+_Direction:_ whether a linear relationship is **positive** or negative.
 
 - **Positive:** the line slopes up as we look from left-to-right. Positive relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
+
+---
+{layout="LaunchR"}
+# Correlations have _Direction_
+
+@right{@image{images/A.gif, "A scatter plot, having a tight point cloud with a negative slope", 200}}
+
+_Direction:_ whether a linear relationship is positive or **negative**.
 
 - **Negative:** the line slopes _down_ as we look from left-to-right. Negative relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
@@ -96,8 +113,10 @@ Data Scientists use their eyes all the time! It doesn't make sense to search for
 Have the class discuss their answers
 -->
 ---
-{layout="Synthesize"}
+{layout="SynthesizeR"}
 # Correlations have _Direction_
+
+@image{images/2NL.gif, "A scatter plot showing a non-linear (curved) relationships"}
 
 It only makes sense to look for direction in *linear* relationships!
 
@@ -106,18 +125,28 @@ Why do you think that is?
 <!--
 
 -->
+
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Correlations have _Strength_
 
 **_Strength:_ how closely the two variables are correlated.**
 
-- **A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be**. A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
-- **A relationship is weak if x tells us little about y**. A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+@right{@image{images/A.gif, "a scatter plot, with a tightly-clumped point cloud with a negative slope"}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 <!--
 Example of a strong relationship: knowing a student's age gives us a very good idea of what grade they're in
+-->
 
+---
+{layout="LaunchR"}
+# Correlations have _Strength_
+
+**_Strength:_ how closely the two variables are correlated.**
+
+@right{@image{images/1a.gif, "a scatter plot, with a loosely-clumped point cloud with a negative slope"}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+
+<!--
 Example of a weak relationship: a student's age doesn't tell us much about their number of siblings
 -->
 ---

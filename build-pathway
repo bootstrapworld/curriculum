@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-05-20 # last modified
+LASTMOD=2022-06-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1364,7 +1364,10 @@ function buildcommonlessons() {
 function proglangversion() {
   local f=$1
 
-  if test $(echo $f|grep "\-wescheme"); then
+  if test ! -f $f/index.shtml; then
+    return 1
+
+  elif test $(echo $f|grep "\-wescheme"); then
     local g=${f%-wescheme}
     if test -f $g/index.shtml; then
       return 1
@@ -1382,11 +1385,8 @@ function proglangversion() {
       return 0
     fi
 
-  elif test -f $f/index.shtml; then
-    return 0
-
   else
-    return 1
+    return 0
   fi
 }
 
@@ -1931,6 +1931,8 @@ function collectworkbookpages() {
         aspect=portrait
         g=$f
         if echo "$f"|grep -q '^ *;'; then
+          :
+        elif echo "$f"|grep -q '^ *//'; then
           :
         elif echo "$f"|grep -q landscape; then
           echo $f >> .cached/.workbook-pages.txt.kp

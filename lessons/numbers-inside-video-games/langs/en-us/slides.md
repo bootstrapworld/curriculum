@@ -1,8 +1,10 @@
 ---
 {layout="Math Title Slide"}
-
 # The Numbers Inside Video Games
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 ---
 {layout="Launch"}
 # Reverse Engineering a Video Game
