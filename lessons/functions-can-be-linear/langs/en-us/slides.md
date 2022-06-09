@@ -17,16 +17,16 @@ Students can record their responses on  @printable-exercise{notice-wonder-linear
 -->
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-What do you Notice? What do you Wonder? 
+What do you Notice? What do you Wonder?{style="font-size:16pt"} 
 
-Can you figure out what the next (x,y) pair should be for each of them? 
+Can you figure out what the next (x,y) pair should be for each of them?{style="font-size:16pt"}  
 
-Can you guess what the y-value for each table would be when x is 0?
+Can you guess what the y-value for each table would be when x is 0?{style="font-size:16pt"} 
 
-@image{images/sideways-tables-pair.png, "a"}
+@image{images/two-tables.png, "a"}{width="500"}
 
 <!--
 	Students can record their responses on @printable-exercise{notice-wonder-linearity.adoc}.
@@ -69,7 +69,7 @@ On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis mu
 We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Linear, Non-Linear, or Bust!
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
@@ -91,12 +91,12 @@ Three of the graphs on the previous slide represent @vocab{linear} relationships
 
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Linear, Non-Linear, or Bust!
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as tables, does that mean all tables are linear?
 
-@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}{width="600"}
 
 <!--
 	Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
@@ -160,8 +160,15 @@ Every linear relationship has two properties:
 
 Turn to @printable-exercise{slope-int-tables-intro.adoc}
 
-- In the table below: How much does y increase as x increases by 1? 
+- In the table below: How much does y increase as x increases by 1? (This is the *slope*.) 
 - What is the y-intercept? (Figure this out by finding the y-value when @math{x = 0}.)
+
+---
+{layout="Launch"}
+# Slope and y-Intercept from Tables
+
+Complete @printable-exercise{slope-int-tables-basic.adoc} for more practice before we move on to more complicated tables.
+
 
 ---
 {layout="Launch"}
@@ -217,30 +224,17 @@ This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\fra
 | x | 3 | 20 | 5  |  9 | 1
 | y | 5 | 56 | 11 | 23 | -1
 
-Taking the first two pairs of values gives us @math{\frac{56 - 5}{20 - 3}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
+Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
 
 * Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
 * Are there other strategies we could have used to find the slope?
 
----
-{layout="Launch"}
-# Slope and y-Intercept from Tables
-
-TO FIND THE Y-INTERCEPT: Multiply any x in the table by the slope, and subtract the result from the corresponding y.
-
-Let's use the the pair (20, 56) from the table to demonstrate this shortcut:
-
-Starting with the @math{x} value of 20, multiplying by the slope (@math{20 \times 3}) gives us @math{60}.
-
-Looking at the table... when @math{x} is 20, @math{y} is 56.
-
-The y-intercept is @math{56 - 60 = -4}.
 
 ---
 {layout="Investigate"}
 # Slope and y-Intercept from Tables
 
-Let's get some practice identifying the slope and y-intercept of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
+Let's get some practice identifying the slope of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
 
 ---
 {layout="Synthesize"}
@@ -252,7 +246,7 @@ For example: If we know a car is moving at a consistent speed, all we need to kn
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
@@ -260,7 +254,7 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
 
@@ -269,7 +263,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 We can compute the slope from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
 
@@ -277,7 +271,7 @@ We can compute the slope from a graph the same way we would with a table, by pic
 
 ---
 {layout="Investigate"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 Complete @printable-exercise{slope-and-y-graphs.adoc}
 
@@ -289,9 +283,23 @@ If you have time, check out:
 
 ---
 {layout="Synthesize"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
-Slope and y-intercept form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample.
+We have learned how to find @vocab{slope} and @vocab{y-intercept} from tables and graphs of linear relationships. Check in with yourself and what we've learned today.
 
-For example: If we know a car is moving at a consistent speed, all we need to know is where it is located at two points in time in order to figure out the speed, and to predict where it will be at any other point in time!
+* Which representation do you feel more confident finding the slope from? Why?
+* Which representation do you feel more confident finding the y-intercept from? Why?
+Looking ahead, we will be learning about yet another representation of Linear Functions that you might find to be even more flexible and powerful.
 
+---
+{layout="Synthesize"}
+# Slope and y-Intercept from Graphs
+
+Linear relationships are _everywhere_:
+
+* "As the number of people visiting the amusement park goes up, the time we spend waiting in line tends to go up."
+* "The more we drive, the more gas we tend to use."
+* "The more Carlo babysits, the more money he tends to earn."
+* "As the number of lizards in the house goes up, the number of cockroaches in the house tends to go down."
+
+What other linear relationships can you think of?
