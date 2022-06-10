@@ -1906,9 +1906,14 @@
           (lambda (o)
 
             (let ([id-file (build-path *containing-directory* (format "slides-~a.id" *proglang*))])
-              (when (file-exists? id-file)
-                (let ([id (call-with-input-file id-file read-line)])
-                  (fprintf o "\n* link:pass:[https://docs.google.com/presentation/d/~a/][Lesson Slides, window=\"_blank\"]\n\n" id))))
+              (cond [(file-exists? id-file)
+                     (let* ([id (call-with-input-file id-file read-line)]
+                            [pres-uri (format "https://docs.google.com/presentation/d/~a/" id)])
+                       (check-link pres-uri #:external? #t)
+                       (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
+                    [else
+                      (printf "WARNING: File ~a not found\n\n" id-file)]))
+
 
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
