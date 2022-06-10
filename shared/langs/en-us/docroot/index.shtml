@@ -63,12 +63,6 @@
                 description: 'Students apply inequalities in the plane to protect a butterfly from going too far to each side of the screen, then explore compound inequalties (union/intersection and AND/OR to protect the butterfly on all sides at once.',
             },
             {
-                title: 'Make a Video Game',
-                path: 'inequalities-collision',
-                prerequisites: ['inequalities-collision', 'inequalities2-compound'],
-                description: 'Students build a videogame of their own design! Every game must have a player (their avatar), a danger (something to avoid), and a target (something to chase). Students build their world using function composition, animate their characters through linear functions, detect boundaries with compound inequalities, and detect collisions with the distance formula. This project can be extended into more complex movement (quadratic, exponential, trigonometric) and "cheat codes" (piecewise/conditional) functions.',
-            },
-            {
                 title: 'Your Stress Level',
                 path: 'box-plots/pages/stress-project.html',
                 prerequisites: ['box-plots'],
@@ -132,7 +126,7 @@
                 graph[l].title = tmpLessonRename[l] || graph[l].title;
                 container.id  = l;
                 container.className =  "container";
-                if(graph[l].type == "project") { 
+                if(graph[l].title.lastIndexOf("Project:", 0) === 0) { 
                     container.classList.add("project");
                 }
                 container.innerHTML = `

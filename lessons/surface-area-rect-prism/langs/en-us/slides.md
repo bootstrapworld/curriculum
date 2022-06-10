@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Surface Area of a Rectangular Prism
+# Surface Area of a Rectangular Prism{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -9,50 +9,72 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Surface Area
 
-Open the @starter-file{prism}, click Run and type `prism` into the Interactions Area.
 
-Notice that the faces and edges of the prism are labeled. 
+Turn to @printable-exercise{prism-explore.adoc}. 
+- What do you picture in your mind when you hear @vocab{rectangular prism}?
+- What do you picture in your mind when you hear @vocab{surface area}?
 
-_Faces are the shapes on the outside of the figure._
+Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run".
 
-_Edges are the line segments where the faces of solid figures meet in each of the three dimensions._ 
 
-__How would you describe the faces of this prism?__
+---
+{layout="LaunchR"}
+# Surface Area
+
+Type `prism` into the interactions area to see an image of a rectangular prism. What do you notice about the prism? 
+@image{images/prism.png, "rectangular prism with dimensions and faces labeled"}
 
 ---
 {layout="Launch"}
 # Surface Area
 
-You are going to work through this file, reading the commented code for instructions.
+*Faces* are the flat surfaces on the outside of a solid figure. *Edges* are the line segments where the faces meet in each of the three dimensions. The *surface area* of a prism is calculated by adding the areas of its faces. 
 
-Take special note of line 22.
+---
+{layout="Launch"}
+# Surface Area
 
-It reads `lst = [list: front, ]`, which defines `lst` to be a list of values.
+- Go to PART 1 and look at the definition for `front` and `back`. Type `front` into the interactions area. What do you get?
+- Just as `front` has been defined to draw a rectangle whose dimensions are width and height, you will need to write definitions for each of the other faces of the prism.
+- Click "Run" and test each of them in the interactions area to make sure that they match the prism you started with.
 
-This list should include all of the faces of the prism.  Right now it only includes `front`. 
+---
+{layout="Launch"}
+# Surface Area
 
-Be sure to save a copy of this file!
+- Go to PART 2 in the code. @ifproglang{pyret}{Type `print-imgs(faces)` into the interactions area.}@ifproglang{wescheme}{Type `(print-imgs faces)` into the interactions area.}  How many rectangles do you see? _One_
+- The code in PART 2 says @ifproglang{pyret}{`faces = [list: front, ]`}@ifproglang{wescheme}{`(define faces (list front back))`} , which defines `faces` to be a list of values. This list will include all of the faces of the prism, but right now it only includes `front` and `back`. Add the names of each of the remaining faces to the list. 
+
+@ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}
+
+
+---
+{layout="Launch"}
+# Surface Area
+
+- When you're ready, click "Run" and type
+@ifproglang{pyret}{`print-imgs(faces)`.}
+@ifproglang{wescheme}{`(print-imgs faces)`.} What do you Notice? What do you Wonder?
+- Do you have enough shapes to cover all of the faces of the prism?
+- Now, read the comments in PART 3 of the file to learn how to print the faces to build your prism.
 
 
 ---
 {layout="Investigate"}
 # Surface Area
 
-1. Open your saved file, and click Run to get an image of all the faces of the prism. 
+Cut out and tape together the images you defined to form a 3D model of a rectangular prism. Now, use your model to calculate surface area.
 
-1. Print them, cut them out, and use them to help you find the surface area of the prism: the total area of the faces covering the outside of the prism.
+Once you've built your prism, use it to help you calculate the surface area of the figure. Then, turn to PART 4 in the @starter-file{prism} and define `surface-area` using length, width, and height.
 
-1. Tape these faces together to build the prism!
-
-1. Complete task 2 in your file, defining surface-area to calculate the area of the prism using width, length and height. 
+<!--
+Labeling the shapes with face names and/or area before taping them together may be helpful for some students. Printing two copies of the file (one to cut and one to write on) might also be useful!
+-->
 
 ---
 {layout="Synthesize"}
 # Surface Area
 
-What code did you write to calculate the surface area?
-
-How did building the prism help you to understand surface area?
-
-How did writing the code for surface area help you to understand surface area?
-
+- How many definitions did you write in order to calculate the surface area of the prism?
+- How did building the prism help you to understand surface area?
+- How did writing the code for surface area help you to understand surface area?

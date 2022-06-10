@@ -36,13 +36,7 @@ Going line-by-line, talk with your group about what you think each line does.
 - What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?
 - What does `SCREENSHOT` return in the @vocab{Interactions area}?
 - Did anyone try pressing Run?  What happens when you press Run?*
-
-@ifproglang{wescheme}{
 - What do you think `image-url` does?
-}
-@ifproglang{pyret}{
-* What do you think `image-url` does?
-}
 
 
 <!--
@@ -59,13 +53,9 @@ _An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
 - *Did anyone try pressing "Run"?  What happens when you press "Run"?*
 _Allow students to discuss what they see and what connections they see with the code_
 
-@ifproglang{wescheme}{
 - *What do you think `image-url` does?*
-}
-@ifproglang{pyret}{
-* *What do you think `image-url` does?*
 _Answers vary: It consumes a @vocab{String}, which is a URL (an image location on the Internet) and produces the @vocab{Image} inside our program_
-}
+
 -->
 
 ---
@@ -108,13 +98,13 @@ Upload to GDrive, and make sure sharing settings allow anyone with the link to v
 {layout="Investigate"}
 # Finding Your Game Images
 
-Open your game file
-
-Click Insert > Images, and select an image
+@ifproglang{pyret}{Open your game file, click “Insert” > “Images”, and select an image}
+@ifproglang{wescheme}{Open your game file, click “Images”, and select an image}
 
 It will insert the code to display the image using image-url.
 
-@[youtube](bWxNXTrGQOE)
+@ifproglang{pyret}{@[youtube](bWxNXTrGQOE)}
+@ifproglang{pyret}{@[youtube](lTl6bjbfCRo)}
 
 ---
 {layout="Synthesize"}

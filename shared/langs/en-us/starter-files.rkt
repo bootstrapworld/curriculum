@@ -17,7 +17,7 @@
   ; CORE
 
   ("alices-restaurant" "Alice's Restaurant Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1M1EtsxsH1a9R4r27PCpKDj5RGv4TSVp2")
+   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86&v=6788e10")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
   )
 
@@ -195,8 +195,8 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Rectangular Prism Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86&v=6788e10")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=ZduhqzWFbx")
+   ("pyret" "https://code.pyret.org/editor#share=1jv3H5pke8VykznZ7kGkKFXXiYomYW0AY")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=iMS9XoU0eb")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl")

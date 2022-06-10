@@ -1,14 +1,16 @@
 ---
-
 {layout="Math Title Slide"}
-
 # Functions Can Be Linear
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
+
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-What do you Notice? What do you Wonder?
+Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and notice and wonder about this table and graph.
 
 @image{images/notice-wonder.png, "table and line graph"}{width="700"}
 
@@ -17,16 +19,30 @@ Students can record their responses on  @printable-exercise{notice-wonder-linear
 -->
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-Can you predict the next two rows in the table? The next points on the graph? How did you arrive at your prediction?
+Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
+
+Can you figure out what the next (x,y) pair should be for each of them?{style="font-size:16pt"}  
+
+Can you guess what the y-value for each table would be when x is 0?{style="font-size:16pt"} 
+
+@image{images/two-tables.png, "a"}{width="500"}
+
+<!--
+_Be sure that students have noticed that:_
+
+- _each (x,y) pair on the table corresponds to a point on the graph_
+- _both the x and y values in the table are increasing by consistent intervals_
+- _the points on the graph are connected by a straight line_
+-->
 
 ---
 {layout="Launch"}
 # Simple Sequences and Straight Lines
 
-The y-column in the table and the y-coordinates on the graph follow a _rule_, which dictates how @math{y} relates to @math{x}. When @math{x} goes up or down by 1, @math{y} goes up or down by 2. We expect that rule to continue for all values of @math{x}, continuing the line and extending the table in both directions, forever.
+We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). When we notice that x-values change at a _constant rate_ and the y-values also change at a _constant rate_, we know that if we were to plot those values on a graph, all of the points would fall on a straight line.
 
 *Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
@@ -34,32 +50,9 @@ The y-column in the table and the y-coordinates on the graph follow a _rule_, wh
 {layout="Launch"}
 # Simple Sequences and Straight Lines
 
-Linear relationships are _everywhere_:
+*Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
-* "A car is traveling at 50 miles per hour"
-* "Milk costs $2.50 per gallon"
-* "There are 18 wheels on every tractor-trailer"
-* "A tree grows 2 inches each year"
-* "There are 30 students per teacher"
-
-What other linear relationships can you think of?
-
----
-{layout="InvestigateR"}
-# Simple Sequences and Straight Lines
-
-What do you Notice? What do you Wonder? 
-
-Can you figure out what the next (x,y) pair should be for each of them? 
-
-Can you guess what the y-value for each table would be when x is 0?
-
-@image{images/sideways-tables-pair.png, "a"}
-
-<!--
-	Students can record their responses on @printable-exercise{notice-wonder-tables.adoc}.
--->
-
+The line representing the @vocab{linear} relationship would not only include the points represented in the table, but also **all of the coordinate pairs that satisfy the same rule**, including lots of points whose x and y values are fractions and decimals.
 
 ---
 {layout="Investigate"}
@@ -74,24 +67,38 @@ If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Axes on a graph need an order. Rows in a table don’t!
+**Axes on a graph need an order. Rows in a table don't!**
 
-The rows in a table are discrete. They preserve their meaning if the rows are shuffled into a different order.
+The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
+they preserve their meaning if the rows are shuffled into a different order.
 
-In a graph, the points on the x-axis cannot be shuffled, because the x-axis must always be ordered. We can stretch the scale of the axes to making the lines look different, but the points will always be in the same order.
+---
+{layout="Investigate"}
+# Simple Sequences and Straight Lines
+
+**Axes on a graph need an order. Rows in a table don't!**
+
+On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. 
+
+We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+
+<!--
+If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+
+-->
 
 ---
 {layout="Synthesize"}
 # Simple Sequences and Straight Lines
 
-Linear relationships show up all the time in real life, so it’s helpful to know how to think about them. 
+We've seen that linear relationships can be represented as tables and graphs. 
 
-Linear relationships can be represented as tables and graphs. 
-- Tables only show us some points on a line, whereas a line itself is made up of an infinite number of points. 
-- While a table represents a sample of some larger trend, the graph is a way of seeing the trend itself.
+Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. 
+
+While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Linear, Non-Linear, or Bust!
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
@@ -104,49 +111,61 @@ What do you Notice? What do you Wonder? If all linear relationships can be shown
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
 Linear relationships in a graph always appear as straight lines.
 
-Three of the graphs on the previous slide represent @vocab{linear} relationships, and three show other, non-linear relationships. The linear graphs can go in lots of directions and non-linear relationships can follow patterns that aren't linear!
+Three of the graphs represent @vocab{linear} relationships, and three show other, non-linear relationships.
+
+@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
 
 
 ---
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-What do you Notice? What do you Wonder? If all linear relationships can be shown as tables, does that mean all tables are linear?
+**If all linear relationships can be shown as tables, does that mean all tables are linear?**
 
-@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
+Complete @printable-exercise{tables-all-linear.adoc}.
+
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}{width="600"}
 
 <!--
 	Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
 -->
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-Linear relationships in a table show up as sequences that change at a constant rate. The y-value when x is zero is also the value where the line will cross the y-axis.
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
 
-Three of the tables on the previous slide show linear relationships, and three show other, non-linear relationships. The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease) as the x-values increase. While the other tables may show patterns, they aren’t linear!
+Linear relationships in a table show up as sequences that change at a constant rate. 
 
+Three of the tables show linear relationships, and three show non-linear relationships. 
 
 ---
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-Sometimes there is no function that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
 
+The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease). 
+
+The other tables may show patterns, but they aren’t linear!
+
+---
+{layout="LaunchC"}
+# Linear, Non-Linear, or Bust!
+
+Sometimes there is _no function_ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
 
 @image{images/table-and-dot-plot.png, "table and corresponding dot plot"}
 
-
 ---
-{layout="Launch"}
+{layout="Investigate"}
 # Linear, Non-Linear, or Bust!
-
 
 * Can you tell when a relationship is a linear function? A non-linear one? Not a function at all?
 * Can someone remind us how to tell whether or not a graph represents a function? 
@@ -182,8 +201,15 @@ Every linear relationship has two properties:
 
 Turn to @printable-exercise{slope-int-tables-intro.adoc}
 
-- In the table below: How much does y increase as x increases by 1? 
+- In the table below: How much does y increase as x increases by 1? (This is the *slope*.) 
 - What is the y-intercept? (Figure this out by finding the y-value when @math{x = 0}.)
+
+---
+{layout="Launch"}
+# Slope and y-Intercept from Tables
+
+Complete @printable-exercise{slope-int-tables-basic.adoc} for more practice before we move on to more complicated tables.
+
 
 ---
 {layout="Launch"}
@@ -228,7 +254,7 @@ TO FIND THE SLOPE: Find any two pairs of values in the table, and divide the dif
 
 This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
 
-This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\frac{rise}{run}}.
+This is often described as  @math{\frac{ChangeInY}{ChangeInX}} or @math{\frac{rise}{run}}.
 
 
 ---
@@ -239,30 +265,17 @@ This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\fra
 | x | 3 | 20 | 5  |  9 | 1
 | y | 5 | 56 | 11 | 23 | -1
 
-Taking the first two pairs of values gives us @math{\frac{56 - 5}{20 - 3}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
+Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
 
 * Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
 * Are there other strategies we could have used to find the slope?
 
----
-{layout="Launch"}
-# Slope and y-Intercept from Tables
-
-TO FIND THE Y-INTERCEPT: Multiply any x in the table by the slope, and subtract the result from the corresponding y.
-
-Let's use the the pair (20, 56) from the table to demonstrate this shortcut:
-
-Starting with the @math{x} value of 20, multiplying by the slope (@math{20 \times 3}) gives us @math{60}.
-
-Looking at the table... when @math{x} is 20, @math{y} is 56.
-
-The y-intercept is @math{56 - 60 = -4}.
 
 ---
 {layout="Investigate"}
 # Slope and y-Intercept from Tables
 
-Let's get some practice identifying the slope and y-intercept of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
+Let's get some practice identifying the slope of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
 
 ---
 {layout="Synthesize"}
@@ -274,7 +287,7 @@ For example: If we know a car is moving at a consistent speed, all we need to kn
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
@@ -282,7 +295,7 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
 
@@ -291,7 +304,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 
 ---
 {layout="LaunchC"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 We can compute the slope from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
 
@@ -299,7 +312,7 @@ We can compute the slope from a graph the same way we would with a table, by pic
 
 ---
 {layout="Investigate"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
 Complete @printable-exercise{slope-and-y-graphs.adoc}
 
@@ -311,9 +324,23 @@ If you have time, check out:
 
 ---
 {layout="Synthesize"}
-# Slope and Y-Intercept from Graphs
+# Slope and y-Intercept from Graphs
 
-Slope and y-intercept form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample.
+We have learned how to find @vocab{slope} and @vocab{y-intercept} from tables and graphs of linear relationships. Check in with yourself and what we've learned today.
 
-For example: If we know a car is moving at a consistent speed, all we need to know is where it is located at two points in time in order to figure out the speed, and to predict where it will be at any other point in time!
+* Which representation do you feel more confident finding the slope from? Why?
+* Which representation do you feel more confident finding the y-intercept from? Why?
+Looking ahead, we will be learning about yet another representation of Linear Functions that you might find to be even more flexible and powerful.
 
+---
+{layout="Synthesize"}
+# Slope and y-Intercept from Graphs
+
+Linear relationships are _everywhere_:
+
+* "As the number of people visiting the amusement park goes up, the time we spend waiting in line tends to go up."
+* "The more we drive, the more gas we tend to use."
+* "The more Carlo babysits, the more money he tends to earn."
+* "As the number of lizards in the house goes up, the number of cockroaches in the house tends to go down."
+
+What other linear relationships can you think of?
