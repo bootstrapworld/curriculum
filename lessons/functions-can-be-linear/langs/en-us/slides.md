@@ -1,14 +1,16 @@
 ---
-
 {layout="Math Title Slide"}
-
 # Functions Can Be Linear
 
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
+
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-What do you Notice? What do you Wonder?
+Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and notice and wonder about this table and graph.
 
 @image{images/notice-wonder.png, "table and line graph"}{width="700"}
 
@@ -20,7 +22,7 @@ Students can record their responses on  @printable-exercise{notice-wonder-linear
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-What do you Notice? What do you Wonder?{style="font-size:16pt"} 
+Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
 
 Can you figure out what the next (x,y) pair should be for each of them?{style="font-size:16pt"}  
 
@@ -29,7 +31,11 @@ Can you guess what the y-value for each table would be when x is 0?{style="font-
 @image{images/two-tables.png, "a"}{width="500"}
 
 <!--
-	Students can record their responses on @printable-exercise{notice-wonder-linearity.adoc}.
+_Be sure that students have noticed that:_
+
+- _each (x,y) pair on the table corresponds to a point on the graph_
+- _both the x and y values in the table are increasing by consistent intervals_
+- _the points on the graph are connected by a straight line_
 -->
 
 ---
@@ -40,6 +46,13 @@ We can think of the "x" column as counting the __order in which the y-values app
 
 *Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
+---
+{layout="Launch"}
+# Simple Sequences and Straight Lines
+
+*Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
+
+The line representing the @vocab{linear} relationship would not only include the points represented in the table, but also **all of the coordinate pairs that satisfy the same rule**, including lots of points whose x and y values are fractions and decimals.
 
 ---
 {layout="Investigate"}
@@ -54,19 +67,35 @@ If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Axes on a graph need an order. Rows in a table don't!
+**Axes on a graph need an order. Rows in a table don't!**
 
 The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
 they preserve their meaning if the rows are shuffled into a different order.
 
-On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+---
+{layout="Investigate"}
+# Simple Sequences and Straight Lines
 
+**Axes on a graph need an order. Rows in a table don't!**
+
+On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. 
+
+We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+
+<!--
+If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+
+-->
 
 ---
 {layout="Synthesize"}
 # Simple Sequences and Straight Lines
 
-We've seen that linear relationships can be represented as tables and graphs. Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
+We've seen that linear relationships can be represented as tables and graphs. 
+
+Tables only show us _some points_ on a line, whereas a line itself is made up of an _infinite_ number of points. 
+
+While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
 {layout="Launch"}
@@ -82,19 +111,23 @@ What do you Notice? What do you Wonder? If all linear relationships can be shown
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
 Linear relationships in a graph always appear as straight lines.
 
-Three of the graphs on the previous slide represent @vocab{linear} relationships, and three show other, non-linear relationships. The linear graphs can go in lots of directions and non-linear relationships can follow patterns that aren't linear!
+Three of the graphs represent @vocab{linear} relationships, and three show other, non-linear relationships.
+
+@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-What do you Notice? What do you Wonder? If all linear relationships can be shown as tables, does that mean all tables are linear?
+**If all linear relationships can be shown as tables, does that mean all tables are linear?**
+
+Complete @printable-exercise{tables-all-linear.adoc}.
 
 @image{images/set-of-6-tables.png, "series of six tables showing different relationships"}{width="600"}
 
@@ -103,28 +136,36 @@ What do you Notice? What do you Wonder? If all linear relationships can be shown
 -->
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-Linear relationships in a table show up as sequences that change at a constant rate. The y-value when x is zero is also the value where the line will cross the y-axis.
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
 
-Three of the tables on the previous slide show linear relationships, and three show other, non-linear relationships. The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease) as the x-values increase. While the other tables may show patterns, they aren’t linear!
+Linear relationships in a table show up as sequences that change at a constant rate. 
 
+Three of the tables show linear relationships, and three show non-linear relationships. 
 
 ---
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-Sometimes there is no function that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
+@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
 
+The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease). 
+
+The other tables may show patterns, but they aren’t linear!
+
+---
+{layout="LaunchC"}
+# Linear, Non-Linear, or Bust!
+
+Sometimes there is _no function_ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
 
 @image{images/table-and-dot-plot.png, "table and corresponding dot plot"}
-
 
 ---
 {layout="Investigate"}
 # Linear, Non-Linear, or Bust!
-
 
 * Can you tell when a relationship is a linear function? A non-linear one? Not a function at all?
 * Can someone remind us how to tell whether or not a graph represents a function? 
@@ -213,7 +254,7 @@ TO FIND THE SLOPE: Find any two pairs of values in the table, and divide the dif
 
 This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
 
-This is often described as  @math{\frac{change.in.y}{change.in.x}} or @math{\frac{rise}{run}}.
+This is often described as  @math{\frac{ChangeInY}{ChangeInX}} or @math{\frac{rise}{run}}.
 
 
 ---
