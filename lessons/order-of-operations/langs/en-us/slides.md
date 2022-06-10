@@ -49,7 +49,7 @@ __Rule #3:__ Circles can contain other circles.
 
 What if we want to use multiple functions?  
 
-How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
+What is the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
 
 ---
 {layout="Launch"}
