@@ -210,7 +210,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 # Exploring Image Functions
 
 
-- What is the contract for star? 
+- What is the contract for `star`? 
 - The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
 
 ---

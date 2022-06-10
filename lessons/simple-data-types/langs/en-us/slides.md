@@ -97,7 +97,12 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 - Our Editor is pretty smart. When we click on a rational number, it switches between showing a fraction and decimal.{style="font-size:17pt"} 
 - Anything in quotes is a String, even something like `"42"`.{style="font-size:17pt"} 
 - Strings _must_ have quotation marks on both sides.{style="font-size:17pt"} 
+
 @ifproglang{pyret}{
+---
+{layout="Synthesize"}
+# Numbers & Strings
+
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
 - In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
 - When there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:17pt"} 
