@@ -123,7 +123,7 @@ We don’t need to know a function definition in order to use function notation 
 
 ---
 {layout="LaunchR"}	
-# Function Notation (Grphas)
+# Function Notation (Graphs)
 
 This works for even more complex functions, which we haven't seen yet!
 
@@ -134,6 +134,7 @@ When evaluating an expression for a piecewise function, points on the graph mark
 
 ---
 {layout="Investigate"}
+# Function Notation (Graphs)
 
 Complete @printable-exercise{function-notation-graphs.adoc}.
 
@@ -141,7 +142,7 @@ If you're ready to engage them with piecewise functions, try @opt-printable-exer
 
 ---
 {layout="Synthesize"}
-# Function Notation (Grphas)
+# Function Notation (Graphs)
 
 Can you think of any values that it would be difficult to determine from one of these graphs?
 
