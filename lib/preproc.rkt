@@ -1905,6 +1905,11 @@
         (call-with-output-file (path-replace-extension out-file "-extra-mat.asc")
           (lambda (o)
 
+            (let ([id-file (build-path *containing-directory* (format "slides-~a.id" *proglang*))])
+              (when (file-exists? id-file)
+                (let ([id (call-with-input-file id-file read-line)])
+                  (fprintf o "\n* link:pass:[https://docs.google.com/presentation/d/~a/][Lesson Slides, window=\"_blank\"]\n\n" id))))
+
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
