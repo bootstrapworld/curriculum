@@ -77,7 +77,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A")
    )
   ("custom-scatter-plot" "Custom Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1FzG3Bc20MxIjohamjQsYUJ3MfYeoMHfF")
+   ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
    )
   ("height" "Age vs. Height Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1prqCzfZWJ-kuXJMclmi1qyE0cSdziLiV")
@@ -92,7 +92,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1-YuAea2oTVZcEyUNvEb-cg5qIB6n5V7n")
    )
   ("table-methods" "Table Methods Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
+   ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
   ("text-stats"  "Text Stats Starter File"
