@@ -80,7 +80,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
    )
   ("height" "Age vs. Height Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1prqCzfZWJ-kuXJMclmi1qyE0cSdziLiV")
+   ("pyret" "https://code.pyret.org/editor#share=1PUGloc440ZjdGf3jT9grWHQ__VgYrfWI")
    )
   ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0")
