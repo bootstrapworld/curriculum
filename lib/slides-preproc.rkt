@@ -221,12 +221,12 @@
          [link-text (if (> num-args 1) (second args) "")])
     (format "[~a](~a)" link-text link)))
 
-(define (starter-file-link lbl)
+(define (starter-file-link lbl link-text)
   (let ([c (assoc lbl *starter-files*)])
     (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
           [else
-            (let ([title (second c)]
+            (let ([title (or link-text (second c))]
                   [p (assoc *proglang* (rest (rest c)))])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
@@ -285,8 +285,10 @@
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (external-link args directive) o)) ]
                          [(member directive '("starter-file" "opt-starter-file"))
-                          (let ([lbl (read-group i directive)])
-                            (display (starter-file-link lbl) o))]
+                          (let* ([lbl+text (read-commaed-group i directive read-group)]
+                                 [lbl (first lbl+text)]
+                                 [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
+                            (display (starter-file-link lbl link-text) o))]
                          [(string=? directive "ifproglang")
                           (let* ([proglang (read-group i directive)]
                                  [fragment (read-group i directive #:multiline? #t)])

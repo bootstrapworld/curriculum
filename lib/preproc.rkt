@@ -1675,14 +1675,16 @@
                                           )))))))]
                            [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
-                            (let* ([lbl (read-group i directive)]
+                            (let* ([lbl+text (read-commaed-group i directive read-group)]
+                                   [lbl (first lbl+text)]
+                                   [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
                                    [c (assoc lbl *starter-files*)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([title (second c)]
+                                      (let ([title (or link-text (second c))]
                                             [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
