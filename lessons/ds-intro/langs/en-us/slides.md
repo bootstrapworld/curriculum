@@ -33,7 +33,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 
 <!--
-Students are VERY likely to try and explain their reasonsing when they give their gut answers. This can taint the answers of other students in the group - emphasize that this is about exposing our "gut reaction" or bias.
+Students are VERY likely to try and explain their reasoning when they give their gut answers. This can taint the answers of other students in the group - emphasize that this is about exposing our "gut reaction" or bias.
 -->
 ---
 {layout="InvestigateR"}
@@ -270,7 +270,7 @@ Here is an example of a table with one header row and two data rows:
 After the header, Pyret tables can have any number of @vocab{data rows}.
 Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_.{style="font-size: 18pt"}
 
-}
+
 
 <!--
 - How many variables are listed in the header row for the Animals Dataset? What are they called? What is being used for the identifier column in this dataset?
@@ -292,3 +292,4 @@ Once you know how to program, you can do a _lot_ with datasets:
 <!--
 
 -->
+}
