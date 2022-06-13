@@ -42,10 +42,10 @@ But how does this function _work?_
 
 When we apply a function to some inputs, we *substitute* those inputs for the variables in the definition. In the example below, the inputs are _substituted_ for the variable `size` in the body of the `gt` function.
 
-**Function 1: @show{(code '(define (gt size)(triangle size "solid" "green")))}**
+**Function 1: @show{(code '(define (gt size) (triangle size "solid" "green")))}**
 [cols="^.^2,^.^3,^.^1", options="header"]
 |===
-| Function Application 		| Substituted Input				| Final Product
+| Function Application 		| After Substitution 				| Final Product
 | @show{(code '(gt 10))}	| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
 | @show{(code '(gt 20))}	| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
 | @show{(code '(gt 30))}	| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
@@ -60,7 +60,7 @@ Let's take a look at a function that works with Numbers:
 **Function 2: @show{(code '(define (f x) (+ x 8)))}**
 [cols="^.^2,^.^3,^.^1", options="header"]
 |===
-| Function Application 	| Substituted Input 		| Final Product
+| Function Application 	| After Substitution  		| Final Product
 | @math{f(10)} 			| @show{(code '(+ 10 8))} 	| 18
 | @math{f(20)} 			| @show{(code '(+ 20 8))} 	| 28
 | @math{f(30)} 			| @show{(code '(+ 30 8))} 	| 38
@@ -94,7 +94,7 @@ In math - just as in programming - *we compute the value of the expression for a
 **Function 2 (again!): @math{f(x) = x + 8}**
 [cols="^.^2,^.^3,^.^1", options="header"]
 |===
-| Function Application 	| Substituted Input 		| Final Product
+| Function Application 	| After Substitution  		| Final Product
 | @math{f(10)} 			| @math{10 + 8} 			| 18
 | @math{f(20)} 			| @math{20 + 8} 			| 28
 | @math{f(30)} 			| @math{30 + 8} 			| 38
