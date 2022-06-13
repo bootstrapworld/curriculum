@@ -42,10 +42,10 @@ But how does this function _work?_
 
 When we apply a function to some inputs, we *substitute* those inputs for the variables in the definition. In the example below, the inputs are _substituted_ for the variable `size` in the body of the `gt` function.
 
-**Function 1: @show{(code '(define (gt size) (triangle size "solid" "green")))}**
-[cols="^.^2,^.^3,^.^1", options="header"]
+@center{**@show{(code '(define (gt size)(triangle size "solid" "green")))}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
 |===
-| Function Application 		| After Substitution 				| Final Product
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
 | @show{(code '(gt 10))}	| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png, green triangle 10}
 | @show{(code '(gt 20))}	| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png, green triangle 20}
 | @show{(code '(gt 30))}	| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png, green triangle 30}
@@ -57,10 +57,11 @@ When we apply a function to some inputs, we *substitute* those inputs for the va
 
 Let's take a look at a function that works with Numbers:
 
-**Function 2: @show{(code '(define (f x) (+ x 8)))}**
-[cols="^.^2,^.^3,^.^1", options="header"]
+
+@center{**@show{(code '(define (f x) (+ x 8)))}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
 |===
-| Function Application 	| After Substitution  		| Final Product
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
 | @math{f(10)} 			| @show{(code '(+ 10 8))} 	| 18
 | @math{f(20)} 			| @show{(code '(+ 20 8))} 	| 28
 | @math{f(30)} 			| @show{(code '(+ 30 8))} 	| 38
@@ -91,10 +92,10 @@ Both forms show the *name of the function*, as well as the *names of the variabl
 
 In math - just as in programming - *we compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition*, just as we did with `gt`.
 
-**Function 2 (again!): @math{f(x) = x + 8}**
-[cols="^.^2,^.^3,^.^1", options="header"]
+@center{**@math{f(x) = x + 8}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
 |===
-| Function Application 	| After Substitution  		| Final Product
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
 | @math{f(10)} 			| @math{10 + 8} 			| 18
 | @math{f(20)} 			| @math{20 + 8} 			| 28
 | @math{f(30)} 			| @math{30 + 8} 			| 38
@@ -115,11 +116,14 @@ You may also want to have students complete @opt-online-exercise{https://teacher
 === Synthesize
 
 [.lesson-instruction]
+--
 You can think of @math{f(3)} as a question.
+
 * What question is it asking you to evaluate?
 ** _What is the value of @math{x + 8} when @math{x} is 3?_
 * What is another way you can ask it?
 ** _What is @math{3 + 8}?_
+--
 
 == Function Notation (Graphs) @duration{15 minutes}
 
