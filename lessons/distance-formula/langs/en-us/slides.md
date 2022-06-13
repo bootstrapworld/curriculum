@@ -152,14 +152,16 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 	-->
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Distance in 2 Dimensions
+
+@[youtube](Ln7myXQx8TM)
 
 Connecting Pythagorean Theorem to Videogames
 
-Let's watch @link{https://www.youtube.com/watch?v=Ln7myXQx8TM, Tova Brown's Video of a Geometric Proof of the Pythagorean Theorem and its application to finding distance between game characters}.
+Watch this video of a geometric proof of the Pythagorean theorem, and its application to finding distance between game characters (created by Tovah Brown!).
 
-- Try your best to explain the proof from the video to a partner!
+- Try your best to explain the proof from the video to a partner
 - What questions do you have?
 
 <!--
@@ -209,11 +211,14 @@ When you're done, fix the broken `distance` function in your game file, click _R
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
-Extension:
+OPTIONAL:
 
 If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
 
-Have students take a look at the two examples on @printable-exercise{pages/distance-comparing-code.adoc}. There's a subtle difference between the two examples! What is it? Can you explain why they need to be written differently?
+Take a look at the two examples on @printable-exercise{pages/distance-comparing-code.adoc}. 
+
+- There's a subtle difference between the two examples! What is it? 
+- Can you explain why they need to be written differently?
 
 <!-- 
 It is _extremely common_ for students to put variables in the *wrong order*. In other words, their program looks like
