@@ -9,9 +9,12 @@
 
 @description{Students recreate images of flags of varying complexity by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely.}
 
+@lesson-prereqs{function-composition, defining-values}
+
+@keywords{ratio, proportion, coordinate plane, proportional, scaling}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{function-composition, defining-values}
 
 | Lesson Goals
 | Students will be able to:
@@ -28,40 +31,21 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1bKY5Ia-E72xEJIIJPia2hTGhAkJQN4iykPipSbyGcxA/, Lesson Slides}
-* @link{https://www.wescheme.org/openEditor?publicId=jH25JejavW, Flags Starter File}
-* @link{https://www.wescheme.org/openEditor?publicId=81WrTGQglP, "Flags of Netherlands, Ireland, Mauritius Starter File"}
-}
 
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1gWn9ihsXQFcrS_5ZgPFM7LohDxONtUfAYUlpZBM0juo/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1VOKiUiHWWqwL9xfclQGtoCnyoMHL6nT3, Flags Starter File}
-* @link{https://code.pyret.org/editor#share=1MytZ-zfHpyO5p_M2M7Int6JzddFXhf4B, "Flags of Netherlands, Ireland, Mauritius Starter File"}
-}
 
 @material-links
 
-| Supplemental Resources
-|
-* @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World}
-* @link{http://www.flagwizard.net/, Flag Wizard} - Searchable index of the world's flags, based on geometric properties and complexity.
-
 | Preparation
 |
-* Make sure all materials have been gathered.
-* Decide how students will be grouped in pairs.
 * For some students, the use of graph paper for this activity will make a big difference!
+
 
 | Key Points For The Facilitator
 |
 * The `put-image` function treats the second image as the first quadrant of a cartesian plane. Having students sketch their flag on a sheet of graph paper drives this point home, and makes the programming easier.
 * This is an excellent opportunity to introduce students to __indenting code__. The difference between poorly-indented flag code and well-indented flag code is extremely noticable.
 
-@lang-prereq
-
 |===
-
 
 == Putting Images Together @duration{25 minutes}
 
@@ -88,10 +72,7 @@ The numbers in `put-image` specify a point on that graph paper, with the center 
 
 === Investigate
 
-Have students open the
-@ifproglang{wescheme}{@link{https://www.wescheme.org/openEditor?publicId=jH25JejavW, Flags Starter File}}
-@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1VOKiUiHWWqwL9xfclQGtoCnyoMHL6nT3, Flags Starter File}}
-, and click Run.
+Have students open the @starter-file{flags} and click "Run".
 
 There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer.
 
@@ -109,19 +90,16 @@ Professional programmers work with teams who need to be able to follow each othe
 - Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
 
-Have students open the
-@ifproglang{wescheme}{@link{https://www.wescheme.org/view?publicId=81WrTGQglP, "Flags of Netherlands, Ireland, Mauritius Starter File"}}
-@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1MytZ-zfHpyO5p_M2M7Int6JzddFXhf4B, "Flags of Netherlands, Ireland, Mauritius Starter File"} }
-, and click Run.
+Have students open the @starter-file{flags-2} and click "Run".
 
 [.lesson-instruction]
 --
 - Look at the code for the flag of the Netherlands.
 - How big is the flag?
-- What was the programmer thinking when she coded the height of the red stripe as @show{(sexp->code '(/ 200 3))}?
-- The center of the blue stripe is placed at (@show{(sexp->code `150)}, @show{(sexp->code '(/ 200 6))}). How did the programmer know to use 150 as the x-coordinate?
-- What was the programmer thinking when she coded the y-coordinate as @show{(sexp->code '(/ 200 6))}?
-- Explain the thinking behind coding the redstripe's y-coordinate as @show{(sexp->code '(* 5 (/ 200 6)))}.
+- What was the programmer thinking when she coded the height of the red stripe as @show{(code '(/ 200 3))}?
+- The center of the blue stripe is placed at (@show{(code `150)}, @show{(code '(/ 200 6))}). How did the programmer know to use 150 as the x-coordinate?
+- What was the programmer thinking when she coded the y-coordinate as @show{(code '(/ 200 6))}?
+- Explain the thinking behind coding the redstripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
 --
 
 Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
@@ -132,6 +110,7 @@ Could we completely replace `overlay` with `put-image`? Why or why not?
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Going Deeper}
 
@@ -184,6 +163,7 @@ If you have time, these matching activities will support student thinking.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Paper Flag Models to Code}
 In this next exercise, students will be decomposing the image of a flag. For a more tactile experience, you could have students construct images of the flags they choose using construction paper. This should happen between the step where they describe the shapes needed to compose the flags image and write the code to build the image.  The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank".
@@ -192,17 +172,13 @@ In this next exercise, students will be decomposing the image of a flag. For a m
 [.lesson-instruction]
 --
 - Turn to @printable-exercise{decomposing-flags.adoc}, and choose ONE flag to focus on. On the blank lines below, describe the parts that make up that flag.
-
-- Once you're done, return to the
-@ifproglang{wescheme}{@link{https://www.wescheme.org/openEditor?publicId=jH25JejavW, Flags Starter File}}
-@ifproglang{pyret}{@link{https://code.pyret.org/editor#share=1VOKiUiHWWqwL9xfclQGtoCnyoMHL6nT3, Flags Starter File}}
-and define those parts.
-
+- Once you're done, return to the @starter-file{flags} and define those parts.
 - Then, compose those parts using `put-image`, and make your flag!
 --
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Around the World in your Classroom}
 The opportunity to focus on a flag of their choosing is a big motivator for students. Coding flags also presents a rare opportunity for students to share a piece of their identity in math class. If you have more time to devote, we highly encourage you to give students the opportunity to create the image of a flag they connect with in some way.  Students might choose the flags of countries related to their heritage, a place they’ve visited, a country they’re interested in, or a group they identify with or support.  Encourage students to choose an appropriately challenging flag.  The teacher may introduce parameters if necessary, such as “Flags need at least 5 different shapes”.  This is intended to be a summative project, so encourage students to demonstrate what they’ve learned. Once students have coded their flags, host a tour of the flags of the world in your classroom!
@@ -212,15 +188,16 @@ that immigration can be a sensitive topic for some students.  For this reason, i
 
 Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
 
-@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @link{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length ratios in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
+@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length ratios in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
 |===
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Ratio and Proportion}
 
-Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(sexp->code '(/ WIDTH 2))} and @show{(sexp->code '(/ HEIGHT 2))}.
+Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
 |===
 
 === Synthesize
@@ -231,17 +208,14 @@ Why is it useful to define each part of the flag first, before stitching the ima
 
 == Additional Exercises
 
-- These two starter files provide students with an image of a flag and code that starts out generating a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag: @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6&v=1904b2c, Flag of Mexico Starter File}} @ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=SnLx13yt5W , Flag of Mexico Starter File}} and  @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1iNeBnsFWSCcZz6Y70rpuTlbPZD6q0jKY, Puerto Rican Flag Starter File}}
-@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=6TJ0N2CJqU, Puerto Rican Flag Starter File}}
+- @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
 
-- For a quick dive into why it’s more efficient to define shapes before building the image, open
-@ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=13gXxlRal1Bi43mjodFh79ARGog8JdU1D&v=8c4da7d, the Alaska Flag Starter File.}}
-@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=ve2gTEY06p, the Alaska Flag Starter File.}}
+- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to define shapes before building the image.
 
-- For practice scaling imported graphics, open @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1q6WBLu01OwhiNaGdb6rIellQEca6XzCr&v=8c4da7d, the Flag of Lebanon Starter File.}}
-@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=x0nJrP1UYp, the Flag of Lebanon Starter File.}}
+- @opt-starter-file{flags-lebanon} - For practice scaling imported graphics.
 
-- For a fun geometry pizzle, open @starter-file{flags-turkey}
+- @opt-starter-file{flags-mx} - Similar to the Puerto Rico Flag Starter File, but this one involves an imported image.
 
-- If you’ve already studied Pythagorean Theorem and are ready to apply it, open @ifproglang{pyret}{@opt-online-exercise{https://code.pyret.org/editor#share=1HH39t2rTH2DIoClabJ17MSqkYS9uUChY&v=8c4da7d, the Flag of Trinidad and Tobago Starter File.}}
-@ifproglang{wescheme}{@opt-online-exercise{https://www.wescheme.org/view?publicId=SQRHKcqQvW, the Flag of Trinidad and Tobago Starter File.}}
+- @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.
+
+- @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.

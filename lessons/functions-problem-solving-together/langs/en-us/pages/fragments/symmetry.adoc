@@ -1,0 +1,16 @@
+@design-recipe-exercise{"symmetry"
+"Nassim loves all things symmetrical. He figured out that if you flip an image horizontally and then place it beside the original image, you can turn any image into a symmetrical image. Help him to be more efficient by writing a new function @funname that will take in any image and use it to make a new symmetrical image."
+#:headless? #t
+#:domain-list '(Image)
+#:range "Image"
+#:purpose "Consumes an image and returns a new image that places a version of the original that has been flipped horizontally beside the original."
+#:num-examples 2
+#:example-list '((image-a (beside(flip-horizontal image-a) image-a))
+             (image-b (beside(flip-horizontal image-b) image-b)))
+#:show-examples '((#f #f #f) (#f #f #f))
+#:param-list '(image)
+#:show-params? #f
+#:body '(beside(flip-horizontal image) image)
+#:show-body? #f
+#:grid-lines? #t
+}

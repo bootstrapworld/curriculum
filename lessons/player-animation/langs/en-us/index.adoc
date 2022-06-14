@@ -2,10 +2,12 @@
 
 @description{Students apply their knowledge of piecewise functions to write a function that will move the player in their game in different directions and at different speeds depending on which key is pressed.}
 
+@lesson-prereqs{piecewise-functions-conditionals}
+
+@keywords{}
 
 [@lesson-intro-table]
 |===
-@lesson-prereqs{piecewise-functions}
 | Lesson Goals
 | Students will be able to:
 
@@ -18,19 +20,8 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1oeHRGPb80w19eGZQ8YUSLJ0osgvNE7usFi5W-Buo0mE/, Lesson Slides}
-}
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/12_kmdPHYJx2muPSLLzBSjkGrfrrnYKHgkQKdXwZyx1w/, Lesson Slides}
-}
 
 @material-links
-
-| Preparation
-|
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
 
 | Key Points for the Facilitator
 |
@@ -38,12 +29,7 @@
 * The update-player function is one of the main places where students can set their game apart and make it theirs.  Encourage exploration and experimentation!
 * Adding comments to code - if you have to ask a student "What are you trying to do there?", then they probably need more comments!
 
-@lang-prereq
-
 |===
-
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit7/index.html, prior unit-based version}
 
 == Defining Piecewise Functions @duration{30 minutes}
 
@@ -53,7 +39,7 @@ Students _define_ a piecewise function. This is a challenging task, which is mot
 === Launch
 Students should have their computer, workbook, contracts page, and pencil and be logged in to
 @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO) } }
 and have their workbooks with a pen or pencil.
 
 You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code or workbook, and refresh your memory on how they work.
@@ -79,15 +65,21 @@ MLR 6 - Three Reads: Have students read through the problem statement three time
 
 * *What is the contract for `update-player`?*
 +
+@ifproglang{wescheme}{
 _The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number._
 * *What does each part of the domain and range represent?*
 +
-_Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`_
+_Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``_}
+@ifproglang{pyret}{
+_The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number._
+* *What does each part of the domain and range represent?*
++
+_Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``_}
 * *How does the y-coordinate of `PLAYER` change when the user presses the "up" key?*
 +
 _It should increase, the program should add something to it_
 
-@centered-image{images/player-move.png, Player Movement, 400, align="center"}
+@centered-image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" , 400, align="center"}
 
 Students complete @printable-exercise{pages/update-player.adoc} with a partner, then type their code into their *Game Project file* and test.
 

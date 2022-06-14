@@ -10,7 +10,6 @@
   print-course-banner
   print-other-resources-intro
   print-teach-remotely
-  print-preparation
   print-ordering-workbooks
   print-link-to-glossary
   print-link-to-standards
@@ -55,25 +54,16 @@
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
 
-(define (print-preparation workbook-link o)
-  (display
-    (string-append
-      "* Students should have "
-      workbook-link
-      " and something to write with\n"
-      "* Computer for each student (or pair), with access to the internet\n"
-      ) o))
-
 (define (print-course-logo course make-image o)
   ; (printf "doing print-course-logo ~s\n" course)
   (let* ([c (assoc course *course-names*)]
-         [course-name (if c (cadr c) "Bootstrap")])
+         [course-name (if c (second c) "Bootstrap")])
     (display
       (string-append
         "= "
         course-name "\n\n"
         "[.logo]\n"
-        (make-image "images/Logo.png" (if c (cadr c) "Bootstrap") '())
+        (make-image "images/Logo.png" (if c (second c) "Bootstrap") '())
         "\n\n") o)))
 
 (define (print-course-banner course o)
@@ -84,7 +74,7 @@
           "\n\n"
           "[.course-banner]\n"
           "--\n"
-          (cadr c)
+          (second c)
           "\n"
           "--"
           "\n\n") o))))
@@ -98,7 +88,7 @@
         "While we give our workbooks away as a PDF, we understand that printing them yourself can be expensive!\n"
         "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
         "link:"
-        (if c (cadr c) "missing-link")
+        (if c (second c) "missing-link")
         "[Click here to order].\n"
         "\n") o)))
 

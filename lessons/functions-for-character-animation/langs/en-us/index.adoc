@@ -2,9 +2,12 @@
 
 @description{Students define functions that control the movement of the target and danger in their games.}
 
+@lesson-prereqs{functions-examples-definitions}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{restating-the-problem}
 
 | Lesson Goals
 | Students will be able to:
@@ -20,30 +23,15 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1FEPz2OezR2Dp2QYp9CPP0Pq7BlcODfUHaVnYDIAyGls/, Lesson Slides}
-}
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1P5P4M9MJ51XaIu9Y5tY4jmdKmsfOmaX_ZXspuKboMZQ/, Lesson Slides}
-}
 @material-links
 
-| Preparation
-|
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
 
 | Key Points for the Facilitator
 |
 * Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
-* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`. `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we press the Run button!
-
-@lang-prereq
+* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`. `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we click the "Run" button!
 
 |===
-
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit5/index.html, prior unit-based version}
 
 == Animation @duration{45 minutes}
 
@@ -98,13 +86,14 @@ _The computer could handle automatically moving TARGET and DANGER, then we could
 
 === Investigate
 [.lesson-instruction]
-- Have students examine the `update-danger` function in their Game Starter File, identify the contract, and interpret what the function is currently doing.
-- Guide students as they complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}, and transfer the code to their Game Starter File.
+- In your saved copy of the @starter-file{game}, examine the `update-danger` function
+- Identify the contract, and interpret what the function is currently doing
+- Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
 
-When students press the Run button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
+When students click the "Run" button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
 
 [.lesson-instruction]
-Have students complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}, with their partner and transfer the code to their Game Starter File.  Press Run to see `DANGER` and `TARGET` move across the screen independently!
+Have students complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}, with their partner and transfer the code to their Game Starter File.  Click "Run" to see `DANGER` and `TARGET` move across the screen independently!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -112,6 +101,12 @@ Have students complete the second word problem on @printable-exercise{pages/char
 @span{.title}{Extension Activities}
 
 Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want!  They should be sure to modify their purpose statements and examples if they change their functions.
-
-Want 2-D movement, and some programming exposure to data structures? Have students complete @opt-printable-exercise{pages/2d-character-movement.adoc} to learn how to modify these functions to allow movement in the x __and__ y directions!
 |===
+
+
+=== Synthesize
+Connecting the code to the underlying math is important - especially if you want to customize your game!
+
+- What part of the function controls the character's _speed?_
+- What part of the function controls the character's _direction?_
+- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the Domain? What about the Range?

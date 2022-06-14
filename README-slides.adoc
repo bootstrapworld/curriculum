@@ -1,0 +1,54 @@
+= Building slides
+
+== Authentication
+
+1. Create a directory `.md2googleslides` in your home directory
+
+----
+  cd ~/
+  mkdir .md2googleslides
+----
+
+2. Talk to Dorai! Ensure that he has added your preferred email
+address is to the Google API settings, and then have him send you
+the `client_id.json` file through a secure channel. Put this file
+inside the `~/.md2googleslides` folder.
+
+
+3. In your terminal window, _manually_ run md2gslides on a simple, dummy file.
+
+----
+  node node_modules/md2googleslides/bin/md2gslides lib/dummy-slides.md -n -t TITLE --use-fileio
+----
+
+This will generate some terminal output. The *first line* of the output looks something like
+
+`Authorize this app by visiting this url:
+https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=...`
+
+2. Copy the _entire URL_ (it's quite long!) into a new browser window. This
+will ask you to grant permission for `md2gslides` to construct google
+slides for you, which requires two different permissions. Check both boxes
+and continue. Eventually you will reach a web page that contains a code.
+
+3. Copy that code, and paste it back into your terminal. This closes the loop
+between md2gslides and Google, authenticating your computer. You're ready to rock!
+
+== Subsequent uses
+
+The script `build-slides` should be called after building a pathway (i.e.,
+with a `distribution` directory populated with the built pathways
+of your choice). This will build all the slides.md files in the
+built lessons.
+
+(The standard location for slides.md is in the lesson directory,
+alongside its lesson plan adoc. It's ok if a lesson doesn't have
+a slides.md.)
+
+If a slides.md is being pushed to Google Slides for the first
+time, a small file containing its Google presentation id is
+created in your view of the repo (not just the `distribution`).
+You will be encouraged to add it to your repo and push it so this
+presentation id is used in perpetuity.  (If someone else has
+already done it, you won't need to do it. You'll will just reuse
+this presentation id.)

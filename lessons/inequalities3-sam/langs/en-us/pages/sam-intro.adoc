@@ -7,59 +7,59 @@
 ++++
 
 @ifproglang{wescheme}{
-Open the @link{https://www.wescheme.org/view?publicId=0elP8WrmfM, “Sam the Butterfly”} starter file and press “Run”. __(Hi, Sam!)__
+Open the @link{https://www.wescheme.org/view?publicId=0elP8WrmfM, “Sam the Butterfly”} starter file and click “Run”. __(Hi, Sam!)__
 }
 
 @ifproglang{pyret}{
-Open the @link{https://code.pyret.org/editor#share=1YSPPa4BLhOG7_qhWdqQ-cG1u3yUUi-zZ, “Sam the Butterfly”} starter file and press “Run”. __(Hi, Sam!)__
+Open the @link{https://code.pyret.org/editor#share=1YSPPa4BLhOG7_qhWdqQ-cG1u3yUUi-zZ, “Sam the Butterfly”} starter file and click “Run”. __(Hi, Sam!)__
 }
 Move Sam around the screen using the arrow keys.
 
 @vspace{2ex}
 
-@n What do you notice about the program?
+@n What do you Notice about the program?
 
-@vspace{6ex}
+@fitb{}{}
 
-@n What do you wonder?
+@fitb{}{}
 
-@vspace{6ex}
+@n What do you Wonder?
+
+@fitb{}{}
+
+@fitb{}{}
 
 @n What do you see when Sam is at (0,0)?  Why is that?
-@ifsoln{_Sam is at the center of the screen, because the origin is at the middle_}
-@vspace{6ex}
+
+@fitb{}{@ifsoln{_Sam is at the center of the screen, because the origin is at the middle_}}
 
 @n What changes as the butterfly moves left and right?
-@ifsoln{__Sam's x-coordinate__}
 
-@vspace{4ex}
+@fitb{}{@ifsoln{__Sam's x-coordinate__}}
 
-Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight.
+Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight. *How far to the left and right can Sam go and still remain visible?*
 
-@vspace{2ex}
+@fitb{}{@ifsoln{Sam can go to the left until their x-coordinate is less than -40, and to the right until x > 680}}
 
-*How far to the left and right can Sam go and still remain visible?*
-@ifsoln{Sam can go to the left until their x-coordinate is less than -40, and to the right until x > 680}
-
-@vspace{2ex}
+@fitb{}{}
 
 Use the new inequality functions to answer the following questions _with code_:
 
 @vspace{2ex}
 
 @n Sam hasn't gone off the left edge of the screen as long as…
-@span{.right}{@fitb{30ex}{@showsoln{(sexp->code '(> x -50)) } } }
+@fitb{}{@showsoln{(code '(> x -50)) } }
 
 @vspace{2ex}
 
 @n Sam hasn't gone off the right edge of the screen as long as…
-@span{.right}{@fitb{30ex}{@showsoln{(sexp->code '(< x 690)) } } }
+@fitb{}{@showsoln{(code '(< x 690)) } }
 
 @vspace{2ex}
 
 @n Use the space below to draw Circles of Evaluation for these two expressions:
 
-@span{.left}{ @showsoln{(sexp->coe '(> x -50)) } }
+@left{ @showsoln{(coe '(> x -50)) } }
 
-@span{.right}{@showsoln{(sexp->coe '(< x 690)) } }
+@right{@showsoln{(coe '(< x 690)) } }
 

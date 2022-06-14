@@ -2,9 +2,12 @@
 
 @description{Students choose, import, scale and orient images for their game, practicing reading comments to make sense of and begin to edit a large body of code.}
 
+@lesson-prereqs{defining-values}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{defining-values}
 
 | Lesson Goals
 | Students will be able to:
@@ -20,21 +23,12 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1V6FGuMjDPcwp767AY0arxQ99kwnUCHo8Ifnzw5n6brQ/, Lesson Slides}
-* @link{pages/LinkingImagesGuide.pdf, Linking Images Guide - PDF}
-}
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/19wYdkpWnoMLAQW75pGDef6NzvBNkwMzO_kkdJBQdvpQ/, Lesson slides}
-* @link{pages/LinkingImagesGuide.pdf, Linking Images Guide - PDF}
-}
 
 @material-links
 
 | Preparation
 |
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
+Students should have their completed “Game Design” work.
 
 | Key Points for the Facilitator
 |
@@ -44,12 +38,8 @@
 * There are two ways of importing images: linking directly to the image on the web or downloading the image to Google Drive and then using the "Insert" button.  See the "Linking Images Guide" below for more information on linking directly.
 * Encourage students to focus on finding and scaling each image as needed before moving on to the next one.
 
-@lang-prereq
 
 |===
-
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit3/index.html, prior unit-based version}.
 
 == The Game Starter File @duration{15 minutes}
 
@@ -57,10 +47,6 @@ Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/
 This activity is primarily about _review and reading comprehension_, in which students open a large and unfamiliar file and must make sense of it using what they've seen before.
 
 === Launch
-Students should have their workbook, pencil, and be logged into
-@ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
-and have their completed “Game Design” worksheet.
 
 By now you've learned about defining values, composing functions, and reading contracts. Taken together, that's a lot of code you're now able to understand! It's time to flex your reading skills, and look at the file you'll be working with to build your video game.
 
@@ -68,14 +54,11 @@ By now you've learned about defining values, composing functions, and reading co
 
 === Investigate
 [,lesson-instruction]
-With their partner, students should load the
-@ifproglang{wescheme}{ @online-exercise{https://www.wescheme.org/openEditor?publicId=ysj93ZPFsu&, Blank Game Starter File }.
-}
-@ifproglang{pyret}{ @online-exercise{https://code.pyret.org/editor#share=1sdxxteW0ZpGXjdZQA-rBAqV2OEjLTfwF, Blank Game Starter File }.
-}
+With their partner, students should load the @starter-file{game}.
 
 [.notice-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Notice and Wonder}
 
@@ -97,16 +80,12 @@ _An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
 - *Did anyone try pressing "Run"?  What happens when you press "Run"?*
 _Allow students to discuss what they see and what connections they see with the code_
 
-@ifproglang{wescheme}{
 - *What do you think `image-url` does?*
-}
-@ifproglang{pyret}{
-* *What do you think `image-url` does?*
 _Answers vary: It consumes a @vocab{String}, which is a URL (an image location on the Internet) and produces the @vocab{Image} inside our program_
-}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{What is SCREENSHOT?}
 
@@ -121,12 +100,16 @@ This activity is all about finding the right images for students' games. Since t
 === Launch
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Copyright and Fair Use}
 
-@span{.right}{ @image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
+@right{ @image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
 https://www.resourcesforlife.com/docs/item6247",300,align="center"} }
 The students will be using images from the Internet for their game, and while this falls entirely under the "Educational Use" umbrella of Fair Use Guidelines, it is still important to make sure students of all ages understand the purpose of copyright law and the differences between educational and commercial purposes.
+
+*When adding an image to their game, students _must_ include a comment which gives attribution to the source of the image.*
+
 @span{.clear}
 |===
 
@@ -149,10 +132,7 @@ Once an image has been selected, click it to expand and save the image to Google
 Once the image is saved to Google Drive, it can be brought into the program by using the
 @ifproglang{wescheme}{ "Images" }
 @ifproglang{pyret}{ "Insert" }
-button.  This will automatically bring in the image using the
-@ifproglang{wescheme}{ `bitmap-url` }
-@ifproglang{pyret}{ `image-url` }
-function, and students can run the code to see the image.
+button.  This will automatically bring in the image using the `image-url` function, and students can run the code to see the image.
 
 === Investigate
 What happens if the image we find needs to be made bigger or smaller? What if it needs to be rotated, or flipped?
@@ -161,6 +141,7 @@ Students can define the image as a value and make changes to it with the image m
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Strategies for English Language Learners}
 
@@ -184,3 +165,8 @@ Students should:
 - Make sure the final version of each image is defined as either `BACKGROUND`, `TARGET`, `DANGER`, or `PLAYER`
 
 When finished, students should be able to type `SCREENSHOT` in the interactions window and see all four of their images appropriately sized and oriented.
+
+=== Synthesize
+
+- What functions were most useful in helping you customize your images to make your game look and feel how you want it?
+- How did you make use of function composition in customizing your images?

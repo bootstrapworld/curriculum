@@ -1,51 +1,54 @@
-= The Design Recipe
+= Defining Table Functions
 
-Functions have multiple representations (e.g. - Contracts, Examples, and Definition), and each of these representations shows us a particular part of how the function should behave. By using these representations in a particular order - called the @vocab{Design Recipe} - we can build lots of functions, check our work, and document our thinking!
+The steps of the Design Recipe don't change just because we're working with Rows, but we can make some adjustments when using Row-consuming functions to filter tables and build columns! Let's try a concrete example:
 
-== Contract and Purpose Statement
-The first step in the Design Recipe is to write the Contract. This means we have to be able to answer three questions:
+_Write a function `is-lizard`, which tells us whether an animal is a lizard._
 
-- What is the *Name* of the function we are defining?
-- What is the *Domain* of that function? (When dealing with Table Functions, the Domain is always `Row`)
-- What is the *Range* of the function? (What is the type of the output?)
+**Contract and Purpose**
 
-The Purpose Statement is a way of adding detail to the Contract, using plain human language. A good Purpose Statement should always explain:
+- We still want to pick good names. Are we writing a function to check if an animal is a lizard? Call it `is-lizard`!
+- The Domain is a lot easier -- it's _always_ a `Row`!
+- The Range is easier, too. If we're writing a function to filter a Table, we know the Range _has to be a Boolean_. (What would it be if we were building a column of Numbers? Images? Strings?)
 
-- What the input _represents_. (Is it Animals? Schools? States?)
-- What the output _represents_. (Pounds? True or false?)
-- All the information necessary to go from input to output.
+**Examples**
 
-It's important to start with this representation, because it's the least detailed. If we can't answer _these_ questions, we shouldn't start writing code!
+The goal of the Examples step is to _find the pattern_ that represents what the function does. When working with Rows, sometimes we have to start by just focusing on what the answer should be.
 
-== Examples
-The second step is work through some concrete examples, making sure that we know exactly what the function will do.
-
-The goal of the Examples step is to _find the pattern_ that represents what the function does. Sometimes we have to start by just focusing on what the answer should be. Suppose `animalA` is a lizard animal, and `animalB` isn't. We can imagine the answers for an `is-lizard` to be...
+Suppose `animalC` is a lizard, and `animalD` is a cat. We can imagine the answers for an `is-lizard` to be...
 
 ```
 examples:
-	is-lizard(animalA) is true
-	is-lizard(animalB) is false
+	is-lizard(animalC) is true
+	is-lizard(animalD) is false
 end
 ```
 
-But what work do we have to do to check if an animal is a lizard? (1) We *look up* the "species" column, and (2) ask if the value is equal to "lizard". We can write both of these steps in code, finishing the examples:
+But how do we know these are `true` and `false`? Well, we KNOW `animalC` is a lizard, and we KNOW `animalD` is a cat. So let's replace those answers with the Boolean expressions that compare their species:
 
 ```
 examples:
-	is-lizard(animalA) is animalA["species"] == "lizard"
-	is-lizard(animalB) is animalB["species"] == "lizard"
+	is-lizard(animalC) is "lizard" == "lizard"  # will produce true
+	is-lizard(animalD) is "cat" == "lizard"    # will produce false
 end
 ```
 
-(And sometimes we can go straight to showing our work, doing the whole thing in one step!)
+But what work gives us "lizard" and "cat"? Well, we can look in the `species` column!
 
-Once we see the pattern, we can _circle and label what changes_. In this case, only the animal itself changes!
+```
+examples:
+	is-lizard(animalC) is animalC["species"] == "lizard" # will produce true
+	is-lizard(animalD) is animalD["species"] == "lizard" # will produce false
+end
+```
+
+Sometimes we can go straight to this final form, doing the whole thing in one step. But it's nice to know we can break it down into pieces if we have to.
+
+Once we see the pattern, we can _circle and label what changes_. In this case, only the Row representing the animal changes! We might use `r` as label, to represent the Row.
 
 == Definition
-The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input.
+The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input. It's no different when working with Rows.
 
-Once again, our previous step is a huge help: we can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
+Once again, our previous step is a huge help. We can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
 
 ```
 fun is-lizard(r): r["species"] == "lizard" end

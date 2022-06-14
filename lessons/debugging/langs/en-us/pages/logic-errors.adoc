@@ -1,0 +1,50 @@
+== Logic Errors
+
+++++
+<style>
+.recipe_word_problem, .recipe_instructions { display: none; }
+.test { line-height: 1.6rem; text-decoration: underline; }
+</style>
+++++
+
+*Word Problem:* __It's normal to tip 20% on a bill at a restaurant. Write a function that takes in the total on the bill, and returns the new total that adds a 20% tip.__
+
+To solve this word problem, Zahara defined the following function, *which runs without any errors*:
+@span{.center}{
+	@show{(code '(define (check-total bill) (* 0.2 bill)))}
+}
+
+@n Can you see what is wrong with this definition?
+
+@fitb{}{
+	@ifsoln{The function computes the tip, but does not add it to the price of the bill.}
+}
+@fitb{}{}
+
+To explain their thinking, they filled out the following Design Recipe:
+
+[cols="1a"]
+|===
+| @include{fragments/check-total.adoc}
+|===
+
+@n Read each step in the recipe carefully. In which step did their thinking first go wrong? (circle one)
+
+[cols="^1,^1,^1", grid="none", frame="none", stripes="none"]
+|===
+| Contract {amp} Purpose
+| @ifnotsoln{Examples {amp} Labels} @ifsoln{*_Examples {amp} Labels_*}
+| Definition
+|===
+
+@vspace{1ex}
+
+@n What could they have done to find or avoid the mistake in the first place?
+@fitb{}{
+	@ifsoln{They could have checked to see if their examples really matched the purpose statement,}
+}
+@fitb{}{@ifsoln{Or used a simpler example to check their calculations}}
+
+@fitb{}{}
+
+@fitb{}{}

@@ -1,0 +1,102 @@
+= Introduction to Transformers: Sort
+@description{Students learn two different ways to sort - by modifying the table, and by using a _Transformer_ to build and modify a copy of the table.}
+
+@add-to-lang{.order-by, .filter, .build-column}
+
+[@lesson-intro-table]
+|===
+@lesson-prereqs{functions-dr}
+| Lesson Goals
+| Students will be able to...
+
+* write a contract, purpose statement, and expression
+* use the `Sort` Transformer order the Animals Dataset by a number of criteria
+
+| Student-facing Lesson Goals
+|
+
+* Let’s learn how transform one table into another.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+|===
+== Sorting by Changing a Table @duration{10 minutes}
+
+=== Overview
+Students _change a table,_ sorting it by a particular column.
+
+=== Launch
+
+Open the @starter-file{animals} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
+
+
+=== Investigate
+
+Student work in groups or pairs. They will sort various columns on the table by clicking the attribute name and then selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.
+
+[.lesson-instruction]
+- Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
+- Sort the animals by age, from youngest to oldest.
+- Sort the animals from heaviest to lightest.
+- Sort the animals table by how long it took for each animal to be adopted, in ascending order.
+
+Now, direct students to go to the hamburger menu in the upper left corner and select "Save" from the drop-down menu. Students will be prompted to login to Google and enter their login credentials, linking CODAP with their Google Drive. After saving the sorted table, tell students to close CODAP.
+
+You might even pretend that the online portion of class is over; you're about to do a bit of performing for students in order to illustrate a point.
+
+Now: dramatically tell students that you forgot something! You REALLY need to know which animal was the third animal on the original table. Direct students to reopen the saved  file (they can access it by selecting the hamburger icon again). Tell them they must _undo_ any sorting and then consult the original list.
+
+Students will discover that they in fact _cannot_ undo their actions, thereby uncovering one of the primary limitations of this type of table transformation.
+
+=== Synthesize
+
+. Does sorting `animals-table` produce a _new_ table, or change the existing one? How do you know?
+
+. Can you think of another scenario (like the one you manufactured, above) when the inability to revert to the original table might cause problems?
+
+== Sorting with Transformers! @duration{20 minutes}
+
+=== Overview
+Students use the `Sort` Transformer to build and modify a _copy_ of the original table.
+
+=== Launch
+The Transformers plugin enables easy low-stakes "what if?" exploration. When students apply Trnasformers, they create copies of the original dataset. The original dataset is always preserved - meaning there is no need for students to undo their actions, or to re-open a saved dataset to consider a different configuration.
+@center{@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers can be found", 350}
+
+
+[.lesson-instruction]
+--
+- Login to the Animal Starters File in CODAP.
+- Access the Transformers plugin (see image above).
+- Explore the different Transformers available, especially those categorized under “Construction.”
+- What do you notice? What do you wonder?
+--
+
+We are going to create a copy of the Animals dataset in which the animals are organized alphabetically by name. To do this, we will use the `Sort` Transformer. Once you've opened the `Sort` Transformer, play with it and see if you can figure out how it works. *NEED IMAGE OF FINALIZED TRANSFORMER UI HERE*
+
+[.lesson-instruction]
+--
+- What do you notice? What do you wonder?
+- Why might it be useful to name the Transformer?
+--
+
+=== Investigate
+
+In order to apply this Transformer, we’ll need to provide it with several important pieces of information: a name, a dataset to sort, a sort method, an attribute to sort, and a direction.
+
+Initially, students might question the value of using a Transformer to sort. Using the Transformer will quite likely feel more laborious than using the sort functionality embedded in CODAP. Encourage students to experiment with all of the functionality that the Transformers offer; invite them to be curious and playful as they work, to consider the possibilities afforded by Transformers.
+
+[.lesson-instruction]
+--
+- Complete the @printable-exercise{pages/codap-sort-transformer.adoc} worksheet to investigate how the `Sort` Transformer works.
+--
+
+Note that new and modified tables created by Transformers are automatically saved. Each new table is titled first with the Transformer name, then the name of the dataset (in parentheses), followed by a number in curly braces at the end to indicate how many times a Transformer has been applied. Students may rename saved tables, if they’d like.
+
+=== Synthesize
+- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
+- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
+- When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?

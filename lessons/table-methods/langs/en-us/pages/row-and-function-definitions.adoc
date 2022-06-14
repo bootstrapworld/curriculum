@@ -3,39 +3,64 @@
 ++++
 <style>
 #content p { margin: 0; }
+.paragraph { min-height: 0.33in; }
+th { text-align: center !important; }
+td .editbox { font-size: 0.75rem; }
+td { padding: 0.5rem 0 !important; }
 </style>
 ++++
 
-Make sure you've opened the @link{https://code.pyret.org/editor#share=1JPuXrbW20rXvuHl0logkDNTy62XXc7qv, Table Methods Starter File} on your computer.
+Make sure you've opened the @starter-file{table-methods} on your computer.
 
-[cols="^.^1,.^30,.>15"]
+
+@n What name is being defined on line 8?  @fitb{}{@ifsoln{_animals-table_}}
+
+@n How many columns are listed?           @fitb{}{@ifsoln{_8_}}
+
+@n What name is being defined on line 15? @fitb{}{@ifsoln{_cat-row_}}
+
+@n Is `cat-row` a Number, String, Image or Row?   @fitb{}{@ifsoln{_Row_}}
+
+@n Type `cat-row` into the Interactions Area. What do you get? @fitb{}{@ifsoln{_the row for "Sasha"_}}
+
+@n A Contract for a function is written on line 32. What is its name? @fitb{}{@ifsoln{_is-dog_}}
+
+@n What is its Domain?  @fitb{}{@ifsoln{_Row_}}
+
+@n What is its Range? @fitb{}{@ifsoln{_Boolean_}}
+
+@n All 3 of the examples on lines 38-40 do the same thing, at different levels of abstraction.  Think about what each example is doing and write a similar example using `dog-row`
+
+[cols='1,1', options="header"]
 |===
-|*@n*| What name is being defined on line 15?         | @ifsoln{_schools-table_}
-|*@n*| How many columns are listed here?              | @ifsoln{_8_}
-|*@n*| What name is being defined on line 22?         | @ifsoln{_cat-row_}
-|*@n*| Is `cat-row` a Number, String, Image or Row?   | @ifsoln{_Row_}
-|*@n*| Type `cat-row` into the Interactions Area. What do you get?
-      | @ifsoln{_the row for "Miaulis"_}
+| Examples with `cat-row`
+| Similar examples with `dog-row`
 
+| `is-dog(cat-row) is false`
+| @ifsoln{`is-dog(dog-row) is true`}
+2+| __What is this example doing?__
+
+| `is-dog(cat-row) is "cat" == "dog"`
+| @ifsoln{`is-dog(dog-row) is "dog" == "dog"`}
+2+| __What is this example doing?__
+
+| `is-dog(cat-row) is cat-row["species"] == "dog"`
+| @ifsoln{`is-dog(dog-row) is dog-row["species"] == "dog"`}
+2+| __What is this example doing?__
 |===
 
-@vspace{1ex}
+@n What other functions are defined here? @fitb{}{@ifsoln{__ `is-old`, `lookup-name`, `lookup-fixed`, etc__}}
 
-*@n* On line 27, define `dog-row`. After clicking "Run", type `dog-row` into the Interactions Area and make sure it's a dog! Do the same for `old-row` and `unfixed-row`.
+@n Evaluate `is-dog(dog-row)`. What do you get? @fitb{}{@ifsoln{`true`}}
 
-@vspace{1ex}
+@n Evaluate `is-dog(cat-row)`. What do you get? @fitb{}{@ifsoln{`false`}}
 
-[cols="^.^1,.^30,.>15"]
-|===
-|*@n*| A Contract for a function is written on line 39. What is its name? | @ifsoln{_is-cat_}
-|*@n*| What is its Domain?                                                            | @ifsoln{_Row_}
-|*@n*| What is its Range?                                                                | @ifsoln{_Boolean_}
-|*@n*| What other functions are defined here?              | @ifsoln{__`is-old`, `lookup-fixed`, `nametag`, etc__}
+@n What does `is-old` do? @fitb{}{@ifsoln{_Looks up the age of the row, and asks if it is greater than 10_}}
 
-|===
+@n What does `lookup-name` do? @fitb{}{@ifsoln{_looks up the value in the `name` column_}}
 
-*@n* Lines 41-42 *define a new function!* What does this function do?
+@n What does `lookup-fixed` do? @fitb{}{@ifsoln{_looks up the value in the `fixed` column_}}
 
-@span{.blankline}{}
+@n What does `label` do? @fitb{}{@ifsoln{_prints the animal's name in red_}}
 
-@span{.blankline}{}
+@n What does `kilos` do? @fitb{}{@ifsoln{_divides the pounds by 2.2_}}

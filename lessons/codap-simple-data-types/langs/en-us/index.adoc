@@ -1,0 +1,175 @@
+= Simple Data Types
+
+@description{Students begin to program, explorings how Numbers, Strings, Booleans and operations on those data types work in this programming language.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+@add-to-lang{ -, +, * , / }
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Identify examples of the following data types: Numbers, Strings, and Booleans
+* Write Numbers, Strings, and Booleans in the Interactions Area
+* Write expressions that produce values of those types
+
+| Student-facing Lesson Goals
+|
+
+* I can tell if a value is a Number, String or a Boolean
+* I can explain the difference between those types
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Key Points For The Facilitator
+|
+* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to @vocab{error messages} with interest to demonstrate to students that the messages are a helpful tool.
+
+
+|===
+
+== Numbers & Strings @duration{20 minutes}
+
+=== Overview
+Students experiment with CODAP. They explore Number and String data types, and investigate how these data types behave in CODAP.
+
+=== Launch
+
+@right{@image{images/driver-navigator.png, "Driver/Navigator", 150, ""}}
+When programming in this class, you'll be working together using the _Driver/Navigator_ model. Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{The Driver/Navigator Model}
+
+This model of pair programming is extremely useful for teasing apart the "thinking" step from the "typing" one. Students - especially those who are new to text-based programming or typing itself - can struggle to put their thoughts into the programming environment. This model allows them to focus on _communicating their ideas_, but letting the Driver focus on the coding. Likewise, the Driver has a chance to focus on syntax and programming. Finally, the requirement that ideas are translated through another person's hands is an excellent scaffold for getting students talking about their thinking and about code.
+
+@link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
+|===
+
+Have students open the @starter-file{animals} in CODAP.
+
+[.lesson-instruction]
+--
+- Invite students to play in CODAP, guided by @printable-exercise{codap-experimentation.adoc}.
+- What did you Notice? What do you Wonder?
+--
+
+Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table.
+
+@image{images/grey-plus-sign.png, "screenshot from CODAP indicating how to add a new column"}
+
+=== Investigate
+
+In their `test` column, students will experiment with _Numbers_ and _Strings_. In order to complete the worksheet below, students must click on the `test` cell in the header of their Table, and then choose `Edit formula` from the resulting drop-down menu.
+
+@image{images/edit-formula.png, "screenshot from CODAP indicating how to edit a formula"}
+
+As they complete each directive, they will re-open `Edit Formula` (below), delete their previous entry and then input the next entry.
+
+@centered-image{images/edit-formula-box.png, "screenshot from CODAP showing where to input new formulas", 450}
+
+[.lesson-instruction]
+--
+- Complete @printable-exercise{numbers-n-strings.adoc}.
+- What did you Notice? What do you Wonder?
+- Did you get any error messages? What did you learn from them? _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc._
+--
+
+=== Synthesize
+CODAP knows about many kinds of Numbers (like Integers, Reals, etc), and they behave pretty much the way they do in math. Discuss what students have learned:
+
+- Numbers and Strings evaluate to themselves.
+- CODAP converts fractions into decimals automatically.
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together two strings, or a number and a string.
+- CODAP knows the order of operations.
+- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
+
+Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
+
+== Booleans @duration{20 minutes}
+
+=== Overview
+This lesson introduces students to Booleans, a unique data type with only two values: "true" and "false", and why they are useful in both the real world and the programming environment.
+
+=== Launch
+
+[.lesson-instruction]
+What's the answer: is 3 greater than 10?
+
+Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
+
+For example, some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.  Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
+
+[.lesson-instruction]
+Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
+
+=== Investigate
+[.lesson-instruction]
+--
+In pairs, students complete @printable-exercise{pages/booleans.adoc}, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
+--
+
+=== Synthesize
+Debrief student answers as a class.
+
+[.lesson-instruction]
+What sets Booleans apart from other data types?
+
+== Expressions @duration{10 minutes}
+
+=== Overview
+Students play with expressions in CODAP, reinforcing concepts from standard Algebra.
+
+=== Launch
+Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about expressions? Students may remember expressions from algebra: @math{x + 4}.
+
+[.lesson-instruction]
+--
+On the board:
+
+- If @math{x = 2}, what will the expression @math{x + 4} evaluate to? What if @math{x = 20}?
+- The values we plug in are the expressions @vocab{arguments}. How many arguments does @math{x + 4} expect? _1_
+--
+
+@vocab{Arguments} (or "inputs") are the values passed into an expression. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! CODAP has lots of @link{https://codap.concord.org/help/functions, built-in functions}, which we can use to play with our dataset.
+
+With this information, students are ready to enter a variety of different expressions into their `test` column to learn about different expressions that CODAP understands.
+
+[.lesson-instruction]
+--
+- Complete @printable-exercise{pages/codap-expressions.adoc}.
+--
+
+=== Investigate
+
+[.lesson-instruction]
+--
+- Create a column called `age-next-year` that uses an expression to add one year to each animal’s age.
+- Create a column called `rounded-weight` that uses an expression to give the weight of each animal rounded to the nearest whole number.
+- Create a column called `old` that uses an expression to indicate which animals are  over 5 years old.
+--
+
+
+
+=== Synthesize
+Debrief the activity with the class.
+
+[.lesson-instruction]
+--
+- Think about the new columns you created using expression. How did the input of the expression relate to the output?
+- What kind of error messages did you encounter, if any?
+
+--

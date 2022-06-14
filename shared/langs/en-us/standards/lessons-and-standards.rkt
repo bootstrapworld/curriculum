@@ -7,6 +7,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CORE
 
+    ("computing-needs-all-voices"
+        "OK.6.IC.C.01"
+        )
+
     ("contracts" 
         "8.F.A.1"
         "HSF.IF.A.1"
@@ -22,12 +26,9 @@
         "OK.G.2D.1.8"
         )
 
-    ("defining-functions" 
+    ("functions-make-life-easier" 
         "6.EE.B.6" ; STEMworks
-        "HSF.IF.A" ; STEMworks
-        "HSF.IF.A.2"
         "HSF.IF.B"
-        "HSF.IF.C"
         "7.EE.B.4"
         "8.F.B"
         "1B-AP-15" ; STEMworks
@@ -38,8 +39,6 @@
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
         "HSA.SSE.A.1"
-        "8.SP.A.1" 
-        "HSF.BF.A.1" 
         "6-8.Algorithms and Programming.Variables" 
         "9-12.Algorithms and Programming.Modularity" 
         "6-8.Algorithms and Programming.Modularity"
@@ -49,6 +48,60 @@
         "OK.A1.A.1.1"
         "OK.8.AP.PD.02"
         "OK.L2.AP.PD.03"
+        "OK.MAP.5"
+        "OK.MAP.6"
+        "OK.3.AP.PD.01"
+        )
+
+    ("functions-examples-definitions"
+        "HSF.IF.C"
+        "6.EE.B.6" ; STEMworks
+        )
+
+    ("functions-dr" 
+        "8.F.B"
+        "7.EE.B"
+        "HSF.BF.A.1"
+        "HSF.IF.C"
+        "OK.6.AP.A.01"
+        "OK.6.AP.PD.05"
+        "OK.7.AP.A.01"
+        "OK.7.AP.PD.05"
+        "OK.8.AP.A.01"
+        "OK.8.AP.PD.04"
+        "OK.8.AP.PD.05"
+        "OK.PA.A.1.2"
+        "OK.PA.A.1.3"
+        "OK.PA.A.2"
+        "OK.PA.A.2.1"
+        "OK.L2.AP.PD.05"
+        "OK.MAP.7"
+        "OK.3.AP.PD.01"
+        "OK.3.AP.PD.04"
+        "OK.4.AP.PD.04"
+        "OK.5.AP.PD.04"
+        )
+
+    ("functions-problem-solving-together" 
+        "6.EE.B.6"
+        "7.EE.B"
+        "7.EE.B.4"
+        "8.F.B"
+        "OK.PA.A.1.3"
+        "OK.PA.A.2"
+        "OK.PA.A.2.1"
+        "OK.8.AP.A.01"
+        "OK.6.AP.PD.03"
+        "OK.7.AP.PD.03"
+        "OK.8.AP.PD.03"
+        "OK.L2.AP.PD.05"
+        "2-AP-11"
+        "2-AP-17"
+        "2-AP-19"
+        "3B-AP-14"
+        "3B-AP-21"
+        "OK.3.AP.PD.01"
+        "OK.L2.AP.M.01"
         )
 
     ("defining-values"
@@ -59,12 +112,39 @@
         "IA.6.EE.B.6"
         "OK.7.A.3.3"
         "OK.PA.A.3.1" 
+        "OK.A1.F.3"
         "OK.A1.F.3.1"
         "OK.3.A.V.01" ; identical standard
         "OK.4.AP.V.01"; identical standard
         "OK.5.AP.V.01"; identical standard
         "1B-AP-09"
         "2-AP-11"
+        )
+
+    ("debugging" 
+        "1B-AP-15"
+        "OK.3.AP.PD.03"
+        "OK.4.AP.PD.03"
+        "OK.5.AP.PD.03" 
+        "OK.L1.CS.T.01"
+        )
+
+    ("piecewise-functions-conditionals" 
+        "6.EE.B.6" ; STEMworks
+        "7.EE.B" ; STEMworks
+        "HSA.SSE.A.1.A"
+        "HSA.SSE.A.1.B"
+        "1B-AP-10" ; STEMworks
+        "1B-AP-12" ; STEMworks
+        "2-AP-11"  ; STEMworks
+        "2-AP-17"  ; STEMworks
+        "2-AP-19"  ; STEMworks
+        "3B-AP-14" ; STEMworks
+        "3B-AP-21" ; STEMworks
+        "OK.PA.A.1.1"
+        "OK.L1.AP.M.01"
+        "OK.L1.AP.M.02"
+        "9-12.Algorithms and Programming.Control"
         )
 
     ("simple-data-types"
@@ -103,6 +183,8 @@
         "8.G.B" ; STEMworks <-- recommend we remove the sub-standards and keep this
         "8.G.B.7"
         "8.G.B.8" ; STEMworks
+        "OK.PA.GM.1"
+        "OK.PA.GM.1.1"
         "OK.PA.GM.1.2"
         "OK.G.2D.1.5"
         "OK.G.RT.1.1"
@@ -127,11 +209,14 @@
         "OK.3.AP.M.01"
         "OK.3.AP.PD.03"
         "OK.4.AP.C.01"
+        "OK.4.AP.A.01"
+        "OK.5.AP.A.01"
         "OK.6.AP.M.01"
         "OK.8.AP.A.01"
         "OK.6.A.1.1"
         "OK.7.GM.4.1"
         "OK.7.GM.4.2"
+        "OK.6.AP.PD.01"
         "3A-AP-18"
         ) 
 
@@ -142,13 +227,62 @@
         "HSF.BF.A.1.C"
         "HSF.BF.A" ; STEMworks
         "OK.A1.F.1.3"
+        "OK.A1.F.3"
         "OK.PA.A.3.1"
         "OK.A1.F.3.2"
         "OK.A1.F.3.3"
+        "OK.5.AP.A.01"
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
         "3B-AP-21" ; STEMworks
+        )
+
+    ("function-notation"
+        "HSF.IF.A" ; STEMworks  <- recommend we keep this, and remove sub-standards
+        "HSF.IF.A.2"
+        "HSF.IF.B.5"
+        )
+
+    ("functions-can-be-linear"
+        "HSF.IF.C"
+        "HSF.BF.A.1" 
+        "8.EE.B"
+        "8.F.A.2"
+        "8.F.B.4"
+        "8.EE.B.5"
+        "8.EE.B.6"
+        "HSF.IF.B.5"
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2"
+        "OK.PA.A.2.4"
+        "OK.A1.F.2.1"
+        )
+
+    ("functions-vertical-line-test"
+        "HSF.IF.C"
+        "HSF.BF.A.1" 
+        )
+
+    ("function-definition-linear"
+        "8.EE.B"
+        "8.EE.B.5"
+        "6.EE.B.6" ; STEMworks
+        "HSF.IF.A.1"
+        "HSF.IF.A.2"
+        "HSF.IF.C"
+        "HSF.IF.C.9"
+        "OK.PA.A.2.1"
+        "OK.PA.A.2.2"
+        "OK.PA.A.2.3"
+        "OK.A1.A.4"
+        "OK.A1.A.4.1"
+        "OK.A1.F.3"
+        "OK.A1.F.3.1"
+        "OK.PA.A.2.4"
+        "OK.A1.F.2.1"
         )
 
     ("functions-for-character-animation" 
@@ -164,7 +298,14 @@
         "3B-AP-21" ; STEMworks
         "OK.PA.A.1.2"
         "OK.8.AP.A.01"
+        "OK.PA.A.2"
         "OK.PA.A.2.1"
+        "OK.MAP.3"
+        "OK.3.AP.M.02"
+        "OK.4.AP.M.02"
+        "OK.5.AP.M.02"
+        "OK.6.AP.PD.01"
+        "OK.7.AP.PD.01"
         )
 
     ("inequalities-collision"
@@ -183,6 +324,8 @@
         "OK.6.AP.M.01"
         "OK.7.AP.M.01"
         "OK.8.AP.M.01"
+        "OK.6.AP.PD.01"
+        "OK.7.AP.PD.01"
         )
 
     ("inequalities1-simple"
@@ -205,6 +348,7 @@
         "OK.6.A.3.1"
         "OK.7.A.3.3"
         "OK.A1.A.2.2"
+        "OK.A1.D.2.2"
         "3B-AP-10"
         )
 
@@ -243,6 +387,16 @@
         "OK.8.AP.A.01"
         "OK.7.GM.4.1"
         "OK.7.GM.4.2"
+        "OK.3.AP.M.02"
+        "OK.4.AP.M.02"
+        "OK.5.AP.M.02"
+        "OK.3.AP.PD.02"
+        "OK.4.AP.PD.02"
+        "OK.5.AP.PD.02"
+        "OK.6.AP.PD.01"
+        "OK.7.AP.PD.01"
+        "OK.6.AP.PD.02"
+        "OK.7.AP.PD.02"
         )
 
     ("numbers-inside-videogames" 
@@ -255,24 +409,7 @@
         "OK.7.A.4.2"
         "HSA.SSE.A.2"
         "HSA.SSE.B"
-        )
-
-    ("piecewise-functions" 
-        "6.EE.B.6" ; STEMworks
-        "7.EE.B" ; STEMworks
-        "HSA.SSE.A.1.A"
-        "HSA.SSE.A.1.B"
-        "1B-AP-10"
-        "1B-AP-12" ; STEMworks
-        "2-AP-11"  ; STEMworks
-        "2-AP-17"  ; STEMworks
-        "2-AP-19"  ; STEMworks
-        "3B-AP-14" ; STEMworks
-        "3B-AP-21" ; STEMworks
-        "OK.PA.A.1.1"
-        "OK.A1.F.1.4"
-        "OK.A2.F.1.8"
-        "OK.6.AP.C.01"
+        "OK.MAP.2"
         )
 
     ("player-animation" 
@@ -291,6 +428,11 @@
         "HSA.SSE.A.1.B"
         "OK.PA.A.1.1"
         "OK.L2.AP.PD.07"
+        "OK.3.AP.M.02"
+        "OK.4.AP.M.02"
+        "OK.5.AP.M.02"
+        "OK.6.AP.PD.01"
+        "OK.7.AP.PD.01"
         )      
 
     ("problem-decomposition"
@@ -312,53 +454,21 @@
         "OK.A1.A.3.1"
         "OK.7.CS.T.01"
         "OK.8.CS.T.01"
+        "OK.4.AP.M.01"
+        "OK.5.AP.M.01"
         "OK.6.AP.M.01"
         "OK.7.AP.M.01"
         "OK.8.AP.M.01"
         "OK.L1.AP.M.01"
-        )
-        
-    ("restating-the-problem" 
-        "8.F.B"
-        "HSF.BF.A.1"
-        "OK.6.AP.A.01"
-        "OK.6.AP.PD.05"
-        "OK.7.AP.A.01"
-        "OK.7.AP.PD.05"
-        "OK.8.AP.A.01"
-        "OK.8.AP.PD.04"
-        "OK.8.AP.PD.05"
-        "OK.PA.A.1.2"
-        "OK.PA.A.1.3"
-        "OK.PA.A.2.1"
-        "OK.L2.AP.PD.05"
-        )
-
-    ("solving-word-problems" 
-        "6.EE.B.6"
-        "7.EE.B"
-        "7.EE.B.4"
-        "8.F.B"
-        "HSF.IF.A.2"
-        "OK.PA.A.1.3"
-        "OK.PA.A.2.1"
-        "OK.8.AP.A.01"
-        "OK.6.AP.PD.03"
-        "OK.7.AP.PD.03"
-        "OK.8.AP.PD.03"
-        "OK.L2.AP.PD.05"
-        "2-AP-11"
-        "2-AP-17"
-        "2-AP-19"
-        "3B-AP-14"
-        "3B-AP-21"
         )
 
     ("surface-area-rect-prism"
         "6.EE.B.6" ; STEMworks
         "6.G.A.4"
         "7.G.B.6"
+        "OK.PA.GM.2"
         "OK.PA.GM.2.1"
+        "OK.PA.GM.2.2"
         "OK.7.AP.A.01"
         "OK.7.GM.1.1"
         "OK.G.3D.1.1"
@@ -366,6 +476,35 @@
         "2-AP-11"  ; STEMworks
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
+        )
+
+    ("project-video-game"
+        "2-DA-07"
+        "1B-AP-09"
+        "1B-AP-10"
+        "1B-AP-11"
+        "1B-AP-12"
+        "1B-AP-13"
+        "1B-AP-14"
+        "1B-AP-15"
+        "1B-AP-16"
+        "2-AP-11"
+        "2-AP-13"
+        "2-AP-14"
+        "2-AP-15"
+        "2-AP-16"
+        "2-AP-17"
+        "2-AP-19"
+        "3A-AP-16"
+        "3A-AP-17"
+        "3A-AP-18"
+        "3A-AP-22"
+        "3B-AP-14"
+        "3B-AP-16"
+        "3B-AP-21"
+        "3B-AP-22"
+        "3B-AP-23"
+        "1B-IC-21"
         )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -389,8 +528,10 @@
         "3B-AP-14" 
         "1B-AP-11" ; STEMworks
         "3A-AP-17" ; STEMworks
+        "3A-DA-11" 
         "OK.L1.DA.CVT.01"
         "OK.L1.IC.C.02"
+        "OK.PA.D.1"
         "OK.A1.D.1.1"
         "OK.PA.D.1.1"
         "OK.PA.A.2.2"
@@ -398,6 +539,8 @@
         "OK.7.D.1.2"
         "OK.6.D.1.3"
         "OK.8.IC.SI.01"
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models"
         )
 
     ("correlations" 
@@ -427,9 +570,10 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02" 
         "OK.A1.D.2.1"
+        "OK.3.AP.PD.01"
         )
 
-    ("displaying-categorical-data"  
+    ("bar-and-pie-charts"  
         "2-DA-08" 
         "3A-DA-11" 
         "OK.8.DA.S.01"
@@ -444,15 +588,6 @@
         "HSS.ID.A"
         )
 
-    ("displays-and-lookups" 
-        "3A-DA-11" 
-        "9-12.Data and Analysis.Visualization and Transformation" 
-        "6-8.Data and Analysis.Inference and Models"
-        "OK.8.DA.S.01"
-        "OK.7.D.1.2"
-        "OK.6.D.1.3"
-        )
-
     ("ds-intro" 
         "6.SP.A.1" ; STEMworks
         "SL.9-10.1" 
@@ -460,7 +595,7 @@
         "OK.5.DA.IM.01"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
         "3A-AP-16" 
         "2-IC-23" ; STEMworks
         "3A-IC-24"; STEMworks
@@ -491,6 +626,7 @@
         "OK.7.D.1.2"
         "OK.6.D.1.3"
         "OK.L1.AP.A.01"
+        "OK.3.AP.C.01"
         )
 
     ("histograms" 
@@ -529,46 +665,22 @@
         "OK.6.D.1.3"
         )
 
-    ("if-expressions" 
-        "2-DA-08" 
-        "2-AP-19" 
-        "3B-NI-05" 
-        "1B-AP-10" ; STEMworks
-        "6-8.Data and Analysis.Inference and Models" 
-        "9-12.Algorithms and Programming.Control"
+    ("custom-scatter-plots"
+        "OK.A1.F.1.4"
+        "OK.A2.F.1.8"
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
-        "OK.A2.D.2.1"
-        "OK.6.AP.C.01"
-        "OK.7.AP.C.01"
-        )
-    
-    ("linearity"
-        "6.EE.B.6" ; STEMworks
-        "8.F.A.2"
-        "8.F.B.4"
-        "8.EE.B.5"
-        "HSF.IF.A" ; STEMworks  <- recommend we keep this, and remove sub-standards
-        "HSF.IF.A.2"
-        "HSF.IF.B.5"
-        "HSF.IF.C"
-        "HSF.IF.C.9"
-        "OK.PA.A.2.1"
-        "OK.PA.A.2.2"
-        )
-
-    ("linearity2"
-        "6.EE.B.6" ; STEMworks
-        "HSF.IF.A.1"
-        "HSF.IF.A.2"
-        "HSF.IF.B.5"
-        "HSF.IF.C"
-        "HSF.IF.C.9"
-        "OK.PA.A.2.1"
-        "OK.PA.A.2.2"
-        "OK.PA.A.2.3"
-        "OK.A1.A.4.1"
-        "OK.A1.F.3.1"
+        "HSA.SSE.A.1.B"
+        "1B-AP-10"     ; STEMworks
+        "1B-AP-12"     ; STEMworks
+        "2-AP-11"      ; STEMworks
+        "2-AP-17"      ; STEMworks
+        "2-AP-19"      ; STEMworks
+        "3B-AP-14"     ; STEMworks
+        "3B-NI-05"
+        "2-DA-08"
+        "6-8.Data and Analysis.Inference and Models" 
+        "9-12.Algorithms and Programming.Control"
         )
 
     ("linear-regression" 
@@ -591,6 +703,9 @@
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
         "OK.L2.DA.CVT.01"
+        "OK.MAP.7"
+        "OK.3.DA.IM.01"
+        "OK.4.DA.IM.01"
         )
 
     ("measures-of-center"
@@ -605,7 +720,7 @@
         "OK.PA.D.1.2"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "6.SP.A"   ; STEMworks
         "6.SP.A.2" ; STEMworks
         "6.SP.B.4" ; STEMworks
@@ -626,6 +741,29 @@
         "OK.L2.DA.CVT.02"
         )
 
+    ("standard-deviation" 
+        "6.SP.A"   ; STEMworks
+        "6.SP.A.2" ; STEMworks
+        "6.SP.B.4" ; STEMworks
+        "6.SP.B.5" ; STEMworks
+        "6.SP.B.5.C"; STEMworks
+        "HSS.ID.A.2";STEMworks
+        "HSS.ID.A.1" 
+        "HSS.ID.A.2" 
+        "HSS.ID.A.3"
+        "1B-DA-06" ; STEMworks
+        "3A-DA-11" 
+        "9-12.Data and Analysis.Visualization and Transformation" 
+        "6-8.Data and Analysis.Inference and Models"
+        ;"HS-SEP4-2" granular NGSS standards are not yet enabled
+        "OK.6.D.1.3"
+        "OK.6.DA.CVT.01"
+        "OK.7.DA.CVT.01"
+        "OK.7.D.1.2"
+        "OK.8.DA.S.01"
+        "OK.L2.DA.CVT.02"
+        )
+
     ("method-chaining" 
         "1B-AP-10" ; STEMworks
         "2-AP-17" 
@@ -638,17 +776,27 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
         "OK.A1.D.2.1"
+        "OK.4.AP.A.01"
         "OK.7.AP.M.01"
         "OK.8.AP.M.01"
+        "OK.3.AP.C.01"
+        "OK.4.AP.M.01"
+        "OK.5.AP.M.01"
+        "OK.4.AP.PD.03"
+        "OK.5.AP.PD.03"
         )
 
     ("random-samples" 
         "HSS.IC.B.3" 
+        "7.SP.A"
+        "7.SP.A.1"
         "2-DA-08" 
         "2-DA-09"
         "OK.PA.A.2.2"
         "OK.PA.D.2.2"
         "OK.L1.IC.C.02"
+        "OK.6.AP.PD.04"
+        "OK.7.AP.PD.04"
         )
 
     ("scatter-plots"
@@ -685,7 +833,104 @@
         "9-12.Data and Analysis.Inference and Models"
         "OK.L1.IC.C.02"
         "OK.8.IC.SI.01"
+        "OK.3.DA.IM.01"
         )
+
+    ("data-collection"
+        "OK.A1.D.1.2"
+        "OK.3.DA.CVT.01"
+        "OK.4.DA.CVT.01"
+        "OK.5.DA.CVT.01"
+        )
+
+    ("project-exploration-paper"
+        "1B-DA-06"
+        "1B-DA-07"
+        "2-DA-08"
+        "2-DA-09"
+        "3A-DA-11"
+        "3A-DA-12"
+        "1B-AP-09"
+        "1B-AP-10"
+        "1B-AP-11"
+        "1B-AP-12"
+        "1B-AP-13"
+        "1B-AP-15"
+        "1B-AP-16"
+        "1B-AP-17"
+        "2-AP-11"
+        "2-AP-12"
+        "2-AP-13"
+        "2-AP-14"
+        "2-AP-16"
+        "2-AP-17"
+        "2-AP-19"
+        "3A-AP-13"
+        "3A-AP-14"
+        "3A-AP-16"
+        "3A-AP-17"
+        "3A-AP-18"
+        "3A-AP-22"
+        "3A-AP-23"
+        "3B-AP-14"
+        "3B-AP-16"
+        "3B-AP-21"
+        "3B-AP-22"
+        "3B-AP-23"
+        "1B-IC-18"
+        "2-IC-21"
+        "3A-IC-24"
+        "3A-IC-25"
+        "3A-IC-29"
+        "3A-IC-30"
+        "3B-IC-25"
+        "3B-IC-26"
+        )
+
+    ("project-research-paper"
+        "1B-DA-06"
+        "1B-DA-07"
+        "2-DA-08"
+        "2-DA-09"
+        "3A-DA-11"
+        "3A-DA-12"
+        "1B-AP-09"
+        "1B-AP-10"
+        "1B-AP-11"
+        "1B-AP-12"
+        "1B-AP-13"
+        "1B-AP-15"
+        "1B-AP-16"
+        "1B-AP-17"
+        "2-AP-11"
+        "2-AP-12"
+        "2-AP-13"
+        "2-AP-14"
+        "2-AP-16"
+        "2-AP-17"
+        "2-AP-19"
+        "3A-AP-13"
+        "3A-AP-14"
+        "3A-AP-16"
+        "3A-AP-17"
+        "3A-AP-18"
+        "3A-AP-22"
+        "3A-AP-23"
+        "3B-AP-14"
+        "3B-AP-16"
+        "3B-AP-21"
+        "3B-AP-22"
+        "3B-AP-23"
+        "1B-IC-18"
+        "2-IC-21"
+        "3A-IC-24"
+        "3A-IC-25"
+        "3A-IC-29"
+        "3A-IC-30"
+        "3B-IC-25"
+        "3B-IC-26"
+        "3B-NI-06"
+        )   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REACTIVE

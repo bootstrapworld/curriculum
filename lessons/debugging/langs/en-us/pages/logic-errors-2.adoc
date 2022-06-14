@@ -1,0 +1,50 @@
+== Logic Errors 2
+
+++++
+<style>
+.recipe_word_problem, .recipe_instructions { display: none; }
+.test { line-height: 1.6rem; text-decoration: underline; }
+</style>
+++++
+
+*Word Problem:* __All students are given five (5) pencils at the beginning of the school year. Write a function called calc-pencils that takes in the number of students in the school and calculates the number of pencils needed for that school.__
+
+To solve this word problem, Louis defined the following function, *which runs without any errors*:
+@span{.center}{
+	@show{(code '(define (calc-pencils p) (/ p 5)))}
+}
+
+@n Can you see what is wrong with this definition?
+
+@fitb{}{
+	@ifsoln{The word problem is supposed to take in the number of students and compute the number of pencils, but this does the opposite.}
+}
+@fitb{}{}
+
+To explain their thinking, they filled out the following Design Recipe:
+
+[cols="1a"]
+|===
+| @include{fragments/calc-pencils.adoc}
+|===
+
+@n Read each step in the recipe carefully. In which step did their thinking first go wrong? (circle one)
+
+[cols="^1,^1,^1", grid="none", frame="none", stripes="none"]
+|===
+| @ifnotsoln{Contract {amp} Purpose} @ifsoln{*_Contract {amp} Purpose_*}
+| Examples {amp} Labels
+| Definition
+|===
+
+@vspace{1ex}
+
+@n What could they have done to find or avoid the mistake in the first place?
+@fitb{}{
+	@ifsoln{Their purpose was incomplete, and did not match the word problem.}
+}
+
+@fitb{}{@ifsoln{Thinking through a simple example with 1 student would have helped.}}
+
+@fitb{}{}
+@fitb{}{}

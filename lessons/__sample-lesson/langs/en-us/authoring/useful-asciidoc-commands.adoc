@@ -35,9 +35,9 @@ Some asciidoc files use multiple languages! asciidoc, css, racket, mathjax...
 - __ `italics` if the formatting of the phrase is more complicated __
 - [.underline]#underline#
 
-@show{(sexp->code 'code)}
-@show{(sexp->code '(coded sentences with "punctuation"))}
-We are trying to write all functions using `sexp->code` ...
+@show{(code 'code)}
+@show{(code '(coded sentences with "punctuation"))}
+We are trying to write all functions using `code` ...
 It's special Dorai wizardry that will
 - take whatever we write in racket and automatically translate it into pyret if the document is opened in a pyret version
 - autogenerate a list of functions used in the lesson plan and accompanying pages for a language prerequisites table
@@ -47,7 +47,7 @@ Widespread use of `sexp` in lesson plans is relatively recent, so you will also 
 - `code`
 _``code`` at the beginning of an italicized sentence_
 
-Feel free to update expressions you encounter to use `sexp->code`!
+Feel free to update expressions you encounter to use `code`!
 (And to use the alternate version of formatting code in text when wanting to format code that is outside the bounds of what `sexp` is used for.)
 
 
@@ -82,10 +82,13 @@ Width is measured in "em" (a unit equivalent to the width of the letter "m")
 @fitb{30em}{if you want text to appear on the line, type it here}
 @fitb{30em}{} whether or not you want something on the line you have to include the second set of brackets or it will break the build
 
-@span{.right}{@fitb{60ex}{}}
+@right{@fitb{60ex}{}}
 
 This makes a line that fills the whole width of the page:
-@span{.blankline}{}
+// This blank line is necessary, if you want the fill-in-the-blank to be in on its own line!
+@fitb{}{}
+
+NOTE: to fill the whole page, the directive must have a blank line between it and the text above.
 
 === Horizontal space between words on the same line
 
@@ -174,7 +177,7 @@ The other formatting defines where in the cell the words end up being placed (se
 
 When possible, use Dorai the Wizard's Special Code that automatically converts code you write into the correct programming language for the pathway.
 
-@show{(sexp->code '(text "Math is fun!" 30 "red"))}
+@show{(code '(text "Math is fun!" 30 "red"))}
 
 There are language specific commands (see asciidoc file):
 

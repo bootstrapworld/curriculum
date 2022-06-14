@@ -3,6 +3,11 @@
 # build script for curriculum
 # Type build-pathway --help for help.
 
+if test ! -d ./node_modules -o ! -d ./node_modules/md2googleslides -o ! -d ./node_modules/mathjax; then
+  echo Required node modules missing. Run \`npm update\` before calling $0.
+  exit
+fi
+
 export BOOK=
 export DEBUG=
 export FORCE=
@@ -27,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-03-02 # last modified
+LASTMOD=2022-06-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -69,6 +74,8 @@ while test $# -ne 0; do
     NOPARALLEL=1
   elif test "$arg" = --proglang; then
     PROGLANG=$1; shift
+  elif test "$arg" = --slides -o "$arg" = -s; then
+    SLIDELESSON=$1; shift
   elif test "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -F; then
     SUPERFORCE=1
   elif test "$arg" = --version -o "$arg" = -v; then
@@ -172,6 +179,12 @@ if test "$ARGS" = ""; then
   ARGS=$(ls -d pathways/*)
 fi
 
+if test ! $PROGLANG; then
+  PROGLANG=pyret
+fi
+
+# echo PROGLANG is $PROGLANG
+
 #echo ARGS is $ARGS
 
 echo '== Generated Documentation' > index.adoc
@@ -249,8 +262,9 @@ function overwrite() {
   fi
 }
 
-if test ! -d distribution/$NATLANG/extlib/MathJax*; then
-  cp -pr $TOPDIR/extlib/MathJax* distribution/$NATLANG/extlib
+if test ! -d distribution/$NATLANG/extlib/mathjax; then
+  cp -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
+  rm -fr distribution/$NATLANG/extlib/mathjax/[CLRptu]*
 fi
 
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
@@ -628,9 +642,6 @@ function resolveabbrevs() {
     -e 's/%SIDEBARSECTION%/--><\/div><div class="sidebar"><div id="toggle"><\/div><div class="paragraph"><!--/' \
     $f
   $SED -i \
-    -e 's/%SIDEBARLESSONSCHECKBOX%/<br\/><input class="sidebarinput" id="prereq" type="checkbox" onchange="toggleNonPrereqDisplay()">\<label for="prereq"\>Prerequisites for this lesson ★<label\>/' \
-    $f
-  $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
     $f
   #
@@ -653,7 +664,7 @@ EOF
   if test "$mathjaxneeded"; then
     if test ! -f $fdir/.cached/.mathjax.txt; then
     cat > $fdir/.cached/.mathjax.txt <<EOF
-      <script src="${localDISTROOTDIR}/extlib/MathJax-2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
+      <script src="${localDISTROOTDIR}/extlib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>
       <script>window.status = "not_ready_to_print";</script>
 EOF
     fi
@@ -718,7 +729,7 @@ function addproglang() {
   if test "$proglangneeded"; then
     $SED -i \
       -e 's/^<body class="/\0'$proglangneeded' /' \
-      -e 's/<span class="headless-design-recipe.FOR[a-z]*"><\/span>//' \
+      -e 's/<p><span class="headless-design-recipe.FOR[a-z]*"><\/span><\/p>//' \
       $f
   fi
 }
@@ -726,8 +737,8 @@ function addproglang() {
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
-  #echo doing adjustproglangsubdirs $d $pl
-  #echo PROGLANG is $PROGLANG
+  # echo doing adjustproglangsubdirs $d $pl
+  # echo PROGLANG is $PROGLANG
 
   test -d "$d" || return
 
@@ -771,8 +782,7 @@ function shadowcopydir() {
 
 function doadoc() {
   local f="$1"
-  #echo doing doadoc "$@"
-  #echo PROGLANG Is $PROGLANG
+  # echo doing doadoc "$@" with PROGLANG = $PROGLANG
   local fbase=${f%.a*doc}
   local fasc=.cached/.$fbase.asc
   local fhtml=$fbase.html
@@ -789,6 +799,9 @@ function doadoc() {
       fi
       if grep -q codap proglang.txt; then
         otherproglang="$otherproglang \"codap\""
+      fi
+      if grep -q pyret proglang.txt; then
+        otherproglang="$otherproglang \"pyret\""
       fi
       otherproglang="($otherproglang)"
     fi
@@ -807,10 +820,6 @@ function doadoc() {
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
-    if test $AUTOGEN_NARRATIVE; then
-      echo courses/$TGTPATHWAY/.pathway-lessons.asciidoc >> $ADOC_INPUT
-      echo courses/$TGTPATHWAY/.pathway-lessons.html >> $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
-    fi
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
     if test $AUTOGEN_NARRATIVE; then
@@ -827,8 +836,7 @@ function doadoc() {
 
 function doadocs() {
   local ff="$@"
-  # echo doing doadocs $ff
-  # echo PROGLANG is $PROGLANG
+  # echo doing doadocs $ff with PROGLANG = $PROGLANG
 
   if test $# -eq 0; then
     return
@@ -850,13 +858,13 @@ function doadocs() {
 
   for f in $ff; do
     if test $TGTPATHWAY; then
-      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
       fi
       echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
     else
-      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"lessons/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson \"$LESSON\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo lessons/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
       fi
@@ -869,20 +877,11 @@ function doadocs() {
 }
 
 function processadocs() {
-  # echo doing processadocs $@
-  if test $# -eq 0; then
-    if test "$dir" = pages; then
-      echo No adoc files in $LESSONSUBDIR
-    fi
-    return
-  elif test $# -eq 1 -a ! -f $1; then
-    return
-  fi
+  # echo doing processadocs
 
-  local ff_given="$@"
   local ff=
 
-  for f in $ff_given; do
+  for f in *.adoc; do
     if test ! -f $f; then
       #echo Not a valid adoc file $f in $(pwd)
       continue
@@ -907,7 +906,8 @@ function processadocs() {
     fi
     if test $DOIT; then
       fpdf=$fbase.pdf
-      test -f "$fpdf" && rm -f "$fpdf"
+      # unfortunately following doesn't work if repo supplies both f.adoc and f.pdf
+      # test -f "$fpdf" && rm -f "$fpdf"
       ff="$ff $f"
       rm -f .cached/.$fbase-comment.txt
     fi
@@ -916,21 +916,35 @@ function processadocs() {
   doadocs $ff
 
   if test ! $NOPDF; then
-    for f in $ff_given; do
-      fbase=${f%.adoc}
-      fhtml=$fbase.html
-      fpdf=$fbase.pdf
-      #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
-      if test ! -f "$fpdf"; then
-        if test "$RESOURCEDOCS" = 1 -o \
-          "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
-          "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
-                  #echo doing it!
-                  if test ! $OTHERDIR; then
-                    echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
-                  fi
-        fi
+    local tryhtml=
+    for ext in adoc html; do
+      if test "$ext" = html; then
+        test ! $tryhtml && break
       fi
+      for f in *.$ext; do
+        if test ! -f "$f"; then
+          test "$ext" = adoc && tryhtml=1
+          break
+        fi
+        if test "$ext" = adoc; then
+          fbase=${f%.adoc}
+        else
+          fbase=${f%.html}
+        fi
+        fhtml=$fbase.html
+        fpdf=$fbase.pdf
+        #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
+        if test ! -f "$fpdf"; then
+          if test "$RESOURCEDOCS" = 1 -o \
+            "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
+            "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
+                      #echo doing it!
+                      if test ! $OTHERDIR; then
+                        echo ", { \"input\": \"courses/$TGTPATHWAY/$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+                      fi
+          fi
+        fi
+      done
     done
   fi
 
@@ -997,7 +1011,7 @@ function recursiveadoc() {
     fi
   fi
 
-  processadocs *.adoc
+  processadocs
 
   #test $DEBUG || rm -f *.adoc
 
@@ -1062,13 +1076,12 @@ function checksinglelessonplan() {
 
 function checklessonplan() {
   local L=$1
-  #echo doing checklessonplan $L in $(pwd)
+  # echo doing checklessonplan $L in $(pwd)
   checksinglelessonplan $L
   test -d .cached || mkdir -p .cached
 
-  test -f index.adoc || return
-
-  grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
+  if test -f index.adoc; then
+    grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
@@ -1085,86 +1098,104 @@ function checklessonplan() {
       g=$f
       if test ${f%.adoc} = $f; then
         echo $f >> $exerfA
+      elif test ! -f pages/$f; then
+        echo
+        echo WARNING: Exercise file pages/$f not found
       elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
         # aspect=landscape # ? FIXME
         echo $f landscape >> $exerfA
       else
         echo $f >> $exerfA
       fi
-      if test ! $NOPDF; then
-        gext=${g##*.}
-        #echo gext is $gext
-        if test "$gext" = adoc; then
-          gbase=${g%.adoc}
-          g=$gbase.html
-          gext=html
-          gpdf=$gbase.pdf
-        fi
-        #echo g is $g gext is $gext
-        if test "$gext" = html; then
-          if test ! -f "pages/$gpdf" -o "pages/$g" -nt "pages/$gpdf"; then
-            echo ", { \"input\": \"lessons/$L/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-          fi
-          if test ! -f "solution-pages/$gpdf" -o "solution-pages/$g" -nt "solution-pages/$gpdf"; then
-            echo ", { \"input\": \"lessons/$L/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-          fi
-        fi
-      fi
     done
   fi
-
-  wbpages=pages/workbook-pages.txt
-  if test ! -f $wbpages; then
-    wbpages=/dev/null
-  fi
-  if test ! -f $exerflist; then
-    exerflist=/dev/null
   fi
 
-  for f in pages/*.adoc; do
-    test ! -f "$f" && break
-    fpdf=${f%.adoc}.pdf
-    fhtml=${f%.adoc}.html
-    grep -q "$f" $wbpages $exerflist && continue
-    grep -q "$fpdf" $wbpages $exerflist && continue
-    grep -q "$fhtml" $wbpages $exerflist && continue
+  # wbpages=pages/workbook-pages.txt
+  # if test ! -f $wbpages; then
+  #   wbpages=/dev/null
+  # fi
+  # if test ! -f $exerflist; then
+  #   exerflist=/dev/null
+  # fi
 
-    aspect=portrait
-    if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
-      #aspect=landscape # ? FIXME
-      :
-    fi
-    if test ! $NOPDF; then
-      g=${f#pages/}
-      g=${g%.adoc}
-      if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
-        echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+  if test ! $NOPDF; then
+    local tryhtml=
+    for ext in adoc html; do
+      if test "$ext" = html; then
+        test ! $tryhtml && break
       fi
-      if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
-        echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-      fi
-    fi
-  done
+      for f in pages/*.$ext; do
+        # echo checklessonplan doing $f
+        if test ! -f "$f"; then
+          test "$ext" = adoc && tryhtml=1
+          break
+        fi
+        if test "$ext" = adoc; then
+          g=${f%.adoc}
+        else
+          g=${f%.html}
+        fi
+        fpdf=$g.pdf
+        fhtml=$g.html
+        # grep -q "$f" $wbpages $exerflist && continue
+        # grep -q "$fpdf" $wbpages $exerflist && continue
+        # grep -q "$fhtml" $wbpages $exerflist && continue
+
+        # echo confirmed
+
+        aspect=portrait
+        #fixme what if html
+        if head -5 $f|grep -q '^ *\[\.landscape\] *$'; then
+          aspect=landscape
+        fi
+        g=${g#pages/}
+
+        # if test ! -f "pages/$g.pdf"; then
+        #   echo pages/$g.pdf doesnt exist
+        # fi
+        # if test "pages/$g.html" -nt "pages/$g.pdf"; then
+        #   echo pages/$g.html is nt pages/$g.pdf
+        # fi
+
+        if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
+          echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 1 }" >> $PUPPETEER_INPUT
+        fi
+        if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
+          echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 2 }" >> $PUPPETEER_INPUT
+        fi
+      done
+    done
+  fi
 
 }
 
 function buildworkbookpages() {
   local L=$1
-  #echo doing buildworkbookpages $L in $(pwd)
-  export oldDISTROOTDIR="$DISTROOTDIR"
   local oldPROGLANG="$PROGLANG"
+
+  if test "$PROGLANG" != all; then
+    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
+      return
+    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
+      return
+    fi
+  else
+    if test -f $L/.cached/.wescheme; then
+      export PROGLANG=wescheme
+    elif test -f $L/.cached/.codap; then
+      export PROGLANG=codap
+    else
+      export PROGLANG=pyret
+    fi
+  fi
+
+  # echo doing buildworkbookpages $L in $(pwd)
+
+  export oldDISTROOTDIR="$DISTROOTDIR"
   cd $L
   export LESSON=$L
   export LESSONSUBDIR=$L
-  #
-  repoDir="$TOPDIR/lessons/$LESSONSUBDIR/langs/$NATLANG"
-
-  export PROGLANG=pyret
-  if test -f .cached/.wescheme; then
-    export PROGLANG=wescheme
-  elif test -f .cached/.codap; then
-    export PROGLANG=codap
-  fi
 
   DORECURSIVEADOC=
 
@@ -1225,23 +1256,33 @@ function collapseadjtables() {
 
 function buildlessonplan() {
   local L=$1
+  local oldPROGLANG="$PROGLANG"
+
+  if test "$PROGLANG" != all; then
+    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
+      return
+    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
+      return
+    fi
+  else
+    if test -f $L/.cached/.wescheme; then
+      export PROGLANG=wescheme
+    elif test -f $L/.cached/.codap; then
+      export PROGLANG=codap
+    else
+      export PROGLANG=pyret
+    fi
+  fi
+
   # echo doing buildlessonplan $L in $(pwd)
 
   local oldLESSONSUBDIR=$LESSONSUBDIR
-  local oldPROGLANG="$PROGLANG"
 
   cd $L
   export DISTROOTDIR=../../
   export LESSONSUBDIR=$L
   export LESSON=$L
   export LESSONPLAN=$(basename $LESSONSUBDIR)
-
-  export PROGLANG=pyret
-  if test -f .cached/.wescheme; then
-    export PROGLANG=wescheme
-  elif test -f .cached/.codap; then
-    export PROGLANG=codap
-  fi
 
   if test -f index.adoc; then
     #export PATHWAYROOTDIR="../../"
@@ -1289,6 +1330,7 @@ function buildcommonlessons() {
   # process lesson directories in parallel
   if test -f $RELEVANT_LESSONS_INPUT; then
     for L in $(cat $RELEVANT_LESSONS_INPUT); do
+      # echo doing relevant lesson $L
       export LESSON=$L
       buildworkbookpages $L
       # if test $NOPARALLEL; then
@@ -1322,31 +1364,52 @@ function buildcommonlessons() {
 function proglangversion() {
   local f=$1
 
-  for pl in codap wescheme; do
-    if test $(echo $f|grep "\-${pl}$"); then
-      local g=${f%-*}
-      if test -d $g; then
-        return 0
-      fi
+  if test ! -f $f/index.shtml; then
+    return 1
+
+  elif test $(echo $f|grep "\-wescheme"); then
+    local g=${f%-wescheme}
+    if test -f $g/index.shtml; then
+      return 1
+    else
+      return 0
     fi
-  done
-  return 1
+
+  elif test $(echo $f|grep "\-codap"); then
+    local g=${f%-codap}
+    if test -f $g/index.shtml; then
+      return 1
+    elif test -f $g-wescheme/index.shtml; then
+      return 1
+    else
+      return 0
+    fi
+
+  else
+    return 0
+  fi
 }
 
 # Must be done sequentially, to handle prerequisite calculation
 function builddependencyjson() {
-  # echo doing builddependencyjson
+  # echo doing builddependencyjson "$@"
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
   echo "var graph = {" > $GRAPHFILE
   first=1
   for L in *; do
-    if proglangversion $L; then
+    # echo try proglangversion $L
+    if ! proglangversion $L; then
       continue
     fi
-    #echo L is $L
+    # echo L is $L
     Lbasename=$L
+    if test $(echo $L|grep "\-wescheme"); then
+      Lbasename=${L%-wescheme}
+    elif test $(echo $L|grep "\-codap"); then
+      Lbasename=${L%-codap}
+    fi
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
     #if test "$L" = lib; then continue; fi
@@ -1703,7 +1766,7 @@ function batchhtmltopdf() {
   # use --trace-warnings to debug
 
   start=`date +%s`
-  echo 🖨️PRINTING TO PDF
+  echo 🖨️ CONVERTING HTML PAGES TO PDF FILES
   echo $'-----------------------------------------------------------\n'
   if grep -q input $PUPPETEER_INPUT; then
     node lib/html2pdf.js $PUPPETEER_INPUT
@@ -1754,6 +1817,9 @@ function copylessondir() {
       DOCOPYDIR=
     fi
     #echo checkmd5nochange done
+
+    local lessonDirPl
+
     if test $DOCOPYDIR; then
       #echo do copydir into $(pwd)
       overwrite preparing $lessonDir
@@ -1773,26 +1839,37 @@ function copylessondir() {
       cd ..
       #checklessonplan $lessonDir
       #echo checklessonplan done
+      local lessonDirPl=
       if test -f $lessonDir/proglang.txt; then
         for pl in $(cat $lessonDir/proglang.txt); do
           if test "$pl" != pyret; then
-            mkdir -p $lessonDir-$pl
-            # echo copying $lessonDir to $lessonDir-$pl
-            cp -pr $lessonDir/* $lessonDir-$pl
-            cd $lessonDir-$pl
-            mkdir -p .cached
-            touch .cached/.$pl
-            touch .cached/.redo
-            for subdir in *; do
-              if test -d "$subdir"; then
-                adjustproglangsubdirs "$subdir" "$pl"
-              fi
-            done
-            #checklessonplan $lessonDir-$pl
-            cd ..
+            lessonDirPl=$lessonDir-$pl
+            mkdir -p $lessonDirPl
+            cp -pr $lessonDir/* $lessonDirPl
           fi
         done
       fi
+      if test -f $lessonDir/proglang.txt; then
+        for pl in $(cat $lessonDir/proglang.txt); do
+          # echo doing $lessonDir for $pl
+          if test "$pl" = pyret; then
+            lessonDirPl=$lessonDir
+          else
+            lessonDirPl=$lessonDir-$pl
+          fi
+          cd $lessonDirPl
+          mkdir -p .cached
+          touch .cached/.$pl
+          touch .cached/.redo
+          for subdir in *; do
+            if test -d "$subdir"; then
+              adjustproglangsubdirs "$subdir" "$pl"
+            fi
+          done
+          #checklessonplan $lessonDir-$pl
+          cd ..
+        done
+      else
       cd $lessonDir
       for subdir in *; do
         if test -d "$subdir"; then
@@ -1801,21 +1878,31 @@ function copylessondir() {
       done
       cd ..
     fi
+    fi
 
-    echo $lessonDir >> $RELEVANT_LESSONS_INPUT
-    cd $lessonDir
-    checklessonplan $lessonDir
-    cd ..
     if test -f $repoLessonDir/proglang.txt; then
       for pl in $(cat $repoLessonDir/proglang.txt); do
-        local lessonDirPl=$lessonDir-$pl
+        if test "$pl" = pyret; then
+          lessonDirPl=$lessonDir
+        else
+          lessonDirPl=$lessonDir-$pl
+        fi
         if test -d $lessonDirPl; then
-          echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
-          cd $lessonDirPl
-          checklessonplan $lessonDirPl
-          cd ..
+          if test "$PROGLANG" = "$pl" -o "$PROGLANG" = all; then
+            echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
+            cd $lessonDirPl
+            checklessonplan $lessonDirPl
+            cd ..
+          fi
         fi
       done
+    else
+      if test "$PROGLANG" = pyret -o "$PROGLANG" = all; then
+        echo $lessonDir >> $RELEVANT_LESSONS_INPUT
+        cd $lessonDir
+        checklessonplan $lessonDir
+        cd ..
+      fi
     fi
   fi
   #echo done copylessondir
@@ -1833,7 +1920,7 @@ function collectworkbookpages() {
       # echo workbook-pages.txt found
       test -d .cached || mkdir .cached
       # cd .cached
-      rm -f .cached/.workbook-pages.txt.kp .cached/.workbook-pages-ls.txt.kp
+      rm -f .cached/.workbook-pages.txt.kp .cached/.workbook-pages-ls.txt.kp .cached/.workbook-notes-pages-ls.txt.kp
       #ensure workbook-pages.txt ends in newline, or while isn't happy
       $SED -i -e '$a\' workbook-pages.txt
 
@@ -1844,6 +1931,8 @@ function collectworkbookpages() {
         aspect=portrait
         g=$f
         if echo "$f"|grep -q '^ *;'; then
+          :
+        elif echo "$f"|grep -q '^ *//'; then
           :
         elif echo "$f"|grep -q landscape; then
           echo $f >> .cached/.workbook-pages.txt.kp
@@ -1871,28 +1960,9 @@ function collectworkbookpages() {
             echo $f >> .cached/.workbook-pages-ls.txt.kp
           fi
         fi
-        if test ! $NOPDF; then
-          if test $DOINGLESSON; then
-            gext=${g##*.}
-            if test "$gext" = adoc; then
-              gbase=${g%.adoc}
-              g=$gbase.html
-              gext=html
-            elif test "$gext" = html; then
-              gbase=${g%.html}
-            fi
-            gpdf=$gbase.pdf
-            if test "$gext" = html; then
-              if test ! -f "$gpdf" -o "$g" -nt "$gpdf"; then
-                echo ", { \"input\": \"lessons/$d/pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-              fi
-              if test ! -f "../solution-pages/$gpdf" -o "../solution-pages/$g" -nt "../solution-pages/$gpdf"; then
-                echo ", { \"input\": \"lessons/$d/solution-pages/$g\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
-              fi
-            fi
-          fi
-        fi
       done < workbook-pages.txt
+
+    grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
 
     fi
     cd ..
@@ -1941,7 +2011,7 @@ function copycommonlessons() {
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
-      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *$'|grep -v '^ *;'); do
+      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
         copylessondir $lessonDir
       done
     done
@@ -1983,7 +2053,7 @@ function updatepathwaylist() {
   rm -f lesson-order.txt.nu
   touch lesson-order.txt.nu
   local lessonDir=
-  for lessonDir in $(cat lesson-order.txt|grep -v '^ *$'|grep -v '^ *;'); do
+  for lessonDir in $(cat lesson-order.txt|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
     if test -d ../../lessons/$lessonDir-$proglang; then
       echo $lessonDir-$proglang >> lesson-order.txt.nu
     else
@@ -2041,7 +2111,7 @@ function buildpathway() {
       cd $DESTPATHWAYDIR
       test -d .cached || mkdir -p .cached
       touch .cached/.redopdf
-      if test $PROGLANG != pyret; then
+      if test "$PROGLANG" != pyret; then
         updatepathwaylist $PROGLANG
       fi
       cd $TOPDIR
@@ -2096,8 +2166,9 @@ function buildpathway() {
       echo
       echo WARNING: No lesson-order.txt in pathway $PATHWAY/$NATLANG
     else
-      export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
+      # export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
+        $SED -e 's/;.*//' |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
     fi
@@ -2351,34 +2422,35 @@ function postproc_workbookpage() {
 }
 
 function postproc_lessonplan() {
+  # echo dOing postproc_lessonplan $1
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
-    #echo  fdir= $fdir
+    # echo  fdir= $fdir
     local fbase=${fhtmlcached##*/.}
     fbase=${fbase%.html}.shtml
-    #echo fbase= $fbase
+    # echo fbase= $fbase
     local fshtml=$fdir/$fbase
-    #echo fhtml= $fhtml
-    #echo moving $fhtmlcached to $fshtml
+    # echo fhtml= $fhtml
+    # echo moving $fhtmlcached to $fshtml
     mv $fhtmlcached $fshtml
-    #echo doing insertbodyid
+    # echo doing insertbodyid
     insertbodyid $fshtml
-    #echo doing addanalytics
+    # echo doing addanalytics
     addanalytics $fshtml
-    #echo doing resolveabbrevs
+    # echo doing resolveabbrevs
     bumpcsspathdir $fshtml $localDISTROOTDIR
     resolveabbrevs $fshtml $localDISTROOTDIR
-    #echo cleanuptitle
+    # echo cleanuptitle
     cleanuptitle $fshtml
-    #echo cleanupduration
+    # echo cleanupduration
     cleanupduration $fshtml
-    #echo insertsectionselfie
+    # echo insertsectionselfie
     insertsectionselfie $fshtml
-    #echo lintlesson
+    # echo lintlesson
     lintlesson $fshtml
-    #echo insertgdrivesave
+    # echo insertgdrivesave
     insertgdrivesave $fshtml
   fi
 }
@@ -2545,15 +2617,6 @@ function doconversions() {
 
   doadocpostproc $ADOC_INPUT
 
-  if test ! $NOPDF; then
-    if test ! -f lib/$ABYSS.pdf; then
-      echo '= PAGE NOT FOUND!' > lib/$ABYSS.adoc
-      echo >> lib/$ABYSS.adoc
-      asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css lib/$ABYSS.adoc
-      echo ", { \"input\": \"lib/$ABYSS.html\" }" >> $PUPPETEER_INPUT
-    fi
-
-  fi
 }
 
 function dolinkcheck() {
@@ -2573,8 +2636,32 @@ function dolinkcheck() {
 
 }
 
+function callonpathway() {
+
+  export TGTPATHWAY="$SRCPATHWAY"
+
+  if test "$PROGLANG" = pyret; then
+    if test "$SRCPATHWAY" = algebra; then
+      export TGTPATHWAY=algebra-pyret
+    fi
+  elif test "$PROGLANG" = wescheme; then
+    if test "$SRCPATHWAY" = algebra; then
+      export TGTPATHWAY=algebra-wescheme
+    else
+      return
+    fi
+  elif test "$PROGLANG" = codap; then
+    if test "$SRCPATHWAY" != data-science -a "$SRCPATHWAY" != data-science-codap; then
+      return
+    fi
+  fi
+
+  $SUBROUTINE
+}
+
 function callonARGS() {
-  local subroutine=$1
+
+  export SUBROUTINE=$1
 
   for f in $ARGS; do
     #echo I doing $f
@@ -2584,25 +2671,19 @@ function callonARGS() {
     export TGTPATHWAY="$SRCPATHWAY"
     #echo SRCPATHWAY is $SRCPATHWAY
     #echo TGTPATHWAY is $TGTPATHWAY
-    if test "$PROGLANG" = ""; then
-      if test "$SRCPATHWAY" = algebra; then
-        export PROGLANG=wescheme
-        export TGTPATHWAY=algebra-wescheme
-        $subroutine
-        export PROGLANG=pyret
-        export TGTPATHWAY=algebra-pyret
-        $subroutine
-      else
-        export PROGLANG=pyret
-        $subroutine
-      fi
-      export PROGLANG=
+
+    if test "$PROGLANG" = all; then
+      export PROGLANG=pyret
+      callonpathway
+      export PROGLANG=wescheme
+      callonpathway
+      export PROGLANG=codap
+      callonpathway
+      export PROGLANG=all
     else
-      if test "$SRCPATHWAY" = algebra; then
-        export TGTPATHWAY=algebra-$PROGLANG
-      fi
-      $subroutine
+      callonpathway
     fi
+
   done
 }
 
@@ -2653,21 +2734,29 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
 
 copycommonlessons
 
+# exit
+
 mkdir -p distribution/$NATLANG/.cached
 
 buildcommonlessons
 
+# exit
+
 buildlessonplans
+
+# exit
 
 callonARGS buildpathway
 
 echo ')' >> $ADOCABLES_INPUT
 
+# exit
+
 doconversions
 
 collectprimitives
 
-echo BUILDING PAGELIST JSON FOR LESSONS
+echo BUILDING DEPENDENCY GRAPH
 echo " "
 
 callonARGS buildworkbookjsons
@@ -2685,9 +2774,16 @@ dolinkcheck
 if test ! $NOPDF; then
 
   cd $TOPDIR/distribution/$NATLANG
-
+  echo 📎 COLLATING WORKBOOK PAGES
+  echo $'-----------------------------------------------------------\n'
   callonARGS buildpathwayworkbooks
 
 fi
 
 rmtmpfiles
+
+cd $TOPDIR
+
+if test $SLIDELESSON; then
+  ./build-slide $SLIDELESSON
+fi

@@ -1,0 +1,60 @@
+= Computing Standard Deviation
+
+The histogram below shows the ages of ten cats at the shelter:
+
+@image{images/stdev-cat-age.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8, with 1-year intervals", 100%}
+
+@n Describe the shape of this histogram. @fitb{}{@ifsoln{_slight right skew_}}
+
+@n How many cats are 1 year old? 2 years old? Fill in the table below by reading the histogram. The first column has been done for you.
+
+[.sideways-pyret-table, cols=">1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| age   |1| 	2    | 	   3    |    4     |    5     |    6     | 	  7
+| count |4|@ifsoln{2}|@ifsoln{1}|@ifsoln{0}|@ifsoln{1}|@ifsoln{0}|@ifsoln{2}
+|===
+
+@vspace{1ex}
+
+@n What is the mean age of the cats in this histogram? @fitb{}{@ifsoln{3}}
+
+@n *Draw a star to locate the mean on the x-axis of the histogram above*.
+
+@n For each cat in the histogram above, *draw a horizontal arrow* under the axis from your star to the cat's interval, and *label the arrow with its distance from the mean*. (For example, if the mean is 3 and a cat is in the 1yr interval, your arrow would stretch from 1 to 3, and be labeled with the distance "2")
+
+@n We want to summarize all 10 distances from the mean into a single number.
+
+Which one of these seems closest: 1, 2, 4, or 5? @fitb{}{}
+
+[.lesson-point]
+To compute the standard deviation we square each distance and take the average, then take the square root of the average.
+
+
+@n We've recorded the 10 ages shown in the histogram above in the table below and listed the distance-from-mean for the four 1-year-old cats for you. As you can see, 1 year-olds are 2 years away from the mean, so their squared distance is 4. Complete the table.
+
+
+@ifnotsoln{
+[.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| age of cat  		     | 1 | 1 | 1 | 1 | 2 | 2 | 3 | 5 | 7 | 7
+| distance from mean     | 2 | 2 | 2 | 2 |   |   |   |   |   |
+| squared distance 	     |   |   |   |   |   |   |   |   |   |
+|===
+}
+
+@ifsoln{
+[.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1, ^1"]
+|===
+| age of cat  			| 1 | 1 | 1 | 1 | 2 | 2 | 3 | 5	|  7 |  7
+| distance from mean (3)| 2 | 2 | 2 | 2 | 1 | 1 | 0 | 2 |  4 |  4
+| squared distance 		| 4 | 4 | 4 | 4 | 1 | 1 | 0 | 4 | 16 | 16
+|===
+}
+
+@vspace{1ex}
+
+@n Add all the squared distances. What is their sum? @fitb{}{@ifsoln{54}}
+
+@n What is the average squared distance? @fitb{}{@ifsoln{5.4}}
+
+@n Take the square root to find the *standard deviation*! @fitb{}{@ifsoln{~2.3}}

@@ -199,6 +199,8 @@
         )
 
     ("choosing-your-dataset" 
+        "IM.8.6.9"
+		"IM.Alg1.1.9"
 		"IM.Alg1.3.10"
         )
 
@@ -215,19 +217,14 @@
         "IM.8.5.3"
 		"IM.Alg1.4.10"
 	)
-
-    ("displays-and-lookups" 
-        "IM.8.6.9"
-		"IM.Alg1.1.9"
-	)
-
+	
     ("ds-intro" 
 		"IM.6.8.1"
 		"IM.6.8.2"
 		"IM.Alg1.1.1"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
 		; no solid alignment to IM.Alg1
         )
 
@@ -290,7 +287,7 @@
 		"IM.Alg1.1.11"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "CMP.6.7"
 		"IM.6.8.15"
 		"IM.6.8.16"
@@ -304,7 +301,7 @@
 		"IM.Alg1.4.3"
         )
 
-    ("displaying-categorical-data" 
+    ("bar-and-pie-charts" 
         "IM.8.6.1"
 		"IM.8.6.2"
 		"IM.Alg1.1.2"

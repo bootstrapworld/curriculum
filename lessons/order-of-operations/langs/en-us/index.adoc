@@ -8,9 +8,13 @@
 
 @description{Students learn to model arithmetic expressions with a visual tool for Order of Operations, known as "Circles of Evaluation".}
 
+@lesson-prereqs{}
+
+@keywords{Circles of evaluation, PEMDAS, GEMDAS}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{}
+
 | Lesson Goals
 | Students will be able to:
 
@@ -26,19 +30,8 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/103WRI5Ynv-sArPXgQQTtbnyyAH1HWRniPyNTn91Wyuo/, Lesson Slides}
-}
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1-Xjz-7HBIx5DP4nc06e6EL6cTX3Fc4bPnYs_ZwdNjP4/, Lesson Slides}
-}
-
 
 @material-links
-
-| Preparation
-|
-* Make sure all materials have been gathered
 
 
 | Key Points For The Facilitator
@@ -49,12 +42,7 @@
 * For a memory hook, model the "bug that crawls through the circle" explanation.
 * Students may benefit from using multiple colors to distinguish between the different smaller expressions and parentheses.
 
-@lang-prereq
-
 |===
-
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit1/index.html, prior unit-based version}.
 
 == Order of Operations @duration{30 minutes}
 
@@ -69,12 +57,12 @@ A mathematical expression is an instruction for doing something, which specifies
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first: putting on your socks, putting on your shoes, etc. Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
-@span{.right}{@image{images/pemdas.png, "", 300, ""}}
+@right{@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}}
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
 The pyramid on the right is a model for summarizing the order of operations. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (operations in parentheses and other grouping symbols). Only after we have completed all of those operations can we move down to the lower level. If both operations from the same level are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear. This set of rules is brittle, and doesn't always make it clear what we need to do. Mnemonic devices for the order of operations like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
 
-@span{.clear}{}
+@clear
 
 [.lesson-instruction]
 Check out the expression below. What do you think the answer is?  This math problem went viral on social media recently, with math teachers arguing about what the answer was! Why might they disagree on the solution?
@@ -93,6 +81,7 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Circles of Evaluation}
 
@@ -113,8 +102,8 @@ That means that Numbers (e.g. - @math{3}, @math{-29}, @math{77.01}...) are still
 If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division function (`/`) is written at the top, with the `6` on the left and the `3` on the right.
 
 [.centered-image]
-@show{(sexp->coe '(/ 6 3))}
-@span{.clear}{}
+@show{(coe '(/ 6 3))}
+@clear
 
 What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
 
@@ -124,22 +113,22 @@ Circles can contain other Circles
 We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!
 
 [.centered-image]
-@show{(sexp->coe '(/ 6 (+ 1 2)))}
-@span{.clear}{}
+@show{(coe '(/ 6 (+ 1 2)))}
+@clear
 
 [.lesson-instruction]
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 [.centered-image]
-@show{(sexp->coe '(* 5 6))}
-@span{.clear}{}
+@show{(coe '(* 5 6))}
+@clear
 
 [.lesson-instruction]
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 [.centered-image]
-@show{(sexp->coe '(* (- 10 5) 6))}
-@span{.clear}{}
+@show{(coe '(* (- 10 5) 6))}
+@clear
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
@@ -150,9 +139,10 @@ Suppose another student tells you that @smath{(+ 1 (* 2 3))} can be rewritten as
 The first Circle is just the original expression. The second expression represents what the (incorrect) commutativity transformation gives us:
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-| @show{(sexp->coe '(+ 1 (* 2 3)))}
+
+| @show{(coe '(+ 1 (* 2 3)))}
 | __ ? __ &rarr;
-| @show{(sexp->coe '(+ 2 (* 1 3)))}
+| @show{(coe '(+ 2 (* 1 3)))}
 |===
 
 In this case, the student __failed to see the structure__, viewing the term to the right of the @smath{+} sign as @smath{2} instead of @smath{(* 2 3)}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
@@ -169,6 +159,7 @@ You may also want to have students complete @printable-exercise{pages/complete-c
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Pedagogy Note}
 
@@ -189,10 +180,11 @@ Students learn how to use the Circles of Evaluation to translate arithmetic expr
 
 === Launch
 
-When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. After that, she crawls from left to right, visiting each of the inputs @ifproglang{wescheme}{to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+@ifproglang{wescheme}{
+When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation - also called the _function_ - at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).}
 
 @ifproglang{pyret}{
-Note: As in math, there are some cases where the outermost parentheses can be removed:
+As in math, in Pyret there are some cases where the outermost parentheses can be removed:
 
 - @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
 - @math{(1 * 2) * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
@@ -202,9 +194,10 @@ You will likely see code written using this "shortcut", but it's always better t
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math '(+ 3 8)) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(+ 3 8)) }
-|*Code*					| &rarr; | @show{(sexp->code '(+ 3 8)) }
+
+|*Expression*			| &rarr; | @show{(math '(+ 3 8)) }
+|*Circle of Evaluation*	| &rarr; | @show{(coe  '(+ 3 8)) }
+|*Code*					| &rarr; | @show{(code '(+ 3 8)) }
 |===
 
 @ifproglang{wescheme}{
@@ -218,9 +211,10 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			| &rarr; | @show{(sexp->math '(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(sexp->coe  '(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(sexp->code '(* 2 (+ 3 8))) }
+
+|*Expression*			| &rarr; | @show{(math '(* 2 (+ 3 8))) }
+|*Circle of Evaluation*	| &rarr; | @show{(coe  '(* 2 (+ 3 8))) }
+|*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8))) }
 |===
 
 @ifproglang{wescheme}{
@@ -233,8 +227,9 @@ What would the code look like for these circles?
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
-|@show{(sexp->coe '(/ 6 (+ 1 2)))}		| @show{(sexp->coe '(* (- 10 5) 6))}
-|@show{(sexp->code '(/ 6 (+ 1 2)))}		| @show{(sexp->code '(* (- 10 5) 6))}
+
+|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
+|@show{(code '(/ 6 (+ 1 2)))}		| @show{(code '(* (- 10 5) 6))}
 |===
 
 === Investigate
@@ -260,16 +255,17 @@ If time allows, take turns entering the code into the editor with your partner.
 
 We have included one page of more complex problems in the student workbook so that you're ready to challenge students who fly @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}.
 
-*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(sexp->code 'sqrt)} as the name of the square root function, and @show{(sexp->code 'sqr)} as the function that squares its input.
+*Note:* If you want to practice making Circles of Evaluation with exponents and square roots, we use @show{(code 'sqrt)} as the name of the square root function, and @show{(code 'sqr)} as the function that squares its input.
 
 @ifproglang{pyret}{
-In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(sexp->code '(f x))} or @show{(sexp->code '(sqrt 9))}
+In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(code '(f x))} or @show{(code '(sqrt 9))}
 }
 
 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Strategies For English Language Learners}
 
@@ -288,9 +284,9 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 === Launch
 
 [.lesson-instruction]
-- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)} } and click run.
+- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)} } and click "Run".
 - For now, we are only going to be working in the interactions area on the right hand side of your screen.
-- Type @show{(sexp->code '(+ (* 8 2) (/ 6 3)))} into the interactions area.
+- Type @show{(code '(+ (* 8 2) (/ 6 3)))} into the interactions area.
 - Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
 - Hit Enter (or Return) to evaluate this expression. What happens? _If you typed the code correctly you'll get 18. If you make a mistake with your typing, the computer should help you identify your mistake so that you can correct it and try it again!_
 - Take a few minutes to go back and test each line of code you wrote on the pages you've completed by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.
@@ -303,8 +299,9 @@ Here are two Circles of Evaluation.
 
 [cols="1,1", grid="none", frame="none"]
 |===
-| @span{.right}{@show{(sexp->coe `(* 10 -4))}}
-| @show{(sexp->coe `(text "Good work!" 50 "red"))}
+
+| @right{@show{(coe `(* 10 -4))}}
+| @show{(coe `(text "Good work!" 50 "red"))}
 |===
 
 One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right?
@@ -330,7 +327,7 @@ _We know the name of the function is `text`, because that's what is at the top o
 - What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
 
 Here is another circle to explore.
-@show{(sexp->coe `(string-length "fun!"))}
+@show{(coe `(string-length "fun!"))}
 
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!

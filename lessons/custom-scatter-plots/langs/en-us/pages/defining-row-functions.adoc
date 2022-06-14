@@ -1,0 +1,69 @@
+= Defining Row-Consuming Functions
+++++
+<style>
+/* Hide DR elements we want hidden */
+#content .recipe_purpose_statement, table.recipe_title {
+ 	display: none !important;
+}
+/* Make the instructions more prominent, to take the place of headers */
+#content .recipe_instructions * {
+	font-style: italic;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
+.pyret .recipe_name {
+    text-align: center;
+}
+
+</style>
+++++
+
+*Suppose we wanted to label each data point on a scatterplot with its species...*
+
+@n Write the code to define `sample1` to be the 10th row in the table.
+
+@fitb{}{@ifsoln{`sample1 = animals-table.row-n(9)`}}
+
+@vspace{1ex}
+
+@n Write the code to look up the `species` column from `sample1`?
+
+@fitb{}{@ifsoln{`sample1["species"]`}}
+
+@vspace{1ex}
+
+@n Write the code that would use the `text` function to show the species of `sample1` in red, 15px letters?
+
+@fitb{}{@ifsoln{`text(sample1["species"], 15, "red")`}}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+_Instead of writing this out over and over for each animal, let's define a function to do it for us!_
+
+== Species Tag
+
+@design-recipe-exercise{ "species-tag"
+"Define a function called `species-tag`, which takes in a row from the Animals Table and draws its name in red, 15px letters. __HINT: Use `cat-row` and `dog-row` in your examples!__"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #f
+#:range "Image"
+#:show-range? #f
+#:purpose "Consumes an animal Row, and draws the species of the animal in red, 15px letters."
+#:show-purpose? #f
+#:num-examples 2
+#:example-list '(("cat-row" "text(cat-row[\"species\"], 15, \"red\")")
+                 ("dog-row" "text(dog-row[\"species\"], 15, \"red\")"))
+#:show-examples #f
+#:param-list '(r)
+#:show-funname-defn? #t
+#:show-params? #f
+#:body "text(r[\"species\"], 15, \"red\")"
+#:show-body? #f
+#:grid-lines? #f
+}

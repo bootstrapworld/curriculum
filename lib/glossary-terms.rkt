@@ -16,8 +16,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("accessor functions") "functions to extract values from a data structure")
      (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
 
-    ((en-us ("apply") "use a given function on some inputs")
-     (es-mx ("aplicar") "dar argumentos a una función"))
+    ((en-us ("apply" "applying" "applied") "use a given function on some inputs")
+     (es-mx ("aplicar" "applicado" "applicada") "dar argumentos a una función"))
 
     ((en-us ("argument" "arguments") "the inputs to a function; the expressions for each argument follow the function name")
      (es-mx ("argumento" "argumentos") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
@@ -88,8 +88,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("data block") "code that lists the name, constructor(s), and field(s) of a data structure")
      (es-mx ("bloque de datos") "código que enumera el nombre, los constructores y los elementos de una estructura de datos"))
 
-    ((en-us ("data row" "data rows") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
-     (es-mx ("fila de datos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
+    ((en-us ("data row" "data rows" "cases") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
+     (es-mx ("fila de datos" "casos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
 
     ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers")
      (es-mx ("Ciencia de Datos") "la ciencia de recopilar, organizar y extraer conclusiones generales a partir de datos, con la ayuda de computadoras"))
@@ -117,6 +117,9 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
      (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
+
+    ((en-us ("dimension") "a measurement of something in a particular direction, especially its height, length, or width")
+     (es-mx ("dimensión") "una medida de algo en una dirección particular, especialmente su altura, largo o ancho"))
 
     ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
      (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen juntas o una incrementa mientras la otra decrece"))
@@ -175,11 +178,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("field") "a part of a data structure that has a name and holds a single value of a specified data type")
      (es-mx ("campo") "una parte de una estructura de datos que tiene un nombre y contiene un solo valor de un tipo específico"))
     
-    ((en-us ("form") "of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
-     (es-mx ("forma") "de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
+    ((en-us ("form") "the shape of a relationship between two quantitative variables: whether the two variables together vary linearly or in some other way")
+     (es-mx ("forma") "la forma de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
     
-    ((en-us ("function" "functions") "a mathematical object that consumes inputs and produces an output")
-     (es-mx ("función" "funciones") "un objeto matemático que consume argumentos y produce un resultado"))
+    ((en-us ("function" "functions") "a relation from a set of inputs to a set of possible outputs, where each input is related to exactly one output")
+     (es-mx ("función" "funciones") "una relación que consume argumentos y produce un resultado"))
     
     ((en-us ("function block") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión a evaluar cuando se utiliza la función"))
@@ -265,6 +268,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("name") "how we refer to a function or value defined in a language (examples: +, *, star, circle)")
      (es-mx ("nombre") "cómo nos referimos a una función o valor definido en un idioma (ejemplos: +, *, star, circle)"))
     
+    ((en-us ("null hypothesis") "the hypothesis that there is no significant difference between specified populations, any observed difference being due to sampling or experimental error.")
+     (es-mx ("hipótesis nula") "la hipótesis de que no hay diferencia significativa entre poblaciones específicas, cualquier diferencia observada se debe a un error de muestreo o experimental."))
+
     ((en-us ("navigator") "in pair programming, the person who has their eyes on the screen directing the driver")
      (es-mx "navegadora" "en programación en pareja, la persona con los ojos en la pantalla, dirigiendo al conductor"))
     
@@ -379,6 +385,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center")
      (es-mx ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro"))
     
+    ((en-us ("standard deviation") "a number that measures spread of a data set using the typical distance of values from their mean")
+     (es-mx ("Desviación Estándar") "un número que mide la dispersión de un conjunto de datos usando la distancia típica de los valores desde su media"))
+
     ((en-us ("state") "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")
      (es-mx ("estado") "el valor de un sistema que cambia en cualquier momento (es decir, un semáforo puede estar en un estado 'rojo', 'amarillo' o 'verde'). En Pyret, el estado de un reactor es su valor actual."))
     
@@ -403,6 +412,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("syntax error" "syntax errors") "errors where the computer cannot make sense of the code (e.g. - missing commas, missing parentheses, unclosed strings)")
      (es-mx ("errores de sintaxis") "errores en los que la computadora no puede entender en el código (por ejemplo, comas faltantes, paréntesis faltantes, cadenas sin cerrar)"))
     
+    ((en-us ("logic error" "logic errors") "errors in the way a programmer is thinking about a problem")
+     (es-mx ("errores de logica") "errores en la forma en que un programador está pensando en un problema"))
+
     ((en-us ("table" "tables") "a data structure that stores data as rows, with entries in particular columns")
      (es-mx ("tabla de datos") "una colección de datos organizados en filas y columnas."))
         

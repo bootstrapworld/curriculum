@@ -1,10 +1,13 @@
 = Choosing Your Dataset
 
-@description{Students select a real world dataset to investigate for the remainder of the course. They begin their analysis by identifying categorical and quantitative columns, and defining a few random and logical subsets.}
+@description{Students select a real world dataset to investigate for the remainder of the course.}
+
+@lesson-prereqs{bar-and-pie-charts}
+
+@keywords{}
 
 [@lesson-intro-table]
 |===
-@lesson-prereqs{grouped-samples}
 | Lesson Goals
 | Students will be able to...
 
@@ -19,9 +22,9 @@
 
 | Materials
 |[.materials-links]
-* @link{https://docs.google.com/presentation/d/1yqz9a9O_PsXpzRzHVN4tFRNZ3FIbdVxzzSBRcJg-4p0/, Lesson Slides}
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}
-* @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/copy, Research Paper template}
+* @link{https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK&v=1904b2c, Animals Starter File}
+* @starter-file{exploration-paper}
+* @starter-file{research-paper}
 
 @material-links
 
@@ -29,92 +32,106 @@
 | Preparation
 |
 * Decide whether you'd like your students to have access to our full dataset library or you want to curate a shorter list for them to choose from. (Depending on your goals, some datasets may work better for your class than others.) We've assembled @link{about-datasets/for-teachers-about-datasets.html, descriptions of individual datasets here}. For those looking for a precurated shorter list, we've starred a few of them for you.
-* Decide how students will be grouped in pairs.
-* All students (or pairs) should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}.
-* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
+* All students (or pairs) should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open the @starter-file{animals}.
+
 
 | Supplemental Resources
 | <<Datasets, Jump to Datasets and Starter files>>
 
-@lang-prereq
 |===
 
-== The Data Cycle @duration{20 minutes}
+== Review @duration{20 minutes}
 
 === Overview
-Students learn about the _Data Cycle_, which helps them get situated in the process of analyzing the datasets they will select in this lesson. They browse through the library of provided datasets, and choose one they want to work with. NOTE: the selection process can also be done as a homework assignment, if all students have internet access at home.
+Students practice making lots of chart types, focusing specifically on the "Consider Data" step in the Data Cycle and how it can be used alongside Contracts to help go from questions to code.
 
 === Launch
-Zoom out a little and help students reflect on what they've done so far. Students began by exploring the Animals Dataset, formulating questions and exploring them with data displays. This led to further questions, making subsets, and asking more questions.
+Let's get some practice isolating the Rows and Columns needed to answer various questions, and use our knowledge of Contracts to help turn those questions into working code!
 
-@span{.right}{@image{images/data-cycle.png, "", 400}}
-The Data Cycle[*] is a _roadmap_, which helps guide us in the process of data analysis.
+[.lesson-instruction]
+Complete @printable-exercise{consider-and-analyze.adoc}.
 
-(Step 1) We start by *Asking Questions* - statistical questions that can be answered with data.
+Be sure to review student answers.
 
-(Step 2) Then we *Consider Data*. This could be done by conducting a survey, observing and recording data, or finding a dataset that meets our needs.
 
-(Step 3) Then it's on to *Analyzing the Data*, in which we produce data displays and new tables of filtered or transformed data in order to identify patterns and relationships.
+== Choosing a Dataset @duration{30 minutes}
 
-(Step 4) Finally, we *Interpret the Data*, in which we answer our questions and summarize the results. As we've already seen from the Animals Dataset, these interpretations often lead to _new_ questions....and the cycle begins again.
+=== Overview
+Students select a dataset that interests them, and do some thinking about _why_ it interests them, _what questions they'd like to answer_ and _what hypotheses they have_. They'll be analyzing this data for a long time, so *it's critical to ensure a high degree of buy-in before signing off on a student's choice!*
 
-@span{.clear}{}
-
-Explain to students that they will now select a dataset for them to work with for the remainder of the course. Make sure they understand that it genuinely has to be something they are interested in - their engagement with the data is critical to engaging with the class.
-
-_Students can also find their own dataset_, and use this @link{https://code.pyret.org/editor#share=12v7kzbxHt2LaSe2uI2d_OnssxtTNF0A8, Blank Starter file}. See this @link{https://youtu.be/7CyvyKWUHBs, tutorial video} for help importing your own data into Pyret.
+=== Launch
 
 [.lesson-point]
-Students must have at least 2 questions that are both _interesting_ and _answerable_ using their dataset.
+Data Science: it's all about YOU!
 
+What data matters to *_you?_* What questions do *_you_* care about? We live in a world filled with data, gathered about almost every subject you can imagine.
+
+- Climate sensors are gathering data on temperature, humidity, oxygen and more...practically everywhere on the globe.
+- Census data tracks the number of different groups of people, as well as their education, income level, and more.
+- Companies like Facebook, Amazon, and Google gather massive amounts of data on the websites you visit, what you chat about online, what you purchase, etc.
+
+This data is used to set public policy, draw voting districts, approve drugs, calculate school funding, decide which advertisements you see, and more.
+
+[.lesson-instruction]
+* Where else do you see data being gathered?
+* What are some other ways data is used in the world around you?
+
+[.lesson-point]
+Here Come the Datasets!
 [[Datasets]]
+
+Below is a list of every dataset already provided to students, with a corresponding Starter File that instantly imports the (cleaned) data into Pyret.
+
+_Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @link{https://youtu.be/uqm9F_tmIho, tutorial video} for help importing your own data into Pyret.
+
 === Investigate
-Have students choose a dataset that is interesting to them! They should have at least two questions that the dataset can help them answer, and write them on @printable-exercise{pages/whats-on-your-mind.adoc}.
+Have students choose a dataset that is interesting to them and save a copy of it in their programs!
 
 @include{fragments/dataset-table.adoc}
 
 [.lesson-instruction]
 --
-Open the @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/copy, Research Paper template}, and save a copy.
-
-- Students fill in their first and last name(s), the teacher name on the first page of the Research Paper.
-- Students should also copy the link to the dataset (spreadsheet), and paste it into the first page of the Research Paper.
-- Students should click "Publish" in their Pyret Starter File, then copy/paste the resulting link into the first page of the Research Paper.
+* Look at the spreadsheet for your dataset. What do you *Notice*? What do you *Wonder*?
+* Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by their dataset and one that __cannot__.
 --
 
 === Synthesize
-Have students share their datasets and their questions.
+- What did you select, and why?
+- What questions did you come up with?
 
-For the rest of this course, students will be learning new programming and Data Science skills, practicing them with the Animals Dataset and then applying them to their own data.
+For the rest of this course, you'll be learning new programming and Data Science skills, practicing them with the Animals Dataset and then applying them to you own data.
 
-== Exploring Your Dataset @duration{flexible}
+== Exploring Your Dataset @duration{Flexible}
 
 === Overview
-Students apply what they've learned about describing and making subsets from the Animals Dataset to their own dataset. *Note: this activity can be done briefly as a homework assignment, but we recommend giving students an _additional class period_ to work on this.*
+[.lesson-point]
+Note: This section should be split across multiple days!
+
+Students apply what they've learned about describing and making subsets from the Animals Dataset to their own dataset. *Note: this section should be broken up across multiple days!* Students should complete each of the investigate sections, then leave ample classtime for discussion and peer-sharing.
 
 === Launch
-By now you've already learned what to do when you approach a new dataset. With the Animals Dataset, you first read the data itself, and wrote down your Notice and Wonders. You described the columns in the Animals Dataset, identifying which were categorical and which were quantitative, and whether they were Numbers, Strings, Booleans, etc. Finally, you used the Design Recipe and table methods to make random and logical subsets.
+By now you've already learned what to do when you approach a new dataset.
+
+- With the Animals Dataset, you first read the data itself, and wrote down your Notices and Wonders.
+- You described the columns in the Animals Dataset, identifying which were categorical and which were quantitative, and whether they were Numbers, Strings, Booleans, etc.
+- You took random samples of the dataset, to explore inference and probability
 
 Now, you're doing to do the same thing _with your own dataset._
 
 === Investigate
-[.lesson-instruction]
-- Have students look at the spreadsheet for their dataset. What do they *Notice*? What do they *Wonder*? Have them complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that _can_ be answered by their dataset and one that _cannot_.
-- In the Definitions Area, students use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
-- In the Definitions Area, students use `.row-n` to define *at least three* values, representing different rows in your table.
-- Have students think about subsets that might be useful for their dataset. Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
-- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.6cy9t2stox4e, My Dataset} portion of their Research Paper.
-- Students should fill in @link{https://docs.google.com/document/d/1_ZEIgM4zvxI7JizViVFZojnpd3Yr2rYe8puPk8pjOcs/edit#heading=h.h6dvbsrt7r00, Categorical Visualizations} portion of their Research Paper, by generating pie and bar charts for their dataset and explaining what they show.
 
 [.lesson-instruction]
-Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
+- Make a copy of @starter-file{exploration-paper}, and open the starter file for your chosen dataset.
+- Why does this dataset matter? Where did it come from? Complete the first set of questions in the exploration paper.
+- In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
+- What are the categorical columns in _your_ dataset? How are those values distributed?
+- Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
+- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of the exploration document.
+- Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
-[.lesson-instruction]
-Choose one categorical column from your dataset, and try making a bar or pie-chart for the whole table. Now try making the same display for each of your subsets. Which is most representative of the entire column in the table?
+=== Synthesize
+Have students share their findings. Were any of them surprising?
 
 === Synthesize
 
-Have students share which subsets they created for their datasets.
-
-
-[*] From the @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}
+Have students share which datasets they chose, and why they are interesting or important to them.

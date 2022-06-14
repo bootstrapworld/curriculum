@@ -44,6 +44,8 @@
                          (unless (member f *exercises-files*)
                            (set! *exercises-files*
                              (cons f *exercises-files*))))))]
+                  [(string=? directive "scrub")
+                   (read-group i directive)]
                   [(string=? directive "ifproglang")
                    (let ([proglang (read-group i directive)])
                      (unless (string=? proglang *proglang*)

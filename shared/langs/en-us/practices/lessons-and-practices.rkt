@@ -30,21 +30,30 @@
          "MLR.2"    ; strategy box in lesson
         )
 
-    ("defining-functions" 
-        "MP.4"      ; STEMworks
-        "MLR.7"
-        "MLR.3"     ; page focused just on this
-        "P4" 
+    ("debugging" 
+        "MP.6"
+        "P2"
+        "P6"
         )
-
-    ("defining-values" 
-        "MP.2"
+    
+    ("functions-make-life-easier"
+        "MP.6"
         "MP.7"
         "MP.8"
-        "SEP.7"
-        "MLR.5"
+        "P4" )
+
+    ("functions-examples-definitions"
+        "MP.6"
+        "MP.7"
+        "MP.8"
+        )
+
+    ("functions-problem-solving-together" 
+        "MP.1"
+        "MP.3"
+        "MP.4"      ; STEMworks
+        "MP.7"
         "MLR.7"
-        "MLR.8"
         )
 
     ("simple-data-types" 
@@ -60,6 +69,7 @@
 
     ("combinatorics-combination"
         "MP.4"
+        ; "MP.5" -- needed? FIXME
         "MP.7"
         "SEP.5")
 
@@ -67,6 +77,16 @@
         "MP.2"
         )
 
+    ("defining-values" 
+        "MP.2"
+        "MP.7"
+        "MP.8"
+        "SEP.7"
+        "MLR.5"
+        "MLR.7"
+        "MLR.8"
+        )
+    
     ("distance-formula" 
         "MP.2"
         "MP.3"      ; STEMworks
@@ -90,6 +110,39 @@
         "SEP.5"
         ) 
 
+    ("functions-vertical-line-test"
+        "MP.2"
+        "MP.4"
+        "MP.8"
+        )
+
+    ("function-notation"
+        "MP.4"
+        "MP.6"
+        "MP.7")
+
+    ("functions-can-be-linear"
+        "MP.1"
+        "MP.2"
+        "MP.5"
+        "MP.7"
+        )
+
+    ("function-definition-linear"
+        "MP.1"
+        "MP.2"
+        "MP.3"
+        "MP.5"
+        "MP.7"
+        )
+
+    ("functions-dr"
+        "MP.1"
+        "MP.7"
+        "MLR.6"     ; strategy box in lesson
+        "MLR.1"     
+        )
+
     ("function-composition" 
         "MP.1"
         "MP.5"
@@ -102,11 +155,6 @@
     ("functions-for-character-animation" 
         "MP.2"
         "MP.4"      ; STEMworks
-        )
-
-    ("inequalities-collision"
-        "MP.3"      ; STEMworks
-        "MLR.7"
         )
 
     ("inequalities1-simple" 
@@ -124,6 +172,11 @@
     ("inequalities3-sam"
         "MP.4"      ; STEMworks
         )    
+
+    ("inequalities-collision"
+        "MP.3"      ; STEMworks
+        "MLR.7"
+        )   
 
     ("making-game-images" 
         "MP.6"
@@ -144,10 +197,6 @@
         "SEP.2"
         )
 
-    ("piecewise-functions" 
-        "MP.8"
-        )
-
     ("player-animation" 
         "MP.3"
         "MP.4"      ; STEMworks
@@ -160,22 +209,17 @@
         "MP.3"     ; STEMworks
         "MP.4"     ; STEMworks
         "MP.6"
-        "MLR.7"    ; strategy box in lesson
-        )
-        
-    ("restating-the-problem" 
-        "MP.1"
-        "MP.7"
-        "MLR.6"     ; strategy box in lesson
-        "MLR.1"     ; strategy box in lesson
-        )
-
-    ("solving-word-problems" 
-        "MP.4"      ; STEMworks
+        "MLR.7"    
         )
 
     ("surface-area-rect-prism"
         "MP.4"      ; STEMworks
+        )
+
+    ("project-video-game"
+        "P2"
+        "P5"
+        "P6"
         )
 
     ;data science
@@ -185,9 +229,16 @@
         "MP.3"      ; STEMworks
         "SEP.3"
         "P6" 
+        "SJ.12"
+        "SJ.13"
+        "SJ.14"
+        "SJ.15"
         )
 
     ("choosing-your-dataset" 
+        "MP.2"
+        "MP.5"
+        "SEP.3"
         "P7"
         )
 
@@ -197,6 +248,30 @@
         "MLR.7"
         "SEP.3"
         )
+
+    ("data-collection"
+        "MP.3"
+        "MP.5"
+        "P2"
+        "P6"
+        "MLR.3"
+        "MLR.5"
+        "SEP.8"
+        "SJ.14"
+        )
+
+    ("data-cycle"
+        "MP.6"
+        "MP.5"
+        "P3"
+        "SEP.4"
+        "SEP.7"
+        "SEP.8"
+        )
+
+    ("custom-scatter-plots" 
+        "MP.7"      
+        )    
     
     ("defining-table-functions" 
         "MP.6"
@@ -204,16 +279,21 @@
         "P4" 
         )
 
-    ("displays-and-lookups" 
-        "MP.3"
-        )
+    ("bar-and-pie-charts" 
+        "MP.5"
+        "MP.6"
+        "SEP.3" 
+        "SJ.2"
+        "SJ.4"
+        "SJ.7"
+        )   
 
     ("ds-intro" 
         "MP.3"      ; STEMworks
         "P7"
         )
 
-    ("ethics-and-privacy" 
+    ("ethics-privacy-and-bias" 
         "MP.3"      ; STEMworks
         "P1" 
         "SJ.12"
@@ -227,13 +307,6 @@
         "P3"
         )
 
-    ("if-expressions" 
-        "MP.1"
-        "MP.3"
-        "MLR.8"
-        "P3" 
-        )
-
     ("histograms" 
         "MP.4"      ; STEMworks
         "SEP.3"
@@ -244,26 +317,14 @@
         "SEP.3"
         )
 
-    ("linearity"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
-        )
-
-    ("linearity2"
-        "MP.1"
-        "MP.2"
-        "MP.3"
-        "MP.5"
-        "MP.7"
-        )
-
     ("linear-regression" 
         "MP.4"      ; STEMworks
         "MLR.8"
         "SEP.3"
+        )
+
+    ("lookups"
+        "MP.7"
         )
 
     ("measures-of-center"
@@ -271,11 +332,17 @@
         "SEP.3"
         )
 
-    ("measures-of-spread" 
+    ("box-plots" 
         "MP.3"      ; STEMworks
         "MP.4"      ; STEMworks
         "MLR.7"
         "SEP.3"
+        )
+
+    ("standard-deviation" 
+        "MP.3"
+        "MP.4"
+        "P5"
         )
 
     ("method-chaining" 
@@ -284,20 +351,15 @@
         "P3" 
         )
 
-    ("displaying-categorical-data" 
-        "MP.5"
-        "MP.6"
-        "SEP.3" 
-        "SJ.2"
-        "SJ.4"
-        "SJ.7"
+    ("piecewise-functions-conditionals" 
+        "MP.8"
         )
 
     ("random-samples" 
         "MLR.1"
         "MP.2"
         "SEP.3"
-        "SJ.10"
+        "SJ.13"
         )
 
     ("scatter-plots"
@@ -314,23 +376,40 @@
         "SEP.3"
         "P1" 
         )
+
+    ("project-exploration-paper"
+        "P1"
+        "P2"
+        "P5"
+        "P6"
+        "SJ.7"
+        "SJ.13"
+        "SJ.14"
+        )
+
+    ("project-research-paper"
+        "P1"
+        "P2"
+        "P5"
+        "P6"
+        "SJ.7"
+        "SJ.12"
+        "SJ.13"
+        "SJ.14"
+        )    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REACTIVE
 
     ("re-intro-to-data-structures" 
-        "P4"
         )
 
     ("re-structures-reactors-animations" 
-        "P5"
         )
 
     ("re-functions-that-ask-questions" 
-        "P5"
         )
 
     ("re-key-events" 
-        "P5"
         )
 
     ("re-refactoring" 
@@ -339,7 +418,6 @@
         )
 
     ("re-your-own-drawing-functions" 
-        "P5"
         )
 
     ("re-build-your-own-animation" 

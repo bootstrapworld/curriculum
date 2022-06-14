@@ -1,10 +1,13 @@
 = Simple Inequalities
 
-@description{Students identify solutions and non-solutions of inequalities using an interactive starter file. This lesson also reviews the `Boolean` data type.}
+@description{Students identify solutions and non-solutions of inequalities using an interactive starter file. This lesson also reviews the `Boolean` datatype.}
+
+@lesson-prereqs{functions-dr}
+
+@keywords{number lines, number line, solution set}
 
 [@lesson-intro-table]
 |===
-@lesson-prereqs{defining-functions}
 
 | Lesson Goals
 | Students will be able to:
@@ -19,20 +22,9 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @online-exercise{https://docs.google.com/presentation/d/1JhmNzpikSfoe5g_XUBtghzsIyweSjjBrCnolHnkhFZY/, Lesson Slides}
-}
 
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1pEC8x-4HWVjc4EcTKGBTTVddtyNkx9tSS_7hKkvr7yA/, Lesson Slides}
-}
 
 @material-links
-
-| Preparation
-|
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
 
 | Supplemental Resources
 |
@@ -44,15 +36,11 @@
 
 @ifproglang{wescheme}{
 * For example, `odd?` and `even?` (pronounced "odd-huh?" and "even-huh?" in Scheme) are both functions that ask if a given number is odd or even.
-* Role-playing can help students understand the jobs of `odd?` and `even?`.
 }
 
 @ifproglang{pyret}{
 * For example, `is-odd`, `is-even` are both functions that ask if a given number is odd or even.
-* Role-playing can help students understand the jobs of `is-odd` and `is-even`.
 }
-
-@lang-prereq
 
 |===
 
@@ -61,19 +49,19 @@
 === Launch
 Students should be logged into
 @ifproglang{wescheme}{ @link{https://www.wescheme.org, WeScheme     } }
-@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org } }
+@ifproglang{pyret}{    @link{https://code.pyret.org, code.pyret.org (CPO) } }
 
 Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
 
-- @show{(sexp->coe '(+ 1 2))}
-- @show{(sexp->coe '(- 4 5))}
-- @show{(sexp->coe '(* 8 0))}
+- @show{(coe '(+ 1 2))}
+- @show{(coe '(- 4 5))}
+- @show{(coe '(* 8 0))}
 
 Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they mean, what they will evaluate to, and what the code would look like.
 
-- @show{(sexp->coe '(> 1 2))}
-- @show{(sexp->coe '(< 4 5))}
-- @show{(sexp->coe '(= 8 0))}
+- @show{(coe '(> 1 2))}
+- @show{(coe '(< 4 5))}
+- @show{(coe '(= 8 0))}
 
 Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the outputs mean?
 
@@ -81,12 +69,8 @@ Values like `true` and `false` obviously aren't Numbers or Images. But they also
 
 === Investigate
 
-@ifproglang{wescheme}{
-Have students open the @online-exercise{https://www.wescheme.org/openEditor?publicId=EA6R0E97nV, Boolean Starter File}
-}
-@ifproglang{pyret}{
-Have students open the @online-exercise{https://code.pyret.org/editor#share=1qoAI2cFSeM7HIrR5L6LzOAX9DlXu9Le1&v=8c4da7d, Boolean Starter File}
-}
+
+Have students open the @starter-file{boolean}.
 
 [.lesson-instruction]
 @ifproglang{wescheme}{
@@ -118,12 +102,7 @@ Students discover (or expand their understanding of) inequalities by identifying
 
 === Launch
 
-@ifproglang{wescheme}{
-Have students open the @online-exercise{https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ, Simple Inequalities Starter File.}
-}
-@ifproglang{pyret}{
-Have students open the @online-exercise{https://code.pyret.org/editor#share=1Jhlrnc5GXhodMYyqr2_toAHd0RHjPSpQ&v=1904b2c, Simple Inequalities Starter File.}
-}
+Have students open the @starter-file{inequalities-simple}.
 
 Equations typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. Inequalities, on the other hand, can have _infinite_ solutions.  Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  It is important that students are able to recognize that there are many possible solutions and non-solutions to an inequality and that they can identify whether or not a given number is or isn't part of the solution set.
 
@@ -134,11 +113,11 @@ The solution set is shaded in blue, with points shaded green (solution) and red 
 
 The resulting plot shows the number line, with all solution values shaded in blue. The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.
 
-@span{.center}{@image{images/inequality-works.png,"" ,""}}
+@span{.center}{@image{images/inequality-works.png,"A picture of an inequality displayed on a number line, with four red dots and four green dots"}}
 
 If their list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and they will get an error message encouraging them to adjust their list.
 
-@span{.center}{@image{images/not-quite.png,"" ,""}}
+@span{.center}{@image{images/not-quite.png,"A picture of an inequality displayed on a number line, with five red dots and only three green dots" ,""}}
 
 Encourage students to use negatives, positives, fractions and decimals as they generate their lists.
 
@@ -152,6 +131,7 @@ The starter file includes an example.  Read the example code in the file careful
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
+
 |
 @span{.title}{Hiding Example Code}
 In order to stop seeing the examples written into the starter file code, students can comment out the example code by adding a # in front of each of the lines they want to hide.
@@ -159,12 +139,7 @@ In order to stop seeing the examples written into the starter file code, student
 
 === Investigate
 [.lesson-instruction]
-@ifproglang{wescheme}{
-Have students open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @online-exercise{https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ, Simple Inequalities Starter File.}
-}
-@ifproglang{pyret}{
-Have students open to @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @online-exercise{https://code.pyret.org/editor#share=1Jhlrnc5GXhodMYyqr2_toAHd0RHjPSpQ&v=1904b2c, Simple Inequalities Starter File.}
-}
+Have students open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
 
 === Synthesize
 - What patterns did you observe in how the inequalities worked?

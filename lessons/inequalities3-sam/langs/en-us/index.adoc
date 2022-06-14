@@ -4,6 +4,8 @@
 
 @lesson-prereqs{inequalities2-compound}
 
+@keywords{compound inequalities, real world application, video game, on screen, bounds, limits}
+
 [@lesson-intro-table]
 |===
 
@@ -19,24 +21,9 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1XoUQr9ablU9eqlqVMxgpo43BX9iq4RYRRnuQXguq8I4/, Lesson Slides}
-}
 
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1aqpCDcQFE0INcYtjUIGzqp9P4py6cPOP_oFVoGZNGPQ/, Lesson Slides}
-}
 
 @material-links
-
-| Preparation
-|
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
-
-
-@lang-prereq
-
 |===
 
 == Introducing Sam @duration{15 minutes}
@@ -46,15 +33,10 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 
 === Launch
 
-Have students open the
-@ifproglang{wescheme}{
-@online-exercise{https://www.wescheme.org/view?publicId=0elP8WrmfM, Sam The Butterfly starter file} and click "Save."
-}
-@ifproglang{pyret}{
-@online-exercise{https://code.pyret.org/editor#share=1YSPPa4BLhOG7_qhWdqQ-cG1u3yUUi-zZ, Sam The Butterfly starter file} and click "Save A Copy."
-}
-
-Have students turn to the @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, click __Run__ and use the arrow keys to investigate the program with their partner.
+[.lesson-instruction]
+- Open the @starter-file{inequalities-sam} in a new tab
+- Save a copy of your own
+- Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 
 [.lesson-instruction]
 - What is something you noticed about this program? _As Sam moves, the @vocab{coordinates} are displayed at the top of the screen; the coordinates are all in the 1st quadrant; etc._
@@ -144,7 +126,7 @@ Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}
 
 Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @ifproglang{wescheme}{`safe-left?` and `safe-right?`} @ifproglang{pyret}{`is-safe-left` and `is-safe-right`} will respond with either "true" or "false".
 
-The function @ifproglang{wescheme}{`onscreen?`} @ifproglang{pyret}{`is-onscreen`}, however, will call the `safe-left` function! So the student roleplaying @ifproglang{wescheme}{`onscreen`?}@ifproglang{pyret}{`is-onscreen`} should turn to `safe-left` and give the input to them.
+The function @ifproglang{wescheme}{`onscreen`?} @ifproglang{pyret}{`is-onscreen`}, however, will call the `safe-left` function! So the student roleplaying @ifproglang{wescheme}{`onscreen`?}@ifproglang{pyret}{`is-onscreen`} should turn to `safe-left` and give the input to them.
 
 For example:
 @ifproglang{wescheme}{
@@ -226,7 +208,7 @@ Students identify common patterns between two-dimensional Boundary detection and
 
 === Launch
 
-Have students open their in-progress game file and press Run. Invite them to analyze the movement of the danger and the target
+Have students open their in-progress game file and click "Run". Invite them to analyze the movement of the danger and the target
 
 [.lesson-instruction]
 - How are the `TARGET` and `DANGER` behaving right now? _They move across the screen._

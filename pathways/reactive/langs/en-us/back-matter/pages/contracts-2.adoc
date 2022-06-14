@@ -3,16 +3,18 @@
 
 Contracts tell us how to use a function. For example:  `num-sqr {two-colons} (n {two-colons} Number) -> Number` tells us that the name of the function is  `num-sqr`, it takes one input (a  `Number`), and it evaluates to a  `Number`. From the contract, we know  `num-sqr(4)` will evaluate to a  `Number`.
 
-++++
-<style>
-td {padding: .4em .625em !important; height: 15pt;}
-</style>
-++++
-
-[.contract-table,cols="3,1,10,1,2", options="header", grid="rows", stripes="none"]
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 
 |Name||Domain||Range
+
+| `above`
+| `{two-colons}`
+| `Image, Image`
+| `->`
+| `Image`
+5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
+
 
 | `# above`
 | `{two-colons}`
@@ -63,6 +65,7 @@ td {padding: .4em .625em !important; height: 15pt;}
 | `Number`
 5+|`#`
 
+
 | `# num-sqrt`
 | `{two-colons}`
 | `(n {two-colons} Number)`
@@ -70,17 +73,4 @@ td {padding: .4em .625em !important; height: 15pt;}
 | `Number`
 5+|`#`
 
-| `# num-min`
-| `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
-| `->`
-| `Number`
-5+|`#`
-
-| `# num-max`
-| `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
-| `->`
-| `Number`
-5+|`#`
 |===

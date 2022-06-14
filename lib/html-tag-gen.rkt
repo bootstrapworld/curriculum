@@ -17,6 +17,11 @@
   decrement-top-span-stack
   display-begin-span
   display-end-span
+
+  string-multiply
+  fitbruby
+  fitb
+  hspace
   )
 
 (define (create-begin-tag tag-name classes #:attribs [attribs #f])
@@ -109,23 +114,23 @@
   (pair? *span-stack*))
 
 (define (top-span-stack)
-  (span-nesting (car *span-stack*)))
+  (span-nesting (first *span-stack*)))
 
 (define (grow-span-stack span-type)
   (set! *span-stack* (cons (span span-type 0) *span-stack*)))
 
 (define (pop-span-stack)
-  (let ([a (car *span-stack*)])
-    (set! *span-stack* (cdr *span-stack*))
+  (let ([a (first *span-stack*)])
+    (set! *span-stack* (rest *span-stack*))
     a))
 
 (define (increment-top-span-stack)
-  (let* ([top-span (car *span-stack*)]
+  (let* ([top-span (first *span-stack*)]
         [n (span-nesting top-span)])
     (set-span-nesting! top-span (+ n 1))))
 
 (define (decrement-top-span-stack)
-  (let* ([top-span (car *span-stack*)]
+  (let* ([top-span (first *span-stack*)]
          [n (span-nesting top-span)])
     (when (<= n 0)
       (error 'ERROR "Bad @span: Check missing braces"))
@@ -140,3 +145,36 @@
 (define (display-end-span o)
   (when (span-real? (pop-span-stack))
     (display (create-end-tag "span") o)))
+
+(define (string-multiply s n)
+  (let loop ([n n] [r ""])
+    (if (= n 0) r
+        (loop (- n 1) (string-append r s)))))
+
+(define (fitbruby width text ruby-classes [show? #t])
+  (when (string=? width "")
+    (set! width "100%"))
+  (string-append
+    (create-begin-tag "span" ".fitbruby" #:attribs
+                      (if (string=? width "")
+                          "style=\"flex-grow: 1\""
+                          (format "style=\"width: ~a\"" width)))
+    (if show? text "")
+    (create-begin-tag "span" (string-append ".ruby" ruby-classes))
+    (create-end-tag "span")
+    (create-end-tag "span")))
+
+(define (fitb width text [show? #t])
+  (string-append
+    (if (string=? width "")
+        (create-begin-tag "span" ".fitb" #:attribs "style=\"flex-grow: 1\"")
+        (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
+    (if show? text "")
+    (create-end-tag "span")))
+
+(define (hspace width)
+  (string-append
+    (create-begin-tag "span" ".quad" #:attribs
+                      (format "style=\"width: ~a\"" width))
+    (create-end-tag "span"))
+  )

@@ -2,9 +2,12 @@
 
 @description{Students practice creating subsets and think about why it might sometimes be useful to answer questions about a dataset through the lens of specific subsets.}
 
+@lesson-prereqs{defining-table-functions}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{defining-table-functions}
 | Lesson Goals
 | Students will be able to...
 
@@ -17,32 +20,16 @@
 
 | Materials
 |[.materials-links]
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1-LPRD7C7xtfHDGeze4v71q53qf5gJgJ-F68pjKY9KCs/, Lesson slides}
-}
-@ifproglang{codap}{
-* @link{https://docs.google.com/presentation/d/1QGQgB__gZkNjx5JvTJ-Tu3jcbhB3wBv8W7-oMviBL7k/edit#slide=id.g930a424983_0_29,  Lesson slides}
-}
 
-@ifproglang{pyret}{
-* @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, Animals Starter File}
-}
-@ifproglang{codap}{
-* @link{https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json, Animals Starter File}
-}
 @material-links
 
 | Preparation
 |
-* Make sure all materials have been gathered
-* Decide how students will be grouped in pairs
-* Computer for each student (or pair), with access to the internet
-* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
 @ifproglang{pyret}{
-* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can @link{https://code.pyret.org/editor#share=1ZupMVPWvVUOM0HCWyA7cRBghSLKxPWv1, open a new one}
+* All students should log into @link{https://code.pyret.org, CPO} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new one from @starter-file{animals}.
 }
 
-@lang-prereq
+
 |===
 
 
@@ -52,12 +39,12 @@
 This activity is all about @vocab{grouped samples}: Students make a bunch of subsets from the Animals Dataset, and see how each subset might answer the same question differently.
 
 === Launch
-When looking at a scatter plot of our animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
-@span{.center}{@image{images/scatter-plot.png,"",550}}
+When looking at a scatter plot of animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
+@center{{@image{images/scatter-plot.png,"A scatter plot with dots loosely clustered around a line with a positive slope",550}}
 
 But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
 
-@span{.center}{@image{images/image-scatter-plot.png,"",550}}
+@center{@image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}}
 
 === Investigate
 Divide the class into groups of 3-4, with one student identified as the "reporter".
@@ -70,13 +57,19 @@ Divide the class into groups of 3-4, with one student identified as the "reporte
 === Synthesize
 Have the reporters share their findings with the class.
 
-Imagine that you've been handed a dataset from a country where half the people are wealthy and have access to amazing medical care, and the other half are poor and have no healthcare. If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!
+You've been handed a dataset from a country where half the people have access to amazing medical care, and the other half have no healthcare.
+
+[.lesson-instruction]
+* Why might it be important to look at a subset of a population?
+* Why is it sometimes bad to blindly take random samples?
+
+If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!
 
 
 == Grouped Samples @duration{20 minutes}
 
 === Launch
-Ultimately, it might make more sense to ask certain questions about "just the cats" or "just the dogs". Averaging every animal together will give us an answer, but they may not be _useful_ answers.
+Depending on the question we're asking, sometimes it makes more sense to ask about "just the cats" or "just the dogs". Averaging every animal together will give us an answer, but they may not be _useful_ answers.
 
 [.lesson-point]
 Sometimes important facts about samples get _lost_ if we mix them with the rest of the population!
@@ -92,15 +85,17 @@ Earlier, you learned how to define values in Pyret. We can define Numbers, Strin
   logo = star(50, "solid", "red")
   sasha= animals-table.row-n(0)
 
-Let's use this skill to define __Tables...__}
+Let's use this skill to define __Tables...__
 
-=== Investigate
-@ifproglang{pyret}{
 We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:
 ----
 dogs  = animals-table.filter(is-dog)
 ----
+
+The `.filter` method walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `.filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `.filter`.
 }
+
+=== Investigate
 
 [.lesson-instruction]
 --
@@ -108,7 +103,7 @@ A “kitten” is an animal who _is a cat_ and who _is young_. How would you def
 
 * Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{sequence of Transformers} will compute whether or not an animal is a kitten.
 
-* Can you fill in the code for the other grouped samples?
+* Can you fill in the @ifproglang{pyret}{code} @ifproglang{codap}{function notation} for the other grouped samples?
 @ifproglang{pyret}{
 * When you're done, type these definitions into the Definitions Area.}
 
@@ -126,11 +121,52 @@ Debrief with students. Thoughtful question: how could we filter _and_ sort a tab
 Students revisit the data display activity, now using the samples they created.
 
 === Launch
-Making grouped and random samples is a powerful skill to have, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make subsets, we can make much more sophisticated displays!
+Making grouped and random samples is a powerful skill, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make subsets, we can make much more sophisticated displays!
+
+Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
+
+@left{@image{images/AskQuestions.png, "Ask Questions icon", 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
+
+@vspace{1ex}
+
+@left{@image{images/ConsiderData.png, "Consider Data icon", 100}} We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
+
+@vspace{1ex}
+
+@left{@image{images/AnalyzeData.png, "Analyze Data icon", 100}} We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice. We've decided what to make and we know which rows and columns we're plotting, so the next step is to _write the code!_
+
+
+@vspace{1ex}
+
+@left{@image{images/InterpretData.png, "Interpret Data icon", 100}} What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 === Investigate
 [.lesson-instruction]
-Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
 
 === Synthesize
-Were any of the students' displays interesting or surprising? Given a novel question, can students identify what helper functions they would need to write?
+- What connections do you see between the "Consider Data" and "Analyze Data" steps?
+- How do we know when we need to filter? How do we know when we _don't?_
+
+== Your Analysis @duration{flexible}
+
+=== Overview
+Students apply their knowledge of table methods, defining table functions, and the Design Recipe to create grouped samples for their dataset.
+
+=== Launch
+Are there grouped samples that you'd like to explore in your own dataset? Here are a few examples, taken from some of the sample datasets:
+
+- In the RI Schools dataset, it might be good to create grouped samples for public v. charter schools
+- In the Movies dataset, it might be valuable to create grouped samples for modern movies, and analyze them separately from older movies.
+- In the US Presidents dataset, it could be useful to make a grouped sample for each political party.
+
+=== Investigate
+What grouped samples make sense for your dataset?
+
+[.lesson-instruction]
+- Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
+- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
+
+=== Synthesize
+Have students share the grouped samples they created for their datasets. After each share-back, ask the class if they have suggestions for other possible grouped samples.

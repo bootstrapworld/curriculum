@@ -32,6 +32,27 @@ mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
 .listingblock pre { margin: 3px 0px; padding: 0; }
 
+body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
+body:not(.LessonPlan, .narrativepage) p {
+  width:        100%;
+  overflow:     hidden; 
+  position:     relative;
+  min-height:   1.75rem;
+  margin:       2px 0px;
+}
+/* Empty p tags should take up no space */
+body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
+/* Stretch elements should expand to the end of the page */
+body:not(.LessonPlan) p > .stretch {
+  float:        right; 
+  clear:        right;
+  position:     absolute;
+  text-align:   left;
+  bottom:       0;
+  width:        100%;
+  margin-left:  10px;
+}
+
 h1 {
   font-size:      2rem;
   font-weight:    bold;
@@ -84,6 +105,7 @@ tr th.tableblock {
   position:   fixed;
   bottom:     0;
   padding:    0;
+  z-index:    999;
 }
 
 /* Hide anything that we only want seen on Google drive */
@@ -113,7 +135,7 @@ tr th.tableblock {
   margin-left:      auto;
   margin-right:     auto;
   text-align:       center !important;
-  padding:          2ex 0ex;
+  padding:          1ex 0ex;
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
@@ -170,12 +192,11 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.fitb, .fitbruby, .blankline, .vskip {
+.fitb, .fitbruby, .blankline {
   display:            inline-block;
-  min-height:         13px;
   min-width:          5em;
   text-align:         center;
-  line-height:        1.5rem;
+  line-height:        1.25rem;
   border-bottom:      solid 1px black;
 }
 
@@ -185,24 +206,24 @@ tr th.tableblock {
    padding:           0;
 }
 
-.vskip { margin-top: 25px; width: 100%; border-bottom: none;}
-.blankline { margin-top: 13px; width: 100%;}
+.blankline { margin-bottom: 13px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
-.fitbruby::before, .vskip::before, .blankline::before {
+.fitbruby::before, .blankline::before {
   content: '\00200b';
 }
 
 .ruby {
   position:           absolute;
   bottom:             -1.1rem;
-  left:               0;
-  font-size:          0.7rem;
+  text-align:         center;
+  font-size:          0.65rem;
   font-weight:        normal;
   width:              100%;
+  transform:          translate(-50%, 0);
 }
 
 /************************************************************************************
@@ -248,6 +269,7 @@ tr th.tableblock {
   box-shadow: -1px 2px 4px black;
   z-index:    9999;
   overflow:   scroll;
+  user-select: none;
 }
 .sidebar.closed {
   left:  -225px;
@@ -350,7 +372,17 @@ tr th.tableblock {
 /* .StarterFile {font-style: italic;} */
 /* .StarterFile::before {content: "Starter File: "; color: gray;} */
 
-/* Language and Standards Tables */
+/* Language Table */
+.lang-features-table {
+  display: table;
+  z-index: 999;
+  position: fixed;
+  top:  50%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  border:  solid 5px gray !important;
+}
 .lang-features-table * {
   margin:             0px;
   padding:            1px;
@@ -407,6 +439,7 @@ tr th.tableblock {
   background: #eee;
   clear:      both;
   padding:    5px;
+  margin:     2ex 0;
 }
 .lesson-instruction > *:first-child { margin-left: 60px; }
 .lesson-instruction > *:first-child::before {
@@ -465,6 +498,7 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
+body:not(.LessonPlan) { font-size: 10.5pt; }
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
@@ -474,6 +508,8 @@ body:not(.LessonPlan) .sect2 > h3:first-child {
   width:            100%;
   padding:          5px 0px;
 }
+
+body:not(.LessonPlan) .description { display: none; }
 
 /**
  * Auto-numbering.
@@ -500,8 +536,18 @@ table .autonum::after { content: none; }
  .TwoColumnDD_DT dl > *:nth-of-type(odd){ background: #7532891f;}
 
 /************************************************************************************
-* DESIGN RECIPE AND STUDENT ANSWER STYLING
+* DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
 */
+
+/* Data Cycle tables should have borders */
+.data-cycle { border-collapse: collapse; }
+.data-cycle td:first-of-type { background: lightgray; border: solid white; }
+.data-cycle .ruby { color: #666; text-align: left; transform:  none; left: 0; }
+.data-cycle td p,.data-cycle td p > * { font-size: 0.75rem; }
+.data-cycle .fitbruby, .data-cycle .fitb { 
+  text-align: left; font-style: italic; font-size:  1rem;
+}
+
 
 /* Note(Emmanuel): use display:flex and get rid of these! */
 .studentAnswerShort  { min-width: 60pt;  }
@@ -511,7 +557,7 @@ table .autonum::after { content: none; }
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { background: gray; border: gray; }
 table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px ;}
+.recipe_title p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 .recipe_title td:last-child { border: 3px solid gray !important; }
 .recipe_title td:last-child .content { width: 18px; height: 18px; background: white; }
 
@@ -519,9 +565,10 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
 /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-.recipe p {
+body:not(.LessonPlan) .recipe p {
   width:      100%;
   margin:     0;
+  min-height: 1.5rem;
   display:    flex;
   flex-wrap:  wrap;
 }
@@ -547,12 +594,12 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
   display:            inline-block;
   border-bottom:      solid 1px black;
 }
-.pyretkeyword { margin: 0.25rem 0; }
+.pyretkeyword { margin: 4px 0; line-height: 1rem; }
 .studentAnswerCode::after, .studentAnswer::after {
   position:           absolute;
   bottom:             -1rem;
   left:               0;
-  font-size:          .65rem;
+  font-size:          .60rem;
   width:              100%;
   text-align:         center;
   font-style:         italic;
@@ -624,7 +671,7 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 .recipe_variables     { min-width: 30%; white-space: nowrap; }
 
 /* in solutions mode, use the smallest possible space for function name */
-.solution.recipe_name { min-width: 5em; }
+.solution.recipe_name { min-width: 6em; }
 .pyret .solution.recipe_name { text-align: right; } /* no whitespace in pyret */
 
 /* Special styling for purpose statements (includes lang-specific comment) */
@@ -700,13 +747,16 @@ table.contract-table tr:nth-child(4n+4) { background-color: #f2f2f2; }
 td.tableblock .listingblock { margin-bottom: 0 !important; }
 
 /************************************************************************************
-* FORMATTING OF CIRCLES, PRIMITIVE TYPES, KEYWORDS, PARENS
+* FORMATTING OF CIRCLES, AND TEXT CODE
 */
 
 /* When printing solutions, add a shadow for expressions */
 .studentAnswerFilled .expression, .studentBlockAnswerFilled .expression {
   box-shadow: 2px 1px 5px black;
 }
+
+/* override asciidoc default when bold-facing text inside code-blocks */
+.pyret strong, .wescheme strong { margin: 0; padding: 0; }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
@@ -748,7 +798,7 @@ div.circleevalsexp .hspace { display: none; }
 div.circleevalsexp .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
 
 /* When in operator position, drop the margins */
-div.circleevalsexp .operator .value { margin: 0px; }
+div.circleevalsexp .operator .value { margin: 0 0.5rem; }
 /* Don't show parens in Circle mode */
 div.circleevalsexp .lParen, div.circleevalsexp .rParen { display: none; }
 
@@ -770,7 +820,8 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   padding:            0 2px;
   text-align:         left;
 }
-p .editbox { line-height: 1.6rem; vertical-align: baseline; font-size: 0.9rem; }
+.editbox:empty { display: none; } /* If empty after JS post-processing, hide */
+p .editbox { line-height: 1.2rem; vertical-align: baseline; font-size: 0.9rem; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
@@ -898,7 +949,7 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor {
+  .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
 
@@ -908,6 +959,7 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
 
     /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  #content { margin: auto; }
 
   /* Page breaks in lesson content*/
   div#body{ position: static; } /* page-break fails on absolute positioning */
@@ -939,13 +991,21 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
   .listingblock pre:not(.highlight) { background: none !important; }
 
   body:not(.LessonPlan) #header> h1:first-child,
-  body:not(.LessonPlan) .sect1 > h1:first-child,
-  body:not(.LessonPlan) .sect1 > h2:first-child,
-  body:not(.LessonPlan) .sect1 > h3:first-child,
-  body:not(.LessonPlan) .sect2 > h3:first-child {
+  body:not(.LessonPlan) .sect1 > h1:first-child{
     background:       black;
     color:            white;
     text-align:       center;
+    padding:          1px;
+  }
+
+  body:not(.LessonPlan) .lesson-section-1 { border: none; }
+  body:not(.LessonPlan) .sect1 > h2:first-child,
+  body:not(.LessonPlan) .sect1 > h3:first-child,
+  body:not(.LessonPlan) .sect2 > h3:first-child {
+    background:   #ccc;
+    font-weight:  600;
+    font-size:    12pt;
+    padding-left: 5px;
   }
 
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/

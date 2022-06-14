@@ -2,9 +2,12 @@
 
 @description{Students learn how to apply Functions in the programming environment and interpret the information contained in Contracts: Name, Domain and Range. Image-producing functions provide an engaging context for this exploration.}
 
+@lesson-prereqs{simple-data-types}
+
+@keywords{}
+
 [@lesson-intro-table]
 |===
-@lesson-prereqs{simple-data-types}
 | Lesson Goals
 | Students will be able to:
 
@@ -22,29 +25,13 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1eLe5LmYNfVBN_6Yw6K41UIpLTO1GOfy2295HrbjlKhk/, Lesson Slides}
-}
 
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1ByESdl8Tuv4V1xf6ZdQ6f1g9oI3uqMFWNP_8BzhVnIc/, Lesson Slides}
-}
 
 @material-links
 
 | Preparation
 |
-* Make sure all materials have been gathered
-* Computer for each student (or pair), with access to the
-internet
-* Students should have @pathwaylink{workbook/workbook.pdf, Student workbook} and something to write with.
-* Decide how students will be grouped in pairs
-@ifproglang{pyret}{
-* All students should log into @link{https://code.pyret.org, "code.pyret.org (CPO)"} and open the "Editor"
-}
-@ifproglang{wescheme}{
-* All students should log into @link{https://www.wescheme.org, WeScheme} and open the "Editor"
-}
+All students should log into @starter-file{editor} and open the "Editor".
 
 | Key Points For The Facilitator
 |
@@ -54,11 +41,7 @@ internet
 * Students will use their Contracts page frequently, so it should be kept in an accessible, convenient location.
 }
 
-@lang-prereq
 |===
-
-[.old-materials]
-Click here to see the @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/unit2/index.html, prior unit-based version}.
 
 == Applying Functions @duration{10 minutes}
 
@@ -69,48 +52,64 @@ Students learn how to apply functions in
 reinforcing concepts from standard Algebra, and practice reading error messages to diagnose errors in code.
 
 === Launch
-Students know about Numbers, Strings,
-	@ifproglang{pyret}{Booleans and Operators}
-	@ifproglang{wescheme}{and Booleans}
--- all of which behave just like they do in math. But what about @vocab{functions}? Students may remember functions from algebra: @math{f(x) = x + 4}.
+In human languages, verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a sandwich". "Throw" and "Eat" are verbs, and "ball" and "sandwich" are nouns.
+
+In programming languages, values are like nouns. You've learned about values in our programming language, like Numbers (`42`, `-8.3`, etc), Strings (`"hello!"`), and Booleans (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` - each of which _does something_ to Numbers.}
+
+In programming, our verbs are called @vocab{functions}. A function is like a machine, and it does three things:
+
+- It takes in some values (called @vocab{arguments})
+- It _does something_ to those values
+- It produces a new value
+
+Let's play with a few functions, to get the hang of it.
 
 [.lesson-instruction]
-- What is the name of this function? _f_
-- The expression @math{f(2)} applies the function @math{f} to the number 2. What will it evaluate to? _6_
-- What will the expression @math{f(3)} evaluate to? _7_
-- The values to which we apply a function are called its @vocab{arguments}. How many arguments does @math{f} expect? _1_
-
-@vocab{Arguments} (or "inputs") are the values passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with input values! Pyret has lots of built-in functions, which we can use to write more interesting programs.
-
-
-Have students log into
+--
+- Log into
 @ifproglang{pyret}{@link{https://code.pyret.org, "code.pyret.org (CPO)"}}
-@ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}, open the editor, @ifproglang{pyret}{type the words *include image* on Line 1 of the Definitions area (left side) and press "Run" to load the image library. Then} type
- @show{(sexp->code '(sqrt 16))} into the interactions area and hit Enter.
+@ifproglang{wescheme}{@link{https://wescheme.org, WeScheme}}
+- Open the editor and press "Run", then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
+- What part of this expression is the _value_?
+** _16_
+- What is the name of this function? @show{(code 'sqrt)}
+- How many arguments are we giving to this function?
+** _1_
+- What is the type of the argument we are giving to `sqrt`?
+** _A Number_
+- What did @show{(code 'sqrt)} produce?
+** _4_
+- What type of data did `sqrt` produce?
+** _Number_
+--
+
+Encourage students to try giving different arguments to `sqrt`. Does it only work with Numbers? Does it only take one Number?
 
 [.lesson-instruction]
 --
-- What is the name of this function? @show{(sexp->code 'sqrt)}
-
-- How many arguments does the function expect? _1_
-- What type of argument does the function expect? _Number_
-- Does the @show{(sexp->code 'sqrt)} function produce a Number? String? Boolean? _Number_
-- What did the expression evaluate to? _4_
+- Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
+- What is the name of this function?
+** _string-length_
+- How many arguments does `string-length` expect?
+** _1_
+- What type of argument does the function expect?
+** _String_
+- What does the expression evaluate to?
+** _7_
+- What type of data did `string-length` produce?
+** _Number_
 --
+Encourage students to try giving different arguments to `string-length`. Does it only work with Strings? Does it only take one String? What does it do?
 
-Have students type @show{(sexp->code '(string-length "rainbow"))} into the interactions area and hit Enter:
+@ifproglang{pyret}{
+**This is a terrific opportunity to remind students of function notation, which Pyret mirrors precisely!**
 
-[.lesson-instruction]
---
-- What is the name of this function? _string-length_
-- How many arguments does `string-length` expect? _1_
-- What type of argument does the function expect? _String_
-- What does the expression evaluate to? _7_
-- Does the `string-length` function produce a Number? String? Boolean? _Number_
---
+Note that @vocab{arguments} (or "inputs") are the _values_ passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with those arguments! Pyret has lots of built-in functions, which we can use to write more interesting programs.
+
+}
 
 === Investigation
-Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(sexp->code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes!
+Have students complete @printable-exercise{pages/applying-functions.adoc} to investigate the `triangle` function and a series of error messages. As students finish, have them try changing the expression @show{(code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then have them try changing colors and sizes!
 
 === Synthesize
 Debrief the activity with the class.
@@ -131,7 +130,7 @@ This activity introduces the notion of @vocab{Contracts}, which are a simple not
 
 === Launch
 
-When students typed @show{(sexp->code '(triangle 50 "solid" "red"))}
+When students typed @show{(code '(triangle 50 "solid" "red"))}
 into the editor, they created an example of a new @vocab{data type}, called an _Image_.
 
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
@@ -192,7 +191,7 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 @ifproglang{pyret}{
 |`#` `num-sqr`			| ::| `Number`  				|	->	| `Number`
 |`#` `num-sqrt`			| ::| `Number` 					|	->	| `Number`
-|`#` `string-equal`		| ::| `String, String`			|	->	| `Boolean`
+|`;` `string-equal`		| : | `String, String`			|	->	| `Boolean`
 |`#` `string-contains`	| ::| `String, String`			|	->	| `Boolean`
 |`#` `string-length`	| ::| `String`					|	->	| `Number`
 |`#` `triangle`			| ::| `Number, String, String`	|	->	| `Image`
@@ -207,7 +206,7 @@ When the input matches what the function consumes, the function produces the out
 
 [.lesson-instruction]
 --
-Here is an example of another function. @show{(sexp->code '(string-append "sun" "shine"))}
+Here is an example of another function. @show{(code '(string-append "sun" "shine"))}
 
 Type it into the editor. What is its contract? `string-append {two-colons} String, String -> String`
 --
@@ -242,7 +241,7 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 
 - Type `star` into the Interactions Area and hit "Enter". What did you get back? What does that mean? _There is something called "star", and the computer knows it's a function!_
 
-- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(sexp->code '(star 50))}
+- If it's a function, we know that it will need an open parentheses and at least one input. Have students try @show{(code '(star 50))}
 
 - What error did we get? What _hint_ does it give us about how to use this function? _``star`` has three elements in its Domain_
 
@@ -310,7 +309,7 @@ Once they've discovered how to build a version of each image function that satis
 --
 
 Have students turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
-If you are ready to dig into @show{(sexp->code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
+If you are ready to dig into @show{(code 'triangle-sas)}, you can also have students work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 Sometimes it's helpful to have a contract that tells us more information about the arguments, like what the 3 numbers in a contract stand for. This will not be a focal point of our work, but to give students a taste of it, have them turn to @printable-exercise{pages/radial-star.adoc} and use the contract to help them match the images to the corresponding expressions. For more practice with detailed contracts you can have them turn to  @opt-printable-exercise{pages/star-polygon.adoc} to work with the detailed contract for a `star-polygon`. Both of these functions can generate a wide range of interesting shapes!
 

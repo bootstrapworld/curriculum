@@ -1,0 +1,135 @@
+= Introduction to Transformers: Filter, Transform, Build
+@description{Students learn more about _Transformers_, including `Filter`, `Transform Attribute`, `Build Attribute`.}
+
+@add-to-lang{.order-by, .filter, .build-column}
+
+[@lesson-intro-table]
+|===
+@lesson-prereqs{functions-dr}
+| Lesson Goals
+| Students will be able to...
+
+* filter the Animals Dataset by species, fixed status, and age
+* transform a column in the Animals Dataset
+* add a column to the Animals Dataset
+
+| Student-facing Lesson Goals
+|
+
+* Let’s learn how transform one table into another.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+|===
+
+== Filtering Tables @duration{20 minutes}
+
+=== Overview
+Students learn how to _filter_ tables by removing Rows.
+
+=== Launch
+
+Announce to the class that you are going to select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
+
+Tell the class that you are going to select a volunteer who will play the role of… The Filter Transformer!
+
+Hand the Filter Transformer an Expression card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__. Instruct them to review their expression's *Contract* and *Purpose Statement*, but to keep that information a secret.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+a|
+@span{.title}{Contracts and Purpose Statements}
+
+A *contract* is a statement of the _domain_ and _range_ of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+
+A *Purpose Statement* is a way of describing what an expression does.
+
+|===
+
+
+Explain to the class that the Filter Transformer will walk from one student to the next, referring to the expression (on the card) in order to determine if each student should stand or sit.
+
+Here’s how that might look if the Filter Transformer chose an expression called `likes-pizza`.
+
+Filter Transformer to Student 1: Do you like pizza?
+
+Student 1: Yes
+
+Filter Transformer: Remain standing. (Student 1 remains standing.)
+
+Filter Transformer to Student 2: Do you like pizza?
+
+Student 2: No.
+
+Filter Transformer: Sit down. (Student 2 sits.)
+
+After the Filter Transformer has applied the expression to each student, ask the class: Based on who sat and who stayed, what expression was the Filter Transformer applying? _What does the Filter Transformer do to a dataset?_
+
+[.lesson-point]
+The `Filter` Transformer takes an _expression_, and produces a new table containing only rows for which the expression returns `true`.
+
+=== Investigate
+
+Explain to students that they are going to practice using the `Filter` Transformer in the @starter-file{animals} in CODAP. As they complete the worksheet, encourage students to pay close attention as they enter information into the `Transformer` plugin. What happens if they forget to select a dataset from the drop-down menu? When does the text change colors? Does CODAP mind if spelling is off? What happens when students 'Save'?
+
+[.lesson-instruction]
+Complete the worksheet @printable-exercise{pages/codap-filter.adoc} in the @starter-file{animals} in CODAP..
+
+=== Synthesize
+Debrief with students. Some guiding questions on filtering:
+
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Trasnformer's _expression_?
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+
+== Transforming Columns @duration{10 minutes}
+
+=== Overview
+Students learn how to _transform columns_ using the `Transform Attribute` Transformer.
+
+=== Launch
+Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or `weeks` to `days`. The `Transform Attribute` Transformer makes that possible! .
+
+=== Investigate
+[.lesson-instruction]
+Complete the worksheet @printable-exercise{pages/codap-transform.adoc} in the @starter-file{animals} in CODAP.
+
+The `Transform Attribute` Transformer walks through the table, applying whatever expression it was given to each row. Whatever the expression produces for that row becomes the value of the column, which we can rename by selecting it. In the first example, we gave the Transformer `Age < 5` as its expression, so the new table replaced the age with an indication of whether each animal is young (`true`) or not (`false`).
+
+=== Synthesize
+Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
+
+- A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we use `Transform Attribute` to convert to imperial units (inches, pounds, etc).
+- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `Transform Attribute` to compute that for every row in the table.
+
+Being able to create and define a Transformer  is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
+
+== Building Columns @duration{10 minutes}
+
+=== Overview
+Students learn how to _build columns_, using the `Build Attribute` Transformer.
+
+=== Launch
+So far, we've used Transformers to _filter_ and to _transform an attribute_. The final Transformer we are exploring today is called `Build Attribute`. Can you guess what this Transformer does and how it might be similar to _and_ different from `Transform Attribute`?
+
+=== Investigate
+
+Now that students have some familiarity with creating and defining Transformers, invite them to explore `Build Attribute` to see if they can determine what it does. (It creates an additional column in the dataset, rather than _transforming_ the existing column.)
+
+[.lesson-instruction]
+Complete the worksheet @printable-exercise{pages/codap-build.adoc} in the @starter-file{animals} in CODAP..
+
+
+=== Synthesize
+Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
+
+- How is `Build Attribute` similar to `Transform Attribute`? How are they different?
+- When might it make more sense to _build_ an attribute, rather than to _transform_ it?
+
+== Additional Exercises:
+@opt-printable-exercise{pages/what-table-do-we-get.adoc}
