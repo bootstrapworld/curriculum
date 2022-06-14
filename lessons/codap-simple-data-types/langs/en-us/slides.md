@@ -1,6 +1,6 @@
 ---
 {layout="Core Title Slide"} 
-# Simple Data Types
+# Simple Data Types 
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -23,17 +23,42 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 {layout="Launch"}
 # Numbers & Strings
 
+- Play around in CODAP, guided by @printable-exercise{codap-experimentation.adoc}.
+- What did you Notice? What do you Wonder?
 
-
----
-{layout="LaunchR"}
-# Numbers & Strings
-
+<!--
+    Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. *NEED SCREENSHOT*
+-->
 
 ---
 {layout="Investigate"}
 # Numbers & Strings
 
+- Complete @printable-exercise{numbers-n-strings.adoc}.
+- What did you Notice? What do you Wonder?
+- Did you get any error messages? What did you learn from them? 
+
+<!--
+In their `test` column, students will experiment with _Numbers_ and _Strings_. In order to complete the worksheet below, students must click on the `test` cell in the header of their Table, and then choose `Edit formula` from the resulting drop-down menu. As they complete each directive, they will re-open `Edit Formula`, delete their previous entry and then input the next entry. *NEED SCREENSHOT*
+-->
+
+---
+{layout="Synthesize"}
+# Numbers & Strings
+
+CODAP knows about many kinds of Numbers (like Integers, Reals, etc), and they behave pretty much the way they do in math. Discuss what students have learned:
+
+- Numbers and Strings evaluate to themselves.
+- CODAP converts fractions into decimals automatically.
+- Anything in quotes is a String, even something like `"42"`.
+- Strings _must_ have quotation marks on both sides.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together two strings, or a number and a string.
+- CODAP knows the order of operations.
+- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
+
+
+<!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
+-->
 
 ---
 {layout="Investigate-DN"}
@@ -58,36 +83,7 @@ Most of the error messages we've just seen were drawing our attention to syntax 
 Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
  -->
 
----
-{layout="Synthesize"}
-# Numbers & Strings
 
-- Numbers and Strings evaluate to themselves.{style="font-size:17pt"} 
-- Our Editor is pretty smart. When we click on a rational number, it switches between showing a fraction and decimal.{style="font-size:17pt"} 
-- Anything in quotes is a String, even something like `"42"`.{style="font-size:17pt"} 
-- Strings _must_ have quotation marks on both sides.{style="font-size:17pt"} 
-
-@ifproglang{pyret}{
----
-{layout="Synthesize"}
-# Numbers & Strings
-
-- @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
-- In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
-- When there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:17pt"} 
-- Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:17pt"} 
-
-
----
-{layout="Synthesize"}
-# Numbers & Strings
-
-Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
-
-- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
-- `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
-
-}
 ---
 {layout="Launch"}
 # Booleans 
@@ -101,7 +97,6 @@ What's the answer: is 3 greater than 10?
 Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!{style="font-size:15pt"} 
 
 For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
-
 @image{images/roller-coaster.png, a}
 
 --- 
@@ -125,3 +120,37 @@ Complete @printable-exercise{pages/booleans.adoc} with your partner, making pred
 # Booleans
 
 What sets Booleans apart from other data types?
+
+
+---
+{layout="Launch"}
+# Expressions
+
+- If @math{x = 2}, what will the expression @math{x + 4} evaluate to? What if @math{x = 20}?
+- The values we plug in are the expressions @vocab{arguments}. How many arguments does @math{x + 4} expect? _1_
+
+
+<!--
+    Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about expressions? Students may remember expressions from algebra: @math{x + 4}.
+-->
+
+---
+{layout="Launch"}
+# Expressions
+
+Complete @printable-exercise{pages/codap-expressions.adoc}.
+
+---
+{layout="Investigate"}
+# Expressions
+
+- Create a column called `age-next-year` that uses an expression to add one year to each animal’s age.
+- Create a column called `rounded-weight` that uses an expression to give the weight of each animal rounded to the nearest whole number.
+- Create a column called `old` that uses an expression to indicate which animals are  over 5 years old.
+
+---
+{layout="Synthesize"}
+# Expressions
+
+- Think about the new columns you created using expression. How did the input of the expression relate to the output?
+- What kind of error messages did you encounter, if any?
