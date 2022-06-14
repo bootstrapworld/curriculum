@@ -9,7 +9,9 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch-DN"}
 # Defining Piecewise Functions 
 
-You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your saved @starter-file{game} file, and refresh your memory on how they work.
+- Open your saved copy of the Game Starter File, or @starter-file{game, make a new copy}.
+- You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to refresh your memory on how they work.
+
 
 ---
 {layout="Launch"}

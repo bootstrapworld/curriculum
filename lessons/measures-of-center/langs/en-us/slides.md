@@ -58,7 +58,7 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 {layout="Investigate"}
 # Mean
 
-* Open your saved @starter-file{animals}, or make a new copy.
+* Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 
 If we plotted all the pounds values as points on a number line, what could we say about the **average** of those values? Is there a **midpoint**? Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
 
