@@ -20,7 +20,7 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Numbers & Strings
 
 - Play around in CODAP, guided by @printable-exercise{codap-experimentation.adoc}.
@@ -46,24 +46,19 @@ In their `test` column, students will experiment with _Numbers_ and _Strings_. I
 {layout="Synthesize"}
 # Numbers & Strings
 
-CODAP knows about many kinds of Numbers (like Integers, Reals, etc), and they behave pretty much the way they do in math. Discuss what students have learned:
+CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
 
 - Numbers and Strings evaluate to themselves.
 - CODAP converts fractions into decimals automatically.
 - Anything in quotes is a String, even something like `"42"`.
 - Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together two strings, or a number and a string.
+- Operators work just like they do in math - with a few exceptions. 
 - CODAP knows the order of operations.
 - Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
 
 
 <!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
 -->
-
----
-{layout="Investigate-DN"}
-# Numbers & Strings
-
 
 ---
 {layout="Investigate"}
@@ -97,6 +92,7 @@ What's the answer: is 3 greater than 10?
 Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!{style="font-size:15pt"} 
 
 For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
+
 @image{images/roller-coaster.png, a}
 
 --- 
@@ -127,7 +123,7 @@ What sets Booleans apart from other data types?
 # Expressions
 
 - If @math{x = 2}, what will the expression @math{x + 4} evaluate to? What if @math{x = 20}?
-- The values we plug in are the expressions @vocab{arguments}. How many arguments does @math{x + 4} expect? _1_
+- The values we plug in are the expressions @vocab{arguments}. How many arguments does @math{x + 4} expect?
 
 
 <!--
@@ -135,7 +131,7 @@ What sets Booleans apart from other data types?
 -->
 
 ---
-{layout="Launch"}
+{layout="Launch-DN"}
 # Expressions
 
 Complete @printable-exercise{pages/codap-expressions.adoc}.
