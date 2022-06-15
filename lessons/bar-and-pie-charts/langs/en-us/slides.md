@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Pie and Bar Charts
 
-- Open your saved @starter-file{animals}, or make a new copy.
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Where have you seen infographics and graphs used to display data in the real world?
 
 <!--

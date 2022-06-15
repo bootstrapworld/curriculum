@@ -28,8 +28,6 @@ When we apply a function to the inputs it needs, we substitute those inputs for 
 
 Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! 
 
-
-
 @image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}
 
 

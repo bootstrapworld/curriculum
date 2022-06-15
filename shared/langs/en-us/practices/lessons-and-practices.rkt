@@ -323,6 +323,10 @@
         "SEP.3"
         )
 
+    ("lookups"
+        "MP.7"
+        )
+
     ("measures-of-center"
         "MP.3"      ; STEMworks
         "SEP.3"

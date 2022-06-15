@@ -52,9 +52,9 @@ Our programming language allows us to define *values*. This lets us create "shor
 
 For example:
 
-@show{(code '(define PRIZE-STAR (star 65 "solid" "pink")))} 
+@show{(code '(define gt (triangle 65 "solid" "green")))} 
 
-This shortcut makes the same star every time!
+This shortcut makes the same green triangle _every_ time!
 
 ---
 {layout="Investigate"}
@@ -62,7 +62,7 @@ This shortcut makes the same star every time!
 
 To make a shortcut that _changes_, we need to define a _function_.
 
-Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
+Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 
 Who wants to be `gt`?!
 

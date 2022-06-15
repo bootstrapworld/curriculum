@@ -183,7 +183,7 @@ Our goal is to use values of the variable on our x-axis to _predict_ values of t
 {layout="Launch-DN"}
 # Linear Regression in Pyret
 
-- Open your saved @starter-file{animals}, or make a new copy.
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Create an `lr-plot` for the `animals-table`, using `"names"` for the labels, `"age"` for the x-axis and `"weeks"` for the y-axis.
 
 ---

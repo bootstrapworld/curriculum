@@ -1544,6 +1544,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)]
+                           [(string=? directive "lesson-slides")
+                            (display-lesson-slides o)]
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (display-lesson-description (read-group i directive)
@@ -1673,14 +1675,16 @@
                                           )))))))]
                            [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
-                            (let* ([lbl (read-group i directive)]
+                            (let* ([lbl+text (read-commaed-group i directive read-group)]
+                                   [lbl (first lbl+text)]
+                                   [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
                                    [c (assoc lbl *starter-files*)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([title (second c)]
+                                      (let ([title (or link-text (second c))]
                                             [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
@@ -1899,11 +1903,12 @@
               (when (pair? prims)
                 (for ([prim prims])
                   (add-prereq prim))))))
-        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr out-file))
+        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr out-file)
 
-      (when *lesson-plan*
         (call-with-output-file (path-replace-extension out-file "-extra-mat.asc")
           (lambda (o)
+
+            (display-lesson-slides o)
 
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -1962,6 +1967,16 @@
       (when *external-links-port* (close-output-port *external-links-port*))
 
       )))
+
+(define (display-lesson-slides o)
+  (let ([id-file (build-path *containing-directory* (format "slides-~a.id" *proglang*))])
+    (cond [(file-exists? id-file)
+           (let* ([id (call-with-input-file id-file read-line)]
+                  [pres-uri (format "https://docs.google.com/presentation/d/~a/" id)])
+             (check-link pres-uri #:external? #t)
+             (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
+          [else
+            (printf "WARNING: File ~a not found\n\n" id-file)])))
 
 (define (display-exercise-collation o)
   ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)

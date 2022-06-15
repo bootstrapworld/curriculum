@@ -18,7 +18,7 @@ The Design Recipe is a powerful tool for solving problems by writing @ifproglang
 {layout="Investigate"}
 # Design Recipe Practice
 
-- Open your saved @starter-file{animals}, or make a new copy.
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
 
 
@@ -46,7 +46,7 @@ Now that we are doing more sophisticated analyses, we might write the following:
 # get a table with the nametags of all 
 # the fixed animals, ordered by species
 with-labels = animals-table.build-column("labels", nametag)
-fixed-with-labels = with-nametags.filter(is-fixed)
+fixed-with-labels = with-labels.filter(is-fixed)
 result = fixed-with-labels.order-by("species", true)
 ```
 

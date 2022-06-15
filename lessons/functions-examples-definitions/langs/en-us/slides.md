@@ -116,7 +116,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 
 Complete:
 - @printable-exercise{pages/contracts-examples-definitions-stars.adoc} 
-- @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
+- @printable-exercise{pages/contracts-examples-definitions-name.adoc}
 
 <!--
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.

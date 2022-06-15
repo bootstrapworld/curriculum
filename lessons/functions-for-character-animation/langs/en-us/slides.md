@@ -49,7 +49,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 {layout="Launch"}
 # Animation
 
-- Open your saved copy of the @starter-file{game} in a new tab
+- Open your saved copy of the Game Starter File, or @starter-file{game, make a new copy}.
 - What did you notice about the movement of TARGET and DANGER? What was changing about them?
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 

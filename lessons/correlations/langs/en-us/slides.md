@@ -246,7 +246,7 @@ If time allows, you may want to emphasize the point that correlation does not im
 # Summarizing Correlations using r-values
 
 - Let's look for correlations in the Animals Dataset!
-- Open your saved @starter-file{animals}, or make a new copy.
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Complete @printable-exercise{correlations-animals.adoc}.
 
 ---

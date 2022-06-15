@@ -23,12 +23,6 @@
 | Materials
 |[.materials-links]
 
-@ifproglang{wescheme}{
-* @link{https://docs.google.com/presentation/d/1B9mESkR0VtlWSF712C0p35d0fNF1kiv_Ar33wIK297c/, Lesson Slides}
-}
-@ifproglang{pyret}{
-* @link{https://docs.google.com/presentation/d/1f58vvHsNgb-YumWEBH_J6o0L3Pc7AacBw-UxvCbYYIs/, Lesson Slides}
-}
 
 @material-links
 
@@ -83,13 +77,13 @@ For example:
 Our programming language allows us to define *values*. This lets us create "shortcuts" to reuse the same code over and over.
 
 For example:
-@show{(code '(define PRIZE-STAR (star 65 "solid" "pink")))} allows us to make the same solid, pink star anywhere we want, just by writing `PRIZE-STAR` - without having to write all of the code again and again.
+@show{(code '(define gt (triangle 65 "solid" "green")))} allows us to make the same solid, green triangle anywhere we want, just by writing `gt` - without having to write all of the code again and again. But...it makes the same green triangle _every_ time.
 
 [.lesson-point]
 To make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.
 
 [.lesson-instruction]
-Suppose we want to define a shortcut called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
+Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 What will _@show{(code '(gt 5))}_ produce?
 _@show{(code '(triangle 5 "solid" "green"))}!_
 
