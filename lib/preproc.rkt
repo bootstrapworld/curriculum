@@ -2464,9 +2464,6 @@
 (define (fitb? e)
   (and (list? e) (memq (first e) '(?FITB))))
 
-(define (fitb? e)
-  (and (list? e) (memq (car e) '(?FITB))))
-
 (define *common-infix-ops*
  '(+ - * / and or < > = <= >= <> frac
      string=? string<? string<=? string>? string>=? string<>?))

@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Row Lookups
 
-Open your saved “Animals Starter File”. (You can always make a new copy of the @starter-file{animals}.)
+Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 
 Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. 
 

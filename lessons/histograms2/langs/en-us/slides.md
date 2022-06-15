@@ -82,7 +82,7 @@ Think about the toes on your right foot!
 {layout="Investigate"}
 # Describing Shape
 
-* Open your saved @starter-file{animals}, or make a new copy.
+* Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 * Make a histogram for the pounds column in the animals table, sorting the animals into 20-pound bins:
 * Would you describe the shape of your histogram as being skewed left, skewed right, or symmetric?
 * Which one of these statements is justified by the histogram’s shape?

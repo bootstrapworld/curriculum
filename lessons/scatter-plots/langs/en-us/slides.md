@@ -68,7 +68,7 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 {layout="Investigate-DN"}
 # Making Scatter Plots
 
-* Open your saved “Animals Starter File”. (You can always make a new copy of the @starter-file{animals}.)
+* Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 * Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
 * Are there any patterns or trends that you see here?
 
