@@ -21,7 +21,7 @@ Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run".
 {layout="LaunchR"}
 # Surface Area
 
-Type `prism` into the interactions area to see an image of a rectangular prism. What do you notice about the prism? 
+Type `prism` into the Interactions Area to see an image of a rectangular prism. What do you notice about the prism? 
 @image{images/prism.png, "rectangular prism with dimensions and faces labeled"}
 
 ---
@@ -34,15 +34,15 @@ Type `prism` into the interactions area to see an image of a rectangular prism. 
 {layout="Launch"}
 # Surface Area
 
-- Go to PART 1 and look at the definition for `front` and `back`. Type `front` into the interactions area. What do you get?
+- Go to PART 1 and look at the definition for `front` and `back`. Type `front` into the Interactions Area. What do you get?
 - Just as `front` has been defined to draw a rectangle whose dimensions are width and height, you will need to write definitions for each of the other faces of the prism.
-- Click "Run" and test each of them in the interactions area to make sure that they match the prism you started with.
+- Click "Run" and test each of them in the Interactions Area to make sure that they match the prism you started with.
 
 ---
 {layout="Launch"}
 # Surface Area
 
-- Go to PART 2 in the code. @ifproglang{pyret}{Type `print-imgs(faces)` into the interactions area.}@ifproglang{wescheme}{Type `(print-imgs faces)` into the interactions area.}  How many rectangles do you see? _One_
+- Go to PART 2 in the code. @ifproglang{pyret}{Type `print-imgs(faces)` into the Interactions Area.}@ifproglang{wescheme}{Type `(print-imgs faces)` into the Interactions Area.}  How many rectangles do you see? _One_
 - The code in PART 2 says @ifproglang{pyret}{`faces = [list: front, ]`}@ifproglang{wescheme}{`(define faces (list front back))`} , which defines `faces` to be a list of values. This list will include all of the faces of the prism, but right now it only includes `front` and `back`. Add the names of each of the remaining faces to the list. 
 
 @ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}

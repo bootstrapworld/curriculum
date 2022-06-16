@@ -84,7 +84,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 - Find the `line-length` function in your game files and take a minute to look at the code.
 - What do you notice?
 - What do you wonder?
-- Click Run, and practice using `line-length` in the @vocab{Interactions area} with different values for `a` and `b`.
+- Click Run, and practice using `line-length` in the @vocab{Interactions Area} with different values for `a` and `b`.
 
 <!--
 - What do you notice? Both of the examples do the same thing, even though the numbers are given in a different order. It's a piecewise function! It uses inequalities.

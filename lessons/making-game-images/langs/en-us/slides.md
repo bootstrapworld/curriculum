@@ -34,7 +34,7 @@ Going line-by-line, talk with your group about what you think each line does.
 - What familiar things did you see in the Game Starter File file?
 - What were some unfamiliar things?  Any idea what they might do?
 - What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?
-- What does `SCREENSHOT` return in the @vocab{Interactions area}?
+- What does `SCREENSHOT` return in the @vocab{Interactions Area}?
 - Did anyone try pressing Run?  What happens when you press Run?*
 - What do you think `image-url` does?
 
@@ -47,7 +47,7 @@ _Answers vary: new functions, comments, images_
 - *What data type is `GAME-TITLE`?  What data type is `BACKGROUND`?*
 _``GAME-TITLE`` is a String, `BACKGROUND` is an Image_
 
-- *What does `SCREENSHOT` return in the @vocab{Interactions area}?*
+- *What does `SCREENSHOT` return in the @vocab{Interactions Area}?*
 _An image of the `BACKGROUND`, `PLAYER`, `TARGET`, and `DANGER` all together_
 
 - *Did anyone try pressing "Run"?  What happens when you press "Run"?*

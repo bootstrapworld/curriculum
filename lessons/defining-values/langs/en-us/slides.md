@@ -68,7 +68,7 @@ Pyret is no different!
 
 Complete @starter-file{defining-values} and complete the Notice and Wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner.
 
-Complete the remaining questions and add some definitions of your own in the definitions area. Be sure to click *Run* again before you try testing them out.
+Complete the remaining questions and add some definitions of your own in the Definitions Area. Be sure to click *Run* again before you try testing them out.
 
 ---
 {layout="Synthesize"}
