@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-03 # last modified
+LASTMOD=2022-06-16 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2168,7 +2168,9 @@ function buildpathway() {
     else
       # export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
+        $SED -e 's/\t/ /g' |
         $SED -e 's/;.*//' |
+        $SED -e 's/ *$//' |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
     fi

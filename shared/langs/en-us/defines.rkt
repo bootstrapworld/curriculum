@@ -43,7 +43,9 @@
   (display
     (string-append
       "\n- link:./pathway-glossary.shtml[Glossary]\n"
-      "-- A list of vocabulary words used in this pathway.\n") o))
+      "-- A list of vocabulary words used in this pathway.\n"
+      "We also provide a link:../../lib/bilingual-glossary.html[bilingual glossary],\n"
+      "which defines all vocabulary words across our lessons in English and Spanish.") o))
 
 (define (print-teach-remotely o)
   (display
