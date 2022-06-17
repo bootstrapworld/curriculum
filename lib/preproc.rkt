@@ -43,7 +43,7 @@
 
 (define *proglang* "pyret")
 
-(define *other-proglang* #f)
+(define *other-proglangs* #f)
 
 (define *containing-directory* "")
 
@@ -860,9 +860,9 @@
 (define *page-title* #f)
 
 (define (display-alternative-proglang o)
-  ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglang* *target-pathway* *narrative* *lesson-plan*)
-  (when (and *other-proglang*
-             (not (null? *other-proglang*))
+  ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglangs* *target-pathway* *narrative* *lesson-plan*)
+  (when (and *other-proglangs*
+             (not (null? *other-proglangs*))
              (or *narrative* *lesson-plan*))
     ; (printf "doing display-alternative-proglang really\n")
     (let ([other-proglang-links
@@ -888,11 +888,7 @@
                                                   (regexp-replace "-wescheme$" *lesson-plan* ""))]
                                         [else #f])]
                                  [(and (string=? *proglang* "pyret") (string=? x "codap"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("data-science"))
-                                                 (format "link:~acourses/data-science-codap/index.html[CODAP]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
+                                  (cond [*lesson-plan*
                                           (format "link:~alessons/~a-codap/index.shtml[CODAP]" *dist-root-dir*
                                                   *lesson-plan*)]
                                         [else #f])]
@@ -906,7 +902,7 @@
                                                   (regexp-replace "-codap$" *lesson-plan* ""))]
                                         [else #f])]
                                  [else #f]))
-                         *other-proglang*))])
+                         *other-proglangs*))])
       (unless (null? other-proglang-links)
         (display
           (enclose-span ".other-proglang"
@@ -1268,7 +1264,7 @@
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
                            #:proglang [proglang "pyret"]
-                           #:other-proglang [other-proglang #f]
+                           #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
 
@@ -1279,7 +1275,7 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
-  (set! *other-proglang* other-proglang)
+  (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
