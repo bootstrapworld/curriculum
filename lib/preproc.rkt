@@ -2200,13 +2200,13 @@
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
                                          (regexp-replace* "\\." first-textbook "_"))
-                       first-textbook)))
+                       (expand-textbook-abbrev first-textbook))))
                (string-join
                  (map (lambda (textbook-label)
                         (enclose-tag "option" ""
                           #:attribs (format "value=\"textbook-~a\""
                                             (regexp-replace* "\\." textbook-label "_"))
-                          textbook-label))
+                          (expand-textbook-abbrev textbook-label)))
                       (if (null? *textbooks-represented*) '()
                           (rest *textbooks-represented*)))
                  "")))
@@ -2223,13 +2223,13 @@
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"practices-~a\""
                                          (regexp-replace* "\\." first-practice-categ "_"))
-                       first-practice-categ)))
+                       (expand-practice-abbrev first-practice-categ))))
                (string-join
                  (map (lambda (practice-categ)
                         (enclose-tag "option" ""
                           #:attribs (format "value=\"practices-~a\""
                                             (regexp-replace* "\\." practice-categ "_"))
-                          practice-categ))
+                          (expand-practice-abbrev practice-categ)))
                       (if (null? *practice-categories-represented*) '()
                           (rest *practice-categories-represented*)))
                  "")))
