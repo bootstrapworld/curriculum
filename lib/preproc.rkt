@@ -574,6 +574,11 @@
          [g-in-pages (string-append lesson "/pages/" snippet)]
          [f (string-append "lessons/" g)]
          [f.src f]
+         [f.titletxt (path-replace-extension
+                       (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
+                       ".titletxt")]
+         [page-title (and (file-exists? f.titletxt)
+                       (call-with-input-file f.titletxt read-line))]
          [existent-file? #f]
          [non-workbook-page? #f]
          [error-cascade? #f])
@@ -619,26 +624,26 @@
             (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
               (set! *exercises-done*
                 (cons (list f ex-ti) *exercises-done*)))))))
-    (when (or (not link-text) (string=? link-text ""))
-      (let ([f.titletxt (path-replace-extension
-                          (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
-                          ".titletxt")])
-        (when (file-exists? f.titletxt)
-          (set! link-text (call-with-input-file f.titletxt read-line)))))
+    (when (and (or (not link-text) (string=? link-text "")) page-title)
+      (set! link-text page-title))
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g link-text
+                    (if *lesson-plan* ", window=\"_blank\"" ""))]
+          [materials-link-output
+            (format "link:~alessons/pass:[~a][~a~a]"
+                    *dist-root-dir* g (or page-title link-text)
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
-                                           link-output "##")])
+                                           materials-link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
                    (set! *opt-printable-exercise-links*
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-                (let ([styled-link-output (string-append "[.PrintableExercise]##" link-output "##")])
+                (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
                   (unless (findf (lambda (L) (equal? (second L) styled-link-output))
                                  *printable-exercise-links*)
                     (set! *printable-exercise-links* (cons (list snippet styled-link-output)
@@ -1643,26 +1648,28 @@
                                             [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
-                                                     (errmessage-context) directive lbl *proglang*)]
+                                                       (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (unless (<= (length p) 2) (set! title (third p)))
-                                                (let* ([link-output (format "link:pass:[~a][~a~a]" (second p) title
-                                                                            (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                            )]
-                                                       [styled-link-output
-                                                         (format "[StarterFile~a]##~a##"
-                                                                 (if opt? " Optional" "")
-                                                                 link-output)])
-                                                  (cond [(member lbl *do-not-autoinclude-in-material-links*)
-                                                         #f]
-                                                        [opt?
-                                                          (unless (member styled-link-output *opt-starter-file-links*)
-                                                            (set! *opt-starter-file-links*
-                                                              (cons styled-link-output *opt-starter-file-links*)))]
-                                                        [else
-                                                          (unless (member styled-link-output *starter-file-links*)
-                                                            (set! *starter-file-links*
-                                                              (cons styled-link-output *starter-file-links*)))])
+                                                (let ([link-output (format "link:pass:[~a][~a~a]" (second p) title
+                                                                           (if *lesson-plan* ", window=\"_blank\"" "")
+                                                                           )])
+                                                  (unless (member lbl *do-not-autoinclude-in-material-links*)
+                                                    (let* ([materials-link-output (format "link:pass:[~a][~a~a]" (second p) (second c)
+                                                                                (if *lesson-plan* ", window=\"_blank\"" "")
+                                                                                )]
+                                                           [styled-link-output
+                                                             (format "[StarterFile~a]##~a##"
+                                                                     (if opt? " Optional" "")
+                                                                     materials-link-output)])
+                                                      (cond [opt?
+                                                              (unless (member styled-link-output *opt-starter-file-links*)
+                                                                (set! *opt-starter-file-links*
+                                                                  (cons styled-link-output *opt-starter-file-links*)))]
+                                                            [else
+                                                              (unless (member styled-link-output *starter-file-links*)
+                                                                (set! *starter-file-links*
+                                                                  (cons styled-link-output *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
