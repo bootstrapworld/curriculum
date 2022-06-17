@@ -805,6 +805,7 @@ function doadoc() {
       fi
       otherproglang="($otherproglang)"
     fi
+    # Why these touches?
     touch .cached/.index-sidebar.asc
     touch .cached/.index-standards.asc
     echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT

@@ -4,6 +4,7 @@
   print-coverage-js
   print-standards-js
   print-textbooks-js
+  print-practices-js
   print-menubar
   )
 
@@ -15,6 +16,9 @@
 
       "function preselect(klass) {\n"
       "  const items = document.getElementsByClassName(klass);\n"
+      "  for (let i = 0; i < items.length; i++) {\n"
+      "    items[i].style.display = 'none';\n"
+      "  }\n"
       "  if (items.length > 0) {\n"
       "    items[0].style.display = 'block';\n"
       "  }\n"
@@ -57,6 +61,9 @@
       "<script>\n"
       "function preselect(klass) {\n"
       "  const items = document.getElementsByClassName(klass);\n"
+      "  for (let i = 0; i < items.length; i++) {\n"
+      "    items[i].style.display = 'none';\n"
+      "  }\n"
       "  if (items.length > 0) {\n"
       "    items[0].style.display = 'block';\n"
       "  }\n"
@@ -64,6 +71,7 @@
       "window.onload = function() {\n"
       "  preselect('alignedStandards');\n"
       "  preselect('alignedTextbooks');\n"
+      "  preselect('alignedPractices');\n"
       "}\n"
       "function showStandardsAlignment() {\n"
       "  const selectTag = document.getElementsByClassName('standardsAlignmentSelect')[0];\n"
@@ -140,6 +148,36 @@
       "    }\n"
       "  }\n"
       "  //intro.style.display = introNeeded ? 'block' : 'none';\n"
+      "}\n"
+      "</script>\n"
+      "++++\n\n") o))
+
+(define (print-practices-js o)
+  (display
+    (string-append
+      "\n++++\n"
+      "<script>\n"
+      "function showPracticesAlignment() {\n"
+      "  const selectTag = document.getElementsByClassName('practicesAlignmentSelect')[0];\n"
+      "  const options = selectTag && selectTag.options;\n"
+      "  if(!options) return;\n"
+      "  const practiceTables = document.getElementsByClassName('alignedPractices');\n"
+      "  for (let i = 0; i < practiceTables.length; i++) {\n"
+      "    const practiceTable = practiceTables[i];\n"
+      "    practiceTable.style.display = 'none';\n"
+      "  }\n"
+      "  for (let i = 0; i < options.length; i++) {\n"
+      "    const opt = options[i];\n"
+      "    if (opt.selected) {\n"
+      "      const optPractice = opt.value;\n"
+      "      for (let j = 0; j < practiceTables.length; j++) {\n"
+      "        const practiceTable = practiceTables[j];\n"
+      "        if (practiceTable.classList.contains(optPractice)) {\n"
+      "          practiceTable.style.display = 'block';\n"
+      "        }\n"
+      "      }\n"
+      "    }\n"
+      "  }\n"
       "}\n"
       "</script>\n"
       "++++\n\n") o))

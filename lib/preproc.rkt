@@ -441,27 +441,6 @@
     (display "*Lessons*\n" o)
 
     (display (create-begin-tag "ul" "") o)
-    #|
-    (for ([lesson relevant-lessons])
-      ; (printf "... doing ~s\n" lesson)
-      (let ([lesson-title lesson]
-            [lesson-title-file (build-path *containing-directory* 'up lesson ".cached" ".index.titletxt")])
-        (cond [(file-exists? lesson-title-file)
-               (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-              [else
-                #f
-                ;(printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson* lesson)
-                ])
-        (let ([lk
-                (format "link:~alessons/pass:[~a]/index.shtml[~a]"
-                        *dist-root-dir*
-                        lesson lesson-title)])
-          (when (member lesson *lesson-prereqs*)
-            ;(printf "lesson ~s is prereq\n" lesson)
-              (set! lk (enclose-span ".prerequisite" lk)))
-          (display (enclose-tag "li" "" lk) o)
-          (newline o))))
-    |#
 
     (display (create-end-tag "ul") o)
     (display (create-end-tag "div") o)
@@ -487,32 +466,21 @@
           ]))
 
 (define (display-practices-bar o)
-  ;(printf "doing display-practices-bar\n")
   (cond [(null? *practices-merited*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))
          (display (create-begin-tag "div" ".sidebarpractices") o)
          (display "*Practices in this Lesson*: _None_" o)
          (display (create-end-tag "div") o)
-         (newline o) ]
+         (display "\n" o)]
         [else
-          ;(printf "Pracices are present for ~s\n" *lesson-plan*)
-          (display (create-begin-tag "div" ".sidebarpractices") o)
-          (display "*Practices in this Lesson*" o)
-          (display "\n\n" o)
-          (for ([practice *practices-merited*])
-            (let* ([p (first practice)]
-                   [practice-desc (assoc p *flat-practices-list*)])
-              (cond [practice-desc
-                      (display p o)
-                      (display ":: " o)
-                      (display (second practice-desc) o)
-                      (newline o)]
-                    [else
-                      (printf "WARNING: Practice ~a not found\n" practice)])))
-          (display "\n\n" o)
-          (display (create-end-tag "div") o)
-          (newline o)]))
+          (display "\n[.sidebarpractices,cols=\"a\"]" o)
+          (display "\n|===\n" o)
+          (display "| " o)
+          (display "*Practices in this Lesson*\n" o)
+          (display-practices-selection o *practice-categories-represented*)
+          (display " | \n" o)
+          (display "\ninclude::.index-practices.asc[]\n" o)
+          (display "|===\n" o)
+          ]))
 
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
@@ -532,20 +500,6 @@
 (define (include-glossary o)
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::{frompathwayroot}~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
-
-(define (workbook-pagenum lesson snippet)
-  ;(printf "doing workbook-pagenum ~s ~s\n" lesson snippet)
-  ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
-  #|
-  (let* ([snippet.adoc
-           (path->string
-             (path-replace-extension snippet ".adoc"))]
-         [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
-                (assoc (list lesson snippet) *workbook-pagenums*))])
-    (if c (second c) #f))
-  |#
-  #f
-  )
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -1810,7 +1764,8 @@
 
               (when *lesson-plan*
                 (create-standards-subfile)
-                (create-textbooks-subfile))
+                (create-textbooks-subfile)
+                (create-practices-subfile))
 
               (when (and *narrative* (not title-reached?))
                 (print-course-logo *target-pathway* make-image o)
@@ -1846,6 +1801,7 @@
                   (lambda (o)
                     (print-standards-js o #:sidebar #t)
                     (print-textbooks-js o)
+                    (print-practices-js o)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
@@ -2156,22 +2112,21 @@
 (define (create-practices-section practice-categ practices o)
   ; (printf "doing create-practices-section ~s ~s\n" practice-categ practices)
   (unless (empty? practices)
-    (fprintf o "\n[~a.practices-~a]\n"
-             (if *lesson* "" ".coverageElement") (sanitize-css-id practice-categ))
+    (fprintf o "\n[.~a.practices-~a]\n"
+             (if *lesson* "alignedPractices" "coverageElement") (sanitize-css-id practice-categ))
     (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-practice-abbrev practice-categ))
     (for ([p practices])
       (let ([p-name (list-ref p 0)]
             [p-desc (list-ref p 1)]
             [p-lessons (unbox (list-ref p 3))])
-        (cond [*lesson* (display p-name o) (display #\space o)]
+        (fprintf o "~a:: " p-name)
+        (fprintf o "~a" p-desc)
+        (cond [*lesson* (fprintf o "\n")]
               [else
-                ; (fprintf o "~a:: {nbsp}\n\n" p)
-                (fprintf o "~a::" p-name)
-                (when p-desc
-                  (fprintf o " ~a." p-desc))
                 (when (> (length p-lessons) 0)
-                  (fprintf o " {startsb}See: ~a.{endsb}"
+                  (fprintf o ". ")
+                  (fprintf o "{startsb}See: ~a.{endsb}\n"
                            (string-join
                              (map
                                (lambda (x)
@@ -2188,10 +2143,7 @@
                                          [else
                                            (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
                                                    lesson *target-pathway* ltitle)])))
-                               p-lessons) ";"))
-                  )
-                (fprintf o "\n\n")
-                ])))
+                               p-lessons) ";")))])))
     (fprintf o "\n\n")))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -2248,15 +2200,38 @@
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
                                          (regexp-replace* "\\." first-textbook "_"))
-                       first-textbook)))
+                       (expand-textbook-abbrev first-textbook))))
                (string-join
                  (map (lambda (textbook-label)
                         (enclose-tag "option" ""
                           #:attribs (format "value=\"textbook-~a\""
                                             (regexp-replace* "\\." textbook-label "_"))
-                          textbook-label))
+                          (expand-textbook-abbrev textbook-label)))
                       (if (null? *textbooks-represented*) '()
                           (rest *textbooks-represented*)))
+                 "")))
+           o)
+  (newline o))
+
+(define (display-practices-selection o *practice-categories-represented*)
+  (display (enclose-tag "select" ".practicesAlignmentSelect"
+             #:attribs
+             " onchange=\"showPracticesAlignment()\""
+             (string-append
+               (if (null? *practice-categories-represented*) ""
+                   (let ([first-practice-categ (first *practice-categories-represented*)])
+                     (enclose-tag "option" ""
+                       #:attribs (format "selected=\"selected\" value=\"practices-~a\""
+                                         (regexp-replace* "\\." first-practice-categ "_"))
+                       (expand-practice-abbrev first-practice-categ))))
+               (string-join
+                 (map (lambda (practice-categ)
+                        (enclose-tag "option" ""
+                          #:attribs (format "value=\"practices-~a\""
+                                            (regexp-replace* "\\." practice-categ "_"))
+                          (expand-practice-abbrev practice-categ)))
+                      (if (null? *practice-categories-represented*) '()
+                          (rest *practice-categories-represented*)))
                  "")))
            o)
   (newline o))
@@ -2360,14 +2335,18 @@
           textbook-label
           textbook-chapters-used o)))))
 
+
 (define (create-practices-subfile-port o)
   ; (printf "doing create-practices-subfile-port with practices-merited= ~s\n" *practices-merited*)
   ; (printf "practice-categories-repd= ~s\n" *practice-categories-represented*)
   (unless (empty? *practices-merited*)
     (for ([practice-categ *practice-categories-represented*])
       (let ([practices-in-this-categ
-              (filter (lambda (s) (string=? (list-ref s 2) practice-categ)) *practices-merited*)])
-        (create-practices-section practice-categ practices-in-this-categ o)))))
+              (filter (lambda (s) (string=? (list-ref s 2) practice-categ))
+                      *practices-merited*)])
+        (create-practices-section
+          practice-categ
+          practices-in-this-categ o)))))
 
 (define (create-standards-subfile)
   (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])
@@ -2379,6 +2358,10 @@
 (define (create-textbooks-subfile)
   (let ([subf (build-path *containing-directory* ".cached" ".index-textbooks.asc")])
     (call-with-output-file subf create-textbooks-subfile-port #:exists 'replace)))
+
+(define (create-practices-subfile)
+  (let ([subf (build-path *containing-directory* ".cached" ".index-practices.asc")])
+    (call-with-output-file subf create-practices-subfile-port #:exists 'replace)))
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")
