@@ -20,10 +20,10 @@
 
 (define *course-workbook-links*
   '(
-    ("algebra-wescheme" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ed-campos-and-jennifer-poole-and-flannery-denny/bootstrapalgebra-student-workbook-wescheme/paperback/product-4j9rmj.html")
-    ("algebra-pyret" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ed-campos-and-jennifer-poole-and-flannery-denny/bootstrapalgebra-student-workbook-pyret/paperback/product-6j9zek.html")
-    ("data-science" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-flannery-denny/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
-    ("data-science-codap" "https://www.lulu.com/en/us/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-flannery-denny/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
+    ("algebra-wescheme" "https://www.lulu.com/shop/rachel-tabak-and-flannery-denny-and-ben-lerner-and-joe-politz/bootstrapalgebra-wescheme/paperback/product-92zw5z.html")
+    ("algebra-pyret" "https://www.lulu.com/shop/rachel-tabak-and-flannery-denny-and-ben-lerner-and-joe-politz/bootstrapalgebra-pyret/paperback/product-4zk8wp.html")
+    ("data-science" "https://www.lulu.com/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-rachel-tabak/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
+    ("data-science-codap" "#")
     ))
 
 (define *course-banners*
