@@ -1873,6 +1873,8 @@
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
+            (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
+
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (first x))]
