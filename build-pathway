@@ -2070,9 +2070,6 @@ function updatepathwaylist() {
 }
 
 function buildpathway() {
-  if test "$TGTPATHWAY" = data-science-codap -a "$PROGLANG" != codap; then
-    return
-  fi
   start=`date +%s`
   # echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
@@ -2652,20 +2649,22 @@ function callonpathway() {
   export TGTPATHWAY="$SRCPATHWAY"
 
   if test "$PROGLANG" = pyret; then
-    if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-pyret
+    # dont build Pyret versions of algebra-wescheme and data-science-codap
+    if test "$SRCPATHWAY" = algebra-wescheme -o "$SRCPATHWAY" = data-science-codap; then
+      return
     fi
   elif test "$PROGLANG" = wescheme; then
-    if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-wescheme
-    else
+    # build WeScheme versions only for algebra-wescheme and core
+    if test "$SRCPATHWAY" != algebra-wescheme -a "$SRCPATHWAY" != core; then
       return
     fi
+    if test "$SRCPATHWAY" = core; then
+      export TGTPATHWAY=core-wescheme
+    fi
   elif test "$PROGLANG" = codap; then
-    if test "$SRCPATHWAY" != data-science -a "$SRCPATHWAY" != data-science-codap; then
+    # build CODAP version only data-science-codap
+    if test "$SRCPATHWAY" != data-science-codap; then
       return
-    elif test "$SRCPATHWAY" = data-science; then
-      export TGTPATHWAY=data-science-old-codap
     fi
   fi
 
@@ -2677,7 +2676,7 @@ function callonARGS() {
   export SUBROUTINE=$1
 
   for f in $ARGS; do
-    #echo I doing $f
+    # echo doing callonARGS $f
     export SRCPATHWAY=$f
     export SRCPATHWAY=${SRCPATHWAY#pathways/}
     export SRCPATHWAY=${SRCPATHWAY%/}
