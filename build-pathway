@@ -1379,7 +1379,11 @@ function proglangversion() {
   elif test $(echo $f|grep "\-codap"); then
     local g=${f%-codap}
     if test -f $g/index.shtml; then
-      return 1
+      if ! diff -q $f/.cached/.lesson-prereq.txt.kp $g/.cached/.lesson-prereq.txt.kp >/dev/null; then
+        return 0
+      else
+        return 1
+      fi
     elif test -f $g-wescheme/index.shtml; then
       return 1
     else
@@ -1402,15 +1406,16 @@ function builddependencyjson() {
   for L in *; do
     # echo try proglangversion $L
     if ! proglangversion $L; then
+      # echo discarding $L
       continue
     fi
     # echo L is $L
     Lbasename=$L
+
     if test $(echo $L|grep "\-wescheme"); then
       Lbasename=${L%-wescheme}
-    elif test $(echo $L|grep "\-codap"); then
-      Lbasename=${L%-codap}
     fi
+
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
     #if test "$L" = lib; then continue; fi
