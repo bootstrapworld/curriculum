@@ -124,7 +124,7 @@
   ; MATH
   ("game"  "Blank Game Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=bTq3FRpa2b")
+   ("wescheme" "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re")
    )
   ("boolean" "Boolean Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
