@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-17 # last modified
+LASTMOD=2022-06-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1379,7 +1379,11 @@ function proglangversion() {
   elif test $(echo $f|grep "\-codap"); then
     local g=${f%-codap}
     if test -f $g/index.shtml; then
-      return 1
+      if ! diff -q $f/.cached/.lesson-prereq.txt.kp $g/.cached/.lesson-prereq.txt.kp >/dev/null; then
+        return 0
+      else
+        return 1
+      fi
     elif test -f $g-wescheme/index.shtml; then
       return 1
     else
@@ -1402,15 +1406,16 @@ function builddependencyjson() {
   for L in *; do
     # echo try proglangversion $L
     if ! proglangversion $L; then
+      # echo discarding $L
       continue
     fi
     # echo L is $L
     Lbasename=$L
+
     if test $(echo $L|grep "\-wescheme"); then
       Lbasename=${L%-wescheme}
-    elif test $(echo $L|grep "\-codap"); then
-      Lbasename=${L%-codap}
     fi
+
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
     #if test "$L" = lib; then continue; fi
@@ -2065,6 +2070,9 @@ function updatepathwaylist() {
 }
 
 function buildpathway() {
+  if test "$TGTPATHWAY" = data-science-codap -a "$PROGLANG" != codap; then
+    return
+  fi
   start=`date +%s`
   # echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
@@ -2092,7 +2100,7 @@ function buildpathway() {
     echo
     echo WARNING: No pathway $PATHWAY/$NATLANG
   else
-    echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY
+    echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY $PROGLANG
     echo $'-----------------------------------------------------------\n'
 
     export DESTPATHWAYDIR=distribution/$NATLANG/courses/$PATHWAY
@@ -2656,6 +2664,8 @@ function callonpathway() {
   elif test "$PROGLANG" = codap; then
     if test "$SRCPATHWAY" != data-science -a "$SRCPATHWAY" != data-science-codap; then
       return
+    elif test "$SRCPATHWAY" = data-science; then
+      export TGTPATHWAY=data-science-old-codap
     fi
   fi
 
