@@ -2070,6 +2070,9 @@ function updatepathwaylist() {
 }
 
 function buildpathway() {
+  if test "$TGTPATHWAY" = data-science-codap -a "$PROGLANG" != codap; then
+    return
+  fi
   start=`date +%s`
   # echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
