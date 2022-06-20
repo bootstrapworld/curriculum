@@ -1,0 +1,13 @@
+@assess-design-recipe{"circle-area"
+"Write a function that returns the area of a circle given its diameter."
+    #:headless? #t
+	#:domain-list (list "Number")
+	#:range "Number"
+	#:purpose "Given the diameter, multiply pi by radius squared to
+	get the area"
+	#:buggy-example-list
+	'([circle-area 10 "num-sqr(10 / 2) * pi"]
+	  [circle-area 50 "num-sqr(50 / 2) * pi"])
+	#:param-list (list "diameter")
+	#:body "sqr(diameter) * pi"
+} 

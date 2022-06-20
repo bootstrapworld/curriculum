@@ -9,6 +9,7 @@
 
     ("computing-needs-all-voices"
         "OK.6.IC.C.01"
+        "9-12.Impacts of Computing.Social Interactions"
         )
 
     ("contracts" 
@@ -837,6 +838,8 @@
         )
 
     ("data-collection"
+        "9-12.Data and Analysis.Collection"
+        "6-8.Data and Analysis.Collection"
         "OK.A1.D.1.2"
         "OK.3.DA.CVT.01"
         "OK.4.DA.CVT.01"

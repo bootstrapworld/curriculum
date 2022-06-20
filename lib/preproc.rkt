@@ -43,7 +43,7 @@
 
 (define *proglang* "pyret")
 
-(define *other-proglang* #f)
+(define *other-proglangs* #f)
 
 (define *containing-directory* "")
 
@@ -441,27 +441,6 @@
     (display "*Lessons*\n" o)
 
     (display (create-begin-tag "ul" "") o)
-    #|
-    (for ([lesson relevant-lessons])
-      ; (printf "... doing ~s\n" lesson)
-      (let ([lesson-title lesson]
-            [lesson-title-file (build-path *containing-directory* 'up lesson ".cached" ".index.titletxt")])
-        (cond [(file-exists? lesson-title-file)
-               (set! lesson-title (call-with-input-file lesson-title-file read-line))]
-              [else
-                #f
-                ;(printf "WARNING: Lesson ~a's prerequisite ~a not found or in incorrect order\n\n" *lesson* lesson)
-                ])
-        (let ([lk
-                (format "link:~alessons/pass:[~a]/index.shtml[~a]"
-                        *dist-root-dir*
-                        lesson lesson-title)])
-          (when (member lesson *lesson-prereqs*)
-            ;(printf "lesson ~s is prereq\n" lesson)
-              (set! lk (enclose-span ".prerequisite" lk)))
-          (display (enclose-tag "li" "" lk) o)
-          (newline o))))
-    |#
 
     (display (create-end-tag "ul") o)
     (display (create-end-tag "div") o)
@@ -487,32 +466,21 @@
           ]))
 
 (define (display-practices-bar o)
-  ;(printf "doing display-practices-bar\n")
   (cond [(null? *practices-merited*)
-         (when *lesson-plan*
-           (printf "WARNING: ~a: No practices specified\n" (errmessage-context)))
          (display (create-begin-tag "div" ".sidebarpractices") o)
          (display "*Practices in this Lesson*: _None_" o)
          (display (create-end-tag "div") o)
-         (newline o) ]
+         (display "\n" o)]
         [else
-          ;(printf "Pracices are present for ~s\n" *lesson-plan*)
-          (display (create-begin-tag "div" ".sidebarpractices") o)
-          (display "*Practices in this Lesson*" o)
-          (display "\n\n" o)
-          (for ([practice *practices-merited*])
-            (let* ([p (first practice)]
-                   [practice-desc (assoc p *flat-practices-list*)])
-              (cond [practice-desc
-                      (display p o)
-                      (display ":: " o)
-                      (display (second practice-desc) o)
-                      (newline o)]
-                    [else
-                      (printf "WARNING: Practice ~a not found\n" practice)])))
-          (display "\n\n" o)
-          (display (create-end-tag "div") o)
-          (newline o)]))
+          (display "\n[.sidebarpractices,cols=\"a\"]" o)
+          (display "\n|===\n" o)
+          (display "| " o)
+          (display "*Practices in this Lesson*\n" o)
+          (display-practices-selection o *practice-categories-represented*)
+          (display " | \n" o)
+          (display "\ninclude::.index-practices.asc[]\n" o)
+          (display "|===\n" o)
+          ]))
 
 (define (display-textbooks-bar o)
   ;(printf "doing display-textbooks-bar\n")
@@ -532,20 +500,6 @@
 (define (include-glossary o)
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::{frompathwayroot}~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
-
-(define (workbook-pagenum lesson snippet)
-  ;(printf "doing workbook-pagenum ~s ~s\n" lesson snippet)
-  ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
-  #|
-  (let* ([snippet.adoc
-           (path->string
-             (path-replace-extension snippet ".adoc"))]
-         [c (or (assoc (list lesson snippet.adoc) *workbook-pagenums*)
-                (assoc (list lesson snippet) *workbook-pagenums*))])
-    (if c (second c) #f))
-  |#
-  #f
-  )
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -620,6 +574,11 @@
          [g-in-pages (string-append lesson "/pages/" snippet)]
          [f (string-append "lessons/" g)]
          [f.src f]
+         [f.titletxt (path-replace-extension
+                       (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
+                       ".titletxt")]
+         [page-title (and (file-exists? f.titletxt)
+                       (call-with-input-file f.titletxt read-line))]
          [existent-file? #f]
          [non-workbook-page? #f]
          [error-cascade? #f])
@@ -665,26 +624,26 @@
             (let ([ex-ti (or (exercise-title f.src) link-text *page-title*)])
               (set! *exercises-done*
                 (cons (list f ex-ti) *exercises-done*)))))))
-    (when (or (not link-text) (string=? link-text ""))
-      (let ([f.titletxt (path-replace-extension
-                          (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
-                          ".titletxt")])
-        (when (file-exists? f.titletxt)
-          (set! link-text (call-with-input-file f.titletxt read-line)))))
+    (when (and (or (not link-text) (string=? link-text "")) page-title)
+      (set! link-text page-title))
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g link-text
+                    (if *lesson-plan* ", window=\"_blank\"" ""))]
+          [materials-link-output
+            (format "link:~alessons/pass:[~a][~a~a]"
+                    *dist-root-dir* g (or page-title link-text)
                     (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
-                                           link-output "##")])
+                                           materials-link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
                    (set! *opt-printable-exercise-links*
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-                (let ([styled-link-output (string-append "[.PrintableExercise]##" link-output "##")])
+                (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
                   (unless (findf (lambda (L) (equal? (second L) styled-link-output))
                                  *printable-exercise-links*)
                     (set! *printable-exercise-links* (cons (list snippet styled-link-output)
@@ -901,9 +860,9 @@
 (define *page-title* #f)
 
 (define (display-alternative-proglang o)
-  ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglang* *target-pathway* *narrative* *lesson-plan*)
-  (when (and *other-proglang*
-             (not (null? *other-proglang*))
+  ; (printf "doing display-alternative-proglang op= ~s; tp=~s; n= ~s; lp= ~s\n" *other-proglangs* *target-pathway* *narrative* *lesson-plan*)
+  (when (and *other-proglangs*
+             (not (null? *other-proglangs*))
              (or *narrative* *lesson-plan*))
     ; (printf "doing display-alternative-proglang really\n")
     (let ([other-proglang-links
@@ -929,11 +888,7 @@
                                                   (regexp-replace "-wescheme$" *lesson-plan* ""))]
                                         [else #f])]
                                  [(and (string=? *proglang* "pyret") (string=? x "codap"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("data-science"))
-                                                 (format "link:~acourses/data-science-codap/index.html[CODAP]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
+                                  (cond [*lesson-plan*
                                           (format "link:~alessons/~a-codap/index.shtml[CODAP]" *dist-root-dir*
                                                   *lesson-plan*)]
                                         [else #f])]
@@ -947,7 +902,7 @@
                                                   (regexp-replace "-codap$" *lesson-plan* ""))]
                                         [else #f])]
                                  [else #f]))
-                         *other-proglang*))])
+                         *other-proglangs*))])
       (unless (null? other-proglang-links)
         (display
           (enclose-span ".other-proglang"
@@ -1309,7 +1264,7 @@
                            #:resources [resources #f]
                            #:target-pathway [target-pathway #f]
                            #:proglang [proglang "pyret"]
-                           #:other-proglang [other-proglang #f]
+                           #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
 
@@ -1320,7 +1275,7 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
-  (set! *other-proglang* other-proglang)
+  (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
@@ -1543,7 +1498,8 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)]
+                                     *containing-directory*)
+                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
                            [(or (string=? directive "lesson-description")
@@ -1688,26 +1644,28 @@
                                             [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
-                                                     (errmessage-context) directive lbl *proglang*)]
+                                                       (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (unless (<= (length p) 2) (set! title (third p)))
-                                                (let* ([link-output (format "link:pass:[~a][~a~a]" (second p) title
-                                                                            (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                            )]
-                                                       [styled-link-output
-                                                         (format "[StarterFile~a]##~a##"
-                                                                 (if opt? " Optional" "")
-                                                                 link-output)])
-                                                  (cond [(member lbl *do-not-autoinclude-in-material-links*)
-                                                         #f]
-                                                        [opt?
-                                                          (unless (member styled-link-output *opt-starter-file-links*)
-                                                            (set! *opt-starter-file-links*
-                                                              (cons styled-link-output *opt-starter-file-links*)))]
-                                                        [else
-                                                          (unless (member styled-link-output *starter-file-links*)
-                                                            (set! *starter-file-links*
-                                                              (cons styled-link-output *starter-file-links*)))])
+                                                (let ([link-output (format "link:pass:[~a][~a~a]" (second p) title
+                                                                           (if *lesson-plan* ", window=\"_blank\"" "")
+                                                                           )])
+                                                  (unless (member lbl *do-not-autoinclude-in-material-links*)
+                                                    (let* ([materials-link-output (format "link:pass:[~a][~a~a]" (second p) (second c)
+                                                                                (if *lesson-plan* ", window=\"_blank\"" "")
+                                                                                )]
+                                                           [styled-link-output
+                                                             (format "[StarterFile~a]##~a##"
+                                                                     (if opt? " Optional" "")
+                                                                     materials-link-output)])
+                                                      (cond [opt?
+                                                              (unless (member styled-link-output *opt-starter-file-links*)
+                                                                (set! *opt-starter-file-links*
+                                                                  (cons styled-link-output *opt-starter-file-links*)))]
+                                                            [else
+                                                              (unless (member styled-link-output *starter-file-links*)
+                                                                (set! *starter-file-links*
+                                                                  (cons styled-link-output *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
@@ -1809,7 +1767,8 @@
 
               (when *lesson-plan*
                 (create-standards-subfile)
-                (create-textbooks-subfile))
+                (create-textbooks-subfile)
+                (create-practices-subfile))
 
               (when (and *narrative* (not title-reached?))
                 (print-course-logo *target-pathway* make-image o)
@@ -1845,6 +1804,7 @@
                   (lambda (o)
                     (print-standards-js o #:sidebar #t)
                     (print-textbooks-js o)
+                    (print-practices-js o)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
@@ -1912,6 +1872,8 @@
 
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
+
+            (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
 
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
@@ -2155,22 +2117,21 @@
 (define (create-practices-section practice-categ practices o)
   ; (printf "doing create-practices-section ~s ~s\n" practice-categ practices)
   (unless (empty? practices)
-    (fprintf o "\n[~a.practices-~a]\n"
-             (if *lesson* "" ".coverageElement") (sanitize-css-id practice-categ))
+    (fprintf o "\n[.~a.practices-~a]\n"
+             (if *lesson* "alignedPractices" "coverageElement") (sanitize-css-id practice-categ))
     (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-practice-abbrev practice-categ))
     (for ([p practices])
       (let ([p-name (list-ref p 0)]
             [p-desc (list-ref p 1)]
             [p-lessons (unbox (list-ref p 3))])
-        (cond [*lesson* (display p-name o) (display #\space o)]
+        (fprintf o "~a:: " p-name)
+        (fprintf o "~a" p-desc)
+        (cond [*lesson* (fprintf o "\n")]
               [else
-                ; (fprintf o "~a:: {nbsp}\n\n" p)
-                (fprintf o "~a::" p-name)
-                (when p-desc
-                  (fprintf o " ~a." p-desc))
                 (when (> (length p-lessons) 0)
-                  (fprintf o " {startsb}See: ~a.{endsb}"
+                  (fprintf o ". ")
+                  (fprintf o "{startsb}See: ~a.{endsb}\n"
                            (string-join
                              (map
                                (lambda (x)
@@ -2187,10 +2148,7 @@
                                          [else
                                            (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
                                                    lesson *target-pathway* ltitle)])))
-                               p-lessons) ";"))
-                  )
-                (fprintf o "\n\n")
-                ])))
+                               p-lessons) ";")))])))
     (fprintf o "\n\n")))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -2247,15 +2205,38 @@
                      (enclose-tag "option" ""
                        #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
                                          (regexp-replace* "\\." first-textbook "_"))
-                       first-textbook)))
+                       (expand-textbook-abbrev first-textbook))))
                (string-join
                  (map (lambda (textbook-label)
                         (enclose-tag "option" ""
                           #:attribs (format "value=\"textbook-~a\""
                                             (regexp-replace* "\\." textbook-label "_"))
-                          textbook-label))
+                          (expand-textbook-abbrev textbook-label)))
                       (if (null? *textbooks-represented*) '()
                           (rest *textbooks-represented*)))
+                 "")))
+           o)
+  (newline o))
+
+(define (display-practices-selection o *practice-categories-represented*)
+  (display (enclose-tag "select" ".practicesAlignmentSelect"
+             #:attribs
+             " onchange=\"showPracticesAlignment()\""
+             (string-append
+               (if (null? *practice-categories-represented*) ""
+                   (let ([first-practice-categ (first *practice-categories-represented*)])
+                     (enclose-tag "option" ""
+                       #:attribs (format "selected=\"selected\" value=\"practices-~a\""
+                                         (regexp-replace* "\\." first-practice-categ "_"))
+                       (expand-practice-abbrev first-practice-categ))))
+               (string-join
+                 (map (lambda (practice-categ)
+                        (enclose-tag "option" ""
+                          #:attribs (format "value=\"practices-~a\""
+                                            (regexp-replace* "\\." practice-categ "_"))
+                          (expand-practice-abbrev practice-categ)))
+                      (if (null? *practice-categories-represented*) '()
+                          (rest *practice-categories-represented*)))
                  "")))
            o)
   (newline o))
@@ -2359,14 +2340,18 @@
           textbook-label
           textbook-chapters-used o)))))
 
+
 (define (create-practices-subfile-port o)
   ; (printf "doing create-practices-subfile-port with practices-merited= ~s\n" *practices-merited*)
   ; (printf "practice-categories-repd= ~s\n" *practice-categories-represented*)
   (unless (empty? *practices-merited*)
     (for ([practice-categ *practice-categories-represented*])
       (let ([practices-in-this-categ
-              (filter (lambda (s) (string=? (list-ref s 2) practice-categ)) *practices-merited*)])
-        (create-practices-section practice-categ practices-in-this-categ o)))))
+              (filter (lambda (s) (string=? (list-ref s 2) practice-categ))
+                      *practices-merited*)])
+        (create-practices-section
+          practice-categ
+          practices-in-this-categ o)))))
 
 (define (create-standards-subfile)
   (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])
@@ -2378,6 +2363,10 @@
 (define (create-textbooks-subfile)
   (let ([subf (build-path *containing-directory* ".cached" ".index-textbooks.asc")])
     (call-with-output-file subf create-textbooks-subfile-port #:exists 'replace)))
+
+(define (create-practices-subfile)
+  (let ([subf (build-path *containing-directory* ".cached" ".index-practices.asc")])
+    (call-with-output-file subf create-practices-subfile-port #:exists 'replace)))
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")

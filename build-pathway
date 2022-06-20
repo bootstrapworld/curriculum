@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-03 # last modified
+LASTMOD=2022-06-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -789,35 +789,36 @@ function doadoc() {
   #echo using $fasc $fhtml
   test -d .cached || mkdir -p .cached
 
-  local otherproglang="#f"
+  local otherproglangs="#f"
 
   if test $LESSONPLAN; then
     # echo doing doadoc LESSONPLAN in $(pwd)
     if test -f proglang.txt; then
       if grep -q wescheme proglang.txt; then
-        otherproglang="$otherproglang \"wescheme\""
+        otherproglangs="$otherproglangs \"wescheme\""
       fi
       if grep -q codap proglang.txt; then
-        otherproglang="$otherproglang \"codap\""
+        otherproglangs="$otherproglangs \"codap\""
       fi
       if grep -q pyret proglang.txt; then
-        otherproglang="$otherproglang \"pyret\""
+        otherproglangs="$otherproglangs \"pyret\""
       fi
-      otherproglang="($otherproglang)"
+      otherproglangs="($otherproglangs)"
     fi
+    # Why these touches?
     touch .cached/.index-sidebar.asc
     touch .cached/.index-standards.asc
-    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"lessons/$LESSONPLAN\" #:dist-root-dir \"$DISTROOTDIR\" #:lesson-plan \"$LESSONPLAN\" #:proglang \"$PROGLANG\" #:other-proglangs '$otherproglangs)" >> $ADOCABLES_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
     if test "$SRCPATHWAY" = algebra; then
-      otherproglang="($otherproglang \"wescheme\")"
+      otherproglangs="($otherproglangs \"wescheme\")"
     fi
     if test "$SRCPATHWAY" = data-science -o "$SRCPATHWAY" = data-science-codap; then
-      otherproglang="($otherproglang \"codap\")"
+      otherproglangs="($otherproglangs \"codap\")"
     fi
-    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglang '$otherproglang)" >> $ADOCABLES_INPUT
+    echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglangs '$otherproglangs)" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
@@ -1378,7 +1379,11 @@ function proglangversion() {
   elif test $(echo $f|grep "\-codap"); then
     local g=${f%-codap}
     if test -f $g/index.shtml; then
-      return 1
+      if ! diff -q $f/.cached/.lesson-prereq.txt.kp $g/.cached/.lesson-prereq.txt.kp >/dev/null; then
+        return 0
+      else
+        return 1
+      fi
     elif test -f $g-wescheme/index.shtml; then
       return 1
     else
@@ -1401,15 +1406,16 @@ function builddependencyjson() {
   for L in *; do
     # echo try proglangversion $L
     if ! proglangversion $L; then
+      # echo discarding $L
       continue
     fi
     # echo L is $L
     Lbasename=$L
+
     if test $(echo $L|grep "\-wescheme"); then
       Lbasename=${L%-wescheme}
-    elif test $(echo $L|grep "\-codap"); then
-      Lbasename=${L%-codap}
     fi
+
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
     #if test "$L" = lib; then continue; fi
@@ -1525,6 +1531,7 @@ function collectprimitives() {
     done
   fi
 
+  cd ..
 }
 
 function buildpathwaynarrative() {
@@ -2091,7 +2098,7 @@ function buildpathway() {
     echo
     echo WARNING: No pathway $PATHWAY/$NATLANG
   else
-    echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY
+    echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY $PROGLANG
     echo $'-----------------------------------------------------------\n'
 
     export DESTPATHWAYDIR=distribution/$NATLANG/courses/$PATHWAY
@@ -2168,7 +2175,9 @@ function buildpathway() {
     else
       # export PATHWAYLESSONS=\"$(cat lesson-order.txt|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\",\"/g')\"
       grep -v '^ *;' lesson-order.txt |
+        $SED -e 's/\t/ /g' |
         $SED -e 's/;.*//' |
+        $SED -e 's/ *$//' |
         grep -v '^ *$' |
         $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
     fi
@@ -2638,21 +2647,29 @@ function dolinkcheck() {
 
 function callonpathway() {
 
+  # echo doing callonpathway for $SRCPATHWAY in $(pwd)
+
+  local REPOPATHWAY=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG
+
+  local PATHWAYPROGLANGSFILE=$REPOPATHWAY/proglang.txt
+
+  local NUMPATHWAYPROGLANGS=1
+
+  if test -f $PATHWAYPROGLANGSFILE; then
+    NUMPATHWAYPROGLANGS=$(wc -l $PATHWAYPROGLANGSFILE|$SED -e 's/^ *\([^ ]*\).*/\1/')
+  fi
+
+  if test -f $PATHWAYPROGLANGSFILE; then
+    if ! grep -q $PROGLANG $PATHWAYPROGLANGSFILE; then
+      return
+    fi
+  fi
+
   export TGTPATHWAY="$SRCPATHWAY"
 
-  if test "$PROGLANG" = pyret; then
-    if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-pyret
-    fi
-  elif test "$PROGLANG" = wescheme; then
-    if test "$SRCPATHWAY" = algebra; then
-      export TGTPATHWAY=algebra-wescheme
-    else
-      return
-    fi
-  elif test "$PROGLANG" = codap; then
-    if test "$SRCPATHWAY" != data-science -a "$SRCPATHWAY" != data-science-codap; then
-      return
+  if test "$NUMPATHWAYPROGLANGS" -ne 1; then
+    if test "$PROGLANG" != pyret; then
+      export TGTPATHWAY=$SRCPATHWAY-$PROGLANG
     fi
   fi
 
@@ -2661,16 +2678,15 @@ function callonpathway() {
 
 function callonARGS() {
 
+  # echo doing callonARGS $1 in $(pwd)
+
   export SUBROUTINE=$1
 
   for f in $ARGS; do
-    #echo I doing $f
+    # echo doing callonARGS $f
     export SRCPATHWAY=$f
     export SRCPATHWAY=${SRCPATHWAY#pathways/}
     export SRCPATHWAY=${SRCPATHWAY%/}
-    export TGTPATHWAY="$SRCPATHWAY"
-    #echo SRCPATHWAY is $SRCPATHWAY
-    #echo TGTPATHWAY is $TGTPATHWAY
 
     if test "$PROGLANG" = all; then
       export PROGLANG=pyret

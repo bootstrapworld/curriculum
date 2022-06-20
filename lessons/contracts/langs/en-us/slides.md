@@ -30,7 +30,7 @@ Let's play with a few functions, to get the hang of it.
 # Applying Functions
 
 - Log into @starter-file{editor}
-- Open the editor and press "Run", then type @show{(code '(sqrt 16))} into the interactions area and hit Enter.
+- Open the editor and press "Run", then type @show{(code '(sqrt 16))} into the Interactions Area and hit Enter.
 - What part of this expression is the _value_?
 - What is the name of this function? @show{(code 'sqrt)}
 - How many arguments are we giving to this function?
@@ -58,7 +58,7 @@ Let's play with a few functions, to get the hang of it.
 {layout="Launch"}
 # Applying Functions
 
-- Type @show{(code '(string-length "rainbow"))} into the interactions area and hit Enter:
+- Type @show{(code '(string-length "rainbow"))} into the Interactions Area and hit Enter:
 - What is the name of this function?
 - How many arguments does `string-length` expect?
 - What type of argument does the function expect?

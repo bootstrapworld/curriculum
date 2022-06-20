@@ -68,6 +68,7 @@
 (define (wescheme->wescheme e #:indent [indent #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
   (cond [(string? e) (format "~s" e)]
+        [(symbol? e) (wescheme-symbol->wescheme e)]
         [(not (pair? e)) (format "~a" e)]
         [(list e) (let ([a (first e)])
                     (cond [(and (eq? a 'cond) (> (length e) 1))
@@ -118,6 +119,10 @@
                                   (string-join (map wescheme->wescheme e) " ")
                                   ")")]))]
         [else (error ' wescheme->wescheme "")]))
+
+(define (wescheme-symbol->wescheme e)
+  (cond [(eq? e 'frac) "/"]
+        [else (format "~a" e)]))
 
 (define (wescheme-symbol->pyret e)
   (cond [(eq? e '<=) "\\<="]

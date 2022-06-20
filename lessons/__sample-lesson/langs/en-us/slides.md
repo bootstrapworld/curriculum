@@ -117,8 +117,8 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 # Testing out your Code
 
 - Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)} } and click run.
-- For now, we are only going to be working in the interactions area on the right hand side of your screen.
-- Type @show{(code '(+ (* 8 2) (/ 6 3)))} into the interactions area.
+- For now, we are only going to be working in the Interactions Area on the right hand side of your screen.
+- Type @show{(code '(+ (* 8 2) (/ 6 3)))} into the Interactions Area.
 - Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
 - Hit Enter (or Return) to evaluate this expression. What happens?
 - Take a few minutes to go back and test each line of code you wrote on the pages you've completed by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.

@@ -86,7 +86,7 @@ Click Run to see the simulation start running on your computer.
 
 Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
-* Type @show{(code '(rocket-height 0))} into the interactions area.{style="font-size:17pt"}
+* Type @show{(code '(rocket-height 0))} into the Interactions Area.{style="font-size:17pt"}
 * As the program is currently written, what happens when we give the `rocket-height` function an input of 0? {style="font-size:17pt"}
 * Is that what we want it to do? {style="font-size:17pt"}
 * As the program is currently written, what happens when we give the `rocket-height` function an input of 10?{style="font-size:17pt"} 
@@ -129,7 +129,7 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 {layout="Investigate-DN"}
 # Rocket Height! 
 
-Once you've completed the Design Recipe page for `rocket-height`, type the code into definitions area, replacing any missing and incorrect code with your own.
+Once you've completed the Design Recipe page for `rocket-height`, type the code into Definitions Area, replacing any missing and incorrect code with your own.
 
 Be sure to add the contract, purpose statement, and examples.
 
@@ -140,7 +140,7 @@ Save your work when you're done!
 {layout="Investigate-DN"}
 # Rocket Height!
 
-At the bottom of the Definitions area, you'll see some commented lines of code with instructions. 
+At the bottom of the Definitions Area, you'll see some commented lines of code with instructions. 
 
 You already know what `(start rocket-height)` does. 
 - What about `(space rocket-height)`?

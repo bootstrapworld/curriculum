@@ -15,13 +15,13 @@
 (define *practices-list*
   (list
     ; nickname expanded-name list URI
-    (list "MLR" "Mathematical Learning Routines" *mlr-practices-list*
+    (list "MLR" "Math Lang. Routines" *mlr-practices-list*
           "https://achievethecore.org/peersandpedagogy/developing-math-language-routines/")
-    (list "SJ" "Social Justice Standards" *sj-practices-list*
+    (list "SJ" "Social Justice" *sj-practices-list*
           "https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf")
-    (list "SEP" "Software Engineering Practices" *sep-practices-list* "https://ngss.nsta.org/practicesfull.aspx")
-    (list "CC" "Common Core Practice Standards" *cc-practices-list* "http://corestandards.org/Math/")
-    (list "K12CS" "K12CS Practices" *k12cs-practices-list* "https://k12cs.org")))
+    (list "SEP" "Science and Engineering" *sep-practices-list* "https://ngss.nsta.org/practicesfull.aspx")
+    (list "CC" "Math" *cc-practices-list* "http://corestandards.org/Math/")
+    (list "K12CS" "K12CS" *k12cs-practices-list* "https://k12cs.org")))
 
 (define *flat-practices-list* (apply append (map third *practices-list*)))
 

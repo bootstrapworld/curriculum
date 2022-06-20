@@ -205,7 +205,7 @@ What did you learn from Circles of Evaluation?
 # Testing out your Code
 
 - Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}@ifproglang{pyret}{@link{https://code.pyret.org, pyret} } and click run.
-- For now, we'll work in the interactions area on the right.
+- For now, we'll work in the Interactions Area on the right.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} 
 - Notice how the editor highlights pairs of parentheses.
 - Hit Enter (or Return) to evaluate this expression. What happens?
