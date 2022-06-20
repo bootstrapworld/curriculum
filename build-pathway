@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-18 # last modified
+LASTMOD=2022-06-20 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1531,6 +1531,7 @@ function collectprimitives() {
     done
   fi
 
+  cd ..
 }
 
 function buildpathwaynarrative() {
@@ -2646,25 +2647,29 @@ function dolinkcheck() {
 
 function callonpathway() {
 
+  # echo doing callonpathway for $SRCPATHWAY in $(pwd)
+
+  local REPOPATHWAY=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG
+
+  local PATHWAYPROGLANGSFILE=$REPOPATHWAY/proglang.txt
+
+  local NUMPATHWAYPROGLANGS=1
+
+  if test -f $PATHWAYPROGLANGSFILE; then
+    NUMPATHWAYPROGLANGS=$(wc -l $PATHWAYPROGLANGSFILE|$SED -e 's/^ *\([^ ]*\).*/\1/')
+  fi
+
+  if test -f $PATHWAYPROGLANGSFILE; then
+    if ! grep -q $PROGLANG $PATHWAYPROGLANGSFILE; then
+      return
+    fi
+  fi
+
   export TGTPATHWAY="$SRCPATHWAY"
 
-  if test "$PROGLANG" = pyret; then
-    # dont build Pyret versions of algebra-wescheme and data-science-codap
-    if test "$SRCPATHWAY" = algebra-wescheme -o "$SRCPATHWAY" = data-science-codap; then
-      return
-    fi
-  elif test "$PROGLANG" = wescheme; then
-    # build WeScheme versions only for algebra-wescheme and core
-    if test "$SRCPATHWAY" != algebra-wescheme -a "$SRCPATHWAY" != core; then
-      return
-    fi
-    if test "$SRCPATHWAY" = core; then
-      export TGTPATHWAY=core-wescheme
-    fi
-  elif test "$PROGLANG" = codap; then
-    # build CODAP version only data-science-codap
-    if test "$SRCPATHWAY" != data-science-codap; then
-      return
+  if test "$NUMPATHWAYPROGLANGS" -ne 1; then
+    if test "$PROGLANG" != pyret; then
+      export TGTPATHWAY=$SRCPATHWAY-$PROGLANG
     fi
   fi
 
@@ -2673,6 +2678,8 @@ function callonpathway() {
 
 function callonARGS() {
 
+  # echo doing callonARGS $1 in $(pwd)
+
   export SUBROUTINE=$1
 
   for f in $ARGS; do
@@ -2680,9 +2687,6 @@ function callonARGS() {
     export SRCPATHWAY=$f
     export SRCPATHWAY=${SRCPATHWAY#pathways/}
     export SRCPATHWAY=${SRCPATHWAY%/}
-    export TGTPATHWAY="$SRCPATHWAY"
-    #echo SRCPATHWAY is $SRCPATHWAY
-    #echo TGTPATHWAY is $TGTPATHWAY
 
     if test "$PROGLANG" = all; then
       export PROGLANG=pyret
