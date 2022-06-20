@@ -1,0 +1,20 @@
+@assess-design-recipe{"scale-image"
+"Write a function that takes an image and a string, representing what to scale the image by. The function should return a smaller image if the string is 'smaller' and a bigger image if the string is 'bigger'."
+    #:headless? #t
+	#:domain-list (list "Image" "String")
+	#:range "image"
+	#:purpose "Make the image bigger or smaller, depending on the
+	given string"
+	#:buggy-example-list
+	'(
+	[scale-image "circle(5, \"solid\", \"red\")" "\"bigger\"" "circle(10, \"solid\", \"red\")"]
+	[scaleimage "triangle(20, \"solid\", \"blue\")" "\"smaller\"" "triangle(10,
+	\"solid\", \"blue\")"])
+	#:param-list (list "original-image" "scale-factor")
+	#:body
+	"ask:
+	  | scale-factor == \"bigger\" then: scale(2, original-image)
+	  | scale-factor == \"smaller\" then: scale(0.5, original-image)
+	  | otherwise: original-image
+	end"
+}
