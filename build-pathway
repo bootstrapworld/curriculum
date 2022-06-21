@@ -2097,7 +2097,9 @@ function buildpathway() {
   if test ! -d $pwydir; then
     echo
     echo WARNING: No pathway $PATHWAY/$NATLANG
-  else
+    return
+  fi
+
     echo $langicon BUILDING PATHWAY: $NATLANG/$PATHWAY $PROGLANG
     echo $'-----------------------------------------------------------\n'
 
@@ -2308,7 +2310,6 @@ function buildpathway() {
 
         fi
       fi
-    fi
 
     buildteacherresource
 
@@ -2647,7 +2648,7 @@ function dolinkcheck() {
 
 function callonpathway() {
 
-  # echo doing callonpathway for $SRCPATHWAY in $(pwd)
+  # echo doing callonpathway $SUBROUTINE for $SRCPATHWAY in $(pwd)
 
   local REPOPATHWAY=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG
 
@@ -2663,6 +2664,8 @@ function callonpathway() {
     if ! grep -q $PROGLANG $PATHWAYPROGLANGSFILE; then
       return
     fi
+  elif test "$PROGLANG" != pyret; then
+    return
   fi
 
   export TGTPATHWAY="$SRCPATHWAY"
