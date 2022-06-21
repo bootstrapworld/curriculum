@@ -65,7 +65,7 @@
       (if show? s
           (string-multiply "&#x5f;" (string-length s-og))))))
 
-(define (wescheme->wescheme e #:indent [indent #f])
+(define (wescheme->wescheme e #:indent [indent #f] #:parens [parens #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
   (cond [(string? e) (format "~s" e)]
         [(symbol? e) (wescheme-symbol->wescheme e)]
@@ -151,8 +151,8 @@
                    (regexp-replace #rx"([a-z])/([a-z])" es "\\1-\\2")]
                   [else es]))]))
 
-(define (wescheme->pyret e #:wrap [wrap #f] #:indent [indent #f])
-  ;(printf "doing wescheme->pyret ~s ~s\n" e wrap)
+(define (wescheme->pyret e #:wrap [wrap #f] #:parens [parens #f] #:indent [indent #f])
+  ; (printf "doing wescheme->pyret ~s ~s ~s\n" e wrap parens)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (wescheme-symbol->pyret e)]
         [(string? e) (format "~s" e)]
@@ -162,10 +162,10 @@
                                         frac
                                         ))
                             (let* ([a (wescheme->pyret a)]
-                                   [lft (wescheme->pyret (list-ref e 1) #:wrap #t)]
-                                   [rt (wescheme->pyret (list-ref e 2) #:wrap #t)]
+                                   [lft (wescheme->pyret (list-ref e 1) #:parens parens #:wrap #t)]
+                                   [rt (wescheme->pyret (list-ref e 2) #:parens parens #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
-                              (if wrap
+                              (if (or parens wrap)
                                   (format "({empty}~a{empty})" x)
                                   x))]
                            [(eq? a 'cond)
@@ -183,20 +183,23 @@
                                       (loop (- i 1) (cons
                                                       (string-append
                                                         (cond [(and (= i n) (eq? (first clause) 'else))
-                                                               (string-append "else: "  (wescheme->pyret (second clause)))]
+                                                               (string-append "else: "  (wescheme->pyret (second clause) #:parens parens))]
                                                               [(= i 0)
-                                                               (string-append "if " (wescheme->pyret (first clause)) ": " (wescheme->pyret (second clause)))]
+                                                               (string-append "if " (wescheme->pyret (first clause) #:parens parens) ": "
+                                                                 (wescheme->pyret (second clause) #:parens parens))]
                                                               [else
-                                                                (string-append "else if " (wescheme->pyret (first clause)) ": " (wescheme->pyret (second clause)))]))
+                                                                (string-append "else if " (wescheme->pyret (first clause) #:parens parens) ": "
+                                                                  (wescheme->pyret (second clause) #:parens parens))]))
                                                       r))))))]
                            [(eq? a 'define)
-                            (let* ([lhs (second e)] [rhs (third e)]
-                                                  [lhs-s (wescheme->pyret lhs)]
-                                                  [rhs-s (wescheme->pyret rhs #:indent
-                                                                          (and indent (+ indent 2)))]
-                                                  [rhs-s-nl? (regexp-match "\n" rhs-s)]
-                                                  [rhs-s-if? (regexp-match "^ *if " rhs-s)]
-                                                  )
+                            (let* ([lhs (second e)]
+                                   [rhs (third e)]
+                                   [lhs-s (wescheme->pyret lhs #:parens parens)]
+                                   [rhs-s (wescheme->pyret rhs #:parens parens #:indent
+                                                           (and indent (+ indent 2)))]
+                                   [rhs-s-nl? (regexp-match "\n" rhs-s)]
+                                   [rhs-s-if? (regexp-match "^ *if " rhs-s)]
+                                   )
                               (if (pair? lhs)
                                   (string-append "fun " lhs-s ":"
                                     (if rhs-s-nl? "\n" " ")
@@ -210,11 +213,12 @@
                               (let loop ([n num-examples] [e (rest e)] [r "examples:"])
                                 (if (= n 0)
                                     (string-append r "\nend")
-                                    (let* ([lhs (first e)] [rhs (second e)]
-                                                         [lhs-s (wescheme->pyret lhs)]
-                                                         [rhs-s (wescheme->pyret rhs)]
-                                                         [tot-len (+ (string-length (format "~s" lhs))
-                                                                     (string-length (format "~s" rhs)))])
+                                    (let* ([lhs (first e)]
+                                           [rhs (second e)]
+                                           [lhs-s (wescheme->pyret lhs #:parens parens)]
+                                           [rhs-s (wescheme->pyret rhs #:parens parens)]
+                                           [tot-len (+ (string-length (format "~s" lhs))
+                                                       (string-length (format "~s" rhs)))])
                                       ; (printf "*** lhs-s = ~s; rhs-s = ~s\n" lhs-s rhs-s)
                                       ; (printf "*** tot-len = ~s\n" tot-len)
                                       (loop (- n 1) (rest (rest e))
@@ -227,10 +231,10 @@
                                                     (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
                            [else (format "~a{empty}({empty}~a{empty})"
-                                         (wescheme->pyret a)
+                                         (wescheme->pyret a #:parens parens)
                                          (string-join
                                            (map (lambda (e1)
-                                                  (wescheme->pyret e1)) (rest e))
+                                                  (wescheme->pyret e1 #:parens parens)) (rest e))
                                            ", "))]))]
         [else
           (error ' ERROR "wescheme->pyret: unknown s-exp ~s" e)]))
