@@ -48,7 +48,7 @@ You've already defined functions to move your `DANGER` and `TARGET`. Take a mome
 - What controlled the speed of your characters?
 - What controlled the _direction_ of your characters?
 
-If we wanted our `PLAYER` to go up all the time, we would already know how to do that. If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that. But we want the player to go up _only_ when the "up" arrow is pressed, and down when the "down" arrow is pressed. Do we know how to make a function behave differently, based on its input?
+If we wanted our `PLAYER` to go up all the time, we would already know how to do that. If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that. But we want the player to go up _only_ when the "up" arrow is pressed, and down _only_ when the "down" arrow is pressed. Do we know how to make a function behave differently, based on its input?
 
 === Investigate
 
@@ -70,6 +70,7 @@ _The Name is `update-player`, the Domain consists of a Number and String, and Ra
 * *What does each part of the domain and range represent?*
 +
 _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``_}
+
 @ifproglang{pyret}{
 _The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number._
 * *What does each part of the domain and range represent?*
@@ -82,6 +83,15 @@ _It should increase, the program should add something to it_
 @centered-image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" , 400, align="center"}
 
 Students complete @printable-exercise{pages/update-player.adoc} with a partner, then type their code into their *Game Project file* and test.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{2-D Game Movement}
+
+If your students have their games working and you are ready to support them in delving into the Posn datatype that will support 2-d movement in the game, the first step is to complete @opt-printable-exercise{2d-character-movement.adoc} and @opt-printable-exercise{2d-character-movement-cont.adoc}. Once they've gotten their danger moving diagonally, they're ready to build upon their understanding of Posn and piecewise functions to tackle @opt-printable-exercise{update-player-2.adoc}.
+|===
+
 
 === Common Misconceptions
 - Students often think of this function as returning a _relative distance_ (e.g. "it adds 20"), instead of an absolute coordinate (e.g. "the new y-coordinate is the old y plus 20")
@@ -122,10 +132,6 @@ Have students complete at least one of the @printable-exercise{pages/challenges.
 Have students share back what they implemented. Sharing solutions is encouraged!
 
 *Question:* What would it take to make the player move left and right? Why can't we do this without changing the contract?
-
-@ifproglang{wescheme}{
-WeScheme supports the ability to change the Domain of a function, which allows `update-player` to take both an x- and a y-coordinate! However, the computer won't know what the new coordinate is if the Range is just a single number. @link{https://www.bootstrapworld.org/materials/spring2020/courses/algebra/en-us/units/Supplemental/index.html#lesson_Structs, This optional lesson} covers the beginnings of __data structures__, teaching just enough to allow students to move their `PLAYER` left and right!
-}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
