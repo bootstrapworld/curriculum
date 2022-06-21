@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-20 # last modified
+LASTMOD=2022-06-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1784,12 +1784,7 @@ function batchhtmltopdf() {
   echo " "
 }
 
-function rmtmpfiles() {
-
-  test $DEBUG && return
-  #echo doing rmtmpfiles
-
-  cd $TOPDIR/distribution/$NATLANG
+function rmtmpfilesaux() {
 
   for f in adoc aux log rkt tex title; do
     find . -name \*.$f -delete
@@ -1800,6 +1795,36 @@ function rmtmpfiles() {
   done
 
   find . -name $WKH2P_PFX-\* -delete
+
+}
+
+function rmtmpfiles() {
+
+  test $DEBUG && return
+  #echo doing rmtmpfiles
+
+  cd $TOPDIR/distribution/$NATLANG
+
+  if test -d lessons; then
+    cd lessons
+    for d in *; do
+      if test -d $d; then
+        cd $d
+        if test -f index.shtml; then
+          rmtmpfilesaux
+        fi
+        cd ..
+      fi
+    done
+    rmtmpfilesaux
+    cd ..
+  fi
+
+  if test -d courses; then
+    cd courses
+    rmtmpfilesaux
+    cd ..
+  fi
 }
 
 function copylessondir() {

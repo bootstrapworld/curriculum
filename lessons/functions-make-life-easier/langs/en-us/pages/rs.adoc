@@ -6,6 +6,7 @@
  * Need to be moved to shared.css, and tested
  */
 .pyret { font-size: 0.85rem !important; } /* override asciidoc default to match code*/
+.studentAnswerLong { min-width: 75% !important; }
 </style>
 ++++
 @n *Let's define a function* `rs` *to generate solid red squares of whatever size we give them!*
@@ -17,17 +18,17 @@ If I say @show{(code '(rs 5))}, what would our actor need to say?
 
 Let's write a few more examples:
 
-@show{(code '(rs (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(rs (?ANS 20)))} &rarr; @show{(code '(?ANS (square 20 "solid" "red")))}
 
-@show{(code '(rs (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(rs (?ANS 40)))} &rarr; @show{(code '(?ANS (square 40 "solid" "red")))}
 
-@show{(code '(rs (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(rs (?ANS 55)))} &rarr; @show{(code '(?ANS (square 55 "solid" "red")))}
 
-What variable changes? @fitb{15em}{}
+What variable changes? @fitb{15em}{@ifsoln{radius}}
 
 Let's define our function using the variable.
 
-`*fun* rs(@fitb{5em}{}) *:* @fitb{8em}{}(@fitb{25em}{}) *end*`
+@show{(code '(define (rs (?ANS radius)) (?ANS (circle radius "solid" "red"))))}
 
 @vspace{1ex}
 
@@ -39,17 +40,17 @@ If I say @show{(code '(bigc "orange"))}, what would our actor need to say?
 
 Let's write a few more examples:
 
-@show{(code '(bigc (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(bigc (?ANS "blue")))} &rarr; @show{(code '(?ANS (circle 100 "solid" "blue")))}
 
-@show{(code '(bigc (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(bigc (?ANS "red")))} &rarr; @show{(code '(?ANS (circle 100 "solid" "red")))}
 
-@show{(code '(bigc (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
+@show{(code '(bigc (?ANS "green")))} &rarr; @show{(code '(?ANS (circle 100 "solid" "green")))}
 
-What variable changes? @fitb{15em}{}
+What variable changes? @fitb{15em}{@ifsoln{color}}
 
 Let's define our function using the variable.
 
-`*fun* bigc(@fitb{5em}{}) *:* @fitb{8em}{}(@fitb{25em}{}) *end*`
+@show{(code '(define (bigc (?ANS color)) (?ANS (circle 100 "solid" color))))}
 
 @vspace{1ex}
 
@@ -59,20 +60,20 @@ If I say @show{(code '(ps "outline"))}, what would our actor need to say?
 
 @fitb{}{@showsoln{(code '(star 50 "outline" "pink"))}}
 
-Let's write a few more examples:
+Write examples for all other possible inputs:
+
+@show{(code '(ps (?ANS "solid")))} &rarr; @show{(code '(?ANS (star 100 "solid" "pink")))}
+
+@show{(code '(ps (?ANS "solid")))} &rarr; @show{(code '(?ANS (star 100 "solid" "pink")))}
 
 @show{(code '(ps (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
 
-@show{(code '(ps (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
-
-@show{(code '(ps (?FITB 5em)))} &rarr; @show{(code '((?FITB 8em) (?FITB 31em)))}
-
-What variable changes? @fitb{15em}{}
+What variable changes? @fitb{15em}{@ifsoln{style}}
 
 @vspace{1ex}
 
 Let's define our function using the variable.
 
-`*fun* ps(@fitb{5em}{}) *:* @fitb{8em}{}(@fitb{25em}{}) *end*`
+@show{(code '(define (ps (?ANS style)) (?ANS (star 50 style "pink"))))}
 
 _Add these new function definitions to your @starter-file{gt} and test them out!_

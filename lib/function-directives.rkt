@@ -159,6 +159,7 @@
         [(list? e) (let ([a (first e)])
                      (cond [(memq a '(+ - * / and or < > = <= >= <>
                                         string=? string<? string<=? string>? string>=? string<>?
+                                        frac
                                         ))
                             (let* ([a (wescheme->pyret a)]
                                    [lft (wescheme->pyret (list-ref e 1) #:wrap #t)]
