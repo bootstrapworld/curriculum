@@ -17,12 +17,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* These items should ALWAYS max-out pagewidth */
+/* These items should ALWAYS max-out pagewidth, and have no padding */
 #header, #content, #footer {
-  width: 100% !important; max-width: 100% !important;
-}
-body:not(.LessonPlan, .narrativepage) #content {
-  height: 90%;
+  width: 100% !important; max-width: 100% !important; padding: 0;
 }
 
 a       { color:  #2156a5 !important; }
@@ -31,6 +28,7 @@ code    { display: inline-block; padding: 0 !important; line-height: 1rem !impor
 mark    { background: none; color: inherit; }
 em, strong { margin: 0px 2px; }
 .listingblock pre { margin: 3px 0px; padding: 0; }
+table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
 
 body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
 body:not(.LessonPlan, .narrativepage) p {
@@ -498,7 +496,22 @@ span.clear {
 /************************************************************************************
 * WORKBOOK PAGES
 */
-body.workbookpage { font-size: 10.5pt; }
+/* set page dimensions */
+body.workbookpage:not(.landscape) {
+  width: 7.5in; min-height: 10in;  max-height: 11in;
+}
+/* define 'landscape' page type */
+body.workbookpage.landscape {
+  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
+
+/* we use the same font-size for print and screen, and zoom the page
+ * in a @screen{...} CSS rule
+ */
+body.workbookpage {
+  font-size: 9pt;
+  padding:   0;
+}
+
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
 body:not(.LessonPlan) .sect1 > h1:first-child,
@@ -902,7 +915,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
 /************************************************************************************
 * SCREEN MEDIA
 */
-@media screen{
+@media screen {
   html { height: 100%; display:  flex; }
 
   .web-page-only {
@@ -911,15 +924,18 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     line-height:      2.5rem;
   }
   body.nonworkbookpage { width: auto !important; }
-}
 
-/* set page width for screen, and range for height */
-body:not(.LessonPlan, .narrativepage, .landscape) {
-  width: 7.5in; min-height: 10in;  max-height: 11in;
+  /* on WB pages, set font size to same as print and then zoom the page */
+
+  body.workbookpage {
+    transform-origin: left top; 
+    transform: scale(1.25); 
+    min-height: calc(11in * 1.25) !important;
+  }
+
+  /* add some left-padding to improve readability on screens */
+  body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 }
-/* define 'landscape' page type */
-body.landscape:not( .LessonPlan, .narrativepage ) {
-  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
 
 /************************************************************************************
  * PRINT MEDIA
@@ -936,11 +952,7 @@ body.landscape:not( .LessonPlan, .narrativepage ) {
    display: none !important; visibility: hidden; float: none;
   }
 
-  /* set page heights */
-  body:not(.LessonPlan, .narrativepage, .landscape) { height:  10in; }
-  body.landscape:not( .LessonPlan, .narrativepage ) { height: 7.5in; }
-
-    /* Override AsciiDoc print default */
+  /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
   #content { margin: auto; }
 
