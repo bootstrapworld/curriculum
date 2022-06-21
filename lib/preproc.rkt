@@ -2782,11 +2782,11 @@
                  (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
-(define (cm-code x #:multi-line [multi-line #t]) ;TODO or #f?
+(define (cm-code x #:multi-line [multi-line #t] #:parens [parens #f]) ;TODO or #f?
   ; (printf "doing cm-code ~s\n" x)
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
-      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:indent 0)))
+      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{empty}: ")
@@ -2798,10 +2798,10 @@
         [else (eq? xx tree)]))
 
 (define (code x #:multi-line [multi-line #t] #:parens [parens #f])
-  ; (printf "doing code ~s\n" x)
+  ; (printf "doing code ~s ~s\n" x parens)
   (if (tree-member? '(?ANS ?ANSWER ?FITB) x)
       (sexp->code x #:parens parens)
-      (cm-code x #:multi-line multi-line)))
+      (cm-code x #:multi-line multi-line #:parens parens)))
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
