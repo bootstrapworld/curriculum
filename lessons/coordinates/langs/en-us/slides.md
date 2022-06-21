@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Navigating a Grid
 
-Computers use numbers to represent a character’s position on screen, using number lines as rulers to measure the distance from the bottom-left corner of the screen. For our videogame, we will draw the number line so that the screen runs from 0 (on the left) to 1000 (on the right).
+Computers use numbers to represent a character’s position on screen, using number lines as rulers to measure the distance from the bottom-left corner of the screen. For this example, we will draw the number line so that the screen runs from 0 (on the left) to 1000 (on the right).
 
 @image{images/1dPosition.png, "A number line with two circles on it, illustrating the distance between two characters in one dimension"}
 
