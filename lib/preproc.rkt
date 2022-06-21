@@ -999,13 +999,13 @@
         (for ([page lesson-notes-pages])
           (unless notes-title-done?
             (set! notes-title-done? #t)
-            (fprintf o "\n\n- *All Lesson Notes*\n\n"))
+            (fprintf o "\n\n- *All Lesson Notes*\n"))
           (set! page (regexp-replace ".adoc$" page ""))
           (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
                 [link-text page])
             (when (file-exists? title-file)
               (set! link-text (call-with-input-file title-file read-line)))
-            (fprintf o "+\n*link:../../../lessons/~a/pages/~a.html[~a]*\n" lesson page link-text)))))))
+            (fprintf o "\n** link:../../../lessons/~a/pages/~a.html[~a]\n" lesson page link-text)))))))
 
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
