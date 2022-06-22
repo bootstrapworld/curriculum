@@ -84,7 +84,7 @@ end
 
 * Who can explain what `is-old` does?
 * Who can explain what `lookup-name` does?
-* Who can explain what `is-fixed` does?
+* Who can explain what `lookup-fixed` does?
 * Who can explain what `label` does?
 * Who can explain what `kilos` does?
 <!--

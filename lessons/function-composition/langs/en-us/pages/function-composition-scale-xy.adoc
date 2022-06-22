@@ -2,21 +2,22 @@
 
 ++++
 <style>
-/* We override width:100% to allow circles and vspace
-to share the same line */
-#content .grid tr:nth-child(1){ height: 130pt; }
-#content .grid tr:nth-child(3){ height: 260pt; }
-#content .grid tr:nth-child(odd) td {border-bottom: 0 !important; padding: 0 5px; }
-#content .contracts td { padding: 0 !important; }
-#content .contracts .editbox { background: none; }
-#content .contracts { background-color: #f7f7f8 !important; }
+p .editbox { font-size: 9pt; }
+.center {padding: 0;}
 
-#content .demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
+.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
 
-#content .center {padding: 0;}
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
+.contracts { background-color: #f7f7f8 !important; }
 
-#content .draw tr:first-of-type { height: 3in; }
-#content .draw tr:last-of-type  { height: 6in; }
+.grid tr td {padding: 0 0.625em; }
+.grid tr:nth-child(1){ height: calc(7in * 0.33); }
+.grid tr:nth-child(2){ height: calc(7in * 0.66); }
+
+/* Necessary rules to force the code solution to the bottom of the row */
+.grid td { position: relative; }
+.grid .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
 
 div.circleevalsexp .value {
   display:            inline-block;
@@ -31,6 +32,7 @@ table .autonum:after { content: ") "; }
 	(define wide `(scale/xy 4 1 ,img))
 	(define tall `(scale/xy 1 4 ,img))
 }
+
 You’ll be investigating these two functions with your partner:
 
 [.contracts, cols="5a, 4a", frame="none", grid="none"]
@@ -57,31 +59,29 @@ Starting with the image described above, write the Circles of Evaluation and Cod
 
 | @n A purple rhombus that is stretched 4 times as wide.
 
-*Circle of Evaluation:*
 @showsoln{(coe wide)}
+
+@showsoln{(code wide) }
 
 | @n A purple rhombus that is stretched 4 times as tall
 
-*Circle of Evaluation:*
 @showsoln{(coe tall) }
 
-| *Code:* @fitb{}{@showsoln{(code wide) }}
-| *Code:* @fitb{}{@showsoln{(code tall) }}
+@showsoln{(code tall) }
 
 
 
 
-| @n  The tall rhombus overlayed on the wide rhombus.
+| @n  The tall rhombus from #1 overlayed on the wide rhombus (#2).
 
-*Circle of Evaluation:*
 @showsoln{(coe `(overlay ,tall ,wide)) }
 
-| ★ Overlay a red rhombus onto the last image you made.
+@showsoln{(code `(overlay ,tall ,wide)) }
 
-*Circle of Evaluation:*
+| ★ Overlay a red rhombus onto the last image you made in #3.
+
 @showsoln{(coe `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
 
-| *Code:* @fitb{}{@showsoln{(code `(overlay ,tall ,wide)) }}
-| *Code:* @fitb{}{@showsoln{(code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }}
+@showsoln{(code `(overlay (rhombus 40 90 "solid" "red") (overlay ,tall ,wide))) }
 
 |===
