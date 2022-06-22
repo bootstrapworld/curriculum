@@ -182,21 +182,12 @@ Students learn how to use the Circles of Evaluation to translate arithmetic expr
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. After that, she crawls from left to right, visiting each of the inputs @ifproglang{wescheme}{to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
-@ifproglang{pyret}{
-As in math, in Pyret there are some cases where the outermost parentheses can be removed:
-
-- @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
-- @math{(1 * 2) * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
-
-You will likely see code written using this "shortcut", but it's always better to at least start with the parentheses to make sure your math/code is _correct_ before taking them out. **It is never wrong to include them!**
-}
-
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
 
 |*Expression*			| &rarr; | @show{(math '(+ 3 8)) }
 |*Circle of Evaluation*	| &rarr; | @show{(coe  '(+ 3 8)) }
-|*Code*					| &rarr; | @show{(code '(+ 3 8)) }
+|*Code*					| &rarr; | @show{(code '(+ 3 8) #:parens true) }
 |===
 
 @ifproglang{wescheme}{
@@ -213,13 +204,11 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 |*Expression*			| &rarr; | @show{(math '(* 2 (+ 3 8))) }
 |*Circle of Evaluation*	| &rarr; | @show{(coe  '(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8))) }
+|*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8)) #:parens true) }
 |===
 
-@ifproglang{wescheme}{
 - Why are there two closing parentheses in a row, at the end of the code?
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
-}
 
 [.lesson-instruction]
 What would the code look like for these circles?
@@ -227,8 +216,8 @@ What would the code look like for these circles?
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 
-|@show{(coe '(/ 6 (+ 1 2)))}		| @show{(coe '(* (- 10 5) 6))}
-|@show{(code '(/ 6 (+ 1 2)))}		| @show{(code '(* (- 10 5) 6))}
+|@show{(coe  '(/ 6 (+ 1 2)))}		| @show{(coe  '(* (- 10 5) 6))}
+|@show{(code '(/ 6 (+ 1 2)))}		| @show{(code '(* (- 10 5) 6) #:parens true)}
 |===
 
 === Investigate
@@ -260,8 +249,6 @@ We have included one page of more complex problems in the student workbook so th
 In Pyret, _operators_ like `+`, `-`, `*`, and `/` are written in between their inputs, just like in math. Function names like `f`, `g`, `num-sqrt` and `num-sqr` get written at the beginning of an expression, for example @show{(code '(f x))} or @show{(code '(sqrt 9))}
 }
 
-
-
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 
@@ -273,6 +260,16 @@ MLR 7 - Compare and Connect: Gather students' graphic organizers to highlight an
 
 === Synthesize
 Have students share back what they learned from the Circles of Evaluation.
+
+@ifproglang{pyret}{
+As in math, **there are some cases where the outermost parentheses can be removed in Pyret**:
+
+- @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
+- @math{(1 * 2) * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
+
+You will likely see code written using this "shortcut", but it's always better to at least start with the parentheses to make sure your math/code is _correct_ before taking them out. **It is never wrong to include them!**
+}
+
 
 == Testing out your Code @duration{optional}
 

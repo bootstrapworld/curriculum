@@ -108,12 +108,11 @@ For more practice with this, turn to:
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-As in math, in Pyret there are some cases where the outermost parentheses can be removed:
+When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
 
-- @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
-- @math{(1 * 2) * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
+The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. 
 
-It is always better to at least start with the parentheses before taking them out. **It is never wrong to include them!**
+After that, she crawls from left to right, visiting each of the inputs@ifproglang{wescheme}{ to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
 ---
 {layout="Investigate"}
@@ -199,6 +198,15 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 # From Circles of Evaluation to Code
 
 What did you learn from Circles of Evaluation?
+
+@ifproglang{pyret}{
+As in math, in Pyret there are some cases where the outermost parentheses can be removed:
+
+- @math{(1 + 2)} can be safely written as @math{1 + 2}, and the same goes for the Pyret code
+- @math{(1 * 2) * 3)} can be safely written as @math{1 * 2 * 3}, and the same goes for the Pyret code
+
+It is always better to at least start with the parentheses before taking them out. **It is never wrong to include them!**
+}
 
 ---
 {layout="Launch-DN"}
