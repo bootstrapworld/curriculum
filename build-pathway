@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-21 # last modified
+LASTMOD=2022-06-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1943,8 +1943,7 @@ function copylessondir() {
 function collectworkbookpages() {
   d="$1"
   test ! -d "$d" && return
-  # echo doing collectworkbookpages in $(pwd)
-  # echo doing collectworkbookpages $d
+  # echo doing collectworkbookpages $d in $(pwd)
   cd "$d"
   if test -d pages; then
     cd pages
@@ -1994,12 +1993,29 @@ function collectworkbookpages() {
         fi
       done < workbook-pages.txt
 
-    grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
+      grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
+
+      checkworkbookpagesalsoexercises
 
     fi
     cd ..
   fi
   cd ..
+}
+
+function checkworkbookpagesalsoexercises() {
+  if test ! -f .cached/.exercise-pages-ls.txt.kp; then
+    return
+  fi
+
+  for f in $(cat .cached/.workbook-pages-ls.txt.kp); do
+    if echo "$f"|grep -q '^notes-'; then continue; fi
+    if test "$f" = whats-on-your-mind.adoc; then continue; fi
+    if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+      echo
+      echo WARNING: Workbook page $f not an exercise page
+    fi
+  done
 }
 
 function buildpathwayworkbooks() {

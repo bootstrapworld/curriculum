@@ -2575,6 +2575,22 @@
                                      (format "fun ~a: ~a end" lhs-c rhs-c)]
                                     [else
                                       (format "~a = ~a" lhs-c rhs-c)]))]
+                           [(and (eq? a 'EXAMPLE) pyret)
+                            (let ([num-examples (/ (length (rest e)) 2)])
+                              (let loop ([n num-examples] [e (rest e)] [r "examples:"])
+                                (if (= n 0)
+                                    (string-append r "\nend")
+                                    (let* ([lhs (first e)]
+                                           [rhs (second e)]
+                                           [lhs-s (sexp->arith lhs #:pyret #t)]
+                                           [rhs-s (sexp->arith rhs #:pyret #t)]
+                                           [tot-len (+ (string-length (format "~s" lhs))
+                                                       (string-length (format "~s" rhs)))])
+                                      (loop (- n 1) (rest (rest e))
+                                            (string-append r "\n"
+                                              "  "
+                                              lhs-s " is "
+                                              rhs-s))))))]
                            [(and (eq? a 'list) pyret)
                             (let* ([args (rest e)]
                                    [args-c (map (lambda (x) (sexp->arith x #:pyret #t)) args)])
@@ -2612,7 +2628,7 @@
          [hole2 *hole2-symbol*]
          [hole3 hole2])
     (lambda (e #:wescheme [wescheme #f])
-      ;(printf "doing holes-to-underscores ~s\n" e)
+      ; (printf "doing holes-to-underscores ~s\n" e)
       (cond [(or (null? e) (number? e) (string? e)) e]
             [(eq? e 'BSLeaveAHoleHere) hole] ;XXX: used anymore?
             [(eq? e 'BSLeaveAHoleHere2) hole2]
@@ -2636,33 +2652,33 @@
 
     ))
 
-(define (sexp->pyret e #:parens [parens #f])
+(define (sexp->pyret e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
-    ;(printf "h2u retn'd ~s\n" h)
+    ; (printf "h2u retn'd ~s\n" h)
     ; (enclose-textarea ".pyret" (sexp->arith h #:pyret #t #:parens parens))
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens))
+    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens) #:multi-line multi-line)
     ))
 
 (define (math e #:parens [parens #f])
   ;(printf "doing math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
-(define (sexp->code e #:parens [parens #f])
+(define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)
   (if (string=? *proglang* "pyret")
-      (sexp->pyret e #:parens parens)
+      (sexp->pyret e #:parens parens #:multi-line multi-line)
       (sexp->wescheme e)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
   (cond [pyret (cond [(eq? e '+) "{plus}"]
-                     [(memq e '(* -)) (format "{empty}~a" e)]
+                     [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (wescheme-symbol->pyret e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
                          [(eq? e 'frac) "/"]
-                         [(memq e '(* -)) (format "{empty}~a" e)]
+                         [(memq e '(* -)) (format "{zwsp}~a" e)]
                          [else (format "~a" e)])]
         [else (cond [(eq? e '<=) " \\le "]
                     [(eq? e 'pi) " \\pi "]
@@ -2789,7 +2805,7 @@
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
-      (if pyret? (regexp-replace* " :: " x " :{empty}: ")
+      (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
           x))))
 
 (define (tree-member? xx tree)
@@ -2800,7 +2816,7 @@
 (define (code x #:multi-line [multi-line #t] #:parens [parens #f])
   ; (printf "doing code ~s ~s\n" x parens)
   (if (tree-member? '(?ANS ?ANSWER ?FITB) x)
-      (sexp->code x #:parens parens)
+      (sexp->code x #:multi-line multi-line #:parens parens)
       (cm-code x #:multi-line multi-line #:parens parens)))
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])

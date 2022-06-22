@@ -64,7 +64,8 @@
   ;(printf "doing enclose-textarea-2 ~s\n" s)
   (set! classes ".codetwo")
   (let ([ta (enclose-tag "span" classes s)])
-    ta))
+    (if multi-line (enclose-span ".obeyspaces" ta)
+        ta)))
 
 (define (low-quality-math x)
   (set! x (regexp-replace* "\\\\;" x ""))
@@ -74,7 +75,7 @@
     (set! x (regexp-replace "} *$" x "")))
   (set! x (regexp-replace* "\\\\over" x "/"))
   (set! x (regexp-replace* "\\\\sqrt" x "\\&radic;"))
-  (set! x (regexp-replace* "{empty}" x ""))
+  (set! x (regexp-replace* "{zwsp}" x ""))
   (set! x (regexp-replace* "\\\\gt" x ">"))
   (set! x (regexp-replace* "\\\\lt" x "<"))
   (set! x (regexp-replace* "\\\\leq" x "\\&le;"))

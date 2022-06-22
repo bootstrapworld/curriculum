@@ -54,7 +54,7 @@
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
-  (let ([s-og (regexp-replace* #rx"{empty}" s "")])
+  (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
     ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
     (enclose-span
       (string-append
@@ -166,7 +166,7 @@
                                    [rt (wescheme->pyret (list-ref e 2) #:parens parens #:wrap #t)]
                                    [x (format "~a ~a ~a" lft a rt)])
                               (if (or parens wrap)
-                                  (format "({empty}~a{empty})" x)
+                                  (format "({zwsp}~a{zwsp})" x)
                                   x))]
                            [(eq? a 'cond)
                             (let* ([clauses (rest e)]
@@ -230,7 +230,7 @@
                                                     "\n"
                                                     (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
-                           [else (format "~a{empty}({empty}~a{empty})"
+                           [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a #:parens parens)
                                          (string-join
                                            (map (lambda (e1)
@@ -397,7 +397,7 @@
 (define (longer-than? len . exprs)
   (let ([exprs-len (foldl + 0
                      (map (lambda (e)
-                            (let ([e (regexp-replace* #rx"{empty}" e "")])
+                            (let ([e (regexp-replace* #rx"{zwsp}" e "")])
                               (string-length e)))
                           exprs))])
     ;(printf "elen = ~s; len = ~s\n" exprs-len len)
