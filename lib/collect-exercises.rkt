@@ -55,14 +55,13 @@
 (define (collect-exercises lesson-plan-file)
   ;(printf "doing collect-exercises ~s\n" lesson-plan-file)
   (call-with-input-file lesson-plan-file scan-exercise-directives)
-  (unless (null? *exercises-files*)
-    ;(printf "writing collected exercises\n")
-    (set! *exercises-files* (reverse *exercises-files*))
-    (call-with-output-file *exercises-list-file*
-      (lambda (o)
-        (for ([f *exercises-files*])
-          (display f o) (newline o)))
-      #:exists 'replace)))
+  ;(printf "writing collected exercises\n")
+  (set! *exercises-files* (reverse *exercises-files*))
+  (call-with-output-file *exercises-list-file*
+    (lambda (o)
+      (for ([f *exercises-files*])
+        (display f o) (newline o)))
+    #:exists 'replace))
 
 (collect-exercises
   (vector-ref (current-command-line-arguments) 0))
