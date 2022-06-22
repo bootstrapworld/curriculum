@@ -2340,7 +2340,6 @@
           textbook-label
           textbook-chapters-used o)))))
 
-
 (define (create-practices-subfile-port o)
   ; (printf "doing create-practices-subfile-port with practices-merited= ~s\n" *practices-merited*)
   ; (printf "practice-categories-repd= ~s\n" *practice-categories-represented*)
@@ -2642,13 +2641,13 @@
               (add-prereq e)
               e]))))
 
-(define (sexp->wescheme e)
+(define (sexp->wescheme e #:multi-line [multi-line #f])
   ; (printf "doing sexp->wescheme ~s\n" e)
   (let ([h (holes-to-underscores e #:wescheme #t)])
-    ;(printf "h2u retn'd ~s\n" h)
+    ; (printf "h2u retn'd ~s\n" h)
 
     ; (enclose-textarea ".racket" (sexp->block h #:wescheme #t))
-    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t))
+    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t) #:multi-line multi-line)
 
     ))
 
@@ -2668,7 +2667,7 @@
   ; (printf "doing sexp->code ~s\n" e)
   (if (string=? *proglang* "pyret")
       (sexp->pyret e #:parens parens #:multi-line multi-line)
-      (sexp->wescheme e)))
+      (sexp->wescheme e #:multi-line multi-line)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
@@ -2742,7 +2741,7 @@
         [else (error 'ERROR "sexp->block-table: unknown s-exp")]))
 
 (define (sexp->block e #:pyret [pyret #f] #:wescheme [wescheme #f])
-  ;(printf "doing sexp->block ~s ~a\n" e pyret)
+  ; (printf "doing sexp->block ~s ~a\n" e pyret)
   (cond [(member e '(true false)) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
         [(eq? e 'else) (enclose-span (if pyret "" ".wescheme-keyword") "else")]
         [(number? e) (enclose-span (if pyret ".value" ".value.wescheme-number") (format "~a" e))]
@@ -2767,26 +2766,45 @@
                                  (format ".value.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(list? e) (let ([a (first e)])
-                     (enclose-span ".expression"
-                       (if (or (symbol? a) (answer? a))
-                           (let ([args (intersperse-spaces
-                                         (map (lambda (e1)
-                                                (sexp->block e1 #:pyret pyret #:wescheme wescheme))
-                                              (rest e)) 'args)])
-                             (string-append
-                               (enclose-span ".lParen" "(")
-                               (enclose-span ".operator"
-                                 (sexp->block a #:pyret pyret #:wescheme wescheme))
-                               args
-                               (enclose-span ".rParen" ")")))
-                           (let ([parts (intersperse-spaces
-                                          (map (lambda (e1)
-                                                 (sexp->block e1 #:pyret pyret #:wescheme wescheme))
-                                               e) #f)])
-                             (string-append
-                               (enclose-span ".lParen" "(")
-                               parts
-                               (enclose-span ".rParen" ")"))))))]
+                     (cond [(and (eq? a 'EXAMPLE) wescheme)
+                            (let ([num-examples (/ (length (rest e)) 2)])
+                              (let loop ([n num-examples] [e (rest e)] [r ""])
+                                (if (= n 0)
+                                    r
+                                    (let* ([lhs (first e)]
+                                           [rhs (second e)]
+                                           [lhs-s (sexp->block lhs #:wescheme #t)]
+                                           [rhs-s (sexp->block rhs #:wescheme #t)])
+                                      (loop (- n 1) (rest (rest e))
+                                            (string-append r
+                                              (if (= n num-examples) "" "\n")
+                                              (enclose-span ".lParen" "(")
+                                              (sexp->block 'EXAMPLE #:wescheme #t)
+                                              " "
+                                              lhs-s "\n  "
+                                              rhs-s
+                                              (enclose-span ".rParen" ")")))))))]
+                           [else
+                             (enclose-span ".expression"
+                               (if (or (symbol? a) (answer? a))
+                                   (let ([args (intersperse-spaces
+                                                 (map (lambda (e1)
+                                                        (sexp->block e1 #:pyret pyret #:wescheme wescheme))
+                                                      (rest e)) 'args)])
+                                     (string-append
+                                       (enclose-span ".lParen" "(")
+                                       (enclose-span ".operator"
+                                         (sexp->block a #:pyret pyret #:wescheme wescheme))
+                                       args
+                                       (enclose-span ".rParen" ")")))
+                                   (let ([parts (intersperse-spaces
+                                                  (map (lambda (e1)
+                                                         (sexp->block e1 #:pyret pyret #:wescheme wescheme))
+                                                       e) #f)])
+                                     (string-append
+                                       (enclose-span ".lParen" "(")
+                                       parts
+                                       (enclose-span ".rParen" ")")))))]))]
         [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
