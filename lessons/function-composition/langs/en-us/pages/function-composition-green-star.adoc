@@ -1,21 +1,22 @@
 = Function Composition -- Green Star
 ++++
 <style>
-/* We override width:100% to allow circles and vspace
-to share the same line */
-#content .grid tr:nth-child(1){ height: 130pt; }
-#content .grid tr:nth-child(3){ height: 230pt; }
-#content .grid tr:nth-child(odd) td {border-bottom: 0 !important; padding: 0 5px; }
-#content .contracts td { padding: 0 !important; }
-#content .contracts .editbox { background: none; }
-#content .contracts { background-color: #f7f7f8 !important; }
+p .editbox { font-size: 9pt; }
+.center {padding: 0;}
 
-#content .demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
+.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
 
-#content .center {padding: 0;}
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
+.contracts { background-color: #f7f7f8 !important; }
 
-#content .draw tr:first-of-type { height: 3in; }
-#content .draw tr:last-of-type  { height: 6in; }
+.grid tr td {padding: 0 0.625em; }
+.grid tr:nth-child(1){ height: calc(6.25in * 0.33); }
+.grid tr:nth-child(2){ height: calc(6.25in * 0.66); }
+
+/* Necessary rules to force the code solution to the bottom of the row */
+.grid td { position: relative; }
+.grid .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
 
 div.circleevalsexp .value {
   display:            inline-block;
@@ -25,12 +26,9 @@ div.circleevalsexp .value {
 table .autonum:after { content: ") "; }
 </style>
 ++++
-
 @do{
 	(define green-star '(star 50 "solid" "green"))
 }
-
-@vspace{2ex}
 
 @n Draw a Circle of Evaluation and write the Code for a *solid, green star, size 50*.
 
@@ -51,31 +49,33 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 
 | @n A solid, green star, that is triple the size of the original (using `scale`)
 
-*Circle of Evaluation:*
 @showsoln{(coe `(scale 3 ,green-star)) }
+
+@showsoln{(code `(scale 3 ,green-star)) }
+
 
 | @n A solid, green star, that is half the size of the original (using `scale`)
 
-*Circle of Evaluation:*
 @showsoln{(coe `(scale 0.5 ,green-star)) }
 
+@showsoln{(code `(scale 0.5 ,green-star)) }
 
 
-| *Code:* @fitb{}{@showsoln{(code `(scale 3 ,green-star)) }}
-| *Code:* @fitb{}{@showsoln{(code `(scale 0.5 ,green-star)) }}
+
+
 
 | @n A solid, green star of size 50 that has been rotated 45 degrees counter-clockwise
 
-*Circle of Evaluation:*
 @showsoln{(coe `(rotate 45 ,green-star)) }
+
+@showsoln{(code `(rotate 45 ,green-star)) }
+
 
 | @n A solid, green star that is 3 times the size of the original *and* has been rotated 45 degrees
 
-*Circle of Evaluation:*
 @showsoln{(coe `(scale 3 (rotate 45 ,green-star))) }
 
-| *Code:* @fitb{}{@showsoln{(code `(rotate 45 ,green-star)) }}
-| *Code:* @fitb{}{@showsoln{(code `(scale 3 (rotate 45 ,green-star))) }}
+@showsoln{(code `(scale 3 (rotate 45 ,green-star))) }
 
 |===
 

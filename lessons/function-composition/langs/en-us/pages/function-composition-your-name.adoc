@@ -2,17 +2,36 @@
 
 ++++
 <style>
-/* Override width:100% to allow circles and vspace to share the same line */
-#content div.circleevalsexp { width: auto;}
-#content .grid tr:nth-child(1){ height: 150pt; }
-#content .grid tr:nth-child(3){ height: 180pt; }
-#content .grid tr:nth-child(odd) td {border-bottom: 0 !important;}
-#content .contracts td { padding: 0 !important; }
-#content .contracts .editbox { background: none; }
-#content .contracts { background-color: #f7f7f8 !important; }
-td .autonum:after { content: ") "; }
+p .editbox { font-size: 9pt; }
+.center {padding: 0;}
+
+.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
+
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
+.contracts { background-color: #f7f7f8 !important; }
+
+.grid tr td {padding: 0 0.625em; }
+.grid tr:nth-child(1){ height: calc(6.5in * 0.33); }
+.grid tr:nth-child(2){ height: calc(6.5in * 0.66); }
+
+/* Necessary rules to force the code solution to the bottom of the row */
+.grid td { position: relative; }
+.grid .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
+
+div.circleevalsexp .value {
+  display:            inline-block;
+  margin:             2px 5px;
+  vertical-align:     top;
+}
+table .autonum:after { content: ") "; }
+
+br:first-child { display: none; }
 </style>
 ++++
+@do{
+	(define name-sexp '(text "X" 30 "red"))
+}
 
 You’ll be investigating these functions with your partner:
 
@@ -31,11 +50,7 @@ You’ll be investigating these functions with your partner:
 )}
 |===
 
-@do{ (define name-sexp '(text "X" 30 "red")) }
-
 @n In the editor, write the code to make an image of your name in big letters in a color of your choosing using `text`.  Then draw the Circle of Evaluation and write the Code that will create the image.
-
-@vspace{1ex}
 
 *Circle of Evaluation:*
 
@@ -46,39 +61,36 @@ You’ll be investigating these functions with your partner:
 
 Using the "image of your name" described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Test your ideas in the editor to make sure they work.
 
-@vspace{1ex}
-
 [.grid, cols="1a,1a",stripes="none"]
 |===
 
 | @n The framed "image of your name".
 
-*Circle of Evaluation:*
 @showsoln{(coe `(frame ,name-sexp)) }
+
+@showsoln{(code `(frame ,name-sexp)) }
+
 
 | @n The "image of your name" flipped vertically.
 
-*Circle of Evaluation:*
 @showsoln{(coe `(flip-vertical ,name-sexp)) }
 
+@showsoln{(code `(flip-vertical ,name-sexp)) }
 
 
-| *Code:* @fitb{}{@showsoln{(code `(frame ,name-sexp)) }}
-| *Code:* @fitb{}{@showsoln{(code `(flip-vertical ,name-sexp)) }}
 
 
 | @n  The "image of your name" above "the image of your name" flipped vertically.
 
-*Circle of Evaluation:*
 @showsoln{(coe `(above ,name-sexp (flip-vertical ,name-sexp))) }
+
+@showsoln{(code `(above  ,name-sexp (flip-vertical   ,name-sexp))) }
+
 
 | @n The "image of your name" flipped horizontally beside "the image of your name".
 
-*Circle of Evaluation:*
-
 @showsoln{(coe `(beside ,name-sexp (flip-horizontal ,name-sexp)))}
 
-| *Code:* @fitb{}{@showsoln{(code `(above  ,name-sexp (flip-vertical   ,name-sexp))) }}
-| *Code:* @fitb{}{@showsoln{(code `(beside ,name-sexp (flip-horizontal ,name-sexp))) }}
+@showsoln{(code `(beside ,name-sexp (flip-horizontal ,name-sexp))) }
 
 |===
