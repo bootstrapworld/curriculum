@@ -1587,14 +1587,47 @@
                                     [else
                                       (read-group i directive)
                                       (set! possible-beginning-of-line? (read-space i))]))]
+
                            [(string=? directive "ifsoln")
-                            (cond [*solutions-mode?* (display-begin-span #f o)]
-                                  [else (read-group i directive)
-                                        (set! possible-beginning-of-line? (read-space i))])]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (cond [*solutions-mode?*
+                                      (let* ([contains-nl? (regexp-match "^ *\n" text)]
+                                             [converted-text (call-with-input-string text
+                                                               (lambda (i)
+                                                                 (call-with-output-string
+                                                                   (lambda (o)
+                                                                     (expand-directives i o)))))])
+                                        (display
+                                          (cond [contains-nl?
+                                                  (string-append
+                                                    "\n\n[.solution]\n"
+                                                    "--"
+                                                    converted-text
+                                                    "--\n\n")]
+                                                [else (enclose-span ".solution" converted-text)])
+                                          o))]
+                                    [else (set! possible-beginning-of-line? (read-space i))]))]
+
                            [(string=? directive "ifnotsoln")
-                            (cond [(not *solutions-mode?*) (display-begin-span #f o)]
-                                  [else (read-group i directive)
-                                        (set! possible-beginning-of-line? (read-space i))])]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (cond [(not *solutions-mode?*)
+                                     (let* ([contains-nl? (regexp-match "^ *\n" text)]
+                                            [converted-text (call-with-input-string text
+                                                              (lambda (i)
+                                                                (call-with-output-string
+                                                                  (lambda (o)
+                                                                    (expand-directives i o)))))])
+                                       (display
+                                         (cond [contains-nl?
+                                                 (string-append
+                                                   "\n\n[.notsolution]\n"
+                                                   "--"
+                                                   converted-text
+                                                   "--\n\n")]
+                                               [else (enclose-span ".notsolution" converted-text)])
+                                         o))]
+                                    [else (set! possible-beginning-of-line? (read-space i))]))]
+
                            [(string=? directive "ifpathway")
                             ;(printf "doing ifpathway ~s\n" *pathway*)
                             (let ([pathways (read-commaed-group i directive read-group)])
