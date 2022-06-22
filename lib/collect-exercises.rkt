@@ -11,9 +11,13 @@
 
 (define *proglang* (string-downcase (getenv "PROGLANG")))
 
-(define *exercises-list-file* "pages/.cached/.exercise-pages-ls.txt.kp")
+(define *opt-exercises-list-file* "pages/.cached/.exercise-pages-ls.txt.kp")
 
-(define *exercises-files* '())
+(define *workbook-exercises-list-file* "pages/.cached/.workbook-exercise-pages-ls.txt.kp")
+
+(define *opt-exercises-files* '())
+
+(define *workbook-exercises-files* '())
 
 (define (read-first-arg i directive)
   (let ([c (peek-char i)])
@@ -33,17 +37,26 @@
         (when (char=? c #\@)
           (let ([directive (read-word i)])
             ;(printf "ce directive= ~s\n" directive)
-            (cond [(member directive '(;"printable-exercise"
-                                       "opt-printable-exercise"))
+            (cond [(string=? directive "opt-printable-exercise")
                    (let* ([page (read-first-arg i directive)]
                           [compts (string-split page "/")]
                           [num-compts (length compts)])
                      ;(printf "doing ex ~s ~s\n" directive page)
                      (when (<= 1 num-compts 2)
                        (let ([f (list-ref compts (- num-compts 1))])
-                         (unless (member f *exercises-files*)
-                           (set! *exercises-files*
-                             (cons f *exercises-files*))))))]
+                         (unless (member f *opt-exercises-files*)
+                           (set! *opt-exercises-files*
+                             (cons f *opt-exercises-files*))))))]
+                  [(string=? directive "printable-exercise")
+                   (let* ([page (read-first-arg i directive)]
+                          [compts (string-split page "/")]
+                          [num-compts (length compts)])
+                     ;(printf "doing ex ~s ~s\n" directive page)
+                     (when (<= 1 num-compts 2)
+                       (let ([f (list-ref compts (- num-compts 1))])
+                         (unless (member f *workbook-exercises-files*)
+                           (set! *workbook-exercises-files*
+                             (cons f *workbook-exercises-files*))))))]
                   [(string=? directive "scrub")
                    (read-group i directive)]
                   [(string=? directive "ifproglang")
@@ -56,10 +69,15 @@
   ;(printf "doing collect-exercises ~s\n" lesson-plan-file)
   (call-with-input-file lesson-plan-file scan-exercise-directives)
   ;(printf "writing collected exercises\n")
-  (set! *exercises-files* (reverse *exercises-files*))
-  (call-with-output-file *exercises-list-file*
+  (set! *opt-exercises-files* (reverse *opt-exercises-files*))
+  (call-with-output-file *opt-exercises-list-file*
     (lambda (o)
-      (for ([f *exercises-files*])
+      (for ([f *opt-exercises-files*])
+        (display f o) (newline o)))
+    #:exists 'replace)
+  (call-with-output-file *workbook-exercises-list-file*
+    (lambda (o)
+      (for ([f *workbook-exercises-files*])
         (display f o) (newline o)))
     #:exists 'replace))
 
