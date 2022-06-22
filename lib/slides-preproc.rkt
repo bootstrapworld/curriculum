@@ -104,7 +104,7 @@
 (define (code exp)
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
-    (set! x (regexp-replace* "{empty}" x ""))
+    (set! x (regexp-replace* "{zwsp}" x ""))
     (string-append "<code>" x "</code>")))
 
 (define (old-coe exp)

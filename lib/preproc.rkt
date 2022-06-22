@@ -2657,12 +2657,12 @@
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
   (cond [pyret (cond [(eq? e '+) "{plus}"]
-                     [(memq e '(* -)) (format "{empty}~a" e)]
+                     [(memq e '(* -)) (format "{zwsp}~a" e)]
                      [else (wescheme-symbol->pyret e)])]
         [(not tex) (cond [(eq? e '<=) "\\<="]
                          [(eq? e '+) "{plus}"]
                          [(eq? e 'frac) "/"]
-                         [(memq e '(* -)) (format "{empty}~a" e)]
+                         [(memq e '(* -)) (format "{zwsp}~a" e)]
                          [else (format "~a" e)])]
         [else (cond [(eq? e '<=) " \\le "]
                     [(eq? e 'pi) " \\pi "]
@@ -2789,7 +2789,7 @@
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
-      (if pyret? (regexp-replace* " :: " x " :{empty}: ")
+      (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
           x))))
 
 (define (tree-member? xx tree)
