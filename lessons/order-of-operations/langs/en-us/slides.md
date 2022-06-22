@@ -105,7 +105,7 @@ For more practice with this, turn to:
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}
 
 ---
-{layout="Investigate"}
+{layout="Launch"}
 # From Circles of Evaluation to Code
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
