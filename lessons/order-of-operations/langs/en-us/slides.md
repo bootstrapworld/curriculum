@@ -141,7 +141,8 @@ What would the code look like for this circle?
 @image{images/coe7.png, a}{width="175"}			
 
 
-<!-- 3 + 8
+<!-- 
+@show{(code '(+ 3 8))}
 -->
 
 ---
@@ -153,7 +154,8 @@ What would the code look like for this circle?
 
  @image{images/coe8.png, a}{width="200"}	
 
-<!-- 2 * ( 3 + 8 )
+<!-- 
+@show{(code '(* 2 (+ 3 8)))}
 -->
 
 ---
@@ -164,7 +166,8 @@ What would the code look like for this circle?
 
 @image{images/coe9.png, a}{width="200"}			
 
-<!-- 6 + (1 + 2) 
+<!-- 
+@show{(code '(+ 6 (+ 1 2)))}
 -->
 
 
@@ -176,7 +179,8 @@ What would the code look like for this circle?
 
 @image{images/coe10.png, a}{width="200"}		
 
-<!-- (10 - 5) * 6
+<!-- 
+@show{(code '(* (- 10 5) 6))}
 -->
 
 ---
@@ -308,7 +312,3 @@ More 3-column practice with square roots:
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}
 * @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}
-
-
-
-
