@@ -161,7 +161,7 @@ What would the code look like for this circle?
 @image{images/coe9.png, a}{width="200"}			
 
 <!-- 
-@show{(code '(+ 6 (+ 1 2)))}
+@show{(code '(/ 6 (+ 1 2)))}
 -->
 
 
