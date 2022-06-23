@@ -254,46 +254,46 @@ Here is another circle to explore.{style="font-size:16pt"}
 {layout="Supplemental"}
 # Additional Practice
 
-If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of options!
+If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of options! {style="font-size:16pt"}
 
-* @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}
-* @opt-printable-exercise{pages/arith-to-coe.adoc}
-* @opt-printable-exercise{pages/arith-to-coe2.adoc}
-* @opt-printable-exercise{pages/arith-to-coe3.adoc}
-* @opt-printable-exercise{pages/coe-to-arith.adoc}
-* @opt-printable-exercise{pages/coe-to-arith2.adoc}
-* @opt-printable-exercise{pages/evaluate-coe.adoc}
-* @opt-printable-exercise{pages/evaluate-coe2.adoc}
-
----
-{layout="Supplemental"}
-# Additional Practice
-
-More practice connecting Circles of Evaluation to Code
-
-* @opt-printable-exercise{pages/coe-to-code.adoc}
-* @opt-printable-exercise{pages/coe-to-code2.adoc}
-
-More 3-column practice connecting Arithmetic Expressions with Circles of Evaluation and Code:
-
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}
+* @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/arith-to-coe.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/arith-to-coe2.adoc}{style="font-size:16pt"}
+* @opt-printable-exercise{pages/arith-to-coe3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/coe-to-arith.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/coe-to-arith2.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/evaluate-coe.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/evaluate-coe2.adoc}{style="font-size:16pt"} 
 
 ---
 {layout="Supplemental"}
 # Additional Practice
 
-More 3-column practice with negatives:
+More practice connecting Circles of Evaluation to Code {style="font-size:16pt"}
 
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-5.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-6.adoc}
+* @opt-printable-exercise{pages/coe-to-code.adoc} {style="font-size:16pt"}
+* @opt-printable-exercise{pages/coe-to-code2.adoc} {style="font-size:16pt"}
 
-More 3-column practice with square roots:
+More 3-column practice connecting Arithmetic Expressions with Circles of Evaluation and Code: {style="font-size:16pt"} 
 
-* @opt-printable-exercise{pages/translate-coe-to-code-w-sqrts.adoc}
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}{style="font-size:16pt"}
 
-3-column challenge problems with brackets and exponents:
+---
+{layout="Supplemental"}
+# Additional Practice
 
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}
+More 3-column practice with negatives:{style="font-size:16pt"} 
+
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-5.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-6.adoc}{style="font-size:16pt"} 
+
+More 3-column practice with square roots:{style="font-size:16pt"}
+
+* @opt-printable-exercise{pages/translate-coe-to-code-w-sqrts.adoc}{style="font-size:16pt"} 
+
+3-column challenge problems with brackets and exponents:{style="font-size:16pt"} 
+
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}{style="font-size:16pt"} 
