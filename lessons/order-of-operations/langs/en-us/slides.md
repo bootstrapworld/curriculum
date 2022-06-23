@@ -35,7 +35,7 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 
 *Circles of Evaluation* allow us to draw the structure of mathematics. The rules are simple:{style="font-size:15pt"}
 
-__Rule #1:__ Every Circle must have one - and only one! - operator written at the top.
+__Rule #1:__ Every Circle must have one - and only one! - function written at the top.
 
 __Rule #2:__ The inputs to the function are written left-to-right, in the middle of the Circle.
 
@@ -43,6 +43,11 @@ __Rule #3:__ Circles can contain other circles.
 
 @image{images/coe1.png, "circle of evaluation for 6 / 3"}
 
+<!--
+In this example, the function is division and the inputs are 6 and 3 (in that order!.
+Math teachers: you may be used to calling division an *operator*, but operators are
+all just functions that we write a little differently! 
+-->
 ---
 {layout="Launch"}
 # Order of Operations
@@ -110,9 +115,9 @@ For more practice with this, turn to:
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
 
-The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. 
+The first thing the spider does is cross over a curved line - an open parenthesis - then visit the function @ifproglang{pyret}{ or operation} at the top. 
 
-After that, she crawls from left to right, visiting each of the inputs@ifproglang{wescheme}{ to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+After that, she crawls from left to right, visiting each of the inputs. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
 ---
 {layout="Investigate"}
@@ -212,10 +217,10 @@ It is always better to at least start with the parentheses before taking them ou
 {layout="Launch-DN"}
 # Testing out your Code
 
-- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}@ifproglang{pyret}{@link{https://code.pyret.org, pyret} } and click run.
+- Open @starter-file{editor} and click run.
 - For now, we'll work in the Interactions Area on the right.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} 
-- Notice how the editor highlights pairs of parentheses.
+- Notice how the editor __highlights pairs of parentheses__!
 - Hit Enter (or Return) to evaluate this expression. What happens?
 - Test each line of code you wrote by typing them into the Interactions Area. Use the error messages to edit your code to get it working.
 
@@ -251,7 +256,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 {layout="Supplemental"}
 # Additional Practice
 
-If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
+If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of options!
 
 * @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}
 * @opt-printable-exercise{pages/arith-to-coe.adoc}
