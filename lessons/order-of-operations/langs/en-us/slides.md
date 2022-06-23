@@ -130,20 +130,9 @@ After that, she crawls from left to right, visiting each of the inputs. Finally,
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set2.png, a}{width="700"}
-
----
-{layout="Investigate"}
-# From Circles of Evaluation to Code
-
-What would the code look like for this circle?
-
-@image{images/coe7.png, a}{width="175"}			
-
-
-<!-- 
-@show{(code '(+ 3 8))}
--->
+Arithmetic expressions involving more than one operation, will end up with more than one circle,
+@ifproglang{wescheme}{and more than one pair of parentheses.}
+@ifproglang{pyret}{and, whether or not there are parentheses in the original expression, the code requires parentheses to clarify the order in which the operations should be completed.}
 
 ---
 {layout="Investigate"}
@@ -155,8 +144,15 @@ What would the code look like for this circle?
  @image{images/coe8.png, a}{width="200"}	
 
 <!-- 
+advance to next slide to reveal the answer
 @show{(code '(* 2 (+ 3 8)))}
 -->
+
+---
+{layout="Investigate"}
+# From Circles of Evaluation to Code
+
+@image{images/coe-set2.png, a}{width="700"}
 
 ---
 {layout="Investigate"}
@@ -266,11 +262,6 @@ If you're digging into Order or Operations and want more practice with Circles o
 * @opt-printable-exercise{pages/arith-to-coe.adoc}
 * @opt-printable-exercise{pages/arith-to-coe2.adoc}
 * @opt-printable-exercise{pages/arith-to-coe3.adoc}
-
----
-{layout="Supplemental"}
-# Additional Practice
-
 * @opt-printable-exercise{pages/coe-to-arith.adoc}
 * @opt-printable-exercise{pages/coe-to-arith2.adoc}
 * @opt-printable-exercise{pages/evaluate-coe.adoc}
@@ -302,10 +293,6 @@ More 3-column practice with negatives:
 More 3-column practice with square roots:
 
 * @opt-printable-exercise{pages/translate-coe-to-code-w-sqrts.adoc}
-
----
-{layout="Supplemental"}
-# Additional Practice
 
 3-column challenge problems with brackets and exponents:
 
