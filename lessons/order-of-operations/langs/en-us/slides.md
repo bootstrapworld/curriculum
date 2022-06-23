@@ -130,9 +130,7 @@ After that, she crawls from left to right, visiting each of the inputs. Finally,
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-Arithmetic expressions involving more than one operation, will end up with more than one circle,
-@ifproglang{wescheme}{and more than one pair of parentheses.}
-@ifproglang{pyret}{and, whether or not there are parentheses in the original expression, the code requires parentheses to clarify the order in which the operations should be completed.}
+Arithmetic expressions involving more than one operation will end up with more than one circle,  @ifproglang{wescheme}{and more than one pair of parentheses.}@ifproglang{pyret}{and the code requires parentheses to clarify the order in which the operations should be completed - whether or not there are parentheses in the original expression.}
 
 ---
 {layout="Investigate"}
