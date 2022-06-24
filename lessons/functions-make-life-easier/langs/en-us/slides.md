@@ -139,7 +139,7 @@ As you look at the examples, consider the following:
 
 <!--
 Highlight or circle the numbers in the gt column and in the triangle column to help students see that they’re the only thing changing! Draw arrows to the two highlighted columns and label them with the word size.
-  -->
+-->
 
 ---
 {layout="Launch"}
@@ -186,7 +186,7 @@ Other people have other favorite shapes. We need to be able to meet their needs,
 
 <!--
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
- -->
+-->
 
 ---
 {layout="Synthesize"}

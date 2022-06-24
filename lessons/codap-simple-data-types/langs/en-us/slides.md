@@ -27,7 +27,7 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 - What did you Notice? What do you Wonder?
 
 <!--
-    Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. *NEED SCREENSHOT*
+Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. *NEED SCREENSHOT*
 -->
 
 ---
@@ -76,7 +76,7 @@ CODAP knows about many kinds of Numbers, and they behave pretty much the way the
 Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
 
 Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
- -->
+-->
 
 
 ---
@@ -127,7 +127,7 @@ What sets Booleans apart from other data types?
 
 
 <!--
-    Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about expressions? Students may remember expressions from algebra: @math{x + 4}.
+Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about expressions? Students may remember expressions from algebra: @math{x + 4}.
 -->
 
 ---

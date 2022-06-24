@@ -51,7 +51,7 @@ Common Misconceptions:
 What are your favorite current video games?
 
 <!--
-	Project their list on the board and select one to discuss as a class.
+Project their list on the board and select one to discuss as a class.
 -->
 
 ---

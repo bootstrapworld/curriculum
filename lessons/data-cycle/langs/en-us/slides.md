@@ -88,9 +88,9 @@ Most questions can be broken down into one of four categories:
 <!--
 Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"
 
- Examples of arithemetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
+Examples of arithemetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
 
- Other  examples of statistical questions might include "How long does it take for an animal to get adopted?" or "What's a typical age for the cats?". There are also some statistical questions that deal with _relationships between *two* columns_: “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
+Other  examples of statistical questions might include "How long does it take for an animal to get adopted?" or "What's a typical age for the cats?". There are also some statistical questions that deal with _relationships between *two* columns_: “Do cats tend to be adopted faster than dogs?” or “Are older animals heavier than young ones?”
 
 We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won't help us answer that question, so as Data Scientists we might need to do some research _beyond the data_. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 -->
