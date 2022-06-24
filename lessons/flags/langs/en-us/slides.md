@@ -35,17 +35,11 @@ Open the @starter-file{flags} in a new tab, save a copy, and click “Run”.
 
 There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer. {style="font-size:16pt"}
 
-Professional programmers use comments __all the time__.{style="font-size:16pt"}
-
----
-{layout="Investigate-DN"}
-# Putting Images Together
-
-Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.{style="font-size:16pt"}
+Professional programmers use comments __all the time__. They are a way for programmers to leave notes for one another so that teammates can follow each other’s thinking in order to collaborate efficiently, and even for a single programmer to keep track of their thinking when they come back to their code another day.
+{style="font-size:16pt"}
 
 @ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
 @ifproglang{wescheme}{In WeScheme, we use a semicolon (`;`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
-
 
 ---
 {layout="Investigate-DN"}
