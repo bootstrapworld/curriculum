@@ -85,7 +85,7 @@ for natlang in *; do
 
      if test ! $regenid; then
        if test -f "$idfile"; then
-         read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? [yn]" goahead
+         read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
          if test "$goahead" != y; then
            exit
        fi
