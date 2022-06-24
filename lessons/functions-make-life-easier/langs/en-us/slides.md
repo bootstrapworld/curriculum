@@ -64,7 +64,7 @@ To make a shortcut that _changes_, we need to define a _function_.
 
 Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 
-Who wants to be `gt`?!
+I'm going to need a volunteer to help act out the process.
 
 <!--
 Ask for a volunteer to act out gt.
@@ -74,32 +74,33 @@ Ask for a volunteer to act out gt.
 {layout="Investigate"}
 # There's Got to Be a Better Way!  
 
-What will _@show{(code '(gt 5))}_ produce?
+Our actor is playing the starring role of `gt`.
 
-_@show{(code '(triangle 5 "solid" "green"))}!_
+They expect a number and will produce an image.
 
-In other words, `gt` expects a Number, and produces an Image.
+Just as with any acting career, this one will begin with a rehearsal.
 
----
-{layout="Investigate"}
-# There's Got to Be a Better Way!  
+When I say, "*gt 5!*", you say, "*triangle 5 solid green!*"
 
-Let's rehearse: 
-
-When I say, "*gt 5!*", 
-`gt` replies, "*triangle 5 solid green!*"
-
-When I say, "*gt 20!*",
-`gt` replies, "*triangle 20 solid green!*"
-
-When I say, "*gt 200!*",
-`gt` replies, "*triangle 200 solid green!*"
-
-When I say, "*gt 99!*",
-`gt` replies, "*triangle 99 solid green!*"
+Let's try it.
 
 <!--
-Make it clear to the class that the function's Name is "gt," that they expect a Number, and will produce an Image. Act out some examples before having the class add their own and record them on the board. -->
+Continue the rehearsal!  
+
+When I say, "*gt 5!*", you say
+... wait for the student to say "*triangle 5 solid green!*"
+
+When I say, "*gt 20!*",
+... wait for the student to say "*triangle 20 solid green!*"
+
+When I say, "*gt 200!*",
+... wait for the student to say "*triangle 200 solid green!*"
+
+When I say, "*gt 99!*",
+... wait for the student to say "*triangle 99 solid green!*"
+
+Once they're rehearsed, have the class add their own and record them on the board. 
+-->
 
 ---
 {layout="Synthesize"}
@@ -169,18 +170,19 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 - Open the @starter-file{gt}, and save a copy of your own
 - Click Run
 - Evaluate @show{(code '(gt 10))} in the Interactions Area. What do you get back?
-- In one minute, how many different green triangles you can make?!
+- In one minute, how many different green triangles can you make?!
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
 ---
 {layout="Investigate-DN"}
 # Identifying and Describing the Pattern
 
-Other people have other favorite shapes. We need to be able to meet their needs, too! 
+Other people have other favorite shapes. We need to be able to meet their needs, too! What if we wanted to define a function `rs` to make solid red squares of whatever size we provide?
 
-What if we wanted to define a function `rs` to make solid red squares of whatever size we provide?
-
-Complete @printable-exercise{rs.adoc} Add your new function definitions to your @starter-file{gt} and test them out before moving on to @printable-exercise{sun.adoc} and @printable-exercise{define-your-own.adoc}
+- Complete @printable-exercise{rs.adoc} 
+- Add your new function definitions to your @starter-file{gt} and test them out.
+- Then do @printable-exercise{sun.adoc} 
+- And @printable-exercise{define-your-own.adoc}
 
 <!--
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
