@@ -709,8 +709,37 @@ body:not(.LessonPlan) .recipe p {
 * TEACHER RESOURCES PAGE
 */
 
-.teacher_resources {  }
-.teacher_resources strong { /* name of resource */ }
+.TeacherResources .sect1 h2 {
+  background-color: #75328A77;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px !important;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+
+.sect1 h2.active, .sect1 h2:hover { background-color: #b7d893; }
+
+.sect1 h2:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.TeacherResources .sect1 h2.active { color: white; }
+.TeacherResources .sect1 h2.active:after { content: "\2212"; }
+
+.TeacherResources .sect1 .sectionbody {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
 
 /* Exercises and Solutions Table */
 table.exercises_and_solutions, table.exercises_and_solutions * {
