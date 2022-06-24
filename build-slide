@@ -84,7 +84,7 @@ for natlang in *; do
      idfile=slides-$PROGLANG.id
 
      if test -f "$idfile"; then
-       read -p "Are you sure you want to rebuild slides for $lsn? [yn] " goahead
+       read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? [yn] " goahead
        if test "$goahead" != y; then
          exit
        fi
