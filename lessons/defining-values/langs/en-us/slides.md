@@ -66,9 +66,11 @@ Pyret is no different!
 {layout="Investigate"}
 # What's in Common? 
 
-Open the @starter-file{defining-values} and complete the Notice and Wonder exercise on @printable-exercise{pages/defining-values-explore.adoc} with your partner.
+Open the @starter-file{defining-values} and complete @printable-exercise{pages/defining-values-explore.adoc} with your partner.
 
-Complete the remaining questions and add some definitions of your own in the Definitions Area. Be sure to click *Run* again before you try testing them out.
+Add some definitions of your own in the Definitions Area. Be sure to click *Run* again before you try testing them out.
+
+Then complete @printable-exercise{which-value-to-define.adoc}.
 
 ---
 {layout="Synthesize"}
@@ -82,7 +84,7 @@ Complete the remaining questions and add some definitions of your own in the Def
 {layout="Launch"}
 # Using Defined Values
 
-Open to @printable-exercise{chinese-flag.adoc}
+Complete @printable-exercise{chinese-flag.adoc}
 
 <!--
 It will direct them to open the @starter-file{flags-china} once they complete the first half of the questions on the page.
@@ -92,13 +94,17 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 {layout="Investigate"}
 # Using Defined Values
 
-Define `sun` to be the image: 
+- Open a new file in @starter-file{editor} and name it sunny.
+- Turn to @printable-exercise{pages/coe-why-define-values.adoc}
+- The first row of the table has been completed for you. Could I get a volunteer to explain what they see happening in that first row?
+- What code is being replaced by `sunny`? 
+- Write the code on the line provided in question 2. Then type it into the Interactions Area and click "Run".
+- Define the value `sunny` in the definitions area.
+- Complete the page and test your code in the editor.
 
-@show{(code '(radial-star 30 20 50 "solid" "yellow"))} 
-
-Then turn to @printable-exercise{pages/coe-why-define-values.adoc}
-
-The first row of the table has been completed for you. Work with your partner to explain what is happening in that first row before completing the rest of the page. 
+<!--
+The code for sunny is @show{(code '(radial-star 30 20 50 "solid" "yellow"))}
+-->
 
 ---
 {layout="Synthesize"}
