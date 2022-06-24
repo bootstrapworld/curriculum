@@ -18,9 +18,10 @@ But how does this function work?
 {layout="LaunchC"}
 # Function Notation (Definitions)
 
-When we apply a function to the inputs it needs, we substitute those inputs for the variables in the definition.
+When applying a function to its inputs, we substitute for the variables in its definition. {style="font-size:15pt"}
 
-@image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}
+
+@image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}{width="1200"}
 
 ---
 {layout="InvestigateC"}
@@ -28,7 +29,7 @@ When we apply a function to the inputs it needs, we substitute those inputs for 
 
 Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! 
 
-@image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}
+@image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}{width="1200"}
 
 
 ---
@@ -156,9 +157,9 @@ It would be hard to be precise for many of the points on the graphs that curve. 
 | x | -10 | -5  | 5 | 7 | 13
 | y | -15 | -10 | 0 | 2 | 8
 
-Let’s take a look at a table of input-output pairs that satisfy the function f(x)=x−5, and think about how could we have determined the value of f(7) from looking at the table.
+Let’s take a look at a table of input-output pairs that satisfy the function @math{f(x)=x−5}, and think about how could we have determined the value of @math{f(7)} from looking at the table.
 
-Looking at the table, what is the value of f(−10)?
+Looking at the table, what is the value of @math{f(−10)}?
 
 ---
 {layout="Investigate"}
