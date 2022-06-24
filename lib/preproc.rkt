@@ -997,9 +997,9 @@
       (let ([lesson-notes-pages (read-data-file
                                   (format "lessons/~a/pages/.cached/.workbook-notes-pages-ls.txt.kp" lesson))])
         (for ([page lesson-notes-pages])
-          (unless notes-title-done?
-            (set! notes-title-done? #t)
-            (fprintf o "\n\n- *All Lesson Notes*\n"))
+          ; (unless notes-title-done?
+          ;   (set! notes-title-done? #t)
+          ;   (fprintf o "\n\n- *All Lesson Notes*\n"))
           (set! page (regexp-replace ".adoc$" page ""))
           (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
                 [link-text page])
@@ -1512,6 +1512,11 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
                             (display-exercise-collation o)]
+                           [(string=? directive "all-lesson-notes")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
+                            (link-to-notes-pages o)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
@@ -1751,7 +1756,7 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              (fprintf o (create-workbook-links))
                              (link-to-opt-projects o)
-                             (link-to-notes-pages o)
+                             ; (link-to-notes-pages o)
                              ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)

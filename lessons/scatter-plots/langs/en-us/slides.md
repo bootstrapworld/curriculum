@@ -125,7 +125,7 @@ Do you think there's a relationship between `pounds` and `weeks` in this table? 
 {layout="Investigate-DN"}
 # The Data Cycle
 
-Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}.
+Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}.
 
 - What did you find when you looked at the scatter-plot?
 - Does there appear to be a pattern or trend?
