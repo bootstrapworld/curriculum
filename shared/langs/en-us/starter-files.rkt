@@ -8,8 +8,8 @@
 '(
 
   ("editor" "the editor"
-    ("pyret" "https://code.pyret.org" "code.pyret.org (CPO)")
-    ("wescheme" "https://www.wescheme.org" "WeScheme")
+    ("pyret" "https://code.pyret.org/editor" "code.pyret.org (CPO)")
+    ("wescheme" "https://www.wescheme.org/openEditor" "WeScheme")
     )
 
   ; no spaces in starter file shortname!
