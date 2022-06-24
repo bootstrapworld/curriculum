@@ -13,7 +13,8 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - Why do we see movement from still images? 
 - How might this apply to our game? 
 
-<!--How does a flip-book animation work? Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
+<!--
+How does a flip-book animation work? Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
 
 Why do we see movement from still images?
 Our eyes fill in the gaps between rapidly changing images.
@@ -54,7 +55,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 
 <!--
-	What did you notice about the movement of TARGET and DANGER? What was changing about them?
+What did you notice about the movement of TARGET and DANGER? What was changing about them?
 
 Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc.
 

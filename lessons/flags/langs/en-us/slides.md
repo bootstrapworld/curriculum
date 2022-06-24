@@ -68,7 +68,7 @@ Could we completely replace `overlay` with `put-image`?
 
 Why or why not?
 
- <!--
+<!--
 If you have time, we have lots of additional starter files to push student thinking linked in the additional exercises at the end of this lesson and now would be the time to dive into them!
 -->
 

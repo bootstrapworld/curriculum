@@ -236,7 +236,7 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 @image{images/coe-pair.png, a}
 
 <!--
-	Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
+Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
 -->
 
 ---

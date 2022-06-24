@@ -131,7 +131,7 @@ Suppose I wrote the code:
 What’s another line of code I could write that would produce the exact same image?
     
 <!-- 
-	@show{(code '(circle 150 "solid" "red"))}
+@show{(code '(circle 150 "solid" "red"))}
 -->
 
 ---

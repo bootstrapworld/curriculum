@@ -59,7 +59,7 @@ We've found a __new data type__, called a @vocab{Boolean}.
 * Identify inputs that will make each function produce `false`.
 
 <!--
-	Students will see functions on this page that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
+Students will see functions on this page that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
 - Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
 
 Common Misconceptions

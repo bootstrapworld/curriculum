@@ -50,7 +50,7 @@ Take a few minutes to write about the @printable-exercise{windows-mirrors.adoc} 
 Complete the Ketchup Use Google Form.
 
 <!--
-  In order to use this slide with your students, you’ll need to make a copy of this form and add the link to this slide https://docs.google.com/forms/d/16tCvWZmTvHrztrVvQeInusQovwoK61WLsg3OTV0VIwg/copy
+In order to use this slide with your students, you’ll need to make a copy of this form and add the link to this slide https://docs.google.com/forms/d/16tCvWZmTvHrztrVvQeInusQovwoK61WLsg3OTV0VIwg/copy
 -->
 
 ---

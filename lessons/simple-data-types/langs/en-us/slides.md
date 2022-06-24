@@ -87,7 +87,7 @@ Pay special attention to the error messages!
 Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
 
 Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
- -->
+-->
 
 ---
 {layout="Synthesize"}

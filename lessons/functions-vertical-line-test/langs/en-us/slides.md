@@ -47,7 +47,7 @@ We can test a graph to see whether or not it's a function using the "vertical li
 @image{images/two-graphs-for-vertical-line-test.png, "one graph that passes the test, another that fails it"}{width="550"}
 
 <!--
-	Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, it means the same input can have more than one output and the relationship is not a function.
+Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, it means the same input can have more than one output and the relationship is not a function.
 -->
 
 ---
