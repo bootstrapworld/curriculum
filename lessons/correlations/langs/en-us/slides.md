@@ -106,8 +106,7 @@ _Direction:_ whether a linear relationship is positive or **negative**.
 {layout="Investigate"}
 # Correlations have _Direction_
 
-- Complete @printable-exercise{pages/identifying-form.adoc} and focus __just on the second question__, determining whether each of the relationships they previously identified as linear is positive or negative.
-- OPTIONAL: complete the card sort on @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/6018cc371c5b92526b6a96d, Identifying Direction}.
+Complete @printable-exercise{pages/identifying-form.adoc} and focus __just on the second question__, determining whether each of the relationships they previously identified as linear is positive or negative.
 
 <!--
 Have the class discuss their answers
