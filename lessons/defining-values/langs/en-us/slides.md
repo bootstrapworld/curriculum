@@ -50,9 +50,7 @@ Duplicate code is almost always bad!
 {layout="Launch"}
 # What's in Common? 
 
-In math, if we define a value, like @math{x = 4}, 
-
-we can evaluate expressions using that value, like @math{x + 2}.
+In math, if we **define** a value, like @math{x = 4}, we can **evaluate** expressions using that value, like @math{x + 2}.
 
 @ifproglang{wescheme}{
 WeScheme uses the word "define" to make this even clearer! We can type `(define x 4)` to define `x` to be the value 4.

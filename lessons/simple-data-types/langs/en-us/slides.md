@@ -23,21 +23,7 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 {layout="Launch"}
 # Numbers & Strings
 
-@ifproglang{wescheme}{
-Open @link{https://www.wescheme.org, WeScheme} and click "Log In". 
-
-It will ask you to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show you the "My Programs" page. This page is empty - you don't have any programs yet! 
-
-Click "Start a New Program".
-}
-
-@ifproglang{pyret}{
-Open @link{https://code.Pyret.org, code.pyret.org (CPO) } and click "Sign In". 
-
-It will ask you to log in with a valid Google account (Gmail, Google Classroom, YouTube, etc.), and then show you the "Programs" page. This page is empty - you don't have any programs yet! 
-
-Click "Open Editor".
-}
+Open @starter-file{editor} and click "Log In", then start a new program.
 
 ---
 {layout="LaunchR"}

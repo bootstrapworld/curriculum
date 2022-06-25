@@ -9,8 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # Introducing Booleans 
 
-Convert these Circles of Evaluation into code. @ifproglang{wescheme}{Then, log into @link{https://www.wescheme.org, WeScheme} and see what the code evaluates to.}
-@ifproglang{pyret}{Then, log into @link{https://code.pyret.org, code.pyret.org (CPO)} and see what the code evaluates to.}{style="font-size:24pt"}
+Convert these Circles of Evaluation into code. Then, log into @starter-file{editor} and see what the code evaluates to.}{style="font-size:24pt"}
 
 @image{images/set-of-coes1.png, a}{width="550"}
 
@@ -36,19 +35,9 @@ We've found a __new data type__, called a @vocab{Boolean}.
 # Introducing Booleans
 
 * Open the @starter-file{boolean}.
-@ifproglang{wescheme}{
-* Explore the five functions in this starter file:  `odd?`, `even?`, `less-than-one?`, `continent?`, ``primary-color?``
-
+* Explore the five functions in this starter file: @show{(code 'odd?')}, @show{(code 'even?')}, @show{(code 'less-than-one?')}, @show{(code 'continent?')}, @show{(code 'primary-color?')}
 * All five functions produce @vocab{Booleans}. 
 * Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
-}
-
-@ifproglang{pyret}{
-* Explore the five functions in this starter file: `is-odd`, `is-even`, `is-less-than-one`, `is-continent`, ``is-primary-color``
-
-* All five functions produce @vocab{Booleans}. 
-* Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
-}
 
 ---
 {layout="Investigate-DN"}
@@ -80,7 +69,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 {layout="Launch-DN"}
 # Introducing Inequalities
 
-* Open the @starter-file{inequalities-simple}.  It includes an example.  
+* Open the @starter-file{inequalities-simple} and **Remix/Save a Copy**.
 * Read the example code in the file carefully and click run to see the image it returns.  
 * Discuss the code with your partner.
 * What do you Notice?
@@ -100,7 +89,7 @@ The solution set is shaded in blue, with points shaded green (solution) and red 
 {layout="LaunchC"}
 # Introducing Inequalities
 
-If your list of 8 values doesn't include an equal number of solutions and non-solutions there will be an unequal distribution of red and green dots and you will get an error message encouraging you to adjust their list.
+If your list of 8 values doesn't include an equal number of solutions and non-solutions, you’ll get an error message encouraging you to adjust the list.
 
 @image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}{width="550"}
 
@@ -108,7 +97,7 @@ If your list of 8 values doesn't include an equal number of solutions and non-so
 {layout="Investigate-DN"}
 # Introducing Inequalities
 
-Open to the @printable-exercise{simple-inequalities.adoc} and complete it with a partner.
+Complete @printable-exercise{simple-inequalities.adoc} with a partner.
 
 Identify solutions and non-solutions to each inequality and test them in the @starter-file{inequalities-simple}.
 

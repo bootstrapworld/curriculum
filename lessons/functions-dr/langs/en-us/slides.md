@@ -11,7 +11,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 A word problem is a description of a situation, but seeing the math behind the words can be challenging!
 
-In this lesson, you're going to learn a strategy for breaking down word problems, called the *Design Recipe*. You've actually seen most of the steps of the Design Recipe, but you _haven't_ seen how to put them together. There's also one part you haven't seen yet: _writing a purpose statement_.
+In this lesson, you're going to learn a strategy for breaking down word problems, called the **Design Recipe**. You've actually seen most of the steps of the Design Recipe, but you _haven't_ seen how to put them together. There's also one part you haven't seen yet: _writing a purpose statement_.
 
 ---
 {layout="Launch"}
@@ -87,10 +87,8 @@ Click Run to see the simulation start running on your computer.
 Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
 * Type @show{(code '(rocket-height 0))} into the Interactions Area.{style="font-size:17pt"}
-* As the program is currently written, what happens when we give the `rocket-height` function an input of 0? {style="font-size:17pt"}
-* Is that what we want it to do? {style="font-size:17pt"}
-* As the program is currently written, what happens when we give the `rocket-height` function an input of 10?{style="font-size:17pt"} 
-* Is that what we want it to do?{style="font-size:17pt"}
+* Wat happens when we give the `rocket-height` function an input of 0? Is that what we want it to do? {style="font-size:17pt"}
+* What happens when we give the `rocket-height` function an input of 10? Is that what we want it to do?{style="font-size:17pt"}
 * Why did the examples pass? {style="font-size:17pt"}
 
 <!--

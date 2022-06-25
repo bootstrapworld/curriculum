@@ -79,7 +79,7 @@ How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numb
 {layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Open @starter-file{inequalities-compound}.
+Open @starter-file{inequalities-compound}, and **Remix/Save a Copy**.
 
 Read the code and click run to see the graphs you've just considered.
 

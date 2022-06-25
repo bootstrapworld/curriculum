@@ -41,11 +41,11 @@ _Since each student ("input") has only one action ("output"), it is still a func
 {layout="Launch"}
 # Intro to Piecewise Functions
 
-Up until now, all of the functions we have seen can be described by a single rule. 
+Up until now, all of the functions we have seen can be described by a **single rule**. 
 
-In this activity your behavior followed a _set of rules_ for which each input still had exactly one output. 
+In this activity your behavior followed a _**set of rules**_ for which each input still had exactly one output. 
 
-This is called a _piecewise function_ in math, and a _conditional_ in programming. The world is full of piecewise functions and conditionals!
+This is called a **piecewise function** in math, and a **conditional** in programming. The world is full of piecewise functions and conditionals!
 
 ---
 {layout="Launch"}
@@ -58,7 +58,7 @@ Let's try acting out another set of rules.
 * Everyone wearing pants put your hands on your hips.
 * Everyone wearing a t-shirt make an O with your arms.
 
-_Why doesn't this set of directions represent a function?_
+_Why does this set of directions **not** represent a function?_
 
 <!--
 _Some students should have nothing to do. Others should look confused as to what to do. They may be wearing sneakers and pants and not be able to put their hands on their head and on their hips at the same time. They may be wearing a tshirt and not be able to make a T and an O with their arms simultaneously._
@@ -92,7 +92,7 @@ You may also want to discuss whether square root and absolute values are piecewi
 {layout="Launch"}
 # Conditionals in Programming 
 
-So far, all of the functions we've written had a _single rule_. The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
+The rule for `gt` was to take a number and make a solid, green triangle of that size. The rule for `bc` was to take a number and make a solid, blue circle of that size.
 
 __What if we want to write functions that apply different rules, based on certain conditions?__
 
@@ -154,7 +154,7 @@ _The examples are also pretty similar: we write the name of the function, follow
 {layout="Investigate-DN"}
 # Extending the Design Recipe 
 
-* Circle and label everything that is *change*able on @printable-exercise{red-shape-dr.adoc}.{style="font-size:16pt"}
+* Circle and label everything that is *change*able on @printable-exercise{red-shape-dr.adoc}.
 * What changes? What did you label?
 
 If there are more unique labels in the examples than there are things in the Domain, we're probably looking at a piecewise function.
@@ -172,7 +172,7 @@ You may also have students work with @opt-printable-exercise{mood-generator-dr.a
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-In this example, we have four patterns:
+In this example, we have four _totally diffrent_ patterns:
 
 - sometimes we produce `(circle 20 "solid" "red")`
 - sometimes we produce `(triangle 20 "solid" "red")`
@@ -186,11 +186,11 @@ In this example, we have four patterns:
 
 To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").
 
-* When should we make circles? When `shape == "circle"`
-* When should we make triangles? When `shape == "triangle"`
-* When should we make rectangles? When `shape == "rectangle"`
-* When should we make stars? When `shape == "star"`
-* When should we draw the "Unknown shape name" text? When `shape` is....anything `else`
+* When do we make circles? When `shape == "circle"`
+* When do we make triangles? When `shape == "triangle"`
+* When do we make rectangles? When `shape == "rectangle"`
+* When do we make stars? When `shape == "star"`
+* When do we draw the "Unknown shape name" text? When `shape` is....anything `else`
 
 ---
 {layout="Investigate"}
@@ -198,11 +198,11 @@ To define a piecewise function, each condition has both a result ("what should w
 
 Adding the questions to our pattern gives us:
 
-- When `shape == "circle"`...we produce `(circle 20 "solid" "red")`
-- When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`
-- When `shape == "rectangle"`...we produce `(rectangle 20 20 "solid" "red")`
-- When `shape == "star"`...we produce `(star 20 "solid" "red")`
-- When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`
+- When `shape == "circle"`...we produce `(circle 20 "solid" "red")`{style="font-size:16pt"}
+- When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`{style="font-size:16pt"}
+- When `shape == "rectangle"`...we produce `(rectangle 20 20 "solid" "red")`{style="font-size:16pt"}
+- When `shape == "star"`...we produce `(star 20 "solid" "red")`{style="font-size:16pt"}
+- When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`{style="font-size:16pt"}
 
 ---
 {layout="Investigate"}
