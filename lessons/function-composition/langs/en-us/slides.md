@@ -13,6 +13,8 @@ For this activity we will be working in groups of 3-4 students.
 
 Each group has a set of @link{pages/function-cards.html, "Function Cards"}, each of which takes an input and produces an output. 
 
+If you don't have printed versions, you can use our Desmos version of the @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Function Cards} instead.
+
 ---
 {layout="Launch"}
 # Composing Functions
