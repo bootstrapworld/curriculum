@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-24 # last modified
+LASTMOD=2022-06-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -2020,7 +2020,7 @@ function checkworkbookpagesalsoexercises() {
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
       echo
-      echo WARNING: Workbook page $f not an exercise page
+      echo WARNING: Workbook page $(pwd)/$f not an exercise page
       echo
     fi
   done
