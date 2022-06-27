@@ -15,21 +15,21 @@ But how does this function work?
 
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Function Notation (Definitions)
 
-When applying a function to its inputs, we substitute for the variables in its definition. {style="font-size:15pt"}
+When applying a function to its inputs, we substitute for the variables in its definition. {style="font-size:13pt"}
 
 
-@image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}{width="1200"}
+@image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}{width="700"}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Function Notation (Definitions)
 
-Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! 
+Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! {style="font-size:15pt"}
 
-@image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}{width="1200"}
+@image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}{width="700"}
 
 
 ---
