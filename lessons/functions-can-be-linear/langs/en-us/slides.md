@@ -231,12 +231,11 @@ Life isn't always so simple!
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
-
-Try extending the second table (below) and filling in the missing rows to find the slope and y-intercept.
-
 @table{5}
 | x |  2 | 5 | 8  | 11
 | y |  3 | 9 | 15 | 21
+
+Try extending the second table (above) and filling in the missing rows to find the slope and y-intercept.
 
 What strategies did you use to extend the table?
 
