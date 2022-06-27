@@ -111,11 +111,11 @@ Make absolutely certain that students understand that this line-length _always r
 
 `line-length` computes the positive distance between two points on a single number line.
 
-If two coordinates differ by their x-values, this function will tell us how far apart they are. 
+**If two coordinates differ by their x-values**, this function will tell us how far apart they are. 
 
-If two coordinates differ by their y-values, this function will tell us how far apart they are. 
+**If two coordinates differ by their y-values**, this function will tell us how far apart they are. 
 
-But what if the coordinates differ by both x and y...?
+But what if the coordinates differ by **both x and y**...?
 
 ---
 {layout="Launch-DN"}
