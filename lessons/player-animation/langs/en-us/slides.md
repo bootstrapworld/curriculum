@@ -104,3 +104,18 @@ It's likely that once they hear other students' ideas, they will want more time 
 
 * What would it take to make the player move left and right? 
 * Why can't we do this without changing the contract?
+
+---
+{layout="Supplemental"}
+# Extension
+
+If your game is working and you have time... you might want to dig into 2-d movement in the game, using the Posn data type.
+
+Start with:
+
+* @opt-printable-exercise{2d-character-movement.adoc} 
+* @opt-printable-exercise{2d-character-movement-cont.adoc}
+
+Once you've gotten your danger moving diagonally, you're ready to build upon your understanding of Posn and piecewise functions to tackle:
+
+* @opt-printable-exercise{update-player-2.adoc}.
