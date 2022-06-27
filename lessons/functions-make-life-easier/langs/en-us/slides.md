@@ -85,8 +85,26 @@ When I say, "*gt 5!*", you say, "*triangle 5 solid green!*"
 Let's try it.
 
 <!--
-Continue the rehearsal!  
+Continue the rehearsal with the next slide!  
 
+-->
+
+---
+{layout="Launch"}
+# There's Got to Be a Better Way!  
+
+@table{2, header}
+|  When I say...    | gt says...
+| gt 5 				| triangle 5 solid green
+| gt 20			 	|
+| gt 200			|
+| gt 99				|
+
+
+Let's Rehearse! 
+
+<!--
+Let's Rehearse!
 When I say, "*gt 5!*", you say
 ... wait for the student to say "*triangle 5 solid green!*"
 
