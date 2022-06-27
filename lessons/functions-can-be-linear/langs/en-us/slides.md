@@ -105,9 +105,9 @@ What do you Notice? What do you Wonder? If all linear relationships can be shown
 
 @image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
 
-<!---
+<!--
 Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
---->
+-->
 
 
 ---
