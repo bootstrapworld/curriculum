@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-26 # last modified
+LASTMOD=2022-06-28 # last modified
 PDFMARGIN=0mm
 SED=sed
 MDV=md5sum
@@ -1370,6 +1370,8 @@ function buildcommonlessons() {
 function proglangversion() {
   local f=$1
 
+  # 0=true 1=false
+
   if test ! -f $f/index.shtml; then
     return 1
 
@@ -1381,19 +1383,6 @@ function proglangversion() {
       return 0
     fi
 
-  elif test $(echo $f|grep "\-codap"); then
-    local g=${f%-codap}
-    if test -f $g/index.shtml; then
-      if ! diff -q $f/.cached/.lesson-prereq.txt.kp $g/.cached/.lesson-prereq.txt.kp >/dev/null; then
-        return 0
-      else
-        return 1
-      fi
-    elif test -f $g-wescheme/index.shtml; then
-      return 1
-    else
-      return 0
-    fi
 
   else
     return 0
@@ -1420,6 +1409,8 @@ function builddependencyjson() {
     if test $(echo $L|grep "\-wescheme"); then
       Lbasename=${L%-wescheme}
     fi
+
+    # echo Lbasename is $Lbasename
 
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
