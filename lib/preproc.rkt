@@ -1611,7 +1611,7 @@
                                                     "\n\n[.solution]\n"
                                                     "--"
                                                     converted-text
-                                                    "--\n\n")]
+                                                    "\n--\n\n")]
                                                 [else (enclose-span ".solution" converted-text)])
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
@@ -1631,7 +1631,7 @@
                                                    "\n\n[.notsolution]\n"
                                                    "--"
                                                    converted-text
-                                                   "--\n\n")]
+                                                   "\n--\n\n")]
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
