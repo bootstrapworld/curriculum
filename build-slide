@@ -58,16 +58,17 @@ fi
 
 for natlang in *; do
   test -d $natlang || continue
-  test -d $natlang/lessons || continue
-  cd $natlang
-  cd lessons
-  export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
-  if test ! -d $lsn; then
-    echo Lesson $lsn not found in distribution
-    break
+  if test ! -d $natlang/lessons; then
+    echo Missing lessons diry in distribution -- did you call build-pathway\?
+    continue
   fi
+  if test ! -d  $natlang/lessons/$lsn; then
+    echo Lesson $natlang/lessons/$lsn not found in distribution
+    continue
+  fi
+  cd $natlang/lessons/$lsn
+  export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
   export LESSON="$lsn"
-  cd $LESSON
   # echo Doing $LESSON
   PROGLANG=pyret
   repoLESSON=$LESSON
@@ -140,7 +141,5 @@ for natlang in *; do
   else
     echo WARNING: Lesson \'$LESSON\' doesn\'t have slides.md
   fi
-  cd ..
-  cd ..
-  cd ..
+  cd ../../..
 done

@@ -1168,22 +1168,25 @@
       (set! *lesson-keywords* (cons k *lesson-keywords*)))))
 
 (define (add-lesson-prereqs immediate-prereqs)
-  ; (printf "doing add-lesson-prereqs ~s ~s\n" *lesson-plan* immediate-prereqs)
-  ;(printf "lesson-prereq dir = ~s\n" (current-directory))
-  (set! *lesson-prereqs* immediate-prereqs)
-  (for ([lsn immediate-prereqs])
+  ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
+  ; (printf "lesson-prereq dir = ~s\n" (current-directory))
+  (cond [(string=? *proglang* "codap")
+         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-codap")) immediate-prereqs))]
+        [else
+          (set! *lesson-prereqs* immediate-prereqs)])
+  (for ([lsn *lesson-prereqs*])
     (let ([lsn-prereq-file (build-path *containing-directory* 'up lsn ".cached" ".lesson-prereq.txt.kp")])
-      ;(printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
+      ; (printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
       (when (file-exists? lsn-prereq-file)
         (let ([pp (read-data-file lsn-prereq-file)])
-          ;(printf "pp are ~s\n" pp)
+          ; (printf "pp are ~s\n" pp)
           (for ([p pp])
-            ;(printf "trying p = ~s\n" p)
+            ; (printf "trying p = ~s\n" p)
             (unless (member p *lesson-prereqs*)
-              ;(printf "adding p = ~s\n" p)
+              ; (printf "adding p = ~s\n" p)
               (set! *lesson-prereqs* (cons p *lesson-prereqs*))))))))
   (let ([this-lsn-prereq-file (build-path *containing-directory* ".cached" ".lesson-prereq.txt.kp")])
-    ;(printf "writing to prereq-file = ~s\n" this-lsn-prereq-file)
+    ; (printf "writing to prereq-file = ~s\n" this-lsn-prereq-file)
     (call-with-output-file this-lsn-prereq-file
       (lambda (o)
         (for ([p *lesson-prereqs*])
@@ -1608,7 +1611,7 @@
                                                     "\n\n[.solution]\n"
                                                     "--"
                                                     converted-text
-                                                    "--\n\n")]
+                                                    "\n--\n\n")]
                                                 [else (enclose-span ".solution" converted-text)])
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
@@ -1628,7 +1631,7 @@
                                                    "\n\n[.notsolution]\n"
                                                    "--"
                                                    converted-text
-                                                   "--\n\n")]
+                                                   "\n--\n\n")]
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
