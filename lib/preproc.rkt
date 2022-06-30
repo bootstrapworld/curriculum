@@ -2526,7 +2526,7 @@
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
                           #:parens [parens #f] #:firstarg [firstarg #f])
-  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens firstarg)
+  ; (printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens firstarg)
   (let ([n (length e)])
     (if (and (eq? a 'frac) (= n 2))
         (format "{{~a} \\over {~a}}"
@@ -2546,6 +2546,7 @@
                                                     #:encloser a #:parens parens #:tex #t)) rest-e)]
                [args (if e1 (cons arg1 args) args)]
                [x (string-join args (format " ~a " am))])
+          ; (printf "IIII w:~s e:~s p:~s f:~s on x:~s\n" wrap encloser parens firstarg x)
           (let ([ans (if (and wrap (or (not encloser)
                                        parens
                                        (and (eq? encloser '+)
@@ -2556,10 +2557,11 @@
                                             (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))))
+                                       (and (eq? encloser '*) (not (memq a '(* frac expt))))
+                                       (and (eq? encloser '/))))
                          (format "( ~a )" x)
                          x)])
-            ;(printf "infix ret'd ~s\n" ans)
+            ; (printf "infix ret'd ~s\n" ans)
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
@@ -2701,7 +2703,7 @@
     ))
 
 (define (math e #:parens [parens #f])
-  ;(printf "doing math ~s p:~s\n" e parens)
+  ; (printf "doing math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
