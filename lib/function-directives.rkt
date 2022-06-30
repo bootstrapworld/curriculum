@@ -155,7 +155,7 @@
   ; (printf "doing wescheme->pyret ~s ~s ~s\n" e wrap parens)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (wescheme-symbol->pyret e)]
-        [(string? e) (format "~s" e)]
+        [(string? e) (string-append "\"" e "\"")]
         [(list? e) (let ([a (first e)])
                      (cond [(memq a '(+ - * / and or < > = <= >= <>
                                         string=? string<? string<=? string>? string>=? string<>?
@@ -332,7 +332,7 @@
               (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
-  ;(printf "doing write-examples num-examples=~a example-list=~a buggy-example-list=~a\n" num-examples example-list buggy-example-list)
+  ; (printf "doing write-examples num-examples=~s example-list=~s buggy-example-list=~s\n" num-examples example-list buggy-example-list)
   (string-append
     (write-title "Examples")
     "[.recipe.recipe_instructions]\n"
@@ -450,7 +450,7 @@
         ))))
 
 (define (write-each-example funname args body show)
-  ;(printf "write-each-example ~s ~s ~s ~s\n" funname args body show)
+  ; (printf "write-each-example ~s ~s ~s ~s\n" funname args body show)
   (let ([show-funname? #f]
         [show-args? #f]
         [show-body? #f])
@@ -603,9 +603,10 @@
                              (highlight-keywords body-line) *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
-  ;(printf "doing write-definition/pyret ~s ~s ~s\n" funname param-list body)
+  ; (printf "doing write-definition/pyret ~s ~s ~s\n" funname param-list body)
   (when (or (not body) (null? body)) (set! body ""))
   (unless (string? body) (set! body (wescheme->pyret body)))
+  ; (printf "body is now ~s\n" body)
       (let* ([body-lines (map string-trim (regexp-split #rx"\n" body))]
              [n (- (length body-lines) 1)]
              [but-last-body-lines (take body-lines n)]
