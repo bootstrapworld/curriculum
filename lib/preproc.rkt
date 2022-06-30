@@ -1574,6 +1574,9 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
+                              (when (string=? width "")
+                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
+                                (set! width "100%"))
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".fitbruby" #:attribs
