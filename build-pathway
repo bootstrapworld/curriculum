@@ -298,7 +298,7 @@ function insertgdrivesave() {
   local other_f=$f_head-gdrive-import.html
   local pageTitle=
   if test -f $f_head.adoc; then
-    pageTitle=$(grep '^[=#] ' $f_head.adoc|head -n 1|$SED -e 's/^[=#] *//' -e 's/  *$//')
+    pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
   fi
 
   if test ! "$pageTitle"; then
@@ -1093,7 +1093,7 @@ function checklessonplan() {
   test -d .cached || mkdir -p .cached
 
   if test -f index.adoc; then
-    grep '^[=#] ' index.adoc|head -n 1|$SED -e 's/^[=#] *//' -e 's/  *$//' > .cached/.index.titletxt
+    grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
 
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
