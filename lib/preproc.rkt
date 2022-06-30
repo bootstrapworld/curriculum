@@ -352,10 +352,10 @@
           (set! vv (sort vv <)))
         (set-box! bx vv)))))
 
-(define (check-first-subsection i o)
+(define (check-first-subsection c0 i o)
   (let ([c (peek-char i)])
     (if (eof-object? c) #f
-        (char=? c #\=))))
+        (char=? c c0))))
 
 (define (display-section-markup i o)
   (let ([section-level
@@ -913,9 +913,9 @@
         (newline o)))
     (newline o)))
 
-(define (display-title i o out-file)
+(define (display-title c0 i o out-file)
   (let* ([title (read-line i)]
-         [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
+         [title-txt (string-trim (regexp-replace "^[=#]+ *" title ""))])
     (set! *page-title* title-txt)
     (unless *other-dir*
       (let ([title-file (path-replace-extension out-file ".titletxt")]
@@ -925,7 +925,7 @@
             (display title-txt o) (newline o))
           #:exists 'replace)))
     (fprintf o "[.~a]\n" *proglang*)
-    (display #\= o)
+    (display c0 o)
     (display title o)
     (newline o)
     (newline o)
@@ -1740,12 +1740,12 @@
                    (set! possible-beginning-of-line? #f)
                    (newline o)
                    (display c o)]
-                  [(and beginning-of-line? (char=? c #\=))
+                  [(and beginning-of-line? (memv c '(#\= #\#)))
                    (set! beginning-of-line? #f)
                    (set! possible-beginning-of-line? #f)
                    (cond [title-reached?
                            (cond [first-subsection-reached? #f]
-                                 [(check-first-subsection i o)
+                                 [(check-first-subsection c i o)
                                   (set! first-subsection-reached? #t)
                                   (when *lesson-plan*
                                     (include-glossary o))]
@@ -1755,7 +1755,7 @@
                                  [else (display c o)])]
                          [else
                            (set! title-reached? #t)
-                           (display-title i o out-file)
+                           (display-title c i o out-file)
                            (display-alternative-proglang o)
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")

@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-29 # last modified
+LASTMOD=2022-06-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -298,7 +298,7 @@ function insertgdrivesave() {
   local other_f=$f_head-gdrive-import.html
   local pageTitle=
   if test -f $f_head.adoc; then
-    pageTitle=$(grep '^= ' $f_head.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//')
+    pageTitle=$(grep '^[=#] ' $f_head.adoc|head -n 1|$SED -e 's/^[=#] *//' -e 's/  *$//')
   fi
 
   if test ! "$pageTitle"; then
@@ -611,6 +611,7 @@ function resolveabbrevs() {
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
+    # echo codemirrorneeded is set for $f $localDISTROOTDIR
   fi
   $SED -i \
     -e 's/%PYRETKEYWORD%\([^%]*\)%END%/<span class="pyretkeyword">\1<\/span>/g' \
@@ -700,7 +701,7 @@ $SED -i \
   fi
   #
   # echo Trying to find tif
-  tif=$fdir/.cached/${fbase%.*}-comment.txt
+  local tif=$fdir/.cached/${fbase%.*}-comment.txt
   # echo Try $tif
   if test ! -f $tif; then
     tif=$fdir/.cached/.${fbase%.*}-comment.txt
@@ -1092,7 +1093,7 @@ function checklessonplan() {
   test -d .cached || mkdir -p .cached
 
   if test -f index.adoc; then
-    grep '^= ' index.adoc|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > .cached/.index.titletxt
+    grep '^[=#] ' index.adoc|head -n 1|$SED -e 's/^[=#] *//' -e 's/  *$//' > .cached/.index.titletxt
 
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
@@ -2584,11 +2585,15 @@ function run_postproc() {
   rm -f $bigfile-split*
   split -l $MAXBASHTHREADS $bigfile $bigfile-split
   for smallfile in $bigfile-split*; do
-    if test -f "$smallfile"; then
+    if test -s "$smallfile"; then
       for fhtml in $(cat $smallfile); do
-        $postproc_func $fhtml &
+        if test $NOPARALLEL; then
+          $postproc_func $fhtml
+        else
+          $postproc_func $fhtml &
+        fi
       done
-      wait
+      test ! $NOPARALLEL && wait
     fi
   done
 
