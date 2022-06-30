@@ -47,7 +47,9 @@ a|
 
 A *contract* is a statement of the _domain_ (input) and _range_ (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
 
-A *Purpose Statement* is a way of describing what an expression does.
+A *Purpose Statement* is a way of describing what an expression does. A sample purpose statement looks like this: "consumes an animal, and produces true if the animal is fixed."
+
+
 
 |===
 
@@ -56,29 +58,34 @@ Explain to the class that the Filter Transformer will walk from one student to t
 
 Here’s how that might look if the Filter Transformer chose an expression called `likes-pizza`.
 
-Filter Transformer to Student 1: Do you like pizza?
+- *Filter Transformer to Student 1*: Do you like pizza?
+- *Student 1*: Yes
+- *Filter Transformer*: Remain standing. (Student 1 remains standing.)
+- *Filter Transformer to Student 2*: Do you like pizza?
+- *Student 2*: No.
+- *Filter Transformer*: Sit down. (Student 2 sits.)
 
-Student 1: Yes
+Have your Filter Transformer volunteer go through all their peers, applying their card to each one.
 
-Filter Transformer: Remain standing. (Student 1 remains standing.)
+[.lesson-instruction]
+Based on who sat and who stayed, what was on the card?
 
-Filter Transformer to Student 2: Do you like pizza?
-
-Student 2: No.
-
-Filter Transformer: Sit down. (Student 2 sits.)
-
-After the Filter Transformer has applied the expression to each student, ask the class: Based on who sat and who stayed, what expression was the Filter Transformer applying? _What does the Filter Transformer do to a dataset?_
-
-[.lesson-point]
 The `Filter` Transformer takes an _expression_, and produces a new table containing only rows for which the expression returns `true`.
 
 === Investigate
 
-Explain to students that they are going to practice using the `Filter` Transformer in the @starter-file{animals} in CODAP. As they complete the worksheet, encourage students to pay close attention as they enter information into the `Transformer` plugin. What happens if they forget to select a dataset from the drop-down menu? When does the text change colors? Does CODAP mind if spelling is off? What happens when students 'Save'?
+@right{@image{images/filter-transformer.png,"An image of the Filter Transformer" ,300}}
 
-[.lesson-instruction]
-Complete the worksheet @printable-exercise{pages/codap-filter.adoc} in the @starter-file{animals} in CODAP.
+Explain to students that they are going complete the worksheet @printable-exercise{pages/codap-filter.adoc} to explore the functionality of the `Filter` Transformer in the @starter-file{animals} in CODAP.
+
+As they complete the worksheet, encourage students to pay close attention while entering information into the `Transformer` plugin. For instance:
+
+- What happens if they forget to select a dataset from the drop-down menu?
+- When does the text color change?
+- Does CODAP mind if spelling is off?
+- What happens when students save?
+- Why might a clear, specific purpose statement be useful?
+- When do we see additional datasets added to the drop-down menu of datasets to filter?
 
 === Synthesize
 Debrief with students. Some guiding questions on filtering:
