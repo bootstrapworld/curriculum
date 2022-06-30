@@ -207,7 +207,7 @@ if test $SUPERFORCE; then
   rm -fr prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
 fi
 
-mkdir -p prog
+mkdir -p distribution/prog
 mkdir -p distribution/$NATLANG/lib
 mkdir -p distribution/$NATLANG/extlib
 
@@ -237,7 +237,7 @@ function checkmd5nochange() {
   fi
 }
 
-export PROGDIR=$TOPDIR/prog
+export PROGDIR=$TOPDIR/distribution/prog
 
 if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $NATLANG != en-us, and
