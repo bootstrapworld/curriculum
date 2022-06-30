@@ -216,8 +216,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **It's not just about the numbers!**
 
-These numbers and scatter plot both come from the same datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize the dataset barely change at all!
-
+These numbers and scatter plot come from different datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
 
 @image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
 <!--
@@ -282,7 +281,7 @@ Which pairs of columns would you like to examine?
 {layout="Investigate-DN"}
 # Your Own Analysis
 
-- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, use the Data Cycle to generate some scatter plots, and add them to the "Making Displays" section of your exploration document.
+- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and add them to the "Making Displays" section of your exploration document.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 ---
