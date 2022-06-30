@@ -10,7 +10,12 @@
   ("editor" "the editor"
     ("pyret" "https://code.pyret.org/editor" "code.pyret.org (CPO)")
     ("wescheme" "https://www.wescheme.org/openEditor" "WeScheme")
-    )
+  )
+
+  ("program-list" "program list"
+    ("pyret" "https://code.pyret.org/")
+    ("wescheme" "https://www.wescheme.org/console")
+  )
 
   ; no spaces in starter file shortname!
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
