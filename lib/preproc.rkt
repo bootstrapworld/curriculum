@@ -1511,6 +1511,7 @@
                                                         (path-replace-extension out-file "-desc.txt.kp")
                                                         o)]
                            [(string=? directive "all-exercises")
+                            ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
@@ -1985,9 +1986,8 @@
             (printf "WARNING: File ~a not found\n\n" id-file)])))
 
 (define (display-exercise-collation o)
-  ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
-  ;(printf "pwrd = ~s\n" *pathway-root-dir*)
-  ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
+  ; (printf "doing display-exercise-collation\n" )
+  ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
   (let* ([pathway-lesson-order
            (build-path "courses" *target-pathway* ".cached/.workbook-lessons.txt.kp")]
@@ -2002,11 +2002,10 @@
                            (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
                                            #:mode 'forms)))
                    lessons-with-exx)])
-    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order
-    ;         (file-exists? pathway-lesson-order))
-    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-    ; (printf "exx is ~s\n" exx)
-    ;(printf "lessons= ~s\n\nexercises= ~s\n" lessons exx)
+     ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
+     ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
+     ; (printf "exx is ~s\n" exx)
+     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
     (unless (null? exx)
       (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
@@ -2030,9 +2029,9 @@
       (fprintf o "|===\n"))))
 
 (define (add-exercises)
-  ;(printf "doing add-exercises\n")
-  (when (and *force* (cons? *exercises-done*))
-    ;(printf "doing add-exercises I\n")
+  ; (printf "doing add-exercises ~s\n" *exercises-done*)
+  (when (cons? *exercises-done*)
+    ; (printf "doing add-exercises I\n")
     (set! *exercises-done* (reverse *exercises-done*))
     (let ([lesson-exercises-file
             (build-path *containing-directory* ".cached" ".lesson-exercises.rkt.kp")])
