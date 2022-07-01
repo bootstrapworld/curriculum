@@ -997,9 +997,9 @@
       (let ([lesson-notes-pages (read-data-file
                                   (format "lessons/~a/pages/.cached/.workbook-notes-pages-ls.txt.kp" lesson))])
         (for ([page lesson-notes-pages])
-          (unless notes-title-done?
-            (set! notes-title-done? #t)
-            (fprintf o "\n\n- *All Lesson Notes*\n"))
+          ; (unless notes-title-done?
+          ;   (set! notes-title-done? #t)
+          ;   (fprintf o "\n\n- *All Lesson Notes*\n"))
           (set! page (regexp-replace ".adoc$" page ""))
           (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
                 [link-text page])
@@ -1168,22 +1168,25 @@
       (set! *lesson-keywords* (cons k *lesson-keywords*)))))
 
 (define (add-lesson-prereqs immediate-prereqs)
-  ; (printf "doing add-lesson-prereqs ~s ~s\n" *lesson-plan* immediate-prereqs)
-  ;(printf "lesson-prereq dir = ~s\n" (current-directory))
-  (set! *lesson-prereqs* immediate-prereqs)
-  (for ([lsn immediate-prereqs])
+  ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
+  ; (printf "lesson-prereq dir = ~s\n" (current-directory))
+  (cond [(string=? *proglang* "codap")
+         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-codap")) immediate-prereqs))]
+        [else
+          (set! *lesson-prereqs* immediate-prereqs)])
+  (for ([lsn *lesson-prereqs*])
     (let ([lsn-prereq-file (build-path *containing-directory* 'up lsn ".cached" ".lesson-prereq.txt.kp")])
-      ;(printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
+      ; (printf "lsn-prereq-file is ~s ~s\n" lsn-prereq-file (file-exists? lsn-prereq-file))
       (when (file-exists? lsn-prereq-file)
         (let ([pp (read-data-file lsn-prereq-file)])
-          ;(printf "pp are ~s\n" pp)
+          ; (printf "pp are ~s\n" pp)
           (for ([p pp])
-            ;(printf "trying p = ~s\n" p)
+            ; (printf "trying p = ~s\n" p)
             (unless (member p *lesson-prereqs*)
-              ;(printf "adding p = ~s\n" p)
+              ; (printf "adding p = ~s\n" p)
               (set! *lesson-prereqs* (cons p *lesson-prereqs*))))))))
   (let ([this-lsn-prereq-file (build-path *containing-directory* ".cached" ".lesson-prereq.txt.kp")])
-    ;(printf "writing to prereq-file = ~s\n" this-lsn-prereq-file)
+    ; (printf "writing to prereq-file = ~s\n" this-lsn-prereq-file)
     (call-with-output-file this-lsn-prereq-file
       (lambda (o)
         (for ([p *lesson-prereqs*])
@@ -1508,10 +1511,16 @@
                                                         (path-replace-extension out-file "-desc.txt.kp")
                                                         o)]
                            [(string=? directive "all-exercises")
+                            ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
                             (display-exercise-collation o)]
+                           [(string=? directive "all-lesson-notes")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
+                            (link-to-notes-pages o)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
@@ -1566,6 +1575,9 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
+                              (when (string=? width "")
+                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
+                                (set! width "100%"))
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".fitbruby" #:attribs
@@ -1603,7 +1615,7 @@
                                                     "\n\n[.solution]\n"
                                                     "--"
                                                     converted-text
-                                                    "--\n\n")]
+                                                    "\n--\n\n")]
                                                 [else (enclose-span ".solution" converted-text)])
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
@@ -1623,7 +1635,7 @@
                                                    "\n\n[.notsolution]\n"
                                                    "--"
                                                    converted-text
-                                                   "--\n\n")]
+                                                   "\n--\n\n")]
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
@@ -1729,7 +1741,7 @@
                    (set! possible-beginning-of-line? #f)
                    (newline o)
                    (display c o)]
-                  [(and beginning-of-line? (char=? c #\=))
+                  [(and beginning-of-line? (char=? c '#\=))
                    (set! beginning-of-line? #f)
                    (set! possible-beginning-of-line? #f)
                    (cond [title-reached?
@@ -1751,7 +1763,7 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              (fprintf o (create-workbook-links))
                              (link-to-opt-projects o)
-                             (link-to-notes-pages o)
+                             ; (link-to-notes-pages o)
                              ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
@@ -1974,9 +1986,8 @@
             (printf "WARNING: File ~a not found\n\n" id-file)])))
 
 (define (display-exercise-collation o)
-  ;(printf "doing display-exercise-collation ~s\n" *pathway-exercises-file*)
-  ;(printf "pwrd = ~s\n" *pathway-root-dir*)
-  ;(printf "? = ~s\n" (file-exists? *pathway-exercises-file*))
+  ; (printf "doing display-exercise-collation\n" )
+  ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
   (let* ([pathway-lesson-order
            (build-path "courses" *target-pathway* ".cached/.workbook-lessons.txt.kp")]
@@ -1991,11 +2002,10 @@
                            (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
                                            #:mode 'forms)))
                    lessons-with-exx)])
-    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order
-    ;         (file-exists? pathway-lesson-order))
-    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-    ; (printf "exx is ~s\n" exx)
-    ;(printf "lessons= ~s\n\nexercises= ~s\n" lessons exx)
+     ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
+     ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
+     ; (printf "exx is ~s\n" exx)
+     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
     (unless (null? exx)
       (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
@@ -2019,9 +2029,9 @@
       (fprintf o "|===\n"))))
 
 (define (add-exercises)
-  ;(printf "doing add-exercises\n")
-  (when (and *force* (cons? *exercises-done*))
-    ;(printf "doing add-exercises I\n")
+  ; (printf "doing add-exercises ~s\n" *exercises-done*)
+  (when (cons? *exercises-done*)
+    ; (printf "doing add-exercises I\n")
     (set! *exercises-done* (reverse *exercises-done*))
     (let ([lesson-exercises-file
             (build-path *containing-directory* ".cached" ".lesson-exercises.rkt.kp")])
@@ -2518,7 +2528,7 @@
 
 (define (infix-sexp->math a e #:wrap [wrap #t] #:encloser [encloser #f]
                           #:parens [parens #f] #:firstarg [firstarg #f])
-  ;(printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens firstarg)
+  ; (printf "doing infix-sexp->math ~s ~s w:~s e:~s p:~s f:~s\n" a e wrap encloser parens firstarg)
   (let ([n (length e)])
     (if (and (eq? a 'frac) (= n 2))
         (format "{{~a} \\over {~a}}"
@@ -2538,6 +2548,7 @@
                                                     #:encloser a #:parens parens #:tex #t)) rest-e)]
                [args (if e1 (cons arg1 args) args)]
                [x (string-join args (format " ~a " am))])
+          ; (printf "IIII w:~s e:~s p:~s f:~s on x:~s\n" wrap encloser parens firstarg x)
           (let ([ans (if (and wrap (or (not encloser)
                                        parens
                                        (and (eq? encloser '+)
@@ -2548,10 +2559,11 @@
                                             (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))))
+                                       (and (eq? encloser '*) (not (memq a '(* frac expt))))
+                                       (and (eq? encloser '/))))
                          (format "( ~a )" x)
                          x)])
-            ;(printf "infix ret'd ~s\n" ans)
+            ; (printf "infix ret'd ~s\n" ans)
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
@@ -2693,7 +2705,7 @@
     ))
 
 (define (math e #:parens [parens #f])
-  ;(printf "doing math ~s p:~s\n" e parens)
+  ; (printf "doing math ~s p:~s\n" e parens)
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])

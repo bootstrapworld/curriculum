@@ -30,7 +30,7 @@ It's almost fully-playable!
 * How will the computer know when the characters have collided?
 
 <!--
-	_Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use if you're demoing on the board._
+_Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use if you're demoing on the board._
 
 
 * What seems to be missing from this game? _The characters aren't doing anything when they collide._
@@ -56,7 +56,7 @@ Role-Play: Two Characters Collide!
 - Do this until students can clearly see that collision happens when the two characters are _touching_ or
 _overlapping_ in some way - NOT when they are _at the same point._
 -->
- 
+
 @image{images/role-play1.png, "dog and ninja cat on a number line"}{width="750"}
 
 
@@ -71,7 +71,7 @@ After a few iterations, try switching places and repeating. Point out that stude
 
 Do this until students can clearly see it’s when the two characters are 'touching' or 'overlapping' in some way - NOT when they are 'at the same point.'
 -->
- 
+
 @image{images/role-play2.png, "dog and ninja cat on a number line"}{width="750"}
 
 ---
@@ -111,11 +111,11 @@ Make absolutely certain that students understand that this line-length _always r
 
 `line-length` computes the positive distance between two points on a single number line.
 
-If two coordinates differ by their x-values, this function will tell us how far apart they are. 
+**If two coordinates differ by their x-values**, this function will tell us how far apart they are. 
 
-If two coordinates differ by their y-values, this function will tell us how far apart they are. 
+**If two coordinates differ by their y-values**, this function will tell us how far apart they are. 
 
-But what if the coordinates differ by both x and y...?
+But what if the coordinates differ by **both x and y**...?
 
 ---
 {layout="Launch-DN"}
@@ -148,8 +148,9 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 - If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?{style="font-size:16pt"}
 
 
-<!-- Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some @online-exercise{https://cdn.kutasoftware.com/Worksheets/PreAlg/Pythagorean%20Theorem.pdf, refresher Pythagorean Theorem Practice.} 
-	-->
+<!--
+Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some @online-exercise{https://cdn.kutasoftware.com/Worksheets/PreAlg/Pythagorean%20Theorem.pdf, refresher Pythagorean Theorem Practice.} 
+-->
 
 ---
 {layout="LaunchC"}

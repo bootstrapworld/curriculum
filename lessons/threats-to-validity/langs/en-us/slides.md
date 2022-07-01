@@ -153,7 +153,7 @@ Fill in the Findings portion of your @starter-file{research-paper}, discussing t
 {layout="Synthesize"}
 # Your Analysis
 
-What threats to validity to you find? What were they?
+What threats to validity did you find? What were they?
 
 <!--
 

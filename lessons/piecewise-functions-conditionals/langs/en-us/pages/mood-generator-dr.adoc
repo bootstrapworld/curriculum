@@ -2,4 +2,30 @@
 
 _NOTE: This file uses emojis. Even though emojis look like images, they are actually characters in a string! They can be accessed from your keyboard, just like any other character._
 
-@include{fragments/mood.adoc}
+@design-recipe-exercise{ "mood"
+"They say a picture is worth a thousand words. Write a function @funname that translates moods into emojis so that we can \"see\" what someone is feeling."
+  #:headless? #t
+  #:show-funname-contract? #t
+  #:domain-list '(String)
+  #:show-domains? #t
+  #:range "String"
+  #:show-range? #t
+  #:purpose "Consumes a mood and produces the emoji for that mood."
+  #:show-purpose? #t
+  #:num-examples 4
+  #:example-list '(("happy" "😀")
+                   ("sad"   "😥")
+                   ("angry" "😡")
+                   ("sick"  "🤮")
+                    )
+  #:show-examples `((#t #t #t #t) (#t #t #t #t) (#t #t #t #t) (#t #t #t #t))
+  #:param-list '(mood)
+  #:show-params? #f
+  #:body '(cond
+[(string=? mood "happy") "😀"]
+[(string=? mood "sad")   "😥"]
+[(string=? mood "angry") "😡"]
+[(string=? mood "sick")  "🤮"]
+[else "❓"])
+  #:show-body? #f
+  #:grid-lines? #t }

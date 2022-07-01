@@ -11,7 +11,9 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 For this activity we will be working in groups of 3-4 students.
 
-Each group has a set of @link{pages/function-cards.html, "Function Cards"}, each of which takes an input and produces an output. 
+Each group has a set of @printable-exercise{pages/function-cards.adoc, "Function Cards"}, each of which takes an input and produces an output. 
+
+_If you don't have printed versions, you can use our Desmos version of the @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Function Cards} instead._
 
 ---
 {layout="Launch"}
@@ -131,7 +133,7 @@ Suppose I wrote the code:
 What’s another line of code I could write that would produce the exact same image?
     
 <!-- 
-	@show{(code '(circle 150 "solid" "red"))}
+@show{(code '(circle 150 "solid" "red"))}
 -->
 
 ---

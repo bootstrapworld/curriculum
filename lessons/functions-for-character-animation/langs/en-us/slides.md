@@ -13,7 +13,8 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - Why do we see movement from still images? 
 - How might this apply to our game? 
 
-<!--How does a flip-book animation work? Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
+<!--
+How does a flip-book animation work? Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
 
 Why do we see movement from still images?
 Our eyes fill in the gaps between rapidly changing images.
@@ -54,7 +55,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 
 <!--
-	What did you notice about the movement of TARGET and DANGER? What was changing about them?
+What did you notice about the movement of TARGET and DANGER? What was changing about them?
 
 Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc.
 
@@ -68,18 +69,18 @@ What jobs could we hand over to the computer to make it possible for us to play 
 - In your saved copy of the @starter-file{game}, examine the `update-danger` function
 - Identify the contract, and interpret what the function is currently doing
 - Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
+- Copy the code for `update-danger` into your starter file and click Run.
 
 ---
 {layout="Investigate-DN"}
 # Animation
 
-Copy the code for `update-danger` into your starter file and click Run.{style="font-size:15pt"}
 
-Then complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}, with your partner and transfer the code to your Game Starter File.  {style="font-size:15pt"}
+Then complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc} with your partner, and transfer the code to your Game Starter File.  {style="font-size:15pt"}
 
 Click Run to see `DANGER` and `TARGET` move across the screen independently!{style="font-size:15pt"}
 
-Once you have successfully gotten `update-target` and `update-danger` working, you can change the functions to make the characters move in whichever direction and whatever speed you want!  {style="font-size:15pt"}
+Once you've gotten `update-target` and `update-danger` working, you can change the functions to make the characters move in whichever direction and whatever speed you want!  {style="font-size:15pt"}
 
 Be sure to modify your purpose statements and examples if you change your functions.{style="font-size:15pt"}
 

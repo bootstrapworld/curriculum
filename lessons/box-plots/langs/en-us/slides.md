@@ -84,14 +84,12 @@ Besides looking at the median as center, and the spread between Q1 and Q3, we al
 Splitting a dataset into @vocab{quartiles} gives us five numbers that we can play with to measure spread. To summarize what we've seen so far:
 
 1. **Minimum**: _the smallest value in a dataset_
-2. **Q2** / Median: _the middle value (median) in a dataset_
+2. **Q2** / **Median**: _the middle value in a dataset_
 3. **Q1**: _the median that falls between the minimum and Q2_
-4. **Q3**: _the median that falls between and Q2 and the maximum_
+4. **Q3**: _the median that falls between Q2 and the maximum_
 5. **Maximum**: _the largest value in a dataset_
 
-<!--
-*Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
--->
+
 ---
 {layout="Launch"}
 # Making Box Plots
@@ -102,7 +100,7 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 - Q3 - Q1 = **IQR**:  _the "Interquartile Range", or the distance spanned by the middle half of the data_
 
 <!--
-
+*Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
 -->
 ---
 {layout="Investigate"}

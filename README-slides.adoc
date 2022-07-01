@@ -14,7 +14,6 @@ address is to the Google API settings, and then have him send you
 the `client_id.json` file through a secure channel. Put this file
 inside the `~/.md2googleslides` folder.
 
-
 3. In your terminal window, _manually_ run md2gslides on a simple, dummy file.
 
 ----
@@ -52,3 +51,34 @@ You will be encouraged to add it to your repo and push it so this
 presentation id is used in perpetuity.  (If someone else has
 already done it, you won't need to do it. You'll will just reuse
 this presentation id.)
+
+== build-slide
+
+The script `build-slide` is used to build the slides for an
+individual lesson, whose name is supplied as its argument, e.g.,
+
+  build-slide functions-can-be-linear
+
+This assumes that the lesson `functions-can-be-linear` has been
+copied to the `distribution/` directory by a previous (any)
+`build-pathway` call.
+
+`build-slide` converts the lessons's `slides.md` to a
+post-processed `slides.mkd` (that expands out our
+curriculum-specific directives) and then uses `md2gslides` to
+construct and upload the corresponding presentation. If the
+`repo`  does not already a presentation id associated with these
+slides -- in the file `slides-pyret.id` say --, then a new id is
+used and stored in the `slides-pyret.id`, and you are advised to
+commit it to the repo, so that it can be reliably reused during
+future calls to `build-slides`.
+
+If `slides-pyret.id` is already present, then you are warned that
+the current `build-slides` call could replace an exising
+presentation on the web. Answer `y` to the prompt if that's what
+you really want to do. If not, answer `n` to exit: You are
+advised to use the `-f` option to create a new id that will not
+dislodge the existing presentation. Using the `-f` option is a
+good way to simply check that your modified slides convert
+correctly without committing them to the web yet.
+

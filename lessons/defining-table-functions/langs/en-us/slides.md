@@ -151,9 +151,9 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 <!--
 2. Choose which set of word problems you are going to start with and give each student within each group a different word problem.
 3. The game of telephone begins!
-  * Every student write the contract+purpose for their word problem, then folds over the word problem and passes the contract+purpose to the right
-  * Using their partner's contract+purpose, every student writes their example, circles+labels the variables, then folds over the contract+purpose and passes the examples to the right
-  * Using their partner's examples, every student writes their definition
+* Every student write the contract+purpose for their word problem, then folds over the word problem and passes the contract+purpose to the right
+* Using their partner's contract+purpose, every student writes their example, circles+labels the variables, then folds over the contract+purpose and passes the examples to the right
+* Using their partner's examples, every student writes their definition
 -->
 
 ---

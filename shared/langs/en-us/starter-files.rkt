@@ -8,9 +8,14 @@
 '(
 
   ("editor" "the editor"
-    ("pyret" "code.pyret.org" "code.pyret.org (CPO)")
-    ("wescheme" "wescheme.org" "WeScheme")
-    )
+    ("pyret" "https://code.pyret.org/editor" "code.pyret.org (CPO)")
+    ("wescheme" "https://www.wescheme.org/openEditor" "WeScheme")
+  )
+
+  ("program-list" "program list"
+    ("pyret" "https://code.pyret.org/")
+    ("wescheme" "https://www.wescheme.org/console")
+  )
 
   ; no spaces in starter file shortname!
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,7 +65,7 @@
 
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
-   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FQ5HlOJFNMVMhosdusJqe%2Ffile.json")
+   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FkiJhfgOZfbpXYpvPUWN6%2Ffile.json")
    )
   ("fair-coins" "Fair Coins Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")

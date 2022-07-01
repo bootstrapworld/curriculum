@@ -15,7 +15,7 @@ Computers use numbers to represent a character’s position on screen, using num
 @image{images/1dPosition.png, "A number line with two circles on it, illustrating the distance between two characters in one dimension"}
 
 <!--
-	What is the coordinate of the Dog, if it’s on the left-hand edge of the screen?
+What is the coordinate of the Dog, if it’s on the left-hand edge of the screen?
 What is the coordinate of the Dog, if it’s on the right-hand edge of the screen?
 What is the coordinate of the Dog, if it’s in the center of the screen?
 What coordinate would place the Dog beyond the left-hand edge of the screen?
@@ -32,7 +32,7 @@ But one number line isn't enough!
 @image{images/dog.png, dog character}{width="150"}
 
 <!--
-	What are the coordinates of the Dog, if it’s on the upper left-hand edge of the screen?
+What are the coordinates of the Dog, if it’s on the upper left-hand edge of the screen?
 -->
 
 
