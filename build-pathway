@@ -2016,9 +2016,11 @@ function checkworkbookpagesalsoexercises() {
     if echo "$f"|grep -q '^notes-'; then continue; fi
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
-      echo
-      echo WARNING: Workbook page $(pwd)/$f not an exercise page
-      echo
+      if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+        echo
+        echo WARNING: Workbook page $(pwd)/$f not an exercise page
+        echo
+      fi
     fi
   done
 }
