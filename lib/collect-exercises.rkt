@@ -66,9 +66,9 @@
         (loop)))))
 
 (define (collect-exercises lesson-plan-file)
-  ;(printf "doing collect-exercises ~s\n" lesson-plan-file)
+  ; (printf "doing collect-exercises ~s\n" lesson-plan-file)
   (call-with-input-file lesson-plan-file scan-exercise-directives)
-  ;(printf "writing collected exercises\n")
+  ; (printf "writing collected exercises ~s ~s\n" *opt-exercises-files* *workbook-exercises-files*)
   (set! *opt-exercises-files* (reverse *opt-exercises-files*))
   (call-with-output-file *opt-exercises-list-file*
     (lambda (o)
