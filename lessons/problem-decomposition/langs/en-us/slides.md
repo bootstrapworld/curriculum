@@ -29,7 +29,7 @@ __Sally runs a lemonade stand, which charges $1.75/glass. It costs her $0.30/gla
 
 Complete @printable-exercise{pages/revenue-and-cost.adoc}. 
 
-*Note: The information you need to write the cost function is provided in the Design Recipe word problem!*
+*Note: The information you need to write the `cost` function is provided in the word problem!*
 
 - What is the difference between _revenue_ and _profit_?
 
@@ -38,18 +38,18 @@ Complete @printable-exercise{pages/revenue-and-cost.adoc}.
 - What is the _relationship_ between profit, cost, and revenue?
 
 <!--
-	What is the difference between revenue and profit? Revenue is the total amount of money that comes in, profit is the remaining money after cost has been subtracted.
+What is the difference between revenue and profit? Revenue is the total amount of money that comes in, profit is the remaining money after cost has been subtracted.
 
-	How could Sally increase her profits? By decreasing her costs, raising her prices (which increases revenue), by selling more lemonade.
+How could Sally increase her profits? By decreasing her costs, raising her prices (which increases revenue), by selling more lemonade.
 
-	What is the relationship between profit, cost, and revenue? Profit = Revenue - Cost
+What is the relationship between profit, cost, and revenue? Profit = Revenue - Cost
 -->
 
 ---
 {layout="Investigate-DN"}
 # Problem Decomposition 
 
-- Complete @printable-exercise{pages/profit.adoc}, using the Design Recipe.
+- Complete @printable-exercise{pages/profit.adoc}.
 - When you've completed all three Design Recipes, open @starter-file{sallys-lemonade} and save a copy to remix.
 - Type the examples and definitions for all three functions and click Run. Do all your tests pass?
 

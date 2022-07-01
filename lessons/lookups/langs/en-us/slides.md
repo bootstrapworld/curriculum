@@ -169,17 +169,6 @@ cat-row["fixed"]
 Debrief student answers here
 -->
 ---
-{layout="Investigate"}
-# Column Lookups
-
-- Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @link{../ds-intro/pages/animals-dataset.adoc, The Animals Table}.
-- Complete @printable-exercise{pages/defining-rows.adoc}.
-- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
-
-<!--
-
--->
----
 {layout="Synthesize"}
 # Column Lookups
 

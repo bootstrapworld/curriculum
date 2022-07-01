@@ -1,19 +1,18 @@
 ---
 {layout="Math Title Slide"}
-# Collaboration
+# Solving Problems Together
 
 
 ---
 {layout="LaunchR"}
 # Design Recipe Telephone
 
-Each group member will start with a different word problem. (See next slide for problem sets.) {style="font-size:14pt"}
+**Each group member will start with a different word problem. (See next slide for problem sets.)**{style="font-size:16pt"}
 
-- You will do one step of each Design Recipe problem.{style="font-size:14pt"}
-- When you complete that step, you will fold your paper to hide the part that you were looking at so that only your work and the rest of the recipe is visible.{style="font-size:14pt"}
-- Then you will pass your work to the person to your right so that they can complete the next step based solely on what you write down.{style="font-size:14pt"}
-- The student who continues working the problem you start will be dependent on your work, so pay careful attention to making your part as precisely as possible.{style="font-size:14pt"}
-- If you don’t provide enough information, they may have to hand the paper back to you for revision.{style="font-size:14pt"}
+- You will do one step of each Design Recipe problem.{style="font-size:16pt"}
+- Then pass your work to the person to your right, so that they can complete the next step based solely on what you write down.{style="font-size:16pt"}
+- The next person will be dependent on your work, so pay careful attention to making your part as precisely as possible!{style="font-size:16pt"}
+- If you don’t provide enough information, they will have to hand the paper back to you for revision.{style="font-size:16pt"}
 
 @image{images/telephone.png, "image of a red telephone"}
 

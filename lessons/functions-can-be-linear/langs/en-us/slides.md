@@ -105,9 +105,9 @@ What do you Notice? What do you Wonder? If all linear relationships can be shown
 
 @image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
 
-<!---
-	Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
-	--->
+<!--
+Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
+-->
 
 
 ---
@@ -132,7 +132,7 @@ Complete @printable-exercise{tables-all-linear.adoc}.
 @image{images/set-of-6-tables.png, "series of six tables showing different relationships"}{width="600"}
 
 <!--
-	Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
+Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
 -->
 
 ---
@@ -231,12 +231,11 @@ Life isn't always so simple!
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
-
-Try extending the second table (below) and filling in the missing rows to find the slope and y-intercept.
-
 @table{5}
 | x |  2 | 5 | 8  | 11
 | y |  3 | 9 | 15 | 21
+
+Try extending the second table (above) and filling in the missing rows to find the slope and y-intercept.
 
 What strategies did you use to extend the table?
 

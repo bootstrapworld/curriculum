@@ -28,9 +28,9 @@ What did you Wonder?
 {layout="Investigate"}
 # Who writes the Code?
 
-We're going to take a gallery walk of some pioneers in computing and math.
+We're going to take a gallery walk of some @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}.
 
-@image{images/pioneers-header.png, "Images of a diverse group of people who are pioneers in computing and mathematics"}{width="950"}
+@image{images/pioneers-header3.png, "Images of a diverse group of people who are pioneers in computing and mathematics"}{width="950"}
 
 <!--To do a gallery walk, you will need to print and hang posters of @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}. If you aren't doing a gallery walk, decide on another format for engaging students with these pioneers.
 -->
@@ -50,7 +50,7 @@ Take a few minutes to write about the @printable-exercise{windows-mirrors.adoc} 
 Complete the Ketchup Use Google Form.
 
 <!--
-  In order to use this slide with your students, you’ll need to make a copy of this form and add the link to this slide https://docs.google.com/forms/d/16tCvWZmTvHrztrVvQeInusQovwoK61WLsg3OTV0VIwg/copy
+In order to use this slide with your students, you’ll need to make a copy of this form and add the link to this slide https://docs.google.com/forms/d/16tCvWZmTvHrztrVvQeInusQovwoK61WLsg3OTV0VIwg/copy
 -->
 
 ---

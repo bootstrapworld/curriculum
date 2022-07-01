@@ -218,7 +218,8 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 # Exploring Image Functions
 
-- Take the next 10 minutes to experiment with the image functions listed in the contracts pages (at the back of your workbook, or printed by your teacher).
+- Take the next 10 minutes to experiment with the image functions listed in the @opt-printable-exercise{image-contracts.adoc, contracts pages} at the back of your workbook.
+
 - When you've got working expressions, record the contracts and the code!
 
 You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!

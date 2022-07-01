@@ -32,9 +32,10 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-22 # last modified
+LASTMOD=2022-06-30 # last modified
 PDFMARGIN=0mm
 SED=sed
+CP=cp
 MDV=md5sum
 VERSION=
 NOPARALLEL=
@@ -120,6 +121,7 @@ export NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 export WORKBOOKPAGE=
 export DATASHEETPAGE=
+export TEACHERRESOURCEPAGE=
 export ALLPATHWAYLESSONS=
 
 function displayhelp() {
@@ -162,6 +164,10 @@ if which gsed | grep -q .; then
   SED=gsed
 fi
 
+if which gcp | grep -q .; then
+  CP=gcp
+fi
+
 if which md5 | grep -q .; then
   MDV=md5
 fi
@@ -198,10 +204,10 @@ mkdir -p distribution/$NATLANG/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
+  rm -fr distribution/.prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
 fi
 
-mkdir -p prog
+mkdir -p distribution/.prog
 mkdir -p distribution/$NATLANG/lib
 mkdir -p distribution/$NATLANG/extlib
 
@@ -231,24 +237,24 @@ function checkmd5nochange() {
   fi
 }
 
-export PROGDIR=$TOPDIR/prog
+export PROGDIR=$TOPDIR/distribution/.prog
 
 if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $NATLANG != en-us, and
   # shared/langs/$NATLANG isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
   #
-  cp -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
-  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
+  $CP -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
+  $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   #
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
-    cp -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
+    $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
-  cp -pr $PROGDIR/docroot/* distribution/$NATLANG
+  $CP -pr $PROGDIR/docroot/* distribution/$NATLANG
   mkdir -p distribution/$NATLANG/lib/Badges
   mkdir -p distribution/$NATLANG/lib/images
-  cp -pr $PROGDIR/Badges/* distribution/$NATLANG/lib/Badges
-  cp -pr $PROGDIR/images/* distribution/$NATLANG/lib/images
+  $CP -pr $PROGDIR/Badges/* distribution/$NATLANG/lib/Badges
+  $CP -pr $PROGDIR/images/* distribution/$NATLANG/lib/images
   # TODO: may need to revisit for unforced NATLANG != en-us
 fi
 
@@ -263,15 +269,15 @@ function overwrite() {
 }
 
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
-  cp -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
+  $CP -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
   rm -fr distribution/$NATLANG/extlib/mathjax/[CLRptu]*
 fi
 
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
-  cp -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
-  cp -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
-  cp -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
+  $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
+  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
 fi
 
 function insertbodyid() {
@@ -377,7 +383,7 @@ EOF
     -e 's/%INSERTGDRIVELESSONTITLE/'"$pageTitle"'/' \
     $f
 
-  cp -p $f $other_f
+  $CP -p $f $other_f
 
   $SED -i \
     -e "s/%INSERTGDRIVEURL/(window.location.href.match(\/\\\\\/$\/)?(window.location.href+'index-gdrive-import.html'):(window.location.href.replace(\/([^\\\\\/]+)\\\\.([^.\\\\\/]+)$\/, '\$1-gdrive-import.html')))/" \
@@ -605,6 +611,7 @@ function resolveabbrevs() {
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
+    # echo codemirrorneeded is set for $f $localDISTROOTDIR
   fi
   $SED -i \
     -e 's/%PYRETKEYWORD%\([^%]*\)%END%/<span class="pyretkeyword">\1<\/span>/g' \
@@ -694,7 +701,7 @@ $SED -i \
   fi
   #
   # echo Trying to find tif
-  tif=$fdir/.cached/${fbase%.*}-comment.txt
+  local tif=$fdir/.cached/${fbase%.*}-comment.txt
   # echo Try $tif
   if test ! -f $tif; then
     tif=$fdir/.cached/.${fbase%.*}-comment.txt
@@ -708,7 +715,11 @@ $SED -i \
       -e 's/%INSERTCURRICULUMCOMMENT//' \
       $f
   fi
-  if test ! $WORKBOOKPAGE -a ! $DATASHEETPAGE; then
+  if test $TEACHERRESOURCEPAGE; then
+    $SED -i \
+      -e 's/^<body class="/\0TeacherResources /' \
+      $f
+  elif test ! $WORKBOOKPAGE -a ! $DATASHEETPAGE; then
     $SED -i \
       -e 's/^<body class="/\0narrativepage /' \
       $f
@@ -744,7 +755,7 @@ function adjustproglangsubdirs() {
 
   if test -d "$d"/"$pl"; then
     #echo copying "$d"/"$pl" to "$d"
-    cp -p "$d"/"$pl"/* "$d"
+    $CP -p "$d"/"$pl"/* "$d"
   fi
 
   for lang in codap pyret wescheme; do
@@ -772,7 +783,7 @@ function shadowcopydir() {
     if test -f "$f"; then
       g=$(basename "$f")
       targetfile="$targetdir/$g"
-      cp -p "$f" "$targetdir"
+      $CP -p "$f" "$targetdir"
     elif test -d "$f"; then
       g=$(basename "$f")
       shadowcopydir "$f" "$targetdir"/"$g"
@@ -1037,9 +1048,9 @@ function mkdirsolutionversion() {
     rm -fr solution-pages-2
   fi
 
-  cp -pr pages solution-pages-2
+  $CP -pr pages solution-pages-2
 
-  cp -p $PROGDIR/.hta* solution-pages-2
+  $CP -p $PROGDIR/.hta* solution-pages-2
 
   if test -d solution-pages; then
     shadowcopydir solution-pages solution-pages-2
@@ -1365,6 +1376,8 @@ function buildcommonlessons() {
 function proglangversion() {
   local f=$1
 
+  # 0=true 1=false
+
   if test ! -f $f/index.shtml; then
     return 1
 
@@ -1376,19 +1389,6 @@ function proglangversion() {
       return 0
     fi
 
-  elif test $(echo $f|grep "\-codap"); then
-    local g=${f%-codap}
-    if test -f $g/index.shtml; then
-      if ! diff -q $f/.cached/.lesson-prereq.txt.kp $g/.cached/.lesson-prereq.txt.kp >/dev/null; then
-        return 0
-      else
-        return 1
-      fi
-    elif test -f $g-wescheme/index.shtml; then
-      return 1
-    else
-      return 0
-    fi
 
   else
     return 0
@@ -1415,6 +1415,8 @@ function builddependencyjson() {
     if test $(echo $L|grep "\-wescheme"); then
       Lbasename=${L%-wescheme}
     fi
+
+    # echo Lbasename is $Lbasename
 
     # the following sanity checks shdnt be needed
     #test -d "$L" || continue
@@ -1719,8 +1721,8 @@ function buildteacherresource() {
   export PATHWAYROOTDIR=../
   export DISTROOTDIR=../../../
   export LESSONSUBDIR=resources
-  #cp -p $PROGDIR/*.css $PROGDIR/.hta* .
-  # cp -p $PROGDIR/.hta* .
+  #$CP -p $PROGDIR/*.css $PROGDIR/.hta* .
+  # $CP -p $PROGDIR/.hta* .
   local copacetic=1
   if test ! -f index.adoc; then
     for f in *.adoc; do
@@ -1855,7 +1857,7 @@ function copylessondir() {
     if test $DOCOPYDIR; then
       #echo do copydir into $(pwd)
       overwrite preparing $lessonDir
-      cp -pr $repoLessonDir/* $lessonDir
+      $CP -pr $repoLessonDir/* $lessonDir
       cd $lessonDir
       #echo I currently in $(pwd)
       # we'll set it again when we do the adoc'ing
@@ -1877,7 +1879,7 @@ function copylessondir() {
           if test "$pl" != pyret; then
             lessonDirPl=$lessonDir-$pl
             mkdir -p $lessonDirPl
-            cp -pr $lessonDir/* $lessonDirPl
+            $CP -pr $lessonDir/* $lessonDirPl
           fi
         done
       fi
@@ -2014,8 +2016,11 @@ function checkworkbookpagesalsoexercises() {
     if echo "$f"|grep -q '^notes-'; then continue; fi
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
-      echo
-      echo WARNING: Workbook page $f not an exercise page
+      if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+        echo
+        echo WARNING: Workbook page $(pwd)/$f not an exercise page
+        echo
+      fi
     fi
   done
 }
@@ -2110,7 +2115,7 @@ function updatepathwaylist() {
       echo $lessonDir >> lesson-order.txt.nu
     fi
   done
-  cp -p lesson-order.txt.nu lesson-order.txt
+  $CP -p lesson-order.txt.nu lesson-order.txt
 }
 
 function buildpathway() {
@@ -2159,7 +2164,7 @@ function buildpathway() {
 
     if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
       # echo copying pathway I $repoDir
-      cp -pr $pwydir/* $DESTPATHWAYDIR
+      $CP -pr $pwydir/* $DESTPATHWAYDIR
       cd $DESTPATHWAYDIR
       test -d .cached || mkdir -p .cached
       touch .cached/.redopdf
@@ -2200,7 +2205,7 @@ function buildpathway() {
 
     rm -f $PROGDIR/pathway-local.rkt
     if test -f $repoDir/pathway-local.rkt; then
-      cp -p $repoDir/pathway-local.rkt $PROGDIR
+      $CP -p $repoDir/pathway-local.rkt $PROGDIR
     fi
 
     cd $DESTPATHWAYDIR
@@ -2242,7 +2247,7 @@ function buildpathway() {
     fi
 
     mkdir -p resources/protected
-    cp -p $PROGDIR/.hta* resources/protected
+    $CP -p $PROGDIR/.hta* resources/protected
 
     if test $REFRESHRESOURCES; then
       cd resources
@@ -2465,7 +2470,7 @@ function postproc_workbookpage() {
     local fhtml=$fdir/$fbase
     #echo fhtml= $fhtml
     #echo moving $fhtmlcached to $fhtml
-    cp -p $fhtmlcached $fhtml
+    $CP -p $fhtmlcached $fhtml
     bumpcsspathdir $fhtml $localDISTROOTDIR
     resolveabbrevs $fhtml $localDISTROOTDIR
     addproglang $fhtml
@@ -2543,6 +2548,7 @@ function postproc_narrativeaux() {
 
 function postproc_resources() {
   local fhtmlcached=$1
+  export TEACHERRESOURCEPAGE=1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
@@ -2556,6 +2562,7 @@ function postproc_resources() {
     cleanuptitle $fshtml
     insertgdrivesave $fshtml
   fi
+  export TEACHERRESOURCEPAGE=
 }
 
 function postproc_allpwylessons() {
@@ -2580,11 +2587,15 @@ function run_postproc() {
   rm -f $bigfile-split*
   split -l $MAXBASHTHREADS $bigfile $bigfile-split
   for smallfile in $bigfile-split*; do
-    if test -f "$smallfile"; then
+    if test -s "$smallfile"; then
       for fhtml in $(cat $smallfile); do
-        $postproc_func $fhtml &
+        if test $NOPARALLEL; then
+          $postproc_func $fhtml
+        else
+          $postproc_func $fhtml &
+        fi
       done
-      wait
+      test ! $NOPARALLEL && wait
     fi
   done
 

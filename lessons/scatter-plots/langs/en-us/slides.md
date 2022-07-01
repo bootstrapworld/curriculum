@@ -125,7 +125,7 @@ Do you think there's a relationship between `pounds` and `weeks` in this table? 
 {layout="Investigate-DN"}
 # The Data Cycle
 
-Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}.
+Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}.
 
 - What did you find when you looked at the scatter-plot?
 - Does there appear to be a pattern or trend?
@@ -216,10 +216,12 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 **It's not just about the numbers!**
 
-These numbers and scatter plot both come from the same datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize the dataset barely change at all!
-
+These numbers and scatter plot come from different datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
 
 @image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
+<!--
+This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.autodesk.com/research/publications/same-stats-different-graphs, Autodesk website}!
+-->
 
 ---
 {layout="Investigate"}
@@ -228,9 +230,7 @@ These numbers and scatter plot both come from the same datasets. The patterns in
 **Data Scientists and Statisticians use their eyes all the time**. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. 
 
 Until we really look at the _shape_ of the data, we aren't seeing the whole picture. 
-<!--
-This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.autodesk.com/research/publications/same-stats-different-graphs, Autodesk website}!
--->
+
 ---
 {layout="Investigate-DN"}
 # Looking for Trends
@@ -281,7 +281,7 @@ Which pairs of columns would you like to examine?
 {layout="Investigate-DN"}
 # Your Own Analysis
 
-- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, use the Data Cycle to generate some scatter plots, and add them to the "Making Displays" section of your exploration document.
+- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and add them to the "Making Displays" section of your exploration document.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 ---

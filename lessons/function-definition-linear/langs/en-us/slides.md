@@ -114,7 +114,7 @@ Let's connect all three function representations!
 What strategies did you use?
 
 <!--
-	Common misconception: It is common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
+Common misconception: It is common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
 -->
 
 ---

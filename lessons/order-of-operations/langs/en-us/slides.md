@@ -35,7 +35,7 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 
 *Circles of Evaluation* allow us to draw the structure of mathematics. The rules are simple:{style="font-size:15pt"}
 
-__Rule #1:__ Every Circle must have one - and only one! - operator written at the top.
+__Rule #1:__ Every Circle must have one - and only one! - function written at the top.
 
 __Rule #2:__ The inputs to the function are written left-to-right, in the middle of the Circle.
 
@@ -43,6 +43,11 @@ __Rule #3:__ Circles can contain other circles.
 
 @image{images/coe1.png, "circle of evaluation for 6 / 3"}
 
+<!--
+In this example, the function is division and the inputs are 6 and 3 (in that order!.
+Math teachers: you may be used to calling division an *operator*, but operators are
+all just functions that we write a little differently! 
+-->
 ---
 {layout="Launch"}
 # Order of Operations
@@ -110,9 +115,9 @@ For more practice with this, turn to:
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
 
-The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. 
+The first thing the spider does is cross over a curved line - an open parenthesis - then visit the function @ifproglang{pyret}{ or operation} at the top. 
 
-After that, she crawls from left to right, visiting each of the inputs@ifproglang{wescheme}{ to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+After that, she crawls from left to right, visiting each of the inputs. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
 ---
 {layout="Investigate"}
@@ -120,6 +125,26 @@ After that, she crawls from left to right, visiting each of the inputs@ifproglan
 
 @image{images/coe-set1.png, a}{width="700"}
 
+
+---
+{layout="Investigate"}
+# From Circles of Evaluation to Code
+
+Arithmetic expressions involving more than one operation will end up with more than one circle,  @ifproglang{wescheme}{and more than one pair of parentheses.}@ifproglang{pyret}{and the code requires parentheses to clarify the order in which the operations should be completed - whether or not there are parentheses in the original expression.}
+
+---
+{layout="Investigate"}
+# From Circles of Evaluation to Code
+
+
+What would the code look like for this circle?
+
+ @image{images/coe8.png, a}{width="200"}	
+
+<!-- 
+advance to next slide to reveal the answer
+@show{(code '(* 2 (+ 3 8)))}
+-->
 
 ---
 {layout="Investigate"}
@@ -133,33 +158,10 @@ After that, she crawls from left to right, visiting each of the inputs@ifproglan
 
 What would the code look like for this circle?
 
-@image{images/coe7.png, a}{width="175"}			
-
-
-<!-- 3 + 8
--->
-
----
-{layout="Investigate"}
-# From Circles of Evaluation to Code
-
-
-What would the code look like for this circle?
-
- @image{images/coe8.png, a}{width="200"}	
-
-<!-- 2 * ( 3 + 8 )
--->
-
----
-{layout="Investigate"}
-# From Circles of Evaluation to Code
-
-What would the code look like for this circle?
-
 @image{images/coe9.png, a}{width="200"}			
 
-<!-- 6 + (1 + 2) 
+<!-- 
+@show{(code '(/ 6 (+ 1 2)))}
 -->
 
 
@@ -171,7 +173,8 @@ What would the code look like for this circle?
 
 @image{images/coe10.png, a}{width="200"}		
 
-<!-- (10 - 5) * 6
+<!-- 
+@show{(code '(* (- 10 5) 6))}
 -->
 
 ---
@@ -212,10 +215,10 @@ It is always better to at least start with the parentheses before taking them ou
 {layout="Launch-DN"}
 # Testing out your Code
 
-- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}}@ifproglang{pyret}{@link{https://code.pyret.org, pyret} } and click run.
+- Open @starter-file{editor} and click run.
 - For now, we'll work in the Interactions Area on the right.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} 
-- Notice how the editor highlights pairs of parentheses.
+- Notice how the editor __highlights pairs of parentheses__!
 - Hit Enter (or Return) to evaluate this expression. What happens?
 - Test each line of code you wrote by typing them into the Interactions Area. Use the error messages to edit your code to get it working.
 
@@ -233,7 +236,7 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 @image{images/coe-pair.png, a}
 
 <!--
-	Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
+Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
 -->
 
 ---
@@ -251,59 +254,46 @@ Here is another circle to explore.{style="font-size:16pt"}
 {layout="Supplemental"}
 # Additional Practice
 
-If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
+If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of options! {style="font-size:16pt"}
 
-* @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}
-* @opt-printable-exercise{pages/arith-to-coe.adoc}
-* @opt-printable-exercise{pages/arith-to-coe2.adoc}
-* @opt-printable-exercise{pages/arith-to-coe3.adoc}
-
----
-{layout="Supplemental"}
-# Additional Practice
-
-* @opt-printable-exercise{pages/coe-to-arith.adoc}
-* @opt-printable-exercise{pages/coe-to-arith2.adoc}
-* @opt-printable-exercise{pages/evaluate-coe.adoc}
-* @opt-printable-exercise{pages/evaluate-coe2.adoc}
+* @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/arith-to-coe.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/arith-to-coe2.adoc}{style="font-size:16pt"}
+* @opt-printable-exercise{pages/arith-to-coe3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/coe-to-arith.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/coe-to-arith2.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/evaluate-coe.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/evaluate-coe2.adoc}{style="font-size:16pt"} 
 
 ---
 {layout="Supplemental"}
 # Additional Practice
 
-More practice connecting Circles of Evaluation to Code
+More practice connecting Circles of Evaluation to Code {style="font-size:16pt"}
 
-* @opt-printable-exercise{pages/coe-to-code.adoc}
-* @opt-printable-exercise{pages/coe-to-code2.adoc}
+* @opt-printable-exercise{pages/coe-to-code.adoc} {style="font-size:16pt"}
+* @opt-printable-exercise{pages/coe-to-code2.adoc} {style="font-size:16pt"}
 
-More 3-column practice connecting Arithmetic Expressions with Circles of Evaluation and Code:
+More 3-column practice connecting Arithmetic Expressions with Circles of Evaluation and Code: {style="font-size:16pt"} 
 
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}
-
----
-{layout="Supplemental"}
-# Additional Practice
-
-More 3-column practice with negatives:
-
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-5.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-6.adoc}
-
-More 3-column practice with square roots:
-
-* @opt-printable-exercise{pages/translate-coe-to-code-w-sqrts.adoc}
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}{style="font-size:16pt"}
 
 ---
 {layout="Supplemental"}
 # Additional Practice
 
-3-column challenge problems with brackets and exponents:
+More 3-column practice with negatives:{style="font-size:16pt"} 
 
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}
-* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-5.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-w-neg-6.adoc}{style="font-size:16pt"} 
 
+More 3-column practice with square roots:{style="font-size:16pt"}
 
+* @opt-printable-exercise{pages/translate-coe-to-code-w-sqrts.adoc}{style="font-size:16pt"} 
 
+3-column challenge problems with brackets and exponents:{style="font-size:16pt"} 
 
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-2.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-3.adoc}{style="font-size:16pt"} 
+* @opt-printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge-4.adoc}{style="font-size:16pt"} 
