@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-29 # last modified
+LASTMOD=2022-06-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -204,10 +204,10 @@ mkdir -p distribution/$NATLANG/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
+  rm -fr distribution/.prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
 fi
 
-mkdir -p prog
+mkdir -p distribution/.prog
 mkdir -p distribution/$NATLANG/lib
 mkdir -p distribution/$NATLANG/extlib
 
@@ -237,7 +237,7 @@ function checkmd5nochange() {
   fi
 }
 
-export PROGDIR=$TOPDIR/prog
+export PROGDIR=$TOPDIR/distribution/.prog
 
 if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $NATLANG != en-us, and
@@ -611,6 +611,7 @@ function resolveabbrevs() {
     $f
   if grep -q 'class=\"\(pyret\|racket\)\"' $f || grep -q 'class=\"circleevalsexp\"' $f; then
     codemirrorneeded=1
+    # echo codemirrorneeded is set for $f $localDISTROOTDIR
   fi
   $SED -i \
     -e 's/%PYRETKEYWORD%\([^%]*\)%END%/<span class="pyretkeyword">\1<\/span>/g' \
@@ -700,7 +701,7 @@ $SED -i \
   fi
   #
   # echo Trying to find tif
-  tif=$fdir/.cached/${fbase%.*}-comment.txt
+  local tif=$fdir/.cached/${fbase%.*}-comment.txt
   # echo Try $tif
   if test ! -f $tif; then
     tif=$fdir/.cached/.${fbase%.*}-comment.txt
@@ -2015,9 +2016,11 @@ function checkworkbookpagesalsoexercises() {
     if echo "$f"|grep -q '^notes-'; then continue; fi
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
-      echo
-      echo WARNING: Workbook page $(pwd)/$f not an exercise page
-      echo
+      if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+        echo
+        echo WARNING: Workbook page $(pwd)/$f not an exercise page
+        echo
+      fi
     fi
   done
 }
@@ -2584,11 +2587,15 @@ function run_postproc() {
   rm -f $bigfile-split*
   split -l $MAXBASHTHREADS $bigfile $bigfile-split
   for smallfile in $bigfile-split*; do
-    if test -f "$smallfile"; then
+    if test -s "$smallfile"; then
       for fhtml in $(cat $smallfile); do
-        $postproc_func $fhtml &
+        if test $NOPARALLEL; then
+          $postproc_func $fhtml
+        else
+          $postproc_func $fhtml &
+        fi
       done
-      wait
+      test ! $NOPARALLEL && wait
     fi
   done
 

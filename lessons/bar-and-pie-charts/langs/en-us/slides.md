@@ -158,7 +158,7 @@ There are _many_ possible misconceptions about displays that students may encoun
 
 @image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}
 
-Turn to @printable-exercise{pages/type-v-display.adoc}, and see if you can identify what kind of data each display needs!
+Turn to @printable-exercise{pages/kind-v-display.adoc}, and see if you can identify what kind of data each display needs!
 
 <!--
 Have students share their answers and discuss.
