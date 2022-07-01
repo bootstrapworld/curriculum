@@ -155,6 +155,7 @@
   ; (printf "doing wescheme->pyret ~s ~s ~s\n" e wrap parens)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (wescheme-symbol->pyret e)]
+        ; [(string? e) (format "~s" e)]
         [(string? e) (string-append "\"" e "\"")]
         [(list? e) (let ([a (first e)])
                      (cond [(memq a '(+ - * / and or < > = <= >= <>
@@ -261,7 +262,7 @@
       )))
 
 (define (highlight-keywords s)
-  ;(printf "doing (~a) highlight-keywords ~s\n" *proglang* s)
+  ; (printf "doing (~a) highlight-keywords ~s\n" *proglang* s)
   (if (not (string? s))
       "Don't care"
       (let ([res (let ([lines (regexp-split #rx"\n" s)])
@@ -422,10 +423,17 @@
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ;(printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
-  (unless (string? body)
-    (set! body (if (null? body) ""
-                   (wescheme->pyret body))))
+  ; (printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
+
+  (cond [(string? body)
+         (cond [(regexp-match "^ *$" body) #f]
+               [(or (regexp-match "\n" body) (regexp-match " .* " body)) #f]
+               [else (set! body (wescheme->pyret body))])]
+        [(null? body) (set! body "")]
+        [else (set! body (wescheme->pyret body))])
+
+  ; (printf "final body is ~s\n" body)
+
   (when (pair? funname)
     (set! args (rest funname))
     (set! funname (first funname)))
