@@ -1098,7 +1098,11 @@ function checklessonplan() {
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
   # echo collecting exercises in $L
-  $PROGDIR/collect-exercises.rkt index.adoc
+  local pl=pyret
+  if test -f .cached/.wescheme; then pl=wescheme
+  elif test -f .cached/.codap; then pl=codap
+  fi
+  $PROGDIR/collect-exercises.rkt index.adoc $pl
   exerflist=pages/.cached/.exercise-pages-ls.txt.kp
   if test -f $exerflist; then
     #echo checklessonplan I
@@ -1894,6 +1898,7 @@ function copylessondir() {
           fi
           cd $lessonDirPl
           mkdir -p .cached
+          # echo touching .$pl in $lessonDirPl
           touch .cached/.$pl
           touch .cached/.redo
           for subdir in *; do
