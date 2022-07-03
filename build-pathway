@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-06-30 # last modified
+LASTMOD=2022-07-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1036,8 +1036,8 @@ function recursiveadoc() {
 }
 
 function mkdirsolutionversion() {
-  #echo doing mkdirsolutionversion
-  test -d pages || return
+  # echo doing mkdirsolutionversion
+  # test -d pages || return
 
   #echo PWD is $(pwd)
 
@@ -1097,8 +1097,12 @@ function checklessonplan() {
 
   local aspect exerfA exerflist f fhtml fpdf g gbase gext gpdf wbpages
 
-  #echo collecting exercises in $L
-  $PROGDIR/collect-exercises.rkt index.adoc
+  # echo collecting exercises in $L
+  local pl=pyret
+  if test -f .cached/.wescheme; then pl=wescheme
+  elif test -f .cached/.codap; then pl=codap
+  fi
+  $PROGDIR/collect-exercises.rkt index.adoc $pl
   exerflist=pages/.cached/.exercise-pages-ls.txt.kp
   if test -f $exerflist; then
     #echo checklessonplan I
@@ -1865,6 +1869,7 @@ function copylessondir() {
       #echo III deleting checksum.md5txt
       #rm -f .cached/.checksum.md5txt
       touch .cached/.redo
+      test -d pages || mkdir pages
       for subdir in *; do
         if test "$subdir" = pages -o "$subdir" = solution-pages; then
           test -d $subdir/.cached || mkdir $subdir/.cached
@@ -1893,6 +1898,7 @@ function copylessondir() {
           fi
           cd $lessonDirPl
           mkdir -p .cached
+          # echo touching .$pl in $lessonDirPl
           touch .cached/.$pl
           touch .cached/.redo
           for subdir in *; do
@@ -1949,16 +1955,16 @@ function collectworkbookpages() {
   cd "$d"
   if test -d pages; then
     cd pages
+    # echo workbook-pages.txt found
+    test -d .cached || mkdir .cached
+    # cd .cached
+    rm -f .cached/.workbook-pages.txt.kp .cached/.workbook-pages-ls.txt.kp .cached/.workbook-notes-pages-ls.txt.kp
+
+    touch .cached/.workbook-pages-ls.txt.kp
+
     if test -f workbook-pages.txt; then
-      # echo workbook-pages.txt found
-      test -d .cached || mkdir .cached
-      # cd .cached
-      rm -f .cached/.workbook-pages.txt.kp .cached/.workbook-pages-ls.txt.kp .cached/.workbook-notes-pages-ls.txt.kp
       #ensure workbook-pages.txt ends in newline, or while isn't happy
       $SED -i -e '$a\' workbook-pages.txt
-
-      touch .cached/.workbook-pages-ls.txt.kp
-
       while read -r f; do
         # echo finding aspect of "$f"
         aspect=portrait
@@ -1994,12 +2000,12 @@ function collectworkbookpages() {
           fi
         fi
       done < workbook-pages.txt
-
-      grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
-
-      checkworkbookpagesalsoexercises
-
     fi
+
+    grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
+
+    checkworkbookpagesalsoexercises
+
     cd ..
   fi
   cd ..

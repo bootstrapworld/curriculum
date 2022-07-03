@@ -51,15 +51,50 @@
 == Design Recipe Practice @duration{25 minutes}
 
 === Overview
-Students practice more of what they learned in the previous lesson, applying the Design Recipe to make @ifproglang{codap}{Transformers with unique expressions} @ifproglang{pyret}{table functions} that operate on rows of the Animals Dataset. These become the basis of the chaining activity that follows.
+@ifproglang{pyret}{
+Students practice more of what they learned in the previous lesson, applying the Design Recipe to make table functions that operate on rows of the Animals Dataset. These become the basis of the chaining activity that follows.}
+
+@ifproglang{codap}{
+In this lesson students build on what they have already learned to formalize their understanding of the Design Recipe, and then gain fluency with using the Design Recipe.}
 
 === Launch
-The Design Recipe is a powerful tool for solving problems by writing @ifproglang{pyret}{functions} @ifproglang{codap}{expressions}. It's important for this to be like second nature, so let's get some more practice using it.
+@ifproglang{pyret}{The Design Recipe is a powerful tool for solving problems by writing functions.} @ifproglang{codap}{The Design Recipe is a sequence of steps that helps us document, test out, and write the expressions that our Transformers need to work properly - enabling us to thoughtfully analyze data!} It's important for this to be like second nature, so let's get some practice using it.
+
+@ifproglang{codap}{
+[.lesson-instruction]
+- Let's look at this @printable-exercise{pages/design-recipe-1.adoc} worksheet together.
+
+First, we need to decide which Transformer to use: Filter, Transform, or Build. Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
+
+@image{images/transformer-name.png, "top section of a Design Recipe", 800}
+
+Next, we provide *example tables*. In this case, we want to know the animals' names and their species, so we write down those column names. We want to list a few different animals - at least one that is a dog, and at least one that is not - to represent the variety of animals on the table. Then we think about what our transformed table will look like:
+
+- Will Sasha be on the new table? _No, Sasha is a cat. We only want dogs!_
+
+- Will Fritz be on the new table? _Yes, Fritz is a dog._
+
+- Will Toggle be on the new table? _Yes, Toggle is a dog._
+
+@image{images/example-tables.png, "filled in example tables from Design Recipe worksheet", 800}
+
+Now, we are ready to drill down on the contents of our Transformer.
+
+- First - the *contract*, which requires a domain (what type of data will we provide) and a range (what type of data will be produced). Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
+
+- Next, we need a clear *purpose statement* which describes what the expression does to each row. In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
+
+- And finally, we enter our *expression*, in this case: `species = "dog"`.
+
+@image{images/contents.png, "contract, purpose statement, expression", 800}
+
+Each time students encounter a new word problem, we encourage working through it with paper and pencil, as above; the Design Recipe slows down students' thinking and encourage them to reason through each scenario fully rather than guessing haphazardly.
+}
 
 === Investigate
 [.lesson-instruction]
 - Open your saved @starter-file{animals}.
-- Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
+- Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -161,7 +196,7 @@ We also encourage students to rename tables descriptively. By the end of this ex
 [.lesson-point]
 When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers}, it’s important to build @ifproglang{codap}{and transform }first, then filter, and then order.
 
-How well do you know your table methods? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} in to find out.
+How well do you know your @ifproglang{pyret}{table methods} @ifproglang{codap}{Transformers}? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} in to find out.
 
 
 === Synthesize

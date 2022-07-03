@@ -1,4 +1,4 @@
-= Introduction to Transformers: Filter, Transform, Build
+= More Transformers: Filter, Transform, Build
 @description{Students learn more about _Transformers_, including `Filter`, `Transform Attribute`, `Build Attribute`.}
 
 @add-to-lang{.order-by, .filter, .build-column}
@@ -106,15 +106,13 @@ Suppose we want to _transform_ our table, converting `pounds` to `kilograms` or 
 [.lesson-instruction]
 Complete the worksheet @printable-exercise{pages/codap-transform.adoc} in the @starter-file{animals} in CODAP.
 
-The `Transform Attribute` Transformer walks through the table, applying whatever expression it was given to each row. Whatever the expression produces for that row becomes the value of the column, which we can rename by selecting it. In the first example, we gave the Transformer `Age < 5` as its expression, so the new table replaced the age with an indication of whether each animal is young (`true`) or not (`false`).
+The `Transform Attribute` Transformer walks through the table, applying whatever expression it was given to each row. Whatever the expression produces for that row becomes the value of the column; we name that column when we create the Transformer. In the first example, we gave the Transformer `Age < 5` as its expression, so the new table replaced the age with an indication of whether each animal is young (`true`) or not (`false`).
 
 === Synthesize
 Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
 
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we use `Transform Attribute` to convert to imperial units (inches, pounds, etc).
 - A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `Transform Attribute` to compute that for every row in the table.
-
-Being able to create and define a Transformer  is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 
 == Building Columns @duration{10 minutes}
 
@@ -137,6 +135,8 @@ Debrief with students. Ask them if they can think of a situation where they woul
 
 - How is `Build Attribute` similar to `Transform Attribute`? How are they different?
 - When might it make more sense to _build_ an attribute, rather than to _transform_ it?
+
+Being able to create and define a Transformer  is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 
 == Additional Exercises:
 @opt-printable-exercise{pages/what-table-do-we-get.adoc}
