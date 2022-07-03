@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-01 # last modified
+LASTMOD=2022-07-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -823,12 +823,16 @@ function doadoc() {
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo lessons/$LESSONPLAN/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_LESSONPLAN_INPUT
   elif test $NARRATIVE; then
-    if test "$SRCPATHWAY" = algebra; then
-      otherproglangs="($otherproglangs \"wescheme\")"
+    if test "$SRCPATHWAY" = algebra-wescheme; then
+      otherproglangs="$otherproglangs \"pyret\""
+    fi
+    if test "$SRCPATHWAY" = algebra-pyret; then
+      otherproglangs="$otherproglangs \"wescheme\""
     fi
     if test "$SRCPATHWAY" = data-science -o "$SRCPATHWAY" = data-science-codap; then
-      otherproglangs="($otherproglangs \"codap\")"
+      otherproglangs="$otherproglangs \"codap\""
     fi
+    otherproglangs="($otherproglangs)"
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY\" #:dist-root-dir \"$DISTROOTDIR\" #:narrative #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\" #:other-proglangs '$otherproglangs)" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
