@@ -63,7 +63,7 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 {layout="LaunchR"}
 # Intro to Linear Regression 
 
-@right{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot with a cluster of points on the lower left and some points in the upper right", 300}}
+@right{@image{images/lr-pounds-v-weeks.png,"weeks-v-pounds linear-regression plot with a cluster of points on the lower left and some points in the upper right, showing the predictor function", 300}}
 
 Given a value on the x-axis, this line allows us to predict what the corresponding value on the y-axis might be. **This allows us to make predictions based on our data!**
 
