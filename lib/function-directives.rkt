@@ -422,7 +422,7 @@
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ; (printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
+  ; (printf "write-each-example/pyret ~s ~s ~s ~s body= ~s ~s\n" funname show-funname? args show-args? body show-body?)
 
   (cond [(string? body)
          (cond [(regexp-match "^ *$" body) #f]
@@ -478,6 +478,7 @@
      funname show-funname? args show-args? body show-body?)))
 
 (define (expr-to-string x)
+  ; (printf "expr-to-string of ~s\n" x)
   ;ideally this should simply be (format "~s" x)
   ;but Racket fails to preserve very high unicode chars
   (cond [(list? x) (string-append "(" (string-join (map expr-to-string x) " ") ")")]
@@ -485,13 +486,9 @@
         [else (format "~s" x)]))
 
 (define (list-to-string xx)
-  ;(printf "list-to-string ~s\n" xx)
-  (let ([ans (apply string-append
-                    (reverse
-                      (let loop ([xx xx] [r '()])
-                        (if (null? xx) r
-                            (loop (rest xx) (cons (format " ~s" (first xx)) r))))))])
-    (if (string=? ans "") " " ans)))
+  (if (null? xx) ""
+      (string-join
+        (map expr-to-string xx) " ")))
 
 (define (list-to-commaed-string xx)
   ;(printf "doing list-to-commaed-string ~s\n" xx)
@@ -695,7 +692,7 @@
       res)))
 
 (define (write-cond-clause clause)
-  ;(printf "doing write-cond-clause ~s\n" clause)
+  ; (printf "doing write-cond-clause ~s\n" clause)
   (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
     (lambda ()
       (string-append (encoded-ans "" "_____" #f)
