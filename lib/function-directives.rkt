@@ -67,7 +67,7 @@
 
 (define (wescheme->wescheme e #:indent [indent #f] #:parens [parens #f])
   ;(printf "doing wescheme->wescheme ~s\n" e)
-  (cond [(string? e) (format "~s" e)]
+  (cond [(string? e) (string-append "\"" e "\"")]
         [(symbol? e) (wescheme-symbol->wescheme e)]
         [(not (pair? e)) (format "~a" e)]
         [(list e) (let ([a (first e)])
@@ -155,7 +155,6 @@
   ; (printf "doing wescheme->pyret ~s ~s ~s\n" e wrap parens)
   (cond [(number? e) (format "~a" e)]
         [(symbol? e) (wescheme-symbol->pyret e)]
-        ; [(string? e) (format "~s" e)]
         [(string? e) (string-append "\"" e "\"")]
         [(list? e) (let ([a (first e)])
                      (cond [(memq a '(+ - * / and or < > = <= >= <>
@@ -405,7 +404,7 @@
     (> exprs-len len)))
 
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
-  ;(printf "write-each-example/scheme ~s ~s ~s\n" funname args body)
+  ; (printf "write-each-example/scheme ~s ~s body= ~s\n" funname args body)
   (string-append
     (write-wrapper ".recipe.recipe_example_line"
       (lambda ()
@@ -423,7 +422,7 @@
             )))))
 
 (define (write-each-example/pyret funname show-funname? args show-args? body show-body?)
-  ; (printf "write-each-example/pyret ~s ~s ~s ~s ~s ~s\n" funname show-funname? args show-args? body show-body?)
+  ; (printf "write-each-example/pyret ~s ~s ~s ~s body= ~s ~s\n" funname show-funname? args show-args? body show-body?)
 
   (cond [(string? body)
          (cond [(regexp-match "^ *$" body) #f]
@@ -479,16 +478,17 @@
      funname show-funname? args show-args? body show-body?)))
 
 (define (expr-to-string x)
-  (format "~s" x))
+  ; (printf "expr-to-string of ~s\n" x)
+  ;ideally this should simply be (format "~s" x)
+  ;but Racket fails to preserve very high unicode chars
+  (cond [(list? x) (string-append "(" (string-join (map expr-to-string x) " ") ")")]
+        [(string? x) (string-append "\"" x "\"")]
+        [else (format "~s" x)]))
 
 (define (list-to-string xx)
-  ;(printf "list-to-string ~s\n" xx)
-  (let ([ans (apply string-append
-                    (reverse
-                      (let loop ([xx xx] [r '()])
-                        (if (null? xx) r
-                            (loop (rest xx) (cons (format " ~s" (first xx)) r))))))])
-    (if (string=? ans "") " " ans)))
+  (if (null? xx) ""
+      (string-join
+        (map expr-to-string xx) " ")))
 
 (define (list-to-commaed-string xx)
   ;(printf "doing list-to-commaed-string ~s\n" xx)
@@ -692,7 +692,7 @@
       res)))
 
 (define (write-cond-clause clause)
-  ;(printf "doing write-cond-clause ~s\n" clause)
+  ; (printf "doing write-cond-clause ~s\n" clause)
   (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
     (lambda ()
       (string-append (encoded-ans "" "_____" #f)
