@@ -1761,8 +1761,8 @@
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
-                             (fprintf o (create-workbook-links))
-                             (link-to-opt-projects o)
+                             ; (fprintf o (create-workbook-links))
+                             ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
                              ;(display-exercise-collation o)
                              )])]
@@ -2002,10 +2002,13 @@
                            (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
                                            #:mode 'forms)))
                    lessons-with-exx)])
-     ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
-     ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-     ; (printf "exx is ~s\n" exx)
-     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
+    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
+    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
+    ; (printf "exx is ~s\n" exx)
+    ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
+
+    (fprintf o (create-workbook-links))
+    (link-to-opt-projects o)
 
     (unless (null? exx)
       (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
