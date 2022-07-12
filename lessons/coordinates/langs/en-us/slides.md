@@ -56,7 +56,7 @@ What are the coordinates of the Dog, if it’s on the upper left-hand edge of th
 
 ---
 {layout="Launch"}
-# Bridging to Video Games
+# Bridging to video games
 
 With your partner, adjust the sliders to move the cat on @online-exercise{https://www.desmos.com/calculator/pbm9nxr2rd, Ninja Cat Desmos graph}.
 
@@ -69,7 +69,7 @@ What do you Wonder?
 
 ---
 {layout="Investigate"}
-# Bridging to Video Games
+# Bridging to video games
 
 Turn to @printable-exercise{pages/BrainstormGame.adoc}.
 
@@ -81,7 +81,7 @@ As a group, come up with at least one idea for a game!
 
 ---
 {layout="InvestigateC"}
-# Bridging to Video Games
+# Bridging to video games
 
 Find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is a great place to find transparent images. 
 
@@ -90,7 +90,7 @@ Find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is 
 
 ---
 {layout="Investigate"}
-# Bridging to Video Games
+# Bridging to video games
 
 Use this @link{https://docs.google.com/drawings/d/1xXNWcbJ7KOgTClFQeHq-tIy0xmeZds9N3OktvEBaO4c/copy, Google Draw template} to create a Screenshot.
 
@@ -101,7 +101,7 @@ Screenshot must include:
 
 ---
 {layout="Synthesize"}
-# Bridging to Video Games
+# Bridging to video games
 
 What games did you come up with?
 

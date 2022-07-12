@@ -131,7 +131,7 @@
 		"IM.Alg1.4.2"
 	)
 
-    ("numbers-inside-videogames" 
+    ("numbers-inside-video games" 
         "IM.6.7.11"
 		"IM.6.7.12"
 		"IM.8.1.1"
