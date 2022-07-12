@@ -7,7 +7,7 @@
 (require "common-defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
-(require "create-workbook-links.rkt")
+;(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
@@ -1548,8 +1548,6 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            ;(fprintf o "link:./protected/pd-workbook.pdf[Teacher's PD Workbook]")
-                            ;(newline o)
                             (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
@@ -1783,8 +1781,7 @@
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
-                             (fprintf o (create-workbook-links))
-                             (link-to-opt-projects o)
+                             ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
                              ;(display-exercise-collation o)
                              )])]
@@ -2024,19 +2021,23 @@
                            (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
                                            #:mode 'forms)))
                    lessons-with-exx)])
-     ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
-     ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-     ; (printf "exx is ~s\n" exx)
-     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
+    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
+    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
+    ; (printf "exx is ~s\n" exx)
+    ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
+
+    (link-to-opt-projects o)
 
     (unless (null? exx)
-      (fprintf o "[.exercises_and_solutions,cols=\"1a,2a\"]\n")
-      (fprintf o "|===\n")
+      (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
+      (display "and we provide password-protected **link:./protected/workbook-sols.pdf[Workbook Solutions]** as well.\n\n" o)
+      (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
+      (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
         ; (printf "lsn-exx is ~s\n" lsn-exx)
         (let ([lsn (first lsn-exx)]
               [exx (second lsn-exx)])
-          (fprintf o "|link:~a~a/index.shtml[~a] |\n\n[cols=\"2a,1a\"]\n!===\n"
+          (fprintf o "\n\n**link:~a~a/index.shtml[~a]**\n"
                    *dist-root-dir*
                    lsn
                    (call-with-input-file (build-path lsn ".cached/.index.titletxt")
@@ -2045,10 +2046,10 @@
             (let* ([ti (list-ref ex 1)]
                    [exer (list-ref ex 0)]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-              (fprintf o "!~a ![ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
+              (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
                        ti *dist-root-dir* exer *dist-root-dir* soln)))
-          (fprintf o "!===\n")))
-      (fprintf o "|===\n"))))
+          ))
+      )))
 
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
