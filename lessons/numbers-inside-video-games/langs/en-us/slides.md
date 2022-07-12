@@ -1,13 +1,13 @@
 ---
 {layout="Math Title Slide"}
-# The Numbers Inside Video Games
+# The Numbers Inside video games
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
-# Reverse Engineering a Video Game
+# Reverse Engineering a video game
 
 Take turns playing the @starter-file{ninja-cat} in pairs.
 
@@ -23,7 +23,7 @@ This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding
 
 ---
 {layout="Investigate"}
-# Reverse Engineering a Video Game
+# Reverse Engineering a video game
 
 Complete @printable-exercise{pages/ReverseEngineerGame.adoc} with your partner.
 
@@ -35,7 +35,7 @@ Common Misconceptions:
 
 ---
 {layout="Synthesize"}
-# Reverse Engineering a Video Game
+# Reverse Engineering a video game
 
 - If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?{style="font-size:16pt"}
 - How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?{style="font-size:16pt"}
