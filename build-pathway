@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-03 # last modified
+LASTMOD=2022-07-13 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -204,7 +204,7 @@ mkdir -p distribution/$NATLANG/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr distribution/.prog distribution/$NATLANG/lib distribution/$NATLANG/extlib
+  rm -fr distribution/.prog distribution/$NATLANG/.cached distribution/$NATLANG/lib distribution/$NATLANG/extlib
 fi
 
 mkdir -p distribution/.prog
