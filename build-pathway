@@ -1846,109 +1846,89 @@ function copylessondir() {
   fi
 
   # echo repoLessonDir is $repoLessonDir
-  if test -d "$repoLessonDir"; then
-    if test $FORCE; then
-      rm -fr $lessonDir
-    fi
-    mkdir -p $lessonDir
-    #echo $repoLessonDir is a diry
-    DOCOPYDIR=1
-    #echo calling checkmd5nochange $lessonDir $repoLessonDir
-    if checkmd5nochange $lessonDir $repoLessonDir; then
-      #echo $lessonDir doesnt need copying
-      DOCOPYDIR=
-    fi
-    #echo checkmd5nochange done
+  test -d "$repoLessonDir" || return
 
-    local lessonDirPl
+  test $FORCE && rm -fr $lessonDir
 
-    if test $DOCOPYDIR; then
-      #echo do copydir into $(pwd)
-      overwrite preparing $lessonDir
-      $CP -pr $repoLessonDir/* $lessonDir
-      cd $lessonDir
-      #echo I currently in $(pwd)
-      # we'll set it again when we do the adoc'ing
-      mkdir -p .cached
-      #echo III deleting checksum.md5txt
-      #rm -f .cached/.checksum.md5txt
-      touch .cached/.redo
-      test -d pages || mkdir pages
-      for subdir in *; do
-        if test "$subdir" = pages -o "$subdir" = solution-pages; then
-          test -d $subdir/.cached || mkdir $subdir/.cached
-        fi
-      done
-      cd ..
-    fi
+  mkdir -p $lessonDir
+  #echo $repoLessonDir is a diry
+  DOCOPYDIR=1
+  #echo calling checkmd5nochange $lessonDir $repoLessonDir
+  if checkmd5nochange $lessonDir $repoLessonDir; then
+    #echo $lessonDir doesnt need copying
+    DOCOPYDIR=
+  fi
+  #echo checkmd5nochange done
 
-    local lessonDirPl=
-    if test -f $lessonDir/proglang.txt; then
-      for pl in $(cat $lessonDir/proglang.txt); do
-        if test "$pl" != pyret; then
-          lessonDirPl=$lessonDir-$pl
-          if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
-            mkdir -p $lessonDirPl
-            $CP -pr $lessonDir/* $lessonDirPl
-          fi
-        fi
-      done
-    fi
-    if test -f $lessonDir/proglang.txt; then
-      for pl in $(cat $lessonDir/proglang.txt); do
-        # echo doing $lessonDir for $pl
-        if test "$pl" = pyret; then
-          lessonDirPl=$lessonDir
-        else
-          lessonDirPl=$lessonDir-$pl
-        fi
+  local lessonDirPl
+
+  if test $DOCOPYDIR; then
+    #echo do copydir into $(pwd)
+    overwrite preparing $lessonDir
+    $CP -pr $repoLessonDir/* $lessonDir
+    cd $lessonDir
+    #echo I currently in $(pwd)
+    # we'll set it again when we do the adoc'ing
+    mkdir -p .cached
+    #echo III deleting checksum.md5txt
+    #rm -f .cached/.checksum.md5txt
+    touch .cached/.redo
+    test -d pages || mkdir pages
+    for subdir in *; do
+      if test "$subdir" = pages -o "$subdir" = solution-pages; then
+        test -d $subdir/.cached || mkdir $subdir/.cached
+      fi
+    done
+    cd ..
+  fi
+
+  local proglangs=pyret
+  test -f $lessonDir/proglang.txt && proglangs=$(cat $lessonDir/proglang.txt)
+  local lessonDirPl=
+  for pl in $proglangs; do
+    lessonDirPl=$lessonDir
+    if test "$pl" != pyret; then
+      lessonDirPl=$lessonDir-$pl
+      if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
+        mkdir -p $lessonDirPl
+        $CP -pr $repoLessonDir/* $lessonDirPl
         cd $lessonDirPl
         mkdir -p .cached
-        # echo touching .$pl in $lessonDirPl
         touch .cached/.$pl
         touch .cached/.redo
+        test -d pages || mkdir pages
         for subdir in *; do
-          if test -d "$subdir"; then
-            adjustproglangsubdirs "$subdir" "$pl"
+          if test "$subdir" = pages -o "$subdir" = solution-pages; then
+            test -d $subdir/.cached || mkdir $subdir/.cached
           fi
         done
         cd ..
-      done
-    else
-      cd $lessonDir
-      for subdir in *; do
-        if test -d "$subdir"; then
-          adjustproglangsubdirs "$subdir" pyret
-        fi
-      done
-      cd ..
+      fi
     fi
+    cd $lessonDirPl
+    for subdir in *; do
+      if test -d "$subdir"; then
+        adjustproglangsubdirs "$subdir" "$pl"
+      fi
+    done
+    cd ..
+  done
 
-    if test -f $repoLessonDir/proglang.txt; then
-      for pl in $(cat $repoLessonDir/proglang.txt); do
-        if test "$pl" = pyret; then
-          lessonDirPl=$lessonDir
-        else
-          lessonDirPl=$lessonDir-$pl
-        fi
-        if test -d $lessonDirPl; then
-          if test "$PROGLANG" = "$pl" -o "$PROGLANG" = all; then
-            echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
-            cd $lessonDirPl
-            checklessonplan $lessonDirPl
-            cd ..
-          fi
-        fi
-      done
+  for pl in $proglangs; do
+    if test "$pl" = pyret; then
+      lessonDirPl=$lessonDir
     else
-      if test "$PROGLANG" = pyret -o "$PROGLANG" = all; then
-        echo $lessonDir >> $RELEVANT_LESSONS_INPUT
-        cd $lessonDir
-        checklessonplan $lessonDir
+      lessonDirPl=$lessonDir-$pl
+    fi
+    if test -d $lessonDirPl; then
+      if test "$PROGLANG" = "$pl" -o "$PROGLANG" = all; then
+        echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
+        cd $lessonDirPl
+        checklessonplan $lessonDirPl
         cd ..
       fi
     fi
-  fi
+  done
   #echo done copylessondir
 }
 
