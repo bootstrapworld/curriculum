@@ -1880,40 +1880,41 @@ function copylessondir() {
         fi
       done
       cd ..
-      #checklessonplan $lessonDir
-      #echo checklessonplan done
-      local lessonDirPl=
-      if test -f $lessonDir/proglang.txt; then
-        for pl in $(cat $lessonDir/proglang.txt); do
-          if test "$pl" != pyret; then
-            lessonDirPl=$lessonDir-$pl
+    fi
+
+    local lessonDirPl=
+    if test -f $lessonDir/proglang.txt; then
+      for pl in $(cat $lessonDir/proglang.txt); do
+        if test "$pl" != pyret; then
+          lessonDirPl=$lessonDir-$pl
+          if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
             mkdir -p $lessonDirPl
             $CP -pr $lessonDir/* $lessonDirPl
           fi
-        done
-      fi
-      if test -f $lessonDir/proglang.txt; then
-        for pl in $(cat $lessonDir/proglang.txt); do
-          # echo doing $lessonDir for $pl
-          if test "$pl" = pyret; then
-            lessonDirPl=$lessonDir
-          else
-            lessonDirPl=$lessonDir-$pl
+        fi
+      done
+    fi
+    if test -f $lessonDir/proglang.txt; then
+      for pl in $(cat $lessonDir/proglang.txt); do
+        # echo doing $lessonDir for $pl
+        if test "$pl" = pyret; then
+          lessonDirPl=$lessonDir
+        else
+          lessonDirPl=$lessonDir-$pl
+        fi
+        cd $lessonDirPl
+        mkdir -p .cached
+        # echo touching .$pl in $lessonDirPl
+        touch .cached/.$pl
+        touch .cached/.redo
+        for subdir in *; do
+          if test -d "$subdir"; then
+            adjustproglangsubdirs "$subdir" "$pl"
           fi
-          cd $lessonDirPl
-          mkdir -p .cached
-          # echo touching .$pl in $lessonDirPl
-          touch .cached/.$pl
-          touch .cached/.redo
-          for subdir in *; do
-            if test -d "$subdir"; then
-              adjustproglangsubdirs "$subdir" "$pl"
-            fi
-          done
-          #checklessonplan $lessonDir-$pl
-          cd ..
         done
-      else
+        cd ..
+      done
+    else
       cd $lessonDir
       for subdir in *; do
         if test -d "$subdir"; then
@@ -1921,7 +1922,6 @@ function copylessondir() {
         fi
       done
       cd ..
-    fi
     fi
 
     if test -f $repoLessonDir/proglang.txt; then
