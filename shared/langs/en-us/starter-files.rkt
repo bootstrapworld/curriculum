@@ -22,7 +22,7 @@
   ; CORE
 
   ("alices-restaurant" "Alice's Restaurant Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86&v=6788e10")
+   ("pyret" "https://code.pyret.org/editor#share=1GScGyigfRPJDdCiGKGnISTXoVBm9f7aE")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
   )
 
