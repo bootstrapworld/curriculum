@@ -27,7 +27,7 @@
   )
 
   ("collaboration" "Collaboration Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN")
+    ("pyret" "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k")
   )
 
   ("bc" "bc Starter File"
