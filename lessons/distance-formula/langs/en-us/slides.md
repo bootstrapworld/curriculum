@@ -158,7 +158,7 @@ Note: If it's been a long time since your students have used the Pythagorean The
 
 @[youtube](Ln7myXQx8TM)
 
-Connecting Pythagorean Theorem to Videogames
+Connecting Pythagorean Theorem to video games
 
 Watch this video of a geometric proof of the Pythagorean theorem, and its application to finding distance between game characters (created by Tovah Brown!).
 

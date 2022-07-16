@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"}
-# Ethics and Privacy
+# Ethics, Privacy & Bias
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -35,10 +35,10 @@ While the immediate goal was "win the war", many of the scientists realized that
 **Should doctors be bound by any ethical rules? If so, what rules?**{style="font-size:24pt"}
 
 ---
-{layout="LaunchR"}
+{layout="Launch"}
 # Case Studies
 
-Between 1932 and 1972, doctors in the US @link{https://en.wikipedia.org/wiki/Tuskegee_Syphilis_Study, gave syphillis to unknowing African-American citizens} as part of an experiment. In 1971, researchers at Stanford conducted an @link{https://en.wikipedia.org/wiki/Stanford_prison_experiment, experiment in human behavior that went horribly wrong, causing tremendous damage to their participants}.
+Between 1932 and 1972, doctors in the US @link{https://en.wikipedia.org/wiki/Tuskegee_Syphilis_Study, gave syphilis to unknowing African-American citizens} as part of an experiment. In 1971, researchers at Stanford conducted an @link{https://en.wikipedia.org/wiki/Stanford_prison_experiment, experiment in human behavior that went horribly wrong, causing tremendous damage to their participants}.
 
 ---
 {layout="Launch"}
@@ -46,15 +46,15 @@ Between 1932 and 1972, doctors in the US @link{https://en.wikipedia.org/wiki/Tus
 
 History is filled with examples of those who study science - be it medicine, human behavior, psychology, etc. - ignoring their ethical responsibility as humans.
 
-With tech companies hiring Data Scientists at a staggering rate and collecting massive datasets on users for those scientists to mine, there's **a new arms race** happening right now.{style="font-size:16pt"} 
+With tech companies hiring Data Scientists at a staggering rate and collecting massive datasets on users for those scientists to mine, there's **a new arms race** happening right now.
 
 ---
 {layout="Launch"}
 # Case Studies
 
-Search engines tailor their results based on what they know about the customer doing the search, and social media networks want to recommend friends based on what they know about all of us.{style="font-size:16pt"} 
+Search engines tailor their results based on what they know about the customer doing the search, and social media networks want to recommend friends based on what they know about all of us.
 
-Both goals require building profiles on everyone, figuring out what their preferences are and where they tend to spend their time. They might require figuring out whether each of us is male or female, more likely to go to a movie or a play, or about to buy a dishwasher or a television.{style="font-size:16pt"}
+Both goals require building profiles on everyone, figuring out what their preferences are and where they tend to spend their time. They might require figuring out whether each of us is male or female, more likely to go to a movie or a play, or about to buy a dishwasher or a television.
 
 <!--
 
@@ -70,10 +70,7 @@ But these datasets and profiles could be used for far more than that. **What if 
 {layout="Launch"}
 # Case Studies
 
-**Should data scientists be bound by any ethical rules? If so, what rules?**{style="font-size:24pt"}
-
-
-As they build ever-more sophisticated models based on ever-more accurate datasets, **Data Scientists need to think about the ethics of what they're doing** as well!
+As they build ever-more sophisticated models based on ever-more accurate datasets, **Data Scientists need to think about the ethics of what they're doing** as well!{style="font-size:24pt"}
 
 <!--
 

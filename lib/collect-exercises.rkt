@@ -9,7 +9,9 @@
                     (lambda ()
                       (format "Collecting exercises in ~a" (current-directory)))))
 
-(define *proglang* (string-downcase (getenv "PROGLANG")))
+; (define *proglang* (string-downcase (getenv "PROGLANG")))
+
+(define *proglang* "pyret")
 
 (define *opt-exercises-list-file* "pages/.cached/.exercise-pages-ls.txt.kp")
 
@@ -65,10 +67,11 @@
                        (read-group i directive)))])))
         (loop)))))
 
-(define (collect-exercises lesson-plan-file)
-  ;(printf "doing collect-exercises ~s\n" lesson-plan-file)
+(define (collect-exercises lesson-plan-file proglang)
+  (set! *proglang* proglang)
+  ; (printf "doing collect-exercises ~s ~s\n" *proglang* lesson-plan-file)
   (call-with-input-file lesson-plan-file scan-exercise-directives)
-  ;(printf "writing collected exercises\n")
+  ; (printf "writing collected exercises ~s ~s\n" *opt-exercises-files* *workbook-exercises-files*)
   (set! *opt-exercises-files* (reverse *opt-exercises-files*))
   (call-with-output-file *opt-exercises-list-file*
     (lambda (o)
@@ -81,5 +84,5 @@
         (display f o) (newline o)))
     #:exists 'replace))
 
-(collect-exercises
-  (vector-ref (current-command-line-arguments) 0))
+(apply collect-exercises
+  (vector->list (current-command-line-arguments)))

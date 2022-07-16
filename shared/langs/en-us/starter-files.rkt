@@ -22,12 +22,13 @@
   ; CORE
 
   ("alices-restaurant" "Alice's Restaurant Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86&v=6788e10")
+   ("pyret" "https://code.pyret.org/editor#share=1GScGyigfRPJDdCiGKGnISTXoVBm9f7aE")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
   )
 
   ("collaboration" "Collaboration Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1aliazZ1Q8RA1AjTAToP_M6lVicP35CKN")
+    ("pyret" "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k")
+    ("wescheme" "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z")
   )
 
   ("bc" "bc Starter File"
@@ -62,6 +63,11 @@
   ("blank-ds" "Blank Dataset Starter File for Bootstrap:Data Science"
     ("pyret" "https://code.pyret.org/editor#share=1L_TTcE1dv0XtgVg8HW89LfDtRgpcJnkA")
     )
+
+  ("animals-spreadsheet" "Animals Spreadsheet"
+    ("pyret" "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/")
+    ("codap" "https://docs.google.com/spreadsheets/d/1_qcn6vlJ2C2SPzpqNYLhEkeGloIxkYN-aLzL6DTi0Uc/")
+  )
 
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
@@ -200,7 +206,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=N47mpskeWS")
    )
   ("prism" "Surface Area of a Rectangular Prism Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86&v=6788e10")
+   ("pyret" "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=Cyrw5bQa71")
    )
   ("sample-game-no-distance-lines" "Sample Game Starter File"

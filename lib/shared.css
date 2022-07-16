@@ -327,8 +327,8 @@ tr th.tableblock {
 * LESSON PAGE STYLES
 */
 
-.LessonPlan h2 { font-size: 2.2em; font-weight: normal; }
-.LessonPlan h3 { font-size: 2.2em; font-weight: 300;  }
+.LessonPlan h2 { font-size: 1.75em; font-weight: normal; }
+.LessonPlan h3 { font-size: 1.5em; font-weight: 300;  }
 
 /* The summary table at the top of each lesson */
 .left-header tr td:nth-child(1) { background-color: #b7d893; }
@@ -421,7 +421,8 @@ tr th.tableblock {
   margin:             0px;
  }
 /* class for styling duration info in headers */
-.duration { float: right; color: #d9d2e9; min-width: 150px; text-align: right;}
+.duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
+
 .section-link a {
   margin-left:        -1.75em;
   padding-right:      0.5em;
@@ -430,7 +431,6 @@ tr th.tableblock {
   font-size:          .9rem;
   visibility:         hidden;
 }
-.sect1.lesson-section-1 h2:hover .section-link a {visibility: visible;}
 
 .lesson-instruction {
   min-height: 50px;
@@ -713,8 +713,6 @@ body:not(.LessonPlan) .recipe p {
 * TEACHER RESOURCES PAGE
 */
 
-.teacher_resources {  }
-.teacher_resources strong { /* name of resource */ }
 
 /* Exercises and Solutions Table */
 table.exercises_and_solutions, table.exercises_and_solutions * {
@@ -933,6 +931,48 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
 
   /* add some left-padding to improve readability on screens */
   body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
+
+
+  /* Collapsing and Colorful Headers */
+  .LessonPlan .sect1 h2, .TeacherResources .sect1 h2 {
+    background-color: #75328A77;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px !important;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+  }
+
+  .LessonPlan .sect1 h2.active, .LessonPlan .sect1 h2:hover,
+  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { background-color: #b7d893; }
+
+  .LessonPlan .sect1 h2:after, .TeacherResources .sect1 h2:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: left;
+    margin-right: 5px;
+  }
+
+  .LessonPlan .sect1 h2.active,       .TeacherResources .sect1 h2.active { color: white; }
+  .LessonPlan .sect1 h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
+  .LessonPlan .sect1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .LessonPlan       .sect1.lesson-section-1 h2:hover .section-link a,
+  .TeacherResources .sect1.lesson-section-1 h2:hover .section-link a { visibility: visible; }
+
+  .LessonPlan       .sect1.lesson-section-1 h2:hover:after,
+  .TeacherResources .sect1.lesson-section-1 h2:hover:after { visibility: hidden; }
+
+
 }
 
 /************************************************************************************
@@ -982,6 +1022,9 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   .LessonPlan .sect1+.sect1 { border-top: solid 3px black; }
   :not(body.LessonPlan) #header { background: black; color: white; }
   .listingblock pre:not(.highlight) { background: none !important; }
+
+  /* Get rid of collapsing headers */
+  .sect1, .sect1 .sectionbody { max-height: unset !important; }
 
   body:not(.LessonPlan) #header> h1:first-child,
   body:not(.LessonPlan) .sect1 > h1:first-child{
