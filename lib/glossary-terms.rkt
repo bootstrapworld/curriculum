@@ -250,6 +250,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("list" "lists") "a data structure containing a sequence of values")
      (es-mx ("lista") "una estructura de datos que contiene una secuencia de valores"))
     
+    ((en-us ("logic error" "logic errors") "errors in the way a programmer is thinking about a problem")
+     (es-mx ("errores de logica") "errores en la forma en que un programador está pensando en un problema"))
+
     ((en-us ("mathematical expression") "a computation using the rules of arithmetic")
      (es-mx ("expresión matemática") "un cálculo realizado usando las reglas de la aritmética"))
     
@@ -400,7 +403,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("string") "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
      (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
     
-   ((en-us ("surface area") "the sum of the areas of all of the faces of a solid figure (polyhedron) or the total area that the surface of the object occupies")
+    ((en-us ("surface area") "the sum of the areas of all of the faces of a solid figure (polyhedron) or the total area that the surface of the object occupies")
      (es-mx ("área de superficie") "la suma de las áreas de todas las caras de una figura sólida (poliedro) o el área total que ocupa la superficie del objeto"))
     
     ((en-us ("symmetric" "symmetric distribution") "A symmetric distribution has a balanced shape, showing that it's just as likely for the variable to take lower values as higher values.")
@@ -412,9 +415,6 @@ when it prints out the glossary for a particular unit
     ((en-us ("syntax error" "syntax errors") "errors where the computer cannot make sense of the code (e.g. - missing commas, missing parentheses, unclosed strings)")
      (es-mx ("errores de sintaxis") "errores en los que la computadora no puede entender en el código (por ejemplo, comas faltantes, paréntesis faltantes, cadenas sin cerrar)"))
     
-    ((en-us ("logic error" "logic errors") "errors in the way a programmer is thinking about a problem")
-     (es-mx ("errores de logica") "errores en la forma en que un programador está pensando en un problema"))
-
     ((en-us ("table" "tables") "a data structure that stores data as rows, with entries in particular columns")
      (es-mx ("tabla de datos") "una colección de datos organizados en filas y columnas."))
         
