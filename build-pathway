@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-13 # last modified
+LASTMOD=2022-07-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1103,9 +1103,11 @@ function checklessonplan() {
 
   # echo collecting exercises in $L
   local pl=pyret
-  if test -f .cached/.wescheme; then pl=wescheme
-  elif test -f .cached/.codap; then pl=codap
-  fi
+  for f in .cached/.proglang-*; do
+    if test -f "$f"; then
+      pl=${f##*.proglang-}
+    fi
+  done
   $PROGDIR/collect-exercises.rkt index.adoc $pl
   exerflist=pages/.cached/.exercise-pages-ls.txt.kp
   if test -f $exerflist; then
@@ -1195,19 +1197,20 @@ function buildworkbookpages() {
   local oldPROGLANG="$PROGLANG"
 
   if test "$PROGLANG" != all; then
-    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
-      return
-    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
-      return
-    fi
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        test "$PROGLANG" = "$pl" || return
+      fi
+    done
   else
-    if test -f $L/.cached/.wescheme; then
-      export PROGLANG=wescheme
-    elif test -f $L/.cached/.codap; then
-      export PROGLANG=codap
-    else
-      export PROGLANG=pyret
-    fi
+    export PROGLANG=pyret
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        export PROGLANG=$pl
+      fi
+    done
   fi
 
   # echo doing buildworkbookpages $L in $(pwd)
@@ -1279,19 +1282,20 @@ function buildlessonplan() {
   local oldPROGLANG="$PROGLANG"
 
   if test "$PROGLANG" != all; then
-    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
-      return
-    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
-      return
-    fi
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        test "$PROGLANG" = "$pl" || return
+      fi
+    done
   else
-    if test -f $L/.cached/.wescheme; then
-      export PROGLANG=wescheme
-    elif test -f $L/.cached/.codap; then
-      export PROGLANG=codap
-    else
-      export PROGLANG=pyret
-    fi
+    export PROGLANG=pyret
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        export PROGLANG=$pl
+      fi
+    done
   fi
 
   # echo doing buildlessonplan $L in $(pwd)
@@ -1894,7 +1898,7 @@ function copylessondir() {
         $CP -pr $repoLessonDir/* $lessonDirPl
         cd $lessonDirPl
         mkdir -p .cached
-        touch .cached/.$pl
+        touch .cached/.proglang-$pl
         touch .cached/.redo
         test -d pages || mkdir pages
         for subdir in *; do

@@ -1233,9 +1233,6 @@
   (set! *exercises-done* '())
   (set! *workbook-pages* '())
 
-  (unless (member *proglang* '("pyret" "wescheme" "codap"))
-    (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
-
   (set! *pyret?* (string=? *proglang* "pyret"))
 
   (when (and *lesson-plan* (not *lesson*))  ;fixme, we shouldn't be relying on this!

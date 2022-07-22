@@ -37,7 +37,7 @@
 @ifpathway{algebra, ok}{
 Students have already searched for structure in a list of expressions in order to define values.
 }
-In this lesson, students will build their flexibiltiy of thinking by engaging with multiple representations. Students will search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
+In this lesson, students will build their flexibility of thinking by engaging with multiple representations. Students will search for structures that are _dynamic_, meaning they change in a predictable way. This is the foundation for defining functions.
 
 === Launch
 
@@ -60,16 +60,19 @@ For example:
 @show{(code '(triangle 500  "solid" "green"))}
 --
 
+Invite students to analyze the examples you recorded by posing the following questions:
+
 [.lesson-instruction]
 --
-- *Is there a pattern?* _Yes, the code mostly stayed the same with one change each time._
-
-- *What stayed the same?* _The function name `triangle`, "solid", "green"._
-
-- *What changed?* _The size of the `triangle`, or the Number input._
-
-- *How many of you typed out the code from scratch each time?*
-- *How many triangles were you able to code in a minute?* _Write this down so that you can compare to it later!!!_
+- Is there a pattern?
+** _Yes, the code mostly stayed the same with one change each time._
+- What stayed the same?
+** _The function name `triangle`, "solid", "green"._
+- What changed?
+** _The size of the `triangle`, or the Number input._
+- How many of you typed out the code from scratch each time?
+- How many triangles were you able to code in a minute?
+** _Write this down so that you can compare to it later!_
 --
 
 === Investigate
@@ -77,16 +80,15 @@ For example:
 Our programming language allows us to define *values*. This lets us create "shortcuts" to reuse the same code over and over.
 
 For example:
-@show{(code '(define gt (triangle 65 "solid" "green")))} allows us to make the same solid, green triangle anywhere we want, just by writing `gt` - without having to write all of the code again and again. But...it makes the same green triangle _every_ time.
+@show{(code '(define gt (triangle 65 "solid" "green")))} allows us to make the same solid, green triangle anywhere we want, just by writing `gt` - without having to write all of the code again and again. But... it makes the same green triangle _every_ time.
 
 [.lesson-point]
 To make a shortcut that _changes_ such as creating solid, green triangles of a changing size, we need to define a _function_.
 
 [.lesson-instruction]
-Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
-What will _@show{(code '(gt 5))}_ produce?
-_@show{(code '(triangle 5 "solid" "green"))}!_
-
+- Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
+- What will _@show{(code '(gt 5))}_ produce?
+** _@show{(code '(triangle 5 "solid" "green"))}!_
 
 Select a student to _act out_ `gt`. Make it clear to the class that their Name is "gt", they expect a Number, and they will produce an Image.
 
@@ -138,9 +140,7 @@ Students will look for what's changing in the examples, label it with a variable
 
 === Launch
 
-[.lesson-instruction]
---
-We need to program the computer to be as smart as our volunteer. But how do we do that? In order to define a function, we need to identify what's changing and what stays the same. Let's take a look at some examples for `gt`.
+We need to program the computer to be as smart as our volunteer. But how do we do that? In order to define a function, we need to identify what's changing and what stays the same. Invite students to take a look at the examples for `gt` below:
 
 @show{(code '(gt 5))} &rarr; @show{(code '(triangle 5 "solid" "green"))}
 
@@ -152,11 +152,16 @@ We need to program the computer to be as smart as our volunteer. But how do we d
 
 @show{(code '(gt 220))} &rarr; @show{(code '(triangle 220 "solid" "green"))}
 
-* What's changing? _The size. Everything else is the same in every single example!_
-** *Highlight or circle the numbers in the gt column and in the triangle column to help students see that they're the only thing changing!*
+[.lesson-instruction]
+* What's changing?
+**  _The size. Everything else is the same in every single example!_
+
+Highlight or circle the numbers in the gt column and in the triangle column to help students see that they're the only thing changing!
+
+[.lesson-instruction]
 * We can define our function by replacing the numbers that change with a variable that describes them. In this case, `size` would be a logical variable.
-** *Draw arrows to the two highlighted columns and label them with the word size.*
---
+
+Draw arrows to the two highlighted columns and label them with the word size.
 
 If we keep everything that stayed the same and substitute `size` for the numbers that changed, it looks like this:
 
@@ -166,32 +171,30 @@ The way we write this in the editor is
 
 @center{@show{(code '(define (gt size)(triangle size "solid" "green")))}}
 
-Have students turn to @printable-exercise{gt-domain-debate.adoc} and "decide and defend" whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
+[.lesson-instruction]
+- Turn to @printable-exercise{gt-domain-debate.adoc}.
+- On this worksheet, you will "decide and defend" whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
 
 In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer substituted into the `triangle` expression. Everything else stayed the same no matter what!
 
 [.lesson-instruction]
-Why might someone think the domain for `gt` contains a Number and two Strings? _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+- Why might someone think the domain for `gt` contains a Number and two Strings?
+** _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+
+Next, direct students to open the @starter-file{gt}, and save a copy of their own. After clicking "Run" and evaluating @show{(code '(gt 10))} in the Interactions Area (they will see a little green triangle appear!), challenge them to take one minute to see how many different green triangles they can make using the `gt` function.
 
 [.lesson-instruction]
-- Open the @starter-file{gt}, and save a copy of your own
-- Click "Run".
-- Evaluate @show{(code '(gt 10))} in the Interactions Area.
-- What did you get back? _a little green triangle!_
-- Take one minute and see how many different green triangles you can make using the `gt` function.
 - How many were you able to make?
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
 === Investigate
 
+Explain to students that they have successfully defined a function to satisfy your love of green triangles... but other people have other favorite shapes and we need to be able to meet their needs, too. Let's take what we've learned to define some other functions.
+
 [.lesson-instruction]
---
-We've successfully defined a function to satisfy my love of green triangles, but other people have other favorite shapes and we need to be able to meet their needs, too. Let's take what we've learned to define some other functions.
-
-What if we wanted to define a function `rs` to make solid red squares of whatever size we give them?
---
-
-Have students complete @printable-exercise{rs.adoc}, add their new function definitions to their @starter-file{gt} and test them out, before moving on to @printable-exercise{sun.adoc} and @printable-exercise{define-your-own.adoc}
+- What if we wanted to define a function `rs` to make solid red squares of whatever size we give them? Try it out on @printable-exercise{rs.adoc}.
+- Add your new function definitions to your @starter-file{gt} and test them out.
+- When you're ready, move on to @printable-exercise{sun.adoc} and @printable-exercise{define-your-own.adoc}
 
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
 
