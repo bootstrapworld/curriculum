@@ -1547,7 +1547,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
+                            (when (member *proglang* '("pyret" "wescheme"))
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
                            [(or (string=? directive "lesson-description")
