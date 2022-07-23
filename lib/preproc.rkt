@@ -67,7 +67,7 @@
 
 ;(printf "LESSON is ~s\n" *lesson*)
 
-(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR")) ;fixme
+(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR")) ;FIXME
 
 ;(printf "LESSONSUBDIR is ~s\n" *lesson-subdir*)
 
@@ -101,7 +101,7 @@
                 (eval x *adoc-namespace*)
                 (loop)))))))))
 
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;fixme
+(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;FIXME
 
 ;(define *dist-root-dir* (getenv "DISTROOTDIR"))
 
@@ -787,7 +787,7 @@
                  [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   ;fixme following probly obsolete?
+                   ;FIXME following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
@@ -809,7 +809,7 @@
                      (let ([short-ref? (abbreviated-index-page? f)])
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
-                                   (string=? g "pathway-standards.shtml");remove ;fixme
+                                   (string=? g "pathway-standards.shtml");remove ;FIXME
                                    (string=? g "pathway-alignments.shtml")
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
@@ -1232,10 +1232,11 @@
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
   (set! *workbook-pages* '())
+  (set! *natlang-glossary-list* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
-  (when (and *lesson-plan* (not *lesson*))  ;fixme, we shouldn't be relying on this!
+  (when (and *lesson-plan* (not *lesson*))
     (set! *lesson* *lesson-plan*))
 
   (set! *lesson-plan-base* *lesson-plan*)
@@ -1267,7 +1268,32 @@
                         (loop (rest gl) (cons (rest x) ngl))
                         (loop2 (rest xx))))))))))
 
-  ; (printf "\nnatlang-glossary-list = ~s\n\n" *natlang-glossary-list*)
+  (let ([gl *glossary-list*])
+
+    (when (or *lesson* *lesson-plan*)
+      (let ([f (build-path "lessons"  *lesson* "shadow-glossary.rkt")])
+        (when (file-exists? f)
+          (let ([ff (read-data-file f #:mode 'files)])
+            (when (pair? ff)
+              (let ([shadow-glossary-file (build-path 'up ".prog" (first ff))])
+                (set! gl
+                  (append gl
+                          (second
+                            (third
+                              (first (read-data-file shadow-glossary-file #:mode 'forms))
+                              ))))))))))
+
+    (set! *natlang-glossary-list*
+      (let ([natlang (string->symbol (getenv "NATLANG"))])
+        ; (printf "\nnatlang= ~s\n\n" natlang)
+        (let loop ([gl gl] [ngl '()])
+          (if (null? gl) ngl
+              (let loop2 ([xx (first gl)])
+                (if (null? xx) (loop (rest gl) ngl)
+                    (let ([x (first xx)])
+                      (if (eq? (first x) natlang)
+                          (loop (rest gl) (cons (rest x) ngl))
+                          (loop2 (rest xx)))))))))))
 
   (when *lesson-plan*
     (set! *all-lessons* (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))))
@@ -1521,7 +1547,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
+                            (when (member *proglang* '("pyret" "wescheme"))
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
                            [(or (string=? directive "lesson-description")
@@ -2107,7 +2134,7 @@
              dict)
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
-    ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? fixme
+    ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
     (for ([s dict-standards-met])
       (let ([std-name (list-ref s 0)]
             [std-desc (list-ref s 1)]
