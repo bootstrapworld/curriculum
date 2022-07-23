@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-22 # last modified
+LASTMOD=2022-07-23 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -650,6 +650,9 @@ function resolveabbrevs() {
     $f
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
+    $f
+  $SED -i \
+    -e '/BOGUSACKNOWLEDGMENTSECTIONHEADER/d' \
     $f
   #
   # echo inserting bootstraplesson.js etc in $f in $(pwd)
