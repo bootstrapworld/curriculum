@@ -192,6 +192,7 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+(define *handout-exercise-links* '())
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
 (define *opt-project-links* '())
@@ -584,7 +585,7 @@
         ""])))
 
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
-  ; (printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
+  ; (printf "make-workbook-link ~s ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text link-type)
   ; (printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
   (let* ([lesson (cond [(equal? lesson-dir *lesson*) (set! lesson-dir #f) *lesson*]
                        [lesson-dir (qualify-lesson-dir lesson-dir)]
@@ -636,7 +637,7 @@
       (printf "WARNING: Lesson ~a: ~a refers to ~a file ~a\n\n" lesson link-type
               (if non-workbook-page? "non-workbook" "nonexistent")
               f))
-    (when (member link-type '("printable-exercise" "opt-printable-exercise"))
+    (when (member link-type '("printable-exercise" "opt-printable-exercise" "handout"))
       (let ([f (format "~a" g-in-pages)])
         (unless lesson-dir
           (unless (ormap (lambda (e) (equal? (first e) f)) *exercises-done*)
@@ -644,6 +645,7 @@
               (set! *exercises-done*
                 (cons (list f ex-ti) *exercises-done*)))))))
     (when (and (or (not link-text) (string=? link-text "")) page-title)
+      ;FIXME: is link-text ever #f
       (set! link-text page-title))
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
@@ -662,11 +664,17 @@
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-                (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
-                  (unless (findf (lambda (L) (equal? (second L) styled-link-output))
-                                 *printable-exercise-links*)
-                    (set! *printable-exercise-links* (cons (list snippet styled-link-output)
-                                                           *printable-exercise-links*))))]))
+               (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
+                 (unless (findf (lambda (L) (equal? (second L) styled-link-output))
+                                *printable-exercise-links*)
+                   (set! *printable-exercise-links*
+                     (cons (list snippet styled-link-output) *printable-exercise-links*))))]
+              [(equal? link-type "handout")
+               (let ([styled-link-output (string-append "[.handout]##"
+                                           materials-link-output "##")])
+                 (unless (member styled-link-output *handout-exercise-links*)
+                   (set! *handout-exercise-links*
+                     (cons styled-link-output *handout-exercise-links*))))]))
       link-output)))
 
 (define (display-comment prose o)
@@ -1498,6 +1506,7 @@
                             (display (enclose-math (read-group i directive)) o)]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
+                                (string=? directive "handout")
                                 )
                             ;(printf "doing ~s\n" directive)
                             (let* ([args (read-commaed-group i directive read-group)]
@@ -1963,6 +1972,9 @@
               (fprintf o "\n* ~a\n\n" x))
 
             (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
+
+            (for ([x (reverse *handout-exercise-links*)])
+              (fprintf o "\n* ~a\n\n" x))
 
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
