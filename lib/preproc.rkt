@@ -706,7 +706,7 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (make-image img text rest-opts #:centered? [centered? #f])
-  ; (printf "doing make-image ~s\n" img)
+  ; (printf "doing make-image ~s ~s ~s\n" img text rest-opts)
   (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *target-pathway* *teacher-resources*)
       ;(printf "anonymizing ~s\n" img)
@@ -724,9 +724,15 @@
                   (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
     (let* ([text (clean-up-image-text text)]
-           [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
-           [commaed-opts (string-join rest-opts ", ")]
-           [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
+           [rest-opts-len (length rest-opts)]
+           [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
+           [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
+           [image-source (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
+           [commaed-opts (string-append
+                           ", "
+                           width-arg
+                           ", "
+                           height-arg)]
            [text-wo-url (clean-up-url-in-image-text text)]
            [img-link-txt (string-append
                            (enclose-span ".big" "&#x1f5bc;") "Show image")]
@@ -737,7 +743,12 @@
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-               img-link)])
+               img-link)]
+           [adoc-img (if image-source
+                         (enclose-span ".image-with-source"
+                           (string-append adoc-img
+                             (enclose-span ".image-source" image-source)))
+                         adoc-img)])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if (string=? text "")
           (if centered?

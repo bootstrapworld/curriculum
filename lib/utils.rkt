@@ -5,6 +5,7 @@
   ferror
   file-mtime
   system-echo
+  unquote-string
   read-data-file
   )
 
