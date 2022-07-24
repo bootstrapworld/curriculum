@@ -19,7 +19,7 @@
           "https://achievethecore.org/peersandpedagogy/developing-math-language-routines/")
     (list "SJ" "Social Justice" *sj-practices-list*
           "https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf")
-    (list "SEP" "Science and Engineering" *sep-practices-list* "https://ngss.nsta.org/practicesfull.aspx")
+    (list "NGSS" "Science and Engineering" *sep-practices-list* "https://ngss.nsta.org/practicesfull.aspx")
     (list "CC" "Math" *cc-practices-list* "http://corestandards.org/Math/")
     (list "K12CS" "K12CS" *k12cs-practices-list* "https://k12cs.org")))
 
