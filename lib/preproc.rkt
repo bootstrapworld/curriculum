@@ -727,7 +727,7 @@
            [rest-opts-len (length rest-opts)]
            [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
            [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
-           [image-source (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
+           [image-caption (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
            [commaed-opts (string-append
                            ", "
                            width-arg
@@ -744,10 +744,11 @@
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)]
-           [adoc-img (if image-source
-                         (enclose-span ".image-with-source"
-                           (string-append adoc-img
-                             (enclose-span ".image-source" image-source)))
+           [adoc-img (if image-caption
+                         (enclose-tag "figure" ".image"
+                           (string-append
+                             adoc-img
+                             (enclose-tag "figcaption" "" image-caption)))
                          adoc-img)])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if (string=? text "")
