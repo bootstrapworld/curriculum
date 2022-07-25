@@ -26,7 +26,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
   )
 
-  ("collaboration" "Set 1 - Collaboration Starter File"
+  ("collaboration" "Set 1: Collaboration Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z")
   )
