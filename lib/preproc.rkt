@@ -1246,6 +1246,7 @@
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
+  (set! *handout-exercise-links* '())
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
