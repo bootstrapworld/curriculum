@@ -1291,7 +1291,7 @@
   (let ([gl *glossary-list*])
 
     (when (or *lesson* *lesson-plan*)
-      (let ([f (build-path "lessons"  *lesson* "shadow-glossary.rkt")])
+      (let ([f (build-path "lessons"  *lesson* "shadow-glossary.txt")])
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
