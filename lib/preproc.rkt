@@ -744,12 +744,11 @@
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)]
-           [adoc-img (if image-caption
-                         (enclose-tag "figure" ".image"
-                           (string-append
-                             adoc-img
-                             (enclose-tag "figcaption" "" image-caption)))
-                         adoc-img)])
+           [adoc-img (enclose-tag "figure" ".image"
+                       (string-append
+                         adoc-img
+                         (if image-caption
+                             (enclose-tag "figcaption" "" image-caption) "")))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if (string=? text "")
           (if centered?
