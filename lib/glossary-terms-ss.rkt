@@ -35,7 +35,7 @@ from the ones in the main glossary file.
 
     ((en-us ("cyclical") "the quality of happening over and over again in a regular pattern"))
 
-    ((en-us ("Data Science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers"))
+    ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers"))
 
     ((en-us ("data") "pieces of categorical or quantitative information about a group of individuals or things"))
 
@@ -80,6 +80,8 @@ from the ones in the main glossary file.
     ((en-us ("resin") "a sticky substance that comes from trees and may be burned for fragrance when it hardens"))
 
     ((en-us ("rubidium") "a soft silvery metal"))
+
+    ((en-us ("shipwreck") "what is left after a ship sank at sea; the contents can teach us about what was valued and traded at the time."))
 
     ((en-us ("social scientist") "an expert on human societies, past and present"))
 

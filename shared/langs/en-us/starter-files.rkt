@@ -71,7 +71,7 @@
 
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
-   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FkiJhfgOZfbpXYpvPUWN6%2Ffile.json")
+   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FI6zAvad2EELkQxtS0SZG%2Ffile.json")
    )
   ("fair-coins" "Fair Coins Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
