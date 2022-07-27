@@ -746,20 +746,15 @@
                img-link)]
            [adoc-img (enclose-tag "figure" ".image"
                        (string-append
+                         (if (string=? text "") ""
+                             (enclose-span ".tooltiptext" text))
                          adoc-img
                          (if image-caption
                              (enclose-tag "figcaption" "" image-caption) "")))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-      (if (string=? text "")
-          (if centered?
-              (enclose-span ".centered-image" adoc-img)
-              adoc-img)
-          (enclose-span
-            (string-append ".tooltip"
-              (if centered? ".centered-image" ""))
-            (string-append
-              (enclose-span ".tooltiptext" text) "\n"
-              adoc-img))))))
+      (if centered?
+          (enclose-span ".centered-image" adoc-img)
+          adoc-img))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
