@@ -522,14 +522,24 @@ Glossary items are annotated with the directive `@vocab`. E.g.,
 
   @vocab{function}
 
-In a lesson plan, such items are searched in
-`shared/langs/en-us/glossary-terms.rkt`,
-and are inserted as lists at the head of the document.
+In a lesson plan, such items are searched in the main glossary
+file, `lib/glossary-terms.rkt`, and are inserted as lists at the
+head of the document.
 
 For a pathway narrative, the glossary items from all its
 constituent lessons are collected into a file
 `pathway-standards.shtml` that is linked to in the narrative
 page.
+
+There can be auxiliary glossary files in `lib/` that can be used
+to _shadow_ the main glossary for particular lessons. For now,
+the only such shadowing glossary file is `glossary-terms-ss.rkt`,
+used for Social-Studies lessons.
+
+In order for a lesson `A` to use a shadowing glossary, its
+directory, i.e., `lessons/A/langs/en-us`, should containing a
+file `shadowing-glossary.txt` that contains the name of the
+shadowing glossary file.
 
 ==== Lesson descriptions and dependencies
 
