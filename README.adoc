@@ -188,21 +188,30 @@ it can be named anything (not necessarily `index.adoc`).
 == The `build-pathway` script
 
 The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments, and/or any combination of the
-options `--add-exercises`, `--debug`, `--force`, `--help`, `--language`,
-`--lint`, `--book`, `--pdf`,
-`--no-parallel`, `--proglang`, and `--version`.
+number of pathway arguments (including none), and any combination of the
+following command-line options:
 
-If called with `--help` (aka `-h`) or `--version` (aka `-v`), the script displays a help message
-and version information, respectively, and quits.
+- `--book` (aka `--pdf` or `-b`)
+- `--debug` (aka `-d`)
+- `--expanded-warnings` (aka `-w`)
+- `--force` (aka `-f`)
+- `--help` (aka `-h`)
+- `--natlang` (aka `--language`)
+- `--lint` (aka `--verify-links` or `-l`)
+- `--nopdf` (aka `--no-pdf` or `-n`)
+- `--noparallel` (aka `--no-parallel`)
+- `--proglang`
+- `--slides` (aka `-s`)
+- `--superforce` (aka `--super-force` or `-F`)
+- `--version` (aka `-v`)
 
-Otherwise, the
-script creates a document tree under the `distribution` directory
-for every pathway argument.
-A pathway arg can be either the
-pathway name, or its relative pathname from the `build-pathway`
-script, with or without a trailing slash, e.g., all of the
-following refer to the same pathway:
+If called with `--help` or `--version`, the script
+displays a help message and version information, respectively, and quits.
+
+Otherwise, the script creates a document tree under the `distribution`
+directory for every pathway argument. A pathway arg can be either the pathway
+name, or its relative pathname from the `build-pathway` script, with or without
+a trailing slash, e.g., all of the following refer to the same pathway:
 
   sample-pathway
   pathways/sample-pathway
@@ -212,9 +221,9 @@ If no pathway arg is supplied,
 `build-pathway` generates doctrees for every pathway in
 `pathways`.
 
-If no `--language` option is supplied, the prose language used is
+If no `--natlang` option is supplied, the prose language used is
 `en-us`. To specify another language, say `es-mx`, use
-`--language es-mx`.
+`--natlang es-mx`.
 
 The doctree for the built pathway under `distribution` resides
 under a subdirectory named for the prose language, e.g., `en-us`,
@@ -238,20 +247,15 @@ workbook. These filenames are standard and do not necessarily
 mirror the names of the source documents.
 
 If no `--proglang` option is supplied, the progamming language is
-assumed to be `pyret`. The other possible value for the option is
-`wescheme`. The distribution directory for a pathway built with
-`wescheme` has the suffix `-wescheme`.
+assumed to be `pyret`. Other possible values for the option are
+`wecheme`, `codap`, and `spreadsheets`.
+The distribution directory for a pathway built with
+a non-``pyret`` proglang typically tacks on the proglang as suffix.
 
-NOTE: A small number of pathways have both `pyret` and `wescheme`
-versions, and they should coexist. To better distinguish the two,
-the distribution directories for them currently have the suffix
-`-pyret` and `-wescheme` respectively. However, in general,
-exclusively `pyret`-based pathways do without the `-pyret`
-suffix.
-
-Note that three workbook PDFs can be created, two for the students
-in the `workbook` directory (with and without optional exercises
-included; and another for teachers in the “protected” directory 
+Note that many workbook PDFs can be created: the students' versions
+are created
+in the `workbook` directory; the teachers' versions in
+the “protected” directory
 `resources/protected`.
 
 Pages under `resources/protected` may prompt you for a teacher
@@ -260,7 +264,6 @@ password, which is available on signing up with Bootstrapworld.
 The pathway narrative web page `index.shtml` includes a link to
 `pathway-lessons.shtml`, which contains all the lesson plans
 associated with the pathway; the student
-
 PDF; a page listing the standards met; and a glossary
 page for the terms used in the lessons.
 
@@ -269,34 +272,49 @@ page for the terms used in the lessons.
 The other options of `build-pathway` are predominantly used for
 debugging:
 
-- `--check-target` (aka `-c`) checks each file of a previous 
-  run to see if it needs to be refreshed. By default, a much more
-  lax check is done to save build time. (The default is enough if you
-  only alter source files and don't alter the previous output.
-  If however you alter output files selectively in order to re-make
-  them, you must use `-c`.)
+- `--debug` retains various temp files in the generated doctree.
 
-- `--debug` (aka `-d`) retains various temp files in the generated doctree.
-
-- `--expanded-warnings` (aka `--w`) shows the diagnostics as
+- `--expanded-warnings` shows the diagnostics as
   long scroll instead of overwriting them.
 
-- `--force` (aka `-f`) forces creating anew the document tree. By default,
+- `--force` forces creating anew the document tree. By default,
   in order to save time,
   conversions are skipped if the `distribution` already contains
   the required target files and they are sufficiently new.
 
-- `--lint` (aka `-l`) reports missing rows in the summary tables of lesson
+- `--lint` reports missing rows in the summary tables of lesson
   plans, and invalid links in the doctree.
 
-- `--no-parallel` (aka `--noparallel`) runs the build script
+- `--noparallel` runs the build script
   strictly sequentially, without exploiting parallelism. This may
   be used to uncover bugs introduced by parallelism.
 
-- `--pdf` (or `--book`, for legacy reasons) generates PDFs for every page and
-  solution-page, and merges them into `workbook.pdf` (normal student workbook),
-  `long-workbook.pdf`, (solutions for student workbook), `workbook-long.pdf`
-  (workbook w/ optional exercises included) and `pd-workbook.pdf` (workbook w/ lesson plans prepended to student workbook.
+- `--book` generates PDFs for every page and solution-page, and merges them
+  into `workbook.pdf` (normal student workbook), `long-workbook.pdf`,
+  (solutions for student workbook), `workbook-long.pdf` (workbook w/ optional
+  exercises included) and `pd-workbook.pdf` (workbook w/ lesson plans prepended
+  to student workbook.
+
+These options set some internal environment variables in the `build-pathway`
+script. `build-pathway` also looks into an init file `.build-pathway.env`, if
+it exists, where these internal variables may be set directly in lieu of giving
+them as command-line options. The variables governed by the options `--book`,
+`--debug`, `--noparallel` and `expandedwarnings` are `BOOK`, `DEBUG`,
+`NOPARALLEL` and `EXPANDEDWARNINGS` respectively.  Thus, a `.build-pathway.env`
+with contents
+
+    BOOK=1
+    DEBUG=1
+    NOPARALLEL=1
+    EXPANDEDWARNINGS=1
+
+is equivalent to supplying the options `--book --debug --noparallel
+--expandedwarnings` when calling `build-pathway`. In the course of
+experimenting, you may delete or, more conveniently, comment out lines in
+`.build-pathway.env` using the usual shell comment character, `#`.
+
+
+
 
 == Deployment
 
@@ -428,7 +446,7 @@ If conflicts arise, you will be given a way to resolve them.
 
 The following is needed to construct documents from this repo:
 
-* A Unix-like environment. 
+* A Unix-like environment.
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) to give yourself a Linux environment first (we recommend Ubuntu).
   - If you're on macOS, your environment is close but missing some tools. You'll want to install [Homebrew](https://brew.sh/) first, then run the following commands to add them:
@@ -551,13 +569,13 @@ The description is displayed in the lesson plan, but is also part
 of the autogenerated thumbnails used by the pathway narrative for
 each of its lessons.
 
-A lesson can optionally include a set of keywords, which are used 
+A lesson can optionally include a set of keywords, which are used
 when searching for lesson content. While the title, description,
-and standards alignment are already included in the search, 
+and standards alignment are already included in the search,
 occassionally there are search terms a user might employ which are
-NOT reflected in any part of the lesson (i.e. - "PEMDAS"). These 
-keywords can be added anywhere in the lesson with the `keywords` 
-directive: `@keywords{larry, curly, moe}`. 
+NOT reflected in any part of the lesson (i.e. - "PEMDAS"). These
+keywords can be added anywhere in the lesson with the `keywords`
+directive: `@keywords{larry, curly, moe}`.
 
 ==== Exercises
 
@@ -589,12 +607,12 @@ or `contracts` (for multiple).
 This states that the function name is `/`, its domain list is
 `("Number" "Number")` and its range is `"Number"`.
 
-  @show{(contract "/" '("Number" "Number") "Number" 
+  @show{(contract "/" '("Number" "Number") "Number"
     "divides one number by another")}
 
 adds an optional fourth argument stating the function's purpose.
 
-To show multiple contracts, 
+To show multiple contracts,
 
   @show{(contracts
     '("/" '("Number" "Number") "Number" "divides one number by another")
@@ -608,7 +626,7 @@ domain-list argument.
 ==== Cross-references and pagination
 
 Both lesson plans and pathway narratives can refer to any files
-in any lessons, in particular, exercises or specific pages in a pathway 
+in any lessons, in particular, exercises or specific pages in a pathway
 workbook.  The relevant directive calls look like
 
   @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
