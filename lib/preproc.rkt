@@ -1753,25 +1753,36 @@
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (unless (<= (length p) 2) (set! title (third p)))
-                                                (let ([link-output (format "link:pass:[~a][~a~a]" (second p) title
-                                                                           (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                           )])
-                                                  (unless (member lbl *do-not-autoinclude-in-material-links*)
-                                                    (let* ([materials-link-output (format "link:pass:[~a][~a~a]" (second p) (second c)
-                                                                                (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                                )]
+                                                (let ([link-output
+                                                        (format
+                                                          "link:pass:[~a][~a~a]" (second p) title
+                                                          ", window=\"_blank\""
+                                                          )])
+                                                  (unless (member
+                                                            lbl
+                                                            *do-not-autoinclude-in-material-links*)
+                                                    (let* ([materials-link-output
+                                                             (format
+                                                               "link:pass:[~a][~a~a]"
+                                                               (second p) (second c)
+                                                                   ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
                                                                      materials-link-output)])
                                                       (cond [opt?
-                                                              (unless (member styled-link-output *opt-starter-file-links*)
+                                                              (unless (member
+                                                                        styled-link-output
+                                                                        *opt-starter-file-links*)
                                                                 (set! *opt-starter-file-links*
-                                                                  (cons styled-link-output *opt-starter-file-links*)))]
+                                                                  (cons styled-link-output
+                                                                        *opt-starter-file-links*)))]
                                                             [else
-                                                              (unless (member styled-link-output *starter-file-links*)
+                                                              (unless (member styled-link-output
+                                                                              *starter-file-links*)
                                                                 (set! *starter-file-links*
-                                                                  (cons styled-link-output *starter-file-links*)))])))
+                                                                  (cons styled-link-output
+                                                                        *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
