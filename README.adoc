@@ -61,7 +61,7 @@ files, with a sample lesson and sample pathway:
         langs/
           en-us/
             proglang.txt (optional)
-            shadowing-glossary.txt (optional)
+            shadow-glossary.txt (optional)
             index.adoc
             slides.md
             images/
@@ -158,7 +158,7 @@ the pages -- one per line -- in the
 final workbook. By default,
 these pages are rendered in portrait mode. If you desire a
 particular file `file.adoc` to be in landscape, its entry line in
-`workbook-pages.txt` should be `file.adoc" landscape` rather
+`workbook-pages.txt` should be `file.adoc landscape` rather
 than just `file.adoc`. (The
 entry `file.adoc` is convenient shorthand for `file.adoc
 portrait`.)  (The words `landscape` and `portrait` may
@@ -325,11 +325,8 @@ debugging:
   strictly sequentially, without exploiting parallelism. This may
   be used to uncover bugs introduced by parallelism.
 
-- `--book` generates PDFs for every page and solution-page, and merges them
-  into `workbook.pdf` (normal student workbook), `long-workbook.pdf`,
-  (solutions for student workbook), `workbook-long.pdf` (workbook w/ optional
-  exercises included) and `pd-workbook.pdf` (workbook w/ lesson plans prepended
-  to student workbook.
+- `--book` is needed to generate PDFs for every page and solution-page, and merges them
+  into the workbook PDFs.
 
 These options set some internal environment variables in the `build-pathway`
 script. `build-pathway` also looks into an init file `.build-pathway.env`, if
@@ -349,6 +346,11 @@ is equivalent to supplying the options `--book --debug --noparallel
 experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment
 them out
 using the usual shell comment character, `#`.
+
+For instance, `BOOK=1` may be commented out during the initial phases of
+adding new content, as
+PDF generation is relatively time-consuming, and one often doesn't need
+the PDFs until after one has thoroughly debugged the HTML output.
 
 == Deployment
 
@@ -588,10 +590,34 @@ to _shadow_ the main glossary for particular lessons. For now,
 the only such shadowing glossary file is `glossary-terms-ss.rkt`,
 used for Social-Studies lessons.
 
-In order for a lesson `A` to use a shadowing glossary, its
-directory, i.e., `lessons/A/langs/en-us`, should containing a
-file `shadowing-glossary.txt` that contains the name of the
+In order for a lesson `lessonA` to use a shadowing glossary, its
+directory, i.e., `lessons/lessonA/langs/en-us`, should containing a
+file `shadow-glossary.txt` that contains the name of the
 shadowing glossary file.
+
+===== Syntax of the glossary-terms.rkt file
+
+The `glossary-terms.rkt` file (and any shadowing files) defines and
+exports the
+Scheme variable `*glossary-list*`, whose value is a list of glosses. Each
+gloss is itself a list of sublists, where the sublist contains three
+elements:
+
+- a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
+- a string specifying glossed item (e.g., `"variable"`),  or a list of strings for
+  grammatically related glossed items, (e.g., `("apply", "applying",
+  "applied")`)
+- a string specifying the definition for the glossed item
+
+The reason for associating a list of grammatically related glossed items
+to the same definition is to allow the source document to use whatever
+variant most fits the prose. The item in the generated glossary will
+always be the first item (presumably the singular, non-declined variant) in the list.
+
+As a convenience, it is not necessary to specify
+"naive plurals" in this list, viz., the ones that simply add "s" to the
+singular. Thus `("coordinate" "coordinates")` can be reduced to
+`("coordinate")`, which can be further reduced to `"coordinate"`.
 
 ==== Lesson descriptions and dependencies
 
@@ -606,10 +632,10 @@ each of its lessons.
 A lesson can optionally include a set of keywords, which are used
 when searching for lesson content. While the title, description,
 and standards alignment are already included in the search,
-occassionally there are search terms a user might employ which are
-NOT reflected in any part of the lesson (i.e. - "PEMDAS"). These
+occasionally there are search terms a user might employ which are
+_not_ reflected in any part of the lesson (e.g., “PEMDAS”, “GEMDAS”). These
 keywords can be added anywhere in the lesson with the `keywords`
-directive: `@keywords{larry, curly, moe}`.
+directive: `@keywords{PEMDAS, GEMDAS}`. Multiple keywords are comma-separated.
 
 ==== Exercises
 

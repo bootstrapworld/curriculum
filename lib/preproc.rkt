@@ -220,13 +220,13 @@
             [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
-(define (assoc-glossary term L)
+(define (assoc-glossary term)
   ; (printf "doing assoc-glossary ~s ~n" term)
   (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
                              (substring term 0 (- (string-length term) 1))
                              "")])
     ; (printf "naive sing = ~s~n" naive-singular)
-    (let loop ([L L])
+    (let loop ([L *natlang-glossary-list*])
       (if (null? L) #f
           (let* ([c (first L)]
                  [lhs (first c)])
@@ -1122,7 +1122,7 @@
                   (let loop ()
                     (let ([x (read i)])
                       (unless (eof-object? x)
-                        (let ([s (assoc-glossary x *natlang-glossary-list*)])
+                        (let ([s (assoc-glossary x)])
                           (cond [s (unless (member s *glossary-items*)
                                      (set! *glossary-items*
                                        (cons s *glossary-items*)))]))
@@ -1271,18 +1271,6 @@
         (read-data-file workbook-pages-ls-file #:mode 'files))))
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
-
-  (set! *natlang-glossary-list*
-    (let ([natlang (string->symbol (getenv "NATLANG"))])
-      ; (printf "\nnatlang= ~s\n\n" natlang)
-      (let loop ([gl *glossary-list*] [ngl '()])
-        (if (null? gl) ngl
-            (let loop2 ([xx (first gl)])
-              (if (null? xx) (loop (rest gl) ngl)
-                  (let ([x (first xx)])
-                    (if (eq? (first x) natlang)
-                        (loop (rest gl) (cons (rest x) ngl))
-                        (loop2 (rest xx))))))))))
 
   (let ([gl *glossary-list*])
 
@@ -1458,7 +1446,7 @@
                                          (create-end-tag "span")) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg *natlang-glossary-list*)])
+                                   [s (assoc-glossary arg)])
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
                               (display (enclose-span ".vocab" arg) o)
