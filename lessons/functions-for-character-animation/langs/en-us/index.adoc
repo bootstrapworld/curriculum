@@ -42,15 +42,15 @@ Students connect the behavior of functions with changing coordinate values, ulti
 
 Students should have their computer, contracts page, and pencil.  Students should have their own *game file* open in a separate window or tab.
 
-- How does a flip-book animation work?
-_Each page of the book is slightly different, and the pages go so fast that the motion looks smooth._
-- Why do we see movement from still images? +
-_Our eyes fill in the gaps between rapidly changing images._
-
-- How might this apply to our game? +
-_If we change image @vocab{coordinates} a little bit at a time, they will appear to move._
+* How does a flip-book animation work?
+** _Each page of the book is slightly different, and the pages go so fast that the motion looks smooth._
+* Why do we see movement from still images? +
+** _Our eyes fill in the gaps between rapidly changing images._
+* How might this apply to our game?
+** _If we change image @vocab{coordinates} a little bit at a time, they will appear to move._
 
 [.lesson-instruction]
+--
 Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`.
 
 - Have the class select a starting x- and y-coordinate for the `TARGET`, and have the volunteer move to that position on the number line or coordinate plane.
@@ -62,8 +62,12 @@ Draw a number line on the board, running from 0 to 1000 (you can also lay tape o
 @ifproglang{pyret}{
 - We make TARGET move by calling out `update-target(300, 200)`, `update-target(250, 100)`, etc.
 }
-*How quickly could I get TARGET to move across the classroom?*
+--
 
+How quickly could I get TARGET to move across the classroom?
+
+[.lesson-instruction]
+--
 After practicing with TARGET, add DANGER in.
 
 - `DANGER` takes a step in the _positive direction_ when they hear "update danger" followed by their current x-coordinate.
@@ -73,16 +77,16 @@ After practicing with TARGET, add DANGER in.
 @ifproglang{pyret}{
 - We make `DANGER` move by calling out `update-danger(40, 92)`, `update-danger(39, 18)`, etc.
 }
-- On a standard number line, if the `DANGER` is moving to the right, is its x-coordinate increasing or decreasing?
+- On a standard number line, if the `DANGER` is moving to the right, is its @vocab{x-coordinate} increasing or decreasing?
+--
 
-*Practice this a few times with your volunteer, asking the class what their new x-coordinate is each time.* Then have the other students call the update-danger function.
+Practice this a few times with your volunteer, asking the class what their new x-coordinate is each time. Then have the other students call the update-danger function.
 
-- *What did you notice about the movement of TARGET and DANGER?  What was changing about them?*
-+
-_Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
-
-- *What jobs could we hand over to the computer to make it possible for us to play the game?*
-_The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
+[.lesson-instruction]
+* What did you notice about the movement of TARGET and DANGER?  What was changing about them?
+** _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
+* What jobs could we hand over to the computer to make it possible for us to play the game?
+** _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
 
 === Investigate
 [.lesson-instruction]
@@ -110,4 +114,4 @@ Connecting the code to the underlying math is important - especially if you want
 
 - What part of the function controls the character's _speed?_
 - What part of the function controls the character's _direction?_
-- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the Domain? What about the Range?
+- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the @vocab{Domain}? What about the @vocab{Range}?

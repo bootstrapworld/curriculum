@@ -466,9 +466,12 @@ when it prints out the glossary for a particular unit
     ((en-us ("vertical axis" "y-axis") "number line on a coordinate plane that runs from bottom to top, indicating values in that direction")
      (es-mx ("eje vertical") "El eje en un gráfico de dispersión que corre de arriba hacia abajo"))
     
-     ((en-us ("vertical line test") "a strategy for determining whether or not a graph represents a function by confirming that no vertical line can be drawn to reveal that an x-value corresponds to more than one y-value")
+    ((en-us ("vertical line test") "a strategy for determining whether or not a graph represents a function by confirming that no vertical line can be drawn to reveal that an x-value corresponds to more than one y-value")
      (es-mx ("prueba de la línea vertical") "establece que una gráfica representa una función si y solo si todas las líneas verticales intersectan la gráfica a lo más una vez"))
 
+    ((en-us ("x-coordinate") "first number of an ordered pair; represents the horizontal location of a point")
+     (es-mx ("coordenada x") "primer número de un par ordenado; representa la ubicación horizontal del punto"))
+    
     ((en-us ("y-intercept") "the point where a line or curve crosses the y-axis of a graph")
      (es-mx ("intercepto" "intercepto vertical" "intersección en el eje Y") "El punto donde la recta o curva cruza el eje vertical (y)."))
 
