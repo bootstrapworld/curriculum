@@ -41,16 +41,29 @@ files, with a sample lesson and sample pathway:
     build-pathway
     lib/
       <language-independent implementation files>
+      *.rkt
+      *.css
+      glossary-terms.rkt
+      glossary-terms-ss.rkt
     shared/langs/
       en-us/
-        <language-dependent implementation files>
-        glossary-terms.rkt
-        *-standards-dictionary.rkt
+        <language-dependent implementation files, such as>
+        *.rkt
+        *.css
+        Badges/*.{jpg,png}
+        docroot/*.{html,png}
+        images/*.png
+        practices/*.rkt
+        standards/*.rkt
+        textbooks/*.rkt
     lessons/
       sample-lesson/
         langs/
           en-us/
+            proglang.txt (optional)
+            shadowing-glossary.txt (optional)
             index.adoc
+            slides.md
             images/
             pyret/
             wescheme/
@@ -71,6 +84,7 @@ files, with a sample lesson and sample pathway:
       sample-pathway/
         langs/
           en-us/
+            proglang.txt (optional)
             index.adoc
             lesson-order.txt
             external-index.rkt
@@ -196,10 +210,10 @@ following command-line options:
 - `--expanded-warnings` (aka `-w`)
 - `--force` (aka `-f`)
 - `--help` (aka `-h`)
-- `--natlang` (aka `--language`)
 - `--lint` (aka `--verify-links` or `-l`)
-- `--nopdf` (aka `--no-pdf` or `-n`)
+- `--natlang` (aka `--language`)
 - `--noparallel` (aka `--no-parallel`)
+- `--nopdf` (aka `--no-pdf` or `-n`)
 - `--proglang`
 - `--slides` (aka `-s`)
 - `--superforce` (aka `--super-force` or `-F`)
@@ -235,7 +249,7 @@ e.g.,
          index.shtml
          lessons/
          resources/
-           protected/i
+           protected/
              workbook-sols.pdf
          workbook/
            workbook.pf
@@ -261,6 +275,10 @@ the “protected” directory
 Pages under `resources/protected` may prompt you for a teacher
 password, which is available on signing up with Bootstrapworld.
 
+The option `--slides lessonA` additionally generates the slide deck
+for lesson `lessonA`, by calling `build-slide lessonA`. For more details, see
+link:./README-slides.adoc[].
+
 The pathway narrative web page `index.shtml` includes a link to
 `pathway-lessons.shtml`, which contains all the lesson plans
 associated with the pathway; the student
@@ -272,7 +290,11 @@ page for the terms used in the lessons.
 The other options of `build-pathway` are predominantly used for
 debugging:
 
-- `--debug` retains various temp files in the generated doctree.
+- `--debug` runs in debug mode, i.e., it retains various temp files in the
+  generated doctree, so they can be inspected to help debugging. Note that like
+  all acts of measurement, running in debug mode results in a system subtly
+  different from non-debug mode, and may actually hide some bugs. Use with
+  circumspection.
 
 - `--expanded-warnings` shows the diagnostics as
   long scroll instead of overwriting them.
@@ -310,11 +332,9 @@ with contents
 
 is equivalent to supplying the options `--book --debug --noparallel
 --expandedwarnings` when calling `build-pathway`. In the course of
-experimenting, you may delete or, more conveniently, comment out lines in
-`.build-pathway.env` using the usual shell comment character, `#`.
-
-
-
+experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment 
+them out 
+using the usual shell comment character, `#`.
 
 == Deployment
 
@@ -431,13 +451,13 @@ Alternatively -- and this will work only for greenlisted members
 
   git clone https://github.com/bootstrapworld/curriculum
   cd curriculum
-  git checkout -b jenbranch
+  git checkout -b my-sandbox
 
 You can pull and merge from `master` as needed:
 
   git checkout master
   git pull
-  git checkout jenbranch
+  git checkout my-sandbox
   git merge master
 
 If conflicts arise, you will be given a way to resolve them.
@@ -510,7 +530,7 @@ Code displays are on contiguous lines that are indented (amount
 of indentation doesn’t matter as long it’s non-0).
 
 Please see the
-https://asciidoctor.org/docs/user-manual[Asciidoctor manual] for
+https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc Language Documentation] for
 the whole story. Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
@@ -699,13 +719,19 @@ like
 
 ==== Comments
 
-HTML comments can be inserted anywhere in the `.adoc` file as
+Comments can be inserted anywhere in the `.adoc` file as
 
   @comment{A comment}
 
-AsciiDoc has its own commenting mechanism with `//` and `////`
-(see manual), but these are expunged when the HTML is created. To
-have comments that persist as HTML comments, use `@comment`.
+Note that such comments _will be seen_ in the HTML source, which may be
+exactly what you want, either for documentation or debugging.
+
+If you don't want your comments to survive into the HTML, you may use
+AsciiDoc's own commenting mechanism with `//` and `////` (see manual). While
+these work mostly, their text is unfortunately subject to preprocessing for
+directives, which may have consequences. To have truly inert comments, use
+
+  @scrub{Everything within these braces is thoroughly scrubbed}
 
 ==== Programming language specific text
 
