@@ -25,7 +25,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
 
-    ((en-us ("axis") "A reference line, used to determine the position of a coordinate")
+    ((en-us ("axis" "axes") "A reference line, used to determine the position of a coordinate")
      (es-mx ("eje" "ejes") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
 
     ((en-us ("bar chart" "bar charts") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
@@ -91,7 +91,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("data block") "code that lists the name, constructor(s), and field(s) of a data structure")
      (es-mx ("bloque de datos") "código que enumera el nombre, los constructores y los elementos de una estructura de datos"))
 
-    ((en-us ("data row" "data rows" "cases") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
+    ((en-us ("data row" "data rows" "cases" "row") "a structured piece of data in a dataset that typically reports all the information gathered about a given individual")
      (es-mx ("fila de datos" "casos") "un conjunto de datos estructurados que usualmente representa toda la información recopilada sobre un individuo particular"))
 
     ((en-us ("data science") "the science of collecting, organizing, and drawing general conclusions from data, with the help of computers")
@@ -250,7 +250,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("line") "an infinite collection of points forming a straight one-dimensional figure having no thickness and extending infinitely in both directions")
      (es-mx ("línea") "una colección infinita de datos que forman una figura recta unidimensional que no tiene espesor y se extiende infinitamente en ambas direcciones"))
     
-    ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as a straight line or written as a sequence of numbers that change at a constant rate")
+    ((en-us ("linear relationship" "linear") "sequences that change at a constant rate, or points forming a straight line on a graph")
      (es-mx ("lineal" "relación lineal") "una regla que calcula una cantidad a partir de otra, que se puede representar gráficamente como una línea recta o que se puede escribir como una secuencia de números que cambian a una tasa constante"))
     
     ((en-us ("linear regression") "a type of analysis that models the relationship between two quantitative variables. The result is known as a regression line, or line of best fit.")
@@ -469,7 +469,7 @@ when it prints out the glossary for a particular unit
      ((en-us ("vertical line test") "a strategy for determining whether or not a graph represents a function by confirming that no vertical line can be drawn to reveal that an x-value corresponds to more than one y-value")
      (es-mx ("prueba de la línea vertical") "establece que una gráfica representa una función si y solo si todas las líneas verticales intersectan la gráfica a lo más una vez"))
 
-    ((en-us ("y-intercept") "The point where a line or curve crosses the y-axis of a graph")
+    ((en-us ("y-intercept") "the point where a line or curve crosses the y-axis of a graph")
      (es-mx ("intercepto" "intercepto vertical" "intersección en el eje Y") "El punto donde la recta o curva cruza el eje vertical (y)."))
 
     ))
