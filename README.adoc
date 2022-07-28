@@ -239,26 +239,40 @@ If no `--natlang` option is supplied, the prose language used is
 `en-us`. To specify another language, say `es-mx`, use
 `--natlang es-mx`.
 
-The doctree for the built pathway under `distribution` resides
-under a subdirectory named for the prose language, e.g., `en-us`,
-e.g.,
+The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
+resides in
+`distribution/en-us/courses/`. Thus:
 
-   distribution/
-     sample-pathway/
-       en-us/
-         index.shtml
-         lessons/
-         resources/
-           protected/
-             workbook-sols.pdf
-         workbook/
-           workbook.pf
+    distribution/
+      en-us/
+        courses/
+          sample-pathway/
+            index.shtml
+              workbook/
+                workbook.pdf
+                workbook-long.pdf
+                opt-exercises.pdf
+              resources/
+                protected/
+                  workbook-sols.pdf
+                  workbook-long-sols.pdf
+                  opt-exercises-sols.pdf
 
 Here `index.shtml` is the web page corresponding to the pathway
-narrative; `resources/protected/workbook-sols.pdf` is the Teacher
-workbook PDF; and `workbook/workbook.pdf` is the student
-workbook. These filenames are standard and do not necessarily
-mirror the names of the source documents.
+narrative. The student workbooks in `workbook/` are
+
+- `workbook.pdf`, the basic student workbook
+- `workbook-long.pdf`, above plus the optional exercises
+- `opt-exercises.pdf`, just the optional exercises
+
+The teacher workbooks in `resources/protected` are
+
+- `workbook-sols.pdf`, the basic teacher workbook, i.e., with solutions
+- `workbook-long-sols.pdf`, above plus the optional exercises
+- `opt-exercises-sols.pdf`, just the optional exercises
+
+These filenames are standards and do not vary with pathway. Their location
+identifies which pathway they describe.
 
 If no `--proglang` option is supplied, the progamming language is
 assumed to be `pyret`. Other possible values for the option are
@@ -332,8 +346,8 @@ with contents
 
 is equivalent to supplying the options `--book --debug --noparallel
 --expandedwarnings` when calling `build-pathway`. In the course of
-experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment 
-them out 
+experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment
+them out
 using the usual shell comment character, `#`.
 
 == Deployment
@@ -788,3 +802,5 @@ enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
 text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
+
+// vi:tw=72
