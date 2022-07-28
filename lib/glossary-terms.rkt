@@ -379,7 +379,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("sample instances") "a collection of single instances, or also used to describe illustrative instances that we use to provide examples of a data structure")
      (es-mx ("instancias de muestra") "un conjunto de instancias únicas, usado para describir instancias ilustrativas que utilizamos para proporcionar ejemplos de una estructura de datos"))
     
-    ((en-us ("scale" "scale up" "scale down") "resize an image to be larger or smaller while maintaining ratios and proportions")
+    ((en-us ("scale" "scale up" "scale down" "scaling") "resize an image to be larger or smaller while maintaining ratios and proportions")
      (es-mx ("escalar") "aumentar o reducir proporcionalmente"))
     
     ((en-us ("scatter plot" "scatter plots") "a display of the relationship between two quantitative variables, graphing each explanatory value on the x axis and the accompanying response on the y axis")
