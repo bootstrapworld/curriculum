@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-25 # last modified
+LASTMOD=2022-07-28 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2004,6 +2004,7 @@ function collectworkbookpages() {
 
 function checkworkbookpagesalsoexercises() {
   if test ! -f .cached/.workbook-exercise-pages-ls.txt.kp; then
+    # FIXME: shouldn't this be a warning?
     return
   fi
 
@@ -2014,6 +2015,7 @@ function checkworkbookpagesalsoexercises() {
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
       if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+        # FIXME: why should presence in opt exercises be a save?
         echo
         echo WARNING: Workbook page $(pwd)/$f not an exercise page
         echo

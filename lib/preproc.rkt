@@ -728,12 +728,14 @@
            [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
            [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
            [image-caption (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
+           [text-wo-url (clean-up-url-in-image-text text)]
            [commaed-opts (string-append
                            ", "
                            width-arg
                            ", "
-                           height-arg)]
-           [text-wo-url (clean-up-url-in-image-text text)]
+                           height-arg
+                           (if (string=? text "") ""
+                               (format ", title=~s" text-wo-url)))]
            [img-link-txt (string-append
                            (enclose-span ".big" "&#x1f5bc;") "Show image")]
            [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
@@ -746,20 +748,14 @@
                img-link)]
            [adoc-img (enclose-tag "figure" ".image"
                        (string-append
+                         ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                          adoc-img
                          (if image-caption
                              (enclose-tag "figcaption" "" image-caption) "")))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-      (if (string=? text "")
-          (if centered?
-              (enclose-span ".centered-image" adoc-img)
-              adoc-img)
-          (enclose-span
-            (string-append ".tooltip"
-              (if centered? ".centered-image" ""))
-            (string-append
-              (enclose-span ".tooltiptext" text) "\n"
-              adoc-img))))))
+      (if centered?
+          (enclose-span ".centered-image" adoc-img)
+          adoc-img))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
@@ -1757,25 +1753,36 @@
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (unless (<= (length p) 2) (set! title (third p)))
-                                                (let ([link-output (format "link:pass:[~a][~a~a]" (second p) title
-                                                                           (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                           )])
-                                                  (unless (member lbl *do-not-autoinclude-in-material-links*)
-                                                    (let* ([materials-link-output (format "link:pass:[~a][~a~a]" (second p) (second c)
-                                                                                (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                                )]
+                                                (let ([link-output
+                                                        (format
+                                                          "link:pass:[~a][~a~a]" (second p) title
+                                                          ", window=\"_blank\""
+                                                          )])
+                                                  (unless (member
+                                                            lbl
+                                                            *do-not-autoinclude-in-material-links*)
+                                                    (let* ([materials-link-output
+                                                             (format
+                                                               "link:pass:[~a][~a~a]"
+                                                               (second p) (second c)
+                                                                   ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
                                                                      materials-link-output)])
                                                       (cond [opt?
-                                                              (unless (member styled-link-output *opt-starter-file-links*)
+                                                              (unless (member
+                                                                        styled-link-output
+                                                                        *opt-starter-file-links*)
                                                                 (set! *opt-starter-file-links*
-                                                                  (cons styled-link-output *opt-starter-file-links*)))]
+                                                                  (cons styled-link-output
+                                                                        *opt-starter-file-links*)))]
                                                             [else
-                                                              (unless (member styled-link-output *starter-file-links*)
+                                                              (unless (member styled-link-output
+                                                                              *starter-file-links*)
                                                                 (set! *starter-file-links*
-                                                                  (cons styled-link-output *starter-file-links*)))])))
+                                                                  (cons styled-link-output
+                                                                        *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]

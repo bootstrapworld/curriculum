@@ -41,16 +41,29 @@ files, with a sample lesson and sample pathway:
     build-pathway
     lib/
       <language-independent implementation files>
+      *.rkt
+      *.css
+      glossary-terms.rkt
+      glossary-terms-ss.rkt
     shared/langs/
       en-us/
-        <language-dependent implementation files>
-        glossary-terms.rkt
-        *-standards-dictionary.rkt
+        <language-dependent implementation files, such as>
+        *.rkt
+        *.css
+        Badges/*.{jpg,png}
+        docroot/*.{html,png}
+        images/*.png
+        practices/*.rkt
+        standards/*.rkt
+        textbooks/*.rkt
     lessons/
       sample-lesson/
         langs/
           en-us/
+            proglang.txt (optional)
+            shadowing-glossary.txt (optional)
             index.adoc
+            slides.md
             images/
             pyret/
             wescheme/
@@ -71,6 +84,7 @@ files, with a sample lesson and sample pathway:
       sample-pathway/
         langs/
           en-us/
+            proglang.txt (optional)
             index.adoc
             lesson-order.txt
             external-index.rkt
@@ -188,21 +202,30 @@ it can be named anything (not necessarily `index.adoc`).
 == The `build-pathway` script
 
 The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments, and/or any combination of the
-options `--add-exercises`, `--debug`, `--force`, `--help`, `--language`,
-`--lint`, `--book`, `--pdf`,
-`--no-parallel`, `--proglang`, and `--version`.
+number of pathway arguments (including none), and any combination of the
+following command-line options:
 
-If called with `--help` (aka `-h`) or `--version` (aka `-v`), the script displays a help message
-and version information, respectively, and quits.
+- `--book` (aka `--pdf` or `-b`)
+- `--debug` (aka `-d`)
+- `--expanded-warnings` (aka `-w`)
+- `--force` (aka `-f`)
+- `--help` (aka `-h`)
+- `--lint` (aka `--verify-links` or `-l`)
+- `--natlang` (aka `--language`)
+- `--noparallel` (aka `--no-parallel`)
+- `--nopdf` (aka `--no-pdf` or `-n`)
+- `--proglang`
+- `--slides` (aka `-s`)
+- `--superforce` (aka `--super-force` or `-F`)
+- `--version` (aka `-v`)
 
-Otherwise, the
-script creates a document tree under the `distribution` directory
-for every pathway argument.
-A pathway arg can be either the
-pathway name, or its relative pathname from the `build-pathway`
-script, with or without a trailing slash, e.g., all of the
-following refer to the same pathway:
+If called with `--help` or `--version`, the script
+displays a help message and version information, respectively, and quits.
+
+Otherwise, the script creates a document tree under the `distribution`
+directory for every pathway argument. A pathway arg can be either the pathway
+name, or its relative pathname from the `build-pathway` script, with or without
+a trailing slash, e.g., all of the following refer to the same pathway:
 
   sample-pathway
   pathways/sample-pathway
@@ -212,55 +235,67 @@ If no pathway arg is supplied,
 `build-pathway` generates doctrees for every pathway in
 `pathways`.
 
-If no `--language` option is supplied, the prose language used is
+If no `--natlang` option is supplied, the prose language used is
 `en-us`. To specify another language, say `es-mx`, use
-`--language es-mx`.
+`--natlang es-mx`.
 
-The doctree for the built pathway under `distribution` resides
-under a subdirectory named for the prose language, e.g., `en-us`,
-e.g.,
+The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
+resides in
+`distribution/en-us/courses/`. Thus:
 
-   distribution/
-     sample-pathway/
-       en-us/
-         index.shtml
-         lessons/
-         resources/
-           protected/i
-             workbook-sols.pdf
-         workbook/
-           workbook.pf
+    distribution/
+      en-us/
+        courses/
+          sample-pathway/
+            index.shtml
+              workbook/
+                workbook.pdf
+                workbook-long.pdf
+                opt-exercises.pdf
+              resources/
+                protected/
+                  workbook-sols.pdf
+                  workbook-long-sols.pdf
+                  opt-exercises-sols.pdf
 
 Here `index.shtml` is the web page corresponding to the pathway
-narrative; `resources/protected/workbook-sols.pdf` is the Teacher
-workbook PDF; and `workbook/workbook.pdf` is the student
-workbook. These filenames are standard and do not necessarily
-mirror the names of the source documents.
+narrative. The student workbooks in `workbook/` are
+
+- `workbook.pdf`, the basic student workbook
+- `workbook-long.pdf`, above plus the optional exercises
+- `opt-exercises.pdf`, just the optional exercises
+
+The teacher workbooks in `resources/protected` are
+
+- `workbook-sols.pdf`, the basic teacher workbook, i.e., with solutions
+- `workbook-long-sols.pdf`, above plus the optional exercises
+- `opt-exercises-sols.pdf`, just the optional exercises
+
+These filenames are standards and do not vary with pathway. Their location
+identifies which pathway they describe.
 
 If no `--proglang` option is supplied, the progamming language is
-assumed to be `pyret`. The other possible value for the option is
-`wescheme`. The distribution directory for a pathway built with
-`wescheme` has the suffix `-wescheme`.
+assumed to be `pyret`. Other possible values for the option are
+`wecheme`, `codap`, and `spreadsheets`.
+The distribution directory for a pathway built with
+a non-``pyret`` proglang typically tacks on the proglang as suffix.
 
-NOTE: A small number of pathways have both `pyret` and `wescheme`
-versions, and they should coexist. To better distinguish the two,
-the distribution directories for them currently have the suffix
-`-pyret` and `-wescheme` respectively. However, in general,
-exclusively `pyret`-based pathways do without the `-pyret`
-suffix.
-
-Note that three workbook PDFs can be created, two for the students
-in the `workbook` directory (with and without optional exercises
-included; and another for teachers in the “protected” directory 
+Note that many workbook PDFs can be created: the students' versions
+are created
+in the `workbook` directory; the teachers' versions in
+the “protected” directory
 `resources/protected`.
 
 Pages under `resources/protected` may prompt you for a teacher
 password, which is available on signing up with Bootstrapworld.
 
+The option `--slides lessonA` additionally generates the slide deck
+for lesson `lessonA`, by calling `build-slide lessonA`. For more details, see
+link:./README-slides.adoc[].
+
 The pathway narrative web page `index.shtml` includes a link to
 `pathway-lessons.shtml`, which contains all the lesson plans
 associated with the pathway; the student
-
 PDF; a page listing the standards met; and a glossary
 page for the terms used in the lessons.
 
@@ -269,34 +304,51 @@ page for the terms used in the lessons.
 The other options of `build-pathway` are predominantly used for
 debugging:
 
-- `--check-target` (aka `-c`) checks each file of a previous 
-  run to see if it needs to be refreshed. By default, a much more
-  lax check is done to save build time. (The default is enough if you
-  only alter source files and don't alter the previous output.
-  If however you alter output files selectively in order to re-make
-  them, you must use `-c`.)
+- `--debug` runs in debug mode, i.e., it retains various temp files in the
+  generated doctree, so they can be inspected to help debugging. Note that like
+  all acts of measurement, running in debug mode results in a system subtly
+  different from non-debug mode, and may actually hide some bugs. Use with
+  circumspection.
 
-- `--debug` (aka `-d`) retains various temp files in the generated doctree.
-
-- `--expanded-warnings` (aka `--w`) shows the diagnostics as
+- `--expanded-warnings` shows the diagnostics as
   long scroll instead of overwriting them.
 
-- `--force` (aka `-f`) forces creating anew the document tree. By default,
+- `--force` forces creating anew the document tree. By default,
   in order to save time,
   conversions are skipped if the `distribution` already contains
   the required target files and they are sufficiently new.
 
-- `--lint` (aka `-l`) reports missing rows in the summary tables of lesson
+- `--lint` reports missing rows in the summary tables of lesson
   plans, and invalid links in the doctree.
 
-- `--no-parallel` (aka `--noparallel`) runs the build script
+- `--noparallel` runs the build script
   strictly sequentially, without exploiting parallelism. This may
   be used to uncover bugs introduced by parallelism.
 
-- `--pdf` (or `--book`, for legacy reasons) generates PDFs for every page and
-  solution-page, and merges them into `workbook.pdf` (normal student workbook),
-  `long-workbook.pdf`, (solutions for student workbook), `workbook-long.pdf`
-  (workbook w/ optional exercises included) and `pd-workbook.pdf` (workbook w/ lesson plans prepended to student workbook.
+- `--book` generates PDFs for every page and solution-page, and merges them
+  into `workbook.pdf` (normal student workbook), `long-workbook.pdf`,
+  (solutions for student workbook), `workbook-long.pdf` (workbook w/ optional
+  exercises included) and `pd-workbook.pdf` (workbook w/ lesson plans prepended
+  to student workbook.
+
+These options set some internal environment variables in the `build-pathway`
+script. `build-pathway` also looks into an init file `.build-pathway.env`, if
+it exists, where these internal variables may be set directly in lieu of giving
+them as command-line options. The variables governed by the options `--book`,
+`--debug`, `--noparallel` and `expandedwarnings` are `BOOK`, `DEBUG`,
+`NOPARALLEL` and `EXPANDEDWARNINGS` respectively.  Thus, a `.build-pathway.env`
+with contents
+
+    BOOK=1
+    DEBUG=1
+    NOPARALLEL=1
+    EXPANDEDWARNINGS=1
+
+is equivalent to supplying the options `--book --debug --noparallel
+--expandedwarnings` when calling `build-pathway`. In the course of
+experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment
+them out
+using the usual shell comment character, `#`.
 
 == Deployment
 
@@ -413,13 +465,13 @@ Alternatively -- and this will work only for greenlisted members
 
   git clone https://github.com/bootstrapworld/curriculum
   cd curriculum
-  git checkout -b jenbranch
+  git checkout -b my-sandbox
 
 You can pull and merge from `master` as needed:
 
   git checkout master
   git pull
-  git checkout jenbranch
+  git checkout my-sandbox
   git merge master
 
 If conflicts arise, you will be given a way to resolve them.
@@ -428,7 +480,7 @@ If conflicts arise, you will be given a way to resolve them.
 
 The following is needed to construct documents from this repo:
 
-* A Unix-like environment. 
+* A Unix-like environment.
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) to give yourself a Linux environment first (we recommend Ubuntu).
   - If you're on macOS, your environment is close but missing some tools. You'll want to install [Homebrew](https://brew.sh/) first, then run the following commands to add them:
@@ -492,7 +544,7 @@ Code displays are on contiguous lines that are indented (amount
 of indentation doesn’t matter as long it’s non-0).
 
 Please see the
-https://asciidoctor.org/docs/user-manual[Asciidoctor manual] for
+https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc Language Documentation] for
 the whole story. Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
@@ -522,14 +574,24 @@ Glossary items are annotated with the directive `@vocab`. E.g.,
 
   @vocab{function}
 
-In a lesson plan, such items are searched in
-`shared/langs/en-us/glossary-terms.rkt`,
-and are inserted as lists at the head of the document.
+In a lesson plan, such items are searched in the main glossary
+file, `lib/glossary-terms.rkt`, and are inserted as lists at the
+head of the document.
 
 For a pathway narrative, the glossary items from all its
 constituent lessons are collected into a file
 `pathway-standards.shtml` that is linked to in the narrative
 page.
+
+There can be auxiliary glossary files in `lib/` that can be used
+to _shadow_ the main glossary for particular lessons. For now,
+the only such shadowing glossary file is `glossary-terms-ss.rkt`,
+used for Social-Studies lessons.
+
+In order for a lesson `A` to use a shadowing glossary, its
+directory, i.e., `lessons/A/langs/en-us`, should containing a
+file `shadowing-glossary.txt` that contains the name of the
+shadowing glossary file.
 
 ==== Lesson descriptions and dependencies
 
@@ -541,13 +603,13 @@ The description is displayed in the lesson plan, but is also part
 of the autogenerated thumbnails used by the pathway narrative for
 each of its lessons.
 
-A lesson can optionally include a set of keywords, which are used 
+A lesson can optionally include a set of keywords, which are used
 when searching for lesson content. While the title, description,
-and standards alignment are already included in the search, 
+and standards alignment are already included in the search,
 occassionally there are search terms a user might employ which are
-NOT reflected in any part of the lesson (i.e. - "PEMDAS"). These 
-keywords can be added anywhere in the lesson with the `keywords` 
-directive: `@keywords{larry, curly, moe}`. 
+NOT reflected in any part of the lesson (i.e. - "PEMDAS"). These
+keywords can be added anywhere in the lesson with the `keywords`
+directive: `@keywords{larry, curly, moe}`.
 
 ==== Exercises
 
@@ -579,12 +641,12 @@ or `contracts` (for multiple).
 This states that the function name is `/`, its domain list is
 `("Number" "Number")` and its range is `"Number"`.
 
-  @show{(contract "/" '("Number" "Number") "Number" 
+  @show{(contract "/" '("Number" "Number") "Number"
     "divides one number by another")}
 
 adds an optional fourth argument stating the function's purpose.
 
-To show multiple contracts, 
+To show multiple contracts,
 
   @show{(contracts
     '("/" '("Number" "Number") "Number" "divides one number by another")
@@ -598,7 +660,7 @@ domain-list argument.
 ==== Cross-references and pagination
 
 Both lesson plans and pathway narratives can refer to any files
-in any lessons, in particular, exercises or specific pages in a pathway 
+in any lessons, in particular, exercises or specific pages in a pathway
 workbook.  The relevant directive calls look like
 
   @worksheet-link{lessonA/exercises/exerciseA1.html, link-text}
@@ -671,13 +733,19 @@ like
 
 ==== Comments
 
-HTML comments can be inserted anywhere in the `.adoc` file as
+Comments can be inserted anywhere in the `.adoc` file as
 
   @comment{A comment}
 
-AsciiDoc has its own commenting mechanism with `//` and `////`
-(see manual), but these are expunged when the HTML is created. To
-have comments that persist as HTML comments, use `@comment`.
+Note that such comments _will be seen_ in the HTML source, which may be
+exactly what you want, either for documentation or debugging.
+
+If you don't want your comments to survive into the HTML, you may use
+AsciiDoc's own commenting mechanism with `//` and `////` (see manual). While
+these work mostly, their text is unfortunately subject to preprocessing for
+directives, which may have consequences. To have truly inert comments, use
+
+  @scrub{Everything within these braces is thoroughly scrubbed}
 
 ==== Programming language specific text
 
@@ -734,3 +802,5 @@ enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
 text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
+
+// vi:tw=72

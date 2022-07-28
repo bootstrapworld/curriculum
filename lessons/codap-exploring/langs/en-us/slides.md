@@ -23,12 +23,33 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 {layout="Launch-DN"}
 # Numbers & Strings
 
-- Play around in CODAP, guided by @printable-exercise{codap-experimentation.adoc}.
+- Open the @starter-file{animals} in CODAP.
+- Play around in our new platform! Record your observations on @printable-exercise{codap-exploration.adoc}.
 - What did you Notice? What do you Wonder?
 
-<!--
-Debrief with students, then ensure that they all have created a blank column titled `test`. They can do so by selecting the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. *NEED SCREENSHOT*
--->
+---
+{layout="LaunchC}
+# Numbers & Strings
+
+Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
+
+@image{images/grey-plus-sign.png, "screenshot from CODAP indicating how to add a new column"}
+
+---
+{layout="LaunchC"}
+# Numbers & Strings
+
+In the next activity, you will click on the `test` cell in the header of your table, and then choose `Edit formula` from the resulting drop-down menu.
+
+@image{images/edit-formula.png, "screenshot from CODAP indicating how to edit a formula"}
+
+---
+{layout="LaunchC"}
+# Numbers & Strings
+
+As you complete each directive, you will re-open `Edit Formula` (below), delete your previous entry and then input the next entry.
+
+@image{images/edit-formula-box.png, "screenshot from CODAP showing where to input new formulas"}
 
 ---
 {layout="Investigate"}
@@ -37,10 +58,6 @@ Debrief with students, then ensure that they all have created a blank column tit
 - Complete @printable-exercise{numbers-n-strings.adoc}.
 - What did you Notice? What do you Wonder?
 - Did you get any error messages? What did you learn from them? 
-
-<!--
-In their `test` column, students will experiment with _Numbers_ and _Strings_. In order to complete the worksheet below, students must click on the `test` cell in the header of their Table, and then choose `Edit formula` from the resulting drop-down menu. As they complete each directive, they will re-open `Edit Formula`, delete their previous entry and then input the next entry. *NEED SCREENSHOT*
--->
 
 ---
 {layout="Synthesize"}
@@ -59,25 +76,6 @@ CODAP knows about many kinds of Numbers, and they behave pretty much the way the
 
 <!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
 -->
-
----
-{layout="Investigate"}
-# Numbers & Strings
-
-- What did you Notice? 
-
-- What do you Wonder?
-
-- Did you get any error messages? 
-
-- What did you learn from them? 
-
-<!--
-Most of the error messages we've just seen were drawing our attention to syntax errors: Missing commas, unclosed strings, etc.
-
-Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
--->
-
 
 ---
 {layout="Launch"}
@@ -120,33 +118,34 @@ What sets Booleans apart from other data types?
 
 ---
 {layout="Launch"}
-# Expressions
+# Expressions and Functions
 
-- If @math{x = 2}, what will the expression @math{x + 4} evaluate to? What if @math{x = 20}?
-- The values we plug in are the expressions @vocab{arguments}. How many arguments does @math{x + 4} expect?
-
-
-<!--
-Students know about Numbers, Strings, Booleans and Operators -- all of which behave just like they do in math. But what about expressions? Students may remember expressions from algebra: @math{x + 4}.
--->
+- Turn to @printable-exercise{pages/codap-apply-functions.adoc}.
+- Let's complete the first table together, with pencil and paper.
+- You complete the second table on your own.
 
 ---
 {layout="Launch-DN"}
-# Expressions
+# Expressions and Functions
 
-Complete @printable-exercise{pages/codap-expressions.adoc}.
+ By using CODAP, we can evaluate expressions much more quickly and efficiently. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
+
+- With your partner, open the @starter-file{animals} and use it to finish the top half of @printable-exercise{pages/codap-apply-functions.adoc}.
+- Note that attribute names that are more than one word need to be entered inside of tick marks.
 
 ---
-{layout="Investigate"}
-# Expressions
+{layout="Launch-DN"}
+# Expressions and Functions
 
-- Create a column called `age-next-year` that uses an expression to add one year to each animal’s age.
-- Create a column called `rounded-weight` that uses an expression to give the weight of each animal rounded to the nearest whole number.
-- Create a column called `old` that uses an expression to indicate which animals are  over 5 years old.
+CODAP also allows us to insert _functions_ into the formula box! *Arguments* (or "inputs") are the values passed into the function. CODAP has lots of @link{https://codap.concord.org/help/functions, built-in functions} that we can use to play with our dataset.
+
+- With your partner, complete @printable-exercise{pages/codap-apply-functions.adoc}.
+- What did you learn about the two functions `sqrt` and `stringLength`?
 
 ---
 {layout="Synthesize"}
 # Expressions
 
-- Think about the new columns you created using expression. How did the input of the expression relate to the output?
+- Think about the new columns you created. How did the inputs relate to the outputs?
+- Did you encounter any new functions that intrigued you?
 - What kind of error messages did you encounter, if any?
