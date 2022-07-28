@@ -64,6 +64,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("combination" "combinations") "the number of possible arrangements in a collection of items where the order of the selection does NOT matter. (ABC and CBA would be considered the same combination.)")
      (es-mx ("combinación") "el número de arreglos posibles con los elementos de un conjunto, donde el orden de los elementos usados NO importa. (ABC y CBA se consideran la misma combinación.)"))
 
+   ((en-us ("comments") "messages in the code, generally ignored by the computer, to help people interacting with the code understand what it is doing")
+     (es-mx ("comentarios de código") "anotaciones en el código que facilitan nuestra comprensión de lo que el código intenta hacer; la computadora no los lee"))
+
     ((en-us ("conditional") "a code expression made of questions and answers")
      (es-mx ("condicional") "una expresión de código compuesta de preguntas y respuestas"))
 
@@ -294,6 +297,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("order" "orders" "ordering") "an arrangement of data according to some pattern")
      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
+
+    ((en-us ("origin") "the point (0,0) where the horizontal and vertical axes intersect")
+     (es-mx ("origen") "el punto (0,0) en el que el eje horizontal y el eje vertical se intersectan"))
     
     ((en-us ("outlier" "outliers") "observations whose values are very different from the other observations in the same data set, perhaps due to experimental error. Outliers can also be indicative of data belonging to a different population from the rest of the established samples.")
      (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes al resto de observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
@@ -325,6 +331,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("purpose statement") "a concise, detailed description of what a function does with its inputs")
      (es-mx ("declaración de propósito") "una breve descripción de lo que hace una función"))
     
+    ((en-us ("Pythagorean Theorem") "the relationship between the squares of the sides of a right triangle; can be used to find diagonal distances on the coordinate plane")
+     (es-mx ("Teorema de Pitágoras") "en todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos; se puede usar para encontrar distancias diagonales en el plano de coordenadas"))
+
     ((en-us ("quantitative data") "number values for which arithmetic makes sense")
      (es-mx ("datos cuantitativos") "datos con valores que miden alguna cantidad; puede no tener un número fijo de valores posibles"))
     
@@ -349,6 +358,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("rate") "A comparison of two related quantities")
      (es-mx ("tasa") "Una comparación de dos cantidades relacionadas"))
     
+    ((en-us ("ratio" "ratios") "the relative sizes of two or more values")
+     (es-mx ("razón") "una comparación entre dos o más medidas"))
+    
     ((en-us ("reactor") "a value that contains a current state, and functions for updating, drawing, and interacting with that state")
      (es-mx ("reactor") "un valor que contiene el estado corriente y funciones por actualizar, dibujar y interactuar con ese estado"))
     
@@ -366,6 +378,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("sample instances") "a collection of single instances, or also used to describe illustrative instances that we use to provide examples of a data structure")
      (es-mx ("instancias de muestra") "un conjunto de instancias únicas, usado para describir instancias ilustrativas que utilizamos para proporcionar ejemplos de una estructura de datos"))
+    
+    ((en-us ("scale" "scale up" "scale down") "resize an image to be larger or smaller while maintaining ratios and proportions")
+     (es-mx ("escalar") "aumentar o reducir proporcionalmente"))
     
     ((en-us ("scatter plot" "scatter plots") "a display of the relationship between two quantitative variables, graphing each explanatory value on the x axis and the accompanying response on the y axis")
      (es-mx ("gráfico de dispersión")  "Un gráfico donde los puntos se colocan en los ejes según pares de valores."))
