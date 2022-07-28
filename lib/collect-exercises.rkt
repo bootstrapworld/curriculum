@@ -56,9 +56,9 @@
                                   (set! *opt-exercises-files*
                                     (cons f *opt-exercises-files*)))]
                                [(string=? directive "printable-exercise")
-                                (unless (member f *opt-exercises-files*)
-                                  (set! *opt-exercises-files*
-                                    (cons f *opt-exercises-files*)))]
+                                (unless (member f *workbook-exercises-files*)
+                                  (set! *workbook-exercises-files*
+                                    (cons f *workbook-exercises-files*)))]
                                [(string=? directive "handout")
                                 (unless (member f *handout-exercises-files*)
                                   (set! *handout-exercises-files*
