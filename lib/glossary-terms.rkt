@@ -193,6 +193,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("function definition" "function definitions") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx ("definición de función") "que designa una función, enumera sus variables e indica la expresión a evaluar cuando se utiliza la función"))
 
+    ((en-us ("function notation") "a standard way to denote functions, beginning with a function name, such as _f_ or _gt_, the variable(s) the function takes in, such as _x_ or _size_, and a definition of what the function does using a formula in terms of the variable. For example, f(x) = x + 1 takes in a number and adds 1.")
+     (es-mx ("notación de funciones") "una manera en la que una función puede ser representada usando símbolos y signos"))
+
     ((en-us ("frequency" "frequencies") "how often a particular value appears in a dataset")
      (es-mx ("frecuencia") "el número de veces que aparece un valor particular en un conjunto de datos"))
     
@@ -243,6 +246,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("library" "libraries") "a file containing definitions (functions, values, etc) that can be imported into another program")
      (es-mx ("biblioteca") "un archivo que contiene definiciones (funciones, valores, etc.) que se pueden importar a otro programa"))
+    
+    ((en-us ("line") "an infinite collection of points forming a straight one-dimensional figure having no thickness and extending infinitely in both directions")
+     (es-mx ("línea") "una colección infinita de datos que forman una figura recta unidimensional que no tiene espesor y se extiende infinitamente en ambas direcciones"))
     
     ((en-us ("linear" "linear relationship") "a rule that computes one quantity from another, which can be graphed as a straight line or written as a sequence of numbers that change at a constant rate")
      (es-mx ("lineal" "relación lineal") "una regla que calcula una cantidad a partir de otra, que se puede representar gráficamente como una línea recta o que se puede escribir como una secuencia de números que cambian a una tasa constante"))
@@ -420,6 +426,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("string") "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
      (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
+    
+    ((en-us ("substitute" "substituted") "replace a variable with a value or expression and evaluate or simplify the resulting expression")
+     (es-mx ("sustitucion") "reemplazar una variable por una cantidad o expresión y evaluar o simplificar"))
     
     ((en-us ("surface area") "the sum of the areas of all of the faces of a solid figure (polyhedron) or the total area that the surface of the object occupies")
      (es-mx ("área de superficie") "la suma de las áreas de todas las caras de una figura sólida (poliedro) o el área total que ocupa la superficie del objeto"))
