@@ -430,7 +430,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("value" "values") "a specific piece of data, like 5 or \"hello\"")
      (es-mx ("valor" "valores") "una pieza específica de datos, como 5 o \" hello \""))
     
-    ((en-us ("variable" "variables") "a letter or symbol that stands in for a value or expression")
+    ((en-us ("variable" "variables") "a value that changes, often represented by a letter or symbol")
      (es-mx ("variable") "algo que cambia"))
     
     ((en-us ("variable name") "name of the information that can be different each time a function is used")
