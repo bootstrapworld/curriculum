@@ -109,7 +109,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("debug") "to find and fix errors in one's code")
      (es-mx ("depurar") "encontrar y corregir errores en el código"))
 
-    ((en-us ("define") "to associate a descriptive name with a value")
+    ((en-us ("define" "defined") "to associate a descriptive name with a value")
      (es-mx ("definir") "asociar un nombre descriptivo con un valor"))
 
     ((en-us ("definitions area") "the left-most text box in the Editor where definitions for values and functions are written")
