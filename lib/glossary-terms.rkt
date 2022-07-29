@@ -145,6 +145,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("entry" "entries") "a single value in a table, belonging to a particular row and column")
      (es-mx ("dato") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
+    ((en-us ("equation") "a statement that two values or expressions are equal")
+     (es-mx ("ecuación") "igualdad entre dos valores o expresiones"))
+
     ((en-us ("error message" "error messages") "information from the computer about errors in code")
      (es-mx ("mensaje de error" "mensajes de error") "información que provee la computadora sobre errores en el Código"))
 
@@ -228,6 +231,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("image" "images") "a type of data for pictures")
      (es-mx ("imagen") "un tipo de datos para representaciones visuales"))
+    
+    ((en-us ("inequality" "inequalities") "a statement that two expressions or values are not equal")
+     (es-mx ("desigualdad") "una afirmación que dos expresiones o valores no son iguales. hay varios símbolos de desigualdad que incluyen: desigual ≠, mayor que >, menor que <, menor o igual que ≤, mayor o igual que ≥"))
     
     ((en-us ("instance") "a specific example of a data structure, with specific values for each field (e.g. - (4,5) is an instance of an (x,y) coordinate")
     (es-mx ("instancia") "un ejemplo específico de una estructura de datos, con valores específicos para cada campo (por ejemplo, (4,5) es una instancia de una coordenada (x,y))"))
@@ -408,6 +414,9 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("slope") "the steepness of a straight line on a graph")
      (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
+
+    ((en-us ("solution set") "the set of all values or coordinate pairs that will make an equation, inequality, set of equations or set of inequalities true")
+     (es-mx ("conjunto solución") "el conjunto de todos los elementos que hacen verdadera una ecuación o desigualdad"))
     
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center")
      (es-mx ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro"))
