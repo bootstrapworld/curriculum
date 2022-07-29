@@ -121,7 +121,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("design recipe") "a sequence of steps that helps people document, test, and write functions")
      (es-mx ("receta de diseño") "una secuencia de pasos que ayuda a las personas a documentar, probar y escribir funciones"))
 
-    ((en-us ("dimension") "a measurement of something in a particular direction, especially its height, length, or width")
+    ((en-us ("dimension" "dimensions") "a measurement of something in a particular direction, especially height, length, or width. The dimensions of a computer screen, for example, are given as width x height.")
      (es-mx ("dimensión") "una medida de algo en una dirección particular, especialmente su altura, largo o ancho"))
 
     ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
