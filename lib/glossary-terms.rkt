@@ -64,8 +64,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("combination" "combinations") "the number of possible arrangements in a collection of items where the order of the selection does NOT matter. (ABC and CBA would be considered the same combination.)")
      (es-mx ("combinación") "el número de arreglos posibles con los elementos de un conjunto, donde el orden de los elementos usados NO importa. (ABC y CBA se consideran la misma combinación.)"))
 
-   ((en-us ("comments") "messages in the code, generally ignored by the computer, to help people interacting with the code understand what it is doing")
+    ((en-us ("comments") "messages in the code, generally ignored by the computer, to help people interacting with the code understand what it is doing")
      (es-mx ("comentarios de código") "anotaciones en el código que facilitan nuestra comprensión de lo que el código intenta hacer; la computadora no los lee"))
+
+    ((en-us ("compound inequality" "compound inequalities") "an inequality that combines two simple inequalities using _and_ or _or_")
+     (es-mx("desigualdad compuesta") "una desigualdad que combina dos desigualdades simples con _o_ o _y_"))
 
     ((en-us ("conditional") "a code expression made of questions and answers")
      (es-mx ("condicional") "una expresión de código compuesta de preguntas y respuestas"))
