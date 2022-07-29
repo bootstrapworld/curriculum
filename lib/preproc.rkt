@@ -222,25 +222,59 @@
 
 (define (assoc-glossary term)
   ; (printf "doing assoc-glossary ~s ~n" term)
-  (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
-                             (substring term 0 (- (string-length term) 1))
-                             "")])
-    ; (printf "naive sing = ~s~n" naive-singular)
+  (let ([terms (cons term
+                     (cond [(regexp-match "(.*)ies$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list (string-append root "y"))))]
+                           [(regexp-match "(.*)es$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list root (string-append root "e"))))]
+                           [(regexp-match "(.*)s$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list root)))]
+                           [(regexp-match "(.*)ied$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list (string-append root "y"))))]
+                           [(regexp-match "(.*)ed$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list root (string-append root "e"))))]
+                           [(regexp-match "(.*)ing$" term)
+                            => (lambda (x)
+                                 (let ([root (second x)])
+                                   (list root)))]
+                           [else '()]))])
+    ; (printf "terms = ~s\n" terms)
     (let loop ([L *natlang-glossary-list*])
       (if (null? L) #f
           (let* ([c (first L)]
-                 [lhs (first c)])
-            ; (printf "lhs = ~s~n" lhs)
+                 [lhs (first c)] [rhs (second c)])
             (or (cond [(string? lhs)
-                       (and (or (string-ci=? lhs term)
-                                (string-ci=? lhs naive-singular))
-                            c)]
+                       (ormap (lambda (term)
+                                (and (string-ci=? term lhs) c))
+                              terms)]
                       [(list? lhs)
-                       (and (memf (lambda (x) (or (string-ci=? x term)
-                                                  (string-ci=? x naive-singular))) lhs)
-                            (list (first lhs) (second c)))]
+                       (let ([headword (car lhs)])
+                         (unless (string? headword) (set! headword #f))
+                         (ormap (lambda (lhs1)
+                                  (cond [(string? lhs1)
+                                         (ormap (lambda (term)
+                                                  (and (string-ci=? term lhs1) (list (or headword lhs1) rhs)))
+                                                terms)]
+                                        [(list? lhs1)
+                                         (ormap (lambda (term)
+                                                  (ormap (lambda (lhs2)
+                                                           (and (string-ci=? term lhs2) (list (car lhs1) rhs)))
+                                                         lhs1))
+                                                terms)]
+                                        [else #f]))
+                                lhs))]
                       [else #f])
-                (loop (rest L))))))))
+                (loop (cdr L))))))))
 
 (define (assoc-standards std)
   ; (printf "doing assoc-standards ~s\n" std)

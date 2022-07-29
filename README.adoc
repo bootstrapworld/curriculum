@@ -542,11 +542,11 @@ Similarly for “subsections” at level 2, 3, 4, 5.
 Itemized lists have each item paragraph preceded by a ``*`` or
 ``-`` and space.
 
-Emphasized text is set within underscores: `+_..._+`.
+Emphasized text is set within underscores: `+_emphasized text_+`.
 
-Bold text is set within stars: `+*...*+`.
+Bold text is set within stars: `+*bold text*+`.
 
-In-text code fragments are set within backticks: ``++`...`++``.
+In-text code fragments are set within backticks: ``++`code fragment`++``.
 
 Code displays are on contiguous lines that are indented (amount
 of indentation doesn’t matter as long it’s non-0).
@@ -610,20 +610,37 @@ gloss is itself a list of sublists, where the sublist contains three
 elements:
 
 - a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
-- a string specifying glossed item (e.g., `"variable"`),  or a list of strings for
-  grammatically related glossed items, (e.g., `("apply", "applying",
-  "applied")`)
+- the glossed item. This can be:
+** a string, e.g., `"variable"`
+** a list of strings, meant to be grammatically related items, e.g., `("axis"
+"axes")`. Either string can be used in the source (whatever fits the
+prose flow), but the item in the generated glossary will be the first
+item
+** a list of sublist of strings, where each of sublist of strings is
+internally
+grammatically related, but the different sublists are quite different
+terms, e.g., `(("mean") ("average" "ave" "avg"))`. The word in the source is used
+to find the relevant sublist, and _its_ first item is used in the
+generated glossary
 - a string specifying the definition for the glossed item
 
-The reason for associating a list of grammatically related glossed items
-to the same definition is to allow the source document to use whatever
-variant most fits the prose. The item in the generated glossary will
-always be the first item (presumably the singular, non-declined variant) in the list.
+As a convenience, it is not necessary to specify simple grammatical
+declensions in the glossary file. Thus, in the glossary entry for
+`"coordinate"` you don't need to tack on `"coordinates"`, although you
+can call `@vocab` on either term in your source with the assurance that
+they will both refer to `"coordinate"`.
 
-As a convenience, it is not necessary to specify
-"naive plurals" in this list, viz., the ones that simply add "s" to the
-singular. Thus `("coordinate" "coordinates")` can be reduced to
-`("coordinate")`, which can be further reduced to `"coordinate"`.
+This convenience covers:
+
+- `"-s"`, `"-es"`, `"-y/-ies"` plurals and singular present tense, e.g.,
+  `"cars"` maps to `"car"`, `"boxes"` to `"box"`, `"stories"` to
+  `"story"`, `"applies"` to `"apply"`
+- `"-d"`, `"-ed"`, `"y/-ied"` preterites, e.g., `"saved"` maps to
+  `"save"`, `"turned"` to `"turn"`, `"applied"` to `"apply"`
+- `"-ing"` gerunds, e.g., `"applying"` maps to `"apply"`
+
+Latin (the aforementioned `"axis"`/`"axes"`) and Old English plurals
+(`"child"`/`"children"`) need explicit entries however; sorry!
 
 ==== Lesson descriptions and dependencies
 
@@ -825,7 +842,7 @@ You can add your own CSS classes or IDs. Classes are specified
 with an initial dot and IDs with an initial `#`. Note that at
 most one ID is meaningful, although any number of classes may be
 specified. A combination of classes and ID are simply strung
-together, e.g,
+together, e.g.,
 
    [.class1.class2.class3#onlyid]
 
