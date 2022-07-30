@@ -43,6 +43,8 @@
 
 (define *proglang* "pyret")
 
+(define *natlang* "en-us")
+
 (define *other-proglangs* #f)
 
 (define *all-lessons* '())
@@ -223,31 +225,34 @@
 (define (assoc-glossary term)
   ; (printf "doing assoc-glossary ~s ~n" term)
   (let ([terms (cons term
-                     (cond [(regexp-match "(.*)ies$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list (string-append root "y"))))]
-                           [(regexp-match "(.*)es$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list root (string-append root "e"))))]
-                           [(regexp-match "(.*)s$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list root)))]
-                           [(regexp-match "(.*)ied$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list (string-append root "y"))))]
-                           [(regexp-match "(.*)ed$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list root (string-append root "e"))))]
-                           [(regexp-match "(.*)ing$" term)
-                            => (lambda (x)
-                                 (let ([root (second x)])
-                                   (list root)))]
-                           [else '()]))])
+                     (case *natlang*
+                       [(en-us)
+                        (cond [(regexp-match "(.*)ies$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "y"))))]
+                              [(regexp-match "(.*)es$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [(regexp-match "(.*)s$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [(regexp-match "(.*)ied$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "y"))))]
+                              [(regexp-match "(.*)ed$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [(regexp-match "(.*)ing$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [else '()])]
+                       [else '()]))])
     ; (printf "terms = ~s\n" terms)
     (let loop ([L *natlang-glossary-list*])
       (if (null? L) #f
@@ -1283,6 +1288,7 @@
   (set! *exercises-done* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
+  (set! *natlang* (string->symbol (getenv "NATLANG")))
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1322,16 +1328,14 @@
                               ))))))))))
 
     (set! *natlang-glossary-list*
-      (let ([natlang (string->symbol (getenv "NATLANG"))])
-        ; (printf "\nnatlang= ~s\n\n" natlang)
-        (let loop ([gl gl] [ngl '()])
-          (if (null? gl) ngl
-              (let loop2 ([xx (first gl)])
-                (if (null? xx) (loop (rest gl) ngl)
-                    (let ([x (first xx)])
-                      (if (eq? (first x) natlang)
-                          (loop (rest gl) (cons (rest x) ngl))
-                          (loop2 (rest xx)))))))))))
+      (let loop ([gl gl] [ngl '()])
+        (if (null? gl) ngl
+            (let loop2 ([xx (first gl)])
+              (if (null? xx) (loop (rest gl) ngl)
+                  (let ([x (first xx)])
+                    (if (eq? (first x) *natlang*)
+                        (loop (rest gl) (cons (rest x) ngl))
+                        (loop2 (rest xx))))))))))
 
   (when *lesson-plan*
     (set! *all-lessons* (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))))

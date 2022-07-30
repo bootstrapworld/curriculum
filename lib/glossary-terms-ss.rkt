@@ -13,7 +13,7 @@ from the ones in the main glossary file.
 
     ((en-us ("artifact") "an object of cultural or historical interest that was made by a human"))
 
-    ((en-us ("average" "mean") "the sum of all numbers in a quantitative data set, divided by how many there are"))
+    ((en-us (("average") ("mean")) "the sum of all numbers in a quantitative data set, divided by how many there are"))
 
     ((en-us ("bar chart") "a display that uses bars to show counts or proportions in each category"))
 
@@ -31,7 +31,7 @@ from the ones in the main glossary file.
 
     ((en-us ("confirmation bias") "the tendency to continue to believe the same things over time, and not believe new ideas that are different"))
 
-    ((en-us ("count" "tally") "the number of items in a certain category"))
+    ((en-us (("count") ("tally")) "the number of items in a certain category"))
 
     ((en-us ("cyclical") "the quality of happening over and over again in a regular pattern"))
 
