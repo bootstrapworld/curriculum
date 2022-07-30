@@ -46,7 +46,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("category") "unique value(s) in a categorical dataset")
      (es-mx("categoría") "valores únicos en un conjunto de datos categórico"))
 
-    ((en-us ("categorical data") "data whose values are qualities that are not subject to the laws of arithmetic.")
+    ((en-us ("categorical data" "categorical") "data whose values are qualities that are not subject to the laws of arithmetic.")
      (es-mx ("datos categóricos") "datos cuyos valores son cualidades que no están sujetas a las leyes de la aritmética"))
 
     ((en-us ("circle of evaluation" "circles of evaluation") "a 'sentence diagram' of the structure of a mathematical expression")
@@ -355,7 +355,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("Pythagorean Theorem") "the relationship between the squares of the sides of a right triangle; can be used to find diagonal distances on the coordinate plane")
      (es-mx ("Teorema de Pitágoras") "en todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos; se puede usar para encontrar distancias diagonales en el plano de coordenadas"))
 
-    ((en-us ("quantitative data") "number values for which arithmetic makes sense")
+    ((en-us ("quantitative data" "quantitative") "number values for which arithmetic makes sense")
      (es-mx ("datos cuantitativos") "datos con valores que miden alguna cantidad; puede no tener un número fijo de valores posibles"))
     
     ((en-us ("quartile") "three values that divide a dataset into four equal-sized groups")
@@ -443,7 +443,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
     
     ((en-us ("substitute") "replace a variable with a value or expression and evaluate or simplify the resulting expression")
-     (es-mx ("sustitucion") "reemplazar una variable por una cantidad o expresión y evaluar o simplificar"))
+     (es-mx ("sustitución") "reemplazar una variable por una cantidad o expresión y evaluar o simplificar"))
     
     ((en-us ("surface area") "the sum of the areas of all of the faces of a solid figure (polyhedron) or the total area that the surface of the object occupies")
      (es-mx ("área de superficie") "la suma de las áreas de todas las caras de una figura sólida (poliedro) o el área total que ocupa la superficie del objeto"))
