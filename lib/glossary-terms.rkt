@@ -82,8 +82,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("contract error") "errors where the code makes sense, but uses a function with the wrong number or type of arguments")
      (es-mx ("error de contrato") "errores donde el código tiene sentido, pero usa una función con el número o tipo de argumentos incorrectos"))
 
-    ((en-us ("coordinate" "coordinate pair") "a number or set of numbers describing an object's location")
-     (es-mx ("coordenada") "un número o conjunto de números que describen la ubicación de un objeto" "sistema de coordenadas"))
+    ((en-us ("coordinate") "a number describing an object's location")
+     (es-mx ("coordenada") "un número que describe la ubicación de un objeto"))
+
+    ((en-us ("coordinate pair") "a set of numbers describing an object's location on the coordinate plane")
+     (es-mx ("par ordenado") "conjunto de números que describen la ubicación de un objeto relacionándola con el eje-x (el primer valor del par ordenado) y con el eje-y (el segundo valor del par ordenado)"))
 
     ((en-us ("coordinate plane") "a grid formed by a pair of intersecting horizontal and vertical number lines")
      (es-mx ("plano de coordinadas" "plano cartesiano") "una cuadrícula formada por un par de rectas numéricas horizontales y verticales que se cruzan"))
