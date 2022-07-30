@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-28 # last modified
+LASTMOD=2022-07-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -638,6 +638,10 @@ function resolveabbrevs() {
     -e 's/&#8594;/-\&gt;/g' \
     \
     -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
+    $f
+  $SED -i \
+    -e 's/<span class="\([^"]\+\)">\(<figure class="image"\)/\2 style="text-align: \1"/g' \
+    -e 's/\(<\/figure>\)<\/span>/\1/g' \
     $f
   $SED -i \
     -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/\(<\/div>\)<\/p>/\1/' \
