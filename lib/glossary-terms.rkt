@@ -46,7 +46,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("category") "unique value(s) in a categorical dataset")
      (es-mx("categoría") "valores únicos en un conjunto de datos categórico"))
 
-    ((en-us ("categorical data" "categorical") "data whose values are qualities that are not subject to the laws of arithmetic.")
+    ((en-us ("categorical data" "categorical") "data whose values are qualities that are not subject to the laws of arithmetic")
      (es-mx ("datos categóricos") "datos cuyos valores son cualidades que no están sujetas a las leyes de la aritmética"))
 
     ((en-us ("circle of evaluation" "circles of evaluation") "a 'sentence diagram' of the structure of a mathematical expression")
@@ -325,6 +325,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("outlier") "observations whose values are very different from the other observations in the same data set, perhaps due to experimental error. Outliers can also be indicative of data belonging to a different population from the rest of the established samples.")
      (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes al resto de observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
     
+    ((en-us ("percentage") "a ratio showing the parts per hundred")
+     (es-mx ("porcentaje") "la relación de proporción existente entre 2 números. Para hacerlo más intuitivo, se ha usado siempre la relación en términos de cien unidades"))
+
     ((en-us ("permutation") "the number of possible arrangements in a collection of items where the order of the selection matters (ABC and CBA would be considered different permutations)")
      (es-mx ("permutación") "el número de arreglos posibles en una colección de elementos donde el orden de la selección importa (ABC y CBA se considerarían permutaciones diferentes)"))
     
