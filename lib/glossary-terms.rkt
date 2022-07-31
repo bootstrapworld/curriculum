@@ -280,11 +280,17 @@ when it prints out the glossary for a particular unit
     ((en-us ("mathematical expression") "a computation using the rules of arithmetic")
      (es-mx ("expresión matemática") "un cálculo realizado usando las reglas de la aritmética"))
     
+    ((en-us ("maximum") "the largest value in a dataset")
+     (es-mx ("máximo") "el mayor valor dentro de un grupo de números"))
+
     ((en-us (("mean") ("average")) "a representation of the center, or 'typical' value in a set of numbers, calculated as the sum of those numbers divided by the number of values.")
      (es-mx ("el promedio") "Un número que representa el centro o valor 'típico' en un conjunto de datos. Resultado que se obtiene al dividir la suma de varias cantidades entre el número de elementos sumados."))
     
     ((en-us ("median") "the middle element of a quantitative dataset")
-     (es-mx ("mediana") "el elemento intermedio de un conjunto de datos cuantitativos ordenados."))
+     (es-mx ("mediana") "el elemento intermedio de un conjunto de datos cuantitativos ordenados"))
+
+    ((en-us ("minimum") "the smallest value in a dataset")
+     (es-mx ("mínimo") "el menor valor dentro de un grupo de números"))
     
     ((en-us ("method") "a function that is only associated with an instance of a data type, which consumes inputs and produces an output based on that instance")
      (es-mx ("método") "una función que solo está asociada con una instancia de un tipo de dato; la función consume argumentos y produce resultados basado en esa instancia"))
