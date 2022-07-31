@@ -226,7 +226,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("histogram") "a display of quantitative data that uses vertical bars positioned over bins (sub-intervals); each bar’s height reflects the count or percentage of data values in that bin.")
      (es-mx ("histograma" "histogramas") "Un gráfico de barras de frecuencia especial en el que cada barra cuenta la frecuencia de los valores que aparecen en un cierto intervalo."))
     
-    ((en-us ("horizontal axis" "x-axis") "axis on a coordinate plane that runs from left to right")
+    ((en-us (("horizontal axis") ("x-axis")) "axis on a coordinate plane that runs from left to right")
      (es-mx ("eje horizontal") "eje en un diagrama de dispersión que va de izquierda a derecha"))
     
     ((en-us ("hypotenuse") "the side opposite the 90-degree angle in a right triangle")
@@ -490,7 +490,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("variable name") "name of the information that can be different each time a function is used")
      (es-mx ("nombre de variable") "nombre de la información que puede ser diferente cada vez que se utiliza una función"))
     
-    ((en-us ("vertical axis" "y-axis") "number line on a coordinate plane that runs from bottom to top, indicating values in that direction")
+    ((en-us (("vertical axis") ("y-axis")) "number line on a coordinate plane that runs from bottom to top, indicating values in that direction")
      (es-mx ("eje vertical") "El eje en un gráfico de dispersión que corre de arriba hacia abajo"))
     
     ((en-us ("vertical line test") "a strategy for determining whether or not a graph represents a function by confirming that no vertical line can be drawn to reveal that an x-value corresponds to more than one y-value")
