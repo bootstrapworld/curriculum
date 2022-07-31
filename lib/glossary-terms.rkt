@@ -403,6 +403,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("sample instances") "a collection of single instances, or also used to describe illustrative instances that we use to provide examples of a data structure")
      (es-mx ("instancias de muestra") "un conjunto de instancias únicas, usado para describir instancias ilustrativas que utilizamos para proporcionar ejemplos de una estructura de datos"))
     
+   ((en-us ("sample size") "the number of participants or observations included in a study")
+     (es-mx ("tamaño de la muestra") "aquel número determinado de sujetos o cosas que componen la muestra extraída de una población"))
+
     ((en-us ("scale" "scale up" "scale down") "resize an image to be larger or smaller while maintaining ratios and proportions")
      (es-mx ("escalar") "aumentar o reducir proporcionalmente"))
     
@@ -436,7 +439,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("state") "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")
      (es-mx ("estado") "el valor de un sistema que cambia en cualquier momento (es decir, un semáforo puede estar en un estado 'rojo', 'amarillo' o 'verde'). En Pyret, el estado de un reactor es su valor actual."))
     
-    ((en-us ("statistical inference") "using information from a sample to draw conclusions about the larger population from which the sample was taken")
+    ((en-us ("statistical inference" "inference") "using information from a sample to draw conclusions about the larger population from which the sample was taken")
      (es-mx ("inferencia estadística") "utilizar información de una muestra para sacar conclusiones sobre la población más grande de la que se origina la muestra"))
     
     ((en-us ("strength") "of a relationship between two quantitative variables: how much the value of one variable tells us about the value of the other")
