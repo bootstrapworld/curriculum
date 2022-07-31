@@ -199,7 +199,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("function block") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión a evaluar cuando se utiliza la función"))
     
-    ((en-us ("function definition") "code that names a function, lists its variables, and states the expression to compute when the function is used")
+    ((en-us ("function definition" "definition") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx ("definición de función") "que designa una función, enumera sus variables e indica la expresión a evaluar cuando se utiliza la función"))
 
     ((en-us ("function notation") "a standard way to denote functions, beginning with a function name, such as _f_ or _gt_, the variable(s) the function takes in, such as _x_ or _size_, and a definition of what the function does using a formula in terms of the variable. For example, f(x) = x + 1 takes in a number and adds 1.")
