@@ -367,7 +367,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("quantitative data" "quantitative") "number values for which arithmetic makes sense")
      (es-mx ("datos cuantitativos") "datos con valores que miden alguna cantidad; puede no tener un número fijo de valores posibles"))
     
-    ((en-us ("quartile") "three values that divide a dataset into four equal-sized groups")
+    ((en-us ("quartile") "each of four equal groups into which a population can be divided according to the distribution of values of a particular variable.")
      (es-mx ("cuartiles") "valores que dividen una muestra de datos en cuatro partes iguales"))
     
     ((en-us ("r" "r-value") "a number between −1 and 1 that measures the direction and strength of a linear relationship between two quantitative variables (also known as correlation value)")
