@@ -41,7 +41,7 @@ Some possibilities include: {3,3,3,3}, {1,2,4,5}, {1,1,4,6}... any four ages tha
 
 Without a measure of @vocab{spread}, just knowing the mean doesn't tell us enough about the shape of the data. 
 
-When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box-plot. 
+When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box plot. 
 
 Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
 
