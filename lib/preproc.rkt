@@ -250,7 +250,7 @@
                               [(regexp-match "(.*)ing$" term)
                                => (lambda (x)
                                     (let ([root (second x)])
-                                      (list root)))]
+                                      (list root (string-append root "e"))))]
                               [else '()])]
                        [else '()]))])
     ; (printf "terms = ~s\n" terms)

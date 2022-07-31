@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-30 # last modified
+LASTMOD=2022-07-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1807,7 +1807,7 @@ function batchhtmltopdf() {
 
 function rmtmpfilesaux() {
 
-  for f in adoc aux log rkt tex title; do
+  for f in aux log rkt tex title; do
     find . -name \*.$f -delete
   done
 
@@ -2647,10 +2647,23 @@ function doadocpostproc() {
   run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
   run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
 
+  rmadocfiles
+
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
   echo " "
+}
+
+function rmadocfiles() {
+  test $DEBUG && return
+
+  test -s $ADOC_INPUT || return
+
+  for f in $(cat $ADOC_INPUT); do
+    g=$(echo $f|$SED -e 's/\.cached\/\.//' -e 's/\.asc$/.adoc/')
+    test -f $g && rm $g
+  done
 }
 
 function createabyss() {
