@@ -13,8 +13,8 @@
   )
 
   ("program-list" "program list"
-    ("pyret" "https://code.pyret.org/")
-    ("wescheme" "https://www.wescheme.org/console")
+    ("pyret" "https://code.pyret.org/" "code.pyret.org (CPO)")
+    ("wescheme" "https://www.wescheme.org/console" "WeScheme")
   )
 
   ; no spaces in starter file shortname!
