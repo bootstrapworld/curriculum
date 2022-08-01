@@ -20,7 +20,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("aplicar" "applicado" "applicada") "dar argumentos a una función"))
 
     ((en-us ("argument") "the inputs to a function; the expressions for each argument follow the function name")
-     (es-mx ("argumento" "argumentos") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
+     (es-mx ("argumento") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
 
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
@@ -296,7 +296,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("método") "una función que solo está asociada con una instancia de un tipo de dato; la función consume argumentos y produce resultados basado en esa instancia"))
     
     ((en-us ("mode") "the most commonly appearing categorical or quantitative value or values in a dataset")
-     (es-mx ("moda" "modas") "el valor (o valores) que ocurren con mayor frecuencia en un conjunto de datos"))
+     (es-mx ("moda") "el valor (o valores) que ocurren con mayor frecuencia en un conjunto de datos"))
     
     ((en-us ("name") "how we refer to a function or value defined in a language (examples: +, *, star, circle)")
      (es-mx ("nombre") "cómo nos referimos a una función o valor definido en un idioma (ejemplos: +, *, star, circle)"))
@@ -320,7 +320,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("número") "un tipo de datos que representa un número real"))
     
     ((en-us ("operator") "a symbol that manipulates two Numbers and produces a result")
-     (es-mx ("operador" "operadores") "un símbolo que manipula dos números y produce un resultado"))
+     (es-mx ("operador") "un símbolo que manipula dos números y produce un resultado"))
     
     ((en-us ("order") "an arrangement of data according to some pattern")
      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
@@ -452,7 +452,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("fuerza") "en una relación entre dos variables cuantitativas, cuánto nos dice el valor de una variable sobre el valor de la otra"))
     
     ((en-us ("string") "a data type for any sequence of characters between quotation marks (examples: \"hello\", \"42\", \"this is a string!\")")
-     (es-mx ("cadena" "cadenas") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
+     (es-mx ("cadena") "cualquier secuencia de caracteres entre comillas (ejemplos: \"hello\", \" 42\", \"esto es una cadena! \")"))
     
     ((en-us ("substitute") "replace a variable with a value or expression and evaluate or simplify the resulting expression")
      (es-mx ("sustitución") "reemplazar una variable por una cantidad o expresión y evaluar o simplificar"))
@@ -482,7 +482,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("unidad de prueba") "un ejemplo que muestra el uso de una función con un valor o valores específicos y la respuesta que debe producir"))
     
     ((en-us ("value") "a specific piece of data, like 5 or \"hello\"")
-     (es-mx ("valor" "valores") "una pieza específica de datos, como 5 o \" hello \""))
+     (es-mx ("valor") "una pieza específica de datos, como 5 o \" hello \""))
     
     ((en-us ("variable") "a value that changes, often represented by a letter or symbol")
      (es-mx ("variable") "algo que cambia"))
