@@ -151,8 +151,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("entry") "a single value in a table, belonging to a particular row and column")
      (es-mx ("dato") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
-    ((en-us ("equation") "a statement that two values or expressions are equal")
-     (es-mx ("ecuación") "igualdad entre dos valores o expresiones"))
+    ((en-us ("equation") "a mathematical description of the relationship between two variables or quantities")
+     (es-mx ("ecuación") "una descripción matemática de la relación entre dos variables o cantidades"))
 
     ((en-us ("error message") "information from the computer about errors in code")
      (es-mx ("mensaje de error" "mensajes de error") "información que provee la computadora sobre errores en el Código"))
