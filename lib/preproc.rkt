@@ -3023,7 +3023,30 @@
       (sexp->code x #:multi-line multi-line #:parens parens)
       (cm-code x #:multi-line multi-line #:parens parens)))
 
+(define (contract-type x)
+  (if (list? x)
+      (let ([name (first x)] [type (second x)])
+        (format "~a {two-colons} ~a" name
+                (if (list? type)
+                    (string-append (contract-type (first type))
+                      " -> "
+                      (contract-types-to-commaed-string (rest type)))
+                    type)))
+      x))
+
+(define (contract-types-to-commaed-string xx)
+  (let* ([n (length xx)]
+         [contains-parens? (ormap list? xx)]
+         [s
+           (string-join
+             (map contract-type xx)
+             ", ")])
+    (if contains-parens?
+        (string-append "(" s ")")
+        s)))
+
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
+  ;FIXME: do we need a keyword to avoid the prefix character
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
@@ -3040,7 +3063,7 @@
           "{two-colons}"
           " "
           ; used to not have commas in WeScheme
-          (vars-to-commaed-string domain-list)
+          (contract-types-to-commaed-string domain-list)
           " ‑> "
           range
           (if purpose
