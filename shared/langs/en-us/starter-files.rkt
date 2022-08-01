@@ -299,4 +299,5 @@
   ))
 
 (define *do-not-autoinclude-in-material-links*
-  '("editor"))
+  '("editor" "program-list")
+    )
