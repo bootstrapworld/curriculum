@@ -250,6 +250,32 @@
                               [(regexp-match "(.*)ing$" term)
                                => (lambda (x)
                                     (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [else '()])]
+                       [(es-mx)
+                        (cond [(regexp-match "(.*)iones$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "ión"))))]
+                              [(regexp-match "(.*)ques$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "c"))))]
+                              [(regexp-match "(.*)gues$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "g"))))]
+                              [(regexp-match "(.*)ces$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "z"))))]
+                              [(regexp-match "(.*)es$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [(regexp-match "(.*)s$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
                                       (list root)))]
                               [else '()])]
                        [else '()]))])

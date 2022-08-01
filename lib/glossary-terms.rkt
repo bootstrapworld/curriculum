@@ -26,13 +26,13 @@ when it prints out the glossary for a particular unit
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
 
     ((en-us ("axis" "axes") "A reference line, used to determine the position of a coordinate")
-     (es-mx ("eje" "ejes") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
+     (es-mx ("eje") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
 
     ((en-us ("bar chart") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
     ((en-us ("bin") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
-     (es-mx ("intervalo" "intervalos") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
+     (es-mx ("intervalo") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
 
     ((en-us ("Boolean") "a type of data with two values: true and false")
      (es-mx ("booleano") "un tipo de dato con dos valores: verdadero (true) y falso (false)"))
@@ -41,7 +41,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("diagrama de caja" "diagramas de caja") "El diagrama de caja (también conocido como diagrama de caja y bigotes) es una forma de mostrar la distribución de datos basada en el resumen de cinco números: mínimo (el valor más bajo), primer cuartil, mediana, tercer cuartil y máximo (el valor más alto)."))
 
     ((en-us ("calling" "calls") "using a function by giving it inputs")
-     (es-mx ("llamada" "llamadas") "Uso de una función dándole valores"))
+     (es-mx ("llamada") "Uso de una función dándole valores"))
 
     ((en-us ("category") "unique value(s) in a categorical dataset")
      (es-mx("categoría") "valores únicos en un conjunto de datos categórico"))
@@ -115,7 +115,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("debug") "to find and fix errors in one's code")
      (es-mx ("depurar") "encontrar y corregir errores en el código"))
 
-    ((en-us ("define" "defined") "to associate a descriptive name with a value")
+    ((en-us ("define") "to associate a descriptive name with a value")
      (es-mx ("definir") "asociar un nombre descriptivo con un valor"))
 
     ((en-us ("definitions area") "the left-most text box in the Editor where definitions for values and functions are written")
@@ -176,7 +176,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("variable explicativa") "cualquier factor que pueda influir en la variable de respuesta, generalmente representada en el eje x de un diagrama de dispersión."))
 
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
-     (es-mx ("expresión" "expresiones") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
+     (es-mx ("expresión") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
     
     ((en-us ("extend") "a table query that creates a table with new column(s), whose entries are computed with an expression")
      (es-mx ("extender") "una consulta de tabla que crea una tabla con nuevas columnas, cuyas entradas se calculan con una expresión"))
@@ -194,7 +194,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("forma") "la forma de una relación entre dos variables cuantitativas: si los dos variables varían juntas linealmente o de alguna otra manera"))
     
     ((en-us ("function") "a relation from a set of inputs to a set of possible outputs, where each input is related to exactly one output")
-     (es-mx ("función" "funciones") "una relación que consume argumentos y produce un resultado"))
+     (es-mx ("función") "una relación que consume argumentos y produce un resultado"))
     
     ((en-us ("function block") "code that names a function, lists its variables, and states the expression to compute when the function is used")
      (es-mx  ("bloque de función") "código que denomina la función, clasifica sus variables, y propone la expresión a evaluar cuando se utiliza la función"))
@@ -224,7 +224,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("función auxiliar") "Una función invocada desde otras funciones con el propósito de realizar una tarea concreta requerida por éstas" "operador"))
     
     ((en-us ("histogram") "a display of quantitative data that uses vertical bars positioned over bins (sub-intervals); each bar’s height reflects the count or percentage of data values in that bin.")
-     (es-mx ("histograma" "histogramas") "Un gráfico de barras de frecuencia especial en el que cada barra cuenta la frecuencia de los valores que aparecen en un cierto intervalo."))
+     (es-mx ("histograma") "Un gráfico de barras de frecuencia especial en el que cada barra cuenta la frecuencia de los valores que aparecen en un cierto intervalo."))
     
     ((en-us (("horizontal axis") ("x-axis")) "axis on a coordinate plane that runs from left to right")
      (es-mx ("eje horizontal") "eje en un diagrama de dispersión que va de izquierda a derecha"))
@@ -367,7 +367,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("quantitative data" "quantitative") "number values for which arithmetic makes sense")
      (es-mx ("datos cuantitativos") "datos con valores que miden alguna cantidad; puede no tener un número fijo de valores posibles"))
     
-    ((en-us ("quartile") "three values that divide a dataset into four equal-sized groups")
+    ((en-us ("quartile") "each of four equal groups into which a population can be divided according to the distribution of values of a particular variable.")
      (es-mx ("cuartiles") "valores que dividen una muestra de datos en cuatro partes iguales"))
     
     ((en-us ("r" "r-value") "a number between −1 and 1 that measures the direction and strength of a linear relationship between two quantitative variables (also known as correlation value)")

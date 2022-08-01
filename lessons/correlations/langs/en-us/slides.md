@@ -29,7 +29,7 @@ But those analyses tell us nothing about the **relationship** between animals' a
 
 In order to understand such relationships, we have to expand our view from one column to two. 
 
-This goes hand-in-hand with expanding our display **from a 1-dimensional histogram or box-plot to a 2-dimensional scatter plot.**
+This goes hand-in-hand with expanding our display **from a 1-dimensional histogram or box plot to a 2-dimensional scatter plot.**
 
 <!--
 
