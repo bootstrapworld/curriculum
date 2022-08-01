@@ -2154,6 +2154,16 @@
             (let* ([ti (list-ref ex 1)]
                    [exer (list-ref ex 0)]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
+
+              (when (string=? ti "")
+                (let ([exer.titletxt
+                        (build-path "lessons"
+                                    (path-replace-extension
+                                      (regexp-replace "/pages/" exer "\\0.cached/.")
+                                      ".titletxt"))])
+                  (when (file-exists? exer.titletxt)
+                    (set! ti (call-with-input-file exer.titletxt read-line)))))
+
               (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
                        ti *dist-root-dir* exer *dist-root-dir* soln)))
           ))
