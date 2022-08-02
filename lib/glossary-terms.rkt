@@ -151,7 +151,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("entry") "a single value in a table, belonging to a particular row and column")
      (es-mx ("dato") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
-    ((en-us ("equation") "a mathematical description of the relationship between two variables or quantities")
+    ((en-us ("equation") "a mathematical description of the relationship between two variables or quantities, in which they are equal")
      (es-mx ("ecuación") "una descripción matemática de la relación entre dos variables o cantidades"))
 
     ((en-us ("error message") "information from the computer about errors in code")
@@ -238,7 +238,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("image") "a type of data for pictures")
      (es-mx ("imagen") "un tipo de datos para representaciones visuales"))
     
-    ((en-us ("inequality") "a statement that two expressions or values are not equal")
+    ((en-us ("inequality") "a mathematical description of the relationship between two variables or quantities, in which they are not necessarily equal")
      (es-mx ("desigualdad") "una afirmación que dos expresiones o valores no son iguales. hay varios símbolos de desigualdad que incluyen: desigual ≠, mayor que >, menor que <, menor o igual que ≤, mayor o igual que ≥"))
     
     ((en-us ("instance") "a specific example of a data structure, with specific values for each field (e.g. - (4,5) is an instance of an (x,y) coordinate")
@@ -484,7 +484,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("value") "a specific piece of data, like 5 or \"hello\"")
      (es-mx ("valor") "una pieza específica de datos, como 5 o \" hello \""))
     
-    ((en-us ("variable") "a value that changes, often represented by a letter or symbol")
+    ((en-us ("variable") "a name or symbol that stands for some value or expression, often a value or expression that changes")
      (es-mx ("variable") "algo que cambia"))
     
     ((en-us ("variable name") "name of the information that can be different each time a function is used")
