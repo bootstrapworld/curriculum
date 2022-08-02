@@ -811,12 +811,18 @@
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)]
-           [adoc-img (enclose-tag "figure" ".image"
+           [img-id (format "img_id_~a" (gen-new-id))]
+           [adoc-img (enclose-tag "span" ".image-figure"
                        (string-append
                          ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                          adoc-img
                          (if image-caption
-                             (enclose-tag "figcaption" "" image-caption) "")))])
+                             (enclose-tag "span" ".image-caption" image-caption
+                               #:attribs (format "id=~s" img-id))
+                             ""))
+                       #:attribs
+                       (and image-caption
+                           (format "aria-describedby=~s" img-id)))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if centered?
           (enclose-span ".centered-image" adoc-img)
