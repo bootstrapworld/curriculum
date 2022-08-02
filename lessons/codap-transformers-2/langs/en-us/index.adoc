@@ -95,8 +95,11 @@ Note that `Age (years)` - or any attribute that is two or more words - needs to 
 Debrief with students. Some guiding questions on filtering:
 
 - What is the role of the `Filter` Transformer? How is its role unique from that of the Trasnformer's _expression_?
+** _The `Filter` Transformer walks through the table's rows, applying the expression to each row - then producing a new table containing only rows for which the expression returns `true`._
 - Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+** _We could use the `Filter` Transformer to produce two new tables - one with only cats, and one with only dogs. We could then analyze and compare the weeks to adoption for each species._
 - If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+** _We would filter out cats where `Age (years) > 5`._
 
 == Transforming Columns @duration{10 minutes}
 
@@ -138,7 +141,9 @@ Complete the worksheet @printable-exercise{pages/codap-build.adoc} in the @start
 Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
 
 - How is `Build Attribute` similar to `Transform Attribute`? How are they different?
+** _`Build Attribute` creates an additional column, using the expression that we provide. `Transform Attribute` converts an existing column, using the expression that we provide._
 - When might it make more sense to _build_ an attribute, rather than to _transform_ it?
+** _We would build rather than transform if we want to do comparisons across columns, or need to preserve the original column for any reason (e.g., we want measurements in metric and standard units.)_
 
 Being able to create and define a Transformer  is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
 
