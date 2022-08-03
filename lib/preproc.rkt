@@ -853,6 +853,7 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (qualify-proglang container dirname)
+  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" container dirname *proglang*)
   (unless (or (string=? *proglang* "pyret")
               (regexp-match (string-append "-" *proglang* "$") dirname))
     (let ([q (string-append dirname "-" *proglang*)])
@@ -861,7 +862,13 @@
   dirname)
 
 (define (make-lesson-link f link-text)
-  ; (printf "doing make-lesson-link ~s\n\n" f)
+  (cond [(regexp-match "/$" f)
+         (set! f (string-append f "index.adoc"))]
+        [(regexp-match "^lessons/[^/]*$" f)
+         (set! f (string-append f "/index.adoc"))])
+
+  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+
   (cond [(regexp-match "^(.*)/([^/]*)$" f)
          => (lambda (m)
               (let* ([dir (second m)]
@@ -886,7 +893,7 @@
                                         (call-with-input-file f.titletxt read-line))]
                        [existent-file? #f])
                   (cond [(or (path-has-extension? f ".adoc")
-                             (path-has-extension? f ".html") (path-has-extension? ".shtml"))
+                             (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
                          (let ([f.adoc (path-replace-extension f ".adoc")]
                                [f.html (path-replace-extension f ".html")]
                                [f.shtml (path-replace-extension f ".shtml")]
@@ -903,7 +910,10 @@
                                   (set! existent-file? #t)]
                                  [(file-exists? f.pdf)
                                   (set! f f.pdf)
-                                  (set! existent-file? #t)]))]
+                                  (set! existent-file? #t)]
+                                 [(path-has-extension? f ".adoc")
+                                  (set! f
+                                    (if (= (length dir-compts) 2) f.shtml f.html))]))]
                         [(path-has-extension? f ".pdf")
                          (when (file-exists? f)
                            (set! existent-file? #t))])
