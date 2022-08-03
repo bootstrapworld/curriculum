@@ -18,19 +18,19 @@ Transformer: Filter
 
 Expression: Fixed = true
 
-|@span{.center}{*`filter-is-young`*}
+| @span{.center}{*`filter-is-young`*}
 
 Transformer: Filter
 
 Expression: Age < 4
 
-|@span{.center}{*`filter-is-female`*}
+| @span{.center}{*`filter-is-female`*}
 
 Transformer: Filter
 
 Expression: Sex = “female”
 
-|@span{.center}{*`build-kilos`*}
+| @span{.center}{*`build-kilos`*}
 
 Transformer: Build Attribute
 
@@ -38,19 +38,19 @@ Name of new attribute: Kilos
 
 Expression: Weight (lbs) / 2.2
 
-|@span{.center}{*`filter-is-heavy`*}
+| @span{.center}{*`filter-is-heavy`*}
 
 Transformer: Filter
 
 Expression: Kilos > 25
 
-|@span{.center}{*`filter-is-dog`*}
+| @span{.center}{*`filter-is-dog`*}
 
 Transformer: Filter
 
 Expression: Species =  “dog”
 
-|@span{.center}{*`filter-is-cat`*}
+| @span{.center}{*`filter-is-cat`*}
 
 Transformer: Filter
 
@@ -75,7 +75,7 @@ Solve the word problems below using the Transformers listed above.
 | *@n*
 | Create a table of all female cats.
 | No
-|Apply `filter-is-female`.
+| Apply `filter-is-female`.
 
 Apply `filter-is-cat`.
 | filter-is-cat(filter-is-female(animals-table))
@@ -87,6 +87,7 @@ Apply `filter-is-cat`.
 Apply `filter-is-young`.
 
 Apply `filter-is-fixed`.}
+
 | @ifsoln{filter-is-young(filter-is-fixed(animals-table))}
 
 | *@n*
@@ -98,6 +99,7 @@ Apply `filter-is-female`.
 Apply `filter-is-dog`.
 
 Apply `build-kilos`.}
+
 | @ifsoln{filter-is-female(filter-is-dog(animals-table))}
 
 | *@n*
@@ -109,6 +111,7 @@ Apply `filter-is-dog`.
 Apply `build-kilos`.
 
 Apply `filter-is-heavy`.}
+
 | @ifsoln{filter-is-dog(build-kilos(filter-is-heavy(animals-table))}
 
 | *@n*
@@ -120,6 +123,7 @@ Apply `filter-is-young`.
 Apply `filter-is-fixed`.
 
 Apply `filter-is-dog`.}
+
 | @ifsoln{filter-is-young(filter-is-fixed(filter-is-dog(animals-table)))}
 
 |===

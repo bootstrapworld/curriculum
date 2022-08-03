@@ -496,6 +496,16 @@ span.clear {
   width:              100%;
 }
 
+/* Images and Captions */
+.image-figure .image-caption { 
+  width:      100%; 
+  max-width:  300px; 
+  display:    inline-block; 
+  font-style: italic; 
+  line-height: 1.5ex;
+  word-break: break-word;
+}
+.image-figure .image-caption::before { content: 'Source: '; }
 /************************************************************************************
 * WORKBOOK PAGES
 */
@@ -515,7 +525,12 @@ body.workbookpage {
   padding:   0;
 }
 
-body.workbookpage p .editbox { line-height: 1rem; vertical-align: baseline; font-size: 9pt; }
+/* Make code match text size/layout */
+body.workbookpage p .editbox, body.workbookpage pre .editbox { 
+  line-height: 1rem; 
+  vertical-align: baseline; 
+  font-size: 9pt !important; 
+}
 
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
@@ -528,6 +543,8 @@ body:not(.LessonPlan) .sect2 > h3:first-child {
 }
 
 body:not(.LessonPlan) .description { display: none; }
+
+.solution { font-style: italic; }
 
 /**
  * Auto-numbering.
@@ -548,12 +565,6 @@ table .autonum::after { content: none; }
 .data-cycle .fitbruby, .data-cycle .fitb { 
   text-align: left; font-style: italic; font-size:  1rem;
 }
-
-
-/* Note(Emmanuel): use display:flex and get rid of these! */
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { background: gray; border: gray; }
@@ -623,6 +634,10 @@ body:not(.LessonPlan) .recipe p {
     margin-bottom:    0;
     line-height:      inherit;
 }
+
+.studentAnswerShort  { min-width: 60pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
 
 /* CODAP-specific formatting */
 /* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
@@ -809,7 +824,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 .editbox {
   width:              auto;
   background-color:   #f7f7f8;
-  margin:             0 2px;
+  margin:             2px;
   padding:            0 2px;
   text-align:         left;
 }

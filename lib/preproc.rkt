@@ -811,12 +811,18 @@
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)]
-           [adoc-img (enclose-tag "figure" ".image"
+           [img-id (format "img_id_~a" (gen-new-id))]
+           [adoc-img (enclose-tag "span" ".image-figure"
                        (string-append
                          ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                          adoc-img
                          (if image-caption
-                             (enclose-tag "figcaption" "" image-caption) "")))])
+                             (enclose-tag "span" ".image-caption" image-caption
+                               #:attribs (format "id=~s" img-id))
+                             ""))
+                       #:attribs
+                       (and image-caption
+                           (format "aria-describedby=~s" img-id)))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if centered?
           (enclose-span ".centered-image" adoc-img)
@@ -845,6 +851,84 @@
          (let ([y (first x)])
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
+
+(define (qualify-proglang container dirname)
+  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" container dirname *proglang*)
+  (unless (or (string=? *proglang* "pyret")
+              (regexp-match (string-append "-" *proglang* "$") dirname))
+    (let ([q (string-append dirname "-" *proglang*)])
+      (when (directory-exists? (build-path container q))
+        (set! dirname q))))
+  dirname)
+
+(define (make-lesson-link f link-text)
+  (cond [(regexp-match "/$" f)
+         (set! f (string-append f "index.adoc"))]
+        [(regexp-match "^lessons/[^/]*$" f)
+         (set! f (string-append f "/index.adoc"))])
+
+  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+
+  (cond [(regexp-match "^(.*)/([^/]*)$" f)
+         => (lambda (m)
+              (let* ([dir (second m)]
+                     [snippet (third m)]
+                     [dir-compts (regexp-split #rx"/" dir)]
+                     [second-compt (second dir-compts)])
+
+                (let* ([first-compt (first dir-compts)]
+                       [second-compt (second dir-compts)]
+                       [q (qualify-proglang first-compt second-compt)])
+                  (unless (string=? q second-compt)
+                    (set! dir
+                      (string-join
+                        (cons first-compt
+                              (cons q (rest (rest dir-compts)))) "/"))
+                    (set! f (string-append dir "/" snippet))))
+
+                (let* ([f.titletxt (path-replace-extension
+                                     (string-append dir "/.cached/." snippet)
+                                     ".titletxt")]
+                       [page-title (and (file-exists? f.titletxt)
+                                        (call-with-input-file f.titletxt read-line))]
+                       [existent-file? #f])
+                  (cond [(or (path-has-extension? f ".adoc")
+                             (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
+                         (let ([f.adoc (path-replace-extension f ".adoc")]
+                               [f.html (path-replace-extension f ".html")]
+                               [f.shtml (path-replace-extension f ".shtml")]
+                               [f.pdf (path-replace-extension f ".pdf")])
+                           (cond [(file-exists? f.html)
+                                  (set! f f.html)
+                                  (set! existent-file? #t)]
+                                 [(file-exists? f.shtml)
+                                  (set! f f.shtml)
+                                  (set! existent-file? #t)]
+                                 [(file-exists? f.adoc)
+                                  (set! f
+                                    (if (= (length dir-compts) 2) f.shtml f.html))
+                                  (set! existent-file? #t)]
+                                 [(file-exists? f.pdf)
+                                  (set! f f.pdf)
+                                  (set! existent-file? #t)]
+                                 [(path-has-extension? f ".adoc")
+                                  (set! f
+                                    (if (= (length dir-compts) 2) f.shtml f.html))]))]
+                        [(path-has-extension? f ".pdf")
+                         (when (file-exists? f)
+                           (set! existent-file? #t))])
+                  (unless existent-file?
+                    (check-link f)
+                    (printf "WARNING: Missing file ~a\n\n" f))
+                  (when (and (or (not link-text) (string=? link-text "")) page-title)
+                    (set! link-text page-title))
+                  (let ([link-output
+                          (format "link:~apass:[~a][~a~a]"
+                                  *dist-root-dir* f link-text
+                                  (if *lesson-plan* ", window=\"_blank\"" ""))])
+                    link-output))))]
+        [else
+          (printf "WARNING: Insufficient path for @lesson-link\n\n")]))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
   ; (printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
@@ -1564,6 +1648,12 @@
                                                o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
+                           [(string=? directive "lesson-link")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [n (length args)]
+                                   [page (first args)]
+                                   [link-text (if (> n 1) (second args) "")])
+                              (display (make-lesson-link page link-text) o))]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 (string=? directive "handout")
