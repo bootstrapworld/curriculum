@@ -8,6 +8,7 @@
   unquote-string
   read-data-file
   gen-new-id
+  qualify-proglang
   )
 
 (define (truthy-getenv ev)
@@ -70,3 +71,12 @@
 (define (gen-new-id)
   (set! *id-counter* (+ *id-counter* 1))
   *id-counter*)
+
+(define (qualify-proglang dirname rel-root *proglang*)
+  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" container dirname *proglang*)
+  (unless (or (string=? *proglang* "pyret")
+              (regexp-match (string-append "-" *proglang* "$") dirname))
+    (let ([q (string-append dirname "-" *proglang*)])
+      (when (directory-exists? (build-path rel-root q))
+        (set! dirname q))))
+  dirname)
