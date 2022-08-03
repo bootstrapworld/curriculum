@@ -16,43 +16,43 @@
 |								    	| *Prediction*	| *Result*
 ||                                		| *Prediction*	| *Result*
 
-| @n @show{(code '(<= 3 4))}   			| @fitb{}{}  	| @fitb{}{@ifsoln{_true_}}
-||@n @show{(code '(string>? "a" "b"))} 	| @fitb{}{}  	| @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(<= 3 4))}   			| @fitb{}{}  	| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string>? "a" "b"))} 	| @fitb{}{}  	| @fitb{}{@ifsoln{false}}
 
-| @n @show{(code '(= 3 2))}				| @fitb{}{}		| @fitb{}{@ifsoln{_false_}
-||@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(= 3 2))}				| @fitb{}{}		| @fitb{}{@ifsoln{false}
+||@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
 
-| @n @show{(code '(< 2 4))}				| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-||@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(< 2 4))}				| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
 
-| @n @show{(code '(>= 5 5))}			| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-||@n @show{(code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+| @n @show{(code '(>= 5 5))}			| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
 
-| @n @show{(code '(>= 4 6))}			| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
-||@n @show{(code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(>= 4 6))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
 
 
-| @n @show{(code '(<> 3 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
-||@n @show{(code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+| @n @show{(code '(<> 3 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
 |===
 
 @vspace{1ex}
 
 @n In your own words, describe what `<` does.
 
-@fitb{}{@ifsoln{_checks whether the first number is smaller than the second number, returns true if it is and false if it isn't_}}
+@fitb{}{@ifsoln{checks whether the first number is smaller than the second number, returns true if it is and false if it isn't}}
 
 @vspace{1ex}
 
 @n In your own words, describe what `>=` does.
 
-@fitb{}{@ifsoln{_checks whether the first number is greater than or equal to the second number, returns true if it is and false if it isn't_}}
+@fitb{}{@ifsoln{checks whether the first number is greater than or equal to the second number, returns true if it is and false if it isn't}}
 
 @vspace{1ex}
 
 @n In your own words, describe what `<>` does.
 
-@fitb{}{@ifsoln{_checks whether the two numbers are unequal, returns true if they're unequal and false if they're equal_}}
+@fitb{}{@ifsoln{checks whether the two numbers are unequal, returns true if they're unequal and false if they're equal}}
 
 @vspace{1ex}
 
@@ -60,18 +60,18 @@
 |===
 |													 | *Prediction:*	| *Result:*
 @ifproglang{wescheme}{
-|@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
-|@n @show{(code '(string=? "tree"   "tree"))}		 | @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
+|@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|@n @show{(code '(string=? "tree"   "tree"))}		 | @fitb{}{}		| @fitb{}{@ifsoln{true}}
 }
-|@n @show{(code '(string-contains?  "catnap" "cat"))}| @fitb{}{}		| @fitb{}{@ifsoln{_true_}}
-|@n @show{(code '(string-contains?  "cat" "catnap"))}| @fitb{}{}		| @fitb{}{@ifsoln{_false_}}
+|@n @show{(code '(string-contains?  "catnap" "cat"))}| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+|@n @show{(code '(string-contains?  "cat" "catnap"))}| @fitb{}{}		| @fitb{}{@ifsoln{false}}
 |===
 
 @vspace{1ex}
 
 [cols=".>10, .>6", frame="none", stripes="none", grid="none"]
 |===
-|@n How many *Numbers* are there in the entire universe? 	| @fitb{}{@ifsoln{_infinite_}}
-|@n How many *Strings* are there in the entire universe?	| @fitb{}{@ifsoln{_infinite_}}
-|@n How many *Booleans* are there in the entire universe?	| @fitb{}{@ifsoln{_two_}}
+|@n How many *Numbers* are there in the entire universe? 	| @fitb{}{@ifsoln{infinite}}
+|@n How many *Strings* are there in the entire universe?	| @fitb{}{@ifsoln{infinite}}
+|@n How many *Booleans* are there in the entire universe?	| @fitb{}{@ifsoln{two}}
 |===
