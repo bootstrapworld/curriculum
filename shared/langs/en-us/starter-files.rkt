@@ -10,11 +10,13 @@
   ("editor" "the editor"
     ("pyret" "https://code.pyret.org/editor" "code.pyret.org (CPO)")
     ("wescheme" "https://www.wescheme.org/openEditor" "WeScheme")
+    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html" "CODAP")
   )
 
   ("program-list" "program list"
     ("pyret" "https://code.pyret.org/" "code.pyret.org (CPO)")
     ("wescheme" "https://www.wescheme.org/console" "WeScheme")
+    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html" "CODAP")
   )
 
   ; no spaces in starter file shortname!
