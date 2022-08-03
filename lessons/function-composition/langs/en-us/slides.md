@@ -117,7 +117,7 @@ Encourage students to practice writing comments in the code to describe what is 
 Fun with Images!
 Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing.
 
-Our @link{../flags/index.shtml, Flags lesson} also dives deeper into image composition.
+Our @lesson-link{lessons/flags/, Flags lesson} also dives deeper into image composition.
 -->
 
 ---

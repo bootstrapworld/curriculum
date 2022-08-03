@@ -156,7 +156,7 @@ What other ideas do you have for how else we could make scatter plots be more in
 <!--
 **This entire section is OPTIONAL. Students delve deeper into programming to create more sophisticated image-scatter-plots, which can then feed deeper analysis**
 
-Math teachers alike may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not a part of the Data Science pathway, the @link{../piecewise-functions-conditionals/, Piecewise Functions and Conditionals} lesson includes a lot of supporting material and practice pages for these topics.
+Math teachers alike may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not a part of the Data Science pathway, the @lesson-link{lessons/piecewise-functions-conditionals/, Piecewise Functions and Conditionals} lesson includes a lot of supporting material and practice pages for these topics.
 -->
 ---
 {layout="LaunchR"}
