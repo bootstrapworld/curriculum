@@ -14,7 +14,6 @@
                           #:back-matter-port [back-matter-port #f])
   ;(printf "doing write-pages-info lesson-dir= ~s pageno= ~s\n" lesson-dir pageno)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
-         [workbook-pages-ls-file (format "~a/pages/.cached/.workbook-pages-ls.txt.kp" lesson-dir)]
          [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)

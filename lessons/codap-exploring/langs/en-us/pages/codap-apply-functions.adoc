@@ -1,0 +1,94 @@
+= Expressions & Functions in CODAP
+
+++++
+<style>
+#content > table { height: 100%; }
+#content td, th {padding: 0px !important; text-align: center !important;}
+#content table td p {white-space: pre-wrap; }
+</style>
+++++
+
+Complete the tables below.
+
+[cols="3a,1a,3a", frame="none", stripes="none"]
+|===
+| @math{y = 3x}
+|
+| @math{y = x + 2}
+| [cols="1a,1a",options="header"]
+!===
+! x ! y
+! 6.5 ! @ifsoln{19.5}
+! 3.5 ! @ifsoln{10.5}
+! 7.4 ! @ifsoln{22.2}
+! 8.1 ! @ifsoln{24.3}
+! 9.2 ! @ifsoln{27.6}
+!===
+|
+| [cols="1a,1a",options="header"]
+!===
+! x ! y
+! 3 ! @ifsoln{5}
+! 8 ! @ifsoln{10}
+! 1 ! @ifsoln{3}
+! 6 ! @ifsoln{8}
+! 5 ! @ifsoln{7}
+!===
+|
+|
+|
+|===
+
+@vspace{1ex}
+
+@n Open your @starter-file{animals}. Edit the `test` column's formula to compute _triple_ the weight of all of the animals. What formula will you use? _Note: Attribute names that are more than one word need to be entered inside of tick marks._
+
+@fitb{}{@ifsoln{_`Weight (lbs)` * 3_}}
+
+- Compare your results with the first table, above.
+
+@n Edit the `test` column's formula so that 2 weeks are added to the time to adoption for all of the animals. What formula did you use?
+
+@fitb{}{@ifsoln{_`Time to adoption (weeks)` + 2_}}
+
+@vspace{1ex}
+
+== Applying Functions
+
+In order to answer each of the questions below, you must first select `test` in @starter-file{animals}, and then choose `Edit formula` from the drop-down menu that appears. You will be typing into the `Edit Formula` box.
+
+- Enter `sqrt(16)` into the `Edit Formula` box.
+
+@n How many arguments does `sqrt` expect? @fitb{}{@ifsoln{_1_}}
+
+@n What type of argument does the function expect? (Number? String? Boolean?) @fitb{}{@ifsoln{_Number._}}
+
+@n What type of output does `sqrt` produce? @fitb{}{@ifsoln{_Number._}}
+
+@n What did the function evaluate to? @fitb{}{@ifsoln{_4_}}
+
+- Now, enter `sqrt(Weight)`.
+
+@n What do you observe? @fitb{}{@ifsoln{_CODAP finds the square root of each animal's weight_}}
+
+@n What happens when you enter `sqrt(Legs)`? @fitb{}{@ifsoln{_CODAP finds the square root of each animal's legs for `sqrt(Legs)`._}}
+
+@n What about `sqrt(Name)`? @fitb{}{@ifsoln{_CODAP produces an error message because it cannot find the square root of a string, only a number._}}
+
+- Enter `stringLength(Name)` into the `test` column.
+
+@n What do you observe? @fitb{}{@ifsoln{__7 appears, CODAP finds the amount of letters in each animal's name__}}
+
+@n How many arguments does `stringLength` expect? @fitb{}{@ifsoln{_1_}}
+
+@n What type of argument does `stringLength` expect? @fitb{}{@ifsoln{_String_}}
+
+@n Does `stringLength` produce a Number? String? Boolean? @fitb{}{@ifsoln{_Number_}}
+
+== Putting it all together
+
+- Create a column called `age-next-year` that uses an expression to add one year to each animal’s age.
+
+- Create a column called `rounded-weight` that uses a function to give the weight of each animal rounded to the nearest whole number.
+
+- Create a column called `old` that uses a Boolean to indicate which animals are over 5 years old.

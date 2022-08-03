@@ -31,7 +31,7 @@
 
 | Preparation
 |
-* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new @starter-file{animals}.
+* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
 
 | Key Points For The Facilitator
 |
@@ -44,9 +44,7 @@
 == Making Scatter Plots @duration{20 minutes}
 
 === Overview
-Students are introduced to questions that ask about __the relationship between one quantitative column and another.__
-
-They explore @vocab{scatter plots}, which are visualizations that show the relationship between two quantitative variables. They learn how to construct scatter plots by hand, and in Pyret.
+Students @vocab{scatter plots}, which are visualizations that show the relationship between two @vocab{quantitative} variables. They learn how to construct scatter plots by hand, and in Pyret.
 
 === Launch
 [.lesson-instruction]
@@ -54,7 +52,7 @@ They explore @vocab{scatter plots}, which are visualizations that show the relat
 - What kind of data is `age`? What kind of data is `weeks`?
 - What kind of display would help us analyze the relationship between age and adoption time?
 
-Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box-plots, that help us explore the _distribution_ of values in a _quantitative_ column.
+Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
 But what we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
 
@@ -84,7 +82,7 @@ When you created the scatter plot by hand, you started with a Table. Then you pl
 
 The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels, xs, and ys. Here's the contract:
 
-`scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`
+`scatter-plot {two-colons} (t::Table, ls::String, xs::String, ys::String)`
 
 [.lesson-instruction]
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
@@ -130,6 +128,7 @@ Let's use the Data Cycle to explore whether there's a connection between weight 
 Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}.
 
 Discuss as a class:
+
 - What did you find when you looked at the scatter-plot?
 - Does there appear to be a pattern or trend?
 - What might be problematic about including every species in the same scatter plot of weight?
@@ -246,4 +245,5 @@ Which pairs of columns would you like to examine?
 - What new questions come up for you?
 
 The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
+
 - Does your dataset contain any sub-groups? If so, what are they?

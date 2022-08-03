@@ -59,22 +59,23 @@ The `put-image` function works like `overlay`, but instead of placing the center
 
 [.lesson-point]
 --
-Think of the background image as a sheet of graph paper with the origin (0,0) in the bottom left corner.
+Think of the background image as a sheet of graph paper with the @vocab{origin} (0,0) in the bottom left corner.
 
 The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
 --
 
 [.lesson-instruction]
 
-- Distribute @printable-exercise{japan-estimating-coordinates.adoc} or project the flag images from the peardeck.
+- Take a look at @printable-exercise{japan-estimating-coordinates.adoc}.
 - The code beneath each image is missing the x and y coordinates to place the dot.
-- Estimate the x- and y-coordinate of the dot's location for each image and complete the code!
+- Estimate the x- and y-coordinate of the dot's location for each image to complete the code!
 
 === Investigate
 
-Have students open the @starter-file{flags} and click "Run".
+[.lesson-instruction]
+Open the @starter-file{flags} and click "Run".
 
-There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer.
+There are some special lines in this file called @vocab{comments}. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer.
 
 [.lesson-point]
 Professional programmers use comments __all the time__.
@@ -82,24 +83,33 @@ Professional programmers use comments __all the time__.
 Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.
 
 [.lesson-instruction]
-- @ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (`;`) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it? _Purple!_}
-@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it? _Red!_}
+- @ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (`;`) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it?
+** _Purple!_}
+@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it?
+** _Red!_}
 - Type `japan-flag` into the Interactions Area. What do you get back?
+** _We see Japan's flag - a white background with a red dot in the center._
 - Type `japan` into the Interactions Area and compare the image to `japan-flag`.
+** _We see a variant of Japan's flag; the dot is in the lower left now._
 - `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
 - Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
 - What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
+** `put-image :: Image, Number, Number, Image`
 
-Have students open the @starter-file{flags-2} and click "Run".
+Next, students will analyze code for the flag of the Netherlands, which uses `put-image` twice.
 
 [.lesson-instruction]
 --
-- Look at the code for the flag of the Netherlands.
-- How big is the flag?
+- Open the @starter-file{flags-2} and click "Run". Look at the code for the flag of the Netherlands. How big is the flag?
+** _The flag is 200 x 300 pixels._
 - What was the programmer thinking when she coded the height of the red stripe as @show{(code '(/ 200 3))}?
+** _The red stripe's height is one-third of the total height (200)._
 - The center of the blue stripe is placed at (@show{(code `150)}, @show{(code '(/ 200 6))}). How did the programmer know to use 150 as the x-coordinate?
+** _150 is half of the rectangle's width; that position will horizontally center the blue stripe._
 - What was the programmer thinking when she coded the y-coordinate as @show{(code '(/ 200 6))}?
-- Explain the thinking behind coding the redstripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
+** _Each stripe occupies 1/3 of the flag's total height. That means the vertical center of the blue stripe is at 1/6 of the flag's height._
+- Explain the thinking behind coding the red stripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
+** _The red strip's vertical center is at 5/6 of the flag's total height._
 --
 
 Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
@@ -120,7 +130,7 @@ If you have time, we have lots of additional starter files to push student think
 == Making Flags @duration{25 minutes}
 
 === Overview
-Students focus on decomposing complex images into simple ones, and using `put-image` to combine them.
+Students focus on decomposing complex images into simple ones and using `put-image` to combine images.
 
 === Launch
 Let's dig into the process for how the flags we’ve seen so far were made:
@@ -130,14 +140,14 @@ Let's dig into the process for how the flags we’ve seen so far were made:
 We observe that the Japanese flag is made up of two simpler images: a black, outline rectangle and a red dot.
 
 
-*2) Define those parts*
+*2) Define those Parts*
 
 We define `dot` and `background`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
 
 
 *3) Find the Coordinates*
 
-For each image, calculate what the x- and y-coordinates of the center should be. __TIP: this is a lot easier if you have a sheet of graph paper handy!__
+For each image, calculate what the x- and y-coordinates of where the center should be. __TIP: this is a lot easier if you have a sheet of graph paper handy!__
 
 
 *4) Build the Image & Check that it Matches the Target Image*
@@ -186,9 +196,9 @@ The opportunity to focus on a flag of their choosing is a big motivator for stud
 Be mindful of the fact that not every student will know their family’s geographical history, and
 that immigration can be a sensitive topic for some students.  For this reason, it is important that students have the option to choose a flag based on interest instead of just family history.
 
-Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
+Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ+ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
 
-@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length ratios in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
+@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
 |===
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -210,12 +220,12 @@ Why is it useful to define each part of the flag first, before stitching the ima
 
 - @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
 
-- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to define shapes before building the image.
+- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
-- @opt-starter-file{flags-lebanon} - For practice scaling imported graphics.
+- @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics.
 
 - @opt-starter-file{flags-mx} - Similar to the Puerto Rico Flag Starter File, but this one involves an imported image.
 
-- @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.
+- @opt-starter-file{flags-trinidad} - If you’ve already studied @vocab{Pythagorean Theorem} and are ready to apply it.
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.

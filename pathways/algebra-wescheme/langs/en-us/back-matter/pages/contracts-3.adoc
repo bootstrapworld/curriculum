@@ -1,74 +1,80 @@
 [.landscape]
 = Contracts
 
-Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the contract, we know  `ellipse(100, 50, "solid", "fuchsia")` will evaluate to an `Image`.
+Contracts tell us how to use a function. e.g.  `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the contract, we know  `(ellipse 100 50 "outline" "teal")` will evaluate to an Image.
 
 [.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
-| Name    			|	 | Domain      							|     	| Range
 
-| `#` `triangle-asa`
+| Name
+|
+| Domain
+|
+| Range
+
+| `;` `triangle`
+| `{two-colons}`
+| `Number, String, Sting`
+| `->`
+| `Image`
+5+| `_(triangle 80 "solid" "green")_`
+
+| `;` `star`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(star 50 "solid" "teal")_`}
+
+| `;` `circle`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{ `_(circle 45 "outline" "darkgreen")_`}
+
+| `;` `square`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(square 70 "outline" "lightblue")_`}
+
+| `;` `rectangle`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
-5+| @ifsoln{`_triangle-asa(100, 50, 200, "solid", "turquoise")_`}
+5+| @ifsoln{`_(rectangle 20 80 "solid" "gold")_`}
 
-| `# image-url`
+| `;` `text`
 | `{two-colons}`
-| @ifsoln{`String`}
+| @ifsoln{`String, Number, String`}
 | `->`
 | @ifsoln{`Image`}
-5+| @ifsoln{`_image-url("https://www.bootstrapworld.org/images/icon.png")_`}
+5+| @ifsoln{`_(text "I'm thankful for..." 50 "brown")_`}
 
-| `# scale`
+| `;` `ellipse`
 | `{two-colons}`
-| @ifsoln{`Number, Image`}
+| @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
-5+| @ifsoln{`_scale(0.8, triangle(30, "solid", "red"))_`}
+5+| @ifsoln{`_(ellipse 70 30 "outline" "red")_`}
 
-| `# rotate`
+| `;` `regular-polygon`
 | `{two-colons}`
-| @ifsoln{`Number, Image`}
+| @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
-5+| @ifsoln{`_rotate(35, rectangle(30, 80, "solid", "purple"))_`}
+5+| @ifsoln{`_(regular-polygon  40 8 "solid" "red")_`}
 
-| `# overlay`
+| `;` `rhombus`
 | `{two-colons}`
-| @ifsoln{`Image, Image`}
+| @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
-5+| @ifsoln{`_overlay(star(30, "solid", "gold"),circle(30, "solid", "blue"))_`}
-
-| `# put-image`
-| `{two-colons}`
-| @ifsoln{`Image, Number, Number, Image`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`}
-
-| `# flip-horizontal`
-| `{two-colons}`
-| @ifsoln{`Image`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_flip-horizontal(text("Bootstrap is fun!", 60, "darkblue"))_`}
-
-| `# flip-vertical`
-| `{two-colons}`
-| @ifsoln{`Image`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_flip-vertical(triangle(80, "solid", "lightgreen"))_`}
-
-| `# above`
-| `{two-colons}`
-| @ifsoln{`Image, Image`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`}
+5+| @ifsoln{`_(rhombus 20 50 "solid" "turquoise")_`}
 
 
 |===
+

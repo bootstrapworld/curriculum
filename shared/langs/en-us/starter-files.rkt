@@ -13,8 +13,8 @@
   )
 
   ("program-list" "program list"
-    ("pyret" "https://code.pyret.org/")
-    ("wescheme" "https://www.wescheme.org/console")
+    ("pyret" "https://code.pyret.org/" "code.pyret.org (CPO)")
+    ("wescheme" "https://www.wescheme.org/console" "WeScheme")
   )
 
   ; no spaces in starter file shortname!
@@ -26,7 +26,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z")
   )
 
-  ("collaboration" "Collaboration Starter File"
+  ("collaboration" "Set 1: Collaboration Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k")
     ("wescheme" "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z")
   )
@@ -71,7 +71,7 @@
 
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
-   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FkiJhfgOZfbpXYpvPUWN6%2Ffile.json")
+   ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FI6zAvad2EELkQxtS0SZG%2Ffile.json")
    )
   ("fair-coins" "Fair Coins Starter File"
     ("pyret" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
@@ -299,4 +299,5 @@
   ))
 
 (define *do-not-autoinclude-in-material-links*
-  '("editor"))
+  '("editor" "program-list")
+    )

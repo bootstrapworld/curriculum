@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-13 # last modified
+LASTMOD=2022-07-31 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -532,7 +532,7 @@ function cleanupduration() {
 function insertsectionselfie() {
   local f=$1
   $SED -i \
-    -e '/^<h2 id=/s/^<h2 id="\([^>]*\)>\(.*\)<\/h2>/<h2 id="\1><span class="section-link"><a href="#\1><span class="section-link-symbol">\&#128279;<\/span><\/a><\/span>\2<\/h2>/' \
+    -e '/^<h2 id=/s/^<h2 id="\([^>]*\)>\(.*\)<\/h2>/<h2 id="\1><span class="section-link"><a href="#\1" title="Direct link to this part of the lesson"><span class="section-link-symbol">\&#128279;<\/span><\/a><\/span>\2<\/h2>/' \
     $f
 }
 
@@ -640,6 +640,10 @@ function resolveabbrevs() {
     -e 's/^\(<div id="preamble\)">/\1_disabled" class="lessonSummary">/' \
     $f
   $SED -i \
+    -e 's/<span class="\([^"]\+\)">\(<figure class="image"\)/\2 style="text-align: \1"/g' \
+    -e 's/\(<\/figure>\)<\/span>/\1/g' \
+    $f
+  $SED -i \
     -e '/%SIDEBARSECTION%/,/%ENDSIDEBARSECTION%/s/\(<\/div>\)<\/p>/\1/' \
     $f
   $SED -i \
@@ -650,6 +654,9 @@ function resolveabbrevs() {
     $f
   $SED -i \
     -e 's/%ENDSIDEBARSECTION%/--><\/div><!--/' \
+    $f
+  $SED -i \
+    -e '/BOGUSACKNOWLEDGMENTSECTIONHEADER/d' \
     $f
   #
   # echo inserting bootstraplesson.js etc in $f in $(pwd)
@@ -1103,9 +1110,11 @@ function checklessonplan() {
 
   # echo collecting exercises in $L
   local pl=pyret
-  if test -f .cached/.wescheme; then pl=wescheme
-  elif test -f .cached/.codap; then pl=codap
-  fi
+  for f in .cached/.proglang-*; do
+    if test -f "$f"; then
+      pl=${f##*.proglang-}
+    fi
+  done
   $PROGDIR/collect-exercises.rkt index.adoc $pl
   exerflist=pages/.cached/.exercise-pages-ls.txt.kp
   if test -f $exerflist; then
@@ -1195,19 +1204,20 @@ function buildworkbookpages() {
   local oldPROGLANG="$PROGLANG"
 
   if test "$PROGLANG" != all; then
-    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
-      return
-    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
-      return
-    fi
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        test "$PROGLANG" = "$pl" || return
+      fi
+    done
   else
-    if test -f $L/.cached/.wescheme; then
-      export PROGLANG=wescheme
-    elif test -f $L/.cached/.codap; then
-      export PROGLANG=codap
-    else
-      export PROGLANG=pyret
-    fi
+    export PROGLANG=pyret
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        export PROGLANG=$pl
+      fi
+    done
   fi
 
   # echo doing buildworkbookpages $L in $(pwd)
@@ -1279,19 +1289,20 @@ function buildlessonplan() {
   local oldPROGLANG="$PROGLANG"
 
   if test "$PROGLANG" != all; then
-    if test -f $L/.cached/.wescheme -a "$PROGLANG" != "wescheme"; then
-      return
-    elif test -f $L/.cached/.codap -a "$PROGLANG" != "codap"; then
-      return
-    fi
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        test "$PROGLANG" = "$pl" || return
+      fi
+    done
   else
-    if test -f $L/.cached/.wescheme; then
-      export PROGLANG=wescheme
-    elif test -f $L/.cached/.codap; then
-      export PROGLANG=codap
-    else
-      export PROGLANG=pyret
-    fi
+    export PROGLANG=pyret
+    for f in $L/.cached/.proglang-*; do
+      if test -f "$f"; then
+        local pl=${f##*.proglang-}
+        export PROGLANG=$pl
+      fi
+    done
   fi
 
   # echo doing buildlessonplan $L in $(pwd)
@@ -1796,12 +1807,12 @@ function batchhtmltopdf() {
 
 function rmtmpfilesaux() {
 
-  for f in adoc aux log rkt tex title; do
+  for f in aux log rkt tex title; do
     find . -name \*.$f -delete
   done
 
   for f in txt; do
-    find . -name \*.$f | grep -v '\(lesson-order\|workbook-pages\)\.txt' | xargs rm -f
+    find . -name \*.$f | grep -v '\(lesson-order\|proglang\|shadow-glossary\|workbook-pages\)\.txt' | xargs rm -f
   done
 
   find . -name $WKH2P_PFX-\* -delete
@@ -1894,7 +1905,7 @@ function copylessondir() {
         $CP -pr $repoLessonDir/* $lessonDirPl
         cd $lessonDirPl
         mkdir -p .cached
-        touch .cached/.$pl
+        touch .cached/.proglang-$pl
         touch .cached/.redo
         test -d pages || mkdir pages
         for subdir in *; do
@@ -1997,6 +2008,7 @@ function collectworkbookpages() {
 
 function checkworkbookpagesalsoexercises() {
   if test ! -f .cached/.workbook-exercise-pages-ls.txt.kp; then
+    # FIXME: shouldn't this be a warning?
     return
   fi
 
@@ -2007,6 +2019,7 @@ function checkworkbookpagesalsoexercises() {
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
     if ! grep -q $f .cached/.workbook-exercise-pages-ls.txt.kp; then
       if ! grep -q $f .cached/.exercise-pages-ls.txt.kp; then
+        # FIXME: why should presence in opt exercises be a save?
         echo
         echo WARNING: Workbook page $(pwd)/$f not an exercise page
         echo
@@ -2634,10 +2647,23 @@ function doadocpostproc() {
   run_postproc postproc_resources $ADOC_POSTPROC_RESOURCES_INPUT
   run_postproc postproc_allpwylessons $ADOC_POSTPROC_ALLPWYLESSONS_INPUT
 
+  rmadocfiles
+
   end=`date +%s`
   runtime=$((end-start))
   echo \ Completed in $runtime s
   echo " "
+}
+
+function rmadocfiles() {
+  test $DEBUG && return
+
+  test -s $ADOC_INPUT || return
+
+  for f in $(cat $ADOC_INPUT); do
+    g=$(echo $f|$SED -e 's/\.cached\/\.//' -e 's/\.asc$/.adoc/')
+    test -f $g && rm $g
+  done
 }
 
 function createabyss() {

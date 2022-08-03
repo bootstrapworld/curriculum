@@ -29,14 +29,14 @@
 
 | Preparation
 |
-* All students should log into @link{https://code.pyret.org, code.pyret.org (CPO)} and open the "Animals Starter File" they saved from the prior lesson. If they don't have the file, they can open a new @starter-file{animals}}
+* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
 
 |===
 
 == Mean @duration{15 minutes}
 
 === Overview
-Students learn about mean (or "average"), and how it is one way (among others!) to summarize a quantitative column.
+Students learn about @vocab{mean} (or "average"), and how it is one way (among others!) to summarize a @vocab{quantitative} column.
 
 === Launch
 [.lesson-point]
@@ -77,12 +77,14 @@ The arithmetic mean is the number that "balances" all the other numbers in the s
 
 [.lesson-instruction]
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-*
-If we plotted all the pounds values as points on a number line, what could we say about the average of those values? Is there a midpoint? Is there a point that shows up most often? Each of these are different ways of “measuring center”.
+* If we plotted all the pounds values as points on a number line, what could we say about the average of those values?
+* Is there a midpoint?
+* Is there a point that shows up most often?
+* Each of these are different ways of “measuring center”.
 
 The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, or "average". The mean of a dataset is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
 
-Pyret has a way for us to compute the mean of any quantitative column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
+Pyret has a way for us to compute the mean of any @vocab{quantitative} column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
 @show{ (contract "mean" '("Table" "String") "Number" )}
 
@@ -118,13 +120,18 @@ As an example, consider this list of ACT scores:
 
 `25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 
-Here 29 is the median, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
+Here 29 is the @vocab{median}, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
 
 The algorithm for finding the median of a quantitative column is:
 
 . Sort the numbers
 . Cross out the highest and lowest number
-. Repeat until there is only one number left. If there are two numbers left at the end, take the _mean_ of those numbers
+. Repeat until there is only one number left...
+. When there are an even number of numbers in the list, as in the example below, there will be two numbers left at the end. Take the _mean_ of those two numbers.
+
+`3, 7, 9, 21`
+
+The median of this list is 8, because 8 is the mean of the two middle numbers, 7 and 9. To find their mean, we added 7 and 9 to get 16 and split 16 in half.
 
 === Investigate
 [.lesson-instruction]
@@ -150,7 +157,12 @@ Students learn about the mode(s) of a dataset, how to compute the mode, and when
 === Launch
 The third measure of center is called the @vocab{modes} of a dataset. The @vocab{modes} of a dataset are the values that appear _most often_.
 
-Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! Often there will be just one mode in the list of most common values: many datasets are what we call “unimodal”. But sometimes there are exceptions! Consider the following three datasets:
+Median and Mean always produce one number and many datasets are what we call “unimodal”, having just one mode. But sometimes there are exceptions!
+
+* If two or more values are equally common, there can be more than one mode.
+* If all values are equally common, then there is no mode at all!
+
+Consider the following three datasets:
 
   1, 2, 3, 4
   1, 2, 2, 3, 4
@@ -181,7 +193,11 @@ At this point, we have a lot of evidence that suggests the Bureau’s use of “
 
 _“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."_
 
-Do you trust this statement? Why or why not? Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
+Do you trust this statement? Why or why not?
+
+** __The mean is sensitive to outliers, and billionaires like Elon Musk, Jeff Bezos, etc. pull the mean is heavily to the right. This makes it appear that the "average" American family earns far more than they actually do. That's why the conclusion "very few Americans were living in poverty" cannot be drawn based on the mean.__
+
+Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
 
 You now have three different ways to measure center in a dataset. But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! Here are some guidelines for when to use one measurement over the other:
 
@@ -189,7 +205,7 @@ You now have three different ways to measure center in a dataset. But how do you
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
 
-*NOTE:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
+*NOTE:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table __or__ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 
 == Additional Exercises
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}

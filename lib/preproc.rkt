@@ -43,6 +43,8 @@
 
 (define *proglang* "pyret")
 
+(define *natlang* "en-us")
+
 (define *other-proglangs* #f)
 
 (define *all-lessons* '())
@@ -67,7 +69,7 @@
 
 ;(printf "LESSON is ~s\n" *lesson*)
 
-(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR")) ;fixme
+(define *lesson-subdir* (truthy-getenv "LESSONSUBDIR")) ;FIXME
 
 ;(printf "LESSONSUBDIR is ~s\n" *lesson-subdir*)
 
@@ -101,7 +103,7 @@
                 (eval x *adoc-namespace*)
                 (loop)))))))))
 
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;fixme
+(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;FIXME
 
 ;(define *dist-root-dir* (getenv "DISTROOTDIR"))
 
@@ -192,6 +194,7 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+(define *handout-exercise-links* '())
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
 (define *opt-project-links* '())
@@ -219,27 +222,90 @@
             [(or (char=? c #\newline)) (read-char i) #t]
             [else #f]))))
 
-(define (assoc-glossary term L)
+(define (assoc-glossary term)
   ; (printf "doing assoc-glossary ~s ~n" term)
-  (let ([naive-singular (if (char-ci=? (string-ref term (- (string-length term) 1)) #\s)
-                             (substring term 0 (- (string-length term) 1))
-                             "")])
-    ; (printf "naive sing = ~s~n" naive-singular)
-    (let loop ([L L])
+  (let ([terms (cons term
+                     (case *natlang*
+                       [(en-us)
+                        (cond [(regexp-match "(.*)ies$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "y"))))]
+                              [(regexp-match "(.*)es$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [(regexp-match "(.*)s$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [(regexp-match "(.*)ied$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "y"))))]
+                              [(regexp-match "(.*)ed$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [(regexp-match "(.*)ing$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root (string-append root "e"))))]
+                              [else '()])]
+                       [(es-mx)
+                        (cond [(regexp-match "(.*)iones$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "ión"))))]
+                              [(regexp-match "(.*)ques$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "c"))))]
+                              [(regexp-match "(.*)gues$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "g"))))]
+                              [(regexp-match "(.*)ces$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list (string-append root "z"))))]
+                              [(regexp-match "(.*)es$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [(regexp-match "(.*)s$" term)
+                               => (lambda (x)
+                                    (let ([root (second x)])
+                                      (list root)))]
+                              [else '()])]
+                       [else '()]))])
+    ; (printf "terms = ~s\n" terms)
+    (let loop ([L *natlang-glossary-list*])
       (if (null? L) #f
           (let* ([c (first L)]
-                 [lhs (first c)])
-            ; (printf "lhs = ~s~n" lhs)
+                 [lhs (first c)] [rhs (second c)])
             (or (cond [(string? lhs)
-                       (and (or (string-ci=? lhs term)
-                                (string-ci=? lhs naive-singular))
-                            c)]
+                       (ormap (lambda (term)
+                                (and (string-ci=? term lhs) c))
+                              terms)]
                       [(list? lhs)
-                       (and (memf (lambda (x) (or (string-ci=? x term)
-                                                  (string-ci=? x naive-singular))) lhs)
-                            (list (first lhs) (second c)))]
+                       (let ([headword (car lhs)])
+                         (unless (string? headword) (set! headword #f))
+                         (ormap (lambda (lhs1)
+                                  (cond [(string? lhs1)
+                                         (ormap (lambda (term)
+                                                  (and (string-ci=? term lhs1) (list (or headword lhs1) rhs)))
+                                                terms)]
+                                        [(list? lhs1)
+                                         (ormap (lambda (term)
+                                                  (ormap (lambda (lhs2)
+                                                           (and (string-ci=? term lhs2) (list (car lhs1) rhs)))
+                                                         lhs1))
+                                                terms)]
+                                        [else #f]))
+                                lhs))]
                       [else #f])
-                (loop (rest L))))))))
+                (loop (cdr L))))))))
 
 (define (assoc-standards std)
   ; (printf "doing assoc-standards ~s\n" std)
@@ -584,7 +650,7 @@
         ""])))
 
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
-  ; (printf "make-workbook-link ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text)
+  ; (printf "make-workbook-link ~s ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text link-type)
   ; (printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
   (let* ([lesson (cond [(equal? lesson-dir *lesson*) (set! lesson-dir #f) *lesson*]
                        [lesson-dir (qualify-lesson-dir lesson-dir)]
@@ -636,7 +702,7 @@
       (printf "WARNING: Lesson ~a: ~a refers to ~a file ~a\n\n" lesson link-type
               (if non-workbook-page? "non-workbook" "nonexistent")
               f))
-    (when (member link-type '("printable-exercise" "opt-printable-exercise"))
+    (when (member link-type '("printable-exercise" "opt-printable-exercise" "handout"))
       (let ([f (format "~a" g-in-pages)])
         (unless lesson-dir
           (unless (ormap (lambda (e) (equal? (first e) f)) *exercises-done*)
@@ -644,6 +710,7 @@
               (set! *exercises-done*
                 (cons (list f ex-ti) *exercises-done*)))))))
     (when (and (or (not link-text) (string=? link-text "")) page-title)
+      ;FIXME: is link-text ever #f
       (set! link-text page-title))
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
@@ -662,11 +729,17 @@
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-                (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
-                  (unless (findf (lambda (L) (equal? (second L) styled-link-output))
-                                 *printable-exercise-links*)
-                    (set! *printable-exercise-links* (cons (list snippet styled-link-output)
-                                                           *printable-exercise-links*))))]))
+               (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
+                 (unless (findf (lambda (L) (equal? (second L) styled-link-output))
+                                *printable-exercise-links*)
+                   (set! *printable-exercise-links*
+                     (cons (list snippet styled-link-output) *printable-exercise-links*))))]
+              [(equal? link-type "handout")
+               (let ([styled-link-output (string-append "[.handout]##"
+                                           materials-link-output "##")])
+                 (unless (member styled-link-output *handout-exercise-links*)
+                   (set! *handout-exercise-links*
+                     (cons styled-link-output *handout-exercise-links*))))]))
       link-output)))
 
 (define (display-comment prose o)
@@ -698,7 +771,7 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (make-image img text rest-opts #:centered? [centered? #f])
-  ; (printf "doing make-image ~s\n" img)
+  ; (printf "doing make-image ~s ~s ~s\n" img text rest-opts)
   (let ([img-qn (string-append *containing-directory* "/" img)])
     (unless (or *narrative* *target-pathway* *teacher-resources*)
       ;(printf "anonymizing ~s\n" img)
@@ -716,10 +789,18 @@
                   (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
     (let* ([text (clean-up-image-text text)]
-           [rest-opts (map (lambda (s) (if (string=? s "\"\"") "" s)) rest-opts)]
-           [commaed-opts (string-join rest-opts ", ")]
-           [commaed-opts (if (string=? commaed-opts "") "" (string-append ", " commaed-opts))]
+           [rest-opts-len (length rest-opts)]
+           [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
+           [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
+           [image-caption (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
            [text-wo-url (clean-up-url-in-image-text text)]
+           [commaed-opts (string-append
+                           ", "
+                           width-arg
+                           ", "
+                           height-arg
+                           (if (string=? text "") ""
+                               (format ", title=~s" text-wo-url)))]
            [img-link-txt (string-append
                            (enclose-span ".big" "&#x1f5bc;") "Show image")]
            [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
@@ -729,18 +810,23 @@
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-               img-link)])
+               img-link)]
+           [img-id (format "img_id_~a" (gen-new-id))]
+           [adoc-img (enclose-tag "span" ".image-figure"
+                       (string-append
+                         ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
+                         adoc-img
+                         (if image-caption
+                             (enclose-tag "span" ".image-caption" image-caption
+                               #:attribs (format "id=~s" img-id))
+                             ""))
+                       #:attribs
+                       (and image-caption
+                           (format "aria-describedby=~s" img-id)))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-      (if (string=? text "")
-          (if centered?
-              (enclose-span ".centered-image" adoc-img)
-              adoc-img)
-          (enclose-span
-            (string-append ".tooltip"
-              (if centered? ".centered-image" ""))
-            (string-append
-              (enclose-span ".tooltiptext" text) "\n"
-              adoc-img))))))
+      (if centered?
+          (enclose-span ".centered-image" adoc-img)
+          adoc-img))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
@@ -787,7 +873,7 @@
                  [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   ;fixme following probly obsolete?
+                   ;FIXME following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
@@ -809,7 +895,7 @@
                      (let ([short-ref? (abbreviated-index-page? f)])
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
-                                   (string=? g "pathway-standards.shtml");remove ;fixme
+                                   (string=? g "pathway-standards.shtml");remove ;FIXME
                                    (string=? g "pathway-alignments.shtml")
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
@@ -1107,7 +1193,7 @@
                   (let loop ()
                     (let ([x (read i)])
                       (unless (eof-object? x)
-                        (let ([s (assoc-glossary x *natlang-glossary-list*)])
+                        (let ([s (assoc-glossary x)])
                           (cond [s (unless (member s *glossary-items*)
                                      (set! *glossary-items*
                                        (cons s *glossary-items*)))]))
@@ -1227,18 +1313,18 @@
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
+  (set! *handout-exercise-links* '())
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
   (set! *workbook-pages* '())
-
-  (unless (member *proglang* '("pyret" "wescheme" "codap"))
-    (error 'ERROR "preproc.rkt: Unknown proglang ~a" *proglang*))
+  (set! *natlang-glossary-list* '())
+  (set! *natlang* (string->symbol (getenv "NATLANG")))
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
-  (when (and *lesson-plan* (not *lesson*))  ;fixme, we shouldn't be relying on this!
+  (when (and *lesson-plan* (not *lesson*))
     (set! *lesson* *lesson-plan*))
 
   (set! *lesson-plan-base* *lesson-plan*)
@@ -1258,19 +1344,30 @@
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
-  (set! *natlang-glossary-list*
-    (let ([natlang (string->symbol (getenv "NATLANG"))])
-      ; (printf "\nnatlang= ~s\n\n" natlang)
-      (let loop ([gl *glossary-list*] [ngl '()])
+  (let ([gl *glossary-list*])
+
+    (when (or *lesson* *lesson-plan*)
+      (let ([f (build-path "lessons"  *lesson* "shadow-glossary.txt")])
+        (when (file-exists? f)
+          (let ([ff (read-data-file f #:mode 'files)])
+            (when (pair? ff)
+              (let ([shadow-glossary-file (build-path 'up ".prog" (first ff))])
+                (set! gl
+                  (append gl
+                          (second
+                            (third
+                              (first (read-data-file shadow-glossary-file #:mode 'forms))
+                              ))))))))))
+
+    (set! *natlang-glossary-list*
+      (let loop ([gl gl] [ngl '()])
         (if (null? gl) ngl
             (let loop2 ([xx (first gl)])
               (if (null? xx) (loop (rest gl) ngl)
                   (let ([x (first xx)])
-                    (if (eq? (first x) natlang)
+                    (if (eq? (first x) *natlang*)
                         (loop (rest gl) (cons (rest x) ngl))
                         (loop2 (rest xx))))))))))
-
-  ; (printf "\nnatlang-glossary-list = ~s\n\n" *natlang-glossary-list*)
 
   (when *lesson-plan*
     (set! *all-lessons* (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))))
@@ -1419,7 +1516,7 @@
                                          (create-end-tag "span")) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg *natlang-glossary-list*)])
+                                   [s (assoc-glossary arg)])
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
                               (display (enclose-span ".vocab" arg) o)
@@ -1475,6 +1572,7 @@
                             (display (enclose-math (read-group i directive)) o)]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
+                                (string=? directive "handout")
                                 )
                             ;(printf "doing ~s\n" directive)
                             (let* ([args (read-commaed-group i directive read-group)]
@@ -1524,7 +1622,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]")]
+                            (when (member *proglang* '("pyret" "wescheme"))
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
                            [(or (string=? directive "lesson-description")
@@ -1712,25 +1811,36 @@
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (unless (<= (length p) 2) (set! title (third p)))
-                                                (let ([link-output (format "link:pass:[~a][~a~a]" (second p) title
-                                                                           (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                           )])
-                                                  (unless (member lbl *do-not-autoinclude-in-material-links*)
-                                                    (let* ([materials-link-output (format "link:pass:[~a][~a~a]" (second p) (second c)
-                                                                                (if *lesson-plan* ", window=\"_blank\"" "")
-                                                                                )]
+                                                (let ([link-output
+                                                        (format
+                                                          "link:pass:[~a][~a~a]" (second p) title
+                                                          ", window=\"_blank\""
+                                                          )])
+                                                  (unless (member
+                                                            lbl
+                                                            *do-not-autoinclude-in-material-links*)
+                                                    (let* ([materials-link-output
+                                                             (format
+                                                               "link:pass:[~a][~a~a]"
+                                                               (second p) (second c)
+                                                                   ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
                                                                      materials-link-output)])
                                                       (cond [opt?
-                                                              (unless (member styled-link-output *opt-starter-file-links*)
+                                                              (unless (member
+                                                                        styled-link-output
+                                                                        *opt-starter-file-links*)
                                                                 (set! *opt-starter-file-links*
-                                                                  (cons styled-link-output *opt-starter-file-links*)))]
+                                                                  (cons styled-link-output
+                                                                        *opt-starter-file-links*)))]
                                                             [else
-                                                              (unless (member styled-link-output *starter-file-links*)
+                                                              (unless (member styled-link-output
+                                                                              *starter-file-links*)
                                                                 (set! *starter-file-links*
-                                                                  (cons styled-link-output *starter-file-links*)))])))
+                                                                  (cons styled-link-output
+                                                                        *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
@@ -1855,6 +1965,7 @@
 
               (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
+                (fprintf o "== BOGUSACKNOWLEDGMENTSECTIONHEADER\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
                 (fprintf o (create-acknowledgment))
@@ -1938,6 +2049,9 @@
               (fprintf o "\n* ~a\n\n" x))
 
             (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
+
+            (for ([x (reverse *handout-exercise-links*)])
+              (fprintf o "\n* ~a\n\n" x))
 
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
@@ -2046,6 +2160,16 @@
             (let* ([ti (list-ref ex 1)]
                    [exer (list-ref ex 0)]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
+
+              (when (string=? ti "")
+                (let ([exer.titletxt
+                        (build-path "lessons"
+                                    (path-replace-extension
+                                      (regexp-replace "/pages/" exer "\\0.cached/.")
+                                      ".titletxt"))])
+                  (when (file-exists? exer.titletxt)
+                    (set! ti (call-with-input-file exer.titletxt read-line)))))
+
               (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
                        ti *dist-root-dir* exer *dist-root-dir* soln)))
           ))
@@ -2110,7 +2234,7 @@
              dict)
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
-    ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? fixme
+    ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
     (for ([s dict-standards-met])
       (let ([std-name (list-ref s 0)]
             [std-desc (list-ref s 1)]
@@ -2905,7 +3029,30 @@
       (sexp->code x #:multi-line multi-line #:parens parens)
       (cm-code x #:multi-line multi-line #:parens parens)))
 
+(define (contract-type x)
+  (if (list? x)
+      (let ([name (first x)] [type (second x)])
+        (format "~a {two-colons} ~a" name
+                (if (list? type)
+                    (string-append (contract-type (first type))
+                      " -> "
+                      (contract-types-to-commaed-string (rest type)))
+                    type)))
+      x))
+
+(define (contract-types-to-commaed-string xx)
+  (let* ([n (length xx)]
+         [contains-parens? (ormap list? xx)]
+         [s
+           (string-join
+             (map contract-type xx)
+             ", ")])
+    (if contains-parens?
+        (string-append "(" s ")")
+        s)))
+
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
+  ;FIXME: do we need a keyword to avoid the prefix character
   ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
@@ -2922,7 +3069,7 @@
           "{two-colons}"
           " "
           ; used to not have commas in WeScheme
-          (vars-to-commaed-string domain-list)
+          (contract-types-to-commaed-string domain-list)
           " ‑> "
           range
           (if purpose

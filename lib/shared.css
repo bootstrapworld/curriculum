@@ -99,6 +99,8 @@ tr th.tableblock {
 }
 #footer {
   background: rgba(0,0,0,0.5);
+  margin-left: -3em;
+  padding-left: 10px !important;
   height:     24px;
   position:   fixed;
   bottom:     0;
@@ -367,8 +369,8 @@ tr th.tableblock {
   background-attachment: local, local, scroll, scroll;
 }
 .preamble tr:hover td > * {max-height: 1000px;}
-.Optional, .OptProject {font-style: italic;}
-.Optional::before, .OptProject::before { color: gray;}
+.Optional, .OptProject, .handout {font-style: italic;}
+.Optional::before, .OptProject::before, .handout::before { color: gray;}
 
 /* Language Table */
 .lang-features-table {
@@ -411,7 +413,7 @@ tr th.tableblock {
 /* Headers, Sections, and section links */
 .lesson-section-1, .lesson-section-1+.lesson-section-1 {
   clear:              both;
-  border-top:         solid 3px black;
+  border-top:         solid 2px black;
   display:            block;
 }
 .lesson-section-2 { clear: both; width: 100%; margin: 20px 0px;}
@@ -427,9 +429,10 @@ tr th.tableblock {
   margin-left:        -1.75em;
   padding-right:      0.5em;
   vertical-align:     middle;
-  text-decoration:    none;
+  text-decoration:    none !important;
   font-size:          .9rem;
-  visibility:         hidden;
+  position:           relative;
+  left:               -2em;
 }
 
 .lesson-instruction {
@@ -493,6 +496,16 @@ span.clear {
   width:              100%;
 }
 
+/* Images and Captions */
+.image-figure .image-caption { 
+  width:      100%; 
+  max-width:  300px; 
+  display:    inline-block; 
+  font-style: italic; 
+  line-height: 1.5ex;
+  word-break: break-word;
+}
+.image-figure .image-caption::before { content: 'Source: '; }
 /************************************************************************************
 * WORKBOOK PAGES
 */
@@ -934,7 +947,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
 
 
   /* Collapsing and Colorful Headers */
-  .LessonPlan .sect1 h2, .TeacherResources .sect1 h2 {
+  .LessonPlan #body, .TeacherResources .LessonPlan #body {padding-bottom:  10in;}
+  .LessonPlan .sect1.lesson-section-1 h2, .TeacherResources .sect1 h2 {
     background-color: #75328A77;
     color: white;
     font-weight: 600;
@@ -946,10 +960,10 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     outline: none;
   }
 
-  .LessonPlan .sect1 h2.active, .LessonPlan .sect1 h2:hover,
+  .LessonPlan .sect1.lesson-section-1 h2.active, .LessonPlan .sect1.lesson-section-1 h2:hover,
   .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { background-color: #b7d893; }
 
-  .LessonPlan .sect1 h2:after, .TeacherResources .sect1 h2:after {
+  .LessonPlan .sect1.lesson-section-1 h2:after, .TeacherResources .sect1 h2:after {
     content: '\002B';
     color: white;
     font-weight: bold;
@@ -957,22 +971,14 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     margin-right: 5px;
   }
 
-  .LessonPlan .sect1 h2.active,       .TeacherResources .sect1 h2.active { color: white; }
-  .LessonPlan .sect1 h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
-  .LessonPlan .sect1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
+  .LessonPlan .sect1.lesson-section-1 h2.active,       .TeacherResources .sect1 h2.active { color: white; }
+  .LessonPlan .sect1.lesson-section-1 h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
+  .LessonPlan .sect1.lesson-section-1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
   }
-
-  .LessonPlan       .sect1.lesson-section-1 h2:hover .section-link a,
-  .TeacherResources .sect1.lesson-section-1 h2:hover .section-link a { visibility: visible; }
-
-  .LessonPlan       .sect1.lesson-section-1 h2:hover:after,
-  .TeacherResources .sect1.lesson-section-1 h2:hover:after { visibility: hidden; }
-
-
 }
 
 /************************************************************************************
@@ -1024,7 +1030,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   .listingblock pre:not(.highlight) { background: none !important; }
 
   /* Get rid of collapsing headers */
-  .sect1, .sect1 .sectionbody { max-height: unset !important; }
+  .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
 
   body:not(.LessonPlan) #header> h1:first-child,
   body:not(.LessonPlan) .sect1 > h1:first-child{

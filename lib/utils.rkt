@@ -5,7 +5,9 @@
   ferror
   file-mtime
   system-echo
+  unquote-string
   read-data-file
+  gen-new-id
   )
 
 (define (truthy-getenv ev)
@@ -62,3 +64,9 @@
                          (if (eof-object? x) (reverse xx)
                              (loop (cons x xx)))))])))))
 
+
+(define *id-counter* 0)
+
+(define (gen-new-id)
+  (set! *id-counter* (+ *id-counter* 1))
+  *id-counter*)
