@@ -852,15 +852,6 @@
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
-(define (qualify-proglang dirname)
-  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" container dirname *proglang*)
-  (unless (or (string=? *proglang* "pyret")
-              (regexp-match (string-append "-" *proglang* "$") dirname))
-    (let ([q (string-append dirname "-" *proglang*)])
-      (when (directory-exists? (build-path "lessons" q))
-        (set! dirname q))))
-  dirname)
-
 (define (make-lesson-link f link-text)
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
@@ -878,7 +869,7 @@
          [dir-compts (regexp-split #rx"/" dir)])
 
     (let* ([first-compt (first dir-compts)]
-           [q (qualify-proglang first-compt)])
+           [q (qualify-proglang first-compt "lessons" *proglang*)])
       (unless (string=? q first-compt)
         (set! dir
           (string-join
