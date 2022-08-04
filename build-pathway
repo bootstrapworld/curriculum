@@ -2100,7 +2100,7 @@ function copypathwayindependent() {
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'
 
-  cd $TOPDIR/distribution/$NATLANG
+  cd $TOPDIR/distribution/$NATLANG/lessons
 
   # echo currently in $(pwd)
 
@@ -2112,28 +2112,28 @@ function copypathwayindependent() {
 
   test -d "$repoDir" || return
 
-  test $FORCE && rm -fr pathway-independent
+  test $FORCE && rm -fr .pathway-independent
 
-  mkdir -p pathway-independent
+  mkdir -p .pathway-independent
 
   local docopydir=1
 
-  if checkmd5nochange pathway-independent $repoDir; then
+  if checkmd5nochange .pathway-independent $repoDir; then
     docopydir=
   fi
 
   if test $docopydir; then
-    $CP -pr $repoDir/* pathway-independent
-    mkdir -p pathway-independent/.cached
-    touch pathway-independent/.cached/.redo
+    $CP -pr $repoDir/* .pathway-independent
+    mkdir -p .pathway-independent/.cached
+    touch .pathway-independent/.cached/.redo
   fi
 
-  export PATHWAYROOTDIR=
-  export DISTROOTDIR=
-  export LESSONSUBDIR=.
+  export PATHWAYROOTDIR=../
+  export DISTROOTDIR=../../
+  export LESSONSUBDIR=lessons
   export PATHWAYINDEPENDENT=1
 
-  recursiveadoc pathway-independent "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+  recursiveadoc .pathway-independent "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
 
   export PATHWAYROOTDIR=
   export DISTROOTDIR=
@@ -2885,6 +2885,8 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
 copycommonlessons
 
 copypathwayindependent
+
+# exit
 
 mkdir -p distribution/$NATLANG/.cached
 
