@@ -49,7 +49,7 @@ This is just one example of what are called @vocab{Threats to Validity}.
 
 (4) **Confounding variables** - A study might find that cat owners are more likely to use public transportation than dog owners. But it's not that owning a cat means you drive less: people who live in big cities are more likely to use public transportation, _and_ also more likely to own cats.  
 
-More examples of confounding variables can be found in @link{../correlations/pages/correlation-is-not-causation.html, Correlation is Not Causation}.
+More examples of confounding variables can be found in @lesson-link{correlations/pages/correlation-is-not-causation.adoc}.
 
 ---
 {layout="Investigate"}

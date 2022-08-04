@@ -166,6 +166,75 @@
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
 
+(define (make-lesson-link args)
+  (let* ([num-args (length args)]
+         [f (first args)]
+         [link-text (if (> num-args 1) (second args) #f)])
+
+    (cond [(regexp-match "^ *$" f)
+           (set! f "./index.adoc")]
+          [(regexp-match "/$" f)
+           (set! f (string-append f "index.adoc"))]
+          [(regexp-match "^[^/]+$" f)
+           (set! f (string-append f "/index.adoc"))])
+
+    (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+           [dir (second m)]
+           [snippet (third m)]
+           [dir-compts (regexp-split #rx"/" dir)]
+           [local-dir #f]
+           [local-f #f])
+
+      (let* ([first-compt (first dir-compts)]
+             [q (qualify-proglang first-compt 'up *proglang*)])
+        (unless (string=? q first-compt)
+          (set! dir
+            (string-join (cons q (rest dir-compts)) "/"))))
+
+      (set! local-dir (build-path 'up dir))
+      (set! local-f (build-path local-dir snippet))
+
+      (let* ([f.titletxt (path-replace-extension
+                           (build-path local-dir ".cached" snippet)
+                           ".titletxt")]
+             [page-title (and (file-exists? f.titletxt)
+                              (call-with-input-file f.titletxt read-line))]
+             [existent-file? #f])
+        (cond [(or (path-has-extension? snippet ".adoc")
+                   (path-has-extension? snippet ".html")
+                   (path-has-extension? snippet ".shtml"))
+               (let ([local-f.adoc (path-replace-extension local-f ".adoc")]
+                     [local-f.html (path-replace-extension local-f ".html")]
+                     [local-f.shtml (path-replace-extension local-f ".shtml")]
+                     [local-f.pdf (path-replace-extension local-f ".pdf")])
+                 (cond [(file-exists? local-f.html)
+                        (set! f (path-replace-extension f ".html"))
+                        (set! existent-file? #t)]
+                       [(file-exists? local-f.shtml)
+                        (set! f (path-replace-extension f ".shtml"))
+                        (set! existent-file? #t)]
+                       [(file-exists? local-f.adoc)
+                        (set! f (path-replace-extension
+                                  f (if (= (length dir-compts) 1) ".shtml" ".html")))
+                        (set! existent-file? #t)]
+                       [(file-exists? local-f.pdf)
+                        (set! f (path-replace-extension f ".pdf"))
+                        (set! existent-file? #t)]
+                       [(path-has-extension? snippet ".adoc")
+                        (set! f (path-replace-extension
+                                  f (if (= (length dir-compts) 1) ".shtml" ".html")))]))]
+              [(path-has-extension? snippet ".pdf")
+               (when (file-exists? local-f)
+                 (set! existent-file? #t))])
+
+        (unless existent-file?
+          (printf "WARNING: Missing file ~a\n\n" f))
+        (when (and (or (not link-text) (string=? link-text "")) page-title)
+          (set! link-text page-title))
+        (let ([link-output
+                (format "[~a](~a)" link-text (build-path *bootstrap-prefix* f))])
+          link-output)))))
+
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
          [page (first args)]
@@ -272,6 +341,9 @@
                          [(member directive '("printable-exercise" "opt-printable-exercise"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (fully-qualify-link args directive) o))]
+                         [(string=? directive "link-lesson")
+                          (let ([args (read-commaed-group i directive read-group)])
+                            (display (make-lesson-link args) o))]
                          [(string=? directive "opt-project")
                           (let* ([arg1 (read-commaed-group i directive read-group)]
                                  [project-file (first arg1)]

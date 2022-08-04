@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-07-31 # last modified
+LASTMOD=2022-08-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -204,7 +204,11 @@ mkdir -p distribution/$NATLANG/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr distribution/.prog distribution/$NATLANG/.cached distribution/$NATLANG/lib distribution/$NATLANG/extlib
+  rm -fr distribution/.prog \
+    distribution/$NATLANG/.cached \
+    distribution/$NATLANG/pathway-independent \
+    distribution/$NATLANG/lib \
+    distribution/$NATLANG/extlib
 fi
 
 mkdir -p distribution/.prog
@@ -880,7 +884,13 @@ function doadocs() {
   test $BOILERPLATE && boilerplate="#t"
 
   for f in $ff; do
-    if test $TGTPATHWAY; then
+    # echo f is $f
+    if test $PATHWAYINDEPENDENT; then
+      # echo PATHWAYINDEPENDENT for $f in l= $LESSONSUBDIR d= $DISTROOTDIR
+      echo "(\"$f\" #:containing-directory \"$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo $LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
+      echo $LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+    elif test $TGTPATHWAY; then
       echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
         echo courses/$TGTPATHWAY/$LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -900,7 +910,7 @@ function doadocs() {
 }
 
 function processadocs() {
-  # echo doing processadocs
+  # echo doing processadocs in $(pwd)
 
   local ff=
 
@@ -958,7 +968,9 @@ function processadocs() {
         fpdf=$fbase.pdf
         #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
         if test ! -f "$fpdf"; then
-          if test "$RESOURCEDOCS" = 1 -o \
+          if test "$PATHWAYINDEPENDENT"; then
+            echo ", { \"input\": \"$LESSONSUBDIR/$fhtml\" }" >> $PUPPETEER_INPUT
+          elif test "$RESOURCEDOCS" -o \
             "$LESSONSUBDIR" = front-matter/pages -o "$LESSONSUBDIR" = front-matter/solution-pages -o \
             "$LESSONSUBDIR" = back-matter/pages -o "$LESSONSUBDIR" = back-matter/solution-pages; then
                       #echo doing it!
@@ -985,7 +997,7 @@ function recursiveadoc() {
   local oldSOLUTION="$SOLUTION"
   local oldOTHERDIR="$OTHERDIR"
 
-  #echo doing recursiveadoc "$@"
+  # echo doing recursiveadoc "$@" in $(pwd)
 
   if test "$dir" = solution-pages; then export SOLUTION=1; fi
 
@@ -1407,7 +1419,6 @@ function proglangversion() {
     else
       return 0
     fi
-
 
   else
     return 0
@@ -2081,6 +2092,56 @@ function copycommonlessons() {
   runtime=$((end-start))
   echo \ Completed in $runtime s
   echo " "
+}
+
+function copypathwayindependent() {
+  # echo doing copypathwayindependent
+  start=`date +%s`
+  echo 📁 PREPARED PATHWAY-INDEPENDENT
+  echo $'-----------------------------------------------------------\n'
+
+  cd $TOPDIR/distribution/$NATLANG/lessons
+
+  # echo currently in $(pwd)
+
+  local refreshpathwayindependent=1
+
+  local repoDir=$TOPDIR/shared/langs/$NATLANG/pathway-independent
+
+  # echo repoDir is $repoDir
+
+  test -d "$repoDir" || return
+
+  test $FORCE && rm -fr .pathway-independent
+
+  mkdir -p .pathway-independent
+
+  local docopydir=1
+
+  if checkmd5nochange .pathway-independent $repoDir; then
+    docopydir=
+  fi
+
+  if test $docopydir; then
+    $CP -pr $repoDir/* .pathway-independent
+    mkdir -p .pathway-independent/.cached
+    touch .pathway-independent/.cached/.redo
+  fi
+
+  export PATHWAYROOTDIR=../
+  export DISTROOTDIR=../../
+  export LESSONSUBDIR=lessons
+  export PATHWAYINDEPENDENT=1
+
+  recursiveadoc .pathway-independent "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+
+  export PATHWAYROOTDIR=
+  export DISTROOTDIR=
+  export LESSONSUBDIR=
+  export PATHWAYINDEPENDENT=
+
+  cd $TOPDIR
+
 }
 
 function buildworkbookjsons() {
@@ -2822,6 +2883,8 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 copycommonlessons
+
+copypathwayindependent
 
 # exit
 
