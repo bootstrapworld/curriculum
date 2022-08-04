@@ -56,6 +56,8 @@ files, with a sample lesson and sample pathway:
         practices/*.rkt
         standards/*.rkt
         textbooks/*.rkt
+        <pathway-agnostic, non-lesson docs>
+        pathway-independent/*
     lessons/
       sample-lesson/
         langs/
@@ -248,15 +250,16 @@ resides in
         courses/
           sample-pathway/
             index.shtml
-              workbook/
-                workbook.pdf
-                workbook-long.pdf
-                opt-exercises.pdf
-              resources/
-                protected/
-                  workbook-sols.pdf
-                  workbook-long-sols.pdf
-                  opt-exercises-sols.pdf
+            workbook/
+              workbook.pdf
+              workbook-long.pdf
+              opt-exercises.pdf
+            resources/
+              protected/
+                workbook-sols.pdf
+                workbook-long-sols.pdf
+                opt-exercises-sols.pdf
+
 
 Here `index.shtml` is the web page corresponding to the pathway
 narrative. The student workbooks in `workbook/` are
@@ -289,7 +292,22 @@ the “protected” directory
 Pages under `resources/protected` may prompt you for a teacher
 password, which is available on signing up with Bootstrapworld.
 
-The option `--slides lessonA` additionally generates the slide deck
+The lessons referred to by the various pathways reside in
+`distribution/en-us/lessons/`. Thus:
+
+     distribution/
+       en-us/
+         lessons/
+           sample-lesson/
+             index.shtml
+             pages/
+             solution-pages/
+
+The pathway-agnostic lessons in
+`shared/langs/en-us/pathway-independent` are converted and placed in
+`distribution/en-us/lessons/.pathway-independent`.
+
+The `build-pathway` option `--slides lessonA` additionally generates the slide deck
 for lesson `lessonA`, by calling `build-slide lessonA`. For more details, see
 link:./README-slides.adoc[].
 
@@ -484,8 +502,11 @@ The following is needed to construct documents from this repo:
 
 * A Unix-like environment.
   - If you're already on some flavor of unix, you're there! ✅
-  - If you're on Windows, you'll want to install [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on macOS, your environment is close but missing some tools. You'll want to install [Homebrew](https://brew.sh/) first, then run the following commands to add them:
+  - If you're on Windows, you'll want to install
+    https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
+  - If you're on macOS, your environment is close but missing some
+    tools. You'll want to install
+    https://brew.sh/[Homebrew] first, then run the following commands to add them:
 +
   brew install gnu-sed
   brew install curl
@@ -493,7 +514,10 @@ The following is needed to construct documents from this repo:
 
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
-* Racket, to do preprocessing and other bookkeeping. Any version should do. We're not using any bleeding-edge features of Racket. You'll want to [download and install DrRacket](https://download.racket-lang.org/) and make sure the `racket` binary is in your `$PATH`.
+* Racket, to do preprocessing and other bookkeeping. Any version should
+do. We're not using any bleeding-edge features of Racket. You'll want to
+https://download.racket-lang.org/[download and install DrRacket]
+and make sure the `racket` binary is in your `$PATH`.
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
