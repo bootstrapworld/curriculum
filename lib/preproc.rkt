@@ -1756,6 +1756,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
                             (display-exercise-collation o)]
+                           [(string=? directive "all-projects")
+                            ; (printf "doing all-projects ~a\n" (errmessage-context))
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                            (link-to-opt-projects o)]
                            [(string=? directive "all-lesson-notes")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -2259,7 +2265,7 @@
     ; (printf "exx is ~s\n" exx)
     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
-    (link-to-opt-projects o)
+    ; (link-to-opt-projects o)
 
     (unless (null? exx)
       (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
