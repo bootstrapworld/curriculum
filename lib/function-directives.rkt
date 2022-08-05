@@ -66,7 +66,7 @@
           (string-multiply "&#x5f;" (string-length s-og))))))
 
 (define (wescheme->wescheme e #:indent [indent #f] #:parens [parens #f])
-  ;(printf "doing wescheme->wescheme ~s\n" e)
+  ; (printf "doing wescheme->wescheme ~s\n" e)
   (cond [(string? e) (string-append "\"" e "\"")]
         [(symbol? e) (wescheme-symbol->wescheme e)]
         [(not (pair? e)) (format "~a" e)]
@@ -96,8 +96,10 @@
                                (if rhs-s-nl? "\n" " ")
                                (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
                                rhs-s ")"))]
-                          [(eq? a 'comment)
-                           (string-append "\n; " (second e) "\n")]
+                          [(eq? a 'BEGIN)
+                           (string-join (map wescheme->wescheme (rest e)) "\n")]
+                          [(eq? a 'COMMENT)
+                           (string-append "; " (second e))]
                           [(eq? a 'EXAMPLE)
                            (let ([num-examples (/ (length (rest e)) 2)])
                              (let loop ([n num-examples] [e (rest e)] [r ""])
@@ -210,8 +212,12 @@
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
                                   (string-append lhs-s " = " rhs-s)))]
-                           [(eq? a 'comment)
-                            (string-append "\n# " (second e) "\n")]
+                           [(eq? a 'BEGIN)
+                            (string-join
+                              (map (lambda (e) (wescheme->pyret e #:parens parens)) (rest e))
+                              "\n")]
+                           [(eq? a 'COMMENT)
+                            (string-append "# " (second e))]
                            [(eq? a 'EXAMPLE)
                             (let ([num-examples (/ (length (rest e)) 2)])
                               (let loop ([n num-examples] [e (rest e)] [r "examples:"])
