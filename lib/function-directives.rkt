@@ -96,7 +96,7 @@
                                (if rhs-s-nl? "\n" " ")
                                (if (and rhs-s-nl? indent) (make-string (+ indent 2) #\space) "")
                                rhs-s ")"))]
-                          [(eq? a 'COMMENT)
+                          [(eq? a 'comment)
                            (string-append "\n; " (second e) "\n")]
                           [(eq? a 'EXAMPLE)
                            (let ([num-examples (/ (length (rest e)) 2)])
@@ -210,7 +210,7 @@
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
                                   (string-append lhs-s " = " rhs-s)))]
-                           [(eq? a 'COMMENT)
+                           [(eq? a 'comment)
                             (string-append "\n# " (second e) "\n")]
                            [(eq? a 'EXAMPLE)
                             (let ([num-examples (/ (length (rest e)) 2)])

@@ -3101,7 +3101,7 @@
                                               lhs-s "\n  "
                                               rhs-s
                                               (enclose-span ".rParen" ")")))))))]
-                           [(and (eq? a 'COMMENT) (or wescheme pyret))
+                           [(and (eq? a 'comment) (or wescheme pyret))
                             (string-append "\n"
                               (if wescheme ";" "#") " "
                               (second e)
