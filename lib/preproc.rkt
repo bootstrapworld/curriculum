@@ -852,6 +852,44 @@
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
+(define (make-dist-link f link-text)
+  (cond [(regexp-match "^ *$" f) (set! f "./index.adoc")]
+        [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
+        [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
+  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+         [dir (second m)] [snippet (third m)]
+         [dir-compts (regexp-split #rx"/" dir)]
+         [f.titletxt (path-replace-extension
+                       (build-path dir ".cached" snippet) ".titletxt")]
+         [page-title (and (file-exists? f.titletxt)
+                          (call-with-input-file f.titletxt read-line))]
+         [existent-file? #f])
+    (cond [(or (path-has-extension? f ".adoc")
+               (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
+           (let ([f.adoc (path-replace-extension f ".adoc")]
+                 [f.html (path-replace-extension f ".html")]
+                 [f.shtml (path-replace-extension f ".shtml")]
+                 [f.pdf (path-replace-extension f ".pdf")])
+             (cond [(file-exists? f.html) (set! f f.html) (set! existent-file? #t)]
+                   [(file-exists? f.shtml) (set! f f.shtml) (set! existent-file? #t)]
+                   [(file-exists? f.adoc)
+                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))
+                    (set! existent-file? #t)]
+                   [(file-exists? f.pdf) (set! f f.pdf) (set! existent-file? #t)]
+                   [(path-has-extension? f ".adoc")
+                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
+          [(path-has-extension? f ".pdf")
+           (when (file-exists? f) (set! existent-file? #t))])
+    (unless existent-file?
+      (check-link f)
+      (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
+    (when (and (or (not link-text) (string=? link-text "")) page-title)
+      (set! link-text page-title))
+    (let ([link-output (format "link:~apass:[~a][~a~a]"
+                               *dist-root-dir* f link-text
+                               (if *lesson-plan* ", window=\"_blank\"" ""))])
+      link-output)))
+
 (define (make-lesson-link f link-text)
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
@@ -912,7 +950,7 @@
                (set! existent-file? #t))])
       (unless existent-file?
         (check-link f)
-        (printf "WARNING: Missing file ~a\n\n" f))
+        (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output
@@ -1639,6 +1677,12 @@
                                                o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
+                           [(string=? directive "dist-link")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [n (length args)]
+                                   [page (first args)]
+                                   [link-text (if (> n 1) (second args) "")])
+                              (display (make-dist-link page link-text) o))]
                            [(string=? directive "lesson-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
