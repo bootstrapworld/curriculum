@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-08-03 # last modified
+LASTMOD=2022-08-04 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -887,9 +887,9 @@ function doadocs() {
     # echo f is $f
     if test $PATHWAYINDEPENDENT; then
       # echo PATHWAYINDEPENDENT for $f in l= $LESSONSUBDIR d= $DISTROOTDIR
-      echo "(\"$f\" #:containing-directory \"$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
+      echo "(\"$f\" #:containing-directory \"$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\")" >> $ADOCABLES_INPUT
       echo $LESSONSUBDIR/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
-      echo $LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+      echo $LESSONSUBDIR/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_PWYINDEP_INPUT
     elif test $TGTPATHWAY; then
       echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/$LESSONSUBDIR\" #:dist-root-dir \"$DISTROOTDIR\" #:other-dir $otherdirarg #:target-pathway \"$TGTPATHWAY\" #:solutions-mode? $solutionsmodearg #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
       if test ! $OTHERDIR; then
@@ -2094,46 +2094,36 @@ function copycommonlessons() {
   echo " "
 }
 
-function copypathwayindependent() {
-  # echo doing copypathwayindependent
+function buildpathwayindependent() {
+  # echo doing buildpathwayindependent
   start=`date +%s`
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'
 
-  cd $TOPDIR/distribution/$NATLANG/lessons
+  cd $TOPDIR/distribution/$NATLANG
 
   # echo currently in $(pwd)
 
-  local refreshpathwayindependent=1
 
-  local repoDir=$TOPDIR/shared/langs/$NATLANG/pathway-independent
-
-  # echo repoDir is $repoDir
-
-  test -d "$repoDir" || return
-
-  test $FORCE && rm -fr .pathway-independent
-
-  mkdir -p .pathway-independent
-
-  local docopydir=1
-
-  if checkmd5nochange .pathway-independent $repoDir; then
-    docopydir=
-  fi
-
-  if test $docopydir; then
-    $CP -pr $repoDir/* .pathway-independent
-    mkdir -p .pathway-independent/.cached
-    touch .pathway-independent/.cached/.redo
-  fi
-
-  export PATHWAYROOTDIR=../
-  export DISTROOTDIR=../../
-  export LESSONSUBDIR=lessons
+  export PATHWAYROOTDIR=
+  export DISTROOTDIR=
+  export LESSONSUBDIR=.
   export PATHWAYINDEPENDENT=1
 
-  recursiveadoc .pathway-independent "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+  processadocs
+
+  export PATHWAYROOTDIR=../
+  export DISTROOTDIR=../
+  export LESSONSUBDIR=.
+
+  for f in *; do
+    if test -d "$f"; then
+      if test $(echo $f|grep "^\(lessons\|courses\|lib\|extlib\)$"); then
+        continue
+      fi
+      recursiveadoc "$f" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+    fi
+  done
 
   export PATHWAYROOTDIR=
   export DISTROOTDIR=
@@ -2141,6 +2131,7 @@ function copypathwayindependent() {
   export PATHWAYINDEPENDENT=
 
   cd $TOPDIR
+
 
 }
 
@@ -2509,15 +2500,16 @@ function allthealignments() {
 
 function calculatedistrootdir() {
   local f=$1
-  #echo doing calculatedistrootdir $f
+  f=$(echo $f|$SED -e 's/^\.\///')
+  # echo doing calculatedistrootdir $f
   local doubledots=$(echo $f|$SED -e 's/\/\.\//\//g')
-  #echo I doubledots= $doubledots
+  # echo I doubledots= $doubledots
   doubledots=$(echo $doubledots|$SED -e 's/[^\/]//g')
-  #echo II doubledots= $doubledots
+  # echo II doubledots= $doubledots
   doubledots=$(echo $doubledots|$SED -e 's/^\///')
-  #echo III doubledots= $doubledots
+  # echo III doubledots= $doubledots
   doubledots=$(echo $doubledots|$SED -e  's/\//..\//g')
-  #echo calculatedistrootdir for $f is $DISTROOTDIR
+  # echo calculatedistrootdir for $f is $DISTROOTDIR
   echo $doubledots
 }
 
@@ -2535,12 +2527,35 @@ function postproc_workbookpage() {
     #echo fhtml= $fhtml
     #echo moving $fhtmlcached to $fhtml
     $CP -p $fhtmlcached $fhtml
+    # FIXME: why not mv $fhtmlcached $fhtml
     bumpcsspathdir $fhtml $localDISTROOTDIR
     resolveabbrevs $fhtml $localDISTROOTDIR
     addproglang $fhtml
     insertgdrivesave $fhtml
   fi
   export WORKBOOKPAGE=
+}
+
+function postproc_pwyindep() {
+  local fhtmlcached=$1
+  # echo doing postproc_pwyindep $fhtmlcached
+  if test -f "$fhtmlcached"; then
+    local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
+    # echo localDISTROOTDIR is $localDISTROOTDIR
+    local fdir=${fhtmlcached%/.cached/.*html}
+    #echo  fdir= $fdir
+    local fbase=${fhtmlcached##*/.}
+    #echo fbase= $fbase
+    local fhtml=$fdir/$fbase
+    #echo fhtml= $fhtml
+    #echo moving $fhtmlcached to $fhtml
+    # $CP -p $fhtmlcached $fhtml
+    mv $fhtmlcached $fhtml
+    bumpcsspathdir $fhtml $localDISTROOTDIR
+    resolveabbrevs $fhtml $localDISTROOTDIR
+    addproglang $fhtml
+    insertgdrivesave $fhtml
+  fi
 }
 
 function postproc_lessonplan() {
@@ -2578,6 +2593,7 @@ function postproc_lessonplan() {
 }
 
 function postproc_narrative() {
+  # echo doing postproc_narrative $1
   local fhtmlcached=$1
   if test -f "$fhtmlcached"; then
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
@@ -2611,6 +2627,7 @@ function postproc_narrativeaux() {
 }
 
 function postproc_resources() {
+  # echo doing postproc_resources $1
   local fhtmlcached=$1
   export TEACHERRESOURCEPAGE=1
   if test -f "$fhtmlcached"; then
@@ -2630,6 +2647,7 @@ function postproc_resources() {
 }
 
 function postproc_allpwylessons() {
+  # echo doing postproc_allpwylessons $1
   local fhtml=$1
   if test -f "$fhtml"; then
     local localDISTROOTDIR=../../
@@ -2701,6 +2719,7 @@ function doadocpostproc() {
   echo 👨‍💻POST-PROCESSING HTML
   echo '-----------------------------------------------------------'
 
+  run_postproc postproc_pwyindep $ADOC_POSTPROC_PWYINDEP_INPUT
   run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
   run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
   run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
@@ -2870,21 +2889,22 @@ export ADOC_POSTPROC_NARRATIVE_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-a
 export ADOC_POSTPROC_NARRATIVEAUX_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-narrativeaux.txt.kp
 export ADOC_POSTPROC_RESOURCES_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-resources.txt.kp
 export ADOC_POSTPROC_ALLPWYLESSONS_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-allpathways.txt.kp
+export ADOC_POSTPROC_PWYINDEP_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-adoc-postproc-pwyindep.txt.kp
 export RELEVANT_LESSONS_INPUT=$TOPDIR/distribution/$NATLANG/.cached/.do-relevant-lessons.txt.kp
 
 rm -f $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT $ADOC_POSTPROC_PWYINDEP_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $ADOC_POSTPROC_LESSONPLAN_INPUT $ADOC_POSTPROC_NARRATIVE_INPUT $ADOC_POSTPROC_NARRATIVEAUX_INPUT \
-  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT \
+  $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT $ADOC_POSTPROC_PWYINDEP_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 copycommonlessons
 
-copypathwayindependent
+buildpathwayindependent
 
 # exit
 
