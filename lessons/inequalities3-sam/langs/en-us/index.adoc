@@ -39,7 +39,7 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 - Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 
 [.lesson-instruction]
-- What is something you noticed about this program? _As Sam moves, the @vocab{coordinates} are displayed at the top of the screen; the coordinates are all in the 1st quadrant; etc._
+- What is something you noticed about this program? _As Sam moves, the coordinates are displayed at the top of the screen; the coordinates are all in the 1st quadrant; etc._
 - What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
 - How far can Sam go to the left and stay on the screen? _Up to, but not beyond, an x of -40._
 - How could we write this as an @vocab{expression}? _Appropriate responses are @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}._
@@ -127,11 +127,18 @@ Students solve a word problem involving compound inequalities, using `and` to co
 *Note:* In this programming language, question marks are pronounced "huh?". So `safe-left?` would be pronounced "safe left huh?" This can be a source of some amusement for students!
 }
 
-Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
+[.roleplay-box, cols="1a", grid="none", stripes="none"]
+|===
 
-Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @ifproglang{wescheme}{`safe-left?` and `safe-right?`} @ifproglang{pyret}{`is-safe-left` and `is-safe-right`} will respond with either "true" or "false".
+|
+@span{.title}{Role Play: Functions in Sam the Butterfly}
 
-The function @ifproglang{wescheme}{`onscreen`?} @ifproglang{pyret}{`is-onscreen`}, however, will call the `safe-left` function! So the student roleplaying @ifproglang{wescheme}{`onscreen`?}@ifproglang{pyret}{`is-onscreen`} should turn to `safe-left` and give the input to them.
+Recruit three student volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}. Give them 1 minute to read the contract and code, as written in the program.
+
+Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @show{(code 'safe-left?)} and @show{(code 'safe-right?)} will respond with either "true" or "false".
+
+The function @show{(code 'onscreen?)}, however, will call the @show{(code 'safe-left?)} function! So the student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
+
 
 For example:
 @ifproglang{wescheme}{
@@ -179,6 +186,10 @@ Hopefully your students will notice that `safe-right?` did not participate in th
 - is-onscreen (turns back to facilitator): "true"
 
 Hopefully your students will notice that `is-safe-right` did not participate in this roleplay scenario at all!
+}
+
+|===
+
 
 [.lesson-instruction]
 - What is the problem with `is-onscreen`? _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
@@ -219,7 +230,7 @@ Have students open their in-progress game file and click "Run". Invite them to a
 - How are the `TARGET` and `DANGER` behaving right now? _They move across the screen._
 - What do we want to change? _We want them to come back after they leave one side of the screen._
 - What happens to an image's x-coordinate when it moves off the screen? _An image is entirely off-screen if its x-coordinate is less than -50 and greater than 690._
-- How can we make the computer understand when an image has moved off the screen? _We can teach the computer to compare the image's @vocab{coordinates} to a boundary on the number line, just like we did with Sam the Butterfly!_
+- How can we make the computer understand when an image has moved off the screen? _We can teach the computer to compare the image's coordinates to a boundary on the number line, just like we did with Sam the Butterfly!_
 
 === Investigate
 

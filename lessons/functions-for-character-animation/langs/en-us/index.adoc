@@ -48,33 +48,28 @@ Students connect the behavior of functions with changing coordinate values, ulti
 * How might this apply to our game?
 ** _If we change image @vocab{coordinates} a little bit at a time, they will appear to move._
 
-Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`. Have the class select a starting x- and y-coordinate for the `TARGET`. Explain to students the following:
+[.roleplay-box, cols="1", grid="none", stripes="none"]
+|===
 
-[.lesson-instruction]
-- The `TARGET` starts at the location we selected, and then moves by 50 (pixels) on each frame of the game.
-- When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving down the x-axis by 50 (pixels).
+| @span{.title}{Role-Play: Making Characters Move!}
+
+Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`. Have the class select a starting x- and y-coordinate for the `TARGET`.
+
+The `TARGET` starts at a particular position, and then moves by 50 (pixels) to the left on each frame of the game.
+
+When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
+
 @ifproglang{wescheme}{
-- We make `TARGET` move by calling out `(update-target 300)`, `(update-target 250)`, etc.
+- Make `TARGET` move by calling out `(update-target 300)`, `(update-target 250)`, etc.
 }
 @ifproglang{pyret}{
-- We make `TARGET` move by calling out `update-target(300, 200)`, `update-target(250, 100)`, etc.
+- Make `TARGET` move by calling out `update-target(300, 200)`, `update-target(250, 100)`, etc.
 }
-- The function `update-target` moves the target 50 pixels at a time. How can we move the target across the classroom more quickly?
 
-After practicing with `TARGET`, add `DANGER` in. Explain to students the following:
+Ask students: what if we wanted the `update-target` function to move the `TARGET` across the classroom __more quickly?__ How would the function have to change?
 
-[.lesson-instruction]
-- `DANGER` takes a step in the _positive direction_ when they hear "update danger" followed by their current x-coordinate.
-@ifproglang{wescheme}{
-- We make `DANGER` move by calling out `(update-danger 40)`, `(update-danger 39)`, etc.
-}
-@ifproglang{pyret}{
-- We make `DANGER` move by calling out `update-danger(40, 92)`, `update-danger(39, 18)`, etc.
-}
-- On a standard number line, if the `DANGER` is moving to the right, is its @vocab{x-coordinate} increasing or decreasing?
-** _Increasing._
-
-Practice this a few times with your volunteer, asking the class what the new x-coordinate is each time. Then have students practice calling the `update-danger` function.
+Repeat with `DANGER`, this time moving _right_ across the x-axis. Then ask: what if we wanted `update-danger` to move the `DANGER` in the __opposite direction?__
+|===
 
 [.lesson-instruction]
 * What did you notice about the movement of TARGET and DANGER?  What was changing about them?
