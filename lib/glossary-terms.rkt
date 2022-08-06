@@ -31,7 +31,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("bar chart") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
-    ((en-us ("bin") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
+    ((en-us ("bin" "interval") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
 
     ((en-us ("Boolean") "a type of data with two values: true and false")
@@ -132,6 +132,9 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("direction") "the relationship between two quantitative variables: either they increase/decrease together or one may increase while the other decreases")
      (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen juntas o una incrementa mientras la otra decrece"))
+
+    ((en-us ("distribution") "a description of the number of times or relative probabilities that different quantities occur in a sample")
+     (es-mx ("distribution") ""))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
