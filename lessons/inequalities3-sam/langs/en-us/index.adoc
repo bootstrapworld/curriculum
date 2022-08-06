@@ -76,12 +76,16 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 |
 @span{.title}{"False" doesn't mean "Wrong"!}
 
-A lot of students - especially confident ones - may struggle to come up with an example where @show{(code 'safe-left?)} returns `false`, like the second one below:
+A lot of students - especially confident ones - may struggle to come up with an example where @show{(code 'safe-left?)} returns `false`:
 
 @show{
-(code '(EXAMPLE
-  (safe-left? 189) (> 189 -50)
-  (safe-left? -65) (> -65 -50)))
+
+(code `(BEGIN
+  (COMMENT "Students hate writing the second one!")
+  (EXAMPLE
+    (safe-left? 189) (> 189 -50)
+    (safe-left? -65) (> -65 -50))
+  ))
 }
 
 This misconception comes from confusing a statement that is "false" with a program that is "wrong". In the second example, above, the result of @show{(code '(safe-left? -65))} _is_ `false`, because "65 is greater than -50" _is a false statement_. Remind your students that you want one example that's true, and a second that's false!
