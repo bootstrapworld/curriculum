@@ -3086,8 +3086,7 @@
                      (cond [(and (eq? a 'EXAMPLE) wescheme)
                             (let ([num-examples (/ (length (rest e)) 2)])
                               (let loop ([n num-examples] [e (rest e)] [r ""])
-                                (if (= n 0)
-                                    r
+                                (if (= n 0) r
                                     (let* ([lhs (first e)]
                                            [rhs (second e)]
                                            [lhs-s (sexp->block lhs #:wescheme #t)]
@@ -3101,11 +3100,12 @@
                                               lhs-s "\n  "
                                               rhs-s
                                               (enclose-span ".rParen" ")")))))))]
-                           [(and (eq? a 'comment) (or wescheme pyret))
-                            (string-append "\n"
-                              (if wescheme ";" "#") " "
-                              (second e)
+                           [(eq? a 'BEGIN)
+                            (string-join
+                              (map (lambda (e) (sexp->block e #:pyret pyret #:wescheme wescheme)) (rest e))
                               "\n")]
+                           [(and (eq? a 'COMMENT) (or wescheme pyret))
+                            (string-append (if wescheme "; " "# ") (second e))]
                            [else
                              (enclose-span ".expression"
                                (if (or (symbol? a) (answer? a))
