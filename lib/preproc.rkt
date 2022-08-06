@@ -1193,8 +1193,8 @@
             (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
             (unless projects-title-done?
               (set! projects-title-done? #t)
-              (fprintf o "\n\n- *Projects*\n\n"))
-            (fprintf o "+\n*~a* {startsb}~a{endsb}\n~a\n"
+              (fprintf o "\n\n*Single-Lesson Projects*\n\n"))
+            (fprintf o "- *~a* {startsb}~a{endsb}\n~a\n"
                      (regexp-replace "^link:" proj-link "link:../")
                      (regexp-replace "^link:" (second x) "link:../")
                      (if (file-exists? proj-desc)
