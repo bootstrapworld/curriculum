@@ -31,6 +31,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("bar chart") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
+    ((en-us ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair.")
+     (es-mx ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair."))
+
     ((en-us ("bin" "interval") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
 
@@ -68,10 +71,13 @@ when it prints out the glossary for a particular unit
      (es-mx ("comentarios de código") "anotaciones en el código que facilitan nuestra comprensión de lo que el código intenta hacer; la computadora no los lee"))
 
     ((en-us ("compound inequality" "compound inequalities") "an inequality that combines two simple inequalities using _and_ or _or_")
-     (es-mx("desigualdad compuesta") "una desigualdad que combina dos desigualdades simples con _o_ o _y_"))
+     (es-mx ("desigualdad compuesta") "una desigualdad que combina dos desigualdades simples con _o_ o _y_"))
 
     ((en-us ("conditional") "a code expression made of questions and answers")
      (es-mx ("condicional") "una expresión de código compuesta de preguntas y respuestas"))
+
+    ((en-us ("confounding variable") "an unaccounted-for variable that influences the relationship between variables being analyzed")
+     (es-mx ("confounding variable") ""))
 
     ((en-us ("constructor") "a function that creates instances of a data structure")
      (es-mx ("constructor") "la función que crea instancias de una estructura"))
@@ -421,6 +427,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("scatter plot") "a display of the relationship between two quantitative variables, graphing each explanatory value on the x axis and the accompanying response on the y axis")
      (es-mx ("gráfico de dispersión")  "Un gráfico donde los puntos se colocan en los ejes según pares de valores."))
     
+    ((en-us ("selection bias") "the non-random selection of individuals, groups, or data")
+     (es-mx ("selection bias") "the non-random selection of individuals, groups, or data"))
+
     ((en-us ("shape") "The aspect of a dataset - visible in a histogram or box plot - that describes which values are more or less common.")
      (es-mx ("forma de la distribución")  "el aspecto de un conjunto de datos -visible en una histograma o diagrama de caja - que describe cuáles de los valors son más o menos comun."))
         
