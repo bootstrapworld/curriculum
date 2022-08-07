@@ -15,8 +15,8 @@
 (require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
 (require "standards/standards-and-lessons.rkt")
+(require "textbooks/textbooks-and-lessons.rkt")
 (require "practices/lessons-and-practices.rkt")
-(require "textbooks/lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -1547,16 +1547,10 @@
             (when (member *lesson-plan-base* ll)
               (add-standard s #f *lesson-plan* #f))))
 
-        ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
-        ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
-
-        (for ([x *lessons-and-textbooks*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
-              (add-textbook-chapter s #f *lesson-plan* #f))))
-
-        ;(printf "textbooks-represented = ~s\n" *textbooks-represented*)
-        ;(printf "chapters-used = ~s\n" *chapters-used*)
+        (for ([t-ll *textbooks-and-lessons*])
+          (let ([t (first t-ll)] [ll (rest t-ll)])
+            (when (member *lesson-plan-base* ll)
+              (add-textbook-chapter t #f *lesson-plan* #f))))
 
         (for ([x *lessons-and-practices*])
           (when (string=? (first x) *lesson-plan-base*)

@@ -12,13 +12,14 @@
 
 ;textbooks
 
-(require "textbooks/lessons-and-textbooks.rkt")
+(require "textbooks/textbooks-and-lessons.rkt")
 
 (require "textbooks/the-textbook-dictionaries.rkt")
 
 ;practices
 
 (require "practices/lessons-and-practices.rkt")
+; (require "practices/practices-and-lessons")
 
 (require "practices/the-practices-dictionaries.rkt")
 
@@ -48,7 +49,7 @@
   (display "</select>\n" o)
   (display "++++\n" o))
 
-(define (display-subreport-newstyle o title standard-entries dictionaries)
+(define (display-subreport o title standard-entries dictionaries)
   ; (printf "doing display-subreport ~s  \n" title  )
 
   (for ([dictionary dictionaries])
@@ -86,8 +87,8 @@
       (fprintf o "|===\n\n")
       )))
 
-(define (display-subreport o title lesson-entries dictionaries)
-  ; (printf "doing display-subreport ~s  \n" title  )
+(define (display-subreport-oldstyle o title lesson-entries dictionaries)
+  ; (printf "doing display-subreport-oldstyle ~s  \n" title  )
 
   (for ([dictionary dictionaries])
     ; (printf "doing dictionary ~s\n" dictionary)
@@ -142,11 +143,11 @@
     (print-coverage-script-n-style o)
     (display-selection o)
 
-    (display-subreport-newstyle o "Standards" *standards-and-lessons* *standards-list*)
+    (display-subreport o "Standards" *standards-and-lessons* *standards-list*)
 
-    (display-subreport o "Textbooks" *lessons-and-textbooks* *textbooks-list*)
+    (display-subreport o "Textbooks" *textbooks-and-lessons* *textbooks-list*)
 
-    (display-subreport o "Practices" *lessons-and-practices* *practices-list*)
+    (display-subreport-oldstyle o "Practices" *lessons-and-practices* *practices-list*)
 
     )
 
