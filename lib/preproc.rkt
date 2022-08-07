@@ -16,7 +16,7 @@
 (require "textbooks/the-textbook-dictionaries.rkt")
 (require "standards/standards-and-lessons.rkt")
 (require "textbooks/textbooks-and-lessons.rkt")
-(require "practices/lessons-and-practices.rkt")
+(require "practices/practices-and-lessons.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -1552,10 +1552,10 @@
             (when (member *lesson-plan-base* ll)
               (add-textbook-chapter t #f *lesson-plan* #f))))
 
-        (for ([x *lessons-and-practices*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
-              (add-practice s #f *lesson-plan* #f))))
+        (for ([p-ll *practices-and-lessons*])
+          (let ([p (first p-ll)] [ll (rest p-ll)])
+            (when (member *lesson-plan-base* ll)
+              (add-practice p #f *lesson-plan* #f))))
 
         )
       ;

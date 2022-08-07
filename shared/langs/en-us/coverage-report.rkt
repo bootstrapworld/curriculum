@@ -18,8 +18,7 @@
 
 ;practices
 
-(require "practices/lessons-and-practices.rkt")
-; (require "practices/practices-and-lessons")
+(require "practices/practices-and-lessons.rkt")
 
 (require "practices/the-practices-dictionaries.rkt")
 
@@ -87,51 +86,6 @@
       (fprintf o "|===\n\n")
       )))
 
-(define (display-subreport-oldstyle o title lesson-entries dictionaries)
-  ; (printf "doing display-subreport-oldstyle ~s  \n" title  )
-
-  (for ([dictionary dictionaries])
-    ; (printf "doing dictionary ~s\n" dictionary)
-    (let ([lyst (list-ref dictionary 2)]
-          [opt (sanitize-css-id (first dictionary))]
-          [counters '()])
-      ; (printf "doing lyst = ~s\n" opt)
-      (for ([desc lyst])
-        (set! counters
-          (cons (list (first desc) (second desc) (box "") (box 0)) counters)))
-
-      (set! counters (reverse counters))
-
-      (for ([lesson-entry lesson-entries])
-        (let ([lesson-name (first lesson-entry)]
-              [lesson-referents (rest lesson-entry)])
-          (for ([referent lesson-referents])
-            (let ([c (assoc referent counters)])
-              (when c
-                (let* ([b (third c)]
-                       [count-box (fourth c)]
-                       [lessons (unbox b)]
-                       [count (unbox count-box)])
-                  (set-box! b (string-append lessons
-                                (if (= count 0) "" ", ")
-                                lesson-name))
-                  (set-box! count-box (+ count 1))
-                  ))))))
-
-      (fprintf o "[.coverageElement.~a]\n" opt)
-      (fprintf o "[cols=\"2a,1a,7a\"]\n")
-      (fprintf o "|===\n")
-      (for ([entry counters])
-        (let ([std (first entry)] [desc (second entry)] [lessons (unbox (third entry))]
-                                [count (unbox (fourth entry))])
-          (set! desc (regexp-replace* "\\|" desc "\\&#x7c;"))
-          (if (string=? lessons "")
-              (fprintf o "| [.unused]#~a# | [.unused]#none# | [.unused]#~a#\n" std desc)
-              (fprintf o "| ~a | ~a (~a) | ~a\n" std lessons count desc)))
-        )
-      (fprintf o "|===\n\n")
-      )))
-
 (call-with-output-file "coverage-report.adoc"
   (lambda (o)
     (fprintf o "= Coverage Report\n\n")
@@ -147,7 +101,7 @@
 
     (display-subreport o "Textbooks" *textbooks-and-lessons* *textbooks-list*)
 
-    (display-subreport-oldstyle o "Practices" *lessons-and-practices* *practices-list*)
+    (display-subreport o "Practices" *practices-and-lessons* *practices-list*)
 
     )
 
