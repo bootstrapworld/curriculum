@@ -14,7 +14,7 @@
 (require "standards/the-standards-dictionaries.rkt")
 (require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
-(require "standards/lessons-and-standards.rkt")
+(require "standards/standards-and-lessons.rkt")
 (require "practices/lessons-and-practices.rkt")
 (require "textbooks/lessons-and-textbooks.rkt")
 (require "collect-lang-prereq.rkt")
@@ -1542,9 +1542,9 @@
       ;
       (when *lesson-plan*
 
-        (for ([x *lessons-and-standards*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
+        (for ([s-ll *standards-and-lessons*])
+          (let ([s (first s-ll)] [ll (rest s-ll)])
+            (when (member *lesson-plan-base* ll)
               (add-standard s #f *lesson-plan* #f))))
 
         ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
