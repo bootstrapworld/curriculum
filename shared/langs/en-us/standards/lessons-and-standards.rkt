@@ -81,6 +81,9 @@
         "OK.3.AP.PD.04"
         "OK.4.AP.PD.04"
         "OK.5.AP.PD.04"
+        "MS-SEP5-2"
+        "MS-SEP5-5"
+        "HS-SEP5-2"
         )
 
     ("functions-problem-solving-together" 
@@ -103,6 +106,9 @@
         "3B-AP-21"
         "OK.3.AP.PD.01"
         "OK.L2.AP.M.01"
+        "MS-SEP5-2"
+        "MS-SEP5-5"
+        "HS-SEP5-2"
         )
 
     ("defining-values"
@@ -146,6 +152,9 @@
         "OK.L1.AP.M.01"
         "OK.L1.AP.M.02"
         "9-12.Algorithms and Programming.Control"
+        "MS-SEP5-2"
+        "MS-SEP5-5"
+        "HS-SEP5-2"
         )
 
     ("simple-data-types"
@@ -195,6 +204,10 @@
         "3B-AP-10"
         "3B-AP-14" ; STEMworks
         "3B-AP-21" ; STEMworks
+        "MS-SEP5-2"
+        "MS-SEP5-5"
+        "HS-SEP5-2"
+        "HS-SEP5-3"
         )
 
     ("flags" 
@@ -219,6 +232,7 @@
         "OK.7.GM.4.2"
         "OK.6.AP.PD.01"
         "3A-AP-18"
+        "MS-SEP5-3"
         ) 
 
     ("function-composition" 
@@ -237,6 +251,7 @@
         "2-AP-17"  ; STEMworks
         "2-AP-19"  ; STEMworks
         "3B-AP-21" ; STEMworks
+        "MS-SEP5-3"
         )
 
     ("function-notation"
@@ -520,6 +535,8 @@
         "9-12.Computing Systems.Troubleshooting" 
         "6-8.Computing Systems.Troubleshooting"
         "OK.L1.IC.C.02"
+        "HS-SEP5-4"
+        "HS-SEP5-4"
         )
 
     ("choosing-your-dataset" 
@@ -557,6 +574,8 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "MS-SEP4-1" ; NGSS
+        "MS-SEP4-2" ; NGSS
         )
     
     ("defining-table-functions" 
@@ -587,6 +606,7 @@
         "7.RP.A.3"
         "7.SP.B"
         "HSS.ID.A"
+        "MS-SEP4-2" ; NGSS
         )
 
     ("ds-intro" 
@@ -594,6 +614,11 @@
         "SL.9-10.1" 
         "OK.8.DA.CVT.01"
         "OK.5.DA.IM.01"
+        "MS-SEP1-1"
+        "MS-SEP1-3"
+        "HS-SEP1-3"
+        "HS-SEP1-5"
+        "HS-SEP1-9"
         )
 
     ("ethics-privacy-and-bias" 
@@ -628,6 +653,8 @@
         "OK.6.D.1.3"
         "OK.L1.AP.A.01"
         "OK.3.AP.C.01"
+        "MS-SEP4-7"
+        "MS-SEP5-3"
         )
 
     ("histograms" 
@@ -644,6 +671,8 @@
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        "MS-SEP4-2" ; NGSS
+        "MS-SEP5-1" ; NGSS
         )
 
     ("histograms2" 
@@ -664,6 +693,8 @@
         "OK.8.DA.S.01"
         "OK.7.D.1.2"
         "OK.6.D.1.3"
+        "MS-SEP4-2" ; NGSS
+        "MS-SEP5-1"
         )
 
     ("custom-scatter-plots"
@@ -682,6 +713,8 @@
         "2-DA-08"
         "6-8.Data and Analysis.Inference and Models" 
         "9-12.Algorithms and Programming.Control"
+        "MS-SEP4-2"
+        "MS-SEP5-1"
         )
 
     ("linear-regression" 
@@ -707,6 +740,18 @@
         "OK.MAP.7"
         "OK.3.DA.IM.01"
         "OK.4.DA.IM.01"
+        "MS-SEP2-2"
+        "MS-SEP2-3"
+        "MS-SEP2-5"
+        "HS-SEP2-1"
+        "HS-SEP2-3"
+        "HS-SEP2-7"
+        "HS-SEP4-1"
+        "MS-SEP4-2"
+        "HS-SEP4-3"
+        "MS-SEP5-1"
+        "HS-SEP5-1"
+        "HS-SEP5-2"
         )
 
     ("measures-of-center"
@@ -719,6 +764,7 @@
         "HSS.ID.A.3"
         "6-8.Data and Analysis.Inference and Models"
         "OK.PA.D.1.2"
+        "MS-SEP4-5"
         )
 
     ("box-plots" 
@@ -740,6 +786,7 @@
         "OK.7.D.1.2"
         "OK.8.DA.S.01"
         "OK.L2.DA.CVT.02"
+        "MS-SEP4-2"
         )
 
     ("standard-deviation" 
@@ -763,6 +810,8 @@
         "OK.7.D.1.2"
         "OK.8.DA.S.01"
         "OK.L2.DA.CVT.02"
+        "MS-SEP4-5"
+        "HS-SEP4-5"
         )
 
     ("method-chaining" 
@@ -798,6 +847,8 @@
         "OK.L1.IC.C.02"
         "OK.6.AP.PD.04"
         "OK.7.AP.PD.04"
+        "MS-SEP4-2"
+        "MS-SEP4-7"
         )
 
     ("scatter-plots"
@@ -816,6 +867,9 @@
         "6-8.Data and Analysis.Visualization and Transformation"
         "OK.PA.D.1.3"
         "OK.L1.DA.IM.01"
+        "MS-SEP4-1"
+        "MS-SEP4-2"
+        "MS-SEP5-1"
         )
 
     ("table-methods" 
@@ -844,6 +898,12 @@
         "OK.3.DA.CVT.01"
         "OK.4.DA.CVT.01"
         "OK.5.DA.CVT.01"
+        "MS-SEP3-1"
+        "MS-SEP3-2"
+        "MS-SEP3-3"
+        "MS-SEP3-4"
+        "HS-SEP3-1"
+        "HS-SEP3-4"
         )
 
     ("project-exploration-paper"
@@ -888,6 +948,42 @@
         "3A-IC-30"
         "3B-IC-25"
         "3B-IC-26"
+        "MS-SEP1-1" ; NGSS
+        "MS-SEP1-2" ; NGSS
+        "MS-SEP1-4" ; NGSS
+        "MS-SEP1-6" ; NGSS
+        "MS-SEP1-8" ; NGSS
+        "HS-SEP1-2" ; NGSS
+        "HS-SEP1-3" ; NGSS
+        "HS-SEP1-5" ; NGSS
+        "HS-SEP1-7" ; NGSS
+        "MS-SEP2-1" ; NGSS
+        "MS-SEP2-2" ; NGSS
+        "MS-SEP2-3" ; NGSS
+        "MS-SEP2-5" ; NGSS
+        "HS-SEP2-1" ; NGSS
+        "HS-SEP2-3" ; NGSS
+        "HS-SEP2-4" ; NGSS
+        "MS-SEP3-1" ; NGSS
+        "HS-SEP3-1" ; NGSS
+        "HS-SEP3-5" ; NGSS
+        "MS-SEP4-1" ; NGSS
+        "MS-SEP4-2" ; NGSS
+        "MS-SEP4-3" ; NGSS
+        "MS-SEP4-4" ; NGSS
+        "MS-SEP4-5" ; NGSS
+        "MS-SEP4-7" ; NGSS
+        "HS-SEP4-3" ; NGSS
+        "MS-SEP5-1" ; NGSS
+        "MS-SEP5-2" ; NGSS
+        "MS-SEP5-3" ; NGSS
+        "MS-SEP5-4" ; NGSS
+        "HS-SEP5-2" ; NGSS
+        "HS-SEP5-3" ; NGSS
+        "HS-SEP5-5" ; NGSS
+        "MS-SEP6-1" ; NGSS
+        "MS-SEP6-2" ; NGSS
+        "HS-SEP6-1" ; NGSS
         )
 
     ("project-research-paper"
@@ -933,6 +1029,46 @@
         "3B-IC-25"
         "3B-IC-26"
         "3B-NI-06"
+        "MS-SEP1-1" ; NGSS
+        "MS-SEP1-2" ; NGSS
+        "MS-SEP1-4" ; NGSS
+        "MS-SEP1-6" ; NGSS
+        "MS-SEP1-8" ; NGSS
+        "HS-SEP1-2" ; NGSS
+        "HS-SEP1-3" ; NGSS
+        "HS-SEP1-5" ; NGSS
+        "HS-SEP1-7" ; NGSS
+        "MS-SEP2-1" ; NGSS
+        "MS-SEP2-2" ; NGSS
+        "MS-SEP2-3" ; NGSS
+        "MS-SEP2-5" ; NGSS
+        "HS-SEP2-1" ; NGSS
+        "HS-SEP2-3" ; NGSS
+        "HS-SEP2-4" ; NGSS
+        "MS-SEP3-1" ; NGSS
+        "HS-SEP3-1" ; NGSS
+        "HS-SEP3-5" ; NGSS
+        "MS-SEP4-1" ; NGSS
+        "MS-SEP4-2" ; NGSS
+        "MS-SEP4-3" ; NGSS
+        "MS-SEP4-4" ; NGSS
+        "MS-SEP4-5" ; NGSS
+        "MS-SEP4-7" ; NGSS
+        "HS-SEP4-3" ; NGSS
+        "MS-SEP5-1" ; NGSS
+        "MS-SEP5-2" ; NGSS
+        "MS-SEP5-3" ; NGSS
+        "MS-SEP5-4" ; NGSS
+        "HS-SEP5-2" ; NGSS
+        "HS-SEP5-3" ; NGSS
+        "HS-SEP5-5" ; NGSS
+        "MS-SEP6-1" ; NGSS
+        "MS-SEP6-2" ; NGSS
+        "HS-SEP6-1" ; NGSS
+        "MS-SEP7-1" ; NGSS
+        "MS-SEP7-3" ; NGSS
+        "HS-SEP7-2" ; NGSS
+        "MS-SEP8-2" ; NGSS
         )   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
