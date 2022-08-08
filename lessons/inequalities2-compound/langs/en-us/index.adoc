@@ -43,7 +43,7 @@ We use inequalities for lots of things:
 - Are the cookies finished baking? (@math{timer = 0})
 
 [.lesson-instruction]
-Have students come up with other examples.
+What other examples can you come up with?
 
 Many times we need to _combine_ inequalities:
 
@@ -51,9 +51,9 @@ Many times we need to _combine_ inequalities:
 - Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $15})
 
 [.lesson-instruction]
-Have students come up with other examples.
+Can you think of examples of when we might want to combine inequalities?
 
-Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
+Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?" This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
 
 === Investigate
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
@@ -79,72 +79,52 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 == Solutions and Non-Solutions of Compound Inequalities
 
 === Launch
-Have students identify 4 solutions and 4 non-solutions for each of the following inequalities.
 
-* @math{x \gt 5}
-* @math{x \le 15}
-
-What about the solution set of @math{x \gt 5} `and` @math{x \le 15}?  What numbers make both of these inequality expressions true?
-
-How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numbers make at least one of these inequality expressions true?
+[.lesson-instruction]
+- What are 4 solutions and 4 non-solutions for @math{x \gt 5} ?
+** _Possible answers: 5.001, 1000, 24, 73.26_
+- What are 4 solutions and 4 non-solutions for @math{x \le 15}?
+** _Possible answers: 15, 14.98, -63, 1/2_
+- What numbers make _both_ of these inequalities true?
+** _Possible answers: 5.001, 10, 12.374, 15_
+- What is the solution set for @math{x \gt 5} `and` @math{x \le 15}?
+** @math{5 \lt x \le 15}
+- How would that be different from @math{x \gt 5} `or` @math{x \le 15}?
+** _All real numbers are a part of the solution set for @math{x \gt 5} `or` @math{x \le 15}_
 
 === Investigate
 
 [.lesson-instruction]
-Have students log in to the @starter-file{inequalities-compound}, read the code carefully and click "Run" to see the graphs they've just considered.
+- Log in to the @starter-file{inequalities-compound}.
+- Click "Run" to see the two graphs you've just considered, @math{x \gt 5} and @math{x \le 15}.
 
-This starter file includes two special functions.
-
-`and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
-
-@show{ (code '(define (gt5 x) (> x 5))) }
-
-@show{ (code '(define (lte15 x) (<= x 15))) }
-
-@show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
-
-@span{.center}{@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities" ,""}}
-
-@show{ (code '(define (lt5 x) (< x 5))) }
-
-@show{ (code '(define (gte15 x) (>= x 15))) }
-
-@show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
-
-_Note: Some pairs of inequalities do not intersect at all and therefore have *no solutions*._
-
-@span{.center}{@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions" ,""}}
-
-`or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
-
-@show{ (code '(define (lt5 x) (< x 5))) }
-
-@show{ (code '(define (gte15 x) (>= x 15))) }
-
-@show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
-
-@span{.center}{@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities" ,""}}
-
-@show{ (code '(define (gt5 x) (> x 5))) }
-
-@show{ (code '(define (lte15 x) (<= x 15))) }
-
-@show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }
-
-_Note: Some @vocab{unions}, like the one below, include *all real numbers*; they have *infinite solutions* that satisfy at least one of the inequalities._
-
-@span{.center}{@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union" ,""}}
+When students click "Run", four graphs will appear. The top two are the inequalities they've just discussed. Encourage students to verify that their solutions and non-solutions are correct. Explain that the bottom two graphs are produced by the special functions `and-intersection` and `or-union`. Use the discussion questions below as a jumping off point in guiding students' analysis of the starter file.
 
 [.lesson-instruction]
-Turn to @printable-exercise{compound-inequality-solutions.adoc} and explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+--
+- Can you describe what `and-intersection` does?
+** _It takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true._
+- What do you think will happen if we enter a pair of inequalities that does not intersect at all and therefore has no solutions?
+** _We will see a graph with only red circles, representing non-solutions, as below. None of the graph will be shaded blue. A message will tell us that no solutions exist in the provided range._
+@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions" ,""}
+- Can you describe what `or-union` does?
+** _It takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true._
+- What do you think will happen if the union of a pair of inequalities includes _all_ real numbers?
+** _We will see a graph that has all regions shaded blue, with only green circles (no red). A message will tell us that all regions shaded blue are a part of the solution._
+@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union" ,""}
+--
 
-Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a @vocab{compound inequality}.
-
-@show{ (code '(define (fiveto15 x)(and (> x 5) (<= x 15)))) }
-@show{ (code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }
+Once students are familiar with the starter file, they are ready use it as they to practice identifying solutions and non-solutions for compound inequalities.
 
 [.lesson-instruction]
-Turn to @printable-exercise{compound-inequality-functions.adoc} and have students write code to describe the compound inequalities pictured.
+- Turn to @printable-exercise{compound-inequality-solutions.adoc}.
+- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+
+Explain to students that instead of defining two functions as simple inequalities, we can produce an inequality graph by defining one function to be a @vocab{compound inequality}! In the following activity, students will analyze inequality graphs and define a _single_ function that produces the graph. Walk students through the completed first example before they attempt to write this code on their own.
+
+[.lesson-instruction]
+- Turn to @printable-exercise{compound-inequality-functions.adoc}.
+- Write code to describe the compound inequalities pictured.
 
 @ifproglang{pyret}{If you have time, have students open to @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
 }
