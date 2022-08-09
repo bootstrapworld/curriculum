@@ -435,15 +435,20 @@ tr th.tableblock {
   left:               -2em;
 }
 
-.lesson-instruction {
+.lesson-instruction, .lesson-roleplay {
   min-height: 50px;
   background: #eee;
   clear:      both;
   padding:    5px;
   margin:     2ex 0;
 }
-.lesson-instruction > *:first-child { margin-left: 60px; }
-.lesson-instruction > *:first-child::before {
+.lesson-instruction > *:first-child, 
+.lesson-roleplay    > *:first-child { 
+  margin-left: 60px; 
+}
+
+.lesson-instruction > *:first-child::before,
+.lesson-roleplay    > *:first-child::before {
   content:  url('lesson-instruction.png');
   height:   50px;
   width:    50px;
@@ -451,6 +456,7 @@ tr th.tableblock {
   margin-right: 10px;
   margin-left:-60px;
 }
+.lesson-roleplay    > *:first-child::before { content: url('lesson-roleplay.png') }
 
 .lesson-point {
   font-weight:        bold;
@@ -463,7 +469,7 @@ tr th.tableblock {
 .lesson-point p { margin: 0ex 1ex; }
 
 /* Callout boxes */
-.strategy-box, .notice-box, .roleplay-box {
+.strategy-box, .notice-box {
   background:         #efefef;
   border:             solid 5px !important;
   width:              75%;
@@ -472,28 +478,17 @@ tr th.tableblock {
   clear:              both;
   position:           relative;
 }
-.strategy-box td { width: 8in; }
-.roleplay-box td { width: 8in; }
-.notice-box   td { width: 8in; }
+.strategy-box td, .notice-box td { width: 8in; }
 
 .strategy-box, .strategy-box .title { border-color: #1a73b5 !important; }
-.roleplay-box, .roleplay-box .title { border-color: #e17070 !important; }
 .notice-box,   .notice-box   .title { border-color: #7747a5 !important; }
 
-.strategy-box .title, .notice-box .title, .roleplay-box .title {
+.strategy-box .title, .notice-box .title {
   width:              100%;
   display:            block;
   text-align:         center;
   font-weight:        bold;
   font-size:          1.5rem;
-}
-
-.roleplay-box .title { text-align: left; margin-bottom: 2ex; }
-.roleplay-box .title::after { 
-  content:    url(images/roleplay.png); 
-  position:   absolute;
-  right:      0px;
-  top:        0px;
 }
 
 .strategy-box a, .notice-box a { color: blue; text-decoration: underline; }
