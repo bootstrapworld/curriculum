@@ -2365,22 +2365,20 @@
           (when (> (length lessons) 0)
             (fprintf op "{startsb}See: ~a.{endsb}\n"
                      (string-join
-                       (map
-                         (lambda (x)
-                           (let ([ltitle (list-ref x 0)]
-                                 [lesson (list-ref x 1)]
-                                 [pwy (list-ref x 2)])
-                             (cond [pwy
-                                     (cond [(string=? pwy "algebra-pyret")
-                                            (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                           [(string=? pwy "algebra-wescheme")
-                                            (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                     (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                              lesson ltitle)]
-                                   [else
-                                     (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                             lesson *target-pathway* ltitle)])))
-                         lessons) ";"))))
+                       (filter identity
+                               (map
+                                 (lambda (x)
+                                   (let ([ltitle (list-ref x 0)]
+                                         [lesson (list-ref x 1)]
+                                         [pwy (list-ref x 2)])
+                                     (cond [pwy (and (file-exists?
+                                                       (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                     (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                             lesson ltitle))]
+                                           [else
+                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                     lesson *target-pathway* ltitle)])))
+                                 lessons)) ";"))))
         ))
     (fprintf op "\n\n")))
 

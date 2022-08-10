@@ -32,7 +32,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-08-04 # last modified
+LASTMOD=2022-08-10 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1882,7 +1882,6 @@ function copylessondir() {
   fi
   #echo checkmd5nochange done
 
-  local lessonDirPl
 
   if test $DOCOPYDIR; then
     #echo do copydir into $(pwd)
@@ -1894,6 +1893,7 @@ function copylessondir() {
     mkdir -p .cached
     #echo III deleting checksum.md5txt
     #rm -f .cached/.checksum.md5txt
+    touch .cached/.proglang-pyret
     touch .cached/.redo
     test -d pages || mkdir pages
     for subdir in *; do
@@ -1905,7 +1905,15 @@ function copylessondir() {
   fi
 
   local proglangs=pyret
-  test -f $lessonDir/proglang.txt && proglangs=$(cat $lessonDir/proglang.txt)
+  local firstproglang=pyret
+  if test -f $lessonDir/proglang.txt; then
+    proglangs=$(cat $lessonDir/proglang.txt)
+    firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
+  fi
+  if test "$firstproglang" = pyret; then
+    touch $lessonDir/.cached/.primarylesson
+  fi
+
   local lessonDirPl=
   for pl in $proglangs; do
     lessonDirPl=$lessonDir
@@ -1918,6 +1926,9 @@ function copylessondir() {
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
+        if test "$firstproglang" = $pl; then
+          touch .cached/.primarylesson
+        fi
         test -d pages || mkdir pages
         for subdir in *; do
           if test "$subdir" = pages -o "$subdir" = solution-pages; then
@@ -2224,6 +2235,7 @@ function buildpathway() {
       test -d .cached || mkdir -p .cached
       touch .cached/.redopdf
       if test "$PROGLANG" != pyret; then
+        touch .cached/.proglang-$PROGLANG
         updatepathwaylist $PROGLANG
       fi
       cd $TOPDIR
@@ -2464,7 +2476,7 @@ function allthealignments() {
   cd $TOPDIR
   cd distribution/$NATLANG
   export LANGROOTDIR=./
-  #echo doing allthealignments in $(pwd)
+#   echo doing allthealignments in $(pwd)
   test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
   for d in courses/*; do
