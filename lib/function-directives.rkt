@@ -934,7 +934,7 @@
   (string-append
     (write-title "Example Tables")
     "[.recipe.recipe_instructions.codap_example_tables]\n"
-    "What gets filtered/transformed/built? In the sample tables below, add the relevant columns.\n\n"
+    "What gets filtered/transformed/built? In the sample tables below, (if needed) add the relevant columns.\n\n"
 
     (let* ([input-header (if (null? input-rows) #f (first input-rows))]
            [output-header (if (null? output-rows) #f (first output-rows))]
