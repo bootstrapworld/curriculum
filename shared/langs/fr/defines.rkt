@@ -4,6 +4,8 @@
 (require "html-tag-gen.rkt")
 (require "course-specifics.rkt")
 
+; Please translate the English prose here into French
+
 (provide
   print-lessons-intro
   print-course-logo
@@ -134,4 +136,4 @@
 
 
 (define (natlang:also-available-in s)
-  (string-append "(Also available in " s ")"))
+  (string-append "(Également disponible en " s ")"))

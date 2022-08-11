@@ -1118,10 +1118,10 @@
       (unless (null? other-proglang-links)
         (display
           (enclose-span ".other-proglang"
-            (string-append "(Also available in "
+            (natlang:also-available-in
               (string-join
                 other-proglang-links
-                ", ") ")")) o)
+                ", "))) o)
         (newline o)))
     (newline o)))
 
