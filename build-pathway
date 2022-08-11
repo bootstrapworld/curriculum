@@ -187,13 +187,15 @@ if test "$ARGS" = ""; then
   ARGS=$(ls -d pathways/*)
 fi
 
+#echo ARGS is $ARGS
+
 if test ! $PROGLANG; then
   PROGLANG=pyret
 fi
 
 # echo PROGLANG is $PROGLANG
 
-#echo ARGS is $ARGS
+export PROGDIR=$TOPDIR/distribution/.prog-$NATLANG
 
 echo '== Generated Documentation' > index.adoc
 echo >> index.adoc
@@ -206,14 +208,14 @@ mkdir -p distribution/$NATLANG/courses
 echo '== Generated Documentation' > distribution/index.adoc
 
 if test $SUPERFORCE; then
-  rm -fr distribution/.prog \
+  rm -fr distribution/.prog-$NATLANG \
     distribution/$NATLANG/.cached \
     distribution/$NATLANG/pathway-independent \
     distribution/$NATLANG/lib \
     distribution/$NATLANG/extlib
 fi
 
-mkdir -p distribution/.prog
+mkdir -p distribution/.prog-$NATLANG
 mkdir -p distribution/$NATLANG/lib
 mkdir -p distribution/$NATLANG/extlib
 
@@ -242,8 +244,6 @@ function checkmd5nochange() {
     return 1
   fi
 }
-
-export PROGDIR=$TOPDIR/distribution/.prog
 
 if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # if $NATLANG != en-us, and
