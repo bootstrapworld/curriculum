@@ -959,9 +959,15 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
 
-  /* Collapsing and Colorful Headers */
+  /********************************************************************
+   *  Collapsing and Colorful Headers 
+   */
+
+  /* add a bottom padding to prevent browser-scroll */
   .LessonPlan #body, .TeacherResources .LessonPlan #body {padding-bottom:  10in;}
-  .LessonPlan .sect1.lesson-section-1 h2, .TeacherResources .sect1 h2 {
+  
+  /* adjust colors */
+  .LessonPlan h2, .TeacherResources .sect1 h2 {
     background-color: #75328A77;
     color: white;
     font-weight: 600;
@@ -972,29 +978,33 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     text-align: left;
     outline: none;
   }
+  .LessonPlan h2.active, .LessonPlan h2:hover,
+  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { 
+    background-color: #b7d893; 
+  }
+  .LessonPlan h2.active,       .TeacherResources .sect1 h2.active { color: white; }
 
-  .LessonPlan .sect1.lesson-section-1 h2.active, .LessonPlan .sect1.lesson-section-1 h2:hover,
-  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { background-color: #b7d893; }
-
-  .LessonPlan .sect1.lesson-section-1 h2:after, .TeacherResources .sect1 h2:after {
+  /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+  .LessonPlan h2:after, .TeacherResources .sect1 h2:after {
     content: '\002B';
     color: white;
     font-weight: bold;
     float: left;
     margin-right: 5px;
   }
+  .LessonPlan h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
 
-  .LessonPlan .sect1.lesson-section-1 h2.active,       .TeacherResources .sect1 h2.active { color: white; }
-  .LessonPlan .sect1.lesson-section-1 h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
-  .LessonPlan .sect1.lesson-section-1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
+  /* set collapsed size and transition rules */
+  .LessonPlan .sectionbody,    .TeacherResources .sect1 .sectionbody {
     padding: 0 18px;
     max-height: 100px;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     position: relative;
   }
-
-  .LessonPlan .sect1.lesson-section-1 .sectionbody::after {
+  
+  /* Add a white fade to hint for discoverability */
+  .LessonPlan .sectionbody::after, .TeacherResources .sect1 .sectionbody::after {
     content  : "";
     position : absolute;
     z-index  : 1;
@@ -1007,7 +1017,14 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     width    : 100%;
     height   : 10em;
   }
-  .LessonPlan .sect1.lesson-section-1 h2:hover+.sectionbody:after{ height: 4em; }
+  .LessonPlan h2:hover+.sectionbody:after,
+  .TeacherResources .sect1 h2:hover+.sectionbody:after { height: 4em; }
+  
+   /* don't add the fade for summaries or active sections */
+  .LessonPlan .lessonSummary .sectionbody { max-height: unset; }
+  .LessonPlan .lessonSummary .sectionbody::after,
+  .LessonPlan h2.active+.sectionbody::after,
+  .TeacherResources h2.active+.sectionbody::after { display: none;}
   .LessonPlan .sect1.lesson-section-1 h2:not(.active)+.sectionbody h3 { display: none; }
 }
 
