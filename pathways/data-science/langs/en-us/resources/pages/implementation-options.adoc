@@ -1,98 +1,149 @@
+[.LessonPlan]
+
 = Implementation Models for Data Science
 
 ++++
 <style>
 th { text-align: center !important; }
 #footer { display: none; }
-td ul { list-style: none; margin: 0px; }
+td .ulist ul { list-style: none; margin-left: 0; }
 </style>
 ++++
 
-Bootstrap:Data Science is incredibly flexible, with options for teachers in multiple subjects from grade 6-12. When considering an implementation model, there are three criteria to consider:
+We designed our lessons in Bootstrap:Data Science to be incredibly flexible, with options for teachers in multiple subjects from grade 6-12. When considering an implementation model, there are three criteria to consider:
 
-. What *Domain Knowledge* do you care about?
-. Which *Math/Statistics learning goals* do you have?
-. How much time do you have to spend on *programming*?
+[.lesson-point]
+_Before_ desiging your Data Science class, make sure to write down the answers to these three questions!
 
-[cols="1a,1a,1a", options="header"]
+. **What Domain Knowledge do you care about?** Are you in a science class, and you need your students to learn about the Water Cycle? Or maybe it's a social studies class, and you're looking at the long-term impact of red-lining. Think hard about this one! The answer to this question dictates the dataset(s) you'll use, which has significant impacts on engagement, relevance, and inclusion.
+
+. **Which Math and Statistics learning goals do you have?** If you're a middle-school math teacher, maybe your goal is getting kids comfortable with displays like pie and bar charts, histograms, etc. Maybe you're an AP Stats teacher who needs to address Simpson's Paradox. The answer to this question will determine which lessons and projects from our library are relvant to you.
+
+. **How much time do you have to spend on *programming*?** Our programming content can be divided into two "chapters". Chapter 1 requires 3-4 class periods, and teaches enough material to do the __entire course__ with one notable exception: tables cannot be filtered, sorted, or transformed. If you're looking to integrate Data Science into an existing math, science, history, or CS class, this is likely all you need! If you're in a semester or yearlong Statistics or Data Science class, however, you 'll want to add Chapter 2 (4-8 class periods).
+
+
+== Charts, Plots, and Social Impact @duration{1 to 4 weeks}
+
+A module with minimial programming, designed for:
+
+- Science teachers who want students to gather data and generate charts for lab reports
+- Math teachers who want students to experiment with charts and plots
+- History or Social Studies teachers who want students explore census data, voting data, economic data, etc.
+- Computer Science teachers who want a small, gentle exposure to Data Science for their students
+
+In addition to whatever project you want your students to do with the data from your class, this format includes optional projects, such as @lesson-link{bar-and-pie-charts/pages/infographic.adoc} and @lesson-link{box-plots/pages/stress-project.adoc}.
+
+[cols="1a,1a", frame="none", grid="none"]
 |===
-| Small (1-4 weeks)
-| Medium (4 weeks - 1 semester)
-| Large (1 semester - 1 year)
-
-| *Who:* Non-CS and Non-Statistics teachers looking to integrate _some_ Data Science, with minimal effort or distraction.
-| *Who:* CS/DS/Stats teachers, or other teachers looking to integrate more Data Science, who have more flexibility in their schedules.
-| *Who:* CS/DS/Stats teachers, for whom all the programming and/or statistics standards are already part of their scope and sequence.
-
 |
-* @lesson-link{ds-intro/}
-* @lesson-link{simple-data-types/}
-* @lesson-link{contracts/}
-* @lesson-link{bar-and-pie-charts/}
-* Choose from: @lesson-link{histograms/}
-
+=== Build a foundation...
+* @lesson-link{ds-intro}
+* @lesson-link{simple-data-types}
+* @lesson-link{contracts}
+* @lesson-link{bar-and-pie-charts}
 |
-* @lesson-link{ds-intro/}
-* @lesson-link{simple-data-types/}
-* @lesson-link{contracts/}
-* @lesson-link{bar-and-pie-charts/}
-* @lesson-link{data-cycle/}
-* @lesson-link{choosing-your-dataset/}
-* Choose what fits}
-* @lesson-link{functions-examples-definitions/}
-* @lesson-link{lookups/}
-* @lesson-link{table-methods/}
-* Optional: @lesson-link{method-chaining/}
-* @lesson-link{defining-table-functions/}
-* @lesson-link{grouped-samples/}
-* Optional: @lesson-link{random-samples/}
-* Optional: @lesson-link{ethics-privacy-and-bias/}
-
-|
-* @lesson-link{computing-needs-all-voices/}
-* @lesson-link{ds-intro/}
-* @lesson-link{simple-data-types/}
-* @lesson-link{contracts/}
-* @lesson-link{bar-and-pie-charts/}
-* @lesson-link{data-cycle/}
-* @lesson-link{random-samples/}
-* @lesson-link{choosing-your-dataset/}
-* @lesson-link{lookups/}
-* @lesson-link{functions-examples-definitions/}
-* Optional: @lesson-link{custom-scatter-plots/}
-* @lesson-link{table-methods/}
-* @lesson-link{functions-dr/}
-* @lesson-link{defining-table-functions/}
-* @lesson-link{grouped-samples/}
-* Optional: @lesson-link{method-chaining/}
-* @lesson-link{histograms/}
-* @lesson-link{histograms2/}
-* @lesson-link{measures-of-center/}
-* @lesson-link{box-plots/}
-* @lesson-link{scatter-plots/}
-* @lesson-link{correlations/}
-* @lesson-link{linear-regression/}
-* Optional: @lesson-link{ethics-privacy-and-bias/}
-* Optional: @lesson-link{threats-to-validity/}
-* Optional: @lesson-link{data-collection/}
+=== ...then choose what you need
+** @lesson-link{histograms2}
+** @lesson-link{measures-of-center}
+** @lesson-link{box-plots}
+** @lesson-link{scatter-plots}
+** @lesson-link{correlations}
+** @lesson-link{linear-regression}
+** @lesson-link{ethics-privacy-and-bias}
+** @lesson-link{threats-to-validity}
 |===
 
-== Domain Knowledge
+== More Analysis, Lots of Statistics Options @duration{4 weeks, up to 1 semester}
 
-The choice of dataset has major implications for integration. Students can't analyze a dataset on Water Salinity without knowing _something_ about environmental science. If you're a Math, Statistics, Data Science or Computer Science teacher, students are going to hit your learning goals no matter what dataset they analyze. History teachers, on the other hand, might want their students to analyze specific datasets on immigration, voting patterns, etc. A Physics teacher might want their students to collect data relating to the position of a ball rolling down a ramp over time, and a Biology teacher might want students to collect data about plants growing in the back of the classroom.
+A module with programming aimed specifically at transforming tables and data visualation, designed for:
 
-The first choice a teacher makes is what dataset(s) their students will use. Consider this first, before addressing the other implementation questions.
+- Statistics teachers
+- Modeling-Based Science teachers
+- Computer Science teachers looking to teach more programming
+- Data Science teachers
 
-== Math and Statistics
+This format includes multiple project-based options, including @lesson-link{bar-and-pie-charts/pages/infographic.adoc}, @lesson-link{random-samples/pages/food-habits-project.adoc}, @lesson-link{box-plots/pages/stress-project.adoc}, and @lesson-link{random-samples/pages/time-use-project.adoc}.
 
-Depending on your subject area and grade level, you may have wildly differeny needs when it comes to data visualization, math, and statistics. A middle-school science teacher, for example, probably doesn't need their students to confront linear regression! More than half of the Bootstrap:Data Science lessons deal with different kinds of math and statistics standards (pie and bar charts, histograms, box-plots, skew, measures of center, scatter plots, correlations, etc), but teachers should decide for themselves which lessons are important to their scope and sequence. If you're looking to integrate Bootstrap:Data Science into your classroom, __you only have to find time to teach the parts you need.__
+[cols="1a,1a", frame="none", grid="none"]
+|===
+|
+=== Build a foundation...
+* @lesson-link{ds-intro}
+* @lesson-link{simple-data-types}
+* @lesson-link{contracts}
+* @lesson-link{bar-and-pie-charts}
+* @lesson-link{data-cycle}
+* @lesson-link{choosing-your-dataset}
+* @lesson-link{functions-examples-definitions}
+* @lesson-link{lookups}
+* @lesson-link{custom-scatter-plots}
+* @lesson-link{table-methods}
+|
+=== ...then choose what you need
+* @lesson-link{data-collection}
+* @lesson-link{computing-needs-all-voices}
+* @lesson-link{method-chaining}
+* @lesson-link{functions-dr}
+* @lesson-link{defining-table-functions}
+* @lesson-link{grouped-samples}
+* @lesson-link{random-samples}
+* @lesson-link{correlations}
+* @lesson-link{linear-regression}
+* @lesson-link{checking-your-work}
+* @lesson-link{threats-to-validity}
+* @lesson-link{ethics-privacy-and-bias}
+|===
 
-== Programming
+== A Full-Blown Data Science Class @duration{1 semester or Full Year}
 
-While this is the _last_ decision you should make as a teacher, it's also one of the most impactful. Nearly all of Bootstrap:Data Science can be taught using either a "lite" or "deluxe" programming component.
+Designed for Data Science teachers building an entire course! There are tons of projects, including @lesson-link{bar-and-pie-charts/pages/infographic.adoc}, @lesson-link{random-samples/pages/food-habits-project.adoc}, @lesson-link{box-plots/pages/stress-project.adoc}, and @lesson-link{random-samples/pages/time-use-project.adoc}, not to mention the @lesson-link{project-research-paper, Capstone Research Paper}!
 
-A student who completes @lesson-link{simple-data-types/} can do every single math and statistics lesson, exploring every type of data display and diving into measures of center and spread!
+Our lesson can be broken up in distinct units, each with a clear theme.
 
-What is missing from this sequence is the ability to _filter_ or _transform_ their datasets, deepening their analysis and allowing for much higher engagement. But the lessons necessary to support this (Defining Functions, Table Methods, Defining Table Methods, Grouped Samples) are an extra week of class time, which not every teacher can afford.
+[.UnitTable, cols="1a,1a,1a,1a,1a", options="header"]
+|===
+| Who are Data Scientists, and what do they do?
+| Gathering, Analyzing, and Visualizing Data
+| Transforming and Playing with Data
+| Modeling the World Around Us
+| Civic Responsibility
 
-In a CS or Data Science class, adding these lessons is a no-brainer. But for teachers integrating into Math, Science, Business, History, or Social Studies classes, this content can be left out to make the Bootstrap content take as little as a single week, or a few lessons spread out over the course of the year.
+|
+* @lesson-link{computing-needs-all-voices}
+* @lesson-link{ds-intro}
+* @lesson-link{simple-data-types}
+* @lesson-link{contracts}
+* @lesson-link{bar-and-pie-charts}
+
+|
+* @lesson-link{data-cycle}
+* @lesson-link{random-samples}
+* @lesson-link{choosing-your-dataset}
+* @lesson-link{histograms}
+* @lesson-link{histograms2}
+* @lesson-link{measures-of-center}
+* @lesson-link{box-plots}
+* @lesson-link{standard-deviation}
+* @lesson-link{scatter-plots}
+* @lesson-link{data-collection}
+
+|
+* @lesson-link{lookups}
+* @lesson-link{functions-make-life-easier}
+* @lesson-link{functions-examples-definitions}
+* @lesson-link{custom-scatter-plots}
+* @lesson-link{table-methods}
+* @lesson-link{functions-dr}
+* @lesson-link{method-chaining}
+* @lesson-link{defining-table-functions}
+
+|
+* @lesson-link{grouped-samples}
+* @lesson-link{correlations}
+* @lesson-link{linear-regression}
+
+|
+* @lesson-link{checking-your-work}
+* @lesson-link{threats-to-validity}
+* @lesson-link{ethics-privacy-and-bias}
+|===
