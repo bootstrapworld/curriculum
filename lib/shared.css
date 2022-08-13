@@ -17,6 +17,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.beta::after { 
+  position: absolute;
+  top: 1in;
+  left: 2in;
+  transform: rotate(-45deg);
+  content: "BETA";
+  opacity: 0.2;
+  line-height: 3em;
+  color: gray;
+  font-size: 100pt;
+  font-weight: 900;
+}
+
 /* These items should ALWAYS max-out pagewidth, and have no padding */
 #header, #content, #footer {
   width: 100% !important; max-width: 100% !important; padding: 0;
@@ -33,7 +46,7 @@ table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
 body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
 body:not(.LessonPlan, .narrativepage) p {
   width:        100%;
-  overflow:     hidden;
+  overflow:     hidden; 
   position:     relative;
   min-height:   1.75rem;
   margin:       2px 0px;
@@ -42,7 +55,7 @@ body:not(.LessonPlan, .narrativepage) p {
 body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
 /* Stretch elements should expand to the end of the page */
 body:not(.LessonPlan) p > .stretch {
-  float:        right;
+  float:        right; 
   clear:        right;
   position:     absolute;
   text-align:   left;
@@ -444,9 +457,9 @@ tr th.tableblock {
   padding:    5px;
   margin:     2ex 0;
 }
-.lesson-instruction > *:first-child,
-.lesson-roleplay    > *:first-child {
-  margin-left: 60px;
+.lesson-instruction > *:first-child, 
+.lesson-roleplay    > *:first-child { 
+  margin-left: 60px; 
 }
 
 .lesson-instruction > *:first-child::before,
@@ -507,11 +520,11 @@ span.clear {
 }
 
 /* Images and Captions */
-.image-figure .image-caption {
-  width:      100%;
-  max-width:  300px;
-  display:    inline-block;
-  font-style: italic;
+.image-figure .image-caption { 
+  width:      100%; 
+  max-width:  300px; 
+  display:    inline-block; 
+  font-style: italic; 
   line-height: 1.5ex;
   word-break: break-word;
 }
@@ -536,10 +549,10 @@ body.workbookpage {
 }
 
 /* Make code match text size/layout */
-body.workbookpage p .editbox, body.workbookpage pre .editbox {
-  line-height: 1rem;
-  vertical-align: baseline;
-  font-size: 9pt !important;
+body.workbookpage p .editbox, body.workbookpage pre .editbox { 
+  line-height: 1rem; 
+  vertical-align: baseline; 
+  font-size: 9pt !important; 
 }
 
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
@@ -572,7 +585,7 @@ table .autonum::after { content: none; }
 .data-cycle td:first-of-type { background: lightgray; border: solid white; }
 .data-cycle .ruby { color: #666; text-align: left; transform:  none; left: 0; }
 .data-cycle td p,.data-cycle td p > * { font-size: 0.75rem; }
-.data-cycle .fitbruby, .data-cycle .fitb {
+.data-cycle .fitbruby, .data-cycle .fitb { 
   text-align: left; font-style: italic; font-size:  1rem;
 }
 
@@ -652,19 +665,13 @@ body:not(.LessonPlan) .recipe p {
 /* CODAP-specific formatting */
 /* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
 
+.codap .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+
 .codap .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
 .codap .recipe_name { display: flex; }
-
-.codap_transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
-.codap_transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
-
-.codap_transformer_type,
-.codap_transformer_type_checked {
-  margin: 0 2.5rem;
-}
-
+.codap_transformer_type { margin: 0 2.5rem; }
 .codap_transformer_type p::before,
-.codap_transformer_type_checked p::before {
+.codap .transformer_type_checked p::before {
   content: "";
   width: 1.1rem;
   height: 1.1rem;
@@ -673,14 +680,11 @@ body:not(.LessonPlan) .recipe p {
   margin:  0 2px 4px 0;
   vertical-align: middle;
 }
-
-.codap_transformer_type_checked p::before {
+.codap .transformer_type_checked p::before {
   content: "x";
   text-align: center;
   line-height: 1rem;
-  color: black;
 }
-
 .recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
 .codap_example_tables+table table * { margin: 0; padding: 0; }
@@ -747,6 +751,7 @@ body:not(.LessonPlan) .recipe p {
 /************************************************************************************
 * TEACHER RESOURCES PAGE
 */
+
 
 /* Exercises and Solutions Table */
 table.exercises_and_solutions, table.exercises_and_solutions * {
@@ -957,8 +962,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
 
   /* on WB pages, set font size to same as print and then zoom the page */
   body.workbookpage {
-    transform-origin: left top;
-    transform: scale(1.25);
+    transform-origin: left top; 
+    transform: scale(1.25); 
     min-height: calc(11in * 1.25) !important;
   }
   body.workbookpage #savetodrive-div { transform: scale(0.8); }
@@ -966,13 +971,14 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   /* add some left-padding to improve readability on screens */
   body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
+
   /********************************************************************
-   *  Collapsing Headers
+   *  Collapsing Headers 
    */
 
   /* add a bottom padding to prevent browser-scroll */
   .LessonPlan #body, .TeacherResources .LessonPlan #body {padding-bottom:  10in;}
-
+  
   /* adjust colors */
   .LessonPlan h2, .TeacherResources .sect1 h2 {
     background-color: #75328A77;
@@ -986,8 +992,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     outline: none;
   }
   .LessonPlan h2.active, .LessonPlan h2:hover,
-  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover {
-    background-color: #b7d893;
+  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { 
+    background-color: #b7d893; 
   }
   .LessonPlan h2.active,       .TeacherResources .sect1 h2.active { color: white; }
 
@@ -1009,7 +1015,7 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     transition: max-height 0.2s ease-out;
     position: relative;
   }
-
+  
   /* Add a white fade to hint for discoverability */
   .LessonPlan .sectionbody::after, .TeacherResources .sect1 .sectionbody::after {
     content  : "";
@@ -1018,15 +1024,15 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     bottom   : 0;
     left     : 0;
     pointer-events   : none;
-    background-image : linear-gradient(to bottom,
-                      rgba(255,255,255, 0),
+    background-image : linear-gradient(to bottom, 
+                      rgba(255,255,255, 0), 
                       rgba(255,255,255, 1) 90%);
     width    : 100%;
     height   : 10em;
   }
   .LessonPlan h2:hover+.sectionbody:after,
   .TeacherResources .sect1 h2:hover+.sectionbody:after { height: 4em; }
-
+  
    /* don't add the fade for summaries or active sections */
   .LessonPlan .lessonSummary .sectionbody { max-height: unset; }
   .LessonPlan .lessonSummary .sectionbody::after,
