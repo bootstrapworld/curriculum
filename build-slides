@@ -17,7 +17,6 @@ fi
 
 topdir=$(pwd)
 
-export PROGDIR=$topdir/distribution/.prog
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 SED=sed
@@ -38,6 +37,7 @@ fi
 for natlang in *; do
  test -d $natlang || continue
  cd $natlang
+ export PROGDIR=$topdir/distribution/.prog-$natlang
  export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
  if test -d lessons; then
    cd lessons

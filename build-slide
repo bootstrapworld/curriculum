@@ -44,7 +44,6 @@ fi
 
 topdir=$(pwd)
 
-export PROGDIR=$topdir/distribution/.prog
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 export PROGLANG=pyret
@@ -58,6 +57,7 @@ fi
 
 for natlang in *; do
   test -d $natlang || continue
+  export PROGDIR=$topdir/distribution/.prog-$natlang
   if test ! -d $natlang/lessons; then
     echo Missing lessons diry in distribution -- did you call build-pathway\?
     continue
