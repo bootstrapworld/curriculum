@@ -907,8 +907,8 @@
           (lambda (type)
             (if (and *show-transformer-type?* transformer-type
                      (string=? transformer-type type))
-                ".codap_transformer_type_checked"
-                ".codap_transformer_type"))])
+                ".transformer_type_checked"
+                ".transformer_type"))])
 
   (string-append
     "\n\n[.recipe_title.transformer_type, cols=\"100a,1a\"]\n"

@@ -666,13 +666,18 @@ body:not(.LessonPlan) .recipe p {
 /* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
 
 .codap .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+.codap .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
 
 .codap .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
 .codap .recipe_name { display: flex; }
-.codap_transformer_type { margin: 0 2.5rem; }
-.codap_transformer_type p::before,
+
+.codap .transformer_type,
+.codap .transformer_type_checked {
+  /* margin: 0 2.5rem; */
+}
+
+.codap .transformer_type p::before,
 .codap .transformer_type_checked p::before {
-  content: "";
   width: 1.1rem;
   height: 1.1rem;
   background: white;
@@ -680,11 +685,18 @@ body:not(.LessonPlan) .recipe p {
   margin:  0 2px 4px 0;
   vertical-align: middle;
 }
+
+.codap .transformer_type p::before {
+  content: "";
+}
+
 .codap .transformer_type_checked p::before {
   content: "x";
   text-align: center;
   line-height: 1rem;
+  color: black;
 }
+
 .recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
 .codap_example_tables+table table * { margin: 0; padding: 0; }
