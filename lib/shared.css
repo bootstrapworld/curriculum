@@ -676,26 +676,28 @@ body:not(.LessonPlan) .recipe p {
   /* margin: 0 2.5rem; */
 }
 
+table.transformer_type td:first-of-type .content { display: flex; flex: row; }
+table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
+
 .codap .transformer_type p::before,
 .codap .transformer_type_checked p::before {
   width: 1.1rem;
   height: 1.1rem;
   background: white;
   display: inline-block;
-  margin:  0 2px 4px 0;
+  margin:  0 2px 2px 0;
   vertical-align: middle;
 }
 
-.codap .transformer_type p::before {
-  content: "";
-}
-
-.codap .transformer_type_checked p::before {
+.codap div.transformer_type p::before { content: ""; }
+.codap div.transformer_type_checked p::before {
   content: "x";
   text-align: center;
   line-height: 1rem;
   color: black;
 }
+
+div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
 
 .recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
