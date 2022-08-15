@@ -68,7 +68,7 @@
 
   ("animals-spreadsheet" "Animals Spreadsheet"
     ("pyret" "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/")
-    ("codap" "https://docs.google.com/spreadsheets/d/1_qcn6vlJ2C2SPzpqNYLhEkeGloIxkYN-aLzL6DTi0Uc/")
+    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FstLKvzDRkNDbD11WsHYP%2Ffile.json")
   )
 
   ("animals" "Animals Starter File"
