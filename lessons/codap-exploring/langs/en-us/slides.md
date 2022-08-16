@@ -1,5 +1,5 @@
 ---
-{layout="Core Title Slide"} 
+{layout="DS Title Slide"} 
 # Exploring CODAP 
 
 <!--
