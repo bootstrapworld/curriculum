@@ -53,7 +53,12 @@ Many times we need to _combine_ inequalities:
 [.lesson-instruction]
 Can you think of examples of when we might want to combine inequalities?
 
-Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?" This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
+Guide students through other examples of `and` and `or` with various statements, such as:
+
+- "I'm wearing a red shirt AND I'm a math teacher, true or false?"
+- "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?"
+
+This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
 
 === Investigate
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
@@ -73,7 +78,7 @@ Be really careful to check for understanding here.
 |
 @span{.title}{Strategies for English Language Learners}
 
-When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
+When describing compound inequalities, be careful not to use "English shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
 |===
 
 == Solutions and Non-Solutions of Compound Inequalities
@@ -85,33 +90,60 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 ** _Possible answers: 5.001, 1000, 24, 73.26_
 - What are 4 solutions and 4 non-solutions for @math{x \le 15}?
 ** _Possible answers: 15, 14.98, -63, 1/2_
-- What numbers make _both_ of these inequalities true?
+- What numbers are in the solutions set of  @math{x \gt 5} `and` @math{x \le 15}, making _both_ of these inequalities true?
 ** _Possible answers: 5.001, 10, 12.374, 15_
-- What is the solution set for @math{x \gt 5} `and` @math{x \le 15}?
-** @math{5 \lt x \le 15}
-- How would that be different from @math{x \gt 5} `or` @math{x \le 15}?
-** _All real numbers are a part of the solution set for @math{x \gt 5} `or` @math{x \le 15}_
+- How would that be different from the solution set of @math{x \gt 5} `or` @math{x \le 15}, making _at least one_ of these inequalities true?
+** _All real numbers are a part of the solution set for @math{x \gt 5} `or` @math{x \le 15} because there aren't any numbers that don't satisfy at least one of these expressions._
 
 === Investigate
 
 [.lesson-instruction]
-- Log in to the @starter-file{inequalities-compound}.
-- Click "Run" to see the two graphs you've just considered, @math{x \gt 5} and @math{x \le 15}.
+* Log in to the @starter-file{inequalities-compound}.
+* Click "Run" to see the graphs you've just considered.
 
-When students click "Run", four graphs will appear. The top two are the inequalities they've just discussed. Encourage students to verify that their solutions and non-solutions are correct. Explain that the bottom two graphs are produced by the special functions `and-intersection` and `or-union`. Use the discussion questions below as a jumping off point in guiding students' analysis of the starter file.
+When students click "Run", four graphs will appear. The top two are the simple inequalities they've just discussed. Encourage students to verify that their solutions and non-solutions are correct. Explain that the bottom two graphs are produced by the special functions `and-intersection` and `or-union`. Use the discussion questions below as a jumping off point in guiding students' analysis of the starter file.
 
 [.lesson-instruction]
 --
-- Can you describe what `and-intersection` does?
+- What does `and-intersection` do?
 ** _It takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true._
-- What do you think will happen if we enter a pair of inequalities that does not intersect at all and therefore has no solutions?
-** _We will see a graph with only red circles, representing non-solutions, as below. None of the graph will be shaded blue. A message will tell us that no solutions exist in the provided range._
-@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions" ,""}
-- Can you describe what `or-union` does?
+
+@centered-image{images/intersection1.png, "A compound inequality displayed on a number line, showing that the inequalities intersect between 5 and 15. The dot on 5 is red. The dot on 15 is green." ,""}
+
+- Why is the circle on 5 red and the circle on 15 green?
+** _Because 5 is not part of the solution - it's not bigger than itself. And 15 is part of the solution - it's less than or equal to 15._
+
+- Do you think every graph made with `and-intersection` will have different color dots at the ends? Why or why not?
+** _No. It will depend on whether or not the inequality symbols include an equal sign. Sometimes one will and one won't. Sometimes neither will. Sometimes both will._
+
+- What does `or-union` do?
 ** _It takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true._
-- What do you think will happen if the union of a pair of inequalities includes _all_ real numbers?
-** _We will see a graph that has all regions shaded blue, with only green circles (no red). A message will tell us that all regions shaded blue are a part of the solution._
-@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union" ,""}
+
+@centered-image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union" ,""}
+
+- Why did the graph of this `or-union` result in the whole numberline being shaded blue?
+** _Because in order to make an `or` statement true, a number only has to make one of the inequalities true. Every number in the universe is either greater than 5 or less than or equal to 15. There aren't any non-solutions!_
+
+- Not all graphs of `or-union` will look like this. Can you think of a pair of inequalities whose union won't shade the whole graph?
+
+Change the function definition on _line 8_ to @math{x \lt 5} and the definition on _line 9_ to @math{x \ge 15} and, before you click "Run", take a moment to think about what the new graphs of `and-intersection` and `or-union` will look like. Then click "Run"r and take a look.
+
+- What does the new `and-intersection` graph look like?
+** _We see a graph with only red circles, representing non-solutions, as below. None of the graph will be shaded blue, because there aren't any numbers that are both smaller than 5 and greater than or equal to 15. A message will tell us that no solutions exist in the provided range._
+@centered-image{images/intersection-ns.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions" ,""}
+
+- What does the new `or-union` graph look like?
+** _There's an arrow to the left and an arrow to the right with a break in the middle between 5 and 15! The dot for 5 is red because it's not part of the solution. The dot for 15 is green because it's part of the solution._
+@centered-image{images/union1.png,"A compound inequality displayed on a number line, shaded when numbers are below 5 or greater than 15. The dot on 5 is red and the dot on 15 is green." ,""}
+
+- Which of the 8 numbers from the list are part of the solution set? How do you know?
+** _-5, -2.1, 0, 15, 20... the circles are green._
+
+- Is 3 part of the solution set? How do you know?
+** _Yes. It's in the blue shaded region._
+
+- Is 10 part of the solution set? How do you know?
+** _No. It's in the unshaded area._
 --
 
 Once students are familiar with the starter file, they are ready use it as they to practice identifying solutions and non-solutions for compound inequalities.

@@ -1,151 +1,140 @@
 ---
-{layout="Core Title Slide"} 
-# Simple Data Types 
+{layout="DS Title Slide"} 
+# Introduction to Transformers: Sort
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
 ---
-{layout="LaunchR"}
-# Numbers & Strings 
+{layout="Launch"}
+# Sorting by Changing a Table
 
-When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
-
-Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. {style="font-size:16pt"} 
-
-If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
-
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
-
+Open the @starter-file{animals} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
 
 ---
-{layout="Launch-DN"}
-# Numbers & Strings
+{layout="InvestigateC"}
+# Sorting by Changing a Table
 
-- Open the @starter-file{animals} in CODAP.
-- Play around in our new platform! Record your observations on @printable-exercise{codap-exploration.adoc}.
-- What did you Notice? What do you Wonder?
+Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
 
----
-{layout="LaunchC}
-# Numbers & Strings
+@image{images/sort-ascending-by-name.png, "how to sort the animals alphabetically by name in CODAP"}{width="650"}
 
-Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
-
-@image{images/grey-plus-sign.png, "screenshot from CODAP indicating how to add a new column"}
-
----
-{layout="LaunchC"}
-# Numbers & Strings
-
-In the next activity, you will click on the `test` cell in the header of your table, and then choose `Edit formula` from the resulting drop-down menu.
-
-@image{images/edit-formula.png, "screenshot from CODAP indicating how to edit a formula"}
-
----
-{layout="LaunchC"}
-# Numbers & Strings
-
-As you complete each directive, you will re-open `Edit Formula` (below), delete your previous entry and then input the next entry.
-
-@image{images/edit-formula-box.png, "screenshot from CODAP showing where to input new formulas"}
 
 ---
 {layout="Investigate"}
-# Numbers & Strings
+# Sorting by Changing a Table
 
-- Complete @printable-exercise{numbers-n-strings.adoc}.
-- What did you Notice? What do you Wonder?
-- Did you get any error messages? What did you learn from them? 
+- Can you sort the animals by age, from youngest to oldest?
+- How about from heaviest to lightest?
+- Now sort the animals table by how long it took for each animal to be adopted, in ascending order.
+
+---
+{layout="Investigate}
+# Sorting by Changing a Table
+
+Now, go to the hamburger menu in the upper left corner and select "Save" from the drop-down menu. 
+
+You will be prompted to login to Google and enter your login credentials, linking CODAP with their Google Drive. 
+
+After saving the sorted table, close CODAP.
+
+<!--
+You might even pretend that the online portion of class is over; you're about to do a bit of performing for students in order to illustrate a point.
+
+Now: dramatically tell students that you forgot something! You REALLY need to know which animal was the third animal on the original table. Direct students to reopen the saved  file (they can access it by selecting the hamburger icon again). Tell them they must _undo_ any sorting and then consult the original list.
+
+Students will discover that they in fact _cannot_ undo their actions, thereby uncovering one of the primary limitations of this type of table transformation.
+-->
+
+
+---
+{layout="Investigate"}
+# Sorting by Changing a Table
+
+We _cannot_ undo actions when we have actually modified a table! This is a primary limitation of the type of table transformation we have just practiced.
+
 
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Sorting by Changing a Table
 
-CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
+- Does sorting the Animals Dataset produce a _new_ table, or change the existing one? How do you know?
 
-- Numbers and Strings evaluate to themselves.
-- CODAP converts fractions into decimals automatically.
-- Anything in quotes is a String, even something like `"42"`.
-- Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. 
-- CODAP knows the order of operations.
-- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
+- Can you think of another scenario (like the one manufactured, above) when the inability to revert to the original table might cause problems?
 
 
-<!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
+<!-- Sorting the dataset alters the existing table. No new tables appear. Whenever we experiment with data, there is a chance we will want to make comparisons to the original dataset.
 -->
 
 ---
 {layout="Launch"}
-# Booleans 
+# Sorting with Transformers!
 
-What's the answer: is 3 greater than 10?
+When we apply Transformers, we create _copies_ of the original dataset. The original dataset is always preserved - meaning there is no need to undo their actions, or to re-open a saved dataset to consider a different configuration. 
 
----
-{layout="LaunchR"}
-# Booleans
-
-Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!{style="font-size:15pt"} 
-
-For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
-
-@image{images/roller-coaster.png, a}
-
---- 
-{layout="LaunchR"}
-# Booleans
-
-Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
-
-Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
-
-@image{images/login.png, a}
+The Transformers plugin enables easy, low-stakes "what if?" exploration that encourages open-ended investigation.
 
 ---
-{layout="Investigate-DN"}
-# Booleans
+{layout="LaunchC"}
+# Sorting with Transformers!
 
-Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
+- Login to the @starter-file{animals} in CODAP.
+- Access the Transformers plugin.
 
----
-{layout="Synthesize"}
-# Booleans
-
-What sets Booleans apart from other data types?
+@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers plugin can be found"}{width="350"}
 
 
 ---
 {layout="Launch"}
-# Expressions and Functions
+# Sorting with Transformers!
 
-- Turn to @printable-exercise{pages/codap-apply-functions.adoc}.
-- Let's complete the first table together, with pencil and paper.
-- You complete the second table on your own.
+- Explore the different Transformers available, especially those categorized under “Construction.”
+- What do you Notice? What do you Wonder?
+
+<!--
+_Students might notice the following: there are Transformers for constructing, measuring the center, aggregating, summarizing, restructuring, tidying, and copying; I often need to provide a dataset; sometimes I see contracts; sometimes I am asked to provide formulas._
+-->
+---
+{layout="InvestigateR"}
+# Sorting with Transformers!
+
+Another way to sort is with the Sort _Transformer_ (pictured below), which will create a _copy_ of the Animals dataset in which the animals are organized alphabetically by name.
+
+Complete the @printable-exercise{pages/codap-sort-transformer.adoc} worksheet, which will walk you through creating, applying, and saving a `Sort` Transformer.
+
+@image{images/sort-transformer.png,"An image of the Sort Transformer"}{width="550"}
+
+
+<!--
+    Initially, students might question the value of using a Transformer to sort. At first, using the Transformer will quite likely feel more laborious than using the sort functionality embedded in CODAP. Encourage students to experiment with all of the functionality that the Transformers offer; invite them to be curious and playful as they work, to consider the possibilities afforded by Transformers. For instance, why might it be useful to name and save a Transformer?
+-->
 
 ---
-{layout="Launch-DN"}
-# Expressions and Functions
+{layout="Investigate"}
+# Sorting with Transformers!
 
- By using CODAP, we can evaluate expressions much more quickly and efficiently. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
+New and modified tables created by Transformers are automatically saved.  
 
-- With your partner, open the @starter-file{animals} and use it to finish the top half of @printable-exercise{pages/codap-apply-functions.adoc}.
-- Note that attribute names that are more than one word need to be entered inside of tick marks.
+Each new table is titled first with the Transformer name, then the name of the dataset (in parentheses), followed by a number in curly braces at the end to indicate how many times a Transformer has been applied. You may rename saved tables, if you’d like. 
 
----
-{layout="Launch-DN"}
-# Expressions and Functions
-
-CODAP also allows us to insert _functions_ into the formula box! *Arguments* (or "inputs") are the values passed into the function. CODAP has lots of @link{https://codap.concord.org/help/functions, built-in functions} that we can use to play with our dataset.
-
-- With your partner, complete @printable-exercise{pages/codap-apply-functions.adoc}.
-- What did you learn about the two functions `sqrt` and `stringLength`?
+Each time you apply a saved Transformer, the _new_ datasets that are created will appear in the Transformer's "Dataset to sort" drop-down menu.
 
 ---
 {layout="Synthesize"}
-# Expressions
+# Sorting with Transformers!
 
-- Think about the new columns you created. How did the inputs relate to the outputs?
-- Did you encounter any new functions that intrigued you?
-- What kind of error messages did you encounter, if any?
+
+- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
+- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
+- When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?
+
+
+<!--
+- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
+** _The `Sort` Transformer produceds a new, modified copy of the original table._
+- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
+** _Transformers can be named and saved for future use. Transformers create a modified copy of a table rather than altering the original dataset._
+- When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?
+** _If we are experimenting with a dataset and want to preserve the original table, it would make more sense to use a Transformer._
+-->

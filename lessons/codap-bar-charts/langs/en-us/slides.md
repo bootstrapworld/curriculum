@@ -1,151 +1,168 @@
 ---
-{layout="Core Title Slide"} 
-# Simple Data Types 
+{layout="DS Title Slide"} 
+# Bar Charts  
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
 ---
-{layout="LaunchR"}
-# Numbers & Strings 
+{layout="Launch"}
+# Displaying Categorical Variables
 
-When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
-
-Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. {style="font-size:16pt"} 
-
-If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
-
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
-
+Where have you seen infographics and graphs used to display data in the real world?
 
 ---
-{layout="Launch-DN"}
-# Numbers & Strings
+{layout="Launch"}
+# Displaying Categorical Variables
 
 - Open the @starter-file{animals} in CODAP.
-- Play around in our new platform! Record your observations on @printable-exercise{codap-exploration.adoc}.
-- What did you Notice? What do you Wonder?
+- Click the `graph` icon from the horizontal toolbar in the upper left. What appears?
+
+@image{images/codap-upper-left-toolbar.png, "CODAP upper left toolbar"}
 
 ---
-{layout="LaunchC}
-# Numbers & Strings
+{layout="LaunchR}
+# Displaying Categorical Variables
 
-Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
+- Select a dot with your mouse. What happens?
+- What happens when you select a table row? How about multiple table rows?
+- What happens when you click the "eye" icon (to the right of the graph or the table, depending on which is selected)?
 
-@image{images/grey-plus-sign.png, "screenshot from CODAP indicating how to add a new column"}
+@image{images/codap-initial-display.png,"An image of the CODAP environment"}
 
----
-{layout="LaunchC"}
-# Numbers & Strings
-
-In the next activity, you will click on the `test` cell in the header of your table, and then choose `Edit formula` from the resulting drop-down menu.
-
-@image{images/edit-formula.png, "screenshot from CODAP indicating how to edit a formula"}
-
----
-{layout="LaunchC"}
-# Numbers & Strings
-
-As you complete each directive, you will re-open `Edit Formula` (below), delete your previous entry and then input the next entry.
-
-@image{images/edit-formula-box.png, "screenshot from CODAP showing where to input new formulas"}
-
----
-{layout="Investigate"}
-# Numbers & Strings
-
-- Complete @printable-exercise{numbers-n-strings.adoc}.
-- What did you Notice? What do you Wonder?
-- Did you get any error messages? What did you learn from them? 
-
----
-{layout="Synthesize"}
-# Numbers & Strings
-
-CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
-
-- Numbers and Strings evaluate to themselves.
-- CODAP converts fractions into decimals automatically.
-- Anything in quotes is a String, even something like `"42"`.
-- Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. 
-- CODAP knows the order of operations.
-- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
-
-
-<!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
+<!--
+    If students report that a blank graph appears (rather than a scatterplot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).
 -->
 
 ---
 {layout="Launch"}
-# Booleans 
+# Displaying Categorical Variables
 
-What's the answer: is 3 greater than 10?
+Initially, the data points are randomly distributed on the graph. 
 
----
-{layout="LaunchR"}
-# Booleans
+Selecting an orange dot reveals the `name` of that particular animal. Selecting a particular dot causes the table row for that animal to be highlighted in blue. 
 
-Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!{style="font-size:15pt"} 
-
-For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
-
-@image{images/roller-coaster.png, a}
-
---- 
-{layout="LaunchR"}
-# Booleans
-
-Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
-
-Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
-
-@image{images/login.png, a}
-
----
-{layout="Investigate-DN"}
-# Booleans
-
-Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
-
----
-{layout="Synthesize"}
-# Booleans
-
-What sets Booleans apart from other data types?
+Holding the shift button allows students to select multiple dots in the graphical display, or multiple rows in the table.
 
 
 ---
 {layout="Launch"}
-# Expressions and Functions
+# Displaying Categorical Variables
 
-- Turn to @printable-exercise{pages/codap-apply-functions.adoc}.
-- Let's complete the first table together, with pencil and paper.
-- You complete the second table on your own.
+When you select a table row (or multiple table rows), the corresponding dots change color. When you set aside selected and / or unselected cases (by using the "eye" icon), you can temporarily alter the amount of pets in the dataset (with the option to restore to the original dataset).
 
----
-{layout="Launch-DN"}
-# Expressions and Functions
-
- By using CODAP, we can evaluate expressions much more quickly and efficiently. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
-
-- With your partner, open the @starter-file{animals} and use it to finish the top half of @printable-exercise{pages/codap-apply-functions.adoc}.
-- Note that attribute names that are more than one word need to be entered inside of tick marks.
+You can also resize the window by dragging its borders.
 
 ---
-{layout="Launch-DN"}
-# Expressions and Functions
+{layout="Investigate"}
+# Displaying Categorical Variables
 
-CODAP also allows us to insert _functions_ into the formula box! *Arguments* (or "inputs") are the values passed into the function. CODAP has lots of @link{https://codap.concord.org/help/functions, built-in functions} that we can use to play with our dataset.
+Once we have a graph of randomly distributed data points, we can organize the data by selecting attributes from our _table_ that we want to appear on the axes of our graph.
 
-- With your partner, complete @printable-exercise{pages/codap-apply-functions.adoc}.
-- What did you learn about the two functions `sqrt` and `stringLength`?
+Practice manipulating the data by completing @printable-exercise{pages/codap-displays-intro.adoc}.
+
+<!--
+    Remind students that categorical data is used to classify, rather than to measure. Only when data is being treated categorically will students be invited to fuse data points to create a bar chart. Quantitative (or numeric) data must measure or compare; it is subject to the laws of arithmetic.
+
+To dig deeper into bar charts, have students turn to @opt-printable-exercise{bar-chart-notice.adoc}.
+
+When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
+
+-->
+
+---
+{layout="Investigate"}
+# Displaying Categorical Variables
+
+Bar charts look a lot like another kind of display - called a "histogram" - which displays _quantitative_ data, not categorical. Histograms and Bar Charts are very different! 
+
+In CODAP, however, making a histogram and making a bar chart start the same way: by creating a dot plot that will be modified. 
+
 
 ---
 {layout="Synthesize"}
-# Expressions
+# Displaying Categorical Variables
 
-- Think about the new columns you created. How did the inputs relate to the outputs?
-- Did you encounter any new functions that intrigued you?
-- What kind of error messages did you encounter, if any?
+Bar charts display how much of the sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+
+
+---
+{layout="Synthesize"}
+# Displaying Categorical Variables
+
+Bar charts are mostly used to _display categorical columns_.
+
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
+
+<!--
+    Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
+-->
+
+--- 
+{layout="Launch"}
+# Exploring Other Displays
+
+There are _lots_ of different kinds of charts and plots that we can build in CODAP! 
+
+Spend three minutes seeing how many different displays you can produce. Be playful! Click buttons and select from menu options to see what you can produce. 
+
+<!-- 
+If students need a bit of encouraging, you might mention that histograms, scatter plots, and linear regressions are possible!
+-->
+
+--- 
+{layout="Launch"}
+# Exploring Other Displays
+
+Let's share!
+
+* What did you discover?
+* When did the `configuration` menu appear?
+* When did the `measure` menu appear?
+
+<!--
+- The `configuration` menu appears when there is another possible configuration of the data - for instance, when dots can be fused into bars - we see this menu.
+- The measure menu appears when there is an opportunity to change what is shown _along with_ the points - for instance, connecting lines, a regression line, or a count_.
+-->
+
+---
+{layout="Investigate"}
+# Exploring Other Displays
+
+CODAP is designed to be student-friendly and that the interface encourages guesswork... but we can save some time by being a bit more strategic.
+
+---
+{layout="Investigate"}
+# Exploring Other Displays
+
+* We're going to complete @printable-exercise{pages/plot-practice.adoc} together. To make a bar chart showing the sex of animals from the shelter, I will ask myself a series of important questions.
+* Which attributes on which axes?
+* What type of data?
+* What configuration?
+
+<!--
+* Which attributes on which axes? _Sex belongs on the x-axis._
+* What type of data? _Male, female, and hermaphrodite are all categories. The bar chart will display categorical data._
+* What configuration? _CODAP initially creates a dot plot of the data. I will need to fuse the dots into bars._
+-->
+
+---
+{layout="Investigate"}
+# Exploring Other Displays
+
+- Now, with your partner, complete @printable-exercise{pages/plot-practice-2.adoc}.
+- For an extension, try @printable-exercise{pages/plot-practice-3.adoc}.
+
+<!--
+    There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity.
+-->
+
+---
+{layout="Synthesize"}
+# Exploring Other Displays
+
+Today you’ve added more data displays to your toolbox. You can create bar charts to visually display categorical data, and you've developed a general approach to guide you as you create other displays.
+
+You will have many opportunities to use these concepts in this course, by applying what you've learned to answer data science questions.
+
