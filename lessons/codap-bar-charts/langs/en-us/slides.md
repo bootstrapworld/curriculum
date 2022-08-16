@@ -1,6 +1,6 @@
 ---
 {layout="Core Title Slide"} 
-# Simple Data Types 
+# Bar Charts  
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -8,28 +8,22 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="LaunchR"}
-# Numbers & Strings 
+# Displaying Categorical Variables
 
-When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
-
-Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. {style="font-size:16pt"} 
-
-If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
-
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
-
+Where have you seen infographics and graphs used to display data in the real world?
 
 ---
 {layout="Launch-DN"}
-# Numbers & Strings
+# Displaying Categorical Variables
 
 - Open the @starter-file{animals} in CODAP.
-- Play around in our new platform! Record your observations on @printable-exercise{codap-exploration.adoc}.
-- What did you Notice? What do you Wonder?
+- Click the `graph` icon from the horizontal toolbar in the upper left. (See toolbar, below.) What appears?
+
+@image{images/codap-upper-left-toolbar.png, "CODAP upper left toolbar"}
 
 ---
 {layout="LaunchC}
-# Numbers & Strings
+# Displaying Categorical Variables
 
 Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
 
