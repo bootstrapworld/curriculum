@@ -32,7 +32,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
     ((en-us ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair.")
-     (es-mx ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair."))
+     (es-mx ("sesgo") "un peso desproporcionado a favor o en contra de una cosa, persona o grupo en comparación con otra, generalmente de una manera que se considera injusta."))
 
     ((en-us ("bin" "interval") "a range that values from a dataset can belong to; there is one bar in a histogram per bin")
      (es-mx ("intervalo") "un rango al que pueden pertenecer los valores de un conjunto de datos; hay una barra en un histograma por intervalo"))
@@ -77,7 +77,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("condicional") "una expresión de código compuesta de preguntas y respuestas"))
 
     ((en-us ("confounding variable") "an unaccounted-for variable that influences the relationship between variables being analyzed")
-     (es-mx ("confounding variable") ""))
+     (es-mx ("factor de confusión") "una variable no contabilizada que influye en la relación entre las variables que se analizan"))
 
     ((en-us ("constructor") "a function that creates instances of a data structure")
      (es-mx ("constructor") "la función que crea instancias de una estructura"))
@@ -140,7 +140,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("dirección") "la relación entre dos variables cuantitativas las cuales incrementan o decrecen juntas o una incrementa mientras la otra decrece"))
 
     ((en-us ("distribution") "a description of the number of times or relative probabilities that different quantities occur in a sample")
-     (es-mx ("distribution") ""))
+     (es-mx ("distribución") "una descripción del número de veces o probabilidades relativas de que diferentes cantidades ocurran en una muestra"))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
@@ -428,7 +428,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("gráfico de dispersión")  "Un gráfico donde los puntos se colocan en los ejes según pares de valores."))
     
     ((en-us ("selection bias") "the non-random selection of individuals, groups, or data")
-     (es-mx ("selection bias") "the non-random selection of individuals, groups, or data"))
+     (es-mx ("sesgo de selección") "la selección no aleatoria de individuos, grupos o datos"))
 
     ((en-us ("shape") "The aspect of a dataset - visible in a histogram or box plot - that describes which values are more or less common.")
      (es-mx ("forma de la distribución")  "el aspecto de un conjunto de datos -visible en una histograma o diagrama de caja - que describe cuáles de los valors son más o menos comun."))
