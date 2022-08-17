@@ -108,6 +108,11 @@
    ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    )
+
+  ("grouped-samples" "Grouped Samples Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1z0ogp7ZA6eoZCm9g6wDu4Z6Onskz47hg&v=a8e2e65")
+    ("codap" "TBD")
+  )
   ("text-stats"  "Text Stats Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP")
    )
