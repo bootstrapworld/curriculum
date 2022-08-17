@@ -109,9 +109,9 @@ programming language used, or whether content is being built for
 student or teacher. Thus:
 
 - The `langs` subdirectory uses further subdirectories, e.g.,
-`en-us` for US English and `es-mx` for Mexican Spanish. Source
+`en-us` for US English, `es-mx` for Mexican Spanish, and `fr` for French. Source
 documents from the relevant natural language are chosen based on
-the `--language` option chosen during build. The default is
+the `--natlang` option chosen during build. The default is
 `en-us`. In order to ease transition, if a language other than
 `en-us` is chosen, any content unavailable in the new language is
 filled in by what’s in `en-us`.
@@ -425,23 +425,33 @@ latter has been built locally first. So if you've built `algebra-wescheme` but
 
 == Standards compliance
 
-The file `shared/lang/en-us/lessons-and-standards.rkt` contains
-an association of lessons with the educational standards they
-comply with. Dictionaries for the various standards are available
+The standards compliance for the various lessons is documented in the
+directory `shared/langs/en-us/standards/'. In it, the file
+`standards-and-lessons.rkt` contains an association of educational
+standards with the lessons that comply with them. Dictionaries for the
+various standards are available
 in the same directory. For now, these are:
 
-  cc-ela-standards-dictionary.rkt
-  cc-math-standards-dictionary.rkt
-  csta-standards-dictionary.rkt
-  k12cs-standards-dictionary.rkt
-  ngss-standards-dictionary.rkt
-  ok-standards-dictionary.rkt
-  old-standards-dictionary.rkt
+  standards-cc-ela-dictionary.rkt
+  standards-cc-math-dictionary.rkt
+  standards-csta-dictionary.rkt
+  standards-ia-dictionary.rkt
+  standards-k12cs-dictionary.rkt
+  standards-ngss-dictionary.rkt
+  standards-ok-dictionary.rkt
 
 The build process creates a menu for finding out the standards
 complied with by the lessons and the pathway. The lesson’s menu
 is embedded in the lesson plan, whereas the pathway’s (larger)
 menu is linked to.
+
+=== Other compliances
+
+Compliances with textbooks and practices are similarly documented in the
+subdirectories `textbooks/` and `practices/` of the `shared/langs/en-us`
+directory.
+
+== Lesson prerequisites
 
 The directive `@lesson-prereqs{}` is used as a placeholder in a
 table for row(s) that include lesson prerequisites (if any) and
@@ -509,7 +519,7 @@ The following is needed to construct documents from this repo:
 +
   brew install gnu-sed
   brew install curl
-+
+
 
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
@@ -534,8 +544,7 @@ and make sure the `racket` binary is in your `$PATH`.
 The `.adoc` files peppering this curriculum repo are written in
 AsciiDoc overlaid with some preprocessing macros written in
 Racket. AsciiDoc is a plain-text-based markup that is converted
-by the Asciidoctor program into HTML (among other things, but we
-don’t use those parts).
+by the Asciidoctor program into HTML.
 
 === A brief introduction to AsciiDoc
 
