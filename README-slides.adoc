@@ -57,9 +57,9 @@ this presentation id.)
 The script `build-slide` is used to build the slides for an
 individual lesson, whose name is supplied as its argument, e.g.,
 
-  build-slide functions-can-be-linear
+  build-slide function-composition
 
-This assumes that the lesson `functions-can-be-linear` has been
+This assumes that the lesson `function-composition` has been
 copied to the `distribution/` directory by a previous (any)
 `build-pathway` call.
 
@@ -82,3 +82,28 @@ dislodge the existing presentation. Using the `-f` option is a
 good way to simply check that your modified slides convert
 correctly without committing them to the web yet.
 
+===  `--proglang` option
+
+The `build-slide` script takes as argument the name of a lesson
+as it is in the `distribution` directory. For the default
+proglang of `pyret`, this name is
+the same as the name of the lesson in the repo. For other
+proglangs, e.g., `wescheme`, the lesson directory inside
+`distribution` sports the suffix `-wescheme`.  `build-slide` called
+with the suffixed lesson name will do the right thing, and will
+copy the resultant `slides-wescheme.id` (not the suffix!) to the
+correct lesson directory in the repo:
+
+  build-slide function-composition-wescheme
+
+If you prefer to use the lesson name as given in the repo even
+for proglangs other than `pyret`, e.g., `wescheme`, you
+may do so, provided you add the `--proglang wescheme` option:
+
+  build-slide function-composition --proglang wescheme
+
+It is ok to overspecify, i.e., to give the `--proglang` option
+in addition to the proglang-modified name for the lesson as it
+occurs in `distribution`:
+
+  build-slides function-composition-wescheme --proglang wescheme
