@@ -1,8 +1,9 @@
 = Design Recipe 2
 
 @design-codap-recipe{"filter-is-old"
-  "Create and save a transformer that consumes a row of the animals table and computes whether it is more than 12 years old."
+  "Create and save a Transformer that produces a copy of the animals table with only  animals that are more than 12 years old."
 #:headless? #t
+#:transformer-type "filter"
 #:domain-list '("Row")
 #:range "Boolean"
 #:num-input-examples 2
@@ -25,7 +26,7 @@
 
 
 @design-codap-recipe{"build-s-names"
-  "Create and save a transformer which returns true if an animal’s name contains the letter `s`."
+  "Create and save a Transformer which returns true in a _new column_ if an animal’s name contains the letter `s`."
 #:headless? #t
 #:domain-list '("Row")
 #:range "Boolean"

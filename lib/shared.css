@@ -17,6 +17,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.beta::after { 
+  position: absolute;
+  top: 1in;
+  left: 2in;
+  transform: rotate(-45deg);
+  content: "BETA";
+  opacity: 0.2;
+  line-height: 3em;
+  color: gray;
+  font-size: 100pt;
+  font-weight: 900;
+}
+
 /* These items should ALWAYS max-out pagewidth, and have no padding */
 #header, #content, #footer {
   width: 100% !important; max-width: 100% !important; padding: 0;
@@ -57,9 +70,11 @@ h1 {
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
 h2 {
-  margin:         0 0 1ex 0; /* 1ex bottom margin */
+  /* margin:         0 0 1ex 0; /* 1ex bottom margin */
+  margin:          0; /* 1ex bottom margin */
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
+
 #header>h1:only-child { border-bottom: none; }
 
 /* unordered list spacing */
@@ -125,7 +140,7 @@ tr th.tableblock {
 }
 
 /* outOfDate warning */
-#outOfDate {background: black; color: white; display: block; width: 100%;}
+#outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
 
 .left  { text-align: left!important; }
 .right { text-align: right!important; }
@@ -435,15 +450,20 @@ tr th.tableblock {
   left:               -2em;
 }
 
-.lesson-instruction {
+.lesson-instruction, .lesson-roleplay {
   min-height: 50px;
   background: #eee;
   clear:      both;
   padding:    5px;
   margin:     2ex 0;
 }
-.lesson-instruction > *:first-child { margin-left: 60px; }
-.lesson-instruction > *:first-child::before {
+.lesson-instruction > *:first-child, 
+.lesson-roleplay    > *:first-child { 
+  margin-left: 60px; 
+}
+
+.lesson-instruction > *:first-child::before,
+.lesson-roleplay    > *:first-child::before {
   content:  url('lesson-instruction.png');
   height:   50px;
   width:    50px;
@@ -451,6 +471,7 @@ tr th.tableblock {
   margin-right: 10px;
   margin-left:-60px;
 }
+.lesson-roleplay    > *:first-child::before { content: url('lesson-roleplay.png') }
 
 .lesson-point {
   font-weight:        bold;
@@ -470,9 +491,13 @@ tr th.tableblock {
   margin:             15px auto;
   display:            block;
   clear:              both;
+  position:           relative;
 }
-.strategy-box { border-color: #1a73b5 !important; }
-.notice-box   { border-color: #7747a5 !important; }
+.strategy-box td, .notice-box td { width: 8in; }
+
+.strategy-box, .strategy-box .title { border-color: #1a73b5 !important; }
+.notice-box,   .notice-box   .title { border-color: #7747a5 !important; }
+
 .strategy-box .title, .notice-box .title {
   width:              100%;
   display:            block;
@@ -480,10 +505,8 @@ tr th.tableblock {
   font-weight:        bold;
   font-size:          1.5rem;
 }
-.strategy-box .title { color: #1a73b5; }
-.notice-box   .title { color: #7747a5; }
+
 .strategy-box a, .notice-box a { color: blue; text-decoration: underline; }
-.strategy-box td, .notice-box td { width: 8.5in; }
 
 .blank    { color: rgba(0,0,0,0); }
 .logo     { float: right; }
@@ -496,6 +519,16 @@ span.clear {
   width:              100%;
 }
 
+/* Images and Captions */
+.image-figure .image-caption { 
+  width:      100%; 
+  max-width:  300px; 
+  display:    inline-block; 
+  font-style: italic; 
+  line-height: 1.5ex;
+  word-break: break-word;
+}
+.image-figure .image-caption::before { content: 'Source: '; }
 /************************************************************************************
 * WORKBOOK PAGES
 */
@@ -515,7 +548,12 @@ body.workbookpage {
   padding:   0;
 }
 
-body.workbookpage p .editbox { line-height: 1rem; vertical-align: baseline; font-size: 9pt; }
+/* Make code match text size/layout */
+body.workbookpage p .editbox, body.workbookpage pre .editbox { 
+  line-height: 1rem; 
+  vertical-align: baseline; 
+  font-size: 9pt !important; 
+}
 
 body:not(.LessonPlan) #header { margin-bottom: 5px !important; }
 body:not(.LessonPlan) #header> h1:first-child,
@@ -528,6 +566,8 @@ body:not(.LessonPlan) .sect2 > h3:first-child {
 }
 
 body:not(.LessonPlan) .description { display: none; }
+
+.solution { font-style: italic; }
 
 /**
  * Auto-numbering.
@@ -548,12 +588,6 @@ table .autonum::after { content: none; }
 .data-cycle .fitbruby, .data-cycle .fitb { 
   text-align: left; font-style: italic; font-size:  1rem;
 }
-
-
-/* Note(Emmanuel): use display:flex and get rid of these! */
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { background: gray; border: gray; }
@@ -624,29 +658,47 @@ body:not(.LessonPlan) .recipe p {
     line-height:      inherit;
 }
 
+.studentAnswerShort  { min-width: 60pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
+
 /* CODAP-specific formatting */
 /* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
 
 .codap .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+.codap .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
 
 .codap .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
 .codap .recipe_name { display: flex; }
-.codap_transformer_type { margin: 0 2.5rem; }
-.codap_transformer_type p::before,
+
+.codap .transformer_type,
+.codap .transformer_type_checked {
+  /* margin: 0 2.5rem; */
+}
+
+table.transformer_type td:first-of-type .content { display: flex; flex: row; }
+table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
+
+.codap .transformer_type p::before,
 .codap .transformer_type_checked p::before {
-  content: "";
   width: 1.1rem;
   height: 1.1rem;
   background: white;
   display: inline-block;
-  margin:  0 2px 4px 0;
+  margin:  0 2px 2px 0;
   vertical-align: middle;
 }
-.codap .transformer_type_checked p::before {
+
+.codap div.transformer_type p::before { content: ""; }
+.codap div.transformer_type_checked p::before {
   content: "x";
   text-align: center;
   line-height: 1rem;
+  color: black;
 }
+
+div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
+
 .recipe_formula, .codap_transformer { display:  flex; }
 .codap_transformer p { width:  100%; }
 .codap_example_tables+table table * { margin: 0; padding: 0; }
@@ -809,7 +861,7 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 .editbox {
   width:              auto;
   background-color:   #f7f7f8;
-  margin:             0 2px;
+  margin:             2px;
   padding:            0 2px;
   text-align:         left;
 }
@@ -923,20 +975,26 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   body.nonworkbookpage { width: auto !important; }
 
   /* on WB pages, set font size to same as print and then zoom the page */
-
   body.workbookpage {
     transform-origin: left top; 
     transform: scale(1.25); 
     min-height: calc(11in * 1.25) !important;
   }
+  body.workbookpage #savetodrive-div { transform: scale(0.8); }
 
   /* add some left-padding to improve readability on screens */
   body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
 
-  /* Collapsing and Colorful Headers */
+  /********************************************************************
+   *  Collapsing Headers 
+   */
+
+  /* add a bottom padding to prevent browser-scroll */
   .LessonPlan #body, .TeacherResources .LessonPlan #body {padding-bottom:  10in;}
-  .LessonPlan .sect1.lesson-section-1 h2, .TeacherResources .sect1 h2 {
+  
+  /* adjust colors */
+  .LessonPlan h2, .TeacherResources .sect1 h2 {
     background-color: #75328A77;
     color: white;
     font-weight: 600;
@@ -947,26 +1005,54 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
     text-align: left;
     outline: none;
   }
+  .LessonPlan h2.active, .LessonPlan h2:hover,
+  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { 
+    background-color: #b7d893; 
+  }
+  .LessonPlan h2.active,       .TeacherResources .sect1 h2.active { color: white; }
 
-  .LessonPlan .sect1.lesson-section-1 h2.active, .LessonPlan .sect1.lesson-section-1 h2:hover,
-  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { background-color: #b7d893; }
-
-  .LessonPlan .sect1.lesson-section-1 h2:after, .TeacherResources .sect1 h2:after {
+  /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+  .LessonPlan h2:after, .TeacherResources .sect1 h2:after {
     content: '\002B';
     color: white;
     font-weight: bold;
     float: left;
     margin-right: 5px;
   }
+  .LessonPlan h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
 
-  .LessonPlan .sect1.lesson-section-1 h2.active,       .TeacherResources .sect1 h2.active { color: white; }
-  .LessonPlan .sect1.lesson-section-1 h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
-  .LessonPlan .sect1.lesson-section-1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
+  /* set collapsed size and transition rules */
+  .LessonPlan .sectionbody,    .TeacherResources .sect1 .sectionbody {
     padding: 0 18px;
-    max-height: 0;
+    max-height: 100px;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    position: relative;
   }
+  
+  /* Add a white fade to hint for discoverability */
+  .LessonPlan .sectionbody::after, .TeacherResources .sect1 .sectionbody::after {
+    content  : "";
+    position : absolute;
+    z-index  : 1;
+    bottom   : 0;
+    left     : 0;
+    pointer-events   : none;
+    background-image : linear-gradient(to bottom, 
+                      rgba(255,255,255, 0), 
+                      rgba(255,255,255, 1) 90%);
+    width    : 100%;
+    height   : 10em;
+  }
+  .LessonPlan h2:hover+.sectionbody:after,
+  .TeacherResources .sect1 h2:hover+.sectionbody:after { height: 4em; }
+  
+   /* don't add the fade for summaries or active sections */
+  .LessonPlan .lessonSummary .sectionbody { max-height: unset; }
+  .LessonPlan .lessonSummary .sectionbody::after,
+  .LessonPlan h2.active+.sectionbody::after,
+  .TeacherResources h2.active+.sectionbody::after { display: none;}
+  .LessonPlan .sect1.lesson-section-1 h2:not(.active)+.sectionbody h3 { display: none; }
 }
 
 /************************************************************************************

@@ -4,9 +4,9 @@
 
 (define *ngss-standards-list*
   '(
-    ; NOTE(Emmanuel): 9/9/21 - Commenting out all the detailed standards, to focus on
-    ; the 8 primary practices
-    #|
+    ; NOTE(Emmanuel): 9/9/21 - Commenting out ES standards, to focus on
+    ; MS and HS
+
     ; The 8 NGSS Science and Engineering Practices do not have a predefined numbering system.  For this dictionary, subitems have been numbered for easier comprehension and use.  
 
     ; ES = Elementary School (Grades 3-5)
@@ -15,6 +15,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP1 = Asking Questions and Defining Problems
+#|
     ("ES-SEP1-1"
      "Ask questions about what would happen if a variable is changed."
      )
@@ -30,6 +31,7 @@
     ("ES-SEP1-5"
      "Define a simple design problem that can be solved through the development of an object, tool, process, or system and includes several criteria for success and constraints on materials, time, or cost."
      )
+|#
     ("MS-SEP1-1"
      "Ask questions that require sufficient and appropriate empirical evidence to answer."
      )
@@ -84,7 +86,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP2 = Developing and Using Models
-
+#|
     ("ES-SEP2-1"
      "Identify limitations of models."
      )
@@ -103,6 +105,7 @@
     ("ES-SEP2-6"
      "Use a model to test cause and effect relationships or interactions concerning the functioning of a natural or designed system."
      )
+|#
     ("MS-SEP2-1"
      "Evaluate limitations of a model for a proposed object or tool."
      )
@@ -148,7 +151,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP3 = Planning and Carrying Out Investigations
-
+#|
     ("ES-SEP3-1"
      "Plan and conduct an investigation collaboratively to produce data to serve as the basis for evidence, using fair tests in which variables are controlled and the number of trials considered."
      )
@@ -164,6 +167,7 @@
     ("ES-SEP3-5"
      "Test two different models of the same proposed object, tool, or process to determine which better meets criteria for success."
      )
+|#
     ("MS-SEP3-1"
      "Plan an investigation individually and collaboratively, and in the design: identify independent and dependent variables and controls, what tools are needed to do the gathering, how measurements will be recorded, and how many data are needed to support a claim."
      )
@@ -200,7 +204,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP4 = Analyzing and Interpreting Data
-
+#|
     ("ES-SEP4-1"
      "Represent data in tables and/or various graphical displays (bar graphs, pictographs, and/or pie charts) to reveal patterns that indicate relationships."
      )
@@ -216,6 +220,7 @@
     ("ES-SEP4-5"
      "Use data to evaluate and refine design solutions."
      )
+|#
     ("MS-SEP4-1"
      "Construct, analyze, and/or interpret graphical displays of data and/or large data sets to identify linear and nonlinear relationships."
      )
@@ -261,7 +266,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP5 = Using Mathematics and Computational Thinking
-
+#|
     ("ES-SEP5-1"
      "Decide if qualitative or quantitative data are best to determine whether a proposed object or tool meets criteria for success."
      )
@@ -274,6 +279,7 @@
     ("ES-SEP5-4"
      "Create and/or use graphs and/or charts generated from simple algorithms to compare alternative solutions to an engineering problem."
      )
+|#
     ("MS-SEP5-1"
      "Use digital tools (e.g., computers) to analyze very large data sets for patterns and trends."
      )
@@ -307,7 +313,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP6 = Constructing Explanations and Designing Solutions
-
+#|
     ("ES-SEP6-1"
      "Construct an explanation of observed relationships (e.g., the distribution of plants in the back yard)."
      )
@@ -323,6 +329,7 @@
     ("ES-SEP6-5"
      "Generate and compare multiple solutions to a problem based on how well they meet the criteria and constraints of the design solution."
      )
+|#
     ("MS-SEP6-1"
      "Construct an explanation that includes qualitative or quantitative relationships between variables that predict(s) and/or describe(s) phenomena."
      )
@@ -365,7 +372,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP7 = Engaging in Argument from Evidence
-
+#|
     ("ES-SEP7-1"
      "Compare and refine arguments based on an evaluation of the evidence presented."
      )
@@ -384,6 +391,7 @@
     ("ES-SEP7-6"
      "Make a claim about the merit of a solution to a problem by citing relevant evidence about how it meets the criteria and constraints of the problem."
      )
+|#
     ("MS-SEP7-1"
      "Compare and critique two arguments on the same topic and analyze whether they emphasize similar or different evidence and/or interpretations of facts."
      )
@@ -420,7 +428,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP8 = Obtaining, Evaluating, and Communicating Information
-
+#|
     ("ES-SEP8-1"
      "Obtain and combine information from books and other reliable media to explain phenomena."
      )
@@ -439,6 +447,7 @@
     ("ES-SEP8-6"
      "Communicate scientific and/or technical information orally and/or in written formats, including various forms of media and may include tables, diagrams, and charts."
      )
+|#
     ("MS-SEP8-1"
      "Critically read scientific texts adapted for classroom use to determine the central ideas and/or obtain scientific and/or technical information to describe patterns in and/or evidence about the natural and designed world(s)."
      )
@@ -469,7 +478,6 @@
     ("HS-SEP8-5"
      "Communicate scientific and/or technical information or ideas (e.g. about phenomena and/or the process of development and the design and performance of a proposed process or system) in multiple formats (including orally, graphically, textually, and mathematically)."
      )
-    |#
 
     ))
 

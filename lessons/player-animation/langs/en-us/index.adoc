@@ -49,8 +49,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 
 === Investigate
 
-[.lesson-instruction]
-Students open their *Game Project file* and look for `update-player`, then figure out what the contract represents.
+Direct students to open their saved Game Project files. Tell them to look for update player. Lead a discussion by posing the following questions.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -60,30 +59,33 @@ Students open their *Game Project file* and look for `update-player`, then figur
 MLR 6 - Three Reads: Have students read through the problem statement three times, looking for different information.  What is the problem asking me?  What is the @vocab{contract} for this @vocab{function}?  What information do I need to create that function?
 |===
 
-* *What is the contract for `update-player`?*
+[.lesson-instruction]
+--
+* What is the contract for `update-player`?
 +
 @ifproglang{wescheme}{
-_The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number._
+** _The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number._
 
-* *What does each part of the domain and range represent?*
+* What does each part of the domain and range represent?
 +
-_Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``_}
+** _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``._}
 
 @ifproglang{pyret}{
 +
-_The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number._
+** _The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number._
 
-* *What does each part of the domain and range represent?*
+* What does each part of the domain and range represent?
 +
-_Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``_}
+** _Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``._}
 
-* *How does the y-coordinate of `PLAYER` change when the user presses the "up" key?*
+* How does the y-coordinate of `PLAYER` change when the user presses the "up" key?
 +
-_It should increase, the program should add something to it_
+** _It should increase, the program should add something to it._
 
 @centered-image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" , 400, align="center"}
 
-Students complete @printable-exercise{pages/update-player.adoc} with a partner, then type their code into their *Game Project file* and test.
+- Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your *Game Project file* and test.
+--
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -112,11 +114,17 @@ Students choose one or more features to make their game more unique. These featu
 Right now, all of your games allow the player to move up and down at a constant speed. But what if we wanted to add a special key that made the player warp to the top of the screen, or move down twice as fast? What if we wanted the player to _wrap_, so going off one side of the screen would make it re-appear on the other?
 
 === Investigate
-Now is your time to customize your game! Try implementing some of the following features, or make your own!
+[.lesson-instruction]
+Complete at least one of the @printable-exercise{pages/challenges.adoc} before turning to your computer to customize your game.
+
+Some possible features students might include are:
 
 * *Warping* - program one key to "warp" the player to a set location, such as the center of the screen
+
 * *Boundaries* - change `update-player` such that `PLAYER` cannot move off the top or bottom of the screen
+
 * *Wrapping* - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
+
 * *Hiding* - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
 
 @ifproglang{wescheme}{
@@ -127,12 +135,10 @@ Reminder: Use `+#+` to add comments to code! +
 }
 Adding useful @vocab{comments} to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
-Have students complete at least one of the @printable-exercise{pages/challenges.adoc} before turning to their computers.
-
 === Synthesize
 Have students share back what they implemented. Sharing solutions is encouraged!
 
-*Question:* What would it take to make the player move left and right? Why can't we do this without changing the contract?
+What would it take to make the player move left and right? Why can't we do this without changing the contract?
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===

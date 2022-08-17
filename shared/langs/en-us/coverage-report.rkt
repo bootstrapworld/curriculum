@@ -6,19 +6,19 @@
 
 ;standards
 
-(require "standards/lessons-and-standards.rkt")
+(require "standards/standards-and-lessons.rkt")
 
 (require "standards/the-standards-dictionaries.rkt")
 
 ;textbooks
 
-(require "textbooks/lessons-and-textbooks.rkt")
+(require "textbooks/textbooks-and-lessons.rkt")
 
 (require "textbooks/the-textbook-dictionaries.rkt")
 
 ;practices
 
-(require "practices/lessons-and-practices.rkt")
+(require "practices/practices-and-lessons.rkt")
 
 (require "practices/the-practices-dictionaries.rkt")
 
@@ -48,7 +48,7 @@
   (display "</select>\n" o)
   (display "++++\n" o))
 
-(define (display-subreport o title lesson-entries dictionaries)
+(define (display-subreport o title standard-entries dictionaries)
   ; (printf "doing display-subreport ~s  \n" title  )
 
   (for ([dictionary dictionaries])
@@ -63,21 +63,14 @@
 
       (set! counters (reverse counters))
 
-      (for ([lesson-entry lesson-entries])
-        (let ([lesson-name (first lesson-entry)]
-              [lesson-referents (rest lesson-entry)])
-          (for ([referent lesson-referents])
-            (let ([c (assoc referent counters)])
-              (when c
-                (let* ([b (third c)]
-                       [count-box (fourth c)]
-                       [lessons (unbox b)]
-                       [count (unbox count-box)])
-                  (set-box! b (string-append lessons
-                                (if (= count 0) "" ", ")
-                                lesson-name))
-                  (set-box! count-box (+ count 1))
-                  ))))))
+      (for ([s-ll standard-entries])
+        (let* ([s (first s-ll)] [ll (rest s-ll)]
+               [c (assoc s counters)])
+          (when c
+            (let* ([b (third c)]
+                   [count-box (fourth c)])
+              (set-box! b (string-join ll ", "))
+              (set-box! count-box (length ll))))))
 
       (fprintf o "[.coverageElement.~a]\n" opt)
       (fprintf o "[cols=\"2a,1a,7a\"]\n")
@@ -104,11 +97,11 @@
     (print-coverage-script-n-style o)
     (display-selection o)
 
-    (display-subreport o "Standards" *lessons-and-standards* *standards-list*)
+    (display-subreport o "Standards" *standards-and-lessons* *standards-list*)
 
-    (display-subreport o "Textbooks" *lessons-and-textbooks* *textbooks-list*)
+    (display-subreport o "Textbooks" *textbooks-and-lessons* *textbooks-list*)
 
-    (display-subreport o "Practices" *lessons-and-practices* *practices-list*)
+    (display-subreport o "Practices" *practices-and-lessons* *practices-list*)
 
     )
 

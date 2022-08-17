@@ -17,7 +17,6 @@ fi
 
 topdir=$(pwd)
 
-export PROGDIR=$topdir/prog
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 SED=sed
@@ -38,7 +37,8 @@ fi
 for natlang in *; do
  test -d $natlang || continue
  cd $natlang
- export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
+ export PROGDIR=$topdir/distribution/.prog-$natlang
+ export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
  if test -d lessons; then
    cd lessons
    for lsn in *; do
@@ -48,10 +48,10 @@ for natlang in *; do
      # echo Doing $LESSON
      PROGLANG=pyret
      repoLESSON=$LESSON
-     if test -f .cached/.wescheme; then
+     if test -f .cached/.proglang-wescheme; then
        PROGLANG=wescheme
        repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
-     elif test -f .cached/.codap; then
+     elif test -f .cached/.proglang-codap; then
        PROGLANG=codap
        repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
      fi

@@ -207,7 +207,7 @@ Common Misconceptions
 
 Debrief your answers!
 
-How does asking "Which rows? Which columns?" help us figure out what code to write?
+How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyret}{what code to write}@ifproglang{codap}{which configurations to use}?
 
 ---
 {layout="LaunchR"}
@@ -218,7 +218,7 @@ How does asking "Which rows? Which columns?" help us figure out what code to wri
 Once we know what data we need, we can turn our attention to what we want to build with it!
 
 - Do we need to filter out certain rows and make a new table?
-- Do we need a pie chart?
+@ifproglang{pyret}{- Do we need a pie chart?}
 - Should we make a histogram?
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
@@ -229,10 +229,12 @@ What kinds of displays can help us analyze whether there are more fixed or unfix
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
 **Are more animals fixed or unfixed?**
+@ifproglang{pyret}{
+We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice.} 
 
-We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice. 
+Once we've decided to make a bar chart and we know which rows and columns we're plotting, the next step is to @ifproglang{pyret}{_write the code!_}@ifproglang{codap}{choose the appropriate configuration.}
 
-Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
+@ifproglang{pyret}{
 
 ---
 {layout="LaunchR"}
@@ -243,14 +245,18 @@ Once we've decided what to make and we know which rows and columns we're plottin
 Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
 
 Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
+}
 
 ---
+
+
 {layout="InvestigateR"}
 # Analyzing Data
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
-Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in Pyret.
+Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
+
 
 <!--
 Have students share their results. What did their charts tell them?
@@ -263,7 +269,8 @@ Have students share their results. What did their charts tell them?
 
 In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
-*How do Contracts and the Data Cycle work together, to help us figure out what program will answer our questions?*
+@ifproglang{pyret}{
+*How do Contracts and the Data Cycle work together, to help us figure out what program will answer our questions?*}
 
 <!--
 Have students share their results. What did their charts tell them?

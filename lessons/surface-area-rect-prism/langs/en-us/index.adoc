@@ -44,24 +44,23 @@ Students build on their experience with writing code to define shapes.  They wil
 
 === Launch
 
-Have students turn to @printable-exercise{prism-explore.adoc} and give them a moment to complete the first two questions.
+[.lesson-instruction]
+- Turn to @printable-exercise{prism-explore.adoc}. Complete the first two questions.
+
+Invite students to share out to gauge their prior knowledge of surface area.
 
 [.lesson-instruction]
-- What do you picture in your mind when you hear @vocab{rectangular prism}?
-- What do you picture in your mind when you hear @vocab{surface area}?
-
-
-[.lesson-instruction]
-- Open the @starter-file{prism} in a new tab, save a copy, and click "Run".
+- Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run".
 - Type `prism` into the Interactions Area to see an image of a rectangular prism. What do you notice about the prism?
 
-_Be sure students notice that the @vocab{faces} and @vocab{dimensions} (length, width, and height) are labeled. Invite them to observe how many faces there are, as well as how many *differently sized* faces there are. (There are three sizes of faces, with two faces in each size.)_
+Be sure that students notice that the @vocab{faces} and @vocab{dimensions} (length, width, and height) are labeled. Invite them to observe how many faces there are, as well as how many *differently sized* faces there are. Students who clearly see that there are three sizes of faces, with two faces in each size, will be able to move more confidently through the remainder of the activity.
 
 [.lesson-point]
 Faces are the flat surfaces on the outside of a solid figure. Edges are the line segments where the faces meet in each of the three dimensions. The surface area of a prism is calculated by adding the areas of its faces.
 
 [.lesson-instruction]
 - Go to PART 1 and look at the definitions for `front` and `back`. Type `front` into the Interactions Area. What do you get?
+** _A black-outlined rectangle that has a width of 180 and a height of 50._
 - The faces `front` and `back` have been defined to draw a rectangle whose dimensions are width and height. You will need to write definitions for each of the other faces of the prism.
 - Click "Run" and test each of the faces in the Interactions Area to make sure that they match the prism you started with.
 
@@ -76,7 +75,8 @@ If you do not have a classroom printer, consider splitting this lesson over two 
 |===
 
 [.lesson-instruction]
-- Go to PART 2 in the code. Type @show{(code '(print-imgs faces))} into the Interactions Area.  How many rectangles do you see? _Two._
+- Go to PART 2 in the code. Type @show{(code '(print-imgs faces))} into the Interactions Area.  How many rectangles do you see?
+** _Two._
 - The code in PART 2 says @show{(code '(define faces (list front back )))} , which defines `faces` to be a list of values. This list will include all of the faces of the prism, but right now it only includes `front` and `back`. Add the names of each of the remaining faces to the list. @ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}
 
 Ensure that students' lists include all six faces of the rectangular prism.
@@ -108,10 +108,18 @@ a|
 
 === Synthesize
 
-* How many definitions did you write in order to calculate the surface area of the prism?
-** _Some students may say 4 and some may say 7._
+Have students share the code they wrote to define `surface-area`. Did students all write the code the same way?
 
-Have students share the codes they wrote to define `surface-area`. Did students all write the code the same way?  Can anyone see other ways that they could have written the code?
+@ifproglang{pyret}{
+Three possible correct ways to define surface area are:
+
+- `surface-area = A-front + A-back + A-left + A-right + A-top + A-bottom`
+- `surface-area = (2 * A-front) + (2 * A-left) + (2 * A-top)`
+- `surface-area = 2 (A-front + A-left + A-top)`
+}
+
+For further debriefing, discuss the following:
 
 - How did building the prism help you to understand surface area?
+
 - How did writing the code for surface area help you to understand surface area?

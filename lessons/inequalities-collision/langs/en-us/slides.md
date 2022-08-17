@@ -51,7 +51,7 @@ We wrote the `distance` function first, and then @ifproglang{pyret}{`is-collisio
 
 <!--
 - Explicitly point out that this function is easy to write because we can _re-use_ the distance function.
-- Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @link{../problem-decomposition, previous lessons}. Problem Decomposition is powerful!
+- Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @lesson-link{problem-decomposition}. Problem Decomposition is powerful!
 -->
 
 ---

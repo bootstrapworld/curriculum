@@ -79,40 +79,41 @@ Challenge them to use terminology like "looks up the value in the X column" when
 Students learn to sort rows of a table in ascending or descending order, filter the rows using a Boolean-producing function, and build a new column.
 
 === Launch
-Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room. Tell the class that you are going to select a volunteer who will play the role of… *Order*!
+
+Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
 
 [.lesson-point]
 * Each of you represents a Row in a table of students
 * Standing together, you represent a _sample_ of the class, stored in a table.
 * Like you, each student has columns like "First Name", "Last Name", "Birthday", "Favorite Food", etc.
 
-A Table is a collection of Rows. And we can _do things_ to collections!
+A Table is a collection of Rows. And we can _do things_ to collections! One thing we can do is *order the rows* by some criteria. What are some ways to sort a table of students?
 
-One thing we can do is *order the rows by some criteria*. What are some ways to sort this table?
+[.lesson-roleplay]
+--
+Tell the class that you are going to select a volunteer who will play the role of… *order-by*! Announce to your volunteer "Sort the Rows by height, from smallest to largest!", and have them do it. Then announce to your volunteer "Sort the Rows by height, from largest to smallest!", and have them do it.
 
-Announce to your volunteer "Sort the Rows by height, from smallest to largest!", and have them do it. Then announce to your volunteer "Sort the Rows by height, from largest to smallest!", and have them do it.
+Solicit other ideas, like sorting by birthday. Try sorting in ascending **and** descending order, using language appropriate cues: "order-by 'birthday', ascending equals true", or "order-by height, ascending equals false!" After a few iterations, give the volunteer a round of applause!
+--
 
-Solicit other ideas, like sorting by birthday. Try sorting in ascending **and** descending order!
+Another thing we can do is *filter the rows* by some criteria. In our animals dataset, for example, we might want to filter the table to show only the rows for dogs, or only the rows for cats older than 5. What are some ways to filter our table of students?
 
-Give the volunteer a round of applause, and then tell the class that you are going to select another volunteer who will play the role of… *Filter*!
+[.lesson-roleplay]
+--
+Tell the class that you are going to select a volunteer who will play the role of… *filter*! Hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (You may need to choose your students strategically. The demonstration that follows, for instance, requires at least one student who wears glasses.) Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students.
 
-Hand the volunteer a Function card from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set. Instruct them to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students.
+Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
 
-Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should stand or sit.
+Here’s how that might look if Filter chose a function card `has-glasses`.
 
-Here’s how that might look if Filter chose an expression called `likes-pizza`.
+- _Filter stands in front of Student 1 and checks if they are wearing glasses._
+- *Filter to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
+- _Filter stands in front of Student 2 and checks if they are wearing glasses._
+- *Filter to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
+--
 
-* *Filter to Student 1:* Do you like pizza?
-* *Student 1:* Yes
-* *Filter:* Remain standing. (Student 1 remains standing.)
-* *Filter to Student 2:* Do you like pizza?
-* *Student 2:* No.
-* *Filter:* Sit down. (Student 2 sits.)
+Have your Filter volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
 
-Have your Filter volunteer go through all their peers, applying their card to each one.
-
-[.lesson-instruction]
-Based on who sat and who stayed, what was on the card?
 
 === Investigate
 Pyret Tables have their own methods for sorting, filtering, and more.

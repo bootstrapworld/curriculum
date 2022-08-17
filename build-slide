@@ -44,10 +44,10 @@ fi
 
 topdir=$(pwd)
 
-export PROGDIR=$topdir/prog
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
-export PROGLANG=pyret
+export PROGLANG=$proglang
+
 
 if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
@@ -58,6 +58,7 @@ fi
 
 for natlang in *; do
   test -d $natlang || continue
+  export PROGDIR=$topdir/distribution/.prog-$natlang
   if test ! -d $natlang/lessons; then
     echo Missing lessons diry in distribution -- did you call build-pathway\?
     continue
@@ -67,20 +68,18 @@ for natlang in *; do
     continue
   fi
   cd $natlang/lessons/$lsn
-  export BOOTSTRAPPREFIX="$bootstraproot/$natlang/lessons"
+  export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
   export LESSON="$lsn"
   # echo Doing $LESSON
-  PROGLANG=pyret
   repoLESSON=$LESSON
-  if test -f .cached/.wescheme; then
-    PROGLANG=wescheme
+  if test -f .cached/.proglang-wescheme; then
+    # FIXME: allow arbitrary proglangs
     repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
-  elif test -f .cached/.codap; then
-    PROGLANG=codap
+  elif test -f .cached/.proglang-codap; then
     repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
   fi
 
-  # echo PROGLANG is $PROGLANG
+  # echo repoLESSON is $repoLESSON
 
   idfile=slides-$PROGLANG.id
 

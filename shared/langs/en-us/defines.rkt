@@ -16,6 +16,7 @@
   print-link-to-student-workbook
   print-link-to-teacher-resources
   print-link-to-forum
+  natlang:also-available-in
   ; print-standards-js
   ; print-textbooks-js
   ; print-menubar
@@ -131,3 +132,6 @@
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
+
+(define (natlang:also-available-in s)
+  (string-append "(Also available in " s ")"))

@@ -34,15 +34,10 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 === Launch
 
 [.lesson-instruction]
-- Open the @starter-file{inequalities-sam} in a new tab
-- Save a copy of your own
+- Open the @starter-file{inequalities-sam} in a new tab and save a copy of your own.
 - Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 
-[.lesson-instruction]
-- What is something you noticed about this program? _As Sam moves, the @vocab{coordinates} are displayed at the top of the screen; the coordinates are all in the 1st quadrant; etc._
-- What do you see when Sam is at (0,0)?  Why is that? _You only see part of Sam's wing.  Sam's position is based on the center of Sam's image._
-- How far can Sam go to the left and stay on the screen? _Up to, but not beyond, an x of -40._
-- How could we write this as an @vocab{expression}? _Appropriate responses are @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}._
+As students complete the worksheet and explore the program, they should notice that Sam's coordinates are displayed at the top of the screen. When Sam is at (0,0), we only see a part of Sam's wing because Sam's position is based on the _center_ of the butterfly image. Students should observe that Sam can go up to, but not beyond, an x of -50. Students can represent this algebraically as @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}.
 
 [.lesson-point]
 Every time Sam moves, we want to check and see if Sam is safe.
@@ -54,12 +49,18 @@ Every time Sam moves, we want to check and see if Sam is safe.
 To further support students, consider asking what three functions are defined in their starter files. Then, ask students what each function _should_ do, when working properly.
 
 [.lesson-instruction]
-- What _should_ our left-checking function do? _Check to see if x is greater than -50_
-- What _should_ our right-checking function do? _Check to see if x is less than 690_
-- What should `onscreen?` do? _Answers may vary. Let students drive the discussion, and don't give away the answer!_
+- What _should_ our left-checking function do?
+** _Check to see if x is greater than -50._
+- What _should_ our right-checking function do?
+** _Check to see if x is less than 690._
+- What should `onscreen?` do?
+** _Answers may vary. Let students drive the discussion, and don't give away the answer!_
 
 === Investigate
-Direct students to complete @printable-exercise{pages/left-and-right.adoc} with their partners. Once finished, they can fix the corresponding functions in their Sam the Butterfly file, and test them out.
+
+[.lesson-instruction]
+- Complete @printable-exercise{pages/left-and-right.adoc} with your partner.
+- Once finished, fix the corresponding functions in your Sam the Butterfly file, and test them out.
 
 @ifproglang{wescheme}{
 Students will notice that fixing `safe-left?` keeps Sam from disappearing off the left side, but fixing `safe-right?` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why.
@@ -70,33 +71,38 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 }
 
 
-@ifproglang{pyret}{
-[.strategy-box, cols="1", grid="none", stripes="none"]
+[.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 
 |
 @span{.title}{"False" doesn't mean "Wrong"!}
 
-A lot of students - especially confident ones - may struggle to come up with an example where `is-safe-left` returns `false`:
+A lot of students - especially confident ones - may struggle to come up with an example where @show{(code 'safe-left?)} returns `false`:
 
-``# Students hate writing the second one!
-examples:
-  is-safe-left( 89) is  89 > -50
-  is-safe-left(-65) is -65 > -50
-end``
+@show{
 
-This misconception comes from confusing a statement that is "false" with a program that is "wrong". In the second example, above, the result of `is-safe-left(-65)` _is_ `false`, because "65 is greater than -50" _is a false statement_.
+(code `(BEGIN
+  (COMMENT "Students hate writing the second one!")
+  (EXAMPLE
+    (safe-left? 189) (> 189 -50)
+    (safe-left? -65) (> -65 -50))
+  ))
+}
 
+This misconception comes from confusing a statement that is "false" with a program that is "wrong". In the second example, above, the result of @show{(code '(safe-left? -65))} _is_ `false`, because "65 is greater than -50" _is a false statement_. Remind your students that you want one example that's true, and a second that's false!
+
+@ifproglang{pyret}{
 Pyret includes some functionality that makes this more explicit, and can help resolve the misconception:
-
-``examples:
+----
+examples:
   is-safe-left( 89) is true  because  89 > -50
   is-safe-left(-65) is false because -65 > -50
-end``
+end
+----
 
 By writing the answer first ( `is-safe-left(-65) is false` ), it reduces anxiety about code being "wrong". Students can think of the `because` as _an explanation of why the answer is false_.
-|===
 }
+|===
 
 Emphasize to students that they cannot trust the behavior of a complex system! After looking closely at examples and observing that they all pass, students should suspect that the bug is elsewhere.
 
@@ -122,11 +128,14 @@ Students solve a word problem involving compound inequalities, using `and` to co
 *Note:* In this programming language, question marks are pronounced "huh?". So `safe-left?` would be pronounced "safe left huh?" This can be a source of some amusement for students!
 }
 
-Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
+[.lesson-roleplay]
+--
+Recruit three student volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}. Give them 1 minute to read the contract and code, as written in the program.
 
-Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @ifproglang{wescheme}{`safe-left?` and `safe-right?`} @ifproglang{pyret}{`is-safe-left` and `is-safe-right`} will respond with either "true" or "false".
+Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @show{(code 'safe-left?)} and @show{(code 'safe-right?)} will respond with either "true" or "false".
 
-The function @ifproglang{wescheme}{`onscreen`?} @ifproglang{pyret}{`is-onscreen`}, however, will call the `safe-left` function! So the student roleplaying @ifproglang{wescheme}{`onscreen`?}@ifproglang{pyret}{`is-onscreen`} should turn to `safe-left` and give the input to them.
+The function @show{(code 'onscreen?)}, however, will call the @show{(code 'safe-left?)} function! So the student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
+
 
 For example:
 @ifproglang{wescheme}{
@@ -151,8 +160,10 @@ For example:
 Hopefully your students will notice that `safe-right?` did not participate in this roleplay scenario at all!
 
 [.lesson-instruction]
-- What is the problem with `onscreen?`? _It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
-- How can `onscreen?` check with both? _It needs to talk to `safe-left?` AND ``safe-right?``_
+- What is the problem with `onscreen?`?
+** _It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
+- How can `onscreen?` check with both?
+** _It needs to talk to `safe-left?` AND ``safe-right?``_
 }
 
 @ifproglang{pyret}{
@@ -174,15 +185,21 @@ Hopefully your students will notice that `safe-right?` did not participate in th
 - is-onscreen (turns back to facilitator): "true"
 
 Hopefully your students will notice that `is-safe-right` did not participate in this roleplay scenario at all!
+--
+
 
 [.lesson-instruction]
-- What is the problem with `is-onscreen`? _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
-- How can `is-onscreen` check with both? _It needs to talk to `is-safe-left` AND ``is-safe-right``_.
+- What is the problem with `is-onscreen`?
+** _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
+- How can `is-onscreen` check with both?
+** _It needs to talk to `is-safe-left` AND ``is-safe-right``_.
 }
 
 === Investigate
 
-Have students complete @printable-exercise{pages/onscreen.adoc}. When this function is entered into the editor, students should now see that Sam is protected on __both__ sides of the screen.
+[.lesson-instruction]
+- Complete @printable-exercise{pages/onscreen.adoc}.
+- When this function is entered into the editor, students should now see that Sam is protected on __both__ sides of the screen.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -211,18 +228,24 @@ Students identify common patterns between two-dimensional Boundary detection and
 Have students open their in-progress game file and click "Run". Invite them to analyze the movement of the danger and the target
 
 [.lesson-instruction]
-- How are the `TARGET` and `DANGER` behaving right now? _They move across the screen._
-- What do we want to change? _We want them to come back after they leave one side of the screen._
-- What happens to an image's x-coordinate when it moves off the screen? _An image is entirely off-screen if its x-coordinate is less than -50 and greater than 690._
-- How can we make the computer understand when an image has moved off the screen? _We can teach the computer to compare the image's @vocab{coordinates} to a boundary on the number line, just like we did with Sam the Butterfly!_
+- How are the `TARGET` and `DANGER` behaving right now?
+** _They move across the screen._
+- What do we want to change?
+** _We want them to come back after they leave one side of the screen._
+- What happens to an image's x-coordinate when it moves off the screen?
+** _An image is entirely off-screen if its x-coordinate is less than -50 and greater than 690._
+- How can we make the computer understand when an image has moved off the screen?
+** _We can teach the computer to compare the image's coordinates to a boundary on the number line, just like we did with Sam the Butterfly!_
 
 === Investigate
 
 @ifproglang{wescheme}{
-Have students apply what they learned from Sam the Butterly to fix the `safe-left?`, `safe-right?`, and `onscreen?` functions in their own code.
+[.lesson-instruction]
+Apply what you learned from Sam the Butterly to fix the `safe-left?`, `safe-right?`, and `onscreen?` functions in your own code.
 }
 @ifproglang{pyret}{
-Have students apply what they learned from Sam the Butterly to fix the `is-safe-left`, `is-safe-right`, and `is-onscreen` functions in their own code.
+[.lesson-instruction]
+Apply what you learned from Sam the Butterly to fix the `is-safe-left`, `is-safe-right`, and `is-onscreen` functions in your own code.
 }
 Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
 

@@ -16,7 +16,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let’s learn how transform one table into another.
+* Let’s learn how to transform one table into another.
 
 | Materials
 |[.materials-links]
@@ -32,45 +32,44 @@ Students learn how to _filter_ tables by removing Rows.
 
 === Launch
 
-Announce to the class that you are going to select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
+[.lesson-roleplay]
+--
+Announce to the class that you are going to select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room. (You may need to choose your students strategically. The demonstration, for instance, requires at least one student who wears glasses.)
 
 Tell the class that you are going to select a volunteer who will play the role of… The Filter Transformer!
 
-Hand the Filter Transformer a card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__. Instruct them to review their expression's *Contract* and *Purpose Statement*, but to keep that information a secret.
-
+Hand the Filter Transformer a card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__.  Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students. Instruct them to review their expression's *Contract* and *Purpose Statement*, but to keep that information a secret.
+--
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 
-a|
-@span{.title}{Contracts and Purpose Statements}
+| @span{.title}{Contracts and Purpose Statements}
 
 A *contract* is a statement of the _domain_ (input) and _range_ (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
 
 A *Purpose Statement* is a way of describing what an expression does. A sample purpose statement looks like this: "consumes an animal, and produces true if the animal is fixed."
 
-
-
 |===
 
 
-Explain to the class that the Filter Transformer will walk from one student to the next, referring to the expression (on the card) in order to determine if each student should stand or sit.
+[.lesson-roleplay]
+--
+Explain to the class that the Filter Transformer will walk from one student to the next, referring to the expression (on the card) in order to determine if each student should step forward or step backwards.
 
-Here’s how that might look if the Filter Transformer chose an expression called `likes-pizza`.
+Here’s how that might look if the Filter Transformer chose an expression card with, "Do they wear glasses?"
 
-- *Filter Transformer to Student 1*: Do you like pizza?
-- *Student 1*: Yes
-- *Filter Transformer*: Remain standing. (Student 1 remains standing.)
-- *Filter Transformer to Student 2*: Do you like pizza?
-- *Student 2*: No.
-- *Filter Transformer*: Sit down. (Student 2 sits.)
+- _Filter Transformer stands in front of Student 1 and checks if they are wearing glasses._
+- *Filter Transformer to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
+- _Filter Transformer stands in front of Student 2 and checks if they are wearing glasses._
+- *Filter Transformer to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
+--
 
-Have your Filter Transformer volunteer go through all their peers, applying their card to each one.
+Have your Filter Transformer volunteer go through all their peers, applying their card to each one. Help students notice that the `Filter` Transformer takes an _expression_, and produces a new table containing only rows for which the expression returns `true`.
 
 [.lesson-instruction]
-Based on who sat and who stayed, what was on the card?
-
-The `Filter` Transformer takes an _expression_, and produces a new table containing only rows for which the expression returns `true`.
+- Based on who sat and who stayed, what was on the card?
+** _The Transformer consumes a student and produces `true` if they are wearing glasses._
 
 === Investigate
 
@@ -141,7 +140,7 @@ Complete the worksheet @printable-exercise{pages/codap-build.adoc} in the @start
 Debrief with students. Ask them if they can think of a situation where they would want to use this. Some ideas:
 
 - How is `Build Attribute` similar to `Transform Attribute`? How are they different?
-** _`Build Attribute` creates an additional column, using the expression that we provide. `Transform Attribute` converts an existing column, using the expression that we provide._
+** _``Build Attribute`` creates an additional column, using the expression that we provide. `Transform Attribute` converts an existing column, using the expression that we provide._
 - When might it make more sense to _build_ an attribute, rather than to _transform_ it?
 ** _We would build rather than transform if we want to do comparisons across columns, or need to preserve the original column for any reason (e.g., we want measurements in metric and standard units.)_
 

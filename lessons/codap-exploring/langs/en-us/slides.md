@@ -1,6 +1,6 @@
 ---
-{layout="Core Title Slide"} 
-# Simple Data Types 
+{layout="DS Title Slide"} 
+# Exploring CODAP 
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -59,6 +59,11 @@ As you complete each directive, you will re-open `Edit Formula` (below), delete 
 - What did you Notice? What do you Wonder?
 - Did you get any error messages? What did you learn from them? 
 
+<!-- 
+- What did you Notice? What do you Wonder _The Synthesize section (below) outlines several of CODAP's features that students likely observed._
+- Did you get any error messages? What did you learn from them? _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: Missing commas, unclosed strings, etc._
+-->
+
 ---
 {layout="Synthesize"}
 # Numbers & Strings
@@ -67,15 +72,23 @@ CODAP knows about many kinds of Numbers, and they behave pretty much the way the
 
 - Numbers and Strings evaluate to themselves.
 - CODAP converts fractions into decimals automatically.
-- Anything in quotes is a String, even something like `"42"`.
+- Anything in quotes is a String, with one exception: CODAP will convert strings containing only numbers (e.g. “42” but not “42 hello”) into number values.
 - Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. 
-- CODAP knows the order of operations.
-- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
 
 
 <!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
 -->
+
+---
+{layout="Synthesize"}
+# Numbers & Strings
+
+CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
+
+- Strings _must_ have quotation marks on both sides.
+- Operators work just like they do in math - with a few exceptions. 
+- CODAP knows the order of operations.
+- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
 
 ---
 {layout="Launch"}
@@ -130,7 +143,7 @@ What sets Booleans apart from other data types?
 
  By using CODAP, we can evaluate expressions much more quickly and efficiently. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
 
-- With your partner, open the @starter-file{animals} and use it to finish the top half of @printable-exercise{pages/codap-apply-functions.adoc}.
+- With your partner, open the @starter-file{animals} and use it to finish questions 1 and 2 on @printable-exercise{pages/codap-apply-functions.adoc}.
 - Note that attribute names that are more than one word need to be entered inside of tick marks.
 
 ---

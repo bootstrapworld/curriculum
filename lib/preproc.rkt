@@ -14,9 +14,9 @@
 (require "standards/the-standards-dictionaries.rkt")
 (require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
-(require "standards/lessons-and-standards.rkt")
-(require "practices/lessons-and-practices.rkt")
-(require "textbooks/lessons-and-textbooks.rkt")
+(require "standards/standards-and-lessons.rkt")
+(require "textbooks/textbooks-and-lessons.rkt")
+(require "practices/practices-and-lessons.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -811,12 +811,18 @@
                      [else
                        (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                img-link)]
-           [adoc-img (enclose-tag "figure" ".image"
+           [img-id (format "img_id_~a" (gen-new-id))]
+           [adoc-img (enclose-tag "span" ".image-figure"
                        (string-append
                          ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                          adoc-img
                          (if image-caption
-                             (enclose-tag "figcaption" "" image-caption) "")))])
+                             (enclose-tag "span" ".image-caption" image-caption
+                               #:attribs (format "id=~s" img-id))
+                             ""))
+                       #:attribs
+                       (and image-caption
+                           (format "aria-describedby=~s" img-id)))])
       ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
       (if centered?
           (enclose-span ".centered-image" adoc-img)
@@ -845,6 +851,113 @@
          (let ([y (first x)])
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
+
+(define (make-dist-link f link-text)
+  (cond [(regexp-match "^ *$" f) (set! f "./index.adoc")]
+        [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
+        [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
+  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+         [dir (second m)] [snippet (third m)]
+         [dir-compts (regexp-split #rx"/" dir)]
+         [f.titletxt (path-replace-extension
+                       (build-path dir ".cached" snippet) ".titletxt")]
+         [page-title (and (file-exists? f.titletxt)
+                          (call-with-input-file f.titletxt read-line))]
+         [existent-file? #f])
+    (cond [(or (path-has-extension? f ".adoc")
+               (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
+           (let ([f.adoc (path-replace-extension f ".adoc")]
+                 [f.html (path-replace-extension f ".html")]
+                 [f.shtml (path-replace-extension f ".shtml")]
+                 [f.pdf (path-replace-extension f ".pdf")])
+             (cond [(file-exists? f.html) (set! f f.html) (set! existent-file? #t)]
+                   [(file-exists? f.shtml) (set! f f.shtml) (set! existent-file? #t)]
+                   [(file-exists? f.adoc)
+                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))
+                    (set! existent-file? #t)]
+                   [(file-exists? f.pdf) (set! f f.pdf) (set! existent-file? #t)]
+                   [(path-has-extension? f ".adoc")
+                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
+          [(path-has-extension? f ".pdf")
+           (when (file-exists? f) (set! existent-file? #t))])
+    (unless existent-file?
+      (check-link f)
+      (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
+    (when (and (or (not link-text) (string=? link-text "")) page-title)
+      (set! link-text page-title))
+    (let ([link-output (format "link:~apass:[~a][~a~a]"
+                               *dist-root-dir* f link-text
+                               (if *lesson-plan* ", window=\"_blank\"" ""))])
+      link-output)))
+
+(define (make-lesson-link f link-text)
+  (cond [(regexp-match "^ *$" f)
+         ;just to avoid error
+         (set! f "./index.adoc")]
+        [(regexp-match "/$" f)
+         (set! f (string-append f "index.adoc"))]
+        [(regexp-match "^[^/]+$" f)
+         (set! f (string-append f "/index.adoc"))])
+
+  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+
+  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+         [dir (second m)]
+         [snippet (third m)]
+         [dir-compts (regexp-split #rx"/" dir)])
+
+    (let* ([first-compt (first dir-compts)]
+           [q (qualify-proglang first-compt "lessons" *proglang*)])
+      (unless (string=? q first-compt)
+        (set! dir
+          (string-join
+            (cons q (rest dir-compts)) "/"))
+        (set! f (string-append dir "/" snippet))))
+
+    (set! f (string-append "lessons/" f))
+    (set! dir (string-append "lessons/" dir))
+
+    (let* ([f.titletxt (path-replace-extension
+                         (string-append dir "/.cached/." snippet)
+                         ".titletxt")]
+           [page-title (and (file-exists? f.titletxt)
+                            (call-with-input-file f.titletxt read-line))]
+           [existent-file? #f])
+      (cond [(or (path-has-extension? f ".adoc")
+                 (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
+             (let ([f.adoc (path-replace-extension f ".adoc")]
+                   [f.html (path-replace-extension f ".html")]
+                   [f.shtml (path-replace-extension f ".shtml")]
+                   [f.pdf (path-replace-extension f ".pdf")])
+               (cond [(file-exists? f.html)
+                      (set! f f.html)
+                      (set! existent-file? #t)]
+                     [(file-exists? f.shtml)
+                      (set! f f.shtml)
+                      (set! existent-file? #t)]
+                     [(file-exists? f.adoc)
+                      (set! f
+                        (if (= (length dir-compts) 1) f.shtml f.html))
+                      (set! existent-file? #t)]
+                     [(file-exists? f.pdf)
+                      (set! f f.pdf)
+                      (set! existent-file? #t)]
+                     [(path-has-extension? f ".adoc")
+                      (set! f
+                        (if (= (length dir-compts) 1) f.shtml f.html))]))]
+            [(path-has-extension? f ".pdf")
+             (when (file-exists? f)
+               (set! existent-file? #t))])
+      (unless existent-file?
+        (check-link f)
+        (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
+      (when (and (or (not link-text) (string=? link-text "")) page-title)
+        (set! link-text page-title))
+      (let ([link-output
+              (format "link:~apass:[~a][~a~a]"
+                      *dist-root-dir* f link-text
+                      (if *lesson-plan* ", window=\"_blank\"" ""))])
+        link-output))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
   ; (printf "doing make-link f= ~s ltxt= ~s inc= ~s ltyp= ~s\n" f link-text include? link-type)
@@ -1005,10 +1118,10 @@
       (unless (null? other-proglang-links)
         (display
           (enclose-span ".other-proglang"
-            (string-append "(Also available in "
+            (natlang:also-available-in
               (string-join
                 other-proglang-links
-                ", ") ")")) o)
+                ", "))) o)
         (newline o)))
     (newline o)))
 
@@ -1080,8 +1193,8 @@
             (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
             (unless projects-title-done?
               (set! projects-title-done? #t)
-              (fprintf o "\n\n- *Projects*\n\n"))
-            (fprintf o "+\n*~a* {startsb}~a{endsb}\n~a\n"
+              (fprintf o "\n\n*Single-Lesson Projects*\n\n"))
+            (fprintf o "- *~a* {startsb}~a{endsb}\n~a\n"
                      (regexp-replace "^link:" proj-link "link:../")
                      (regexp-replace "^link:" (second x) "link:../")
                      (if (file-exists? proj-desc)
@@ -1429,26 +1542,20 @@
       ;
       (when *lesson-plan*
 
-        (for ([x *lessons-and-standards*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
+        (for ([s-ll *standards-and-lessons*])
+          (let ([s (first s-ll)] [ll (rest s-ll)])
+            (when (member *lesson-plan-base* ll)
               (add-standard s #f *lesson-plan* #f))))
 
-        ;(printf "lessons-and-textbooks = ~s\n\n" *lessons-and-textbooks*)
-        ;(printf "textbooks-list = ~s\n\n" *textbooks-list*)
+        (for ([t-ll *textbooks-and-lessons*])
+          (let ([t (first t-ll)] [ll (rest t-ll)])
+            (when (member *lesson-plan-base* ll)
+              (add-textbook-chapter t #f *lesson-plan* #f))))
 
-        (for ([x *lessons-and-textbooks*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
-              (add-textbook-chapter s #f *lesson-plan* #f))))
-
-        ;(printf "textbooks-represented = ~s\n" *textbooks-represented*)
-        ;(printf "chapters-used = ~s\n" *chapters-used*)
-
-        (for ([x *lessons-and-practices*])
-          (when (string=? (first x) *lesson-plan-base*)
-            (for ([s (rest x)])
-              (add-practice s #f *lesson-plan* #f))))
+        (for ([p-ll *practices-and-lessons*])
+          (let ([p (first p-ll)] [ll (rest p-ll)])
+            (when (member *lesson-plan-base* ll)
+              (add-practice p #f *lesson-plan* #f))))
 
         )
       ;
@@ -1564,6 +1671,18 @@
                                                o)]))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
+                           [(string=? directive "dist-link")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [n (length args)]
+                                   [page (first args)]
+                                   [link-text (if (> n 1) (second args) "")])
+                              (display (make-dist-link page link-text) o))]
+                           [(string=? directive "lesson-link")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [n (length args)]
+                                   [page (first args)]
+                                   [link-text (if (> n 1) (second args) "")])
+                              (display (make-lesson-link page link-text) o))]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
                                 (string=? directive "handout")
@@ -1631,6 +1750,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
                             (display-exercise-collation o)]
+                           [(string=? directive "all-projects")
+                            ; (printf "doing all-projects ~a\n" (errmessage-context))
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                            (link-to-opt-projects o)]
                            [(string=? directive "all-lesson-notes")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -1860,7 +1985,7 @@
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
-                  [(and possible-beginning-of-line? (char=? c #\|))
+                  [(and possible-beginning-of-line? (member c '(#\| #\!)))
                    (set! beginning-of-line? #f) ;FIXME check if needed
                    (set! possible-beginning-of-line? #f)
                    (newline o)
@@ -2134,7 +2259,7 @@
     ; (printf "exx is ~s\n" exx)
     ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
-    (link-to-opt-projects o)
+    ; (link-to-opt-projects o)
 
     (unless (null? exx)
       (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
@@ -2240,22 +2365,20 @@
           (when (> (length lessons) 0)
             (fprintf op "{startsb}See: ~a.{endsb}\n"
                      (string-join
-                       (map
-                         (lambda (x)
-                           (let ([ltitle (list-ref x 0)]
-                                 [lesson (list-ref x 1)]
-                                 [pwy (list-ref x 2)])
-                             (cond [pwy
-                                     (cond [(string=? pwy "algebra-pyret")
-                                            (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                           [(string=? pwy "algebra-wescheme")
-                                            (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                     (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                              lesson ltitle)]
-                                   [else
-                                     (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                             lesson *target-pathway* ltitle)])))
-                         lessons) ";"))))
+                       (filter identity
+                               (map
+                                 (lambda (x)
+                                   (let ([ltitle (list-ref x 0)]
+                                         [lesson (list-ref x 1)]
+                                         [pwy (list-ref x 2)])
+                                     (cond [pwy (and (file-exists?
+                                                       (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                     (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                             lesson ltitle))]
+                                           [else
+                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                     lesson *target-pathway* ltitle)])))
+                                 lessons)) ";"))))
         ))
     (fprintf op "\n\n")))
 
@@ -2955,8 +3078,7 @@
                      (cond [(and (eq? a 'EXAMPLE) wescheme)
                             (let ([num-examples (/ (length (rest e)) 2)])
                               (let loop ([n num-examples] [e (rest e)] [r ""])
-                                (if (= n 0)
-                                    r
+                                (if (= n 0) r
                                     (let* ([lhs (first e)]
                                            [rhs (second e)]
                                            [lhs-s (sexp->block lhs #:wescheme #t)]
@@ -2970,6 +3092,12 @@
                                               lhs-s "\n  "
                                               rhs-s
                                               (enclose-span ".rParen" ")")))))))]
+                           [(eq? a 'BEGIN)
+                            (string-join
+                              (map (lambda (e) (sexp->block e #:pyret pyret #:wescheme wescheme)) (rest e))
+                              "\n")]
+                           [(and (eq? a 'COMMENT) (or wescheme pyret))
+                            (string-append (if wescheme "; " "# ") (second e))]
                            [else
                              (enclose-span ".expression"
                                (if (or (symbol? a) (answer? a))
