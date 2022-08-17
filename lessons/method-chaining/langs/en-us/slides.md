@@ -5,21 +5,80 @@
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+
 ---
 {layout="Launch"}
 # Design Recipe Practice
 
 The Design Recipe is a powerful tool for solving problems by writing @ifproglang{pyret}{functions} @ifproglang{codap}{expressions}. It's important for this to be like second nature, so let's get some more practice using it.
 
-<!--
+@ifproglang{codap}{
+---
+{layout="LaunchC"}
+# Design Recipe Practice
 
+Let's look at this @printable-exercise{pages/design-recipe-1.adoc} worksheet together.
+
+First, we need to decide which Transformer to use: Filter, Transform, or Build. 
+
+@image{images/transformer-name.png, "top section of a Design Recipe"}
+
+<!---
+  Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
 -->
+
+---
+{layout="Launch"}
+# Design Recipe Practice
+
+Next, we provide *example tables*. 
+
+In this case, we want to know the animals' names and their species, so we write down those column names. We want to list a few different animals - at least one that is a dog, and at least one that is not - to represent the variety of animals on the table. 
+
+
+---
+{layout="LaunchC"}
+# Design Recipe Practice
+
+Then we think about what our transformed table will look like:
+
+- Will Sasha be on the new table? _No, Sasha is a cat. We only want dogs!_
+
+- Will Fritz be on the new table? _Yes, Fritz is a dog._
+
+- Will Toggle be on the new table? _Yes, Toggle is a dog._
+
+@image{images/example-tables.png, "filled in example tables from Design Recipe worksheet"}
+
+---
+{layout="LaunchC"}
+# Design Recipe Practice
+
+Now, we are ready to drill down on the contents of our Transformer.
+
+- First - the *contract*, which requires a domain and a range. 
+
+- Next, we need a clear *purpose statement* which describes what the expression does to each row. 
+
+- And finally, we enter our *expression*, in this case: `species = "dog"`.
+
+@image{images/contents.png, "contract, purpose statement, expression"}
+
+<!--
+Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
+
+In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
+
+Each time students encounter a new word problem, we encourage working through it with paper and pencil, as above; the Design Recipe slows down students' thinking and encourages them to reason through each scenario fully rather than guessing haphazardly.
+-->
+}
+
 ---
 {layout="Investigate"}
 # Design Recipe Practice
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
+- Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
 
 
 <!--
@@ -118,15 +177,17 @@ Now that we are doing more sophisticated analyses, we might find ourselves in a 
 {layout="Launch"}
 # Chaining
 
-Suppose a journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms.{style="font-size:14pt"}
+Suppose a journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms.
 
-She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.{style="font-size:14pt"}
+She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.
 
 ---
 {layout="Launch"}
 # Chaining
 
-In CODAP, we can use the result of one Transformer as the dataset for another Transformer! To help the journalist, you decide that you want to use *two* Transformers: _Build Attribute_ and _Filter_. But in which order?
+In CODAP, we can use the result of one Transformer as the dataset for another Transformer! 
+
+To help the journalist, you decide that you want to use *two* Transformers: _Build Attribute_ and _Filter_. But in which order?
 
 ---
 {layout="Launch"}
