@@ -16,7 +16,7 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
-proglang=pyret
+proglang=
 lsn=
 
 if test $# -eq 0; then
@@ -42,12 +42,21 @@ elif test "$proglang" = codap; then
   lsn=$lsn-codap
 fi
 
+if echo $lsn|grep -q "\-wescheme$"; then
+  proglang=wescheme
+elif echo $lsn|grep -q "\-codap$"; then
+  proglang=codap
+fi
+
+if test -z "$proglang"; then
+  proglang=pyret
+fi
+
 topdir=$(pwd)
 
 templateSlidesId=1jAjRtOGXhxfTGOx4F1vKAXfxUxQj2RXyTgwNuiOa_-w
 
 export PROGLANG=$proglang
-
 
 if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
