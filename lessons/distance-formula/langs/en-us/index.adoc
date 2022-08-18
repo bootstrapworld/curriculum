@@ -47,7 +47,7 @@ Students discover the need for distance calculation (first in one dimension, the
 === Launch
 
 [.lesson-instruction]
-Have students sign in to @starter-file{program-list} and open their saved Game Starter Files.
+Sign in to @starter-file{program-list} and open your saved Game Starter Files.
 
 
 @right{@image{images/screenshot.jpg, "game image: astronaut and space craft on a landscape, with a right triangle showing the horizontal, vertical and diagonal distance between them", 200}}
@@ -55,7 +55,7 @@ Have students sign in to @starter-file{program-list} and open their saved Game S
 At this point:
 
 * The Target and Danger should be moving on their own.
-* Your Player should respond to keypresses.
+* The Player should respond to keypresses.
 * The Target and Danger should re-appear after they leave the screen.
 
 It's almost fully-playable!
@@ -75,6 +75,8 @@ _Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use
 
 [.lesson-roleplay]
 --
+In the following activity, students will role play a collision between two characters.
+
 Draw a "number line" on the floor or across a wall of your classroom as the backdrop for your movement, and select a volunteer to represent a character in the game (either `TARGET` or `DANGER`), while represent the `PLAYER`. Emphasize that this represents _one dimension_ (perhaps the x-axis). Both of you should stand on the number line, 8-10 steps away from one another.
 
 Each image in the game is located based on its center. Make sure that you and your volunteer stand with feet as close together as possible, representing the infinitely small point that identifies your center. Have you and the volunteer raise your arms to form a "T shape", representing the outer edges of the characters.
@@ -111,9 +113,8 @@ _If you want to provide students with the questions below, use  @opt-printable-e
 
 
 === Synthesize
-Why is the distance between two points always positive?
-
-- _Because distance has nothing to do with direction - it takes just as long to drive from Seattle to Wichita as it does to drive from Wichita to Seattle._
+- Why is the distance between two points always positive?
+** _Because distance has nothing to do with direction - it takes just as long to drive from Seattle to Wichita as it does to drive from Wichita to Seattle._
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -144,30 +145,23 @@ Students extend their understanding of _distance_ from one dimension to two.
 
 We just practiced computing the distance in 1-dimension, which is useful if the Player and Danger have the same x- or y-coordinate. But how do we compute the distance between two points when both the x- _and_ y-coordinates are different?
 
-[.lesson-instruction]
-Scroll down to `4. Collisions` in your game file and look for the `distances-color` definition. Right now this value is defined to be the __empty string__ `""`. Change this to a color that will show up on your background, and click "Run".
-
-_Here's a link to a @opt-starter-file{sample-game-w-distance} to use if you're demoing on the board._
+_Here's a link to a @opt-starter-file{sample-game-w-distance} to use if you're demoing the instruction below on the board._
 
 [.lesson-instruction]
---
-This setting will draw lines from your Player to each of the other characters, and then uses those lines as the hypotenuse of right triangles!
+- Scroll down to `4. Collisions` in your game file and look for the `distances-color` definition. What is the value defined to be?
+** _Right now this value is defined to be the __empty string__ `""`._
+- Change this to a color that will show up on your background, and click "Run". What happens?
+** _This setting draws lines from your Player to each of the other characters, and then uses those lines as the hypotenuse of right triangles! The legs of these triangles show the distance in 1 dimension each (on the x- and y-axis)._
 
-The legs of these triangles show the distance in 1 dimension each (on the x- and y-axis).
---
-
-[.lesson-point]
 In order to compute the _diagonal_ distance between two characters in a video game, we'll need a special formula that considers _both the vertical and the horizontal_ distances between them!
 
-
-[.lesson-instruction]
---
 When we turned on `distances-color` in our game, we saw the diagonal distance between two characters represented as the @vocab{hypotenuse} of a right triangle.
 
+[.lesson-instruction]
 * How do we find the hypotenuse of a right triangle if we know the measures of both of its legs?
 ** _The Pythagorean Theorem!_ @math{a^2 + b^2 = c^2}
 * If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?
---
+** _We would add @math{3^2} and @math{4^2}, or 9 and 16, to get 25. The square root of 25, or 5, is the length of the hypotenuse._
 
 _Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some @opt-printable-exercise{pages/pythag-practice.pdf, Pythagorean Theorem Practice}._
 
@@ -189,23 +183,14 @@ Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've pr
 [.lesson-instruction]
 * Turn to @printable-exercise{distance-on-coordinate-plane.adoc} and look at how line-length is used in the code. See if you can figure out how to write the code for the second problem.
 * Then turn to @printable-exercise{distance-coe.adoc} in your student workbook. Convert this expression to a Circle of Evaluation, and then to code.
-* Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circle of evaluation, code, computation and a sketch on a graph.
+* Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circles of evaluation, code, computation and a sketch on a graph.
 
 For more practice writing code to generate the distance between two fixed points, use:
 
 * @printable-exercise{pages/distance-from-game-coordinates.adoc}
 * @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
 
-Debrief these workbook pages - or have students pair-and-share - before moving on to writing the full distance function.
-
-[.lesson-instruction]
---
-All of the practice we've done so far today focused on a screenshot of a moment in time. With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them.
-
-*But, as we play our games, the characters are constantly changing locations!*
-
-* Before we move on, are there any lingering questions about what we've done so far?
---
+Debrief these workbook pages - or have students pair-and-share - before moving on to writing the full distance function. Explain to students that all of the practice they've done so far today focused on a screenshot of a moment in time. With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them. *As we play our games, however, the characters are constantly changing locations!*
 
 [.lesson-point]
 In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!
@@ -213,9 +198,7 @@ In order to calculate the distance between two objects whose locations are const
 [.lesson-instruction]
 --
 * Turn to @printable-exercise{pages/distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
-
-__HINT:__ the code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!
-
+* HINT: The code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!
 * When you're done, fix the broken `distance` function in your game file, click "Run" and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 --
 
@@ -229,7 +212,10 @@ If we knew the lengths of the hypotenuse and one leg of the triangle, could we u
 Take a look at the two examples on @printable-exercise{pages/distance-comparing-code.adoc}.
 
 - There's a subtle difference between the two examples! What is it?
+** __In the first example, the length of the hypotenuse is missing. In the second example, the length of a leg is missing.__
 - Can you explain why they need to be written differently?
+** __Finding the hypotenuse requires finding the square root of the @math{A^2 + B^2}, whereas finding a leg requires finding the square root of the difference between @math{C^2} and @math{B^2}.__
+
 |===
 
 
@@ -243,9 +229,10 @@ instead of `...num-sqrt(num-sqr(line-length(x2 x1)) + num-sqr(line-length(y2 y1)
 
 In this situation, remind students to look back at what they circled and labeled in the example steps. _This is why we label!_
 
-== Synthesize
+=== Synthesize
 
-How does the length of the hypoteneuse rely on the length of each side? Where do you see one formula being used inside the other?
+- How does the length of the hypoteneuse rely on the length of each side?
+- Where do you see one formula being used inside the other?
 
 == Additional Exercises
 
