@@ -135,7 +135,7 @@ A “kitten” is an animal who _is a cat_ and who _is young_. **How would you d
 
 ---
 {layout="Synthesize"}
-# Synthesize
+# Grouped Samples
 
 * Make bar charts showing the `sex` column for every grouped sample. 
 * Which one best represents the distribution of species for the whole population? Why?
@@ -225,12 +225,19 @@ In this case, we found out exactly how many fixed v. unfixed cats there are. But
 We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 ---
+{layout="Investigate"}
+
+- Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
+
+---
 {layout="Synthesize"}
 # Displaying Samples
 
 - What connections do you see between the "Consider Data" and "Analyze Data" steps?
 - How do we know when we need to filter? How do we know when we _don't?_
 
+@ifproglang{pyret}{
 ---
 {layout="Launch"}
 # Your Analysis
@@ -242,7 +249,7 @@ Are there grouped samples that you'd like to explore in your own dataset? Here a
 - In the US Presidents dataset, it could be useful to make a grouped sample for **each political party**.
 
 ---
-{layout="Launch"}
+{layout="Investigate"}
 # Your Analysis
 
 - **What grouped samples make sense for your dataset?**
@@ -256,3 +263,4 @@ Are there grouped samples that you'd like to explore in your own dataset? Here a
 - What grouped samples did you make for your dataset?
 - What other samples would be good to examine? 
 - Do you have suggestions for your colleagues?
+}
