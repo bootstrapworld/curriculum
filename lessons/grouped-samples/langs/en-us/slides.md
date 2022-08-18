@@ -162,7 +162,7 @@ __What's the ratio of fixed to unfixed *cats* at the shelter?__
 
 Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
 
-**1) Is this a lookup, arithmetic, or statistical question?**
+_Starting off: Is this a lookup, arithmetic, or statistical question?_
 <!--
 Have students discuss their answers
 -->
@@ -173,11 +173,11 @@ Have students discuss their answers
 
 @image{images/AskQuestions.png, "Ask Questions icon", 100} 
 
-1) Is this a lookup, arithmetic, or statistical question?
+**1 - Is this a lookup, arithmetic, or statistical question?**
 
 This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
 
-**2) What rows do we need? What columns?**
+_Next: What rows do we need? What columns?_
 <!--
 Have students discuss their answers
 -->
@@ -188,11 +188,11 @@ Have students discuss their answers
 
 @image{images/ConsiderData.png, "Consider Data icon", 100}
 
-2) What rows do we need? What columns?
+**2 - What rows do we need? What columns?**
 
 We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
 
-**3) What kind of table or display are we building?**
+_Next: What kind of table or display are we building?_
 
 <!--
 Have students discuss their answers
@@ -203,11 +203,11 @@ Have students discuss their answers
 
 @image{images/AnalyzeData.png, "Analyze Data icon", 100}
 
-3) What kind of table or display are we building?
+**3 - What kind of table or display are we building?**
 
 We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice. We've decided what to make and we know which rows and columns we're plotting, so the next step is to _write the code!_
 
-**4) What did our displays tell us?**
+_Next: What did our displays tell us?_
 
 <!--
 Have students discuss their answers
@@ -218,7 +218,7 @@ Have students discuss their answers
 
 @image{images/InterpretData.png, "Interpret Data icon", 100}
 
-4) What did our displays tell us?
+**4 - What did our displays tell us?**
 
 In this case, we found out exactly how many fixed v. unfixed cats there are. But perhaps that's not the end of the story! 
 
@@ -226,6 +226,7 @@ We might have _new_ questions about whether a higher percentage of dogs are spay
 
 ---
 {layout="Investigate"}
+# Displaying Samples
 
 - Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
 - Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
