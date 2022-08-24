@@ -66,6 +66,15 @@
     ("pyret" "https://code.pyret.org/editor#share=1L_TTcE1dv0XtgVg8HW89LfDtRgpcJnkA")
     )
 
+  ("exploration-paper" "Data Set Exploration"
+    ("pyret" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy")
+    ("codap" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"))
+
+  ("research-paper" "Research Paper"
+    ("pyret" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy")
+    ("codap" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"))
+
+
   ("animals-spreadsheet" "Animals Spreadsheet"
     ("pyret" "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/")
     ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FstLKvzDRkNDbD11WsHYP%2Ffile.json")
@@ -74,11 +83,6 @@
   ("animals" "Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FI6zAvad2EELkQxtS0SZG%2Ffile.json")
-   )
-
-  ("fair-coins" "Fair Coins Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
-    ("codap" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
    )
 
   ("custom-animals" "Custom Animals Starter File"
@@ -90,16 +94,26 @@
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json")
    )
 
+  ("custom-scatter-plot" "Custom Scatter Plot Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
+   )
+
   ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A")
    )
 
-  ("food" "Global Food Supply"
+  ("fair-coins" "Fair Coins Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
+    ("codap" "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf")
+   )
+
+  ("food" "Global Food Supply & Production"
     ("pyret" "https://code.pyret.org/editor#share=1XkTWBTssYznSgB8PZ6ky7Cvc6ea-BdBU&v=164e917")
     )
 
-  ("custom-scatter-plot" "Custom Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
+  ("grouped-samples" "Grouped Samples Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1z0ogp7ZA6eoZCm9g6wDu4Z6Onskz47hg&v=a8e2e65")
+    ("codap" "TBD")
    )
 
   ("height" "Age vs. Height Starter File"
@@ -121,44 +135,31 @@
   ("table-methods" "Table Methods Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
-   )
-
-  ("grouped-samples" "Grouped Samples Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1z0ogp7ZA6eoZCm9g6wDu4Z6Onskz47hg&v=a8e2e65")
-    ("codap" "TBD")
-  )
-
-  ("text-stats"  "Text Stats Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP")
-   )
+   ) 
 
   ("trust-but-verify"  "Trust but Verify Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1DBYGJDOlIARaWI3pBVzjPp6eewkQJGHW")
-   )
-
-  ("word-length"  "Word Length Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
-   )
-
-  ("fav-desserts" "Survey of Eighth Graders and their Favorite Desserts Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1qpq3isP-1NcOWmGXzq7Iw02GQcUszoI2&v=6788e10")
-    )
-
-  ("dirty-data"  "New Animals! Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
    )
 
   ("bad-survey"  "Height vs. Wingspan Survey"
    ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
    )
 
-  ("exploration-paper" "Data Set Exploration"
-    ("pyret" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy")
-    ("codap" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"))
+  ("dirty-data"  "New Animals! Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
+   )
 
-  ("research-paper" "Research Paper"
-    ("pyret" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy")
-    ("codap" "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"))
+  ("fav-desserts" "Survey of Eighth Graders and their Favorite Desserts Starter File"
+    ("pyret" "https://code.pyret.org/editor#share=1qpq3isP-1NcOWmGXzq7Iw02GQcUszoI2&v=6788e10")
+    )
+
+  ("text-stats"  "Text Stats Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1yF_v4g708v5FLnidZ8n7nQo_MJGrFoIP")
+   )
+  
+  ("word-length"  "Word Length Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb")
+   )
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; MATH
