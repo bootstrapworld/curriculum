@@ -15,14 +15,14 @@ td .ulist ul { list-style: none; margin-left: 0; }
 	padding: 0.5rem;
 	margin: 1em;
 	box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-	width: 45%;
+	width: 90%;
 	display: inline-block;
 	vertical-align: top;
-	transform: rotate(1deg);
+	transform: rotate(-1deg);
 	transition: transform .15s linear;
 	background: white;
 }
-.Unit:nth-child(even) { transform: rotate(-1deg); }
+.Unit:nth-child(2n) { transform: rotate(1deg); }
 .Unit div.paragraph:first-child p {
 	font-size: 	 1.5rem;
 	line-height: 1.5rem;
@@ -34,19 +34,7 @@ td .ulist ul { list-style: none; margin-left: 0; }
 </style>
 ++++
 
-We designed our lessons in Bootstrap:Data Science to be incredibly flexible, with options for teachers in multiple subjects from grade 6-12. When considering an implementation model, there are three criteria to consider:
-
-[.lesson-point]
-_Before_ desiging your Data Science class, make sure to write down the answers to these three questions!
-
-. **How much time do you have?** This is going to determine which of the implementation models (shown below) is the right fit for you.
-
-. **What Domain Knowledge do you care about?** Are you in a science class, and you need your students to learn about the Water Cycle? Or maybe it's a social studies class, and you're looking at the long-term impact of red-lining. Think hard about this one! The answer to this question dictates the dataset(s) you'll use or collect, which has significant impacts on engagement, relevance, and inclusion.
-
-. **Which Math and Statistics learning goals do you have?** If you're a middle-school math teacher, maybe your goal is getting kids comfortable with displays like pie and bar charts, histograms, etc. Maybe you're an AP Stats teacher who needs to address Simpson's Paradox. The answer to this question will determine which lessons and projects from our library are relvant to you.
-
-. **How much time do you have to spend on *programming*?** Our programming content can be divided into two "chapters". Chapter 1 requires 3-4 class periods, and teaches enough material to do the __entire course__ with one notable exception: tables cannot be filtered, sorted, or transformed. If you're looking to integrate Data Science into an existing math, science, history, or CS class, this is likely all you need! If you're in a semester or yearlong Statistics or Data Science class, however, you 'll want to add Chapter 2 (4-8 class periods).
-
+We designed our lessons in Bootstrap:Data Science to be incredibly flexible, with options for teachers in multiple subjects from grade 6-12. **Choose which of the following implementation models is right for you:**
 
 == A Complete Data Science Class @duration{1 semester to Full Year}
 
@@ -59,6 +47,8 @@ Our lessons can be broken up in distinct units, each with a clear theme.
 [.Unit]
 --
 Unit 1: Who are Data Scientists, and what do they do?
+
+Students see the wide range of people involved with mathematics, computing, and data science, and confront the challenge of answering messy questions with data. They explore a sample dataset, consider the relationship between probability and statistics, and learn the basic programming and statistics necessary to display that dataset using a variety of charts, plots and graphs.
 
 * @lesson-link{computing-needs-all-voices}
 * @lesson-link{ds-intro}
@@ -73,6 +63,9 @@ Unit 1: Who are Data Scientists, and what do they do?
 --
 Unit 2: Gathering, Analyzing, and Visualizing Data
 
+Students choose a real dataset, or create their own! They explore this dataset, diving deep into the meaning, use, and interpretation of one-dimensional analyses like histograms, box-plots, measures of center and spread. What do these tools tell us about our data, and when is it appropriate to use one tool over another?
+
+
 * @lesson-link{choosing-your-dataset}
 * @lesson-link{histograms}
 * @lesson-link{histograms2}
@@ -85,6 +78,8 @@ Unit 2: Gathering, Analyzing, and Visualizing Data
 [.Unit]
 --
 Unit 3: Transforming and Playing with Data
+
+Students learn to program _functions_, super-charging their programming arsenals with core algebraic concepts that allow them to create custom visualations that express many dimensions of data. They also learn how to _sort, filter, and transform_ their dataset to search for patterns, zoom in on samples, and identify trends within sub-groups of their samples.
 
 * @lesson-link{lookups}
 * @lesson-link{functions-make-life-easier}
@@ -100,6 +95,8 @@ Unit 3: Transforming and Playing with Data
 --
 Unit 4: Modeling the World Around Us with Data
 
+In this unit, students apply their newfound programming power to identify _relationships within their data_, and developing linear (and even non-linear!) models to describe those relationships. They generate numerous data displays, and combine them into a library of visualizations and inferences about their data.
+
 * @lesson-link{grouped-samples}
 * @lesson-link{scatter-plots}
 * @lesson-link{correlations}
@@ -111,11 +108,19 @@ Unit 4: Modeling the World Around Us with Data
 --
 Unit 5: Using Data Responsibly
 
+As full-fledged data scientists, students consider the _social impact_ of their work. How do we know that the tools we use to analyze data haven't been tampered with? How do we know to trust the validity of our methods and data-collection? What are the ethical implications of this work? Using the visualization library from the previous unit, students conduct an original research project into their data. In doing so, they confront both analytical and ethical factors in their final report, and discuss the ethical standards that define a responsible data scientist.
+
 * @lesson-link{checking-your-work}
 * @lesson-link{threats-to-validity}
 * @lesson-link{ethics-privacy-and-bias}
 * @lesson-link{project-research-paper}
 --
+
+=== Other Considerations
+
+**What Domain Knowledge do you care about?** Do you want your students to focus on climate systems? Economics? Social Studies or History themes? Do you want them to design a survey for their school or neighborhood? What topics are important to your students? What topics are exciting to them? Your answer to these questions will determine the dataset(s) you'll use or collect, which has significant impacts on engagement, relevance, and inclusion.
+
+**Which Math and Statistics learning goals do you have?** If you're in middle-school, maybe your goal is getting kids comfortable with displays like pie and bar charts, histograms, etc. Maybe you're an Algebra 2 teacher who needs to address inverse functions and logarithms, or a CS teacher who wants students to focus on programming challenges. The answer to this question will determine which lessons and projects from our library are relvant to you.
 
 == More Analysis, Lots of Statistics Options @duration{4 weeks, up to 1 semester}
 
@@ -157,6 +162,12 @@ This format includes multiple project-based options, including @lesson-link{bar-
 * @lesson-link{threats-to-validity}
 * @lesson-link{ethics-privacy-and-bias}
 |===
+
+=== Other Considerations
+
+**What Domain Knowledge do you care about?** If you're integrating into a Science class, maybe you want students to study data from experiments, or data related to Earth Science or Biological phenomena from the Next Generation Science Standards. If you're integrating into a Social Studies class, maybe you're looking at datasets involving gerrymandering or redlinling. Your answer to this question will determine the dataset(s) you'll use or collect, which has significant impacts on engagement, relevance, and inclusion.
+
+**Which Math and Statistics learning goals do you have?** If you're in middle-school, maybe your goal is getting kids comfortable with displays like pie and bar charts, histograms, etc. Maybe you're trying to support high-school math instruction through practicing functions and composition, or a CS teacher who wants students to focus on programming challenges. The answer to this question will determine which lessons and projects from our library are relvant to you.
 
 == Charts, Plots, and Social Impact @duration{1 to 4 weeks}
 
