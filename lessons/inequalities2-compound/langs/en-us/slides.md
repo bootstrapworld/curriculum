@@ -65,105 +65,86 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 {layout="Launch"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Identify 4 solutions and 4 non-solutions for each of the following inequalities.
-
-* @math{x \gt 5}
-* @math{x \le 15}
-
-What about the solution set of @math{x \gt 5} `and` @math{x \le 15}?  What numbers make both of these inequality expressions true?
-
-How would that be different from @math{x \gt 5} `or` @math{x \le 15}?  What numbers make at least one of these inequality expressions true?
-
-
----
-{layout="Investigate-DN"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-Open @starter-file{inequalities-compound}, and **Remix/Save a Copy**.
-
-Read the code and click run to see the graphs you've just considered.
-
-This starter file includes two special functions...
-
----
-{layout="InvestigateC"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-`and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both inequalities true. {style="font-size:13pt"}
-
-@show{ (code '(define (gt5 x) (> x 5))) }{style="font-size:13pt"}
-
-@show{ (code '(define (lte15 x) (<= x 15))) }{style="font-size:13pt"}
-
-@show{ (code '(and-intersection gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:13pt"}
-
-@image{images/intersection1.png,"A compound inequality displayed on a number line, showing the intersection of two simple inequalities"}{style="width:550pt"}
-
----
-{layout="InvestigateC"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-@show{ (code '(define (lt5 x) (< x 5))) }{style="font-size:15pt"}
-
-@show{ (code '(define (gte15 x) (>= x 15))) }{style="font-size:15pt"}
-
-@show{ (code '(and-intersection lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:15pt"}
-
-Some pairs of inequalities do not intersect at all and therefore have no solutions.{style="font-size:15pt"}
-
-@image{images/intersection-no-solution1.png,"A compound inequality displayed on a number line, showing no intersection and therefore no solutions"}{style="width:550pt"}
-
----
-{layout="InvestigateC"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-`or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.{style="font-size:13pt"}
-
-@show{ (code '(define (lt5 x) (< x 5))) }{style="font-size:13pt"}
-
-@show{ (code '(define (gte15 x) (>= x 15))) }{style="font-size:13pt"}
-
-@show{ (code '(or-union lt5 gte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:13pt"}
-
-@image{images/union1.png,"A compound inequality displayed on a number line, showing the union of two simple inequalities"}{style="width:550pt"}
-
----
-{layout="InvestigateC"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-@show{ (code '(define (gt5 x) (> x 5))) }{style="font-size:14pt"}
-
-@show{ (code '(define (lte15 x) (<= x 15))) }{style="font-size:14pt"}
-
-@show{ (code '(or-union gt5 lte15 (list -5 -2.1 0 5 10 39/5 15 20))) }{style="font-size:14pt"}
-
-Some @vocab{unions}, like the one below, include *all real numbers*; they have *infinite solutions* that satisfy at least one of the inequalities.{style="font-size:14pt"}
-
-@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}{style="width:550pt"}
-
----
-{layout="Investigate-DN"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-Turn to @printable-exercise{compound-inequality-solutions.adoc}.
-
-Explore the compound inequalities listed using the @starter-file{inequalities-compound}. Identify solutions and non-solutions for each.
-
----
-{layout="Investigate-DN"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-Instead of defining two functions as simple inequalities, we could produce the same graph by defining one function to be a compound inequality.
-
-@show{ (code '(define (fiveto15 x)(and (> x 5) (<= x 15)))) }
-@show{ (code '(inequality fiveto15 (list -5 -2.1 0 5 10 12 15 20))) }{style="font-size:16pt"}
-
-Turn to @printable-exercise{compound-inequality-functions.adoc} and write code to describe the compound inequalities pictured.
+- What are 4 solutions for @math{x \gt 5} ?
+- What are 4 non-solutions for @math{x \gt 5}?
+- What are 4 solutions for @math{x \le 15}?
+- What are 4 non-solutions for @math{x \le 15}?
+- What numbers are in the solutions set of  @math{x \gt 5} `and` @math{x \le 15}, making _both_ of these inequalities true?
+- How would that be different from the solution set of @math{x \gt 5} `or` @math{x \le 15}, making _at least one_ of these inequalities true?
 
 <!--
-@ifproglang{pyret}{If you have time, have students open to @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
-}
+The questions above could be printed from @opt-printable-exercise{compound-warmup.adoc}.
 -->
+
+---
+{layout="Investigate-DN"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+* Open the @starter-file{inequalities-compound}.
+* Click "Run" to see the graphs you've just considered. Four graphs will appear: The top two are the simple inequalities we've just discussed. 
+* Were your solutions and non-solutions correct?
+
+
+---
+{layout="InvestigateC"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+The bottom two graphs are produced by the special functions `and-intersection` and `or-union`. 
+
+- What does `and-intersection` do?
+- Why is the circle on 5 red and the circle on 15 green?
+- Do you think every graph made with `and-intersection` will have different color dots at the ends? Why or why not?
+
+@image{images/intersection1.png, "A compound inequality displayed on a number line, showing that the inequalities intersect between 5 and 15. The dot on 5 is red. The dot on 15 is green."}
+
+
+---
+{layout="InvestigateC"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+- What does `or-union` do?
+- Why did the graph of this `or-union` result in the whole number line being shaded blue?
+- Not all graphs of `or-union` will look like this. Can you think of a pair of inequalities whose union won't shade the whole graph?
+
+@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+Change the function definition on _line 8_ to @math{x \lt 5} and the definition on _line 9_ to @math{x \ge 15} and, before you click "Run", take a moment to think about what the new graphs of `and-intersection` and `or-union` will look like. 
+
+Then click "Run" and take a look.
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+- What does the new `and-intersection` graph look like?
+- What does the new `or-union` graph look like?
+- Why is the dot for 5 red and the dot for 15 green?
+- Which of the 8 numbers from the list are part of the solution set? How do you know?
+- Is 3 part of the solution set? How do you know?
+- Is 10 part of the solution set? How do you know?
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+Once you are familiar with the starter file, you are ready to use it as you practice identifying solutions and non-solutions for compound inequalities.
+
+- Turn to @printable-exercise{compound-inequality-solutions.adoc}.
+- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+In the following activity, you will analyze inequality graphs and define a _single_ function that produces the graph. Let's look at the first example together.
+
+- Turn to @printable-exercise{compound-inequality-functions.adoc}.
+- Write code to describe the compound inequalities pictured.
 
 ---
 {layout="Synthesize"}
