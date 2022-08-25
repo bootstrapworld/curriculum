@@ -35,7 +35,7 @@ We've found a __new data type__, called a @vocab{Boolean}.
 # Introducing Booleans
 
 * Open the @starter-file{boolean}.
-* Explore the five functions in this starter file: @show{(code 'odd?')}, @show{(code 'even?')}, @show{(code 'less-than-one?')}, @show{(code 'continent?')}, @show{(code 'primary-color?')}
+* Explore the five functions in this starter file.
 * All five functions produce @vocab{Booleans}. 
 * Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
 
@@ -65,47 +65,62 @@ Inequalities, on the other hand, can have _infinite_ solutions.
 
 Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.  
 
----
-{layout="Launch-DN"}
-# Introducing Inequalities
+<!--
+	_It is important that students learn to recognize that there are many possible solutions and non-solutions to an inequality and are able to identify whether or not a given number is or isn't part of the @vocab{solution set}._
+-->
 
-* Open the @starter-file{inequalities-simple} and **Remix/Save a Copy**.
-* Read the example code in the file carefully and click run to see the image it returns.  
-* Discuss the code with your partner.
-* What do you Notice?
-* What do you Wonder?
 
 ---
 {layout="LaunchC"}
 # Introducing Inequalities
 
-This starter file includes a special `inequality` function that takes in a function, __which tests numbers in an inequality__, a list of 8 numbers __(to test in the function)__, and plots the numbers and a graph of the inequality on a number line.{style="font-size:13pt"}
+- We are going to practice identifying whether or not a given number is part of the @vocab{solution set}.
+- Open the @starter-file{inequalities-simple} and click "Run".
+- Analyze the graph that appears (image below), as well as the provided code (lines 10, 18, and 26).
+- What do you Notice? What do you Wonder?
 
-The solution set is shaded in blue, with points shaded green (solution) and red (non-solution). The 8 numbers provided in the list are shown as green (solution) or red (non-solution) circles. A successful input will include 4 solutions and 4 non-solutions, so the image returned will show 4 green dots and 4 red dots.{style="font-size:13pt"}
+@image{images/inequality-works.png,"A picture of an inequality displayed on a number line, with four red dots and four green dots"}
 
-@image{images/inequality-works.png, "A picture of an inequality displayed on a number line, with four red dots and four green dots"}{width="550"}
+<!--
+	Students might observe the following:
+
+* This starter file includes a special `inequality` function that takes in a function __(which tests numbers in an inequality)__ and a list of 8 numbers __(to test in the function)__.
+
+* When we click "Run", we see a graph of the inequality on a number line.
+
+* The solution set is shaded in blue.
+
+* The 8 numbers provided in the list are shown as dots on the numberline. They will appear:
+** green _when they're part of the solution set_
+** red _when they are non-solutions_
+-->
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Introducing Inequalities
 
-If your list of 8 values doesn't include an equal number of solutions and non-solutions, you’ll get an error message encouraging you to adjust the list.
+- Look at line 18. Edit the list of values by deleting _one_ of the `-` symbols.
+- Hit "Run". Examine the graph that appears (sample image below).
+- How is this graph different from the one you first produced?
 
-@image{images/not-quite.png, "A picture of an inequality displayed on a number line, with five red dots and only three green dots"}{width="550"}
+
+@image{images/not-quite2.png,"A picture of an inequality displayed on a number line, with three red dots and five green dots"}
+
+---
+{layout="Launch"}
+# Introducing Inequalities
+
+A successful input in this starter file will include 4 solutions and 4 non-solutions; in other words, the image returned will show 4 green dots and 4 red dots.
+
+When you modify the list of numbers, you will see that there are now 5 red dots and 4 green dots - along with a message that says, _"Challenge yourself: Find 4 true examples and 4 false"_.
 
 ---
 {layout="Investigate-DN"}
 # Introducing Inequalities
 
-Complete @printable-exercise{simple-inequalities.adoc} with a partner.
-
-Identify solutions and non-solutions to each inequality and test them in the @starter-file{inequalities-simple}.
-
-<!--
-Encourage students to use negatives, positives, fractions and decimals as they generate their lists.
-
-In order to stop seeing the examples written into the starter file code, students can comment out the example code by adding a # in front of each of the lines they want to hide.
--->
+- Complete @printable-exercise{simple-inequalities.adoc} with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
+- For each inequality, you must find four solutions and four non-solutions.
+- Try using negatives, positives, fractions and decimals as you generate your lists.
 
 ---
 {layout="Synthesize"}
