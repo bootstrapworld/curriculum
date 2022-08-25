@@ -130,7 +130,7 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 @ifproglang{wescheme}{_WeScheme allows us to write piecewise functions as follows:_
 
 . _the keyword `cond`, followed by a list of conditions_
-. _each condition is a boolean expression, followed by a rule for what the function should do if the condition is_ `true`.
+. _each condition is a Boolean expression, followed by a rule for what the function should do if the condition is_ `true`.
 . _ending with an `else` statement, being our fallback in case every other condition is_ `false`.
 }
 -->

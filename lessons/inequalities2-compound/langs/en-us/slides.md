@@ -30,7 +30,7 @@ Many times we need to _combine_ inequalities:
 What other examples can you come up with?
 
 <!--
-Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound boolean statements and everyone stands if that statement is true for them.
+Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound Boolean statements and everyone stands if that statement is true for them.
 -->
 
 ---
@@ -55,7 +55,7 @@ True or False?
 - I'm wearing a red shirt and I'm a math teacher.
 - I'm an NBA basketball star or I'm having pizza for lunch.
 
-Write your own compound boolean statements.
+Write your own compound Boolean statements.
 
 <!--
 When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
