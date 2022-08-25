@@ -70,7 +70,7 @@
      "distance-formula"
      "piecewise-functions-conditionals"
      "defining-values"
-     "functions-problem-solving-together"
+     "functions-dr"
      "functions-examples-definitions"
      "functions-make-life-easier"
      )
@@ -82,12 +82,11 @@
      "inequalities2-compound"
      "inequalities1-simple"
      "defining-values"
-     "functions-problem-solving-together"
+     "functions-dr"
      "functions-make-life-easier"
      )
     ("8.F.B"
      "functions-for-character-animation"
-     "functions-problem-solving-together"
      "functions-dr"
      "functions-make-life-easier"
      )
@@ -118,7 +117,6 @@
      "simple-data-types"
      "piecewise-functions-conditionals"
      "defining-values"
-     "functions-problem-solving-together"
      "functions-make-life-easier"
      )
     ("2-AP-14"
@@ -154,7 +152,6 @@
      "function-composition"
      "distance-formula"
      "piecewise-functions-conditionals"
-     "functions-problem-solving-together"
      "functions-make-life-easier"
      )
     ("2-AP-19"
@@ -170,7 +167,6 @@
      "function-composition"
      "distance-formula"
      "piecewise-functions-conditionals"
-     "functions-problem-solving-together"
      "functions-make-life-easier"
      )
     ("3B-AP-14"
@@ -190,7 +186,6 @@
      "functions-for-character-animation"
      "distance-formula"
      "piecewise-functions-conditionals"
-     "functions-problem-solving-together"
      "functions-make-life-easier"
      )
     ("3B-AP-21"
@@ -206,7 +201,6 @@
      "function-composition"
      "distance-formula"
      "piecewise-functions-conditionals"
-     "functions-problem-solving-together"
      "functions-make-life-easier"
      )
     ("HSA.SSE.A.1"
@@ -250,7 +244,6 @@
      )
     ("OK.3.AP.PD.01"
      "defining-table-functions"
-     "functions-problem-solving-together"
      "functions-dr"
      "functions-make-life-easier"
      )
@@ -267,7 +260,6 @@
      "inequalities3-sam"
      "distance-formula"
      "piecewise-functions-conditionals"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("HSF.BF.A.1"
@@ -296,7 +288,6 @@
      "making-game-images"
      "functions-for-character-animation"
      "flags"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("OK.8.AP.PD.04"
@@ -306,23 +297,19 @@
      "functions-dr"
      )
     ("OK.PA.A.1.3"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("OK.PA.A.2"
      "functions-for-character-animation"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("OK.PA.A.2.1"
      "functions-for-character-animation"
      "function-definition-linear"
      "functions-can-be-linear"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("OK.L2.AP.PD.05"
-     "functions-problem-solving-together"
      "functions-dr"
      )
     ("OK.MAP.7"
@@ -339,16 +326,12 @@
      "functions-dr"
      )
     ("OK.6.AP.PD.03"
-     "functions-problem-solving-together"
      )
     ("OK.7.AP.PD.03"
-     "functions-problem-solving-together"
      )
     ("OK.8.AP.PD.03"
-     "functions-problem-solving-together"
      )
     ("OK.L2.AP.M.01"
-     "functions-problem-solving-together"
      )
     ("IA.6.EE.B.6"
      "defining-values"

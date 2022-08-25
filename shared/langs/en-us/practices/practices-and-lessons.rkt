@@ -57,7 +57,7 @@
      "flags"
      "combinatorics-combination"
      "combinatorics-permutation"
-     "functions-problem-solving-together"
+     "functions-dr"
      "codap-transformers"
      )
     ("SEP.8"
@@ -120,7 +120,7 @@
      "defining-values"
      "combinatorics-combination"
      "combinatorics-permutation"
-     "functions-problem-solving-together"
+     "functions-dr"
      "functions-examples-definitions"
      "functions-make-life-easier"
      )
@@ -154,7 +154,7 @@
      "function-definition-linear"
      "functions-can-be-linear"
      "flags"
-     "functions-problem-solving-together"
+     "functions-dr"
      )
     ("MP.3"
      "threats-to-validity"
@@ -173,7 +173,7 @@
      "inequalities-collision"
      "function-definition-linear"
      "distance-formula"
-     "functions-problem-solving-together"
+     "functions-dr"
      )
     ("MLR.7"
      "box-plots"
@@ -184,7 +184,7 @@
      "function-composition"
      "flags"
      "defining-values"
-     "functions-problem-solving-together"
+     "functions-dr"
      )
     ("MLR.4"
      "simple-data-types"
