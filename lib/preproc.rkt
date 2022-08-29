@@ -891,6 +891,7 @@
       link-output)))
 
 (define (make-lesson-link f link-text)
+  ;(printf "doing make-lesson-link ~s ~s\n\n" f link-text)
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
          (set! f "./index.adoc")]
@@ -957,6 +958,7 @@
               (format "link:~apass:[~a][~a~a]"
                       *dist-root-dir* f link-text
                       (if *lesson-plan* ", window=\"_blank\"" ""))])
+        ;(printf "outputting link-output= ~s\n\n" link-output)
         link-output))))
 
 (define (make-link f link-text #:include? [include? #f] #:link-type [link-type #f])
@@ -1406,6 +1408,7 @@
       #:exists 'replace)))
 
 (define (init-flags)
+  ;(printf "doing init-flags\n")
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
@@ -1458,7 +1461,7 @@
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
-              (let ([shadow-glossary-file (build-path 'up ".prog" (first ff))])
+              (let ([shadow-glossary-file (build-path *progdir* (first ff))])
                 (set! gl
                   (append gl
                           (second
@@ -1496,6 +1499,7 @@
                            #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
+  ;(printf "doing preproc-adoc-file ~s\n" in-file)
 
   (set! *containing-directory* containing-directory)
   (set! *dist-root-dir* dist-root-dir)
@@ -1518,7 +1522,7 @@
         (unless (string=? *lesson-plan* x)
           (set! *lesson-plan-base* x)))))
 
-  ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
+  ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
 
   (with-handlers ([exn:fail? (lambda (e)
                                (printf "ERROR: ~a in ~s\n\n"
@@ -2225,7 +2229,11 @@
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
-      )))
+      ))
+
+  ;(printf "done preproc-adoc-file ~s\n\n" in-file)
+
+  )
 
 (define (display-lesson-slides o)
   (let ([id-file (build-path *containing-directory* (format "slides-~a.id" *proglang*))])
