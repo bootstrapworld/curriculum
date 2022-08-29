@@ -14,23 +14,44 @@ td .ulist ul { list-style: none; margin-left: 0; }
 	border: solid 1px #75328A77;
 	padding: 0.5rem;
 	margin: 1em;
-	box-shadow: 5px 5px 7px rgba(33,33,33,.7);
 	width: 90%;
 	display: inline-block;
-	vertical-align: top;
-	transform: rotate(-1deg);
-	transition: transform .15s linear;
 	background: white;
 }
-.Unit:nth-child(2n) { transform: rotate(1deg); }
 .Unit div.paragraph:first-child p {
 	font-size: 	 1.5rem;
 	line-height: 1.5rem;
     font-weight: bold;
-	font-family: 'Reenie Beanie';
 	margin-top: 0;
 }
-.Unit .ulist p { font-size: 8pt; }
+.Unit .ulist p { font-size: 8pt; line-height: 8pt; }
+
+.Unit .Lessons { display: inline-block; width: 50%; }
+.Unit .Projects {
+	display: inline-block;
+	font-family: 'Reenie Beanie';
+	width: 30%;
+	padding: 0.25em;
+	background: yellow;
+	margin: 1em;
+	box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+	vertical-align: top;
+	transform: rotate(-1deg);
+	transition: transform .15s linear;
+	color: black !important;
+	font-size: 20px;
+}
+.Unit .Projects:hover { transform: none; }
+.Unit:nth-child(2n) .Projects { transform: rotate(1deg); }
+.Unit .Projects a { font-size: 18px; text-decoration: underline 1px; }
+.Unit .Projects a::after { content: '!'; }
+.Unit .Projects::before {
+	content: 'Project Options:';
+	font-weight: bold;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
 </style>
 ++++
 
@@ -38,9 +59,7 @@ We designed our lessons in Bootstrap:Data Science to be incredibly flexible, wit
 
 == A Complete Data Science Class @duration{1 semester to Full Year}
 
-Designed for Data Science teachers building an entire course! There are tons of projects, including @lesson-link{bar-and-pie-charts/pages/infographic.adoc}, @lesson-link{random-samples/pages/food-habits-project.adoc}, @lesson-link{box-plots/pages/stress-project.adoc}, and @lesson-link{random-samples/pages/time-use-project.adoc}, not to mention the @lesson-link{project-research-paper, Capstone Research Paper}!
-
-Our lessons can be broken up in distinct units, each with a clear theme.
+The Bootstrap:Data Science lessons can be broken up into five distinct units, each with a clear theme and a set of creative projects.
 
 *Note: Many teachers pace themselves in order to have their students analyze _additional datasets_ after completing all five units.* Analyzing multiple datasets allows students to refine their skills and broaden and/or deepen domain knowledge. Most teacher start with one of the provided datasets (or a cleaned one they found themselves), and only have students collect their own data after working through their first analysis.
 
@@ -50,6 +69,7 @@ Unit 1: Who are Data Scientists, and what do they do?
 
 Students see the wide range of people involved with mathematics, computing, and data science, and confront the challenge of answering messy questions with data. They explore a sample dataset, consider the relationship between probability and statistics, and learn the basic programming and statistics necessary to display that dataset using a variety of charts, plots and graphs.
 
+[.Lessons]
 * @lesson-link{computing-needs-all-voices}
 * @lesson-link{ds-intro}
 * @lesson-link{simple-data-types}
@@ -57,6 +77,11 @@ Students see the wide range of people involved with mathematics, computing, and 
 * @lesson-link{bar-and-pie-charts}
 * @lesson-link{data-cycle}
 * @lesson-link{random-samples}
+
+[.Projects]
+* @lesson-link{bar-and-pie-charts/pages/infographic.adoc}
+* @lesson-link{random-samples/pages/food-habits-project.adoc}
+* @lesson-link{random-samples/pages/time-use-project.adoc}
 --
 
 [.Unit]
@@ -65,7 +90,7 @@ Unit 2: Gathering, Analyzing, and Visualizing Data
 
 Students choose a real dataset, or create their own! They explore this dataset, diving deep into the meaning, use, and interpretation of one-dimensional analyses like histograms, box-plots, measures of center and spread. What do these tools tell us about our data, and when is it appropriate to use one tool over another?
 
-
+[.Lessons]
 * @lesson-link{choosing-your-dataset}
 * @lesson-link{histograms}
 * @lesson-link{histograms2}
@@ -73,6 +98,10 @@ Students choose a real dataset, or create their own! They explore this dataset, 
 * @lesson-link{box-plots}
 * @lesson-link{standard-deviation}
 * @lesson-link{data-collection}
+
+[.Projects]
+* @lesson-link{data-collection/pages/survey-design.adoc}
+* @lesson-link{project-exploration-paper, Exploring Your Dataset}
 --
 
 [.Unit]
@@ -81,6 +110,7 @@ Unit 3: Transforming and Playing with Data
 
 Students learn to program _functions_, super-charging their programming arsenals with core algebraic concepts that allow them to create custom visualations that express many dimensions of data. They also learn how to _sort, filter, and transform_ their dataset to search for patterns, zoom in on samples, and identify trends within sub-groups of their samples.
 
+[.Lessons]
 * @lesson-link{lookups}
 * @lesson-link{functions-make-life-easier}
 * @lesson-link{functions-examples-definitions}
@@ -89,6 +119,9 @@ Students learn to program _functions_, super-charging their programming arsenals
 * @lesson-link{functions-dr}
 * @lesson-link{method-chaining}
 * @lesson-link{defining-table-functions}
+
+[.Projects]
+* Beautiful Evidence
 --
 
 [.Unit]
@@ -97,11 +130,15 @@ Unit 4: Modeling the World Around Us with Data
 
 In this unit, students apply their newfound programming power to identify _relationships within their data_, and developing linear (and even non-linear!) models to describe those relationships. They generate numerous data displays, and combine them into a library of visualizations and inferences about their data.
 
+[.Lessons]
 * @lesson-link{grouped-samples}
 * @lesson-link{scatter-plots}
 * @lesson-link{correlations}
 * @lesson-link{linear-regression}
-* @lesson-link{project-exploration-paper, Exploring {amp} Reporting your findings}
+
+[.Projects]
+* @lesson-link{linear-regression/pages/olympics-project.adoc}
+* @lesson-link{project-research-paper, Capstone Research Paper}
 --
 
 [.Unit]
@@ -110,17 +147,19 @@ Unit 5: Using Data Responsibly
 
 As full-fledged data scientists, students consider the _social impact_ of their work. How do we know that the tools we use to analyze data haven't been tampered with? How do we know to trust the validity of our methods and data-collection? What are the ethical implications of this work? Using the visualization library from the previous unit, students conduct an original research project into their data. In doing so, they confront both analytical and ethical factors in their final report, and discuss the ethical standards that define a responsible data scientist.
 
+[.Lessons]
 * @lesson-link{checking-your-work}
 * @lesson-link{threats-to-validity}
 * @lesson-link{ethics-privacy-and-bias}
 * @lesson-link{project-research-paper}
+
+[.Projects]
+* @lesson-link{threats-to-validity/pages/rubric-threats-to-validity.adoc}
 --
 
 === Other Considerations
 
 **What Domain Knowledge do you care about?** Do you want your students to focus on climate systems? Economics? Social Studies or History themes? Do you want them to design a survey for their school or neighborhood? What topics are important to your students? What topics are exciting to them? Your answers to these questions will determine the dataset(s) you'll use or collect, which has significant impacts on engagement, relevance, and inclusion.
-
-**Which Math and Statistics learning goals do you have?** The answer to this question will determine which lessons and projects from our library are relevant to you. A middle-school teacher might focus on lessons dealing pie and bar charts, histograms, etc. An Algebra teacher might focus on lessons about defining and composing functions. Meanwhile, a CS teacher might spend time on If-Expressions and conditionals.
 
 == More Analysis, Lots of Statistics Options @duration{4 weeks, up to 1 semester}
 
