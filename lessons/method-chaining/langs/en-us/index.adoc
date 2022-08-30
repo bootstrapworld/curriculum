@@ -117,37 +117,67 @@ By using the `and` and `or` operators, we can _combine_ Boolean tests @ifproglan
 === Overview
 Students learn how to compose multiple table operations (sorting, filtering, building) on the same table - a technique called "chaining".
 
-
 === Launch
+
+//////////////////////////
+Pyret-specific content
+//////////////////////////
 @ifproglang{pyret}{
-Now that we are doing more sophisticated analyses, we might write the following:
+Suppose we start with the number 1, and want to add 2, 6 and 3 to it. The code below will get the job done:
 ```
-# get a table with the nametags of all
-# the fixed animals, ordered by species
-with-labels = animals-table.build-column("labels", nametag)
-fixed-with-labels = with-labels.filter(is-fixed)
+x = 1 + 2
+y = x + 6
+result = z + 3
+```
+
+[.lesson-instruction]
+Why is this code ugly, or hard to read?
+
+This code breaks up each step of the computation in steps, and creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+
+We can easily _chain these operators together_, to do all the calculation in one line of code:
+```
+result = 1 + 2 + 6
+```
+
+[.lesson-instruction]
+- Open your saved Table Methods Starter File (or @starter-file{table-methods, open a new one}), and click "Run".
+- Can you make a table with a new column called "nametag" that is populated using the `label` function?
+- Can you take _that_ table, and filter it so it only shows the fixed animals?
+- Can you sort _that_ table by species?
+
+Here's some code that will solve the challenges above:
+```
+x = animals-table.build-column("labels", nametag)
+y = with-labels.filter(is-fixed)
 result = fixed-with-labels.order-by("species", true)
 ```
 
-That's a lot of code, and it also requires us to come up with names for each intermediate step! Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
+[.lesson-instruction]
+Why is this code ugly, or hard to read?
+
+This code breaks up each step of the computation in steps, and creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+
+Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
 
 ```
-# get a table with the nametags of all
-# the fixed animals, ordered by species
 result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
 ```
 
-This code takes the `animals-table`, and builds a new column called `label`. `.build-column` produces a new Table...and we call that Table's `.filter` method. `.filter` produces _yet another Table_ (of all fixed animals) and we call _that_ Table’s `order-by` method. The Table produced by `.order-by` is our final result.
+Let's walk through this line of code one step at a time:
+- We take the `animals-table`, and produce a new table with an extra column called `label`.
+- Then call _that_ Table's `.filter` method, producing a new table with a `label` column and only rows for fixed animals.
+- Then we call _that_ Table’s `order-by` method, producing a new, sorted table of fixed animals with a `label` column.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
 @span{.title}{Teaching Tip}
 
-Use different color markers to draw _nested boxes_ around each part of the expression, showing where each Table came from.
+Use different color markers to draw _nested boxes_ around each part of the expression, showing each of the three steps described above.
 |===
 
-It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “`.`” to make it more readable. Here’s the exact same code, written with each method on its own line:
+It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each `.` to make it more readable. Here’s the exact same code, written with each method on its own line:
 
 ```
 # get a table with the nametags of all
@@ -158,6 +188,10 @@ animals-table
   .order-by("species", true)
 ```
 }
+
+//////////////////////////
+CODAP-specific content
+//////////////////////////
 @ifproglang{codap}{
 Now that we are doing more sophisticated analyses, we might find ourselves in a situation where we want to use a series of Transformers!
 
@@ -193,13 +227,15 @@ We also encourage students to rename tables descriptively. By the end of this ex
 }
 === Investigate
 [.lesson-point]
-When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers}, it’s important to build @ifproglang{codap}{and transform }first, then filter, and then order.
+When chaining @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers}, it’s important to build @ifproglang{codap}{and transform} first, then filter, and then order.
 
 How well do you know your @ifproglang{pyret}{table methods} @ifproglang{codap}{Transformers}? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} in to find out.
 
 
 === Synthesize
 Ask students about their answers to @printable-exercise{pages/chaining-methods-order-matters.adoc}. Which ones produce an error? Why do will they produce an error, and how can this be fixed?
+
+Can students trigger a similar error in their Table Methods starter file?
 
 As our analysis gets more complex, chaining is a great way to re-use code we've already written. And less code means a smaller chance of bugs.
 
