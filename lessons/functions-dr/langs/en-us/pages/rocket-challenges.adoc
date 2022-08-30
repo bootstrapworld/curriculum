@@ -1,5 +1,13 @@
 = Rocket Height Challenges
 
+++++
+<style>
+body:not(.LessonPlan, .narrativepage) .paragraph:nth-child(odd) p {
+	height: 2.5rem;
+}
+</style>
+++++
+
 @n Can you make the rocket fly faster?
 
 @fitb{}{@ifsoln{multiply `seconds` by a number larger than 7: @math{height(s) = 20 \times s}}}
@@ -18,11 +26,11 @@
 
 @n Can you make the rocket blast off and then land again?
 
-@fitb{}{@ifsoln{This is a parabola with a negative coefficient: @math{height(s) = -7s^2}. Adding a constant pushes the parabola up above @math{y = 0}}}
+@fitb{}{@ifsoln{A parabola with a negative coefficient, shifted right by subtracting from the squared term and up by adding a constant: @math{height(s) = -(x - 10)^2 + 100}}}
 
 @n Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land?
 
-@fitb{}{@ifsoln{See previous solution, with a constant of 1000: @math{height(s) = 1000 + -7s^2}}}
+@fitb{}{@ifsoln{In the previous solution, the constant we add is the square of the constant we subtract from @math{s}. To reach a height of 1000: @math{height(s) = -(x - \sqrt{1000})^2 + 1000}}}
 
 @n Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
 
@@ -30,6 +38,6 @@
 
 @n Can you make the rocket fly to the edge of the the universe?
 
-@fitb{}{@ifsoln{Only an exponential function will counteract the effects of the background's log scale. } }
+@fitb{}{@ifsoln{What's the inverse function of log? Exponential } }
 
 @fitb{}{@ifsoln{Use any number for the base and seconds as the exponent: @math{height(s) = 7^s}}
