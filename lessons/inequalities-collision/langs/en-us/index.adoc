@@ -45,13 +45,21 @@ Students may remember that there are two strategies for doing this:
 For the following complex word problem, have students *first* decide which strategy they want to use, and then apply the Design Recipe to build the functions they need.
 
 [.lesson-instruction]
-A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Define functions that compute the height of the pole and the area of the triangle after a given number of seconds.
-
-Have students complete the @printable-exercise{pages/top-down-bottom-up.adoc} worksheet, using Problem Decomposition and the Design Recipe to solve this problem!
+* A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Write a function that computes the area of the triangle as a function of time.
+* This is easier to think about as two functions:
+** one that computes the height of the pole, based on the seconds
+** another that computes the area of the triangle, based on the height
+* Does one function rely on the other? If so, which one?
+* Which strategy will YOU use - top-down, or bottom-up?
+* Complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy for Problem Decomposition!
 
 === Synthesize
+**Note:** defining the `height` first is bottom-up, and solving `area` first is top-down.
+
 - Which strategy did students use?
 - Did they start out with one, and then switch to another?
+- Explicitly point out that the `area` function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
+
 
 == Collision Detection @duration{20 minutes}
 
@@ -64,18 +72,16 @@ Knowing how far apart our characters are is the first step. We still need the co
 === Investigate
 
 [.lesson-instruction]
-* Turn to @printable-exercise{pages/collision.adoc}
-* Write a function that
-** takes in two @vocab{coordinate pairs} representing the locations of
-*** the `PLAYER` `(px, py)` and
-*** a `CHARACTER` `(cx, cy)`
-**** _Note: `CHARACTER` refers to a `DANGER` or a `TARGET` and the function will work for both._
-** and returns `true` if the locations are within 50 @vocab{pixels} of each other.
-* Then login to @starter-file{program-list}, fix the `is-collision` function in your game file, and click "Run"!
+* This is easier to think about as two functions:
+** one that computes the distance between a Player and a Character, based on their coordinates
+** another that checks if those same coordinates are less than 50 pixels apart, based on the distance
+* Does one function rely on the other? If so, which one?
+* Complete @printable-exercise{pages/collision.adoc}.
+* When you've finished, open your saved game file and fix the @code function in your game file, and click "Run"!
 
 === Synthesize
-- You started by writing the `distance` function first, and then  @show{(code 'collision?)}. Is this *Top-Down* or *Bottom-Up* decomposition?
-- Explicitly point out that this function is easy to write because we can _re-use_ the distance function.
+- In our flag-pole exercise, we had to write two functions and could start with one or the other. In our game, however, we began already having written  the `distance` function! Is this *Top-Down* or *Bottom-Up* decomposition?
+- Explicitly point out that the @show{(code 'collide?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
 - Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @lesson-link{problem-decomposition, the Problem Decomposition lesson}.
 
 == Additional Exercises:
