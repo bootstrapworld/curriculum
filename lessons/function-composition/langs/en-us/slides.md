@@ -142,7 +142,7 @@ What’s another line of code I could write that would produce the exact same im
 
 Complete @printable-exercise{pages/more-than-one-way.adoc}.
 
-There is a special function in @ifproglang{wescheme}{WeScheme} @ifproglang{pyret}{code.pyret.org (CPO)} that lets us test whether or not two images are equal.
+There is a special function that lets us test whether or not two images are equal.
 
 @show{(code 'image=?)}` :: Image, Image -> Boolean`
 

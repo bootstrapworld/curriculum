@@ -116,7 +116,7 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 ---
 # Testing out your Code
 
-- Open @ifproglang{wescheme}{@link{https://www.wescheme.org, WeScheme}} @ifproglang{pyret}{@link{https://code.pyret.org, code.pyret.org (CPO)} } and click run.
+- Open @starter-file{editor} and click run.
 - For now, we are only going to be working in the Interactions Area on the right hand side of your screen.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} into the Interactions Area.
 - Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
@@ -142,7 +142,7 @@ One of them is familiar, but the other is very different from what you've been w
 # Testing out your Code
 
 Here is another circle to explore.
-@show{(coe `(string-length "fun!"))}
+@show{(coe '(string-length "fun!"))}
 
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
