@@ -49,16 +49,18 @@ For the following complex word problem, have students *first* decide which strat
 * This is easier to think about as two functions:
 ** one that computes the height of the pole, based on the seconds
 ** another that computes the area of the triangle, based on the height
-* Does one function rely on the other? If so, which one?
-* Which strategy will YOU use - top-down, or bottom-up?
+* Does one function depend on (or "sit on top of") the other? If so, which one?
+** _Yes - `area` depends on `height`._
+* Which strategy will YOU use: bottom-up (independent first) or top-down (dependent first)?
+** _Students answers will vary! They can define either function first._
 * Complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy for Problem Decomposition!
 
 === Synthesize
-**Note:** defining the `height` first is bottom-up, and solving `area` first is top-down.
+**Note:** Defining the `height` first is bottom-up, and solving `area` first is top-down.
 
 - Which strategy did students use?
-- Did they start out with one, and then switch to another?
-- Explicitly point out that the `area` function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
+- Did they try starting with one function, and then switch to another?
+** _Invite students to share. Oftentimes, responses are not only intriguing but can highlight the value of each approach. Explicitly point out that the `area` function _uses_ `height`, allowing us to break a big problem down into two smaller ones._
 
 
 == Collision Detection @duration{20 minutes}
@@ -82,7 +84,8 @@ Knowing how far apart our characters are is the first step. We still need the co
 === Synthesize
 - In our flag-pole exercise, we had to write two functions and could start with one or the other. In our game, however, we began already having written  the `distance` function! Is this *Top-Down* or *Bottom-Up* decomposition?
 - Explicitly point out that the @show{(code 'collide?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
-- Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @lesson-link{problem-decomposition, the Problem Decomposition lesson}.
+- Connect this back to `profit` (from @lesson-link{problem-decomposition, Problem Decomposition}), which relied on `revenue` and `cost`. Which function(s) would a top-down strategy address first?
+- Connect this back to @show{(code 'onscreen?)} (from @lesson-link{inequalities3-sam, Sam the Butterfly}), which relied on @show{(code 'safe-left?)} and @show{(code 'safe-right?)}. Which function(s) would a bottom-up strategy address first?
 
 == Additional Exercises:
 For teachers who've already introduced your class to flags, @opt-starter-file{flags-trinidad} makes use of Pythagorean Theorem and could make for an interesting connection to this lesson.
