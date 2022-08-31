@@ -123,21 +123,21 @@ Students learn how to compose multiple table operations (sorting, filtering, bui
 Pyret-specific content
 //////////////////////////
 @ifproglang{pyret}{
-Suppose we start with the number 1, and want to add 2, 6 and 3 to it. The code below will get the job done:
+Suppose we start with some number A, and want to add B, C and D to it. The code below will get the job done:
 ```
-x = 1 + 2
-y = x + 6
-result = y + 3
+x = A + B                # starting with A, add B
+y = x + C                # then add C....
+result = y + D           # then add D to get our result
 ```
 
 [.lesson-instruction]
-Why is this code ugly, or hard to read?
-
-This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+* Why is this code ugly, or hard to read?
+** __Many lines of code means more to read and more possible places for bugs__
+** __This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!__
 
 We can easily _chain these operators together_, to do all the calculation in one line of code:
 ```
-result = 1 + 2 + 6
+result = A + B + C + D
 ```
 
 [.lesson-instruction]
@@ -146,17 +146,17 @@ result = 1 + 2 + 6
 - Can you take _that_ table, and filter it so it only shows the fixed animals?
 - Can you sort _that_ table by species?
 
-Here's some code that will solve the challenges above:
+Let's look at one possible solution to these challenges:
 ```
-x = animals-table.build-column("labels", nametag)
-y = with-labels.filter(is-fixed)
-result = fixed-with-labels.order-by("species", true)
+x = animals-table.build-column("labels", nametag)    # starting with our table, and add labels
+y = with-labels.filter(is-fixed)                     # then filter by is-fixed...
+result = fixed-with-labels.order-by("species", true) # then sort by species to get our result
 ```
 
 [.lesson-instruction]
-Why is this code ugly, or hard to read?
-
-This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+* Why is this code ugly, or hard to read?
+** __Many lines of code means more to read and more possible places for bugs__
+** __This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!__
 
 Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
 
