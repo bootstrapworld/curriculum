@@ -152,11 +152,17 @@ The mean and standard deviation tell us where the data is centered and how far t
 |
 @span{.title}{Mean Average v. Standard Deviation}
 
+MAD and SD are both measures of a certain kind of _distance_, literally asking "how are far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
+
+Before learning the distance formula, students might guess at a number of ways to compute the hypotenuse. They can quickly rule out the sum of the legs, and the difference between them. At some point they might suggest _averaging_ the lengths of the legs. Mean Average Deviation (MAD) does exactly that, by flattening each points' deviation into a single "dimension".
+
+Of course, these legs exist on separate axes - so we need a formula for distances in more than one dimension. Computing the SD involves the _square root of a sum of squares_. That should sound suspiciously like the distance formula! Indeed, computing the SD for a dataset with two points is basically finding the (normalized) length of the hypoteneuse!
+
+The pythagorean distance works in 3-dimensions as well (right pyramids!) - or for any number of dimensions - as does the formula for standard deviation. By treating each point as a separate dimension, DS allows each deviation to be considered independantly.
+
 Why use one measure of spread instead the other? The answer is closely related to the difference between two measures of _center_! `Mean` incorporates data from every point, while `median` does not. However, `mean` is sensitive to the effect of extreme outliers or @vocab{skew}. In those cases, `median` is considered to be the better measure of center.
 
-One problem with Mean Average Deviation (MAD), is that by flattening each deviation into a single "dimension", MAD allows the contribition of one deviation to cancel out another (+1 cancels out -1, for example). SD is in fact related to the __distance formula__, treating each point as a separate dimension and allowing deviations to be considered independantly. Squaring each deviation, taking the average, and taking the square root allows each deviation to contribute to the summary (just like `mean`!).
-
-Standard deviation used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
+Treating each point independantly allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. This is why SD is used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
 |===
 
 === Synthesize
