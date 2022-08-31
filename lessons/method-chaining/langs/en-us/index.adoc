@@ -209,9 +209,20 @@ In CODAP, we can use the result of one Transformer as the dataset for another Tr
 A perk of applying Transformers, rather than manipulating the dataset, is that any updates made to the original dataset will flow through the chain. As you chain together Transformers, it is important to remember the following:
 }
 [.lesson-point]
-Order matters: Build / Transform, Filter, Sort.
+Order matters: Build @ifproglang{codap}{/ Transform}, Filter, Sort.
 
 Suppose we want to build a column and then use it to filter our table. If we use the @ifproglang{pyret}{methods} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
+
+//////////////////////////
+PYRET-specific content
+//////////////////////////
+@ifproglang{pyret}{
+[.lesson-instruction]
+* Take a minute to think about what code you would write to sort the animals table by the kilograms column.
+* Do you think
+`animals-table.order-by("kilograms", true).build-column("kilograms", kilos)`
+will generate the table we want? Why or why not? Test your hypothesis by typing the code that you think will build the table into the starter file!
+}
 
 @ifproglang{codap}{
 
