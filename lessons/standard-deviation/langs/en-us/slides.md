@@ -123,7 +123,7 @@ stdev(animals-table, "pounds")
 What is the standard deviation for the weights of _all_ the animals at our dataset?
 
 <!--
-	__Approximately 48.5__ OPTIONAL: For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
+	__Approximately 48.5__ Optional: For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
 -->
 
 ---
@@ -169,7 +169,7 @@ Invite students to take a look at the histogram below. It is the same histogram 
 - Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set._
 - What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.
 - What did this outlier do to the standard deviation?
-- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
+- Optional: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 
 <!--
 - What is the shape of this histogram?
@@ -181,7 +181,7 @@ Invite students to take a look at the histogram below. It is the same histogram 
 ** __Previously, the mean was 3; now it is approximately 4.33.__
 - What did this outlier do to the standard deviation?
 ** _The outlier caused the standard deviation to increase by about 1.33._
-- OPTIONAL: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
+- Optional: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 -->
 
 ---

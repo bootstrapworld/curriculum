@@ -212,7 +212,7 @@ When you're done, fix the broken `distance` function in your game file, click _R
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
-OPTIONAL:
+Optional:
 
 If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
 
