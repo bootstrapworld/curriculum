@@ -46,7 +46,7 @@ Make two scatterplots from the `animals-table`, using `age` as the explanatory v
 
 Have students write down what they think, then quickly survey the class.
 
-@right{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot with a cluster of points on the lower left and some points in the upper right", 300}}
+@right{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a cluster of points on the lower left and some points in the upper right", 300}}
 We are asking if we can use an animal’s size or age to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.
 
 Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted, based on these factors? And which one would give us a better prediction?
@@ -93,8 +93,8 @@ Open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
 
 Let's explore scatter plots for weeks-v-pounds and weeks-v-age.
 
-@left{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot with a tight cluster in the lower left and some points toward the right and top right corner", 400}}
-@right{@image{images/age-v-weeks.gif,"weeks-v-age scatterplot with some points in the lower left and some in the upper right", 400}}
+@left{@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a tight cluster in the lower left and some points toward the right and top right corner", 400}}
+@right{@image{images/age-v-weeks.gif,"weeks-v-age scatter plot with some points in the lower left and some in the upper right", 400}}
 @span{.clear}
 
 After looking at the point clouds, we are left with a few questions:
@@ -127,12 +127,12 @@ Give students some time to experiment, then share back observations. Can they co
 Students are introduced to the `lr-plot` function in Pyret, which performs a linear regression and plots the result.
 
 === Launch
-Pyret includes a powerful display, which (1) draws a scatterplot, (2) draws the line of best fit, and (3) even displays the equation for that line:
+Pyret includes a powerful display, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line:
 
 ----
 # lr-plot :: Table, String, String, String -> Image
 # consumes a table, and 3 column names: labels, xs and ys
-# produces a scatterplot, and draws the line of best fit
+# produces a scatter plot, and draws the line of best fit
 lr-plot(animals-table, "name", "age", "weeks")
 ----
 
@@ -158,7 +158,7 @@ We prefer the words “explanatory” and “response” in our curriculum, beca
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Create an `lr-plot` for the `animals-table`, using `"names"` for the labels, `"age"` for the x-axis and `"weeks"` for the y-axis.
 
-The resulting scatterplot looks like those we’ve seen before, but it has a few important additions. First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red). In this plot, we can see that the slope of the line is 0.792, which means that on average, each extra year of age results in an extra 0.792 weeks of waiting to be adopted (about 5 or 6 extra days). By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted. For example, we predict a 5-year-old animal to be adopted in @math{0.792(5) + 2.285 = 6.245} weeks. That’s the y-value exactly on the line at x=5.
+The resulting scatter plot looks like those we’ve seen before, but it has a few important additions. First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red). In this plot, we can see that the slope of the line is 0.792, which means that on average, each extra year of age results in an extra 0.792 weeks of waiting to be adopted (about 5 or 6 extra days). By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted. For example, we predict a 5-year-old animal to be adopted in @math{0.792(5) + 2.285 = 6.245} weeks. That’s the y-value exactly on the line at x=5.
 
 The intercept is `2.285`. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this too literally, and say that a newborn animal would be adopted in 2.285 weeks, because none of the animals in our dataset was that young. Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a baby animal, whose age is close to 0, would take only about 3 weeks to be adopted.
 

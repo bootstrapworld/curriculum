@@ -32,7 +32,7 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 
 @image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}
 
-- Looking at this scatterplot, does it make sense to analyze all the animals together? Why or why not?{style="font-size: 16pt"}
+- Looking at this scatter plot, does it make sense to analyze all the animals together? Why or why not?{style="font-size: 16pt"}
 - Are there some questions where it would be important to break up the animals into species-specific samples? What are they?{style="font-size: 16pt"}
 - Are there some questions where it would be important to keep the whole population together? What are they?{style="font-size: 16pt"}
 
@@ -45,7 +45,7 @@ Divide the class into groups of 3-4, with one student identified as the "reporte
 
 Report back on your answers to these questions!
 
-- Looking at this scatterplot, does it make sense to analyze all the animals together? Why or why not?
+- Looking at this scatter plot, does it make sense to analyze all the animals together? Why or why not?
 - Are there some questions where it would be important to break up the animals into species-specific samples? What are they?
 - Are there some questions where it would be important to keep the whole population together? What are they?
 

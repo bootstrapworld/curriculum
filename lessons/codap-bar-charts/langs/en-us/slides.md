@@ -32,7 +32,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 @image{images/codap-initial-display.png,"An image of the CODAP environment"}
 
 <!--
-    If students report that a blank graph appears (rather than a scatterplot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).
+    If students report that a blank graph appears (rather than a scatter plot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).
 -->
 
 ---

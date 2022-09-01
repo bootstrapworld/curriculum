@@ -34,7 +34,7 @@ We are asking if we can use an animal’s **size** or **age** to predict how lon
 {layout="LaunchR"}
 # Intro to Linear Regression 
 
-@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
+@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
 
 The mean, median, and mode are three different ways to measure the “center” of a dataset in one dimension. 
 
@@ -109,8 +109,8 @@ Open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
 
 Let's explore scatter plots for weeks-v-pounds and weeks-v-age.
 
-@image{images/age-v-weeks.gif,"weeks-v-age scatterplot with some points in the lower left and some in the upper right", 400}
-@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatterplot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
+@image{images/age-v-weeks.gif,"weeks-v-age scatter plot with some points in the lower left and some in the upper right", 400}
+@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
 
 <!--
 - Do the relationships appear to be linear for one? Both?
@@ -150,12 +150,12 @@ Give students some time to experiment, then share back observations.
 {layout="Launch"}
 # Linear Regression in Pyret
 
-Pyret includes a powerful display, which (1) draws a scatterplot, (2) draws the line of best fit, and (3) even displays the equation for that line:
+Pyret includes a powerful display, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line:
 
 ```{style="font-size:16pt"}
 # lr-plot :: Table, String, String, String -> Image
 # consumes a table, and 3 column names: labels, xs and ys
-# produces a scatterplot, and draws the line of best fit
+# produces a scatter plot, and draws the line of best fit
 lr-plot(animals-table, "name", "age", "weeks")
 ```
 <!--
@@ -192,7 +192,7 @@ Our goal is to use values of the variable on our x-axis to _predict_ values of t
 
 @image{images/lr-explained.png, LR explained, 400}
 
-The resulting scatterplot looks like those we’ve seen before, but it has a few important additions.{style="font-size:15pt"}
+The resulting scatter plot looks like those we’ve seen before, but it has a few important additions.{style="font-size:15pt"}
 
 First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red).{style="font-size:15pt"}
 
