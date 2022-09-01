@@ -35,18 +35,18 @@
 Students review row definitions, and get more practice reading the definitions of functions that work on rows.
 
 === Launch
+
+[.lesson-instruction]
 Load the @starter-file{table-methods}, go to the File menu, and click "Save a Copy".
 
-This activity is about reading carefully, getting more comfortable with functions that work on rows.
+Explain to students that this activity is about reading carefully and getting more comfortable with functions that work on rows.
 
 === Investigate
 
-Student work in groups or pairs.
-
 [.lesson-instruction]
-Complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+With your partner, complete items 1 through 8 on @printable-exercise{pages/row-and-function-definitions.adoc}.
 
-Take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
+Direct students to take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
 
 ```
 examples:
@@ -61,16 +61,22 @@ end
 . The third example shows __all the work__: given the `cat-row`, we lookup the value in the `"species"` column and compare it to the String `"dog"`.
 
 [.lesson-instruction]
-Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
+- Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
+- Complete the worksheet.
 
 === Synthesize
 * Who can explain what `is-old` does?
+** _It looks up the age of the row, and asks if its greater than 10._
 * Who can explain what `lookup-name` does?
+** _It looks up the value in the `name` column._
 * Who can explain what `lookup-fixed` does?
+** _It looks up the value in the fixed column._
 * Who can explain what `label` does?
+** _It prints the animal's name in red._
 * Who can explain what `kilos` does?
+** _It divides the pounds by 2.2._
 
-Challenge them to use terminology like "looks up the value in the X column" when describing a lookup.
+Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
 
 
 == Ordering, Filtering, and Building @duration{30 minutes}
@@ -82,7 +88,7 @@ Students learn to sort rows of a table in ascending or descending order, filter 
 
 Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
 
-[.lesson-point]
+Explain to students that:
 * Each of you represents a Row in a table of students
 * Standing together, you represent a _sample_ of the class, stored in a table.
 * Like you, each student has columns like "First Name", "Last Name", "Birthday", "Favorite Food", etc.
@@ -116,38 +122,35 @@ Have your Filter volunteer go through all their peers, applying their card to ea
 
 
 === Investigate
-Pyret Tables have their own methods for sorting, filtering, and more.
+Pyret Tables have their own methods for sorting, filtering, and more. The exploration that students will complete is divided into three sections, accordingly.
 
 [.lesson-instruction]
-Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
+Complete the "Ordering Rows" section on @printable-exercise{exploring-methods.adoc} to discover how the `.order-by` method works.
 
-* How does the `.order-by` method work?
-** `.order-by` consumes a String (the name of the column by which to sort) and a @vocab{Boolean} (`true` for ascending, `false` for descending), and sorts the rows according to that column.
-* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
-** It creates a new one
-* How could we test this?
-** Sort the table, then evaluate `animals-table` and see if it stayed sorted
+After students have completed the section, lead a discussion to confirm that students understand the following key ideas:
+
+* `.order-by` consumes a String (the name of the column by which to sort) and a @vocab{Boolean} (`true` for ascending, `false` for descending), and sorts the rows according to that column.
+* The `.order-by` method produces a _new_ table rather than changing the existing one.
+* How could we test that a new table was produced? We could sort the table, then evaluate `animals-table` and see if it stayed sorted.
 
 [.lesson-instruction]
-- Complete questions 7-13 on @printable-exercise{exploring-methods.adoc}
+- Complete the "Filtering Rows" section on @printable-exercise{exploring-methods.adoc}
 - Find the contract for `.filter` in your Contracts page.
 
-* What is its Domain?
-** `.filter` takes a _Boolean-producing function_
-* How does the `.filter` method work?
-** It produces a new table containing only rows for which the function returns `true`.
-* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
-** It creates a new one
+Confirm that students understand the following key ideas:
+
+* The Domain of `.filter` is a _Boolean-producing function_
+* The `.filter` method works by producing a new table containing only rows for which the function returns `true`.
+* The `.filter` method creates a new table.
 
 [.lesson-instruction]
-Complete questions 14-16 on @printable-exercise{exploring-methods.adoc}
+Complete "Building Columns", the last section of @printable-exercise{exploring-methods.adoc}
 
-* What is its Domain?
-** `.build-column` takes in a String and a _function_
-* How the `.build-column` method work?
-** It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
-* Does sorting the `animals-table` produce a _new_ table, or change the existing one?
-** It creates a new one
+Confirm that students understand the following:
+
+* `.build-column` takes in a String and a _function_
+* The `.build-column` method produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
+* Building a column in the `animals-table` produces a _new_ table.
 
 [.lesson-instruction]
 Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
