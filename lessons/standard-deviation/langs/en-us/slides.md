@@ -161,7 +161,7 @@ Invite students to take a look at the histogram below. It is the same histogram 
 @image{images/histogram-with-outlier.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An 11th cat has been added at 16 years."} 
 
 ---
-{layout="LaunchR"}
+{layout="Launch"}
 # Measuring "Deviance"
 
 - What is the shape of this histogram?
