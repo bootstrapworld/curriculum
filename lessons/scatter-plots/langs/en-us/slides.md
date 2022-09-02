@@ -73,7 +73,7 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 * Are there any patterns or trends that you see here?
 
 <!--
-Have students report back on their findings from the starter file and on @printable-exercise{pages/creating-scatterplot.adoc}.
+Have students report back on their findings from the starter file and on @printable-exercise{pages/creating-scatter plot.adoc}.
 -->
 ---
 {layout="SynthesizeR"}

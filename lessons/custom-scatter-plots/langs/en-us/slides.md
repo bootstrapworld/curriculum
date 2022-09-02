@@ -144,7 +144,7 @@ The `legs-tag` function _made blue rings whose size was determined by the number
 
 ---
 {layout="Launch"}
-# OPTIONAL: Using Conditionals
+# Optional: Using Conditionals
 So far, we've seen that...
 
 * the `scatter-plot` function makes uniform blue dots
@@ -154,7 +154,7 @@ What other ideas do you have for how else we could make scatter plots be more in
 
 
 <!--
-**This entire section is OPTIONAL. Students delve deeper into programming to create more sophisticated image-scatter-plots, which can then feed deeper analysis**
+**This entire section is Optional. Students delve deeper into programming to create more sophisticated image-scatter-plots, which can then feed deeper analysis**
 
 Math teachers alike may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not a part of the Data Science pathway, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics.
 -->
@@ -180,7 +180,7 @@ Math teachers alike may want their students to confront piecewise functions more
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
-* OPTIONAL: Complete @opt-printable-exercise{sex-dot-dr.adoc}, to write a new helper function that will make differently-colored dots based on the animals' sex.
+* Optional: Complete @opt-printable-exercise{sex-dot-dr.adoc}, to write a new helper function that will make differently-colored dots based on the animals' sex.
 
 <!--
 Make sure that students write the Contract __first__ , and check in with their partner __and__ the teacher before proceeding.

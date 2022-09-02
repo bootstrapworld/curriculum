@@ -96,7 +96,7 @@ There are other ways to mislead the audience as well:
 
 **Intentionally using the wrong chart** - suppose the census asks for data from different groups of people, and gets _none_ from one group. That would be very suspicious! The missing group would be an empty space on bar chart, but a pie chart would hide that absence completely - making it less likely that anyone would even notice that group had been "erased"!
 
-**Changing the scale of a chart** - Changing the y-axis of a scatterplot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
+**Changing the scale of a chart** - Changing the y-axis of a scatter plot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
 
 ---
 {layout="Launch"}

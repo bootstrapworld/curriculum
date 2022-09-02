@@ -93,9 +93,9 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 {layout="LaunchC"}
 # Function Notation (Graphs)
 
-We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatterplot below.{style="font-size:15pt"}
+We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatter plot below.{style="font-size:15pt"}
 
-@image{images/sp.png, "scatterplot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
+@image{images/sp.png, "scatter plot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
 
 ---
 {layout="LaunchR"}
@@ -106,7 +106,7 @@ We don’t need to know a function definition in order to use function notation 
 * What is the value of @math{f(3)}?
 * What other values on this graph could we describe using function notation?
 
-@image{images/sp.png, "scatterplot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
+@image{images/sp.png, "scatter plot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
 
 
 <!--
