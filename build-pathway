@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-08-11 # last modified
+LASTMOD=2022-09-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2023,6 +2023,14 @@ function collectworkbookpages() {
     fi
 
     grep '^notes-' .cached/.workbook-pages-ls.txt.kp > .cached/.workbook-notes-pages-ls.txt.kp
+
+    for f in notes-*.adoc; do
+      if test -f "$f"; then
+        if ! grep -q "$f" .cached/.workbook-notes-pages-ls.txt.kp; then
+          echo $f >> .cached/.workbook-notes-pages-ls.txt.kp
+        fi
+      fi
+    done
 
     checkworkbookpagesalsoexercises
 
