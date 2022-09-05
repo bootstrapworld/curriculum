@@ -100,69 +100,95 @@ Each time students encounter a new word problem, we encourage working through it
 {layout="Launch"}
 # Chaining
 
-Now that we are doing more sophisticated analyses, we might write the following:
-```{style="font-size:14pt"}
-# get a table with the nametags of all 
-# the fixed animals, ordered by species
-with-labels = animals-table.build-column("labels", nametag)
-fixed-with-labels = with-labels.filter(is-fixed)
-result = fixed-with-labels.order-by("species", true)
+Suppose we start with some number A, and want to add B, C and D to it. The code below will get the job done:
+```
+x = A + B                # starting with A, add B
+y = x + C                # then add C....
+result = y + D           # then add D to get our result
 ```
 
+Why is this code ugly, or hard to read?
+
 <!--
+Why is this code ugly, or hard to read? Many lines of code means more to read and more possible places for bugs. This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+-->  
+
+---
+{layout="Launch"}
+# Chaining
+
+We can easily _chain these operators together_, to do all the calculation in one line of code:
+```
+result = A + B + C + D
+```
+---
+{layout="Launch"}
+# Chaining
+
+- Open your saved Table Methods Starter File (or @starter-file{table-methods, open a new one}), and click "Run".
+- Can you make a table with a new column called "nametag" that is populated using the `label` function?
+- Can you take _that_ table, and filter it so it only shows the fixed animals?
+- Can you sort _that_ table by species?
+
+---
+{layout="Launch"}
+# Chaining
+
+
+Let's look at one possible solution to these challenges:
+```
+x = animals-table.build-column("labels", nametag)    # starting with our table, and add labels
+y = with-labels.filter(is-fixed)                     # then filter by is-fixed...
+result = fixed-with-labels.order-by("species", true) # then sort by species to get our result
+```
+
+Why is this code ugly, or hard to read?
+
+<!--
+  Many lines of code means more to read and more possible places for bugs. This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
+-->
+
+---
+{layout="Launch"}
+# Chaining
+
+
+Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. 
+
+```
+result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
+```
+
+ 
+<!--
+- We take the `animals-table`, and produce a new table with an extra column called `label`.
+- Then call _that_ Table's `.filter` method, producing a new table with a `label` column and only rows for fixed animals.
+- Then we call _that_ Table’s `order-by` method, producing a new, sorted table of fixed animals with a `label` column.
 
 -->
 ---
 {layout="Launch"}
 # Chaining
 
-That's a lot of code, and it also requires us to come up with names for each intermediate step! Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. For example:
+It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each `.` to make it more readable. Here’s the exact same code, written with each method on its own line:
 
 ```
 # get a table with the nametags of all 
 # the fixed animals, ordered by species
 result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
 ```
----
-{layout="Launch"}
-# Chaining
 
-It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each “`.`” to make it more readable. Here’s the exact same code, written with each method on its own line:
-```
-# get a table with the nametags of all 
-# the fixed animals, order by species
-animals-table
-  .build-column("label", nametag)
-  .filter(is-fixed)
-  .order-by("species", true)
-```
 
 ---
 {layout="Launch"}
 # Chaining
 
-```{style="font-size:16pt"}
-# get a table with the nametags of all 
-# the fixed animals, order by species
-animals-table
-  .build-column("label", nametag)
-  .filter(is-fixed)
-  .order-by("species", true)
-```
-This code takes the `animals-table`, and builds a new column called `label`. `.build-column` produces a new Table...and we that Table's whose `.filter` method. 
-`.filter` produces _yet another Table_ (of all fixed animals) and we call _that_ Table’s `order-by` method. The Table produced by `.order-by` is our final result.{style="font-size:15pt"}
-<!--
-**Teaching Tip**
-Use different color markers to draw _nested boxes_ around each part of the expression, showing where each Table came from.
--->
+* Take a minute to think about what code you would write to sort the animals table by the kilograms column.
+* Do you think
+`animals-table.order-by("kilograms", true).build-column("kilograms", kilos)`
+will generate the table we want? Why or why not? 
 
----
-{layout="Launch"}
-# Chaining
-
-**Suppose we want to build a column, and then use it to filter our table.**
-
-If we use methods in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. Even worse, the program might work, but produce results that are incorrect!
+Test your hypothesis by typing the code that you think will build the table into the starter file!
 }
 
 @ifproglang{codap}{
