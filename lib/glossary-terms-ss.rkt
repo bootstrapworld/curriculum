@@ -49,6 +49,8 @@ from the ones in the main glossary file.
 
     ((en-us ("hemisphere") "half of a circular ball shape; the earth’s globe can be divided into northern and southern hemispheres, or eastern and western hemispheres"))
 
+    ((en-us ("hieroglyph" "hieroglyphic") "stylized picture of an object representing a word, syllable, or sound, as found in ancient Egyptian, the Maya calendar, and other writing systems."))
+
     ((en-us ("kiln") "an oven used to heat ceramic pottery to high temperatures, which makes them last a long time"))
 
     ((en-us ("line chart") "a display that uses lines to show how values of a quantitative variable change over time"))
