@@ -8,6 +8,7 @@
   print-link-to-student-workbook
   print-link-to-teacher-resources
   print-link-to-forum
+  print-other-resources
   )
 
 ;please add definitions for
@@ -62,3 +63,10 @@ información de inicio de sesión necesaria para acceder.\n"))
 plan de estudios? ¿Quieres hacer una pregunta o plantear una idea de lección
 para otros maestros de Bootstrap? Estos foros son el lugar para hacerlo.\n")
   )
+
+(define (print-other-resources o)
+  (print-link-to-glossary o)
+  (print-link-to-standards o)
+  (print-link-to-student-workbook o)
+  (print-link-to-teacher-resources o)
+  (print-link-to-forum o))
