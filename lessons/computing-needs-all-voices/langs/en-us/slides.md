@@ -28,7 +28,7 @@ What did you Wonder?
 {layout="Investigate"}
 # Who writes the Code?
 
-We're going to take a gallery walk of some @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}.
+We're going to take a gallery walk of some @handout{computing-pioneers.html, Pioneers in Computing and Mathematics}.
 
 @image{images/pioneers-header3.png, "Images of a diverse group of people who are pioneers in computing and mathematics"}{width="950"}
 
