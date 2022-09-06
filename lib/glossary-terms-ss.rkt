@@ -19,7 +19,7 @@ from the ones in the main glossary file.
 
     ((en-us ("biology") "the study of living things (plants and animals)"))
 
-    ((en-us ("categorical variable") "one that classifies and does not have numeric value"))
+    ((en-us ("categorical variable") "one that classifies and for which arithmetic does not make sense"))
 
     ((en-us ("ceramics") "things made from clay hardened by heat")) 
 
