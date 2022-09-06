@@ -1748,6 +1748,21 @@
                             (display-lesson-description (read-group i directive)
                                                         (path-replace-extension out-file "-desc.txt.kp")
                                                         o)]
+                           [(string=? directive "pathway-lessons")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @pathway-lessons valid only in pathway narrative"))
+                            (link-to-lessons-in-pathway o)]
+                           [(string=? directive "workbooks")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @workbooks valid only in pathway narrative"))
+                            (print-ordering-workbooks *target-pathway* o)]
+                           [(string=? directive "other-resources")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @workbooks valid only in pathway narrative"))
+                            (print-other-resources o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
@@ -2052,11 +2067,6 @@
 
               (set! *practices-merited* (reverse *practices-merited*))
 
-              ;;(printf "call link-to-lessons-in-pathway?\n")
-              ;(when *narrative*
-              ;  ;(printf "yes\n")
-              ;  (link-to-lessons-in-pathway o))
-
               (let ([dict-rep *dictionaries-represented*])
                 (set! *dictionaries-represented*
                   (filter (lambda (x) (member x dict-rep))
@@ -2077,11 +2087,7 @@
                 (print-ordering-workbooks *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
-                (print-link-to-glossary o)
-                (print-link-to-standards o)
-                (print-link-to-student-workbook o)
-                (print-link-to-teacher-resources o)
-                (print-link-to-forum o))
+                (print-other-resources o))
 
               (unless *other-dir*
                 (fprintf o "\n\n"))

@@ -194,17 +194,18 @@ animals-table
 CODAP-specific content
 //////////////////////////
 @ifproglang{codap}{
-Now that we are doing more sophisticated analyses, we might find ourselves in a situation where we want to use a series of Transformers!
+A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *no more than 9 kilograms.* She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.
 
-Suppose a journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms. She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.
+To help the journalist, you decide that you want to define and _chain together_ two Transformers - _Build Attribute_ and _Filter_.
 
-In CODAP, we can use the result of one Transformer as the dataset for another Transformer! To help the journalist, you decide that you want to use *two* Transformers: _Build Attribute_ and _Filter_. But in which order?
+- We'll define a **_Build Attribute_** Transformer using the formula `pounds/2.205`. (CODAP also requires that we provide a name for our new attribute, such as `kilograms`.)
+- We'll define a **_Filter_** Transformer using the formula `kilograms<9`.
 
 [.lesson-instruction]
-- The _Build Attribute_ Transformer we must define uses this formula: `pounds/2.205`. It also requires that we provide a name for our new attribute, such as `kilograms`.
-- The _Filter_ Transformer that we must define uses this formula: `kilograms<9`.
 - Which of the two above Transformers should we apply _first_, `weight-in-kg` or `filter-if-light`?
+** _We must apply `weight-in-kg` first. (`Kilograms` doesn't exist on our table otherwise!)_
 - What do you predict will happen if we apply them in the wrong order? Why?
+** _Students should predict that they will encounter some sort of error message._
 
 A perk of applying Transformers, rather than manipulating the dataset, is that any updates made to the original dataset will flow through the chain. As you chain together Transformers, it is important to remember the following:
 }
