@@ -6,7 +6,8 @@
 
 (provide
   print-lessons-intro
-  print-course-logo
+  print-course-title-and-logo
+  print-pathway-logo
   print-course-banner
   print-other-resources-intro
   print-teach-remotely
@@ -58,17 +59,27 @@
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
 
-(define (print-course-logo course make-image o)
-  ; (printf "doing print-course-logo ~s\n" course)
+(define (print-course-title-and-logo course make-image o)
+  ; (printf "doing print-course-title-and-logo ~s\n" course)
   (let* ([c (assoc course *course-names*)]
          [course-name (if c (second c) "Bootstrap")])
     (display
       (string-append
         "= "
-        course-name "\n\n"
-        "[.logo]\n"
-        (make-image "images/Logo.png" (if c (second c) "Bootstrap") '())
-        "\n\n") o)))
+        course-name "\n") o)
+    (print-pathway-logo course make-image o #:course-name course-name)))
+
+(define (print-pathway-logo course make-image o #:course-name [course-name #f])
+  ; (printf "doing print-pathway-logo\n")
+  (unless course-name
+    (let ([c (assoc course *course-names*)])
+      (set! course-name (if c (second c) "Bootstrap"))))
+  (display
+    (string-append
+      "\n"
+      "[.logo]\n"
+      (make-image "images/Logo.png" course-name '())
+      "\n\n") o))
 
 (define (print-course-banner course o)
   (let ([c (assoc course *course-banners*)])

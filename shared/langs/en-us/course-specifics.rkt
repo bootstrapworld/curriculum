@@ -13,9 +13,11 @@
     ("data-science-codap" "Bootstrap:Data Science (in CODAP)")
     ("history-social-studies" "Bootstrap:Social Studies")
     ("hour-of-code" "Hour of Code")
+    ("maya" "Exploring the Maya Civilization")
     ("ok" "Bootstrap:Integrated Oklahoma")
     ("physics" "Bootstrap:Physics")
     ("reactive" "Bootstrap:Reactive")
+    ("shipwrecks" "Bootstrap:Shipwrecks")
     ))
 
 (define *course-workbook-links*
