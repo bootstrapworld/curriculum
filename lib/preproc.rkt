@@ -1762,6 +1762,7 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
+                            (print-other-resources-intro o)
                             (print-other-resources o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
