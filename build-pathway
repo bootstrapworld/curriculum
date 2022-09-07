@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-03 # last modified
+LASTMOD=2022-09-07 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -256,13 +256,15 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
-  $CP -pr $PROGDIR/docroot/* distribution/$NATLANG
+  # $CP -pr $PROGDIR/docroot/* distribution/$NATLANG
   mkdir -p distribution/$NATLANG/lib/Badges
   mkdir -p distribution/$NATLANG/lib/images
   $CP -pr $PROGDIR/Badges/* distribution/$NATLANG/lib/Badges
   $CP -pr $PROGDIR/images/* distribution/$NATLANG/lib/images
   # TODO: may need to revisit for unforced NATLANG != en-us
 fi
+
+$CP -pr $PROGDIR/docroot/* distribution/$NATLANG
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
