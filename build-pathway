@@ -264,7 +264,10 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   # TODO: may need to revisit for unforced NATLANG != en-us
 fi
 
-$CP -pr $PROGDIR/docroot/* distribution/$NATLANG
+$CP -pr $TOPDIR/shared/langs/en-us/docroot/* distribution/$NATLANG
+if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG/docroot; then
+  $CP -pr $TOPDIR/shared/langs/$NATLANG/docroot/* distribution/$NATLANG
+fi
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
 # end of line, and (3) truncate the argument to terminal width
