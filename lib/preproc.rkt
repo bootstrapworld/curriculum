@@ -1748,6 +1748,11 @@
                             (display-lesson-description (read-group i directive)
                                                         (path-replace-extension out-file "-desc.txt.kp")
                                                         o)]
+                           [(string=? directive "pathway-logo")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @pathway-logo valid only in pathway narrative"))
+                            (print-pathway-logo *target-pathway* make-image o)]
                            [(string=? directive "pathway-lessons")
                             (unless *narrative*
                               (error 'ERROR
@@ -2079,7 +2084,7 @@
                 (create-practices-subfile))
 
               (when (and *narrative* (not title-reached?))
-                (print-course-logo *target-pathway* make-image o)
+                (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
