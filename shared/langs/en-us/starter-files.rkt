@@ -63,7 +63,7 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; DATA SCIENCE
   ("blank-ds" "Blank Dataset Starter File for Bootstrap:Data Science"
-    ("pyret" "https://code.pyret.org/editor#share=1L_TTcE1dv0XtgVg8HW89LfDtRgpcJnkA")
+    ("pyret" "https://code.pyret.org/editor#share=1hsALf5oOrWqrolayPIgIlYXrqk3i-vD5")
     )
 
   ("exploration-paper" "Data Set Exploration"
