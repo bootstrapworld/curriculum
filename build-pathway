@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-07 # last modified
+LASTMOD=2022-09-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -858,10 +858,8 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    if test $AUTOGEN_NARRATIVE; then
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    fi
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
