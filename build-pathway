@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-03 # last modified
+LASTMOD=2022-09-09 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -256,12 +256,17 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
-  $CP -pr $PROGDIR/docroot/* distribution/$NATLANG
+  # $CP -pr $PROGDIR/docroot/* distribution/$NATLANG
   mkdir -p distribution/$NATLANG/lib/Badges
   mkdir -p distribution/$NATLANG/lib/images
   $CP -pr $PROGDIR/Badges/* distribution/$NATLANG/lib/Badges
   $CP -pr $PROGDIR/images/* distribution/$NATLANG/lib/images
   # TODO: may need to revisit for unforced NATLANG != en-us
+fi
+
+$CP -pr $TOPDIR/shared/langs/en-us/docroot/* distribution/$NATLANG
+if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG/docroot; then
+  $CP -pr $TOPDIR/shared/langs/$NATLANG/docroot/* distribution/$NATLANG
 fi
 
 # escaped characters are: (1) go to beginning of line, (2) erase to
@@ -853,10 +858,10 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    if test $AUTOGEN_NARRATIVE; then
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    fi
+    local alignf=.cached/.pathway-alignments.asc
+    test -f "$alignf" || touch "$alignf"
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT

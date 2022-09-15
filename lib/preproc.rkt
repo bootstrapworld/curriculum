@@ -1764,6 +1764,8 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-ordering-workbooks *target-pathway* o)]
                            [(string=? directive "other-resources")
+                            (create-alignments-subfile
+                              (string-append *containing-directory* "/.cached/.pathway-alignments"))
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
