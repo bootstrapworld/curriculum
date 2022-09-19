@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-09 # last modified
+LASTMOD=2022-09-19 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -881,6 +881,11 @@ function doadocs() {
   fi
 
   test -d .cached || mkdir -p .cached
+
+  local ftitletxt=.cached/.$fbase.titletxt
+  if test ! -f "$ftitletxt"; then
+    grep '^= ' $f|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > $ftitletxt
+  fi
 
   overwrite building  /$LESSONSUBDIR
 
