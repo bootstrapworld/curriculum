@@ -268,6 +268,19 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin")
    )
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; SOCIAL STUDIES
+
+  ("skulls" "Skulls Dataset"
+   ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Kw0m4K2jMQAvAE0gb2f93_7HB52KgnxjluuCmVpamOE/copy")
+   )
+  ("averages" "Calculating Averages Dataset"
+   ("spreadsheets" "https://docs.google.com/spreadsheets/d/1GuAX3WGidiX-2QUxTZaXJxrSKHp8MJ1dPW0ap57OxHM/copy")
+   )
+  ("pie-chart" "Making Pie Charts Dataset"
+   ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Finl40MSuZ32MKnpK0hnKuFPYYwNGsHmU9LDQFqvOVk/copy")
+   )
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; REACTIVE
   ("package-delivery" "Package Delivery Starter File"
@@ -331,3 +344,4 @@
 (define *do-not-autoinclude-in-material-links*
   '("editor" "program-list")
     )
+
