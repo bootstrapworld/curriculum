@@ -318,7 +318,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
   )          
 
-  ("ninja-cat-collisions", "Ninja Cat Starter File"
+  ("ninja-cat-collisions" "Ninja Cat Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1TGw11fcBMAS0j2CCRWZm5_6GuBWVMBPq")
   )
 
