@@ -1,0 +1,222 @@
+<html moznomarginboxes="">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Bootstrap :: Hour of Code</title>
+      <link   type="text/css"        rel="stylesheet" href="css/hoc.css" title="default"/>
+      <script type="text/javascript" src="js/hoc.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+      <link href="./repartee/static/css/main.chunk.css" rel="stylesheet">
+      <script src="./repartee/static/js/bundle.js"></script>
+      <script src="./repartee/static/js/main.chunk.js"></script>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": { scale: 80, linebreaks: { automatic: true } },
+         });
+        </script>
+      </head>
+  <body>
+    <div id="banner">
+      <img src="images/icon.png" height="50"><span>Bootstrap :: Winter Hour of Code</span>
+    </div>
+    <div id="progressbar"></div>
+    <a id="prev" href="#" onclick="javascript:previousCard()">&#171;</a>
+    <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
+    <div id="lesson">
+      <ul id="cards">
+        <li imageConfig="images/klein.gif">
+          <h1>1. Welcome to the Hour of Code!</h1>
+
+          We're going to use Pyret to write programs that make images, and we've
+          embedded a Pyret editor on the right-hand side of this page. 
+          <p/>
+          The Editor works like a chat program. You write lines of code, and the Editor runs each line and responds with the result. 
+          <ol>
+            <li>The <b>Update Responses</b> button will re-run every line</li>
+            <li>You can also <b>click any line</b> to edit or change it</li>
+          </ol>
+          <p/>
+          <div class="activity">Do a thing!</div>
+        </li>
+        <li editorCode='
+        text("Hello!", 200, "purple")
+        '>
+          <h1>2. Making Images from Code</h1>
+          <li editorCode='
+        star(50, "solid", "blue")
+        '>
+          In the editor you can see a simple program. Make a prediction of what this code will do, then click Run
+
+          HOW DO I WRITE A COMMENT? I want this next set of text to appear on click. 
+          
+          Where did the result appear?
+
+          Try changing the number and clicking Run. What happens?
+
+          NEXT CLICK
+
+          Try changing the color and clicking Run.
+
+          NEXT CLICK
+
+          There are lots of other functions that will produce an image... some of them take the same arguments as star (a Number and two Strings).
+
+          `circle`: Can you make a solid, green circle with a radius of 26?
+
+          `triangle`: Can you make an outlined, red triangle of size 45?
+
+          `square`: Can you make two different purple squares with side-lengths of 104?
+
+          <h1>3. More Images</h1>
+
+          <li editorCode='
+        rectangle(50, 100, "solid", "orange")
+        '>
+          There are also image-producing function that need more arguments.
+
+          Why does rectangle need an extra number?
+
+          What do you think will happen if you switch the order of the numbers and click Run?
+
+          NEXT CLICK
+
+          Some other shapes require the same arguments as `rectangle` (Two Numbers and two Strings). 
+
+          `ellipse`: Experiment with this function and see if you can figure out what an ellipse is.
+
+          `right-triangle`: Experiment with this function and figure out why it needs two numbers, while `triangle` only needed one.
+        
+        <h1>4. Defining & Composing Functions</h1>
+
+          <li editorCode='
+        head = circle(42, "outline", "darkgrey")
+        torso = circle(50, "outline", "darkgrey")
+        base = circle(70, "outline", "darkgrey")
+        '>
+
+        What do you think will happen if you type `head` and click Run?
+
+        Test it out.
+
+        NEXT CLICK 
+
+        How will that be different from typing `torso` or `base` and clicking Run?
+
+        NEXT CLICK
+
+        Defining functions simplifies the process of _combining_ them.
+
+        What do you think this next line of code will do?
+        
+        <li editorCode='
+        body = above(torso, base)
+        '>
+
+        Test out your theory by typing `body` and clicking Run.
+
+        NEXT CLICK
+
+        YOUR TURN: Can you place the head above the body?
+
+        <h1>5.Composing a Top Hat</h1>
+
+          <li editorCode='
+        brim = rectangle(70, 15, "solid", "black")
+        '>
+
+        YOUR TURN: Define `top` to be a solid black rectangle that is 50 x 30.
+
+        NEXT CLICK
+
+        Define `top-hat` to put the `brim` below the `top`.
+
+        NEXT CLICK
+
+        Can you make the same image using `above`?
+
+      <h1>6.Choosing Image Placement</h1>
+        Just as we can place an image `above` or `below` another image, we can also `overlay` an image on top of another image.
+          <li editorCode='
+        eye-white = circle(30, "outline", "black")
+        pupil = circle(10, "solid", "black")
+        overlay(pupil, eye-white)
+        '>
+
+        Click Run to see what happens. 
+
+        NEXT CLICK
+
+        Where on the eye-white does the pupil get placed?
+
+        What do you think we'd see if we typed `overlay(eye-white, pupil)` instead? Test it out!
+
+        NEXT CLICK
+
+        Sometimes we want to be able to decide where the top image will land on the bottom image.
+
+        This requires a function called `put-image`, which takes in two Numbers. 
+
+        The first Number is the x-coordinate.
+        The second Number is the y-coordinate.
+        The bottom left corner of the bottom image is (0,0).
+
+        What image do you think this `put-image` expression will generate? Let's test it out!
+
+        <li editorCode='
+        put-image(pupil, 10, 30, eye-white)
+        '>
+
+        NEXT CLICK
+
+        YOUR TURN
+
+        Use put-image to place the pupil on the center of the eye-white.
+
+        NEXT CLICK
+
+        Use put-image to place the pupil on the bottom of the eye-white.
+
+        NEXT CLICK
+
+        Use put-image to place the pupil on the eye-white wherever you think it makes the best looking googley eye!
+
+        <h1>7. Parlay to Pyret</h1>
+        
+        IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS
+
+        So far we have been working in the chatitor version of Pyret. More complex programs get written in a different view.
+
+        Here you see our classic Pyret editor. 
+        On the left side we have the definitions area. On the right side we have the interactions area.
+
+        When we click "Run", the definitions on the left get loaded. Unlike in Parlay, definitions aren't automatically built. If we want to see the snowman, for example, we can type snowman into the editor and hit "Return" on our keyboard.
+          <li editorCode='
+        head = circle(42, "outline", "darkgrey")
+        torso = circle(50, "outline", "darkgrey")
+        base = circle(70, "outline", "darkgrey")
+        body = above(torso, base)
+        snowman = above(head, body)
+        eye-white = circle(30, "outline", "black")
+        pupil = circle(10, "solid", "black")
+        eye = overlay(pupil, eye-white)
+        googley-eye = put-image(pupil, 10, 30, eye-white)
+        '>
+
+      <h1>8. Winter Wonderland Puzzle</h1>
+
+        On the next screen you will find an embedded program. When you run it, you will see an image with lots of pieces strewn about and it will be your task to edit the code to place the images such that they compose a winter wonderland scene.
+
+        The pieces have been defined behind the scenes so you won't be able to change them... but you don't have to use them all and, once you have created an image that will make sense to other viewers, you can define any additional values you like!
+        
+
+        https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c
+        
+      </ul>
+    </div>
+    
+    <div id="righthand"></div>
+    <div id="footer">
+      <a href="https://www.BootstrapWorld.org" style="color: white">Bootstrap</a> is brought to you by the <a href="https://www.BootstrapWorld.org/community">Bootstrap Team</a>. Special thanks to <a href="http://www.ProgramByDesign.org">Program by Design</a>.
+    </div>
+  </body>
+</html>
