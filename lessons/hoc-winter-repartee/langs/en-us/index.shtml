@@ -24,40 +24,46 @@
     <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
     <div id="lesson">
       <ul id="cards">
-        <li imageConfig="images/klein.gif">
+        <!----   Page 1 ---->
+        <li editorCode='
+        text("Hello!", 200, "purple")
+        '>
           <h1>1. Welcome to the Hour of Code!</h1>
 
           We're going to use Pyret to write programs that make images, and we've
           embedded a Pyret editor on the right-hand side of this page. 
           <p/>
           The Editor works like a chat program. You write lines of code, and the Editor runs each line and responds with the result. 
+          <!----   <ol> = "Ordered List" (numbered list items) ---->
           <ol>
             <li>The <b>Update Responses</b> button will re-run every line</li>
             <li>You can also <b>click any line</b> to edit or change it</li>
           </ol>
           <p/>
+          <!----   <div class="activity"> = "purple shaded box" ---->
           <div class="activity">Do a thing!</div>
         </li>
-        <li editorCode='
-        text("Hello!", 200, "purple")
-        '>
+
+        <!----   Page 2 ---->
+        <li editorCode=''>
           <h1>2. Making Images from Code</h1>
-          <li editorCode='
+          What do you think the following code will do?
+
+          <tt>star(50, "solid", "blue")</tt>
+
+          Make a prediction, then <input type="button" value="click here" onclick='addToEditor(`star(50, "solid", "blue")`)' /> to add it to the editor and see the result!
+
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
+
+        <!----   Page 3 ---->
+        <li editorCode='
         star(50, "solid", "blue")
         '>
-          In the editor you can see a simple program. Make a prediction of what this code will do, then click Run
+          <h1>3. Changing the Arguments</h1>
+          You can also click on the code on the right to change it! Try changing the 50 to something else, and then hit "Enter" to save the change. What happens?
 
-          HOW DO I WRITE A COMMENT? I want this next set of text to appear on click. 
-          
-          Where did the result appear?
-
-          Try changing the number and clicking Run. What happens?
-
-          NEXT CLICK
-
-          Try changing the color and clicking Run.
-
-          NEXT CLICK
+          Try changing the color.
 
           There are lots of other functions that will produce an image... some of them take the same arguments as star (a Number and two Strings).
 
@@ -67,11 +73,14 @@
 
           `square`: Can you make two different purple squares with side-lengths of 104?
 
-          <h1>3. More Images</h1>
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
 
-          <li editorCode='
+        <!----   Page 4 ---->
+        <li editorCode='
         rectangle(50, 100, "solid", "orange")
         '>
+          <h1>3. More Images</h1>
           There are also image-producing function that need more arguments.
 
           Why does rectangle need an extra number?
@@ -85,44 +94,59 @@
           `ellipse`: Experiment with this function and see if you can figure out what an ellipse is.
 
           `right-triangle`: Experiment with this function and figure out why it needs two numbers, while `triangle` only needed one.
-        
-        <h1>4. Defining & Composing Functions</h1>
 
-          <li editorCode='
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
+
+        <!----   Page 4 ---->
+        <li editorCode='
         head = circle(42, "outline", "darkgrey")
         torso = circle(50, "outline", "darkgrey")
         base = circle(70, "outline", "darkgrey")
         '>
+          <h1>4. Defining & Composing Functions</h1>
+          What do you think will happen if you type `head` and click Run?
 
-        What do you think will happen if you type `head` and click Run?
+          Test it out.
 
-        Test it out.
+          NEXT CLICK 
 
-        NEXT CLICK 
+          How will that be different from typing `torso` or `base` and clicking Run?
 
-        How will that be different from typing `torso` or `base` and clicking Run?
+          NEXT CLICK
 
-        NEXT CLICK
+          Defining functions simplifies the process of _combining_ them.
 
-        Defining functions simplifies the process of _combining_ them.
+          What do you think this next line of code will do?
+        </li>
 
-        What do you think this next line of code will do?
+        <!----   TEMPLATE PAGE ---->
+        <li editorCode='
+          ..some pyret code
+        '>
+          <h1>Some Header</h1>
+
+          This is where you put instructions for kids
+
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
         
+        <!----   Page 5 ---->
         <li editorCode='
         body = above(torso, base)
         '>
 
-        Test out your theory by typing `body` and clicking Run.
+          Test out your theory by typing `body` and clicking Run.
 
-        NEXT CLICK
+          NEXT CLICK
 
-        YOUR TURN: Can you place the head above the body?
+          YOUR TURN: Can you place the head above the body?
+        </li>
 
-        <h1>5.Composing a Top Hat</h1>
-
-          <li editorCode='
+        <li editorCode='
         brim = rectangle(70, 15, "solid", "black")
         '>
+          <h1>5.Composing a Top Hat</h1>
 
         YOUR TURN: Define `top` to be a solid black rectangle that is 50 x 30.
 
