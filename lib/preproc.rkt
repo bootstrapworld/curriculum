@@ -1690,7 +1690,8 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (second args) "")])
+                                   [link-text (string-join (map string-trim (rest args)) ", ")])
+                              (set! link-text (string-trim link-text "\""))
                               (display (make-lesson-link page link-text) o))]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
