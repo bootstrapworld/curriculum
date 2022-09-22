@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-19 # last modified
+LASTMOD=2022-09-22 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2128,6 +2128,9 @@ function copycommonlessons() {
 
 function buildpathwayindependent() {
   # echo doing buildpathwayindependent
+
+  test $NOARGSGIVEN || return
+
   start=`date +%s`
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'
