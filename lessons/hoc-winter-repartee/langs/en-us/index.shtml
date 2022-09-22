@@ -24,6 +24,18 @@
     <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
     <div id="lesson">
       <ul id="cards">
+
+        <!----   TEMPLATE PAGE ---->
+        <li editorCode='
+          ..some pyret code
+        '>
+          <h1>Some Header</h1>
+
+          This is where you put instructions for kids
+
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
+
         <!----   Page 1 ---->
         <li editorCode='
         text("Hello!", 200, "purple")
@@ -64,157 +76,157 @@
           You can also click on the code on the right to change it! Try changing the 50 to something else, and then hit "Enter" to save the change. What happens?
 
           Try changing the color.
-
-          There are lots of other functions that will produce an image... some of them take the same arguments as star (a Number and two Strings).
-
-          `circle`: Can you make a solid, green circle with a radius of 26?
-
-          `triangle`: Can you make an outlined, red triangle of size 45?
-
-          `square`: Can you make two different purple squares with side-lengths of 104?
-
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 4 ---->
         <li editorCode='
-        rectangle(50, 100, "solid", "orange")
+        star(50, "solid", "blue")
         '>
-          <h1>3. More Images</h1>
-          There are also image-producing function that need more arguments.
+        <h1>4. Making Images</h1>
+          There are lots of other functions that will produce an image... some of them take the same arguments as star (a Number and two Strings).
 
-          Why does rectangle need an extra number?
+          <tt>circle<tt>: Can you make a solid, green circle with a radius of 26?
 
-          What do you think will happen if you switch the order of the numbers and click Run?
+          <tt>triangle<tt>: Can you make an outlined, red triangle of size 45?
 
-          NEXT CLICK
-
-          Some other shapes require the same arguments as `rectangle` (Two Numbers and two Strings). 
-
-          `ellipse`: Experiment with this function and see if you can figure out what an ellipse is.
-
-          `right-triangle`: Experiment with this function and figure out why it needs two numbers, while `triangle` only needed one.
+          <tt>square<tt>: Can you make two different purple squares with side-lengths of 104?
 
           You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
-        <!----   Page 4 ---->
+        <!----   Page 5 ---->
+        <li editorCode=''>
+          <h1>5. Making Rectangles</h1>
+          There are also image-producing functions that need more arguments.
+
+          Take 1 minute to see if you can figure out how to make a <tt>rectangle<tt> before advancing to the next slide.
+
+          </li>
+
+          <!----   Page 6 ---->
+        <li editorCode='rectangle(50, 100, "solid", "orange")'>
+          <h1>6. What Makes Rectangles Different?</h1>
+
+          Why does <tt>rectangle<tt> need an extra number?
+
+          What do you think will happen if you switch the order of the numbers and hit "Enter".
+          </li>
+
+         <!----   Page 7 ---->
+        <li editorCode='rectangle(50, 100, "solid", "orange")'>
+          <h1>7. More Images</h1>
+
+          Here are a couple of other shape-functions that require the same arguments as <tt>rectangle<tt> (Two Numbers and two Strings). 
+
+          <tt>ellipse<tt>: Experiment with this function and see if you can figure out what an ellipse is.
+
+          <tt>right-triangle<tt>: Experiment with this function and figure out why it needs two numbers, while <tt>triangle<tt> only needed one.
+
+          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
+        </li>
+
+        <!----   Page 8 ---->
         <li editorCode='
         head = circle(42, "outline", "darkgrey")
         torso = circle(50, "outline", "darkgrey")
         base = circle(70, "outline", "darkgrey")
         '>
-          <h1>4. Defining & Composing Functions</h1>
-          What do you think will happen if you type `head` and click Run?
+          <h1>8. Defining & Composing Functions</h1>
+          What do you think will happen if you type <tt>head<tt> and hit "Enter"?  Test it out.
 
-          Test it out.
+          How will that be different from typing <tt>torso<tt> or <tt>base<tt>?
 
-          NEXT CLICK 
-
-          How will that be different from typing `torso` or `base` and clicking Run?
-
-          NEXT CLICK
-
-          Defining functions simplifies the process of _combining_ them.
+          Defining functions simplifies the process of combining them.
 
           What do you think this next line of code will do?
+
+          <tt>body = above(torso, base)<tt>
+
+          Make a prediction, then <input type="button" value="click here" onclick='addToEditor(`body = above(torso, base)`)' /> to add it to the editor and see the result!
+
+          YOUR TURN: Can you write the code to place the head above the body?
         </li>
 
-        <!----   TEMPLATE PAGE ---->
-        <li editorCode='
-          ..some pyret code
-        '>
-          <h1>Some Header</h1>
-
-          This is where you put instructions for kids
-
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
-        </li>
-        
-        <!----   Page 5 ---->
-        <li editorCode='
-        body = above(torso, base)
-        '>
-
-          Test out your theory by typing `body` and clicking Run.
-
-          NEXT CLICK
-
-          YOUR TURN: Can you place the head above the body?
-        </li>
-
+        <!----   Page 9 ---->
         <li editorCode='
         brim = rectangle(70, 15, "solid", "black")
         '>
-          <h1>5.Composing a Top Hat</h1>
+          <h1>9. Composing a Top Hat</h1>
 
-        YOUR TURN: Define `top` to be a solid black rectangle that is 50 x 30.
+          <ol>
+            <li>Define  <tt>top <tt> to be a solid black rectangle that is 50 x 30.</li>
+            <li>Define <tt>top-hat<tt> to put the <tt>brim<tt> below the <tt>top<tt>.</li>
+            <li>Can you make the same image using <tt>above<tt>.</li>
+          </ol>
+        </li>
 
-        NEXT CLICK
-
-        Define `top-hat` to put the `brim` below the `top`.
-
-        NEXT CLICK
-
-        Can you make the same image using `above`?
-
-      <h1>6.Choosing Image Placement</h1>
-        Just as we can place an image `above` or `below` another image, we can also `overlay` an image on top of another image.
-          <li editorCode='
+        <!----   Page 10 ---->
+        <li editorCode='
         eye-white = circle(30, "outline", "black")
         pupil = circle(10, "solid", "black")
-        overlay(pupil, eye-white)
         '>
 
-        Click Run to see what happens. 
+      <h1>10. Overlaying Images</h1>
+        Just as we can place an image <tt>above<tt> or <tt>below<tt> another image, we can also <tt>overlay<tt> an image on top of another image.
+          
+        What do you think this next line of code will do?
+        <tt>overlay(pupil, eye-white)<tt>
 
-        NEXT CLICK
+        Make a prediction, then <input type="button" value="click here" onclick='addToEditor(`overlay(pupil, eye-white)`)' /> to add it to the editor and see the result!
 
         Where on the eye-white does the pupil get placed?
 
-        What do you think we'd see if we typed `overlay(eye-white, pupil)` instead? Test it out!
+        What do you think we'd see if we typed <tt>overlay(eye-white, pupil)<tt> instead? <input type="button" value="Click here" onclick='addToEditor(`overlay(eye-white, pupil)`)' /> to add it to the editor and see the result!
+        
+        </li>
 
-        NEXT CLICK
-
-        Sometimes we want to be able to decide where the top image will land on the bottom image.
-
-        This requires a function called `put-image`, which takes in two Numbers. 
-
-        The first Number is the x-coordinate.
-        The second Number is the y-coordinate.
-        The bottom left corner of the bottom image is (0,0).
-
-        What image do you think this `put-image` expression will generate? Let's test it out!
-
+       <!----   Page 11 ---->
         <li editorCode='
+        eye-white = circle(30, "outline", "black")
+        pupil = circle(10, "solid", "black")
+        '>
+
+      <h1>11. Placing Images Using Coordinates</h1>
+
+        Sometimes we want the top image to land somewhere other than on the center of the bottom image.
+
+        This requires a function called <tt>put-image<tt>, which takes in two Numbers. 
+
+          <ol>
+            <li>The first Number is the x-coordinate.</li>
+            <li>The second Number is the y-coordinate.</li>
+            <li>The bottom left corner of the bottom image is (0,0).</li>
+          </ol>
+
+        What image do you think the expression <tt>put-image(pupil, 10, 30, eye-white)<tt> will generate? 
+
+          <input type="button" value="Click here" onclick='addToEditor(`put-image(pupil, 10, 30, eye-white)`)' /> to add it to the editor and test it out!
+
+        </li>
+
+        <!----   Page 12 ---->
+        <li editorCode='
+        eye-white = circle(30, "outline", "black")
+        pupil = circle(10, "solid", "black")
         put-image(pupil, 10, 30, eye-white)
         '>
 
-        NEXT CLICK
+        <h1>12. Making Googley Eyes</h1>
 
-        YOUR TURN
+        <ol>
+            <li>Use put-image to place the pupil on the center of the eye-white.</li>
+            <li>Use put-image to place the pupil on the bottom of the eye-white.</li>
+            <li>Use put-image to place the pupil on the eye-white wherever you think it makes the best looking googley eye!.</li>
+          </ol>
 
-        Use put-image to place the pupil on the center of the eye-white.
-
-        NEXT CLICK
-
-        Use put-image to place the pupil on the bottom of the eye-white.
-
-        NEXT CLICK
-
-        Use put-image to place the pupil on the eye-white wherever you think it makes the best looking googley eye!
-
-        <h1>7. Parlay to Pyret</h1>
+        </li>
+      
+      <!----   Page 13 ---->
         
-        IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS
+<!---- IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS---->
 
-        So far we have been working in the chatitor version of Pyret. More complex programs get written in a different view.
-
-        Here you see our classic Pyret editor. 
-        On the left side we have the definitions area. On the right side we have the interactions area.
-
-        When we click "Run", the definitions on the left get loaded. Unlike in Parlay, definitions aren't automatically built. If we want to see the snowman, for example, we can type snowman into the editor and hit "Return" on our keyboard.
-          <li editorCode='
+        
+         <li editorCode='
         head = circle(42, "outline", "darkgrey")
         torso = circle(50, "outline", "darkgrey")
         base = circle(70, "outline", "darkgrey")
@@ -225,16 +237,40 @@
         eye = overlay(pupil, eye-white)
         googley-eye = put-image(pupil, 10, 30, eye-white)
         '>
-
-      <h1>8. Winter Wonderland Puzzle</h1>
-
-        On the next screen you will find an embedded program. When you run it, you will see an image with lots of pieces strewn about and it will be your task to edit the code to place the images such that they compose a winter wonderland scene.
-
-        The pieces have been defined behind the scenes so you won't be able to change them... but you don't have to use them all and, once you have created an image that will make sense to other viewers, you can define any additional values you like!
+        <h1>13. Introducing The Pyret Editor</h1>
+        <ol>
         
+        So far we have been working in the chatitor version of Pyret. More complex programs get written in a different view.
 
-        https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c
+        Here you see our classic Pyret editor. Unlike in Repartee, the code is not automatically ... <!----Ideas on how to word this? ----> 
+
+        On the left side we have the Definitions Area. On the right side we have the Interactions Area.
+
+        Click "Run" to load (or reload) the definitions on the left. If we want to see any of the values that are defined, we type them into the interactions area and hit "Return" on our keyboard.the snowman, for example, we can type snowman into the editor and hit "Return" on our keyboard.
+      
+      </li>
+
+<!----   Page 14 ---->
+      <li>
+      <h1>14. Your Task</h1>
+
+        Now that you know how to define image-producing functions and compose more complex images with them using coordinates, you're ready to solve a puzzle! 
+
+        On the next slide you will see an embedded program. When you click "Run", you will see a jumbled collection of objects that need to be placed to compose a winter wonderland scene.
+
+        The pieces have been defined behind the scenes so you won't be able to change them... but you don't have to use them all and, once you have successfully created an image that will make sense to other viewers, you can improve upon it by defining any additional values you like!
+       </li> 
+
         
+        
+        <!----   Page 15 ---->
+      <li>
+
+    <!---- IN THIS WINDOW WE WANT TO SEE THIS EMBEDDED PYRET STARTER FILE FILLING THE WHOLE SCREEN: https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c---->
+        
+      <h1>15. Winter Wonderland Puzzle</h1>
+      </li>
+
       </ul>
     </div>
     
