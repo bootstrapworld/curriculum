@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-22 # last modified
+LASTMOD=2022-09-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1355,16 +1355,13 @@ function buildlessonplan() {
         $PROGDIR/glossary-warnings.rkt
       fi
     fi
-    if test -f index.shtml; then
-      # checklinks index.shtml
 
       if test ! $NOPDF; then
-        if test index.adoc -nt index.pdf; then
+        if test index.shtml -nt index.pdf -o index.adoc -nt index.pdf; then
           #echo PUPPETEER_INPUT is x $PUPPETEER_INPUT x
           echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
         fi
       fi
-    fi
     if test ! $DEBUG; then
       rm -f *.asc
     fi
@@ -1909,6 +1906,7 @@ function copylessondir() {
     #rm -f .cached/.checksum.md5txt
     touch .cached/.proglang-pyret
     touch .cached/.redo
+    rm -f index.shtml index.pdf
     test -d pages || mkdir pages
     for subdir in *; do
       if test "$subdir" = pages -o "$subdir" = solution-pages; then
@@ -1941,6 +1939,7 @@ function copylessondir() {
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
+        rm -f index.shtml index.pdf
         if test "$firstproglang" = $pl; then
           touch .cached/.primarylesson
         fi
