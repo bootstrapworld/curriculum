@@ -38,12 +38,21 @@ function loadFromConfig(i = cardIndex) {
   // clear any content
   while(righthand.firstChild) { righthand.removeChild(righthand.firstChild); }
 
+  document.getElementById('reset').style.display = 'none';
+
   const editorConfig= cards[i].getAttribute('editorCode'),
         imageConfig = cards[i].getAttribute('imageConfig');
 
   if(editorConfig) {
     righthand.appendChild(editor);
     parley.resetChunks(editorConfig.trim().split("\n") || [""]);
+    document.getElementById('reset').onclick = () => {
+      righthand.classList.add('resetting');
+      loadFromConfig();
+      setTimeout( () => righthand.classList.remove('resetting'),
+        2000)
+    }
+    document.getElementById('reset').style.display = 'block';
   } else if(imageConfig) {
     var img = document.createElement("img");
     img.src = imageConfig;

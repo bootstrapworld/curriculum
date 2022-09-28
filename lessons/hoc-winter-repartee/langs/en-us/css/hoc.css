@@ -20,6 +20,7 @@ body {
 }
 #banner{top: 0px; font-size: 30px; font-weight: 600;}
 #footer{bottom: 0px; font-size: 10px;}
+#footer a {color: aaaaff;}
 #banner * { vertical-align: middle;}
 
 #lesson {
@@ -69,7 +70,7 @@ ul#cards h1{ margin-top: 0px; line-height: 1.1;}
   border-bottom: dashed 1px black;
   margin: 20px 0px;
 }
-a#prev, a#next{
+a#prev, a#next, a#reset {
   position: absolute;
   width: 30px;
   height: 30px;
@@ -80,6 +81,7 @@ a#prev, a#next{
   top: 45%;
   text-align: center;
   z-index: 9;
+  line-height: 2.2;
   box-shadow: 2px 2px 5px #888888;
   display: none;
 }
@@ -87,7 +89,13 @@ a#prev:hover, a#next:hover{background: black; color: white;}
 a#prev:active, a#next:active{margin-left: 1px; margin-top: 1px; box-shadow: none;}
 
 a#prev{left: 5px;}
-a#next{left: 415px;}
+a#next,a#reset{left: 415px;}
+a#reset{top: 50%;}
+#righthand.resetting { animation: fadeIn 2s; }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 /************************** VIDEO LIGHTBOX **********************************/
 #fade {
   display: none;
