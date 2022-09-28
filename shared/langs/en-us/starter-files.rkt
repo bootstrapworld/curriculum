@@ -66,7 +66,7 @@
     ("pyret" "https://code.pyret.org/editor#share=1hsALf5oOrWqrolayPIgIlYXrqk3i-vD5")
     )
 
-  ("exploration-paper" "Data Set Exploration"
+  ("exploration-paper" "Dataset Exploration"
     ("pyret" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy")
     ("codap" "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"))
 
