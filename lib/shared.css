@@ -536,30 +536,34 @@ span.clear {
 */
 /* set page dimensions */
 body.workbookpage:not(.landscape) {
-  width: 7.5in; min-height: 10in;  max-height: 11in;
+  width: 7.5in; max-height: 10in; 
 }
 /* define 'landscape' page type */
 body.workbookpage.landscape {
-  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
+  width: 10in; max-height:  7.5in; page: landscape; }
 
 /* we use the same font-size for print and screen, and zoom the page
  * in a @screen{...} CSS rule
  */
-body.workbookpage, body.workbookpage #content,
-body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody {
+body.workbookpage {
   font-size: 9pt;
   padding:   0;
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
+  overflow-y: hidden;
 }
 /* Make content of page as tall as possible */
-body.workbookpage #content, body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody,
-body.workbookpage #preamble_disabled .sectionbody table.stretch { 
-  flex-grow: 1;
+body.workbookpage #content { 
+  flex-grow: 1; overflow: hidden;
 }
+/* giant, hidden thing to make stretched tables as tall as possible */
+body.workbookpage #preamble_disabled table.stretch td .content::after { 
+      content: "\00a0"; 
+      height: 1000vh;
+      display: block;
+      visibility: hidden;
+    }
 
 
 /* Make code match text size/layout */
