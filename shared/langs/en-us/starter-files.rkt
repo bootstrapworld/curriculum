@@ -271,15 +271,22 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SOCIAL STUDIES
 
-  ("skulls" "Skulls Dataset"
-   ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Kw0m4K2jMQAvAE0gb2f93_7HB52KgnxjluuCmVpamOE/copy")
-   )
   ("averages" "Calculating Averages Dataset"
    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1GuAX3WGidiX-2QUxTZaXJxrSKHp8MJ1dPW0ap57OxHM/copy")
+   )
+  ("bones" "Learning from Bones: Corn Dataset"
+    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1ghGJ7pBb_YOOmdtf2l-pfUrZG0en3DVmLltH1mJod6w/edit?usp=sharing")
+   )
+  ("deforestation" "Modern Deforestation Dataset"
+    ("spreadsheets" "https://docs.google.com/spreadsheets/d/12b7nDl5DjxOiiP-VFwk3vAUKUKQvvvAcCWFQs3GixW4/edit?usp=sharing")
    )
   ("pie-chart" "Making Pie Charts Dataset"
    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Finl40MSuZ32MKnpK0hnKuFPYYwNGsHmU9LDQFqvOVk/copy")
    )
+  ("skulls" "Skulls Dataset"
+   ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Kw0m4K2jMQAvAE0gb2f93_7HB52KgnxjluuCmVpamOE/copy")
+   )
+
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; REACTIVE

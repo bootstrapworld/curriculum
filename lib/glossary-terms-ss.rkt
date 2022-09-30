@@ -39,6 +39,8 @@ from the ones in the main glossary file.
 
     ((en-us ("data") "pieces of categorical or quantitative information about a group of individuals or things"))
 
+    ((en-us ("deforestation") "cutting down trees from land so it can be used for another purpose"))
+    
     ((en-us ("Ding") "a type of ceramics made near Hebei, China from about 1000 to 1300 CE; because they were usually baked upside-down, the rim of Ding bowls were usually unglazed and banded with metal"))
 
     ((en-us ("DNA") "the material in living things that has information about how they will develop, passed on from one generation to the next"))
@@ -78,6 +80,8 @@ from the ones in the main glossary file.
     ((en-us ("quantitative variable") "one that has numeric value for which arithmetic makes sense"))
 
     ((en-us ("radiocarbon dating") "a way of estimating the age of materials that came from living things, based on how much regular and radioactive carbon they contain"))
+
+    ((en-us ("range") "the difference between the highest and lowest values in a series"))
 
     ((en-us ("resin") "a sticky substance that comes from trees and may be burned for fragrance when it hardens"))
 
