@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-26 # last modified
+LASTMOD=2022-09-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -750,17 +750,16 @@ function addproglang() {
   local f=$1
   # echo doing addproglang $f
   local proglangneeded=
-  if grep -q 'class="headless-design-recipe.FORpyret"' $f; then
+  if grep -q 'headless-design-recipe FORpyret"' $f; then
     proglangneeded=pyret
-  elif grep -q 'class="headless-design-recipe.FORwescheme"' $f; then
+  elif grep -q 'headless-design-recipe FORwescheme"' $f; then
     proglangneeded=wescheme
-  elif grep -q 'class="headless-design-recipe.FORcodap"' $f; then
+  elif grep -q 'headless-design-recipe FORcodap"' $f; then
     proglangneeded=codap
   fi
   if test "$proglangneeded"; then
     $SED -i \
       -e 's/^<body class="/\0'$proglangneeded' /' \
-      -e 's/<p><span class="headless-design-recipe.FOR[a-z]*"><\/span><\/p>//' \
       $f
   fi
 }
@@ -881,6 +880,11 @@ function doadocs() {
   fi
 
   test -d .cached || mkdir -p .cached
+
+  local ftitletxt=.cached/.$fbase.titletxt
+  if test ! -f "$ftitletxt"; then
+    grep '^= ' $f|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > $ftitletxt
+  fi
 
   overwrite building  /$LESSONSUBDIR
 
@@ -2129,6 +2133,9 @@ function copycommonlessons() {
 
 function buildpathwayindependent() {
   # echo doing buildpathwayindependent
+
+  test $NOARGSGIVEN || return
+
   start=`date +%s`
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'

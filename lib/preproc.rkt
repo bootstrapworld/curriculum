@@ -955,9 +955,13 @@
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output
+
               (format "link:~apass:[~a][~a~a]"
-                      *dist-root-dir* f link-text
-                      (if *lesson-plan* ", window=\"_blank\"" ""))])
+                      "{fromlangroot}"
+                      f link-text
+                      (if *lesson-plan* ", window=\"_blank\"" ""))
+
+              ])
         ;(printf "outputting link-output= ~s\n\n" link-output)
         link-output))))
 
@@ -1143,9 +1147,10 @@
     (display title o)
     (newline o)
     (newline o)
+    (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
     (when *lesson-plan*
       ;(printf "containing-dir= ~s\n" *containing-directory*)
-      (fprintf o "ifndef::frompathwayroot[:frompathwayroot: ]\n\n")
+      (fprintf o "ifndef::frompathwayroot[:frompathwayroot: ]\n\n") ;FIXME: No longer needed?
       (fprintf o "include::{frompathwayroot}~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
       ;(fprintf o "include::./.index-sidebar.asc[]\n\n")
       )
@@ -1499,7 +1504,7 @@
                            #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
-  ;(printf "doing preproc-adoc-file ~s\n" in-file)
+  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
 
   (set! *containing-directory* containing-directory)
   (set! *dist-root-dir* dist-root-dir)
@@ -1685,7 +1690,8 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (second args) "")])
+                                   [link-text (string-join (map string-trim (rest args)) ", ")])
+                              (set! link-text (string-trim link-text "\""))
                               (display (make-lesson-link page link-text) o))]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
