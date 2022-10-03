@@ -558,26 +558,25 @@ body.workbookpage #preamble_disabled .sectionbody {
 /* Make content of page as tall as possible */
 body.workbookpage #content, body.workbookpage #preamble_disabled,
 body.workbookpage #preamble_disabled .sectionbody,
-body.workbookpage #preamble_disabled .sectionbody table.stretch { 
+body.workbookpage #preamble_disabled .sectionbody table.FillVerticalSpace { 
   flex-grow: 1;
 }
 
-/* make stretch tables use CSS grid layout */
-body.workbookpage table.stretch { 
+/* make .FillVerticalSpace tables use CSS grid layout */
+body.workbookpage table.FillVerticalSpace { 
   display: grid;
   height: 100%;
   grid-template-columns: auto;
   grid-template-rows: max-content;
 }
-body.workbookpage table.stretch colgroup { display: none; }
-body.workbookpage table.stretch thead,
-body.workbookpage table.stretch tbody,
-body.workbookpage table.stretch tr {
+body.workbookpage table.FillVerticalSpace > *,
+body.workbookpage table.FillVerticalSpace > * > tr {
   display: contents;
 }
+body.workbookpage table.FillVerticalSpace > colgroup { display: none; }
 
-body.workbookpage table.stretch td { display: grid; }
-body.workbookpage table.stretch td.valign-middle { align-items: center; }
+body.workbookpage table.FillVerticalSpace > * > tr > * { display: grid; }
+body.workbookpage table.FillVerticalSpace > * > tr > *.valign-middle { align-items: center; }
 
 /* Make code match text size/layout */
 body.workbookpage p .editbox, body.workbookpage pre .editbox { 
