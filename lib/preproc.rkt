@@ -2108,6 +2108,7 @@
 
               (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
+                (fprintf o "[.acknowledgmentsect]\n")
                 (fprintf o "== BOGUSACKNOWLEDGMENTSECTIONHEADER\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
