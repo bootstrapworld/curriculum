@@ -576,7 +576,7 @@ body.workbookpage table.FillVerticalSpace > * > tr {
 }
 body.workbookpage table.FillVerticalSpace > colgroup { display: none; }
 
-body.workbookpage table.FillVerticalSpace > * > tr > * { display: grid; }
+body.workbookpage table.FillVerticalSpace > * > tr > td { display: grid; position: relative; }
 body.workbookpage table.FillVerticalSpace > * > tr > *.valign-middle { align-items: center; }
 
 /* Make code match text size/layout */
@@ -1100,6 +1100,8 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
+  /* Even when invisible, flex-grow will take up space */
+  body.workbookpage #content > .sect1:last-child { flex-grow: 0; }
 
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
