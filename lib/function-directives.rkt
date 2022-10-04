@@ -299,10 +299,11 @@
           page-header
           (if funname (format ": ~a" funname) "")))
 
-(define (write-directions directions)
+(define (write-directions directions headless?)
   (format (string-append
-            "\n[.recipe_word_problem]\n"
+            "\n[.recipe_word_problem~a]\n"
             "**Directions**: ~a\n\n")
+          (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) "")
           directions))
 
 (define (write-title title-text)
@@ -823,10 +824,10 @@
   (string-append
 
     (if headless?
-        (write-proglang)
+        ""
         (write-section-header page-header funname))
 
-    (write-directions directions)
+    (write-directions directions headless?)
 
     (write-purpose funname domain-list range purpose)
 
@@ -1040,10 +1041,10 @@
   (string-append
 
     (if headless?
-        (write-proglang)
+        ""
         (write-section-header page-header #f))
 
-    (write-directions directions)
+    (write-directions directions headless?)
 
     (write-transformer transformer-name transformer-type)
 
