@@ -53,16 +53,6 @@ body:not(.LessonPlan, .narrativepage) p {
 }
 /* Empty p tags should take up no space */
 body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
-/* Stretch elements should expand to the end of the page */
-body:not(.LessonPlan) p > .stretch {
-  float:        right; 
-  clear:        right;
-  position:     absolute;
-  text-align:   left;
-  bottom:       0;
-  width:        100%;
-  margin-left:  10px;
-}
 
 h1 {
   font-size:      2rem;
@@ -209,11 +199,11 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.fitb, .fitbruby, .blankline {
+.fitb, .fitbruby, .blankline, .fitb.stretch::after {
   display:            inline-block;
   min-width:          5em;
   text-align:         center;
-  line-height:        1.25rem;
+  line-height:        1rem;
   border-bottom:      solid 1px black;
 }
 
@@ -221,6 +211,25 @@ tr th.tableblock {
    position:          relative;
    margin-bottom:     1rem;
    padding:           0;
+}
+
+/* fill-in-the-blanks that stretch to the end of a line */
+.fitb.stretch { 
+  position:           relative; 
+  margin-left:        10px; 
+  vertical-align:     bottom; 
+  display:            inline-block;
+  width:              auto;
+  padding-top:         1rem;
+}
+
+.fitb.stretch::after { 
+  content:"\00a0";
+  border-bottom:      1px solid black;
+  width:              1000px;
+  position:           absolute;
+  left:               0;
+  bottom :            -1px;
 }
 
 .blankline { margin-bottom: 13px; width: 100%;}
