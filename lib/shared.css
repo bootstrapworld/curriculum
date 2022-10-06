@@ -48,8 +48,7 @@ body:not(.LessonPlan, .narrativepage) p {
   width:        100%;
   overflow:     hidden; 
   position:     relative;
-  min-height:   1.75rem;
-  margin:       2px 0px;
+  margin:       0px;
 }
 /* Empty p tags should take up no space */
 body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
@@ -185,9 +184,7 @@ tr th.tableblock {
 .tooltip:hover .tooltiptext { opacity: 1; }
 
 .alignedStandards { display: none; }
-
 .coverageElement { display: none; }
-
 .standard-menu-container {
   padding:          10px;
   display:          flex;
@@ -199,7 +196,11 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.fitb, .fitbruby, .blankline, .fitb.stretch::after {
+/* fill-in-the-blanks are where kids should write answers 
+ * kids need more room, so we add some height to these elements
+*/
+.fitb, .fitbruby, .fitb.stretch::after {
+  padding-top:        1rem; /* THIS IS HOW MUCH EXTRA HEIGHT TO ADD!*/
   display:            inline-block;
   min-width:          5em;
   text-align:         center;
@@ -216,29 +217,24 @@ tr th.tableblock {
 /* fill-in-the-blanks that stretch to the end of a line */
 .fitb.stretch { 
   position:           relative; 
-  margin-left:        10px; 
+  margin-left:        5px; 
   vertical-align:     bottom; 
-  display:            inline-block;
   width:              auto;
-  padding-top:         1rem;
 }
-
+/* add an underline that goes past the end of the page */
 .fitb.stretch::after { 
   content:"\00a0";
-  border-bottom:      1px solid black;
   width:              1000px;
   position:           absolute;
   left:               0;
   bottom :            -1px;
 }
 
-.blankline { margin-bottom: 13px; width: 100%;}
-
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
-.fitbruby::before, .blankline::before {
+.fitbruby::before {
   content: '\00200b';
 }
 
