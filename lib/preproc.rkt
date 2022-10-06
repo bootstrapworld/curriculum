@@ -3102,6 +3102,9 @@
                                  (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
                                  (format ".value.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
+        [(fitb? e) (let ([e (second e)])
+                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}"
+                       #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and (eq? a 'EXAMPLE) wescheme)
                             (let ([num-examples (/ (length (rest e)) 2)])
