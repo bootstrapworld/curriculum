@@ -47,7 +47,6 @@ body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
 body:not(.LessonPlan, .narrativepage) p {
   width:        100%;
   overflow:     hidden; 
-  position:     relative;
   margin:       0px;
 }
 /* Empty p tags should take up no space */
@@ -144,13 +143,9 @@ tr th.tableblock {
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
-.glossary   { margin-bottom: 20px; }
-.glossary * { display: inline; }
-.glossary .title {
-  display:          block;
-  font-weight:      bold;
-  color:            inherit;
- }
+.glossary           { margin-bottom: 20px; }
+.glossary *         { display: inline; }
+.glossary .title    { display: block; font-weight: bold; color: inherit;}
 .glossary dt::after { content: '::'; margin: 0px 5px; }
 .glossary dd        { margin: 0px; }
 .glossary dd::after { content: '\A'; white-space: pre; }
@@ -631,11 +626,7 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
 /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-body:not(.LessonPlan) .recipe p {
-  width:      100%;
-  display:    flex;
-  flex-wrap:  wrap;
-}
+body:not(.LessonPlan) .recipe p { display: flex; flex-wrap: wrap; }
 
 /* All student answers have a bottom-border, and a "ruby" printed in black */
 .recipe .studentAnswer { border-bottom: solid 1px black; }
@@ -739,6 +730,7 @@ div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
   flex-grow:  1;
 }
 
+.recipe_word_problem { min-height: 0.65in; }
 .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
   text-align: center;
 }
@@ -755,7 +747,7 @@ div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
 
 /* Special styling for purpose statements (includes lang-specific comment) */
 .recipe_purpose, .recipe_contract .recipe_name {
-  padding-left:         1.5ex;
+  padding-left:         2ex;
   background-repeat-x:  no-repeat;
   background-size:      0.4rem calc(1rem + 8pt);
   background-position-y:4pt;
