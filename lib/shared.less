@@ -147,8 +147,6 @@ body:not(.LessonPlan, .narrativepage) p {
   overflow:     hidden; 
   margin:       0px;
 }
-/* Empty p tags should take up no space */
-body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0; }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
 .glossary { 
@@ -575,6 +573,8 @@ body.workbookpage {
 
 /* TODO(Emmanuel): do we even need all of these? Clean up */
 body:not(.LessonPlan) {
+  p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
+
   #header { margin-bottom: 5px !important; }
   #header> h1:first-child,
   .sect1 > h1:first-child,
