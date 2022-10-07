@@ -217,7 +217,7 @@ tr th.tableblock {
   vertical-align:     bottom; 
   width:              auto;
   /* add an underline that goes past the end of the page */
-  ::after { 
+  &::after { 
     content:"\00a0";
     width:              1000px;
     position:           absolute;
@@ -246,22 +246,23 @@ tr th.tableblock {
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
-#lesson-list {
-  *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
-  dt        { margin-top: 15px; display: inline-block; }
-  dd:after  { display: block; content: ''; }
-  dd:before { display: inline; content: '::'; font-weight: 900; }
-}
+.narrativepage {
+  #lesson-list {
+    *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
+    dt        { margin-top: 15px; display: inline-block; }
+    dd:after  { display: block; content: ''; }
+    dd:before { display: inline; content: '::'; font-weight: 900; }
+  }
 
-.course-banner {
-  font-style: italic;
-  background: #B6D990aa;
-  border: #75328A 1px dashed;
-  padding: 5px;
-  margin-bottom: 2rem;
-  a { color: black; text-decoration: underline; }
+  .course-banner {
+    font-style: italic;
+    background: #B6D990aa;
+    border: #75328A 1px dashed;
+    padding: 5px;
+    margin-bottom: 2rem;
+    a { color: black; text-decoration: underline; }
+  }
 }
-
 /************************************************************************************
 * LESSON SIDEBAR
 */
@@ -345,12 +346,12 @@ tr th.tableblock {
 .LessonPlan h2 { font-size: 1.75em; font-weight: normal; }
 .LessonPlan h3 { font-size: 1.5em; font-weight: 300;  }
 
-/* The summary table at the top of each lesson */
-.left-header tr td:nth-child(1) { background-color: #b7d893; }
-.left-header tr td:nth-child(1) p { font-weight: bold; }
-
 /* Styling for the Preamble section of the Lesson Summary */
-.preamble {
+.LessonPlan .preamble {
+  /* The summary table at the top of each lesson */
+  .left-header tr td:nth-child(1) { background-color: #b7d893; }
+  .left-header tr td:nth-child(1) p { font-weight: bold; }
+
   tr td > * {
     max-height: 150pt;
     overflow: hidden;
@@ -383,9 +384,11 @@ tr th.tableblock {
     background-attachment: local, local, scroll, scroll;
   }
   tr:hover td > * {max-height: 1000px;}
+
+  /* Custom materials link styles */ 
+  .Optional, .OptProject, .handout {font-style: italic;}
+  .Optional::before, .OptProject::before, .handout::before { color: gray;}
 }
-.Optional, .OptProject, .handout {font-style: italic;}
-.Optional::before, .OptProject::before, .handout::before { color: gray;}
 
 /* Language Table */
 .lang-features-table {
@@ -523,20 +526,17 @@ span.clear {
 /* we use the same font-size for print and screen, and zoom the page
  * in a @screen{...} CSS rule
  */
-body.workbookpage, body.workbookpage #content,
-body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody {
+body.workbookpage {
+  /* set page dimensions */
+  &:not(.landscape) { width: 7.5in; height: 9.75in; }
+  &.landscape { width: 9.75in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
+
+  /* set font size and flex information */
   font-size: 9pt;
   padding:   0;
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
-}
-
-body.workbookpage {
-  /* set page dimensions */
-  &:not(.landscape) { width: 7.5in; height: 9.75in; }
-  &.landscape { width: 9.75in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
   
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
@@ -783,8 +783,6 @@ div.circleevalsexp {
     background:         white;
     text-align:         center;
     border-radius:      20px;
-    -moz-border-radius: 20px;
-    -webkit-border-radius:20px;
   }
   .value {
     display:            inline-block;
@@ -935,7 +933,6 @@ table.contracts-table {
   /* add some left-padding to improve readability on screens */
   body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
-
   /********************************************************************
    *  Collapsing Headers 
    */
@@ -954,22 +951,17 @@ table.contracts-table {
     border: none;
     text-align: left;
     outline: none;
+    /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+    &::after {
+      content: '\002B';
+      color: white;
+      font-weight: bold;
+      float: left;
+      margin-right: 5px;
+    }
+    &.active::after { content: "\2212"; }
+    &.active, &:hover { background-color: #b7d893; }
   }
-  .LessonPlan h2.active, .LessonPlan h2:hover,
-  .TeacherResources .sect1 h2.active, .TeacherResources .sect1 h2:hover { 
-    background-color: #b7d893; 
-  }
-  .LessonPlan h2.active,       .TeacherResources .sect1 h2.active { color: white; }
-
-  /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
-  .LessonPlan h2:after, .TeacherResources .sect1 h2:after {
-    content: '\002B';
-    color: white;
-    font-weight: bold;
-    float: left;
-    margin-right: 5px;
-  }
-  .LessonPlan h2.active:after, .TeacherResources .sect1 h2.active:after { content: "\2212"; }
 
   /* set collapsed size and transition rules */
   .LessonPlan .sect1.lesson-section-1 .sectionbody,    .TeacherResources .sect1 .sectionbody {
