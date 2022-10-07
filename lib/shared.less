@@ -194,55 +194,12 @@ body:not(.LessonPlan, .narrativepage) p {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-/* fill-in-the-blanks are where kids should write answers 
- * kids need more room, so we add some height to these elements
-*/
-.fitb, .fitbruby, .fitb.stretch::after {
-  padding-top:        1rem; /* THIS IS HOW MUCH EXTRA HEIGHT TO ADD!*/
-  display:            inline-block;
-  min-width:          5em;
-  text-align:         center;
-  line-height:        1rem;
-  border-bottom:      solid 1px black;
-}
-
-.fitbruby {
-   position:          relative;
-   margin-bottom:     1rem;
-   padding:           0;
-}
-
-/* fill-in-the-blanks that stretch to the end of a line */
-.fitb.stretch { 
-  position:           relative; 
-  margin-left:        5px; 
-  vertical-align:     bottom; 
-  width:              auto;
-  /* add an underline that goes past the end of the page */
-  &::after { 
-    content:"\00a0";
-    width:              1000px;
-    position:           absolute;
-    left:               0;
-    bottom :            -1px;
-  }
-}
 
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .quad::before, .fitb::before, .fitbruby::before {
   content: '\00200b';
-}
-
-.ruby {
-  position:           absolute;
-  bottom:             -1.1rem;
-  text-align:         center;
-  font-size:          0.65rem;
-  font-weight:        normal;
-  width:              100%;
-  transform:          translate(-50%, 0);
 }
 
 /************************************************************************************
@@ -569,6 +526,50 @@ body.workbookpage {
   /* Auto-numbering - Add a right-paren, unless it's inside a table. */
   .autonum::after { content: ')'; }
   table .autonum::after { content: none; }
+
+  /* Fill in the blanks */
+  .fitb, .fitbruby, .fitb.stretch::after {
+    padding-top:        1rem; /* <--- how much extra height for kids to write!! */
+    position:           relative;
+    display:            inline-block;
+    min-width:          5em;
+    text-align:         center;
+    line-height:        1rem;
+    border-bottom:      solid 1px black;
+  }
+  .fitbruby {
+     margin-bottom:     1rem;
+     padding:           0;
+     .ruby {
+       position:           absolute;
+       bottom:             -1.1rem;
+       font-size:          0.65rem;
+       font-weight:        normal;
+       width:              100%;
+       transform:          translate(-50%, 0);
+     }
+  }
+  .fitb.stretch { 
+    margin-left:        5px; 
+    vertical-align:     bottom; 
+    width:              auto;
+    /* add an underline that goes past the end of the page */
+    ::after { 
+      content:"\00a0";
+      width:              1000px;
+      position:           absolute;
+      left:               0;
+      bottom :            -1px;
+    }
+  }
+
+  /* Back-of-the-book contracts table */
+  table.contracts-table {
+    border-collapse: collapse;
+    p  { margin-top: 0; }
+    td { padding: .1em .625em !important; height: 23pt; }
+    tr:nth-child(odd) { border-top: solid 2px black; }
+  }
 }
 
 /* TODO(Emmanuel): do we even need all of these? Clean up */
@@ -661,6 +662,7 @@ table.recipe_title    {
   .questions  { width: 39%; }
   .answers    { width: 44%; }
   .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
+  strong { margin: 0; padding: 0; }
 }
 
 .wescheme {
@@ -677,6 +679,7 @@ table.recipe_title    {
     font-size: inherit;
   }
   .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
+  strong { margin: 0; padding: 0; }
 }
 
 /* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
@@ -766,9 +769,6 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 /************************************************************************************
 * FORMATTING OF CIRCLES, AND TEXT CODE
 */
-
-/* override asciidoc default when bold-facing text inside code-blocks */
-.pyret strong, .wescheme strong { margin: 0; padding: 0; }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: Hack, "Courier New", monospace;
@@ -900,16 +900,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   background-color: #f7f7f8;
   color: #666;
   word-break: break-word;
-}
-
-/************************************************************************************
- * CONTRACT TABLES
- */
-table.contracts-table {
-  border-collapse: collapse;
-  p  { margin-top: 0; }
-  td { padding: .1em .625em !important; height: 23pt; }
-  tr:nth-child(odd) { border-top: solid 2px black; }
 }
 
 /************************************************************************************
