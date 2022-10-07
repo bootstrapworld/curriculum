@@ -4,7 +4,7 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
-* OVERRIDE ASCIIDOCTOR DEFAULTS AND SET SYSTEMWIDE STYLES
+* SYSTEMWIDE STYLES
 */
 body {
   font-size:      12pt;
@@ -27,20 +27,119 @@ body {
     font-size: 100pt;
     font-weight: 900;
   }
-}
+  /* Set Defaults (many asciidoc overrides) */
+  h1 {
+    font-size:      2rem;
+    font-weight:    bold;
+    font-family:    'Lato', Arial, Helvetica, sans-serif;
+  }
+  h2 {
+    margin:          0; /* 1ex bottom margin */
+    font-family:    'Lato', Arial, Helvetica, sans-serif;
+  }
+  a       { color:  #2156a5 !important; }
+  p       { margin: 10px 0px; font-size: inherit; }
+  code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
+  mark    { background: none; color: inherit; }
+  em, strong { margin: 0px 2px; }
+  .listingblock pre { margin: 3px 0px; padding: 0; }
+  .indentedpara { margin-left: 3em; }
+  table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
+  ul { line-height: inherit; }
+  .ulist ul { margin-bottom: 0px; }
+  .ulist p  { margin: 5px 0px; }
 
-/* These items should ALWAYS max-out pagewidth, and have no padding */
-#header, #content, #footer {
-  width: 100% !important; max-width: 100% !important; padding: 0;
-}
+  table, td.tableblock>.content { margin-bottom: 0px; }
+  tr th.tableblock code, td.tableblock code { background: none; }
+  td.tableblock pre { background: none !important; }
+  tr th.tableblock {
+    background:       #cccccc !important;
+    padding:          .25em .5em;
+    font-size:        1rem;
+  }
 
-a       { color:  #2156a5 !important; }
-p       { margin: 10px 0px; font-size: inherit; }
-code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
-mark    { background: none; color: inherit; }
-em, strong { margin: 0px 2px; }
-.listingblock pre { margin: 3px 0px; padding: 0; }
-table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
+  #header>h1:only-child { border-bottom: none; }
+
+  /* The footer at the bottom of every page */
+  .acknowledgment {
+    margin-top:       35px !important;
+    border-top:       dashed 2px black !important;
+    padding-top:      20px !important;
+    padding-bottom:   5px !important;
+    font-size:        0.8rem !important;
+    font-style:       italic !important;
+    line-height:      inherit !important;
+    * { line-height: inherit !important; }
+    img {
+      width:            94px !important;
+      height:           37px !important;
+      float:            right !important;
+    }
+  }
+
+  #footer {
+    background: rgba(0,0,0,0.5);
+    margin-left: -3em;
+    padding-left: 10px !important;
+    height:     24px;
+    position:   fixed;
+    bottom:     0;
+    padding:    0;
+    z-index:    999;
+  }
+
+  .canBeLongerThanAPage #footer { display: none; }
+
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       #75328AAA;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
+
+  /* outOfDate warning */
+  #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
+
+  .left  { text-align: left  !important; }
+  .right { text-align: right !important; }
+  .right img { margin-left: 15px; }
+  .center, .centered-image {
+    display:          block;
+    margin-left:      auto;
+    margin-right:     auto;
+    text-align:       center !important;
+    padding:          1ex 0ex;
+  }
+
+  /* These items should always max-out pagewidth, and have no padding */
+  #header, #content, #footer {
+    width: 100% !important; max-width: 100% !important; padding: 0;
+  }
+
+  /* Sections */
+  .lesson-section-1, .lesson-section-1+.lesson-section-1 {
+    clear:              both;
+    border-top:         solid 2px black;
+    display:            block;
+  }
+  .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
+  .lesson-section-2 h3 { font-size: 1.5rem; font-style: italic; margin: 0px; }
+  .sectionbreak {
+    display:          block;
+    width:            auto;
+    border-bottom:    solid 3px black;
+    margin:           5px 0px;
+  }
+}
 
 body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
 body:not(.LessonPlan, .narrativepage) p {
@@ -50,95 +149,6 @@ body:not(.LessonPlan, .narrativepage) p {
 }
 /* Empty p tags should take up no space */
 body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0; }
-
-h1 {
-  font-size:      2rem;
-  font-weight:    bold;
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-}
-h2 {
-  margin:          0; /* 1ex bottom margin */
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-}
-
-#header>h1:only-child { border-bottom: none; }
-
-/* unordered list spacing */
-ul { line-height: inherit; }
-.ulist ul { margin-bottom: 0px; }
-.ulist p  { margin: 5px 0px; }
-
-/* table format defaults */
-table, td.tableblock>.content { margin-bottom: 0px; }
-tr th.tableblock code, td.tableblock code { background: none; }
-td.tableblock pre { background: none !important; }
-tr th.tableblock {
-  background:       #cccccc !important;
-  padding:          .25em .5em;
-  font-size:        1rem;
-}
-
-.indentedpara { margin-left: 3em; }
-
-/* The footer at the bottom of every page */
-.acknowledgment {
-  margin-top:       35px !important;
-  border-top:       dashed 2px black !important;
-  padding-top:      20px !important;
-  padding-bottom:   5px !important;
-  font-size:        0.8rem !important;
-  font-style:       italic !important;
-  line-height:      inherit !important;
-  * { line-height: inherit !important; }
-  img {
-    width:            94px !important;
-    height:           37px !important;
-    float:            right !important;
-  }
-}
-
-#footer {
-  background: rgba(0,0,0,0.5);
-  margin-left: -3em;
-  padding-left: 10px !important;
-  height:     24px;
-  position:   fixed;
-  bottom:     0;
-  padding:    0;
-  z-index:    999;
-}
-
-.canBeLongerThanAPage #footer { display: none; }
-
-/* Hide anything that we only want seen on Google drive */
-.gdrive-only { display: none; visibility: hidden; }
-
-/* Warn the user the Save-to-Drive is broken on Safari */
-#safariWarning { display: none; }
-#savetodrive-div:hover + #safariWarning {
-  display:          block;
-  background:       #75328AAA;
-  color:            white;
-  padding:          5px;
-  margin-top:       75px;
-  border-radius:    5px;
-  font-size:        10pt;
-  line-height:      1rem;
-}
-
-/* outOfDate warning */
-#outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
-
-.left  { text-align: left!important; }
-.right { text-align: right!important; }
-.right img { margin-left: 15px; }
-.center, .centered-image {
-  display:          block;
-  margin-left:      auto;
-  margin-right:     auto;
-  text-align:       center !important;
-  padding:          1ex 0ex;
-}
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
 .glossary { 
@@ -152,13 +162,7 @@ tr th.tableblock {
 
 .vocab { font-weight: bold; font-style: italic; color: #75328A; }
 
-.sectionbreak {
-  display:          block;
-  width:            auto;
-  border-bottom:    solid 3px black;
-  margin:           5px 0px;
-}
-
+/* TODO(Emmanuel): dead code? */
 .tooltip { 
   position: relative; 
   .tooltiptext {
@@ -247,6 +251,8 @@ tr th.tableblock {
 * NARRATIVE PAGE STYLES
 */
 .narrativepage {
+  .logo     { float: right; }
+  .logo img { width: 400px; }
   #lesson-list {
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; }
@@ -263,244 +269,228 @@ tr th.tableblock {
     a { color: black; text-decoration: underline; }
   }
 }
-/************************************************************************************
-* LESSON SIDEBAR
-*/
-
-@keyframes slideInFromLeft {
-    0% { transform: translateX(-100%); }
-  100% { transform: translateX(0);     }
-}
-
-.sidebar {
-  animation:  0.5s ease-out 0s 1 slideInFromLeft;
-  display:    block;
-  position:   fixed;
-  top:        0px;
-  left:       0px;
-  width:      225px;
-  height:     100%;
-  background: #e8f3dd;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 4px black;
-  z-index:    9999;
-  overflow:   scroll;
-  user-select: none;
-  &.closed {
-    left:  -225px;
-    width: 265px;
-    height: 30px;
-  }
-  .paragraph { width: 205px; }
-  #toggle {
-    top:    0;
-    right:  0;
-    position: absolute;
-    width:  40px;
-    height: 30px;
-    text-align:  center;
-    border: 0;
-    margin: 0 !important;
-    background: #75328A77;
-    &:after { content: '≫'; font-size: 20px;}
-  }
-
-  &:not(.closed) #toggle:after { content: '«'; }
-  &:hover * { opacity: 1; }
-  > * { margin: 0px 10px !important; }
-  > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
-  label { display: inline; font-size: 0.8rem; }
-  select { border:  none; }
-  strong { color: black; margin: 0; }
-  li { list-style-type: none; margin-bottom: 5px;}
-  table { background: none !important; border: none; width: auto; }
-  table td, table tr { padding: 0; background: none; border: 0; }
-  table .title { display: none; }
-  dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
-  dl { line-height: 0.4rem; }
-  dd::after { content: '\A'; white-space: pre; }
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
-  table dt { margin-top: 10px; }
-  .sidebarlessons { 
-    margin-top:  10px; 
-    input[type="checkbox"] { margin-right: 5px; }
-    ul {
-      background: white;
-      margin:     0px;
-      box-shadow: inset -1px 0px 2px gray;
-      max-height: 250px;
-      overflow:   scroll;
-      padding:    10px;
-      font-size:  0.8rem !important;
-    }
-    li:nth-child(odd) { background: #b7d89333; }
-  }
-  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
-}
 
 /************************************************************************************
 * LESSON PAGE STYLES
 */
-
-.LessonPlan h2 { font-size: 1.75em; font-weight: normal; }
-.LessonPlan h3 { font-size: 1.5em; font-weight: 300;  }
-
-/* Styling for the Preamble section of the Lesson Summary */
-.LessonPlan .preamble {
+.LessonPlan {
   /* The summary table at the top of each lesson */
-  .left-header tr td:nth-child(1) { background-color: #b7d893; }
-  .left-header tr td:nth-child(1) p { font-weight: bold; }
+  .preamble {
+    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
-  tr td > * {
-    max-height: 150pt;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: all 0.5s ease-out;
-  }
-  tr td:last-child > * {
-    background:
-      /* Shadow covers */
-      linear-gradient(white 30%, rgba(255,255,255,0)),
-      linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-      /* Shadows */
-      radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-      radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-
+    tr td > * {
+      max-height: 150pt;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.5s ease-out;
+    }
+    tr td:last-child > * {
       background:
-      /* Shadow covers */
-      linear-gradient(white 30%, rgba(255,255,255,0)),
-      linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
 
-      /* Shadows */
-      radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-      radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+        /* Shadows */
+        radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 
-    background-repeat: no-repeat;
-    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+        background:
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
 
-    /* Opera doesn't support this in the shorthand */
-    background-attachment: local, local, scroll, scroll;
+        /* Shadows */
+        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+
+      background-repeat: no-repeat;
+      background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+      /* Opera doesn't support this in the shorthand */
+      background-attachment: local, local, scroll, scroll;
+    }
+    tr:hover td > * {max-height: 1000px;}
+
+    /* Custom materials link styles */ 
+    .Optional, .OptProject, .handout {font-style: italic;}
+    .Optional::before, .OptProject::before, .handout::before { color: gray;}
   }
-  tr:hover td > * {max-height: 1000px;}
 
-  /* Custom materials link styles */ 
-  .Optional, .OptProject, .handout {font-style: italic;}
-  .Optional::before, .OptProject::before, .handout::before { color: gray;}
-}
-
-/* Language Table */
-.lang-features-table {
-  display: table;
-  z-index: 999;
-  position: fixed;
-  top:  50%;
-  left: 50%;
-  width: 500px;
-  transform: translate(-50%, -50%);
-  border:  solid 5px gray !important;
-  * {
-    margin:             0px;
-    padding:            1px;
-    font-size:          0.8rem;
+  /* Language table */
+  .lang-features-table {
+    display: table;
+    z-index: 999;
+    position: fixed;
+    top:  50%;
+    left: 50%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    border:  solid 5px gray !important;
+    * {
+      margin:             0px;
+      padding:            1px;
+      font-size:          0.8rem;
+    }
+    p { font-family: monospace; }
+    .editbox { width: auto; }
+    tr:first-of-type, tr:first-of-type p {
+      background-color:   lightgray;
+      font-weight:        bold;
+      text-align:         center;
+      font-family:        inherit; /* Header row should not be monospace */
+    }
+    .centered-image { display: inline; } /* Override default image treatment */
+    tr td:nth-child(1), tr td:nth-child(1) p {
+      background-color:   transparent;
+      text-align:         center;
+      vertical-align:     middle;
+      font-family:        inherit; /* Type cell should not be monospace */
+    }
   }
-  p { font-family: monospace; }
-  .editbox { width: auto; }
-  tr:first-of-type, tr:first-of-type p {
-    background-color:   lightgray;
+
+  /* Lesson sidebar */
+  @keyframes slideInFromLeft {
+      0% { transform: translateX(-100%); }
+    100% { transform: translateX(0);     }
+  }
+
+  .sidebar {
+    animation:  0.5s ease-out 0s 1 slideInFromLeft;
+    display:    block;
+    position:   fixed;
+    top:        0px;
+    left:       0px;
+    width:      225px;
+    height:     100%;
+    background: #e8f3dd;
+    transition: all 0.5s;
+    color:      black;
+    box-shadow: -1px 2px 4px black;
+    z-index:    9999;
+    overflow:   scroll;
+    user-select: none;
+    &.closed {
+      left:  -225px;
+      width: 265px;
+      height: 30px;
+    }
+    .paragraph { width: 205px; }
+    #toggle {
+      top:    0;
+      right:  0;
+      position: absolute;
+      width:  40px;
+      height: 30px;
+      text-align:  center;
+      border: 0;
+      margin: 0 !important;
+      background: #75328A77;
+      &:after { content: '≫'; font-size: 20px;}
+    }
+
+    &:not(.closed) #toggle:after { content: '«'; }
+    &:hover * { opacity: 1; }
+    > * { margin: 0px 10px !important; }
+    > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
+    label { display: inline; font-size: 0.8rem; }
+    select { border:  none; }
+    strong { color: black; margin: 0; }
+    li { list-style-type: none; margin-bottom: 5px;}
+    table { background: none !important; border: none; width: auto; }
+    table td, table tr { padding: 0; background: none; border: 0; }
+    table .title { display: none; }
+    dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
+    dl { line-height: 0.4rem; }
+    dd::after { content: '\A'; white-space: pre; }
+    dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
+    table dt { margin-top: 10px; }
+    .sidebarlessons { 
+      margin-top:  10px; 
+      input[type="checkbox"] { margin-right: 5px; }
+      ul {
+        background: white;
+        margin:     0px;
+        box-shadow: inset -1px 0px 2px gray;
+        max-height: 250px;
+        overflow:   scroll;
+        padding:    10px;
+        font-size:  0.8rem !important;
+      }
+      li:nth-child(odd) { background: #b7d89333; }
+    }
+    .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
+  }
+
+  .lesson-instruction, .lesson-roleplay {
+    min-height: 50px;
+    background: #eee;
+    clear:      both;
+    padding:    5px;
+    margin:     2ex 0;
+    > *:first-child { margin-left: 60px; }
+    > *:first-child::before {
+      content:  url('lesson-instruction.png');
+      height:   50px;
+      width:    50px;
+      float:    left;
+      margin-right: 10px;
+      margin-left:-60px;
+    }
+  }
+  .lesson-roleplay > *:first-child::before { content: url('lesson-roleplay.png') }
+
+  .lesson-point {
     font-weight:        bold;
-    text-align:         center;
-    font-family:        inherit; /* Header row should not be monospace */
+    color:              black;
+    border-style:       solid;
+    margin:             2ex;
+    border-width:       2px 0px;
+    clear:              both;
+    p { margin: 0ex 1ex; }
   }
-  .centered-image { display: inline; } /* Override default image treatment */
-  tr td:nth-child(1), tr td:nth-child(1) p {
-    background-color:   transparent;
-    text-align:         center;
-    vertical-align:     middle;
-    font-family:        inherit; /* Type cell should not be monospace */
-  }
-}
-.standards-hierarchical-table ul li ul { display: none; }
 
-/* Special links back to older, pre-remix materials */
-.old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
-
-/* Headers, Sections, and section links */
-.lesson-section-1, .lesson-section-1+.lesson-section-1 {
-  clear:              both;
-  border-top:         solid 2px black;
-  display:            block;
-}
-.lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
-.lesson-section-2 h3 { font-size: 1.5rem; font-style: italic; margin: 0px; }
-/* class for styling duration info in headers */
-.duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
-
-.section-link a {
-  margin-left:        -1.75em;
-  padding-right:      0.5em;
-  vertical-align:     middle;
-  text-decoration:    none !important;
-  font-size:          .9rem;
-  position:           relative;
-  left:               -2em;
-}
-
-.lesson-instruction, .lesson-roleplay {
-  min-height: 50px;
-  background: #eee;
-  clear:      both;
-  padding:    5px;
-  margin:     2ex 0;
-  > *:first-child { margin-left: 60px; }
-  > *:first-child::before {
-    content:  url('lesson-instruction.png');
-    height:   50px;
-    width:    50px;
-    float:    left;
-    margin-right: 10px;
-    margin-left:-60px;
-  }
-}
-.lesson-roleplay > *:first-child::before { content: url('lesson-roleplay.png') }
-
-.lesson-point {
-  font-weight:        bold;
-  color:              black;
-  border-style:       solid;
-  margin:             2ex;
-  border-width:       2px 0px;
-  clear:              both;
-  p { margin: 0ex 1ex; }
-}
-
-/* Callout boxes */
-.strategy-box, .notice-box {
-  background:         #efefef;
-  border:             solid 5px !important;
-  width:              75%;
-  margin:             15px auto;
-  display:            block;
-  clear:              both;
-  position:           relative;
-  td { width: 8in; }
-  a { color: blue; text-decoration: underline; }
-  .title {
-    width:              100%;
+  /* Callout boxes */
+  .strategy-box, .notice-box {
+    background:         #efefef;
+    border:             solid 5px !important;
+    width:              75%;
+    margin:             15px auto;
     display:            block;
-    text-align:         center;
-    font-weight:        bold;
-    font-size:          1.5rem;
+    clear:              both;
+    position:           relative;
+    td { width: 8in; }
+    a { color: blue; text-decoration: underline; }
+    .title {
+      width:              100%;
+      display:            block;
+      text-align:         center;
+      font-weight:        bold;
+      font-size:          1.5rem;
+    }
   }
+  .strategy-box { border-color: #1a73b5 !important; }
+  .notice-box   { border-color: #7747a5 !important; }
+
+  h2 { font-size: 1.75em; font-weight: normal; }
+  h3 { font-size: 1.5em; font-weight: 300;  }
+
+  /* Direct link to a section of a lesson */
+  .section-link a {
+    margin-left:        -1.75em;
+    padding-right:      0.5em;
+    vertical-align:     middle;
+    text-decoration:    none !important;
+    font-size:          .9rem;
+    position:           relative;
+    left:               -2em;
+  }
+
+  /* class for styling duration info in headers */
+  .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
+  /* Special links back to older, pre-remix materials */
+  .old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
 }
-
-.strategy-box { border-color: #1a73b5 !important; }
-.notice-box   { border-color: #7747a5 !important; }
-
-.blank    { color: rgba(0,0,0,0); }
-.logo     { float: right; }
-.logo img { width: 400px; }
 
 span.clear {
   clear:              both;
@@ -517,27 +507,37 @@ span.clear {
   font-style: italic; 
   line-height: 1.5ex;
   word-break: break-word;
+  &::before { content: 'Source: '; }
 }
-.image-figure .image-caption::before { content: 'Source: '; }
+
+
+
+/* NOTE(Emmanuel): probably dead code;
+.standards-hierarchical-table ul li ul { display: none; }
+*/
+
+
 /************************************************************************************
 * WORKBOOK PAGES
 */
 
-/* we use the same font-size for print and screen, and zoom the page
- * in a @screen{...} CSS rule
- */
-body.workbookpage {
-  /* set page dimensions */
-  &:not(.landscape) { width: 7.5in; height: 9.75in; }
-  &.landscape { width: 9.75in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
-
-  /* set font size and flex information */
-  font-size: 9pt;
+/* Maximize vertical space for content */
+body.workbookpage, body.workbookpage #content,
+body.workbookpage #preamble_disabled,
+body.workbookpage #preamble_disabled .sectionbody {
   padding:   0;
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
-  
+}
+
+body.workbookpage {
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+
+  /* set page dimensions */
+  &:not(.landscape) { width: 7.5in; height: 9.75in; }
+  &.landscape { width: 9.75in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
+
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
   #preamble_disabled .sectionbody table.FillVerticalSpace,
@@ -551,10 +551,10 @@ body.workbookpage {
     height: 100%;
     grid-template-columns: auto;
     grid-template-rows: max-content;
-    > *, > * > tr { display: contents; }
     > colgroup { display: none; }
-    > * > tr > td { display: grid; position: relative; }
-    > * > tr > *.valign-middle { align-items: center; }
+    tbody, thead, tr { display: contents; }
+    td { display: grid; position: relative; }
+    .valign-middle { align-items: center; }
   }
 
   /* Make code match text size/layout */
@@ -563,8 +563,17 @@ body.workbookpage {
     vertical-align: baseline; 
     font-size: 9pt !important; 
   }
+
+  /* Some elements show either solution mode or a blank */
+  .solution { font-style: italic; }
+  .blank    { color: rgba(0,0,0,0); }
+
+  /* Auto-numbering - Add a right-paren, unless it's inside a table. */
+  .autonum::after { content: ')'; }
+  table .autonum::after { content: none; }
 }
 
+/* TODO(Emmanuel): do we even need all of these? Clean up */
 body:not(.LessonPlan) {
   #header { margin-bottom: 5px !important; }
   #header> h1:first-child,
@@ -577,12 +586,6 @@ body:not(.LessonPlan) {
   }
   .description { display: none; }
 }
-
-.solution { font-style: italic; }
-
-/* Auto-numbering - Add a right-paren, unless it's inside a table. */
-.autonum::after { content: ')'; }
-table .autonum::after { content: none; }
 
 /************************************************************************************
 * DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
@@ -920,7 +923,6 @@ table.contracts-table {
     font-style:       italic;
     line-height:      2.5rem;
   }
-  body.nonworkbookpage { width: auto !important; }
 
   /* on WB pages, set font size to same as print and then zoom the page */
   body.workbookpage {
