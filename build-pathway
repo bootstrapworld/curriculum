@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-29 # last modified
+LASTMOD=2022-10-06 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -252,6 +252,12 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   #
   $CP -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
+  #
+  for f in distribution/$NATLANG/lib/*.less; do
+    if test -f "$f"; then
+      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
+    fi
+  done
   #
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
