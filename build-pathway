@@ -254,12 +254,7 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   $CP -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   #
-  for f in distribution/$NATLANG/lib/*.less; do
-    if test -f "$f"; then
-      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
-    fi
-  done
-  #
+
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
@@ -297,7 +292,13 @@ if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
-  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.less $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  for f in distribution/$NATLANG/lib/*.less; do
+    if test -f "$f"; then
+      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
+    fi
+  done
+  rm -f distribution/$NATLANG/lib/*.less
 fi
 
 function insertbodyid() {

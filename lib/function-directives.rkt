@@ -693,7 +693,7 @@
                       (format "\n\n[.wrapper~a]\n" classes)
                       (make-string *wrapper-block-level* #\-)
                       "\n"
-                      (write-clear)
+                      ;(write-clear)
                       (thunk)
                       "\n"
                       (make-string *wrapper-block-level* #\-)
