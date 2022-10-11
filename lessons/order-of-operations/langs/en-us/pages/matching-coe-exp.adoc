@@ -3,9 +3,12 @@
 
 ++++
 <style>
+  table { height: 95%; }
   td, td p { text-align: left; margin: 0; }
+  .content { height: 100%; } /* maximize cell content */
   .autonum { font-weight: bold; font-size: 1.5rem; }
   .MathJax { display: block; margin-top: 2ex; }
+  #content #preamble_disabled .sectionbody { height: 7in; }
 </style>
 ++++
 
@@ -22,7 +25,7 @@ Cut out the cards in the table below, mix them up, and try to match the Circle o
   (define expr8 '(- -2 (* 10 (+ 5 2))))
 }
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a",stripes="none"]
+[cols="^.^1a,^.^1a,^.^1a,^.^1a",stripes="none"]
 |===
 |@n @ifsoln{-A} @show{(coe expr1)}
 |@span{.autonum}{A} @ifsoln{-1}  @show{(math expr1 #:parens true)}
