@@ -12,7 +12,7 @@ body {
   color:          #75328A;
   width:          100%; /* needed to undo effect of html{display:flex} */
   break-inside:   auto !important;
-  display:        block;
+  display:        block !important;
   page-break-inside: auto !important;
   -webkit-font-smoothing: antialiased;
 }
@@ -47,10 +47,22 @@ body:not(.LessonPlan, .narrativepage) .paragraph {width: 100%; }
 body:not(.LessonPlan, .narrativepage) p {
   width:        100%;
   overflow:     hidden; 
-  margin:       0px;
+  position:     relative;
+  min-height:   1.75rem;
+  margin:       2px 0px;
 }
 /* Empty p tags should take up no space */
-body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0; }
+body:not(.LessonPlan) p:empty { min-height: 0; margin: 0; padding: 0;}
+/* Stretch elements should expand to the end of the page */
+body:not(.LessonPlan) p > .stretch {
+  float:        right; 
+  clear:        right;
+  position:     absolute;
+  text-align:   left;
+  bottom:       0;
+  width:        100%;
+  margin-left:  10px;
+}
 
 h1 {
   font-size:      2rem;
@@ -58,6 +70,7 @@ h1 {
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
 h2 {
+  /* margin:         0 0 1ex 0; /* 1ex bottom margin */
   margin:          0; /* 1ex bottom margin */
   font-family:    'Lato', Arial, Helvetica, sans-serif;
 }
@@ -143,9 +156,13 @@ tr th.tableblock {
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
-.glossary           { margin-bottom: 20px; }
-.glossary *         { display: inline; }
-.glossary .title    { display: block; font-weight: bold; color: inherit;}
+.glossary   { margin-bottom: 20px; }
+.glossary * { display: inline; }
+.glossary .title {
+  display:          block;
+  font-weight:      bold;
+  color:            inherit;
+ }
 .glossary dt::after { content: '::'; margin: 0px 5px; }
 .glossary dd        { margin: 0px; }
 .glossary dd::after { content: '\A'; white-space: pre; }
@@ -178,7 +195,9 @@ tr th.tableblock {
 .tooltip:hover .tooltiptext { opacity: 1; }
 
 .alignedStandards { display: none; }
+
 .coverageElement { display: none; }
+
 .standard-menu-container {
   padding:          10px;
   display:          flex;
@@ -190,15 +209,11 @@ tr th.tableblock {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-/* fill-in-the-blanks are where kids should write answers 
- * kids need more room, so we add some height to these elements
-*/
-.fitb, .fitbruby, .fitb.stretch::after {
-  padding-top:        1rem; /* THIS IS HOW MUCH EXTRA HEIGHT TO ADD!*/
+.fitb, .fitbruby, .blankline {
   display:            inline-block;
   min-width:          5em;
   text-align:         center;
-  line-height:        1rem;
+  line-height:        1.25rem;
   border-bottom:      solid 1px black;
 }
 
@@ -208,27 +223,13 @@ tr th.tableblock {
    padding:           0;
 }
 
-/* fill-in-the-blanks that stretch to the end of a line */
-.fitb.stretch { 
-  position:           relative; 
-  margin-left:        5px; 
-  vertical-align:     bottom; 
-  width:              auto;
-}
-/* add an underline that goes past the end of the page */
-.fitb.stretch::after { 
-  content:"\00a0";
-  width:              1000px;
-  position:           absolute;
-  left:               0;
-  bottom :            -1px;
-}
+.blankline { margin-bottom: 13px; width: 100%;}
 
 .lh-style li, .lh-style li p { line-height: 2rem; }
 .lh-style .fitb { line-height: 1.6rem !important; }
 
 .studentAnswer::before, .quad::before, .fitb::before,
-.fitbruby::before {
+.fitbruby::before, .blankline::before {
   content: '\00200b';
 }
 
@@ -432,8 +433,12 @@ tr th.tableblock {
   border-top:         solid 2px black;
   display:            block;
 }
-.lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
-.lesson-section-2 h3 { font-size: 1.5rem; font-style: italic; margin: 0px; }
+.lesson-section-2 { clear: both; width: 100%; margin: 20px 0px;}
+.lesson-section-2 h3 {
+  font-size:          1.5rem;
+  font-style:         italic;
+  margin:             0px;
+ }
 /* class for styling duration info in headers */
 .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
 
@@ -531,48 +536,19 @@ span.clear {
 */
 /* set page dimensions */
 body.workbookpage:not(.landscape) {
-  width: 7.5in; height: 9.75in; 
+  width: 7.5in; min-height: 10in;  max-height: 11in;
 }
 /* define 'landscape' page type */
 body.workbookpage.landscape {
-  width: 9.75in; height:  7.5in; page: landscape; }
+  width: 10in; min-height: 7.5in; max-height:  8.5in; page: landscape; }
 
 /* we use the same font-size for print and screen, and zoom the page
  * in a @screen{...} CSS rule
  */
-body.workbookpage, body.workbookpage #content,
-body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody {
+body.workbookpage {
   font-size: 9pt;
   padding:   0;
-  display: flex; 
-  flex-direction: column; 
-  justify-content: flex-start; 
 }
-/* Make content of page as tall as possible */
-body.workbookpage #content, body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody,
-body.workbookpage #preamble_disabled .sectionbody table.FillVerticalSpace { 
-  flex-grow: 1;
-}
-
-body.workbookpage #content > .sect1 { flex-grow: 1; }
-
-/* make .FillVerticalSpace tables use CSS grid layout */
-body.workbookpage table.FillVerticalSpace { 
-  display: grid;
-  height: 100%;
-  grid-template-columns: auto;
-  grid-template-rows: max-content;
-}
-body.workbookpage table.FillVerticalSpace > *,
-body.workbookpage table.FillVerticalSpace > * > tr {
-  display: contents;
-}
-body.workbookpage table.FillVerticalSpace > colgroup { display: none; }
-
-body.workbookpage table.FillVerticalSpace > * > tr > td { display: grid; position: relative; }
-body.workbookpage table.FillVerticalSpace > * > tr > *.valign-middle { align-items: center; }
 
 /* Make code match text size/layout */
 body.workbookpage p .editbox, body.workbookpage pre .editbox { 
@@ -626,7 +602,13 @@ table.recipe_title td { padding: 0px; margin: 0px; border: none; vertical-align:
 .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
 /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-body:not(.LessonPlan) .recipe p { display: flex; flex-wrap: wrap; }
+body:not(.LessonPlan) .recipe p {
+  width:      100%;
+  margin:     0;
+  min-height: 1.5rem;
+  display:    flex;
+  flex-wrap:  wrap;
+}
 
 /* All student answers have a bottom-border, and a "ruby" printed in black */
 .recipe .studentAnswer { border-bottom: solid 1px black; }
@@ -634,6 +616,8 @@ body:not(.LessonPlan) .recipe p { display: flex; flex-wrap: wrap; }
 
 /* All code is inside a wrapper, so apply the code font */
 .wrapper p, .wrapper .studentAnswer { font-family: Hack, "Courier New", monospace; }
+
+:not(.recipe_instructions) + .keyword_only { margin: -4pt 0pt; }
 
 /* Note(Emmanuel): these could probably be a lot tighter */
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled,
@@ -647,7 +631,7 @@ body:not(.LessonPlan) .recipe p { display: flex; flex-wrap: wrap; }
   display:            inline-block;
   border-bottom:      solid 1px black;
 }
-
+.pyretkeyword { margin: 4px 0; line-height: 1rem; }
 .studentAnswerCode::after, .studentAnswer::after {
   position:           absolute;
   bottom:             -1rem;
@@ -730,7 +714,6 @@ div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
   flex-grow:  1;
 }
 
-.recipe_word_problem { min-height: 0.65in; }
 .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
   text-align: center;
 }
@@ -747,7 +730,7 @@ div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
 
 /* Special styling for purpose statements (includes lang-specific comment) */
 .recipe_purpose, .recipe_contract .recipe_name {
-  padding-left:         2ex;
+  padding-left:         1.5ex;
   background-repeat-x:  no-repeat;
   background-size:      0.4rem calc(1rem + 8pt);
   background-position-y:4pt;
@@ -1088,8 +1071,6 @@ table.contracts-table td {padding: .1em .625em !important; height: 23pt;}
   .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
-  /* Even when invisible, flex-grow will take up space */
-  body.workbookpage #content > .acknowledgmentsect:last-child { flex-grow: 0; }
 
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
