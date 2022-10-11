@@ -49,15 +49,17 @@ text("Hello!", 200, "purple")
         </li>
 
         <!----   Page 2 ---->
-        <li editorCode=''>
+        <li editorCode='
+        '>
           <h1>2. Making Images from Code</h1>
           What do you think the following code will do?
           <p/>
           <tt>star(50, "solid", "blue")</tt>
           <p/>
-          Make a prediction, then <input type="button" value="click here" onclick='addToEditor(`include image star(50, "solid", "blue")`)' /> to add it to the editor and see the result!
-          <p/>
-          You can also always <input type="button" value="🔄 reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw any card.
+          <ol>
+            <li>Make a prediction, then <input type="button" value="click here" onclick='addToEditor(`include image star(50, "solid", "blue")`)' /> to add it to the editor and see the result!
+            </li>
+          </ol>
         </li>
 
         <!----   Page 3 ---->
@@ -82,7 +84,8 @@ star(50, "solid", "blue")
         '>
         <h1>4. Making Images</h1>
           There are lots of other functions that will produce an image... 
-          <p/> some of them take the same arguments as <tt>star</tt>: a Number and two Strings.
+          <p/> some of them take the same arguments as <tt>star</tt>: 
+          <p/> <i> a Number and two Strings.</i>
           <p/> Here are a few:
 
           <ol>
@@ -92,8 +95,6 @@ star(50, "solid", "blue")
             <p/>
             <li>Can you make two different purple <tt>square</tt>s with side-lengths of 104?</li>
           </ol>
-          <p/>
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 5 ---->
@@ -101,8 +102,10 @@ star(50, "solid", "blue")
           <h1>5. Making Rectangles</h1>
           There are also image-producing functions that need more arguments.
           <p/>
-          Take 1 minute to see if you can figure out how to make a <tt>rectangle</tt> before advancing to the next slide.
-
+          <ol>
+            <li>Take 1 minute to see if you can figure out how to make a <tt>rectangle</tt> before advancing to the next slide.
+            </li>
+          </ol>
         </li>
 
         <!----   Page 6 ---->
@@ -137,8 +140,6 @@ rectangle(50, 100, "solid", "orange")
             <li>Experiment with <tt>right-triangle</tt>.</li>
             <p/>Figure out why it needs two numbers, while <tt>triangle</tt> only needed one.
           </ol>
-          <p/>
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 8 ---->
@@ -163,8 +164,6 @@ base = circle(70, "outline", "darkgrey")
           <p/>
             <li>YOUR TURN: Can you write the code to place the head above the body?</li>
           </ol>
-          <p/>
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 9 ---->
@@ -181,8 +180,6 @@ brim = rectangle(70, 15, "solid", "black")
             <p/>
             <li>Can you make the same image using <tt>above</tt>?</li>
           </ol>
-          <p/>
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 10 ---->
@@ -206,12 +203,11 @@ pupil = circle(10, "solid", "black")
               </p>
               Make a prediction and then <input type="button" value="click here" onclick='addToEditor(`overlay(eye-white, pupil)`)' /> to add it to the editor and see the result!
           </ol>
-          <p/>
-          You can always <input type="button" value="reset" onclick="loadFromConfig()"/> the editor to where it was the first time you saw this card.
         </li>
 
         <!----   Page 11 ---->
         <li editorCode='
+        include image
 eye-white = circle(30, "outline", "black")
 pupil = circle(10, "solid", "black")
         '>
@@ -236,6 +232,7 @@ pupil = circle(10, "solid", "black")
 
         <!----   Page 12 ---->
         <li editorCode='
+        include image
 eye-white = circle(30, "outline", "black")
 pupil = circle(10, "solid", "black")
 put-image(pupil, 10, 30, eye-white)
@@ -255,7 +252,7 @@ put-image(pupil, 10, 30, eye-white)
         IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS---->
 
         
-         <li imageConfig="images/pyret-intro.png">
+         <li movieConfig="test.mov">
           <h1>13. Introducing The Pyret Editor</h1>
           
             So far we have been working in the chatitor version of Pyret. More complex programs get written in a different view.
@@ -268,11 +265,12 @@ put-image(pupil, 10, 30, eye-white)
                 <li>In classic Pyret, code is only evaluated when you click "Run".</li>
               </ul>  
               <p/>              
-            <a href="https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf">Click here</a> to open Pyret in a new window and play around with the file pictured to get a feel for it.
+            
+            <input type="button" value="Click here" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> to open Pyret in a new window and play around with the file pictured to get a feel for it.
         </li>
 
         <!----   Page 14 ---->
-        <li imageConfig="images/pyret-intro.png"><li>
+        <li>
           <h1>14. Your Task</h1>
 
           Now that you know how to define image-producing functions and compose more complex images with them using coordinates, you're ready to solve a puzzle! 
