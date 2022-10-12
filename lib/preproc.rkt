@@ -583,7 +583,7 @@
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::{frompathwayroot}~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
+  (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -1061,8 +1061,7 @@
               ;TODO: probably not needed anymore
 
               ;FIXME: avoid erroring include: if file doesn't exist?
-              (format "include::~a~a[~a]"
-                      (if *lesson-plan* "{frompathwayroot}" "")
+              (format "include::~a[~a]"
                       f.asc link-text))])))
 
 (define (make-pathway-link f link-text)
@@ -1150,8 +1149,7 @@
     (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
     (when *lesson-plan*
       ;(printf "containing-dir= ~s\n" *containing-directory*)
-      (fprintf o "ifndef::frompathwayroot[:frompathwayroot: ]\n\n") ;FIXME: No longer needed?
-      (fprintf o "include::{frompathwayroot}~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
+      (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
       ;(fprintf o "include::./.index-sidebar.asc[]\n\n")
       )
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
@@ -1269,7 +1267,6 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
     (let ([st-o (open-output-file
                   (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
                   #:exists 'replace)]
@@ -1743,7 +1740,7 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
+                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
                             (when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
@@ -2147,7 +2144,10 @@
         ;no longer possible to append to pathway's file, as there
         ;is no pathway at this stage
         ;(add-exercises)
-        (create-glossary-subfile))
+        (create-glossary-subfile (string-append *containing-directory* "/.cached/."
+                                   (if *lesson-plan* "index" "pathway")
+                                   "-glossary"
+                                   )))
 
       (when *lesson-plan*
         (accumulate-glossary-and-alignments))
@@ -2337,10 +2337,10 @@
         #:exists 'replace)
       )))
 
-(define (create-glossary-subfile)
+(define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s\n" *narrative*)
-  (print-menubar (build-path *containing-directory* ".cached" ".pathway-glossary-comment.txt"))
-  (call-with-output-file (build-path *containing-directory* ".cached" ".pathway-glossary.asc")
+  (print-menubar (string-append file "-comment.txt"))
+  (call-with-output-file (string-append file ".asc")
     (lambda (op)
       (unless (empty? *glossary-items*)
         (set! *glossary-items*
