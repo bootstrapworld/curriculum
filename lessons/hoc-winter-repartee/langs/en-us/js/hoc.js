@@ -41,7 +41,8 @@ function loadFromConfig(i = cardIndex) {
   document.getElementById('reset').style.display = 'none';
 
   const editorConfig= cards[i].getAttribute('editorCode'),
-        imageConfig = cards[i].getAttribute('imageConfig');
+        imageConfig = cards[i].getAttribute('imageConfig')
+        videoConfig = cards[i].getAttribute('videoConfig');
 
   if(editorConfig) {
     righthand.appendChild(editor);
@@ -57,6 +58,20 @@ function loadFromConfig(i = cardIndex) {
     var img = document.createElement("img");
     img.src = imageConfig;
     righthand.appendChild(img);
+  } else if (videoConfig) {
+    var video = document.createElement("video");
+    righthand.appendChild(video);
+    video.src = videoConfig;
+    video.controls = true;
+    video.style.display = 'none';
+    // after the video is loaded, give the browser 500ms and then set dimensions
+    video.onloadstart = function(v) { 
+      setTimeout(function() {
+        video.style.height = v.srcElement.videoHeight;
+        video.style.width = v.srcElement.videoWidth;
+        video.style.display = "block";
+      }, 500);
+    }
   }
 }
 
