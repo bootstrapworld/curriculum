@@ -934,64 +934,61 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
    *  Collapsing Headers 
    */
 
-  /* add a bottom padding to prevent browser-scroll */
-  .LessonPlan #body, .TeacherResources .LessonPlan #body {padding-bottom:  10in;}
-  
-  /* adjust colors */
-  .LessonPlan h2, .TeacherResources .sect1 h2 {
-    background-color: #75328A77;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 5px !important;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
-    &::after {
-      content: '\002B';
-      color: white;
-      font-weight: bold;
-      float: left;
-      margin-right: 5px;
-    }
-    &.active::after { content: "\2212"; }
-    &.active, &:hover { background-color: #b7d893; }
-  }
-
-  /* set collapsed size and transition rules */
-  .LessonPlan .sect1:not(.acknowledgmentsect)  .sectionbody,    .TeacherResources .sect1 .sectionbody {
-    padding: 0 18px;
-    max-height: 100px;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    position: relative;
-    /* Add a white fade to hint for discoverability */
-    &::after {
-      content  : "";
-      position : absolute;
-      z-index  : 1;
-      bottom   : 0;
-      left     : 0;
-      pointer-events   : none;
-      background-image : linear-gradient(to bottom, 
-                        rgba(255,255,255, 0), 
-                        rgba(255,255,255, 1) 90%);
-      width    : 100%;
-      height   : 10em;
-    }
-  }
-  
-  .LessonPlan .sect1:not(.acknowledgmentsect)  h2:hover+.sectionbody:after,
-  .TeacherResources .sect1 h2:hover+.sectionbody:after { height: 4em; }
-  
-   /* don't add the fade for summaries or active sections */
-  .LessonPlan .lessonSummary .sectionbody { max-height: unset; }
-  .LessonPlan .lessonSummary .sectionbody::after,
-  .LessonPlan h2.active+.sectionbody::after,
-  .TeacherResources h2.active+.sectionbody::after { display: none;}
-  .LessonPlan .sect1:not(.acknowledgmentsect)  h2:not(.active)+.sectionbody h3 { display: none; }
+   .LessonPlan, .TeacherResources {
+      /* add a bottom padding to prevent browser-scroll */
+      #body { padding-bottom:  10in; }  
+      /* adjust colors */
+      h2 {
+        background-color: #75328A77;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px !important;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+        &::after {
+          content: '\002B';
+          color: white;
+          font-weight: bold;
+          float: left;
+          margin-right: 5px;
+        }
+        &.active::after { content: "\2212"; }
+        &.active, &:hover { background-color: #b7d893; }
+      }
+      /* set collapsed size and transition rules */
+      .sect1:not(.acknowledgmentsect) .sectionbody {
+        padding: 0 18px;
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        position: relative;
+        /* Add a white fade to hint for discoverability */
+        &::after {
+          content  : "";
+          position : absolute;
+          z-index  : 1;
+          bottom   : 0;
+          left     : 0;
+          pointer-events   : none;
+          background-image : linear-gradient(to bottom, 
+                            rgba(255,255,255, 0), 
+                            rgba(255,255,255, 1) 90%);
+          width    : 100%;
+          height   : 10em;
+        }
+      }
+      .sect1:not(.acknowledgmentsect) h2:hover+.sectionbody:after { height: 4em; }
+      /* don't add the fade for summaries or active sections */
+      .lessonSummary .sectionbody { max-height: unset; }
+      .lessonSummary .sectionbody, h2.active+.sectionbody {
+        &::after { display: none; } 
+      }
+      .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
+   }
 }
 
 /************************************************************************************
