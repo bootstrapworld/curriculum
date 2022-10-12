@@ -1389,8 +1389,8 @@
 (define (add-lesson-prereqs immediate-prereqs)
   ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
   ; (printf "lesson-prereq dir = ~s\n" (current-directory))
-  (cond [(string=? *proglang* "codap")
-         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-codap")) immediate-prereqs))]
+  (cond [(not (member *proglang* '("pyret" "wescheme")))
+         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-" *proglang*)) immediate-prereqs))]
         [else
           (set! *lesson-prereqs* immediate-prereqs)])
   (for ([lsn *lesson-prereqs*])
