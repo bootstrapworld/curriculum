@@ -68,8 +68,9 @@ function loadFromConfig(i = cardIndex) {
     video.onloadstart = function(v) { 
       setTimeout(function() {
         video.style.height = v.srcElement.videoHeight;
-        video.style.width = v.srcElement.videoWidth;
+        video.style.maxWidth = v.srcElement.videoWidth;
         video.style.display = "block";
+        video.play();
       }, 500);
     }
   }
