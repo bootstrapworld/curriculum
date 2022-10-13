@@ -158,9 +158,7 @@ body:not(.LessonPlan, .narrativepage) p {
   dd::after { content: '\A'; white-space: pre; }
 }
 
-.vocab { font-weight: bold; font-style: italic; color: #75328A; }
-
-/* TODO(Emmanuel): dead code? */
+/* TODO(Emmanuel): dead code?
 .tooltip { 
   position: relative; 
   .tooltiptext {
@@ -180,6 +178,8 @@ body:not(.LessonPlan, .narrativepage) p {
   }
   :hover .tooltiptext { opacity: 1; }
 }
+.standards-hierarchical-table ul li ul { display: none; }
+*/
 
 .alignedStandards { display: none; }
 .coverageElement { display: none; }
@@ -193,10 +193,6 @@ body:not(.LessonPlan, .narrativepage) p {
 
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
-
-
-.lh-style li, .lh-style li p { line-height: 2rem; }
-.lh-style .fitb { line-height: 1.6rem !important; }
 
 .quad::before, .fitb::before, .fitbruby::before {
   content: '\00200b';
@@ -376,7 +372,7 @@ body:not(.LessonPlan, .narrativepage) p {
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-
+  .vocab { font-weight: bold; font-style: italic; color: #75328A; }
   .lesson-instruction, .lesson-roleplay {
     min-height: 50px;
     background: #eee;
@@ -465,13 +461,6 @@ span.clear {
   &::before { content: 'Source: '; }
 }
 
-
-
-/* NOTE(Emmanuel): probably dead code;
-.standards-hierarchical-table ul li ul { display: none; }
-*/
-
-
 /************************************************************************************
 * WORKBOOK PAGES
 */
@@ -539,7 +528,7 @@ body.workbookpage {
   }
   .fitbruby {
      margin-bottom:     1rem;
-     padding:           0;
+     padding:           0; /* TODO(Emmanuel): remove this rule! */
      .ruby {
        position:           absolute;
        bottom:             -1.1rem;
@@ -933,7 +922,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   /********************************************************************
    *  Collapsing Headers 
    */
-
    .LessonPlan, .TeacherResources {
       /* add a bottom padding to prevent browser-scroll */
       #body { padding-bottom:  10in; }  
@@ -1005,27 +993,53 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
-  /* Even when invisible, flex-grow will take up space */
-  body.workbookpage #content > .acknowledgmentsect:last-child { flex-grow: 0; }
-
+  div#body{ position: static; } /* page-break fails on absolute positioning */
+  
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
   #content { margin: auto; }
 
-  /* Page breaks in lesson content*/
-  div#body{ position: static; } /* page-break fails on absolute positioning */
-  .LessonPlan .lessonSummary {
-    break-after:  page !important;
-    page-break-after:  always !important;
+  /* Change coloring of body text, lesson summary table, and code */
+  html { -webkit-print-color-adjust: exact; }
+  div#body, body { color: black; }
+  :not(body.LessonPlan) #header { background: black; color: white; }
+  .listingblock pre:not(.highlight) { background: none !important; }
+
+  .LessonPlan {
+    .lessonSummary {
+      break-after:  page !important;
+      page-break-after:  always !important;
+    }
+    .lesson-section-1 {
+      break-before: page !important;
+      page-break-before: always !important;
+    }
+    .lesson-section-2 p, .notice-box, .strategy-box, .circleevalsexp, .image,
+    img, .MathJax, #_additional_exercises + .sectionbody {
+      break-inside: avoid !important; page-break-inside: avoid !important;
+    }
+    .left-header tr td:nth-child(1) { background-color: lightgray; }
+    .sect1+.sect1 { border-top: solid 3px black; }
   }
-  .LessonPlan .lesson-section-1 {
-    break-before: page !important;
-    page-break-before: always !important;
+  
+  body.workbookpage {
+    /* Use B&W colors for headers */
+    #header> h1:first-child, .sect1 > h1:first-child { 
+      background:       black;
+      color:            white;
+      text-align:       center;
+      padding:          1px;
+    }
+    .acknowledgmentsect:last-child { flex-grow: 0; } /* Even when invisible, flex-grow will take up space */
+    .lesson-section-1 { border: none; }
+    .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+      background:   #ccc;
+      font-weight:  600;
+      font-size:    12pt;
+      padding-left: 5px;
+    }
   }
-  .lesson-section-2 p, .notice-box, .strategy-box, .circleevalsexp, .image,
-  img, .MathJax, #_additional_exercises + .sectionbody {
-    break-inside: avoid !important; page-break-inside: avoid !important;
-  }
+  /* Page Breaks for printed lesson plans, projects, and TR pages */
   h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
   h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
   table { break-inside: auto; }
@@ -1033,39 +1047,11 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   thead { display: table-header-group; }
   tfoot { display: table-footer-group; }
 
-  /* Change coloring of body text, lesson summary table, code, and WB page headers */
-  html { -webkit-print-color-adjust: exact; }
-  div#body, body { color: black; }
-  .LessonPlan .left-header tr td:nth-child(1) { background-color: lightgray; }
-  .LessonPlan .sect1+.sect1 { border-top: solid 3px black; }
-  :not(body.LessonPlan) #header { background: black; color: white; }
-  .listingblock pre:not(.highlight) { background: none !important; }
-
   /* Get rid of collapsing headers */
   .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
 
-  /* Use B&W colors for headers */
-  body:not(.LessonPlan) {
-    #header> h1:first-child,
-    .sect1 > h1:first-child {
-      background:       black;
-      color:            white;
-      text-align:       center;
-      padding:          1px;
-    }
-    .lesson-section-1 { border: none; }
-    .sect1 > h2:first-child,
-    .sect1 > h3:first-child,
-    .sect2 > h3:first-child {
-      background:   #ccc;
-      font-weight:  600;
-      font-size:    12pt;
-      padding-left: 5px;
-    }
-  }
-
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  html, body { font-size:      9pt; }
+  html, body    { font-size:      9pt; }
   .questions    { min-width: 36%; width: auto; }
   .answers      { width: auto; }
 }
