@@ -496,8 +496,13 @@ body.workbookpage {
     grid-template-columns: auto;
     grid-template-rows: max-content;
     > colgroup { display: none; }
-    tbody, thead, tr { display: contents; }
-    td { display: grid; position: relative; }
+    > tbody, > thead {
+      display: contents;
+      > tr { 
+        display: contents; 
+        > td { display: grid; position: relative; }
+      }
+    } 
     .valign-middle { align-items: center; }
   }
 
