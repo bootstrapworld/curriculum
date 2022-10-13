@@ -27,7 +27,7 @@
     (list "NGSS" "Next-Gen Science" *ngss-standards-list* "https://www.nextgenscience.org/")
     (list "Oklahoma" "Oklahoma" *ok-standards-list* "https://sde.ok.gov/oklahoma-academic-standards")
     (list "Iowa" "Iowa" *iowa-standards-list* "https://iowacore.gov/standards/iowa-core-standards")
-    (list "Massachusetts" "Massachusetts" *ma-standards-list* "https://www.doe.mass.edu/frameworks/math/2017-06.pdf")
+    (list "Massachusetts" "Massachusetts" *ma-standards-list* "https://www.doe.mass.edu/frameworks/")
     ))
 
 (define *dict-canonical-order* (map first *standards-list*))
