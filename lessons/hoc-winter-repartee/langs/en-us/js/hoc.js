@@ -54,6 +54,7 @@ function loadFromConfig(i = cardIndex) {
         2000)
     }
     document.getElementById('reset').style.display = 'block';
+    parley.run();
   } else if(imageConfig) {
     var img = document.createElement("img");
     img.src = imageConfig;
