@@ -10,22 +10,19 @@
     ("9-12.Impacts of Computing.Social Interactions"
      "computing-needs-all-voices"
      )
-    ("8.F.A.1"
+    (("8.F.A.1" "IA.8.F.A.1" "MA.8.F.A.1")
      "contracts"
      )
-    ("HSF.IF.A.1"
+    (("HSF.IF.A.1" "IA.HSF.IF.A.1" "MA.HSF.IF.A.1")
      "function-definition-linear"
      "contracts"
      )
-    ("HSF.IF.A.2"
+    (("HSF.IF.A.2" "IA.HSF.IF.A.2" "MA.HSF.IF.A.2")
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
      "function-notation"
      "flags"
-     "contracts"
-     )
-    ("IA.HSF.IF.A.1"
      "contracts"
      )
     ("OK.A1.F.1.2"
@@ -55,7 +52,7 @@
     ("OK.G.2D.1.8"
      "contracts"
      )
-    ("6.EE.B.6"
+    (("6.EE.B.6" "MA.6.EE.B.6" "IA.6.EE.B.6")
      "linear-regression"
      "grouped-samples"
      "defining-table-functions"
@@ -74,18 +71,18 @@
      "functions-examples-definitions"
      "functions-make-life-easier"
      )
-    ("HSF.IF.B"
+    (("HSF.IF.B" "IA.HSF.IF.B")
      "flags"
      "functions-make-life-easier"
      )
-    ("7.EE.B.4"
+    (("7.EE.B.4" "IA.7.EE.B.4" "MA.7.EE.B.4")
      "inequalities2-compound"
      "inequalities1-simple"
      "defining-values"
      "functions-dr"
      "functions-make-life-easier"
      )
-    ("8.F.B"
+    (("8.F.B" "IA.8.F.B" "MA.8.F.B")
      "functions-for-character-animation"
      "functions-dr"
      "functions-make-life-easier"
@@ -203,7 +200,7 @@
      "piecewise-functions-conditionals"
      "functions-make-life-easier"
      )
-    ("HSA.SSE.A.1"
+    (("HSA.SSE.A.1" "IA.HSA.SSE.A.1" "MA.HSA.SSE.A.1")
      "defining-values"
      "functions-make-life-easier"
      )
@@ -247,14 +244,14 @@
      "functions-dr"
      "functions-make-life-easier"
      )
-    ("HSF.IF.C"
+    (("HSF.IF.C" "IA.HSF.IF.C" "MA.HSF.IF.C")
      "function-definition-linear"
      "functions-vertical-line-test"
      "functions-can-be-linear"
      "functions-dr"
      "functions-examples-definitions"
      )
-    ("7.EE.B"
+    (("7.EE.B" "IA.7.EE.B" "MA.7.EE.B")
      "problem-decomposition"
      "player-animation"
      "inequalities3-sam"
@@ -262,7 +259,7 @@
      "piecewise-functions-conditionals"
      "functions-dr"
      )
-    ("HSF.BF.A.1"
+    (("HSF.BF.A.1" "IA.HSF.BF.A.1" "MA.HSF.BF.A.1")
      "problem-decomposition"
      "inequalities-collision"
      "functions-vertical-line-test"
@@ -390,11 +387,11 @@
     ("OK.L1.CS.T.01"
      "debugging"
      )
-    ("HSA.SSE.A.1.A"
+    (("HSA.SSE.A.1.A" "IA.HSA.SSE.A.1.A" "MA.HSA.SSE.A.1.A")
      "player-animation"
      "piecewise-functions-conditionals"
      )
-    ("HSA.SSE.A.1.B"
+    (("HSA.SSE.A.1.B" "IA.HSA.SSE.A.1.B" "MA.HSA.SSE.A.1.B")
      "custom-scatter-plots"
      "player-animation"
      "piecewise-functions-conditionals"
@@ -459,7 +456,7 @@
     ("OK.8.AP.C.01"
      "simple-data-types"
      )
-    ("HSS.CP.B.9"
+    (("HSS.CP.B.9" "IA.HSS.CP.B.9" "MA.HSS.CP.B.9")
      "combinatorics-combination"
      "combinatorics-permutation"
      )
@@ -481,13 +478,13 @@
      "numbers-inside-video games"
      "coordinates"
      )
-    ("8.G.B"
+    (("8.G.B" "IA.8.G.B" "MA.8.G.B")
      "distance-formula"
      )
-    ("8.G.B.7"
+    (("8.G.B.7" "IA.8.G.B.7" "MA.8.G.B.7")
      "distance-formula"
      )
-    ("8.G.B.8"
+    (("8.G.B.8" "IA.8.G.B.8" "MA.8.G.B.8")
      "distance-formula"
      )
     ("OK.PA.GM.1"
@@ -514,10 +511,10 @@
      "inequalities1-simple"
      "distance-formula"
      )
-    ("HSN.Q.A"
+    (("HSN.Q.A" "IA.HSN.Q.A" "MA.HSN.Q.A")
      "flags"
      )
-    ("6.RP.A"
+    (("6.RP.A" "IA.6.RP.A" "MA.6.RP.A")
      "bar-and-pie-charts"
      "flags"
      )
@@ -604,31 +601,31 @@
     ("OK.A1.F.3.3"
      "function-composition"
      )
-    ("HSF.IF.A"
+    (("HSF.IF.A" "IA.HSF.IF.A" "MA.HSF.IF.A")
      "function-notation"
      )
-    ("HSF.IF.B.5"
+    (("HSF.IF.B.5" "IA.HSF.IF.B.5" "MA.HSF.IF.B.5")
      "functions-can-be-linear"
      "function-notation"
      )
-    ("8.EE.B"
+    (("8.EE.B" "IA.8.EE.B" "MA.8.EE.B")
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    ("8.F.A.2"
+    (("8.F.A.2" "IA.8.F.A.2" "MA.8.F.A.2")
      "functions-can-be-linear"
      )
-    ("8.F.B.4"
+    (("8.F.B.4" "IA.8.F.B.4" "MA.8.F.B.4")
      "functions-can-be-linear"
      )
-    ("8.EE.B.5"
+    (("8.EE.B.5" "IA.8.EE.B.5" "MA.8.EE.B.5")
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    ("8.EE.B.6"
+    (("8.EE.B.6" "IA.8.EE.B.6" "MA.8.EE.B.6")
      "functions-can-be-linear"
      )
-    ("HSF.IF.C.9"
+    (("HSF.IF.C.9" "IA.HSF.IF.C.9" "MA.HSF.IF.C.9")
      "function-definition-linear"
      "functions-can-be-linear"
      )
@@ -696,7 +693,7 @@
      "inequalities-collision"
      "functions-for-character-animation"
      )
-    ("HSF.BF.B"
+    (("HSF.BF.B" "IA.HSF.BF.B" "MA.HSF.BF.B")
      "problem-decomposition"
      "inequalities3-sam"
      "inequalities-collision"
@@ -713,11 +710,11 @@
      "inequalities3-sam"
      "inequalities-collision"
      )
-    ("6.EE.B.8"
+    (("6.EE.B.8" "IA.6.EE.B.8" "MA.6.EE.B.8")
      "inequalities3-sam"
      "inequalities1-simple"
      )
-    ("6.EE.B.5"
+    (("6.EE.B.5" "IA.6.EE.B.5" "MA.6.EE.B.5")
      "inequalities1-simple"
      )
     ("OK.6.A.3.1"
@@ -729,7 +726,7 @@
      "inequalities2-compound"
      "inequalities1-simple"
      )
-    ("HSS.CP.A.1"
+    (("HSS.CP.A.1" "IA.HSS.CP.A.1" "MA.HSS.CP.A.1")
      "inequalities2-compound"
      )
     ("OK.A1.A.2.2"
@@ -739,7 +736,7 @@
     ("OK.A1.D.2.2"
      "inequalities2-compound"
      )
-    ("HSA.CED.A.3"
+    (("HSA.CED.A.3" "IA.HSA.CED.A.3" "MA.HSA.CED.A.3")
      "inequalities3-sam"
      )
     ("HSA.CED.A.1"
@@ -763,10 +760,10 @@
      "table-methods"
      "inequalities3-sam"
      )
-    ("7.RP.A.1"
+    (("7.RP.A.1" "IA.7.RP.A.1" "MA.7.RP.A.1")
      "making-game-images"
      )
-    ("8.G.A.1"
+    (("8.G.A.1" "IA.8.G.A.1" "MA.8.G.A.1")
      "making-game-images"
      )
     ("1B-AP-14"
@@ -810,10 +807,10 @@
     ("OK.7.A.4.2"
      "order-of-operations"
      )
-    ("HSA.SSE.A.2"
+    (("HSA.SSE.A.2" "IA.HSA.SSE.A.2" "MA.HSA.SSE.A.2")
      "order-of-operations"
      )
-    ("HSA.SSE.B"
+    (("HSA.SSE.B" "IA.HSA.SSE.B" "MA.HSA.SSE.B")
      "order-of-operations"
      )
     ("OK.MAP.2"
@@ -831,7 +828,7 @@
     ("OK.L2.AP.PD.07"
      "player-animation"
      )
-    ("7.EE.A.2"
+    (("7.EE.A.2" "IA.7.EE.A.2" "MA.7.EE.A.2")
      "problem-decomposition"
      )
     ("1B-AP-11"
@@ -881,10 +878,10 @@
      "method-chaining"
      "problem-decomposition"
      )
-    ("6.G.A.4"
+    (("6.G.A.4" "IA.6.G.A.4" "MA.6.G.A.4")
      "surface-area-rect-prism"
      )
-    ("7.G.B.6"
+    (("7.G.B.6" "IA.7.G.B.6" "MA.7.G.B.6")
      "surface-area-rect-prism"
      )
     ("OK.PA.GM.2"
@@ -946,7 +943,7 @@
      "choosing-your-dataset"
      "checking-your-work"
      )
-    ("6.SP.A.1"
+    (("6.SP.A.1" "IA.6.SP.A.1" "MA.6.SP.A.1")
      "ds-intro"
      "choosing-your-dataset"
      )
@@ -1040,26 +1037,26 @@
      "histograms2"
      "correlations"
      )
-    ("HSS.ID.C.9"
+    (("HSS.ID.C.9" "IA.HSS.ID.C.9" "MA.HSS.ID.C.9")
      "linear-regression"
      "correlations"
      )
-    ("HSS.ID.C.8"
+    (("HSS.ID.C.8" "IA.HSS.ID.C.8" "MA.HSS.ID.C.8")
      "scatter-plots"
      "linear-regression"
      "correlations"
      )
-    ("HSS.ID.B.6"
+    (("HSS.ID.B.6" "IA.HSS.ID.B.6" "MA.HSS.ID.B.6")
      "scatter-plots"
      "correlations"
      )
-    ("8.SP.A.1"
+    (("8.SP.A.1" "IA.8.SP.A.1" "MA.8.SP.A.1")
      "scatter-plots"
      "linear-regression"
      "grouped-samples"
      "correlations"
      )
-    ("8.SP.A.2"
+    (("8.SP.A.2" "IA.8.SP.A.1" "MA.8.SP.A.1")
      "scatter-plots"
      "linear-regression"
      "correlations"
@@ -1116,16 +1113,16 @@
     ("OK.7.DA.S.01"
      "bar-and-pie-charts"
      )
-    ("7.RP.A"
+    (("7.RP.A" "IA.7.RP.A" "MA.7.RP.A")
      "bar-and-pie-charts"
      )
-    ("7.RP.A.3"
+    (("7.RP.A.3" "IA.7.RP.A.3" "MA.7.RP.A.3")
      "bar-and-pie-charts"
      )
-    ("7.SP.B"
+    (("7.SP.B" "IA.7.SP.B" "MA.7.SP.B")
      "bar-and-pie-charts"
      )
-    ("HSS.ID.A"
+    (("HSS.ID.A" "IA.HSS.ID.A" "MA.HSS.ID.A")
      "bar-and-pie-charts"
      )
     ("SL.9-10.1"
@@ -1185,26 +1182,26 @@
      "method-chaining"
      "grouped-samples"
      )
-    ("6.SP.B.4"
+    (("6.SP.B.4" "IA.6.SP.B.4" "MA.6.SP.B.4")
      "standard-deviation"
      "box-plots"
      "histograms2"
      "histograms"
      )
-    ("HSS.ID.A.3"
+    (("HSS.ID.A.3" "IA.HSS.ID.A.3" "MA.HSS.ID.A.3")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms2"
      "histograms"
      )
-    ("HSS.ID.A.1"
+    (("HSS.ID.A.1" "IA.HSS.ID.A.1" "MA.HSS.ID.A.1")
      "standard-deviation"
      "box-plots"
      "histograms2"
      "histograms"
      )
-    ("HSS.ID.A.2"
+    (("HSS.ID.A.2" "IA.HSS.ID.A.2" "MA.HSS.ID.A.2")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
@@ -1214,13 +1211,13 @@
      "histograms2"
      "histograms"
      )
-    ("6.SP.A.2"
+    (("6.SP.A.2" "IA.6.SP.A.2" "MA.6.SP.A.2")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms2"
      )
-    ("6.SP.A"
+    (("6.SP.A" "IA.6.SP.A" "MA.6.SP.A")
      "scatter-plots"
      "standard-deviation"
      "box-plots"
@@ -1231,16 +1228,16 @@
     ("OK.A2.F.1.8"
      "custom-scatter-plots"
      )
-    ("HSS.ID.C.7"
+    (("HSS.ID.C.7" "IA.HSS.ID.C.7" "MA.HSS.ID.C.7")
      "linear-regression"
      )
-    ("HSS.ID.B.6.A"
+    (("HSS.ID.B.6.A" "IA.HSS.ID.B.6.A" "MA.HSS.ID.B.6.A")
      "linear-regression"
      )
-    ("HSS.ID.B.6.C"
+    (("HSS.ID.B.6.C" "IA.HSS.ID.B.6.C" "MA.HSS.ID.B.6.C")
      "linear-regression"
      )
-    ("8.SP.A.3"
+    (("8.SP.A.3" "IA.8.SP.A.3" "MA.8.SP.A.3")
      "linear-regression"
      )
     ("1B-DA-07"
@@ -1269,17 +1266,17 @@
     ("OK.4.DA.IM.01"
      "linear-regression"
      )
-    ("6.SP.B.5.C"
+    (("6.SP.B.5.C" "IA.6.SP.B.5.C" "MA.6.SP.B.5.C")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      )
-    ("6.SP.B.5"
+    (("6.SP.B.5" "IA.6.SP.B.5" "MA.6.SP.B.5")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      )
-    ("6.SP.B.5.D"
+    (("6.SP.B.5.D" "IA.6.SP.B.5.D" "MA.6.SP.B.5.D")
      "measures-of-center"
      )
     ("OK.PA.D.1.2"
@@ -1301,13 +1298,13 @@
      "re-functions-that-ask-questions"
      "method-chaining"
      )
-    ("HSS.IC.B.3"
+    (("HSS.IC.B.3" "IA.HSS.IC.B.3" "MA.HSS.IC.B.3")
      "random-samples"
      )
-    ("7.SP.A"
+    (("7.SP.A" "IA.7.SP.A" "MA.7.SP.A")
      "random-samples"
      )
-    ("7.SP.A.1"
+    (("7.SP.A.1" "IA.7.SP.A.1" "MA.7.SP.A.1")
      "random-samples"
      )
     ("OK.PA.D.2.2"
@@ -1319,7 +1316,7 @@
     ("OK.7.AP.PD.04"
      "random-samples"
      )
-    ("HSS.IC.B.6"
+    (("HSS.IC.B.6" "IA.HSS.IC.B.6" "MA.HSS.IC.B.6")
      "threats-to-validity"
      )
     ("2-IC-21"
