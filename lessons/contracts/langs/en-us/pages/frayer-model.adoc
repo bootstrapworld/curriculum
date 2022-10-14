@@ -2,21 +2,25 @@
 
 ++++
 <style>
+  :root {
+    --gap: 25px;
+  }
   .solution * { font-weight: normal; font-size: 10pt; margin-top: 2ex; }
   #content td {
     border: solid 1px black;
     border-radius: 25px;
+    height: 2in;
     padding: 10px;
   }
   .sectionbody { align-items: center; }
   table {
     width: 6.5in;
-    grid-gap: 50px;
+    grid-gap: var(--gap);
     color: #444;
     font-size: 14pt;
     font-weight: bold;
     border: none !important;
-    grid-template-columns: 45% 45% !important;
+    grid-template-columns: 48% 48% !important;
     position: relative;
   }
 
@@ -26,12 +30,15 @@
     align-items: center;
     justify-items: center;
     border: 1px solid black;
-    width: 100%;
-    height: 100%;
-    border-radius: 50% 50%;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
     position: absolute;
-    left: calc(.5 * (100% + 50px));
-    top: calc(.5 * (100% + 50px));
+    /* offset position is calculated via
+     * .5 * (100% + width% + gap)
+     */
+    left: calc(.5 * (100% + 50% + var(--gap)));
+    top:  calc(.5 * (100% + 50% + var(--gap)));
     background: white;
     z-index: 2;
     box-shadow: 1px 1px 5px black;
@@ -45,16 +52,14 @@
 
 [.FillVerticalSpace, cols="1a,>1a", frame="none"]
 |===
-| My Definition
---
+|
+My Definition
 @ifsoln{
 Domain - the set of all possible values that a function consumes
 }
 
---
-
-| Facts and Characteristics
---
+|
+Facts and Characteristics
 @ifsoln{
 Domains are always expressed as *sets*, not
 specific *values*
@@ -63,10 +68,8 @@ Ranges are always expressed as *sets*, not specific *values*
 Domains can have multiple parts: a function
 }
 
---
-
-| Examples
---
+|
+Examples
 @ifsoln{
 Domains can use named sets....
 - Numbers, Rational Numbers, etc.
@@ -77,42 +80,33 @@ Or use set notation... {...-2, -1, 0, 1, 2, …}, {true, false}, etc
 Domains can have multiple parts... (Number, Number, String, String)
 }
 
---
-
-| Non-Examples
---
+|
+Non-Examples
 @ifsoln{
 Specific values cannot be Domains:
 4 “hello” true
 }
-
---
-
 |===
 
 @vspace{5ex}
 
 [.FillVerticalSpace, cols="1a,>1a"]
 |===
-| My Definition
---
+|
+My Definition
 @ifsoln{
 Range - the set of all possible values a function can produce
 }
 
---
-
-| Facts and Characteristics
---
+|
+Facts and Characteristics
 @ifsoln{
 A Range can only have one part.
 Ranges are always expressed as *sets*, not specific *values*
 }
 
---
-
-| Examples
---
+|
+Examples
 @ifsoln{
  Ranges can use named sets....
 - Numbers, Rational Numbers, etc.
@@ -121,15 +115,11 @@ Ranges are always expressed as *sets*, not specific *values*
 Or use set notation... {...-2, -1, 0, 1, 2, …}, {true, false}, etc
 }
 
---
-
-| Non-Examples
---
+|
+Non-Examples
 @ifsoln{
 Specific values cannot be Ranges:
 4 “hello” true
 Multiple sets cannot be ranges: Number, String
 }
-
---
 |===

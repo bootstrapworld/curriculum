@@ -2,22 +2,26 @@
 
 ++++
 <style>
+  :root {
+    --gap: 25px;
+  }
+  .solution * { font-weight: normal; font-size: 10pt; margin-top: 2ex; }
   #content td {
     border: solid 1px black;
     border-radius: 25px;
+    height: 2in;
     padding: 10px;
   }
-  .solution * { font-weight: normal; font-size: 10pt; margin-top: 2ex; }
   .sectionbody { align-items: center; }
   table {
     width: 6.5in;
-    grid-gap: 50px;
+    grid-gap: var(--gap);
     color: #444;
-    border: none !important;
-    grid-template-columns: 45% 45% !important;
-    position: relative;
     font-size: 14pt;
     font-weight: bold;
+    border: none !important;
+    grid-template-columns: 48% 48% !important;
+    position: relative;
   }
 
   tr:first-child td:first-child:after {
@@ -26,12 +30,15 @@
     align-items: center;
     justify-items: center;
     border: 1px solid black;
-    width: 100%;
-    height: 100%;
-    border-radius: 50% 50%;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
     position: absolute;
-    left: calc(.5 * (100% + 50px));
-    top: calc(.5 * (100% + 50px));
+    /* offset position is calculated via
+     * .5 * (100% + width% + gap)
+     */
+    left: calc(.5 * (100% + 50% + var(--gap)));
+    top:  calc(.5 * (100% + 50% + var(--gap)));
     background: white;
     z-index: 2;
     box-shadow: 1px 1px 5px black;
@@ -45,39 +52,31 @@
 
 [.FillVerticalSpace, cols="1a,>1a"]
 |===
-| My Definition
---
+|
+My Definition
 @ifsoln{
 a relation from a set of inputs to a possible set of outputs.
 each input (or set of inputs) produces one output
 }
 
---
-
-| Facts and Characteristics
---
+|
+Facts and Characteristics
 @ifsoln{
 can take in numbers, strings, etc.
 can produce numbers, images, strings, booleans
 }
 
---
-
-| Examples
---
+|
+Examples
 @ifsoln{
 triangle
 f(x)
 text
 }
 
---
-
-| Non-Examples
---
+|
+Non-Examples
 @ifsoln{x}
-
---
 |===
 
 
@@ -85,22 +84,18 @@ text
 
 [.FillVerticalSpace, cols="1a,>1a"]
 |===
-| My Definition
---
+|
+My Definition
 @ifsoln{
 a name or symbol that stands for some value or expression, often a value or expression that changes
 }
 
---
-
-| Facts and Characteristics
---
+|
+Facts and Characteristics
 @ifsoln{often represented by a word or a letter}
 
---
-
-| Examples
---
+|
+Examples
 @ifsoln{
 x
 y
@@ -109,17 +104,12 @@ miles
 color
 }
 
---
-
-| Non-Examples
---
+|
+Non-Examples
 @ifsoln{
 “Hello”
 36
 gt(20)
 triangle
 }
-
---
-
 |===
