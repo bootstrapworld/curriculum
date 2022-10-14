@@ -1548,10 +1548,12 @@
       ;
       (when *lesson-plan*
 
-        (for ([s-ll *standards-and-lessons*])
-          (let ([s (first s-ll)] [ll (rest s-ll)])
+        (for ([ss-ll *standards-and-lessons*])
+          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
+            (unless (list? ss) (set! ss (list ss)))
             (when (member *lesson-plan-base* ll)
-              (add-standard s #f *lesson-plan* #f))))
+              (for ([s ss])
+                (add-standard s #f *lesson-plan* #f)))))
 
         (for ([t-ll *textbooks-and-lessons*])
           (let ([t (first t-ll)] [ll (rest t-ll)])
