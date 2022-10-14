@@ -550,10 +550,16 @@
                   [else ""])
 
             (cond [cond?
-                    (write-wrapper ".cond_clauses"
-                      (lambda ()
-                        (apply string-append
-                          (map write-cond-clause (rest body)))))]
+                    (let* ([clauses (rest body)]
+                           [n (- (length clauses) 1)]
+                           [but-last-clauses (take clauses n)]
+                           [last-clause (list-ref clauses n)])
+                      (write-null-wrapper ".cond_clauses"
+                        (lambda ()
+                          (string-append
+                            (apply string-append
+                              (map write-cond-clause but-last-clauses))
+                            (write-cond-clause last-clause #:last-clause? #t)))))]
                   [else
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
@@ -702,9 +708,11 @@
       (set! *wrapper-block-level* old-*wrapper-block-level*)
       res)))
 
-(define (write-cond-clause clause)
+(define (write-cond-clause clause #:last-clause? [last-clause? #f])
   ; (printf "doing write-cond-clause ~s\n" clause)
-  (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
+  (write-wrapper
+    (string-append ".recipe.recipe_line.recipe_cond_clause"
+      (if last-clause? ".recipe_cond_last_clause" ""))
     (lambda ()
       (string-append (encoded-ans "" "_____" #f)
                      (write-large "{startsb}")
