@@ -570,11 +570,10 @@
   ; (printf "write-body-line-p ~s\n" body-line)
   (write-wrapper
     (string-append ".recipe.recipe_line"
-      (cond [(regexp-match "^(if|else if|else:) " body-line) ".recipe_cond_clause"]
+      (cond [(regexp-match "^(if|else if|else:) " body-line) ".recipe_condition"]
             [else ""]))
     (lambda ()
       (string-append
-        (encoded-ans "" "__" #f)
         (cond [(string=? body-line "") ""]
               [(string-prefix? body-line "|")
                (set! body-line (regexp-replace #rx"^\\| *" body-line ""))
@@ -612,21 +611,15 @@
                    (string-prefix? body-line "else if "))
                (let* ([n (cond [(string-prefix? body-line "if ") 3]
                                [(string-prefix? body-line "else if ") 8])]
-                      [leadup (substring body-line 0 n)]
                       [kode (regexp-match "([^:]*):(.*)" (substring body-line n))]
                       [question-code (list-ref kode 1)]
                       [answer-code (list-ref kode 2)])
                  (string-append
-                   (highlight-keywords leadup)
                    (encoded-ans ".questions" (highlight-keywords question-code) *show-body?*)
-                   ": "
                    (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
               [(string-prefix? body-line "else: ")
-               (let* ([leadup (substring body-line 0 6)]
-                      [answer-code (substring body-line 6)])
-                 (string-append
-                   (highlight-keywords leadup)
-                   (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
+               (let* ([answer-code (substring body-line 6)])
+                 (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*))]
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else
@@ -717,7 +710,7 @@
 (define (write-cond-clause clause)
   ; (printf "doing write-cond-clause ~s\n" clause)
   (write-wrapper
-    ".recipe.recipe_line.recipe_cond_clause"
+    ".recipe.recipe_line.recipe_condition"
     (lambda ()
      (let* ([question (expr-to-string (first clause))]
             [answer (list-to-string (rest clause))])

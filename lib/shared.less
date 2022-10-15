@@ -652,18 +652,7 @@ table.recipe_title    {
     padding-left: 1em;
     &::before { color: black; position: absolute; left: 0; }
   }
-
-  /* Piecewise Functions (ask/cond) branches */
-  &.recipe_cond_clause { 
-    position: relative; 
-    margin-left: 3em; 
-    width: 90%;
-    .answers { margin-left: 1em; }
-    >::before { content: "["; position: absolute; left: -1ex; top: 4px;}
-    >::after { content: "]"; position: absolute; left: 100%; bottom: 3ex; }
-    &:last-child >::after { content: "] ) )"; white-space: nowrap; }
-  }
-  .cond_clauses .studentAnswer { border-bottom: solid 1px black; }
+  .questions, .answers { flex-grow: 1; }
 }
 
 /* Proglang-specific adaptations */
@@ -672,8 +661,28 @@ table.recipe_title    {
     &::before { content: '#'; }
   }
   .solution.recipe_name { text-align: right; } /* no whitespace in pyret */
-  .questions  { width: 39%; }
-  .answers    { width: 44%; }
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 3em; 
+    width: 90%;
+    .answers { margin-left: 1em; }
+    .questions::after { 
+      content: ":"; 
+      position: absolute; 
+      left: 100%; 
+      top: 4px; 
+      width: 1em;
+    }
+    &::before { content: "if"; position: absolute; left: -1em; top: 4px;}
+    +.recipe_condition {
+      .questions { margin-left: 2em; }
+      &::before { content: "else if"; }
+    }
+    +.recipe:nth-last-child(3) {
+      .answers { margin-left: 1.5em; }
+      &::before  { content: "else:"; }
+    }
+  }
   .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
   strong { margin: 0; padding: 0; }
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
@@ -683,7 +692,15 @@ table.recipe_title    {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
-  .questions, .answers { flex-grow: 1; }
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 3em; 
+    width: 90%;
+    .answers { margin-left: 1em; }
+    >::before { content: "["; position: absolute; left: -1ex; top: 4px;}
+    >::after { content: "]"; position: absolute; left: 100%; bottom: 2.8ex; }
+    &:last-child >::after { content: "] ) )"; white-space: nowrap; }
+  }
   .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
   strong { margin: 0; padding: 0; }
   .contracts-table tr:nth-child(odd) td:first-child::before { content: ';'; }
