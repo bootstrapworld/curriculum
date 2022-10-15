@@ -568,7 +568,10 @@
 
 (define (write-body-line/pyret body-line)
   ; (printf "write-body-line-p ~s\n" body-line)
-  (write-wrapper ".recipe.recipe_line"
+  (write-wrapper
+    (string-append ".recipe.recipe_line"
+      (cond [(regexp-match "^(if|else if|else:) " body-line) ".recipe_cond_clause"]
+            [else ""]))
     (lambda ()
       (string-append
         (encoded-ans "" "__" #f)
@@ -606,16 +609,24 @@
                        [else
                          (encoded-ans "" body-line *show-body?*)]))]
               [(or (string-prefix? body-line "if ")
-                   (string-prefix? body-line "else if ")
-                   (string-prefix? body-line "else: "))
+                   (string-prefix? body-line "else if "))
                (let* ([n (cond [(string-prefix? body-line "if ") 3]
-                               [(string-prefix? body-line "else if ") 8]
-                               [(string-prefix? body-line "else: ") 6])]
+                               [(string-prefix? body-line "else if ") 8])]
                       [leadup (substring body-line 0 n)]
-                      [kode (substring body-line n)])
+                      [kode (regexp-match "([^:]*):(.*)" (substring body-line n))]
+                      [question-code (list-ref kode 1)]
+                      [answer-code (list-ref kode 2)])
                  (string-append
                    (highlight-keywords leadup)
-                   (encoded-ans ".answers" (highlight-keywords kode) *show-body?*)))]
+                   (encoded-ans ".questions" (highlight-keywords question-code) *show-body?*)
+                   ": "
+                   (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
+              [(string-prefix? body-line "else: ")
+               (let* ([leadup (substring body-line 0 6)]
+                      [answer-code (substring body-line 6)])
+                 (string-append
+                   (highlight-keywords leadup)
+                   (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else
