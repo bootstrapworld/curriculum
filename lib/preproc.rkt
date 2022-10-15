@@ -986,7 +986,6 @@
                  [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   ;FIXME following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
@@ -1636,12 +1635,8 @@
                                         (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
                                       (printf "WARNING: Item ~s not found in glossary\n\n"
                                               arg)]))]
-                           [(or (string=? directive "prereqs-stds")
-                                (string=? directive "lesson-prereqs"))
-                            (add-lesson-prereqs (read-commaed-group i directive read-group))
-                            ;(display-prereqs-bar o)
-                            ;(display-standards-bar o)
-                            ]
+                           [(string=? directive "lesson-prereqs")
+                            (add-lesson-prereqs (read-commaed-group i directive read-group))]
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
@@ -1713,8 +1708,7 @@
                               (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
-                                (string=? directive "opt-online-exercise")
-                                (string=? directive "ext-exercise-link"))
+                                (string=? directive "opt-online-exercise"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]
                                    [link-text (string-join
