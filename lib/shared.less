@@ -654,7 +654,15 @@ table.recipe_title    {
   }
 
   /* Piecewise Functions (ask/cond) branches */
-  .cond_clauses { position: relative; width: 100%; }
+  &.recipe_cond_clause { 
+    position: relative; 
+    margin-left: 2em; 
+    width: 90%;
+    .answers { margin-left: 1em; }
+    >::before { content: "["; position: absolute; left: -1ex; top: 4px;}
+    >::after { content: "]"; position: absolute; left: 100%; bottom: 3ex; }
+    &:last-child >::after { content: "] ) )"; white-space: nowrap; }
+  }
   .cond_clauses .studentAnswer { border-bottom: solid 1px black; }
 }
 
@@ -675,15 +683,7 @@ table.recipe_title    {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
-  .questions  { width: 44%; }
-  .answers    { width: 45%; }
-  .cond_clauses::after {  /* Add trailing parens for WeScheme */
-    content: ') )';
-    position: absolute;
-    left: 98%;
-    bottom: 1rem;
-    font-size: inherit;
-  }
+  .questions, .answers { flex-grow: 1; }
   .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
   strong { margin: 0; padding: 0; }
   .contracts-table tr:nth-child(odd) td:first-child::before { content: ';'; }

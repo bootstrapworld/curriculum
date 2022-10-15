@@ -714,9 +714,7 @@
     (string-append ".recipe.recipe_line.recipe_cond_clause"
       (if last-clause? ".recipe_cond_last_clause" ""))
     (lambda ()
-      (string-append (encoded-ans "" "_____" #f)
-                     (write-large "{startsb}")
-                     (write-wrapper ".clause"
+      (string-append (write-wrapper ".clause"
                        (lambda ()
                          (let* ([test (expr-to-string (first clause))]
                                 [action (list-to-string (rest clause))]
@@ -732,7 +730,7 @@
                                       (encoded-ans ".answers" action *show-body?*))]
                                    [else (string-append " "
                                            (encoded-ans ".answers" action *show-body?*))])))))
-                     (write-large "{endsb}")))))
+                     ))))
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
