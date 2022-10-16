@@ -14,6 +14,7 @@ body {
   break-inside:   auto !important;
   display:        block;
   page-break-inside: auto !important;
+  position:       relative;
   -webkit-font-smoothing: antialiased;
   &.beta::after { 
     position: absolute;
@@ -58,13 +59,16 @@ body {
     font-size:        1rem;
   }
 
+  #content { margin: 0; }
   #header>h1:only-child { border-bottom: none; }
 
   /* The footer at the bottom of every page */
+  .acknowledgmentsect {
+    position: absolute;
+    top: 100%;
+    margin-top: 20px;
+  }
   .acknowledgment {
-    margin-top:       35px !important;
-    border-top:       dashed 2px black !important;
-    padding-top:      20px !important;
     padding-bottom:   5px !important;
     font-size:        0.8rem !important;
     font-style:       italic !important;
@@ -81,9 +85,8 @@ body {
     background: rgba(0,0,0,0.5);
     margin-left: -3em;
     padding-left: 10px !important;
-    height:     24px;
     position:   fixed;
-    bottom:     0;
+    top:        100%;
     padding:    0;
     z-index:    999;
   }
