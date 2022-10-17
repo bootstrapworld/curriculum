@@ -663,24 +663,25 @@ table.recipe_title    {
   .solution.recipe_name { text-align: right; } /* no whitespace in pyret */
   .recipe_condition { 
     position: relative; 
-    margin-left: 3em; 
+    margin-left: 1em; 
     width: 90%;
     .answers { margin-left: 1em; }
     .questions::after { 
       content: ":"; 
       position: absolute; 
       left: 100%; 
-      top: 4px; 
+      top: 0px; 
       width: 1em;
     }
-    &::before { content: "if"; position: absolute; left: -1em; top: 4px;}
+    .questions { margin-left: 3em; }
+    .questions::before { content: "if"; position: absolute; left: -2em; color: black ;}
     +.recipe_condition {
-      .questions { margin-left: 2em; }
-      &::before { content: "else if"; }
+      .questions { margin-left: 4em; }
+      .questions::before { content: "else if"; left: -3em; }
     }
     +.recipe:nth-last-child(3) {
-      .answers { margin-left: 1.5em; }
-      &::before  { content: "else:"; }
+      .answers::before  { position: absolute; content: "else:"; left: -2em; color: black; }
+      .answers { margin-left: 3em; }
     }
   }
   .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
@@ -694,12 +695,32 @@ table.recipe_title    {
   }
   .recipe_condition { 
     position: relative; 
-    margin-left: 3em; 
+    margin-left: 2em; 
     width: 90%;
-    .answers { margin-left: 1em; }
-    >::before { content: "["; position: absolute; left: -1ex; top: 4px;}
-    >::after { content: "]"; position: absolute; left: 100%; bottom: 2.8ex; }
-    &:last-child >::after { content: "] ) )"; white-space: nowrap; }
+    .questions { margin-left: 1em; }
+    .answers { margin-left: 1em; margin-right: 1em; }
+    .questions::before { content: "["; position: absolute; left: -1ex; color: black; }
+    .answers::after { 
+      content: "]"; 
+      position: absolute; 
+      left: calc(100% + 2pt);
+      bottom: 0; 
+      color: black; 
+      width: unset; 
+      font-style: unset;
+      font-size: unset;
+      font-family: unset;
+    }
+
+    &:last-child >::after { 
+      content: "] ) )"; 
+      white-space: nowrap; 
+      position: absolute; 
+      left: 100%; 
+      bottom: 0; 
+      line-height: 18px;
+      margin-bottom: 0.9rem;
+    }
   }
   .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
   strong { margin: 0; padding: 0; }
@@ -750,7 +771,6 @@ table.recipe_title    {
   display:            inline-block;
   border-bottom:      solid 1px black;
 }
-
 .studentAnswerCode::after, .studentAnswer::after {
   position:           absolute;
   bottom:             -1rem;
@@ -763,6 +783,7 @@ table.recipe_title    {
   content:            "\00A0";
   word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
 }
+
 .studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
 .studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
 
