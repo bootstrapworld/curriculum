@@ -464,10 +464,7 @@
      "combinatorics-combination"
      "combinatorics-permutation"
      )
-    ("IA.5.G.A.1"
-     "coordinates"
-     )
-    ("5.G.A.1"
+    (("5.G.A.1" "IA.5.G.A.1" "MA.5.G.A.1")
      "coordinates"
      )
     ("OK.6.A.1.1"
@@ -518,7 +515,7 @@
      "bar-and-pie-charts"
      "flags"
      )
-    ("6.RP.A.3.D"
+    (("6.RP.A.3.D" "IA.6.RP.A.3.D" "MA.6.RP.A.3.D")
      "flags"
      )
     ("OK.MAP.1"
@@ -580,18 +577,15 @@
      "making-game-images"
      "flags"
      )
-    ("IA.HSF.BF.A.1.B"
+    (("HSF.BF.A.1.B" "IA.HSF.BF.A.1.B" "MA.HSF.BF.A.1.B")
      "function-composition"
      )
-    ("IA.HSF.BF.A.1.C"
-     "function-composition"
-     )
-    ("HSF.BF.A.1.C"
+    (("HSF.BF.A.1.C" "IA.HSF.BF.A.1.C" "MA.HSF.BF.A.1.C")
      "problem-decomposition"
      "inequalities3-sam"
      "function-composition"
      )
-    ("HSF.BF.A"
+    (("HSF.BF.A" "IA.HSF.BF.A" "MA.HSF.BF.A")
      "problem-decomposition"
      "function-composition"
      )
@@ -736,10 +730,10 @@
     ("OK.A1.D.2.2"
      "inequalities2-compound"
      )
-    (("HSA.CED.A.3" "IA.HSA.CED.A.3" "MA.HSA.CED.A.3")
+    (("HSA.CED.A.1" "IA.HSA.CED.A.1" "MA.HSA.CED.A.1")
      "inequalities3-sam"
      )
-    ("HSA.CED.A.1"
+    (("HSA.CED.A.3" "IA.HSA.CED.A.3" "MA.HSA.CED.A.3")
      "inequalities3-sam"
      )
     ("OK.A1.A.2"
