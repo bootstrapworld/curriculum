@@ -2,16 +2,22 @@
 
 (provide *standards-and-lessons*)
 
+(define cc-states
+  '("AL" "AR" "CA" "CO" "CT" "DE" "GA" "HI" "ID" "IL"
+    "IA" "KS" "KY" "LA" "ME" "MD" "MA" "MI" "MS" "MO"
+    "MT" "NV" "NH" "NJ" "NM" "NY" "NC" "ND" "OH" "OR"
+    "PA" "RI" "SD" "TN" "UT" "VT" "WA" "WV" "WI" "WY"))
+
+(define (all-cc-states std)
+  (map (lambda (state) (string-append state "." std)) cc-states))
+
 (define *standards-and-lessons*
-  '(
+  `(
     ;;;;;;;;;;;;;;;;;;;  Common Core Math Standards ;;;;;;;;;;;;;;;;;;
-    (("5.G.A.1" "IA.5.G.A.1" "MA.5.G.A.1")
+    (,(all-cc-states "5.G.A.1")
      "coordinates"
      )
-    (("6.EE.B.6" "IA.6.EE.B.6" "MA.6.EE.B.6")
-     "defining-values"
-     )
-    (("6.EE.B.6" "MA.6.EE.B.6" "IA.6.EE.B.6")
+   (,(all-cc-states "6.EE.B.6")
      "linear-regression"
      "grouped-samples"
      "defining-table-functions"
@@ -30,40 +36,40 @@
      "functions-examples-definitions"
      "functions-make-life-easier"
      )
-    (("6.EE.B.8" "IA.6.EE.B.8" "MA.6.EE.B.8")
+    (,(all-cc-states "6.EE.B.5")
+     "inequalities1-simple"
+     )
+    (,(all-cc-states "6.EE.B.8")
      "inequalities3-sam"
      "inequalities1-simple"
      )
-    (("6.EE.B.5" "IA.6.EE.B.5" "MA.6.EE.B.5")
-     "inequalities1-simple"
-     )
-    (("6.RP.A" "IA.6.RP.A" "MA.6.RP.A")
+    (,(all-cc-states "6.RP.A")
      "bar-and-pie-charts"
      "flags"
      )
-    (("6.RP.A.3.D" "IA.6.RP.A.3.D" "MA.6.RP.A.3.D")
+    (,(all-cc-states "6.RP.A.3.D")
      "flags"
      )
-    (("6.G.A.4" "IA.6.G.A.4" "MA.6.G.A.4")
+    (,(all-cc-states "6.G.A.4")
      "surface-area-rect-prism"
      )
-    (("6.SP.B.4" "IA.6.SP.B.4" "MA.6.SP.B.4")
+    (,(all-cc-states "6.SP.B.4")
      "standard-deviation"
      "box-plots"
      "histograms2"
      "histograms"
      )
-    (("6.SP.A.1" "IA.6.SP.A.1" "MA.6.SP.A.1")
+    (,(all-cc-states "6.SP.A.1")
      "ds-intro"
      "choosing-your-dataset"
      )
-    (("6.SP.A.2" "IA.6.SP.A.2" "MA.6.SP.A.2")
+    (,(all-cc-states "6.SP.A.2")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms2"
      )
-    (("6.SP.A" "IA.6.SP.A" "MA.6.SP.A")
+    (,(all-cc-states "6.SP.A")
      "scatter-plots"
      "standard-deviation"
      "box-plots"
@@ -71,26 +77,26 @@
      "linear-regression"
      "histograms2"
      )
-    (("6.SP.B.5.C" "IA.6.SP.B.5.C" "MA.6.SP.B.5.C")
+    (,(all-cc-states "6.SP.B.5.C")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      )
-    (("6.SP.B.5" "IA.6.SP.B.5" "MA.6.SP.B.5")
+    (,(all-cc-states "6.SP.B.5")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      )
-    (("6.SP.B.5.D" "IA.6.SP.B.5.D" "MA.6.SP.B.5.D")
+    (,(all-cc-states "6.SP.B.5.D")
      "measures-of-center"
      )
-    (("7.RP.A.1" "IA.7.RP.A.1" "MA.7.RP.A.1")
+    (,(all-cc-states "7.RP.A.1")
      "making-game-images"
      )
-    (("7.EE.A.2" "IA.7.EE.A.2" "MA.7.EE.A.2")
+    (,(all-cc-states "7.EE.A.2")
      "problem-decomposition"
      )
-    (("7.EE.B" "IA.7.EE.B" "MA.7.EE.B")
+    (,(all-cc-states "7.EE.B")
      "problem-decomposition"
      "player-animation"
      "inequalities3-sam"
@@ -98,100 +104,103 @@
      "piecewise-functions-conditionals"
      "functions-dr"
      )
-    (("7.EE.B.4" "IA.7.EE.B.4" "MA.7.EE.B.4")
+    (,(all-cc-states "7.EE.B.4")
      "inequalities2-compound"
      "inequalities1-simple"
      "defining-values"
      "functions-dr"
      "functions-make-life-easier"
      )
-    (("7.G.B.6" "IA.7.G.B.6" "MA.7.G.B.6")
+    (,(all-cc-states "7.G.B.6")
      "surface-area-rect-prism"
      )
-    (("7.RP.A" "IA.7.RP.A" "MA.7.RP.A")
+    (,(all-cc-states "7.RP.A")
      "bar-and-pie-charts"
      )
-    (("7.RP.A.3" "IA.7.RP.A.3" "MA.7.RP.A.3")
+    (,(all-cc-states "7.RP.A.3")
      "bar-and-pie-charts"
      )
-    (("7.SP.B" "IA.7.SP.B" "MA.7.SP.B")
+    (,(all-cc-states "7.SP.B")
      "bar-and-pie-charts"
      )
-    (("7.SP.A" "IA.7.SP.A" "MA.7.SP.A")
+    (,(all-cc-states "7.SP.A")
      "random-samples"
      )
-    (("7.SP.A.1" "IA.7.SP.A.1" "MA.7.SP.A.1")
+    (,(all-cc-states "7.SP.A.1")
      "random-samples"
      )
-    (("8.EE.B.5" "IA.8.EE.B.5" "MA.8.EE.B.5")
+    (,(all-cc-states "8.EE.B.5")
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (("8.EE.B.6" "IA.8.EE.B.6" "MA.8.EE.B.6")
+    (,(all-cc-states "8.EE.B.6")
      "functions-can-be-linear"
      )
-    (("8.EE.B" "IA.8.EE.B" "MA.8.EE.B")
+    (,(all-cc-states "8.EE.B")
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (("8.F.B" "IA.8.F.B" "MA.8.F.B")
+    (,(all-cc-states "8.F.B")
      "functions-for-character-animation"
      "functions-dr"
      "functions-make-life-easier"
      )
-    (("8.F.A.2" "IA.8.F.A.2" "MA.8.F.A.2")
+    (,(all-cc-states "8.F.A.2")
      "functions-can-be-linear"
      )
-    (("8.F.B.4" "IA.8.F.B.4" "MA.8.F.B.4")
+    (,(all-cc-states "8.F.B.4")
      "functions-can-be-linear"
      )
-    (("8.F.A.1" "IA.8.F.A.1" "MA.8.F.A.1")
+    (,(all-cc-states "8.F.A.1")
      "contracts"
      )
-    (("8.SP.A.3" "IA.8.SP.A.3" "MA.8.SP.A.3")
+    (,(all-cc-states "8.SP.A.3")
      "linear-regression"
      )
-    (("8.G.A.1" "IA.8.G.A.1" "MA.8.G.A.1")
+    (,(all-cc-states "8.G.A.1")
      "making-game-images"
      )
-    (("8.G.B" "IA.8.G.B" "MA.8.G.B")
+    (,(all-cc-states "8.G.B")
      "distance-formula"
      )
-    (("8.G.B.7" "IA.8.G.B.7" "MA.8.G.B.7")
+    (,(all-cc-states "8.G.B.7")
      "distance-formula"
      )
-    (("8.G.B.8" "IA.8.G.B.8" "MA.8.G.B.8")
+    (,(all-cc-states "8.G.B.8")
      "distance-formula"
      )
-    (("8.SP.A.1" "IA.8.SP.A.1" "MA.8.SP.A.1")
+    (,(all-cc-states "8.SP.A.1")
      "scatter-plots"
      "linear-regression"
      "grouped-samples"
      "correlations"
      )
-    (("8.SP.A.2" "IA.8.SP.A.1" "MA.8.SP.A.1")
+    (,(all-cc-states "8.SP.A.2")
      "scatter-plots"
      "linear-regression"
      "correlations"
      )
-    (("HSS.IC.B.3" "IA.HSS.IC.B.3" "MA.HSS.IC.B.3")
+    (,(all-cc-states "HSS.IC.B.3")
      "random-samples"
      )
-    (("HSN.Q.A" "IA.HSN.Q.A" "MA.HSN.Q.A")
+    (,(all-cc-states "HSN.Q.A")
      "flags"
      )
-    (("HSS.CP.B.9" "IA.HSS.CP.B.9" "MA.HSS.CP.B.9")
+    (,(all-cc-states "HSS.CP.A.1")
+     "inequalities2-compound"
+     )
+    (,(all-cc-states "HSS.CP.B.9")
      "combinatorics-combination"
      "combinatorics-permutation"
      )
-    (("HSF.IF.A" "IA.HSF.IF.A" "MA.HSF.IF.A")
+    (,(all-cc-states "HSF.IF.A")
      "function-notation"
      )
-    (("HSF.IF.A.1" "IA.HSF.IF.A.1" "MA.HSF.IF.A.1")
+    (,(all-cc-states "HSF.IF.A.1")
      "function-definition-linear"
      "contracts"
      )
-    (("HSF.IF.A.2" "IA.HSF.IF.A.2" "MA.HSF.IF.A.2")
+    (,(all-cc-states "HSF.IF.A.2")
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
@@ -199,127 +208,127 @@
      "flags"
      "contracts"
      )
-    (("HSF.IF.B" "IA.HSF.IF.B")
+    (,(all-cc-states "HSF.IF.B")
      "flags"
      "functions-make-life-easier"
      )
-    (("HSF.IF.B.5" "IA.HSF.IF.B.5" "MA.HSF.IF.B.5")
+    (,(all-cc-states "HSF.IF.B.5")
      "functions-can-be-linear"
      "function-notation"
      )
-    (("HSF.IF.C" "IA.HSF.IF.C" "MA.HSF.IF.C")
+    (,(all-cc-states "HSF.IF.C")
      "function-definition-linear"
      "functions-vertical-line-test"
      "functions-can-be-linear"
      "functions-dr"
      "functions-examples-definitions"
      )
-    (("HSF.IF.C.9" "IA.HSF.IF.C.9" "MA.HSF.IF.C.9")
+    (,(all-cc-states "HSF.IF.C.9")
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (("HSF.BF.A" "IA.HSF.BF.A" "MA.HSF.BF.A")
+    (,(all-cc-states "HSF.BF.A")
      "problem-decomposition"
      "function-composition"
      )
-    (("HSF.BF.A.1" "IA.HSF.BF.A.1" "MA.HSF.BF.A.1")
+    (,(all-cc-states "HSF.BF.A.1")
      "problem-decomposition"
      "inequalities-collision"
      "functions-vertical-line-test"
      "functions-can-be-linear"
      "functions-dr"
      )
-    (("HSF.BF.A.1.B" "IA.HSF.BF.A.1.B" "MA.HSF.BF.A.1.B")
+    (,(all-cc-states "HSF.BF.A.1.B")
      "function-composition"
      )
-    (("HSF.BF.A.1.C" "IA.HSF.BF.A.1.C" "MA.HSF.BF.A.1.C")
+    (,(all-cc-states "HSF.BF.A.1.C")
      "problem-decomposition"
      "inequalities3-sam"
      "function-composition"
      )
-    (("HSF.BF.B" "IA.HSF.BF.B" "MA.HSF.BF.B")
+    (,(all-cc-states "HSF.BF.B")
      "problem-decomposition"
      "inequalities3-sam"
      "inequalities-collision"
      )
-    (("HSA.SSE.A.2" "IA.HSA.SSE.A.2" "MA.HSA.SSE.A.2")
+    (,(all-cc-states "HSA.SSE.A.2")
      "order-of-operations"
      )
-    (("HSA.SSE.B" "IA.HSA.SSE.B" "MA.HSA.SSE.B")
+    (,(all-cc-states "HSA.SSE.B")
      "order-of-operations"
      )
-    (("HSF.LE.B" "IA.HSF.LE.B" "MA.HSF.LE.B")
+    (,(all-cc-states "HSF.LE.B")
      "functions-for-character-animation"
      )
-    (("HSA.CED.A.1" "IA.HSA.CED.A.1" "MA.HSA.CED.A.1")
+    (,(all-cc-states "HSA.CED.A.1")
      "inequalities3-sam"
      )
-    (("HSA.CED.A.3" "IA.HSA.CED.A.3" "MA.HSA.CED.A.3")
+    (,(all-cc-states "HSA.CED.A.3")
      "inequalities3-sam"
      )
-    (("HSA.SSE.A.1" "IA.HSA.SSE.A.1" "MA.HSA.SSE.A.1")
+    (,(all-cc-states "HSA.SSE.A.1")
      "defining-values"
      "functions-make-life-easier"
      )
-    (("HSA.SSE.A.1.A" "IA.HSA.SSE.A.1.A" "MA.HSA.SSE.A.1.A")
+    (,(all-cc-states "HSA.SSE.A.1.A")
      "player-animation"
      "piecewise-functions-conditionals"
      )
-    (("HSA.SSE.A.1.B" "IA.HSA.SSE.A.1.B" "MA.HSA.SSE.A.1.B")
+    (,(all-cc-states "HSA.SSE.A.1.B")
      "custom-scatter-plots"
      "player-animation"
      "piecewise-functions-conditionals"
      )
-    (("HSS.ID.C.9" "IA.HSS.ID.C.9" "MA.HSS.ID.C.9")
+    (,(all-cc-states "HSS.ID.C.9")
      "linear-regression"
      "correlations"
      )
-    (("HSS.ID.C.8" "IA.HSS.ID.C.8" "MA.HSS.ID.C.8")
+    (,(all-cc-states "HSS.ID.C.8")
      "scatter-plots"
      "linear-regression"
      "correlations"
      )
-    (("HSS.ID.B.6" "IA.HSS.ID.B.6" "MA.HSS.ID.B.6")
+    (,(all-cc-states "HSS.ID.B.6")
      "scatter-plots"
      "correlations"
      )
-    (("HSS.ID.A" "IA.HSS.ID.A" "MA.HSS.ID.A")
+    (,(all-cc-states "HSS.ID.A")
      "bar-and-pie-charts"
      )
-    (("HSS.ID.A.3" "IA.HSS.ID.A.3" "MA.HSS.ID.A.3")
+    (,(all-cc-states "HSS.ID.A.3")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms2"
      "histograms"
      )
-    (("HSS.ID.A.1" "IA.HSS.ID.A.1" "MA.HSS.ID.A.1")
+    (,(all-cc-states "HSS.ID.A.1")
      "standard-deviation"
      "box-plots"
      "histograms2"
      "histograms"
      )
-    (("HSS.ID.A.2" "IA.HSS.ID.A.2" "MA.HSS.ID.A.2")
+    (,(all-cc-states "HSS.ID.A.2")
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms"
      )
-    (("HSS.ID.C.7" "IA.HSS.ID.C.7" "MA.HSS.ID.C.7")
+    (,(all-cc-states "HSS.ID.C.7")
      "linear-regression"
      )
-    (("HSS.ID.B.6.A" "IA.HSS.ID.B.6.A" "MA.HSS.ID.B.6.A")
+    (,(all-cc-states "HSS.ID.B.6.A")
      "linear-regression"
      )
-    (("HSS.ID.B.6.C" "IA.HSS.ID.B.6.C" "MA.HSS.ID.B.6.C")
+    (,(all-cc-states "HSS.ID.B.6.C")
      "linear-regression"
      )
-    (("HSS.IC.B.6" "IA.HSS.IC.B.6" "MA.HSS.IC.B.6")
+    (,(all-cc-states "HSS.IC.B.6")
      "threats-to-validity"
      )
 
     ;;;;;;;;;;;;;;;;;;;  Common Core ELA Standards ;;;;;;;;;;;;;;;;;;
-    (("SL.9-10.1" "IA.SL.9-10.1" "MA.SL.9-10.1")
+    (,(all-cc-states "SL.9-10.1")
      "ds-intro"
      )
 
@@ -622,9 +631,6 @@
      "inequalities3-sam"
      "inequalities2-compound"
      "inequalities1-simple"
-     )
-    (("HSS.CP.A.1" "IA.HSS.CP.A.1" "MA.HSS.CP.A.1")
-     "inequalities2-compound"
      )
     ("OK.A1.A.2.2"
      "inequalities3-sam"
