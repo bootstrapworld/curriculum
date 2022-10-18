@@ -986,7 +986,6 @@
                  [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   ;FIXME following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
@@ -1548,10 +1547,12 @@
       ;
       (when *lesson-plan*
 
-        (for ([s-ll *standards-and-lessons*])
-          (let ([s (first s-ll)] [ll (rest s-ll)])
+        (for ([ss-ll *standards-and-lessons*])
+          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
+            (unless (list? ss) (set! ss (list ss)))
             (when (member *lesson-plan-base* ll)
-              (add-standard s #f *lesson-plan* #f))))
+              (for ([s ss])
+                (add-standard s #f *lesson-plan* #f)))))
 
         (for ([t-ll *textbooks-and-lessons*])
           (let ([t (first t-ll)] [ll (rest t-ll)])
@@ -1634,12 +1635,8 @@
                                         (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
                                       (printf "WARNING: Item ~s not found in glossary\n\n"
                                               arg)]))]
-                           [(or (string=? directive "prereqs-stds")
-                                (string=? directive "lesson-prereqs"))
-                            (add-lesson-prereqs (read-commaed-group i directive read-group))
-                            ;(display-prereqs-bar o)
-                            ;(display-standards-bar o)
-                            ]
+                           [(string=? directive "lesson-prereqs")
+                            (add-lesson-prereqs (read-commaed-group i directive read-group))]
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
@@ -1711,8 +1708,7 @@
                               (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
-                                (string=? directive "opt-online-exercise")
-                                (string=? directive "ext-exercise-link"))
+                                (string=? directive "opt-online-exercise"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]
                                    [link-text (string-join
