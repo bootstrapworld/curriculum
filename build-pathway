@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-17 # last modified
+LASTMOD=2022-10-18 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2108,6 +2108,15 @@ function buildpathwayworkbooks() {
   #mkdir -p $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY/resources/solution-pages
 
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
+
+  cd resources/protected
+  for f in workbook-sols workbook-long-sols opt-exercises-sols; do
+    $CP -p $PROGDIR/redirect.html $f.pdf.html
+    $SED -i \
+      -e 's/REDIRECT_TARGET_FILE/'$f.pdf'/g' \
+      $f.pdf.html
+   done
+
 }
 
 function copycommonlessons() {
