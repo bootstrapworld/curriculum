@@ -337,7 +337,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("origin") "the point (0,0) where the horizontal and vertical axes intersect")
      (es-mx ("origen") "el punto (0,0) en el que el eje horizontal y el eje vertical se intersectan"))
     
-    ((en-us ("outlier") "observations whose values are very different from the other observations in the same data set, perhaps due to experimental error. Outliers can also be indicative of data belonging to a different population from the rest of the established samples.")
+    ((en-us ("outlier") "observations whose values are very different from the other observations in the same dataset, perhaps due to experimental error. Outliers can also be indicative of data belonging to a different population from the rest of the established samples.")
      (es-mx ("valore atípico" "valores atípicos") "observaciones cuyos valores son muy diferentes al resto de observaciones del mismo grupo de datos, quizás debido a un error experimental. Los valores atípicos también pueden ser indicativos de datos pertenecientes a una población diferente del resto de las muestras establecidas."))
     
     ((en-us ("percentage") "a ratio showing the parts per hundred")
@@ -451,7 +451,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("spread") "the extent to which values in a dataset vary, either from one another or from the center")
      (es-mx ("dispersión") "la medida en que los valores en un conjunto de datos varían, entre sí o desde el centro"))
     
-    ((en-us ("standard deviation") "a number that measures spread of a data set using the typical distance of values from their mean")
+    ((en-us ("standard deviation") "a number that measures spread of a dataset using the typical distance of values from their mean")
      (es-mx ("Desviación Estándar") "un número que mide la dispersión de un conjunto de datos usando la distancia típica de los valores desde su media"))
 
     ((en-us ("state") "the value of a changing system at any point in time (i.e. a stoplight can be in the 'red', 'yellow' or 'green' state). In Pyret, the state of a Reactor is it's current value.")

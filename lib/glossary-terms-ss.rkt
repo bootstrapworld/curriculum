@@ -13,7 +13,7 @@ from the ones in the main glossary file.
 
     ((en-us ("artifact") "an object of cultural or historical interest that was made by a human"))
 
-    ((en-us (("average") ("mean")) "the sum of all numbers in a quantitative data set, divided by how many there are"))
+    ((en-us (("average") ("mean")) "the sum of all numbers in a quantitative dataset, divided by how many there are"))
 
     ((en-us ("bar chart") "a display that uses bars to show counts or proportions in each category"))
 
@@ -63,7 +63,7 @@ from the ones in the main glossary file.
 
     ((en-us ("organic") "coming from living things"))
 
-    ((en-us ("outlier" "outliers") "a value in a quantitative data set that is unusually low or high compared to the rest of the values"))
+    ((en-us ("outlier" "outliers") "a value in a quantitative dataset that is unusually low or high compared to the rest of the values"))
 
     ((en-us ("pie chart") "a display that uses a circular pie’s slices to show proportions in each category"))
 
