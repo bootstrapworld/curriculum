@@ -1792,7 +1792,7 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
+                            (fprintf o "link:./protected/workbook-sols.pdf.html[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
@@ -2287,8 +2287,9 @@
     ; (link-to-opt-projects o)
 
     (unless (null? exx)
+      ; FIXME: should make this natlang-dependent
       (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
-      (display "and we provide password-protected **link:./protected/workbook-sols.pdf[Workbook Solutions]** as well.\n\n" o)
+      (display "and we provide password-protected **link:./protected/workbook-sols.pdf.html[Workbook Solutions]** as well.\n\n" o)
       (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])

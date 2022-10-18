@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-15 # last modified
+LASTMOD=2022-10-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -299,7 +299,8 @@ fi
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
-  $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
+  $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
+    $TOPDIR/lib/.hta* $PROGDIR
   $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
 fi
 

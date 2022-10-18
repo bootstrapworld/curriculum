@@ -1,4 +1,4 @@
-# last modified 2022-10-16
+# last modified 2022-10-17
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -8,20 +8,13 @@ YEAR=2022
 
 ############################################################################
 
-lib=
-
-while test $# -ne 0; do
-  arg=$1; shift
-  if test "$arg" = -lib; then
-    lib=lib
-  fi
-done
-
 if test ! -d distribution; then
   echo distribution/ not found; exit
 fi
 
 cd distribution
+
+export DISTDIR=$(pwd)
 
 test -d deployables && rm -fr deployables
 
@@ -36,7 +29,7 @@ done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
 
-SED=sed
+export SED=sed
 
 (which gsed | grep -q .) && SED=gsed
 
@@ -64,10 +57,8 @@ function copyCourse() {
 echo Creating distribution/deployables
 
 for lang in $ALL_THE_LANGS; do
-  if test $lib; then
-    if test -d $lang/extlib; then
-      cp -pr $lang/extlib deployables/$lang
-    fi
+  if test -d $lang/extlib; then
+    cp -pr $lang/extlib deployables/$lang
   fi
   for f in $lang/*; do
     if test -f $f; then
@@ -104,11 +95,14 @@ find deployables -name __sample* -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 find deployables -name zample* -type d -exec rm -fr {} \; > /dev/null 2>&1
 
-# The following two will be removed once we set up htaccess
+echo Password-protecting solution files
 
-find deployables -name solution-pages -type d -exec rm -fr {} \; > /dev/null 2>&1
+export SHAW=c6554157433a94d84db9792fc3cf779b14956e59
 
-find deployables -name protected -type d -exec rm -fr {} \; > /dev/null 2>&1
+export PROGDIR=$DISTDIR/.prog-en-us
+
+find deployables -name solution-pages -type d | xargs $PROGDIR/password-protect-dirs.sh
+find deployables -name protected -type d | xargs $PROGDIR/password-protect-dirs.sh
 
 ###########################
 
@@ -127,7 +121,9 @@ mkdir -p $DEPLOY_DIR
 
 cp -pr deployables/* $DEPLOY_DIR
 
-echo Committing $DEPLOY_DIR to GitHub
+# exit
+
+echo Pushing $DEPLOY_DIR to GitHub
 
 cd $DEPLOY_DIR
 
