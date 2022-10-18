@@ -322,8 +322,8 @@
     (("SL.9-10.1" "IA.SL.9-10.1" "MA.SL.9-10.1")
      "ds-intro"
      )
-    ;;;;;;;;;;;;;;;;;;;  Oklahoma Standards ;;;;;;;;;;;;;;;;;;
 
+    ;;;;;;;;;;;;;;;;;;;  Oklahoma Standards ;;;;;;;;;;;;;;;;;;
     ("OK.SP.1.5"
      "combinatorics-combination"
      "combinatorics-permutation"
@@ -915,6 +915,300 @@
     ("OK.6.IC.C.01"
      "computing-needs-all-voices"
      )
+
+    ;;;;;;;;;;;;;;; MA Digital Literacy Standards ;;;;;;;;
+    ("MA.3-5.CAS.b.2"
+     "making-game-images"
+    )
+    ("MA.3-5.DTC.c.5"
+     ;"Create an artifact that answers a research question and clearly communicates thoughts and ideas."
+     ; TODO(Flannery): do any of the social studies lessons align here?
+    )
+    ("MA.3-5.CT.a.2"
+     ;"Organize information in different ways to make it more useful/relevant (e.g., sorting, tables)."
+     ; TODO(Flannery): do any of the social studies lessons align here?
+    )
+    ("MA.3-5.CT.b.2"
+      ;"Recognize that different solutions exist for the same problem (or sub-problem)."
+    )
+    ("MA.3-5.CT.c.2"
+     "Individually and collaboratively collect and manipulate data to answer a question using a variety of computing methods (e.g., sorting, totaling, averaging) and tools (such as a spreadsheet) to collect, organize, graph, and analyze data."
+    )
+    ("MA.3-5.CT.d.2"
+     "Use arithmetic operators, conditionals, and repetition in programs."
+    )
+    ("MA.3-5.CT.d.3"
+      "Use interactive debugging to detect and correct simple program errors."
+    )
+    ("MA.3-5.CT.e.1"
+     ;"Individually and collaboratively create a simple model of a system (e.g., water cycle, solar system) and explain what the model shows and does not show."
+     ; MODELING!!
+    )
+    ("MA.3-5.CT.e.2"
+     ;"Identify the concepts, features, and behaviors illustrated by a simulation (e.g., object motion, weather, ecosystem, predator/prey) and those that were not included."
+     ; MODELING!!
+    )
+    ("MA.3-5.CT.e.3"
+     ;"Individually and collaboratively use data from a simulation to answer a question."
+     ; MODELING!!
+    )
+    ("MA.6-8.CAS.b.1"
+     "making-game-images"
+    )
+    ("MA.6-8.CAS.c.4"
+     "measures-of-center"
+     "threats-to-validity"
+    )
+    ("MA.6-8.DTC.a.4"
+     "making-game-images"
+     "functions-for-character-animation"
+     "inequalities3-sam"
+     "inequalities-collision"
+     "distance-formula"
+     "player-animation"
+     "project-video-game"
+    )
+    ("MA.6-8.DTC.a.5"
+     "data-collection"
+    )
+    ("MA.6-8.DTC.b.1"
+     "project-research-paper"
+    )
+    ("MA.6-8.DTC.c.4"
+     "project-research-paper"
+    )
+    ("MA.6-8.CT.a.2"
+     "functions-make-life-easier"
+     "functions-dr"
+     "functions-for-character-animation"
+     "problem-decomposition"
+     "inequalities1-simple"
+     "inequalities2-compound"
+     "inequalities3-sam"
+     "re-refactoring"
+     "re-structures-reactors-animations"
+     "re-nested-structures"
+     "re-intro-to-data-structures"
+     "re-functions-that-ask-questions"
+     "re-key-events"
+     "re-timers"
+     "re-scoring"
+    )
+    ("MA.6-8.CT.b.1"
+     "piecewise-functions-conditionals"
+     "player-animation"
+     "table-methods"
+     "codap-transformers-1"
+     "codap-transformers-2"
+     "defining-table-functions"
+    )
+    ("MA.6-8.CT.b.2"
+     "functions-make-life-easier"
+     "functions-dr"
+     "functions-for-character-animation"
+     "problem-decomposition"
+     "inequalities1-simple"
+     "inequalities2-compound"
+     "inequalities3-sam"
+     "re-refactoring"
+     "re-structures-reactors-animations"
+     "re-nested-structures"
+     "re-intro-to-data-structures"
+     "re-functions-that-ask-questions"
+     "re-key-events"
+     "re-timers"
+     "re-scoring"
+    )
+    ("MA.6-8.CT.b.3"
+     "problem-decomposition"
+     "inequalities-collision"
+    )
+    ("MA.6-8.CT.b.5"
+     "inequalities3-sam"
+    )
+    ("MA.6-8.CT.c.4"
+     "table-methods"
+     "codap-transformers-1"
+     "codap-transformers-2"
+    )
+    ("MA.6-8.CT.c.5"
+     "data-collection"
+    )
+    ("MA.6-8.CT.d.2"
+     "functions-make-life-easier"
+     "functions-dr"
+     "functions-for-character-animation"
+     "problem-decomposition"
+     "inequalities1-simple"
+     "inequalities2-compound"
+     "inequalities3-sam"
+     "re-refactoring"
+     "re-structures-reactors-animations"
+     "re-nested-structures"
+     "re-intro-to-data-structures"
+     "re-functions-that-ask-questions"
+     "re-key-events"
+     "re-timers"
+     "re-scoring"
+    )
+    ("MA.6-8.CT.d.4"
+     "project-research-paper"
+     "project-exploration-paper"
+     "project-video-game"
+     "codap-transformers-1"
+     "codap-transformers-2"
+     "piecewise-functions-conditionals"
+     "player-animation"
+    )
+    ("MA.6-8.CT.d.5"
+     "functions-make-life-easier"
+     "functions-dr"
+     "functions-for-character-animation"
+     "problem-decomposition"
+     "inequalities1-simple"
+     "inequalities2-compound"
+     "inequalities3-sam"
+     "re-refactoring"
+     "re-structures-reactors-animations"
+     "re-nested-structures"
+     "re-intro-to-data-structures"
+     "re-functions-that-ask-questions"
+     "re-key-events"
+     "re-timers"
+     "re-scoring"
+    )
+    ("MA.6-8.CT.d.6"
+     "debugging"
+    )
+    ("MA.6-8.CT.e.1"
+     ;"Create a model of a real-world system and explain why some details, features and behaviors were required in the model and why some could be ignored."
+     ; MODELING!
+    )
+    ("MA.6-8.CT.e.2"
+     ;"Use and modify simulations to analyze and illustrate a concept in depth (e.g., light rays/mechanical waves interaction with materials, genetic variation)."
+     ; MODELING!
+    )
+    ("MA.6-8.CT.e.3"
+     ;"Select and use computer simulations, individually and collaboratively, to gather, view, analyze, and report results for content-related problems (e.g., migration, trade, cellular function)."
+     ; MODELING!
+    )
+    ("MA.9-12.DTC.a.1"
+     "project-research-paper"
+     "project-exploration-paper"
+     "project-video-game"
+    )
+    ("MA.9-12.DTC.c.1"
+     "ds-intro"
+     "project-research-paper"
+     "project-exploration-paper"
+    )
+    ("MA.9-12.DTC.c.4"
+     "data-collection"
+    )
+    ("MA.9-12.DTC.c.5"
+     "project-research-paper"
+     "project-exploration-paper"
+    )
+    ("MA.9-12.CT.a.1"
+     "problem-decomposition"
+     "inequalities-collision"
+     "re-nested-structures"
+    )
+    ("MA.9-12.CT.b.2"
+     "functions-make-life-easier"
+     "functions-dr"
+     "functions-for-character-animation"
+     "problem-decomposition"
+     "inequalities1-simple"
+     "inequalities2-compound"
+     "inequalities3-sam"
+     "re-refactoring"
+     "re-structures-reactors-animations"
+     "re-nested-structures"
+     "re-intro-to-data-structures"
+     "re-functions-that-ask-questions"
+     "re-key-events"
+     "re-timers"
+     "re-scoring"
+    )
+    ("MA.9-12.CT.b.3"
+     ;"Explain how a recursive solution to a problem repeatedly applies the same solution to smaller instances of the problem."
+     ; I hope to god we teach this someday
+    )
+    ("MA.9-12.CT.c.2"
+     "codap-transformers-1"
+     "codap-transformers-2"
+     "table-methods"
+     "defining-table-functions"
+    )
+    ("MA.9-12.CT.c.3"
+     "bar-and-pie-charts"
+     "codap-bar-charts"
+     "codap-exploring"
+     "histograms"
+     "histograms2"
+     "box-plots"
+     "custom-scatter-plots"
+     "scatter-plots"
+     "correlations"
+     "linear-regression"
+    )
+    ("MA.9-12.CT.c.4"
+     "project-research-paper"
+     "project-exploration-paper"
+     "linear-regression"
+     "histograms2"
+     "measures-of-center"
+    )
+    ("MA.9-12.CT.d.1"
+     "project-research-paper"
+    )
+    ("MA.9-12.CT.d.3"
+     "table-methods"
+     "defining-table-functions"
+     "codap-transformers-1"
+     "codap-transformers-2"
+    )
+    ("MA.9-12.CT.d.5"
+     "table-methods"
+     "defining-table-functions"
+     "codap-transformers-1"
+     "codap-transformers-2"
+    )
+    ("MA.9-12.CT.d.6"
+     "piecewise-functions-conditionals"
+     "player-animation"
+     "re-key-events"
+    )
+    ("MA.9-12.CT.d.7"
+     "order-of-operations"
+    )
+    ("MA.9-12.CT.d.8"
+     "project-video-game"
+     "project-research-paper"
+     "project-exploration-paper"
+     "flags"
+    )
+    ("MA.9-12.CT.d.10"
+     "project-video-game"
+     "project-research-paper"
+     "project-exploration-paper"
+     "flags"
+    )
+    ("MA.9-12.CT.d.11"
+     "debugging"
+    )
+    ("MA.9-12.CT.d.12"
+     "functions-dr"
+    )
+    ("MA.9-12.CT.e.1"
+     ;"Create models and simulations to help formulate, test, and refine hypotheses."
+     ; MODELING!
+    )
+    ("MA.9-12.CT.e.2"
+     ;"Form a model from a hypothesis generated from research and run a simulation to collect and analyze data to test that hypothesis."
+     ; MODELING!
+    )
 
     ;;;;;;;;;;;;;;;;;;;  CSTA Standards ;;;;;;;;;;;;;;;;;;
     ("1B-AP-17"
