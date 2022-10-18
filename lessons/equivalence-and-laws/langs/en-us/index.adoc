@@ -1,10 +1,10 @@
-= Lesson Title
+= Equivalence and the Laws of Arithmetic
 
-@description{ }
+@description{Students use properties to analyze when equations both with and without variables are true.}
 
-@lesson-prereqs{}
+@lesson-prereqs{associative-property}
 
-@keywords{}
+@keywords{variable}
 
 [@lesson-intro-table]
 |===
@@ -12,56 +12,143 @@
 | Lesson Goals
 | Students will be able to...
 
-* blah
-* blah
-* blah
+* Determine if two expressions are equivalent by applying Circle Transformations.
+* Analyze Circle Transformations to determine if equivalency exists on account of the Associative Property, the Commutative Property, or Computation.
 
 
 | Student-facing Lesson Goals
 |
 
-@ifproglang{pyret}{
-* Let's blah.
-}
+* Let's use Circles of Evaluation to decide if expressions are equivalent.
+
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-* blah.
 
 | Key Points For The Facilitator
 |
-* blah
-* blah
-* blah
+* This lesson introduces variables. The cognitive leap required when moving from operations with numbers to operations with variables is a big one! In this lesson, Circles of Evaluation can help ease the transition.
 |===
 
-== Section 1 @duration{ }
+== More Practice with Circle Transformations @duration{25 minutes}
 
 === Overview
+Students analyze Circle Transformations to determine if two expressions are equivalent or not.
 
 === Launch
+Circles, in combination with laws of arithmetic, can help us understand whether an equation is TRUE or FALSE.
 
+Invite students to analyze the equation represented by these two Circles:
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(- (* 22 3) 4))}	| @math{=} | @show{(coe '(- (* 3 22) 4))}
+|===
+
+Next, take a look at the equation represented by these two Circles.
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(- (* 22 3) 4))}	| @math{=} | @show{(coe '(- 4 (* 22 3)))}
+|===
+
+[.lesson-instruction]
+- Which equation is true: the first one, the second one, or both? How do you know?
+** _The first equation is true. We see the Commutative Property of multiplication being applied when @math{22 \times 3} is transformed to @math{3 \times 22}._
+** _In the second equation, it looks as though there has been a misguided attempted to apply the Commutative Property; this does not work because the Commutative Property does not hold for subtraction._
+** _We can also use Computation to verify that both sides of the first equation equal @math{62}. The second equation's left side is @math{62}, but its right side is @math{-62}._
+
+As students observe and share out, urge them to justify their ideas by thinking about the valid Circle Transformations that they have studied and explored in this course.
 
 === Investigate
 
+In the subsequent activities, students who analyze the underlying structure rather than rely on computation will work more efficiently. (That said, computation is a valid tool to check for equivalency - one which we do want students to have in their toolbox!)
+
+Note: The next segment of the lesson introduces variables, meaning that computation will not be an immediately available option. We want students to have a strong, intuitive grasp on each property - including when it holds and when it doesn’t.
+
+[.lesson-instruction]
+- Complete TRUE or FALSE? using your knowledge of the Associative Property and the Commutative Property. When you encounter an equation that is FALSE, identify what you need to change in order to make the equation true.
+- Next, complete Label the Arrow. Identify if each Circle Transformation represents Computation, the Commutative Property, or the Associative Property.
+- Finally, analyze the Circles to decide Which One Doesn’t Belong? Be sure to explain your thinking.
 
 === Synthesize
 
+- Summarize the Associative Property in your own words. When does it apply?
+- Summarize the Commutative Property in your own words. When does it apply?
+- What is a Computation Transformation? When do those apply?
+- Can you think of any expressions involving subtraction or division when the Associative Property or the Commutative Property would apply?
+- Which Circle transformations were not valid, meaning that they resulted in an equation that was false?
 
 
-
-== Section 2 @duration{ }
+== Circle Transformations with Variables @duration{25 minutes}
 
 === Overview
+Students analyze Circle Transformations with variables to determine equivalency.
 
 === Launch
 
+[.lesson-instruction]
+- In this class, sometimes we’ll work with variables - symbols that stand for values we don’t know yet.
+- The equation @math{c + a = r} could be true or false.
+- What are some values that make the equation true?
+** _Sample answer: @math{c = 5}, @math{a = 10}, @math{r = 15}_
+- What are some values that make the equation false?
+** _Sample answer: @math{c = 1}, @math{a = 2}, @math{r = 900}_
+
+We can represent the Associative Property like this:
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(* 2 (* 3 c)))}	| @math{=} | @show{(coe '(* (* 2 3) c))}
+| @math{2 \times (3 \times c)} 	| @math{=} | @math{(2 \times 3) \times c)}
+|===
+
+Or like this:
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(+ 5 (+ 6 m)))}	| @math{=} | @show{(coe '(+ (+ 5 6) m))}
+| @math{5 + (2 + m)} 			| @math{=} | @math{(5 + 2) + m}
+|===
+
+The Associative Property will hold no matter what values we substitute in for @math{c} or for @math{m}.
+
+The same goes for the Commutative Property! We can represent it with variables, like this:
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(* 5 g))}	| @math{=} | @show{(coe '(* g 5))}
+| @math{5 * g} 			| @math{=} | @math{g * 5}
+|===
+
+Or like this:
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+|@show{(coe '(+ 12 h))}	| @math{=} | @show{(coe '(+ h 12))}
+| @math{12 + h} 			| @math{=} | @math{h + 12}
+|===
+
+It doesn't matter what values we use for @math{g} or for @math{h} - the equations above are _always_ true.
+
+These examples above show us that the Commutative and Associative properties are in fact more powerful than sheer computation. @math{12 + h} and @math{h + 12} can't be proven equivalent by computing the answer – because without knowing h we can't find the answer! Commutativity lets us prove them as equivalent even with variables.
 
 === Investigate
 
+All of the practice below invites students to apply their knowledge of the Associative and Commutative Properties in equations and Circles that include variables. For some students, this cognitive leap can be a challenging one. The familiarity of the worksheets (they all parallel those in the previous section) can make this transition to more abstract thinking a bit smoother.
+
+Students are also welcome and encouraged to choose values to represent the variables if they in fact want to evaluate the expressions as they are working. Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles are correct.
+
+[.lesson-instruction]
+- Complete TRUE or FALSE with Variables using your knowledge of the Associative Property and the Commutative Property.
+- Complete Label the Arrow with Variables. Identify if each Circle Transformation represents the Commutative Property, the Associative Property, or Neither.
+- Analyze the Circles to decide Which One Doesn’t Belong? with Variables. Be sure to explain your thinking.
 
 === Synthesize
+
+- Are equations with variables always true?
+** _No. If we're looking at an equation that represents one of our Circle Transformations, then yes. An equation such as @math{j - y = y - j} is only sometimes true. And an equation like @math{g \times 0 = 600} is never true._
+- What does it mean for two expressions with variables to be equivalent?
+** _When two expressions with variables are equivalent, that means that *no matter what number we substitute in,* we will still get the same result. Valid Circle Transformations result in equivalent expressions._
