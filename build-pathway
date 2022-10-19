@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-09-07 # last modified
+LASTMOD=2022-09-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -750,17 +750,16 @@ function addproglang() {
   local f=$1
   # echo doing addproglang $f
   local proglangneeded=
-  if grep -q 'class="headless-design-recipe.FORpyret"' $f; then
+  if grep -q 'headless-design-recipe FORpyret"' $f; then
     proglangneeded=pyret
-  elif grep -q 'class="headless-design-recipe.FORwescheme"' $f; then
+  elif grep -q 'headless-design-recipe FORwescheme"' $f; then
     proglangneeded=wescheme
-  elif grep -q 'class="headless-design-recipe.FORcodap"' $f; then
+  elif grep -q 'headless-design-recipe FORcodap"' $f; then
     proglangneeded=codap
   fi
   if test "$proglangneeded"; then
     $SED -i \
       -e 's/^<body class="/\0'$proglangneeded' /' \
-      -e 's/<p><span class="headless-design-recipe.FOR[a-z]*"><\/span><\/p>//' \
       $f
   fi
 }
@@ -858,10 +857,10 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    if test $AUTOGEN_NARRATIVE; then
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
-      echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    fi
+    local alignf=.cached/.pathway-alignments.asc
+    test -f "$alignf" || touch "$alignf"
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
+    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -881,6 +880,11 @@ function doadocs() {
   fi
 
   test -d .cached || mkdir -p .cached
+
+  local ftitletxt=.cached/.$fbase.titletxt
+  if test ! -f "$ftitletxt"; then
+    grep '^= ' $f|head -n 1|$SED -e 's/^= *//' -e 's/  *$//' > $ftitletxt
+  fi
 
   overwrite building  /$LESSONSUBDIR
 
@@ -1068,7 +1072,7 @@ function recursiveadoc() {
 }
 
 function mkdirsolutionversion() {
-  # echo doing mkdirsolutionversion
+  # echo doing mkdirsolutionversion in $(pwd)
   # test -d pages || return
 
   #echo PWD is $(pwd)
@@ -1161,6 +1165,11 @@ function checklessonplan() {
   fi
   fi
 
+}
+
+function addToPuppeteer() {
+
+  test $NOPDF && return
   # wbpages=pages/workbook-pages.txt
   # if test ! -f $wbpages; then
   #   wbpages=/dev/null
@@ -1169,7 +1178,6 @@ function checklessonplan() {
   #   exerflist=/dev/null
   # fi
 
-  if test ! $NOPDF; then
     local tryhtml=
     for ext in adoc html; do
       if test "$ext" = html; then
@@ -1208,15 +1216,14 @@ function checklessonplan() {
         #   echo pages/$g.html is nt pages/$g.pdf
         # fi
 
-        if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf"; then
+        if test ! -f "pages/$g.pdf" -o "pages/$g.html" -nt "pages/$g.pdf" -o "pages/$g.adoc" -nt "pages/$g.pdf"; then
           echo ", { \"input\": \"lessons/$L/pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 1 }" >> $PUPPETEER_INPUT
         fi
-        if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf"; then
+        if test ! -f "solution-pages/$g.pdf" -o "solution-pages/$g.html" -nt "solution-pages/$g.pdf" -o "solution-pages/$g.adoc" -nt "solution-pages/$g.pdf"; then
           echo ", { \"input\": \"lessons/$L/solution-pages/$g.html\", \"aspect\": \"$aspect\", \"debug\": 2 }" >> $PUPPETEER_INPUT
         fi
       done
     done
-  fi
 
 }
 
@@ -1265,8 +1272,10 @@ function buildworkbookpages() {
       touch pages/workbook-pages.txt
     fi
 
-  #echo calling mkdirsolutionversion in buildworkbookpages
+  # echo calling mkdirsolutionversion in buildworkbookpages
   mkdirsolutionversion
+
+  addToPuppeteer
 
   #
   export PATHWAYROOTDIR="../../"
@@ -1350,16 +1359,13 @@ function buildlessonplan() {
         $PROGDIR/glossary-warnings.rkt
       fi
     fi
-    if test -f index.shtml; then
-      # checklinks index.shtml
 
       if test ! $NOPDF; then
-        if test index.adoc -nt index.pdf; then
+        if test index.shtml -nt index.pdf -o index.adoc -nt index.pdf; then
           #echo PUPPETEER_INPUT is x $PUPPETEER_INPUT x
           echo ", { \"input\": \"lessons/$LESSONSUBDIR/index.shtml\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
         fi
       fi
-    fi
     if test ! $DEBUG; then
       rm -f *.asc
     fi
@@ -1894,6 +1900,7 @@ function copylessondir() {
   if test $DOCOPYDIR; then
     #echo do copydir into $(pwd)
     overwrite preparing $lessonDir
+    find $lessonDir/solution-pages -name \*.adoc -delete 2>/dev/null
     $CP -pr $repoLessonDir/* $lessonDir
     cd $lessonDir
     #echo I currently in $(pwd)
@@ -1903,6 +1910,7 @@ function copylessondir() {
     #rm -f .cached/.checksum.md5txt
     touch .cached/.proglang-pyret
     touch .cached/.redo
+    rm -f index.shtml index.pdf
     test -d pages || mkdir pages
     for subdir in *; do
       if test "$subdir" = pages -o "$subdir" = solution-pages; then
@@ -1929,11 +1937,13 @@ function copylessondir() {
       lessonDirPl=$lessonDir-$pl
       if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
         mkdir -p $lessonDirPl
+        find $lessonDirPl/solution-pages -name \*.adoc -delete 2>/dev/null
         $CP -pr $repoLessonDir/* $lessonDirPl
         cd $lessonDirPl
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
+        rm -f index.shtml index.pdf
         if test "$firstproglang" = $pl; then
           touch .cached/.primarylesson
         fi
@@ -2123,6 +2133,9 @@ function copycommonlessons() {
 
 function buildpathwayindependent() {
   # echo doing buildpathwayindependent
+
+  test $NOARGSGIVEN || return
+
   start=`date +%s`
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'
@@ -2929,6 +2942,8 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $RELEVANT_LESSONS_INPUT
 
 copycommonlessons
+
+# exit
 
 buildpathwayindependent
 
