@@ -456,13 +456,11 @@
   (write-wrapper ".recipe.recipe_example_line"
     (lambda ()
       (string-append
-        (encoded-ans "" "__" #f)
         (encoded-ans ".recipe_name" funname show-funname?)
         " "
         (write-large "(")
         (encoded-ans ".recipe_example_inputs" args show-args?)
         (write-large ")")
-        (encoded-ans "" "__" #f)
         (highlight-keywords " is ")
         (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
         ))))
@@ -655,7 +653,6 @@
                 (write-wrapper ".recipe.recipe_line"
                   (lambda ()
                     (string-append
-                      (encoded-ans "" "__" #f)
                       (encoded-ans (if (= n 0) ".recipe_definition_body" "")
                                    (highlight-keywords last-body-line)
                                    (if (string-prefix? last-body-line "end") #t
