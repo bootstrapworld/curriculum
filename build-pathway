@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-18 # last modified
+LASTMOD=2022-10-15 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -256,12 +256,7 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   $CP -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   #
-  for f in distribution/$NATLANG/lib/*.less; do
-    if test -f "$f"; then
-      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
-    fi
-  done
-  #
+
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
@@ -299,9 +294,14 @@ fi
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
-  $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
-    $TOPDIR/lib/.hta* $PROGDIR
-  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/ano* $TOPDIR/lib/check* $TOPDIR/lib/.hta* $PROGDIR
+  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.less $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  for f in distribution/$NATLANG/lib/*.less; do
+    if test -f "$f"; then
+      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
+    fi
+  done
+  rm -f distribution/$NATLANG/lib/*.less
 fi
 
 function insertbodyid() {
@@ -2108,15 +2108,6 @@ function buildpathwayworkbooks() {
   #mkdir -p $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY/resources/solution-pages
 
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
-
-  cd resources/protected
-  for f in workbook-sols workbook-long-sols opt-exercises-sols; do
-    $CP -p $PROGDIR/redirect.html $f.pdf.html
-    $SED -i \
-      -e 's/REDIRECT_TARGET_FILE/'$f.pdf'/g' \
-      $f.pdf.html
-   done
-
 }
 
 function copycommonlessons() {
