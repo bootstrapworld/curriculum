@@ -550,10 +550,11 @@
                   [else ""])
 
             (cond [cond?
-                    (write-wrapper ".cond_clauses"
-                      (lambda ()
-                        (apply string-append
-                          (map write-cond-clause (rest body)))))]
+                    (let* ([clauses (rest body)])
+                      (write-null-wrapper ".cond_clauses"
+                        (lambda ()
+                          (apply string-append
+                            (map write-cond-clause clauses)))))]
                   [else
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
@@ -567,10 +568,12 @@
 
 (define (write-body-line/pyret body-line)
   ; (printf "write-body-line-p ~s\n" body-line)
-  (write-wrapper ".recipe.recipe_line"
+  (write-wrapper
+    (string-append ".recipe.recipe_line"
+      (cond [(regexp-match "^(if|else if|else:) " body-line) ".recipe_condition"]
+            [else ""]))
     (lambda ()
       (string-append
-        (encoded-ans "" "__" #f)
         (cond [(string=? body-line "") ""]
               [(string-prefix? body-line "|")
                (set! body-line (regexp-replace #rx"^\\| *" body-line ""))
@@ -605,16 +608,18 @@
                        [else
                          (encoded-ans "" body-line *show-body?*)]))]
               [(or (string-prefix? body-line "if ")
-                   (string-prefix? body-line "else if ")
-                   (string-prefix? body-line "else: "))
+                   (string-prefix? body-line "else if "))
                (let* ([n (cond [(string-prefix? body-line "if ") 3]
-                               [(string-prefix? body-line "else if ") 8]
-                               [(string-prefix? body-line "else: ") 6])]
-                      [leadup (substring body-line 0 n)]
-                      [kode (substring body-line n)])
+                               [(string-prefix? body-line "else if ") 8])]
+                      [kode (regexp-match "([^:]*):(.*)" (substring body-line n))]
+                      [question-code (list-ref kode 1)]
+                      [answer-code (list-ref kode 2)])
                  (string-append
-                   (highlight-keywords leadup)
-                   (encoded-ans ".answers" (highlight-keywords kode) *show-body?*)))]
+                   (encoded-ans ".questions" (highlight-keywords question-code) *show-body?*)
+                   (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
+              [(string-prefix? body-line "else: ")
+               (let* ([answer-code (substring body-line 6)])
+                 (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*))]
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else
@@ -704,27 +709,15 @@
 
 (define (write-cond-clause clause)
   ; (printf "doing write-cond-clause ~s\n" clause)
-  (write-wrapper ".recipe.recipe_line.recipe_cond_clause"
+  (write-wrapper
+    ".recipe.recipe_line.recipe_condition"
     (lambda ()
-      (string-append (encoded-ans "" "_____" #f)
-                     (write-large "{startsb}")
-                     (write-wrapper ".clause"
-                       (lambda ()
-                         (let* ([test (expr-to-string (first clause))]
-                                [action (list-to-string (rest clause))]
-                                [test-len (string-length test)]
-                                [action-len (string-length action)])
-                           (string-append
-                             (encoded-ans ".questions" test *show-body?*)
-                             (cond [;(and *show-body?* (> (+ test-len action-len) 57))
-                                    (or (> test-len *max-wescheme-cond-side-length*)
-                                        (> action-len *max-wescheme-cond-side-length*))
-                                    (string-append (write-clear)
-                                      (encoded-ans "" "_______" #f)
-                                      (encoded-ans ".answers" action *show-body?*))]
-                                   [else (string-append " "
-                                           (encoded-ans ".answers" action *show-body?*))])))))
-                     (write-large "{endsb}")))))
+     (let* ([question (expr-to-string (first clause))]
+            [answer (list-to-string (rest clause))])
+       (string-append
+          (encoded-ans ".questions" question *show-body?*)
+          (encoded-ans ".answers"   answer   *show-body?*))))))
+               
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
