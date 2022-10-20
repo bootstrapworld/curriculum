@@ -78,7 +78,7 @@ function loadFromConfig(i = cardIndex) {
 }
 
 function addToEditor(lines) {
-  const newChunks = lines.split("\n");
+  const newChunks = lines.trim().split("\n");
   newChunks.forEach((c) => parley.addChunk(c));
   parley.run();
 }
