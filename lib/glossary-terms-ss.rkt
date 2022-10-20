@@ -73,6 +73,8 @@ from the ones in the main glossary file.
 
     ((en-us ("proportion") "a fraction, decimal, or percent that equals count divided by total"))
 
+    ((en-us ("primary source") "any piece of information that was created by someone who witnessed first hand or was part of the historical events that are being described. The most common primary sources are journals or letters."))
+
     ((en-us ("Qing Dynasty") "the Chinese dynasty of emperors that ruled from 1636 to 1912 CE"))
 
     ((en-us ("Qingbai") "a type of ceramics made in China from about 1000 to 1300 CE; their basic color was white but often with a pale green glaze"))

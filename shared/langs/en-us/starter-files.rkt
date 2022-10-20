@@ -271,21 +271,24 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; SOCIAL STUDIES
 
-  ("averages" "Calculating Averages Dataset"
+  ("averages" "Dataset: Calculating Averages"
    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1GuAX3WGidiX-2QUxTZaXJxrSKHp8MJ1dPW0ap57OxHM/copy")
    )
-  ("bones" "Learning from Bones: Corn Dataset"
+  ("bones" "Dataset: Learning from Bones"
     ("spreadsheets" "https://docs.google.com/spreadsheets/d/1ghGJ7pBb_YOOmdtf2l-pfUrZG0en3DVmLltH1mJod6w/edit?usp=sharing")
    )
-  ("deforestation" "Modern Deforestation Dataset"
+  ("deforestation" "Dataset: Modern Deforestation"
     ("spreadsheets" "https://docs.google.com/spreadsheets/d/12b7nDl5DjxOiiP-VFwk3vAUKUKQvvvAcCWFQs3GixW4/edit?usp=sharing")
    )
-  ("pie-chart" "Making Pie Charts Dataset"
+  ("pie-chart" "Dataset: Making Pie Charts"
    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Finl40MSuZ32MKnpK0hnKuFPYYwNGsHmU9LDQFqvOVk/copy")
    )
-  ("skulls" "Skulls Dataset"
+  ("skulls" "Dataset: Skulls"
    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1Kw0m4K2jMQAvAE0gb2f93_7HB52KgnxjluuCmVpamOE/copy")
    )
+  ("food-groups" "Dataset: Comparing Food Habits of Northeastern Native Americans in the 1600s and Modern US Americans"
+    ("spreadsheets" "https://docs.google.com/spreadsheets/d/1jS-xMeEFrK3UP4Vo2EHVb0KSqg4CQffZCC50iahb9E4/edit?usp=sharing")
+    )
 
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
