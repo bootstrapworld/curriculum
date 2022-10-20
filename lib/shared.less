@@ -653,6 +653,7 @@ table.recipe_title    {
     &::before { color: black; position: absolute; left: 0; }
   }
   .questions, .answers { flex-grow: 1; }
+  &.recipe_condition *::before, *::after { color: #75328A; }
 }
 
 /* Proglang-specific adaptations */
@@ -674,13 +675,13 @@ table.recipe_title    {
       width: 1em;
     }
     .questions { margin-left: 3em; }
-    .questions::before { content: "if"; position: absolute; left: -2em; color: #75328A ;}
+    .questions::before { content: "if"; position: absolute; left: -2em; }
     +.recipe_condition {
       .questions { margin-left: 4em; }
       .questions::before { content: "else if"; left: -3em; }
     }
     +.recipe:nth-last-child(3) {
-      .answers::before  { position: absolute; content: "else:"; left: -2em; color: #75328A; }
+      .answers::before  { position: absolute; content: "else:"; left: -2em; }
       .answers { margin-left: 3em; }
     }
   }
@@ -699,7 +700,7 @@ table.recipe_title    {
     width: 90%;
     .questions { margin-left: 1em; }
     .answers { margin-left: 1em; margin-right: 1em; }
-    .questions::before { content: "["; position: absolute; left: -1ex; color: #75328A; }
+    .questions::before { content: "["; position: absolute; left: -1ex; }
     .answers::after { 
       content: "]"; 
       position: absolute; 
@@ -1089,6 +1090,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       font-size:    12pt;
       padding-left: 5px;
     }
+    .recipe_condition *::before, *::after { color: black !important; }
   }
   /* Page Breaks for printed lesson plans, projects, and TR pages */
   h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
