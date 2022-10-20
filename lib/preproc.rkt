@@ -3033,9 +3033,9 @@
         [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
+                           (enclose-span (format ".studentAnswerFilled~a" fill-len)
                            (sexp->block-table e #:pyret pyret))
-                           (enclose-span (format ".value~a.studentBlockAnswerUnfilled~a"
+                           (enclose-span (format ".value~a.studentAnswerUnfilled~a"
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
@@ -3097,7 +3097,7 @@
                            (enclose-span
                              (if wescheme
                                  (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
-                                 (format ".value.studentBlockAnswerUnfilled~a" fill-len))
+                                 (format ".value.studentAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(fitb? e) (let ([e (second e)])
                      (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}"

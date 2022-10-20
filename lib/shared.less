@@ -771,8 +771,7 @@ table.recipe_title    {
 } 
 
 /* Note(Emmanuel): these could probably be a lot tighter */
-.studentAnswerCode, .studentAnswer, .studentAnswerUnfilled,
-.studentBlockAnswerUnfilled, .studentBlockAnswerFilled {
+.studentAnswerCode, .studentAnswer, .studentAnswerUnfilled {
   margin-bottom:      0.85rem;
   min-width:          105pt;
   position:           relative;
@@ -797,12 +796,11 @@ table.recipe_title    {
 .studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
 .studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
 
-.studentAnswerUnfilled, .studentBlockAnswerUnfilled,
-.studentAnswerFilled,   .studentBlockAnswerFilled {
+.studentAnswerUnfilled, .studentAnswerFilled {
   min-width:          auto;
 }
 
-.studentAnswerFilled, .studentBlockAnswerFilled {
+.studentAnswerFilled {
     border-bottom:    none;
     font-weight:      900;
     font-style:       italic;
@@ -861,6 +859,9 @@ div.circleevalsexp {
   .hspace { display: none; }
   .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
   .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
+
+  /* fill-in-the-blanks inside circles need no border */
+  .studentAnswerUnfilled { border: none; }
 }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
