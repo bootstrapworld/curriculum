@@ -533,17 +533,21 @@ body.workbookpage {
     line-height:        1rem;
     border-bottom:      solid 1px black;
   }
-  .fitbruby {
-     margin-bottom:     0.7rem;
-     .ruby {
-       position:           absolute;
-       bottom:             -0.9rem;
-       font-size:          0.65rem;
-       font-weight:        normal;
-       width:              100%;
-       transform:          translate(-50%, 0);
-     }
+  .fitbruby, .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled { 
+    margin-bottom:     0.7rem; display: inline-block; position: relative;
   }
+  .fitbruby .ruby, .studentAnswer:after, .studentAnswerCode:after {
+    position:           absolute;
+    bottom:             -0.9rem;
+    left:               0;
+    font-size:          0.65rem;
+    font-weight:        normal;
+    width:              100%;
+    text-align:         center;
+    font-style:         normal;
+    word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
+  }
+  .studentAnswer:after, .studentAnswerCode:after { content: "\00A0"; }
   .fitb.stretch { 
     margin-left:        5px; 
     vertical-align:     bottom; 
@@ -551,8 +555,8 @@ body.workbookpage {
     /* add an underline that goes past the end of the page */
     &::after { 
       content:"\00a0";
-      width:              1000px;
       position:           absolute;
+      width:              1000px;
       left:               0;
       bottom :            -1px;
     }
@@ -772,34 +776,9 @@ table.recipe_title    {
 
 /* Note(Emmanuel): these could probably be a lot tighter */
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled {
-  margin-bottom:      0.85rem;
-  min-width:          105pt;
-  position:           relative;
-  padding:            0;
-  word-spacing:       4pt;
-  display:            inline-block;
-  border-bottom:      solid 1px black;
+  padding: 0; word-spacing: 2pt;
 }
-.studentAnswerCode::after, .studentAnswer::after {
-  position:           absolute;
-  bottom:             -1rem;
-  left:               0;
-  font-size:          .60rem;
-  width:              100%;
-  text-align:         center;
-  font-style:         italic;
-  font-family:        "Century Gothic";
-  content:            "\00A0";
-  word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
-}
-
-.studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
-.studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
-
-.studentAnswerUnfilled, .studentAnswerFilled {
-  min-width:          auto;
-}
-
+.studentAnswerUnfilled, .studentAnswerFilled { min-width: auto; }
 .studentAnswerFilled {
     border-bottom:    none;
     font-weight:      900;
