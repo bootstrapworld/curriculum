@@ -161,33 +161,33 @@ body:not(.LessonPlan, .narrativepage) p {
 }
 
 /* TODO(Emmanuel): dead code?
-.tooltip { 
-  position: relative; 
-  .tooltiptext {
-    min-width:        120px;
-    max-width:        66%;
-    background-color: #555;
-    color:            white;
-    border-radius:    6px;
-    padding:          5px 0;
-    position:         absolute;
-    top:              50%;
-    left:             50%;
-    text-align:       center;
-    opacity:          0;
-    transition:       all 0.3s;
-    transform:        translateX(-50%) translateY(-50%);
+  .tooltip { 
+    position: relative; 
+    .tooltiptext {
+      min-width:        120px;
+      max-width:        66%;
+      background-color: #555;
+      color:            white;
+      border-radius:    6px;
+      padding:          5px 0;
+      position:         absolute;
+      top:              50%;
+      left:             50%;
+      text-align:       center;
+      opacity:          0;
+      transition:       all 0.3s;
+      transform:        translateX(-50%) translateY(-50%);
+    }
+    :hover .tooltiptext { opacity: 1; }
   }
-  :hover .tooltiptext { opacity: 1; }
-}
-.standards-hierarchical-table ul li ul { display: none; }
+  .standards-hierarchical-table ul li ul { display: none; }
 
-span.clear {
-  clear:              both;
-  display:            block;
-  content:            "";
-  width:              100%;
-}
+  span.clear {
+    clear:              both;
+    display:            block;
+    content:            "";
+    width:              100%;
+  }
 */
 
 .alignedStandards { display: none; }
@@ -525,7 +525,7 @@ body.workbookpage {
 
   /* Fill in the blanks */
   .fitb, .fitbruby, .fitb.stretch::after {
-    padding-top:        1.1rem; /* <--- how much extra height for kids to write!! */
+    padding-top:        0.8rem; /* <--- how much extra height for kids to write!! */
     position:           relative;
     display:            inline-block;
     min-width:          5em;
@@ -534,13 +534,13 @@ body.workbookpage {
     border-bottom:      solid 1px black;
   }
   .fitbruby, .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled { 
-    margin-bottom:     0.7rem; display: inline-block; position: relative;
+    margin-bottom:     0.8rem; display: inline-block; position: relative;
   }
   .fitbruby .ruby, .studentAnswer:after, .studentAnswerCode:after {
     position:           absolute;
     bottom:             -0.9rem;
     left:               0;
-    font-size:          0.65rem;
+    font-size:          0.75rem;
     font-weight:        normal;
     width:              100%;
     text-align:         center;
@@ -603,24 +603,17 @@ body.LessonNotes {
 .workbookpage .data-cycle { 
   border-collapse: collapse; 
   td:first-of-type { background: lightgray; border: solid white; }
-  td p, td p > * { font-size: 0.75rem; }
   td { padding: 0.2rem 0.625rem; }
   .fitbruby, .fitb { 
-    padding-top: 1.5ex !important;
     font-style: italic; 
-    font-size:  1rem;
     margin-bottom: 0.8rem;
     .ruby { 
+      font-size:  0.75rem;  /* slightly-larger font here */
+      bottom:     -0.95rem; /* ...and more space for it  */
       text-align: left; 
-      transform:  none; 
-      left:       0; 
-      bottom:     -0.95rem;
-      font-size:  0.75rem; 
     }
   }
 }
-
-.recipe_word_problem { min-height: 0.65in; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { 
@@ -632,6 +625,7 @@ table.recipe_title    {
 }
 
 .recipe {
+  .recipe_word_problem { min-height: 0.60in; }
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
   /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
@@ -774,7 +768,7 @@ table.recipe_title    {
   .recipe_domain, .recipe_range { width:  40%; }
 } 
 
-/* Note(Emmanuel): these could probably be a lot tighter */
+/* Note(Emmanuel): studentAnswerCode is no different from studentAnswer! */
 .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled {
   padding: 0; word-spacing: 2pt;
 }
