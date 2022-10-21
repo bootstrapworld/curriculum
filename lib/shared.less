@@ -203,7 +203,7 @@ span.clear {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.quad::before, .fitb::before, .fitbruby::before, .studentAnswer::before {
+.quad::before, .fitb::before, .fitbruby::before {
   content: '\00200b';
 }
 
@@ -533,10 +533,10 @@ body.workbookpage {
     line-height:        1rem;
     border-bottom:      solid 1px black;
   }
-  .fitbruby, .studentAnswerCode, .studentAnswer, .studentAnswerUnfilled { 
+  .fitbruby, .studentAnswerCode, .studentAnswerUnfilled { 
     margin-bottom:     0.7rem; display: inline-block; position: relative;
   }
-  .fitbruby .ruby, .studentAnswer:after, .studentAnswerCode:after {
+  .fitbruby .ruby, .studentAnswerCode:after {
     position:           absolute;
     bottom:             -0.9rem;
     left:               0;
@@ -545,9 +545,8 @@ body.workbookpage {
     width:              100%;
     text-align:         center;
     font-style:         normal;
-    word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
+    word-spacing:       0;
   }
-  .studentAnswer:after, .studentAnswerCode:after { content: "\00A0"; }
   .fitb.stretch { 
     margin-left:        5px; 
     vertical-align:     bottom; 
@@ -560,6 +559,23 @@ body.workbookpage {
       left:               0;
       bottom :            -1px;
     }
+    /* Note(Emmanuel): these could probably be a lot tighter */
+    .studentAnswerCode, .studentAnswerUnfilled {
+      padding: 0; word-spacing: 2pt;
+    }
+    .studentAnswerCode:after { content: "\00A0"; }
+    .studentAnswerUnfilled, .studentAnswerFilled { min-width: auto; }
+    .studentAnswerFilled {
+        border-bottom:    none;
+        font-weight:      900;
+        font-style:       italic;
+        margin-bottom:    0;
+        line-height:      inherit;
+    }
+
+    .studentAnswerShort  { min-width: 60pt;  }
+    .studentAnswerMedium { min-width: 100pt; }
+    .studentAnswerLong   { min-width: 140pt; }
   }
 
   /* Back-of-the-book contracts table */
@@ -638,8 +654,6 @@ table.recipe_title    {
   p { display: flex; flex-wrap: wrap; align-items: baseline;}
   /* All student answers have a bottom-border, and a "ruby" printed in black */
   p .fitb, p .fitbruby { padding-top: 1ex; }
-  .studentAnswer { border-bottom: solid 1px black; }
-  .studentAnswer::after { color: black; }
   .recipe_domain, .recipe_purpose { flex-grow:  1; }
 
   .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
@@ -653,7 +667,7 @@ table.recipe_title    {
   .recipe_variables     { min-width: 30%; white-space: nowrap; }
   /* All code is inside a wrapper, so apply the code font */
   .wrapper {
-    p, .studentAnswer { font-family: Hack, "Courier New", monospace; }
+    p, .fitbruby { font-family: Hack, "Courier New", monospace; }
   }
 
   /* in solutions mode, use the smallest possible space for function name */
@@ -775,22 +789,6 @@ table.recipe_title    {
   .recipe_domain, .recipe_range { width:  40%; }
 } 
 
-/* Note(Emmanuel): these could probably be a lot tighter */
-.studentAnswerCode, .studentAnswer, .studentAnswerUnfilled {
-  padding: 0; word-spacing: 2pt;
-}
-.studentAnswerUnfilled, .studentAnswerFilled { min-width: auto; }
-.studentAnswerFilled {
-    border-bottom:    none;
-    font-weight:      900;
-    font-style:       italic;
-    margin-bottom:    0;
-    line-height:      inherit;
-}
-
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
 /************************************************************************************
 * TEACHER RESOURCES PAGE
 */
