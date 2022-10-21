@@ -7,59 +7,62 @@
 /*****************************************************
  * DESIGN RECIPE
  */
-.recipe_name::after           { content: "function name"; }
-.codap .recipe_name::after    { content: "Transformer name"; }
+body.workbookpage .recipe_name::after           { content: "function name"; }
+body.workbookpage .codap .recipe_name::after    { content: "Transformer name"; }
 
-.recipe_purpose::after        { content: "what does the function do?"; }
-.codap .recipe_purpose::after { content: "Purpose: what does the formula do for each row?"; }
+body.workbookpage .recipe_purpose::after        { content: "what does the function do?"; }
+body.workbookpage .codap .recipe_purpose::after { content: "Purpose: what does the formula do for each row?"; }
 
-.recipe_domain::after         { content: "Domain"; }
-.recipe_range::after          { content: "Range"; }
-.recipe_variables::after      { content: "variable(s)"; }
-.recipe_example_inputs::after { content: "input(s)"; }
-.recipe_example_body::after,
-.recipe_example_body_short::after,
-.recipe_example_body_long::after {
+body.workbookpage .recipe_domain::after         { content: "Domain"; }
+body.workbookpage .recipe_range::after          { content: "Range"; }
+body.workbookpage .recipe_variables::after      { content: "variable(s)"; }
+body.workbookpage .recipe_example_inputs::after { content: "input(s)"; }
+body.workbookpage .recipe_example_body::after,
+body.workbookpage .recipe_example_body_short::after,
+body.workbookpage .recipe_example_body_long::after {
   content: "what the function produces";
 }
-.codap .codap_example_tables+table { border-width: 0; }
-.codap .codap_example_tables+table>tbody>tr>td{ padding-top: 0; }
+body.workbookpage .recipe_definition_body::after{ 
+  content: "what the function does with those variable(s)"; 
+}
 
-.recipe_definition_body::after{ content: "what the function does with those variable(s)"; }
-.codap .recipe_formula::after {
+body.workbookpage .codap .codap_example_tables+table { border-width: 0; }
+body.workbookpage .codap .codap_example_tables+table>tbody>tr>td{ padding-top: 0; }
+
+body.workbookpage .codap .recipe_formula::after {
   content: 'i.e. Weight < 20 or Species = "rabbit". Pay careful attention to capitalization and quotation marks.';
 }
 
-.codap .ExampleTableTitle { text-align:  center; font-size: 0.7rem;}
-.codap .ExampleTableTitle p { font-weight: bold; min-height: unset; }
+body.workbookpage .codap .ExampleTableTitle { text-align:  center; font-size: 0.7rem;}
+body.workbookpage .codap .ExampleTableTitle p { font-weight: bold; min-height: unset; }
 
 /*****************************************************
  * DATA CYCLE 
  */
-.data-cycle-question::after { content: "What question do you have?"; }
-.data-cycle-type-of-question::after { content: "What type of question is this? (circle one) "; }
-.data-cycle-lookup::after     { content: " Lookup "; }
-.data-cycle-arithmetic::after { content: " Arithmetic "; }
-.data-cycle-statistical::after{ content: " Statistical "; }
-.data-cycle-rows::after {
+body.workbookpage .data-cycle-question::after { content: "What question do you have?"; }
+body.workbookpage .data-cycle-type-of-question::after { content: "What type of question is this? (circle one) "; }
+body.workbookpage .data-cycle-lookup::after     { content: " Lookup "; }
+body.workbookpage .data-cycle-arithmetic::after { content: " Arithmetic "; }
+body.workbookpage .data-cycle-statistical::after{ content: " Statistical "; }
+body.workbookpage .data-cycle-rows::after {
   content: "What Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)";
 }
-.data-cycle-cols::after   { content: "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)"; }
-.data-cycle-filter::after {
+body.workbookpage .data-cycle-cols::after   { content: "What Columns do we need? (age, weight-in-kilograms, weeks, etc.)"; }
+body.workbookpage .data-cycle-filter::after {
   content: "If you only need some rows, define your filter function here (Need help? Use the Design Recipe!)";
 }
-.codap .data-cycle-filter::after {
+body.workbookpage .codap .data-cycle-filter::after {
   content:  "If you only need some rows, write an expression for your Filter Transformer here."
 }
-.data-cycle-build::after {
+body.workbookpage .data-cycle-build::after {
   content: "If you need to make a new column, define your builder function here (Need help? Use the Design Recipe!)";
 }
-.codap .data-cycle-build::after{
+body.workbookpage .codap .data-cycle-build::after{
   content: "If you need to Transform or Build an attribute, write the expression for your Transformer here.";
 }
-.data-cycle-expression::after   { content: "What code that will make the table or display you want?"; }
-.codap .data-cycle-expression::after   { content: "What configuration or measure will make the table or display you want?"; }
+body.workbookpage .data-cycle-expression::after   { content: "What code that will make the table or display you want?"; }
+body.workbookpage .codap .data-cycle-expression::after   { content: "What configuration or measure will make the table or display you want?"; }
 
-.codap .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(3) { display: none; }
-.data-cycle-finding::after      { content: "What did you find out? What can you infer?"; }
-.data-cycle-new-question::after { content: "What new question(s) does this raise?"; }
+body.workbookpage .codap .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(3) { display: none; }
+body.workbookpage .data-cycle-finding::after      { content: "What did you find out? What can you infer?"; }
+body.workbookpage .data-cycle-new-question::after { content: "What new question(s) does this raise?"; }
