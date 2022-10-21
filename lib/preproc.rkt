@@ -2375,7 +2375,7 @@
   (unless (empty? dict-standards-met) ;can it ever be empty?
     (fprintf op "\n[.~a.standards-~a]\n"
              (if *lesson* "alignedStandards" "coverageElement")
-             dict)
+             (sanitize-css-id dict))
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
     ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
@@ -2508,12 +2508,12 @@
                  (if (null? *dictionaries-represented*) ""
                      (let ([first-dict (first *dictionaries-represented*)])
                        (enclose-tag "option" ""
-                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" first-dict)
+                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" (sanitize-css-id first-dict))
                          first-dict)))
                  (string-join
                    (map (lambda (dict)
                           (enclose-tag "option" ""
-                            #:attribs (format "value=\"standards-~a\"" dict)
+                            #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
                             dict))
                         (if (null? *dictionaries-represented*) '()
                             (rest *dictionaries-represented*)))
@@ -2574,7 +2574,7 @@
   (newline o))
 
 (define (sanitize-css-id id)
-  (regexp-replace* "\\." id "_"))
+  (regexp-replace* "[. ]" id "_"))
 
 (define (display-alignments-selection o)
   ; (printf "doing display-alignments-selection\n")
