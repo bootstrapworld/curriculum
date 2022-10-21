@@ -3,13 +3,19 @@
 @import 'https://www.bootstrapworld.org/styles.css';
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
+// LESS Variables
+@default-size:    12pt;
+@default-family:  'Lato', Arial, Helvetica, sans-serif;
+@default-color:   #75328A;
+@default-translucent-color:   #75328A77;
+@writing-space:   0.8rem; /* <--- how much extra height for kids to write!! */
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
 body {
-  font-size:      12pt;
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-  color:          #75328A;
+  font-size:      @default-size;
+  font-family:    @default-family;
+  color:          @default-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
   break-inside:   auto !important;
   display:        block;
@@ -32,11 +38,11 @@ body {
   h1 {
     font-size:      2rem;
     font-weight:    bold;
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @default-family;
   }
   h2 {
     margin:          0; /* 1ex bottom margin */
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @default-family;
   }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
@@ -100,7 +106,7 @@ body {
   #safariWarning { display: none; }
   #savetodrive-div:hover + #safariWarning {
     display:          block;
-    background:       #75328AAA;
+    background:       @default-translucent-color;
     color:            white;
     padding:          5px;
     margin-top:       75px;
@@ -223,7 +229,7 @@ body:not(.LessonPlan, .narrativepage) p {
   .course-banner {
     font-style: italic;
     background: #B6D990aa;
-    border: #75328A 1px dashed;
+    border: @default-color 1px dashed;
     padding: 5px;
     margin-bottom: 2rem;
     a { color: black; text-decoration: underline; }
@@ -345,7 +351,7 @@ body:not(.LessonPlan, .narrativepage) p {
       text-align:  center;
       border: 0;
       margin: 0 !important;
-      background: #75328A77;
+      background: @default-translucent-color;
       &:after { content: '≫'; font-size: 20px;}
     }
 
@@ -381,7 +387,7 @@ body:not(.LessonPlan, .narrativepage) p {
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-  .vocab { font-weight: bold; font-style: italic; color: #75328A; }
+  .vocab { font-weight: bold; font-style: italic; color: @default-color; }
   .lesson-instruction, .lesson-roleplay {
     min-height: 50px;
     background: #eee;
@@ -449,7 +455,7 @@ body:not(.LessonPlan, .narrativepage) p {
   /* class for styling duration info in headers */
   .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
   /* Special links back to older, pre-remix materials */
-  .old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
+  .old-materials p { width:100%; background:@default-translucent-color; color:black; text-align:center; }
 }
 
 /* Images and Captions */
@@ -525,7 +531,7 @@ body.workbookpage {
 
   /* Fill in the blanks */
   .fitb, .fitbruby, .fitb.stretch::after {
-    padding-top:        0.8rem; /* <--- how much extra height for kids to write!! */
+    padding-top:        @writing-space;
     position:           relative;
     display:            inline-block;
     min-width:          5em;
@@ -606,9 +612,7 @@ body.LessonNotes {
   td { padding: 0.2rem 0.625rem; }
   .fitbruby, .fitb { 
     font-style: italic; 
-    margin-bottom: 0.8rem;
     .ruby { 
-      font-size:  0.75rem;  /* slightly-larger font here */
       bottom:     -0.95rem; /* ...and more space for it  */
       text-align: left; 
     }
@@ -658,7 +662,7 @@ table.recipe_title    {
     &::before { color: black; position: absolute; left: 0; }
   }
   .questions, .answers { flex-grow: 1; }
-  &.recipe_condition *::before, *::after { color: #75328A; }
+  &.recipe_condition *::before, *::after { color: @default-color; }
 }
 
 /* Proglang-specific adaptations */
@@ -716,7 +720,7 @@ table.recipe_title    {
       position: absolute; 
       left: calc(100% + 2pt);
       bottom: 0; 
-      color: #75328A; 
+      color: @default-color; 
       width: unset; 
       font-style: unset;
       font-size: unset;
@@ -947,7 +951,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   /* on WB pages, set font size to same as print and then zoom the page */
   body.workbookpage {
     transform-origin: left top; 
-    transform: scale(1.25); 
+    transform:  scale(1.25); 
     min-height: calc(11in * 1.25) !important;
     #savetodrive-div { transform: scale(0.8); }
   }
@@ -963,7 +967,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       #body { padding-bottom:  10in; }  
       /* adjust colors */
       h2 {
-        background-color: #75328A77;
+        background-color: @default-translucent-color;
         color: white;
         font-weight: 600;
         cursor: pointer;
