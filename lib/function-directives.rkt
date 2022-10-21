@@ -52,7 +52,7 @@
 
 (define (get-function-name) *funname*)
 
-(define (encoded-ans style s show?)
+(define (old-encoded-ans style s show?) ;FIXME will be removed after new one stabilized
   (unless (string? s) (set! s (format "~a" s)))
   (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
     ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
@@ -64,6 +64,23 @@
         style)
       (if show? s
           (string-multiply "&#x5f;" (string-length s-og))))))
+
+(define (encoded-ans style s ruby-text show?)
+  (unless (string? s) (set! s (format "~a" s)))
+  (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
+    ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
+    (enclose-span
+      (string-append
+        (if (string=? style "") "" ".fitbruby")
+        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if show? ".solution" ".blank")
+        style)
+      (string-append
+        (if show? s
+            (string-multiply "&#x5f;" (string-length s-og)))
+        (if ruby-text
+            (enclose-span ".ruby" ruby-text)
+            "")))))
 
 (define (wescheme->wescheme e #:indent [indent #f] #:parens [parens #f])
   ; (printf "doing wescheme->wescheme ~s\n" e)
@@ -319,28 +336,28 @@
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
-    (encoded-ans ".recipe_name" funname *show-funname-contract?*)
+    (encoded-ans ".recipe_name" funname "function name" *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
                  ((if *pyret?*
                       vars-to-commaed-string
-                      vars-to-string) domain-list) *show-domains?*)
+                      vars-to-string) domain-list) "domain" *show-domains?*)
     "->"
-    (encoded-ans ".recipe_range" range *show-range?*)
+    (encoded-ans ".recipe_range" range "range" *show-range?*)
     "\n\n"
     "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)))
 
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
-          (encoded-ans ".recipe_purpose" purpose *show-purpose?*)]
+          (encoded-ans ".recipe_purpose" purpose "what does the function do?" *show-purpose?*)]
         [else
           (string-append
             (enclose-span ".begin-ignore-for-gdrive" "")
-            (encoded-ans ".recipe_purpose" " " *show-purpose?*)
+            (encoded-ans ".recipe_purpose" " " "what does the function do?" *show-purpose?*)
             (enclose-span ".end-ignore-for-gdrive" "")
             (enclose-span ".gdrive-only"
-              (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))]))
+              (encoded-ans ".recipe_purpose" purpose "what does the function do?" *show-purpose?*)))]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ; (printf "doing write-examples num-examples=~s example-list=~s buggy-example-list=~s\n" num-examples example-list buggy-example-list)
@@ -420,14 +437,14 @@
     (write-wrapper ".recipe.recipe_example_line"
       (lambda ()
         (string-append
-          (encoded-ans "" "(EXAMPLE (" #t)
+          (encoded-ans "" "(EXAMPLE (" #f #t)
           (encoded-ans ".recipe_name" funname show-funname?)
           " "
-          (encoded-ans ".recipe_example_inputs" (list-to-string args) show-args?)
-          (encoded-ans "" ")" #t)
+          (encoded-ans ".recipe_example_inputs" (list-to-string args) "input(s)" show-args?)
+          (encoded-ans "" ")" #f #t)
           (let ([body-s (expr-to-string body)])
             (string-append
-              (encoded-ans ".recipe_example_body" body-s show-body?)
+              (encoded-ans ".recipe_example_body" body-s "what the function produces" show-body?)
               (write-large ")")
                   ))
             )))))
@@ -456,13 +473,13 @@
   (write-wrapper ".recipe.recipe_example_line"
     (lambda ()
       (string-append
-        (encoded-ans ".recipe_name" funname show-funname?)
+        (encoded-ans ".recipe_name" funname "function name" show-funname?)
         " "
         (write-large "(")
-        (encoded-ans ".recipe_example_inputs" args show-args?)
+        (encoded-ans ".recipe_example_inputs" args "input(s)" show-args?)
         (write-large ")")
         (highlight-keywords " is ")
-        (encoded-ans ".recipe_example_body" (highlight-keywords body) show-body?)
+        (encoded-ans ".recipe_example_body" (highlight-keywords body) "what the function produces" show-body?)
         ))))
 
 (define (write-each-example funname args body show)
@@ -532,19 +549,19 @@
                 (string-append
                   (write-large "(")
                   (write-spaced "define (")
-                  (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+                  (encoded-ans ".recipe_name" funname "function name" *show-funname-defn?*)
                   " "
-                  (encoded-ans ".recipe_variables" (vars-to-string param-list) *show-params?*)
+                  (encoded-ans ".recipe_variables" (vars-to-string param-list) "variable(s)" *show-params?*)
                   (write-large ")"))))
 
             (cond [cond?
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "__" #f)
+                          (encoded-ans "" "__" #f #f)
                           (write-large "(")
-                          (encoded-ans ".recipe_cond" "cond" #t)
-                          (encoded-ans "" "__" #f))))]
+                          (encoded-ans ".recipe_cond" "cond" #f #t)
+                          (encoded-ans "" "__" #f #f))))]
                   [else ""])
 
             (cond [cond?
@@ -557,8 +574,8 @@
                     (write-wrapper ".recipe.recipe_line"
                       (lambda ()
                         (string-append
-                          (encoded-ans "" "__" #f)
-                          (encoded-ans ".recipe_definition_body" (expr-to-string body) *show-body?*)
+                          (encoded-ans "" "__" #f #f)
+                          (encoded-ans ".recipe_definition_body" (expr-to-string body) "what the function does with those variable(s)" *show-body?*)
                           (write-large ")")
                           )))])
 
@@ -582,7 +599,7 @@
                           (string-append
                             (highlight-keywords "otherwise: ")
                             (encoded-ans ".answers" (highlight-keywords (first otherwise-branch))
-                                         *show-body?*)))]
+                                         #f *show-body?*)))]
                        [(string-contains? body-line "then:")
                         (let* ([test-action (string-split body-line " then: ")]
                                [test (first test-action)]
@@ -591,20 +608,20 @@
                                [action-len (string-length action)])
                           ;(printf "test-action = ~s\n" test-action)
                           (string-append
-                            (encoded-ans ".questions" test *show-body?*)
+                            (encoded-ans ".questions" test #f *show-body?*)
                             (cond [(and *show-body?* (> (+ test-len action-len) 50))
                                    (string-append
                                      (write-clear)
-                                     (encoded-ans "" "__" #f)
-                                     (encoded-ans "" "| " #f)
+                                     (encoded-ans "" "__" #f #f)
+                                     (encoded-ans "" "| " #f #f)
                                      (highlight-keywords "then: ")
-                                     (encoded-ans ".answers" action *show-body?*))]
+                                     (encoded-ans ".answers" action #f *show-body?*))]
                                   [else
                                     (string-append
                                       (highlight-keywords " then: ")
-                                      (encoded-ans ".answers" action *show-body?*))])))]
+                                      (encoded-ans ".answers" action #f *show-body?*))])))]
                        [else
-                         (encoded-ans "" body-line *show-body?*)]))]
+                         (encoded-ans "" body-line #f *show-body?*)]))]
               [(or (string-prefix? body-line "if ")
                    (string-prefix? body-line "else if "))
                (let* ([n (cond [(string-prefix? body-line "if ") 3]
@@ -613,16 +630,16 @@
                       [question-code (list-ref kode 1)]
                       [answer-code (list-ref kode 2)])
                  (string-append
-                   (encoded-ans ".questions" (highlight-keywords question-code) *show-body?*)
-                   (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*)))]
+                   (encoded-ans ".questions" (highlight-keywords question-code) #f *show-body?*)
+                   (encoded-ans ".answers" (highlight-keywords answer-code) #f *show-body?*)))]
               [(string-prefix? body-line "else: ")
                (let* ([answer-code (substring body-line 6)])
-                 (encoded-ans ".answers" (highlight-keywords answer-code) *show-body?*))]
+                 (encoded-ans ".answers" (highlight-keywords answer-code) #f *show-body?*))]
               [(regexp-match #rx"^(ask:|end)" body-line)
                (highlight-keywords body-line)]
               [else
                 (encoded-ans ".recipe_definition_body"
-                             (highlight-keywords body-line) *show-body?*)])))))
+                             (highlight-keywords body-line) "what the function does with those variable(s)" *show-body?*)])))))
 
 (define (write-definition/pyret funname param-list body)
   ; (printf "doing write-definition/pyret ~s ~s ~s\n" funname param-list body)
@@ -644,9 +661,9 @@
                   (lambda ()
                     (string-append
                       (write-spaced (highlight-keywords "fun "))
-                      (encoded-ans ".recipe_name" funname *show-funname-defn?*)
+                      (encoded-ans ".recipe_name" funname "function name" *show-funname-defn?*)
                       (write-large "(")
-                      (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) *show-params?*)
+                      (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) "variable(s)" *show-params?*)
                       (write-large "):"))))
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
@@ -655,6 +672,7 @@
                     (string-append
                       (encoded-ans (if (= n 0) ".recipe_definition_body" "")
                                    (highlight-keywords last-body-line)
+                                   "what the function does with those variable(s)"
                                    (if (string-prefix? last-body-line "end") #t
                                        *show-body?*)))))
                 (write-wrapper ".recipe.recipe_line.keyword_only"
@@ -712,8 +730,8 @@
      (let* ([question (expr-to-string (first clause))]
             [answer (list-to-string (rest clause))])
        (string-append
-          (encoded-ans ".questions" question *show-body?*)
-          (encoded-ans ".answers"   answer   *show-body?*))))))
+          (encoded-ans ".questions" question #f *show-body?*)
+          (encoded-ans ".answers"   answer   #f *show-body?*))))))
                
 
 (define (design-recipe-exercise funname directions
@@ -1050,9 +1068,9 @@
   (string-append
     (write-title "Contents (Contract, Purpose Statement, and Expression)")
     "[.recipe.recipe_contract]\n"
-    (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) *show-domains?*)
+    (encoded-ans ".recipe_domain" (vars-to-commaed-string domain-list) "domain" *show-domains?*)
     "->"
-    (encoded-ans ".recipe_range" range *show-range?*)
+    (encoded-ans ".recipe_range" range "range" *show-range?*)
     "\n\n"
     "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)
