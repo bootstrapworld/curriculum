@@ -336,28 +336,28 @@
     "[.recipe.recipe_instructions]\n"
     "Every contract has three parts...\n\n"
     "[.recipe.recipe_contract]\n"
-    (encoded-ans ".recipe_name" funname "function name" *show-funname-contract?*)
+    (encoded-ans ".recipe_name" funname "" *show-funname-contract?*)
     (if *pyret?* "::" ":")
     (encoded-ans ".recipe_domain"
                  ((if *pyret?*
                       vars-to-commaed-string
-                      vars-to-string) domain-list) "domain" *show-domains?*)
+                      vars-to-string) domain-list) "" *show-domains?*)
     "->"
-    (encoded-ans ".recipe_range" range "range" *show-range?*)
+    (encoded-ans ".recipe_range" range "" *show-range?*)
     "\n\n"
     "[.recipe.recipe_purpose_statement]\n"
     (write-purpose-prose purpose)))
 
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
-          (encoded-ans ".recipe_purpose" purpose "what does the function do?" *show-purpose?*)]
+          (encoded-ans ".recipe_purpose" purpose "" *show-purpose?*)]
         [else
           (string-append
             (enclose-span ".begin-ignore-for-gdrive" "")
-            (encoded-ans ".recipe_purpose" " " "what does the function do?" *show-purpose?*)
+            (encoded-ans ".recipe_purpose" " " "" *show-purpose?*)
             (enclose-span ".end-ignore-for-gdrive" "")
             (enclose-span ".gdrive-only"
-              (encoded-ans ".recipe_purpose" purpose "what does the function do?" *show-purpose?*)))]))
+              (encoded-ans ".recipe_purpose" purpose "" *show-purpose?*)))]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ; (printf "doing write-examples num-examples=~s example-list=~s buggy-example-list=~s\n" num-examples example-list buggy-example-list)
@@ -440,11 +440,11 @@
           (encoded-ans "" "(EXAMPLE (" #f #t)
           (encoded-ans ".recipe_name" funname show-funname?)
           " "
-          (encoded-ans ".recipe_example_inputs" (list-to-string args) "input(s)" show-args?)
+          (encoded-ans ".recipe_example_inputs" (list-to-string args) "" show-args?)
           (encoded-ans "" ")" #f #t)
           (let ([body-s (expr-to-string body)])
             (string-append
-              (encoded-ans ".recipe_example_body" body-s "what the function produces" show-body?)
+              (encoded-ans ".recipe_example_body" body-s "" show-body?)
               (write-large ")")
                   ))
             )))))
@@ -473,13 +473,13 @@
   (write-wrapper ".recipe.recipe_example_line"
     (lambda ()
       (string-append
-        (encoded-ans ".recipe_name" funname "function name" show-funname?)
+        (encoded-ans ".recipe_name" funname "" show-funname?)
         " "
         (write-large "(")
-        (encoded-ans ".recipe_example_inputs" args "input(s)" show-args?)
+        (encoded-ans ".recipe_example_inputs" args "" show-args?)
         (write-large ")")
         (highlight-keywords " is ")
-        (encoded-ans ".recipe_example_body" (highlight-keywords body) "what the function produces" show-body?)
+        (encoded-ans ".recipe_example_body" (highlight-keywords body) "" show-body?)
         ))))
 
 (define (write-each-example funname args body show)
@@ -549,9 +549,9 @@
                 (string-append
                   (write-large "(")
                   (write-spaced "define (")
-                  (encoded-ans ".recipe_name" funname "function name" *show-funname-defn?*)
+                  (encoded-ans ".recipe_name" funname "" *show-funname-defn?*)
                   " "
-                  (encoded-ans ".recipe_variables" (vars-to-string param-list) "variable(s)" *show-params?*)
+                  (encoded-ans ".recipe_variables" (vars-to-string param-list) "" *show-params?*)
                   (write-large ")"))))
 
             (cond [cond?
@@ -575,7 +575,7 @@
                       (lambda ()
                         (string-append
                           (encoded-ans "" "__" #f #f)
-                          (encoded-ans ".recipe_definition_body" (expr-to-string body) "what the function does with those variable(s)" *show-body?*)
+                          (encoded-ans ".recipe_definition_body" (expr-to-string body) "" *show-body?*)
                           (write-large ")")
                           )))])
 
@@ -661,9 +661,9 @@
                   (lambda ()
                     (string-append
                       (write-spaced (highlight-keywords "fun "))
-                      (encoded-ans ".recipe_name" funname "function name" *show-funname-defn?*)
+                      (encoded-ans ".recipe_name" funname "" *show-funname-defn?*)
                       (write-large "(")
-                      (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) "variable(s)" *show-params?*)
+                      (encoded-ans ".recipe_variables" (vars-to-commaed-string param-list) "" *show-params?*)
                       (write-large "):"))))
                 (apply string-append
                        (map write-body-line/pyret but-last-body-lines))
@@ -672,7 +672,7 @@
                     (string-append
                       (encoded-ans (if (= n 0) ".recipe_definition_body" "")
                                    (highlight-keywords last-body-line)
-                                   "what the function does with those variable(s)"
+                                   ""
                                    (if (string-prefix? last-body-line "end") #t
                                        *show-body?*)))))
                 (write-wrapper ".recipe.recipe_line.keyword_only"
@@ -696,7 +696,7 @@
   )
 
 (define (write-large s #:tag [tag ""])
-  (enclose-span (string-append ".studentAnswerCode" tag) s))
+  (enclose-span tag s))
 
 (define *wrapper-block-level* 0)
 

@@ -559,24 +559,25 @@ body.workbookpage {
       left:               0;
       bottom :            -1px;
     }
-    /* Note(Emmanuel): these could probably be a lot tighter */
-    .studentAnswerCode, .studentAnswerUnfilled {
-      padding: 0; word-spacing: 2pt;
-    }
-    .studentAnswerCode:after { content: "\00A0"; }
-    .studentAnswerUnfilled, .studentAnswerFilled { min-width: auto; }
-    .studentAnswerFilled {
-        border-bottom:    none;
-        font-weight:      900;
-        font-style:       italic;
-        margin-bottom:    0;
-        line-height:      inherit;
-    }
-
-    .studentAnswerShort  { min-width: 60pt;  }
-    .studentAnswerMedium { min-width: 100pt; }
-    .studentAnswerLong   { min-width: 140pt; }
   }
+
+  /* Note(Emmanuel): these could probably be a lot tighter */
+  .studentAnswerCode, .studentAnswerUnfilled {
+    padding: 0; word-spacing: 2pt; border-bottom: solid 1px black;
+  }
+  .studentAnswerUnfilled, .studentAnswerFilled { min-width: auto; }
+  .studentAnswerFilled {
+      border-bottom:    none;
+      font-weight:      900;
+      font-style:       italic;
+      margin-bottom:    0;
+      line-height:      inherit;
+  }
+
+  .studentAnswerShort  { min-width: 20pt;  }
+  .studentAnswerMedium { min-width: 100pt; }
+  .studentAnswerLong   { min-width: 140pt; }
+
 
   /* Back-of-the-book contracts table */
   table.contracts-table {
@@ -660,26 +661,28 @@ table.recipe_title    {
     text-align: center;
   }
 
-  .recipe_cond { flex-grow: unset !important; min-width:  10%; }
-  .recipe_name          { min-width: 20%; }
-  .recipe_range         { min-width: 12%; }
-  .recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
-  .recipe_variables     { min-width: 30%; white-space: nowrap; }
+  .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+  .fitbruby.recipe_name          { min-width: 20%; }
+  .fitbruby.recipe_range         { min-width: 12%; }
+  .fitbruby.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
+  .fitbruby.recipe_variables     { min-width: 30%; white-space: nowrap; }
   /* All code is inside a wrapper, so apply the code font */
   .wrapper {
     p, .fitbruby { font-family: Hack, "Courier New", monospace; }
   }
 
   /* in solutions mode, use the smallest possible space for function name */
-  .solution.recipe_name { min-width: 6em; }
+  .fitbruby.solution.recipe_name { min-width: 6em; }
 
   /* Contract and Purpose get lang-specific comment symbols */
   .recipe_purpose, &.recipe_contract .recipe_name {
     padding-left: 1em;
     &::before { color: black; position: absolute; left: 0; }
   }
-  .questions, .answers { flex-grow: 1; }
-  &.recipe_condition *::before, *::after { color: #75328A; }
+  .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
+  &.fitbruby.recipe_condition *::before, *::after { color: #75328A; }
+
+  .studentAnswerCode, .studentAnswerUnfilled { border: none; }
 }
 
 /* Proglang-specific adaptations */
@@ -705,15 +708,18 @@ table.recipe_title    {
       width: 1em;
     }
     .questions { margin-left: 3em; }
-    .questions::before { content: "if"; position: absolute; left: -2em; }
+    +.recipe:nth-last-child(3) .answers::before,
+    .questions::before { position: absolute; left: -2em; color:  #75328A; font-weight: bold; }
+    .questions::before { content: "if"; }
     +.recipe_condition {
       .questions { margin-left: 4em; }
       .questions::before { content: "else if"; left: -3em; }
     }
     +.recipe:nth-last-child(3) {
-      .answers::before  { position: absolute; content: "else:"; left: -2em; }
+      .answers::before  { content: "else:"; }
       .answers { margin-left: 3em; }
     }
+    +.recipe_line:not(.recipe_condition) .solution { border-bottom: none; margin-left: 2em; font-style: normal;}
   }
   .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
   strong { margin: 0; padding: 0; }
@@ -731,7 +737,7 @@ table.recipe_title    {
     width: 90%;
     .questions { margin-left: 1em; }
     .answers { margin-left: 1em; margin-right: 1em; }
-    .questions::before { content: "["; position: absolute; left: -1ex; }
+    .questions::before { content: "["; position: absolute; left: -1ex; color:  #75328A; }
     .answers::after { 
       content: "]"; 
       position: absolute; 
