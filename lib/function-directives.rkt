@@ -67,6 +67,7 @@
 
 (define (encoded-ans style s ruby-text show?)
   (unless (string? s) (set! s (format "~a" s)))
+  ; (printf "doing encoded-ans ~s ~s ~s ~s\n" style s ruby-text show?)
   (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
     ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
     (enclose-span
@@ -438,7 +439,7 @@
       (lambda ()
         (string-append
           (encoded-ans "" "(EXAMPLE (" #f #t)
-          (encoded-ans ".recipe_name" funname show-funname?)
+          (encoded-ans ".recipe_name" funname #f show-funname?)
           " "
           (encoded-ans ".recipe_example_inputs" (list-to-string args) "" show-args?)
           (encoded-ans "" ")" #f #t)
