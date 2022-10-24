@@ -2067,7 +2067,7 @@
 
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
-                    [*solutions-mode?* (display "[.solution]\n" o)]
+                    [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
 
               (expand-directives i o)
