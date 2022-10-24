@@ -59,7 +59,7 @@
     (enclose-span
       (string-append
         (if (string=? style "") "" ".studentAnswer")
-        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if (string=? style ".recipe_purpose") "" ".studentAnswer")
         (if show? ".solution" ".blank")
         style)
       (if show? s
@@ -73,7 +73,7 @@
     (enclose-span
       (string-append
         (if (string=? style "") "" ".fitbruby")
-        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if (string=? style ".recipe_purpose") "" ".studentAnswer")
         (if show? ".solution" ".blank")
         style)
       (string-append
@@ -351,7 +351,7 @@
 
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
-          (encoded-ans ".recipe_purpose" purpose "" *show-purpose?*)]
+          (encoded-ans ".recipe_purpose.studentAnswer" purpose "" *show-purpose?*)]
         [else
           (string-append
             (enclose-span ".begin-ignore-for-gdrive" "")
