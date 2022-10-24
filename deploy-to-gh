@@ -1,4 +1,4 @@
-# last modified 2022-10-17
+# last modified 2022-10-18
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -131,33 +131,6 @@ for f in $(find . -name \* -type f); do
   git add -- $f
 done
 
-git commit -a -m "newest commit"
+git commit -a -m "..."
 
-####################################
-
-# When pushing, remove all but the last commit, as we don't need to maintain history
-
-cd $BOOTSTRAPWORLD_GITHUB_IO_DIR
-
-CURRBRANCH=$(git branch --show-current)
-UNTRACKEDFILES=.my-untracked-files
-SAVEDGITCONFIG=.my-orig-git-config
-
-mv .git/config $SAVEDGITCONFIG
-
-git ls-files --others --exclude-standard -z > $UNTRACKEDFILES
-
-rm -fr .git
-
-git init -b $CURRBRANCH
-git add .
-
-mv $SAVEDGITCONFIG .git/config
-
-cat $UNTRACKEDFILES | xargs -r0 git rm --cached
-
-rm $UNTRACKEDFILES
-
-git commit -m "sole commit"
-
-git push -u origin $CURRBRANCH
+git push origin $(git branch --show-current)

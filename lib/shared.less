@@ -3,13 +3,19 @@
 @import 'https://www.bootstrapworld.org/styles.css';
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
+// LESS Variables
+@default-size:    12pt;
+@default-family:  'Lato', Arial, Helvetica, sans-serif;
+@default-color:   #75328A;
+@default-translucent-color:   #75328A77;
+@writing-space:   0.8rem; /* <--- how much extra height for kids to write!! */
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
 body {
-  font-size:      12pt;
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-  color:          #75328A;
+  font-size:      @default-size;
+  font-family:    @default-family;
+  color:          @default-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
   break-inside:   auto !important;
   display:        block;
@@ -32,11 +38,11 @@ body {
   h1 {
     font-size:      2rem;
     font-weight:    bold;
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @default-family;
   }
   h2 {
     margin:          0; /* 1ex bottom margin */
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @default-family;
   }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
@@ -100,7 +106,7 @@ body {
   #safariWarning { display: none; }
   #savetodrive-div:hover + #safariWarning {
     display:          block;
-    background:       #75328AAA;
+    background:       @default-translucent-color;
     color:            white;
     padding:          5px;
     margin-top:       75px;
@@ -161,33 +167,33 @@ body:not(.LessonPlan, .narrativepage) p {
 }
 
 /* TODO(Emmanuel): dead code?
-.tooltip { 
-  position: relative; 
-  .tooltiptext {
-    min-width:        120px;
-    max-width:        66%;
-    background-color: #555;
-    color:            white;
-    border-radius:    6px;
-    padding:          5px 0;
-    position:         absolute;
-    top:              50%;
-    left:             50%;
-    text-align:       center;
-    opacity:          0;
-    transition:       all 0.3s;
-    transform:        translateX(-50%) translateY(-50%);
+  .tooltip { 
+    position: relative; 
+    .tooltiptext {
+      min-width:        120px;
+      max-width:        66%;
+      background-color: #555;
+      color:            white;
+      border-radius:    6px;
+      padding:          5px 0;
+      position:         absolute;
+      top:              50%;
+      left:             50%;
+      text-align:       center;
+      opacity:          0;
+      transition:       all 0.3s;
+      transform:        translateX(-50%) translateY(-50%);
+    }
+    :hover .tooltiptext { opacity: 1; }
   }
-  :hover .tooltiptext { opacity: 1; }
-}
-.standards-hierarchical-table ul li ul { display: none; }
+  .standards-hierarchical-table ul li ul { display: none; }
 
-span.clear {
-  clear:              both;
-  display:            block;
-  content:            "";
-  width:              100%;
-}
+  span.clear {
+    clear:              both;
+    display:            block;
+    content:            "";
+    width:              100%;
+  }
 */
 
 .alignedStandards { display: none; }
@@ -223,7 +229,7 @@ span.clear {
   .course-banner {
     font-style: italic;
     background: #B6D990aa;
-    border: #75328A 1px dashed;
+    border: @default-color 1px dashed;
     padding: 5px;
     margin-bottom: 2rem;
     a { color: black; text-decoration: underline; }
@@ -345,7 +351,7 @@ span.clear {
       text-align:  center;
       border: 0;
       margin: 0 !important;
-      background: #75328A77;
+      background: @default-translucent-color;
       &:after { content: '≫'; font-size: 20px;}
     }
 
@@ -381,7 +387,7 @@ span.clear {
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-  .vocab { font-weight: bold; font-style: italic; color: #75328A; }
+  .vocab { font-weight: bold; font-style: italic; color: @default-color; }
   .lesson-instruction, .lesson-roleplay {
     min-height: 50px;
     background: #eee;
@@ -449,7 +455,7 @@ span.clear {
   /* class for styling duration info in headers */
   .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
   /* Special links back to older, pre-remix materials */
-  .old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
+  .old-materials p { width:100%; background:@default-translucent-color; color:black; text-align:center; }
 }
 
 /* Images and Captions */
@@ -541,7 +547,7 @@ body.workbookpage {
   .studentAnswerLong   { min-width: 140pt; }
 
   .fitb, .fitbruby, .fitb.stretch::after {
-    padding-top:        1.1rem; /* <--- how much extra height for kids to write!! */
+    padding-top:        @writing-space;
     position:           relative;
     display:            inline-block;
     min-width:          5em;
@@ -557,7 +563,7 @@ body.workbookpage {
     position:           absolute;
     bottom:             -0.9rem;
     left:               0;
-    font-size:          0.65rem;
+    font-size:          0.75rem;
     font-weight:        normal;
     width:              100%;
     text-align:         center;
@@ -619,24 +625,15 @@ body.LessonNotes {
 .workbookpage .data-cycle { 
   border-collapse: collapse; 
   td:first-of-type { background: lightgray; border: solid white; }
-  td p, td p > * { font-size: 0.75rem; }
   td { padding: 0.2rem 0.625rem; }
   .fitbruby, .fitb { 
-    padding-top: 1.5ex !important;
     font-style: italic; 
-    font-size:  1rem;
-    margin-bottom: 0.8rem;
     .ruby { 
+      bottom:     -0.95rem; /* ...and more space for it  */
       text-align: left; 
-      transform:  none; 
-      left:       0; 
-      bottom:     -0.95rem;
-      font-size:  0.75rem; 
     }
   }
 }
-
-.recipe_word_problem { min-height: 0.65in; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { 
@@ -648,6 +645,7 @@ table.recipe_title    {
 }
 
 .recipe {
+  .recipe_word_problem { min-height: 0.60in; }
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
   /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
@@ -737,7 +735,7 @@ table.recipe_title    {
       position: absolute; 
       left: calc(100% + 2pt);
       bottom: 0; 
-      color: #75328A; 
+      color: @default-color; 
       width: unset; 
       font-style: unset;
       font-size: unset;
@@ -788,7 +786,6 @@ table.recipe_title    {
   .codap_example_tables+table table * { text-align: center; height: 2rem; }
   .recipe_domain, .recipe_range { width:  40%; }
 } 
-
 /************************************************************************************
 * TEACHER RESOURCES PAGE
 */
@@ -952,7 +949,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   /* on WB pages, set font size to same as print and then zoom the page */
   body.workbookpage {
     transform-origin: left top; 
-    transform: scale(1.25); 
+    transform:  scale(1.25); 
     min-height: calc(11in * 1.25) !important;
     #savetodrive-div { transform: scale(0.8); }
   }
@@ -968,7 +965,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       #body { padding-bottom:  10in; }  
       /* adjust colors */
       h2 {
-        background-color: #75328A77;
+        background-color: @default-translucent-color;
         color: white;
         font-weight: 600;
         cursor: pointer;
