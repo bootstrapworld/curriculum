@@ -58,8 +58,8 @@
     ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
     (enclose-span
       (string-append
-        (if (string=? style "") "" ".studentAnswer")
-        (if (string=? style ".recipe_purpose") "" ".studentAnswer")
+        (if (string=? style "") "" ".fitbruby")
+        (if (string=? style ".recipe_purpose") "" ".fitbruby")
         (if show? ".solution" ".blank")
         style)
       (if show? s
@@ -73,7 +73,7 @@
     (enclose-span
       (string-append
         (if (string=? style "") "" ".fitbruby")
-        (if (string=? style ".recipe_purpose") "" ".studentAnswer")
+        (if (string=? style ".recipe_purpose") "" ".fitbruby")
         (if show? ".solution" ".blank")
         style)
       (string-append
@@ -351,7 +351,7 @@
 
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
-          (encoded-ans ".recipe_purpose.studentAnswer" purpose "" *show-purpose?*)]
+          (encoded-ans ".recipe_purpose.fitbruby" purpose "" *show-purpose?*)]
         [else
           (string-append
             (enclose-span ".begin-ignore-for-gdrive" "")
@@ -935,7 +935,7 @@
     "|\n"
     "|===\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
+    "++++\n<p class=\"recipe\"><span class=\"fitbruby recipe_name\">"
     (if *show-transformer-name?* transformer-name "")
     "</span></p>\n++++")))
 
@@ -1077,7 +1077,7 @@
     (write-purpose-prose purpose)
     "\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_formula\">"
+    "++++\n<p class=\"recipe\"><span class=\"fitbruby recipe_formula\">"
     (if *show-formula-expression?* body "")
     "</span></p>\n++++"
     "\n\n"))

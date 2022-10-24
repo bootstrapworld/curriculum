@@ -2865,7 +2865,7 @@
                        (if (or pyret tex) x (enclose-span ".value.wescheme-number" x)))]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
-         (enclose-span ".studentAnswer" (format "~a" e))] ;CHECK
+         (enclose-span ".fitb" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
                        (if (or pyret tex) x (enclose-span ".value.wescheme-symbol" x)))]
         [(string? e) (let ([x (format "~s" e)])
@@ -2874,16 +2874,16 @@
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentAnswer~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                              (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex))
-                           (enclose-span (format ".studentAnswer~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(fitb? e)
          ; (printf "found fitb ~s\n" e)
          (let ([e (second e)])
-                     (enclose-tag "span" ".studentAnswer" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
+                     (enclose-tag "span" ".fitb" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
@@ -3034,9 +3034,9 @@
         [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentAnswer~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                            (sexp->block-table e #:pyret pyret))
-                           (enclose-span (format ".value~a.studentAnswer~a"
+                           (enclose-span (format ".value~a.fitb~a"
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
@@ -3092,16 +3092,16 @@
                        (if *solutions-mode?*
                            (enclose-span
                              (if wescheme
-                                 (format ".studentAnswer~a" fill-len)
+                                 (format ".fitb~a" fill-len)
                                  (format ".studentBlockAnswerFilled~a" fill-len))
                              (sexp->block e #:pyret pyret #:wescheme wescheme))
                            (enclose-span
                              (if wescheme
-                                 (format ".value.wescheme-symbol.studentAnswer~a" fill-len)
-                                 (format ".value.studentAnswer~a" fill-len))
+                                 (format ".value.wescheme-symbol.fitb~a" fill-len)
+                                 (format ".value.fitb~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(fitb? e) (let ([e (second e)])
-                     (enclose-tag "span" ".studentAnswer" "{nbsp}"
+                     (enclose-tag "span" ".fitb" "{nbsp}"
                        #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and (eq? a 'EXAMPLE) wescheme)
