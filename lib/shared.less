@@ -543,7 +543,7 @@ body.workbookpage {
     border-bottom:      solid 1px black;
   }
   .fitbruby { 
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.75rem;
   }
   .fitbruby .ruby, .recipe .ruby:after {
     position:           absolute;
@@ -554,6 +554,7 @@ body.workbookpage {
     width:              100%;
     text-align:         center;
     font-style:         normal;
+    font-family:        'Lato', Arial, Helvetica, sans-serif;
   }
   .fitb.stretch { 
     margin-left:        5px; 
@@ -641,26 +642,29 @@ table.recipe_title    {
 .recipe {
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
+
   /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
   p { display: flex; flex-wrap: wrap; align-items: baseline;}
+
   /* All student answers have a bottom-border, and a "ruby" printed in black */
   p .fitb, p .fitbruby { padding-top: 1ex; word-spacing: 2pt; }
+
   /* We're using the ruby itself to hang the content, and it's already positioned correctly */
   .ruby:after { bottom: 0 !important; } 
-  .fitbruby { text-align: left; }
 
-  /* Some things should grow to fill the width of their containing line */
-  .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
+  /* Format fitrubies: mostly left, but a few in the center or on the right */
+  .fitbruby { text-align: left !important; font-family: Hack, "Courier New", monospace; }
+  .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
+  .recipe_name, .recipe_range { text-align: right !important; }
 
-  .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
   .fitbruby.recipe_name          { min-width: 20%; }
   .fitbruby.recipe_range         { min-width: 12%; }
   .fitbruby.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
   .fitbruby.recipe_variables     { min-width: 30%; white-space: nowrap; }
-  /* All code is inside a wrapper, so apply the code font */
-  .wrapper {
-    p, .fitbruby { font-family: Hack, "Courier New", monospace; }
-  }
+  .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+
+  /* Some things should grow to fill the width of their containing line */
+  .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
 
   /* Contract and Purpose get lang-specific comment symbols */
   .recipe_purpose, &.recipe_contract .recipe_name {
