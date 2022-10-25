@@ -1,0 +1,176 @@
+= Absolute Value and Opposites
+
+@description{Students learn to model arithmetic expressions in words with a visual tool known as "Circles of Evaluation".}
+
+@lesson-prereqs{distributive-property}
+
+@keywords{Opposite, Absolute Value}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Define absolute value as a number's distance from zero on the number line.
+* Recognize that two numbers are referred to as "opposites" if they are the same distance from zero.
+* Use Circles of Evaluation to analyze expressions with opposite and absolute value.
+
+| Student-facing Lesson Goals
+|
+
+* Let's use Circles of Evaluation to think about opposites and absolute value.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+|
+* Draw or project a number line, which will be the focal point of a lot of the conversation for today's lesson.
+
+| Key Points For The Facilitator
+|
+* The difference between absolute value and opposite can be subtle and confusing for students. Sometimes, given an input, they produce the same output - but at other times, their outputs differ.
+|===
+
+== Opposite @duration{20 minutes}
+
+=== Overview
+
+Students discover what it means for numbers to be opposites, and then play with Circles of Evaluation to explore the `negate` function.
+
+
+=== Launch
+
+Instruct students to draw a number line that spans from @math{-10} to @math{10}, or draw/project one at the front of the room.
+
+[.lesson-instruction]
+- What number is the same distance from zero as @math{8}?
+** _@math{-8}_
+- What number is the same distance from zero as @math{-3}?
+** _@math{3}_
+- The pairs of numbers we've just identified are called _opposites_ - two numbers that are the same distance from zero on the number line, with one negative and one positive.
+- What are some other pairs of opposites that you can identify?
+** _Possible responses: @math{6.5} and @math{-6.5}; @math{4} and @math{-4}; @math{\frac {7}{3}} and @math{- \frac {7}{3}}._
+- Do you think that zero has an opposite?
+** _Zero is its own opposite._
+
+=== Investigate
+
+Explain to students that the function used to represent "the opposite" is called `negate`. It can be used like any other operator that we put at the top of a Circle of Evaluation - with one important difference: when we use `negate`, we can include just one argument inside the Circle.
+
+[.lesson-instruction]
+--
+- Take a look at the Circle below. What does it evaluate to?
+** _The Circle below evaluates to @math{-2}._
+
+[.image]
+@show{(coe '(negate 2))}
+@clear
+
+- What happens if we nest a negating Circle _inside of_ another negating Circle?
+** _The opposite of the opposite of a number is the number itself._
+
+[.image]
+@show{(coe '(negate (negate 2)))}
+@clear
+
+- Practice applying `negate` on Negate: True or False?
+--
+
+When we want to write a mathematical expression that indicates that negating is happen, we just use a negative sign! So, while we can read @math{-45} by simply saying "negative 45," another way to read that value's name is by saying, "the opposite of 45."
+
+=== Synthesize
+
+- Two opposites are 8 units apart from each other. What are they?
+** @math{4} and @math{-4}
+- Two opposites are 42.5 units apart from each other. What are they?
+** @math{21.5} and @math{-21.5}
+- Cia says that opposites are always negative. Are they right? Why?
+** _No, opposites are not always negative. When we negate a negative value, we get a positive value. Additionally, zero is its own opposite, and it is neither positive nor negative._
+
+== Absolute Value @duration{30 minutes}
+
+=== Overview
+
+Students consider the meaning of absolute value, and apply the concept to Circles of Evaluation using `num-abs`.
+
+=== Launch
+
+[.lesson-instruction]
+What is the distance between these two points on the number line: @math{-18} and @math{5}?
+
+Give students a minute to contemplate, and then invite them to verbally share their strategies. Record students' thinking the board, annotating the number line. All strategies are welcome, with a special interest in any discussion that hones in on the idea of _the distance of a number from zero._
+
+Explain to students that we have a term for _the distance of a number from zero_ - it's absolute value.
+
+We annotate absolute value like this: @math{|x|}, with @math{x} being any given number. When we encounter an expression like @math{|x|}, we say "the absolute value of @math{x}."
+
+Because _opposites_ are the same distance away from zero, they will always have the same absolute value. So, @math{|4| = 4} and @math{|-4| = 4}.
+
+// include number line diagram showing a 4-unit jump from 0 to 4, and from 0 to -4 //
+
+=== Investigate
+
+The function to represent absolute value is `num-abs`. It can be used like any other operator that we put at the top of a Circle of Evaluation - with one important difference: when we use `negate`, we include just one argument inside the Circle.
+
+[.lesson-instruction]
+Practice applying `num-abs` on Num-Abs: True or False?
+
+Check in with students to ensure that they have a solid understanding of absolute value before moving forward.
+
+=== Synthesize
+
+
+== Putting it Together @duration{30 minutes}
+
+=== Overview
+Students tackle expressions that include both `num-abs` _and_ `negate`.
+
+=== Launch
+
+Circles can be extremely useful in helping students to navigate problems with `num-abs` and `negate`, which can be quite complicated, otherwise; after all, "negative" and "absolute value" are not typically delegated in the order of operations.
+
+[.lesson-instruction]
+--
+Analyze the equation below and consider if it is *true* or *false*:
+
+@math{-|4| = |-4|}
+
+Jenny says that it is _true_ because absolute value makes everything positive, so both sides of the equation evaluate to 4. Is she correct?
+--
+
+Representing the equation with Circles highlights the structure of these expressions and it becomes clearer that they are not equivalent.
+
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+| @show{(coe '(negate (num-abs 4)))} | @math{=} | @show{(coe '(num-abs (negate 4)))}
+|===
+
+[.lesson-instruction]
+- Turn to True or False? to analyze additional pairs of Circles that use `negate` and `num-opposite`.
+
+=== Investigate
+
+Students who are can toggle between the mathematical representation, the expression in words, and the Circle of Evaluation will feel more confident both completing and discussing the subsequent activities.
+
+[.lesson-instruction]
+- On Find the Equivalent Circles, identify each Circle that evaluates to the designated value.
+- For a challenge, try Find the Equivalent Circles with Substitution.
+
+
+=== Synthesize
+
+- The absolute value of a number is sometimes / always / never greater than or equal to the original number.
+** _Always_
+- The opposite of a number is sometimes / always / never equal to the original number.
+** _Sometimes_
+- The absolute value of a number is sometimes / always / never greater than or equal to the opposite of the number.
+** _Always_
+- The opposite of a number is sometimes / always / never equal to the absolute value of that number.
+** _Never_
+
+
+// sometimes, always, never is from https://mathequalslove.net/always-sometimes-never-for-absolute/ //
