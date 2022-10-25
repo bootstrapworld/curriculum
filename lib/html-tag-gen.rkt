@@ -19,7 +19,7 @@
   display-end-span
 
   string-multiply
-  fitbruby
+  fitbruby ;fixme
   fitb
   hspace
   )
@@ -152,7 +152,7 @@
     (if (= n 0) r
         (loop (- n 1) (string-append r s)))))
 
-(define (fitbruby width text ruby-classes [show? #t])
+(define (fitbruby width text ruby-classes [show? #t]) ;fixme remove evntly
   (when (string=? width "")
     (set! width "100%"))
   (string-append
