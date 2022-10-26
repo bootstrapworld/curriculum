@@ -614,13 +614,12 @@ body.LessonNotes {
   td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
   td { padding: 0.2rem 0.625rem; }
 
+  .fitbruby { text-align: left !important; }
+
   /* Ruby text in the Data Cycle needs to be slightly larger than normal */
-  .fitbruby, .fitb { 
-    margin-bottom: 0.8rem;
-    .ruby { 
-      font-size:  0.75rem !important; 
-      &::after { bottom: 0 !important; color: black; text-align: left !important; } 
-    }
+  .fitbruby .ruby { 
+    font-size:  0.75rem !important; 
+    &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
 }
 
@@ -651,7 +650,6 @@ table.recipe_title    {
   /* Format fitrubies: mostly left, but a few in the center or on the right */
   .fitbruby { text-align: left !important; font-family: Hack, "Courier New", monospace; }
   .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
-  .recipe_name, .recipe_range { text-align: right !important; }
 
   .fitbruby.recipe_name          { min-width: 20%; }
   .fitbruby.recipe_range         { min-width: 12%; }
@@ -675,7 +673,7 @@ table.recipe_title    {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
-  .solution.recipe_name { text-align: right; min-width: 6em; } /* no whitespace in pyret */
+  .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
   /* Indenting for function body and example bodies */
   .recipe_example_line:not(.keyword_only) > .content, 
   .recipe_definition_body { margin-left: 2ex; }
