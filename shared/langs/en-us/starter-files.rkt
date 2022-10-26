@@ -141,8 +141,8 @@
    ("pyret" "https://code.pyret.org/editor#share=1DBYGJDOlIARaWI3pBVzjPp6eewkQJGHW")
    )
 
-  ("bad-survey"  "Height vs. Wingspan Survey"
-   ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
+  ("bad-survey"  "Height vs. Wingspan Survey (make a copy)"
+   ("pyret" "https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy")
    )
 
   ("dirty-data"  "New Animals! Starter File"

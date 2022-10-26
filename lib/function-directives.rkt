@@ -38,13 +38,7 @@
 
 (define *table-marker* "|")
 
-(define *div-nesting* 0)
 
-(define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 50)
-;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
-;(define *max-wescheme-example-side-length* 30)
-;(define *max-pyret-example-side-length* 30)
 
 (define *max-pyret-example-clause-length* 60)
 
@@ -54,16 +48,20 @@
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
+  ; (printf "doing encoded-ans ~s ~s ~s\n" style s show?)
   (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
     ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
     (enclose-span
       (string-append
-        (if (string=? style "") "" ".studentAnswer")
-        (if (string=? style ".recipe_purpose") "" ".studentAnswerCode")
+        (if (string=? style "") "" ".fitbruby")
+        ; (if (string=? style ".recipe_purpose") "" ".fitbruby")
         (if show? ".solution" ".blank")
         style)
-      (if show? s
-          (string-multiply "&#x5f;" (string-length s-og))))))
+      (string-append
+        (if show? s
+            (string-multiply "&#x5f;" (string-length s-og)))
+        (enclose-span ".ruby" "")
+        ))))
 
 (define (wescheme->wescheme e #:indent [indent #f] #:parens [parens #f])
   ; (printf "doing wescheme->wescheme ~s\n" e)
@@ -235,10 +233,6 @@
                                             (string-append r "\n"
                                               (if indent (make-string (+ indent 2) #\space) "")
                                               lhs-s " is "
-                                              (if (< tot-len *max-pyret-example-clause-length*) ""
-                                                  (string-append
-                                                    "\n"
-                                                    (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
                            [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a #:parens parens)
@@ -333,7 +327,7 @@
 
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
-          (encoded-ans ".recipe_purpose" purpose *show-purpose?*)]
+          (encoded-ans ".recipe_purpose.fitbruby" purpose *show-purpose?*)]
         [else
           (string-append
             (enclose-span ".begin-ignore-for-gdrive" "")
@@ -678,7 +672,7 @@
   )
 
 (define (write-large s #:tag [tag ""])
-  (enclose-span (string-append ".studentAnswerCode" tag) s))
+  (enclose-span tag s))
 
 (define *wrapper-block-level* 0)
 
@@ -916,9 +910,10 @@
     "|\n"
     "|===\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_name\">"
-    (if *show-transformer-name?* transformer-name "")
-    "</span></p>\n++++")))
+    "++++\n<p class=\"recipe\">"
+    (encoded-ans ".recipe_name" transformer-name *show-transformer-name?*)
+    "</p>\n++++"
+    )))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -1058,9 +1053,9 @@
     (write-purpose-prose purpose)
     "\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"studentAnswer recipe_formula\">"
-    (if *show-formula-expression?* body "")
-    "</span></p>\n++++"
+    "++++\n<p class=\"recipe\">"
+    (encoded-ans ".recipe_formula" body *show-formula-expression?*)
+    "</p>\n++++"
     "\n\n"))
 
 ;;;; Data cycle
@@ -1124,7 +1119,7 @@
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
     "\n"
     "|\n"
-    (fitbruby "" question ".data-cycle-question" *show-question?*)
+    (encoded-ans ".data-cycle-question.stretch" question *show-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
@@ -1140,29 +1135,29 @@
     "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
-    (fitbruby "" rows ".data-cycle-rows" *show-rows?*)
+    (encoded-ans ".data-cycle-rows.stretch" rows *show-rows?*)
     "\n\n"
-    (fitbruby "" cols ".data-cycle-cols" *show-cols?*)
+    (encoded-ans ".data-cycle-cols.stretch" cols *show-cols?*)
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/AnalyzeData.png[Analyze icon]"
     "\n"
     "|\n"
-    (fitbruby "" filter-fn ".data-cycle-filter" *show-filter?*)
+    (encoded-ans ".data-cycle-filter.stretch" filter-fn *show-filter?*)
     "\n\n"
-    (fitbruby "" build-fn ".data-cycle-build" *show-build?*)
+    (encoded-ans ".data-cycle-build.stretch" build-fn *show-build?*)
     "\n\n"
-    (fitbruby "" expression ".data-cycle-expression" *show-expression?*)
+    (encoded-ans ".data-cycle-expression.stretch" expression *show-expression?*)
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
     "\n"
     "|\n"
-    (fitbruby "" finding ".data-cycle-finding" *show-finding?*)
+    (encoded-ans ".data-cycle-finding.stretch" finding *show-finding?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (fitbruby "" new-question ".data-cycle-new-question" *show-new-question?*)
+    (encoded-ans ".data-cycle-new-question.stretch" new-question *show-new-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
