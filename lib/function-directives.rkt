@@ -933,9 +933,10 @@
     "|\n"
     "|===\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"fitbruby recipe_name\">"
-    (if *show-transformer-name?* transformer-name "")
-    "</span></p>\n++++")))
+    "++++\n<p class=\"recipe\">"
+    (encoded-ans ".recipe_name" transformer-name *show-transformer-name?*)
+    "</p>\n++++"
+    )))
 
 (define (write-example-tables input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
   ; (printf "doing write-example-tables ~s ~s ~s ~s\n" input-rows output-rows stipulated-num-input-rows stipulated-num-output-rows)
@@ -1075,9 +1076,9 @@
     (write-purpose-prose purpose)
     "\n\n"
     "[.recipe]\n"
-    "++++\n<p class=\"recipe\"><span class=\"fitbruby recipe_formula\">"
-    (if *show-formula-expression?* body "")
-    "</span></p>\n++++"
+    "++++\n<p class=\"recipe\">"
+    (encoded-ans ".recipe_formula" body *show-formula-expression?*)
+    "</p>\n++++"
     "\n\n"))
 
 ;;;; Data cycle
