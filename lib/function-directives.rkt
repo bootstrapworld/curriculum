@@ -233,10 +233,6 @@
                                             (string-append r "\n"
                                               (if indent (make-string (+ indent 2) #\space) "")
                                               lhs-s " is "
-                                              (if (< tot-len *max-pyret-example-clause-length*) ""
-                                                  (string-append
-                                                    "\n"
-                                                    (if indent (make-string (+ indent 4) #\space) "")))
                                               rhs-s))))))]
                            [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a #:parens parens)
@@ -1123,45 +1119,45 @@
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
     "\n"
     "|\n"
-    (encoded-ans ".data-cycle-question" question *show-question?*)
+    (encoded-ans ".data-cycle-question.stretch" question *show-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (encoded-ans ".data-cycle-type-of-question" "" #t)
+    (enclose-span ".data-cycle-type-of-question" "")
     (hspace "1.5em")
-    (encoded-ans ".data-cycle-lookup" "" #t)
+    (enclose-span ".data-cycle-lookup" "")
     (hspace "1.5em")
-    (encoded-ans ".data-cycle-arithmetic" "" #t)
+    (enclose-span ".data-cycle-arithmetic" "")
     (hspace "1.5em")
-    (encoded-ans ".data-cycle-statistical" "" #t)
+    (enclose-span ".data-cycle-statistical" "")
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
     "|\n"
-    (encoded-ans ".data-cycle-rows" rows *show-rows?*)
+    (encoded-ans ".data-cycle-rows.stretch" rows *show-rows?*)
     "\n\n"
-    (encoded-ans ".data-cycle-cols" cols *show-cols?*)
+    (encoded-ans ".data-cycle-cols.stretch" cols *show-cols?*)
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/AnalyzeData.png[Analyze icon]"
     "\n"
     "|\n"
-    (encoded-ans ".data-cycle-filter" filter-fn *show-filter?*)
+    (encoded-ans ".data-cycle-filter.stretch" filter-fn *show-filter?*)
     "\n\n"
-    (encoded-ans ".data-cycle-build" build-fn *show-build?*)
+    (encoded-ans ".data-cycle-build.stretch" build-fn *show-build?*)
     "\n\n"
-    (encoded-ans ".data-cycle-expression" expression *show-expression?*)
+    (encoded-ans ".data-cycle-expression.stretch" expression *show-expression?*)
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
     "\n"
     "|\n"
-    (encoded-ans ".data-cycle-finding" finding *show-finding?*)
+    (encoded-ans ".data-cycle-finding.stretch" finding *show-finding?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (encoded-ans ".data-cycle-new-question" new-question *show-new-question?*)
+    (encoded-ans ".data-cycle-new-question.stretch" new-question *show-new-question?*)
     "\n\n"
     (fitb "100%" "")
     "\n\n"
