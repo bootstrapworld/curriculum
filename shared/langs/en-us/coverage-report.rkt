@@ -25,25 +25,26 @@
 ;;;;;;;;;;;;;
 
 (define (sanitize-css-id id)
-  (regexp-replace* "\\." id "_"))
+  (regexp-replace* "[. ]" id "_")
+  )
 
 (define (display-selection o )
   (display "\n++++\n" o)
   (display "<select class=\"coverageAlignmentSelect\" onchange=\"showCoverageAlignment()\">\n" o)
   (display "<optgroup label=\"Standards\">\n" o)
   (for ([categ *standards-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ)))
+    (fprintf o "<option>~a</option>\n" (first categ))
     )
   (display "</optgroup>\n" o)
   ;
   (display "<optgroup label=\"Textbooks\">\n" o)
   (for ([categ *textbooks-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ))))
+    (fprintf o "<option>~a</option>\n" (first categ)))
   (display "</optgroup>\n" o)
   ;
   (display "<optgroup label=\"Practices\">\n" o)
   (for ([categ *practices-list*])
-    (fprintf o "<option>~a</option>\n" (sanitize-css-id (first categ))))
+    (fprintf o "<option>~a</option>\n" (first categ)))
   (display "</optgroup>\n" o)
   (display "</select>\n" o)
   (display "++++\n" o))
