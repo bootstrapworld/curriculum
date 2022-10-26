@@ -142,6 +142,16 @@ body {
     border-bottom:    solid 3px black;
     margin:           5px 0px;
   }
+  .editbox {
+    width:              auto;
+    background-color:   #f7f7f8;
+    margin:             2px;
+    padding:            0 2px;
+    text-align:         left;
+    line-height:        1.2rem;
+    vertical-align:     baseline;
+    &:empty { display: none; } /* If empty after JS post-processing, hide */
+  }
 }
 
 body:not(.LessonPlan, .narrativepage) p {
@@ -159,36 +169,6 @@ body:not(.LessonPlan, .narrativepage) p {
   dd        { margin: 0px; }
   dd::after { content: '\A'; white-space: pre; }
 }
-
-/* TODO(Emmanuel): dead code?
-.tooltip { 
-  position: relative; 
-  .tooltiptext {
-    min-width:        120px;
-    max-width:        66%;
-    background-color: #555;
-    color:            white;
-    border-radius:    6px;
-    padding:          5px 0;
-    position:         absolute;
-    top:              50%;
-    left:             50%;
-    text-align:       center;
-    opacity:          0;
-    transition:       all 0.3s;
-    transform:        translateX(-50%) translateY(-50%);
-  }
-  :hover .tooltiptext { opacity: 1; }
-}
-.standards-hierarchical-table ul li ul { display: none; }
-
-span.clear {
-  clear:              both;
-  display:            block;
-  content:            "";
-  width:              100%;
-}
-*/
 
 .alignedStandards { display: none; }
 .coverageElement { display: none; }
@@ -293,7 +273,7 @@ span.clear {
       font-size:          0.8rem;
     }
     p { font-family: monospace; }
-    .editbox { width: auto; }
+    
     tr:first-of-type, tr:first-of-type p {
       background-color:   lightgray;
       font-weight:        bold;
@@ -515,11 +495,7 @@ body.workbookpage {
   }
 
   /* Make code match text size/layout */
-  p .editbox, pre .editbox { 
-    line-height: 1rem; 
-    vertical-align: baseline; 
-    font-size: 9pt !important; 
-  }
+  p .editbox, pre .editbox { font-size: 9pt !important; }
 
   /* Some elements show either solution mode or a blank */
   .solution { font-style: italic; }
@@ -843,16 +819,6 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   font-style:         normal;
   clear:              both;
 }
-
-.editbox {
-  width:              auto;
-  background-color:   #f7f7f8;
-  margin:             2px;
-  padding:            0 2px;
-  text-align:         left;
-}
-.editbox:empty { display: none; } /* If empty after JS post-processing, hide */
-p .editbox { line-height: 1.2rem; vertical-align: baseline; font-size: 9pt; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
