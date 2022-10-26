@@ -38,32 +38,13 @@
 
 (define *table-marker* "|")
 
-(define *div-nesting* 0)
 
-(define *max-wescheme-cond-side-length* 32)
-(define *max-line-length* 50)
-;; NOTE(Emmanuel) - these lines have been subsumed by *max-line-length*
-;(define *max-wescheme-example-side-length* 30)
-;(define *max-pyret-example-side-length* 30)
 
 (define *max-pyret-example-clause-length* 60)
 
 (define *funname* #f)
 
 (define (get-function-name) *funname*)
-
-(define (old-encoded-ans style s show?) ;FIXME will be removed after new one stabilized
-  (unless (string? s) (set! s (format "~a" s)))
-  (let ([s-og (regexp-replace* #rx"{zwsp}" s "")])
-    ;(printf "encoded-ans ~s\n ~s\n ~s ~s\n" show? s s-og (string-length s-og))
-    (enclose-span
-      (string-append
-        (if (string=? style "") "" ".fitbruby")
-        (if (string=? style ".recipe_purpose") "" ".fitbruby")
-        (if show? ".solution" ".blank")
-        style)
-      (if show? s
-          (string-multiply "&#x5f;" (string-length s-og))))))
 
 (define (encoded-ans style s show?)
   (unless (string? s) (set! s (format "~a" s)))
