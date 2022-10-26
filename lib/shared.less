@@ -6,14 +6,18 @@
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
+
+@font-color: #75328A;
+@translucent-bg-color: #75328AAA;
+@text-font: 'Lato', Arial, Helvetica, sans-serif;
+@code-font: Hack, "Courier New", monospace;
+
 body {
   font-size:      12pt;
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-  color:          #75328A;
+  font-family:    @text-font;
+  color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
-  break-inside:   auto !important;
   display:        block;
-  page-break-inside: auto !important;
   position:       relative;
   -webkit-font-smoothing: antialiased;
   &.beta::after { 
@@ -32,11 +36,11 @@ body {
   h1 {
     font-size:      2rem;
     font-weight:    bold;
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @text-font;
   }
   h2 {
     margin:          0; /* 1ex bottom margin */
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @text-font;
   }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
@@ -100,7 +104,7 @@ body {
   #safariWarning { display: none; }
   #savetodrive-div:hover + #safariWarning {
     display:          block;
-    background:       #75328AAA;
+    background:       @translucent-bg-color;
     color:            white;
     padding:          5px;
     margin-top:       75px;
@@ -141,6 +145,17 @@ body {
     width:            auto;
     border-bottom:    solid 3px black;
     margin:           5px 0px;
+  }
+
+  /* Images and Captions */
+  .image-figure .image-caption { 
+    width:      100%; 
+    max-width:  300px; 
+    display:    inline-block; 
+    font-style: italic; 
+    line-height: 1.5ex;
+    word-break: break-word;
+    &::before { content: 'Source: '; }
   }
   .editbox {
     width:              auto;
@@ -203,7 +218,7 @@ body:not(.LessonPlan, .narrativepage) p {
   .course-banner {
     font-style: italic;
     background: #B6D990aa;
-    border: #75328A 1px dashed;
+    border: @font-color 1px dashed;
     padding: 5px;
     margin-bottom: 2rem;
     a { color: black; text-decoration: underline; }
@@ -325,7 +340,7 @@ body:not(.LessonPlan, .narrativepage) p {
       text-align:  center;
       border: 0;
       margin: 0 !important;
-      background: #75328A77;
+      background: @translucent-bg-color;
       &:after { content: '≫'; font-size: 20px;}
     }
 
@@ -361,7 +376,7 @@ body:not(.LessonPlan, .narrativepage) p {
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-  .vocab { font-weight: bold; font-style: italic; color: #75328A; }
+  .vocab { font-weight: bold; font-style: italic; color: @font-color; }
   .lesson-instruction, .lesson-roleplay {
     min-height: 50px;
     background: #eee;
@@ -429,18 +444,7 @@ body:not(.LessonPlan, .narrativepage) p {
   /* class for styling duration info in headers */
   .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
   /* Special links back to older, pre-remix materials */
-  .old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
-}
-
-/* Images and Captions */
-.image-figure .image-caption { 
-  width:      100%; 
-  max-width:  300px; 
-  display:    inline-block; 
-  font-style: italic; 
-  line-height: 1.5ex;
-  word-break: break-word;
-  &::before { content: 'Source: '; }
+  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 }
 
 /************************************************************************************
@@ -458,9 +462,7 @@ body.workbookpage #preamble_disabled .sectionbody {
 }
 
 body.solution-page {
-  .fitbruby, .fitb {
-    font-style:       italic;
-  }
+  .fitbruby, .fitb { font-style: italic; }
 }
 
 body.workbookpage {
@@ -530,7 +532,7 @@ body.workbookpage {
     width:              100%;
     text-align:         center;
     font-style:         normal;
-    font-family:        'Lato', Arial, Helvetica, sans-serif;
+    font-family:        @text-font;
   }
   .fitb.stretch { 
     margin-left:        5px; 
@@ -599,8 +601,6 @@ body.LessonNotes {
   }
 }
 
-.recipe_word_problem { min-height: 0.65in; }
-
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { 
   background: gray; border: gray; 
@@ -611,6 +611,8 @@ table.recipe_title    {
 }
 
 .recipe {
+  .recipe_word_problem { min-height: 0.65in; }
+
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
@@ -624,7 +626,7 @@ table.recipe_title    {
   .ruby:after { bottom: 0 !important; } 
 
   /* Format fitrubies: mostly left, but a few in the center or on the right */
-  .fitbruby { text-align: left !important; font-family: Hack, "Courier New", monospace; }
+  .fitbruby { text-align: left !important; font-family: @code-font; }
   .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
 
   .fitbruby.recipe_name          { min-width: 20%; }
@@ -641,7 +643,7 @@ table.recipe_title    {
     padding-left: 1em;
     &::before { color: black; position: absolute; left: 0; }
   }
-  &.fitbruby.recipe_condition *::before, *::after { color: #75328A; }
+  &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
 }
 
 /* Proglang-specific adaptations */
@@ -668,7 +670,7 @@ table.recipe_title    {
       width: 1em;
     }
     +.recipe:nth-last-child(3) .answers::before,
-    .questions::before { position: absolute; left: -2em; color:  #75328A; font-weight: bold; }
+    .questions::before { position: absolute; left: -2em; color: #75328A; font-weight: bold; }
     .questions::before { content: "if"; }
     +.recipe_condition {
       .questions { margin-left: 4em; }
@@ -698,13 +700,13 @@ table.recipe_title    {
     width: 90%;
     .questions { margin-left: 1em; text-align: left; }
     .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
-    .questions::before { content: "["; position: absolute; left: -1ex; color:  #75328A; }
+    .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
     .answers::after { 
       content: "]"; 
       position: absolute; 
       left: calc(100% + 2pt);
       bottom: 0; 
-      color: #75328A; 
+      color: @font-color; 
       width: unset; 
       font-style: unset;
       font-size: unset;
@@ -769,7 +771,7 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 */
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
-  font-family: Hack, "Courier New", monospace;
+  font-family: @code-font;
 }
 
 td.halign-center div.circleevalsexp { text-align: center; }
@@ -887,7 +889,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 .codetwo {
-  font-family: Hack, "Courier New", monospace;
+  font-family: @code-font;
   font-size: 0.85rem;
   background-color: #f7f7f8;
   color: #666;
@@ -925,7 +927,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       #body { padding-bottom:  10in; }  
       /* adjust colors */
       h2 {
-        background-color: #75328A77;
+        background-color: @translucent-bg-color;
         color: white;
         font-weight: 600;
         cursor: pointer;
