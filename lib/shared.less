@@ -490,10 +490,12 @@ body.workbookpage {
       display: contents;
       > tr { 
         display: contents; 
-        > td { display: grid; position: relative; }
+        > td { 
+          display: grid; position: relative; 
+          &.valign-middle { align-items: center; }
+        }
       }
     } 
-    .valign-middle { align-items: center; }
   }
 
   /* Make code match text size/layout */
@@ -610,9 +612,10 @@ table.recipe_title    {
   p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 }
 
-.recipe {
-  .recipe_word_problem { min-height: 0.65in; }
+/* common height for headless and non-headless DRs */
+.recipe_word_problem { min-height: 0.65in; }
 
+.recipe {
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
