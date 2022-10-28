@@ -7,18 +7,24 @@ window.onload = () => {
   cards     = [].slice.call(slider.children);           // an array of all the cards
   editor    = document.createElement("div");
   parley    = window.embedableParley.renderParley(editor);
+  parley.onReady(() => clearLoadingScreenAndRun());
   righthand = document.getElementById("righthand");
-  loadFromConfig(cardIndex);
   updateSliderAndButtons();
-  progress.style.width = (cardIndex+1) * (100 / cards.length) + "%";
+  progress.style.width = (cardIndex + 1) * (100 / cards.length) + "%";
 }
 
 function updateSliderAndButtons() {
   document.getElementById('prev').style.display = (cardIndex === 0)? "none" : "block"
   document.getElementById('next').style.display = (cardIndex >= cards.length-1)? "none" : "block";
-  slider.style.left = (cardIndex*-400) + "px";
+  slider.style.left = (cardIndex * -400) + "px";
   slider.scrollIntoView();
-  progress.style.width = (cardIndex+1) * (100 / cards.length) + "%";
+  progress.style.width = (cardIndex + 1) * (100 / cards.length) + "%";
+  loadFromConfig(cardIndex);
+}
+
+function clearLoadingScreenAndRun() {
+  document.getElementById('righthand').style.opacity = 1;
+  document.getElementById('loadingScreen').classList.add('loaded');
   loadFromConfig(cardIndex);
 }
 
