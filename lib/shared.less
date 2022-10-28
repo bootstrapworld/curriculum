@@ -11,6 +11,8 @@
 @translucent-bg-color: #75328AAA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
+@top-padding-for-writing: 1.2rem;
+@top-padding-for-dr: 1rem;
 
 body {
   font-size:      12pt;
@@ -514,7 +516,7 @@ body.workbookpage {
   .studentAnswerLong   { min-width: 140pt; }
 
   .fitb, .fitbruby, .fitb.stretch::after {
-    padding-top:        1rem; /* <--- how much extra height for kids to write!! */
+    padding-top:        @top-padding-for-writing;
     position:           relative;
     display:            inline-block;
     min-width:          4em;
@@ -616,6 +618,7 @@ table.recipe_title    {
 .recipe_word_problem { min-height: 0.65in; }
 
 .recipe {
+
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
 
@@ -623,7 +626,10 @@ table.recipe_title    {
   p { display: flex; flex-wrap: wrap; align-items: baseline;}
 
   /* All student answers have a bottom-border, and a "ruby" printed in black */
-  p .fitb, p .fitbruby { word-spacing: 2pt; }
+  p .fitb, p .fitbruby { 
+    word-spacing: 2pt; padding-top: @top-padding-for-dr;
+    &:after { word-spacing: 0; }
+  }
 
   /* We're using the ruby itself to hang the content, and it's already positioned correctly */
   .ruby:after { bottom: 0 !important; } 
@@ -673,15 +679,26 @@ table.recipe_title    {
       width: 1em;
     }
     +.recipe:nth-last-child(3) .answers::before,
-    .questions::before { position: absolute; left: -2em; color: #75328A; font-weight: bold; }
+    .questions::before { 
+      position: absolute; 
+      left: -2em; 
+      color: #75328A; 
+      font-weight: bold; 
+      font-family: @text-font;
+    }
+    /* the 1st condition ("if") */
     .questions::before { content: "if"; }
+    /* the next n-1 conditions ("if else")*/
     +.recipe_condition {
       .questions { margin-left: 4em; }
       .questions::before { content: "else if"; left: -3em; }
     }
+    /* the last condition ("else") */
     +.recipe:nth-last-child(3) {
-      .answers::before  { content: "else:"; }
-      .answers { margin-left: 3em; }
+      .fitbruby:first-child { 
+        margin-left: 3em; 
+        &:before  { content: "else:"; }
+      }
     }
     +.recipe_line:not(.recipe_condition) .solution { 
       border-bottom: none; margin-left: 2em; font-style: normal; text-align: left;
