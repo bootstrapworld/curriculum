@@ -133,7 +133,7 @@
     (,(all-cc-states "6.G.A.4")
      "surface-area-rect-prism"
      )
-    (,(all-cc-states "6.P.A")
+    (,(all-cc-states "6.SP.A")
      "measures-of-center"
      "histograms"
      "histograms2"
