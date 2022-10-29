@@ -2,63 +2,54 @@
 
 (provide *standards-and-lessons*)
 
-(define cc-states
-  '("AL" "AR" "CA" "CO" "CT" "DE" "GA" "HI" "ID" "IL"
-    "IA" "KS" "KY" "LA" "ME" "MD" "MA" "MI" "MS" "MO"
-    "MT" "NV" "NH" "NJ" "NM" "NY" "NC" "ND" "OH" "OR"
-    "PA" "RI" "SD" "TN" "UT" "VT" "WA" "WV" "WI" "WY"))
-
-(define (all-cc-states std)
-  (map (lambda (state) (string-append state "." std)) cc-states))
-
 (define *standards-and-lessons*
   `(
     ;;;;;;;;;;;;;;;;;;;  Common Core Math Standards ;;;;;;;;;;;;;;;;;;
     ; Grade 5
-    (,(all-cc-states "5.OA.A")
+    ("5.OA.A"
      "order-of-operations"
      )
-    (,(all-cc-states "5.OA.A.1")
+    ("5.OA.A.1"
      "order-of-operations"
      )
-    (,(all-cc-states "5.MD.B")
+    ("5.MD.B"
      ;"Represent and interpret data."
      ;Flannery?
      )
-    (,(all-cc-states "5.MD.C")
+    ("5.MD.C"
      ;"Geometric measurement: understand concepts of volume."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.3")
+    ("5.MD.C.3"
      ;"Recognize volume as an attribute of solid figures and understand concepts of volume measurement."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.3.A")
+    ("5.MD.C.3.A"
      ;"A cube with side length 1 unit, called a "unit cube," is said to have "one cubic unit" of volume, and can be used to measure volume."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.5")
+    ("5.MD.C.5"
      ;"A solid figure which can be packed without gaps or overlaps using n unit cubes is said to have a volume of n cubic units."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.5")
+    ("5.MD.C.5"
      ;"Relate volume to the operations of multiplication and addition and solve real world and mathematical problems involving volume."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.5.A")
+    ("5.MD.C.5.A"
      ;"Find the volume of a right rectangular prism with whole-number side lengths by packing it with unit cubes, and show that the volume is the same as would be found by multiplying the edge lengths, equivalently by multiplying the height by the area of the base. Represent threefold whole-number products as volumes, e.g., to represent the associative property of multiplication."
      ;Rachel?
      )
-    (,(all-cc-states "5.MD.C.5.B")
+    ("5.MD.C.5.B"
      ;"Apply the formulas V = l × w × h and V = b × h for rectangular prisms to find volumes of right rectangular prisms with whole-number edge lengths in the context of solving real world and mathematical problems."
      ;Rachel?
      )
-    (,(all-cc-states "5.G.A.1")
+    ("5.G.A.1"
      "coordinates"
      )
 
     ; Grade 6
-    (,(all-cc-states "6.EE.B.6")
+    ("6.EE.B.6"
      "linear-regression"
      "grouped-samples"
      "defining-table-functions"
@@ -77,92 +68,92 @@
      "functions-examples-definitions"
      "functions-make-life-easier"
      )
-    (,(all-cc-states "6.EE.A.1")
+    ("6.EE.A.1"
      ;"Write and evaluate numerical expressions involving whole-number exponents."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.A.2")
+    ("6.EE.A.2"
      ;"Write, read, and evaluate expressions in which letters stand for numbers."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.A.2.A")
+    ("6.EE.A.2.A"
      ;"Write expressions that record operations with numbers and with letters standing for numbers."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.A.2.C")
+    ("6.EE.A.2.C"
      ;"Evaluate expressions at specific values of their variables. Include expressions that arise from formulas used in real-world problems. Perform arithmetic operations, including those involving whole-number exponents, in the conventional order when there are no parentheses to specify a particular order (Order of Operations)."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.A.3")
+    ("6.EE.A.3"
      ;"Apply the properties of operations to generate equivalent expressions."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.A.4")
+    ("6.EE.A.4"
      ;"Identify when two expressions are equivalent (i.e., when the two expressions name the same number regardless of which value is substituted into them)."
      ;Rachel?
      )
-    (,(all-cc-states "6.EE.B")
+    ("6.EE.B"
      "inequalities1-simple"
      "inequalities2-compound"
      )
-    (,(all-cc-states "6.EE.B.5")
+    ("6.EE.B.5"
      ;"Reason about and solve one-variable equations and inequalities."
      ;Flannery?
      )
-    (,(all-cc-states "6.EE.B.8")
+    ("6.EE.B.8"
      "inequalities3-sam"
      "inequalities1-simple"
      )
-    (,(all-cc-states "6.NS.C.6.A")
+    ("6.NS.C.6.A"
      ;"Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
      ;Rachel?
      )
-    (,(all-cc-states "6.RP.A")
+    ("6.RP.A"
      "bar-and-pie-charts"
      "flags"
      )
-    (,(all-cc-states "6.RP.A.1")
+    ("6.RP.A.1"
      "flags"
      )
-    (,(all-cc-states "6.RP.A.3.D")
+    ("6.RP.A.3.D"
      "flags"
      )
-    (,(all-cc-states "6.G.A")
+    ("6.G.A"
      "surface-area-rect-prism"
      )
-    (,(all-cc-states "6.G.A.4")
+    ("6.G.A.4"
      "surface-area-rect-prism"
      )
-    (,(all-cc-states "6.SP.A")
+    ("6.SP.A"
      "measures-of-center"
      "histograms"
      "histograms2"
      "box-plots"
      )
-    (,(all-cc-states "6.SP.A.1")
+    ("6.SP.A.1"
      "ds-intro"
      "choosing-your-dataset"
      "data-cycle"
      )
-    (,(all-cc-states "6.SP.A.2")
+    ("6.SP.A.2"
      "measures-of-center"
      "histograms"
      "histograms2"
      "box-plots"
      "standard-deviation"
      )
-    (,(all-cc-states "6.SP.A.3")
+    ("6.SP.A.3"
      "standard-deviation"
      "box-plots"
      )
-    (,(all-cc-states "6.SP.B")
+    ("6.SP.B"
      "measures-of-center"
      "histograms2"
      "box-plots"
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "6.SP.B.4")
+    ("6.SP.B.4"
      "standard-deviation"
      "box-plots"
      "histograms2"
@@ -170,50 +161,50 @@
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "6.SP.B.5")
+    ("6.SP.B.5"
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "6.SP.B.5.C")
+    ("6.SP.B.5.C"
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "6.SP.B.5.D")
+    ("6.SP.B.5.D"
      "measures-of-center"
      "project-exploration-paper"
      "project-research-paper"
      )
 
     ; Grade 7
-    (,(all-cc-states "7.RP.A")
+    ("7.RP.A"
       "flags"
       "making-game-images"
     )
-    (,(all-cc-states "7.RP.A.1")
+    ("7.RP.A.1"
      "flags"
      )
-    (,(all-cc-states "7.RP.A.2.A")
+    ("7.RP.A.2.A"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "7.RP.A.2.B")
+    ("7.RP.A.2.B"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "7.EE.A")
+    ("7.EE.A"
      ;"Use properties of operations to generate equivalent expressions."
      ;Rachel?
      )
-    (,(all-cc-states "7.EE.A.2")
+    ("7.EE.A.2"
      "problem-decomposition"
      )
-    (,(all-cc-states "7.EE.B")
+    ("7.EE.B"
      "problem-decomposition"
      "player-animation"
      "inequalities3-sam"
@@ -221,45 +212,45 @@
      "piecewise-functions-conditionals"
      "functions-dr"
      )
-    (,(all-cc-states "7.EE.B.4")
+    ("7.EE.B.4"
      "inequalities2-compound"
      "inequalities1-simple"
      "defining-values"
      "functions-dr"
      "functions-make-life-easier"
      )
-    (,(all-cc-states "7.G.B.4")
+    ("7.G.B.4"
      "functions-dr"
      )
-    (,(all-cc-states "7.G.B.6")
+    ("7.G.B.6"
      "surface-area-rect-prism"
      "functions-dr"
      )
-    (,(all-cc-states "7.SP.B")
+    ("7.SP.B"
      "bar-and-pie-charts"
      )
-    (,(all-cc-states "7.SP.A")
+    ("7.SP.A"
      "random-samples"
      )
-    (,(all-cc-states "7.SP.A.1")
+    ("7.SP.A.1"
      "random-samples"
      )
-    (,(all-cc-states "7.SP.A.2")
+    ("7.SP.A.2"
      "random-samples"
      )
-    (,(all-cc-states "7.SP.B")
+    ("7.SP.B"
      ;"Draw informal comparative inferences about two populations."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "7.SP.B.3")
+    ("7.SP.B.3"
      ;"Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
      )
-    (,(all-cc-states "7.SP.B.4")
+    ("7.SP.B.4"
      ;"Use measures of center and measures of variability for numerical data from random samples to draw informal comparative inferences about two populations."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
@@ -267,143 +258,143 @@
      )
 
     ; Grade 8
-    (,(all-cc-states "8.EE.B")
+    ("8.EE.B"
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (,(all-cc-states "8.EE.B.5")
+    ("8.EE.B.5"
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (,(all-cc-states "8.F.A.1")
+    ("8.F.A.1"
      "contracts"
      "functions-vertical-line-test"
      )
-    (,(all-cc-states "8.F.A.2")
+    ("8.F.A.2"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "8.F.A.3")
+    ("8.F.A.3"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "8.F.B")
+    ("8.F.B"
      "functions-for-character-animation"
      "functions-dr"
      "functions-make-life-easier"
      "function-definition-linear"
      "problem-decomposition"
      )
-    (,(all-cc-states "8.F.B.4")
+    ("8.F.B.4"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "8.F.B.5")
+    ("8.F.B.5"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "8.G.A.1")
+    ("8.G.A.1"
      "making-game-images"
      )
-    (,(all-cc-states "8.G.B")
+    ("8.G.B"
      "distance-formula"
      )
-    (,(all-cc-states "8.G.B.7")
+    ("8.G.B.7"
      "distance-formula"
      )
-    (,(all-cc-states "8.G.B.8")
+    ("8.G.B.8"
      "distance-formula"
      )
-    (,(all-cc-states "8.SP.A.3")
+    ("8.SP.A.3"
      "linear-regression"
      )
-    (,(all-cc-states "8.SP.A.1")
+    ("8.SP.A.1"
      "scatter-plots"
      "linear-regression"
      "grouped-samples"
      "correlations"
      )
-    (,(all-cc-states "8.SP.A.2")
+    ("8.SP.A.2"
      "scatter-plots"
      "linear-regression"
      "correlations"
      )
-    (,(all-cc-states "8.SP.A.3")
+    ("8.SP.A.3"
      "linear-regression"
      )
 
     ; High School
-    (,(all-cc-states "HSS.IC.B.3")
+    ("HSS.IC.B.3"
      "random-samples"
      )
-    (,(all-cc-states "HSN.Q.A")
+    ("HSN.Q.A"
      "flags"
      )
-    (,(all-cc-states "HSN.Q.A")
+    ("HSN.Q.A"
      ;"Reason quantitatively and use units to solve problems."
      ;Modeling?
      )
-    (,(all-cc-states "HSN.Q.A.1")
+    ("HSN.Q.A.1"
      ;"Use units as a way to understand problems and to guide the solution of multi-step problems; choose and interpret units consistently in formulas; choose and interpret the scale and the origin in graphs and data displays."
      ;Modeling?
      )
-    (,(all-cc-states "HSN.Q.A.2")
+    ("HSN.Q.A.2"
      ;"Define appropriate quantities for the purpose of descriptive modeling."
      ;Modeling?
      )
     
-    (,(all-cc-states "HSA.SSE.A.1")
+    ("HSA.SSE.A.1"
      "defining-values"
      "functions-make-life-easier"
      "functions-dr"
      )
-    (,(all-cc-states "HSA.SSE.A.1.A")
+    ("HSA.SSE.A.1.A"
      "player-animation"
      "piecewise-functions-conditionals"
      )
-    (,(all-cc-states "HSA.SSE.A.1.B")
+    ("HSA.SSE.A.1.B"
      "custom-scatter-plots"
      "player-animation"
      "piecewise-functions-conditionals"
      )
-    (,(all-cc-states "HSA.SSE.A.2")
+    ("HSA.SSE.A.2"
      ;"Use the structure of an expression to identify ways to rewrite it."
      "order-of-operations"
      ;Rachel?
      )
-    (,(all-cc-states "HSA.SSE.B")
+    ("HSA.SSE.B"
      ;"Write expressions in equivalent forms to solve problems."
      "order-of-operations"
      ;Rachel?
      )
-    (,(all-cc-states "HSA.CED.A")
+    ("HSA.CED.A"
      "problem-decomposition"
      "inequalities3-sam"
      "functions-dr"
      "surface-area-rect-prism"
      )
-    (,(all-cc-states "HSA.CED.A.1")
+    ("HSA.CED.A.1"
      "inequalities3-sam"
      )
-    (,(all-cc-states "HSA.CED.A.2")
+    ("HSA.CED.A.2"
      "inequalities3-sam"
      )
-    (,(all-cc-states "HSA.CED.A.3")
+    ("HSA.CED.A.3"
      "inequalities3-sam"
      )
     ("HSA.REI.A.1"
      ;"Explain each step in solving a simple equation as following from the equality of numbers asserted at the previous step, starting from the assumption that the original equation has a solution. Construct a viable argument to justify a solution method."
      ; Rachel?
      )
-    (,(all-cc-states "HSF.IF.A")
+    ("HSF.IF.A"
      "functions-make-life-easier"
      "function-notation"
      )
-    (,(all-cc-states "HSF.IF.A.1")
+    ("HSF.IF.A.1"
      "functions-vertical-line-test"
      "contracts"
      )
-    (,(all-cc-states "HSF.IF.A.2")
+    ("HSF.IF.A.2"
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
@@ -415,7 +406,7 @@
      "flags"
      "contracts"
      )
-    (,(all-cc-states "HSF.IF.B")
+    ("HSF.IF.B"
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
@@ -425,35 +416,35 @@
      "functions-for-character-animation"
      "defining-table-functions"
      )
-    (,(all-cc-states "HSF.IF.B.5")
+    ("HSF.IF.B.5"
      "functions-can-be-linear"
      "function-definition-linear"
      )
-    (,(all-cc-states "HSF.IF.C")
+    ("HSF.IF.C"
      "function-definition-linear"
      "functions-vertical-line-test"
      "functions-can-be-linear"
      "functions-dr"
      "functions-examples-definitions"
      )
-    (,(all-cc-states "HSF.IF.C.7.A")
+    ("HSF.IF.C.7.A"
      ;"Graph linear and quadratic functions and show intercepts, maxima, and minima."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.IF.C.7.E")
+    ("HSF.IF.C.7.E"
      ;"Graph exponential and logarithmic functions, showing intercepts and end behavior, and trigonometric functions, showing period, midline, and amplitude."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.IF.C.9")
+    ("HSF.IF.C.9"
      "function-definition-linear"
      "functions-can-be-linear"
      "problem-decomposition"
      )
-    (,(all-cc-states "HSF.IF.C.9")
+    ("HSF.IF.C.9"
      "function-definition-linear"
      "functions-can-be-linear"
      )
-    (,(all-cc-states "HSF.BF.A")
+    ("HSF.BF.A"
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
@@ -463,7 +454,7 @@
      "functions-for-character-animation"
      "defining-table-functions"
      )
-    (,(all-cc-states "HSF.BF.A.1")
+    ("HSF.BF.A.1"
      "inequalities2-compound"
      "inequalities1-simple"
      "function-definition-linear"
@@ -473,178 +464,178 @@
      "functions-for-character-animation"
      "defining-table-functions"
      )
-    (,(all-cc-states "HSF.BF.A.1.B")
+    ("HSF.BF.A.1.B"
      "function-composition"
      )
-    (,(all-cc-states "HSF.BF.A.1.C")
+    ("HSF.BF.A.1.C"
      "problem-decomposition"
      "inequalities3-sam"
      "function-composition"
      "inequalities-collision"
      )
-    (,(all-cc-states "HSF.BF.B")
+    ("HSF.BF.B"
      "problem-decomposition"
      "inequalities3-sam"
      "inequalities-collision"
      )
-    (,(all-cc-states "HSF.BF.B.4")
+    ("HSF.BF.B.4"
      ;"Find inverse functions."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.BF.B.4.A")
+    ("HSF.BF.B.4.A"
      ;"Solve an equation of the form f(x) = c for a simple function f that has an inverse and write an expression for the inverse."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.BF.B.4.B")
+    ("HSF.BF.B.4.B"
      ;"Verify by composition that one function is the inverse of another."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.BF.B.4.C")
+    ("HSF.BF.B.4.C"
      ;"Read values of an inverse function from a graph or a table, given that the function has an inverse."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.BF.B.4.D")
+    ("HSF.BF.B.4.D"
      ;"Produce an invertible function from a non-invertible function by restricting the domain."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.BF.B.5")
+    ("HSF.BF.B.5"
      ;"Understand the inverse relationship between exponents and logarithms and use this relationship to solve problems involving logarithms and exponents."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A")
+    ("HSF.LE.A"
      ;"Construct and compare linear, quadratic, and exponential models and solve problems."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.1")
+    ("HSF.LE.A.1"
      ;"Distinguish between situations that can be modeled with linear functions and with exponential functions."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.1.A")
+    ("HSF.LE.A.1.A"
      ;"Prove that linear functions grow by equal differences over equal intervals, and that exponential functions grow by equal factors over equal intervals."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.1.B")
+    ("HSF.LE.A.1.B"
      ;"Recognize situations in which one quantity changes at a constant rate per unit interval relative to another."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.1.C")
+    ("HSF.LE.A.1.C"
      ;"Recognize situations in which a quantity grows or decays by a constant percent rate per unit interval relative to another."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.2")
+    ("HSF.LE.A.2"
      ;"Construct linear and exponential functions, including arithmetic and geometric sequences, given a graph, a description of a relationship, or two input-output pairs (include reading these from a table)."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.3")
+    ("HSF.LE.A.3"
      ;"Observe using graphs and tables that a quantity increasing exponentially eventually exceeds a quantity increasing linearly, quadratically, or (more generally) as a polynomial function."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.A.4")
+    ("HSF.LE.A.4"
      ;"For exponential models, express as a logarithm the solution to abct = d where a, c, and d are numbers and the base b is 2, 10, or e; evaluate the logarithm using technology."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.B")
+    ("HSF.LE.B"
      ;"Interpret expressions for functions in terms of the situation they model."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSF.LE.B.5")
+    ("HSF.LE.B.5"
      ;"Interpret the parameters in a linear or exponential function in terms of a context."
      ;Emmanuel?
      )
-    (,(all-cc-states "HSS.ID.A")
+    ("HSS.ID.A"
      "bar-and-pie-charts"
      "measures-of-center"
      "histograms"
      "histograms2"
      "box-plots"
      )
-    (,(all-cc-states "HSS.ID.A.1")
+    ("HSS.ID.A.1"
      "standard-deviation"
      "box-plots"
      "histograms2"
      "histograms"
      )
-    (,(all-cc-states "HSS.ID.A.2")
+    ("HSS.ID.A.2"
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms"
      )
-    (,(all-cc-states "HSS.ID.A.3")
+    ("HSS.ID.A.3"
      "standard-deviation"
      "box-plots"
      "measures-of-center"
      "histograms2"
      "histograms"
      )
-    (,(all-cc-states "HSS.ID.B")
+    ("HSS.ID.B"
      ;"Summarize, represent, and interpret data on two categorical and quantitative variables."
      "scatter-plots"
      "correlations"
      )
-    (,(all-cc-states "HSS.ID.B.6")
+    ("HSS.ID.B.6"
      "scatter-plots"
      "correlations"
      )
-    (,(all-cc-states "HSS.ID.B.6.A")
+    ("HSS.ID.B.6.A"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.ID.B.6.C")
+    ("HSS.ID.B.6.C"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.ID.C")
+    ("HSS.ID.C"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.ID.C.7")
+    ("HSS.ID.C.7"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.ID.C.8")
+    ("HSS.ID.C.8"
      "scatter-plots"
      "linear-regression"
      "correlations"
      )
-    (,(all-cc-states "HSS.ID.C.9")
+    ("HSS.ID.C.9"
      "linear-regression"
      "correlations"
      )
-    (,(all-cc-states "HSS.ID.B.6.A")
+    ("HSS.ID.B.6.A"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.ID.B.6.C")
+    ("HSS.ID.B.6.C"
      "linear-regression"
      )
-    (,(all-cc-states "HSS.IC.A")
+    ("HSS.IC.A"
      "random-samples"
      )
-    (,(all-cc-states "HSS.IC.A.1")
+    ("HSS.IC.A.1"
      "random-samples"
      )
-    (,(all-cc-states "HSS.IC.A.2")
+    ("HSS.IC.A.2"
      ;"Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation."
      ;Modeling?
      )
-    (,(all-cc-states "HSS.IC.B")
+    ("HSS.IC.B"
      "data-collection"
      )
-    (,(all-cc-states "HSS.IC.B.3")
+    ("HSS.IC.B.3"
      "data-collection"
      )
-    (,(all-cc-states "HSS.IC.B.4")
+    ("HSS.IC.B.4"
      "data-collection"
      )
-    (,(all-cc-states "HSS.IC.B.6")
+    ("HSS.IC.B.6"
      "threats-to-validity"
      )
-    (,(all-cc-states "HSS.CP.A.1")
+    ("HSS.CP.A.1"
      "inequalities2-compound"
      )
-    (,(all-cc-states "HSS.CP.B.9")
+    ("HSS.CP.B.9"
      "combinatorics-combination"
      "combinatorics-permutation"
      )
 
     ;;;;;;;;;;;;;;;;;;;  Common Core ELA Standards ;;;;;;;;;;;;;;;;;;
-    (,(all-cc-states "SL.9-10.1")
+    ("SL.9-10.1"
      "ds-intro"
      )
 
