@@ -25,9 +25,9 @@
     (list "CSTA"        "CSTA"              *csta-standards-list* "https://csteachers.org/page/standards")
     (list "K12CS"       "K-12CS"            *k12cs-standards-list* "https://k12cs.org")
     (list "NGSS"        "Next-Gen Science"  *ngss-standards-list* "https://www.nextgenscience.org/")
-    (list "Illinois"    "Illinois"          *il-standards-list* "")
-    (list "Massachusetts" "Massachusetts"   *ma-standards-list* "https://www.doe.mass.edu/frameworks/")
-    (list "Oklahoma"    "Oklahoma"          *ok-standards-list* "https://sde.ok.gov/oklahoma-academic-standards")
+    (list "IA"          "Iowa"              *iowa-standards-list* "https://iowacore.gov/standards/iowa-core-standards")
+    (list "MA"          "Massachusetts"     *ma-standards-list* "https://www.doe.mass.edu/frameworks/")
+    (list "OK"          "Oklahoma"          *ok-standards-list* "https://sde.ok.gov/oklahoma-academic-standards")
     ))
 
 (define *dict-canonical-order* (map first *standards-list*))
