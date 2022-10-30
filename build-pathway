@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-29 # last modified
+LASTMOD=2022-10-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2541,7 +2541,7 @@ function allthealignments() {
 
     f=$d/.cached/.standards-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-standards.txt
     fi
 
     f=$d/.cached/.textbooks-in-pathway.txt.kp
