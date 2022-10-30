@@ -2546,12 +2546,12 @@ function allthealignments() {
 
     f=$d/.cached/.textbooks-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-textbooks.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-textbooks.txt
     fi
 
     f=$d/.cached/.practices-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-practices.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-practices.txt
     fi
   done
 
