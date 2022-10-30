@@ -73,23 +73,6 @@
       "  preselect('alignedTextbooks');\n"
       "  preselect('alignedPractices');\n"
       "}\n"
-
-      (if sidebar
-          (string-append
-            "function toggleNonPrereqDisplay() {\n"
-            "  const inputTag = document.getElementsByClassName('sidebarinput')[0];\n"
-            "  const checkedP = inputTag.checked;\n"
-            "  const lessonTable = document.getElementsByClassName('sidebarlessons')[0];\n"
-            "  const lis = lessonTable.getElementsByTagName('li');\n"
-            "  for (let i = 0; i < lis.length; i++) {\n"
-            "    const li = lis[i];\n"
-            "    const lesson = li.getElementsByClassName('prerequisite');\n"
-            "    if (lesson.length === 0) {\n"
-            "      li.style.display = checkedP ? 'none' : 'block';\n"
-            "    }\n"
-            "  }\n"
-            "}\n")
-          "")
       "</script>\n"
       "++++\n\n") o))
 
