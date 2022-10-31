@@ -4,7 +4,7 @@
 
 (define *k12cs-standards-list*
 '(
-  ; https://K12CS Frameworkss
+  ; https://K12CS Frameworks
 
   ;;;;;;;;;;;;;; Computing Systems ;;;;;;;;;;;;;;;;;;;;;;
   ("9-12.Computing Systems.Devices"
