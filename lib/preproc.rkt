@@ -2715,13 +2715,12 @@
           (let ([first? #t])
             (display "    standards: [" op2)
             (for ([s *standards-met*])
-              (let ([std-name (first s)]
-                    [std-desc (second s)])
+              (let ([std-name (first s)])
               (fprintf op "~s~n" std-name)
               (let ([x (second s)])
                 (cond [first? (set! first? #f)]
                       [else (display ",\n                " op2)])
-                (write (string-append std-name " : " std-desc) op2))
+                (write std-name op2))
               ))
             (display "]" op2) (newline op2)
             ))
