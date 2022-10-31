@@ -1,10 +1,10 @@
-= Translating Between Words and Math
+= Evaluating Exponents
 
-@description{Students learn to model arithmetic expressions in words with a visual tool known as "Circles of Evaluation".}
+@description{Students use Circles of Evaluation analyze the structure of expressions that include exponents.}
 
-@lesson-prereqs{}
+@lesson-prereqs{absolute-value-and-opposites-more}
 
-@keywords{Circle of Evaluation, }
+@keywords{exponent, base}
 
 [@lesson-intro-table]
 |===
@@ -12,160 +12,135 @@
 | Lesson Goals
 | Students will be able to...
 
-* Model an arithmetic expression using @vocab{Circles of Evaluation}.
-* Translate between expressions in words, Circles of Evaluation, and mathematical expressions.
-* Recognize when expressions in words are ambiguous.
+* Translate between words, mathematical expressions, and Circles of Evaluation.
+* Evaluate expressions involving exponents and one other operation.
+* Evaluate expressions involving exponents and negations.
 
 
 | Student-facing Lesson Goals
 |
 
-* Let's use Circles of Evaluation to analyze the structure of expressions in words and numbers.
-
+* Let's use Circles of Evaluation to analyze the structure of expressions with exponents.
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-* This activity involves a card sort. The easiest way to prepare for this is to give each pair of students an envelope containing the three sets of cards. Keep each set (A, B, and C) together with rubberbands or paperclips.
-
 | Key Points For The Facilitator
 |
-* This lesson may challenge students' ideas of math as a subject that is entirely black and white. This theme - that there are oftentimes a variety of completely valid ways of seeing a seemingly simple problem - will emerge again and again throughout the course.
+* Circles of Evaluation will not help students to visualize or understand the meaning of exponents as repeated multiplication. Rather, they will help students parse expressions that involve exponents. We recommend ensuring that students are comfortable evaluating exponents before jumping into this lesson.
+
 |===
 
-== Circles of Evaluation @duration{30 minutes}
+== Expressions with Exponents and One Operation @duration{30 minutes}
 
 === Overview
-Students match Circles of Evaluation to mathematical expressions, and then they consider how mathematical expressions in words map onto Circles of Evaluation.
+
+Sudents use Circles, words, and mathematical notation to analyze the structure of expressions with exponents and one operation.
 
 === Launch
 
-Explain to students that they are going to receive three sets of cards.
-
-The first set of cards includes mathematical expressions. Students have definitely encountered those before! The expressions on their cards each include the number 15, the number 3, and an operator (+, -, *, or /).
-
-The second set of cards includes _Circles of Evaluation_. Students have almost definitely never encountered Circles of Evaluation before! Broadly, Circles of Evaluation will help students to visualize the structure of the mathematical expressions they encounter. (We’ll dig into that statement much more throughout this course!) For the time being, here’s what students need to know about Circles of Evaluation:
-
-- Every circle must have one - and only one! - function, written at the top.
-
-- The inputs of the function are written left to right, in the middle of the circle.
-
-Share these two key concepts before explaining the following instructions.
-
 [.lesson-instruction]
-- With your partner, match each A card with the corresponding B card.
-- Lay them out on the table in front of you so you can clearly see both the circle and the expression. Create a separate pile for any cards that do not have a match.
-- Discuss each match that you make.
+- Show students the following expression: @math{2^3}
+- One way of reading this expression is "two raised to the power of three." Do you know any other ways of reading this expression with an exponent?
+** _Two to the third power; two to the third; two cubed._
+- What does it mean to _cube_ a number?
+** We multiply it by itself three times.
+- What does this expression evaluate to?
+** @math{2^3 = 2 \times 2 \times 2 = 8}
 
-Circulate as students sort their cards, ensuring that they are carefully analyzing each card so that they see the connection between the arithmetic expression and the circle of evaluation. This first phase of matching cards should be relatively quick - but it might raise questions on a few topics:
+Clarify and reinforce some key concepts about exponents via class discussion:
 
-- *Symbols*. Circles utilize * to represent multiplication and / to represent division. (Why? Circles are a bridge representation - one which can eventually be used to help students learn to code! Getting comfortable with symbols that we can type on the keyboard is useful, given this context.)
+- The number on the left is called the _base_; that number is multiplied by itself when we apply the exponent.
 
-- *Order of terms*. Although 5 + 3 and 3 + 5 both evaluate to 8, the Circle of Evaluation that corresponds with each of these expressions is unique.
+- The number next to the base is called the _exponent_; it indicates how many times to multiply the base.
 
-- *Position of the operator*. The operator always belongs at the top of the Circle, and not in between terms.
+- "Cubing" is the same as "raising to the third power", and "squaring" is the same as raising to the second power.
 
-[.lesson-instruction]
-- Now, you’re going to receive a set of C cards.
-- One at a time, take turns reading each C card out loud. After reading the card, place it with the appropriate circle and expression.
-- Explain to your partner how and why you placed each card.
-- You and your partner must agree on each card’s placement before advancing to the next.
+- There is no special terminology for any other exponents. (The subsequent lesson will address why two and three are referred to as "squaring" and "cubing.")
 
-Here are some common challenges:
-
-- Students often translate "3 less than 15" into @math{3 - 15}, rather than @math{15 - 3}. Discuss the meaning of the word "less" in this context. Sometimes, asking, “What value is 3 less than 15?” can help students to make the connection.
-
-- Difficulty may arise when matching words to the division expression, 15/3. Take advantage of every opportunity to help students connect multiplication and division as inverse operations.
-
-[.lesson-instruction]
-Practice and apply what you’ve learned on this worksheet.
-
-Ensure that students are confident creating and analyzing simple circles, as the next section introduces another layer of complexity.
-
-=== Investigate
-
-A useful feature of Circles of Evaluation is that they can contain other circles!
-
-During the launch, students looked at the circle for "15 increased by 3."
-
-Let’s say we want to replace @math{15} with @math{3 \times 5}. Now, our expression looks like this: @math{3 \times 5 + 3}.
-
-Translating this mathematical expression into words requires students to complete a number of tasks concurrently.
-
-- First, they must see some sort of structure in expression. (Multiply @math{3} by @math{5} first? Or add @math{5} and @math{3}?)
-
-- Now, they must hold that structure in their heads as they attempt to access (possibly new? possibly unfamiliar?) vocabulary.
-
-- They must map said vocabulary onto the imaginary structure that has quite possibly slipped away by this point.
-
-The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
+Explain to students that we can represent expressions with exponents as Circles of Evaluation. The expression we used is called `num-expt`; when we use `num-expt`, the value on the left is the _base_, and the value on the right is the exponent. The Circle of Evaluation for @math{2^3} looks like this:
 
 [.centered-image]
-@show{(coe '(+ (* 3 5) 3))}
+@show{(coe '(num-expt 2 3))}
 @clear
 
+Now, have students analyze the two Circles below.
 
-Because the Circles of Evaluation highlight the structure of any given expression, translating into words is a far less daunting task: the inner circle very clearly shows a product, which is being increased by @math{3} (as the outer circle indicates).
-
-[.lesson-instruction]
-- Complete the worksheet with your partner. The top half involves drawing circles to represent each expression in words.  On the bottom half of the worksheet, write an expression in words to match with each circle of evaluation.
-- When you’re finished, complete this worksheet to translate between all three representations (the mathematical expression, the Circle of Evaluation, the expression in words).
-- Optional: Try this worksheet, where you will match mathematical expressions with their corresponding expressions in words without the Circles included to help you. (If you get stuck, feel free to draw your own!)
-
-Note: The last worksheet also includes a column where students may evaluate the expression. Evaluating is not the primary goal of the activity - but we want students to recognize that computation is indeed a viable way to transform an expression. This column should be the lowest priority.
-
-=== Synthesize
-- We did lots of different translations between circles, words, and arithmetic expressions.
-- Was there any type of transformation that was more challenging for you?
-- Is there more than one to draw the Circle for @math{1 + 2} ? If so, is one way more "correct" than the other?
-
-
-
-== The Ambiguity of Words @duration{20 minutes}
-
-=== Overview
-Students diagram Circles of Evaluations to consider how different interpretations of words not only parse differently but evaluate differently!
-
-
-=== Launch
-
-One reason that Circles of Evaluation are so powerful is that they eliminate the ambiguity we often encounter when representing expressions with words. In this lesson, we tackle expressions in words that have _more than one_ possible mathematical translation–-as well as more than one possible solution!
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+|===
+|@math{5^2}							| @math{2^5}
+|@show{(coe  '(num-expt 5 2))}		| @show{(coe  '(num-expt 2 5))}
+|===
 
 [.lesson-instruction]
-- What does “ambiguity” mean?
-- Do you think there is ambiguity in math?
+- Can we switch the order of the exponent and the base, as we could when adding or multiplying values?
+** _No; the first Circle evaluates to 25, while the second Circle evaluates to 32._
+
+At first, Circles of Evaluation with exponents might seem like more trouble than they're worth. After all, exponents are a shorthand for repeated addition; to see the structure of an exponential expression, students can use expanded form. As students will soon discover, Circles become a useful tool when dealing with exponential expressions involving additional operations and negations.
 
 === Investigate
 
-Take a look at this expression: "the sum of three and two multiplied by eight"
-
-Is that an instruction to add three and sixteen (as represented by the circle on the left)… or is it an instruction to take five - that’s the sum of three and two! - and then multiply it by eight (as represented by the circle on the right)?!
+Invite students to examine the two Circles below:
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 
-|@show{(coe  '(+ 3 (* 2 8)))}		| @show{(coe  '(* (+ 3 2) 8))}
+|@show{(coe  '(* 9 (num-expt 3 2)))}		| @show{(coe  '(num-expt (* 9 3) 2))}
 |===
 
+[.lesson-instruction]
+- How would you translate each of these Circles into words? Why are their translations different?
+** _The Circle on the left is "nine multiplied by three squared," while the Circle on the right is "find the product of nine and three, then square it." Their translations differ because the Circles are organized differently._
+- How would you translate each of these Circles into mathematical expressions?
+** The Circle on the left is @math{9 \times 3^2} while the Circle on the right is @math{(9 \times 3)^2}.
 
-Words can be confusing! In this case, there is not one single correct mathematical translation. (And it’s debatable whether inserting a comma after the word “two” provides clarity.)
+Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle on the right. This response is of course, correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. Still, every time they create a Circle representation of an expression including a base and exponent, it will be drawn inside of its own Circle.
+
+After students understand that, in an expression with no grouping symbols, we evaluate the exponent before the other operations, they are ready to continue their exploration of expressions with exponents.
 
 [.lesson-instruction]
-- Complete The Ambiguity of Words, drawing two possible circles for each expression in words.
-- On the second half of the worksheet, write the expression in words that resulted in two different Circle outcomes.
+- Translate between Circles, mathematical expressions, and words on Translating Expressions with Exponents.
+- Next, try the Matching Exponents activity, connecting Circles with their appropriate mathematical expressions.
+- Finally, practice Evaluating Expressions with Exponents using computation. There are no Circles on this worksheet - but drawing them might help if you get stuck.
 
-We don't want students to think _all_ mathematical expressions in words are ambiguous, as that is simply not the case! Emphasize that only certain verbal structures create this confusion; some phrases are indeed clearer than others. The following activity emphasizes this idea.
-
-[.lesson-instruction]
-- On Ambiguous or Clear?, identify the expressions that have two different numeric translations.
-- When you encounter an expression that is ambiguous, choose one of the interpretations. Translate it into a numeric expression, and then _rewrite_ the expression in words so that it is more clear. Use Circles to help if you get stuck!
 
 === Synthesize
 
-- Why are some expressions in words ambiguous and others are not?
-- Do you think that expressions written in the language of math have ambiguity?
-- What is it about Circles of Evaluation that removes ambiguity?
+- Is @math{2 + (6^2)} equivalent to @math{2 + 6^2}? Why or why not?
+** _Yes, these expressions are equivalent. Applying an exponent is a function separate from addition, regardless of whether we put it in parentheses or not._
+- Is @math{2 + 6^2} equivalent to @math{(2 + 6)^2}? Why or why not?
+** _No, these expressions are not equivalent. For the first expression, we apply the exponent and then multiply. For the second expression, we multiply and then apply the exponent._
 
+
+== Expressions with Exponents and Negatives @duration{20 minutes}
+
+=== Overview
+
+THIS LESSON IS ALIGNED TO SEVENTH GRADE STANDARDS - MAYBE NOT APPROPRIATE FOR THIS SEQUENCE?
+
+=== Launch
+
+[.lesson-instruction]
+--
+- Analyze these expressions: @math{-3^2}, @math{(-3)^2}, and @math{-(3^2)}
+- Are any of these three expressions equivalent? How do you know? Draw Circles to help you.
+** _We know that in an expression with no grouping symbols, we evaluate the exponent first - before the negation. Therefore, the first and third expression are equivalent; they both evaluate to @math{-9}. The second expression evaluates to @math{9}. See Circles below._
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+|===
+|@math{-3^2} or @math{-(3^2)}				| @math{(-3)^2}
+|@show{(coe  '(negate (num-expt 3 2)))}		| @show{(coe  '(num-expt (negate 3) 2) )}
+|===
+--
+
+=== Investigate
+
+[.lesson-instruction]
+- First, complete the first column by drawing Circles of Evaluation to represent the expressions with exponents and negations.
+- Next, complete the final column by evaluating the Circles.
+
+=== Synthesize
+
+- If an expression has no grouping symbols, which do we apply first: `num-expt` or
+`negate`?
+** _First, we apply `num-expt`, then `negate`._
