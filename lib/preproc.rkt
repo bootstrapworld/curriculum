@@ -583,7 +583,7 @@
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::{frompathwayroot}~a/{cachedir}.pathway-glossary.asc[]\n\n" *containing-directory*))
+  (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -986,7 +986,6 @@
                  [(regexp-match #rx"^javascript:" f) #f]
                  [(regexp-match #rx"^#" f) #f]
                  [else
-                   ;FIXME following probly obsolete?
                    (let ([existent-file? #f])
                      (cond [(file-exists? f)
                             (set! existent-file? #t)]
@@ -1061,8 +1060,7 @@
               ;TODO: probably not needed anymore
 
               ;FIXME: avoid erroring include: if file doesn't exist?
-              (format "include::~a~a[~a]"
-                      (if *lesson-plan* "{frompathwayroot}" "")
+              (format "include::~a[~a]"
                       f.asc link-text))])))
 
 (define (make-pathway-link f link-text)
@@ -1150,8 +1148,7 @@
     (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
     (when *lesson-plan*
       ;(printf "containing-dir= ~s\n" *containing-directory*)
-      (fprintf o "ifndef::frompathwayroot[:frompathwayroot: ]\n\n") ;FIXME: No longer needed?
-      (fprintf o "include::{frompathwayroot}~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
+      (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
       ;(fprintf o "include::./.index-sidebar.asc[]\n\n")
       )
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
@@ -1269,7 +1266,6 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (print-menubar (build-path *containing-directory* ".cached" ".pathway-lessons-comment.txt"))
     (let ([st-o (open-output-file
                   (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
                   #:exists 'replace)]
@@ -1389,8 +1385,8 @@
 (define (add-lesson-prereqs immediate-prereqs)
   ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
   ; (printf "lesson-prereq dir = ~s\n" (current-directory))
-  (cond [(string=? *proglang* "codap")
-         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-codap")) immediate-prereqs))]
+  (cond [(not (member *proglang* '("pyret" "wescheme")))
+         (set! *lesson-prereqs* (map (lambda (x) (string-append x "-" *proglang*)) immediate-prereqs))]
         [else
           (set! *lesson-prereqs* immediate-prereqs)])
   (for ([lsn *lesson-prereqs*])
@@ -1551,10 +1547,12 @@
       ;
       (when *lesson-plan*
 
-        (for ([s-ll *standards-and-lessons*])
-          (let ([s (first s-ll)] [ll (rest s-ll)])
+        (for ([ss-ll *standards-and-lessons*])
+          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
+            (unless (list? ss) (set! ss (list ss)))
             (when (member *lesson-plan-base* ll)
-              (add-standard s #f *lesson-plan* #f))))
+              (for ([s ss])
+                (add-standard s #f *lesson-plan* #f)))))
 
         (for ([t-ll *textbooks-and-lessons*])
           (let ([t (first t-ll)] [ll (rest t-ll)])
@@ -1637,12 +1635,8 @@
                                         (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
                                       (printf "WARNING: Item ~s not found in glossary\n\n"
                                               arg)]))]
-                           [(or (string=? directive "prereqs-stds")
-                                (string=? directive "lesson-prereqs"))
-                            (add-lesson-prereqs (read-commaed-group i directive read-group))
-                            ;(display-prereqs-bar o)
-                            ;(display-standards-bar o)
-                            ]
+                           [(string=? directive "lesson-prereqs")
+                            (add-lesson-prereqs (read-commaed-group i directive read-group))]
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
@@ -1714,8 +1708,7 @@
                               (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
-                                (string=? directive "opt-online-exercise")
-                                (string=? directive "ext-exercise-link"))
+                                (string=? directive "opt-online-exercise"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]
                                    [link-text (string-join
@@ -1743,7 +1736,7 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::{frompathwayroot}~a/{cachedir}.index-extra-mat.asc[]\n\n"
+                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
                             (when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
@@ -1799,7 +1792,7 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
+                            (fprintf o "link:./protected/workbook-sols.pdf.html[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
@@ -2147,7 +2140,10 @@
         ;no longer possible to append to pathway's file, as there
         ;is no pathway at this stage
         ;(add-exercises)
-        (create-glossary-subfile))
+        (create-glossary-subfile (string-append *containing-directory* "/.cached/."
+                                   (if *lesson-plan* "index" "pathway")
+                                   "-glossary"
+                                   )))
 
       (when *lesson-plan*
         (accumulate-glossary-and-alignments))
@@ -2291,8 +2287,9 @@
     ; (link-to-opt-projects o)
 
     (unless (null? exx)
+      ; FIXME: should make this natlang-dependent
       (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
-      (display "and we provide password-protected **link:./protected/workbook-sols.pdf[Workbook Solutions]** as well.\n\n" o)
+      (display "and we provide password-protected **link:./protected/workbook-sols.pdf.html[Workbook Solutions]** as well.\n\n" o)
       (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
@@ -2337,10 +2334,10 @@
         #:exists 'replace)
       )))
 
-(define (create-glossary-subfile)
+(define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s\n" *narrative*)
-  (print-menubar (build-path *containing-directory* ".cached" ".pathway-glossary-comment.txt"))
-  (call-with-output-file (build-path *containing-directory* ".cached" ".pathway-glossary.asc")
+  (print-menubar (string-append file "-comment.txt"))
+  (call-with-output-file (string-append file ".asc")
     (lambda (op)
       (unless (empty? *glossary-items*)
         (set! *glossary-items*
@@ -2379,7 +2376,7 @@
   (unless (empty? dict-standards-met) ;can it ever be empty?
     (fprintf op "\n[.~a.standards-~a]\n"
              (if *lesson* "alignedStandards" "coverageElement")
-             dict)
+             (sanitize-css-id dict))
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
     ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
@@ -2432,22 +2429,21 @@
                 (fprintf o ". ")
                 (fprintf o "{startsb}See: ~a.{endsb}\n"
                          (string-join
-                           (map
-                             (lambda (x)
-                               (let ([ltitle (list-ref x 0)]
-                                     [lesson (list-ref x 1)]
-                                     [pwy (list-ref x 2)])
-                                 (cond [pwy
-                                         (cond [(string=? pwy "algebra-pyret")
-                                                (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                               [(string=? pwy "algebra-wescheme")
-                                                (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                         (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                  lesson ltitle)]
-                                       [else
-                                         (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                 lesson *target-pathway* ltitle)])))
-                             chapter-lessons) ";")))])))
+                           (filter identity
+                             (map
+                               (lambda (x)
+                                 (let ([ltitle (list-ref x 0)]
+                                       [lesson (list-ref x 1)]
+                                       [pwy (list-ref x 2)])
+                                   (cond [pwy
+                                           (and (file-exists?
+                                                  (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                        lesson ltitle))]
+                                         [else
+                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                   lesson *target-pathway* ltitle)])))
+                               chapter-lessons)) ";")))])))
     (fprintf o "\n\n")))
 
 (define (create-practices-section practice-categ practices o)
@@ -2469,22 +2465,21 @@
                   (fprintf o ". ")
                   (fprintf o "{startsb}See: ~a.{endsb}\n"
                            (string-join
-                             (map
-                               (lambda (x)
-                                 (let ([ltitle (list-ref x 0)]
-                                       [lesson (list-ref x 1)]
-                                       [pwy (list-ref x 2)])
-                                   (cond [pwy
-                                           (cond [(string=? pwy "algebra-pyret")
-                                                  (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                                 [(string=? pwy "algebra-wescheme")
-                                                  (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                           (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                   lesson ltitle)]
-                                         [else
-                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                   lesson *target-pathway* ltitle)])))
-                               p-lessons) ";")))])))
+                             (filter identity
+                               (map
+                                 (lambda (x)
+                                   (let ([ltitle (list-ref x 0)]
+                                         [lesson (list-ref x 1)]
+                                         [pwy (list-ref x 2)])
+                                     (cond [pwy
+                                             (and (file-exists?
+                                                    (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                  (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                          lesson ltitle))]
+                                           [else
+                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                     lesson *target-pathway* ltitle)])))
+                                 p-lessons)) ";")))])))
     (fprintf o "\n\n")))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -2512,12 +2507,12 @@
                  (if (null? *dictionaries-represented*) ""
                      (let ([first-dict (first *dictionaries-represented*)])
                        (enclose-tag "option" ""
-                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" first-dict)
+                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" (sanitize-css-id first-dict))
                          first-dict)))
                  (string-join
                    (map (lambda (dict)
                           (enclose-tag "option" ""
-                            #:attribs (format "value=\"standards-~a\"" dict)
+                            #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
                             dict))
                         (if (null? *dictionaries-represented*) '()
                             (rest *dictionaries-represented*)))
@@ -2578,7 +2573,7 @@
   (newline o))
 
 (define (sanitize-css-id id)
-  (regexp-replace* "\\." id "_"))
+  (regexp-replace* "[. ]" id "_"))
 
 (define (display-alignments-selection o)
   ; (printf "doing display-alignments-selection\n")
@@ -3103,6 +3098,9 @@
                                  (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
                                  (format ".value.studentBlockAnswerUnfilled~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
+        [(fitb? e) (let ([e (second e)])
+                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}"
+                       #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and (eq? a 'EXAMPLE) wescheme)
                             (let ([num-examples (/ (length (rest e)) 2)])
