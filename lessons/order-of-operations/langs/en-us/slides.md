@@ -236,8 +236,27 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 @image{images/coe-pair.png, a}
 
 <!--
-Possible responses: We’ve never seen the function text before. We’ve never seen words used in a Circle of Evaluation before. We’ve never seen a function take in three inputs. We’ve never seen a function take in a mix of Numbers and words.
+Possible responses: 
+- _We've never seen the function `text` before_
+- _We've never seen words used in a Circle of Evaluation before_
+- _We've never seen a function take in three inputs_
+- _We've never seen a function take in a mix of Numbers and words_
 -->
+
+@ifproglang{pyret}{
+---
+{layout="InvestigateC-DN"}
+# Testing out your Code
+
+@image{images/coe-pair.png, a}
+
+There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
+
+When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
+
+The `text` Circle would be translated as @show{(coe  '(text "Good work!" 50 "red"))}
+
+}
 
 ---
 {layout="Investigate-DN"}

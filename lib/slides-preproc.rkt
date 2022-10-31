@@ -421,7 +421,7 @@
                               (display " [" o)
                               (display (fully-qualify-link (list rubric-file "rubric") directive) o)
                               (display "]" o)))]
-                         [(member directive '("link" "online-exercise" "opt-online-exercise" "ext-exercise-link"))
+                         [(member directive '("link" "online-exercise" "opt-online-exercise")
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (external-link args directive) o)) ]
                          [(member directive '("starter-file" "opt-starter-file"))

@@ -66,7 +66,7 @@ Instead of focusing on the handful of data points used in our Five Number Summar
 
 In this image, we've drawn a star to show the mean at 3. 
 
-But there are _all sorts of data sets_ that have a mean of 3! 
+But there are _all sorts of datasets_ that have a mean of 3! 
 <!--
 
 -->
@@ -166,7 +166,7 @@ Invite students to take a look at the histogram below. It is the same histogram 
 
 - What is the shape of this histogram?
 - How does it differ from the one we just looked at?
-- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set._
+- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset._
 - What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.
 - What did this outlier do to the standard deviation?
 - Optional: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
@@ -176,7 +176,7 @@ Invite students to take a look at the histogram below. It is the same histogram 
 ** _The histogram has high outliers, therefore it is skewed right._
 - How does it differ from the one we just looked at?
 ** _The previous histogram - with the 16-year-old cat omitted - was roughly symmetric._
-- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative data set._
+- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset._
 - What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.
 ** __Previously, the mean was 3; now it is approximately 4.33.__
 - What did this outlier do to the standard deviation?
@@ -213,7 +213,7 @@ Treating each point independantly allows each deviation to contribute to the mea
 # Measuring "Deviance"
 
 - How much did adding an outlier change the mean? The standard deviation?
-- Extreme values affect both the mean and standard deviation of a data set.
+- Extreme values affect both the mean and standard deviation of a dataset.
 - **Unusually low values _decrease_ the mean, while unusually high values _increase_ it.** Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
 
 ---
