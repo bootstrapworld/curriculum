@@ -41,13 +41,13 @@ text("Hello!", 200, "purple")
           <!----   <ol> = "Ordered List" (numbered list items) ---->
           <ul>
             <li> The code we've written appears in the blue bubble.</li>  
+            <li> The <tt>text</tt> function takes in 3 inputs: <i>a message, a size, and a color</i>.
+          </li>
             <li> The Editor automatically runs each line of code and responds with the result.</li>
           </ul>
           <p/>
-          The <tt>text</tt> function takes in 3 inputs: <i>a message, a size, and a color</i>.
-          <p/>
           <ol>
-            <li>Try <b>clicking on the code</b> and editing it.</li>
+            <li>Try <b>clicking on the code</b> and editing the message.</li>
             <li>Then click the <b>Update responses</b> button or hit "Enter" to re-run the code.</li>
           </ol>
           <p/>
@@ -66,34 +66,23 @@ text("Hello!", 200, "purple")
 star(50, "solid", "blue")
               `, 0)' /> to add it to the editor and see the result!
             </li>
+            <p/>
+          <li>You can also click on the code on the right to change it! 
+           <p/>
+             Try changing the 50 to another number. Then click the <b>Update responses</b> button or hit "Enter" to re-run the code. What happens?</li>
+            <p/>
+            <li>Try changing the color.</li>
           </ol>
         </li>
 
         <!----   Page 3 ---->
         <li editorCode='
 include essentials2021
-star(50, "solid", "blue")
-        '>
-          <h1>3. Modifying the Code to Adjust the Images</h1>
-          You can also click on the code on the right to change it! 
-           <p/>
-          <ol>
-            <li>Try changing the 50 to another number. Then click the <b>Update responses</b> button or hit "Enter" to re-run the code. What happens?</li>
-            <p/>
-            <li>Try changing the color.</li>
-          </ol>
-        </li>
-
-        <!----   Page 4 ---->
-        <li editorCode='
-include essentials2021
 star(50, "outline", "fuchsia")
         '>
-        <h1>4. More Shape Functions!</h1>
-          There are lots of other functions that will produce an image... 
-          <p/> some of them take the same arguments as <tt>star</tt>: 
-          <p/> <i> a Number and two Strings.</i>
-          <p/> Here are a few:
+        <h1>3. More Shape Functions!</h1>
+          There are lots of other functions that will produce an image... and some of them take the same arguments as <tt>star</tt>:  <i> a Number and two Strings.</i>
+          <p/> Here are a few for you to try!
 
           <ol>
             <li>Can you write the code to make a solid, green <tt>circle</tt> with a radius of 26?</li>
@@ -104,13 +93,13 @@ star(50, "outline", "fuchsia")
           </ol>
         </li>
 
-        <!----   Page 5 ---->
+        <!----   Page 4 ---->
         <li editorCode='
 include essentials2021
 star(50, "solid", "blue")
 rectangle(50, "solid", "blue")
         '>
-          <h1>5. What about Errors?!</h1>
+          <h1>4. What about Errors?!</h1>
           There are also image-producing functions that need more arguments than <tt>star</tt>, <tt>circle</tt>, <tt>triangle</tt>, or <tt>square</tt>.
           <p/>
           The error message we see here tells us that <tt>rectangle</tt> needs 4 arguments, but was only given 3. 
@@ -123,12 +112,12 @@ rectangle(50, "solid", "blue")
           </ol>
         </li>
 
-        <!----   Page 6 ---->
+        <!----   Page 5 ---->
         <li editorCode='
 include essentials2021 
 rectangle(50, 100, "solid", "orange")
         '>
-          <h1>6. What Makes Rectangles Different?</h1>
+          <h1>5. What Makes Rectangles Different?</h1>
           <p/>
           <ol>
             <li>Why does <tt>rectangle</tt> need two numbers, while square only needed one?</li>
@@ -139,17 +128,19 @@ rectangle(50, 100, "solid", "orange")
           </ol>
           </li>
 
-        <!----   Page 7 ---->
+        <!----   Page 6 ---->
         <li editorCode='
 include essentials2021 
-rectangle(50, 100, "solid", "orange")
+
         '>
-          <h1>7. More Images</h1>
+          <h1>6. More Images</h1>
 
           Let's explore some more functions that require the same arguments as <tt>rectangle</tt>: <i>two Numbers and two Strings</i>. 
           <p/>
           <ol>
-            <li>Experiment with the <tt>ellipse</tt> function.</li>
+            <li>Take a moment to imagine an ellipse in your mind.
+            <p/> Then, either write the code to generate an <tt>ellipse</tt> on your own or 
+            <input type="button" value="click here to add one to the editor" onclick='addToEditor(`ellipse(100, 50, "solid", "orange")`)' />
             <p/>How would you explain what an ellipse is to someone else?
             <p/>Can you make an ellipse that looks like a circle?
             <p/>Can you make a wide ellipse? A tall ellipse?
@@ -159,12 +150,12 @@ rectangle(50, 100, "solid", "orange")
           </ol>
         </li>
 
-        <!----   Page 8 ---->
+        <!----   Page 7 ---->
         <li editorCode='
 include essentials2021
 nose = isosceles-triangle(100, 340, "solid", "orange")
         '>
-          <h1>8. Defining Functions</h1>
+          <h1>7. Defining Functions</h1>
 
           Sometimes it is useful to define functions so that we can reuse them without having to write out all of the code.
           <p/>
@@ -177,18 +168,16 @@ nose = isosceles-triangle(100, 340, "solid", "orange")
             </ol>
         </li>
 
- <!----   Page 9 ---->
+ <!----   Page 8 ---->
         <li editorCode='
 include essentials2021
 head = circle(6, "outline", "darkgrey")
 torso = circle(8, "outline", "darkgrey")
 base = circle(10, "outline", "darkgrey")
         '>
-          <h1>9. Composing Functions</h1>
+          <h1>8. Composing Functions</h1>
           <ol>
-            <li>What do you think will happen if you type <tt>head</tt> and hit "Enter"?  Test it out.</li>
-            <li>How will that be different from typing <tt>torso</tt> or <tt>base</tt>?</li>
-          <p/>
+            <p/>
           <b>Defining functions simplifies the process of combining them.</b>
           <p/>
             <li>What do you think this next line of code will do?</li>
@@ -201,12 +190,12 @@ base = circle(10, "outline", "darkgrey")
           </ol>
         </li>
 
-        <!----   Page 10 ---->
+        <!----   Page 9 ---->
         <li editorCode='
 include essentials2021
 brim = rectangle(70, 15, "solid", "black")
         '>
-          <h1>10. Composing a Top Hat</h1>
+          <h1>9. Composing a Top Hat</h1>
 
           <ol>
             <li>Define  <tt>top</tt> to be a solid black rectangle that is 50 x 30.</li>
@@ -217,14 +206,14 @@ brim = rectangle(70, 15, "solid", "black")
           </ol>
         </li>
 
-        <!----   Page 11 ---->
+        <!----   Page 10 ---->
         <li editorCode='
 include essentials2021
 eye-white = circle(30, "solid", "lightgrey")
 pupil = circle(10, "solid", "black")
         '>
 
-          <h1>11. Overlaying Images</h1>
+          <h1>10. Overlaying Images</h1>
           Just as we can place an image <tt>above</tt> or <tt>below</tt> another image, we can also <tt>overlay</tt> an image on top of another image.
           <p/>
           <ol>
@@ -236,21 +225,21 @@ pupil = circle(10, "solid", "black")
             <li>Where on the eye-white does the pupil get placed?</li>
             <li>What do you think we'd see if we typed <tt>overlay(eye-white, pupil)</tt> instead?</li>
               </p>
-               <input type="button" value="Make a prediction, then click here" onclick='addToEditor(`overlay(eye-white, pupil)`)' /> to add it to the editor and see the result!
+               <input type="button" value="Make a prediction, then click here" onclick='addToEditor(`overlay(eye-white, pupil)`)' /> to add it to the editor and see the result! What happened?!
           </ol>
         </li>
 
-        <!----   Page 12 ---->
+        <!----   Page 11 ---->
         <li editorCode='
 include essentials2021
 eye-white = circle(30, "outline", "black")
 pupil = circle(10, "solid", "black")
         '>
-          <h1>12. Placing Images Using Coordinates</h1>
+          <h1>11. Placing Images Using Coordinates</h1>
 
-          Sometimes we want the top image to land somewhere other than on the center of the bottom image.
+          Sometimes we want <b>to place the top image somewhere other than on the center</b> of the bottom image.
           <p/>
-          This requires a function called <tt>put-image</tt>, which takes in two Numbers. 
+          This requires a function called <tt>put-image</tt>, which takes in two Images and two Numbers. 
           <p/>  
             <ul>
               <li>The first Number is the x-coordinate.</li>
@@ -265,14 +254,14 @@ pupil = circle(10, "solid", "black")
            </ol>  
         </li>
 
-        <!----   Page 13 ---->
+        <!----   Page 12 ---->
         <li editorCode='
 include essentials2021
 eye-white = circle(30, "outline", "black")
 pupil = circle(10, "solid", "black")
 put-image(pupil, 10, 30, eye-white)
         '>
-          <h1>13. Making Googley Eyes</h1>
+          <h1>12. Making Googley Eyes</h1>
           <ol>
               <li>Use <tt>put-image</tt> to place the <tt>pupil</tt> on the center of the <tt>eye-white</tt>.</li>
               <p/>
@@ -282,12 +271,12 @@ put-image(pupil, 10, 30, eye-white)
             </ol> 
         </li>
       
-        <!----   Page 14 
+        <!----   Page 13 
         
         IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS---->
         
          <li videoConfig="videos/eye.mov">
-          <h1>14. Full Pyret</h1>
+          <h1>13. Full Pyret</h1>
           
             So far we have been working in the Parley version of Pyret. More complex programs get written with the same exact code, but in a different view.
               <p/>On the right is a video of our classic Pyret editor in action.  
@@ -303,13 +292,13 @@ put-image(pupil, 10, 30, eye-white)
             If you'd like to watch the video again, click on the screen.
 
 <p/>
-             <input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with the file in the classic Pyret editor.
+             <input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with this file in the classic Pyret editor.
         </li>
 
-        <!----   Page 15 ---->
+        <!----   Page 14 ---->
 
         <li imageConfig="images/snowmanpuzzle.png">
-          <h1>15. Your Task</h1>
+          <h1>14. Your Task</h1>
 
           Now that you're 
           <ul>
