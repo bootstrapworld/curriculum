@@ -302,7 +302,7 @@ if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
     $TOPDIR/lib/.hta* $PROGDIR
-  $CP -p $TOPDIR/lib/*.css $TOPDIR/lib/*.js $TOPDIR/lib/*.less $TOPDIR/lib/*.png distribution/$NATLANG/lib 2>/dev/null
+  $CP -p $TOPDIR/lib/*.css $TOPDIR/lib/*.js* $TOPDIR/lib/*.less $TOPDIR/lib/*.png distribution/$NATLANG/lib 2>/dev/null
   for f in distribution/$NATLANG/lib/*.less; do
     if test -f "$f"; then
       $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
