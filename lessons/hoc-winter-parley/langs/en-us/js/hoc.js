@@ -51,6 +51,7 @@ function loadFromConfig(i = cardIndex) {
         videoConfig = cards[i].getAttribute('videoConfig');
 
   if(editorConfig) {
+    clearTimeout(window.parleyTimeout);
     righthand.appendChild(editor);
     parley.resetChunks(editorConfig.trim().split("\n") || [""]);
     document.getElementById('reset').onclick = () => {
@@ -60,7 +61,7 @@ function loadFromConfig(i = cardIndex) {
         2000)
     }
     document.getElementById('reset').style.display = 'block';
-    setTimeout(() => parley.run(), 500);
+    window.parleyTimeout = setTimeout(() => parley.run(), 500);
   } else if(imageConfig) {
     var img = document.createElement("img");
     img.src = imageConfig;
