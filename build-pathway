@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-26 # last modified
+LASTMOD=2022-10-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -296,7 +296,7 @@ if true; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
     $TOPDIR/lib/.hta* $PROGDIR
-  $CP -p $TOPDIR/lib/*.css $TOPDIR/lib/*.js $TOPDIR/lib/*.less $TOPDIR/lib/*.png distribution/$NATLANG/lib
+  $CP -p $TOPDIR/lib/*.css $TOPDIR/lib/*.js $TOPDIR/lib/*.less $TOPDIR/lib/*.png distribution/$NATLANG/lib 2>/dev/null
   for f in distribution/$NATLANG/lib/*.less; do
     if test -f "$f"; then
       $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
@@ -2148,7 +2148,7 @@ function copycommonlessons() {
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
-      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
+      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/\(;\|\/\/\).*//'|grep -v '^ *$'); do
         copylessondir $lessonDir
       done
     done
@@ -2543,17 +2543,17 @@ function allthealignments() {
 
     f=$d/.cached/.standards-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-standards.txt
     fi
 
     f=$d/.cached/.textbooks-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-textbooks.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-textbooks.txt
     fi
 
     f=$d/.cached/.practices-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-practices.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-practices.txt
     fi
   done
 
