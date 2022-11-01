@@ -20,14 +20,14 @@ The table `t` below represents four animals from the shelter:
 
 _Match_ each Pyret expression (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
 
-[cols=".^10a,^.^2a,3,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+[.FillVerticalSpace, cols=".^10a,^.^2a,3,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 
 |
 ----
  t.order-by("kilos", true)
 ----
-|*@n*@ifsoln{-D} ||*A*
+|*@n*@ifsoln{(D)} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
 |
@@ -35,7 +35,7 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 t.filter(is-female)
   .build-column("kilos", kilograms)
 ----
-|*@n*@ifsoln{-A} ||*B*
+|*@n*@ifsoln{(A)} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
 |
@@ -43,7 +43,7 @@ t.filter(is-female)
 t.build-column("kilos", kilograms)
   .filter(is-heavy)
 ----
-|*@n*@ifsoln{-C} ||*C*
+|*@n*@ifsoln{(C)} ||*C*
 | Produces a table containing only Fritz.
 
 |
@@ -51,7 +51,7 @@ t.build-column("kilos", kilograms)
 t.filter(is-heavy)
   .build-column("kilos", kilograms)
 ----
-|*@n*@ifsoln{-D} ||*D*
+|*@n*@ifsoln{(D)} ||*D*
 | Won’t run: will produce an error (if so, why?)
 
 |
@@ -60,7 +60,7 @@ t.build-column("kilos", kilograms)
   .filter(is-heavy)
   .order-by("sex", true)
 ----
-|*@n*@ifsoln{-C} ||*E*
+|*@n*@ifsoln{+(C)+} ||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
 |
@@ -69,7 +69,7 @@ t.build-column("female", is-female)
   .build-column("kilos", kilograms)
   .filter(is-heavy)
 ----
-|*@n*@ifsoln{-E} ||*F*
+|*@n*@ifsoln{(E)} ||*F*
 | Produces a table containing Maple and Fritz
 
 |===

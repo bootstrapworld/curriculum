@@ -1,0 +1,1078 @@
+@import url("./asciidoctor.css");
+@import url("./bootstrap.css");
+@import 'https://www.bootstrapworld.org/styles.css';
+@import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
+
+/************************************************************************************
+* SYSTEMWIDE STYLES
+*/
+
+@font-color: #75328A;
+@translucent-bg-color: #75328AAA;
+@text-font: 'Lato', Arial, Helvetica, sans-serif;
+@code-font: Hack, "Courier New", monospace;
+@top-padding-for-writing: 1.2rem;
+@top-padding-for-dr: 1rem;
+
+body {
+  font-size:      12pt;
+  font-family:    @text-font;
+  color:          @font-color;
+  width:          100%; /* needed to undo effect of html{display:flex} */
+  display:        block;
+  position:       relative;
+  -webkit-font-smoothing: antialiased;
+  &.beta::after { 
+    position: absolute;
+    top: 1in;
+    left: 2in;
+    transform: rotate(-45deg);
+    content: "BETA";
+    opacity: 0.2;
+    line-height: 3em;
+    color: gray;
+    font-size: 100pt;
+    font-weight: 900;
+  }
+  /* Set Defaults (many asciidoc overrides) */
+  h1 {
+    font-size:      2rem;
+    font-weight:    bold;
+    font-family:    @text-font;
+  }
+  h2 {
+    margin:          0; /* 1ex bottom margin */
+    font-family:    @text-font;
+  }
+  a       { color:  #2156a5 !important; }
+  p       { margin: 10px 0px; font-size: inherit; }
+  code    { display: inline-block; padding: 0 !important; line-height: 1rem !important; }
+  mark    { background: none; color: inherit; }
+  em, strong { margin: 0px 2px; }
+  .listingblock pre { margin: 3px 0px; padding: 0; }
+  .indentedpara { margin-left: 3em; }
+  table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
+  ul { line-height: inherit; }
+  .ulist ul { margin-bottom: 0px; }
+  .ulist p  { margin: 5px 0px; }
+
+  table, td.tableblock>.content { margin-bottom: 0px; }
+  tr th.tableblock code, td.tableblock code { background: none; }
+  td.tableblock pre { background: none !important; }
+  tr th.tableblock {
+    background:       #cccccc !important;
+    padding:          .25em .5em;
+    font-size:        1rem;
+  }
+
+  #content { margin: 0; }
+  #header>h1:only-child { border-bottom: none; }
+
+  /* The footer at the bottom of every page */
+  .acknowledgmentsect {
+    position: absolute;
+    top: 100%;
+    margin-top: 20px;
+  }
+  .acknowledgment {
+    padding-bottom:   5px !important;
+    font-size:        0.8rem !important;
+    font-style:       italic !important;
+    line-height:      inherit !important;
+    * { line-height: inherit !important; }
+    img {
+      width:            94px !important;
+      height:           37px !important;
+      float:            right !important;
+    }
+  }
+
+  #footer {
+    background: rgba(0,0,0,0.5);
+    margin-left: -3em;
+    padding-left: 10px !important;
+    position:   fixed;
+    top:        100%;
+    padding:    0;
+    z-index:    999;
+  }
+
+  .canBeLongerThanAPage #footer { display: none; }
+
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       @translucent-bg-color;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
+
+  /* outOfDate warning */
+  #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
+
+  .left  { text-align: left  !important; }
+  .right { text-align: right !important; }
+  .right img { margin-left: 15px; }
+  .center, .centered-image {
+    display:          block;
+    margin-left:      auto;
+    margin-right:     auto;
+    text-align:       center !important;
+    padding:          1ex 0ex;
+  }
+
+  /* These items should always max-out pagewidth, and have no padding */
+  #header, #content, #footer {
+    width: 100% !important; max-width: 100% !important; padding: 0;
+  }
+
+  /* Sections */
+  .lesson-section-1, .lesson-section-1+.lesson-section-1 {
+    clear:              both;
+    border-top:         solid 2px black;
+    display:            block;
+  }
+  .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
+  .lesson-section-2 h3 { font-size: 1.5rem; font-style: italic; margin: 0px; }
+  .sectionbreak {
+    display:          block;
+    width:            auto;
+    border-bottom:    solid 3px black;
+    margin:           5px 0px;
+  }
+
+  /* Images and Captions */
+  .image-figure .image-caption { 
+    width:      100%; 
+    max-width:  300px; 
+    display:    inline-block; 
+    font-style: italic; 
+    line-height: 1.5ex;
+    word-break: break-word;
+    &::before { content: 'Source: '; }
+  }
+  .editbox {
+    width:              auto;
+    background-color:   #f7f7f8;
+    margin:             2px;
+    padding:            0 2px;
+    text-align:         left;
+    line-height:        1.2rem;
+    vertical-align:     baseline;
+    &:empty { display: none; } /* If empty after JS post-processing, hide */
+  }
+}
+
+body:not(.LessonPlan, .narrativepage) p {
+  overflow:     hidden; 
+  margin:       0px;
+  line-height:  1.3;
+}
+
+/*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
+.glossary { 
+  margin-bottom: 20px; 
+  * { display: inline; }
+  .title    { display: block; font-weight: bold; color: inherit;}
+  dt::after { content: '::'; margin: 0px 5px; }
+  dd        { margin: 0px; }
+  dd::after { content: '\A'; white-space: pre; }
+}
+
+.alignedStandards { display: none; }
+.coverageElement { display: none; }
+.standard-menu-container {
+  padding:          10px;
+  display:          flex;
+  justify-content:  space-between;
+  div:nth-child(1) { width: 75%; }
+  div:nth-child(2) { width: 25%;}
+}
+
+.quad   { display: inline-block; min-height: 15px; }
+.vspace { display: inline-block; }
+
+.quad::before, .fitb:empty::before, .fitbruby:empty::before {
+  content: '\00200b';
+}
+
+/************************************************************************************
+* NARRATIVE PAGE STYLES
+*/
+.narrativepage {
+  .logo     { float: right; }
+  .logo img { width: 400px; }
+  #lesson-list {
+    *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
+    dt        { margin-top: 15px; display: inline-block; }
+    dd:after  { display: block; content: ''; }
+    dd:before { display: inline; content: '::'; font-weight: 900; }
+  }
+
+  .course-banner {
+    font-style: italic;
+    background: #B6D990aa;
+    border: @font-color 1px dashed;
+    padding: 5px;
+    margin-bottom: 2rem;
+    a { color: black; text-decoration: underline; }
+  }
+}
+
+/************************************************************************************
+* LESSON PAGE STYLES
+*/
+.LessonPlan {
+  /* The summary table at the top of each lesson */
+  .preamble {
+    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) p { font-weight: bold; }
+
+    tr td > * {
+      max-height: 150pt;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.5s ease-out;
+    }
+    tr td:last-child > * {
+      background:
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+        /* Shadows */
+        radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+
+        background:
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+        /* Shadows */
+        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+
+      background-repeat: no-repeat;
+      background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+      /* Opera doesn't support this in the shorthand */
+      background-attachment: local, local, scroll, scroll;
+    }
+    tr:hover td > * {max-height: 1000px;}
+
+    /* Custom materials link styles */ 
+    .Optional, .OptProject, .handout {font-style: italic;}
+    .Optional::before, .OptProject::before, .handout::before { color: gray;}
+  }
+
+  /* Language table */
+  .lang-features-table {
+    display: table;
+    z-index: 999;
+    position: fixed;
+    top:  50%;
+    left: 50%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    border:  solid 5px gray !important;
+    * {
+      margin:             0px;
+      padding:            1px;
+      font-size:          0.8rem;
+    }
+    p { font-family: monospace; }
+    
+    tr:first-of-type, tr:first-of-type p {
+      background-color:   lightgray;
+      font-weight:        bold;
+      text-align:         center;
+      font-family:        inherit; /* Header row should not be monospace */
+    }
+    .centered-image { display: inline; } /* Override default image treatment */
+    tr td:nth-child(1), tr td:nth-child(1) p {
+      background-color:   transparent;
+      text-align:         center;
+      vertical-align:     middle;
+      font-family:        inherit; /* Type cell should not be monospace */
+    }
+  }
+
+  /* Lesson sidebar */
+  @keyframes slideInFromLeft {
+      0% { transform: translateX(-100%); }
+    100% { transform: translateX(0);     }
+  }
+
+  .sidebar {
+    animation:  0.5s ease-out 0s 1 slideInFromLeft;
+    display:    block;
+    position:   fixed;
+    top:        0px;
+    left:       0px;
+    width:      225px;
+    height:     100%;
+    background: #e8f3dd;
+    transition: all 0.5s;
+    color:      black;
+    box-shadow: -1px 2px 4px black;
+    z-index:    9999;
+    overflow:   scroll;
+    user-select: none;
+    &.closed {
+      left:  -225px;
+      width: 265px;
+      height: 30px;
+    }
+    .paragraph { width: 205px; }
+    #toggle {
+      top:    0;
+      right:  0;
+      position: absolute;
+      width:  40px;
+      height: 30px;
+      text-align:  center;
+      border: 0;
+      margin: 0 !important;
+      background: @translucent-bg-color;
+      &:after { content: '≫'; font-size: 20px;}
+    }
+
+    &:not(.closed) #toggle:after { content: '«'; }
+    &:hover * { opacity: 1; }
+    > * { margin: 0px 10px !important; }
+    > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
+    label { display: inline; font-size: 0.8rem; }
+    select { border:  none; }
+    strong { color: black; margin: 0; }
+    li { list-style-type: none; margin-bottom: 5px;}
+    table { background: none !important; border: none; width: auto; }
+    table td, table tr { padding: 0; background: none; border: 0; }
+    table .title { display: none; }
+    dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
+    dl { line-height: 0.4rem; }
+    dd::after { content: '\A'; white-space: pre; }
+    dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
+    table dt { margin-top: 10px; }
+    .sidebarlessons { 
+      margin-top:  30px; 
+      input[type="checkbox"] { margin-right: 5px; }
+      ul {
+        background: white;
+        margin:     0px;
+        box-shadow: inset -1px 0px 2px gray;
+        max-height: 250px;
+        overflow:   scroll;
+        padding:    10px;
+        font-size:  0.8rem !important;
+      }
+      li:nth-child(odd) { background: #b7d89333; }
+    }
+    .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
+  }
+  .vocab { font-weight: bold; font-style: italic; color: @font-color; }
+  .lesson-instruction, .lesson-roleplay {
+    min-height: 50px;
+    background: #eee;
+    clear:      both;
+    padding:    5px;
+    margin:     2ex 0;
+    > *:first-child { margin-left: 60px; }
+    > *:first-child::before {
+      content:  url('lesson-instruction.png');
+      height:   50px;
+      width:    50px;
+      float:    left;
+      margin-right: 10px;
+      margin-left:-60px;
+    }
+  }
+  .lesson-roleplay > *:first-child::before { content: url('lesson-roleplay.png') }
+
+  .lesson-point {
+    font-weight:        bold;
+    color:              black;
+    border-style:       solid;
+    margin:             2ex;
+    border-width:       2px 0px;
+    clear:              both;
+    p { margin: 0ex 1ex; }
+  }
+
+  /* Callout boxes */
+  .strategy-box, .notice-box {
+    background:         #efefef;
+    border:             solid 5px !important;
+    width:              75%;
+    margin:             15px auto;
+    display:            block;
+    clear:              both;
+    position:           relative;
+    td { width: 8in; }
+    a { color: blue; text-decoration: underline; }
+    .title {
+      width:              100%;
+      display:            block;
+      text-align:         center;
+      font-weight:        bold;
+      font-size:          1.5rem;
+    }
+  }
+  .strategy-box { border-color: #1a73b5 !important; }
+  .notice-box   { border-color: #7747a5 !important; }
+
+  h2 { font-size: 1.75em; font-weight: normal; }
+  h3 { font-size: 1.5em; font-weight: 300;  }
+
+  /* Direct link to a section of a lesson */
+  .section-link a {
+    margin-left:        -1.75em;
+    padding-right:      0.5em;
+    vertical-align:     middle;
+    text-decoration:    none !important;
+    font-size:          .9rem;
+    position:           relative;
+    left:               -2em;
+  }
+
+  /* class for styling duration info in headers */
+  .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
+  /* Special links back to older, pre-remix materials */
+  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+}
+
+/************************************************************************************
+* WORKBOOK PAGES
+*/
+
+/* Maximize vertical space for content */
+body.workbookpage, body.workbookpage #content,
+body.workbookpage #preamble_disabled,
+body.workbookpage #preamble_disabled .sectionbody {
+  padding:   0;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start; 
+}
+
+body.solution-page {
+  .fitbruby, .fitb { font-style: italic; }
+}
+
+body.workbookpage {
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+
+  /* set page dimensions */
+  &:not(.landscape) { width: 7.5in; height: 9.75in; }
+  &.landscape { width: 9.75in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
+
+  /* Make content of page as tall as possible */
+  #content, #preamble_disabled, #preamble_disabled .sectionbody,
+  #preamble_disabled .sectionbody table.FillVerticalSpace,
+  #content > .sect1 { 
+    flex-grow: 1;
+  }
+
+  /* make .FillVerticalSpace tables use CSS grid layout */
+  table.FillVerticalSpace { 
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: max-content;
+    > colgroup { display: none; }
+    > tbody, > thead {
+      display: contents;
+      > tr { 
+        display: contents; 
+        > td { 
+          display: grid; position: relative; 
+          &.valign-middle { align-items: center; }
+        }
+      }
+    } 
+  }
+
+  /* Make code match text size/layout */
+  p .editbox, pre .editbox { font-size: 9pt !important; }
+
+  /* Some elements show either solution mode or a blank */
+  .solution { font-style: italic; }
+  .blank    { color: rgba(0,0,0,0); }
+
+  /* Auto-numbering - Add a right-paren, unless it's inside a table. */
+  .autonum::after { content: ')'; }
+  table .autonum::after { content: none; }
+
+  .studentAnswerShort  { min-width: 20pt;  }
+  .studentAnswerMedium { min-width: 100pt; }
+  .studentAnswerLong   { min-width: 140pt; }
+
+  .fitb, .fitbruby, .fitb.stretch::after {
+    padding-top:        @top-padding-for-writing;
+    position:           relative;
+    display:            inline-block;
+    min-width:          4em;
+    text-align:         center;
+    line-height:        1rem;
+    border-bottom:      solid 1px black;
+  }
+  .fitbruby { 
+    margin-bottom: 0.75rem;
+  }
+  .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
+    position:           absolute;
+    bottom:             -0.9rem;
+    left:               0;
+    font-size:          0.65rem;
+    font-weight:        normal;
+    width:              100%;
+    text-align:         center;
+    font-style:         normal;
+    font-family:        @text-font;
+  }
+  .fitb.stretch { 
+    margin-left:        5px; 
+    vertical-align:     bottom; 
+    width:              auto;
+    /* add an underline that goes past the end of the page */
+    &::after { 
+      content:"\00a0";
+      position:           absolute;
+      width:              1000px;
+      left:               0;
+      bottom :            -1px;
+    }
+  }
+
+  /* Back-of-the-book contracts table */
+  table.contracts-table {
+    border-collapse: collapse;
+    p  { margin-top: 0; }
+    td { padding: .1em .625em !important; height: 23pt; }
+    tr:nth-child(odd) { border-top: solid 2px black; }
+    tbody tr:nth-child(odd) * { color: #cd7054 !important; }
+    tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
+    tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
+  }
+}
+
+/* TODO(Emmanuel): do we even need all of these? Clean up */
+body:not(.LessonPlan) {
+  p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
+
+  #header { margin-bottom: 5px !important; }
+  #header> h1:first-child,
+  .sect1 > h1:first-child,
+  .sect1 > h2:first-child,
+  .sect1 > h3:first-child,
+  .sect2 > h3:first-child {
+    width:            100%;
+    padding:          5px 0px;
+    margin:           0;
+  }
+  .description { display: none; }
+}
+
+/* Don't use flex to space out content on notes pages */
+body.LessonNotes {
+  #content { display: block !important; }
+}
+/************************************************************************************
+* DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
+*/
+
+/* Data Cycle tables should have borders */
+.data-cycle { 
+  border-collapse: collapse;
+  width: 100%;
+  td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
+  td { padding: 0.2rem 0.625rem; }
+
+  .fitbruby { text-align: left !important; }
+
+  /* Ruby text in the Data Cycle needs to be slightly larger than normal */
+  .fitbruby .ruby { 
+    font-size:  0.75rem !important; 
+    &::after { bottom: 0 !important; color: black; text-align: left !important; } 
+  }
+}
+
+/* We use tables (perhaps not the best idea) for our DR headings */
+table.recipe_title    { 
+  background: gray; border: gray; 
+  td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
+  td:last-child { border: 2px solid gray !important; }
+  td:last-child .content { width: 16px; height: 16px; background: white; }
+  p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
+}
+
+/* common height for headless and non-headless DRs */
+.recipe_word_problem { min-height: 0.65in; }
+
+.recipe {
+
+  /* Under a heading come the instructions */
+  .recipe_instructions * { font-style: italic; font-size: .85rem; }
+
+  /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
+  p { display: flex; flex-wrap: wrap; align-items: baseline;}
+
+  /* All student answers have a bottom-border, and a "ruby" printed in black */
+  p .fitb, p .fitbruby { 
+    word-spacing: 2pt; padding-top: @top-padding-for-dr;
+    &:after { word-spacing: 0; }
+  }
+
+  /* We're using the ruby itself to hang the content, and it's already positioned correctly */
+  .ruby:after { bottom: 0 !important; } 
+
+  /* Format fitrubies: mostly left, but a few in the center or on the right */
+  .fitbruby { text-align: left !important; font-family: @code-font; }
+  .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
+
+  .fitbruby.recipe_name          { min-width: 20%; }
+  .fitbruby.recipe_range         { min-width: 12%; }
+  .fitbruby.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
+  .fitbruby.recipe_variables     { min-width: 30%; white-space: nowrap; }
+  .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+
+  /* Some things should grow to fill the width of their containing line */
+  .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
+
+  /* Contract and Purpose get lang-specific comment symbols */
+  .recipe_purpose, &.recipe_contract .recipe_name {
+    padding-left: 1em;
+    &::before { color: black; position: absolute; left: 0; }
+  }
+  &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
+}
+
+/* Proglang-specific adaptations */
+.pyret {
+  .recipe_purpose, .recipe_contract .recipe_name {
+    &::before { content: '#'; }
+  }
+  .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+  /* Indenting for function body and example bodies */
+  .recipe_example_line:not(.keyword_only) > .content, 
+  .recipe_definition_body { margin-left: 2ex; }
+  /* Conditionals */  
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 1em; 
+    width: 90%;
+    .answers { margin-left: 1em; text-align: left;}
+    .questions { margin-left: 3em; text-align: left;}
+    .questions::after { 
+      content: ":"; 
+      position: absolute; 
+      left: 100%; 
+      top: 0px; 
+      width: 1em;
+    }
+    +.recipe:nth-last-child(3) .answers::before,
+    .questions::before { 
+      position: absolute; 
+      left: -2em; 
+      color: #75328A; 
+      font-weight: bold; 
+      font-family: @text-font;
+    }
+    /* the 1st condition ("if") */
+    .questions::before { content: "if"; }
+    /* the next n-1 conditions ("if else")*/
+    +.recipe_condition {
+      .questions { margin-left: 4em; }
+      .questions::before { content: "else if"; left: -3em; }
+    }
+    /* the last condition ("else") */
+    +.recipe:nth-last-child(3) {
+      .fitbruby:first-child { 
+        margin-left: 3em; 
+        &:before  { content: "else:"; }
+      }
+    }
+    +.recipe_line:not(.recipe_condition) .solution { 
+      border-bottom: none; margin-left: 2em; font-style: normal; text-align: left;
+    }
+  }
+  .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
+  strong { margin: 0; padding: 0; }
+  .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
+}
+
+.wescheme {
+  .recipe_purpose, .recipe_contract .recipe_name {
+    &::before { content: ';'; }
+  }
+  .recipe_example_body { margin-left: 1em;}
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 2em; 
+    width: 90%;
+    .questions { margin-left: 1em; text-align: left; }
+    .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
+    .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
+    .answers::after { 
+      content: "]"; 
+      position: absolute; 
+      left: calc(100% + 2pt);
+      bottom: 0; 
+      color: @font-color; 
+      width: unset; 
+      font-style: unset;
+      font-size: unset;
+      font-family: unset;
+    }
+
+    &:last-child >::after { 
+      content: ") )"; 
+      white-space: nowrap; 
+      position: absolute; 
+      left: 100%; 
+      bottom: 0; 
+      line-height: 18px;
+      margin-bottom: 0.9rem;
+    }
+  }
+  .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
+  strong { margin: 0; padding: 0; }
+  .contracts-table tr:nth-child(odd) td:first-child::before { content: ';'; }
+}
+
+.codap {
+  .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+  .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
+  .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
+  .recipe_name { display: flex !important; }
+  .transformer_type p::before, .transformer_type_checked p::before {
+    width: 1.1rem;
+    height: 1.1rem;
+    background: white;
+    display: inline-block;
+    margin:  0 2px 2px 0;
+    vertical-align: middle;
+  }
+  div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
+  div.transformer_type p::before { content: ""; }
+  table.transformer_type td:first-of-type .content { display: flex; flex: row; }
+  table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
+  div.transformer_type_checked p::before {
+    content: "x";
+    text-align: center;
+    line-height: 1rem;
+    color: black;
+  }
+  .recipe_formula, .codap_transformer { display:  flex !important; }
+  .codap_transformer p { width:  100%; }
+  .codap_example_tables+table table * { margin: 0; padding: 0; }
+  .codap_example_tables+table table * { text-align: center; height: 2rem; }
+  .recipe_domain, .recipe_range { width:  40%; }
+} 
+
+/************************************************************************************
+* TEACHER RESOURCES PAGE
+*/
+
+.pathway_external_links ul li { margin-top: 3ex 0ex; list-style-type: none; }
+
+td.tableblock .listingblock { margin-bottom: 0 !important; }
+
+/************************************************************************************
+* FORMATTING OF CIRCLES, AND TEXT CODE
+*/
+
+div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+  font-family: @code-font;
+}
+
+td.halign-center div.circleevalsexp { text-align: center; }
+
+div.circleevalsexp {
+  .expression {
+    display:            inline-block;
+    padding-top:        6px;
+    margin:             2px 5px;
+    clear:              none;
+    border:             2px solid black;
+    background:         white;
+    text-align:         center;
+    border-radius:      20px;
+  }
+  .value {
+    display:            inline-block;
+    margin:             0.65rem 0.5rem;
+    vertical-align:     top;
+  }
+  .operator {
+    display:            block;
+    height:             1.1rem;
+    text-align:         center;
+    line-height:        0.5rem;
+    width:              100%;
+    border-bottom:      solid 2px black;
+    border-radius:      15px 15px 0px 0px;
+    .value { margin: 0 0.5rem; } /* When in operator position, drop the margins */
+  }
+  /* Display ONLY 5px hspaces that are after the first one (keeps args centered) */
+  .hspace { display: none; }
+  .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
+  .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
+
+  /* fill-in-the-blanks inside circles need no border */
+  .fitb { border: none; padding: 0;}
+}
+
+div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
+  width:              100%;
+  margin:             0px 3px;
+  display:            inline-block;
+  padding:            0px;
+  font-size:          0.8rem;
+  color:              #666;
+  font-style:         normal;
+  clear:              both;
+}
+
+/* WESCHEME COLORS */
+.wescheme-string,     .cm-scheme-string   { color: green;}
+.wescheme-number,     .cm-scheme-number   { color: blue;}
+.wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
+.wescheme-character,  .cm-scheme-character{ color: orange;}
+.wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
+.wescheme-comment,    .cm-scheme-comment  { color: orange; }
+span.cm-scheme-punctuation                { color: black;}
+span.cm-scheme-rparen                     { color: black;}
+
+/* PYRET COLORS */
+.cm-s-default.CodeMirror                  { color: black; }
+.cm-comment                               { color: #cd7054; }
+.cm-boolean                               { color: darkred; }
+.cm-builtin                               { color: #555; }
+.cm-variable                              { color: #4d5966; }
+.cm-keyword                               { color: black; font-weight: bold; }
+.cm-number                                { color: navy; }
+.cm-roughnum                              { color: blue; }
+.cm-bad-number                            { color: red; font-weight: bold; }
+.cm-string                                { color: forestgreen; }
+.cm-type                                  { color: #374049; }
+.cm-function-name                         { color: #374049; }
+.cm-unterminated-string                   { color: red; font-weight: bold; }
+.pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
+* + .pyretkeyword { margin-left: 1ex;}
+
+/* class for tables containing Pyret data */
+table.pyret-table {
+  border-collapse:    collapse;
+  width:              100%;
+  table-layout:       auto;
+  display:            table!important;
+  border:             1px black solid;
+  border-radius:      1em;
+  overflow:           hidden;
+  background:         #eee;
+  tr:nth-child(even){background-color: #f2f2f2}
+  thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
+  td p { margin: 0px; }
+  td, th {
+    border:             none;
+    border-right:       1px white solid;
+    color:              #1f1180;
+    font-family:        monospace;
+  }
+}
+
+table.sideways-pyret-table {
+  p { margin: 0px }
+  tr { background: none; text-align: right; }
+  td:first-child {
+    display: table-cell;
+    background: #cccccc;
+    text-align: center;
+    width: 50px;
+  }
+  td:first-child p { font-weight: bold; }
+}
+
+.obeyspaces { white-space: pre-wrap; }
+
+div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
+  display: inline-block;
+}
+
+.codetwo {
+  font-family: @code-font;
+  font-size: 0.85rem;
+  background-color: #f7f7f8;
+  color: #666;
+  word-break: break-word;
+}
+
+/************************************************************************************
+* SCREEN MEDIA
+*/
+@media screen {
+  html { height: 100%; display:  flex; }
+
+  .web-page-only {
+    font-weight:      bold;
+    font-style:       italic;
+    line-height:      2.5rem;
+  }
+
+  /* on WB pages, set font size to same as print and then zoom the page */
+  body.workbookpage {
+    transform-origin: left top; 
+    transform: scale(1.25); 
+    min-height: calc(11in * 1.25) !important;
+    #savetodrive-div { transform: scale(0.8); }
+  }
+
+  /* add some left-padding to improve readability on screens */
+  body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
+
+  /********************************************************************
+   *  Collapsing Headers 
+   */
+   .LessonPlan, .TeacherResources {
+      /* add a bottom padding to prevent browser-scroll */
+      #body { padding-bottom:  10in; }  
+      /* adjust colors */
+      h2 {
+        background-color: @translucent-bg-color;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px !important;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+        &::after {
+          content: '\002B';
+          color: white;
+          font-weight: bold;
+          float: left;
+          margin-right: 5px;
+        }
+        &.active::after { content: "\2212"; }
+        &.active, &:hover { background-color: #b7d893; }
+      }
+      /* set collapsed size and transition rules */
+      .sect1:not(.acknowledgmentsect) .sectionbody {
+        padding: 0 18px;
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        position: relative;
+        /* Add a white fade to hint for discoverability */
+        &::after {
+          content  : "";
+          position : absolute;
+          z-index  : 1;
+          bottom   : 0;
+          left     : 0;
+          pointer-events   : none;
+          background-image : linear-gradient(to bottom, 
+                            rgba(255,255,255, 0), 
+                            rgba(255,255,255, 1) 90%);
+          width    : 100%;
+          height   : 10em;
+        }
+      }
+      .sect1:not(.acknowledgmentsect) h2:hover+.sectionbody:after { height: 4em; }
+      /* don't add the fade for summaries or active sections */
+      .lessonSummary .sectionbody { max-height: unset; }
+      .lessonSummary .sectionbody, h2.active+.sectionbody {
+        &::after { display: none; } 
+      }
+      .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
+   }
+}
+
+/************************************************************************************
+ * PRINT MEDIA
+ */
+@page { size: letter portrait; margin: 0.5in; }
+@page landscape { size: letter landscape; margin: 0.5in; }
+
+@media print {
+  /* Elements we don't want printed */
+  ::-webkit-scrollbar { display:  none; }
+  a[href]::after { content: none !important; }
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
+   display: none !important; visibility: hidden; float: none;
+  }
+  div#body{ position: static; } /* page-break fails on absolute positioning */
+  
+  /* Override AsciiDoc print default */
+  p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  #content { margin: auto; }
+
+  /* Change coloring of body text, lesson summary table, and code */
+  html { -webkit-print-color-adjust: exact; }
+  div#body, body { color: black; }
+  :not(body.LessonPlan) #header { background: black; color: white; }
+  .listingblock pre:not(.highlight) { background: none !important; }
+
+  .LessonPlan {
+    .lessonSummary {
+      break-after:  page !important;
+      page-break-after:  always !important;
+    }
+    .lesson-section-1 {
+      break-before: page !important;
+      page-break-before: always !important;
+    }
+    .lesson-section-2 p, .notice-box, .strategy-box, .circleevalsexp, .image,
+    img, .MathJax, #_additional_exercises + .sectionbody {
+      break-inside: avoid !important; page-break-inside: avoid !important;
+    }
+    .left-header tr td:nth-child(1) { background-color: lightgray; }
+    .sect1+.sect1 { border-top: solid 3px black; }
+  }
+  
+  body.workbookpage {
+    /* Use B&W colors for headers */
+    #header> h1:first-child, .sect1 > h1:first-child { 
+      background:       black;
+      color:            white;
+      text-align:       center;
+      padding:          1px;
+    }
+    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
+    .lesson-section-1 { border: none; }
+    .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+      background:   #ccc;
+      font-weight:  600;
+      font-size:    12pt;
+      padding-left: 5px;
+    }
+    .recipe_condition *::before, *::after { color: black !important; }
+  }
+  /* Page Breaks for printed lesson plans, projects, and TR pages */
+  h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
+  h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
+  table { break-inside: auto; }
+  tr td { page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: auto; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+
+  /* Get rid of collapsing headers */
+  .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
+
+  /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
+  html, body    { font-size:      9pt; }
+  .questions    { min-width: 36%; width: auto; }
+  .answers      { width: auto; }
+}
