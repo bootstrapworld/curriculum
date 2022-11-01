@@ -25,6 +25,7 @@ function updateSliderAndButtons() {
 function clearLoadingScreenAndRun() {
   document.getElementById('righthand').style.opacity = 1;
   document.getElementById('loadingScreen').classList.add('loaded');
+  parley.run();
 }
 
 function nextCard() {
@@ -38,7 +39,6 @@ function previousCard() {
 }
 
 function loadFromConfig(i = cardIndex) {
-  console.log('@@@@@@@@@loading from caed index', i);
   if(i > cards.length-1) return; // if there's no more cards, bail
 
   // clear any content
@@ -51,7 +51,6 @@ function loadFromConfig(i = cardIndex) {
         videoConfig = cards[i].getAttribute('videoConfig');
 
   if(editorConfig) {
-    console.log('editorConfig');
     righthand.appendChild(editor);
     parley.resetChunks(editorConfig.trim().split("\n") || [""]);
     document.getElementById('reset').onclick = () => {
@@ -61,7 +60,7 @@ function loadFromConfig(i = cardIndex) {
         2000)
     }
     document.getElementById('reset').style.display = 'block';
-    parley.run();
+    setTimeout(() => parley.run(), 500);
   } else if(imageConfig) {
     var img = document.createElement("img");
     img.src = imageConfig;
