@@ -6,14 +6,20 @@
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
+
+@font-color: #75328A;
+@translucent-bg-color: #75328AAA;
+@text-font: 'Lato', Arial, Helvetica, sans-serif;
+@code-font: Hack, "Courier New", monospace;
+@top-padding-for-writing: 1.2rem;
+@top-padding-for-dr: 1rem;
+
 body {
   font-size:      12pt;
-  font-family:    'Lato', Arial, Helvetica, sans-serif;
-  color:          #75328A;
+  font-family:    @text-font;
+  color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
-  break-inside:   auto !important;
   display:        block;
-  page-break-inside: auto !important;
   position:       relative;
   -webkit-font-smoothing: antialiased;
   &.beta::after { 
@@ -32,11 +38,11 @@ body {
   h1 {
     font-size:      2rem;
     font-weight:    bold;
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @text-font;
   }
   h2 {
     margin:          0; /* 1ex bottom margin */
-    font-family:    'Lato', Arial, Helvetica, sans-serif;
+    font-family:    @text-font;
   }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
@@ -100,7 +106,7 @@ body {
   #safariWarning { display: none; }
   #savetodrive-div:hover + #safariWarning {
     display:          block;
-    background:       #75328AAA;
+    background:       @translucent-bg-color;
     color:            white;
     padding:          5px;
     margin-top:       75px;
@@ -142,12 +148,33 @@ body {
     border-bottom:    solid 3px black;
     margin:           5px 0px;
   }
+
+  /* Images and Captions */
+  .image-figure .image-caption { 
+    width:      100%; 
+    max-width:  300px; 
+    display:    inline-block; 
+    font-style: italic; 
+    line-height: 1.5ex;
+    word-break: break-word;
+    &::before { content: 'Source: '; }
+  }
+  .editbox {
+    width:              auto;
+    background-color:   #f7f7f8;
+    margin:             2px;
+    padding:            0 2px;
+    text-align:         left;
+    line-height:        1.2rem;
+    vertical-align:     baseline;
+    &:empty { display: none; } /* If empty after JS post-processing, hide */
+  }
 }
 
 body:not(.LessonPlan, .narrativepage) p {
   overflow:     hidden; 
   margin:       0px;
-  line-height:  1.5;
+  line-height:  1.3;
 }
 
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
@@ -159,29 +186,6 @@ body:not(.LessonPlan, .narrativepage) p {
   dd        { margin: 0px; }
   dd::after { content: '\A'; white-space: pre; }
 }
-
-/* TODO(Emmanuel): dead code?
-.tooltip { 
-  position: relative; 
-  .tooltiptext {
-    min-width:        120px;
-    max-width:        66%;
-    background-color: #555;
-    color:            white;
-    border-radius:    6px;
-    padding:          5px 0;
-    position:         absolute;
-    top:              50%;
-    left:             50%;
-    text-align:       center;
-    opacity:          0;
-    transition:       all 0.3s;
-    transform:        translateX(-50%) translateY(-50%);
-  }
-  :hover .tooltiptext { opacity: 1; }
-}
-.standards-hierarchical-table ul li ul { display: none; }
-*/
 
 .alignedStandards { display: none; }
 .coverageElement { display: none; }
@@ -196,7 +200,7 @@ body:not(.LessonPlan, .narrativepage) p {
 .quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.quad::before, .fitb::before, .fitbruby::before, .studentAnswer::before {
+.quad::before, .fitb:empty::before, .fitbruby:empty::before {
   content: '\00200b';
 }
 
@@ -216,7 +220,7 @@ body:not(.LessonPlan, .narrativepage) p {
   .course-banner {
     font-style: italic;
     background: #B6D990aa;
-    border: #75328A 1px dashed;
+    border: @font-color 1px dashed;
     padding: 5px;
     margin-bottom: 2rem;
     a { color: black; text-decoration: underline; }
@@ -286,7 +290,7 @@ body:not(.LessonPlan, .narrativepage) p {
       font-size:          0.8rem;
     }
     p { font-family: monospace; }
-    .editbox { width: auto; }
+    
     tr:first-of-type, tr:first-of-type p {
       background-color:   lightgray;
       font-weight:        bold;
@@ -338,7 +342,7 @@ body:not(.LessonPlan, .narrativepage) p {
       text-align:  center;
       border: 0;
       margin: 0 !important;
-      background: #75328A77;
+      background: @translucent-bg-color;
       &:after { content: '≫'; font-size: 20px;}
     }
 
@@ -359,7 +363,7 @@ body:not(.LessonPlan, .narrativepage) p {
     dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
     table dt { margin-top: 10px; }
     .sidebarlessons { 
-      margin-top:  10px; 
+      margin-top:  30px; 
       input[type="checkbox"] { margin-right: 5px; }
       ul {
         background: white;
@@ -374,7 +378,7 @@ body:not(.LessonPlan, .narrativepage) p {
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-  .vocab { font-weight: bold; font-style: italic; color: #75328A; }
+  .vocab { font-weight: bold; font-style: italic; color: @font-color; }
   .lesson-instruction, .lesson-roleplay {
     min-height: 50px;
     background: #eee;
@@ -442,25 +446,7 @@ body:not(.LessonPlan, .narrativepage) p {
   /* class for styling duration info in headers */
   .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
   /* Special links back to older, pre-remix materials */
-  .old-materials p { width:100%; background:#75328AAA; color:black; text-align:center; }
-}
-
-span.clear {
-  clear:              both;
-  display:            block;
-  content:            "";
-  width:              100%;
-}
-
-/* Images and Captions */
-.image-figure .image-caption { 
-  width:      100%; 
-  max-width:  300px; 
-  display:    inline-block; 
-  font-style: italic; 
-  line-height: 1.5ex;
-  word-break: break-word;
-  &::before { content: 'Source: '; }
+  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 }
 
 /************************************************************************************
@@ -475,6 +461,10 @@ body.workbookpage #preamble_disabled .sectionbody {
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
+}
+
+body.solution-page {
+  .fitbruby, .fitb { font-style: italic; }
 }
 
 body.workbookpage {
@@ -502,18 +492,16 @@ body.workbookpage {
       display: contents;
       > tr { 
         display: contents; 
-        > td { display: grid; position: relative; }
+        > td { 
+          display: grid; position: relative; 
+          &.valign-middle { align-items: center; }
+        }
       }
     } 
-    .valign-middle { align-items: center; }
   }
 
   /* Make code match text size/layout */
-  p .editbox, pre .editbox { 
-    line-height: 1rem; 
-    vertical-align: baseline; 
-    font-size: 9pt !important; 
-  }
+  p .editbox, pre .editbox { font-size: 9pt !important; }
 
   /* Some elements show either solution mode or a blank */
   .solution { font-style: italic; }
@@ -523,26 +511,32 @@ body.workbookpage {
   .autonum::after { content: ')'; }
   table .autonum::after { content: none; }
 
-  /* Fill in the blanks */
+  .studentAnswerShort  { min-width: 20pt;  }
+  .studentAnswerMedium { min-width: 100pt; }
+  .studentAnswerLong   { min-width: 140pt; }
+
   .fitb, .fitbruby, .fitb.stretch::after {
-    padding-top:        1.1rem; /* <--- how much extra height for kids to write!! */
+    padding-top:        @top-padding-for-writing;
     position:           relative;
     display:            inline-block;
-    min-width:          5em;
+    min-width:          4em;
     text-align:         center;
     line-height:        1rem;
     border-bottom:      solid 1px black;
   }
-  .fitbruby {
-     margin-bottom:     0.7rem;
-     .ruby {
-       position:           absolute;
-       bottom:             -0.9rem;
-       font-size:          0.65rem;
-       font-weight:        normal;
-       width:              100%;
-       transform:          translate(-50%, 0);
-     }
+  .fitbruby { 
+    margin-bottom: 0.75rem;
+  }
+  .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
+    position:           absolute;
+    bottom:             -0.9rem;
+    left:               0;
+    font-size:          0.65rem;
+    font-weight:        normal;
+    width:              100%;
+    text-align:         center;
+    font-style:         normal;
+    font-family:        @text-font;
   }
   .fitb.stretch { 
     margin-left:        5px; 
@@ -551,8 +545,8 @@ body.workbookpage {
     /* add an underline that goes past the end of the page */
     &::after { 
       content:"\00a0";
-      width:              1000px;
       position:           absolute;
+      width:              1000px;
       left:               0;
       bottom :            -1px;
     }
@@ -596,74 +590,69 @@ body.LessonNotes {
 */
 
 /* Data Cycle tables should have borders */
-.workbookpage .data-cycle { 
-  border-collapse: collapse; 
-  td:first-of-type { background: lightgray; border: solid white; }
-  td p, td p > * { font-size: 0.75rem; }
+.data-cycle { 
+  border-collapse: collapse;
+  width: 100%;
+  td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
   td { padding: 0.2rem 0.625rem; }
-  .fitbruby, .fitb { 
-    padding-top: 1.5ex !important;
-    font-style: italic; 
-    font-size:  1rem;
-    margin-bottom: 0.8rem;
-    .ruby { 
-      text-align: left; 
-      transform:  none; 
-      left:       0; 
-      bottom:     -0.95rem;
-      font-size:  0.75rem; 
-    }
+
+  .fitbruby { text-align: left !important; }
+
+  /* Ruby text in the Data Cycle needs to be slightly larger than normal */
+  .fitbruby .ruby { 
+    font-size:  0.75rem !important; 
+    &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
 }
-
-.recipe_word_problem { min-height: 0.65in; }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { 
   background: gray; border: gray; 
   td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-  td:last-child { border: 3px solid gray !important; }
-  td:last-child .content { width: 18px; height: 18px; background: white; }
+  td:last-child { border: 2px solid gray !important; }
+  td:last-child .content { width: 16px; height: 16px; background: white; }
   p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 }
 
+/* common height for headless and non-headless DRs */
+.recipe_word_problem { min-height: 0.65in; }
+
 .recipe {
+
   /* Under a heading come the instructions */
   .recipe_instructions * { font-style: italic; font-size: .85rem; }
+
   /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
-  p { display: flex; flex-wrap: wrap; }
+  p { display: flex; flex-wrap: wrap; align-items: baseline;}
+
   /* All student answers have a bottom-border, and a "ruby" printed in black */
-  .studentAnswer { border-bottom: solid 1px black; }
-  .studentAnswer::after { color: black; }
-  .recipe_example_body { margin-left: 1em;}
-  .recipe_domain, .recipe_purpose { flex-grow:  1; }
-
-  .recipe_domain, .recipe_range, .recipe_example_inputs, .recipe_variables {
-    text-align: center;
+  p .fitb, p .fitbruby { 
+    word-spacing: 2pt; padding-top: @top-padding-for-dr;
+    &:after { word-spacing: 0; }
   }
 
-  .recipe_cond { flex-grow: unset !important; min-width:  10%; }
-  .recipe_name          { min-width: 20%; }
-  .recipe_range         { min-width: 12%; }
-  .recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
-  .recipe_variables     { min-width: 30%; white-space: nowrap; }
-  /* All code is inside a wrapper, so apply the code font */
-  .wrapper {
-    p, .studentAnswer { font-family: Hack, "Courier New", monospace; }
-  }
+  /* We're using the ruby itself to hang the content, and it's already positioned correctly */
+  .ruby:after { bottom: 0 !important; } 
 
-  /* in solutions mode, use the smallest possible space for function name */
-  .solution.recipe_name { min-width: 6em; }
+  /* Format fitrubies: mostly left, but a few in the center or on the right */
+  .fitbruby { text-align: left !important; font-family: @code-font; }
+  .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
+
+  .fitbruby.recipe_name          { min-width: 20%; }
+  .fitbruby.recipe_range         { min-width: 12%; }
+  .fitbruby.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
+  .fitbruby.recipe_variables     { min-width: 30%; white-space: nowrap; }
+  .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+
+  /* Some things should grow to fill the width of their containing line */
+  .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
 
   /* Contract and Purpose get lang-specific comment symbols */
   .recipe_purpose, &.recipe_contract .recipe_name {
     padding-left: 1em;
     &::before { color: black; position: absolute; left: 0; }
   }
-
-  /* Piecewise Functions (ask/cond) branches */
-  .cond_clauses { position: relative; width: 100%; }
-  .cond_clauses .studentAnswer { border-bottom: solid 1px black; }
+  &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
 }
 
 /* Proglang-specific adaptations */
@@ -671,9 +660,50 @@ table.recipe_title    {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
-  .solution.recipe_name { text-align: right; } /* no whitespace in pyret */
-  .questions  { width: 39%; }
-  .answers    { width: 44%; }
+  .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+  /* Indenting for function body and example bodies */
+  .recipe_example_line:not(.keyword_only) > .content, 
+  .recipe_definition_body { margin-left: 2ex; }
+  /* Conditionals */  
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 1em; 
+    width: 90%;
+    .answers { margin-left: 1em; text-align: left;}
+    .questions { margin-left: 3em; text-align: left;}
+    .questions::after { 
+      content: ":"; 
+      position: absolute; 
+      left: 100%; 
+      top: 0px; 
+      width: 1em;
+    }
+    +.recipe:nth-last-child(3) .answers::before,
+    .questions::before { 
+      position: absolute; 
+      left: -2em; 
+      color: #75328A; 
+      font-weight: bold; 
+      font-family: @text-font;
+    }
+    /* the 1st condition ("if") */
+    .questions::before { content: "if"; }
+    /* the next n-1 conditions ("if else")*/
+    +.recipe_condition {
+      .questions { margin-left: 4em; }
+      .questions::before { content: "else if"; left: -3em; }
+    }
+    /* the last condition ("else") */
+    +.recipe:nth-last-child(3) {
+      .fitbruby:first-child { 
+        margin-left: 3em; 
+        &:before  { content: "else:"; }
+      }
+    }
+    +.recipe_line:not(.recipe_condition) .solution { 
+      border-bottom: none; margin-left: 2em; font-style: normal; text-align: left;
+    }
+  }
   .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
   strong { margin: 0; padding: 0; }
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
@@ -683,26 +713,46 @@ table.recipe_title    {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
-  .questions  { width: 44%; }
-  .answers    { width: 45%; }
-  .cond_clauses::after {  /* Add trailing parens for WeScheme */
-    content: ') )';
-    position: absolute;
-    left: 98%;
-    bottom: 1rem;
-    font-size: inherit;
+  .recipe_example_body { margin-left: 1em;}
+  .recipe_condition { 
+    position: relative; 
+    margin-left: 2em; 
+    width: 90%;
+    .questions { margin-left: 1em; text-align: left; }
+    .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
+    .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
+    .answers::after { 
+      content: "]"; 
+      position: absolute; 
+      left: calc(100% + 2pt);
+      bottom: 0; 
+      color: @font-color; 
+      width: unset; 
+      font-style: unset;
+      font-size: unset;
+      font-family: unset;
+    }
+
+    &:last-child >::after { 
+      content: ") )"; 
+      white-space: nowrap; 
+      position: absolute; 
+      left: 100%; 
+      bottom: 0; 
+      line-height: 18px;
+      margin-bottom: 0.9rem;
+    }
   }
   .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
   strong { margin: 0; padding: 0; }
   .contracts-table tr:nth-child(odd) td:first-child::before { content: ';'; }
 }
 
-/* TODO(Emmanuel): clean up once build script generates more consistent asciidoc */
 .codap {
   .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
   .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
   .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
-  .recipe_name { display: flex; }
+  .recipe_name { display: flex !important; }
   .transformer_type p::before, .transformer_type_checked p::before {
     width: 1.1rem;
     height: 1.1rem;
@@ -721,58 +771,13 @@ table.recipe_title    {
     line-height: 1rem;
     color: black;
   }
-  .recipe_formula, .codap_transformer { display:  flex; }
+  .recipe_formula, .codap_transformer { display:  flex !important; }
   .codap_transformer p { width:  100%; }
   .codap_example_tables+table table * { margin: 0; padding: 0; }
   .codap_example_tables+table table * { text-align: center; height: 2rem; }
   .recipe_domain, .recipe_range { width:  40%; }
 } 
 
-
-/* Note(Emmanuel): these could probably be a lot tighter */
-.studentAnswerCode, .studentAnswer, .studentAnswerUnfilled,
-.studentAnswerBlockUnfilled .studentBlockAnswerUnfilled,
-.studentBlockAnswerFilled {
-  margin-bottom:      0.85rem;
-  min-width:          105pt;
-  position:           relative;
-  padding:            0;
-  word-spacing:       4pt;
-  display:            inline-block;
-  border-bottom:      solid 1px black;
-}
-
-.studentAnswerCode::after, .studentAnswer::after {
-  position:           absolute;
-  bottom:             -1rem;
-  left:               0;
-  font-size:          .60rem;
-  width:              100%;
-  text-align:         center;
-  font-style:         italic;
-  font-family:        "Century Gothic";
-  content:            "\00A0";
-  word-spacing:       0;  /* don't inherit spacing from .studentAnswer */
-}
-.studentAnswerCode, .pyretkeyword { border-bottom: 0; min-width: unset;}
-.studentAnswer      .pyretkeyword { margin-bottom: 0; margin-right: 0; }
-
-.studentAnswerUnfilled, .studentBlockAnswerUnfilled,
-.studentAnswerFilled,   .studentBlockAnswerFilled {
-  min-width:          auto;
-}
-
-.studentAnswerFilled, .studentBlockAnswerFilled {
-    border-bottom:    none;
-    font-weight:      900;
-    font-style:       italic;
-    margin-bottom:    0;
-    line-height:      inherit;
-}
-
-.studentAnswerShort  { min-width: 60pt;  }
-.studentAnswerMedium { min-width: 100pt; }
-.studentAnswerLong   { min-width: 140pt; }
 /************************************************************************************
 * TEACHER RESOURCES PAGE
 */
@@ -786,7 +791,7 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 */
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
-  font-family: Hack, "Courier New", monospace;
+  font-family: @code-font;
 }
 
 td.halign-center div.circleevalsexp { text-align: center; }
@@ -821,6 +826,9 @@ div.circleevalsexp {
   .hspace { display: none; }
   .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
   .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
+
+  /* fill-in-the-blanks inside circles need no border */
+  .fitb { border: none; padding: 0;}
 }
 
 div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
@@ -833,16 +841,6 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   font-style:         normal;
   clear:              both;
 }
-
-.editbox {
-  width:              auto;
-  background-color:   #f7f7f8;
-  margin:             2px;
-  padding:            0 2px;
-  text-align:         left;
-}
-.editbox:empty { display: none; } /* If empty after JS post-processing, hide */
-p .editbox { line-height: 1.2rem; vertical-align: baseline; font-size: 9pt; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: green;}
@@ -869,6 +867,7 @@ span.cm-scheme-rparen                     { color: black;}
 .cm-function-name                         { color: #374049; }
 .cm-unterminated-string                   { color: red; font-weight: bold; }
 .pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
+* + .pyretkeyword { margin-left: 1ex;}
 
 /* class for tables containing Pyret data */
 table.pyret-table {
@@ -910,7 +909,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 }
 
 .codetwo {
-  font-family: Hack, "Courier New", monospace;
+  font-family: @code-font;
   font-size: 0.85rem;
   background-color: #f7f7f8;
   color: #666;
@@ -948,7 +947,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       #body { padding-bottom:  10in; }  
       /* adjust colors */
       h2 {
-        background-color: #75328A77;
+        background-color: @translucent-bg-color;
         color: white;
         font-weight: 600;
         cursor: pointer;
@@ -1059,6 +1058,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
       font-size:    12pt;
       padding-left: 5px;
     }
+    .recipe_condition *::before, *::after { color: black !important; }
   }
   /* Page Breaks for printed lesson plans, projects, and TR pages */
   h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }

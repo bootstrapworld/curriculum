@@ -256,7 +256,8 @@ function checkmd5nochange() {
   fi
 }
 
-if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
+# ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs
+if true; then
   # if $NATLANG != en-us, and
   # shared/langs/$NATLANG isn't sufficiently populated,
   # we'll put in the en-us files first and shadow them later
@@ -298,7 +299,8 @@ if test ! -d distribution/$NATLANG/extlib/mathjax; then
   fi
 fi
 
-if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
+# ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib
+if true; then
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
     $TOPDIR/lib/.hta* $PROGDIR
