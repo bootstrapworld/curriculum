@@ -237,9 +237,9 @@ function checkmd5nochange() {
   test -d $distDir/.cached || mkdir -p $distDir/.cached
   local savef=$distDir/.cached/.checksum.md5txt
   local currdir=$(pwd)
-  cd $repoDir
+  cd "$repoDir"
   newchecksum=$(find . -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
-  cd $currdir
+  cd "$currdir"
   if test -f $savef; then
     savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
@@ -1911,21 +1911,21 @@ function copylessondir() {
   lessonDir=${repoDir#*lessons/}
   lessonDir=${lessonDir#*/}
   # echo doing copylessondir $lessonDir in $(pwd)
-  local repoLessonDir=$repoDir/langs/$NATLANG
-  if test ! -d $repoLessonDir -a $NATLANG != en-us; then
-    repoLessonDir=$repoDir/langs/en-us
+  local repoLessonDir="$repoDir"/langs/$NATLANG
+  if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
+    repoLessonDir="$repoDir"/langs/en-us
   fi
 
   # echo repoLessonDir is $repoLessonDir
   test -d "$repoLessonDir" || return
 
-  test $FORCE && rm -fr $lessonDir
+  test $FORCE && rm -fr "$lessonDir"
 
-  mkdir -p $lessonDir
+  mkdir -p "$lessonDir"
   #echo $repoLessonDir is a diry
   DOCOPYDIR=1
   #echo calling checkmd5nochange $lessonDir $repoLessonDir
-  if checkmd5nochange $lessonDir $repoLessonDir; then
+  if checkmd5nochange "$lessonDir" "$repoLessonDir"; then
     #echo $lessonDir doesnt need copying
     DOCOPYDIR=
   fi
@@ -1934,9 +1934,9 @@ function copylessondir() {
   if test $DOCOPYDIR; then
     #echo do copydir into $(pwd)
     overwrite preparing $lessonDir
-    find $lessonDir/solution-pages -name \*.adoc -delete 2>/dev/null
-    $CP -pr $repoLessonDir/* $lessonDir
-    cd $lessonDir
+    find "$lessonDir"/solution-pages -name \*.adoc -delete 2>/dev/null
+    $CP -pr "$repoLessonDir"/* "$lessonDir"
+    cd "$lessonDir"
     #echo I currently in $(pwd)
     # we'll set it again when we do the adoc'ing
     mkdir -p .cached
@@ -1948,7 +1948,7 @@ function copylessondir() {
     test -d pages || mkdir pages
     for subdir in *; do
       if test "$subdir" = pages -o "$subdir" = solution-pages; then
-        test -d $subdir/.cached || mkdir $subdir/.cached
+        test -d "$subdir"/.cached || mkdir "$subdir"/.cached
       fi
     done
     cd ..
@@ -1956,24 +1956,24 @@ function copylessondir() {
 
   local proglangs=pyret
   local firstproglang=pyret
-  if test -f $lessonDir/proglang.txt; then
-    proglangs=$(cat $lessonDir/proglang.txt)
+  if test -f "$lessonDir"/proglang.txt; then
+    proglangs=$(cat "$lessonDir"/proglang.txt)
     firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   fi
   if test "$firstproglang" = pyret; then
-    touch $lessonDir/.cached/.primarylesson
+    touch "$lessonDir"/.cached/.primarylesson
   fi
 
   local lessonDirPl=
   for pl in $proglangs; do
-    lessonDirPl=$lessonDir
+    lessonDirPl="$lessonDir"
     if test "$pl" != pyret; then
-      lessonDirPl=$lessonDir-$pl
-      if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
-        mkdir -p $lessonDirPl
-        find $lessonDirPl/solution-pages -name \*.adoc -delete 2>/dev/null
-        $CP -pr $repoLessonDir/* $lessonDirPl
-        cd $lessonDirPl
+      lessonDirPl="$lessonDir"-$pl
+      if test -n "$DOCOPYDIR" -o ! -d "$lessonDirPl"; then
+        mkdir -p "$lessonDirPl"
+        find "$lessonDirPl"/solution-pages -name \*.adoc -delete 2>/dev/null
+        $CP -pr "$repoLessonDir"/* "$lessonDirPl"
+        cd "$lessonDirPl"
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
@@ -1984,13 +1984,13 @@ function copylessondir() {
         test -d pages || mkdir pages
         for subdir in *; do
           if test "$subdir" = pages -o "$subdir" = solution-pages; then
-            test -d $subdir/.cached || mkdir $subdir/.cached
+            test -d "$subdir"/.cached || mkdir "$subdir"/.cached
           fi
         done
         cd ..
       fi
     fi
-    cd $lessonDirPl
+    cd "$lessonDirPl"
     for subdir in *; do
       if test -d "$subdir"; then
         adjustproglangsubdirs "$subdir" "$pl"
@@ -2001,15 +2001,15 @@ function copylessondir() {
 
   for pl in $proglangs; do
     if test "$pl" = pyret; then
-      lessonDirPl=$lessonDir
+      lessonDirPl="$lessonDir"
     else
-      lessonDirPl=$lessonDir-$pl
+      lessonDirPl="$lessonDir"-$pl
     fi
-    if test -d $lessonDirPl; then
+    if test -d "$lessonDirPl"; then
       if test "$PROGLANG" = "$pl" -o "$PROGLANG" = all; then
         echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
-        cd $lessonDirPl
-        checklessonplan $lessonDirPl
+        cd "$lessonDirPl"
+        checklessonplan "$lessonDirPl"
         cd ..
       fi
     fi
@@ -2019,11 +2019,13 @@ function copylessondir() {
 
 function copylessonrecdir() {
   d=$1
-  if test -d $d/langs; then
-    copylessondir $d
+  if test -d "$d"/langs; then
+    copylessondir "$d"
   else
-    for sd in $d/*; do
-      copylessonrecdir $sd
+    for sd in "$d"/*; do
+      if test -d "$sd"; then
+        copylessonrecdir "$sd"
+      fi
     done
   fi
 }
@@ -2162,7 +2164,7 @@ function copycommonlessons() {
   # TODO(Dorai): check if these calls can be parallelized
   if test $NOARGSGIVEN; then
     for lessonDir in $TOPDIR/lessons/*; do
-      copylessonrecdir $lessonDir
+      copylessonrecdir "$lessonDir"
     done
   else
     for pwy in $ARGS; do
