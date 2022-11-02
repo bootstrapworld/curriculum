@@ -1261,6 +1261,8 @@ function buildworkbookpages() {
   local L=$1
   local oldPROGLANG="$PROGLANG"
 
+  # echo doing buildworkbookpages $L
+
   if test "$PROGLANG" != all; then
     for f in $L/.cached/.proglang-*; do
       if test -f "$f"; then
@@ -1304,23 +1306,25 @@ function buildworkbookpages() {
 
   # echo calling mkdirsolutionversion in buildworkbookpages
   mkdirsolutionversion
+  fi
 
   addToPuppeteer
 
-  #
-  export PATHWAYROOTDIR="../../"
-  export DISTROOTDIR="$DISTROOTDIR../"
-  export SOLUTION=
-  export WORKBOOKPAGE=1
+  if test $DORECURSIVEADOC; then
+    #
+    export PATHWAYROOTDIR="../../"
+    export DISTROOTDIR="$DISTROOTDIR../"
+    export SOLUTION=
+    export WORKBOOKPAGE=1
 
-  for d in *; do
-    if test -d "$d"; then
-      #echo calling recursiveadoc from buildworkbookpages
-      recursiveadoc "$d" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
-    fi
-  done
+    for d in *; do
+      if test -d "$d"; then
+        #echo calling recursiveadoc from buildworkbookpages
+        recursiveadoc "$d" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+      fi
+    done
 
-  export WORKBOOKPAGE=
+    export WORKBOOKPAGE=
 
   fi
 
