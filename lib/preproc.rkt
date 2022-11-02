@@ -2375,7 +2375,7 @@
   (unless (empty? dict-standards-met) ;can it ever be empty?
     (fprintf op "\n[.~a.standards-~a]\n"
              (if *lesson* "alignedStandards" "coverageElement")
-             dict)
+             (sanitize-css-id dict))
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
     ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
@@ -2428,22 +2428,21 @@
                 (fprintf o ". ")
                 (fprintf o "{startsb}See: ~a.{endsb}\n"
                          (string-join
-                           (map
-                             (lambda (x)
-                               (let ([ltitle (list-ref x 0)]
-                                     [lesson (list-ref x 1)]
-                                     [pwy (list-ref x 2)])
-                                 (cond [pwy
-                                         (cond [(string=? pwy "algebra-pyret")
-                                                (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                               [(string=? pwy "algebra-wescheme")
-                                                (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                         (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                  lesson ltitle)]
-                                       [else
-                                         (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                 lesson *target-pathway* ltitle)])))
-                             chapter-lessons) ";")))])))
+                           (filter identity
+                             (map
+                               (lambda (x)
+                                 (let ([ltitle (list-ref x 0)]
+                                       [lesson (list-ref x 1)]
+                                       [pwy (list-ref x 2)])
+                                   (cond [pwy
+                                           (and (file-exists?
+                                                  (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                        lesson ltitle))]
+                                         [else
+                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                   lesson *target-pathway* ltitle)])))
+                               chapter-lessons)) ";")))])))
     (fprintf o "\n\n")))
 
 (define (create-practices-section practice-categ practices o)
@@ -2465,22 +2464,21 @@
                   (fprintf o ". ")
                   (fprintf o "{startsb}See: ~a.{endsb}\n"
                            (string-join
-                             (map
-                               (lambda (x)
-                                 (let ([ltitle (list-ref x 0)]
-                                       [lesson (list-ref x 1)]
-                                       [pwy (list-ref x 2)])
-                                   (cond [pwy
-                                           (cond [(string=? pwy "algebra-pyret")
-                                                  (set! ltitle (string-append ltitle "^(Pyret)^"))]
-                                                 [(string=? pwy "algebra-wescheme")
-                                                  (set! ltitle (string-append ltitle "^(WeScheme)^"))])
-                                           (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                   lesson ltitle)]
-                                         [else
-                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                   lesson *target-pathway* ltitle)])))
-                               p-lessons) ";")))])))
+                             (filter identity
+                               (map
+                                 (lambda (x)
+                                   (let ([ltitle (list-ref x 0)]
+                                         [lesson (list-ref x 1)]
+                                         [pwy (list-ref x 2)])
+                                     (cond [pwy
+                                             (and (file-exists?
+                                                    (format "lessons/~a/.cached/.primarylesson" lesson))
+                                                  (format " link:lessons/pass:[~a]/index.shtml[~a]"
+                                                          lesson ltitle))]
+                                           [else
+                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
+                                                     lesson *target-pathway* ltitle)])))
+                                 p-lessons)) ";")))])))
     (fprintf o "\n\n")))
 
 (define (display-standards-selection o *narrative* *dictionaries-represented*)
@@ -2508,12 +2506,12 @@
                  (if (null? *dictionaries-represented*) ""
                      (let ([first-dict (first *dictionaries-represented*)])
                        (enclose-tag "option" ""
-                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" first-dict)
+                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" (sanitize-css-id first-dict))
                          first-dict)))
                  (string-join
                    (map (lambda (dict)
                           (enclose-tag "option" ""
-                            #:attribs (format "value=\"standards-~a\"" dict)
+                            #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
                             dict))
                         (if (null? *dictionaries-represented*) '()
                             (rest *dictionaries-represented*)))
@@ -2574,7 +2572,7 @@
   (newline o))
 
 (define (sanitize-css-id id)
-  (regexp-replace* "\\." id "_"))
+  (regexp-replace* "[. ]" id "_"))
 
 (define (display-alignments-selection o)
   ; (printf "doing display-alignments-selection\n")

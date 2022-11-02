@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-10-18 # last modified
+LASTMOD=2022-11-01 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -43,6 +43,8 @@ fi
 if test -f ./.build-pathway.env; then
   . ./.build-pathway.env
 fi
+
+BADPATHWAYARG=
 
 while test $# -ne 0; do
   arg=$1; shift
@@ -93,7 +95,12 @@ while test $# -ne 0; do
     if test "$arg1" != "$arg"; then
       echo Mistyped option \'$arg\'?
     fi
-    ARGS="$ARGS $arg"
+    if test -d pathways/$arg; then
+      ARGS="$ARGS $arg"
+    else
+      BADPATHWAYARG=1
+      echo WARNING: Skipping nonexistent pathway $arg
+    fi
   fi
 done
 
@@ -186,6 +193,7 @@ fi
 NOARGSGIVEN=
 
 if test "$ARGS" = ""; then
+  test -n "$BADPATHWAYARG" && exit
   NOARGSGIVEN=1
   ARGS=$(ls -d pathways/*)
 fi
@@ -256,12 +264,6 @@ if ! checkmd5nochange $PROGDIR $TOPDIR/shared/langs; then
   $CP -pr $TOPDIR/shared/langs/en-us/* $PROGDIR
   $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   #
-  for f in distribution/$NATLANG/lib/*.less; do
-    if test -f "$f"; then
-      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
-    fi
-  done
-  #
   if test $NATLANG != en-us -a -d $TOPDIR/shared/langs/$NATLANG; then
     $CP -pr $TOPDIR/shared/langs/$NATLANG/* $PROGDIR
   fi
@@ -298,10 +300,15 @@ fi
 
 if ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib; then
   overwrite copying distribution/$NATLANG/lib
-  $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
     $TOPDIR/lib/.hta* $PROGDIR
-  $CP -p $TOPDIR/lib/*.png $TOPDIR/lib/*.css $TOPDIR/lib/*.js distribution/$NATLANG/lib
+  $CP -p $TOPDIR/lib/*.css $TOPDIR/lib/*.js* $TOPDIR/lib/*.less $TOPDIR/lib/*.png distribution/$NATLANG/lib 2>/dev/null
+  for f in distribution/$NATLANG/lib/*.less; do
+    if test -f "$f"; then
+      $TOPDIR/node_modules/less/bin/lessc "$f" "${f%.less}.css"
+    fi
+  done
+  $CP -p $TOPDIR/shared/langs/en-us/*.css distribution/$NATLANG/lib
 fi
 
 function insertbodyid() {
@@ -2147,9 +2154,11 @@ function copycommonlessons() {
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
-      for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
-        copylessondir $lessonDir
-      done
+      if test -f $lessonOrderFile; then
+        for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/\(;\|\/\/\).*//'|grep -v '^ *$'); do
+          copylessondir $lessonDir
+        done
+      fi
     done
   fi
 
@@ -2542,17 +2551,17 @@ function allthealignments() {
 
     f=$d/.cached/.standards-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-standards.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-standards.txt
     fi
 
     f=$d/.cached/.textbooks-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-textbooks.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-textbooks.txt
     fi
 
     f=$d/.cached/.practices-in-pathway.txt.kp
     if test -f $f; then
-      $SED -e "s/)\$/ \"$db\")/" $f >> .cached/.all-practices.txt
+      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-practices.txt
     fi
   done
 
@@ -2879,6 +2888,12 @@ function callonpathway() {
   # echo doing callonpathway $SUBROUTINE for $SRCPATHWAY in $(pwd)
 
   local REPOPATHWAY=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG
+
+  if test ! -d $REPOPATHWAY; then
+    echo WARNING: Skipping nonexistent pathway $REPOPATHWAY
+    echo
+    return
+  fi
 
   local PATHWAYPROGLANGSFILE=$REPOPATHWAY/proglang.txt
 

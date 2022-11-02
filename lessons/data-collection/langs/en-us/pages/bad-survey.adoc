@@ -2,6 +2,8 @@
 
 The @starter-file{bad-survey} has __lots__ of problems, which can lead to many kinds of dirty data: Missing Data, Inconsistent Types, Inconsistent Units and Inconsistent Language! Try filling it out with bad data. Record the problems and make some recommendations for how to improve the survey!
 
+*NOTE: make sure your teachers gives you a link to their _own copy_ of the survey. You should be able to the data after you submit it!*
+
 [.FillVerticalSpace, cols="^.^2a,10a,11a", options="header"]
 |===
 |Question
@@ -9,19 +11,19 @@ The @starter-file{bad-survey} has __lots__ of problems, which can lead to many k
 | How could the survey be improved to avoid bad data?
 
 |*A*
-| @ifsoln{Inconsistent types ("A", true, etc) and Units ("18 wheels")}
-| @ifsoln{Add some kind of restriction so only valid answers can be submitted}
+| @ifsoln{*Inconsistent Types* I could enter 13 as an answer (a number), but I could also enter “teenager” (a string). This would mess up anyone who is trying to find the median age of the survey, for example. *Inconsistent Units* I could also enter "13 years" or "4,745 days".}
+| @ifsoln{Add some kind of input validation so only valid answers can be submitted}
 
 |*B*
-| @ifsoln{Inconsistent types (select more than one grade!)}
+| @ifsoln{*Inconsistent Types*  I could select 5 or 6, but I can also select both grades. That means the resulting column might have lots of numbers….and then a few cells that look like “5, 6” (a string).}
 | @ifsoln{Use a dropdown, or some other format that only allows single responses}
 
 |*C*
-| @ifsoln{Inconsistent units (10 -- maybe that's millimeters?)}
-| @ifsoln{Do not accept wildly unlikely values}
+| @ifsoln{*Inconsistent Units* The questions for inches, but people don't always read carefully. There's nothing to stop someone from submitting "1.5" (maybe they're thinking of meters?) or "2000" (millimeters?).}
+| @ifsoln{Add validation so impossible values get rejected}
 
 |*D*
-| @ifsoln{Inconsistent types ("hello", false, etc), Inconsistent unts ("2 miles")}
-| @ifsoln{Add some kind of restriction so only valid answers can be submitted}
+| @ifsoln{*Inconsistent Types* Nothing to stop someone from answering with numbers, strings, booleans, etc. *Inconsistent Units* Someone could easily answer with a number of inches, feet, meters, etc.}
+| @ifsoln{Add some kind of input validation so only valid answers can be submitted}
 
 |===

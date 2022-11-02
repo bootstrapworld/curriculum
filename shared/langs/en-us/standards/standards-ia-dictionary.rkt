@@ -10,7 +10,6 @@
 
 (define *iowa-standards-list*
   `(
-
     ; prefix the Common Core Math and ELA standards
     ,@(map iowa-prefix *cc-math-standards-list*)
     ,@(map iowa-prefix *cc-ela-standards-list*)

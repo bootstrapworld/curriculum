@@ -96,6 +96,7 @@
     ("5.G.B.4"
      "Classify two-dimensional figures in a hierarchy based on properties."
      )
+    ; Grade 5
     ("6.RP.A"
      "Understand ratio concepts and use ratio reasoning to solve problems."
      )
@@ -267,6 +268,8 @@
     ("6.SP.B.5.D"
      "Summarize numerical data sets in relation to their context by relating the choice of measures of center and variability to the shape of the data distribution and the context in which the data were gathered."
      )
+
+    ; Grade 7
     ("7.RP.A"
      "Analyze proportional relationships and use them to solve real-world and mathematical problems."
      )
@@ -423,6 +426,8 @@
     ("7.SP.C.8.C"
      "Design and use a simulation to generate frequencies for compound events."
      )
+
+    ; Grade 8
     ("8.NS.A"
      "Know that there are numbers that are not rational, and approximate them by rational numbers."
      )

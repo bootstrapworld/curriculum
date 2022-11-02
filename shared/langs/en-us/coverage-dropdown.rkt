@@ -23,6 +23,10 @@
       "  preselect('coverageElement');\n"
       "}\n"
 
+      "function sanitizeCSSId(id) {\n"
+      "  return id.replace(/[. ]/g, '_');\n"
+      "}\n"
+
       "function showCoverageAlignment() {\n"
       "  const selectTag = document.getElementsByClassName('coverageAlignmentSelect')[0];\n"
       "  const options = selectTag && selectTag.options;\n"
@@ -35,7 +39,7 @@
       "  for (let i = 0; i < options.length; i++) {\n"
       "    const opt = options[i];\n"
       "    if (opt.selected) {\n"
-      "      const optStd = opt.value;\n"
+      "      const optStd = sanitizeCSSId(opt.value);\n"
       "      for (let j = 0; j < stdTables.length; j++) {\n"
       "        const stdTable = stdTables[j];\n"
       "        if (stdTable.classList.contains(optStd)) {\n"
