@@ -49,9 +49,9 @@
 
 
 
-(call-with-output-file "dictionaries.json"
+(call-with-output-file "dictionaries.js"
   (lambda (o)
-    (fprintf o "{\n")
+    (fprintf o "var dictionaries = {\n")
     (fprintf o "  \"standards\": {\n")
     (display-sublist *standards-list* o)
     (fprintf o "  },\n")
