@@ -2080,7 +2080,7 @@
                           (map first *standards-list*))))
 
               (when *lesson-plan*
-                (create-standards-subfile)
+                ;(create-standards-subfile)
                 (create-textbooks-subfile)
                 (create-practices-subfile))
 
@@ -2503,20 +2503,7 @@
                #:attribs
                ;(format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
                " onchange=\"showStandardsAlignment()\""
-               (string-append
-                 (if (null? *dictionaries-represented*) ""
-                     (let ([first-dict (first *dictionaries-represented*)])
-                       (enclose-tag "option" ""
-                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" (sanitize-css-id first-dict))
-                         first-dict)))
-                 (string-join
-                   (map (lambda (dict)
-                          (enclose-tag "option" ""
-                            #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
-                            dict))
-                        (if (null? *dictionaries-represented*) '()
-                            (rest *dictionaries-represented*)))
-                   "")))
+               "")
              o)
     (newline o)
     (when narrative?
@@ -2649,6 +2636,7 @@
         ))
     #:exists 'replace))
 
+
 (define (create-standards-subfile-port o)
   (unless (empty? *standards-met*)
 
@@ -2683,12 +2671,13 @@
           practice-categ
           practices-in-this-categ o)))))
 
-(define (create-standards-subfile)
-  (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])
+;; TODO(DELETE)
+;(define (create-standards-subfile)
+;  (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])
     ; (printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
     ; (printf "standards-met= ~s\n\n\n" *standards-met*)
     ; (printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
-    (call-with-output-file file create-standards-subfile-port #:exists 'replace)))
+    ;(call-with-output-file file create-standards-subfile #:exists 'replace)))
 
 (define (create-textbooks-subfile)
   (let ([subf (build-path *containing-directory* ".cached" ".index-textbooks.asc")])
