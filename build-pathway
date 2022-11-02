@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-01 # last modified
+LASTMOD=2022-11-02 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1905,11 +1905,15 @@ function rmtmpfiles() {
 }
 
 function copylessondir() {
-  lessonDir=$1
+  repoDir=$1
+  test -z "$repoDir" && return
+  test -d "$repoDir" || return
+  lessonDir=${repoDir#*lessons/}
+  lessonDir=${lessonDir#*/}
   # echo doing copylessondir $lessonDir in $(pwd)
-  local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$NATLANG
+  local repoLessonDir=$repoDir/langs/$NATLANG
   if test ! -d $repoLessonDir -a $NATLANG != en-us; then
-    repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/en-us
+    repoLessonDir=$repoDir/langs/en-us
   fi
 
   # echo repoLessonDir is $repoLessonDir
@@ -2011,6 +2015,17 @@ function copylessondir() {
     fi
   done
   #echo done copylessondir
+}
+
+function copylessonrecdir() {
+  d=$1
+  if test -d $d/langs; then
+    copylessondir $d
+  else
+    for sd in $d/*; do
+      copylessonrecdir $sd
+    done
+  fi
 }
 
 function collectworkbookpages() {
@@ -2147,8 +2162,7 @@ function copycommonlessons() {
   # TODO(Dorai): check if these calls can be parallelized
   if test $NOARGSGIVEN; then
     for lessonDir in $TOPDIR/lessons/*; do
-      lessonDir=${lessonDir#*lessons/}
-      copylessondir $lessonDir
+      copylessonrecdir $lessonDir
     done
   else
     for pwy in $ARGS; do
@@ -2158,7 +2172,8 @@ function copycommonlessons() {
       fi
       if test -f $lessonOrderFile; then
         for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/\(;\|\/\/\).*//'|grep -v '^ *$'); do
-          copylessondir $lessonDir
+          repoDir=$(find $TOPDIR/lessons -type d -name $lessonDir)
+          copylessondir $repoDir
         done
       fi
     done
