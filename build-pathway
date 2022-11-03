@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-02 # last modified
+LASTMOD=2022-11-03 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2409,14 +2409,6 @@ function buildpathway() {
       cd resources
       test -d pages || mkdir -p pages
       mkdirsolutionversion
-      for d in *; do
-        if test -d $d; then
-          cd $d
-          mkdirsolutionversion
-          cd ..
-          #adjustproglangsubdirs $d
-        fi
-      done
       cd ..
       adjustproglangsubdirs resources $PROGLANG
     fi
