@@ -7,7 +7,7 @@
 (require "common-defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
-;(require "create-workbook-links.rkt")
+(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
@@ -2287,10 +2287,9 @@
     ; (link-to-opt-projects o)
 
     (unless (null? exx)
-      ; FIXME: should make this natlang-dependent
-      (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
-      (display "and we provide password-protected **link:./protected/workbook-sols.pdf.html[Workbook Solutions]** as well.\n\n" o)
-      (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
+      (display "\n\n" o)
+      (display (create-workbook-links) o)
+      (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
         ; (printf "lsn-exx is ~s\n" lsn-exx)
