@@ -674,7 +674,6 @@
      )
 
     ;;;;;;;;;;;;;;;;;;;   NGSS standards-and-lessons  ;;;;;;;;;;;;;;;;
-    ngss
 
     ("MS-SEP1-8" 
       "hoc-data"
