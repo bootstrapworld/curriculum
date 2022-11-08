@@ -1760,7 +1760,7 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
-                            (print-ordering-workbooks *target-pathway* o)]
+                            (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
                             (create-alignments-subfile
                               (string-append *containing-directory* "/.cached/.pathway-alignments"))
@@ -2091,7 +2091,7 @@
                 (link-to-lessons-in-pathway o)
                 (create-alignments-subfile
                   (string-append *containing-directory* "/.cached/.pathway-alignments"))
-                (print-ordering-workbooks *target-pathway* o)
+                (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-other-resources o))
