@@ -291,6 +291,12 @@ function overwrite() {
   fi
 }
 
+# check for repartee
+if test -d $TOPDIR/node_modules; then
+  rm -r lessons/hoc-winter-parley/langs/$NATLANG/repartee
+  $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+fi
+
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
   if test -d $TOPDIR/node_modules; then
     $CP -pr $TOPDIR/node_modules/mathjax distribution/$NATLANG/extlib
