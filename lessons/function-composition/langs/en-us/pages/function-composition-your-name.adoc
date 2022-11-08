@@ -2,33 +2,22 @@
 
 ++++
 <style>
-p .editbox { font-size: 9pt; }
 .center {padding: 0;}
-
-.demo td, .demo td>p { padding: 0 !important; margin: 0 !important; }
 
 .contracts td { padding: 0 !important; }
 .contracts .editbox { background: none; }
 .contracts { background-color: #f7f7f8 !important; }
 
-.grid tr td {padding: 0 0.625em; }
-.grid tr:nth-child(1){ height: calc(6.5in * 0.33); }
-.grid tr:nth-child(2){ height: calc(6.5in * 0.66); }
+#content table .autonum::after { content: ')'; }
 
-/* Necessary rules to force the code solution to the bottom of the row */
-.grid td { position: relative; }
-.grid .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
+/* Give more space for the bottom row */
+table { grid-template-rows: 2fr 3fr !important; }
 
-div.circleevalsexp .value {
-  display:            inline-block;
-  margin:             2px 5px;
-  vertical-align:     top;
-}
-table .autonum:after { content: ") "; }
-
-br:first-child { display: none; }
+/* Force the code solution to the bottom of the row */
+.content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
 </style>
 ++++
+
 @do{
 	(define name-sexp '(text "X" 30 "red"))
 }
@@ -52,16 +41,16 @@ You’ll be investigating these functions with your partner:
 
 @n In the editor, write the code to make an image of your name in big letters in a color of your choosing using `text`.  Then draw the Circle of Evaluation and write the Code that will create the image.
 
-*Circle of Evaluation:*
+*Circle of Evaluation for an "image of your name":*
 
 @showsoln{(coe name-sexp) }
 @vspace{7ex}
 
-*Code:* @fitb{}{@showsoln{(code name-sexp)}}
+*Code for an "image of your name":* @fitb{}{@showsoln{(code name-sexp)}}
 
 Using the "image of your name" described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Test your ideas in the editor to make sure they work.
 
-[.grid, cols="1a,1a",stripes="none"]
+[.FillVerticalSpace, cols="1a,1a",stripes="none"]
 |===
 
 | @n The framed "image of your name".
