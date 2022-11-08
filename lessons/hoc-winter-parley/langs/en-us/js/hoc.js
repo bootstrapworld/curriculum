@@ -7,6 +7,7 @@ window.onload = () => {
   cards     = [].slice.call(slider.children);           // an array of all the cards
   editor    = document.createElement("div");
   parley    = window.embedableParley.renderParley(editor);
+  parley._dispatch({type: 'update', key: 'updater', value: (s) => ({ ...s, enterNewline: false })});
   parley.onReady(() => clearLoadingScreenAndRun());
   righthand = document.getElementById("righthand");
   updateSliderAndButtons();
