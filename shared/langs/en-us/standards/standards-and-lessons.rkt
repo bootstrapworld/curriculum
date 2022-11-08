@@ -53,8 +53,17 @@
      ;"Apply the formulas V = l × w × h and V = b × h for rectangular prisms to find volumes of right rectangular prisms with whole-number edge lengths in the context of solving real world and mathematical problems."
      ;Rachel?
      )
+    (,(all-cc-states "5.G.A")
+     "hoc-winter-parley"
+     )
     (,(all-cc-states "5.G.A.1")
      "coordinates"
+     )
+    (,(all-cc-states "5.G.A.2")
+     "hoc-winter-parley"
+     )
+    (,(all-cc-states "5.G.B")
+     "hoc-winter-parley"
      )
 
     ; Grade 6
@@ -117,12 +126,18 @@
      ;"Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
      ;Rachel?
      )
+     (,(all-cc-states "6.NS.C.6.C")
+     "hoc-winter-parley"
+     )
     (,(all-cc-states "6.RP.A")
      "bar-and-pie-charts"
      "flags"
      )
     (,(all-cc-states "6.RP.A.1")
      "flags"
+     )
+    (,(all-cc-states "6.RP.A.3")
+     "hoc-data"
      )
     (,(all-cc-states "6.RP.A.3.D")
      "flags"
@@ -206,6 +221,9 @@
      "functions-can-be-linear"
      "function-definition-linear"
      )
+    (,(all-cc-states "7.RP.A.3")
+     "hoc-data"
+     )
     (,(all-cc-states "7.EE.A")
      ;"Use properties of operations to generate equivalent expressions."
      ;Rachel?
@@ -228,6 +246,9 @@
      "functions-dr"
      "functions-make-life-easier"
      )
+    (,(all-cc-states "7.G.A")
+     "hoc-winter-parley"
+     )
     (,(all-cc-states "7.G.B.4")
      "functions-dr"
      )
@@ -243,6 +264,7 @@
      )
     (,(all-cc-states "7.SP.A.1")
      "random-samples"
+     "hoc-data"
      )
     (,(all-cc-states "7.SP.A.2")
      "random-samples"
@@ -252,6 +274,7 @@
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
+     "hoc-data"
      )
     (,(all-cc-states "7.SP.B.3")
      ;"Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability."
@@ -585,6 +608,7 @@
     (,(all-cc-states "HSS.ID.B.6")
      "scatter-plots"
      "correlations"
+     "hoc-data"
      )
     (,(all-cc-states "HSS.ID.B.6.A")
      "linear-regression"
@@ -625,6 +649,7 @@
      )
     (,(all-cc-states "HSS.IC.B")
      "data-collection"
+     "hoc-data"
      )
     (,(all-cc-states "HSS.IC.B.3")
      "data-collection"
@@ -1533,6 +1558,12 @@
     )
 
     ;;;;;;;;;;;;;;;;;;;  CSTA Standards ;;;;;;;;;;;;;;;;;;
+    ("1B-AP-12"
+     "hoc-winter-parley"
+     )
+    ("1B-AP-15"
+     "hoc-winter-parley"
+     )
     ("1B-AP-17"
      "re-functions-that-ask-questions"
      "re-intro-to-data-structures"
@@ -1544,6 +1575,7 @@
      "project-exploration-paper"
      "scatter-plots"
      "linear-regression"
+     "hoc-data"
      )
     ("1B-IC-18"
      "project-research-paper"
@@ -1660,6 +1692,9 @@
      "project-research-paper"
      "project-exploration-paper"
      "choosing-your-dataset"
+     )
+    ("3A-DA-09"
+     "hoc-winter-parley"
      )
     ("3A-DA-11"
      "project-research-paper"
@@ -1976,6 +2011,9 @@
     ("6-8.Computing Systems.Troubleshooting"
      "checking-your-work"
      )
+    ("6-8.Computing Systems.Devices"
+     "hoc-data"
+     )
     ("6-8.Algorithms and Programming.Variables"
      "re-intro-to-data-structures"
      "defining-values"
@@ -1988,6 +2026,7 @@
      "re-key-events"
      "re-timers"
      "re-timers"
+     "hoc-winter-parley"
      )
     ("6-8.Algorithms and Programming.Modularity"
      "re-refactoring"
