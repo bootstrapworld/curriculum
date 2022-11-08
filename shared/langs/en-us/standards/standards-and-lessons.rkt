@@ -22,35 +22,28 @@
      "order-of-operations"
      )
     (,(all-cc-states "5.MD.B")
-     ;"Represent and interpret data."
      ;Flannery?
      )
     (,(all-cc-states "5.MD.C")
-     ;"Geometric measurement: understand concepts of volume."
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.3")
-     ;"Recognize volume as an attribute of solid figures and understand concepts of volume measurement."
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.3.A")
-     ;"A cube with side length 1 unit, called a "unit cube," is said to have "one cubic unit" of volume, and can be used to measure volume."
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.5")
-     ;"A solid figure which can be packed without gaps or overlaps using n unit cubes is said to have a volume of n cubic units."
+      ;FIXME: did you mean 5.MD.C.3.B ? Otherwise this is a repeat
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.5")
-     ;"Relate volume to the operations of multiplication and addition and solve real world and mathematical problems involving volume."
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.5.A")
-     ;"Find the volume of a right rectangular prism with whole-number side lengths by packing it with unit cubes, and show that the volume is the same as would be found by multiplying the edge lengths, equivalently by multiplying the height by the area of the base. Represent threefold whole-number products as volumes, e.g., to represent the associative property of multiplication."
      ;Rachel?
      )
     (,(all-cc-states "5.MD.C.5.B")
-     ;"Apply the formulas V = l × w × h and V = b × h for rectangular prisms to find volumes of right rectangular prisms with whole-number edge lengths in the context of solving real world and mathematical problems."
      ;Rachel?
      )
     (,(all-cc-states "5.G.A")
@@ -87,27 +80,21 @@
      "functions-make-life-easier"
      )
     (,(all-cc-states "6.EE.A.1")
-     ;"Write and evaluate numerical expressions involving whole-number exponents."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.A.2")
-     ;"Write, read, and evaluate expressions in which letters stand for numbers."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.A.2.A")
-     ;"Write expressions that record operations with numbers and with letters standing for numbers."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.A.2.C")
-     ;"Evaluate expressions at specific values of their variables. Include expressions that arise from formulas used in real-world problems. Perform arithmetic operations, including those involving whole-number exponents, in the conventional order when there are no parentheses to specify a particular order (Order of Operations)."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.A.3")
-     ;"Apply the properties of operations to generate equivalent expressions."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.A.4")
-     ;"Identify when two expressions are equivalent (i.e., when the two expressions name the same number regardless of which value is substituted into them)."
      ;Rachel?
      )
     (,(all-cc-states "6.EE.B")
@@ -115,6 +102,7 @@
      "inequalities2-compound"
      )
     (,(all-cc-states "6.EE.B.5")
+      ; FIXME: did you mean to add this. The comment suggests 6.EE.B, wch is already listed above
      ;"Reason about and solve one-variable equations and inequalities."
      ;Flannery?
      )
@@ -123,7 +111,6 @@
      "inequalities1-simple"
      )
     (,(all-cc-states "6.NS.C.6.A")
-     ;"Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
      ;Rachel?
      )
      (,(all-cc-states "6.NS.C.6.C")
@@ -225,7 +212,6 @@
      "hoc-data"
      )
     (,(all-cc-states "7.EE.A")
-     ;"Use properties of operations to generate equivalent expressions."
      ;Rachel?
      )
     (,(all-cc-states "7.EE.A.2")
@@ -270,20 +256,17 @@
      "random-samples"
      )
     (,(all-cc-states "7.SP.B")
-     ;"Draw informal comparative inferences about two populations."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
      "hoc-data"
      )
     (,(all-cc-states "7.SP.B.3")
-     ;"Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
      )
     (,(all-cc-states "7.SP.B.4")
-     ;"Use measures of center and measures of variability for numerical data from random samples to draw informal comparative inferences about two populations."
      ; We should do this explicitly in more lessons, post-filtering
      "project-exploration-paper"
      "project-research-paper"
@@ -363,15 +346,12 @@
      "flags"
      )
     (,(all-cc-states "HSN.Q.A")
-     ;"Reason quantitatively and use units to solve problems."
      ;Modeling?
      )
     (,(all-cc-states "HSN.Q.A.1")
-     ;"Use units as a way to understand problems and to guide the solution of multi-step problems; choose and interpret units consistently in formulas; choose and interpret the scale and the origin in graphs and data displays."
      ;Modeling?
      )
     (,(all-cc-states "HSN.Q.A.2")
-     ;"Define appropriate quantities for the purpose of descriptive modeling."
      ;Modeling?
      )
     
@@ -390,12 +370,10 @@
      "piecewise-functions-conditionals"
      )
     (,(all-cc-states "HSA.SSE.A.2")
-     ;"Use the structure of an expression to identify ways to rewrite it."
      "order-of-operations"
      ;Rachel?
      )
     (,(all-cc-states "HSA.SSE.B")
-     ;"Write expressions in equivalent forms to solve problems."
      "order-of-operations"
      ;Rachel?
      )
@@ -415,7 +393,6 @@
      "inequalities3-sam"
      )
     ("HSA.REI.A.1"
-     ;"Explain each step in solving a simple equation as following from the equality of numbers asserted at the previous step, starting from the assumption that the original equation has a solution. Construct a viable argument to justify a solution method."
      ; Rachel?
      )
     (,(all-cc-states "HSF.IF.A")
@@ -460,11 +437,9 @@
      "functions-examples-definitions"
      )
     (,(all-cc-states "HSF.IF.C.7.A")
-     ;"Graph linear and quadratic functions and show intercepts, maxima, and minima."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.IF.C.7.E")
-     ;"Graph exponential and logarithmic functions, showing intercepts and end behavior, and trigonometric functions, showing period, midline, and amplitude."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.IF.C.9")
@@ -511,67 +486,51 @@
      "inequalities-collision"
      )
     (,(all-cc-states "HSF.BF.B.4")
-     ;"Find inverse functions."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.BF.B.4.A")
-     ;"Solve an equation of the form f(x) = c for a simple function f that has an inverse and write an expression for the inverse."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.BF.B.4.B")
-     ;"Verify by composition that one function is the inverse of another."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.BF.B.4.C")
-     ;"Read values of an inverse function from a graph or a table, given that the function has an inverse."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.BF.B.4.D")
-     ;"Produce an invertible function from a non-invertible function by restricting the domain."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.BF.B.5")
-     ;"Understand the inverse relationship between exponents and logarithms and use this relationship to solve problems involving logarithms and exponents."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A")
-     ;"Construct and compare linear, quadratic, and exponential models and solve problems."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.1")
-     ;"Distinguish between situations that can be modeled with linear functions and with exponential functions."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.1.A")
-     ;"Prove that linear functions grow by equal differences over equal intervals, and that exponential functions grow by equal factors over equal intervals."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.1.B")
-     ;"Recognize situations in which one quantity changes at a constant rate per unit interval relative to another."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.1.C")
-     ;"Recognize situations in which a quantity grows or decays by a constant percent rate per unit interval relative to another."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.2")
-     ;"Construct linear and exponential functions, including arithmetic and geometric sequences, given a graph, a description of a relationship, or two input-output pairs (include reading these from a table)."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.3")
-     ;"Observe using graphs and tables that a quantity increasing exponentially eventually exceeds a quantity increasing linearly, quadratically, or (more generally) as a polynomial function."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.A.4")
-     ;"For exponential models, express as a logarithm the solution to abct = d where a, c, and d are numbers and the base b is 2, 10, or e; evaluate the logarithm using technology."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.B")
-     ;"Interpret expressions for functions in terms of the situation they model."
      ;Emmanuel?
      )
     (,(all-cc-states "HSF.LE.B.5")
-     ;"Interpret the parameters in a linear or exponential function in terms of a context."
      ;Emmanuel?
      )
     (,(all-cc-states "HSS.ID.A")
@@ -601,7 +560,6 @@
      "histograms"
      )
     (,(all-cc-states "HSS.ID.B")
-     ;"Summarize, represent, and interpret data on two categorical and quantitative variables."
      "scatter-plots"
      "correlations"
      )
@@ -644,7 +602,6 @@
      "random-samples"
      )
     (,(all-cc-states "HSS.IC.A.2")
-     ;"Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation."
      ;Modeling?
      )
     (,(all-cc-states "HSS.IC.B")
@@ -1268,35 +1225,26 @@
      "making-game-images"
     )
     ("MA.3-5.DTC.c.5"
-     ;"Create an artifact that answers a research question and clearly communicates thoughts and ideas."
      ; TODO(Flannery): do any of the social studies lessons align here?
     )
     ("MA.3-5.CT.a.2"
-     ;"Organize information in different ways to make it more useful/relevant (e.g., sorting, tables)."
      ; TODO(Flannery): do any of the social studies lessons align here?
     )
     ("MA.3-5.CT.b.2"
-      ;"Recognize that different solutions exist for the same problem (or sub-problem)."
     )
     ("MA.3-5.CT.c.2"
-     "Individually and collaboratively collect and manipulate data to answer a question using a variety of computing methods (e.g., sorting, totaling, averaging) and tools (such as a spreadsheet) to collect, organize, graph, and analyze data."
     )
     ("MA.3-5.CT.d.2"
-     "Use arithmetic operators, conditionals, and repetition in programs."
     )
     ("MA.3-5.CT.d.3"
-      "Use interactive debugging to detect and correct simple program errors."
     )
     ("MA.3-5.CT.e.1"
-     ;"Individually and collaboratively create a simple model of a system (e.g., water cycle, solar system) and explain what the model shows and does not show."
      ; MODELING!!
     )
     ("MA.3-5.CT.e.2"
-     ;"Identify the concepts, features, and behaviors illustrated by a simulation (e.g., object motion, weather, ecosystem, predator/prey) and those that were not included."
      ; MODELING!!
     )
     ("MA.3-5.CT.e.3"
-     ;"Individually and collaboratively use data from a simulation to answer a question."
      ; MODELING!!
     )
     ("MA.6-8.CAS.b.1"
@@ -1428,15 +1376,12 @@
      "debugging"
     )
     ("MA.6-8.CT.e.1"
-     ;"Create a model of a real-world system and explain why some details, features and behaviors were required in the model and why some could be ignored."
      ; MODELING!
     )
     ("MA.6-8.CT.e.2"
-     ;"Use and modify simulations to analyze and illustrate a concept in depth (e.g., light rays/mechanical waves interaction with materials, genetic variation)."
      ; MODELING!
     )
     ("MA.6-8.CT.e.3"
-     ;"Select and use computer simulations, individually and collaboratively, to gather, view, analyze, and report results for content-related problems (e.g., migration, trade, cellular function)."
      ; MODELING!
     )
     ("MA.9-12.DTC.a.1"
@@ -1479,7 +1424,6 @@
      "re-scoring"
     )
     ("MA.9-12.CT.b.3"
-     ;"Explain how a recursive solution to a problem repeatedly applies the same solution to smaller instances of the problem."
      ; I hope to god we teach this someday
     )
     ("MA.9-12.CT.c.2"
@@ -1549,11 +1493,9 @@
      "functions-dr"
     )
     ("MA.9-12.CT.e.1"
-     ;"Create models and simulations to help formulate, test, and refine hypotheses."
      ; MODELING!
     )
     ("MA.9-12.CT.e.2"
-     ;"Form a model from a hypothesis generated from research and run a simulation to collect and analyze data to test that hypothesis."
      ; MODELING!
     )
 
