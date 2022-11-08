@@ -4,7 +4,6 @@
 <style>
 	td { padding: 0 .5em !important; }
 	td p.tableblock { text-align: left; }
-	tr { height: 8ex; }
 	tr > td:nth-child(2) { vertical-align: top; text-align: left; }
 </style>
 ++++
@@ -13,7 +12,7 @@
 --
 @show{(code 'ellipse)}`{two-colons} Number, Number, String, String -> Image`
 --
-[cols="^.^1a,^.^2a",stripes="none"]
+[.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/ellipse-50-150-outline.png, black outline of an ellipse that's about 3 times as tall as it is wide}
 | Use the contract to write an expression that generates a similar image:
@@ -26,10 +25,10 @@
 @showsoln{(code '(ellipse 150 50 "solid" "black")) }
 
 | What changes with the first Number?
-| @showsoln{"_width_" }
+| @ifsoln{width}
 
 | What about the shape changes with the second Number?
-| @showsoln{"_height_" }
+| @ifsoln{height}
 
 | Write an expression using @show{(code 'ellipse)} to produce a circle.
 | @showsoln{(code '(ellipse 50 50 "solid" "black")) }
@@ -39,7 +38,7 @@
 --
 @show{(code 'regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
 --
-[cols="^.^1a,^.^2a",stripes="none"]
+[.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/reg-polygon-50-5-solid.png, solid black pentagon}
 | Use the contract to write an expression that generates a similar image:
@@ -52,14 +51,14 @@
 @showsoln{(code '(regular-polygon 25 8 "outline" "black")) }
 
 | What changes with the first Number?
-| @showsoln{"_the length of each side_" }
+| @ifsoln{the length of each side}
 
 | What about the shape changes with the second Number?
-| @showsoln{"_the number of sides_" }
+| @ifsoln{the number of sides}
 
 | Use @show{(code 'regular-polygon)} to write an expression for a square!
 | @showsoln{(code '(regular-polygon 50 4 "solid" "black")) }
 
 | How would you describe a *regular polygon* to a friend?
-| @showsoln{"_a closed shape made of equal-length straight lines, all joined at the same angle_"  }
+| @ifsoln{a closed shape made of equal-length straight lines, all joined at the same angle}
 |===

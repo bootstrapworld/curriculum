@@ -4,7 +4,6 @@
 <style>
 	td { padding: 0 .5em !important; }
 	td p.tableblock { text-align: left; }
-	tr { height: 8ex; }
 	tr > td:nth-child(2) { vertical-align: top; text-align: left; }
 </style>
 ++++
@@ -15,7 +14,7 @@ Use the contracts to write expressions to generate images similar to those pictu
 --
 @show{(code 'rhombus)}`{two-colons} Number, Number, String, String -> Image`
 --
-[cols="^.^1,^.^2",stripes="none"]
+[.FillVerticalSpace, cols="^.^1,^.^2",stripes="none"]
 |===
 | @centered-image{../images/rhombus-100-140-solid.png, solid black rhombus, wider than it is tall}
 | @showsoln{(code '(rhombus 100 140 "solid" "black")) }
@@ -27,10 +26,10 @@ Use the contracts to write expressions to generate images similar to those pictu
 | @showsoln{(code '(rhombus 100 90 "solid" "black")) }
 
 | What variable changes with the first Number?
-| @showsoln{"_The length of each side_" }
+| @ifsoln{The length of each side}
 
 | What variable changes with the second Number?
-| @showsoln{"_The top and bottom angle of the rhombus_" }
+| @ifsoln{The top and bottom angle of the rhombus}
 |===
 
 

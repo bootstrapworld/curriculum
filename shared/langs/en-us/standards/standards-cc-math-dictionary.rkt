@@ -58,7 +58,7 @@
      "Recognize volume as an attribute of solid figures and understand concepts of volume measurement."
      )
     ("5.MD.C.3.A"
-     "A cube with side length 1 unit, called a "unit cube," is said to have "one cubic unit" of volume, and can be used to measure volume."
+     "A cube with side length 1 unit, called a \"unit cube,\" is said to have \"one cubic unit\" of volume, and can be used to measure volume."
      )
     ("5.MD.C.3.B"
      "A solid figure which can be packed without gaps or overlaps using n unit cubes is said to have a volume of n cubic units."
