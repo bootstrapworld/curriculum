@@ -17,37 +17,20 @@
           (fprintf o "    ~s: {\n" nickname)
           (let loopj ([j 0])
             (unless (> j last-j)
-              (let ([desc (list-ref lyst j)])
-                (fprintf o "      ~s: ~s~a\n"
-                         (first desc) (second desc)
+              (let ([entry (list-ref lyst j)])
+                (fprintf o "      ~s: {\n" (first entry))
+                (fprintf o "        \"description\": ~s,\n" (second entry))
+                (fprintf o "        \"lessons\": [")
+                (let ([lessons (rest (rest entry))])
+                  (unless (null? lessons)
+                    (fprintf o "~s" (string-join lessons ","))))
+                (fprintf o "]\n")
+                (fprintf o "      }~a\n"
                          (if (= j last-j) "" ",")))
               (loopj (+ j 1))))
           (fprintf o "    }~a\n"
                    (if (= i last-i) "" ","))
           (loop (+ i 1)))))))
-
-(define (display-sublist-obs dictionaries o)
-  ; (printf "doing display-sublist ~s\n" dictionaries)
-  (let ([first? #t])
-    (for ([dictionary dictionaries])
-      (let ([nickname (first dictionary)]
-            ; [full-name (second dictionary)]
-            [lyst (third dictionary)]
-            ; [url (fourth dictionary)] 
-            )
-        ; (printf "doing ~s ~s\n" nickname lyst)
-        (fprintf o "    ~a~s: {\n" (if first? " " ",") nickname)
-        (set! first? #f)
-        (let ([i-first? #t])
-          (for ([desc lyst])
-            (fprintf o "      ~a~s: ~s\n" (if i-first? " " ",") (first desc) (second desc))
-            (set! i-first? #f)
-            )
-          )
-        (fprintf o "    }\n")
-        ))))
-
-
 
 (call-with-output-file "dictionaries.json"
   (lambda (o)
