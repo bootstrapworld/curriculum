@@ -7,16 +7,13 @@
 (require "common-defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
-;(require "create-workbook-links.rkt")
+(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "standards/the-standards-dictionaries.rkt")
-(require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
-(require "standards/standards-and-lessons.rkt")
-(require "textbooks/textbooks-and-lessons.rkt")
-(require "practices/practices-and-lessons.rkt")
+(require "practices/the-practices-dictionaries.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -1547,22 +1544,20 @@
       ;
       (when *lesson-plan*
 
-        (for ([ss-ll *standards-and-lessons*])
-          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
-            (unless (list? ss) (set! ss (list ss)))
-            (when (member *lesson-plan-base* ll)
-              (for ([s ss])
-                (add-standard s #f *lesson-plan* #f)))))
+        (for ([i *standards-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-standard (first j) #f *lesson-plan* #f))))
 
-        (for ([t-ll *textbooks-and-lessons*])
-          (let ([t (first t-ll)] [ll (rest t-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-textbook-chapter t #f *lesson-plan* #f))))
+        (for ([i *textbooks-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-textbook-chapter (first j) #f *lesson-plan* #f))))
 
-        (for ([p-ll *practices-and-lessons*])
-          (let ([p (first p-ll)] [ll (rest p-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-practice p #f *lesson-plan* #f))))
+        (for ([i *practices-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-practice (first j) #f *lesson-plan* #f))))
 
         )
       ;
@@ -1610,8 +1605,7 @@
                               ; (printf "doing @page-of-lines ~s\n" n)
                               (let loop ([i 0])
                                 (unless (>= i n)
-                                  ; (display-begin-span ".fitb.stretch" o)
-                                  (display-begin-span ".blankline" o)
+                                  (display-begin-span ".fitb.stretch" o)
                                   (display-end-span o)
                                   (newline o)
                                   (newline o)
@@ -1761,7 +1755,7 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
-                            (print-ordering-workbooks *target-pathway* o)]
+                            (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
                             (create-alignments-subfile
                               (string-append *containing-directory* "/.cached/.pathway-alignments"))
@@ -2068,6 +2062,7 @@
 
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
+                    [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
 
               (expand-directives i o)
@@ -2091,7 +2086,7 @@
                 (link-to-lessons-in-pathway o)
                 (create-alignments-subfile
                   (string-append *containing-directory* "/.cached/.pathway-alignments"))
-                (print-ordering-workbooks *target-pathway* o)
+                (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-other-resources o))
@@ -2287,10 +2282,9 @@
     ; (link-to-opt-projects o)
 
     (unless (null? exx)
-      ; FIXME: should make this natlang-dependent
-      (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
-      (display "and we provide password-protected **link:./protected/workbook-sols.pdf.html[Workbook Solutions]** as well.\n\n" o)
-      (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
+      (display "\n\n" o)
+      (display (create-workbook-links) o)
+      (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
         ; (printf "lsn-exx is ~s\n" lsn-exx)
@@ -2851,7 +2845,7 @@
                        (if (or pyret tex) x (enclose-span ".value.wescheme-number" x)))]
         [(and (symbol? e) pyret
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
-         (enclose-span ".studentAnswer" (format "~a" e))] ;CHECK
+         (enclose-span ".fitb" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
                        (if (or pyret tex) x (enclose-span ".value.wescheme-symbol" x)))]
         [(string? e) (let ([x (format "~s" e)])
@@ -2860,16 +2854,16 @@
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentAnswerFilled~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                              (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex))
-                           (enclose-span (format ".studentAnswerUnfilled~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
                              )))]
         [(fitb? e)
          ; (printf "found fitb ~s\n" e)
          (let ([e (second e)])
-                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
+                     (enclose-tag "span" ".fitb" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
@@ -3020,9 +3014,9 @@
         [(answer? e) (let* ([e (second e)]
                             [fill-len (answer-block-fill-length e)])
                        (if *solutions-mode?*
-                           (enclose-span (format ".studentBlockAnswerFilled~a" fill-len)
+                           (enclose-span (format ".fitb~a" fill-len)
                            (sexp->block-table e #:pyret pyret))
-                           (enclose-span (format ".value~a.studentBlockAnswerUnfilled~a"
+                           (enclose-span (format ".value~a.fitb~a"
                                                  (if pyret "" ".wescheme-symbol")
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
@@ -3078,16 +3072,16 @@
                        (if *solutions-mode?*
                            (enclose-span
                              (if wescheme
-                                 (format ".studentAnswerFilled~a" fill-len)
+                                 (format ".fitb~a" fill-len)
                                  (format ".studentBlockAnswerFilled~a" fill-len))
                              (sexp->block e #:pyret pyret #:wescheme wescheme))
                            (enclose-span
                              (if wescheme
-                                 (format ".value.wescheme-symbol.studentAnswerUnfilled~a" fill-len)
-                                 (format ".value.studentBlockAnswerUnfilled~a" fill-len))
+                                 (format ".value.wescheme-symbol.fitb~a" fill-len)
+                                 (format ".value.fitb~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(fitb? e) (let ([e (second e)])
-                     (enclose-tag "span" ".studentAnswerUnfilled" "{nbsp}"
+                     (enclose-tag "span" ".fitb" "{nbsp}"
                        #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and (eq? a 'EXAMPLE) wescheme)

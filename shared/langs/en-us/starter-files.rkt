@@ -168,7 +168,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re")
    )
   ("boolean" "Boolean Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
+   ("pyret" "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
    )
   ("permutations-and-combinations"  "Permutations and Combinations Starter File"
@@ -256,7 +256,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ")
    )
   ("inequalities-compound" "Compound Inequalities Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=11M7tp22-lOwYK9jJD67mM_RP836ikARd")
+   ("pyret" "https://code.pyret.org/editor#share=1fKAwPsQ-WaVYVWyVQtgrkEd1jgfAUizN&v=22f3b65")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=yFnDbsSnR7")
    )
   ("inequalities-sam" "Sam the Butterfly Starter File"

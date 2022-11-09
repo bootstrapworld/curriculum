@@ -8,16 +8,17 @@
 
 (provide
   print-lessons-intro
-  print-course-logo
+  print-course-title-and-logo
+  print-pathway-logo
   print-course-banner
   print-other-resources-intro
   print-teach-remotely
-  print-ordering-workbooks
+  print-workbook-info
   print-link-to-glossary
   print-link-to-standards
-  print-link-to-student-workbook
   print-link-to-teacher-resources
   print-link-to-forum
+  print-other-resources
   natlang:also-available-in
   ; print-standards-js
   ; print-textbooks-js
@@ -59,17 +60,27 @@
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
 
-(define (print-course-logo course make-image o)
-  ; (printf "doing print-course-logo ~s\n" course)
+(define (print-course-title-and-logo course make-image o)
+  ; (printf "doing print-course-title-and-logo ~s\n" course)
   (let* ([c (assoc course *course-names*)]
          [course-name (if c (second c) "Bootstrap")])
     (display
       (string-append
         "= "
-        course-name "\n\n"
-        "[.logo]\n"
-        (make-image "images/Logo.png" (if c (second c) "Bootstrap") '())
-        "\n\n") o)))
+        course-name "\n") o)
+    (print-pathway-logo course make-image o #:course-name course-name)))
+
+(define (print-pathway-logo course make-image o #:course-name [course-name #f])
+  ; (printf "doing print-pathway-logo\n")
+  (unless course-name
+    (let ([c (assoc course *course-names*)])
+      (set! course-name (if c (second c) "Bootstrap"))))
+  (display
+    (string-append
+      "\n"
+      "[.logo]\n"
+      (make-image "images/Logo.png" course-name '())
+      "\n\n") o))
 
 (define (print-course-banner course o)
   (let ([c (assoc course *course-banners*)])
@@ -84,17 +95,23 @@
           "--"
           "\n\n") o))))
 
-(define (print-ordering-workbooks course o)
+(define (print-workbook-info course o)
   (let ([c (assoc course *course-workbook-links*)])
     (display
       (string-append
-        "== Ordering Student Workbooks?\n"
+        "== Student Workbooks\n"
         "\n"
-        "While we give our workbooks away as a PDF, we understand that printing them yourself can be expensive!\n"
-        "You can purchase beautifully-bound copies of the student workbook from Lulu.com.\n"
+        "Sometimes, the best place for students to get real thinking done\n"
+        "is __away from the keyboard!__ Our lesson plans are tightly integrated\n"
+        "with a detailed Student Workbook, allowing for paper-and-pencil practice and\n"
+        "activities that don't require a computer.\n"
+        "\n"
         "link:"
-        (if c (second c) "missing-link")
-        "[Click here to order].\n"
+          (if c (second c) "missing-link")
+          "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
+        "\n"
+        "Of course, we understand that printing them yourself can be expensive!\n"
+        "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
         "\n") o)))
 
 (define (print-link-to-standards o)
@@ -105,15 +122,6 @@
       "Standards, as well as some of the most commonly used math\n"
       " textbooks.\n")
     o))
-
-(define (print-link-to-student-workbook o)
-  (display
-    (string-append
-      "\n- link:./workbook/workbook.pdf[Workbook]\n"
-      "-- Sometimes, the best way for students to get real thinking done\n"
-      "is to step away from the keyboard! Our lesson plans are tightly integrated\n"
-      "with the Student Workbook, allowing for paper-and-pencil practice and\n"
-      "activities that don't require a computer.\n") o))
 
 (define (print-link-to-teacher-resources o)
   (display
@@ -134,6 +142,11 @@
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
+(define (print-other-resources o)
+  (print-link-to-glossary o)
+  (print-link-to-standards o)
+  (print-link-to-teacher-resources o)
+  (print-link-to-forum o))
 
 (define (natlang:also-available-in s)
-  (string-append "(Également disponible en " s ")"))
+  (string-append "(Also available in " s ")"))

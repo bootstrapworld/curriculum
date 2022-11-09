@@ -1,18 +1,14 @@
 = Let's Define Some More New Functions!
 ++++
 <style>
-/*********************************
- * CSS fixes for https://github.com/bootstrapworld/curriculum/issues/920
- * Need to be moved to shared.css, and tested
- */
 p .editbox { font-size: 9pt !important; } /* override asciidoc default to match code*/
 .studentAnswerLong { min-width: 65% !important; }
 .studentAnswerShort{ min-width: 4em; }
 .studentAnswerMedium{ min-width: 7em; }
+.autonum { display: inline-block; margin-top: 1ex; }
 </style>
 ++++
 @n *Let's define a function* `sun` *to write SUNSHINE in whatever color and size we give it!*
-
 
 If I say @show{(code '(sun 5 "blue"))}, what would our actor need to say?
 
@@ -31,8 +27,6 @@ What changes in these examples? Name your variable(s): @fitb{}{@ifsoln{size, col
 Let's define our function using the variable.
 
 @show{(code '(define (sun (?ANS size) (?ANS color)) (?ANS (text "SUNSHINE" size color))))}
-
-@vspace{1ex}
 
 @n *Let's define a function* `me` *to generate your name in whatever size and color we give it!*
 
@@ -54,8 +48,6 @@ Let's define our function using the variable.
 
 @show{(code '(define (me (?ANS size) (?ANS color)) (?ANS (text "Malik" size color))))}
 
-@vspace{1ex}
-
 @n *Let's define a function* `gr` *to build a solid, green rectangle of whatever length and width we give it!*
 
 If I say @show{(code '(gr 10 80))}, what would our actor need to say?
@@ -72,13 +64,9 @@ Let's write a few more examples:
 
 What changes in these examples? Name your variable(s): @fitb{}{@ifsoln{length, width}}
 
-@vspace{1ex}
-
 Let's define our function using the variable.
 
 @show{(code '(define (gr (?ANS length) (?ANS width)) (?ANS (rectangle length width "solid" "green"))))}
-
-@vspace{1ex}
 
 @n _Add these new function definitions to your @starter-file{gt} and test them out!_
 
