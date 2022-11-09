@@ -7,30 +7,21 @@
 (require "../shared/langs/en-us/practices/the-practices-dictionaries.rkt")
 
 (define (display-sublist dictionaries o)
-  (let ([last-i (- (length dictionaries) 1)])
-    (let loop ([i 0])
-      (unless (> i last-i)
-        (let* ([dictionary (list-ref dictionaries i)]
-               [nickname (first dictionary)]
-               [lyst (third dictionary)]
-               [last-j (- (length lyst) 1)])
-          (fprintf o "    ~s: {\n" nickname)
-          (let loopj ([j 0])
-            (unless (> j last-j)
-              (let ([entry (list-ref lyst j)])
-                (fprintf o "      ~s: {\n" (first entry))
-                (fprintf o "        \"description\": ~s,\n" (second entry))
-                (fprintf o "        \"lessons\": [")
-                (let ([lessons (rest (rest entry))])
-                  (unless (null? lessons)
-                    (fprintf o "~s" (string-join lessons ","))))
-                (fprintf o "]\n")
-                (fprintf o "      }~a\n"
-                         (if (= j last-j) "" ",")))
-              (loopj (+ j 1))))
-          (fprintf o "    }~a\n"
-                   (if (= i last-i) "" ","))
-          (loop (+ i 1)))))))
+
+  (for ([dictionary dictionaries])
+    (fprintf o "    ~s: {\n" (first dictionary))
+
+    (for ([entry (third dictionary)])
+      (fprintf o "      ~s: {\n" (first entry))
+      (fprintf o "        \"description\": ~s,\n" (second entry))
+      (fprintf o "        \"lessons\": [")
+      (let ([lessons (rest (rest entry))])
+        (unless (null? lessons)
+          (fprintf o "~s" (string-join lessons ","))))
+      (fprintf o "]\n")
+      (fprintf o "      },\n"))
+
+    (fprintf o "    },\n")))
 
 (call-with-output-file "dictionaries.js"
   (lambda (o)
